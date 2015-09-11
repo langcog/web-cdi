@@ -1,0 +1,137 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>Words and Sentences CDI</title>
+    <meta name="description" content="English Words and Sentences CDI form">
+    <meta name="author" content="Ashwin Paranjape">
+
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="css/styles.css?v=1.0">
+        <!--.alternate-color :nth-child(odd){
+              background-color:#ddd;
+        }
+        .alternate-color :nth-child(even){
+              background-color:#fff;
+        }-->
+    <style>
+        .alco-child{
+            margin:10px;
+            background-color:#eee;
+        }
+
+        input[type=checkbox] + label {
+              color: #222;
+        } 
+        input[type=checkbox]:checked + label {
+              color: #3C763D;
+        } 
+        input[type=radio] + label {
+              color: #222;
+        } 
+        input[type=radio]:checked + label {
+              color: #3C763D;
+        } 
+
+    </style>
+
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+
+<body data-spy="scroll" data-target="#navbar">
+    <div class="container bs-docs-container">
+    <div class="row">
+    {% if parts %}
+        <div class = "col-md-3" role="complementary">
+            <nav id="navbar" class=" bs-docs-sidebar hidden-print hidden-xs hidden-sm affix">
+                <ul class="nav bs-docs-sidenav">
+                    {% for part in parts %}
+                    <li><a href="#{{ part.id }}">{{ part.title }}</a></li>
+                        <ul class="nav ">
+                        {% for type in part.types %}
+                            <li><a href="#{{ type.id }}">{{ type.title }}</a></li>
+                                    <ul class="nav">
+                                    {% for section in type.sections %}
+                                        <li><a href="#{{ section.id }}">{{ section.title }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                        {% endfor %}
+                        </ul>
+                    {% endfor %}
+                </ul>
+            </nav>
+
+        </div>
+        <div class = "col-md-9" role="main">
+            <form>
+            <ul>
+            {% for part in parts %}
+                <h2 id="{{ part.id }}"> {{ part.title }}</h2>
+                
+                {% for type in part.types %}
+                    <h3 id = "{{ type.id }}"> {{ type.title }}</h3>
+                    <p class="lead"> {{ type.text }}</p>
+                    <div class="row alternate-color">
+                    {% for object in type.objects %}
+                        {% if type.type == "radiobutton" %}
+                            {% if object.text != '' %}
+                                <div class="col-md-12 alco-child"> 
+                                    <div class="row">{{ object.text }} </div>
+                                    <div class="row">
+                                        {% for choice in object.choices %}
+                                            <input type="radio" id="{{ choice }}" name="{{ object.itemID }}"> 
+                                            <label for="{{ choice }}"> {{ choice }}</label>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% else %}
+                                <div class="col-md-4 alco-child"> 
+                                    {% for choice in object.choices %}
+                                        <div class="row">
+                                                <input type="radio" id="{{ choice }}" name="{{ object.itemID }}"> 
+                                                <label for="{{ choice }}"> {{ choice }}</label>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                
+                            {% endif %}
+                        {% else %}
+                        
+
+                            <div class="col-md-4 alco-child"> <input type="checkbox" id="{{ object.itemID }}" name="{{ object.itemID }}"> <label for="{{ object.itemID }}"> {{ object.definition }}</label></div>
+                        {% endif %}
+                            
+                    {% endfor %}
+                    </div>
+                    <ul>
+                    {% for section in type.sections %}
+                        <h4 id ="{{ section.id }}" >{{ section.title }}</h4>
+                            <div class="row ">
+                                {%for object in section.objects %}
+                                <div class="col-md-4"><input type="checkbox" id="{{ object.itemID }}" name="{{ object.itemID }}"> <label for="{{ object.itemID }}"> {{ object.gloss }} </label></div>
+                                {% endfor %}
+                            </div>
+                    {% endfor %}
+                    </ul>
+                    
+                
+                {% endfor %}
+            {% endfor %}
+            </ul>
+        </form>
+        </div>
+    {% else %}
+        <p>Form unavailable. Contact admin. </p>
+    {% endif %}
+
+</body>
+</html>

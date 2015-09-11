@@ -1,0 +1,39 @@
+
+
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" >Administer new subjects</h4>
+      </div>
+      <div class="modal-body">
+      <form method='post' class="form-horizontal">
+        {% csrf_token %}
+        <p> The subject IDs should not include any identifiable information. For the same reason they are enforced to be numeric </p>
+        <div class="form-group">
+            <label for="new-subject-ids" class="col-sm-2 control-label">New Subject Ids:</label>
+            <div class="col-sm-10">
+            <textarea name="new-subject-ids" class="form-control" rows="3" id='new-subject-ids'></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="autogenerate-count" class="col-sm-2 control-label">Number of IDs to Autogenerate:</label>
+            <div class="col-sm-10">
+            <input type="text" name = 'autogenerate-count' class="form-control" id ='autogenerate-count' placeholder="Autogenerate">
+            </div>
+        </div>
+
+        
+      </form>
+      <div class="alert alert-danger error-message" role="alert" style="display:none">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              <span class="sr-only">Error:</span>
+              <div style='display:inline' id='error-message-text'></div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <input name="submit" value="Submit" class="btn btn-primary" type="submit">
+      </div>
+    </div>
+  </div>

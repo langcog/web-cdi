@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en"> <head> <meta charset="utf-8">
+
+    {% load staticfiles %}
+
+    <title>WebCDI Interface</title>
+    <meta name="description" content="English Words and Sentences CDI form">
+    <meta name="author" content="Ashwin Paranjape">
+
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="{% static 'researcher_UI/django_modal_forms.js' %}"></script>
+    <script src="{% static 'researcher_UI/researcher_UI.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'researcher_UI/console.css' %}" />
+    <link rel="stylesheet" href="{% static 'researcher_UI/table.css' %}" />
+</head>
+<body>
+<div class='container'>
+    <div class='row'>
+            <form class="form-inline">
+                <fieldset>
+                    <legend>Study:</legend>
+                    <div class='col-md-10'>
+                            <div style = 'width:100%' class="form-group">
+                                <select  style = 'width:100%;' id="study-selector" class="form-control" onchange="location = this.options[this.selectedIndex].value;">
+                                    <option value="/interface/" selected disabled>Please select study</option>
+                                    {% for study in studies %}
+                                        <option value="/interface/study/{{ study }}/">{{ study }}</option>
+                                    {% endfor %}
+                                </select> 
+                            </div>
+                    </div>
+                    <div class='col-md-2'>
+                            <button type="button" style='width:100%;' class="btn btn-primary"   onclick = "modal_form('/interface/add_study/')" >New Study</button>
+                    </div>
+                </fieldset>
+            </form>
+
+        </div>
+    {% if current_study %}
+    <div class='row'>
+            <form method='post' action = '/interface/study/{{ current_study }}/' id='administration-form' class="form-inline">
+        {% csrf_token %}
+
+                <fieldset>
+                    <legend> {{ current_study }} :</legend>
+                    <div class='col-md-12'>
+                        {% include "researcher_UI/table.html" with table=study_administrations %}
+                    </div>
+                    <div class='col-md-3'>
+                            <button style='width:100%;' class="btn btn-default" id='add-selected' type='submit' name='administer-selected' value='administer-selected' disabled  >Re-administer Selected Subjects</button>
+                    </div>
+                    <div class='col-md-3'>
+                            <button style='width:100%;' class="btn btn-default" id='download-selected' type='submit' name='download-selected' value='download-selected'  disabled >Download Selected Data</button>
+                    </div>
+                    <div class='col-md-3'>
+                            <button type="button" style='width:100%;' class="btn btn-default"   onclick = "modal_form('/interface/study/{{ current_study }}/administer_new/')" >Administer New Subjects</button>
+                    </div>
+                    <div class='col-md-3'>
+                            <button type="button" style='width:100%;' class="btn btn-default"   onclick = "modal_form('/interface/study/{{ current_study }}/download/')" >Download Study Data</button>
+                    </div>
+                </fieldset>
+            </form>
+
+        </div>
+    </div>
+    </div>
+    {% endif %}
+</div>
+<!-- New Study Modal -->
+<div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="new study">
+</div>
+<script>
+checked_only()
+</script>
+</body>
+</html>
