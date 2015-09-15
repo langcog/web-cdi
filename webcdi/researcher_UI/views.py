@@ -8,6 +8,7 @@ import re, random
 from .tables  import StudyAdministrationTable
 from django_tables2   import RequestConfig
 from django.db.models import Max
+import datetime
 
 # Create your views here
 
@@ -27,7 +28,7 @@ def console(request, study_name = None):
                         new_administrations = []
                         for sid in subject_ids:
                             old_rep = administration.objects.filter(study = study_obj, subject_id = sid).count()
-                            new_administrations.append(administration(study =study_obj, subject_id = sid, repeat_num = old_rep+1, url_hash = random_url_generator(), completed = False))
+                            new_administrations.append(administration(study =study_obj, subject_id = sid, repeat_num = old_rep+1, url_hash = random_url_generator(), completed = False, due_date = datetime.datetime.now()+datetime.timedelta(days=14)))
                         administration.objects.bulk_create(new_administrations)
                         refresh = True
 
@@ -119,13 +120,16 @@ def administer_new(request, study_name):
                     subject_ids = map(int, subject_ids)
                     for sid in subject_ids:
                         old_rep = administration.objects.filter(study = study_obj, subject_id = sid).count()
-                        new_administrations.append(administration(study =study_obj, subject_id = sid, repeat_num = old_rep+1, url_hash = random_url_generator(), completed = False))
+                        new_administrations.append(administration(study =study_obj, subject_id = sid, repeat_num = old_rep+1, url_hash = random_url_generator(), completed = False, due_date = datetime.datetime.now()+ datetime.timedelta(days=14)))
+
 
                 if params['autogenerate-count'][0]!='':
                     autogenerate_count = int(params['autogenerate-count'][0])
                     max_subject_id = administration.objects.filter(study=study_obj).aggregate(Max('subject_id'))['subject_id__max']
+                    if max_subject_id is None:
+                        max_subject_id = 0
                     for sid in range(max_subject_id+1, max_subject_id+autogenerate_count+1):
-                        new_administrations.append(administration(study =study_obj, subject_id = sid, repeat_num = 1, url_hash = random_url_generator(), completed = False))
+                        new_administrations.append(administration(study =study_obj, subject_id = sid, repeat_num = 1, url_hash = random_url_generator(), completed = False, due_date = datetime.datetime.now()+datetime.timedelta(days=14)))
 #
                 administration.objects.bulk_create(new_administrations)
                 data['stat'] = "ok";

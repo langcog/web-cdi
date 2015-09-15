@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'crispy_forms',
     'django_tables2',
     'bootstrap3',
+    'form_utils',
 )
 
 MIDDLEWARE_CLASSES = (

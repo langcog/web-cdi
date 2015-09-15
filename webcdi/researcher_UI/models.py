@@ -21,8 +21,10 @@ class administration(models.Model):
     study = models.ForeignKey("study")
     subject_id = models.IntegerField()
     repeat_num = models.IntegerField()
-    url_hash = models.CharField(max_length=128)
+    url_hash = models.CharField(max_length=128, unique=True)
     completed = models.BooleanField()
+    due_date = models.DateTimeField()
+    last_modified = models.DateTimeField(auto_now = True)
 
     class Meta:
         unique_together = ('study', 'subject_id', 'repeat_num')

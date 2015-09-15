@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    {% load staticfiles %}
 
     <title>Words and Sentences CDI</title>
     <meta name="description" content="English Words and Sentences CDI form">
@@ -11,6 +12,7 @@
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
@@ -41,6 +43,7 @@
         } 
 
     </style>
+    <link rel="stylesheet" href="http://getbootstrap.com/assets/css/docs.min.css" />
 
     <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -48,31 +51,55 @@
 </head>
 
 <body data-spy="scroll" data-target="#navbar">
-    <div class="container bs-docs-container">
+    <div class="container bs-docs-container" style='padding-top: 60px; padding-bottom: 60px;'>
+    <form method='post' >
     <div class="row">
     {% if parts %}
         <div class = "col-md-3" role="complementary">
-            <nav id="navbar" class=" bs-docs-sidebar hidden-print hidden-xs hidden-sm affix">
+            
+            
+            <nav id="navbar" class=" bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" style="padding-top:60px;">
+                <div>
+                    <h4>Instructions:</h4>
+                    <ul>
+                        <li> This form can be filled anytime before the due date </li>
+                        <li> It can also be saved at any time and resumed later by using the same link (<a id="bookmarkme" href="">create bookmark</a>)</li>
+                        <li> After the form is submitted, it cannot be altered </li>
+                        <li> The form also cannot be altered after the due date </li>
+                    </ul>
+                    <p><b> Due date </b>: {{ due_date }}</p>
+                    {% if not completed %}
+                        <input name="save" value="Save" class="btn btn-primary" type="submit">
+                        <input name="submit" value="Submit" class="btn btn-primary" type="submit">
+                    {% endif %}
+                </div>
+
+                    <h4>Contents:</h4>
                 <ul class="nav bs-docs-sidenav">
                     {% for part in parts %}
-                    <li><a href="#{{ part.id }}">{{ part.title }}</a></li>
+                    <li><a href="#{{ part.id }}">{{ part.title }}</a>
                         <ul class="nav ">
                         {% for type in part.types %}
-                            <li><a href="#{{ type.id }}">{{ type.title }}</a></li>
-                                    <ul class="nav">
+                            <li><a href="#{{ type.id }}">{{ type.title }}</a>
+<!--                                    <ul class="nav">
                                     {% for section in type.sections %}
                                         <li><a href="#{{ section.id }}">{{ section.title }}</a></li>
                                     {% endfor %}
-                                </ul>
+                                </ul>-->
                         {% endfor %}
+                            </li>
                         </ul>
-                    {% endfor %}
+                        {% endfor %}
+                    </li>
                 </ul>
             </nav>
 
         </div>
         <div class = "col-md-9" role="main">
-            <form>
+            {% csrf_token %}
+            {% load crispy_forms_tags %}
+            {% load form_utils %}
+            {{ background_form|render }}
             <ul>
             {% for part in parts %}
                 <h2 id="{{ part.id }}"> {{ part.title }}</h2>
@@ -88,8 +115,8 @@
                                     <div class="row">{{ object.text }} </div>
                                     <div class="row">
                                         {% for choice in object.choices %}
-                                            <input type="radio" id="{{ choice }}" name="{{ object.itemID }}"> 
-                                            <label for="{{ choice }}"> {{ choice }}</label>
+                                            <input type="radio" id="{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}> 
+                                            <label for="{{ choice.0 }}"> {{ choice.0 }}</label>
                                         {% endfor %}
                                     </div>
                                 </div>
@@ -97,17 +124,15 @@
                                 <div class="col-md-4 alco-child"> 
                                     {% for choice in object.choices %}
                                         <div class="row">
-                                                <input type="radio" id="{{ choice }}" name="{{ object.itemID }}"> 
-                                                <label for="{{ choice }}"> {{ choice }}</label>
+                                                <input type="radio" id="{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}"{% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}> 
+                                                <label for="{{ choice.0 }}"> {{ choice.0 }}</label>
                                         </div>
                                     {% endfor %}
                                 </div>
                                 
                             {% endif %}
                         {% else %}
-                        
-
-                            <div class="col-md-4 alco-child"> <input type="checkbox" id="{{ object.itemID }}" name="{{ object.itemID }}"> <label for="{{ object.itemID }}"> {{ object.definition }}</label></div>
+                            <div class="col-md-4 alco-child"> <input type="checkbox" id="{{ object.itemID }}" name="{{ object.itemID }}" value="{{ object.choices }}"{% if completed %} disabled {% endif %} {% if object.prefilled_value %} checked {% endif %}> <label for="{{ object.itemID }}"> {{ object.definition }}</label></div>
                         {% endif %}
                             
                     {% endfor %}
@@ -117,7 +142,7 @@
                         <h4 id ="{{ section.id }}" >{{ section.title }}</h4>
                             <div class="row ">
                                 {%for object in section.objects %}
-                                <div class="col-md-4"><input type="checkbox" id="{{ object.itemID }}" name="{{ object.itemID }}"> <label for="{{ object.itemID }}"> {{ object.gloss }} </label></div>
+                                <div class="col-md-4"><input type="checkbox" id="{{ object.itemID }}" name="{{ object.itemID }}" value="{{ object.choices }}"{% if completed %} disabled {% endif %} {% if object.prefilled_value %} checked {% endif %} > <label for="{{ object.itemID }}"> {{ object.gloss }} </label></div>
                                 {% endfor %}
                             </div>
                     {% endfor %}
@@ -127,11 +152,25 @@
                 {% endfor %}
             {% endfor %}
             </ul>
-        </form>
         </div>
     {% else %}
         <p>Form unavailable. Contact admin. </p>
     {% endif %}
-
+        </form>
+</div>
+<script type="text/javascript">
+    $(function() {
+        $("#bookmarkme").click(function() {
+            // Mozilla Firefox Bookmark
+            if ('sidebar' in window && 'addPanel' in window.sidebar) { 
+                window.sidebar.addPanel(location.href,document.title,"");
+            } else if( /*@cc_on!@*/false) { // IE Favorite
+                window.external.AddFavorite(location.href,document.title); 
+            } else { // webkit - safari/chrome
+                alert('Press ' + (navigator.userAgent.toLowerCase().indexOf('mac') != - 1 ? 'Command/Cmd' : 'CTRL') + ' + D to bookmark this page.');
+            }
+        });
+    });
+</script>
 </body>
 </html>
