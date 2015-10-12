@@ -7,7 +7,7 @@
     <meta name="description" content="English Words and Sentences CDI form">
     <meta name="author" content="Ashwin Paranjape">
 
-    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -24,7 +24,7 @@
                     <legend>Study:</legend>
                     <div class='col-md-10'>
                             <div style = 'width:100%' class="form-group">
-                                <select  style = 'width:100%;' id="study-selector" class="form-control" onchange="location = this.options[this.selectedIndex].value;">
+                                <select  style = 'width:100%;' id="study-selector" class="form-control" onchange="location = encodeURI(this.options[this.selectedIndex].value);">
                                     <option value="/interface/" selected disabled>Please select study</option>
                                     {% for study in studies %}
                                         <option value="/interface/study/{{ study }}/">{{ study }}</option>
@@ -51,6 +51,9 @@
                     </div>
                     <div class='col-md-3'>
                             <button style='width:100%;' class="btn btn-default" id='add-selected' type='submit' name='administer-selected' value='administer-selected' disabled  >Re-administer Selected Subjects</button>
+                    </div>
+                    <div class='col-md-3'>
+                            <button style='width:100%;' class="btn btn-default" id='delete-selected' type='submit' name='delete-selected' value='administer-selected' disabled onclick='confirm("Are you sure you want to delete the selected administration record and all the data associated with it?")' >Delete Selected Data</button>
                     </div>
                     <div class='col-md-3'>
                             <button style='width:100%;' class="btn btn-default" id='download-selected' type='submit' name='download-selected' value='download-selected'  disabled >Download Selected Data</button>

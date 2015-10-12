@@ -21,19 +21,44 @@ def console(request, study_name = None):
         study_obj = study.objects.get(researcher= request.user, name= study_name)
         if permitted :
             if request.method == 'POST' :
+                ids = request.POST.getlist('select_col')
                 if 'administer-selected' in request.POST:
-                    subject_ids = request.POST.getlist('select_col')
-                    if all([x.isdigit() for x in subject_ids]):
-                        subject_ids = list(set(map(int, subject_ids)))
+                    if all([x.isdigit() for x in ids]):
+                        num_ids = map(int, ids)
                         new_administrations = []
-                        for sid in subject_ids:
+                        sids_created = set()
+                        for nid in num_ids:
+                            admin_instance = administration.objects.get(id = nid)
+                            sid = admin_instance.subject_id
+                            if sid in sids_created:
+                                continue
                             old_rep = administration.objects.filter(study = study_obj, subject_id = sid).count()
                             new_administrations.append(administration(study =study_obj, subject_id = sid, repeat_num = old_rep+1, url_hash = random_url_generator(), completed = False, due_date = datetime.datetime.now()+datetime.timedelta(days=14)))
+                            sids_created.add(sid)
+
+
                         administration.objects.bulk_create(new_administrations)
                         refresh = True
 
+                elif 'delete-selected' in request.POST:
+                    ids = request.POST.getlist('select_col')
+                    if all([x.isdigit() for x in ids]):
+                        ids = list(set(map(int, ids)))
+                        for nid in ids:
+                            admin_object = administration.objects.get(id = nid)
+                            admin_object.delete()
+                        refresh = True
+
+
                 elif 'download-selected' in request.POST:
-                    pass
+                    ids = request.POST.getlist('select_col')
+                    #header = get_cdi_model['English_WS'].
+                    if all([x.isdigit() for x in ids]):
+                        ids = list(set(map(int, ids)))
+                        for nid in ids:
+                            admin_object = administration.objects.get(id = nid)
+#                            admin_object.delete()
+                        refresh = True
 
         
     if request.method == 'GET' or refresh:
@@ -85,6 +110,7 @@ def random_url_generator(size=64, chars='0123456789abcdef'):
 @login_required 
 def administer_new(request, study_name):
     data = {}
+    #check if the researcher exists and has permissions over the study
     permitted = study.objects.filter(researcher = request.user,  name = study_name).exists()
     study_obj = study.objects.get(researcher= request.user, name= study_name)
 
@@ -145,3 +171,4 @@ def administer_new(request, study_name):
             return HttpResponse(json.dumps(data), content_type="application/json")
     else:
         return render(request, 'researcher_UI/administer_new_modal.html')
+

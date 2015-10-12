@@ -2,6 +2,7 @@ function checked_only(){
     checkboxes = $('input[name="select_col"]')
     checkboxes.click(function() {
         $('#add-selected').attr("disabled", !checkboxes.is(":checked"));
+        $('#delete-selected').attr("disabled", !checkboxes.is(":checked"));
         $('#download-selected').attr("disabled", !checkboxes.is(":checked"));
     });
 }

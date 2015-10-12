@@ -1,0 +1,98 @@
+{% extends 'cdi_forms/cdi_base.html' %}
+{% block nav_buttons %}
+    {% if not completed %}
+        <input name="btn-save" value="Save" class="btn btn-primary" type="submit">
+        <input name="btn-submit" value="Submit" class="btn btn-primary" type="submit">
+        <input name="btn-back" value="Back" class="btn btn-primary" type="submit">
+    {% endif %}
+{% endblock %}
+
+{% block navcontents %}
+    <h4>Contents:</h4>
+    <ul class="nav bs-docs-sidenav">
+    {% for part in parts %}
+        <li><a href="#{{ part.id }}">{{ part.title }}</a>
+            <ul class="nav ">
+            {% for type in part.types %}
+                <li><a href="#{{ type.id }}">{{ type.title }}</a>
+    <!--                                    <ul class="nav">
+                        {% for section in type.sections %}
+                            <li><a href="#{{ section.id }}">{{ section.title }}</a></li>
+                        {% endfor %}
+                    </ul>-->
+            {% endfor %}
+                </li>
+            </ul>
+            {% endfor %}
+        </li>
+    </ul>
+{% endblock %}
+
+{% block main%}
+{% csrf_token %}
+
+{% if parts %}
+<input type='hidden' name='cdi-form' value='cdi-form'/>
+    <ul>
+            {% for part in parts %}
+                <h2 id="{{ part.id }}"> {{ part.title }}</h2>
+                
+                {% for type in part.types %}
+                    <h3 id = "{{ type.id }}"> {{ type.title }}</h3>
+                    <p class="lead"> {{ type.text }}</p>
+                    <div class="row alternate-color">
+                    {% for object in type.objects %}
+                        {% if type.type == "radiobutton" %}
+                            {% if object.text != '' %}
+                                <div class="col-md-12 alco-child"> 
+                                    <div class="row">{{ object.text }} </div>
+                                    <div class="row">
+                                        {% for choice in object.choices %}
+                                            <input type="radio" id="{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}> 
+                                            <label for="{{ choice.0 }}"> {{ choice.0 }}</label>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% else %}
+                                <div class="col-md-4 alco-child"> 
+                                    {% for choice in object.choices %}
+                                        <div class="row">
+                                                <input type="radio" id="{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}"{% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}> 
+                                                <label for="{{ choice.0 }}"> {{ choice.0 }}</label>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                
+                            {% endif %}
+                        {% else %}
+                            <div class="col-md-4 alco-child"> <input type="checkbox" id="{{ object.itemID }}" name="{{ object.itemID }}" value="{{ object.choices }}"{% if completed %} disabled {% endif %} {% if object.prefilled_value %} checked {% endif %}> <label for="{{ object.itemID }}"> {{ object.definition }}</label></div>
+                        {% endif %}
+                            
+                    {% endfor %}
+                    </div>
+                    <ul>
+                    {% for section in type.sections %}
+                        <h4 id ="{{ section.id }}" >{{ section.title }}</h4>
+                            <div class="row ">
+                                {%for object in section.objects %}
+                                <div class="col-md-4"><input type="checkbox" id="{{ object.itemID }}" name="{{ object.itemID }}" value="{{ object.choices }}"{% if completed %} disabled {% endif %} {% if object.prefilled_value %} checked {% endif %} > <label for="{{ object.itemID }}"> {{ object.gloss }} </label></div>
+                                {% endfor %}
+                            </div>
+                    {% endfor %}
+                    </ul>
+                    
+                
+                {% endfor %}
+            {% endfor %}
+            </ul>
+    {% else %}
+        <p>Form unavailable. Contact admin. </p>
+    {% endif %}
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript">
+    $('body').on('activate.bs.scrollspy', function () {
+        $.post('', data=$('#cdi_form').serialize())
+    });
+</script>
+{% endblock %}

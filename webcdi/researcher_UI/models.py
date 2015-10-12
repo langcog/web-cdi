@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 class instrument(models.Model):
     name = models.CharField(max_length = 51, primary_key=True)
+    verbose_name = models.CharField(max_length = 51, blank = True)
     def __str__(self):
         return self.name
     
@@ -20,10 +21,11 @@ class study(models.Model):
 class administration(models.Model):
     study = models.ForeignKey("study")
     subject_id = models.IntegerField()
-    repeat_num = models.IntegerField()
+    repeat_num = models.IntegerField(verbose_name = "Administration number")
     url_hash = models.CharField(max_length=128, unique=True)
     completed = models.BooleanField()
-    due_date = models.DateTimeField()
+    completedBackgroundInfo = models.BooleanField(default=False)
+    due_date = models.DateTimeField(verbose_name = "Expiration date")
     last_modified = models.DateTimeField(auto_now = True)
 
     class Meta:
