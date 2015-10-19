@@ -17,5 +17,5 @@ class AddStudyForm(forms.Form):
         self.helper.field_class = 'col-lg-9'
         self.helper.form_method = 'post'
         self.helper.form_action = '/interface/add_study/'
-        self.helper.add_input(Submit('submit', 'Submit'))
+#        self.helper.add_input(Submit('submit', 'Submit'))
 
