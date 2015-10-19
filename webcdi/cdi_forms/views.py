@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 from django.http import HttpResponse
 
-from .models import English_WS, BackgroundInfo
+from .models import English_WS, BackgroundInfo, requests_log
 import os.path
 import json
 from researcher_UI.models import administration_data, administration
@@ -178,6 +178,8 @@ def administer_cdi_form(request, hash_id):
     refresh = False
     if request.method == 'POST':
         if not administration_instance.completed and administration_instance.due_date > timezone.now():
+            requests_log.objects.create(url_hash = hash_id, request_type="POST")
+            
             if 'background-info-form' in request.POST:
                 return background_info_form(request, hash_id)
 
@@ -190,6 +192,7 @@ def administer_cdi_form(request, hash_id):
             request.method = 'GET'
 
     if request.method == 'GET' or refresh:
+        requests_log.objects.create(url_hash = hash_id, request_type="GET")
         if not administration_instance.completed and administration_instance.due_date > timezone.now():
             if administration_instance.completedBackgroundInfo:
                 return cdi_form(request, hash_id)
