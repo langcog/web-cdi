@@ -12,9 +12,9 @@ class English_WS(models.Model):
     item_type = models.CharField(max_length = 101)
     category = models.CharField(max_length = 101)
     choices = models.CharField(max_length = 101)
-    definition = models.CharField(max_length = 201)
-    gloss = models.CharField(max_length = 101)
-    complexity_category = models.CharField(max_length = 101)
+    definition = models.CharField(max_length = 201, null=True)
+    gloss = models.CharField(max_length = 101, null=True)
+    complexity_category = models.CharField(max_length = 101, null=True)
 
 def get_cdi_model(model_name):
     model_mapping = {'English_WS': English_WS}
