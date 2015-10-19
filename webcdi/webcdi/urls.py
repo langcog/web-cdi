@@ -21,6 +21,8 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^form/', include('cdi_forms.urls')),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'admin/login.html'}),
+    url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'next_page': 'interface/'}),
+
     url(r'^accounts/profile/$', RedirectView.as_view(url='/interface/', permanent=False), name='interface'),
 
     url(r'interface/', include('researcher_UI.urls')),
