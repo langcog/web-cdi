@@ -99,10 +99,10 @@ def prefilled_cdi_data(administration_instance):
 
                     if item_type['type'] == 'radiobutton':
                         for obj in item_type['objects']:
-                            split_definition = map(unicode.strip, obj['definition'].split('/'))
                             split_choices = map(unicode.strip, obj['choices'].split(';'))
                             prefilled_values = [False if obj['itemID'] not in prefilled_data else x == prefilled_data[obj['itemID']] for x in split_choices]
-                            if obj['definition'].find('/') >=0:
+                            if obj['definition'] is not None and obj['definition'].find('/') >=0:
+                            	split_definition = map(unicode.strip, obj['definition'].split('/'))
                                 obj['text'] = ''
                                 obj['choices'] = zip(split_definition, split_choices, prefilled_values)
                             else:
