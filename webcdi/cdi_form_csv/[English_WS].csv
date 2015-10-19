@@ -1,4 +1,4 @@
-itemID,item,type,category,choices,definition,gloss,complexity_category
+itemID,item,item_type,category,choices,definition,gloss,complexity_category
 item_1,baa_baa,word,sounds,produces,baa baa,baa baa,
 item_2,choo_choo,word,sounds,produces,choo choo,choo choo,
 item_3,cockadoodledoo,word,sounds,produces,cockadoodledoo,cockadoodledoo,

@@ -1,4 +1,4 @@
-itemID,item,type,category,choices,uni_lemma,definition,gloss,complexity_category
+itemID,item,item_type,category,choices,uni_lemma,definition,gloss,complexity_category
 item_1,respname,first_signs,first_signs,yes; no,,,,
 item_2,respno,first_signs,first_signs,yes; no,,,,
 item_3,reactmd,first_signs,first_signs,yes; no,,,,
