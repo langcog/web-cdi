@@ -22,6 +22,7 @@
                 },
                 {
                     "text": "The following is a list of typical words in young children's vocabularies. For words your child understands but does not yet say, place a mark in the first column (understands). For words that your child not only understands but uses, place a mark in the second column (understands and says). If your child uses a different pronounciation of a word (for example, \"raffe\" for \"giraffe\" or \"sketti\" for \"spagetti\"), mark the word anyway. Remember, this is a \"catalogue\" of words that are used by many different children. Don't worry if you child knows only a few right now.",
+                    "type": "radiobutton",
                     "sections": [
                         {
                             "id": "sounds",
@@ -116,13 +117,33 @@
             "types": [
                 {
                     "text": "When infants are learning to communicate, they often use gestures to make their wishes known. For each item below, mark the line that describes your child's actions right now",
+                    "type": "radiobutton",
                     "id": "gestures_first",
                     "title": "First communicative gestures"
                 },
                 {
                     "text": "Does your child do any of the following?",
-                    "id": "gestures",
+                    "type": "radiobutton",
+                    "id": "gestures_games",
                     "title": "Games and routines"
+                },
+                {
+                    "text": "Does your child do or try to do any of the following?",
+                    "type": "radiobutton",
+                    "id": "gestures_objects",
+                    "title": "Actions with objects"
+                },
+                {
+                    "text": "Here are some things that young children sometimes do with stuffed animals or dolls. Please mark the actions that you hae seen your child do.",
+                    "type": "radiobutton",
+                    "id": "gestures_parent",
+                    "title": "Pretending to be a parent"
+                },
+                {
+                    "text": "Does your child do or try to do any of the following?",
+                    "type": "radiobutton",
+                    "id": "gestures_adult",
+                    "title": "Imitating other adult actions (using real or toy implements)"
                 }
             ],
             "title": "Actions and Gestures"

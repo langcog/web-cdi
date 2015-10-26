@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 from django.http import HttpResponse
 
-from .models import English_WS, BackgroundInfo, requests_log
+from .models import English_WS, English_WG, BackgroundInfo, requests_log
 import os.path
 import json
 from researcher_UI.models import administration_data, administration
@@ -14,6 +14,12 @@ from django.utils import timezone
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
+def model_map(name):
+    mapping = {"English_WS": English_WS, "English_WG": English_WG}
+    assert name in mapping, name+"instrument not added to the mapping in views.py model_map function"
+    return mapping[name]
+        
+    
 def prefilled_background_form(administration_instance):
     background_instance = BackgroundInfo.objects.get(administration = administration_instance)
     #age = background_instance.age
@@ -76,8 +82,10 @@ def background_info_form(request, hash_id):
 
 def prefilled_cdi_data(administration_instance):
     prefilled_data_list = administration_data.objects.filter(administration = administration_instance).values('item_ID', 'value')
+    instrument_name = administration_instance.study.instrument.name
+    instrument_model = model_map(instrument_name)
     prefilled_data = {x['item_ID']:x['value'] for x in prefilled_data_list}
-    with open(PROJECT_ROOT+'/form_data/English_WS_meta.json', 'r') as content_file:
+    with open(PROJECT_ROOT+'/form_data/'+instrument_name+'_meta.json', 'r') as content_file:
         data = json.loads(content_file.read())
         data['completed'] = administration_instance.completed
         data['due_date'] = administration_instance.due_date
@@ -87,36 +95,42 @@ def prefilled_cdi_data(administration_instance):
             for item_type in part['types']:
                 if 'sections' in item_type:
                     for section in item_type['sections']:
-                        section['objects'] = English_WS.objects.filter(category__exact=section['id']).values()
+                        section['objects'] = instrument_model.objects.filter(category__exact=section['id']).values()
                         for obj in section['objects']:
                             obj['prefilled_value'] = obj['itemID'] in prefilled_data
                                 
                 else:
-                    item_type['objects'] = English_WS.objects.filter(item_type__exact=item_type['id']).values()
+                    item_type['objects'] = instrument_model.objects.filter(item_type__exact=item_type['id']).values()
                     if item_type['type'] == 'checkbox':
                         for obj in item_type['objects']:
                             obj['prefilled_value'] = obj['itemID'] in prefilled_data
+                            if obj['gloss'] is None:
+                                obj['gloss'] = obj['definition']
 
                     if item_type['type'] == 'radiobutton':
                         for obj in item_type['objects']:
                             split_choices = map(unicode.strip, obj['choices'].split(';'))
                             prefilled_values = [False if obj['itemID'] not in prefilled_data else x == prefilled_data[obj['itemID']] for x in split_choices]
+                            obj['text'] = obj['gloss']
+
                             if obj['definition'] is not None and obj['definition'].find('/') >=0:
                             	split_definition = map(unicode.strip, obj['definition'].split('/'))
-                                obj['text'] = ''
                                 obj['choices'] = zip(split_definition, split_choices, prefilled_values)
                             else:
-                                obj['text'] = obj['definition']
                                 obj['choices'] = zip(split_choices, split_choices, prefilled_values)
+                                if obj['definition'] is not None:
+                                    obj['text'] = obj['definition']
     return data
 
 def cdi_form(request, hash_id):
     administration_instance = get_administration_instance(hash_id)
+    instrument_name = administration_instance.study.instrument.name
+    instrument_model = model_map(instrument_name)
     if request.method == 'POST' :
         if not administration_instance.completed and administration_instance.due_date > timezone.now():
             bulk_data = []
             for key in request.POST:
-                items = English_WS.objects.filter(itemID = key)
+                items = instrument_model.objects.filter(itemID = key)
                 if len(items) == 1:
                     item = items[0]
                     choices = map(unicode.strip, item.choices.split(';'))
