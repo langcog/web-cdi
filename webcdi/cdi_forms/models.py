@@ -20,6 +20,17 @@ class English_WS(models.Model):
     gloss = models.CharField(max_length = 101, null=True)
     complexity_category = models.CharField(max_length = 101, null=True)
 
+class English_WG(models.Model):
+    itemID = models.CharField(max_length = 101, primary_key=True)
+    item = models.CharField(max_length = 101)
+    item_type = models.CharField(max_length = 101)
+    category = models.CharField(max_length = 101)
+    choices = models.CharField(max_length = 101)
+    uni_lemma = models.CharField(max_length= 101, null=True)
+    definition = models.CharField(max_length = 201, null=True)
+    gloss = models.CharField(max_length = 1001, null=True)
+    complexity_category = models.CharField(max_length = 101, null=True)
+
 def get_cdi_model(model_name):
     model_mapping = {'English_WS': English_WS}
     return model_mapping[model_name]
