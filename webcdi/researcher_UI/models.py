@@ -6,7 +6,7 @@ class instrument(models.Model):
     name = models.CharField(max_length = 51, primary_key=True)
     verbose_name = models.CharField(max_length = 51, blank = True)
     def __str__(self):
-        return self.name
+        return self.verbose_name
     
 class study(models.Model):
     researcher = models.ForeignKey("auth.user")

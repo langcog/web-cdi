@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 from django.http import HttpResponse
 
-from .models import English_WS, BackgroundInfo
+from .models import English_WS, BackgroundInfo, requests_log
 import os.path
 import json
 from researcher_UI.models import administration_data, administration
@@ -99,10 +99,10 @@ def prefilled_cdi_data(administration_instance):
 
                     if item_type['type'] == 'radiobutton':
                         for obj in item_type['objects']:
-                            split_definition = map(unicode.strip, obj['definition'].split('/'))
                             split_choices = map(unicode.strip, obj['choices'].split(';'))
                             prefilled_values = [False if obj['itemID'] not in prefilled_data else x == prefilled_data[obj['itemID']] for x in split_choices]
-                            if obj['definition'].find('/') >=0:
+                            if obj['definition'] is not None and obj['definition'].find('/') >=0:
+                            	split_definition = map(unicode.strip, obj['definition'].split('/'))
                                 obj['text'] = ''
                                 obj['choices'] = zip(split_definition, split_choices, prefilled_values)
                             else:
@@ -178,6 +178,8 @@ def administer_cdi_form(request, hash_id):
     refresh = False
     if request.method == 'POST':
         if not administration_instance.completed and administration_instance.due_date > timezone.now():
+            requests_log.objects.create(url_hash = hash_id, request_type="POST")
+            
             if 'background-info-form' in request.POST:
                 return background_info_form(request, hash_id)
 
@@ -190,6 +192,7 @@ def administer_cdi_form(request, hash_id):
             request.method = 'GET'
 
     if request.method == 'GET' or refresh:
+        requests_log.objects.create(url_hash = hash_id, request_type="GET")
         if not administration_instance.completed and administration_instance.due_date > timezone.now():
             if administration_instance.completedBackgroundInfo:
                 return cdi_form(request, hash_id)

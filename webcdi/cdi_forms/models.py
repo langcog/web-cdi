@@ -4,7 +4,11 @@ from django.core.exceptions import ValidationError
 from django.core.validators import validate_comma_separated_integer_list,MaxValueValidator,MinValueValidator
 from django.contrib.postgres.fields import ArrayField
 
-
+class requests_log(models.Model):
+    url_hash = models.CharField(max_length=128)
+    request_type = models.CharField(max_length=4)
+    timestamp = models.DateTimeField(auto_now = True)
+    
 # Create your models here.
 class English_WS(models.Model):
     itemID = models.CharField(max_length = 101, primary_key=True)
@@ -12,9 +16,9 @@ class English_WS(models.Model):
     item_type = models.CharField(max_length = 101)
     category = models.CharField(max_length = 101)
     choices = models.CharField(max_length = 101)
-    definition = models.CharField(max_length = 201)
-    gloss = models.CharField(max_length = 101)
-    complexity_category = models.CharField(max_length = 101)
+    definition = models.CharField(max_length = 201, null=True)
+    gloss = models.CharField(max_length = 101, null=True)
+    complexity_category = models.CharField(max_length = 101, null=True)
 
 def get_cdi_model(model_name):
     model_mapping = {'English_WS': English_WS}

@@ -19,6 +19,19 @@
 <body>
 <div class='container'>
     <div class='row'>
+	<form class="form-inline" action="/accounts/logout/">
+            <fieldset>
+                <legend>User:</legend>
+		<div class='col-md-10'>
+		    <big>{{ username }}</big>
+		</div>
+		<div class='col-md-2'>
+		    <input type="submit" value="Logout" class='btn btn-primary' style="width:100%">
+		</div>
+            </fieldset>
+	</form>
+    </div>
+    <div class='row'>
             <form class="form-inline">
                 <fieldset>
                     <legend>Study:</legend>
