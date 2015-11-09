@@ -68,7 +68,7 @@
                 
                 {% for type in part.types %}
                     <h3 id = "{{ type.id }}"> {{ type.title }}</h3>
-                    <p class="lead"> {{ type.text | title }}</p>
+                    <p class="lead"> {{ type.text | capfirst }}</p>
                     <div class="row alternate-color">
                     {% for object in type.objects %}
                         {% if type.type == "radiobutton" %}

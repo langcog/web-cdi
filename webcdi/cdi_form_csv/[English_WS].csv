@@ -684,10 +684,10 @@ item_682,usefuture,usage,how_use_words,not yet; sometimes; often,does your child
 item_683,miss_produce,usage,how_use_words,not yet; sometimes; often,does your child talk a bout objects that are not present?,,
 item_684,miss_comp,usage,how_use_words,not yet; sometimes; often,does your child understand if you ask for something that is not in the room?,,
 item_685,usepossessive,usage,how_use_words,not yet; sometimes; often,does your child ever pick up or point to an object and name an absent person to whom the object belongs?,,
-item_686,splural,ending,word_endings,not yet; sometimes; often,,,
-item_687,spossess,ending,word_endings,not yet; sometimes; often,,,
-item_688,ing,ending,word_endings,not yet; sometimes; often,,,
-item_689,ed,ending,word_endings,not yet; sometimes; often,,,
+item_686,splural,ending,word_endings,not yet; sometimes; often,"To talk about more than one thing we add an “s” to many words. Examples include cars (for more than one car), shoes, dogs and keys. Has your child begun to do this?",,
+item_687,spossess,ending,word_endings,not yet; sometimes; often,"To talk about ownership, we add an “'s”, for example, Daddy's key, kitty's dish, and baby's bottle. Has your child begun to do this?",,
+item_688,ing,ending,word_endings,not yet; sometimes; often,"To talk about activities, we sometimes add “ing” to verbs. Examples include looking, running, and crying. Has your child begun to do this?",,
+item_689,ed,ending,word_endings,not yet; sometimes; often,"To talk about things that happened in the past, we often add “ed” to the verb. Examples include kissed, opened, and pushed. Has your child begun to do this?",,
 item_690,children,word_form,word_forms_nouns,produces,children,children,
 item_691,feet,word_form,word_forms_nouns,produces,feet,feet,
 item_692,men,word_form,word_forms_nouns,produces,men,men,
@@ -758,7 +758,7 @@ item_756,satted,word_ending,word_endings_verbs,produces,satted,satted,
 item_757,sitted,word_ending,word_endings_verbs,produces,sitted,sitted,
 item_758,taked,word_ending,word_endings_verbs,produces,taked,taked,
 item_759,wented,word_ending,word_endings_verbs,produces,wented,wented,
-item_760,combine,combine,combine,not yet; sometimes; often,has your child begun to combine word yet?,,
+item_760,combine,combine,combine,not yet; sometimes; often,Has your child begun to combine words yet?,,
 item_761,complx01,complexity,complexity,simple; complex,two shoe / two shoes,two shoe / two shoes,morphology
 item_762,complx02,complexity,complexity,simple; complex,two foot / two feet,two foot / two feet,morphology
 item_763,complx03,complexity,complexity,simple; complex,daddy car / daddy's car,daddy car / daddy's car,morphology

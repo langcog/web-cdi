@@ -16,9 +16,11 @@ class English_WS(models.Model):
     item_type = models.CharField(max_length = 101)
     category = models.CharField(max_length = 101)
     choices = models.CharField(max_length = 101)
-    definition = models.CharField(max_length = 201, null=True)
-    gloss = models.CharField(max_length = 101, null=True)
-    complexity_category = models.CharField(max_length = 101, null=True)
+    definition = models.CharField(max_length = 201, null=True, blank=True)
+    gloss = models.CharField(max_length = 101, null=True, blank=True)
+    complexity_category = models.CharField(max_length = 101, null=True, blank=True)
+    def __str__(self):
+        return self.item
 
 class English_WG(models.Model):
     itemID = models.CharField(max_length = 101, primary_key=True)
@@ -26,10 +28,12 @@ class English_WG(models.Model):
     item_type = models.CharField(max_length = 101)
     category = models.CharField(max_length = 101)
     choices = models.CharField(max_length = 101)
-    uni_lemma = models.CharField(max_length= 101, null=True)
-    definition = models.CharField(max_length = 201, null=True)
-    gloss = models.CharField(max_length = 1001, null=True)
-    complexity_category = models.CharField(max_length = 101, null=True)
+    uni_lemma = models.CharField(max_length= 101, null=True, blank=True)
+    definition = models.CharField(max_length = 201, null=True, blank=True)
+    gloss = models.CharField(max_length = 1001, null=True, blank=True)
+    complexity_category = models.CharField(max_length = 101, null=True, blank=True)
+    def __str__(self):
+        return self.item
 
 def validate_g_zero(value):
         if value <= 0:
