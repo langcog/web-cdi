@@ -39,13 +39,13 @@
                 
                 {% for type in part.types %}
                     <h3 id = "{{ type.id }}"> {{ type.title }}</h3>
-                    <p class="lead"> {{ type.text }}</p>
+                    <p class="lead"> {{ type.text | title }}</p>
                     <div class="row alternate-color">
                     {% for object in type.objects %}
                         {% if type.type == "radiobutton" %}
                             {% if object.text != '' %}
                                 <div class="col-md-12 alco-child"> 
-                                    <div class="row">{{ object.text }} </div>
+                                    <div class="row">{{ object.text | capfirst }} </div>
                                     <div class="row">
                                         {% for choice in object.choices %}
                                             <input type="radio" id="{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}> 
