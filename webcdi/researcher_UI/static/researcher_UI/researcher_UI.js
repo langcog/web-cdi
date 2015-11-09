@@ -21,6 +21,14 @@ function action_selected(url){
             }
         }
     });
-    
 }
+$(document).ready(function(){
+    $("th.select_col>input").change(function(){
+        $('input[name="select_col"]').prop('checked', $(this).prop("checked"));
+        $('#add-selected').attr("disabled", !checkboxes.is(":checked"));
+        $('#delete-selected').attr("disabled", !checkboxes.is(":checked"));
+        $('#download-selected').attr("disabled", !checkboxes.is(":checked"));
+    });
+});
+	
 
