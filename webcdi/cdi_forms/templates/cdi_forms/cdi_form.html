@@ -77,6 +77,7 @@
                                 {%for object in section.objects %}
                                 <div class="col-md-4"><input type="checkbox" id="{{ object.itemID }}" name="{{ object.itemID }}" value="{{ object.choices }}"{% if completed %} disabled {% endif %} {% if object.prefilled_value %} checked {% endif %} > <label for="{{ object.itemID }}"> {{ object.gloss }} </label></div>
                                 {% endfor %}
+			        <div class="col-md-12">{{ section.starred }}</div>
                             </div>
                     {% endfor %}
                     </ul>

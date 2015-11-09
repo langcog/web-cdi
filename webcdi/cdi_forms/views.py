@@ -98,6 +98,8 @@ def prefilled_cdi_data(administration_instance):
                 if 'sections' in item_type:
                     for section in item_type['sections']:
                         section['objects'] = instrument_model.objects.filter(category__exact=section['id']).values()
+			if any(['*' in x['gloss'] for x in section['objects']]):
+			    section['starred'] = "*Or the word used in your family"
                         for obj in section['objects']:
                             obj['prefilled_value'] = obj['itemID'] in prefilled_data
                                 
