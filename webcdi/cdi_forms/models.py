@@ -31,10 +31,6 @@ class English_WG(models.Model):
     gloss = models.CharField(max_length = 1001, null=True)
     complexity_category = models.CharField(max_length = 101, null=True)
 
-def get_cdi_model(model_name):
-    model_mapping = {'English_WS': English_WS}
-    return model_mapping[model_name]
-    
 def validate_g_zero(value):
         if value <= 0:
             raise ValidationError("Value should be greater than 0")

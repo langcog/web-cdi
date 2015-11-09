@@ -78,6 +78,7 @@ def background_info_form(request, hash_id):
     data['background_form'] = background_form
     data['completed'] = administration_instance.completed
     data['due_date'] = administration_instance.due_date
+    data['title'] = administration_instance.study.instrument.verbose_name
     return render(request, 'cdi_forms/background_info.html', data)
 
 def prefilled_cdi_data(administration_instance):
@@ -87,6 +88,7 @@ def prefilled_cdi_data(administration_instance):
     prefilled_data = {x['item_ID']:x['value'] for x in prefilled_data_list}
     with open(PROJECT_ROOT+'/form_data/'+instrument_name+'_meta.json', 'r') as content_file:
         data = json.loads(content_file.read())
+        data['title'] = administration_instance.study.instrument.verbose_name
         data['completed'] = administration_instance.completed
         data['due_date'] = administration_instance.due_date
         #meta_file['background_form'] = None
