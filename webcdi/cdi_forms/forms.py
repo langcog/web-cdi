@@ -26,7 +26,7 @@ class BackgroundForm(BetterModelForm):
     ('W', "White"),
     ('O', "Other")), label = "My child is (check all that apply):", required = False)
     YESNO_CHOICES = ((False, 'No'), (True, 'Yes'))
-    child_dob = forms.DateField(input_formats=['%m/%d/%Y'], widget=forms.TextInput(attrs={'placeholder': 'mm/dd/yyyy'}), validators = [MaxValueValidator(datetime.date.today())])
+    child_dob = forms.DateField(input_formats=['%m/%d/%Y'], widget=forms.TextInput(attrs={'placeholder': 'mm/dd/yyyy'}), validators = [MaxValueValidator(datetime.date.today())], label = "Child DOB")
     #years = [(x,x) for x in range(1900, datetime.date.today().year+1)]
     #child_yob = forms.TypedChoiceField(label = "Child's year of birth", choices = years, coerce=int)
     #month_choices = enumerate(["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"])
