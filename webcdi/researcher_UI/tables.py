@@ -6,7 +6,7 @@ from .models import administration
 
 class StudyAdministrationTable(tables.Table):
     select_col = tables.columns.CheckBoxColumn(accessor='id')
-    link = tables.TemplateColumn('<a href="/form/fill/{{ record.url_hash }}" target="_blank">link</a>')
+    link = tables.TemplateColumn('<a href="/form/fill/{{ record.url_hash }}" target="_blank">link</a>', orderable=False)
     class Meta:
         model = administration
         exclude = ("study",'id', 'url_hash','completedBackgroundInfo')
