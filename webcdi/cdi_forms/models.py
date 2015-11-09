@@ -60,14 +60,17 @@ class BackgroundInfo(models.Model):
     due_date_diff = models.IntegerField(verbose_name = "By how many weeks?",blank=True, null=True, validators = [validate_ne_zero])
 
 
-    education_levels = [(x,x) for x in range(5,24)]
+    education_levels = {x:str(x) for x in range(5,24)}
+    education_levels[12] += " (High school graduate)"
+    education_levels[16] += " (College graduate)"
+    education_levels[18] += " (Advanced degree)"
     mother_yob = models.IntegerField(verbose_name = "Mother's (or Parent 1) Year of birth", choices=years)
-    mother_education = models.IntegerField(verbose_name = "Mother's (or Parent 1) Education", help_text ="Choose highest grade completed (12 = high school graduate; 16 = college graduate; 18 = advanced degree)", choices = education_levels)
+    mother_education = models.IntegerField(verbose_name = "Mother's (or Parent 1) Education", help_text ="Choose highest grade completed (12 = high school graduate; 16 = college graduate; 18 = advanced degree)", choices = education_levels.iteritems())
     #mother_occupation = models.CharField(max_length = 101, verbose_name = "Occupation")
     #mother_hours_work = models.IntegerField(verbose_name = "Hours/week at work")
 
     father_yob = models.IntegerField(verbose_name = "Father's (or Parent 2) Year of birth", choices = years)
-    father_education = models.IntegerField(verbose_name = "Father's (or Parent 2) Education", help_text ="Choose highest grade completed (12 = high school graduate; 16 = college graduate; 18 = advanced degree)", choices= education_levels)
+    father_education = models.IntegerField(verbose_name = "Father's (or Parent 2) Education", help_text ="Choose highest grade completed (12 = high school graduate; 16 = college graduate; 18 = advanced degree)", choices= education_levels.iteritems())
     #father_occupation = models.CharField(max_length = 101, verbose_name = "Occupation")
     #father_hours_work = models.IntegerField(verbose_name = "Hours/week at work")
     
