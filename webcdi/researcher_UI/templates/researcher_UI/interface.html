@@ -70,7 +70,7 @@
                         {% include "researcher_UI/table.html" with table=study_administrations %}
                     </div>
                     <div class='col-md-3'>
-                            <button style='width:100%;' class="btn btn-default" id='add-selected' type='submit' name='administer-selected' value='administer-selected' disabled  >Re-administer Selected Subjects</button>
+                            <button style='width:100%;' class="btn btn-default" id='add-selected' type='submit' name='administer-selected' value='administer-selected' disabled  >Re-administer Participants</button>
                     </div>
                     <div class='col-md-3'>
                             <button style='width:100%;' class="btn btn-default" id='delete-selected' type='submit' name='delete-selected' value='administer-selected' disabled onclick='confirm("Are you sure you want to delete the selected administration record and all the data associated with it?")' >Delete Selected Data</button>
@@ -79,7 +79,7 @@
                             <button style='width:100%;' class="btn btn-default" id='download-selected' type='submit' name='download-selected' value='download-selected'  disabled >Download Selected Data</button>
                     </div>
                     <div class='col-md-3'>
-                            <button type="button" style='width:100%;' class="btn btn-default"   onclick = "modal_form('/interface/study/{{ current_study }}/administer_new/')" >Administer New Subjects</button>
+                            <button type="button" style='width:100%;' class="btn btn-default"   onclick = "modal_form('/interface/study/{{ current_study }}/administer_new/')" >Add Participants</button>
                     </div>
                     <div class='col-md-3'>
                             <button type="button" style='width:100%;' class="btn btn-default"   onclick = "modal_form('/interface/study/{{ current_study }}/download/')" >Download Study Data</button>
