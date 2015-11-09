@@ -45,7 +45,7 @@ def validate_ne_zero(value):
 
 class BackgroundInfo(models.Model):
     administration = models.OneToOneField("researcher_UI.administration")
-    years = [(x,x) for x in range(1900, datetime.date.today().year+1)]
+    years = [(x,x) for x in range(1950, datetime.date.today().year+1)]
     age = models.IntegerField(verbose_name = "Age (in months)")
     sex = models.CharField(max_length = 1, choices = (('M', "Male"), ('F', "Female")))
     birth_order = models.IntegerField(verbose_name = "Birth order (enter number)", validators = [validate_g_zero])
