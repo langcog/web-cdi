@@ -46,7 +46,7 @@
                         },
                         {
                             "id": "outside",
-                            "title": "10. Outisde Things"
+                            "title": "10. Outside Things"
                         },
                         {
                             "id": "places",
@@ -110,7 +110,7 @@
         },
         {
             "id": 2,
-            "title": "PART 2: Sentences and Grammer",
+            "title": "PART 2: Sentences and Grammar",
             "types": [
                 {
                     "id": "ending",
