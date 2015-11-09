@@ -17,10 +17,11 @@ from django.conf.urls import include, url
 from django.views.generic.base import RedirectView
 from django.contrib import admin
 
+
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^form/', include('cdi_forms.urls')),
-    url(r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'admin/login.html'}),
+    url(r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'researcher_UI/login.html'}),
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'next_page': 'interface/'}),
 
     url(r'^accounts/profile/$', RedirectView.as_view(url='/interface/', permanent=False), name='interface'),
