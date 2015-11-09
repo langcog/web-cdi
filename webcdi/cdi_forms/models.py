@@ -53,7 +53,7 @@ class BackgroundInfo(models.Model):
     age = models.IntegerField(verbose_name = "Age (in months)")
     sex = models.CharField(max_length = 1, choices = (('M', "Male"), ('F', "Female")))
     birth_order = models.IntegerField(verbose_name = "Birth order (enter number)", validators = [validate_g_zero])
-    birth_weight = models.FloatField(verbose_name = "Birth weight (In pounds)", validators = [validate_g_zero])
+    birth_weight = models.FloatField(verbose_name = "Birth weight (In pounds)", validators = [validate_g_zero, MaxValueValidator(14, "Birth weight is not expected to be more than 14 pounds")])
     #early_late = models.DateField(verbose_name = "Early or late birth", help_text = "If the child was born on due date, fill 0. If the child was born earlier than due date, fill the number of weeks after the due date as positive value. If the child was born later fill a negative value." )
     born_on_due_date = models.BooleanField(verbose_name = "Was your child born early or late?")
     early_or_late = models.CharField(verbose_name = "Was he/she early or late?", max_length = 5, choices = (('early', 'Early'),('late', 'Late')), blank=True, null=True)
