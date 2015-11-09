@@ -74,6 +74,7 @@ def console(request, study_name = None):
             administration_table = StudyAdministrationTable(administration.objects.filter(study = current_study))
             RequestConfig(request).configure(administration_table)
             context['current_study'] = current_study.name
+            context['study_instrument'] = current_study.instrument.verbose_name
             context['study_administrations'] = administration_table
         return render(request, 'researcher_UI/interface.html', context)
 
