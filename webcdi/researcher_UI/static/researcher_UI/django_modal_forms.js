@@ -7,7 +7,7 @@ function modal_form(form_url){
         success: function (data, status) {
             $('#'+modal_id).html(data);
             $('#'+modal_id).modal('show');
-            $("#"+modal_id+" :submit").click(function () {
+            $("#"+modal_id+" [name=submit]").click(function () {
                 $.ajax({
                     type: 'POST',
                     url: form_url,

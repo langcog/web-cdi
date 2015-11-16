@@ -70,6 +70,7 @@ def console(request, study_name = None):
         context['studies'] = study.objects.filter(researcher = request.user)
         context['instruments'] = []
         if study_name is not None:
+            print study_name
             current_study = study.objects.get(researcher= request.user, name= study_name)
             administration_table = StudyAdministrationTable(administration.objects.filter(study = current_study))
             RequestConfig(request).configure(administration_table)
@@ -91,7 +92,7 @@ def add_study(request):
                 new_study = study(researcher = researcher, name = study_name, instrument = instrument)
                 new_study.save()
                 data['stat'] = "ok";
-                data['redirect_url'] = "study/"+new_study.name+"/";
+                data['redirect_url'] = "/interface/study/"+study_name+"/";
                 return HttpResponse(json.dumps(data), content_type="application/json")
             else:
                 data['stat'] = "error";
