@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from .forms import AddStudyForm
+from .forms import AddStudyForm, RenameStudyForm
 from .models import study, administration
 import json
 import re, random
@@ -60,6 +60,16 @@ def console(request, study_name = None):
 #                            admin_object.delete()
                         refresh = True
 
+                elif 'delete-study' in request.POST:
+		    study_obj.delete()
+		    study_name = None
+		    refresh = True
+
+
+		    
+		    
+
+
         
     if request.method == 'GET' or refresh:
         username = None
@@ -70,7 +80,6 @@ def console(request, study_name = None):
         context['studies'] = study.objects.filter(researcher = request.user)
         context['instruments'] = []
         if study_name is not None:
-            print study_name
             current_study = study.objects.get(researcher= request.user, name= study_name)
             administration_table = StudyAdministrationTable(administration.objects.filter(study = current_study))
             RequestConfig(request).configure(administration_table)
@@ -79,6 +88,33 @@ def console(request, study_name = None):
             context['study_administrations'] = administration_table
         return render(request, 'researcher_UI/interface.html', context)
 
+@login_required 
+def rename_study(request, study_name):
+    data = {}
+    #check if the researcher exists and has permissions over the study
+    permitted = study.objects.filter(researcher = request.user,  name = study_name).exists()
+    study_obj = study.objects.get(researcher= request.user, name= study_name)
+    if request.method == 'POST' :
+        form = RenameStudyForm(study_name, request.POST)
+        if form.is_valid():
+            researcher = request.user
+            new_study_name = form.cleaned_data.get('name')
+            if not study.objects.filter(researcher = researcher, name = new_study_name).exists():
+	        study_obj.name = new_study_name
+                study_obj.save()
+                data['stat'] = "ok";
+                data['redirect_url'] = "/interface/study/"+new_study_name+"/";
+                return HttpResponse(json.dumps(data), content_type="application/json")
+            else:
+                data['stat'] = "error";
+                data['error_message'] = "Study already exists; Use a unique name";
+                return HttpResponse(json.dumps(data), content_type="application/json")
+        else:
+            data['stat'] = "re-render";
+            return render(request, 'researcher_UI/add_study_modal.html', {'form': form})
+    else:
+        form = RenameStudyForm(study_name)
+        return render(request, 'researcher_UI/add_study_modal.html', {'form': form})
 @login_required 
 def add_study(request):
     data = {}

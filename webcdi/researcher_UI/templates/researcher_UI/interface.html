@@ -32,31 +32,51 @@
 	</form>
     </div>
     <div class='row'>
-            <form class="form-inline">
+            <form method='post' action = '/interface/study/{{ current_study }}/' id='study-form' class="form-inline">
+       		 {% csrf_token %}
                 <fieldset>
                     <legend>Study:</legend>
-                    <div class='col-md-10'>
-                            <div style = 'width:100%' class="form-group">
-                                <select  style = 'width:100%;' id="study-selector" class="form-control" onchange="location = encodeURI(this.options[this.selectedIndex].value);">
-                                    <option value="/interface/" selected disabled>Please select study</option>
-                                    {% for study in studies %}
-                                        <option value="/interface/study/{{ study }}/"{% if study.name == current_study %} selected="" {% endif %}>{{ study }}</option>
-                                    {% endfor %}
-                                </select> 
-                            </div>
-			<div>
-			    {% if study_instrument %}
-				<h4>Instrument: {{ study_instrument }}</h4>
-			    {% endif %}
+                    <div class='col-md-12'>
+			<div class="row">
+			    <div class='col-md-10'>
+				    <div style = 'width:100%' class="form-group">
+					<select  style = 'width:100%;' id="study-selector" class="form-control" onchange="location = encodeURI(this.options[this.selectedIndex].value);">
+					    <option value="/interface/" selected disabled>Please select study</option>
+					    {% for study in studies %}
+						<option value="/interface/study/{{ study }}/"{% if study.name == current_study %} selected="" {% endif %}>{{ study }}</option>
+					    {% endfor %}
+					</select> 
+				    </div>
+				<div>
+				    {% if study_instrument %}
+					<h4>Instrument: {{ study_instrument }}</h4>
+				    {% endif %}
+				</div>
+			    </div>
+			    <div class='col-md-2'>
+				    <button type="button" style='width:100%;' class="btn btn-primary"   onclick = "modal_form('/interface/add_study/')" >New Study</button>
+			    </div>
 			</div>
-                    </div>
-                    <div class='col-md-2'>
-                            <button type="button" style='width:100%;' class="btn btn-primary"   onclick = "modal_form('/interface/add_study/')" >New Study</button>
-                    </div>
+			{% if current_study %}
+			<div class="row">
+			    <div class='col-md-3'>
+				    <button type="button" style='width:100%;' class="btn btn-default"   onclick = "modal_form('/interface/study/{{ current_study|urlencode }}/administer_new/')" >Add Participants</button>
+			    </div>
+			    <div class='col-md-3'>
+				    <button type="button" style='width:100%;' class="btn btn-default"   onclick = "modal_form('/interface/study/{{ current_study|urlencode }}/download/')" >Download Study Data</button>
+			    </div>
+			    <div class='col-md-3'>
+				    <button type="button" style='width:100%;' class="btn btn-default"   onclick = "modal_form('/interface/study/{{ current_study|urlencode }}/rename_study/')" >Rename Study</button>
+			    </div>
+			    <div class='col-md-3'>
+				    <button type="submit" style='width:100%;' class="btn btn-default"   onclick='return confirm("Are you sure you want to delete the entire study and all the data associated with it?");' >Delete Study</button>
+			    </div>
+			</div>
+    			{% endif %}
+		    </div>
                 </fieldset>
-            </form>
 
-	
+            </form>
 
         </div>
     {% if current_study %}
@@ -73,16 +93,11 @@
                             <button style='width:100%;' class="btn btn-default" id='add-selected' type='submit' name='administer-selected' value='administer-selected' disabled  >Re-administer Participants</button>
                     </div>
                     <div class='col-md-3'>
-                            <button style='width:100%;' class="btn btn-default" id='delete-selected' type='submit' name='delete-selected' value='administer-selected' disabled onclick='confirm("Are you sure you want to delete the selected administration record and all the data associated with it?")' >Delete Selected Data</button>
+                            <button style='width:100%;' class="btn btn-default" id='delete-selected' type='submit' name='delete-selected' value='administer-selected' disabled onclick='return confirm("Are you sure you want to delete the selected administration record and all the data associated with it?");' >Delete Selected Data</button>
+
                     </div>
                     <div class='col-md-3'>
                             <button style='width:100%;' class="btn btn-default" id='download-selected' type='submit' name='download-selected' value='download-selected'  disabled >Download Selected Data</button>
-                    </div>
-                    <div class='col-md-3'>
-                            <button type="button" style='width:100%;' class="btn btn-default"   onclick = "modal_form('/interface/study/{{ current_study|urlencode }}/administer_new/')" >Add Participants</button>
-                    </div>
-                    <div class='col-md-3'>
-                            <button type="button" style='width:100%;' class="btn btn-default"   onclick = "modal_form('/interface/study/{{ current_study|urlencode }}/download/')" >Download Study Data</button>
                     </div>
                 </fieldset>
             </form>
@@ -97,6 +112,7 @@
 </div>
 <script>
 checked_only()
+$('form').each(function(){this.onkeypress = checkEnter;});
 </script>
 </body>
 </html>
