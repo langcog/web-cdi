@@ -1,0 +1,44 @@
+install git and clone repo
+$ sudo apt-get install git
+$ git clone https://github.com/langcog/web-cdi.git
+$ cd web-cdi
+
+install dependencies
+  on ubuntu:
+    $ sudo apt-get python-pip python-dev postgresql-client postgresql postgresql-contrib pgadmin5 python-psycopg2 libpq-dev libxml2-dev libxslt-dev supervisor nginx
+  on osx:
+    install and start postgresql
+    $ brew install postgresql
+    $ pg_ctl -D /usr/local/var/postgres/ -l /usr/local/var/postgres/server.log start
+    [TODO: the rest]
+
+install virtualenv and set one up
+$ sudo pip install virtualenv
+$ cd my_project_folder
+$ virtualenv venv
+$ source venv/bin/activate
+
+install project requirements
+$ pip install -r requirements.txt
+
+create postgres database/user ($username = your OSX login)
+$ sudo -u $username createdb webcdi-admin
+$ sudo -u $username createuser -P -s webcdi-admin
+$ psql -U $username webcdi-admin -c "GRANT ALL PRIVILEGES ON DATABASE "webcdi-admin" TO "webcdi-admin;"
+
+make and run migrations
+$ python manage.py makemigrations
+$ python manage.py migrate
+
+set up instruments
+$ sudo -u $username psql -d webcdi-admin -c "\\COPY cdi_forms_english_ws FROM 'cdi_form_csv/[English_WS].csv' WITH (FORMAT csv, HEADER True)"
+$ sudo -u $username psql -d webcdi-admin -c "\\COPY cdi_forms_english_wg FROM 'cdi_form_csv/[English_WG].csv' WITH (FORMAT csv, HEADER True)"
+[and so on for other instruments]
+
+create login for admin console
+$ python manage.py createsuperuser
+
+run locally
+$ python manage.py runserver
+
+in the admin console (http://127.0.0.1:8000/admin) add instruments for English_WS, English_WG, etc.
