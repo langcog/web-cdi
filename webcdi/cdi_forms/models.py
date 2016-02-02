@@ -47,11 +47,14 @@ def validate_ne_zero(value):
         if value ==  0:
             raise ValidationError("Value should be non-zero")
 
+def format_currency(val):
+    return "${:,}".format(val)
+
 class BackgroundInfo(models.Model):
     administration = models.OneToOneField("researcher_UI.administration")
     years = [(x,x) for x in range(1950, datetime.date.today().year+1)]
     age = models.IntegerField(verbose_name = "Age (in months)")
-    sex = models.CharField(max_length = 1, choices = (('M', "Male"), ('F', "Female")))
+    sex = models.CharField(max_length = 1, choices = (('M', "Male"), ('F', "Female"), ('O', "Other")))
     birth_order = models.IntegerField(verbose_name = "Birth order (enter number)", validators = [validate_g_zero])
     birth_weight = models.FloatField(verbose_name = "Birth weight (In pounds)", validators = [validate_g_zero, MaxValueValidator(14, "Birth weight is not expected to be more than 14 pounds")])
     #early_late = models.DateField(verbose_name = "Early or late birth", help_text = "If the child was born on due date, fill 0. If the child was born earlier than due date, fill the number of weeks after the due date as positive value. If the child was born later fill a negative value." )
@@ -73,8 +76,13 @@ class BackgroundInfo(models.Model):
     father_education = models.IntegerField(verbose_name = "Father's (or Parent 2) Education", help_text ="Choose highest grade completed (12 = high school graduate; 16 = college graduate; 18 = advanced degree)", choices= education_levels.iteritems())
     #father_occupation = models.CharField(max_length = 101, verbose_name = "Occupation")
     #father_hours_work = models.IntegerField(verbose_name = "Hours/week at work")
-    
-    annual_income = models.FloatField(verbose_name = "Estimated Annual Family Income (in USD)", validators = [validate_ge_zero])
+
+    low, high, inc = 10000, 200000, 10000
+    income_choices = [("<" + str(low), "Under " + format_currency(low))] +\
+        [("%d-%d" % (bottom, bottom + inc), "-".join([format_currency(bottom), format_currency(bottom + inc)])) for bottom in range(low, high, inc)] +\
+        [(">" + str(high), "Over " + format_currency(high)), (None, "Prefer not to disclose")]
+    annual_income = models.CharField(max_length = 30, choices = income_choices, verbose_name = "Estimated Annual Family Income (in USD)")
+    #annual_income = models.FloatField(verbose_name = "Estimated Annual Family Income (in USD)", validators = [validate_ge_zero])
 
     child_hispanic_latino = models.NullBooleanField(verbose_name = "Is your child Hispanic or Latino?", blank=True, null=True)
     child_ethnicity = ArrayField(models.CharField(max_length = 1), blank=True, null=True)

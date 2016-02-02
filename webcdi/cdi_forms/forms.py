@@ -41,7 +41,7 @@ class BackgroundForm(BetterModelForm):
                      choices=(('early', 'Early'),('late', 'Late')), widget=forms.RadioSelect,
                  required=False)
     sex = forms.ChoiceField(
-                     choices=(('M', 'Male'),('F', 'Female')), widget=forms.RadioSelect,
+                     choices=(('M', 'Male'),('F', 'Female'), ('O', 'Other')), widget=forms.RadioSelect,
                 )
     other_languages_boolean = forms.TypedChoiceField(
                      choices=YESNO_CHOICES, widget=forms.RadioSelect, coerce=string_bool_coerce, label='Does your child regularly hear a language other than english?')
@@ -120,7 +120,7 @@ class BackgroundForm(BetterModelForm):
         #self.helper.add_input(Submit('submit', 'Submit'))
         #self.helper[1:6].wrap(Fieldset, "Basic info")
         self.helper.layout = Layout(
-            Fieldset( 'Basic Information', 'child_dob',HTML("<p> To preserve your privacy, we do not store the month and year of birth on our server. We only store the age in months </p>"), 'sex','birth_order', 'birth_weight', Field('born_on_due_date', css_class='enabler'), Div('early_or_late', 'due_date_diff', css_class='dependent')),
+            Fieldset( 'Basic Information', 'child_dob',HTML("<p> To preserve your privacy, we do not store the child's date of birth on our server: we only record their age in months.</p>"), 'sex','birth_order', 'birth_weight', Field('born_on_due_date', css_class='enabler'), Div('early_or_late', 'due_date_diff', css_class='dependent')),
             Fieldset( 'Family Background', 'mother_yob', 'mother_education','father_yob', 'father_education', 'annual_income'),
             Fieldset( "Child's Ethnicity",HTML("<p> The following information is being collected for the sole purpose of reporting to our grant-funding institute, i.e.,  NIH (National Institute of Health).  NIH requires this information to ensure the soundness and inclusiveness of our research. Your cooperation is appreciated, but optional. </p>"), 'child_hispanic_latino', 'child_ethnicity'),
             Fieldset( "Caregiver Information", 'caregiver_info'),
