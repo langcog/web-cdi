@@ -34,7 +34,7 @@ class BackgroundForm(BetterModelForm):
     #child_mob = forms.TypedChoiceField(label = "Child's month of birth", choices = month_choices, coerce = int) 
     child_hispanic_latino = forms.TypedChoiceField(
                      choices=YESNO_CHOICES, widget=forms.RadioSelect, coerce = string_bool_coerce
-                , required=False)
+                , required=False, label="Is your child Hispanic or Latino?")
     born_on_due_date = forms.TypedChoiceField(
                      choices=YESNO_CHOICES, widget=forms.RadioSelect, label='Was your child born early or late?', coerce=string_bool_coerce)
     early_or_late = forms.ChoiceField(

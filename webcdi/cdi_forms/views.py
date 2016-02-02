@@ -19,6 +19,8 @@ def model_map(name):
     assert name in mapping, name+"instrument not added to the mapping in views.py model_map function"
     return mapping[name]
         
+def get_model_header(name):
+    return model_map(name).objects.values_list('itemID', flat=True).order_by('-pk')
     
 def prefilled_background_form(administration_instance):
     background_instance = BackgroundInfo.objects.get(administration = administration_instance)

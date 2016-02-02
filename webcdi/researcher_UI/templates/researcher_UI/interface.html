@@ -69,7 +69,7 @@
 				    <button type="button" style='width:100%;' class="btn btn-default"   onclick = "modal_form('/interface/study/{{ current_study|urlencode }}/rename_study/')" >Rename Study</button>
 			    </div>
 			    <div class='col-md-3'>
-				    <button type="submit" style='width:100%;' class="btn btn-default"   onclick='return confirm("Are you sure you want to delete the entire study and all the data associated with it?");' >Delete Study</button>
+				    <button type="submit" style='width:100%;' class="btn btn-default" name='delete-study'  onclick='return confirm("Are you sure you want to delete the entire study and all the data associated with it?");' >Delete Study</button>
 			    </div>
 			</div>
     			{% endif %}

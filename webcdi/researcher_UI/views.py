@@ -2,15 +2,37 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from .forms import AddStudyForm, RenameStudyForm
-from .models import study, administration
+from .models import study, administration, administration_data
 import json
 import re, random
 from .tables  import StudyAdministrationTable
 from django_tables2   import RequestConfig
 from django.db.models import Max
 import datetime
+from cdi_forms.views import get_model_header
 
 # Create your views here
+
+import csv
+from django.http import HttpResponse
+
+def download_data(request, study_obj, administrations = None):
+    # Create the HttpResponse object with the appropriate CSV header.
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename='+study_obj.name+'"-data.csv"'
+
+    writer = csv.writer(response)
+    
+
+    model_header = get_model_header(study_obj.instrument.name)
+    meta_data_header = administration.get_meta_header()
+    writer.writerow(['admin_id', 'hash']+model_header)
+    for admin_obj in administrations:
+        admin_data = {x:y for (x,y) in administration_data.objects.values_list('itemID', 'value').filter(administeration_id = admin_obj)}
+	[admin_data[key] for key in model_header]
+    	writer.writerow(['Second row', 'A', 'B', 'C', '"Testing"', "Here's a quote"])
+
+    return response
 
 @login_required
 def console(request, study_name = None):

@@ -31,6 +31,11 @@ class administration(models.Model):
     class Meta:
         unique_together = ('study', 'subject_id', 'repeat_num')
 
+    def get_meta_header():
+        return ['study', 'subject_id', 'administration_number', 'link', 'completed', 'expiration_date', 'last_modified']
+    def get_meta_data():
+        return [self.study, self.subject_id, self.repeat_num, self.url_hash, self.completed, self.due_date, self.last_modified]
+
 class administration_data(models.Model):
     administration = models.ForeignKey("administration")
     item_ID = models.CharField(max_length = 101)
