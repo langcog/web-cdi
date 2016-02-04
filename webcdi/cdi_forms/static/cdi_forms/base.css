@@ -1,0 +1,36 @@
+@font-face {
+    font-family: Karla;
+    src: url(https://fonts.gstatic.com/s/karla/v5/suoMYBGv5sGCUIrF9mVTfXYhjbSpvc47ee6xR_80Hnw.woff2);
+}
+body {
+    font-family: "Karla", "sans-serif";
+}
+
+.alco-child {
+    margin: 10px;
+    background-color: #eee;
+}
+
+input[type=checkbox] + label {
+      color: #222;
+}
+
+input[type=checkbox]:checked + label {
+      color: #3C763D;
+}
+
+input[type=radio] + label {
+      color: #222;
+}
+
+input[type=radio]:checked + label {
+      color: #3C763D;
+}
+
+.dependent {
+    display: none;
+}
+
+ul {
+  padding-left: 15px;
+}
