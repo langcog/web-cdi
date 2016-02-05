@@ -27,6 +27,11 @@ input[type=radio]:checked + label {
       color: #3C763D;
 }
 
+input[type=textbox] {
+    width: 80%;
+    margin-bottom: 10px;
+}
+
 .dependent {
     display: none;
 }

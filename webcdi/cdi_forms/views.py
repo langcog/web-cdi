@@ -100,8 +100,8 @@ def prefilled_cdi_data(administration_instance):
                         section['objects'] = instrument_model.objects.filter(category__exact=section['id']).values()
                         if any(['*' in x['gloss'] for x in section['objects']]):
                             section['starred'] = "*Or the word used in your family"
-		        for obj in section['objects']:
-			    obj['prefilled_value'] = obj['itemID'] in prefilled_data
+                        for obj in section['objects']:
+                            obj['prefilled_value'] = obj['itemID'] in prefilled_data
                                 
                 else:
                     item_type['objects'] = instrument_model.objects.filter(item_type__exact=item_type['id']).values()
@@ -140,10 +140,13 @@ def cdi_form(request, hash_id):
                 items = instrument_model.objects.filter(itemID = key)
                 if len(items) == 1:
                     item = items[0]
-                    choices = map(unicode.strip, item.choices.split(';'))
-                    value = request.POST[key]
-                    if value in choices:
-                        administration_data.objects.update_or_create(administration = administration_instance, item_ID = key, value= value)
+                    if item.choices:
+                        choices = map(unicode.strip, item.choices.split(';'))
+                        value = request.POST[key]
+                        if value in choices:
+                            administration_data.objects.update_or_create(administration = administration_instance, item_ID = key, value = value)
+                    else:
+                        administration_data.objects.update_or_create(administration = administration_instance, item_ID = key, value = value)
             if 'btn-save' in request.POST and request.POST['btn-save'] == 'Save':
                 administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now())
                 refresh = True
