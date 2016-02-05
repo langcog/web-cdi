@@ -26,7 +26,9 @@ class BackgroundForm(BetterModelForm):
     ('W', "White"),
     ('O', "Other")), label = "My child is (check all that apply):", required = False)
     YESNO_CHOICES = ((False, 'No'), (True, 'Yes'))
-    child_dob = forms.DateField(input_formats=['%m/%d/%Y'], widget=forms.TextInput(attrs={'placeholder': 'mm/dd/yyyy'}), validators = [MaxValueValidator(datetime.date.today())], label = "Child DOB")
+    child_dob = forms.DateField(input_formats=['%m/%d/%Y'], widget=forms.TextInput(attrs={'placeholder': 'mm/dd/yyyy'}),
+                                help_text = "To protect your privacy, we never store your child's date of birth, we only record age in months.",
+                                validators = [MaxValueValidator(datetime.date.today())], label = "Child DOB")
     #years = [(x,x) for x in range(1900, datetime.date.today().year+1)]
     #child_yob = forms.TypedChoiceField(label = "Child's year of birth", choices = years, coerce=int)
     #month_choices = enumerate(["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"])
@@ -126,7 +128,7 @@ class BackgroundForm(BetterModelForm):
         #self.helper.add_input(Submit('submit', 'Submit'))
         #self.helper[1:6].wrap(Fieldset, "Basic info")
         self.helper.layout = Layout(
-            Fieldset( 'Basic Information', 'child_dob',HTML("<p> To preserve your privacy, we do not store the child's date of birth on our server: we only record their age in months.</p>"), 'sex','birth_order', 'birth_weight', Field('born_on_due_date', css_class='enabler'), Div('early_or_late', 'due_date_diff', css_class='dependent')),
+            Fieldset( 'Basic Information', 'child_dob', 'sex','birth_order', 'birth_weight', Field('born_on_due_date', css_class='enabler'), Div('early_or_late', 'due_date_diff', css_class='dependent')),
             Fieldset( 'Family Background', 'mother_yob', 'mother_education','father_yob', 'father_education', 'annual_income'),
             Fieldset( "Child's Ethnicity",HTML("<p> The following information is being collected for the sole purpose of reporting to our grant-funding institute, i.e.,  NIH (National Institute of Health).  NIH requires this information to ensure the soundness and inclusiveness of our research. Your cooperation is appreciated, but optional. </p>"), 'child_hispanic_latino', 'child_ethnicity'),
             Fieldset( "Caregiver Information", 'caregiver_info'),
