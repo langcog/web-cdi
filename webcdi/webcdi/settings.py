@@ -16,14 +16,17 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 from django.utils.crypto import get_random_string
 
-def generate_secret_key()
+def generate_secret_key(fname):
     chars = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)'
-    get_random_string(50, chars)
+    f = open(fname, 'w')
+    f.write("SECRET_KEY = '%s'\n"%get_random_string(50, chars))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 try:
@@ -39,7 +42,7 @@ except ImportError:
 DEBUG = False
 TEMPLATE_DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1','52.32.108.131']
 
 
 # Application definition
@@ -102,7 +105,7 @@ DATABASES = {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'webcdi-admin',                      
             'USER': 'webcdi-admin',
-            'PASSWORD': 'talkbabytalk',
+            'PASSWORD': 'first5words',
             'HOST': 'localhost',
             'PORT': '',
         }
@@ -133,3 +136,22 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': '/home/ubuntu/web-cdi/django_logs/debug.log',
+        },
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
