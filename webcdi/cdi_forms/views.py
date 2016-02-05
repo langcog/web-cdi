@@ -124,6 +124,10 @@ def prefilled_cdi_data(administration_instance):
                                 obj['choices'] = zip(split_choices, split_choices, prefilled_values)
                                 if obj['definition'] is not None:
                                     obj['text'] = obj['definition']
+
+                    if item_type['type'] == 'textbox':
+                        for obj in item_type['objects']:
+                            obj['choices']
     return data
 
 def cdi_form(request, hash_id):
@@ -140,9 +144,11 @@ def cdi_form(request, hash_id):
                 items = instrument_model.objects.filter(itemID = key)
                 if len(items) == 1:
                     item = items[0]
+                    value = request.POST[key]
+                    print key, value
+                    print item.choices
                     if item.choices:
                         choices = map(unicode.strip, item.choices.split(';'))
-                        value = request.POST[key]
                         if value in choices:
                             administration_data.objects.update_or_create(administration = administration_instance, item_ID = key, value = value)
                     else:
