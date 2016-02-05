@@ -7,49 +7,25 @@
 
     <title>{{ title }}</title>
     <meta name="description" content="English Words and Sentences CDI form">
-    <meta name="author" content="Ashwin Paranjape">
 
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="{% static 'cdi_forms/selectize.js' %}"></script>
     <script src="{% static 'cdi_forms/bootstrap-datepicker.js' %}"></script>
     <link rel='stylesheet' href="{% static 'cdi_forms/selectize.bootstrap3.css' %}">
     <link rel='stylesheet' href="{% static 'cdi_forms/datepicker.css' %}">
-
-        <!--.alternate-color :nth-child(odd){
-              background-color:#ddd;
-        }
-        .alternate-color :nth-child(even){
-              background-color:#fff;
-        }-->
-    <style>
-        .alco-child{
-            margin:10px;
-            background-color:#eee;
-        }
-
-        input[type=checkbox] + label {
-              color: #222;
-        } 
-        input[type=checkbox]:checked + label {
-              color: #3C763D;
-        } 
-        input[type=radio] + label {
-              color: #222;
-        } 
-        input[type=radio]:checked + label {
-              color: #3C763D;
-        } 
-        .dependent{
-            display:none;
-        }
-
-    </style>
     <link rel="stylesheet" href="http://getbootstrap.com/assets/css/docs.min.css" />
+    <link rel='stylesheet' href="{% static 'cdi_forms/base.css' %}">
+
+    <!--.alternate-color :nth-child(odd){
+          background-color:#ddd;
+    }
+    .alternate-color :nth-child(even){
+          background-color:#fff;
+    }-->
 
     <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -57,52 +33,51 @@
 </head>
 
 <body data-spy="scroll" data-target="#navbar">
-    <div class="container bs-docs-container" style='padding-top: 60px; padding-bottom: 60px;'>
-    <form id="cdi_form" method='post' class='form-horizontal'>
-    <div class="row">
-        <div class = "col-md-3" role="complementary">
-            
-            
-            <nav id="navbar" class=" bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" style="padding-top:60px;">
-                <div>
-                    <h4>Instructions:</h4>
-                    <ul>
-                        <li> This form can be filled anytime before the due date </li>
-                        <li> It can also be saved at any time and resumed later by using the same link (<a id="bookmarkme" href="">create bookmark</a>)</li>
-                        <li> After the form is submitted, it cannot be altered </li>
-                        <li> The form also cannot be altered after the due date </li>
-                    </ul>
-                    <script type="text/javascript">
+<div class="container bs-docs-container" style="padding-top: 60px; padding-bottom: 60px;">
+    <form id="cdi_form" method="post" class="form-horizontal">
+        <div class="row">
+            <div class="col-md-3" role="complementary">
+
+                <nav id="navbar" class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" style="padding-top:60px;">
+                    <div>
+                        <h4>Instructions:</h4>
+                        <ul>
+                            <li> This form can be filled anytime before the due date. </li>
+                            <li> It can also be saved at any time and resumed later by using the same link (<a id="bookmarkme" href="">create bookmark</a>).</li>
+                            <li> After the form is submitted, it cannot be altered. </li>
+                            <li> The form also cannot be altered after the due date. </li>
+                        </ul>
+                        <script type="text/javascript">
                         $(function() {
                             $("#bookmarkme").click(function() {
                                 // Mozilla Firefox Bookmark
-                                if ('sidebar' in window && 'addPanel' in window.sidebar) { 
+                                if ('sidebar' in window && 'addPanel' in window.sidebar) {
                                     window.sidebar.addPanel(location.href,document.title,"");
                                 } else if( /*@cc_on!@*/false) { // IE Favorite
-                                    window.external.AddFavorite(location.href,document.title); 
+                                    window.external.AddFavorite(location.href,document.title);
                                 } else { // webkit - safari/chrome
                                     alert('Press ' + (navigator.userAgent.toLowerCase().indexOf('mac') != - 1 ? 'Command/Cmd' : 'CTRL') + ' + D to bookmark this page.');
                                 }
                             });
                         });
                     </script>
-                    
-                    <p><b> Due date </b>: {{ due_date }}</p>
-                    {% block nav_buttons %}
-                    {% endblock %}
-                </div>
 
+                        <p><b> Due date </b>: {{ due_date }}</p>
+                        {% block nav_buttons %}
+                        {% endblock %}
+                    </div>
                     {% block navcontents %}
                     {% endblock %}
-            </nav>
+                </nav>
 
-        </div>
-        <div class = "col-md-9" role="main">
-            {% block main %}
-            {% endblock %}
+            </div>
+            <div class = "col-md-9" role="main">
+                {% block main %}
+                {% endblock %}
 
+            </div>
         </div>
-        </form>
+    </form>
 </div>
 {% block scripts %}
 {% endblock %}

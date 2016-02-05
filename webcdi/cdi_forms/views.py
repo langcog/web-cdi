@@ -1,7 +1,4 @@
 from django.shortcuts import render
-
-from django.http import HttpResponse
-
 from .models import English_WS, English_WG, BackgroundInfo, requests_log
 import os.path
 import json
@@ -41,6 +38,7 @@ def get_administration_instance(hash_id):
 def background_info_form(request, hash_id):
     administration_instance = get_administration_instance(hash_id)
     refresh = False
+    background_form = None
         
     if request.method == 'POST' :
         if not administration_instance.completed and administration_instance.due_date > timezone.now():
@@ -100,10 +98,10 @@ def prefilled_cdi_data(administration_instance):
                 if 'sections' in item_type:
                     for section in item_type['sections']:
                         section['objects'] = instrument_model.objects.filter(category__exact=section['id']).values()
-			if any(['*' in x['gloss'] for x in section['objects']]):
-			    section['starred'] = "*Or the word used in your family"
-                        for obj in section['objects']:
-                            obj['prefilled_value'] = obj['itemID'] in prefilled_data
+            if any(['*' in x['gloss'] for x in section['objects']]):
+                section['starred'] = "*Or the word used in your family"
+                for obj in section['objects']:
+                    obj['prefilled_value'] = obj['itemID'] in prefilled_data
                                 
                 else:
                     item_type['objects'] = instrument_model.objects.filter(item_type__exact=item_type['id']).values()
@@ -119,8 +117,8 @@ def prefilled_cdi_data(administration_instance):
                             prefilled_values = [False if obj['itemID'] not in prefilled_data else x == prefilled_data[obj['itemID']] for x in split_choices]
                             obj['text'] = obj['gloss']
 
-                            if obj['definition'] is not None and obj['definition'].find('/') >=0:
-                            	split_definition = map(unicode.strip, obj['definition'].split('/'))
+                            if obj['definition'] is not None and obj['definition'].find('/') >= 0:
+                                split_definition = map(unicode.strip, obj['definition'].split('/'))
                                 obj['choices'] = zip(split_definition, split_choices, prefilled_values)
                             else:
                                 obj['choices'] = zip(split_choices, split_choices, prefilled_values)
@@ -129,9 +127,12 @@ def prefilled_cdi_data(administration_instance):
     return data
 
 def cdi_form(request, hash_id):
+
     administration_instance = get_administration_instance(hash_id)
     instrument_name = administration_instance.study.instrument.name
     instrument_model = model_map(instrument_name)
+    refresh = False
+
     if request.method == 'POST' :
         if not administration_instance.completed and administration_instance.due_date > timezone.now():
             bulk_data = []
@@ -154,6 +155,7 @@ def cdi_form(request, hash_id):
                 administration.objects.filter(url_hash = hash_id).update(completed= True)
                 return printable_view(request, hash_id)
 
+    data = {}
     if request.method == 'GET' or refresh:
         data = prefilled_cdi_data(administration_instance)
         #with open(PROJECT_ROOT+'/form_data/English_WS_meta.json', 'r') as content_file:
@@ -177,6 +179,7 @@ def cdi_form(request, hash_id):
 
 def printable_view(request, hash_id):
     administration_instance = get_administration_instance(hash_id)
+    prefilled_data = {}
     if request.method == 'GET' or request.method=='POST':
         prefilled_data = prefilled_cdi_data(administration_instance)
         try:
@@ -219,6 +222,5 @@ def administer_cdi_form(request, hash_id):
             else:
                 return background_info_form(request, hash_id)
         else:
-            #only printable
+            # only printable
             return printable_view(request, hash_id)
-

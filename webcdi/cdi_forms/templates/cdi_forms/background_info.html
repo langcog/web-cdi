@@ -1,26 +1,39 @@
 {% extends 'cdi_forms/cdi_base.html' %}
+
 {% block nav_buttons %}
-    {% if not completed %}
-        <input name="btn-save" value="Save" class="btn btn-primary" type="button">
-        <input name="btn-next" value="Next" class="btn btn-primary" type="submit">
-    {% endif %}
+{% if not completed %}
+<input name="btn-save" value="Save" class="btn btn-primary" type="button">
+<input name="btn-next" value="Next" class="btn btn-primary" type="submit">
+{% endif %}
 {% endblock %}
+
 {% block main %}
 {% if background_form %}
-        <input type='hidden' name='background-info-form' value='background-info-form'/>
-        <div class = 'row'>
-        {% load crispy_forms_tags %}
-        {% crispy background_form %}
-        </div>
+<input type="hidden" name="background-info-form" value="background-info-form"/>
+<div class="row">
+    <h2>MacArthur-Bates Communicative Development Inventory</h2><br>
+    <h4>Instructions for completing the language inventory</h4>
+    <ul>
+        <li> Try to complete the inventory when you have at least 30 quiet minutes, without interruptions. An example might be when your child is sleeping. </li>
+        <li> You do not have to complete the inventory in one sitting. If you are interrupted, it is ok to put it down and come back to it when you have more time. </li>
+        <li> Feel free to ask others (e.g. other family members, nanny, child care providers) to help you fill out this form. </li>
+        <li> Please read all of the instructions on the inventory carefully, and make sure you complete all of the sections. </li>
+    </ul>
+    <p>For more information about the MB-CDI, <a href="http://mb-cdi.stanford.edu/">click here</a>.</p>
+    <p>Thank you! We appreciate your time and effort!</p>
+</div>
+<br>
+<div class="row">
+    {% load crispy_forms_tags %}
+    {% crispy background_form %}
+</div>
 {% else %}
-        <p>Form unavailable. Contact admin. </p>
-    {% endif %}
+<p>Form unavailable. Contact admin. </p>
+{% endif %}
 {% endblock %}
 
 {% block scripts %}
-        <script>
-
-
+<script>
     $('.enabler[value="True"]').each(function(index, e){
         if(e.checked){
             $(e).closest('.form-group').next('.dependent').css('display','block');
@@ -38,11 +51,11 @@
         });
     });
     var $select = $('.make-selectize').selectize({
-        maxItems :null, 
+        maxItems :null,
     });
     $('#id_child_dob').datepicker();
     {% if completed %}
         $('input').prop('disabled', True);
     {% endif %}
-        </script>
+</script>
 {% endblock %}
