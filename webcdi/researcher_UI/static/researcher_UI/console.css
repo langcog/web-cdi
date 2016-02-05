@@ -1,3 +1,11 @@
+@font-face {
+    font-family: Karla;
+    src: url(https://fonts.gstatic.com/s/karla/v5/suoMYBGv5sGCUIrF9mVTfXYhjbSpvc47ee6xR_80Hnw.woff2);
+}
+body {
+    font-family: "Karla", "sans-serif";
+}
+
 fieldset {
     border: 1px groove #ddd !important;
     padding: 1.4em 1.4em 1.4em 1.4em !important;
