@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from .forms import AddStudyForm, RenameStudyForm
-from .models import study, administration, administration_data
+from .models import study, administration, administration_data, get_meta_header 
 import json
 import re, random
 from .tables  import StudyAdministrationTable
@@ -16,22 +16,25 @@ from cdi_forms.views import get_model_header
 import csv
 from django.http import HttpResponse
 
+@login_required
 def download_data(request, study_obj, administrations = None):
     # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename='+study_obj.name+'"-data.csv"'
+    response['Content-Disposition'] = 'attachment; filename='+study_obj.name.replace(' ', '_')+'"-data.csv"'
 
     writer = csv.writer(response)
     
 
+    #if(len(administrations) == 0):
+        #return None;
     model_header = get_model_header(study_obj.instrument.name)
-    meta_data_header = administration.get_meta_header()
-    writer.writerow(['admin_id', 'hash']+model_header)
+    
+    meta_data_header = get_meta_header()
+    writer.writerow(meta_data_header+model_header)
     for admin_obj in administrations:
-        admin_data = {x:y for (x,y) in administration_data.objects.values_list('itemID', 'value').filter(administeration_id = admin_obj)}
-	[admin_data[key] for key in model_header]
-    	writer.writerow(['Second row', 'A', 'B', 'C', '"Testing"', "Here's a quote"])
-
+        admin_data = {x:y for (x,y) in administration_data.objects.values_list('item_ID', 'value').filter(administration_id = admin_obj)}
+	
+    	writer.writerow(admin_obj.get_meta_data()+[admin_data[key] if key in admin_data else '' for key in model_header])
     return response
 
 @login_required
@@ -77,9 +80,10 @@ def console(request, study_name = None):
                     #header = get_cdi_model['English_WS'].
                     if all([x.isdigit() for x in ids]):
                         ids = list(set(map(int, ids)))
+                        administrations = []
                         for nid in ids:
-                            admin_object = administration.objects.get(id = nid)
-#                            admin_object.delete()
+                            administrations.append(administration.objects.get(id = nid))
+                        return download_data(request, study_obj, administrations)
                         refresh = True
 
                 elif 'delete-study' in request.POST:
@@ -87,6 +91,9 @@ def console(request, study_name = None):
 		    study_name = None
 		    refresh = True
 
+                elif 'download-study' in request.POST:
+                    administrations = administration.objects.filter(study = study_obj)
+                    return download_data(request, study_obj, administrations)
 
 		    
 		    
@@ -165,6 +172,17 @@ def add_study(request):
 
 def random_url_generator(size=64, chars='0123456789abcdef'):
     return ''.join(random.choice(chars) for _ in range(size))
+
+@login_required 
+def download_study(request, study_name):
+    data = {}
+    #check if the researcher exists and has permissions over the study
+    permitted = study.objects.filter(researcher = request.user,  name = study_name).exists()
+    study_obj = study.objects.get(researcher= request.user, name= study_name)
+
+
+
+    
 
 
 @login_required 
