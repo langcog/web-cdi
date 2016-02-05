@@ -17,6 +17,8 @@
     <script src="{% static 'cdi_forms/bootstrap-datepicker.js' %}"></script>
     <link rel='stylesheet' href="{% static 'cdi_forms/selectize.bootstrap3.css' %}">
     <link rel='stylesheet' href="{% static 'cdi_forms/datepicker.css' %}">
+    <link rel="stylesheet" href="http://getbootstrap.com/assets/css/docs.min.css" />
+    <link rel='stylesheet' href="{% static 'cdi_forms/base.css' %}">
 
         <!--.alternate-color :nth-child(odd){
               background-color:#ddd;
@@ -24,30 +26,6 @@
         .alternate-color :nth-child(even){
               background-color:#fff;
         }-->
-    <style>
-        .alco-child{
-            margin:10px;
-            background-color:#eee;
-        }
-
-        input[type=checkbox] + label {
-              color: #222;
-        } 
-        input[type=checkbox]:checked + label {
-              color: #3C763D;
-        } 
-        input[type=radio] + label {
-              color: #222;
-        } 
-        input[type=radio]:checked + label {
-              color: #3C763D;
-        } 
-        .dependent{
-            display:none;
-        }
-
-    </style>
-    <link rel="stylesheet" href="http://getbootstrap.com/assets/css/docs.min.css" />
 
     <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -93,8 +71,10 @@
                                 </div>
                                 
                             {% endif %}
-                        {% else %}
+                        {% elif type.type == "checkbox" %}
                             <div class="col-md-4 alco-child"> <input type="checkbox" id="{{ object.itemID }}" name="{{ object.itemID }}" value="{{ object.choices }}"{% if completed %} disabled {% endif %} {% if object.prefilled_value %} checked {% endif %}> <label for="{{ object.itemID }}"> {{ object.definition }}</label></div>
+                        {% elif type.type == "textbox" %}
+                            <div class="col-md-12"> <input type="textbox" id="{{ object.itemID }}" name="{{ object.itemID }}" maxlength="200" value="{{ object.prefilled_value }}" {% if completed %} disabled {% endif %}></div>
                         {% endif %}
                             
                     {% endfor %}

@@ -39,7 +39,7 @@ class administration(models.Model):
 class administration_data(models.Model):
     administration = models.ForeignKey("administration")
     item_ID = models.CharField(max_length = 101)
-    value = models.CharField(max_length=101)
+    value = models.CharField(max_length=200)
     class Meta:
         unique_together = ('administration', 'item_ID')
 

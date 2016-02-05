@@ -60,7 +60,7 @@
             {% elif type.type == "checkbox" %}
                 <div class="col-md-4 alco-child"> <input type="checkbox" id="{{ object.itemID }}" name="{{ object.itemID }}" value="{{ object.choices }}"{% if completed %} disabled {% endif %} {% if object.prefilled_value %} checked {% endif %}> <label for="{{ object.itemID }}"> {{ object.gloss }}</label></div>
             {% elif type.type == "textbox" %}
-                <div class="col-md-12"> <input type="textbox" id="{{ object.itemID }}" name="{{ object.itemID }}" {% if completed %} disabled {% endif %}></div>
+                <div class="col-md-12"> <input type="textbox" id="{{ object.itemID }}" name="{{ object.itemID }}" maxlength="200" value="{{ object.prefilled_value }}" {% if completed %} disabled {% endif %}></div>
             {% endif %}
         {% endfor %}
     </div>

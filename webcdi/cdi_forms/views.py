@@ -85,7 +85,7 @@ def prefilled_cdi_data(administration_instance):
     prefilled_data_list = administration_data.objects.filter(administration = administration_instance).values('item_ID', 'value')
     instrument_name = administration_instance.study.instrument.name
     instrument_model = model_map(instrument_name)
-    prefilled_data = {x['item_ID']:x['value'] for x in prefilled_data_list}
+    prefilled_data = {x['item_ID']: x['value'] for x in prefilled_data_list}
     with open(PROJECT_ROOT+'/form_data/'+instrument_name+'_meta.json', 'r') as content_file:
         data = json.loads(content_file.read())
         data['title'] = administration_instance.study.instrument.verbose_name
@@ -127,7 +127,9 @@ def prefilled_cdi_data(administration_instance):
 
                     if item_type['type'] == 'textbox':
                         for obj in item_type['objects']:
-                            obj['choices']
+                            if obj['itemID'] in prefilled_data:
+                                obj['prefilled_value'] = prefilled_data[obj['itemID']]
+                                print obj['prefilled_value']
     return data
 
 def cdi_form(request, hash_id):
@@ -139,20 +141,18 @@ def cdi_form(request, hash_id):
 
     if request.method == 'POST' :
         if not administration_instance.completed and administration_instance.due_date > timezone.now():
-            bulk_data = []
             for key in request.POST:
                 items = instrument_model.objects.filter(itemID = key)
                 if len(items) == 1:
                     item = items[0]
                     value = request.POST[key]
-                    print key, value
-                    print item.choices
                     if item.choices:
                         choices = map(unicode.strip, item.choices.split(';'))
                         if value in choices:
                             administration_data.objects.update_or_create(administration = administration_instance, item_ID = key, value = value)
                     else:
-                        administration_data.objects.update_or_create(administration = administration_instance, item_ID = key, value = value)
+                        if value:
+                            administration_data.objects.update_or_create(administration = administration_instance, item_ID = key, value = value)
             if 'btn-save' in request.POST and request.POST['btn-save'] == 'Save':
                 administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now())
                 refresh = True
