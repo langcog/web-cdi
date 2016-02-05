@@ -22,8 +22,11 @@
 	<form class="form-inline" action="/accounts/logout/">
             <fieldset>
                 <legend>User:</legend>
-		<div class='col-md-10'>
+		<div class='col-md-8'>
 		    <big>{{ username }}</big>
+		</div>
+		<div class='col-md-2'>
+		    <input type="button" value="Help" onclick="window.open('https://docs.google.com/document/d/1naFm2U-77YcOwFD7jcQIes2HhNz98qQM2wm1J1cmwck/pub')" class='btn btn-primary' style="width:100%">
 		</div>
 		<div class='col-md-2'>
 		    <input type="submit" value="Logout" class='btn btn-primary' style="width:100%">
