@@ -7,7 +7,7 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cdi_forms', '0012_auto_20160202_1852'),
+        ('cdi_forms', '0019_auto_20151026_1840'),
     ]
 
     operations = [

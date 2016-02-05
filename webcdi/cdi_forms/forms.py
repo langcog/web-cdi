@@ -41,7 +41,7 @@ class BackgroundForm(BetterModelForm):
                      choices=(('early', 'Early'),('late', 'Late')), widget=forms.RadioSelect,
                  required=False)
     sex = forms.ChoiceField(
-                     choices=(('M', 'Male'),('F', 'Female')), widget=forms.RadioSelect,
+                     choices=(('M', 'Male'), ('F', 'Female'), ('O', 'Other')), widget=forms.RadioSelect,
                 )
     other_languages_boolean = forms.TypedChoiceField(
                      choices=YESNO_CHOICES, widget=forms.RadioSelect, coerce=string_bool_coerce, label='Does your child regularly hear a language other than english?')
