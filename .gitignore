@@ -2,3 +2,7 @@
 venv/
 .idea/
 .DS_Store
+.env/
+django_logs/
+*.swp
+*.backup
