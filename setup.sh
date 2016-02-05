@@ -9,8 +9,14 @@
 #source .env/bin/activate
 cd webcdi
 #pip install -r requirements.txt
+
+#Server setup
 #pip install gunicorn
 #sudo cp ~/webcdi.conf /etc/supervisor/conf.d/
+#sudo supervisorctl reread
+#sudo supervisorctl update
+#refer to https://www.digitalocean.com/community/tutorials/how-to-install-and-manage-supervisor-on-ubuntu-and-debian-vps
+
 #sudo cp ~/web-cdi-nginx.conf /etc/nginx/conf.d/
 #sudo -u postgres createdb webcdi-admin
 #sudo -u postgres createuser -P -s webcdi-admin
@@ -21,4 +27,4 @@ python manage.py migrate
 
 #manually add the instruments. It can be automated but then it overwrites all of the data. So it is risky in case it gets automatically executed. To add the instruments go to /admin/ and click on Add button for Instruments model.
 
-sudo -u postgres psql -d webcdi-admin -c "\\COPY cdi_forms_english_ws FROM 'cdi_form_csv/[English_WS].csv' WITH (FORMAT csv, HEADER True)"
+sudo -u postgres psql -d webcdi-admin -c "\\COPY cdi_forms_english_wg FROM 'cdi_form_csv/[English_WG].csv' WITH (FORMAT csv, HEADER True)"
