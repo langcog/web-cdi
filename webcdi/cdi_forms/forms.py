@@ -85,6 +85,7 @@ class BackgroundForm(BetterModelForm):
                      choices=language_choices, 
                      label = "Which language(s)", required = False
                 )
+    birth_order = forms.IntegerField(widget=forms.NumberInput(attrs={'min':'1'}))
 
     def clean(self):
         cleaned_data = super(BackgroundForm, self).clean()

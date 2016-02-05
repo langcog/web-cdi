@@ -3,6 +3,7 @@ import datetime
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_comma_separated_integer_list,MaxValueValidator,MinValueValidator
 from django.contrib.postgres.fields import ArrayField
+from django import forms
 
 class requests_log(models.Model):
     url_hash = models.CharField(max_length=128)
@@ -52,7 +53,7 @@ class BackgroundInfo(models.Model):
     years = [(x,x) for x in range(1950, datetime.date.today().year+1)]
     age = models.IntegerField(verbose_name = "Age (in months)")
     sex = models.CharField(max_length = 1, choices = (('M', "Male"), ('F', "Female")))
-    birth_order = models.IntegerField(verbose_name = "Birth order (enter number)", validators = [validate_g_zero])
+    birth_order = models.IntegerField(verbose_name = "Birth order (enter number)", validators = [MinValueValidator(1, "Birth order cannot be less than 1. First born child gets value 1")], )
     birth_weight = models.FloatField(verbose_name = "Birth weight (In pounds)", validators = [validate_g_zero, MaxValueValidator(14, "Birth weight is not expected to be more than 14 pounds")])
     #early_late = models.DateField(verbose_name = "Early or late birth", help_text = "If the child was born on due date, fill 0. If the child was born earlier than due date, fill the number of weeks after the due date as positive value. If the child was born later fill a negative value." )
     born_on_due_date = models.BooleanField(verbose_name = "Was your child born early or late?")
