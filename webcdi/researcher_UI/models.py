@@ -18,6 +18,8 @@ class study(models.Model):
     class Meta:
         unique_together = ('researcher', 'name')
     
+def get_meta_header():
+    return ['study', 'subject_id', 'administration_number', 'link', 'completed', 'expiration_date', 'last_modified']
 class administration(models.Model):
     study = models.ForeignKey("study")
     subject_id = models.IntegerField()
@@ -31,9 +33,7 @@ class administration(models.Model):
     class Meta:
         unique_together = ('study', 'subject_id', 'repeat_num')
 
-    def get_meta_header():
-        return ['study', 'subject_id', 'administration_number', 'link', 'completed', 'expiration_date', 'last_modified']
-    def get_meta_data():
+    def get_meta_data(self):
         return [self.study, self.subject_id, self.repeat_num, self.url_hash, self.completed, self.due_date, self.last_modified]
 
 class administration_data(models.Model):
