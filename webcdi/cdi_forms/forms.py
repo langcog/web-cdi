@@ -41,7 +41,7 @@ class BackgroundForm(BetterModelForm):
                      choices=(('early', 'Early'),('late', 'Late')), widget=forms.RadioSelect,
                  required=False)
     sex = forms.ChoiceField(
-                     choices=(('M', 'Male'),('F', 'Female'), ('O', 'Other')), widget=forms.RadioSelect,
+                     choices=(('M', 'Male'),('F', 'Female')), widget=forms.RadioSelect,
                 )
     other_languages_boolean = forms.TypedChoiceField(
                      choices=YESNO_CHOICES, widget=forms.RadioSelect, coerce=string_bool_coerce, label='Does your child regularly hear a language other than english?')
@@ -105,6 +105,11 @@ class BackgroundForm(BetterModelForm):
                 for dependent in dependents:
                     if dependent not in cleaned_data or cleaned_data.get(dependent) == '':
                         self.add_error(dependent, "This field cannot be empty")
+        if cleaned_data.get('early_or_late') == 'early' and cleaned_data.get('due_date_diff') > 18:
+            self.add_error(dependent, "Cannot be more than 18 weeks early")
+        if cleaned_data.get('early_or_late') == 'late' and cleaned_data.get('due_date_diff') > 4:
+            self.add_error(dependent, "Cannot be more than 4 weeks late")
+
 
 
     def __init__(self, *args, **kwargs):
@@ -162,4 +167,6 @@ class BackgroundForm(BetterModelForm):
         'services': Textarea(attrs={'cols': 80, 'rows': 3}), 
         'worried': Textarea(attrs={'cols': 80, 'rows': 3}), 
         'learning_disability': Textarea(attrs={'cols': 80, 'rows': 3}), 
+        'birth_order': forms.NumberInput(attrs={'min':'1'}),
+        'birth_weight': forms.NumberInput(attrs={'min':'0'})
         }
