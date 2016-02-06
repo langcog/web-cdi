@@ -78,7 +78,7 @@ class BackgroundInfo(models.Model):
     #father_occupation = models.CharField(max_length = 101, verbose_name = "Occupation")
     #father_hours_work = models.IntegerField(verbose_name = "Hours/week at work")
 
-    low, high, inc = 10000, 200000, 10000
+    low, high, inc = 25000, 200000, 25000
     income_choices = [("<" + str(low), "Under " + format_currency(low))] +\
         [("%d-%d" % (bottom, bottom + inc), "-".join([format_currency(bottom), format_currency(bottom + inc)])) for bottom in range(low, high, inc)] +\
         [(">" + str(high), "Over " + format_currency(high)), ("Prefer not to disclose", "Prefer not to disclose")]
