@@ -29,6 +29,10 @@ class BackgroundForm(BetterModelForm):
     child_dob = forms.DateField(input_formats=['%m/%d/%Y'], widget=forms.TextInput(attrs={'placeholder': 'mm/dd/yyyy'}),
                                 help_text = "To protect your privacy, we never store your child's date of birth, we only record age in months.",
                                 validators = [MaxValueValidator(datetime.date.today())], label = "Child DOB")
+
+    #ADDED BY BEN ON AUGUST 13--DELETE LATER
+    # ben_test = 
+
     #years = [(x,x) for x in range(1900, datetime.date.today().year+1)]
     #child_yob = forms.TypedChoiceField(label = "Child's year of birth", choices = years, coerce=int)
     #month_choices = enumerate(["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"])
@@ -46,7 +50,7 @@ class BackgroundForm(BetterModelForm):
                      choices=(('M', 'Male'), ('F', 'Female'), ('O', 'Other')), widget=forms.RadioSelect,
                 )
     other_languages_boolean = forms.TypedChoiceField(
-                     choices=YESNO_CHOICES, widget=forms.RadioSelect, coerce=string_bool_coerce, label='Does your child regularly hear a language other than english?')
+                     choices=YESNO_CHOICES, widget=forms.RadioSelect, coerce=string_bool_coerce, label='Does your child regularly hear a language other than English?')
 
     ear_infections_boolean = forms.TypedChoiceField(
                      choices=YESNO_CHOICES, widget=forms.RadioSelect, coerce=string_bool_coerce ,

@@ -26,15 +26,15 @@
                     "sections": [
                         {
                             "id": "sounds",
-                            "title": "Sound Effects and Animal Sounds"
+                            "title": "Sound Effects And Animal Sounds"
                         },
                         {
                             "id": "animals",
-                            "title": "Animals (Real of Toy)"
+                            "title": "Animals (Real Or Toy)"
                         },
                         {
                             "id": "vehicles",
-                            "title": "Vehicles (Real of Toy)"
+                            "title": "Vehicles (Real Or Toy)"
                         },
                         {
                             "id": "toys",
@@ -42,7 +42,7 @@
                         },
                         {
                             "id": "food_drink",
-                            "title": "Food and drink"
+                            "title": "Food And Drink"
                         },
                         {
                             "id": "clothing",
@@ -59,15 +59,15 @@
                         },
                         {
                             "id": "furniture_rooms",
-                            "title": "Furniture and Rooms"
+                            "title": "Furniture And Rooms"
                         },
                         {
                             "id": "outside",
-                            "title": "Outside things and places to go"
+                            "title": "Outside Things And Places to Go"
                         },
                         {
                             "id": "places",
-                            "title": "Places To Go"
+                            "title": "Places to Go"
                         },
                         {
                             "id": "people",
@@ -75,7 +75,7 @@
                         },
                         {
                             "id": "games_routines",
-                            "title": "Games and Routines"
+                            "title": "Games And Routines"
                         },
                         {
                             "id": "action_words",
@@ -87,7 +87,7 @@
                         },
                         {
                             "id": "time_words",
-                            "title": "Words about time"
+                            "title": "Words about Time"
                         },
                         {
                             "id": "pronouns",
@@ -99,11 +99,11 @@
                         },
                         {
                             "id": "locations",
-                            "title": "Prepositions and Locations"
+                            "title": "Prepositions And Locations"
                         },
                         {
                             "id": "quantifiers",
-                            "title": "Quantifiers and Articles"
+                            "title": "Quantifiers And Articles"
                         }
                     ],
                     "id": "word",

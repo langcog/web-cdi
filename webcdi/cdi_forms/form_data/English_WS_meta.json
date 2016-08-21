@@ -9,15 +9,15 @@
                     "sections": [
                         {
                             "id": "sounds",
-                            "title": "1. Sound Effects and Animal Sounds"
+                            "title": "1. Sound Effects And Animal Sounds"
                         },
                         {
                             "id": "animals",
-                            "title": "2. Animals (Real of Toy)"
+                            "title": "2. Animals (Real Or Toy)"
                         },
                         {
                             "id": "vehicles",
-                            "title": "3. Vehicles (Real of Toy)"
+                            "title": "3. Vehicles (Real Or Toy)"
                         },
                         {
                             "id": "toys",
@@ -25,7 +25,7 @@
                         },
                         {
                             "id": "food_drink",
-                            "title": "5. Food and drink"
+                            "title": "5. Food And Drink"
                         },
                         {
                             "id": "clothing",
@@ -42,7 +42,7 @@
                         },
                         {
                             "id": "furniture_rooms",
-                            "title": "9. Furniture and Rooms"
+                            "title": "9. Furniture And Rooms"
                         },
                         {
                             "id": "outside",
@@ -50,7 +50,7 @@
                         },
                         {
                             "id": "places",
-                            "title": "11. Places To Go"
+                            "title": "11. Places to Go"
                         },
                         {
                             "id": "people",
@@ -58,7 +58,7 @@
                         },
                         {
                             "id": "games_routines",
-                            "title": "13. Games and Routines"
+                            "title": "13. Games And Routines"
                         },
                         {
                             "id": "action_words",
@@ -70,7 +70,7 @@
                         },
                         {
                             "id": "time_words",
-                            "title": "16. Words about time"
+                            "title": "16. Words about Time"
                         },
                         {
                             "id": "pronouns",
@@ -86,7 +86,7 @@
                         },
                         {
                             "id": "quantifiers",
-                            "title": "20. Quantifiers and Articles"
+                            "title": "20. Quantifiers And Articles"
                         },
                         {
                             "id": "helping_verbs",
@@ -145,7 +145,7 @@
                             "title": "Verbs"
                         }
                     ],
-                    "text": "Young children often place the wrong endings on words. For example, a child might say \"Auntie goed home\". Mistakes like this are often a sign of progress in language. In the following lists, please mark all the mistakes of this kind you have heard your child say recently.",
+                    "text": "Young children often place the wrong endings on words. For example, a child might say \"Auntie goed home\". Mistakes like this are often a sign of progress in language. In the following lists, please mark all the mistakes of this kind you have heard your child make recently.",
                     "title": "C. Word Endings / Part 2",
                     "type": "checkbox"
                 },

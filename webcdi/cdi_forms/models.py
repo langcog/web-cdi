@@ -61,7 +61,7 @@ class BackgroundInfo(models.Model):
     #early_late = models.DateField(verbose_name = "Early or late birth", help_text = "If the child was born on due date, fill 0. If the child was born earlier than due date, fill the number of weeks after the due date as positive value. If the child was born later fill a negative value." )
     born_on_due_date = models.BooleanField(verbose_name = "Was your child born early or late?")
     early_or_late = models.CharField(verbose_name = "Was he/she early or late?", max_length = 5, choices = (('early', 'Early'),('late', 'Late')), blank=True, null=True)
-    due_date_diff = models.IntegerField(verbose_name = "By how many weeks?",blank=True, null=True, validators = [validate_ne_zero])
+    due_date_diff = models.IntegerField(verbose_name = "By how many weeks?",blank=True, null=True, validators = [MinValueValidator(1, "Number of weeks cannot be less than 1")])
 
 
     education_levels = {x:str(x) for x in range(5,24)}
@@ -101,9 +101,9 @@ class BackgroundInfo(models.Model):
     #which_language = models.CharField(max_length = 20, blank = True)
     other_languages_boolean = models.BooleanField()
     other_languages = ArrayField(models.CharField(max_length = 101), blank = True, null=True)
-    language_from = models.CharField(max_length = 50, blank = True, verbose_name = "From Whom?", null=True)
-    language_days_per_week = models.IntegerField(null=True, blank = True, verbose_name = "How many days per week is the child exposed to these languages", validators = [MaxValueValidator(7, "Number of days per week cannot exceed 7"), MinValueValidator(1, "Number of days per week cannot be less than 1")], )
-    language_hours_per_day = models.IntegerField(null=True, blank = True, verbose_name = "How many hours per day is the child exposed to these languages", validators = [MaxValueValidator(24, "Number of hours per day cannot exceed 24"), MinValueValidator(1, "Number of hours per day cannot be less than 1")],)
+    language_from = models.CharField(max_length = 50, blank = True, verbose_name = "From whom?", null=True)
+    language_days_per_week = models.IntegerField(null=True, blank = True, verbose_name = "How many days per week is the child exposed to these languages?", validators = [MaxValueValidator(7, "Number of days per week cannot exceed 7"), MinValueValidator(1, "Number of days per week cannot be less than 1")], )
+    language_hours_per_day = models.IntegerField(null=True, blank = True, verbose_name = "How many hours per day is the child exposed to these languages?", validators = [MaxValueValidator(24, "Number of hours per day cannot exceed 24"), MinValueValidator(1, "Number of hours per day cannot be less than 1")],)
     #language_since = models.IntegerField( blank = True)
 
     ear_infections_boolean = models.BooleanField(verbose_name = "Has your child experienced chronic ear infections (5 or more)? ")
