@@ -20,7 +20,8 @@ from django.http import HttpResponse
 def download_data(request, study_obj, administrations = None):
     # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename='+study_obj.name.replace(' ', '_')+'"-data.csv"'
+    response['Content-Disposition'] = 'attachment; filename='+study_obj.name+'_data.csv'''
+    # response['Content-Disposition'] = 'attachment; filename='+study_obj.name.replace(' ', '_')+'"-data.csv"'
 
     writer = csv.writer(response)
     
