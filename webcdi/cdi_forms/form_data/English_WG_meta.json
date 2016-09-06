@@ -116,7 +116,7 @@
             "id": 2,
             "types": [
                 {
-                    "text": "When infants are learning to communicate, they often use gestures to make their wishes known. For each item below, mark the line that describes your child's actions right now",
+                    "text": "When infants are learning to communicate, they often use gestures to make their wishes known. For each item below, mark the line that describes your child's actions right now.",
                     "type": "radiobutton",
                     "id": "gestures_first",
                     "title": "First communicative gestures"

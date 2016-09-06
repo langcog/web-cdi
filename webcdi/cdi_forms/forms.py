@@ -1,3 +1,5 @@
+from django.conf import settings
+
 from django.forms import ModelForm, Textarea
 from django import forms
 from .models import *
@@ -9,6 +11,7 @@ from django.templatetags.static import static
 
 from django.core.exceptions import ValidationError
 import codecs, json
+
 
 isoLangs = json.load(codecs.open('languages.json', 'r', 'utf-8'))
 language_choices = [(v['name'],v['name']) for k,v in isoLangs.iteritems()]
@@ -29,9 +32,6 @@ class BackgroundForm(BetterModelForm):
     child_dob = forms.DateField(input_formats=['%m/%d/%Y'], widget=forms.TextInput(attrs={'placeholder': 'mm/dd/yyyy'}),
                                 help_text = "To protect your privacy, we never store your child's date of birth, we only record age in months.",
                                 validators = [MaxValueValidator(datetime.date.today())], label = "Child DOB")
-
-    #ADDED BY BEN ON AUGUST 13--DELETE LATER
-    # ben_test = 
 
     #years = [(x,x) for x in range(1900, datetime.date.today().year+1)]
     #child_yob = forms.TypedChoiceField(label = "Child's year of birth", choices = years, coerce=int)
@@ -131,6 +131,9 @@ class BackgroundForm(BetterModelForm):
         #self.helper.form_tag = False
         #self.helper.add_input(Submit('submit', 'Submit'))
         #self.helper[1:6].wrap(Fieldset, "Basic info")
+
+        #LINE BELOW ADDED AS A TEST TO FIX THE DATE ISSUE
+        self.fields['child_dob'].input_formats=(settings.DATE_INPUT_FORMATS)
         self.helper.layout = Layout(
             Fieldset( 'Basic Information', 'child_dob', 'sex','birth_order', 'birth_weight', Field('born_on_due_date', css_class='enabler'), Div('early_or_late', 'due_date_diff', css_class='dependent')),
             Fieldset( 'Family Background', 'mother_yob', 'mother_education','father_yob', 'father_education', 'annual_income'),
