@@ -54,7 +54,7 @@ def format_currency(val):
 class BackgroundInfo(models.Model):
     administration = models.OneToOneField("researcher_UI.administration")
     years = [(x,x) for x in range(1950, datetime.date.today().year+1)]
-    age = models.IntegerField(verbose_name = "Age (in months)")
+    age = models.IntegerField(verbose_name = "Age (in months)", null=True, blank = True)
     sex = models.CharField(max_length = 1, choices = (('M', "Male"), ('F', "Female"), ('O', "Other")))
     birth_order = models.IntegerField(verbose_name = "Birth order (enter number)", validators = [MinValueValidator(1, "Birth order cannot be less than 1. First born child gets value 1")], )
     birth_weight = models.FloatField(verbose_name = "Birth weight (In pounds)", validators = [validate_g_zero, MaxValueValidator(14, "Birth weight is not expected to be more than 14 pounds")])
@@ -68,6 +68,7 @@ class BackgroundInfo(models.Model):
     education_levels[12] += " (High school graduate)"
     education_levels[16] += " (College graduate)"
     education_levels[18] += " (Advanced degree)"
+    education_levels[23] += " or more"
     mother_yob = models.IntegerField(verbose_name = "Mother's (or Parent 1) Year of birth", choices=years)
     mother_education = models.IntegerField(verbose_name = "Mother's (or Parent 1) Education", help_text ="Choose highest grade completed (12 = high school graduate; 16 = college graduate; 18 = advanced degree)", choices = education_levels.iteritems())
     #mother_occupation = models.CharField(max_length = 101, verbose_name = "Occupation")

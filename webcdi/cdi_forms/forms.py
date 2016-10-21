@@ -33,6 +33,9 @@ class BackgroundForm(BetterModelForm):
                                 help_text = "To protect your privacy, we never store your child's date of birth, we only record age in months.",
                                 validators = [MaxValueValidator(datetime.date.today())], label = "Child DOB")
 
+    age = forms.IntegerField(label = "Age (in months)", required = False, validators=[MinValueValidator(0)], widget=forms.TextInput(attrs={'placeholder':'This field will update and save when you enter your child\'s DOB and switch pages'}))
+
+
     #years = [(x,x) for x in range(1900, datetime.date.today().year+1)]
     #child_yob = forms.TypedChoiceField(label = "Child's year of birth", choices = years, coerce=int)
     #month_choices = enumerate(["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"])
@@ -115,6 +118,9 @@ class BackgroundForm(BetterModelForm):
             self.add_error(dependent, "Cannot be more than 18 weeks early")
         if cleaned_data.get('early_or_late') == 'late' and cleaned_data.get('due_date_diff') > 4:
             self.add_error(dependent, "Cannot be more than 4 weeks late")
+        #self.child_dob = cleaned_data.get('child_dob')
+        #self.age = (datetime.date.today().year - self.child_dob.year) * 12 +  (datetime.date.today().month - self.child_dob.month) + (self.child_dob.day >=15)
+
 
 
 
@@ -135,7 +141,7 @@ class BackgroundForm(BetterModelForm):
         #LINE BELOW ADDED AS A TEST TO FIX THE DATE ISSUE
         self.fields['child_dob'].input_formats=(settings.DATE_INPUT_FORMATS)
         self.helper.layout = Layout(
-            Fieldset( 'Basic Information', 'child_dob', 'sex','birth_order', 'birth_weight', Field('born_on_due_date', css_class='enabler'), Div('early_or_late', 'due_date_diff', css_class='dependent')),
+            Fieldset( 'Basic Information', 'child_dob','age', 'sex','birth_order', 'birth_weight', Field('born_on_due_date', css_class='enabler'), Div('early_or_late', 'due_date_diff', css_class='dependent')),
             Fieldset( 'Family Background', 'mother_yob', 'mother_education','father_yob', 'father_education', 'annual_income'),
             Fieldset( "Child's Ethnicity",HTML("<p> The following information is being collected for the sole purpose of reporting to our grant-funding institute, i.e.,  NIH (National Institute of Health).  NIH requires this information to ensure the soundness and inclusiveness of our research. Your cooperation is appreciated, but optional. </p>"), 'child_hispanic_latino', 'child_ethnicity'),
             Fieldset( "Caregiver Information", 'caregiver_info'),
@@ -153,7 +159,7 @@ class BackgroundForm(BetterModelForm):
 
     class Meta:
         model = BackgroundInfo
-        exclude = ['age', 'administration']
+        exclude = ['administration']
         #fields = '__all__'
         #fieldsets = [
         #('Basic Info', {'fields' : []}),
@@ -177,5 +183,6 @@ class BackgroundForm(BetterModelForm):
         'worried': Textarea(attrs={'cols': 80, 'rows': 3}), 
         'learning_disability': Textarea(attrs={'cols': 80, 'rows': 3}), 
         'birth_order': forms.NumberInput(attrs={'min':'1'}),
-        'birth_weight': forms.NumberInput(attrs={'min':'0'})
+        'birth_weight': forms.NumberInput(attrs={'min':'0'}),
+        'due_date_diff': forms.NumberInput(attrs={'min':'1'})
         }
