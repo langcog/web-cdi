@@ -11,6 +11,12 @@ body {
     background-color: #eee;
 }
 
+.alco-child1 {
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: #eee;
+}
+
 input[type=checkbox] + label {
       color: #222;
 }

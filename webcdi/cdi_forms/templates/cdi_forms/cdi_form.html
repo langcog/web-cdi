@@ -39,12 +39,14 @@
             {% if type.type == "radiobutton" %}
                 {% if object.text != '' %}
                 <div class="col-md-12 alco-child">
-                    <div class="row">{{ object.text | capfirst }} </div>
-                    <div class="row">
-                        {% for choice in object.choices %}
-                        <input type="radio" id="{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
-                        <label for="{{ choice.0 }}"> {{ choice.0 }}</label>
-                        {% endfor %}
+                    <div class="row alco-child1" >{{ object.text | capfirst }} <!-- </div>
+                    <div class="row"> -->
+                        <div class="pull-right">
+                            {% for choice in object.choices %}
+                            <input type="radio" id="{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
+                            <label for="{{ choice.0 }}"> {{ choice.0 }}</label>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
                 {% else %}
@@ -72,12 +74,15 @@
                 {% if type.type == "radiobutton" %}
                     {% if object.text != '' %}
                     <div class="col-md-12 alco-child">
-                        <div class="row">{{ object.text | capfirst }} </div>
-                        <div class="row">
-                            {% for choice in object.choices %}
-                            <input type="radio" id="{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
-                            <label for="{{ choice.0 }}"> {{ choice.0 }}</label>
-                            {% endfor %}
+                        <div class="row alco-child1">{{ object.text | capfirst }} <!-- </div>
+                        <div class="row"> -->
+                            <div class="pull-right">
+                                {% for choice in object.choices %}
+                                <input type="radio" id="{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
+                                <label for="{{ choice.0 }}"> {{ choice.0 }}</label>
+                                {% endfor %}
+                            </div>
+
                         </div>
                     </div>
                     {% else %}
