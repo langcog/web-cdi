@@ -2,6 +2,7 @@
     "parts": [
         {
             "id": 1,
+            "title": "PART 1: Early Words",
             "types": [
                 {
                     "text": "Before children begin to speak, they show signs of understanding language by responding to familiar words and phrases. Below are some common examples. Does your child do any of these?",
@@ -16,137 +17,139 @@
                     "title": "Phrases"
                 },
                 {
-                    "type": "radiobutton",
                     "id": "starting_to_talk",
+                    "type": "radiobutton",
                     "title": "Starting to talk"
                 },
                 {
                     "text": "The following is a list of typical words in young children's vocabularies. For words your child UNDERSTANDS but does not yet say, place a mark in the first column (\"understands\"). For words that your child both understands and also SAYS, place a mark in the second column (\"understands and says\"). If your child uses a different pronunciation of a word (for example, \"raffe\" for \"giraffe\" or \"sketti\" for \"spagetti\") or knows a different word that has a similar meaning as the word listed here (e.g., \"nana\" for \"grandma\"), go ahead and mark it.  Remember, this is a \"catalogue\" of words that are used by many different children. Don't worry if your child knows only a few right now.",
-                    "type": "radiobutton",
+                    "id": "word",
+                    "title": "Vocabulary checklist",
                     "sections": [
                         {
                             "id": "sounds",
-                            "title": "Sound Effects And Animal Sounds"
+                            "title": "1. Sound Effects And Animal Sounds"
                         },
                         {
                             "id": "animals",
-                            "title": "Animals (Real Or Toy)"
+                            "title": "2. Animals (Real Or Toy)"
                         },
                         {
                             "id": "vehicles",
-                            "title": "Vehicles (Real Or Toy)"
+                            "title": "3. Vehicles (Real Or Toy)"
                         },
                         {
                             "id": "toys",
-                            "title": "Toys"
+                            "title": "4. Toys"
                         },
                         {
                             "id": "food_drink",
-                            "title": "Food And Drink"
+                            "title": "5. Food And Drink"
                         },
                         {
                             "id": "clothing",
-                            "title": "Clothing"
+                            "title": "6. Clothing"
                         },
                         {
                             "footnote": "* or word used in your family",
                             "id": "body_parts",
-                            "title": "Body Parts"
+                            "title": "7. Body Parts"
                         },
                         {
                             "id": "household",
-                            "title": "Small Household Items"
+                            "title": "8. Small Household Items"
                         },
                         {
                             "id": "furniture_rooms",
-                            "title": "Furniture And Rooms"
+                            "title": "9. Furniture And Rooms"
                         },
                         {
                             "id": "outside",
-                            "title": "Outside Things And Places to Go"
+                            "title": "10. Outside Things And Places to Go"
                         },
                         {
                             "id": "places",
-                            "title": "Places to Go"
+                            "title": "11. Places to Go"
                         },
                         {
                             "id": "people",
-                            "title": "People"
+                            "title": "12. People"
                         },
                         {
                             "id": "games_routines",
-                            "title": "Games And Routines"
+                            "title": "13. Games And Routines"
                         },
                         {
                             "id": "action_words",
-                            "title": "Action Words"
+                            "title": "14. Action Words"
                         },
                         {
                             "id": "descriptive_words",
-                            "title": "Descriptive Words"
+                            "title": "15. Descriptive Words"
                         },
                         {
                             "id": "time_words",
-                            "title": "Words about Time"
+                            "title": "16. Words about Time"
                         },
                         {
                             "id": "pronouns",
-                            "title": "Pronouns"
+                            "title": "17. Pronouns"
                         },
                         {
                             "id": "question_words",
-                            "title": "Question Words"
+                            "title": "18. Question Words"
                         },
                         {
                             "id": "locations",
-                            "title": "Prepositions And Locations"
+                            "title": "19. Prepositions And Locations"
                         },
                         {
                             "id": "quantifiers",
-                            "title": "Quantifiers And Articles"
+                            "title": "20. Quantifiers And Articles"
                         }
                     ],
-                    "id": "word",
-                    "title": "Vocabulary checklist"
+                    "type": "radiobutton"
                 }
-            ],
-            "title": "PART 1: Early Words"
+            ]
         },
         {
             "id": 2,
+            "title": "Actions and Gestures",
             "types": [
                 {
-                    "text": "When infants are learning to communicate, they often use gestures to make their wishes known. For each item below, mark the line that describes your child's actions right now.",
                     "type": "radiobutton",
-                    "id": "gestures_first",
-                    "title": "First communicative gestures"
-                },
-                {
-                    "text": "Does your child do any of the following?",
-                    "type": "radiobutton",
-                    "id": "gestures_games",
-                    "title": "Games and routines"
-                },
-                {
-                    "text": "Does your child do or try to do any of the following?",
-                    "type": "radiobutton",
-                    "id": "gestures_objects",
-                    "title": "Actions with objects"
-                },
-                {
-                    "text": "Here are some things that young children sometimes do with stuffed animals or dolls. Please mark the actions that you hae seen your child do.",
-                    "type": "radiobutton",
-                    "id": "gestures_parent",
-                    "title": "Pretending to be a parent"
-                },
-                {
-                    "text": "Does your child do or try to do any of the following?",
-                    "type": "radiobutton",
-                    "id": "gestures_adult",
-                    "title": "Imitating other adult actions (using real or toy implements)"
+                    "id": "gestures",
+                    "sections": [
+
+                        {
+                            "text": "When infants are learning to communicate, they often use gestures to make their wishes known. For each item below, mark the line that describes your child's actions right now.",
+                            "id": "gestures_first",
+                            "title": "First communicative gestures"
+                        },
+                        {
+                            "text": "Does your child do any of the following?",
+                            "id": "gestures_games",
+                            "title": "Games and routines"
+                        },
+                        {
+                            "text": "Does your child do or try to do any of the following?",
+                            "id": "gestures_objects",
+                            "title": "Actions with objects"
+                        },
+                        {
+                            "text": "Here are some things that young children sometimes do with stuffed animals or dolls. Please mark the actions that you hae seen your child do.",
+                            "id": "gestures_parent",
+                            "title": "Pretending to be a parent"
+                        },
+                        {
+                            "text": "Does your child do or try to do any of the following?",
+                            "id": "gestures_adult",
+                            "title": "Imitating other adult actions (using real or toy implements)"
+                        }
+
+                    ]
                 }
-            ],
-            "title": "Actions and Gestures"
+            ]
         }
     ]
 }
