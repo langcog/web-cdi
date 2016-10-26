@@ -100,8 +100,34 @@ def prefilled_cdi_data(administration_instance):
                         section['objects'] = instrument_model.objects.filter(category__exact=section['id']).values()
                         if any(['*' in x['gloss'] for x in section['objects']]):
                             section['starred'] = "*Or the word used in your family"
-                        for obj in section['objects']:
-                            obj['prefilled_value'] = obj['itemID'] in prefilled_data
+
+                        if item_type['type'] == 'checkbox':
+                            for obj in section['objects']:
+                                obj['prefilled_value'] = obj['itemID'] in prefilled_data
+                                if obj['gloss'] is None:
+                                    obj['gloss'] = obj['definition']
+
+                        if item_type['type'] == 'radiobutton':
+                            for obj in section['objects']:
+                                split_choices = map(unicode.strip, obj['choices'].split(';'))
+                                prefilled_values = [False if obj['itemID'] not in prefilled_data else x == prefilled_data[obj['itemID']] for x in split_choices]
+                                obj['text'] = obj['gloss']
+
+                                if obj['definition'] is not None and obj['definition'].find('/') >= 0:
+                                    split_definition = map(unicode.strip, obj['definition'].split('/'))
+                                    obj['choices'] = zip(split_definition, split_choices, prefilled_values)
+                                else:
+                                    obj['choices'] = zip(split_choices, split_choices, prefilled_values)
+                                    if obj['definition'] is not None:
+                                        obj['text'] = obj['definition']
+
+                        if item_type['type'] == 'textbox':
+                            for obj in section['objects']:
+                                if obj['itemID'] in prefilled_data:
+                                    obj['prefilled_value'] = prefilled_data[obj['itemID']]
+                                    print obj['prefilled_value']                        
+
+
                                 
                 else:
                     item_type['objects'] = instrument_model.objects.filter(item_type__exact=item_type['id']).values()
