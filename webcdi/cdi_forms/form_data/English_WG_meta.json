@@ -69,39 +69,39 @@
                         },
                         {
                             "id": "people",
-                            "title": "12. People"
+                            "title": "11. People"
                         },
                         {
                             "id": "games_routines",
-                            "title": "13. Games And Routines"
+                            "title": "12. Games And Routines"
                         },
                         {
                             "id": "action_words",
-                            "title": "14. Action Words"
+                            "title": "13. Action Words"
                         },
                         {
                             "id": "descriptive_words",
-                            "title": "15. Descriptive Words"
+                            "title": "14. Descriptive Words"
                         },
                         {
                             "id": "time_words",
-                            "title": "16. Words about Time"
+                            "title": "15. Words about Time"
                         },
                         {
                             "id": "pronouns",
-                            "title": "17. Pronouns"
+                            "title": "16. Pronouns"
                         },
                         {
                             "id": "question_words",
-                            "title": "18. Question Words"
+                            "title": "17. Question Words"
                         },
                         {
                             "id": "locations",
-                            "title": "19. Prepositions And Locations"
+                            "title": "18. Prepositions And Locations"
                         },
                         {
                             "id": "quantifiers",
-                            "title": "20. Quantifiers And Articles"
+                            "title": "19. Quantifiers And Articles"
                         }
                     ],
                     "type": "radiobutton"
