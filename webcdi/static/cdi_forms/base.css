@@ -11,6 +11,12 @@ body {
     background-color: #eee;
 }
 
+.alco-child1 {
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: #eee;
+}
+
 input[type=checkbox] + label {
       color: #222;
 }
@@ -25,6 +31,11 @@ input[type=radio] + label {
 
 input[type=radio]:checked + label {
       color: #3C763D;
+}
+
+input[type=textbox] {
+    width: 80%;
+    margin-bottom: 10px;
 }
 
 .dependent {

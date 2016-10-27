@@ -181,7 +181,7 @@ def cdi_form(request, hash_id):
                             administration_data.objects.update_or_create(administration = administration_instance, item_ID = key, value = value)
             if 'btn-save' in request.POST and request.POST['btn-save'] == 'Save':
                 administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now())
-                refresh = True
+                #refresh = True
             elif 'btn-back' in request.POST and request.POST['btn-back'] == 'Back':
                 administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now())
                 request.method = "GET"
