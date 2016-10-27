@@ -113,7 +113,7 @@ def prefilled_cdi_data(administration_instance):
                                 prefilled_values = [False if obj['itemID'] not in prefilled_data else x == prefilled_data[obj['itemID']] for x in split_choices]
                                 obj['text'] = obj['gloss']
 
-                                if obj['definition'] is not None and obj['definition'].find('/') >= 0:
+                                if obj['definition'] is not None and obj['definition'].find('/') >= 0 and item_type['id'] != 'word':
                                     split_definition = map(unicode.strip, obj['definition'].split('/'))
                                     obj['choices'] = zip(split_definition, split_choices, prefilled_values)
                                 else:
@@ -143,7 +143,7 @@ def prefilled_cdi_data(administration_instance):
                             prefilled_values = [False if obj['itemID'] not in prefilled_data else x == prefilled_data[obj['itemID']] for x in split_choices]
                             obj['text'] = obj['gloss']
 
-                            if obj['definition'] is not None and obj['definition'].find('/') >= 0:
+                            if obj['definition'] is not None and obj['definition'].find('/') >= 0 and item_type['id'] != 'word':
                                 split_definition = map(unicode.strip, obj['definition'].split('/'))
                                 obj['choices'] = zip(split_definition, split_choices, prefilled_values)
                             else:

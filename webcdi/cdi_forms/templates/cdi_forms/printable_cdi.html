@@ -48,46 +48,79 @@
                     <h3 id = "{{ type.id }}"> {{ type.title }}</h3>
                     <p class="lead"> {{ type.text | capfirst }}</p>
                     <div class="row alternate-color">
-                    {% for object in type.objects %}
-                        {% if type.type == "radiobutton" %}
-                            {% if object.text != '' %}
-                                <div class="col-md-12 alco-child"> 
-                                    <div class="row">{{ object.text | capfirst }} </div>
-                                    <div class="row">
-                                        {% for choice in object.choices %}
-                                            <input type="radio" id="{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}> 
+                        {% for object in type.objects %}
+                            {% if type.type == "radiobutton" %}
+                                {% if object.text != '' %}
+                                <div class="col-md-12 alco-child">
+                                    <div class="row alco-child1" >{{ object.text | capfirst }} <!-- </div>
+                                    <div class="row"> -->
+                                        <div class="pull-right">
+                                            {% for choice in object.choices %}
+                                            &ensp;
+                                            <input type="radio" id="{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
                                             <label for="{{ choice.0 }}"> {{ choice.0 }}</label>
-                                        {% endfor %}
+                                            {% endfor %}
+                                        </div>
                                     </div>
                                 </div>
-                            {% else %}
-                                <div class="col-md-4 alco-child"> 
+                                {% else %}
+                                <div class="col-md-4 alco-child">
                                     {% for choice in object.choices %}
-                                        <div class="row">
-                                                <input type="radio" id="{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}"{% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}> 
-                                                <label for="{{ choice.0 }}"> {{ choice.0 }}</label>
-                                        </div>
+                                    <div class="row">
+                                        &ensp;
+                                        <input type="radio" id="{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}"{% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
+                                        <label for="{{ choice.0 }}"> {{ choice.0 }}</label>
+                                    </div>
                                     {% endfor %}
                                 </div>
-                                
+                                {% endif %}
+                            {% elif type.type == "checkbox" %}
+                                <div class="col-md-4 alco-child"> <input type="checkbox" id="{{ object.itemID }}" name="{{ object.itemID }}" value="{{ object.choices }}"{% if completed %} disabled {% endif %} {% if object.prefilled_value %} checked {% endif %}> <label for="{{ object.itemID }}"> {{ object.gloss }}</label></div>
+                            {% elif type.type == "textbox" %}
+                                <div class="col-md-12"> <input type="textbox" id="{{ object.itemID }}" name="{{ object.itemID }}" maxlength="200" value="{{ object.prefilled_value }}" {% if completed %} disabled {% endif %}></div>
                             {% endif %}
-                        {% elif type.type == "checkbox" %}
-                            <div class="col-md-4 alco-child"> <input type="checkbox" id="{{ object.itemID }}" name="{{ object.itemID }}" value="{{ object.choices }}"{% if completed %} disabled {% endif %} {% if object.prefilled_value %} checked {% endif %}> <label for="{{ object.itemID }}"> {{ object.definition }}</label></div>
-                        {% elif type.type == "textbox" %}
-                            <div class="col-md-12"> <input type="textbox" id="{{ object.itemID }}" name="{{ object.itemID }}" maxlength="200" value="{{ object.prefilled_value }}" {% if completed %} disabled {% endif %}></div>
-                        {% endif %}
-                            
-                    {% endfor %}
+                        {% endfor %}
                     </div>
                     <ul>
-                    {% for section in type.sections %}
+                        {% for section in type.sections %}
                         <h4 id ="{{ section.id }}" >{{ section.title }}</h4>
-                            <div class="row ">
-                                {%for object in section.objects %}
-                                <div class="col-md-4"><input type="checkbox" id="{{ object.itemID }}" name="{{ object.itemID }}" value="{{ object.choices }}"{% if completed %} disabled {% endif %} {% if object.prefilled_value %} checked {% endif %} > <label for="{{ object.itemID }}"> {{ object.gloss }} </label></div>
-                                {% endfor %}
-                            </div>
-                    {% endfor %}
+                        <div class="row ">
+                            {%for object in section.objects %}
+                                {% if type.type == "radiobutton" %}
+                                    {% if object.text != '' %}
+                                    <div class="col-md-12 alco-child">
+                                        <div class="row alco-child1">{{ object.text | capfirst }} <!-- </div>
+                                        <div class="row"> -->
+                                            <div class="pull-right">
+                                                {% for choice in object.choices %}
+                                                &ensp;
+                                                <input type="radio" id="{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
+                                                <label for="{{ choice.0 }}"> {{ choice.0 }}</label>
+                                                {% endfor %}
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    {% else %}
+                                    <div class="col-md-4 alco-child">
+                                        {% for choice in object.choices %}
+                                        <div class="row">
+                                            &ensp;
+                                            <input type="radio" id="{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}"{% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
+                                            <label for="{{ choice.0 }}"> {{ choice.0 }}</label>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                    {% endif %}
+                                {% elif type.type == "checkbox" %}
+                                    <div class="col-md-4 alco-child"> <input type="checkbox" id="{{ object.itemID }}" name="{{ object.itemID }}" value="{{ object.choices }}"{% if completed %} disabled {% endif %} {% if object.prefilled_value %} checked {% endif %}> <label for="{{ object.itemID }}"> {{ object.gloss }}</label></div>
+                                {% elif type.type == "textbox" %}
+                                    <div class="col-md-12"> <input type="textbox" id="{{ object.itemID }}" name="{{ object.itemID }}" maxlength="200" value="{{ object.prefilled_value }}" {% if completed %} disabled {% endif %}></div>
+                                {% endif %}
+                            {% endfor %}
+                            <div class="col-md-12">{{ section.starred }}</div>
+                        </div>
+                        {% endfor %}
                     </ul>
                     
                 
