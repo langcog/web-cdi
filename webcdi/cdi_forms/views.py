@@ -109,7 +109,7 @@ def prefilled_cdi_data(administration_instance):
 
                         if item_type['type'] == 'radiobutton':
                             for obj in section['objects']:
-                                split_choices = map(unicode.strip, obj['choices'].split(';'))
+                                split_choices = map(unicode.strip, obj['choices'].split('/'))
                                 prefilled_values = [False if obj['itemID'] not in prefilled_data else x == prefilled_data[obj['itemID']] for x in split_choices]
                                 obj['text'] = obj['gloss']
 
