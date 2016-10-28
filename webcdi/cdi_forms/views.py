@@ -81,6 +81,34 @@ def background_info_form(request, hash_id):
     data['title'] = administration_instance.study.instrument.verbose_name
     return render(request, 'cdi_forms/background_info.html', data)
 
+def cdi_items(object_group, item_type, prefilled_data, item_id):
+    for obj in object_group:
+        if item_type == 'checkbox':
+            obj['prefilled_value'] = obj['itemID'] in prefilled_data
+            if obj['gloss'] is None:
+                obj['gloss'] = obj['definition']
+
+        if item_type == 'radiobutton':
+            split_choices = map(unicode.strip, obj['choices'].split(';'))
+            prefilled_values = [False if obj['itemID'] not in prefilled_data else x == prefilled_data[obj['itemID']] for x in split_choices]
+            obj['text'] = obj['gloss']
+
+            if obj['definition'] is not None and obj['definition'].find('/') >= 0 and item_id != 'word':
+                split_definition = map(unicode.strip, obj['definition'].split('/'))
+                obj['choices'] = zip(split_definition, split_choices, prefilled_values)
+            else:
+                obj['choices'] = zip(split_choices, split_choices, prefilled_values)
+                if obj['definition'] is not None:
+                    obj['text'] = obj['definition']
+
+        if item_type == 'textbox':
+            if obj['itemID'] in prefilled_data:
+                obj['prefilled_value'] = prefilled_data[obj['itemID']]
+                print obj['prefilled_value']
+
+    return object_group 
+
+
 def prefilled_cdi_data(administration_instance):
     prefilled_data_list = administration_data.objects.filter(administration = administration_instance).values('item_ID', 'value')
     instrument_name = administration_instance.study.instrument.name
@@ -97,65 +125,18 @@ def prefilled_cdi_data(administration_instance):
             for item_type in part['types']:
                 if 'sections' in item_type:
                     for section in item_type['sections']:
-                        section['objects'] = instrument_model.objects.filter(category__exact=section['id']).values()
+                        group_objects = instrument_model.objects.filter(category__exact=section['id']).values()
+               
+                        section['objects'] = cdi_items(group_objects, item_type['type'], prefilled_data, item_type['id'])
                         if any(['*' in x['gloss'] for x in section['objects']]):
-                            section['starred'] = "*Or the word used in your family"
-
-                        if item_type['type'] == 'checkbox':
-                            for obj in section['objects']:
-                                obj['prefilled_value'] = obj['itemID'] in prefilled_data
-                                if obj['gloss'] is None:
-                                    obj['gloss'] = obj['definition']
-
-                        if item_type['type'] == 'radiobutton':
-                            for obj in section['objects']:
-                                split_choices = map(unicode.strip, obj['choices'].split(';'))
-                                prefilled_values = [False if obj['itemID'] not in prefilled_data else x == prefilled_data[obj['itemID']] for x in split_choices]
-                                obj['text'] = obj['gloss']
-
-                                if obj['definition'] is not None and obj['definition'].find('/') >= 0 and item_type['id'] != 'word':
-                                    split_definition = map(unicode.strip, obj['definition'].split('/'))
-                                    obj['choices'] = zip(split_definition, split_choices, prefilled_values)
-                                else:
-                                    obj['choices'] = zip(split_choices, split_choices, prefilled_values)
-                                    if obj['definition'] is not None:
-                                        obj['text'] = obj['definition']
-
-                        if item_type['type'] == 'textbox':
-                            for obj in section['objects']:
-                                if obj['itemID'] in prefilled_data:
-                                    obj['prefilled_value'] = prefilled_data[obj['itemID']]
-                                    print obj['prefilled_value']                        
-
+                            section['starred'] = "*Or the word used in your family"  
 
                                 
                 else:
-                    item_type['objects'] = instrument_model.objects.filter(item_type__exact=item_type['id']).values()
-                    if item_type['type'] == 'checkbox':
-                        for obj in item_type['objects']:
-                            obj['prefilled_value'] = obj['itemID'] in prefilled_data
-                            if obj['gloss'] is None:
-                                obj['gloss'] = obj['definition']
+                    group_objects = instrument_model.objects.filter(item_type__exact=item_type['id']).values()
+                    item_type['objects'] = cdi_items(group_objects, item_type['type'], prefilled_data, item_type['id'])
 
-                    if item_type['type'] == 'radiobutton':
-                        for obj in item_type['objects']:
-                            split_choices = map(unicode.strip, obj['choices'].split(';'))
-                            prefilled_values = [False if obj['itemID'] not in prefilled_data else x == prefilled_data[obj['itemID']] for x in split_choices]
-                            obj['text'] = obj['gloss']
-
-                            if obj['definition'] is not None and obj['definition'].find('/') >= 0 and item_type['id'] != 'word':
-                                split_definition = map(unicode.strip, obj['definition'].split('/'))
-                                obj['choices'] = zip(split_definition, split_choices, prefilled_values)
-                            else:
-                                obj['choices'] = zip(split_choices, split_choices, prefilled_values)
-                                if obj['definition'] is not None:
-                                    obj['text'] = obj['definition']
-
-                    if item_type['type'] == 'textbox':
-                        for obj in item_type['objects']:
-                            if obj['itemID'] in prefilled_data:
-                                obj['prefilled_value'] = prefilled_data[obj['itemID']]
-                                print obj['prefilled_value']
+                    
     return data
 
 def cdi_form(request, hash_id):
