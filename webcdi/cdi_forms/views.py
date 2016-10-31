@@ -7,6 +7,7 @@ from django.http import Http404
 import datetime
 from .forms import BackgroundForm
 from django.utils import timezone
+from django.http import JsonResponse
 
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
@@ -139,6 +140,35 @@ def prefilled_cdi_data(administration_instance):
                     
     return data
 
+def cdi_response_data(administration_instance):
+    prefilled_data_list = administration_data.objects.filter(administration = administration_instance).values('item_ID', 'value')
+    instrument_name = administration_instance.study.instrument.name
+    instrument_model = model_map(instrument_name)
+    prefilled_data = {x['item_ID']: x['value'] for x in prefilled_data_list}
+    with open(PROJECT_ROOT+'/form_data/'+instrument_name+'_meta.json', 'r') as content_file:
+        data = json.loads(content_file.read())
+        #data['title'] = administration_instance.study.instrument.verbose_name
+        #data['completed'] = administration_instance.completed
+        #data['due_date'] = administration_instance.due_date
+        #meta_file['background_form'] = None
+
+        for part in data['parts']:
+            for item_type in part['types']:
+                if 'sections' in item_type:
+                    for section in item_type['sections']:
+                        group_objects = instrument_model.objects.filter(category__exact=section['id']).values()
+               
+                        section['objects'] = cdi_items(group_objects, item_type['type'], prefilled_data, item_type['id'])
+                        #if any(['*' in x['gloss'] for x in section['objects']]):
+                        #    section['starred'] = "*Or the word used in your family"  
+
+                                
+                else:
+                    group_objects = instrument_model.objects.filter(item_type__exact=item_type['id']).values()
+                    item_type['objects'] = cdi_items(group_objects, item_type['type'], prefilled_data, item_type['id'])
+
+    return data
+
 def cdi_form(request, hash_id):
 
     administration_instance = get_administration_instance(hash_id)
@@ -207,7 +237,23 @@ def printable_view(request, hash_id):
         prefilled_data['background_form'] = background_form
     
     return render(request, 'cdi_forms/printable_cdi.html', prefilled_data)
-    
+
+def visualize_cdi_result(request, hash_id):   
+    return render(request, 'cdi_forms/graph.html', {'hash_id': hash_id})
+
+def words(request, hash_id):
+    administration_instance = get_administration_instance(hash_id)
+    response_data = {}
+    if request.method == 'GET' or request.method=='POST':
+        response_data = cdi_response_data(administration_instance)
+
+    #foo = [{"itemID": "item_1", "category": "sounds", "item_type": "word", "item": "baa_baa", "definition": "baa baa", "complexity_category": null, "prefilled_value": false, "gloss": "baa baa", "choices": "produces"}, {"itemID": "item_2", "category": "sounds", "item_type": "word", "item": "choo_choo", "definition": "choo choo", "complexity_category": null, "prefilled_value": false, "gloss": "choo choo", "choices": "produces"}, {"itemID": "item_3", "category": "sounds", "item_type": "word", "item": "cockadoodledoo", "definition": "cockadoodledoo", "complexity_category": null, "prefilled_value": false, "gloss": "cockadoodledoo", "choices": "produces"}, {"itemID": "item_4", "category": "sounds", "item_type": "word", "item": "grrr", "definition": "grrr", "complexity_category": null, "prefilled_value": false, "gloss": "grrr", "choices": "produces"}, {"itemID": "item_5", "category": "sounds", "item_type": "word", "item": "meow", "definition": "meow", "complexity_category": null, "prefilled_value": false, "gloss": "meow", "choices": "produces"}, {"itemID": "item_6", "category": "sounds", "item_type": "word", "item": "moo", "definition": "moo", "complexity_category": null, "prefilled_value": false, "gloss": "moo", "choices": "produces"}, {"itemID": "item_7", "category": "sounds", "item_type": "word", "item": "ouch", "definition": "ouch", "complexity_category": null, "prefilled_value": false, "gloss": "ouch", "choices": "produces"}, {"itemID": "item_8", "category": "sounds", "item_type": "word", "item": "quack_quack", "definition": "quack quack", "complexity_category": null, "prefilled_value": false, "gloss": "quack quack", "choices": "produces"}, {"itemID": "item_9", "category": "sounds", "item_type": "word", "item": "uh_oh", "definition": "uh oh", "complexity_category": null, "prefilled_value": false, "gloss": "uh oh", "choices": "produces"}, {"itemID": "item_10", "category": "sounds", "item_type": "word", "item": "vroom", "definition": "vroom", "complexity_category": null, "prefilled_value": false, "gloss": "vroom", "choices": "produces"}, {"itemID": "item_11", "category": "sounds", "item_type": "word", "item": "woof_woof", "definition": "woof woof", "complexity_category": null, "prefilled_value": false, "gloss": "woof woof", "choices": "produces"}, {"itemID": "item_12", "category": "sounds", "item_type": "word", "item": "yum_yum", "definition": "yum yum", "complexity_category": null, "prefilled_value": false, "gloss": "yum yum", "choices": "produces"}]
+
+    #return JsonResponse(json.dumps(response_data), safe=False)
+    foo = [{"itemID": "item_1", "category": "sounds", "item_type": "word", "item": "baa_baa", "definition": "baa baa", "prefilled_value": False, "gloss": "baa baa", "choices": "produces"}, 
+           {"itemID": "item_2", "category": "sounds", "item_type": "word", "item": "choo_choo", "definition": "choo choo", "prefilled_value": True, "gloss": "choo choo", "choices": "produces"}]
+    return JsonResponse(json.dumps(foo), safe=False)
+
 def administer_cdi_form(request, hash_id):
     try:
         administration_instance = administration.objects.get(url_hash = hash_id)
