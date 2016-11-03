@@ -7,6 +7,7 @@ from django.http import Http404
 import datetime
 from .forms import BackgroundForm
 from django.utils import timezone
+from django.http import JsonResponse
 
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
@@ -139,6 +140,7 @@ def prefilled_cdi_data(administration_instance):
                     
     return data
 
+
 def cdi_form(request, hash_id):
 
     administration_instance = get_administration_instance(hash_id)
@@ -207,7 +209,10 @@ def printable_view(request, hash_id):
         prefilled_data['background_form'] = background_form
     
     return render(request, 'cdi_forms/printable_cdi.html', prefilled_data)
-    
+
+def visualize_cdi_result(request, hash_id):   
+    return render(request, 'cdi_forms/graph.html', {'hash_id': hash_id})
+
 def administer_cdi_form(request, hash_id):
     try:
         administration_instance = administration.objects.get(url_hash = hash_id)
