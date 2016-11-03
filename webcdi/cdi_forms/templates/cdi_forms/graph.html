@@ -1,93 +1,55 @@
+
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    {% load staticfiles %}
 
     <title>Words and Sentences CDI</title>
     <meta name="description" content="English Words and Sentences CDI form">
     <meta name="author" content="Ashwin Paranjape">
-
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="{% static 'cdi_forms/selectize.js' %}"></script>
+    <script src="{% static 'cdi_forms/bootstrap-datepicker.js' %}"></script>
+    <link rel='stylesheet' href="{% static 'cdi_forms/selectize.bootstrap3.css' %}">
+    <link rel='stylesheet' href="{% static 'cdi_forms/datepicker.css' %}">
+    <link rel="stylesheet" href="http://getbootstrap.com/assets/css/docs.min.css" />
+    <link rel='stylesheet' href="{% static 'cdi_forms/base.css' %}">
 
 
     <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 </head>
-<style>
 
-.chart rect {
-  fill: steelblue;
-}
-
-.chart text {
-  fill: black;
-  font: 10px sans-serif;
-  text-anchor: end;
-}
-
-</style>
 <body >
-    <div class="container bs-docs-container" style='padding-top: 60px; padding-bottom: 60px;'>
-        {% url "words" hash_id %}
+
+    <div id="content">
+        <div class="h_iframe">
+            <iframe style="border:none; width:1100px; height:1500px" id="analysis"  src="http://127.0.0.1:6254/?={{ hash_id }}"></iframe>
+        </div>
     </div>
 
+    <!--<script>
+        $('#content').hide();
 
-    <div class = "jumbotron"> 
-        <svg class="chart"></svg>
-    </div>
-</body>
-<script src="https://d3js.org/d3.v3.min.js"></script>
-<script>
-    var words = Array();
-    var values = Array();
-    var categories = Array();
-
-    d3.json("{% url "words" hash_id %}", function(error, data) {
-        json_data = JSON.parse(data);
-
-
-        for (i = 0; i < json_data.length; i++) {
-            words[i] = json_data[i].definition;
-            values[i] = json_data[i].prefilled_value;
-            categories[i] = json_data[i].category;
+        var displayAnalysis = function() {
+            console.log('loaded!');
+            $('#wait').hide();
+            $('#content').show();
         }
-    })
 
-    function add_bool(a, b) {
-        var b_int = b ? 1 : 0;
-       return a + b_int;
-    }
+        $('#analysis').load(function() {
+            displayAnalysis();
+        });
+    </script>
+
+ 
+
     
-    //var data = [4, 8, 15, 16, 23, 42];
-
-//    var data = [10, 10]; // alues.reduce(add_bool, 0);
-
-    var width = 420,
-        barHeight = 20;
-
-    var x = d3.scale.linear()
-        .domain([0, d3.max(data)])
-        .range([0, width]);
-
-    var chart = d3.select(".chart")
-        .attr("width", width)
-        .attr("height", barHeight * data.length);
-
-    var bar = chart.selectAll("g")
-        .data(data)
-      .enter().append("g")
-        .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; });
-
-    bar.append("rect")
-        .attr("width", x)
-        .attr("height", barHeight - 1);
-
-    bar.append("text")
-        .attr("x", function(d) { return x(d) - 3; })
-        .attr("y", barHeight / 2)
-        .attr("dy", ".35em")
-        .text(function(d) { return d; });
-
-
-</script>
 </body>
 </html>
