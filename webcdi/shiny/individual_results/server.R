@@ -12,6 +12,7 @@ library(dplyr)
 library(ggplot2)
 library(gtable)
 library(grid)
+library(feather)
 source("access-webcdi.R")
 mode="local"
 src <- connect_to_webcdi(mode=mode)

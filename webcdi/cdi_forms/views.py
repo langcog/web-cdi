@@ -140,34 +140,6 @@ def prefilled_cdi_data(administration_instance):
                     
     return data
 
-def cdi_response_data(administration_instance):
-    prefilled_data_list = administration_data.objects.filter(administration = administration_instance).values('item_ID', 'value')
-    instrument_name = administration_instance.study.instrument.name
-    instrument_model = model_map(instrument_name)
-    prefilled_data = {x['item_ID']: x['value'] for x in prefilled_data_list}
-    with open(PROJECT_ROOT+'/form_data/'+instrument_name+'_meta.json', 'r') as content_file:
-        data = json.loads(content_file.read())
-        data['title'] = administration_instance.study.instrument.verbose_name
-        #data['completed'] = administration_instance.completed
-        #data['due_date'] = administration_instance.due_date
-        #meta_file['background_form'] = None
-
-        for part in data['parts']:
-            for item_type in part['types']:
-                if 'sections' in item_type:
-                    for section in item_type['sections']:
-                        group_objects = instrument_model.objects.filter(category__exact=section['id']).values()
-               
-                        section['objects'] = cdi_items(group_objects, item_type['type'], prefilled_data, item_type['id'])
-                        if any(['*' in x['gloss'] for x in section['objects']]):
-                            section['starred'] = "*Or the word used in your family"  
-
-                                
-                else:
-                    group_objects = instrument_model.objects.filter(item_type__exact=item_type['id']).values()
-                    item_type['objects'] = cdi_items(group_objects, item_type['type'], prefilled_data, item_type['id'])
-
-    return data
 
 def cdi_form(request, hash_id):
 
@@ -240,11 +212,6 @@ def printable_view(request, hash_id):
 
 def visualize_cdi_result(request, hash_id):   
     return render(request, 'cdi_forms/graph.html', {'hash_id': hash_id})
-
-# def words(request, hash_id):
-#     administration_instance = get_administration_instance(hash_id)
-    
-#     return JsonResponse({'hash_id': hash_id})
 
 def administer_cdi_form(request, hash_id):
     try:
