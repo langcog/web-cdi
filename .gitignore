@@ -6,3 +6,6 @@ venv/
 django_logs/
 *.swp
 *.backup
+.Rproj.user
+.Rhistory
+packrat/src/*

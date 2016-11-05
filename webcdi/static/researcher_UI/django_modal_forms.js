@@ -7,7 +7,7 @@ function modal_form(form_url){
         success: function (data, status) {
             $('#'+modal_id).html(data);
             $('#'+modal_id).modal('show');
-            $("#"+modal_id+" [name=submit]").click(function () {
+            var callback = function() {
                 $.ajax({
                     type: 'POST',
                     url: form_url,
@@ -18,6 +18,7 @@ function modal_form(form_url){
                             $('#'+modal_id).modal('hide');
                             $('#'+modal_id).children().remove();
                             window.location = data['redirect_url']
+
                         }
                         else if(data['stat'] == "re-render"){
                             $('#'+modal_id).html(data);
@@ -29,8 +30,15 @@ function modal_form(form_url){
                             $('#'+modal_id + ' .error-message').css('display','block');
                         }
                     }
-                });
-            }); 
+                });                
+            };
+            $("#"+modal_id+" [name=autogenerate-count]").keypress(function() {
+                if (event.which == 13) callback();
+            });
+            $("#"+modal_id+" [name=new-subject-ids]").keypress(function() {
+                if (event.which == 13) callback();
+            });
+            $("#"+modal_id+" [name=submit]").click(callback); 
         }
     });
 }

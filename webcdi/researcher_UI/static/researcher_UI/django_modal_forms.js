@@ -18,7 +18,6 @@ function modal_form(form_url){
                             $('#'+modal_id).modal('hide');
                             $('#'+modal_id).children().remove();
                             window.location = data['redirect_url']
-                            return render(request, 'researcher_UI/administer_new_modal.html')
 
                         }
                         else if(data['stat'] == "re-render"){
