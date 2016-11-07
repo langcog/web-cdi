@@ -99,10 +99,10 @@ shinyServer(function(input, output, session) {
     words <- as.data.frame(study_word())
     num_produced <- sum(words$numvalue == 2)
     num_understood <- sum(words$numvalue == 1)
-    if (num_produced > 0) {
+    if (num_understood > 0) {
       paste("My baby says", num_produced, "words and understands",num_understood + num_produced,"words.", sep=" ")
     } else{
-      paste("My baby understands", num_produced, "words.", sep=" ")
+      paste("My baby says", num_produced, "words.", sep=" ")
     }
   })
   
