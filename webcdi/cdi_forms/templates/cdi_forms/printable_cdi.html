@@ -34,11 +34,33 @@
 <body >
     <div class="container bs-docs-container" style='padding-top: 60px; padding-bottom: 60px;'>
     <form class='form-horizontal'>
-    <div class = "col-md-12" role="main">
+
+    <div class = "col-md-12">
+        <div class="row">
+            <p class="text-center"><h2>Thank you!</h2></p>
+            Thank you for taking the time to complete our survey. With the help of parents and caregivers like you, we are working to learn more about the way that children’s language develops, and how that development varies across individual children and cultures. If you enjoyed our assessment and would like to learn more about our work, you can visit our <a href="https://www.facebook.com/langcoglab/">facebook page</a> or check out our <a href="http://langcog.stanford.edu/forparents.html">website</a>. Below are some insights into your child’s developing vocabulary, based on our research. We appreciate your contribution!
+        </div>
+        <br>
+        <div class="row text-center">
+            <a class="btn btn-primary btn-lg" href="#graph_data" data-toggle="collapse">Graph My Data!</a>
+        </div>
+    </div>
+
+    <div class="row text-center">
+        <a href="#filled_form" data-toggle="collapse">Show Me My Answers</a>
+    </div>
+
+    <div class="col-md-12 collapse" id="graph_data" style="height: 90vh;">
+        <iframe style="border:2px" id="analysis"  src="http://127.0.0.1:7338/?={{ hash_id }}" width="100%" height="100%"></iframe>
+    </div>
+
+    <div class = "col-md-12 collapse" id="filled_form" role="main">
+
     <div class="row">
         {% load crispy_forms_tags %}
         {% crispy background_form %}
     </div>
+
 {% if parts %}
     <ul>
             {% for part in parts %}
@@ -130,6 +152,7 @@
     {% else %}
         <p>Form unavailable. Contact admin. </p>
     {% endif %}
+
     </div>
     <form>
 </div>
@@ -137,6 +160,15 @@
 <script>
         $('input').prop('disabled', 'True');
         $('select').prop('disabled', 'True');
+
+        $('#graph_data').on('shown.bs.collapse', function () {
+            $('#filled_form').collapse('hide')        
+        })
+
+
+        $('#filled_form').on('shown.bs.collapse', function () {
+            $('#graph_data').collapse('hide')        
+        })
 </script>
 </body>
 </html>

@@ -207,11 +207,10 @@ def printable_view(request, hash_id):
             #Blank form
             background_form = BackgroundForm()  
         prefilled_data['background_form'] = background_form
+        prefilled_data['hash_id'] = hash_id
     
     return render(request, 'cdi_forms/printable_cdi.html', prefilled_data)
 
-def visualize_cdi_result(request, hash_id):   
-    return render(request, 'cdi_forms/graph.html', {'hash_id': hash_id})
 
 def administer_cdi_form(request, hash_id):
     try:
