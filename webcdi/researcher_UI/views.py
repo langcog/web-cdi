@@ -2,14 +2,17 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from .forms import AddStudyForm, RenameStudyForm
-from .models import study, administration, administration_data, get_meta_header 
+from .models import study, administration, administration_data, get_meta_header, get_background_header
 import json
 import re, random
 from .tables  import StudyAdministrationTable
 from django_tables2   import RequestConfig
 from django.db.models import Max
 import datetime
-from cdi_forms.views import get_model_header, background_info_form
+from cdi_forms.views import get_model_header, background_info_form, prefilled_background_form
+from cdi_forms.models import BackgroundInfo
+
+
 
 # Create your views here
 
@@ -31,11 +34,15 @@ def download_data(request, study_obj, administrations = None):
     model_header = get_model_header(study_obj.instrument.name)
     
     meta_data_header = get_meta_header()
-    writer.writerow(meta_data_header+model_header)
+    background_header = get_background_header()
+    writer.writerow(meta_data_header+background_header+model_header)
     for admin_obj in administrations:
         admin_data = {x:y for (x,y) in administration_data.objects.values_list('item_ID', 'value').filter(administration_id = admin_obj)}
-	
-    	writer.writerow(admin_obj.get_meta_data()+[admin_data[key] if key in admin_data else '' for key in model_header])
+        background_data = []
+        for i in background_header:
+            background_values = BackgroundInfo.objects.values_list(i, flat=True).filter(administration = admin_obj)
+            background_data.append(background_values)
+    	writer.writerow(admin_obj.get_meta_data()+[item for sublist in background_data for item in sublist]+[admin_data[key] if key in admin_data else '' for key in model_header])
     return response
 
 @login_required

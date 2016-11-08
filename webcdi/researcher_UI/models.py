@@ -19,7 +19,11 @@ class study(models.Model):
         unique_together = ('researcher', 'name')
     
 def get_meta_header():
-    return ['study', 'subject_id', 'administration_number', 'link', 'completed', 'expiration_date', 'last_modified']
+    return ['study', 'subject_id', 'administration_number', 'link', 'completed', 'completedBackgroundInfo', 'expiration_date', 'last_modified']
+
+def get_background_header():
+    return ['id', 'age', 'sex', 'birth_order', 'birth_weight', 'early_or_late', 'due_date_diff', 'mother_yob', 'mother_education', 'father_yob', 'father_education', 'annual_income', 'child_hispanic_latino', 'caregiver_info', 'other_languages_boolean', 'language_from', 'language_days_per_week', 'language_hours_per_day', 'ear_infections_boolean', 'ear_infections', 'hearing_loss_boolean', 'hearing_loss', 'vision_problems_boolean', 'vision_problems']
+
 class administration(models.Model):
     study = models.ForeignKey("study")
     subject_id = models.IntegerField()
@@ -34,7 +38,7 @@ class administration(models.Model):
         unique_together = ('study', 'subject_id', 'repeat_num')
 
     def get_meta_data(self):
-        return [self.study, self.subject_id, self.repeat_num, self.url_hash, self.completed, self.due_date, self.last_modified]
+        return [self.study, self.subject_id, self.repeat_num, self.url_hash, self.completed, self.completedBackgroundInfo, self.due_date, self.last_modified]
 
 class administration_data(models.Model):
     administration = models.ForeignKey("administration")
