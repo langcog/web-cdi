@@ -248,7 +248,7 @@ def administer_new(request, study_name):
             data['redirect_url'] = "interface/";
             return HttpResponse(json.dumps(data), content_type="application/json")
     else:
-        return render(request, 'researcher_UI/administer_new_modal.html')
+        return render(request, 'researcher_UI/administer_new_modal.html', {'study_name': study_name})
 
 def administer_new_parent(request, study_name):
     data={}
