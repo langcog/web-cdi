@@ -14,8 +14,8 @@ shinyUI(fluidPage(
   
   # Application title
   titlePanel("Your CDI Results"),
-  fluidRow(
-    column(6, plotOutput("numwords_chart")),
+  fluidRow( 
+    column(6, plotOutput("predicted_vocab")),
     column(6, h2(textOutput("numwords_text")))
     ),
   
@@ -24,7 +24,8 @@ shinyUI(fluidPage(
     column(6, h2(textOutput("word_categories_text")))
     ),
 
-  fluidRow(h2(textOutput("hardest_word")))
+  fluidRow( 
+    h2(textOutput("hardest_word"), align = "center"))
     
 
 ))

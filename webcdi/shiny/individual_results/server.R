@@ -12,15 +12,20 @@ library(dplyr)
 library(ggplot2)
 library(gtable)
 library(grid)
+library(langcog)
 library(feather)
+library(stringr)
 source("access-webcdi.R")
 mode="local"
 src <- connect_to_webcdi(mode=mode)
 word_cats <- read.csv("word_categories.csv")
+theme_set(theme_mikabr(base_size = 15))
+
 
 english_wg_prod <- read_feather("data/eng_wg_production_aoas.feather")
 english_wg_und <- read_feather("data/eng_wg_comprehension_aoas.feather")
 english_ws_prod <- read_feather("data/eng_ws_production_aoas.feather")
+english_pred_vocab <- read_feather("data/predicted_vocab_English_WG_WS.feather")
 
 
 # Define server logic required to draw a histogram
@@ -95,6 +100,30 @@ shinyServer(function(input, output, session) {
     return(hardest_words[1])
   }
   
+  predicted_vocab <- function() {
+    words <- as.data.frame(study_word())
+    num_produced <- sum(words$numvalue == 2)
+    instrument_curves <- english_pred_vocab %>% filter(Instrument == study_info()$instrument_id)
+    child_age <- background_info()$age
+    age_compare <- instrument_curves %>% filter(age == child_age)
+    closest_quantile <- which.min(abs(age_compare$predicted - num_produced))
+    paste(closest_quantile)
+  }
+  
+  
+  output$predicted_vocab <- renderPlot({
+    words <- as.data.frame(study_word())
+    num_produced <- sum(words$numvalue == 2)
+    instrument_curves <- english_pred_vocab %>% filter(Instrument == study_info()$instrument_id)
+    child_age <- background_info()$age
+    age_compare <- instrument_curves %>% filter(age == child_age)
+    closest_quantile <- age_compare$quantile[which.min(abs(age_compare$predicted - num_produced))]
+    curveToPlot <- instrument_curves %>% filter(quantile == closest_quantile)
+    currentPoint <- curveToPlot %>% filter(age == child_age)
+    growth <- ggplot(curveToPlot, aes(x = age, y = predicted)) + geom_line(colour = "#9471f2", size = 2) + geom_point(data = currentPoint, aes(x = age, y = predicted), size = 6, colour = "#2dbc74") + xlab("Age (in Months)") + ylab("Predicted Size of Spoken Vocabulary") + ggtitle("Predicted Growth of Vocabulary Over Time") + geom_text(data=currentPoint, label="Current Vocabulary Size", vjust = 0, hjust="inward", nudge_x = -0.4, size = 5) + scale_x_continuous(limits=c((min(curveToPlot$age)-0.5),(max(curveToPlot$age)+0.5)), breaks = seq(min(curveToPlot$age), max(curveToPlot$age), 1))
+    print(growth)
+    })
+  
   output$numwords_text <- renderText({
     words <- as.data.frame(study_word())
     num_produced <- sum(words$numvalue == 2)
@@ -112,7 +141,7 @@ shinyServer(function(input, output, session) {
     words$value[words$value == "produces"] <- "Produces"
     words$value[words$value == "understands"] <- "Understands"
     pie <- ggplot(words, aes(x = factor(1), fill = factor(value))) +
-      geom_bar(width = 1) + coord_polar(theta = "y") + xlab("% of Words") + theme_void() + ggtitle("% of Words on Assessment")
+      geom_bar(width = 1) + coord_polar(theta = "y") + xlab("% of Words") + ggtitle("% of Words on Assessment")
     print(pie)
   })
   
@@ -121,22 +150,22 @@ shinyServer(function(input, output, session) {
     best_produced <- categories$`Word Category`[categories$`% of Words Said` == max(categories$`% of Words Said`)]
     if (!is.null(categories$`% of Words Understood`)) {
       best_understood <- categories$`Word Category`[categories$`% of Words Understood` == max(categories$`% of Words Understood`)]
-      paste0("My baby's best spoken category is \"",best_produced[1],"\" and their best understood category is \"",best_understood[1],"\".")
+      paste0("My baby says the most words in the \"",best_produced[1],"\" category and understands the most words in the \"",best_understood[1],"\" category.")
     } else {
-      paste0("My baby's best spoken category is \"",best_produced[1],"\".")
+      paste0("My baby says the most words in the \"",best_produced[1],"\" category.")
       
     }
   })
   
   output$word_categories_chart <- renderPlot({
     categories <- study_word_categories()
-    bar_produced <- ggplot(categories, aes( x = `Word Category`, y =`% of Words Said`, fill = `Word Category`)) + geom_bar(stat = "identity") + theme(axis.text.x = element_text(angle = 45, hjust = 1), legend.position="none") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),panel.background = element_blank())
+    bar_produced <- ggplot(categories, aes( x = `Word Category`, y =`% of Words Said`, fill = `Word Category`)) + ylab("% of Words\nSaid") + geom_bar(stat = "identity") + scale_x_discrete(labels = str_wrap(categories$`Word Category`,15)) + theme(axis.text.x = element_text(angle = 45, hjust = 1), legend.position="none")
     if (!is.null(categories$`% of Words Understood`)) {
-      bar_understood <- ggplot(categories, aes( x = `Word Category`, y =`% of Words Understood`, fill = `Word Category`)) + geom_bar(stat = "identity") + theme(axis.text.x = element_text(angle = 45, hjust = 1), legend.position="none") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),panel.background = element_blank())
+      bar_understood <- ggplot(categories, aes( x = `Word Category`, y =`% of Words Understood`, fill = `Word Category`)) + ylab("% of Words\nUnderstood") + geom_bar(stat = "identity") + scale_x_discrete(labels = str_wrap(categories$`Word Category`,15)) + theme(axis.text.x = element_text(angle = 45, hjust = 1), legend.position="none")
       bars_up <- rbind(ggplotGrob(bar_produced), ggplotGrob(bar_understood),  size="first")
       grid.newpage()
       grid.draw(bars_up)
-    } else {
+      } else {
       print(bar_produced)
     }
     

@@ -8,4 +8,4 @@ django_logs/
 *.backup
 .Rproj.user
 .Rhistory
-packrat/src/*
+*/packrat/src/*

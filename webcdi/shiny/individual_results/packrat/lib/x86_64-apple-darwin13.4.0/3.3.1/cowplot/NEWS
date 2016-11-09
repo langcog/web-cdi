@@ -1,0 +1,61 @@
+cowplot 0.7.0
+----------------------------------------------------------------
+- This version of cowplot has been prepared for the upcoming release of ggplot2 2.2.0. As a result of this upcoming switch, the function switch_axis_position() has been removed. Alternative axes will be natively supported by ggplot2 2.2.0.
+- As of this version, cowplot requires R >= 3.3.0. This dependency was added because R 3.3 fixes a critical problem with lists of units.
+
+cowplot 0.6.3
+----------------------------------------------------------------
+- Adds a get_legend() function that extracts the legend from a plot. Code provided by https://github.com/marcus1487
+- Fixes bug that creates an empty page on some plot devices. Fix provided by https://github.com/marcus1487
+- Fixes bug that hardcoded panel border line-type and size. Fix provided by Spencer Fox, https://github.com/sjfox
+- Adds the option of custom axes on the drawing layer. Code provided by https://github.com/zaczap
+- Separates out the alignment function from plot_grid(). Will likely be more useful further down the line. Code provided by Spencer Fox, https://github.com/sjfox
+
+cowplot 0.6.2
+----------------------------------------------------------------
+- Updated plot_grid vignette so the tutorial on aligning plots of different types works again. This stopped working at some point and was removed from 0.6.1.
+
+cowplot 0.6.1
+----------------------------------------------------------------
+- Added new convenience function draw_figure_label() to label figures with labels such as "Figure 1".
+- Fixes in switch_axis_position() so that rotated axis labels work.
+- Fix missing axis lines in ggplot2 2.1
+
+cowplot 0.6.0
+----------------------------------------------------------------
+Major changes:
+- Now requires ggplot2 version 2.0.0 or higher. Use cowplot 0.5.0 with older versions of ggplot2.
+- Because of the dependency on ggplot2 2.0.0, the default design is changed. No more bold face for axis labels
+- Add auto-generation of labels in plot_grid()
+- Add vignettes describing plot annotations and shared legends among plots
+
+cowplot 0.5.0
+----------------------------------------------------------------
+Major changes:
+- Fix label positioning in plot_grid() so it is not affected by the scale parameter
+- Add draw_label() function which can draw both text and plotmath expressions
+- Add parameters hjust and vjust to plot_grid() to allow fine-tuning of label position
+- Add annotations underneath plot, via add_sub() function
+
+Other changes:
+- Improve vignettes
+
+cowplot 0.4.0
+----------------------------------------------------------------
+Major changes:
+- Added a function switch_axis_position() which can move/copy the x and/or y axis of a
+  plot to the other side
+- plot_grid() can now align graphs
+- plot_grid() can now make grids with varying column widths and row heights
+
+Other changes:
+- Various improvements in the documentation
+- Code has been separated into multiple files for easier maintenance
+
+cowplot 0.3.1
+----------------------------------------------------------------
+Fix Vignette title
+
+cowplot 0.3.0
+----------------------------------------------------------------
+First complete implementation ready for initial release
