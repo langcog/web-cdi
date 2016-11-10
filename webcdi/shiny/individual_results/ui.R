@@ -15,17 +15,20 @@ shinyUI(fluidPage(
   # Application title
   titlePanel("Your CDI Results"),
   fluidRow( 
-    column(6, plotOutput("predicted_vocab")),
-    column(6, h2(textOutput("numwords_text")))
+    column(7, plotOutput("predicted_vocab")),
+    column(5, h2(textOutput("numwords_text")))
     ),
   
   fluidRow(
-    column(6, plotOutput("word_categories_chart")),
-    column(6, h2(textOutput("word_categories_text")))
+    column(7, plotOutput("word_categories_chart")),
+    column(5, h2(textOutput("word_categories_text")))
     ),
 
   fluidRow( 
-    h2(textOutput("hardest_word"), align = "center"))
+    h2(textOutput("hardest_word"), align = "center"),
+    br(),
+    h2(textOutput("completion_code"), align = "center")
+    )
     
 
 ))

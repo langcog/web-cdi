@@ -180,6 +180,9 @@ shinyServer(function(input, output, session) {
   output$hardest_word <- renderText({
     paste0("The hardest word that my baby says is \"",most_unique_produced(),"\".")
   })
+  output$completion_code <- renderText({
+    print("Survey completion code: sXeMytpD")
+  })
   
   output$allVariables <- renderText(
     paste(hash_id(), server_id(), sep="\n")
