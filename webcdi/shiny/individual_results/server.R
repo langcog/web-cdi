@@ -1,11 +1,4 @@
-#
-# This is the server logic of a Shiny web application. You can run the 
-# application by clicking 'Run App' above.
-#
-# Find out more about building applications with Shiny here:
-# 
-#    http://shiny.rstudio.com/
-#
+
 
 library(shiny)
 library(dplyr)
@@ -101,6 +94,18 @@ shinyServer(function(input, output, session) {
     return(hardest_words[1])
   }
   
+  most_unique_understood <- function() {
+    words_produced <- filter(as.data.frame(study_data()), item_type == "word" & numvalue == 1)
+    if (study_info()$instrument_id == "English_WG") {
+      aoa <- english_wg_prod
+    } else if (study_info()$instrument_id == "English_WS"){
+      aoa <- english_ws_prod
+    }
+    a <- inner_join(words_produced,aoa)
+    hardest_words <- a$item[a$aoa == max(a$aoa, na.rm = T)]
+    return(hardest_words[1])
+  }
+  
   predict_vocab_data <- reactive({
     english_pred_vocab %>% filter(Instrument == study_info()$instrument_id)
   })
@@ -140,8 +145,9 @@ shinyServer(function(input, output, session) {
   
   output$predicted_vocab <- renderPlot({
     age_check <- outside_age_range()
+    error_msg <- paste("Your baby is outside of our age range for predicting vocabulary size. This version of the MB-CDI is for children between",min(predict_vocab_data()$age),"and", max(predict_vocab_data()$age),"months of age.")
     validate(
-      need(age_check,"Your baby is outside of our age range for predicting vocabulary size."))
+      need(age_check,error_msg))
     print(predicted_vocab())
     })
   
@@ -194,7 +200,16 @@ shinyServer(function(input, output, session) {
   })
   
   output$hardest_word <- renderText({
-    paste0("The hardest word that my baby says is \"",most_unique_produced(),"\".")
+    
+    if (!is.na(most_unique_produced()) & !is.na(most_unique_understood()) ) {
+    paste0("The hardest word that my baby says is \"",most_unique_produced(),"\".", "\nThe hardest word my baby understands is \"", most_unique_understood(),"\".")
+    } else if (!is.na(most_unique_produced()) & is.na(most_unique_understood())) {
+      paste0("The hardest word that my baby says is \"",most_unique_produced(),"\".")
+    } else if (is.na(most_unique_produced()) & !is.na(most_unique_understood()) ){
+      paste0("\nThe hardest word my baby understands is \"", most_unique_understood(),"\".")
+    } else if (is.na(most_unique_produced()) & is.na(most_unique_understood()) ) {
+      print("")
+    }
   })
 
   output$allVariables <- renderText(
