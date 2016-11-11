@@ -25,9 +25,17 @@ shinyUI(fluidPage(
     ),
 
   fluidRow( 
-    h2(textOutput("hardest_word"), align = "center"),
-    br(),
-    h2(textOutput("completion_code"), align = "center")
+    h2(textOutput("hardest_word"), align = "center")
+    ),
+  
+  tags$head(
+    tags$style(HTML("
+                    .shiny-output-error-validation {
+                    color: green;
+                    font-size: 200%;
+                    text-align: center;
+                    }
+                    "))
     )
     
 

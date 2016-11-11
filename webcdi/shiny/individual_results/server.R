@@ -101,32 +101,48 @@ shinyServer(function(input, output, session) {
     return(hardest_words[1])
   }
   
+  predict_vocab_data <- reactive({
+    english_pred_vocab %>% filter(Instrument == study_info()$instrument_id)
+  })
+  
+  outside_age_range <- reactive({
+    if (background_info()$age %in% predict_vocab_data()$age) {TRUE
+      } else {FALSE}
+  })
+  
   predicted_vocab <- function() {
+    instrument_curves <- predict_vocab_data()
+    child_age <- background_info()$age
+    
     words <- as.data.frame(study_word())
     num_produced <- sum(words$numvalue == 2)
-    instrument_curves <- english_pred_vocab %>% filter(Instrument == study_info()$instrument_id)
-    child_age <- background_info()$age
-    age_compare <- instrument_curves %>% filter(age == child_age)
-    closest_quantile <- which.min(abs(age_compare$predicted - num_produced))
-    paste(closest_quantile)
+    num_understood <- sum(words$numvalue == 1)
+    
+    
+    
+    age_compare_prod <- instrument_curves %>% filter(age == child_age & measure == "production")
+    closest_quantile_prod <- age_compare_prod$quantile[which.min(abs(age_compare_prod$predicted - num_produced))]
+    curveToPlot_prod <- instrument_curves %>% filter(quantile == closest_quantile_prod)
+    currentPoint_prod <- curveToPlot_prod %>% filter(age == child_age)
+    
+    if (num_understood > 0) {
+      age_compare_comp <- instrument_curves %>% filter(age == child_age & measure == "comprehension")
+    }
+    
+    growth <- ggplot(curveToPlot_prod, aes(x = age, y = predicted)) + geom_line(colour = "#9471f2", size = 2) + geom_point(data = currentPoint_prod, aes(x = age, y = predicted), size = 6, colour = "#2dbc74")
+    growth <- growth + xlab("Age (in Months)") + ylab("Predicted Size of Spoken Vocabulary") 
+    growth <- growth + ggtitle("Predicted Growth of Vocabulary Over Time") 
+    growth <- growth + geom_text_repel(data=currentPoint_prod, aes(age, predicted, label = "Current Vocabulary Size"), nudge_x = 1, size = 5,  point.padding = unit(1, "lines")) 
+    growth <- growth + scale_x_continuous(limits=c((min(currentPoint_prod$age)-0.5),(max(currentPoint_prod$age)+0.5)), breaks = seq(min(currentPoint_prod$age), max(currentPoint_prod$age), 1))
+    print(growth)
   }
   
   
   output$predicted_vocab <- renderPlot({
-    words <- as.data.frame(study_word())
-    num_produced <- sum(words$numvalue == 2)
-    instrument_curves <- english_pred_vocab %>% filter(Instrument == study_info()$instrument_id)
-    child_age <- background_info()$age
-    age_compare <- instrument_curves %>% filter(age == child_age)
-    closest_quantile <- age_compare$quantile[which.min(abs(age_compare$predicted - num_produced))]
-    curveToPlot <- instrument_curves %>% filter(quantile == closest_quantile)
-    currentPoint <- curveToPlot %>% filter(age == child_age)
-    growth <- ggplot(curveToPlot, aes(x = age, y = predicted)) + geom_line(colour = "#9471f2", size = 2) + geom_point(data = currentPoint, aes(x = age, y = predicted), size = 6, colour = "#2dbc74")
-    growth <- growth + xlab("Age (in Months)") + ylab("Predicted Size of Spoken Vocabulary") 
-    growth <- growth + ggtitle("Predicted Growth of Vocabulary Over Time") 
-    growth <- growth + geom_text_repel(data=currentPoint, aes(age, predicted, label = "Current Vocabulary Size"), nudge_x = 1, size = 5,  point.padding = unit(1, "lines")) 
-    growth <- growth + scale_x_continuous(limits=c((min(curveToPlot$age)-0.5),(max(curveToPlot$age)+0.5)), breaks = seq(min(curveToPlot$age), max(curveToPlot$age), 1))
-    print(growth)
+    age_check <- outside_age_range()
+    validate(
+      need(age_check,"Your baby is outside of our age range for predicting vocabulary size."))
+    print(predicted_vocab())
     })
   
   output$numwords_text <- renderText({
@@ -180,16 +196,9 @@ shinyServer(function(input, output, session) {
   output$hardest_word <- renderText({
     paste0("The hardest word that my baby says is \"",most_unique_produced(),"\".")
   })
-  output$completion_code <- renderText({
-    print("Survey completion code: sXeMytpD")
-  })
-  
+
   output$allVariables <- renderText(
     paste(hash_id(), server_id(), sep="\n")
   )
-  
- # output$studyData <- renderTable(
- #   study_word()
- # )
-  
+
 })
