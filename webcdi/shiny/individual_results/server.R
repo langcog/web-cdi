@@ -124,21 +124,42 @@ shinyServer(function(input, output, session) {
     num_understood <- sum(words$numvalue == 1)
     
     
-    
+    if (num_produced > 0) {
     age_compare_prod <- instrument_curves %>% filter(age == child_age & measure == "production")
     closest_quantile_prod <- age_compare_prod$quantile[which.min(abs(age_compare_prod$predicted - num_produced))]
-    curveToPlot_prod <- instrument_curves %>% filter(quantile == closest_quantile_prod)
+    curveToPlot_prod <- instrument_curves %>% filter(quantile == closest_quantile_prod & measure == "production")
     currentPoint_prod <- curveToPlot_prod %>% filter(age == child_age)
+    
+    growth <- ggplot(curveToPlot_prod, aes(x = age, y = predicted)) + geom_line(colour = "#9471f2", size = 2)
+    growth <- growth + geom_point(data = currentPoint_prod, aes(x = age, y = predicted), size = 6, colour = "#2dbc74")
+    growth <- growth + geom_text_repel(data=currentPoint_prod, aes(age, predicted, label = "Current Spoken\nVocabulary Size"), 
+          nudge_x = 1, size = 5,  point.padding = unit(1, "lines")) 
+    }
     
     if (num_understood > 0) {
       age_compare_comp <- instrument_curves %>% filter(age == child_age & measure == "comprehension")
+      closest_quantile_comp <- age_compare_comp$quantile[which.min(abs(age_compare_comp$predicted - num_understood))]
+      curveToPlot_comp <- instrument_curves %>% filter(quantile == closest_quantile_comp & measure == "comprehension")
+      currentPoint_comp <- curveToPlot_comp %>% filter(age == child_age)
+      
+      if (is.ggplot(growth)){
+        growth <- growth + geom_line(data = curveToPlot_comp, aes(x = age, y = predicted), colour = "#FF9667", size = 2)
+      } else{
+      growth <- ggplot(curveToPlot_comp, aes(x = age, y = predicted)) + geom_line(colour = "#FF9667", size = 2)
+        
+      }
+        growth <- growth +  geom_point(data = currentPoint_comp, aes(x = age, y = predicted), size = 6, colour = "#2dbc74")
+        growth <- growth + geom_text_repel(data=currentPoint_comp, aes(age, predicted, label = "Current Understood\nVocabulary Size"), 
+            nudge_x = 1, size = 5,  point.padding = unit(1, "lines")) 
+      
     }
     
-    growth <- ggplot(curveToPlot_prod, aes(x = age, y = predicted)) + geom_line(colour = "#9471f2", size = 2) + geom_point(data = currentPoint_prod, aes(x = age, y = predicted), size = 6, colour = "#2dbc74")
-    growth <- growth + xlab("Age (in Months)") + ylab("Predicted Size of Spoken Vocabulary") 
+    min_age <- min(predict_vocab_data()$age)
+    max_age <- max(predict_vocab_data()$age)
+    
+    growth <- growth + xlab("Age (in Months)") + ylab("Predicted Size of Vocabulary") 
     growth <- growth + ggtitle("Predicted Growth of Vocabulary Over Time") 
-    growth <- growth + geom_text_repel(data=currentPoint_prod, aes(age, predicted, label = "Current Vocabulary Size"), nudge_x = 1, size = 5,  point.padding = unit(1, "lines")) 
-    growth <- growth + scale_x_continuous(limits=c((min(currentPoint_prod$age)-0.5),(max(currentPoint_prod$age)+0.5)), breaks = seq(min(currentPoint_prod$age), max(currentPoint_prod$age), 1))
+    growth <- growth + scale_x_continuous(limits=c((min_age-0.5),(max_age+0.5)), breaks = seq(min_age, max_age, 1))
     print(growth)
   }
   
@@ -200,20 +221,17 @@ shinyServer(function(input, output, session) {
   })
   
   output$hardest_word <- renderText({
-    
-    if (!is.na(most_unique_produced()) & !is.na(most_unique_understood()) ) {
-    paste0("The hardest word that my baby says is \"",most_unique_produced(),"\".", "\nThe hardest word my baby understands is \"", most_unique_understood(),"\".")
-    } else if (!is.na(most_unique_produced()) & is.na(most_unique_understood())) {
-      paste0("The hardest word that my baby says is \"",most_unique_produced(),"\".")
-    } else if (is.na(most_unique_produced()) & !is.na(most_unique_understood()) ){
-      paste0("\nThe hardest word my baby understands is \"", most_unique_understood(),"\".")
-    } else if (is.na(most_unique_produced()) & is.na(most_unique_understood()) ) {
-      print("")
+    if (!is.na(most_unique_produced())){
+    prod <- paste0("The hardest word that my baby says is \"",most_unique_produced(),"\".")
+    } else {
+      prod <- ""
     }
+    if (!is.na(most_unique_understood())){
+    under <- paste0("\nThe hardest word my baby understands is \"", most_unique_understood(),"\".")
+    } else {
+      under <- ""
+    }
+    paste(prod, under)
   })
-
-  output$allVariables <- renderText(
-    paste(hash_id(), server_id(), sep="\n")
-  )
 
 })
