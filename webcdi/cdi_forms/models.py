@@ -61,7 +61,7 @@ class BackgroundInfo(models.Model):
     #early_late = models.DateField(verbose_name = "Early or late birth", help_text = "If the child was born on due date, fill 0. If the child was born earlier than due date, fill the number of weeks after the due date as positive value. If the child was born later fill a negative value." )
     born_on_due_date = models.BooleanField(verbose_name = "Was your child born early or late?")
     early_or_late = models.CharField(verbose_name = "Was he/she early or late?", max_length = 5, choices = (('early', 'Early'),('late', 'Late')), blank=True, null=True)
-    due_date_diff = models.IntegerField(verbose_name = "By how many weeks?",blank=True, null=True, validators = [MinValueValidator(1, "Number of weeks cannot be less than 1")])
+    due_date_diff = models.IntegerField(verbose_name = "By how many weeks?<br>(Round to the nearest week)",blank=True, null=True, validators = [MinValueValidator(1, "Number of weeks cannot be less than 1")])
 
 
     education_levels = {x:str(x) for x in range(5,24)}

@@ -3,7 +3,7 @@
 {% block nav_buttons %}
 {% if not completed %}
 <input name="btn-save" value="Save" class="btn btn-primary" type="submit">
-<input name="btn-submit" value="Submit" class="btn btn-primary" type="submit">
+<input name="btn-submit" value="Submit" class="btn btn-primary" type="submit" onclick="clicked(event)">
 <input name="btn-back" value="Back" class="btn btn-primary" type="submit">
 {% endif %}
 {% endblock %}
@@ -44,8 +44,8 @@
                         <div class="pull-right">
                             {% for choice in object.choices %}
                             &ensp;
-                            <input type="radio" id="{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
-                            <label for="{{ choice.0 }}"> {{ choice.0 }}</label>
+                            <input type="radio" id="{{ object.itemID }}_{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
+                            <label for="{{ object.itemID }}_{{ choice.0 }}"> {{ choice.0 }}</label>
                             {% endfor %}
                         </div>
                     </div>
@@ -55,8 +55,8 @@
                     {% for choice in object.choices %}
                     <div class="row">
                         &ensp;
-                        <input type="radio" id="{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}"{% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
-                        <label for="{{ choice.0 }}"> {{ choice.0 }}</label>
+                        <input type="radio" id="{{ object.itemID }}_{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}"{% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
+                        <label for="{{ object.itemID }}_{{ choice.0 }}"> {{ choice.0 }}</label>
                     </div>
                     {% endfor %}
                 </div>
@@ -81,8 +81,8 @@
                             <div class="pull-right">
                                 {% for choice in object.choices %}
                                 &ensp;
-                                <input type="radio" id="{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
-                                <label for="{{ choice.0 }}"> {{ choice.0 }}</label>
+                                <input type="radio" id="{{ object.itemID }}_{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
+                                <label for="{{ object.itemID }}_{{ choice.0 }}"> {{ choice.0 }}</label>
                                 {% endfor %}
                             </div>
 
@@ -112,6 +112,13 @@
 
     {% endfor %}
     {% endfor %}
+
+    <div class="row text-center">
+        <input name="btn-save" value="Save" class="btn btn-primary" type="submit">
+        <input name="btn-submit" value="Submit" class="btn btn-primary" type="submit" onclick="clicked(event)">
+        <input name="btn-back" value="Back" class="btn btn-primary" type="submit">
+    </div>
+
 </ul>
 {% else %}
 <p>Form unavailable. Contact admin. </p>
@@ -123,5 +130,15 @@
     $('body').on('activate.bs.scrollspy', function () {
         $.post('', data=$('#cdi_form').serialize())
     });
+
+    history.pushState(null, null, document.URL);
+    window.addEventListener('popstate', function () {
+        history.pushState(null, null, document.URL);
+    });
+
+    function clicked(e)
+    {
+        if(!confirm('Are you ready to submit? You cannot change your answers after submission.'))e.preventDefault();
+    }    
 </script>
 {% endblock %}

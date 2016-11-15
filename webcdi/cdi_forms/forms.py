@@ -182,7 +182,7 @@ class BackgroundForm(BetterModelForm):
         'services': Textarea(attrs={'cols': 80, 'rows': 3}), 
         'worried': Textarea(attrs={'cols': 80, 'rows': 3}), 
         'learning_disability': Textarea(attrs={'cols': 80, 'rows': 3}), 
-        'birth_order': forms.NumberInput(attrs={'min':'1'}),
-        'birth_weight': forms.NumberInput(attrs={'min':'0'}),
+        'birth_order': forms.NumberInput(attrs={'min':'1', 'max':'15'}),
+        'birth_weight': forms.NumberInput(attrs={'min':'1', 'max':'15'}),
         'due_date_diff': forms.NumberInput(attrs={'min':'1'})
         }

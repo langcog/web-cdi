@@ -259,15 +259,16 @@ def administer_new(request, study_name):
 
 def administer_new_parent(request, study_name):
     data={}
+    new_administrations = []
     autogenerate_count = 1
     study_obj = study.objects.get(name= study_name)
     max_subject_id = administration.objects.filter(study=study_obj).aggregate(Max('subject_id'))['subject_id__max']
     if max_subject_id is None:
         max_subject_id = 0
+    for sid in range(max_subject_id+1, max_subject_id+autogenerate_count+1):
+        new_administrations.append(administration(study =study_obj, subject_id = sid, repeat_num = 1, url_hash = random_url_generator(), completed = False, due_date = datetime.datetime.now()+datetime.timedelta(days=14)))
 
-    new_administrations = []
 
-    new_administrations.append(administration(study =study_obj, subject_id = max_subject_id+1, repeat_num = 1, url_hash = random_url_generator(), completed = False, due_date = datetime.datetime.now()+datetime.timedelta(days=14)))
     new_url = new_administrations[0]
     new_hash_id = new_url.url_hash
     administration.objects.bulk_create(new_administrations)

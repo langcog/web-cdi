@@ -26,6 +26,12 @@
 <div class="row">
     {% load crispy_forms_tags %}
     {% crispy background_form %}
+
+</div>
+
+<div class="row text-center">
+    <input name="btn-save" value="Save" class="btn btn-primary" type="button">
+    <input name="btn-next" value="Next" class="btn btn-primary" type="submit">
 </div>
 {% else %}
 <p>Form unavailable. Contact admin. </p>
@@ -57,6 +63,11 @@
     {% if completed %}
         $('input').prop('disabled', True);
     {% endif %}
+
+    history.pushState(null, null, document.URL);
+    window.addEventListener('popstate', function () {
+        history.pushState(null, null, document.URL);
+    });
 
     document.getElementById("id_age").disabled = true;
 
