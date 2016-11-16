@@ -54,7 +54,7 @@ def format_currency(val):
 class BackgroundInfo(models.Model):
     administration = models.OneToOneField("researcher_UI.administration")
     years = [(x,x) for x in range(1950, datetime.date.today().year+1)]
-    age = models.IntegerField(verbose_name = "Age (in months)", validators=[MinValueValidator(0)], default = 0)
+    age = models.IntegerField(verbose_name = "Age (in months)", validators=[MinValueValidator(0)], default = 999)
     sex = models.CharField(max_length = 1, choices = (('M', "Male"), ('F', "Female"), ('O', "Other")))
     birth_order = models.IntegerField(verbose_name = "Birth order (enter number)", validators = [MinValueValidator(1, "Birth order cannot be less than 1. First born child gets value 1")], )
     birth_weight = models.FloatField(verbose_name = "Birth weight (In pounds)", validators = [validate_g_zero, MaxValueValidator(14, "Birth weight is not expected to be more than 14 pounds")])
