@@ -54,12 +54,12 @@ def format_currency(val):
 class BackgroundInfo(models.Model):
     administration = models.OneToOneField("researcher_UI.administration")
     years = [(x,x) for x in range(1950, datetime.date.today().year+1)]
-    age = models.IntegerField(verbose_name = "Age (in months)", null=True, blank = True)
+    age = models.IntegerField(verbose_name = "Age (in months)", validators=[MinValueValidator(0)], default = 0)
     sex = models.CharField(max_length = 1, choices = (('M', "Male"), ('F', "Female"), ('O', "Other")))
     birth_order = models.IntegerField(verbose_name = "Birth order (enter number)", validators = [MinValueValidator(1, "Birth order cannot be less than 1. First born child gets value 1")], )
     birth_weight = models.FloatField(verbose_name = "Birth weight (In pounds)", validators = [validate_g_zero, MaxValueValidator(14, "Birth weight is not expected to be more than 14 pounds")])
     #early_late = models.DateField(verbose_name = "Early or late birth", help_text = "If the child was born on due date, fill 0. If the child was born earlier than due date, fill the number of weeks after the due date as positive value. If the child was born later fill a negative value." )
-    born_on_due_date = models.BooleanField(verbose_name = "Was your child born early or late?")
+    born_on_due_date = models.BooleanField(verbose_name = "Was your child born early or late from their due date?")
     early_or_late = models.CharField(verbose_name = "Was he/she early or late?", max_length = 5, choices = (('early', 'Early'),('late', 'Late')), blank=True, null=True)
     due_date_diff = models.IntegerField(verbose_name = "By how many weeks?<br>(Round to the nearest week)",blank=True, null=True, validators = [MinValueValidator(1, "Number of weeks cannot be less than 1")])
 

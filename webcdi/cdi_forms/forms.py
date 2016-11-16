@@ -31,9 +31,9 @@ class BackgroundForm(BetterModelForm):
     YESNO_CHOICES = ((False, 'No'), (True, 'Yes'))
     child_dob = forms.DateField(input_formats=['%m/%d/%Y'], widget=forms.TextInput(attrs={'placeholder': 'mm/dd/yyyy'}),
                                 help_text = "To protect your privacy, we never store your child's date of birth, we only record age in months.",
-                                validators = [MaxValueValidator(datetime.date.today())], label = "Child DOB")
+                                validators = [MaxValueValidator(datetime.date.today())], label = 'Child DOB<font color="aa0000">*</font>', required=False)
 
-    age = forms.IntegerField(label = "Age (in months)", required = False, validators=[MinValueValidator(0)], widget=forms.TextInput(attrs={'placeholder':'This field will update and save when you enter your child\'s DOB and switch pages'}))
+    age = forms.IntegerField(label = 'Age (in months)<font color="aa0000">*</font>', validators=[MinValueValidator(0)], help_text='This field will update when you enter or change your child\'s DOB.', required=False)
 
 
     #years = [(x,x) for x in range(1900, datetime.date.today().year+1)]
@@ -45,7 +45,7 @@ class BackgroundForm(BetterModelForm):
                      choices=YESNO_CHOICES, widget=forms.RadioSelect, coerce = string_bool_coerce
                 , required=False, label="Is your child Hispanic or Latino?")
     born_on_due_date = forms.TypedChoiceField(
-                     choices=YESNO_CHOICES, widget=forms.RadioSelect, label='Was your child born early or late?', coerce=string_bool_coerce)
+                     choices=YESNO_CHOICES, widget=forms.RadioSelect, label='Was your child born early or late from their due date?', coerce=string_bool_coerce)
     early_or_late = forms.ChoiceField(
                      choices=(('early', 'Early'),('late', 'Late')), widget=forms.RadioSelect,
                  required=False)
@@ -118,8 +118,8 @@ class BackgroundForm(BetterModelForm):
             self.add_error(dependent, "Cannot be more than 18 weeks early")
         if cleaned_data.get('early_or_late') == 'late' and cleaned_data.get('due_date_diff') > 4:
             self.add_error(dependent, "Cannot be more than 4 weeks late")
-        #self.child_dob = cleaned_data.get('child_dob')
-        #self.age = (datetime.date.today().year - self.child_dob.year) * 12 +  (datetime.date.today().month - self.child_dob.month) + (self.child_dob.day >=15)
+        if cleaned_data.get('age') == '':
+            self.add_error('age', 'Please enter your child\'s DOB in the field above.')
 
 
 

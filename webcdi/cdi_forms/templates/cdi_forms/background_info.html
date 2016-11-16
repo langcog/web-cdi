@@ -59,7 +59,11 @@
     var $select = $('.make-selectize').selectize({
         maxItems :null,
     });
-    $('#id_child_dob').datepicker();
+
+    $('#id_child_dob').datepicker()
+        .on('changeDate', function() {
+            getDiffinMonths();
+        });
     {% if completed %}
         $('input').prop('disabled', True);
     {% endif %}
@@ -70,6 +74,35 @@
     });
 
     document.getElementById("id_age").disabled = true;
+
+    function getDiffinMonths() {
+        
+        var b_date = new Date($('#id_child_dob').val());
+
+        if (!isNaN(b_date.getTime()) && document.getElementById("id_child_dob").value != ''){
+            console.log("Date valid");
+            var t_date = new Date();
+
+            var years_diff = t_date.getFullYear() - b_date.getFullYear();
+            var months_diff_raw = t_date.getMonth() - b_date.getMonth();
+            var months_diff = months_diff_raw >= 0 ? months_diff_raw : (years_diff >= 1? (months_diff_raw + 12): months_diff_raw);
+            var days_diff_raw = t_date.getDate() - b_date.getDate();
+            var days_diff = days_diff_raw >= 15 ? 1 : 0;
+
+            var diff_in_months = years_diff*12 + months_diff + days_diff;
+
+            if (diff_in_months > 0){
+
+                document.getElementById("id_age").value = diff_in_months;
+            }
+
+        }
+    };
+
+    document.getElementById("id_child_dob").onchange = function() {getDiffinMonths()};
+
+
+
 
 </script>
 {% endblock %}
