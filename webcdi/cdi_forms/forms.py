@@ -45,7 +45,7 @@ class BackgroundForm(BetterModelForm):
                      choices=YESNO_CHOICES, widget=forms.RadioSelect, coerce = string_bool_coerce
                 , required=False, label="Is your child Hispanic or Latino?")
     born_on_due_date = forms.TypedChoiceField(
-                     choices=YESNO_CHOICES, widget=forms.RadioSelect, label='Was your child born early or late from their due date?', coerce=string_bool_coerce)
+                     choices=YESNO_CHOICES, widget=forms.RadioSelect, label='Was your child born early or late (more than one week before or after the due date)?', coerce=string_bool_coerce)
     early_or_late = forms.ChoiceField(
                      choices=(('early', 'Early'),('late', 'Late')), widget=forms.RadioSelect,
                  required=False)
@@ -94,7 +94,7 @@ class BackgroundForm(BetterModelForm):
                      choices=language_choices, 
                      label = "Which language(s)", required = False
                 )
-    birth_order = forms.IntegerField(widget=forms.NumberInput(attrs={'min':'1'}))
+    birth_order = forms.IntegerField(label = "Birth order (enter number e.g., 1 for first)")
 
     def clean(self):
         cleaned_data = super(BackgroundForm, self).clean()
@@ -183,6 +183,6 @@ class BackgroundForm(BetterModelForm):
         'worried': Textarea(attrs={'cols': 80, 'rows': 3}), 
         'learning_disability': Textarea(attrs={'cols': 80, 'rows': 3}), 
         'birth_order': forms.NumberInput(attrs={'min':'1', 'max':'15'}),
-        'birth_weight': forms.NumberInput(attrs={'min':'1', 'max':'15'}),
-        'due_date_diff': forms.NumberInput(attrs={'min':'1'})
+        'birth_weight': forms.NumberInput(attrs={'min':'1', 'max':'15', 'placeholder': 'X.X'}),
+        'due_date_diff': forms.NumberInput(attrs={'min':'1', 'max':'18'})
         }

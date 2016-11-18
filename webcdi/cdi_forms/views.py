@@ -51,12 +51,16 @@ def background_info_form(request, hash_id):
 
             if background_form.is_valid():
                 background_instance = background_form.save(commit = False)
-                # child_dob = background_form.cleaned_data.get('child_dob')
+                child_dob = background_form.cleaned_data.get('child_dob')
                 # # #age = (datetime.date.today() - background_form.cleaned_data.get('child_dob'))
                 # # #age = age.year*12 + age.month + (age.day >= 15)
-                # age = (datetime.date.today().year - child_dob.year) * 12 +  (datetime.date.today().month - child_dob.month) + (child_dob.day >=15)
+                if child_dob:
+                    age = (datetime.date.today().year - child_dob.year) * 12 +  (datetime.date.today().month - child_dob.month) + (child_dob.day >=15)
+                else:
+                    age = None
                 # # #validity of age is checked in the modelform's clean method
-                # background_instance.age = age
+                if age:
+                    background_instance.age = age
                 #background_instance.age = background_form.cleaned_data.get('age')
                 background_instance.administration = administration_instance
                 background_instance.save()
