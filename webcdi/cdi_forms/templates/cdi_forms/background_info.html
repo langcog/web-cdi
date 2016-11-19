@@ -11,7 +11,8 @@
 {% if background_form %}
 <input type="hidden" name="background-info-form" value="background-info-form"/>
 <div class="row">
-    <h2>MacArthur-Bates Communicative Development Inventory</h2><br>
+    <h2>MacArthur-Bates Communicative Development Inventory</h2>
+    <h4><div id = "instrument_age" style = "text-decoration: underline;"></p></div><br>
     <h4>Instructions for completing the language inventory</h4>
     <ul>
         <li> Try to complete the inventory when you have at least 30 quiet minutes, without interruptions. An example might be when your child is sleeping. </li>
@@ -73,6 +74,8 @@
         history.pushState(null, null, document.URL);
     });
 
+    $
+
     document.getElementById("id_age").disabled = true;
 
     function getDiffinMonths() {
@@ -101,6 +104,27 @@
 
     document.getElementById("id_child_dob").onchange = function() {getDiffinMonths()};
     getDiffinMonths();
+
+    window.onload = function() {
+
+        var instrument_name = "{{ title }}";
+        var text;
+        var selected_ages = document.getElementById('hint_id_age');
+        var hint;
+
+
+        if ( instrument_name.indexOf("Sentences") || instrument_name.indexOf("WS")) {
+            text = "For 16- to 30-month-old children";
+            hint = "<br><font color = '#3C763D' style = 'text-decoration: underline;'>Your child should be between 16 to 30 months of age.</font>"
+        } else if ( instrument_name.indexOf("Gestures") || instrument_name.indexOf("WG")) {
+            text = "For 8- to 18-month-old children";
+            hint = "<br><font color = '#3C763D' style = 'text-decoration: underline;'>Your child should be between 8 to 18 months of age.</font>"
+        }
+        document.getElementById("instrument_age").innerHTML = text;
+
+
+        selected_ages.innerHTML = selected_ages.innerHTML + hint;
+    }
 
 
 
