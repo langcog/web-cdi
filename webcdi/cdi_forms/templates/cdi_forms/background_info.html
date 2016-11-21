@@ -104,8 +104,11 @@
 
     document.getElementById("id_child_dob").onchange = function() {getDiffinMonths()};
     getDiffinMonths();
+    var instrument_name = "{{ title }}";
 
-    window.onload = function() {
+    window.onload = function() { addWarnings() };
+
+    function addWarnings() {
 
         var instrument_name = "{{ title }}";
         var text;
@@ -113,10 +116,10 @@
         var hint;
 
 
-        if ( instrument_name.indexOf("Sentences") || instrument_name.indexOf("WS")) {
+       if ( instrument_name.indexOf("Words and Sentences") > -1 || instrument_name.indexOf("WS") > -1) {
             text = "For 16- to 30-month-old children";
             hint = "<br><font color = '#3C763D' style = 'text-decoration: underline;'>Your child should be between 16 to 30 months of age.</font>"
-        } else if ( instrument_name.indexOf("Gestures") || instrument_name.indexOf("WG")) {
+        } else if ( instrument_name.indexOf("Words and Gestures") > -1 || instrument_name.indexOf("WG") > -1 ) {
             text = "For 8- to 18-month-old children";
             hint = "<br><font color = '#3C763D' style = 'text-decoration: underline;'>Your child should be between 8 to 18 months of age.</font>"
         }
