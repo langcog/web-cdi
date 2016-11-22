@@ -95,7 +95,7 @@ class BackgroundInfo(models.Model):
     #parent_2_hours = models.IntegerField(verbose_name = "Parent 2")
     #other = models.CharField(max_length = 20,  blank = True, verbose_name = "Other caregiver (if any)", help_text = "e.g. nanny, family provider, grandmother")
     #other_hours = models.IntegerField( blank = True, verbose_name = "Hours spend with other caregivers")
-    caregiver_info = models.IntegerField(verbose_name = "Does your child live with:", choices =((2, "Two parents"), (1, "One parent"), (0, "Other caregivers (e.g., grandparent or grandparents)")))
+    caregiver_info = models.IntegerField(verbose_name = "Who does your child live with?", choices =((2, "Two parents"), (1, "One parent"), (3, "One parent plus other caregiver (e.g., grandparent)"), (0, "Other caregivers (e.g., grandparent or grandparents)")))
 
     #daycare_days_per_week = models.IntegerField( blank = True, verbose_name = "Number of days per week at daycare or preschool (if applicable)")
     #daycare_hours_per_day = models.IntegerField( blank = True, verbose_name = "Number of hours per day at daycare or preschool (if applicable)")
