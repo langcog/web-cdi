@@ -18,7 +18,9 @@ shinyUI(fluidPage(
     ),
 
   fluidRow( 
-    h2(textOutput("hardest_word"), align = "center")
+    h2(textOutput("hardest_word"), align = "center"),
+     br(),
+     h2(textOutput("completion_code"), align = "center")
     ),
   
   tags$head(

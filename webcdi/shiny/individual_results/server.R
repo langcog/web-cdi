@@ -142,12 +142,17 @@ shinyServer(function(input, output, session) {
       curveToPlot_comp <- instrument_curves %>% filter(quantile == closest_quantile_comp & measure == "comprehension")
       currentPoint_comp <- curveToPlot_comp %>% filter(age == child_age)
       
-      if (is.ggplot(growth)){
-        growth <- growth + geom_line(data = curveToPlot_comp, aes(x = age, y = predicted), colour = "#FF9667", size = 2)
-      } else{
-      growth <- ggplot(curveToPlot_comp, aes(x = age, y = predicted)) + geom_line(colour = "#FF9667", size = 2)
+      if (exists("growth")){
+        if (is.ggplot(growth)){
+          growth <- growth + geom_line(data = curveToPlot_comp, aes(x = age, y = predicted), colour = "#FF9667", size = 2)
+        } else {
+          growth <- ggplot(curveToPlot_comp, aes(x = age, y = predicted)) + geom_line(colour = "#FF9667", size = 2)} 
+        } else{
+        growth <- ggplot(curveToPlot_comp, aes(x = age, y = predicted)) + geom_line(colour = "#FF9667", size = 2)
         
       }
+
+
         growth <- growth +  geom_point(data = currentPoint_comp, aes(x = age, y = predicted), size = 6, colour = "#2dbc74")
         growth <- growth + geom_text_repel(data=currentPoint_comp, aes(age, predicted, label = "Current Understood\nVocabulary Size"), 
             nudge_x = 1, size = 5,  point.padding = unit(1, "lines")) 
@@ -233,5 +238,9 @@ shinyServer(function(input, output, session) {
     }
     paste(prod, under)
   })
+  output$completion_code <- renderText({
+     print("Survey completion code: QckBotPc")
+  })
+
 
 })
