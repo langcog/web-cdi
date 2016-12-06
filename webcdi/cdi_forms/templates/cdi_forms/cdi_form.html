@@ -139,6 +139,8 @@
     function clicked(e)
     {
         if(!confirm('Are you ready to submit? You cannot change your answers after submission.'))e.preventDefault();
-    }    
+    }
+
+    $(":input[id$='neither']").attr('checked',true);    
 </script>
 {% endblock %}
