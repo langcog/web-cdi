@@ -94,7 +94,7 @@ def cdi_items(object_group, item_type, prefilled_data, item_id):
             if obj['gloss'] is None:
                 obj['gloss'] = obj['definition']
 
-        if item_type == 'radiobutton':
+        if item_type == 'radiobutton' or item_type == 'modified_checkbox':
             split_choices = map(unicode.strip, obj['choices'].split(';'))
             prefilled_values = [False if obj['itemID'] not in prefilled_data else x == prefilled_data[obj['itemID']] for x in split_choices]
             obj['text'] = obj['gloss']

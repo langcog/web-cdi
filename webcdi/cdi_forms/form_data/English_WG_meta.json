@@ -22,7 +22,7 @@
                     "title": "Starting to talk"
                 },
                 {
-                    "text": "The following is a list of typical words in young children's vocabularies. For words your child UNDERSTANDS but does not yet say, place a mark in the first column (\"understands\"). For words that your child both understands and also SAYS, place a mark in the second column (\"understands and says\"). If your child uses a different pronunciation of a word (for example, \"raffe\" for \"giraffe\" or \"sketti\" for \"spagetti\") or knows a different word that has a similar meaning as the word listed here (e.g., \"nana\" for \"grandma\"), go ahead and mark it.  Remember, this is a \"catalogue\" of words that are used by many different children. Don't worry if your child knows only a few right now.",
+                    "text": "The following is a list of typical words in young children's vocabularies. For words your child UNDERSTANDS but does not yet say, place a mark in the first column (\"understands\"). For words that your child both understands and also SAYS, place a mark in the second column (\"understands AND says\"). You only need to mark one column. If your child uses a different pronunciation of a word (for example, \"raffe\" for \"giraffe\" or \"sketti\" for \"spagetti\") or knows a different word that has a similar meaning as the word listed here (e.g., \"nana\" for \"grandma\"), go ahead and mark it.  Remember, this is a \"catalogue\" of words that are used by many different children. Don't worry if your child knows only a few right now.",
                     "id": "word",
                     "title": "Vocabulary checklist",
                     "sections": [
@@ -104,7 +104,7 @@
                             "title": "19. Quantifiers And Articles"
                         }
                     ],
-                    "type": "radiobutton"
+                    "type": "modified_checkbox"
                 }
             ]
         },
