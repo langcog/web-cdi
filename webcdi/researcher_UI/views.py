@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from .forms import AddStudyForm, RenameStudyForm
+from .forms import AddStudyForm, RenameStudyForm, AddPairedStudyForm
 from .models import study, administration, administration_data, get_meta_header, get_background_header
 import json
 import re, random
@@ -177,6 +177,40 @@ def add_study(request):
     else:
         form = AddStudyForm()
         return render(request, 'researcher_UI/add_study_modal.html', {'form': form})
+
+@login_required 
+def add_paired_study(request):
+    data = {}
+    if request.method == 'POST' :
+        form = AddPairedStudyForm(request.POST)
+        if form.is_valid():
+            researcher = request.user
+            study_group = form.cleaned_data.get('study_group')
+            paired_studies = form.cleaned_data.get('paired_studies')
+            permissions = []
+            for one_study in paired_studies:
+                permitted = study.objects.filter(researcher = researcher,  name = one_study).exists()
+                permissions.append(permitted)
+                if permitted:
+                    study_obj = study.objects.get(researcher = researcher,  name = one_study)                    
+                    study_obj.study_group = study_group
+                    study_obj.save()
+
+            if all(True for permission in permissions):
+                data['stat'] = "ok";
+                data['redirect_url'] = "/interface/";
+                return HttpResponse(json.dumps(data), content_type="application/json")
+
+            else:
+                data['stat'] = "error";
+                data['error_message'] = "Study group already exists; Use a unique name";
+                return HttpResponse(json.dumps(data), content_type="application/json")
+        else:
+            data['stat'] = "re-render";
+            return render(request, 'researcher_UI/add_paired_study_modal.html', {'form': form})
+    else:
+        form = AddPairedStudyForm()
+        return render(request, 'researcher_UI/add_paired_study_modal.html', {'form': form})
 
 def random_url_generator(size=64, chars='0123456789abcdef'):
     return ''.join(random.choice(chars) for _ in range(size))
