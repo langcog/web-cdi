@@ -83,7 +83,7 @@
                     <p class="lead"> {{ type.text | capfirst }}</p>
                     <div class="row alternate-color">
                         {% for object in type.objects %}
-                            {% if type.type == "radiobutton" %}
+                            {% if type.type == "radiobutton" or type.type == "modified_checkbox" %}
                                 {% if object.text != '' %}
                                 <div class="col-md-12 alco-child">
                                     <div class="row alco-child1" >{{ object.text | capfirst }} <!-- </div>
@@ -91,8 +91,8 @@
                                         <div class="pull-right">
                                             {% for choice in object.choices %}
                                             &ensp;
-                                            <input type="radio" id="{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
-                                            <label for="{{ choice.0 }}"> {{ choice.0 }}</label>
+                                            <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
+                                            <label for="{{ object.itemID }}_{{ choice.0 }}"> {{ choice.0 }}</label>
                                             {% endfor %}
                                         </div>
                                     </div>
@@ -102,12 +102,12 @@
                                     {% for choice in object.choices %}
                                     <div class="row">
                                         &ensp;
-                                        <input type="radio" id="{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}"{% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
-                                        <label for="{{ choice.0 }}"> {{ choice.0 }}</label>
+                                        <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}"{% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
+                                        <label for="{{ object.itemID }}_{{ choice.0 }}"> {{ choice.0 }}</label>
                                     </div>
                                     {% endfor %}
                                 </div>
-                                {% endif %}
+                                {% endif %}                            
                             {% elif type.type == "checkbox" %}
                                 <div class="col-md-4 alco-child"> <input type="checkbox" id="{{ object.itemID }}" name="{{ object.itemID }}" value="{{ object.choices }}"{% if completed %} disabled {% endif %} {% if object.prefilled_value %} checked {% endif %}> <label for="{{ object.itemID }}"> {{ object.gloss }}</label></div>
                             {% elif type.type == "textbox" %}
@@ -120,7 +120,7 @@
                         <h4 id ="{{ section.id }}" >{{ section.title }}</h4>
                         <div class="row ">
                             {%for object in section.objects %}
-                                {% if type.type == "radiobutton" %}
+                                {% if type.type == "radiobutton" or type.type == "modified_checkbox" %}
                                     {% if object.text != '' %}
                                     <div class="col-md-12 alco-child">
                                         <div class="row alco-child1">{{ object.text | capfirst }} <!-- </div>
@@ -128,8 +128,8 @@
                                             <div class="pull-right">
                                                 {% for choice in object.choices %}
                                                 &ensp;
-                                                <input type="radio" id="{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
-                                                <label for="{{ choice.0 }}"> {{ choice.0 }}</label>
+                                                <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
+                                                <label for="{{ object.itemID }}_{{ choice.0 }}"> {{ choice.0 }}</label>
                                                 {% endfor %}
                                             </div>
 
@@ -140,12 +140,12 @@
                                         {% for choice in object.choices %}
                                         <div class="row">
                                             &ensp;
-                                            <input type="radio" id="{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}"{% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
+                                            <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}"{% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
                                             <label for="{{ choice.0 }}"> {{ choice.0 }}</label>
                                         </div>
                                         {% endfor %}
                                     </div>
-                                    {% endif %}
+                                    {% endif %}                            
                                 {% elif type.type == "checkbox" %}
                                     <div class="col-md-4 alco-child"> <input type="checkbox" id="{{ object.itemID }}" name="{{ object.itemID }}" value="{{ object.choices }}"{% if completed %} disabled {% endif %} {% if object.prefilled_value %} checked {% endif %}> <label for="{{ object.itemID }}"> {{ object.gloss }}</label></div>
                                 {% elif type.type == "textbox" %}
@@ -181,6 +181,12 @@
         $('#filled_form').on('shown.bs.collapse', function () {
             $('#graph_data').collapse('hide')        
         })
+
+        $( "input[id$='produces']" ).each( function (){ 
+            var box_name = $(this).attr("id");
+            var label_var = "label[for='".concat(box_name,"']")
+            $(label_var).text("understands and says");
+        });        
 </script>
 </body>
 </html>

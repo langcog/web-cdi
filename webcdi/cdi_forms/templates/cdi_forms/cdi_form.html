@@ -157,5 +157,11 @@
         $box.prop("checked", false);
       }
     });   
+
+    $( "input[id$='produces']" ).each( function (){ 
+        var box_name = $(this).attr("id");
+        var label_var = "label[for='".concat(box_name,"']")
+        $(label_var).text("understands and says");
+    });
 </script>
 {% endblock %}
