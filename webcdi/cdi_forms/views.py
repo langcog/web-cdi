@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .models import English_WS, English_WG, BackgroundInfo, requests_log
 import os.path
 import json
-from researcher_UI.models import administration_data, administration
+from researcher_UI.models import administration_data, administration, study
 from django.http import Http404
 import datetime
 from .forms import BackgroundForm
@@ -85,6 +85,19 @@ def background_info_form(request, hash_id):
     data['completed'] = administration_instance.completed
     data['due_date'] = administration_instance.due_date
     data['title'] = administration_instance.study.instrument.verbose_name
+    data['max_age'] = administration_instance.study.instrument.max_age
+    data['min_age'] = administration_instance.study.instrument.min_age
+    study_group = administration_instance.study.study_group
+    study_name = administration_instance.study.name
+    alt_studies = study.objects.filter(study_group = study_group).exclude(name = study_name)
+    data['alt_study'] = []
+    data['alt_study_min'] = []
+    data['alt_study_max'] = []
+    for this_study in alt_studies:
+        data['alt_study'].append(this_study.name)
+        data['alt_study_min'].append(this_study.instrument.min_age)
+        data['alt_study_max'].append(this_study.instrument.max_age)
+
     return render(request, 'cdi_forms/background_info.html', data)
 
 def cdi_items(object_group, item_type, prefilled_data, item_id):

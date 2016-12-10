@@ -27,7 +27,6 @@
 <div class="row">
     {% load crispy_forms_tags %}
     {% crispy background_form %}
-
 </div>
 
 <div class="row text-center">
@@ -111,18 +110,17 @@
     function addWarnings() {
 
         var instrument_name = "{{ title }}";
-        var text;
+        var text = "For ".concat("{{ min_age }}","- to ", "{{ max_age }}", "-month-old children")
         var selected_ages = document.getElementById('hint_id_age');
-        var hint;
+        var hint = "<br><font color = '#3C763D' style = 'text-decoration: underline;'>Your child should be between ".concat("{{ min_age }}"," to ", "{{ max_age }}", " months of age.</font>")
 
-
-       if ( instrument_name.indexOf("Words and Sentences") > -1 || instrument_name.indexOf("WS") > -1) {
+/*       if ( instrument_name.indexOf("Words and Sentences") > -1 || instrument_name.indexOf("WS") > -1) {
             text = "For 16- to 30-month-old children";
             hint = "<br><font color = '#3C763D' style = 'text-decoration: underline;'>Your child should be between 16 to 30 months of age.</font>"
         } else if ( instrument_name.indexOf("Words and Gestures") > -1 || instrument_name.indexOf("WG") > -1 ) {
             text = "For 8- to 18-month-old children";
             hint = "<br><font color = '#3C763D' style = 'text-decoration: underline;'>Your child should be between 8 to 18 months of age.</font>"
-        }
+        }*/
         document.getElementById("instrument_age").innerHTML = text;
 
 
