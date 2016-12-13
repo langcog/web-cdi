@@ -5,18 +5,18 @@ from django.contrib.auth.models import User
 class instrument(models.Model):
     name = models.CharField(max_length = 51, primary_key=True)
     verbose_name = models.CharField(max_length = 51, blank = True)
-    language = models.CharField(max_length = 51, blank = True)
-    # language = models.CharField(max_length = 51)
-    form = models.CharField(max_length = 51, blank = True)    
-    # form = models.CharField(max_length = 51)
-    min_age = models.IntegerField(verbose_name = "Minimum age", null = True)
-    # min_age = models.IntegerField(verbose_name = "Minimum age")
-    max_age = models.IntegerField(verbose_name = "Maximum age", null = True)
-    # max_age = models.IntegerField(verbose_name = "Maximum age")
+    # language = models.CharField(max_length = 51, blank = True)
+    language = models.CharField(max_length = 51)
+    # form = models.CharField(max_length = 51, blank = True)    
+    form = models.CharField(max_length = 51)
+    # min_age = models.IntegerField(verbose_name = "Minimum age", null = True)
+    min_age = models.IntegerField(verbose_name = "Minimum age")
+    # max_age = models.IntegerField(verbose_name = "Maximum age", null = True)
+    max_age = models.IntegerField(verbose_name = "Maximum age")
     def __str__(self):
         return self.verbose_name
-    # class Meta:
-    #      unique_together = ('language', 'form')
+    class Meta:
+         unique_together = ('language', 'form')
     
 class study(models.Model):
     researcher = models.ForeignKey("auth.user")
