@@ -1,0 +1,136 @@
+{% extends 'cdi_forms/cdi_base.html' %}
+
+{% block nav_buttons %}
+{% if not completed %}
+<input name="btn-save" value="Save" class="btn btn-primary" type="button">
+<input name="btn-next" value="Next" class="btn btn-primary" type="submit">
+{% endif %}
+{% endblock %}
+
+{% block main %}
+{% if background_form %}
+<input type="hidden" name="background-info-form" value="background-info-form"/>
+<div class="row">
+    <h2>MacArthur-Bates Communicative Development Inventory</h2>
+    <h4><div id = "instrument_age" style = "text-decoration: underline;"></p></div><br>
+    <h4>Instructions for completing the language inventory</h4>
+    <ul>
+        <li> Try to complete the inventory when you have at least 30 quiet minutes, without interruptions. An example might be when your child is sleeping. </li>
+        <li> You do not have to complete the inventory in one sitting. If you are interrupted, it is ok to put it down and come back to it when you have more time. </li>
+        <li> Feel free to ask others (e.g. other family members, nanny, child care providers) to help you fill out this form. </li>
+        <li> Please read all of the instructions on the inventory carefully, and make sure you complete all of the sections. </li>
+    </ul>
+    <p>For more information about the MB-CDI, <a href="http://mb-cdi.stanford.edu/">click here</a>.</p>
+    <p>Thank you! We appreciate your time and effort!</p>
+</div>
+<br>
+<div class="row">
+    {% load crispy_forms_tags %}
+    {% crispy background_form %}
+</div>
+
+<div id="possible_studies" class="modal fade" role="dialog">
+
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h2 class="modal-title" >How old is your child?</h2>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="inner"></div>
+
+                <script type="text/javascript">
+/*                 for( var i = 0, len = raw_data.length; i < len; i++ ) {
+                        console.log( raw_data[ i ].name );
+                    }*/
+
+                 var raw_data = JSON.parse('{{possible_studies}}'.replace(/&quot;/g,'"'));
+
+                function compare(a,b) {
+                  if (a.instrument__min_age < b.instrument__min_age)
+                    return -1;
+                  if (a.instrument__min_age > b.instrument__min_age)
+                    return 1;
+                  return 0;
+                }
+
+                data = raw_data.sort(compare);                 
+
+                 console.log(data);
+                 console.log('{{possible_studies}}');
+
+                 $.each(data, function(index, value){
+                    var raw_text = "My baby speaks " + value.instrument__language + " and is between " + value.instrument__min_age + " and " + value.instrument__max_age + " months old.";
+                    var hyperlink = "/interface/study/" + value.name + "/new_parent";
+
+                    var dob_min = moment().subtract(value.instrument__max_age, 'months').format("MMMM Do, YYYY");
+                    var dob_max = moment().subtract(value.instrument__min_age, 'months').format("MMMM Do, YYYY");
+
+                    var hint = "Born between " + dob_min + " and " + dob_max;
+                    console.log(hint)
+
+                    var text = "<h3><a href = '" + hyperlink + "'>" + raw_text + "</a> </h3> <ul><li>" + hint + "</li></ul> <br>";                    
+
+                    $( ".inner" ).append( text);
+                    console.log(text);
+
+                 })
+
+                 
+                </script>
+            </div>
+
+        
+        </div>
+    </div>
+</div>
+
+{% else %}
+<p>Form unavailable. Contact admin. </p>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+
+    $('.enabler[value="True"]').each(function(index, e){
+        if(e.checked){
+            $(e).closest('.form-group').next('.dependent').css('display','block');
+        }
+        $(e).change(function(){
+            $(e).closest('.form-group').next('.dependent').css('display','block');
+        });
+    });
+    $('.enabler[value="False"]').each(function(index, e){
+        if(e.checked){
+            $(e).closest('.form-group').next('.dependent').css('display','none');
+        }
+        $(e).change(function(){
+            $(e).closest('.form-group').next('.dependent').css('display','none');
+        });
+    });
+    var $select = $('.make-selectize').selectize({
+        maxItems :null,
+    });
+
+    history.pushState(null, null, document.URL);
+    window.addEventListener('popstate', function () {
+        history.pushState(null, null, document.URL);
+    });
+
+    $
+
+
+    window.onload = function() { 
+        $('#possible_studies').modal({backdrop: 'static', keyboard: false})  
+        $('#possible_studies').modal('show');
+    };
+
+
+
+
+</script>
+{% endblock %}

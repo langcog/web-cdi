@@ -8,6 +8,8 @@ import datetime
 from .forms import BackgroundForm
 from django.utils import timezone
 from django.http import JsonResponse
+from django.core.serializers.json import DjangoJSONEncoder
+
 
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
@@ -89,14 +91,7 @@ def background_info_form(request, hash_id):
     data['min_age'] = administration_instance.study.instrument.min_age
     study_group = administration_instance.study.study_group
     study_name = administration_instance.study.name
-    alt_studies = study.objects.filter(study_group = study_group).exclude(name = study_name)
-    data['alt_study'] = []
-    data['alt_study_min'] = []
-    data['alt_study_max'] = []
-    for this_study in alt_studies:
-        data['alt_study'].append(this_study.name)
-        data['alt_study_min'].append(this_study.instrument.min_age)
-        data['alt_study_max'].append(this_study.instrument.max_age)
+    data['alt_study_info'] = study.objects.filter(study_group = study_group).exclude(name = study_name).values_list("name","instrument__min_age", "instrument__max_age")
 
     return render(request, 'cdi_forms/background_info.html', data)
 
@@ -262,3 +257,10 @@ def administer_cdi_form(request, hash_id):
         else:
             # only printable
             return printable_view(request, hash_id)
+
+def find_paired_studies(request, study_group):
+    possible_studies = study.objects.filter(study_group = study_group).values("name","instrument__min_age", "instrument__max_age", "instrument__language")
+    data = {}
+    data['background_form'] = BackgroundForm()
+    data['possible_studies'] = json.dumps(list(possible_studies), cls=DjangoJSONEncoder)
+    return render(request, 'cdi_forms/study_group.html', data)
