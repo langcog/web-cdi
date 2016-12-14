@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    {% load staticfiles %}
+
+    <title>Words and Sentences CDI</title>
+    <meta name="description" content="English Words and Sentences CDI form">
+    <meta name="author" content="Ashwin Paranjape">
+
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="{% static 'cdi_forms/selectize.js' %}"></script>
+    <script src="{% static 'cdi_forms/bootstrap-datepicker.js' %}"></script>
+    <link rel='stylesheet' href="{% static 'cdi_forms/selectize.bootstrap3.css' %}">
+    <link rel='stylesheet' href="{% static 'cdi_forms/datepicker.css' %}">
+    <link rel="stylesheet" href="http://getbootstrap.com/assets/css/docs.min.css" />
+    <link rel='stylesheet' href="{% static 'cdi_forms/base.css' %}">
+
+        <!--.alternate-color :nth-child(odd){
+              background-color:#ddd;
+        }
+        .alternate-color :nth-child(even){
+              background-color:#fff;
+        }-->
+
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+
+<style>
+    .axis {
+    font: 20px sans-serif;
+  }
+
+  .axis path,
+  .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+  }
+
+</style>
+<body>
+<!--           {% debug %}
+ -->
+
+<script src="http://d3js.org/d3.v3.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-queue/3.0.3/d3-queue.min.js"></script>
+<script>
+
+
+  var raw_data = '{{ objects |escapejs }}';
+  var root = JSON.parse(raw_data);
+  root.age = '{{ age }}';
+  root.completed = '{{ completed }}';
+  root.hash_id = '{{ hash_id }}';
+  root.instrument_name = '{{ instrument_name }}';
+
+  var words = root.filter(function(d) { return d.item_type == "word"; });
+
+  $.each(words, function(index, value){
+    value.num_value = 'neither';
+    if (root.instrument_name.indexOf('WS') > -1) {
+      if (value.prefilled_value) {
+          value.num_value = 'produces';
+        }
+    } else if (root.instrument_name.indexOf('WG') > -1) {
+      if (value.choices[0][2]) {
+        value.num_value = 'understands';
+      } else if (value.choices[1][2]) {
+        value.num_value = 'produces';
+      }
+    }
+
+  });
+
+  var words_understood = words.filter(function(d) { return d.num_value == 'produces' | d.num_value == 'understands' ; }).length;
+  var words_produced = words.filter(function(d) { return (d.num_value == 'produces'); }).length;
+
+  var categorySize = d3.nest()
+    .key(function(d) { return d.category; })
+    .key(function(d) { return d.num_value; })
+    .rollup(function(v) { return v.length; })
+    .map(words);
+
+  var word_categories;
+  
+  d3.csv("{% static 'graph_data/word_categories.csv' %}", function(data) {
+    word_categories = data;
+  });
+
+
+  //  $.each(categorySize, function(index, value){
+  //   value.num_understood = 0
+  //   value.num_produced = 0
+  //   value.num_neither = 0
+
+  //   if(typeof categorySize[index].values["neither"] !== 'undefined') {
+  //       value.num_neither = categorySize[index].values["0"].values
+  //   }
+  //   if(typeof categorySize[index].values["understands"] !== 'undefined') {
+  //       value.num_understood = categorySize[index].values["1"].values
+  //   }
+  //   if(typeof categorySize[index].values["neither"] !== 'undefined') {
+  //       value.num_produced = categorySize[index].values["2"].values
+  //   }
+
+  //   value.num_all = value.num_understood + value.num_produced + value.num_neither
+  //   value.prop_understood = 100*(value.num_understood + value.num_produced)/(value.num_all)
+  //   value.prop_produced = 100*(value.num_produced)/(value.num_all)
+  //  });
+  //  var colors = d3.scale.category20()
+  // console.log(categorySize);
+
+  // (function () {
+  //     var margin = {top: 20, right: 20, bottom: 150, left: 100},
+  //       width = 600 - margin.left - margin.right,
+  //       height = 300 - margin.top - margin.bottom;
+    
+  //     var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
+    
+  //     var y = d3.scale.linear().range([height, 0]);
+    
+  //     var xAxis = d3.svg.axis()
+  //         .scale(x)
+  //         .orient("bottom")
+    
+  //     var yAxis = d3.svg.axis()
+  //       .scale(y)
+  //       .orient("left")
+  //       .ticks(4);
+    
+  //     var chart_understood = d3.select("body").append("svg")
+  //       .attr("width", width + margin.left + margin.right)
+  //       .attr("height", height + margin.top + margin.bottom)
+  //     .append("g")
+  //       .attr("transform", 
+  //             "translate(" + margin.left + "," + margin.top + ")");
+    
+  //      x.domain(categorySize.map(function(d) { return d.key; }));
+  //      y.domain([0, d3.max(categorySize, function(d) { return d.prop_understood; })]);
+    
+  //     chart_understood.append("g")
+  //         .attr("class", "x axis")
+  //         .attr("transform", "translate(0," + height + ")")
+  //         .call(xAxis)
+  //       .selectAll("text")
+  //         .style("text-anchor", "end")
+  //         .attr("dx", "-.8em")
+  //         .attr("dy", "-.55em")
+  //         .attr("transform", "rotate(-45)" );
+    
+  //     chart_understood.append("g")
+  //         .attr("class", "y axis")
+  //         .call(yAxis)
+  //       .append("text")
+  //         .attr("transform", "rotate(-90)")
+  //         .attr("y", 6)
+  //         .attr("dy", ".71em")
+  //         .style("text-anchor", "end");
+    
+  //     chart_understood.selectAll("bar")
+  //         .data(categorySize)
+  //       .enter().append("rect")
+  //         .attr("fill",function(d,i){return colors(i)})
+  //         .attr("x", function(d) { return x(d.key); })
+  //         .attr("width", x.rangeBand())
+  //         .attr("y", function(d) { return y(d.prop_understood); })
+  //         .attr("height", function(d) { return height - y(d.prop_understood); });
+  //   }
+  // )();
+
+  //   (function () {
+  //     var margin = {top: 20, right: 20, bottom: 150, left: 100},
+  //       width = 600 - margin.left - margin.right,
+  //       height = 300 - margin.top - margin.bottom;
+    
+  //     var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
+    
+  //     var y = d3.scale.linear().range([height, 0]);
+    
+  //     var xAxis = d3.svg.axis()
+  //         .scale(x)
+  //         .orient("bottom")
+    
+  //     var yAxis = d3.svg.axis()
+  //       .scale(y)
+  //       .orient("left")
+  //       .ticks(4);
+    
+  //     var chart_produced = d3.select("body").append("svg")
+  //       .attr("width", width + margin.left + margin.right)
+  //       .attr("height", height + margin.top + margin.bottom)
+  //     .append("g")
+  //       .attr("transform", 
+  //             "translate(" + margin.left + "," + margin.top + ")");
+    
+  //      x.domain(categorySize.map(function(d) { return d.key; }));
+  //      y.domain([0, d3.max(categorySize, function(d) { return d.prop_produced; })]);
+    
+  //     chart_produced.append("g")
+  //         .attr("class", "x axis")
+  //         .attr("transform", "translate(0," + height + ")")
+  //         .call(xAxis)
+  //       .selectAll("text")
+  //         .style("text-anchor", "end")
+  //         .attr("dx", "-.8em")
+  //         .attr("dy", "-.55em")
+  //         .attr("transform", "rotate(-45)" );
+    
+  //     chart_produced.append("g")
+  //         .attr("class", "y axis")
+  //         .call(yAxis)
+  //       .append("text")
+  //         .attr("transform", "rotate(-90)")
+  //         .attr("y", 6)
+  //         .attr("dy", ".71em")
+  //         .style("text-anchor", "end");
+    
+  //     chart_produced.selectAll("bar")
+  //         .data(categorySize)
+  //       .enter().append("rect")
+  //         .attr("fill",function(d,i){return colors(i)})
+  //         .attr("x", function(d) { return x(d.key); })
+  //         .attr("width", x.rangeBand())
+  //         .attr("y", function(d) { return y(d.prop_produced); })
+  //         .attr("height", function(d) { return height - y(d.prop_produced); });
+  //   }
+  // )();
+
+</script>
+</body>
+</html>
