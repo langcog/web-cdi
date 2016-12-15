@@ -34,7 +34,7 @@
 
 <style>
     .axis {
-    font: 20px sans-serif;
+    font: 15px sans-serif;
   }
 
   .axis path,
@@ -78,7 +78,7 @@
     }
 
   });
-
+  var raw_words_understood = words.filter(function(d) { return d.num_value == 'understands' ; }).length;
   var words_understood = words.filter(function(d) { return d.num_value == 'produces' | d.num_value == 'understands' ; }).length;
   var words_produced = words.filter(function(d) { return (d.num_value == 'produces'); }).length;
 
@@ -86,152 +86,189 @@
     .key(function(d) { return d.category; })
     .key(function(d) { return d.num_value; })
     .rollup(function(v) { return v.length; })
-    .map(words);
+    .entries(words);
 
   var word_categories;
-  
+
+
   d3.csv("{% static 'graph_data/word_categories.csv' %}", function(data) {
     word_categories = data;
+    var list_names = objectMap(categorySize,'key')
+    updateCategoryInfo();
+
+    $.each(word_categories, function(index){
+      var category_id = word_categories[index].id;
+      var name_location = list_names.indexOf(category_id)
+      if (name_location > -1 ) {
+        categorySize[name_location].category_name = word_categories[index].category;
+      }
+    });
+
+    console.log(categorySize);
+
+    if (raw_words_understood > 0) {
+        plotPropUnderstood();
+    }
+
+    if (words_produced > 0) {
+        plotPropProduced();
+      }
+
   });
 
+  function objectMap (obj, variable) {
+    var values = []
+    i = 0;
+      $.each(categorySize, function(index){ 
+        values[i] = obj[index][variable]
+        i = i + 1;
+      });
+      return values;
+  }
 
-  //  $.each(categorySize, function(index, value){
-  //   value.num_understood = 0
-  //   value.num_produced = 0
-  //   value.num_neither = 0
+  function updateCategoryInfo() {
+       $.each(categorySize, function(index, value){
+        value.neither = 0;
+        value.understands = 0;
+        value.produces = 0;
+  
+        for (var i = 0; i < categorySize[index].values.length; i++) {
+          var current_val = categorySize[index].values[i]
+        if(current_val.key == 'neither') {
+            value.neither = current_val.values;
+        }
+        if(typeof current_val.key == 'understands') {
+            value.understands = current_val.values;
+        }
+        if(typeof current_val.produces !== 'produces') {
+            value.produces = current_val.values;
+        }
+  
+        }
+  
+  
+        value.num_all = value.neither + value.understands + value.produces
+        value.prop_understood = 100*(value.understands + value.produces)/(value.num_all)
+        value.prop_produced = 100*(value.produces)/(value.num_all)
+       });
+     }
 
-  //   if(typeof categorySize[index].values["neither"] !== 'undefined') {
-  //       value.num_neither = categorySize[index].values["0"].values
-  //   }
-  //   if(typeof categorySize[index].values["understands"] !== 'undefined') {
-  //       value.num_understood = categorySize[index].values["1"].values
-  //   }
-  //   if(typeof categorySize[index].values["neither"] !== 'undefined') {
-  //       value.num_produced = categorySize[index].values["2"].values
-  //   }
+  var colors = d3.scale.category20();
 
-  //   value.num_all = value.num_understood + value.num_produced + value.num_neither
-  //   value.prop_understood = 100*(value.num_understood + value.num_produced)/(value.num_all)
-  //   value.prop_produced = 100*(value.num_produced)/(value.num_all)
-  //  });
-  //  var colors = d3.scale.category20()
-  // console.log(categorySize);
 
-  // (function () {
-  //     var margin = {top: 20, right: 20, bottom: 150, left: 100},
-  //       width = 600 - margin.left - margin.right,
-  //       height = 300 - margin.top - margin.bottom;
+    function plotPropUnderstood() {
+      var margin = {top: 20, right: 20, bottom: 150, left: 100},
+        width = 600 - margin.left - margin.right,
+        height = 300 - margin.top - margin.bottom;
     
-  //     var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
+      var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
     
-  //     var y = d3.scale.linear().range([height, 0]);
+      var y = d3.scale.linear().range([height, 0]);
     
-  //     var xAxis = d3.svg.axis()
-  //         .scale(x)
-  //         .orient("bottom")
+      var xAxis = d3.svg.axis()
+          .scale(x)
+          .orient("bottom")
     
-  //     var yAxis = d3.svg.axis()
-  //       .scale(y)
-  //       .orient("left")
-  //       .ticks(4);
+      var yAxis = d3.svg.axis()
+        .scale(y)
+        .orient("left")
+        .ticks(4);
     
-  //     var chart_understood = d3.select("body").append("svg")
-  //       .attr("width", width + margin.left + margin.right)
-  //       .attr("height", height + margin.top + margin.bottom)
-  //     .append("g")
-  //       .attr("transform", 
-  //             "translate(" + margin.left + "," + margin.top + ")");
+      var chart_understood = d3.select("body").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+        .attr("transform", 
+              "translate(" + margin.left + "," + margin.top + ")");
     
-  //      x.domain(categorySize.map(function(d) { return d.key; }));
-  //      y.domain([0, d3.max(categorySize, function(d) { return d.prop_understood; })]);
+       x.domain(categorySize.map(function(d) { return d.category_name; }));
+       y.domain([0, d3.max(categorySize, function(d) { return d.prop_understood; })]);
     
-  //     chart_understood.append("g")
-  //         .attr("class", "x axis")
-  //         .attr("transform", "translate(0," + height + ")")
-  //         .call(xAxis)
-  //       .selectAll("text")
-  //         .style("text-anchor", "end")
-  //         .attr("dx", "-.8em")
-  //         .attr("dy", "-.55em")
-  //         .attr("transform", "rotate(-45)" );
+      chart_understood.append("g")
+          .attr("class", "x axis")
+          .attr("transform", "translate(0," + height + ")")
+          .call(xAxis)
+        .selectAll("text")
+          .style("text-anchor", "end")
+          .attr("dx", "-.8em")
+          .attr("dy", "-.55em")
+          .attr("transform", "rotate(-90)" );
     
-  //     chart_understood.append("g")
-  //         .attr("class", "y axis")
-  //         .call(yAxis)
-  //       .append("text")
-  //         .attr("transform", "rotate(-90)")
-  //         .attr("y", 6)
-  //         .attr("dy", ".71em")
-  //         .style("text-anchor", "end");
+      chart_understood.append("g")
+          .attr("class", "y axis")
+          .call(yAxis)
+        .append("text")
+          .attr("transform", "rotate(-90)")
+          .attr("y", 6)
+          .attr("dy", ".71em")
+          .style("text-anchor", "end");
     
-  //     chart_understood.selectAll("bar")
-  //         .data(categorySize)
-  //       .enter().append("rect")
-  //         .attr("fill",function(d,i){return colors(i)})
-  //         .attr("x", function(d) { return x(d.key); })
-  //         .attr("width", x.rangeBand())
-  //         .attr("y", function(d) { return y(d.prop_understood); })
-  //         .attr("height", function(d) { return height - y(d.prop_understood); });
-  //   }
-  // )();
+      chart_understood.selectAll("bar")
+          .data(categorySize)
+        .enter().append("rect")
+          .attr("fill",function(d,i){return colors(i)})
+          .attr("x", function(d) { return x(d.category_name); })
+          .attr("width", x.rangeBand())
+          .attr("y", function(d) { return y(d.prop_understood); })
+          .attr("height", function(d) { return height - y(d.prop_understood); });
+    }
 
-  //   (function () {
-  //     var margin = {top: 20, right: 20, bottom: 150, left: 100},
-  //       width = 600 - margin.left - margin.right,
-  //       height = 300 - margin.top - margin.bottom;
+    function plotPropProduced() {
+      var margin = {top: 20, right: 20, bottom: 150, left: 100},
+        width = 600 - margin.left - margin.right,
+        height = 300 - margin.top - margin.bottom;
     
-  //     var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
+      var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
     
-  //     var y = d3.scale.linear().range([height, 0]);
+      var y = d3.scale.linear().range([height, 0]);
     
-  //     var xAxis = d3.svg.axis()
-  //         .scale(x)
-  //         .orient("bottom")
+      var xAxis = d3.svg.axis()
+          .scale(x)
+          .orient("bottom")
     
-  //     var yAxis = d3.svg.axis()
-  //       .scale(y)
-  //       .orient("left")
-  //       .ticks(4);
+      var yAxis = d3.svg.axis()
+        .scale(y)
+        .orient("left")
+        .ticks(4);
     
-  //     var chart_produced = d3.select("body").append("svg")
-  //       .attr("width", width + margin.left + margin.right)
-  //       .attr("height", height + margin.top + margin.bottom)
-  //     .append("g")
-  //       .attr("transform", 
-  //             "translate(" + margin.left + "," + margin.top + ")");
+      var chart_produced = d3.select("body").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+        .attr("transform", 
+              "translate(" + margin.left + "," + margin.top + ")");
     
-  //      x.domain(categorySize.map(function(d) { return d.key; }));
-  //      y.domain([0, d3.max(categorySize, function(d) { return d.prop_produced; })]);
+       x.domain(categorySize.map(function(d) { return d.category_name; }));
+       y.domain([0, d3.max(categorySize, function(d) { return d.prop_produced; })]);
     
-  //     chart_produced.append("g")
-  //         .attr("class", "x axis")
-  //         .attr("transform", "translate(0," + height + ")")
-  //         .call(xAxis)
-  //       .selectAll("text")
-  //         .style("text-anchor", "end")
-  //         .attr("dx", "-.8em")
-  //         .attr("dy", "-.55em")
-  //         .attr("transform", "rotate(-45)" );
+      chart_produced.append("g")
+          .attr("class", "x axis")
+          .attr("transform", "translate(0," + height + ")")
+          .call(xAxis)
+        .selectAll("text")
+          .style("text-anchor", "end")
+          .attr("dx", "-.8em")
+          .attr("dy", "-.55em")
+          .attr("transform", "rotate(-90)" );
     
-  //     chart_produced.append("g")
-  //         .attr("class", "y axis")
-  //         .call(yAxis)
-  //       .append("text")
-  //         .attr("transform", "rotate(-90)")
-  //         .attr("y", 6)
-  //         .attr("dy", ".71em")
-  //         .style("text-anchor", "end");
+      chart_produced.append("g")
+          .attr("class", "y axis")
+          .call(yAxis)
+        .append("text")
+          .attr("transform", "rotate(-90)")
+          .attr("y", 6)
+          .attr("dy", ".71em")
+          .style("text-anchor", "end");
     
-  //     chart_produced.selectAll("bar")
-  //         .data(categorySize)
-  //       .enter().append("rect")
-  //         .attr("fill",function(d,i){return colors(i)})
-  //         .attr("x", function(d) { return x(d.key); })
-  //         .attr("width", x.rangeBand())
-  //         .attr("y", function(d) { return y(d.prop_produced); })
-  //         .attr("height", function(d) { return height - y(d.prop_produced); });
-  //   }
-  // )();
+      chart_produced.selectAll("bar")
+          .data(categorySize)
+        .enter().append("rect")
+          .attr("fill",function(d,i){return colors(i)})
+          .attr("x", function(d) { return x(d.category_name); })
+          .attr("width", x.rangeBand())
+          .attr("y", function(d) { return y(d.prop_produced); })
+          .attr("height", function(d) { return height - y(d.prop_produced); });
+    };
 
 </script>
 </body>
