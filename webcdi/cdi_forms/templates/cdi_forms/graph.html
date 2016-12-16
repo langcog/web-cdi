@@ -34,7 +34,7 @@
 
 <style>
     .axis {
-    font: 15px sans-serif;
+    font: 13px sans-serif;
   }
 
   .axis path,
@@ -44,10 +44,17 @@
     shape-rendering: crispEdges;
   }
 
+
+
 </style>
 <body>
 <!--           {% debug %}
  -->
+
+<div id="num_words_text"></div>
+<div id="hardest_words"></div>
+<div id="best_categories"></div>
+
 
 <script src="http://d3js.org/d3.v3.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-queue/3.0.3/d3-queue.min.js"></script>
@@ -56,7 +63,7 @@
 
   var raw_data = '{{ objects |escapejs }}';
   var root = JSON.parse(raw_data);
-  root.age = '{{ age }}';
+  root.age = JSON.parse('{{ age }}')[0];
   root.completed = '{{ completed }}';
   root.hash_id = '{{ hash_id }}';
   root.instrument_name = '{{ instrument_name }}';
@@ -67,8 +74,8 @@
     value.num_value = 'neither';
     if (root.instrument_name.indexOf('WS') > -1) {
       if (value.prefilled_value) {
-          value.num_value = 'produces';
-        }
+        value.num_value = 'produces';
+      }
     } else if (root.instrument_name.indexOf('WG') > -1) {
       if (value.choices[0][2]) {
         value.num_value = 'understands';
@@ -78,15 +85,33 @@
     }
 
   });
+
   var raw_words_understood = words.filter(function(d) { return d.num_value == 'understands' ; }).length;
   var words_understood = words.filter(function(d) { return d.num_value == 'produces' | d.num_value == 'understands' ; }).length;
   var words_produced = words.filter(function(d) { return (d.num_value == 'produces'); }).length;
 
+
+  if (words_produced > 0 & raw_words_understood > 0) {
+    var num_words = "My baby says " + words_produced + " words and understands " + words_understood + " words."
+  }
+
+  if (words_produced > 0 & raw_words_understood == 0) {
+    var num_words = "My baby says " + words_produced + " words."
+  }
+
+  if (words_produced == 0 & raw_words_understood > 0) {
+    var num_words = "My baby understands " + words_understood + " words."
+  }
+
+  if (words_produced > 0 | raw_words_understood > 0) {
+    document.getElementById("num_words_text").innerHTML = num_words;
+  }
+
   var categorySize = d3.nest()
-    .key(function(d) { return d.category; })
-    .key(function(d) { return d.num_value; })
-    .rollup(function(v) { return v.length; })
-    .entries(words);
+  .key(function(d) { return d.category; })
+  .key(function(d) { return d.num_value; })
+  .rollup(function(v) { return v.length; })
+  .entries(words);
 
   var word_categories;
 
@@ -104,171 +129,593 @@
       }
     });
 
-    console.log(categorySize);
-
     if (raw_words_understood > 0) {
-        plotPropUnderstood();
+      plotPropUnderstood();
     }
 
     if (words_produced > 0) {
-        plotPropProduced();
-      }
+      plotPropProduced();
+    }
+
+    plotFlippedPropUnderstood();
+
+    plotFlippedPropProduced();
+
+    bestCategories();
 
   });
 
   function objectMap (obj, variable) {
     var values = []
     i = 0;
-      $.each(categorySize, function(index){ 
-        values[i] = obj[index][variable]
-        i = i + 1;
-      });
-      return values;
+    $.each(obj, function(index){ 
+      values[i] = obj[index][variable]
+      i = i + 1;
+    });
+    return values;
   }
 
   function updateCategoryInfo() {
-       $.each(categorySize, function(index, value){
-        value.neither = 0;
-        value.understands = 0;
-        value.produces = 0;
-  
-        for (var i = 0; i < categorySize[index].values.length; i++) {
-          var current_val = categorySize[index].values[i]
-        if(current_val.key == 'neither') {
-            value.neither = current_val.values;
-        }
-        if(typeof current_val.key == 'understands') {
-            value.understands = current_val.values;
-        }
-        if(typeof current_val.produces !== 'produces') {
-            value.produces = current_val.values;
-        }
-  
-        }
-  
-  
-        value.num_all = value.neither + value.understands + value.produces
-        value.prop_understood = 100*(value.understands + value.produces)/(value.num_all)
-        value.prop_produced = 100*(value.produces)/(value.num_all)
-       });
-     }
+   $.each(categorySize, function(index, value){
+    value.neither = 0;
+    value.understands = 0;
+    value.produces = 0;
+    
+    for (var i = 0; i < categorySize[index].values.length; i++) {
+      var current_val = categorySize[index].values[i]
+      if(current_val.key == 'neither') {
+        value.neither = current_val.values;
+      }
+      if(current_val.key == 'understands') {
+        value.understands = current_val.values;
+      }
+      if(current_val.key == 'produces') {
+        value.produces = current_val.values;
+      }
+
+    }
+    
+    
+    value.num_all = value.neither + value.understands + value.produces
+    value.prop_understood = 100*(value.understands + value.produces)/(value.num_all)
+    value.prop_produced = 100*(value.produces)/(value.num_all)
+  });
+  }
 
   var colors = d3.scale.category20();
 
 
-    function plotPropUnderstood() {
-      var margin = {top: 20, right: 20, bottom: 150, left: 100},
-        width = 600 - margin.left - margin.right,
-        height = 300 - margin.top - margin.bottom;
-    
-      var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
-    
-      var y = d3.scale.linear().range([height, 0]);
-    
-      var xAxis = d3.svg.axis()
-          .scale(x)
-          .orient("bottom")
-    
-      var yAxis = d3.svg.axis()
-        .scale(y)
-        .orient("left")
-        .ticks(4);
-    
-      var chart_understood = d3.select("body").append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-      .append("g")
-        .attr("transform", 
-              "translate(" + margin.left + "," + margin.top + ")");
-    
-       x.domain(categorySize.map(function(d) { return d.category_name; }));
-       y.domain([0, d3.max(categorySize, function(d) { return d.prop_understood; })]);
-    
-      chart_understood.append("g")
-          .attr("class", "x axis")
-          .attr("transform", "translate(0," + height + ")")
-          .call(xAxis)
-        .selectAll("text")
-          .style("text-anchor", "end")
-          .attr("dx", "-.8em")
-          .attr("dy", "-.55em")
-          .attr("transform", "rotate(-90)" );
-    
-      chart_understood.append("g")
-          .attr("class", "y axis")
-          .call(yAxis)
-        .append("text")
-          .attr("transform", "rotate(-90)")
-          .attr("y", 6)
-          .attr("dy", ".71em")
-          .style("text-anchor", "end");
-    
-      chart_understood.selectAll("bar")
-          .data(categorySize)
-        .enter().append("rect")
-          .attr("fill",function(d,i){return colors(i)})
-          .attr("x", function(d) { return x(d.category_name); })
-          .attr("width", x.rangeBand())
-          .attr("y", function(d) { return y(d.prop_understood); })
-          .attr("height", function(d) { return height - y(d.prop_understood); });
+  function plotPropUnderstood() {
+    var margin = {top: 20, right: 20, bottom: 150, left: 100},
+    width = 600 - margin.left - margin.right,
+    height = 300 - margin.top - margin.bottom;
+
+    var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
+
+    var y = d3.scale.linear().range([height, 0]);
+
+    var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom")
+
+    var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    .ticks(4);
+
+    var chart_understood = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", 
+      "translate(" + margin.left + "," + margin.top + ")");
+
+    x.domain(categorySize.map(function(d) { return d.category_name; }));
+    y.domain([0, d3.max(categorySize, function(d) { return d.prop_understood; })]);
+
+    chart_understood.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis)
+    .selectAll("text")
+    .style("text-anchor", "end")
+    .attr("dx", "-.8em")
+    .attr("dy", "-.55em")
+    .attr("transform", "rotate(-90)" );
+
+    chart_understood.append("g")
+    .attr("class", "y axis")
+    .call(yAxis)
+    .append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 6)
+    .attr("dy", ".71em")
+    .style("text-anchor", "end");
+
+    chart_understood.selectAll("bar")
+    .data(categorySize)
+    .enter().append("rect")
+    .attr("fill",function(d,i){return colors(i)})
+    .attr("x", function(d) { return x(d.category_name); })
+    .attr("width", x.rangeBand())
+    .attr("y", function(d) { return y(d.prop_understood); })
+    .attr("height", function(d) { return height - y(d.prop_understood); });
+  }
+
+  function plotFlippedPropUnderstood() {
+    var margin = {top: 20, right: 20, bottom: 30, left: 200},
+    width = 600 - margin.left - margin.right,
+    height = 600 - margin.top - margin.bottom;
+
+    var x = d3.scale.linear().range([0, width]);
+
+    var y = d3.scale.ordinal().rangeRoundBands([0, height], .05);
+
+    var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom")
+
+    var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    //.ticks(4);
+
+    var chart_understood = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", 
+      "translate(" + margin.left + "," + margin.top + ")");
+
+    x.domain([0, d3.max(categorySize, function(d) { return d.prop_understood; })]);
+    y.domain(categorySize.map(function(d) { return d.category_name; }));
+
+
+    chart_understood.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis)
+    .selectAll("text")
+    .style("text-anchor", "end")
+    .attr("dx", "0.4em")
+    .attr("dy", ".8em")
+    //.attr("transform", "rotate(-90)" );
+
+    chart_understood.append("g")
+    .attr("class", "y axis")
+    .call(yAxis)
+    //.append("text")
+    //.attr("transform", "rotate(-90)")
+    .selectAll(".tick text")
+    .attr("dx", "-0.8em")
+    .call(wrap, 150)
+    .attr("y", 6)
+    .attr("dy", ".71em")
+    .style("text-anchor", "end");
+
+    chart_understood.selectAll("bar")
+    .data(categorySize)
+    .enter().append("rect")
+    .attr("fill",function(d,i){return colors(i)})
+    .attr("x", function(d) { return 0; })
+    .attr("width", function(d) { return x(d.prop_understood); })
+    .attr("y", function(d) { return y(d.category_name); })
+    .attr("height", y.rangeBand());
+  }
+
+  function plotPropProduced() {
+    var margin = {top: 20, right: 20, bottom: 150, left: 100},
+    width = 600 - margin.left - margin.right,
+    height = 300 - margin.top - margin.bottom;
+
+    var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
+
+    var y = d3.scale.linear().range([height, 0]);
+
+    var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom")
+
+    var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    .ticks(4);
+
+    var chart_produced = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", 
+      "translate(" + margin.left + "," + margin.top + ")");
+
+    x.domain(categorySize.map(function(d) { return d.category_name; }));
+    y.domain([0, d3.max(categorySize, function(d) { return d.prop_produced; })]);
+
+    chart_produced.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis)
+    .selectAll("text")
+    .style("text-anchor", "end")
+    .attr("dx", "-.8em")
+    .attr("dy", "-.55em")
+    .attr("transform", "rotate(-90)" );
+
+    chart_produced.append("g")
+    .attr("class", "y axis")
+    .call(yAxis)
+    .append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 6)
+    .attr("dy", ".71em")
+    .style("text-anchor", "end");
+
+    chart_produced.selectAll("bar")
+    .data(categorySize)
+    .enter().append("rect")
+    .attr("fill",function(d,i){return colors(i)})
+    .attr("x", function(d) { return x(d.category_name); })
+    .attr("width", x.rangeBand())
+    .attr("y", function(d) { return y(d.prop_produced); })
+    .attr("height", function(d) { return height - y(d.prop_produced); });
+  };
+
+  function plotFlippedPropProduced() {
+    var margin = {top: 20, right: 20, bottom: 30, left: 200},
+    width = 600 - margin.left - margin.right,
+    height = 600 - margin.top - margin.bottom;
+
+    var x = d3.scale.linear().range([0, width]);
+
+    var y = d3.scale.ordinal().rangeRoundBands([0, height], .05);
+
+    var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom")
+
+    var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    //.ticks(4);
+
+    var chart_produced = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", 
+      "translate(" + margin.left + "," + margin.top + ")");
+
+    x.domain([0, d3.max(categorySize, function(d) { return d.prop_produced; })]);
+    y.domain(categorySize.map(function(d) { return d.category_name; }));
+
+
+    chart_produced.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis)
+    .selectAll("text")
+    .style("text-anchor", "end")
+    .attr("dx", "0.4em")
+    .attr("dy", ".8em")
+    //.attr("transform", "rotate(-90)" );
+
+    chart_produced.append("g")
+    .attr("class", "y axis")
+    .call(yAxis)
+    //.append("text")
+    //.attr("transform", "rotate(-90)")
+    .selectAll(".tick text")
+    .attr("dx", "-0.8em")
+    .call(wrap, 150)
+    .attr("y", 6)
+    .attr("dy", ".71em")
+    .style("text-anchor", "end");
+
+    chart_produced.selectAll("bar")
+    .data(categorySize)
+    .enter().append("rect")
+    .attr("fill",function(d,i){return colors(i)})
+    .attr("x", function(d) { return 0; })
+    .attr("width", function(d) { return x(d.prop_produced); })
+    .attr("y", function(d) { return y(d.category_name); })
+    .attr("height", y.rangeBand());
+  }
+
+  var bestProdCat_num = 0;
+  var bestCompCat_num = 0;
+  var bestProdCat;
+  var bestCompCat;
+
+  function bestCategories() {
+
+
+    for (var i = 0; i < categorySize.length; i++) {
+      if (categorySize[i].prop_produced > bestProdCat_num & words_produced > 0) {
+        bestProdCat_num = categorySize[i].prop_produced;
+        bestProdCat = categorySize[i].category_name;
+      }
+
+      if (categorySize[i].prop_understood > bestCompCat_num & raw_words_understood > 0) {
+        bestCompCat_num = categorySize[i].prop_understood;
+        bestCompCat = categorySize[i].category_name;
+      }
+
+
     }
 
-    function plotPropProduced() {
-      var margin = {top: 20, right: 20, bottom: 150, left: 100},
-        width = 600 - margin.left - margin.right,
-        height = 300 - margin.top - margin.bottom;
-    
-      var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
-    
-      var y = d3.scale.linear().range([height, 0]);
-    
-      var xAxis = d3.svg.axis()
-          .scale(x)
-          .orient("bottom")
-    
-      var yAxis = d3.svg.axis()
-        .scale(y)
-        .orient("left")
-        .ticks(4);
-    
-      var chart_produced = d3.select("body").append("svg")
+
+    if (typeof(bestProdCat) !== 'undefined') {
+
+      document.getElementById("best_categories").innerHTML = document.getElementById("best_categories").innerHTML + 'My baby says the most words in the "' + bestProdCat + '" category.<br>';
+    }
+
+    if (typeof(bestCompCat) !== 'undefined') {
+
+      document.getElementById("best_categories").innerHTML = document.getElementById("best_categories").innerHTML + 'My baby understands the most words in the "' + bestCompCat + '" category.<br>';
+    }
+
+
+  }
+
+  var aoa_data;
+  var words_prod;
+  var words_comp;
+  var aoa_data_prod;
+  var aoa_data_comp;
+  var aoa_prod_combined;
+  var aoa_comp_combined;
+  var high_prod_aoa;
+  var high_comp_aoa;
+  var high_prod_word;
+  var high_comp_word;
+
+  function join(lookupTable, mainTable, lookupKey, mainKey, select) {
+    var l = lookupTable.length,
+    m = mainTable.length,
+    lookupIndex = [],
+    output = [];
+    for (var i = 0; i < l; i++) { // loop through l items
+      var row = lookupTable[i];
+        lookupIndex[row[lookupKey]] = row; // create an index for lookup table
+      }
+    for (var j = 0; j < m; j++) { // loop through m items
+      var y = mainTable[j];
+        var x = lookupIndex[y[mainKey]]; // get corresponding row from lookupTable
+        output.push(select(y, x)); // select only the columns you need
+      }
+    return output;
+  };
+
+  d3.csv("{% static 'graph_data/english_aoas.csv' %}", function(data) {
+    aoa_data = data;
+
+    words_prod = words.filter(function(d) { return (d.num_value == 'produces'); });
+    words_comp = words.filter(function(d) { return (d.num_value == 'understands'); });
+
+    aoa_data_prod = aoa_data.filter(function(d) { return (d.measure == 'produces'); });
+    aoa_data_comp = aoa_data.filter(function(d) { return (d.measure == 'understands'); });
+
+    aoa_prod_combined = join(aoa_data_prod, words_prod, "words", "definition", function(word, aoa) {
+      return {
+        word: word.definition,
+        aoa: (aoa !== undefined) ? parseInt(aoa.age) : null
+      };
+    });
+
+    aoa_comp_combined = join(aoa_data_comp, words_comp, "words", "definition", function(word, aoa) {
+      return {
+        word: word.definition,
+        aoa: (aoa !== undefined) ? parseInt(aoa.age) : null
+      };
+    });
+
+    if (aoa_prod_combined.length > 0) {
+      high_prod_aoa = 0
+
+      for (var i = 0; i < aoa_prod_combined.length; i++) {
+        if (aoa_prod_combined[i].aoa > high_prod_aoa) {
+          high_prod_aoa = aoa_prod_combined[i].aoa;
+          high_prod_word = aoa_prod_combined[i].word;
+        }
+
+      }
+    }
+
+    if (aoa_comp_combined.length > 0) {
+      high_comp_aoa = 0
+
+      for (var j = 0; j < aoa_comp_combined.length; j++) {
+        if (aoa_comp_combined[j].aoa > high_comp_aoa) {
+          high_comp_aoa = aoa_comp_combined[j].aoa;
+          high_comp_word = aoa_comp_combined[j].word;
+        }
+
+      }
+    }
+
+
+    if (typeof(high_prod_word) !== 'undefined') {
+
+      document.getElementById("hardest_words").innerHTML = document.getElementById("hardest_words").innerHTML + 'The hardest word my baby says is "' + high_prod_word + '".<br>';
+    }
+
+    if (typeof(high_comp_word) !== 'undefined') {
+
+      document.getElementById("hardest_words").innerHTML = document.getElementById("hardest_words").innerHTML + 'The hardest word my baby understands is "' + high_comp_word + '".<br>';
+    }
+
+
+
+
+  });
+
+  var predicted_vocab;
+  var pred_prod_min;
+  var pred_comp_min;
+  var pred_prod_quant;
+  var pred_comp_quant;
+  var quant_prod;
+  var quant_age_loc_prod;
+  var adjust_prod;
+  var quant_comp;
+  var quant_age_loc_comp;
+  var adjust_comp;
+  var adjusted_quant_prod = [];
+  var adjusted_quant_comp = [];
+
+
+
+  d3.csv("{% static 'graph_data/predicted_vocab_English.csv' %}", function(data) {
+
+    predicted_vocab = data;
+    current_ages = predicted_vocab.filter(function(d) { return (parseInt(d.age) == root.age); });
+
+    findQuantile();
+
+    quant_prod = predicted_vocab.filter(function(d) { return d.percentile == pred_prod_quant & d.measure == "production"; });
+    quant_age_loc_prod = objectMap(quant_prod,'age').indexOf(root.age.toString());
+    adjust_prod = (words_produced/(words.length)) - quant_prod[quant_age_loc_prod].pred;
+    for (var i = 0; i < quant_prod.length; i++) {
+      raw_adjusted_num = parseFloat(quant_prod[i].pred) + adjust_prod;
+      adjusted_num = (raw_adjusted_num < 0)? 0 : raw_adjusted_num
+      adjusted_quant_prod[i] = {"pred" : adjusted_num , "age": (parseFloat(quant_prod[i].age))};
+    }
+
+
+
+    if (raw_words_understood > 0) {
+        quant_comp = predicted_vocab.filter(function(d) { return d.percentile == pred_prod_quant & d.measure == "comprehension"; });
+        quant_age_loc_comp = objectMap(quant_comp,'age').indexOf(root.age.toString());
+        adjust_comp = (raw_words_understood/(words.length)) - quant_comp[quant_age_loc_comp].pred;
+        for (var i = 0; i < quant_comp.length; i++) {
+          raw_adjusted_num = parseFloat(quant_comp[i].pred) + adjust_comp;
+          adjusted_num = (raw_adjusted_num < 0)? 0 : raw_adjusted_num
+          adjusted_quant_comp[i] = {"pred" : adjusted_num , "age": (parseFloat(quant_comp[i].age))};
+        }
+    }
+
+    plotPredictData();
+
+ 
+
+
+
+  });
+
+  function findQuantile() {
+    // if (words_produced > 0) {
+    //   pred_prod_min = 1000;
+    //   word_prod_prop = words_produced/(words.length);
+    //   current_ages_prod = predicted_vocab.filter(function(d) { return (parseInt(d.age) == root.age & d.measure == "production"); });
+
+
+    //   for (var j = 0; j < current_ages_prod.length; j++) {
+    //     current_diff = Math.abs(parseInt(current_ages_prod[j].pred) - word_prod_prop);
+
+    //     if (pred_prod_min > current_diff) {
+    //       pred_prod_min = current_diff;
+    //       pred_prod_quant = current_ages_prod[j].percentile;
+    //     }
+
+    //   }
+    // } else {
+    //   pred_prod_quant = 10
+    // }
+
+    pred_prod_quant = 50
+
+    if (raw_words_understood > 0) {
+      // pred_comp_min = 1000;
+      // word_comp_prop = raw_words_understood/(words.length);
+      // current_ages_comp = predicted_vocab.filter(function(d) { return (parseInt(d.age) == root.age & d.measure == "comprehension"); });
+
+
+      // for (var i = 0; i < current_ages_comp.length; i++) {
+      //   current_diff = Math.abs(parseInt(current_ages_comp[i].pred) - word_comp_prop);
+
+      //   if (pred_comp_min > current_diff) {
+      //     pred_comp_min = current_diff;
+      //     pred_comp_quant = current_ages_prod[i].percentile;
+      //   }
+
+      // }
+
+      pred_comp_quant = 50
+    }
+  }
+
+  function plotPredictData() {
+  var margin = {top: 30, right: 20, bottom: 30, left: 50},
+    width = 600 - margin.left - margin.right,
+    height = 270 - margin.top - margin.bottom;
+
+    var x = d3.scale.linear().range([0, width]);
+    var y = d3.scale.linear().range([height, 0]);
+
+    var xAxis = d3.svg.axis().scale(x)
+      .orient("bottom").ticks(5);
+     
+    var yAxis = d3.svg.axis().scale(y)
+      .orient("left").ticks(5);
+
+    var valueline = d3.svg.line()
+      .x(function(d) { return x(d.age); })
+      .y(function(d) { return y(d.pred); });
+
+    var svg = d3.select("body")
+      .append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
       .append("g")
-        .attr("transform", 
-              "translate(" + margin.left + "," + margin.top + ")");
-    
-       x.domain(categorySize.map(function(d) { return d.category_name; }));
-       y.domain([0, d3.max(categorySize, function(d) { return d.prop_produced; })]);
-    
-      chart_produced.append("g")
-          .attr("class", "x axis")
-          .attr("transform", "translate(0," + height + ")")
-          .call(xAxis)
-        .selectAll("text")
-          .style("text-anchor", "end")
-          .attr("dx", "-.8em")
-          .attr("dy", "-.55em")
-          .attr("transform", "rotate(-90)" );
-    
-      chart_produced.append("g")
-          .attr("class", "y axis")
-          .call(yAxis)
-        .append("text")
-          .attr("transform", "rotate(-90)")
-          .attr("y", 6)
-          .attr("dy", ".71em")
-          .style("text-anchor", "end");
-    
-      chart_produced.selectAll("bar")
-          .data(categorySize)
-        .enter().append("rect")
-          .attr("fill",function(d,i){return colors(i)})
-          .attr("x", function(d) { return x(d.category_name); })
-          .attr("width", x.rangeBand())
-          .attr("y", function(d) { return y(d.prop_produced); })
-          .attr("height", function(d) { return height - y(d.prop_produced); });
-    };
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    x.domain(d3.extent(adjusted_quant_prod, function(d) { return d.age; }));
+    y.domain([0, d3.max(adjusted_quant_prod, function(d) { return d.pred; })]);
+   
+    svg.append("path")  
+      .attr("class", "line")
+      .style("stroke", "steelblue")
+      .style("stroke-width", 2)
+      .style("fill", "none")
+      .attr("d", valueline(adjusted_quant_prod));
+
+   
+    svg.append("g")   
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+   
+    svg.append("g")   
+      .attr("class", "y axis")
+      .call(yAxis);
+
+  }
+
+  function wrap(text, width) {
+    text.each(function() {
+      var text = d3.select(this),
+          words = text.text().split(/\s+/).reverse(),
+          word,
+          line = [],
+          lineNumber = 0,
+          lineHeight = 0.8, // ems
+          y = text.attr("y"),
+          dx = parseFloat(text.attr("dx")),
+          dy = parseFloat(text.attr("dy")),
+          tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dx", dx + "em").attr("dy", dy + "em");
+      while (word = words.pop()) {
+        line.push(word);
+        tspan.text(line.join(" "));
+        if (tspan.node().getComputedTextLength() > width) {
+          line.pop();
+          tspan.text(line.join(" "));
+          line = [word];
+          tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dx", dx + "em").attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+        }
+      }
+    });
+  }
+
 
 </script>
 </body>
