@@ -8,7 +8,7 @@ from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Field, R
 from form_utils.forms import BetterModelForm
 from crispy_forms.bootstrap import InlineField
 from django.templatetags.static import static
-
+import datetime
 from django.core.exceptions import ValidationError
 import codecs, json
 
@@ -121,10 +121,24 @@ class BackgroundForm(BetterModelForm):
         if cleaned_data.get('age') == '':
             self.add_error('age', 'Please enter your child\'s DOB in the field above.')
 
+        c_dob = cleaned_data.get('child_dob')
+        if c_dob:
+            c_age = (datetime.date.today().year - c_dob.year) * 12 +  (datetime.date.today().month - c_dob.month) + (c_dob.day >=15)
+        else:
+            c_age = self.age_ref['child_age']
+        if c_age:
+            if c_age < self.age_ref['min_age']:
+                self.add_error('age', 'Your baby is too young for this version of the CDI.')
+            elif c_age > self.age_ref['max_age']:
+                self.add_error('age', 'Your baby is too old for this version of the CDI.')
+        else:
+            self.add_error('age', 'Please enter your child\'s DOB in the field above.')
+
 
 
 
     def __init__(self, *args, **kwargs):
+        self.age_ref = kwargs.pop('age_ref', None)
         super(BackgroundForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         #self.helper.form_id = 'background_form'

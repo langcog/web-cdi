@@ -41,6 +41,10 @@ def get_administration_instance(hash_id):
 
 def background_info_form(request, hash_id):
     administration_instance = get_administration_instance(hash_id)
+    age_ref = {}
+    age_ref['min_age'] = administration_instance.study.instrument.min_age
+    age_ref['max_age'] = administration_instance.study.instrument.max_age
+    age_ref['child_age'] = None
     refresh = False
     background_form = None
         
@@ -48,9 +52,11 @@ def background_info_form(request, hash_id):
         if not administration_instance.completed and administration_instance.due_date > timezone.now():
             try:
                 background_instance = BackgroundInfo.objects.get(administration = administration_instance)
-                background_form = BackgroundForm(request.POST, instance = background_instance)
+                if background_instance.age:
+                    age_ref['child_age'] = background_instance.age
+                background_form = BackgroundForm(request.POST, instance = background_instance, age_ref = age_ref)
             except:
-                background_form = BackgroundForm(request.POST)
+                background_form = BackgroundForm(request.POST, age_ref = age_ref)
 
             if background_form.is_valid():
                 background_instance = background_form.save(commit = False)
@@ -79,10 +85,13 @@ def background_info_form(request, hash_id):
     if request.method == 'GET' or refresh:
         try:
             #Get form from database
-            background_form = prefilled_background_form(administration_instance)
+            background_instance = BackgroundInfo.objects.get(administration = administration_instance)
+            if background_instance.age:
+                age_ref['child_age'] = background_instance.age
+            background_form = BackgroundForm(instance = background_instance, age_ref = age_ref)
         except:
             #Blank form
-            background_form = BackgroundForm()  
+            background_form = BackgroundForm(age_ref = age_ref)  
     data = {}
     data['background_form'] = background_form
     data['completed'] = administration_instance.completed
@@ -90,10 +99,14 @@ def background_info_form(request, hash_id):
     data['title'] = administration_instance.study.instrument.verbose_name
     data['max_age'] = administration_instance.study.instrument.max_age
     data['min_age'] = administration_instance.study.instrument.min_age
-    study_group = administration_instance.study.study_group
     study_name = administration_instance.study.name
-    data['alt_study_info'] = study.objects.filter(study_group = study_group).exclude(name = study_name).values_list("name","instrument__min_age", "instrument__max_age")
-
+    study_group = administration_instance.study.study_group
+    if study_group:
+        data['study_group'] = study_group
+        data['alt_study_info'] = study.objects.filter(study_group = study_group).exclude(name = study_name).values_list("name","instrument__min_age", "instrument__max_age")
+    else:
+        data['study_group'] = None
+        data['alt_study_info'] = None
     return render(request, 'cdi_forms/background_info.html', data)
 
 def cdi_items(object_group, item_type, prefilled_data, item_id):

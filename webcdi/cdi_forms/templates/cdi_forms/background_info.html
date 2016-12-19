@@ -27,6 +27,7 @@
 <div class="row">
     {% load crispy_forms_tags %}
     {% crispy background_form %}
+    {{ study_group }}
 
 </div>
 
@@ -80,19 +81,14 @@
 
     function getDiffinMonths() {
         
-        var b_date = new Date($('#id_child_dob').val());
+        var raw_b_date = new Date($('#id_child_dob').val());
+        var b_date = moment(raw_b_date);
 
-        if (!isNaN(b_date.getTime()) && document.getElementById("id_child_dob").value != ''){
+        if (!isNaN(raw_b_date.getTime()) && document.getElementById("id_child_dob").value != ''){
             console.log("Date valid");
-            var t_date = new Date();
+            var t_date = moment();
 
-            var years_diff = t_date.getFullYear() - b_date.getFullYear();
-            var months_diff_raw = t_date.getMonth() - b_date.getMonth();
-            var months_diff = months_diff_raw >= 0 ? months_diff_raw : (years_diff >= 1? (months_diff_raw + 12): months_diff_raw);
-            var days_diff_raw = t_date.getDate() - b_date.getDate();
-            var days_diff = days_diff_raw >= 15 ? 1 : 0;
-
-            var diff_in_months = years_diff*12 + months_diff + days_diff;
+            var diff_in_months = t_date.diff(b_date, 'months');
 
             if (diff_in_months > 0){
 
@@ -115,17 +111,17 @@
         var selected_ages = document.getElementById('hint_id_age');
         var hint = "<br><font color = '#3C763D' style = 'text-decoration: underline;'>Your child should be between ".concat("{{ min_age }}"," to ", "{{ max_age }}", " months of age.</font>")
 
-/*       if ( instrument_name.indexOf("Words and Sentences") > -1 || instrument_name.indexOf("WS") > -1) {
-            text = "For 16- to 30-month-old children";
-            hint = "<br><font color = '#3C763D' style = 'text-decoration: underline;'>Your child should be between 16 to 30 months of age.</font>"
-        } else if ( instrument_name.indexOf("Words and Gestures") > -1 || instrument_name.indexOf("WG") > -1 ) {
-            text = "For 8- to 18-month-old children";
-            hint = "<br><font color = '#3C763D' style = 'text-decoration: underline;'>Your child should be between 8 to 18 months of age.</font>"
-        }*/
+        var study_group = "{{ study_group }}"
+        if (study_group != "None") {
+            study_group_hint = " Not the right age? <a href='/form/group/" + "{{ study_group }}"+ "'> Click here</a>"
+        } else {
+            study_group_hint = ""
+        }
+
         document.getElementById("instrument_age").innerHTML = text;
 
 
-        selected_ages.innerHTML = selected_ages.innerHTML + hint;
+        selected_ages.innerHTML = selected_ages.innerHTML + hint + study_group_hint;
     }
 
     document.getElementById("id_birth_order").min = "1";
