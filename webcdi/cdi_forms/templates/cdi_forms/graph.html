@@ -34,7 +34,7 @@
 
 <style>
     .axis {
-    font: 13px sans-serif;
+    font: 12px sans-serif;
   }
 
   .axis path,
@@ -48,18 +48,30 @@
 
 </style>
 <body>
-<!--           {% debug %}
- -->
 
-<div id="num_words_text"></div>
-<div id="hardest_words"></div>
-<div id="best_categories"></div>
+  <div class = "row"> 
+    <div class="col-md-6 text-center" id="predicted_chart"></div>
+    <h2><div class="col-md-6 text-center" id="num_words_text"></div></h2>
+  </div>
+
+  <div class = "row"> 
+    <div class="text-center" id="categories_charts"></div>
+    <h4><div class="row text-center" id="best_categories"></div></h4>
+  </div>
+
+  <div class = "row text-center"> 
+    <h2><div id="hardest_words"></div><h2>
+  </div>
 
 
 <script src="http://d3js.org/d3.v3.js"></script>
+<script src="https://cdn.jsdelivr.net/lodash/4.17.2/lodash.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-queue/3.0.3/d3-queue.min.js"></script>
-<script>
 
+<script>
+  var graph_height = 500;
+  var graph_width = 500;
+  var stroke_thickness = 4;
 
   var raw_data = '{{ objects |escapejs }}';
   var root = JSON.parse(raw_data);
@@ -67,6 +79,8 @@
   root.completed = '{{ completed }}';
   root.hash_id = '{{ hash_id }}';
   root.instrument_name = '{{ instrument_name }}';
+
+
 
   var words = root.filter(function(d) { return d.item_type == "word"; });
 
@@ -114,6 +128,8 @@
   .entries(words);
 
   var word_categories;
+  var prod_graph_width = graph_width;
+  var comp_graph_width = graph_width;
 
 
   d3.csv("{% static 'graph_data/word_categories.csv' %}", function(data) {
@@ -129,17 +145,22 @@
       }
     });
 
+    if (raw_words_understood == 0 ) {
+      prod_graph_width = graph_width*2;
+    }
+
+    if (words_produced == 0 ) {
+      comp_graph_width = graph_width*2;
+    }
+
     if (raw_words_understood > 0) {
-      plotPropUnderstood();
+      plotFlippedPropUnderstood();
     }
 
     if (words_produced > 0) {
-      plotPropProduced();
+      plotFlippedPropProduced();
     }
 
-    plotFlippedPropUnderstood();
-
-    plotFlippedPropProduced();
 
     bestCategories();
 
@@ -155,8 +176,13 @@
     return values;
   }
 
+  var colors = d3.scale.category20();
+
   function updateCategoryInfo() {
+
+  var category_colors = colorHue(categorySize.length)
    $.each(categorySize, function(index, value){
+    value.color = category_colors[index]
     value.neither = 0;
     value.understands = 0;
     value.produces = 0;
@@ -182,70 +208,40 @@
   });
   }
 
-  var colors = d3.scale.category20();
+  function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
 
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
 
-  function plotPropUnderstood() {
-    var margin = {top: 20, right: 20, bottom: 150, left: 100},
-    width = 600 - margin.left - margin.right,
-    height = 300 - margin.top - margin.bottom;
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
 
-    var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
 
-    var y = d3.scale.linear().range([height, 0]);
+    return array;
+  }
 
-    var xAxis = d3.svg.axis()
-    .scale(x)
-    .orient("bottom")
+  function colorHue(n) {
+    var hues = []
+    var step_count = 360/n
 
-    var yAxis = d3.svg.axis()
-    .scale(y)
-    .orient("left")
-    .ticks(4);
-
-    var chart_understood = d3.select("body").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform", 
-      "translate(" + margin.left + "," + margin.top + ")");
-
-    x.domain(categorySize.map(function(d) { return d.category_name; }));
-    y.domain([0, d3.max(categorySize, function(d) { return d.prop_understood; })]);
-
-    chart_understood.append("g")
-    .attr("class", "x axis")
-    .attr("transform", "translate(0," + height + ")")
-    .call(xAxis)
-    .selectAll("text")
-    .style("text-anchor", "end")
-    .attr("dx", "-.8em")
-    .attr("dy", "-.55em")
-    .attr("transform", "rotate(-90)" );
-
-    chart_understood.append("g")
-    .attr("class", "y axis")
-    .call(yAxis)
-    .append("text")
-    .attr("transform", "rotate(-90)")
-    .attr("y", 6)
-    .attr("dy", ".71em")
-    .style("text-anchor", "end");
-
-    chart_understood.selectAll("bar")
-    .data(categorySize)
-    .enter().append("rect")
-    .attr("fill",function(d,i){return colors(i)})
-    .attr("x", function(d) { return x(d.category_name); })
-    .attr("width", x.rangeBand())
-    .attr("y", function(d) { return y(d.prop_understood); })
-    .attr("height", function(d) { return height - y(d.prop_understood); });
+    for (var i = 0; i < n; i++) {
+      hue = Math.round(15 + i*step_count);
+      hues.push(d3.hcl(hue, 100, 60));
+      }
+    return shuffle(hues);
   }
 
   function plotFlippedPropUnderstood() {
-    var margin = {top: 20, right: 20, bottom: 30, left: 200},
-    width = 600 - margin.left - margin.right,
-    height = 600 - margin.top - margin.bottom;
+    var margin = {top: 20, right: 20, bottom: 60, left: 200},
+    width = comp_graph_width - margin.left - margin.right,
+    height = graph_height - margin.top - margin.bottom;
 
     var x = d3.scale.linear().range([0, width]);
 
@@ -254,13 +250,14 @@
     var xAxis = d3.svg.axis()
     .scale(x)
     .orient("bottom")
+    .ticks(4)
+    .outerTickSize(0);
 
     var yAxis = d3.svg.axis()
     .scale(y)
-    .orient("left")
-    //.ticks(4);
+    .orient("left");
 
-    var chart_understood = d3.select("body").append("svg")
+    var chart_understood = d3.select("#categories_charts").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
@@ -275,7 +272,7 @@
     .attr("class", "x axis")
     .attr("transform", "translate(0," + height + ")")
     .call(xAxis)
-    .selectAll("text")
+    .selectAll(".tick text")
     .style("text-anchor", "end")
     .attr("dx", "0.4em")
     .attr("dy", ".8em")
@@ -288,82 +285,32 @@
     //.attr("transform", "rotate(-90)")
     .selectAll(".tick text")
     .attr("dx", "-0.8em")
-    .call(wrap, 150)
+    .call(wrap, 200)
     .attr("y", 6)
     .attr("dy", ".71em")
     .style("text-anchor", "end");
 
+    chart_understood.append("text")             
+    .attr("transform",
+          "translate(" + (width/2) + " ," + (height + margin.top + 20) + ")")
+    .style("text-anchor", "middle")
+    .text("Percentage of Words Understood (%)");
+
     chart_understood.selectAll("bar")
     .data(categorySize)
     .enter().append("rect")
-    .attr("fill",function(d,i){return colors(i)})
+    .attr("fill",function(d,i) { return d3.hcl(categorySize[i].color); })
     .attr("x", function(d) { return 0; })
     .attr("width", function(d) { return x(d.prop_understood); })
     .attr("y", function(d) { return y(d.category_name); })
     .attr("height", y.rangeBand());
   }
 
-  function plotPropProduced() {
-    var margin = {top: 20, right: 20, bottom: 150, left: 100},
-    width = 600 - margin.left - margin.right,
-    height = 300 - margin.top - margin.bottom;
-
-    var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
-
-    var y = d3.scale.linear().range([height, 0]);
-
-    var xAxis = d3.svg.axis()
-    .scale(x)
-    .orient("bottom")
-
-    var yAxis = d3.svg.axis()
-    .scale(y)
-    .orient("left")
-    .ticks(4);
-
-    var chart_produced = d3.select("body").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform", 
-      "translate(" + margin.left + "," + margin.top + ")");
-
-    x.domain(categorySize.map(function(d) { return d.category_name; }));
-    y.domain([0, d3.max(categorySize, function(d) { return d.prop_produced; })]);
-
-    chart_produced.append("g")
-    .attr("class", "x axis")
-    .attr("transform", "translate(0," + height + ")")
-    .call(xAxis)
-    .selectAll("text")
-    .style("text-anchor", "end")
-    .attr("dx", "-.8em")
-    .attr("dy", "-.55em")
-    .attr("transform", "rotate(-90)" );
-
-    chart_produced.append("g")
-    .attr("class", "y axis")
-    .call(yAxis)
-    .append("text")
-    .attr("transform", "rotate(-90)")
-    .attr("y", 6)
-    .attr("dy", ".71em")
-    .style("text-anchor", "end");
-
-    chart_produced.selectAll("bar")
-    .data(categorySize)
-    .enter().append("rect")
-    .attr("fill",function(d,i){return colors(i)})
-    .attr("x", function(d) { return x(d.category_name); })
-    .attr("width", x.rangeBand())
-    .attr("y", function(d) { return y(d.prop_produced); })
-    .attr("height", function(d) { return height - y(d.prop_produced); });
-  };
 
   function plotFlippedPropProduced() {
-    var margin = {top: 20, right: 20, bottom: 30, left: 200},
-    width = 600 - margin.left - margin.right,
-    height = 600 - margin.top - margin.bottom;
+    var margin = {top: 20, right: 20, bottom: 60, left: 200},
+    width = prod_graph_width - margin.left - margin.right,
+    height = graph_height - margin.top - margin.bottom;
 
     var x = d3.scale.linear().range([0, width]);
 
@@ -372,13 +319,15 @@
     var xAxis = d3.svg.axis()
     .scale(x)
     .orient("bottom")
+    .ticks(4)
+    .outerTickSize(0);
 
     var yAxis = d3.svg.axis()
     .scale(y)
     .orient("left")
-    //.ticks(4);
+    .outerTickSize(0);
 
-    var chart_produced = d3.select("body").append("svg")
+    var chart_produced = d3.select("#categories_charts").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
@@ -393,20 +342,23 @@
     .attr("class", "x axis")
     .attr("transform", "translate(0," + height + ")")
     .call(xAxis)
-    .selectAll("text")
+    .selectAll(".tick text")
     .style("text-anchor", "end")
     .attr("dx", "0.4em")
-    .attr("dy", ".8em")
-    //.attr("transform", "rotate(-90)" );
+    .attr("dy", ".8em");
+
+    chart_produced.append("text")             
+    .attr("transform",
+          "translate(" + (width/2) + " ," + (height + margin.top + 20) + ")")
+    .style("text-anchor", "middle")
+    .text("Percentage of Words Spoken (%)");
 
     chart_produced.append("g")
     .attr("class", "y axis")
     .call(yAxis)
-    //.append("text")
-    //.attr("transform", "rotate(-90)")
     .selectAll(".tick text")
     .attr("dx", "-0.8em")
-    .call(wrap, 150)
+    .call(wrap, 200)
     .attr("y", 6)
     .attr("dy", ".71em")
     .style("text-anchor", "end");
@@ -414,7 +366,8 @@
     chart_produced.selectAll("bar")
     .data(categorySize)
     .enter().append("rect")
-    .attr("fill",function(d,i){return colors(i)})
+    //.attr("fill",function(d,i){return colors(i)})
+    .attr("fill",function(d,i) { return d3.hcl(categorySize[i].color); })
     .attr("x", function(d) { return 0; })
     .attr("width", function(d) { return x(d.prop_produced); })
     .attr("y", function(d) { return y(d.category_name); })
@@ -562,45 +515,52 @@
   var adjust_comp;
   var adjusted_quant_prod = [];
   var adjusted_quant_comp = [];
+  var current_vocab = [];
 
 
+  if ((root.age > 30 | root.age < 16) & root.instrument_name.indexOf('WS') > -1) {
+    document.getElementById("predicted_chart").innerHTML = "<h4><font color = '#008000'> Sorry but it looks like your baby is outside of our age range for predicting vocabulary size! This version of the CDI assessment is for children between 16 to 30 months of age </font></h4>"
 
-  d3.csv("{% static 'graph_data/predicted_vocab_English.csv' %}", function(data) {
+  } else if ((root.age > 18 | root.age < 8) & root.instrument_name.indexOf('WG') > -1) {
+    document.getElementById("predicted_chart").innerHTML = "<h4><font color = '#008000'> Sorry but it looks like your baby is outside of our age range for predicting vocabulary size! This version of the CDI assessment is for children between 8 to 18 months of age </font></h4>"
 
-    predicted_vocab = data;
-    current_ages = predicted_vocab.filter(function(d) { return (parseInt(d.age) == root.age); });
-
-    findQuantile();
-
-    quant_prod = predicted_vocab.filter(function(d) { return d.percentile == pred_prod_quant & d.measure == "production"; });
-    quant_age_loc_prod = objectMap(quant_prod,'age').indexOf(root.age.toString());
-    adjust_prod = (words_produced/(words.length)) - quant_prod[quant_age_loc_prod].pred;
-    for (var i = 0; i < quant_prod.length; i++) {
-      raw_adjusted_num = parseFloat(quant_prod[i].pred) + adjust_prod;
-      adjusted_num = (raw_adjusted_num < 0)? 0 : raw_adjusted_num
-      adjusted_quant_prod[i] = {"pred" : adjusted_num , "age": (parseFloat(quant_prod[i].age))};
-    }
-
-
-
-    if (raw_words_understood > 0) {
-        quant_comp = predicted_vocab.filter(function(d) { return d.percentile == pred_prod_quant & d.measure == "comprehension"; });
-        quant_age_loc_comp = objectMap(quant_comp,'age').indexOf(root.age.toString());
-        adjust_comp = (raw_words_understood/(words.length)) - quant_comp[quant_age_loc_comp].pred;
-        for (var i = 0; i < quant_comp.length; i++) {
-          raw_adjusted_num = parseFloat(quant_comp[i].pred) + adjust_comp;
-          adjusted_num = (raw_adjusted_num < 0)? 0 : raw_adjusted_num
-          adjusted_quant_comp[i] = {"pred" : adjusted_num , "age": (parseFloat(quant_comp[i].age))};
-        }
-    }
-
-    plotPredictData();
-
- 
-
-
-
-  });
+  } else {
+    d3.csv("{% static 'graph_data/predicted_vocab_English.csv' %}", function(data) {
+  
+      predicted_vocab = data;
+      current_ages = predicted_vocab.filter(function(d) { return (parseInt(d.age) == root.age); });
+  
+      findQuantile();
+  
+      quant_prod = predicted_vocab.filter(function(d) { return d.percentile == pred_prod_quant & d.measure == "production"; });
+      quant_age_loc_prod = objectMap(quant_prod,'age').indexOf(root.age.toString());
+      adjust_prod = (words_produced/(words.length)) - quant_prod[quant_age_loc_prod].pred;
+      for (var i = 0; i < quant_prod.length; i++) {
+        raw_adjusted_num = parseFloat(quant_prod[i].pred) + adjust_prod;
+        adjusted_num = (raw_adjusted_num < 0)? 0 : ((raw_adjusted_num > 1)? 1 : raw_adjusted_num)
+        adjusted_quant_prod[i] = {"pred" : adjusted_num , "age": (parseFloat(quant_prod[i].age))};
+      }
+      current_vocab.push({"age": root.age, "vocab": 100*words_understood/(words.length)});
+  
+  
+      if (raw_words_understood > 0) {
+          quant_comp = predicted_vocab.filter(function(d) { return d.percentile == pred_prod_quant & d.measure == "comprehension"; });
+          quant_age_loc_comp = objectMap(quant_comp,'age').indexOf(root.age.toString());
+          adjust_comp = (words_understood/(words.length)) - quant_comp[quant_age_loc_comp].pred;
+          for (var i = 0; i < quant_comp.length; i++) {
+            raw_adjusted_num = parseFloat(quant_comp[i].pred) + adjust_comp;
+            adjusted_num = (raw_adjusted_num < 0)? 0 : ((raw_adjusted_num > 1)? 1 : raw_adjusted_num)
+            adjusted_quant_comp[i] = {"pred" : adjusted_num , "age": (parseFloat(quant_comp[i].age))};
+          }
+        current_vocab.push({"age": root.age, "vocab": 100*words_produced/(words.length)});
+      }
+  
+  
+  
+      plotPredictData();
+  
+    });
+  }
 
   function findQuantile() {
     // if (words_produced > 0) {
@@ -645,24 +605,28 @@
   }
 
   function plotPredictData() {
-  var margin = {top: 30, right: 20, bottom: 30, left: 50},
-    width = 600 - margin.left - margin.right,
-    height = 270 - margin.top - margin.bottom;
+    var margin = {top: 20, right: 150, bottom: 60, left: 80},
+      width = graph_width - margin.left - margin.right,
+      height = graph_height - margin.top - margin.bottom;
 
     var x = d3.scale.linear().range([0, width]);
     var y = d3.scale.linear().range([height, 0]);
 
     var xAxis = d3.svg.axis().scale(x)
-      .orient("bottom").ticks(5);
+      .orient("bottom")
+      .ticks(5)
+      .outerTickSize(0);
      
     var yAxis = d3.svg.axis().scale(y)
-      .orient("left").ticks(5);
+      .orient("left")
+      .ticks(5)
+      .outerTickSize(0);
 
     var valueline = d3.svg.line()
       .x(function(d) { return x(d.age); })
-      .y(function(d) { return y(d.pred); });
+      .y(function(d) { return y(100 * d.pred); });
 
-    var svg = d3.select("body")
+    var pred_chart = d3.select("#predicted_chart")
       .append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
@@ -670,22 +634,79 @@
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     x.domain(d3.extent(adjusted_quant_prod, function(d) { return d.age; }));
-    y.domain([0, d3.max(adjusted_quant_prod, function(d) { return d.pred; })]);
+    y.domain([0, 100]);
    
-    svg.append("path")  
+    pred_chart.append("path")  
       .attr("class", "line")
-      .style("stroke", "steelblue")
-      .style("stroke-width", 2)
+      .style("stroke", "#9471f2")
+      .style("stroke-width", stroke_thickness)
       .style("fill", "none")
       .attr("d", valueline(adjusted_quant_prod));
 
-   
-    svg.append("g")   
+    pred_chart.append("path")  
+      .attr("class", "line")
+      .style("stroke", "#FF9667")
+      .style("stroke-width", stroke_thickness)
+      .style("fill", "none")
+      .attr("d", valueline(adjusted_quant_comp))
+      .style("display", (root.age > 18)? "none": null);
+
+    pred_chart.selectAll("dot")
+        .data(current_vocab)
+      .enter().append("circle")
+        .attr("r", 6)
+        .attr("cx", function(d) { return x(d.age); })
+        .attr("cy", function(d) { return y(d.vocab); })
+        .attr("fill", "#2DBC74");
+
+    pred_chart.append("text")             
+    .attr("transform",
+          "translate(" + (width/2) + " ," + (height + margin.top + 20) + ")")
+    .style("text-anchor", "middle")
+    .text("Age (in Months)");
+
+    pred_chart.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0 - margin.left/2)
+        .attr("x",0 - (height / 2))
+        .attr("dy", "0.8em")
+        .style("text-anchor", "middle")
+        .text("% of Words on Test");
+
+    pred_chart.append("text")
+        .attr("y", 10 )
+        .attr("x", width-10)
+        .attr("dy", "0.8em")
+        .attr("class", "legend")
+        .style("text-anchor", "right")
+        .style("fill", "#26985F")         
+        .text("Current Vocabulary Size"); 
+
+    pred_chart.append("text")
+        .attr("y", 30 )
+        .attr("x", width)
+        .attr("dy", "0.8em")
+        .attr("class", "legend")
+        .style("text-anchor", "right")
+        .style("fill", "#7B5FC9")         
+        .text("% of Words Spoken"); 
+
+    pred_chart.append("text")
+        .attr("y", 50 )
+        .attr("x", width-10)
+        .attr("dy", "0.8em")
+        .attr("class", "legend")
+        .style("text-anchor", "right")
+        .style("fill", "#DD6935")         
+        .text("% of Words Understood")
+        .style("display", (root.age > 18)? "none": null); 
+
+    pred_chart.append("g")   
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height + ")")
       .call(xAxis);
    
-    svg.append("g")   
+    pred_chart.append("g")   
       .attr("class", "y axis")
       .call(yAxis);
 
@@ -698,7 +719,7 @@
           word,
           line = [],
           lineNumber = 0,
-          lineHeight = 0.8, // ems
+          lineHeight = 0.9, // ems
           y = text.attr("y"),
           dx = parseFloat(text.attr("dx")),
           dy = parseFloat(text.attr("dy")),
