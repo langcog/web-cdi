@@ -9,7 +9,7 @@
 
 {% block main %}
 {% if background_form %}
-<input type="hidden" name="background-info-form" value="background-info-form"/>
+<input type="hidden" name="background-info-form" value="background-info-form"/> {% csrf_token %}
 <div class="row">
     <h2>MacArthur-Bates Communicative Development Inventory</h2>
     <h4><div id = "instrument_age" style = "text-decoration: underline;"></p></div><br>
@@ -27,7 +27,6 @@
 <div class="row">
     {% load crispy_forms_tags %}
     {% crispy background_form %}
-    {{ study_group }}
 
 </div>
 
