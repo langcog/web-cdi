@@ -258,15 +258,15 @@
 
 
   if (words_produced > 0 & raw_words_understood > 0) {
-    var num_words = "My baby says " + words_produced + " words and understands " + words_understood + " words."
+    var num_words = "My child says " + words_produced + " words and understands " + words_understood + " words."
   }
 
   if (words_produced > 0 & raw_words_understood == 0) {
-    var num_words = "My baby says " + words_produced + " words."
+    var num_words = "My child says " + words_produced + " words."
   }
 
   if (words_produced == 0 & raw_words_understood > 0) {
-    var num_words = "My baby understands " + words_understood + " words."
+    var num_words = "My child understands " + words_understood + " words."
   }
 
   if (words_produced > 0 | raw_words_understood > 0) {
@@ -452,6 +452,15 @@
     .data(categorySize)
     .enter().append("rect")
     .attr("fill",function(d,i) { return d3.hcl(categorySize[i].color); })
+    .on("mouseover", function() {
+        d3.select(this)
+          .attr("fill", "orange");
+    })
+    .on("mouseout", function(d, i) {
+        d3.select(this).attr("fill", function() {
+            return d3.hcl(categorySize[i].color);
+        });
+    })
     .attr("x", function(d) { return 0; })
     .attr("width", function(d) { return x(d.prop_understood); })
     .attr("y", function(d) { return y(d.category_name); })
@@ -518,8 +527,16 @@
     chart_produced.selectAll("bar")
     .data(categorySize)
     .enter().append("rect")
-    //.attr("fill",function(d,i){return colors(i)})
     .attr("fill",function(d,i) { return d3.hcl(categorySize[i].color); })
+    .on("mouseover", function() {
+        d3.select(this)
+          .attr("fill", "orange");
+    })
+    .on("mouseout", function(d, i) {
+        d3.select(this).attr("fill", function() {
+            return d3.hcl(categorySize[i].color);
+        });
+    })
     .attr("x", function(d) { return 0; })
     .attr("width", function(d) { return x(d.prop_produced); })
     .attr("y", function(d) { return y(d.category_name); })
@@ -551,12 +568,12 @@
 
     if (typeof(bestProdCat) !== 'undefined') {
 
-      document.getElementById("best_categories").innerHTML = document.getElementById("best_categories").innerHTML + 'My baby says the most words in the "' + bestProdCat + '" category.<br>';
+      document.getElementById("best_categories").innerHTML = document.getElementById("best_categories").innerHTML + 'My child says the most words in the "' + bestProdCat + '" category.<br>';
     }
 
     if (typeof(bestCompCat) !== 'undefined') {
 
-      document.getElementById("best_categories").innerHTML = document.getElementById("best_categories").innerHTML + 'My baby understands the most words in the "' + bestCompCat + '" category.<br>';
+      document.getElementById("best_categories").innerHTML = document.getElementById("best_categories").innerHTML + 'My child understands the most words in the "' + bestCompCat + '" category.<br>';
     }
 
 
@@ -641,12 +658,12 @@
 
     if (typeof(high_prod_word) !== 'undefined') {
 
-      document.getElementById("hardest_words").innerHTML = document.getElementById("hardest_words").innerHTML + 'The hardest word my baby says is "' + high_prod_word + '".<br>';
+      document.getElementById("hardest_words").innerHTML = document.getElementById("hardest_words").innerHTML + 'The hardest word my child says is "' + high_prod_word + '".<br>';
     }
 
     if (typeof(high_comp_word) !== 'undefined') {
 
-      document.getElementById("hardest_words").innerHTML = document.getElementById("hardest_words").innerHTML + 'The hardest word my baby understands is "' + high_comp_word + '".<br>';
+      document.getElementById("hardest_words").innerHTML = document.getElementById("hardest_words").innerHTML + 'The hardest word my child understands is "' + high_comp_word + '".<br>';
     }
 
 
@@ -671,10 +688,10 @@
 
 
   if ((root.age > 30 | root.age < 16) & root.instrument_name.indexOf('WS') > -1) {
-    document.getElementById("predicted_chart").innerHTML = "<h4><font color = '#008000'> Sorry but it looks like your baby is outside of our age range for predicting vocabulary size! This version of the CDI assessment is for children between 16 to 30 months of age </font></h4>"
+    document.getElementById("predicted_chart").innerHTML = "<h4><font color = '#008000'> Sorry but it looks like your child is outside of our age range for predicting vocabulary size! This version of the CDI assessment is for children between 16 to 30 months of age </font></h4>"
 
   } else if ((root.age > 18 | root.age < 8) & root.instrument_name.indexOf('WG') > -1) {
-    document.getElementById("predicted_chart").innerHTML = "<h4><font color = '#008000'> Sorry but it looks like your baby is outside of our age range for predicting vocabulary size! This version of the CDI assessment is for children between 8 to 18 months of age </font></h4>"
+    document.getElementById("predicted_chart").innerHTML = "<h4><font color = '#008000'> Sorry but it looks like your child is outside of our age range for predicting vocabulary size! This version of the CDI assessment is for children between 8 to 18 months of age </font></h4>"
 
   } else {
     d3.csv("{% static 'graph_data/predicted_vocab_English.csv' %}", function(data) {
@@ -792,7 +809,7 @@
       .attr("class", "line")
       .style("stroke", "#9471f2")
       .style("stroke-width", stroke_thickness)
-      .style("fill", "none")
+      .style("fill", "none")   
       .attr("d", valueline(adjusted_quant_prod));
 
     pred_chart.append("path")  
@@ -827,6 +844,7 @@
     .attr("transform",
           "translate(" + (width/2) + " ," + (height + margin.top + 20) + ")")
     .style("text-anchor", "middle")
+    .style("font-size","16px")
     .text("Age (in Months)");
 
     pred_chart.append('g')
@@ -853,13 +871,15 @@
       return d.name;
     });
 
+
     pred_chart.append("text")
         .attr("transform", "rotate(-90)")
         .attr("y", 0 - margin.left/2)
         .attr("x",0 - (height / 2))
         .attr("dy", "0.8em")
         .style("text-anchor", "middle")
-        .text("% of Words on Test");
+        .style("font-size","16px")
+        .text("Predicted % of Words on Test");
 
     pred_chart.append("text")
         .attr("y", 10 )
@@ -877,7 +897,7 @@
         .attr("class", "legend")
         .style("text-anchor", "end")
         .style("fill", "#7B5FC9")         
-        .text("% of Words Spoken"); 
+        .text("Predicted % of Words Spoken"); 
 
     pred_chart.append("text")
         .attr("y", 50 )
@@ -886,7 +906,7 @@
         .attr("class", "legend")
         .style("text-anchor", "end")
         .style("fill", "#DD6935")         
-        .text("% of Words Understood")
+        .text("Predicted % of Words Understood")
         .style("display", (root.age > 18)? "none": null); 
 
     pred_chart.append("g")   
