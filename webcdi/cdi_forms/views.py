@@ -145,8 +145,10 @@ def prefilled_cdi_data(administration_instance):
     with open(PROJECT_ROOT+'/form_data/'+instrument_name+'_meta.json', 'r') as content_file:
         data = json.loads(content_file.read())
         data['title'] = administration_instance.study.instrument.verbose_name
+        data['instrument_name'] = administration_instance.study.instrument.name
         data['completed'] = administration_instance.completed
         data['due_date'] = administration_instance.due_date
+        raw_objects = []
         #meta_file['background_form'] = None
 
         for part in data['parts']:
@@ -154,17 +156,25 @@ def prefilled_cdi_data(administration_instance):
                 if 'sections' in item_type:
                     for section in item_type['sections']:
                         group_objects = instrument_model.objects.filter(category__exact=section['id']).values()
-               
-                        section['objects'] = cdi_items(group_objects, item_type['type'], prefilled_data, item_type['id'])
+                        
+                        x = cdi_items(group_objects, item_type['type'], prefilled_data, item_type['id'])
+                        section['objects'] = x
+                        raw_objects.extend(x)
                         if any(['*' in x['gloss'] for x in section['objects']]):
                             section['starred'] = "*Or the word used in your family"  
 
                                 
                 else:
                     group_objects = instrument_model.objects.filter(item_type__exact=item_type['id']).values()
-                    item_type['objects'] = cdi_items(group_objects, item_type['type'], prefilled_data, item_type['id'])
-
-                    
+                    x = cdi_items(group_objects, item_type['type'], prefilled_data, item_type['id'])
+                    item_type['objects'] = x
+                    raw_objects.extend(x)
+        data['cdi_items'] = json.dumps(raw_objects, cls=DjangoJSONEncoder)
+        try:
+            age = BackgroundInfo.objects.filter(administration = administration_instance).values_list('age', flat=True)
+        except:
+            age = ''
+        data['age'] = age                    
     return data
 
 
@@ -239,50 +249,50 @@ def printable_view(request, hash_id):
     return render(request, 'cdi_forms/printable_cdi.html', prefilled_data)
 
 
-def flat_prefilled_cdi_data(administration_instance):
-    prefilled_data_list = administration_data.objects.filter(administration = administration_instance).values('item_ID', 'value')
-    instrument_name = administration_instance.study.instrument.name
-    instrument_model = model_map(instrument_name)
-    prefilled_data = {x['item_ID']: x['value'] for x in prefilled_data_list}
-    with open(PROJECT_ROOT+'/form_data/'+instrument_name+'_meta.json', 'r') as content_file:
-        data = json.loads(content_file.read())
-        data['title'] = administration_instance.study.instrument.verbose_name
-        data['instrument_name'] = administration_instance.study.instrument.name
-        data['completed'] = administration_instance.completed
-        data['due_date'] = administration_instance.due_date
-        raw_objects = []
+# def flat_prefilled_cdi_data(administration_instance):
+#     prefilled_data_list = administration_data.objects.filter(administration = administration_instance).values('item_ID', 'value')
+#     instrument_name = administration_instance.study.instrument.name
+#     instrument_model = model_map(instrument_name)
+#     prefilled_data = {x['item_ID']: x['value'] for x in prefilled_data_list}
+#     with open(PROJECT_ROOT+'/form_data/'+instrument_name+'_meta.json', 'r') as content_file:
+#         data = json.loads(content_file.read())
+#         data['title'] = administration_instance.study.instrument.verbose_name
+#         data['instrument_name'] = administration_instance.study.instrument.name
+#         data['completed'] = administration_instance.completed
+#         data['due_date'] = administration_instance.due_date
+#         raw_objects = []
 
-        for part in data['parts']:
-            for item_type in part['types']:
-                if 'sections' in item_type:
-                    for section in item_type['sections']:
-                        group_objects = instrument_model.objects.filter(category__exact=section['id']).values()
-                        x = cdi_items(group_objects, item_type['type'], prefilled_data, item_type['id'])
-                        raw_objects.extend(x)
+#         for part in data['parts']:
+#             for item_type in part['types']:
+#                 if 'sections' in item_type:
+#                     for section in item_type['sections']:
+#                         group_objects = instrument_model.objects.filter(category__exact=section['id']).values()
+#                         x = cdi_items(group_objects, item_type['type'], prefilled_data, item_type['id'])
+#                         raw_objects.extend(x)
 
                                 
-                else:
-                    group_objects = instrument_model.objects.filter(item_type__exact=item_type['id']).values()
-                    x = cdi_items(group_objects, item_type['type'], prefilled_data, item_type['id'])
-                    raw_objects.extend(x)
-        data['objects'] = json.dumps(raw_objects, cls=DjangoJSONEncoder)
+#                 else:
+#                     group_objects = instrument_model.objects.filter(item_type__exact=item_type['id']).values()
+#                     x = cdi_items(group_objects, item_type['type'], prefilled_data, item_type['id'])
+#                     raw_objects.extend(x)
+#         data['objects'] = json.dumps(raw_objects, cls=DjangoJSONEncoder)
 
                     
-    return data
+#     return data
 
-def graph_data(request, hash_id):
-    administration_instance = get_administration_instance(hash_id)
-    prefilled_data = {}
-    if request.method == 'GET' or request.method=='POST':
-        prefilled_data = flat_prefilled_cdi_data(administration_instance)
-        try:
-            age = BackgroundInfo.objects.filter(administration = administration_instance).values_list('age', flat=True)
-        except:
-            age = ''
-        prefilled_data['age'] = age
-        prefilled_data['hash_id'] = hash_id
+# def graph_data(request, hash_id):
+#     administration_instance = get_administration_instance(hash_id)
+#     prefilled_data = {}
+#     if request.method == 'GET' or request.method=='POST':
+#         prefilled_data = flat_prefilled_cdi_data(administration_instance)
+#         try:
+#             age = BackgroundInfo.objects.filter(administration = administration_instance).values_list('age', flat=True)
+#         except:
+#             age = ''
+#         prefilled_data['age'] = age
+#         prefilled_data['hash_id'] = hash_id
 
-    return render(request, 'cdi_forms/graph.html', prefilled_data)
+#     return render(request, 'cdi_forms/graph.html', prefilled_data)
 
 
 def administer_cdi_form(request, hash_id):
