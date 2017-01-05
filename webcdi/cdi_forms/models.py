@@ -57,8 +57,45 @@ class BackgroundInfo(models.Model):
     years[-1] = (0, "Prefer not to disclose")
     age = models.IntegerField(verbose_name = "Age (in months)", validators=[MinValueValidator(0)], default = 999)
     sex = models.CharField(max_length = 1, choices = (('M', "Male"), ('F', "Female"), ('O', "Other")))
-    birth_order = models.IntegerField(verbose_name = "Birth order (enter number e.g., 1 for first)", validators = [MinValueValidator(1, "Birth order cannot be less than 1. First born child gets value 1")], )
-    birth_weight = models.FloatField(verbose_name = "Birth weight (in pounds)", validators = [validate_g_zero, MaxValueValidator(14, "Birth weight is not expected to be more than 14 pounds")],)
+
+    birth_order_choices = [
+        (1, "1 (First)"),
+        (2, "2 (Second)"),
+        (3, "3 (Third)"),
+        (4, "4 (Fourth)"),
+        (5, "5 (Fifth)"),
+        (6, "6 (Sixth)"),
+        (7, "7 (Seventh)"),
+        (8, "8 (Eighth)"),
+        (9, "9 (Ninth)"),
+        (10, "10 or more (Tenth or Later)"),
+
+    ]
+
+    birth_weight_choices = [
+        (0, "Less than 3 lbs, 0 oz"),
+        (3, "3 lbs, 0 oz - 3 lbs, 7 oz"),
+        (3.5, "3 lbs, 8 oz - 3 lbs, 15 oz"),
+        (4, "4 lbs, 0 oz - 4 lbs, 7 oz"),
+        (4.5, "4 lbs, 8 oz - 4 lbs, 15 oz"),
+        (5, "5 lbs, 0 oz - 5 lbs, 7 oz"),
+        (5.5, "5 lbs, 8 oz - 5 lbs, 15 oz"),
+        (6, "6 lbs, 0 oz - 6 lbs, 7 oz"),
+        (6.5, "6 lbs, 8 oz - 6 lbs, 15 oz"),
+        (7, "7 lbs, 0 oz - 7 lbs, 7 oz"),
+        (7.5, "7 lbs, 8 oz - 7 lbs, 15 oz"),
+        (8, "8 lbs, 0 oz - 8 lbs, 7 oz"),
+        (8.5, "8 lbs, 8 oz - 8 lbs, 15 oz"),
+        (9, "9 lbs, 0 oz - 9 lbs, 7 oz"),
+        (9.5, "9 lbs, 8 oz - 9 lbs, 15 oz"),
+        (10, "10 lbs, 0 oz or more")
+
+    ]
+
+    birth_order = models.IntegerField(verbose_name = "Birth order", choices = birth_order_choices)
+    birth_weight = models.FloatField(verbose_name = "Birth weight", choices = birth_weight_choices)
+
+
     #early_late = models.DateField(verbose_name = "Early or late birth", help_text = "If the child was born on due date, fill 0. If the child was born earlier than due date, fill the number of weeks after the due date as positive value. If the child was born later fill a negative value." )
     born_on_due_date = models.BooleanField(verbose_name = "Was your child born earlier or later than their due date?")
     early_or_late = models.CharField(verbose_name = "Was he/she early or late?", max_length = 5, choices = (('early', 'Early'),('late', 'Late')), blank=True, null=True)

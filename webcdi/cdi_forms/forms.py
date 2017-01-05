@@ -94,7 +94,7 @@ class BackgroundForm(BetterModelForm):
                      choices=language_choices, 
                      label = "Which language(s)", required = False
                 )
-    birth_order = forms.IntegerField(label = "Birth order (enter number e.g., 1 for first)")
+    #birth_order = forms.IntegerField(label = "Birth order (enter number e.g., 1 for first)")
 
     def clean(self):
         cleaned_data = super(BackgroundForm, self).clean()
@@ -196,7 +196,7 @@ class BackgroundForm(BetterModelForm):
         'services': Textarea(attrs={'cols': 80, 'rows': 3}), 
         'worried': Textarea(attrs={'cols': 80, 'rows': 3}), 
         'learning_disability': Textarea(attrs={'cols': 80, 'rows': 3}), 
-        'birth_order': forms.NumberInput(attrs={'min':'1', 'max':'15'}),
-        'birth_weight': forms.NumberInput(attrs={'min':'1', 'max':'15', 'placeholder': 'X.X', 'step': '0.1'}),
+        #'birth_order': forms.NumberInput(attrs={'min':'1', 'max':'15'}),
+        #'birth_weight': forms.NumberInput(attrs={'min':'1', 'max':'15', 'placeholder': 'X.X', 'step': '0.1'}),
         'due_date_diff': forms.NumberInput(attrs={'min':'1', 'max':'18'})
         }
