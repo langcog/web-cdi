@@ -64,7 +64,8 @@ def background_info_form(request, hash_id):
                 # # #age = (datetime.date.today() - background_form.cleaned_data.get('child_dob'))
                 # # #age = age.year*12 + age.month + (age.day >= 15)
                 if child_dob:
-                    age = (datetime.date.today().year - child_dob.year) * 12 +  (datetime.date.today().month - child_dob.month) + (child_dob.day >=15)
+                    day_diff = datetime.date.today().day - child_dob.day
+                    age = (datetime.date.today().year - child_dob.year) * 12 +  (datetime.date.today().month - child_dob.month) + (1 if day_diff >=15 else 0)
                 else:
                     age = None
                 # # #validity of age is checked in the modelform's clean method

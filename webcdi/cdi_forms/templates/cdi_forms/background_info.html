@@ -86,8 +86,11 @@
         if (!isNaN(raw_b_date.getTime()) && document.getElementById("id_child_dob").value != ''){
             console.log("Date valid");
             var t_date = moment();
+            var day_diff = ((t_date.date() - b_date.date()) >= 15)? 1: 0
+            var diff_in_months = 12*(t_date.year() - b_date.year()) + (t_date.month() - b_date.month()) + day_diff;
+            console.log(day_diff)
+            console.log(diff_in_months)
 
-            var diff_in_months = t_date.diff(b_date, 'months');
 
             if (diff_in_months > 0){
 

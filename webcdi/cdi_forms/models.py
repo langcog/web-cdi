@@ -73,22 +73,22 @@ class BackgroundInfo(models.Model):
     ]
 
     birth_weight_choices = [
-        (0, "Less than 3 lbs, 0 oz"),
-        (3, "3 lbs, 0 oz - 3 lbs, 7 oz"),
+        (0.0, "Less than 3 lbs, 0 oz"),
+        (3.0, "3 lbs, 0 oz - 3 lbs, 7 oz"),
         (3.5, "3 lbs, 8 oz - 3 lbs, 15 oz"),
-        (4, "4 lbs, 0 oz - 4 lbs, 7 oz"),
+        (4.0, "4 lbs, 0 oz - 4 lbs, 7 oz"),
         (4.5, "4 lbs, 8 oz - 4 lbs, 15 oz"),
-        (5, "5 lbs, 0 oz - 5 lbs, 7 oz"),
+        (5.0, "5 lbs, 0 oz - 5 lbs, 7 oz"),
         (5.5, "5 lbs, 8 oz - 5 lbs, 15 oz"),
-        (6, "6 lbs, 0 oz - 6 lbs, 7 oz"),
+        (6.0, "6 lbs, 0 oz - 6 lbs, 7 oz"),
         (6.5, "6 lbs, 8 oz - 6 lbs, 15 oz"),
-        (7, "7 lbs, 0 oz - 7 lbs, 7 oz"),
+        (7.0, "7 lbs, 0 oz - 7 lbs, 7 oz"),
         (7.5, "7 lbs, 8 oz - 7 lbs, 15 oz"),
-        (8, "8 lbs, 0 oz - 8 lbs, 7 oz"),
+        (8.0, "8 lbs, 0 oz - 8 lbs, 7 oz"),
         (8.5, "8 lbs, 8 oz - 8 lbs, 15 oz"),
-        (9, "9 lbs, 0 oz - 9 lbs, 7 oz"),
+        (9.0, "9 lbs, 0 oz - 9 lbs, 7 oz"),
         (9.5, "9 lbs, 8 oz - 9 lbs, 15 oz"),
-        (10, "10 lbs, 0 oz or more")
+        (10.0, "10 lbs, 0 oz or more")
 
     ]
 

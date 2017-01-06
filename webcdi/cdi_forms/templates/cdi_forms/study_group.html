@@ -66,10 +66,28 @@
                     var raw_text = "My baby speaks " + value.instrument__language + " and is between " + value.instrument__min_age + " and " + value.instrument__max_age + " months old.";
                     var hyperlink = "/interface/study/" + value.name + "/new_parent";
 
-                    var dob_min = moment().subtract(value.instrument__max_age, 'months').format("MMMM Do, YYYY");
-                    var dob_max = moment().subtract(value.instrument__min_age, 'months').format("MMMM Do, YYYY");
+                    var min_age = value.instrument__min_age;
+                    var max_age = value.instrument__max_age;
+                    var poss_age;
+                    var dob_min = moment().subtract((min_age - 2), 'months');
+                    var dob_max = moment().subtract((max_age + 2), 'months');
+                    var b_date = dob_min;
+                    var t_date = moment();
+                    var age_range = [];
 
-                    var hint = "Born between " + dob_min + " and " + dob_max;
+
+                    while (b_date.isAfter(dob_max)) {
+                        var day_diff = ((t_date.date() - b_date.date()) >= 15)? 1: 0
+                        var poss_age = 12*(t_date.year() - b_date.year()) + (t_date.month() - b_date.month()) + day_diff;
+                        if (poss_age >= min_age & poss_age <= max_age) {
+                            age_range.push(b_date.format("MMMM Do, YYYY"))
+                        }
+                        b_date.subtract(1, 'days')
+
+                    }
+                    console.log(age_range);
+
+                    var hint = "Born between " + age_range[age_range.length - 1] + " and " + age_range[0];
                     console.log(hint)
 
                     var text = "<h3><a href = '" + hyperlink + "'>" + raw_text + "</a> </h3> <ul><li>" + hint + "</li></ul> <br>";                    

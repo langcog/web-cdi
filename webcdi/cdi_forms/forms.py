@@ -123,13 +123,14 @@ class BackgroundForm(BetterModelForm):
 
         c_dob = cleaned_data.get('child_dob')
         if c_dob:
-            c_age = (datetime.date.today().year - c_dob.year) * 12 +  (datetime.date.today().month - c_dob.month) + (c_dob.day >=15)
+            day_diff = datetime.date.today().day - c_dob.day
+            c_age = (datetime.date.today().year - c_dob.year) * 12 +  (datetime.date.today().month - c_dob.month) + (1 if day_diff >=15 else 0)
         else:
             c_age = self.age_ref['child_age']
         if c_age:
             if c_age < self.age_ref['min_age']:
                 self.add_error('age', 'Your baby is too young for this version of the CDI.')
-            elif c_age > self.age_ref['max_age']:
+            elif c_age > (self.age_ref['max_age']):
                 self.add_error('age', 'Your baby is too old for this version of the CDI.')
         else:
             self.add_error('age', 'Please enter your child\'s DOB in the field above.')
