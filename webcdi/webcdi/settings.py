@@ -42,8 +42,16 @@ except ImportError:
 
 #NOTE FROM BEN: I CHANGED DEBUG = False to DEBUG = True 
 # DEBUG = False
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = False
+
+ADMINS = (
+    ('Danielle Kellier', 'dkellier@stanford.edu'),
+)
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+MANAGERS = ADMINS
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1','52.32.108.131']
 
@@ -67,6 +75,7 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'django.middleware.common.BrokenLinkEmailsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -140,24 +149,34 @@ USE_TZ = True
 STATIC_URL = '/static/'
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
-# LOGGING = {
-#     'version': 1,
-#     'disable_existing_loggers': False,
-#     'handlers': {
-#         'file': {
-#             'level': 'DEBUG',
-#             'class': 'logging.FileHandler',
-#             'filename': '/home/ubuntu/web-cdi/django_logs/debug.log',
-#         },
-#     },
-#     'loggers': {
-#         'django.request': {
-#             'handlers': ['file'],
-#             'level': 'DEBUG',
-#             'propagate': True,
-#         },
-#     },
-# }
+# A sample logging configuration. The only tangible logging
+# performed by this configuration is to send an email to
+# the site admins on every HTTP 500 error when DEBUG=False.
+# See http://docs.djangoproject.com/en/dev/topics/logging for
+# more details on how to customize your logging configuration.
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        }
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    }
+}
 
 DATE_INPUT_FORMATS = (
     '%Y-%m-%d', '%m/%d/%Y', '%m/%d/%y',  # '2006-10-25', '10/25/2006', '10/25/06'
