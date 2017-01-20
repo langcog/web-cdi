@@ -133,7 +133,7 @@ def cdi_items(object_group, item_type, prefilled_data, item_id):
         if item_type == 'textbox':
             if obj['itemID'] in prefilled_data:
                 obj['prefilled_value'] = prefilled_data[obj['itemID']]
-                print obj['prefilled_value']
+                # print obj['prefilled_value']
 
     return object_group 
 
