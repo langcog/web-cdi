@@ -10,3 +10,4 @@ django_logs/
 .Rhistory
 */packrat/src/
 webcdi/webcdi/secret_key*
+webcdi/webcdi/databases*
