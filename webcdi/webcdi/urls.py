@@ -21,6 +21,8 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name="researcher_UI/home.html")),
+    url(r'^favicon\.ico', RedirectView.as_view(url='/static/images/favicon.ico', permanent=True)),
+    url(r'^robots\.txt', RedirectView.as_view(url='/static/robots.txt', permanent=True)),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^form/', include('cdi_forms.urls')),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'researcher_UI/login.html'}),
