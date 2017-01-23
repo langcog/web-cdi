@@ -38,7 +38,7 @@
         {% for object in type.objects %}
             {% if type.type == "radiobutton" or type.type == "modified_checkbox" %}
                 {% if object.text != '' %}
-                <div class="col-md-12 alco-child">
+                <div class="col-md-12 alco-child" name = "{{ object.itemID }}_div">
                     <div class="row alco-child1" >{{ object.text | capfirst }} <!-- </div>
                     <div class="row"> -->
                         <div class="pull-right">
@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 {% else %}
-                <div class="col-md-4 alco-child">
+                <div class="col-md-4 alco-child" name = "{{ object.itemID }}_div" >
                     {% for choice in object.choices %}
                     <div class="row">
                         &ensp;
@@ -75,8 +75,8 @@
             {%for object in section.objects %}
                 {% if type.type == "radiobutton" or type.type == "modified_checkbox" %}
                     {% if object.text != '' %}
-                    <div class="col-md-12 alco-child">
-                        <div class="row alco-child1">{{ object.text | capfirst }} <!-- </div>
+                    <div class="col-md-12 alco-child" name = "{{ object.itemID }}_div">
+                        <div class="row alco-child1" >{{ object.text | capfirst }} <!-- </div>
                         <div class="row"> -->
                             <div class="pull-right">
                                 {% for choice in object.choices %}
@@ -89,7 +89,7 @@
                         </div>
                     </div>
                     {% else %}
-                    <div class="col-md-4 alco-child">
+                    <div class="col-md-4 alco-child" name = "{{ object.itemID }}_div">
                         {% for choice in object.choices %}
                         <div class="row">
                             &ensp;
@@ -136,11 +136,45 @@
         history.pushState(null, null, document.URL);
     });
 
+    var uncheck_alert = false;
+
     function clicked(e)
     {
-        if(!confirm('Are you ready to submit? You cannot change your answers after submission.'))e.preventDefault();
+        var names = {};
+        var unchecked_boxes = {}
+        $(':radio').each(function() {
+            names[$(this).attr('name')] = true;
+        });
+        var count = 0;
+        $.each(names, function() { 
+            count++;
+        });
+        if ($(':radio:checked').length === count) {
+            uncheck_alert = false;
+            if(!confirm('Are you ready to submit? You cannot change your answers after submission.'))e.preventDefault();
+        } else {
+            alert('Some of the radio buttons have been left unchecked. Please go back and answer them.');
+            e.preventDefault();
+            uncheck_alert = true;
+
+            $.each(names, function(index, value) {
+                var div_name = 'div[name*="' + index + '_div"]';
+                if (!$("input:radio[name='"+ index + "']").is(":checked")) {
+                    $(div_name).css('background-color','#f4b7b7');
+                    $(div_name).children('div').css('background-color','#f4b7b7');
+                }
+
+            });
+        }
     }
 
+    if (uncheck_alert = true) {
+        $(':radio').change(function() {
+            var div_name = 'div[name*="' +  $(this).attr('name') + '_div"]';
+            $(div_name).css('background-color','#eeeeee');
+            $(div_name).children('div').css('background-color','#eeeeee');
+        });
+    }
     
     $("input:checkbox").on('click', function() {
       // in the handler, 'this' refers to the box clicked on
