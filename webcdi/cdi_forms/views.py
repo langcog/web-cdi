@@ -149,6 +149,7 @@ def prefilled_cdi_data(administration_instance):
         data['instrument_name'] = administration_instance.study.instrument.name
         data['completed'] = administration_instance.completed
         data['due_date'] = administration_instance.due_date
+        data['page_number'] = administration_instance.page_number
         raw_objects = []
         #meta_file['background_form'] = None
 
@@ -201,7 +202,11 @@ def cdi_form(request, hash_id):
                         if value:
                             administration_data.objects.update_or_create(administration = administration_instance, item_ID = key, defaults = {'value': value})
             if 'btn-save' in request.POST and request.POST['btn-save'] == 'Save':
-                administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now())
+                try:
+                    page_number = request.POST['page_number']
+                    administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now(), page_number = page_number)
+                except:
+                    administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now())
                 refresh = True
             elif 'btn-back' in request.POST and request.POST['btn-back'] == 'Go back to Background Info':
                 administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now())

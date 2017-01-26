@@ -45,6 +45,7 @@ class administration(models.Model):
     due_date = models.DateTimeField(verbose_name = "Expiration date")
     last_modified = models.DateTimeField(auto_now = True)
     created_date = models.DateTimeField(verbose_name = "Creation date", auto_now_add = True)
+    page_number = models.IntegerField(verbose_name = "Page number", default = 0)
 
     class Meta:
         unique_together = ('study', 'subject_id', 'repeat_num')

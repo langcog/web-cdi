@@ -12,22 +12,25 @@
 
 
 {% block navcontents %}
-<h4>Contents:</h4>
-<ul class="nav bs-docs-sidenav">
-    {% for part in parts %}
-        <li><a href="#{{ part.id }}" onclick="findPage({{ part.types.0.id }}_div)">{{ part.title }}</a>
-            <ul class="nav">
-                {% for type in part.types %}
-                    <li><a onclick="findPage({{ type.id }}_div)">{{ type.title }}</a></li>
-                    {% for section in type.sections %}
-                        <li><a onclick="findPage({{ section.id }}_div)">{{ section.title }}</a></li>
-                    {% endfor %}
+<a href="#nav_list" data-toggle="collapse" id="tob_title"><h4>Table of Contents: &#8744;</h4></a>
+<div id = "nav_list" class = "collapse">
+    <h4>Contents:</h4>
+    <ul class="nav bs-docs-sidenav">
+        {% for part in parts %}
+            <li><a href="#{{ part.id }}" onclick="findPage({{ part.types.0.id }}_div)">{{ part.title }}</a>
+                <ul class="nav">
+                    {% for type in part.types %}
+                        <li><a onclick="findPage({{ type.id }}_div)">{{ type.title }}</a></li>
+                        {% for section in type.sections %}
+                            <li><a onclick="findPage({{ section.id }}_div)">{{ section.title }}</a></li>
+                        {% endfor %}
 
-                {% endfor %}
-            </ul>
-        </li>
-    {% endfor %}
-</ul>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}
 
 
@@ -35,6 +38,7 @@
 {% csrf_token %}
 {% if parts %}
 <input type='hidden' name='cdi-form' value='cdi-form'/>
+
 <ul>
     {% for part in parts %}
     <div id = "{{ part.id }}_div" class="part_div collapse">
@@ -130,13 +134,15 @@
     {% endfor %}
 
     <div class="row text-center">
+        <a class="btn btn-primary prev-cdi-page" href="#">&#60;&#60; Previous Page</a>
+        <a class="btn btn-primary next-cdi-page" href="#">Next Page &#62;&#62;</a>
+        <font id="progress"></font>
+        <br>
         <input name="btn-save" value="Save" class="btn btn-primary" type="submit">
         <input name="btn-submit" value="Submit" class="btn btn-primary submit-button" type="submit" onclick="clicked(event)">
         <input name="btn-back" value='Go back to Background Info' class="btn btn-primary" type="submit">
-        <br>
-        <a class="btn btn-primary prev-cdi-page" href="#">&#60;&#60; Previous Page</a>
-        <a class="btn btn-primary next-cdi-page" href="#">Next Page &#62;&#62;</a>
     </div>
+    <input type="hidden" id="page_number" name="page_number" value = "0">
     <hr>
     <div class="row text-center">Don't forget to save your progress whenever you can!</div>
 
@@ -172,6 +178,8 @@
     function clicked(e)
     {
         if(!confirm('Are you ready to submit? You cannot change your answers after submission.'))e.preventDefault();
+
+        localStorage.removeItem('prev_page_number');
 
     }
 
@@ -210,10 +218,10 @@
         }
 
 
-        current_page = filterednames[which_page]
+        current_page = filterednames[which_page];
         console.log(which_page + "; " + current_page.id)
 
-        parent_page = current_page.parentElement.parentElement
+        parent_page = current_page.parentElement.parentElement;
 
 
         if ($.inArray( parent_page.id, larger_types ) > -1) {
@@ -223,8 +231,13 @@
             $(".page_div").collapse('hide');
         }
 
-        $("#" + current_page.id).collapse('show')
+        $("#" + current_page.id).collapse('show');
 
+        $('#page_number').val(page_num);
+
+        localStorage.setItem("prev_page_number", $('#page_number').val());
+
+        $('#progress').text((page_num+1) + "/" + filterednames.length)
 
         checkPageNum() 
         closeParts()
@@ -245,7 +258,15 @@
     }
 
     //Defining starting variables. Page number is set to 0 (indexes are 0-based)
-    var page_num = 0
+
+    try {
+
+        var old_page_num = localStorage.getItem("prev_page_number") || 0
+        var page_num = Math.max(parseInt('{{ page_number }}'), old_page_num);
+    }
+    catch(err) {
+        var page_num = 0
+    }
     var parent_page
     var current_page
 
