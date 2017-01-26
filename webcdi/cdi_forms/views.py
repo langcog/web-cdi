@@ -203,7 +203,7 @@ def cdi_form(request, hash_id):
             if 'btn-save' in request.POST and request.POST['btn-save'] == 'Save':
                 administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now())
                 refresh = True
-            elif 'btn-back' in request.POST and request.POST['btn-back'] == 'Back':
+            elif 'btn-back' in request.POST and request.POST['btn-back'] == 'Go back to Background Info':
                 administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now())
                 request.method = "GET"
                 return background_info_form(request, hash_id)

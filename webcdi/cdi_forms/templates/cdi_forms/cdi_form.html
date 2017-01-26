@@ -3,25 +3,33 @@
 {% block nav_buttons %}
 {% if not completed %}
 <input name="btn-save" value="Save" class="btn btn-primary" type="submit">
-<input name="btn-submit" value="Submit" class="btn btn-primary" type="submit" onclick="clicked(event)">
-<input name="btn-back" value="Back" class="btn btn-primary" type="submit">
+<input name="btn-submit" value="Submit" class="btn btn-primary submit-button" type="submit" onclick="clicked(event)">
+<input name="btn-back" value='Go back to Background Info' class="btn btn-primary" type="submit">
+
 {% endif %}
 {% endblock %}
+
+
 
 {% block navcontents %}
 <h4>Contents:</h4>
 <ul class="nav bs-docs-sidenav">
     {% for part in parts %}
-    <li><a href="#{{ part.id }}">{{ part.title }}</a>
-        <ul class="nav ">
-            {% for type in part.types %}
-            <li><a href="#{{ type.id }}">{{ type.title }}</a></li>
-            {% endfor %}
-        </ul>
-        {% endfor %}
-    </li>
+        <li><a href="#{{ part.id }}" onclick="findPage({{ part.types.0.id }}_div)">{{ part.title }}</a>
+            <ul class="nav">
+                {% for type in part.types %}
+                    <li><a onclick="findPage({{ type.id }}_div)">{{ type.title }}</a></li>
+                    {% for section in type.sections %}
+                        <li><a onclick="findPage({{ section.id }}_div)">{{ section.title }}</a></li>
+                    {% endfor %}
+
+                {% endfor %}
+            </ul>
+        </li>
+    {% endfor %}
 </ul>
 {% endblock %}
+
 
 {% block main%}
 {% csrf_token %}
@@ -29,95 +37,109 @@
 <input type='hidden' name='cdi-form' value='cdi-form'/>
 <ul>
     {% for part in parts %}
-    <h2 id="{{ part.id }}"> {{ part.title }}</h2>
+    <div id = "{{ part.id }}_div" class="part_div collapse">
 
-    {% for type in part.types %}
-    <h3 id = "{{ type.id }}"> {{ type.title }}</h3>
-    <p class="lead"> {{ type.text | capfirst }}</p>
-    <div class="row alternate-color">
-        {% for object in type.objects %}
-            {% if type.type == "radiobutton" or type.type == "modified_checkbox" %}
-                {% if object.text != '' %}
-                <div class="col-md-12 alco-child" name = "{{ object.itemID }}_div">
-                    <div class="row alco-child1" >{{ object.text | capfirst }} <!-- </div>
-                    <div class="row"> -->
-                        <div class="pull-right">
+        <h2 id="{{ part.id }}"> {{ part.title }}</h2>
+
+        {% for type in part.types %}
+        <div id = "{{ type.id }}_div" class = "page_div collapse">
+            <h3 id = "{{ type.id }}"> {{ type.title }}</h3>
+            <p class="lead"> {{ type.text | capfirst }}</p>
+            <div class="row alternate-color">
+                {% for object in type.objects %}
+                    {% if type.type == "radiobutton" or type.type == "modified_checkbox" %}
+                        {% if object.text != '' %}
+                        <div class="col-md-12 alco-child" name = "{{ object.itemID }}_div">
+                            <div class="row alco-child1" >{{ object.text | capfirst }} <!-- </div>
+                            <div class="row"> -->
+                                <div class="pull-right">
+                                    {% for choice in object.choices %}
+                                    &ensp;
+                                    <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
+                                    <label for="{{ object.itemID }}_{{ choice.0 }}"> {{ choice.0 }}</label>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="col-md-4 alco-child" name = "{{ object.itemID }}_div" >
                             {% for choice in object.choices %}
-                            &ensp;
-                            <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
-                            <label for="{{ object.itemID }}_{{ choice.0 }}"> {{ choice.0 }}</label>
+                            <div class="row">
+                                &ensp;
+                                <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}"{% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
+                                <label for="{{ object.itemID }}_{{ choice.0 }}"> {{ choice.0 }}</label>
+                            </div>
                             {% endfor %}
                         </div>
+                        {% endif %}
+                    {% elif type.type == "checkbox" %}
+                        <div class="col-md-4 alco-child"> <input type="checkbox" id="{{ object.itemID }}" name="{{ object.itemID }}" value="{{ object.choices }}"{% if completed %} disabled {% endif %} {% if object.prefilled_value %} checked {% endif %}> <label for="{{ object.itemID }}"> {{ object.gloss }}</label></div>
+                    {% elif type.type == "textbox" %}
+                        <div class="col-md-12"> <input type="textbox" id="{{ object.itemID }}" name="{{ object.itemID }}" maxlength="200" value="{{ object.prefilled_value }}" {% if completed %} disabled {% endif %}></div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <ul>
+                {% for section in type.sections %}
+                <div id = "{{ section.id }}_div"  class = "page_div collapse">
+
+                    <h4 id ="{{ section.id }}" >{{ section.title }}</h4>
+                    <div class="row ">
+                        {%for object in section.objects %}
+                            {% if type.type == "radiobutton" or type.type == "modified_checkbox" %}
+                                {% if object.text != '' %}
+                                <div class="col-md-12 alco-child" name = "{{ object.itemID }}_div">
+                                    <div class="row alco-child1" >{{ object.text | capfirst }} <!-- </div>
+                                    <div class="row"> -->
+                                        <div class="pull-right">
+                                            {% for choice in object.choices %}
+                                            &ensp;
+                                            <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
+                                            <label for="{{ object.itemID }}_{{ choice.0 }}"> {{ choice.0 }}</label>
+                                            {% endfor %}
+                                        </div>
+
+                                    </div>
+                                </div>
+                                {% else %}
+                                <div class="col-md-4 alco-child" name = "{{ object.itemID }}_div">
+                                    {% for choice in object.choices %}
+                                    <div class="row">
+                                        &ensp;
+                                        <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}"{% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
+                                        <label for="{{ choice.0 }}"> {{ choice.0 }}</label>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            {% elif type.type == "checkbox" %}
+                                <div class="col-md-4 alco-child"> <input type="checkbox" id="{{ object.itemID }}" name="{{ object.itemID }}" value="{{ object.choices }}"{% if completed %} disabled {% endif %} {% if object.prefilled_value %} checked {% endif %}> <label for="{{ object.itemID }}"> {{ object.gloss }}</label></div>
+                            {% elif type.type == "textbox" %}
+                                <div class="col-md-12"> <input type="textbox" id="{{ object.itemID }}" name="{{ object.itemID }}" maxlength="200" value="{{ object.prefilled_value }}" {% if completed %} disabled {% endif %}></div>
+                            {% endif %}
+                        {% endfor %}
+                        <div class="col-md-12">{{ section.starred }}</div>
                     </div>
                 </div>
-                {% else %}
-                <div class="col-md-4 alco-child" name = "{{ object.itemID }}_div" >
-                    {% for choice in object.choices %}
-                    <div class="row">
-                        &ensp;
-                        <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}"{% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
-                        <label for="{{ object.itemID }}_{{ choice.0 }}"> {{ choice.0 }}</label>
-                    </div>
-                    {% endfor %}
-                </div>
-                {% endif %}
-            {% elif type.type == "checkbox" %}
-                <div class="col-md-4 alco-child"> <input type="checkbox" id="{{ object.itemID }}" name="{{ object.itemID }}" value="{{ object.choices }}"{% if completed %} disabled {% endif %} {% if object.prefilled_value %} checked {% endif %}> <label for="{{ object.itemID }}"> {{ object.gloss }}</label></div>
-            {% elif type.type == "textbox" %}
-                <div class="col-md-12"> <input type="textbox" id="{{ object.itemID }}" name="{{ object.itemID }}" maxlength="200" value="{{ object.prefilled_value }}" {% if completed %} disabled {% endif %}></div>
-            {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+
         {% endfor %}
     </div>
-    <ul>
-        {% for section in type.sections %}
-        <h4 id ="{{ section.id }}" >{{ section.title }}</h4>
-        <div class="row ">
-            {%for object in section.objects %}
-                {% if type.type == "radiobutton" or type.type == "modified_checkbox" %}
-                    {% if object.text != '' %}
-                    <div class="col-md-12 alco-child" name = "{{ object.itemID }}_div">
-                        <div class="row alco-child1" >{{ object.text | capfirst }} <!-- </div>
-                        <div class="row"> -->
-                            <div class="pull-right">
-                                {% for choice in object.choices %}
-                                &ensp;
-                                <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
-                                <label for="{{ object.itemID }}_{{ choice.0 }}"> {{ choice.0 }}</label>
-                                {% endfor %}
-                            </div>
-
-                        </div>
-                    </div>
-                    {% else %}
-                    <div class="col-md-4 alco-child" name = "{{ object.itemID }}_div">
-                        {% for choice in object.choices %}
-                        <div class="row">
-                            &ensp;
-                            <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}"{% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
-                            <label for="{{ choice.0 }}"> {{ choice.0 }}</label>
-                        </div>
-                        {% endfor %}
-                    </div>
-                    {% endif %}
-                {% elif type.type == "checkbox" %}
-                    <div class="col-md-4 alco-child"> <input type="checkbox" id="{{ object.itemID }}" name="{{ object.itemID }}" value="{{ object.choices }}"{% if completed %} disabled {% endif %} {% if object.prefilled_value %} checked {% endif %}> <label for="{{ object.itemID }}"> {{ object.gloss }}</label></div>
-                {% elif type.type == "textbox" %}
-                    <div class="col-md-12"> <input type="textbox" id="{{ object.itemID }}" name="{{ object.itemID }}" maxlength="200" value="{{ object.prefilled_value }}" {% if completed %} disabled {% endif %}></div>
-                {% endif %}
-            {% endfor %}
-            <div class="col-md-12">{{ section.starred }}</div>
-        </div>
-        {% endfor %}
-    </ul>
-
-    {% endfor %}
     {% endfor %}
 
     <div class="row text-center">
         <input name="btn-save" value="Save" class="btn btn-primary" type="submit">
-        <input name="btn-submit" value="Submit" class="btn btn-primary" type="submit" onclick="clicked(event)">
-        <input name="btn-back" value="Back" class="btn btn-primary" type="submit">
+        <input name="btn-submit" value="Submit" class="btn btn-primary submit-button" type="submit" onclick="clicked(event)">
+        <input name="btn-back" value='Go back to Background Info' class="btn btn-primary" type="submit">
+        <br>
+        <a class="btn btn-primary prev-cdi-page" href="#">&#60;&#60; Previous Page</a>
+        <a class="btn btn-primary next-cdi-page" href="#">Next Page &#62;&#62;</a>
     </div>
+    <hr>
+    <div class="row text-center">Don't forget to save your progress whenever you can!</div>
+
 
 </ul>
 {% else %}
@@ -127,55 +149,33 @@
 
 {% block scripts %}
 <script type="text/javascript">
-    $('body').on('activate.bs.scrollspy', function () {
-        $.post('', data=$('#cdi_form').serialize())
-    });
 
+    if ($("#nav_list").hasClass( "collapse" )) {
+        $("#tob_title").innerText = "Table of Contents: &#8744;";
+    } else if ($("#nav_list").hasClass( "collapse.in" )) {
+        $("#tob_title").innerText = "Table of Contents: &#8743;";
+    }
+
+    if ($("#instructions").hasClass( "collapse" )) {
+        $("#instructions_title").innerText = "Table of Contents: &#8744;";
+    } else if ($("#instructions").hasClass( "collapse.in" )) {
+        $("#instructions_title").innerText = "Table of Contents: &#8743;";
+    }    
+
+    //Prevent backspacing in form. Test-takers should use the provided Back and Next Buttons
     history.pushState(null, null, document.URL);
     window.addEventListener('popstate', function () {
         history.pushState(null, null, document.URL);
     });
 
-    var uncheck_alert = false;
-
+    // Confirm to prevent premature submissions
     function clicked(e)
     {
-        var names = {};
-        var unchecked_boxes = {}
-        $(':radio').each(function() {
-            names[$(this).attr('name')] = true;
-        });
-        var count = 0;
-        $.each(names, function() { 
-            count++;
-        });
-        if ($(':radio:checked').length === count) {
-            uncheck_alert = false;
-            if(!confirm('Are you ready to submit? You cannot change your answers after submission.'))e.preventDefault();
-        } else {
-            alert('Some of the radio buttons have been left unchecked. Please go back and answer them.');
-            e.preventDefault();
-            uncheck_alert = true;
+        if(!confirm('Are you ready to submit? You cannot change your answers after submission.'))e.preventDefault();
 
-            $.each(names, function(index, value) {
-                var div_name = 'div[name*="' + index + '_div"]';
-                if (!$("input:radio[name='"+ index + "']").is(":checked")) {
-                    $(div_name).css('background-color','#f4b7b7');
-                    $(div_name).children('div').css('background-color','#f4b7b7');
-                }
-
-            });
-        }
     }
 
-    if (uncheck_alert = true) {
-        $(':radio').change(function() {
-            var div_name = 'div[name*="' +  $(this).attr('name') + '_div"]';
-            $(div_name).css('background-color','#eeeeee');
-            $(div_name).children('div').css('background-color','#eeeeee');
-        });
-    }
-    
+    //Create mutually exclusive checkboxes. 0 or 1 checkbox in a group may be clicked.
     $("input:checkbox").on('click', function() {
       // in the handler, 'this' refers to the box clicked on
       var $box = $(this);
@@ -197,5 +197,119 @@
         var label_var = "label[for='".concat(box_name,"']")
         $(label_var).text("understands and says");
     });
+
+
+
+    //Collapses and expands sections to act like a page-flipper
+    function changePages(which_page) {
+
+        if (which_page === undefined) {
+            which_page = page_num;
+        } else {
+            page_num = which_page;
+        }
+
+
+        current_page = filterednames[which_page]
+        console.log(which_page + "; " + current_page.id)
+
+        parent_page = current_page.parentElement.parentElement
+
+
+        if ($.inArray( parent_page.id, larger_types ) > -1) {
+            $(".page_div").not("#" + parent_page.id).collapse('hide')
+            $("#" + parent_page.id).collapse('show');
+        } else {
+            $(".page_div").collapse('hide');
+        }
+
+        $("#" + current_page.id).collapse('show')
+
+
+        checkPageNum() 
+        closeParts()
+
+    }
+
+    //For types and sections nested in parts, keeps only the relevant part open (e.g., "Part 2: Gestures" won't be open and visible while the test-taker is working on "Phrases")
+    function closeParts() {
+
+        $(".part_div").each( function () {
+            if ($(this).has("#" + current_page.id).length) {
+                $(this).collapse('show')
+            } else{
+                 $(this).collapse('hide')
+            }
+
+        });
+    }
+
+    //Defining starting variables. Page number is set to 0 (indexes are 0-based)
+    var page_num = 0
+    var parent_page
+    var current_page
+
+    //Naming types that are containers of smaller sections. Important for creating pages from a nested structure!
+    var larger_types = ["word_div", "gestures_div", "word_ending_div", "word_form_div"];
+
+    // Going through all the named type and section divisions and pulling out those that are not just containers for smaller sections
+    var filterednames = $(".page_div").filter(function(index, value) {
+        return ($.inArray( value.id, larger_types ) == -1);
+    });
+
+    //Initial page turning. Test starts on page 0 (first page)
+    changePages();
+
+
+    //Page changing buttons. Flip forwards of backwards
+    $('.prev-cdi-page').on('click', function (e) {
+        e.preventDefault();
+        page_num--;
+        changePages();
+    })
+
+    $('.next-cdi-page').on('click', function (e) {
+        e.preventDefault();
+        page_num++;
+        changePages();
+
+    })
+
+
+    //Prevent page_num from going below 0 or above the max number of pages - 1 by removing the capable buttons
+    function checkPageNum() {
+
+        if (page_num <= 0) {
+            $('.prev-cdi-page').hide();
+        } else{
+            $('.prev-cdi-page').show();
+
+        }
+
+        if (page_num >= filterednames.length -1) {
+            $('.next-cdi-page').hide();
+            $('.submit-button').css('background-color', '#249D00');
+        } else{
+            $('.next-cdi-page').show();
+            $('.submit-button').css('background-color', '#337ab7');
+        }
+    }
+
+    //Navbar functionality. Clicking a section in the nav-bar now flips you to the relevant page.
+    function findPage(page_title) {
+        var page_location = $.inArray( page_title, filterednames ); 
+        if (page_location > -1) {
+            var x = page_location;
+        } else {
+            var next_page = $(filterednames).filter(function(index, value) {
+                return ($("#" + page_title.id).has("#" + value.id).length);
+            }).first();
+            console.log(next_page)
+            var x = $.inArray( next_page[0], filterednames ); 
+        }
+        console.log(x)
+        changePages(x);
+    }
+
 </script>
 {% endblock %}

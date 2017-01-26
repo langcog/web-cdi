@@ -24,35 +24,27 @@
     <script src="https://cdn.jsdelivr.net/lodash/4.17.2/lodash.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-queue/3.0.3/d3-queue.min.js"></script>
 
-    <!--.alternate-color :nth-child(odd){
-          background-color:#ddd;
-    }
-    .alternate-color :nth-child(even){
-          background-color:#fff;
-    }-->
-
-    <!--[if lt IE 9]>
-    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
 </head>
 
 <body data-spy="scroll" data-target="#navbar">
-<div class="container bs-docs-container" style="padding-top: 60px; padding-bottom: 60px;">
+    <div class="container bs-docs-container" style="padding-top: 60px; padding-bottom: 60px;">
     <form id="cdi_form" method="post" class="form-horizontal">
         <div class="row">
             <div class="col-md-3" role="complementary">
 
                 <nav id="navbar" class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" style="padding-top:60px;">
                     <div>
-                        <h4>Instructions:</h4>
-                        <ul>
-                            <li> This form can be filled anytime before the due date. </li>
-                            <li> It can also be saved at any time and resumed later by using the same link (<a id="bookmarkme" href="">create bookmark</a>).</li>
-                            <li> After the form is submitted, it cannot be altered. </li>
-                            <li> The form also cannot be altered after the due date. </li>
-                            <li> Please use the navigation buttons below. Do not use the "back" and "forward" buttons on your browser. </li>
-                            <li> You can use the tab button and arrows keys to quickly navigate and answer questions. </li>
-                        </ul>
+                        <a href="#instructions" data-toggle="collapse" id="instructions_title"><h4>Instructions: &#8744;</h4></a>
+                        <div id="instructions" class = "collapse.in">
+                            <ul>
+                                <li> This form can be filled anytime before the due date. </li>
+                                <li> It can also be saved at any time and resumed later by using the same link (<a id="bookmarkme" href="">create bookmark</a>).</li>
+                                <li> After the form is submitted, it cannot be altered. </li>
+                                <li> The form also cannot be altered after the due date. </li>
+                                <li> Please use the navigation buttons below. Do not use the "back" and "forward" buttons on your browser. </li>
+                                <li> You can use the tab button and arrows keys to quickly navigate and answer questions. </li>
+                            </ul>
+                        </div>
                         <script type="text/javascript">
                         $(function() {
                             $("#bookmarkme").click(function() {
@@ -72,8 +64,11 @@
                         {% block nav_buttons %}
                         {% endblock %}
                     </div>
-                    {% block navcontents %}
-                    {% endblock %}
+                    <a href="#nav_list" data-toggle="collapse" id="tob_title"><h4>Table of Contents: &#8744;</h4></a>
+                    <div id = "nav_list" class = "collapse">
+                        {% block navcontents %}
+                        {% endblock %}
+                    </div>
                 </nav>
 
             </div>
