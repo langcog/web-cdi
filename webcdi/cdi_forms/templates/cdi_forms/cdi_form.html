@@ -156,17 +156,7 @@
 {% block scripts %}
 <script type="text/javascript">
 
-    if ($("#nav_list").hasClass( "collapse" )) {
-        $("#tob_title").innerText = "Table of Contents: &#8744;";
-    } else if ($("#nav_list").hasClass( "collapse.in" )) {
-        $("#tob_title").innerText = "Table of Contents: &#8743;";
-    }
-
-    if ($("#instructions").hasClass( "collapse" )) {
-        $("#instructions_title").innerText = "Table of Contents: &#8744;";
-    } else if ($("#instructions").hasClass( "collapse.in" )) {
-        $("#instructions_title").innerText = "Table of Contents: &#8743;";
-    }    
+    $("#instructions").collapse('show');
 
     //Prevent backspacing in form. Test-takers should use the provided Back and Next Buttons
     history.pushState(null, null, document.URL);

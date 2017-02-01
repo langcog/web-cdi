@@ -33,6 +33,11 @@
     <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+	<meta property="og:url" content="http://webcdi.stanford.edu/form/fill/{{ hash_id}}/" />
+	<meta property="og:image" content="http://webcdi.stanford.edu/{% static 'researcher_UI/images/logo.png' %}" />
+	<meta property="og:title" content="MacArthur-Bates Communicative Development Inventory" />
+	<meta property="og:description" content="Interesting tidbits learned from how your child speaks!" />
+
 </head>
 
 <style>
@@ -52,6 +57,15 @@
 </style>
 
 <body >
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
     <div class="container bs-docs-container" style='padding-top: 60px; padding-bottom: 60px;'>
     <form class='form-horizontal'>
     {% csrf_token %}
@@ -79,7 +93,10 @@
     </div>
 
     <div class="row text-center">
-        <a href="#filled_form" data-toggle="collapse">Show Me My Answers</a>
+        <a href="#filled_form" data-toggle="collapse">Show Me My Answers</a><br>
+	<div class="fb-share-button" data-href="http://webcdi.stanford.edu/form/fill/{{ hash_id }}/" data-layout="link" data-mobile-iframe="false">
+		<a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwebcdi.stanford.edu%2Fform%2Ffill%2F{{ hash_id }}%2F&amp;src=sdkpreparse">Share</a>
+	</div>
     </div>
 
     <div class="col-md-12 collapse" id="graph_data" style="height: 90vh;">
