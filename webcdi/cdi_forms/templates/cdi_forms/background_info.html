@@ -42,7 +42,7 @@
 
 {% block scripts %}
 <script>
-    $('.enabler[value="True"]').each(function(index, e){
+    $('.enabler[value="1"]').each(function(index, e){
         if(e.checked){
             $(e).closest('.form-group').next('.dependent').css('display','block');
         }
@@ -50,7 +50,15 @@
             $(e).closest('.form-group').next('.dependent').css('display','block');
         });
     });
-    $('.enabler[value="False"]').each(function(index, e){
+    $('.enabler[value="0"]').each(function(index, e){
+        if(e.checked){
+            $(e).closest('.form-group').next('.dependent').css('display','none');
+        }
+        $(e).change(function(){
+            $(e).closest('.form-group').next('.dependent').css('display','none');
+        });
+    });
+    $('.enabler[value="2"]').each(function(index, e){
         if(e.checked){
             $(e).closest('.form-group').next('.dependent').css('display','none');
         }

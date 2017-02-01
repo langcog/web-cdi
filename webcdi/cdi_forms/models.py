@@ -69,11 +69,12 @@ class BackgroundInfo(models.Model):
         (8, "8 (Eighth)"),
         (9, "9 (Ninth)"),
         (10, "10 or more (Tenth or Later)"),
+        (0, "Prefer not to disclose")
 
     ]
 
     birth_weight_choices = [
-        (0.0, "Less than 3 lbs, 0 oz"),
+        (1.0, "Less than 3 lbs, 0 oz"),
         (3.0, "3 lbs, 0 oz - 3 lbs, 7 oz"),
         (3.5, "3 lbs, 8 oz - 3 lbs, 15 oz"),
         (4.0, "4 lbs, 0 oz - 4 lbs, 7 oz"),
@@ -88,7 +89,8 @@ class BackgroundInfo(models.Model):
         (8.5, "8 lbs, 8 oz - 8 lbs, 15 oz"),
         (9.0, "9 lbs, 0 oz - 9 lbs, 7 oz"),
         (9.5, "9 lbs, 8 oz - 9 lbs, 15 oz"),
-        (10.0, "10 lbs, 0 oz or more")
+        (10.0, "10 lbs, 0 oz or more"),
+        (0.0, "Prefer not to disclose")
 
     ]
 
@@ -97,7 +99,7 @@ class BackgroundInfo(models.Model):
 
 
     #early_late = models.DateField(verbose_name = "Early or late birth", help_text = "If the child was born on due date, fill 0. If the child was born earlier than due date, fill the number of weeks after the due date as positive value. If the child was born later fill a negative value." )
-    born_on_due_date = models.BooleanField(verbose_name = "Was your child born earlier or later than their due date?")
+    born_on_due_date = models.IntegerField(verbose_name = "Was your child born earlier or later than their due date?")
     early_or_late = models.CharField(verbose_name = "Was he/she early or late?", max_length = 5, choices = (('early', 'Early'),('late', 'Late')), blank=True, null=True)
     due_date_diff = models.IntegerField(verbose_name = "By how many weeks? (round to the nearest week)",blank=True, null=True, validators = [MinValueValidator(1, "Number of weeks cannot be less than 1")])
 
@@ -132,33 +134,34 @@ class BackgroundInfo(models.Model):
     #parent_2_hours = models.IntegerField(verbose_name = "Parent 2")
     #other = models.CharField(max_length = 20,  blank = True, verbose_name = "Other caregiver (if any)", help_text = "e.g. nanny, family provider, grandmother")
     #other_hours = models.IntegerField( blank = True, verbose_name = "Hours spend with other caregivers")
-    caregiver_info = models.IntegerField(verbose_name = "Who does your child live with?", choices =((2, "Two parents"), (1, "One parent"), (3, "One parent plus other caregiver (e.g., grandparent)"), (0, "Other caregivers (e.g., grandparent or grandparents)")))
+    caregivers_choices = ((2, "Two parents"), (1, "One parent"), (3, "One parent plus other caregiver (e.g., grandparent)"), (4, "Other caregivers (e.g., grandparent or grandparents)"), (0, "Prefer not to disclose"))
+    caregiver_info = models.IntegerField(verbose_name = "Who does your child live with?", choices = caregivers_choices)
 
     #daycare_days_per_week = models.IntegerField( blank = True, verbose_name = "Number of days per week at daycare or preschool (if applicable)")
     #daycare_hours_per_day = models.IntegerField( blank = True, verbose_name = "Number of hours per day at daycare or preschool (if applicable)")
     #daycare_since = models.IntegerField( blank = True, verbose_name = "Since what age (in months) at daycare or preschool (if applicable)")
 
     #which_language = models.CharField(max_length = 20, blank = True)
-    other_languages_boolean = models.BooleanField()
+    other_languages_boolean = models.IntegerField()
     other_languages = ArrayField(models.CharField(max_length = 101), blank = True, null=True)
     language_from = models.CharField(max_length = 50, blank = True, verbose_name = "From whom?", null=True)
     language_days_per_week = models.IntegerField(null=True, blank = True, verbose_name = "How many days per week is the child exposed to these languages?", validators = [MaxValueValidator(7, "Number of days per week cannot exceed 7"), MinValueValidator(1, "Number of days per week cannot be less than 1")], )
     language_hours_per_day = models.IntegerField(null=True, blank = True, verbose_name = "How many hours per day is the child exposed to these languages?", validators = [MaxValueValidator(24, "Number of hours per day cannot exceed 24"), MinValueValidator(1, "Number of hours per day cannot be less than 1")],)
     #language_since = models.IntegerField( blank = True)
 
-    ear_infections_boolean = models.BooleanField(verbose_name = "Has your child experienced chronic ear infections (5 or more)? ")
+    ear_infections_boolean = models.IntegerField(verbose_name = "Has your child experienced chronic ear infections (5 or more)? ")
     ear_infections = models.CharField(max_length = 1001, null=True, blank = True, verbose_name = "Has your child undergone interventions (e.g., tubes)?  Please describe")
-    hearing_loss_boolean = models.BooleanField(verbose_name = 'Do you suspect that your child may have hearing loss?' )
+    hearing_loss_boolean = models.IntegerField(verbose_name = 'Do you suspect that your child may have hearing loss?' )
     hearing_loss = models.CharField(max_length = 1001, blank = True, null=True,  verbose_name = 'Please describe' )
-    vision_problems_boolean = models.BooleanField(verbose_name = 'Is there some reason to suspect that your child may have vision problems?' )
+    vision_problems_boolean = models.IntegerField(verbose_name = 'Is there some reason to suspect that your child may have vision problems?' )
     vision_problems = models.CharField(max_length = 1001, blank = True, null=True, verbose_name = 'Please describe')
-    illnesses_boolean = models.BooleanField(verbose_name = 'Has your child had any major illnesses, hospitalizations, or diagnosed disabilities?' )
+    illnesses_boolean = models.IntegerField(verbose_name = 'Has your child had any major illnesses, hospitalizations, or diagnosed disabilities?' )
     illnesses = models.CharField(max_length = 1001, blank = True, null=True, verbose_name = "Please describe")
-    services_boolean = models.BooleanField(verbose_name = 'Has your child ever received any services for speech, language, or development issues?' )
+    services_boolean = models.IntegerField(verbose_name = 'Has your child ever received any services for speech, language, or development issues?' )
     services = models.CharField(max_length = 1001, blank = True, null=True, verbose_name = "Please describe")
-    worried_boolean = models.BooleanField(verbose_name = 'Are you worried about your child\'s progress in language or communication?' )
+    worried_boolean = models.IntegerField(verbose_name = 'Are you worried about your child\'s progress in language or communication?' )
     worried = models.CharField(max_length = 1001, blank = True, null=True, verbose_name = "Please describe")
-    learning_disability_boolean = models.BooleanField(verbose_name = 'Have you or anyone in your immediate family been diagnosed with a language or learning disability?' )
+    learning_disability_boolean = models.IntegerField(verbose_name = 'Have you or anyone in your immediate family been diagnosed with a language or learning disability?' )
     learning_disability = models.CharField(max_length = 1001, blank = True, null=True, verbose_name = "Indicate which family member and provide a description")
 
     #def clean(self):

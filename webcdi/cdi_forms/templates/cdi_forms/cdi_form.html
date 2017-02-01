@@ -226,6 +226,7 @@
         $('#page_number').val(page_num);
 
         localStorage.setItem("prev_page_number", $('#page_number').val());
+        localStorage.setItem("prev_hash_id", "{{ hash_id }}");
 
         $('#progress').text((page_num+1) + "/" + filterednames.length)
 
@@ -250,8 +251,13 @@
     //Defining starting variables. Page number is set to 0 (indexes are 0-based)
 
     try {
+        if (localStorage.getItem("prev_hash_id") == "{{ hash_id }}") {
+            var old_page_num = localStorage.getItem("prev_page_number") || 0
+        } else {
+            var old_page_num = 0;
+        }
 
-        var old_page_num = localStorage.getItem("prev_page_number") || 0
+
         var page_num = Math.max(parseInt('{{ page_number }}'), old_page_num);
     }
     catch(err) {

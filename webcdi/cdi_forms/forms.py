@@ -29,6 +29,8 @@ class BackgroundForm(BetterModelForm):
     ('W', "White"),
     ('O', "Other")), label = "My child is (check all that apply):", required = False)
     YESNO_CHOICES = ((False, 'No'), (True, 'Yes'))
+    YESNONA_CHOICES = ((0, 'No'), (1, 'Yes'), (2, 'Prefer not to disclose'))
+
     child_dob = forms.DateField(input_formats=['%m/%d/%Y'], widget=forms.TextInput(attrs={'placeholder': 'mm/dd/yyyy'}),
                                 help_text = "To protect your privacy, we never store your child's date of birth, we only record age in months.",
                                 validators = [MaxValueValidator(datetime.date.today())], label = 'Child DOB<font color="aa0000">*</font>', required=False)
@@ -45,48 +47,48 @@ class BackgroundForm(BetterModelForm):
                      choices=YESNO_CHOICES, widget=forms.RadioSelect, coerce = string_bool_coerce
                 , required=False, label="Is your child Hispanic or Latino?")
     born_on_due_date = forms.TypedChoiceField(
-                     choices=YESNO_CHOICES, widget=forms.RadioSelect, label='Was your child born early or late (more than one week before or after the due date)?', coerce=string_bool_coerce)
+                     choices=YESNONA_CHOICES, widget=forms.RadioSelect, label='Was your child born early or late (more than one week before or after the due date)?')
     early_or_late = forms.ChoiceField(
                      choices=(('early', 'Early'),('late', 'Late')), widget=forms.RadioSelect,
                  required=False)
     sex = forms.ChoiceField(
-                     choices=(('M', 'Male'), ('F', 'Female'), ('O', 'Other')), widget=forms.RadioSelect,
+                     choices=(('M', 'Male'), ('F', 'Female'), ('O', 'Other / Prefer not to disclose')), widget=forms.RadioSelect,
                 )
     other_languages_boolean = forms.TypedChoiceField(
-                     choices=YESNO_CHOICES, widget=forms.RadioSelect, coerce=string_bool_coerce, label='Does your child regularly hear a language other than English?')
+                     choices=YESNONA_CHOICES, widget=forms.RadioSelect, label='Does your child regularly hear a language other than English?')
 
     ear_infections_boolean = forms.TypedChoiceField(
-                     choices=YESNO_CHOICES, widget=forms.RadioSelect, coerce=string_bool_coerce ,
+                     choices=YESNONA_CHOICES, widget=forms.RadioSelect,
                      label =  
                      "Has your child experienced chronic ear infections (5 or more)?"
                      )
     hearing_loss_boolean = forms.TypedChoiceField(
-                     choices=YESNO_CHOICES, widget=forms.RadioSelect, coerce=string_bool_coerce, 
+                     choices=YESNONA_CHOICES, widget=forms.RadioSelect, 
                      label =  
                         'Do you suspect that your child may have hearing loss?' 
                      )
     vision_problems_boolean = forms.TypedChoiceField(
-                     choices=YESNO_CHOICES, widget=forms.RadioSelect, coerce=string_bool_coerce, 
+                     choices=YESNONA_CHOICES, widget=forms.RadioSelect, 
                      label =  
                         'Is there some reason to suspect that your child may have vision problems?' 
                      )
     illnesses_boolean = forms.TypedChoiceField(
-                     choices=YESNO_CHOICES, widget=forms.RadioSelect, coerce=string_bool_coerce, 
+                     choices=YESNONA_CHOICES, widget=forms.RadioSelect, 
                      label =  
                          'Has your child had any major illnesses, hospitalizations, or diagnosed disabilities?' 
                      )
     services_boolean = forms.TypedChoiceField(
-                     choices=YESNO_CHOICES, widget=forms.RadioSelect, coerce=string_bool_coerce, 
+                     choices=YESNONA_CHOICES, widget=forms.RadioSelect, 
                      label =  
                         'Has your child ever received any services for speech, language, or development issues?' 
                      )
     worried_boolean = forms.TypedChoiceField(
-                     choices=YESNO_CHOICES, widget=forms.RadioSelect, coerce=string_bool_coerce, 
+                     choices=YESNONA_CHOICES, widget=forms.RadioSelect, 
                      label =  
                         'Are you worried about your child\'s progress in language or communication?' 
                      )
     learning_disability_boolean = forms.TypedChoiceField(
-                     choices=YESNO_CHOICES, widget=forms.RadioSelect, coerce=string_bool_coerce, 
+                     choices=YESNONA_CHOICES, widget=forms.RadioSelect, 
                      label =  
                         'Have you or anyone in your immediate family been diagnosed with a language or learning disability?' 
                      )
@@ -110,7 +112,7 @@ class BackgroundForm(BetterModelForm):
         ('learning_disability_boolean', ['learning_disability',]),)
         for (enabler, dependents) in enabler_dependent_fields:
             enabler_val = cleaned_data.get(enabler)
-            if enabler_val:
+            if enabler_val == '1':
                 for dependent in dependents:
                     if dependent not in cleaned_data or cleaned_data.get(dependent) == '':
                         self.add_error(dependent, "This field cannot be empty")
