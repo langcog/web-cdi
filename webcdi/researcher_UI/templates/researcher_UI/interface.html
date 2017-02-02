@@ -15,6 +15,8 @@
     <script src="{% static 'researcher_UI/researcher_UI.js' %}"></script>
     <link rel="stylesheet" href="{% static 'researcher_UI/console.css' %}" />
     <link rel="stylesheet" href="{% static 'researcher_UI/table.css' %}" />
+    <script src="{% static 'cdi_forms/moment.js' %}"></script>
+
 </head>
 <body>
 <div class='container'>
@@ -93,6 +95,17 @@
                     <legend> Data :</legend>
                     <div class='col-md-12'>
                         {% include "researcher_UI/table.html" with table=study_administrations %}
+                        <script type="text/javascript">
+                            var utc_time;
+                            var local_time;
+                            $('.due_date, .last_modified, .created_date').not('.orderable, .sortable').each( function () {
+                                utc_time = moment.utc($(this).html(), "MM/DD/YYYY hh:mm a");
+                                local_time = moment(utc_time).local().format("MM/DD/YYYY hh:mm a");
+                                $(this).html(local_time);
+
+
+                            });
+                        </script>
                     </div>
                     <div class='col-md-3'>
                             <button style='width:100%;' class="btn btn-default" id='add-selected' type='submit' name='administer-selected' value='administer-selected' disabled  >Re-administer Participants</button>
@@ -118,6 +131,7 @@
 <script>
 checked_only()
 $('form').each(function(){this.onkeypress = checkEnter;});
+
 </script>
 </body>
 </html>
