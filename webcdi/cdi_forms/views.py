@@ -150,6 +150,7 @@ def prefilled_cdi_data(administration_instance):
         data['completed'] = administration_instance.completed
         data['due_date'] = administration_instance.due_date
         data['page_number'] = administration_instance.page_number
+        data['hash_id'] = administration_instance.url_hash
         raw_objects = []
         #meta_file['background_form'] = None
 
