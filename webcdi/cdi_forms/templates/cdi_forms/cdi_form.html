@@ -37,6 +37,135 @@
 {% block main%}
 {% csrf_token %}
 {% if parts %}
+<ul>
+    <div id = "intro" class = "page_div collapse">
+        {% if instrument_name  == "English_WG" %}
+            {% load staticfiles %}
+            <p class="lead" id="intro_text">
+                In this section of the assessment, you will be asked about the kinds of signs, phrases, words, and gestures that your child understands. When we ask if your child "understands" or "understands and says" a word, there are a lot of possible meanings! Here are some examples of what we mean.
+            </p>
+            When it comes to "understanding" a word: <br><br>
+            <div class="row">
+                <div class="col-xs-6">
+                    <img src={% static 'images/understands-no-read.png' %} class="rounded float-xs-left" alt="Hearing the word is not enough to say that your child understands it."style="max-width: 90%; border: 1px solid black;">
+
+                </div>
+
+                <div class="col-xs-6">
+                    Just hearing the word "ball" is NOT enough to prove that your child "understands" that word.
+
+                </div>
+            </div><br>
+
+            <div class="row">
+                <div class="col-xs-6">
+                    <img src={% static 'images/understands-yes-get.png' %} class="rounded float-xs-left" alt="Hearing the word AND looking for the object can mean that your child understands it."style="max-width: 90%; border: 1px solid black;">
+
+                </div>
+
+                <div class="col-xs-6">
+                    However, if you think your child would look for a ball if they heard the word "ball", then your child "understands" the word "ball".
+
+                </div>
+            </div>
+            <br>
+            When it comes to "understanding and saying" a word:<br>
+            It's fine if your child cannot say the whole word! Saying "ba" instead of "ball" can still mean that your child "understands and says" a word in some cases.
+
+            <br>
+
+            <div class="row">
+                <div class="col-xs-6">
+                    <img src={% static 'images/says-no-baba.png' %} class="rounded float-xs-left" alt="Saying the word alone is not enough to mean that your child understands and says a word. The context is important!"style="max-width: 90%; border: 1px solid black;">
+
+                </div>
+
+                <div class="col-xs-6">
+                    Your child says "ba" or "ball" in the absence of a ball, that does NOT mean that your child "understands AND says" the word "ball".
+
+                </div>
+            </div><br>
+
+            <div class="row">
+                <div class="col-xs-6">
+                    <img src={% static 'images/says-no-coaching.png' %} class="rounded float-xs-left" alt="Having your child repeat back a taught word is not enough to mean that your child undestands the word."style="max-width: 90%; border: 1px solid black;">
+
+                </div>
+
+                <div class="col-xs-6">
+                    In that same vein, teaching your child to say "ba" or "ball" does NOT mean that your child "understands AND says" the word "ball".
+
+                </div>
+            </div><br>
+
+            <div class="row">
+                <div class="col-xs-6">
+                    <img src={% static 'images/says-yes-ba.png' %} class="rounded float-xs-left" alt="Having your child say the word in the presence of the object can mean that your child understands and says the word."style="max-width: 90%; border: 1px solid black;">
+
+                </div>
+
+                <div class="col-xs-6">
+                    However if you think your child would say "ba" or "ball" in the presence of a ball, then your child "understands and says" that word.
+
+                </div>
+            </div>
+
+        {% elif instrument_name  == "English_WS" %}
+            {% load staticfiles %}
+            <p class="lead" id="intro_text">
+                In this section of the assessment, you will be asked about the kinds of words and sentences that your child says. When we ask if your child "says" a word, there can be more than one meaning! Here are some examples of what we mean:
+            </p>
+
+            <br>
+
+            It's fine if your child cannot say the whole word! Saying "ba" instead of "ball" can still mean that your child "says" a word in certain cases.<br><br>
+
+
+            <div class="row">
+                <div class="col-xs-6">
+                    <img src={% static 'images/says-no-baba.png' %} class="rounded float-xs-left" alt="Michael C. Frank Signature"style="max-width: 90%; border: 1px solid black;">
+
+                </div>
+
+                <div class="col-xs-6">
+                    Your child says "ba" or "ball" in the absence of a ball, that does NOT mean that your child "says" the word "ball".
+
+                </div>
+            </div><br>
+
+            <div class="row">
+                <div class="col-xs-6">
+                    <img src={% static 'images/says-no-coaching.png' %} class="rounded float-xs-left" alt="Michael C. Frank Signature"style="max-width: 90%; border: 1px solid black;">
+
+                </div>
+
+                <div class="col-xs-6">
+                    In that same vein, teaching your child to say "ba" or "ball" does NOT mean that your child "says" the word "ball".
+
+                </div>
+            </div><br>
+
+            <div class="row">
+                <div class="col-xs-6">
+                    <img src={% static 'images/says-yes-ba.png' %} class="rounded float-xs-left" alt="Michael C. Frank Signature"style="max-width: 90%; border: 1px solid black;">
+
+                </div>
+
+                <div class="col-xs-6">
+                    However if you think your child would say "ba" or "ball" in the presence of a ball, then your child "says" that word.
+
+                </div>
+            </div>
+
+
+        {% endif %}
+        <br><br>
+        You do NOT have to personally witness your child interacting with a ball. We just want you to think hypothetically about what you think your child would do.<br>
+        This assessment covers a wide range of ages. If your child may not be able to understand or say a lot of the words on the form and that is perfectly fine. We want to see what you think your child can do.
+    </div>
+
+</ul>
+
 <input type='hidden' name='cdi-form' value='cdi-form'/>
 
 <ul>
