@@ -407,6 +407,8 @@
     return shuffle(hues);
   }
 
+  var chart_understood;
+
   function plotFlippedPropUnderstood() {
     var margin = {top: 20, right: 20, bottom: 60, left: 200},
     width = comp_graph_width - margin.left - margin.right,
@@ -426,7 +428,7 @@
     .scale(y)
     .orient("left");
 
-    var chart_understood = d3.select("#categories_charts").append("svg")
+    chart_understood = d3.select("#categories_charts").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
@@ -484,6 +486,7 @@
     .attr("height", y.rangeBand());
   }
 
+  var chart_produced;
 
   function plotFlippedPropProduced() {
     var margin = {top: 20, right: 20, bottom: 60, left: 200},
@@ -505,7 +508,7 @@
     .orient("left")
     .outerTickSize(0);
 
-    var chart_produced = d3.select("#categories_charts").append("svg")
+    chart_produced = d3.select("#categories_charts").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
@@ -790,6 +793,9 @@
     }
   }
 
+  var pred_chart;
+  var node;
+
   function plotPredictData() {
     var margin = {top: 20, right: 160, bottom: 60, left: 80},
       width = graph_width + 50 - margin.left - margin.right,
@@ -812,7 +818,7 @@
       .x(function(d) { return x(d.age); })
       .y(function(d) { return y(100 * d.pred); });
 
-    var pred_chart = d3.select("#predicted_chart")
+    pred_chart = d3.select("#predicted_chart")
       .append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
@@ -845,7 +851,7 @@
     //     .attr("cy", function(d) { return y(d.vocab); })
     //     .attr("fill", "#2DBC74");
 
-    var node = pred_chart.selectAll("g")
+    node = pred_chart.selectAll("g")
         .data(current_vocab)
         .enter()
         .append("g");
