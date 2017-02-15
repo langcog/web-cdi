@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 from databases import *
-
+import socket
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -55,7 +55,16 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 MANAGERS = ADMINS
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1','52.32.108.131']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1','52.32.108.131','.amazonaws.com','.us-west-2.elasticbeanstalk.com']
+
+EC2_PRIVATE_IP  =   None
+try:
+    EC2_PRIVATE_IP  =   socket.gethostbyname(socket.gethostname())
+except requests.exceptions.RequestException:
+    pass
+
+if EC2_PRIVATE_IP:
+    ALLOWED_HOSTS.append(EC2_PRIVATE_IP)
 
 
 # Application definition
