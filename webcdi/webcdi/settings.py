@@ -60,7 +60,7 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1','52.32.108.131','.amazonaws.com','.us-
 EC2_PRIVATE_IP  =   None
 try:
     EC2_PRIVATE_IP  =   socket.gethostbyname(socket.gethostname())
-except requests.exceptions.RequestException:
+except:
     pass
 
 if EC2_PRIVATE_IP:
