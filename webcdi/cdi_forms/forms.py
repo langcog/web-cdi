@@ -11,9 +11,15 @@ from django.templatetags.static import static
 import datetime
 from django.core.exceptions import ValidationError
 import codecs, json
+import os.path
+
+PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
 
-isoLangs = json.load(codecs.open('languages.json', 'r', 'utf-8'))
+
+#isoLangs = json.load(codecs.open('languages.json', 'r', 'utf-8'))
+isoLangs = json.load(codecs.open(PROJECT_ROOT + '/../' + 'languages.json', 'r', 'utf-8'))
+
 language_choices = [(v['name'],v['name']) for k,v in isoLangs.iteritems()]
 
 def string_bool_coerce(val):
