@@ -38,151 +38,182 @@
 {% csrf_token %}
 {% if parts %}
 <ul>
-    <div id = "intro" class = "page_div collapse">
+    <div id="intro" class = "page_div collapse"><div>
         {% if instrument_name  == "English_WG" %}
             {% load staticfiles %}
-            <p class="lead" id="intro_text">
-                In this section of the assessment, you will be asked about the kinds of signs, phrases, words, and gestures that your child understands. When we ask if your child "understands" or "understands and says" a word, there are a lot of possible meanings! Here are some examples of what we mean.
-            </p>
-            When it comes to "understanding" a word: <br><br>
-            <div class="row">
-                <div class="col-xs-6">
-                    <img src={% static 'images/understands-no-hear.png' %} class="rounded float-xs-left" alt="Hearing the word is not enough to say that your child understands it."style="max-width: 90%; border: 1px solid black;">
 
-                </div>
+            <div id = "intro_part1" class = "page_div collapse">
+                <p class="lead" id="intro_text">
+                    In this section, you will be asked about the phrases and words that your child "understands" and "understands and says". Here are some examples.
+                </p>
+                <h4>Your child "understands" a word or phrase:</h4> <br><br>
 
-                <div class="col-xs-6">
-                    Just hearing the word "ball" is NOT enough to prove that your child "understands" that word.
+                <div class="row">
+                    <div class="col-xs-6">
+                        <img src={% static 'images/understands-yes-get.png' %} class="rounded float-xs-left" alt="Hearing the word AND looking for the object can mean that your child understands it."style="max-width: 90%; border: 1px solid black;">
 
-                </div>
-            </div><br>
+                    </div>
 
-            <div class="row">
-                <div class="col-xs-6">
-                    <img src={% static 'images/understands-yes-get.png' %} class="rounded float-xs-left" alt="Hearing the word AND looking for the object can mean that your child understands it."style="max-width: 90%; border: 1px solid black;">
+                    <div class="col-xs-6">
+                        <h4>If s/he shows that s/he knows what the word/phrase means by responding to it appropriately.  For example, when you say "Get the ball" s/he turns and tries to find the ball.<br><br>
 
-                </div>
+                        DO check "understands."</h4>
 
-                <div class="col-xs-6">
-                    However, if you think your child would look for a ball if they heard the word "ball", then your child "understands" the word "ball".
+                    </div>
+                </div><br>
 
-                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <img src={% static 'images/understands-no-hear.png' %} class="rounded float-xs-left" alt="Hearing the word is not enough to say that your child understands it."style="max-width: 90%; border: 1px solid black;">
+
+                    </div>
+
+                    <div class="col-xs-6">
+                        <h4>DON’T check "understands" if you don't think that s/he knows meaning of that word/phrase.  S/he might have heard it before, like in a story, but you don't think s/he would know what it means. </h4>
+
+                    </div>
+                </div><br>
+
             </div>
-            <br>
-            When it comes to "understanding and saying" a word:<br>
 
-            <br>
+            <div id = "intro_part2" class = "page_div collapse">
 
-            <div class="row">
-                <div class="col-xs-6">
-                    <img src={% static 'images/says-no-baba.png' %} class="rounded float-xs-left" alt="Saying the word alone is not enough to mean that your child understands and says a word. The context is important!"style="max-width: 90%; border: 1px solid black;">
+                <h4>Your child "understands and says" a word or phrase:</h4> <br><br>
 
-                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <img src={% static 'images/says-yes-ball.png' %} class="rounded float-xs-left" alt="Having your child say the word in the presence of the object can mean that your child understands and says the word."style="max-width: 90%; border: 1px solid black;">
 
-                <div class="col-xs-6">
-                    Your child says "ball" in the absence of a ball, that does NOT mean that your child "understands AND says" the word "ball".
+                    </div>
 
-                </div>
-            </div><br>
+                    <div class="col-xs-6">
+                        <h4>If s/he says the word/phrase when trying to describe an object or something that happened and you think s/he has a meaning for that word/phrase. <br><br>
 
-            <div class="row">
-                <div class="col-xs-6">
-                    <img src={% static 'images/says-no-coaching.png' %} class="rounded float-xs-left" alt="Having your child repeat back a taught word is not enough to mean that your child undestands the word."style="max-width: 90%; border: 1px solid black;">
+                        DO check "understands and says".</h4>
 
-                </div>
 
-                <div class="col-xs-6">
-                    In that same vein, teaching your child to say "ball" does NOT mean that your child "understands AND says" the word "ball".
+                    </div>
+                </div> <br>
 
-                </div>
-            </div><br>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <img src={% static 'images/says-yes-raff.png' %} class="rounded float-xs-left" alt="Having your child say the word in the presence of the object can mean that your child understands and says the word."style="max-width: 90%; border: 1px solid black;">
 
-            <div class="row">
-                <div class="col-xs-6">
-                    <img src={% static 'images/says-yes-ball.png' %} class="rounded float-xs-left" alt="Having your child say the word in the presence of the object can mean that your child understands and says the word."style="max-width: 90%; border: 1px solid black;">
+                    </div>
 
-                </div>
+                    <div class="col-xs-6">
+                        <h4>It's fine if your child can't say the whole word or says it his/her own way.<br><br>
 
-                <div class="col-xs-6">
-                    It's fine if your child cannot say the whole word! Saying "raff" instead of "giraffe" can still mean that your child "understands and says" a word in some cases.
+                        DO check "understands and says".</h4>
 
-                </div>
-            </div> <br>
 
-            <div class="row">
-                <div class="col-xs-6">
-                    <img src={% static 'images/says-yes-raff.png' %} class="rounded float-xs-left" alt="Having your child say the word in the presence of the object can mean that your child understands and says the word."style="max-width: 90%; border: 1px solid black;">
+                    </div>
+                </div> <br>
 
-                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <img src={% static 'images/says-no-baba.png' %} class="rounded float-xs-left" alt="Saying the word alone is not enough to mean that your child understands and says a word. The context is important!"style="max-width: 90%; border: 1px solid black;">
 
-                <div class="col-xs-6">
-                    However if you think your child would say "ball" in the presence of a ball, then your child "understands and says" that word.
+                    </div>
 
-                </div>
-            </div>                
+                    <div class="col-xs-6">
+                        <h4>DON’T check "understands and says" if your child is just stringing sounds together and you don't think it is a "real" word that means something.</h4>
+
+                    </div>
+                </div><br>
+
+                <div class="row">
+                    <div class="col-xs-6">
+                        <img src={% static 'images/says-no-coaching.png' %} class="rounded float-xs-left" alt="Having your child repeat back a taught word is not enough to mean that your child undestands the word."style="max-width: 90%; border: 1px solid black;">
+
+                    </div>
+
+                    <div class="col-xs-6">
+                        <h4>DON'T ask your child to repeat the words on the list. This doesn't count!<br><br>
+
+                        DON'T check "understands and says".</h4>
+
+
+                    </div>
+                </div><br>
+
+            </div>
+                   
 
         {% elif instrument_name  == "English_WS" %}
             {% load staticfiles %}
-            <p class="lead" id="intro_text">
-                In this section of the assessment, you will be asked about the kinds of words and sentences that your child says. When we ask if your child "says" a word, there can be more than one meaning! Here are some examples of what we mean:
-            </p>
 
-            <br>
+            <div id = "intro_part1" class = "page_div collapse">
+
+                <p class="lead" id="intro_text">
+                    In this section, you will be asked about the phrases and words that your child "says". Here are some examples.
+                </p>
+                <h4>Your child "says" a word or phrase:</h4> <br><br>
 
 
-            <div class="row">
-                <div class="col-xs-6">
-                    <img src={% static 'images/says-no-baba.png' %} class="rounded float-xs-left" alt="Saying the word alone is not enough to mean that your child understands and says a word. The context is important!"style="max-width: 90%; border: 1px solid black;">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <img src={% static 'images/says-yes-ball.png' %} class="rounded float-xs-left" alt="Having your child say the word in the presence of the object can mean that your child understands and says the word."style="max-width: 90%; border: 1px solid black;">
 
-                </div>
+                    </div>
 
-                <div class="col-xs-6">
-                    Your child says "ba" or "ball" in the absence of a ball, that does NOT mean that your child "says" the word "ball".
+                    <div class="col-xs-6">
+                        <h4>If s/he says the word/phrase when trying to describe an object or something that happened and you think s/he has a meaning for that word/phrase.<br><br>
 
-                </div>
-            </div><br>
+                        DO mark the word.</h4>
 
-            <div class="row">
-                <div class="col-xs-6">
-                    <img src={% static 'images/says-no-coaching.png' %} class="rounded float-xs-left" alt="Having your child repeat back a taught word is not enough to mean that your child undestands the word."style="max-width: 90%; border: 1px solid black;">
 
-                </div>
+                    </div>
+                </div> <br>
 
-                <div class="col-xs-6">
-                    In that same vein, teaching your child to say "ba" or "ball" does NOT mean that your child "says" the word "ball".
+                <div class="row">
+                    <div class="col-xs-6">
+                        <img src={% static 'images/says-yes-raff.png' %} class="rounded float-xs-left" alt="Having your child say the word in the presence of the object can mean that your child understands and says the word."style="max-width: 90%; border: 1px solid black;">
 
-                </div>
-            </div><br>
+                    </div>
 
-            <div class="row">
-                <div class="col-xs-6">
-                    <img src={% static 'images/says-yes-ball.png' %} class="rounded float-xs-left" alt="Having your child say the word in the presence of the object can mean that your child understands and says the word."style="max-width: 90%; border: 1px solid black;">
+                    <div class="col-xs-6">
+                        <h4>It's fine if your child can't say the whole word or says it his/her own way.<br><br>
 
-                </div>
+                        DO mark the word.</h4>
 
-                <div class="col-xs-6">
-                    However if you think your child would say "ba" or "ball" in the presence of a ball, then your child "says" that word.
 
-                </div>
-            </div><br>
+                    </div>
+                </div> <br>
 
-            <div class="row">
-                <div class="col-xs-6">
-                    <img src={% static 'images/says-yes-raff.png' %} class="rounded float-xs-left" alt="Your child does not need to say the whole word to be counted as saying it." style="max-width: 90%; border: 1px solid black;">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <img src={% static 'images/says-no-baba.png' %} class="rounded float-xs-left" alt="Saying the word alone is not enough to mean that your child understands and says a word. The context is important!"style="max-width: 90%; border: 1px solid black;">
 
-                </div>
+                    </div>
 
-                <div class="col-xs-6">
-                    It's fine if your child cannot say the whole word! Saying "raff" instead of "giraffe" can still mean that your child "says" a word in some cases.
+                    <div class="col-xs-6">
+                        <h4>DON’T mark the word if your child is just stringing sounds together and you don't think it is a "real" word that means something.</h4>
 
-                </div>
+                    </div>
+                </div><br>
+
+                <div class="row">
+                    <div class="col-xs-6">
+                        <img src={% static 'images/says-no-coaching.png' %} class="rounded float-xs-left" alt="Having your child repeat back a taught word is not enough to mean that your child undestands the word."style="max-width: 90%; border: 1px solid black;">
+
+                    </div>
+
+                    <div class="col-xs-6">
+                        <h4>DON'T ask your child to repeat the words on the list. This doesn't count!<br><br>
+
+                        DON'T mark the word.</h4>
+
+
+                    </div>
+                </div><br>
+
             </div>
 
-
         {% endif %}
-        <br><br>
-        You do NOT have to personally witness your child interacting with a ball. We just want you to think hypothetically about what you think your child would do.<br>
-        This assessment covers a wide range of ages. If your child may not be able to understand or say a lot of the words on the form and that is perfectly fine. We want to see what you think your child can do.
+    <br><br>
+    <h4>This assessment is for children of many ages. Your child may not be able to understand or say a lot of the words on the form and that is perfectly fine. </h4><br>
+    </div>
     </div>
 
 </ul>
@@ -417,7 +448,7 @@
     var current_page
 
     //Naming types that are containers of smaller sections. Important for creating pages from a nested structure!
-    var larger_types = ["word_div", "gestures_div", "word_ending_div", "word_form_div"];
+    var larger_types = ["intro","word_div", "gestures_div", "word_ending_div", "word_form_div"];
 
     // Going through all the named type and section divisions and pulling out those that are not just containers for smaller sections
     var filterednames = $(".page_div").filter(function(index, value) {
