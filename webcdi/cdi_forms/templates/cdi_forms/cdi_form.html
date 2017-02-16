@@ -37,6 +37,7 @@
 {% block main%}
 {% csrf_token %}
 {% if parts %}
+
 <ul>
     <div id="intro" class = "page_div collapse"><div>
         {% if instrument_name  == "English_WG" %}
@@ -313,6 +314,24 @@
         {% endfor %}
     </div>
     {% endfor %}
+    <div id = "analysis_div"  class = "page_div collapse">    
+        <h4>
+            You are almost done! Click "Yes" if you agree with ALL of the following points. Your answer will not affect your results. There is nothing wrong with choosing "No":
+        </h4>
+
+        <ul>
+            <li>You have a child who is {{ age.0 }} months old.</li>
+            <li>You filled out the entire questionnaire to the best of your ability.</li>
+            <li>You would like your (anonymous) answers to be used in research on how children learn language.</li>
+        </ul>
+        <br>
+
+        <input  type="radio" id="analysis_yes" name="analysis" value="Y">
+        <label for="analysis_yes"> Yes, I want my answers to be used for research purposes.</label>
+        <br>
+        <input  type="radio" id="analysis_no" name="analysis" value="N">
+        <label for="analysis_no"> No, I do NOT want my answers to be used for research purposes.</label>
+    </div> <br><br>
 
     <div class="row text-center">
         <a class="btn btn-primary prev-cdi-page" href="#">&#60;&#60; Previous Page</a>

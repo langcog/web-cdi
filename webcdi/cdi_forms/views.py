@@ -205,7 +205,8 @@ def cdi_form(request, hash_id):
             if 'btn-save' in request.POST and request.POST['btn-save'] == 'Save':
                 try:
                     page_number = request.POST['page_number']
-                    administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now(), page_number = page_number)
+                    analysis = request.POST['analysis']
+                    administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now(), page_number = page_number, analysis = analysis)
                 except:
                     administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now())
                 refresh = True
