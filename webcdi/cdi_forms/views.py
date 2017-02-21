@@ -215,7 +215,12 @@ def cdi_form(request, hash_id):
                 request.method = "GET"
                 return background_info_form(request, hash_id)
             elif 'btn-submit' in request.POST and request.POST['btn-submit'] == 'Submit':
-                administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now(), completed= True)
+                try:
+                    page_number = request.POST['page_number']
+                    analysis = request.POST['analysis']
+                    administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now(), analysis = analysis, completed= True)
+                except:
+                    administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now(), completed= True)                
                 return printable_view(request, hash_id)
 
     data = {}

@@ -46,7 +46,7 @@ class administration(models.Model):
     last_modified = models.DateTimeField(auto_now = True)
     created_date = models.DateTimeField(verbose_name = "Creation date", auto_now_add = True)
     page_number = models.IntegerField(verbose_name = "Page number", default = 0)
-    analysis = models.BooleanField(verbose_name = "Can be used for analysis", default = False)
+    analysis = models.NullBooleanField(verbose_name = "Can be used for analysis", default = None)
 
     class Meta:
         unique_together = ('study', 'subject_id', 'repeat_num')
