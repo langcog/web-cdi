@@ -122,6 +122,7 @@ def console(request, study_name = None):
             RequestConfig(request).configure(administration_table)
             context['current_study'] = current_study.name
             context['study_instrument'] = current_study.instrument.verbose_name
+            context['study_group'] = current_study.study_group
             context['study_administrations'] = administration_table
         return render(request, 'researcher_UI/interface.html', context)
 
@@ -136,8 +137,10 @@ def rename_study(request, study_name):
         if form.is_valid():
             researcher = request.user
             new_study_name = form.cleaned_data.get('name')
+            new_study_waiver = form.cleaned_data.get('waiver')
             if not study.objects.filter(researcher = researcher, name = new_study_name).exists():
-	        study_obj.name = new_study_name
+    	        study_obj.name = new_study_name
+                study_obj.waiver = new_study_waiver
                 study_obj.save()
                 data['stat'] = "ok";
                 data['redirect_url'] = "/interface/study/"+new_study_name+"/";
@@ -161,8 +164,9 @@ def add_study(request):
             researcher = request.user
             study_name = form.cleaned_data.get('name')
             instrument = form.cleaned_data.get('instrument')
+            waiver = form.cleaned_data.get('waiver')
             if not study.objects.filter(researcher = researcher, name = study_name).exists():
-                new_study = study(researcher = researcher, name = study_name, instrument = instrument)
+                new_study = study(researcher = researcher, name = study_name, instrument = instrument, waiver = waiver)
                 new_study.save()
                 data['stat'] = "ok";
                 data['redirect_url'] = "/interface/study/"+study_name+"/";

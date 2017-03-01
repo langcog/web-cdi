@@ -22,6 +22,7 @@ class study(models.Model):
     researcher = models.ForeignKey("auth.user")
     name = models.CharField(max_length = 51)
     instrument = models.ForeignKey("instrument")
+    waiver = models.TextField(blank = True)
     study_group = models.CharField(max_length = 51, blank = True)
     def __str__(self):
         return self.name

@@ -7,6 +7,7 @@ from crispy_forms.layout import Submit
 class AddStudyForm(forms.Form):
     name = forms.CharField(label='Study Name', max_length=51)
     instrument = forms.ModelChoiceField(queryset=instrument.objects.all(), empty_label="(choose from the list)")
+    waiver = forms.CharField(widget=forms.Textarea, label='Waiver of Documentation text (no titles)', required = False)
 
 
     def __init__(self, *args, **kwargs):
@@ -39,6 +40,8 @@ class AddPairedStudyForm(forms.Form):
 
 class RenameStudyForm(forms.Form):
     name = forms.CharField(label='Study Name', max_length=51)
+    waiver = forms.CharField(widget=forms.Textarea, label='Waiver of Documentation', required = False)
+
 
     def __init__(self, old_study_name, *args, **kwargs):
         super(RenameStudyForm, self).__init__(*args, **kwargs)

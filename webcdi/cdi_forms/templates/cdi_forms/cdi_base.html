@@ -23,6 +23,7 @@
     <script src="http://d3js.org/d3.v3.js"></script>
     <script src="https://cdn.jsdelivr.net/lodash/4.17.2/lodash.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-queue/3.0.3/d3-queue.min.js"></script>
+    <script src="{% static 'cdi_forms/js.cookie.js' %}"></script>
 
 </head>
 
@@ -46,19 +47,19 @@
                             </ul>
                         </div>
                         <script type="text/javascript">
-                        $(function() {
-                            $("#bookmarkme").click(function() {
-                                // Mozilla Firefox Bookmark
-                                if ('sidebar' in window && 'addPanel' in window.sidebar) {
-                                    window.sidebar.addPanel(location.href,document.title,"");
-                                } else if( /*@cc_on!@*/false) { // IE Favorite
-                                    window.external.AddFavorite(location.href,document.title);
-                                } else { // webkit - safari/chrome
-                                    alert('Press ' + (navigator.userAgent.toLowerCase().indexOf('mac') != - 1 ? 'Command/Cmd' : 'CTRL') + ' + D to bookmark this page.');
-                                }
+                            $(function() {
+                                $("#bookmarkme").click(function() {
+                                    // Mozilla Firefox Bookmark
+                                    if ('sidebar' in window && 'addPanel' in window.sidebar) {
+                                        window.sidebar.addPanel(location.href,document.title,"");
+                                    } else if( /*@cc_on!@*/false) { // IE Favorite
+                                        window.external.AddFavorite(location.href,document.title);
+                                    } else { // webkit - safari/chrome
+                                        alert('Press ' + (navigator.userAgent.toLowerCase().indexOf('mac') != - 1 ? 'Command/Cmd' : 'CTRL') + ' + D to bookmark this page.');
+                                    }
+                                });
                             });
-                        });
-                    </script>
+                        </script>
                         <div id="due_time"></div>
                         <script type="text/javascript">
                         var due_date = "{{ due_date }}";
@@ -66,6 +67,8 @@
                         var due_date_local = moment(due_date_utc).local().format("MMM. D, YYYY, h:mm a");
                         $('#due_time').html("<p><b> Due date </b>: " + due_date_local + "</p>");
                         </script>
+
+                        <a href="#" id="show_waiver" onclick = "$('#consent_waiver').modal('show');"> Show waiver of documentation </a><br>
                         {% block nav_buttons %}
                         {% endblock %}
                     </div>
@@ -83,6 +86,30 @@
         </div>
     </form>
 </div>
+
+<div id="consent_waiver" class="modal fade" role="dialog">
+
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h2 class="modal-title" >Waiver of Documentation</h2>
+            </div>
+
+            <div class="modal-body">
+                {% if study_waiver and study_waiver != "" %}
+                    {{ study_waiver |linebreaks }}
+                {% endif %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-primary" id="okaybtn">Okay</button>
+            </div>
+
+        
+        </div>
+    </div>
+</div>
+
 {% block scripts %}
 {% endblock %}
 </body>

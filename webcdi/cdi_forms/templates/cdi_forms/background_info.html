@@ -35,6 +35,8 @@
     <input name="btn-save" value="Save" class="btn btn-primary" type="button">
     <input name="btn-next" value="Next" class="btn btn-primary" type="submit">
 </div>
+
+
 {% else %}
 <p>Form unavailable. Contact admin. </p>
 {% endif %}
@@ -42,6 +44,8 @@
 
 {% block scripts %}
 <script>
+
+
     $('.enabler[value="1"]').each(function(index, e){
         if(e.checked){
             $(e).closest('.form-group').next('.dependent').css('display','block');
@@ -113,7 +117,15 @@
     getDiffinMonths();
     var instrument_name = "{{ title }}";
 
-    window.onload = function() { addWarnings() };
+    window.onload = function() { 
+        if (Cookies.get('old_visitor') == null) {
+            $('#consent_waiver').modal('show');
+            Cookies.set('old_visitor','yes',{path: ''});
+        }
+
+        addWarnings();
+    };
+
 
     function addWarnings() {
 

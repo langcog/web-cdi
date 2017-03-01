@@ -100,6 +100,7 @@ def background_info_form(request, hash_id):
     data['title'] = administration_instance.study.instrument.verbose_name
     data['max_age'] = administration_instance.study.instrument.max_age
     data['min_age'] = administration_instance.study.instrument.min_age
+    data['study_waiver'] = administration_instance.study.waiver
     study_name = administration_instance.study.name
     study_group = administration_instance.study.study_group
     if study_group:
@@ -151,6 +152,7 @@ def prefilled_cdi_data(administration_instance):
         data['due_date'] = administration_instance.due_date
         data['page_number'] = administration_instance.page_number
         data['hash_id'] = administration_instance.url_hash
+        data['study_waiver'] = administration_instance.study.waiver
         raw_objects = []
         #meta_file['background_form'] = None
 
