@@ -68,7 +68,10 @@
                         $('#due_time').html("<p><b> Due date </b>: " + due_date_local + "</p>");
                         </script>
 
-                        <a href="#" id="show_waiver" onclick = "$('#consent_waiver').modal('show');"> Show waiver of documentation </a><br>
+                        {% if study_waiver and study_waiver != "" %}
+                            <a href="#" id="show_waiver" onclick = "$('#consent_waiver').modal('show');"> Show waiver of documentation </a><br>
+                        {% endif %}
+
                         {% block nav_buttons %}
                         {% endblock %}
                     </div>

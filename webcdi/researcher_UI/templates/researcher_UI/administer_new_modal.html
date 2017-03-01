@@ -26,8 +26,11 @@
           <div class="form-group">
             <label for="add_new_parent" class="col-sm-2 control-label">Single Reusable Link</label>
             <div class="col-sm-10">
-              <a href="/interface/study/{{study_name}}/new_parent/">http://webcdi.stanford.edu/interface/study/{{study_name}}/new_parent</a><br>
+              <a href="/interface/study/{{study_name}}/new_parent/" id="reusable_link">Click here</a><br>
               (For mass emails or adding to a website. Does not track IP addresses or use cookies. Every link click creates a new administration.)
+              <script type="text/javascript">
+                $('#reusable_link').html($('#reusable_link')[0].href)
+              </script>
             </div>
         </div>
 

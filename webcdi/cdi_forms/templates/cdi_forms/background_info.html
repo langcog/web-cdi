@@ -117,10 +117,15 @@
     getDiffinMonths();
     var instrument_name = "{{ title }}";
 
+    var study_waiver = "{{ study_waiver|length }}";
+
     window.onload = function() { 
-        if (Cookies.get('old_visitor') == null) {
-            $('#consent_waiver').modal('show');
-            Cookies.set('old_visitor','yes',{path: ''});
+
+        if (parseInt(study_waiver) > 0) {
+            if (Cookies.get('old_visitor') == null) {
+                $('#consent_waiver').modal('show');
+                Cookies.set('old_visitor','yes',{path: ''});
+            }
         }
 
         addWarnings();
