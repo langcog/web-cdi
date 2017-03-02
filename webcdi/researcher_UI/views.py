@@ -24,13 +24,9 @@ def download_data(request, study_obj, administrations = None):
     # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename='+study_obj.name+'_data.csv'''
-    # response['Content-Disposition'] = 'attachment; filename='+study_obj.name.replace(' ', '_')+'"-data.csv"'
 
     writer = csv.writer(response)
     
-
-    #if(len(administrations) == 0):
-        #return None;
     model_header = get_model_header(study_obj.instrument.name)
     
     meta_data_header = get_meta_header()
@@ -39,10 +35,12 @@ def download_data(request, study_obj, administrations = None):
     for admin_obj in administrations:
         admin_data = {x:y for (x,y) in administration_data.objects.values_list('item_ID', 'value').filter(administration_id = admin_obj)}
         background_data = []
+        modified_admin = admin_obj.get_meta_data()
+        modified_admin[3] = request.get_host() + "/form/fill/" + modified_admin[3]
         for i in background_header:
             background_values = BackgroundInfo.objects.values_list(i, flat=True).filter(administration = admin_obj)
             background_data.append(background_values)
-    	writer.writerow(admin_obj.get_meta_data()+[item for sublist in background_data for item in sublist]+[admin_data[key] if key in admin_data else '' for key in model_header])
+    	writer.writerow(modified_admin+[item for sublist in background_data for item in sublist]+[admin_data[key] if key in admin_data else '' for key in model_header])
     return response
 
 @login_required
