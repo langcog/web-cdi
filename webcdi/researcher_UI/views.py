@@ -89,11 +89,11 @@ def download_dictionary(request, study_obj):
     response['Content-Disposition'] = 'attachment; filename='+study_obj.instrument.name+'_data.csv'''
 
     writer = UnicodeWriter(response)
-    item_properties = ['itemID','item_type','category','definition']
+    item_properties = ['itemID','item_type','category','definition','gloss']
 
     writer.writerow(item_properties)
 
-    raw_item_data = model_map(study_obj.instrument.name).objects.values_list('itemID','item_type','category','definition')
+    raw_item_data = model_map(study_obj.instrument.name).objects.values_list('itemID','item_type','category','definition','gloss')
 
     item_data = [list(elem) for elem in raw_item_data]
 
