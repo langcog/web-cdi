@@ -68,16 +68,19 @@ def download_data(request, study_obj, administrations = None):
             modified_admin[3] = request.get_host() + "/form/fill/" + modified_admin[3]
 
         for i in background_header:
-            raw_background_value = BackgroundInfo.objects.values_list(i, flat=True).filter(administration = admin_obj)
             try:
-                background_value = dict(BackgroundInfo._meta.get_field(i).choices).get(raw_background_value[0])
-                if background_value:
-                    background_data.append([background_value])
-                else:
-                    background_data.append(raw_background_value)
+                raw_background_value = BackgroundInfo.objects.values_list(i, flat=True).filter(administration = admin_obj)
+                try:
+                    background_value = dict(BackgroundInfo._meta.get_field(i).choices).get(raw_background_value[0])
+                    if background_value:
+                        background_data.append(force_text(background_value))
+                    else:
+                        background_data.append(force_text(raw_background_value[0]))
+                except:
+                    background_data.append(force_text(raw_background_value[0]))
             except:
-                background_data.append(raw_background_value)
-    	writer.writerow([force_text(s) for s in modified_admin]+[force_text(item) for sublist in background_data for item in sublist]+[force_text(admin_data[key]) if key in admin_data else '' for key in model_header])
+                background_data.append("")
+    	writer.writerow([force_text(s) for s in modified_admin]+background_data+[force_text(admin_data[key]) if key in admin_data else '' for key in model_header])
     return response
 
 
