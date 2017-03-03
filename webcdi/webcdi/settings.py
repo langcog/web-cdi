@@ -44,6 +44,7 @@ except ImportError:
 
 #NOTE FROM BEN: I CHANGED DEBUG = False to DEBUG = True 
 # DEBUG = False
+
 DEBUG = False
 TEMPLATE_DEBUG = False
 

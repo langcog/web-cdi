@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from .forms import AddStudyForm, RenameStudyForm, AddPairedStudyForm
 from .models import study, administration, administration_data, get_meta_header, get_background_header
 import codecs, json
+import os
 import re, random
 from .tables  import StudyAdministrationTable
 from django_tables2   import RequestConfig
@@ -61,10 +62,21 @@ def download_data(request, study_obj, administrations = None):
         admin_data = {x:y for (x,y) in administration_data.objects.values_list('item_ID', 'value').filter(administration_id = admin_obj)}
         background_data = []
         modified_admin = admin_obj.get_meta_data()
-        modified_admin[3] = request.get_host() + "/form/fill/" + modified_admin[3]
+        try:
+            modified_admin[3] = os.environ['VANITY_URL'] + "/form/fill/" + modified_admin[3]
+        except:
+            modified_admin[3] = request.get_host() + "/form/fill/" + modified_admin[3]
+
         for i in background_header:
-            background_values = BackgroundInfo.objects.values_list(i, flat=True).filter(administration = admin_obj)
-            background_data.append(background_values)
+            raw_background_value = BackgroundInfo.objects.values_list(i, flat=True).filter(administration = admin_obj)
+            try:
+                background_value = dict(BackgroundInfo._meta.get_field(i).choices).get(raw_background_value[0])
+                if background_value:
+                    background_data.append([background_value])
+                else:
+                    background_data.append(raw_background_value)
+            except:
+                background_data.append(raw_background_value)
     	writer.writerow([force_text(s) for s in modified_admin]+[force_text(item) for sublist in background_data for item in sublist]+[force_text(admin_data[key]) if key in admin_data else '' for key in model_header])
     return response
 
