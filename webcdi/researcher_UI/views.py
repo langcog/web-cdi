@@ -62,9 +62,10 @@ def download_data(request, study_obj, administrations = None):
         admin_data = {x:y for (x,y) in administration_data.objects.values_list('item_ID', 'value').filter(administration_id = admin_obj)}
         background_data = []
         modified_admin = admin_obj.get_meta_data()
-        try:
+
+        if 'VANITY_URL' in os.environ:
             modified_admin[3] = os.environ['VANITY_URL'] + "/form/fill/" + modified_admin[3]
-        except:
+        else:
             modified_admin[3] = request.get_host() + "/form/fill/" + modified_admin[3]
 
         for i in background_header:
