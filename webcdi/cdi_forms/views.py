@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.shortcuts import render
 from .models import English_WS, English_WG, BackgroundInfo, requests_log
 import os.path

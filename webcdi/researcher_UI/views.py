@@ -1,16 +1,20 @@
+# -*- coding: utf-8 -*-
+
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from .forms import AddStudyForm, RenameStudyForm, AddPairedStudyForm
 from .models import study, administration, administration_data, get_meta_header, get_background_header
-import json
+import codecs, json
 import re, random
 from .tables  import StudyAdministrationTable
 from django_tables2   import RequestConfig
 from django.db.models import Max
 import datetime
-from cdi_forms.views import get_model_header, background_info_form, prefilled_background_form
+from cdi_forms.views import model_map, get_model_header, background_info_form, prefilled_background_form
 from cdi_forms.models import BackgroundInfo
+import cStringIO
+from django.utils.encoding import force_text
 
 
 
@@ -19,13 +23,34 @@ from cdi_forms.models import BackgroundInfo
 import csv
 from django.http import HttpResponse
 
+class UnicodeWriter:
+    def __init__(self, f, dialect=csv.excel, encoding="utf-8-sig", **kwds):
+        self.queue = cStringIO.StringIO()
+        self.writer = csv.writer(self.queue, dialect=dialect, **kwds)
+        self.stream = f
+        self.encoder = codecs.getincrementalencoder(encoding)()
+    def writerow(self, row):
+        '''writerow(unicode) -> None
+        This function takes a Unicode string and encodes it to the output.
+        '''
+        self.writer.writerow([s.encode("utf-8") for s in row])
+        data = self.queue.getvalue()
+        data = data.decode("utf-8")
+        data = self.encoder.encode(data)
+        self.stream.write(data)
+        self.queue.truncate(0)
+
+    def writerows(self, rows):
+        for row in rows:
+            self.writerow(row)
+
 @login_required
 def download_data(request, study_obj, administrations = None):
     # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename='+study_obj.name+'_data.csv'''
 
-    writer = csv.writer(response)
+    writer = UnicodeWriter(response)
     
     model_header = get_model_header(study_obj.instrument.name)
     
@@ -40,8 +65,28 @@ def download_data(request, study_obj, administrations = None):
         for i in background_header:
             background_values = BackgroundInfo.objects.values_list(i, flat=True).filter(administration = admin_obj)
             background_data.append(background_values)
-    	writer.writerow(modified_admin+[item for sublist in background_data for item in sublist]+[admin_data[key] if key in admin_data else '' for key in model_header])
+    	writer.writerow([force_text(s) for s in modified_admin]+[force_text(item) for sublist in background_data for item in sublist]+[force_text(admin_data[key]) if key in admin_data else '' for key in model_header])
     return response
+
+
+def download_dictionary(request, study_obj):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename='+study_obj.instrument.name+'_data.csv'''
+
+    writer = UnicodeWriter(response)
+    item_properties = ['itemID','item_type','category','definition']
+
+    writer.writerow(item_properties)
+
+    raw_item_data = model_map(study_obj.instrument.name).objects.values_list('itemID','item_type','category','definition')
+
+    item_data = [list(elem) for elem in raw_item_data]
+
+    for item in item_data:
+        writer.writerow([force_text(s) for s in item])
+    return response    
+
+    
 
 @login_required
 def console(request, study_name = None):
@@ -93,18 +138,18 @@ def console(request, study_name = None):
                         refresh = True
 
                 elif 'delete-study' in request.POST:
-		    study_obj.delete()
-		    study_name = None
-		    refresh = True
+                    study_obj.delete()
+                    study_name = None
+                    refresh = True
 
                 elif 'download-study' in request.POST:
                     administrations = administration.objects.filter(study = study_obj)
                     return download_data(request, study_obj, administrations)
 
-		    
-		    
+                elif 'download-dictionary' in request.POST:
+                    return download_dictionary(request, study_obj)                
 
-
+		    
         
     if request.method == 'GET' or refresh:
         username = None
@@ -216,16 +261,6 @@ def add_paired_study(request):
 
 def random_url_generator(size=64, chars='0123456789abcdef'):
     return ''.join(random.choice(chars) for _ in range(size))
-
-@login_required 
-def download_study(request, study_name):
-    data = {}
-    #check if the researcher exists and has permissions over the study
-    permitted = study.objects.filter(researcher = request.user,  name = study_name).exists()
-    study_obj = study.objects.get(researcher= request.user, name= study_name)
-
-
-    
 
 
 @login_required 
