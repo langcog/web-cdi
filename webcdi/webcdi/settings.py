@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 from databases import *
+from email import *
 import socket
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -51,8 +52,6 @@ TEMPLATE_DEBUG = False
 ADMINS = (
     ('Danielle Kellier', 'dkellier@stanford.edu'),
 )
-
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 MANAGERS = ADMINS
 
@@ -123,23 +122,6 @@ WSGI_APPLICATION = 'webcdi.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-# DATABASES = {
-
-#     'default': {
-#             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#             'NAME': 'webcdi-admin',                      
-#             'USER': 'webcdi-admin',
-#             'PASSWORD': 'first5words',
-#             'HOST': 'localhost',
-#             'PORT': '',
-#         }
-
-#     #'default': {
-#     #    'ENGINE': 'django.db.backends.sqlite3',
-#     #    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     #}
-# }
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
@@ -166,24 +148,48 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 # the site admins on every HTTP 500 error when DEBUG=False.
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
+# LOGGING = {
+#      'version': 1,
+#      'disable_existing_loggers': False,
+#      'handlers': {
+#          'file': {
+#              'level': 'DEBUG',
+#              'class': 'logging.FileHandler',
+#              'filename': os.path.join(BASE_DIR, '../django_logs/debug.log'),
+#          },
+#      },
+#      'loggers': {
+#          'django.request': {
+#              'handlers': ['file'],
+#              'level': 'DEBUG',
+#              'propagate': True,
+#          },
+#      },
+#  }
+
 LOGGING = {
-     'version': 1,
-     'disable_existing_loggers': False,
-     'handlers': {
-         'file': {
-             'level': 'DEBUG',
-             'class': 'logging.FileHandler',
-             'filename': os.path.join(BASE_DIR, '../django_logs/debug.log'),
-         },
-     },
-     'loggers': {
-         'django.request': {
-             'handlers': ['file'],
-             'level': 'DEBUG',
-             'propagate': True,
-         },
-     },
- }
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        }
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    }
+}
 
 DATE_INPUT_FORMATS = (
     '%Y-%m-%d', '%m/%d/%Y', '%m/%d/%y',  # '2006-10-25', '10/25/2006', '10/25/06'
