@@ -16,6 +16,8 @@ from cdi_forms.views import model_map, get_model_header, background_info_form, p
 from cdi_forms.models import BackgroundInfo
 import cStringIO
 from django.utils.encoding import force_text
+from django.core.serializers.json import DjangoJSONEncoder
+
 
 
 
@@ -82,30 +84,54 @@ def download_data(request, study_obj, administrations = None):
             except:
                 background_data.append("")
     	writer.writerow([force_text(s) for s in modified_admin]+background_data+[force_text(admin_data[key]) if key in admin_data else '' for key in model_header])
+    print response
     return response
 
 
+@login_required
 def download_dictionary(request, study_obj):
     response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename='+study_obj.instrument.name+'_data.csv'''
-
+    response['Content-Disposition'] = 'attachment; filename='+study_obj.instrument.name+'_dictionary.csv'''
     writer = UnicodeWriter(response)
-    item_properties = ['itemID','item_type','category','definition','gloss']
 
+    item_properties = ['itemID','item_type','category','definition','gloss']
     writer.writerow(item_properties)
 
     raw_item_data = model_map(study_obj.instrument.name).objects.values_list('itemID','item_type','category','definition','gloss')
-
     item_data = [list(elem) for elem in raw_item_data]
 
     for item in item_data:
         writer.writerow([force_text(s) for s in item])
     return response    
 
+@login_required
+def download_links(request, study_obj, administrations = None):
+
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename='+study_obj.name+'_links.csv'''
+
+    writer = UnicodeWriter(response)
+
+    meta_data_header = get_meta_header()[0:4]
+    writer.writerow(meta_data_header)
+
+    for admin_obj in administrations:
+        modified_admin = admin_obj.get_meta_data()[0:4]
+
+        if 'VANITY_URL' in os.environ:
+            modified_admin[3] = os.environ['VANITY_URL'] + "/form/fill/" + modified_admin[3]
+        else:
+            modified_admin[3] = request.get_host() + "/form/fill/" + modified_admin[3]
+
+        writer.writerow([force_text(s) for s in modified_admin])
+    print response
+    return response
+
+ 
     
 
 @login_required
-def console(request, study_name = None):
+def console(request, study_name = None, num_per_page = 20):
     refresh = False
     if request.method == 'POST' :
         data = {}
@@ -141,6 +167,15 @@ def console(request, study_name = None):
                             admin_object.delete()
                         refresh = True
 
+                elif 'download-links' in request.POST:
+                    ids = request.POST.getlist('select_col')
+                    administrations = []
+                    if all([x.isdigit() for x in ids]):
+                        ids = list(set(map(int, ids)))
+                        administrations = list(administration.objects.filter(id__in = ids))
+                        return download_links(request, study_obj, administrations)
+                        refresh = True
+
 
                 elif 'download-selected' in request.POST:
                     ids = request.POST.getlist('select_col')
@@ -163,9 +198,15 @@ def console(request, study_name = None):
                     return download_data(request, study_obj, administrations)
 
                 elif 'download-dictionary' in request.POST:
-                    return download_dictionary(request, study_obj)                
+                    return download_dictionary(request, study_obj)
 
-		    
+                elif 'view_all' in request.POST:
+                    if request.POST['view_all'] == "Show All":
+                        num_per_page = administration.objects.filter(study = study_obj).count()
+                    elif request.POST['view_all'] == "Show 20":
+                        num_per_page = 20
+                    refresh = True
+
         
     if request.method == 'GET' or refresh:
         username = None
@@ -178,8 +219,9 @@ def console(request, study_name = None):
         if study_name is not None:
             current_study = study.objects.get(researcher= request.user, name= study_name)
             administration_table = StudyAdministrationTable(administration.objects.filter(study = current_study))
-            RequestConfig(request).configure(administration_table)
+            RequestConfig(request, paginate={'per_page': num_per_page}).configure(administration_table)
             context['current_study'] = current_study.name
+            context['num_per_page'] = num_per_page
             context['study_instrument'] = current_study.instrument.verbose_name
             context['study_group'] = current_study.study_group
             context['study_administrations'] = administration_table
@@ -282,6 +324,7 @@ def random_url_generator(size=64, chars='0123456789abcdef'):
 @login_required 
 def administer_new(request, study_name):
     data = {}
+    context = dict()
     #check if the researcher exists and has permissions over the study
     permitted = study.objects.filter(researcher = request.user,  name = study_name).exists()
     study_obj = study.objects.get(researcher= request.user, name= study_name)
@@ -317,8 +360,9 @@ def administer_new(request, study_name):
                     subject_ids = filter(None, subject_ids)
                     subject_ids = map(int, subject_ids)
                     for sid in subject_ids:
+                        new_hash = random_url_generator()
                         old_rep = administration.objects.filter(study = study_obj, subject_id = sid).count()
-                        new_administrations.append(administration(study =study_obj, subject_id = sid, repeat_num = old_rep+1, url_hash = random_url_generator(), completed = False, due_date = datetime.datetime.now()+ datetime.timedelta(days=14)))
+                        new_administrations.append(administration(study =study_obj, subject_id = sid, repeat_num = old_rep+1, url_hash = new_hash, completed = False, due_date = datetime.datetime.now()+ datetime.timedelta(days=14)))
 
 
                 if params['autogenerate-count'][0]!='':
@@ -327,11 +371,13 @@ def administer_new(request, study_name):
                     if max_subject_id is None:
                         max_subject_id = 0
                     for sid in range(max_subject_id+1, max_subject_id+autogenerate_count+1):
-                        new_administrations.append(administration(study =study_obj, subject_id = sid, repeat_num = 1, url_hash = random_url_generator(), completed = False, due_date = datetime.datetime.now()+datetime.timedelta(days=14)))
+                        new_hash = random_url_generator()
+                        new_administrations.append(administration(study =study_obj, subject_id = sid, repeat_num = 1, url_hash = new_hash, completed = False, due_date = datetime.datetime.now()+datetime.timedelta(days=14)))
 #
                 administration.objects.bulk_create(new_administrations)
                 data['stat'] = "ok";
                 data['redirect_url'] = "/interface/study/"+study_name+"/";
+                data['study_name'] = study_name
                 return HttpResponse(json.dumps(data), content_type="application/json")
             else:
                 data['stat'] = "error";

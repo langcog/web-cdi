@@ -114,20 +114,23 @@
                                 local_time = moment(utc_time).local().format("MM/DD/YYYY hh:mm a");
                                 $(this).html(local_time);
 
-
                             });
                         </script>
                     </div>
                     <div class='col-md-3'>
-                            <button style='width:100%;' class="btn btn-default" id='add-selected' type='submit' name='administer-selected' value='administer-selected' disabled  >Re-administer Participants</button>
+                            <button style='width:100%;' class="btn btn-default selected-btn" id='add-selected' type='submit' name='administer-selected' value='administer-selected' disabled  >Re-administer Participants</button>
                     </div>
                     <div class='col-md-3'>
-                            <button style='width:100%;' class="btn btn-default" id='delete-selected' type='submit' name='delete-selected' value='administer-selected' disabled onclick='return confirm("Are you sure you want to delete the selected administration record and all the data associated with it?");' >Delete Selected Data</button>
+                            <button style='width:100%;' class="btn btn-default selected-btn" id='delete-selected' type='submit' name='delete-selected' value='administer-selected' disabled onclick='return confirm("Are you sure you want to delete the selected administration record and all the data associated with it?");' >Delete Selected Data</button>
 
                     </div>
                     <div class='col-md-3'>
-                            <button style='width:100%;' class="btn btn-default" id='download-selected' type='submit' name='download-selected' value='download-selected'  disabled >Download Selected Data</button>
+                            <button style='width:100%;' class="btn btn-default selected-btn" id='download-selected' type='submit' name='download-selected' value='download-selected'  disabled >Download Selected Data (All)</button>
                     </div>
+                    <div class='col-md-3'>
+                            <button style='width:100%;' class="btn btn-default selected-btn" id='download-links' type='submit' name='download-links' value='download-links'  disabled >Download Selected Data (Links)</button>
+                    </div>
+                    
                 </fieldset>
             </form>
 
@@ -140,8 +143,62 @@
 <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="new study">
 </div>
 <script>
-checked_only()
-$('form').each(function(){this.onkeypress = checkEnter;});
+    checked_only()
+    $('form').each(function(){this.onkeypress = checkEnter;});
+
+    var num_per_page = parseInt("{{ num_per_page }}");
+
+    if ((window.location.search.indexOf('per_page') != -1 && window.location.search.indexOf('per_page=20') == -1) || num_per_page != 20) {
+        $('#view_all').val("Show 20");
+    } else if (num_per_page == 20 || window.location.search.indexOf('per_page=20') != -1) {
+        $('#view_all').val("Show All");
+    }
+
+    var querystring = 'per_page=' + num_per_page;
+
+    $('.column_sort_links').each(function() {
+        var href = $(this).attr('href');
+
+        if (href) {
+            if (href.indexOf('per_page') == -1) {
+                href += (href.match(/\?/) ? '&' : '?') + querystring;
+                $(this).attr('href', href);
+            }
+        }
+    });
+
+    $(document).on('keyup keydown', function(e){
+        console.log(e.shiftKey);
+        shifted = e.shiftKey;
+    } );
+
+
+    var lastChecked = null;
+    var handleChecked = function(e) {
+        if(lastChecked && shifted) {
+            console.log("yes")
+            var i = $('input[type="checkbox"]').index(lastChecked);
+        var j = $('input[type="checkbox"]').index(e.target);
+        var checkboxes = [];
+        if (j > i) {
+            checkboxes = $('input[type="checkbox"]:gt('+ (i-1) +'):lt('+ (j-i) +')');
+        } else {
+            checkboxes = $('input[type="checkbox"]:gt('+ j +'):lt('+ (i-j) +')');
+        }
+     
+        if (!$(e.target).is(':checked')) {
+            $(checkboxes).removeAttr('checked');
+        } else {
+            $(checkboxes).attr('checked', 'checked');
+        }
+        }
+        lastChecked = e.target;
+          
+    }
+    $('input[name="select_col"').click( function() {
+        console.log("clicked!");
+        handleChecked(event);
+    });
 
 </script>
 </body>
