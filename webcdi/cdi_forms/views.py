@@ -101,6 +101,7 @@ def background_info_form(request, hash_id):
             background_form = BackgroundForm(age_ref = age_ref)  
     data = {}
     data['background_form'] = background_form
+    data['hash_id'] = hash_id
     data['completed'] = administration_instance.completed
     data['due_date'] = administration_instance.due_date
     data['title'] = administration_instance.study.instrument.verbose_name
