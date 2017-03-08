@@ -7,11 +7,15 @@ import json
 from researcher_UI.models import administration_data, administration, study
 from django.http import Http404
 import datetime
-from .forms import BackgroundForm
+from .forms import BackgroundForm, ContactForm
 from django.utils import timezone
 from django.http import JsonResponse, HttpResponse
 from django.core.serializers.json import DjangoJSONEncoder
 import itertools
+from django.core.mail import EmailMessage
+from django.template import Context
+from django.template.loader import get_template
+from django.contrib import messages
 
 
 
@@ -362,3 +366,34 @@ def find_paired_studies(request, study_group):
     data['background_form'] = BackgroundForm()
     data['possible_studies'] = json.dumps(list(possible_studies), cls=DjangoJSONEncoder)
     return render(request, 'cdi_forms/study_group.html', data)
+
+def contact(request, hash_id):
+    form = ContactForm(hash_id = hash_id)
+
+    if request.method == 'POST':
+        form = ContactForm(request.POST, hash_id = hash_id)
+
+        if form.is_valid():
+            contact_name = request.POST.get('contact_name', '')
+            contact_email = request.POST.get('contact_email', '')
+            contact_id = request.POST.get('contact_id', '')
+            form_content = request.POST.get('content', '')
+            template = get_template('cdi_forms/contact_template.txt')
+            context = Context({
+                'contact_name': contact_name,
+                'contact_id': contact_id,
+                'contact_email': contact_email,
+                'form_content': form_content,
+            })
+            content = template.render(context)
+            email = EmailMessage(
+                "New contact form submission",
+                content,
+                "webcdi.stanford.edu" +'',
+                ['dkellier@stanford.edu'],
+                headers = {'Reply-To': contact_email }
+            )
+            email.send()
+            messages.success(request, 'Form submission successful!')
+
+    return render(request, 'cdi_forms/contact.html', {'form': form})    

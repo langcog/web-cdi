@@ -4,14 +4,15 @@ from django.forms import ModelForm, Textarea
 from django import forms
 from .models import *
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Field, Row, Div, HTML
-from form_utils.forms import BetterModelForm
+from crispy_forms.layout import Layout, Fieldset, Submit, Field, Row, Div, HTML
 from crispy_forms.bootstrap import InlineField
+from form_utils.forms import BetterModelForm
 from django.templatetags.static import static
 import datetime
 from django.core.exceptions import ValidationError
 import codecs, json
 import os.path
+from django.core.validators import EmailValidator
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
@@ -209,3 +210,23 @@ class BackgroundForm(BetterModelForm):
         #'birth_weight': forms.NumberInput(attrs={'min':'1', 'max':'15', 'placeholder': 'X.X', 'step': '0.1'}),
         'due_date_diff': forms.NumberInput(attrs={'min':'1', 'max':'18'})
         }
+
+class ContactForm(forms.Form):
+    contact_name = forms.CharField(label="Your Name", required=True, max_length = 51)
+    contact_email = forms.EmailField(label="Your Email Address", required=True, max_length = 101, validators = [EmailValidator()])
+    contact_id = forms.CharField(label="Your Test URL", required=True, max_length = 101)
+    content = forms.CharField(label="What would you like to tell us?",
+        required=True,
+        widget=forms.Textarea(attrs={'cols': 80, 'rows': 6}),
+        max_length = 1001
+    )
+
+    def __init__(self, *args, **kwargs):
+        self.hash_id = kwargs.pop('hash_id', '')
+        super(ContactForm, self).__init__(*args, **kwargs)
+        self.fields['contact_id'].initial='webcdi.stanford.edu/form/fill/'+self.hash_id
+        self.helper = FormHelper()
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-lg-3'
+        self.helper.field_class = 'col-lg-9'
+        self.helper.layout = Layout(Field('contact_name'), Field('contact_email'), Field('contact_id'), Field('content'), Div(Submit('submit','Submit'), css_class="col-lg-offset-3 col-lg-9 text-center"))

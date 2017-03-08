@@ -1,0 +1,83 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    {% load staticfiles %}
+
+    <title>Words and Sentences CDI</title>
+    <meta name="description" content="English Words and Sentences CDI form">
+    <meta name="author" content="Ashwin Paranjape">
+
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="{% static 'cdi_forms/selectize.js' %}"></script>
+    <script src="{% static 'cdi_forms/bootstrap-datepicker.js' %}"></script>
+    <link rel='stylesheet' href="{% static 'cdi_forms/selectize.bootstrap3.css' %}">
+    <link rel='stylesheet' href="{% static 'cdi_forms/datepicker.css' %}">
+    <link rel="stylesheet" href="http://getbootstrap.com/assets/css/docs.min.css" />
+    <link rel='stylesheet' href="{% static 'cdi_forms/base.css' %}">
+    <script src="http://d3js.org/d3.v3.js"></script>
+    <script src="https://cdn.jsdelivr.net/lodash/4.17.2/lodash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-queue/3.0.3/d3-queue.min.js"></script>
+
+</head>
+
+
+
+<body >
+
+    <div class="container bs-docs-container" style='padding-top: 60px; padding-bottom: 60px;'>
+    	<div class="col-lg-offset-3 col-lg-9">
+    		<h2> Fill out the form below and a member of our team will get back to you soon! </h2>
+    	</div>
+	    {% load crispy_forms_tags %}
+	    {% crispy form %}
+
+	    {% if messages %}
+	    <div class="col-lg-offset-3 col-lg-9 text-center">
+			<ul class="messages">
+			    {% for message in messages %}
+			    <font color="#3C763D" {% if message.tags %} class="{{ message.tags }}" {% endif %}><h2>{{ message }}<h2></font>
+			    {% endfor %}
+			</ul>
+		</div>
+		{% endif %}
+	</div>
+
+	<script type="text/javascript">
+	$('textarea').each(function(){
+		current_textbox = $(this)[0];
+		max_length = current_textbox.maxLength
+		parent_div = current_textbox.parentElement
+
+		parent_div.insertAdjacentHTML('beforeend', "<div class = 'pull-right' id='" + current_textbox.name+"_char_counter'></div>")
+		countCharacters(current_textbox);
+	})
+
+	function countCharacters(current_textbox) { 
+		max_length = current_textbox.maxLength;
+		val_length = current_textbox.value.length;
+
+		remaining_chars = max_length - val_length;
+
+		$('#'+current_textbox.name+'_char_counter').html(remaining_chars + "/" + max_length + " characters remaining");
+
+	}
+
+	$('textarea').keyup(function() { 
+		current_textbox = $(this)[0];
+		countCharacters(current_textbox);
+
+	})
+
+
+	</script>
+
+</body>
+</html>
+
+
+
