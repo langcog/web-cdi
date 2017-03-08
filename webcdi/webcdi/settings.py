@@ -59,16 +59,14 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1','52.32.108.131','.amazonaws.com','.us-
 
 IPS_TO_ADD = ['webcdi-dev.us-west-2.elasticbeanstalk.com', 'webcdi-prod.us-west-2.elasticbeanstalk.com', 'webcdi.stanford.edu', socket.gethostname()]
 
+NEW_IPS = set()
+
 for IP in IPS_TO_ADD:
+    for i in range(0,100):
+    	NEW_IPS.add(socket.gethostbyname(IP))
 
-    EC2_PRIVATE_IP  =   None
-    try:
-        EC2_PRIVATE_IP  =   socket.gethostbyname(IP)
-    except:
-        pass
-
-    if EC2_PRIVATE_IP:
-        ALLOWED_HOSTS.append(EC2_PRIVATE_IP)
+for IP in list(NEW_IPS):
+	ALLOWED_HOSTS.append(IP)
 
 # Application definition
 
