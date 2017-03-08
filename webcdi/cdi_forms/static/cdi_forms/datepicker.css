@@ -19,6 +19,31 @@
   }*/
 
 }
+
+@media(max-width:767px){
+    .datepicker.dropdown-menu {
+      font-size: 28px;
+    }
+}
+
+@media(min-width:768px){
+    .datepicker.dropdown-menu {
+      font-size: 28px;
+    }
+}
+
+@media(min-width:992px){
+    .datepicker.dropdown-menu {
+      font-size: 24px;
+    }
+}
+
+@media(min-width:1200px){
+    .datepicker.dropdown-menu {
+      font-size: 14px;
+    }
+}
+
 .datepicker:before {
   content: '';
   display: inline-block;
