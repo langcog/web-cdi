@@ -30,11 +30,5 @@ urlpatterns = [
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'next_page': 'interface/'}),
     url(r'^accounts/profile/$', RedirectView.as_view(url='/interface/', permanent=False), name='interface'),
     url(r'interface/', include('researcher_UI.urls')),
-    url(r'^registration/register/$', RegistrationView.as_view(), name='registration_register'),
-    url(r'^registration/activate/complete/$', ActivationCompleteView.as_view(), name='registration_activation_complete'),
-    url(r'^registration/register/complete/$', RegistrationCompleteView.as_view(), name='registration_complete'),
-    url(r'^registration/register/closed/$', RegistrationClosedView.as_view(), name='registration_disallowed'),
-    url(r'^registration/activate/(?P<activation_key>\w+)/$', ActivationView.as_view(), name='registration_activate'),
-    url(r'^registration/register/complete/$', RegistrationCompleteView.as_view(), name='registration_complete'),
     url(r'^registration/', include('registration.urls')),
 ]
