@@ -57,8 +57,6 @@ MANAGERS = ADMINS
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1','52.32.108.131','webcdi-dev.us-west-2.elasticbeanstalk.com','webcdi-prod.us-west-2.elasticbeanstalk.com', 'webcdi.stanford.edu']
 
-REGISTRATION_SUPPLEMENT_CLASS = None
-
 # Application definition
 
 INSTALLED_APPS = (
@@ -76,6 +74,7 @@ INSTALLED_APPS = (
     'bootstrap3',
     'form_utils',
     'registration',
+    'supplementtut',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -191,3 +190,8 @@ DATE_INPUT_FORMATS = (
     '%B %d %Y', '%B %d, %Y',             # 'October 25 2006', 'October 25, 2006'
     '%d %B %Y', '%d %B, %Y',             # '25 October 2006', '25 October, 2006'
 )
+
+
+REGISTRATION_SUPPLEMENT_CLASS = 'supplementtut.models.MyRegistrationSupplement'
+ACCOUNT_ACTIVATION_DAYS = 3
+REGISTRATION_OPEN = True
