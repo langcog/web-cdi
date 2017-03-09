@@ -57,6 +57,7 @@ MANAGERS = ADMINS
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1','52.32.108.131','webcdi-dev.us-west-2.elasticbeanstalk.com','webcdi-prod.us-west-2.elasticbeanstalk.com', 'webcdi.stanford.edu']
 
+REGISTRATION_SUPPLEMENT_CLASS = None
 
 # Application definition
 
@@ -74,6 +75,7 @@ INSTALLED_APPS = (
     'django_tables2',
     'bootstrap3',
     'form_utils',
+    'registration',
 )
 
 MIDDLEWARE_CLASSES = (

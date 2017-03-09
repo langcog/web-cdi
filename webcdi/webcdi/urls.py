@@ -29,4 +29,5 @@ urlpatterns = [
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'next_page': 'interface/'}),
     url(r'^accounts/profile/$', RedirectView.as_view(url='/interface/', permanent=False), name='interface'),
     url(r'interface/', include('researcher_UI.urls')),
+    url(r'^registration/', include('registration.urls')),
 ]
