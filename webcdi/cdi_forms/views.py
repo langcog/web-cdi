@@ -48,6 +48,8 @@ def get_administration_instance(hash_id):
 def background_info_form(request, hash_id):
     administration_instance = get_administration_instance(hash_id)
     age_ref = {}
+    age_ref['language'] = administration_instance.study.instrument.language
+    age_ref['instrument'] = administration_instance.study.instrument.name
     age_ref['min_age'] = administration_instance.study.instrument.min_age
     age_ref['max_age'] = administration_instance.study.instrument.max_age
     age_ref['child_age'] = None
@@ -104,6 +106,7 @@ def background_info_form(request, hash_id):
     data['hash_id'] = hash_id
     data['completed'] = administration_instance.completed
     data['due_date'] = administration_instance.due_date
+    data['language'] = administration_instance.study.instrument.language
     data['title'] = administration_instance.study.instrument.verbose_name
     data['max_age'] = administration_instance.study.instrument.max_age
     data['min_age'] = administration_instance.study.instrument.min_age
@@ -112,7 +115,7 @@ def background_info_form(request, hash_id):
     study_group = administration_instance.study.study_group
     if study_group:
         data['study_group'] = study_group
-        data['alt_study_info'] = study.objects.filter(study_group = study_group).exclude(name = study_name).values_list("name","instrument__min_age", "instrument__max_age")
+        data['alt_study_info'] = study.objects.filter(study_group = study_group).exclude(name = study_name).values_list("name","instrument__min_age", "instrument__max_age", "instrument__language")
     else:
         data['study_group'] = None
         data['alt_study_info'] = None
