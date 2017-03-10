@@ -77,6 +77,10 @@ input[type=textbox] {
     display: none;
 }
 
+.asteriskField{
+  color: #aa0000;
+}
+
 ul {
   padding-left: 15px;
 }
