@@ -12,7 +12,7 @@ import datetime
 from django.core.exceptions import ValidationError
 import codecs, json
 import os.path
-from django.core.validators import EmailValidator
+from django.core.validators import EmailValidator, RegexValidator
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
@@ -44,6 +44,7 @@ class BackgroundForm(BetterModelForm):
 
     age = forms.IntegerField(label = 'Age (in months)<font color="aa0000">*</font>', validators=[MinValueValidator(0)], help_text='This field will update when you enter or change your child\'s DOB.', required=False)
 
+    zip_code = forms.CharField(min_length = 5, max_length = 5, required = False, widget=forms.TextInput(attrs={'placeholder': 'XXXXX'}), label = "What is your zip code?<br>(if you live in the U.S.)")
 
     #years = [(x,x) for x in range(1900, datetime.date.today().year+1)]
     #child_yob = forms.TypedChoiceField(label = "Child's year of birth", choices = years, coerce=int)
@@ -165,7 +166,7 @@ class BackgroundForm(BetterModelForm):
         #LINE BELOW ADDED AS A TEST TO FIX THE DATE ISSUE
         self.fields['child_dob'].input_formats=(settings.DATE_INPUT_FORMATS)
         self.helper.layout = Layout(
-            Fieldset( 'Basic Information', 'child_dob','age', 'sex','birth_order', 'birth_weight', Field('born_on_due_date', css_class='enabler'), Div('early_or_late', 'due_date_diff', css_class='dependent')),
+            Fieldset( 'Basic Information', 'child_dob','age', 'sex','zip_code','birth_order', 'birth_weight', Field('born_on_due_date', css_class='enabler'), Div('early_or_late', 'due_date_diff', css_class='dependent')),
             Fieldset( 'Family Background', 'mother_yob', 'mother_education','father_yob', 'father_education', 'annual_income'),
             Fieldset( "Child's Ethnicity",HTML("<p> The following information is being collected for the sole purpose of reporting to our grant-funding institute, i.e.,  NIH (National Institute of Health).  NIH requires this information to ensure the soundness and inclusiveness of our research. Your cooperation is appreciated, but optional. </p>"), 'child_hispanic_latino', 'child_ethnicity'),
             Fieldset( "Caregiver Information", 'caregiver_info'),

@@ -1,7 +1,7 @@
 from django.db import models
 import datetime
 from django.core.exceptions import ValidationError
-from django.core.validators import validate_comma_separated_integer_list,MaxValueValidator,MinValueValidator
+from django.core.validators import validate_comma_separated_integer_list,MaxValueValidator,MinValueValidator,RegexValidator
 from django.contrib.postgres.fields import ArrayField
 from django import forms
 
@@ -57,6 +57,8 @@ class BackgroundInfo(models.Model):
     years[-1] = (0, "Prefer not to disclose")
     age = models.IntegerField(verbose_name = "Age (in months)", validators=[MinValueValidator(0)], default = 999)
     sex = models.CharField(max_length = 1, choices = (('M', "Male"), ('F', "Female"), ('O', "Other")))
+    zip_code = models.CharField(max_length = 5, verbose_name = 'Zip Code (if you live in the U.S.)', blank = True, null=True, validators=[RegexValidator(regex='^\d{5}$', message='Please enter a valid U.S. zip code')])
+
 
     birth_order_choices = [
         (1, "1 (First)"),
