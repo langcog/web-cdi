@@ -563,10 +563,23 @@
         changePages(x);
     }
 
+    var click_div = false;
+
     $('div.col-md-4.alco-child:has(input:checkbox)').on('click', function() {
-        $( this ).find('input').click();
+    click_div = true;
+    current_checkbox = $(this).find("input[type='checkbox']");
+    current_checkbox.click();
+    click_div = false;
+
     })
 
+    $('div.col-md-4.alco-child input[type=checkbox]').click(function(e){
+            if (!click_div) e.stopPropagation();
+    });
+
+    $('div.col-md-4.alco-child label').click(function(e){
+            if (!click_div) e.stopPropagation();
+    });
 
 
 </script>
