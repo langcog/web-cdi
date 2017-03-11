@@ -11,8 +11,11 @@ function modal_form(form_url){
                 $.ajax({
                     type: 'POST',
                     url: form_url,
-                    data: $('#'+modal_id+" form").serialize(),
+                    data: new FormData($('#'+modal_id+" form")[0]),
                     cache: false,
+                    contentType: false,
+                    processData: false,
+
                     success: function (data, status) {
                         if (data['stat'] == "ok") {
                             $('#'+modal_id).modal('hide');
@@ -32,10 +35,7 @@ function modal_form(form_url){
                     }
                 });                
             };
-            $("#"+modal_id+" [name=autogenerate-count]").keypress(function() {
-                if (event.which == 13) callback();
-            });
-            $("#"+modal_id+" [name=new-subject-ids]").keypress(function() {
+            $("#"+modal_id+" input").keypress(function() {
                 if (event.which == 13) callback();
             });
             $("#"+modal_id+" [name=submit]").click(callback); 

@@ -17,14 +17,13 @@ from cdi_forms.models import BackgroundInfo
 import cStringIO
 from django.utils.encoding import force_text
 from django.core.serializers.json import DjangoJSONEncoder
+import csv
 
 
 
 
 # Create your views here
 
-import csv
-from django.http import HttpResponse
 
 class UnicodeWriter:
     def __init__(self, f, dialect=csv.excel, encoding="utf-8-sig", **kwds):
@@ -334,9 +333,25 @@ def administer_new(request, study_name):
             params = dict(request.POST)
             validity = True
             data['error_message'] = ''
-            if params['new-subject-ids'][0] == '' and params['autogenerate-count'][0] == '':
+            ids_csv = request.FILES['subject-ids-csv'] if 'subject-ids-csv' in request.FILES else None
+            print ids_csv
+
+            if params['new-subject-ids'][0] == '' and params['autogenerate-count'][0] == '' and ids_csv is None:
                 validity = False
                 data['error_message'] += "Form is empty\n"
+
+            if ids_csv:
+                ids_to_add = iter(csv.reader(ids_csv, delimiter=','))
+                if 'ignore-csv-header' in request.POST:
+                    next(ids_to_add)
+                subject_ids_numbers = all([x[0].isdigit() for x in ids_to_add])
+                if not subject_ids_numbers:
+                    validity = False
+                    if 'ignore-csv-header' not in request.POST:
+                        data['error_message'] += "Non integer subject ids. Make sure first row is numeric\n"
+                    else:
+                        data['error_message'] += "Non integer subject ids\n"
+
 
             if params['new-subject-ids'][0] != '':
                 subject_ids = re.split('[,\s]+', str(params['new-subject-ids'][0]))
@@ -355,6 +370,17 @@ def administer_new(request, study_name):
 
             if validity:
                 new_administrations = []
+
+                if ids_csv:
+                    ids_to_add = iter(csv.reader(ids_csv, delimiter=','))
+                    if 'ignore-csv-header' in request.POST:
+                        next(ids_to_add)
+                    subject_ids = [x[0] for x in ids_to_add]
+                    for sid in subject_ids:
+                        new_hash = random_url_generator()
+                        old_rep = administration.objects.filter(study = study_obj, subject_id = sid).count()
+                        new_administrations.append(administration(study =study_obj, subject_id = sid, repeat_num = old_rep+1, url_hash = new_hash, completed = False, due_date = datetime.datetime.now()+ datetime.timedelta(days=14)))
+
                 if params['new-subject-ids'][0] != '':
                     subject_ids = re.split('[,\s]+', str(params['new-subject-ids'][0]))
                     subject_ids = filter(None, subject_ids)
@@ -376,7 +402,7 @@ def administer_new(request, study_name):
 #
                 administration.objects.bulk_create(new_administrations)
                 data['stat'] = "ok";
-                data['redirect_url'] = "/interface/study/"+study_name+"/";
+                data['redirect_url'] = "/interface/study/"+study_name+"/?sort=-created_date";
                 data['study_name'] = study_name
                 return HttpResponse(json.dumps(data), content_type="application/json")
             else:
