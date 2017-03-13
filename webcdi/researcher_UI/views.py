@@ -235,17 +235,26 @@ def rename_study(request, study_name):
     study_obj = study.objects.get(researcher= request.user, name= study_name)
     if request.method == 'POST' :
         form = RenameStudyForm(study_name, request.POST)
+        changed_name = None
+        changed_waiver = None
         if form.is_valid():
             researcher = request.user
             new_study_name = form.cleaned_data.get('name')
             new_study_waiver = form.cleaned_data.get('waiver')
+
             if not study.objects.filter(researcher = researcher, name = new_study_name).exists():
     	        study_obj.name = new_study_name
+                changed_name = True
+                study_obj.save()
+            if study_obj.waiver != new_study_waiver:
                 study_obj.waiver = new_study_waiver
                 study_obj.save()
+                changed_waiver = True
+
+            if changed_name or changed_waiver:
                 data['stat'] = "ok";
                 data['redirect_url'] = "/interface/study/"+new_study_name+"/";
-                return HttpResponse(json.dumps(data), content_type="application/json")
+                return HttpResponse(json.dumps(data), content_type="application/json")            
             else:
                 data['stat'] = "error";
                 data['error_message'] = "Study already exists; Use a unique name";
@@ -254,8 +263,9 @@ def rename_study(request, study_name):
             data['stat'] = "re-render";
             return render(request, 'researcher_UI/add_study_modal.html', {'form': form})
     else:
-        form = RenameStudyForm(study_name)
+        form = RenameStudyForm(study_name, study_waiver = study_obj.waiver)
         return render(request, 'researcher_UI/add_study_modal.html', {'form': form})
+        
 @login_required 
 def add_study(request):
     data = {}

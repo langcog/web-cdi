@@ -40,10 +40,34 @@ class AddPairedStudyForm(forms.Form):
 
 class RenameStudyForm(forms.Form):
     name = forms.CharField(label='Study Name', max_length=51)
-    waiver = forms.CharField(widget=forms.Textarea, label='Waiver of Documentation', required = False)
+    waiver = forms.CharField(widget=forms.Textarea, label='Waiver of Documentation')
+
+    def clean(self):
+        cleaned_data = super(RenameStudyForm, self).clean()
+        cleaned_name = cleaned_data.get("name")
+        cleaned_waiver = cleaned_data.get("waiver")
+
+        if cleaned_data.get('cleaned_name') == '' or cleaned_data.get('cleaned_name') == self.study_name:
+            print "No name input"
+            no_name = True
+        else:
+            no_name = None
+
+        if cleaned_data.get('cleaned_waiver') == '' or cleaned_data.get('cleaned_waiver') == self.old_waiver:
+            print "No waiver input"
+            no_waiver = True
+        else:
+            no_waiver = None
+
+        if no_name and no_waiver:
+            print "Will raise error"
+            self.add_error('name', 'Both "Study Name" and "Waiver of Documentation" cannot be empty. Please update at least one field.')
+            self.add_error('waiver', 'Both "Study Name" and "Waiver of Documentation" cannot be empty. Please update at least one field.')
 
 
     def __init__(self, old_study_name, *args, **kwargs):
+        self.study_name = old_study_name
+        self.old_waiver = kwargs.pop('study_waiver', None)
         super(RenameStudyForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_id = 'rename_study'
@@ -52,4 +76,6 @@ class RenameStudyForm(forms.Form):
         self.helper.field_class = 'col-lg-9'
         self.helper.form_method = 'post'
         self.helper.form_action = '/interface/'+old_study_name+'rename_study/'
+        self.fields['name'].initial = self.study_name
+        self.fields['waiver'].initial = self.old_waiver
 #        self.helper.add_input(Submit('submit', 'Submit'))

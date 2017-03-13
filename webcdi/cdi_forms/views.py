@@ -117,7 +117,7 @@ def background_info_form(request, hash_id):
     study_group = administration_instance.study.study_group
     if study_group:
         data['study_group'] = study_group
-        data['alt_study_info'] = study.objects.filter(study_group = study_group).exclude(name = study_name).values_list("name","instrument__min_age", "instrument__max_age", "instrument__language")
+        data['alt_study_info'] = study.objects.filter(study_group = study_group, researcher = administration_instance.study.researcher ).exclude(name = study_name).values_list("name","instrument__min_age", "instrument__max_age", "instrument__language")
     else:
         data['study_group'] = None
         data['alt_study_info'] = None
