@@ -16,6 +16,8 @@ from django.core.mail import EmailMessage
 from django.template import Context
 from django.template.loader import get_template
 from django.contrib import messages
+from django.contrib.auth.models import User
+
 
 
 
@@ -364,8 +366,9 @@ def administer_cdi_form(request, hash_id):
             # only printable
             return printable_view(request, hash_id)
 
-def find_paired_studies(request, study_group):
-    possible_studies = study.objects.filter(study_group = study_group).values("name","instrument__min_age", "instrument__max_age", "instrument__language")
+def find_paired_studies(request, username, study_group):
+    researcher = User.objects.get(username = username)
+    possible_studies = study.objects.filter(study_group = study_group, researcher = researcher).values("name","instrument__min_age", "instrument__max_age", "instrument__language")
     data = {}
     data['background_form'] = BackgroundForm()
     data['possible_studies'] = json.dumps(list(possible_studies), cls=DjangoJSONEncoder)
