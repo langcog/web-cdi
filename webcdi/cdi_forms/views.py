@@ -372,6 +372,7 @@ def find_paired_studies(request, username, study_group):
     data = {}
     data['background_form'] = BackgroundForm()
     data['possible_studies'] = json.dumps(list(possible_studies), cls=DjangoJSONEncoder)
+    data['username'] = username
     return render(request, 'cdi_forms/study_group.html', data)
 
 def contact(request, hash_id):

@@ -64,7 +64,7 @@
 
                  $.each(data, function(index, value){
                     var raw_text = "My baby speaks " + value.instrument__language + " and is between " + value.instrument__min_age + " and " + value.instrument__max_age + " months old.";
-                    var hyperlink = "/interface/study/" + value.name + "/new_parent";
+                    var hyperlink = "{% url 'administer_new_parent' username=username study_name=12345 %}".replace(/12345/, value.name);
 
                     var min_age = value.instrument__min_age;
                     var max_age = value.instrument__max_age;
