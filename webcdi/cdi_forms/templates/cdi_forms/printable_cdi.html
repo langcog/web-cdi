@@ -23,17 +23,9 @@
     <script src="https://cdn.jsdelivr.net/lodash/4.17.2/lodash.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-queue/3.0.3/d3-queue.min.js"></script>
 
-        <!--.alternate-color :nth-child(odd){
-              background-color:#ddd;
-        }
-        .alternate-color :nth-child(even){
-              background-color:#fff;
-        }-->
-
     <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-	<meta property="og:url" content="http://webcdi.stanford.edu/form/fill/{{ hash_id}}/" />
 	<meta property="og:image" content="http://webcdi.stanford.edu/{% static 'researcher_UI/images/logo.png' %}" />
 	<meta property="og:title" content="MacArthur-Bates Communicative Development Inventory" />
 	<meta property="og:description" content="Interesting tidbits learned from how your child speaks!" />
@@ -94,9 +86,10 @@
 
     <div class="row text-center">
         <h4><a href="#filled_form" data-toggle="collapse">Show Me My Answers</a></h4>
-	<div class="fb-share-button" data-href="http://webcdi.stanford.edu/form/fill/{{ hash_id }}/" data-layout="link" data-mobile-iframe="false">
-		<a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwebcdi.stanford.edu%2Fform%2Ffill%2F{{ hash_id }}%2F&amp;src=sdkpreparse">Share</a>
-	</div>
+        {% url 'administer_cdi_form' hash_id=hash_id as form_url %}
+       <div class="fb-share-button" data-href="{{ form_url }}" data-layout="link" data-mobile-iframe="false">
+               <a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ form_url | urlencode }}&amp;src=sdkpreparse">Share</a>
+       </div>
     </div>
 
     <div class="col-md-12 collapse" id="graph_data" style="height: 90vh;">
