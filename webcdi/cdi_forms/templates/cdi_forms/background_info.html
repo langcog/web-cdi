@@ -141,7 +141,7 @@
 
         var study_group = "{{ study_group }}"
         if (study_group != "None") {
-            study_group_hint = " Not the right age? <a href='/form/group/" + "{{ study_group }}"+ "'> Click here</a>"
+            study_group_hint = " Not the right age? <a href='{% url 'find_paired_studies' username study_group %}"+ "'> Click here</a>"
         } else {
             study_group_hint = ""
         }
