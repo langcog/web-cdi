@@ -71,6 +71,7 @@ for IP in list(NEW_IPS):
 # Application definition
 
 INSTALLED_APPS = (
+    'researcher_UI', 
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -78,7 +79,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cdi_forms',
-    'researcher_UI', 
     'csvimport.app.CSVImportConf',
     'crispy_forms',
     'django_tables2',

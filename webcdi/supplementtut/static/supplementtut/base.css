@@ -23,3 +23,13 @@ legend {
     border-bottom:none;
     margin-bottom: 0;
 }
+
+.breadcrumbs {
+    background: #fff;
+    padding: 2px 8px 3px 8px;
+    font-size: 14px;
+    color: #999;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
