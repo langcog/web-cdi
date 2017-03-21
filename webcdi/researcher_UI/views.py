@@ -296,10 +296,10 @@ def add_study(request):
 @login_required 
 def add_paired_study(request):
     data = {}
+    researcher = request.user
     if request.method == 'POST' :
         form = AddPairedStudyForm(request.POST)
         if form.is_valid():
-            researcher = request.user
             study_group = form.cleaned_data.get('study_group')
             paired_studies = form.cleaned_data.get('paired_studies')
             permissions = []
@@ -324,7 +324,8 @@ def add_paired_study(request):
             data['stat'] = "re-render";
             return render(request, 'researcher_UI/add_paired_study_modal.html', {'form': form})
     else:
-        form = AddPairedStudyForm()
+        your_studies = study.objects.filter(study_group = "", researcher = researcher).values_list("name","name")
+        form = AddPairedStudyForm(your_studies = your_studies)
         return render(request, 'researcher_UI/add_paired_study_modal.html', {'form': form})
 
 def random_url_generator(size=64, chars='0123456789abcdef'):

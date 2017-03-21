@@ -27,6 +27,7 @@ class AddPairedStudyForm(forms.Form):
 
 
     def __init__(self, *args, **kwargs):
+        self.your_studies = kwargs.pop('your_studies', None)
         super(AddPairedStudyForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_id = 'add-paired-study'
@@ -35,7 +36,7 @@ class AddPairedStudyForm(forms.Form):
         self.helper.field_class = 'col-lg-9'
         self.helper.form_method = 'post'
         self.helper.form_action = '/interface/add_paired_study/'
-        self.fields['paired_studies'].choices = study.objects.filter(study_group = "").values_list("name","name")
+        self.fields['paired_studies'].choices = self.your_studies
 #        self.helper.add_input(Submit('submit', 'Submit'))
 
 class RenameStudyForm(forms.Form):
