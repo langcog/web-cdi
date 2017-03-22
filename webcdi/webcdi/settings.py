@@ -86,7 +86,10 @@ INSTALLED_APPS = (
     'form_utils',
     'registration',
     'supplementtut',
+    'django.contrib.sites',
 )
+
+SITE_ID = 1
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.BrokenLinkEmailsMiddleware',
