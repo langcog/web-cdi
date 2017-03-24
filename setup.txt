@@ -5,6 +5,11 @@ $ sudo apt-get install git
 $ git clone https://github.com/langcog/web-cdi.git
 $ cd web-cdi
 
+#ASK FOR THE FOLLOWING FILES THAT ARE NOT ON GITHUB
+webcdi/webcdi/email.py
+webcdi/webcdi/databases.py
+~/.pgpass
+
 install dependencies
   on ubuntu:
     $ sudo apt-get python-pip python-dev postgresql-client postgresql postgresql-contrib pgadmin5 python-psycopg2 libpq-dev libxml2-dev libxslt-dev supervisor nginx
@@ -23,7 +28,7 @@ install virtualenv and set one up
 $ sudo pip install virtualenv
 
 #NOTE FROM BEN: WE MIGHT WANT TO CLARIFY THAT YOU NEED TO REPLACE “my_project_folder” BELOW WITH THE ACTUAL NAME OF YOUR PROJECT FOLDER, WHICH SHOULD BE “webcdi”
-$ cd my_project_folder
+$ cd webcdi
 $ virtualenv venv
 $ source venv/bin/activate
 
@@ -36,8 +41,8 @@ $ sudo -u $username createdb webcdi-admin
 #THIS STEP ASKS YOU TO CREATE A PASSWORD. MINE IS XXXXXXXXXXX. 
 $ sudo -u $username createuser -P -s webcdi-admin
 
-#NOTE FROM BEN: THERE’S SOME WEIRD ESCAPING ISSUE GOING ON WITH THE COMMAND BELOW. YOU’LL HAVE TO SPLIT THIS UP INTO TWO COMMANDS: (1) $ psql -U $username webcdi-admin and [opens a psql session] (2) GRANT ALL PRIVILEGES ON DATABASE "webcdi-admin" TO "webcdi-admin"; [grants privileges and should give you a message saying “GRANT” if it’s worked correctly] 
-$ psql -U $username webcdi-admin -c "GRANT ALL PRIVILEGES ON DATABASE "webcdi-admin" TO "webcdi-admin;"
+#GRANT ALL PRIVILEGES ON DATABASE TO ADMIN USER
+$ psql -U $username webcdi-admin -c 'GRANT ALL PRIVILEGES ON DATABASE "webcdi-admin" TO "webcdi-admin";'
 
 
 #FOR THIS TO WORK, YOU MUST GO INTO settings.py AND COMMENT OUT THE LINE STARTING WITH LOGGING = { THROUGH THE FINAL CLOSING BRACKET AFTER ‘propagate’: True,
@@ -45,15 +50,24 @@ make and run migrations
 $ python manage.py makemigrations
 $ python manage.py migrate
 
-set up instruments
-$ sudo -u $username psql -d webcdi-admin -c "\\COPY cdi_forms_english_ws FROM 'cdi_form_csv/[English_WS].csv' WITH (FORMAT csv, HEADER True)"
-$ sudo -u $username psql -d webcdi-admin -c "\\COPY cdi_forms_english_wg FROM 'cdi_form_csv/[English_WG].csv' WITH (FORMAT csv, HEADER True)"
-[and so on for other instruments]
+#FROM HERE YOU HAVE 2 OPTIONS. CREATE A BLANK VERSION OF THE DATABASE OR SYNC YOUR LOCAL COPY TO THE LIVE DATABASE. 
+#TO DO THE FIRST:
 
-create login for admin console
-$ python manage.py createsuperuser
+	set up instruments
+	$ sudo -u $username psql -d webcdi-admin -c "\\COPY cdi_forms_english_ws FROM 'cdi_form_csv/[English_WS].csv' WITH (FORMAT csv, HEADER True)"
+	$ sudo -u $username psql -d webcdi-admin -c "\\COPY cdi_forms_english_wg FROM 'cdi_form_csv/[English_WG].csv' WITH (FORMAT csv, HEADER True)"
+	[and so on for other instruments]
+
+	create login for admin console
+	$ python manage.py createsuperuser
+
+	in the admin console (http://127.0.0.1:8000/admin) add instruments for English_WS, English_WG, etc.
+
+# TO SYNC YOUR LOCAL DATABASE TO THE LIVE DB (MAKE SURE YOU HAVE ~/.pgpass SET UP CURRENTLY)
+	$ psql -U $local-username webcdi-admin -c 'drop schema public cascade;'
+	$ psql -U $local-username webcdi-admin -c 'create schema public;'
+	$ psql -h <end-point-url> -p 5432 -U webcdi-admin webcdi-admin | psql -U $local-username webcdi-admin
+
 
 run locally
 $ python manage.py runserver
-
-in the admin console (http://127.0.0.1:8000/admin) add instruments for English_WS, English_WG, etc.

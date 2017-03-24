@@ -1,3 +1,5 @@
+#Note (Danielle Kellier 3/24/17): These instructions are for originally setting up Web-CDI on its original EC2 server. If you want a locally-run copy on a MacOS, please refer to setup.txt
+
 #Execute these commands in order to load the git repo
 #sudo apt-get install git 
 #git clone https://github.com/langcog/web-cdi.git
