@@ -9,6 +9,8 @@ $ cd web-cdi
 webcdi/webcdi/email.py
 webcdi/webcdi/databases.py
 ~/.pgpass
+Passwords for "webcdi-admin" and "webcdi-user" users
+DB endpoint url
 
 install dependencies
   on ubuntu:
@@ -35,11 +37,16 @@ $ source venv/bin/activate
 install project requirements
 $ pip install -r requirements.txt
 
+set computer username
+$ username={put your account username here}
+
 create postgres database/user ($username = your OSX login)
 $ sudo -u $username createdb webcdi-admin
 
-#THIS STEP ASKS YOU TO CREATE A PASSWORD. MINE IS XXXXXXXXXXX. 
-$ sudo -u $username createuser -P -s webcdi-admin
+#THIS STEP ASKS YOU TO CREATE A PASSWORD. 
+$ psql -U $username webcdi-admin -c 'CREATE USER "webcdi-admin" WITH PASSWORD XXXXXX;'
+$ psql -U $username webcdi-admin -c 'CREATE USER "webcdi-user" WITH PASSWORD XXXXXX;'
+
 
 #GRANT ALL PRIVILEGES ON DATABASE TO ADMIN USER
 $ psql -U $username webcdi-admin -c 'GRANT ALL PRIVILEGES ON DATABASE "webcdi-admin" TO "webcdi-admin";'
@@ -64,9 +71,10 @@ $ python manage.py migrate
 	in the admin console (http://127.0.0.1:8000/admin) add instruments for English_WS, English_WG, etc.
 
 # TO SYNC YOUR LOCAL DATABASE TO THE LIVE DB (MAKE SURE YOU HAVE ~/.pgpass SET UP CURRENTLY)
-	$ psql -U $local-username webcdi-admin -c 'drop schema public cascade;'
-	$ psql -U $local-username webcdi-admin -c 'create schema public;'
-	$ psql -h <end-point-url> -p 5432 -U webcdi-admin webcdi-admin | psql -U $local-username webcdi-admin
+	$ endpointurl={put endpoint url of remote DB here}
+	$ psql -U $username webcdi-admin -c 'drop schema public cascade;'
+	$ psql -U $username webcdi-admin -c 'create schema public;'
+	$ pg_dump -C -h $endpointurl -p 5432 -U webcdi-admin webcdi-admin | psql -U $username webcdi-admin
 
 
 run locally
