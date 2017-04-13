@@ -9,6 +9,6 @@ class StudyAdministrationTable(tables.Table):
     link = tables.TemplateColumn('<a href="/form/fill/{{ record.url_hash }}" target="_blank">link</a>', orderable=False)
     class Meta:
         model = administration
-        exclude = ("study",'id', 'url_hash','completedBackgroundInfo')
-        sequence = ('select_col','subject_id', 'repeat_num', 'link')
+        exclude = ("study",'id', 'url_hash','completedBackgroundInfo', 'page_number')
+        sequence = ('select_col','subject_id', 'repeat_num', 'link',)
         # add class="paleblue" to <table> tag

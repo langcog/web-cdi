@@ -334,7 +334,7 @@
         {% endfor %}
     </div>
     {% endfor %}
-    <div id = "analysis_div"  class = "page_div collapse">    
+    <div id = "analysis_div"  class = "collapse">    
         <h4>
             You are almost done! Click "Yes" if you agree with ALL of the following points. Your answer will not affect your results. There is nothing wrong with choosing "No":
         </h4>
@@ -419,6 +419,12 @@
 
     var gotToEnd = false;
     $('.submit-button').hide();
+
+    var confirm_completion = "{{ confirm_completion }}";
+
+    if ($.inArray( confirm_completion, [ "true", "True", "T", "1",1 ] ) > -1) {
+        $('#analysis_div').addClass('page_div');
+    }
 
     //Collapses and expands sections to act like a page-flipper
     function changePages(which_page) {

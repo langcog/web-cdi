@@ -40,9 +40,9 @@ class BackgroundForm(BetterModelForm):
 
     child_dob = forms.DateField(input_formats=['%m/%d/%Y'], widget=forms.TextInput(attrs={'placeholder': 'mm/dd/yyyy'}),
                                 help_text = "To protect your privacy, we never store your child's date of birth, we only record age in months.",
-                                validators = [MaxValueValidator(datetime.date.today())], label = 'Child DOB<font color="aa0000">*</font>', required=False)
+                                validators = [MaxValueValidator(datetime.date.today())], label = 'Child DOB<span class="asteriskField">*</span>', required=False)
 
-    age = forms.IntegerField(label = 'Age (in months)<font color="aa0000">*</font>', validators=[MinValueValidator(0)], help_text='This field will update when you enter or change your child\'s DOB.', required=False)
+    age = forms.IntegerField(label = 'Age (in months)<span class="asteriskField">*</span>', validators=[MinValueValidator(0)], help_text='This field will update when you enter or change your child\'s DOB.', required=False)
 
     zip_code = forms.CharField(min_length = 5, max_length = 5, required = False, widget=forms.TextInput(attrs={'placeholder': 'XXXXX'}), label = "What is your zip code?<br>(if you live in the U.S.)")
 

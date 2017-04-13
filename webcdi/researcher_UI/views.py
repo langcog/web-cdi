@@ -219,6 +219,8 @@ def console(request, study_name = None, num_per_page = 20):
         if study_name is not None:
             current_study = study.objects.get(researcher= request.user, name= study_name)
             administration_table = StudyAdministrationTable(administration.objects.filter(study = current_study))
+            if not current_study.confirm_completion:
+                administration_table.exclude = ("study",'id', 'url_hash','completedBackgroundInfo', 'analysis')
             RequestConfig(request, paginate={'per_page': num_per_page}).configure(administration_table)
             context['current_study'] = current_study.name
             context['num_per_page'] = num_per_page

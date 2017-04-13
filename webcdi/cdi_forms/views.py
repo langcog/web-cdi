@@ -166,6 +166,7 @@ def prefilled_cdi_data(administration_instance):
         data['page_number'] = administration_instance.page_number
         data['hash_id'] = administration_instance.url_hash
         data['study_waiver'] = administration_instance.study.waiver
+        data['confirm_completion'] = administration_instance.study.confirm_completion
         raw_objects = []
         #meta_file['background_form'] = None
 
