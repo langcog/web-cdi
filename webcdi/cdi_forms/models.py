@@ -10,7 +10,6 @@ class requests_log(models.Model):
     request_type = models.CharField(max_length=4)
     timestamp = models.DateTimeField(auto_now = True)
     
-# Create your models here.
 class English_WS(models.Model):
     itemID = models.CharField(max_length = 101, primary_key=True)
     item = models.CharField(max_length = 101)
@@ -98,9 +97,6 @@ class BackgroundInfo(models.Model):
 
     birth_order = models.IntegerField(verbose_name = "Birth order", choices = birth_order_choices)
     birth_weight = models.FloatField(verbose_name = "Birth weight", choices = birth_weight_choices)
-
-
-    #early_late = models.DateField(verbose_name = "Early or late birth", help_text = "If the child was born on due date, fill 0. If the child was born earlier than due date, fill the number of weeks after the due date as positive value. If the child was born later fill a negative value." )
     born_on_due_date = models.IntegerField(verbose_name = "Was your child born earlier or later than their due date?")
     early_or_late = models.CharField(verbose_name = "Was he/she early or late?", max_length = 5, choices = (('early', 'Early'),('late', 'Late')), blank=True, null=True)
     due_date_diff = models.IntegerField(verbose_name = "By how many weeks? (round to the nearest week)",blank=True, null=True, validators = [MinValueValidator(1, "Number of weeks cannot be less than 1")])
@@ -114,42 +110,27 @@ class BackgroundInfo(models.Model):
     education_levels[-1] = (0, "Prefer not to disclose")
     mother_yob = models.IntegerField(verbose_name = "Mother's (or Parent 1) Year of birth", choices=years)
     mother_education = models.IntegerField(verbose_name = "Mother's (or Parent 1) Education", help_text ="Choose highest grade completed (12 = high school graduate; 16 = college graduate; 18 = advanced degree)", choices = education_levels)
-    #mother_occupation = models.CharField(max_length = 101, verbose_name = "Occupation")
-    #mother_hours_work = models.IntegerField(verbose_name = "Hours/week at work")
 
     father_yob = models.IntegerField(verbose_name = "Father's (or Parent 2) Year of birth", choices = years)
     father_education = models.IntegerField(verbose_name = "Father's (or Parent 2) Education", help_text ="Choose highest grade completed (12 = high school graduate; 16 = college graduate; 18 = advanced degree)", choices= education_levels)
-    #father_occupation = models.CharField(max_length = 101, verbose_name = "Occupation")
-    #father_hours_work = models.IntegerField(verbose_name = "Hours/week at work")
 
     low, high, inc = 25000, 200000, 25000
     income_choices = [("<" + str(low), "Under " + format_currency(low))] +\
         [("%d-%d" % (bottom, bottom + inc), "-".join([format_currency(bottom), format_currency(bottom + inc)])) for bottom in range(low, high, inc)] +\
         [(">" + str(high), "Over " + format_currency(high)), ("Prefer not to disclose", "Prefer not to disclose")]
     annual_income = models.CharField(max_length = 30, choices = income_choices, verbose_name = "Estimated Annual Family Income (in USD)")
-    #annual_income = models.FloatField(verbose_name = "Estimated Annual Family Income (in USD)", validators = [validate_ge_zero])
 
     child_hispanic_latino = models.NullBooleanField(verbose_name = "Is your child Hispanic or Latino?", blank=True, null=True)
     child_ethnicity = ArrayField(models.CharField(max_length = 1), blank=True, null=True)
 
-    #parent_1_hours = models.IntegerField(verbose_name = "Parent 1")
-    #parent_2_hours = models.IntegerField(verbose_name = "Parent 2")
-    #other = models.CharField(max_length = 20,  blank = True, verbose_name = "Other caregiver (if any)", help_text = "e.g. nanny, family provider, grandmother")
-    #other_hours = models.IntegerField( blank = True, verbose_name = "Hours spend with other caregivers")
     caregivers_choices = ((2, "Two parents"), (1, "One parent"), (3, "One parent plus other caregiver (e.g., grandparent)"), (4, "Other caregivers (e.g., grandparent or grandparents)"), (0, "Prefer not to disclose"))
     caregiver_info = models.IntegerField(verbose_name = "Who does your child live with?", choices = caregivers_choices)
 
-    #daycare_days_per_week = models.IntegerField( blank = True, verbose_name = "Number of days per week at daycare or preschool (if applicable)")
-    #daycare_hours_per_day = models.IntegerField( blank = True, verbose_name = "Number of hours per day at daycare or preschool (if applicable)")
-    #daycare_since = models.IntegerField( blank = True, verbose_name = "Since what age (in months) at daycare or preschool (if applicable)")
-
-    #which_language = models.CharField(max_length = 20, blank = True)
     other_languages_boolean = models.IntegerField()
     other_languages = ArrayField(models.CharField(max_length = 101), blank = True, null=True)
     language_from = models.CharField(max_length = 50, blank = True, verbose_name = "From whom?", null=True)
     language_days_per_week = models.IntegerField(null=True, blank = True, verbose_name = "How many days per week is the child exposed to these languages?", validators = [MaxValueValidator(7, "Number of days per week cannot exceed 7"), MinValueValidator(1, "Number of days per week cannot be less than 1")], )
     language_hours_per_day = models.IntegerField(null=True, blank = True, verbose_name = "How many hours per day is the child exposed to these languages?", validators = [MaxValueValidator(24, "Number of hours per day cannot exceed 24"), MinValueValidator(1, "Number of hours per day cannot be less than 1")],)
-    #language_since = models.IntegerField( blank = True)
 
     ear_infections_boolean = models.IntegerField(verbose_name = "Has your child experienced chronic ear infections (5 or more)? ")
     ear_infections = models.CharField(max_length = 1001, null=True, blank = True, verbose_name = "Has your child undergone interventions (e.g., tubes)?  Please describe")
@@ -165,24 +146,6 @@ class BackgroundInfo(models.Model):
     worried = models.CharField(max_length = 1001, blank = True, null=True, verbose_name = "Please describe")
     learning_disability_boolean = models.IntegerField(verbose_name = 'Have you or anyone in your immediate family been diagnosed with a language or learning disability?' )
     learning_disability = models.CharField(max_length = 1001, blank = True, null=True, verbose_name = "Indicate which family member and provide a description")
-
-    #def clean(self):
-        #enabler_dependent_fields = (
-        #(self.born_on_due_date, [self.early_or_late, self.due_date_diff,]),
-        #(self.other_languages_boolean, [self.language_from, self.language_days_per_week, self.language_hours_per_day, self.language_fromm]),
-        #(self.ear_infections_boolean, [self.ear_infections,]),
-        #(self.hearing_loss_boolean, [self.hearing_loss,]),
-        #(self.vision_problems_boolean, [self.vision_problems,]),
-        #(self.illnesses_boolean, [self.illnesses,]),
-        #(self.services_boolean, [self.services,]),
-        #(self.worried_boolean, [self.worried,]),
-        #(self.learning_disability_boolean , [self.learning_disability,]),)
-        #errors = {}
-        #for (enabler, dependents) in enabler_dependent_fields:
-            #if enabler == 1:
-                #for dependent in dependents:
-                    #if dependent is None:
-                        #errors[enabler.k
 
 
         

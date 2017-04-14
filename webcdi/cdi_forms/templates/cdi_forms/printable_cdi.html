@@ -23,12 +23,9 @@
     <script src="https://cdn.jsdelivr.net/lodash/4.17.2/lodash.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-queue/3.0.3/d3-queue.min.js"></script>
 
-    <!--[if lt IE 9]>
-    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-	<meta property="og:image" content="http://webcdi.stanford.edu/{% static 'researcher_UI/images/logo.png' %}" />
-	<meta property="og:title" content="MacArthur-Bates Communicative Development Inventory" />
-	<meta property="og:description" content="Interesting tidbits learned from how your child speaks!" />
+  	<meta property="og:image" content="http://webcdi.stanford.edu/{% static 'researcher_UI/images/logo.png' %}" />
+  	<meta property="og:title" content="MacArthur-Bates Communicative Development Inventory" />
+  	<meta property="og:description" content="Interesting tidbits learned from how your child speaks!" />
 
 </head>
 
@@ -128,8 +125,7 @@
                             {% if type.type == "radiobutton" or type.type == "modified_checkbox" %}
                                 {% if object.text != '' %}
                                 <div class="col-md-12 alco-child">
-                                    <div class="row alco-child1" >{{ object.text | capfirst }} <!-- </div>
-                                    <div class="row"> -->
+                                    <div class="row alco-child1" >{{ object.text | capfirst }} 
                                         <div class="pull-right">
                                             {% for choice in object.choices %}
                                             &ensp;
@@ -165,8 +161,7 @@
                                 {% if type.type == "radiobutton" or type.type == "modified_checkbox" %}
                                     {% if object.text != '' %}
                                     <div class="col-md-12 alco-child">
-                                        <div class="row alco-child1">{{ object.text | capfirst }} <!-- </div>
-                                        <div class="row"> -->
+                                        <div class="row alco-child1">{{ object.text | capfirst }} 
                                             <div class="pull-right">
                                                 {% for choice in object.choices %}
                                                 &ensp;
@@ -214,15 +209,6 @@
 <script>
         $('input').prop('disabled', 'True');
         $('select').prop('disabled', 'True');
-
-        // $('#graph_data').on('shown.bs.collapse', function () {
-        //     $('#filled_form').collapse('hide')        
-        // })
-
-
-        // $('#filled_form').on('shown.bs.collapse', function () {
-        //     $('#graph_data').collapse('hide')        
-        // })
 
         $( "input[id$='produces']" ).each( function (){ 
             var box_name = $(this).attr("id");
@@ -280,7 +266,7 @@
   }
 
   if (words_produced > 0 | raw_words_understood > 0) {
-    document.getElementById("num_words_text").innerHTML = num_words;
+    $("#num_words_text").html(num_words);
   }
 
   var categorySize = d3.nest()
@@ -373,14 +359,11 @@
   function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
-    // While there remain elements to shuffle...
     while (0 !== currentIndex) {
 
-      // Pick a remaining element...
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex -= 1;
 
-      // And swap it with the current element.
       temporaryValue = array[currentIndex];
       array[currentIndex] = array[randomIndex];
       array[randomIndex] = temporaryValue;
@@ -439,14 +422,11 @@
     .selectAll(".tick text")
     .style("text-anchor", "end")
     .attr("dx", "0.4em")
-    .attr("dy", ".8em")
-    //.attr("transform", "rotate(-90)" );
+    .attr("dy", ".8em");
 
     chart_understood.append("g")
     .attr("class", "y axis")
     .call(yAxis)
-    //.append("text")
-    //.attr("transform", "rotate(-90)")
     .selectAll(".tick text")
     .attr("dx", "-0.8em")
     .call(wrap, 200)
@@ -581,12 +561,12 @@
 
     if (typeof(bestProdCat) !== 'undefined') {
 
-      document.getElementById("best_categories").innerHTML = document.getElementById("best_categories").innerHTML + 'My child says the most words in the "' + bestProdCat + '" category.<br>';
+      $("#best_categories").append('My child says the most words in the "', bestProdCat, '" category.<br>');
     }
 
     if (typeof(bestCompCat) !== 'undefined') {
 
-      document.getElementById("best_categories").innerHTML = document.getElementById("best_categories").innerHTML + 'My child understands the most words in the "' + bestCompCat + '" category.<br>';
+      $("#best_categories").append('My child understands the most words in the "', bestCompCat, '" category.<br>');
     }
 
 
@@ -671,12 +651,12 @@
 
     if (typeof(high_prod_word) !== 'undefined') {
 
-      document.getElementById("hardest_words").innerHTML = document.getElementById("hardest_words").innerHTML + 'The hardest word my child says is "' + high_prod_word + '".<br>';
+      $('#hardest_words').append('The hardest word my child says is "', high_prod_word, '".<br>')
     }
 
     if (typeof(high_comp_word) !== 'undefined') {
 
-      document.getElementById("hardest_words").innerHTML = document.getElementById("hardest_words").innerHTML + 'The hardest word my child understands is "' + high_comp_word + '".<br>';
+      $('#hardest_words').append('The hardest word my child understands is "', high_comp_word, '".<br>')
     }
 
 
@@ -701,10 +681,10 @@
 
 
   if ((root.age > 30 | root.age < 16) & root.instrument_name.indexOf('WS') > -1) {
-    document.getElementById("predicted_chart").innerHTML = "<h4><font color = '#008000'> Sorry but it looks like your child is outside of our age range for predicting vocabulary size! This version of the CDI assessment is for children between 16 to 30 months of age </font></h4>"
+    $("#predicted_chart").html("<h4><font color = '#008000'> Sorry but it looks like your child is outside of our age range for predicting vocabulary size! This version of the CDI assessment is for children between 16 to 30 months of age </font></h4>");
 
   } else if ((root.age > 18 | root.age < 8) & root.instrument_name.indexOf('WG') > -1) {
-    document.getElementById("predicted_chart").innerHTML = "<h4><font color = '#008000'> Sorry but it looks like your child is outside of our age range for predicting vocabulary size! This version of the CDI assessment is for children between 8 to 18 months of age </font></h4>"
+    $("#predicted_chart").html("<h4><font color = '#008000'> Sorry but it looks like your child is outside of our age range for predicting vocabulary size! This version of the CDI assessment is for children between 8 to 18 months of age </font></h4>");
 
   } else {
     d3.csv("{% static 'graph_data/predicted_vocab_English.csv' %}", function(data) {
@@ -745,45 +725,13 @@
   }
 
   function findQuantile() {
-    // if (words_produced > 0) {
-    //   pred_prod_min = 1000;
-    //   word_prod_prop = words_produced/(words.length);
-    //   current_ages_prod = predicted_vocab.filter(function(d) { return (parseInt(d.age) == root.age & d.measure == "production"); });
-
-
-    //   for (var j = 0; j < current_ages_prod.length; j++) {
-    //     current_diff = Math.abs(parseInt(current_ages_prod[j].pred) - word_prod_prop);
-
-    //     if (pred_prod_min > current_diff) {
-    //       pred_prod_min = current_diff;
-    //       pred_prod_quant = current_ages_prod[j].percentile;
-    //     }
-
-    //   }
-    // } else {
-    //   pred_prod_quant = 10
-    // }
 
     pred_prod_quant = 50
 
     if (raw_words_understood > 0) {
-      // pred_comp_min = 1000;
-      // word_comp_prop = raw_words_understood/(words.length);
-      // current_ages_comp = predicted_vocab.filter(function(d) { return (parseInt(d.age) == root.age & d.measure == "comprehension"); });
-
-
-      // for (var i = 0; i < current_ages_comp.length; i++) {
-      //   current_diff = Math.abs(parseInt(current_ages_comp[i].pred) - word_comp_prop);
-
-      //   if (pred_comp_min > current_diff) {
-      //     pred_comp_min = current_diff;
-      //     pred_comp_quant = current_ages_prod[i].percentile;
-      //   }
-
-      // }
-
       pred_comp_quant = 50
     }
+
   }
 
   var pred_chart;
@@ -835,14 +783,6 @@
       .style("fill", "none")
       .attr("d", valueline(adjusted_quant_comp))
       .style("display", (root.age > 18)? "none": null);
-
-    // var node = pred_chart.selectAll("dot")
-    //     .data(current_vocab)
-    //   .enter().append("circle")
-    //     .attr("r", 6)
-    //     .attr("cx", function(d) { return x(d.age); })
-    //     .attr("cy", function(d) { return y(d.vocab); })
-    //     .attr("fill", "#2DBC74");
 
     node = pred_chart.selectAll("g")
         .data(current_vocab)

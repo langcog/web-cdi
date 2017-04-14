@@ -20,6 +20,8 @@ from django.core.serializers.json import DjangoJSONEncoder
 import csv
 from django.contrib.auth.models import User
 import pandas as pd
+from django.core.urlresolvers import reverse
+
 
 
 
@@ -180,7 +182,6 @@ def console(request, study_name = None, num_per_page = 20):
 
                 elif 'download-selected' in request.POST:
                     ids = request.POST.getlist('select_col')
-                    #header = get_cdi_model['English_WS'].
                     if all([x.isdigit() for x in ids]):
                         ids = list(set(map(int, ids)))
                         administrations = []
@@ -215,19 +216,23 @@ def console(request, study_name = None, num_per_page = 20):
             username = request.user.username
         context = dict()
         context['username'] =  username 
-        context['studies'] = study.objects.filter(researcher = request.user)
+        context['studies'] = study.objects.filter(researcher = request.user).order_by('id')
         context['instruments'] = []
         if study_name is not None:
-            current_study = study.objects.get(researcher= request.user, name= study_name)
-            administration_table = StudyAdministrationTable(administration.objects.filter(study = current_study))
-            if not current_study.confirm_completion:
-                administration_table.exclude = ("study",'id', 'url_hash','completedBackgroundInfo', 'analysis')
-            RequestConfig(request, paginate={'per_page': num_per_page}).configure(administration_table)
-            context['current_study'] = current_study.name
-            context['num_per_page'] = num_per_page
-            context['study_instrument'] = current_study.instrument.verbose_name
-            context['study_group'] = current_study.study_group
-            context['study_administrations'] = administration_table
+            try:
+                current_study = study.objects.get(researcher= request.user, name= study_name)
+                administration_table = StudyAdministrationTable(administration.objects.filter(study = current_study))
+                if not current_study.confirm_completion:
+                    administration_table.exclude = ("study",'id', 'url_hash','completedBackgroundInfo', 'analysis')
+                RequestConfig(request, paginate={'per_page': num_per_page}).configure(administration_table)
+                context['current_study'] = current_study.name
+                context['num_per_page'] = num_per_page
+                context['study_instrument'] = current_study.instrument.verbose_name
+                context['study_group'] = current_study.study_group
+                context['study_administrations'] = administration_table
+                context['completed_admins'] = administration.objects.filter(study = current_study, completed = True).count()
+            except:
+                pass
         return render(request, 'researcher_UI/interface.html', context)
 
 @login_required 
@@ -275,14 +280,21 @@ def add_study(request):
     if request.method == 'POST' :
         form = AddStudyForm(request.POST)
         if form.is_valid():
+            study_instance = form.save(commit=False)
             researcher = request.user
             study_name = form.cleaned_data.get('name')
-            instrument = form.cleaned_data.get('instrument')
-            waiver = form.cleaned_data.get('waiver')
-            confirm_completion = form.cleaned_data.get('confirm_completion')
+            study_instance.researcher = researcher
+
+
+            # study_name = form.cleaned_data.get('name')
+            # instrument = form.cleaned_data.get('instrument')
+            # subject_cap = form.cleaned_data.get('subject_cap')
+            # waiver = form.cleaned_data.get('waiver')
+            # confirm_completion = form.cleaned_data.get('confirm_completion')
             if not study.objects.filter(researcher = researcher, name = study_name).exists():
-                new_study = study(researcher = researcher, name = study_name, instrument = instrument, waiver = waiver, confirm_completion = confirm_completion)
-                new_study.save()
+                # new_study = study(researcher = researcher, name = study_name, instrument = instrument, waiver = waiver, confirm_completion = confirm_completion, subject_cap = subject_cap)
+                # new_study.save()
+                study_instance.save()
                 data['stat'] = "ok";
                 data['redirect_url'] = "/interface/study/"+study_name+"/";
                 return HttpResponse(json.dumps(data), content_type="application/json")
@@ -432,7 +444,7 @@ def administer_new(request, study_name):
                     for sid in range(max_subject_id+1, max_subject_id+autogenerate_count+1):
                         new_hash = random_url_generator()
                         new_administrations.append(administration(study =study_obj, subject_id = sid, repeat_num = 1, url_hash = new_hash, completed = False, due_date = datetime.datetime.now()+datetime.timedelta(days=14)))
-#
+
                 administration.objects.bulk_create(new_administrations)
                 data['stat'] = "ok";
                 data['redirect_url'] = "/interface/study/"+study_name+"/?sort=-created_date";
@@ -458,17 +470,22 @@ def administer_new_parent(request, username, study_name):
     autogenerate_count = 1
     researcher = User.objects.get(username = username)
     study_obj = study.objects.get(name= study_name, researcher = researcher)
-    max_subject_id = administration.objects.filter(study=study_obj).aggregate(Max('subject_id'))['subject_id__max']
-    if max_subject_id is None:
-        max_subject_id = 0
-    for sid in range(max_subject_id+1, max_subject_id+autogenerate_count+1):
-        new_administrations.append(administration(study =study_obj, subject_id = sid, repeat_num = 1, url_hash = random_url_generator(), completed = False, due_date = datetime.datetime.now()+datetime.timedelta(days=14)))
+    subject_cap = study_obj.subject_cap
+    completed_admins = administration.objects.filter(study = study_obj, completed = True).count()
+    if completed_admins < subject_cap:
+        max_subject_id = administration.objects.filter(study=study_obj).aggregate(Max('subject_id'))['subject_id__max']
+        if max_subject_id is None:
+            max_subject_id = 0
+        for sid in range(max_subject_id+1, max_subject_id+autogenerate_count+1):
+            new_administrations.append(administration(study =study_obj, subject_id = sid, repeat_num = 1, url_hash = random_url_generator(), completed = False, due_date = datetime.datetime.now()+datetime.timedelta(days=14)))
 
-    new_url = new_administrations[0]
-    new_hash_id = new_url.url_hash
-    administration.objects.bulk_create(new_administrations)
-    redirect_url = "/form/fill/"+new_hash_id+"/"
-    background_info_form(request, new_hash_id)
+        new_url = new_administrations[0]
+        new_hash_id = new_url.url_hash
+        administration.objects.bulk_create(new_administrations)
+        redirect_url = reverse('administer_cdi_form', args=[new_url.url_hash])
+        background_info_form(request, new_hash_id)
+    else:
+        redirect_url = "/"
     return redirect(redirect_url)
 
 

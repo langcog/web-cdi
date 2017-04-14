@@ -2,13 +2,17 @@ from django import forms
 from .models import *
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
+from form_utils.forms import BetterModelForm
 
 
-class AddStudyForm(forms.Form):
+
+class AddStudyForm(BetterModelForm):
     name = forms.CharField(label='Study Name', max_length=51)
     instrument = forms.ModelChoiceField(queryset=instrument.objects.all(), empty_label="(choose from the list)")
     waiver = forms.CharField(widget=forms.Textarea, label='Waiver of Documentation text (no titles)', required = False)
-    confirm_completion = forms.BooleanField(required = False, label="At the end of the form, would you like parents to confirm the age of their child and that they completed the entire test?<br>(Best for anonymous data collections where you haven't personally vetted each participant)")
+    anon_collection = forms.BooleanField(required=False, label="Do you plan on collecting only anonymous data in this study? (e.g., posting ads on social media, mass emails, etc)")
+    subject_cap = forms.IntegerField(label = "Maximum number of participants", required = False, min_value = 1, help_text = "Leave this blank if you do NOT want to limit the number of participants.", widget=forms.NumberInput(attrs={'placeholder': 'XXX participants'}))
+    confirm_completion = forms.BooleanField(required = False, label="At the end of the form, would you like parents to confirm the age of their child and that they completed the entire test? (Best for anonymous data collections where you haven't personally vetted each participant)")
 
 
     def __init__(self, *args, **kwargs):
@@ -21,6 +25,10 @@ class AddStudyForm(forms.Form):
         self.helper.form_method = 'post'
         self.helper.form_action = '/interface/add_study/'
 #        self.helper.add_input(Submit('submit', 'Submit'))
+
+    class Meta:
+        model = study
+        exclude = ['study_group','researcher']
 
 class AddPairedStudyForm(forms.Form):
     study_group = forms.CharField(label='Study Group Name', max_length=51)

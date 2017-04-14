@@ -54,7 +54,7 @@
             $(e).closest('.form-group').next('.dependent').css('display','block');
         });
     });
-    $('.enabler[value="0"]').each(function(index, e){
+    $('.enabler[value="0"], .enabler[value="2"]').each(function(index, e){
         if(e.checked){
             $(e).closest('.form-group').next('.dependent').css('display','none');
         }
@@ -62,14 +62,7 @@
             $(e).closest('.form-group').next('.dependent').css('display','none');
         });
     });
-    $('.enabler[value="2"]').each(function(index, e){
-        if(e.checked){
-            $(e).closest('.form-group').next('.dependent').css('display','none');
-        }
-        $(e).change(function(){
-            $(e).closest('.form-group').next('.dependent').css('display','none');
-        });
-    });
+
     var $select = $('.make-selectize').selectize({
         maxItems :null,
     });
@@ -89,31 +82,33 @@
 
     $
 
-    document.getElementById("id_age").disabled = true;
+    $("#id_age").prop('disabled', true);
 
     function getDiffinMonths() {
         
         var raw_b_date = new Date($('#id_child_dob').val());
         var b_date = moment(raw_b_date);
 
-        if (!isNaN(raw_b_date.getTime()) && document.getElementById("id_child_dob").value != ''){
-            console.log("Date valid");
+        if (!isNaN(raw_b_date.getTime()) && $("#id_child_dob").val() != ''){
             var t_date = moment();
             var day_diff = ((t_date.date() - b_date.date()) >= 15)? 1: 0
             var diff_in_months = 12*(t_date.year() - b_date.year()) + (t_date.month() - b_date.month()) + day_diff;
-            console.log(day_diff)
-            console.log(diff_in_months)
+
 
 
             if (diff_in_months > 0){
 
-                document.getElementById("id_age").value = diff_in_months;
+                // document.getElementById("id_age").value = diff_in_months;
+                $("#id_age").val(diff_in_months);
             }
 
         }
     };
 
-    document.getElementById("id_child_dob").onchange = function() {getDiffinMonths()};
+    $('#id_child_dob').on('change', function () {
+        getDiffinMonths();
+    })
+
     getDiffinMonths();
     var instrument_name = "{{ title }}";
 
@@ -136,7 +131,6 @@
 
         var instrument_name = "{{ title }}";
         var text = "For ".concat("{{ min_age }}","- to ", "{{ max_age }}", "-month-old children")
-        var selected_ages = document.getElementById('hint_id_age');
         var hint = "<br><font color = '#3C763D' style = 'text-decoration: underline;'>Your child should be between ".concat("{{ min_age }}"," to ", "{{ max_age }}", " months of age.</font>")
 
         var study_group = "{{ study_group }}"
@@ -146,16 +140,11 @@
             study_group_hint = ""
         }
 
-        document.getElementById("instrument_age").innerHTML = text;
+        $("#instrument_age").html(text);
 
 
-        selected_ages.innerHTML = selected_ages.innerHTML + hint + study_group_hint;
+        $('#hint_id_age').append(hint, study_group_hint);
     }
-
-    document.getElementById("id_birth_order").min = "1";
-    document.getElementById("id_birth_order").max = "15";
-
-
 
 
 </script>
