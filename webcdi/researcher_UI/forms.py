@@ -8,7 +8,7 @@ class AddStudyForm(forms.Form):
     name = forms.CharField(label='Study Name', max_length=51)
     instrument = forms.ModelChoiceField(queryset=instrument.objects.all(), empty_label="(choose from the list)")
     waiver = forms.CharField(widget=forms.Textarea, label='Waiver of Documentation text (no titles)', required = False)
-    confirm_completion = forms.BooleanField(label="At the end of the form, would you like parents to confirm the age of their child and that they completed the entire test?<br>(Best for anonymous data collections where you haven't personally vetted each participant)")
+    confirm_completion = forms.BooleanField(required = False, label="At the end of the form, would you like parents to confirm the age of their child and that they completed the entire test?<br>(Best for anonymous data collections where you haven't personally vetted each participant)")
 
 
     def __init__(self, *args, **kwargs):

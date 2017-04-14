@@ -19,6 +19,7 @@ from django.utils.encoding import force_text
 from django.core.serializers.json import DjangoJSONEncoder
 import csv
 from django.contrib.auth.models import User
+import pandas as pd
 
 
 
@@ -278,8 +279,9 @@ def add_study(request):
             study_name = form.cleaned_data.get('name')
             instrument = form.cleaned_data.get('instrument')
             waiver = form.cleaned_data.get('waiver')
+            confirm_completion = form.cleaned_data.get('confirm_completion')
             if not study.objects.filter(researcher = researcher, name = study_name).exists():
-                new_study = study(researcher = researcher, name = study_name, instrument = instrument, waiver = waiver)
+                new_study = study(researcher = researcher, name = study_name, instrument = instrument, waiver = waiver, confirm_completion = confirm_completion)
                 new_study.save()
                 data['stat'] = "ok";
                 data['redirect_url'] = "/interface/study/"+study_name+"/";
@@ -347,28 +349,45 @@ def administer_new(request, study_name):
             params = dict(request.POST)
             validity = True
             data['error_message'] = ''
-            ids_csv = request.FILES['subject-ids-csv'] if 'subject-ids-csv' in request.FILES else None
-            print ids_csv
+            raw_ids_csv = request.FILES['subject-ids-csv'] if 'subject-ids-csv' in request.FILES else None
 
-            if params['new-subject-ids'][0] == '' and params['autogenerate-count'][0] == '' and ids_csv is None:
+            if params['new-subject-ids'][0] == '' and params['autogenerate-count'][0] == '' and raw_ids_csv is None:
                 validity = False
                 data['error_message'] += "Form is empty\n"
 
-            if ids_csv:
-                ids_to_add = iter(csv.reader(ids_csv, delimiter=','))
-                if 'ignore-csv-header' in request.POST:
-                    next(ids_to_add)
-                subject_ids_numbers = all([x[0].isdigit() for x in ids_to_add])
-                if not subject_ids_numbers:
+            if raw_ids_csv:
+                if 'csv-header' in request.POST:
+                    ids_df = pd.read_csv(raw_ids_csv)
+                    if request.POST['subject-ids-column']:
+                        subj_column = request.POST['subject-ids-column']
+                        if subj_column in ids_df.columns:
+                            ids_to_add = ids_df[subj_column]
+                            ids_type =  ids_to_add.dtype
+                        else:
+                            ids_type = 'missing'
+
+                    else:
+                        ids_to_add = ids_df[ids_df.columns[0]]
+                        ids_type =  ids_to_add.dtype
+
+                else:
+                    ids_df = pd.read_csv(raw_ids_csv, header = None)
+                    ids_to_add = ids_df[ids_df.columns[0]]
+                    ids_type =  ids_to_add.dtype
+
+                if ids_type != 'int64':
                     validity = False
-                    if 'ignore-csv-header' not in request.POST:
+                    if 'csv-header' not in request.POST:
                         data['error_message'] += "Non integer subject ids. Make sure first row is numeric\n"
                     else:
-                        data['error_message'] += "Non integer subject ids\n"
+                        if ids_type == 'missing':
+                            data['error_message'] += "Unable to find specified column. Check for any typos."
+                        else:
+                            data['error_message'] += "Non integer subject ids\n"
 
 
             if params['new-subject-ids'][0] != '':
-                subject_ids = re.split('[,\s]+', str(params['new-subject-ids'][0]))
+                subject_ids = re.split('[,;\s\t\n]+', str(params['new-subject-ids'][0]))
                 subject_ids = filter(None, subject_ids)
                 subject_ids_numbers = all([x.isdigit() for x in subject_ids])
                 if not subject_ids_numbers:
@@ -385,18 +404,18 @@ def administer_new(request, study_name):
             if validity:
                 new_administrations = []
 
-                if ids_csv:
-                    ids_to_add = iter(csv.reader(ids_csv, delimiter=','))
-                    if 'ignore-csv-header' in request.POST:
-                        next(ids_to_add)
-                    subject_ids = [x[0] for x in ids_to_add]
+                if raw_ids_csv:
+
+                    subject_ids = ids_to_add.tolist()
+                    print subject_ids
+
                     for sid in subject_ids:
                         new_hash = random_url_generator()
                         old_rep = administration.objects.filter(study = study_obj, subject_id = sid).count()
                         new_administrations.append(administration(study =study_obj, subject_id = sid, repeat_num = old_rep+1, url_hash = new_hash, completed = False, due_date = datetime.datetime.now()+ datetime.timedelta(days=14)))
 
                 if params['new-subject-ids'][0] != '':
-                    subject_ids = re.split('[,\s]+', str(params['new-subject-ids'][0]))
+                    subject_ids = re.split('[,;\s\t\n]+', str(params['new-subject-ids'][0]))
                     subject_ids = filter(None, subject_ids)
                     subject_ids = map(int, subject_ids)
                     for sid in subject_ids:

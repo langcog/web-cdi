@@ -10,24 +10,29 @@
       <form method='post' class="form-horizontal" enctype="multipart/form-data">
         {% csrf_token %}
         <p> The subject IDs should not include any identifiable information. For the same reason they are enforced to be numeric </p>
+        <hr />
         <div class="form-group">
             <label for="new-subject-ids" class="col-sm-2 control-label">New Subject Ids:</label>
             <div class="col-sm-10">
-            <textarea name="new-subject-ids" class="form-control" rows="3" id='new-subject-ids'></textarea>
+            <textarea name="new-subject-ids" class="form-control" rows="3" id='new-subject-ids' placeholder="Copy and paste in a list of subject IDs here (separated by spaces, commas, semicolons, or new lines)"></textarea>
             </div>
         </div>
+        <hr />
         <div class="form-group">
             <label for="autogenerate-count" class="col-sm-2 control-label">Number of IDs to Autogenerate:</label>
             <div class="col-sm-10">
-            <input type="text" name = 'autogenerate-count' class="form-control" id ='autogenerate-count' placeholder="Autogenerate">
+            <input type="text" name = 'autogenerate-count' class="form-control" id ='autogenerate-count' placeholder="Autogenerate XX subject IDs">
             </div>
         </div>
-
+        <hr />
         <div class="form-group">
-            <label for="subject-ids-csv" class="col-sm-2 control-label">Upload a CSV of subject IDs:</label>
+            <label for="subject-ids-csv" class="col-sm-2 control-label">Upload a CSV of Subject IDs:</label>
             <div class="col-sm-10">
-            <input type="file" name = 'subject-ids-csv' class="form-control" id ='subject-ids-csv'><br>
-            <input type="checkbox" name = 'ignore-csv-header' id ='ignore-csv-header'><label for='ignore-csv-header'>&nbsp; Ignore first row of CSV</label>
+              <input type="file" name = 'subject-ids-csv' class="form-control" id ='subject-ids-csv'><br>
+              <input type="checkbox" name = 'csv-header' id ='csv-header'><label for='ignore-csv-header'>&nbsp; This file has a header row</label><br>
+              <div id = "subj_col_div" class = "collapse">
+                <input type="text" name = "subject-ids-column" id = "subject-ids-column" class="form-control" placeholder="Name of Subject ID Column (ex. subject_id)">
+              </div>
             </div>
         </div>
 
@@ -37,10 +42,22 @@
               if (file.size > 1024) {
                   alert('max upload size is 1k')
               }
-          });
-        </script>
 
-          <div class="form-group">
+          });
+
+          $('#csv-header').on('change', function() {
+              if ($('#csv-header').prop('checked')) {
+                  $('#subj_col_div').collapse('show');
+              } else {
+                  $('#subj_col_div').collapse('hide');
+              }
+          });
+
+
+        </script>
+        <hr />
+
+        <div class="form-group">
             <label for="add_new_parent" class="col-sm-2 control-label">Single Reusable Link</label>
             <div class="col-sm-10" id="reusable_link_div">
               <a href="{% url 'administer_new_parent' username study_name %}" id="reusable_link">Click here</a><br>
