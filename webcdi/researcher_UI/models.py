@@ -20,8 +20,6 @@ class study(models.Model):
     instrument = models.ForeignKey("instrument")
     waiver = models.TextField(blank = True)
     study_group = models.CharField(max_length = 51, blank = True)
-    anon_collection = models.BooleanField(default=False)
-    subject_cap = models.IntegerField(blank = True, null=True)
     confirm_completion = models.BooleanField(default=False)
     def __str__(self):
         return self.name

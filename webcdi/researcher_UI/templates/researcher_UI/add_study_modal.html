@@ -9,24 +9,6 @@
       <div class="modal-body">
         {% load crispy_forms_tags %}
         {% crispy form %}
-
-        <script>
-
-        $('#div_id_subject_cap').css('display','none');
-        $('#div_id_confirm_completion').css('display','none');     
-
-        $('#id_anon_collection').on('change', function () {
-          if ($(this).prop('checked')) {
-            $('#div_id_subject_cap').css('display','block');
-            $('#div_id_confirm_completion').css('display','block');
-          } else {
-            $('#div_id_subject_cap').css('display','none');
-            $('#div_id_confirm_completion').css('display','none');            
-          }
-
-        });
-
-        </script>
     </div>
     {% if form.errors %}
         {% for field in form %}
