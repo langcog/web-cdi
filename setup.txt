@@ -8,7 +8,7 @@ $ cd web-cdi
 #ASK FOR THE FOLLOWING FILES THAT ARE NOT ON GITHUB
 webcdi/webcdi/email.py
 webcdi/webcdi/databases.py
-~/.pgpass
+~/.pgpass (chmod 0600 before use)
 Passwords for "webcdi-admin" and "webcdi-user" users
 DB endpoint url
 
@@ -23,8 +23,7 @@ install dependencies
     $ brew install postgresql
 
 #NOTE FROM BEN: IF YOU SHUT THE SERVER DOWN AND WANT TO RESTART, YOU HAVE TO DO SO USING THE LINE BELOW. 
-    $ pg_ctl -D /usr/local/var/postgres/ -l /usr/local/var/postgres/server.log start
-    [TODO: the rest]
+    $ brew services restart postgresql
 
 install virtualenv and set one up
 $ sudo pip install virtualenv
@@ -44,8 +43,9 @@ create postgres database/user ($username = your OSX login)
 $ sudo -u $username createdb webcdi-admin
 
 #THIS STEP ASKS YOU TO CREATE A PASSWORD. 
-$ psql -U $username webcdi-admin -c 'CREATE USER "webcdi-admin" WITH PASSWORD XXXXXX;'
-$ psql -U $username webcdi-admin -c 'CREATE USER "webcdi-user" WITH PASSWORD XXXXXX;'
+$ psql -U $username webcdi-admin
+webcdi-admin=> CREATE USER "webcdi-admin" WITH PASSWORD 'XXXXXX';
+webcdi-admin=> CREATE USER "webcdi-user" WITH PASSWORD 'XXXXXX';
 
 
 #GRANT ALL PRIVILEGES ON DATABASE TO ADMIN USER
@@ -54,11 +54,11 @@ $ psql -U $username webcdi-admin -c 'GRANT ALL PRIVILEGES ON DATABASE "webcdi-ad
 
 #FOR THIS TO WORK, YOU MUST GO INTO settings.py AND COMMENT OUT THE LINE STARTING WITH LOGGING = { THROUGH THE FINAL CLOSING BRACKET AFTER ‘propagate’: True,
 make and run migrations
-$ python manage.py makemigrations
-$ python manage.py migrate
+$ ./manage.py makemigrations
+$ ./manage.py migrate
 
 #FROM HERE YOU HAVE 2 OPTIONS. CREATE A BLANK VERSION OF THE DATABASE OR SYNC YOUR LOCAL COPY TO THE LIVE DATABASE. 
-#TO DO THE FIRST:
+# TO DO THE FIRST:
 
 	set up instruments
 	$ sudo -u $username psql -d webcdi-admin -c "\\COPY cdi_forms_english_ws FROM 'cdi_form_csv/[English_WS].csv' WITH (FORMAT csv, HEADER True)"
@@ -66,11 +66,11 @@ $ python manage.py migrate
 	[and so on for other instruments]
 
 	create login for admin console
-	$ python manage.py createsuperuser
+	$ ./manage.py createsuperuser
 
 	in the admin console (http://127.0.0.1:8000/admin) add instruments for English_WS, English_WG, etc.
 
-# TO SYNC YOUR LOCAL DATABASE TO THE LIVE DB (MAKE SURE YOU HAVE ~/.pgpass SET UP CURRENTLY)
+# TO SYNC YOUR LOCAL DATABASE TO THE LIVE DB (MAKE SURE YOU HAVE ~/.pgpass SET UP)
 	$ endpointurl={put endpoint url of remote DB here}
 	$ psql -U $username webcdi-admin -c 'drop schema public cascade;'
 	$ psql -U $username webcdi-admin -c 'create schema public;'
@@ -78,4 +78,4 @@ $ python manage.py migrate
 
 
 run locally
-$ python manage.py runserver
+$ ./manage.py runserver --insecure

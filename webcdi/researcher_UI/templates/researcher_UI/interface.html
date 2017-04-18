@@ -38,7 +38,7 @@
 	</form>
     </div>
     <div class='row'>
-            <form method='post' action = "/interface/study/{{ current_study|urlencode }}" id='study-form' class="form-inline">
+            <form method='post' action = '/interface/study/{{ current_study }}/' id='study-form' class="form-inline">
        		 {% csrf_token %}
                 <fieldset>
                     <legend>Study:</legend>
@@ -49,7 +49,7 @@
 					<select  style = 'width:100%;' id="study-selector" class="form-control" onchange="location = encodeURI(this.options[this.selectedIndex].value);">
 					    <option value="/interface/" selected disabled>Please select study</option>
 					    {% for study in studies %}
-						<option value="{% url 'console' study_name=study %}"{% if study.name == current_study %} selected="" {% endif %}>{{ study }}</option>
+						<option value="/interface/study/{{ study }}/"{% if study.name == current_study %} selected="" {% endif %}>{{ study }}</option>
 					    {% endfor %}
 					</select> 
 				    </div>
@@ -59,9 +59,6 @@
 				    {% endif %}
                     {% if study_group %}
                     <h4>Study Group: {{ study_group }}</h4>
-                    {% endif %}
-                    {% if completed_admins %}
-                    <h4>Completed Administrations: {{ completed_admins }}</h4>
                     {% endif %}
 				</div>
 			    </div>
@@ -85,7 +82,7 @@
                                 <button type="submit" class="btn btn-default"  name='download-dictionary' >Download Dictionary</button>
                             </div>
                             <div class="btn-group" role="group">  
-                                <button type="button" class="btn btn-default"   onclick = "modal_form('/interface/study/{{ current_study|urlencode }}/rename_study/')" >Update Study</button>
+                                <button type="button" class="btn btn-default"   onclick = "modal_form('/interface/study/{{ current_study|urlencode }}/rename_study/')" >Rename Study</button>
                             </div>
                             <div class="btn-group" role="group">  
                                 <button type="submit" class="btn btn-default" name='delete-study'  onclick='return confirm("Are you sure you want to delete the entire study and all the data associated with it?");' >Delete Study</button>
@@ -102,7 +99,7 @@
         </div>
     {% if current_study %}
     <div class='row'>
-            <form method='post' action = "/interface/study/{{ current_study|urlencode }}" id='administration-form' class="form-inline">
+            <form method='post' action = '/interface/study/{{ current_study }}/' id='administration-form' class="form-inline">
         {% csrf_token %}
 
                 <fieldset>
