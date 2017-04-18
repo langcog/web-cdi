@@ -470,35 +470,22 @@ def administer_new_parent(request, username, study_name):
     autogenerate_count = 1
     researcher = User.objects.get(username = username)
     study_obj = study.objects.get(name= study_name, researcher = researcher)
+    subject_cap = study_obj.subject_cap
+    completed_admins = administration.objects.filter(study = study_obj, completed = True).count()
+    if completed_admins < subject_cap:
+        max_subject_id = administration.objects.filter(study=study_obj).aggregate(Max('subject_id'))['subject_id__max']
+        if max_subject_id is None:
+            max_subject_id = 0
+        for sid in range(max_subject_id+1, max_subject_id+autogenerate_count+1):
+            new_administrations.append(administration(study =study_obj, subject_id = sid, repeat_num = 1, url_hash = random_url_generator(), completed = False, due_date = datetime.datetime.now()+datetime.timedelta(days=14)))
 
-    max_subject_id = administration.objects.filter(study=study_obj).aggregate(Max('subject_id'))['subject_id__max']
-    if max_subject_id is None:
-        max_subject_id = 0
-    for sid in range(max_subject_id+1, max_subject_id+autogenerate_count+1):
-        new_administrations.append(administration(study =study_obj, subject_id = sid, repeat_num = 1, url_hash = random_url_generator(), completed = False, due_date = datetime.datetime.now()+datetime.timedelta(days=14)))
-    
-    new_url = new_administrations[0]
-    new_hash_id = new_url.url_hash
-    administration.objects.bulk_create(new_administrations)
-    redirect_url = "/form/fill/"+new_hash_id+"/"
-    background_info_form(request, new_hash_id)
-
-    # subject_cap = study_obj.subject_cap
-    # completed_admins = administration.objects.filter(study = study_obj, completed = True).count()
-    # if completed_admins < subject_cap:
-    #     max_subject_id = administration.objects.filter(study=study_obj).aggregate(Max('subject_id'))['subject_id__max']
-    #     if max_subject_id is None:
-    #         max_subject_id = 0
-    #     for sid in range(max_subject_id+1, max_subject_id+autogenerate_count+1):
-    #         new_administrations.append(administration(study =study_obj, subject_id = sid, repeat_num = 1, url_hash = random_url_generator(), completed = False, due_date = datetime.datetime.now()+datetime.timedelta(days=14)))
-
-    #     new_url = new_administrations[0]
-    #     new_hash_id = new_url.url_hash
-    #     administration.objects.bulk_create(new_administrations)
-    #     redirect_url = reverse('administer_cdi_form', args=[new_url.url_hash])
-    #     background_info_form(request, new_hash_id)
-    # else:
-    #     redirect_url = "/"
+        new_url = new_administrations[0]
+        new_hash_id = new_url.url_hash
+        administration.objects.bulk_create(new_administrations)
+        redirect_url = reverse('administer_cdi_form', args=[new_url.url_hash])
+        background_info_form(request, new_hash_id)
+    else:
+        redirect_url = "/"
     return redirect(redirect_url)
 
 
