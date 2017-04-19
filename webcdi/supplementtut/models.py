@@ -8,8 +8,9 @@ class MyRegistrationSupplement(RegistrationSupplementBase):
 
     name = models.CharField(verbose_name = "Full name", max_length=101, help_text="Please fill your full name here")
     institution = models.CharField(verbose_name = "Name of institution", max_length=101)
-    comments = models.TextField("Comments", blank=True)
+    position = models.CharField(verbose_name = "Position in Institution", max_length=101)
+    comments = models.TextField(verbose_name = "Comments", blank=True)
 
     def __str__(self):
         # a summary of this supplement
-        return "%s (%s)" % (self.name, self.institution)
+        return "%s, %s (%s)" % (self.name, self.position, self.institution)
