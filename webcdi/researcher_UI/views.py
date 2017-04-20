@@ -29,82 +29,55 @@ from django.core.urlresolvers import reverse
 # Create your views here
 
 
-class UnicodeWriter:
-    def __init__(self, f, dialect=csv.excel, encoding="utf-8-sig", **kwds):
-        self.queue = cStringIO.StringIO()
-        self.writer = csv.writer(self.queue, dialect=dialect, **kwds)
-        self.stream = f
-        self.encoder = codecs.getincrementalencoder(encoding)()
-    def writerow(self, row):
-        '''writerow(unicode) -> None
-        This function takes a Unicode string and encodes it to the output.
-        '''
-        self.writer.writerow([s.encode("utf-8") for s in row])
-        data = self.queue.getvalue()
-        data = data.decode("utf-8")
-        data = self.encoder.encode(data)
-        self.stream.write(data)
-        self.queue.truncate(0)
-
-    def writerows(self, rows):
-        for row in rows:
-            self.writerow(row)
-
 @login_required
 def download_data(request, study_obj, administrations = None):
     # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename='+study_obj.name+'_data.csv'''
-
-    writer = UnicodeWriter(response)
     
-    model_header = get_model_header(study_obj.instrument.name)
+    model_header = ['administration_id'] + get_model_header(study_obj.instrument.name)
     
     meta_data_header = get_meta_header()
-    background_header = get_background_header()
-    writer.writerow(meta_data_header+background_header+model_header)
-    for admin_obj in administrations:
-        admin_data = {x:y for (x,y) in administration_data.objects.values_list('item_ID', 'value').filter(administration_id = admin_obj)}
-        background_data = []
-        modified_admin = admin_obj.get_meta_data()
+    # background_header = get_background_header()
+    # writer.writerow(meta_data_header+background_header+model_header)
 
-        if 'VANITY_URL' in os.environ:
-            modified_admin[3] = os.environ['VANITY_URL'] + "/form/fill/" + modified_admin[3]
-        else:
-            modified_admin[3] = request.get_host() + "/form/fill/" + modified_admin[3]
+    answers = administration_data.objects.values('administration_id', 'item_ID', 'value').filter(administration_id__in = administrations)
 
-        for i in background_header:
-            try:
-                raw_background_value = BackgroundInfo.objects.values_list(i, flat=True).filter(administration = admin_obj)
-                try:
-                    background_value = dict(BackgroundInfo._meta.get_field(i).choices).get(raw_background_value[0])
-                    if background_value:
-                        background_data.append(force_text(background_value))
-                    else:
-                        background_data.append(force_text(raw_background_value[0]))
-                except:
-                    background_data.append(force_text(raw_background_value[0]))
-            except:
-                background_data.append("")
-    	writer.writerow([force_text(s) for s in modified_admin]+background_data+[force_text(admin_data[key]) if key in admin_data else '' for key in model_header])
-    print response
+    melted_answers = pd.DataFrame.from_records(answers).pivot(index='administration_id', columns='item_ID', values='value')
+    melted_answers.reset_index(level=0, inplace=True)
+    
+    background_data = BackgroundInfo.objects.values().filter(administration__in = administrations)
+    new_background = pd.DataFrame.from_records(background_data)
+
+    for c in new_background.columns:
+        try:
+            new_background = new_background.replace({c: dict(BackgroundInfo._meta.get_field(c).choices)})
+            # new_background[c] = new_background[c].map(dict(BackgroundInfo._meta.get_field(c).choices))
+        except:
+            pass
+
+    background_answers = pd.merge(new_background, melted_answers, how='outer', on = 'administration_id')
+
+    admin_data = pd.DataFrame.from_records(administrations.values()).rename(columns = {'id':'administration_id'})
+
+    combined_data = pd.merge(admin_data, background_answers, how='outer', on = 'administration_id')
+    test_url = request.build_absolute_uri(reverse('administer_cdi_form', args=['a'*64])).replace('a'*64+'/','')
+    combined_data['url_hash'] = test_url + combined_data['url_hash']
+
+    combined_data.to_csv(response, encoding='utf-8')
+
     return response
+
 
 
 @login_required
 def download_dictionary(request, study_obj):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename='+study_obj.instrument.name+'_dictionary.csv'''
-    writer = UnicodeWriter(response)
 
-    item_properties = ['itemID','item_type','category','definition','gloss']
-    writer.writerow(item_properties)
+    raw_item_data = model_map(study_obj.instrument.name).objects.values('itemID','item_type','category','definition','gloss')
+    pd.DataFrame.from_records(raw_item_data).to_csv(response, encoding='utf-8')
 
-    raw_item_data = model_map(study_obj.instrument.name).objects.values_list('itemID','item_type','category','definition','gloss')
-    item_data = [list(elem) for elem in raw_item_data]
-
-    for item in item_data:
-        writer.writerow([force_text(s) for s in item])
     return response    
 
 @login_required
@@ -113,21 +86,17 @@ def download_links(request, study_obj, administrations = None):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename='+study_obj.name+'_links.csv'''
 
-    writer = UnicodeWriter(response)
+    admin_data = pd.DataFrame.from_records(administrations.values()).rename(columns = {'id':'administration_id','study_id':'study_name'})
+    admin_data = admin_data[['study_name','subject_id','administration_id','repeat_num','url_hash']]
 
-    meta_data_header = get_meta_header()[0:4]
-    writer.writerow(meta_data_header)
+    admin_data['study_name'] = study_obj.name
 
-    for admin_obj in administrations:
-        modified_admin = admin_obj.get_meta_data()[0:4]
+    test_url = request.build_absolute_uri(reverse('administer_cdi_form', args=['a'*64])).replace('a'*64+'/','')
+    admin_data['url_hash'] = test_url + admin_data['url_hash']
 
-        if 'VANITY_URL' in os.environ:
-            modified_admin[3] = os.environ['VANITY_URL'] + "/form/fill/" + modified_admin[3]
-        else:
-            modified_admin[3] = request.get_host() + "/form/fill/" + modified_admin[3]
+    admin_data.to_csv(response, encoding='utf-8')
 
-        writer.writerow([force_text(s) for s in modified_admin])
-    print response
+
     return response
 
  
@@ -175,7 +144,7 @@ def console(request, study_name = None, num_per_page = 20):
                     administrations = []
                     if all([x.isdigit() for x in ids]):
                         ids = list(set(map(int, ids)))
-                        administrations = list(administration.objects.filter(id__in = ids))
+                        administrations = administration.objects.filter(id__in = ids)
                         return download_links(request, study_obj, administrations)
                         refresh = True
 
@@ -184,10 +153,9 @@ def console(request, study_name = None, num_per_page = 20):
                     ids = request.POST.getlist('select_col')
                     if all([x.isdigit() for x in ids]):
                         ids = list(set(map(int, ids)))
-                        administrations = []
-                        for nid in ids:
-                            administrations.append(administration.objects.get(id = nid))
+                        administrations = administration.objects.filter(id__in = ids)
                         return download_data(request, study_obj, administrations)
+
                         refresh = True
 
                 elif 'delete-study' in request.POST:
