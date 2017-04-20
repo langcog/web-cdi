@@ -35,9 +35,9 @@ def download_data(request, study_obj, administrations = None):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename='+study_obj.name+'_data.csv'''
     
-    model_header = ['administration_id'] + get_model_header(study_obj.instrument.name)
+    model_header = get_model_header(study_obj.instrument.name)
+    admin_header = ['study_name', 'subject_id','repeat_num', 'administration_id', 'link', 'completed', 'completedBackgroundInfo', 'due_date', 'last_modified','created_date']
     
-    meta_data_header = get_meta_header()
     # background_header = get_background_header()
     # writer.writerow(meta_data_header+background_header+model_header)
 
@@ -58,11 +58,14 @@ def download_data(request, study_obj, administrations = None):
 
     background_answers = pd.merge(new_background, melted_answers, how='outer', on = 'administration_id')
 
-    admin_data = pd.DataFrame.from_records(administrations.values()).rename(columns = {'id':'administration_id'})
+    admin_data = pd.DataFrame.from_records(administrations.values()).rename(columns = {'id':'administration_id', 'study_id': 'study_name', 'url_hash': 'link'})
+    admin_data['study_name'] = study_obj.name
 
     combined_data = pd.merge(admin_data, background_answers, how='outer', on = 'administration_id')
     test_url = request.build_absolute_uri(reverse('administer_cdi_form', args=['a'*64])).replace('a'*64+'/','')
-    combined_data['url_hash'] = test_url + combined_data['url_hash']
+    combined_data['link'] = test_url + combined_data['link']
+    
+    combined_data = combined_data[admin_header + [col for col in new_background.columns if col != 'administration_id'] + model_header ]
 
     combined_data.to_csv(response, encoding='utf-8')
 
@@ -86,13 +89,13 @@ def download_links(request, study_obj, administrations = None):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename='+study_obj.name+'_links.csv'''
 
-    admin_data = pd.DataFrame.from_records(administrations.values()).rename(columns = {'id':'administration_id','study_id':'study_name'})
-    admin_data = admin_data[['study_name','subject_id','administration_id','repeat_num','url_hash']]
+    admin_data = pd.DataFrame.from_records(administrations.values()).rename(columns = {'id':'administration_id', 'study_id': 'study_name', 'url_hash': 'link'})
+    admin_data = admin_data[['study_name','subject_id', 'repeat_num', 'administration_id','link']]
 
     admin_data['study_name'] = study_obj.name
 
     test_url = request.build_absolute_uri(reverse('administer_cdi_form', args=['a'*64])).replace('a'*64+'/','')
-    admin_data['url_hash'] = test_url + admin_data['url_hash']
+    admin_data['link'] = test_url + admin_data['link']
 
     admin_data.to_csv(response, encoding='utf-8')
 
