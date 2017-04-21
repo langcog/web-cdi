@@ -443,7 +443,7 @@ def administer_new_parent(request, username, study_name):
     study_obj = study.objects.get(name= study_name, researcher = researcher)
     subject_cap = study_obj.subject_cap
     completed_admins = administration.objects.filter(study = study_obj, completed = True).count()
-    if completed_admins < subject_cap:
+    if completed_admins < subject_cap or subject_cap is None:
         max_subject_id = administration.objects.filter(study=study_obj).aggregate(Max('subject_id'))['subject_id__max']
         if max_subject_id is None:
             max_subject_id = 0
