@@ -14,6 +14,7 @@ import codecs, json
 import os.path
 from django.core.validators import EmailValidator, RegexValidator
 
+
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
 isoLangs = json.load(codecs.open(PROJECT_ROOT + '/../' + 'languages.json', 'r', 'utf-8'))

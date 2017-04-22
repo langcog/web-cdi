@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import RegexValidator
+
 
 # Create your models here.
 class instrument(models.Model):
@@ -23,6 +25,9 @@ class study(models.Model):
     anon_collection = models.BooleanField(default=False)
     subject_cap = models.IntegerField(blank = True, null=True)
     confirm_completion = models.BooleanField(default=False)
+    allow_payment = models.BooleanField(default=False)
+    allow_sharing = models.BooleanField(default=False)
+
     def __str__(self):
         return self.name
 
@@ -61,4 +66,15 @@ class administration_data(models.Model):
     class Meta:
         unique_together = ('administration', 'item_ID')
 
+class payment_code(models.Model):
+    study = models.ForeignKey("study")
+    hash_id = models.CharField(max_length=128, unique=True, null=True)
+    added_date = models.DateTimeField(verbose_name = "Date code was added to database", auto_now_add = True)
+    assignment_date = models.DateTimeField(verbose_name = "Date code was given to participant", null=True)
+    payment_type = models.CharField(max_length=50)
+    gift_amount = models.DecimalField(max_digits=6, decimal_places=2, verbose_name="Monetary value")
+    gift_code = models.CharField(max_length=50)
+
+    class Meta:
+        unique_together = ('payment_type', 'gift_code')
 

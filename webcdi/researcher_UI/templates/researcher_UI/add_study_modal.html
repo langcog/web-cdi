@@ -4,7 +4,13 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" >Add new study</h4>
+        <h4 class="modal-title" >
+        {% if form_name %}
+          {{ form_name }}
+        {% else %}
+          Add new study
+        {% endif %}
+        </h4>
       </div>
       <div class="modal-body">
         {% load crispy_forms_tags %}
@@ -12,19 +18,24 @@
 
         <script>
 
-        $('#div_id_subject_cap').css('display','none');
-        $('#div_id_confirm_completion').css('display','none');     
+        $('#div_id_subject_cap').addClass( "anon-collection collapse" );
+        $('#div_id_confirm_completion').addClass( "anon-collection collapse" ); 
 
+        if ("{{ allow_payment }}" == "True"){
+          $('#div_id_gift_codes').parent().css('display', 'block')
+        }
         $('#id_anon_collection').on('change', function () {
           if ($(this).prop('checked')) {
-            $('#div_id_subject_cap').css('display','block');
-            $('#div_id_confirm_completion').css('display','block');
+            $('.anon-collection').collapse('show');
           } else {
-            $('#div_id_subject_cap').css('display','none');
-            $('#div_id_confirm_completion').css('display','none');            
-          }
+            $('.anon-collection').collapse('hide');
+          }        
 
         });
+
+        $('#id_gift_codes').keyup(function() { 
+             $('#div_id_gift_amount').parent().collapse('show');
+          })          
 
         </script>
     </div>

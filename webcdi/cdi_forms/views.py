@@ -4,7 +4,7 @@ from django.shortcuts import render
 from .models import English_WS, English_WG, BackgroundInfo, requests_log
 import os.path
 import json
-from researcher_UI.models import administration_data, administration, study
+from researcher_UI.models import administration_data, administration, study, payment_code
 from django.http import Http404
 import datetime
 from .forms import BackgroundForm, ContactForm
@@ -241,6 +241,12 @@ def cdi_form(request, hash_id):
                 request.method = "GET"
                 return background_info_form(request, hash_id)
             elif 'btn-submit' in request.POST and request.POST['btn-submit'] == 'Submit':
+                if administration_instance.study.allow_payment:
+                    given_code = payment_code.objects.filter(hash_id__isnull = True).first()
+                    if given_code:
+                        given_code.hash_id = hash_id
+                        given_code.assignment_date = datetime.datetime.now()
+                        given_code.save()
                 try:
                     page_number = request.POST['page_number']
                     analysis = parse_analysis(request.POST['analysis'])
@@ -275,17 +281,19 @@ def cdi_form(request, hash_id):
 def printable_view(request, hash_id):
     administration_instance = get_administration_instance(hash_id)
     prefilled_data = {}
-    if request.method == 'GET' or request.method=='POST':
-        prefilled_data = prefilled_cdi_data(administration_instance)
-        try:
-            #Get form from database
-            background_form = prefilled_background_form(administration_instance)
-        except:
-            #Blank form
-            background_form = BackgroundForm()  
-        prefilled_data['background_form'] = background_form
-        prefilled_data['hash_id'] = hash_id
-    
+
+    prefilled_data = prefilled_cdi_data(administration_instance)
+    try:
+        #Get form from database
+        background_form = prefilled_background_form(administration_instance)
+    except:
+        #Blank form
+        background_form = BackgroundForm()  
+    prefilled_data['background_form'] = background_form
+    prefilled_data['hash_id'] = hash_id
+    prefilled_data['gift_code'] = payment_code.objects.values_list('gift_code', flat=True).get(hash_id = hash_id)
+    prefilled_data['gift_amount'] = payment_code.objects.values_list('gift_amount', flat=True).get(hash_id = hash_id)
+
     return render(request, 'cdi_forms/printable_cdi.html', prefilled_data)
 
 

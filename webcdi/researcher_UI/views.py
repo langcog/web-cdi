@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from .forms import AddStudyForm, RenameStudyForm, AddPairedStudyForm
-from .models import study, administration, administration_data, get_meta_header, get_background_header
+from .models import study, administration, administration_data, get_meta_header, get_background_header, payment_code
 import codecs, json
 import os
 import re, random
@@ -21,6 +21,8 @@ import csv
 from django.contrib.auth.models import User
 import pandas as pd
 from django.core.urlresolvers import reverse
+from decimal import Decimal
+
 
 
 
@@ -209,6 +211,7 @@ def console(request, study_name = None, num_per_page = 20):
 @login_required 
 def rename_study(request, study_name):
     data = {}
+    form_package = {}
     #check if the researcher exists and has permissions over the study
     permitted = study.objects.filter(researcher = request.user,  name = study_name).exists()
     study_obj = study.objects.get(researcher= request.user, name= study_name)
@@ -216,34 +219,92 @@ def rename_study(request, study_name):
         form = RenameStudyForm(study_name, request.POST)
         changed_name = None
         changed_waiver = None
+        raw_gift_codes = None
+        all_new_codes = None
+        old_codes = None
+        amount_regex = None
         if form.is_valid():
             researcher = request.user
             new_study_name = form.cleaned_data.get('name')
-            new_study_waiver = form.cleaned_data.get('waiver')
+            waiver = form.cleaned_data.get('waiver')
+            raw_gift_codes = form.cleaned_data.get('gift_codes')
+            raw_gift_amount = form.cleaned_data.get('gift_amount')
+            print raw_gift_amount
 
             if not study.objects.filter(researcher = researcher, name = new_study_name).exists():
     	        study_obj.name = new_study_name
                 changed_name = True
                 study_obj.save()
-            if study_obj.waiver != new_study_waiver:
-                study_obj.waiver = new_study_waiver
+
+            if study_obj.waiver != waiver:
+                study_obj.waiver = waiver
                 study_obj.save()
                 changed_waiver = True
 
-            if changed_name or changed_waiver:
-                data['stat'] = "ok";
-                data['redirect_url'] = "/interface/study/"+new_study_name+"/";
-                return HttpResponse(json.dumps(data), content_type="application/json")            
+            if raw_gift_codes:
+                new_payment_codes = []
+                used_codes = []
+                gift_codes = re.split('[,;\s\t\n]+', raw_gift_codes)
+                gift_regex = re.compile(r'^[a-zA-Z0-9]{4}-[a-zA-Z0-9]{6}-[a-zA-Z0-9]{4}$')
+                gift_type = "Amazon"
+                gift_codes = filter(gift_regex.search, gift_codes)                
+
+                try:
+                    amount_regex = Decimal(re.search('([0-9]{1,3})?.[0-9]{2}', raw_gift_amount).group(0))
+                except:
+                    pass
+
+                if amount_regex:
+
+                    for gift_code in gift_codes:
+                        if not payment_code.objects.filter(payment_type = gift_type, gift_code = gift_code).exists():
+                            new_payment_codes.append(payment_code(study =study_obj, payment_type = gift_type, gift_code = gift_code, gift_amount = amount_regex))
+                        else:
+                            used_codes.append(gift_code)
+                if not used_codes:
+                    all_new_codes = True
+
+
+            if any([changed_name, changed_waiver, raw_gift_codes]):
+                if raw_gift_codes:
+                    if not all_new_codes or not amount_regex: 
+                        data['stat'] = "error";
+                        err_msg = []
+                        if not all_new_codes:
+                            err_msg = err_msg + ['The following codes are already in the database:'] + used_codes;
+                        if not amount_regex:
+                            err_msg = err_msg + [ "Please enter in a valid amount for \"Amount per Card\""];
+
+                        print err_msg
+                        data['error_message'] = "<br>".join(err_msg);
+                        return HttpResponse(json.dumps(data), content_type="application/json")
+                    else:
+                        if all_new_codes:
+                            payment_code.objects.bulk_create(new_payment_codes)
+                            data['stat'] = "ok";
+                            data['redirect_url'] = "/interface/study/"+new_study_name+"/";
+                            return HttpResponse(json.dumps(data), content_type="application/json") 
+                else:
+                    data['stat'] = "ok";
+                    data['redirect_url'] = "/interface/study/"+new_study_name+"/";
+                    return HttpResponse(json.dumps(data), content_type="application/json")            
             else:
+
                 data['stat'] = "error";
                 data['error_message'] = "Study already exists; Use a unique name";
                 return HttpResponse(json.dumps(data), content_type="application/json")
         else:
             data['stat'] = "re-render";
-            return render(request, 'researcher_UI/add_study_modal.html', {'form': form})
+            form_package['form'] = form
+            form_package['form_name'] = 'Update Study'
+            form_package['allow_payment'] = study_obj.allow_payment
+            return render(request, 'researcher_UI/add_study_modal.html', form_package)
     else:
         form = RenameStudyForm(study_name, study_waiver = study_obj.waiver)
-        return render(request, 'researcher_UI/add_study_modal.html', {'form': form})
+        form_package['form'] = form
+        form_package['form_name'] = 'Update Study'
+        form_package['allow_payment'] = study_obj.allow_payment
+        return render(request, 'researcher_UI/add_study_modal.html', form_package)
         
 @login_required 
 def add_study(request):
@@ -275,10 +336,10 @@ def add_study(request):
                 return HttpResponse(json.dumps(data), content_type="application/json")
         else:
             data['stat'] = "re-render";
-            return render(request, 'researcher_UI/add_study_modal.html', {'form': form})
+            return render(request, 'researcher_UI/add_study_modal.html', {'form': form, 'form_name': 'Add New Study'})
     else:
         form = AddStudyForm()
-        return render(request, 'researcher_UI/add_study_modal.html', {'form': form})
+        return render(request, 'researcher_UI/add_study_modal.html', {'form': form, 'form_name': 'Add New Study'})
 
 @login_required 
 def add_paired_study(request):
