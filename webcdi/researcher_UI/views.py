@@ -504,7 +504,18 @@ def administer_new_parent(request, username, study_name):
     study_obj = study.objects.get(name= study_name, researcher = researcher)
     subject_cap = study_obj.subject_cap
     completed_admins = administration.objects.filter(study = study_obj, completed = True).count()
-    if completed_admins < subject_cap or subject_cap is None:
+    bypass = request.GET.get('bypass', None)
+
+    if completed_admins < subject_cap:
+        let_through = True
+    elif subject_cap is None:
+        let_through = True
+    elif bypass:
+        let_through = True
+    else:
+        let_through = None
+
+    if let_through:
         max_subject_id = administration.objects.filter(study=study_obj).aggregate(Max('subject_id'))['subject_id__max']
         if max_subject_id is None:
             max_subject_id = 0
@@ -517,7 +528,12 @@ def administer_new_parent(request, username, study_name):
         redirect_url = reverse('administer_cdi_form', args=[new_url.url_hash])
         background_info_form(request, new_hash_id)
     else:
-        redirect_url = "/"
+        redirect_url = reverse('overflow', args=[username, study_name])
     return redirect(redirect_url)
 
+def overflow(request, username, study_name):
+    data = {}
+    data['username'] = username
+    data['study_name'] = study_name
+    return render(request, 'cdi_forms/overflow.html', data)
 

@@ -61,28 +61,28 @@
     <div class = "col-md-12">
 
         <div class="row">
+            <div class="col-md-12">
+                <img src={% static 'images/logo_bg.jpg' %} class="rounded img-responsive center-block" alt="MB-CDI Lab Logo" style="max-width: 40%;"> <br>
+            </div>
             <h2>Thank you!</h2><br>
             <h4>Thank you for taking the time to complete the MacArthur-Bates Communicative Development Inventory (CDI). With the help of parents and caregivers like you, we are working to learn more about the way that children’s language develops, and how that development varies across individual children and cultures. Remember that the CDI lists many different words that are used by many different children. Don’t worry if your child only knows a few of them right now. Below are some insights into your child’s developing vocabulary, based on our research. This summary is not a clinical evaluation. If you have any concerns about your child’s development, we recommend that you talk with your child’s physician. If you enjoyed our assessment, you can learn more about the CDI <a href="http://mb-cdi.stanford.edu/" target="_blank">here</a>. We appreciate your contribution!</h4>
 
             {% if gift_code %}
               <br>
+              <h2>Redeeming your thank-you gift card<h2>
               <h4>As an added thank you, we wanted to compensate you for your time filling out our form with an Amazon.com gift card! <br>
               Claim Code: {{ gift_code }}<br>
               Amount: ${{ gift_amount }}<br>
               <br>
               To redeem your gift card, follow these steps:
               <ol>
-                <li>Visit <a href="www.amazon.com/redeem">www.amazon.com/redeem</a></li>
+                <li>Visit <a href="http://www.amazon.com/redeem">www.amazon.com/redeem</a></li>
                 <li>Enter the Claim Code when prompted.</li>
                 <li>Gift card funds will be applied automatically to eligible orders during the checkout process.</li>
                 <li>You must pay for any remaining balance on your order with another payment method.</li>
               </ol>
             {% endif %}
             <br><br>
-
-            <div class="col-md-12">
-                <img src={% static 'images/logo_bg.jpg' %} class="rounded float-xs-right" alt="MB-CDI Lab Logo" style="max-width: 20%;"> <br>
-            </div>
         </div>
         <br>
         <div class="row text-center">

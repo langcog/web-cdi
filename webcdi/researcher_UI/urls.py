@@ -9,5 +9,7 @@ urlpatterns = [
             url(r'^study/(?P<study_name>[^/]+)/$', views.console, name='console'),
             url(r'^study/(?P<study_name>[^/]+)/administer_new/$', views.administer_new, name='administer_new'),
             url(r'^study/(?P<study_name>[^/]+)/rename_study/$', views.rename_study, name='rename_study'),
-            url(r'^(?P<username>[^/]+)/(?P<study_name>[^/]+)/new_parent/$', views.administer_new_parent, name='administer_new_parent')
+            url(r'^(?P<username>[^/]+)/(?P<study_name>[^/]+)/new_parent/$', views.administer_new_parent, name='administer_new_parent'),
+            url(r'^(?P<username>[^/]+)/(?P<study_name>[^/]+)/overflow/$', views.overflow, name='overflow'),
+
             ]

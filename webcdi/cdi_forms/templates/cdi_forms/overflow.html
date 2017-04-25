@@ -1,0 +1,54 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    {% load staticfiles %}
+
+    <title>Words and Sentences CDI</title>
+    <meta name="description" content="English Words and Sentences CDI form">
+    <meta name="author" content="Ashwin Paranjape">
+
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="{% static 'cdi_forms/selectize.js' %}"></script>
+    <script src="{% static 'cdi_forms/bootstrap-datepicker.js' %}"></script>
+    <link rel='stylesheet' href="{% static 'cdi_forms/selectize.bootstrap3.css' %}">
+    <link rel='stylesheet' href="{% static 'cdi_forms/datepicker.css' %}">
+    <link rel="stylesheet" href="http://getbootstrap.com/assets/css/docs.min.css" />
+    <link rel='stylesheet' href="{% static 'cdi_forms/base.css' %}">
+    <script src="http://d3js.org/d3.v3.js"></script>
+    <script src="https://cdn.jsdelivr.net/lodash/4.17.2/lodash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-queue/3.0.3/d3-queue.min.js"></script>
+
+    <meta property="og:image" content="http://webcdi.stanford.edu/{% static 'researcher_UI/images/logo.png' %}" />
+    <meta property="og:title" content="MacArthur-Bates Communicative Development Inventory" />
+    <meta property="og:description" content="Interesting tidbits learned from how your child speaks!" />
+
+</head>
+
+
+<body >
+
+
+    <div class="container bs-docs-container" style='padding-top: 60px; padding-bottom: 60px;'>
+    <div class = "col-md-12">
+
+        <div class="row">
+            <div class="col-md-12">
+                <img src={% static 'images/logo_bg.jpg' %} class="rounded img-responsive center-block" alt="MB-CDI Lab Logo" style="max-width: 40%;"> <br>
+            </div>
+            <h2>Thank you!</h2><br>
+            <h4>Thank you for your interest in completing the MacArthur-Bates Communicative Development Inventory (CDI)! At this time, all of our study slots have already filled up and we have run out of thank you gifts to compensate you for your time! If you are still interested in completing the CDI and learning more about your child's vocabulary, you may click <a href="{% url 'administer_new_parent' username=username study_name=study_name %}?bypass=true" target="_blank">here</a> to complete the 30-minute questionnaire. If you have any concerns about your child’s development, we recommend that you talk with your child’s physician. If you enjoyed our assessment, you can learn more about the CDI <a href="http://mb-cdi.stanford.edu/" target="_blank">here</a>. Again, we appreciate your interest!</h4>
+            <br><br>
+
+        </div>
+    </div>
+
+
+    </div>
+
+</body>
+</html>

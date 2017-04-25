@@ -242,7 +242,7 @@ def cdi_form(request, hash_id):
                 return background_info_form(request, hash_id)
             elif 'btn-submit' in request.POST and request.POST['btn-submit'] == 'Submit':
                 if administration_instance.study.allow_payment:
-                    given_code = payment_code.objects.filter(hash_id__isnull = True).first()
+                    given_code = payment_code.objects.filter(hash_id__isnull = True, study = administration_instance.study).first()
                     if given_code:
                         given_code.hash_id = hash_id
                         given_code.assignment_date = datetime.datetime.now()
