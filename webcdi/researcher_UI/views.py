@@ -204,6 +204,10 @@ def console(request, study_name = None, num_per_page = 20):
                 context['study_group'] = current_study.study_group
                 context['study_administrations'] = administration_table
                 context['completed_admins'] = administration.objects.filter(study = current_study, completed = True).count()
+                context['unique_children'] = count = administration.objects.filter(study = current_study, completed = True).values('subject_id').distinct().count()
+                context['allow_payment'] = current_study.allow_payment
+                context['available_giftcards'] = payment_code.objects.filter(hash_id__isnull = True, study = current_study).count()
+                print payment_code.objects
             except:
                 pass
         return render(request, 'researcher_UI/interface.html', context)

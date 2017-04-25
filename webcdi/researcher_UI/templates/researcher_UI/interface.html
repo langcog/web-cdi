@@ -60,6 +60,12 @@
                     {% if study_group %}
                     <h4>Study Group: {{ study_group }}</h4>
                     {% endif %}
+                    {% if completed_admins %}
+                    <h4># Completed Administrations: {{ completed_admins }} Tests, {{ unique_children }} Children</h4>
+                    {% endif %}
+                    {% if allow_payment %}
+                    <h4># Gift Cards Left: {{ available_giftcards }}</h4>
+                    {% endif %}                    
 				</div>
 			    </div>
 			    <div class='col-md-2'>

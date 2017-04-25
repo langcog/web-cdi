@@ -146,6 +146,28 @@
         $('#hint_id_age').append(hint, study_group_hint);
     }
 
+    function fastforward() {
+        $('#id_child_dob').val(moment().subtract(17,'M').format("MM/DD/YYYY"))
+        $('#id_sex_1').click();
+        $('#id_birth_order').val(4);
+        $('#id_birth_weight').val(7.5);
+        $('#id_born_on_due_date_1').click();
+        $('#id_mother_yob').val(1990);
+        $('#id_mother_education').val(16);
+        $('#id_father_yob').val(1990);
+        $('#id_father_education').val(16);
+        $('#id_annual_income').val('100000-125000');
+        $('#id_caregiver_info').val(2);
+        $('#id_other_languages_boolean_1').click();
+        $('#id_ear_infections_boolean_3').click();
+        $('#id_hearing_loss_boolean_1').click();
+        $('#id_vision_problems_boolean_1').click();
+        $('#id_illnesses_boolean_1').click();
+        $('#id_services_boolean_3').click();
+        $('#id_worried_boolean_1').click();
+        $('#id_learning_disability_boolean_1').click();
+    }
+
 
 </script>
 {% endblock %}
