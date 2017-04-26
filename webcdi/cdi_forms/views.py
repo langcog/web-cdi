@@ -17,6 +17,8 @@ from django.template import Context
 from django.template.loader import get_template
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.db import models
+
 
 
 
@@ -337,7 +339,11 @@ def administer_cdi_form(request, hash_id):
 
 def find_paired_studies(request, username, study_group):
     researcher = User.objects.get(username = username)
-    possible_studies = study.objects.filter(study_group = study_group, researcher = researcher).values("name","instrument__min_age", "instrument__max_age", "instrument__language")
+    possible_studies = study.objects.filter(study_group = study_group, researcher = researcher).values("name","instrument__min_age", "instrument__max_age", "instrument__language","subject_cap").annotate(admin_count=models.Sum(
+    models.Case(
+        models.When(administration__completed=True, then=1),
+        default=0, output_field=models.IntegerField()
+    ))).annotate(slots_left=models.F('subject_cap')-models.F('admin_count'))
     data = {}
     data['background_form'] = BackgroundForm()
     data['possible_studies'] = json.dumps(list(possible_studies), cls=DjangoJSONEncoder)

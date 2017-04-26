@@ -57,11 +57,12 @@
 
                 data = raw_data.sort(compare);                 
 
-                 console.log(data);
-                 console.log('{{possible_studies}}');
-
                  $.each(data, function(index, value){
                     var raw_text = "My baby speaks " + value.instrument__language + " and is between " + value.instrument__min_age + " and " + value.instrument__max_age + " months old.";
+
+                    if (parseInt(value.slots_left) >= 0) {
+                        raw_text = raw_text + " (" + value.slots_left + " spots left)"
+                    }
                     var hyperlink = "{% url 'administer_new_parent' username=username study_name=12345 %}".replace(/12345/, value.name);
 
                     var min_age = value.instrument__min_age;
@@ -83,15 +84,12 @@
                         b_date.subtract(1, 'days')
 
                     }
-                    console.log(age_range);
 
                     var hint = "Born between " + age_range[age_range.length - 1] + " and " + age_range[0];
-                    console.log(hint)
 
                     var text = "<h3><a href = '" + hyperlink + "'>" + raw_text + "</a> </h3> <ul><li>" + hint + "</li></ul> <br>";                    
 
                     $( ".inner" ).append( text);
-                    console.log(text);
 
                  })
 

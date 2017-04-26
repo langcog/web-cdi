@@ -8,6 +8,7 @@ from django.core.urlresolvers import reverse
 
 
 
+
 class AddStudyForm(BetterModelForm):
     name = forms.CharField(label='Study Name', max_length=51)
     instrument = forms.ModelChoiceField(queryset=instrument.objects.all(), empty_label="(choose from the list)")
@@ -37,7 +38,6 @@ class AddStudyForm(BetterModelForm):
             Field('confirm_completion'),
             Field('allow_sharing'),
         )
-#        self.helper.add_input(Submit('submit', 'Submit'))
 
     class Meta:
         model = study
@@ -45,11 +45,15 @@ class AddStudyForm(BetterModelForm):
 
 class AddPairedStudyForm(forms.Form):
     study_group = forms.CharField(label='Study Group Name', max_length=51)
-    paired_studies = forms.MultipleChoiceField(choices = [])
+    paired_studies = forms.ModelMultipleChoiceField(queryset=study.objects.all())
 
+    def clean(self):
+        cleaned_data = super(AddPairedStudyForm, self).clean()
+        if not cleaned_data.get('paired_studies'):
+            self.add_error('paired_studies', 'Added studies cannot be blank')
 
     def __init__(self, *args, **kwargs):
-        self.your_studies = kwargs.pop('your_studies', None)
+        self.researcher = kwargs.pop('researcher', None)
         super(AddPairedStudyForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_id = 'add-paired-study'
@@ -58,8 +62,8 @@ class AddPairedStudyForm(forms.Form):
         self.helper.field_class = 'col-lg-9'
         self.helper.form_method = 'post'
         self.helper.form_action = reverse('add_paired_study')
-        self.fields['paired_studies'].choices = self.your_studies
-#        self.helper.add_input(Submit('submit', 'Submit'))
+        if self.researcher:
+            self.fields['paired_studies'] = forms.ModelMultipleChoiceField(queryset=study.objects.filter(study_group = "", researcher = self.researcher))
 
 class RenameStudyForm(forms.Form):
     name = forms.CharField(label='Study Name', max_length=51, required=False)

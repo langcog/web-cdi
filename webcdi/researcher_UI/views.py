@@ -207,7 +207,6 @@ def console(request, study_name = None, num_per_page = 20):
                 context['unique_children'] = count = administration.objects.filter(study = current_study, completed = True).values('subject_id').distinct().count()
                 context['allow_payment'] = current_study.allow_payment
                 context['available_giftcards'] = payment_code.objects.filter(hash_id__isnull = True, study = current_study).count()
-                print payment_code.objects
             except:
                 pass
         return render(request, 'researcher_UI/interface.html', context)
@@ -233,7 +232,6 @@ def rename_study(request, study_name):
             waiver = form.cleaned_data.get('waiver')
             raw_gift_codes = form.cleaned_data.get('gift_codes')
             raw_gift_amount = form.cleaned_data.get('gift_amount')
-            print raw_gift_amount
 
             if not study.objects.filter(researcher = researcher, name = new_study_name).exists():
     	        study_obj.name = new_study_name
@@ -279,7 +277,6 @@ def rename_study(request, study_name):
                         if not amount_regex:
                             err_msg = err_msg + [ "Please enter in a valid amount for \"Amount per Card\""];
 
-                        print err_msg
                         data['error_message'] = "<br>".join(err_msg);
                         return HttpResponse(json.dumps(data), content_type="application/json")
                     else:
@@ -345,10 +342,12 @@ def add_study(request):
         form = AddStudyForm()
         return render(request, 'researcher_UI/add_study_modal.html', {'form': form, 'form_name': 'Add New Study'})
 
+
 @login_required 
 def add_paired_study(request):
     data = {}
     researcher = request.user
+
     if request.method == 'POST' :
         form = AddPairedStudyForm(request.POST)
         if form.is_valid():
@@ -373,11 +372,11 @@ def add_paired_study(request):
                 data['error_message'] = "Study group already exists; Use a unique name";
                 return HttpResponse(json.dumps(data), content_type="application/json")
         else:
+            print form
             data['stat'] = "re-render";
             return render(request, 'researcher_UI/add_paired_study_modal.html', {'form': form})
     else:
-        your_studies = study.objects.filter(study_group = "", researcher = researcher).values_list("name","name")
-        form = AddPairedStudyForm(your_studies = your_studies)
+        form = AddPairedStudyForm(researcher = researcher)
         return render(request, 'researcher_UI/add_paired_study_modal.html', {'form': form})
 
 def random_url_generator(size=64, chars='0123456789abcdef'):
@@ -455,7 +454,6 @@ def administer_new(request, study_name):
                 if raw_ids_csv:
 
                     subject_ids = ids_to_add.tolist()
-                    print subject_ids
 
                     for sid in subject_ids:
                         new_hash = random_url_generator()
