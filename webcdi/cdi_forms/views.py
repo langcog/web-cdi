@@ -291,9 +291,13 @@ def printable_view(request, hash_id):
         background_form = BackgroundForm()  
     prefilled_data['background_form'] = background_form
     prefilled_data['hash_id'] = hash_id
-    prefilled_data['gift_code'] = payment_code.objects.values_list('gift_code', flat=True).get(hash_id = hash_id)
-    prefilled_data['gift_amount'] = payment_code.objects.values_list('gift_amount', flat=True).get(hash_id = hash_id)
-
+    if administration_instance.study.allow_payment:
+        prefilled_data['gift_code'] = payment_code.objects.values_list('gift_code', flat=True).get(hash_id = hash_id)
+        prefilled_data['gift_amount'] = payment_code.objects.values_list('gift_amount', flat=True).get(hash_id = hash_id)
+    else:
+        prefilled_data['gift_code'] = None
+        prefilled_data['gift_amount'] = None
+    prefilled_data['allow_sharing'] = administration_instance.study.allow_sharing
     return render(request, 'cdi_forms/printable_cdi.html', prefilled_data)
 
 

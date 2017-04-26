@@ -92,10 +92,12 @@
 
     <div class="row text-center">
         <h4><a href="#filled_form" data-toggle="collapse">Show Me My Answers</a></h4>
-        {% url 'administer_cdi_form' hash_id=hash_id as form_url %}
-       <div class="fb-share-button" data-href="{{ form_url }}" data-layout="link" data-mobile-iframe="false">
-               <a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ form_url | urlencode }}&amp;src=sdkpreparse">Share</a>
-       </div>
+          {% if allow_sharing %}
+            {% url 'administer_cdi_form' hash_id=hash_id as form_url %}
+            <div class="fb-share-button" data-href="{{ form_url }}" data-layout="link" data-mobile-iframe="false">
+                   <a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ form_url | urlencode }}&amp;src=sdkpreparse">Share</a>
+            </div>
+          {% endif %}
     </div>
 
     <div class="col-md-12 collapse" id="graph_data" style="height: 90vh;">
