@@ -116,6 +116,12 @@ def background_info_form(request, hash_id):
     data['max_age'] = administration_instance.study.instrument.max_age
     data['min_age'] = administration_instance.study.instrument.min_age
     data['study_waiver'] = administration_instance.study.waiver
+    data['allow_payment'] = administration_instance.study.allow_payment
+    if data['allow_payment']:
+        try:
+            data['gift_amount'] = payment_code.objects.filter(study = administration_instance.study).values_list('gift_amount', flat=True).first()
+        except:
+            data['gift_amount'] = None
     study_name = administration_instance.study.name
     study_group = administration_instance.study.study_group
     if study_group:

@@ -19,6 +19,9 @@
         <li> You do not have to complete the inventory in one sitting. If you are interrupted, it is ok to put it down and come back to it when you have more time. </li>
         <li> Feel free to ask others (e.g. other family members, nanny, child care providers) to help you fill out this form. </li>
         <li> Please read all of the instructions on the inventory carefully, and make sure you complete all of the sections. </li>
+        {% if gift_amount %}
+            <li> You will receive a ${{ gift_amount }} Amazon.com gift card after you complete the form.
+        {% endif %}
     </ul>
     <p>For more information about the MB-CDI, <a href="http://mb-cdi.stanford.edu/">click here</a>.</p>
     <p>Thank you! We appreciate your time and effort!</p>
