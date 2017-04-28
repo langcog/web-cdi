@@ -219,9 +219,7 @@ def rename_study(request, study_name):
     permitted = study.objects.filter(researcher = request.user,  name = study_name).exists()
     study_obj = study.objects.get(researcher= request.user, name= study_name)
     if request.method == 'POST' :
-        form = RenameStudyForm(study_name, request.POST)
-        changed_name = None
-        changed_waiver = None
+        form = RenameStudyForm(study_name, request.POST, instance = study_obj)
         raw_gift_codes = None
         all_new_codes = None
         old_codes = None
@@ -229,19 +227,18 @@ def rename_study(request, study_name):
         if form.is_valid():
             researcher = request.user
             new_study_name = form.cleaned_data.get('name')
-            waiver = form.cleaned_data.get('waiver')
             raw_gift_codes = form.cleaned_data.get('gift_codes')
             raw_gift_amount = form.cleaned_data.get('gift_amount')
 
-            if not study.objects.filter(researcher = researcher, name = new_study_name).exists():
-    	        study_obj.name = new_study_name
-                changed_name = True
-                study_obj.save()
+            study_obj = form.save(commit=False)
 
-            if study_obj.waiver != waiver:
-                study_obj.waiver = waiver
-                study_obj.save()
-                changed_waiver = True
+            if new_study_name != study_name:
+                if study.objects.filter(researcher = researcher, name = study_obj.name).exists():
+                    study_obj.name = study_name
+
+            study_obj.save()
+
+            new_study_name = study_obj.name
 
             if raw_gift_codes:
                 new_payment_codes = []
@@ -267,33 +264,28 @@ def rename_study(request, study_name):
                     all_new_codes = True
 
 
-            if any([changed_name, changed_waiver, raw_gift_codes]):
-                if raw_gift_codes:
-                    if not all_new_codes or not amount_regex: 
-                        data['stat'] = "error";
-                        err_msg = []
-                        if not all_new_codes:
-                            err_msg = err_msg + ['The following codes are already in the database:'] + used_codes;
-                        if not amount_regex:
-                            err_msg = err_msg + [ "Please enter in a valid amount for \"Amount per Card\""];
+            if raw_gift_codes:
+                if not all_new_codes or not amount_regex: 
+                    data['stat'] = "error";
+                    err_msg = []
+                    if not all_new_codes:
+                        err_msg = err_msg + ['The following codes are already in the database:'] + used_codes;
+                    if not amount_regex:
+                        err_msg = err_msg + [ "Please enter in a valid amount for \"Amount per Card\""];
 
-                        data['error_message'] = "<br>".join(err_msg);
-                        return HttpResponse(json.dumps(data), content_type="application/json")
-                    else:
-                        if all_new_codes:
-                            payment_code.objects.bulk_create(new_payment_codes)
-                            data['stat'] = "ok";
-                            data['redirect_url'] = "/interface/study/"+new_study_name+"/";
-                            return HttpResponse(json.dumps(data), content_type="application/json") 
+                    data['error_message'] = "<br>".join(err_msg);
+                    return HttpResponse(json.dumps(data), content_type="application/json")
                 else:
-                    data['stat'] = "ok";
-                    data['redirect_url'] = "/interface/study/"+new_study_name+"/";
-                    return HttpResponse(json.dumps(data), content_type="application/json")            
+                    if all_new_codes:
+                        payment_code.objects.bulk_create(new_payment_codes)
+                        data['stat'] = "ok";
+                        data['redirect_url'] = "/interface/study/"+new_study_name+"/";
+                        return HttpResponse(json.dumps(data), content_type="application/json") 
             else:
+                data['stat'] = "ok";
+                data['redirect_url'] = "/interface/study/"+new_study_name+"/";
+                return HttpResponse(json.dumps(data), content_type="application/json")            
 
-                data['stat'] = "error";
-                data['error_message'] = "Study already exists; Use a unique name";
-                return HttpResponse(json.dumps(data), content_type="application/json")
         else:
             data['stat'] = "re-render";
             form_package['form'] = form
@@ -301,7 +293,8 @@ def rename_study(request, study_name):
             form_package['allow_payment'] = study_obj.allow_payment
             return render(request, 'researcher_UI/add_study_modal.html', form_package)
     else:
-        form = RenameStudyForm(study_name, study_waiver = study_obj.waiver)
+        # form = RenameStudyForm(study_name, study_waiver = study_obj.waiver)
+        form = RenameStudyForm(instance = study_obj, old_study_name = study_obj.name)
         form_package['form'] = form
         form_package['form_name'] = 'Update Study'
         form_package['allow_payment'] = study_obj.allow_payment

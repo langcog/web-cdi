@@ -4,7 +4,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" >
+        <h4 id="modal-title" class="modal-title" >
         {% if form_name %}
           {{ form_name }}
         {% else %}
@@ -18,24 +18,42 @@
 
         <script>
 
+
         $('#div_id_subject_cap').addClass( "anon-collection collapse" );
         $('#div_id_confirm_completion').addClass( "anon-collection collapse" ); 
 
-        if ("{{ allow_payment }}" == "True"){
-          $('#div_id_gift_codes').parent().css('display', 'block')
+
+        function check_for_payment() {
+            if($('#id_allow_payment').prop('checked')) {
+                $('.gift_cards').collapse('show');
+            } else {
+                $('.gift_cards').collapse('hide');
+            }
         }
-        $('#id_anon_collection').on('change', function () {
-          if ($(this).prop('checked')) {
+
+        function check_for_anon() {
+
+          if ($('#id_anon_collection').prop('checked')) {
             $('.anon-collection').collapse('show');
           } else {
             $('.anon-collection').collapse('hide');
-          }        
+          }  
+        }        
 
+        check_for_payment();
+        check_for_anon();
+
+
+
+        $('#id_anon_collection').on('change', function () {
+            check_for_anon();      
         });
 
-        $('#id_gift_codes').keyup(function() { 
-             $('#div_id_gift_amount').parent().collapse('show');
-          })          
+        $("#id_allow_payment").on('change', function () {
+            check_for_payment();
+
+        });
+        
 
         </script>
     </div>

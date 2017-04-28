@@ -6,9 +6,6 @@ from form_utils.forms import BetterModelForm
 from django.core.urlresolvers import reverse
 
 
-
-
-
 class AddStudyForm(BetterModelForm):
     name = forms.CharField(label='Study Name', max_length=51)
     instrument = forms.ModelChoiceField(queryset=instrument.objects.all(), empty_label="(choose from the list)")
@@ -65,9 +62,10 @@ class AddPairedStudyForm(forms.Form):
         if self.researcher:
             self.fields['paired_studies'] = forms.ModelMultipleChoiceField(queryset=study.objects.filter(study_group = "", researcher = self.researcher))
 
-class RenameStudyForm(forms.Form):
+class RenameStudyForm(BetterModelForm):
     name = forms.CharField(label='Study Name', max_length=51, required=False)
     waiver = forms.CharField(widget=forms.Textarea, label='Waiver of Documentation', required=False)
+
     gift_codes = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Paste Amazon gift card codes here. Can be separated by spaces, commas, or new lines.'}), required=False, label='Gift Card Codes')
     gift_amount = forms.CharField(max_length=7, required=False, label="Amount per Card (in USD)", widget=forms.TextInput(attrs={'placeholder': '$XX.XX'}))
 
@@ -75,9 +73,6 @@ class RenameStudyForm(forms.Form):
         cleaned_data = super(RenameStudyForm, self).clean()
 
     def __init__(self, old_study_name, *args, **kwargs):
-        self.old_name = old_study_name
-        self.old_waiver = kwargs.pop('study_waiver', None)
-        self.old_gift_codes = None
         super(RenameStudyForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_id = 'rename_study'
@@ -86,12 +81,18 @@ class RenameStudyForm(forms.Form):
         self.helper.field_class = 'col-lg-9'
         self.helper.form_method = 'post'
         self.helper.form_action = reverse('rename_study', args=[old_study_name])
-        # self.helper.form_action = '/interface/'+old_study_name+'rename_study/'
-        self.fields['name'].initial = self.old_name
-        self.fields['waiver'].initial = self.old_waiver
         self.helper.layout = Layout(
             Field('name'),
             Field('waiver'),
-            Div(Field('gift_codes'), style="display: none;", css_class="gift_cards"),
+            Field('anon_collection'),
+            Field('subject_cap'),
+            Field('confirm_completion'),
+            Field('allow_payment'),
+            Div(Field('gift_codes'), css_class="gift_cards collapse"),
             Div(Field('gift_amount'), css_class="gift_cards collapse"),
+            Field('allow_sharing'),
         )
+
+    class Meta:
+        model = study
+        exclude = ['study_group','researcher','instrument']
