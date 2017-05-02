@@ -40,28 +40,37 @@ def download_data(request, study_obj, administrations = None):
     
     model_header = get_model_header(study_obj.instrument.name)
     admin_header = ['study_name', 'subject_id','repeat_num', 'administration_id', 'link', 'completed', 'completedBackgroundInfo', 'due_date', 'last_modified','created_date']
-    
-    # background_header = get_background_header()
-    # writer.writerow(meta_data_header+background_header+model_header)
+    background_header = [col for col in BackgroundInfo._meta.get_all_field_names() if col not in ['administration_id', 'administration']] 
 
-    answers = administration_data.objects.values('administration_id', 'item_ID', 'value').filter(administration_id__in = administrations)
 
-    melted_answers = pd.DataFrame.from_records(answers).pivot(index='administration_id', columns='item_ID', values='value')
-    melted_answers.reset_index(level=0, inplace=True)
+    try:
+        answers = administration_data.objects.values('administration_id', 'item_ID', 'value').filter(administration_id__in = administrations)
+        melted_answers = pd.DataFrame.from_records(answers).pivot(index='administration_id', columns='item_ID', values='value')
+        melted_answers.reset_index(level=0, inplace=True)
+    except:
+        melted_answers = pd.DataFrame(columns = get_model_header(study_obj.instrument.name))
 
-    background_data = BackgroundInfo.objects.values().filter(administration__in = administrations)
-    new_background = pd.DataFrame.from_records(background_data)
+    try:
+        background_data = BackgroundInfo.objects.values().filter(administration__in = administrations)
+        new_background = pd.DataFrame.from_records(background_data)
 
-    for c in new_background.columns:
-        try:
-            new_background = new_background.replace({c: dict(BackgroundInfo._meta.get_field(c).choices)})
-            # new_background[c] = new_background[c].map(dict(BackgroundInfo._meta.get_field(c).choices))
-        except:
-            pass
+        for c in new_background.columns:
+            try:
+                new_background = new_background.replace({c: dict(BackgroundInfo._meta.get_field(c).choices)})
+                # new_background[c] = new_background[c].map(dict(BackgroundInfo._meta.get_field(c).choices))
+            except:
+                pass
+    except:
+        new_background(columns = ['administration_id'] + background_header)
 
     background_answers = pd.merge(new_background, melted_answers, how='outer', on = 'administration_id')
 
-    admin_data = pd.DataFrame.from_records(administrations.values()).rename(columns = {'id':'administration_id', 'study_id': 'study_name', 'url_hash': 'link'})
+    try:
+
+        admin_data = pd.DataFrame.from_records(administrations.values()).rename(columns = {'id':'administration_id', 'study_id': 'study_name', 'url_hash': 'link'})
+    except:
+        admin_data = pd.DataFrame(columns = admin_header)
+        
     admin_data['study_name'] = study_obj.name
 
     combined_data = pd.merge(admin_data, background_answers, how='outer', on = 'administration_id')
@@ -72,7 +81,7 @@ def download_data(request, study_obj, administrations = None):
     if missing_columns:
         combined_data = combined_data.reindex(columns = np.append( combined_data.columns.values, missing_columns))
 
-    combined_data = combined_data[admin_header + [col for col in new_background.columns if col != 'administration_id'] + model_header ]
+    combined_data = combined_data[admin_header + background_header + model_header ]
 
     combined_data.to_csv(response, encoding='utf-8')
 
