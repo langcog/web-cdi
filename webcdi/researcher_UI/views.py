@@ -20,6 +20,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 import csv
 from django.contrib.auth.models import User
 import pandas as pd
+import numpy as np
 from django.core.urlresolvers import reverse
 from decimal import Decimal
 
@@ -47,7 +48,7 @@ def download_data(request, study_obj, administrations = None):
 
     melted_answers = pd.DataFrame.from_records(answers).pivot(index='administration_id', columns='item_ID', values='value')
     melted_answers.reset_index(level=0, inplace=True)
-    
+
     background_data = BackgroundInfo.objects.values().filter(administration__in = administrations)
     new_background = pd.DataFrame.from_records(background_data)
 
@@ -66,7 +67,11 @@ def download_data(request, study_obj, administrations = None):
     combined_data = pd.merge(admin_data, background_answers, how='outer', on = 'administration_id')
     test_url = request.build_absolute_uri(reverse('administer_cdi_form', args=['a'*64])).replace('a'*64+'/','')
     combined_data['link'] = test_url + combined_data['link']
-    
+
+    missing_columns = list(set(model_header) - set(combined_data.columns))
+    if missing_columns:
+        combined_data = combined_data.reindex(columns = np.append( combined_data.columns.values, missing_columns))
+
     combined_data = combined_data[admin_header + [col for col in new_background.columns if col != 'administration_id'] + model_header ]
 
     combined_data.to_csv(response, encoding='utf-8')
