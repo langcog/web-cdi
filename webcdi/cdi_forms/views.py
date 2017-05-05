@@ -117,7 +117,7 @@ def background_info_form(request, hash_id):
     data['min_age'] = administration_instance.study.instrument.min_age
     data['study_waiver'] = administration_instance.study.waiver
     data['allow_payment'] = administration_instance.study.allow_payment
-    if data['allow_payment']:
+    if data['allow_payment'] and administration_instance.bypass is None:
         try:
             data['gift_amount'] = payment_code.objects.filter(study = administration_instance.study).values_list('gift_amount', flat=True).first()
         except:
@@ -249,7 +249,7 @@ def cdi_form(request, hash_id):
                 request.method = "GET"
                 return background_info_form(request, hash_id)
             elif 'btn-submit' in request.POST and request.POST['btn-submit'] == 'Submit':
-                if administration_instance.study.allow_payment:
+                if administration_instance.study.allow_payment and administration_instance.bypass is None:
                     given_code = payment_code.objects.filter(hash_id__isnull = True, study = administration_instance.study).first()
                     if given_code:
                         given_code.hash_id = hash_id
@@ -299,7 +299,7 @@ def printable_view(request, hash_id):
         background_form = BackgroundForm()  
     prefilled_data['background_form'] = background_form
     prefilled_data['hash_id'] = hash_id
-    if administration_instance.study.allow_payment:
+    if administration_instance.study.allow_payment and administration_instance.bypass is None:
         prefilled_data['gift_code'] = payment_code.objects.values_list('gift_code', flat=True).get(hash_id = hash_id)
         prefilled_data['gift_amount'] = payment_code.objects.values_list('gift_amount', flat=True).get(hash_id = hash_id)
     else:

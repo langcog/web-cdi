@@ -52,6 +52,8 @@ class administration(models.Model):
     created_date = models.DateTimeField(verbose_name = "Creation date", auto_now_add = True)
     page_number = models.IntegerField(verbose_name = "Page number", default = 0)
     analysis = models.NullBooleanField(verbose_name = "Confirmed Age and Completion", default = None)
+    bypass = models.NullBooleanField(verbose_name = "Willing to forgo payment", default = None)
+    include = models.NullBooleanField(verbose_name = "Include for eventual analysis", default = True)
 
     class Meta:
         unique_together = ('study', 'subject_id', 'repeat_num')

@@ -528,14 +528,12 @@ def administer_new_parent(request, username, study_name):
         max_subject_id = administration.objects.filter(study=study_obj).aggregate(Max('subject_id'))['subject_id__max']
         if max_subject_id is None:
             max_subject_id = 0
-        for sid in range(max_subject_id+1, max_subject_id+autogenerate_count+1):
-            new_administrations.append(administration(study =study_obj, subject_id = sid, repeat_num = 1, url_hash = random_url_generator(), completed = False, due_date = datetime.datetime.now()+datetime.timedelta(days=14)))
-
-        new_url = new_administrations[0]
-        new_hash_id = new_url.url_hash
-        administration.objects.bulk_create(new_administrations)
-        redirect_url = reverse('administer_cdi_form', args=[new_url.url_hash])
-        background_info_form(request, new_hash_id)
+        new_admin = administration.objects.create(study =study_obj, subject_id = max_subject_id+1, repeat_num = 1, url_hash = random_url_generator(), completed = False, due_date = datetime.datetime.now()+datetime.timedelta(days=14))
+        new_hash_id = new_admin.url_hash
+        if bypass:
+            new_admin.bypass = True
+            new_admin.save()
+        redirect_url = reverse('administer_cdi_form', args=[new_hash_id])
     else:
         redirect_url = reverse('overflow', args=[username, study_name])
     return redirect(redirect_url)
