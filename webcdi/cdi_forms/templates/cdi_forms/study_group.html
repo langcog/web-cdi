@@ -60,8 +60,10 @@
                  $.each(data, function(index, value){
                     var raw_text = "My baby speaks " + value.instrument__language + " and is between " + value.instrument__min_age + " and " + value.instrument__max_age + " months old.";
 
-                    if (parseInt(value.slots_left) >= 0) {
+                    if (parseInt(value.slots_left) > 0) {
                         raw_text = raw_text + " (" + value.slots_left + " spots left)"
+                    } else if (parseInt(value.slots_left) <=0) {
+                        raw_text = raw_text + " (0 spots left)"
                     }
                     var hyperlink = "{% url 'administer_new_parent' username=username study_name=12345 %}".replace(/12345/, value.name);
 

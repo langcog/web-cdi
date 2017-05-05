@@ -71,7 +71,10 @@
                         {% if study_waiver and study_waiver != "" %}
                             <a href="#" id="show_waiver" onclick = "$('#consent_waiver').modal('show');"> Show waiver of documentation </a><br>
                         {% endif %}
-                        <a href="{% url 'contact' hash_id=hash_id %}" target="_blank">Reach out to the Web-CDI Team!</a>
+
+                        {% if hash_id %}
+                            <a href="{% url 'contact' hash_id=hash_id %}" target="_blank">Reach out to the Web-CDI Team!</a>
+                        {% endif %}
 
                         {% block nav_buttons %}
                         {% endblock %}
