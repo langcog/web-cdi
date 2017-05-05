@@ -86,10 +86,7 @@ def background_info_form(request, hash_id):
                 #background_instance.age = background_form.cleaned_data.get('age')
                 background_instance.administration = administration_instance
                 background_instance.save()
-                if 'btn-save' in request.POST and request.POST['btn-save'] == 'Save':
-                    administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now())
-                    refresh = True
-                elif 'btn-next' in request.POST and request.POST['btn-next'] == 'Next':
+                if 'btn-next' in request.POST and request.POST['btn-next'] == 'Next':
                     administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now())
                     administration.objects.filter(url_hash = hash_id).update(completedBackgroundInfo = True)
                     request.method = "GET"
@@ -299,12 +296,16 @@ def printable_view(request, hash_id):
         background_form = BackgroundForm()  
     prefilled_data['background_form'] = background_form
     prefilled_data['hash_id'] = hash_id
+    prefilled_data['gift_code'] = None
+    prefilled_data['gift_amount'] = None
     if administration_instance.study.allow_payment and administration_instance.bypass is None:
-        prefilled_data['gift_code'] = payment_code.objects.values_list('gift_code', flat=True).get(hash_id = hash_id)
-        prefilled_data['gift_amount'] = payment_code.objects.values_list('gift_amount', flat=True).get(hash_id = hash_id)
-    else:
-        prefilled_data['gift_code'] = None
-        prefilled_data['gift_amount'] = None
+        try:
+            prefilled_data['gift_code'] = payment_code.objects.values_list('gift_code', flat=True).get(hash_id = hash_id)
+            prefilled_data['gift_amount'] = payment_code.objects.values_list('gift_amount', flat=True).get(hash_id = hash_id)
+        except:
+            prefilled_data['gift_code'] = 'ran out'
+            prefilled_data['gift_amount'] = 'ran out'
+
     prefilled_data['allow_sharing'] = administration_instance.study.allow_sharing
     return render(request, 'cdi_forms/printable_cdi.html', prefilled_data)
 
