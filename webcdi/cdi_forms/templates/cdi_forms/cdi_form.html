@@ -342,14 +342,15 @@
         <ul>
             <li>You have a child who is {{ age.0 }} months old.</li>
             <li>You filled out the entire questionnaire to the best of your ability.</li>
+            <li>You are taking this questionnaire for the FIRST time.</li>
         </ul>
         <br>
 
-        <input  type="radio" id="analysis_yes" name="analysis" value="True">
-        <label for="analysis_yes"> Yes, I have a child who is {{ age.0 }} months old and I filled out the entire questionnaire. </label>
+        <label> <input  type="radio" id="analysis_yes" name="analysis" value="True">&ensp;
+        Yes, I have a child who is {{ age.0 }} months old, I filled out the entire questionnaire, and I am taking this questionnaire for the first time. </label>
         <br>
-        <input  type="radio" id="analysis_no" name="analysis" value="False">
-        <label for="analysis_no"> No, I do NOT have a child who is {{ age.0 }} months old and/or I have NOT filled out the entire questionnaire. </label>
+        <label> <input  type="radio" id="analysis_no" name="analysis" value="False">&ensp;
+        No, I do NOT have a child who is {{ age.0 }} months old, I have NOT filled out the entire questionnaire, and/or I have taken this questionnaire before. </label>
 
     </div> <br><br>
 

@@ -66,7 +66,8 @@
             </div>
             <h2>Thank you!</h2><br>
             <h4>Thank you for taking the time to complete the MacArthur-Bates Communicative Development Inventory (CDI). With the help of parents and caregivers like you, we are working to learn more about the way that children’s language develops, and how that development varies across individual children and cultures. Remember that the CDI lists many different words that are used by many different children. Don’t worry if your child only knows a few of them right now. Below are some insights into your child’s developing vocabulary, based on our research. This summary is not a clinical evaluation. If you have any concerns about your child’s development, we recommend that you talk with your child’s physician. If you enjoyed our assessment, you can learn more about the CDI <a href="http://mb-cdi.stanford.edu/" target="_blank">here</a>. We appreciate your contribution!</h4>
-
+            <br>
+<!--    
             {% if gift_code %}
               <br>
               <h2>Redeeming your thank-you gift card<h2>
@@ -82,7 +83,47 @@
                 <li>You must pay for any remaining balance on your order with another payment method.</li>
               </ol>
               Any issues redeeming your gift card? Do not hesitate to reach out to the Web-CDI team <a href="{% url 'contact' hash_id=hash_id %}" target="_blank">here</a>!
+            {% endif %} -->
+
+            {% if gift_code %}
+                <h4>
+                <p>
+                    Thank you for participating in the participating our Web-CDI project! It is our pleasure to send you this Amazon.com Gift Card* that can be redeemed towards millions of items at <a href="http://www.amazon.com" target="_blank">www.amazon.com</a>. You may want to print this screen for easy reference later--you’ll need the gift card claim code below.
+                </p>
+
+                <p>
+                    Gift Card Amount: ${{ gift_amount }} <br>
+                    Claim Code: {{ gift_code }}
+                </p>
+
+                <p>
+                    |&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="https://www.amazon.com/gp/css/gc/payment/view-gc-balance?claimCode={{ gift_code }}" target="_blank">Apply to Account</a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="http://www.amazon.com/gc-redeem" target="_blank">How to Use</a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;|
+                </p>
+
+                <p>
+                    To redeem your gift card, follow these steps:
+                    <ol>
+                      <li>Visit <a href="http://www.amazon.com/redeem" target="_blank">www.amazon.com/redeem</a></li>
+                      <li>Enter the Claim Code when prompted.</li>
+                      <li>Gift card funds will be applied automatically to eligible orders during the checkout process.</li>
+                      <li>You must pay for any remaining balance on your order with another payment method.</li>
+                    </ol>
+                    <br>
+                    Your gift card claim code may also be entered when prompted during checkout. To redeem your gift card using the Amazon.com 1-Click&reg; service, first add the gift card funds to Your Account.
+                    <br>
+                    If you have questions about redeeming your gift card, please visit <a href="http://www.amazon.com/gc-redeem" target="_blank">www.amazon.com/gc-redeem</a>. If you have questions regarding the Web-CDI, please contact the Web-CDI team <a href="{% url 'contact' hash_id=hash_id %}" target="_blank">here</a>.
+                </p>
+                </h4>
+                <p style="font-size: 0.8em;">
+                    *Amazon.com is not a sponsor of this promotion. Except as required by law, Amazon.com Gift Cards (&quot;GCs&quot;) cannot be transferred for value or redeemed for cash. GCs may be used only for purchases of eligible goods on Amazon.com or certain of its affiliated websites. GCs cannot be redeemed for purchases of gift cards. Purchases are deducted from the GC balance. To redeem or view a GC balance, visit &quot;Your Account&quot; on Amazon.com. Amazon is not responsible if a GC is lost, stolen, destroyed or used without permission. For complete terms and conditions, see <a href="http://www.amazon.com/gc-legal"  target="_blank">www.amazon.com/gc-legal</a>. GCs are issued by ACI Gift Cards LLC, a Washington corporation. All Amazon &trade; &amp; &copy; are IP of Amazon.com, Inc. or its affiliates. No expiration date or service fees.
+                </p>
+                            
             {% endif %}
+
             <br><br>
         </div>
         <br>
