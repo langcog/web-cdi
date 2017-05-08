@@ -108,11 +108,11 @@ class BackgroundInfo(models.Model):
     education_levels[18-5] = (18, "18 (Advanced degree)")
     education_levels[23-5] = (23, "23 or more")
     education_levels[-1] = (0, "Prefer not to disclose")
-    mother_yob = models.IntegerField(verbose_name = "Mother's (or Parent 1) Year of birth", choices=years)
-    mother_education = models.IntegerField(verbose_name = "Mother's (or Parent 1) Education", help_text ="Choose highest grade completed (12 = high school graduate; 16 = college graduate; 18 = advanced degree)", choices = education_levels)
+    mother_yob = models.IntegerField(verbose_name = "Mother / Parent or Guardian 1 Year of birth", choices=years)
+    mother_education = models.IntegerField(verbose_name = "Mother / Parent or Guardian 1 Education", help_text ="Choose highest grade completed (12 = high school graduate; 16 = college graduate; 18 = advanced degree)", choices = education_levels)
 
-    father_yob = models.IntegerField(verbose_name = "Father's (or Parent 2) Year of birth", choices = years)
-    father_education = models.IntegerField(verbose_name = "Father's (or Parent 2) Education", help_text ="Choose highest grade completed (12 = high school graduate; 16 = college graduate; 18 = advanced degree)", choices= education_levels)
+    father_yob = models.IntegerField(verbose_name = "Father / Parent or Guardian 2 Year of birth", choices = years)
+    father_education = models.IntegerField(verbose_name = "Father / Parent or Guardian 2 Education", help_text ="Choose highest grade completed (12 = high school graduate; 16 = college graduate; 18 = advanced degree)", choices= education_levels)
 
     low, high, inc = 25000, 200000, 25000
     income_choices = [("<" + str(low), "Under " + format_currency(low))] +\
