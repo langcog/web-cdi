@@ -5,9 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from .forms import AddStudyForm, RenameStudyForm, AddPairedStudyForm
 from .models import study, administration, administration_data, get_meta_header, get_background_header, payment_code
-import codecs, json
-import os
-import re, random
+import codecs, json, os, re, random, csv, datetime
 from .tables  import StudyAdministrationTable
 from django_tables2   import RequestConfig
 from django.db.models import Max
@@ -17,12 +15,13 @@ from cdi_forms.models import BackgroundInfo
 import cStringIO
 from django.utils.encoding import force_text
 from django.core.serializers.json import DjangoJSONEncoder
-import csv
 from django.contrib.auth.models import User
 import pandas as pd
 import numpy as np
 from django.core.urlresolvers import reverse
 from decimal import Decimal
+from django.contrib.sites.shortcuts import get_current_site
+
 
 
 
@@ -74,7 +73,8 @@ def download_data(request, study_obj, administrations = None):
     admin_data['study_name'] = study_obj.name
 
     combined_data = pd.merge(admin_data, background_answers, how='outer', on = 'administration_id')
-    test_url = request.build_absolute_uri(reverse('administer_cdi_form', args=['a'*64])).replace('a'*64+'/','')
+    # test_url = request.build_absolute_uri(reverse('administer_cdi_form', args=['a'*64])).replace('a'*64+'/','')
+    test_url = ''.join(['http://', get_current_site(request).domain, reverse('administer_cdi_form', args=['a'*64])]).replace('a'*64+'/','')
     combined_data['link'] = test_url + combined_data['link']
 
     missing_columns = list(set(model_header) - set(combined_data.columns))
@@ -110,7 +110,9 @@ def download_links(request, study_obj, administrations = None):
 
     admin_data['study_name'] = study_obj.name
 
-    test_url = request.build_absolute_uri(reverse('administer_cdi_form', args=['a'*64])).replace('a'*64+'/','')
+    # test_url = request.build_absolute_uri(reverse('administer_cdi_form', args=['a'*64])).replace('a'*64+'/','')
+    test_url = ''.join(['http://', get_current_site(request).domain, reverse('administer_cdi_form', args=['a'*64])]).replace('a'*64+'/','')
+    combined_data['link'] = test_url + combined_data['link']
     admin_data['link'] = test_url + admin_data['link']
 
     admin_data.to_csv(response, encoding='utf-8')

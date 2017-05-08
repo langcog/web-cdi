@@ -63,8 +63,8 @@
                         <div id="due_time"></div>
                         <script type="text/javascript">
                         var due_date = "{{ due_date }}";
-                        var due_date_utc = moment.utc("{{ due_date }}", "MMM. DD, YYYY, hh:mm a");
-                        var due_date_local = moment(due_date_utc).local().format("MMM. D, YYYY, h:mm a");
+                        var due_date_utc = moment.utc(due_date, "MMM DD, YYYY, hh:mm a");
+                        var due_date_local = moment(due_date_utc).local().format("MMM D, YYYY, h:mm a");
                         $('#due_time').html("<p><b> Due date </b>: " + due_date_local + "</p>");
                         </script>
 
