@@ -112,17 +112,13 @@ def download_links(request, study_obj, administrations = None):
 
     # test_url = request.build_absolute_uri(reverse('administer_cdi_form', args=['a'*64])).replace('a'*64+'/','')
     test_url = ''.join(['http://', get_current_site(request).domain, reverse('administer_cdi_form', args=['a'*64])]).replace('a'*64+'/','')
-    combined_data['link'] = test_url + combined_data['link']
     admin_data['link'] = test_url + admin_data['link']
-
     admin_data.to_csv(response, encoding='utf-8')
 
 
     return response
 
  
-    
-
 @login_required
 def console(request, study_name = None, num_per_page = 20):
     refresh = False
