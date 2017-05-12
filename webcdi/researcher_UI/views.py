@@ -241,8 +241,10 @@ def rename_study(request, study_name):
             new_study_name = form.cleaned_data.get('name')
             raw_gift_codes = form.cleaned_data.get('gift_codes')
             raw_gift_amount = form.cleaned_data.get('gift_amount')
+            raw_test_period = form.cleaned_data.get('test_period')
 
             study_obj = form.save(commit=False)
+            study_obj.test_period = raw_test_period if (raw_test_period >= 1 and raw_test_period <= 30) else 14
 
             if new_study_name != study_name:
                 if study.objects.filter(researcher = researcher, name = study_obj.name).exists():
@@ -455,7 +457,7 @@ def administer_new(request, study_name):
 
             if validity:
                 new_administrations = []
-
+                test_period = int(study_obj.test_period)
                 if raw_ids_csv:
 
                     subject_ids = ids_to_add.tolist()
@@ -463,7 +465,7 @@ def administer_new(request, study_name):
                     for sid in subject_ids:
                         new_hash = random_url_generator()
                         old_rep = administration.objects.filter(study = study_obj, subject_id = sid).count()
-                        new_administrations.append(administration(study =study_obj, subject_id = sid, repeat_num = old_rep+1, url_hash = new_hash, completed = False, due_date = datetime.datetime.now()+ datetime.timedelta(days=14)))
+                        new_administrations.append(administration(study =study_obj, subject_id = sid, repeat_num = old_rep+1, url_hash = new_hash, completed = False, due_date = datetime.datetime.now()+ datetime.timedelta(days=test_period)))
 
                 if params['new-subject-ids'][0] != '':
                     subject_ids = re.split('[,;\s\t\n]+', str(params['new-subject-ids'][0]))
@@ -472,7 +474,7 @@ def administer_new(request, study_name):
                     for sid in subject_ids:
                         new_hash = random_url_generator()
                         old_rep = administration.objects.filter(study = study_obj, subject_id = sid).count()
-                        new_administrations.append(administration(study =study_obj, subject_id = sid, repeat_num = old_rep+1, url_hash = new_hash, completed = False, due_date = datetime.datetime.now()+ datetime.timedelta(days=14)))
+                        new_administrations.append(administration(study =study_obj, subject_id = sid, repeat_num = old_rep+1, url_hash = new_hash, completed = False, due_date = datetime.datetime.now()+ datetime.timedelta(days=test_period)))
 
 
                 if params['autogenerate-count'][0]!='':
@@ -482,7 +484,7 @@ def administer_new(request, study_name):
                         max_subject_id = 0
                     for sid in range(max_subject_id+1, max_subject_id+autogenerate_count+1):
                         new_hash = random_url_generator()
-                        new_administrations.append(administration(study =study_obj, subject_id = sid, repeat_num = 1, url_hash = new_hash, completed = False, due_date = datetime.datetime.now()+datetime.timedelta(days=14)))
+                        new_administrations.append(administration(study =study_obj, subject_id = sid, repeat_num = 1, url_hash = new_hash, completed = False, due_date = datetime.datetime.now()+datetime.timedelta(days=test_period)))
 
                 administration.objects.bulk_create(new_administrations)
                 data['stat'] = "ok";
@@ -510,6 +512,7 @@ def administer_new_parent(request, username, study_name):
     researcher = User.objects.get(username = username)
     study_obj = study.objects.get(name= study_name, researcher = researcher)
     subject_cap = study_obj.subject_cap
+    test_period = int(study_obj.test_period)
     completed_admins = administration.objects.filter(study = study_obj, completed = True).count()
     bypass = request.GET.get('bypass', None)
 
@@ -526,7 +529,7 @@ def administer_new_parent(request, username, study_name):
         max_subject_id = administration.objects.filter(study=study_obj).aggregate(Max('subject_id'))['subject_id__max']
         if max_subject_id is None:
             max_subject_id = 0
-        new_admin = administration.objects.create(study =study_obj, subject_id = max_subject_id+1, repeat_num = 1, url_hash = random_url_generator(), completed = False, due_date = datetime.datetime.now()+datetime.timedelta(days=14))
+        new_admin = administration.objects.create(study =study_obj, subject_id = max_subject_id+1, repeat_num = 1, url_hash = random_url_generator(), completed = False, due_date = datetime.datetime.now()+datetime.timedelta(days=test_period))
         new_hash_id = new_admin.url_hash
         if bypass:
             new_admin.bypass = True

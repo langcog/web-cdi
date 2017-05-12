@@ -15,6 +15,7 @@ class AddStudyForm(BetterModelForm):
     subject_cap = forms.IntegerField(label = "Maximum number of participants", required = False, min_value = 1, help_text = "Leave this blank if you do NOT want to limit the number of participants.", widget=forms.NumberInput(attrs={'placeholder': 'XXX participants'}))
     confirm_completion = forms.BooleanField(required = False, label="At the end of the form, would you like parents to confirm the age of their child and that they completed the entire test? (Best for anonymous data collections where you haven't personally vetted each participant)")
     allow_sharing = forms.BooleanField(required=False, label="Would you like participants to be able to share their Web-CDI results via Facebook?")
+    test_period = forms.IntegerField(label = "# Days Before Expiration", help_text= "Between 1 and 14. Default is 14 days. (e.g., 14 = 14 days for parents to complete a form)", required = False, widget= forms.NumberInput(attrs={'placeholder':'(e.g., 14 = 14 days to complete a form)', 'min': '1', 'max': '14'}))
 
     def __init__(self, *args, **kwargs):
         super(AddStudyForm, self).__init__(*args, **kwargs)
@@ -28,6 +29,7 @@ class AddStudyForm(BetterModelForm):
         self.helper.layout = Layout(
             Field('name'),
             Field('instrument'),
+            Field('test_period'),
             Field('waiver'),
             Field('allow_payment'),
             Field('anon_collection'),
@@ -65,7 +67,7 @@ class AddPairedStudyForm(forms.Form):
 class RenameStudyForm(BetterModelForm):
     name = forms.CharField(label='Study Name', max_length=51, required=False)
     waiver = forms.CharField(widget=forms.Textarea, label='Waiver of Documentation', required=False)
-
+    test_period = forms.IntegerField(label = "# Days Before Expiration", help_text= "Between 1 and 14. Default is 14 days. (e.g., 14 = 14 days for parents to complete a form)", required = False, widget= forms.NumberInput(attrs={'placeholder':'(e.g., 14 = 14 days to complete a form)', 'min': '1', 'max': '30'}))
     gift_codes = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Paste Amazon gift card codes here. Can be separated by spaces, commas, or new lines.'}), required=False, label='Gift Card Codes')
     gift_amount = forms.CharField(max_length=7, required=False, label="Amount per Card (in USD)", widget=forms.TextInput(attrs={'placeholder': '$XX.XX'}))
 
@@ -83,6 +85,7 @@ class RenameStudyForm(BetterModelForm):
         self.helper.form_action = reverse('rename_study', args=[old_study_name])
         self.helper.layout = Layout(
             Field('name'),
+            Field('test_period'),
             Field('waiver'),
             Field('anon_collection'),
             Field('subject_cap'),

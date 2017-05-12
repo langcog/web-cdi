@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.core.validators import RegexValidator
-
+from django.core.validators import MaxValueValidator,MinValueValidator
 
 # Create your models here.
 class instrument(models.Model):
@@ -27,6 +26,7 @@ class study(models.Model):
     confirm_completion = models.BooleanField(default=False)
     allow_payment = models.BooleanField(default=False)
     allow_sharing = models.BooleanField(default=False)
+    test_period = models.IntegerField(default=14, validators = [MinValueValidator(1), MaxValueValidator(14)])
 
     def __str__(self):
         return self.name
