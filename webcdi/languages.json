@@ -119,6 +119,14 @@
         "name":"Chinese",
         "nativeName":"中文 (Zhōngwén), 汉语, 漢語"
     },
+    "ma":{
+        "name":"Mandarin (Chinese)",
+        "nativeName":" 官话 (Guānhuà), 官話"
+    },
+    "ct":{
+        "name":"Cantonese (Chinese)",
+        "nativeName":"广东话 (Gwóngdūng wá), 廣東話"
+    },        
     "cv":{
         "name":"Chuvash",
         "nativeName":"чӑваш чӗлхи"

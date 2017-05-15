@@ -55,6 +55,10 @@ class BackgroundForm(BetterModelForm):
     sex = forms.ChoiceField(
                      choices=(('M', 'Male'), ('F', 'Female'), ('O', 'Other / Prefer not to disclose')), widget=forms.RadioSelect,
                 )
+
+    multi_birth_boolean = forms.TypedChoiceField(
+                     choices=YESNONA_CHOICES, widget=forms.RadioSelect, label="Was your child born as part of a multiple birth?")
+
     other_languages_boolean = forms.TypedChoiceField(
                      choices=YESNONA_CHOICES, widget=forms.RadioSelect, label='Does your child regularly hear a language other than English?')
 
@@ -102,6 +106,7 @@ class BackgroundForm(BetterModelForm):
     def clean(self):
         cleaned_data = super(BackgroundForm, self).clean()
         enabler_dependent_fields = (
+        ('multi_birth_boolean', ['multi_birth',]),
         ('born_on_due_date', ['early_or_late', 'due_date_diff',]),
         ('other_languages_boolean', ['other_languages', 'language_days_per_week', 'language_hours_per_day', 'language_from']),
         ('ear_infections_boolean', ['ear_infections',]),
@@ -153,7 +158,7 @@ class BackgroundForm(BetterModelForm):
         #LINE BELOW ADDED AS A TEST TO FIX THE DATE ISSUE
         self.fields['child_dob'].input_formats=(settings.DATE_INPUT_FORMATS)
         self.helper.layout = Layout(
-            Fieldset( 'Basic Information', 'child_dob','age', 'sex','zip_code','birth_order', 'birth_weight', Field('born_on_due_date', css_class='enabler'), Div('early_or_late', 'due_date_diff', css_class='dependent')),
+            Fieldset( 'Basic Information', 'child_dob','age', 'sex','zip_code','birth_order', Field('multi_birth_boolean', css_class='enabler'), Div('multi_birth', css_class='dependent'), 'birth_weight', Field('born_on_due_date', css_class='enabler'), Div('early_or_late', 'due_date_diff', css_class='dependent')),
             Fieldset( 'Family Background', 'mother_yob', 'mother_education','father_yob', 'father_education', 'annual_income'),
             Fieldset( "Child's Ethnicity",HTML("<p> The following information is being collected for the sole purpose of reporting to our grant-funding institute, i.e.,  NIH (National Institute of Health).  NIH requires this information to ensure the soundness and inclusiveness of our research. Your cooperation is appreciated, but optional. </p>"), 'child_hispanic_latino', 'child_ethnicity'),
             Fieldset( "Caregiver Information", 'caregiver_info'),
@@ -197,9 +202,9 @@ class ContactForm(forms.Form):
     )
 
     def __init__(self, *args, **kwargs):
-        self.hash_id = kwargs.pop('hash_id', '')
+        self.redirect_url = kwargs.pop('redirect_url', '')
         super(ContactForm, self).__init__(*args, **kwargs)
-        self.fields['contact_id'].initial='webcdi.stanford.edu/form/fill/'+self.hash_id
+        self.fields['contact_id'].initial=self.redirect_url
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
         self.helper.label_class = 'col-lg-3'

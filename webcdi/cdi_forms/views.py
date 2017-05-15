@@ -18,8 +18,8 @@ from django.template.loader import get_template
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.db import models
-
-
+from django.contrib.sites.shortcuts import get_current_site
+from django.core.urlresolvers import reverse
 
 
 
@@ -358,10 +358,14 @@ def find_paired_studies(request, username, study_group):
     return render(request, 'cdi_forms/study_group.html', data)
 
 def contact(request, hash_id):
-    form = ContactForm(hash_id = hash_id)
+
+    redirect_url = ''.join(['http://', get_current_site(request).domain, reverse('administer_cdi_form', args=[hash_id])])
+
+    form = ContactForm(redirect_url = redirect_url)
 
     if request.method == 'POST':
-        form = ContactForm(request.POST, hash_id = hash_id)
+
+        form = ContactForm(request.POST, redirect_url = redirect_url)
 
         if form.is_valid():
             contact_name = request.POST.get('contact_name', '')

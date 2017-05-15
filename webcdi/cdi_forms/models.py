@@ -96,6 +96,17 @@ class BackgroundInfo(models.Model):
     ]
 
     birth_order = models.IntegerField(verbose_name = "Birth order", choices = birth_order_choices)
+
+    multi_birth_choices = [
+        (2, "Twins"),
+        (3, "Triplets"),
+        (4, "Quadruplets"),
+        (5, "Quintuplets or greater"),
+    ]
+
+    multi_birth_boolean = models.IntegerField(verbose_name = "Was your child born as part of a multiple birth?")
+    multi_birth = models.IntegerField(verbose_name = "Twins, triplets, quadruplets, other?", choices = multi_birth_choices, blank=True, null=True)
+
     birth_weight = models.FloatField(verbose_name = "Birth weight", choices = birth_weight_choices)
     born_on_due_date = models.IntegerField(verbose_name = "Was your child born earlier or later than their due date?")
     early_or_late = models.CharField(verbose_name = "Was he/she early or late?", max_length = 5, choices = (('early', 'Early'),('late', 'Late')), blank=True, null=True)
