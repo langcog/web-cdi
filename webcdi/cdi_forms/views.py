@@ -2,16 +2,13 @@
 
 from django.shortcuts import render
 from .models import English_WS, English_WG, BackgroundInfo, requests_log
-import os.path
-import json
-from researcher_UI.models import administration_data, administration, study, payment_code
+import os.path, json, datetime, itertools
+from researcher_UI.models import administration_data, administration, study, payment_code, ip_address
 from django.http import Http404
-import datetime
 from .forms import BackgroundForm, ContactForm
 from django.utils import timezone
 from django.http import JsonResponse, HttpResponse
 from django.core.serializers.json import DjangoJSONEncoder
-import itertools
 from django.core.mail import EmailMessage
 from django.template import Context
 from django.template.loader import get_template
@@ -20,7 +17,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.urlresolvers import reverse
-
+from ipware.ip import get_ip
 
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
@@ -35,10 +32,7 @@ def get_model_header(name):
     
 def prefilled_background_form(administration_instance):
     background_instance = BackgroundInfo.objects.get(administration = administration_instance)
-    #age = background_instance.age
-    #age_in_date = datetime.date(age/12, age%12, 1)
-    #child_dob = datetime.date.today() - age_in_date
-    #background_form = BackgroundForm(instance = background_instance, initial={'child_dob':child_dob})  
+
     background_form = BackgroundForm(instance = background_instance)  
     return background_form
 
@@ -73,17 +67,15 @@ def background_info_form(request, hash_id):
             if background_form.is_valid():
                 background_instance = background_form.save(commit = False)
                 child_dob = background_form.cleaned_data.get('child_dob')
-                # # #age = (datetime.date.today() - background_form.cleaned_data.get('child_dob'))
-                # # #age = age.year*12 + age.month + (age.day >= 15)
+
                 if child_dob:
                     day_diff = datetime.date.today().day - child_dob.day
                     age = (datetime.date.today().year - child_dob.year) * 12 +  (datetime.date.today().month - child_dob.month) + (1 if day_diff >=15 else 0)
                 else:
                     age = None
-                # # #validity of age is checked in the modelform's clean method
                 if age:
                     background_instance.age = age
-                #background_instance.age = background_form.cleaned_data.get('age')
+
                 background_instance.administration = administration_instance
                 background_instance.save()
                 if 'btn-next' in request.POST and request.POST['btn-next'] == 'Next':
@@ -152,7 +144,6 @@ def cdi_items(object_group, item_type, prefilled_data, item_id):
         if item_type == 'textbox':
             if obj['itemID'] in prefilled_data:
                 obj['prefilled_value'] = prefilled_data[obj['itemID']]
-                # print obj['prefilled_value']
 
     return object_group 
 
@@ -173,7 +164,6 @@ def prefilled_cdi_data(administration_instance):
         data['study_waiver'] = administration_instance.study.waiver
         data['confirm_completion'] = administration_instance.study.confirm_completion
         raw_objects = []
-        #meta_file['background_form'] = None
 
         for part in data['parts']:
             for item_type in part['types']:
@@ -236,7 +226,7 @@ def cdi_form(request, hash_id):
                 try:
                     page_number = request.POST['page_number']
                     analysis = parse_analysis(request.POST['analysis'])
-                    #analysis = request.POST['analysis']
+
                     administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now(), page_number = page_number, analysis = analysis)
                 except:
                     administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now())
@@ -252,6 +242,13 @@ def cdi_form(request, hash_id):
                         given_code.hash_id = hash_id
                         given_code.assignment_date = datetime.datetime.now()
                         given_code.save()
+
+                if administration_instance.study.researcher == "langcoglab" and administration_instance.study.allow_payment:
+                    user_ip = str(get_ip(request))
+
+                    if user_ip:
+                        ip_address.objects.create(study = administration_instance.study,ip_address = user_ip)
+
                 try:
                     page_number = request.POST['page_number']
                     analysis = parse_analysis(request.POST['analysis'])
@@ -264,23 +261,7 @@ def cdi_form(request, hash_id):
     data = {}
     if request.method == 'GET' or refresh:
         data = prefilled_cdi_data(administration_instance)
-        #with open(PROJECT_ROOT+'/form_data/English_WS_meta.json', 'r') as content_file:
-        #    meta_file = json.loads(content_file.read())
-        #    for part in meta_file['parts']:
-        #        for item_type in part['types']:
-        #            if 'sections' in item_type:
-        #                for section in item_type['sections']:
-        #                    section['objects'] = English_WS.objects.filter(category__exact=section['id']).values()
-        #            else:
-        #                item_type['objects'] = English_WS.objects.filter(item_type__exact=item_type['id']).values()
-        #                if item_type['type'] == 'radiobutton':
-        #                    for obj in item_type['objects']:
-        #                        if obj['definition'].find('/') >=0:
-        #                            obj['text'] = ''
-        #                            obj['choices'] = obj['definition'].split('/')
-        #                        else:
-        #                            obj['text'] = obj['definition']
-        #                            obj['choices'] = obj['choices'].split(';')
+
     return render(request, 'cdi_forms/cdi_form.html', data)
 
 def printable_view(request, hash_id):

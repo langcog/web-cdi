@@ -589,10 +589,16 @@
             if (!click_div) e.stopPropagation();
     });
 
-    // function fastforward() {
-    //     changePages(filterednames.length-1)
-    // }
-
 
 </script>
+
+{% if user.is_authenticated %}
+
+    <script>
+        function fastforward() {
+            changePages(filterednames.length-1)
+        }
+    </script>
+{% endif %}
+
 {% endblock %}
