@@ -501,11 +501,12 @@ def administer_new_parent(request, username, study_name):
     completed_admins = administration.objects.filter(study = study_obj, completed = True).count()
     bypass = request.GET.get('bypass', None)
     let_through = None
+    prev_visitor = 0
     visitor_ip = str(get_ip(request))
     if visitor_ip:
         prev_visitor = ip_address.objects.filter(ip_address = visitor_ip).count()
 
-    if visitor_ip < 1 or request.user.is_authenticated():
+    if prev_visitor < 1 or request.user.is_authenticated():
         if completed_admins < subject_cap:
             let_through = True
         elif subject_cap is None:
@@ -531,5 +532,13 @@ def overflow(request, username, study_name):
     data = {}
     data['username'] = username
     data['study_name'] = study_name
+    visitor_ip = str(get_ip(request))
+    prev_visitor = 0
+    if (visitor_ip and visitor_ip != 'None'):
+        prev_visitor = ip_address.objects.filter(ip_address = visitor_ip).count()
+    if prev_visitor > 0 and not request.user.is_authenticated():
+        data['repeat'] = True
+
+
     return render(request, 'cdi_forms/overflow.html', data)
 

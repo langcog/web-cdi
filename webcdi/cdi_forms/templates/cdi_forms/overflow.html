@@ -40,8 +40,16 @@
             <div class="col-md-12">
                 <img src={% static 'images/logo_bg.jpg' %} class="rounded img-responsive center-block" alt="MB-CDI Lab Logo" style="max-width: 40%;"> <br>
             </div>
+
             <h2>Thank you!</h2><br>
-            <h4>Thank you for your interest in completing the MacArthur-Bates Communicative Development Inventory (CDI)! At this time, all of our study slots have already filled up and we have run out of thank you gifts to compensate you for your time! If you are still interested in completing the CDI and learning more about your child's vocabulary, you may click <a href="{% url 'administer_new_parent' username=username study_name=study_name %}?bypass=true" target="_blank">here</a> to complete the 30-minute questionnaire. If you have any concerns about your child’s development, we recommend that you talk with your child’s physician. If you enjoyed our assessment, you can learn more about the CDI <a href="http://mb-cdi.stanford.edu/" target="_blank">here</a>. Again, we appreciate your interest!</h4>
+
+            {% if repeat %}
+                <h4>Thank you for your interest in completing the MacArthur-Bates Communicative Development Inventory (CDI)! It looks like you have completed the CDI form before. We ask that you only complete our assessment once. If you have any concerns about your child’s development, we recommend that you talk with your child’s physician. If you enjoyed our assessment, you can learn more about the CDI <a href="http://mb-cdi.stanford.edu/" target="_blank">here</a>. Again, we appreciate your interest!</h4>
+            {% elif %}
+
+                <h4>Thank you for your interest in completing the MacArthur-Bates Communicative Development Inventory (CDI)! At this time, all of our study slots have already filled up and we have run out of thank you gifts to compensate you for your time! If you are still interested in completing the CDI and learning more about your child's vocabulary, you may click <a href="{% url 'administer_new_parent' username=username study_name=study_name %}?bypass=true" target="_blank">here</a> to complete the 30-minute questionnaire. If you have any concerns about your child’s development, we recommend that you talk with your child’s physician. If you enjoyed our assessment, you can learn more about the CDI <a href="http://mb-cdi.stanford.edu/" target="_blank">here</a>. Again, we appreciate your interest!</h4>
+
+            {% endif %}
             <br><br>
 
         </div>
