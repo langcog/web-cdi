@@ -4,15 +4,13 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from .forms import AddStudyForm, RenameStudyForm, AddPairedStudyForm
-from .models import study, administration, administration_data, get_meta_header, get_background_header, payment_code
-import codecs, json, os, re, random, csv, datetime
+from .models import study, administration, administration_data, get_meta_header, get_background_header, payment_code, ip_address
+import codecs, json, os, re, random, csv, datetime, cStringIO
 from .tables  import StudyAdministrationTable
 from django_tables2   import RequestConfig
 from django.db.models import Max
-import datetime
 from cdi_forms.views import model_map, get_model_header, background_info_form, prefilled_background_form
 from cdi_forms.models import BackgroundInfo
-import cStringIO
 from django.utils.encoding import force_text
 from django.core.serializers.json import DjangoJSONEncoder
 from django.contrib.auth.models import User
@@ -21,14 +19,9 @@ import numpy as np
 from django.core.urlresolvers import reverse
 from decimal import Decimal
 from django.contrib.sites.shortcuts import get_current_site
+from ipware.ip import get_ip
 
 
-
-
-
-
-
-# Create your views here
 
 
 @login_required
@@ -73,7 +66,7 @@ def download_data(request, study_obj, administrations = None):
     admin_data['study_name'] = study_obj.name
 
     combined_data = pd.merge(admin_data, background_answers, how='outer', on = 'administration_id')
-    # test_url = request.build_absolute_uri(reverse('administer_cdi_form', args=['a'*64])).replace('a'*64+'/','')
+
     test_url = ''.join(['http://', get_current_site(request).domain, reverse('administer_cdi_form', args=['a'*64])]).replace('a'*64+'/','')
     combined_data['link'] = test_url + combined_data['link']
 
@@ -110,7 +103,6 @@ def download_links(request, study_obj, administrations = None):
 
     admin_data['study_name'] = study_obj.name
 
-    # test_url = request.build_absolute_uri(reverse('administer_cdi_form', args=['a'*64])).replace('a'*64+'/','')
     test_url = ''.join(['http://', get_current_site(request).domain, reverse('administer_cdi_form', args=['a'*64])]).replace('a'*64+'/','')
     admin_data['link'] = test_url + admin_data['link']
     admin_data.to_csv(response, encoding='utf-8')
@@ -307,7 +299,7 @@ def rename_study(request, study_name):
             form_package['allow_payment'] = study_obj.allow_payment
             return render(request, 'researcher_UI/add_study_modal.html', form_package)
     else:
-        # form = RenameStudyForm(study_name, study_waiver = study_obj.waiver)
+
         form = RenameStudyForm(instance = study_obj, old_study_name = study_obj.name)
         form_package['form'] = form
         form_package['form_name'] = 'Update Study'
@@ -325,15 +317,8 @@ def add_study(request):
             study_name = form.cleaned_data.get('name')
             study_instance.researcher = researcher
 
-
-            # study_name = form.cleaned_data.get('name')
-            # instrument = form.cleaned_data.get('instrument')
-            # subject_cap = form.cleaned_data.get('subject_cap')
-            # waiver = form.cleaned_data.get('waiver')
-            # confirm_completion = form.cleaned_data.get('confirm_completion')
             if not study.objects.filter(researcher = researcher, name = study_name).exists():
-                # new_study = study(researcher = researcher, name = study_name, instrument = instrument, waiver = waiver, confirm_completion = confirm_completion, subject_cap = subject_cap)
-                # new_study.save()
+
                 study_instance.save()
                 data['stat'] = "ok";
                 data['redirect_url'] = "/interface/study/"+study_name+"/";
@@ -515,15 +500,18 @@ def administer_new_parent(request, username, study_name):
     test_period = int(study_obj.test_period)
     completed_admins = administration.objects.filter(study = study_obj, completed = True).count()
     bypass = request.GET.get('bypass', None)
+    let_through = None
+    visitor_ip = str(get_ip(request))
+    if visitor_ip:
+        prev_visitor = ip_address.objects.filter(ip_address = visitor_ip).count()
 
-    if completed_admins < subject_cap:
-        let_through = True
-    elif subject_cap is None:
-        let_through = True
-    elif bypass:
-        let_through = True
-    else:
-        let_through = None
+    if visitor_ip >= 1 or request.user.is_authenticated():
+        if completed_admins < subject_cap:
+            let_through = True
+        elif subject_cap is None:
+            let_through = True
+        elif bypass:
+            let_through = True
 
     if let_through:
         max_subject_id = administration.objects.filter(study=study_obj).aggregate(Max('subject_id'))['subject_id__max']

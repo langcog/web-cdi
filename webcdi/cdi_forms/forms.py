@@ -1,6 +1,4 @@
 from django.conf import settings
-
-from django.forms import ModelForm, Textarea
 from django import forms
 from .models import *
 from crispy_forms.helper import FormHelper
@@ -8,10 +6,8 @@ from crispy_forms.layout import Layout, Fieldset, Submit, Field, Row, Div, HTML
 from crispy_forms.bootstrap import InlineField
 from form_utils.forms import BetterModelForm
 from django.templatetags.static import static
-import datetime
+import datetime, codecs, json, os.path
 from django.core.exceptions import ValidationError
-import codecs, json
-import os.path
 from django.core.validators import EmailValidator, RegexValidator
 
 
@@ -101,7 +97,6 @@ class BackgroundForm(BetterModelForm):
                      choices=language_choices, 
                      label = "Which language(s)", required = False
                 )
-    #birth_order = forms.IntegerField(label = "Birth order (enter number e.g., 1 for first)")
 
     def clean(self):
         cleaned_data = super(BackgroundForm, self).clean()
@@ -155,7 +150,6 @@ class BackgroundForm(BetterModelForm):
         self.helper.field_class = 'col-lg-9'
         self.helper.form_method = 'post'
 
-        #LINE BELOW ADDED AS A TEST TO FIX THE DATE ISSUE
         self.fields['child_dob'].input_formats=(settings.DATE_INPUT_FORMATS)
         self.helper.layout = Layout(
             Fieldset( 'Basic Information', 'child_dob','age', 'sex','zip_code','birth_order', Field('multi_birth_boolean', css_class='enabler'), Div('multi_birth', css_class='dependent'), 'birth_weight', Field('born_on_due_date', css_class='enabler'), Div('early_or_late', 'due_date_diff', css_class='dependent')),
@@ -179,15 +173,13 @@ class BackgroundForm(BetterModelForm):
         exclude = ['administration']
         
         widgets = { 
-        'ear_infections': Textarea(attrs={'cols': 80, 'rows': 3}), 
-        'hearing_loss': Textarea(attrs={'cols': 80, 'rows': 3}), 
-        'vision_problems': Textarea(attrs={'cols': 80, 'rows': 3}), 
-        'illnesses': Textarea(attrs={'cols': 80, 'rows': 3}), 
-        'services': Textarea(attrs={'cols': 80, 'rows': 3}), 
-        'worried': Textarea(attrs={'cols': 80, 'rows': 3}), 
-        'learning_disability': Textarea(attrs={'cols': 80, 'rows': 3}), 
-        #'birth_order': forms.NumberInput(attrs={'min':'1', 'max':'15'}),
-        #'birth_weight': forms.NumberInput(attrs={'min':'1', 'max':'15', 'placeholder': 'X.X', 'step': '0.1'}),
+        'ear_infections': forms.Textarea(attrs={'cols': 80, 'rows': 3}), 
+        'hearing_loss': forms.Textarea(attrs={'cols': 80, 'rows': 3}), 
+        'vision_problems': forms.Textarea(attrs={'cols': 80, 'rows': 3}), 
+        'illnesses': forms.Textarea(attrs={'cols': 80, 'rows': 3}), 
+        'services': forms.Textarea(attrs={'cols': 80, 'rows': 3}), 
+        'worried': forms.Textarea(attrs={'cols': 80, 'rows': 3}), 
+        'learning_disability': forms.Textarea(attrs={'cols': 80, 'rows': 3}), 
         'due_date_diff': forms.NumberInput(attrs={'min':'1', 'max':'18'})
         }
 

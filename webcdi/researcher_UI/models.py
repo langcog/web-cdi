@@ -80,3 +80,7 @@ class payment_code(models.Model):
     class Meta:
         unique_together = ('payment_type', 'gift_code')
 
+class ip_address(models.Model):
+    study = models.ForeignKey("study")
+    ip_address = models.CharField(max_length = 30)
+    date_added = models.DateTimeField(verbose_name = "Date IP address was added to database", auto_now_add = True)
