@@ -17,7 +17,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.urlresolvers import reverse
-from ipware.ip import get_ip
+from ipware.ip import get_real_ip
 
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
@@ -244,7 +244,7 @@ def cdi_form(request, hash_id):
                         given_code.save()
 
                 if administration_instance.study.researcher == "langcoglab" and administration_instance.study.allow_payment:
-                    user_ip = str(get_ip(request))
+                    user_ip = str(get_real_ip(request))
 
                     if user_ip:
                         ip_address.objects.create(study = administration_instance.study,ip_address = user_ip)
