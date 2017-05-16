@@ -505,7 +505,7 @@ def administer_new_parent(request, username, study_name):
     if visitor_ip:
         prev_visitor = ip_address.objects.filter(ip_address = visitor_ip).count()
 
-    if visitor_ip >= 1 or request.user.is_authenticated():
+    if visitor_ip > 0 or request.user.is_authenticated():
         if completed_admins < subject_cap:
             let_through = True
         elif subject_cap is None:
