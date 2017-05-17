@@ -12,3 +12,4 @@ venv/
 webcdi/webcdi/secret_key*
 webcdi/webcdi/databases*
 webcdi/webcdi/email*
+webcdi/webcdi/captcha*

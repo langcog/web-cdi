@@ -15,6 +15,7 @@ import os
 from databases import *
 from email import *
 import socket
+from captcha import *
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -87,6 +88,7 @@ INSTALLED_APPS = (
     'registration',
     'supplementtut',
     'django.contrib.sites',
+    'captcha',
 )
 
 MIDDLEWARE_CLASSES = (
