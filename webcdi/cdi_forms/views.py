@@ -250,7 +250,7 @@ def cdi_form(request, hash_id):
                 request.method = "GET"
                 return background_info_form(request, hash_id)
             elif 'btn-submit' in request.POST and request.POST['btn-submit'] == 'Submit':
-                result = None
+                result = {}
                 recaptcha_response = request.POST.get('g-recaptcha-response', None)
                 if recaptcha_response:
                     dt = {
@@ -295,7 +295,7 @@ def cdi_form(request, hash_id):
         data['slow_down'] = True if too_fast else None
         data['created_date'] = administration_instance.created_date
         data['captcha'] = None
-        if administration_instance.study.confirm_completion:
+        if administration_instance.study.confirm_completion and administration_instance.study.researcher.username == "langcoglab" and administration_instance.study.allow_payment:
             data['captcha'] = 'True'
 
     return render(request, 'cdi_forms/cdi_form.html', data)

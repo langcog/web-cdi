@@ -354,7 +354,7 @@
 
         {% if captcha == 'True' %}
         <br><br>
-        <div class="g-recaptcha" data-sitekey="6LfI0yEUAAAAALj8wAxmoXmWg8B64tvr866bXeYg"></div>
+        <div class="g-recaptcha" data-sitekey="6LfI0yEUAAAAALj8wAxmoXmWg8B64tvr866bXeYg" data-callback="enableBtn"></div>
         {% endif %}
 
     </div> <br><br>
@@ -380,6 +380,27 @@
 {% endblock %}
 
 {% block scripts %}
+
+{% if captcha == 'True' %}
+    <script>
+        captcha_clicked = false;
+
+    function enableBtn(){
+        captcha_clicked = true;
+        if (gotToEnd && test_duration >= 5) {
+            $('.submit-button').show();
+        }
+
+    }
+    </script>
+
+{% else %}
+    <script>
+    captcha_clicked = true;
+    </script>    
+
+{% endif %}
+
 <script type="text/javascript">
 
     $("#instructions").collapse('show');
@@ -478,7 +499,7 @@
 
         test_duration = moment.utc().diff(moment.utc(created_date, "MMM DD, YYYY, hh:mm a"),'minutes')
 
-        if (gotToEnd && test_duration >= 5) {
+        if (gotToEnd && test_duration >= 5 && captcha_clicked) {
             $('.submit-button').show();
         }
 
@@ -609,5 +630,6 @@
         }
     </script>
 {% endif %}
+
 
 {% endblock %}
