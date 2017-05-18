@@ -393,6 +393,8 @@
         localStorage.removeItem('prev_page_number');
 
     }
+    created_date = "{{ created_date }}";
+
 
     //Create mutually exclusive checkboxes. 0 or 1 checkbox in a group may be clicked.
     $("input:checkbox").on('click', function() {
@@ -469,8 +471,9 @@
             gotToEnd = true;
         }
 
-        
-        if (gotToEnd) {
+        test_duration = moment.utc().diff(moment.utc(created_date, "MMM DD, YYYY, hh:mm a"),'minutes')
+
+        if (gotToEnd && test_duration >= 5) {
             $('.submit-button').show();
         }
 
@@ -596,6 +599,7 @@
 
     <script>
         function fastforward() {
+            created_date = moment().subtract(6,'minutes')
             changePages(filterednames.length-1)
         }
     </script>

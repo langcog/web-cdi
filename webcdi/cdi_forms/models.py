@@ -56,7 +56,7 @@ class BackgroundInfo(models.Model):
     years[-1] = (0, "Prefer not to disclose")
     age = models.IntegerField(verbose_name = "Age (in months)", validators=[MinValueValidator(0)], default = 999)
     sex = models.CharField(max_length = 1, choices = (('M', "Male"), ('F', "Female"), ('O', "Other")))
-    zip_code = models.CharField(max_length = 5, verbose_name = 'Zip Code (if you live in the U.S.)', blank = True, null=True, validators=[RegexValidator(regex='^\d{5}$', message='Please enter a valid U.S. zip code')])
+    zip_code = models.CharField(max_length = 5, verbose_name = 'Zip Code (if you live in the U.S.)', blank = True, null=True, validators=[RegexValidator(regex='^(\d{3})|([A-Z]{2})$', message='Please enter a valid U.S. zip code')])
 
 
     birth_order_choices = [
@@ -159,6 +159,11 @@ class BackgroundInfo(models.Model):
     learning_disability = models.CharField(max_length = 1001, blank = True, null=True, verbose_name = "Indicate which family member and provide a description")
 
 
-        
+class Zipcode(models.Model):
+    zip_code=models.CharField(max_length = 5)
+    zip_prefix=models.CharField(max_length = 3)
+    population=models.IntegerField()
+    state=models.CharField(max_length = 2)
+
 
     

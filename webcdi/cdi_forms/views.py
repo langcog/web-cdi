@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.shortcuts import render
-from .models import English_WS, English_WG, BackgroundInfo, requests_log
+from .models import English_WS, English_WG, BackgroundInfo, requests_log, Zipcode
 import os.path, json, datetime, itertools
 from researcher_UI.models import administration_data, administration, study, payment_code, ip_address
 from django.http import Http404
@@ -51,6 +51,7 @@ def background_info_form(request, hash_id):
     age_ref['min_age'] = administration_instance.study.instrument.min_age
     age_ref['max_age'] = administration_instance.study.instrument.max_age
     age_ref['child_age'] = None
+    age_ref['zip_code'] = ''
     refresh = False
     background_form = None
         
@@ -76,6 +77,14 @@ def background_info_form(request, hash_id):
                 if age:
                     background_instance.age = age
 
+                zip_prefix = '000'
+                raw_zip = background_instance.zip_code
+                if raw_zip and raw_zip != 'None':
+                    zip_prefix = raw_zip[:3]
+                    if Zipcode.objects.filter(zip_prefix = zip_prefix).exists():
+                        zip_prefix = Zipcode.objects.filter(zip_prefix = zip_prefix).first().state
+                background_instance.zip_code = zip_prefix
+
                 background_instance.administration = administration_instance
                 background_instance.save()
                 if 'btn-next' in request.POST and request.POST['btn-next'] == 'Next':
@@ -90,6 +99,8 @@ def background_info_form(request, hash_id):
             background_instance = BackgroundInfo.objects.get(administration = administration_instance)
             if background_instance.age:
                 age_ref['child_age'] = background_instance.age
+            if len(background_instance.zip_code) == 3:
+                background_instance.zip_code = background_instance.zip_code + '**'
             background_form = BackgroundForm(instance = background_instance, age_ref = age_ref)
         except:
             #Blank form
@@ -207,6 +218,7 @@ def cdi_form(request, hash_id):
     instrument_name = administration_instance.study.instrument.name
     instrument_model = model_map(instrument_name)
     refresh = False
+    too_fast = False
 
     if request.method == 'POST' :
         if not administration_instance.completed and administration_instance.due_date > timezone.now():
@@ -245,6 +257,7 @@ def cdi_form(request, hash_id):
 
                 if administration_instance.study.researcher.username == "langcoglab" and administration_instance.study.allow_payment:
                     user_ip = str(get_ip(request))
+                    print user_ip
 
                     if user_ip and user_ip != 'None':
                         ip_address.objects.create(study = administration_instance.study,ip_address = user_ip)
@@ -252,15 +265,22 @@ def cdi_form(request, hash_id):
                 try:
                     page_number = request.POST['page_number']
                     analysis = parse_analysis(request.POST['analysis'])
-                    #analysis = request.POST['analysis']
-                    administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now(), analysis = analysis, completed= True)
+                    administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now(), analysis = analysis)
                 except:
-                    administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now(), completed= True)                
-                return printable_view(request, hash_id)
+                    administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now())                
+                completion_time = administration_instance.last_modified - administration_instance.created_date
+                if completion_time.total_seconds() > 300 or request.user.is_authenticated():
+                    administration.objects.filter(url_hash = hash_id).update(completed = True)
+                    return printable_view(request, hash_id)
+                else:
+                    refresh = True
+                    too_fast = True
 
     data = {}
     if request.method == 'GET' or refresh:
         data = prefilled_cdi_data(administration_instance)
+        data['slow_down'] = True if too_fast else None
+        data['created_date'] = administration_instance.created_date
 
     return render(request, 'cdi_forms/cdi_form.html', data)
 

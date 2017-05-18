@@ -39,7 +39,7 @@ class BackgroundForm(BetterModelForm):
 
     age = forms.IntegerField(label = 'Age (in months)<span class="asteriskField">*</span>', validators=[MinValueValidator(0)], help_text='This field will update when you enter or change your child\'s DOB.', required=False)
 
-    zip_code = forms.CharField(min_length = 5, max_length = 5, required = False, widget=forms.TextInput(attrs={'placeholder': 'XXXXX'}), label = "What is your zip code?<br>(if you live in the U.S.)")
+    zip_code = forms.CharField(min_length = 2, max_length = 5, required = False, widget=forms.TextInput(attrs={'placeholder': 'XXXXX'}), label = "What is your zip code?<br>(if you live in the U.S.)")
 
     child_hispanic_latino = forms.TypedChoiceField(
                      choices=YESNO_CHOICES, widget=forms.RadioSelect, coerce = string_bool_coerce
