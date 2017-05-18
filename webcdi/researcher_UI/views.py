@@ -503,10 +503,11 @@ def administer_new_parent(request, username, study_name):
     let_through = None
     prev_visitor = 0
     visitor_ip = str(get_ip(request))
+    completed = request.get_signed_cookie('completed', 'None')
     if visitor_ip:
         prev_visitor = ip_address.objects.filter(ip_address = visitor_ip).count()
 
-    if prev_visitor < 1 or request.user.is_authenticated():
+    if (prev_visitor < 1 and completed == 'None') or request.user.is_authenticated():
         if completed_admins < subject_cap:
             let_through = True
         elif subject_cap is None:

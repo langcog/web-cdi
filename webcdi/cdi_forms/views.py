@@ -308,7 +308,11 @@ def printable_view(request, hash_id):
             prefilled_data['gift_amount'] = 'ran out'
 
     prefilled_data['allow_sharing'] = administration_instance.study.allow_sharing
-    return render(request, 'cdi_forms/printable_cdi.html', prefilled_data)
+    response = render(request, 'cdi_forms/printable_cdi.html', prefilled_data)
+
+    if administration_instance.study.researcher.username == "langcoglab" and administration_instance.study.allow_payment:
+        response.set_signed_cookie('completed','True')
+    return response
 
 
 
