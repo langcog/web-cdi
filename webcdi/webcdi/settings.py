@@ -88,7 +88,6 @@ INSTALLED_APPS = (
     'registration',
     'supplementtut',
     'django.contrib.sites',
-    'captcha',
 )
 
 MIDDLEWARE_CLASSES = (

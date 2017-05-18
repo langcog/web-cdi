@@ -2,7 +2,7 @@
 
 from django.shortcuts import render
 from .models import English_WS, English_WG, BackgroundInfo, requests_log, Zipcode
-import os.path, json, datetime, itertools
+import os.path, json, datetime, itertools, requests
 from researcher_UI.models import administration_data, administration, study, payment_code, ip_address
 from django.http import Http404
 from .forms import BackgroundForm, ContactForm
@@ -18,6 +18,8 @@ from django.db import models
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.urlresolvers import reverse
 from ipware.ip import get_ip
+from django.conf import settings
+
 
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
@@ -248,8 +250,19 @@ def cdi_form(request, hash_id):
                 request.method = "GET"
                 return background_info_form(request, hash_id)
             elif 'btn-submit' in request.POST and request.POST['btn-submit'] == 'Submit':
-                if administration_instance.study.allow_payment and administration_instance.bypass is None:
+                result = None
+                recaptcha_response = request.POST.get('g-recaptcha-response', None)
+                if recaptcha_response:
+                    dt = {
+                        'secret': settings.RECAPTCHA_PRIVATE_KEY,
+                        'response': recaptcha_response
+                    }
+                    r = requests.post('https://www.google.com/recaptcha/api/siteverify', data=dt)
+                    result = r.json()
+
+                if administration_instance.study.allow_payment and administration_instance.bypass is None and result['success']:
                     given_code = payment_code.objects.filter(hash_id__isnull = True, study = administration_instance.study).first()
+
                     if given_code:
                         given_code.hash_id = hash_id
                         given_code.assignment_date = datetime.datetime.now()
@@ -281,6 +294,9 @@ def cdi_form(request, hash_id):
         data = prefilled_cdi_data(administration_instance)
         data['slow_down'] = True if too_fast else None
         data['created_date'] = administration_instance.created_date
+        data['captcha'] = None
+        if administration_instance.study.confirm_completion:
+            data['captcha'] = 'True'
 
     return render(request, 'cdi_forms/cdi_form.html', data)
 
@@ -300,10 +316,11 @@ def printable_view(request, hash_id):
     prefilled_data['gift_code'] = None
     prefilled_data['gift_amount'] = None
     if administration_instance.study.allow_payment and administration_instance.bypass is None:
-        try:
-            prefilled_data['gift_code'] = payment_code.objects.values_list('gift_code', flat=True).get(hash_id = hash_id)
-            prefilled_data['gift_amount'] = payment_code.objects.values_list('gift_amount', flat=True).get(hash_id = hash_id)
-        except:
+        if payment_code.objects.filter(hash_id = hash_id).exists():
+            gift_card = payment_code.objects.get(hash_id = hash_id)
+            prefilled_data['gift_code'] = gift_card.gift_code
+            prefilled_data['gift_amount'] = gift_card.gift_amount
+        else:
             prefilled_data['gift_code'] = 'ran out'
             prefilled_data['gift_amount'] = 'ran out'
 

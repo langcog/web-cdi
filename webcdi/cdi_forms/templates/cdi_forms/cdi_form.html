@@ -350,7 +350,12 @@
         Yes, I have a child who is {{ age.0 }} months old, I filled out the entire questionnaire, and I am taking this questionnaire for the first time. </label>
         <br>
         <label> <input  type="radio" id="analysis_no" name="analysis" value="False">&ensp;
-        No, I do NOT have a child who is {{ age.0 }} months old, I have NOT filled out the entire questionnaire, and/or I have taken this questionnaire before. </label>
+        No, I do NOT have a child who is {{ age.0 }} months old, I have NOT filled out the entire questionnaire, and/or I have taken this questionnaire before. </label> 
+
+        {% if captcha == 'True' %}
+        <br><br>
+        <div class="g-recaptcha" data-sitekey="6LfI0yEUAAAAALj8wAxmoXmWg8B64tvr866bXeYg"></div>
+        {% endif %}
 
     </div> <br><br>
 

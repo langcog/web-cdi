@@ -9,7 +9,6 @@ from django.templatetags.static import static
 import datetime, codecs, json, os.path
 from django.core.exceptions import ValidationError
 from django.core.validators import EmailValidator, RegexValidator
-from captcha.fields import ReCaptchaField
 
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
@@ -99,8 +98,6 @@ class BackgroundForm(BetterModelForm):
                      label = "Which language(s)", required = False
                 )
 
-    captcha = ReCaptchaField()
-
     def clean(self):
         cleaned_data = super(BackgroundForm, self).clean()
         enabler_dependent_fields = (
@@ -168,7 +165,6 @@ class BackgroundForm(BetterModelForm):
             Field('services_boolean', css_class = 'enabler'), Div('services', css_class='dependent'),
             Field('worried_boolean', css_class = 'enabler'), Div('worried', css_class='dependent'),
             Field('learning_disability_boolean', css_class = 'enabler'), Div('learning_disability', css_class='dependent'),),
-            Field('captcha'),
 
 )
 
