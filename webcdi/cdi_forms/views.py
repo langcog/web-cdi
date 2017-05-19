@@ -302,6 +302,7 @@ def cdi_form(request, hash_id):
 
 def printable_view(request, hash_id):
     administration_instance = get_administration_instance(hash_id)
+    completed = int(request.get_signed_cookie('completed', '0'))
     prefilled_data = {}
 
     prefilled_data = prefilled_cdi_data(administration_instance)
@@ -328,7 +329,7 @@ def printable_view(request, hash_id):
     response = render(request, 'cdi_forms/printable_cdi.html', prefilled_data)
 
     if administration_instance.study.researcher.username == "langcoglab" and administration_instance.study.allow_payment:
-        response.set_signed_cookie('completed','True')
+        response.set_signed_cookie('completed',str(completed))
     return response
 
 
