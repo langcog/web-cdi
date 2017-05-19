@@ -25,6 +25,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='backgroundinfo',
             name='zip_code',
-            field=models.CharField(blank=True, max_length=5, null=True, verbose_name=b'Zip Code (if you live in the U.S.)', validators=[django.core.validators.RegexValidator(regex=b'^(\\d{3})|([A-Z]{2})$', message=b'Please enter a valid U.S. zip code')]),
+            field=models.CharField(blank=True, max_length=5, null=True, verbose_name=b'Zip Code (if you live in the U.S.)', validators=[django.core.validators.RegexValidator(regex=b'^(\\d{3}([*]{2})?)|([A-Z]{2})$', message=b'Please enter a valid U.S. zip code')]),
         ),
     ]

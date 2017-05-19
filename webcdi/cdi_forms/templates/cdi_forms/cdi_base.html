@@ -120,7 +120,11 @@
         </div>
     </div>
 </div>
-
+<script>
+    $(".btn").mouseup(function(){
+        $(this).blur();
+    })
+</script>
 {% block scripts %}
 {% endblock %}
 </body>

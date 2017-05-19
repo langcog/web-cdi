@@ -32,13 +32,19 @@ def download_data(request, study_obj, administrations = None):
     
     model_header = get_model_header(study_obj.instrument.name)
     admin_header = ['study_name', 'subject_id','repeat_num', 'administration_id', 'link', 'completed', 'completedBackgroundInfo', 'due_date', 'last_modified','created_date']
-    background_header = [col for col in BackgroundInfo._meta.get_all_field_names() if col not in ['administration_id', 'administration']] 
+    # background_header = [col for col in BackgroundInfo._meta.get_all_field_names() if col not in ['administration_id', 'administration']]
 
+    background_header = ['age','sex','zip_code','birth_order','multi_birth_boolean','multi_birth', 'birth_weight', 'born_on_due_date', 'early_or_late', 'due_date_diff', 'mother_yob', 'mother_education','father_yob', 'father_education', 'annual_income', 'child_hispanic_latino', 'child_ethnicity', 'caregiver_info', 'other_languages_boolean','other_languages','language_from', 'language_days_per_week', 'language_hours_per_day', 'ear_infections_boolean','ear_infections', 'hearing_loss_boolean','hearing_loss', 'vision_problems_boolean','vision_problems', 'illnesses_boolean','illnesses', 'services_boolean','services','worried_boolean','worried','learning_disability_boolean','learning_disability']
+
+    print "got headers!"
 
     try:
         answers = administration_data.objects.values('administration_id', 'item_ID', 'value').filter(administration_id__in = administrations)
+        print answers
         melted_answers = pd.DataFrame.from_records(answers).pivot(index='administration_id', columns='item_ID', values='value')
+        print melted_answers
         melted_answers.reset_index(level=0, inplace=True)
+        print "got answers!"
     except:
         melted_answers = pd.DataFrame(columns = get_model_header(study_obj.instrument.name))
 
@@ -49,16 +55,21 @@ def download_data(request, study_obj, administrations = None):
         for c in new_background.columns:
             try:
                 new_background = new_background.replace({c: dict(BackgroundInfo._meta.get_field(c).choices)})
-                # new_background[c] = new_background[c].map(dict(BackgroundInfo._meta.get_field(c).choices))
             except:
-                pass
+                if 'boolean' in c or c == 'born_on_due_date':
+                    new_background = new_background.replace({c: {0: 'No', 1: 'Yes', 2: 'Prefer not to disclose'}})
+                elif c == 'child_hispanic_latino':
+                    new_background = new_background.replace({c: {False: 'No', True: 'Yes'}})
+
+        print "got demographics!"
     except:
         new_background(columns = ['administration_id'] + background_header)
 
+    print melted_answers
+    print new_background
     background_answers = pd.merge(new_background, melted_answers, how='outer', on = 'administration_id')
 
     try:
-
         admin_data = pd.DataFrame.from_records(administrations.values()).rename(columns = {'id':'administration_id', 'study_id': 'study_name', 'url_hash': 'link'})
     except:
         admin_data = pd.DataFrame(columns = admin_header)
@@ -66,6 +77,7 @@ def download_data(request, study_obj, administrations = None):
     admin_data['study_name'] = study_obj.name
 
     combined_data = pd.merge(admin_data, background_answers, how='outer', on = 'administration_id')
+    print "merged data!"
 
     test_url = ''.join(['http://', get_current_site(request).domain, reverse('administer_cdi_form', args=['a'*64])]).replace('a'*64+'/','')
     combined_data['link'] = test_url + combined_data['link']
@@ -73,8 +85,10 @@ def download_data(request, study_obj, administrations = None):
     missing_columns = list(set(model_header) - set(combined_data.columns))
     if missing_columns:
         combined_data = combined_data.reindex(columns = np.append( combined_data.columns.values, missing_columns))
+    print "tweaked data!"
 
     combined_data = combined_data[admin_header + background_header + model_header ]
+    print "reorganized column!"
 
     combined_data.to_csv(response, encoding='utf-8')
 
@@ -143,9 +157,10 @@ def console(request, study_name = None, num_per_page = 20):
                     ids = request.POST.getlist('select_col')
                     if all([x.isdigit() for x in ids]):
                         ids = list(set(map(int, ids)))
-                        for nid in ids:
-                            admin_object = administration.objects.get(id = nid)
-                            admin_object.delete()
+                        administration.objects.filter(id__in = ids).delete()
+                        # for nid in ids:
+                        #     admin_object = administration.objects.get(id = nid)
+                        #     admin_object.delete()
                         refresh = True
 
                 elif 'download-links' in request.POST:
@@ -164,7 +179,6 @@ def console(request, study_name = None, num_per_page = 20):
                         ids = list(set(map(int, ids)))
                         administrations = administration.objects.filter(id__in = ids)
                         return download_data(request, study_obj, administrations)
-
                         refresh = True
 
                 elif 'delete-study' in request.POST:
@@ -503,7 +517,7 @@ def administer_new_parent(request, username, study_name):
     let_through = None
     prev_visitor = 0
     visitor_ip = str(get_ip(request))
-    completed = int(request.get_signed_cookie('completed', '0'))
+    completed = int(request.get_signed_cookie('completed_num', '0'))
     if visitor_ip:
         prev_visitor = ip_address.objects.filter(ip_address = visitor_ip).count()
 

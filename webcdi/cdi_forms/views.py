@@ -79,12 +79,14 @@ def background_info_form(request, hash_id):
                 if age:
                     background_instance.age = age
 
-                zip_prefix = '000'
+                zip_prefix = ''
                 raw_zip = background_instance.zip_code
                 if raw_zip and raw_zip != 'None':
                     zip_prefix = raw_zip[:3]
                     if Zipcode.objects.filter(zip_prefix = zip_prefix).exists():
                         zip_prefix = Zipcode.objects.filter(zip_prefix = zip_prefix).first().state
+                    else:
+                        zip_prefix = zip_prefix + '**'
                 background_instance.zip_code = zip_prefix
 
                 background_instance.administration = administration_instance
@@ -250,7 +252,7 @@ def cdi_form(request, hash_id):
                 request.method = "GET"
                 return background_info_form(request, hash_id)
             elif 'btn-submit' in request.POST and request.POST['btn-submit'] == 'Submit':
-                result = {}
+                result = {'success': None}
                 recaptcha_response = request.POST.get('g-recaptcha-response', None)
                 if recaptcha_response:
                     dt = {
@@ -260,13 +262,15 @@ def cdi_form(request, hash_id):
                     r = requests.post('https://www.google.com/recaptcha/api/siteverify', data=dt)
                     result = r.json()
 
-                if administration_instance.study.allow_payment and administration_instance.bypass is None and result['success']:
-                    given_code = payment_code.objects.filter(hash_id__isnull = True, study = administration_instance.study).first()
+                if administration_instance.study.allow_payment and administration_instance.bypass is None:
+                    if (administration_instance.study.confirm_completion and result['success']) or not administration_instance.study.confirm_completion:
 
-                    if given_code:
-                        given_code.hash_id = hash_id
-                        given_code.assignment_date = datetime.datetime.now()
-                        given_code.save()
+                        given_code = payment_code.objects.filter(hash_id__isnull = True, study = administration_instance.study).first()
+
+                        if given_code:
+                            given_code.hash_id = hash_id
+                            given_code.assignment_date = datetime.datetime.now()
+                            given_code.save()
 
                 if administration_instance.study.researcher.username == "langcoglab" and administration_instance.study.allow_payment:
                     user_ip = str(get_ip(request))
@@ -302,7 +306,7 @@ def cdi_form(request, hash_id):
 
 def printable_view(request, hash_id):
     administration_instance = get_administration_instance(hash_id)
-    completed = int(request.get_signed_cookie('completed', '0'))
+    completed = int(request.get_signed_cookie('completed_num', '0'))
     prefilled_data = {}
 
     prefilled_data = prefilled_cdi_data(administration_instance)
@@ -329,7 +333,7 @@ def printable_view(request, hash_id):
     response = render(request, 'cdi_forms/printable_cdi.html', prefilled_data)
 
     if administration_instance.study.researcher.username == "langcoglab" and administration_instance.study.allow_payment:
-        response.set_signed_cookie('completed',str(completed))
+        response.set_signed_cookie('completed_num',str(completed))
     return response
 
 
