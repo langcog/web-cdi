@@ -263,13 +263,13 @@ def cdi_form(request, hash_id):
 
                 if administration_instance.study.allow_payment and administration_instance.bypass is None:
                     if (administration_instance.study.confirm_completion and result['success']) or not administration_instance.study.confirm_completion:
+                        if not payment_code.objects.filter(hash_id = hash_id).exists():
+                            given_code = payment_code.objects.filter(hash_id__isnull = True, study = administration_instance.study).first()
 
-                        given_code = payment_code.objects.filter(hash_id__isnull = True, study = administration_instance.study).first()
-
-                        if given_code:
-                            given_code.hash_id = hash_id
-                            given_code.assignment_date = datetime.datetime.now()
-                            given_code.save()
+                            if given_code:
+                                given_code.hash_id = hash_id
+                                given_code.assignment_date = datetime.datetime.now()
+                                given_code.save()
 
                 if administration_instance.study.researcher.username == "langcoglab" and administration_instance.study.allow_payment:
                     user_ip = str(get_ip(request))
