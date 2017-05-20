@@ -222,7 +222,6 @@ def cdi_form(request, hash_id):
     instrument_name = administration_instance.study.instrument.name
     instrument_model = model_map(instrument_name)
     refresh = False
-    too_fast = False
 
     if request.method == 'POST' :
         if not administration_instance.completed and administration_instance.due_date > timezone.now():
@@ -285,18 +284,12 @@ def cdi_form(request, hash_id):
                     administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now(), analysis = analysis)
                 except:
                     administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now())                
-                completion_time = administration_instance.last_modified - administration_instance.created_date
-                if completion_time.total_seconds() > 300 or request.user.is_authenticated():
-                    administration.objects.filter(url_hash = hash_id).update(completed = True)
-                    return printable_view(request, hash_id)
-                else:
-                    refresh = True
-                    too_fast = True
+                administration.objects.filter(url_hash = hash_id).update(completed = True)
+                return printable_view(request, hash_id)
 
     data = {}
     if request.method == 'GET' or refresh:
         data = prefilled_cdi_data(administration_instance)
-        data['slow_down'] = True if too_fast else None
         data['created_date'] = administration_instance.created_date
         data['captcha'] = None
         if administration_instance.study.confirm_completion and administration_instance.study.researcher.username == "langcoglab" and administration_instance.study.allow_payment:
