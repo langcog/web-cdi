@@ -15,7 +15,7 @@
 <form method="post" action="" class="form-signin">{% csrf_token %}
     {{ form|crispy }}
     <div>
-    <button type="submit" class="btn btn-primary">{% trans "Log in" %}</button>
+    <button type="submit" id = 'id_login' class="btn btn-primary">{% trans "Log in" %}</button>
     </div>
 </form>
 

@@ -7,9 +7,11 @@
 
 {% block contents %}
 {{ block.super }}
-
-		<p>{% trans 'You have successfully filled out our registration form.' %}</p>
-		<p>{% trans 'Please wait until the Web-CDI team can review your application.' %} <br>
-		{% trans 'You will receive an acceptance or rejection email within several days.' %}</p>
+		
+		<div id="success">
+			<p>{% trans 'You have successfully filled out our registration form.' %}</p>
+			<p>{% trans 'Please wait until the Web-CDI team can review your application.' %} <br>
+			{% trans 'You will receive an acceptance or rejection email within several days.' %}</p>
+		</div>
 
 {% endblock %}
