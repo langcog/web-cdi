@@ -2,9 +2,11 @@
 
 {% block nav_buttons %}
 {% if not completed %}
-<input name="btn-save" value="Save" class="btn btn-primary" type="submit">
-<input name="btn-submit" value="Submit" class="btn btn-primary submit-button" type="submit" onclick="clicked(event)">
-<input name="btn-back" value='Go back to Background Info' class="btn btn-primary" type="submit">
+<div class="row text-center button-wrapper">
+    <input name="btn-save" value="Save" class="btn btn-primary" type="submit">
+    <input name="btn-submit" value="Submit" class="btn btn-primary submit-button" type="submit" onclick="clicked(event)">
+    <input name="btn-back" value='Go back to Background Info' class="btn btn-primary" type="submit">
+</div>
 
 {% endif %}
 {% endblock %}
@@ -360,7 +362,7 @@
 
     </div> <br><br>
 
-    <div class="row text-center">
+    <div class="row text-center button-wrapper">
         <a class="btn btn-primary prev-cdi-page" href="#">&#60;&#60; Previous Page</a>
         <a class="btn btn-primary next-cdi-page" href="#">Next Page &#62;&#62;</a>
         <input name="btn-submit" value="Submit" class="btn btn-primary submit-button" type="submit" onclick="clicked(event)">
