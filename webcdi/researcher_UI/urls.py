@@ -2,6 +2,7 @@ from django.conf.urls import url
 
 from . import views
 
+# URL patterns for pages related to researcher interface
 urlpatterns = [
             url(r'^$', views.console, name='console'),
             url(r'^add_study/$', views.add_study, name='add_study'),
