@@ -1,567 +1,454 @@
 # -*- coding: utf-8 -*-
 
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
-from .forms import AddStudyForm, RenameStudyForm, AddPairedStudyForm
-from .models import study, administration, administration_data, get_meta_header, get_background_header, payment_code, ip_address
-import codecs, json, os, re, random, csv, datetime, cStringIO
-from .tables  import StudyAdministrationTable
-from django_tables2   import RequestConfig
-from django.db.models import Max
-from cdi_forms.views import model_map, get_model_header, background_info_form, prefilled_background_form
-from cdi_forms.models import BackgroundInfo
-from django.utils.encoding import force_text
+from django.shortcuts import render
+from .models import English_WS, English_WG, BackgroundInfo, requests_log, Zipcode
+import os.path, json, datetime, itertools, requests
+from researcher_UI.models import administration_data, administration, study, payment_code, ip_address
+from django.http import Http404
+from .forms import BackgroundForm, ContactForm
+from django.utils import timezone
+from django.http import JsonResponse, HttpResponse
 from django.core.serializers.json import DjangoJSONEncoder
+from django.core.mail import EmailMessage
+from django.template import Context
+from django.template.loader import get_template
+from django.contrib import messages
 from django.contrib.auth.models import User
-import pandas as pd
-import numpy as np
-from django.core.urlresolvers import reverse
-from decimal import Decimal
+from django.db import models
 from django.contrib.sites.shortcuts import get_current_site
+from django.core.urlresolvers import reverse
 from ipware.ip import get_ip
+from django.conf import settings
 
 
 
+PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__)) # Declare root folder for project and files. Varies between Mac and Linux installations.
 
-@login_required # For researchers only, requires user to be logged in (test-takers do not have an account and are blocked from this interface)
-def download_data(request, study_obj, administrations = None): # Download study data
-    # Create the HttpResponse object with the appropriate CSV header.
-    response = HttpResponse(content_type='text/csv') # Format response as a CSV
-    response['Content-Disposition'] = 'attachment; filename='+study_obj.name+'_data.csv''' # Name the CSV response
-    
-    model_header = get_model_header(study_obj.instrument.name) # Fetch the associated instrument model's variables
-    
-    # Fetch administration variables
-    admin_header = ['study_name', 'subject_id','repeat_num', 'administration_id', 'link', 'completed', 'completedBackgroundInfo', 'due_date', 'last_modified','created_date']
-    # background_header = [col for col in BackgroundInfo._meta.get_all_field_names() if col not in ['administration_id', 'administration']]
-
-    # Fetch background data variables
-    background_header = ['age','sex','zip_code','birth_order','multi_birth_boolean','multi_birth', 'birth_weight', 'born_on_due_date', 'early_or_late', 'due_date_diff', 'mother_yob', 'mother_education','father_yob', 'father_education', 'annual_income', 'child_hispanic_latino', 'child_ethnicity', 'caregiver_info', 'other_languages_boolean','other_languages','language_from', 'language_days_per_week', 'language_hours_per_day', 'ear_infections_boolean','ear_infections', 'hearing_loss_boolean','hearing_loss', 'vision_problems_boolean','vision_problems', 'illnesses_boolean','illnesses', 'services_boolean','services','worried_boolean','worried','learning_disability_boolean','learning_disability']
-
-    # Try to properly format CDI responses for pandas dataframe
-    try:
-        answers = administration_data.objects.values('administration_id', 'item_ID', 'value').filter(administration_id__in = administrations)
-        melted_answers = pd.DataFrame.from_records(answers).pivot(index='administration_id', columns='item_ID', values='value')
-        melted_answers.reset_index(level=0, inplace=True)
-    except:
-        melted_answers = pd.DataFrame(columns = get_model_header(study_obj.instrument.name))
-
-    # Format background data responses for pandas dataframe and eventual printing
-    try:
-        background_data = BackgroundInfo.objects.values().filter(administration__in = administrations)
-        new_background = pd.DataFrame.from_records(background_data)
-
-        for c in new_background.columns:
-            try:
-                new_background = new_background.replace({c: dict(BackgroundInfo._meta.get_field(c).choices)}) # Replaces integer and single letter responses in dataframe with more easily interpreted choices that were originally given to test-takers. For instance, gender in database is stored as 'M' but is presented to test-takers and researchers as 'Male' for a lesser chance of misinterpretation
-            except:
-                if 'boolean' in c or c == 'born_on_due_date': # Replace integer boolean responses with text responses (catches any columns missed by previous pass)
-                    new_background = new_background.replace({c: {0: 'No', 1: 'Yes', 2: 'Prefer not to disclose'}})
-                elif c == 'child_hispanic_latino':
-                    new_background = new_background.replace({c: {False: 'No', True: 'Yes'}})
-
-    except:
-        new_background(columns = ['administration_id'] + background_header)
-
-
-    # Try to combine background data and CDI responses
-    background_answers = pd.merge(new_background, melted_answers, how='outer', on = 'administration_id')
-
-    # Try to format administration data for pandas dataframe
-    try:
-        admin_data = pd.DataFrame.from_records(administrations.values()).rename(columns = {'id':'administration_id', 'study_id': 'study_name', 'url_hash': 'link'})
-    except:
-        admin_data = pd.DataFrame(columns = admin_header)
-    
-    # Replace study ID# with actual study name
-    admin_data['study_name'] = study_obj.name
-
-    # Merge administration data into already combined background/CDI form dataframe
-    combined_data = pd.merge(admin_data, background_answers, how='outer', on = 'administration_id')
-
-    # Recreate link for administration
-    test_url = ''.join(['http://', get_current_site(request).domain, reverse('administer_cdi_form', args=['a'*64])]).replace('a'*64+'/','')
-    combined_data['link'] = test_url + combined_data['link']
-
-    # If there are any missing columns (e.g., all test-takers for one study did not answer an item so it does not appear in database responses), add the empty columns in and don't break!
-    missing_columns = list(set(model_header) - set(combined_data.columns))
-    if missing_columns:
-        combined_data = combined_data.reindex(columns = np.append( combined_data.columns.values, missing_columns))
-    print "tweaked data!"
-
-    # Organize columns  
-    combined_data = combined_data[admin_header + background_header + model_header ]
-    print "reorganized column!"
-
-    # Turn pandas dataframe into a CSV
-    combined_data.to_csv(response, encoding='utf-8')
-
-    # Return CSV
-    return response
-
-
-
-@login_required
-def download_dictionary(request, study_obj): # Download dictionary for instrument, lists relevant information for each item
-    response = HttpResponse(content_type='text/csv') # Format the response as a CSV
-    response['Content-Disposition'] = 'attachment; filename='+study_obj.instrument.name+'_dictionary.csv''' # Name CSV
-
-    raw_item_data = model_map(study_obj.instrument.name).objects.values('itemID','item_type','category','definition','gloss') # Grab the relevant variables within the appropriate instrument model
-    pd.DataFrame.from_records(raw_item_data).to_csv(response, encoding='utf-8') # Convert nested dictionary into a pandas dataframe and then into a CSV
-
-    # Return CSV
-    return response    
-
-@login_required
-def download_links(request, study_obj, administrations = None): # Download only the associated administration links instead of the whole data spreadsheet
-
-    response = HttpResponse(content_type='text/csv') # Format response as a CSV
-    response['Content-Disposition'] = 'attachment; filename='+study_obj.name+'_links.csv''' # Name CSV
-
-    admin_data = pd.DataFrame.from_records(administrations.values()).rename(columns = {'id':'administration_id', 'study_id': 'study_name', 'url_hash': 'link'}) # Grab variables from administration objects
-    admin_data = admin_data[['study_name','subject_id', 'repeat_num', 'administration_id','link']] # Organize columns
-
-    admin_data['study_name'] = study_obj.name # Replace study ID number with actual study name
-
-    # Recreate administration links and add them to dataframe
-    test_url = ''.join(['http://', get_current_site(request).domain, reverse('administer_cdi_form', args=['a'*64])]).replace('a'*64+'/','')
-    admin_data['link'] = test_url + admin_data['link']
-    admin_data.to_csv(response, encoding='utf-8') # Convert dataframe into a CSV
-
-    # Return CSV
-    return response
-
- 
-@login_required
-def console(request, study_name = None, num_per_page = 20):
-    refresh = False
-    if request.method == 'POST' :
-        data = {}
-        permitted = study.objects.filter(researcher = request.user,  name = study_name).exists()
-        study_obj = study.objects.get(researcher= request.user, name= study_name)
-        if permitted :
-            if request.method == 'POST' :
-                ids = request.POST.getlist('select_col')
-                if 'administer-selected' in request.POST:
-                    if all([x.isdigit() for x in ids]):
-                        num_ids = map(int, ids)
-                        new_administrations = []
-                        sids_created = set()
-                        for nid in num_ids:
-                            admin_instance = administration.objects.get(id = nid)
-                            sid = admin_instance.subject_id
-                            if sid in sids_created:
-                                continue
-                            old_rep = administration.objects.filter(study = study_obj, subject_id = sid).count()
-                            new_administrations.append(administration(study =study_obj, subject_id = sid, repeat_num = old_rep+1, url_hash = random_url_generator(), completed = False, due_date = datetime.datetime.now()+datetime.timedelta(days=14)))
-                            sids_created.add(sid)
-
-
-                        administration.objects.bulk_create(new_administrations)
-                        refresh = True
-
-                elif 'delete-selected' in request.POST:
-                    ids = request.POST.getlist('select_col')
-                    if all([x.isdigit() for x in ids]):
-                        ids = list(set(map(int, ids)))
-                        administration.objects.filter(id__in = ids).delete()
-                        # for nid in ids:
-                        #     admin_object = administration.objects.get(id = nid)
-                        #     admin_object.delete()
-                        refresh = True
-
-                elif 'download-links' in request.POST:
-                    ids = request.POST.getlist('select_col')
-                    administrations = []
-                    if all([x.isdigit() for x in ids]):
-                        ids = list(set(map(int, ids)))
-                        administrations = administration.objects.filter(id__in = ids)
-                        return download_links(request, study_obj, administrations)
-                        refresh = True
-
-
-                elif 'download-selected' in request.POST:
-                    ids = request.POST.getlist('select_col')
-                    if all([x.isdigit() for x in ids]):
-                        ids = list(set(map(int, ids)))
-                        administrations = administration.objects.filter(id__in = ids)
-                        return download_data(request, study_obj, administrations)
-                        refresh = True
-
-                elif 'delete-study' in request.POST:
-                    study_obj.delete()
-                    study_name = None
-                    refresh = True
-
-                elif 'download-study' in request.POST:
-                    administrations = administration.objects.filter(study = study_obj)
-                    return download_data(request, study_obj, administrations)
-
-                elif 'download-dictionary' in request.POST:
-                    return download_dictionary(request, study_obj)
-
-                elif 'view_all' in request.POST:
-                    if request.POST['view_all'] == "Show All":
-                        num_per_page = administration.objects.filter(study = study_obj).count()
-                    elif request.POST['view_all'] == "Show 20":
-                        num_per_page = 20
-                    refresh = True
-
+# Map name of instrument model (English_WG & English_WS) to its string title
+def model_map(name):
+    mapping = {"English_WS": English_WS, "English_WG": English_WG}
+    assert name in mapping, name+"instrument not added to the mapping in views.py model_map function"
+    return mapping[name]
         
-    if request.method == 'GET' or refresh:
-        username = None
-        if request.user.is_authenticated():
-            username = request.user.username
-        context = dict()
-        context['username'] =  username 
-        context['studies'] = study.objects.filter(researcher = request.user).order_by('id')
-        context['instruments'] = []
-        if study_name is not None:
+# Gets list of itemIDs 'item_XX' from an instrument model
+def get_model_header(name):
+    return list(model_map(name).objects.values_list('itemID', flat=True))
+    
+# If the BackgroundInfo model was filled out before, populate BackgroundForm with responses based on administation object
+def prefilled_background_form(administration_instance):
+    background_instance = BackgroundInfo.objects.get(administration = administration_instance)
+
+    background_form = BackgroundForm(instance = background_instance)  
+    return background_form
+
+# Find the administration object for a test-taker based on their unique hash code.
+def get_administration_instance(hash_id):
+    try:
+        administration_instance = administration.objects.get(url_hash = hash_id)
+    except:
+        raise Http404("Administration not found")
+    return administration_instance
+
+# Finds and renders BackgroundForm based on given hash ID code.
+def background_info_form(request, hash_id):
+    administration_instance = get_administration_instance(hash_id) # Get administation object based on hash ID
+
+    # Populate a dictionary with information regarding the instrument (age range, language, and name) along with information on child's age and zipcode for modification. Will be sent to forms.py for form validation.
+    age_ref = {}
+    age_ref['language'] = administration_instance.study.instrument.language
+    age_ref['instrument'] = administration_instance.study.instrument.name
+    age_ref['min_age'] = administration_instance.study.instrument.min_age
+    age_ref['max_age'] = administration_instance.study.instrument.max_age
+    age_ref['child_age'] = None
+    age_ref['zip_code'] = ''
+
+    refresh = False # Refreshing page is automatically off
+    background_form = None
+        
+    if request.method == 'POST' : #if test-taker is sending in form responses
+        if not administration_instance.completed and administration_instance.due_date > timezone.now(): # And test has yet to be completed and has not timed out
             try:
-                current_study = study.objects.get(researcher= request.user, name= study_name)
-                administration_table = StudyAdministrationTable(administration.objects.filter(study = current_study))
-                if not current_study.confirm_completion:
-                    administration_table.exclude = ("study",'id', 'url_hash','completedBackgroundInfo', 'analysis')
-                RequestConfig(request, paginate={'per_page': num_per_page}).configure(administration_table)
-                context['current_study'] = current_study.name
-                context['num_per_page'] = num_per_page
-                context['study_instrument'] = current_study.instrument.verbose_name
-                context['study_group'] = current_study.study_group
-                context['study_administrations'] = administration_table
-                context['completed_admins'] = administration.objects.filter(study = current_study, completed = True).count()
-                context['unique_children'] = count = administration.objects.filter(study = current_study, completed = True).values('subject_id').distinct().count()
-                context['allow_payment'] = current_study.allow_payment
-                context['available_giftcards'] = payment_code.objects.filter(hash_id__isnull = True, study = current_study).count()
+                background_instance = BackgroundInfo.objects.get(administration = administration_instance) # Try to fetch BackgroundInfo model already stored in database.
+                if background_instance.age:
+                    age_ref['child_age'] = background_instance.age # Populate dictionary with child's age for validation in forms.py.
+                background_form = BackgroundForm(request.POST, instance = background_instance, age_ref = age_ref) # Save filled out form as an object
             except:
-                pass
-        return render(request, 'researcher_UI/interface.html', context)
+                background_form = BackgroundForm(request.POST, age_ref = age_ref) # Pull up an empty BackgroundForm with information regarding only the instrument.
 
-@login_required 
-def rename_study(request, study_name):
+            if background_form.is_valid(): # If form passed forms.py validation (clean function)
+                background_instance = background_form.save(commit = False) # Save but do not commit form just yet.
+
+                child_dob = background_form.cleaned_data.get('child_dob') # Try to fetch DOB
+
+                if child_dob: # If DOB was entered into form, calculate age based on DOB and today's date.
+                    day_diff = datetime.date.today().day - child_dob.day
+                    age = (datetime.date.today().year - child_dob.year) * 12 +  (datetime.date.today().month - child_dob.month) + (1 if day_diff >=15 else 0)
+                else:
+                    age = None
+
+                # If age was properly calculated from 'child_dob', save it to the model object
+                if age:
+                    background_instance.age = age
+
+                # Find the raw zip code value and make it compliant with Safe Harbor guidelines. Only store the first 3 digits if the total population for that prefix is greataer than 20,000 (found prohibited prefixes via Census API data). If prohibited zip code, replace value with state abbreviations.
+                zip_prefix = ''
+                raw_zip = background_instance.zip_code
+                if raw_zip and raw_zip != 'None':
+                    zip_prefix = raw_zip[:3]
+                    if Zipcode.objects.filter(zip_prefix = zip_prefix).exists():
+                        zip_prefix = Zipcode.objects.filter(zip_prefix = zip_prefix).first().state
+                    else:
+                        zip_prefix = zip_prefix + '**'
+                background_instance.zip_code = zip_prefix
+
+                # Save model object to database
+                background_instance.administration = administration_instance
+                background_instance.save()
+
+                # If 'Next' button is pressed, update last_modified and mark completion of BackgroundInfo. Fetch CDI form by hash ID.
+                if 'btn-next' in request.POST and request.POST['btn-next'] == 'Next':
+                    administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now())
+                    administration.objects.filter(url_hash = hash_id).update(completedBackgroundInfo = True)
+                    request.method = "GET"
+                    return cdi_form(request, hash_id)
+
+    # For fetching or refreshing background form.
+    if request.method == 'GET' or refresh:
+        try:
+            # Fetch responses stored in BackgroundInfo model
+            background_instance = BackgroundInfo.objects.get(administration = administration_instance)
+            if background_instance.age:
+                age_ref['child_age'] = background_instance.age
+            if len(background_instance.zip_code) == 3:
+                background_instance.zip_code = background_instance.zip_code + '**'
+            background_form = BackgroundForm(instance = background_instance, age_ref = age_ref)
+        except:
+            # If you cannot fetch responses, render a blank form
+            background_form = BackgroundForm(age_ref = age_ref)  
+
+    # Store relevant variables in a dictionary for template rendering. Includes prefilled responses, hash ID, data on study (researcher's name, instrument language, age range, related studies, etc.)
     data = {}
-    form_package = {}
-    #check if the researcher exists and has permissions over the study
-    permitted = study.objects.filter(researcher = request.user,  name = study_name).exists()
-    study_obj = study.objects.get(researcher= request.user, name= study_name)
-    if request.method == 'POST' :
-        form = RenameStudyForm(study_name, request.POST, instance = study_obj)
-        raw_gift_codes = None
-        all_new_codes = None
-        old_codes = None
-        amount_regex = None
-        if form.is_valid():
-            researcher = request.user
-            new_study_name = form.cleaned_data.get('name')
-            raw_gift_codes = form.cleaned_data.get('gift_codes')
-            raw_gift_amount = form.cleaned_data.get('gift_amount')
-            raw_test_period = form.cleaned_data.get('test_period')
+    data['background_form'] = background_form
+    data['hash_id'] = hash_id
+    data['username'] = administration_instance.study.researcher.username
+    data['completed'] = administration_instance.completed
+    data['due_date'] = administration_instance.due_date
+    data['language'] = administration_instance.study.instrument.language
+    data['title'] = administration_instance.study.instrument.verbose_name
+    data['max_age'] = administration_instance.study.instrument.max_age
+    data['min_age'] = administration_instance.study.instrument.min_age
+    data['study_waiver'] = administration_instance.study.waiver
+    data['allow_payment'] = administration_instance.study.allow_payment
+    if data['allow_payment'] and administration_instance.bypass is None:
+        try:
+            data['gift_amount'] = payment_code.objects.filter(study = administration_instance.study).values_list('gift_amount', flat=True).first()
+        except:
+            data['gift_amount'] = None
+    study_name = administration_instance.study.name
+    study_group = administration_instance.study.study_group
+    if study_group:
+        data['study_group'] = study_group
+        data['alt_study_info'] = study.objects.filter(study_group = study_group, researcher = administration_instance.study.researcher ).exclude(name = study_name).values_list("name","instrument__min_age", "instrument__max_age", "instrument__language")
+    else:
+        data['study_group'] = None
+        data['alt_study_info'] = None
 
-            study_obj = form.save(commit=False)
-            study_obj.test_period = raw_test_period if (raw_test_period >= 1 and raw_test_period <= 30) else 14
+    # Render template
+    return render(request, 'cdi_forms/background_info.html', data)
 
-            if new_study_name != study_name:
-                if study.objects.filter(researcher = researcher, name = study_obj.name).exists():
-                    study_obj.name = study_name
+# Stitch section nesting in cdi_forms/form_data/*.json and instrument models together and prepare for CDI form rendering
+def cdi_items(object_group, item_type, prefilled_data, item_id):
+    for obj in object_group:
+        if item_type == 'checkbox':
+            obj['prefilled_value'] = obj['itemID'] in prefilled_data
+            if obj['gloss'] is None:
+                obj['gloss'] = obj['definition']
 
-            study_obj.save()
+        if item_type == 'radiobutton' or item_type == 'modified_checkbox':
+            split_choices = map(unicode.strip, obj['choices'].split(';'))
+            prefilled_values = [False if obj['itemID'] not in prefilled_data else x == prefilled_data[obj['itemID']] for x in split_choices]
+            obj['text'] = obj['gloss']
 
-            new_study_name = study_obj.name
+            if obj['definition'] is not None and obj['definition'].find('/') >= 0 and item_id != 'word':
+                split_definition = map(unicode.strip, obj['definition'].split('/'))
+                obj['choices'] = zip(split_definition, split_choices, prefilled_values)
+            else:
+                obj['choices'] = zip(split_choices, split_choices, prefilled_values)
+                if obj['definition'] is not None:
+                    obj['text'] = obj['definition']
 
-            if raw_gift_codes:
-                new_payment_codes = []
-                used_codes = []
-                gift_codes = re.split('[,;\s\t\n]+', raw_gift_codes)
-                gift_regex = re.compile(r'^[a-zA-Z0-9]{4}-[a-zA-Z0-9]{6}-[a-zA-Z0-9]{4}$')
-                gift_type = "Amazon"
-                gift_codes = filter(gift_regex.search, gift_codes)                
+        if item_type == 'textbox':
+            if obj['itemID'] in prefilled_data:
+                obj['prefilled_value'] = prefilled_data[obj['itemID']]
+
+    return object_group 
+
+# Prepare items with prefilled reponses for later rendering. Dependent on cdi_items
+def prefilled_cdi_data(administration_instance):
+    prefilled_data_list = administration_data.objects.filter(administration = administration_instance).values('item_ID', 'value') # Grab a list of prefilled responses
+    instrument_name = administration_instance.study.instrument.name # Grab instrument name
+    instrument_model = model_map(instrument_name) # Grab appropriate model given the instrument name associated with test
+    prefilled_data = {x['item_ID']: x['value'] for x in prefilled_data_list} # Store prefilled data in a dictionary with item_ID as the key and response as the value.
+    with open(PROJECT_ROOT+'/form_data/'+instrument_name+'_meta.json', 'r') as content_file: # Open associated json file with section ordering and nesting
+        # Read json file and store additional variables regarding the instrument, study, and the administration
+        data = json.loads(content_file.read())
+        data['title'] = administration_instance.study.instrument.verbose_name
+        data['instrument_name'] = administration_instance.study.instrument.name
+        data['completed'] = administration_instance.completed
+        data['due_date'] = administration_instance.due_date
+        data['page_number'] = administration_instance.page_number
+        data['hash_id'] = administration_instance.url_hash
+        data['study_waiver'] = administration_instance.study.waiver
+        data['confirm_completion'] = administration_instance.study.confirm_completion
+        raw_objects = []
+
+        #As some items are nested on different levels, carefully parse and store items for rendering.
+        for part in data['parts']:
+            for item_type in part['types']:
+                if 'sections' in item_type:
+                    for section in item_type['sections']:
+                        group_objects = instrument_model.objects.filter(category__exact=section['id']).values()
+                        
+                        x = cdi_items(group_objects, item_type['type'], prefilled_data, item_type['id'])
+                        section['objects'] = x
+                        raw_objects.extend(x)
+                        if any(['*' in x['gloss'] for x in section['objects']]):
+                            section['starred'] = "*Or the word used in your family"  
+
+                                
+                else:
+                    group_objects = instrument_model.objects.filter(item_type__exact=item_type['id']).values()
+                    x = cdi_items(group_objects, item_type['type'], prefilled_data, item_type['id'])
+                    item_type['objects'] = x
+                    raw_objects.extend(x)
+        data['cdi_items'] = json.dumps(raw_objects, cls=DjangoJSONEncoder)
+
+        # If age is stored in database, add it to dictionary
+        try:
+            age = BackgroundInfo.objects.filter(administration = administration_instance).values_list('age', flat=True)
+        except:
+            age = ''
+        data['age'] = age                    
+    return data
+
+# Convert string boolean to true boolean
+def parse_analysis(raw_answer):
+    if raw_answer == 'True':
+        answer = True
+    elif raw_answer == 'False':
+        answer = False
+    else:
+        answer = None
+    return answer
+
+# Render CDI form. Dependent on prefilled_cdi_data
+def cdi_form(request, hash_id):
+
+    administration_instance = get_administration_instance(hash_id) # Get administration instance.
+    instrument_name = administration_instance.study.instrument.name # Get instrument name associated with study
+    instrument_model = model_map(instrument_name) # Fetch instrument model based on instrument name.
+    refresh = False
+
+    if request.method == 'POST' : # If submitting responses to CDI form
+        if not administration_instance.completed and administration_instance.due_date > timezone.now(): # If form has not been completed and it has not expired
+            for key in request.POST: # Parse responses and individually save each item's response (empty checkboxes or radiobuttons are not saved)
+                items = instrument_model.objects.filter(itemID = key)
+                if len(items) == 1:
+                    item = items[0]
+                    value = request.POST[key]
+                    if item.choices:
+                        choices = map(unicode.strip, item.choices.split(';'))
+                        if value in choices:
+                            administration_data.objects.update_or_create(administration = administration_instance, item_ID = key, defaults = {'value': value})
+                    else:
+                        if value:
+                            administration_data.objects.update_or_create(administration = administration_instance, item_ID = key, defaults = {'value': value})
+            if 'btn-save' in request.POST and request.POST['btn-save'] == 'Save': # If the save button was pressed
+                try:
+                    page_number = request.POST['page_number'] # Note the page number for completion
+                    analysis = parse_analysis(request.POST['analysis']) # Note whether test-taker asserted that the child's age was accurate and form was filled out to best of ability
+
+                    administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now(), page_number = page_number, analysis = analysis) # Update administration object
+                except: # If page_number or analysis question fail to be accessed
+                    administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now()) # Just update the last_modified field in administation object
+                refresh = True
+            elif 'btn-back' in request.POST and request.POST['btn-back'] == 'Go back to Background Info': # If Back button was pressed
+                administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now()) # Update last_modified
+                request.method = "GET"
+                return background_info_form(request, hash_id) # Fetch Background info template
+            elif 'btn-submit' in request.POST and request.POST['btn-submit'] == 'Submit': # If 'Submit' button was pressed
+                
+                #Some studies may require successfully passing a ReCaptcha test for submission. If so, get for a passing response before marking form as complete.
+                result = {'success': None}
+                recaptcha_response = request.POST.get('g-recaptcha-response', None)
+                if recaptcha_response:
+                    dt = {
+                        'secret': settings.RECAPTCHA_PRIVATE_KEY,
+                        'response': recaptcha_response
+                    }
+                    r = requests.post('https://www.google.com/recaptcha/api/siteverify', data=dt)
+                    result = r.json()
+
+                # If study allows for subject payment and has yet to hit its cap on subjects, try to provide the test-taker with a gift card code.
+                if administration_instance.study.allow_payment and administration_instance.bypass is None:
+                    if (administration_instance.study.confirm_completion and result['success']) or not administration_instance.study.confirm_completion:
+                        if not payment_code.objects.filter(hash_id = hash_id).exists():
+                            given_code = payment_code.objects.filter(hash_id__isnull = True, study = administration_instance.study).first()
+
+                            if given_code:
+                                given_code.hash_id = hash_id
+                                given_code.assignment_date = datetime.datetime.now()
+                                given_code.save()
+
+                # If the study is run by langcoglab and the study allows for subject payments, store the IP address for security purposes
+                if administration_instance.study.researcher.username == "langcoglab" and administration_instance.study.allow_payment:
+                    user_ip = str(get_ip(request))
+                    print user_ip
+
+                    if user_ip and user_ip != 'None':
+                        ip_address.objects.create(study = administration_instance.study,ip_address = user_ip)
 
                 try:
-                    amount_regex = Decimal(re.search('([0-9]{1,3})?.[0-9]{2}', raw_gift_amount).group(0))
-                except:
-                    pass
+                    analysis = parse_analysis(request.POST['analysis']) # Note whether the response given to the analysis question
+                    administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now(), analysis = analysis) #Update administration object
+                except: # If grabbing the analysis response failed
+                    administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now()) # Update last_modified               
+                administration.objects.filter(url_hash = hash_id).update(completed = True) # Mark test as complete
+                return printable_view(request, hash_id) # Render completion page
 
-                if amount_regex:
-
-                    for gift_code in gift_codes:
-                        if not payment_code.objects.filter(payment_type = gift_type, gift_code = gift_code).exists():
-                            new_payment_codes.append(payment_code(study =study_obj, payment_type = gift_type, gift_code = gift_code, gift_amount = amount_regex))
-                        else:
-                            used_codes.append(gift_code)
-                if not used_codes:
-                    all_new_codes = True
-
-
-            if raw_gift_codes:
-                if not all_new_codes or not amount_regex: 
-                    data['stat'] = "error";
-                    err_msg = []
-                    if not all_new_codes:
-                        err_msg = err_msg + ['The following codes are already in the database:'] + used_codes;
-                    if not amount_regex:
-                        err_msg = err_msg + [ "Please enter in a valid amount for \"Amount per Card\""];
-
-                    data['error_message'] = "<br>".join(err_msg);
-                    return HttpResponse(json.dumps(data), content_type="application/json")
-                else:
-                    if all_new_codes:
-                        payment_code.objects.bulk_create(new_payment_codes)
-                        data['stat'] = "ok";
-                        data['redirect_url'] = "/interface/study/"+new_study_name+"/";
-                        return HttpResponse(json.dumps(data), content_type="application/json") 
-            else:
-                data['stat'] = "ok";
-                data['redirect_url'] = "/interface/study/"+new_study_name+"/";
-                return HttpResponse(json.dumps(data), content_type="application/json")            
-
-        else:
-            data['stat'] = "re-render";
-            form_package['form'] = form
-            form_package['form_name'] = 'Update Study'
-            form_package['allow_payment'] = study_obj.allow_payment
-            return render(request, 'researcher_UI/add_study_modal.html', form_package)
-    else:
-
-        form = RenameStudyForm(instance = study_obj, old_study_name = study_obj.name)
-        form_package['form'] = form
-        form_package['form_name'] = 'Update Study'
-        form_package['allow_payment'] = study_obj.allow_payment
-        return render(request, 'researcher_UI/add_study_modal.html', form_package)
-        
-@login_required 
-def add_study(request):
+    # Fetch prefilled responses
     data = {}
-    if request.method == 'POST' :
-        form = AddStudyForm(request.POST)
-        if form.is_valid():
-            study_instance = form.save(commit=False)
-            researcher = request.user
-            study_name = form.cleaned_data.get('name')
-            study_instance.researcher = researcher
+    if request.method == 'GET' or refresh:
+        data = prefilled_cdi_data(administration_instance)
+        data['created_date'] = administration_instance.created_date
+        data['captcha'] = None
+        if administration_instance.study.confirm_completion and administration_instance.study.researcher.username == "langcoglab" and administration_instance.study.allow_payment:
+            data['captcha'] = 'True'
 
-            if not study.objects.filter(researcher = researcher, name = study_name).exists():
+    # Render CDI form with prefilled responses and study context
+    return render(request, 'cdi_forms/cdi_form.html', data)
 
-                study_instance.save()
-                data['stat'] = "ok";
-                data['redirect_url'] = "/interface/study/"+study_name+"/";
-                return HttpResponse(json.dumps(data), content_type="application/json")
-            else:
-                data['stat'] = "error";
-                data['error_message'] = "Study already exists; Use a unique name";
-                return HttpResponse(json.dumps(data), content_type="application/json")
+# Render completion page
+def printable_view(request, hash_id):
+    administration_instance = get_administration_instance(hash_id) # Get administration object based on hash ID
+    completed = int(request.get_signed_cookie('completed_num', '0')) # If there is a cookie for a previously completed test, get it
+    
+    # Create a blank dictionary and then fill it with prefilled background and CDI data, along with hash ID and information regarding the gift card code if subject is to be paid
+    prefilled_data = {}
+    prefilled_data = prefilled_cdi_data(administration_instance)
+    try:
+        #Get form from database
+        background_form = prefilled_background_form(administration_instance)
+    except:
+        #Blank form
+        background_form = BackgroundForm()  
+    prefilled_data['background_form'] = background_form
+    prefilled_data['hash_id'] = hash_id
+    prefilled_data['gift_code'] = None
+    prefilled_data['gift_amount'] = None
+    if administration_instance.study.allow_payment and administration_instance.bypass is None:
+        if payment_code.objects.filter(hash_id = hash_id).exists():
+            gift_card = payment_code.objects.get(hash_id = hash_id)
+            prefilled_data['gift_code'] = gift_card.gift_code
+            prefilled_data['gift_amount'] = gift_card.gift_amount
         else:
-            data['stat'] = "re-render";
-            return render(request, 'researcher_UI/add_study_modal.html', {'form': form, 'form_name': 'Add New Study'})
-    else:
-        form = AddStudyForm()
-        return render(request, 'researcher_UI/add_study_modal.html', {'form': form, 'form_name': 'Add New Study'})
+            prefilled_data['gift_code'] = 'ran out'
+            prefilled_data['gift_amount'] = 'ran out'
+
+    prefilled_data['allow_sharing'] = administration_instance.study.allow_sharing
+
+    # Pre-render template and add a cookie for form completion before sending template back to browser.
+    response = render(request, 'cdi_forms/printable_cdi.html', prefilled_data)
+
+    if administration_instance.study.researcher.username == "langcoglab" and administration_instance.study.allow_payment:
+        response.set_signed_cookie('completed_num',str(completed))
+    return response
 
 
-@login_required 
-def add_paired_study(request):
-    data = {}
-    researcher = request.user
+# As the entire test (background --> CDI --> completion page) share the same URL, access the database to determine current status of test and render the appropriate template
+def administer_cdi_form(request, hash_id):
+    try:
+        administration_instance = administration.objects.get(url_hash = hash_id)
+    except:
+        raise Http404("Administration not found")
 
-    if request.method == 'POST' :
-        form = AddPairedStudyForm(request.POST)
-        if form.is_valid():
-            study_group = form.cleaned_data.get('study_group')
-            paired_studies = form.cleaned_data.get('paired_studies')
-            permissions = []
-            for one_study in paired_studies:
-                permitted = study.objects.filter(researcher = researcher,  name = one_study).exists()
-                permissions.append(permitted)
-                if permitted:
-                    study_obj = study.objects.get(researcher = researcher,  name = one_study)                    
-                    study_obj.study_group = study_group
-                    study_obj.save()
+    refresh = False
+    if request.method == 'POST':
+        if not administration_instance.completed and administration_instance.due_date > timezone.now():
+            requests_log.objects.create(url_hash = hash_id, request_type="POST")
+            
+            if 'background-info-form' in request.POST:
+                return background_info_form(request, hash_id)
 
-            if all(True for permission in permissions):
-                data['stat'] = "ok";
-                data['redirect_url'] = "/interface/";
-                return HttpResponse(json.dumps(data), content_type="application/json")
+            elif 'cdi-form' in request.POST:
+                return cdi_form(request, hash_id)
 
             else:
-                data['stat'] = "error";
-                data['error_message'] = "Study group already exists; Use a unique name";
-                return HttpResponse(json.dumps(data), content_type="application/json")
+                refresh = True
         else:
-            print form
-            data['stat'] = "re-render";
-            return render(request, 'researcher_UI/add_paired_study_modal.html', {'form': form})
-    else:
-        form = AddPairedStudyForm(researcher = researcher)
-        return render(request, 'researcher_UI/add_paired_study_modal.html', {'form': form})
+            request.method = 'GET'
 
-def random_url_generator(size=64, chars='0123456789abcdef'):
-    return ''.join(random.choice(chars) for _ in range(size))
-
-
-@login_required 
-def administer_new(request, study_name):
-    data = {}
-    context = dict()
-    #check if the researcher exists and has permissions over the study
-    permitted = study.objects.filter(researcher = request.user,  name = study_name).exists()
-    study_obj = study.objects.get(researcher= request.user, name= study_name)
-
-    if request.method == 'POST' :
-        if permitted :
-            params = dict(request.POST)
-            validity = True
-            data['error_message'] = ''
-            raw_ids_csv = request.FILES['subject-ids-csv'] if 'subject-ids-csv' in request.FILES else None
-
-            if params['new-subject-ids'][0] == '' and params['autogenerate-count'][0] == '' and raw_ids_csv is None:
-                validity = False
-                data['error_message'] += "Form is empty\n"
-
-            if raw_ids_csv:
-                if 'csv-header' in request.POST:
-                    ids_df = pd.read_csv(raw_ids_csv)
-                    if request.POST['subject-ids-column']:
-                        subj_column = request.POST['subject-ids-column']
-                        if subj_column in ids_df.columns:
-                            ids_to_add = ids_df[subj_column]
-                            ids_type =  ids_to_add.dtype
-                        else:
-                            ids_type = 'missing'
-
-                    else:
-                        ids_to_add = ids_df[ids_df.columns[0]]
-                        ids_type =  ids_to_add.dtype
-
-                else:
-                    ids_df = pd.read_csv(raw_ids_csv, header = None)
-                    ids_to_add = ids_df[ids_df.columns[0]]
-                    ids_type =  ids_to_add.dtype
-
-                if ids_type != 'int64':
-                    validity = False
-                    if 'csv-header' not in request.POST:
-                        data['error_message'] += "Non integer subject ids. Make sure first row is numeric\n"
-                    else:
-                        if ids_type == 'missing':
-                            data['error_message'] += "Unable to find specified column. Check for any typos."
-                        else:
-                            data['error_message'] += "Non integer subject ids\n"
-
-
-            if params['new-subject-ids'][0] != '':
-                subject_ids = re.split('[,;\s\t\n]+', str(params['new-subject-ids'][0]))
-                subject_ids = filter(None, subject_ids)
-                subject_ids_numbers = all([x.isdigit() for x in subject_ids])
-                if not subject_ids_numbers:
-                    validity = False
-                    data['error_message'] += "Non integer subject ids\n"
-
-            if params['autogenerate-count'][0] != '':
-                autogenerate_count = params['autogenerate-count'][0]
-                autogenerate_count_isdigit = autogenerate_count.isdigit()
-                if not autogenerate_count_isdigit:
-                    validity = False
-                    data['error_message'] += "Non integer number of IDs to autogenerate\n"
-
-            if validity:
-                new_administrations = []
-                test_period = int(study_obj.test_period)
-                if raw_ids_csv:
-
-                    subject_ids = ids_to_add.tolist()
-
-                    for sid in subject_ids:
-                        new_hash = random_url_generator()
-                        old_rep = administration.objects.filter(study = study_obj, subject_id = sid).count()
-                        new_administrations.append(administration(study =study_obj, subject_id = sid, repeat_num = old_rep+1, url_hash = new_hash, completed = False, due_date = datetime.datetime.now()+ datetime.timedelta(days=test_period)))
-
-                if params['new-subject-ids'][0] != '':
-                    subject_ids = re.split('[,;\s\t\n]+', str(params['new-subject-ids'][0]))
-                    subject_ids = filter(None, subject_ids)
-                    subject_ids = map(int, subject_ids)
-                    for sid in subject_ids:
-                        new_hash = random_url_generator()
-                        old_rep = administration.objects.filter(study = study_obj, subject_id = sid).count()
-                        new_administrations.append(administration(study =study_obj, subject_id = sid, repeat_num = old_rep+1, url_hash = new_hash, completed = False, due_date = datetime.datetime.now()+ datetime.timedelta(days=test_period)))
-
-
-                if params['autogenerate-count'][0]!='':
-                    autogenerate_count = int(params['autogenerate-count'][0])
-                    max_subject_id = administration.objects.filter(study=study_obj).aggregate(Max('subject_id'))['subject_id__max']
-                    if max_subject_id is None:
-                        max_subject_id = 0
-                    for sid in range(max_subject_id+1, max_subject_id+autogenerate_count+1):
-                        new_hash = random_url_generator()
-                        new_administrations.append(administration(study =study_obj, subject_id = sid, repeat_num = 1, url_hash = new_hash, completed = False, due_date = datetime.datetime.now()+datetime.timedelta(days=test_period)))
-
-                administration.objects.bulk_create(new_administrations)
-                data['stat'] = "ok";
-                data['redirect_url'] = "/interface/study/"+study_name+"/?sort=-created_date";
-                data['study_name'] = study_name
-                return HttpResponse(json.dumps(data), content_type="application/json")
+    if request.method == 'GET' or refresh:
+        requests_log.objects.create(url_hash = hash_id, request_type="GET")
+        if not administration_instance.completed and administration_instance.due_date > timezone.now():
+            if administration_instance.completedBackgroundInfo:
+                return cdi_form(request, hash_id)
             else:
-                data['stat'] = "error";
-                return HttpResponse(json.dumps(data), content_type="application/json")
+                return background_info_form(request, hash_id)
         else:
-            data['stat'] = "error";
-            data['error_message'] = "permission denied";
-            data['redirect_url'] = "interface/";
-            return HttpResponse(json.dumps(data), content_type="application/json")
-    else:
-        context['username'] = request.user.username
-        context['study_name'] = study_name
-        context['study_group'] = study_obj.study_group
-        return render(request, 'researcher_UI/administer_new_modal.html', context)
+            # only printable
+            return printable_view(request, hash_id)
 
-def administer_new_parent(request, username, study_name):
-    data={}
-    new_administrations = []
-    autogenerate_count = 1
+# For studies that are grouped together, render a modal form that properly displays information regarding each study.
+def find_paired_studies(request, username, study_group):
     researcher = User.objects.get(username = username)
-    study_obj = study.objects.get(name= study_name, researcher = researcher)
-    subject_cap = study_obj.subject_cap
-    test_period = int(study_obj.test_period)
-    completed_admins = administration.objects.filter(study = study_obj, completed = True).count()
-    bypass = request.GET.get('bypass', None)
-    let_through = None
-    prev_visitor = 0
-    visitor_ip = str(get_ip(request))
-    completed = int(request.get_signed_cookie('completed_num', '0'))
-    if visitor_ip:
-        prev_visitor = ip_address.objects.filter(ip_address = visitor_ip).count()
-
-    if (prev_visitor < 1 and completed < 2) or request.user.is_authenticated():
-        if completed_admins < subject_cap:
-            let_through = True
-        elif subject_cap is None:
-            let_through = True
-        elif bypass:
-            let_through = True
-
-    if let_through:
-        max_subject_id = administration.objects.filter(study=study_obj).aggregate(Max('subject_id'))['subject_id__max']
-        if max_subject_id is None:
-            max_subject_id = 0
-        new_admin = administration.objects.create(study =study_obj, subject_id = max_subject_id+1, repeat_num = 1, url_hash = random_url_generator(), completed = False, due_date = datetime.datetime.now()+datetime.timedelta(days=test_period))
-        new_hash_id = new_admin.url_hash
-        if bypass:
-            new_admin.bypass = True
-            new_admin.save()
-        redirect_url = reverse('administer_cdi_form', args=[new_hash_id])
-    else:
-        redirect_url = reverse('overflow', args=[username, study_name])
-    return redirect(redirect_url)
-
-def overflow(request, username, study_name):
+    possible_studies = study.objects.filter(study_group = study_group, researcher = researcher).values("name","instrument__min_age", "instrument__max_age", "instrument__language","subject_cap").annotate(admin_count=models.Sum(
+    models.Case(
+        models.When(administration__completed=True, then=1),
+        default=0, output_field=models.IntegerField()
+    ))).annotate(slots_left=models.F('subject_cap')-models.F('admin_count'))
     data = {}
+    data['background_form'] = BackgroundForm()
+    data['possible_studies'] = json.dumps(list(possible_studies), cls=DjangoJSONEncoder)
     data['username'] = username
-    data['study_name'] = study_name
-    visitor_ip = str(get_ip(request))
-    prev_visitor = 0
-    if (visitor_ip and visitor_ip != 'None'):
-        prev_visitor = ip_address.objects.filter(ip_address = visitor_ip).count()
-    if prev_visitor > 0 and not request.user.is_authenticated():
-        data['repeat'] = True
+    return render(request, 'cdi_forms/study_group.html', data)
 
+# For test-takers contacting a Web-CDI admin
+def contact(request, hash_id):
 
-    return render(request, 'cdi_forms/overflow.html', data)
+    # Determine administration URL
+    redirect_url = ''.join(['http://', get_current_site(request).domain, reverse('administer_cdi_form', args=[hash_id])])
 
+    # Render bare contact form
+    form = ContactForm(redirect_url = redirect_url)
+
+    if request.method == 'POST': # If submitting a responses
+
+        form = ContactForm(request.POST, redirect_url = redirect_url)
+
+        if form.is_valid(): # If form is validated
+
+            # Access responses and render an email to be sent to administrator.
+            contact_name = request.POST.get('contact_name', '')
+            contact_email = request.POST.get('contact_email', '')
+            contact_id = request.POST.get('contact_id', '')
+            form_content = request.POST.get('content', '')
+            template = get_template('cdi_forms/contact_template.txt')
+            context = Context({
+                'contact_name': contact_name,
+                'contact_id': contact_id,
+                'contact_email': contact_email,
+                'form_content': form_content,
+            })
+            content = template.render(context)
+            email = EmailMessage(
+                "New contact form submission",
+                content,
+                "webcdi.stanford.edu" +'',
+                ['dkellier@stanford.edu'],
+                headers = {'Reply-To': contact_email }
+            )
+            email.send()
+            messages.success(request, 'Form submission successful!') # Provide sender with a message the form was properly sent.
+
+    return render(request, 'cdi_forms/contact.html', {'form': form}) # Render contact form template   
