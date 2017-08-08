@@ -88,6 +88,7 @@ INSTALLED_APPS = (
     'registration',
     'supplementtut',
     'django.contrib.sites',
+    'axes',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -208,3 +209,16 @@ DATE_INPUT_FORMATS = (
 REGISTRATION_SUPPLEMENT_CLASS = 'supplementtut.models.MyRegistrationSupplement'
 ACCOUNT_ACTIVATION_DAYS = 3
 REGISTRATION_OPEN = True
+
+AXES_LOGIN_FAILURE_LIMIT = 4
+# AXES_LOCKOUT_TEMPLATE
+AXES_LOCKOUT_URL = '/lockout/'
+# AXES_NEVER_LOCKOUT_WHITELIST
+# AXES_IP_WHITELIST
+
+if SITE_ID != 3:
+    AXES_NUM_PROXIES = 1
+    AXES_BEHIND_REVERSE_PROXY = True
+
+
+

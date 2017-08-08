@@ -16,6 +16,8 @@
     {{ form|crispy }}
     <div>
     <button type="submit" id = 'id_login' class="btn btn-primary">{% trans "Log in" %}</button>
+    <br>
+    <a style="font-size: 0.7em" href="{% url 'password_reset' %}">Forgot your password? Click here to reset.</a>
     </div>
 </form>
 
