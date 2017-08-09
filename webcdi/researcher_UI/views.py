@@ -52,21 +52,27 @@ def download_data(request, study_obj, administrations = None): # Download study 
         background_data = BackgroundInfo.objects.values().filter(administration__in = administrations)
         new_background = pd.DataFrame.from_records(background_data)
 
-        for c in new_background.columns:
-            try:
-                new_background = new_background.replace({c: dict(BackgroundInfo._meta.get_field(c).choices)}) # Replaces integer and single letter responses in dataframe with more easily interpreted choices that were originally given to test-takers. For instance, gender in database is stored as 'M' but is presented to test-takers and researchers as 'Male' for a lesser chance of misinterpretation
-            except:
-                if 'boolean' in c or c == 'born_on_due_date': # Replace integer boolean responses with text responses (catches any columns missed by previous pass)
-                    new_background = new_background.replace({c: {0: 'No', 1: 'Yes', 2: 'Prefer not to disclose'}})
-                elif c == 'child_hispanic_latino':
-                    new_background = new_background.replace({c: {False: 'No', True: 'Yes'}})
+        if len(list(new_background)) > 0:
+            for c in new_background.columns:
+                try:
+                    new_background = new_background.replace({c: dict(BackgroundInfo._meta.get_field(c).choices)}) # Replaces integer and single letter responses in dataframe with more easily interpreted choices that were originally given to test-takers. For instance, gender in database is stored as 'M' but is presented to test-takers and researchers as 'Male' for a lesser chance of misinterpretation
+                except:
+                    if 'boolean' in c or c == 'born_on_due_date': # Replace integer boolean responses with text responses (catches any columns missed by previous pass)
+                        new_background = new_background.replace({c: {0: 'No', 1: 'Yes', 2: 'Prefer not to disclose'}})
+                    elif c == 'child_hispanic_latino':
+                        new_background = new_background.replace({c: {False: 'No', True: 'Yes'}})
+        else:
+            new_background = pd.DataFrame(columns = ['administration_id'] + background_header)
 
     except:
-        new_background(columns = ['administration_id'] + background_header)
+        new_background = pd.DataFrame(columns = ['administration_id'] + background_header)
 
 
     # Try to combine background data and CDI responses
-    background_answers = pd.merge(new_background, melted_answers, how='outer', on = 'administration_id')
+    try:
+        background_answers = pd.merge(new_background, melted_answers, how='outer', on = 'administration_id')
+    except:
+        background_answers = pd.DataFrame(columns = list(new_background) + list(melted_answers))
 
     # Try to format administration data for pandas dataframe
     try:
@@ -88,14 +94,12 @@ def download_data(request, study_obj, administrations = None): # Download study 
     missing_columns = list(set(model_header) - set(combined_data.columns))
     if missing_columns:
         combined_data = combined_data.reindex(columns = np.append( combined_data.columns.values, missing_columns))
-    print "tweaked data!"
 
     # Organize columns  
     combined_data = combined_data[admin_header + background_header + model_header ]
-    print "reorganized column!"
 
     # Turn pandas dataframe into a CSV
-    combined_data.to_csv(response, encoding='utf-8')
+    combined_data.to_csv(response, encoding='utf-8', index=False)
 
     # Return CSV
     return response
@@ -108,7 +112,7 @@ def download_dictionary(request, study_obj): # Download dictionary for instrumen
     response['Content-Disposition'] = 'attachment; filename='+study_obj.instrument.name+'_dictionary.csv''' # Name CSV
 
     raw_item_data = model_map(study_obj.instrument.name).objects.values('itemID','item_type','category','definition','gloss') # Grab the relevant variables within the appropriate instrument model
-    pd.DataFrame.from_records(raw_item_data).to_csv(response, encoding='utf-8') # Convert nested dictionary into a pandas dataframe and then into a CSV
+    pd.DataFrame.from_records(raw_item_data).to_csv(response, encoding='utf-8', index=False) # Convert nested dictionary into a pandas dataframe and then into a CSV
 
     # Return CSV
     return response    
@@ -127,7 +131,7 @@ def download_links(request, study_obj, administrations = None): # Download only 
     # Recreate administration links and add them to dataframe
     test_url = ''.join(['http://', get_current_site(request).domain, reverse('administer_cdi_form', args=['a'*64])]).replace('a'*64+'/','')
     admin_data['link'] = test_url + admin_data['link']
-    admin_data.to_csv(response, encoding='utf-8') # Convert dataframe into a CSV
+    admin_data.to_csv(response, encoding='utf-8', index=False) # Convert dataframe into a CSV
 
     # Return CSV
     return response
