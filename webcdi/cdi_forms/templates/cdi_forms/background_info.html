@@ -18,6 +18,7 @@
         <li> You do not have to complete the inventory in one sitting. If you are interrupted, it is ok to put it down and come back to it when you have more time. </li>
         <li> Feel free to ask others (e.g. other family members, nanny, child care providers) to help you fill out this form. </li>
         <li> Please read all of the instructions on the inventory carefully, and make sure you complete all of the sections. </li>
+        <!-- Added optional bullet point describing compensation post-submission. Only appears if participant will be compensated. -->
         {% if gift_amount %}
             <li> You will receive a ${{ gift_amount }} Amazon.com gift card after you complete the form. As we are a research lab with limited funds, we ask that you only complete this questionnaire once.
         {% endif %}
@@ -28,6 +29,7 @@
 <br>
 <div class="row">
     <h3>Background Information</h3>
+    <!-- Load backgroundform in crispy format. -->
     {% load crispy_forms_tags %}
     {% crispy background_form %}
 
@@ -46,7 +48,9 @@
 {% block scripts %}
 <script>
 
-
+    // Some fields are labeled as enabler fields (refer to cdi_forms/forms.py). 
+    // If the participant chooses 'Yes' (corresponds to value '1'), a textbox appears that demands a greater description. 
+    // If the other two options ('Prefer to not disclose'/2 or 'No'/0), then the textbox field will be hiddent. 
     $('.enabler[value="1"]').each(function(index, e){
         if(e.checked){
             $(e).closest('.form-group').next('.dependent').css('display','block');
@@ -68,14 +72,18 @@
         maxItems :null,
     });
 
+    // In the event that the datepicker functionality is used to change the date in the dob field, age in months will be calculated.
     $('#id_child_dob').datepicker()
         .on('changeDate', function() {
             getDiffinMonths();
         });
+
+    // Upon completion, all input fields will be disabled to show static answers.
     {% if completed %}
         $('input').prop('disabled', True);
     {% endif %}
 
+    // Prevents use of back and forward browser buttons. Participant should rely on given navigation buttons on site.
     history.pushState(null, null, document.URL);
     window.addEventListener('popstate', function () {
         history.pushState(null, null, document.URL);
@@ -83,8 +91,10 @@
 
     $
 
+    // Age field is disabled. Changes must be made by inputting DOB into dob field
     $("#id_age").prop('disabled', true);
 
+    // Function for calculating age in months. Final age in months is calculated in cdi_forms/views.py
     function getDiffinMonths() {
         
         var raw_b_date = new Date($('#id_child_dob').val());
@@ -95,26 +105,26 @@
             var day_diff = ((t_date.date() - b_date.date()) >= 15)? 1: 0
             var diff_in_months = 12*(t_date.year() - b_date.year()) + (t_date.month() - b_date.month()) + day_diff;
 
-
-
             if (diff_in_months > 0){
-
-                // document.getElementById("id_age").value = diff_in_months;
                 $("#id_age").val(diff_in_months);
             }
 
         }
     };
 
+    // Any changes in dob field will trigger re-calculation of age in months.
     $('#id_child_dob').on('change', function () {
         getDiffinMonths();
     })
 
+    // Age in months is calculated upon loading
     getDiffinMonths();
+
     var instrument_name = "{{ title }}";
 
+    // If a study waiver was uploaded by the researcher (# of characters in field is greater than zero),
+    // Display modal for consent waiver. Also add warnings regarding age under age in months field
     var study_waiver = "{{ study_waiver|length }}";
-
     window.onload = function() { 
 
         if (parseInt(study_waiver) > 0) {
@@ -123,11 +133,11 @@
                 Cookies.set('old_visitor','yes',{path: ''});
             }
         }
-
         addWarnings();
     };
 
-
+    // Function reminding parents of age in months. In green and underlined for parents to notice.
+    // If there is a study paired with current study, page will suggest the parents look at the paired study if their child is not the right age.
     function addWarnings() {
 
         var instrument_name = "{{ title }}";
@@ -143,7 +153,6 @@
 
         $("#instrument_age").html(text);
 
-
         $('#hint_id_age').append(hint, study_group_hint);
     }
 
@@ -152,6 +161,7 @@
 </script>
 
 {% if user.is_authenticated %}
+<!-- If user is logged-in (vetted researcher), fastforward debug functions will be available. -->
 
     <script>
         function fastforward() {

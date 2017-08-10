@@ -1,5 +1,6 @@
 {% extends 'cdi_forms/cdi_base.html' %}
 
+<!-- Navigation buttons placed in cdi_base.html -->
 {% block nav_buttons %}
 {% if not completed %}
 <div class="row text-center button-wrapper">
@@ -12,7 +13,7 @@
 {% endblock %}
 
 
-
+<!-- Navigation sidebar -->
 {% block navcontents %}
 <a href="#nav_list" data-toggle="collapse" id="tob_title"><h4>Table of Contents: &#8744;</h4></a>
 <div id = "nav_list" class = "collapse">
@@ -40,7 +41,9 @@
 {% csrf_token %}
 {% if parts %}
 
+<!-- Actual CDI form. Sections are broken into pages and automatically collapse and extend based on changePages function -->
 <ul>
+    <!-- Instructions given to parents based on form. Includes photos. -->
     <div id="intro" class = "page_div collapse"><div>
         {% if instrument_name  == "English_WG" %}
             {% load staticfiles %}
@@ -336,6 +339,7 @@
         {% endfor %}
     </div>
     {% endfor %}
+    <!-- Last page that asks parents to confirm that their data is suitable for analysis. May appear based on the study's confirm_completion setting. May also include a ReCaptcha based on if study is done by langcoglab and will pay participants -->
     <div id = "analysis_div"  class = "collapse">    
         <h4>
             You are almost done! Click "Yes" if you agree with ALL of the following points. Your answer will not affect your results. There is nothing wrong with choosing "No":
@@ -355,13 +359,14 @@
         No, I do NOT have a child who is {{ age.0 }} months old, I have NOT filled out the entire questionnaire, and/or I have taken this questionnaire before. </label> 
 
         {% if captcha == 'True' %}
-        <br><br>
-        Finally, please check the Captcha box below to display the submit button!
-        <div class="g-recaptcha" data-sitekey="6LfI0yEUAAAAALj8wAxmoXmWg8B64tvr866bXeYg" data-callback="enableBtn"></div>
+            <br><br>
+            Finally, please check the Captcha box below to display the submit button!
+            <div class="g-recaptcha" data-sitekey="6LfI0yEUAAAAALj8wAxmoXmWg8B64tvr866bXeYg" data-callback="enableBtn"></div>
         {% endif %}
 
     </div> <br><br>
 
+    <!-- Navigation buttons -->
     <div class="row text-center button-wrapper">
         <a class="btn btn-primary prev-cdi-page" href="#">&#60;&#60; Previous Page</a>
         <a class="btn btn-primary next-cdi-page" href="#">Next Page &#62;&#62;</a>
@@ -384,28 +389,30 @@
 
 {% block scripts %}
 
+<!-- ReCaptcha. If study has a ReCaptcha option, the participant must have worked on the test for at least 4 minutes AND pass the ReCaptcha test for the submit button to appear. Otherwise, participant only has to have worked on the test for 4 minutes. -->
 {% if captcha == 'True' %}
     <script>
         captcha_clicked = false;
 
-    function enableBtn(){
-        captcha_clicked = true;
-        if (gotToEnd && test_duration >= 5) {
-            $('.submit-button').show();
+        // Triggers when participant successfully passes ReCaptcha
+        function enableBtn(){
+            captcha_clicked = true;
+            if (gotToEnd && test_duration >= 4) {
+                $('.submit-button').show();
+            }
         }
-
-    }
     </script>
 
 {% else %}
     <script>
-    captcha_clicked = true;
+        captcha_clicked = true;
     </script>    
 
 {% endif %}
 
 <script type="text/javascript">
 
+    // Automatically show instruction panel. 
     $("#instructions").collapse('show');
 
     //Prevent backspacing in form. Test-takers should use the provided Back and Next Buttons
@@ -418,12 +425,11 @@
     function clicked(e)
     {
         if(!confirm('Are you ready to submit? You cannot change your answers after submission.'))e.preventDefault();
-
         localStorage.removeItem('prev_page_number');
-
     }
-    created_date = "{{ created_date }}";
 
+    // Read Django administration creation date
+    created_date = "{{ created_date }}";
 
     //Create mutually exclusive checkboxes. 0 or 1 checkbox in a group may be clicked.
     $("input:checkbox").on('click', function() {
@@ -442,23 +448,24 @@
       }
     });   
 
+    // Rename checkbox labels from 'produces' to 'understands and says'
     $( "input[id$='produces']" ).each( function (){ 
         var box_name = $(this).attr("id");
         var label_var = "label[for='".concat(box_name,"']")
         $(label_var).text("understands and says");
     });
 
-
     var gotToEnd = false;
-    $('.submit-button').hide();
+    $('.submit-button').hide(); // Hide submit button. Unhides upon certain events
 
     var confirm_completion = "{{ confirm_completion }}";
 
+    // If confirm_completion is true for a study, add analysis_div to page_div class. Hidden otherwise.
     if ($.inArray( confirm_completion, [ "true", "True", "T", "1",1 ] ) > -1) {
         $('#analysis_div').addClass('page_div');
     }
 
-    //Collapses and expands sections to act like a page-flipper
+    //Collapses and expands sections to act like a page-flipper. As some sections are nested within others, need to track 'parent pages' to make sure pages display properly. Also triggers other checks such as tracking the submit button
     function changePages(which_page) {
 
         if (which_page === undefined) {
@@ -467,10 +474,7 @@
             page_num = which_page;
         }
 
-
         current_page = filterednames[which_page];
-        console.log(which_page + "; " + current_page.id)
-
         parent_page = current_page.parentElement.parentElement;
 
 
@@ -502,7 +506,7 @@
 
         test_duration = moment.utc().diff(moment.utc(created_date, "MMM DD, YYYY, hh:mm a"),'minutes')
 
-        if (gotToEnd && test_duration >= 5 && captcha_clicked) {
+        if (gotToEnd && test_duration >= 4 && captcha_clicked) {
             $('.submit-button').show();
         }
 
@@ -510,21 +514,19 @@
 
     }
 
-    //For types and sections nested in parts, keeps only the relevant part open (e.g., "Part 2: Gestures" won't be open and visible while the test-taker is working on "Phrases")
+    //For types and sections nested in parts, keeps only the relevant part open 
+    // (e.g., "Part 2: Gestures" won't be open and visible while the test-taker is working on "Phrases")
     function closeParts() {
-
         $(".part_div").each( function () {
             if ($(this).has("#" + current_page.id).length) {
                 $(this).collapse('show')
             } else{
                  $(this).collapse('hide')
             }
-
         });
     }
 
-    //Defining starting variables. Page number is set to 0 (indexes are 0-based)
-
+    //Defining starting variables. Page number is set to 0 (indexes are 0-based) unless cookie on browser or database says otherwise.
     try {
         if (localStorage.getItem("prev_hash_id") == "{{ hash_id }}") {
             var old_page_num = localStorage.getItem("prev_page_number") || 0
@@ -538,6 +540,7 @@
     catch(err) {
         var page_num = 0
     }
+
     var parent_page
     var current_page
 
@@ -552,8 +555,7 @@
     //Initial page turning. Test starts on page 0 (first page)
     changePages();
 
-
-    //Page changing buttons. Flip forwards of backwards
+    //Page changing buttons. Flip forwards or backwards
     $('.prev-cdi-page').on('click', function (e) {
         e.preventDefault();
         page_num--;
@@ -568,14 +570,13 @@
     })
 
 
-    //Prevent page_num from going below 0 or above the max number of pages - 1 by removing the capable buttons
+    //Prevent page_num from going below 0 or above (max number of pages - 1) by removing the capable buttons
     function checkPageNum() {
 
         if (page_num <= 0) {
             $('.prev-cdi-page').hide();
         } else{
             $('.prev-cdi-page').show();
-
         }
 
         if (page_num >= filterednames.length -1) {
@@ -587,7 +588,7 @@
         }
     }
 
-    //Navbar functionality. Clicking a section in the nav-bar now flips you to the relevant page.
+    //Navbar functionality. Clicking a section in the nav-bar flips you to the relevant page.
     function findPage(page_title) {
         var page_location = $.inArray( page_title, filterednames ); 
         if (page_location > -1) {
@@ -596,23 +597,23 @@
             var next_page = $(filterednames).filter(function(index, value) {
                 return ($("#" + page_title.id).has("#" + value.id).length);
             }).first();
-            console.log(next_page)
             var x = $.inArray( next_page[0], filterednames ); 
         }
-        console.log(x)
         changePages(x);
     }
 
     var click_div = false;
 
+    // Clicking div containing a single checkbox triggers click event on clickbox. Meant for smaller screens such as iPads
     $('div.col-md-4.alco-child:has(input:checkbox)').on('click', function() {
-    click_div = true;
-    current_checkbox = $(this).find("input[type='checkbox']");
-    current_checkbox.click();
-    click_div = false;
-
+        click_div = true;
+        current_checkbox = $(this).find("input[type='checkbox']");
+        current_checkbox.click();
+        click_div = false;
     })
 
+    // Clicking label associated with checkbox within the div was triggering a double click event, undoing the checkbox. 
+    // Now prevents a double click event for checkbox and labels by focusing on div clicks only
     $('div.col-md-4.alco-child input[type=checkbox]').click(function(e){
             if (!click_div) e.stopPropagation();
     });
@@ -621,10 +622,10 @@
             if (!click_div) e.stopPropagation();
     });
 
-
 </script>
 
 {% if user.is_authenticated %}
+<!-- Logged-in users (vetted researchers) can use the fastforward debug functions. Not an option for not logged-in users (parents) -->
 
     <script>
         function fastforward() {

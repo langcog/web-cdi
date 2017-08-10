@@ -25,10 +25,11 @@
 </div>
 <br>
 <div class="row">
+    <!-- Load blank version of backgroundform in crispy format -->
     {% load crispy_forms_tags %}
     {% crispy background_form %}
 </div>
-
+<!-- Loads modal showing possible studies that participant can enter into. -->
 <div id="possible_studies" class="modal fade" role="dialog">
 
     <div class="modal-dialog modal-lg" role="document">
@@ -44,9 +45,10 @@
 
                 <script type="text/javascript">
 
-                var x = '{{possible_studies}}'.replace(/&quot;/g,'"')
-                 var raw_data = JSON.parse('{{possible_studies}}'.replace(/&quot;/g,'"'));
+                // Parse string object from Django into a JS object.
+                var raw_data = JSON.parse('{{possible_studies}}'.replace(/&quot;/g,'"'));
 
+                // Function for sorting instruments by age. W&G forms appear above W&S forms.
                 function compare(a,b) {
                   if (a.instrument__min_age < b.instrument__min_age)
                     return -1;
@@ -55,16 +57,15 @@
                   return 0;
                 }
 
+                // Sort JSON objects by minimum age (ascending)
                 data = raw_data.sort(compare);                 
 
-                 $.each(data, function(index, value){
+                // For each object, create a short text section describing the age range and language associated with the text along with an actual date range based off of the date in browser time. Append to the 'inner' div above for display.
+                $.each(data, function(index, value){
                     var raw_text = "My baby speaks " + value.instrument__language + " and is between " + value.instrument__min_age + " and " + value.instrument__max_age + " months old.";
 
-                    if (parseInt(value.slots_left) > 0) {
-                        raw_text = raw_text + " (" + value.slots_left + " spots left)"
-                    } else if (parseInt(value.slots_left) <=0) {
-                        raw_text = raw_text + " (0 spots left)"
-                    }
+                    if (parseInt(value.slots_left) > 0) {raw_text = raw_text + " (" + value.slots_left + " spots left)"
+                    } else if (parseInt(value.slots_left) <=0) {raw_text = raw_text + " (0 spots left)"}
                     var hyperlink = "{% url 'administer_new_parent' username=username study_name=12345 %}".replace(/12345/, value.name);
 
                     var min_age = value.instrument__min_age;
@@ -76,21 +77,18 @@
                     var t_date = moment();
                     var age_range = [];
 
-
                     while (b_date.isAfter(dob_max)) {
                         var day_diff = ((t_date.date() - b_date.date()) >= 15)? 1: 0
                         var poss_age = 12*(t_date.year() - b_date.year()) + (t_date.month() - b_date.month()) + day_diff;
-                        if (poss_age >= min_age & poss_age <= max_age) {
-                            age_range.push(b_date.format("MMMM Do, YYYY"))
-                        }
+                        if (poss_age >= min_age & poss_age <= max_age) {age_range.push(b_date.format("MMMM Do, YYYY"))}
+
                         b_date.subtract(1, 'days')
 
                     }
 
                     var hint = "Born between " + age_range[age_range.length - 1] + " and " + age_range[0];
-
-                    var text = "<h3><a href = '" + hyperlink + "'>" + raw_text + "</a> </h3> <ul><li>" + hint + "</li></ul> <br>";                    
-
+                    var text = "<h3><a href = '" + hyperlink + "'>" + raw_text + "</a> </h3> <ul><li>" + hint + "</li></ul> <br>"              
+                    
                     $( ".inner" ).append( text);
 
                  })

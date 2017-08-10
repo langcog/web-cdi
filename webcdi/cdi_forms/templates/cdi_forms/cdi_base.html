@@ -37,6 +37,7 @@
 
                 <nav id="navbar" class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" style="padding-top:60px;">
                     <div>
+                        <!-- Instructions for completing CDI form -->
                         <a href="#instructions" data-toggle="collapse" id="instructions_title"><h4>Instructions: &#8744;</h4></a>
                         <div id="instructions" class = "collapse">
                             <ul>
@@ -48,6 +49,8 @@
                                 <li> You can use the tab button and arrows keys to quickly navigate and answer questions. </li>
                             </ul>
                         </div>
+
+                        <!-- Script for guiding participants to bookmark link -->
                         <script type="text/javascript">
                             $(function() {
                                 $("#bookmarkme").click(function() {
@@ -62,6 +65,8 @@
                                 });
                             });
                         </script>
+
+                        <!-- Script for calculating the test's expiration date in the browser's local time -->
                         <div id="due_time"></div>
                         <script type="text/javascript">
                         var due_date = "{{ due_date }}";
@@ -70,10 +75,12 @@
                         $('#due_time').html("<p><b> Due date </b>: " + due_date_local + "</p>");
                         </script>
 
+                        <!-- If study has an associated body of text in it's waiver field, gives option to pull up a modal window containing the waiver text by clicking button -->
                         {% if study_waiver and study_waiver != "" %}
                             <a href="#" id="show_waiver" onclick = "$('#consent_waiver').modal('show');"> Show waiver of documentation </a><br>
                         {% endif %}
 
+                        <!-- Gives option to render contact.html and send an email to the web-cdi team -->
                         {% if hash_id %}
                             <a href="{% url 'contact' hash_id=hash_id %}" target="_blank">Reach out to the Web-CDI Team!</a>
                         {% endif %}
@@ -89,6 +96,7 @@
                 </nav>
 
             </div>
+            <!-- Holds main form. Can be backgroundform or cdi_form -->
             <div class = "col-md-9" role="main">
                 {% block main %}
                 {% endblock %}
@@ -98,6 +106,7 @@
     </form>
 </div>
 
+<!-- Modal window housing study waiver text -->
 <div id="consent_waiver" class="modal fade" role="dialog">
 
     <div class="modal-dialog modal-lg" role="document">
@@ -120,6 +129,8 @@
         </div>
     </div>
 </div>
+
+<!-- Function un-focuses pressed buttons to avoid participant confusion after pressing a button. -->
 <script>
     $(".btn").mouseup(function(){
         $(this).blur();
