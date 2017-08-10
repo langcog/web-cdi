@@ -18,142 +18,148 @@
     <script src="{% static 'cdi_forms/moment.js' %}"></script>
 
 </head>
-
+<!-- Researcher interface -->
 <body>
-<div class='container'>
-    <div class='row'>
-	<form class="form-inline" action="/accounts/logout/">
-            <fieldset>
-                <legend>User:</legend>
-		<div class='col-md-8'>
-		    <big>{{ username }}</big>
-		</div>
-		<div class='col-md-2'>
-		    <input type="button" value="Help" onclick="window.open('https://docs.google.com/document/d/1naFm2U-77YcOwFD7jcQIes2HhNz98qQM2wm1J1cmwck/pub')" class='btn btn-primary' style="width:100%">
-		</div>
-		<div class='col-md-2'>
-		    <input type="submit" value="Logout" class='btn btn-primary' style="width:100%">
-		</div>
-            </fieldset>
-	</form>
-    </div>
-    <div class='row'>
+    <div class='container'>
+        <!-- Row displaying username, help button, and logout button. -->
+        <div class='row'>
+        	<form class="form-inline" action="/accounts/logout/">
+
+                <fieldset>
+                    <legend>User:</legend>
+            		<div class='col-md-8'>
+            		    <big>{{ username }}</big>
+            		</div>
+            		<div class='col-md-2'>
+            		    <input type="button" value="Help" onclick="window.open('https://docs.google.com/document/d/1naFm2U-77YcOwFD7jcQIes2HhNz98qQM2wm1J1cmwck/pub')" class='btn btn-primary' style="width:100%">
+            		</div>
+            		<div class='col-md-2'>
+            		    <input type="submit" value="Logout" class='btn btn-primary' style="width:100%">
+            		</div>
+                </fieldset>
+        	</form>
+        </div>
+
+        <div class='row'>
             <form method='post' action = '/interface/study/{{ current_study }}/' id='study-form' class="form-inline">
-       		 {% csrf_token %}
+           		{% csrf_token %}
                 <fieldset>
                     <legend>Study:</legend>
-                    <div class='col-md-12'>
-			<div class="row">
-			    <div class='col-md-10'>
-				    <div style = 'width:100%' class="form-group">
-					<select  style = 'width:100%;' id="study-selector" class="form-control" onchange="location = encodeURI(this.options[this.selectedIndex].value);">
-					    <option value="/interface/" selected disabled>Please select study</option>
-					    {% for study in studies %}
-						<option value="/interface/study/{{ study }}/"{% if study.name == current_study %} selected="" {% endif %}>{{ study }}</option>
-					    {% endfor %}
-					</select> 
-				    </div>
-				<div>
-				    {% if study_instrument %}
-					<h4>Instrument: {{ study_instrument }}</h4>
-				    {% endif %}
-                    {% if study_group %}
-                    <h4>Study Group: {{ study_group }}</h4>
-                    {% endif %}
-                    {% if completed_admins %}
-                    <h4># Completed Administrations: {{ completed_admins }} Tests, {{ unique_children }} Children</h4>
-                    {% endif %}
-                    {% if allow_payment %}
-                    <h4># Gift Cards Left: {{ available_giftcards }}</h4>
-                    {% endif %}                    
-				</div>
-			    </div>
-			    <div class='col-md-2'>
-				    <button type="button" style='width:100%;' class="btn btn-primary"   onclick = "modal_form('/interface/add_study/')" >New Study</button>
-                    <br><br>
-                    <button type="button" style='width:100%;' class="btn btn-primary"   onclick = "modal_form('/interface/add_paired_study/')" >Group Studies</button>
-			    </div>
-			</div>
-			{% if current_study %}
-                <div class="row">
-                    <div class='col-md-12'>
-                        <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
-                            <div class="btn-group" role="group">
-                                <button type="button" class="btn btn-default"   onclick = "modal_form('/interface/study/{{ current_study|urlencode }}/administer_new/')" >Add Participants</button>
-                            </div>
-                            <div class="btn-group" role="group">                    
-                                <button type="submit" class="btn btn-default"  name='download-study' id='download-study' >Download Data</button>
-                            </div>
-                            <div class="btn-group" role="group">  
-                                <button type="submit" class="btn btn-default"  name='download-dictionary' id='download-dictionary' >Download Dictionary</button>
-                            </div>
-                            <div class="btn-group" role="group">  
-                                <button type="button" class="btn btn-default"   onclick = "modal_form('/interface/study/{{ current_study|urlencode }}/rename_study/')" >Update Study</button>
-                            </div>
-                            <div class="btn-group" role="group">  
-                                <button type="submit" class="btn btn-default" name='delete-study' id='delete-study' onclick='return confirm("Are you sure you want to delete the entire study and all the data associated with it?");' >Delete Study</button>
-                            </div>
+                        <div class='col-md-12'>
+                			<div class="row">
+                			    <div class='col-md-10'>
+                				    <div style = 'width:100%' class="form-group">
+                    					<select  style = 'width:100%;' id="study-selector" class="form-control" onchange="location = encodeURI(this.options[this.selectedIndex].value);">
+                    					    <option value="/interface/" selected disabled>Please select study</option>
+                    					    {% for study in studies %}
+                    						  <option value="/interface/study/{{ study }}/"{% if study.name == current_study %} selected="" {% endif %}>{{ study }}</option>
+                    					    {% endfor %}
+                    					</select> 
+                				    </div>
+                    				<div>
+                    				    {% if study_instrument %}
+                    					   <h4>Instrument: {{ study_instrument }}</h4>
+                    				    {% endif %}
+
+                                        {% if study_group %}
+                                            <h4>Study Group: {{ study_group }}</h4>
+                                        {% endif %}
+
+                                        {% if completed_admins %}
+                                            <h4># Completed Administrations: {{ completed_admins }} Tests, {{ unique_children }} Children</h4>
+                                        {% endif %}
+
+                                        {% if allow_payment %}
+                                            <h4># Gift Cards Left: {{ available_giftcards }}</h4>
+                                        {% endif %}                    
+                    				</div>
+                			    </div>
+                			    <div class='col-md-2'>
+                				    <button type="button" style='width:100%;' class="btn btn-primary"   onclick = "modal_form('/interface/add_study/')" >New Study</button>
+                                    <br><br>
+                                    <button type="button" style='width:100%;' class="btn btn-primary"   onclick = "modal_form('/interface/add_paired_study/')" >Group Studies</button>
+                			    </div>
+                			</div>
+                			{% if current_study %}
+                                <div class="row">
+                                    <div class='col-md-12'>
+                                        <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
+                                            <div class="btn-group" role="group">
+                                                <button type="button" class="btn btn-default"   onclick = "modal_form('/interface/study/{{ current_study|urlencode }}/administer_new/')" >Add Participants</button>
+                                            </div>
+                                            <div class="btn-group" role="group">                    
+                                                <button type="submit" class="btn btn-default"  name='download-study' id='download-study' >Download Data</button>
+                                            </div>
+                                            <div class="btn-group" role="group">  
+                                                <button type="submit" class="btn btn-default"  name='download-dictionary' id='download-dictionary' >Download Dictionary</button>
+                                            </div>
+                                            <div class="btn-group" role="group">  
+                                                <button type="button" class="btn btn-default"   onclick = "modal_form('/interface/study/{{ current_study|urlencode }}/rename_study/')" >Update Study</button>
+                                            </div>
+                                            <div class="btn-group" role="group">  
+                                                <button type="submit" class="btn btn-default" name='delete-study' id='delete-study' onclick='return confirm("Are you sure you want to delete the entire study and all the data associated with it?");' >Delete Study</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                    		{% endif %}
                         </div>
-                    </div>
-                </div>
-    			{% endif %}
-		    </div>
-                </fieldset>
-
-            </form>
-
-        </div>
-    {% if current_study %}
-    <div class='row'>
-            <form method='post' action = '/interface/study/{{ current_study }}/' id='administration-form' class="form-inline">
-        {% csrf_token %}
-
-                <fieldset>
-                    <legend> Data :</legend>
-                    <div class='col-md-12'>
-                        {% include "researcher_UI/table.html" with table=study_administrations %}
-                        <script type="text/javascript">
-                            var utc_time;
-                            var local_time;
-                            $('.due_date, .last_modified, .created_date').not('.orderable, .sortable').each( function () {
-                                utc_time = moment.utc($(this).html(), "MM/DD/YYYY hh:mm a");
-                                local_time = moment(utc_time).local().format("MM/DD/YYYY hh:mm a");
-                                $(this).html(local_time);
-
-                            });
-                        </script>
-                    </div>
-                    <div class='col-md-3'>
-                            <button style='width:100%;' class="btn btn-default selected-btn" id='add-selected' type='submit' name='administer-selected' value='administer-selected' disabled  >Re-administer Participants</button>
-                    </div>
-                    <div class='col-md-3'>
-                            <button style='width:100%;' class="btn btn-default selected-btn" id='delete-selected' type='submit' name='delete-selected' value='administer-selected' disabled onclick='return confirm("Are you sure you want to delete the selected administration record and all the data associated with it?");' >Delete Selected Data</button>
-
-                    </div>
-                    <div class='col-md-3'>
-                            <button style='width:100%;' class="btn btn-default selected-btn" id='download-selected' type='submit' name='download-selected' value='download-selected'  disabled >Download Selected Data (All)</button>
-                    </div>
-                    <div class='col-md-3'>
-                            <button style='width:100%;' class="btn btn-default selected-btn" id='download-links' type='submit' name='download-links' value='download-links'  disabled >Download Selected Data (Links)</button>
-                    </div>
-                    
                 </fieldset>
             </form>
-
         </div>
+
+        {% if current_study %}
+            <div class='row'>
+                <form method='post' action = '/interface/study/{{ current_study }}/' id='administration-form' class="form-inline">
+                    {% csrf_token %}
+
+                        <fieldset>
+                            <legend> Data :</legend>
+                            <div class='col-md-12'>
+                                {% include "researcher_UI/table.html" with table=study_administrations %}
+                                <script type="text/javascript">
+                                    var utc_time;
+                                    var local_time;
+                                    $('.due_date, .last_modified, .created_date').not('.orderable, .sortable').each( function () {
+                                        utc_time = moment.utc($(this).html(), "MM/DD/YYYY hh:mm a");
+                                        local_time = moment(utc_time).local().format("MM/DD/YYYY hh:mm a");
+                                        $(this).html(local_time);
+
+                                    });
+                                </script>
+                            </div>
+                            <div class='col-md-3'>
+                                    <button style='width:100%;' class="btn btn-default selected-btn" id='add-selected' type='submit' name='administer-selected' value='administer-selected' disabled  >Re-administer Participants</button>
+                            </div>
+                            <div class='col-md-3'>
+                                    <button style='width:100%;' class="btn btn-default selected-btn" id='delete-selected' type='submit' name='delete-selected' value='administer-selected' disabled onclick='return confirm("Are you sure you want to delete the selected administration record and all the data associated with it?");' >Delete Selected Data</button>
+
+                            </div>
+                            <div class='col-md-3'>
+                                    <button style='width:100%;' class="btn btn-default selected-btn" id='download-selected' type='submit' name='download-selected' value='download-selected'  disabled >Download Selected Data (All)</button>
+                            </div>
+                            <div class='col-md-3'>
+                                    <button style='width:100%;' class="btn btn-default selected-btn" id='download-links' type='submit' name='download-links' value='download-links'  disabled >Download Selected Data (Links)</button>
+                            </div>
+                            
+                        </fieldset>
+                </form>
+            </div>
+        {% endif %}
     </div>
-    </div>
-    {% endif %}
-</div>
+
 <!-- New Study Modal -->
-<div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="new study">
-</div>
+<div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="new study"></div>
+
 <script>
+    // Function from static/researcher_UI.js. Disables the 'selected' buttons unless at least one of the checkboxes in select_col is selected.
     checked_only()
     $('form').each(function(){this.onkeypress = checkEnter;});
 
+    // Tracks the number of administrations to be displayed per page.
     var num_per_page = parseInt("{{ num_per_page }}");
 
+    // Depending on value stored in num_per_page, display the other option on the page
     if ((window.location.search.indexOf('per_page') != -1 && window.location.search.indexOf('per_page=20') == -1) || num_per_page != 20) {
         $('#view_all').val("Show 20");
     } else if (num_per_page == 20 || window.location.search.indexOf('per_page=20') != -1) {
@@ -173,12 +179,13 @@
         }
     });
 
+    // Track whether Shift key is being held down. Used up Shift-Select motions
     $(document).on('keyup keydown', function(e){
         console.log(e.shiftKey);
         shifted = e.shiftKey;
-    } );
+    });
 
-
+    // Checkboxes selected while Shift button is held down select all checkboxes in between as well
     var lastChecked = null;
     var handleChecked = function(e) {
         if(lastChecked && shifted) {
@@ -201,11 +208,12 @@
         lastChecked = e.target;
           
     }
+
     $('input[name="select_col"').click( function() {
-        console.log("clicked!");
         handleChecked(event);
     });
 
+    // Check for the number of completed tests as reported by Django. If none of the tests are completed, disables download_data option.
     var completed_admins = "{{ completed_admins }}";
 
     if (parseInt("{{ completed_admins }}")) {

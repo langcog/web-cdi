@@ -1,4 +1,4 @@
-
+<!-- Modal form for adding a new study -->
 
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -18,10 +18,9 @@
 
         <script>
 
-
+        // Automatically collapses fields dependent on whether the study involves anonymous participants and/or financial compensation. Upon checking/unchecking inputs for those 2 settings, other dependent fields appear.
         $('#div_id_subject_cap').addClass( "anon-collection collapse" );
         $('#div_id_confirm_completion').addClass( "anon-collection collapse" ); 
-
 
         function check_for_payment() {
             if($('#id_allow_payment').prop('checked')) {
@@ -42,8 +41,6 @@
 
         check_for_payment();
         check_for_anon();
-
-
 
         $('#id_anon_collection').on('change', function () {
             check_for_anon();      
