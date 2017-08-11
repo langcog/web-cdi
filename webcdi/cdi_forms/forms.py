@@ -228,7 +228,7 @@ class BackgroundForm(BetterModelForm):
 # Form for contacting Web-CDI team. Asks for basic contact information and test ID. Simple format.
 class ContactForm(forms.Form):
     contact_name = forms.CharField(label="Your Name", required=True, max_length = 51)
-    contact_email = forms.EmailField(label="Your Email Address", required=True, max_length = 101, validators = [EmailValidator()])
+    contact_email = forms.EmailField(label="Your Email Address", required=True, max_length = 201, validators = [EmailValidator()])
     contact_id = forms.CharField(label="Your Test URL", required=True, max_length = 101)
     content = forms.CharField(label="What would you like to tell us?",
         required=True,
