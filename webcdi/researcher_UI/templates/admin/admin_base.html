@@ -7,11 +7,19 @@
 <title>{% block title %}{% endblock %}</title>
 
 <!-- <link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static "admin/css/base.css" %}{% endblock %}" />
- --><script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+ --><!-- <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="{% static 'supplementtut/base.css' %}" /> -->
+
+<script src="{% static 'jquery/jquery-1.11.3.min.js' %}"></script>
+<link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'bootstrap/bootstrap-theme.min.css' %}">
+<script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
 <link rel="stylesheet" href="{% static 'supplementtut/base.css' %}" />
+
+
 {% block extrastyle %}{% endblock %}
 
 <!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="{% block stylesheet_ie %}{% static "admin/css/ie.css" %}{% endblock %}" /><![endif]-->

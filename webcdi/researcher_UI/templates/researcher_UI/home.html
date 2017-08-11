@@ -6,16 +6,20 @@
     {% load staticfiles %}
     <title>Web CDI</title>
 
-    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<!--     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-    <!-- <link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.min.css"> -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> -->
+
+    <script src="{% static 'jquery/jquery-1.11.3.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap-theme.min.css' %}">
+    <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
 
     <style>
     @font-face {
         font-family: Karla;
-        src: url(https://fonts.gstatic.com/s/karla/v5/suoMYBGv5sGCUIrF9mVTfXYhjbSpvc47ee6xR_80Hnw.woff2);
+        src: url("{% static 'fonts/Karla.woff2' %}");
     }
     body {
         font-family: "Karla", "sans-serif";

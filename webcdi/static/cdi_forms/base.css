@@ -52,6 +52,11 @@ h6 { font-size: .75em; }
     background-color: #eee;
 }
 
+.button-wrapper .btn {
+    margin-bottom:5px;
+    margin-right:5px;
+}
+
 input[type=checkbox] + label {
       color: #222;
 }
@@ -79,6 +84,7 @@ input[type=textbox] {
 
 .asteriskField{
   color: #aa0000;
+  font-size: 1.8em;
 }
 
 ul {
