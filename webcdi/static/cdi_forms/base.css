@@ -5,24 +5,35 @@
 
 
 @media(max-width:767px){
-    body {
-      font-family: "Karla", "sans-serif";
-      font-size: 28px;
-    }
+  body {
+    font-family: "Karla", "sans-serif";
+    font-size: 32px;
+  }
+
+  label.btn span {
+    font-size: 1.9em;
+  }
 }
 
 @media(min-width:768px){
-    body {
-      font-family: "Karla", "sans-serif";
-      font-size: 28px;
-    }
+  body {
+    font-family: "Karla", "sans-serif";
+    font-size: 30px;
+  }
+
+  label.btn span {
+    font-size: 1.9em;
+  }
 }
 
 @media(min-width:992px){
-    body {
-      font-family: "Karla", "sans-serif";
-      font-size: 24px;
-    }
+  body {
+    font-family: "Karla", "sans-serif";
+    font-size: 26px;
+  }
+  label.btn span {
+    font-size: 1.9em;
+  }
 }
 
 @media(min-width:1200px){
@@ -30,6 +41,9 @@
       font-family: "Karla", "sans-serif";
       font-size: 14px;
     }
+  label.btn span {
+    font-size: 1em;
+  }
 }
 
 h1 { font-size: 2em; }
@@ -79,9 +93,6 @@ input[type=textbox] {
     margin-bottom: 10px;
 }
 
-label.btn span {
-font-size: 1em;
-}
 
 span.glyphicon:after {
   font-family: "Glyphicons Halflings";
@@ -133,7 +144,7 @@ box-shadow: none;
 
 .asteriskField{
   color: #aa0000;
-  font-size: 1.8em;
+  font-size: 1.9em;
 }
 
 ul {

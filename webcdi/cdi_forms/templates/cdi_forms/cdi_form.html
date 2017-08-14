@@ -319,16 +319,16 @@
                                 <div class="col-md-12 alco-child" name = "{{ object.itemID }}_div">
                                     <div class="row alco-child1" >
                                         <span> {{ object.text | capfirst }}</span>
-                                            <div class="btn-group pull-right" data-toggle="buttons">
-                                                {% for choice in object.choices %}
-                                                    <label class = "btn mult-choice">
-                                                        <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
-                                                        <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
-                                                        <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
-                                                        <span class="choice"> {{ choice.0 }}</span>
-                                                    </label>
-                                                {% endfor %}
-                                            </div>
+                                        <div class="btn-group pull-right" data-toggle="buttons">
+                                            {% for choice in object.choices %}
+                                                <label class = "btn mult-choice">
+                                                    <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
+                                                    <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
+                                                    <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                                                    <span class="choice"> {{ choice.0 }}</span>
+                                                </label>
+                                            {% endfor %}
+                                        </div>
                                     </div>
                                 </div>
                                 {% else %}

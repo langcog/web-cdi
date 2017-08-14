@@ -186,6 +186,7 @@ class BackgroundForm(BetterModelForm):
         self.age_ref = kwargs.pop('age_ref', None)
         super(BackgroundForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
+        self.helper.template = PROJECT_ROOT + '/templates/bootstrap/whole_uni_form.html'
         self.helper.form_class = 'form-inline'
         self.helper.label_class = 'col-lg-3'
         self.helper.field_class = 'col-lg-9'
