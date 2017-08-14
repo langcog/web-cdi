@@ -73,10 +73,18 @@
     });
 
     // In the event that the datepicker functionality is used to change the date in the dob field, age in months will be calculated.
-    $('#id_child_dob').datepicker()
+    $('#id_child_dob').datepicker({ignoreReadonly: true})
         .on('changeDate', function() {
             getDiffinMonths();
         });
+
+    $('#id_child_dob').inputmask("mm/dd/yyyy", 
+              { 
+                  onincomplete: function(){
+                      $(this).val('');
+                  }
+              }
+      );
 
     // Upon completion, all input fields will be disabled to show static answers.
     {% if completed %}
