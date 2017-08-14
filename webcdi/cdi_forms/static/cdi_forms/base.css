@@ -1,6 +1,6 @@
 @font-face {
     font-family: Karla;
-    src: url(http://fonts.gstatic.com/s/karla/v5/3nZS3BKzlvhkwl4yjCQcjHYhjbSpvc47ee6xR_80Hnw.woff);
+    src: url('../fonts/Karla.woff2');
 }
 
 
@@ -38,6 +38,7 @@ h3 { font-size: 1.17em; }
 h4 { font-size: 1.12em; }
 h5 { font-size: .83em; }
 h6 { font-size: .75em; }
+
 .lead { font-size: 1.2em; }
 @media(max-width:1199px){.form-control { font-size: 0.65em; }}
 
@@ -57,7 +58,7 @@ h6 { font-size: .75em; }
     margin-right:5px;
 }
 
-input[type=checkbox] + label {
+/*input[type=checkbox] + label {
       color: #222;
 }
 
@@ -71,12 +72,60 @@ input[type=radio] + label {
 
 input[type=radio]:checked + label {
       color: #3C763D;
-}
+}*/
 
 input[type=textbox] {
     width: 80%;
     margin-bottom: 10px;
 }
+
+label.btn span {
+font-size: 1.2em;
+}
+
+span.glyphicon:after {
+  font-family: "Glyphicons Halflings";
+  src: url('../fonts/glyphicons-halflings-regular.woff2');
+}
+
+label input[type="radio"] ~ span.glyphicon.glyphicon-unchecked ,label input[type="checkbox"] ~ span.glyphicon.glyphicon-unchecked {
+color: #222;
+display: inline;
+}
+label input[type="radio"] ~ span.glyphicon.glyphicon-check ,label input[type="checkbox"] ~ span.glyphicon.glyphicon-check {
+display: none;
+}
+label input[type="radio"]:checked ~ span.glyphicon.glyphicon-unchecked ,label input[type="checkbox"]:checked ~ span.glyphicon.glyphicon-unchecked {
+display: none;
+}
+label input[type="radio"]:checked ~ span.glyphicon.glyphicon-check ,label input[type="checkbox"]:checked ~ span.glyphicon.glyphicon-check {
+color: #3C763D;
+display: inline;
+}
+
+input:checked ~ span { 
+  color: #3C763D; 
+}
+
+div[data-toggle="buttons"] label {
+display: inline-block;
+cursor: pointer;
+color: #222;
+user-select: none;
+}
+
+
+div[data-toggle="buttons"] label:has( input:not(:checked) ) {
+color: #222;
+}
+
+div[data-toggle="buttons"] label:has( input:checked ) {
+color: #3C763D;
+}
+div[data-toggle="buttons"] label:active, div[data-toggle="buttons"] label.active {
+box-shadow: none;
+}
+
 
 .dependent {
     display: none;
