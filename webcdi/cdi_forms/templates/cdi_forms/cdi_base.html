@@ -31,7 +31,7 @@
     <div class="container bs-docs-container" style="padding-top: 60px; padding-bottom: 60px;">
     <form id="cdi_form" method="post" class="form-horizontal">
         <div class="row">
-            <div class="col-md-3" role="complementary">
+            <div class="col-md-3 hidden-md-down" role="complementary">
 
                 <nav id="navbar" class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" style="padding-top:60px;">
                     <div>
@@ -83,8 +83,11 @@
                             <a href="{% url 'contact' hash_id=hash_id %}" target="_blank">Reach out to the Web-CDI Team!</a>
                         {% endif %}
 
-                        {% block nav_buttons %}
-                        {% endblock %}
+                        <div>
+                            {% block nav_buttons %}
+                            {% endblock %}
+                        </div>
+                        
                     </div>
 
                         {% block navcontents %}

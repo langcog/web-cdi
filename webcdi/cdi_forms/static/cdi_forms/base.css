@@ -4,7 +4,7 @@
 }
 
 
-@media(max-width:767px){
+@media (max-width:767px){
   body {
     font-family: "Karla", "sans-serif";
     font-size: 32px;
@@ -13,9 +13,12 @@
   label.btn span {
     font-size: 1.9em;
   }
+  a.btn, input.btn {
+    font-size:1em;
+  }
 }
 
-@media(min-width:768px){
+@media (min-width:768px) and (max-width:991px) {
   body {
     font-family: "Karla", "sans-serif";
     font-size: 30px;
@@ -24,9 +27,13 @@
   label.btn span {
     font-size: 1.9em;
   }
+
+  a.btn, input.btn {
+    font-size:1em;
+  }
 }
 
-@media(min-width:992px){
+@media (min-width:992px) and (max-width:1199px) {
   body {
     font-family: "Karla", "sans-serif";
     font-size: 26px;
@@ -34,9 +41,12 @@
   label.btn span {
     font-size: 1.9em;
   }
+  a.btn, input.btn {
+    font-size:1em;
+  }
 }
 
-@media(min-width:1200px){
+@media (min-width:1200px){
     body {
       font-family: "Karla", "sans-serif";
       font-size: 14px;
@@ -71,22 +81,6 @@ h6 { font-size: .75em; }
     margin-bottom:5px;
     margin-right:5px;
 }
-
-/*input[type=checkbox] + label {
-      color: #222;
-}
-
-input[type=checkbox]:checked + label {
-      color: #3C763D;
-}
-
-input[type=radio] + label {
-      color: #222;
-}
-
-input[type=radio]:checked + label {
-      color: #3C763D;
-}*/
 
 input[type=textbox] {
     width: 80%;
