@@ -1,0 +1,163 @@
+{
+    "parts": [
+        {
+            "id": 1,
+            "title": "I&#170; Parte: El Uso de Palabras",
+            "types": [
+                {
+                    "id": "word",
+                    "sections": [
+                        {
+                            "id": "sounds",
+                            "title": "1. Sonidos de Cosas y Animales"
+                        },
+                        {
+                            "id": "animals",
+                            "title": "2. Animales (de Verdad y de Juguete)"
+                        },
+                        {
+                            "id": "vehicles",
+                            "title": "3. Vehículos (de Verdad y de Juguete)"
+                        },
+                        {
+                            "id": "food_drink",
+                            "title": "4. Alimentos y Bebidas"
+                        },
+                        {
+                            "id": "clothing",
+                            "title": "5. Ropa"
+                        },
+                        {
+                            "footnote": "* or word used in your family",
+                            "id": "body_parts",
+                            "title": "6. Partes del Cuerpo"
+                        },
+                        {
+                            "id": "toys",
+                            "title": "7. Juguetes"
+                        },
+                        {
+                            "id": "household",
+                            "title": "8. Utensilios de la Casa"
+                        },
+                        {
+                            "id": "furniture_rooms",
+                            "title": "9. Muebles y Cuartos"
+                        },
+                        {
+                            "id": "outside",
+                            "title": "10. Objetos Fuera de la Casa"
+                        },
+                        {
+                            "id": "places",
+                            "title": "11. Lugares Fuera de la Casa"
+                        },
+                        {
+                            "footnote": "* or word used in your family",
+                            "id": "people",
+                            "title": "12. Personas"
+                        },
+                        {
+                            "id": "games_routines",
+                            "title": "13. Rutina Diaria, Reglas Sociales y Juegos"
+                        },
+                        {
+                            "id": "action_words",
+                            "title": "14. Acciones y Procesos (Verbos)"
+                        },
+                        {
+                            "id": "states",
+                            "title": "15. Estados"
+                        },
+                        {
+                            "id": "descriptive_words",
+                            "title": "16. Cualidades y Atributos"
+                        },
+                        {
+                            "id": "time_words",
+                            "title": "17. Tiempo"
+                        },
+                        {
+                            "id": "pronouns",
+                            "title": "18. Pronombres y Modificadores"
+                        },
+                        {
+                            "id": "question_words",
+                            "title": "19. Preguntas"
+                        },
+                        {
+                            "id": "prepositions",
+                            "title": "20. Preposiciones y Artículos"
+                        },
+                        {
+                            "id": "quantifiers",
+                            "title": "21. Cuantificadores y Adverbios"
+                        },
+                        {
+                            "id": "locations",
+                            "title": "22. Locativos"
+                        },
+                        {
+                            "id": "connecting_words",
+                            "title": "23. Conectivos"
+                        }
+                    ],
+                    "text": "Los niños comprenden más palabras de las que dicen. Aquí nos interesan la palabras que realmente DICEN. Muchas veces, las palabras que usan son poco distintas de las que aparacen en esta lista. Por ejemplo, dicen \"pupa\" en vex de \"ombligo\" o \"pica\" en vez de \"chile\". También pronuncian las palabras de diferentes maneras; por ejemplo, dicen \"tatamina\" en vez de \"vitamina\" o \"pato\" en vez de \"zapato\". Si su hijo/a dice otra palabra que se usa en su familia y significa lo mismo que la que viene en el cuestionario (por ejemplo, si dice \"coca\" en vez de \"refresco\", \"super\" en vez de \"tienda\", o \"kleenex\" en vez de \"pañuelo\"), rellene el círculo de la palabra correspondiente que viene en las lista. Recuerde que esta lista incluye las palabras que muchos niñoes pueden decir. No se preocupe si su hijo/a no dice todas las palabras.",
+                    "title": "A: Lista de Vocabulario",
+                    "type": "checkbox"
+                },
+                {
+                    "id": "usage",
+                    "title": "Cómo Usa y Comprende el Niño/a el Lenguaje",
+                    "type": "radiobutton"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "title": "II&#170; Parte: Oraciones y Gramática",
+            "types": [
+                {
+                    "id": "word_forms",
+                    "sections": [
+                        {
+                            "id": "word_forms_prese",
+                            "title": "",
+                            "text": "Para hablar de lo que sucede en el presente, ¿cuáles de estas formas usa?"
+                        },
+                        {
+                            "id": "word_forms_suced",
+                            "title": "",
+                            "text": "Para hablar de cosas que ya sucedieron, ¿cuáles de estas formas usa?"
+                        },
+                        {
+                            "id": "word_forms_orden",
+                            "title": "",
+                            "text": "Para pedir algo u ordenar, ¿cuáles de estas formas usa?"
+                        }
+                    ],
+                    "text": "A continuación encontrará una lista de diferentes terminaciones de verbos. Indique si su hijo/a usa palabras de la lista. En caso de que no use la misma palabra, pero que usa la misma terminación con palabras similares, por favor, rellene el círculo de la palabra que más se la parezca. Por ejemplo, en vez de \"comes\" dice \"duermes\" o \"puedes\" marque la línea de \"comes\".",
+                    "title": "A. Formas de Verbos",
+                    "type": "checkbox"
+                },
+                {
+                    "id": "combine",
+                    "title": "",
+                    "type": "radiobutton"
+                },
+                {
+                    "id": "combination_examples",
+                    "title": "B. Ejemplos",
+                    "text": "Por favor escriba tres ejemplos de las frases más largas que recuerde que su hijo/a haya dicho últimamente.",
+                    "type": "textbox"
+                },
+                {
+                    "id": "complexity",
+                    "text": "A continuación encontrará pares de frases. Por favor señale la que más se parezca a la forma en como hable su hijo/a, en este momento. Si su hijo/a usa frases más largas o complicadas de las que vienen en los ejemplos, por favor marque la segunda frase. El niño/a no tiene que decir exáctamente la misma frase; lo que le pedimos es que marque la frase que se parezca más a la manera en que su hijo/a habla.",
+                    "title": "C. Complejidad de Frases",
+                    "type": "radiobutton"
+                }
+            ]
+        }
+    ]
+}
