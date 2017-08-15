@@ -4,40 +4,27 @@
 }
 
 
-@media (max-width:767px){
+@media (max-width:991px){
   body {
     font-family: "Karla", "sans-serif";
-    font-size: 32px;
+    font-size: 40px;
   }
 
   label.btn span {
-    font-size: 1.9em;
+    font-size: 2.5em;
   }
   a.btn, input.btn {
     font-size:1em;
   }
-}
 
-@media (min-width:768px) and (max-width:991px) {
-  body {
-    font-family: "Karla", "sans-serif";
-    font-size: 30px;
-  }
-
-  label.btn span {
-    font-size: 1.9em;
-  }
-
-  a.btn, input.btn {
-    font-size:1em;
-  }
+  legend { font-size: 1.1em; }
 
 }
 
 @media (min-width:992px) and (max-width:1199px) {
   body {
     font-family: "Karla", "sans-serif";
-    font-size: 26px;
+    font-size: 24px;
   }
   label.btn span {
     font-size: 1.9em;
@@ -50,10 +37,10 @@
 @media (min-width:1200px){
     body {
       font-family: "Karla", "sans-serif";
-      font-size: 14px;
+      font-size: 18px;
     }
   label.btn span {
-    font-size: 1em;
+    font-size: 1.1em;
   }
 }
 
@@ -65,7 +52,13 @@ h5 { font-size: .83em; }
 h6 { font-size: .75em; }
 
 .lead { font-size: 1.2em; }
-@media(max-width:1199px){.form-control { font-size: 0.65em; }}
+
+
+@media(max-width:1199px){.form-control { 
+    height: 1.9em;
+    font-size: 0.8em; 
+  }
+}
 
 .alco-child {
     margin: 10px;
