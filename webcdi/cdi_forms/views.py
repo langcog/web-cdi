@@ -264,13 +264,16 @@ def cdi_form(request, hash_id):
                         if value:
                             administration_data.objects.update_or_create(administration = administration_instance, item_ID = key, defaults = {'value': value})
             if 'btn-save' in request.POST and request.POST['btn-save'] == 'Save': # If the save button was pressed
-                try:
-                    page_number = request.POST['page_number'] # Note the page number for completion
-                    analysis = parse_analysis(request.POST['analysis']) # Note whether test-taker asserted that the child's age was accurate and form was filled out to best of ability
+                administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now()) # Update administration object with date of last modification
 
-                    administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now(), page_number = page_number, analysis = analysis) # Update administration object
-                except: # If page_number or analysis question fail to be accessed
-                    administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now()) # Just update the last_modified field in administation object
+                if 'analysis' in request.POST:
+                    analysis = parse_analysis(request.POST['analysis']) # Note whether test-taker asserted that the child's age was accurate and form was filled out to best of ability
+                    administration.objects.filter(url_hash = hash_id).update(analysis = analysis) # Update administration object
+
+                if 'page_number' in request.POST:
+                    page_number = int(request.POST['page_number']) if request.POST['page_number'].isdigit() else 0  # Note the page number for completion
+                    administration.objects.filter(url_hash = hash_id).update(page_number = page_number) # Update administration object
+
                 refresh = True
             elif 'btn-back' in request.POST and request.POST['btn-back'] == 'Go back to Background Info': # If Back button was pressed
                 administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now()) # Update last_modified

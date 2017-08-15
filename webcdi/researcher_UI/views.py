@@ -143,52 +143,45 @@ def console(request, study_name = None, num_per_page = 20): # Main giant functio
     if request.method == 'POST' : # If submitting data, make sure that study is allowed to be edited by current user
         data = {}
         permitted = study.objects.filter(researcher = request.user,  name = study_name).exists()
-        study_obj = study.objects.get(researcher= request.user, name= study_name)
         if permitted : # If user is permitted to update study
-            if request.method == 'POST' :
-                ids = request.POST.getlist('select_col') # Get the list of administrations with a clicked checkbox
+            study_obj = study.objects.get(researcher= request.user, name= study_name) # Grab study object
+            ids = request.POST.getlist('select_col') # Get the list of administrations with a clicked checkbox
+            if all([x.isdigit() for x in ids]): # Check that the administration numbers are all numeric
                 if 'administer-selected' in request.POST: # If the 'Re-administer Participants' button was clicked
-                    if all([x.isdigit() for x in ids]): # Check that the administration numbers are all numeric
-                        num_ids = map(int, ids) # Force numeric IDs into a list of integers
-                        new_administrations = []
-                        sids_created = set()
+                    num_ids = map(int, ids) # Force numeric IDs into a list of integers
+                    new_administrations = []
+                    sids_created = set()
 
-                        for nid in num_ids: # For each ID number
-                            admin_instance = administration.objects.get(id = nid) # Grab the associated administration object
-                            sid = admin_instance.subject_id # Pull subject ID from the administration object (unique to each study but not that whole database)
-                            if sid in sids_created:
-                                continue
-                            old_rep = administration.objects.filter(study = study_obj, subject_id = sid).count() # Count the number of administrations previously given to this subject within this study
-                            new_administrations.append(administration(study =study_obj, subject_id = sid, repeat_num = old_rep+1, url_hash = random_url_generator(), completed = False, due_date = datetime.datetime.now()+datetime.timedelta(days=14))) # Create a new administration based off the # of previously completed participants
-                            sids_created.add(sid) # Add new administration to the set of to-be-added administrations
+                    for nid in num_ids: # For each ID number
+                        admin_instance = administration.objects.get(id = nid) # Grab the associated administration object
+                        sid = admin_instance.subject_id # Pull subject ID from the administration object (unique to each study but not that whole database)
+                        if sid in sids_created:
+                            continue
+                        old_rep = administration.objects.filter(study = study_obj, subject_id = sid).count() # Count the number of administrations previously given to this subject within this study
+                        new_administrations.append(administration(study =study_obj, subject_id = sid, repeat_num = old_rep+1, url_hash = random_url_generator(), completed = False, due_date = datetime.datetime.now()+datetime.timedelta(days=14))) # Create a new administration based off the # of previously completed participants
+                        sids_created.add(sid) # Add new administration to the set of to-be-added administrations
 
-                        administration.objects.bulk_create(new_administrations) # Add new administrations to administration model en masse
-                        refresh = True # Refresh page to reflect table changes
+                    administration.objects.bulk_create(new_administrations) # Add new administrations to administration model en masse
+                    refresh = True # Refresh page to reflect table changes
 
                 elif 'delete-selected' in request.POST: # If 'Delete Selected Data' was clicked
-                    ids = request.POST.getlist('select_col') # Get the list of administrations with a clicked checkbox
-                    if all([x.isdigit() for x in ids]): # Check that all ID #s are proper numerics
-                        ids = list(set(map(int, ids))) # Force ID #s into a list of integers
-                        administration.objects.filter(id__in = ids).delete() # Delete administrations with IDs found in the list of to-be-deleted IDs
-                        refresh = True # Refresh page to reflect table changes
+                    num_ids = list(set(map(int, ids))) # Force ID #s into a list of integers
+                    administration.objects.filter(id__in = num_ids).delete() # Delete administrations with IDs found in the list of to-be-deleted IDs
+                    refresh = True # Refresh page to reflect table changes
 
                 elif 'download-links' in request.POST: # If 'Download Selected Data (Links)' was clicked
-                    ids = request.POST.getlist('select_col') # Get the list of administrations with a clicked checkbox
                     administrations = []
-                    if all([x.isdigit() for x in ids]): # Check that all IDs are properly numeric
-                        ids = list(set(map(int, ids))) # Force IDs into a list of integers
-                        administrations = administration.objects.filter(id__in = ids) # Grab a queryset of administration objects with administration IDs found in list
-                        return download_links(request, study_obj, administrations) # Send queryset to download_links function to return a CSV of subject data
-                        refresh = True # Refresh page to reflect table changes
+                    num_ids = list(set(map(int, ids))) # Force IDs into a list of integers
+                    administrations = administration.objects.filter(id__in = ids) # Grab a queryset of administration objects with administration IDs found in list
+                    return download_links(request, study_obj, administrations) # Send queryset to download_links function to return a CSV of subject data
+                    refresh = True # Refresh page to reflect table changes
 
 
                 elif 'download-selected' in request.POST: # If 'Download Selected Data' was clicked
-                    ids = request.POST.getlist('select_col') # Get the list of administrations with a clicked checkbox
-                    if all([x.isdigit() for x in ids]): # Check that all IDs are properly numeric
-                        ids = list(set(map(int, ids))) # Force IDs into a list of integers
-                        administrations = administration.objects.filter(id__in = ids) # Grab a queryset of administration objects with administration IDs found in list
-                        return download_data(request, study_obj, administrations) # Send queryset to download_data function to return a CSV of subject data
-                        refresh = True # Refresh page to reflect table changes
+                    num_ids = list(set(map(int, ids))) # Force IDs into a list of integers
+                    administrations = administration.objects.filter(id__in = num_ids) # Grab a queryset of administration objects with administration IDs found in list
+                    return download_data(request, study_obj, administrations) # Send queryset to download_data function to return a CSV of subject data
+                    refresh = True # Refresh page to reflect table changes
 
                 elif 'delete-study' in request.POST: # If 'Delete Study' button is clicked
                     study_obj.delete() # Delete study object
@@ -209,7 +202,6 @@ def console(request, study_name = None, num_per_page = 20): # Main giant functio
                         num_per_page = 20 # Set num_per_page to 20
                     refresh = True # Refresh page
 
-        
     if request.method == 'GET' or refresh: # If fetching data for console rendering
         username = None # Set username to None at first
         if request.user.is_authenticated(): # If logged in (should be)
