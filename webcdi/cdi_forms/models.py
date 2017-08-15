@@ -36,6 +36,20 @@ class English_WG(models.Model):
     def __str__(self):
         return self.item
 
+#Model for Spanish Words & Sentences form. Each row represents another item in the CDI questionnaire and its descriptive variables     
+class Spanish_WS(models.Model):
+    itemID = models.CharField(max_length = 101, primary_key=True) # ID number for identification
+    item = models.CharField(max_length = 101) # string variable name
+    item_type = models.CharField(max_length = 101) # type of variable (word, phrase, etc.)
+    category = models.CharField(max_length = 101) # if word, the subcategory for item (animals, sounds, etc.)
+    choices = models.CharField(max_length = 101, null=True) # possible positive choices for item
+    definition = models.CharField(max_length = 201, null=True, blank=True) # item listed in plaintext. This is what is displayed to test-takers along with possible choices
+    uni_lemma = models.CharField(max_length= 101, null=True, blank=True) # ID for matching terms across languages. Currently unused.
+    gloss = models.CharField(max_length = 101, null=True, blank=True) # English translation for item. At the moment, we only have English instruments so definition and gloss are identical
+    complexity_category = models.CharField(max_length = 101, null=True, blank=True) # category for complexity item. Currently blank.
+    def __str__(self):
+        return self.item
+
 # Method for ensuring that a value is positive
 def validate_g_zero(value):
         if value <= 0:

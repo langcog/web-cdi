@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.shortcuts import render
-from .models import English_WS, English_WG, BackgroundInfo, requests_log, Zipcode
+from .models import English_WS, English_WG, Spanish_WS, BackgroundInfo, requests_log, Zipcode
 import os.path, json, datetime, itertools, requests
 from researcher_UI.models import administration_data, administration, study, payment_code, ip_address
 from django.http import Http404
@@ -26,7 +26,7 @@ PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__)) # Declare root folder 
 
 # Map name of instrument model (English_WG & English_WS) to its string title
 def model_map(name):
-    mapping = {"English_WS": English_WS, "English_WG": English_WG}
+    mapping = {"English_WS": English_WS, "English_WG": English_WG, "Spanish_WS": Spanish_WS}
     assert name in mapping, name+"instrument not added to the mapping in views.py model_map function"
     return mapping[name]
         
@@ -161,13 +161,11 @@ def cdi_items(object_group, item_type, prefilled_data, item_id):
     for obj in object_group:
         if item_type == 'checkbox':
             obj['prefilled_value'] = obj['itemID'] in prefilled_data
-            if obj['gloss'] is None:
-                obj['gloss'] = obj['definition']
 
         if item_type == 'radiobutton' or item_type == 'modified_checkbox':
             split_choices = map(unicode.strip, obj['choices'].split(';'))
             prefilled_values = [False if obj['itemID'] not in prefilled_data else x == prefilled_data[obj['itemID']] for x in split_choices]
-            obj['text'] = obj['gloss']
+            obj['text'] = obj['definition']
 
             if obj['definition'] is not None and obj['definition'].find('/') >= 0 and item_id != 'word':
                 split_definition = map(unicode.strip, obj['definition'].split('/'))
@@ -212,7 +210,7 @@ def prefilled_cdi_data(administration_instance):
                         x = cdi_items(group_objects, item_type['type'], prefilled_data, item_type['id'])
                         section['objects'] = x
                         raw_objects.extend(x)
-                        if any(['*' in x['gloss'] for x in section['objects']]):
+                        if any(['*' in x['definition'] for x in section['objects']]):
                             section['starred'] = "*Or the word used in your family"  
 
                                 

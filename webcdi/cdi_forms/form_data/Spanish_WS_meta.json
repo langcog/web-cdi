@@ -2,7 +2,7 @@
     "parts": [
         {
             "id": 1,
-            "title": "I&#170; Parte: El Uso de Palabras",
+            "title": "Iª Parte: El Uso de Palabras",
             "types": [
                 {
                     "id": "word",
@@ -28,7 +28,7 @@
                             "title": "5. Ropa"
                         },
                         {
-                            "footnote": "* or word used in your family",
+                            "footnote": "* o palabra que use su familia para esto",
                             "id": "body_parts",
                             "title": "6. Partes del Cuerpo"
                         },
@@ -53,7 +53,7 @@
                             "title": "11. Lugares Fuera de la Casa"
                         },
                         {
-                            "footnote": "* or word used in your family",
+                            "footnote": "* o palabra que use su familia para esto",
                             "id": "people",
                             "title": "12. Personas"
                         },
@@ -115,7 +115,7 @@
         },
         {
             "id": 2,
-            "title": "II&#170; Parte: Oraciones y Gramática",
+            "title": "IIª Parte: Oraciones y Gramática",
             "types": [
                 {
                     "id": "word_forms",

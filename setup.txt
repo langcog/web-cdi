@@ -63,6 +63,7 @@ $ ./manage.py migrate
 	set up instruments
 	$ sudo -u $username psql -d webcdi-admin -c "\\COPY cdi_forms_english_ws FROM 'cdi_form_csv/[English_WS].csv' WITH (FORMAT csv, HEADER True)"
 	$ sudo -u $username psql -d webcdi-admin -c "\\COPY cdi_forms_english_wg FROM 'cdi_form_csv/[English_WG].csv' WITH (FORMAT csv, HEADER True)"
+	$ sudo -u $username psql -d webcdi-admin -c "\\COPY cdi_forms_spanish_ws FROM 'cdi_form_csv/[Spanish_WS].csv' WITH (FORMAT csv, HEADER True)"
 	[and so on for other instruments]
 
 	create login for admin console
