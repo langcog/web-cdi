@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.shortcuts import render
-from .models import English_WS, English_WG, Spanish_WS, BackgroundInfo, requests_log, Zipcode
+from .models import English_WS, English_WG, Spanish_WS, Spanish_WG, BackgroundInfo, requests_log, Zipcode
 import os.path, json, datetime, itertools, requests
 from researcher_UI.models import administration_data, administration, study, payment_code, ip_address
 from django.http import Http404
@@ -26,7 +26,8 @@ PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__)) # Declare root folder 
 
 # Map name of instrument model (English_WG & English_WS) to its string title
 def model_map(name):
-    mapping = {"English_WS": English_WS, "English_WG": English_WG, "Spanish_WS": Spanish_WS}
+    mapping = {"English_WS": English_WS, "English_WG": English_WG, 
+    "Spanish_WS": Spanish_WS, "Spanish_WG": Spanish_WG}
     assert name in mapping, name+"instrument not added to the mapping in views.py model_map function"
     return mapping[name]
         
