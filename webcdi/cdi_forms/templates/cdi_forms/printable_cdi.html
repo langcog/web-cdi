@@ -7,21 +7,6 @@
     <meta name="description" content="English Words and Sentences CDI form">
     <meta name="author" content="Ashwin Paranjape">
 
-<!--     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="{% static 'cdi_forms/selectize.js' %}"></script>
-    <script src="{% static 'cdi_forms/bootstrap-datepicker.js' %}"></script>
-    <link rel='stylesheet' href="{% static 'cdi_forms/selectize.bootstrap3.css' %}">
-    <link rel='stylesheet' href="{% static 'cdi_forms/datepicker.css' %}">
-    <link rel="stylesheet" href="{% static 'cdi_forms/docs.min.css' %}" />
-    <link rel='stylesheet' href="{% static 'cdi_forms/base.css' %}">
-    <script src="http://d3js.org/d3.v3.js"></script>
-    <script src="https://cdn.jsdelivr.net/lodash/4.17.2/lodash.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-queue/3.0.3/d3-queue.min.js"></script> -->
-
-
     <script src="{% static 'jquery/jquery-1.11.3.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'bootstrap/bootstrap-theme.min.css' %}">
@@ -35,6 +20,10 @@
     <script src="{% static 'd3/d3.v3.js' %}"></script>
     <script src="{% static 'lodash/lodash.min.js' %}"></script>
     <script src="{% static 'd3/d3-queue.min.js' %}"></script>
+
+    <link rel="stylesheet" href="{% static 'd3/c3.css' %}">
+    <script src="{% static 'd3/c3.min.js' %}"></script>
+
 
   	<meta property="og:image" content="http://webcdi.stanford.edu/{% static 'researcher_UI/images/logo.png' %}" />
   	<meta property="og:title" content="MacArthur-Bates Communicative Development Inventory" />
@@ -68,211 +57,245 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
-    <div class="container bs-docs-container" style='padding-top: 60px; padding-bottom: 60px;'>
+<div class="container bs-docs-container" style='padding-top: 60px; padding-bottom: 60px;'>
     <form class='form-horizontal'>
-    {% csrf_token %}
-    <div class = "col-md-12">
-    <!-- Thank you letter written to participants upon completion with the CDI logo. If participant is meant to be compensated, letter will also include a gift card code, monetary amount, and instructions on how to redeem the gift card. -->
-        <div class="row">
-            <div class="col-md-12">
-                <img src={% static 'images/logo_bg.jpg' %} class="rounded img-responsive center-block" alt="MB-CDI Lab Logo" style="max-width: 40%;"> <br>
-            </div>
-            <h2>Thank you!</h2><br>
-            <h4>Thank you for taking the time to complete the MacArthur-Bates Communicative Development Inventory (CDI). With the help of parents and caregivers like you, we are working to learn more about the way that children’s language develops, and how that development varies across individual children and cultures. Remember that the CDI lists many different words that are used by many different children. Don’t worry if your child only knows a few of them right now. Below are some insights into your child’s developing vocabulary, based on our research. This summary is not a clinical evaluation. If you have any concerns about your child’s development, we recommend that you talk with your child’s physician. If you enjoyed our assessment, you can learn more about the CDI <a href="http://mb-cdi.stanford.edu/" target="_blank">here</a>. We appreciate your contribution!</h4>
+        {% csrf_token %}
+        <div class = "col-md-12">
+        <!-- Thank you letter written to participants upon completion with the CDI logo. If participant is meant to be compensated, letter will also include a gift card code, monetary amount, and instructions on how to redeem the gift card. -->
+            <div class="row">
+                <div class="col-md-12">
+                    <img src={% static 'images/logo_bg.jpg' %} class="rounded img-responsive center-block" alt="MB-CDI Lab Logo" style="max-width: 40%;"> <br>
+                </div>
+                <h2>Thank you!</h2><br>
+                <h4>Thank you for taking the time to complete the MacArthur-Bates Communicative Development Inventory (CDI). With the help of parents and caregivers like you, we are working to learn more about the way that children’s language develops, and how that development varies across individual children and cultures. Remember that the CDI lists many different words that are used by many different children. Don’t worry if your child only knows a few of them right now. Below are some insights into your child’s developing vocabulary, based on our research. This summary is not a clinical evaluation. If you have any concerns about your child’s development, we recommend that you talk with your child’s physician. If you enjoyed our assessment, you can learn more about the CDI <a href="http://mb-cdi.stanford.edu/" target="_blank">here</a>. We appreciate your contribution!</h4>
 
-            {% if gift_code %}
-            <br>
-                {% if gift_code == 'ran out' %}
-                    <h4>We're sorry but it looks like we have ran out of Amazon.com Gift Cards! Please <a href="{% url 'contact' hash_id=hash_id %}" target="_blank">reach out to us</a> and we will quickly fix this issue. </h4>
-                {% else %}
-                    <h4>
-                    <p>
-                        Thank you for participating in the participating our Web-CDI project! It is our pleasure to send you this Amazon.com Gift Card* that can be redeemed towards millions of items at <a href="http://www.amazon.com" target="_blank">www.amazon.com</a>. You may want to print this screen for easy reference later--you’ll need the gift card claim code below.
-                    </p>
+                {% if gift_code %}
+                <br>
+                    {% if gift_code == 'ran out' %}
+                        <h4>We're sorry but it looks like we have ran out of Amazon.com Gift Cards! Please <a href="{% url 'contact' hash_id=hash_id %}" target="_blank">reach out to us</a> and we will quickly fix this issue. </h4>
+                    {% else %}
+                        <h4>
+                        <p>
+                            Thank you for participating in the participating our Web-CDI project! It is our pleasure to send you this Amazon.com Gift Card* that can be redeemed towards millions of items at <a href="http://www.amazon.com" target="_blank">www.amazon.com</a>. You may want to print this screen for easy reference later--you’ll need the gift card claim code below.
+                        </p>
 
-                    <p>
-                        Gift Card Amount: ${{ gift_amount }} <br>
-                        Claim Code: {{ gift_code }}
-                    </p>
+                        <p>
+                            Gift Card Amount: ${{ gift_amount }} <br>
+                            Claim Code: {{ gift_code }}
+                        </p>
 
-                    <p>
-                        |&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="https://www.amazon.com/gp/css/gc/payment/view-gc-balance?claimCode={{ gift_code }}" target="_blank">Apply to Account</a>
-                        &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="http://www.amazon.com/gc-redeem" target="_blank">How to Use</a>
-                        &nbsp;&nbsp;&nbsp;&nbsp;|
-                    </p>
+                        <p>
+                            |&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="https://www.amazon.com/gp/css/gc/payment/view-gc-balance?claimCode={{ gift_code }}" target="_blank">Apply to Account</a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="http://www.amazon.com/gc-redeem" target="_blank">How to Use</a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;|
+                        </p>
 
-                    <p>
-                        To redeem your gift card, follow these steps:
-                        <ol>
-                          <li>Visit <a href="http://www.amazon.com/redeem" target="_blank">www.amazon.com/redeem</a></li>
-                          <li>Enter the Claim Code when prompted.</li>
-                          <li>Gift card funds will be applied automatically to eligible orders during the checkout process.</li>
-                          <li>You must pay for any remaining balance on your order with another payment method.</li>
-                        </ol>
-                        <br>
-                        Your gift card claim code may also be entered when prompted during checkout. To redeem your gift card using the Amazon.com 1-Click&reg; service, first add the gift card funds to Your Account.
-                        <br>
-                        If you have questions about redeeming your gift card, please visit <a href="http://www.amazon.com/gc-redeem" target="_blank">www.amazon.com/gc-redeem</a>. If you have questions regarding the Web-CDI, please contact the Web-CDI team <a href="{% url 'contact' hash_id=hash_id %}" target="_blank">here</a>.
-                    </p>
-                    </h4>
-                    <p style="font-size: 0.8em;">
-                        *Amazon.com is not a sponsor of this promotion. Except as required by law, Amazon.com Gift Cards (&quot;GCs&quot;) cannot be transferred for value or redeemed for cash. GCs may be used only for purchases of eligible goods on Amazon.com or certain of its affiliated websites. GCs cannot be redeemed for purchases of gift cards. Purchases are deducted from the GC balance. To redeem or view a GC balance, visit &quot;Your Account&quot; on Amazon.com. Amazon is not responsible if a GC is lost, stolen, destroyed or used without permission. For complete terms and conditions, see <a href="http://www.amazon.com/gc-legal"  target="_blank">www.amazon.com/gc-legal</a>. GCs are issued by ACI Gift Cards LLC, a Washington corporation. All Amazon &trade; &amp; &copy; are IP of Amazon.com, Inc. or its affiliates. No expiration date or service fees.
-                    </p>
+                        <p>
+                            To redeem your gift card, follow these steps:
+                            <ol>
+                              <li>Visit <a href="http://www.amazon.com/redeem" target="_blank">www.amazon.com/redeem</a></li>
+                              <li>Enter the Claim Code when prompted.</li>
+                              <li>Gift card funds will be applied automatically to eligible orders during the checkout process.</li>
+                              <li>You must pay for any remaining balance on your order with another payment method.</li>
+                            </ol>
+                            <br>
+                            Your gift card claim code may also be entered when prompted during checkout. To redeem your gift card using the Amazon.com 1-Click&reg; service, first add the gift card funds to Your Account.
+                            <br>
+                            If you have questions about redeeming your gift card, please visit <a href="http://www.amazon.com/gc-redeem" target="_blank">www.amazon.com/gc-redeem</a>. If you have questions regarding the Web-CDI, please contact the Web-CDI team <a href="{% url 'contact' hash_id=hash_id %}" target="_blank">here</a>.
+                        </p>
+                        </h4>
+                        <p style="font-size: 0.8em;">
+                            *Amazon.com is not a sponsor of this promotion. Except as required by law, Amazon.com Gift Cards (&quot;GCs&quot;) cannot be transferred for value or redeemed for cash. GCs may be used only for purchases of eligible goods on Amazon.com or certain of its affiliated websites. GCs cannot be redeemed for purchases of gift cards. Purchases are deducted from the GC balance. To redeem or view a GC balance, visit &quot;Your Account&quot; on Amazon.com. Amazon is not responsible if a GC is lost, stolen, destroyed or used without permission. For complete terms and conditions, see <a href="http://www.amazon.com/gc-legal"  target="_blank">www.amazon.com/gc-legal</a>. GCs are issued by ACI Gift Cards LLC, a Washington corporation. All Amazon &trade; &amp; &copy; are IP of Amazon.com, Inc. or its affiliates. No expiration date or service fees.
+                        </p>
+                    {% endif %}
+                                
                 {% endif %}
-                            
-            {% endif %}
 
-            <br><br>
-        </div>
-        <br>
-        <!-- Button triggers the D3 graph div to appear. -->
-        <div class="row text-center">
-            <a class="btn btn-primary btn-lg" href="#graph_data" data-toggle="collapse">Graph My Data!</a>
-        </div>
-    </div>
-
-    <!-- Text triggers the submitted answers div to appear -->
-    <div class="row text-center">
-        <h4><a href="#filled_form" data-toggle="collapse">Show Me My Answers</a></h4>
-        <!-- If study allows participants to share results via Facebook, a link for FB sharing will appear in template. -->
-          {% if allow_sharing %}
-            {% url 'administer_cdi_form' hash_id=hash_id as form_url %}
-            <div class="fb-share-button" data-href="{{ form_url }}" data-layout="link" data-mobile-iframe="false">
-                   <a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ form_url | urlencode }}&amp;src=sdkpreparse">Share</a>
+                <br><br>
             </div>
-          {% endif %}
-    </div>
-    <!-- D3 graph div. Filled with empty divs which are populated by later D3 script -->
-    <div class="col-md-12 collapse" id="graph_data" style="height: 90vh;">
-      <div class = "row"> 
-        <div class="col-md-6 text-center" id="predicted_chart"></div>
-        <h2><div class="col-md-6 text-center" id="num_words_text"></div></h2>
-      </div>
+            <br>
+            <!-- Button triggers the D3 graph div to appear. -->
+            <div class="row text-center">
+                <a class="btn btn-primary btn-lg" href="#graph_data" data-toggle="collapse">Graph My Data!</a>
+            </div>
+        </div>
 
-      <div class = "row"> 
-        <div class="text-center" id="categories_charts"></div>
-        <h4><div class="row text-center" id="best_categories"></div></h4>
-      </div>
+        <!-- Text triggers the submitted answers div to appear -->
+        <div class="row text-center">
+            <h4><a href="#filled_form" data-toggle="collapse">Show Me My Answers</a></h4>
+            <!-- If study allows participants to share results via Facebook, a link for FB sharing will appear in template. -->
+              {% if allow_sharing %}
+                {% url 'administer_cdi_form' hash_id=hash_id as form_url %}
+                <div class="fb-share-button" data-href="{{ form_url }}" data-layout="link" data-mobile-iframe="false">
+                       <a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ form_url | urlencode }}&amp;src=sdkpreparse">Share</a>
+                </div>
+              {% endif %}
+        </div>
+        <!-- D3 graph div. Filled with empty divs which are populated by later D3 script -->
+        <div class="col-md-12 collapse.in" id="graph_data" style="height: 90vh;">
+          <div class = "row"> 
+            <div class="col-md-6 text-center" id="predicted_chart"></div>
+            <h2><div class="col-md-6 text-center" id="num_words_text"></div></h2>
+          </div>
 
-      <div class = "row text-center"> 
-        <h4><div id="hardest_words"></div><h4>
-      </div>
+          <div class = "row"> 
+            <div class="text-center" id="categories_charts"></div>
+            <h4><div class="row text-center" id="best_categories"></div></h4>
+          </div>
 
-    </div>
+          <div class = "row text-center"> 
+            <h4><div id="hardest_words"></div><h4>
+          </div>
+        </div>
 
-    <!-- Div for submitted form. Identical to section in cdi_form.html however all inputs are disabled and all answers are displayed on one page. -->
-    <div class = "col-md-12 collapse" id="filled_form" role="main">
+        <!-- Div for submitted form. Identical to section in cdi_form.html however all inputs are disabled and all answers are displayed on one page. -->
+        <div class = "col-md-12 collapse" id="filled_form" role="main">
 
-    <div class="row">
-        {% load crispy_forms_tags %}
-        {% crispy background_form %}
-    </div>
-{% if parts %}
-    <ul>
-            {% for part in parts %}
-                <h2 id="{{ part.id }}"> {{ part.title }}</h2>
-                
-                {% for type in part.types %}
-                    <h3 id = "{{ type.id }}"> {{ type.title }}</h3>
-                    <p class="lead"> {{ type.text | capfirst }}</p>
-                    <div class="row alternate-color">
-                        {% for object in type.objects %}
-                            {% if type.type == "radiobutton" or type.type == "modified_checkbox" %}
-                                {% if object.text != '' %}
-                                <div class="col-md-12 alco-child">
-                                    <div class="row alco-child1" >{{ object.text | capfirst }} 
-                                        <div class="pull-right">
-                                            {% for choice in object.choices %}
-                                            &ensp;
-                                            <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
-                                            <label for="{{ object.itemID }}_{{ choice.0 }}"> {{ choice.0 }}</label>
-                                            {% endfor %}
+            <div class="row">
+                {% load crispy_forms_tags %}
+                {% crispy background_form %}
+            </div>
+            
+            {% if parts %}
+                <ul>
+                    {% for part in parts %}
+                        <h2 id="{{ part.id }}"> {{ part.title }}</h2>
+                        
+                        {% for type in part.types %}
+                            <h3 id = "{{ type.id }}"> {{ type.title }}</h3>
+                            <p class="lead"> {{ type.text | capfirst }}</p>
+                            <div class="row alternate-color">
+                                {% for object in type.objects %}
+                                    {% if type.type == "radiobutton" or type.type == "modified_checkbox" %}
+                                        {% if object.text != '' %}
+                                        <div class="col-md-12 alco-child">
+                                            <div class="row alco-child1" >
+                                                <span>{{ object.text | capfirst }}</span>
+                                                <div class="btn-group pull-right" data-toggle="buttons">
+                                                    {% for choice in object.choices %}
+                                                        <label class = "btn mult-choice">
+                                                            <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
+                                                            <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
+                                                            <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                                                            <span class="choice"> {{ choice.0 }}</span>
+                                                        </label>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                {% else %}
-                                <div class="col-md-4 alco-child">
-                                    {% for choice in object.choices %}
-                                    <div class="row">
-                                        &ensp;
-                                        <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}"{% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
-                                        <label for="{{ object.itemID }}_{{ choice.0 }}"> {{ choice.0 }}</label>
-                                    </div>
-                                    {% endfor %}
-                                </div>
-                                {% endif %}                            
-                            {% elif type.type == "checkbox" %}
-                                <div class="col-md-4 alco-child"> <input type="checkbox" id="{{ object.itemID }}" name="{{ object.itemID }}" value="{{ object.choices }}"{% if completed %} disabled {% endif %} {% if object.prefilled_value %} checked {% endif %}> <label for="{{ object.itemID }}"> {{ object.gloss }}</label></div>
-                            {% elif type.type == "textbox" %}
-                                <div class="col-md-12"> <input type="textbox" id="{{ object.itemID }}" name="{{ object.itemID }}" maxlength="200" value="{{ object.prefilled_value }}" {% if completed %} disabled {% endif %}></div>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                    <ul>
-                        {% for section in type.sections %}
-                        <h4 id ="{{ section.id }}" >{{ section.title }}</h4>
-                        <div class="row ">
-                            {%for object in section.objects %}
-                                {% if type.type == "radiobutton" or type.type == "modified_checkbox" %}
-                                    {% if object.text != '' %}
-                                    <div class="col-md-12 alco-child">
-                                        <div class="row alco-child1">{{ object.text | capfirst }} 
-                                            <div class="pull-right">
+                                        {% else %}
+                                        <div class="col-md-4 alco-child">
+                                            <div class="btn-group" data-toggle="buttons">
                                                 {% for choice in object.choices %}
-                                                &ensp;
-                                                <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
-                                                <label for="{{ object.itemID }}_{{ choice.0 }}"> {{ choice.0 }}</label>
+                                                    <div class="row">
+                                                        <label class = "btn mult-choice">
+                                                            <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
+                                                            <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
+                                                            <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                                                            <span class="choice"> {{ choice.0 }}</span>
+                                                        </label>
+                                                    </div>
                                                 {% endfor %}
                                             </div>
-
                                         </div>
-                                    </div>
-                                    {% else %}
-                                    <div class="col-md-4 alco-child">
-                                        {% for choice in object.choices %}
-                                        <div class="row">
-                                            &ensp;
-                                            <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}"{% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
-                                            <label for="{{ choice.0 }}"> {{ choice.0 }}</label>
+                                        {% endif %}                            
+                                    {% elif type.type == "checkbox" %}
+                                        <div class="col-md-4 alco-child"> 
+                                            <div class="btn-group" data-toggle="buttons"> 
+                                                <label class = "btn">
+                                                    <input type="checkbox" id="{{ object.itemID }}" name="{{ object.itemID }}" value="{{ object.choices }}"{% if completed %} disabled {% endif %} {% if object.prefilled_value %} checked {% endif %}> 
+                                                    <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
+                                                    <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                                                    <span class="choice"> {{ object.gloss }}</span>
+                                                </label>
+                                            </div>
                                         </div>
-                                        {% endfor %}
-                                    </div>
-                                    {% endif %}                            
-                                {% elif type.type == "checkbox" %}
-                                    <div class="col-md-4 alco-child"> <input type="checkbox" id="{{ object.itemID }}" name="{{ object.itemID }}" value="{{ object.choices }}"{% if completed %} disabled {% endif %} {% if object.prefilled_value %} checked {% endif %}> <label for="{{ object.itemID }}"> {{ object.gloss }}</label></div>
-                                {% elif type.type == "textbox" %}
-                                    <div class="col-md-12"> <input type="textbox" id="{{ object.itemID }}" name="{{ object.itemID }}" maxlength="200" value="{{ object.prefilled_value }}" {% if completed %} disabled {% endif %}></div>
-                                {% endif %}
-                            {% endfor %}
-                            <div class="col-md-12">{{ section.starred }}</div>
-                        </div>
+                                    {% elif type.type == "textbox" %}
+                                        <div class="col-md-12"> <input type="textbox" id="{{ object.itemID }}" name="{{ object.itemID }}" maxlength="200" value="{{ object.prefilled_value }}" {% if completed %} disabled {% endif %}></div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <ul>
+                                {% for section in type.sections %}
+                                <h4 id ="{{ section.id }}" >{{ section.title }}</h4>
+                                <div class="row ">
+                                    {%for object in section.objects %}
+                                        {% if type.type == "radiobutton" or type.type == "modified_checkbox" %}
+                                            {% if object.text != '' %}
+                                            <div class="col-md-12 alco-child">
+                                                <div class="row alco-child1" >
+                                                    <span>{{ object.text | capfirst }}</span>
+                                                    <div class="btn-group pull-right" data-toggle="buttons">
+                                                        {% for choice in object.choices %}
+                                                            <label class = "btn mult-choice">
+                                                                <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
+                                                                <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
+                                                                <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                                                                <span class="choice"> {{ choice.0 }}</span>
+                                                            </label>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% else %}
+                                            <div class="col-md-4 alco-child">
+                                                <div class="btn-group" data-toggle="buttons">
+                                                    {% for choice in object.choices %}
+                                                        <div class="row">
+                                                            <label class = "btn mult-choice">
+                                                                <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
+                                                                <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
+                                                                <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                                                                <span class="choice"> {{ choice.0 }}</span>
+                                                            </label>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                            {% endif %}                            
+                                        {% elif type.type == "checkbox" %}
+                                            <div class="col-md-4 alco-child">
+                                                <div class="btn-group" data-toggle="buttons"> 
+                                                    <label class = "btn">
+                                                        <input type="checkbox" id="{{ object.itemID }}" name="{{ object.itemID }}" value="{{ object.choices }}"{% if completed %} disabled {% endif %} {% if object.prefilled_value %} checked {% endif %}> 
+                                                        <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
+                                                        <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                                                        <span class="choice"> {{ object.gloss }}</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        {% elif type.type == "textbox" %}
+                                            <div class="col-md-12"> <input type="textbox" id="{{ object.itemID }}" name="{{ object.itemID }}" maxlength="200" value="{{ object.prefilled_value }}" {% if completed %} disabled {% endif %}></div>
+                                        {% endif %}
+                                    {% endfor %}
+                                    <div class="col-md-12">{{ section.starred }}</div>
+                                </div>
+                                {% endfor %}
+                            </ul>
+                            
+                        
                         {% endfor %}
-                    </ul>
-                    
-                
-                {% endfor %}
-            {% endfor %}
-            </ul>
-    {% else %}
-        <p>Form unavailable. Contact admin. </p>
-    {% endif %}
-
-    </div>
-    <form>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Form unavailable. Contact admin. </p>
+            {% endif %}
+        </div>
+    </form>
 </div>
 
 <!-- Disables all inputs and select options. Renames 'produces' to 'understands and says' -->
 <script>
-        $('input').prop('disabled', 'True');
-        $('select').prop('disabled', 'True');
+    $('input').prop('disabled', 'True');
+    $('select').prop('disabled', 'True');
+    $('label.btn').addClass('disabled');
 
-        $( "input[id$='produces']" ).each( function (){ 
-            var box_name = $(this).attr("id");
-            var label_var = "label[for='".concat(box_name,"']")
-            $(label_var).text("understands and says");
-        });        
+    $( "input[id$='produces']" ).each( function (){ 
+        var label_var = $(this).parent().find('span.choice');
+        $(label_var).text("understands and says");
+    });      
 </script>
 
 <!-- Script for generating D3 graphs. Very long!!-->
@@ -730,6 +753,7 @@
     var adjusted_quant_prod = [];
     var adjusted_quant_comp = [];
     var current_vocab = [];
+    var new_pred_chart;
 
     // If data is satisfactory (child's age is within study's age range), graph a chart predicting median growth rate adjusted for child.
     if ((root.age > 30 | root.age < 16) & root.instrument_name.indexOf('WS') > -1) {
@@ -754,7 +778,7 @@
             for (var i = 0; i < quant_prod.length; i++) {
                 raw_adjusted_num = parseFloat(quant_prod[i].pred) + adjust_prod;
                 adjusted_num = (raw_adjusted_num < 0)? 0 : ((raw_adjusted_num > 1)? 1 : raw_adjusted_num)
-                adjusted_quant_prod[i] = {"pred" : adjusted_num , "age": (parseFloat(quant_prod[i].age))};
+                adjusted_quant_prod[i] = {"prod_pred" : adjusted_num , "age": (parseFloat(quant_prod[i].age))};
             }
 
             current_vocab.push({"age": root.age, "vocab": 100*words_produced/(words.length), "name": "Current Spoken Vocabulary", "dy": 6});
@@ -768,16 +792,59 @@
                 for (var i = 0; i < quant_comp.length; i++) {
                     raw_adjusted_num = parseFloat(quant_comp[i].pred) + adjust_comp;
                     adjusted_num = (raw_adjusted_num < 0)? 0 : ((raw_adjusted_num > 1)? 1 : raw_adjusted_num)
-                    adjusted_quant_comp[i] = {"pred" : adjusted_num , "age": (parseFloat(quant_comp[i].age))};
+                    adjusted_quant_comp[i] = {"comp_pred" : adjusted_num , "age": (parseFloat(quant_comp[i].age))};
                 }
 
                 current_vocab.push({"age": root.age, "vocab": 100*words_understood/(words.length),
                  "name": "Current Understood Vocabulary", "dy": 0});
             }
 
-            plotPredictData();
+
+            // plotPredictData();
+
+
+            var new_pred_chart = c3.generate({
+                bindto: '#predicted_chart',
+                data: {
+                    xs: {
+                        'Predicted % of Words Spoken': 'x1',
+                        'Predicted % of Words Understood': 'x2',
+                    },
+                    columns: [
+                        ['x1'].concat(objectMap(adjusted_quant_prod, 'age')),
+                        ['x2'].concat(objectMap(adjusted_quant_comp, 'age')),
+                        ['Predicted % of Words Spoken'].concat(objectMap(adjusted_quant_prod, 'prod_pred').map(function(x) { return x * 100; })),
+                        ['Predicted % of Words Understood'].concat(objectMap(adjusted_quant_comp, 'comp_pred').map(function(x) { return x * 100; }))
+                    ]
+                },
+                axis: {
+                  x: {
+                    label: 'Age (in Months)',
+                    position: 'outer-center',
+                    tick: {
+                      values: _.range(8, 32, 2)
+                    }
+                  },
+                  y: {
+                    label: 'Predicted % of Words on Test',
+                    position: 'outer-middle',
+                    tick: {
+                      values: _.range(0, 125, 25)
+                    }
+                  }
+                }
+            });
+
+            setTimeout(function () {
+                new_pred_chart.resize({
+                  height: $("#predicted_chart").innerWidth()*0.8,
+                  width: $("#predicted_chart").innerWidth()
+                });
+            }, 50);
 
         });
+
+
     }
 
     // Determines quantile growth rate. Originally assigned growth rate based on child's percentile ranking. Now only chooses the median growth rate.
@@ -812,9 +879,13 @@
             .ticks(5)
             .outerTickSize(0);
 
-        var valueline = d3.svg.line()
+        var prod_valueline = d3.svg.line()
             .x(function(d) { return x(d.age); })
-            .y(function(d) { return y(100 * d.pred); });
+            .y(function(d) { return y(100 * d.prod_pred); });
+
+        var comp_valueline = d3.svg.line()
+            .x(function(d) { return x(d.age); })
+            .y(function(d) { return y(100 * d.comp_pred); });
 
         pred_chart = d3.select("#predicted_chart")
             .append("svg")
@@ -831,14 +902,14 @@
             .style("stroke", "#9471f2")
             .style("stroke-width", stroke_thickness)
             .style("fill", "none")   
-            .attr("d", valueline(adjusted_quant_prod));
+            .attr("d", prod_valueline(adjusted_quant_prod));
 
         pred_chart.append("path")  
             .attr("class", "line")
             .style("stroke", "#FF9667")
             .style("stroke-width", stroke_thickness)
             .style("fill", "none")
-            .attr("d", valueline(adjusted_quant_comp))
+            .attr("d", comp_valueline(adjusted_quant_comp))
             .style("display", (root.age > 18)? "none": null);
 
         node = pred_chart.selectAll("g")
