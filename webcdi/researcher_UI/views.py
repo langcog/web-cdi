@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from .forms import AddStudyForm, RenameStudyForm, AddPairedStudyForm
 from .models import study, administration, administration_data, get_meta_header, get_background_header, payment_code, ip_address
-import codecs, json, os, re, random, csv, datetime, cStringIO
+import codecs, json, os, re, random, csv, datetime, cStringIO, math, StringIO, zipfile
 from .tables  import StudyAdministrationTable
 from django_tables2   import RequestConfig
 from django.db.models import Max
@@ -30,6 +30,7 @@ def download_data(request, study_obj, administrations = None): # Download study 
     response = HttpResponse(content_type='text/csv') # Format response as a CSV
     response['Content-Disposition'] = 'attachment; filename='+study_obj.name+'_data.csv''' # Name the CSV response
     
+    administrations = administrations if administrations is not None else administration.objects.filter(study = study_obj)
     model_header = get_model_header(study_obj.instrument.name) # Fetch the associated instrument model's variables
     
     # Fetch administration variables
@@ -136,7 +137,60 @@ def download_links(request, study_obj, administrations = None): # Download only 
     # Return CSV
     return response
 
- 
+def write_to_zip(x, zf, vocab_start):
+    curr_name = "{0}_S{1}_{2}".format(x['study_name'], x['subject_id'], x['repeat_num'])
+    vocab_string = x[vocab_start:].to_string(header = False, index = False).replace('\n','').encode("utf-8")
+    demo_string = ("{:<25}"*(vocab_start)).format(*x[0:vocab_start].replace(r'', np.nan, regex=True))
+    string_to_write = demo_string + vocab_string
+    zf.writestr("{}.txt".format(curr_name), string_to_write)
+
+@login_required
+def download_cdi_format(request, study_obj, administrations = None):
+    outfile = StringIO.StringIO()
+    administrations = administrations if administrations is not None else administration.objects.filter(study = study_obj)
+    completed_admins = administrations.filter(completed = True)
+    r = re.compile('item_[0-9]{1,3}')
+
+    model_header = filter(r.match, get_model_header(study_obj.instrument.name))
+    admin_header = ['study_name', 'subject_id','repeat_num', 'completed', 'last_modified']
+    background_header = ['age','sex','zip_code','birth_order','multi_birth_boolean','multi_birth', 'birth_weight', 'born_on_due_date', 'early_or_late', 'due_date_diff', 'mother_yob', 'mother_education','father_yob', 'father_education', 'annual_income', 'child_hispanic_latino', 'child_ethnicity', 'caregiver_info', 'other_languages_boolean', 'language_days_per_week', 'language_hours_per_day', 'ear_infections_boolean', 'hearing_loss_boolean', 'vision_problems_boolean', 'illnesses_boolean', 'services_boolean','worried_boolean','learning_disability_boolean']
+
+    answers = administration_data.objects.values('administration_id', 'item_ID', 'value').filter(administration_id__in = completed_admins)
+    melted_answers = pd.DataFrame.from_records(answers).pivot(index='administration_id', columns='item_ID', values='value')
+    melted_answers.reset_index(level=0, inplace=True)
+
+    missing_columns = [x for x in model_header if x not in melted_answers.columns]
+
+    if missing_columns:
+        melted_answers = melted_answers.reindex(columns = np.append(melted_answers.columns.values, missing_columns))
+
+    new_answers = melted_answers
+
+    if study_obj.instrument.form == 'WG':
+        for c in new_answers.columns[1:]:
+            new_answers = new_answers.replace({c: {None: 0, 'understands': 1, 'produces': 2, 'simple': 1, 'complex': 2, 'no': 0, 'yes': 1, 'not yet': 0, 'sometimes': 1, 'often': 2, 'never': 0}})
+    elif study_obj.instrument.form == 'WS':
+        for c in new_answers.columns[1:]:
+            new_answers = new_answers.replace({c: {None: 0, 'produces': 1, 'simple': 1, 'complex': 2, 'no': 0, 'yes': 1, 'not yet': 0, 'sometimes': 1, 'often': 2, 'never': 0}})
+
+    background_data = BackgroundInfo.objects.values().filter(administration__in = completed_admins)
+    new_background = pd.DataFrame.from_records(background_data)
+
+    admin_data = pd.DataFrame.from_records(completed_admins.values()).rename(columns = {'id':'administration_id', 'study_id': 'study_name', 'url_hash': 'link'})
+    admin_data['study_name'] = study_obj.name # Replace study ID number with actual study name
+
+    background_answers = pd.merge(new_background, new_answers, how='outer', on = 'administration_id')
+    combined_data = pd.merge(admin_data, background_answers, how='outer', on = 'administration_id')
+    combined_data = combined_data[admin_header + background_header + model_header ]
+    vocab_start = combined_data.columns.values.tolist().index('item_1')
+
+    with zipfile.ZipFile(outfile, 'w') as zf:
+        combined_data.apply(lambda x: write_to_zip(x, zf, vocab_start), axis = 1)
+    zf.close()
+    response = HttpResponse(outfile.getvalue(), content_type="application/octet-stream")
+    response['Content-Disposition'] = 'attachment; filename=%s.zip' % study_obj.name
+    return response
+
 @login_required
 def console(request, study_name = None, num_per_page = 20): # Main giant function that manages the interface page
     refresh = False
@@ -190,7 +244,8 @@ def console(request, study_name = None, num_per_page = 20): # Main giant functio
 
                 elif 'download-study' in request.POST: # If 'Download Data' button is clicked
                     administrations = administration.objects.filter(study = study_obj) # Grab a queryset of administration objects within study
-                    return download_data(request, study_obj, administrations) # Send queryset to download_data and receive a CSV of responses
+                    # return download_data(request, study_obj, administrations) # Send queryset to download_data and receive a CSV of responses
+                    return download_cdi_format(request, study_obj, administrations)
 
                 elif 'download-dictionary' in request.POST: # If 'Download Dictionary Data' button is clicked
                     return download_dictionary(request, study_obj) # Send study object to download_dictionary and receive a CSV of item data
