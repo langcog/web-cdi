@@ -242,10 +242,13 @@ def console(request, study_name = None, num_per_page = 20): # Main giant functio
                     study_name = None # Clear current study_name in interface
                     refresh = True # Refresh page
 
-                elif 'download-study' in request.POST: # If 'Download Data' button is clicked
+                elif 'download-study-csv' in request.POST: # If 'Download Data' button is clicked
                     administrations = administration.objects.filter(study = study_obj) # Grab a queryset of administration objects within study
-                    # return download_data(request, study_obj, administrations) # Send queryset to download_data and receive a CSV of responses
-                    return download_cdi_format(request, study_obj, administrations)
+                    return download_data(request, study_obj, administrations) # Send queryset to download_data and receive a CSV of responses
+                
+                elif 'download-study-scoring' in request.POST: # If 'Download Data' button is clicked
+                    administrations = administration.objects.filter(study = study_obj) # Grab a queryset of administration objects within study
+                    return download_cdi_format(request, study_obj, administrations)                    
 
                 elif 'download-dictionary' in request.POST: # If 'Download Dictionary Data' button is clicked
                     return download_dictionary(request, study_obj) # Send study object to download_dictionary and receive a CSV of item data
