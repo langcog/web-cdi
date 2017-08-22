@@ -43,6 +43,10 @@
     shape-rendering: crispEdges;
   }
 
+    .c3-line {
+        stroke-width: 4px;
+    }
+
 
 
 </style>
@@ -809,13 +813,26 @@
                     xs: {
                         'Predicted % of Words Spoken': 'x1',
                         'Predicted % of Words Understood': 'x2',
+                        'Current Vocabulary Size': 'current_age'
                     },
                     columns: [
                         ['x1'].concat(objectMap(adjusted_quant_prod, 'age')),
                         ['x2'].concat(objectMap(adjusted_quant_comp, 'age')),
-                        ['Predicted % of Words Spoken'].concat(objectMap(adjusted_quant_prod, 'prod_pred').map(function(x) { return x * 100; })),
-                        ['Predicted % of Words Understood'].concat(objectMap(adjusted_quant_comp, 'comp_pred').map(function(x) { return x * 100; }))
-                    ]
+                        ['Predicted % of Words Spoken'].concat(objectMap(adjusted_quant_prod, 'prod_pred').map(function(x) { return Math.round(x * 100); })),
+                        ['Predicted % of Words Understood'].concat(objectMap(adjusted_quant_comp, 'comp_pred').map(function(x) { return Math.round(x * 100); })),
+                        ['current_age'].concat(objectMap(current_vocab, 'age')),
+                        ['Current Vocabulary Size'].concat(objectMap(current_vocab, 'vocab'))
+                    ],
+                    type: 'line',
+                    types: {
+                        'Current Vocabulary Size': 'scatter'
+                    },
+                    order: 'asc',
+                    colors: {
+                        'Predicted % of Words Spoken': '#9471f2',
+                        'Predicted % of Words Understood': '#FF9667',
+                        'Current Vocabulary Size': '#2DBC74'
+                    }
                 },
                 axis: {
                   x: {
@@ -830,17 +847,25 @@
                     position: 'outer-middle',
                     tick: {
                       values: _.range(0, 125, 25)
-                    }
+                    },
+                    max: 100,
+                    padding: {top:5, bottom:5}
                   }
+                },
+                point: {
+                  r: 8,
+                  show: false
                 }
             });
 
+
+
             setTimeout(function () {
                 new_pred_chart.resize({
-                  height: $("#predicted_chart").innerWidth()*0.8,
-                  width: $("#predicted_chart").innerWidth()
+                  height: $("#predicted_chart").innerWidth()*0.7,
+                  width: $("#predicted_chart").innerWidth()*0.95
                 });
-            }, 50);
+            }, 25);
 
         });
 
