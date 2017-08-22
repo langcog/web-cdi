@@ -166,12 +166,14 @@ def download_cdi_format(request, study_obj, administrations = None):
 
     new_answers = melted_answers
 
+    new_answers.ix[:,1:] = new_answers.ix[:,1:].applymap(str)
+
     if study_obj.instrument.form == 'WG':
         for c in new_answers.columns[1:]:
-            new_answers = new_answers.replace({c: {None: 0, 'understands': 1, 'produces': 2, 'simple': 1, 'complex': 2, 'no': 0, 'yes': 1, 'not yet': 0, 'sometimes': 1, 'often': 2, 'never': 0}})
+            new_answers = new_answers.replace({c: {'nan': 0, 'none': 0, 'None': 0, 'understands': 1, 'produces': 2, 'simple': 1, 'complex': 2, 'no': 0, 'yes': 1, 'not yet': 0, 'sometimes': 1, 'often': 2, 'never': 0}})
     elif study_obj.instrument.form == 'WS':
         for c in new_answers.columns[1:]:
-            new_answers = new_answers.replace({c: {None: 0, 'produces': 1, 'simple': 1, 'complex': 2, 'no': 0, 'yes': 1, 'not yet': 0, 'sometimes': 1, 'often': 2, 'never': 0}})
+            new_answers = new_answers.replace({c: {'nan': 0, 'none': 0, 'None': 0, 'produces': 1, 'simple': 1, 'complex': 2, 'no': 0, 'yes': 1, 'not yet': 0, 'sometimes': 1, 'often': 2, 'never': 0}})
 
     background_data = BackgroundInfo.objects.values().filter(administration__in = completed_admins)
     new_background = pd.DataFrame.from_records(background_data)
@@ -182,6 +184,8 @@ def download_cdi_format(request, study_obj, administrations = None):
     background_answers = pd.merge(new_background, new_answers, how='outer', on = 'administration_id')
     combined_data = pd.merge(admin_data, background_answers, how='outer', on = 'administration_id')
     combined_data = combined_data[admin_header + background_header + model_header ]
+    combined_data['last_modified'] = combined_data['last_modified'].dt.strftime('%Y-%m-%d %H:%M %Z')
+    combined_data['annual_income'] = combined_data['annual_income'].apply(lambda x: 0 if x == 'Prefer not to disclose' else x)
     vocab_start = combined_data.columns.values.tolist().index('item_1')
 
     with zipfile.ZipFile(outfile, 'w') as zf:
