@@ -46,7 +46,16 @@
     .c3-line {
         stroke-width: 4px;
     }
+    .c3-axis-y , .c3-axis-x 
+    {
+      font-size: 1.1em; 
+    }
 
+
+    .c3-axis-x-label , .c3-axis-y-label 
+    {
+        font-size: 1.1em;
+    }
 
 
 </style>
@@ -132,23 +141,29 @@
             <!-- If study allows participants to share results via Facebook, a link for FB sharing will appear in template. -->
               {% if allow_sharing %}
                 {% url 'administer_cdi_form' hash_id=hash_id as form_url %}
-                <div class="fb-share-button" data-href="{{ form_url }}" data-layout="link" data-mobile-iframe="false">
-                       <a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ form_url | urlencode }}&amp;src=sdkpreparse">Share</a>
-                </div>
+                    <div class="fb-share-button" data-href="{{ form_url }}" data-layout="link" data-mobile-iframe="false">
+                           <a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ form_url | urlencode }}&amp;src=sdkpreparse">Share on Facebook</a>
+                    </div>
               {% endif %}
         </div>
+        <br>
         <!-- D3 graph div. Filled with empty divs which are populated by later D3 script -->
         <div class="col-md-12 collapse.in" id="graph_data" style="height: 90vh;">
+        <br>
           <div class = "row"> 
             <div class="col-md-6 text-center" id="predicted_chart"></div>
             <h2><div class="col-md-6 text-center" id="num_words_text"></div></h2>
           </div>
-
+          <br>
           <div class = "row"> 
             <div class="text-center" id="categories_charts"></div>
+            <div class="row">
+                <div class="col-md-6 text-center" id="categories_charts_understood"></div>
+                <div class="col-md-6 text-center" id="categories_charts_produced"></div>
+            </div>
             <h4><div class="row text-center" id="best_categories"></div></h4>
           </div>
-
+          <br>
           <div class = "row text-center"> 
             <h4><div id="hardest_words"></div><h4>
           </div>
@@ -363,6 +378,7 @@
     var word_categories;
     var prod_graph_width = graph_width;
     var comp_graph_width = graph_width;
+    var new_chart_understood;
 
     // Load csv matching informal category labels with formal category titles and generate 2 category-level summary graph.
     // If chid only had responses of one type (all words are 'understands' or all words are 'produces'), produce 1 graph and double its width
@@ -387,12 +403,116 @@
             comp_graph_width = graph_width*2;
         }
 
+        // if (raw_words_understood > 0) {
+        //     plotFlippedPropUnderstood();
+        // }
+
+        // if (words_produced > 0) {
+        //     plotFlippedPropProduced();
+        // }
+
         if (raw_words_understood > 0) {
-            plotFlippedPropUnderstood();
+            new_chart_understood = c3.generate({
+                bindto: '#categories_charts_understood',
+                data: {
+                    x: 'Category',
+                    columns: [
+                        ['Category'].concat(objectMap(categorySize,'category_name')),
+                        ['Percentage of Words Understood (%)'].concat(objectMap(categorySize,'prop_understood'))
+                    ],
+                    type: 'bar',
+                    color : function (color, d) {
+                        return d.index? categorySize[d.index].hex : color;
+                    },                                                     
+                },
+                axis: {
+                  rotated: true,
+                    x: {
+                        type: 'category',
+                        tick: {
+                            width: 110
+                        } 
+                    },
+                    y: {
+                        label: {
+                            text: 'Percentage of Words Understood (%)',
+                            position: 'outer-center'
+                        }
+                    }                    
+
+                },
+                legend: {
+                    show: false
+                }                   
+
+            });
+
+            setTimeout(function () {
+                if (words_produced > 0){
+                    new_chart_understood.resize({
+                        height: $("#predicted_chart").innerWidth()*1.2,
+                        width: $("#categories_charts").innerWidth()*0.49
+                })} else {
+                    $('#categories_charts_produced').remove()
+                    new_chart_understood.resize({
+                        height: $("#predicted_chart").innerWidth()*1.2,
+                        width: $("#categories_charts").innerWidth()*0.95
+                    })
+                }
+
+            }, 25);
         }
 
         if (words_produced > 0) {
-            plotFlippedPropProduced();
+            new_chart_produced = c3.generate({
+                bindto: '#categories_charts_produced',
+                data: {
+                    x: 'Category',
+                    columns: [
+                        ['Category'].concat(objectMap(categorySize,'category_name')),
+                        ['Percentage of Words Spoken (%)'].concat(objectMap(categorySize,'prop_produced'))
+                    ],
+                    type: 'bar',
+                    color : function (color, d) {
+                        return d.index? categorySize[d.index].hex : color;
+                    },                                                     
+                },
+                axis: {
+                  rotated: true,
+                    x: {
+                        type: 'category',
+                        tick: {
+                            width: 110
+                        }
+                        
+                    },
+                    y: {
+                        label: {
+                            text: 'Percentage of Words Spoken (%)',
+                            position: 'outer-center'
+                        }
+                    }
+                },
+                legend: {
+                    show: false
+                }                 
+
+            });
+
+            setTimeout(function () {
+                if (raw_words_understood > 0){
+                    new_chart_produced.resize({
+                        height: $("#predicted_chart").innerWidth()*1.2,
+                        width: $("#categories_charts").innerWidth()*0.49
+                })} else {
+                    $('#categories_charts_understood').remove()
+                    new_chart_produced.resize({
+                        height: $("#predicted_chart").innerWidth()*1.2,
+                        width: $("#categories_charts").innerWidth()*0.95
+                    })
+                }
+
+            }, 25);       
         }
 
         bestCategories();
@@ -417,6 +537,7 @@
 
         $.each(categorySize, function(index, value){
             value.color = category_colors[index]
+            value.hex = value.color.toString()
             value.neither = 0;
             value.understands = 0;
             value.produces = 0;
@@ -836,25 +957,33 @@
                 },
                 axis: {
                   x: {
-                    label: 'Age (in Months)',
-                    position: 'outer-center',
+                    label: {
+                        text: 'Age (in Months)        ',
+                        position: 'outer-center',                        
+                    },
                     tick: {
                       values: _.range(8, 32, 2)
                     }
                   },
                   y: {
-                    label: 'Predicted % of Words on Test',
-                    position: 'outer-middle',
+                    label: {
+                        text: 'Predicted % of Words on Test',
+                        position: 'outer-middle',
+                    },
                     tick: {
                       values: _.range(0, 125, 25)
                     },
                     max: 100,
-                    padding: {top:5, bottom:5}
+                    min: 0,
+                    padding: {top:5, bottom:10}
                   }
                 },
                 point: {
                   r: 8,
                   show: false
+                },
+                legend: {
+                    position: 'inset'
                 }
             });
 
@@ -862,7 +991,7 @@
 
             setTimeout(function () {
                 new_pred_chart.resize({
-                  height: $("#predicted_chart").innerWidth()*0.7,
+                  height: $("#predicted_chart").innerWidth()*0.8,
                   width: $("#predicted_chart").innerWidth()*0.95
                 });
             }, 25);
