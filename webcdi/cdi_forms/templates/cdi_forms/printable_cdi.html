@@ -7,10 +7,13 @@
     <meta name="description" content="English Words and Sentences CDI form">
     <meta name="author" content="Ashwin Paranjape">
 
-    <script src="{% static 'jquery/jquery-1.11.3.min.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap-theme.min.css' %}">
-    <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" ></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" ></script>
+
+<!--     <script src="{% static 'jquery/jquery-1.11.3.min.js' %}"></script>
+ -->    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
+<!--     <link rel="stylesheet" href="{% static 'bootstrap/bootstrap-theme.min.css' %}">
+ -->    <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
     <script src="{% static 'cdi_forms/selectize.js' %}"></script>
     <script src="{% static 'cdi_forms/bootstrap-datepicker.js' %}"></script>
     <link rel='stylesheet' href="{% static 'cdi_forms/selectize.bootstrap3.css' %}">
@@ -23,6 +26,8 @@
 
     <link rel="stylesheet" href="{% static 'd3/c3.css' %}">
     <script src="{% static 'd3/c3.min.js' %}"></script>
+    <script src="https://d3js.org/d3-color.v1.min.js"></script>
+
 
 
   	<meta property="og:image" content="http://webcdi.stanford.edu/{% static 'researcher_UI/images/logo.png' %}" />
@@ -77,7 +82,7 @@
         <!-- Thank you letter written to participants upon completion with the CDI logo. If participant is meant to be compensated, letter will also include a gift card code, monetary amount, and instructions on how to redeem the gift card. -->
             <div class="row">
                 <div class="col-md-12">
-                    <img src={% static 'images/logo_bg.jpg' %} class="rounded img-responsive center-block" alt="MB-CDI Lab Logo" style="max-width: 40%;"> <br>
+                    <img src={% static 'images/logo_bg.jpg' %} class="rounded mx-auto d-block" alt="MB-CDI Lab Logo" style="max-width: 40%;"> <br>
                 </div>
                 <h2>Thank you!</h2><br>
                 <h4>Thank you for taking the time to complete the MacArthur-Bates Communicative Development Inventory (CDI). With the help of parents and caregivers like you, we are working to learn more about the way that children’s language develops, and how that development varies across individual children and cultures. Remember that the CDI lists many different words that are used by many different children. Don’t worry if your child only knows a few of them right now. Below are some insights into your child’s developing vocabulary, based on our research. This summary is not a clinical evaluation. If you have any concerns about your child’s development, we recommend that you talk with your child’s physician. If you enjoyed our assessment, you can learn more about the CDI <a href="http://mb-cdi.stanford.edu/" target="_blank">here</a>. We appreciate your contribution!</h4>
@@ -130,42 +135,44 @@
             </div>
             <br>
             <!-- Button triggers the D3 graph div to appear. -->
-            <div class="row text-center">
+            <div class="row justify-content-center" style="padding-bottom: 1%;">
                 <a class="btn btn-primary btn-lg" href="#graph_data" data-toggle="collapse">Graph My Data!</a>
             </div>
         </div>
 
         <!-- Text triggers the submitted answers div to appear -->
-        <div class="row text-center">
+        <div class="row justify-content-center">
             <h4><a href="#filled_form" data-toggle="collapse">Show Me My Answers</a></h4>
+        </div>
+
+        <div class="row justify-content-center">
             <!-- If study allows participants to share results via Facebook, a link for FB sharing will appear in template. -->
               {% if allow_sharing %}
                 {% url 'administer_cdi_form' hash_id=hash_id as form_url %}
-                    <div class="fb-share-button" data-href="{{ form_url }}" data-layout="link" data-mobile-iframe="false">
-                           <a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ form_url | urlencode }}&amp;src=sdkpreparse">Share on Facebook</a>
-                    </div>
+                <div class="fb-share-button" data-href="{{ form_url }}" data-layout="link" data-mobile-iframe="false">
+                       <a class="fb-xfbml-parse-ignore" target="_blank" style="width: 100%;" href="https://www.facebook.com/sharer/sharer.php?u={{ form_url | urlencode }}&amp;src=sdkpreparse">Share on Facebook</a>
+                </div>
               {% endif %}
         </div>
+
+
         <br>
         <!-- D3 graph div. Filled with empty divs which are populated by later D3 script -->
-        <div class="col-md-12 collapse.in" id="graph_data" style="height: 90vh;">
+        <div class="col-md-12 collapse.show" id="graph_data" style="height: 90vh;">
         <br>
           <div class = "row"> 
             <div class="col-md-6 text-center" id="predicted_chart"></div>
-            <h2><div class="col-md-6 text-center" id="num_words_text"></div></h2>
+            <div class="col-md-6 text-center" id="num_words_text"></div>
           </div>
           <br>
           <div class = "row"> 
-            <div class="text-center" id="categories_charts"></div>
-            <div class="row">
                 <div class="col-md-6 text-center" id="categories_charts_understood"></div>
                 <div class="col-md-6 text-center" id="categories_charts_produced"></div>
-            </div>
             <h4><div class="row text-center" id="best_categories"></div></h4>
           </div>
           <br>
-          <div class = "row text-center"> 
-            <h4><div id="hardest_words"></div><h4>
+          <div class = "row justify-content-center"> 
+            <h4><div id="hardest_words" class="text-center"></div><h4>
           </div>
         </div>
 
@@ -324,6 +331,8 @@
     var graph_width = 500;
     var stroke_thickness = 4;
 
+    refresh_time = 25;
+
     // Parse Django string object data. Grab relevant variables
     var raw_data = '{{ cdi_items |escapejs }}';
     var root = JSON.parse(raw_data);
@@ -364,7 +373,7 @@
 
     // Place text variable into div
     if (words_produced > 0 | raw_words_understood > 0) {
-        $("#num_words_text").html(num_words);
+        $("#num_words_text").html("<h2>"+num_words+"</h2>");
     }
 
     // Generate a category-level summary of vocabulary
@@ -451,16 +460,17 @@
                 if (words_produced > 0){
                     new_chart_understood.resize({
                         height: $("#predicted_chart").innerWidth()*1.2,
-                        width: $("#categories_charts").innerWidth()*0.49
+                        width: $("#categories_charts_understood").innerWidth()*0.85
                 })} else {
-                    $('#categories_charts_produced').remove()
+                    $('#categories_charts_produced').remove();
+                    $('#categories_charts_understood').removeClass('col-md-6').addClass('col-md-12');
                     new_chart_understood.resize({
                         height: $("#predicted_chart").innerWidth()*1.2,
-                        width: $("#categories_charts").innerWidth()*0.95
+                        width: $("#categories_charts_understood").innerWidth()*0.85
                     })
                 }
 
-            }, 25);
+            }, refresh_time);
         }
 
         if (words_produced > 0) {
@@ -503,16 +513,18 @@
                 if (raw_words_understood > 0){
                     new_chart_produced.resize({
                         height: $("#predicted_chart").innerWidth()*1.2,
-                        width: $("#categories_charts").innerWidth()*0.49
+                        width: $("#categories_charts_produced").innerWidth()*0.85
                 })} else {
-                    $('#categories_charts_understood').remove()
+                    $('#categories_charts_understood').remove();
+                    $('#categories_charts_produced').removeClass('col-md-6').addClass('col-md-12');
                     new_chart_produced.resize({
                         height: $("#predicted_chart").innerWidth()*1.2,
-                        width: $("#categories_charts").innerWidth()*0.95
+                        width: $("#categories_charts_produced").innerWidth()*0.85
                     })
                 }
 
-            }, 25);       
+            }, refresh_time);  
+    
         }
 
         bestCategories();
@@ -991,10 +1003,10 @@
 
             setTimeout(function () {
                 new_pred_chart.resize({
-                  height: $("#predicted_chart").innerWidth()*0.8,
-                  width: $("#predicted_chart").innerWidth()*0.95
+                  height: $("#predicted_chart").innerWidth()*0.75,
+                  width: $("#predicted_chart").innerWidth()*0.9
                 });
-            }, 25);
+            }, refresh_time);
 
         });
 
@@ -1189,6 +1201,12 @@
             }
         });
     }
+
+    
+
+    setTimeout(function () {
+        $('.fb-share-button span').css('width', '20%');
+    }, 200);
 
 
 </script>

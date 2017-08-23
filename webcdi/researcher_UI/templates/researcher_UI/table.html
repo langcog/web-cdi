@@ -48,9 +48,8 @@
  
 {% if table.page %}
     {% block pagination %}
-        <div class = "row" style = "float:none; display:inline-block; vertical-align:middle;">
-            {% bootstrap_pagination table.page url=request.get_full_path %}
-            <br>
+        <div class = "col-md-12" style = "float:none; display:inline-block; vertical-align:middle;">
+            <nav>{% bootstrap_pagination table.page url=request.get_full_path %}</nav>
             <input name="view_all" id = "view_all" class="btn btn-link" role="link" type="submit" value = "Show All">
         </div>
     {% endblock pagination %}
