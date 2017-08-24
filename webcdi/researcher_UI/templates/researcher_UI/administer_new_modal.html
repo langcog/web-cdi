@@ -1,6 +1,6 @@
 <!-- Modal window for creating new tests within a study -->
 
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -11,23 +11,23 @@
         {% csrf_token %}
         <p> The subject IDs should not include any identifiable information. For the same reason they are enforced to be numeric </p>
         <hr />
-        <div class="form-group">
-            <label for="new-subject-ids" class="col-sm-2 control-label">New Subject Ids:</label>
-            <div class="col-sm-10">
+        <div class="row form-group">
+            <label for="new-subject-ids" class="col-3 control-label">New Subject Ids:</label>
+            <div class="col-9">
             <textarea name="new-subject-ids" class="form-control" rows="3" id='new-subject-ids' placeholder="Copy and paste in a list of subject IDs here (separated by spaces, commas, semicolons, or new lines)"></textarea>
             </div>
         </div>
         <hr />
-        <div class="form-group">
-            <label for="autogenerate-count" class="col-sm-2 control-label">Number of IDs to Autogenerate:</label>
-            <div class="col-sm-10">
+        <div class="row form-group">
+            <label for="autogenerate-count" class="col-3 control-label">Number of IDs to Autogenerate:</label>
+            <div class="col-9">
             <input type="text" name = 'autogenerate-count' class="form-control" id ='autogenerate-count' placeholder="Autogenerate XX subject IDs">
             </div>
         </div>
         <hr />
-        <div class="form-group">
-            <label for="subject-ids-csv" class="col-sm-2 control-label">Upload a CSV of Subject IDs:</label>
-            <div class="col-sm-10">
+        <div class="row form-group">
+            <label for="subject-ids-csv" class="col-3 control-label">Upload a CSV of Subject IDs:</label>
+            <div class="col-9">
               <input type="file" name = 'subject-ids-csv' class="form-control" id ='subject-ids-csv'><br>
               <input type="checkbox" name = 'csv-header' id ='csv-header'><label for='ignore-csv-header'>&nbsp; This file has a header row</label><br>
               <div id = "subj_col_div" class = "collapse">
@@ -56,9 +56,9 @@
         </script>
         <hr />
 
-        <div class="form-group">
-            <label for="add_new_parent" class="col-sm-2 control-label">Single Reusable Link</label>
-            <div class="col-sm-10" id="reusable_link_div">
+        <div class="row form-group">
+            <label for="add_new_parent" class="col-3 control-label">Single Reusable Link</label>
+            <div class="col-9" id="reusable_link_div">
               <a href="{% url 'administer_new_parent' username study_name %}" id="reusable_link">Click here</a><br>
               (For mass emails or adding to a website. Does not track IP addresses or use cookies. Every link click creates a new administration.)
 

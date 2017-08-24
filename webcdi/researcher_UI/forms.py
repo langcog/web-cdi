@@ -4,6 +4,9 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Field, Div
 from form_utils.forms import BetterModelForm
 from django.core.urlresolvers import reverse
+import os
+
+PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__)) # Declare project file directory
 
 # Form for creating a new study
 class AddStudyForm(BetterModelForm):
@@ -23,8 +26,9 @@ class AddStudyForm(BetterModelForm):
         self.helper = FormHelper()
         self.helper.form_id = 'add-study'
         self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-lg-3'
-        self.helper.field_class = 'col-lg-9'
+        self.helper.template = PROJECT_ROOT + '/../cdi_forms/templates/bootstrap3/whole_uni_form.html'        
+        self.helper.label_class = 'col-3'
+        self.helper.field_class = 'col-9'
         self.helper.form_method = 'post'
         self.helper.form_action = reverse('add_study')
         self.helper.layout = Layout(
@@ -63,8 +67,9 @@ class AddPairedStudyForm(forms.Form):
         self.helper = FormHelper()
         self.helper.form_id = 'add-paired-study'
         self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-lg-3'
-        self.helper.field_class = 'col-lg-9'
+        self.helper.template = PROJECT_ROOT + '/../cdi_forms/templates/bootstrap3/whole_uni_form.html'        
+        self.helper.label_class = 'col-3'
+        self.helper.field_class = 'col-9'
         self.helper.form_method = 'post'
         self.helper.form_action = reverse('add_paired_study')
         if self.researcher:
@@ -88,8 +93,9 @@ class RenameStudyForm(BetterModelForm):
         self.helper = FormHelper()
         self.helper.form_id = 'rename_study'
         self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-lg-3'
-        self.helper.field_class = 'col-lg-9'
+        self.helper.template = PROJECT_ROOT + '/../cdi_forms/templates/bootstrap3/whole_uni_form.html'        
+        self.helper.label_class = 'col-3'
+        self.helper.field_class = 'col-9'
         self.helper.form_method = 'post'
         self.helper.form_action = reverse('rename_study', args=[old_study_name])
         self.helper.layout = Layout(

@@ -1,6 +1,6 @@
 <!-- Modal form for adding a new study -->
 
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -19,23 +19,23 @@
         <script>
 
         // Automatically collapses fields dependent on whether the study involves anonymous participants and/or financial compensation. Upon checking/unchecking inputs for those 2 settings, other dependent fields appear.
-        $('#div_id_subject_cap').addClass( "anon-collection collapse" );
-        $('#div_id_confirm_completion').addClass( "anon-collection collapse" ); 
+        $('#div_id_subject_cap').addClass( "anon-collection" );
+        $('#div_id_confirm_completion').addClass( "anon-collection" ); 
 
         function check_for_payment() {
             if($('#id_allow_payment').prop('checked')) {
-                $('.gift_cards').collapse('show');
+                $('.gift_cards').removeClass('collapse')
             } else {
-                $('.gift_cards').collapse('hide');
+                $('.gift_cards').addClass('collapse');
             }
         }
 
         function check_for_anon() {
 
           if ($('#id_anon_collection').prop('checked')) {
-            $('.anon-collection').collapse('show');
+            $('.anon-collection').removeClass('collapse')
           } else {
-            $('.anon-collection').collapse('hide');
+            $('.anon-collection').addClass('collapse');
           }  
         }        
 

@@ -20,11 +20,12 @@
     <script src="http://d3js.org/d3.v3.js"></script>
     <script src="https://cdn.jsdelivr.net/lodash/4.17.2/lodash.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-queue/3.0.3/d3-queue.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" ></script>
 
     <script src="{% static 'jquery/jquery-1.11.3.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap-theme.min.css' %}">
-    <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
+<!--     <link rel="stylesheet" href="{% static 'bootstrap/bootstrap-theme.min.css' %}">
+ -->    <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
     <script src="{% static 'cdi_forms/selectize.js' %}"></script>
     <script src="{% static 'cdi_forms/bootstrap-datepicker.js' %}"></script>
     <link rel='stylesheet' href="{% static 'cdi_forms/selectize.bootstrap3.css' %}">
@@ -42,7 +43,7 @@
 <body >
 <!-- Form for contacting the Web-CDI team -->
     <div class="container bs-docs-container" style='padding-top: 60px; padding-bottom: 60px;'>
-    	<div class="col-lg-offset-3 col-lg-9">
+    	<div class="col-9 ml-auto">
     		<h2> Fill out the form below and a member of our team will get back to you soon! </h2>
     	</div>
 	    {% load crispy_forms_tags %}
@@ -50,7 +51,7 @@
 
 	    <!-- Uses Django 'messages' framework to deliver message of successful delivery without reloading the page -->
 	    {% if messages %}
-	    <div class="col-lg-offset-3 col-lg-9 text-center">
+	    <div class="col-9 ml-auto text-center">
 			<ul class="messages">
 			    {% for message in messages %}
 			    <font color="#3C763D" {% if message.tags %} class="{{ message.tags }}" {% endif %}><h2>{{ message }}<h2></font>
@@ -67,7 +68,7 @@
 		max_length = current_textbox.maxLength
 		parent_div = current_textbox.parentElement
 
-		parent_div.insertAdjacentHTML('beforeend', "<div class = 'pull-right' id='" + current_textbox.name+"_char_counter'></div>")
+		parent_div.insertAdjacentHTML('beforeend', "<div class = 'd-flex justify-content-end' id='" + current_textbox.name+"_char_counter'></div>")
 		countCharacters(current_textbox);
 	})
 
