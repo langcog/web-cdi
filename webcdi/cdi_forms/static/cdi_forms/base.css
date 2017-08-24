@@ -53,6 +53,12 @@ h6 { font-size: .75em; }
 
 .lead { font-size: 1.2em; }
 
+.form-inline .form-control {
+    width:auto;
+}
+.form-inline .form-group {
+    display: inline-block;
+}
 
 @media(max-width:1199px){.form-control { 
     height: 1.9em;
@@ -82,12 +88,7 @@ input[type=textbox] {
 }
 
 
-span.glyphicon:after {
-  font-family: "Glyphicons Halflings";
-  src: url('../fonts/glyphicons-halflings-regular.woff2');
-}
-
-label input[type="radio"] ~ span.glyphicon.glyphicon-unchecked ,label input[type="checkbox"] ~ span.glyphicon.glyphicon-unchecked {
+/*label input[type="radio"] ~ span.glyphicon.glyphicon-unchecked ,label input[type="checkbox"] ~ span.glyphicon.glyphicon-unchecked {
 color: #222;
 display: inline;
 }
@@ -100,10 +101,29 @@ display: none;
 label input[type="radio"]:checked ~ span.glyphicon.glyphicon-check ,label input[type="checkbox"]:checked ~ span.glyphicon.glyphicon-check {
 color: #3C763D;
 display: inline;
+}*/
+
+label input ~ i.material-icons.radio_button_unchecked ,label input ~ i.material-icons.check_box_outline_blank {
+color: #222;
+display: inline;
+}
+label input ~ i.material-icons.radio_button_checked ,label input ~ i.material-icons.check_box {
+display: none;
+}
+label input:checked ~ i.material-icons.radio_button_unchecked ,label input:checked ~ i.material-icons.check_box_outline_blank {
+display: none;
+}
+label input:checked ~ i.material-icons.radio_button_checked ,label input:checked ~ i.material-icons.check_box {
+color: #3C763D;
+display: inline;
 }
 
 input:checked ~ span { 
   color: #3C763D; 
+}
+
+i.material-icons{
+  margin-right: 0.5%;
 }
 
 div[data-toggle="buttons"] label {
@@ -140,4 +160,9 @@ ul {
 }
 .h_iframe iframe {
     width:100%;
+}
+
+.btn.justify-content-start{
+    white-space:normal !important;
+    word-wrap: break-word; 
 }

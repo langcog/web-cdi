@@ -3,10 +3,14 @@
 <!-- Navigation buttons placed in cdi_base.html -->
 {% block nav_buttons %}
 {% if not completed %}
-<div class="row text-center button-wrapper">
-    <input name="btn-save" value="Save" class="btn btn-primary" type="submit">
-    <input name="btn-submit" value="Submit" class="btn btn-success submit-button" type="submit" onclick="clicked(event)">
-    <input name="btn-back" value='Go back to Background Info' class="btn btn-primary" type="submit">
+<div class="button-wrapper">
+    <div class="flex-row d-flex justify-content-center">
+        <input name="btn-save" value="Save" class="btn btn-primary" type="submit">
+        <input name="btn-submit" value="Submit" class="btn btn-success submit-button" type="submit" onclick="clicked(event)">
+    </div>
+    <div class="flex-row d-flex justify-content-center">    
+        <input name="btn-back" value='Go back to Background Info' class="btn btn-primary" type="submit">
+    </div>
 </div>
 
 {% endif %}
@@ -15,7 +19,7 @@
 
 <!-- Navigation sidebar -->
 {% block navcontents %}
-<a href="#nav_list" data-toggle="collapse" id="tob_title"><h4>Table of Contents: &#8744;</h4></a>
+<a href="#nav_list" data-toggle="collapse" id="tob_title"><h4>Table of Contents: <i class="material-icons">arrow_drop_down</i></h4></a>
 <div id = "nav_list" class = "collapse">
     <h4>Contents:</h4>
     <ul class="nav bs-docs-sidenav">
@@ -55,12 +59,12 @@
                 <h4>You child "understands" a word/phrase if they know what the word/phrase means, even though they may not be able to say it themselves. Here are some examples.</h4> <br><br>
 
                 <div class="row">
-                    <div class="col-xs-6">
+                    <div class="col-6">
                         <img src={% static 'images/understands-yes-get.png' %} class="rounded float-xs-left" alt="Hearing the word AND looking for the object can mean that your child understands it."style="max-width: 90%; border: 1px solid black;">
 
                     </div>
 
-                    <div class="col-xs-6">
+                    <div class="col-6">
                         <h4>
                         DO check "understands" if:
                         <br><br>
@@ -70,12 +74,12 @@
                 </div><br>
 
                 <div class="row">
-                    <div class="col-xs-6">
+                    <div class="col-6">
                         <img src={% static 'images/understands-no-hear.png' %} class="rounded float-xs-left" alt="Hearing the word is not enough to say that your child understands it."style="max-width: 90%; border: 1px solid black;">
 
                     </div>
 
-                    <div class="col-xs-6">
+                    <div class="col-6">
                         <h4>
                         DON'T check "understands" if:
                         <br><br>
@@ -92,12 +96,12 @@
                 <h4>You child "understands and says" a word/phrase if they know what the word/phrase means AND they are able to say it by themselves. Here are some examples.</h4> <br><br>
 
                 <div class="row">
-                    <div class="col-xs-6">
+                    <div class="col-6">
                         <img src={% static 'images/says-yes-ball.png' %} class="rounded float-xs-left" alt="Having your child say the word in the presence of the object can mean that your child understands and says the word."style="max-width: 90%; border: 1px solid black;">
 
                     </div>
 
-                    <div class="col-xs-6">
+                    <div class="col-6">
                         <h4>
                         DO check "understands and says" if:
                         <br><br>
@@ -109,12 +113,12 @@
                 </div> <br>
 
                 <div class="row">
-                    <div class="col-xs-6">
+                    <div class="col-6">
                         <img src={% static 'images/says-yes-raff.png' %} class="rounded float-xs-left" alt="Having your child say the word in the presence of the object can mean that your child understands and says the word."style="max-width: 90%; border: 1px solid black;">
 
                     </div>
 
-                    <div class="col-xs-6">
+                    <div class="col-6">
                         <h4>
                         It's fine if your child can't say the whole word or says it his/her own "special" way.
                         <br><br>
@@ -126,12 +130,12 @@
                 </div> <br>
 
                 <div class="row">
-                    <div class="col-xs-6">
+                    <div class="col-6">
                         <img src={% static 'images/says-no-baba.png' %} class="rounded float-xs-left" alt="Saying the word alone is not enough to mean that your child understands and says a word. The context is important!"style="max-width: 90%; border: 1px solid black;">
 
                     </div>
 
-                    <div class="col-xs-6">
+                    <div class="col-6">
                         <h4>
                         DON'T check if your child is just stringing sounds together.  This is not a real word that means something.
                         <br><br>
@@ -142,12 +146,12 @@
                 </div><br>
 
                 <div class="row">
-                    <div class="col-xs-6">
+                    <div class="col-6">
                         <img src={% static 'images/says-no-coaching.png' %} class="rounded float-xs-left" alt="Having your child repeat back a taught word is not enough to mean that your child undestands the word."style="max-width: 90%; border: 1px solid black;">
 
                     </div>
 
-                    <div class="col-xs-6">
+                    <div class="col-6">
                         <h4>
                         DON'T ask your child to repeat the words on the list. This doesn't count!
                         <br><br>
@@ -172,12 +176,12 @@
 
 
                 <div class="row">
-                    <div class="col-xs-6">
+                    <div class="col-6">
                         <img src={% static 'images/says-yes-ball.png' %} class="rounded float-xs-left" alt="Having your child say the word in the presence of the object can mean that your child understands and says the word."style="max-width: 90%; border: 1px solid black;">
 
                     </div>
 
-                    <div class="col-xs-6">
+                    <div class="col-6">
                         <h4>
                         DO check the box if:
                         <br><br>
@@ -190,12 +194,12 @@
                 </div> <br>
 
                 <div class="row">
-                    <div class="col-xs-6">
+                    <div class="col-6">
                         <img src={% static 'images/says-yes-raff.png' %} class="rounded float-xs-left" alt="Having your child say the word in the presence of the object can mean that your child understands and says the word."style="max-width: 90%; border: 1px solid black;">
 
                     </div>
 
-                    <div class="col-xs-6">
+                    <div class="col-6">
                         <h4>
                         It's fine if your child can't say the whole word or says it his/her own "special" way. If you use another word in your family (e.g., Nana for Grandma), that is ok too!
                         <br><br>
@@ -207,12 +211,12 @@
                 </div> <br>
 
                 <div class="row">
-                    <div class="col-xs-6">
+                    <div class="col-6">
                         <img src={% static 'images/says-no-baba.png' %} class="rounded float-xs-left" alt="Saying the word alone is not enough to mean that your child understands and says a word. The context is important!"style="max-width: 90%; border: 1px solid black;">
 
                     </div>
 
-                    <div class="col-xs-6">
+                    <div class="col-6">
                         <h4>
                         DON'T check the box if your child is just stringing sounds together. This is not a real word that means something.
                         </h4>
@@ -221,12 +225,12 @@
                 </div><br>
 
                 <div class="row">
-                    <div class="col-xs-6">
+                    <div class="col-6">
                         <img src={% static 'images/says-no-coaching.png' %} class="rounded float-xs-left" alt="Having your child repeat back a taught word is not enough to mean that your child undestands the word."style="max-width: 90%; border: 1px solid black;">
 
                     </div>
 
-                    <div class="col-xs-6">
+                    <div class="col-6">
                         <h4>
                         DON'T ask your child to repeat the words on the list. This doesn't count!
                         </h4>
@@ -262,13 +266,15 @@
                         {% if object.text != '' %}
                         <div class="col-md-12 alco-child" name = "{{ object.itemID }}_div">
                             <div class="row alco-child1" >
-                                <span>{{ object.text | capfirst }}</span>
-                                <div class="btn-group pull-right" data-toggle="buttons">
+                                <div class="col"><span>{{ object.text | capfirst }}</span></div>
+                                <div class="col align-items-center btn-group d-flex justify-content-end" data-toggle="buttons">
                                     {% for choice in object.choices %}
                                         <label class = "btn mult-choice">
                                             <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
-                                            <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
-                                            <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                                            <!-- <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
+                                            <span class="glyphicon glyphicon-check" aria-hidden="true"></span> -->
+                                            <i class="material-icons check_box" aria-hidden="true">check_box</i>
+                                            <i class="material-icons check_box_outline_blank" aria-hidden="true">check_box_outline_blank</i>
                                             <span class="choice"> {{ choice.0 }}</span>
                                         </label>
                                     {% endfor %}
@@ -282,8 +288,10 @@
                                     <div class="row">
                                         <label class = "btn mult-choice">
                                             <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
-                                            <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
-                                            <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+<!--                                             <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
+                                            <span class="glyphicon glyphicon-check" aria-hidden="true"></span> -->
+                                            <i class="material-icons check_box" aria-hidden="true">check_box</i>
+                                            <i class="material-icons check_box_outline_blank" aria-hidden="true">check_box_outline_blank</i>
                                             <span class="choice"> {{ choice.0 }}</span>
                                         </label>
                                     </div>
@@ -296,8 +304,10 @@
                             <div class="btn-group" data-toggle="buttons"> 
                                 <label class = "btn">
                                     <input type="checkbox" id="{{ object.itemID }}" name="{{ object.itemID }}" value="{{ object.choices }}"{% if completed %} disabled {% endif %} {% if object.prefilled_value %} checked {% endif %}> 
-                                    <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
-                                    <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                                    <!-- <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
+                                    <span class="glyphicon glyphicon-check" aria-hidden="true"></span> -->
+                                    <i class="material-icons check_box" aria-hidden="true">check_box</i>
+                                    <i class="material-icons check_box_outline_blank" aria-hidden="true">check_box_outline_blank</i>
                                     <span class="choice"> {{ object.definition }}</span>
                                 </label>
                             </div>
@@ -318,13 +328,15 @@
                                 {% if object.text != '' %}
                                 <div class="col-md-12 alco-child" name = "{{ object.itemID }}_div">
                                     <div class="row alco-child1" >
-                                        <span> {{ object.text | capfirst }}</span>
-                                        <div class="btn-group pull-right" data-toggle="buttons">
+                                        <div class="col"><span> {{ object.text | capfirst }}</span></div>
+                                        <div class="col align-items-center btn-group d-flex justify-content-end" data-toggle="buttons">
                                             {% for choice in object.choices %}
                                                 <label class = "btn mult-choice">
                                                     <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
-                                                    <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
-                                                    <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                                                    <!-- <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
+                                                    <span class="glyphicon glyphicon-check" aria-hidden="true"></span> -->
+                                                    <i class="material-icons check_box" aria-hidden="true">check_box</i>
+                                                    <i class="material-icons check_box_outline_blank" aria-hidden="true">check_box_outline_blank</i>
                                                     <span class="choice"> {{ choice.0 }}</span>
                                                 </label>
                                             {% endfor %}
@@ -338,8 +350,10 @@
                                             <div class="row">
                                                 <label class = "btn mult-choice">
                                                     <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
-                                                    <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
-                                                    <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                                                    <!-- <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
+                                                    <span class="glyphicon glyphicon-check" aria-hidden="true"></span> -->
+                                                    <i class="material-icons check_box" aria-hidden="true">check_box</i>
+                                                    <i class="material-icons check_box_outline_blank" aria-hidden="true">check_box_outline_blank</i>
                                                     <span class="choice"> {{ choice.0 }}</span>
                                                 </label>
                                             </div>
@@ -352,8 +366,10 @@
                                     <div class="btn-group" data-toggle="buttons"> 
                                         <label class = "btn">
                                             <input type="checkbox" id="{{ object.itemID }}" name="{{ object.itemID }}" value="{{ object.choices }}"{% if completed %} disabled {% endif %} {% if object.prefilled_value %} checked {% endif %}> 
-                                            <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
-                                            <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                                            <!-- <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
+                                            <span class="glyphicon glyphicon-check" aria-hidden="true"></span> -->
+                                            <i class="material-icons check_box" aria-hidden="true">check_box</i>
+                                            <i class="material-icons check_box_outline_blank" aria-hidden="true">check_box_outline_blank</i>
                                             <span class="choice"> {{ object.definition }}</span>
                                         </label>
                                     </div>
@@ -385,43 +401,51 @@
         </ul>
         <br>
 
-        <div class="btn-group" data-toggle="buttons">
-            <label class = "btn">
+        <div class="btn-group btn-group-vertical" data-toggle="buttons">
+            <label class = "btn d-flex justify-content-start">
                 <input  type="radio" id="analysis_yes" name="analysis" value="True">
-                <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
-                <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
-                Yes, I have a child who is {{ age.0 }} months old, I filled out the entire questionnaire, and I am taking this questionnaire for the first time.
+                <!-- <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-check" aria-hidden="true"></span> -->
+                <i class="material-icons radio_button_checked" aria-hidden="true">radio_button_checked</i>
+                <i class="material-icons radio_button_unchecked" aria-hidden="true">radio_button_unchecked</i>
+                <p class="text-left">Yes, I have a child who is {{ age.0 }} months old, I filled out the entire questionnaire, and I am taking this questionnaire for the first time.</p>
             </label>
             <br>
-            <label class = "btn">
+            <label class = "btn d-flex justify-content-start">
                 <input  type="radio" id="analysis_no" name="analysis" value="False">
-                <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
-                <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
-                No, I do NOT have a child who is {{ age.0 }} months old, I have NOT filled out the entire questionnaire, and/or I have taken this questionnaire before.
+                <!-- <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-check" aria-hidden="true"></span> -->
+                <i class="material-icons radio_button_checked" aria-hidden="true">radio_button_checked</i>
+                <i class="material-icons radio_button_unchecked" aria-hidden="true">radio_button_unchecked</i>
+                <p class="text-left">No, I do NOT have a child who is {{ age.0 }} months old, I have NOT filled out the entire questionnaire, and/or I have taken this questionnaire before.</p>
             </label>
         </div>
 
         {% if captcha == 'True' %}
             <br><br>
-            Finally, please check the Captcha box below to display the submit button!
-            <div class="g-recaptcha" data-sitekey="6LfI0yEUAAAAALj8wAxmoXmWg8B64tvr866bXeYg" data-callback="enableBtn"></div>
+            <p>Finally, please check the Captcha box below to display the submit button!</p>
+            <div class="g-recaptcha d-flex justify-content-center" data-sitekey="6LfI0yEUAAAAALj8wAxmoXmWg8B64tvr866bXeYg" data-callback="enableBtn"></div>
         {% endif %}
 
     </div> <br><br>
 
     <!-- Navigation buttons -->
-    <div class="row text-center button-wrapper">
-        <a class="btn btn-primary prev-cdi-page" href="#">&#60;&#60; Previous Page</a>
-        <a class="btn btn-primary next-cdi-page" href="#">Next Page &#62;&#62;</a>
-        <input name="btn-submit" value="Submit" class="btn btn-success submit-button" type="submit" onclick="clicked(event)">
-        <font id="progress"></font>
-        <br>
-        <input name="btn-save" value="Save" class="btn btn-primary" type="submit">
-        <input name="btn-back" value='Go back to Background Info' class="btn btn-primary" type="submit">
+    <div class="button-wrapper">
+        <div class="flex-row  d-flex justify-content-center">
+            <a class="btn btn-primary prev-cdi-page" href="#">&#60;&#60; Previous Page</a>
+            <a class="btn btn-primary next-cdi-page" href="#">Next Page &#62;&#62;</a>
+            <input name="btn-submit" value="Submit" class="btn btn-success submit-button" type="submit" onclick="clicked(event)">
+            <font id="progress"></font>
+        </div>
+        <div class="flex-row d-flex justify-content-center">        
+            <input name="btn-save" value="Save" class="btn btn-primary" type="submit">
+            <input name="btn-back" value='Go back to Background Info' class="btn btn-primary" type="submit">
+        </div>
+
     </div>
     <input type="hidden" id="page_number" name="page_number" value = "0">
     <hr>
-    <div class="row text-center">Don't forget to save your progress whenever you can!</div>
+    <div class="flex-row"><p class="text-center">Don't forget to save your progress whenever you can!</p></div>
 
 
 </ul>

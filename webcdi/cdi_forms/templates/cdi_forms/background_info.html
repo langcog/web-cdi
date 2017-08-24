@@ -2,7 +2,9 @@
 
 {% block nav_buttons %}
 {% if not completed %}
-<input name="btn-next" value="Next" class="btn btn-primary" type="submit">
+<div class="row d-flex justify-content-center">
+    <input name="btn-next" value="Next" class="btn btn-primary" type="submit">
+</div>
 {% endif %}
 {% endblock %}
 
@@ -35,7 +37,7 @@
 
 </div>
 
-<div class="row text-center">
+<div class="row d-flex justify-content-center">
     <input name="btn-next" value="Next" class="btn btn-primary" type="submit">
 </div>
 
@@ -163,7 +165,6 @@
 
         $('#hint_id_age').append(hint, study_group_hint);
     }
-
 
 
 </script>

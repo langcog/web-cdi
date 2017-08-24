@@ -3,13 +3,15 @@
 
 <div class="controls"{% if flat_attrs %} {{ flat_attrs|safe }}{% endif %}>
     {% include 'bootstrap/layout/field_errors_block.html' %}
-    <div class="btn-group" data-toggle="buttons">
+    <div class="btn-group btn-group-vertical" data-toggle="buttons">
 	    {% for choice in field.field.choices %}
-	        <label class="btn checkbox{% if inline_class %} {{ inline_class }}{% endif %}">
+	        <label class="btn checkbox{% if inline_class %} {{ inline_class }}{% endif %} d-flex justify-content-start" >
 	            <input type="checkbox"{% if choice.0 in field.value or choice.0|stringformat:"s" in field.value or choice.0|stringformat:"s" == field.value|stringformat:"s" %} checked="checked"{% endif %} name="{{ field.html_name }}" id="id_{{ field.html_name }}_{{ forloop.counter }}" value="{{ choice.0|unlocalize }}" {{ field.field.widget.attrs|flatatt }}>
-                <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
-                <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
-                <span class="choice"> {{ choice.1|unlocalize }}</span>
+                <!-- <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-check" aria-hidden="true"></span> -->
+                <i class="material-icons check_box" aria-hidden="true">check_box</i>
+                <i class="material-icons check_box_outline_blank" aria-hidden="true">check_box_outline_blank</i>
+                <span class="choice text-left"> {{ choice.1|unlocalize }}</span>
 	        </label>
 	    {% endfor %}
 	</div>

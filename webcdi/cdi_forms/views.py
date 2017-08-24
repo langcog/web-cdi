@@ -168,7 +168,7 @@ def cdi_items(object_group, item_type, prefilled_data, item_id):
             prefilled_values = [False if obj['itemID'] not in prefilled_data else x == prefilled_data[obj['itemID']] for x in split_choices]
             obj['text'] = obj['definition']
 
-            if obj['definition'] is not None and obj['definition'].find('/') >= 0 and item_id != 'word':
+            if obj['definition'] is not None and obj['definition'].find('/') >= 0 and item_id == 'complexity':
                 split_definition = map(unicode.strip, obj['definition'].split('/'))
                 obj['choices'] = zip(split_definition, split_choices, prefilled_values)
             else:

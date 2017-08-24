@@ -8,8 +8,10 @@
 	    {% for choice in field.field.choices %}
 	        <label class="btn radio{% if inline_class %} {{ inline_class }}{% endif %}">
 	            <input type="radio"{% if choice.0|stringformat:"s" == field.value|stringformat:"s" %} checked="checked"{% endif %} name="{{ field.html_name }}" id="id_{{ field.html_name }}_{{ forloop.counter }}" value="{{ choice.0|unlocalize }}" {{ field.field.widget.attrs|flatatt }}>
-	            <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
-	            <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+	            <!-- <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
+	            <span class="glyphicon glyphicon-check" aria-hidden="true"></span> -->
+	            <i class="material-icons radio_button_checked" aria-hidden="true">radio_button_checked</i>
+                <i class="material-icons radio_button_unchecked" aria-hidden="true">radio_button_unchecked</i>
 	            <span class="choice"> {{ choice.1|unlocalize }}</span>
 	        </label>
 	    {% endfor %}

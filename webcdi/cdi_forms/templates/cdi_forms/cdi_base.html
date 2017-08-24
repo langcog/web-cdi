@@ -8,10 +8,12 @@
     <title>{{ title }}</title>
     <meta name="description" content="English Words and Sentences CDI form">
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" ></script>
+
     <script src="{% static 'jquery/jquery-1.11.3.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap-theme.min.css' %}">
-    <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
+<!--     <link rel="stylesheet" href="{% static 'bootstrap/bootstrap-theme.min.css' %}">
+ -->    <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
     <script src="{% static 'cdi_forms/selectize.js' %}"></script>
     <script src="{% static 'cdi_forms/bootstrap-datepicker.js' %}"></script>
     <script src="{% static 'cdi_forms/moment.js' %}"></script>
@@ -25,6 +27,7 @@
     <script src="{% static 'cdi_forms/js.cookie.js' %}"></script>
     <script src="{% static 'jquery/jquery.inputmask.bundle.js' %}"></script>
     <script src='http://www.google.com/recaptcha/api.js'></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 </head>
 
@@ -32,13 +35,14 @@
     <div class="container bs-docs-container" style="padding-top: 60px; padding-bottom: 60px;">
     <form id="cdi_form" method="post" class="form-horizontal">
         <div class="row">
-            <div class="col-md-3 hidden-md-down" role="complementary">
+            <div class="col-md-3 d-xs-none" role="complementary">
 
-                <nav id="navbar" class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" style="padding-top:60px;">
+                <nav id="navbar" class="bs-docs-sidebar  affix" style="padding-top:60px;">
                     <div>
                         <!-- Instructions for completing CDI form -->
-                        <a href="#instructions" data-toggle="collapse" id="instructions_title"><h4>Instructions: &#8744;</h4></a>
-                        <div id="instructions" class = "collapse">
+                        <a href="#instructions" data-toggle="collapse" id="instructions_title"><h4>Instructions: 
+                            <i class="material-icons">arrow_drop_down</i></h4></a>
+                        <div id="instructions" class = "collapse" style="font-size: .85em;">
                             <ul>
                                 <li> This form can be filled anytime before the due date. </li>
                                 <li> It can also be saved at any time and resumed later by using the same link (<a id="bookmarkme" href="">create bookmark</a>).</li>
@@ -99,7 +103,7 @@
 
             </div>
             <!-- Holds main form. Can be backgroundform or cdi_form -->
-            <div class = "col-md-9" role="main">
+            <div class = "col-md-9 col-sm-12" role="main">
                 {% block main %}
                 {% endblock %}
 
