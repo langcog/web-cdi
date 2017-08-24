@@ -35,9 +35,9 @@
     <div class="container bs-docs-container" style="padding-top: 60px; padding-bottom: 60px;">
     <form id="cdi_form" method="post" class="form-horizontal">
         <div class="row">
-            <div class="col-md-3 d-xs-none" role="complementary">
+            <div class="col-md-3 d-print-none d-none d-lg-block affix" role="complementary">
 
-                <nav id="navbar" class="bs-docs-sidebar  affix" style="padding-top:60px;">
+                <nav id="navbar" class="bs-docs-sidebar affix" style="padding-top:60px;">
                     <div>
                         <!-- Instructions for completing CDI form -->
                         <a href="#instructions" data-toggle="collapse" id="instructions_title"><h4>Instructions: 
@@ -75,7 +75,7 @@
                         var due_date = "{{ due_date }}";
                         var due_date_utc = moment.utc(due_date, "MMM DD, YYYY, hh:mm a");
                         var due_date_local = moment(due_date_utc).local().format("MMM D, YYYY, h:mm a");
-                        $('#due_time').html("<p><b> Due date </b>: " + due_date_local + "</p>");
+                        $('#due_time').html("<p><b> Due date </b>: <span>" + due_date_local + "</span></p>");
                         </script>
 
                         <!-- If study has an associated body of text in it's waiver field, gives option to pull up a modal window containing the waiver text by clicking button -->
@@ -103,7 +103,7 @@
 
             </div>
             <!-- Holds main form. Can be backgroundform or cdi_form -->
-            <div class = "col-md-9 col-sm-12" role="main">
+            <div class = "col-12 col-lg-9" role="main">
                 {% block main %}
                 {% endblock %}
 

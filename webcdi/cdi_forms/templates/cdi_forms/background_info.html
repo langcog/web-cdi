@@ -13,20 +13,26 @@
 <input type="hidden" name="background-info-form" value="background-info-form"/> {% csrf_token %}
 <div class="row">
     <h2>MacArthur-Bates Communicative Development Inventory</h2>
-    <h4><div id = "instrument_age" style = "text-decoration: underline;"></p></div><br>
-    <h4>Instructions for completing the language inventory</h4>
-    <ul>
-        <li> Try to complete the inventory when you have at least 30 quiet minutes, without interruptions. An example might be when your child is sleeping. </li>
-        <li> You do not have to complete the inventory in one sitting. If you are interrupted, it is ok to put it down and come back to it when you have more time. </li>
-        <li> Feel free to ask others (e.g. other family members, nanny, child care providers) to help you fill out this form. </li>
-        <li> Please read all of the instructions on the inventory carefully, and make sure you complete all of the sections. </li>
-        <!-- Added optional bullet point describing compensation post-submission. Only appears if participant will be compensated. -->
-        {% if gift_amount %}
-            <li> You will receive a ${{ gift_amount }} Amazon.com gift card after you complete the form. As we are a research lab with limited funds, we ask that you only complete this questionnaire once.
-        {% endif %}
-    </ul>
-    <p>For more information about the MB-CDI, <a href="http://mb-cdi.stanford.edu/">click here</a>.</p>
-    <p>Thank you! We appreciate your time and effort!</p>
+    <h4><div class="flex-row" id="instrument_age" style="text-decoration: underline;">
+        For {{ min_age }}- to {{ max_age }}-month-old children
+    </div></h4>
+    <div class="flex-row">
+        <h4>Instructions for completing the language inventory</h4>
+        <ul>
+            <li> Try to complete the inventory when you have at least 30 quiet minutes, without interruptions. An example might be when your child is sleeping. </li>
+            <li> You do not have to complete the inventory in one sitting. If you are interrupted, it is ok to put it down and come back to it when you have more time. </li>
+            <li> Feel free to ask others (e.g. other family members, nanny, child care providers) to help you fill out this form. </li>
+            <li> Please read all of the instructions on the inventory carefully, and make sure you complete all of the sections. </li>
+            <!-- Added optional bullet point describing compensation post-submission. Only appears if participant will be compensated. -->
+            {% if gift_amount %}
+                <li> You will receive a ${{ gift_amount }} Amazon.com gift card after you complete the form. As we are a research lab with limited funds, we ask that you only complete this questionnaire once.</li>
+            {% endif %}
+        </ul>
+    </div>
+    <p>
+        For more information about the MB-CDI, <a href="http://mb-cdi.stanford.edu/">click here</a>.<br> 
+        Thank you! We appreciate your time and effort!
+    </p>
 </div>
 <br>
 <div class="row">
@@ -151,7 +157,7 @@
     function addWarnings() {
 
         var instrument_name = "{{ title }}";
-        var text = "For ".concat("{{ min_age }}","- to ", "{{ max_age }}", "-month-old children")
+        // var text = "For ".concat("{{ min_age }}","- to ", "{{ max_age }}", "-month-old children")
         var hint = "<br><font color = '#3C763D' style = 'text-decoration: underline;'>Your child should be between ".concat("{{ min_age }}"," to ", "{{ max_age }}", " months of age.</font>")
 
         var study_group = "{{ study_group }}"
@@ -161,7 +167,7 @@
             study_group_hint = ""
         }
 
-        $("#instrument_age").html(text);
+        // $("#instrument_age").html(text);
 
         $('#hint_id_age').append(hint, study_group_hint);
     }

@@ -11,11 +11,18 @@
   }
 
   label.btn span {
-    font-size: 2.5em;
+    font-size: 2.3em;
   }
   a.btn, input.btn {
     font-size:1em;
   }
+
+  h1 { font-size: 1.5em; }
+  h2 { font-size: 1.3em; }
+  h3 { font-size: 1.15em; }
+  h4 { font-size: 1.1em; }
+  h5 { font-size: .83em; }
+  h6 { font-size: .75em; }
 
   legend { font-size: 1.1em; }
 
@@ -32,6 +39,13 @@
   a.btn, input.btn {
     font-size:1em;
   }
+
+  h1 { font-size: 2em; }
+  h2 { font-size: 1.2em; }
+  h3 { font-size: 1.15em; }
+  h4 { font-size: 1.1em; }
+  h5 { font-size: .83em; }
+  h6 { font-size: .75em; }
 }
 
 @media (min-width:1200px){
@@ -42,14 +56,15 @@
   label.btn span {
     font-size: 1.1em;
   }
+  h1 { font-size: 2em; }
+  h2 { font-size: 1.5em; }
+  h3 { font-size: 1.17em; }
+  h4 { font-size: 1.12em; }
+  h5 { font-size: .83em; }
+  h6 { font-size: .75em; }
 }
 
-h1 { font-size: 2em; }
-h2 { font-size: 1.5em; }
-h3 { font-size: 1.17em; }
-h4 { font-size: 1.12em; }
-h5 { font-size: .83em; }
-h6 { font-size: .75em; }
+
 
 .lead { font-size: 1.2em; }
 
@@ -87,21 +102,6 @@ input[type=textbox] {
     margin-bottom: 10px;
 }
 
-
-/*label input[type="radio"] ~ span.glyphicon.glyphicon-unchecked ,label input[type="checkbox"] ~ span.glyphicon.glyphicon-unchecked {
-color: #222;
-display: inline;
-}
-label input[type="radio"] ~ span.glyphicon.glyphicon-check ,label input[type="checkbox"] ~ span.glyphicon.glyphicon-check {
-display: none;
-}
-label input[type="radio"]:checked ~ span.glyphicon.glyphicon-unchecked ,label input[type="checkbox"]:checked ~ span.glyphicon.glyphicon-unchecked {
-display: none;
-}
-label input[type="radio"]:checked ~ span.glyphicon.glyphicon-check ,label input[type="checkbox"]:checked ~ span.glyphicon.glyphicon-check {
-color: #3C763D;
-display: inline;
-}*/
 
 label input ~ i.material-icons.radio_button_unchecked ,label input ~ i.material-icons.check_box_outline_blank {
 color: #222;
