@@ -124,8 +124,16 @@ def background_info_form(request, hash_id):
                 background_instance.zip_code = background_instance.zip_code + '**'
             background_form = BackgroundForm(instance = background_instance, age_ref = age_ref)
         except:
-            # If you cannot fetch responses, render a blank form
-            background_form = BackgroundForm(age_ref = age_ref)  
+            if administration_instance.repeat_num > 1 and administration_instance.study.prefilled_data >= 1:
+                old_admin = administration.objects.get(study = administration_instance.study, subject_id = administration_instance.subject_id, repeat_num = (administration_instance.repeat_num - 1))
+                background_instance = BackgroundInfo.objects.get(administration = old_admin)
+                background_instance.pk = None
+                background_instance.administration = administration_instance
+                background_instance.age = None
+                background_form = BackgroundForm(instance = background_instance, age_ref = age_ref)
+            else:
+                # If you cannot fetch responses, render a blank form
+                background_form = BackgroundForm(age_ref = age_ref)  
 
     # Store relevant variables in a dictionary for template rendering. Includes prefilled responses, hash ID, data on study (researcher's name, instrument language, age range, related studies, etc.)
     data = {}
@@ -185,8 +193,18 @@ def cdi_items(object_group, item_type, prefilled_data, item_id):
 # Prepare items with prefilled reponses for later rendering. Dependent on cdi_items
 def prefilled_cdi_data(administration_instance):
     prefilled_data_list = administration_data.objects.filter(administration = administration_instance).values('item_ID', 'value') # Grab a list of prefilled responses
+
     instrument_name = administration_instance.study.instrument.name # Grab instrument name
     instrument_model = model_map(instrument_name) # Grab appropriate model given the instrument name associated with test
+    
+    if not prefilled_data_list and administration_instance.repeat_num > 1 and administration_instance.study.prefilled_data >= 2:
+        word_items = instrument_model.objects.filter(item_type = 'word').values_list('itemID', flat = True)
+        old_admin = administration.objects.get(study = administration_instance.study, subject_id = administration_instance.subject_id, repeat_num = (administration_instance.repeat_num - 1))
+        old_admin_data = administration_data.objects.filter(administration = old_admin, item_ID__in = word_items).values('item_ID', 'value')
+        for admin_data_obj in old_admin_data:
+            administration_data.objects.create(administration = administration_instance, item_ID = admin_data_obj['item_ID'], value = admin_data_obj['value'])
+        prefilled_data_list = administration_data.objects.filter(administration = administration_instance).values('item_ID', 'value')
+
     prefilled_data = {x['item_ID']: x['value'] for x in prefilled_data_list} # Store prefilled data in a dictionary with item_ID as the key and response as the value.
     with open(PROJECT_ROOT+'/form_data/'+instrument_name+'_meta.json', 'r') as content_file: # Open associated json file with section ordering and nesting
         # Read json file and store additional variables regarding the instrument, study, and the administration

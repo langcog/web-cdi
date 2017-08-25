@@ -29,7 +29,8 @@ class study(models.Model):
     confirm_completion = models.BooleanField(default=False) # Whether to have participant confirm child's age and that test was completed to best of ability at end of study
     allow_payment = models.BooleanField(default=False) # Whether to reward participants with gift card codes upon completion
     allow_sharing = models.BooleanField(default=False) # Whether to allow participants to share results via Facebook
-    test_period = models.IntegerField(default=14, validators = [MinValueValidator(1), MaxValueValidator(14)]) # Number of days after test creation that a participant may work on and complete administration
+    test_period = models.IntegerField(default=14, validators = [MinValueValidator(1), MaxValueValidator(14)]) # Number of days after test creation that a participant may work on and complete administration  
+    prefilled_data = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name

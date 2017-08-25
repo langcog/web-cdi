@@ -6,8 +6,6 @@ from form_utils.forms import BetterModelForm
 from django.core.urlresolvers import reverse
 import os
 
-PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__)) # Declare project file directory
-
 # Form for creating a new study
 class AddStudyForm(BetterModelForm):
     name = forms.CharField(label='Study Name', max_length=51) # Study name
@@ -19,6 +17,9 @@ class AddStudyForm(BetterModelForm):
     confirm_completion = forms.BooleanField(required = False, label="At the end of the form, would you like parents to confirm the age of their child and that they completed the entire test? (Best for anonymous data collections where you haven't personally vetted each participant)") # Asks participants to verify the child's age and that they completed the form to the best of their ability. Only for participants that have not been vetted.
     allow_sharing = forms.BooleanField(required=False, label="Would you like participants to be able to share their Web-CDI results via Facebook?") # Gives option for participants to be able to share their results via Facebook. Default off.
     test_period = forms.IntegerField(label = "# Days Before Expiration", help_text= "Between 1 and 14. Default is 14 days. (e.g., 14 = 14 days for parents to complete a form)", required = False, widget= forms.NumberInput(attrs={'placeholder':'(e.g., 14 = 14 days to complete a form)', 'min': '1', 'max': '14'})) # Number of days that a participant can use to complete an administration before expiration. By default, participants have 14 days to complete test. Ranges from 1-14 days.
+    
+    prefilled_data_choices = ((0, 'No, do not populate the any part of the form'), (1, 'Only the Background Information Form'), (2, 'The Background Information Form and the Vocabulary Checklist'))
+    prefilled_data = forms.ChoiceField(choices = prefilled_data_choices, label = "Pre-fill data for longitudinal participants?", help_text="For longitudinal participants, would you like to populate the test with responses from earlier tests?")
 
     # Initiating form and field layout.
     def __init__(self, *args, **kwargs):
@@ -26,7 +27,8 @@ class AddStudyForm(BetterModelForm):
         self.helper = FormHelper()
         self.helper.form_id = 'add-study'
         self.helper.form_class = 'form-horizontal'
-        self.helper.template = PROJECT_ROOT + '/../cdi_forms/templates/bootstrap3/whole_uni_form.html'        
+        # self.helper.template = PROJECT_ROOT + '/../cdi_forms/templates/bootstrap3/whole_uni_form.html'        
+        self.helper.template = 'bootstrap3/whole_uni_form.html'
         self.helper.label_class = 'col-3'
         self.helper.field_class = 'col-9'
         self.helper.form_method = 'post'
@@ -36,6 +38,7 @@ class AddStudyForm(BetterModelForm):
             Field('instrument'),
             Field('test_period'),
             Field('waiver'),
+            Field('prefilled_data'),            
             Field('allow_payment'),
             Field('anon_collection'),
             Field('subject_cap'),
@@ -67,7 +70,7 @@ class AddPairedStudyForm(forms.Form):
         self.helper = FormHelper()
         self.helper.form_id = 'add-paired-study'
         self.helper.form_class = 'form-horizontal'
-        self.helper.template = PROJECT_ROOT + '/../cdi_forms/templates/bootstrap3/whole_uni_form.html'        
+        # self.helper.template = PROJECT_ROOT + '/../cdi_forms/templates/bootstrap3/whole_uni_form.html'        
         self.helper.label_class = 'col-3'
         self.helper.field_class = 'col-9'
         self.helper.form_method = 'post'
@@ -82,6 +85,9 @@ class RenameStudyForm(BetterModelForm):
     test_period = forms.IntegerField(label = "# Days Before Expiration", help_text= "Between 1 and 14. Default is 14 days. (e.g., 14 = 14 days for parents to complete a form)", required = False, widget= forms.NumberInput(attrs={'placeholder':'(e.g., 14 = 14 days to complete a form)', 'min': '1', 'max': '14'})) # Update testing period. Can range from 1 to 14 days.
     gift_codes = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Paste Amazon gift card codes here. Can be separated by spaces, commas, or new lines.'}), required=False, label='Gift Card Codes') # Can add a list of gift card codes (separated by new lines, commas, or spaces) to the PaymentCode model that are given out to participants upon completion of current study.
     gift_amount = forms.CharField(max_length=7, required=False, label="Amount per Card (in USD)", widget=forms.TextInput(attrs={'placeholder': '$XX.XX'})) # Specify monetary value of the list of gift card codes in the gift_codes field. Assumed that all codes in the list have the same monetary value.
+    prefilled_data_choices = ((0, 'No, do not populate the form with earlier responses'), (1, 'Only populate the Background Information Form with demographic data'), (2, 'Populate the Background Information Form and the Vocabulary Checklist'))
+    prefilled_data = forms.TypedChoiceField(choices = prefilled_data_choices, label="For longitudinal participants, would you like to populate the CDI test with responses from earlier tests?",  widget=forms.RadioSelect)
+
 
     # Form validation. Form is passed automatically to views.py for higher level checking.
     def clean(self):
@@ -93,7 +99,7 @@ class RenameStudyForm(BetterModelForm):
         self.helper = FormHelper()
         self.helper.form_id = 'rename_study'
         self.helper.form_class = 'form-horizontal'
-        self.helper.template = PROJECT_ROOT + '/../cdi_forms/templates/bootstrap3/whole_uni_form.html'        
+        # self.helper.template = PROJECT_ROOT + '/../cdi_forms/templates/bootstrap3/whole_uni_form.html'        
         self.helper.label_class = 'col-3'
         self.helper.field_class = 'col-9'
         self.helper.form_method = 'post'
@@ -102,6 +108,7 @@ class RenameStudyForm(BetterModelForm):
             Field('name'),
             Field('test_period'),
             Field('waiver'),
+            Field('prefilled_data'),
             Field('anon_collection'),
             Field('subject_cap'),
             Field('confirm_completion'),
