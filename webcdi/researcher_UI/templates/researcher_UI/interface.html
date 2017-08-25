@@ -7,18 +7,8 @@
     <meta name="description" content="English Words and Sentences CDI form">
     <meta name="author" content="Ashwin Paranjape">
 
-<!--     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="{% static 'researcher_UI/django_modal_forms.js' %}"></script>
-    <script src="{% static 'researcher_UI/researcher_UI.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'researcher_UI/console.css' %}" />
-    <link rel="stylesheet" href="{% static 'researcher_UI/table.css' %}" />
-    <script src="{% static 'cdi_forms/moment.js' %}"></script> -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" ></script>
-<!--     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" ></script>
- -->
     <script src="{% static 'jquery/jquery-1.11.3.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
     <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
@@ -35,6 +25,19 @@
     .btn{
         white-space:normal !important;
         word-wrap: break-word; 
+    }
+
+    label input ~ i.material-icons.radio_button_unchecked ,label input ~ i.material-icons.check_box_outline_blank {
+        display: inline;
+    }
+    label input ~ i.material-icons.radio_button_checked ,label input ~ i.material-icons.check_box {
+        display: none;
+    }
+    label input:checked ~ i.material-icons.radio_button_unchecked ,label input:checked ~ i.material-icons.check_box_outline_blank {
+        display: none;
+    }
+    label input:checked ~ i.material-icons.radio_button_checked ,label input:checked ~ i.material-icons.check_box {
+        display: inline;
     }
 </style>
 <!-- Researcher interface -->
@@ -152,20 +155,33 @@
                                 </script>
                             </div>
                             <div class="row d-flex align-items-stretch">
-                                <div class='col-md-3 align-self-stretch'>
+                                <div class='col-md-4 align-self-stretch'>
                                         <button style='width:100%; height: 100%;' class="btn btn-secondary selected-btn btn-block" id='add-selected' type='submit' name='administer-selected' value='administer-selected' disabled  >Re-administer Participants</button>
                                 </div>
-                                <div class='col-md-3 align-self-stretch'>
+                                <div class='col-md-4 align-self-stretch'>
                                         <button style='width:100%; height: 100%;' class="btn btn-secondary selected-btn btn-block" id='delete-selected' type='submit' name='delete-selected' value='administer-selected' disabled onclick='return confirm("Are you sure you want to delete the selected administration record and all the data associated with it?");' >Delete Selected Data</button>
 
                                 </div>
-                                <div class='col-md-3 align-self-stretch'>
-                                        <button style='width:100%; height: 100%;' class="btn btn-secondary selected-btn btn-block" id='download-selected' type='submit' name='download-selected' value='download-selected'  disabled >Download Selected Data (All)</button>
-                                </div>
-                                <div class='col-md-3 align-self-stretch'>
-                                        <button style='width:100%; height: 100%;' class="btn btn-secondary selected-btn btn-block" id='download-links' type='submit' name='download-links' value='download-links'  disabled >Download Selected Data (Links)</button>
-                                </div>
+
+                                <div class='col-md-4 align-self-stretch'>
+                                    <div class="dropdown show selected-btn">
+                                      <button class="btn btn-secondary selected-btn btn-block dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Download Selected Data
+                                      </button>
+                                      <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+
+                                        <button class="dropdown-item btn btn-secondary selected-btn btn-block" id='download-selected' type='submit' name='download-selected' value='download-selected'  disabled >Download Selected Data (CSV/All)</button>
+
+                                        <button class="dropdown-item btn btn-secondary selected-btn btn-block" id='download-links' type='submit' name='download-links' value='download-links'  disabled >Download Selected Data (CSV/Links)</button>
+
+                                        <button class="dropdown-item btn btn-secondary selected-btn btn-block" id='download-study-scoring-selected' type='submit' name='download-study-scoring-selected' value='download-study-scoring-selected'  disabled >Download Selected Data (CDI Scoring Format/All)</button>
+                                      </div>
+                                    </div>                                            
+                                </div> 
+
                             </div>
+
+                            
                             
                         </fieldset>
                 </form>
@@ -203,6 +219,7 @@
             }
         }
     });
+    var shifted = false;
 
     // Track whether Shift key is being held down. Used up Shift-Select motions
     $(document).on('keyup keydown', function(e){
@@ -247,6 +264,7 @@
     {
         $('#download-study').addClass('disabled');
     }
+
 
 </script>
 </body>

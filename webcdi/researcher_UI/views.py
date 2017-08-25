@@ -124,6 +124,9 @@ def download_links(request, study_obj, administrations = None): # Download only 
     response = HttpResponse(content_type='text/csv') # Format response as a CSV
     response['Content-Disposition'] = 'attachment; filename='+study_obj.name+'_links.csv''' # Name CSV
 
+    if administrations is None:
+        administrations = administration.objects.filter(study = study_obj)
+
     admin_data = pd.DataFrame.from_records(administrations.values()).rename(columns = {'id':'administration_id', 'study_id': 'study_name', 'url_hash': 'link'}) # Grab variables from administration objects
     admin_data = admin_data[['study_name','subject_id', 'repeat_num', 'administration_id','link']] # Organize columns
 
@@ -147,8 +150,12 @@ def write_to_zip(x, zf, vocab_start):
 @login_required
 def download_cdi_format(request, study_obj, administrations = None):
     outfile = StringIO.StringIO()
-    administrations = administrations if administrations is not None else administration.objects.filter(study = study_obj)
-    completed_admins = administrations.filter(completed = True)
+    
+    if administrations is not None:
+        completed_admins = administrations.filter(completed = True)
+    else:
+        completed_admins = administration.objects.filter(study = study_obj, completed = True)
+
     r = re.compile('item_[0-9]{1,3}')
 
     model_header = filter(r.match, get_model_header(study_obj.instrument.name))
@@ -252,7 +259,12 @@ def console(request, study_name = None, num_per_page = 20): # Main giant functio
                 
                 elif 'download-study-scoring' in request.POST: # If 'Download Data' button is clicked
                     administrations = administration.objects.filter(study = study_obj) # Grab a queryset of administration objects within study
-                    return download_cdi_format(request, study_obj, administrations)                    
+                    return download_cdi_format(request, study_obj, administrations)        
+
+                elif 'download-study-scoring-selected' in request.POST: # If 'Download Data' button is clicked
+                    num_ids = list(set(map(int, ids)))
+                    administrations = administration.objects.filter(id__in = num_ids) # Grab a queryset of administration objects within study
+                    return download_cdi_format(request, study_obj, administrations)                                     
 
                 elif 'download-dictionary' in request.POST: # If 'Download Dictionary Data' button is clicked
                     return download_dictionary(request, study_obj) # Send study object to download_dictionary and receive a CSV of item data
