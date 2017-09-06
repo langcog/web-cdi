@@ -4,19 +4,12 @@
     {% load staticfiles %}
 
     <title>WebCDI Interface</title>
+
     <meta name="description" content="English Words and Sentences CDI form">
     <meta name="author" content="Ashwin Paranjape">
-
-<!--     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="{% static 'supplementtut/base.css' %}" />
-    <script src="{% static 'cdi_forms/moment.js' %}"></script> -->
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" ></script>
     <script src="{% static 'jquery/jquery-1.11.3.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap-theme.min.css' %}">
     <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'supplementtut/base.css' %}" />
     <script src="{% static 'cdi_forms/moment.js' %}"></script>
@@ -25,10 +18,10 @@
 <body>
 	<div class="container bs-docs-container" style="padding-top: 100px; padding-bottom: 60px;">
 
-		<div class="row">
-
+		<div class="flex-row">
 			{% block content_title %}{% endblock %}
-			<br>
+        </div>
+        <div class="flex-row">
 		    {% block contents %}
 		    {% endblock %}
 		</div>
