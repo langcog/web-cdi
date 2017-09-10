@@ -16,7 +16,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.db import models
 from django.contrib.sites.shortcuts import get_current_site
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from ipware.ip import get_ip
 from django.conf import settings
 
@@ -91,6 +91,9 @@ def background_info_form(request, hash_id):
                 if age:
                     background_instance.age = age
 
+                if background_instance.child_hispanic_latino == '':
+                    background_instance.child_hispanic_latino = 'None'
+
                 # Find the raw zip code value and make it compliant with Safe Harbor guidelines. Only store the first 3 digits if the total population for that prefix is greataer than 20,000 (found prohibited prefixes via Census API data). If prohibited zip code, replace value with state abbreviations.
                 zip_prefix = ''
                 raw_zip = background_instance.zip_code
@@ -161,7 +164,7 @@ def background_info_form(request, hash_id):
     else:
         data['study_group'] = None
         data['alt_study_info'] = None
-
+    
     # Render template
     return render(request, 'cdi_forms/background_info.html', data)
 
@@ -201,8 +204,10 @@ def prefilled_cdi_data(administration_instance):
         word_items = instrument_model.objects.filter(item_type = 'word').values_list('itemID', flat = True)
         old_admin = administration.objects.get(study = administration_instance.study, subject_id = administration_instance.subject_id, repeat_num = (administration_instance.repeat_num - 1))
         old_admin_data = administration_data.objects.filter(administration = old_admin, item_ID__in = word_items).values('item_ID', 'value')
+        new_data_objs = []
         for admin_data_obj in old_admin_data:
-            administration_data.objects.create(administration = administration_instance, item_ID = admin_data_obj['item_ID'], value = admin_data_obj['value'])
+            new_data_objs.append(administration_data(administration = administration_instance, item_ID = admin_data_obj['item_ID'], value = admin_data_obj['value']))
+        administration_data.objects.bulk_create(new_data_objs)
         prefilled_data_list = administration_data.objects.filter(administration = administration_instance).values('item_ID', 'value')
 
     prefilled_data = {x['item_ID']: x['value'] for x in prefilled_data_list} # Store prefilled data in a dictionary with item_ID as the key and response as the value.
@@ -242,10 +247,10 @@ def prefilled_cdi_data(administration_instance):
 
         # If age is stored in database, add it to dictionary
         try:
-            age = BackgroundInfo.objects.filter(administration = administration_instance).values_list('age', flat=True)
+            age = BackgroundInfo.objects.values_list('age', flat=True).get(administration = administration_instance)
         except:
             age = ''
-        data['age'] = age                    
+        data['age'] = age
     return data
 
 # Convert string boolean to true boolean
@@ -337,7 +342,7 @@ def cdi_form(request, hash_id):
                 return printable_view(request, hash_id) # Render completion page
 
     # Fetch prefilled responses
-    data = {}
+    data = dict()
     if request.method == 'GET' or refresh:
         data = prefilled_cdi_data(administration_instance)
         data['created_date'] = administration_instance.created_date
@@ -354,7 +359,7 @@ def printable_view(request, hash_id):
     completed = int(request.get_signed_cookie('completed_num', '0')) # If there is a cookie for a previously completed test, get it
     
     # Create a blank dictionary and then fill it with prefilled background and CDI data, along with hash ID and information regarding the gift card code if subject is to be paid
-    prefilled_data = {}
+    prefilled_data = dict()
     prefilled_data = prefilled_cdi_data(administration_instance)
     try:
         #Get form from database
@@ -427,7 +432,7 @@ def find_paired_studies(request, username, study_group):
         models.When(administration__completed=True, then=1),
         default=0, output_field=models.IntegerField()
     ))).annotate(slots_left=models.F('subject_cap')-models.F('admin_count'))
-    data = {}
+    data = dict()
     data['background_form'] = BackgroundForm()
     data['possible_studies'] = json.dumps(list(possible_studies), cls=DjangoJSONEncoder)
     data['username'] = username
@@ -454,12 +459,12 @@ def contact(request, hash_id):
             contact_id = request.POST.get('contact_id', '')
             form_content = request.POST.get('content', '')
             template = get_template('cdi_forms/contact_template.txt')
-            context = Context({
+            context = {
                 'contact_name': contact_name,
                 'contact_id': contact_id,
                 'contact_email': contact_email,
                 'form_content': form_content,
-            })
+            }
             content = template.render(context)
             email = EmailMessage(
                 "New contact form submission",

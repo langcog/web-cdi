@@ -3,7 +3,7 @@ from .models import *
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Field, Div
 from form_utils.forms import BetterModelForm
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 import os
 
 # Form for creating a new study

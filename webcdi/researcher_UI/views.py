@@ -16,7 +16,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 from django.contrib.auth.models import User
 import pandas as pd
 import numpy as np
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from decimal import Decimal
 from django.contrib.sites.shortcuts import get_current_site
 from ipware.ip import get_ip
@@ -35,7 +35,6 @@ def download_data(request, study_obj, administrations = None): # Download study 
     
     # Fetch administration variables
     admin_header = ['study_name', 'subject_id','repeat_num', 'administration_id', 'link', 'completed', 'completedBackgroundInfo', 'due_date', 'last_modified','created_date']
-    # background_header = [col for col in BackgroundInfo._meta.get_all_field_names() if col not in ['administration_id', 'administration']]
 
     # Fetch background data variables
     background_header = ['age','sex','zip_code','birth_order','multi_birth_boolean','multi_birth', 'birth_weight', 'born_on_due_date', 'early_or_late', 'due_date_diff', 'mother_yob', 'mother_education','father_yob', 'father_education', 'annual_income', 'child_hispanic_latino', 'child_ethnicity', 'caregiver_info', 'other_languages_boolean','other_languages','language_from', 'language_days_per_week', 'language_hours_per_day', 'ear_infections_boolean','ear_infections', 'hearing_loss_boolean','hearing_loss', 'vision_problems_boolean','vision_problems', 'illnesses_boolean','illnesses', 'services_boolean','services','worried_boolean','worried','learning_disability_boolean','learning_disability']
@@ -278,7 +277,7 @@ def console(request, study_name = None, num_per_page = 20): # Main giant functio
 
     if request.method == 'GET' or refresh: # If fetching data for console rendering
         username = None # Set username to None at first
-        if request.user.is_authenticated(): # If logged in (should be)
+        if request.user.is_authenticated: # If logged in (should be)
             username = request.user.username # Set username to current user's username
         context = dict() # Create a dictionary of data related to template rendering such as username, studies associated with username, information on currently viewed study, and number of administrations to show.
         context['username'] =  username 
@@ -600,7 +599,7 @@ def administer_new_parent(request, username, study_name): # For creating single 
     if visitor_ip: # If the visitor IP was successfully pulled
         prev_visitor = ip_address.objects.filter(ip_address = visitor_ip).count() # Check if IP address was logged previously in the database (only logged for specific studies under the langcoglab account. This is under Stanford's IRB approval)
 
-    if (prev_visitor < 1 and completed < 2) or request.user.is_authenticated(): # If the user if the user has not visited an excessive number of times based on IP logs and cookies or if they are logged-in (therefore a vetted researcher) 
+    if (prev_visitor < 1 and completed < 2) or request.user.is_authenticated: # If the user if the user has not visited an excessive number of times based on IP logs and cookies or if they are logged-in (therefore a vetted researcher) 
         if completed_admins < subject_cap: # If the number of completed tests has not reached the subject cap
             let_through = True # Mark as allowed
         elif subject_cap is None: # If there was no subject cap sent up
@@ -630,7 +629,7 @@ def overflow(request, username, study_name): # Page for overflowed studies. For 
     prev_visitor = 0
     if (visitor_ip and visitor_ip != 'None'): # If visitor IP address was properly caught
         prev_visitor = ip_address.objects.filter(ip_address = visitor_ip).count() # Check if IP address was logged previously in the database (only logged for specific studies under the langcoglab account. This is under Stanford's IRB approval)
-    if prev_visitor > 0 and not request.user.is_authenticated(): # If IP address appears in logs and the user is not logged-in (cannot tell if a vetted reseacher)
+    if prev_visitor > 0 and not request.user.is_authenticated: # If IP address appears in logs and the user is not logged-in (cannot tell if a vetted reseacher)
         data['repeat'] = True # Mark as a repeat visitor. Will not be given the option to bypass in template
 
 

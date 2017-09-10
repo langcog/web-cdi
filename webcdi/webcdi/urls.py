@@ -18,6 +18,7 @@ from django.views.generic.base import RedirectView
 from django.contrib import admin
 from django.views.generic import TemplateView
 from supplementtut.views import *
+from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
@@ -26,8 +27,8 @@ urlpatterns = [
     url(r'^robots\.txt', RedirectView.as_view(url='/static/robots.txt', permanent=True)),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^form/', include('cdi_forms.urls')),
-    url(r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'registration/login.html'}),
-    url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'next_page': 'interface/'}),
+    url(r'^accounts/login/$', auth_views.login, {'template_name': 'registration/login.html'}),
+    url(r'^accounts/logout/$', auth_views.logout, {'next_page': 'interface/'}),
     url(r'^accounts/profile/$', RedirectView.as_view(url='/interface/', permanent=False), name='interface'),
     url(r'interface/', include('researcher_UI.urls')),
     url(r'^registration/', include('registration.urls')),

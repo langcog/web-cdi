@@ -80,7 +80,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cdi_forms',
-    'csvimport.app.CSVImportConf',
     'crispy_forms',
     'django_tables2',
     'bootstrap3',
@@ -89,6 +88,7 @@ INSTALLED_APPS = (
     'supplementtut',
     'django.contrib.sites',
     'axes',
+    'csvimport.app.CSVImportConf',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -97,7 +97,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -116,7 +115,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'django.core.context_processors.request',
             ],
         },
     },

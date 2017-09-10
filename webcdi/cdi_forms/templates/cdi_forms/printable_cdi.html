@@ -351,7 +351,8 @@
     // Parse Django string object data. Grab relevant variables
     var raw_data = '{{ cdi_items |escapejs }}';
     var root = JSON.parse(raw_data);
-    root.age = JSON.parse('{{ age }}')[0];
+    var raw_age = '{{ age }}';
+    root.age = JSON.parse(raw_age);
     root.completed = '{{ completed }}';
     root.instrument_name = '{{ instrument_name }}';
 
