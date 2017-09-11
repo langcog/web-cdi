@@ -112,7 +112,8 @@ def download_dictionary(request, study_obj): # Download dictionary for instrumen
     response['Content-Disposition'] = 'attachment; filename='+study_obj.instrument.name+'_dictionary.csv''' # Name CSV
 
     raw_item_data = model_map(study_obj.instrument.name).objects.values('itemID','item_type','category','definition','gloss') # Grab the relevant variables within the appropriate instrument model
-    pd.DataFrame.from_records(raw_item_data).to_csv(response, encoding='utf-8', index=False) # Convert nested dictionary into a pandas dataframe and then into a CSV
+    item_data = pd.DataFrame.from_records(raw_item_data)
+    item_data[['itemID','item_type','category','definition','gloss']].to_csv(response, encoding='utf-8', index=False) # Convert nested dictionary into a pandas dataframe and then into a CSV
 
     # Return CSV
     return response    
