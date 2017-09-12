@@ -1,7 +1,4 @@
-{% extends "admin/admin_base.html" %}
-
-{% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
-
+{% extends "admin/base_site.html" %}
 {% block extrastyle %}
 <style type="text/css">
     body:before {
@@ -16,5 +13,3 @@
     }
 </style>
 {% endblock %}
-
-{% block nav-global %}{% endblock %}
