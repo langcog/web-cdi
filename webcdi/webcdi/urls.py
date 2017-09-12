@@ -25,7 +25,7 @@ urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name="researcher_UI/home.html")),
     url(r'^favicon\.ico', RedirectView.as_view(url='/static/images/favicon.ico', permanent=True)),
     url(r'^robots\.txt', RedirectView.as_view(url='/static/robots.txt', permanent=True)),
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^wcadmin/', include(admin.site.urls)),
     url(r'^form/', include('cdi_forms.urls')),
     url(r'^accounts/login/$', auth_views.login, {'template_name': 'registration/login.html'}),
     url(r'^accounts/logout/$', auth_views.logout, {'next_page': 'interface/'}),

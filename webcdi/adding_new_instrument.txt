@@ -2,5 +2,5 @@
 2) Add new model in app cdi_forms
 3) Add a new line in ../setup.sh and execute the appropriate set (cd into folder, makemigrations, migrate and psql copy
 4) Create file in cdi_forms/form_data/<instrument_acronym>_meta.json which encodes the meta information
-5) Using django administration interface /admin/ add the instrument to the instruments model. use <instrument_acronym> for name (without spaces) and verbose_name for a visible readable name
+5) Using django administration interface /wcadmin/ add the instrument to the instruments model. use <instrument_acronym> for name (without spaces) and verbose_name for a visible readable name
 6) Add a mapping to cdi_forms/views.py model_map function and import the model too
