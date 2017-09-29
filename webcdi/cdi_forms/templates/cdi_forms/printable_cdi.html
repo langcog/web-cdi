@@ -206,10 +206,13 @@
                                                     {% for choice in object.choices %}
                                                         <label class = "btn mult-choice">
                                                             <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
-                                                            <!-- <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
-                                                            <span class="glyphicon glyphicon-check" aria-hidden="true"></span> -->
-                                                            <i class="material-icons check_box" aria-hidden="true">check_box</i>
-                                                            <i class="material-icons check_box_outline_blank" aria-hidden="true">check_box_outline_blank</i>
+                                                            {% if type.type == "radiobutton" %} 
+                                                                <i class="material-icons radio_button_checked" aria-hidden="true">radio_button_checked</i>
+                                                                <i class="material-icons radio_button_unchecked" aria-hidden="true">radio_button_unchecked</i>
+                                                            {% elif type.type == "modified_checkbox"%} 
+                                                                <i class="material-icons check_box" aria-hidden="true">check_box</i>
+                                                                <i class="material-icons check_box_outline_blank" aria-hidden="true">check_box_outline_blank</i>
+                                                            {% endif %}
                                                             <span class="choice"> {{ choice.0 }}</span>
                                                         </label>
                                                     {% endfor %}
@@ -223,10 +226,13 @@
                                                     <div class="row">
                                                         <label class = "btn mult-choice">
                                                             <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
-<!--                                                             <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
-                                                            <span class="glyphicon glyphicon-check" aria-hidden="true"></span> -->
-                                                            <i class="material-icons check_box" aria-hidden="true">check_box</i>
-                                                            <i class="material-icons check_box_outline_blank" aria-hidden="true">check_box_outline_blank</i>
+                                                            {% if type.type == "radiobutton" %} 
+                                                                <i class="material-icons radio_button_checked" aria-hidden="true">radio_button_checked</i>
+                                                                <i class="material-icons radio_button_unchecked" aria-hidden="true">radio_button_unchecked</i>
+                                                            {% elif type.type == "modified_checkbox"%} 
+                                                                <i class="material-icons check_box" aria-hidden="true">check_box</i>
+                                                                <i class="material-icons check_box_outline_blank" aria-hidden="true">check_box_outline_blank</i>
+                                                            {% endif %}
                                                             <span class="choice"> {{ choice.0 }}</span>
                                                         </label>
                                                     </div>
@@ -239,8 +245,6 @@
                                             <div class="btn-group" data-toggle="buttons"> 
                                                 <label class = "btn">
                                                     <input type="checkbox" id="{{ object.itemID }}" name="{{ object.itemID }}" value="{{ object.choices }}"{% if completed %} disabled {% endif %} {% if object.prefilled_value %} checked {% endif %}> 
-<!--                                                     <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
-                                                    <span class="glyphicon glyphicon-check" aria-hidden="true"></span> -->
                                                     <i class="material-icons check_box" aria-hidden="true">check_box</i>
                                                     <i class="material-icons check_box_outline_blank" aria-hidden="true">check_box_outline_blank</i>
                                                     <span class="choice"> {{ object.gloss }}</span>
@@ -266,10 +270,13 @@
                                                         {% for choice in object.choices %}
                                                             <label class = "btn mult-choice">
                                                                 <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
-                                                                <!-- <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
-                                                                <span class="glyphicon glyphicon-check" aria-hidden="true"></span> -->
-                                                                <i class="material-icons check_box" aria-hidden="true">check_box</i>
-                                                                <i class="material-icons check_box_outline_blank" aria-hidden="true">check_box_outline_blank</i>
+                                                                {% if type.type == "radiobutton" %} 
+                                                                    <i class="material-icons radio_button_checked" aria-hidden="true">radio_button_checked</i>
+                                                                    <i class="material-icons radio_button_unchecked" aria-hidden="true">radio_button_unchecked</i>
+                                                                {% elif type.type == "modified_checkbox"%} 
+                                                                    <i class="material-icons check_box" aria-hidden="true">check_box</i>
+                                                                    <i class="material-icons check_box_outline_blank" aria-hidden="true">check_box_outline_blank</i>
+                                                                {% endif %}
                                                                 <span class="choice"> {{ choice.0 }}</span>
                                                             </label>
                                                         {% endfor %}
@@ -283,10 +290,13 @@
                                                         <div class="row">
                                                             <label class = "btn mult-choice">
                                                                 <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
-<!--                                                                 <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
-                                                                <span class="glyphicon glyphicon-check" aria-hidden="true"></span> -->
-                                                                <i class="material-icons check_box" aria-hidden="true">check_box</i>
-                                                                <i class="material-icons check_box_outline_blank" aria-hidden="true">check_box_outline_blank</i>                                                                
+                                                                {% if type.type == "radiobutton" %} 
+                                                                    <i class="material-icons radio_button_checked" aria-hidden="true">radio_button_checked</i>
+                                                                    <i class="material-icons radio_button_unchecked" aria-hidden="true">radio_button_unchecked</i>
+                                                                {% elif type.type == "modified_checkbox"%} 
+                                                                    <i class="material-icons check_box" aria-hidden="true">check_box</i>
+                                                                    <i class="material-icons check_box_outline_blank" aria-hidden="true">check_box_outline_blank</i>
+                                                                {% endif %}                                                             
                                                                 <span class="choice"> {{ choice.0 }}</span>
                                                             </label>
                                                         </div>
@@ -299,8 +309,6 @@
                                                 <div class="btn-group" data-toggle="buttons"> 
                                                     <label class = "btn">
                                                         <input type="checkbox" id="{{ object.itemID }}" name="{{ object.itemID }}" value="{{ object.choices }}"{% if completed %} disabled {% endif %} {% if object.prefilled_value %} checked {% endif %}> 
-<!--                                                         <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
-                                                        <span class="glyphicon glyphicon-check" aria-hidden="true"></span> -->
                                                         <i class="material-icons check_box" aria-hidden="true">check_box</i>
                                                         <i class="material-icons check_box_outline_blank" aria-hidden="true">check_box_outline_blank</i>                                                        
                                                         <span class="choice"> {{ object.gloss }}</span>
