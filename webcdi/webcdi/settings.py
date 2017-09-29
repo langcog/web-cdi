@@ -82,6 +82,7 @@ INSTALLED_APPS = (
     'cdi_forms',
     'crispy_forms',
     'django_tables2',
+    'bootstrap4',
     'bootstrap3',
     'form_utils',
     'registration',
