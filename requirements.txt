@@ -13,7 +13,7 @@ django-appconf==1.0.2
 django-axes==2.3.3
 django-bootstrap3==9.0.0
 django-bootstrap3-datetimepicker==2.2.3
-django-crispy-forms==1.6.1
+git+git://github.com/django-crispy-forms/django-crispy-forms.git@003448bc9a2b35404a06dbb84a2cb4f0d12821a6
 django-csvimport==2.4
 django-form-utils==1.0.3
 django-inspectional-registration==0.6.2
