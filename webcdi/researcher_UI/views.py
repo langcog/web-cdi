@@ -412,6 +412,9 @@ def add_study(request): # Function for adding studies modal
             study_name = form.cleaned_data.get('name')
             study_instance.researcher = researcher
 
+            if not study_instance.test_period.isdigit():
+                study_instance.test_period = 14
+
             if not study.objects.filter(researcher = researcher, name = study_name).exists(): # If the researcher does not already have a study with the given name
 
                 study_instance.save() # Save study to database
