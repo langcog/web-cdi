@@ -407,12 +407,13 @@ def add_study(request): # Function for adding studies modal
     if request.method == 'POST' : # If submitting data
         form = AddStudyForm(request.POST) # Grab submitted form
         if form.is_valid(): # If form passed validation checks in forms.py
+
             study_instance = form.save(commit=False) # Save study object but do not commit to database just yet
             researcher = request.user
             study_name = form.cleaned_data.get('name')
             study_instance.researcher = researcher
 
-            if not study_instance.test_period.isdigit():
+            if not form.cleaned_data.get('test_period'):
                 study_instance.test_period = 14
 
             if not study.objects.filter(researcher = researcher, name = study_name).exists(): # If the researcher does not already have a study with the given name
