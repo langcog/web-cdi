@@ -333,7 +333,7 @@ def rename_study(request, study_name): # Function for study settings modal
             study_obj.test_period = raw_test_period if (raw_test_period >= 1 and raw_test_period <= 14) else 14 # Check that entered test period is within the 1-14 range. If not, set to default (14)
 
             if new_study_name != study_name: # If the study name has changed
-                if study.objects.filter(researcher = researcher, name = study_obj.name).exists(): # Check whether the new name has already been taken by this researcher
+                if study.objects.filter(researcher = researcher, name = new_study_name).exists() or '/' in new_study_name: # Check whether the new name has already been taken by this researcher
                     study_obj.name = study_name # If not, update study name
 
             study_obj.save() # Commit study object to database
@@ -411,21 +411,29 @@ def add_study(request): # Function for adding studies modal
             study_instance = form.save(commit=False) # Save study object but do not commit to database just yet
             researcher = request.user
             study_name = form.cleaned_data.get('name')
+
+            slash_in_name = True if '/' in study_name else None
+            not_unique_name = True if study.objects.filter(researcher = researcher, name = study_name).exists() else None
+
             study_instance.researcher = researcher
 
             if not form.cleaned_data.get('test_period'):
                 study_instance.test_period = 14
 
-            if not study.objects.filter(researcher = researcher, name = study_name).exists(): # If the researcher does not already have a study with the given name
+            if not slash_in_name and not not_unique_name: # If the researcher does not already have a study with the given name
 
                 study_instance.save() # Save study to database
                 data['stat'] = "ok"; # Mark entry as 'ok'
                 data['redirect_url'] = "/interface/study/"+study_name+"/";
                 return HttpResponse(json.dumps(data), content_type="application/json") # Redirect back to interface
-            else: # If study with same name already exists
+            elif not_unique_name: # If study with same name already exists
                 data['stat'] = "error"; # Mark entry as 'error'
                 data['error_message'] = "Study already exists; Use a unique name";
                 return HttpResponse(json.dumps(data), content_type="application/json") # Display error message about non-unique study back to user
+            elif slash_in_name:
+                data['stat'] = "error"; # Mark entry as 'error'
+                data['error_message'] = "Study name has a forward slash ('/') inside. Please remove or replace this character.";
+                return HttpResponse(json.dumps(data), content_type="application/json") # Display error message about non-unique study back to user                
         else: # If form failed validation checks
             data['stat'] = "re-render"; # Re-render form
             return render(request, 'researcher_UI/add_study_modal.html', {'form': form, 'form_name': 'Add New Study'})
