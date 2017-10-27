@@ -20,6 +20,7 @@ from django.urls import reverse
 from decimal import Decimal
 from django.contrib.sites.shortcuts import get_current_site
 from ipware.ip import get_ip
+from psycopg2.extras import NumericRange
 
 
 
@@ -311,8 +312,11 @@ def rename_study(request, study_name): # Function for study settings modal
     #check if the researcher exists and has permissions over the study
     permitted = study.objects.filter(researcher = request.user,  name = study_name).exists()
     study_obj = study.objects.get(researcher= request.user, name= study_name)
+    age_range = NumericRange(study_obj.min_age, study_obj.max_age)
+    print age_range
+
     if request.method == 'POST' : # If submitting data
-        form = RenameStudyForm(study_name, request.POST, instance = study_obj) # Grab submitted form
+        form = RenameStudyForm(study_name, request.POST, instance = study_obj, age_range = age_range) # Grab submitted form
 
         # Mark these variables as None for later population
         raw_gift_codes = None
@@ -328,6 +332,10 @@ def rename_study(request, study_name): # Function for study settings modal
             raw_gift_codes = form.cleaned_data.get('gift_codes')
             raw_gift_amount = form.cleaned_data.get('gift_amount')
             raw_test_period = form.cleaned_data.get('test_period')
+
+            new_age_range = form.cleaned_data.get('age_range')
+            study_obj.min_age = new_age_range.lower
+            study_obj.max_age = new_age_range.upper
 
             study_obj = form.save(commit=False) # Save object but do not commit to database just yet
             study_obj.test_period = raw_test_period if (raw_test_period >= 1 and raw_test_period <= 14) else 14 # Check that entered test period is within the 1-14 range. If not, set to default (14)
@@ -395,10 +403,12 @@ def rename_study(request, study_name): # Function for study settings modal
             return render(request, 'researcher_UI/add_study_modal.html', form_package) # Reload 'Update Study' modal
     else:
 
-        form = RenameStudyForm(instance = study_obj, old_study_name = study_obj.name)
+        form = RenameStudyForm(instance = study_obj, old_study_name = study_obj.name, age_range = age_range)
         form_package['form'] = form
         form_package['form_name'] = 'Update Study'
         form_package['allow_payment'] = study_obj.allow_payment
+        form_package['min_age'] = age_range.lower
+        form_package['max_age'] = age_range.upper
         return render(request, 'researcher_UI/add_study_modal.html', form_package) # Reload 'Update Study' modal
         
 @login_required 
@@ -406,11 +416,16 @@ def add_study(request): # Function for adding studies modal
     data = {}
     if request.method == 'POST' : # If submitting data
         form = AddStudyForm(request.POST) # Grab submitted form
+
         if form.is_valid(): # If form passed validation checks in forms.py
 
             study_instance = form.save(commit=False) # Save study object but do not commit to database just yet
             researcher = request.user
             study_name = form.cleaned_data.get('name')
+
+            age_range = form.cleaned_data.get('age_range')
+            study_instance.min_age = age_range.lower
+            study_instance.max_age = age_range.upper
 
             slash_in_name = True if '/' in study_name else None
             not_unique_name = True if study.objects.filter(researcher = researcher, name = study_name).exists() else None

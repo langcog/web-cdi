@@ -5,6 +5,7 @@ from crispy_forms.layout import Submit, Layout, Field, Div
 from form_utils.forms import BetterModelForm
 from django.urls import reverse
 import os
+from django.contrib.postgres.forms import IntegerRangeField
 
 # Form for creating a new study
 class AddStudyForm(BetterModelForm):
@@ -17,9 +18,13 @@ class AddStudyForm(BetterModelForm):
     confirm_completion = forms.BooleanField(required = False, label="At the end of the form, would you like parents to confirm the age of their child and that they completed the entire test? (Best for anonymous data collections where you haven't personally vetted each participant)") # Asks participants to verify the child's age and that they completed the form to the best of their ability. Only for participants that have not been vetted.
     allow_sharing = forms.BooleanField(required=False, label="Would you like participants to be able to share their Web-CDI results via Facebook?") # Gives option for participants to be able to share their results via Facebook. Default off.
     test_period = forms.IntegerField(label = "# Days Before Expiration", help_text= "Between 1 and 14. Default is 14 days. (e.g., 14 = 14 days for parents to complete a form)", required = False, widget= forms.NumberInput(attrs={'placeholder':'(e.g., 14 = 14 days to complete a form)', 'min': '1', 'max': '14'})) # Number of days that a participant can use to complete an administration before expiration. By default, participants have 14 days to complete test. Ranges from 1-14 days.
-    
+    age_range = IntegerRangeField(label="Age Range For Study (in months)")
     prefilled_data_choices = ((0, 'No, do not populate the any part of the form'), (1, 'Only the Background Information Form'), (2, 'The Background Information Form and the Vocabulary Checklist'))
     prefilled_data = forms.ChoiceField(choices = prefilled_data_choices, label = "Pre-fill data for longitudinal participants?", help_text="For longitudinal participants, would you like to populate the test with responses from earlier tests?")
+
+    # Form validation. Form is passed automatically to views.py for higher level checking.
+    def clean(self):
+        cleaned_data = super(AddStudyForm, self).clean()
 
     # Initiating form and field layout.
     def __init__(self, *args, **kwargs):
@@ -36,6 +41,7 @@ class AddStudyForm(BetterModelForm):
         self.helper.layout = Layout(
             Field('name'),
             Field('instrument'),
+            Field('age_range'),
             Field('test_period'),
             Field('waiver'),
             Field('prefilled_data'),            
@@ -85,6 +91,7 @@ class RenameStudyForm(BetterModelForm):
     test_period = forms.IntegerField(label = "# Days Before Expiration", help_text= "Between 1 and 14. Default is 14 days. (e.g., 14 = 14 days for parents to complete a form)", required = False, widget= forms.NumberInput(attrs={'placeholder':'(e.g., 14 = 14 days to complete a form)', 'min': '1', 'max': '14'})) # Update testing period. Can range from 1 to 14 days.
     gift_codes = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Paste Amazon gift card codes here. Can be separated by spaces, commas, or new lines.'}), required=False, label='Gift Card Codes') # Can add a list of gift card codes (separated by new lines, commas, or spaces) to the PaymentCode model that are given out to participants upon completion of current study.
     gift_amount = forms.CharField(max_length=7, required=False, label="Amount per Card (in USD)", widget=forms.TextInput(attrs={'placeholder': '$XX.XX'})) # Specify monetary value of the list of gift card codes in the gift_codes field. Assumed that all codes in the list have the same monetary value.
+    age_range = IntegerRangeField(label="Age Range For Study (in months)")
 
     prefilled_data_choices = ((0, 'No, do not populate the any part of the form'), (1, 'Only the Background Information Form'), (2, 'The Background Information Form and the Vocabulary Checklist'))
     prefilled_data = forms.ChoiceField(choices = prefilled_data_choices, label = "Pre-fill data for longitudinal participants?", help_text="For longitudinal participants, would you like to populate the test with responses from earlier tests?")
@@ -95,6 +102,7 @@ class RenameStudyForm(BetterModelForm):
 
     # Form initiation. Specific form and field layout.
     def __init__(self, old_study_name, *args, **kwargs):
+        self.age_range = kwargs.pop('age_range', None)
         super(RenameStudyForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_id = 'rename_study'
@@ -103,9 +111,12 @@ class RenameStudyForm(BetterModelForm):
         self.helper.label_class = 'col-3'
         self.helper.field_class = 'col-9'
         self.helper.form_method = 'post'
+        if self.age_range:
+            self.fields['age_range'].initial = self.age_range
         self.helper.form_action = reverse('rename_study', args=[old_study_name])
         self.helper.layout = Layout(
             Field('name'),
+            Field('age_range'),
             Field('test_period'),
             Field('waiver'),
             Field('prefilled_data'),

@@ -31,6 +31,8 @@ class study(models.Model):
     allow_sharing = models.BooleanField(default=False) # Whether to allow participants to share results via Facebook
     test_period = models.IntegerField(default=14, validators = [MinValueValidator(1), MaxValueValidator(14)]) # Number of days after test creation that a participant may work on and complete administration  
     prefilled_data = models.IntegerField(default=0)
+    min_age = models.IntegerField(verbose_name = "Minimum age", blank = True, null=True) # Minimum age in months for study
+    max_age = models.IntegerField(verbose_name = "Maximum age", blank = True, null=True) # Maximum age in months for study
 
     def __str__(self):
         return self.name
