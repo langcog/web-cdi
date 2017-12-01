@@ -82,8 +82,10 @@ def background_info_form(request, hash_id):
                 child_dob = background_form.cleaned_data.get('child_dob') # Try to fetch DOB
 
                 if child_dob: # If DOB was entered into form, calculate age based on DOB and today's date.
-                    day_diff = datetime.date.today().day - child_dob.day
-                    age = (datetime.date.today().year - child_dob.year) * 12 +  (datetime.date.today().month - child_dob.month) + (1 if day_diff >=15 else 0)
+                    raw_age = datetime.date.today() - child_dob
+                    age = int(float(raw_age.days)/(365.2425/12.0))
+                    # day_diff = datetime.date.today().day - child_dob.day
+                    # age = (datetime.date.today().year - child_dob.year) * 12 +  (datetime.date.today().month - child_dob.month) + (1 if day_diff >=15 else 0)
                 else:
                     age = None
 
