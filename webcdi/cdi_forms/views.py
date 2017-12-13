@@ -208,13 +208,14 @@ def prefilled_cdi_data(administration_instance):
     if not prefilled_data_list and administration_instance.repeat_num > 1 and administration_instance.study.prefilled_data >= 2:
         word_items = instrument_model.objects.filter(item_type = 'word').values_list('itemID', flat = True)
         old_admins = administration.objects.filter(study = administration_instance.study, subject_id = administration_instance.subject_id, completed = True)
-        old_admin = old_admins.latest(field_name='last_modified')
-        old_admin_data = administration_data.objects.filter(administration = old_admin, item_ID__in = word_items).values('item_ID', 'value')
-        new_data_objs = []
-        for admin_data_obj in old_admin_data:
-            new_data_objs.append(administration_data(administration = administration_instance, item_ID = admin_data_obj['item_ID'], value = admin_data_obj['value']))
-        administration_data.objects.bulk_create(new_data_objs)
-        prefilled_data_list = administration_data.objects.filter(administration = administration_instance).values('item_ID', 'value')
+        if old_admins:
+            old_admin = old_admins.latest(field_name='last_modified')
+            old_admin_data = administration_data.objects.filter(administration = old_admin, item_ID__in = word_items).values('item_ID', 'value')
+            new_data_objs = []
+            for admin_data_obj in old_admin_data:
+                new_data_objs.append(administration_data(administration = administration_instance, item_ID = admin_data_obj['item_ID'], value = admin_data_obj['value']))
+            administration_data.objects.bulk_create(new_data_objs)
+            prefilled_data_list = administration_data.objects.filter(administration = administration_instance).values('item_ID', 'value')
 
     prefilled_data = {x['item_ID']: x['value'] for x in prefilled_data_list} # Store prefilled data in a dictionary with item_ID as the key and response as the value.
     with open(PROJECT_ROOT+'/form_data/'+instrument_name+'_meta.json', 'r') as content_file: # Open associated json file with section ordering and nesting
