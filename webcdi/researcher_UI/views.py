@@ -573,8 +573,6 @@ def administer_new(request, study_name): # For creating new administrations
                         new_hash = random_url_generator() # Generate a unique hash ID
                         old_rep = administration.objects.filter(study = study_obj, subject_id = sid).count() # Count the number of administrations previously given to this subject ID
                         if not administration.objects.filter(study = study_obj, subject_id = sid, repeat_num = old_rep + 1).exists():
-                            # new_obj = administration(study = study_obj, subject_id = sid, repeat_num = old_rep + 1, url_hash = new_hash, completed = False, due_date = datetime.datetime.now() + datetime.timedelta(days=test_period))
-                            # new_administrations.append(new_obj) # Create a new administration object and add to list
                             administration.objects.create(study = study_obj, subject_id = sid, repeat_num = old_rep + 1, url_hash = new_hash, completed = False, due_date = datetime.datetime.now() + datetime.timedelta(days=test_period))
 
                 if params['new-subject-ids'][0] != '': # If there was text in the new_subject_ids field
@@ -585,8 +583,6 @@ def administer_new(request, study_name): # For creating new administrations
                         new_hash = random_url_generator() # Generate a unique hash ID
                         old_rep = administration.objects.filter(study = study_obj, subject_id = sid).count() # Count the number of administrations previously given to this subject ID
                         if not administration.objects.filter(study = study_obj, subject_id = sid, repeat_num = old_rep + 1).exists():
-                            # new_obj = administration(study = study_obj, subject_id = sid, repeat_num = old_rep + 1, url_hash = new_hash, completed = False, due_date = datetime.datetime.now() + datetime.timedelta(days = test_period))
-                            # new_administrations.append(new_obj) # Create a new administration object and add to list
                             administration.objects.create(study = study_obj, subject_id = sid, repeat_num = old_rep + 1, url_hash = new_hash, completed = False, due_date = datetime.datetime.now() + datetime.timedelta(days = test_period))
 
 
@@ -597,9 +593,7 @@ def administer_new(request, study_name): # For creating new administrations
                         max_subject_id = 0 # Mark the max as 0
                     for sid in range(max_subject_id+1, max_subject_id+autogenerate_count+1): # For each to-be-created subject ID
                         new_hash = random_url_generator() # Generate a unique hash ID
-                        # new_administrations.append(administration(study =study_obj, subject_id = sid, repeat_num = 1, url_hash = new_hash, completed = False, due_date = datetime.datetime.now()+datetime.timedelta(days=test_period))) # Create a new administration object and add to list
                         administration.objects.create(study =study_obj, subject_id = sid, repeat_num = 1, url_hash = new_hash, completed = False, due_date = datetime.datetime.now() + datetime.timedelta(days = test_period))
-
 
                 # administration.objects.bulk_create(new_administrations) # Add the list of new administration objects to the database
                 data['stat'] = "ok"; # Mark entry as 'ok'

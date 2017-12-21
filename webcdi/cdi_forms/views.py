@@ -82,8 +82,10 @@ def background_info_form(request, hash_id):
                 child_dob = background_form.cleaned_data.get('child_dob') # Try to fetch DOB
 
                 if child_dob: # If DOB was entered into form, calculate age based on DOB and today's date.
-                    day_diff = datetime.date.today().day - child_dob.day
-                    age = (datetime.date.today().year - child_dob.year) * 12 +  (datetime.date.today().month - child_dob.month) + (1 if day_diff >=15 else 0)
+                    raw_age = datetime.date.today() - child_dob
+                    age = int(float(raw_age.days)/(365.2425/12.0))
+                    # day_diff = datetime.date.today().day - child_dob.day
+                    # age = (datetime.date.today().year - child_dob.year) * 12 +  (datetime.date.today().month - child_dob.month) + (1 if day_diff >=15 else 0)
                 else:
                     age = None
 
@@ -128,12 +130,15 @@ def background_info_form(request, hash_id):
             background_form = BackgroundForm(instance = background_instance, age_ref = age_ref)
         except:
             if administration_instance.repeat_num > 1 and administration_instance.study.prefilled_data >= 1:
-                old_admin = administration.objects.get(study = administration_instance.study, subject_id = administration_instance.subject_id, repeat_num = (administration_instance.repeat_num - 1))
-                background_instance = BackgroundInfo.objects.get(administration = old_admin)
-                background_instance.pk = None
-                background_instance.administration = administration_instance
-                background_instance.age = None
-                background_form = BackgroundForm(instance = background_instance, age_ref = age_ref)
+                old_admins = administration.objects.filter(study = administration_instance.study, subject_id = administration_instance.subject_id, completedBackgroundInfo = True)
+                if old_admins:
+                    background_instance = BackgroundInfo.objects.get(administration = old_admins.latest(field_name='last_modified'))
+                    background_instance.pk = None
+                    background_instance.administration = administration_instance
+                    background_instance.age = None
+                    background_form = BackgroundForm(instance = background_instance, age_ref = age_ref)
+                else:
+                    background_form = BackgroundForm(age_ref = age_ref)  
             else:
                 # If you cannot fetch responses, render a blank form
                 background_form = BackgroundForm(age_ref = age_ref)  
@@ -202,13 +207,15 @@ def prefilled_cdi_data(administration_instance):
     
     if not prefilled_data_list and administration_instance.repeat_num > 1 and administration_instance.study.prefilled_data >= 2:
         word_items = instrument_model.objects.filter(item_type = 'word').values_list('itemID', flat = True)
-        old_admin = administration.objects.get(study = administration_instance.study, subject_id = administration_instance.subject_id, repeat_num = (administration_instance.repeat_num - 1))
-        old_admin_data = administration_data.objects.filter(administration = old_admin, item_ID__in = word_items).values('item_ID', 'value')
-        new_data_objs = []
-        for admin_data_obj in old_admin_data:
-            new_data_objs.append(administration_data(administration = administration_instance, item_ID = admin_data_obj['item_ID'], value = admin_data_obj['value']))
-        administration_data.objects.bulk_create(new_data_objs)
-        prefilled_data_list = administration_data.objects.filter(administration = administration_instance).values('item_ID', 'value')
+        old_admins = administration.objects.filter(study = administration_instance.study, subject_id = administration_instance.subject_id, completed = True)
+        if old_admins:
+            old_admin = old_admins.latest(field_name='last_modified')
+            old_admin_data = administration_data.objects.filter(administration = old_admin, item_ID__in = word_items).values('item_ID', 'value')
+            new_data_objs = []
+            for admin_data_obj in old_admin_data:
+                new_data_objs.append(administration_data(administration = administration_instance, item_ID = admin_data_obj['item_ID'], value = admin_data_obj['value']))
+            administration_data.objects.bulk_create(new_data_objs)
+            prefilled_data_list = administration_data.objects.filter(administration = administration_instance).values('item_ID', 'value')
 
     prefilled_data = {x['item_ID']: x['value'] for x in prefilled_data_list} # Store prefilled data in a dictionary with item_ID as the key and response as the value.
     with open(PROJECT_ROOT+'/form_data/'+instrument_name+'_meta.json', 'r') as content_file: # Open associated json file with section ordering and nesting

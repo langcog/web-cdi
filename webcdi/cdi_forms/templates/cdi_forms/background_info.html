@@ -118,8 +118,9 @@
 
         if (!isNaN(raw_b_date.getTime()) && $("#id_child_dob").val() != ''){
             var t_date = moment();
-            var day_diff = ((t_date.date() - b_date.date()) >= 15)? 1: 0
-            var diff_in_months = 12*(t_date.year() - b_date.year()) + (t_date.month() - b_date.month()) + day_diff;
+            // var day_diff = ((t_date.date() - b_date.date()) >= 15)? 1: 0
+            // var diff_in_months = 12*(t_date.year() - b_date.year()) + (t_date.month() - b_date.month()) + day_diff;
+            var diff_in_months = parseInt((t_date.diff(b_date, 'days'))/(365.2425/12.0))
 
             if (diff_in_months > 0){
                 $("#id_age").val(diff_in_months);
