@@ -58,8 +58,8 @@ def background_info_form(request, hash_id):
     age_ref = {}
     age_ref['language'] = administration_instance.study.instrument.language
     age_ref['instrument'] = administration_instance.study.instrument.name
-    age_ref['min_age'] = administration_instance.study.instrument.min_age
-    age_ref['max_age'] = administration_instance.study.instrument.max_age
+    age_ref['min_age'] = administration_instance.study.min_age
+    age_ref['max_age'] = administration_instance.study.max_age
     age_ref['child_age'] = None
     age_ref['zip_code'] = ''
 
@@ -152,8 +152,8 @@ def background_info_form(request, hash_id):
     data['due_date'] = administration_instance.due_date
     data['language'] = administration_instance.study.instrument.language
     data['title'] = administration_instance.study.instrument.verbose_name
-    data['max_age'] = administration_instance.study.instrument.max_age
-    data['min_age'] = administration_instance.study.instrument.min_age
+    data['max_age'] = administration_instance.study.max_age
+    data['min_age'] = administration_instance.study.min_age
     data['study_waiver'] = administration_instance.study.waiver
     data['allow_payment'] = administration_instance.study.allow_payment
     if data['allow_payment'] and administration_instance.bypass is None:

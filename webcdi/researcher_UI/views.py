@@ -313,7 +313,6 @@ def rename_study(request, study_name): # Function for study settings modal
     permitted = study.objects.filter(researcher = request.user,  name = study_name).exists()
     study_obj = study.objects.get(researcher= request.user, name= study_name)
     age_range = NumericRange(study_obj.min_age, study_obj.max_age)
-    print age_range
 
     if request.method == 'POST' : # If submitting data
         form = RenameStudyForm(study_name, request.POST, instance = study_obj, age_range = age_range) # Grab submitted form
@@ -424,8 +423,13 @@ def add_study(request): # Function for adding studies modal
             study_name = form.cleaned_data.get('name')
 
             age_range = form.cleaned_data.get('age_range')
-            study_instance.min_age = age_range.lower
-            study_instance.max_age = age_range.upper
+
+            try:
+                study_instance.min_age = age_range.lower
+                study_instance.max_age = age_range.upper
+            except:
+                study_instance.min_age = study_instance.instrument.min_age
+                study_instance.max_age = study_instance.instrument.max_age
 
             slash_in_name = True if '/' in study_name else None
             not_unique_name = True if study.objects.filter(researcher = researcher, name = study_name).exists() else None
