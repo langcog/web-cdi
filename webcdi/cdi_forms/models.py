@@ -118,8 +118,8 @@ class BackgroundInfo(models.Model):
     multi_birth_boolean = models.IntegerField(verbose_name = "Was your child born as part of a multiple birth?") # Boolean for multiple birth
     multi_birth = models.IntegerField(verbose_name = "Twins, triplets, quadruplets, other?", choices = multi_birth_choices, blank=True, null=True) # Elaboration on circumstances for subjects born in a multiple birth (twins, triplets, etc.)
 
-    #Declared set of birthweight choices. Displays intervals instead of birthweight rounded down to nearest 0.5 lb
-    birth_weight_choices = [
+    #Declared set of birthweight choices (in lb and oz). Displays intervals instead of birthweight rounded down to nearest 0.5 lb
+    birth_weight_lb_choices = [
         (1.0, "Less than 3 lbs, 0 oz"),
         (3.0, "3 lbs, 0 oz - 3 lbs, 7 oz"),
         (3.5, "3 lbs, 8 oz - 3 lbs, 15 oz"),
@@ -140,7 +140,31 @@ class BackgroundInfo(models.Model):
 
     ]
 
-    birth_weight = models.FloatField(verbose_name = "Birth weight", choices = birth_weight_choices) # Declared birthweight for subject
+    #Declared set of birthweight choices (in lb and oz). Displays intervals instead of birthweight rounded down to nearest 0.5 lb
+    birth_weight_kg_choices = [
+        (1.00, "Less than 1500 grams"),
+        (1.50, "1500 grams - 1749 grams"),
+        (1.75, "1750 grams - 1999 grams"),
+        (2.00, "2000 grams - 2249 grams"),
+        (2.25, "2250 grams - 2499 grams"),
+        (2.50, "2500 grams - 2749 grams"),
+        (2.75, "2750 grams - 2999 grams"),
+        (3.00, "3000 grams - 3249 grams"),
+        (3.25, "3250 grams - 3499 grams"),
+        (3.50, "3500 grams - 3749 grams"),
+        (3.75, "3750 grams - 3999 grams"),
+        (4.00, "4000 grams - 4249 grams"),
+        (4.25, "4250 grams - 4499 grams"),
+        (4.50, "4500 grams - 4749 grams"),
+        (4.75, "4750 grams - 4999 grams"),
+        (5.00, "5000 grams or more"),
+        (0.00, "Prefer not to disclose")
+
+    ]
+
+    birth_weight_lb = models.FloatField(verbose_name = "Birth weight", choices = birth_weight_lb_choices, blank=True, null=True) # Declared birthweight for subject (in lb and oz)
+    birth_weight_kg = models.FloatField(verbose_name = "Birth weight", choices = birth_weight_kg_choices, blank=True, null=True) # Declared birthweight for subject
+
 
     born_on_due_date = models.IntegerField(verbose_name = "Was your child born earlier or later than their due date?") # Boolean for whether child was born on due date
     early_or_late = models.CharField(verbose_name = "Was he/she early or late?", max_length = 5, choices = (('early', 'Early'),('late', 'Late')), blank=True, null=True) # Determines if child was born earlier or later than due date
@@ -155,7 +179,7 @@ class BackgroundInfo(models.Model):
     education_levels[23-5] = (23, "23 or more")
     education_levels[-1] = (0, "Prefer not to disclose")
 
-    years = [(x,str(x)) for x in range(1950, datetime.date.today().year+2)] #Declares tupe for year of birth for parents/guardians
+    years = [(x,str(x)) for x in range(1950, datetime.date.today().year+2)] #Declares tuple for year of birth for parents/guardians
     years[-1] = (0, "Prefer not to disclose")
 
     mother_yob = models.IntegerField(verbose_name = "Mother / Parent or Guardian 1 Year of birth", choices=years) # Asks for year of birth for mother. Can be used to roughly determine maternal age

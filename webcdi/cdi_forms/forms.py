@@ -51,7 +51,7 @@ class BackgroundForm(BetterModelForm):
     child_hispanic_latino = forms.TypedChoiceField(
                      choices=YESNO_CHOICES, widget=forms.RadioSelect, coerce = string_bool_coerce
                 , required=False, label="Is your child Hispanic or Latino?")
-    
+
     # Was child born on their due date? Yes/No question.
     born_on_due_date = forms.TypedChoiceField(
                      choices=YESNONA_CHOICES, widget=forms.RadioSelect, label='Was your child born early or late (more than one week before or after the due date)?')
@@ -192,9 +192,11 @@ class BackgroundForm(BetterModelForm):
         self.helper.field_class = 'col-lg-9'
         self.helper.form_method = 'post'
 
-        self.fields['child_dob'].input_formats=(settings.DATE_INPUT_FORMATS)
+        self.fields['child_dob'].input_formats = (settings.DATE_INPUT_FORMATS)
+        self.fields['birth_weight_lb'].label = 'Birth weight<span class="asteriskField">*</span>'
+        self.fields['birth_weight_kg'].label = 'Birth weight<span class="asteriskField">*</span>'
         self.helper.layout = Layout(
-            Fieldset( 'Basic Information', 'child_dob','age', 'sex','zip_code','birth_order', Field('multi_birth_boolean', css_class='enabler'), Div('multi_birth', css_class='dependent'), 'birth_weight', Field('born_on_due_date', css_class='enabler'), Div('early_or_late', 'due_date_diff', css_class='dependent')),
+            Fieldset( 'Basic Information', 'child_dob','age', 'sex','zip_code','birth_order', Field('multi_birth_boolean', css_class='enabler'), Div('multi_birth', css_class='dependent'), 'birth_weight_lb', 'birth_weight_kg', Field('born_on_due_date', css_class='enabler'), Div('early_or_late', 'due_date_diff', css_class='dependent')),
             Fieldset( 'Family Background', 'mother_yob', 'mother_education','father_yob', 'father_education', 'annual_income'),
             Fieldset( "Child's Ethnicity",HTML("<p> The following information is being collected for the sole purpose of reporting to our grant-funding institute, i.e.,  NIH (National Institute of Health).  NIH requires this information to ensure the soundness and inclusiveness of our research. Your cooperation is appreciated, but optional. </p>"), 'child_hispanic_latino', 'child_ethnicity'),
             Fieldset( "Caregiver Information", 'caregiver_info'),
