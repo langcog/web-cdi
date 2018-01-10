@@ -19,8 +19,12 @@ class AddStudyForm(BetterModelForm):
     allow_sharing = forms.BooleanField(required=False, label="Would you like participants to be able to share their Web-CDI results via Facebook?") # Gives option for participants to be able to share their results via Facebook. Default off.
     test_period = forms.IntegerField(label = "# Days Before Expiration", help_text= "Between 1 and 14. Default is 14 days. (e.g., 14 = 14 days for parents to complete a form)", required = False, widget= forms.NumberInput(attrs={'placeholder':'(e.g., 14 = 14 days to complete a form)', 'min': '1', 'max': '14'})) # Number of days that a participant can use to complete an administration before expiration. By default, participants have 14 days to complete test. Ranges from 1-14 days.
     age_range = IntegerRangeField(label="Age Range For Study (in months)")
+    
     prefilled_data_choices = ((0, 'No, do not populate the any part of the form'), (1, 'Only the Background Information Form'), (2, 'The Background Information Form and the Vocabulary Checklist'))
     prefilled_data = forms.ChoiceField(choices = prefilled_data_choices, label = "Pre-fill data for longitudinal participants?", help_text="For longitudinal participants, would you like to populate the test with responses from earlier tests?")
+    
+    birth_weight_choices = (("lb", "Measure birthweight in pounds and ounces"), ("kg", "Measure birthweight in kilograms"))
+    birth_weight_units = forms.ChoiceField(choices = birth_weight_choices, label = "Measurement units for birthweight")
 
     # Form validation. Form is passed automatically to views.py for higher level checking.
     def clean(self):
@@ -43,6 +47,7 @@ class AddStudyForm(BetterModelForm):
             Field('instrument'),
             Field('age_range'),
             Field('test_period'),
+            Field('birth_weight_units'),
             Field('waiver'),
             Field('prefilled_data'),            
             Field('allow_payment'),
@@ -96,6 +101,9 @@ class RenameStudyForm(BetterModelForm):
     prefilled_data_choices = ((0, 'No, do not populate the any part of the form'), (1, 'Only the Background Information Form'), (2, 'The Background Information Form and the Vocabulary Checklist'))
     prefilled_data = forms.ChoiceField(choices = prefilled_data_choices, label = "Pre-fill data for longitudinal participants?", help_text="For longitudinal participants, would you like to populate the test with responses from earlier tests?")
 
+    birth_weight_choices = (("lb", "Measure birthweight in pounds and ounces"), ("kg", "Measure birthweight in kilograms"))
+    birth_weight_units = forms.ChoiceField(choices = birth_weight_choices, label = "Measurement units for birthweight")
+
     # Form validation. Form is passed automatically to views.py for higher level checking.
     def clean(self):
         cleaned_data = super(RenameStudyForm, self).clean()
@@ -118,6 +126,7 @@ class RenameStudyForm(BetterModelForm):
             Field('name'),
             Field('age_range'),
             Field('test_period'),
+            Field('birth_weight_units'),
             Field('waiver'),
             Field('prefilled_data'),
             Field('anon_collection'),

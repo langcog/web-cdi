@@ -33,6 +33,7 @@ class study(models.Model):
     prefilled_data = models.IntegerField(default=0)
     min_age = models.IntegerField(verbose_name = "Minimum age", blank = True, null=True) # Minimum age in months for study
     max_age = models.IntegerField(verbose_name = "Maximum age", blank = True, null=True) # Maximum age in months for study
+    birth_weight_units = models.CharField(max_length = 5, default="lb")
 
     def __str__(self):
         return self.name
@@ -44,7 +45,7 @@ def get_meta_header(): # Returns a list of variables for administration objects
     return ['study', 'subject_id', 'administration_number', 'link', 'completed', 'completedBackgroundInfo', 'expiration_date', 'last_modified']
 
 def get_background_header(): # Returns a list of variables for backgroundinfo objects
-    return ['id', 'age', 'sex', 'birth_order', 'birth_weight', 'early_or_late', 'due_date_diff', 'mother_yob', 'mother_education', 'father_yob', 'father_education', 'annual_income', 'child_hispanic_latino', 'caregiver_info', 'other_languages_boolean', 'language_from', 'language_days_per_week', 'language_hours_per_day', 'ear_infections_boolean', 'ear_infections', 'hearing_loss_boolean', 'hearing_loss', 'vision_problems_boolean', 'vision_problems']
+    return ['id', 'age', 'sex', 'birth_order', 'birth_weight_lb', 'birth_weight_kg', 'early_or_late', 'due_date_diff', 'mother_yob', 'mother_education', 'father_yob', 'father_education', 'annual_income', 'child_hispanic_latino', 'caregiver_info', 'other_languages_boolean', 'language_from', 'language_days_per_week', 'language_hours_per_day', 'ear_infections_boolean', 'ear_infections', 'hearing_loss_boolean', 'hearing_loss', 'vision_problems_boolean', 'vision_problems']
 
 # Model for individual administrations
 class administration(models.Model):

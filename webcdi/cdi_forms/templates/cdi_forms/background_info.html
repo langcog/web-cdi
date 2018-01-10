@@ -187,7 +187,15 @@
             $('#id_zip_code').val((""+Math.random()).substring(2,7))
             $('#id_birth_order').val(4);
             $('#id_multi_birth_boolean_1').click();
-            $('#id_birth_weight').val(7.5);
+
+            if( $('#id_birth_weight_lb').length ) {
+                $('#id_birth_weight_lb').val(7.5);
+            }
+
+            if( $('#id_birth_weight_kg').length ) {
+                $('#id_birth_weight_kg').val(3.5);
+            }
+
             $('#id_born_on_due_date_1').click();
             $('#id_mother_yob').val(1990);
             $('#id_mother_education').val(16);

@@ -170,20 +170,23 @@ class BackgroundForm(BetterModelForm):
             day_diff = datetime.date.today().day - c_dob.day
             c_age = (datetime.date.today().year - c_dob.year) * 12 +  (datetime.date.today().month - c_dob.month) + (1 if day_diff >=15 else 0)
         else:
-            c_age = self.age_ref['child_age']
+            c_age = self.curr_context['child_age']
         if c_age:
-            if c_age < self.age_ref['min_age']:
+            if c_age < self.curr_context['min_age']:
                 self.add_error('age', 'Your baby is too young for this version of the CDI.')
-            elif c_age > (self.age_ref['max_age']):
+            elif c_age > (self.curr_context['max_age']):
                 self.add_error('age', 'Your baby is too old for this version of the CDI.')
         else:
             self.add_error('age', 'Please enter your child\'s DOB in the field above.')
+            
+        if not cleaned_data.get(self.birth_weight_field):
+            self.add_error(self.birth_weight_field, 'This field cannot be empty')
 
 
 
     #Initiation of form. Set values, page format according to crispy forms, store variables delivered by views.py, and organize fields on the form.
     def __init__(self, *args, **kwargs):
-        self.age_ref = kwargs.pop('age_ref', None)
+        self.curr_context = kwargs.pop('context', None)
         super(BackgroundForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.template = PROJECT_ROOT + '/templates/bootstrap/whole_uni_form.html'
@@ -195,8 +198,14 @@ class BackgroundForm(BetterModelForm):
         self.fields['child_dob'].input_formats = (settings.DATE_INPUT_FORMATS)
         self.fields['birth_weight_lb'].label = 'Birth weight<span class="asteriskField">*</span>'
         self.fields['birth_weight_kg'].label = 'Birth weight<span class="asteriskField">*</span>'
+
+        if self.curr_context['birthweight_units'] == "lb":
+            self.birth_weight_field = 'birth_weight_lb'
+        elif self.curr_context['birthweight_units'] == "kg":
+            self.birth_weight_field = 'birth_weight_kg'
+
         self.helper.layout = Layout(
-            Fieldset( 'Basic Information', 'child_dob','age', 'sex','zip_code','birth_order', Field('multi_birth_boolean', css_class='enabler'), Div('multi_birth', css_class='dependent'), 'birth_weight_lb', 'birth_weight_kg', Field('born_on_due_date', css_class='enabler'), Div('early_or_late', 'due_date_diff', css_class='dependent')),
+            Fieldset( 'Basic Information', 'child_dob','age', 'sex','zip_code','birth_order', Field('multi_birth_boolean', css_class='enabler'), Div('multi_birth', css_class='dependent'), self.birth_weight_field, Field('born_on_due_date', css_class='enabler'), Div('early_or_late', 'due_date_diff', css_class='dependent')),
             Fieldset( 'Family Background', 'mother_yob', 'mother_education','father_yob', 'father_education', 'annual_income'),
             Fieldset( "Child's Ethnicity",HTML("<p> The following information is being collected for the sole purpose of reporting to our grant-funding institute, i.e.,  NIH (National Institute of Health).  NIH requires this information to ensure the soundness and inclusiveness of our research. Your cooperation is appreciated, but optional. </p>"), 'child_hispanic_latino', 'child_ethnicity'),
             Fieldset( "Caregiver Information", 'caregiver_info'),

@@ -26,8 +26,12 @@ PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__)) # Declare root folder 
 
 # Map name of instrument model (English_WG & English_WS) to its string title
 def model_map(name):
-    mapping = {"English_WS": English_WS, "English_WG": English_WG, 
-    "Spanish_WS": Spanish_WS, "Spanish_WG": Spanish_WG}
+    mapping = {
+    "English_WS": English_WS, 
+    "English_WG": English_WG, 
+    "Spanish_WS": Spanish_WS, 
+    "Spanish_WG": Spanish_WG
+    }
     assert name in mapping, name+"instrument not added to the mapping in views.py model_map function"
     return mapping[name]
         
@@ -55,13 +59,14 @@ def background_info_form(request, hash_id):
     administration_instance = get_administration_instance(hash_id) # Get administation object based on hash ID
 
     # Populate a dictionary with information regarding the instrument (age range, language, and name) along with information on child's age and zipcode for modification. Will be sent to forms.py for form validation.
-    age_ref = {}
-    age_ref['language'] = administration_instance.study.instrument.language
-    age_ref['instrument'] = administration_instance.study.instrument.name
-    age_ref['min_age'] = administration_instance.study.min_age
-    age_ref['max_age'] = administration_instance.study.max_age
-    age_ref['child_age'] = None
-    age_ref['zip_code'] = ''
+    context = {}
+    context['language'] = administration_instance.study.instrument.language
+    context['instrument'] = administration_instance.study.instrument.name
+    context['min_age'] = administration_instance.study.min_age
+    context['max_age'] = administration_instance.study.max_age
+    context['birthweight_units'] = administration_instance.study.birth_weight_units
+    context['child_age'] = None
+    context['zip_code'] = ''
 
     refresh = False # Refreshing page is automatically off
     background_form = None
@@ -71,10 +76,10 @@ def background_info_form(request, hash_id):
             try:
                 background_instance = BackgroundInfo.objects.get(administration = administration_instance) # Try to fetch BackgroundInfo model already stored in database.
                 if background_instance.age:
-                    age_ref['child_age'] = background_instance.age # Populate dictionary with child's age for validation in forms.py.
-                background_form = BackgroundForm(request.POST, instance = background_instance, age_ref = age_ref) # Save filled out form as an object
+                    context['child_age'] = background_instance.age # Populate dictionary with child's age for validation in forms.py.
+                background_form = BackgroundForm(request.POST, instance = background_instance, context = context) # Save filled out form as an object
             except:
-                background_form = BackgroundForm(request.POST, age_ref = age_ref) # Pull up an empty BackgroundForm with information regarding only the instrument.
+                background_form = BackgroundForm(request.POST, context = context) # Pull up an empty BackgroundForm with information regarding only the instrument.
 
             if background_form.is_valid(): # If form passed forms.py validation (clean function)
                 background_instance = background_form.save(commit = False) # Save but do not commit form just yet.
@@ -124,10 +129,10 @@ def background_info_form(request, hash_id):
             # Fetch responses stored in BackgroundInfo model
             background_instance = BackgroundInfo.objects.get(administration = administration_instance)
             if background_instance.age:
-                age_ref['child_age'] = background_instance.age
+                context['child_age'] = background_instance.age
             if len(background_instance.zip_code) == 3:
                 background_instance.zip_code = background_instance.zip_code + '**'
-            background_form = BackgroundForm(instance = background_instance, age_ref = age_ref)
+            background_form = BackgroundForm(instance = background_instance, context = context)
         except:
             if administration_instance.repeat_num > 1 and administration_instance.study.prefilled_data >= 1:
                 old_admins = administration.objects.filter(study = administration_instance.study, subject_id = administration_instance.subject_id, completedBackgroundInfo = True)
@@ -136,12 +141,12 @@ def background_info_form(request, hash_id):
                     background_instance.pk = None
                     background_instance.administration = administration_instance
                     background_instance.age = None
-                    background_form = BackgroundForm(instance = background_instance, age_ref = age_ref)
+                    background_form = BackgroundForm(instance = background_instance, context = context)
                 else:
-                    background_form = BackgroundForm(age_ref = age_ref)  
+                    background_form = BackgroundForm(context = context)  
             else:
                 # If you cannot fetch responses, render a blank form
-                background_form = BackgroundForm(age_ref = age_ref)  
+                background_form = BackgroundForm(context = context)  
 
     # Store relevant variables in a dictionary for template rendering. Includes prefilled responses, hash ID, data on study (researcher's name, instrument language, age range, related studies, etc.)
     data = {}
