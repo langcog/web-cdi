@@ -43,9 +43,9 @@ class Spanish_WS(models.Model):
     item_type = models.CharField(max_length = 101) # type of variable (word, phrase, etc.)
     category = models.CharField(max_length = 101) # if word, the subcategory for item (animals, sounds, etc.)
     choices = models.CharField(max_length = 101, null=True) # possible positive choices for item
-    definition = models.CharField(max_length = 201, null=True, blank=True) # item listed in plaintext. This is what is displayed to test-takers along with possible choices
+    definition = models.CharField(max_length = 1001, null=True, blank=True) # item listed in plaintext. This is what is displayed to test-takers along with possible choices
     uni_lemma = models.CharField(max_length= 101, null=True, blank=True) # ID for matching terms across languages. Currently unused.
-    gloss = models.CharField(max_length = 101, null=True, blank=True) # English translation for item. At the moment, we only have English instruments so definition and gloss are identical
+    gloss = models.CharField(max_length = 1001, null=True, blank=True) # English translation for item. At the moment, we only have English instruments so definition and gloss are identical
     complexity_category = models.CharField(max_length = 101, null=True, blank=True) # category for complexity item. Currently blank.
     def __str__(self):
         return self.item
@@ -56,9 +56,9 @@ class Spanish_WG(models.Model):
     item_type = models.CharField(max_length = 101) # type of variable (word, phrase, etc.)
     category = models.CharField(max_length = 101) # if word, the subcategory for item (animals, sounds, etc.)
     choices = models.CharField(max_length = 101, null=True) # possible positive choices for item
-    definition = models.CharField(max_length = 201, null=True, blank=True) # item listed in plaintext. This is what is displayed to test-takers along with possible choices
+    definition = models.CharField(max_length = 1001, null=True, blank=True) # item listed in plaintext. This is what is displayed to test-takers along with possible choices
     uni_lemma = models.CharField(max_length= 101, null=True, blank=True) # ID for matching terms across languages. Currently unused.
-    gloss = models.CharField(max_length = 101, null=True, blank=True) # English translation for item. At the moment, we only have English instruments so definition and gloss are identical
+    gloss = models.CharField(max_length = 1001, null=True, blank=True) # English translation for item. At the moment, we only have English instruments so definition and gloss are identical
     complexity_category = models.CharField(max_length = 101, null=True, blank=True) # category for complexity item. Currently blank.
     def __str__(self):
         return self.item
