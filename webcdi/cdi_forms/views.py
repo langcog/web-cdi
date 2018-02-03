@@ -4,10 +4,9 @@ from django.shortcuts import render
 from .models import English_WS, English_WG, Spanish_WS, Spanish_WG, BackgroundInfo, requests_log, Zipcode
 import os.path, json, datetime, itertools, requests
 from researcher_UI.models import administration_data, administration, study, payment_code, ip_address
-from django.http import Http404
+from django.http import Http404, JsonResponse, HttpResponse
 from .forms import BackgroundForm, ContactForm
-from django.utils import timezone
-from django.http import JsonResponse, HttpResponse
+from django.utils import timezone, translation
 from django.core.serializers.json import DjangoJSONEncoder
 from django.core.mail import EmailMessage
 from django.template import Context
@@ -19,6 +18,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.urls import reverse
 from ipware.ip import get_ip
 from django.conf import settings
+
 
 
 
@@ -154,7 +154,7 @@ def background_info_form(request, hash_id):
     data['hash_id'] = hash_id
     data['username'] = administration_instance.study.researcher.username
     data['completed'] = administration_instance.completed
-    data['due_date'] = administration_instance.due_date
+    data['due_date'] = administration_instance.due_date.strftime('%b %d, %Y, %I:%M %p')
     data['language'] = administration_instance.study.instrument.language
     data['title'] = administration_instance.study.instrument.verbose_name
     data['max_age'] = administration_instance.study.max_age
@@ -176,7 +176,23 @@ def background_info_form(request, hash_id):
         data['alt_study_info'] = None
     
     # Render template
-    return render(request, 'cdi_forms/background_info.html', data)
+    response =  render(request, 'cdi_forms/background_info.html', data)
+
+    if administration_instance.study.instrument.language == "English":
+        print 'English'
+        user_language = 'en'
+    elif administration_instance.study.instrument.language == "Spanish":
+        print 'Spanish'
+        user_language = 'es'
+
+    translation.activate(user_language)
+
+    # Render CDI form with prefilled responses and study context
+    response = render(request, 'cdi_forms/background_info.html', data) # Render contact form template   
+
+    response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
+    return response
+
 
 # Stitch section nesting in cdi_forms/form_data/*.json and instrument models together and prepare for CDI form rendering
 def cdi_items(object_group, item_type, prefilled_data, item_id):
@@ -362,8 +378,18 @@ def cdi_form(request, hash_id):
         if administration_instance.study.confirm_completion and administration_instance.study.researcher.username == "langcoglab" and administration_instance.study.allow_payment:
             data['captcha'] = 'True'
 
+    if administration_instance.study.instrument.language == "English":
+        user_language = 'en'
+    elif administration_instance.study.instrument.language == "Spanish":
+        user_language = 'es'
+
+    translation.activate(user_language)
+
     # Render CDI form with prefilled responses and study context
-    return render(request, 'cdi_forms/cdi_form.html', data)
+    response = render(request, 'cdi_forms/cdi_form.html', data) # Render contact form template   
+
+    response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
+    return response
 
 # Render completion page
 def printable_view(request, hash_id):
@@ -394,8 +420,14 @@ def printable_view(request, hash_id):
 
     prefilled_data['allow_sharing'] = administration_instance.study.allow_sharing
 
-    # Pre-render template and add a cookie for form completion before sending template back to browser.
-    response = render(request, 'cdi_forms/printable_cdi.html', prefilled_data)
+    if administration_instance.study.instrument.language == "English":
+        user_language = 'en'
+    elif administration_instance.study.instrument.language == "Spanish":
+        user_language = 'es'
+
+    translation.activate(user_language)
+    response = render(request, 'cdi_forms/printable_cdi.html', prefilled_data) # Render contact form template   
+    response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
 
     if administration_instance.study.researcher.username == "langcoglab" and administration_instance.study.allow_payment:
         response.set_signed_cookie('completed_num',str(completed))
@@ -453,6 +485,7 @@ def find_paired_studies(request, username, study_group):
 # For test-takers contacting a Web-CDI admin
 def contact(request, hash_id):
 
+    administration_instance = get_administration_instance(hash_id)
     # Determine administration URL
     redirect_url = ''.join(['http://', get_current_site(request).domain, reverse('administer_cdi_form', args=[hash_id])])
 
@@ -488,4 +521,13 @@ def contact(request, hash_id):
             email.send()
             messages.success(request, 'Form submission successful!') # Provide sender with a message the form was properly sent.
 
-    return render(request, 'cdi_forms/contact.html', {'form': form}) # Render contact form template   
+    if administration_instance.study.instrument.language == "English":
+        user_language = 'en'
+    elif administration_instance.study.instrument.language == "Spanish":
+        user_language = 'es'
+
+    translation.activate(user_language)
+    response = render(request, 'cdi_forms/contact.html', {'form': form}) # Render contact form template   
+    response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
+
+    return response

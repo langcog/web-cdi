@@ -9,6 +9,8 @@ from django.templatetags.static import static
 import datetime, codecs, json, os.path
 from django.core.exceptions import ValidationError
 from django.core.validators import EmailValidator, RegexValidator
+from django.utils.translation import ugettext_lazy as _
+
 
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__)) # Declare project file directory
@@ -27,106 +29,106 @@ class BackgroundForm(BetterModelForm):
     # Multiple checkbox question regarding child's ethnicity. Not required.
     child_ethnicity = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,
     choices = (
-    ('N', "American Indian / Alaska Native"),
-    ('A', "Asian (Far East, Southeast Asia, Indian Sub-continent)"), 
-    ('H', "Native Hawaiian or Other Pacific Islander"),
-    ('B', "Black or African American"),
-    ('W', "White"),
-    ('O', "Other")), label = "My child is (check all that apply):", required = False)
-    YESNO_CHOICES = ((False, 'No'), (True, 'Yes'))
-    YESNONA_CHOICES = ((0, 'No'), (1, 'Yes'), (2, 'Prefer not to disclose'))
+    ('N', _("American Indian / Alaska Native")),
+    ('A', _("Asian (Far East, Southeast Asia, Indian Sub-continent)")), 
+    ('H', _("Native Hawaiian or Other Pacific Islander")),
+    ('B', _("Black or African American")),
+    ('W', _("White")),
+    ('O', _("Other"))), label = _("My child is (check all that apply):"), required = False)
+    YESNO_CHOICES = ((False, _('No')), (True, _('Yes')))
+    YESNONA_CHOICES = ((0, _('No')), (1, _('Yes')), (2, _('Prefer not to disclose')))
 
     # Child's DOB. Formatted weirdly to only be required if Age in months in not already stored in database.
     child_dob = forms.DateField(input_formats=['%m/%d/%Y'], widget=forms.TextInput(attrs={'placeholder': 'mm/dd/yyyy'}),
-                                help_text = "To protect your privacy, we never store your child's date of birth, we only record age in months.",
-                                validators = [MaxValueValidator(datetime.date.today())], label = 'Child DOB<span class="asteriskField">*</span>', required=False)
+                                help_text = _("To protect your privacy, we never store your child's date of birth, we only record age in months."),
+                                validators = [MaxValueValidator(datetime.date.today())], label = _('Child DOB<span class="asteriskField">*</span>'), required=False)
 
     # Child's age in months. Formatted weirdly to ask for 'child_dob' when empty.
-    age = forms.IntegerField(label = 'Age (in months)<span class="asteriskField">*</span>', validators=[MinValueValidator(0)], help_text='This field will update when you enter or change your child\'s DOB.', required=False)
+    age = forms.IntegerField(label = _('Age (in months)<span class="asteriskField">*</span>'), validators=[MinValueValidator(0)], help_text=_('This field will update when you enter or change your child\'s DOB.'), required=False)
 
     # Zip code. Regex validation of zip code (3-digit prefix) occurs in models.py
-    zip_code = forms.CharField(min_length = 2, max_length = 5, required = False, widget=forms.TextInput(attrs={'placeholder': 'XXXXX'}), label = "What is your zip code?<br>(if you live in the U.S.)")
+    zip_code = forms.CharField(min_length = 2, max_length = 5, required = False, widget=forms.TextInput(attrs={'placeholder': 'XXXXX'}), label = _("What is your zip code?<br>(if you live in the U.S.)"))
 
     # Whether child is hispanic/latino. Yes/No question. Not required.
     child_hispanic_latino = forms.TypedChoiceField(
                      choices=YESNO_CHOICES, widget=forms.RadioSelect, coerce = string_bool_coerce
-                , required=False, label="Is your child Hispanic or Latino?")
+                , required=False, label=_("Is your child Hispanic or Latino?"))
 
     # Was child born on their due date? Yes/No question.
     born_on_due_date = forms.TypedChoiceField(
-                     choices=YESNONA_CHOICES, widget=forms.RadioSelect, label='Was your child born early or late (more than one week before or after the due date)?')
+                     choices=YESNONA_CHOICES, widget=forms.RadioSelect, label=_('Was your child born early or late (more than one week before or after the due date)?'))
     
     # Was child born early or late compared to due date. 2-choice question. 
     early_or_late = forms.ChoiceField(
-                     choices=(('early', 'Early'),('late', 'Late')), widget=forms.RadioSelect,
+                     choices=(('early', _('Early')),('late', _('Late'))), widget=forms.RadioSelect,
                  required=False)
 
     # Child's sex. Can choose M (male), F (female) or O (other/not disclosed)
     sex = forms.ChoiceField(
-                     choices=(('M', 'Male'), ('F', 'Female'), ('O', 'Other / Prefer not to disclose')), widget=forms.RadioSelect,
+                     choices=(('M', _('Male')), ('F', _('Female')), ('O', _('Other / Prefer not to disclose'))), widget=forms.RadioSelect,
                 )
 
     # Whether child was a part of a multiple birth (twins, triplets, etc.)
     multi_birth_boolean = forms.TypedChoiceField(
-                     choices=YESNONA_CHOICES, widget=forms.RadioSelect, label="Was your child born as part of a multiple birth?")
+                     choices=YESNONA_CHOICES, widget=forms.RadioSelect, label=_("Was your child born as part of a multiple birth?"))
 
     # Whether child is exposed to other languages (currently besides English)
     other_languages_boolean = forms.TypedChoiceField(
-                     choices=YESNONA_CHOICES, widget=forms.RadioSelect, label='Does your child regularly hear a language other than English?')
+                     choices=YESNONA_CHOICES, widget=forms.RadioSelect, label=_('Does your child regularly hear a language other than English?'))
 
     # Whether child experienced 5+ ear infections
     ear_infections_boolean = forms.TypedChoiceField(
                      choices=YESNONA_CHOICES, widget=forms.RadioSelect,
                      label =  
-                     "Has your child experienced chronic ear infections (5 or more)?"
+                     _("Has your child experienced chronic ear infections (5 or more)?")
                      )
 
     # Whether child may suffer from hearing loss
     hearing_loss_boolean = forms.TypedChoiceField(
                      choices=YESNONA_CHOICES, widget=forms.RadioSelect, 
                      label =  
-                        'Do you suspect that your child may have hearing loss?' 
+                        _('Do you suspect that your child may have hearing loss?') 
                      )
 
     # Whether child may have vision problems
     vision_problems_boolean = forms.TypedChoiceField(
                      choices=YESNONA_CHOICES, widget=forms.RadioSelect, 
                      label =  
-                        'Is there some reason to suspect that your child may have vision problems?' 
+                        _('Is there some reason to suspect that your child may have vision problems?') 
                      )
 
     #Whether child may have major illnesses, hospitalizations, or diagnoses
     illnesses_boolean = forms.TypedChoiceField(
                      choices=YESNONA_CHOICES, widget=forms.RadioSelect, 
                      label =  
-                         'Has your child had any major illnesses, hospitalizations, or diagnosed disabilities?' 
+                         _('Has your child had any major illnesses, hospitalizations, or diagnosed disabilities?') 
                      )
 
     # Whether child has received services for speech or language
     services_boolean = forms.TypedChoiceField(
                      choices=YESNONA_CHOICES, widget=forms.RadioSelect, 
                      label =  
-                        'Has your child ever received any services for speech, language, or development issues?' 
+                        _('Has your child ever received any services for speech, language, or development issues?') 
                      )
 
     # Whether test-taker has concerns about child's language development
     worried_boolean = forms.TypedChoiceField(
                      choices=YESNONA_CHOICES, widget=forms.RadioSelect, 
                      label =  
-                        'Are you worried about your child\'s progress in language or communication?' 
+                        _('Are you worried about your child\'s progress in language or communication?') 
                      )
 
     # Whether child has a relative diagnoses with a language/learning disability
     learning_disability_boolean = forms.TypedChoiceField(
                      choices=YESNONA_CHOICES, widget=forms.RadioSelect, 
                      label =  
-                        'Have you or anyone in your immediate family been diagnosed with a language or learning disability?' 
+                        _('Have you or anyone in your immediate family been diagnosed with a language or learning disability?') 
                      )
 
     # Multiple choice question. Choices are the languages listed in languages.json in root folder.
     other_languages = forms.MultipleChoiceField(
                      choices=language_choices, 
-                     label = "Which language(s)", required = False
+                     label = _("Which language(s)"), required = False
                 )
 
     # Cleaning input data for views.py and later database storage.
@@ -152,17 +154,17 @@ class BackgroundForm(BetterModelForm):
             if enabler_val == '1':
                 for dependent in dependents:
                     if dependent not in cleaned_data or cleaned_data.get(dependent) == '':
-                        self.add_error(dependent, "This field cannot be empty")
+                        self.add_error(dependent, _("This field cannot be empty"))
         
         # Check responses to 'early_or_late' and 'due_date_diff' to ensure biologically believable values.
         if cleaned_data.get('early_or_late') == 'early' and cleaned_data.get('due_date_diff') > 18:
-            self.add_error(dependent, "Cannot be more than 18 weeks early")
+            self.add_error(dependent, _("Cannot be more than 18 weeks early"))
         if cleaned_data.get('early_or_late') == 'late' and cleaned_data.get('due_date_diff') > 4:
-            self.add_error(dependent, "Cannot be more than 4 weeks late")
+            self.add_error(dependent, _("Cannot be more than 4 weeks late"))
         
         # Ensure that the 'age' field is not empty.
         if cleaned_data.get('age') == '':
-            self.add_error('age', 'Please enter your child\'s DOB in the field above.')
+            self.add_error('age', _('Please enter your child\'s DOB in the field above.'))
 
         # Complex set of checks meant to ensure that there is an 'age' value stored in the database but 'DOB' is not. If there is no 'age' value in the database, enforce entry of 'child_dob'. If there is an age value, 'child_dob' is not necessary. Also check that 'age' is appropriate for the assigned Web-CDI form. Prevent continuing if not.
         c_dob = cleaned_data.get('child_dob')
@@ -173,14 +175,14 @@ class BackgroundForm(BetterModelForm):
             c_age = self.curr_context['child_age']
         if c_age:
             if c_age < self.curr_context['min_age']:
-                self.add_error('age', 'Your baby is too young for this version of the CDI.')
+                self.add_error('age', _('Your baby is too young for this version of the CDI.'))
             elif c_age > (self.curr_context['max_age']):
-                self.add_error('age', 'Your baby is too old for this version of the CDI.')
+                self.add_error('age', _('Your baby is too old for this version of the CDI.'))
         else:
-            self.add_error('age', 'Please enter your child\'s DOB in the field above.')
+            self.add_error('age', _('Please enter your child\'s DOB in the field above.'))
             
         if not cleaned_data.get(self.birth_weight_field):
-            self.add_error(self.birth_weight_field, 'This field cannot be empty')
+            self.add_error(self.birth_weight_field, _('This field cannot be empty'))
 
 
 
@@ -196,8 +198,8 @@ class BackgroundForm(BetterModelForm):
         self.helper.form_method = 'post'
 
         self.fields['child_dob'].input_formats = (settings.DATE_INPUT_FORMATS)
-        self.fields['birth_weight_lb'].label = 'Birth weight<span class="asteriskField">*</span>'
-        self.fields['birth_weight_kg'].label = 'Birth weight<span class="asteriskField">*</span>'
+        self.fields['birth_weight_lb'].label = _('Birth weight<span class="asteriskField">*</span>')
+        self.fields['birth_weight_kg'].label = _('Birth weight<span class="asteriskField">*</span>')
 
         if self.curr_context['birthweight_units'] == "lb":
             self.birth_weight_field = 'birth_weight_lb'
@@ -239,10 +241,10 @@ class BackgroundForm(BetterModelForm):
 
 # Form for contacting Web-CDI team. Asks for basic contact information and test ID. Simple format.
 class ContactForm(forms.Form):
-    contact_name = forms.CharField(label="Your Name", required=True, max_length = 51)
-    contact_email = forms.EmailField(label="Your Email Address", required=True, max_length = 201, validators = [EmailValidator()])
-    contact_id = forms.CharField(label="Your Test URL", required=True, max_length = 101)
-    content = forms.CharField(label="What would you like to tell us?",
+    contact_name = forms.CharField(label=_("Your Name"), required=True, max_length = 51)
+    contact_email = forms.EmailField(label=_("Your Email Address"), required=True, max_length = 201, validators = [EmailValidator()])
+    contact_id = forms.CharField(label=_("Your Test URL"), required=True, max_length = 101)
+    content = forms.CharField(label=_("What would you like to tell us?"),
         required=True,
         widget=forms.Textarea(attrs={'cols': 80, 'rows': 6}),
         max_length = 1001

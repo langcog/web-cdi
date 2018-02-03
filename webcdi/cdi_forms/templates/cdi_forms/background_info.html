@@ -1,4 +1,5 @@
 {% extends 'cdi_forms/cdi_base.html' %}
+{% load i18n %}
 
 {% block nav_buttons %}
 {% if not completed %}
@@ -11,6 +12,8 @@
 {% block main %}
 {% if background_form %}
 <input type="hidden" name="background-info-form" value="background-info-form"/> {% csrf_token %}
+
+
 <div class="row">
     <h2>MacArthur-Bates Communicative Development Inventory</h2>
     <h4><div class="flex-row" id="instrument_age" style="text-decoration: underline;">
