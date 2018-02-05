@@ -3,22 +3,10 @@
     <meta charset="utf-8">
     {% load staticfiles %}
 
-    <title>Words and Sentences CDI</title>
+    <title>{% trans "Words and Sentences CDI" %}</title>
     <meta name="description" content="English Words and Sentences CDI form">
     <meta name="author" content="Ashwin Paranjape">
 
-<!--     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="{% static 'cdi_forms/selectize.js' %}"></script>
-    <script src="{% static 'cdi_forms/bootstrap-datepicker.js' %}"></script>
-    <link rel='stylesheet' href="{% static 'cdi_forms/selectize.bootstrap3.css' %}">
-    <link rel='stylesheet' href="{% static 'cdi_forms/datepicker.css' %}">
-    <link rel="stylesheet" href="{% static 'cdi_forms/docs.min.css' %}" />
-    <link rel='stylesheet' href="{% static 'cdi_forms/base.css' %}">
-    <script src="http://d3js.org/d3.v3.js"></script>
-    <script src="https://cdn.jsdelivr.net/lodash/4.17.2/lodash.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-queue/3.0.3/d3-queue.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" ></script>
 
@@ -35,10 +23,6 @@
     <script src="{% static 'lodash/lodash.min.js' %}"></script>
     <script src="{% static 'd3/d3-queue.min.js' %}"></script>
 
-    <meta property="og:image" content="http://webcdi.stanford.edu/{% static 'researcher_UI/images/logo.png' %}" />
-    <meta property="og:title" content="MacArthur-Bates Communicative Development Inventory" />
-    <meta property="og:description" content="Interesting tidbits learned from how your child speaks!" />
-
 </head>
 
 
@@ -50,16 +34,25 @@
     <!-- Written letter explaining that study has reached its desired number of participants. May or may not give an option to allow participants to take the test despite reaching the cap. Depends on cookies stored on device and IP logs in database. -->
         <div class="row">
             <div class="col-md-12">
-                <img src="{% static 'images/logo_bg.jpg' %}" class="rounded img-responsive center-block" alt="MB-CDI Lab Logo" style="max-width: 40%;"> <br>
+                <img src="{% static 'images/logo_bg.jpg' %}" class="rounded img-responsive center-block" alt="{% trans 'MB-CDI Lab Logo' %}" style="max-width: 40%;"> <br>
             </div>
 
-            <h2>Thank you!</h2><br>
+            <h2>{% trans "Thank you!" %}</h2><br>
 
             {% if repeat %}
-                <h4>Thank you for your interest in completing the MacArthur-Bates Communicative Development Inventory (CDI)! It looks like you have completed the CDI form before. We ask that you only complete our assessment once. If you have any concerns about your child’s development, we recommend that you talk with your child’s physician. If you enjoyed our assessment, you can learn more about the CDI <a href="http://mb-cdi.stanford.edu/" target="_blank">here</a>. Again, we appreciate your interest!</h4>
+                <h4>
+                    {% blocktrans %}
+                    Thank you for your interest in completing the MacArthur-Bates Communicative Development Inventory (CDI)! It looks like you have completed the CDI form before. We ask that you only complete our assessment once. If you have any concerns about your child’s development, we recommend that you talk with your child’s physician. If you enjoyed our assessment, you can learn more about the CDI <a href="http://mb-cdi.stanford.edu/" target="_blank">here</a>. Again, we appreciate your interest!
+                    {% endblocktrans %}
+                </h4>
             {% else %}
 
-                <h4>Thank you for your interest in completing the MacArthur-Bates Communicative Development Inventory (CDI)! At this time, all of our study slots have already filled up and we have run out of thank you gifts to compensate you for your time! If you are still interested in completing the CDI and learning more about your child's vocabulary, you may click <a href="{% url 'administer_new_parent' username=username study_name=study_name %}?bypass=true" target="_blank">here</a> to complete the 30-minute questionnaire. If you have any concerns about your child’s development, we recommend that you talk with your child’s physician. If you enjoyed our assessment, you can learn more about the CDI <a href="http://mb-cdi.stanford.edu/" target="_blank">here</a>. Again, we appreciate your interest!</h4>
+                <h4>
+                    {% url 'administer_new_parent' username=username study_name=study_name as bypass_url %}
+                    {% blocktrans bypass_url=bypass_url %}
+                    Thank you for your interest in completing the MacArthur-Bates Communicative Development Inventory (CDI)! At this time, all of our study slots have already filled up and we have run out of thank you gifts to compensate you for your time! If you are still interested in completing the CDI and learning more about your child's vocabulary, you may click <a href="{{ bypass_url }}?bypass=true" target="_blank">here</a> to complete the 30-minute questionnaire. If you have any concerns about your child’s development, we recommend that you talk with your child’s physician. If you enjoyed our assessment, you can learn more about the CDI <a href="http://mb-cdi.stanford.edu/" target="_blank">here</a>. Again, we appreciate your interest!
+                    {% endblocktrans %}
+                </h4>
 
             {% endif %}
             <br><br>

@@ -161,6 +161,8 @@ def background_info_form(request, hash_id):
     data['min_age'] = administration_instance.study.min_age
     data['study_waiver'] = administration_instance.study.waiver
     data['allow_payment'] = administration_instance.study.allow_payment
+    data['hint'] = _("Your child should be between %(min_age)d to %(max_age)d months of age.") % {"min_age": data['min_age'], "max_age": data['max_age']}
+    
     if data['allow_payment'] and administration_instance.bypass is None:
         try:
             data['gift_amount'] = payment_code.objects.filter(study = administration_instance.study).values_list('gift_amount', flat=True).first()
@@ -171,9 +173,11 @@ def background_info_form(request, hash_id):
     if study_group:
         data['study_group'] = study_group
         data['alt_study_info'] = study.objects.filter(study_group = study_group, researcher = administration_instance.study.researcher ).exclude(name = study_name).values_list("name","instrument__min_age", "instrument__max_age", "instrument__language")
+        data['study_group_hint'] = _(" Not the right age? <a href='%(sgurl)s'> Click here</a>") % {"sgurl": reverse('find_paired_studies', args=[data['username'], data['study_group']])}
     else:
         data['study_group'] = None
         data['alt_study_info'] = None
+        data['study_group_hint'] = ""
     
     # Render template
     response =  render(request, 'cdi_forms/background_info.html', data)
@@ -374,6 +378,7 @@ def cdi_form(request, hash_id):
     if request.method == 'GET' or refresh:
         data = prefilled_cdi_data(administration_instance)
         data['created_date'] = administration_instance.created_date
+        data['confirm_script'] = _("Are you ready to submit? You cannot change your answers after submission.")
         data['captcha'] = None
         if administration_instance.study.confirm_completion and administration_instance.study.researcher.username == "langcoglab" and administration_instance.study.allow_payment:
             data['captcha'] = 'True'
@@ -419,6 +424,43 @@ def printable_view(request, hash_id):
             prefilled_data['gift_amount'] = 'ran out'
 
     prefilled_data['allow_sharing'] = administration_instance.study.allow_sharing
+    prefilled_data['contact_url'] = reverse('contact', args=[hash_id])
+
+
+    cdi_map = pd.DataFrame(list(model_map(administration_instance.study.instrument.name).objects.all().values()))
+    prefilled_data_list =  pd.DataFrame(list(administration_data.objects.filter(administration = administration_instance).values('item_ID', 'value')))
+    cdi_answers = pd.merge(cdi_map, prefilled_data_list, how = 'left', left_on = 'itemID', right_on = 'item_ID')
+    df_understood = cdi_answers.query('item_type == "word" & value == "understands"')
+    df_produced = cdi_answers.query('item_type == "word" & value == "produces"')
+    words_understood = df_understood.shape[0]
+    words_produced = df_produced.shape[0]
+    best_category_u = cdi_answers.query('item_type == "word" & (value == "understands" | value == "produces")').groupby('category')['value'].agg('count').idxmax()
+    best_category_p = df_produced.groupby('category')['value'].agg('count').idxmax()
+
+    if words_produced > 0 and words_understood > 0:
+        num_words = _("My child says %(words_produced)d words and understands %(words_understood)d words.") % { "words_produced" : words_produced, "words_understood" : words_understood + words_produced }
+    elif words_produced > 0 and raw_words_understood == 0:
+        num_words = _("My child says %(words_produced)d words.") % { "words_produced" : words_produced}
+    elif words_produced == 0 and raw_words_understood > 0:
+        num_words = _("My child understands %(words_understood)d words.") % { "words_understood" : words_understood}
+    
+    prefilled_data['num_words'] = num_words
+    prefilled_data['understood_graph_axis'] = _("Percentage of Words Understood")
+    prefilled_data['produced_graph_axis'] = _("Percentage of Words Spoken")
+    prefilled_data['category_axis'] = _("Category")
+    prefilled_data['age_axis'] = _("Age (in Months)")
+    prefilled_data['pred_axis'] = _("Predicted %% of Words on Test")
+    prefilled_data['best_category_p'] = _("My child says the most words in the %(bestProdCat)s category.") %{"bestProdCat": best_category_p}
+    prefilled_data['best_category_u'] = _("My child says the most words in the %(bestCompCat)s category.") %{"bestCompCat": best_category_u}
+    prefilled_data['hardest_words_p'] = _("The hardest word my child says is")
+    prefilled_data['hardest_words_u'] = _("The hardest word my child understands is")
+    prefilled_data['outside_range'] = _("Sorry but it looks like your child is outside of our age range for predicting vocabulary size! This version of the CDI assessment is for children between %(min_age)d to %(max_age)d months of age") % {"min_age" : administration_instance.study.instrument.min_age, "max_age" : administration_instance.study.instrument.max_age}
+    prefilled_data['pred_word_p'] = _("Predicted %% of Words Spoken")
+    prefilled_data['pred_word_u'] = _("Predicted %% of Words Understood")
+    prefilled_data['curr_vocab_p'] = _("Current Spoken Vocabulary")
+    prefilled_data['curr_vocab_u'] = _("Current Understood Vocabulary")
+    prefilled_data['curr_vocab'] = _("Current Vocabulary Size")
+
 
     if administration_instance.study.instrument.language == "English":
         user_language = 'en'

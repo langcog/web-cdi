@@ -6,7 +6,7 @@
     {% load i18n %}
     {% load staticfiles %}
 
-    <title>{{ title }}</title>
+    <title>{% trans title %}</title>
     <meta name="description" content="English Words and Sentences CDI form">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" ></script>
@@ -41,16 +41,16 @@
                 <nav id="navbar" class="bs-docs-sidebar affix" style="padding-top:60px;">
                     <div>
                         <!-- Instructions for completing CDI form -->
-                        <a href="#instructions" data-toggle="collapse" id="instructions_title"><h4>Instructions: 
+                        <a href="#instructions" data-toggle="collapse" id="instructions_title"><h4>{% trans "Instructions: " %}
                             <i class="material-icons">arrow_drop_down</i></h4></a>
                         <div id="instructions" class = "collapse" style="font-size: .85em;">
                             <ul>
-                                <li> This form can be filled anytime before the due date. </li>
-                                <li> It can also be saved at any time and resumed later by using the same link (<a id="bookmarkme" href="">create bookmark</a>).</li>
-                                <li> After the form is submitted, it cannot be altered. </li>
-                                <li> The form also cannot be altered after the due date. </li>
-                                <li> Please use the navigation buttons below. Do not use the "back" and "forward" buttons on your browser. </li>
-                                <li> You can use the tab button and arrows keys to quickly navigate and answer questions. </li>
+                                <li> {% trans "This form can be filled anytime before the due date." %} </li>
+                                <li> {% trans "It can also be saved at any time and resumed later by using the same link" %} (<a id="bookmarkme" href="">{% trans "create bookmark" %}</a>).</li>
+                                <li> {% trans "After the form is submitted, it cannot be altered." %} </li>
+                                <li> {% trans "The form also cannot be altered after the due date." %} </li>
+                                <li> {% trans "Please use the navigation buttons below. Do not use the "back" and "forward" buttons on your browser." %} </li>
+                                <li> {% trans "You can use the tab button and arrows keys to quickly navigate and answer questions." %} </li>
                             </ul>
                         </div>
 
@@ -81,12 +81,12 @@
 
                         <!-- If study has an associated body of text in it's waiver field, gives option to pull up a modal window containing the waiver text by clicking button -->
                         {% if study_waiver and study_waiver != "" %}
-                            <a href="#" id="show_waiver" onclick = "$('#consent_waiver').modal('show');"> Show waiver of documentation </a><br>
+                            <a href="#" id="show_waiver" onclick = "$('#consent_waiver').modal('show');"> {% trans "Show waiver of documentation" %} </a><br>
                         {% endif %}
 
                         <!-- Gives option to render contact.html and send an email to the web-cdi team -->
                         {% if hash_id %}
-                            <a href="{% url 'contact' hash_id=hash_id %}" target="_blank">Reach out to the Web-CDI Team!</a>
+                            <a href="{% url 'contact' hash_id=hash_id %}" target="_blank">{% trans "Reach out to the Web-CDI Team!" %}</a>
                         {% endif %}
 
                         <div>
@@ -120,7 +120,7 @@
         <div class="modal-content">
 
             <div class="modal-header">
-                <h2 class="modal-title" >Waiver of Documentation</h2>
+                <h2 class="modal-title" >{% trans "Waiver of Documentation" %}</h2>
             </div>
 
             <div class="modal-body">
@@ -129,7 +129,7 @@
                 {% endif %}
             </div>
             <div class="modal-footer">
-                <button type="button" data-dismiss="modal" class="btn btn-primary" id="okaybtn">Okay</button>
+                <button type="button" data-dismiss="modal" class="btn btn-primary" id="okaybtn">{% trans "Okay" %}</button>
             </div>
 
         

@@ -6,11 +6,11 @@
 {% if not completed %}
 <div class="button-wrapper">
     <div class="flex-row d-flex justify-content-center">
-        <input name="btn-save" value="Save" class="btn btn-primary" type="submit">
-        <input name="btn-submit" value="Submit" class="btn btn-success submit-button" type="submit" onclick="clicked(event)">
+        <input name="btn-save" value="{% trans 'Save' %}" class="btn btn-primary" type="submit">
+        <input name="btn-submit" value="{% trans 'Submit' %}" class="btn btn-success submit-button" type="submit" onclick="clicked(event)">
     </div>
     <div class="flex-row d-flex justify-content-center">    
-        <input name="btn-back" value='Go back to Background Info' class="btn btn-primary" type="submit">
+        <input name="btn-back" value="{% trans 'Go back to Background Info' %}" class="btn btn-primary" type="submit">
     </div>
 </div>
 
@@ -20,9 +20,9 @@
 
 <!-- Navigation sidebar -->
 {% block navcontents %}
-<a href="#nav_list" data-toggle="collapse" id="tob_title"><h4>Table of Contents: <i class="material-icons">arrow_drop_down</i></h4></a>
+<a href="#nav_list" data-toggle="collapse" id="tob_title"><h4>{% trans "Table of Contents:" %} <i class="material-icons">arrow_drop_down</i></h4></a>
 <div id = "nav_list" class = "collapse">
-    <h4>Contents:</h4>
+    <h4>{% trans "Contents:" %}</h4>
     <ul class="nav bs-docs-sidenav">
         {% for part in parts %}
             <li><a href="#{{ part.id }}" onclick="findPage({{ part.types.0.id }}_div)">{{ part.title }}</a>
@@ -400,13 +400,13 @@
     <!-- Last page that asks parents to confirm that their data is suitable for analysis. May appear based on the study's confirm_completion setting. May also include a ReCaptcha based on if study is done by langcoglab and will pay participants -->
     <div id = "analysis_div"  class = "collapse">    
         <h4>
-            You are almost done! Click "Yes" if you agree with ALL of the following points. Your answer will not affect your results. There is nothing wrong with choosing "No":
+            {% trans 'You are almost done! Click "Yes" if you agree with ALL of the following points. Your answer will not affect your results. There is nothing wrong with choosing "No":' %}
         </h4>
 
         <ul>
-            <li>You have a child who is {{ age.0 }} months old.</li>
-            <li>You filled out the entire questionnaire to the best of your ability.</li>
-            <li>You are taking this questionnaire for the FIRST time.</li>
+            <li>{% blocktrans with age=age.0 %}You have a child who is {{ age }} months old.{% endblocktrans %}</li>
+            <li>{% trans "You filled out the entire questionnaire to the best of your ability." %}</li>
+            <li>{% trans "You are taking this questionnaire for the FIRST time." %}</li>
         </ul>
         <br>
 
@@ -415,19 +415,19 @@
                 <input  type="radio" id="analysis_yes" name="analysis" value="True">
                 <i class="material-icons radio_button_checked align-middle" aria-hidden="true">radio_button_checked</i>
                 <i class="material-icons radio_button_unchecked align-middle" aria-hidden="true">radio_button_unchecked</i>
-                <p class="text-left">Yes, I have a child who is {{ age.0 }} months old, I filled out the entire questionnaire, and I am taking this questionnaire for the first time.</p>
+                <p class="text-left">{% blocktrans with age=age.0 %}Yes, I have a child who is {{ age.0 }} months old, I filled out the entire questionnaire, and I am taking this questionnaire for the first time.{% endblocktrans %}</p>
             </label>
             <label class = "btn d-flex justify-content-start">
                 <input  type="radio" id="analysis_no" name="analysis" value="False">
                 <i class="material-icons radio_button_checked align-middle" aria-hidden="true">radio_button_checked</i>
                 <i class="material-icons radio_button_unchecked align-middle" aria-hidden="true">radio_button_unchecked</i>
-                <p class="text-left">No, I do NOT have a child who is {{ age.0 }} months old, I have NOT filled out the entire questionnaire, and/or I have taken this questionnaire before.</p>
+                <p class="text-left">{% blocktrans with age=age.0 %}No, I do NOT have a child who is {{ age.0 }} months old, I have NOT filled out the entire questionnaire, and/or I have taken this questionnaire before.{% endblocktrans %}</p>
             </label>
         </div>
 
         {% if captcha == 'True' %}
             <br><br>
-            <p>Finally, please check the Captcha box below to display the submit button!</p>
+            <p>{% trans "Finally, please check the Captcha box below to display the submit button!" %}</p>
             <div class="g-recaptcha d-flex justify-content-center" data-sitekey="6LfI0yEUAAAAALj8wAxmoXmWg8B64tvr866bXeYg" data-callback="enableBtn"></div>
         {% endif %}
 
@@ -436,25 +436,25 @@
     <!-- Navigation buttons -->
     <div class="button-wrapper">
         <div class="flex-row  d-flex justify-content-center">
-            <a class="btn btn-primary prev-cdi-page" href="#">&#60;&#60; Previous Page</a>
-            <a class="btn btn-primary next-cdi-page" href="#">Next Page &#62;&#62;</a>
-            <input name="btn-submit" value="Submit" class="btn btn-success submit-button" type="submit" onclick="clicked(event)">
+            <a class="btn btn-primary prev-cdi-page" href="#">&#60;&#60; {% trans "Previous Page" %}</a>
+            <a class="btn btn-primary next-cdi-page" href="#">{% trans "Next Page" %} &#62;&#62;</a>
+            <input name="btn-submit" value="{% trans 'Submit' %}" class="btn btn-success submit-button" type="submit" onclick="clicked(event)">
             <font id="progress"></font>
         </div>
         <div class="flex-row d-flex justify-content-center">        
-            <input name="btn-save" value="Save" class="btn btn-primary" type="submit">
-            <input name="btn-back" value='Go back to Background Info' class="btn btn-primary" type="submit">
+            <input name="btn-save" value="{% trans 'Save' %}" class="btn btn-primary" type="submit">
+            <input name="btn-back" value="{% trans 'Go back to Background Info' %}" class="btn btn-primary" type="submit">
         </div>
 
     </div>
     <input type="hidden" id="page_number" name="page_number" value = "0">
     <hr>
-    <div class="flex-row"><p class="text-center">Don't forget to save your progress whenever you can!</p></div>
+    <div class="flex-row"><p class="text-center">{% trans "Don't forget to save your progress whenever you can!" %}</p></div>
 
 
 </ul>
 {% else %}
-<p>Form unavailable. Contact admin. </p>
+<p>{% trans "Form unavailable. Contact admin." %} </p>
 {% endif %}
 {% endblock %}
 
@@ -495,7 +495,7 @@
     // Confirm to prevent premature submissions
     function clicked(e)
     {
-        if(!confirm('Are you ready to submit? You cannot change your answers after submission.'))e.preventDefault();
+        if(!confirm("{{ confirm_script }}"))e.preventDefault();
         localStorage.removeItem('prev_page_number');
     }
 
