@@ -49,7 +49,7 @@
                                 <li> {% trans "It can also be saved at any time and resumed later by using the same link" %} (<a id="bookmarkme" href="">{% trans "create bookmark" %}</a>).</li>
                                 <li> {% trans "After the form is submitted, it cannot be altered." %} </li>
                                 <li> {% trans "The form also cannot be altered after the due date." %} </li>
-                                <li> {% trans "Please use the navigation buttons below. Do not use the "back" and "forward" buttons on your browser." %} </li>
+                                <li> {% trans 'Please use the navigation buttons below. Do not use the "back" and "forward" buttons on your browser.' %} </li>
                                 <li> {% trans "You can use the tab button and arrows keys to quickly navigate and answer questions." %} </li>
                             </ul>
                         </div>
@@ -75,7 +75,12 @@
                         <script type="text/javascript">
                         var due_date = "{{ due_date }}";
                         var due_date_utc = moment.utc(due_date, "MMM DD, YYYY, hh:mm a");
-                        var due_date_local = moment(due_date_utc).local().format("MMM D, YYYY, h:mm a");
+                        if ("{{language}}" == 'Spanish') {
+                            var due_date_local = moment(due_date_utc).local().locale('es-us').format("lll");
+                        } else {
+                            var due_date_local = moment(due_date_utc).local().format("lll");
+                        }
+                        
                         $('#due_time').html("<p><b> Due date </b>: <span>" + due_date_local + "</span></p>");
                         </script>
 

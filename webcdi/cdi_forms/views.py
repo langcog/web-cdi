@@ -18,6 +18,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.urls import reverse
 from ipware.ip import get_ip
 from django.conf import settings
+from django.utils.translation import ugettext_lazy as _
 
 
 
@@ -249,7 +250,7 @@ def prefilled_cdi_data(administration_instance):
         data['title'] = administration_instance.study.instrument.verbose_name
         data['instrument_name'] = administration_instance.study.instrument.name
         data['completed'] = administration_instance.completed
-        data['due_date'] = administration_instance.due_date
+        data['due_date'] = administration_instance.due_date.strftime('%b %d, %Y, %I:%M %p')
         data['page_number'] = administration_instance.page_number
         data['hash_id'] = administration_instance.url_hash
         data['study_waiver'] = administration_instance.study.waiver
@@ -380,6 +381,8 @@ def cdi_form(request, hash_id):
         data['created_date'] = administration_instance.created_date
         data['confirm_script'] = _("Are you ready to submit? You cannot change your answers after submission.")
         data['captcha'] = None
+        data['language'] = administration_instance.study.instrument.language
+
         if administration_instance.study.confirm_completion and administration_instance.study.researcher.username == "langcoglab" and administration_instance.study.allow_payment:
             data['captcha'] = 'True'
 
