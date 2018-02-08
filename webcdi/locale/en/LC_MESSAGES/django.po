@@ -876,21 +876,21 @@ msgstr "Please wait until the Web-CDI team can review your application."
 #: supplementtut/templates/supplementtut/registration_complete.html:13
 #: supplementtut/templates/supplementtut/registration_email.txt:6
 msgid "You will receive an acceptance or rejection email within several days."
-msgstr ""You will receive an acceptance or rejection email within several days.""
+msgstr "You will receive an acceptance or rejection email within several days."
 
 #: researcher_UI/templates/registration/registration_email.txt:3
 msgid "Your account application was completed successfully."
-msgstr ""Your account application was completed successfully.""
+msgstr "Your account application was completed successfully."
 
 #: researcher_UI/templates/registration/registration_email.txt:5
 msgid "A member of the Web-CDI team will review your registration shortly."
-msgstr ""A member of the Web-CDI team will review your registration shortly.""
+msgstr "A member of the Web-CDI team will review your registration shortly."
 
 #: researcher_UI/templates/registration/registration_email_subject.txt:2
 #: supplementtut/templates/supplementtut/registration_email_subject.txt:2
 #, python-format
 msgid "Your registration was created -- %(site_name)s"
-msgstr ""Your registration was created -- %(site_name)s""
+msgstr "Your registration was created -- %(site_name)s"
 
 #: researcher_UI/templates/registration/registration_form.html:4
 #: researcher_UI/templates/registration/registration_form.html:6
