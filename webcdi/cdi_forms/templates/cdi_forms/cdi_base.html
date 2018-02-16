@@ -81,7 +81,7 @@
                             var due_date_local = moment(due_date_utc).local().format("lll");
                         }
                         
-                        $('#due_time').html("<p><b> Due date </b>: <span>" + due_date_local + "</span></p>");
+                        $('#due_time').html("<p><b> {% trans 'Due date' %} </b>: <span>" + due_date_local + "</span></p>");
                         </script>
 
                         <!-- If study has an associated body of text in it's waiver field, gives option to pull up a modal window containing the waiver text by clicking button -->

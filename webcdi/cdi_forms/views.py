@@ -69,6 +69,15 @@ def background_info_form(request, hash_id):
     context['child_age'] = None
     context['zip_code'] = ''
 
+    if administration_instance.study.instrument.language == "English":
+        print 'English'
+        user_language = 'en'
+    elif administration_instance.study.instrument.language == "Spanish":
+        print 'Spanish'
+        user_language = 'es'
+
+    translation.activate(user_language)
+
     refresh = False # Refreshing page is automatically off
     background_form = None
         
@@ -118,7 +127,7 @@ def background_info_form(request, hash_id):
                 background_instance.save()
 
                 # If 'Next' button is pressed, update last_modified and mark completion of BackgroundInfo. Fetch CDI form by hash ID.
-                if 'btn-next' in request.POST and request.POST['btn-next'] == 'Next':
+                if 'btn-next' in request.POST and request.POST['btn-next'] == _('Next'):
                     administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now())
                     administration.objects.filter(url_hash = hash_id).update(completedBackgroundInfo = True)
                     request.method = "GET"
@@ -126,6 +135,7 @@ def background_info_form(request, hash_id):
 
     # For fetching or refreshing background form.
     if request.method == 'GET' or refresh:
+
         try:
             # Fetch responses stored in BackgroundInfo model
             background_instance = BackgroundInfo.objects.get(administration = administration_instance)
@@ -180,17 +190,6 @@ def background_info_form(request, hash_id):
         data['alt_study_info'] = None
         data['study_group_hint'] = ""
     
-    # Render template
-    response =  render(request, 'cdi_forms/background_info.html', data)
-
-    if administration_instance.study.instrument.language == "English":
-        print 'English'
-        user_language = 'en'
-    elif administration_instance.study.instrument.language == "Spanish":
-        print 'Spanish'
-        user_language = 'es'
-
-    translation.activate(user_language)
 
     # Render CDI form with prefilled responses and study context
     response = render(request, 'cdi_forms/background_info.html', data) # Render contact form template   
@@ -304,6 +303,13 @@ def cdi_form(request, hash_id):
     instrument_model = model_map(instrument_name) # Fetch instrument model based on instrument name.
     refresh = False
 
+    if administration_instance.study.instrument.language == "English":
+        user_language = 'en'
+    elif administration_instance.study.instrument.language == "Spanish":
+        user_language = 'es'
+
+    translation.activate(user_language)
+
     if request.method == 'POST' : # If submitting responses to CDI form
         if not administration_instance.completed and administration_instance.due_date > timezone.now(): # If form has not been completed and it has not expired
             for key in request.POST: # Parse responses and individually save each item's response (empty checkboxes or radiobuttons are not saved)
@@ -318,7 +324,7 @@ def cdi_form(request, hash_id):
                     else:
                         if value:
                             administration_data.objects.update_or_create(administration = administration_instance, item_ID = key, defaults = {'value': value})
-            if 'btn-save' in request.POST and request.POST['btn-save'] == 'Save': # If the save button was pressed
+            if 'btn-save' in request.POST and request.POST['btn-save'] == _('Save'): # If the save button was pressed
                 administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now()) # Update administration object with date of last modification
 
                 if 'analysis' in request.POST:
@@ -330,11 +336,11 @@ def cdi_form(request, hash_id):
                     administration.objects.filter(url_hash = hash_id).update(page_number = page_number) # Update administration object
 
                 refresh = True
-            elif 'btn-back' in request.POST and request.POST['btn-back'] == 'Go back to Background Info': # If Back button was pressed
+            elif 'btn-back' in request.POST and request.POST['btn-back'] == _('Go back to Background Info'): # If Back button was pressed
                 administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now()) # Update last_modified
                 request.method = "GET"
                 return background_info_form(request, hash_id) # Fetch Background info template
-            elif 'btn-submit' in request.POST and request.POST['btn-submit'] == 'Submit': # If 'Submit' button was pressed
+            elif 'btn-submit' in request.POST and request.POST['btn-submit'] == _('Submit'): # If 'Submit' button was pressed
                 
                 #Some studies may require successfully passing a ReCaptcha test for submission. If so, get for a passing response before marking form as complete.
                 result = {'success': None}
@@ -386,12 +392,6 @@ def cdi_form(request, hash_id):
         if administration_instance.study.confirm_completion and administration_instance.study.researcher.username == "langcoglab" and administration_instance.study.allow_payment:
             data['captcha'] = 'True'
 
-    if administration_instance.study.instrument.language == "English":
-        user_language = 'en'
-    elif administration_instance.study.instrument.language == "Spanish":
-        user_language = 'es'
-
-    translation.activate(user_language)
 
     # Render CDI form with prefilled responses and study context
     response = render(request, 'cdi_forms/cdi_form.html', data) # Render contact form template   
@@ -407,6 +407,14 @@ def printable_view(request, hash_id):
     # Create a blank dictionary and then fill it with prefilled background and CDI data, along with hash ID and information regarding the gift card code if subject is to be paid
     prefilled_data = dict()
     prefilled_data = prefilled_cdi_data(administration_instance)
+
+    if administration_instance.study.instrument.language == "English":
+        user_language = 'en'
+    elif administration_instance.study.instrument.language == "Spanish":
+        user_language = 'es'
+
+    translation.activate(user_language)
+
     try:
         #Get form from database
         background_form = prefilled_background_form(administration_instance)
@@ -465,12 +473,6 @@ def printable_view(request, hash_id):
     prefilled_data['curr_vocab'] = _("Current Vocabulary Size")
 
 
-    if administration_instance.study.instrument.language == "English":
-        user_language = 'en'
-    elif administration_instance.study.instrument.language == "Spanish":
-        user_language = 'es'
-
-    translation.activate(user_language)
     response = render(request, 'cdi_forms/printable_cdi.html', prefilled_data) # Render contact form template   
     response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
 
