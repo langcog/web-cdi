@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-05 10:42-0800\n"
+"POT-Creation-Date: 2018-02-08 11:23-0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: DANIELLE KELLIER <dkellier@stanford.edu>\n"
+"Last-Translator: \n" <-- Add translator date and email here (e.g.,DANIELLE KELLIER <dkellier@stanford.edu>)
 "Language-Team: \n"
 "Language: Spanish\n"
 "MIME-Version: 1.0\n"
@@ -78,7 +78,9 @@ msgstr "Edad (en meses)<span class=\"asteriskField\">*</span>"
 
 #: cdi_forms/forms.py:47
 msgid "This field will update when you enter or change your child's DOB."
-msgstr "Esto campo actualizará cuando usted introduce o cambia la fec. nac. de su hijo."
+msgstr ""
+"Esto campo actualizará cuando usted introduce o cambia la fec. nac. de su "
+"hijo."
 
 #: cdi_forms/forms.py:50
 msgid "What is your zip code?<br>(if you live in the U.S.)"
@@ -92,7 +94,9 @@ msgstr "¿El niño(a) es Hispano o Latino?"
 msgid ""
 "Was your child born early or late (more than one week before or after the "
 "due date)?"
-msgstr "¿Su hijo nació temprano o tarde (más que una semana antes de o después de la fecha de parto)?"
+msgstr ""
+"¿Su hijo nació temprano o tarde (más que una semana antes de o después de la "
+"fecha de parto)?"
 
 #: cdi_forms/forms.py:63 cdi_forms/models.py:172
 msgid "Early"
@@ -464,7 +468,9 @@ msgstr "Madre / Custodio Legal 1 Educación"
 msgid ""
 "Choose highest grade completed (12 = high school graduate; 16 = college "
 "graduate; 18 = advanced degree)"
-msgstr "Elija el nivel más alto de estudios completado (12 = graduado de secundaria; 16 = graduado de la universidad; 18 = título de posgrado)"
+msgstr ""
+"Elija el nivel más alto de estudios completado (12 = graduado de secundaria; "
+"16 = graduado de la universidad; 18 = título de posgrado)"
 
 #: cdi_forms/models.py:190
 msgid "Father / Parent or Guardian 2 Year of birth"
@@ -540,7 +546,8 @@ msgstr "¿Su hijo(a) ha tenido infecciones crónicas del oído (cinco o más)?
 
 #: cdi_forms/models.py:220
 msgid "Has your child undergone interventions (e.g., tubes)?  Please describe"
-msgstr "¿Ha tenido su hijo intervenciones (p. ej. conducto)? Por favor describa"
+msgstr ""
+"¿Ha tenido su hijo intervenciones (p. ej. conducto)? Por favor describa"
 
 #: cdi_forms/models.py:223 cdi_forms/models.py:226 cdi_forms/models.py:229
 #: cdi_forms/models.py:232 cdi_forms/models.py:235
@@ -552,6 +559,7 @@ msgid "Indicate which family member and provide a description"
 msgstr "Indique cuál miembro de la familia y provea una descripción"
 
 #: cdi_forms/templates/cdi_forms/background_info.html:7
+#: cdi_forms/templates/cdi_forms/background_info.html:56 cdi_forms/views.py:121
 msgid "Next"
 msgstr "Siguiente"
 
@@ -567,6 +575,9 @@ msgid ""
 "        For %(min_age)s- to %(max_age)s-month-old children\n"
 "        "
 msgstr ""
+"\n"
+"        Para niños de %(min_age)s- a %(max_age)s meses\n"
+"        "
 
 #: cdi_forms/templates/cdi_forms/background_info.html:25
 msgid "Instructions for completing the language inventory"
@@ -635,12 +646,16 @@ msgstr "Instrucciones: "
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:48
 msgid "This form can be filled anytime before the due date."
-msgstr "Esto formulario puede ser llenado en cualquier momento antes la fecha de entrega."
+msgstr ""
+"Esto formulario puede ser llenado en cualquier momento antes la fecha de "
+"entrega."
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:49
 msgid ""
 "It can also be saved at any time and resumed later by using the same link"
-msgstr "Él también se puede guardar en cualquier momento y reanudarse más tarde utilizando el mismo enlace"
+msgstr ""
+"Él también se puede guardar en cualquier momento y reanudarse más tarde "
+"utilizando el mismo enlace"
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:49
 msgid "create bookmark"
@@ -652,7 +667,8 @@ msgstr "Después de enviar el formulario, no se puede modificar."
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:51
 msgid "The form also cannot be altered after the due date."
-msgstr "El formulario también se puede modificar después de la fecha de entrega."
+msgstr ""
+"El formulario también se puede modificar después de la fecha de entrega."
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:52
 msgid ""
@@ -667,33 +683,37 @@ msgid ""
 msgstr ""
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:84
+msgid "Due date"
+msgstr "Fecha de entrega"
+
+#: cdi_forms/templates/cdi_forms/cdi_base.html:89
 msgid "Show waiver of documentation"
 msgstr ""
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:89
+#: cdi_forms/templates/cdi_forms/cdi_base.html:94
 msgid "Reach out to the Web-CDI Team!"
 msgstr ""
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:123
+#: cdi_forms/templates/cdi_forms/cdi_base.html:128
 msgid "Waiver of Documentation"
 msgstr ""
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:132
+#: cdi_forms/templates/cdi_forms/cdi_base.html:137
 msgid "Okay"
 msgstr ""
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:9
-#: cdi_forms/templates/cdi_forms/cdi_form.html:445
+#: cdi_forms/templates/cdi_forms/cdi_form.html:445 cdi_forms/views.py:321
 msgid "Save"
 msgstr ""
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:10
-#: cdi_forms/templates/cdi_forms/cdi_form.html:441
+#: cdi_forms/templates/cdi_forms/cdi_form.html:441 cdi_forms/views.py:337
 msgid "Submit"
 msgstr ""
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:13
-#: cdi_forms/templates/cdi_forms/cdi_form.html:446
+#: cdi_forms/templates/cdi_forms/cdi_form.html:446 cdi_forms/views.py:333
 msgid "Go back to Background Info"
 msgstr ""
 
@@ -950,67 +970,70 @@ msgstr " ¿No la edad apropiada? <a href='%(sgurl)s'> Haga click aquí</a>"
 #: cdi_forms/views.py:382
 msgid ""
 "Are you ready to submit? You cannot change your answers after submission."
-msgstr "¿Está listo para enviar? No puede cambiar sus respuestas después de envío"
+msgstr ""
+"¿Está listo para enviar? No puede cambiar sus respuestas después de envío"
 
-#: cdi_forms/views.py:442
+#: cdi_forms/views.py:444
 #, python-format
 msgid ""
 "My child says %(words_produced)d words and understands %(words_understood)d "
 "words."
-msgstr "Mi hijo dice %(words_produced)d palabras y comprende %(words_understood)d palabras."
+msgstr ""
+"Mi hijo dice %(words_produced)d palabras y comprende %(words_understood)d "
+"palabras."
 
-#: cdi_forms/views.py:444
+#: cdi_forms/views.py:446
 #, python-format
 msgid "My child says %(words_produced)d words."
 msgstr "Mi hijo dice %(words_produced)d palabras"
 
-#: cdi_forms/views.py:446
+#: cdi_forms/views.py:448
 #, python-format
 msgid "My child understands %(words_understood)d words."
 msgstr "Mi hijo comprende %(words_understood)d palabras."
 
-#: cdi_forms/views.py:449
+#: cdi_forms/views.py:451
 msgid "Percentage of Words Understood"
 msgstr "Porcentaje de Palabras Comprendido"
 
-#: cdi_forms/views.py:450
+#: cdi_forms/views.py:452
 msgid "Percentage of Words Spoken"
 msgstr "Porcentaje de Palabras Hablado"
 
-#: cdi_forms/views.py:451
+#: cdi_forms/views.py:453
 msgid "Category"
 msgstr "Categoría"
 
-#: cdi_forms/views.py:452
+#: cdi_forms/views.py:454
 #, fuzzy
 #| msgid "Age (in months)"
 msgid "Age (in Months)"
 msgstr "Edad (en meses)"
 
-#: cdi_forms/views.py:453
+#: cdi_forms/views.py:455
 #, python-format
 msgid "Predicted %% of Words on Test"
 msgstr "%% Prevista de Palabras en Cuestionario"
 
-#: cdi_forms/views.py:454
+#: cdi_forms/views.py:456
 #, python-format
 msgid "My child says the most words in the %(bestProdCat)s category."
 msgstr "Mi hijo dice la más palabras en la categoría de %(bestProdCat)s"
 
-#: cdi_forms/views.py:455
+#: cdi_forms/views.py:457
 #, python-format
 msgid "My child says the most words in the %(bestCompCat)s category."
 msgstr "Mi hijo dice la más palabras en la categoría de %(bestCompCat)s"
 
-#: cdi_forms/views.py:456
+#: cdi_forms/views.py:458
 msgid "The hardest word my child says is"
 msgstr "La palabra más difícil que mi hijo dice es"
 
-#: cdi_forms/views.py:457
+#: cdi_forms/views.py:459
 msgid "The hardest word my child understands is"
 msgstr "La palabra más difícil que mi hijo entiende es"
 
-#: cdi_forms/views.py:458
+#: cdi_forms/views.py:460
 #, python-format
 msgid ""
 "Sorry but it looks like your child is outside of our age range for "
@@ -1018,25 +1041,25 @@ msgid ""
 "children between %(min_age)d to %(max_age)d months of age"
 msgstr ""
 
-#: cdi_forms/views.py:459
+#: cdi_forms/views.py:461
 #, python-format
 msgid "Predicted %% of Words Spoken"
 msgstr "%% Prevista de Palabras Hablado"
 
-#: cdi_forms/views.py:460
+#: cdi_forms/views.py:462
 #, python-format
 msgid "Predicted %% of Words Understood"
 msgstr "%% Prevista de Palabras Comprendido"
 
-#: cdi_forms/views.py:461
+#: cdi_forms/views.py:463
 msgid "Current Spoken Vocabulary"
 msgstr "Vocabulario Hablado y Actual"
 
-#: cdi_forms/views.py:462
+#: cdi_forms/views.py:464
 msgid "Current Understood Vocabulary"
 msgstr "Vocabulario Comprendido y Actual"
 
-#: cdi_forms/views.py:463
+#: cdi_forms/views.py:465
 msgid "Current Vocabulary Size"
 msgstr "El Tamaño Actual del Vocabulario"
 

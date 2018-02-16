@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-02 15:32-0800\n"
+"POT-Creation-Date: 2018-02-08 11:23-0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -109,7 +109,7 @@ msgstr "Female"
 
 #: cdi_forms/forms.py:68
 msgid "Other / Prefer not to disclose"
-msgstr "Other /	Prefer not to disclose"
+msgstr "Other /\tPrefer not to disclose"
 
 #: cdi_forms/forms.py:73 cdi_forms/models.py:120
 msgid "Was your child born as part of a multiple birth?"
@@ -542,6 +542,504 @@ msgstr "Please describe"
 msgid "Indicate which family member and provide a description"
 msgstr "Indicate which family member and provide a description"
 
+#: cdi_forms/templates/cdi_forms/background_info.html:7
+#: cdi_forms/templates/cdi_forms/background_info.html:56 cdi_forms/views.py:121
+msgid "Next"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/background_info.html:18
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:33
+msgid "MacArthur-Bates Communicative Development Inventory"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/background_info.html:20
+#, python-format
+msgid ""
+"\n"
+"        For %(min_age)s- to %(max_age)s-month-old children\n"
+"        "
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/background_info.html:25
+msgid "Instructions for completing the language inventory"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/background_info.html:27
+msgid ""
+"Try to complete the inventory when you have at least 30 quiet minutes, "
+"without interruptions. An example might be when your child is sleeping."
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/background_info.html:28
+msgid ""
+"You do not have to complete the inventory in one sitting. If you are "
+"interrupted, it is ok to put it down and come back to it when you have more "
+"time."
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/background_info.html:29
+msgid ""
+"Feel free to ask others (e.g. other family members, nanny, child care "
+"providers) to help you fill out this form."
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/background_info.html:30
+msgid ""
+"Please read all of the instructions on the inventory carefully, and make "
+"sure you complete all of the sections."
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/background_info.html:34
+#, python-format
+msgid ""
+"\n"
+"                    You will receive a $%(gift_amount)s Amazon.com gift card "
+"after you complete the form. As we are a research lab with limited funds, we "
+"ask that you only complete this questionnaire once.\n"
+"                    "
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/background_info.html:42
+msgid "For more information about the MB-CDI,"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/background_info.html:42
+msgid "click here"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/background_info.html:43
+msgid "Thank you! We appreciate your time and effort!"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/background_info.html:48
+#, fuzzy
+#| msgid "::Your account information::"
+msgid "Background Information"
+msgstr "::Your account information::"
+
+#: cdi_forms/templates/cdi_forms/background_info.html:61
+#: cdi_forms/templates/cdi_forms/cdi_form.html:457
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:348
+msgid "Form unavailable. Contact admin."
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_base.html:44
+msgid "Instructions: "
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_base.html:48
+msgid "This form can be filled anytime before the due date."
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_base.html:49
+msgid ""
+"It can also be saved at any time and resumed later by using the same link"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_base.html:49
+msgid "create bookmark"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_base.html:50
+msgid "After the form is submitted, it cannot be altered."
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_base.html:51
+msgid "The form also cannot be altered after the due date."
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_base.html:52
+msgid ""
+"Please use the navigation buttons below. Do not use the \"back\" and "
+"\"forward\" buttons on your browser."
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_base.html:53
+msgid ""
+"You can use the tab button and arrows keys to quickly navigate and answer "
+"questions."
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_base.html:84
+msgid "Due date"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_base.html:89
+msgid "Show waiver of documentation"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_base.html:94
+msgid "Reach out to the Web-CDI Team!"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_base.html:128
+#, fuzzy
+#| msgid "Documentation"
+msgid "Waiver of Documentation"
+msgstr "Documentation"
+
+#: cdi_forms/templates/cdi_forms/cdi_base.html:137
+msgid "Okay"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_form.html:9
+#: cdi_forms/templates/cdi_forms/cdi_form.html:445 cdi_forms/views.py:321
+msgid "Save"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_form.html:10
+#: cdi_forms/templates/cdi_forms/cdi_form.html:441 cdi_forms/views.py:337
+msgid "Submit"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_form.html:13
+#: cdi_forms/templates/cdi_forms/cdi_form.html:446 cdi_forms/views.py:333
+msgid "Go back to Background Info"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_form.html:23
+msgid "Table of Contents:"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_form.html:25
+msgid "Contents:"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_form.html:403
+msgid ""
+"You are almost done! Click \"Yes\" if you agree with ALL of the following "
+"points. Your answer will not affect your results. There is nothing wrong "
+"with choosing \"No\":"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_form.html:407
+#, python-format
+msgid "You have a child who is %(age)s months old."
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_form.html:408
+msgid "You filled out the entire questionnaire to the best of your ability."
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_form.html:409
+msgid "You are taking this questionnaire for the FIRST time."
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_form.html:418
+#, python-format
+msgid ""
+"Yes, I have a child who is %(age.0)s months old, I filled out the entire "
+"questionnaire, and I am taking this questionnaire for the first time."
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_form.html:424
+#, python-format
+msgid ""
+"No, I do NOT have a child who is %(age.0)s months old, I have NOT filled out "
+"the entire questionnaire, and/or I have taken this questionnaire before."
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_form.html:430
+msgid ""
+"Finally, please check the Captcha box below to display the submit button!"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_form.html:439
+msgid "Previous Page"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_form.html:440
+msgid "Next Page"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_form.html:452
+msgid "Don't forget to save your progress whenever you can!"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/overflow.html:6
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:6
+msgid "Words and Sentences CDI"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/overflow.html:37
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:85
+msgid "MB-CDI Lab Logo"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/overflow.html:40
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:88
+msgid "Thank you!"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/overflow.html:44
+msgid ""
+"\n"
+"                    Thank you for your interest in completing the MacArthur-"
+"Bates Communicative Development Inventory (CDI)! It looks like you have "
+"completed the CDI form before. We ask that you only complete our assessment "
+"once. If you have any concerns about your child’s development, we recommend "
+"that you talk with your child’s physician. If you enjoyed our assessment, "
+"you can learn more about the CDI <a href=\"http://mb-cdi.stanford.edu/\" "
+"target=\"_blank\">here</a>. Again, we appreciate your interest!\n"
+"                    "
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/overflow.html:52
+#, python-format
+msgid ""
+"\n"
+"                    Thank you for your interest in completing the MacArthur-"
+"Bates Communicative Development Inventory (CDI)! At this time, all of our "
+"study slots have already filled up and we have run out of thank you gifts to "
+"compensate you for your time! If you are still interested in completing the "
+"CDI and learning more about your child's vocabulary, you may click <a href="
+"\"%(bypass_url)s?bypass=true\" target=\"_blank\">here</a> to complete the 30-"
+"minute questionnaire. If you have any concerns about your child’s "
+"development, we recommend that you talk with your child’s physician. If you "
+"enjoyed our assessment, you can learn more about the CDI <a href=\"http://mb-"
+"cdi.stanford.edu/\" target=\"_blank\">here</a>. Again, we appreciate your "
+"interest!\n"
+"                    "
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:34
+msgid "Interesting tidbits learned from how your child speaks!"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:90
+msgid ""
+"\n"
+"                    Thank you for taking the time to complete the MacArthur-"
+"Bates Communicative Development Inventory (CDI). With the help of parents "
+"and caregivers like you, we are working to learn more about the way that "
+"children’s language develops, and how that development varies across "
+"individual children and cultures. Remember that the CDI lists many different "
+"words that are used by many different children. Don’t worry if your child "
+"only knows a few of them right now. Below are some insights into your "
+"child’s developing vocabulary, based on our research. This summary is not a "
+"clinical evaluation. If you have any concerns about your child’s "
+"development, we recommend that you talk with your child’s physician. If you "
+"enjoyed our assessment, you can learn more about the CDI <a href=\"http://mb-"
+"cdi.stanford.edu/\" target=\"_blank\">here</a>. We appreciate your "
+"contribution!\n"
+"                    "
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:99
+#, python-format
+msgid ""
+"\n"
+"                            We're sorry but it looks like we have ran out of "
+"Amazon.com Gift Cards! Please <a href=\"%(contact_url)s\" target=\"_blank"
+"\">reach out to us</a> and we will quickly fix this issue. \n"
+"                            "
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:106
+msgid ""
+"\n"
+"                            Thank you for participating in the participating "
+"our Web-CDI project! It is our pleasure to send you this Amazon.com Gift "
+"Card* that can be redeemed towards millions of items at <a href=\"http://www."
+"amazon.com\" target=\"_blank\">www.amazon.com</a>. You may want to print "
+"this screen for easy reference later--you’ll need the gift card claim code "
+"below.\n"
+"                            "
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:112
+#, python-format
+msgid ""
+"\n"
+"                            Gift Card Amount: $%(gift_amount)s <br>\n"
+"                            Claim Code: %(gift_code)s\n"
+"                            "
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:120
+msgid "Apply to Account"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:122
+msgid "How to Use"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:127
+msgid "To redeem your gift card, follow these steps:"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:129
+msgid "Visit"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:130
+msgid "Enter the Claim Code when prompted."
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:131
+msgid ""
+"Gift card funds will be applied automatically to eligible orders during the "
+"checkout process."
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:132
+msgid ""
+"You must pay for any remaining balance on your order with another payment "
+"method."
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:135
+msgid ""
+"Your gift card claim code may also be entered when prompted during checkout. "
+"To redeem your gift card using the Amazon.com 1-Click&reg; service, first "
+"add the gift card funds to Your Account."
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:137
+#, python-format
+msgid ""
+"\n"
+"                            If you have questions about redeeming your gift "
+"card, please visit <a href=\"http://www.amazon.com/gc-redeem\" target="
+"\"_blank\">www.amazon.com/gc-redeem</a>. If you have questions regarding the "
+"Web-CDI, please contact the Web-CDI team <a href=\"%(contact_url)s\" target="
+"\"_blank\">here</a>.\n"
+"                            "
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:143
+msgid ""
+"\n"
+"                            *Amazon.com is not a sponsor of this promotion. "
+"Except as required by law, Amazon.com Gift Cards (&quot;GCs&quot;) cannot be "
+"transferred for value or redeemed for cash. GCs may be used only for "
+"purchases of eligible goods on Amazon.com or certain of its affiliated "
+"websites. GCs cannot be redeemed for purchases of gift cards. Purchases are "
+"deducted from the GC balance. To redeem or view a GC balance, visit &quot;"
+"Your Account&quot; on Amazon.com. Amazon is not responsible if a GC is lost, "
+"stolen, destroyed or used without permission. For complete terms and "
+"conditions, see <a href=\"http://www.amazon.com/gc-legal\"  target=\"_blank"
+"\">www.amazon.com/gc-legal</a>. GCs are issued by ACI Gift Cards LLC, a "
+"Washington corporation. All Amazon &trade; &amp; &copy; are IP of Amazon."
+"com, Inc. or its affiliates. No expiration date or service fees.\n"
+"                            "
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:156
+msgid "Graph My Data!"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:162
+msgid "Show Me My Answers"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:170
+msgid "Share on Facebook"
+msgstr ""
+
+#: cdi_forms/views.py:165
+#, python-format
+msgid "Your child should be between %(min_age)d to %(max_age)d months of age."
+msgstr ""
+
+#: cdi_forms/views.py:177
+#, python-format
+msgid " Not the right age? <a href='%(sgurl)s'> Click here</a>"
+msgstr ""
+
+#: cdi_forms/views.py:382
+msgid ""
+"Are you ready to submit? You cannot change your answers after submission."
+msgstr ""
+
+#: cdi_forms/views.py:444
+#, python-format
+msgid ""
+"My child says %(words_produced)d words and understands %(words_understood)d "
+"words."
+msgstr ""
+
+#: cdi_forms/views.py:446
+#, python-format
+msgid "My child says %(words_produced)d words."
+msgstr ""
+
+#: cdi_forms/views.py:448
+#, python-format
+msgid "My child understands %(words_understood)d words."
+msgstr ""
+
+#: cdi_forms/views.py:451
+msgid "Percentage of Words Understood"
+msgstr ""
+
+#: cdi_forms/views.py:452
+msgid "Percentage of Words Spoken"
+msgstr ""
+
+#: cdi_forms/views.py:453
+msgid "Category"
+msgstr ""
+
+#: cdi_forms/views.py:454
+#, fuzzy
+#| msgid "Age (in months)"
+msgid "Age (in Months)"
+msgstr "Age (in months)"
+
+#: cdi_forms/views.py:455
+#, python-format
+msgid "Predicted %% of Words on Test"
+msgstr ""
+
+#: cdi_forms/views.py:456
+#, python-format
+msgid "My child says the most words in the %(bestProdCat)s category."
+msgstr ""
+
+#: cdi_forms/views.py:457
+#, python-format
+msgid "My child says the most words in the %(bestCompCat)s category."
+msgstr ""
+
+#: cdi_forms/views.py:458
+msgid "The hardest word my child says is"
+msgstr ""
+
+#: cdi_forms/views.py:459
+msgid "The hardest word my child understands is"
+msgstr ""
+
+#: cdi_forms/views.py:460
+#, python-format
+msgid ""
+"Sorry but it looks like your child is outside of our age range for "
+"predicting vocabulary size! This version of the CDI assessment is for "
+"children between %(min_age)d to %(max_age)d months of age"
+msgstr ""
+
+#: cdi_forms/views.py:461
+#, python-format
+msgid "Predicted %% of Words Spoken"
+msgstr ""
+
+#: cdi_forms/views.py:462
+#, python-format
+msgid "Predicted %% of Words Understood"
+msgstr ""
+
+#: cdi_forms/views.py:463
+msgid "Current Spoken Vocabulary"
+msgstr ""
+
+#: cdi_forms/views.py:464
+msgid "Current Understood Vocabulary"
+msgstr ""
+
+#: cdi_forms/views.py:465
+msgid "Current Vocabulary Size"
+msgstr ""
+
 #: researcher_UI/templates/admin/admin_base.html:41
 msgid "Welcome,"
 msgstr "Welcome,"
@@ -967,10 +1465,10 @@ msgstr "Please wait until the inspector verify your registration."
 msgid "I am afraid that your account registration was rejected by inspector."
 msgstr "I am afraid that your account registration was rejected by inspector."
 
-#: webcdi/settings.py:205
+#: webcdi/settings.py:208
 msgid "English"
 msgstr "English"
 
-#: webcdi/settings.py:206
+#: webcdi/settings.py:209
 msgid "Spanish"
 msgstr "Spanish"
