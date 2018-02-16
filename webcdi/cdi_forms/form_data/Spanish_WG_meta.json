@@ -11,7 +11,7 @@
                     "title": "A. Comprehensión Temprana"
                 },
                 {
-                    "text": "En la lista que viene a continuación, por favor, rellene el círculo que corresponda a las frases que su hijo/a comprende.",
+                    "text": "En la lista que viene a continuación, por favor, activa la casilla que corresponda a las frases que su hijo/a comprende.",
                     "type": "checkbox",
                     "id": "phrases",
                     "title": "B. Comprehensión de las Primeras Frases"
@@ -22,7 +22,7 @@
                     "title": "C. Maneras de Hablar"
                 },
                 {
-                    "text": "A continuación encontrará una lsita de palabras frecuentes en el vocabulario de los niños pequeños. Si su hijo/a ya comprende, pero no dice las palabras, rellene el círculo de la palabra correspondiente en la columna que dice \"comprende\". Si su hijo/a dice palabras de la lista aunque de manera distinta (ej., \"tete\" por \"leche\"), o si su hijo/a dice otra palabra que se usa en su familia y que significa lo mismo que la que viene en el cuestionario (ej., si dice \"coca\" en vez de \"refresco\", o \"super\" en vez de \"tienda\", o \"kleenex\" en vez de \"pañuelo\"), rellene el círculo de las palabra correspondiente en la columna \"comprende y dice\". Recuerde que esta lista incluye las palabras que muchos niños comprenden o pueden decir. No se preocupe si su hijo/a no comprende o no dice todas las palabras.",
+                    "text": "A continuación encontrará una lsita de palabras frecuentes en el vocabulario de los niños pequeños. Si su hijo/a ya comprende, pero no dice las palabras, activa la casilla de la palabra correspondiente en la columna que dice \"comprende\". Si su hijo/a dice palabras de la lista aunque de manera distinta (ej., \"tete\" por \"leche\"), o si su hijo/a dice otra palabra que se usa en su familia y que significa lo mismo que la que viene en el cuestionario (ej., si dice \"coca\" en vez de \"refresco\", o \"super\" en vez de \"tienda\", o \"kleenex\" en vez de \"pañuelo\"), activa la casilla de las palabra correspondiente en la columna \"comprende y dice\". Recuerde que esta lista incluye las palabras que muchos niños comprenden o pueden decir. No se preocupe si su hijo/a no comprende o no dice todas las palabras.",
                     "id": "word",
                     "title": "D. Lista de Vocabulario",
                     "sections": [
@@ -70,7 +70,7 @@
                             "id": "people",
                             "title": "11. Personas",
                             "footnote": "* o el nombre de esta persona",
-                            "text": "Los niños les dicen de manera diferente a sus parientes. A veces le dicen \"tía\" o \"abuela\" o en otros casos le dicen por su nombre, or por su nombre de cariño, por ejemplo, \"Chacha\". Si su hijo/a hace cualquiera de las dos cosas, le dice \"tía\" o \"Chacha\", rellene el círculo de las palabra indicada en la columna correspondiente."
+                            "text": "Los niños les dicen de manera diferente a sus parientes. A veces le dicen \"tía\" o \"abuela\" o en otros casos le dicen por su nombre, or por su nombre de cariño, por ejemplo, \"Chacha\". Si su hijo/a hace cualquiera de las dos cosas, le dice \"tía\" o \"Chacha\", activa la casilla de las palabra indicada en la columna correspondiente."
                         },
                         {
                             "id": "games_routines",
@@ -79,7 +79,7 @@
                         {
                             "id": "action_words",
                             "title": "13. Acciones y Procesos (Verbos)",
-                            "text": "Cuando los niños hablan, por lo general, usan verbos en distinta formas. Por ejemplo, pueden decir \"abrir\", \"abrí\", \"abre\", \"está abierto\", o \"se abrió\". Si su hijo/a comprende o usa algunos de los verbos de la lista en cualquier forma o conjugación, por favor, rellene el círculo de las palabra indicada en la columna correspondiente."
+                            "text": "Cuando los niños hablan, por lo general, usan verbos en distinta formas. Por ejemplo, pueden decir \"abrir\", \"abrí\", \"abre\", \"está abierto\", o \"se abrió\". Si su hijo/a comprende o usa algunos de los verbos de la lista en cualquier forma o conjugación, por favor, activa la casilla de las palabra indicada en la columna correspondiente."
                         },
                         {
                             "id": "states",
@@ -92,12 +92,12 @@
                         {
                             "id": "descriptive_words",
                             "title": "16. Cualidades y Atributos",
-                            "text": "Muchas de estas palabras pueden aparecer en masculino, por ejemplo, \"bueno\", o en feminino \"buena\". Si su hijo/a comprende o comprende y dice la palabra en cualquiera de las dos formas, por favor, rellene el círculo de la palabra en la columna correspondiente."
+                            "text": "Muchas de estas palabras pueden aparecer en masculino, por ejemplo, \"bueno\", o en feminino \"buena\". Si su hijo/a comprende o comprende y dice la palabra en cualquiera de las dos formas, por favor, activa la casilla de la palabra en la columna correspondiente."
                         },
                         {
                             "id": "pronouns",
                             "title": "17. Pronombres",
-                            "text": "Su hijo/a puede comprender o decir y comprender estas palabras solas, por ejemplo, \"ésta\" o junto con otra palabra, como \"dámelo\". Rellene el círculo de la columna correspondiente si hijo/a comprende o comprende y dice algunas de las palabras de la lista. Recuerde que no importa si lo dice en forma separada o como parte de otra palabra."
+                            "text": "Su hijo/a puede comprender o decir y comprender estas palabras solas, por ejemplo, \"ésta\" o junto con otra palabra, como \"dámelo\". Activa la casilla de la columna correspondiente si hijo/a comprende o comprende y dice algunas de las palabras de la lista. Recuerde que no importa si lo dice en forma separada o como parte de otra palabra."
                         },
                         {
                             "id": "question_words",
@@ -134,7 +134,7 @@
                     "sections": [
 
                         {
-                            "text": "Instrucciones: Cuando un niño/a pequeño/a empieza a comunicarse, frecuentemente usa gestos para dar entender sus necesidades. Por favor, rellene el círculo en la columna correspondiente de los gestos o acciones que su hijo/a haga en este momento.",
+                            "text": "Instrucciones: Cuando un niño/a pequeño/a empieza a comunicarse, frecuentemente usa gestos para dar entender sus necesidades. Por favor, activa la casilla en la columna correspondiente de los gestos o acciones que su hijo/a haga en este momento.",
                             "id": "gestures_first",
                             "title": "A. Primeros Gestos"
                         },

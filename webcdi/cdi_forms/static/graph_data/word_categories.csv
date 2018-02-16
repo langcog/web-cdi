@@ -1,23 +1,26 @@
-id,category
-sounds,Sound Effects And Animal Sounds
-animals,Animals (Real Or Toy)
-vehicles,Vehicles (Real Or Toy)
-toys,Toys
-food_drink,Food And Drink
-clothing,Clothing
-body_parts,Body Parts
-household,Small Household Items
-furniture_rooms,Furniture And Rooms
-outside,Outside Things
-places,Places to Go
-people,People
-games_routines,Games And Routines
-action_words,Action Words
-descriptive_words,Descriptive Words
-time_words,Words about Time
-pronouns,Pronouns
-question_words,Question Words
-locations,Prepositions and Locations
-quantifiers,Quantifiers And Articles
-helping_verbs,Helping Verbs
-connecting_words,Connecting Words
+id,English_WG,English_WS,Spanish_WG,Spanish_WS
+action_words,Action Words,Action Words,Acciones y Procesos (Verbos),Acciones y Procesos (Verbos)
+animals,Animals (Real Or Toy),Animals (Real Or Toy),Animales (de Verdad y de Juguete),Animales (de Verdad y de Juguete)
+articles,,,Artículos,
+body_parts,Body Parts,Body Parts,Partes del Cuerpo,Partes del Cuerpo
+clothing,Clothing,Clothing,Ropa,Ropa
+connecting_words,,Connecting Words,,Conectivos
+descriptive_words,Descriptive Words,Descriptive Words,Cualidades y Atributos,Cualidades y Atributos
+food_drink,Food And Drink,Food And Drink,Alimentos y Bebidas,Alimentos y Bebidas
+furniture_rooms,Furniture And Rooms,Furniture And Rooms,Muebles y Cuartos,Muebles y Cuartos
+games_routines,Games And Routines,Games And Routines,"Rutina Diaria, Reglas Sociales y Juegos","Rutina Diaria, Reglas Sociales y Juegos"
+helping_verbs,,Helping Verbs,,
+household,Small Household Items,Small Household Items,Utensilios de la Casa,Utensilios de la Casa
+locations,Prepositions And Locations,Prepositions and Locations,Locativos,Locativos
+outside,Outside Things And Places to Go,Outside Things,Lugares y Objetos Fuera de la Casa,Objetos Fuera de la Casa
+people,People,People,Personas,Personas
+places,,Places to Go,,Lugares Fuera de la Casa
+prepositions,,,Preposiciones,Preposiciones y Artículos
+pronouns,Pronouns,Pronouns,Pronombres,Pronombres y Modificadores
+quantifiers,Quantifiers And Articles,Quantifiers And Articles,Cuantificadores y Adverbios,Cuantificadores y Adverbios
+question_words,Question Words,Question Words,Preguntas,Preguntas
+sounds,Sound Effects And Animal Sounds,Sound Effects And Animal Sounds,Sonidos de Cosas y Animales,Sonidos de Cosas y Animales
+states,,,Estados,Estados
+time_words,Words about Time,Words about Time,Tiempo,Tiempo
+toys,Toys,Toys,Juguetes,Juguetes
+vehicles,Vehicles (Real Or Toy),Vehicles (Real Or Toy),Vehículos (de Verdad y de Juguete),Vehículos (de Verdad y de Juguete)
