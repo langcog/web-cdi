@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-08 11:23-0800\n"
+"POT-Creation-Date: 2018-02-17 02:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -543,7 +543,7 @@ msgid "Indicate which family member and provide a description"
 msgstr "Indicate which family member and provide a description"
 
 #: cdi_forms/templates/cdi_forms/background_info.html:7
-#: cdi_forms/templates/cdi_forms/background_info.html:56 cdi_forms/views.py:121
+#: cdi_forms/templates/cdi_forms/background_info.html:56 cdi_forms/views.py:130
 msgid "Next"
 msgstr ""
 
@@ -683,17 +683,17 @@ msgid "Okay"
 msgstr ""
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:9
-#: cdi_forms/templates/cdi_forms/cdi_form.html:445 cdi_forms/views.py:321
+#: cdi_forms/templates/cdi_forms/cdi_form.html:445 cdi_forms/views.py:327
 msgid "Save"
 msgstr ""
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:10
-#: cdi_forms/templates/cdi_forms/cdi_form.html:441 cdi_forms/views.py:337
+#: cdi_forms/templates/cdi_forms/cdi_form.html:441 cdi_forms/views.py:343
 msgid "Submit"
 msgstr ""
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:13
-#: cdi_forms/templates/cdi_forms/cdi_form.html:446 cdi_forms/views.py:333
+#: cdi_forms/templates/cdi_forms/cdi_form.html:446 cdi_forms/views.py:339
 msgid "Go back to Background Info"
 msgstr ""
 
@@ -937,80 +937,80 @@ msgstr ""
 msgid "Share on Facebook"
 msgstr ""
 
-#: cdi_forms/views.py:165
+#: cdi_forms/views.py:175
 #, python-format
 msgid "Your child should be between %(min_age)d to %(max_age)d months of age."
 msgstr ""
 
-#: cdi_forms/views.py:177
+#: cdi_forms/views.py:187
 #, python-format
 msgid " Not the right age? <a href='%(sgurl)s'> Click here</a>"
 msgstr ""
 
-#: cdi_forms/views.py:382
+#: cdi_forms/views.py:388
 msgid ""
 "Are you ready to submit? You cannot change your answers after submission."
 msgstr ""
 
-#: cdi_forms/views.py:444
+#: cdi_forms/views.py:452
 #, python-format
 msgid ""
 "My child says %(words_produced)d words and understands %(words_understood)d "
 "words."
 msgstr ""
 
-#: cdi_forms/views.py:446
+#: cdi_forms/views.py:454
 #, python-format
 msgid "My child says %(words_produced)d words."
 msgstr ""
 
-#: cdi_forms/views.py:448
+#: cdi_forms/views.py:456
 #, python-format
 msgid "My child understands %(words_understood)d words."
 msgstr ""
 
-#: cdi_forms/views.py:451
+#: cdi_forms/views.py:459
 msgid "Percentage of Words Understood"
 msgstr ""
 
-#: cdi_forms/views.py:452
+#: cdi_forms/views.py:460
 msgid "Percentage of Words Spoken"
 msgstr ""
 
-#: cdi_forms/views.py:453
+#: cdi_forms/views.py:461
 msgid "Category"
 msgstr ""
 
-#: cdi_forms/views.py:454
+#: cdi_forms/views.py:462
 #, fuzzy
 #| msgid "Age (in months)"
 msgid "Age (in Months)"
 msgstr "Age (in months)"
 
-#: cdi_forms/views.py:455
+#: cdi_forms/views.py:463
 #, python-format
 msgid "Predicted %% of Words on Test"
 msgstr ""
 
-#: cdi_forms/views.py:456
+#: cdi_forms/views.py:464
 #, python-format
 msgid "My child says the most words in the %(bestProdCat)s category."
 msgstr ""
 
-#: cdi_forms/views.py:457
+#: cdi_forms/views.py:465
 #, python-format
 msgid "My child says the most words in the %(bestCompCat)s category."
 msgstr ""
 
-#: cdi_forms/views.py:458
+#: cdi_forms/views.py:466
 msgid "The hardest word my child says is"
 msgstr ""
 
-#: cdi_forms/views.py:459
+#: cdi_forms/views.py:467
 msgid "The hardest word my child understands is"
 msgstr ""
 
-#: cdi_forms/views.py:460
+#: cdi_forms/views.py:468
 #, python-format
 msgid ""
 "Sorry but it looks like your child is outside of our age range for "
@@ -1018,25 +1018,25 @@ msgid ""
 "children between %(min_age)d to %(max_age)d months of age"
 msgstr ""
 
-#: cdi_forms/views.py:461
+#: cdi_forms/views.py:469
 #, python-format
 msgid "Predicted %% of Words Spoken"
 msgstr ""
 
-#: cdi_forms/views.py:462
+#: cdi_forms/views.py:470
 #, python-format
 msgid "Predicted %% of Words Understood"
 msgstr ""
 
-#: cdi_forms/views.py:463
+#: cdi_forms/views.py:471
 msgid "Current Spoken Vocabulary"
 msgstr ""
 
-#: cdi_forms/views.py:464
+#: cdi_forms/views.py:472
 msgid "Current Understood Vocabulary"
 msgstr ""
 
-#: cdi_forms/views.py:465
+#: cdi_forms/views.py:473
 msgid "Current Vocabulary Size"
 msgstr ""
 
@@ -1472,3 +1472,9 @@ msgstr "English"
 #: webcdi/settings.py:209
 msgid "Spanish"
 msgstr "Spanish"
+
+#, fuzzy
+#~| msgid "Yes"
+#~ msgctxt "possible response during questionnaire"
+#~ msgid "yes"
+#~ msgstr "Yes"
