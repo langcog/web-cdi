@@ -12,7 +12,7 @@ class instrument(models.Model):
     min_age = models.IntegerField(verbose_name = "Minimum age") # Minimum age in months that instrument was built for
     max_age = models.IntegerField(verbose_name = "Maximum age") # Maximum age in months that instrument was built for
     def __str__(self):
-        return self.verbose_name
+        return "%s (%s %s)" % (self.verbose_name, self.language, self.form)
     class Meta:
          unique_together = ('language', 'form') # Each instrument in the database must have a unique combination of language and form type
     
