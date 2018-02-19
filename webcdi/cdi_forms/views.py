@@ -44,8 +44,15 @@ def get_model_header(name):
 # If the BackgroundInfo model was filled out before, populate BackgroundForm with responses based on administation object
 def prefilled_background_form(administration_instance):
     background_instance = BackgroundInfo.objects.get(administration = administration_instance)
+    
+    context = {}
+    context['language'] = administration_instance.study.instrument.language
+    context['instrument'] = administration_instance.study.instrument.name
+    context['min_age'] = administration_instance.study.min_age
+    context['max_age'] = administration_instance.study.max_age
+    context['birthweight_units'] = administration_instance.study.birth_weight_units
 
-    background_form = BackgroundForm(instance = background_instance, context = { 'birthweight_units' : administration_instance.study.birth_weight_units})  
+    background_form = BackgroundForm(instance = background_instance, context = context)  
     return background_form
 
 # Find the administration object for a test-taker based on their unique hash code.
@@ -166,6 +173,7 @@ def background_info_form(request, hash_id):
     data['completed'] = administration_instance.completed
     data['due_date'] = administration_instance.due_date.strftime('%b %d, %Y, %I:%M %p')
     data['language'] = administration_instance.study.instrument.language
+    data['language_code'] = user_language
     data['title'] = administration_instance.study.instrument.verbose_name
     data['max_age'] = administration_instance.study.max_age
     data['min_age'] = administration_instance.study.min_age
@@ -202,8 +210,9 @@ def cdi_items(object_group, item_type, prefilled_data, item_id):
     for obj in object_group:
         if item_type == 'checkbox':
             obj['prefilled_value'] = obj['itemID'] in prefilled_data
+            obj['definition'] = obj['definition'][0].upper() + obj['definition'][1:] if obj['definition'][0].isalpha() else obj['definition'][0] + obj['definition'][1].upper() + obj['definition'][2:]
 
-        if item_type == 'radiobutton' or item_type == 'modified_checkbox':
+        if item_type in ['radiobutton', 'modified_checkbox']:
             raw_split_choices = map(unicode.strip, obj['choices__choice_set'].split(';'))
 
             split_choices_translated = map(unicode.strip, [value for key, value in obj.items() if 'choice_set_' in key][0].split(';'))
@@ -425,12 +434,20 @@ def printable_view(request, hash_id):
 
     translation.activate(user_language)
 
+    context = {}
+    context['language'] = administration_instance.study.instrument.language
+    context['instrument'] = administration_instance.study.instrument.name
+    context['min_age'] = administration_instance.study.min_age
+    context['max_age'] = administration_instance.study.max_age
+    context['birthweight_units'] = administration_instance.study.birth_weight_units
+
     try:
         #Get form from database
         background_form = prefilled_background_form(administration_instance)
     except:
         #Blank form
-        background_form = BackgroundForm()  
+        background_form = BackgroundForm(context = context)
+
     prefilled_data['background_form'] = background_form
     prefilled_data['hash_id'] = hash_id
     prefilled_data['gift_code'] = None

@@ -90,12 +90,20 @@
     });
 
     // In the event that the datepicker functionality is used to change the date in the dob field, age in months will be calculated.
-    $('#id_child_dob').datepicker({ignoreReadonly: true})
+    var datepicker_options = {
+        ignoreReadonly: true,
+        language: "{{ language_code }}"
+    }
+
+    var date_format = "{{ language_code }}" == "en"? "mm/dd/yyyy" : "dd/mm/yyyy"
+
+    $('#id_child_dob').datepicker(datepicker_options)
         .on('changeDate', function() {
-            getDiffinMonths();
+            getDiffinMonths("{{ language_code }}" == "en"? "mm/dd/yyyy" : "dd/mm/yyyy");
         });
 
-    $('#id_child_dob').inputmask("mm/dd/yyyy", 
+
+    $('#id_child_dob').inputmask(date_format, 
               { 
                   onincomplete: function(){
                       $(this).val('');
@@ -120,12 +128,11 @@
     $("#id_age").prop('disabled', true);
 
     // Function for calculating age in months. Final age in months is calculated in cdi_forms/views.py
-    function getDiffinMonths() {
+    function getDiffinMonths(date_format) {
         
-        var raw_b_date = new Date($('#id_child_dob').val());
-        var b_date = moment(raw_b_date);
+        var b_date = moment($('#id_child_dob').val(), date_format.toUpperCase())
 
-        if (!isNaN(raw_b_date.getTime()) && $("#id_child_dob").val() != ''){
+        if (moment.isMoment(b_date) && $("#id_child_dob").val() != ''){
             var t_date = moment();
             // var day_diff = ((t_date.date() - b_date.date()) >= 15)? 1: 0
             // var diff_in_months = 12*(t_date.year() - b_date.year()) + (t_date.month() - b_date.month()) + day_diff;
@@ -140,11 +147,11 @@
 
     // Any changes in dob field will trigger re-calculation of age in months.
     $('#id_child_dob').on('change', function () {
-        getDiffinMonths();
+        getDiffinMonths("{{ language_code }}" == "en"? "mm/dd/yyyy" : "dd/mm/yyyy");
     })
 
     // Age in months is calculated upon loading
-    getDiffinMonths();
+    getDiffinMonths(date_format);
 
     var instrument_name = "{{ title }}";
 
@@ -191,7 +198,7 @@
 
     <script>
         function fastforward() {
-            $('#id_child_dob').val(moment().subtract(17,'M').format("MM/DD/YYYY"))
+            $('#id_child_dob').val(moment().subtract(17,'M').format(date_format.toUpperCase()))
             $('#id_sex_1').click();
             $('#id_zip_code').val((""+Math.random()).substring(2,7))
             $('#id_birth_order').val(4);

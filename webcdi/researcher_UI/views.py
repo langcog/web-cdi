@@ -659,6 +659,9 @@ def overflow(request, username, study_name): # Page for overflowed studies. For 
     data = {}
     data['username'] = username # Get researcher user name
     data['study_name'] = study_name # Get study's name
+    researcher = User.objects.get(username = username) # Get researcher's username. Different method because current user may not be the researcher and may not be logged in
+    study_obj = study.objects.get(name= study_name, researcher = researcher) 
+    data['title'] = study_obj.instrument.verbose_name
     visitor_ip = str(get_ip(request)) # Get visitor's IP address
     prev_visitor = 0
     if (visitor_ip and visitor_ip != 'None'): # If visitor IP address was properly caught

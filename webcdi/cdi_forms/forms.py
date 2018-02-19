@@ -10,6 +10,7 @@ import datetime, codecs, json, os.path
 from django.core.exceptions import ValidationError
 from django.core.validators import EmailValidator, RegexValidator
 from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext
 
 
 
@@ -39,7 +40,7 @@ class BackgroundForm(BetterModelForm):
     YESNONA_CHOICES = ((0, _('No')), (1, _('Yes')), (2, _('Prefer not to disclose')))
 
     # Child's DOB. Formatted weirdly to only be required if Age in months in not already stored in database.
-    child_dob = forms.DateField(input_formats=['%m/%d/%Y'], widget=forms.TextInput(attrs={'placeholder': 'mm/dd/yyyy'}),
+    child_dob = forms.DateField(input_formats=['%m/%d/%Y'], widget=forms.TextInput(),
                                 help_text = _("To protect your privacy, we never store your child's date of birth, we only record age in months."),
                                 validators = [MaxValueValidator(datetime.date.today())], label = _('Child DOB<span class="asteriskField">*</span>'), required=False)
 
@@ -197,22 +198,28 @@ class BackgroundForm(BetterModelForm):
         self.helper.field_class = 'col-lg-9'
         self.helper.form_method = 'post'
 
-        self.fields['child_dob'].input_formats = (settings.DATE_INPUT_FORMATS)
-        self.fields['birth_weight_lb'].label = _('Birth weight<span class="asteriskField">*</span>')
-        self.fields['birth_weight_kg'].label = _('Birth weight<span class="asteriskField">*</span>')
+        self.fields['birth_weight_lb'].label = _('Birth weight') + '<span class="asteriskField">*</span>'
+        self.fields['birth_weight_kg'].label = _('Birth weight') + '<span class="asteriskField">*</span>'
 
         if self.curr_context['birthweight_units'] == "lb":
             self.birth_weight_field = 'birth_weight_lb'
         elif self.curr_context['birthweight_units'] == "kg":
             self.birth_weight_field = 'birth_weight_kg'
 
+        if self.curr_context['language'] == "English":
+            self.fields['child_dob'].input_formats = ('%m/%d/%Y', '%m/%d/%y',)
+            self.fields['child_dob'].widget.attrs['placeholder'] = 'mm/dd/yyyy'
+        else:
+            self.fields['child_dob'].input_formats = ('%d/%m/%Y', '%d/%m/%y',)
+            self.fields['child_dob'].widget.attrs['placeholder'] = 'dd/mm/yyyy'
+
         self.helper.layout = Layout(
-            Fieldset( 'Basic Information', 'child_dob','age', 'sex','zip_code','birth_order', Field('multi_birth_boolean', css_class='enabler'), Div('multi_birth', css_class='dependent'), self.birth_weight_field, Field('born_on_due_date', css_class='enabler'), Div('early_or_late', 'due_date_diff', css_class='dependent')),
-            Fieldset( 'Family Background', 'mother_yob', 'mother_education','father_yob', 'father_education', 'annual_income'),
-            Fieldset( "Child's Ethnicity",HTML("<p> The following information is being collected for the sole purpose of reporting to our grant-funding institute, i.e.,  NIH (National Institute of Health).  NIH requires this information to ensure the soundness and inclusiveness of our research. Your cooperation is appreciated, but optional. </p>"), 'child_hispanic_latino', 'child_ethnicity'),
-            Fieldset( "Caregiver Information", 'caregiver_info'),
-            Fieldset( "Language Exposure", Field('other_languages_boolean', css_class = 'enabler'), Div(Field('other_languages', css_class='make-selectize'),'language_from', 'language_days_per_week', 'language_hours_per_day', css_class='dependent')),
-            Fieldset( "Health", 
+            Fieldset( _('Basic Information'), 'child_dob','age', 'sex','zip_code','birth_order', Field('multi_birth_boolean', css_class='enabler'), Div('multi_birth', css_class='dependent'), self.birth_weight_field, Field('born_on_due_date', css_class='enabler'), Div('early_or_late', 'due_date_diff', css_class='dependent')),
+            Fieldset( _('Family Background'), 'mother_yob', 'mother_education','father_yob', 'father_education', 'annual_income'),
+            Fieldset( _("Child's Ethnicity"),HTML("<p> " + ugettext("The following information is being collected for the sole purpose of reporting to our grant-funding institute, i.e.,  NIH (National Institute of Health).  NIH requires this information to ensure the soundness and inclusiveness of our research. Your cooperation is appreciated, but optional.") + " </p>"), 'child_hispanic_latino', 'child_ethnicity'),
+            Fieldset( _("Caregiver Information"), 'caregiver_info'),
+            Fieldset( _("Language Exposure"), Field('other_languages_boolean', css_class = 'enabler'), Div(Field('other_languages', css_class='make-selectize'),'language_from', 'language_days_per_week', 'language_hours_per_day', css_class='dependent')),
+            Fieldset( _("Health"), 
             Field('ear_infections_boolean', css_class = 'enabler'), Div('ear_infections', css_class='dependent'),
             Field('hearing_loss_boolean', css_class = 'enabler'), Div('hearing_loss', css_class='dependent'),
             Field('vision_problems_boolean', css_class = 'enabler'), Div('vision_problems', css_class='dependent'),

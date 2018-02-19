@@ -38,7 +38,8 @@
                         },
                         {
                             "id": "household",
-                            "title": "8. Small Household Items"
+                            "title": "8. Small Household Items",
+                            "footnote": "* or word used in your family"
                         },
                         {
                             "id": "furniture_rooms",
@@ -50,11 +51,13 @@
                         },
                         {
                             "id": "places",
-                            "title": "11. Places to Go"
+                            "title": "11. Places to Go",
+                            "footnote": "* or word used in your family"
                         },
                         {
                             "id": "people",
-                            "title": "12. People"
+                            "title": "12. People",
+                            "footnote": "* or word used in your family"
                         },
                         {
                             "id": "games_routines",

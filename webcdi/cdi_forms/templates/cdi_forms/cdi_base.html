@@ -7,19 +7,21 @@
     {% load staticfiles %}
 
     <title>{% trans title %}</title>
-    <meta name="description" content="English Words and Sentences CDI form">
+    <meta name="description" content="MacArthur-Bates Communicative Development Inventory">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" ></script>
 
     <script src="{% static 'jquery/jquery-1.11.3.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
-<!--     <link rel="stylesheet" href="{% static 'bootstrap/bootstrap-theme.min.css' %}">
- -->    <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
+    <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/locales/bootstrap-datepicker.es.min.js"></script>
     <script src="{% static 'cdi_forms/selectize.js' %}"></script>
-    <script src="{% static 'cdi_forms/bootstrap-datepicker.js' %}"></script>
-    <script src="{% static 'cdi_forms/moment.js' %}"></script>
+<!--     <script src="{% static 'cdi_forms/bootstrap-datepicker.js' %}"></script>
+ -->    <script src="{% static 'cdi_forms/moment.js' %}"></script>
     <link rel='stylesheet' href="{% static 'cdi_forms/selectize.bootstrap3.css' %}">
-    <link rel='stylesheet' href="{% static 'cdi_forms/datepicker.css' %}">
+    <!-- <link rel='stylesheet' href="{% static 'cdi_forms/datepicker.css' %}"> -->
+    <link rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker3.css">
     <link rel="stylesheet" href="{% static 'cdi_forms/docs.min.css' %}" />
     <link rel='stylesheet' href="{% static 'cdi_forms/base.css' %}">
     <script src="{% static 'd3/d3.v3.js' %}"></script>
