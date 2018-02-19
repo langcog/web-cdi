@@ -1,3 +1,4 @@
+{% load i18n %}
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -403,7 +404,14 @@
     var words_produced = words.filter(function(d) { return (d.num_value == 'produces'); }).length;
 
     // Create summary text depending on number of words in bins.
-    var num_words = "{{ num_words }}"
+
+    if (words_produced > 0 & raw_words_understood > 0) {
+        var num_words = "{% trans 'My child says PPP words and understands UUU words.' %}".replace(/PPP/g, words_produced).replace(/UUU/g, words_understood)
+    } else if (words_produced > 0 & raw_words_understood == 0) {
+        var num_words = "{% trans 'My child says PPP words.' %}".replace(/PPP/g, words_produced)
+    } else if (words_produced == 0 & raw_words_understood > 0) {
+        var num_words = "{% trans 'My child understands UUU words.' %}".replace(/UUU/g, words_understood)
+    }
     
 
     // Place text variable into div
@@ -435,7 +443,7 @@
             var category_id = word_categories[index].id;
             var name_location = list_names.indexOf(category_id)
             if (name_location > -1 ) {
-            categorySize[name_location].category_name = word_categories[index].category;
+            categorySize[name_location].category_name = word_categories[index][root.instrument_name];
             }
         });
 
@@ -452,10 +460,10 @@
             new_chart_understood = c3.generate({
                 bindto: '#categories_charts_understood',
                 data: {
-                    x: '{{ category_axis }}',
+                    x: '{% trans "Category" %}',
                     columns: [
-                        ['{{ category_axis }}'].concat(objectMap(categorySize,'category_name')),
-                        ['{{ understood_graph_axis }} (%)'].concat(objectMap(categorySize,'prop_understood'))
+                        ['{% trans "Category" %}'].concat(objectMap(categorySize,'category_name')),
+                        ['{% trans "Percentage of Words Understood (%%)" %}'].concat(objectMap(categorySize,'prop_understood'))
                     ],
                     type: 'bar',
                     color : function (color, d) {
@@ -472,7 +480,7 @@
                     },
                     y: {
                         label: {
-                            text: '{{ understood_graph_axis }} (%)',
+                            text: '{% trans "Percentage of Words Understood (%%)" %}',
                             position: 'outer-center'
                         }
                     }                    
@@ -505,10 +513,10 @@
             new_chart_produced = c3.generate({
                 bindto: '#categories_charts_produced',
                 data: {
-                    x: '{{ category_axis }}',
+                    x: '{% trans "Category" %}',
                     columns: [
-                        ['{{ category_axis }}'].concat(objectMap(categorySize,'category_name')),
-                        ['{{ produced_graph_axis }} (%)'].concat(objectMap(categorySize,'prop_produced'))
+                        ['{% trans "Category" %}'].concat(objectMap(categorySize,'category_name')),
+                        ['{% trans "Percentage of Words Spoken (%%)" %}'].concat(objectMap(categorySize,'prop_produced'))
                     ],
                     type: 'bar',
                     color : function (color, d) {
@@ -526,7 +534,7 @@
                     },
                     y: {
                         label: {
-                            text: '{{ produced_graph_axis }} (%)',
+                            text: '{% trans "Percentage of Words Spoken (%%)" %}',
                             position: 'outer-center'
                         }
                     }
@@ -658,11 +666,11 @@
         }
 
         if (typeof(bestProdCat) !== 'undefined') {
-            $("#best_categories").append('{{ best_category_p }}<br>');
+            $("#best_categories").append('{% trans "My child says the most words in the bestProdCat category." %}<br>'.replace(/bestProdCat/g, bestProdCat));
         }
 
         if (typeof(bestCompCat) !== 'undefined') {
-            $("#best_categories").append('{{ best_category_u }}<br>');
+            $("#best_categories").append('{% trans "My child says the most words in the bestCompCat category." %}<br>'.replace(/bestCompCat/g, bestCompCat));
         }
     }
 
@@ -747,11 +755,11 @@
 
 
         if (typeof(high_prod_word) !== 'undefined') {
-            $('#hardest_words').append('{{ hardest_words_p }} "', high_prod_word, '".<br>')
+            $('#hardest_words').append('{% trans "The hardest word my child says is INSERTWORDHERE." %}<br>'.replace(/INSERTWORDHERE/g, high_prod_word))
         }
 
         if (typeof(high_comp_word) !== 'undefined') {
-            $('#hardest_words').append('{{ hardest_words_u }} "', high_comp_word, '".<br>')
+            $('#hardest_words').append('{% trans "The hardest word my child understands is INSERTWORDHERE." %}<br>'.replace(/INSERTWORDHERE/g, high_comp_word))
         }
     });
 
@@ -770,13 +778,14 @@
     var adjusted_quant_comp = [];
     var current_vocab = [];
     var new_pred_chart;
+    var outside_warning = "<h4><font color = '#008000'> {% trans 'Sorry but it looks like your child is outside of our age range for predicting vocabulary size! This version of the CDI assessment is for children between MIN_AGE to MAX_AGE months of age' %} </font></h4>".replace(/MIN_AGE/g, "{{ min_age }}").replace(/MAX_AGE/g, "{{ max_age }}")
 
     // If data is satisfactory (child's age is within study's age range), graph a chart predicting median growth rate adjusted for child.
     if ((root.age > 30 | root.age < 16) & root.instrument_name.indexOf('WS') > -1) {
-        $("#predicted_chart").html("<h4><font color = '#008000'> {{ outside_range }} </font></h4>");
+        $("#predicted_chart").html(outside_warning);
 
     } else if ((root.age > 18 | root.age < 8) & root.instrument_name.indexOf('WG') > -1) {
-        $("#predicted_chart").html("<h4><font color = '#008000'> {{ outside_range }} </font></h4>");
+        $("#predicted_chart").html(outside_warning);
 
     } else {
         // Generate prediction chart.
@@ -797,7 +806,7 @@
                 adjusted_quant_prod[i] = {"prod_pred" : adjusted_num , "age": (parseFloat(quant_prod[i].age))};
             }
 
-            current_vocab.push({"age": root.age, "vocab": 100*words_produced/(words.length), "name": "{{ curr_vocab_p }}", "dy": 6});
+            current_vocab.push({"age": root.age, "vocab": 100*words_produced/(words.length), "name": "{% trans 'Current Spoken Vocabulary' %}", "dy": 6});
 
             if (raw_words_understood > 0) {
 
@@ -812,7 +821,7 @@
                 }
 
                 current_vocab.push({"age": root.age, "vocab": 100*words_understood/(words.length),
-                 "name": "{{ curr_vocab_u }}", "dy": 0});
+                 "name": "{% trans 'Current Understood Vocabulary' %}", "dy": 0});
             }
 
 
@@ -821,33 +830,33 @@
                 bindto: '#predicted_chart',
                 data: {
                     xs: {
-                        '{{pred_word_p}}': 'x1',
-                        '{{pred_word_u}}': 'x2',
-                        '{{ curr_vocab }}': 'current_age'
+                        '{% trans "Predicted %% of Words Spoken" %}': 'x1',
+                        '{% trans "Predicted %% of Words Understood" %}': 'x2',
+                        '{% trans "Current Vocabulary Size" %}': 'current_age'
                     },
                     columns: [
                         ['x1'].concat(objectMap(adjusted_quant_prod, 'age')),
                         ['x2'].concat(objectMap(adjusted_quant_comp, 'age')),
-                        ['{{pred_word_p}}'].concat(objectMap(adjusted_quant_prod, 'prod_pred').map(function(x) { return Math.round(x * 100); })),
-                        ['{{pred_word_u}}'].concat(objectMap(adjusted_quant_comp, 'comp_pred').map(function(x) { return Math.round(x * 100); })),
+                        ['{% trans "Predicted %% of Words Spoken" %}'].concat(objectMap(adjusted_quant_prod, 'prod_pred').map(function(x) { return Math.round(x * 100); })),
+                        ['{% trans "Predicted %% of Words Understood" %}'].concat(objectMap(adjusted_quant_comp, 'comp_pred').map(function(x) { return Math.round(x * 100); })),
                         ['current_age'].concat(objectMap(current_vocab, 'age')),
-                        ['{{ curr_vocab }}'].concat(objectMap(current_vocab, 'vocab'))
+                        ['{% trans "Current Vocabulary Size" %}'].concat(objectMap(current_vocab, 'vocab'))
                     ],
                     type: 'line',
                     types: {
-                        '{{ curr_vocab }}': 'scatter'
+                        '{% trans "Current Vocabulary Size" %}': 'scatter'
                     },
                     order: 'asc',
                     colors: {
-                        '{{pred_word_p}}': '#9471f2',
-                        '{{pred_word_u}}': '#FF9667',
-                        '{{ curr_vocab }}': '#2DBC74'
+                        '{% trans "Predicted %% of Words Spoken" %}': '#9471f2',
+                        '{% trans "Predicted %% of Words Understood" %}': '#FF9667',
+                        '{% trans "Current Vocabulary Size" %}': '#2DBC74'
                     }
                 },
                 axis: {
                   x: {
                     label: {
-                        text: '{{age_axis}}',
+                        text: '{% trans "Age (in Months)" %}',
                         position: 'outer-center',                        
                     },
                     tick: {
@@ -856,7 +865,7 @@
                   },
                   y: {
                     label: {
-                        text: '{{pred_axis}}',
+                        text: '{% trans "Predicted %% of Words on Test" %}',
                         position: 'outer-middle',
                     },
                     tick: {

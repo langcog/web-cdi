@@ -267,11 +267,11 @@
                         {% if object.text != '' %}
                         <div class="col-md-12 alco-child" name = "{{ object.itemID }}_div">
                             <div class="row alco-child1" >
-                                <div class="col-lg-5 col-12"><span class="choice">{{ object.text | capfirst }}</span></div>
+                                <div class="col-lg-5 col-12"><span class="choice">{{ object.text }}</span></div>
                                 <div class="col-lg-7 col-12 align-items-center btn-group btn-group-justified d-flex justify-content-end" data-toggle="buttons">
                                     {% for choice in object.choices %}
                                         <label class = "btn mult-choice">
-                                            <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
+                                            <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.1 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
                                             {% if type.type == "radiobutton" %} 
                                                 <i class="material-icons radio_button_checked" aria-hidden="true">radio_button_checked</i>
                                                 <i class="material-icons radio_button_unchecked" aria-hidden="true">radio_button_unchecked</i>
@@ -291,7 +291,7 @@
                                 {% for choice in object.choices %}
                                     <div class="row">
                                         <label class = "btn mult-choice">
-                                            <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
+                                            <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.1 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
                                             {% if type.type == "radiobutton" %} 
                                                 <i class="material-icons radio_button_checked" aria-hidden="true">radio_button_checked</i>
                                                 <i class="material-icons radio_button_unchecked" aria-hidden="true">radio_button_unchecked</i>
@@ -333,11 +333,11 @@
                                 {% if object.text != '' %}
                                 <div class="col-md-12 alco-child" name = "{{ object.itemID }}_div">
                                     <div class="row alco-child1" >
-                                        <div class="col-lg-5 col-12"><span class="choice"> {{ object.text | capfirst }}</span></div>
+                                        <div class="col-lg-5 col-12"><span class="choice"> {{ object.text }}</span></div>
                                         <div class="col-lg-7 col-12 align-items-center btn-group btn-group-justified d-flex justify-content-end" data-toggle="buttons">
                                             {% for choice in object.choices %}
                                                 <label class = "btn mult-choice">
-                                                    <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
+                                                    <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.1 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
                                                     {% if type.type == "radiobutton" %} 
                                                         <i class="material-icons radio_button_checked" aria-hidden="true">radio_button_checked</i>
                                                         <i class="material-icons radio_button_unchecked" aria-hidden="true">radio_button_unchecked</i>
@@ -357,7 +357,7 @@
                                         {% for choice in object.choices %}
                                             <div class="row">
                                                 <label class = "btn mult-choice">
-                                                    <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
+                                                    <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.1 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
                                                     {% if type.type == "radiobutton" %} 
                                                         <i class="material-icons radio_button_checked" aria-hidden="true">radio_button_checked</i>
                                                         <i class="material-icons radio_button_unchecked" aria-hidden="true">radio_button_unchecked</i>
@@ -495,7 +495,7 @@
     // Confirm to prevent premature submissions
     function clicked(e)
     {
-        if(!confirm("{{ confirm_script }}"))e.preventDefault();
+        if(!confirm("{% trans 'Are you ready to submit? You cannot change your answers after submission.' %}"))e.preventDefault();
         localStorage.removeItem('prev_page_number');
     }
 
@@ -524,7 +524,7 @@
     // Rename checkbox labels from 'produces' to 'understands and says'
     $( "input[id$='produces']" ).each( function (){ 
         var label_var = $(this).parent().find('span.choice');
-        $(label_var).text("understands and says");
+        $(label_var).text("{% trans 'understands and says' %}");
     });
 
     var gotToEnd = false;

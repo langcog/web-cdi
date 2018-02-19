@@ -19,8 +19,8 @@ def addSpanishData(apps, schema_editor):
     Spanish_WG = apps.get_model('cdi_forms', 'Spanish_WG')
     Spanish_WS = apps.get_model('cdi_forms', 'Spanish_WS')
 
-    spanish_wg_data=pd.read_csv(spanish_wg_path, sep=',')
-    spanish_ws_data=pd.read_csv(spanish_ws_path, sep=',')
+    spanish_wg_data=pd.read_csv(spanish_wg_path, sep=',').fillna('')
+    spanish_ws_data=pd.read_csv(spanish_ws_path, sep=',').fillna('')
 
     Spanish_WG.objects.bulk_create([Spanish_WG(**vals) for vals in spanish_wg_data.to_dict('records')])
     Spanish_WS.objects.bulk_create([Spanish_WS(**vals) for vals in spanish_ws_data.to_dict('records')])

@@ -8,7 +8,7 @@ venv/
 *.backup
 .Rproj.user
 .Rhistory
-*/packrat/src/
+*/packrat/src/*
 webcdi/webcdi/secret_key*
 webcdi/webcdi/databases*
 webcdi/webcdi/email*

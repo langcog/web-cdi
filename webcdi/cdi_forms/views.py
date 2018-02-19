@@ -2,7 +2,7 @@
 
 from django.shortcuts import render
 from .models import English_WS, English_WG, Spanish_WS, Spanish_WG, BackgroundInfo, requests_log, Zipcode
-import os.path, json, datetime, itertools, requests
+import os.path, json, datetime, itertools, requests, re
 from researcher_UI.models import administration_data, administration, study, payment_code, ip_address
 from django.http import Http404, JsonResponse, HttpResponse
 from .forms import BackgroundForm, ContactForm
@@ -19,6 +19,7 @@ from django.urls import reverse
 from ipware.ip import get_ip
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
+import pandas as pd
 
 
 
@@ -44,7 +45,7 @@ def get_model_header(name):
 def prefilled_background_form(administration_instance):
     background_instance = BackgroundInfo.objects.get(administration = administration_instance)
 
-    background_form = BackgroundForm(instance = background_instance)  
+    background_form = BackgroundForm(instance = background_instance, context = { 'birthweight_units' : administration_instance.study.birth_weight_units})  
     return background_form
 
 # Find the administration object for a test-taker based on their unique hash code.
@@ -70,10 +71,8 @@ def background_info_form(request, hash_id):
     context['zip_code'] = ''
 
     if administration_instance.study.instrument.language == "English":
-        print 'English'
         user_language = 'en'
     elif administration_instance.study.instrument.language == "Spanish":
-        print 'Spanish'
         user_language = 'es'
 
     translation.activate(user_language)
@@ -205,17 +204,21 @@ def cdi_items(object_group, item_type, prefilled_data, item_id):
             obj['prefilled_value'] = obj['itemID'] in prefilled_data
 
         if item_type == 'radiobutton' or item_type == 'modified_checkbox':
-            split_choices = map(unicode.strip, obj['choices'].split(';'))
-            prefilled_values = [False if obj['itemID'] not in prefilled_data else x == prefilled_data[obj['itemID']] for x in split_choices]
-            obj['text'] = obj['definition']
+            raw_split_choices = map(unicode.strip, obj['choices__choice_set'].split(';'))
+
+            split_choices_translated = map(unicode.strip, [value for key, value in obj.items() if 'choice_set_' in key][0].split(';'))
+
+            prefilled_values = [False if obj['itemID'] not in prefilled_data else x == prefilled_data[obj['itemID']] for x in raw_split_choices]
+
+            obj['text'] = obj['definition'][0].upper() + obj['definition'][1:] if obj['definition'][0].isalpha() else obj['definition'][0] + obj['definition'][1].upper() + obj['definition'][2:]
 
             if obj['definition'] is not None and obj['definition'].find('/') >= 0 and item_id == 'complexity':
                 split_definition = map(unicode.strip, obj['definition'].split('/'))
-                obj['choices'] = zip(split_definition, split_choices, prefilled_values)
+                obj['choices'] = zip(split_definition, raw_split_choices, prefilled_values)
             else:
-                obj['choices'] = zip(split_choices, split_choices, prefilled_values)
+                obj['choices'] = zip(split_choices_translated, raw_split_choices, prefilled_values)
                 if obj['definition'] is not None:
-                    obj['text'] = obj['definition']
+                    obj['text'] = obj['definition'][0].upper() + obj['definition'][1:] if obj['definition'][0].isalpha() else obj['definition'][0] + obj['definition'][1].upper() + obj['definition'][2:]
 
         if item_type == 'textbox':
             if obj['itemID'] in prefilled_data:
@@ -256,12 +259,20 @@ def prefilled_cdi_data(administration_instance):
         data['confirm_completion'] = administration_instance.study.confirm_completion
         raw_objects = []
 
+        field_values = ['itemID', 'item_type', 'category', 'definition', 'choices__choice_set']
+        if administration_instance.study.instrument.language == 'English':
+            field_values += ['choices__choice_set_en']
+        elif administration_instance.study.instrument.language == 'Spanish':
+            field_values += ['choices__choice_set_es']
+
         #As some items are nested on different levels, carefully parse and store items for rendering.
         for part in data['parts']:
             for item_type in part['types']:
                 if 'sections' in item_type:
                     for section in item_type['sections']:
-                        group_objects = instrument_model.objects.filter(category__exact=section['id']).values()
+
+
+                        group_objects = instrument_model.objects.filter(category__exact=section['id']).values(*field_values)
                         
                         x = cdi_items(group_objects, item_type['type'], prefilled_data, item_type['id'])
                         section['objects'] = x
@@ -271,7 +282,7 @@ def prefilled_cdi_data(administration_instance):
 
                                 
                 else:
-                    group_objects = instrument_model.objects.filter(item_type__exact=item_type['id']).values()
+                    group_objects = instrument_model.objects.filter(item_type__exact=item_type['id']).values(*field_values)
                     x = cdi_items(group_objects, item_type['type'], prefilled_data, item_type['id'])
                     item_type['objects'] = x
                     raw_objects.extend(x)
@@ -318,7 +329,8 @@ def cdi_form(request, hash_id):
                     item = items[0]
                     value = request.POST[key]
                     if item.choices:
-                        choices = map(unicode.strip, item.choices.split(';'))
+
+                        choices = map(unicode.strip, item.choices.choice_set_en.split(';'))
                         if value in choices:
                             administration_data.objects.update_or_create(administration = administration_instance, item_ID = key, defaults = {'value': value})
                     else:
@@ -367,7 +379,6 @@ def cdi_form(request, hash_id):
                 # If the study is run by langcoglab and the study allows for subject payments, store the IP address for security purposes
                 if administration_instance.study.researcher.username == "langcoglab" and administration_instance.study.allow_payment:
                     user_ip = str(get_ip(request))
-                    print user_ip
 
                     if user_ip and user_ip != 'None':
                         ip_address.objects.create(study = administration_instance.study,ip_address = user_ip)
@@ -384,8 +395,7 @@ def cdi_form(request, hash_id):
     data = dict()
     if request.method == 'GET' or refresh:
         data = prefilled_cdi_data(administration_instance)
-        data['created_date'] = administration_instance.created_date
-        data['confirm_script'] = _("Are you ready to submit? You cannot change your answers after submission.")
+        data['created_date'] = administration_instance.created_date.strftime('%b %d, %Y, %I:%M %p')
         data['captcha'] = None
         data['language'] = administration_instance.study.instrument.language
 
@@ -425,6 +435,9 @@ def printable_view(request, hash_id):
     prefilled_data['hash_id'] = hash_id
     prefilled_data['gift_code'] = None
     prefilled_data['gift_amount'] = None
+    prefilled_data['min_age'] = administration_instance.study.instrument.min_age
+    prefilled_data['max_age'] = administration_instance.study.instrument.max_age
+
     if administration_instance.study.allow_payment and administration_instance.bypass is None:
         if payment_code.objects.filter(hash_id = hash_id).exists():
             gift_card = payment_code.objects.get(hash_id = hash_id)
@@ -436,42 +449,6 @@ def printable_view(request, hash_id):
 
     prefilled_data['allow_sharing'] = administration_instance.study.allow_sharing
     prefilled_data['contact_url'] = reverse('contact', args=[hash_id])
-
-
-    cdi_map = pd.DataFrame(list(model_map(administration_instance.study.instrument.name).objects.all().values()))
-    prefilled_data_list =  pd.DataFrame(list(administration_data.objects.filter(administration = administration_instance).values('item_ID', 'value')))
-    cdi_answers = pd.merge(cdi_map, prefilled_data_list, how = 'left', left_on = 'itemID', right_on = 'item_ID')
-    df_understood = cdi_answers.query('item_type == "word" & value == "understands"')
-    df_produced = cdi_answers.query('item_type == "word" & value == "produces"')
-    words_understood = df_understood.shape[0]
-    words_produced = df_produced.shape[0]
-    best_category_u = cdi_answers.query('item_type == "word" & (value == "understands" | value == "produces")').groupby('category')['value'].agg('count').idxmax()
-    best_category_p = df_produced.groupby('category')['value'].agg('count').idxmax()
-
-    if words_produced > 0 and words_understood > 0:
-        num_words = _("My child says %(words_produced)d words and understands %(words_understood)d words.") % { "words_produced" : words_produced, "words_understood" : words_understood + words_produced }
-    elif words_produced > 0 and raw_words_understood == 0:
-        num_words = _("My child says %(words_produced)d words.") % { "words_produced" : words_produced}
-    elif words_produced == 0 and raw_words_understood > 0:
-        num_words = _("My child understands %(words_understood)d words.") % { "words_understood" : words_understood}
-    
-    prefilled_data['num_words'] = num_words
-    prefilled_data['understood_graph_axis'] = _("Percentage of Words Understood")
-    prefilled_data['produced_graph_axis'] = _("Percentage of Words Spoken")
-    prefilled_data['category_axis'] = _("Category")
-    prefilled_data['age_axis'] = _("Age (in Months)")
-    prefilled_data['pred_axis'] = _("Predicted %% of Words on Test")
-    prefilled_data['best_category_p'] = _("My child says the most words in the %(bestProdCat)s category.") %{"bestProdCat": best_category_p}
-    prefilled_data['best_category_u'] = _("My child says the most words in the %(bestCompCat)s category.") %{"bestCompCat": best_category_u}
-    prefilled_data['hardest_words_p'] = _("The hardest word my child says is")
-    prefilled_data['hardest_words_u'] = _("The hardest word my child understands is")
-    prefilled_data['outside_range'] = _("Sorry but it looks like your child is outside of our age range for predicting vocabulary size! This version of the CDI assessment is for children between %(min_age)d to %(max_age)d months of age") % {"min_age" : administration_instance.study.instrument.min_age, "max_age" : administration_instance.study.instrument.max_age}
-    prefilled_data['pred_word_p'] = _("Predicted %% of Words Spoken")
-    prefilled_data['pred_word_u'] = _("Predicted %% of Words Understood")
-    prefilled_data['curr_vocab_p'] = _("Current Spoken Vocabulary")
-    prefilled_data['curr_vocab_u'] = _("Current Understood Vocabulary")
-    prefilled_data['curr_vocab'] = _("Current Vocabulary Size")
-
 
     response = render(request, 'cdi_forms/printable_cdi.html', prefilled_data) # Render contact form template   
     response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)

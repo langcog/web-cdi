@@ -18,7 +18,7 @@ class English_WS(models.Model):
     item = models.CharField(max_length = 101) # string variable name
     item_type = models.CharField(max_length = 101) # type of variable (word, phrase, etc.)
     category = models.CharField(max_length = 101) # if word, the subcategory for item (animals, sounds, etc.)
-    choices = models.CharField(max_length = 101, null=True) # possible positive choices for item
+    choices = models.ForeignKey('Choices', null=True)
     definition = models.CharField(max_length = 1001, null=True, blank=True) # item listed in plaintext. This is what is displayed to test-takers along with possible choices
     gloss = models.CharField(max_length = 1001, null=True, blank=True) # English translation for item. At the moment, we only have English instruments so definition and gloss are identical
     complexity_category = models.CharField(max_length = 101, null=True, blank=True) # category for complexity item. Currently blank.
@@ -30,7 +30,7 @@ class English_WG(models.Model):
     item = models.CharField(max_length = 101) # string variable name
     item_type = models.CharField(max_length = 101) # type of variable (word, phrase, etc.)
     category = models.CharField(max_length = 101) # if word, the subcategory for item (animals, sounds, etc.)
-    choices = models.CharField(max_length = 101) # possible positive choices for item
+    choices = models.ForeignKey('Choices', null=True)
     uni_lemma = models.CharField(max_length= 101, null=True, blank=True) # ID for matching terms across languages. Currently unused.
     definition = models.CharField(max_length = 1001, null=True, blank=True) # item listed in plaintext. This is what is displayed to test-takers along with possible choices
     gloss = models.CharField(max_length = 1001, null=True, blank=True) # English translation for item. At the moment, we only have English instruments so definition and gloss are identical
@@ -44,7 +44,7 @@ class Spanish_WS(models.Model):
     item = models.CharField(max_length = 101) # string variable name
     item_type = models.CharField(max_length = 101) # type of variable (word, phrase, etc.)
     category = models.CharField(max_length = 101) # if word, the subcategory for item (animals, sounds, etc.)
-    choices = models.CharField(max_length = 101, null=True) # possible positive choices for item
+    choices = models.ForeignKey('Choices', null=True)
     definition = models.CharField(max_length = 1001, null=True, blank=True) # item listed in plaintext. This is what is displayed to test-takers along with possible choices
     uni_lemma = models.CharField(max_length= 101, null=True, blank=True) # ID for matching terms across languages. Currently unused.
     gloss = models.CharField(max_length = 1001, null=True, blank=True) # English translation for item. At the moment, we only have English instruments so definition and gloss are identical
@@ -57,13 +57,18 @@ class Spanish_WG(models.Model):
     item = models.CharField(max_length = 101) # string variable name
     item_type = models.CharField(max_length = 101) # type of variable (word, phrase, etc.)
     category = models.CharField(max_length = 101) # if word, the subcategory for item (animals, sounds, etc.)
-    choices = models.CharField(max_length = 101, null=True) # possible positive choices for item
+    choices = models.ForeignKey('Choices', null=True)
     definition = models.CharField(max_length = 1001, null=True, blank=True) # item listed in plaintext. This is what is displayed to test-takers along with possible choices
     uni_lemma = models.CharField(max_length= 101, null=True, blank=True) # ID for matching terms across languages. Currently unused.
     gloss = models.CharField(max_length = 1001, null=True, blank=True) # English translation for item. At the moment, we only have English instruments so definition and gloss are identical
     complexity_category = models.CharField(max_length = 101, null=True, blank=True) # category for complexity item. Currently blank.
     def __str__(self):
         return self.item
+
+class Choices(models.Model):
+    choice_set = models.CharField(max_length=101)
+    def __str__(self):
+        return self.choice_set
 
 # Method for ensuring that a value is positive
 def validate_g_zero(value):
