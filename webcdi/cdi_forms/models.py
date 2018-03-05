@@ -22,6 +22,7 @@ class English_WS(models.Model):
     definition = models.CharField(max_length = 1001, null=True, blank=True) # item listed in plaintext. This is what is displayed to test-takers along with possible choices
     gloss = models.CharField(max_length = 1001, null=True, blank=True) # English translation for item. At the moment, we only have English instruments so definition and gloss are identical
     complexity_category = models.CharField(max_length = 101, null=True, blank=True) # category for complexity item. Currently blank.
+    uni_lemma = models.CharField(max_length= 101, null=True, blank=True) # ID for matching terms across languages. Currently unused.
     def __str__(self):
         return self.item
 #Model for English Words & Gestures form. Each row represents another item in the CDI questionnaire and its descriptive variables  

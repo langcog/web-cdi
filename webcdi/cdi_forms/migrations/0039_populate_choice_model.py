@@ -20,7 +20,7 @@ def populateChoiceModel(apps, schema_editor):
 
 def addChoicesLink(apps, schema_editor):
 
-    instrument_models = ['English_WS', 'English_WG', 'Spanish_WS', 'Spanish_WG']
+    instrument_models = ['English_WS', 'English_WG']
 
     Choices = apps.get_model('cdi_forms', 'Choices')
 
@@ -35,7 +35,7 @@ def addChoicesLink(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cdi_forms', '0039_add_choices_model'),
+        ('cdi_forms', '0038_add_choices_model'),
     ]
 
     operations = [

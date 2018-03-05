@@ -8,7 +8,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cdi_forms', '0040_populate_choice_model'),
+        ('cdi_forms', '0039_populate_choice_model'),
     ]
 
     operations = [
@@ -20,14 +20,6 @@ class Migration(migrations.Migration):
             model_name='english_ws',
             name='choices',
         ),
-        migrations.RemoveField(
-            model_name='spanish_wg',
-            name='choices',
-        ),
-        migrations.RemoveField(
-            model_name='spanish_ws',
-            name='choices',
-        ),
         migrations.RenameField(
             model_name='english_wg',
             old_name='choices_link',
@@ -38,14 +30,5 @@ class Migration(migrations.Migration):
             old_name='choices_link',
             new_name='choices'
         ),
-        migrations.RenameField(
-            model_name='spanish_wg',
-            old_name='choices_link',
-            new_name='choices'
-        ),
-        migrations.RenameField(
-            model_name='spanish_ws',
-            old_name='choices_link',
-            new_name='choices'
-        ),
+
     ]

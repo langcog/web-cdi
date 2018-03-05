@@ -211,8 +211,10 @@ def cdi_items(object_group, item_type, prefilled_data, item_id):
         if item_type == 'checkbox':
             obj['prefilled_value'] = obj['itemID'] in prefilled_data
             obj['definition'] = obj['definition'][0].upper() + obj['definition'][1:] if obj['definition'][0].isalpha() else obj['definition'][0] + obj['definition'][1].upper() + obj['definition'][2:]
+            obj['choices'] = obj['choices__choice_set']
 
         if item_type in ['radiobutton', 'modified_checkbox']:
+
             raw_split_choices = map(unicode.strip, obj['choices__choice_set'].split(';'))
 
             split_choices_translated = map(unicode.strip, [value for key, value in obj.items() if 'choice_set_' in key][0].split(';'))
@@ -337,9 +339,10 @@ def cdi_form(request, hash_id):
                 if len(items) == 1:
                     item = items[0]
                     value = request.POST[key]
+                    print value
                     if item.choices:
-
                         choices = map(unicode.strip, item.choices.choice_set_en.split(';'))
+                        print choices
                         if value in choices:
                             administration_data.objects.update_or_create(administration = administration_instance, item_ID = key, defaults = {'value': value})
                     else:

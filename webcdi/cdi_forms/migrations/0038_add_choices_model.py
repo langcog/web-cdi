@@ -10,7 +10,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cdi_forms', '0038_populate_spanish_models'),
+        ('cdi_forms', '0037_split_birthweight_into_us_and_si_units'),
     ]
 
     operations = [
@@ -32,13 +32,8 @@ class Migration(migrations.Migration):
             field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='cdi_forms.Choices'),
         ),
         migrations.AddField(
-            model_name='spanish_wg',
-            name='choices_link',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='cdi_forms.Choices'),
+            model_name='english_ws',
+            name='uni_lemma',
+            field=models.CharField(blank=True, max_length=101, null=True),
         ),
-        migrations.AddField(
-            model_name='spanish_ws',
-            name='choices_link',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='cdi_forms.Choices'),
-        )
     ]
