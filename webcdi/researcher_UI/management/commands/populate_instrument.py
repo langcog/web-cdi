@@ -3,8 +3,8 @@ import re
 from django.core.management.base import BaseCommand
 from researcher_UI.models import *
 import string
-
-
+from django.conf import settings
+import os
 
 # Populates the ItemInfo and ItemMap models with data from instrument definition files.
 # Given no arguments, does so for all instruments in 'static/json/instruments.json'.
@@ -17,8 +17,9 @@ class Command(BaseCommand):
         parser.add_argument('-f', '--form', type=str)
 
     def handle(self, *args, **options):
-
-        instruments = json.load(open('static/json/instruments.json'))
+	
+	PROJECT_ROOT = settings.BASE_DIR
+	instruments = json.load(open(os.path.realpath(PROJECT_ROOT + '/static/json/instruments.json')))
         var_safe = lambda s: ''.join([c for c in '_'.join(s.split()) if c in string.letters + '_'])
 
         if options['language'] and options['form']:

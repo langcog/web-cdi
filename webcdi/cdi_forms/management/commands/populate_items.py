@@ -3,8 +3,9 @@ import re
 from django.core.management.base import BaseCommand
 from cdi_forms.models import *
 from researcher_UI.models import *
-import csv
+import csv, os
 from django.apps import apps
+from django.conf import settings
 
 
 # Populates the ItemInfo and ItemMap models with data from instrument definition files.
@@ -24,8 +25,8 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
-        instruments = json.load(open('static/json/instruments.json'))
-
+	PROJECT_ROOT = settings.BASE_DIR
+        instruments = json.load(open(os.path.realpath(PROJECT_ROOT + '/static/json/instruments.json')))
         if options['language'] and options['form']:
             input_language, input_form = options['language'], options['form']
             input_instruments = filter(lambda instrument: instrument['language'] == input_language and
@@ -55,7 +56,7 @@ class Command(BaseCommand):
 
             if ftype == 'csv':
 
-                contents = list(unicode_csv_reader(open(curr_instrument['csv_file'])))
+                contents = list(unicode_csv_reader(open(os.path.realpath(PROJECT_ROOT + '/' + curr_instrument['csv_file']))))
                 col_names = contents[0]
                 nrows = len(contents)
                 get_row = lambda row: contents[row]
