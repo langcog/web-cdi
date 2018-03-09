@@ -61,7 +61,7 @@ class BackgroundForm(BetterModelForm):
     
     # Was child born early or late compared to due date. 2-choice question. 
     early_or_late = forms.ChoiceField(
-                     choices=(('early', _('Early')),('late', _('Late'))), widget=forms.RadioSelect,
+                     choices=(('early', _('Early')),('late', _('Late'))), widget=forms.RadioSelect, label=_("Was he/she early or late?"),
                  required=False)
 
     # Child's sex. Can choose M (male), F (female) or O (other/not disclosed)
