@@ -58,7 +58,7 @@
 
         <div class="row form-group">
             <label for="add_new_parent" class="col-3 control-label">Single Reusable Link</label>
-            <div class="col-9" id="reusable_link_div">
+            <div class="col-9" id="reusable_link_div" style = "overflow: hidden; text-overflow: ellipsis;">
               <a href="{% url 'administer_new_parent' username study_name %}" id="reusable_link">Click here</a><br>
               (For mass emails or adding to a website. Does not track IP addresses or use cookies. Every link click creates a new administration.)
 
@@ -69,7 +69,7 @@
               {% endif %}
 
               <script type="text/javascript">
-                $('#reusable_link').html($('#reusable_link')[0].href);
+                $('#reusable_link').html($('#reusable_link')[0].href).css;
 
                 var study_group = "{{ study_group }}";
                 if (study_group != "") {

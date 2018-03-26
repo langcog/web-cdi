@@ -37,7 +37,7 @@ class AddStudyForm(BetterModelForm):
         self.helper.form_id = 'add-study'
         self.helper.form_class = 'form-horizontal'
         # self.helper.template = PROJECT_ROOT + '/../cdi_forms/templates/bootstrap3/whole_uni_form.html'        
-        self.helper.template = 'bootstrap3/whole_uni_form.html'
+        # self.helper.template = 'bootstrap4/whole_uni_form.html'
         self.helper.label_class = 'col-3'
         self.helper.field_class = 'col-9'
         self.helper.form_method = 'post'
@@ -103,6 +103,13 @@ class RenameStudyForm(BetterModelForm):
 
     birth_weight_choices = (("lb", "Measure birthweight in pounds and ounces"), ("kg", "Measure birthweight in kilograms"))
     birth_weight_units = forms.ChoiceField(choices = birth_weight_choices, label = "Measurement units for birthweight")
+    
+    anon_collection = forms.BooleanField(required=False, label="Do you plan on collecting only anonymous data in this study? (e.g., posting ads on social media, mass emails, etc)") # Whether the study will have only anonymous participants (opens up a range of other settings for anonymous data collection)
+    allow_payment = forms.BooleanField(required=False, label="Would you like to pay subjects in the form of Amazon gift cards? (You will need to upload gift card codes under \"Update Study\").") # Whether study participants will be compensated in the form of gift card codes upon completion
+    subject_cap = forms.IntegerField(label = "Maximum number of participants", required = False, min_value = 1, help_text = "Leave this blank if you do NOT want to limit the number of participants.", widget=forms.NumberInput(attrs={'placeholder': 'XXX participants'})) # If there are anonymous participants, you can set a cap that limits the number of tests that can be completed. Tests initiated before the cutoff can still be finished even after the cutoff is reached
+    confirm_completion = forms.BooleanField(required = False, label="At the end of the form, would you like parents to confirm the age of their child and that they completed the entire test? (Best for anonymous data collections where you haven't personally vetted each participant)") # Asks participants to verify the child's age and that they completed the form to the best of their ability. Only for participants that have not been vetted.
+    allow_sharing = forms.BooleanField(required=False, label="Would you like participants to be able to share their Web-CDI results via Facebook?") # Gives option for participants to be able to share their results via Facebook. Default off.
+
 
     # Form validation. Form is passed automatically to views.py for higher level checking.
     def clean(self):
