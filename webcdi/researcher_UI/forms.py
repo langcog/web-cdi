@@ -19,6 +19,7 @@ class AddStudyForm(BetterModelForm):
     allow_sharing = forms.BooleanField(required=False, label="Would you like participants to be able to share their Web-CDI results via Facebook?") # Gives option for participants to be able to share their results via Facebook. Default off.
     test_period = forms.IntegerField(label = "# Days Before Expiration", help_text= "Between 1 and 14. Default is 14 days. (e.g., 14 = 14 days for parents to complete a form)", required = False, widget= forms.NumberInput(attrs={'placeholder':'(e.g., 14 = 14 days to complete a form)', 'min': '1', 'max': '14'})) # Number of days that a participant can use to complete an administration before expiration. By default, participants have 14 days to complete test. Ranges from 1-14 days.
     age_range = IntegerRangeField(label="Age Range For Study (in months)")
+    show_feedback = forms.BooleanField(required=False, initial=True, label="Would you like to show participants graphs of their data after completion?")
     
     prefilled_data_choices = ((0, 'No, do not populate the any part of the form'), (1, 'Only the Background Information Form'), (2, 'The Background Information Form and the Vocabulary Checklist'))
     prefilled_data = forms.ChoiceField(choices = prefilled_data_choices, label = "Pre-fill data for longitudinal participants?", help_text="For longitudinal participants, would you like to populate the test with responses from earlier tests?")
@@ -54,6 +55,7 @@ class AddStudyForm(BetterModelForm):
             Field('anon_collection'),
             Field('subject_cap'),
             Field('confirm_completion'),
+            Field('show_feedback'),
             Field('allow_sharing'),
         )
 
@@ -109,7 +111,7 @@ class RenameStudyForm(BetterModelForm):
     subject_cap = forms.IntegerField(label = "Maximum number of participants", required = False, min_value = 1, help_text = "Leave this blank if you do NOT want to limit the number of participants.", widget=forms.NumberInput(attrs={'placeholder': 'XXX participants'})) # If there are anonymous participants, you can set a cap that limits the number of tests that can be completed. Tests initiated before the cutoff can still be finished even after the cutoff is reached
     confirm_completion = forms.BooleanField(required = False, label="At the end of the form, would you like parents to confirm the age of their child and that they completed the entire test? (Best for anonymous data collections where you haven't personally vetted each participant)") # Asks participants to verify the child's age and that they completed the form to the best of their ability. Only for participants that have not been vetted.
     allow_sharing = forms.BooleanField(required=False, label="Would you like participants to be able to share their Web-CDI results via Facebook?") # Gives option for participants to be able to share their results via Facebook. Default off.
-
+    show_feedback = forms.BooleanField(required=False, label="Would you like to show participants graphs of their data after completion?")
 
     # Form validation. Form is passed automatically to views.py for higher level checking.
     def clean(self):
@@ -142,6 +144,7 @@ class RenameStudyForm(BetterModelForm):
             Field('allow_payment'),
             Div(Field('gift_codes'), css_class="gift_cards collapse"),
             Div(Field('gift_amount'), css_class="gift_cards collapse"),
+            Field('show_feedback'),
             Field('allow_sharing'),
         )
 

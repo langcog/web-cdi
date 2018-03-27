@@ -282,22 +282,20 @@ def prefilled_cdi_data(administration_instance):
                 if 'sections' in item_type:
                     for section in item_type['sections']:
 
-
                         group_objects = instrument_model.objects.filter(category__exact=section['id']).values(*field_values)
                         
                         x = cdi_items(group_objects, item_type['type'], prefilled_data, item_type['id'])
                         section['objects'] = x
-                        raw_objects.extend(x)
+                        if administration_instance.study.show_feedback: raw_objects.extend(x)
                         if any(['*' in x['definition'] for x in section['objects']]):
                             section['starred'] = "*Or the word used in your family"  
-
-                                
+  
                 else:
                     group_objects = instrument_model.objects.filter(item_type__exact=item_type['id']).values(*field_values)
                     x = cdi_items(group_objects, item_type['type'], prefilled_data, item_type['id'])
                     item_type['objects'] = x
-                    raw_objects.extend(x)
-        data['cdi_items'] = json.dumps(raw_objects, cls=DjangoJSONEncoder)
+                    if administration_instance.study.show_feedback: raw_objects.extend(x)
+        if administration_instance.study.show_feedback: data['cdi_items'] = json.dumps(raw_objects, cls=DjangoJSONEncoder)
 
         # If age is stored in database, add it to dictionary
         try:
@@ -457,6 +455,7 @@ def printable_view(request, hash_id):
     prefilled_data['gift_amount'] = None
     prefilled_data['min_age'] = administration_instance.study.instrument.min_age
     prefilled_data['max_age'] = administration_instance.study.instrument.max_age
+    prefilled_data['show_feedback'] = administration_instance.study.show_feedback
 
     if administration_instance.study.allow_payment and administration_instance.bypass is None:
         if payment_code.objects.filter(hash_id = hash_id).exists():

@@ -151,11 +151,15 @@
                 <br><br>
             </div>
             <br>
+
+        </div>
+
+        {% if show_feedback %}
             <!-- Button triggers the D3 graph div to appear. -->
             <div class="row justify-content-center" style="padding-bottom: 1%;">
                 <a class="btn btn-primary btn-lg active" href="#graph_data" data-toggle="collapse">{% trans "Graph My Data!" %}</a>
             </div>
-        </div>
+        {% endif %}
 
         <!-- Text triggers the submitted answers div to appear -->
         <div class="row justify-content-center">
@@ -174,26 +178,28 @@
 
 
         <br>
-        <!-- D3 graph div. Filled with empty divs which are populated by later D3 script -->
-        <div class="col-md-12 collapse show" id="graph_data" style="height: 90vh;">
-        <br>
-          <div class = "row"> 
-            <div class="col-md-6 text-center" id="predicted_chart"></div>
-            <div class="col-md-6 text-center" id="num_words_text"></div>
-          </div>
-          <br>
-          <div class = "row"> 
-                <div class="col-md-6 text-center" id="categories_charts_understood"></div>
-                <div class="col-md-6 text-center" id="categories_charts_produced"></div>
-          </div>
-            <div class = "row justify-content-center"> 
-                <h4><div id="best_categories" class="text-center"></div></h4>
+        {% if show_feedback %}
+            <!-- D3 graph div. Filled with empty divs which are populated by later D3 script -->
+            <div class="col-md-12 collapse show" id="graph_data" style="height: 90vh;">
+            <br>
+              <div class = "row"> 
+                <div class="col-md-6 text-center" id="predicted_chart"></div>
+                <div class="col-md-6 text-center" id="num_words_text"></div>
+              </div>
+              <br>
+              <div class = "row"> 
+                    <div class="col-md-6 text-center" id="categories_charts_understood"></div>
+                    <div class="col-md-6 text-center" id="categories_charts_produced"></div>
+              </div>
+                <div class = "row justify-content-center"> 
+                    <h4><div id="best_categories" class="text-center"></div></h4>
+                </div>
+              <br>
+              <div class = "row justify-content-center"> 
+                <h4><div id="hardest_words" class="text-center"></div><h4>
+              </div>
             </div>
-          <br>
-          <div class = "row justify-content-center"> 
-            <h4><div id="hardest_words" class="text-center"></div><h4>
-          </div>
-        </div>
+        {% endif %}
 
         <!-- Div for submitted form. Identical to section in cdi_form.html however all inputs are disabled and all answers are displayed on one page. -->
         <div class = "col-md-12 collapse" id="filled_form" role="main">
@@ -263,7 +269,7 @@
                                                     <input type="checkbox" id="{{ object.itemID }}" name="{{ object.itemID }}" value="{{ object.choices }}"{% if completed %} disabled {% endif %} {% if object.prefilled_value %} checked {% endif %}> 
                                                     <i class="material-icons check_box" aria-hidden="true">check_box</i>
                                                     <i class="material-icons check_box_outline_blank" aria-hidden="true">check_box_outline_blank</i>
-                                                    <span class="choice"> {{ object.gloss }}</span>
+                                                    <span class="choice"> {{ object.definition }}</span>
                                                 </label>
                                             </div>
                                         </div>
@@ -327,7 +333,7 @@
                                                         <input type="checkbox" id="{{ object.itemID }}" name="{{ object.itemID }}" value="{{ object.choices }}"{% if completed %} disabled {% endif %} {% if object.prefilled_value %} checked {% endif %}> 
                                                         <i class="material-icons check_box" aria-hidden="true">check_box</i>
                                                         <i class="material-icons check_box_outline_blank" aria-hidden="true">check_box_outline_blank</i>                                                        
-                                                        <span class="choice"> {{ object.gloss }}</span>
+                                                        <span class="choice"> {{ object.definition }}</span>
                                                     </label>
                                                 </div>
                                             </div>
@@ -360,597 +366,597 @@
     $( "input[id$='produces']" ).each( function (){ 
         var label_var = $(this).parent().find('span.choice');
         $(label_var).text("understands and says");
-    });      
-</script>
-
-<!-- Script for generating D3 graphs. Very long!!-->
-<script>
-    // Set variables for graph sizes and line thickness
-    var graph_height = 500;
-    var graph_width = 500;
-    var stroke_thickness = 4;
-
-    refresh_time = 10;
-
-    // Parse Django string object data. Grab relevant variables
-    var raw_data = '{{ cdi_items |escapejs }}';
-    var root = JSON.parse(raw_data);
-    var raw_age = '{{ age }}';
-    root.age = JSON.parse(raw_age);
-    root.completed = '{{ completed }}';
-    root.instrument_name = '{{ instrument_name }}';
-
-    // Load word-level data for participant. Parse into 2 or 3 bins depending on instrument type.
-    var words = root.filter(function(d) { return d.item_type == "word"; });
-    $.each(words, function(index, value){
-        value.num_value = 'neither';
-        if (root.instrument_name.indexOf('WS') > -1) {
-            if (value.prefilled_value) {
-                value.num_value = 'produces';
-            }
-        } else if (root.instrument_name.indexOf('WG') > -1) {
-            if (value.choices[0][2]) {
-                value.num_value = 'understands';
-            } else if (value.choices[1][2]) {
-                value.num_value = 'produces';
-            }
-        }
     });
-
-    // Sort words into bins as 'understands' (only), 'understands'|'produces', and 'produces' (only)
-    var raw_words_understood = words.filter(function(d) { return d.num_value == 'understands' ; }).length;
-    var words_understood = words.filter(function(d) { return d.num_value == 'produces' | d.num_value == 'understands' ; }).length;
-    var words_produced = words.filter(function(d) { return (d.num_value == 'produces'); }).length;
-
-    // Create summary text depending on number of words in bins.
-
-    if (words_produced > 0 & raw_words_understood > 0) {
-        var num_words = "{% trans 'My child says PPP words and understands UUU words.' %}".replace(/PPP/g, words_produced).replace(/UUU/g, words_understood)
-    } else if (words_produced > 0 & raw_words_understood == 0) {
-        var num_words = "{% trans 'My child says PPP words.' %}".replace(/PPP/g, words_produced)
-    } else if (words_produced == 0 & raw_words_understood > 0) {
-        var num_words = "{% trans 'My child understands UUU words.' %}".replace(/UUU/g, words_understood)
-    }
-    
-
-    // Place text variable into div
-    if (words_produced > 0 | raw_words_understood > 0) {
-        $("#num_words_text").html("<h2>"+num_words+"</h2>");
-    }
-
-    // Generate a category-level summary of vocabulary
-    var categorySize = d3.nest()
-        .key(function(d) { return d.category; })
-        .key(function(d) { return d.num_value; })
-        .rollup(function(v) { return v.length; })
-        .entries(words);
-
-    // Declare variables for word_categories graph
-    var word_categories;
-    var prod_graph_width = graph_width;
-    var comp_graph_width = graph_width;
-    var new_chart_understood;
-
-    // Load csv matching informal category labels with formal category titles and generate 2 category-level summary graph.
-    // If chid only had responses of one type (all words are 'understands' or all words are 'produces'), produce 1 graph and double its width
-    d3.csv("{% static 'graph_data/word_categories.csv' %}", function(data) {
-        word_categories = data;
-        var list_names = objectMap(categorySize,'key')
-        updateCategoryInfo();
-
-        $.each(word_categories, function(index){
-            var category_id = word_categories[index].id;
-            var name_location = list_names.indexOf(category_id)
-            if (name_location > -1 ) {
-            categorySize[name_location].category_name = word_categories[index][root.instrument_name];
-            }
-        });
-
-        if (raw_words_understood == 0 ) {
-            prod_graph_width = graph_width*2;
-        }
-
-        if (words_produced == 0 ) {
-            comp_graph_width = graph_width*2;
-        }
-
-
-        if (raw_words_understood > 0) {
-            new_chart_understood = c3.generate({
-                bindto: '#categories_charts_understood',
-                data: {
-                    x: '{% trans "Category" %}',
-                    columns: [
-                        ['{% trans "Category" %}'].concat(objectMap(categorySize,'category_name')),
-                        ['{% trans "Percentage of Words Understood (%)" %}'].concat(objectMap(categorySize,'prop_understood'))
-                    ],
-                    type: 'bar',
-                    color : function (color, d) {
-                        return d.index? categorySize[d.index].hex : color;
-                    },                                                     
-                },
-                axis: {
-                  rotated: true,
-                    x: {
-                        type: 'category',
-                        tick: {
-                            width: 110
-                        } 
-                    },
-                    y: {
-                        label: {
-                            text: '{% trans "Percentage of Words Understood (%)" %}',
-                            position: 'outer-center'
-                        }
-                    }                    
-
-                },
-                legend: {
-                    show: false
-                }                   
-
-            });
-
-            setTimeout(function () {
-                if (words_produced > 0){
-                    new_chart_understood.resize({
-                        height: $("#predicted_chart").innerWidth()*1.2,
-                        width: $("#categories_charts_understood").innerWidth()*0.85
-                })} else {
-                    $('#categories_charts_produced').remove();
-                    $('#categories_charts_understood').removeClass('col-md-6').addClass('col-md-12');
-                    new_chart_understood.resize({
-                        height: $("#predicted_chart").innerWidth()*1.2,
-                        width: $("#categories_charts_understood").innerWidth()*0.85
-                    })
-                }
-
-            }, refresh_time);
-        }
-
-        if (words_produced > 0) {
-            new_chart_produced = c3.generate({
-                bindto: '#categories_charts_produced',
-                data: {
-                    x: '{% trans "Category" %}',
-                    columns: [
-                        ['{% trans "Category" %}'].concat(objectMap(categorySize,'category_name')),
-                        ['{% trans "Percentage of Words Spoken (%)" %}'].concat(objectMap(categorySize,'prop_produced'))
-                    ],
-                    type: 'bar',
-                    color : function (color, d) {
-                        return d.index? categorySize[d.index].hex : color;
-                    },                                                     
-                },
-                axis: {
-                  rotated: true,
-                    x: {
-                        type: 'category',
-                        tick: {
-                            width: 110
-                        }
-                        
-                    },
-                    y: {
-                        label: {
-                            text: '{% trans "Percentage of Words Spoken (%)" %}',
-                            position: 'outer-center'
-                        }
-                    }
-                },
-                legend: {
-                    show: false
-                }                 
-
-            });
-
-            setTimeout(function () {
-                if (raw_words_understood > 0){
-                    new_chart_produced.resize({
-                        height: $("#predicted_chart").innerWidth()*1.2,
-                        width: $("#categories_charts_produced").innerWidth()*0.85
-                })} else {
-                    $('#categories_charts_understood').remove();
-                    $('#categories_charts_produced').removeClass('col-md-6').addClass('col-md-12');
-                    new_chart_produced.resize({
-                        height: $("#predicted_chart").innerWidth()*1.2,
-                        width: $("#categories_charts_produced").innerWidth()*0.85
-                    })
-                }
-
-            }, refresh_time);  
-    
-        }
-
-        bestCategories();
-
-    });
-
-    // Returns a list of values for variables nested in a list of objects.
-    function objectMap (obj, variable) {
-        var values = []
-        i = 0;
-        $.each(obj, function(index){ 
-            values[i] = obj[index][variable]
-            i = i + 1;
-        });
-        return values;
-    }
-
-    // Assign categories colors. Also summary performance data for each individual category
-    function updateCategoryInfo() {
-
-        var category_colors = colorHue(categorySize.length)
-
-        $.each(categorySize, function(index, value){
-            value.color = category_colors[index]
-            value.hex = value.color.toString()
-            value.neither = 0;
-            value.understands = 0;
-            value.produces = 0;
-
-            for (var i = 0; i < categorySize[index].values.length; i++) {
-                var current_val = categorySize[index].values[i]
-                if(current_val.key == 'neither') {
-                    value.neither = current_val.values;
-                }
-                if(current_val.key == 'understands') {
-                    value.understands = current_val.values;
-                }
-                if(current_val.key == 'produces') {
-                    value.produces = current_val.values;
-                }
-
-            }
-
-
-            value.num_all = value.neither + value.understands + value.produces
-            value.prop_understood = 100*(value.understands + value.produces)/(value.num_all)
-            value.prop_produced = 100*(value.produces)/(value.num_all)
-        });
-    }
-
-    // Function for shuffling the order of an array.
-    function shuffle(array) {
-        var currentIndex = array.length, temporaryValue, randomIndex;
-
-        while (0 !== currentIndex) {
-
-            randomIndex = Math.floor(Math.random() * currentIndex);
-            currentIndex -= 1;
-
-            temporaryValue = array[currentIndex];
-            array[currentIndex] = array[randomIndex];
-            array[randomIndex] = temporaryValue;
-        }
-
-        return array;
-    }
-
-    // Function for generating a color palette spanning the color range and dependent on the # of unique hues needed
-    function colorHue(n) {
-        var hues = []
-        var step_count = 360/n
-
-        for (var i = 0; i < n; i++) {
-            hue = Math.round(15 + i*step_count);
-            hues.push(d3.hcl(hue, 100, 60));
-        }
-        return shuffle(hues);
-    }
-
-    // Declare both category charts
-    var chart_understood;
-    var chart_produced;
-
-
-    var bestProdCat_num = 0;
-    var bestCompCat_num = 0;
-    var bestProdCat;
-    var bestCompCat;
-
-    // Determine categories with highest performance and produce a text summary for presentation
-    function bestCategories() {
-
-        for (var i = 0; i < categorySize.length; i++) {
-            if (categorySize[i].prop_produced > bestProdCat_num & words_produced > 0) {
-                bestProdCat_num = categorySize[i].prop_produced;
-                bestProdCat = categorySize[i].category_name;
-            }
-
-            if (categorySize[i].prop_understood > bestCompCat_num & raw_words_understood > 0) {
-                bestCompCat_num = categorySize[i].prop_understood;
-                bestCompCat = categorySize[i].category_name;
-            }
-        }
-
-        if (typeof(bestProdCat) !== 'undefined') {
-            $("#best_categories").append('{% trans "My child says the most words in the bestProdCat category." %}<br>'.replace(/bestProdCat/g, bestProdCat));
-        }
-
-        if (typeof(bestCompCat) !== 'undefined') {
-            $("#best_categories").append('{% trans "My child says the most words in the bestCompCat category." %}<br>'.replace(/bestCompCat/g, bestCompCat));
-        }
-    }
-
-    var aoa_data;
-    var words_prod;
-    var words_comp;
-    var aoa_data_prod;
-    var aoa_data_comp;
-    var aoa_prod_combined;
-    var aoa_comp_combined;
-    var high_prod_aoa;
-    var high_comp_aoa;
-    var high_prod_word;
-    var high_comp_word;
-
-    // Merge objects by matching values in specific keys
-    function join(lookupTable, mainTable, lookupKey, mainKey, select) {
-        var l = lookupTable.length,
-        m = mainTable.length,
-        lookupIndex = [],
-        output = [];
-
-        for (var i = 0; i < l; i++) { // loop through l items
-            var row = lookupTable[i];
-            lookupIndex[row[lookupKey]] = row; // create an index for lookup table
-        }
-
-        for (var j = 0; j < m; j++) { // loop through m items
-            var y = mainTable[j];
-            var x = lookupIndex[y[mainKey]]; // get corresponding row from lookupTable
-            output.push(select(y, x)); // select only the columns you need
-        }
-
-        return output;
-    };
-
-    // Take age of acquisition (AOA) data produced by Mika Braginsky. Match it with individual's word performance to determine the words understood/produced with the highest AOA values.
-    d3.csv("{% static 'graph_data/english_aoas.csv' %}", function(data) {
-        aoa_data = data;
-
-        words_prod = words.filter(function(d) { return (d.num_value == 'produces'); });
-        words_comp = words.filter(function(d) { return (d.num_value == 'understands'); });
-
-        aoa_data_prod = aoa_data.filter(function(d) { return (d.measure == 'produces'); });
-        aoa_data_comp = aoa_data.filter(function(d) { return (d.measure == 'understands'); });
-
-        aoa_prod_combined = join(aoa_data_prod, words_prod, "words", "definition", function(word, aoa) {
-            return {
-                word: word.definition,
-                aoa: (aoa !== undefined) ? parseInt(aoa.age) : null
-            };
-        });
-
-        aoa_comp_combined = join(aoa_data_comp, words_comp, "words", "definition", function(word, aoa) {
-            return {
-                word: word.definition,
-                aoa: (aoa !== undefined) ? parseInt(aoa.age) : null
-            };
-        });
-
-        if (aoa_prod_combined.length > 0) {
-            high_prod_aoa = 0
-
-            for (var i = 0; i < aoa_prod_combined.length; i++) {
-                if (aoa_prod_combined[i].aoa > high_prod_aoa) {
-                    high_prod_aoa = aoa_prod_combined[i].aoa;
-                    high_prod_word = aoa_prod_combined[i].word;
-                }
-            }
-        }
-
-        if (aoa_comp_combined.length > 0) {
-            high_comp_aoa = 0
-
-            for (var j = 0; j < aoa_comp_combined.length; j++) {
-                if (aoa_comp_combined[j].aoa > high_comp_aoa) {
-                    high_comp_aoa = aoa_comp_combined[j].aoa;
-                    high_comp_word = aoa_comp_combined[j].word;
-                }
-            }
-        }
-
-
-        if (typeof(high_prod_word) !== 'undefined') {
-            $('#hardest_words').append('{% trans "The hardest word my child says is INSERTWORDHERE." %}<br>'.replace(/INSERTWORDHERE/g, high_prod_word))
-        }
-
-        if (typeof(high_comp_word) !== 'undefined') {
-            $('#hardest_words').append('{% trans "The hardest word my child understands is INSERTWORDHERE." %}<br>'.replace(/INSERTWORDHERE/g, high_comp_word))
-        }
-    });
-
-    var predicted_vocab;
-    var pred_prod_min;
-    var pred_comp_min;
-    var pred_prod_quant;
-    var pred_comp_quant;
-    var quant_prod;
-    var quant_age_loc_prod;
-    var adjust_prod;
-    var quant_comp;
-    var quant_age_loc_comp;
-    var adjust_comp;
-    var adjusted_quant_prod = [];
-    var adjusted_quant_comp = [];
-    var current_vocab = [];
-    var new_pred_chart;
-    var outside_warning = "<h4><font color = '#008000'> {% trans 'Sorry but it looks like your child is outside of our age range for predicting vocabulary size! This version of the CDI assessment is for children between MIN_AGE to MAX_AGE months of age' %} </font></h4>".replace(/MIN_AGE/g, "{{ min_age }}").replace(/MAX_AGE/g, "{{ max_age }}")
-
-    // If data is satisfactory (child's age is within study's age range), graph a chart predicting median growth rate adjusted for child.
-    if ((root.age > 30 | root.age < 16) & root.instrument_name.indexOf('WS') > -1) {
-        $("#predicted_chart").html(outside_warning);
-
-    } else if ((root.age > 18 | root.age < 8) & root.instrument_name.indexOf('WG') > -1) {
-        $("#predicted_chart").html(outside_warning);
-
-    } else {
-        // Generate prediction chart.
-        d3.csv("{% static 'graph_data/predicted_vocab_English.csv' %}", function(data) {
-
-            predicted_vocab = data;
-            current_ages = predicted_vocab.filter(function(d) { return (parseInt(d.age) == root.age); });
-
-            findQuantile();
-
-            quant_prod = predicted_vocab.filter(function(d) { return d.percentile == pred_prod_quant & d.measure == "production"; });
-            quant_age_loc_prod = objectMap(quant_prod,'age').indexOf(root.age.toString());
-            adjust_prod = (words_produced/(words.length)) - quant_prod[quant_age_loc_prod].pred;
-
-            for (var i = 0; i < quant_prod.length; i++) {
-                raw_adjusted_num = parseFloat(quant_prod[i].pred) + adjust_prod;
-                adjusted_num = (raw_adjusted_num < 0)? 0 : ((raw_adjusted_num > 1)? 1 : raw_adjusted_num)
-                adjusted_quant_prod[i] = {"prod_pred" : adjusted_num , "age": (parseFloat(quant_prod[i].age))};
-            }
-
-            current_vocab.push({"age": root.age, "vocab": 100*words_produced/(words.length), "name": "{% trans 'Current Spoken Vocabulary' %}", "dy": 6});
-
-            if (raw_words_understood > 0) {
-
-                quant_comp = predicted_vocab.filter(function(d) { return d.percentile == pred_prod_quant & d.measure == "comprehension"; });
-                quant_age_loc_comp = objectMap(quant_comp,'age').indexOf(root.age.toString());
-                adjust_comp = (words_understood/(words.length)) - quant_comp[quant_age_loc_comp].pred;
-
-                for (var i = 0; i < quant_comp.length; i++) {
-                    raw_adjusted_num = parseFloat(quant_comp[i].pred) + adjust_comp;
-                    adjusted_num = (raw_adjusted_num < 0)? 0 : ((raw_adjusted_num > 1)? 1 : raw_adjusted_num)
-                    adjusted_quant_comp[i] = {"comp_pred" : adjusted_num , "age": (parseFloat(quant_comp[i].age))};
-                }
-
-                current_vocab.push({"age": root.age, "vocab": 100*words_understood/(words.length),
-                 "name": "{% trans 'Current Understood Vocabulary' %}", "dy": 0});
-            }
-
-
-
-            var new_pred_chart = c3.generate({
-                bindto: '#predicted_chart',
-                data: {
-                    xs: {
-                        '{% trans "Predicted % of Words Spoken" %}': 'x1',
-                        '{% trans "Predicted % of Words Understood" %}': 'x2',
-                        '{% trans "Current Vocabulary Size" %}': 'current_age'
-                    },
-                    columns: [
-                        ['x1'].concat(objectMap(adjusted_quant_prod, 'age')),
-                        ['x2'].concat(objectMap(adjusted_quant_comp, 'age')),
-                        ['{% trans "Predicted % of Words Spoken" %}'].concat(objectMap(adjusted_quant_prod, 'prod_pred').map(function(x) { return Math.round(x * 100); })),
-                        ['{% trans "Predicted % of Words Understood" %}'].concat(objectMap(adjusted_quant_comp, 'comp_pred').map(function(x) { return Math.round(x * 100); })),
-                        ['current_age'].concat(objectMap(current_vocab, 'age')),
-                        ['{% trans "Current Vocabulary Size" %}'].concat(objectMap(current_vocab, 'vocab'))
-                    ],
-                    type: 'line',
-                    types: {
-                        '{% trans "Current Vocabulary Size" %}': 'scatter'
-                    },
-                    order: 'asc',
-                    colors: {
-                        '{% trans "Predicted % of Words Spoken" %}': '#9471f2',
-                        '{% trans "Predicted % of Words Understood" %}': '#FF9667',
-                        '{% trans "Current Vocabulary Size" %}': '#2DBC74'
-                    }
-                },
-                axis: {
-                  x: {
-                    label: {
-                        text: '{% trans "Age (in Months)" %}',
-                        position: 'outer-center',                        
-                    },
-                    tick: {
-                      values: _.range(8, 32, 2)
-                    }
-                  },
-                  y: {
-                    label: {
-                        text: '{% trans "Predicted % of Words on Test" %}',
-                        position: 'outer-middle',
-                    },
-                    tick: {
-                      values: _.range(0, 125, 25)
-                    },
-                    max: 100,
-                    min: 0,
-                    padding: {top:5, bottom:10}
-                  }
-                },
-                point: {
-                  r: 8,
-                  show: false
-                },
-                legend: {
-                    position: 'inset'
-                }
-            });
-
-
-
-            setTimeout(function () {
-                new_pred_chart.resize({
-                  height: $("#predicted_chart").innerWidth()*0.75,
-                  width: $("#predicted_chart").innerWidth()*0.9
-                });
-            }, refresh_time);
-
-        });
-
-
-    }
-
-    // Determines quantile growth rate. Originally assigned growth rate based on child's percentile ranking. Now only chooses the median growth rate.
-    function findQuantile() {
-
-        pred_prod_quant = 50
-
-        if (raw_words_understood > 0) {
-            pred_comp_quant = 50
-        }
-    }
-
-    var pred_chart;
-    var node;
-
-
-    // Function wraps lengthy text labels for proper spacing between items
-    function wrap(text, width) {
-        text.each(function() {
-            var text = d3.select(this),
-                words = text.text().split(/\s+/).reverse(),
-                word,
-                line = [],
-                lineNumber = 0,
-                lineHeight = 0.9, // ems
-                y = text.attr("y"),
-                dx = parseFloat(text.attr("dx")),
-                dy = parseFloat(text.attr("dy")),
-                tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dx", dx + "em").attr("dy", dy + "em");
-
-            while (word = words.pop()) {
-                line.push(word);
-                tspan.text(line.join(" "));
-                if (tspan.node().getComputedTextLength() > width) {
-                    line.pop();
-                    tspan.text(line.join(" "));
-                    line = [word];
-                    tspan = text.append("tspan")
-                        .attr("x", 0)
-                        .attr("y", y)
-                        .attr("dx", dx + "em")
-                        .attr("dy", ++lineNumber * lineHeight + dy + "em")
-                        .text(word);
-                }
-            }
-        });
-    }
-
-    
 
     setTimeout(function () {
         $('.fb-share-button span').css('width', '20%');
-    }, 200);
-
-
+    }, 200);      
 </script>
+
+{% if show_feedback %}
+    <!-- Script for generating D3 graphs. Very long!!-->
+    <script>
+        // Set variables for graph sizes and line thickness
+        var graph_height = 500;
+        var graph_width = 500;
+        var stroke_thickness = 4;
+
+        refresh_time = 10;
+
+        // Parse Django string object data. Grab relevant variables
+        var raw_data = '{{ cdi_items |escapejs }}';
+        var root = JSON.parse(raw_data);
+        var raw_age = '{{ age }}';
+        root.age = JSON.parse(raw_age);
+        root.completed = '{{ completed }}';
+        root.instrument_name = '{{ instrument_name }}';
+
+        // Load word-level data for participant. Parse into 2 or 3 bins depending on instrument type.
+        var words = root.filter(function(d) { return d.item_type == "word"; });
+        $.each(words, function(index, value){
+            value.num_value = 'neither';
+            if (root.instrument_name.indexOf('WS') > -1) {
+                if (value.prefilled_value) {
+                    value.num_value = 'produces';
+                }
+            } else if (root.instrument_name.indexOf('WG') > -1) {
+                if (value.choices[0][2]) {
+                    value.num_value = 'understands';
+                } else if (value.choices[1][2]) {
+                    value.num_value = 'produces';
+                }
+            }
+        });
+
+        // Sort words into bins as 'understands' (only), 'understands'|'produces', and 'produces' (only)
+        var raw_words_understood = words.filter(function(d) { return d.num_value == 'understands' ; }).length;
+        var words_understood = words.filter(function(d) { return d.num_value == 'produces' | d.num_value == 'understands' ; }).length;
+        var words_produced = words.filter(function(d) { return (d.num_value == 'produces'); }).length;
+
+        // Create summary text depending on number of words in bins.
+
+        if (words_produced > 0 & raw_words_understood > 0) {
+            var num_words = "{% trans 'My child says PPP words and understands UUU words.' %}".replace(/PPP/g, words_produced).replace(/UUU/g, words_understood)
+        } else if (words_produced > 0 & raw_words_understood == 0) {
+            var num_words = "{% trans 'My child says PPP words.' %}".replace(/PPP/g, words_produced)
+        } else if (words_produced == 0 & raw_words_understood > 0) {
+            var num_words = "{% trans 'My child understands UUU words.' %}".replace(/UUU/g, words_understood)
+        }
+        
+
+        // Place text variable into div
+        if (words_produced > 0 | raw_words_understood > 0) {
+            $("#num_words_text").html("<h2>"+num_words+"</h2>");
+        }
+
+        // Generate a category-level summary of vocabulary
+        var categorySize = d3.nest()
+            .key(function(d) { return d.category; })
+            .key(function(d) { return d.num_value; })
+            .rollup(function(v) { return v.length; })
+            .entries(words);
+
+        // Declare variables for word_categories graph
+        var word_categories;
+        var prod_graph_width = graph_width;
+        var comp_graph_width = graph_width;
+        var new_chart_understood;
+
+        // Load csv matching informal category labels with formal category titles and generate 2 category-level summary graph.
+        // If chid only had responses of one type (all words are 'understands' or all words are 'produces'), produce 1 graph and double its width
+        d3.csv("{% static 'graph_data/word_categories.csv' %}", function(data) {
+            word_categories = data;
+            var list_names = objectMap(categorySize,'key')
+            updateCategoryInfo();
+
+            $.each(word_categories, function(index){
+                var category_id = word_categories[index].id;
+                var name_location = list_names.indexOf(category_id)
+                if (name_location > -1 ) {
+                categorySize[name_location].category_name = word_categories[index][root.instrument_name];
+                }
+            });
+
+            if (raw_words_understood == 0 ) {
+                prod_graph_width = graph_width*2;
+            }
+
+            if (words_produced == 0 ) {
+                comp_graph_width = graph_width*2;
+            }
+
+
+            if (raw_words_understood > 0) {
+                new_chart_understood = c3.generate({
+                    bindto: '#categories_charts_understood',
+                    data: {
+                        x: '{% trans "Category" %}',
+                        columns: [
+                            ['{% trans "Category" %}'].concat(objectMap(categorySize,'category_name')),
+                            ['{% trans "Percentage of Words Understood (%)" %}'].concat(objectMap(categorySize,'prop_understood'))
+                        ],
+                        type: 'bar',
+                        color : function (color, d) {
+                            return d.index? categorySize[d.index].hex : color;
+                        },                                                     
+                    },
+                    axis: {
+                      rotated: true,
+                        x: {
+                            type: 'category',
+                            tick: {
+                                width: 110
+                            } 
+                        },
+                        y: {
+                            label: {
+                                text: '{% trans "Percentage of Words Understood (%)" %}',
+                                position: 'outer-center'
+                            }
+                        }                    
+
+                    },
+                    legend: {
+                        show: false
+                    }                   
+
+                });
+
+                setTimeout(function () {
+                    if (words_produced > 0){
+                        new_chart_understood.resize({
+                            height: $("#predicted_chart").innerWidth()*1.2,
+                            width: $("#categories_charts_understood").innerWidth()*0.85
+                    })} else {
+                        $('#categories_charts_produced').remove();
+                        $('#categories_charts_understood').removeClass('col-md-6').addClass('col-md-12');
+                        new_chart_understood.resize({
+                            height: $("#predicted_chart").innerWidth()*1.2,
+                            width: $("#categories_charts_understood").innerWidth()*0.85
+                        })
+                    }
+
+                }, refresh_time);
+            }
+
+            if (words_produced > 0) {
+                new_chart_produced = c3.generate({
+                    bindto: '#categories_charts_produced',
+                    data: {
+                        x: '{% trans "Category" %}',
+                        columns: [
+                            ['{% trans "Category" %}'].concat(objectMap(categorySize,'category_name')),
+                            ['{% trans "Percentage of Words Spoken (%)" %}'].concat(objectMap(categorySize,'prop_produced'))
+                        ],
+                        type: 'bar',
+                        color : function (color, d) {
+                            return d.index? categorySize[d.index].hex : color;
+                        },                                                     
+                    },
+                    axis: {
+                      rotated: true,
+                        x: {
+                            type: 'category',
+                            tick: {
+                                width: 110
+                            }
+                            
+                        },
+                        y: {
+                            label: {
+                                text: '{% trans "Percentage of Words Spoken (%)" %}',
+                                position: 'outer-center'
+                            }
+                        }
+                    },
+                    legend: {
+                        show: false
+                    }                 
+
+                });
+
+                setTimeout(function () {
+                    if (raw_words_understood > 0){
+                        new_chart_produced.resize({
+                            height: $("#predicted_chart").innerWidth()*1.2,
+                            width: $("#categories_charts_produced").innerWidth()*0.85
+                    })} else {
+                        $('#categories_charts_understood').remove();
+                        $('#categories_charts_produced').removeClass('col-md-6').addClass('col-md-12');
+                        new_chart_produced.resize({
+                            height: $("#predicted_chart").innerWidth()*1.2,
+                            width: $("#categories_charts_produced").innerWidth()*0.85
+                        })
+                    }
+
+                }, refresh_time);  
+        
+            }
+
+            bestCategories();
+
+        });
+
+        // Returns a list of values for variables nested in a list of objects.
+        function objectMap (obj, variable) {
+            var values = []
+            i = 0;
+            $.each(obj, function(index){ 
+                values[i] = obj[index][variable]
+                i = i + 1;
+            });
+            return values;
+        }
+
+        // Assign categories colors. Also summary performance data for each individual category
+        function updateCategoryInfo() {
+
+            var category_colors = colorHue(categorySize.length)
+
+            $.each(categorySize, function(index, value){
+                value.color = category_colors[index]
+                value.hex = value.color.toString()
+                value.neither = 0;
+                value.understands = 0;
+                value.produces = 0;
+
+                for (var i = 0; i < categorySize[index].values.length; i++) {
+                    var current_val = categorySize[index].values[i]
+                    if(current_val.key == 'neither') {
+                        value.neither = current_val.values;
+                    }
+                    if(current_val.key == 'understands') {
+                        value.understands = current_val.values;
+                    }
+                    if(current_val.key == 'produces') {
+                        value.produces = current_val.values;
+                    }
+
+                }
+
+
+                value.num_all = value.neither + value.understands + value.produces
+                value.prop_understood = 100*(value.understands + value.produces)/(value.num_all)
+                value.prop_produced = 100*(value.produces)/(value.num_all)
+            });
+        }
+
+        // Function for shuffling the order of an array.
+        function shuffle(array) {
+            var currentIndex = array.length, temporaryValue, randomIndex;
+
+            while (0 !== currentIndex) {
+
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex -= 1;
+
+                temporaryValue = array[currentIndex];
+                array[currentIndex] = array[randomIndex];
+                array[randomIndex] = temporaryValue;
+            }
+
+            return array;
+        }
+
+        // Function for generating a color palette spanning the color range and dependent on the # of unique hues needed
+        function colorHue(n) {
+            var hues = []
+            var step_count = 360/n
+
+            for (var i = 0; i < n; i++) {
+                hue = Math.round(15 + i*step_count);
+                hues.push(d3.hcl(hue, 100, 60));
+            }
+            return shuffle(hues);
+        }
+
+        // Declare both category charts
+        var chart_understood;
+        var chart_produced;
+
+
+        var bestProdCat_num = 0;
+        var bestCompCat_num = 0;
+        var bestProdCat;
+        var bestCompCat;
+
+        // Determine categories with highest performance and produce a text summary for presentation
+        function bestCategories() {
+
+            for (var i = 0; i < categorySize.length; i++) {
+                if (categorySize[i].prop_produced > bestProdCat_num & words_produced > 0) {
+                    bestProdCat_num = categorySize[i].prop_produced;
+                    bestProdCat = categorySize[i].category_name;
+                }
+
+                if (categorySize[i].prop_understood > bestCompCat_num & raw_words_understood > 0) {
+                    bestCompCat_num = categorySize[i].prop_understood;
+                    bestCompCat = categorySize[i].category_name;
+                }
+            }
+
+            if (typeof(bestProdCat) !== 'undefined') {
+                $("#best_categories").append('{% trans "My child says the most words in the bestProdCat category." %}<br>'.replace(/bestProdCat/g, bestProdCat));
+            }
+
+            if (typeof(bestCompCat) !== 'undefined') {
+                $("#best_categories").append('{% trans "My child says the most words in the bestCompCat category." %}<br>'.replace(/bestCompCat/g, bestCompCat));
+            }
+        }
+
+        var aoa_data;
+        var words_prod;
+        var words_comp;
+        var aoa_data_prod;
+        var aoa_data_comp;
+        var aoa_prod_combined;
+        var aoa_comp_combined;
+        var high_prod_aoa;
+        var high_comp_aoa;
+        var high_prod_word;
+        var high_comp_word;
+
+        // Merge objects by matching values in specific keys
+        function join(lookupTable, mainTable, lookupKey, mainKey, select) {
+            var l = lookupTable.length,
+            m = mainTable.length,
+            lookupIndex = [],
+            output = [];
+
+            for (var i = 0; i < l; i++) { // loop through l items
+                var row = lookupTable[i];
+                lookupIndex[row[lookupKey]] = row; // create an index for lookup table
+            }
+
+            for (var j = 0; j < m; j++) { // loop through m items
+                var y = mainTable[j];
+                var x = lookupIndex[y[mainKey]]; // get corresponding row from lookupTable
+                output.push(select(y, x)); // select only the columns you need
+            }
+
+            return output;
+        };
+
+        // Take age of acquisition (AOA) data produced by Mika Braginsky. Match it with individual's word performance to determine the words understood/produced with the highest AOA values.
+        d3.csv("{% static 'graph_data/english_aoas.csv' %}", function(data) {
+            aoa_data = data;
+
+            words_prod = words.filter(function(d) { return (d.num_value == 'produces'); });
+            words_comp = words.filter(function(d) { return (d.num_value == 'understands'); });
+
+            aoa_data_prod = aoa_data.filter(function(d) { return (d.measure == 'produces'); });
+            aoa_data_comp = aoa_data.filter(function(d) { return (d.measure == 'understands'); });
+
+            aoa_prod_combined = join(aoa_data_prod, words_prod, "words", "definition", function(word, aoa) {
+                return {
+                    word: word.definition,
+                    aoa: (aoa !== undefined) ? parseInt(aoa.age) : null
+                };
+            });
+
+            aoa_comp_combined = join(aoa_data_comp, words_comp, "words", "definition", function(word, aoa) {
+                return {
+                    word: word.definition,
+                    aoa: (aoa !== undefined) ? parseInt(aoa.age) : null
+                };
+            });
+
+            if (aoa_prod_combined.length > 0) {
+                high_prod_aoa = 0
+
+                for (var i = 0; i < aoa_prod_combined.length; i++) {
+                    if (aoa_prod_combined[i].aoa > high_prod_aoa) {
+                        high_prod_aoa = aoa_prod_combined[i].aoa;
+                        high_prod_word = aoa_prod_combined[i].word;
+                    }
+                }
+            }
+
+            if (aoa_comp_combined.length > 0) {
+                high_comp_aoa = 0
+
+                for (var j = 0; j < aoa_comp_combined.length; j++) {
+                    if (aoa_comp_combined[j].aoa > high_comp_aoa) {
+                        high_comp_aoa = aoa_comp_combined[j].aoa;
+                        high_comp_word = aoa_comp_combined[j].word;
+                    }
+                }
+            }
+
+
+            if (typeof(high_prod_word) !== 'undefined') {
+                $('#hardest_words').append('{% trans "The hardest word my child says is INSERTWORDHERE." %}<br>'.replace(/INSERTWORDHERE/g, high_prod_word))
+            }
+
+            if (typeof(high_comp_word) !== 'undefined') {
+                $('#hardest_words').append('{% trans "The hardest word my child understands is INSERTWORDHERE." %}<br>'.replace(/INSERTWORDHERE/g, high_comp_word))
+            }
+        });
+
+        var predicted_vocab;
+        var pred_prod_min;
+        var pred_comp_min;
+        var pred_prod_quant;
+        var pred_comp_quant;
+        var quant_prod;
+        var quant_age_loc_prod;
+        var adjust_prod;
+        var quant_comp;
+        var quant_age_loc_comp;
+        var adjust_comp;
+        var adjusted_quant_prod = [];
+        var adjusted_quant_comp = [];
+        var current_vocab = [];
+        var new_pred_chart;
+        var outside_warning = "<h4><font color = '#008000'> {% trans 'Sorry but it looks like your child is outside of our age range for predicting vocabulary size! This version of the CDI assessment is for children between MIN_AGE to MAX_AGE months of age' %} </font></h4>".replace(/MIN_AGE/g, "{{ min_age }}").replace(/MAX_AGE/g, "{{ max_age }}")
+
+        // If data is satisfactory (child's age is within study's age range), graph a chart predicting median growth rate adjusted for child.
+        if ((root.age > 30 | root.age < 16) & root.instrument_name.indexOf('WS') > -1) {
+            $("#predicted_chart").html(outside_warning);
+
+        } else if ((root.age > 18 | root.age < 8) & root.instrument_name.indexOf('WG') > -1) {
+            $("#predicted_chart").html(outside_warning);
+
+        } else {
+            // Generate prediction chart.
+            d3.csv("{% static 'graph_data/predicted_vocab_English.csv' %}", function(data) {
+
+                predicted_vocab = data;
+                current_ages = predicted_vocab.filter(function(d) { return (parseInt(d.age) == root.age); });
+
+                findQuantile();
+
+                quant_prod = predicted_vocab.filter(function(d) { return d.percentile == pred_prod_quant & d.measure == "production"; });
+                quant_age_loc_prod = objectMap(quant_prod,'age').indexOf(root.age.toString());
+                adjust_prod = (words_produced/(words.length)) - quant_prod[quant_age_loc_prod].pred;
+
+                for (var i = 0; i < quant_prod.length; i++) {
+                    raw_adjusted_num = parseFloat(quant_prod[i].pred) + adjust_prod;
+                    adjusted_num = (raw_adjusted_num < 0)? 0 : ((raw_adjusted_num > 1)? 1 : raw_adjusted_num)
+                    adjusted_quant_prod[i] = {"prod_pred" : adjusted_num , "age": (parseFloat(quant_prod[i].age))};
+                }
+
+                current_vocab.push({"age": root.age, "vocab": 100*words_produced/(words.length), "name": "{% trans 'Current Spoken Vocabulary' %}", "dy": 6});
+
+                if (raw_words_understood > 0) {
+
+                    quant_comp = predicted_vocab.filter(function(d) { return d.percentile == pred_prod_quant & d.measure == "comprehension"; });
+                    quant_age_loc_comp = objectMap(quant_comp,'age').indexOf(root.age.toString());
+                    adjust_comp = (words_understood/(words.length)) - quant_comp[quant_age_loc_comp].pred;
+
+                    for (var i = 0; i < quant_comp.length; i++) {
+                        raw_adjusted_num = parseFloat(quant_comp[i].pred) + adjust_comp;
+                        adjusted_num = (raw_adjusted_num < 0)? 0 : ((raw_adjusted_num > 1)? 1 : raw_adjusted_num)
+                        adjusted_quant_comp[i] = {"comp_pred" : adjusted_num , "age": (parseFloat(quant_comp[i].age))};
+                    }
+
+                    current_vocab.push({"age": root.age, "vocab": 100*words_understood/(words.length),
+                     "name": "{% trans 'Current Understood Vocabulary' %}", "dy": 0});
+                }
+
+
+
+                var new_pred_chart = c3.generate({
+                    bindto: '#predicted_chart',
+                    data: {
+                        xs: {
+                            '{% trans "Predicted % of Words Spoken" %}': 'x1',
+                            '{% trans "Predicted % of Words Understood" %}': 'x2',
+                            '{% trans "Current Vocabulary Size" %}': 'current_age'
+                        },
+                        columns: [
+                            ['x1'].concat(objectMap(adjusted_quant_prod, 'age')),
+                            ['x2'].concat(objectMap(adjusted_quant_comp, 'age')),
+                            ['{% trans "Predicted % of Words Spoken" %}'].concat(objectMap(adjusted_quant_prod, 'prod_pred').map(function(x) { return Math.round(x * 100); })),
+                            ['{% trans "Predicted % of Words Understood" %}'].concat(objectMap(adjusted_quant_comp, 'comp_pred').map(function(x) { return Math.round(x * 100); })),
+                            ['current_age'].concat(objectMap(current_vocab, 'age')),
+                            ['{% trans "Current Vocabulary Size" %}'].concat(objectMap(current_vocab, 'vocab'))
+                        ],
+                        type: 'line',
+                        types: {
+                            '{% trans "Current Vocabulary Size" %}': 'scatter'
+                        },
+                        order: 'asc',
+                        colors: {
+                            '{% trans "Predicted % of Words Spoken" %}': '#9471f2',
+                            '{% trans "Predicted % of Words Understood" %}': '#FF9667',
+                            '{% trans "Current Vocabulary Size" %}': '#2DBC74'
+                        }
+                    },
+                    axis: {
+                      x: {
+                        label: {
+                            text: '{% trans "Age (in Months)" %}',
+                            position: 'outer-center',                        
+                        },
+                        tick: {
+                          values: _.range(8, 32, 2)
+                        }
+                      },
+                      y: {
+                        label: {
+                            text: '{% trans "Predicted % of Words on Test" %}',
+                            position: 'outer-middle',
+                        },
+                        tick: {
+                          values: _.range(0, 125, 25)
+                        },
+                        max: 100,
+                        min: 0,
+                        padding: {top:5, bottom:10}
+                      }
+                    },
+                    point: {
+                      r: 8,
+                      show: false
+                    },
+                    legend: {
+                        position: 'inset'
+                    }
+                });
+
+
+
+                setTimeout(function () {
+                    new_pred_chart.resize({
+                      height: $("#predicted_chart").innerWidth()*0.75,
+                      width: $("#predicted_chart").innerWidth()*0.9
+                    });
+                }, refresh_time);
+
+            });
+
+
+        }
+
+        // Determines quantile growth rate. Originally assigned growth rate based on child's percentile ranking. Now only chooses the median growth rate.
+        function findQuantile() {
+
+            pred_prod_quant = 50
+
+            if (raw_words_understood > 0) {
+                pred_comp_quant = 50
+            }
+        }
+
+        var pred_chart;
+        var node;
+
+
+        // Function wraps lengthy text labels for proper spacing between items
+        function wrap(text, width) {
+            text.each(function() {
+                var text = d3.select(this),
+                    words = text.text().split(/\s+/).reverse(),
+                    word,
+                    line = [],
+                    lineNumber = 0,
+                    lineHeight = 0.9, // ems
+                    y = text.attr("y"),
+                    dx = parseFloat(text.attr("dx")),
+                    dy = parseFloat(text.attr("dy")),
+                    tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dx", dx + "em").attr("dy", dy + "em");
+
+                while (word = words.pop()) {
+                    line.push(word);
+                    tspan.text(line.join(" "));
+                    if (tspan.node().getComputedTextLength() > width) {
+                        line.pop();
+                        tspan.text(line.join(" "));
+                        line = [word];
+                        tspan = text.append("tspan")
+                            .attr("x", 0)
+                            .attr("y", y)
+                            .attr("dx", dx + "em")
+                            .attr("dy", ++lineNumber * lineHeight + dy + "em")
+                            .text(word);
+                    }
+                }
+            });
+        }
+
+    </script>
+{% endif %}
+
 </body>
 </html>
