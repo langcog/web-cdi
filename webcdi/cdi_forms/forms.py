@@ -265,4 +265,9 @@ class ContactForm(forms.Form):
         self.helper.form_class = 'form-horizontal'
         self.helper.label_class = 'col-lg-3'
         self.helper.field_class = 'col-lg-9'
-        self.helper.layout = Layout(Field('contact_name'), Field('contact_email'), Field('contact_id'), Field('content'), Div(Submit('submit','Submit'), css_class="col-lg-offset-3 col-lg-9 text-center"))
+        self.helper.layout = Layout(
+            Field('contact_name'), 
+            Field('contact_email'), 
+            Field('contact_id', css_class = "form-control-plaintext"), 
+            Field('content'), 
+            Div(Submit('submit','Submit'), css_class="col-lg-offset-3 col-lg-9 text-center"))
