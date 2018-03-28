@@ -18,7 +18,7 @@ PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__)) # Declare project file
 
 isoLangs = json.load(codecs.open(PROJECT_ROOT + '/../' + 'languages.json', 'r', 'utf-8')) # Load up languages stored in languages.json in project root for other_languages question
 
-language_choices = [(v['name'],v['name']) for k,v in isoLangs.iteritems()] # Create a tuple of possible other languages child is exposed to
+language_choices = [(v['name'],v['nativeName'] + " ("+ v['name'] + ")") for k,v in isoLangs.iteritems()] # Create a tuple of possible other languages child is exposed to
 
 # Function for converting string 'True' into boolean True
 def string_bool_coerce(val):

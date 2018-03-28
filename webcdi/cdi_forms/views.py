@@ -195,7 +195,7 @@ def background_info_form(request, hash_id):
     else:
         data['study_group'] = None
         data['alt_study_info'] = None
-        data['study_group_hint'] = ""
+        data['study_group_hint'] = _(" Not the right age? You should contact your researcher for steps on what to do next.")
     
 
     # Render CDI form with prefilled responses and study context
@@ -285,6 +285,7 @@ def prefilled_cdi_data(administration_instance):
                         group_objects = instrument_model.objects.filter(category__exact=section['id']).values(*field_values)
                         
                         x = cdi_items(group_objects, item_type['type'], prefilled_data, item_type['id'])
+                        print x
                         section['objects'] = x
                         if administration_instance.study.show_feedback: raw_objects.extend(x)
                         if any(['*' in x['definition'] for x in section['objects']]):

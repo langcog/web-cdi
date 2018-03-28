@@ -668,6 +668,7 @@ def overflow(request, username, study_name): # Page for overflowed studies. For 
         prev_visitor = ip_address.objects.filter(ip_address = visitor_ip).count() # Check if IP address was logged previously in the database (only logged for specific studies under the langcoglab account. This is under Stanford's IRB approval)
     if prev_visitor > 0 and not request.user.is_authenticated: # If IP address appears in logs and the user is not logged-in (cannot tell if a vetted reseacher)
         data['repeat'] = True # Mark as a repeat visitor. Will not be given the option to bypass in template
+    data['bypass_url'] = reverse('administer_new_parent', args=[username, study_name]) + '?bypass=true'
 
 
     return render(request, 'cdi_forms/overflow.html', data) # Render overflow page

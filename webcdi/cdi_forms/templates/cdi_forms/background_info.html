@@ -179,7 +179,7 @@
 
         var study_group = "{{ study_group }}"
         if (study_group != "None") {
-            study_group_hint = "{{ study_group_hint }}"
+            study_group_hint = "<br>{{ study_group_hint | safe }}"
         } else {
             study_group_hint = ""
         }
