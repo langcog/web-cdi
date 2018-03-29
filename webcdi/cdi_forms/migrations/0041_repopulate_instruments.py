@@ -10,6 +10,72 @@ def updateInstruments(apps, schema_editor):
     call_command('populate_instrument')
     call_command('populate_items')
 
+def fixItemOrders(apps, schema_editor):
+    administration_data = apps.get_model('researcher_UI', 'administration_data')
+
+    administration_data.objects.filter(administration__study__instrument__language = 'English', 
+        administration__study__instrument__form = 'WS', 
+        item_ID='item_292').update(item_ID='item_XXX')
+    administration_data.objects.filter(administration__study__instrument__language = 'English', 
+        administration__study__instrument__form = 'WS', 
+        item_ID='item_293').update(item_ID='item_292')
+    administration_data.objects.filter(administration__study__instrument__language = 'English', 
+        administration__study__instrument__form = 'WS', 
+        item_ID='item_XXX').update(item_ID='item_293')
+
+    administration_data.objects.filter(administration__study__instrument__language = 'English', 
+        administration__study__instrument__form = 'WS', 
+        item_ID='item_282').update(item_ID='item_YYY')
+    administration_data.objects.filter(administration__study__instrument__language = 'English', 
+        administration__study__instrument__form = 'WS', 
+        item_ID='item_283').update(item_ID='item_282')
+    administration_data.objects.filter(administration__study__instrument__language = 'English', 
+        administration__study__instrument__form = 'WS', 
+        item_ID='item_YYY').update(item_ID='item_283')
+
+    administration_data.objects.filter(administration__study__instrument__language = 'English', 
+        administration__study__instrument__form = 'WS', 
+        item_ID='item_131').update(item_ID='item_ZZZ')
+    administration_data.objects.filter(administration__study__instrument__language = 'English', 
+        administration__study__instrument__form = 'WS', 
+        item_ID='item_132').update(item_ID='item_131')
+    administration_data.objects.filter(administration__study__instrument__language = 'English', 
+        administration__study__instrument__form = 'WS', 
+        item_ID='item_ZZZ').update(item_ID='item_132')
+
+def reverseItemOrders(apps, schema_editor):
+    administration_data = apps.get_model('researcher_UI', 'administration_data')
+
+    administration_data.objects.filter(administration__study__instrument__language = 'English', 
+        administration__study__instrument__form = 'WS', 
+        item_ID='item_293').update(item_ID='item_XXX')
+    administration_data.objects.filter(administration__study__instrument__language = 'English', 
+        administration__study__instrument__form = 'WS', 
+        item_ID='item_292').update(item_ID='item_293')
+    administration_data.objects.filter(administration__study__instrument__language = 'English', 
+        administration__study__instrument__form = 'WS', 
+        item_ID='item_XXX').update(item_ID='item_292')
+
+    administration_data.objects.filter(administration__study__instrument__language = 'English', 
+        administration__study__instrument__form = 'WS', 
+        item_ID='item_283').update(item_ID='item_YYY')
+    administration_data.objects.filter(administration__study__instrument__language = 'English', 
+        administration__study__instrument__form = 'WS', 
+        item_ID='item_282').update(item_ID='item_283')
+    administration_data.objects.filter(administration__study__instrument__language = 'English', 
+        administration__study__instrument__form = 'WS', 
+        item_ID='item_YYY').update(item_ID='item_282')
+
+    administration_data.objects.filter(administration__study__instrument__language = 'English', 
+        administration__study__instrument__form = 'WS', 
+        item_ID='item_132').update(item_ID='item_ZZZ')
+    administration_data.objects.filter(administration__study__instrument__language = 'English', 
+        administration__study__instrument__form = 'WS', 
+        item_ID='item_131').update(item_ID='item_132')
+    administration_data.objects.filter(administration__study__instrument__language = 'English', 
+        administration__study__instrument__form = 'WS', 
+        item_ID='item_ZZZ').update(item_ID='item_131')
+
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -47,5 +113,6 @@ class Migration(migrations.Migration):
             name='gloss',
             field=models.CharField(blank=True, max_length=1001, null=True),
         ),
-        migrations.RunPython(updateInstruments)
+        migrations.RunPython(updateInstruments),
+        migrations.RunPython(fixItemOrders, reverseItemOrders),
     ]
