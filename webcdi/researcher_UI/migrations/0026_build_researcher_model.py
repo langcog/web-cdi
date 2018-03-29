@@ -5,6 +5,45 @@ from __future__ import unicode_literals
 from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
+import os, json
+
+def populateResearcherModel(apps, schema_editor):
+    
+    PROJECT_ROOT = settings.BASE_DIR
+    researcher_profiles = json.load(open(os.path.realpath(PROJECT_ROOT + '/researcher_profiles.json')))
+
+    researcher = apps.get_model('researcher_UI', 'researcher')
+    User = apps.get_model('auth', 'User')
+    instrument = apps.get_model('researcher_UI', 'instrument')
+
+    english_instruments = instrument.objects.filter(language = 'English')
+
+    for rp in researcher_profiles:
+        user_obj = User.objects.get(id = rp['user'], email = rp['email'])
+        researcher_obj, created = researcher.objects.get_or_create(user = user_obj)
+        user_obj.first_name = rp['first_name']
+        user_obj.last_name = rp['last_name']
+        researcher_obj.institution = rp['institution']
+        researcher_obj.position = rp['position']
+        user_obj.save()
+        researcher_obj.allowed_instruments.add(*english_instruments)
+        researcher_obj.save()
+
+
+def removeResearcherModel(apps, schema_editor):
+    
+    PROJECT_ROOT = settings.BASE_DIR
+    researcher_profiles = json.load(open(os.path.realpath(PROJECT_ROOT + '/researcher_profiles.json')))
+
+    researcher = apps.get_model('researcher_UI', 'researcher')
+    User = apps.get_model('auth', 'User')
+
+    for rp in researcher_profiles:
+        user_obj = User.objects.get(id = rp['user'], email = rp['email'])
+        researcher.objects.filter(user = user_obj).delete()
+        user_obj.first_name = ''
+        user_obj.last_name = ''
+        user_obj.save()
 
 
 class Migration(migrations.Migration):
@@ -19,9 +58,11 @@ class Migration(migrations.Migration):
             name='researcher',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('institution', models.CharField(max_length=101, verbose_name=b'Name of institution')),
+                ('institution', models.CharField(max_length=101, verbose_name=b'Name of Institution')),
                 ('position', models.CharField(max_length=101, verbose_name=b'Position in Institution')),
                 ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('allowed_instruments', models.ManyToManyField(to='researcher_UI.instrument', verbose_name = "Instruments this researcher has access to")),
             ],
         ),
+        migrations.RunPython(populateResearcherModel, removeResearcherModel),
     ]

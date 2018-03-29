@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from .forms import AddStudyForm, RenameStudyForm, AddPairedStudyForm
-from .models import study, administration, administration_data, get_meta_header, get_background_header, payment_code, ip_address
+from .models import researcher, study, administration, administration_data, get_meta_header, get_background_header, payment_code, ip_address
 import codecs, json, os, re, random, csv, datetime, cStringIO, math, StringIO, zipfile
 from .tables  import StudyAdministrationTable
 from django_tables2   import RequestConfig
@@ -281,6 +281,9 @@ def console(request, study_name = None, num_per_page = 20): # Main giant functio
         username = None # Set username to None at first
         if request.user.is_authenticated: # If logged in (should be)
             username = request.user.username # Set username to current user's username
+
+        researcher_obj, created = researcher.objects.get_or_create(user = request.user)
+
         context = dict() # Create a dictionary of data related to template rendering such as username, studies associated with username, information on currently viewed study, and number of administrations to show.
         context['username'] =  username 
         context['studies'] = study.objects.filter(researcher = request.user).order_by('id')
@@ -413,15 +416,15 @@ def rename_study(request, study_name): # Function for study settings modal
 @login_required 
 def add_study(request): # Function for adding studies modal
     data = {}
+    researcher = request.user # Get username for logged-in user
+
     if request.method == 'POST' : # If submitting data
         form = AddStudyForm(request.POST) # Grab submitted form
 
         if form.is_valid(): # If form passed validation checks in forms.py
 
             study_instance = form.save(commit=False) # Save study object but do not commit to database just yet
-            researcher = request.user
             study_name = form.cleaned_data.get('name')
-
             age_range = form.cleaned_data.get('age_range')
 
             try:
@@ -457,7 +460,7 @@ def add_study(request): # Function for adding studies modal
             data['stat'] = "re-render"; # Re-render form
             return render(request, 'researcher_UI/add_study_modal.html', {'form': form, 'form_name': 'Add New Study'})
     else: # If fetching modal
-        form = AddStudyForm() # Pull up blank form and render
+        form = AddStudyForm(researcher=researcher) # Pull up blank form and render
         return render(request, 'researcher_UI/add_study_modal.html', {'form': form, 'form_name': 'Add New Study'})
 
 

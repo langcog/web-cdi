@@ -10,7 +10,7 @@ from django.contrib.postgres.forms import IntegerRangeField
 # Form for creating a new study
 class AddStudyForm(BetterModelForm):
     name = forms.CharField(label='Study Name', max_length=51) # Study name
-    instrument = forms.ModelChoiceField(queryset=instrument.objects.all(), empty_label="(choose from the list)") # Study instrument (CANNOT BE CHANGED LATER)
+    instrument = forms.ModelChoiceField(queryset=instrument.objects.filter(language='English'), empty_label="(choose from the list)") # Study instrument (CANNOT BE CHANGED LATER)
     waiver = forms.CharField(widget=forms.Textarea, label='Waiver of Documentation text (no titles)', required = False) # Addition of an IRB waiver of documentation or any other instructive text can be added here
     allow_payment = forms.BooleanField(required=False, label="Would you like to pay subjects in the form of Amazon gift cards? (You will need to upload gift card codes under \"Update Study\").") # Whether study participants will be compensated in the form of gift card codes upon completion
     anon_collection = forms.BooleanField(required=False, label="Do you plan on collecting only anonymous data in this study? (e.g., posting ads on social media, mass emails, etc)") # Whether the study will have only anonymous participants (opens up a range of other settings for anonymous data collection)
@@ -33,6 +33,7 @@ class AddStudyForm(BetterModelForm):
 
     # Initiating form and field layout.
     def __init__(self, *args, **kwargs):
+        self.researcher = kwargs.pop('researcher', None)
         super(AddStudyForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_id = 'add-study'
@@ -42,6 +43,10 @@ class AddStudyForm(BetterModelForm):
         self.helper.label_class = 'col-3'
         self.helper.field_class = 'col-9'
         self.helper.form_method = 'post'
+
+        if self.researcher:
+            self.fields['instrument'] = forms.ModelChoiceField(queryset=instrument.objects.filter(researcher = self.researcher.researcher), empty_label="(choose from the list)")
+
         self.helper.form_action = reverse('add_study')
         self.helper.layout = Layout(
             Field('name'),

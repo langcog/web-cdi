@@ -28,4 +28,9 @@ class Migration(migrations.Migration):
             field=models.CharField(default='LastName', max_length=101, verbose_name='Last name'),
             preserve_default=False,
         ),
+        migrations.AlterField(
+            model_name='myregistrationsupplement',
+            name='institution',
+            field=models.CharField(max_length=101, verbose_name='Name of Institution'),
+        ),
     ]

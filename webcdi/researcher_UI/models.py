@@ -2,11 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator,MinValueValidator
 
-class researcher(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    institution = models.CharField(verbose_name = "Name of institution", max_length=101) # Name of research institution they are affiliated with
-    position = models.CharField(verbose_name = "Position in Institution", max_length=101) # Title of position within research institution
-
 # Model for individual instruments
 class instrument(models.Model):
     name = models.CharField(max_length = 51, primary_key=True) # Instrument short name
@@ -19,7 +14,14 @@ class instrument(models.Model):
         return "%s (%s %s)" % (self.verbose_name, self.language, self.form)
     class Meta:
          unique_together = ('language', 'form') # Each instrument in the database must have a unique combination of language and form type
-    
+
+class researcher(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    institution = models.CharField(verbose_name = "Name of Institution", max_length=101) # Name of research institution they are affiliated with
+    position = models.CharField(verbose_name = "Position in Institution", max_length=101) # Title of position within research institution
+    allowed_instruments = models.ManyToManyField(instrument, verbose_name = "Instruments this researcher has access to")
+    def __str__(self):
+        return "%s %s (%s, %s)" % (self.user.first_name, self.user.last_name, self.position, self.institution)
 
 # Model for individual studies
 class study(models.Model):
