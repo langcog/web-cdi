@@ -24,12 +24,12 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='english_wg',
             name='choices_link',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='cdi_forms.Choices'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.PROTECT, to='cdi_forms.Choices'),
         ),
         migrations.AddField(
             model_name='english_ws',
             name='choices_link',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='cdi_forms.Choices'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.PROTECT, to='cdi_forms.Choices'),
         ),
         migrations.AddField(
             model_name='english_ws',
