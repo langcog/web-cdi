@@ -11,9 +11,25 @@
 {{ block.super }}
 
 <p>{% trans 'Please fill the following fields to create your registration' %}</p>
-<form method="post" action="" class="form-register">{% csrf_token %}
-    {{ form|crispy }}
-    {{ supplement_form|crispy }}
+<form method="post" action="" class="form-register uniForm">{% csrf_token %}
+<!--     {{ form|crispy }}
+    {{ supplement_form|crispy }} -->
+
+	{% for field in form %}
+	    <div class="row form-group">
+	    	<div class="control-label col-lg-3">{{ field.label_tag }}</div>
+
+	    	<div class="controls col-lg-9">{{ field }}</div>
+		</div>
+	{% endfor %}
+
+	{% for field in supplement_form %}
+	    <div class="row form-group">
+	    	<div class="control-label col-lg-3">{{ field.label_tag }}</div>
+
+	    	<div class="controls col-lg-9">{{ field }}</div>
+		</div>
+	{% endfor %}
     <div>
     <button type="submit" id="id_register" class="btn btn-primary">{% trans 'Register' %}</button>
     </div>

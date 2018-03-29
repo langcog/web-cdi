@@ -15,6 +15,21 @@ from __future__ import unicode_literals
 # from registration.backends import get_backend
 # from registration.models import RegistrationProfile
 
+from registration.signals import user_registered
+from registration.models import RegistrationProfile
+from researcher_UI.models import *
+
+def save_researcher_profile_receiver(sender, user, profile, request, **kwargs):
+    researcher_profile, created = researcher.objects.get_or_create(user = profile.user)
+    profile.user.first_name = profile.supplement.first_name
+    profile.user.last_name = profile.supplement.last_name
+    researcher_profile.institution = profile.supplement.institution
+    researcher_profile.position = profile.supplement.position
+    
+    profile.user.save()
+    researcher_profile.save()
+
+user_registered.connect(save_researcher_profile_receiver)
 
 # class RegistrationCompleteView(TemplateView):
 #     """A simple template view for registration complete"""

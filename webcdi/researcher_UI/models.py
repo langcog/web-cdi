@@ -2,6 +2,10 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator,MinValueValidator
 
+class researcher(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    institution = models.CharField(verbose_name = "Name of institution", max_length=101) # Name of research institution they are affiliated with
+    position = models.CharField(verbose_name = "Position in Institution", max_length=101) # Title of position within research institution
 
 # Model for individual instruments
 class instrument(models.Model):
