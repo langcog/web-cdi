@@ -21,6 +21,7 @@ from decimal import Decimal
 from django.contrib.sites.shortcuts import get_current_site
 from ipware.ip import get_ip
 from psycopg2.extras import NumericRange
+from django.conf import settings
 
 
 
@@ -676,3 +677,112 @@ def overflow(request, username, study_name): # Page for overflowed studies. For 
 
     return render(request, 'cdi_forms/overflow.html', data) # Render overflow page
 
+def importFillablePDFs(request, study_name):
+
+    study_obj = study.objects.get(researcher= request.user, name= study_name)
+
+    PROJECT_ROOT = settings.BASE_DIR
+    instruments_json = json.load(open(os.path.realpath(PROJECT_ROOT + '/static/json/instruments.json')))
+
+    header_file_path = filter(lambda x: x['language'] == study_obj.instrument.language and x['form'] == study_obj.instrument.form, instruments_json)[0]['fillable_headers']
+
+    pdf_header_df = pd.read_csv(header_file_path)
+
+    csv_file = pd.read_csv(request.FILES['imported-file'])
+
+    admin_row = next(csv_file.iterrows())[1]
+    error_msg = None
+    new_admin_pks = []
+
+    for index, admin_row in csv_file.iterrows():
+
+        raw_sid = str(admin_row['name_of_child'])
+        if raw_sid.isdigit():
+            sid = int(raw_sid)
+        else:
+            error_msg = "Subject IDs must be numeric only."
+            break
+
+        old_rep = administration.objects.filter(study = study_obj, subject_id = sid).count()
+        due_date = datetime.datetime.strptime(admin_row['date_today'], '%m/%d/%Y')
+        new_admin = administration.objects.create(study = study_obj, subject_id = sid, repeat_num = old_rep + 1, url_hash = random_url_generator(), completed = True, due_date = due_date, last_modified = due_date)
+        new_admin_pks.append(new_admin.pk)
+
+        if admin_row['gender'] == "m":
+            sex = "M"
+        elif admin_row['gender'] == "f":
+            sex = "F"
+        else:
+            sex = "O"
+
+        dot = due_date
+        dob = datetime.datetime.strptime(admin_row['birthdate'], '%m/%d/%Y')
+        raw_age = dot - dob
+        age = int(float(raw_age.days)/(365.2425/12.0))
+
+        try:
+            new_background = BackgroundInfo.objects.create(
+                administration = new_admin,
+                age = age,
+                sex = sex,
+                birth_order = 0,
+                multi_birth_boolean = 2,
+                birth_weight_lb = 0.0,
+                born_on_due_date = 2,
+                mother_yob = 0,
+                mother_education = 0,
+                father_yob = 0,
+                father_education = 0,
+                annual_income = "Prefer not to disclose",
+                caregiver_info = 0,
+                other_languages_boolean = 2,
+                ear_infections_boolean = 2,
+                hearing_loss_boolean = 2,
+                vision_problems_boolean = 2,
+                illnesses_boolean = 2,
+                services_boolean = 2,
+                worried_boolean = 2,
+                learning_disability_boolean = 2
+                )
+        except:
+            error_msg = "Error adding age and sex information."
+            break
+
+        fillable_items = pd.DataFrame({'pdf_header':admin_row.index, 'value':admin_row.values})
+        cdi_responses = []
+        cdi_responses_df = pd.merge(pdf_header_df, fillable_items, how='left', on='pdf_header')
+
+        try:
+            for index, response_row in cdi_responses_df.iterrows():
+                if study_obj.instrument.form == 'WS':
+                    if response_row['item_type'] in ['word', 'word_form', 'word_ending'] and response_row['value'] == "Yes":
+                        item_value = 'produces'
+                    if response_row['item_type'] in ['usage', 'ending', 'combine']:
+                        item_value = response_row['value'].lower()
+                    if response_row['item_type'] == 'combination_examples':
+                        item_value = response_row['value']
+                    if response_row['item_type'] == 'complexity' and response_row['value'] in ['No', 'Yes']:
+                        if response_row['value'] == 'No':
+                            item_value = 'simple'
+                        elif response_row['value'] == 'Yes':
+                            item_value = 'complex'
+                    try:
+                        cdi_responses.append(administration_data(
+                            administration = new_admin,
+                            item_ID = response_row['itemID'],
+                            value = item_value
+                        ))
+                    except:
+                        error_msg = "Error importing item '%s' for subject_id '%s'" % (sid, response_row['itemID'])
+                        break
+
+            administration_data.objects.bulk_create(cdi_responses)
+
+        except:
+            error_msg = "Error importing administration data. Objects."
+            break
+
+    if error_msg is not None:
+        administration.objects.filter(pk__in = new_admin_pks).delete()
+
+    return "Okay" if error_msg is None else error_msg
