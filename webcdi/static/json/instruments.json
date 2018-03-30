@@ -6,7 +6,8 @@
 		"min_age": 16,
 		"max_age": 30,
 		"csv_file": "cdi_form_csv/[English_WS].csv",
-		"json_data": "cdi_forms/form_data/English_WS_meta.json"
+		"json_data": "cdi_forms/form_data/English_WS_meta.json",
+		"fillable_headers": "cdi_form_csv/EnglishWS_pdf_headers.csv"
 	},
 	{
 		"language": "English",

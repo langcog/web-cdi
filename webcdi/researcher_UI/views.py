@@ -38,7 +38,7 @@ def download_data(request, study_obj, administrations = None): # Download study 
     admin_header = ['study_name', 'subject_id','repeat_num', 'administration_id', 'link', 'completed', 'completedBackgroundInfo', 'due_date', 'last_modified','created_date']
 
     # Fetch background data variables
-    background_header = ['age','sex','zip_code','birth_order','multi_birth_boolean','multi_birth', 'birth_weight', 'born_on_due_date', 'early_or_late', 'due_date_diff', 'mother_yob', 'mother_education','father_yob', 'father_education', 'annual_income', 'child_hispanic_latino', 'child_ethnicity', 'caregiver_info', 'other_languages_boolean','other_languages','language_from', 'language_days_per_week', 'language_hours_per_day', 'ear_infections_boolean','ear_infections', 'hearing_loss_boolean','hearing_loss', 'vision_problems_boolean','vision_problems', 'illnesses_boolean','illnesses', 'services_boolean','services','worried_boolean','worried','learning_disability_boolean','learning_disability']
+    background_header = ['age','sex','zip_code','birth_order','multi_birth_boolean','multi_birth', 'birth_weight_lb', 'birth_weight_kg', 'born_on_due_date', 'early_or_late', 'due_date_diff', 'mother_yob', 'mother_education','father_yob', 'father_education', 'annual_income', 'child_hispanic_latino', 'child_ethnicity', 'caregiver_info', 'other_languages_boolean','other_languages','language_from', 'language_days_per_week', 'language_hours_per_day', 'ear_infections_boolean','ear_infections', 'hearing_loss_boolean','hearing_loss', 'vision_problems_boolean','vision_problems', 'illnesses_boolean','illnesses', 'services_boolean','services','worried_boolean','worried','learning_disability_boolean','learning_disability']
 
     # Try to properly format CDI responses for pandas dataframe
     try:
@@ -161,7 +161,7 @@ def download_cdi_format(request, study_obj, administrations = None):
 
     model_header = filter(r.match, get_model_header(study_obj.instrument.name))
     admin_header = ['study_name', 'subject_id','repeat_num', 'completed', 'last_modified']
-    background_header = ['age','sex','zip_code','birth_order','multi_birth_boolean','multi_birth', 'birth_weight', 'born_on_due_date', 'early_or_late', 'due_date_diff', 'mother_yob', 'mother_education','father_yob', 'father_education', 'annual_income', 'child_hispanic_latino', 'child_ethnicity', 'caregiver_info', 'other_languages_boolean', 'language_days_per_week', 'language_hours_per_day', 'ear_infections_boolean', 'hearing_loss_boolean', 'vision_problems_boolean', 'illnesses_boolean', 'services_boolean','worried_boolean','learning_disability_boolean']
+    background_header = ['age','sex','zip_code','birth_order','multi_birth_boolean','multi_birth', 'birth_weight_lb', 'birth_weight_kg', 'born_on_due_date', 'early_or_late', 'due_date_diff', 'mother_yob', 'mother_education','father_yob', 'father_education', 'annual_income', 'child_hispanic_latino', 'child_ethnicity', 'caregiver_info', 'other_languages_boolean', 'language_days_per_week', 'language_hours_per_day', 'ear_infections_boolean', 'hearing_loss_boolean', 'vision_problems_boolean', 'illnesses_boolean', 'services_boolean','worried_boolean','learning_disability_boolean']
 
     answers = administration_data.objects.values('administration_id', 'item_ID', 'value').filter(administration_id__in = completed_admins)
     melted_answers = pd.DataFrame.from_records(answers).pivot(index='administration_id', columns='item_ID', values='value')

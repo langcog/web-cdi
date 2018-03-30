@@ -9,6 +9,8 @@ venv/
 .Rproj.user
 .Rhistory
 */packrat/src/*
+researcher_profiles.json
+sync*.sh
 webcdi/webcdi/secret_key*
 webcdi/webcdi/databases*
 webcdi/webcdi/email*
