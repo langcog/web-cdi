@@ -39,7 +39,7 @@ def download_data(request, study_obj, administrations = None): # Download study 
     admin_header = ['study_name', 'subject_id','repeat_num', 'administration_id', 'link', 'completed', 'completedBackgroundInfo', 'due_date', 'last_modified','created_date']
 
     # Fetch background data variables
-    background_header = ['age','sex','zip_code','birth_order','multi_birth_boolean','multi_birth', 'birth_weight_lb', 'birth_weight_kg', 'born_on_due_date', 'early_or_late', 'due_date_diff', 'mother_yob', 'mother_education','father_yob', 'father_education', 'annual_income', 'child_hispanic_latino', 'child_ethnicity', 'caregiver_info', 'other_languages_boolean','other_languages','language_from', 'language_days_per_week', 'language_hours_per_day', 'ear_infections_boolean','ear_infections', 'hearing_loss_boolean','hearing_loss', 'vision_problems_boolean','vision_problems', 'illnesses_boolean','illnesses', 'services_boolean','services','worried_boolean','worried','learning_disability_boolean','learning_disability']
+    background_header = ['age','sex','zip_code','birth_order', 'birth_weight_lb', 'birth_weight_kg','multi_birth_boolean','multi_birth', 'born_on_due_date', 'early_or_late', 'due_date_diff', 'mother_yob', 'mother_education','father_yob', 'father_education', 'annual_income', 'child_hispanic_latino', 'child_ethnicity', 'caregiver_info', 'other_languages_boolean','other_languages','language_from', 'language_days_per_week', 'language_hours_per_day', 'ear_infections_boolean','ear_infections', 'hearing_loss_boolean','hearing_loss', 'vision_problems_boolean','vision_problems', 'illnesses_boolean','illnesses', 'services_boolean','services','worried_boolean','worried','learning_disability_boolean','learning_disability']
 
     # Try to properly format CDI responses for pandas dataframe
     try:
@@ -52,19 +52,20 @@ def download_data(request, study_obj, administrations = None): # Download study 
     # Format background data responses for pandas dataframe and eventual printing
     try:
         background_data = BackgroundInfo.objects.values().filter(administration__in = administrations)
-        new_background = pd.DataFrame.from_records(background_data)
 
-        if len(list(new_background)) > 0:
-            for c in new_background.columns:
-                try:
-                    new_background = new_background.replace({c: dict(BackgroundInfo._meta.get_field(c).choices)}) # Replaces integer and single letter responses in dataframe with more easily interpreted choices that were originally given to test-takers. For instance, gender in database is stored as 'M' but is presented to test-takers and researchers as 'Male' for a lesser chance of misinterpretation
-                except:
-                    if 'boolean' in c or c == 'born_on_due_date': # Replace integer boolean responses with text responses (catches any columns missed by previous pass)
-                        new_background = new_background.replace({c: {0: 'No', 1: 'Yes', 2: 'Prefer not to disclose'}})
-                    elif c == 'child_hispanic_latino':
-                        new_background = new_background.replace({c: {False: 'No', True: 'Yes'}})
-        else:
-            new_background = pd.DataFrame(columns = ['administration_id'] + background_header)
+        BI_choices = {}
+
+        fields = BackgroundInfo._meta.get_fields()
+        for field in fields:
+            if field.choices:
+                field_choices = dict(field.choices)
+                for k, v in field_choices.items():
+                    if str(k) == str(v):
+                        field_choices.pop(k, None)
+                BI_choices[field.name] = {str(k):str(v) for k,v in field_choices.items()}
+
+        new_background = pd.DataFrame.from_records(background_data).astype(str).replace(BI_choices)
+        new_background['administration_id'] = new_background['administration_id'].astype('int64')
 
     except:
         new_background = pd.DataFrame(columns = ['administration_id'] + background_header)
@@ -105,7 +106,6 @@ def download_data(request, study_obj, administrations = None): # Download study 
 
     # Return CSV
     return response
-
 
 
 @login_required
@@ -162,7 +162,7 @@ def download_cdi_format(request, study_obj, administrations = None):
 
     model_header = filter(r.match, get_model_header(study_obj.instrument.name))
     admin_header = ['study_name', 'subject_id','repeat_num', 'completed', 'last_modified']
-    background_header = ['age','sex','zip_code','birth_order','multi_birth_boolean','multi_birth', 'birth_weight_lb', 'birth_weight_kg', 'born_on_due_date', 'early_or_late', 'due_date_diff', 'mother_yob', 'mother_education','father_yob', 'father_education', 'annual_income', 'child_hispanic_latino', 'child_ethnicity', 'caregiver_info', 'other_languages_boolean', 'language_days_per_week', 'language_hours_per_day', 'ear_infections_boolean', 'hearing_loss_boolean', 'vision_problems_boolean', 'illnesses_boolean', 'services_boolean','worried_boolean','learning_disability_boolean']
+    background_header = ['age','sex','zip_code','birth_order', 'birth_weight_lb', 'birth_weight_kg', 'multi_birth_boolean','multi_birth', 'born_on_due_date', 'early_or_late', 'due_date_diff', 'mother_yob', 'mother_education','father_yob', 'father_education', 'annual_income', 'child_hispanic_latino', 'child_ethnicity', 'caregiver_info', 'other_languages_boolean', 'language_days_per_week', 'language_hours_per_day', 'ear_infections_boolean', 'hearing_loss_boolean', 'vision_problems_boolean', 'illnesses_boolean', 'services_boolean','worried_boolean','learning_disability_boolean']
 
     answers = administration_data.objects.values('administration_id', 'item_ID', 'value').filter(administration_id__in = completed_admins)
     melted_answers = pd.DataFrame.from_records(answers).pivot(index='administration_id', columns='item_ID', values='value')
@@ -677,6 +677,15 @@ def overflow(request, username, study_name): # Page for overflowed studies. For 
 
     return render(request, 'cdi_forms/overflow.html', data) # Render overflow page
 
+def try_parsing_date(text):
+    date_formats = ('%Y.%m.%d', '%Y-%m-%d', '%Y/%m/%d','%m.%d.%Y', '%m-%d-%Y', '%m/%d/%Y',)
+    for fmt in date_formats:
+        try:
+            return datetime.datetime.strptime(text, fmt)
+        except ValueError:
+            pass
+    raise ValueError('no valid date format found')
+
 def importFillablePDFs(request, study_name):
 
     study_obj = study.objects.get(researcher= request.user, name= study_name)
@@ -704,46 +713,78 @@ def importFillablePDFs(request, study_name):
             break
 
         old_rep = administration.objects.filter(study = study_obj, subject_id = sid).count()
-        due_date = datetime.datetime.strptime(admin_row['date_today'], '%m/%d/%Y')
+
+        try:
+            due_date = try_parsing_date(admin_row['date_today'])
+        except ValueError:
+            error_msg = "Invalid date format. Please submit dates as MM-DD-YYYY or YYYY-MM-DD. '/' and '.' delimiters are alsoacceptable."
+            break
+
         new_admin = administration.objects.create(study = study_obj, subject_id = sid, repeat_num = old_rep + 1, url_hash = random_url_generator(), completed = True, due_date = due_date, last_modified = due_date)
         new_admin_pks.append(new_admin.pk)
 
         if admin_row['gender'] == "m":
-            sex = "M"
+            sex = u'M'
         elif admin_row['gender'] == "f":
-            sex = "F"
+            sex = u'F'
         else:
-            sex = "O"
+            sex = u'O'
 
         dot = due_date
-        dob = datetime.datetime.strptime(admin_row['birthdate'], '%m/%d/%Y')
+
+        try:
+            dob = try_parsing_date(admin_row['birthdate'])
+        except ValueError:
+            error_msg = "Invalid date format. Please submit dates as MM-DD-YYYY or YYYY-MM-DD. '/' and '.' delimiters are alsoacceptable."
+            break
+
         raw_age = dot - dob
         age = int(float(raw_age.days)/(365.2425/12.0))
 
+        background_dict = {
+        'sex': sex,
+        'age': age,
+        'mother_yob': 0, 
+        'illnesses': None, 
+        'hearing_loss': None, 
+        'birth_weight_lb': 0.0, 
+        'language_from': None, 
+        'father_yob': 0,  
+        'multi_birth': None, 
+        'due_date_diff': None, 
+        'language_hours_per_day': None, 
+        'illnesses_boolean': 2, 
+        'ear_infections': None, 
+        'other_languages': [], 
+        'ear_infections_boolean': 2, 
+        'caregiver_info': 0, 
+        'other_languages_boolean': 2, 
+        'services_boolean': 2, 
+        'learning_disability': None, 
+        'birth_order': 0, 
+        'born_on_due_date': 2, 
+        'zip_code': u'', 
+        'birth_weight_kg': None, 
+        'mother_education': 0, 
+        'multi_birth_boolean': 2, 
+        'vision_problems_boolean': 2, 
+        'early_or_late': u'', 
+        'services': None, 
+        'language_days_per_week': None, 
+        'hearing_loss_boolean': 2, 
+        'annual_income': u'Prefer not to disclose', 
+        'learning_disability_boolean': 2,  
+        'child_ethnicity': [], 
+        'worried': None, 
+        'vision_problems': None, 
+        'father_education': 0, 
+        'worried_boolean': 2, 
+        'child_hispanic_latino': None
+        }
+        
+
         try:
-            new_background = BackgroundInfo.objects.create(
-                administration = new_admin,
-                age = age,
-                sex = sex,
-                birth_order = 0,
-                multi_birth_boolean = 2,
-                birth_weight_lb = 0.0,
-                born_on_due_date = 2,
-                mother_yob = 0,
-                mother_education = 0,
-                father_yob = 0,
-                father_education = 0,
-                annual_income = "Prefer not to disclose",
-                caregiver_info = 0,
-                other_languages_boolean = 2,
-                ear_infections_boolean = 2,
-                hearing_loss_boolean = 2,
-                vision_problems_boolean = 2,
-                illnesses_boolean = 2,
-                services_boolean = 2,
-                worried_boolean = 2,
-                learning_disability_boolean = 2
-                )
+            new_background, created = BackgroundInfo.objects.get_or_create(administration = new_admin, defaults = background_dict)
         except:
             error_msg = "Error adding age and sex information."
             break
@@ -755,26 +796,30 @@ def importFillablePDFs(request, study_name):
         try:
             for index, response_row in cdi_responses_df.iterrows():
                 if study_obj.instrument.form == 'WS':
+                    item_value = None
+
                     if response_row['item_type'] in ['word', 'word_form', 'word_ending'] and response_row['value'] == "Yes":
                         item_value = 'produces'
-                    if response_row['item_type'] in ['usage', 'ending', 'combine']:
+                    elif response_row['item_type'] in ['usage', 'ending', 'combine']:
                         item_value = response_row['value'].lower()
-                    if response_row['item_type'] == 'combination_examples':
+                    elif response_row['item_type'] == 'combination_examples':
                         item_value = response_row['value']
-                    if response_row['item_type'] == 'complexity' and response_row['value'] in ['No', 'Yes']:
+                    elif response_row['item_type'] == 'complexity' and response_row['value'] in ['No', 'Yes']:
                         if response_row['value'] == 'No':
                             item_value = 'simple'
                         elif response_row['value'] == 'Yes':
                             item_value = 'complex'
-                    try:
-                        cdi_responses.append(administration_data(
-                            administration = new_admin,
-                            item_ID = response_row['itemID'],
-                            value = item_value
-                        ))
-                    except:
-                        error_msg = "Error importing item '%s' for subject_id '%s'" % (sid, response_row['itemID'])
-                        break
+
+                    if item_value:
+                        try:
+                            cdi_responses.append(administration_data(
+                                administration = new_admin,
+                                item_ID = response_row['itemID'],
+                                value = item_value
+                            ))
+                        except:
+                            error_msg = "Error importing item '%s' for subject_id '%s'" % (sid, response_row['itemID'])
+                            break
 
             administration_data.objects.bulk_create(cdi_responses)
 
@@ -785,4 +830,4 @@ def importFillablePDFs(request, study_name):
     if error_msg is not None:
         administration.objects.filter(pk__in = new_admin_pks).delete()
 
-    return "Okay" if error_msg is None else error_msg
+    return "Imported." if error_msg is None else error_msg

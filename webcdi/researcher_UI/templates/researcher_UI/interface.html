@@ -110,8 +110,21 @@
                 			{% if current_study %}
                                 <div class="row">
                                     <div class="col-3">
-                                        <button type="button" class="btn btn-secondary btn-block"   onclick = "modal_form('/interface/study/{{ current_study|urlencode }}/administer_new/')" >Add Participants</button>
+<!--                                         <button type="button" class="btn btn-secondary btn-block"   onclick = "modal_form('/interface/study/{{ current_study|urlencode }}/administer_new/')" >Add Participants</button> -->
+
+                                        <div class="btn-group btn-block">
+                                          <button type="button" class="btn btn-secondary btn-block" onclick = "modal_form('/interface/study/{{ current_study|urlencode }}/administer_new/')">Add Participants</button>
+
+                                          <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span class="sr-only">Toggle Dropdown</span>
+                                          </button>
+                                          <div class="dropdown-menu">
+                                            <button class="dropdown-item btn btn-secondary btn-block">Do an Action</button>
+                                          </div>
+                                        </div>
+
                                     </div>
+
                                     <div class="col-3">
                                         <div class="dropdown show">
                                           <button class="btn btn-secondary  btn-block dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
