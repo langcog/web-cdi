@@ -181,8 +181,8 @@ class BackgroundForm(BetterModelForm):
                 self.add_error('age', _('Your baby is too old for this version of the CDI.'))
         else:
             self.add_error('age', _('Please enter your child\'s DOB in the field above.'))
-            
-        if not cleaned_data.get(self.birth_weight_field):
+        c_weight = cleaned_data.get(self.birth_weight_field)
+        if not c_weight and c_weight != 0:
             self.add_error(self.birth_weight_field, _('This field cannot be empty'))
 
 
