@@ -119,7 +119,8 @@
                                             <span class="sr-only">Toggle Dropdown</span>
                                           </button>
                                           <div class="dropdown-menu">
-                                            <button class="dropdown-item btn btn-secondary btn-block">Do an Action</button>
+                                            <!-- <button class="dropdown-item btn btn-secondary btn-block">Do an Action</button> -->
+                                            <button type="button" class="dropdown-item btn btn-secondary btn-block"   onclick = "modal_form('/interface/study/{{ current_study|urlencode }}/import_data/')" >Import Spreadsheet Data</button>
                                           </div>
                                         </div>
 

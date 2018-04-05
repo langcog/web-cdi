@@ -2,7 +2,7 @@ from django import forms
 from .models import *
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Field, Div
-from form_utils.forms import BetterModelForm
+from form_utils.forms import BetterModelForm, BetterForm
 from django.urls import reverse
 import os
 from django.contrib.postgres.forms import IntegerRangeField
@@ -157,3 +157,32 @@ class RenameStudyForm(BetterModelForm):
     class Meta:
         model = study
         exclude = ['study_group','researcher','instrument']
+
+
+class ImportDataForm(BetterForm):
+    study = forms.ModelChoiceField(queryset=study.objects.all(), empty_label="(choose from the list)") # Study instrument (CANNOT BE CHANGED LATER)
+    imported_file = forms.FileField()
+
+    # Form validation. Form is passed automatically to views.py for higher level checking.
+    def clean(self):
+        cleaned_data = super(ImportDataForm, self).clean()
+        if not cleaned_data.get('imported_file'):
+            self.add_error('imported_file', 'Please upload a file.')
+
+    # Form initiation. Specify form and field layout. Updated paired_studies so that only unpaired studies associated with the researcher are displayed.
+    def __init__(self, *args, **kwargs):
+        self.researcher = kwargs.pop('researcher', None)
+        self.study = kwargs.pop('study', None)
+        super(ImportDataForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_id = 'import-data'
+        self.helper.form_class = 'form-horizontal'
+        # self.helper.template = PROJECT_ROOT + '/../cdi_forms/templates/bootstrap3/whole_uni_form.html'        
+        self.helper.label_class = 'col-3'
+        self.helper.field_class = 'col-9'
+        self.helper.form_method = 'post'
+        if self.researcher:
+            self.fields['study'] = forms.ModelChoiceField(queryset=study.objects.filter(researcher = self.researcher), empty_label="(choose from the list)")
+        if self.study:
+            self.fields['study'].initial = self.study
+
