@@ -420,10 +420,10 @@ def add_study(request): # Function for adding studies modal
     researcher = request.user # Get username for logged-in user
 
     if request.method == 'POST' : # If submitting data
-        form = AddStudyForm(request.POST) # Grab submitted form
+        form = AddStudyForm(request.POST, researcher = researcher) # Grab submitted form
 
         if form.is_valid(): # If form passed validation checks in forms.py
-
+            print "Valid form"
             study_instance = form.save(commit=False) # Save study object but do not commit to database just yet
             study_name = form.cleaned_data.get('name')
             age_range = form.cleaned_data.get('age_range')
@@ -458,6 +458,7 @@ def add_study(request): # Function for adding studies modal
                 data['error_message'] = "Study name has a forward slash ('/') inside. Please remove or replace this character.";
                 return HttpResponse(json.dumps(data), content_type="application/json") # Display error message about non-unique study back to user                
         else: # If form failed validation checks
+            print "Invalid form"
             data['stat'] = "re-render"; # Re-render form
             return render(request, 'researcher_UI/add_study_modal.html', {'form': form, 'form_name': 'Add New Study'})
     else: # If fetching modal

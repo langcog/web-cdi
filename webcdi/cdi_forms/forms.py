@@ -67,6 +67,7 @@ class BackgroundForm(BetterModelForm):
     # Child's sex. Can choose M (male), F (female) or O (other/not disclosed)
     sex = forms.ChoiceField(
                      choices=(('M', _('Male')), ('F', _('Female')), ('O', _('Other / Prefer not to disclose'))), widget=forms.RadioSelect,
+                     label=_('Sex')
                 )
 
     # Whether child was a part of a multiple birth (twins, triplets, etc.)

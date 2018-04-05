@@ -26,7 +26,10 @@ def populateResearcherModel(apps, schema_editor):
         researcher_obj.institution = rp['institution']
         researcher_obj.position = rp['position']
         user_obj.save()
-        researcher_obj.allowed_instruments.add(*english_instruments)
+        if user_obj.is_staff:
+            researcher_obj.allowed_instruments.add(*instrument.objects.all())
+        else:
+            researcher_obj.allowed_instruments.add(*english_instruments)
         researcher_obj.save()
 
 
