@@ -857,36 +857,55 @@ def import_data(request, study_name):
                 cdi_responses = []
                 cdi_responses_df = pd.merge(pdf_header_df, fillable_items, how='left', on='pdf_header')
 
+                yes_list = ['yes', '1']
+                no_list = ['no', '0']
+                graded_list = ['not yet', 'sometimes', 'often']
+
                 try:
                     for index, response_row in cdi_responses_df.iterrows():
+                        item_value = None
+                        raw_value = str(response_row['value']).lower()
                         if study_obj.instrument.form == 'WS':
-                            item_value = None
-
-                            if response_row['item_type'] in ['word', 'word_form', 'word_ending'] and response_row['value'] == "Yes":
+                            if response_row['item_type'] in ['word', 'word_form', 'word_ending'] and raw_value in yes_list:
                                 item_value = 'produces'
                             elif response_row['item_type'] in ['usage', 'ending', 'combine']:
-                                item_value = response_row['value'].lower()
+                                item_value = raw_value
                             elif response_row['item_type'] == 'combination_examples':
-                                item_value = response_row['value']
-                            elif response_row['item_type'] == 'complexity' and response_row['value'] in ['No', 'Yes']:
-                                if response_row['value'] == 'No':
+                                item_value = str(response_row['value'])
+                            elif response_row['item_type'] == 'complexity':
+                                if raw_value in no_list + ['simple']:
                                     item_value = 'simple'
-                                elif response_row['value'] == 'Yes':
+                                elif raw_value in yes_list + ['complex']:
                                     item_value = 'complex'
-
-                            if item_value:
-                                try:
-                                    cdi_responses.append(administration_data(
-                                        administration = new_admin,
-                                        item_ID = response_row['itemID'],
-                                        value = item_value
-                                    ))
-                                except:
-                                    error_msg = "Error importing item '%s' for subject_id '%s'" % (sid, response_row['itemID'])
-                                    break
-
+                        elif study_obj.instrument.form == 'WG':
+                            if response_row['item_type'] == 'first_signs':
+                                if raw_value in yes_list + no_list:
+                                    item_value = 'yes' if raw_value in yes_list else 'no'
+                            elif response_row['item_type'] == 'phrases' and raw_value in yes_list:
+                                item_value = "understands"
+                            elif response_row['item_type'] in ['starting_to_talk', 'gestures']:
+                                if raw_value in graded_list:
+                                    item_value = raw_value
+                                elif raw_value in yes_list:
+                                    item_value = 'yes'
+                                elif raw_value in no_list:
+                                    item_value = 'no'
+                            elif response_row['item_type'] == 'word':
+                                if raw_value in ['understands', '1']:
+                                    item_value = 'understands'
+                                elif raw_value in ['understands and says', 'produces', '2']:
+                                    item_value = 'produces'
+                        if item_value:
+                            try:
+                                cdi_responses.append(administration_data(
+                                    administration = new_admin,
+                                    item_ID = response_row['itemID'],
+                                    value = item_value
+                                ))
+                            except:
+                                error_msg = "Error importing item '%s' for subject_id '%s'" % (sid, response_row['itemID'])
+                                # break
                     administration_data.objects.bulk_create(cdi_responses)
-
                 except:
                     error_msg = "Error importing administration data. Check that only valid values are in item columns."
                     break
