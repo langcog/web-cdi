@@ -716,8 +716,8 @@
 
 
         // Take age of acquisition (AOA) data produced by Mika Braginsky. Match it with individual's word performance to determine the words understood/produced with the highest AOA values.
-        d3.csv("{% static 'graph_data/english_aoas.csv' %}", function(data) {
-            aoa_data = data;
+        d3.csv("{% static 'graph_data/language_aoas.csv' %}", function(data) {
+            aoa_data = data.filter(function(d) { return (d.language == '{{ language }}'); });
 
             words_prod = words.filter(function(d) { return (d.num_value == 'produces'); });
             words_comp = words.filter(function(d) { return (d.num_value == 'understands'); });
@@ -728,14 +728,14 @@
             aoa_prod_combined = join(aoa_data_prod, words_prod, "words", "definition", function(word, aoa) {
                 return {
                     word: word.definition,
-                    aoa: (aoa !== undefined) ? parseInt(aoa.age) : null
+                    aoa: (aoa !== undefined) ? parseFloat(aoa.aoa) : null
                 };
             });
 
             aoa_comp_combined = join(aoa_data_comp, words_comp, "words", "definition", function(word, aoa) {
                 return {
                     word: word.definition,
-                    aoa: (aoa !== undefined) ? parseInt(aoa.age) : null
+                    aoa: (aoa !== undefined) ? parseFloat(aoa.aoa) : null
                 };
             });
 

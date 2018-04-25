@@ -450,6 +450,7 @@ def printable_view(request, hash_id):
         #Blank form
         background_form = BackgroundForm(context = context)
 
+    prefilled_data['language'] = administration_instance.study.instrument.language
     prefilled_data['background_form'] = background_form
     prefilled_data['hash_id'] = hash_id
     prefilled_data['gift_code'] = None
