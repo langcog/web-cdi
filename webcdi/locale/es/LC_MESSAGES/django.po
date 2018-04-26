@@ -95,8 +95,7 @@ msgid ""
 "Was your child born early or late (more than one week before or after the "
 "due date)?"
 msgstr ""
-"¿Su niño(a) nació temprano o tarde (más que una semana antes de o después de la "
-"fecha de parto)?"
+"¿Su niño(a) nació más que una semana antes de o después de la fecha de parto?"
 
 #: cdi_forms/forms.py:64 cdi_forms/models.py:180
 msgid "Early"
@@ -140,7 +139,7 @@ msgstr "¿Su niño(a) ha tenido infecciones crónicas del oído (cinco o más)
 
 #: cdi_forms/forms.py:92 cdi_forms/models.py:230
 msgid "Do you suspect that your child may have hearing loss?"
-msgstr "¿Sospecha que su niño(a) haya sufrido perdida del oído?"
+msgstr "¿Sospecha que su niño(a) haya sufrido pérdida del oído?"
 
 #: cdi_forms/forms.py:99 cdi_forms/models.py:233
 msgid ""
@@ -178,7 +177,7 @@ msgstr ""
 
 #: cdi_forms/forms.py:133
 msgid "Which language(s)"
-msgstr "Qué idioma(s)"
+msgstr "¿Qué idioma(s)?"
 
 #: cdi_forms/forms.py:159 cdi_forms/forms.py:187
 msgid "This field cannot be empty"
@@ -219,7 +218,7 @@ msgstr "Informe Familiar"
 
 #: cdi_forms/forms.py:220
 msgid "Child's Ethnicity"
-msgstr "Etnicidad del Niño/a"
+msgstr "Etnicidad del Niño(a)"
 
 #: cdi_forms/forms.py:220
 msgid ""
@@ -240,7 +239,7 @@ msgstr "Información del Tutor"
 
 #: cdi_forms/forms.py:222
 msgid "Language Exposure"
-msgstr "Exposición al Lenguaje"
+msgstr "Exposición al lenguaje"
 
 #: cdi_forms/forms.py:223
 msgid "Health"
@@ -507,8 +506,8 @@ msgid ""
 "Choose highest grade completed (12 = high school graduate; 16 = college "
 "graduate; 18 = advanced degree)"
 msgstr ""
-"Elija el nivel mas alto de estudio completados: (12 = graduado de preparatoria; "
-"16 = graduado de la universidad; 18 = título de maestría)"
+"Elija el nivel mas alto de estudio completados: (12 = graduado de preparatoria, "
+"16 = graduado de la universidad, 18 = título de maestría)"
 
 #: cdi_forms/models.py:198
 msgid "Father / Parent or Guardian 2 Year of birth"
@@ -540,7 +539,7 @@ msgstr "Un padre"
 
 #: cdi_forms/models.py:214
 msgid "One parent plus other caregiver (e.g., grandparent)"
-msgstr "Un padre y un otro cuidador (p. ej. abuelo)"
+msgstr "Un padre y otro(s) cuidador(es) (p. ej. abuelo)"
 
 #: cdi_forms/models.py:215
 msgid "Other caregivers (e.g., grandparent or grandparents)"
@@ -552,11 +551,11 @@ msgstr "¿Con quién vive su niño(a)?"
 
 #: cdi_forms/models.py:223
 msgid "From whom?"
-msgstr "¿De quien?"
+msgstr "¿De quién?"
 
 #: cdi_forms/models.py:224
 msgid "How many days per week is the child exposed to these languages?"
-msgstr "¿Cuantos días a la semana está escuchando su niño(a) este idioma(s)?"
+msgstr "Cuántos días a la semana está escuchando su niño(a) este idioma(s)?"
 
 #: cdi_forms/models.py:224
 msgid "Number of days per week cannot exceed 7"
@@ -568,7 +567,7 @@ msgstr "El número de días no puede ser menos que 1"
 
 #: cdi_forms/models.py:225
 msgid "How many hours per day is the child exposed to these languages?"
-msgstr "¿Cuantas horas al día esta escuchando su niño(a) este idioma(s)?"
+msgstr "¿Cuántas horas al día está escuchando su niño(a) este(os) idioma(s)?"
 
 #: cdi_forms/models.py:225
 msgid "Number of hours per day cannot exceed 24"
@@ -585,7 +584,7 @@ msgstr "¿Su niño(a) ha tenido infecciones crónicas del oído (cinco o más)
 #: cdi_forms/models.py:228
 msgid "Has your child undergone interventions (e.g., tubes)?  Please describe"
 msgstr ""
-"¿Ha tenido alguna procedimiento (por ejemplo, tubos en los oídos)? Por favor describa"
+"¿Ha tenido algún procedimiento (por ejemplo, tubos en los oídos)? Por favor describa"
 
 #: cdi_forms/models.py:231 cdi_forms/models.py:234 cdi_forms/models.py:237
 #: cdi_forms/models.py:240 cdi_forms/models.py:243
@@ -626,8 +625,7 @@ msgid ""
 "Try to complete the inventory when you have at least 30 quiet minutes, "
 "without interruptions. An example might be when your child is sleeping."
 msgstr ""
-"Trate de llenar el inventario cuando tenga por lo menos 30 minutos "
-"tranquilos, sin interrupciones. Un ejemplo podría ser cuando su niño(a) este "
+"Cuando tenga por lo menos 30 minutos tranquilos sin interrupciones, trate de llenar el inventario. Un ejemplo podría ser cuando su niño(a) este "
 "durmiendo."
 
 #: cdi_forms/templates/cdi_forms/background_info.html:28
@@ -636,26 +634,21 @@ msgid ""
 "interrupted, it is ok to put it down and come back to it when you have more "
 "time."
 msgstr ""
-"No tiene que llenar el inventario de corrido. Si se le presenta una "
-"interrupción puede dejar el inventario a un lado y regresar a terminarlo "
-"cuando tenga más tiempo."
+"No tiene que llenar el inventario de corrido. Si se le presenta una interrupción puede dejar el inventario a un lado y regresar a terminarlo cuando tenga más tiempo."
 
 #: cdi_forms/templates/cdi_forms/background_info.html:29
 msgid ""
 "Feel free to ask others (e.g. other family members, nanny, child care "
 "providers) to help you fill out this form."
 msgstr ""
-"Consulte a otras personas que tienen contacto con su niño(a) por ejemplo en "
-"la guardería, la nana, o la abuela y comparta el inventario de palabras con "
-"ellos."
+"Consulte a otras personas que tienen contacto con su hijo(a) por ejemplo en la guardería, la nana, o la abuela y comparta el inventario de palabras con ellos."
 
 #: cdi_forms/templates/cdi_forms/background_info.html:30
 msgid ""
 "Please read all of the instructions on the inventory carefully, and make "
 "sure you complete all of the sections."
 msgstr ""
-"Por favor lea todas instrucciones en el inventario con cuidado y asegúrese "
-"de completar todas las secciones."
+"Por favor lea todas instrucciones en el inventario con cuidado y asegúrese de completar todas las secciones."
 
 #: cdi_forms/templates/cdi_forms/background_info.html:34
 #, python-format
@@ -702,15 +695,13 @@ msgstr "Instrucciones: "
 #: cdi_forms/templates/cdi_forms/cdi_base.html:50
 msgid "This form can be filled anytime before the due date."
 msgstr ""
-"Esto formulario puede ser llenado en cualquier momento antes la fecha de "
-"entrega."
+"Este formulario puede ser completado en cualquier momento antes la fecha de entrega."
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:51
 msgid ""
 "It can also be saved at any time and resumed later by using the same link"
 msgstr ""
-"Él también se puede guardar en cualquier momento y reanudarse más tarde "
-"utilizando la misma pagina"
+"También se puede guardar en cualquier momento y puede continuar más tarde utilizando la misma página."
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:51
 msgid "create bookmark"
@@ -730,15 +721,14 @@ msgid ""
 "Please use the navigation buttons below. Do not use the \"back\" and "
 "\"forward\" buttons on your browser."
 msgstr ""
-"Por favor, use los botones de navegación al final de la pagina. No use los botones \"Atrás\" y \"Adelante\" en su navegador."
+"Por favor, use los botones de navegación al final de la página. No use los botones \"Atrás\" y \"Adelante\" en su navegador."
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:55
 msgid ""
 "You can use the tab button and arrows keys to quickly navigate and answer "
 "questions."
 msgstr ""
-"Puede usar el botón de tab y las teclas de flechas para navegar "
-"rápidamente y responder preguntas."
+"Puede usar el botón de tab y las teclas de flechas para navegar rápidamente y responder preguntas."
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:86
 msgid "Due date"
