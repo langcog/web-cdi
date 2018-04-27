@@ -922,8 +922,8 @@ def import_data(request, study_name):
 
         else: # If form did not pass validation checks in forms.py
             data['stat'] = "re-render"; # Re-render form
-            return render(request, 'researcher_UI/add_paired_study_modal.html', {'form': form}) 
+            return render(request, 'researcher_UI/import_data.html', {'form': form}) 
 
     else: # If fetching form
         form = ImportDataForm(researcher = request.user, study = study_obj) # Pull up a blank copy of form and render
-        return render(request, 'researcher_UI/add_paired_study_modal.html', {'form': form})
+        return render(request, 'researcher_UI/import_data.html', {'form': form})
