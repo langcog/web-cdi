@@ -716,7 +716,7 @@
 
 
         // Take age of acquisition (AOA) data produced by Mika Braginsky. Match it with individual's word performance to determine the words understood/produced with the highest AOA values.
-        d3.csv("{% static 'graph_data/language_aoas.csv' %}", function(data) {
+        d3.csv("{% static 'data_csv/language_aoas.csv' %}", function(data) {
             aoa_data = data.filter(function(d) { return (d.language == '{{ language }}'); });
 
             words_prod = words.filter(function(d) { return (d.num_value == 'produces'); });
