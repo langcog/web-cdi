@@ -641,7 +641,7 @@ msgid ""
 "Feel free to ask others (e.g. other family members, nanny, child care "
 "providers) to help you fill out this form."
 msgstr ""
-"Consulte a otras personas que tienen contacto con su hijo(a) por ejemplo en la guardería, la nana, o la abuela y comparta el inventario de palabras con ellos."
+"Consulte a otras personas que tienen contacto con su niño(a) por ejemplo en la guardería, la nana, o la abuela y comparta el inventario de palabras con ellos."
 
 #: cdi_forms/templates/cdi_forms/background_info.html:30
 msgid ""
