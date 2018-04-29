@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-05 22:01+0000\n"
+"POT-Creation-Date: 2018-04-29 22:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -523,7 +523,9 @@ msgid "One parent"
 msgstr "One parent"
 
 #: cdi_forms/models.py:214
-msgid "One parent plus other caregiver (e.g., grandparent)"
+#, fuzzy
+#| msgid "One parent plus other caregiver (e.g., grandparent)"
+msgid "One or both parents and other caregiver(s) (e.g., grandparent)"
 msgstr "One parent plus other caregiver (e.g., grandparent)"
 
 #: cdi_forms/models.py:215

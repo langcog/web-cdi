@@ -211,7 +211,7 @@ class BackgroundInfo(models.Model):
     caregivers_choices = [
         (2, _("Two parents")), 
         (1, _("One parent")), 
-        (3, _("One parent plus other caregiver (e.g., grandparent)")), 
+        (3, _("One or both parents and other caregiver(s) (e.g., grandparent)")), 
         (4, _("Other caregivers (e.g., grandparent or grandparents)")), 
         (0, _("Prefer not to disclose")),
     ]
