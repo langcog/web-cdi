@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-29 22:15+0000\n"
+"POT-Creation-Date: 2018-04-30 05:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -582,16 +582,19 @@ msgid "Indicate which family member and provide a description"
 msgstr "Indicate which family member and provide a description"
 
 #: cdi_forms/templates/cdi_forms/background_info.html:7
-#: cdi_forms/templates/cdi_forms/background_info.html:56 cdi_forms/views.py:136
+#: cdi_forms/templates/cdi_forms/background_info.html:56
+#: cdi_forms/templates/cdi_forms/study_group.html:7 cdi_forms/views.py:136
 msgid "Next"
 msgstr ""
 
 #: cdi_forms/templates/cdi_forms/background_info.html:18
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:33
+#: cdi_forms/templates/cdi_forms/study_group.html:15
 msgid "MacArthur-Bates Communicative Development Inventory"
 msgstr ""
 
 #: cdi_forms/templates/cdi_forms/background_info.html:20
+#: cdi_forms/templates/cdi_forms/study_group.html:17
 #, python-format
 msgid ""
 "\n"
@@ -600,16 +603,19 @@ msgid ""
 msgstr ""
 
 #: cdi_forms/templates/cdi_forms/background_info.html:25
+#: cdi_forms/templates/cdi_forms/study_group.html:22
 msgid "Instructions for completing the language inventory"
 msgstr ""
 
 #: cdi_forms/templates/cdi_forms/background_info.html:27
+#: cdi_forms/templates/cdi_forms/study_group.html:24
 msgid ""
 "Try to complete the inventory when you have at least 30 quiet minutes, "
 "without interruptions. An example might be when your child is sleeping."
 msgstr ""
 
 #: cdi_forms/templates/cdi_forms/background_info.html:28
+#: cdi_forms/templates/cdi_forms/study_group.html:25
 msgid ""
 "You do not have to complete the inventory in one sitting. If you are "
 "interrupted, it is ok to put it down and come back to it when you have more "
@@ -617,12 +623,14 @@ msgid ""
 msgstr ""
 
 #: cdi_forms/templates/cdi_forms/background_info.html:29
+#: cdi_forms/templates/cdi_forms/study_group.html:26
 msgid ""
 "Feel free to ask others (e.g. other family members, nanny, child care "
 "providers) to help you fill out this form."
 msgstr ""
 
 #: cdi_forms/templates/cdi_forms/background_info.html:30
+#: cdi_forms/templates/cdi_forms/study_group.html:27
 msgid ""
 "Please read all of the instructions on the inventory carefully, and make "
 "sure you complete all of the sections."
@@ -639,14 +647,17 @@ msgid ""
 msgstr ""
 
 #: cdi_forms/templates/cdi_forms/background_info.html:42
+#: cdi_forms/templates/cdi_forms/study_group.html:31
 msgid "For more information about the MB-CDI,"
 msgstr ""
 
 #: cdi_forms/templates/cdi_forms/background_info.html:42
+#: cdi_forms/templates/cdi_forms/study_group.html:31
 msgid "click here"
 msgstr ""
 
 #: cdi_forms/templates/cdi_forms/background_info.html:43
+#: cdi_forms/templates/cdi_forms/study_group.html:32
 msgid "Thank you! We appreciate your time and effort!"
 msgstr ""
 
@@ -658,7 +669,8 @@ msgstr "::Your account information::"
 
 #: cdi_forms/templates/cdi_forms/background_info.html:61
 #: cdi_forms/templates/cdi_forms/cdi_form.html:458
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:350
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:351
+#: cdi_forms/templates/cdi_forms/study_group.html:170
 msgid "Form unavailable. Contact admin."
 msgstr ""
 
@@ -722,7 +734,8 @@ msgid "Okay"
 msgstr ""
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:9
-#: cdi_forms/templates/cdi_forms/cdi_form.html:446 cdi_forms/views.py:350
+#: cdi_forms/templates/cdi_forms/cdi_form.html:446
+#: cdi_forms/templates/cdi_forms/study_group.html:6 cdi_forms/views.py:350
 msgid "Save"
 msgstr ""
 
@@ -980,98 +993,124 @@ msgstr ""
 msgid "Share on Facebook"
 msgstr ""
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:416
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:417
 msgid "My child says PPP words and understands UUU words."
 msgstr ""
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:418
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:419
 msgid "My child says PPP words."
 msgstr ""
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:420
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:421
 msgid "My child understands UUU words."
 msgstr ""
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:470
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:472
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:523
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:525
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:471
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:473
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:524
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:526
 msgid "Category"
 msgstr ""
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:473
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:490
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:474
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:491
 #, python-format
 msgid "Percentage of Words Understood (%%)"
 msgstr ""
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:526
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:544
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:527
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:545
 #, python-format
 msgid "Percentage of Words Spoken (%%)"
 msgstr ""
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:676
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:677
 msgid "My child says the most words in the bestProdCat category."
 msgstr ""
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:680
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:681
 msgid "My child says the most words in the bestCompCat category."
 msgstr ""
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:766
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:767
 msgid "The hardest word my child says is INSERTWORDHERE."
 msgstr ""
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:770
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:771
 msgid "The hardest word my child understands is INSERTWORDHERE."
 msgstr ""
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:789
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:790
 msgid ""
 "Sorry but it looks like your child is outside of our age range for "
 "predicting vocabulary size! This version of the CDI assessment is for "
 "children between MIN_AGE to MAX_AGE months of age"
 msgstr ""
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:817
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:818
 msgid "Current Spoken Vocabulary"
 msgstr ""
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:832
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:833
 msgid "Current Understood Vocabulary"
-msgstr ""
-
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:841
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:848
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:859
-#, python-format
-msgid "Predicted %% of Words Spoken"
 msgstr ""
 
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:842
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:849
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:860
 #, python-format
-msgid "Predicted %% of Words Understood"
+msgid "Predicted %% of Words Spoken"
 msgstr ""
 
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:843
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:851
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:855
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:850
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:861
+#, python-format
+msgid "Predicted %% of Words Understood"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:844
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:852
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:856
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:862
 msgid "Current Vocabulary Size"
 msgstr ""
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:867
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:868
 #, fuzzy
 #| msgid "Age (in months)"
 msgid "Age (in Months)"
 msgstr "Age (in months)"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:876
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:877
 #, python-format
 msgid "Predicted %% of Words on Test"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/study_group.html:48
+#, fuzzy
+#| msgid "Who does your child live with?"
+msgid "How old is your child?"
+msgstr "Who does your child live with?"
+
+#: cdi_forms/templates/cdi_forms/study_group.html:58
+msgid ""
+"My baby speaks LANGUAGE and is between MIN_AGE and MAX_AGE months old. [XX "
+"slot(s) left]"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/study_group.html:61
+#: cdi_forms/templates/cdi_forms/study_group.html:152
+msgid "Born between STARTDATE and ENDDATE"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/study_group.html:125
+msgid "My baby speaks LANGUAGE and is between MIN_AGE and MAX_AGE months old."
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/study_group.html:127
+#: cdi_forms/templates/cdi_forms/study_group.html:128
+msgid "spots left"
 msgstr ""
 
 #: cdi_forms/views.py:182

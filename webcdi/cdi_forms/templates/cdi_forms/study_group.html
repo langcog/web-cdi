@@ -1,9 +1,10 @@
 {% extends 'cdi_forms/cdi_base.html' %}
+{% load i18n %}
 
 {% block nav_buttons %}
 {% if not completed %}
-<input name="btn-save" value="Save" class="btn btn-primary" type="button">
-<input name="btn-next" value="Next" class="btn btn-primary" type="submit">
+<input name="btn-save" value='{% trans "Save" %}' class="btn btn-primary" type="button">
+<input name="btn-next" value='{% trans "Next" %}' class="btn btn-primary" type="submit">
 {% endif %}
 {% endblock %}
 
@@ -11,17 +12,25 @@
 {% if background_form %}
 <input type="hidden" name="background-info-form" value="background-info-form"/>
 <div class="row">
-    <h2>MacArthur-Bates Communicative Development Inventory</h2>
-    <h4><div id = "instrument_age" style = "text-decoration: underline;"></p></div><br>
-    <h4>Instructions for completing the language inventory</h4>
-    <ul>
-        <li> Try to complete the inventory when you have at least 30 quiet minutes, without interruptions. An example might be when your child is sleeping. </li>
-        <li> You do not have to complete the inventory in one sitting. If you are interrupted, it is ok to put it down and come back to it when you have more time. </li>
-        <li> Feel free to ask others (e.g. other family members, nanny, child care providers) to help you fill out this form. </li>
-        <li> Please read all of the instructions on the inventory carefully, and make sure you complete all of the sections. </li>
-    </ul>
-    <p>For more information about the MB-CDI, <a href="http://mb-cdi.stanford.edu/">click here</a>.</p>
-    <p>Thank you! We appreciate your time and effort!</p>
+    <h2>{% trans "MacArthur-Bates Communicative Development Inventory" %}</h2>
+    <h4><div class="flex-row" id="instrument_age" style="text-decoration: underline;">
+        {% blocktrans with min_age=min_age max_age=max_age %}
+        For {{ min_age }}- to {{ max_age }}-month-old children
+        {% endblocktrans %}
+    </div></h4>
+    <div class="flex-row">
+        <h4>{% trans "Instructions for completing the language inventory" %}</h4>
+        <ul>
+            <li> {% trans "Try to complete the inventory when you have at least 30 quiet minutes, without interruptions. An example might be when your child is sleeping." %} </li>
+            <li> {% trans "You do not have to complete the inventory in one sitting. If you are interrupted, it is ok to put it down and come back to it when you have more time." %} </li>
+            <li> {% trans "Feel free to ask others (e.g. other family members, nanny, child care providers) to help you fill out this form." %} </li>
+            <li> {% trans "Please read all of the instructions on the inventory carefully, and make sure you complete all of the sections." %} </li>
+        </ul>
+    </div>
+    <p>
+        {% trans "For more information about the MB-CDI," %} <a href="http://mb-cdi.stanford.edu/">{% trans "click here" %}</a>.<br> 
+        {% trans "Thank you! We appreciate your time and effort!" %}
+    </p>
 </div>
 <br>
 <div class="row">
@@ -36,65 +45,65 @@
         <div class="modal-content">
 
             <div class="modal-header">
-                <h2 class="modal-title" >How old is your child?</h2>
+                <h2 class="modal-title" >{% for curr_lang in lang_list %}{% language curr_lang %}{% trans "How old is your child?" %}{% endlanguage %}<br>{% endfor %}</h2>
             </div>
 
             <div class="modal-body">
 
-                <div class="inner"></div>
+                <div class="inner">
+                    {% for curr_study in possible_studies %}
+                        {% language curr_study.user_language %}
+                        <div id="div_{{curr_study.name}}">
+                        
+                            <h3><a href = "{% url 'administer_new_parent' username=username study_name=curr_study.name %}">
+                            {% trans 'My baby speaks LANGUAGE and is between MIN_AGE and MAX_AGE months old. [XX slot(s) left]' %}
+                            </a> </h3> 
+                            <ul><li>
+                                {% trans 'Born between STARTDATE and ENDDATE' %}
+                            </li></ul> 
+                            <br>
+                        
+                        </div>
+                        <script type="text/javascript">
 
-                <script type="text/javascript">
+                            var min_age = parseInt("{{ curr_study.min_age }}");
+                            var max_age = parseInt("{{ curr_study.max_age }}");
+                            var poss_age;
+                            var dob_min = moment().subtract((min_age - 2), 'months');
+                            var dob_max = moment().subtract((max_age + 2), 'months');
+                            var b_date = dob_min;
+                            var t_date = moment();
+                            var age_range = [];
 
-                // Parse string object from Django into a JS object.
-                var raw_data = JSON.parse('{{possible_studies}}'.replace(/&quot;/g,'"'));
+                            while (b_date.isAfter(dob_max)) {
+                                var day_diff = ((t_date.date() - b_date.date()) >= 15)? 1: 0
+                                var poss_age = 12*(t_date.year() - b_date.year()) + (t_date.month() - b_date.month()) + day_diff;
+                                if (poss_age >= min_age & poss_age <= max_age) {
+                                    curr_date = b_date.locale("{{ curr_study.user_language }}")
+                                    age_range.push(curr_date.format("ll"))
+                                }
 
-                // Function for sorting instruments by age. W&G forms appear above W&S forms.
-                function compare(a,b) {
-                  if (a.instrument__min_age < b.instrument__min_age)
-                    return -1;
-                  if (a.instrument__min_age > b.instrument__min_age)
-                    return 1;
-                  return 0;
-                }
+                                b_date.subtract(1, 'days')
 
-                // Sort JSON objects by minimum age (ascending)
-                data = raw_data.sort(compare);                 
+                            }
 
-                // For each object, create a short text section describing the age range and language associated with the text along with an actual date range based off of the date in browser time. Append to the 'inner' div above for display.
-                $.each(data, function(index, value){
-                    var raw_text = "My baby speaks " + value.instrument__language + " and is between " + value.instrument__min_age + " and " + value.instrument__max_age + " months old.";
+                            var curr_text = $('#div_{{curr_study.name}}').html();
+                            curr_text = curr_text.replace(/LANGUAGE/g, "{% trans curr_study.instrument.language %}").replace(/MIN_AGE/g, "{{ curr_study.min_age }}").replace(/MAX_AGE/g, "{{ curr_study.max_age }}").replace(/STARTDATE/g, age_range[age_range.length - 1]).replace(/ENDDATE/g, age_range[0]);;
+                            var slots_left = parseInt("{{ curr_study.slots_left }}");
+                            if (slots_left > 0) {
+                                curr_text = curr_text.replace("XX", String(slots_left));
+                            } else if (slots_left <=0) {
+                                curr_text = curr_text.replace("XX", String(0));
+                            } else {
+                                curr_text = curr_text.replace(/\[(.*?)\]/g, "");
+                            }
 
-                    if (parseInt(value.slots_left) > 0) {raw_text = raw_text + " (" + value.slots_left + " spots left)"
-                    } else if (parseInt(value.slots_left) <=0) {raw_text = raw_text + " (0 spots left)"}
-                    var hyperlink = "{% url 'administer_new_parent' username=username study_name=12345 %}".replace(/12345/, value.name);
+                            $('#div_{{curr_study.name}}').html(curr_text);
+                        </script>
+                        {% endlanguage %}
+                    {% endfor %}
+                </div>
 
-                    var min_age = value.instrument__min_age;
-                    var max_age = value.instrument__max_age;
-                    var poss_age;
-                    var dob_min = moment().subtract((min_age - 2), 'months');
-                    var dob_max = moment().subtract((max_age + 2), 'months');
-                    var b_date = dob_min;
-                    var t_date = moment();
-                    var age_range = [];
-
-                    while (b_date.isAfter(dob_max)) {
-                        var day_diff = ((t_date.date() - b_date.date()) >= 15)? 1: 0
-                        var poss_age = 12*(t_date.year() - b_date.year()) + (t_date.month() - b_date.month()) + day_diff;
-                        if (poss_age >= min_age & poss_age <= max_age) {age_range.push(b_date.format("MMMM Do, YYYY"))}
-
-                        b_date.subtract(1, 'days')
-
-                    }
-
-                    var hint = "Born between " + age_range[age_range.length - 1] + " and " + age_range[0];
-                    var text = "<h3><a href = '" + hyperlink + "'>" + raw_text + "</a> </h3> <ul><li>" + hint + "</li></ul> <br>"              
-                    
-                    $( ".inner" ).append( text);
-
-                 })
-
-                 
-                </script>
             </div>
 
         
@@ -103,7 +112,7 @@
 </div>
 
 {% else %}
-<p>Form unavailable. Contact admin. </p>
+<p>{% trans "Form unavailable. Contact admin." %} </p>
 {% endif %}
 {% endblock %}
 

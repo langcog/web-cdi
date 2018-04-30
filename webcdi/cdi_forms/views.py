@@ -2,7 +2,7 @@
 
 from django.shortcuts import render
 from .models import English_WS, English_WG, Spanish_WS, Spanish_WG, BackgroundInfo, requests_log, Zipcode
-import os.path, json, datetime, itertools, requests, re
+import os.path, json, datetime, dateutil.relativedelta, itertools, requests, re
 from researcher_UI.models import administration_data, administration, study, payment_code, ip_address
 from django.http import Http404, JsonResponse, HttpResponse
 from .forms import BackgroundForm, ContactForm
@@ -515,17 +515,41 @@ def administer_cdi_form(request, hash_id):
 
 # For studies that are grouped together, render a modal form that properly displays information regarding each study.
 def find_paired_studies(request, username, study_group):
+    data = {}
     researcher = User.objects.get(username = username)
-    possible_studies = study.objects.filter(study_group = study_group, researcher = researcher).values("name","instrument__min_age", "instrument__max_age", "instrument__language","subject_cap").annotate(admin_count=models.Sum(
+    possible_studies = study.objects.filter(study_group = study_group, researcher = researcher).annotate(admin_count=models.Sum(
     models.Case(
         models.When(administration__completed=True, then=1),
         default=0, output_field=models.IntegerField()
-    ))).annotate(slots_left=models.F('subject_cap')-models.F('admin_count'))
-    data = dict()
-    data['background_form'] = BackgroundForm()
-    data['possible_studies'] = json.dumps(list(possible_studies), cls=DjangoJSONEncoder)
+    ))).annotate(slots_left=models.F('subject_cap')-models.F('admin_count'),
+    user_language = models.Case( 
+        models.When(instrument__language='English', then=models.Value('en')),
+        models.When(instrument__language='Spanish', then=models.Value('es')),
+    default=models.Value('en'), output_field=models.CharField())).order_by('min_age')
+
+    first_study = study.objects.filter(study_group = study_group, researcher = researcher)[:1].get()
+
+    context = {}
+    context['language'] = first_study.instrument.language
+    context['instrument'] = first_study.instrument.name
+    context['min_age'] = first_study.min_age
+    context['max_age'] = first_study.max_age
+    context['birthweight_units'] = first_study.birth_weight_units
+
+    if context['language'] == "English":
+        user_language = 'en'
+    elif context['language'] == "Spanish":
+        user_language = 'es'
+    translation.activate(user_language)
+
+    data['background_form'] = BackgroundForm(context = context)
+    data['possible_studies'] = possible_studies
+    data['lang_list'] = possible_studies.order_by('user_language').values_list('user_language', flat = True).distinct()
     data['username'] = username
-    return render(request, 'cdi_forms/study_group.html', data)
+
+    response = render(request, 'cdi_forms/study_group.html', data)
+    response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
+    return response
 
 # For test-takers contacting a Web-CDI admin
 def contact(request, hash_id):
