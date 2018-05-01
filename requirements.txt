@@ -17,6 +17,7 @@ django-bootstrap4==0.0.3
 git+git://github.com/django-crispy-forms/django-crispy-forms.git@c243b01a41ff2cab28fba219f39f996c1125195d
 django-csvimport==2.4
 django-form-utils==1.0.3
+django-health-check==3.5.1
 django-inspectional-registration==0.6.2
 django-ipware==1.1.6
 django-modeltranslation==0.12.2

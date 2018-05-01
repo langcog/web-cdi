@@ -33,4 +33,5 @@ urlpatterns = [
     url(r'interface/', include('researcher_UI.urls')),
     url(r'^registration/', include('registration.urls')),
     url(r'^lockout/$', TemplateView.as_view(template_name="registration/lockout.html")),
+    url(r'^health/?', include('health_check.urls')),
 ]
