@@ -409,7 +409,8 @@ def cdi_form(request, hash_id):
         data['created_date'] = administration_instance.created_date.strftime('%b %d, %Y, %I:%M %p')
         data['captcha'] = None
         data['language'] = administration_instance.study.instrument.language
-
+        data['form'] = administration_instance.study.instrument.form
+        
         if administration_instance.study.confirm_completion and administration_instance.study.researcher.username == "langcoglab" and administration_instance.study.allow_payment:
             data['captcha'] = 'True'
 

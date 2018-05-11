@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-30 05:41+0000\n"
+"POT-Creation-Date: 2018-05-10 21:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -699,9 +699,9 @@ msgid "Background Information"
 msgstr "Informe Historial"
 
 #: cdi_forms/templates/cdi_forms/background_info.html:61
-#: cdi_forms/templates/cdi_forms/cdi_form.html:458
+#: cdi_forms/templates/cdi_forms/cdi_form.html:460
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:351
-#: cdi_forms/templates/cdi_forms/study_group.html:170
+#: cdi_forms/templates/cdi_forms/study_group.html:115
 msgid "Form unavailable. Contact admin."
 msgstr "Formulario no disponible. Contacte admin."
 
@@ -772,18 +772,18 @@ msgid "Okay"
 msgstr "Bien"
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:9
-#: cdi_forms/templates/cdi_forms/cdi_form.html:446
+#: cdi_forms/templates/cdi_forms/cdi_form.html:448
 #: cdi_forms/templates/cdi_forms/study_group.html:6 cdi_forms/views.py:350
 msgid "Save"
 msgstr "Guardar"
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:10
-#: cdi_forms/templates/cdi_forms/cdi_form.html:442 cdi_forms/views.py:366
+#: cdi_forms/templates/cdi_forms/cdi_form.html:444 cdi_forms/views.py:366
 msgid "Submit"
 msgstr "Enviar"
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:13
-#: cdi_forms/templates/cdi_forms/cdi_form.html:447 cdi_forms/views.py:362
+#: cdi_forms/templates/cdi_forms/cdi_form.html:449 cdi_forms/views.py:362
 msgid "Go back to Background Info"
 msgstr "Volver a Información de Fondo"
 
@@ -795,7 +795,129 @@ msgstr "El Índice de Contenidos"
 msgid "Contents:"
 msgstr "El Índice:"
 
-#: cdi_forms/templates/cdi_forms/cdi_form.html:404
+#: cdi_forms/templates/cdi_forms/cdi_form.html:58
+msgid ""
+"In this section, you will be asked to think about which phrases and words "
+"your child \"understands\" and \"understands and says.\"  This assessment is "
+"for children of many ages. Your child may not be able to understand or say a "
+"lot of the words on the form. That is perfectly fine!"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_form.html:61
+msgid ""
+"Your child \"understands\" a word/phrase if they know what the word/phrase "
+"means, even though they may not be able to say it themselves. Here are some "
+"examples."
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_form.html:72
+msgid "DO check \"understands\" if:"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_form.html:74
+msgid ""
+"Your child responds appropriately to the word/phrase. For example, when you "
+"say \"Get the ball,\" s/he turns and tries to find the ball."
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_form.html:87
+msgid "DON'T check \"understands\" if:"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_form.html:89
+msgid ""
+"Your child doesn't have a meaning for the word/phrase.  S/he may have heard "
+"it before, like in a story, but you don't think s/he knows what it means."
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_form.html:99
+msgid ""
+"Your child \"understands and says\" a word/phrase if they know what the word/"
+"phrase means AND they are able to say it by themselves. Here are some "
+"examples."
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_form.html:109
+#, fuzzy
+#| msgid "understands and says"
+msgid "DO check \"understands and says\" if:"
+msgstr "comp. y dice"
+
+#: cdi_forms/templates/cdi_forms/cdi_form.html:111
+msgid ""
+"Your child says a word/phrase when trying to name an object or describe "
+"something that happened.  You think s/he has a meaning for that word/phrase."
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_form.html:126
+msgid ""
+"It's fine if your child can't say the whole word or says it his/her own "
+"\"special\" way."
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_form.html:128
+#, fuzzy
+#| msgid "understands and says"
+msgid "DO check \"understands and says.\""
+msgstr "comp. y dice"
+
+#: cdi_forms/templates/cdi_forms/cdi_form.html:143
+msgid ""
+"DON'T check if your child is just stringing sounds together.  This is not a "
+"real word that means something."
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_form.html:145
+#: cdi_forms/templates/cdi_forms/cdi_form.html:161
+#, fuzzy
+#| msgid "understands and says"
+msgid "DON'T check \"understands and says.\""
+msgstr "comp. y dice"
+
+#: cdi_forms/templates/cdi_forms/cdi_form.html:159
+#: cdi_forms/templates/cdi_forms/cdi_form.html:238
+msgid ""
+"DON'T ask your child to repeat the words on the list. This doesn't count!"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_form.html:177
+msgid ""
+"In this section, you will be asked about words that your child \"understands "
+"and says.\" Your child \"understands and says\" a word on the list if they "
+"know what the word means AND they say it by themselves. Here are some "
+"examples. This assessment is for children of many ages. Your child may not "
+"be able to understand or say a lot of the words on the form. That is "
+"perfectly fine!"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_form.html:189
+msgid "DO check the box if:"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_form.html:191
+msgid ""
+"Your child says the word when trying to name an object or describe something "
+"that happened.  You think s/he has a meaning for that word."
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_form.html:207
+msgid ""
+"It's fine if your child can't say the whole word or says it his/her own "
+"\"special\" way. If you use another word in your family (e.g., Nana for "
+"Grandma), that is ok too!"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_form.html:209
+msgid "DO check the box."
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_form.html:224
+msgid ""
+"DON'T check the box if your child is just stringing sounds together. This is "
+"not a real word that means something."
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_form.html:406
 msgid ""
 "You are almost done! Click \"Yes\" if you agree with ALL of the following "
 "points. Your answer will not affect your results. There is nothing wrong "
@@ -805,20 +927,20 @@ msgstr ""
 "puntos siguientes. Tu respuesta no afectará tus resultados. No hay nada de "
 "malo en elegir \"No\":"
 
-#: cdi_forms/templates/cdi_forms/cdi_form.html:408
+#: cdi_forms/templates/cdi_forms/cdi_form.html:410
 #, python-format
 msgid "You have a child who is %(age)s months old."
 msgstr "Usted tiene un(a) niño(a) que tiene %(age)s meses de edad."
 
-#: cdi_forms/templates/cdi_forms/cdi_form.html:409
+#: cdi_forms/templates/cdi_forms/cdi_form.html:411
 msgid "You filled out the entire questionnaire to the best of your ability."
 msgstr "Completaste todo el cuestionario lo mejor que pudiste."
 
-#: cdi_forms/templates/cdi_forms/cdi_form.html:410
+#: cdi_forms/templates/cdi_forms/cdi_form.html:412
 msgid "You are taking this questionnaire for the FIRST time."
 msgstr "Usted está tomando este cuestionario por PRIMERA vez."
 
-#: cdi_forms/templates/cdi_forms/cdi_form.html:419
+#: cdi_forms/templates/cdi_forms/cdi_form.html:421
 #, python-format
 msgid ""
 "Yes, I have a child who is %(age.0)s months old, I filled out the entire "
@@ -827,7 +949,7 @@ msgstr ""
 "Sí, tengo un(a) niño(a) que tiene %(age.0)s meses de edad, llené todo el "
 "cuestionario y estoy tomando este cuestionario por primera vez."
 
-#: cdi_forms/templates/cdi_forms/cdi_form.html:425
+#: cdi_forms/templates/cdi_forms/cdi_form.html:427
 #, python-format
 msgid ""
 "No, I do NOT have a child who is %(age.0)s months old, I have NOT filled out "
@@ -836,32 +958,32 @@ msgstr ""
 "No, I do NOT have a child who is %(age.0)s months old, I have NOT filled out "
 "the entire questionnaire, and/or I have taken this questionnaire before."
 
-#: cdi_forms/templates/cdi_forms/cdi_form.html:431
+#: cdi_forms/templates/cdi_forms/cdi_form.html:433
 msgid ""
 "Finally, please check the Captcha box below to display the submit button!"
 msgstr ""
 "¡Finalmente, compruebe el cuadro Captcha a continuación para mostrar el "
 "botón de enviar!"
 
-#: cdi_forms/templates/cdi_forms/cdi_form.html:440
+#: cdi_forms/templates/cdi_forms/cdi_form.html:442
 msgid "Previous Page"
 msgstr "Página Anterior"
 
-#: cdi_forms/templates/cdi_forms/cdi_form.html:441
+#: cdi_forms/templates/cdi_forms/cdi_form.html:443
 msgid "Next Page"
 msgstr "Página Siguiente"
 
-#: cdi_forms/templates/cdi_forms/cdi_form.html:453
+#: cdi_forms/templates/cdi_forms/cdi_form.html:455
 msgid "Don't forget to save your progress whenever you can!"
 msgstr "¡No olvide guardar su progreso siempre que pueda!"
 
-#: cdi_forms/templates/cdi_forms/cdi_form.html:499
+#: cdi_forms/templates/cdi_forms/cdi_form.html:501
 msgid ""
 "Are you ready to submit? You cannot change your answers after submission."
 msgstr ""
 "¿Está listo para enviar? No puede cambiar sus respuestas después de envío"
 
-#: cdi_forms/templates/cdi_forms/cdi_form.html:528
+#: cdi_forms/templates/cdi_forms/cdi_form.html:530
 msgid "understands and says"
 msgstr "comp. y dice"
 
@@ -1199,26 +1321,17 @@ msgstr "%% Prevista de Palabras en Cuestionario"
 msgid "How old is your child?"
 msgstr "¿Cuántos años su niño(a) tiene?"
 
-#: cdi_forms/templates/cdi_forms/study_group.html:58
+#: cdi_forms/templates/cdi_forms/study_group.html:59
 msgid ""
 "My baby speaks LANGUAGE and is between MIN_AGE and MAX_AGE months old. [XX "
 "slot(s) left]"
-msgstr "Mi niño(a) habla LANGUAGE y está entre MIN_AGE y MAX_AGE meses de edad. [XX "
+msgstr ""
+"Mi niño(a) habla LANGUAGE y está entre MIN_AGE y MAX_AGE meses de edad. [XX "
 "lugar(es) más]"
 
-#: cdi_forms/templates/cdi_forms/study_group.html:61
-#: cdi_forms/templates/cdi_forms/study_group.html:152
+#: cdi_forms/templates/cdi_forms/study_group.html:62
 msgid "Born between STARTDATE and ENDDATE"
 msgstr "Nacido(a) entre STARTDATE y ENDDATE"
-
-#: cdi_forms/templates/cdi_forms/study_group.html:125
-msgid "My baby speaks LANGUAGE and is between MIN_AGE and MAX_AGE months old."
-msgstr "Mi niño(a) habla LANGUAGE y está entre MIN_AGE y MAX_AGE meses de edad"
-
-#: cdi_forms/templates/cdi_forms/study_group.html:127
-#: cdi_forms/templates/cdi_forms/study_group.html:128
-msgid "spots left"
-msgstr "lugares más"
 
 #: cdi_forms/views.py:182
 #, python-format
@@ -1663,11 +1776,18 @@ msgstr ""
 msgid "I am afraid that your account registration was rejected by inspector."
 msgstr ""
 
-#: webcdi/settings.py:209
+#: webcdi/settings.py:213
 msgid "English"
 msgstr "Inglés"
 
-#: webcdi/settings.py:210
+#: webcdi/settings.py:214
 msgid "Spanish"
 msgstr "Español"
 
+#~ msgid ""
+#~ "My baby speaks LANGUAGE and is between MIN_AGE and MAX_AGE months old."
+#~ msgstr ""
+#~ "Mi niño(a) habla LANGUAGE y está entre MIN_AGE y MAX_AGE meses de edad"
+
+#~ msgid "spots left"
+#~ msgstr "lugares más"
