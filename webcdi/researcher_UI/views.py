@@ -773,7 +773,7 @@ def import_data(request, study_name):
             PROJECT_ROOT = settings.BASE_DIR
             instruments_json = json.load(open(os.path.realpath(PROJECT_ROOT + '/static/json/instruments.json')))
             header_file_path = filter(lambda x: x['language'] == study_obj.instrument.language and x['form'] == study_obj.instrument.form, instruments_json)[0]['fillable_headers']
-            pdf_header_df = pd.read_csv(header_file_path)
+            pdf_header_df = pd.read_csv(open(os.path.realpath(PROJECT_ROOT + '/' +header_file_path)))
 
             default_dict = {
             'annual_income': u'Prefer not to disclose', 'birth_order': 0, 'birth_weight_kg': None,
