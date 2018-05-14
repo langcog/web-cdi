@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 - Upcoming additions of other language forms to CDI
+- Addition of English-language short forms
+
+## [1.1.1] - 2018-05-11
+### Changed
+- Marked CDI form instructions for Spanish-language translations
 
 ## [1.1.0] - 2018-05-07
 ### Added
