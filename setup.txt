@@ -55,19 +55,19 @@ $ psql -U $username webcdi-admin -c 'GRANT ALL PRIVILEGES ON DATABASE "webcdi-ad
 #FOR THIS TO WORK, YOU MUST GO INTO settings.py AND COMMENT OUT THE LINE STARTING WITH LOGGING = { THROUGH THE FINAL CLOSING BRACKET AFTER ‘propagate’: True,
 make and run migrations
 $ ./manage.py makemigrations
+$ ./manage.py migrate researcher_UI 0025_study_show_feedback
+$ ./manage.py migrate cdi_forms 0040_replace_choices_field
+$ ./manage.py populate_instrument
 $ ./manage.py migrate
 
 #FROM HERE YOU HAVE 2 OPTIONS. CREATE A BLANK VERSION OF THE DATABASE OR SYNC YOUR LOCAL COPY TO THE LIVE DATABASE. 
 # TO DO THE FIRST:
 
-	set up instruments
-	$ sudo -u $username psql -d webcdi-admin -c "\\COPY cdi_forms_english_ws FROM 'cdi_form_csv/[English_WS].csv' WITH (FORMAT csv, HEADER True)"
-	$ sudo -u $username psql -d webcdi-admin -c "\\COPY cdi_forms_english_wg FROM 'cdi_form_csv/[English_WG].csv' WITH (FORMAT csv, HEADER True)"
-	$ sudo -u $username psql -d webcdi-admin -c "\\COPY cdi_forms_spanish_ws FROM 'cdi_form_csv/[Spanish_WS].csv' WITH (FORMAT csv, HEADER True)"
-	[and so on for other instruments]
-
 	create login for admin console
 	$ ./manage.py createsuperuser
+
+	set up instrument access for superuser
+	$ psql -U $username webcdi-admin -c 'INSERT INTO "researcher_UI_researcher_allowed_instruments"( researcher_id,instrument_id) SELECT x,y FROM (select id as x from auth_user where is_superuser=true) xx CROSS JOIN (select name as y from "researcher_UI_instrument") yy'
 
 	in the admin console (http://127.0.0.1:8000/admin) add instruments for English_WS, English_WG, etc.
 

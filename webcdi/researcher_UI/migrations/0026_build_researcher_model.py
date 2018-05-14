@@ -10,27 +10,30 @@ import os, json
 def populateResearcherModel(apps, schema_editor):
     
     PROJECT_ROOT = settings.BASE_DIR
-    researcher_profiles = json.load(open(os.path.realpath(PROJECT_ROOT + '/researcher_profiles.json')))
+    file_path = PROJECT_ROOT + '/researcher_profiles.json'
+    if os.path.exists(file_path):
+        researcher_profiles = json.load(open(os.path.realpath(file_path)))
 
-    researcher = apps.get_model('researcher_UI', 'researcher')
-    User = apps.get_model('auth', 'User')
-    instrument = apps.get_model('researcher_UI', 'instrument')
+        researcher = apps.get_model('researcher_UI', 'researcher')
+        User = apps.get_model('auth', 'User')
+        instrument = apps.get_model('researcher_UI', 'instrument')
 
-    english_instruments = instrument.objects.filter(language = 'English')
+        english_instruments = instrument.objects.filter(language = 'English')
 
-    for rp in researcher_profiles:
-        user_obj = User.objects.get(id = rp['user'], email = rp['email'])
-        researcher_obj, created = researcher.objects.get_or_create(user = user_obj)
-        user_obj.first_name = rp['first_name']
-        user_obj.last_name = rp['last_name']
-        researcher_obj.institution = rp['institution']
-        researcher_obj.position = rp['position']
-        user_obj.save()
-        if user_obj.is_staff:
-            researcher_obj.allowed_instruments.add(*instrument.objects.all())
-        else:
-            researcher_obj.allowed_instruments.add(*english_instruments)
-        researcher_obj.save()
+        for rp in researcher_profiles:
+            if User.objects.filter(id = rp['user'], email = rp['email']).exists():
+                user_obj = User.objects.get(id = rp['user'], email = rp['email'])
+                researcher_obj, created = researcher.objects.get_or_create(user = user_obj)
+                user_obj.first_name = rp['first_name']
+                user_obj.last_name = rp['last_name']
+                researcher_obj.institution = rp['institution']
+                researcher_obj.position = rp['position']
+                user_obj.save()
+                if user_obj.is_staff:
+                    researcher_obj.allowed_instruments.add(*instrument.objects.all())
+                else:
+                    researcher_obj.allowed_instruments.add(*english_instruments)
+                researcher_obj.save()
 
 
 def removeResearcherModel(apps, schema_editor):
