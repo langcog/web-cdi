@@ -285,7 +285,6 @@ def prefilled_cdi_data(administration_instance):
                         group_objects = instrument_model.objects.filter(category__exact=section['id']).values(*field_values)
                         
                         x = cdi_items(group_objects, item_type['type'], prefilled_data, item_type['id'])
-                        print x
                         section['objects'] = x
                         if administration_instance.study.show_feedback: raw_objects.extend(x)
                         if any(['*' in x['definition'] for x in section['objects']]):
@@ -338,10 +337,8 @@ def cdi_form(request, hash_id):
                 if len(items) == 1:
                     item = items[0]
                     value = request.POST[key]
-                    print value
                     if item.choices:
                         choices = map(unicode.strip, item.choices.choice_set_en.split(';'))
-                        print choices
                         if value in choices:
                             administration_data.objects.update_or_create(administration = administration_instance, item_ID = key, defaults = {'value': value})
                     else:
