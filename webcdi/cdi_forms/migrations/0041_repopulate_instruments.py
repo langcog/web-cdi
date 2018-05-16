@@ -5,75 +5,165 @@ from __future__ import unicode_literals
 from django.db import migrations, models
 import django.db.models.deletion
 from django.core.management import call_command
+from django.conf import settings
+import csv, json, os, re, string
+from django.core.exceptions import FieldError
 
-def updateInstruments(apps, schema_editor):
-    call_command('populate_instrument')
-    call_command('populate_items')
+def unicode_csv_reader(utf8_data, dialect=csv.excel, **kwargs):
+    csv_reader = csv.reader(utf8_data, dialect=dialect, **kwargs)
+    for row in csv_reader:
+        yield [unicode(cell, 'utf-8') for cell in row]
+
+def populate_instrument(apps, schema_editor):
+    PROJECT_ROOT = settings.BASE_DIR
+    input_instruments = json.load(open(os.path.realpath(PROJECT_ROOT + '/static/json/instruments.json')))
+    var_safe = lambda s: ''.join([c for c in '_'.join(s.split()) if c in string.letters + '_'])
+    instrument = apps.get_model('researcher_UI', 'instrument')
+    instrument_fields = [f.name for f in instrument._meta.get_fields()]
+
+    for curr_instrument in input_instruments:
+
+        instrument_language = curr_instrument['language']
+        instrument_form = curr_instrument['form']
+        instrument_verbose_name = curr_instrument['verbose_name']
+
+        instrument_name = var_safe(instrument_language) + '_' + var_safe(instrument_form)
+
+        instrument_min_age = curr_instrument['min_age']
+        instrument_max_age = curr_instrument['max_age']
+
+        data_dict = {'language': instrument_language,
+                     'form': instrument_form,
+                     'verbose_name': instrument_verbose_name,
+                     'min_age': instrument_min_age,
+                     'max_age': instrument_max_age}
+
+        sub_dict = {k: data_dict.get(k, None) for k in set.intersection(set(data_dict.keys()), set(instrument_fields))}
+
+        instrument_obj, created = instrument.objects.update_or_create(name = instrument_name, defaults=sub_dict,)
+
+def populate_items(apps, schema_editor):
+    PROJECT_ROOT = settings.BASE_DIR
+    input_instruments = json.load(open(os.path.realpath(PROJECT_ROOT + '/static/json/instruments.json')))
+    instrument = apps.get_model('researcher_UI', 'instrument')
+    var_safe = lambda s: ''.join([c for c in '_'.join(s.split()) if c in string.letters + '_'])
+
+    try:
+        Choices = apps.get_model('cdi_forms', 'Choices')
+    except LookupError:
+        Choices = None
+
+    for curr_instrument in input_instruments:
+
+        instrument_language, instrument_form = curr_instrument['language'], curr_instrument['form']
+        instrument_name = var_safe(instrument_language) + '_' + var_safe(instrument_form)
+
+        try:
+            instrument_obj = instrument.objects.get(form=instrument_form, language=instrument_language)
+        except FieldError:
+            instrument_obj = instrument.objects.get(name=instrument_name)
+
+        instrument_model = apps.get_model(app_label='cdi_forms', model_name=instrument_obj.name)
+
+        ftype = curr_instrument['csv_file'].split('.')[-1]
+
+        if ftype == 'csv':
+
+            contents = list(unicode_csv_reader(open(os.path.realpath(PROJECT_ROOT + '/' + curr_instrument['csv_file']))))
+            col_names = contents[0]
+            nrows = len(contents)
+            get_row = lambda row: contents[row]
+        else:
+            raise IOError("Instrument file must be a CSV.")
+
+        for row in xrange(1, nrows):
+            row_values = get_row(row)
+            if len(row_values) > 1:
+                itemID = row_values[col_names.index('itemID')]
+                item = row_values[col_names.index('item')]
+                item_type = row_values[col_names.index('item_type')]
+                item_category = row_values[col_names.index('category')]
+                item_choices = row_values[col_names.index('choices')]
+                choices_key = None
+                if item_type not in ['combination_examples']:
+                    try:
+                        if Choices:
+                            choices_key = Choices.objects.get(choice_set_en = item_choices)
+                        else:
+                            choices_key = item_choices
+                    except:
+                        raise IOError("Can't find choice set %s in model for %s (%s)" % (item_category, itemID, item_choices, ))
+
+                definition = row_values[col_names.index('definition')]
+                gloss = row_values[col_names.index('gloss')]
+                if 'complexity_category' in col_names:
+                    complexity_category = row_values[col_names.index('complexity_category')]
+                else:
+                    complexity_category = None
+
+                if 'uni_lemma' in col_names:
+                    uni_lemma = row_values[col_names.index('uni_lemma')]
+                else:
+                    uni_lemma = None
+
+                data_dict = {'item': item,
+                             'item_type': item_type,
+                             'category': item_category,
+                             'choices': choices_key,
+                             'definition': definition,
+                             'gloss': gloss,
+                             'complexity_category': complexity_category,
+                             'uni_lemma': uni_lemma}
+
+                cdi_item, created = instrument_model.objects.update_or_create(itemID = itemID, defaults=data_dict,)
+
 
 def fixItemOrders(apps, schema_editor):
     administration_data = apps.get_model('researcher_UI', 'administration_data')
 
-    administration_data.objects.filter(administration__study__instrument__language = 'English', 
-        administration__study__instrument__form = 'WS', 
+    administration_data.objects.filter(administration__study__instrument__name = 'English_WS', 
         item_ID='item_292').update(item_ID='item_XXX')
-    administration_data.objects.filter(administration__study__instrument__language = 'English', 
-        administration__study__instrument__form = 'WS', 
+    administration_data.objects.filter(administration__study__instrument__name = 'English_WS', 
         item_ID='item_293').update(item_ID='item_292')
-    administration_data.objects.filter(administration__study__instrument__language = 'English', 
-        administration__study__instrument__form = 'WS', 
+    administration_data.objects.filter(administration__study__instrument__name = 'English_WS', 
         item_ID='item_XXX').update(item_ID='item_293')
 
-    administration_data.objects.filter(administration__study__instrument__language = 'English', 
-        administration__study__instrument__form = 'WS', 
+    administration_data.objects.filter(administration__study__instrument__name = 'English_WS', 
         item_ID='item_282').update(item_ID='item_YYY')
-    administration_data.objects.filter(administration__study__instrument__language = 'English', 
-        administration__study__instrument__form = 'WS', 
+    administration_data.objects.filter(administration__study__instrument__name = 'English_WS', 
         item_ID='item_283').update(item_ID='item_282')
-    administration_data.objects.filter(administration__study__instrument__language = 'English', 
-        administration__study__instrument__form = 'WS', 
+    administration_data.objects.filter(administration__study__instrument__name = 'English_WS', 
         item_ID='item_YYY').update(item_ID='item_283')
 
-    administration_data.objects.filter(administration__study__instrument__language = 'English', 
-        administration__study__instrument__form = 'WS', 
+    administration_data.objects.filter(administration__study__instrument__name = 'English_WS', 
         item_ID='item_131').update(item_ID='item_ZZZ')
-    administration_data.objects.filter(administration__study__instrument__language = 'English', 
-        administration__study__instrument__form = 'WS', 
+    administration_data.objects.filter(administration__study__instrument__name = 'English_WS', 
         item_ID='item_132').update(item_ID='item_131')
-    administration_data.objects.filter(administration__study__instrument__language = 'English', 
-        administration__study__instrument__form = 'WS', 
+    administration_data.objects.filter(administration__study__instrument__name = 'English_WS', 
         item_ID='item_ZZZ').update(item_ID='item_132')
 
 def reverseItemOrders(apps, schema_editor):
     administration_data = apps.get_model('researcher_UI', 'administration_data')
 
-    administration_data.objects.filter(administration__study__instrument__language = 'English', 
-        administration__study__instrument__form = 'WS', 
+    administration_data.objects.filter(administration__study__instrument__name = 'English_WS', 
         item_ID='item_293').update(item_ID='item_XXX')
-    administration_data.objects.filter(administration__study__instrument__language = 'English', 
-        administration__study__instrument__form = 'WS', 
+    administration_data.objects.filter(administration__study__instrument__name = 'English_WS', 
         item_ID='item_292').update(item_ID='item_293')
-    administration_data.objects.filter(administration__study__instrument__language = 'English', 
-        administration__study__instrument__form = 'WS', 
+    administration_data.objects.filter(administration__study__instrument__name = 'English_WS', 
         item_ID='item_XXX').update(item_ID='item_292')
 
-    administration_data.objects.filter(administration__study__instrument__language = 'English', 
-        administration__study__instrument__form = 'WS', 
+    administration_data.objects.filter(administration__study__instrument__name = 'English_WS', 
         item_ID='item_283').update(item_ID='item_YYY')
-    administration_data.objects.filter(administration__study__instrument__language = 'English', 
-        administration__study__instrument__form = 'WS', 
+    administration_data.objects.filter(administration__study__instrument__name = 'English_WS', 
         item_ID='item_282').update(item_ID='item_283')
-    administration_data.objects.filter(administration__study__instrument__language = 'English', 
-        administration__study__instrument__form = 'WS', 
+    administration_data.objects.filter(administration__study__instrument__name = 'English_WS', 
         item_ID='item_YYY').update(item_ID='item_282')
 
-    administration_data.objects.filter(administration__study__instrument__language = 'English', 
-        administration__study__instrument__form = 'WS', 
+    administration_data.objects.filter(administration__study__instrument__name = 'English_WS', 
         item_ID='item_132').update(item_ID='item_ZZZ')
-    administration_data.objects.filter(administration__study__instrument__language = 'English', 
-        administration__study__instrument__form = 'WS', 
+    administration_data.objects.filter(administration__study__instrument__name = 'English_WS', 
         item_ID='item_131').update(item_ID='item_132')
-    administration_data.objects.filter(administration__study__instrument__language = 'English', 
-        administration__study__instrument__form = 'WS', 
+    administration_data.objects.filter(administration__study__instrument__name = 'English_WS', 
         item_ID='item_ZZZ').update(item_ID='item_131')
 
 class Migration(migrations.Migration):
@@ -113,6 +203,7 @@ class Migration(migrations.Migration):
             name='gloss',
             field=models.CharField(blank=True, max_length=1001, null=True),
         ),
-        migrations.RunPython(updateInstruments),
+        migrations.RunPython(populate_instrument),
+        migrations.RunPython(populate_items),
         migrations.RunPython(fixItemOrders, reverseItemOrders),
     ]
