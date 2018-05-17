@@ -442,7 +442,7 @@
 
         // Load csv matching informal category labels with formal category titles and generate 2 category-level summary graph.
         // If chid only had responses of one type (all words are 'understands' or all words are 'produces'), produce 1 graph and double its width
-        d3.csv("{% static 'graph_data/word_categories.csv' %}", function(data) {
+        d3.csv("{% static 'data_csv/word_categories.csv' %}", function(data) {
             word_categories = data;
             var list_names = objectMap(categorySize,'key')
             updateCategoryInfo();
@@ -798,7 +798,7 @@
 
         // } else {
         //     // Generate prediction chart.
-        //     d3.csv("{% static 'graph_data/predicted_vocab_English.csv' %}", function(data) {
+        //     d3.csv("{% static 'data_csv/predicted_vocab_English.csv' %}", function(data) {
 
         //         predicted_vocab = data;
         //         current_ages = predicted_vocab.filter(function(d) { return (parseInt(d.age) == root.age); });
