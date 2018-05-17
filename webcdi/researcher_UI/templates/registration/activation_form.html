@@ -11,7 +11,16 @@
 {{ block.super }}
 <p>{% trans 'Please fill the password to complete account activation' %}</p>
 <form action="" method="post" class="form-activate">{% csrf_token %}
-    {{ form|crispy }}
+<!--     {{ form|crispy }}
+ -->
+	{% for field in form %}
+	    <div class="row form-group">
+	    	<div class="control-label col-lg-3">{{ field.label_tag }}{% if field.field.required %}<span class="asteriskField">*</span>{% endif %}</div>
+
+	    	<div class="controls col-lg-9">{{ field }}</div>
+		</div>
+	{% endfor %}
+	
     <div>
     <button type="submit" class="btn btn-primary">{% trans "Activate" %}</button>
     </div>

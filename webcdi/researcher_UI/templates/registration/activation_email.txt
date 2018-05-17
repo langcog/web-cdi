@@ -11,7 +11,7 @@
 {% blocktrans %}USERNAME: {{ user }}{% endblocktrans %}
 {% blocktrans %}PASSWORD: {{ password }}{% endblocktrans %}
 
-http://{{ site.domain }}{% url 'login' %}
+http://{{ site.domain }}{% url 'console' %}
 {% else %}
 {% blocktrans with site.name as site_name %}Your account at {{ site_name }} was successfully activated by the Web-CDI Team{% endblocktrans %}
 
@@ -20,5 +20,5 @@ http://{{ site.domain }}{% url 'login' %}
 {% trans '::Your account information::' %}
 {% blocktrans %}USERNAME: {{ user }}{% endblocktrans %}
 
-http://{{ site.domain }}{% url 'login' %}
+http://{{ site.domain }}{% url 'console' %}
 {% endif %}

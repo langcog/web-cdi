@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 from django.db import models
 import datetime
 from django.core.exceptions import ValidationError
@@ -54,6 +56,7 @@ class Spanish_WS(models.Model):
     complexity_category = models.CharField(max_length = 101, null=True, blank=True) # category for complexity item. Currently blank.
     def __str__(self):
         return self.item
+
 #Model for Spanish Words & Gestures form. Each row represents another item in the CDI questionnaire and its descriptive variables     
 class Spanish_WG(models.Model):
     itemID = models.CharField(max_length = 101, primary_key=True) # ID number for identification
