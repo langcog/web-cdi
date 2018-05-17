@@ -194,10 +194,11 @@ class BackgroundForm(BetterModelForm):
         super(BackgroundForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.template = PROJECT_ROOT + '/templates/bootstrap/whole_uni_form.html'
-        self.helper.form_class = 'form-inline'
+        self.helper.form_class = 'form-horizontal'
         self.helper.label_class = 'col-lg-3'
         self.helper.field_class = 'col-lg-9'
         self.helper.form_method = 'post'
+        self.helper.form_tag = False
 
         self.fields['birth_weight_lb'].label = _('Birth weight') + '<span class="asteriskField">*</span>'
         self.fields['birth_weight_kg'].label = _('Birth weight') + '<span class="asteriskField">*</span>'
