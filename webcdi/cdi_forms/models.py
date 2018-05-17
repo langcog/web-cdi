@@ -9,72 +9,11 @@ from django import forms
 from django.utils.translation import ugettext_lazy as _
 
 
-
 class requests_log(models.Model):
     url_hash = models.CharField(max_length=128)
     request_type = models.CharField(max_length=4)
     timestamp = models.DateTimeField(auto_now = True)
 
-#Model for English Words & Sentences form. Each row represents another item in the CDI questionnaire and its descriptive variables     
-class English_WS(models.Model):
-    itemID = models.CharField(max_length = 101, primary_key=True) # ID number for identification
-    item = models.CharField(max_length = 101) # string variable name
-    item_type = models.CharField(max_length = 101) # type of variable (word, phrase, etc.)
-    category = models.CharField(max_length = 101) # if word, the subcategory for item (animals, sounds, etc.)
-    choices = models.ForeignKey('Choices', null=True, on_delete=models.deletion.PROTECT)
-    definition = models.CharField(max_length = 1001, null=True, blank=True) # item listed in plaintext. This is what is displayed to test-takers along with possible choices
-    gloss = models.CharField(max_length = 1001, null=True, blank=True) # English translation for item. At the moment, we only have English instruments so definition and gloss are identical
-    complexity_category = models.CharField(max_length = 101, null=True, blank=True) # category for complexity item. Currently blank.
-    uni_lemma = models.CharField(max_length= 101, null=True, blank=True) # ID for matching terms across languages. Currently unused.
-    def __str__(self):
-        return self.item
-
-#Model for English Words & Gestures form. Each row represents another item in the CDI questionnaire and its descriptive variables  
-class English_WG(models.Model):
-    itemID = models.CharField(max_length = 101, primary_key=True) # ID number for identification
-    item = models.CharField(max_length = 101) # string variable name
-    item_type = models.CharField(max_length = 101) # type of variable (word, phrase, etc.)
-    category = models.CharField(max_length = 101) # if word, the subcategory for item (animals, sounds, etc.)
-    choices = models.ForeignKey('Choices', null=True, on_delete=models.deletion.PROTECT)
-    uni_lemma = models.CharField(max_length= 101, null=True, blank=True) # ID for matching terms across languages. Currently unused.
-    definition = models.CharField(max_length = 1001, null=True, blank=True) # item listed in plaintext. This is what is displayed to test-takers along with possible choices
-    gloss = models.CharField(max_length = 1001, null=True, blank=True) # English translation for item. At the moment, we only have English instruments so definition and gloss are identical
-    complexity_category = models.CharField(max_length = 101, null=True, blank=True) # category for complexity item. Currently blank.
-    def __str__(self):
-        return self.item
-
-#Model for Spanish Words & Sentences form. Each row represents another item in the CDI questionnaire and its descriptive variables     
-class Spanish_WS(models.Model):
-    itemID = models.CharField(max_length = 101, primary_key=True) # ID number for identification
-    item = models.CharField(max_length = 101) # string variable name
-    item_type = models.CharField(max_length = 101) # type of variable (word, phrase, etc.)
-    category = models.CharField(max_length = 101) # if word, the subcategory for item (animals, sounds, etc.)
-    choices = models.ForeignKey('Choices', null=True, on_delete=models.deletion.PROTECT)
-    definition = models.CharField(max_length = 1001, null=True, blank=True) # item listed in plaintext. This is what is displayed to test-takers along with possible choices
-    uni_lemma = models.CharField(max_length= 101, null=True, blank=True) # ID for matching terms across languages. Currently unused.
-    gloss = models.CharField(max_length = 1001, null=True, blank=True) # English translation for item. At the moment, we only have English instruments so definition and gloss are identical
-    complexity_category = models.CharField(max_length = 101, null=True, blank=True) # category for complexity item. Currently blank.
-    def __str__(self):
-        return self.item
-
-#Model for Spanish Words & Gestures form. Each row represents another item in the CDI questionnaire and its descriptive variables     
-class Spanish_WG(models.Model):
-    itemID = models.CharField(max_length = 101, primary_key=True) # ID number for identification
-    item = models.CharField(max_length = 101) # string variable name
-    item_type = models.CharField(max_length = 101) # type of variable (word, phrase, etc.)
-    category = models.CharField(max_length = 101) # if word, the subcategory for item (animals, sounds, etc.)
-    choices = models.ForeignKey('Choices', null=True, on_delete=models.deletion.PROTECT)
-    definition = models.CharField(max_length = 1001, null=True, blank=True) # item listed in plaintext. This is what is displayed to test-takers along with possible choices
-    uni_lemma = models.CharField(max_length= 101, null=True, blank=True) # ID for matching terms across languages. Currently unused.
-    gloss = models.CharField(max_length = 1001, null=True, blank=True) # English translation for item. At the moment, we only have English instruments so definition and gloss are identical
-    complexity_category = models.CharField(max_length = 101, null=True, blank=True) # category for complexity item. Currently blank.
-    def __str__(self):
-        return self.item
-
-class Choices(models.Model):
-    choice_set = models.CharField(max_length=101)
-    def __str__(self):
-        return self.choice_set
 
 # Method for ensuring that a value is positive
 def validate_g_zero(value):
@@ -94,6 +33,29 @@ def validate_ne_zero(value):
 #Method for formatting integers according to U.S. currency formats.
 def format_currency(val):
     return "${:,}".format(val)
+
+class Choices(models.Model):
+    choice_set = models.CharField(max_length=101)
+    def __str__(self):
+        return self.choice_set
+
+#Model for storing CDI items for all forms. Each row represents a single item for a single type of CDI questionnaire and its descriptive variables     
+class Instrument_Forms(models.Model):
+    instrument = models.ForeignKey('researcher_UI.instrument', db_index=True)
+    itemID = models.CharField(max_length = 101, db_index=True) # ID number for identification
+    item = models.CharField(max_length = 101) # string variable name
+    item_type = models.CharField(max_length = 101) # type of variable (word, phrase, etc.)
+    category = models.CharField(max_length = 101) # if word, the subcategory for item (animals, sounds, etc.)
+    choices = models.ForeignKey('Choices', null=True, on_delete=models.deletion.PROTECT)
+    definition = models.CharField(max_length = 1001, null=True, blank=True) # item listed in plaintext. This is what is displayed to test-takers along with possible choices
+    gloss = models.CharField(max_length = 1001, null=True, blank=True) # English translation for item. At the moment, we only have English instruments so definition and gloss are identical
+    complexity_category = models.CharField(max_length = 101, null=True, blank=True) # category for complexity item. Currently blank.
+    uni_lemma = models.CharField(max_length= 101, null=True, blank=True) # ID for matching terms across languages. Currently unused.
+    def __str__(self):
+        return "%s (%s, %s)" % (self.definition, self.instrument.verbose_name, self.itemID)
+    class Meta:
+        unique_together = ('instrument', 'itemID') # Each instrument in the database must have a unique combination of instrument and itemID
+
 
 #Model for storing demographic variables associated with a subject.
 class BackgroundInfo(models.Model):

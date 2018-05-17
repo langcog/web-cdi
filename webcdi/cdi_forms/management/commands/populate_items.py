@@ -48,7 +48,7 @@ class Command(BaseCommand):
             instrument_language, instrument_form = curr_instrument['language'], curr_instrument['form']
 
             instrument_obj = instrument.objects.get(form=instrument_form, language=instrument_language)
-            instrument_model = apps.get_model(app_label='cdi_forms', model_name=instrument_obj.name)
+            instrument_forms = apps.get_model(app_label='cdi_forms', model_name='Instrument_Forms')
 
             print "    Populating items for", instrument_language, instrument_form
 
@@ -99,5 +99,5 @@ class Command(BaseCommand):
                                  'complexity_category': complexity_category,
                                  'uni_lemma': uni_lemma}
 
-                    cdi_item, created = instrument_model.objects.update_or_create(itemID = itemID, defaults=data_dict,)
+                    cdi_item, created = instrument_forms.objects.update_or_create(instrument = instrument_obj, itemID = itemID, defaults=data_dict,)
 

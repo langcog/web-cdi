@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 from django.shortcuts import render
-from .models import English_WS, English_WG, Spanish_WS, Spanish_WG, BackgroundInfo, requests_log, Zipcode
+from .models import  *
 import os.path, json, datetime, dateutil.relativedelta, itertools, requests, re
-from researcher_UI.models import administration_data, administration, study, payment_code, ip_address
+from researcher_UI.models import *
 from django.http import Http404, JsonResponse, HttpResponse
 from .forms import BackgroundForm, ContactForm
 from django.utils import timezone, translation
@@ -28,18 +28,15 @@ PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__)) # Declare root folder 
 
 # Map name of instrument model (English_WG & English_WS) to its string title
 def model_map(name):
-    mapping = {
-    "English_WS": English_WS, 
-    "English_WG": English_WG, 
-    "Spanish_WS": Spanish_WS, 
-    "Spanish_WG": Spanish_WG
-    }
-    assert name in mapping, name+"instrument not added to the mapping in views.py model_map function"
-    return mapping[name]
+    assert instrument.objects.filter(name=name).exists(), "%s is not registered as a valid instrument" % name
+    instrument_obj = instrument.objects.get(name=name)
+    cdi_items = Instrument_Forms.objects.filter(instrument=instrument_obj)
+    assert cdi_items.count() > 0, "Could not find any CDI items registered with this instrument: %s" % name
+    return cdi_items
         
 # Gets list of itemIDs 'item_XX' from an instrument model
 def get_model_header(name):
-    return list(model_map(name).objects.values_list('itemID', flat=True))
+    return list(model_map(name).values_list('itemID', flat=True))
     
 # If the BackgroundInfo model was filled out before, populate BackgroundForm with responses based on administation object
 def prefilled_background_form(administration_instance):
@@ -249,7 +246,7 @@ def prefilled_cdi_data(administration_instance):
     instrument_model = model_map(instrument_name) # Grab appropriate model given the instrument name associated with test
     
     if not prefilled_data_list and administration_instance.repeat_num > 1 and administration_instance.study.prefilled_data >= 2:
-        word_items = instrument_model.objects.filter(item_type = 'word').values_list('itemID', flat = True)
+        word_items = instrument_model.filter(item_type = 'word').values_list('itemID', flat = True)
         old_admins = administration.objects.filter(study = administration_instance.study, subject_id = administration_instance.subject_id, completed = True)
         if old_admins:
             old_admin = old_admins.latest(field_name='last_modified')
@@ -286,7 +283,7 @@ def prefilled_cdi_data(administration_instance):
                 if 'sections' in item_type:
                     for section in item_type['sections']:
 
-                        group_objects = instrument_model.objects.filter(category__exact=section['id']).values(*field_values)
+                        group_objects = instrument_model.filter(category__exact=section['id']).values(*field_values)
                         
                         x = cdi_items(group_objects, item_type['type'], prefilled_data, item_type['id'])
                         section['objects'] = x
@@ -295,7 +292,7 @@ def prefilled_cdi_data(administration_instance):
                             section['starred'] = "*Or the word used in your family"  
   
                 else:
-                    group_objects = instrument_model.objects.filter(item_type__exact=item_type['id']).values(*field_values)
+                    group_objects = instrument_model.filter(item_type__exact=item_type['id']).values(*field_values)
                     x = cdi_items(group_objects, item_type['type'], prefilled_data, item_type['id'])
                     item_type['objects'] = x
                     if administration_instance.study.show_feedback: raw_objects.extend(x)
@@ -337,7 +334,7 @@ def cdi_form(request, hash_id):
     if request.method == 'POST' : # If submitting responses to CDI form
         if not administration_instance.completed and administration_instance.due_date > timezone.now(): # If form has not been completed and it has not expired
             for key in request.POST: # Parse responses and individually save each item's response (empty checkboxes or radiobuttons are not saved)
-                items = instrument_model.objects.filter(itemID = key)
+                items = instrument_model.filter(itemID = key)
                 if len(items) == 1:
                     item = items[0]
                     value = request.POST[key]
