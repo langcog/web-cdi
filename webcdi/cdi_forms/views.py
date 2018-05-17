@@ -151,8 +151,12 @@ def background_info_form(request, hash_id):
                 background_instance.zip_code = background_instance.zip_code + '**'
             background_form = BackgroundForm(instance = background_instance, context = context)
         except:
-            if administration_instance.repeat_num > 1 and administration_instance.study.prefilled_data >= 1:
-                old_admins = administration.objects.filter(study = administration_instance.study, subject_id = administration_instance.subject_id, completedBackgroundInfo = True)
+            if (administration_instance.repeat_num > 1 or administration_instance.study.study_group) and administration_instance.study.prefilled_data >= 1:
+                if administration_instance.study.study_group:
+                    related_studies = study.objects.filter(researcher = administration_instance.study.researcher, study_group = administration_instance.study.study_group)
+                elif administration_instance.repeat_num > 1 and not administration_instance.study.study_group:
+                    related_studies = study.objects.filter(id=administration_instance.study.id)
+                old_admins = administration.objects.filter(study__in = related_studies, subject_id = administration_instance.subject_id, completedBackgroundInfo = True)
                 if old_admins:
                     background_instance = BackgroundInfo.objects.get(administration = old_admins.latest(field_name='last_modified'))
                     background_instance.pk = None
