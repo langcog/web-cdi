@@ -36,5 +36,14 @@
 		"max_age": 18,
 		"csv_file": "cdi_form_csv/[Spanish_WG].csv",
 		"json_data": "cdi_forms/form_data/Spanish_WG_meta.json"
+	},
+	{
+		"language": "English",
+		"form": "L1",
+		"verbose_name": "Short Form Vocabulary Checklist: Level I",
+		"min_age": 8,
+		"max_age": 18,
+		"csv_file": "cdi_form_csv/[English_L1].csv",
+		"json_data": "cdi_forms/form_data/English_L1_meta.json"
 	}
 ]
