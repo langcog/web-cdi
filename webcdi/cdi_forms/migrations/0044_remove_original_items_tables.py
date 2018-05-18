@@ -8,7 +8,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cdi_forms', '0043_auto_20180517_2245'),
+        ('cdi_forms', '0043_add_combined_items_table'),
     ]
 
     operations = [

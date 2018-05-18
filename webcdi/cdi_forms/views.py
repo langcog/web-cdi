@@ -30,7 +30,10 @@ PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__)) # Declare root folder 
 def model_map(name):
     assert instrument.objects.filter(name=name).exists(), "%s is not registered as a valid instrument" % name
     instrument_obj = instrument.objects.get(name=name)
-    cdi_items = Instrument_Forms.objects.filter(instrument=instrument_obj)
+    cdi_items = Instrument_Forms.objects.filter(instrument=instrument_obj).annotate(
+        num_item_id=models.functions.Cast(models.functions.Substr('itemID',len('item_') + 1), models.IntegerField())
+        ).order_by('num_item_id')
+
     assert cdi_items.count() > 0, "Could not find any CDI items registered with this instrument: %s" % name
     return cdi_items
         
