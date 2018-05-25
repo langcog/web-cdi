@@ -63,7 +63,10 @@
 
                 <div class="row">
                     <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
-                        <img src={% static 'images/understands-yes-get.png' %} class="rounded mx-auto d-block" alt="Hearing the word AND looking for the object can mean that your child understands it." style="max-width: 90%; border: 1px solid black;">
+                        {% with 'images/'|add:language_code|add:'_understands-yes-get.png' as image_static %}
+                          
+                            <img src="{% static image_static %}" class="rounded mx-auto d-block" alt="Hearing the word AND looking for the object can mean that your child understands it." style="max-width: 90%; border: 1px solid black;">
+                        {% endwith %}
 
                     </div>
 
@@ -78,7 +81,9 @@
 
                 <div class="row">
                     <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
-                        <img src={% static 'images/understands-no-hear.png' %} class="rounded mx-auto d-block" alt="Hearing the word is not enough to say that your child understands it." style="max-width: 90%; border: 1px solid black;">
+                        {% with 'images/'|add:language_code|add:'_understands-no-hear.png' as image_static %}
+                            <img src="{% static image_static %}" class="rounded mx-auto d-block" alt="Hearing the word is not enough to say that your child understands it." style="max-width: 90%; border: 1px solid black;">
+                        {% endwith %}
 
                     </div>
 
@@ -100,7 +105,9 @@
 
                 <div class="row">
                     <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
-                        <img src={% static 'images/says-yes-ball.png' %} class="rounded mx-auto d-block" alt="Having your child say the word in the presence of the object can mean that your child understands and says the word." style="max-width: 90%; border: 1px solid black;">
+                        {% with 'images/'|add:language_code|add:'_says-yes-ball.png' as image_static %}
+                            <img src="{% static image_static %}" class="rounded mx-auto d-block" alt="Having your child say the word in the presence of the object can mean that your child understands and says the word." style="max-width: 90%; border: 1px solid black;">
+                        {% endwith %}
 
                     </div>
 
@@ -117,7 +124,9 @@
 
                 <div class="row">
                     <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
-                        <img src={% static 'images/says-yes-raff.png' %} class="rounded mx-auto d-block" alt="Having your child say the word in the presence of the object can mean that your child understands and says the word." style="max-width: 90%; border: 1px solid black;">
+                        {% with 'images/'|add:language_code|add:'_says-yes-raff.png' as image_static %}
+                            <img src="{% static image_static %}" class="rounded mx-auto d-block" alt="Having your child say the word in the presence of the object can mean that your child understands and says the word." style="max-width: 90%; border: 1px solid black;">
+                        {% endwith %}
 
                     </div>
 
@@ -134,7 +143,9 @@
 
                 <div class="row">
                     <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
-                        <img src={% static 'images/says-no-baba.png' %} class="rounded mx-auto d-block" alt="Saying the word alone is not enough to mean that your child understands and says a word. The context is important!" style="max-width: 90%; border: 1px solid black;">
+                        {% with 'images/'|add:language_code|add:'_says-no-baba.png' as image_static %}
+                            <img src="{% static image_static %}" class="rounded mx-auto d-block" alt="Saying the word alone is not enough to mean that your child understands and says a word. The context is important!" style="max-width: 90%; border: 1px solid black;">
+                        {% endwith %}
 
                     </div>
 
@@ -150,7 +161,9 @@
 
                 <div class="row">
                     <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
-                        <img src={% static 'images/says-no-coaching.png' %} class="rounded mx-auto d-block" alt="Having your child repeat back a taught word is not enough to mean that your child undestands the word." style="max-width: 90%; border: 1px solid black;">
+                        {% with 'images/'|add:language_code|add:'_says-no-coaching.png' as image_static %}
+                            <img src="{% static image_static %}" class="rounded mx-auto d-block" alt="Having your child repeat back a taught word is not enough to mean that your child undestands the word." style="max-width: 90%; border: 1px solid black;">
+                        {% endwith %}
 
                     </div>
 
@@ -180,7 +193,9 @@
 
                 <div class="row">
                     <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
-                        <img src={% static 'images/says-yes-ball.png' %} class="rounded mx-auto d-block" alt="Having your child say the word in the presence of the object can mean that your child understands and says the word." style="max-width: 90%; border: 1px solid black;">
+                        {% with 'images/'|add:language_code|add:'_says-yes-ball.png' as image_static %}
+                            <img src="{% static image_static %}" class="rounded mx-auto d-block" alt="Having your child say the word in the presence of the object can mean that your child understands and says the word." style="max-width: 90%; border: 1px solid black;">
+                        {% endwith %}
 
                     </div>
 
@@ -198,7 +213,9 @@
 
                 <div class="row">
                     <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
-                        <img src={% static 'images/says-yes-raff.png' %} class="rounded mx-auto d-block" alt="Having your child say the word in the presence of the object can mean that your child understands and says the word." style="max-width: 90%; border: 1px solid black;">
+                        {% with 'images/'|add:language_code|add:'_says-yes-raff.png' as image_static %}
+                            <img src="{% static image_static %}" class="rounded mx-auto d-block" alt="Having your child say the word in the presence of the object can mean that your child understands and says the word." style="max-width: 90%; border: 1px solid black;">
+                        {% endwith %}
 
                     </div>
 
@@ -215,7 +232,9 @@
 
                 <div class="row">
                     <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
-                        <img src={% static 'images/says-no-baba.png' %} class="rounded mx-auto d-block" alt="Saying the word alone is not enough to mean that your child understands and says a word. The context is important!" style="max-width: 90%; border: 1px solid black;">
+                        {% with 'images/'|add:language_code|add:'_says-no-baba.png' as image_static %}
+                            <img src="{% static image_static %}" class="rounded mx-auto d-block" alt="Saying the word alone is not enough to mean that your child understands and says a word. The context is important!" style="max-width: 90%; border: 1px solid black;">
+                        {% endwith %}
 
                     </div>
 
@@ -229,7 +248,9 @@
 
                 <div class="row">
                     <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
-                        <img src={% static 'images/says-no-coaching.png' %} class="rounded mx-auto d-block" alt="Having your child repeat back a taught word is not enough to mean that your child undestands the word." style="max-width: 90%; border: 1px solid black;">
+                        {% with 'images/'|add:language_code|add:'_says-no-coaching.png' as image_static %}
+                            <img src="{% static image_static %}" class="rounded mx-auto d-block" alt="Having your child repeat back a taught word is not enough to mean that your child undestands the word." style="max-width: 90%; border: 1px solid black;">
+                        {% endwith %}
 
                     </div>
 

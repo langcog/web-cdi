@@ -6,6 +6,7 @@ from django.db import migrations, models
 import django.db.models.deletion
 from django.conf import settings
 import csv, json, os, re, string
+from django.core.exceptions import FieldError
 
 def unicode_csv_reader(utf8_data, dialect=csv.excel, **kwargs):
     csv_reader = csv.reader(utf8_data, dialect=dialect, **kwargs)
@@ -27,6 +28,7 @@ def populate_items(apps, schema_editor):
 
         instrument_language, instrument_form = curr_instrument['language'], curr_instrument['form']
         instrument_name = var_safe(instrument_language) + '_' + var_safe(instrument_form)
+        print "    Populating items for", instrument_language, instrument_form
 
         try:
             instrument_obj = instrument.objects.get(form=instrument_form, language=instrument_language)

@@ -30,9 +30,7 @@ PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__)) # Declare root folder 
 def model_map(name):
     assert instrument.objects.filter(name=name).exists(), "%s is not registered as a valid instrument" % name
     instrument_obj = instrument.objects.get(name=name)
-    cdi_items = Instrument_Forms.objects.filter(instrument=instrument_obj).annotate(
-        num_item_id=models.functions.Cast(models.functions.Substr('itemID',len('item_') + 1), models.IntegerField())
-        ).order_by('num_item_id')
+    cdi_items = Instrument_Forms.objects.filter(instrument=instrument_obj).order_by('pk')
 
     assert cdi_items.count() > 0, "Could not find any CDI items registered with this instrument: %s" % name
     return cdi_items
@@ -411,6 +409,7 @@ def cdi_form(request, hash_id):
         data['captcha'] = None
         data['language'] = administration_instance.study.instrument.language
         data['form'] = administration_instance.study.instrument.form
+        data['language_code'] = user_language
         
         if administration_instance.study.confirm_completion and administration_instance.study.researcher.username == "langcoglab" and administration_instance.study.allow_payment:
             data['captcha'] = 'True'
