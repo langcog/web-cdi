@@ -1,8 +1,9 @@
-choice_set,choice_set_en,choice_set_es
-produces,produces,produce
-not yet; sometimes; often,not yet; sometimes; often,todavía no; de vez en cuando; frecuentemente
-simple; complex,simple; complex,simple; complex
-no; yes,no; yes,no; sí
-understands,understands,comprende
-never; sometimes; often,never; sometimes; often,todavía no; de vez en cuando; frecuentemente
-understands; produces,understands; produces,comprende; produce
+choice_set,choice_set_en,choice_set_es,choice_set_fr
+produces,produces,produce,dit
+not yet; sometimes; often,not yet; sometimes; often,todavía no; de vez en cuando; frecuentemente,pas encore; parfois; souvent
+simple; complex,simple; complex,simple; complex,simple; complex
+no; yes,no; yes,no; sí,non; oui
+understands,understands,comprende,comprend
+never; sometimes; often,never; sometimes; often,todavía no; de vez en cuando; frecuentemente,jamais; parfois; souvent
+understands; produces,understands; produces,comprende; produce,comprend; dit
+pronoun; article,pronoun; article,,pronoun; article

@@ -79,6 +79,8 @@ def background_info_form(request, hash_id):
         user_language = 'en'
     elif administration_instance.study.instrument.language == "Spanish":
         user_language = 'es'
+    elif administration_instance.study.instrument.language == "French (Quebec)":
+        user_language = 'fr'
 
     translation.activate(user_language)
 
@@ -329,6 +331,8 @@ def cdi_form(request, hash_id):
         user_language = 'en'
     elif administration_instance.study.instrument.language == "Spanish":
         user_language = 'es'
+    elif administration_instance.study.instrument.language == "French (Quebec)":
+        user_language = 'fr'
 
     translation.activate(user_language)
 
@@ -434,6 +438,8 @@ def printable_view(request, hash_id):
         user_language = 'en'
     elif administration_instance.study.instrument.language == "Spanish":
         user_language = 'es'
+    elif administration_instance.study.instrument.language == "French (Quebec)":
+        user_language = 'fr'
 
     translation.activate(user_language)
 
@@ -526,6 +532,7 @@ def find_paired_studies(request, username, study_group):
     user_language = models.Case( 
         models.When(instrument__language='English', then=models.Value('en')),
         models.When(instrument__language='Spanish', then=models.Value('es')),
+        models.When(instrument__language='French (Quebec)', then=models.Value('fr')),
     default=models.Value('en'), output_field=models.CharField())).order_by('min_age')
 
     first_study = study.objects.filter(study_group = study_group, researcher = researcher)[:1].get()
@@ -541,6 +548,9 @@ def find_paired_studies(request, username, study_group):
         user_language = 'en'
     elif context['language'] == "Spanish":
         user_language = 'es'
+    elif administration_instance.study.instrument.language == "French (Quebec)":
+        user_language = 'fr'
+
     translation.activate(user_language)
 
     data['background_form'] = BackgroundForm(context = context)
@@ -595,6 +605,8 @@ def contact(request, hash_id):
         user_language = 'en'
     elif administration_instance.study.instrument.language == "Spanish":
         user_language = 'es'
+    elif administration_instance.study.instrument.language == "French (Quebec)":
+        user_language = 'fr'
 
     translation.activate(user_language)
     response = render(request, 'cdi_forms/contact.html', {'form': form}) # Render contact form template   

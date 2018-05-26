@@ -25,7 +25,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
-	PROJECT_ROOT = settings.BASE_DIR
+        PROJECT_ROOT = settings.BASE_DIR
         instruments = json.load(open(os.path.realpath(PROJECT_ROOT + '/static/json/instruments.json')))
         if options['language'] and options['form']:
             input_language, input_form = options['language'], options['form']
@@ -72,9 +72,9 @@ class Command(BaseCommand):
                     item_category = row_values[col_names.index('category')]
                     item_choices = row_values[col_names.index('choices')]
                     choices_key = None
-                    if item_type not in ['combination_examples']:
+                    if "example" not in item_type:
                         try:
-                            choices_key = Choices.objects.get(choice_set_en = item_choices)
+                            choices_key = Choices.objects.get(choice_set = item_choices)
                         except:
                             raise IOError("Can't find choice set %s in model for %s" % (item_category, itemID, ))
 

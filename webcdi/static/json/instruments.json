@@ -38,6 +38,24 @@
 		"json_data": "cdi_forms/form_data/Spanish_WG_meta.json"
 	},
 	{
+		"language": "French (Quebec)",
+		"form": "WS",
+		"verbose_name": "Mots et Énoncés",
+		"min_age": 16,
+		"max_age": 30,
+		"csv_file": "cdi_form_csv/[French_Quebec_WS].csv",
+		"json_data": "cdi_forms/form_data/French_Quebec_WS_meta.json"
+	},
+	{
+		"language": "French (Quebec)",
+		"form": "WG",
+		"verbose_name": "Mots et Gestes",
+		"min_age": 8,
+		"max_age": 16,
+		"csv_file": "cdi_form_csv/[French_Quebec_WG].csv",
+		"json_data": "cdi_forms/form_data/French_Quebec_WG_meta.json"
+	},
+	{
 		"language": "English",
 		"form": "L1",
 		"verbose_name": "Short Form Vocabulary Checklist: Level I",
