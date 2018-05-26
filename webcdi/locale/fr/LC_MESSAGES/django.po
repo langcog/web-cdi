@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-26 01:28+0000\n"
+"POT-Creation-Date: 2018-05-26 01:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,48 +16,49 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: cdi_forms/forms.py:33
 msgid "American Indian / Alaska Native"
-msgstr "American Indian / Alaska Native"
+msgstr ""
 
 #: cdi_forms/forms.py:34
 msgid "Asian (Far East, Southeast Asia, Indian Sub-continent)"
-msgstr "Asian (Far East, Southeast Asia, Indian Sub-continent)"
+msgstr ""
 
 #: cdi_forms/forms.py:35
 msgid "Native Hawaiian or Other Pacific Islander"
-msgstr "Native Hawaiian or Other Pacific Islander"
+msgstr ""
 
 #: cdi_forms/forms.py:36
 msgid "Black or African American"
-msgstr "Black or African American"
+msgstr ""
 
 #: cdi_forms/forms.py:37
 msgid "White"
-msgstr "White"
+msgstr ""
 
 #: cdi_forms/forms.py:38 cdi_forms/models.py:64
 msgid "Other"
-msgstr "Other"
+msgstr ""
 
 #: cdi_forms/forms.py:38
 msgid "My child is (check all that apply):"
-msgstr "My child is (check all that apply):"
+msgstr ""
 
 #: cdi_forms/forms.py:39 cdi_forms/forms.py:40
 msgid "No"
-msgstr "No"
+msgstr ""
 
 #: cdi_forms/forms.py:39 cdi_forms/forms.py:40
 msgid "Yes"
-msgstr "Yes"
+msgstr ""
 
 #: cdi_forms/forms.py:40 cdi_forms/models.py:79 cdi_forms/models.py:114
 #: cdi_forms/models.py:136 cdi_forms/models.py:155 cdi_forms/models.py:158
 #: cdi_forms/models.py:169 cdi_forms/models.py:181
 msgid "Prefer not to disclose"
-msgstr "Prefer not to disclose"
+msgstr ""
 
 #: cdi_forms/forms.py:44
 msgid ""
@@ -67,23 +68,23 @@ msgstr ""
 
 #: cdi_forms/forms.py:45
 msgid "Child DOB<span class=\"asteriskField\">*</span>"
-msgstr "Child DOB<span class=\"asteriskField\">*</span>"
+msgstr ""
 
 #: cdi_forms/forms.py:48
 msgid "Age (in months)<span class=\"asteriskField\">*</span>"
-msgstr "Age (in months)<span class=\"asteriskField\">*</span>"
+msgstr ""
 
 #: cdi_forms/forms.py:48
 msgid "This field will update when you enter or change your child's DOB."
-msgstr "This field will update when you enter or change your child's DOB."
+msgstr ""
 
 #: cdi_forms/forms.py:51
 msgid "What is your zip code?<br>(if you live in the U.S.)"
-msgstr "What is your zip code?<br>(if you live in the U.S.)"
+msgstr ""
 
 #: cdi_forms/forms.py:56 cdi_forms/models.py:172
 msgid "Is your child Hispanic or Latino?"
-msgstr "Is your child Hispanic or Latino?"
+msgstr ""
 
 #: cdi_forms/forms.py:60
 msgid ""
@@ -93,27 +94,27 @@ msgstr ""
 
 #: cdi_forms/forms.py:64 cdi_forms/models.py:145
 msgid "Early"
-msgstr "Early"
+msgstr ""
 
 #: cdi_forms/forms.py:64 cdi_forms/models.py:145
 msgid "Late"
-msgstr "Late"
+msgstr ""
 
 #: cdi_forms/forms.py:64 cdi_forms/models.py:145
 msgid "Was he/she early or late?"
-msgstr "Was he/she early or late?"
+msgstr ""
 
 #: cdi_forms/forms.py:69 cdi_forms/models.py:64
 msgid "Male"
-msgstr "Male"
+msgstr ""
 
 #: cdi_forms/forms.py:69 cdi_forms/models.py:64
 msgid "Female"
-msgstr "Female"
+msgstr ""
 
 #: cdi_forms/forms.py:69
 msgid "Other / Prefer not to disclose"
-msgstr "Other /\tPrefer not to disclose"
+msgstr ""
 
 #: cdi_forms/forms.py:70
 msgid "Sex"
@@ -121,19 +122,19 @@ msgstr ""
 
 #: cdi_forms/forms.py:75 cdi_forms/models.py:93
 msgid "Was your child born as part of a multiple birth?"
-msgstr "Was your child born as part of a multiple birth?"
+msgstr ""
 
 #: cdi_forms/forms.py:79
 msgid "Does your child regularly hear a language other than English?"
-msgstr "Does your child regularly hear a language other than English?"
+msgstr ""
 
 #: cdi_forms/forms.py:85
 msgid "Has your child experienced chronic ear infections (5 or more)?"
-msgstr "Has your child experienced chronic ear infections (5 or more)?"
+msgstr ""
 
 #: cdi_forms/forms.py:92 cdi_forms/models.py:195
 msgid "Do you suspect that your child may have hearing loss?"
-msgstr "Do you suspect that your child may have hearing loss?"
+msgstr ""
 
 #: cdi_forms/forms.py:99 cdi_forms/models.py:198
 msgid ""
@@ -165,42 +166,40 @@ msgstr ""
 
 #: cdi_forms/forms.py:133
 msgid "Which language(s)"
-msgstr "Which language(s)"
+msgstr ""
 
 #: cdi_forms/forms.py:159 cdi_forms/forms.py:187
 msgid "This field cannot be empty"
-msgstr "This field cannot be empty"
+msgstr ""
 
 #: cdi_forms/forms.py:163
 msgid "Cannot be more than 18 weeks early"
-msgstr "Cannot be more than 18 weeks early"
+msgstr ""
 
 #: cdi_forms/forms.py:165
 msgid "Cannot be more than 4 weeks late"
-msgstr "Cannot be more than 4 weeks late"
+msgstr ""
 
 #: cdi_forms/forms.py:169 cdi_forms/forms.py:184
 msgid "Please enter your child's DOB in the field above."
-msgstr "Please enter your child's DOB in the field above."
+msgstr ""
 
 #: cdi_forms/forms.py:180
 msgid "Your baby is too young for this version of the CDI."
-msgstr "Your baby is too young for this version of the CDI."
+msgstr ""
 
 #: cdi_forms/forms.py:182
 msgid "Your baby is too old for this version of the CDI."
-msgstr "Your baby is too old for this version of the CDI."
+msgstr ""
 
 #: cdi_forms/forms.py:203 cdi_forms/forms.py:204 cdi_forms/models.py:140
 #: cdi_forms/models.py:141
 msgid "Birth weight"
-msgstr "Birth weight"
+msgstr ""
 
 #: cdi_forms/forms.py:219
-#, fuzzy
-#| msgid "::Your account information::"
 msgid "Basic Information"
-msgstr "::Your account information::"
+msgstr ""
 
 #: cdi_forms/forms.py:220
 msgid "Family Background"
@@ -219,10 +218,8 @@ msgid ""
 msgstr ""
 
 #: cdi_forms/forms.py:222
-#, fuzzy
-#| msgid "::Your account information::"
 msgid "Caregiver Information"
-msgstr "::Your account information::"
+msgstr ""
 
 #: cdi_forms/forms.py:223
 msgid "Language Exposure"
@@ -234,259 +231,259 @@ msgstr ""
 
 #: cdi_forms/forms.py:253
 msgid "Your Name"
-msgstr "Your Name"
+msgstr ""
 
 #: cdi_forms/forms.py:254
 msgid "Your Email Address"
-msgstr "Your Email Address"
+msgstr ""
 
 #: cdi_forms/forms.py:255
 msgid "Your Test URL"
-msgstr "Your Test URL"
+msgstr ""
 
 #: cdi_forms/forms.py:256
 msgid "What would you like to tell us?"
-msgstr "What would you like to tell us?"
+msgstr ""
 
 #: cdi_forms/models.py:63
 msgid "Age (in months)"
-msgstr "Age (in months)"
+msgstr ""
 
 #: cdi_forms/models.py:65
 msgid "Zip Code (if you live in the U.S.)"
-msgstr "Zip Code (if you live in the U.S.)"
+msgstr ""
 
 #: cdi_forms/models.py:65
 msgid "Please enter a valid U.S. zip code"
-msgstr "Please enter a valid U.S. zip code"
+msgstr ""
 
 #: cdi_forms/models.py:69
 msgid "1 (First)"
-msgstr "1 (First)"
+msgstr ""
 
 #: cdi_forms/models.py:70
 msgid "2 (Second)"
-msgstr "2 (Second)"
+msgstr ""
 
 #: cdi_forms/models.py:71
 msgid "3 (Third)"
-msgstr "3 (Third)"
+msgstr ""
 
 #: cdi_forms/models.py:72
 msgid "4 (Fourth)"
-msgstr "4 (Fourth)"
+msgstr ""
 
 #: cdi_forms/models.py:73
 msgid "5 (Fifth)"
-msgstr "5 (Fifth)"
+msgstr ""
 
 #: cdi_forms/models.py:74
 msgid "6 (Sixth)"
-msgstr "6 (Sixth)"
+msgstr ""
 
 #: cdi_forms/models.py:75
 msgid "7 (Seventh)"
-msgstr "7 (Seventh)"
+msgstr ""
 
 #: cdi_forms/models.py:76
 msgid "8 (Eighth)"
-msgstr "8 (Eighth)"
+msgstr ""
 
 #: cdi_forms/models.py:77
 msgid "9 (Ninth)"
-msgstr "9 (Ninth)"
+msgstr ""
 
 #: cdi_forms/models.py:78
 msgid "10 or more (Tenth or Later)"
-msgstr "10 or more (Tenth or Later)"
+msgstr ""
 
 #: cdi_forms/models.py:83
 msgid "Birth order"
-msgstr "Birth order"
+msgstr ""
 
 #: cdi_forms/models.py:87
 msgid "Twins"
-msgstr "Twins"
+msgstr ""
 
 #: cdi_forms/models.py:88
 msgid "Triplets"
-msgstr "Triplets"
+msgstr ""
 
 #: cdi_forms/models.py:89
 msgid "Quadruplets"
-msgstr "Quadruplets"
+msgstr ""
 
 #: cdi_forms/models.py:90
 msgid "Quintuplets or greater"
-msgstr "Quintuplets or greater"
+msgstr ""
 
 #: cdi_forms/models.py:94
 msgid "Twins, triplets, quadruplets, other?"
-msgstr "Twins, triplets, quadruplets, other?"
+msgstr ""
 
 #: cdi_forms/models.py:98
 msgid "Less than 3 lbs, 0 oz"
-msgstr "Less than 3 lbs, 0 oz"
+msgstr ""
 
 #: cdi_forms/models.py:99
 msgid "3 lbs, 0 oz - 3 lbs, 7 oz"
-msgstr "3 lbs, 0 oz - 3 lbs, 7 oz"
+msgstr ""
 
 #: cdi_forms/models.py:100
 msgid "3 lbs, 8 oz - 3 lbs, 15 oz"
-msgstr "3 lbs, 8 oz - 3 lbs, 15 oz"
+msgstr ""
 
 #: cdi_forms/models.py:101
 msgid "4 lbs, 0 oz - 4 lbs, 7 oz"
-msgstr "4 lbs, 0 oz - 4 lbs, 7 oz"
+msgstr ""
 
 #: cdi_forms/models.py:102
 msgid "4 lbs, 8 oz - 4 lbs, 15 oz"
-msgstr "4 lbs, 8 oz - 4 lbs, 15 oz"
+msgstr ""
 
 #: cdi_forms/models.py:103
 msgid "5 lbs, 0 oz - 5 lbs, 7 oz"
-msgstr "5 lbs, 0 oz - 5 lbs, 7 oz"
+msgstr ""
 
 #: cdi_forms/models.py:104
 msgid "5 lbs, 8 oz - 5 lbs, 15 oz"
-msgstr "5 lbs, 8 oz - 5 lbs, 15 oz"
+msgstr ""
 
 #: cdi_forms/models.py:105
 msgid "6 lbs, 0 oz - 6 lbs, 7 oz"
-msgstr "6 lbs, 0 oz - 6 lbs, 7 oz"
+msgstr ""
 
 #: cdi_forms/models.py:106
 msgid "6 lbs, 8 oz - 6 lbs, 15 oz"
-msgstr "6 lbs, 8 oz - 6 lbs, 15 oz"
+msgstr ""
 
 #: cdi_forms/models.py:107
 msgid "7 lbs, 0 oz - 7 lbs, 7 oz"
-msgstr "7 lbs, 0 oz - 7 lbs, 7 oz"
+msgstr ""
 
 #: cdi_forms/models.py:108
 msgid "7 lbs, 8 oz - 7 lbs, 15 oz"
-msgstr "7 lbs, 8 oz - 7 lbs, 15 oz"
+msgstr ""
 
 #: cdi_forms/models.py:109
 msgid "8 lbs, 0 oz - 8 lbs, 7 oz"
-msgstr "8 lbs, 0 oz - 8 lbs, 7 oz"
+msgstr ""
 
 #: cdi_forms/models.py:110
 msgid "8 lbs, 8 oz - 8 lbs, 15 oz"
-msgstr "8 lbs, 8 oz - 8 lbs, 15 oz"
+msgstr ""
 
 #: cdi_forms/models.py:111
 msgid "9 lbs, 0 oz - 9 lbs, 7 oz"
-msgstr "9 lbs, 0 oz - 9 lbs, 7 oz"
+msgstr ""
 
 #: cdi_forms/models.py:112
 msgid "9 lbs, 8 oz - 9 lbs, 15 oz"
-msgstr "9 lbs, 8 oz - 9 lbs, 15 oz"
+msgstr ""
 
 #: cdi_forms/models.py:113
 msgid "10 lbs, 0 oz or more"
-msgstr "10 lbs, 0 oz or more"
+msgstr ""
 
 #: cdi_forms/models.py:120
 msgid "Less than 1500 grams"
-msgstr "Less than 1500 grams"
+msgstr ""
 
 #: cdi_forms/models.py:121
 msgid "1500 grams - 1749 grams"
-msgstr "1500 grams - 1749 grams"
+msgstr ""
 
 #: cdi_forms/models.py:122
 msgid "1750 grams - 1999 grams"
-msgstr "1750 grams - 1999 grams"
+msgstr ""
 
 #: cdi_forms/models.py:123
 msgid "2000 grams - 2249 grams"
-msgstr "2000 grams - 2249 grams"
+msgstr ""
 
 #: cdi_forms/models.py:124
 msgid "2250 grams - 2499 grams"
-msgstr "2250 grams - 2499 grams"
+msgstr ""
 
 #: cdi_forms/models.py:125
 msgid "2500 grams - 2749 grams"
-msgstr "2500 grams - 2749 grams"
+msgstr ""
 
 #: cdi_forms/models.py:126
 msgid "2750 grams - 2999 grams"
-msgstr "2750 grams - 2999 grams"
+msgstr ""
 
 #: cdi_forms/models.py:127
 msgid "3000 grams - 3249 grams"
-msgstr "3000 grams - 3249 grams"
+msgstr ""
 
 #: cdi_forms/models.py:128
 msgid "3250 grams - 3499 grams"
-msgstr "3250 grams - 3499 grams"
+msgstr ""
 
 #: cdi_forms/models.py:129
 msgid "3500 grams - 3749 grams"
-msgstr "3500 grams - 3749 grams"
+msgstr ""
 
 #: cdi_forms/models.py:130
 msgid "3750 grams - 3999 grams"
-msgstr "3750 grams - 3999 grams"
+msgstr ""
 
 #: cdi_forms/models.py:131
 msgid "4000 grams - 4249 grams"
-msgstr "4000 grams - 4249 grams"
+msgstr ""
 
 #: cdi_forms/models.py:132
 msgid "4250 grams - 4499 grams"
-msgstr "4250 grams - 4499 grams"
+msgstr ""
 
 #: cdi_forms/models.py:133
 msgid "4500 grams - 4749 grams"
-msgstr "4500 grams - 4749 grams"
+msgstr ""
 
 #: cdi_forms/models.py:134
 msgid "4750 grams - 4999 grams"
-msgstr "4750 grams - 4999 grams"
+msgstr ""
 
 #: cdi_forms/models.py:135
 msgid "5000 grams or more"
-msgstr "5000 grams or more"
+msgstr ""
 
 #: cdi_forms/models.py:144
 msgid "Was your child born earlier or later than their due date?"
-msgstr "Was your child born earlier or later than their due date?"
+msgstr ""
 
 #: cdi_forms/models.py:146
 msgid "By how many weeks? (round to the nearest week)"
-msgstr "By how many weeks? (round to the nearest week)"
+msgstr ""
 
 #: cdi_forms/models.py:146
 msgid "Number of weeks cannot be less than 1"
-msgstr "Number of weeks cannot be less than 1"
+msgstr ""
 
 #: cdi_forms/models.py:151
 msgid "12 (High school graduate)"
-msgstr "12 (High school graduate)"
+msgstr ""
 
 #: cdi_forms/models.py:152
 msgid "16 (College graduate)"
-msgstr "16 (College graduate)"
+msgstr ""
 
 #: cdi_forms/models.py:153
 msgid "18 (Advanced degree)"
-msgstr "18 (Advanced degree)"
+msgstr ""
 
 #: cdi_forms/models.py:154
 msgid "23 or more"
-msgstr "23 or more"
+msgstr ""
 
 #: cdi_forms/models.py:160
 msgid "Mother / Parent or Guardian 1 Year of birth"
-msgstr "Mother / Parent or Guardian 1 Year of birth"
+msgstr ""
 
 #: cdi_forms/models.py:161
 msgid "Mother / Parent or Guardian 1 Education"
-msgstr "Mother / Parent or Guardian 1 Education"
+msgstr ""
 
 #: cdi_forms/models.py:161 cdi_forms/models.py:164
 msgid ""
@@ -496,90 +493,88 @@ msgstr ""
 
 #: cdi_forms/models.py:163
 msgid "Father / Parent or Guardian 2 Year of birth"
-msgstr "Father / Parent or Guardian 2 Year of birth"
+msgstr ""
 
 #: cdi_forms/models.py:164
 msgid "Father / Parent or Guardian 2 Education"
-msgstr "Father / Parent or Guardian 2 Education"
+msgstr ""
 
 #: cdi_forms/models.py:167
 msgid "Under "
-msgstr "Under "
+msgstr ""
 
 #: cdi_forms/models.py:169
 msgid "Over "
-msgstr "Over "
+msgstr ""
 
 #: cdi_forms/models.py:170
 msgid "Estimated Annual Family Income (in USD)"
-msgstr "Estimated Annual Family Income (in USD)"
+msgstr ""
 
 #: cdi_forms/models.py:177
 msgid "Two parents"
-msgstr "Two parents"
+msgstr ""
 
 #: cdi_forms/models.py:178
 msgid "One parent"
-msgstr "One parent"
+msgstr ""
 
 #: cdi_forms/models.py:179
-#, fuzzy
-#| msgid "One parent plus other caregiver (e.g., grandparent)"
 msgid "One or both parents and other caregiver(s) (e.g., grandparent)"
-msgstr "One parent plus other caregiver (e.g., grandparent)"
+msgstr ""
 
 #: cdi_forms/models.py:180
 msgid "Other caregivers (e.g., grandparent or grandparents)"
-msgstr "Other caregivers (e.g., grandparent or grandparents)"
+msgstr ""
 
 #: cdi_forms/models.py:184
 msgid "Who does your child live with?"
-msgstr "Who does your child live with?"
+msgstr ""
 
 #: cdi_forms/models.py:188
 msgid "From whom?"
-msgstr "From whom?"
+msgstr ""
 
 #: cdi_forms/models.py:189
 msgid "How many days per week is the child exposed to these languages?"
-msgstr "How many days per week is the child exposed to these languages?"
+msgstr ""
 
 #: cdi_forms/models.py:189
 msgid "Number of days per week cannot exceed 7"
-msgstr "Number of days per week cannot exceed 7"
+msgstr ""
 
 #: cdi_forms/models.py:189
 msgid "Number of days per week cannot be less than 1"
-msgstr "Number of days per week cannot be less than 1"
+msgstr ""
 
 #: cdi_forms/models.py:190
 msgid "How many hours per day is the child exposed to these languages?"
-msgstr "How many hours per day is the child exposed to these languages?"
+msgstr ""
 
 #: cdi_forms/models.py:190
 msgid "Number of hours per day cannot exceed 24"
-msgstr "Number of hours per day cannot exceed 24"
+msgstr ""
 
 #: cdi_forms/models.py:190
 msgid "Number of hours per day cannot be less than 1"
-msgstr "Number of hours per day cannot be less than 1"
+msgstr ""
 
 #: cdi_forms/models.py:192
 msgid "Has your child experienced chronic ear infections (5 or more)? "
-msgstr "Has your child experienced chronic ear infections (5 or more)? "
+msgstr ""
 
 #: cdi_forms/models.py:193
 msgid "Has your child undergone interventions (e.g., tubes)?  Please describe"
-msgstr "Has your child undergone interventions (e.g., tubes)?  Please describe"
+msgstr ""
 
 #: cdi_forms/models.py:196 cdi_forms/models.py:199 cdi_forms/models.py:202
 #: cdi_forms/models.py:205 cdi_forms/models.py:208
 msgid "Please describe"
-msgstr "Please describe"
+msgstr ""
 
 #: cdi_forms/models.py:211
 msgid "Indicate which family member and provide a description"
-msgstr "Indicate which family member and provide a description"
+msgstr ""
 
 #: cdi_forms/templates/cdi_forms/background_info.html:7
 #: cdi_forms/templates/cdi_forms/background_info.html:56
@@ -662,10 +657,8 @@ msgid "Thank you! We appreciate your time and effort!"
 msgstr ""
 
 #: cdi_forms/templates/cdi_forms/background_info.html:48
-#, fuzzy
-#| msgid "::Your account information::"
 msgid "Background Information"
-msgstr "::Your account information::"
+msgstr ""
 
 #: cdi_forms/templates/cdi_forms/background_info.html:61
 #: cdi_forms/templates/cdi_forms/cdi_form.html:481
@@ -724,10 +717,8 @@ msgid "Reach out to the Web-CDI Team!"
 msgstr ""
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:130
-#, fuzzy
-#| msgid "Documentation"
 msgid "Waiver of Documentation"
-msgstr "Documentation"
+msgstr ""
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:139
 msgid "Okay"
@@ -1193,10 +1184,8 @@ msgid "Current Vocabulary Size"
 msgstr ""
 
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:868
-#, fuzzy
-#| msgid "Age (in months)"
 msgid "Age (in Months)"
-msgstr "Age (in months)"
+msgstr ""
 
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:877
 #, python-format
@@ -1204,10 +1193,8 @@ msgid "Predicted %% of Words on Test"
 msgstr ""
 
 #: cdi_forms/templates/cdi_forms/study_group.html:48
-#, fuzzy
-#| msgid "Who does your child live with?"
 msgid "How old is your child?"
-msgstr "Who does your child live with?"
+msgstr ""
 
 #: cdi_forms/templates/cdi_forms/study_group.html:59
 msgid ""
@@ -1237,29 +1224,29 @@ msgstr ""
 
 #: researcher_UI/templates/admin/admin_base.html:41
 msgid "Welcome,"
-msgstr "Welcome,"
+msgstr ""
 
 #: researcher_UI/templates/admin/admin_base.html:46
 msgid "View site"
-msgstr "View site"
+msgstr ""
 
 #: researcher_UI/templates/admin/admin_base.html:51
 #: researcher_UI/templates/registration/password_change_done.html:3
 #: researcher_UI/templates/registration/password_change_form.html:6
 msgid "Documentation"
-msgstr "Documentation"
+msgstr ""
 
 #: researcher_UI/templates/admin/admin_base.html:55
 #: researcher_UI/templates/registration/password_change_done.html:3
 #: researcher_UI/templates/registration/password_change_form.html:6
 msgid "Change password"
-msgstr "Change password"
+msgstr ""
 
 #: researcher_UI/templates/admin/admin_base.html:57
 #: researcher_UI/templates/registration/password_change_done.html:3
 #: researcher_UI/templates/registration/password_change_form.html:6
 msgid "Log out"
-msgstr "Log out"
+msgstr ""
 
 #: researcher_UI/templates/admin/admin_base.html:67
 #: researcher_UI/templates/registration/password_change_done.html:6
@@ -1269,11 +1256,11 @@ msgstr "Log out"
 #: researcher_UI/templates/registration/password_reset_done.html:6
 #: researcher_UI/templates/registration/password_reset_form.html:8
 msgid "Home"
-msgstr "Home"
+msgstr ""
 
 #: researcher_UI/templates/admin/admin_base_site.html:3
 msgid "Django site admin"
-msgstr "Django site admin"
+msgstr ""
 
 #: researcher_UI/templates/registration/acceptance_email.txt:2
 #: researcher_UI/templates/registration/activation_email.txt:2
@@ -1285,12 +1272,12 @@ msgstr "Django site admin"
 #: supplementtut/templates/supplementtut/rejection_email.txt:2
 #, python-format
 msgid "Dear %(user)s,"
-msgstr "Dear %(user)s,"
+msgstr ""
 
 #: researcher_UI/templates/registration/acceptance_email.txt:4
 #, python-format
 msgid "Your registration at %(site_name)s was accepted by the Web-CDI Team."
-msgstr "Your registration at %(site_name)s was accepted by the Web-CDI Team."
+msgstr ""
 
 #: researcher_UI/templates/registration/acceptance_email.txt:6
 #: supplementtut/templates/supplementtut/acceptance_email.txt:6
@@ -1303,30 +1290,30 @@ msgstr ""
 #: supplementtut/templates/supplementtut/acceptance_email.txt:10
 #, python-format
 msgid "The activation link above will be expired in %(expiration_days)s days."
-msgstr "The activation link above will be expired in %(expiration_days)s days."
+msgstr ""
 
 #: researcher_UI/templates/registration/acceptance_email_subject.txt:2
 #: supplementtut/templates/supplementtut/acceptance_email_subject.txt:2
 #, python-format
 msgid "Your registration was accepted -- %(site_name)s"
-msgstr "Your registration was accepted -- %(site_name)s"
+msgstr ""
 
 #: researcher_UI/templates/registration/activation_complete.html:4
 #: researcher_UI/templates/registration/activation_complete.html:6
 #: supplementtut/templates/supplementtut/activation_complete.html:4
 #: supplementtut/templates/supplementtut/activation_complete.html:6
 msgid "Activation was complete"
-msgstr "Activation was complete"
+msgstr ""
 
 #: researcher_UI/templates/registration/activation_complete.html:11
 #: supplementtut/templates/supplementtut/activation_complete.html:11
 msgid "Your account has been activated!"
-msgstr "Your account has been activated!"
+msgstr ""
 
 #: researcher_UI/templates/registration/activation_email.txt:4
 #, python-format
 msgid "Your account at %(site_name)s was activated by the Web-CDI Team"
-msgstr "Your account at %(site_name)s was activated by the Web-CDI Team"
+msgstr ""
 
 #: researcher_UI/templates/registration/activation_email.txt:6
 #: supplementtut/templates/supplementtut/activation_email.txt:6
@@ -1339,7 +1326,7 @@ msgstr ""
 #: supplementtut/templates/supplementtut/activation_email.txt:7
 #: supplementtut/templates/supplementtut/activation_email.txt:18
 msgid "Please click the following url to login."
-msgstr "Please click the following url to login."
+msgstr ""
 
 #: researcher_UI/templates/registration/activation_email.txt:8
 #: supplementtut/templates/supplementtut/activation_email.txt:8
@@ -1353,7 +1340,7 @@ msgstr ""
 #: supplementtut/templates/supplementtut/activation_email.txt:10
 #: supplementtut/templates/supplementtut/activation_email.txt:20
 msgid "::Your account information::"
-msgstr "::Your account information::"
+msgstr ""
 
 #: researcher_UI/templates/registration/activation_email.txt:11
 #: researcher_UI/templates/registration/activation_email.txt:21
@@ -1361,13 +1348,13 @@ msgstr "::Your account information::"
 #: supplementtut/templates/supplementtut/activation_email.txt:21
 #, python-format
 msgid "USERNAME: %(user)s"
-msgstr "USERNAME: %(user)s"
+msgstr ""
 
 #: researcher_UI/templates/registration/activation_email.txt:12
 #: supplementtut/templates/supplementtut/activation_email.txt:12
 #, python-format
 msgid "PASSWORD: %(password)s"
-msgstr "PASSWORD: %(password)s"
+msgstr ""
 
 #: researcher_UI/templates/registration/activation_email.txt:16
 #, python-format
@@ -1379,52 +1366,52 @@ msgstr ""
 #: supplementtut/templates/supplementtut/activation_email_subject.txt:2
 #, python-format
 msgid "Your account was activated -- %(site_name)s"
-msgstr "Your account was activated -- %(site_name)s"
+msgstr ""
 
 #: researcher_UI/templates/registration/activation_form.html:4
 #: researcher_UI/templates/registration/activation_form.html:6
 #: supplementtut/templates/supplementtut/activation_form.html:4
 #: supplementtut/templates/supplementtut/activation_form.html:6
 msgid "Activate your account"
-msgstr "Activate your account"
+msgstr ""
 
 #: researcher_UI/templates/registration/activation_form.html:12
 #: supplementtut/templates/supplementtut/activation_form.html:12
 msgid "Please fill the password to complete account activation"
-msgstr "Please fill the password to complete account activation"
+msgstr ""
 
 #: researcher_UI/templates/registration/activation_form.html:25
 #: supplementtut/templates/supplementtut/activation_form.html:16
 msgid "Activate"
-msgstr "Activate"
+msgstr ""
 
 #: researcher_UI/templates/registration/lockout.html:5
 #: researcher_UI/templates/registration/lockout.html:7
 #: researcher_UI/templates/registration/login.html:5
 #: researcher_UI/templates/registration/login.html:7
 msgid "Login"
-msgstr "Login"
+msgstr ""
 
 #: researcher_UI/templates/registration/login.html:14
 msgid "Please fill your username and password to login"
-msgstr "Please fill your username and password to login"
+msgstr ""
 
 #: researcher_UI/templates/registration/login.html:18
 #: researcher_UI/templates/registration/login.html:68
 #: researcher_UI/templates/registration/password_reset_complete.html:18
 #: researcher_UI/templates/researcher_UI/login.html:83
 msgid "Log in"
-msgstr "Log in"
+msgstr ""
 
 #: researcher_UI/templates/registration/login.html:26
 #: researcher_UI/templates/researcher_UI/login.html:26
 msgid "Please correct the error below."
-msgstr "Please correct the error below."
+msgstr ""
 
 #: researcher_UI/templates/registration/login.html:26
 #: researcher_UI/templates/researcher_UI/login.html:26
 msgid "Please correct the errors below."
-msgstr "Please correct the errors below."
+msgstr ""
 
 #: researcher_UI/templates/registration/login.html:42
 #: researcher_UI/templates/researcher_UI/login.html:42
@@ -1437,20 +1424,20 @@ msgstr ""
 #: researcher_UI/templates/registration/logout.html:4
 #: researcher_UI/templates/registration/logout.html:6
 msgid "Logged out"
-msgstr "Logged out"
+msgstr ""
 
 #: researcher_UI/templates/registration/logout.html:10
 msgid "You are logged out."
-msgstr "You are logged out."
+msgstr ""
 
 #: researcher_UI/templates/registration/password_change_done.html:7
 #: researcher_UI/templates/registration/password_change_form.html:10
 msgid "Password change"
-msgstr "Password change"
+msgstr ""
 
 #: researcher_UI/templates/registration/password_change_done.html:15
 msgid "Your password was changed."
-msgstr "Your password was changed."
+msgstr ""
 
 #: researcher_UI/templates/registration/password_change_form.html:22
 msgid ""
@@ -1461,21 +1448,21 @@ msgstr ""
 #: researcher_UI/templates/registration/password_change_form.html:35
 #: researcher_UI/templates/registration/password_reset_confirm.html:42
 msgid "Change my password"
-msgstr "Change my password"
+msgstr ""
 
 #: researcher_UI/templates/registration/password_reset_complete.html:7
 #: researcher_UI/templates/registration/password_reset_done.html:7
 #: researcher_UI/templates/registration/password_reset_form.html:9
 msgid "Password reset"
-msgstr "Password reset"
+msgstr ""
 
 #: researcher_UI/templates/registration/password_reset_complete.html:16
 msgid "Your password has been set.  You may go ahead and log in now."
-msgstr "Your password has been set.  You may go ahead and log in now."
+msgstr ""
 
 #: researcher_UI/templates/registration/password_reset_confirm.html:9
 msgid "Password reset confirmation"
-msgstr "Password reset confirmation"
+msgstr ""
 
 #: researcher_UI/templates/registration/password_reset_confirm.html:22
 msgid ""
@@ -1510,20 +1497,20 @@ msgstr ""
 
 #: researcher_UI/templates/registration/password_reset_email.html:4
 msgid "Please go to the following page and choose a new password:"
-msgstr "Please go to the following page and choose a new password:"
+msgstr ""
 
 #: researcher_UI/templates/registration/password_reset_email.html:8
 msgid "Your username, in case you have forgotten:"
-msgstr "Your username, in case you have forgotten:"
+msgstr ""
 
 #: researcher_UI/templates/registration/password_reset_email.html:10
 msgid "Thank you for using Web-CDI!"
-msgstr "Thank you for using Web-CDI!"
+msgstr ""
 
 #: researcher_UI/templates/registration/password_reset_email.html:12
 #, python-format
 msgid "The %(site_name)s team"
-msgstr "The %(site_name)s team"
+msgstr ""
 
 #: researcher_UI/templates/registration/password_reset_form.html:20
 msgid ""
@@ -1533,150 +1520,141 @@ msgstr ""
 
 #: researcher_UI/templates/registration/password_reset_form.html:31
 msgid "Reset my password"
-msgstr "Reset my password"
+msgstr ""
 
 #: researcher_UI/templates/registration/registration_closed.html:4
 #: researcher_UI/templates/registration/registration_closed.html:6
 #: supplementtut/templates/supplementtut/registration_closed.html:4
 #: supplementtut/templates/supplementtut/registration_closed.html:6
 msgid "Registration is closed"
-msgstr "Registration is closed"
+msgstr ""
 
 #: researcher_UI/templates/registration/registration_closed.html:10
 #: supplementtut/templates/supplementtut/registration_closed.html:10
 msgid "The registration is currently closed."
-msgstr "The registration is currently closed."
+msgstr ""
 
 #: researcher_UI/templates/registration/registration_complete.html:4
 #: researcher_UI/templates/registration/registration_complete.html:6
 #: supplementtut/templates/supplementtut/registration_complete.html:4
 #: supplementtut/templates/supplementtut/registration_complete.html:6
 msgid "Registration is complete!"
-msgstr "Registration is complete!"
+msgstr ""
 
 #: researcher_UI/templates/registration/registration_complete.html:12
 #: supplementtut/templates/supplementtut/registration_complete.html:11
 msgid "You have successfully filled out our registration form."
-msgstr "You have successfully filled out our registration form."
+msgstr ""
 
 #: researcher_UI/templates/registration/registration_complete.html:13
 #: supplementtut/templates/supplementtut/registration_complete.html:12
 msgid "Please wait until the Web-CDI team can review your application."
-msgstr "Please wait until the Web-CDI team can review your application."
+msgstr ""
 
 #: researcher_UI/templates/registration/registration_complete.html:14
 #: researcher_UI/templates/registration/registration_email.txt:6
 #: supplementtut/templates/supplementtut/registration_complete.html:13
 #: supplementtut/templates/supplementtut/registration_email.txt:6
 msgid "You will receive an acceptance or rejection email within several days."
-msgstr "You will receive an acceptance or rejection email within several days."
+msgstr ""
 
 #: researcher_UI/templates/registration/registration_email.txt:3
 msgid "Your account application was completed successfully."
-msgstr "Your account application was completed successfully."
+msgstr ""
 
 #: researcher_UI/templates/registration/registration_email.txt:5
 msgid "A member of the Web-CDI team will review your registration shortly."
-msgstr "A member of the Web-CDI team will review your registration shortly."
+msgstr ""
 
 #: researcher_UI/templates/registration/registration_email_subject.txt:2
 #: supplementtut/templates/supplementtut/registration_email_subject.txt:2
 #, python-format
 msgid "Your registration was created -- %(site_name)s"
-msgstr "Your registration was created -- %(site_name)s"
+msgstr ""
 
 #: researcher_UI/templates/registration/registration_form.html:4
 #: researcher_UI/templates/registration/registration_form.html:6
 #: supplementtut/templates/supplementtut/registration_form.html:4
 #: supplementtut/templates/supplementtut/registration_form.html:6
 msgid "Registration"
-msgstr "Registration"
+msgstr ""
 
 #: researcher_UI/templates/registration/registration_form.html:13
 #: supplementtut/templates/supplementtut/registration_form.html:13
 msgid "Please fill the following fields to create your registration"
-msgstr "Please fill the following fields to create your registration"
+msgstr ""
 
 #: researcher_UI/templates/registration/registration_form.html:34
 #: supplementtut/templates/supplementtut/registration_form.html:18
 msgid "Register"
-msgstr "Register"
+msgstr ""
 
 #: researcher_UI/templates/registration/rejection_email.txt:4
 msgid "Your account registration was rejected by the Web-CDI Team."
-msgstr "Your account registration was rejected by the Web-CDI Team."
+msgstr ""
 
 #: researcher_UI/templates/registration/rejection_email.txt:7
 msgid "Your application was rejected due to:"
-msgstr "Your application was rejected due to:"
+msgstr ""
 
 #: researcher_UI/templates/registration/rejection_email.txt:8
 #: supplementtut/templates/supplementtut/rejection_email.txt:7
 msgid "Rejection reasons:"
-msgstr "Rejection reasons:"
+msgstr ""
 
 #: researcher_UI/templates/registration/rejection_email_subject.txt:2
 #: supplementtut/templates/supplementtut/rejection_email_subject.txt:2
 #, python-format
 msgid "Your registration was rejected -- %(site_name)s"
-msgstr "Your registration was rejected -- %(site_name)s"
+msgstr ""
 
 #: researcher_UI/templates/researcher_UI/login.html:3
 msgid "WebCDI"
-msgstr "WebCDI"
+msgstr ""
 
 #: researcher_UI/templates/researcher_UI/login.html:13
 msgid "WebCDI Login"
-msgstr "WebCDI Login"
+msgstr ""
 
 #: researcher_UI/templates/researcher_UI/login.html:79
 msgid "Forgotten your password or username?"
-msgstr "Forgotten your password or username?"
+msgstr ""
 
 #: supplementtut/templates/supplementtut/acceptance_email.txt:4
 #, python-format
 msgid "Your registration of %(site_name)s was accepted by inspector."
-msgstr "Your registration of %(site_name)s was accepted by inspector."
+msgstr ""
 
 #: supplementtut/templates/supplementtut/activation_email.txt:4
 #, python-format
 msgid "Your account of %(site_name)s was activated by inspector"
-msgstr "Your account of %(site_name)s was activated by inspector"
+msgstr ""
 
 #: supplementtut/templates/supplementtut/activation_email.txt:16
 #, python-format
 msgid "Your account of %(site_name)s was successfully activated"
-msgstr "Your account of %(site_name)s was successfully activated"
+msgstr ""
 
 #: supplementtut/templates/supplementtut/registration_email.txt:3
 msgid "Your account registration was created successfully."
-msgstr "Your account registration was created successfully."
+msgstr ""
 
 #: supplementtut/templates/supplementtut/registration_email.txt:5
 msgid "Please wait until the inspector verify your registration."
-msgstr "Please wait until the inspector verify your registration."
+msgstr ""
 
 #: supplementtut/templates/supplementtut/rejection_email.txt:4
 msgid "I am afraid that your account registration was rejected by inspector."
-msgstr "I am afraid that your account registration was rejected by inspector."
+msgstr ""
 
 #: webcdi/settings.py:213
 msgid "English"
-msgstr "English"
+msgstr ""
 
 #: webcdi/settings.py:214
 msgid "Spanish"
-msgstr "Spanish"
+msgstr ""
 
 #: webcdi/settings.py:215
 msgid "French"
 msgstr ""
-
-#~ msgid "Birth weight<span class=\"asteriskField\">*</span>"
-#~ msgstr "Birth weight<span class=\"asteriskField\">*</span>"
-
-#, fuzzy
-#~| msgid "Yes"
-#~ msgctxt "possible response during questionnaire"
-#~ msgid "yes"
-#~ msgstr "Yes"
