@@ -801,84 +801,78 @@ msgid ""
 "your child \"understands\" and \"understands and says.\"  This assessment is "
 "for children of many ages. Your child may not be able to understand or say a "
 "lot of the words on the form. That is perfectly fine!"
-msgstr ""
+msgstr "En esta sección, se les preguntará cuales frases y parablas su niño/a \"comprende\" y \"comprende y dice\". Este cuestionario es para niños de varias edades. Puede ser que su niño/a todavía no comprende o dice muchas de las palabras en este cuestionario y eso esta bien!"
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:61
 msgid ""
 "Your child \"understands\" a word/phrase if they know what the word/phrase "
 "means, even though they may not be able to say it themselves. Here are some "
 "examples."
-msgstr ""
+msgstr "Su niño \"comprende\" una palabra o frase sí saben que la palabra o frase significa, aun que talvez todavia no la pueden decir solos. Aquí les mostramos algunos ejemplos."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:75
 msgid "DO check \"understands\" if:"
-msgstr ""
+msgstr "Marque \"comprende\" si:"
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:77
 msgid ""
 "Your child responds appropriately to the word/phrase. For example, when you "
 "say \"Get the ball,\" s/he turns and tries to find the ball."
-msgstr ""
+msgstr "Su niño responde appropiadamente a la palabra/frase. Por ejemplo, si le dice \"Traeme la pelota\", el/ella intenta buscar la pelota."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:92
 msgid "DON'T check \"understands\" if:"
-msgstr ""
+msgstr "NO marque \"comprende\" si:"
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:94
 msgid ""
 "Your child doesn't have a meaning for the word/phrase.  S/he may have heard "
 "it before, like in a story, but you don't think s/he knows what it means."
-msgstr ""
+msgstr "Su niño no tiene un significado para la palabra/frase. Es posible que lo ha escuchado antes, como en un cuento, pero usted no cree que el/ella sabe lo que significa."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:104
 msgid ""
 "Your child \"understands and says\" a word/phrase if they know what the word/"
 "phrase means AND they are able to say it by themselves. Here are some "
 "examples."
-msgstr ""
+msgstr "Su niño \"comprende y dice\" una palabra/frase si saben que significa la palabra/phrase Y lo pueden decir independientemente. Aquí hay unos ejemplos."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:116
-#, fuzzy
-#| msgid "understands and says"
 msgid "DO check \"understands and says\" if:"
-msgstr "comp. y dice"
+msgstr "Marque \"comprende y dice\" si:"
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:118
 msgid ""
 "Your child says a word/phrase when trying to name an object or describe "
 "something that happened.  You think s/he has a meaning for that word/phrase."
-msgstr ""
+msgstr "Su niño/a dice una palabra/frase cuando quiere nombrar un objecto o decribir algo que paso. Usted cree que el/ella tiene un siginificado para esa palabra/frase."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:135
 msgid ""
 "It's fine if your child can't say the whole word or says it his/her own "
 "\"special\" way."
-msgstr ""
+msgstr "También cuenta si su niño/a no puede decir la palabra complete o lo dice a su manera."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:137
-#, fuzzy
-#| msgid "understands and says"
 msgid "DO check \"understands and says.\""
-msgstr "comp. y dice"
+msgstr "Marque \"comprende y dice\""
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:154
 msgid ""
 "DON'T check if your child is just stringing sounds together.  This is not a "
 "real word that means something."
-msgstr ""
+msgstr "No marque \"comprende y dice\" si su niño/a esta repitiendo sonidos similares. Esto no es una palabra real que significa algo."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:156
 #: cdi_forms/templates/cdi_forms/cdi_form.html:174
-#, fuzzy
-#| msgid "understands and says"
 msgid "DON'T check \"understands and says.\""
-msgstr "comp. y dice"
+msgstr "NO marque \"comprende y dice\""
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:172
 #: cdi_forms/templates/cdi_forms/cdi_form.html:259
 msgid ""
 "DON'T ask your child to repeat the words on the list. This doesn't count!"
-msgstr ""
+msgstr "No le pida a su niño que repita las palabras de este cuestionario. Eso no cuenta!"
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:190
 msgid ""
@@ -888,34 +882,34 @@ msgid ""
 "examples. This assessment is for children of many ages. Your child may not "
 "be able to understand or say a lot of the words on the form. That is "
 "perfectly fine!"
-msgstr ""
+msgstr "En esta sección, se les preguntará cuales frases y parablas su niño/a \"comprende Y dice\". Su niño/a \"comprende y dice\" una palabra o frase en esta lista si lo puede decir solito/a y también sabe lo que significa la palabra o frase. Este cuestionario es para niños de varias edades. Puede ser que su niño/a todavía no comprende o dice muchas de las palabras en este cuestionario y eso está bien!"
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:204
 msgid "DO check the box if:"
-msgstr ""
+msgstr "Marque la caja si:"
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:206
 msgid ""
 "Your child says the word when trying to name an object or describe something "
 "that happened.  You think s/he has a meaning for that word."
-msgstr ""
+msgstr "Su niño responde appropiadamente a la palabra/frase. Por ejemplo, si le dice \"Traeme la pelota\", el/ella intenta buscar la pelota."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:224
 msgid ""
 "It's fine if your child can't say the whole word or says it his/her own "
 "\"special\" way. If you use another word in your family (e.g., Nana for "
 "Grandma), that is ok too!"
-msgstr ""
+msgstr "También cuenta si su niño/a no puede decir la palabra complete o lo dice a su manera. Si usen otro nombre in su familia, por ejemplo \"nana\" in vez de \"hermana\", eso también cuenta."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:226
 msgid "DO check the box."
-msgstr ""
+msgstr "Marque la caja"
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:243
 msgid ""
 "DON'T check the box if your child is just stringing sounds together. This is "
 "not a real word that means something."
-msgstr ""
+msgstr "NO marque la caja si su niño/a esta repitiendo sonidos similares. Esto no es una palabra real que significa algo."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:427
 msgid ""
@@ -1003,8 +997,8 @@ msgid ""
 "                    Thank you for your interest in completing the MacArthur-"
 "Bates Communicative Development Inventory (CDI)! It looks like you have "
 "completed the CDI form before. We ask that you only complete our assessment "
-"once. If you have any concerns about your child’s development, we recommend "
-"that you talk with your child’s physician. If you enjoyed our assessment, "
+"once. If you have any concerns about your child's development, we recommend "
+"that you talk with your child's physician. If you enjoyed our assessment, "
 "you can learn more about the CDI <a href=\"http://mb-cdi.stanford.edu/\" "
 "target=\"_blank\">here</a>. Again, we appreciate your interest!\n"
 "                    "
@@ -1030,8 +1024,8 @@ msgid ""
 "compensate you for your time! If you are still interested in completing the "
 "CDI and learning more about your child's vocabulary, you may click <a href="
 "\"%(bypass_url)s\" target=\"_blank\">here</a> to complete the 30-minute "
-"questionnaire. If you have any concerns about your child’s development, we "
-"recommend that you talk with your child’s physician. If you enjoyed our "
+"questionnaire. If you have any concerns about your child's development, we "
+"recommend that you talk with your child's physician. If you enjoyed our "
 "assessment, you can learn more about the CDI <a href=\"http://mb-cdi."
 "stanford.edu/\" target=\"_blank\">here</a>. Again, we appreciate your "
 "interest!\n"
@@ -1062,13 +1056,13 @@ msgid ""
 "                    Thank you for taking the time to complete the MacArthur-"
 "Bates Communicative Development Inventory (CDI). With the help of parents "
 "and caregivers like you, we are working to learn more about the way that "
-"children’s language develops, and how that development varies across "
+"children's language develops, and how that development varies across "
 "individual children and cultures. Remember that the CDI lists many different "
-"words that are used by many different children. Don’t worry if your child "
+"words that are used by many different children. Don't worry if your child "
 "only knows a few of them right now. Below are some insights into your "
-"child’s developing vocabulary, based on our research. This summary is not a "
-"clinical evaluation. If you have any concerns about your child’s "
-"development, we recommend that you talk with your child’s physician. If you "
+"child's developing vocabulary, based on our research. This summary is not a "
+"clinical evaluation. If you have any concerns about your child's "
+"development, we recommend that you talk with your child's physician. If you "
 "enjoyed our assessment, you can learn more about the CDI <a href=\"http://mb-"
 "cdi.stanford.edu/\" target=\"_blank\">here</a>. We appreciate your "
 "contribution!\n"
@@ -1114,7 +1108,7 @@ msgid ""
 "our Web-CDI project! It is our pleasure to send you this Amazon.com Gift "
 "Card* that can be redeemed towards millions of items at <a href=\"http://www."
 "amazon.com\" target=\"_blank\">www.amazon.com</a>. You may want to print "
-"this screen for easy reference later--you’ll need the gift card claim code "
+"this screen for easy reference later--you'll need the gift card claim code "
 "below.\n"
 "                            "
 msgstr ""
