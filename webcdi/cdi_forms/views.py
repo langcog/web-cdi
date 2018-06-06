@@ -30,7 +30,7 @@ PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__)) # Declare root folder 
 def model_map(name):
     assert instrument.objects.filter(name=name).exists(), "%s is not registered as a valid instrument" % name
     instrument_obj = instrument.objects.get(name=name)
-    cdi_items = Instrument_Forms.objects.filter(instrument=instrument_obj).order_by('pk')
+    cdi_items = Instrument_Forms.objects.filter(instrument=instrument_obj).order_by('item_order')
 
     assert cdi_items.count() > 0, "Could not find any CDI items registered with this instrument: %s" % name
     return cdi_items
@@ -279,16 +279,19 @@ def prefilled_cdi_data(administration_instance):
             field_values += ['choices__choice_set_en']
         elif administration_instance.study.instrument.language == 'Spanish':
             field_values += ['choices__choice_set_es']
+        elif administration_instance.study.instrument.language == 'French (Quebec)':
+            field_values += ['choices__choice_set_fr']
 
         #As some items are nested on different levels, carefully parse and store items for rendering.
         for part in data['parts']:
             for item_type in part['types']:
                 if 'sections' in item_type:
                     for section in item_type['sections']:
-
                         group_objects = instrument_model.filter(category__exact=section['id']).values(*field_values)
-                        
-                        x = cdi_items(group_objects, item_type['type'], prefilled_data, item_type['id'])
+                        if "type" not in section:
+                            section['type'] = item_type['type']
+
+                        x = cdi_items(group_objects, section['type'], prefilled_data, item_type['id'])
                         section['objects'] = x
                         if administration_instance.study.show_feedback: raw_objects.extend(x)
                         if any(['*' in x['definition'] for x in section['objects']]):

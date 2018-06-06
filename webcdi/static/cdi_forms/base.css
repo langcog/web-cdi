@@ -167,3 +167,10 @@ ul {
     white-space:normal !important;
     word-wrap: break-word; 
 }
+
+strong { text-decoration: underline; }
+
+label.btn{
+    white-space:normal !important;
+    word-wrap: break-word; 
+}

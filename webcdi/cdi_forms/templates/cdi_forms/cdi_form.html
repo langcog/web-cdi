@@ -1,5 +1,6 @@
 {% extends 'cdi_forms/cdi_base.html' %}
 {% load i18n %}
+{% load bleach_markdown %}
 
 <!-- Navigation buttons placed in cdi_base.html -->
 {% block nav_buttons %}
@@ -336,7 +337,7 @@
                                     <input type="checkbox" id="{{ object.itemID }}" name="{{ object.itemID }}" value="{{ object.choices }}"{% if completed %} disabled {% endif %} {% if object.prefilled_value %} checked {% endif %}> 
                                     <i class="material-icons check_box" aria-hidden="true">check_box</i>
                                     <i class="material-icons check_box_outline_blank" aria-hidden="true">check_box_outline_blank</i>
-                                    &nbsp;&nbsp;<span class="choice">{{ object.definition }}</span>
+                                    &nbsp;&nbsp;<span class="choice">{{ object.definition|bleach_markdown }}</span>
                                 </label>
                             </div>
                         </div>
@@ -353,7 +354,7 @@
                     <div class="col-md-12">{{ section.text }}</div>
                     <div class="row ">
                         {%for object in section.objects %}
-                            {% if type.type == "radiobutton" or type.type == "modified_checkbox" %}
+                            {% if section.type == "radiobutton" or section.type == "modified_checkbox" %}
                                 {% if object.text != '' %}
                                 <div class="col-md-12 alco-child" name = "{{ object.itemID }}_div">
                                     <div class="row alco-child1" >
@@ -396,18 +397,18 @@
                                     </div>
                                 </div>
                                 {% endif %}
-                            {% elif type.type == "checkbox" %}
+                            {% elif section.type == "checkbox" %}
                                 <div class="col-lg-4 col-8 alco-child">
                                     <div class="btn-group btn-block" data-toggle="buttons"> 
                                         <label class = "btn btn-block d-flex justify-content-start">
                                             <input type="checkbox" id="{{ object.itemID }}" name="{{ object.itemID }}" value="{{ object.choices }}"{% if completed %} disabled {% endif %} {% if object.prefilled_value %} checked {% endif %}> 
                                             <i class="material-icons check_box" aria-hidden="true">check_box</i>
                                             <i class="material-icons check_box_outline_blank" aria-hidden="true">check_box_outline_blank</i>
-                                            &nbsp;&nbsp;<span class="choice">{{ object.definition }}</span>
+                                            &nbsp;&nbsp;<span class="choice">{{ object.definition|bleach_markdown }}</span>
                                         </label>
                                     </div>
                                 </div>
-                            {% elif type.type == "textbox" %}
+                            {% elif section.type == "textbox" %}
                                 <div class="col-md-12"> <input type="textbox" class="rounded border border-secondary" id="{{ object.itemID }}" name="{{ object.itemID }}" maxlength="200" value="{{ object.prefilled_value }}" {% if completed %} disabled {% endif %}></div>
                             {% endif %}
                         {% endfor %}

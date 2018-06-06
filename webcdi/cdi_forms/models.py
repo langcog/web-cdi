@@ -51,6 +51,7 @@ class Instrument_Forms(models.Model):
     gloss = models.CharField(max_length = 1001, null=True, blank=True) # English translation for item. At the moment, we only have English instruments so definition and gloss are identical
     complexity_category = models.CharField(max_length = 101, null=True, blank=True) # category for complexity item. Currently blank.
     uni_lemma = models.CharField(max_length= 101, null=True, blank=True) # ID for matching terms across languages. Currently unused.
+    item_order = models.IntegerField(validators=[MinValueValidator(1)])
     def __str__(self):
         return "%s (%s, %s)" % (self.definition, self.instrument.verbose_name, self.itemID)
     class Meta:

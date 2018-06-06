@@ -97,7 +97,8 @@ class Command(BaseCommand):
                                  'definition': definition,
                                  'gloss': gloss,
                                  'complexity_category': complexity_category,
-                                 'uni_lemma': uni_lemma}
+                                 'uni_lemma': uni_lemma,
+                                 'item_order': row}
 
                     cdi_item, created = instrument_forms.objects.update_or_create(instrument = instrument_obj, itemID = itemID, defaults=data_dict,)
 

@@ -12,8 +12,10 @@ class instrument(models.Model):
     form = models.CharField(max_length = 51) # Instrument's form type abbreviation. For 'English Words & Sentences' this would be 'WS'
     min_age = models.IntegerField(verbose_name = "Minimum age") # Minimum age in months that instrument was built for
     max_age = models.IntegerField(verbose_name = "Maximum age") # Maximum age in months that instrument was built for
-    def __str__(self):
+    def __unicode__(self):
         return "%s (%s %s)" % (self.verbose_name, self.language, self.form)
+    def __str__(self):
+        return unicode(self).encode('utf-8')
     class Meta:
          unique_together = ('language', 'form') # Each instrument in the database must have a unique combination of language and form type
 
@@ -22,8 +24,10 @@ class researcher(models.Model):
     institution = models.CharField(verbose_name = "Name of Institution", max_length=101) # Name of research institution they are affiliated with
     position = models.CharField(verbose_name = "Position in Institution", max_length=101) # Title of position within research institution
     allowed_instruments = models.ManyToManyField(instrument, verbose_name = "Instruments this researcher has access to")
-    def __str__(self):
+    def __unicode__(self):
         return "%s %s (%s, %s)" % (self.user.first_name, self.user.last_name, self.position, self.institution)
+    def __str__(self):
+        return unicode(self).encode('utf-8')
 
 # Model for individual studies
 class study(models.Model):
@@ -44,8 +48,10 @@ class study(models.Model):
     birth_weight_units = models.CharField(max_length = 5, default="lb")
     show_feedback = models.BooleanField(default=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.name
+    def __str__(self):
+        return unicode(self).encode('utf-8')
 
     class Meta:
         unique_together = ('researcher', 'name') # Each study in database must have a unique combination of researcher and name
