@@ -63,5 +63,23 @@
 		"max_age": 18,
 		"csv_file": "cdi_form_csv/[English_L1].csv",
 		"json_data": "cdi_forms/form_data/English_L1_meta.json"
+	},
+	{
+		"language": "English",
+		"form": "L2A",
+		"verbose_name": "Short Form Vocabulary Checklist: Level II (Form A)",
+		"min_age": 16,
+		"max_age": 30,
+		"csv_file": "cdi_form_csv/[English_L2A].csv",
+		"json_data": "cdi_forms/form_data/English_L2A_meta.json"
+	},
+	{
+		"language": "English",
+		"form": "L2B",
+		"verbose_name": "Short Form Vocabulary Checklist: Level II (Form B)",
+		"min_age": 16,
+		"max_age": 30,
+		"csv_file": "cdi_form_csv/[English_L2B].csv",
+		"json_data": "cdi_forms/form_data/English_L2B_meta.json"
 	}
 ]
