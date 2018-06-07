@@ -26,7 +26,23 @@ import pandas as pd
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__)) # Declare root folder for project and files. Varies between Mac and Linux installations.
 
-# Map name of instrument model (English_WG & English_WS) to its string title
+def language_map(language):
+    with translation.override('en'):
+        available_langs = dict(settings.LANGUAGES)
+        trimmed_lang = re.sub(r'(\s+)?\([^)]*\)', '', language).strip()
+        print "Could not find '%s' in " % language + str(available_langs)
+        lang_code = None
+
+        for code, language in available_langs.iteritems(): 
+            if language == trimmed_lang:
+                lang_code = code
+
+        print lang_code
+
+        assert lang_code, "'%s' not available in language mapping function (language_map, cdi_forms/views.py)" % trimmed_lang
+        return lang_code
+
+# Map name of instrument model to its string title
 def model_map(name):
     assert instrument.objects.filter(name=name).exists(), "%s is not registered as a valid instrument" % name
     instrument_obj = instrument.objects.get(name=name)
@@ -75,7 +91,7 @@ def background_info_form(request, hash_id):
     context['child_age'] = None
     context['zip_code'] = ''
 
-    user_language = dict(settings.LANGUAGES).keys()[dict(settings.LANGUAGES).values().index(re.sub(r'(\s+)?\([^)]*\)', '', administration_instance.study.instrument.language))]
+    user_language = language_map(administration_instance.study.instrument.language)
 
     translation.activate(user_language)
 
@@ -222,7 +238,7 @@ def cdi_items(object_group, item_type, prefilled_data, item_id):
 
             obj['text'] = obj['definition'][0].upper() + obj['definition'][1:] if obj['definition'][0].isalpha() else obj['definition'][0] + obj['definition'][1].upper() + obj['definition'][2:]
 
-            if obj['definition'] is not None and obj['definition'].find('/') >= 0 and item_id == 'complexity':
+            if obj['definition'] is not None and obj['definition'].find('/') >= 0 and item_id in ['complexity', 'pronoun_usage']:
                 split_definition = map(unicode.strip, obj['definition'].split('/'))
                 obj['choices'] = zip(split_definition, raw_split_choices, prefilled_values)
             else:
@@ -325,7 +341,7 @@ def cdi_form(request, hash_id):
     instrument_model = model_map(instrument_name) # Fetch instrument model based on instrument name.
     refresh = False
 
-    user_language = dict(settings.LANGUAGES).keys()[dict(settings.LANGUAGES).values().index(re.sub(r'(\s+)?\([^)]*\)', '', administration_instance.study.instrument.language))]
+    user_language = language_map(administration_instance.study.instrument.language)
 
     translation.activate(user_language)
 
@@ -427,7 +443,7 @@ def printable_view(request, hash_id):
     prefilled_data = dict()
     prefilled_data = prefilled_cdi_data(administration_instance)
 
-    user_language = dict(settings.LANGUAGES).keys()[dict(settings.LANGUAGES).values().index(re.sub(r'(\s+)?\([^)]*\)', '', administration_instance.study.instrument.language))]
+    user_language = language_map(administration_instance.study.instrument.language)
 
     translation.activate(user_language)
 
@@ -532,7 +548,7 @@ def find_paired_studies(request, username, study_group):
     context['max_age'] = first_study.max_age
     context['birthweight_units'] = first_study.birth_weight_units
 
-    user_language = dict(settings.LANGUAGES).keys()[dict(settings.LANGUAGES).values().index(re.sub(r'(\s+)?\([^)]*\)', '', administration_instance.study.instrument.language))]
+    user_language = language_map(administration_instance.study.instrument.language)
 
     translation.activate(user_language)
 
@@ -584,7 +600,7 @@ def contact(request, hash_id):
             email.send()
             messages.success(request, 'Form submission successful!') # Provide sender with a message the form was properly sent.
 
-    user_language = dict(settings.LANGUAGES).keys()[dict(settings.LANGUAGES).values().index(re.sub(r'(\s+)?\([^)]*\)', '', administration_instance.study.instrument.language))]
+    user_language = language_map(administration_instance.study.instrument.language)
 
 
     translation.activate(user_language)
