@@ -75,12 +75,7 @@ def background_info_form(request, hash_id):
     context['child_age'] = None
     context['zip_code'] = ''
 
-    if administration_instance.study.instrument.language == "English":
-        user_language = 'en'
-    elif administration_instance.study.instrument.language == "Spanish":
-        user_language = 'es'
-    elif administration_instance.study.instrument.language == "French (Quebec)":
-        user_language = 'fr'
+    user_language = dict(settings.LANGUAGES).keys()[dict(settings.LANGUAGES).values().index(re.sub(r'(\s+)?\([^)]*\)', '', administration_instance.study.instrument.language))]
 
     translation.activate(user_language)
 
@@ -330,12 +325,7 @@ def cdi_form(request, hash_id):
     instrument_model = model_map(instrument_name) # Fetch instrument model based on instrument name.
     refresh = False
 
-    if administration_instance.study.instrument.language == "English":
-        user_language = 'en'
-    elif administration_instance.study.instrument.language == "Spanish":
-        user_language = 'es'
-    elif administration_instance.study.instrument.language == "French (Quebec)":
-        user_language = 'fr'
+    user_language = dict(settings.LANGUAGES).keys()[dict(settings.LANGUAGES).values().index(re.sub(r'(\s+)?\([^)]*\)', '', administration_instance.study.instrument.language))]
 
     translation.activate(user_language)
 
@@ -437,12 +427,7 @@ def printable_view(request, hash_id):
     prefilled_data = dict()
     prefilled_data = prefilled_cdi_data(administration_instance)
 
-    if administration_instance.study.instrument.language == "English":
-        user_language = 'en'
-    elif administration_instance.study.instrument.language == "Spanish":
-        user_language = 'es'
-    elif administration_instance.study.instrument.language == "French (Quebec)":
-        user_language = 'fr'
+    user_language = dict(settings.LANGUAGES).keys()[dict(settings.LANGUAGES).values().index(re.sub(r'(\s+)?\([^)]*\)', '', administration_instance.study.instrument.language))]
 
     translation.activate(user_language)
 
@@ -547,12 +532,7 @@ def find_paired_studies(request, username, study_group):
     context['max_age'] = first_study.max_age
     context['birthweight_units'] = first_study.birth_weight_units
 
-    if context['language'] == "English":
-        user_language = 'en'
-    elif context['language'] == "Spanish":
-        user_language = 'es'
-    elif administration_instance.study.instrument.language == "French (Quebec)":
-        user_language = 'fr'
+    user_language = dict(settings.LANGUAGES).keys()[dict(settings.LANGUAGES).values().index(re.sub(r'(\s+)?\([^)]*\)', '', administration_instance.study.instrument.language))]
 
     translation.activate(user_language)
 
@@ -604,12 +584,8 @@ def contact(request, hash_id):
             email.send()
             messages.success(request, 'Form submission successful!') # Provide sender with a message the form was properly sent.
 
-    if administration_instance.study.instrument.language == "English":
-        user_language = 'en'
-    elif administration_instance.study.instrument.language == "Spanish":
-        user_language = 'es'
-    elif administration_instance.study.instrument.language == "French (Quebec)":
-        user_language = 'fr'
+    user_language = dict(settings.LANGUAGES).keys()[dict(settings.LANGUAGES).values().index(re.sub(r'(\s+)?\([^)]*\)', '', administration_instance.study.instrument.language))]
+
 
     translation.activate(user_language)
     response = render(request, 'cdi_forms/contact.html', {'form': form}) # Render contact form template   
