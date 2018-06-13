@@ -14,9 +14,7 @@
 <div class="row">
     <h2>{% trans "MacArthur-Bates Communicative Development Inventory" %}</h2>
     <h4><div class="flex-row" id="instrument_age" style="text-decoration: underline;">
-        {% blocktrans with min_age=min_age max_age=max_age %}
-        For {{ min_age }}- to {{ max_age }}-month-old children
-        {% endblocktrans %}
+        {% blocktrans with min_age=min_age max_age=max_age %}For {{ min_age }}- to {{ max_age }}-month-old children{% endblocktrans %}
     </div></h4>
     <div class="flex-row">
         <h4>{% trans "Instructions for completing the language inventory" %}</h4>

@@ -471,16 +471,28 @@ def printable_view(request, hash_id):
     prefilled_data['show_feedback'] = administration_instance.study.show_feedback
 
     if administration_instance.study.allow_payment and administration_instance.bypass is None:
+        amazon_urls = {
+        'English': {'redeem_url': 'www.amazon.com/redeem', 
+            'legal_url': 'www.amazon.com/gc-legal'},
+        'Spanish': {'redeem_url': 'www.amazon.com/gc/redeem/?language=es_US', 
+            'legal_url': 'www.amazon.com/gc-legal/?language=es_US'},
+        'French (Quebec)': {'redeem_url': 'www.amazon.ca/gc/redeem/?language=fr_CA', 
+            'legal_url': 'www.amazon.ca/gc-legal/?language=fr_CA'}
+        }
+        url_obj = amazon_urls[administration_instance.study.instrument.language]
         if payment_code.objects.filter(hash_id = hash_id).exists():
             gift_card = payment_code.objects.get(hash_id = hash_id)
             prefilled_data['gift_code'] = gift_card.gift_code
-            prefilled_data['gift_amount'] = gift_card.gift_amount
+            prefilled_data['gift_amount'] = '${:,.2f}'.format(gift_card.gift_amount)
+            prefilled_data['redeem_url'] = url_obj['redeem_url']
+            prefilled_data['legal_url'] = url_obj['legal_url']
         else:
             prefilled_data['gift_code'] = 'ran out'
             prefilled_data['gift_amount'] = 'ran out'
+            prefilled_data['redeem_url'] = None
+            prefilled_data['legal_url'] = None
 
     prefilled_data['allow_sharing'] = administration_instance.study.allow_sharing
-    prefilled_data['contact_url'] = reverse('contact', args=[hash_id])
 
     response = render(request, 'cdi_forms/printable_cdi.html', prefilled_data) # Render contact form template   
     response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
