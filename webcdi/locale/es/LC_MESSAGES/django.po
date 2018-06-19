@@ -1137,6 +1137,9 @@ msgid ""
 "%(redeem_url)s</a>. Restrictions apply, see <a href=\"%(legal_url)s\" target="
 "\"_blank\">%(legal_url)s</a>."
 msgstr ""
+"Para canjear su tarjeta de regalo, visite <a href=\"%(redeem_url)s\" target=\"_blank\">"
+"%(redeem_url)s</a>. Se aplican restricciones, mira <a href=\"%(legal_url)s\" target="
+"\"_blank\">%(legal_url)s</a>."
 
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:129
 msgid "Graph My Data!"

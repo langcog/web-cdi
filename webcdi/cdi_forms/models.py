@@ -7,6 +7,7 @@ from django.core.validators import validate_comma_separated_integer_list,MaxValu
 from django.contrib.postgres.fields import ArrayField
 from django import forms
 from django.utils.translation import ugettext_lazy as _
+from django_countries.fields import CountryField
 
 
 class requests_log(models.Model):
@@ -63,6 +64,7 @@ class BackgroundInfo(models.Model):
     administration = models.OneToOneField("researcher_UI.administration") # Administration ID# unique to the entire database
     age = models.IntegerField(verbose_name = _("Age (in months)"), validators=[MinValueValidator(0)], default = 999) #age in months for child (views.py converts DOB field in forms.py into age for this model)
     sex = models.CharField(max_length = 1, choices = (('M', _("Male")), ('F', _("Female")), ('O', _("Other")))) # Reported gender for child
+    country = CountryField(verbose_name='Country', blank = True, null=True)
     zip_code = models.CharField(max_length = 5, verbose_name = _('Zip Code (if you live in the U.S.)'), blank = True, null=True, validators=[RegexValidator(regex='^(\d{3}([*]{2})?)|([A-Z]{2})$', message=_('Please enter a valid U.S. zip code'))]) # Reported zip code for family. Follows Safe Harbor guidelines. Stores first 3 digits of zip code or state abbreviation.
 
     #Declared set of choices for birth order. Displays text version of integer ("First" instead of 1)

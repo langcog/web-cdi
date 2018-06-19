@@ -81,6 +81,23 @@
         });
     });
 
+    $('#id_country').each(function(index, e){
+        if($(this).val() == "US"){
+            $(e).closest('.form-group').next('.dependent').css('display','block');
+        } else {
+            $('#id_zip_code').val('');
+            $(e).closest('.form-group').next('.dependent').css('display','none');
+        }
+        $(e).change(function(){
+            if($(this).val() == "US"){
+                $(e).closest('.form-group').next('.dependent').css('display','block');
+            } else {
+                $('#id_zip_code').val('');
+                $(e).closest('.form-group').next('.dependent').css('display','none');
+            }
+        });
+    });
+
     var $select = $('.make-selectize').selectize({
         maxItems :null,
     });
@@ -196,7 +213,8 @@
         function fastforward() {
             $('#id_child_dob').val(moment().subtract(17,'M').format(date_format.toUpperCase()))
             $('#id_sex_1').click();
-            $('#id_zip_code').val((""+Math.random()).substring(2,7))
+            $('#id_country').val('US');
+            $('#id_zip_code').val((''+Math.random()).substring(2,7));
             $('#id_birth_order').val(4);
             $('#id_multi_birth_boolean_1').click();
 
