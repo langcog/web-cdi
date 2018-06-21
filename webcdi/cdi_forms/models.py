@@ -15,7 +15,6 @@ class requests_log(models.Model):
     request_type = models.CharField(max_length=4)
     timestamp = models.DateTimeField(auto_now = True)
 
-
 # Method for ensuring that a value is positive
 def validate_g_zero(value):
         if value <= 0:

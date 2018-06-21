@@ -21,6 +21,7 @@ from researcher_UI.models import *
 from django.contrib.auth import login, authenticate
 from django.contrib.sites.models import Site
 
+
 def save_researcher_profile_receiver(sender, user, profile, request, **kwargs):
     researcher_profile, created = researcher.objects.get_or_create(user = profile.user)
     profile.user.first_name = profile.supplement.first_name
