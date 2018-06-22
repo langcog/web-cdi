@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import  *
 import os.path, json, datetime, dateutil.relativedelta, itertools, requests, re
 from researcher_UI.models import *
@@ -621,3 +621,29 @@ def contact(request, hash_id):
     response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
 
     return response
+
+
+def save_answer(request):
+
+    hash_id = request.POST.get('hash_id')
+    administration_instance = get_administration_instance(hash_id)
+
+    instrument_name = administration_instance.study.instrument.name # Get instrument name associated with study
+    instrument_model = model_map(instrument_name).filter(itemID__in = request.POST) # Fetch instrument model based on instrument name.
+
+    for key in request.POST: # Parse responses and individually save each item's response (empty checkboxes or radiobuttons are not saved)
+        items = instrument_model.filter(itemID = key)
+        if len(items) == 1:
+            item = items[0]
+            value = request.POST[key]
+            if item.choices:
+                choices = map(unicode.strip, item.choices.choice_set_en.split(';'))
+                if value in choices:
+                    administration_data.objects.update_or_create(administration = administration_instance, item_ID = key, defaults = {'value': value})
+            else:
+                if value:
+                    administration_data.objects.update_or_create(administration = administration_instance, item_ID = key, defaults = {'value': value})
+    administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now()) # Update administration object with date of last modification
+
+    # Return a response. An empty dictionary is still a 200
+    return HttpResponse(json.dumps([{}]), content_type='application/json')

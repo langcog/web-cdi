@@ -508,18 +508,44 @@
         return ($.inArray( value.id, larger_types ) == -1);
     });
 
+        // note: this line only works in the template
+    save_answer_link = "{% url 'save_answer' %}";
+    hash_id = "{{ hash_id }}";
+
+
+    function save_answer(page_num) {
+        csrfmiddlewaretoken = $("input[name='csrfmiddlewaretoken']").val();
+        current_page = filterednames[page_num]
+
+        var page_data = {
+            'hash_id': hash_id,
+            'csrfmiddlewaretoken': csrfmiddlewaretoken,
+        };
+
+        $(current_page).find('input:checked, input[type="text"], input[type="textbox"]').each(function() {
+            page_data[$(this).prop('name')] = $(this).val()
+        });
+
+
+
+        $.post(save_answer_link, page_data);        
+
+    };
+
     //Initial page turning. Test starts on page 0 (first page)
     changePages();
 
     //Page changing buttons. Flip forwards or backwards
     $('.prev-cdi-page').on('click', function (e) {
         e.preventDefault();
+        save_answer(page_num);
         page_num--;
         changePages();
     })
 
     $('.next-cdi-page').on('click', function (e) {
         e.preventDefault();
+        save_answer(page_num);
         page_num++;
         changePages();
 
