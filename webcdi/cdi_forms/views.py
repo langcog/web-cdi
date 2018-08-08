@@ -26,6 +26,7 @@ import pandas as pd
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__)) # Declare root folder for project and files. Varies between Mac and Linux installations.
 
+# This function is not written properly...
 def language_map(language):
     with translation.override('en'):
         available_langs = dict(settings.LANGUAGES)
