@@ -100,6 +100,8 @@ def background_info_form(request, hash_id):
     background_form = None
         
     if request.method == 'POST' : #if test-taker is sending in form responses
+        print "\n\n\n background req post"
+        print context
         if not administration_instance.completed and administration_instance.due_date > timezone.now(): # And test has yet to be completed and has not timed out
             try:
                 background_instance = BackgroundInfo.objects.get(administration = administration_instance) # Try to fetch BackgroundInfo model already stored in database.
@@ -146,7 +148,7 @@ def background_info_form(request, hash_id):
 
                 # If 'Next' button is pressed, update last_modified and mark completion of BackgroundInfo. Fetch CDI form by hash ID.
                 if 'btn-next' in request.POST and request.POST['btn-next'] == _('Next'):
-                    administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now())
+                    administration.objects.filter(url_hash = hash_id).update(last_modified = timezone.now())
                     administration.objects.filter(url_hash = hash_id).update(completedBackgroundInfo = True)
                     request.method = "GET"
                     return cdi_form(request, hash_id)
@@ -362,7 +364,7 @@ def cdi_form(request, hash_id):
                         if value:
                             administration_data.objects.update_or_create(administration = administration_instance, item_ID = key, defaults = {'value': value})
             if 'btn-save' in request.POST and request.POST['btn-save'] == _('Save'): # If the save button was pressed
-                administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now()) # Update administration object with date of last modification
+                administration.objects.filter(url_hash = hash_id).update(last_modified = timezone.now()) # Update administration object with date of last modification
 
                 if 'analysis' in request.POST:
                     analysis = parse_analysis(request.POST['analysis']) # Note whether test-taker asserted that the child's age was accurate and form was filled out to best of ability
@@ -374,7 +376,7 @@ def cdi_form(request, hash_id):
 
                 refresh = True
             elif 'btn-back' in request.POST and request.POST['btn-back'] == _('Go back to Background Info'): # If Back button was pressed
-                administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now()) # Update last_modified
+                administration.objects.filter(url_hash = hash_id).update(last_modified = timezone.now()) # Update last_modified
                 request.method = "GET"
                 return background_info_form(request, hash_id) # Fetch Background info template
             elif 'btn-submit' in request.POST and request.POST['btn-submit'] == _('Submit'): # If 'Submit' button was pressed
@@ -398,7 +400,7 @@ def cdi_form(request, hash_id):
 
                             if given_code:
                                 given_code.hash_id = hash_id
-                                given_code.assignment_date = datetime.datetime.now()
+                                given_code.assignment_date = timezone.now()
                                 given_code.save()
 
                 # If the study is run by langcoglab and the study allows for subject payments, store the IP address for security purposes
@@ -410,9 +412,9 @@ def cdi_form(request, hash_id):
 
                 try:
                     analysis = parse_analysis(request.POST['analysis']) # Note whether the response given to the analysis question
-                    administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now(), analysis = analysis) #Update administration object
+                    administration.objects.filter(url_hash = hash_id).update(last_modified = timezone.now(), analysis = analysis) #Update administration object
                 except: # If grabbing the analysis response failed
-                    administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now()) # Update last_modified               
+                    administration.objects.filter(url_hash = hash_id).update(last_modified = timezone.now()) # Update last_modified               
                 administration.objects.filter(url_hash = hash_id).update(completed = True) # Mark test as complete
                 return printable_view(request, hash_id) # Render completion page
 
@@ -644,7 +646,7 @@ def save_answer(request):
             else:
                 if value:
                     administration_data.objects.update_or_create(administration = administration_instance, item_ID = key, defaults = {'value': value})
-    administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now()) # Update administration object with date of last modification
+    administration.objects.filter(url_hash = hash_id).update(last_modified = timezone.now()) # Update administration object with date of last modification
 
     # Return a response. An empty dictionary is still a 200
     return HttpResponse(json.dumps([{}]), content_type='application/json')
