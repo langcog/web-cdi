@@ -44,7 +44,7 @@ class Command(BaseCommand):
             instrument_form = curr_instrument['form']
             instrument_verbose_name = curr_instrument['verbose_name']
 
-            print "    Updating instrument table for %s (%s %s)" % (instrument_verbose_name, instrument_language, instrument_form)
+            print "Updating instrument table for (%s %s)" % (instrument_language, instrument_form)
 
             instrument_name = var_safe(instrument_language) + '_' + var_safe(instrument_form)
 
