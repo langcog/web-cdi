@@ -157,7 +157,7 @@
                         {
                             "type": "radiobutton",
                             "id": "pretend",
-                            "title": "",
+                            "title": ""
                         },
                         {
                             "id": "pretend_examples",
