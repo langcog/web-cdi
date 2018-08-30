@@ -48,7 +48,7 @@ class BackgroundForm(BetterModelForm):
     age = forms.IntegerField(label = _('Age (in months)<span class="asteriskField">*</span>'), validators=[MinValueValidator(0)], help_text=_('This field will update when you enter or change your child\'s DOB.'), required=False)
 
     # Zip code. Regex validation of zip code (3-digit prefix) occurs in models.py
-    zip_code = forms.CharField(min_length = 2, max_length = 5, required = False, widget=forms.TextInput(attrs={'placeholder': 'XXXXX'}), label = _("What is your zip code?<br>(if you live in the U.S.)"))
+    zip_code = forms.CharField(min_length = 2, max_length = 5, required = False, widget=forms.TextInput(attrs={'placeholder': 'XXXXX'}), label = _("What is your postal/zip code?"))
 
     # Whether child is hispanic/latino. Yes/No question. Not required.
     child_hispanic_latino = forms.TypedChoiceField(
@@ -139,6 +139,7 @@ class BackgroundForm(BetterModelForm):
         
         # Nesting fields. Some questions, like 'born_on_due_date' trigger related subsequent questions like 'early_or_late' and 'due_date_diff' to inquire more depending on earlier answers.
         enabler_dependent_fields = (
+        ('country', ['zip_code',]),
         ('multi_birth_boolean', ['multi_birth',]),
         ('born_on_due_date', ['early_or_late', 'due_date_diff',]),
         ('other_languages_boolean', ['other_languages', 'language_days_per_week', 'language_hours_per_day', 'language_from']),
@@ -194,10 +195,11 @@ class BackgroundForm(BetterModelForm):
         super(BackgroundForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.template = PROJECT_ROOT + '/templates/bootstrap/whole_uni_form.html'
-        self.helper.form_class = 'form-inline'
+        self.helper.form_class = 'form-horizontal'
         self.helper.label_class = 'col-lg-3'
         self.helper.field_class = 'col-lg-9'
         self.helper.form_method = 'post'
+        self.helper.form_tag = False
 
         self.fields['birth_weight_lb'].label = _('Birth weight') + '<span class="asteriskField">*</span>'
         self.fields['birth_weight_kg'].label = _('Birth weight') + '<span class="asteriskField">*</span>'
@@ -215,7 +217,7 @@ class BackgroundForm(BetterModelForm):
             self.fields['child_dob'].widget.attrs['placeholder'] = 'dd/mm/yyyy'
 
         self.helper.layout = Layout(
-            Fieldset( _('Basic Information'), 'child_dob','age', 'sex','zip_code','birth_order', Field('multi_birth_boolean', css_class='enabler'), Div('multi_birth', css_class='dependent'), self.birth_weight_field, Field('born_on_due_date', css_class='enabler'), Div('early_or_late', 'due_date_diff', css_class='dependent')),
+            Fieldset( _('Basic Information'), 'child_dob','age', 'sex', Field('country', css_class='enabler'), Div('zip_code', css_class='dependent'),'birth_order', Field('multi_birth_boolean', css_class='enabler'), Div('multi_birth', css_class='dependent'), self.birth_weight_field, Field('born_on_due_date', css_class='enabler'), Div('early_or_late', 'due_date_diff', css_class='dependent')),
             Fieldset( _('Family Background'), 'mother_yob', 'mother_education','father_yob', 'father_education', 'annual_income'),
             Fieldset( _("Child's Ethnicity"),HTML("<p> " + ugettext("The following information is being collected for the sole purpose of reporting to our grant-funding institute, i.e.,  NIH (National Institute of Health).  NIH requires this information to ensure the soundness and inclusiveness of our research. Your cooperation is appreciated, but optional.") + " </p>"), 'child_hispanic_latino', 'child_ethnicity'),
             Fieldset( _("Caregiver Information"), 'caregiver_info'),

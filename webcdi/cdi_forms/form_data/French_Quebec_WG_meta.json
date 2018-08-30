@@ -1,0 +1,174 @@
+{
+    "parts": [
+        {
+            "id": 1,
+            "title": "PARTIE 1: PREMIERS MOTS",
+            "types": [
+                {
+                    "text": "Avant de commencer à parler, les enfants manifestent des signes de compréhension en répondant à des mots et des phrases familiers. Parmi les exemples qui suivent, indiquez ce que votre enfant fait.", 
+                    "type": "radiobutton",
+                    "id": "first_signs",
+                    "title": "A. PREMIERS SIGNES DE COMPRÉHENSION"
+                },
+                {
+                    "text": "Dans la liste ci-dessous, veuillez indiquer les phrases que votre enfant semble comprendre.",
+                    "type": "checkbox",
+                    "id": "phrases",
+                    "title": "B. PHRASES"
+                },
+                {
+                    "text": "Autres phrases:",
+                    "type": "textbox",
+                    "id": "phrase_examples"
+                },
+                {
+                    "id": "starting_to_talk",
+                    "type": "radiobutton",
+                    "title": "C. DÉBUT DE L’EXPRESSION VERBALE"
+                },
+                {
+                    "text": "La liste qui suit contient des mots fréquents dans le vocabulaire des jeunes enfants. Indiquez quels mots votre enfant comprend mais ne dit pas encore en noircissant le cercle de la première colonne (comprend). Pour les mots que votre enfant non seulement comprend mais utilise aussi spontanément, veuillez noircir le cercle de la seconde colonne (comprend et dit). Dans les cas où plus d’un mot est proposé, veuillez encercler celui que votre enfant utilise le plus souvent. Si votre enfant utilise une prononciation différente pour un mot, par exemple “wawal” pour “cheval” ou “ghetti” pour “spaghetti”, ce mot est accepté. Souvenez-vous que cet inventaire est un “catalogue” de tous les mots utilisés par une foule d’enfants divers. Ne vous inquiétez pas si votre enfant n’en connaît que quelques-uns en ce moment.",
+                    "id": "word",
+                    "title": "D. VOCABULAIRE",
+                    "sections": [
+                        {
+                            "id": "sounds",
+                            "title": "1. EFFETS SONORES ET SONS D’ANIMAUX"
+                        },
+                        {
+                            "id": "animals",
+                            "title": "2. ANIMAUX (réels ou jouets)"
+                        },
+                        {
+                            "id": "vehicles",
+                            "title": "3. VÉHICULES (réels ou jouets)"
+                        },
+                        {
+                            "id": "toys",
+                            "title": "4. JOUETS"
+                        },
+                        {
+                            "id": "food_drink",
+                            "title": "5. NOURRITURE ET BOISSONS"
+                        },
+                        {
+                            "id": "clothing",
+                            "title": "6. VÊTEMENTS"
+                        },
+                        {
+                            "id": "body_parts",
+                            "title": "7. PARTIES DU CORPS"
+                        },
+                        {
+                            "id": "furniture_rooms",
+                            "title": "8. MEUBLES ET PIÈCES"
+                        },
+                        {
+                            "id": "household",
+                            "title": "9. PETITS ARTICLES MÉNAGERS"
+                        },
+                        {
+                            "id": "outside_places",
+                            "title": "10. CHOSES DE L’EXTÉRIEUR ET ENDROITS OÙ ALLER"
+                        },
+                        {
+                            "id": "people",
+                            "title": "11. GENS",
+                            "footnote": "* ou tout autre mot utilisé dans votre famille"
+                        },
+                        {
+                            "id": "games_routines",
+                            "title": "12. JEUX ET ROUTINES"
+                        },
+                        {
+                            "id": "action_words",
+                            "title": "13. VERBES D’ACTION"
+                        },
+                        {
+                            "id": "time_words",
+                            "title": "14. MOTS POUR PARLER DU TEMPS"
+                        },
+                        {
+                            "id": "descriptive_words",
+                            "title": "15. MOTS DESCRIPTIFS"
+                        },
+                        {
+                            "id": "pronouns",
+                            "title": "16. PRONOMS"
+                        },
+                        {
+                            "id": "question_words",
+                            "title": "17. MOTS D’INTERROGATION"
+                        },
+                        {
+                            "id": "locations",
+                            "title": "18. PRÉPOSITIONS, ADVERBES ET TERMES LOCATIFS"
+                        },
+                        {
+                            "id": "quantifiers",
+                            "title": "19. QUANTIFICATEURS"
+                        }
+                    ],
+                    "type": "modified_checkbox"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "title": "PARTIE 2: ACTIONS ET GESTES",
+            "types": [
+                {
+                    "type": "radiobutton",
+                    "id": "gestures",
+                    "sections": [
+
+                        {
+                            "text": "Quand les enfants commencent à communiquer, ils expriment souvent leurs désirs par des gestes. Pour chaque item de la liste, indiquez si votre enfant manifeste actuellement ce genre de comportement.",
+                            "id": "gestures_first",
+                            "title": "A. PREMIERS GESTES COMMUNICATIFS"
+                        },
+                        {
+                            "text": "Votre enfant fait-il les choses suivantes?",
+                            "id": "gestures_games",
+                            "title": "B. JEUX ET ROUTINES"
+                        },
+                        {
+                            "text": "Votre enfant fait-il ou essaie-t-il de faire les choses suivantes?",
+                            "id": "gestures_objects",
+                            "title": "C. ACTIONS AVEC LES OBJETS"
+                        },
+                        {
+                            "text": "Voici des exemples de gestes que les enfants font parfois avec une poupée ou un animal en peluche. Indiquez les gestes que vous avez vu votre enfant poser avec ce genre d’objet.",
+                            "id": "gestures_parent",
+                            "title": "D. FAIRE SEMBLANT D’ÊTRE UN PARENT"
+                        },
+                        {
+                            "text": "Votre enfant fait-il ou essaie-t-il de faire les choses suivantes?",
+                            "id": "gestures_adult",
+                            "title": "E. IMITATION D’AUTRES ACTIONS DES ADULTES (avec objets réels ou jouets)"
+                        }
+
+                    ]
+                },
+                {
+                    "id": "pretend",
+                    "title": "F. JEU SYMBOLIQUE",
+                    "sections":[
+                        {
+                            "type": "radiobutton",
+                            "id": "pretend",
+                            "title": ""
+                        },
+                        {
+                            "id": "pretend_examples",
+                            "title": "",
+                            "text": "Si oui, donnez plusieurs exemples:",
+                            "type": "textbox"
+                        }  
+                    ]
+                }
+                  
+            ]
+        }
+    ]
+}

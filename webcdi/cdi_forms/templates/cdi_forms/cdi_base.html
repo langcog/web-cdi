@@ -16,6 +16,7 @@
     <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/locales/bootstrap-datepicker.es.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/locales/bootstrap-datepicker.fr.min.js"></script>
     <script src="{% static 'cdi_forms/selectize.js' %}"></script>
 <!--     <script src="{% static 'cdi_forms/bootstrap-datepicker.js' %}"></script>
  -->    <script src="{% static 'cdi_forms/moment.js' %}"></script>
@@ -47,7 +48,7 @@
                             <i class="material-icons">arrow_drop_down</i></h4></a>
                         <div id="instructions" class = "collapse" style="font-size: .85em;">
                             <ul>
-                                <li> {% trans "This form can be filled anytime before the due date." %} </li>
+                                <li> {% trans "This form can be filled any time before the due date." %} </li>
                                 <li> {% trans "It can also be saved at any time and resumed later by using the same link" %} (<a id="bookmarkme" href="">{% trans "create bookmark" %}</a>).</li>
                                 <li> {% trans "After the form is submitted, it cannot be altered." %} </li>
                                 <li> {% trans "The form also cannot be altered after the due date." %} </li>
@@ -79,6 +80,8 @@
                         var due_date_utc = moment.utc(due_date, "MMM DD, YYYY, hh:mm a");
                         if ("{{language}}" == 'Spanish') {
                             var due_date_local = moment(due_date_utc).local().locale('es').format("lll");
+                        } else if ("{{language}}" == 'French (Quebec)') {
+                            var due_date_local = moment(due_date_utc).local().locale('fr_CA').format("lll");
                         } else {
                             var due_date_local = moment(due_date_utc).local().format("lll");
                         }

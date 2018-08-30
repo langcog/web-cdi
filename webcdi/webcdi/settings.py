@@ -98,6 +98,8 @@ INSTALLED_APPS = (
     'health_check.db',
     'health_check.cache',
     'health_check.storage',
+    'localflavor',
+    'django_countries',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -212,4 +214,15 @@ LOCALE_PATHS = (
 LANGUAGES = [
     ('en', _('English')),
     ('es', _('Spanish')),
+    ('fr', _('French')),
 ]
+
+
+COUNTRIES_FIRST = [
+    'US',
+]
+
+
+
+
+

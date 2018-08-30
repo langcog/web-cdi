@@ -1,6 +1,7 @@
 @font-face {
     font-family: Karla;
-    src: url('../fonts/Karla.woff2');
+    src: url('../fonts/Karla.woff2') format('woff2'),
+         url('../fonts/Karla.woff') format('woff');
 }
 
 
@@ -163,6 +164,13 @@ ul {
 }
 
 .btn.justify-content-start{
+    white-space:normal !important;
+    word-wrap: break-word; 
+}
+
+strong { text-decoration: underline; }
+
+label.btn{
     white-space:normal !important;
     word-wrap: break-word; 
 }

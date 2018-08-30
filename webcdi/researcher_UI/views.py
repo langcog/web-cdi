@@ -113,8 +113,9 @@ def download_dictionary(request, study_obj): # Download dictionary for instrumen
     response = HttpResponse(content_type='text/csv') # Format the response as a CSV
     response['Content-Disposition'] = 'attachment; filename='+study_obj.instrument.name+'_dictionary.csv''' # Name CSV
 
-    raw_item_data = model_map(study_obj.instrument.name).objects.values('itemID','item_type','category','definition','gloss') # Grab the relevant variables within the appropriate instrument model
+    raw_item_data = model_map(study_obj.instrument.name).values('itemID','item_type','category','definition','gloss') # Grab the relevant variables within the appropriate instrument model
     item_data = pd.DataFrame.from_records(raw_item_data)
+    item_data['definition'] = item_data['definition'].apply(lambda x: re.sub("__", "", x))
     item_data[['itemID','item_type','category','definition','gloss']].to_csv(response, encoding='utf-8', index=False) # Convert nested dictionary into a pandas dataframe and then into a CSV
 
     # Return CSV
@@ -597,7 +598,11 @@ def administer_new(request, study_name): # For creating new administrations
 
                 if params['autogenerate-count'][0]!='': # If there was text in the autogenerate field
                     autogenerate_count = int(params['autogenerate-count'][0]) # Convert the text entry into an integer
-                    max_subject_id = administration.objects.filter(study=study_obj).aggregate(Max('subject_id'))['subject_id__max'] # Find the subject ID with the largest number within this study. For example, a study with subject IDs like '3','5',and '25' would get a '25' in this field.
+                    if study_obj.study_group:
+                        related_studies = study.objects.filter(researcher = study_obj.researcher, study_group = study_obj.study_group)
+                    else:
+                        related_studies = study.objects.filter(id=study_obj.id)
+                    max_subject_id = administration.objects.filter(study__in=related_studies).aggregate(Max('subject_id'))['subject_id__max'] # Find the subject ID with the largest number within this study. For example, a study with subject IDs like '3','5',and '25' would get a '25' in this field.
                     if max_subject_id is None: # If there is no max subject ID number (study has 0 participants)
                         max_subject_id = 0 # Mark the max as 0
                     for sid in range(max_subject_id+1, max_subject_id+autogenerate_count+1): # For each to-be-created subject ID
@@ -647,7 +652,12 @@ def administer_new_parent(request, username, study_name): # For creating single 
             let_through = True # Mark as allowed
 
     if let_through: # If marked as allowed
-        max_subject_id = administration.objects.filter(study=study_obj).aggregate(Max('subject_id'))['subject_id__max'] # Find the subject ID in this study with the highest number
+        if study_obj.study_group:
+            related_studies = study.objects.filter(researcher=researcher, study_group=study_obj.study_group)
+            max_subject_id = administration.objects.filter(study__in=related_studies).aggregate(Max('subject_id'))['subject_id__max']
+        else:
+            max_subject_id = administration.objects.filter(study=study_obj).aggregate(Max('subject_id'))['subject_id__max'] # Find the subject ID in this study with the highest number
+
         if max_subject_id is None: # If the max subject ID could not be found (e.g., study has 0 participants)
             max_subject_id = 0 # Mark as zero
         new_admin = administration.objects.create(study =study_obj, subject_id = max_subject_id+1, repeat_num = 1, url_hash = random_url_generator(), completed = False, due_date = datetime.datetime.now()+datetime.timedelta(days=test_period)) # Create an administration object for participant within database
@@ -815,7 +825,7 @@ def import_data(request, study_name):
                     error_msg = "Invalid date format. Please submit dates as MM-DD-YYYY or YYYY-MM-DD. '/' and '.' delimiters are alsoacceptable."
                     break
 
-                new_admin = administration.objects.create(study = study_obj, subject_id = sid, repeat_num = old_rep + 1, url_hash = random_url_generator(), completed = True, due_date = due_date, last_modified = due_date)
+                new_admin = administration.objects.create(study = study_obj, subject_id = sid, repeat_num = old_rep + 1, url_hash = random_url_generator(), completed = True, completedBackgroundInfo = True, due_date = due_date, last_modified = due_date)
                 new_admin_pks.append(new_admin.pk)
 
                 if admin_row['gender'] == "m":

@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from django.shortcuts import render
-from .models import English_WS, English_WG, Spanish_WS, Spanish_WG, BackgroundInfo, requests_log, Zipcode
+from django.shortcuts import render, get_object_or_404
+from .models import  *
 import os.path, json, datetime, dateutil.relativedelta, itertools, requests, re
-from researcher_UI.models import administration_data, administration, study, payment_code, ip_address
+from researcher_UI.models import *
 from django.http import Http404, JsonResponse, HttpResponse
 from .forms import BackgroundForm, ContactForm
 from django.utils import timezone, translation
@@ -26,20 +26,35 @@ import pandas as pd
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__)) # Declare root folder for project and files. Varies between Mac and Linux installations.
 
-# Map name of instrument model (English_WG & English_WS) to its string title
+# This function is not written properly...
+def language_map(language):
+    with translation.override('en'):
+        available_langs = dict(settings.LANGUAGES)
+        trimmed_lang = re.sub(r'(\s+)?\([^)]*\)', '', language).strip()
+        print "Could not find '%s' in " % language + str(available_langs)
+        lang_code = None
+
+        for code, language in available_langs.iteritems(): 
+            if language == trimmed_lang:
+                lang_code = code
+
+        print lang_code
+
+        assert lang_code, "'%s' not available in language mapping function (language_map, cdi_forms/views.py)" % trimmed_lang
+        return lang_code
+
+# Map name of instrument model to its string title
 def model_map(name):
-    mapping = {
-    "English_WS": English_WS, 
-    "English_WG": English_WG, 
-    "Spanish_WS": Spanish_WS, 
-    "Spanish_WG": Spanish_WG
-    }
-    assert name in mapping, name+"instrument not added to the mapping in views.py model_map function"
-    return mapping[name]
+    assert instrument.objects.filter(name=name).exists(), "%s is not registered as a valid instrument" % name
+    instrument_obj = instrument.objects.get(name=name)
+    cdi_items = Instrument_Forms.objects.filter(instrument=instrument_obj).order_by('item_order')
+
+    assert cdi_items.count() > 0, "Could not find any CDI items registered with this instrument: %s" % name
+    return cdi_items
         
 # Gets list of itemIDs 'item_XX' from an instrument model
 def get_model_header(name):
-    return list(model_map(name).objects.values_list('itemID', flat=True))
+    return list(model_map(name).values_list('itemID', flat=True))
     
 # If the BackgroundInfo model was filled out before, populate BackgroundForm with responses based on administation object
 def prefilled_background_form(administration_instance):
@@ -77,10 +92,7 @@ def background_info_form(request, hash_id):
     context['child_age'] = None
     context['zip_code'] = ''
 
-    if administration_instance.study.instrument.language == "English":
-        user_language = 'en'
-    elif administration_instance.study.instrument.language == "Spanish":
-        user_language = 'es'
+    user_language = language_map(administration_instance.study.instrument.language)
 
     translation.activate(user_language)
 
@@ -88,6 +100,8 @@ def background_info_form(request, hash_id):
     background_form = None
         
     if request.method == 'POST' : #if test-taker is sending in form responses
+        print "\n\n\n background req post"
+        print context
         if not administration_instance.completed and administration_instance.due_date > timezone.now(): # And test has yet to be completed and has not timed out
             try:
                 background_instance = BackgroundInfo.objects.get(administration = administration_instance) # Try to fetch BackgroundInfo model already stored in database.
@@ -134,7 +148,7 @@ def background_info_form(request, hash_id):
 
                 # If 'Next' button is pressed, update last_modified and mark completion of BackgroundInfo. Fetch CDI form by hash ID.
                 if 'btn-next' in request.POST and request.POST['btn-next'] == _('Next'):
-                    administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now())
+                    administration.objects.filter(url_hash = hash_id).update(last_modified = timezone.now())
                     administration.objects.filter(url_hash = hash_id).update(completedBackgroundInfo = True)
                     request.method = "GET"
                     return cdi_form(request, hash_id)
@@ -151,8 +165,12 @@ def background_info_form(request, hash_id):
                 background_instance.zip_code = background_instance.zip_code + '**'
             background_form = BackgroundForm(instance = background_instance, context = context)
         except:
-            if administration_instance.repeat_num > 1 and administration_instance.study.prefilled_data >= 1:
-                old_admins = administration.objects.filter(study = administration_instance.study, subject_id = administration_instance.subject_id, completedBackgroundInfo = True)
+            if (administration_instance.repeat_num > 1 or administration_instance.study.study_group) and administration_instance.study.prefilled_data >= 1:
+                if administration_instance.study.study_group:
+                    related_studies = study.objects.filter(researcher = administration_instance.study.researcher, study_group = administration_instance.study.study_group)
+                elif administration_instance.repeat_num > 1 and not administration_instance.study.study_group:
+                    related_studies = study.objects.filter(id=administration_instance.study.id)
+                old_admins = administration.objects.filter(study__in = related_studies, subject_id = administration_instance.subject_id, completedBackgroundInfo = True)
                 if old_admins:
                     background_instance = BackgroundInfo.objects.get(administration = old_admins.latest(field_name='last_modified'))
                     background_instance.pk = None
@@ -223,7 +241,7 @@ def cdi_items(object_group, item_type, prefilled_data, item_id):
 
             obj['text'] = obj['definition'][0].upper() + obj['definition'][1:] if obj['definition'][0].isalpha() else obj['definition'][0] + obj['definition'][1].upper() + obj['definition'][2:]
 
-            if obj['definition'] is not None and obj['definition'].find('/') >= 0 and item_id == 'complexity':
+            if obj['definition'] is not None and obj['definition'].find('/') >= 0 and item_id in ['complexity', 'pronoun_usage']:
                 split_definition = map(unicode.strip, obj['definition'].split('/'))
                 obj['choices'] = zip(split_definition, raw_split_choices, prefilled_values)
             else:
@@ -245,7 +263,7 @@ def prefilled_cdi_data(administration_instance):
     instrument_model = model_map(instrument_name) # Grab appropriate model given the instrument name associated with test
     
     if not prefilled_data_list and administration_instance.repeat_num > 1 and administration_instance.study.prefilled_data >= 2:
-        word_items = instrument_model.objects.filter(item_type = 'word').values_list('itemID', flat = True)
+        word_items = instrument_model.filter(item_type = 'word').values_list('itemID', flat = True)
         old_admins = administration.objects.filter(study = administration_instance.study, subject_id = administration_instance.subject_id, completed = True)
         if old_admins:
             old_admin = old_admins.latest(field_name='last_modified')
@@ -275,23 +293,27 @@ def prefilled_cdi_data(administration_instance):
             field_values += ['choices__choice_set_en']
         elif administration_instance.study.instrument.language == 'Spanish':
             field_values += ['choices__choice_set_es']
+        elif administration_instance.study.instrument.language == 'French (Quebec)':
+            field_values += ['choices__choice_set_fr']
 
         #As some items are nested on different levels, carefully parse and store items for rendering.
         for part in data['parts']:
             for item_type in part['types']:
                 if 'sections' in item_type:
                     for section in item_type['sections']:
+                        group_objects = instrument_model.filter(category__exact=section['id']).values(*field_values)
+                        if "type" not in section:
+                            section['type'] = item_type['type']
 
-                        group_objects = instrument_model.objects.filter(category__exact=section['id']).values(*field_values)
-                        
-                        x = cdi_items(group_objects, item_type['type'], prefilled_data, item_type['id'])
+                        x = cdi_items(group_objects, section['type'], prefilled_data, item_type['id'])
+
                         section['objects'] = x
                         if administration_instance.study.show_feedback: raw_objects.extend(x)
                         if any(['*' in x['definition'] for x in section['objects']]):
                             section['starred'] = "*Or the word used in your family"  
   
                 else:
-                    group_objects = instrument_model.objects.filter(item_type__exact=item_type['id']).values(*field_values)
+                    group_objects = instrument_model.filter(item_type__exact=item_type['id']).values(*field_values)
                     x = cdi_items(group_objects, item_type['type'], prefilled_data, item_type['id'])
                     item_type['objects'] = x
                     if administration_instance.study.show_feedback: raw_objects.extend(x)
@@ -323,17 +345,14 @@ def cdi_form(request, hash_id):
     instrument_model = model_map(instrument_name) # Fetch instrument model based on instrument name.
     refresh = False
 
-    if administration_instance.study.instrument.language == "English":
-        user_language = 'en'
-    elif administration_instance.study.instrument.language == "Spanish":
-        user_language = 'es'
+    user_language = language_map(administration_instance.study.instrument.language)
 
     translation.activate(user_language)
 
     if request.method == 'POST' : # If submitting responses to CDI form
         if not administration_instance.completed and administration_instance.due_date > timezone.now(): # If form has not been completed and it has not expired
             for key in request.POST: # Parse responses and individually save each item's response (empty checkboxes or radiobuttons are not saved)
-                items = instrument_model.objects.filter(itemID = key)
+                items = instrument_model.filter(itemID = key)
                 if len(items) == 1:
                     item = items[0]
                     value = request.POST[key]
@@ -345,7 +364,7 @@ def cdi_form(request, hash_id):
                         if value:
                             administration_data.objects.update_or_create(administration = administration_instance, item_ID = key, defaults = {'value': value})
             if 'btn-save' in request.POST and request.POST['btn-save'] == _('Save'): # If the save button was pressed
-                administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now()) # Update administration object with date of last modification
+                administration.objects.filter(url_hash = hash_id).update(last_modified = timezone.now()) # Update administration object with date of last modification
 
                 if 'analysis' in request.POST:
                     analysis = parse_analysis(request.POST['analysis']) # Note whether test-taker asserted that the child's age was accurate and form was filled out to best of ability
@@ -357,7 +376,7 @@ def cdi_form(request, hash_id):
 
                 refresh = True
             elif 'btn-back' in request.POST and request.POST['btn-back'] == _('Go back to Background Info'): # If Back button was pressed
-                administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now()) # Update last_modified
+                administration.objects.filter(url_hash = hash_id).update(last_modified = timezone.now()) # Update last_modified
                 request.method = "GET"
                 return background_info_form(request, hash_id) # Fetch Background info template
             elif 'btn-submit' in request.POST and request.POST['btn-submit'] == _('Submit'): # If 'Submit' button was pressed
@@ -381,7 +400,7 @@ def cdi_form(request, hash_id):
 
                             if given_code:
                                 given_code.hash_id = hash_id
-                                given_code.assignment_date = datetime.datetime.now()
+                                given_code.assignment_date = timezone.now()
                                 given_code.save()
 
                 # If the study is run by langcoglab and the study allows for subject payments, store the IP address for security purposes
@@ -393,9 +412,9 @@ def cdi_form(request, hash_id):
 
                 try:
                     analysis = parse_analysis(request.POST['analysis']) # Note whether the response given to the analysis question
-                    administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now(), analysis = analysis) #Update administration object
+                    administration.objects.filter(url_hash = hash_id).update(last_modified = timezone.now(), analysis = analysis) #Update administration object
                 except: # If grabbing the analysis response failed
-                    administration.objects.filter(url_hash = hash_id).update(last_modified = datetime.datetime.now()) # Update last_modified               
+                    administration.objects.filter(url_hash = hash_id).update(last_modified = timezone.now()) # Update last_modified               
                 administration.objects.filter(url_hash = hash_id).update(completed = True) # Mark test as complete
                 return printable_view(request, hash_id) # Render completion page
 
@@ -407,6 +426,7 @@ def cdi_form(request, hash_id):
         data['captcha'] = None
         data['language'] = administration_instance.study.instrument.language
         data['form'] = administration_instance.study.instrument.form
+        data['language_code'] = user_language
         
         if administration_instance.study.confirm_completion and administration_instance.study.researcher.username == "langcoglab" and administration_instance.study.allow_payment:
             data['captcha'] = 'True'
@@ -427,10 +447,7 @@ def printable_view(request, hash_id):
     prefilled_data = dict()
     prefilled_data = prefilled_cdi_data(administration_instance)
 
-    if administration_instance.study.instrument.language == "English":
-        user_language = 'en'
-    elif administration_instance.study.instrument.language == "Spanish":
-        user_language = 'es'
+    user_language = language_map(administration_instance.study.instrument.language)
 
     translation.activate(user_language)
 
@@ -458,16 +475,28 @@ def printable_view(request, hash_id):
     prefilled_data['show_feedback'] = administration_instance.study.show_feedback
 
     if administration_instance.study.allow_payment and administration_instance.bypass is None:
+        amazon_urls = {
+        'English': {'redeem_url': 'www.amazon.com/redeem', 
+            'legal_url': 'www.amazon.com/gc-legal'},
+        'Spanish': {'redeem_url': 'www.amazon.com/gc/redeem/?language=es_US', 
+            'legal_url': 'www.amazon.com/gc-legal/?language=es_US'},
+        'French (Quebec)': {'redeem_url': 'www.amazon.ca/gc/redeem/?language=fr_CA', 
+            'legal_url': 'www.amazon.ca/gc-legal/?language=fr_CA'}
+        }
+        url_obj = amazon_urls[administration_instance.study.instrument.language]
         if payment_code.objects.filter(hash_id = hash_id).exists():
             gift_card = payment_code.objects.get(hash_id = hash_id)
             prefilled_data['gift_code'] = gift_card.gift_code
-            prefilled_data['gift_amount'] = gift_card.gift_amount
+            prefilled_data['gift_amount'] = '${:,.2f}'.format(gift_card.gift_amount)
+            prefilled_data['redeem_url'] = url_obj['redeem_url']
+            prefilled_data['legal_url'] = url_obj['legal_url']
         else:
             prefilled_data['gift_code'] = 'ran out'
             prefilled_data['gift_amount'] = 'ran out'
+            prefilled_data['redeem_url'] = None
+            prefilled_data['legal_url'] = None
 
     prefilled_data['allow_sharing'] = administration_instance.study.allow_sharing
-    prefilled_data['contact_url'] = reverse('contact', args=[hash_id])
 
     response = render(request, 'cdi_forms/printable_cdi.html', prefilled_data) # Render contact form template   
     response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
@@ -523,6 +552,7 @@ def find_paired_studies(request, username, study_group):
     user_language = models.Case( 
         models.When(instrument__language='English', then=models.Value('en')),
         models.When(instrument__language='Spanish', then=models.Value('es')),
+        models.When(instrument__language='French (Quebec)', then=models.Value('fr')),
     default=models.Value('en'), output_field=models.CharField())).order_by('min_age')
 
     first_study = study.objects.filter(study_group = study_group, researcher = researcher)[:1].get()
@@ -534,10 +564,8 @@ def find_paired_studies(request, username, study_group):
     context['max_age'] = first_study.max_age
     context['birthweight_units'] = first_study.birth_weight_units
 
-    if context['language'] == "English":
-        user_language = 'en'
-    elif context['language'] == "Spanish":
-        user_language = 'es'
+    user_language = language_map(administration_instance.study.instrument.language)
+
     translation.activate(user_language)
 
     data['background_form'] = BackgroundForm(context = context)
@@ -588,13 +616,37 @@ def contact(request, hash_id):
             email.send()
             messages.success(request, 'Form submission successful!') # Provide sender with a message the form was properly sent.
 
-    if administration_instance.study.instrument.language == "English":
-        user_language = 'en'
-    elif administration_instance.study.instrument.language == "Spanish":
-        user_language = 'es'
+    user_language = language_map(administration_instance.study.instrument.language)
+
 
     translation.activate(user_language)
     response = render(request, 'cdi_forms/contact.html', {'form': form}) # Render contact form template   
     response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
 
     return response
+
+
+def save_answer(request):
+
+    hash_id = request.POST.get('hash_id')
+    administration_instance = get_administration_instance(hash_id)
+
+    instrument_name = administration_instance.study.instrument.name # Get instrument name associated with study
+    instrument_model = model_map(instrument_name).filter(itemID__in = request.POST) # Fetch instrument model based on instrument name.
+
+    for key in request.POST: # Parse responses and individually save each item's response (empty checkboxes or radiobuttons are not saved)
+        items = instrument_model.filter(itemID = key)
+        if len(items) == 1:
+            item = items[0]
+            value = request.POST[key]
+            if item.choices:
+                choices = map(unicode.strip, item.choices.choice_set_en.split(';'))
+                if value in choices:
+                    administration_data.objects.update_or_create(administration = administration_instance, item_ID = key, defaults = {'value': value})
+            else:
+                if value:
+                    administration_data.objects.update_or_create(administration = administration_instance, item_ID = key, defaults = {'value': value})
+    administration.objects.filter(url_hash = hash_id).update(last_modified = timezone.now()) # Update administration object with date of last modification
+
+    # Return a response. An empty dictionary is still a 200
+    return HttpResponse(json.dumps([{}]), content_type='application/json')

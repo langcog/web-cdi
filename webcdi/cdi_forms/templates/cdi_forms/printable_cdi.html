@@ -87,63 +87,32 @@
                 </div>
                 <h2>{% trans "Thank you!" %}</h2><br>
                 <h4>
-                    {% blocktrans %}
-                    Thank you for taking the time to complete the MacArthur-Bates Communicative Development Inventory (CDI). With the help of parents and caregivers like you, we are working to learn more about the way that children’s language develops, and how that development varies across individual children and cultures. Remember that the CDI lists many different words that are used by many different children. Don’t worry if your child only knows a few of them right now. Below are some insights into your child’s developing vocabulary, based on our research. This summary is not a clinical evaluation. If you have any concerns about your child’s development, we recommend that you talk with your child’s physician. If you enjoyed our assessment, you can learn more about the CDI <a href="http://mb-cdi.stanford.edu/" target="_blank">here</a>. We appreciate your contribution!
-                    {% endblocktrans %}
+                    {% blocktrans %}Thank you for taking the time to complete the MacArthur-Bates Communicative Development Inventory (CDI). With the help of parents and caregivers like you, we are working to learn more about the way that children’s language develops, and how that development varies across individual children and cultures. Remember that the CDI lists many different words that are used by many different children. Don’t worry if your child only knows a few of them right now. Below are some insights into your child’s developing vocabulary, based on our research. This summary is not a clinical evaluation. If you have any concerns about your child’s development, we recommend that you talk with your child’s physician. If you enjoyed our assessment, you can learn more about the CDI <a href="http://mb-cdi.stanford.edu/" target="_blank">here</a>. We appreciate your contribution!{% endblocktrans %}
                 </h4>
 
                 {% if gift_code %}
                 <br>
                     {% if gift_code == 'ran out' %}
                         <h4>
-                            {% blocktrans with contact_url=contact_url %}
-                            We're sorry but it looks like we have ran out of Amazon.com Gift Cards! Please <a href="{{ contact_url }}" target="_blank">reach out to us</a> and we will quickly fix this issue. 
-                            {% endblocktrans %}
+                            {% blocktrans with contact_url=contact_url %}We're sorry but it looks like we have run out of Amazon.com Gift Cards! Please <a href="{{ contact_url }}" target="_blank">reach out to us</a> and we will quickly fix this issue.{% endblocktrans %}
                         </h4>
                     {% else %}
                         <h4>
                         <p>
-                            {% blocktrans %}
-                            Thank you for participating in the participating our Web-CDI project! It is our pleasure to send you this Amazon.com Gift Card* that can be redeemed towards millions of items at <a href="http://www.amazon.com" target="_blank">www.amazon.com</a>. You may want to print this screen for easy reference later--you’ll need the gift card claim code below.
-                            {% endblocktrans %}
+                            {% blocktrans %}Thank you for participating in our Web-CDI project! It is our pleasure to send you this Amazon.com Gift Card that can be redeemed towards millions of items at <a href="http://www.amazon.com" target="_blank">www.amazon.com</a>. You may want to print this screen for easy reference later--you’ll need the gift card claim code below.{% endblocktrans %}
                         </p>
 
                         <p>
-                            {% blocktrans with gift_amount=gift_amount gift_code=gift_code%}
-                            Gift Card Amount: ${{ gift_amount }} <br>
-                            Claim Code: {{ gift_code }}
-                            {% endblocktrans %}
+                            {% trans "Gift Card Amount" %}: {{ gift_amount }}  <br>
+                            {% trans "Claim Code" %}: {{ gift_code }}
                         </p>
 
                         <p>
-                            |&nbsp;&nbsp;&nbsp;&nbsp;
-                            <a href="https://www.amazon.com/gp/css/gc/payment/view-gc-balance?claimCode={{ gift_code }}" target="_blank">{% trans "Apply to Account" %}</a>
-                            &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
-                            <a href="http://www.amazon.com/gc-redeem" target="_blank">{% trans "How to Use" %}</a>
-                            &nbsp;&nbsp;&nbsp;&nbsp;|
-                        </p>
-
-                        <p>
-                            {% trans "To redeem your gift card, follow these steps:" %}
-                            <ol>
-                              <li>{% trans "Visit" %} <a href="http://www.amazon.com/redeem" target="_blank">www.amazon.com/redeem</a></li>
-                              <li>{% trans "Enter the Claim Code when prompted." %}</li>
-                              <li>{% trans "Gift card funds will be applied automatically to eligible orders during the checkout process." %}</li>
-                              <li>{% trans "You must pay for any remaining balance on your order with another payment method." %}</li>
-                            </ol>
-                            <br>
-                            {% trans "Your gift card claim code may also be entered when prompted during checkout. To redeem your gift card using the Amazon.com 1-Click&reg; service, first add the gift card funds to Your Account." %}
-                            <br>
-                            {% blocktrans with contact_url=contact_url %}
-                            If you have questions about redeeming your gift card, please visit <a href="http://www.amazon.com/gc-redeem" target="_blank">www.amazon.com/gc-redeem</a>. If you have questions regarding the Web-CDI, please contact the Web-CDI team <a href="{{ contact_url }}" target="_blank">here</a>.
-                            {% endblocktrans %}
+                            {% blocktrans with redeem_url=redeem_url legal_url=legal_url %}To redeem your gift card, visit <a href="{{ redeem_url }}" target="_blank">{{ redeem_url }}</a>. Restrictions apply, see <a href="{{ legal_url }}" target="_blank">{{ legal_url }}</a>.{% endblocktrans %}
+                 
                         </p>
                         </h4>
-                        <p style="font-size: 0.8em;">
-                            {% blocktrans %}
-                            *Amazon.com is not a sponsor of this promotion. Except as required by law, Amazon.com Gift Cards (&quot;GCs&quot;) cannot be transferred for value or redeemed for cash. GCs may be used only for purchases of eligible goods on Amazon.com or certain of its affiliated websites. GCs cannot be redeemed for purchases of gift cards. Purchases are deducted from the GC balance. To redeem or view a GC balance, visit &quot;Your Account&quot; on Amazon.com. Amazon is not responsible if a GC is lost, stolen, destroyed or used without permission. For complete terms and conditions, see <a href="http://www.amazon.com/gc-legal"  target="_blank">www.amazon.com/gc-legal</a>. GCs are issued by ACI Gift Cards LLC, a Washington corporation. All Amazon &trade; &amp; &copy; are IP of Amazon.com, Inc. or its affiliates. No expiration date or service fees.
-                            {% endblocktrans %}
-                        </p>
+                 
                     {% endif %}
                                 
                 {% endif %}
@@ -208,144 +177,7 @@
             
             {% if parts %}
                 <ul>
-                    {% for part in parts %}
-                        <h2 id="{{ part.id }}"> {{ part.title }}</h2>
-                        
-                        {% for type in part.types %}
-                            <h3 id = "{{ type.id }}"> {{ type.title }}</h3>
-                            <p class="lead"> {{ type.text | capfirst }}</p>
-                            <div class="row alternate-color">
-                                {% for object in type.objects %}
-                                    {% if type.type == "radiobutton" or type.type == "modified_checkbox" %}
-                                        {% if object.text != '' %}
-                                        <div class="col-md-12 alco-child">
-                                            <div class="row alco-child1" >
-                                                <div class="col"><span>{{ object.text | capfirst }}</span></div>
-                                                <div class="col align-items-center btn-group d-flex justify-content-end" data-toggle="buttons">
-                                                    {% for choice in object.choices %}
-                                                        <label class = "btn mult-choice">
-                                                            <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
-                                                            {% if type.type == "radiobutton" %} 
-                                                                <i class="material-icons radio_button_checked" aria-hidden="true">radio_button_checked</i>
-                                                                <i class="material-icons radio_button_unchecked" aria-hidden="true">radio_button_unchecked</i>
-                                                            {% elif type.type == "modified_checkbox"%} 
-                                                                <i class="material-icons check_box" aria-hidden="true">check_box</i>
-                                                                <i class="material-icons check_box_outline_blank" aria-hidden="true">check_box_outline_blank</i>
-                                                            {% endif %}
-                                                            <span class="choice"> {{ choice.0 }}</span>
-                                                        </label>
-                                                    {% endfor %}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {% else %}
-                                        <div class="col-md-4 alco-child">
-                                            <div class="btn-group" data-toggle="buttons">
-                                                {% for choice in object.choices %}
-                                                    <div class="row">
-                                                        <label class = "btn mult-choice">
-                                                            <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
-                                                            {% if type.type == "radiobutton" %} 
-                                                                <i class="material-icons radio_button_checked" aria-hidden="true">radio_button_checked</i>
-                                                                <i class="material-icons radio_button_unchecked" aria-hidden="true">radio_button_unchecked</i>
-                                                            {% elif type.type == "modified_checkbox"%} 
-                                                                <i class="material-icons check_box" aria-hidden="true">check_box</i>
-                                                                <i class="material-icons check_box_outline_blank" aria-hidden="true">check_box_outline_blank</i>
-                                                            {% endif %}
-                                                            <span class="choice"> {{ choice.0 }}</span>
-                                                        </label>
-                                                    </div>
-                                                {% endfor %}
-                                            </div>
-                                        </div>
-                                        {% endif %}                            
-                                    {% elif type.type == "checkbox" %}
-                                        <div class="col-md-4 alco-child"> 
-                                            <div class="btn-group" data-toggle="buttons"> 
-                                                <label class = "btn">
-                                                    <input type="checkbox" id="{{ object.itemID }}" name="{{ object.itemID }}" value="{{ object.choices }}"{% if completed %} disabled {% endif %} {% if object.prefilled_value %} checked {% endif %}> 
-                                                    <i class="material-icons check_box" aria-hidden="true">check_box</i>
-                                                    <i class="material-icons check_box_outline_blank" aria-hidden="true">check_box_outline_blank</i>
-                                                    <span class="choice"> {{ object.definition }}</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    {% elif type.type == "textbox" %}
-                                        <div class="col-md-12"> <input type="textbox" id="{{ object.itemID }}" name="{{ object.itemID }}" maxlength="200" value="{{ object.prefilled_value }}" {% if completed %} disabled {% endif %}></div>
-                                    {% endif %}
-                                {% endfor %}
-                            </div>
-                            <ul>
-                                {% for section in type.sections %}
-                                <h4 id ="{{ section.id }}" >{{ section.title }}</h4>
-                                <div class="row ">
-                                    {%for object in section.objects %}
-                                        {% if type.type == "radiobutton" or type.type == "modified_checkbox" %}
-                                            {% if object.text != '' %}
-                                            <div class="col-md-12 alco-child">
-                                                <div class="row alco-child1" >
-                                                    <div class="col"><span>{{ object.text | capfirst }}</span></div>
-                                                    <div class="col align-items-center btn-group d-flex justify-content-end" data-toggle="buttons">
-                                                        {% for choice in object.choices %}
-                                                            <label class = "btn mult-choice">
-                                                                <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
-                                                                {% if type.type == "radiobutton" %} 
-                                                                    <i class="material-icons radio_button_checked" aria-hidden="true">radio_button_checked</i>
-                                                                    <i class="material-icons radio_button_unchecked" aria-hidden="true">radio_button_unchecked</i>
-                                                                {% elif type.type == "modified_checkbox"%} 
-                                                                    <i class="material-icons check_box" aria-hidden="true">check_box</i>
-                                                                    <i class="material-icons check_box_outline_blank" aria-hidden="true">check_box_outline_blank</i>
-                                                                {% endif %}
-                                                                <span class="choice"> {{ choice.0 }}</span>
-                                                            </label>
-                                                        {% endfor %}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            {% else %}
-                                            <div class="col-md-4 alco-child">
-                                                <div class="btn-group" data-toggle="buttons">
-                                                    {% for choice in object.choices %}
-                                                        <div class="row">
-                                                            <label class = "btn mult-choice">
-                                                                <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.0 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
-                                                                {% if type.type == "radiobutton" %} 
-                                                                    <i class="material-icons radio_button_checked" aria-hidden="true">radio_button_checked</i>
-                                                                    <i class="material-icons radio_button_unchecked" aria-hidden="true">radio_button_unchecked</i>
-                                                                {% elif type.type == "modified_checkbox"%} 
-                                                                    <i class="material-icons check_box" aria-hidden="true">check_box</i>
-                                                                    <i class="material-icons check_box_outline_blank" aria-hidden="true">check_box_outline_blank</i>
-                                                                {% endif %}                                                             
-                                                                <span class="choice"> {{ choice.0 }}</span>
-                                                            </label>
-                                                        </div>
-                                                    {% endfor %}
-                                                </div>
-                                            </div>
-                                            {% endif %}                            
-                                        {% elif type.type == "checkbox" %}
-                                            <div class="col-md-4 alco-child">
-                                                <div class="btn-group" data-toggle="buttons"> 
-                                                    <label class = "btn">
-                                                        <input type="checkbox" id="{{ object.itemID }}" name="{{ object.itemID }}" value="{{ object.choices }}"{% if completed %} disabled {% endif %} {% if object.prefilled_value %} checked {% endif %}> 
-                                                        <i class="material-icons check_box" aria-hidden="true">check_box</i>
-                                                        <i class="material-icons check_box_outline_blank" aria-hidden="true">check_box_outline_blank</i>                                                        
-                                                        <span class="choice"> {{ object.definition }}</span>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        {% elif type.type == "textbox" %}
-                                            <div class="col-md-12"> <input type="textbox" id="{{ object.itemID }}" name="{{ object.itemID }}" maxlength="200" value="{{ object.prefilled_value }}" {% if completed %} disabled {% endif %}></div>
-                                        {% endif %}
-                                    {% endfor %}
-                                    <div class="col-md-12">{{ section.starred }}</div>
-                                </div>
-                                {% endfor %}
-                            </ul>
-                            
-                        
-                        {% endfor %}
-                    {% endfor %}
+                    {% include "cdi_forms/cdi_items.html" with parts=parts %}
                 </ul>
             {% else %}
                 <p>{% trans "Form unavailable. Contact admin." %} </p>
@@ -442,7 +274,7 @@
 
         // Load csv matching informal category labels with formal category titles and generate 2 category-level summary graph.
         // If chid only had responses of one type (all words are 'understands' or all words are 'produces'), produce 1 graph and double its width
-        d3.csv("{% static 'graph_data/word_categories.csv' %}", function(data) {
+        d3.csv("{% static 'data_csv/word_categories.csv' %}", function(data) {
             word_categories = data;
             var list_names = objectMap(categorySize,'key')
             updateCategoryInfo();
@@ -787,136 +619,6 @@
         var adjusted_quant_comp = [];
         var current_vocab = [];
         var new_pred_chart;
-        var outside_warning = "<h4><font color = '#008000'> {% trans 'Sorry but it looks like your child is outside of our age range for predicting vocabulary size! This version of the CDI assessment is for children between MIN_AGE to MAX_AGE months of age' %} </font></h4>".replace(/MIN_AGE/g, "{{ min_age }}").replace(/MAX_AGE/g, "{{ max_age }}")
-
-        // // If data is satisfactory (child's age is within study's age range), graph a chart predicting median growth rate adjusted for child.
-        // if ((root.age > 30 | root.age < 16) & root.instrument_name.indexOf('WS') > -1) {
-        //     $("#predicted_chart").html(outside_warning);
-
-        // } else if ((root.age > 18 | root.age < 8) & root.instrument_name.indexOf('WG') > -1) {
-        //     $("#predicted_chart").html(outside_warning);
-
-        // } else {
-        //     // Generate prediction chart.
-        //     d3.csv("{% static 'graph_data/predicted_vocab_English.csv' %}", function(data) {
-
-        //         predicted_vocab = data;
-        //         current_ages = predicted_vocab.filter(function(d) { return (parseInt(d.age) == root.age); });
-
-        //         findQuantile();
-
-        //         quant_prod = predicted_vocab.filter(function(d) { return d.percentile == pred_prod_quant & d.measure == "production"; });
-        //         quant_age_loc_prod = objectMap(quant_prod,'age').indexOf(root.age.toString());
-        //         adjust_prod = (words_produced/(words.length)) - quant_prod[quant_age_loc_prod].pred;
-
-        //         for (var i = 0; i < quant_prod.length; i++) {
-        //             raw_adjusted_num = parseFloat(quant_prod[i].pred) + adjust_prod;
-        //             adjusted_num = (raw_adjusted_num < 0)? 0 : ((raw_adjusted_num > 1)? 1 : raw_adjusted_num)
-        //             adjusted_quant_prod[i] = {"prod_pred" : adjusted_num , "age": (parseFloat(quant_prod[i].age))};
-        //         }
-
-        //         current_vocab.push({"age": root.age, "vocab": 100*words_produced/(words.length), "name": "{% trans 'Current Spoken Vocabulary' %}", "dy": 6});
-
-        //         if (raw_words_understood > 0) {
-
-        //             quant_comp = predicted_vocab.filter(function(d) { return d.percentile == pred_prod_quant & d.measure == "comprehension"; });
-        //             quant_age_loc_comp = objectMap(quant_comp,'age').indexOf(root.age.toString());
-        //             adjust_comp = (words_understood/(words.length)) - quant_comp[quant_age_loc_comp].pred;
-
-        //             for (var i = 0; i < quant_comp.length; i++) {
-        //                 raw_adjusted_num = parseFloat(quant_comp[i].pred) + adjust_comp;
-        //                 adjusted_num = (raw_adjusted_num < 0)? 0 : ((raw_adjusted_num > 1)? 1 : raw_adjusted_num)
-        //                 adjusted_quant_comp[i] = {"comp_pred" : adjusted_num , "age": (parseFloat(quant_comp[i].age))};
-        //             }
-
-        //             current_vocab.push({"age": root.age, "vocab": 100*words_understood/(words.length),
-        //              "name": "{% trans 'Current Understood Vocabulary' %}", "dy": 0});
-        //         }
-
-
-
-        //         var new_pred_chart = c3.generate({
-        //             bindto: '#predicted_chart',
-        //             data: {
-        //                 xs: {
-        //                     '{% trans "Predicted % of Words Spoken" %}': 'x1',
-        //                     '{% trans "Predicted % of Words Understood" %}': 'x2',
-        //                     '{% trans "Current Vocabulary Size" %}': 'current_age'
-        //                 },
-        //                 columns: [
-        //                     ['x1'].concat(objectMap(adjusted_quant_prod, 'age')),
-        //                     ['x2'].concat(objectMap(adjusted_quant_comp, 'age')),
-        //                     ['{% trans "Predicted % of Words Spoken" %}'].concat(objectMap(adjusted_quant_prod, 'prod_pred').map(function(x) { return Math.round(x * 100); })),
-        //                     ['{% trans "Predicted % of Words Understood" %}'].concat(objectMap(adjusted_quant_comp, 'comp_pred').map(function(x) { return Math.round(x * 100); })),
-        //                     ['current_age'].concat(objectMap(current_vocab, 'age')),
-        //                     ['{% trans "Current Vocabulary Size" %}'].concat(objectMap(current_vocab, 'vocab'))
-        //                 ],
-        //                 type: 'line',
-        //                 types: {
-        //                     '{% trans "Current Vocabulary Size" %}': 'scatter'
-        //                 },
-        //                 order: 'asc',
-        //                 colors: {
-        //                     '{% trans "Predicted % of Words Spoken" %}': '#9471f2',
-        //                     '{% trans "Predicted % of Words Understood" %}': '#FF9667',
-        //                     '{% trans "Current Vocabulary Size" %}': '#2DBC74'
-        //                 }
-        //             },
-        //             axis: {
-        //               x: {
-        //                 label: {
-        //                     text: '{% trans "Age (in Months)" %}',
-        //                     position: 'outer-center',                        
-        //                 },
-        //                 tick: {
-        //                   values: _.range(8, 32, 2)
-        //                 }
-        //               },
-        //               y: {
-        //                 label: {
-        //                     text: '{% trans "Predicted % of Words on Test" %}',
-        //                     position: 'outer-middle',
-        //                 },
-        //                 tick: {
-        //                   values: _.range(0, 125, 25)
-        //                 },
-        //                 max: 100,
-        //                 min: 0,
-        //                 padding: {top:5, bottom:10}
-        //               }
-        //             },
-        //             point: {
-        //               r: 8,
-        //               show: false
-        //             },
-        //             legend: {
-        //                 position: 'inset'
-        //             }
-        //         });
-
-
-
-        //         setTimeout(function () {
-        //             new_pred_chart.resize({
-        //               height: $("#predicted_chart").innerWidth()*0.75,
-        //               width: $("#predicted_chart").innerWidth()*0.9
-        //             });
-        //         }, refresh_time);
-
-        //     });
-
-
-        // }
-
-        // // Determines quantile growth rate. Originally assigned growth rate based on child's percentile ranking. Now only chooses the median growth rate.
-        // function findQuantile() {
-
-        //     pred_prod_quant = 50
-
-        //     if (raw_words_understood > 0) {
-        //         pred_comp_quant = 50
-        //     }
-        // }
 
         var pred_chart;
         var node;

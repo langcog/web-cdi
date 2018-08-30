@@ -20,7 +20,7 @@ class Command(BaseCommand):
 	
 	PROJECT_ROOT = settings.BASE_DIR
 	instruments = json.load(open(os.path.realpath(PROJECT_ROOT + '/static/json/instruments.json')))
-        var_safe = lambda s: ''.join([c for c in '_'.join(s.split()) if c in string.letters + '_'])
+        var_safe = lambda s: ''.join([c for c in '_'.join(s.split()) if c in string.letters + string.digits + '_'])
 
         if options['language'] and options['form']:
             input_language, input_form = options['language'], options['form']
@@ -44,7 +44,7 @@ class Command(BaseCommand):
             instrument_form = curr_instrument['form']
             instrument_verbose_name = curr_instrument['verbose_name']
 
-            print "    Updating instrument table for %s (%s %s)" % (instrument_verbose_name, instrument_language, instrument_form)
+            print "Updating instrument table for (%s %s)" % (instrument_language, instrument_form)
 
             instrument_name = var_safe(instrument_language) + '_' + var_safe(instrument_form)
 
