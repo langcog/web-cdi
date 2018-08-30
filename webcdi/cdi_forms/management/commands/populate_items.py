@@ -25,7 +25,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
-	PROJECT_ROOT = settings.BASE_DIR
+        PROJECT_ROOT = settings.BASE_DIR
         instruments = json.load(open(os.path.realpath(PROJECT_ROOT + '/static/json/instruments.json')))
         if options['language'] and options['form']:
             input_language, input_form = options['language'], options['form']
@@ -48,7 +48,7 @@ class Command(BaseCommand):
             instrument_language, instrument_form = curr_instrument['language'], curr_instrument['form']
 
             instrument_obj = instrument.objects.get(form=instrument_form, language=instrument_language)
-            instrument_model = apps.get_model(app_label='cdi_forms', model_name=instrument_obj.name)
+            instrument_forms = apps.get_model(app_label='cdi_forms', model_name='Instrument_Forms')
 
             print "    Populating items for", instrument_language, instrument_form
 
@@ -72,9 +72,9 @@ class Command(BaseCommand):
                     item_category = row_values[col_names.index('category')]
                     item_choices = row_values[col_names.index('choices')]
                     choices_key = None
-                    if item_type not in ['combination_examples']:
+                    if "example" not in item_type:
                         try:
-                            choices_key = Choices.objects.get(choice_set_en = item_choices)
+                            choices_key = Choices.objects.get(choice_set = item_choices)
                         except:
                             raise IOError("Can't find choice set %s in model for %s" % (item_category, itemID, ))
 
@@ -97,7 +97,8 @@ class Command(BaseCommand):
                                  'definition': definition,
                                  'gloss': gloss,
                                  'complexity_category': complexity_category,
-                                 'uni_lemma': uni_lemma}
+                                 'uni_lemma': uni_lemma,
+                                 'item_order': row}
 
-                    cdi_item, created = instrument_model.objects.update_or_create(itemID = itemID, defaults=data_dict,)
+                    cdi_item, created = instrument_forms.objects.update_or_create(instrument = instrument_obj, itemID = itemID, defaults=data_dict,)
 
