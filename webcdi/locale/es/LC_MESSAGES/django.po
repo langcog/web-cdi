@@ -58,7 +58,7 @@ msgstr "Sí"
 #: cdi_forms/models.py:137 cdi_forms/models.py:156 cdi_forms/models.py:159
 #: cdi_forms/models.py:170 cdi_forms/models.py:182
 msgid "Prefer not to disclose"
-msgstr "No prefiero revelar"
+msgstr "Prefiero no revelar"
 
 #: cdi_forms/forms.py:44
 msgid ""
@@ -119,7 +119,7 @@ msgstr "Femenino"
 
 #: cdi_forms/forms.py:69
 msgid "Other / Prefer not to disclose"
-msgstr "Otro / No prefiero revelar"
+msgstr "Otro / Prefiero no revelar"
 
 #: cdi_forms/forms.py:70
 msgid "Sex"
