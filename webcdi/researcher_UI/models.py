@@ -47,6 +47,7 @@ class study(models.Model):
     max_age = models.IntegerField(verbose_name = "Maximum age", blank = True, null=True) # Maximum age in months for study
     birth_weight_units = models.CharField(max_length = 5, default="lb")
     show_feedback = models.BooleanField(default=True)
+    active = models.BooleanField(default=True)
 
     def __unicode__(self):
         return self.name
