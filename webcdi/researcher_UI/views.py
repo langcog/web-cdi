@@ -252,7 +252,8 @@ def console(request, study_name = None, num_per_page = 20): # Main giant functio
                     refresh = True # Refresh page to reflect table changes
 
                 elif 'delete-study' in request.POST: # If 'Delete Study' button is clicked
-                    study_obj.delete() # Delete study object
+                    study_obj.active = False # soft delete
+                    study_obj.save()
                     study_name = None # Clear current study_name in interface
                     refresh = True # Refresh page
 
@@ -288,7 +289,7 @@ def console(request, study_name = None, num_per_page = 20): # Main giant functio
 
         context = dict() # Create a dictionary of data related to template rendering such as username, studies associated with username, information on currently viewed study, and number of administrations to show.
         context['username'] =  username 
-        context['studies'] = study.objects.filter(researcher = request.user).order_by('id')
+        context['studies'] = study.objects.filter(researcher = request.user, active = True).order_by('id')
         context['instruments'] = []
         if study_name is not None:
             try:
