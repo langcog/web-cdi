@@ -429,6 +429,8 @@ def add_study(request): # Function for adding studies modal
             study_instance = form.save(commit=False) # Save study object but do not commit to database just yet
             study_name = form.cleaned_data.get('name')
             age_range = form.cleaned_data.get('age_range')
+            
+            study_instance.active = True
 
             try:
                 study_instance.min_age = age_range.lower
