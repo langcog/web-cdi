@@ -16,12 +16,14 @@ from django.core.serializers.json import DjangoJSONEncoder
 from django.contrib.auth.models import User
 import pandas as pd
 import numpy as np
+import requests
 from django.urls import reverse
 from decimal import Decimal
 from django.contrib.sites.shortcuts import get_current_site
 from ipware.ip import get_ip
 from psycopg2.extras import NumericRange
 from django.conf import settings
+from django.utils import timezone
 
 
 
@@ -655,6 +657,37 @@ def administer_new_parent(request, username, study_name): # For creating single 
             let_through = True # Mark as allowed
 
     if let_through: # If marked as allowed
+        subject_id = request.GET.get("subject_id") # used for wordful RedCap study
+        if subject_id:
+            num_admins = administration.objects.filter(study=study_obj, subject_id=subject_id).count()
+            if num_admins == 0: # create first administration
+                requests.get("http://wordful-flask.herokuapp.com/addEmailAddressToStudy", params={
+                    "email":request.GET.get("email"),
+                    "studyId":"ContinuousCDI" # hardcode study id for wordful
+                    })
+                admin = administration(study=study_obj, subject_id=subject_id, repeat_num=1)
+                admin.url_hash = random_url_generator()
+                admin.completed = False
+                admin.due_date = timezone.now()+datetime.timedelta(days=test_period)
+                admin.bypass = True
+                admin.save()
+            elif num_admins == 1: # check if this is final cdi or if user is continuing first CDI
+                if request.GET.get("final_cdi"):
+                    admin = administration.objects.create(
+                        study=study_obj,
+                        subject_id=subject_id,
+                        repeat_num=2,
+                        url_hash=random_url_generator(),
+                        completed=False,
+                        due_date=datetime.datetime.now() + datetime.timedelta(days=14)
+                    )  # Create a new administration based off the # of previously completed participants
+                else:
+                    admin = administration.objects.get(study=study_obj, subject_id=subject_id, repeat_num = 1)
+            else: # return final CDI. can only have 2 in this study
+                admin = administration.objects.get(study=study_obj, subject_id=subject_id, repeat_num=2)
+            return redirect(reverse('administer_cdi_form', args=[admin.url_hash]))
+
+
         if study_obj.study_group:
             related_studies = study.objects.filter(researcher=researcher, study_group=study_obj.study_group)
             max_subject_id = administration.objects.filter(study__in=related_studies).aggregate(Max('subject_id'))['subject_id__max']
