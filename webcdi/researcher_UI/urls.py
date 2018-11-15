@@ -12,6 +12,7 @@ urlpatterns = [
             url(r'^study/(?P<study_name>[^/]+)/import_data/$', views.import_data, name='import_data'),
             url(r'^study/(?P<study_name>[^/]+)/rename_study/$', views.rename_study, name='rename_study'),
             url(r'^(?P<username>[^/]+)/(?P<study_name>[^/]+)/new_parent/$', views.administer_new_parent, name='administer_new_parent'),
+            url(r'^(?P<username>[^/]+)/(?P<study_name>[^/]+)/new_participant/$', views.administer_new_participant, name='administer_new_participant'),
             url(r'^(?P<username>[^/]+)/(?P<study_name>[^/]+)/overflow/$', views.overflow, name='overflow'),
 
             ]
