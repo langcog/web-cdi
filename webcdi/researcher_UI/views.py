@@ -633,7 +633,7 @@ def administer_new(request, study_name): # For creating new administrations
         context['study_group'] = study_obj.study_group
         return render(request, 'researcher_UI/administer_new_modal.html', context) # Render blank form with added context of username, current study name, and study group.
 
-def administer_new_parent(request, username, study_name): # For creating single administrations. Does not require a log-in. Participants can generate their own single-use administration if given the proper link,
+def administer_new_participant(request, username, study_name): # used for wordful study
     data={}
     researcher = User.objects.get(username = username) # Get researcher's username. Different method because current user may not be the researcher and may not be logged in
     study_obj = study.objects.get(name= study_name, researcher = researcher) # Find the study object associated with the researcher and study name
@@ -656,8 +656,13 @@ def administer_new_parent(request, username, study_name): # For creating single 
         elif bypass: # If the user explicitly wanted to continue with the test despite being told they would not be compensated
             let_through = True # Mark as allowed
 
-    if let_through: # If marked as allowed
-        subject_id = request.GET.get("subject_id") # used for wordful RedCap study
+    if let_through:
+        subject_id_obscured = request.GET.get("id") # used for wordful RedCap study
+        sid1 = subject_id_obscured[11:].split("827483249828")[0] # record id is obscured in url to avoid abuse
+        sid2 = subject_id_obscured[11:].split("827483249828")[1].split("9248232436")[0]
+        if sid1 != sid2:
+            return # 404?
+        subject_id = sid1
         if subject_id:
             num_admins = administration.objects.filter(study=study_obj, subject_id=subject_id).count()
             if num_admins == 0: # create first administration
@@ -687,7 +692,30 @@ def administer_new_parent(request, username, study_name): # For creating single 
                 admin = administration.objects.get(study=study_obj, subject_id=subject_id, repeat_num=2)
             return redirect(reverse('administer_cdi_form', args=[admin.url_hash]))
 
+def administer_new_parent(request, username, study_name): # For creating single administrations. Does not require a log-in. Participants can generate their own single-use administration if given the proper link,
+    data={}
+    researcher = User.objects.get(username = username) # Get researcher's username. Different method because current user may not be the researcher and may not be logged in
+    study_obj = study.objects.get(name= study_name, researcher = researcher) # Find the study object associated with the researcher and study name
+    subject_cap = study_obj.subject_cap # Get the subject cap for this study
+    test_period = int(study_obj.test_period) # Get the testing period for this study
+    completed_admins = administration.objects.filter(study = study_obj, completed = True).count() # Count the number of completed administrations within this study
+    bypass = request.GET.get('bypass', None) # Check if user clicked the link to bypass study cap (studies that allow for payment will not pay participants in this case)
+    let_through = None # By default, users are not given access to administration and must be approved
+    prev_visitor = 0 
+    visitor_ip = str(get_ip(request)) # Get IP address for current visitor
+    completed = int(request.get_signed_cookie('completed_num', '0')) # Check if there is a cookie stored on device for a previously completed administration
+    if visitor_ip: # If the visitor IP was successfully pulled
+        prev_visitor = ip_address.objects.filter(ip_address = visitor_ip).count() # Check if IP address was logged previously in the database (only logged for specific studies under the langcoglab account. This is under Stanford's IRB approval)
 
+    if (prev_visitor < 1 and completed < 2) or request.user.is_authenticated: # If the user if the user has not visited an excessive number of times based on IP logs and cookies or if they are logged-in (therefore a vetted researcher) 
+        if completed_admins < subject_cap: # If the number of completed tests has not reached the subject cap
+            let_through = True # Mark as allowed
+        elif subject_cap is None: # If there was no subject cap sent up
+            let_through = True # Mark as allowed
+        elif bypass: # If the user explicitly wanted to continue with the test despite being told they would not be compensated
+            let_through = True # Mark as allowed
+
+    if let_through: # If marked as allowed
         if study_obj.study_group:
             related_studies = study.objects.filter(researcher=researcher, study_group=study_obj.study_group)
             max_subject_id = administration.objects.filter(study__in=related_studies).aggregate(Max('subject_id'))['subject_id__max']
