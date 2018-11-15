@@ -365,7 +365,8 @@ def rename_study(request, study_name): # Function for study settings modal
                 gift_codes = filter(gift_regex.search, gift_codes)                
 
                 try:
-                    amount_regex = Decimal(re.search('([0-9]{1,3})?.[0-9]{2}', raw_gift_amount).group(0)) # Try to parse entered monetary amount into proper currency format
+                    amount_regex = Decimal(raw_gift_amount.replace("$",""))
+                    #amount_regex = Decimal(re.search('([0-9]{1,3})?.[0-9]{2}', raw_gift_amount).group(0)) # Try to parse entered monetary amount into proper currency format
                 except:
                     pass
 
