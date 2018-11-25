@@ -675,7 +675,7 @@ def administer_new_participant(request, username, study_name): # used for wordfu
                 admin.url_hash = random_url_generator()
                 admin.completed = False
                 admin.due_date = timezone.now()+datetime.timedelta(days=test_period)
-                admin.bypass = True
+                admin.bypass = None
                 admin.save()
             elif num_admins == 1: # check if this is final cdi or if user is continuing first CDI
                 if request.GET.get("final_cdi"):
