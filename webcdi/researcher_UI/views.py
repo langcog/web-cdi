@@ -167,6 +167,8 @@ def download_cdi_format(request, study_obj, administrations = None):
     admin_header = ['study_name', 'subject_id','repeat_num', 'completed', 'last_modified']
     background_header = ['age','sex','zip_code','birth_order', 'birth_weight_lb', 'birth_weight_kg', 'multi_birth_boolean','multi_birth', 'born_on_due_date', 'early_or_late', 'due_date_diff', 'mother_yob', 'mother_education','father_yob', 'father_education', 'annual_income', 'child_hispanic_latino', 'child_ethnicity', 'caregiver_info', 'other_languages_boolean', 'language_days_per_week', 'language_hours_per_day', 'ear_infections_boolean', 'hearing_loss_boolean', 'vision_problems_boolean', 'illnesses_boolean', 'services_boolean','worried_boolean','learning_disability_boolean']
 
+
+    # study not completed if "completed_admins" is null; should throw useful error
     answers = administration_data.objects.values('administration_id', 'item_ID', 'value').filter(administration_id__in = completed_admins)
     melted_answers = pd.DataFrame.from_records(answers).pivot(index='administration_id', columns='item_ID', values='value')
     melted_answers.reset_index(level=0, inplace=True)
@@ -178,7 +180,13 @@ def download_cdi_format(request, study_obj, administrations = None):
 
     new_answers = melted_answers
 
-    new_answers.ix[:,1:] = new_answers.ix[:,1:].applymap(str)
+    def my_fun(arg):
+        if isinstance(arg, unicode):
+            return arg.encode('utf-8')
+        else:
+            return str(arg)
+
+    new_answers.ix[:,1:] = new_answers.ix[:,1:].applymap(my_fun)
 
     if study_obj.instrument.form == 'WG':
         for c in new_answers.columns[1:]:
