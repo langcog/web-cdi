@@ -675,7 +675,7 @@ def administer_new_participant(request, username, study_name): # used for wordfu
         if subject_id:
             num_admins = administration.objects.filter(study=study_obj, subject_id=subject_id).count()
             if num_admins == 0: # create first administration
-                requests.get("http://wordful-flask.herokuapp.com/addEmailAddressToStudy", params={
+                requests.post("https://wordful-flask.herokuapp.com/addEmailAddressToStudy", json={
                     "email":request.GET.get("email"),
                     "studyId":"ContinuousCDI" # hardcode study id for wordful
                     })
