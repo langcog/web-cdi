@@ -156,7 +156,7 @@ class RenameStudyForm(BetterModelForm):
     # Link form to study model. Exclude study group (specified in another form), researcher (automatically filled by current user), and instrument (chosen during study creation and CANNOT BE CHANGED)
     class Meta:
         model = study
-        exclude = ['study_group','researcher','instrument']
+        exclude = ['study_group','researcher','instrument', 'active']
 
 
 class ImportDataForm(BetterForm):
