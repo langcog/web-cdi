@@ -16,12 +16,14 @@ from django.core.serializers.json import DjangoJSONEncoder
 from django.contrib.auth.models import User
 import pandas as pd
 import numpy as np
+import requests
 from django.urls import reverse
 from decimal import Decimal
 from django.contrib.sites.shortcuts import get_current_site
 from ipware.ip import get_ip
 from psycopg2.extras import NumericRange
 from django.conf import settings
+from django.utils import timezone
 
 
 
@@ -165,6 +167,8 @@ def download_cdi_format(request, study_obj, administrations = None):
     admin_header = ['study_name', 'subject_id','repeat_num', 'completed', 'last_modified']
     background_header = ['age','sex','zip_code','birth_order', 'birth_weight_lb', 'birth_weight_kg', 'multi_birth_boolean','multi_birth', 'born_on_due_date', 'early_or_late', 'due_date_diff', 'mother_yob', 'mother_education','father_yob', 'father_education', 'annual_income', 'child_hispanic_latino', 'child_ethnicity', 'caregiver_info', 'other_languages_boolean', 'language_days_per_week', 'language_hours_per_day', 'ear_infections_boolean', 'hearing_loss_boolean', 'vision_problems_boolean', 'illnesses_boolean', 'services_boolean','worried_boolean','learning_disability_boolean']
 
+
+    # study not completed if "completed_admins" is null; should throw useful error
     answers = administration_data.objects.values('administration_id', 'item_ID', 'value').filter(administration_id__in = completed_admins)
     melted_answers = pd.DataFrame.from_records(answers).pivot(index='administration_id', columns='item_ID', values='value')
     melted_answers.reset_index(level=0, inplace=True)
@@ -176,7 +180,13 @@ def download_cdi_format(request, study_obj, administrations = None):
 
     new_answers = melted_answers
 
-    new_answers.ix[:,1:] = new_answers.ix[:,1:].applymap(str)
+    def my_fun(arg):
+        if isinstance(arg, unicode):
+            return arg.encode('utf-8')
+        else:
+            return str(arg)
+
+    new_answers.ix[:,1:] = new_answers.ix[:,1:].applymap(my_fun)
 
     if study_obj.instrument.form == 'WG':
         for c in new_answers.columns[1:]:
@@ -363,7 +373,8 @@ def rename_study(request, study_name): # Function for study settings modal
                 gift_codes = filter(gift_regex.search, gift_codes)                
 
                 try:
-                    amount_regex = Decimal(re.search('([0-9]{1,3})?.[0-9]{2}', raw_gift_amount).group(0)) # Try to parse entered monetary amount into proper currency format
+                    amount_regex = Decimal(raw_gift_amount.replace("$",""))
+                    #amount_regex = Decimal(re.search('([0-9]{1,3})?.[0-9]{2}', raw_gift_amount).group(0)) # Try to parse entered monetary amount into proper currency format
                 except:
                     pass
 
@@ -429,6 +440,8 @@ def add_study(request): # Function for adding studies modal
             study_instance = form.save(commit=False) # Save study object but do not commit to database just yet
             study_name = form.cleaned_data.get('name')
             age_range = form.cleaned_data.get('age_range')
+            
+            study_instance.active = True
 
             try:
                 study_instance.min_age = age_range.lower
@@ -628,6 +641,65 @@ def administer_new(request, study_name): # For creating new administrations
         context['study_name'] = study_name
         context['study_group'] = study_obj.study_group
         return render(request, 'researcher_UI/administer_new_modal.html', context) # Render blank form with added context of username, current study name, and study group.
+
+def administer_new_participant(request, username, study_name): # used for wordful study
+    data={}
+    researcher = User.objects.get(username = username) # Get researcher's username. Different method because current user may not be the researcher and may not be logged in
+    study_obj = study.objects.get(name= study_name, researcher = researcher) # Find the study object associated with the researcher and study name
+    subject_cap = study_obj.subject_cap # Get the subject cap for this study
+    test_period = int(study_obj.test_period) # Get the testing period for this study
+    completed_admins = administration.objects.filter(study = study_obj, completed = True).count() # Count the number of completed administrations within this study
+    bypass = request.GET.get('bypass', None) # Check if user clicked the link to bypass study cap (studies that allow for payment will not pay participants in this case)
+    let_through = None # By default, users are not given access to administration and must be approved
+    prev_visitor = 0 
+    visitor_ip = str(get_ip(request)) # Get IP address for current visitor
+    completed = int(request.get_signed_cookie('completed_num', '0')) # Check if there is a cookie stored on device for a previously completed administration
+    if visitor_ip: # If the visitor IP was successfully pulled
+        prev_visitor = ip_address.objects.filter(ip_address = visitor_ip).count() # Check if IP address was logged previously in the database (only logged for specific studies under the langcoglab account. This is under Stanford's IRB approval)
+
+    if (prev_visitor < 1 and completed < 2) or request.user.is_authenticated: # If the user if the user has not visited an excessive number of times based on IP logs and cookies or if they are logged-in (therefore a vetted researcher) 
+        if completed_admins < subject_cap: # If the number of completed tests has not reached the subject cap
+            let_through = True # Mark as allowed
+        elif subject_cap is None: # If there was no subject cap sent up
+            let_through = True # Mark as allowed
+        elif bypass: # If the user explicitly wanted to continue with the test despite being told they would not be compensated
+            let_through = True # Mark as allowed
+
+    if let_through:
+        subject_id_obscured = request.GET.get("id") # used for wordful RedCap study
+        sid1 = subject_id_obscured[11:].split("827483249828")[0] # record id is obscured in url to avoid abuse
+        sid2 = subject_id_obscured[11:].split("827483249828")[1].split("9248232436")[0]
+        if sid1 != sid2:
+            return # 404?
+        subject_id = sid1
+        if subject_id:
+            num_admins = administration.objects.filter(study=study_obj, subject_id=subject_id).count()
+            if num_admins == 0: # create first administration
+                requests.post("https://wordful-flask.herokuapp.com/addEmailAddressToStudy", json={
+                    "email":request.GET.get("email"),
+                    "studyId":"ContinuousCDI" # hardcode study id for wordful
+                    })
+                admin = administration(study=study_obj, subject_id=subject_id, repeat_num=1)
+                admin.url_hash = random_url_generator()
+                admin.completed = False
+                admin.due_date = timezone.now()+datetime.timedelta(days=test_period)
+                admin.bypass = None
+                admin.save()
+            elif num_admins == 1: # check if this is final cdi or if user is continuing first CDI
+                if request.GET.get("final_cdi"):
+                    admin = administration.objects.create(
+                        study=study_obj,
+                        subject_id=subject_id,
+                        repeat_num=2,
+                        url_hash=random_url_generator(),
+                        completed=False,
+                        due_date=datetime.datetime.now() + datetime.timedelta(days=14)
+                    )  # Create a new administration based off the # of previously completed participants
+                else:
+                    admin = administration.objects.get(study=study_obj, subject_id=subject_id, repeat_num = 1)
+            else: # return final CDI. can only have 2 in this study
+                admin = administration.objects.get(study=study_obj, subject_id=subject_id, repeat_num=2)
+            return redirect(reverse('administer_cdi_form', args=[admin.url_hash]))
 
 def administer_new_parent(request, username, study_name): # For creating single administrations. Does not require a log-in. Participants can generate their own single-use administration if given the proper link,
     data={}
