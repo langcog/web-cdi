@@ -396,7 +396,7 @@ def cdi_form(request, hash_id):
                 if administration_instance.study.allow_payment and administration_instance.bypass is None:
                     if (administration_instance.study.confirm_completion and result['success']) or not administration_instance.study.confirm_completion:
                         if not payment_code.objects.filter(hash_id = hash_id).exists():
-                            if administration_instance.study.name == "Wordful Study (official)": # for wordful study: if its second admin, give 25 bucks else 5
+                            if administration_instance.study.name == "Wordful Study (Official)": # for wordful study: if its second admin, give 25 bucks else 5
                                 if administration_instance.repeat_num == 2:
                                     gift_amount_search = 25
                                 else:
