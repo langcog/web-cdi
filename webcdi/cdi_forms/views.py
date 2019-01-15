@@ -398,9 +398,13 @@ def cdi_form(request, hash_id):
                         if not payment_code.objects.filter(hash_id = hash_id).exists():
                             if administration_instance.study.name == "Wordful Study (official)": # for wordful study: if its second admin, give 25 bucks else 5
                                 if administration_instance.repeat_num == 2:
-                                    gift_amount_search = 25
+                                    # if this subject already has claimed $25: give them $5 this time
+                                    if payment_code.objects.filter(hash_id=administration_instance.url_hash, gift_amount=25.0).exists():
+                                        gift_amount_search = 5.0
+                                    else:
+                                        gift_amount_search = 25.0
                                 else:
-                                    gift_amount_search = 5
+                                    gift_amount_search = 5.0
                                 given_code = payment_code.objects.filter(hash_id__isnull = True, study = administration_instance.study, gift_amount = gift_amount_search).first()
                             else:
                                 given_code = payment_code.objects.filter(hash_id__isnull = True, study = administration_instance.study).first()
