@@ -48,7 +48,7 @@ except ImportError:
 #NOTE FROM BEN: I CHANGED DEBUG = False to DEBUG = True 
 # DEBUG = False
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = False
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
