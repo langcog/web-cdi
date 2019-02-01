@@ -487,12 +487,12 @@ def printable_view(request, hash_id):
 
     if administration_instance.study.allow_payment and administration_instance.bypass is None:
         amazon_urls = {
-        'English': {'redeem_url': 'www.amazon.com/redeem', 
-            'legal_url': 'www.amazon.com/gc-legal'},
-        'Spanish': {'redeem_url': 'www.amazon.com/gc/redeem/?language=es_US', 
-            'legal_url': 'www.amazon.com/gc-legal/?language=es_US'},
-        'French (Quebec)': {'redeem_url': 'www.amazon.ca/gc/redeem/?language=fr_CA', 
-            'legal_url': 'www.amazon.ca/gc-legal/?language=fr_CA'}
+        'English': {'redeem_url': 'http://www.amazon.com/redeem', 
+            'legal_url': 'http://www.amazon.com/gc-legal'},
+        'Spanish': {'redeem_url': 'http://www.amazon.com/gc/redeem/?language=es_US', 
+            'legal_url': 'http://www.amazon.com/gc-legal/?language=es_US'},
+        'French (Quebec)': {'redeem_url': 'http://www.amazon.ca/gc/redeem/?language=fr_CA', 
+            'legal_url': 'http://www.amazon.ca/gc-legal/?language=fr_CA'}
         }
         url_obj = amazon_urls[administration_instance.study.instrument.language]
         if payment_code.objects.filter(hash_id = hash_id).exists():
