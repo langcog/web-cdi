@@ -657,7 +657,8 @@ def administer_new_participant(request, username, study_name): # used for wordfu
     if visitor_ip: # If the visitor IP was successfully pulled
         prev_visitor = ip_address.objects.filter(ip_address = visitor_ip).count() # Check if IP address was logged previously in the database (only logged for specific studies under the langcoglab account. This is under Stanford's IRB approval)
 
-    if (prev_visitor < 1 and completed < 2) or request.user.is_authenticated: # If the user if the user has not visited an excessive number of times based on IP logs and cookies or if they are logged-in (therefore a vetted researcher) 
+    # if you've completed x number of payed CDIs by langcog before, or y number of CDIs generally (for the cookie)
+    if (prev_visitor < 5 and completed < 5) or request.user.is_authenticated: # If the user if the user has not visited an excessive number of times based on IP logs and cookies or if they are logged-in (therefore a vetted researcher) 
         if completed_admins < subject_cap: # If the number of completed tests has not reached the subject cap
             let_through = True # Mark as allowed
         elif subject_cap is None: # If there was no subject cap sent up
@@ -665,10 +666,7 @@ def administer_new_participant(request, username, study_name): # used for wordfu
         elif bypass: # If the user explicitly wanted to continue with the test despite being told they would not be compensated
             let_through = True # Mark as allowed
 
-    print(study_name)
-    print(let_through)
-
-    if True:
+    if let_through:
         subject_id_obscured = request.GET.get("id") # used for wordful RedCap study
         sid1 = subject_id_obscured[11:].split("827483249828")[0] # record id is obscured in url to avoid abuse
         sid2 = subject_id_obscured[11:].split("827483249828")[1].split("9248232436")[0]
