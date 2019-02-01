@@ -665,7 +665,10 @@ def administer_new_participant(request, username, study_name): # used for wordfu
         elif bypass: # If the user explicitly wanted to continue with the test despite being told they would not be compensated
             let_through = True # Mark as allowed
 
-    if let_through:
+    print(study_name)
+    print(let_through)
+
+    if True:
         subject_id_obscured = request.GET.get("id") # used for wordful RedCap study
         sid1 = subject_id_obscured[11:].split("827483249828")[0] # record id is obscured in url to avoid abuse
         sid2 = subject_id_obscured[11:].split("827483249828")[1].split("9248232436")[0]
