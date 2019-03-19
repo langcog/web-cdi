@@ -48,7 +48,7 @@ except ImportError:
 #NOTE FROM BEN: I CHANGED DEBUG = False to DEBUG = True 
 # DEBUG = False
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = False
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
@@ -222,7 +222,5 @@ COUNTRIES_FIRST = [
     'US',
 ]
 
-
-
-
-
+if SITE_ID == 3: USER_ADMIN_EMAIL = 'henrymehta@hotmail.com'
+else : USER_ADMIN_EMAIL = 'webcdi-contact@stanford.edu'
