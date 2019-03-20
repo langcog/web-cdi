@@ -24,4 +24,24 @@ Once you have the data, and installed packages, you should be able to run the se
 Working with postgres could be difficult. There are instructions online, as well as some legacy instructions in setup_OUTDATED.txt that may help.
 
 
+**Deploy to Dev and Production**
+In order to do this, you must ssh into the webcdi "base" instance, and from there deploy to the development or production servers. Here is the host info for the base server:
 
+Host web-cdi 
+HostName 52.32.108.131 
+User ubuntu 
+IdentityFile ~/.ssh/web-cdi_011017.pem
+
+NOTE: You will need to get the IdentifyFile from someone.  (Alessandro and Henry have it - I do not know who else does).
+
+You can now ssh into the webcdi base with `ssh -i ~/.ssh/web-cdi_011017.pem ubuntu@52.32.108.131`
+
+Next, you will see two folders inside the home directory once you ssh: web-cdi and webcdi-backup. The first is the actual repo, so in order to update it you have to go in and pull the latest code, or change the branch. This is the repo that will be pushed to production or development. There is also a folder inside there called .ebextensions which contains important config files. One file in particular, `02_python.config`, has a list of python commands that are run on the actual production / dev server every time there is a deploy (e.g. django migration commands). You can add a python command here if you want to. 
+
+The second folder (webcdi-backup) contains the deploy script. In order to deploy to prod, you run:
+`bash eb_deploy.sh web-cdi-prod2`
+
+and to deploy to dev you run:
+`bash eb_deploy.sh web-cdi-dev`
+
+To access admin you will need to obtain an admin username and password from a current admin user.
