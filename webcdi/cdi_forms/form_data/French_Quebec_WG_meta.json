@@ -149,25 +149,24 @@
                         }
 
                     ]
-                },
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "title": "PARTIE 2: ACTIONS ET GESTES",
+            "types": [
                 {
                     "id": "pretend",
                     "title": "F. JEU SYMBOLIQUE",
-                    "sections":[
-                        {
-                            "type": "radiobutton",
-                            "id": "pretend",
-                            "title": ""
-                        },
-                        {
-                            "id": "pretend_examples",
-                            "title": "",
-                            "text": "Si oui, donnez plusieurs exemples:",
-                            "type": "textbox"
-                        }  
-                    ]
-                }
-                  
+                    "type": "radiobutton"
+                },
+                {
+                    "id": "pretend_examples",
+                    "title": "F. JEU SYMBOLIQUE",
+                    "text": "Si oui, donnez plusieurs exemples:",
+                    "type": "textbox"
+                }                  
             ]
         }
     ]
