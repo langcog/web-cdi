@@ -980,7 +980,7 @@ msgstr "Êtes-vous prêt à soumettre? Vous ne pourrez pas modifier vos réponse
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:408
 msgid "understands and says"
-msgstr ""
+msgstr "comprend et dit"
 
 #: cdi_forms/templates/cdi_forms/overflow.html:37
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:85
