@@ -181,3 +181,7 @@ label.btn{
     white-space:normal !important;
     word-wrap: break-word; 
 }
+
+.choice { 
+  text-align: left
+}
