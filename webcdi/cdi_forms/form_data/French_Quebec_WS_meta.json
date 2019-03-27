@@ -90,7 +90,7 @@
                         },
                         {
                             "id": "quantifiers",
-                            "title": "20. QUANTIFICATEURS ET ARTCLES",
+                            "title": "20. QUANTIFICATEURS ET ARTICLES",
                             "text": "Plusieurs mots de cette catégorie existent dans la forme masculine ou féminine (par ex., tout, toute). Veuillez noircir le cercle si votre enfant utilise l'une ou l'autre de ces formes."
                         },
                         {
@@ -163,7 +163,7 @@
                 },
                 {
                     "id": "combination_examples",
-                    "title": "B. EXEMEPLES",
+                    "title": "B. EXEMPLES",
                     "text": "Écrivez trois phrases parmi les plus longues que votre enfant a produites dernièrement.",
                     "type": "textbox"
                 },
