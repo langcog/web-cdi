@@ -51,7 +51,7 @@
 <ul>
     <!-- Instructions given to parents based on form. Includes photos. -->
     <div id="intro" class = "page_div collapse"><div>
-        {% if form  == "WG" %}
+        {% if form == "WG" or form == "L1" %}
             {% load staticfiles %}
 
             <div id = "intro_part1" class = "page_div collapse">
@@ -182,8 +182,7 @@
             </div>
                    
 
-        <!--{% elif form  == "WS" %}-->
-        {% else %}
+        {% elif form  == "WS" or form == "L2A" or form == "L2B" %}
             {% load staticfiles %}
 
             <div id = "intro_part1" class = "page_div collapse">
