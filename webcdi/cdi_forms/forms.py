@@ -211,10 +211,10 @@ class BackgroundForm(BetterModelForm):
 
         if self.curr_context['language'] == "English":
             self.fields['child_dob'].input_formats = ('%m/%d/%Y', '%m/%d/%y',)
-            self.fields['child_dob'].widget.attrs['placeholder'] = 'mm/dd/yyyy'
+            self.fields['child_dob'].widget.attrs['placeholder'] = _('mm/dd/yyyy')
         else:
             self.fields['child_dob'].input_formats = ('%d/%m/%Y', '%d/%m/%y',)
-            self.fields['child_dob'].widget.attrs['placeholder'] = 'dd/mm/yyyy'
+            self.fields['child_dob'].widget.attrs['placeholder'] = _('dd/mm/yyyy')
 
         self.helper.layout = Layout(
             Fieldset( _('Basic Information'), 'child_dob','age', 'sex', Field('country', css_class='enabler'), Div('zip_code', css_class='dependent'),'birth_order', Field('multi_birth_boolean', css_class='enabler'), Div('multi_birth', css_class='dependent'), self.birth_weight_field, Field('born_on_due_date', css_class='enabler'), Div('early_or_late', 'due_date_diff', css_class='dependent')),
