@@ -83,6 +83,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'cdi_forms',
     'crispy_forms',
     'django_tables2',

@@ -82,8 +82,17 @@ class administration(models.Model):
     class Meta:
         unique_together = ('study', 'subject_id', 'repeat_num') # Each administration object has a unique combination of study ID, subject ID, and administration number. They also have a unique hash ID identifier but uniqueness of hash ID is not enforced due to odds of 2 participants having the same hash ID being cosmically low.
 
+    def __unicode__(self):
+        return '%s %s %s' % (self.study, self.subject_id, self.repeat_num)
+
     def get_meta_data(self):
         return [self.study, self.subject_id, self.repeat_num, self.url_hash, self.completed, self.completedBackgroundInfo, self.due_date, self.last_modified]
+
+class AdministrationSummary(administration):
+    class Meta:
+        proxy = True
+        verbose_name = 'Administration Summary'
+        verbose_name_plural = 'Administration Summary'
 
 # Model for item responses within an administration
 class administration_data(models.Model):
@@ -92,6 +101,8 @@ class administration_data(models.Model):
     value = models.CharField(max_length=200) # Response given by participant to this particular item
     class Meta:
         unique_together = ('administration', 'item_ID') # Each administation_data object must have a unique combination of administration ID and item ID.
+    def __unicode__(self):
+        return '%s %s' % (self.administration, self.item_ID)
 
 # Model for stored gift card codes
 class payment_code(models.Model):
