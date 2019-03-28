@@ -166,9 +166,23 @@ class BackgroundInfo(models.Model):
     father_education = models.IntegerField(verbose_name = _("Father / Parent or Guardian 2 Education"), help_text = _("Choose highest grade completed (12 = high school graduate; 16 = college graduate; 18 = advanced degree)"), choices= education_levels) # Asks for # of years of paternal education
 
     low, high, inc = 25000, 200000, 25000 # Declares range of values and step interval for annual income question
+    '''
     income_choices = [("<" + str(low), _("Under ") + format_currency(low))] +\
         [("%d-%d" % (bottom, bottom + inc), "-".join([format_currency(bottom), format_currency(bottom + inc)])) for bottom in range(low, high, inc)] +\
         [(">" + str(high), _("Over ") + format_currency(high)), ("Prefer not to disclose", _("Prefer not to disclose"))] # Declares set of choices for annual_income that span from under $25,000 to over $200,000 in $25,000 intervals
+    '''
+    income_choices = [
+        ('<25000',_('Under $25,000')),
+        ('25000-50000',_('$25,000-$50,000')),
+        ('50000-75000',_('$50,000-$75,000')),
+        ('75000-100000',_('$75,000-$100,000')),
+        ('100000-125000',_('$100,000-$125,000')),
+        ('125000-150000',_('$125,000-$150,000')),
+        ('150000-175000',_('$150,000-$175,000')),
+        ('175000-200000',_('$175,000-$200,000')),
+        ('>200000',_('Over $200,000')),
+        ('Prefer not to disclose',_('Prefer not to disclose'))
+    ]
     annual_income = models.CharField(max_length = 30, choices = income_choices, verbose_name = _("Estimated Annual Family Income (in USD)")) # Asks for bracket of annual income
 
     child_hispanic_latino = models.NullBooleanField(verbose_name = _("Is your child Hispanic or Latino?"), blank=True, null=True) # Asks whether child is hispanic/latino

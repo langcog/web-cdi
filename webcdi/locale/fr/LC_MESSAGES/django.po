@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-27 08:43+0000\n"
+"POT-Creation-Date: 2019-03-28 09:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -56,7 +56,7 @@ msgstr "Oui"
 
 #: cdi_forms/forms.py:40 cdi_forms/models.py:81 cdi_forms/models.py:116
 #: cdi_forms/models.py:138 cdi_forms/models.py:157 cdi_forms/models.py:160
-#: cdi_forms/models.py:171 cdi_forms/models.py:183
+#: cdi_forms/models.py:184 cdi_forms/models.py:197
 msgid "Prefer not to disclose"
 msgstr "Préfère ne pas divulguer/non applicable"
 
@@ -86,7 +86,7 @@ msgstr ""
 msgid "What is your postal/zip code?"
 msgstr "Quel est votre code postal?"
 
-#: cdi_forms/forms.py:56 cdi_forms/models.py:174
+#: cdi_forms/forms.py:56 cdi_forms/models.py:188
 msgid "Is your child Hispanic or Latino?"
 msgstr "Votre enfant est-il hispanique ou latino?"
 
@@ -138,16 +138,16 @@ msgstr "Votre enfant entend-il régulièrement une autre langue que le français
 msgid "Has your child experienced chronic ear infections (5 or more)?"
 msgstr "Votre enfant a-t-il déjà eu des otites chroniques (5 ou plus)?"
 
-#: cdi_forms/forms.py:92 cdi_forms/models.py:197
+#: cdi_forms/forms.py:92 cdi_forms/models.py:211
 msgid "Do you suspect that your child may have hearing loss?"
 msgstr "Pensez-vous que votre enfant pourrait avoir un problème auditif?"
 
-#: cdi_forms/forms.py:99 cdi_forms/models.py:200
+#: cdi_forms/forms.py:99 cdi_forms/models.py:214
 msgid ""
 "Is there some reason to suspect that your child may have vision problems?"
 msgstr "Pensez-vous que votre enfant pourrait avoir des problèmes de vision?"
 
-#: cdi_forms/forms.py:106 cdi_forms/models.py:203
+#: cdi_forms/forms.py:106 cdi_forms/models.py:217
 msgid ""
 "Has your child had any major illnesses, hospitalizations, or diagnosed "
 "disabilities?"
@@ -155,7 +155,7 @@ msgstr ""
 "Votre enfant a-t-il eu des maladies graves, des hospitalisations ou des "
 "handicaps diagnostiqués?"
 
-#: cdi_forms/forms.py:113 cdi_forms/models.py:206
+#: cdi_forms/forms.py:113 cdi_forms/models.py:220
 msgid ""
 "Has your child ever received any services for speech, language, or "
 "development issues?"
@@ -163,13 +163,13 @@ msgstr ""
 "Votre enfant a-t-il déjà reçu des services pour des problèmes d'élocution, "
 "de langage ou de développement?"
 
-#: cdi_forms/forms.py:120 cdi_forms/models.py:209
+#: cdi_forms/forms.py:120 cdi_forms/models.py:223
 msgid ""
 "Are you worried about your child's progress in language or communication?"
 msgstr ""
 "Êtes-vous inquiet du progrès de votre enfant en langage ou en communication?"
 
-#: cdi_forms/forms.py:127 cdi_forms/models.py:212
+#: cdi_forms/forms.py:127 cdi_forms/models.py:226
 msgid ""
 "Have you or anyone in your immediate family been diagnosed with a language "
 "or learning disability?"
@@ -238,9 +238,9 @@ msgid ""
 "Health).  NIH requires this information to ensure the soundness and "
 "inclusiveness of our research. Your cooperation is appreciated, but optional."
 msgstr ""
-"Les informations suivantes sont recueillies dans certaines "
-"situations, lorsque l’agence de financement est le NIH "
-"(Institut américain de la santé).  "
+"Les informations suivantes sont recueillies dans certaines situations, "
+"lorsque l’agence de financement est le NIH (Institut américain de la "
+"santé).  "
 
 #: cdi_forms/forms.py:223
 msgid "Caregiver Information"
@@ -533,84 +533,112 @@ msgstr "Année de naissance du Père / Parent ou Tuteur 2"
 msgid "Father / Parent or Guardian 2 Education"
 msgstr "Éducation du Père / Parent ou Tuteur 2"
 
-#: cdi_forms/models.py:169
-msgid "Under "
-msgstr "Au-dessous de "
+#: cdi_forms/models.py:175
+msgid "Under $25,000"
+msgstr "Au-dessous de 25 000$"
 
-#: cdi_forms/models.py:171
-msgid "Over "
-msgstr "Au-dessus de "
+#: cdi_forms/models.py:176
+msgid "$25,000-$50,000"
+msgstr "25 000$-50 000$"
 
-#: cdi_forms/models.py:172
+#: cdi_forms/models.py:177
+msgid "$50,000-$75,000"
+msgstr "50 000$-75 000$"
+
+#: cdi_forms/models.py:178
+msgid "$75,000-$100,000"
+msgstr "75 000$-100 000$"
+
+#: cdi_forms/models.py:179
+msgid "$100,000-$125,000"
+msgstr "100 000$-125 000$"
+
+#: cdi_forms/models.py:180
+msgid "$125,000-$150,000"
+msgstr "250 000$-150 000$"
+
+#: cdi_forms/models.py:181
+msgid "$150,000-$175,000"
+msgstr "150 000$-175 000$"
+
+#: cdi_forms/models.py:182
+msgid "$175,000-$200,000"
+msgstr "175 000$-200 000$"
+
+#: cdi_forms/models.py:183
+msgid "Over $200,000"
+msgstr "Au-dessus de 200 000$"
+
+#: cdi_forms/models.py:186
 msgid "Estimated Annual Family Income (in USD)"
 msgstr "Revenu familial annuel estimé (en dollars Canadiens)"
 
-#: cdi_forms/models.py:179
+#: cdi_forms/models.py:193
 msgid "Two parents"
 msgstr "Deux parents"
 
-#: cdi_forms/models.py:180
+#: cdi_forms/models.py:194
 msgid "One parent"
 msgstr "Un parent"
 
-#: cdi_forms/models.py:181
+#: cdi_forms/models.py:195
 msgid "One or both parents and other caregiver(s) (e.g., grandparent)"
 msgstr "Un ou les deux parents et autre(s) tuteur(s) (par ex., grand-parent)"
 
-#: cdi_forms/models.py:182
+#: cdi_forms/models.py:196
 msgid "Other caregivers (e.g., grandparent or grandparents)"
 msgstr "Autres tuteurs (par ex., grand-parent ou grands-parents)"
 
-#: cdi_forms/models.py:186
+#: cdi_forms/models.py:200
 msgid "Who does your child live with?"
 msgstr "Avec qui vit votre enfant?"
 
-#: cdi_forms/models.py:190
+#: cdi_forms/models.py:204
 msgid "From whom?"
 msgstr "De qui?"
 
-#: cdi_forms/models.py:191
+#: cdi_forms/models.py:205
 msgid "How many days per week is the child exposed to these languages?"
 msgstr ""
 "Combien de jours par semaine l'enfant est-il exposé à ces/cette langue(s)?"
 
-#: cdi_forms/models.py:191
+#: cdi_forms/models.py:205
 msgid "Number of days per week cannot exceed 7"
 msgstr "Le nombre de jours par semaine ne peut pas excéder 7"
 
-#: cdi_forms/models.py:191
+#: cdi_forms/models.py:205
 msgid "Number of days per week cannot be less than 1"
 msgstr "Le nombre de jours par semaine ne peut pas être moins que 1"
 
-#: cdi_forms/models.py:192
+#: cdi_forms/models.py:206
 msgid "How many hours per day is the child exposed to these languages?"
 msgstr ""
 "Combien d'heures par jour l'enfant est-il exposé à ces/cette langue(s)?"
 
-#: cdi_forms/models.py:192
+#: cdi_forms/models.py:206
 msgid "Number of hours per day cannot exceed 24"
 msgstr "Le nombre d’heures par jour ne peut excéder 24 heures"
 
-#: cdi_forms/models.py:192
+#: cdi_forms/models.py:206
 msgid "Number of hours per day cannot be less than 1"
 msgstr "Le nombre d’heures par jour ne peut pas être moins de 1"
 
-#: cdi_forms/models.py:194
+#: cdi_forms/models.py:208
 msgid "Has your child experienced chronic ear infections (5 or more)? "
 msgstr "Votre enfant a-t-il déjà eu des otites chroniques (5 ou plus)?"
 
-#: cdi_forms/models.py:195
+#: cdi_forms/models.py:209
 msgid "Has your child undergone interventions (e.g., tubes)?  Please describe"
 msgstr ""
 "Votre enfant a-t-il subi des interventions (par ex., tubes)? Veuillez "
 "spécifier"
 
-#: cdi_forms/models.py:198 cdi_forms/models.py:201 cdi_forms/models.py:204
-#: cdi_forms/models.py:207 cdi_forms/models.py:210
+#: cdi_forms/models.py:212 cdi_forms/models.py:215 cdi_forms/models.py:218
+#: cdi_forms/models.py:221 cdi_forms/models.py:224
 msgid "Please describe"
 msgstr "Veuillez spécifier"
 
-#: cdi_forms/models.py:213
+#: cdi_forms/models.py:227
 msgid "Indicate which family member and provide a description"
 msgstr "Indiquez quel membre de la famille et veuillez spécifiez"
 
@@ -1246,7 +1274,9 @@ msgstr "Né entre DATEDÉBUT et DATEFIN"
 #: cdi_forms/views.py:200
 #, python-format
 msgid "Your child should be between %(min_age)d to %(max_age)d months of age."
-msgstr "Votre enfant devrait être âgé entre %(min_age)d et %(max_age)d mois.  Veuillez communiquer avec le chercheur de votre étude"
+msgstr ""
+"Votre enfant devrait être âgé entre %(min_age)d et %(max_age)d mois.  "
+"Veuillez communiquer avec le chercheur de votre étude"
 
 #: cdi_forms/views.py:212
 #, python-format
@@ -1697,3 +1727,6 @@ msgstr ""
 #: webcdi/settings.py:217
 msgid "French"
 msgstr ""
+
+#~ msgid "Over "
+#~ msgstr "Au-dessus de "
