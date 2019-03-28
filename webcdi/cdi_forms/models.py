@@ -52,7 +52,7 @@ class Instrument_Forms(models.Model):
     complexity_category = models.CharField(max_length = 101, null=True, blank=True) # category for complexity item. Currently blank.
     uni_lemma = models.CharField(max_length= 101, null=True, blank=True) # ID for matching terms across languages. Currently unused.
     item_order = models.IntegerField(validators=[MinValueValidator(1)])
-    def __str__(self):
+    def __unicode__(self):
         return "%s (%s, %s)" % (self.definition, self.instrument.verbose_name, self.itemID)
     class Meta:
         unique_together = ('instrument', 'itemID') # Each instrument in the database must have a unique combination of instrument and itemID
