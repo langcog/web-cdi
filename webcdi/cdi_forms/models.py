@@ -159,11 +159,23 @@ class BackgroundInfo(models.Model):
     years = [(x,str(x)) for x in range(1950, datetime.date.today().year+2)] #Declares tuple for year of birth for parents/guardians
     years[-1] = (0, _("Prefer not to disclose"))
 
-    mother_yob = models.IntegerField(verbose_name = _("Mother / Parent or Guardian 1 Year of birth"), choices=years) # Asks for year of birth for mother. Can be used to roughly determine maternal age
-    mother_education = models.IntegerField(verbose_name = _("Mother / Parent or Guardian 1 Education"), help_text = _("Choose highest grade completed (12 = high school graduate; 16 = college graduate; 18 = advanced degree)"), choices = education_levels) # Asks for # of years of maternal education
+    caregiver_choices = (
+        ('mother', _('Mother')),
+        ('father',_('Father')),
+        ('both parents', _('Both caregivers')),
+        ('grandparent(s)', _('Grandparent(s)')),
+        ('other',_('Other')),
+    )
+    
+    primary_caregiver = models.CharField(verbose_name=_('Primary Caregiver'), choices=caregiver_choices, max_length=20)
+    primary_caregiver_other = models.CharField(max_length=25, null=True, blank=True)
+    mother_yob = models.IntegerField(verbose_name = _("Primary Caregiver Year of birth"), choices=years) # Asks for year of birth for mother. Can be used to roughly determine maternal age
+    mother_education = models.IntegerField(verbose_name = _("Primary Caregiver Education"), help_text = _("Choose highest grade completed (12 = high school graduate; 16 = college graduate; 18 = advanced degree)"), choices = education_levels) # Asks for # of years of maternal education
 
-    father_yob = models.IntegerField(verbose_name = _("Father / Parent or Guardian 2 Year of birth"), choices = years) # Asks for year of birth for father. Can be used to roughly determine paternal age
-    father_education = models.IntegerField(verbose_name = _("Father / Parent or Guardian 2 Education"), help_text = _("Choose highest grade completed (12 = high school graduate; 16 = college graduate; 18 = advanced degree)"), choices= education_levels) # Asks for # of years of paternal education
+    secondary_caregiver = models.CharField(verbose_name=_('Secondary Caregiver'), choices=caregiver_choices, max_length=20, null=True, blank=True)
+    secondary_caregiver_other = models.CharField(max_length=25, null=True, blank=True)
+    father_yob = models.IntegerField(verbose_name = _("Secondary Caregiver Year of birth"), choices = years, blank=True, null=True) # Asks for year of birth for father. Can be used to roughly determine paternal age
+    father_education = models.IntegerField(verbose_name = _("Secondary Caregiver Education"), blank=True, null=True, help_text = _("Choose highest grade completed (12 = high school graduate; 16 = college graduate; 18 = advanced degree)"), choices= education_levels) # Asks for # of years of paternal education
 
     low, high, inc = 25000, 200000, 25000 # Declares range of values and step interval for annual income question
     '''
@@ -226,6 +238,15 @@ class BackgroundInfo(models.Model):
     learning_disability_boolean = models.IntegerField(verbose_name = _('Have you or anyone in your immediate family been diagnosed with a language or learning disability?') ) # Asks whether a relative of the child has ever been diagnoses with a learning/language disability
     learning_disability = models.CharField(max_length = 1001, blank = True, null=True, verbose_name = _("Indicate which family member and provide a description")) # Free response asking for elaboration on the relationship between child and family member and a description of diagnosis
 
+    form_filler_choices = [
+        ('mother',_('Mother')),
+        ('father',_('Father')),
+        ('both parents', _('Both caregivers')),
+        ('grandparent(s)', _('Grandparent(s)')),
+        ('other',_('Other')),
+    ]
+    form_filler = models.CharField(verbose_name=_('Who is filling in the form?'), max_length=20, choices=form_filler_choices)
+    form_filler_other = models.CharField(max_length=25, blank=True, null=True)
 #Model of zipcodes reported to be in 3-digit zip code prefixes with a population lower than 20,000. Tests with a zipcode found in this model will have their digits replaced with their state abbreviation.
 class Zipcode(models.Model):
     zip_code=models.CharField(max_length = 5)
