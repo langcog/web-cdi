@@ -424,7 +424,7 @@ msgstr "1500 grammes - 1749 grammes (3 lbs, 5 oz - 3 lbs, 13 oz)"
 
 #: cdi_forms/models.py:124
 msgid "1750 grams - 1999 grams"
-msgstr "1750 grammes - 1999 gramsme (3 lbs, 14 oz - 4 lbs, 6 oz)"
+msgstr "1750 grammes - 1999 grammes (3 lbs, 14 oz - 4 lbs, 6 oz)"
 
 #: cdi_forms/models.py:125
 msgid "2000 grams - 2249 grams"

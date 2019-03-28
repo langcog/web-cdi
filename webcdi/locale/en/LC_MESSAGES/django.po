@@ -326,131 +326,131 @@ msgstr "Twins, triplets, quadruplets, other?"
 
 #: cdi_forms/models.py:99
 msgid "Less than 3 lbs, 0 oz"
-msgstr "Less than 3 lbs, 0 oz"
+msgstr "Less than 3 lbs, 0 oz (Less than 1360 grams)"
 
 #: cdi_forms/models.py:100
 msgid "3 lbs, 0 oz - 3 lbs, 7 oz"
-msgstr "3 lbs, 0 oz - 3 lbs, 7 oz"
+msgstr "3 lbs, 0 oz - 3 lbs, 7 oz (1361 grams - 1587 grams)"
 
 #: cdi_forms/models.py:101
 msgid "3 lbs, 8 oz - 3 lbs, 15 oz"
-msgstr "3 lbs, 8 oz - 3 lbs, 15 oz"
+msgstr "3 lbs, 8 oz - 3 lbs, 15 oz (1588 grams - 1814 grams)"
 
 #: cdi_forms/models.py:102
 msgid "4 lbs, 0 oz - 4 lbs, 7 oz"
-msgstr "4 lbs, 0 oz - 4 lbs, 7 oz"
+msgstr "4 lbs, 0 oz - 4 lbs, 7 oz (1815 grams - 2041 grams)"
 
 #: cdi_forms/models.py:103
 msgid "4 lbs, 8 oz - 4 lbs, 15 oz"
-msgstr "4 lbs, 8 oz - 4 lbs, 15 oz"
+msgstr "4 lbs, 8 oz - 4 lbs, 15 oz (2042 grams - 2267 grams)"
 
 #: cdi_forms/models.py:104
 msgid "5 lbs, 0 oz - 5 lbs, 7 oz"
-msgstr "5 lbs, 0 oz - 5 lbs, 7 oz"
+msgstr "5 lbs, 0 oz - 5 lbs, 7 oz (2268 grams - 2494 grams)"
 
 #: cdi_forms/models.py:105
 msgid "5 lbs, 8 oz - 5 lbs, 15 oz"
-msgstr "5 lbs, 8 oz - 5 lbs, 15 oz"
+msgstr "5 lbs, 8 oz - 5 lbs, 15 oz (2495 grams - 2721 grams)"
 
 #: cdi_forms/models.py:106
 msgid "6 lbs, 0 oz - 6 lbs, 7 oz"
-msgstr "6 lbs, 0 oz - 6 lbs, 7 oz"
+msgstr "6 lbs, 0 oz - 6 lbs, 7 oz (2722 grams - 2948 grams)"
 
 #: cdi_forms/models.py:107
 msgid "6 lbs, 8 oz - 6 lbs, 15 oz"
-msgstr "6 lbs, 8 oz - 6 lbs, 15 oz"
+msgstr "6 lbs, 8 oz - 6 lbs, 15 oz (2949 grams - 3175 grams)"
 
 #: cdi_forms/models.py:108
 msgid "7 lbs, 0 oz - 7 lbs, 7 oz"
-msgstr "7 lbs, 0 oz - 7 lbs, 7 oz"
+msgstr "7 lbs, 0 oz - 7 lbs, 7 oz (3176 grams - 3401 grams)"
 
 #: cdi_forms/models.py:109
 msgid "7 lbs, 8 oz - 7 lbs, 15 oz"
-msgstr "7 lbs, 8 oz - 7 lbs, 15 oz"
+msgstr "7 lbs, 8 oz - 7 lbs, 15 oz (3402 grams - 3628 grams)"
 
 #: cdi_forms/models.py:110
 msgid "8 lbs, 0 oz - 8 lbs, 7 oz"
-msgstr "8 lbs, 0 oz - 8 lbs, 7 oz"
+msgstr "8 lbs, 0 oz - 8 lbs, 7 oz (3629 grams - 3855 grams)"
 
 #: cdi_forms/models.py:111
 msgid "8 lbs, 8 oz - 8 lbs, 15 oz"
-msgstr "8 lbs, 8 oz - 8 lbs, 15 oz"
+msgstr "8 lbs, 8 oz - 8 lbs, 15 oz (3856 grams - 3628 grams)"
 
 #: cdi_forms/models.py:112
 msgid "9 lbs, 0 oz - 9 lbs, 7 oz"
-msgstr "9 lbs, 0 oz - 9 lbs, 7 oz"
+msgstr "9 lbs, 0 oz - 9 lbs, 7 oz (3629 grams - 4082 grams)"
 
 #: cdi_forms/models.py:113
 msgid "9 lbs, 8 oz - 9 lbs, 15 oz"
-msgstr "9 lbs, 8 oz - 9 lbs, 15 oz"
+msgstr "9 lbs, 8 oz - 9 lbs, 15 oz (4083 grams - 4309 grams)"
 
 #: cdi_forms/models.py:114
 msgid "10 lbs, 0 oz or more"
-msgstr "10 lbs, 0 oz or more"
+msgstr "10 lbs, 0 oz or more (4310 grams or more)"
 
 #: cdi_forms/models.py:121
 msgid "Less than 1500 grams"
-msgstr "Less than 1500 grams"
+msgstr "Less than 1500 grams (Less than 3 lbs, 4 oz)"
 
 #: cdi_forms/models.py:122
 msgid "1500 grams - 1749 grams"
-msgstr "1500 grams - 1749 grams"
+msgstr "1500 grams - 1749 grams (3 lbs, 5 oz - 3 lbs, 13 oz)"
 
 #: cdi_forms/models.py:123
 msgid "1750 grams - 1999 grams"
-msgstr "1750 grams - 1999 grams"
+msgstr "1750 grams - 1999 grams (3 lbs, 14 oz - 4 lbs, 6 oz)"
 
 #: cdi_forms/models.py:124
 msgid "2000 grams - 2249 grams"
-msgstr "2000 grams - 2249 grams"
+msgstr "2000 grams - 2249 grams (4 lbs, 7 oz - 4 lbs, 15 oz)"
 
 #: cdi_forms/models.py:125
 msgid "2250 grams - 2499 grams"
-msgstr "2250 grams - 2499 grams"
+msgstr "2250 grams - 2499 grams (5 lbs, 0 oz - 5 lbs, 8 oz)"
 
 #: cdi_forms/models.py:126
 msgid "2500 grams - 2749 grams"
-msgstr "2500 grams - 2749 grams"
+msgstr "2500 grams - 2749 grams (5 lbs, 9 oz - 6 lbs, 1 oz)"
 
 #: cdi_forms/models.py:127
 msgid "2750 grams - 2999 grams"
-msgstr "2750 grams - 2999 grams"
+msgstr "2750 grams - 2999 grams (6 lbs, 2 oz - 6 lbs, 9 oz)"
 
 #: cdi_forms/models.py:128
 msgid "3000 grams - 3249 grams"
-msgstr "3000 grams - 3249 grams"
+msgstr "3000 grams - 3249 grams (6 lbs, 10 oz - 7 lbs, 2 oz)"
 
 #: cdi_forms/models.py:129
 msgid "3250 grams - 3499 grams"
-msgstr "3250 grams - 3499 grams"
+msgstr "3250 grams - 3499 grams (7 lbs, 3 oz - 7 lbs, 11 oz)"
 
 #: cdi_forms/models.py:130
 msgid "3500 grams - 3749 grams"
-msgstr "3500 grams - 3749 grams"
+msgstr "3500 grams - 3749 grams (7 lbs, 12 oz - 8 lbs, 4 oz)"
 
 #: cdi_forms/models.py:131
 msgid "3750 grams - 3999 grams"
-msgstr "3750 grams - 3999 grams"
+msgstr "3750 grams - 3999 grams (8 lbs, 5 oz - 8 lbs, 13 oz)"
 
 #: cdi_forms/models.py:132
 msgid "4000 grams - 4249 grams"
-msgstr "4000 grams - 4249 grams"
+msgstr "4000 grams - 4249 grams (8 lbs, 14 oz - 9 lbs, 5 oz)"
 
 #: cdi_forms/models.py:133
 msgid "4250 grams - 4499 grams"
-msgstr "4250 grams - 4499 grams"
+msgstr "4250 grams - 4499 grams (9 lbs, 6 oz - 9 lbs, 14 oz)"
 
 #: cdi_forms/models.py:134
 msgid "4500 grams - 4749 grams"
-msgstr "4500 grams - 4749 grams"
+msgstr "4500 grams - 4749 grams (9 lbs, 15 oz - 10 lbs, 7 oz)"
 
 #: cdi_forms/models.py:135
 msgid "4750 grams - 4999 grams"
-msgstr "4750 grams - 4999 grams"
+msgstr "4750 grams - 4999 grams (10 lbs, 8 oz - 11 lbs, 0 oz)"
 
 #: cdi_forms/models.py:136
 msgid "5000 grams or more"
-msgstr "5000 grams or more"
+msgstr "5000 grams or more (11 lbs, 1 oz or more)"
 
 #: cdi_forms/models.py:145
 msgid "Was your child born earlier or later than their due date?"
