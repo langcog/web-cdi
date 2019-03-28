@@ -98,6 +98,54 @@
         });
     });
 
+    $('#id_form_filler').each(function(index, e){
+        if($(this).val() == "other"){
+            $(e).closest('.form-group').next('.dependent').css('display','block');
+        } else {
+            $('#id_form_filler_other').val('');
+            $(e).closest('.form-group').next('.dependent').css('display','none');
+        }
+        $(e).change(function(){
+            if($(this).val() == "other"){
+                $(e).closest('.form-group').next('.dependent').css('display','block');
+            } else {
+                $('#id_form_filler_other').val('');
+                $(e).closest('.form-group').next('.dependent').css('display','none');
+            }
+        });
+    });
+    $('#id_primary_caregiver').each(function(index, e){
+        if($(this).val() == "other"){
+            $(e).closest('.form-group').next('.dependent').css('display','block');
+        } else {
+            $('#id_primary_caregiver_other').val('');
+            $(e).closest('.form-group').next('.dependent').css('display','none');
+        }
+        $(e).change(function(){
+            if($(this).val() == "other"){
+                $(e).closest('.form-group').next('.dependent').css('display','block');
+            } else {
+                $('#id_primary_caregiver_other').val('');
+                $(e).closest('.form-group').next('.dependent').css('display','none');
+            }
+        });
+    });
+    $('#id_secondary_caregiver').each(function(index, e){
+        if($(this).val() == "other"){
+            $(e).closest('.form-group').next('.dependent').css('display','block');
+        } else {
+            $('#id_secondary_caregiver_other').val('');
+            $(e).closest('.form-group').next('.dependent').css('display','none');
+        }
+        $(e).change(function(){
+            if($(this).val() == "other"){
+                $(e).closest('.form-group').next('.dependent').css('display','block');
+            } else {
+                $('#id_secondary_caregiver_other').val('');
+                $(e).closest('.form-group').next('.dependent').css('display','none');
+            }
+        });
+    });
     var $select = $('.make-selectize').selectize({
         maxItems :null,
     });

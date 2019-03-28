@@ -133,28 +133,47 @@ class BackgroundForm(BetterModelForm):
                      label = _("Which language(s)"), required = False
                 )
 
+    form_filler_other = forms.CharField(
+        label = ' ',
+        required=False,
+        widget = forms.TextInput(attrs={'placeholder': _('Please specify')})
+    )
+    primary_caregiver_other = forms.CharField(
+        label = ' ',
+        required=False,
+        widget = forms.TextInput(attrs={'placeholder': _('Please specify')})
+    )
+    secondary_caregiver_other = forms.CharField(
+        label = ' ',
+        required=False,
+        widget = forms.TextInput(attrs={'placeholder': _('Please specify')})
+    )
     # Cleaning input data for views.py and later database storage.
     def clean(self):
         cleaned_data = super(BackgroundForm, self).clean()
         
         # Nesting fields. Some questions, like 'born_on_due_date' trigger related subsequent questions like 'early_or_late' and 'due_date_diff' to inquire more depending on earlier answers.
         enabler_dependent_fields = (
-        ('country', ['zip_code',]),
-        ('multi_birth_boolean', ['multi_birth',]),
-        ('born_on_due_date', ['early_or_late', 'due_date_diff',]),
-        ('other_languages_boolean', ['other_languages', 'language_days_per_week', 'language_hours_per_day', 'language_from']),
-        ('ear_infections_boolean', ['ear_infections',]),
-        ('hearing_loss_boolean', ['hearing_loss',]),
-        ('vision_problems_boolean', ['vision_problems',]),
-        ('illnesses_boolean', ['illnesses',]),
-        ('services_boolean', ['services',]),
-        ('worried_boolean', ['worried',]),
-        ('learning_disability_boolean', ['learning_disability',]),)
+            ('form_filler', ['form_filler_other']),
+            ('country', ['zip_code',]),
+            ('primary_caregiver', ['primary_caregiver_other']),
+            ('secondary_caregiver', ['secondary_caregiver_other']),
+            ('multi_birth_boolean', ['multi_birth',]),
+            ('born_on_due_date', ['early_or_late', 'due_date_diff',]),
+            ('other_languages_boolean', ['other_languages', 'language_days_per_week', 'language_hours_per_day', 'language_from']),
+            ('ear_infections_boolean', ['ear_infections',]),
+            ('hearing_loss_boolean', ['hearing_loss',]),
+            ('vision_problems_boolean', ['vision_problems',]),
+            ('illnesses_boolean', ['illnesses',]),
+            ('services_boolean', ['services',]),
+            ('worried_boolean', ['worried',]),
+            ('learning_disability_boolean', ['learning_disability',]),
+        )
 
         # If enabler field was answered as 'True', its related fields cannot be empty. 
         for (enabler, dependents) in enabler_dependent_fields:
             enabler_val = cleaned_data.get(enabler)
-            if enabler_val == '1':
+            if enabler_val in ['1','other']:
                 for dependent in dependents:
                     if dependent not in cleaned_data or cleaned_data.get(dependent) == '':
                         self.add_error(dependent, _("This field cannot be empty"))
@@ -217,21 +236,21 @@ class BackgroundForm(BetterModelForm):
             self.fields['child_dob'].widget.attrs['placeholder'] = _('dd/mm/yyyy')
 
         self.helper.layout = Layout(
-            Fieldset( _('Basic Information'), 'child_dob','age', 'sex', Field('country', css_class='enabler'), Div('zip_code', css_class='dependent'),'birth_order', Field('multi_birth_boolean', css_class='enabler'), Div('multi_birth', css_class='dependent'), self.birth_weight_field, Field('born_on_due_date', css_class='enabler'), Div('early_or_late', 'due_date_diff', css_class='dependent')),
-            Fieldset( _('Family Background'), 'mother_yob', 'mother_education','father_yob', 'father_education', 'annual_income'),
+            Fieldset( _('Basic Information'), Field('form_filler', css_class='enabler'), Div('form_filler_other', css_class='dependent'), 'child_dob','age', 'sex', Field('country', css_class='enabler'), Div('zip_code', css_class='dependent'),'birth_order', Field('multi_birth_boolean', css_class='enabler'), Div('multi_birth', css_class='dependent'), self.birth_weight_field, Field('born_on_due_date', css_class='enabler'), Div('early_or_late', 'due_date_diff', css_class='dependent')),
+            Fieldset( _('Family Background'), Field('primary_caregiver', css_class='enabler'), Div('primary_caregiver_other', css_class='dependent'), 'mother_yob', 'mother_education',Field('secondary_caregiver', css_class='enabler'), Div('secondary_caregiver_other', css_class='dependent'), 'father_yob', 'father_education', 'annual_income'),
             Fieldset( _("Child's Ethnicity"),HTML("<p> " + ugettext("The following information is being collected for the sole purpose of reporting to our grant-funding institute, i.e.,  NIH (National Institute of Health).  NIH requires this information to ensure the soundness and inclusiveness of our research. Your cooperation is appreciated, but optional.") + " </p>"), 'child_hispanic_latino', 'child_ethnicity'),
             Fieldset( _("Caregiver Information"), 'caregiver_info'),
             Fieldset( _("Language Exposure"), Field('other_languages_boolean', css_class = 'enabler'), Div(Field('other_languages', css_class='make-selectize'),'language_from', 'language_days_per_week', 'language_hours_per_day', css_class='dependent')),
-            Fieldset( _("Health"), 
-            Field('ear_infections_boolean', css_class = 'enabler'), Div('ear_infections', css_class='dependent'),
-            Field('hearing_loss_boolean', css_class = 'enabler'), Div('hearing_loss', css_class='dependent'),
-            Field('vision_problems_boolean', css_class = 'enabler'), Div('vision_problems', css_class='dependent'),
-            Field('illnesses_boolean', css_class = 'enabler'), Div('illnesses', css_class='dependent'),
-            Field('services_boolean', css_class = 'enabler'), Div('services', css_class='dependent'),
-            Field('worried_boolean', css_class = 'enabler'), Div('worried', css_class='dependent'),
-            Field('learning_disability_boolean', css_class = 'enabler'), Div('learning_disability', css_class='dependent'),),
-
-)
+                Fieldset( _("Health"), 
+                Field('ear_infections_boolean', css_class = 'enabler'), Div('ear_infections', css_class='dependent'),
+                Field('hearing_loss_boolean', css_class = 'enabler'), Div('hearing_loss', css_class='dependent'),
+                Field('vision_problems_boolean', css_class = 'enabler'), Div('vision_problems', css_class='dependent'),
+                Field('illnesses_boolean', css_class = 'enabler'), Div('illnesses', css_class='dependent'),
+                Field('services_boolean', css_class = 'enabler'), Div('services', css_class='dependent'),
+                Field('worried_boolean', css_class = 'enabler'), Div('worried', css_class='dependent'),
+                Field('learning_disability_boolean', css_class = 'enabler'), Div('learning_disability', css_class='dependent'),
+            ),
+        )
 
     #Link form to BackgroundInfo model stored in database. Declare widget formatting for specific fields.
     class Meta:
