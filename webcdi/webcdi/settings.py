@@ -223,4 +223,4 @@ COUNTRIES_FIRST = [
 ]
 
 if SITE_ID == 3: USER_ADMIN_EMAIL = 'henrymehta@hotmail.com'
-else : USER_ADMIN_EMAIL = 'henrymehta@hotmail.com'
+else : USER_ADMIN_EMAIL = 'webcdi-contact@stanford.edu'
