@@ -93,7 +93,6 @@ def background_info_form(request, hash_id):
     context['zip_code'] = ''
 
     user_language = language_map(administration_instance.study.instrument.language)
-
     translation.activate(user_language)
 
     refresh = False # Refreshing page is automatically off
