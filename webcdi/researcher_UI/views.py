@@ -52,25 +52,25 @@ def download_data(request, study_obj, administrations = None): # Download study 
         melted_answers = pd.DataFrame(columns = get_model_header(study_obj.instrument.name))
 
     # Format background data responses for pandas dataframe and eventual printing
-    try:
-        background_data = BackgroundInfo.objects.values().filter(administration__in = administrations)
+    #try:
+    background_data = BackgroundInfo.objects.values().filter(administration__in = administrations)
 
-        BI_choices = {}
+    BI_choices = {}
 
-        fields = BackgroundInfo._meta.get_fields()
-        for field in fields:
-            if field.choices:
-                field_choices = dict(field.choices)
-                for k, v in field_choices.items():
-                    if k == v:
-                        field_choices.pop(k, None)
-                BI_choices[field.name] = {k:v for k,v in field_choices.items()}
+    fields = BackgroundInfo._meta.get_fields()
+    for field in fields:
+        if field.choices:
+            field_choices = dict(field.choices)
+            for k, v in field_choices.items():
+                if unicode(k) == unicode(v):
+                    field_choices.pop(k, None)
+            BI_choices[field.name] = {unicode(k):unicode(v) for k,v in field_choices.items()}
 
-        new_background = pd.DataFrame.from_records(background_data).astype(str).replace(BI_choices)
-        new_background['administration_id'] = new_background['administration_id'].astype('int64')
+    new_background = pd.DataFrame.from_records(background_data).astype(str).replace(BI_choices)
+    new_background['administration_id'] = new_background['administration_id'].astype('int64')
 
-    except:
-        new_background = pd.DataFrame(columns = ['administration_id'] + background_header)
+    #except:
+    #    new_background = pd.DataFrame(columns = ['administration_id'] + background_header)
 
 
     # Try to combine background data and CDI responses
