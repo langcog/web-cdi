@@ -195,6 +195,10 @@
         "name":"French",
         "nativeName":"français, langue française"
     },
+    "fr-ca":{
+        "name": "French Quebec",
+        "nativeName":"français, langue française canadienne"
+    },
     "ff":{
         "name":"Fula; Fulah; Pulaar; Pular",
         "nativeName":"Fulfulde, Pulaar, Pular"
