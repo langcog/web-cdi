@@ -162,7 +162,6 @@ class BackgroundInfo(models.Model):
     caregiver_choices = (
         ('mother', _('Mother')),
         ('father',_('Father')),
-        ('both parents', _('Both caregivers')),
         ('grandparent(s)', _('Grandparent(s)')),
         ('other',_('Other')),
     )
