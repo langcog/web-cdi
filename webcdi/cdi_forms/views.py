@@ -31,14 +31,11 @@ def language_map(language):
     with translation.override('en'):
         available_langs = dict(settings.LANGUAGES)
         trimmed_lang = re.sub(r'(\s+)?\([^)]*\)', '', language).strip()
-        print "Could not find '%s' in " % language + str(available_langs)
         lang_code = None
 
         for code, language in available_langs.iteritems(): 
             if language == trimmed_lang:
                 lang_code = code
-
-        print lang_code
 
         assert lang_code, "'%s' not available in language mapping function (language_map, cdi_forms/views.py)" % trimmed_lang
         return lang_code
@@ -234,7 +231,7 @@ def cdi_items(object_group, item_type, prefilled_data, item_id):
 
             raw_split_choices = map(unicode.strip, obj['choices__choice_set'].split(';'))
 
-            split_choices_translated = map(unicode.strip, [value for key, value in obj.items() if 'choice_set_' in key][0].split(';'))
+            split_choices_translated = map(unicode.strip, [value for key, value in obj.items() if 'choice_set' in key][0].split(';'))
 
             prefilled_values = [False if obj['itemID'] not in prefilled_data else x == prefilled_data[obj['itemID']] for x in raw_split_choices]
 
