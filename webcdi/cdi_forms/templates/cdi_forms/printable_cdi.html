@@ -242,7 +242,7 @@
         var raw_words_understood = words.filter(function(d) { return d.num_value == 'understands' ; }).length;
         var words_understood = words.filter(function(d) { return d.num_value == 'produces' | d.num_value == 'understands' ; }).length;
         var words_produced = words.filter(function(d) { return (d.num_value == 'produces'); }).length;
-
+        
         // Create summary text depending on number of words in bins.
 
         if (words_produced > 0 & raw_words_understood > 0) {
@@ -278,7 +278,7 @@
             word_categories = data;
             var list_names = objectMap(categorySize,'key')
             updateCategoryInfo();
-
+            
             $.each(word_categories, function(index){
                 var category_id = word_categories[index].id;
                 var name_location = list_names.indexOf(category_id)
@@ -295,7 +295,7 @@
                 comp_graph_width = graph_width*2;
             }
 
-
+            
             if (raw_words_understood > 0) {
                 new_chart_understood = c3.generate({
                     bindto: '#categories_charts_understood',
@@ -350,6 +350,7 @@
             }
 
             if (words_produced > 0) {
+                console.log(words_produced)
                 new_chart_produced = c3.generate({
                     bindto: '#categories_charts_produced',
                     data: {
