@@ -231,7 +231,7 @@ def cdi_items(object_group, item_type, prefilled_data, item_id):
 
             raw_split_choices = map(unicode.strip, obj['choices__choice_set'].split(';'))
 
-            split_choices_translated = map(unicode.strip, [value for key, value in obj.items() if 'choice_set' in key][0].split(';'))
+            split_choices_translated = map(unicode.strip, [value for key, value in obj.items() if 'choice_set_' in key][0].split(';'))
 
             prefilled_values = [False if obj['itemID'] not in prefilled_data else x == prefilled_data[obj['itemID']] for x in raw_split_choices]
 
@@ -289,8 +289,8 @@ def prefilled_cdi_data(administration_instance):
             field_values += ['choices__choice_set_en']
         elif administration_instance.study.instrument.language == 'Spanish':
             field_values += ['choices__choice_set_es']
-        elif administration_instance.study.instrument.language == 'French (Quebec)':
-            field_values += ['choices__choice_set_fr']
+        elif administration_instance.study.instrument.language == 'French Quebec':
+            field_values += ['choices__choice_set_fr_ca']
 
         #As some items are nested on different levels, carefully parse and store items for rendering.
         for part in data['parts']:
@@ -487,7 +487,7 @@ def printable_view(request, hash_id):
             'legal_url': 'http://www.amazon.com/gc-legal'},
         'Spanish': {'redeem_url': 'http://www.amazon.com/gc/redeem/?language=es_US', 
             'legal_url': 'http://www.amazon.com/gc-legal/?language=es_US'},
-        'French (Quebec)': {'redeem_url': 'http://www.amazon.ca/gc/redeem/?language=fr_CA', 
+        'French Quebec': {'redeem_url': 'http://www.amazon.ca/gc/redeem/?language=fr_CA', 
             'legal_url': 'http://www.amazon.ca/gc-legal/?language=fr_CA'}
         }
         url_obj = amazon_urls[administration_instance.study.instrument.language]
@@ -559,7 +559,7 @@ def find_paired_studies(request, username, study_group):
     user_language = models.Case( 
         models.When(instrument__language='English', then=models.Value('en')),
         models.When(instrument__language='Spanish', then=models.Value('es')),
-        models.When(instrument__language='French (Quebec)', then=models.Value('fr')),
+        models.When(instrument__language='French Quebec', then=models.Value('fr_ca')),
     default=models.Value('en'), output_field=models.CharField())).order_by('min_age')
 
     first_study = study.objects.filter(study_group = study_group, researcher = researcher)[:1].get()
