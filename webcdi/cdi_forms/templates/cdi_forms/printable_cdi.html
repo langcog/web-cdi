@@ -303,7 +303,7 @@
                         x: '{% trans "Category" %}',
                         columns: [
                             ['{% trans "Category" %}'].concat(objectMap(categorySize,'category_name')),
-                            ['{% trans "Percentage of Words Understood (%)" %}'].concat(objectMap(categorySize,'prop_understood'))
+                            ['{% trans "Words Understood (%)" %}'].concat(objectMap(categorySize,'prop_understood'))
                         ],
                         type: 'bar',
                         color : function (color, d) {
@@ -320,7 +320,7 @@
                         },
                         y: {
                             label: {
-                                text: '{% trans "Percentage of Words Understood (%)" %}',
+                                text: '{% trans "Words Understood (%)" %}',
                                 position: 'outer-center'
                             }
                         }                    
@@ -357,7 +357,7 @@
                         x: '{% trans "Category" %}',
                         columns: [
                             ['{% trans "Category" %}'].concat(objectMap(categorySize,'category_name')),
-                            ['{% trans "Percentage of Words Spoken (%)" %}'].concat(objectMap(categorySize,'prop_produced'))
+                            ['{% trans "Words Produced (%)" %}'].concat(objectMap(categorySize,'prop_produced'))
                         ],
                         type: 'bar',
                         color : function (color, d) {
@@ -375,7 +375,7 @@
                         },
                         y: {
                             label: {
-                                text: '{% trans "Percentage of Words Spoken (%)" %}',
+                                text: '{% trans "Words Produced (%)" %}',
                                 position: 'outer-center'
                             }
                         }
