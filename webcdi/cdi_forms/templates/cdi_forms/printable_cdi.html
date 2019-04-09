@@ -295,7 +295,7 @@
                 comp_graph_width = graph_width*2;
             }
 
-            
+            console.log(['{% trans "Words Understood (%)" %}'].concat(objectMap(categorySize,'prop_understood')))
             if (raw_words_understood > 0) {
                 new_chart_understood = c3.generate({
                     bindto: '#categories_charts_understood',

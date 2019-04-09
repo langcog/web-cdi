@@ -1270,8 +1270,6 @@ msgstr "Categoría"
 
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:306
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:323
-#, fuzzy, python-format
-#| msgid "Percentage of Words Understood (%%)"
 msgid "Words Understood (%%)"
 msgstr "Comprensión de Palabras (%%)"
 
@@ -1279,17 +1277,13 @@ msgstr "Comprensión de Palabras (%%)"
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:378
 #, python-format
 msgid "Words Produced (%%)"
-msgstr "Producción de Palabras"
+msgstr "Producción de Palabras (%%)"
 
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:510
-#, fuzzy
-#| msgid "My child says the most words in the bestProdCat category."
 msgid "My child produces the most words in the bestProdCat category."
 msgstr "Mi niño(a) dice la más palabras en la categoría de bestProdCat."
 
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:514
-#, fuzzy
-#| msgid "My child says the most words in the bestCompCat category."
 msgid "My child understands the most words in the bestCompCat category."
 msgstr "Mi niño(a) dice la más palabras en la categoría de bestCompCat."
 
