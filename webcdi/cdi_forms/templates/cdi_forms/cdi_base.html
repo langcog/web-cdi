@@ -80,7 +80,7 @@
                         var due_date_utc = moment.utc(due_date, "MMM DD, YYYY, hh:mm a");
                         if ("{{language}}" == 'Spanish') {
                             var due_date_local = moment(due_date_utc).local().locale('es').format("lll");
-                        } else if ("{{language}}" == 'French (Quebec)') {
+                        } else if ("{{language}}" == 'French Quebec') {
                             var due_date_local = moment(due_date_utc).local().locale('fr_CA').format("lll");
                         } else {
                             var due_date_local = moment(due_date_utc).local().format("lll");
