@@ -507,11 +507,11 @@
             }
 
             if (typeof(bestProdCat) !== 'undefined') {
-                $("#best_categories").append('{% trans "My child says the most words in the bestProdCat category." %}<br>'.replace(/bestProdCat/g, '"' + bestProdCat + '"'));
+                $("#best_categories").append('{% trans "My child produces the most words in the bestProdCat category." %}<br>'.replace(/bestProdCat/g, '"' + bestProdCat + '"'));
             }
 
             if (typeof(bestCompCat) !== 'undefined') {
-                $("#best_categories").append('{% trans "My child says the most words in the bestCompCat category." %}<br>'.replace(/bestCompCat/g, '"' + bestCompCat + '"'));
+                $("#best_categories").append('{% trans "My child understands the most words in the bestCompCat category." %}<br>'.replace(/bestCompCat/g, '"' + bestCompCat + '"'));
             }
         }
 
