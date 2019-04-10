@@ -56,6 +56,24 @@
 		"json_data": "cdi_forms/form_data/French_Quebec_WG_meta.json"
 	},
 	{
+		"language": "Canadian English",
+		"form": "WS",
+		"verbose_name": "Words and Sentences",
+		"min_age": 16,
+		"max_age": 30,
+		"csv_file": "cdi_form_csv/[Canadian_English_WS].csv",
+		"json_data": "cdi_forms/form_data/Canadian_English_WS_meta.json"
+	},
+	{
+		"language": "Canadian English",
+		"form": "WG",
+		"verbose_name": "Words and Gertures",
+		"min_age": 8,
+		"max_age": 16,
+		"csv_file": "cdi_form_csv/[Canadian_English_WG].csv",
+		"json_data": "cdi_forms/form_data/Canadian_English_WG_meta.json"
+	},	
+	{
 		"language": "English",
 		"form": "L1",
 		"verbose_name": "Short Form Vocabulary Checklist: Level I",
