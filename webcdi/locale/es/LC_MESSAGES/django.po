@@ -512,34 +512,28 @@ msgid "23 or more"
 msgstr "23 o más"
 
 #: cdi_forms/models.py:163 cdi_forms/models.py:241
-#, fuzzy
-#| msgid "Other"
 msgid "Mother"
-msgstr "Otro"
+msgstr "Madre"
 
 #: cdi_forms/models.py:164 cdi_forms/models.py:242
-#, fuzzy
-#| msgid "Other"
 msgid "Father"
-msgstr "Otro"
+msgstr "Padre"
 
 #: cdi_forms/models.py:165 cdi_forms/models.py:244
 msgid "Grandparent(s)"
-msgstr ""
+msgstr "Abuelo/a"
 
 #: cdi_forms/models.py:169
 msgid "Primary Caregiver"
-msgstr ""
+msgstr "Cuidador(a) principal"
 
 #: cdi_forms/models.py:171
 msgid "Primary Caregiver Year of birth"
-msgstr ""
+msgstr "Año de nacimiento del/de la cuidador(a) principal"
 
 #: cdi_forms/models.py:172
-#, fuzzy
-#| msgid "Caregiver Information"
 msgid "Primary Caregiver Education"
-msgstr "Información del Tutor"
+msgstr "Nivel de educación del/de la cuidador(a) principal"
 
 #: cdi_forms/models.py:172 cdi_forms/models.py:177
 msgid ""
@@ -551,21 +545,17 @@ msgstr ""
 
 #: cdi_forms/models.py:174
 msgid "Secondary Caregiver"
-msgstr ""
+msgstr "Cuidador(a) secundario"
 
 #: cdi_forms/models.py:176
 msgid "Secondary Caregiver Year of birth"
-msgstr ""
+msgstr "Año de nacimiento del/de la cuidador(a) secundario"
 
 #: cdi_forms/models.py:177
-#, fuzzy
-#| msgid "Caregiver Information"
 msgid "Secondary Caregiver Education"
-msgstr "Información del Tutor"
+msgstr "Nivel de educación del/de la cuidador(a) secundario"
 
 #: cdi_forms/models.py:186
-#, fuzzy
-#| msgid "Under "
 msgid "Under $25,000"
 msgstr "Menos que "
 
@@ -674,11 +664,11 @@ msgstr "Indique cual miembro de la familia y de una descripción"
 
 #: cdi_forms/models.py:243
 msgid "Both caregivers"
-msgstr ""
+msgstr "Ambos cuidadores"
 
 #: cdi_forms/models.py:247
 msgid "Who is filling in the form?"
-msgstr ""
+msgstr "¿Quien está llenado este questionnario?"
 
 #: cdi_forms/templates/cdi_forms/background_info.html:7
 #: cdi_forms/templates/cdi_forms/background_info.html:52
