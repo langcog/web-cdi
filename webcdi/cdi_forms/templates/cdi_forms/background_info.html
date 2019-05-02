@@ -151,16 +151,24 @@
     });
 
     // In the event that the datepicker functionality is used to change the date in the dob field, age in months will be calculated.
+    var language_code = "{{ language_code }}"
+    if ("{{ language_code }}" == 'en-ca') {
+        language_code = "en-GB"
+    }
+    if ("{{ language_code }}" == 'fr-ca') {
+        language_code = "fr"
+    }
+    
     var datepicker_options = {
         ignoreReadonly: true,
-        language: "{{ language_code }}"
+        language: language_code
     }
 
-    var date_format = "{{ language_code }}" == "en"? "mm/dd/yyyy" : "dd/mm/yyyy"
-
+    var date_format = language_code == "en"? "mm/dd/yyyy" : "dd/mm/yyyy"
+    console.log(date_format)
     $('#id_child_dob').datepicker(datepicker_options)
         .on('changeDate', function() {
-            getDiffinMonths("{{ language_code }}" == "en"? "mm/dd/yyyy" : "dd/mm/yyyy");
+            getDiffinMonths(language_code == "en"? "mm/dd/yyyy" : "dd/mm/yyyy");
         });
 
 
@@ -208,7 +216,7 @@
 
     // Any changes in dob field will trigger re-calculation of age in months.
     $('#id_child_dob').on('change', function () {
-        getDiffinMonths("{{ language_code }}" == "en"? "mm/dd/yyyy" : "dd/mm/yyyy");
+        getDiffinMonths(language_code == "en"? "mm/dd/yyyy" : "dd/mm/yyyy");
     })
 
     // Age in months is calculated upon loading
@@ -291,5 +299,6 @@
             $('#id_learning_disability_boolean_1').click();
         }
     </script>
+    
 {% endif %}
 {% endblock %}
