@@ -31,7 +31,7 @@ msgstr ""
 
 #: cdi_forms/forms.py:36
 msgid "Black or African American"
-msgstr "Noir ou Afro-Canadian"
+msgstr "Black or Afro-Canadian"
 
 #: cdi_forms/forms.py:37
 msgid "White"
