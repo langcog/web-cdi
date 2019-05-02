@@ -231,7 +231,7 @@ def cdi_items(object_group, item_type, prefilled_data, item_id):
 
             raw_split_choices = map(unicode.strip, obj['choices__choice_set'].split(';'))
 
-            split_choices_translated = map(unicode.strip, [value for key, value in obj.items() if 'choice_set_' in key][0].split(';'))
+            split_choices_translated = map(unicode.strip, [value for key, value in obj.items() if 'choice_set' in key][0].split(';'))
 
             prefilled_values = [False if obj['itemID'] not in prefilled_data else x == prefilled_data[obj['itemID']] for x in raw_split_choices]
 

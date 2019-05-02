@@ -222,7 +222,7 @@ LANGUAGES = [
 
 
 COUNTRIES_FIRST = [
-    'US',
+    'US','CA',
 ]
 
 if SITE_ID == 3: USER_ADMIN_EMAIL = 'henrymehta@hotmail.com'

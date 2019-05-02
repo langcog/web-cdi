@@ -16,9 +16,10 @@ from django.utils.translation import ugettext
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__)) # Declare project file directory
 
-isoLangs = json.load(codecs.open(PROJECT_ROOT + '/../' + 'languages.json', 'r', 'utf-8')) # Load up languages stored in languages.json in project root for other_languages question
+#isoLangs = json.load(codecs.open(PROJECT_ROOT + '/../' + 'languages.json', 'r', 'utf-8')) # Load up languages stored in languages.json in project root for other_languages question
+#language_choices = [(v['name'],v['nativeName'] + " ("+ v['name'] + ")") for k,v in isoLangs.iteritems()] # Create a tuple of possible other languages child is exposed to
+from .languages import LANGUAGE_OPTIONS as language_choices
 
-language_choices = [(v['name'],v['nativeName'] + " ("+ v['name'] + ")") for k,v in isoLangs.iteritems()] # Create a tuple of possible other languages child is exposed to
 
 # Function for converting string 'True' into boolean True
 def string_bool_coerce(val):
@@ -40,7 +41,8 @@ class BackgroundForm(BetterModelForm):
     YESNONA_CHOICES = ((0, _('No')), (1, _('Yes')), (2, _('Prefer not to disclose')))
 
     # Child's DOB. Formatted weirdly to only be required if Age in months in not already stored in database.
-    child_dob = forms.DateField(input_formats=['%m/%d/%Y'], widget=forms.TextInput(),
+    child_dob = forms.DateField(input_formats=['%m/%d/%Y'], 
+                                widget=forms.TextInput(attrs={'max' : datetime.datetime.now().strftime("%Y-%m-%d")}),
                                 help_text = _("To protect your privacy, we never store your child's date of birth, we only record age in months."),
                                 validators = [MaxValueValidator(datetime.date.today())], label = _('Child DOB<span class="asteriskField">*</span>'), required=False)
 

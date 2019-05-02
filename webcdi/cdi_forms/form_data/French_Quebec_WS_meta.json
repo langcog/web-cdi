@@ -98,7 +98,7 @@
                             "title": "21. CONJONCTIONS"
                         }
                     ],
-                    "text": "Les enfants comprennent bien plus de mots qu'ils n'en produisent. Nous sommes particulièrement intéressés aux mots que produit votre enfant. Lisez la liste et indiquez les mots que vous avez entendu votre enfant utiliser. Dans les cas où plus d'un mot est présenté, veuillez encercler le mot utilisé le plus souvent par votre enfant. Si votre enfant utilise une prononciation différente pour un mot, par exemple \"wawal\" pour \"cheval\" ou \"ghetti\" pour \"spaghetti\", ce mot est accepté. Souvenez-vous que cet inventaire est un \"catalogue\" de tous les mots utilisés par une foule d'enfants divers. Ne vous inquiétez pas si votre enfant n'en connaît que quelques-uns en ce moment. Veuillez noircir le case à cocher pour chaque mot qu'utilise votre enfant.",
+                    "text": "Les enfants comprennent bien plus de mots qu'ils n'en produisent. Nous sommes particulièrement intéressés aux mots que produit votre enfant. Lisez la liste et indiquez les mots que vous avez entendu votre enfant utiliser. Dans les cas où plus d'un mot est présenté, veuillez encercler le mot utilisé le plus souvent par votre enfant. Si votre enfant utilise une prononciation différente pour un mot, par exemple \"wawal\" pour \"cheval\" ou \"ghetti\" pour \"spaghetti\", ce mot est accepté. Souvenez-vous que cet inventaire est un \"catalogue\" de tous les mots utilisés par une foule d'enfants divers. Ne vous inquiétez pas si votre enfant n'en connaît que quelques-uns en ce moment. Veuillez sélectionner la case pour chaque mot qu'utilise votre enfant.",
                     "title": "A. VOCABULAIRE",
                     "type": "checkbox"
                 },
@@ -116,7 +116,7 @@
                 {
                     "id": "word_forms",
                     "title": "A. FORMES GRAMMATICALES",
-                    "text": "Vous trouverez ci-dessous une liste de différentes terminaisons de verbes. Veuillez indiquer lesquelles votre enfant utilise. Si votre enfant n'emploie pas le verbe donné en exemple mais utilise ces terminaisons avec d'autres verbes, veuillez noircir le cercle. Par exemple, si votre enfant ne dit pas \"aime\" mais dit \"mange\", vous devez noircir le cercle du mot \"aime\".",
+                    "text": "Vous trouverez ci-dessous une liste de différentes terminaisons de verbes. Veuillez indiquer lesquelles votre enfant utilise. Si votre enfant n'emploie pas le verbe donné en exemple mais utilise ces terminaisons avec d'autres verbes, veuillez sélectionner la case tout de même. Par exemple, si votre enfant ne dit pas \"aime\" mais dit \"mange\", vous devez sélectionner la case pour le mot \"aime\".",
                     "sections": [
                         {
                             "id": "word_forms_prese",
