@@ -277,665 +277,665 @@ msgstr ""
 
 #: cdi_forms/languages.py:6
 msgid "Abkhaz"
-msgstr ""
+msgstr "abkhaz"
 
 #: cdi_forms/languages.py:7
 msgid "Afar"
-msgstr ""
+msgstr "afar"
 
 #: cdi_forms/languages.py:8
 msgid "Afrikaans"
-msgstr ""
+msgstr "afrikaans"
 
 #: cdi_forms/languages.py:9
 msgid "Akan"
-msgstr ""
+msgstr "akan"
 
 #: cdi_forms/languages.py:10
 msgid "Albanian"
-msgstr ""
+msgstr "albanais"
 
 #: cdi_forms/languages.py:11
 msgid "Amharic"
-msgstr ""
+msgstr "amharique"
 
 #: cdi_forms/languages.py:12
 msgid "Arabic"
-msgstr ""
+msgstr "arabe"
 
 #: cdi_forms/languages.py:13
 msgid "Aragonese"
-msgstr ""
+msgstr "aragonais"
 
 #: cdi_forms/languages.py:14
 msgid "Armenian"
-msgstr ""
+msgstr "arménien"
 
 #: cdi_forms/languages.py:15
 msgid "Assamese"
-msgstr ""
+msgstr "assamais"
 
 #: cdi_forms/languages.py:16
 msgid "Avaric"
-msgstr ""
+msgstr "avar"
 
 #: cdi_forms/languages.py:17
 msgid "Avestan"
-msgstr ""
+msgstr "avestique; zend"
 
 #: cdi_forms/languages.py:18
 msgid "Aymara"
-msgstr ""
+msgstr "aymara; aimara"
 
 #: cdi_forms/languages.py:19
 msgid "Azerbaijani"
-msgstr ""
+msgstr "azerbaïdjanais"
 
 #: cdi_forms/languages.py:20
 msgid "Bambara"
-msgstr ""
+msgstr "bambara"
 
 #: cdi_forms/languages.py:21
 msgid "Bashkir"
-msgstr ""
+msgstr "bachkir"
 
 #: cdi_forms/languages.py:22
 msgid "Basque"
-msgstr ""
+msgstr "basque"
 
 #: cdi_forms/languages.py:23
 msgid "Belarusian"
-msgstr ""
+msgstr "bélarussien"
 
 #: cdi_forms/languages.py:24
 msgid "Bengali"
-msgstr ""
+msgstr "bengali"
 
 #: cdi_forms/languages.py:25
 msgid "Bihari"
-msgstr ""
+msgstr "bihari"
 
 #: cdi_forms/languages.py:26
 msgid "Bislama"
-msgstr ""
+msgstr "bichelamar"
 
 #: cdi_forms/languages.py:27
 msgid "Bosnian"
-msgstr ""
+msgstr "bosnien; bosniaque"
 
 #: cdi_forms/languages.py:28
 msgid "Breton"
-msgstr ""
+msgstr "breton"
 
 #: cdi_forms/languages.py:29
 msgid "Bulgarian"
-msgstr ""
+msgstr "bulgare"
 
 #: cdi_forms/languages.py:30
 msgid "Burmese"
-msgstr ""
+msgstr "birman"
 
 #: cdi_forms/languages.py:31
 msgid "Catalan; Valencian"
-msgstr ""
+msgstr "catalan; valencien"
 
 #: cdi_forms/languages.py:32
 msgid "Chamorro"
-msgstr ""
+msgstr "chamorro"
 
 #: cdi_forms/languages.py:33
 msgid "Chechen"
-msgstr ""
+msgstr "tchétchène"
 
 #: cdi_forms/languages.py:34
 msgid "Chichewa; Chewa; Nyanja"
-msgstr ""
+msgstr "chichewa; chewa; nyanja"
 
 #: cdi_forms/languages.py:35
 msgid "Chinese"
-msgstr ""
+msgstr "chinois"
 
 #: cdi_forms/languages.py:36
 msgid "Chuvash"
-msgstr ""
+msgstr "tchouvache"
 
 #: cdi_forms/languages.py:37
 msgid "Cornish"
-msgstr ""
+msgstr "cornouaillais"
 
 #: cdi_forms/languages.py:38
 msgid "Corsican"
-msgstr ""
+msgstr "corse"
 
 #: cdi_forms/languages.py:39
 msgid "Cree"
-msgstr ""
+msgstr "cri"
 
 #: cdi_forms/languages.py:40
 msgid "Croatian"
-msgstr ""
+msgstr "croate"
 
 #: cdi_forms/languages.py:41
 msgid "Czech"
-msgstr ""
+msgstr "tchèque"
 
 #: cdi_forms/languages.py:42
 msgid "Danish"
-msgstr ""
+msgstr "danois"
 
 #: cdi_forms/languages.py:43
-msgid "Divehi; Dhivehi; Maldivian;"
-msgstr ""
+msgid "Divehi; Dhivehi; Maldivian"
+msgstr "divehi; dhivehi; maldivien"
 
 #: cdi_forms/languages.py:44
 msgid "Dutch"
-msgstr ""
+msgstr "néerlandais"
 
 #: cdi_forms/languages.py:45 webcdi/settings.py:217
 msgid "English"
-msgstr ""
+msgstr "anglais"
 
 #: cdi_forms/languages.py:46
 msgid "Esperanto"
-msgstr ""
+msgstr "espéranto"
 
 #: cdi_forms/languages.py:47
 msgid "Estonian"
-msgstr ""
+msgstr "estonien"
 
 #: cdi_forms/languages.py:48
 msgid "Ewe"
-msgstr ""
+msgstr "éwé"
 
 #: cdi_forms/languages.py:49
 msgid "Faroese"
-msgstr ""
+msgstr "féroïen"
 
 #: cdi_forms/languages.py:50
 msgid "Fijian"
-msgstr ""
+msgstr "fidjien"
 
 #: cdi_forms/languages.py:51
 msgid "Finnish"
-msgstr ""
+msgstr "finnois"
 
 #: cdi_forms/languages.py:52
 msgid "French"
-msgstr ""
+msgstr "français"
 
 #: cdi_forms/languages.py:53
 msgid "Fula; Fulah; Pulaar; Pular"
-msgstr ""
+msgstr "foulfouldé; pulaar"
 
 #: cdi_forms/languages.py:54
 msgid "Galician"
-msgstr ""
+msgstr "galicien"
 
 #: cdi_forms/languages.py:55
 msgid "Georgian"
-msgstr ""
+msgstr "géorgien"
 
 #: cdi_forms/languages.py:56
 msgid "German"
-msgstr ""
+msgstr "allemand"
 
 #: cdi_forms/languages.py:57
 msgid "Greek, Modern"
-msgstr ""
+msgstr "grec, moderne"
 
 #: cdi_forms/languages.py:58
 msgid "Guaraní"
-msgstr ""
+msgstr "guarani"
 
 #: cdi_forms/languages.py:59
 msgid "Gujarati"
-msgstr ""
+msgstr "gujarâtî"
 
 #: cdi_forms/languages.py:60
 msgid "Haitian; Haitian Creole"
-msgstr ""
+msgstr "haïtien; créole haïtien"
 
 #: cdi_forms/languages.py:61
 msgid "Hausa"
-msgstr ""
+msgstr "haoussa; hausa"
 
 #: cdi_forms/languages.py:62
 msgid "Hebrew (modern)"
-msgstr ""
+msgstr "hébreu (moderne)"
 
 #: cdi_forms/languages.py:63
 msgid "Herero"
-msgstr ""
+msgstr "herero"
 
 #: cdi_forms/languages.py:64
 msgid "Hindi"
-msgstr ""
+msgstr "hindi"
 
 #: cdi_forms/languages.py:65
 msgid "Hiri Motu"
-msgstr ""
+msgstr "hiri motu"
 
 #: cdi_forms/languages.py:66
 msgid "Hungarian"
-msgstr ""
+msgstr "hongrois"
 
 #: cdi_forms/languages.py:67
 msgid "Interlingua"
-msgstr ""
+msgstr "interlingua"
 
 #: cdi_forms/languages.py:68
 msgid "Indonesian"
-msgstr ""
+msgstr "indonésien"
 
 #: cdi_forms/languages.py:69
 msgid "Interlingue"
-msgstr ""
+msgstr "interlingue; occidental"
 
 #: cdi_forms/languages.py:70
 msgid "Irish"
-msgstr ""
+msgstr "irlandais"
 
 #: cdi_forms/languages.py:71
 msgid "Igbo"
-msgstr ""
+msgstr "igbo"
 
 #: cdi_forms/languages.py:72
 msgid "Inupiaq"
-msgstr ""
+msgstr "inupiaq"
 
 #: cdi_forms/languages.py:73
 msgid "Ido"
-msgstr ""
+msgstr "ido"
 
 #: cdi_forms/languages.py:74
 msgid "Icelandic"
-msgstr ""
+msgstr "islandais"
 
 #: cdi_forms/languages.py:75
 msgid "Italian"
-msgstr ""
+msgstr "italien"
 
 #: cdi_forms/languages.py:76
 msgid "Inuktitut"
-msgstr ""
+msgstr "inuktitut"
 
 #: cdi_forms/languages.py:77
 msgid "Japanese"
-msgstr ""
+msgstr "japonais"
 
 #: cdi_forms/languages.py:78
 msgid "Javanese"
-msgstr ""
+msgstr "javanais"
 
 #: cdi_forms/languages.py:79
 msgid "Kalaallisut, Greenlandic"
-msgstr ""
+msgstr "kalaallisut, groenlandais"
 
 #: cdi_forms/languages.py:80
 msgid "Kannada"
-msgstr ""
+msgstr "kannada"
 
 #: cdi_forms/languages.py:81
 msgid "Kanuri"
-msgstr ""
+msgstr "kanouri"
 
 #: cdi_forms/languages.py:82
 msgid "Kashmiri"
-msgstr ""
+msgstr "cachemiri; kashmiri"
 
 #: cdi_forms/languages.py:83
 msgid "Kazakh"
-msgstr ""
+msgstr "kazakh; qazaq"
 
 #: cdi_forms/languages.py:84
 msgid "Khmer"
-msgstr ""
+msgstr "khmer"
 
 #: cdi_forms/languages.py:85
 msgid "Kikuyu, Gikuyu"
-msgstr ""
+msgstr "kikuyu, gikuyu"
 
 #: cdi_forms/languages.py:86
 msgid "Kinyarwanda"
-msgstr ""
+msgstr "kinyarwanda"
 
 #: cdi_forms/languages.py:87
 msgid "Kirghiz, Kyrgyz"
-msgstr ""
+msgstr "kirghiz, kirghize"
 
 #: cdi_forms/languages.py:88
 msgid "Komi"
-msgstr ""
+msgstr "komi"
 
 #: cdi_forms/languages.py:89
 msgid "Kongo"
-msgstr ""
+msgstr "kikongo"
 
 #: cdi_forms/languages.py:90
 msgid "Korean"
-msgstr ""
+msgstr "coréen"
 
 #: cdi_forms/languages.py:91
 msgid "Kurdish"
-msgstr ""
+msgstr "kurde"
 
 #: cdi_forms/languages.py:92
 msgid "Kwanyama, Kuanyama"
-msgstr ""
+msgstr "kwanyama"
 
 #: cdi_forms/languages.py:93
 msgid "Latin"
-msgstr ""
+msgstr "latin"
 
 #: cdi_forms/languages.py:94
 msgid "Luxembourgish, Letzeburgesch"
-msgstr ""
+msgstr "luxembourgeois"
 
 #: cdi_forms/languages.py:95
 msgid "Luganda"
-msgstr ""
+msgstr "luganda"
 
 #: cdi_forms/languages.py:96
 msgid "Limburgish, Limburgan, Limburger"
-msgstr ""
+msgstr "limbourgeois"
 
 #: cdi_forms/languages.py:97
 msgid "Lingala"
-msgstr ""
+msgstr "lingala"
 
 #: cdi_forms/languages.py:98
 msgid "Lao"
-msgstr ""
+msgstr "lao"
 
 #: cdi_forms/languages.py:99
 msgid "Lithuanian"
-msgstr ""
+msgstr "lituanien"
 
 #: cdi_forms/languages.py:100
 msgid "Luba-Katanga"
-msgstr ""
+msgstr "luba; Katanga; tshiluba"
 
 #: cdi_forms/languages.py:101
 msgid "Latvian"
-msgstr ""
+msgstr "letton"
 
 #: cdi_forms/languages.py:102
 msgid "Manx"
-msgstr ""
+msgstr "mannois"
 
 #: cdi_forms/languages.py:103
 msgid "Macedonian"
-msgstr ""
+msgstr "macédonien"
 
 #: cdi_forms/languages.py:104
 msgid "Malagasy"
-msgstr ""
+msgstr "malgache"
 
 #: cdi_forms/languages.py:105
 msgid "Malay"
-msgstr ""
+msgstr "malais"
 
 #: cdi_forms/languages.py:106
 msgid "Malayalam"
-msgstr ""
+msgstr "malayalam"
 
 #: cdi_forms/languages.py:107
 msgid "Maltese"
-msgstr ""
+msgstr "maltais"
 
 #: cdi_forms/languages.py:108
 msgid "Māori"
-msgstr ""
+msgstr "maori"
 
 #: cdi_forms/languages.py:109
 msgid "Marathi (Marāṭhī)"
-msgstr ""
+msgstr "marathi; marathe"
 
 #: cdi_forms/languages.py:110
-msgid "Marshallese"
+msgid "marshallais"
 msgstr ""
 
 #: cdi_forms/languages.py:111
-msgid "Mongolian"
+msgid "mongol"
 msgstr ""
 
 #: cdi_forms/languages.py:112
 msgid "Nauru"
-msgstr ""
+msgstr "nauruan"
 
 #: cdi_forms/languages.py:113
 msgid "Navajo, Navaho"
-msgstr ""
+msgstr "navajo, navaho"
 
 #: cdi_forms/languages.py:114
 msgid "Norwegian Bokmål"
-msgstr ""
+msgstr "norvégien bokmål"
 
 #: cdi_forms/languages.py:115
 msgid "North Ndebele"
-msgstr ""
+msgstr "ndebele du Nord"
 
 #: cdi_forms/languages.py:116
 msgid "Nepali"
-msgstr ""
+msgstr "népalais"
 
 #: cdi_forms/languages.py:117
 msgid "Ndonga"
-msgstr ""
+msgstr "ndonga"
 
 #: cdi_forms/languages.py:118
 msgid "Norwegian Nynorsk"
-msgstr ""
+msgstr "norvégien nynorsk"
 
 #: cdi_forms/languages.py:119
 msgid "Norwegian"
-msgstr ""
+msgstr "norvégien"
 
 #: cdi_forms/languages.py:120
 msgid "Nuosu"
-msgstr ""
+msgstr "nuosu; nosu"
 
 #: cdi_forms/languages.py:121
 msgid "South Ndebele"
-msgstr ""
+msgstr "ndebele du Sud"
 
 #: cdi_forms/languages.py:122
 msgid "Occitan"
-msgstr ""
+msgstr "occitan"
 
 #: cdi_forms/languages.py:123
 msgid "Ojibwe, Ojibwa"
-msgstr ""
+msgstr "ojibway; ojibwa; ojibwé"
 
 #: cdi_forms/languages.py:124
 msgid ""
 "Old Church Slavonic, Church Slavic, Church Slavonic, Old Bulgarian, Old "
 "Slavonic"
-msgstr ""
+msgstr "vieux slave d'église; slave d'église; vieux bulgare"
 
 #: cdi_forms/languages.py:125
 msgid "Oromo"
-msgstr ""
+msgstr "oromo"
 
 #: cdi_forms/languages.py:126
 msgid "Oriya"
-msgstr ""
+msgstr "oriya"
 
 #: cdi_forms/languages.py:127
 msgid "Ossetian, Ossetic"
-msgstr ""
+msgstr "ossète"
 
 #: cdi_forms/languages.py:128
 msgid "Panjabi, Punjabi"
-msgstr ""
+msgstr "panjabi, punjabi"
 
 #: cdi_forms/languages.py:129
 msgid "Pāli"
-msgstr ""
+msgstr "pâli"
 
 #: cdi_forms/languages.py:130
 msgid "Persian"
-msgstr ""
+msgstr "persan; parsi"
 
 #: cdi_forms/languages.py:131
 msgid "Polish"
-msgstr ""
+msgstr "polonais"
 
 #: cdi_forms/languages.py:132
 msgid "Pashto, Pushto"
-msgstr ""
+msgstr "pachtou"
 
 #: cdi_forms/languages.py:133
 msgid "Portuguese"
-msgstr ""
+msgstr "portugais"
 
 #: cdi_forms/languages.py:134
 msgid "Quechua"
-msgstr ""
+msgstr "quechua"
 
 #: cdi_forms/languages.py:135
 msgid "Romansh"
-msgstr ""
+msgstr "romanche"
 
 #: cdi_forms/languages.py:136
 msgid "Kirundi"
-msgstr ""
+msgstr "kirundi"
 
 #: cdi_forms/languages.py:137
 msgid "Romanian, Moldavian, Moldovan"
-msgstr ""
+msgstr "roumain; moldave"
 
 #: cdi_forms/languages.py:138
 msgid "Russian"
-msgstr ""
+msgstr "russe"
 
 #: cdi_forms/languages.py:139
 msgid "Sanskrit (Saṁskṛta)"
-msgstr ""
+msgstr "sanskrit (saṁskṛta)"
 
 #: cdi_forms/languages.py:140
 msgid "Sardinian"
-msgstr ""
+msgstr "sarde"
 
 #: cdi_forms/languages.py:141
 msgid "Sindhi"
-msgstr ""
+msgstr "sindhi"
 
 #: cdi_forms/languages.py:142
 msgid "Northern Sami"
-msgstr ""
+msgstr "same du Nord"
 
 #: cdi_forms/languages.py:143
 msgid "Samoan"
-msgstr ""
+msgstr "samoan"
 
 #: cdi_forms/languages.py:144
 msgid "Sango"
-msgstr ""
+msgstr "sango"
 
 #: cdi_forms/languages.py:145
 msgid "Serbian"
-msgstr ""
+msgstr "serbe"
 
 #: cdi_forms/languages.py:146
 msgid "Scottish Gaelic; Gaelic"
-msgstr ""
+msgstr "gaélique écossais; gaélique"
 
 #: cdi_forms/languages.py:147
 msgid "Shona"
-msgstr ""
+msgstr "shona"
 
 #: cdi_forms/languages.py:148
 msgid "Sinhala, Sinhalese"
-msgstr ""
+msgstr "cinghalais"
 
 #: cdi_forms/languages.py:149
 msgid "Slovak"
-msgstr ""
+msgstr "slovaque"
 
 #: cdi_forms/languages.py:150
 msgid "Slovene"
-msgstr ""
+msgstr "slovène"
 
 #: cdi_forms/languages.py:151
 msgid "Somali"
-msgstr ""
+msgstr "somalien"
 
 #: cdi_forms/languages.py:152
 msgid "Southern Sotho"
-msgstr ""
+msgstr "sotho du Sud"
 
 #: cdi_forms/languages.py:153
 msgid "Spanish; Castilian"
-msgstr ""
+msgstr "espagnol; castillan"
 
 #: cdi_forms/languages.py:154
 msgid "Sundanese"
-msgstr ""
+msgstr "soundanais; sundanais"
 
 #: cdi_forms/languages.py:155
 msgid "Swahili"
-msgstr ""
+msgstr "swahili"
 
 #: cdi_forms/languages.py:156
 msgid "Swati"
-msgstr ""
+msgstr "swati; siswati"
 
 #: cdi_forms/languages.py:157
 msgid "Swedish"
-msgstr ""
+msgstr "suédois"
 
 #: cdi_forms/languages.py:158
 msgid "Tamil"
-msgstr ""
+msgstr "tamoul"
 
 #: cdi_forms/languages.py:159
 msgid "Telugu"
-msgstr ""
+msgstr "télougou"
 
 #: cdi_forms/languages.py:160
 msgid "Tajik"
-msgstr ""
+msgstr "tadjik"
 
 #: cdi_forms/languages.py:161
 msgid "Thai"
-msgstr ""
+msgstr "thaï"
 
 #: cdi_forms/languages.py:162
 msgid "Tigrinya"
-msgstr ""
+msgstr "tigrinya; tigrigna"
 
 #: cdi_forms/languages.py:163
 msgid "Tibetan Standard, Tibetan, Central"
-msgstr ""
+msgstr "tibétain standard, tibétain, centrale"
 
 #: cdi_forms/languages.py:164
 msgid "Turkmen"
-msgstr ""
+msgstr "turkmène"
 
 #: cdi_forms/languages.py:165
 msgid "Tagalog"
-msgstr ""
+msgstr "tagalog; tagal"
 
 #: cdi_forms/languages.py:166
 msgid "Tswana"
-msgstr ""
+msgstr "tswana"
 
 #: cdi_forms/languages.py:167
 msgid "Tonga (Tonga Islands)"
-msgstr ""
+msgstr "tongien"
 
 #: cdi_forms/languages.py:168
 msgid "Turkish"
-msgstr ""
+msgstr "turc"
 
 #: cdi_forms/languages.py:169
 msgid "Tsonga"
-msgstr ""
+msgstr "tsonga"
 
 #: cdi_forms/languages.py:170
 msgid "Tatar"
-msgstr ""
+msgstr "tatar"
 
 #: cdi_forms/languages.py:171
 #, fuzzy
@@ -945,67 +945,67 @@ msgstr "Jumeaux"
 
 #: cdi_forms/languages.py:172
 msgid "Tahitian"
-msgstr ""
+msgstr "tahitien"
 
 #: cdi_forms/languages.py:173
 msgid "Uighur, Uyghur"
-msgstr ""
+msgstr "ouïgour"
 
 #: cdi_forms/languages.py:174
 msgid "Ukrainian"
-msgstr ""
+msgstr "ukrainien"
 
 #: cdi_forms/languages.py:175
 msgid "Urdu"
-msgstr ""
+msgstr "ourdou"
 
 #: cdi_forms/languages.py:176
 msgid "Uzbek"
-msgstr ""
+msgstr "ouzbek"
 
 #: cdi_forms/languages.py:177
 msgid "Venda"
-msgstr ""
+msgstr "venda"
 
 #: cdi_forms/languages.py:178
 msgid "Vietnamese"
-msgstr ""
+msgstr "vietnamien"
 
 #: cdi_forms/languages.py:179
 msgid "Volapük"
-msgstr ""
+msgstr "volapük"
 
 #: cdi_forms/languages.py:180
 msgid "Walloon"
-msgstr ""
+msgstr "wallon"
 
 #: cdi_forms/languages.py:181
 msgid "Welsh"
-msgstr ""
+msgstr "gallois"
 
 #: cdi_forms/languages.py:182
 msgid "Wolof"
-msgstr ""
+msgstr "wolof"
 
 #: cdi_forms/languages.py:183
 msgid "Western Frisian"
-msgstr ""
+msgstr "frison; frison occidental"
 
 #: cdi_forms/languages.py:184
 msgid "Xhosa"
-msgstr ""
+msgstr "xhosa"
 
 #: cdi_forms/languages.py:185
 msgid "Yiddish"
-msgstr ""
+msgstr "yiddish; yidich"
 
 #: cdi_forms/languages.py:186
 msgid "Yoruba"
-msgstr ""
+msgstr "yoruba"
 
 #: cdi_forms/languages.py:187
 msgid "Zhuang, Chuang"
-msgstr ""
+msgstr "zhuang"
 
 #: cdi_forms/models.py:64
 msgid "Age (in months)"
