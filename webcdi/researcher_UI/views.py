@@ -340,6 +340,7 @@ def rename_study(request, study_name): # Function for study settings modal
         amount_regex = None
 
         if form.is_valid(): # If form passed validation checks in forms.py
+            print("update form valid")
 
             # Grab submitted data along with username
             researcher = request.user
@@ -353,7 +354,7 @@ def rename_study(request, study_name): # Function for study settings modal
             study_obj.max_age = new_age_range.upper
 
             study_obj = form.save(commit=False) # Save object but do not commit to database just yet
-            study_obj.test_period = raw_test_period if (raw_test_period >= 1 and raw_test_period <= 14) else 14 # Check that entered test period is within the 1-14 range. If not, set to default (14)
+            study_obj.test_period = raw_test_period if (raw_test_period >= 1 and raw_test_period <= 28) else 14 # Check that entered test period is within the 1-28 range. If not, set to default (14)
 
             if new_study_name != study_name: # If the study name has changed
                 if study.objects.filter(researcher = researcher, name = new_study_name).exists() or '/' in new_study_name: # Check whether the new name has already been taken by this researcher
