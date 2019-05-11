@@ -51,7 +51,6 @@
                             "title": "6. Clothing"
                         },
                         {
-                            "footnote": "* or word used in your family",
                             "id": "body_parts",
                             "title": "7. Body Parts"
                         },
@@ -92,7 +91,7 @@
                         },
                         {
                             "id": "pronouns",
-                            "title": "16. Pronouns"
+                            "title": "16. Pronouns",
                         },
                         {
                             "id": "question_words",

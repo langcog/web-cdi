@@ -231,7 +231,7 @@ def cdi_items(object_group, item_type, prefilled_data, item_id):
 
             raw_split_choices = map(unicode.strip, obj['choices__choice_set'].split(';'))
 
-            split_choices_translated = map(unicode.strip, [value for key, value in obj.items() if 'choice_set' in key][0].split(';'))
+            split_choices_translated = map(unicode.strip, [value for key, value in obj.items() if 'choice_set_' in key][0].split(';'))
 
             prefilled_values = [False if obj['itemID'] not in prefilled_data else x == prefilled_data[obj['itemID']] for x in raw_split_choices]
 
@@ -291,7 +291,8 @@ def prefilled_cdi_data(administration_instance):
             field_values += ['choices__choice_set_es']
         elif administration_instance.study.instrument.language == 'French Quebec':
             field_values += ['choices__choice_set_fr_ca']
-
+        elif administration_instance.study.instrument.language == 'Canadian English':
+            field_values += ['choices__choice_set_en_ca']
         #As some items are nested on different levels, carefully parse and store items for rendering.
         for part in data['parts']:
             for item_type in part['types']:
@@ -300,9 +301,8 @@ def prefilled_cdi_data(administration_instance):
                         group_objects = instrument_model.filter(category__exact=section['id']).values(*field_values)
                         if "type" not in section:
                             section['type'] = item_type['type']
-
                         x = cdi_items(group_objects, section['type'], prefilled_data, item_type['id'])
-
+                        
                         section['objects'] = x
                         if administration_instance.study.show_feedback: raw_objects.extend(x)
                         if any(['*' in x['definition'] for x in section['objects']]):
