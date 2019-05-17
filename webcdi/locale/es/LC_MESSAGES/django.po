@@ -85,7 +85,7 @@ msgstr ""
 
 #: cdi_forms/forms.py:51
 msgid "What is your postal/zip code?"
-msgstr ""
+msgstr "¿Cuál es su código postal?"
 
 #: cdi_forms/forms.py:56 cdi_forms/models.py:199
 msgid "Is your child Hispanic or Latino?"
