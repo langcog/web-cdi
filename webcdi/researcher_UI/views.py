@@ -79,13 +79,27 @@ def download_data(request, study_obj, administrations = None): # Download study 
     #except:
     #    new_background = pd.DataFrame(columns = ['administration_id'] + background_header)
 
-
+    # Add scoring
+    scores = []
+    score_header = []
+    for administration_id in administrations:
+        scoring_dict = {'administration_id':administration_id.id}
+        for administration_data_item in administration_data.objects.filter(administration_id=administration_id):
+            inst = Instrument_Forms.objects.get(instrument=study_obj.instrument,itemID=administration_data_item.item_ID)
+            if not inst.item_type in scoring_dict: scoring_dict[inst.item_type] = 0
+            if not inst.item_type in score_header: score_header.append(inst.item_type)
+            if administration_data_item.value in ['produces','yes','sometimes','often']: scoring_dict[inst.item_type] += 1
+        scores.append(scoring_dict)
+    melted_scores = pd.DataFrame(scores)
+    melted_scores.set_index('administration_id')
+    
     # Try to combine background data and CDI responses
     try:
-        background_answers = pd.merge(new_background, melted_answers, how='outer', on = 'administration_id')
+        background_answers1 = pd.merge(new_background, melted_answers, how='outer', on = 'administration_id')
+        background_answers = pd.merge(background_answers1, melted_scores, how='outer', on = 'administration_id')
     except:
-        background_answers = pd.DataFrame(columns = list(new_background) + list(melted_answers))
-
+        background_answers = pd.DataFrame(columns = list(new_background) + list(melted_answers) + list(melted_scores))
+    
     # Try to format administration data for pandas dataframe
     try:
         admin_data = pd.DataFrame.from_records(administrations.values()).rename(columns = {'id':'administration_id', 'study_id': 'study_name', 'url_hash': 'link'})
@@ -108,8 +122,8 @@ def download_data(request, study_obj, administrations = None): # Download study 
         combined_data = combined_data.reindex(columns = np.append( combined_data.columns.values, missing_columns))
 
     # Organize columns  
-    combined_data = combined_data[admin_header + background_header + model_header ]
-
+    combined_data = combined_data[admin_header + background_header + model_header + score_header]
+    
     # Turn pandas dataframe into a CSV
     combined_data.to_csv(response, encoding='utf-8', index=False)
 
