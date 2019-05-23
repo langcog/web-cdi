@@ -560,6 +560,7 @@ def find_paired_studies(request, username, study_group):
         models.When(instrument__language='English', then=models.Value('en')),
         models.When(instrument__language='Spanish', then=models.Value('es')),
         models.When(instrument__language='French Quebec', then=models.Value('fr_ca')),
+        models.When(instrument__language='Canadian English', then=models.Value('en_ca')),
     default=models.Value('en'), output_field=models.CharField())).order_by('min_age')
 
     first_study = study.objects.filter(study_group = study_group, researcher = researcher)[:1].get()
