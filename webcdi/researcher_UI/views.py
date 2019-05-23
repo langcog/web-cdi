@@ -36,7 +36,7 @@ def download_data(request, study_obj, administrations = None): # Download study 
     
     administrations = administrations if administrations is not None else administration.objects.filter(study = study_obj)
     model_header = get_model_header(study_obj.instrument.name) # Fetch the associated instrument model's variables
-    
+
     # Fetch administration variables
     admin_header = ['study_name', 'subject_id','repeat_num', 'administration_id', 'link', 'completed', 'completedBackgroundInfo', 'due_date', 'last_modified','created_date']
 
@@ -51,6 +51,13 @@ def download_data(request, study_obj, administrations = None): # Download study 
     except:
         melted_answers = pd.DataFrame(columns = get_model_header(study_obj.instrument.name))
 
+    # Change column headers from item ID to item's definition - note: should be gloss for comparison across languages
+    from cdi_forms.models import Instrument_Forms
+    new_headers = Instrument_Forms.objects.values('itemID', 'definition').filter(instrument=study_obj.instrument).distinct()
+    new_headers = {x['itemID'] : x['definition'] for x in new_headers}
+    model_header = [new_headers.get(n, n) for n in model_header]
+    melted_answers.rename(columns=new_headers, inplace=True)
+    
     # Format background data responses for pandas dataframe and eventual printing
     #try:
     background_data = BackgroundInfo.objects.values().filter(administration__in = administrations)
