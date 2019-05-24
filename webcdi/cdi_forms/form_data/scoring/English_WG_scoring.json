@@ -1,0 +1,72 @@
+[
+    {
+        "title" : "First Signs",
+        "category" : "first_signs",
+        "measure" : "yes"
+    },
+    {
+        "title" : "Phrases",
+        "category" : "phrases",
+        "measure" : "understands"
+    },
+    {
+        "title" : "Imitation",
+        "category" : "imitation",
+        "measure" : "sometimes;often"
+    },
+    {
+        "title" : "Labeling",
+        "category" : "label",
+        "measure" : "sometimes;often"
+    },
+    {
+        "title" : "Words Understood",
+        "category" : "word",
+        "measure" : "understands;produces"
+    },
+    {
+        "title" : "Words Produced",
+        "category" : "word",
+        "measure" : "produces"
+    },
+    {
+        "title" : "First Gestures",
+        "category" : "gestures_first",
+        "measure" : "sometimes;often"
+    },
+    {
+        "title" : "Games Gestures",
+        "category" : "gestures_games",
+        "measure" : "yes"
+    },
+    {
+        "title" : "Early Gestures",
+        "category" : "gestures_first;gestures_games",
+        "measure" : "sometimes;often;yes"
+    },
+    {
+        "title" : "Object Gestures",
+        "category" : "gestures_objects",
+        "measure" : "yes"
+    },
+    {
+        "title" : "Adult Gestures",
+        "category" : "gestures_adults",
+        "measure" : "yes"
+    },
+    {
+        "title" : "Parent Gestures",
+        "category" : "gestures_parents",
+        "measure" : "yes"
+    },
+    {
+        "title" : "Later Gestures",
+        "category" : "gestures_parents;gestures_adults;gestures_objects",
+        "measure" : "yes"
+    },
+    {
+        "title" : "Total Gestures",
+        "category" : "gestures_parents;gestures_adults;gestures_objects;gestures_first;gestures_games",
+        "measure" : "sometimes;often;yes"
+    }
+]

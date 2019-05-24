@@ -1,0 +1,47 @@
+[
+    {
+        "title" : "Total Produced",
+        "category" : "word",
+        "measure" : "produces"
+    },
+    {
+        "title" : "How Children Use Words",
+        "category" : "usage",
+        "measure" : "sometimes;often"
+    },
+    {
+        "title" : "Word Endings 1",
+        "category" : "word_endings_1",
+        "measure" : "produces"
+    },
+    {
+        "title" : "Word Forms 1 Nouns",
+        "category" : "word_forms_nouns_1",
+        "measure" : "produces"
+    },
+    {
+        "title" : "Word Forms 1 Verbs",
+        "category" : "word_forms_verbs_1",
+        "measure" : "produces"
+    },
+    {
+        "title" : "Word Forms 2 Nouns",
+        "category" : "word_endings_nouns_2",
+        "measure" : "produces"
+    },
+    {
+        "title" : "Word Forms 2 Verbs",
+        "category" : "word_endings_verbs_2",
+        "measure" : "produces"
+    },
+    {
+        "title" : "Combining",
+        "category" : "combine",
+        "measure" : "sometimes;often"
+    },
+    {
+        "title" : "Complexity",
+        "category" : "complex",
+        "measure" : "complex"
+    }
+]

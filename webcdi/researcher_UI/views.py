@@ -32,7 +32,8 @@ from django.utils import timezone
 def download_data(request, study_obj, administrations = None): # Download study data
     # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse(content_type='text/csv') # Format response as a CSV
-    response['Content-Disposition'] = 'attachment; filename='+study_obj.name+'_data.csv''' # Name the CSV response
+    filename = study_obj.name+'_data.csv'
+    response['Content-Disposition'] = 'attachment; filename="' + filename + '"'# Name the CSV response
     
     administrations = administrations if administrations is not None else administration.objects.filter(study = study_obj)
     model_header = get_model_header(study_obj.instrument.name) # Fetch the associated instrument model's variables
@@ -55,7 +56,6 @@ def download_data(request, study_obj, administrations = None): # Download study 
     from cdi_forms.models import Instrument_Forms
     new_headers = Instrument_Forms.objects.values('itemID', 'definition', 'gloss').filter(instrument=study_obj.instrument).distinct()
     new_headers = {x['itemID'] : x['gloss'] if len(x['gloss']) > 0 else x['definition'] for x in new_headers}
-    #new_headers = {x['itemID'] : x['definition'] for x in new_headers}
     model_header = [new_headers.get(n, n) for n in model_header]
     melted_answers.rename(columns=new_headers, inplace=True)
     
@@ -82,14 +82,28 @@ def download_data(request, study_obj, administrations = None): # Download study 
 
     # Add scoring
     scores = []
+    
+    score_forms = InstrumentScore.objects.filter(instrument=study_obj.instrument)
     score_header = []
+    for f in score_forms: # let's get the scoring headers
+        score_header.append(f.title)
+
     for administration_id in administrations:
-        scoring_dict = {'administration_id':administration_id.id}
+        scoring_dict = {'administration_id':administration_id.id}  # add administration_id so we know the respondent
+        #set each head in dictionary
+        for f in score_forms: #and ensure each score is at least 0
+            scoring_dict[f.title] = 0
         for administration_data_item in administration_data.objects.filter(administration_id=administration_id):
             inst = Instrument_Forms.objects.get(instrument=study_obj.instrument,itemID=administration_data_item.item_ID)
-            if not inst.item_type in scoring_dict: scoring_dict[inst.item_type] = 0
-            if not inst.item_type in score_header: score_header.append(inst.item_type)
-            if administration_data_item.value in ['produces','yes','sometimes','often','understands']: scoring_dict[inst.item_type] += 1
+            scoring_category = inst.scoring_category if inst.scoring_category else inst.item_type
+            print scoring_category
+            for f in score_forms: #items can be counted under multiple Titles check category against all categories
+                if scoring_category == 'imitation':
+                    print (f.category.split(';'))
+
+                if scoring_category in f.category.split(';'):
+                    if administration_data_item.value in f.measure.split(';'): #and check all values to see if we increment
+                        scoring_dict[f.title] += 1
         scores.append(scoring_dict)
     melted_scores = pd.DataFrame(scores)
     melted_scores.set_index('administration_id')

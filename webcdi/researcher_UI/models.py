@@ -122,3 +122,13 @@ class ip_address(models.Model):
     study = models.ForeignKey("study") # Study associated with IP address
     ip_address = models.CharField(max_length = 30) # Actual IP address
     date_added = models.DateTimeField(verbose_name = "Date IP address was added to database", auto_now_add = True) # Date that IP address was added to database.
+
+class InstrumentScore(models.Model):
+    '''
+    Class to store the instrument scoring mechanisms loaded from json files held in 
+    /cdi_forms/form_data/scoring/
+    '''
+    instrument = models.ForeignKey(instrument, on_delete=models.CASCADE)
+    title = models.CharField(max_length=101)
+    category = models.CharField(max_length=101)
+    measure = models.CharField(max_length=101)
