@@ -1,0 +1,27 @@
+[
+    {
+        "title" : "Total Produced",
+        "category" : "word",
+        "measure" : "produces"
+    },
+    {
+        "title" : "How Children Use Words",
+        "category" : "usage",
+        "measure" : "sometimes;often"
+    },
+    {
+        "title" : "Word Forms",
+        "category" : "word_forms",
+        "measure" : "produces"
+    },
+    {
+        "title" : "Combining",
+        "category" : "combine",
+        "measure" : "sometimes;often"
+    },
+    {
+        "title" : "Complexity",
+        "category" : "complex",
+        "measure" : "complex"
+    }
+]

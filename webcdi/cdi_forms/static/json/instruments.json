@@ -29,7 +29,7 @@
 		"max_age": 30,
 		"csv_file": "cdi_form_csv/[Spanish_WS].csv",
 		"json_data": "cdi_forms/form_data/Spanish_WS_meta.json",
-		"scoring_json" : "cdi_forms/form_data/scoring/English_WS_scoring.json"
+		"scoring_json" : "cdi_forms/form_data/scoring/Spanish_WS_scoring.json"
 	},
 	{
 		"language": "Spanish",
@@ -39,7 +39,7 @@
 		"max_age": 18,
 		"csv_file": "cdi_form_csv/[Spanish_WG].csv",
 		"json_data": "cdi_forms/form_data/Spanish_WG_meta.json",
-		"scoring_json" : "cdi_forms/form_data/scoring/English_WG_scoring.json"
+		"scoring_json" : "cdi_forms/form_data/scoring/Spanish_WG_scoring.json"
 	},
 	{
 		"language": "French Quebec",
@@ -49,7 +49,7 @@
 		"max_age": 30,
 		"csv_file": "cdi_form_csv/[French_Quebec_WS].csv",
 		"json_data": "cdi_forms/form_data/French_Quebec_WS_meta.json",
-		"scoring_json" : "cdi_forms/form_data/scoring/English_WS_scoring.json"
+		"scoring_json" : "cdi_forms/form_data/scoring/French_Quebec_WS_scoring.json"
 	},
 	{
 		"language": "French Quebec",
@@ -59,7 +59,7 @@
 		"max_age": 16,
 		"csv_file": "cdi_form_csv/[French_Quebec_WG].csv",
 		"json_data": "cdi_forms/form_data/French_Quebec_WG_meta.json",
-		"scoring_json" : "cdi_forms/form_data/scoring/English_WG_scoring.json"
+		"scoring_json" : "cdi_forms/form_data/scoring/French_Quebec_WG_scoring.json"
 	},
 	{
 		"language": "Canadian English",
@@ -69,7 +69,7 @@
 		"max_age": 30,
 		"csv_file": "cdi_form_csv/[Canadian_English_WS].csv",
 		"json_data": "cdi_forms/form_data/Canadian_English_WS_meta.json",
-		"scoring_json" : "cdi_forms/form_data/scoring/English_WS_scoring.json"
+		"scoring_json" : "cdi_forms/form_data/scoring/Canadian_English_WS_scoring.json"
 	},
 	{
 		"language": "Canadian English",
@@ -79,7 +79,7 @@
 		"max_age": 16,
 		"csv_file": "cdi_form_csv/[Canadian_English_WG].csv",
 		"json_data": "cdi_forms/form_data/Canadian_English_WG_meta.json",
-		"scoring_json" : "cdi_forms/form_data/scoring/English_WG_scoring.json"
+		"scoring_json" : "cdi_forms/form_data/scoring/Canadian_English_WG_scoring.json"
 	},	
 	{
 		"language": "English",
@@ -89,7 +89,7 @@
 		"max_age": 18,
 		"csv_file": "cdi_form_csv/[English_L1].csv",
 		"json_data": "cdi_forms/form_data/English_L1_meta.json",
-		"scoring_json" : "cdi_forms/form_data/scoring/English_WS_scoring.json"
+		"scoring_json" : "cdi_forms/form_data/scoring/English_L1_WS_scoring.json"
 	},
 	{
 		"language": "English",
@@ -99,7 +99,7 @@
 		"max_age": 30,
 		"csv_file": "cdi_form_csv/[English_L2A].csv",
 		"json_data": "cdi_forms/form_data/English_L2A_meta.json",
-		"scoring_json" : "cdi_forms/form_data/scoring/English_WS_scoring.json"
+		"scoring_json" : "cdi_forms/form_data/scoring/English_L2A_WS_scoring.json"
 	},
 	{
 		"language": "English",
@@ -109,6 +109,6 @@
 		"max_age": 30,
 		"csv_file": "cdi_form_csv/[English_L2B].csv",
 		"json_data": "cdi_forms/form_data/English_L2B_meta.json",
-		"scoring_json" : "cdi_forms/form_data/scoring/English_WS_scoring.json"
+		"scoring_json" : "cdi_forms/form_data/scoring/English_L2B_WS_scoring.json"
 	}
 ]

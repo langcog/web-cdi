@@ -1,0 +1,12 @@
+[
+    {
+        "title" : "Understands and Produces",
+        "category" : "word",
+        "measure" : "understands;produces"
+    },
+    {
+        "title" : "Understands",
+        "category" : "word",
+        "measure" : "understands"
+    }
+]

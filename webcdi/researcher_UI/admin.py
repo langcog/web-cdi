@@ -10,6 +10,11 @@ admin.site.register(administration_data)
 admin.site.register(researcher)
 
 
+class InstrumentScoreAdmin(admin.ModelAdmin):
+    list_display = ['instrument','title']
+    list_filter = ['instrument__language','instrument__form']
+admin.site.register(InstrumentScore,InstrumentScoreAdmin)
+
 class AdministrationSummaryAdmin(admin.ModelAdmin):
     change_list_template = 'admin/administration_summary_change_list.html'
     list_filter = ['completed','completedBackgroundInfo']

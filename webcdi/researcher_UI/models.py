@@ -132,3 +132,6 @@ class InstrumentScore(models.Model):
     title = models.CharField(max_length=101)
     category = models.CharField(max_length=101)
     measure = models.CharField(max_length=101)
+
+    def __unicode__(self):
+        return '%s: %s' % (self.instrument, self.title)

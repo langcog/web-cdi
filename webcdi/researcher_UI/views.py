@@ -96,11 +96,7 @@ def download_data(request, study_obj, administrations = None): # Download study 
         for administration_data_item in administration_data.objects.filter(administration_id=administration_id):
             inst = Instrument_Forms.objects.get(instrument=study_obj.instrument,itemID=administration_data_item.item_ID)
             scoring_category = inst.scoring_category if inst.scoring_category else inst.item_type
-            print scoring_category
             for f in score_forms: #items can be counted under multiple Titles check category against all categories
-                if scoring_category == 'imitation':
-                    print (f.category.split(';'))
-
                 if scoring_category in f.category.split(';'):
                     if administration_data_item.value in f.measure.split(';'): #and check all values to see if we increment
                         scoring_dict[f.title] += 1
