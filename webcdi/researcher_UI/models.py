@@ -123,6 +123,12 @@ class ip_address(models.Model):
     ip_address = models.CharField(max_length = 30) # Actual IP address
     date_added = models.DateTimeField(verbose_name = "Date IP address was added to database", auto_now_add = True) # Date that IP address was added to database.
 
+
+KIND_OPTIONS = (
+    ('count','count'),
+    ('list','list')
+)
+
 class InstrumentScore(models.Model):
     '''
     Class to store the instrument scoring mechanisms loaded from json files held in 
@@ -132,6 +138,11 @@ class InstrumentScore(models.Model):
     title = models.CharField(max_length=101)
     category = models.CharField(max_length=101)
     measure = models.CharField(max_length=101)
+    order = models.IntegerField(default=999)
+    kind = models.CharField(max_length=5, default="count", choices=KIND_OPTIONS) 
 
     def __unicode__(self):
         return '%s: %s' % (self.instrument, self.title)
+
+    class Meta:
+        ordering = ['instrument', 'order']

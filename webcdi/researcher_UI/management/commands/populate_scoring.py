@@ -58,5 +58,7 @@ class Command(BaseCommand):
                 data_dict = {
                     'category': score['category'],
                     'measure': score['measure'],
+                    'order':score['order'],
+                    'kind':score['kind'] if 'kind' in score else 'count'
                 }
                 row, created = InstrumentScore.objects.update_or_create(instrument = instrument_obj, title=score['title'], defaults=data_dict,)

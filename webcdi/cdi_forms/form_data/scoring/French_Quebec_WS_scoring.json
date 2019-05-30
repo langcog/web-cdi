@@ -2,46 +2,55 @@
     {
         "title" : "Total Produced",
         "category" : "word",
-        "measure" : "produces"
+        "measure" : "produces",
+        "order" : 1
     },
     {
         "title" : "How Children Use Words",
         "category" : "usage",
-        "measure" : "sometimes;often"
+        "measure" : "sometimes;often",
+        "order" : 2
     },
     {
         "title" : "Word Forms: Verb Tenses",
         "category" : "word_forms_verb_tenses",
-        "measure" : "produces"
+        "measure" : "produces",
+        "order" : 3
     },
     {
         "title" : "Word Forms: Verb Endings",
         "category" : "word_forms_verb_endings",
-        "measure" : "produces"
+        "measure" : "produces",
+        "order" : 4
     },
     {
         "title" : "Word Forms: Adjectives",
         "category" : "word_forms_adjectives",
-        "measure" : "yes"
+        "measure" : "yes",
+        "order" : 5
     },
     {
         "title" : "Combining",
         "category" : "combine",
-        "measure" : "sometimes;often"
+        "measure" : "sometimes;often",
+        "order" : 6
     },
     {
         "title" : "Complexity",
         "category" : "complex",
-        "measure" : "complex"
+        "measure" : "complex",
+        "order" : 7
     },
     {
         "title" : "Pronoun Usage: Pronoun",
         "category" : "pronoun_usage",
-        "measure" : "pronoun"
+        "measure" : "pronoun",
+        "order" : 8
     },
     {
         "title" : "Pronoun Usage: Article",
         "category" : "pronoun_usage",
-        "measure" : "article"
+        "measure" : "article",
+        "order" : 9
     }
 ]
