@@ -40,7 +40,9 @@ def populate_instrument(apps, schema_editor):
 
         sub_dict = {k: data_dict.get(k, None) for k in set.intersection(set(data_dict.keys()), set(instrument_fields))}
 
-        instrument_obj, created = instrument.objects.update_or_create(name = instrument_name, defaults=sub_dict,)
+        # try except added so it works
+        try: instrument_obj, created = instrument.objects.update_or_create(name = instrument_name, defaults=sub_dict,)
+        except: pass
 
 def populate_items(apps, schema_editor):
     PROJECT_ROOT = settings.BASE_DIR
@@ -63,7 +65,9 @@ def populate_items(apps, schema_editor):
         except FieldError:
             instrument_obj = instrument.objects.get(name=instrument_name)
 
-        instrument_model = apps.get_model(app_label='cdi_forms', model_name=instrument_obj.name)
+        # try except add so migration works
+        try: instrument_model = apps.get_model(app_label='cdi_forms', model_name=instrument_obj.name)
+        except: break
 
         ftype = curr_instrument['csv_file'].split('.')[-1]
 

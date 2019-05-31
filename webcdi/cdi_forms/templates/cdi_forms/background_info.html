@@ -267,6 +267,7 @@
 
     <script>
         function fastforward() {
+            $('#id_form_filler').val('mother');
             $('#id_child_dob').val(moment().subtract(17,'M').format(date_format.toUpperCase()))
             $('#id_sex_1').click();
             $('#id_country').val('US');
@@ -283,6 +284,7 @@
             }
 
             $('#id_born_on_due_date_1').click();
+            $('#id_primary_caregiver').val('mother');
             $('#id_mother_yob').val(1990);
             $('#id_mother_education').val(16);
             $('#id_father_yob').val(1990);

@@ -1,0 +1,92 @@
+[
+    {
+        "title" : "First Signs",
+        "category" : "first_signs",
+        "measure" : "yes",
+        "order" : 1
+    },
+    {
+        "title" : "Phrases",
+        "category" : "phrases",
+        "measure" : "understands",
+        "order" : 2
+    },
+    {
+        "title" : "Imitation",
+        "category" : "imitation",
+        "measure" : "sometimes;often",
+        "order" : 3
+    },
+    {
+        "title" : "Labeling",
+        "category" : "label",
+        "measure" : "sometimes;often",
+        "order" : 4
+    },
+    {
+        "title" : "Words Understood",
+        "category" : "word",
+        "measure" : "understands;produces",
+        "order" : 5
+    },
+    {
+        "title" : "Words Produced",
+        "category" : "word",
+        "measure" : "produces",
+        "order" : 6
+    },
+    {
+        "title" : "First Gestures",
+        "category" : "gestures_first",
+        "measure" : "yes",
+        "order" : 7
+    },
+    {
+        "title" : "Games Gestures",
+        "category" : "gestures_games",
+        "measure" : "yes",
+        "order" : 8
+    },
+    {
+        "title" : "Early Gestures",
+        "category" : "gestures_first;gestures_games",
+        "measure" : "yes",
+        "order" : 13
+    },
+    {
+        "title" : "Object Gestures",
+        "category" : "gestures_objects",
+        "measure" : "yes",
+        "order" : 10
+    },
+    {
+        "title" : "Adult Gestures",
+        "category" : "gestures_adults",
+        "measure" : "yes",
+        "order" : 11
+    },
+    {
+        "title" : "Parent Gestures",
+        "category" : "gestures_parents",
+        "measure" : "yes",
+        "order" : 12
+    },
+    {
+        "title" : "Later Gestures",
+        "category" : "gestures_parents;gestures_adults;gestures_objects",
+        "measure" : "yes",
+        "order" : 14
+    },
+    {
+        "title" : "Total Gestures",
+        "category" : "gestures_parents;gestures_adults;gestures_objects;gestures_first;gestures_games",
+        "measure" : "sometimes;often;yes",
+        "order" : 15
+    },
+    {
+        "title" : "Pretend",
+        "category" : "pretend",
+        "measure" : "yes",
+        "order" : 15
+    }
+]

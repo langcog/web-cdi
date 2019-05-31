@@ -7,15 +7,14 @@
 		"max_age": 30,
 		"csv_file": "cdi_form_csv/[English_WS].csv",
 		"json_data": "cdi_forms/form_data/English_WS_meta.json",
-		"fillable_headers": "cdi_form_csv/EnglishWS_pdf_headers.csv",
-		"scoring_json" : "cdi_forms/form_data/scoring/English_WS_scoring.json"
-	},
+		"fillable_headers": "cdi_form_csv/EnglishWS_pdf_headers.csv"
+	},	
 	{
 		"language": "English",
 		"form": "CDI3",
 		"verbose_name": "CDI-III",
-		"min_age": 30,
-		"max_age": 37,
+		"min_age": 16,
+		"max_age": 30,
 		"csv_file": "cdi_form_csv/[English_CDI3].csv",
 		"json_data": "cdi_forms/form_data/English_CDI3_meta.json"
 	},
@@ -27,8 +26,7 @@
 		"max_age": 18,
 		"csv_file": "cdi_form_csv/[English_WG].csv",
 		"json_data": "cdi_forms/form_data/English_WG_meta.json",
-		"fillable_headers": "cdi_form_csv/EnglishWG_pdf_headers.csv",
-		"scoring_json" : "cdi_forms/form_data/scoring/English_WG_scoring.json"
+		"fillable_headers": "cdi_form_csv/EnglishWG_pdf_headers.csv"
 	},
 	{
 		"language": "Spanish",
@@ -37,8 +35,7 @@
 		"min_age": 16,
 		"max_age": 30,
 		"csv_file": "cdi_form_csv/[Spanish_WS].csv",
-		"json_data": "cdi_forms/form_data/Spanish_WS_meta.json",
-		"scoring_json" : "cdi_forms/form_data/scoring/Spanish_WS_scoring.json"
+		"json_data": "cdi_forms/form_data/Spanish_WS_meta.json"
 	},
 	{
 		"language": "Spanish",
@@ -47,8 +44,7 @@
 		"min_age": 8,
 		"max_age": 18,
 		"csv_file": "cdi_form_csv/[Spanish_WG].csv",
-		"json_data": "cdi_forms/form_data/Spanish_WG_meta.json",
-		"scoring_json" : "cdi_forms/form_data/scoring/Spanish_WG_scoring.json"
+		"json_data": "cdi_forms/form_data/Spanish_WG_meta.json"
 	},
 	{
 		"language": "French Quebec",
@@ -57,8 +53,7 @@
 		"min_age": 16,
 		"max_age": 30,
 		"csv_file": "cdi_form_csv/[French_Quebec_WS].csv",
-		"json_data": "cdi_forms/form_data/French_Quebec_WS_meta.json",
-		"scoring_json" : "cdi_forms/form_data/scoring/French_Quebec_WS_scoring.json"
+		"json_data": "cdi_forms/form_data/French_Quebec_WS_meta.json"
 	},
 	{
 		"language": "French Quebec",
@@ -67,8 +62,7 @@
 		"min_age": 8,
 		"max_age": 16,
 		"csv_file": "cdi_form_csv/[French_Quebec_WG].csv",
-		"json_data": "cdi_forms/form_data/French_Quebec_WG_meta.json",
-		"scoring_json" : "cdi_forms/form_data/scoring/French_Quebec_WG_scoring.json"
+		"json_data": "cdi_forms/form_data/French_Quebec_WG_meta.json"
 	},
 	{
 		"language": "Canadian English",
@@ -77,8 +71,7 @@
 		"min_age": 16,
 		"max_age": 30,
 		"csv_file": "cdi_form_csv/[Canadian_English_WS].csv",
-		"json_data": "cdi_forms/form_data/Canadian_English_WS_meta.json",
-		"scoring_json" : "cdi_forms/form_data/scoring/Canadian_English_WS_scoring.json"
+		"json_data": "cdi_forms/form_data/Canadian_English_WS_meta.json"
 	},
 	{
 		"language": "Canadian English",
@@ -87,9 +80,8 @@
 		"min_age": 8,
 		"max_age": 16,
 		"csv_file": "cdi_form_csv/[Canadian_English_WG].csv",
-		"json_data": "cdi_forms/form_data/Canadian_English_WG_meta.json",
-		"scoring_json" : "cdi_forms/form_data/scoring/Canadian_English_WG_scoring.json"
-	},	
+		"json_data": "cdi_forms/form_data/Canadian_English_WG_meta.json"
+	},
 	{
 		"language": "English",
 		"form": "L1",
@@ -97,8 +89,7 @@
 		"min_age": 8,
 		"max_age": 18,
 		"csv_file": "cdi_form_csv/[English_L1].csv",
-		"json_data": "cdi_forms/form_data/English_L1_meta.json",
-		"scoring_json" : "cdi_forms/form_data/scoring/English_L1_WS_scoring.json"
+		"json_data": "cdi_forms/form_data/English_L1_meta.json"
 	},
 	{
 		"language": "English",
@@ -107,8 +98,7 @@
 		"min_age": 16,
 		"max_age": 30,
 		"csv_file": "cdi_form_csv/[English_L2A].csv",
-		"json_data": "cdi_forms/form_data/English_L2A_meta.json",
-		"scoring_json" : "cdi_forms/form_data/scoring/English_L2A_WS_scoring.json"
+		"json_data": "cdi_forms/form_data/English_L2A_meta.json"
 	},
 	{
 		"language": "English",
@@ -117,7 +107,6 @@
 		"min_age": 16,
 		"max_age": 30,
 		"csv_file": "cdi_form_csv/[English_L2B].csv",
-		"json_data": "cdi_forms/form_data/English_L2B_meta.json",
-		"scoring_json" : "cdi_forms/form_data/scoring/English_L2B_WS_scoring.json"
+		"json_data": "cdi_forms/form_data/English_L2B_meta.json"
 	}
 ]

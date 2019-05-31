@@ -25,18 +25,19 @@ from psycopg2.extras import NumericRange
 from django.conf import settings
 from django.utils import timezone
 
-
+from cdi_forms.models import Instrument_Forms
 
 
 @login_required # For researchers only, requires user to be logged in (test-takers do not have an account and are blocked from this interface)
 def download_data(request, study_obj, administrations = None): # Download study data
     # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse(content_type='text/csv') # Format response as a CSV
-    response['Content-Disposition'] = 'attachment; filename='+study_obj.name+'_data.csv''' # Name the CSV response
+    filename = study_obj.name+'_items.csv'
+    response['Content-Disposition'] = 'attachment; filename="' + filename + '"'# Name the CSV response
     
     administrations = administrations if administrations is not None else administration.objects.filter(study = study_obj)
     model_header = get_model_header(study_obj.instrument.name) # Fetch the associated instrument model's variables
-    
+
     # Fetch administration variables
     admin_header = ['study_name', 'subject_id','repeat_num', 'administration_id', 'link', 'completed', 'completedBackgroundInfo', 'due_date', 'last_modified','created_date']
 
@@ -50,6 +51,115 @@ def download_data(request, study_obj, administrations = None): # Download study 
         melted_answers.reset_index(level=0, inplace=True)
     except:
         melted_answers = pd.DataFrame(columns = get_model_header(study_obj.instrument.name))
+
+    # Change column headers from item ID to item's definition - note: should be gloss for comparison across languages
+    
+    new_headers = Instrument_Forms.objects.values('itemID', 'definition', 'gloss').filter(instrument=study_obj.instrument).distinct()
+    new_headers = {x['itemID'] : x['gloss'] if len(x['gloss']) > 0 else x['definition'] if len(x['definition']) > 0 else x['itemID'] for x in new_headers}
+    model_header = [new_headers.get(n, n) for n in model_header]
+    melted_answers.rename(columns=new_headers, inplace=True)
+    
+    # Format background data responses for pandas dataframe and eventual printing
+    #try:
+    background_data = BackgroundInfo.objects.values().filter(administration__in = administrations)
+
+    BI_choices = {}
+
+    fields = BackgroundInfo._meta.get_fields()
+    for field in fields:
+        if field.choices:
+            field_choices = dict(field.choices)
+            for k, v in field_choices.items():
+                if unicode(k) == unicode(v):
+                    field_choices.pop(k, None)
+            BI_choices[field.name] = {unicode(k):unicode(v) for k,v in field_choices.items()}
+
+    new_background = pd.DataFrame.from_records(background_data).astype(unicode).replace(BI_choices)
+    new_background['administration_id'] = new_background['administration_id'].astype('int64')
+
+    #except:
+    #    new_background = pd.DataFrame(columns = ['administration_id'] + background_header)
+
+    # Add scoring
+    scores = []
+    
+    score_forms = InstrumentScore.objects.filter(instrument=study_obj.instrument)
+    score_header = []
+    for f in score_forms: # let's get the scoring headers
+        score_header.append(f.title)
+
+    for administration_id in administrations:
+        scoring_dict = {'administration_id':administration_id.id}  # add administration_id so we know the respondent
+        #set each head in dictionary
+        for f in score_forms: #and ensure each score is at least 0
+            if f.kind == 'count' : scoring_dict[f.title] = 0
+            else : scoring_dict[f.title] = ''
+        for administration_data_item in administration_data.objects.filter(administration_id=administration_id):
+            inst = Instrument_Forms.objects.get(instrument=study_obj.instrument,itemID=administration_data_item.item_ID)
+            scoring_category = inst.scoring_category if inst.scoring_category else inst.item_type
+            for f in score_forms: #items can be counted under multiple Titles check category against all categories
+                if f.kind == "count" :
+                    if scoring_category in f.category.split(';'):
+                        if administration_data_item.value in f.measure.split(';'): #and check all values to see if we increment
+                            scoring_dict[f.title] += 1
+                else : 
+                    if scoring_category in f.category.split(';'):
+                        scoring_dict[f.title] +=  administration_data_item.value + '\n'
+        scores.append(scoring_dict)
+    melted_scores = pd.DataFrame(scores)
+    melted_scores.set_index('administration_id')
+    
+    # Try to combine background data and CDI responses
+    try:
+        background_answers1 = pd.merge(new_background, melted_answers, how='outer', on = 'administration_id')
+        background_answers = pd.merge(background_answers1, melted_scores, how='outer', on = 'administration_id')
+    except:
+        background_answers = pd.DataFrame(columns = list(new_background) + list(melted_answers) + list(melted_scores))
+    
+    # Try to format administration data for pandas dataframe
+    try:
+        admin_data = pd.DataFrame.from_records(administrations.values()).rename(columns = {'id':'administration_id', 'study_id': 'study_name', 'url_hash': 'link'})
+    except:
+        admin_data = pd.DataFrame(columns = admin_header)
+    
+    # Replace study ID# with actual study name
+    admin_data['study_name'] = study_obj.name
+
+    # Merge administration data into already combined background/CDI form dataframe
+    combined_data = pd.merge(admin_data, background_answers, how='outer', on = 'administration_id')
+
+    # Recreate link for administration
+    test_url = ''.join(['http://', get_current_site(request).domain, reverse('administer_cdi_form', args=['a'*64])]).replace('a'*64+'/','')
+    combined_data['link'] = test_url + combined_data['link']
+
+    # If there are any missing columns (e.g., all test-takers for one study did not answer an item so it does not appear in database responses), add the empty columns in and don't break!
+    missing_columns = list(set(model_header) - set(combined_data.columns))
+    if missing_columns:
+        combined_data = combined_data.reindex(columns=np.append(combined_data.columns.values, missing_columns))
+
+    # Organize columns  
+    combined_data = combined_data[admin_header + background_header + model_header + score_header]
+    
+    # Turn pandas dataframe into a CSV
+    combined_data.to_csv(response, encoding='utf-8', index=False)
+
+    # Return CSV
+    return response
+
+@login_required # For researchers only, requires user to be logged in (test-takers do not have an account and are blocked from this interface)
+def download_summary(request, study_obj, administrations = None): # Download study data
+    # Create the HttpResponse object with the appropriate CSV header.
+    response = HttpResponse(content_type='text/csv') # Format response as a CSV
+    filename = study_obj.name+'_summary.csv'
+    response['Content-Disposition'] = 'attachment; filename="' + filename + '"'# Name the CSV response
+    
+    administrations = administrations if administrations is not None else administration.objects.filter(study = study_obj)
+
+    # Fetch administration variables
+    admin_header = ['study_name', 'subject_id','repeat_num', 'administration_id', 'link', 'completed', 'completedBackgroundInfo', 'due_date', 'last_modified','created_date']
+
+    # Fetch background data variables
+    background_header = ['age','sex','zip_code','birth_order', 'birth_weight_lb', 'birth_weight_kg','multi_birth_boolean','multi_birth', 'born_on_due_date', 'early_or_late', 'due_date_diff', 'mother_yob', 'mother_education','father_yob', 'father_education', 'annual_income', 'child_hispanic_latino', 'child_ethnicity', 'caregiver_info', 'other_languages_boolean','other_languages','language_from', 'language_days_per_week', 'language_hours_per_day', 'ear_infections_boolean','ear_infections', 'hearing_loss_boolean','hearing_loss', 'vision_problems_boolean','vision_problems', 'illnesses_boolean','illnesses', 'services_boolean','services','worried_boolean','worried','learning_disability_boolean','learning_disability']
 
     # Format background data responses for pandas dataframe and eventual printing
     #try:
@@ -72,13 +182,41 @@ def download_data(request, study_obj, administrations = None): # Download study 
     #except:
     #    new_background = pd.DataFrame(columns = ['administration_id'] + background_header)
 
+    # Add scoring
+    scores = []
+    
+    score_forms = InstrumentScore.objects.filter(instrument=study_obj.instrument)
+    score_header = []
+    for f in score_forms: # let's get the scoring headers
+        score_header.append(f.title)
 
+    for administration_id in administrations:
+        scoring_dict = {'administration_id':administration_id.id}  # add administration_id so we know the respondent
+        #set each head in dictionary
+        for f in score_forms: #and ensure each score is at least 0
+            if f.kind == 'count' : scoring_dict[f.title] = 0
+            else : scoring_dict[f.title] = ''
+        for administration_data_item in administration_data.objects.filter(administration_id=administration_id):
+            inst = Instrument_Forms.objects.get(instrument=study_obj.instrument,itemID=administration_data_item.item_ID)
+            scoring_category = inst.scoring_category if inst.scoring_category else inst.item_type
+            for f in score_forms: #items can be counted under multiple Titles check category against all categories
+                if f.kind == "count" :
+                    if scoring_category in f.category.split(';'):
+                        if administration_data_item.value in f.measure.split(';'): #and check all values to see if we increment
+                            scoring_dict[f.title] += 1
+                else : 
+                    if scoring_category in f.category.split(';'):
+                        scoring_dict[f.title] +=  administration_data_item.value + '\n'
+        scores.append(scoring_dict)
+    melted_scores = pd.DataFrame(scores)
+    melted_scores.set_index('administration_id')
+    
     # Try to combine background data and CDI responses
     try:
-        background_answers = pd.merge(new_background, melted_answers, how='outer', on = 'administration_id')
+        background_answers = pd.merge(new_background, melted_scores, how='outer', on = 'administration_id')
     except:
-        background_answers = pd.DataFrame(columns = list(new_background) + list(melted_answers))
-
+        background_answers = pd.DataFrame(columns = list(new_background) + list(melted_scores))
+    
     # Try to format administration data for pandas dataframe
     try:
         admin_data = pd.DataFrame.from_records(administrations.values()).rename(columns = {'id':'administration_id', 'study_id': 'study_name', 'url_hash': 'link'})
@@ -95,20 +233,14 @@ def download_data(request, study_obj, administrations = None): # Download study 
     test_url = ''.join(['http://', get_current_site(request).domain, reverse('administer_cdi_form', args=['a'*64])]).replace('a'*64+'/','')
     combined_data['link'] = test_url + combined_data['link']
 
-    # If there are any missing columns (e.g., all test-takers for one study did not answer an item so it does not appear in database responses), add the empty columns in and don't break!
-    missing_columns = list(set(model_header) - set(combined_data.columns))
-    if missing_columns:
-        combined_data = combined_data.reindex(columns = np.append( combined_data.columns.values, missing_columns))
-
     # Organize columns  
-    combined_data = combined_data[admin_header + background_header + model_header ]
-
+    combined_data = combined_data[admin_header + background_header + score_header]
+    
     # Turn pandas dataframe into a CSV
     combined_data.to_csv(response, encoding='utf-8', index=False)
 
     # Return CSV
     return response
-
 
 @login_required
 def download_dictionary(request, study_obj): # Download dictionary for instrument, lists relevant information for each item
@@ -260,6 +392,12 @@ def console(request, study_name = None, num_per_page = 20): # Main giant functio
                     administrations = administration.objects.filter(id__in = num_ids) # Grab a queryset of administration objects with administration IDs found in list
                     return download_data(request, study_obj, administrations) # Send queryset to download_data function to return a CSV of subject data
                     refresh = True # Refresh page to reflect table changes
+                
+                elif 'download-selected-summary' in request.POST: # If 'Download Selected Data' was clicked
+                    num_ids = list(set(map(int, ids))) # Force IDs into a list of integers
+                    administrations = administration.objects.filter(id__in = num_ids) # Grab a queryset of administration objects with administration IDs found in list
+                    return download_summary(request, study_obj, administrations) # Send queryset to download_data function to return a CSV of subject data
+                    refresh = True # Refresh page to reflect table changes
 
                 elif 'delete-study' in request.POST: # If 'Delete Study' button is clicked
                     study_obj.active = False # soft delete
@@ -270,6 +408,10 @@ def console(request, study_name = None, num_per_page = 20): # Main giant functio
                 elif 'download-study-csv' in request.POST: # If 'Download Data' button is clicked
                     administrations = administration.objects.filter(study = study_obj) # Grab a queryset of administration objects within study
                     return download_data(request, study_obj, administrations) # Send queryset to download_data and receive a CSV of responses
+                
+                elif 'download-summary-csv' in request.POST: # If 'Download Summary' button is clicked
+                    administrations = administration.objects.filter(study = study_obj) # Grab a queryset of administration objects within study
+                    return download_summary(request, study_obj, administrations) # Send queryset to download_data and receive a CSV of responses
                 
                 elif 'download-study-scoring' in request.POST: # If 'Download Data' button is clicked
                     administrations = administration.objects.filter(study = study_obj) # Grab a queryset of administration objects within study
