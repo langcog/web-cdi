@@ -91,7 +91,7 @@
                         $('#due_time').html("<p><b> {% trans 'Due date' %} </b>: <span>" + due_date_local + "</span></p>");
                         </script>
 
-                        <!-- If study has an associated body of text in it's waiver field, gives option to pull up a modal window containing the waiver text by clicking button -->
+                        <!-- If study has an associated body of text in its waiver field, gives option to pull up a modal window containing the waiver text by clicking button -->
                         {% if study_waiver and study_waiver != "" %}
                             <a href="#" id="show_waiver" onclick = "$('#consent_waiver').modal('show');"> {% trans "Show waiver of documentation" %} </a><br>
                         {% endif %}

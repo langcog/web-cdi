@@ -74,7 +74,7 @@ def download_data(request, study_obj, administrations = None): # Download study 
                     field_choices.pop(k, None)
             BI_choices[field.name] = {unicode(k):unicode(v) for k,v in field_choices.items()}
 
-    new_background = pd.DataFrame.from_records(background_data).astype(str).replace(BI_choices)
+    new_background = pd.DataFrame.from_records(background_data).astype(unicode).replace(BI_choices)
     new_background['administration_id'] = new_background['administration_id'].astype('int64')
 
     #except:
