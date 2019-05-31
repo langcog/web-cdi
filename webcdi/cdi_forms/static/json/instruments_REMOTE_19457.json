@@ -12,15 +12,6 @@
 	},
 	{
 		"language": "English",
-		"form": "CDI3",
-		"verbose_name": "CDI-III",
-		"min_age": 30,
-		"max_age": 37,
-		"csv_file": "cdi_form_csv/[English_CDI3].csv",
-		"json_data": "cdi_forms/form_data/English_CDI3_meta.json"
-	},
-	{
-		"language": "English",
 		"form": "WG",
 		"verbose_name": "Words and Gestures",
 		"min_age": 8,
