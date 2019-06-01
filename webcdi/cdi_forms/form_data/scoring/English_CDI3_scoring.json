@@ -4,5 +4,30 @@
         "category" : "word",
         "measure" : "produces",
         "order" : 1
+    },
+    {
+        "title" : "Combining",
+        "category" : "combine",
+        "measure" : "sometimes;often",
+        "order" : 2
+    },
+    {
+        "title" : "Complexity",
+        "category" : "complexity",
+        "measure" : "complex",
+        "order" : 3
+    },
+    {
+        "title" : "How to User Words",
+        "category" : "usage",
+        "measure" : "yes",
+        "order" : 4
+    },
+    {
+        "title" : "Combination Examples",
+        "category" : "combination_examples",
+        "measure" : "complex",
+        "order" : 10,
+        "kind" : "list"
     }
 ]
