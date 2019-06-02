@@ -8,7 +8,7 @@ from django.db.models import Count
 admin.site.register(instrument)
 admin.site.register(administration_data)
 admin.site.register(researcher)
-
+admin.site.register(Benchmark)
 
 class InstrumentScoreAdmin(admin.ModelAdmin):
     list_display = ['instrument','title']

@@ -8,7 +8,8 @@
 		"csv_file": "cdi_form_csv/[English_WS].csv",
 		"json_data": "cdi_forms/form_data/English_WS_meta.json",
 		"fillable_headers": "cdi_form_csv/EnglishWS_pdf_headers.csv",
-		"scoring_json" : "cdi_forms/form_data/scoring/English_WS_scoring.json"
+		"scoring_json" : "cdi_forms/form_data/scoring/English_WS_scoring.json",
+		"benchmark" : "cdi_forms/form_data/benchmarking/English_WS_benchmark.csv"
 	},	
 	{
 		"language": "English",

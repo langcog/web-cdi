@@ -146,3 +146,22 @@ class InstrumentScore(models.Model):
 
     class Meta:
         ordering = ['instrument', 'order']
+
+class Benchmark(models.Model):
+    '''
+    Class to store benchmark data for each instrument and score.
+    Data is loaded from csv files held in /cdi_forms/form_data/benchmarking/
+    '''
+    instrument = models.ForeignKey(instrument, on_delete=models.CASCADE)
+    instrument_score = models.ForeignKey(InstrumentScore, on_delete=models.CASCADE)
+    percentile = models.IntegerField()
+    age = models.IntegerField()
+    raw_score = models.IntegerField()
+    percentile_boy = models.IntegerField()
+    percentile_girl = models.IntegerField()
+
+    def __unicode__(self):
+        return '%s : %s : %s' % (self.instrument_score, self.percentile, self.age)
+
+    class Meta:
+        ordering = ['instrument_score','age','raw_score']

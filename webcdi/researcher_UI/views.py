@@ -176,7 +176,7 @@ def download_summary(request, study_obj, administrations = None): # Download stu
                     field_choices.pop(k, None)
             BI_choices[field.name] = {unicode(k):unicode(v) for k,v in field_choices.items()}
 
-    new_background = pd.DataFrame.from_records(background_data).astype(str).replace(BI_choices)
+    new_background = pd.DataFrame.from_records(background_data).astype(unicode).replace(BI_choices)
     new_background['administration_id'] = new_background['administration_id'].astype('int64')
 
     #except:
@@ -189,6 +189,9 @@ def download_summary(request, study_obj, administrations = None): # Download stu
     score_header = []
     for f in score_forms: # let's get the scoring headers
         score_header.append(f.title)
+        if Benchmark.objects.filter(instrument_score=f).exists():
+            score_header.append(f.title + ' Percentile-sex')
+            score_header.append(f.title + ' Percentile-both')
 
     for administration_id in administrations:
         scoring_dict = {'administration_id':administration_id.id}  # add administration_id so we know the respondent
@@ -196,6 +199,12 @@ def download_summary(request, study_obj, administrations = None): # Download stu
         for f in score_forms: #and ensure each score is at least 0
             if f.kind == 'count' : scoring_dict[f.title] = 0
             else : scoring_dict[f.title] = ''
+            
+            #add benchmark titles
+            if Benchmark.objects.filter(instrument_score=f).exists():
+                scoring_dict[f.title + ' Percentile-sex'] = 0
+                scoring_dict[f.title + ' Percentile-both'] = 0
+            
         for administration_data_item in administration_data.objects.filter(administration_id=administration_id):
             inst = Instrument_Forms.objects.get(instrument=study_obj.instrument,itemID=administration_data_item.item_ID)
             scoring_category = inst.scoring_category if inst.scoring_category else inst.item_type
@@ -207,6 +216,22 @@ def download_summary(request, study_obj, administrations = None): # Download stu
                 else : 
                     if scoring_category in f.category.split(';'):
                         scoring_dict[f.title] +=  administration_data_item.value + '\n'
+
+        # now add in the benchmark scores
+        try:
+            sex = BackgroundInfo.objects.get(administration=administration_id).sex
+            age = BackgroundInfo.objects.get(administration=administration_id).age
+            for f in score_forms:
+                if Benchmark.objects.filter(instrument_score=f, age=age).exists():
+                    benchmarks = Benchmark.objects.filter(instrument_score=f, age=age)
+                    raw_score = scoring_dict[f.title]
+                    benchmark = benchmarks[0]
+                    for b in benchmarks:
+                        if b.raw_score < raw_score: benchmark = b
+                    if sex == 'M':scoring_dict[f.title + ' Percentile-sex'] = benchmark.percentile_boy
+                    if sex == 'F':scoring_dict[f.title + ' Percentile-sex'] = benchmark.percentile_girl
+                    scoring_dict[f.title + ' Percentile-both'] = benchmark.percentile
+        except: pass
         scores.append(scoring_dict)
     melted_scores = pd.DataFrame(scores)
     melted_scores.set_index('administration_id')
@@ -880,7 +905,7 @@ def administer_new_parent(request, username, study_name): # For creating single 
         new_admin = administration.objects.create(study =study_obj, subject_id = max_subject_id+1, repeat_num = 1, url_hash = random_url_generator(), completed = False, due_date = datetime.datetime.now()+datetime.timedelta(days=test_period)) # Create an administration object for participant within database
         new_hash_id = new_admin.url_hash # Note the generated hash ID
         if bypass: # If the user explicitly wanted to continue with the test despite being told they would not be compensated
-            new_admin.bypass = True # Mark administation object with 'bypass'
+            new_admin.bypass = True # Mark administration object with 'bypass'
             new_admin.save() # Update object in database
         redirect_url = reverse('administer_cdi_form', args=[new_hash_id]) # Generate the administration URL given the object's hash ID
     else: # If not marked as allowed
