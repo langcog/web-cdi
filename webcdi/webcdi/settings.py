@@ -49,7 +49,6 @@ except ImportError:
 # DEBUG = False
 
 DEBUG = bool(os.environ.get('DEBUG', False))
-DEBUG = True
 TEMPLATE_DEBUG = False
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
