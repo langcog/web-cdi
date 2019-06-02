@@ -148,6 +148,7 @@ def download_data(request, study_obj, administrations = None): # Download study 
 
 @login_required # For researchers only, requires user to be logged in (test-takers do not have an account and are blocked from this interface)
 def download_summary(request, study_obj, administrations = None): # Download study data
+    start_time = datetime.datetime.now()
     # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse(content_type='text/csv') # Format response as a CSV
     filename = study_obj.name+'_summary.csv'
@@ -218,6 +219,7 @@ def download_summary(request, study_obj, administrations = None): # Download stu
                         scoring_dict[f.title] +=  administration_data_item.value + '\n'
 
         # now add in the benchmark scores
+        
         try:
             sex = BackgroundInfo.objects.get(administration=administration_id).sex
             age = BackgroundInfo.objects.get(administration=administration_id).age
@@ -232,6 +234,7 @@ def download_summary(request, study_obj, administrations = None): # Download stu
                     if sex == 'F':scoring_dict[f.title + ' Percentile-sex'] = benchmark.percentile_girl
                     scoring_dict[f.title + ' Percentile-both'] = benchmark.percentile
         except: pass
+        
         scores.append(scoring_dict)
     melted_scores = pd.DataFrame(scores)
     melted_scores.set_index('administration_id')
@@ -265,6 +268,8 @@ def download_summary(request, study_obj, administrations = None): # Download stu
     combined_data.to_csv(response, encoding='utf-8', index=False)
 
     # Return CSV
+    end_time = datetime.datetime.now()
+    print(end_time-start_time)
     return response
 
 @login_required
