@@ -48,7 +48,7 @@ def populate_items(apps, schema_editor):
     PROJECT_ROOT = settings.BASE_DIR
     input_instruments = json.load(open(os.path.realpath(PROJECT_ROOT + '/static/json/instruments.json')))
     instrument = apps.get_model('researcher_UI', 'instrument')
-    var_safe = lambda s: ''.join([c for c in '_'.join(s.split()) if c in string.letters + '_'])
+    var_safe = lambda s: ''.join([c for c in '_'.join(s.split()) if c in string.letters + string.digits + '_'])
 
     try:
         Choices = apps.get_model('cdi_forms', 'Choices')
