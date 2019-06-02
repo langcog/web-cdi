@@ -92,8 +92,10 @@ class Command(BaseCommand):
 
                     if 'scoring_category' in col_names:
                         scoring_category = row_values[col_names.index('scoring_category')]
+                        if len(scoring_category) < 1:
+                            scoring_category = item_type
                     else:
-                        scoring_category = None                        
+                        scoring_category = item_type                        
 
                     data_dict = {'item': item,
                                  'item_type': item_type,

@@ -193,33 +193,28 @@ def download_summary(request, study_obj, administrations = None): # Download stu
         if Benchmark.objects.filter(instrument_score=f).exists():
             score_header.append(f.title + ' Percentile-sex')
             score_header.append(f.title + ' Percentile-both')
-
+    
     for administration_id in administrations:
         scoring_dict = {'administration_id':administration_id.id}  # add administration_id so we know the respondent
         #set each head in dictionary
         for f in score_forms: #and ensure each score is at least 0
-            if f.kind == 'count' : scoring_dict[f.title] = 0
-            else : scoring_dict[f.title] = ''
+            insts = Instrument_Forms.objects.filter(instrument=study_obj.instrument, scoring_category__in=f.category.split(';'))
+            insts_IDs = []
+            for inst in insts: insts_IDs.append(inst.itemID)
+            if f.kind == 'count' : 
+                scoring_dict[f.title] = administration_data.objects.filter(administration_id=administration_id, value__in=f.measure.split(';'), item_ID__in=insts_IDs).count()
+            else : 
+                items = administration_data.objects.filter(administration_id=administration_id, item_ID__in=insts_IDs)
+                scoring_dict[f.title] = ''
+                for item in items :
+                    scoring_dict[f.title] +=  item.value + '\n'
             
             #add benchmark titles
             if Benchmark.objects.filter(instrument_score=f).exists():
                 scoring_dict[f.title + ' Percentile-sex'] = 0
                 scoring_dict[f.title + ' Percentile-both'] = 0
             
-        for administration_data_item in administration_data.objects.filter(administration_id=administration_id):
-            inst = Instrument_Forms.objects.get(instrument=study_obj.instrument,itemID=administration_data_item.item_ID)
-            scoring_category = inst.scoring_category if inst.scoring_category else inst.item_type
-            for f in score_forms: #items can be counted under multiple Titles check category against all categories
-                if f.kind == "count" :
-                    if scoring_category in f.category.split(';'):
-                        if administration_data_item.value in f.measure.split(';'): #and check all values to see if we increment
-                            scoring_dict[f.title] += 1
-                else : 
-                    if scoring_category in f.category.split(';'):
-                        scoring_dict[f.title] +=  administration_data_item.value + '\n'
-
         # now add in the benchmark scores
-        
         try:
             sex = BackgroundInfo.objects.get(administration=administration_id).sex
             age = BackgroundInfo.objects.get(administration=administration_id).age
