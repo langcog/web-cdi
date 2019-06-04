@@ -10,13 +10,13 @@
 		"fillable_headers": "cdi_form_csv/EnglishWS_pdf_headers.csv",
 		"scoring_json" : "cdi_forms/form_data/scoring/English_WS_scoring.json",
 		"benchmark" : "cdi_forms/form_data/benchmarking/English_WS_benchmark.csv"
-	},
+	},	
 	{
 		"language": "English",
 		"form": "CDI3",
 		"verbose_name": "CDI-III",
-		"min_age": 30,
-		"max_age": 37,
+		"min_age": 16,
+		"max_age": 30,
 		"csv_file": "cdi_form_csv/[English_CDI3].csv",
 		"json_data": "cdi_forms/form_data/English_CDI3_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/English_CDI3_scoring.json"	
