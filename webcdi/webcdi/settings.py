@@ -228,3 +228,5 @@ COUNTRIES_FIRST = [
 
 if SITE_ID == 3: USER_ADMIN_EMAIL = 'henrymehta@hotmail.com'
 else : USER_ADMIN_EMAIL = 'webcdi-contact@stanford.edu'
+
+CSRF_TRUSTED_ORIGINS = ('web-cdi-dev2.mfpemr5vcz.us-west-2.elasticbeanstalk.com',)
