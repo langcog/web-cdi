@@ -62,7 +62,7 @@ MANAGERS = ADMINS
 
 ALLOWED_HOSTS = ['web-cdi-dev5.mfpemr5vcz.us-west-2.elasticbeanstalk.com','localhost', '127.0.0.1','52.32.108.131','webcdi-dev.us-west-2.elasticbeanstalk.com','webcdi-prod.us-west-2.elasticbeanstalk.com', 'webcdi.stanford.edu', 'webcdi-dev.stanford.edu', '.elb.amazonaws.com']
 
-IPS_TO_ADD = ['web-cdi-dev5.mfpemr5vcz.us-west-2.elasticbeanstalk.com','webcdi-dev.us-west-2.elasticbeanstalk.com', 'webcdi-prod.us-west-2.elasticbeanstalk.com', 'webcdi.stanford.edu', socket.gethostname()]
+IPS_TO_ADD = ['webcdi-dev.us-west-2.elasticbeanstalk.com', 'webcdi-prod.us-west-2.elasticbeanstalk.com', 'webcdi.stanford.edu', socket.gethostname()]
 
 NEW_IPS = set()
 
