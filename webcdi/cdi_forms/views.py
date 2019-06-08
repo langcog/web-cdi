@@ -304,7 +304,6 @@ def prefilled_cdi_data(administration_instance):
                         if "type" not in section:
                             section['type'] = item_type['type']
                         x = cdi_items(group_objects, section['type'], prefilled_data, item_type['id'])
-                        
                         section['objects'] = x
                         if administration_instance.study.show_feedback: raw_objects.extend(x)
                         if any(['*' in x['definition'] for x in section['objects']]):

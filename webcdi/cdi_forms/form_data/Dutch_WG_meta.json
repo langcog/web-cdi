@@ -112,7 +112,6 @@
     },
     {
       "id": 2,
-      "title": "DEEL 2: Acties en gebaren",
       "types": [
         {
           "id": "first_gestures",
@@ -154,7 +153,8 @@
           "text": "Als kinderen aan het spelen zijn, gebruiken ze soms een ander voorwerp in plaats van het echte. Bijv. als een kind zijn/haar beer eten wil geven, kan het doen alsof een speelgoedblokje een appel is. Of een kind kan doen alsof een (grote) kom een hoed is. Hebt u uw kind die dingen al zien doen? Indien ja, kunt u enkele voorbeelden geven?",
           "type": "textbox"
         }
-      ]
+      ],
+      "title": "DEEL 2: Acties en gebaren"
     }
   ]
 }
