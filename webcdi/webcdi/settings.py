@@ -219,6 +219,7 @@ LANGUAGES = [
     ('es', _('Spanish')),
     ('fr-ca', _('French Quebec')),
     ('en-ca', _('Canadian English')),
+    ('nl', _('Dutch')),
 ]
 
 

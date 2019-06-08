@@ -121,5 +121,27 @@
 		"csv_file": "cdi_form_csv/[English_L2B].csv",
 		"json_data": "cdi_forms/form_data/English_L2B_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/English_L2B_WS_scoring.json"
+	},
+	{
+		"language": "Dutch",
+		"form": "WS",
+		"verbose_name": "Woorden en zinnen",
+		"min_age": 16,
+		"max_age": 30,
+		"csv_file": "cdi_form_csv/[Dutch_WS].csv",
+		"json_data": "cdi_forms/form_data/Dutch_WS_meta.json",
+		"fillable_headers": "cdi_form_csv/DutchWS_pdf_headers.csv",
+		"scoring_json" : "cdi_forms/form_data/scoring/Dutch_WS_scoring.json"
+	},
+	{
+		"language": "Dutch",
+		"form": "WG",
+		"verbose_name": "Woorden en gebaren",
+		"min_age": 8,
+		"max_age": 18,
+		"csv_file": "cdi_form_csv/[Dutch_WG].csv",
+		"json_data": "cdi_forms/form_data/Dutch_WG_meta.json",
+		"fillable_headers": "cdi_form_csv/DutchWG_pdf_headers.csv",
+		"scoring_json" : "cdi_forms/form_data/scoring/Dutch_WG_scoring.json"
 	}
 ]

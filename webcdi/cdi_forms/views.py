@@ -293,6 +293,8 @@ def prefilled_cdi_data(administration_instance):
             field_values += ['choices__choice_set_fr_ca']
         elif administration_instance.study.instrument.language == 'Canadian English':
             field_values += ['choices__choice_set_en_ca']
+        elif administration_instance.study.instrument.language == 'Dutch':
+            field_values += ['choices__choice_set_nl']
         #As some items are nested on different levels, carefully parse and store items for rendering.
         for part in data['parts']:
             for item_type in part['types']:
