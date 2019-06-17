@@ -225,7 +225,7 @@
         $.each(words, function(index, value){
             value.definition = value.definition.toLowerCase();
             value.num_value = 'neither';
-            if (root.instrument_name.indexOf('WS') > -1) {
+            if ((root.instrument_name.indexOf('WS') > -1) | (root.instrument_name.indexOf('CDI3') > -1)) {
                 if (value.prefilled_value) {
                     value.num_value = 'produces';
                 }
@@ -277,6 +277,7 @@
         d3.csv("{% static 'data_csv/word_categories.csv' %}", function(data) {
             word_categories = data;
             var list_names = objectMap(categorySize,'key')
+            console.log(list_names)
             updateCategoryInfo();
             
             $.each(word_categories, function(index){
@@ -286,6 +287,7 @@
                 categorySize[name_location].category_name = word_categories[index][root.instrument_name];
                 }
             });
+            console.log(categorySize)
 
             if (raw_words_understood == 0 ) {
                 prod_graph_width = graph_width*2;
@@ -432,6 +434,7 @@
 
                 for (var i = 0; i < categorySize[index].values.length; i++) {
                     var current_val = categorySize[index].values[i]
+                    console.log(categorySize[index].values[i])
                     if(current_val.key == 'neither') {
                         value.neither = current_val.values;
                     }
