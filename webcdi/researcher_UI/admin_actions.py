@@ -12,6 +12,9 @@ def scoring_data(modeladmin, request, queryset):
         if q.instrument != study_obj.instrument:
             messages.error(request, _('Instruments for all Studies must be the same'))
             return
+        if len(q.administration_set.all()) < 1:
+            messages.error(request, _('Studies must have at least 1 responsent. %s has none' % (q.name)))
+            return
 
     administrations = administration.objects.filter(study__in=queryset)
     return download_data(request, study_obj, administrations)
@@ -22,6 +25,9 @@ def scoring_summary(modeladmin, request, queryset):
     for q in queryset:
         if q.instrument != study_obj.instrument:
             messages.error(request, _('Instruments for all Studies must be the same'))
+            return
+        if len(q.administration_set.all()) < 1:
+            messages.error(request, _('Studies must have at least 1 responsent. %s has none' % (q.name)))
             return
 
     administrations = administration.objects.filter(study__in=queryset)

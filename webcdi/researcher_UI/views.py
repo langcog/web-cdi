@@ -118,12 +118,14 @@ def download_data(request, study_obj, administrations = None): # Download study 
     
     # Try to format administration data for pandas dataframe
     try:
-        admin_data = pd.DataFrame.from_records(administrations.values()).rename(columns = {'id':'administration_id', 'study_id': 'study_name', 'url_hash': 'link'})
+        admin_data = pd.DataFrame.from_records(administrations.values(
+            'id', 'study__name','url_hash', 'repeat_num', 'subject_id','completed','completedBackgroundInfo','due_date','last_modified','created_date'
+        )).rename(columns = {'id':'administration_id', 'study__name': 'study_name', 'url_hash': 'link'})
     except:
         admin_data = pd.DataFrame(columns = admin_header)
     
     # Replace study ID# with actual study name
-    admin_data['study_name'] = study_obj.name
+    #admin_data['study_name'] = study_obj.name
 
     # Merge administration data into already combined background/CDI form dataframe
     combined_data = pd.merge(admin_data, background_answers, how='outer', on = 'administration_id')
@@ -135,6 +137,7 @@ def download_data(request, study_obj, administrations = None): # Download study 
     # If there are any missing columns (e.g., all test-takers for one study did not answer an item so it does not appear in database responses), add the empty columns in and don't break!
     missing_columns = list(set(model_header) - set(combined_data.columns))
     if missing_columns:
+        print("Duplicated: ",combined_data[combined_data.index.duplicated()])
         combined_data = combined_data.reindex(columns=np.append(combined_data.columns.values, missing_columns))
 
     # Organize columns  
@@ -242,12 +245,14 @@ def download_summary(request, study_obj, administrations = None): # Download stu
     
     # Try to format administration data for pandas dataframe
     try:
-        admin_data = pd.DataFrame.from_records(administrations.values()).rename(columns = {'id':'administration_id', 'study_id': 'study_name', 'url_hash': 'link'})
+        admin_data = pd.DataFrame.from_records(administrations.values(
+            'id', 'study__name','url_hash', 'repeat_num', 'subject_id','completed','completedBackgroundInfo','due_date','last_modified','created_date'
+        )).rename(columns = {'id':'administration_id', 'study__name': 'study_name', 'url_hash': 'link'})
     except:
         admin_data = pd.DataFrame(columns = admin_header)
     
     # Replace study ID# with actual study name
-    admin_data['study_name'] = study_obj.name
+    #admin_data['study_name'] = study_obj.name
 
     # Merge administration data into already combined background/CDI form dataframe
     combined_data = pd.merge(admin_data, background_answers, how='outer', on = 'administration_id')

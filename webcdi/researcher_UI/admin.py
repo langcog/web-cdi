@@ -57,10 +57,15 @@ class AdministrationAdmin(admin.ModelAdmin):
 admin.site.register(administration, AdministrationAdmin)
 
 class StudyAdmin(admin.ModelAdmin):
-    list_display=['name','instrument','researcher']
+    list_display=['name','get_responses','instrument','researcher']
     list_filter = ['instrument','researcher']
     search_fields = ['instrument','researcher','name']
     actions = [scoring_data, scoring_summary]
+
+    def get_responses(self, obj):
+        return len(obj.administration_set.all())
+    get_responses.short_description = "Responses"
+
 admin.site.register(study, StudyAdmin)
 
 # Define an inline admin descriptor for Researcher model
