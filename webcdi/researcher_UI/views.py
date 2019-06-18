@@ -57,6 +57,7 @@ def download_data(request, study_obj, administrations = None): # Download study 
     new_headers = Instrument_Forms.objects.values('itemID', 'definition', 'gloss').filter(instrument=study_obj.instrument).distinct()
     new_headers = {x['itemID'] : x['gloss'] if len(x['gloss']) > 0 else x['definition'] if len(x['definition']) > 0 else x['itemID'] for x in new_headers}
     model_header = [new_headers.get(n, n) for n in model_header]
+    
     melted_answers.rename(columns=new_headers, inplace=True)
     
     # Format background data responses for pandas dataframe and eventual printing
@@ -135,11 +136,17 @@ def download_data(request, study_obj, administrations = None): # Download study 
     combined_data['link'] = test_url + combined_data['link']
 
     # If there are any missing columns (e.g., all test-takers for one study did not answer an item so it does not appear in database responses), add the empty columns in and don't break!
+    s2 = combined_data.columns.to_series()
+    combined_data.columns = (combined_data.columns + 
+                            s2.groupby(s2).cumcount().astype(str).radd('_').str.replace('_0',''))
+
     missing_columns = list(set(model_header) - set(combined_data.columns))
     if missing_columns:
-        print("Duplicated: ",combined_data[combined_data.index.duplicated()])
+        print (len(set(combined_data.columns)), len(combined_data.columns))
+        print(set(combined_data.columns))
+        print(missing_columns)
         combined_data = combined_data.reindex(columns=np.append(combined_data.columns.values, missing_columns))
-
+    
     # Organize columns  
     combined_data = combined_data[admin_header + background_header + model_header + score_header]
     
