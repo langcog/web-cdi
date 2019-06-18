@@ -4,6 +4,8 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 from django.db.models import Count 
 
+from .admin_actions import scoring_data, scoring_summary
+
 # Register your models here.
 admin.site.register(instrument)
 admin.site.register(administration_data)
@@ -58,6 +60,7 @@ class StudyAdmin(admin.ModelAdmin):
     list_display=['name','instrument','researcher']
     list_filter = ['instrument','researcher']
     search_fields = ['instrument','researcher','name']
+    actions = [scoring_data, scoring_summary]
 admin.site.register(study, StudyAdmin)
 
 # Define an inline admin descriptor for Researcher model
