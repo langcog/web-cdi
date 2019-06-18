@@ -142,9 +142,6 @@ def download_data(request, study_obj, administrations = None): # Download study 
 
     missing_columns = list(set(model_header) - set(combined_data.columns))
     if missing_columns:
-        print (len(set(combined_data.columns)), len(combined_data.columns))
-        print(set(combined_data.columns))
-        print(missing_columns)
         combined_data = combined_data.reindex(columns=np.append(combined_data.columns.values, missing_columns))
     
     # Organize columns  

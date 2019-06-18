@@ -54,10 +54,24 @@
         "order" : 9
     },
     {
-        "title" : "Combination Examples",
-        "category" : "combination_examples",
+        "title" : "Combination Example 1",
+        "category" : "combination_example1",
         "measure" : "complex",
         "order" : 10,
+        "kind" : "list"
+    },
+    {
+        "title" : "Combination Example 2",
+        "category" : "combination_example2",
+        "measure" : "complex",
+        "order" : 11,
+        "kind" : "list"
+    },
+    {
+        "title" : "Combination Example 3",
+        "category" : "combination_example3",
+        "measure" : "complex",
+        "order" : 12,
         "kind" : "list"
     }
 ]
