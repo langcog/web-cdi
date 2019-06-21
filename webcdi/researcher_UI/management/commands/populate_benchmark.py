@@ -74,11 +74,11 @@ class Command(BaseCommand):
                     percentile = row_values[col_names.index('percentile')]
                     age = row_values[col_names.index('age')]
                     raw_score = row_values[col_names.index('raw_score')]
-                    percentile_boy = row_values[col_names.index('percentile_boy')]
-                    percentile_girl = row_values[col_names.index('percentile_girl')]
+                    raw_score_boy = row_values[col_names.index('raw_score_boy')]
+                    raw_score_girl = row_values[col_names.index('raw_score_girl')]
                     data_dict = {'raw_score': raw_score,
-                                 'percentile_boy': percentile_boy,
-                                 'percentile_girl': percentile_boy}
+                                 'raw_score_boy': raw_score_boy,
+                                 'raw_score_girl': raw_score_girl}
 
                     cdi_item, created = Benchmark.objects.update_or_create(instrument=instrument_obj, instrument_score=scoring_obj, percentile = percentile, age=age, defaults=data_dict,)
 

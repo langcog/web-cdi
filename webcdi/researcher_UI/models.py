@@ -157,8 +157,8 @@ class Benchmark(models.Model):
     percentile = models.IntegerField()
     age = models.IntegerField()
     raw_score = models.IntegerField()
-    percentile_boy = models.IntegerField()
-    percentile_girl = models.IntegerField()
+    raw_score_boy = models.IntegerField()
+    raw_score_girl = models.IntegerField()
 
     def __unicode__(self):
         return '%s : %s : %s' % (self.instrument_score, self.percentile, self.age)

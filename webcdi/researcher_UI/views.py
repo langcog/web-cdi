@@ -27,6 +27,10 @@ from django.utils import timezone
 
 from cdi_forms.models import Instrument_Forms
 
+def calc_benchmark(x1, x2, y1, y2, raw_score):
+    gradient = float(y2-y1)/(x2-x1)
+    a = float(y1 - (x1 * gradient))
+    return int(a + raw_score * gradient)
 
 @login_required # For researchers only, requires user to be logged in (test-takers do not have an account and are blocked from this interface)
 def download_data(request, study_obj, administrations = None): # Download study data
@@ -230,11 +234,39 @@ def download_summary(request, study_obj, administrations = None): # Download stu
                     benchmarks = Benchmark.objects.filter(instrument_score=f, age=age)
                     raw_score = scoring_dict[f.title]
                     benchmark = benchmarks[0]
+                    unisex_score = benchmark.percentile
                     for b in benchmarks:
-                        if b.raw_score < raw_score: benchmark = b
-                    if sex == 'M':scoring_dict[f.title + ' Percentile-sex'] = benchmark.percentile_boy
-                    if sex == 'F':scoring_dict[f.title + ' Percentile-sex'] = benchmark.percentile_girl
-                    scoring_dict[f.title + ' Percentile-both'] = benchmark.percentile
+                        if b.raw_score < raw_score: 
+                            benchmark = b
+                            unisex_score = benchmark.percentile
+                        else:
+                            unisex_score = calc_benchmark(benchmark.raw_score, b.raw_score, benchmark.percentile, b.percentile, raw_score)
+                            break
+                    scoring_dict[f.title + ' Percentile-both'] = unisex_score
+                    
+                    if sex == 'M':
+                        benchmark = benchmarks[0]
+                        sex_score = benchmark.percentile
+                        for b in benchmarks:
+                            if b.raw_score_boy < raw_score: 
+                                benchmark = b
+                                sex_score = benchmark.percentile
+                            else:
+                                sex_score = calc_benchmark(benchmark.raw_score_boy, b.raw_score_boy, benchmark.percentile, b.percentile, raw_score)
+                                break
+                    elif sex == 'F':
+                        benchmark = benchmarks[0]
+                        sex_score = benchmark.percentile
+                        for b in benchmarks:
+                            if b.raw_score_boy < raw_score: 
+                                benchmark = b
+                                sex_score = benchmark.percentile
+                            else:
+                                sex_score = calc_benchmark(benchmark.raw_score_girl, b.raw_score_girl, benchmark.percentile, b.percentile, raw_score)
+                                break
+                    scoring_dict[f.title + ' Percentile-sex'] = sex_score
+                    
+            
         except: pass
         
         scores.append(scoring_dict)
