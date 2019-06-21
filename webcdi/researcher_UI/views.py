@@ -228,26 +228,32 @@ def download_summary(request, study_obj, administrations = None): # Download stu
         # now add in the benchmark scores
         try:
             sex = BackgroundInfo.objects.get(administration=administration_id).sex
+        except:
+            sex = None
+        try:
             age = BackgroundInfo.objects.get(administration=administration_id).age
-            for f in score_forms:
-                if Benchmark.objects.filter(instrument_score=f, age=age).exists():
-                    benchmarks = Benchmark.objects.filter(instrument_score=f, age=age)
-                    raw_score = scoring_dict[f.title]
+        except:
+            age=None
+        for f in score_forms:
+            if Benchmark.objects.filter(instrument_score=f, age=age).exists():
+                benchmarks = Benchmark.objects.filter(instrument_score=f, age=age)
+                raw_score = scoring_dict[f.title]
+                if raw_score > 0:
                     benchmark = benchmarks[0]
                     unisex_score = benchmark.percentile
-                    for b in benchmarks:
+                    for b in benchmarks[1:]:
                         if b.raw_score < raw_score: 
                             benchmark = b
                             unisex_score = benchmark.percentile
                         else:
                             unisex_score = calc_benchmark(benchmark.raw_score, b.raw_score, benchmark.percentile, b.percentile, raw_score)
                             break
-                    scoring_dict[f.title + ' Percentile-both'] = unisex_score
+                    
                     
                     if sex == 'M':
                         benchmark = benchmarks[0]
                         sex_score = benchmark.percentile
-                        for b in benchmarks:
+                        for b in benchmarks[1:]:
                             if b.raw_score_boy < raw_score: 
                                 benchmark = b
                                 sex_score = benchmark.percentile
@@ -257,17 +263,19 @@ def download_summary(request, study_obj, administrations = None): # Download stu
                     elif sex == 'F':
                         benchmark = benchmarks[0]
                         sex_score = benchmark.percentile
-                        for b in benchmarks:
+                        for b in benchmarks[1:]:
                             if b.raw_score_boy < raw_score: 
                                 benchmark = b
                                 sex_score = benchmark.percentile
                             else:
                                 sex_score = calc_benchmark(benchmark.raw_score_girl, b.raw_score_girl, benchmark.percentile, b.percentile, raw_score)
                                 break
-                    scoring_dict[f.title + ' Percentile-sex'] = sex_score
+                else:
+                    unisex_score = sex_score = 0
+                scoring_dict[f.title + ' Percentile-both'] = max(0,unisex_score)
+                scoring_dict[f.title + ' Percentile-sex'] = max(0,sex_score)
                     
             
-        except: pass
         
         scores.append(scoring_dict)
     melted_scores = pd.DataFrame(scores)
