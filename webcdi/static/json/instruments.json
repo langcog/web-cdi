@@ -30,7 +30,8 @@
 		"csv_file": "cdi_form_csv/[English_WG].csv",
 		"json_data": "cdi_forms/form_data/English_WG_meta.json",
 		"fillable_headers": "cdi_form_csv/EnglishWG_pdf_headers.csv",
-		"scoring_json" : "cdi_forms/form_data/scoring/English_WG_scoring.json"
+		"scoring_json" : "cdi_forms/form_data/scoring/English_WG_scoring.json",
+		"benchmark" : "cdi_forms/form_data/benchmarking/English_WG_benchmark.csv"
 	},
 	{
 		"language": "Spanish",
