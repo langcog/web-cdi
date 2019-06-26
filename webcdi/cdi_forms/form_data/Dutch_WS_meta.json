@@ -10,6 +10,7 @@
                         {
                             "id": "sounds",
                             "title": "1. Geluidseffecten en dierengeluiden"
+                            
                         },
                         {
                             "id": "animals",
@@ -104,7 +105,7 @@
                     ],
                     "text": "Nu volgt er een lijst met mogelijke woorden van jonge kinderen. Markeer het woord in de kolom \"begrijpen\" als uw kind dit woord begrijpt, maar nog niet zelf zegt. Markeer het woord in de kolom \"begrijpen en zeggen\" als uw kind dit woord begrijpt en zelf zegt. Als uw kind een woord anders uitspreekt (bijv. 'ojanne' voor 'oranje' of 'sjille' voor 'schillen') dan mag u toch het woord in de kolom \"begrijpen en zeggen\" markeren. Als u of uw kind een ander woord gebruikt (bijv. 'paleis' voor 'kasteel'), dan mag u toch het het woord markeren als uw kind dit woord begrijpt en/of zelf zegt. Deze lijst is eigenlijk een verzameling woorden die afkomstig is van verschillende kinderen; wees niet ongerust als uw kind er maar enkele van begrijpt of kent op dit moment.",
                     "title": "A: Woordenschatlijst",
-                    "type": "checkbox"
+                    "type": "radiobutton"
                 },
                 {
                     "id": "usage",
