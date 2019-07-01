@@ -124,6 +124,6 @@ item_122,miss_comp,usage,how_use_words,no; yes,"Could your child tell you which 
 item_123,rightleft,usage,how_use_words,no; yes,Does your child know his/her right hand from his/her left hand?,,
 item_124,usesuperlative,usage,how_use_words,no; yes,"Does your child use ""-est"" words such as ""biggest"" and ""strongest""?",,
 item_125,useroutines,usage,how_use_words,no; yes,"Can your child answer questions such as ""what do you do when you are hungry?"" and ""what do you do when you are tired?"" with appropriate answers such as ""get food,"" ""eat,"" ""go to sleep,"" and/or ""take a nap""?",,
-item_example1,combination_example1,combination_examples,combination_examples,,,,
-item_example2,combination_example2,combination_examples,combination_examples,,,,
-item_example3,combination_example3,combination_examples,combination_examples,,,,
+item_example1,combination_example1,combination_example1,combination_examples,,,,combination_example1
+item_example2,combination_example2,combination_example2,combination_examples,,,,combination_example2
+item_example3,combination_example3,combination_example3,combination_examples,,,,combination_example3

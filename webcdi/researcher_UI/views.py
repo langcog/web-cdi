@@ -334,7 +334,6 @@ def download_summary(request, study_obj, administrations = None): # Download stu
 
     # Return CSV
     end_time = datetime.datetime.now()
-    print(end_time-start_time)
     return response
 
 @login_required
