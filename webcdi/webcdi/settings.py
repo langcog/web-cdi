@@ -60,7 +60,7 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-ALLOWED_HOSTS = ['web-cdi-dev8.mfpemr5vcz.us-west-2.elasticbeanstalk.com','localhost', '127.0.0.1','52.32.108.131','webcdi-dev.us-west-2.elasticbeanstalk.com','webcdi-prod.us-west-2.elasticbeanstalk.com', 'webcdi.stanford.edu', 'webcdi-dev.stanford.edu', '.elb.amazonaws.com']
+ALLOWED_HOSTS = ['web-cdi-dev6.mfpemr5vcz.us-west-2.elasticbeanstalk.com','web-cdi-dev8.mfpemr5vcz.us-west-2.elasticbeanstalk.com','localhost', '127.0.0.1','52.32.108.131','webcdi-dev.us-west-2.elasticbeanstalk.com','webcdi-prod.us-west-2.elasticbeanstalk.com', 'webcdi.stanford.edu', 'webcdi-dev.stanford.edu', '.elb.amazonaws.com']
 
 IPS_TO_ADD = ['webcdi-dev.us-west-2.elasticbeanstalk.com', 'webcdi-prod.us-west-2.elasticbeanstalk.com', 'webcdi.stanford.edu', socket.gethostname()]
 
