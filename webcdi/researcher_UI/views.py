@@ -25,6 +25,7 @@ from psycopg2.extras import NumericRange
 from django.conf import settings
 from django.utils import timezone
 
+from django.utils.translation import ugettext_lazy as _
 from cdi_forms.models import Instrument_Forms
 
 def calc_benchmark(x1, x2, y1, y2, raw_score):
@@ -93,6 +94,14 @@ def download_data(request, study_obj, administrations = None): # Download study 
     score_header = []
     for f in score_forms: # let's get the scoring headers
         score_header.append(f.title)
+        if Benchmark.objects.filter(instrument_score=f).exists():
+            benchmark = Benchmark.objects.filter(instrument_score=f)[0]
+            if benchmark.percentile == 999:
+                score_header.append(f.title + ' % yes answers at this age and sex')
+            else:
+                score_header.append(f.title + ' Percentile-sex')
+                if not benchmark.raw_score == 9999: score_header.append(f.title + ' Percentile-both')
+    
 
     for administration_id in administrations:
         scoring_dict = {'administration_id':administration_id.id}  # add administration_id so we know the respondent
@@ -111,6 +120,80 @@ def download_data(request, study_obj, administrations = None): # Download study 
                 else : 
                     if scoring_category in f.category.split(';'):
                         scoring_dict[f.title] +=  administration_data_item.value + '\n'
+            
+                #add benchmark titles
+            if Benchmark.objects.filter(instrument_score=f).exists():
+                benchmark = Benchmark.objects.filter(instrument_score=f)[0]
+                if benchmark.percentile == 999:
+                    scoring_dict[f.title + ' % yes answers at this age and sex'] = 0
+                else:
+                    scoring_dict[f.title + ' Percentile-sex'] = 0
+                    if not benchmark.raw_score == 9999: scoring_dict[f.title + ' Percentile-both'] = 0
+                
+        # now add in the benchmark scores
+        try:
+            sex = BackgroundInfo.objects.get(administration=administration_id).sex
+        except:
+            sex = None
+        try:
+            age = BackgroundInfo.objects.get(administration=administration_id).age
+        except:
+            age=None
+        for f in score_forms:
+            if Benchmark.objects.filter(instrument_score=f, age=age).exists():
+                benchmark = Benchmark.objects.filter(instrument_score=f)[0]
+                if benchmark.percentile == 999:
+                    benchmark = Benchmark.objects.get(instrument_score=f, age=age)
+                    if sex == 'M': scoring_dict[f.title + ' % yes answers at this age and sex'] = benchmark.raw_score_boy
+                    if sex == 'F': scoring_dict[f.title + ' % yes answers at this age and sex'] = benchmark.raw_score_girl
+                    
+                else:
+                    benchmarks = Benchmark.objects.filter(instrument_score=f, age=age)
+                    raw_score = scoring_dict[f.title]
+
+                    if raw_score > 0:
+                        benchmark = benchmarks[0]
+                        if not benchmark.raw_score == 9999:
+                            unisex_score = benchmark.percentile
+                            for b in benchmarks[1:]:
+                                if b.raw_score <= raw_score: 
+                                    benchmark = b
+                                    unisex_score = benchmark.percentile
+                                else:
+                                    unisex_score = calc_benchmark(benchmark.raw_score, b.raw_score, benchmark.percentile, b.percentile, raw_score)
+                                    break
+                            
+                        
+                        if sex == 'M':
+                            benchmark = benchmarks[0]
+                            sex_score = benchmark.percentile
+                            for b in benchmarks[1:]:
+                                if b.raw_score_boy <= raw_score: 
+                                    benchmark = b
+                                    sex_score = benchmark.percentile
+                                else:
+                                    sex_score = calc_benchmark(benchmark.raw_score_boy, b.raw_score_boy, benchmark.percentile, b.percentile, raw_score)
+                                    break
+                        elif sex == 'F':
+                            benchmark = benchmarks[0]
+                            sex_score = benchmark.percentile
+                            for b in benchmarks[1:]:
+                                if b.raw_score_girl <= raw_score: 
+                                    benchmark = b
+                                    sex_score = benchmark.percentile
+                                else:
+                                    sex_score = calc_benchmark(benchmark.raw_score_girl, b.raw_score_girl, benchmark.percentile, b.percentile, raw_score)
+                                    break
+                    else:
+                        unisex_score = sex_score = 0
+                    
+                    if not benchmark.raw_score == 9999:
+                        if unisex_score < 1: unisex_score = '<1'
+                    if sex_score < 1: sex_score = '<1'
+                
+                    if not benchmark.raw_score == 9999: scoring_dict[f.title + ' Percentile-both'] = unisex_score
+                    scoring_dict[f.title + ' Percentile-sex'] = sex_score
+
         scores.append(scoring_dict)
     melted_scores = pd.DataFrame(scores)
     melted_scores.set_index('administration_id')
