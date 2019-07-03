@@ -113,7 +113,11 @@ def download_data(request, study_obj, administrations = None): # Download study 
         scoring_dict = {'administration_id':administration_id.id}  # add administration_id so we know the respondent
         #set each head in dictionary
         for f in score_forms: #and ensure each score is at least 0
-            if f.kind == 'count' : scoring_dict[f.title] = 0
+            if f.kind == 'count' : 
+                if administration_id.completedBackgroundInfo:
+                    scoring_dict[f.title] = 0
+                else:
+                    scoring_dict[f.title] = ''
             else : scoring_dict[f.title] = ''
         for administration_data_item in administration_data.objects.filter(administration_id=administration_id):
             inst = Instrument_Forms.objects.get(instrument=study_obj.instrument,itemID=administration_data_item.item_ID)
@@ -131,10 +135,20 @@ def download_data(request, study_obj, administrations = None): # Download study 
             if Benchmark.objects.filter(instrument_score=f).exists():
                 benchmark = Benchmark.objects.filter(instrument_score=f)[0]
                 if benchmark.percentile == 999:
-                    scoring_dict[f.title + ' % yes answers at this age and sex'] = 0
+                    if administration_id.completedBackgroundInfo:
+                        scoring_dict[f.title + ' % yes answers at this age and sex'] = 0
+                    else :
+                        scoring_dict[f.title + ' % yes answers at this age and sex'] = ''
                 else:
-                    scoring_dict[f.title + ' Percentile-sex'] = 0
-                    if not benchmark.raw_score == 9999: scoring_dict[f.title + ' Percentile-both'] = 0
+                    if administration_id.completedBackgroundInfo:
+                        scoring_dict[f.title + ' Percentile-sex'] = 0
+                    else:
+                        scoring_dict[f.title + ' Percentile-sex'] = ''
+                    if not benchmark.raw_score == 9999: 
+                        if administration_id.completedBackgroundInfo:
+                            scoring_dict[f.title + ' Percentile-both'] = 0
+                        else:
+                            scoring_dict[f.title + ' Percentile-both'] = ''
                 
         # now add in the benchmark scores
         try:
@@ -311,7 +325,10 @@ def download_summary(request, study_obj, administrations = None): # Download stu
             insts_IDs = []
             for inst in insts: insts_IDs.append(inst.itemID)
             if f.kind == 'count' : 
-                scoring_dict[f.title] = administration_data.objects.filter(administration_id=administration_id, value__in=f.measure.split(';'), item_ID__in=insts_IDs).count()
+                if administration_id.completedBackgroundInfo:
+                    scoring_dict[f.title] = administration_data.objects.filter(administration_id=administration_id, value__in=f.measure.split(';'), item_ID__in=insts_IDs).count()
+                else:
+                    scoring_dict[f.title] = ''
             else : 
                 items = administration_data.objects.filter(administration_id=administration_id, item_ID__in=insts_IDs)
                 scoring_dict[f.title] = ''
@@ -322,10 +339,20 @@ def download_summary(request, study_obj, administrations = None): # Download stu
             if Benchmark.objects.filter(instrument_score=f).exists():
                 benchmark = Benchmark.objects.filter(instrument_score=f)[0]
                 if benchmark.percentile == 999:
-                    scoring_dict[f.title + ' % yes answers at this age and sex'] = 0
+                    if administration_id.completedBackgroundInfo:
+                        scoring_dict[f.title + ' % yes answers at this age and sex'] = 0
+                    else: 
+                        scoring_dict[f.title + ' % yes answers at this age and sex'] = ''
                 else:
-                    scoring_dict[f.title + ' Percentile-sex'] = 0
-                    if not benchmark.raw_score == 9999: scoring_dict[f.title + ' Percentile-both'] = 0
+                    if administration_id.completedBackgroundInfo:
+                        scoring_dict[f.title + ' Percentile-sex'] = 0
+                    else:
+                        scoring_dict[f.title + ' Percentile-sex'] = ''
+                    if not benchmark.raw_score == 9999: 
+                        if administration_id.completedBackgroundInfo:
+                            scoring_dict[f.title + ' Percentile-both'] = 0
+                        else: 
+                            scoring_dict[f.title + ' Percentile-both'] = ''
                 
         # now add in the benchmark scores
         try:
