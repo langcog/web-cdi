@@ -49,7 +49,7 @@ except ImportError:
 # DEBUG = False
 
 DEBUG = bool(os.environ.get('DEBUG', False))
-#DEBUG = True
+#DEBUG = False
 TEMPLATE_DEBUG = False
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
@@ -102,6 +102,7 @@ INSTALLED_APPS = (
     'health_check.storage',
     'localflavor',
     'django_countries',
+    'webcdi',
 )
 
 MIDDLEWARE_CLASSES = (

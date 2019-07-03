@@ -2,7 +2,7 @@
 
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseServerError, Http404
 from .forms import *
 from .models import researcher, study, administration, administration_data, get_meta_header, get_background_header, payment_code, ip_address
 import codecs, json, os, re, random, csv, datetime, cStringIO, math, StringIO, zipfile
@@ -20,10 +20,12 @@ import requests
 from django.urls import reverse
 from decimal import Decimal
 from django.contrib.sites.shortcuts import get_current_site
+from django.contrib import messages
 from ipware.ip import get_ip
 from psycopg2.extras import NumericRange
 from django.conf import settings
 from django.utils import timezone
+
 
 from django.utils.translation import ugettext_lazy as _
 from cdi_forms.models import Instrument_Forms
@@ -82,7 +84,11 @@ def download_data(request, study_obj, administrations = None): # Download study 
             BI_choices[field.name] = {unicode(k):unicode(v) for k,v in field_choices.items()}
 
     new_background = pd.DataFrame.from_records(background_data).astype(unicode).replace(BI_choices)
-    new_background['administration_id'] = new_background['administration_id'].astype('int64')
+    try:
+        new_background['administration_id'] = new_background['administration_id'].astype('int64')
+    except Exception as e:
+        messages.add_message(request, messages.ERROR, "You must select at least 1 completed response")
+        return render (request, 'error-page.html')
 
     #except:
     #    new_background = pd.DataFrame(columns = ['administration_id'] + background_header)
@@ -217,7 +223,11 @@ def download_data(request, study_obj, administrations = None): # Download study 
     #admin_data['study_name'] = study_obj.name
 
     # Merge administration data into already combined background/CDI form dataframe
-    combined_data = pd.merge(admin_data, background_answers, how='outer', on = 'administration_id')
+    try: 
+        combined_data = pd.merge(admin_data, background_answers, how='outer', on = 'administration_id')
+    except Exception as e:
+        messages.add_message(request, messages.ERROR, "You must select at least 1 completed response")
+        return render (request, 'error-page.html')
 
     # Recreate link for administration
     test_url = ''.join(['http://', get_current_site(request).domain, reverse('administer_cdi_form', args=['a'*64])]).replace('a'*64+'/','')
