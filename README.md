@@ -1,6 +1,6 @@
 # Web-CDI
 
-[Web-CDI](http://webcdi.stanford.edu) is a project for the web-based administration of the [MacArthur-Bates Communicative Development Inventory](mb-cdi.stanford.edu), a checklist instrument for measuring children's early language development via parent report.
+[Web-CDI](http://webcdi.stanford.edu) is a project for the web-based administration of the [MacArthur-Bates Communicative Development Inventory](http://mb-cdi.stanford.edu), a checklist instrument for measuring children's early language development via parent report.
 
 # Using the system
 
