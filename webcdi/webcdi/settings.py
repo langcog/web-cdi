@@ -55,7 +55,7 @@ TEMPLATE_DEBUG = False
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
 
 ADMINS = (
-    ('Alessandro Sanchez', 'sanchez7@stanford.edu'),
+    ('Henry Mehta', 'hjsmehta@gmail.com'),
 )
 
 MANAGERS = ADMINS

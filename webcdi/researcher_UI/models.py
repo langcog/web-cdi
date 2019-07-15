@@ -164,4 +164,4 @@ class Benchmark(models.Model):
         return '%s : %s : %s' % (self.instrument_score, self.percentile, self.age)
 
     class Meta:
-        ordering = ['instrument_score','age','raw_score']
+        ordering = ['instrument_score','age','percentile']

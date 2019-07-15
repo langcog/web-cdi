@@ -59,7 +59,7 @@ admin.site.register(administration, AdministrationAdmin)
 class StudyAdmin(admin.ModelAdmin):
     list_display=['name','get_responses','instrument','researcher']
     list_filter = ['instrument','researcher']
-    search_fields = ['instrument','researcher','name']
+    search_fields = ['instrument__name','researcher__username','name']
     actions = [scoring_data, scoring_summary]
 
     def get_responses(self, obj):

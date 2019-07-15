@@ -171,41 +171,39 @@ def download_data(request, study_obj, administrations = None): # Download study 
                     benchmarks = Benchmark.objects.filter(instrument_score=f, age=age)
                     raw_score = scoring_dict[f.title]
 
-                    if raw_score > 0:
-                        benchmark = benchmarks[0]
-                        if not benchmark.raw_score == 9999:
-                            unisex_score = benchmark.percentile
-                            for b in benchmarks[1:]:
-                                if b.raw_score <= raw_score: 
-                                    benchmark = b
-                                    unisex_score = benchmark.percentile
-                                else:
-                                    unisex_score = calc_benchmark(benchmark.raw_score, b.raw_score, benchmark.percentile, b.percentile, raw_score)
-                                    break
-                            
+                    unisex_score = sex_score = 0
+                    benchmark = benchmarks[0]
+                    if not benchmark.raw_score == 9999:
+                        unisex_score = benchmark.percentile
+                        for b in benchmarks[1:]:
+                            if b.raw_score <= raw_score: 
+                                benchmark = b
+                                unisex_score = benchmark.percentile
+                            else:
+                                unisex_score = calc_benchmark(benchmark.raw_score, b.raw_score, benchmark.percentile, b.percentile, raw_score)
+                                break
                         
-                        if sex == 'M':
-                            benchmark = benchmarks[0]
-                            sex_score = benchmark.percentile
-                            for b in benchmarks[1:]:
-                                if b.raw_score_boy <= raw_score: 
-                                    benchmark = b
-                                    sex_score = benchmark.percentile
-                                else:
-                                    sex_score = calc_benchmark(benchmark.raw_score_boy, b.raw_score_boy, benchmark.percentile, b.percentile, raw_score)
-                                    break
-                        elif sex == 'F':
-                            benchmark = benchmarks[0]
-                            sex_score = benchmark.percentile
-                            for b in benchmarks[1:]:
-                                if b.raw_score_girl <= raw_score: 
-                                    benchmark = b
-                                    sex_score = benchmark.percentile
-                                else:
-                                    sex_score = calc_benchmark(benchmark.raw_score_girl, b.raw_score_girl, benchmark.percentile, b.percentile, raw_score)
-                                    break
-                    else:
-                        unisex_score = sex_score = 0
+                    
+                    if sex == 'M':
+                        benchmark = benchmarks[0]
+                        sex_score = benchmark.percentile
+                        for b in benchmarks[1:]:
+                            if b.raw_score_boy <= raw_score: 
+                                benchmark = b
+                                sex_score = benchmark.percentile
+                            else:
+                                sex_score = calc_benchmark(benchmark.raw_score_boy, b.raw_score_boy, benchmark.percentile, b.percentile, raw_score)
+                                break
+                    elif sex == 'F':
+                        benchmark = benchmarks[0]
+                        sex_score = benchmark.percentile
+                        for b in benchmarks[1:]:
+                            if b.raw_score_girl <= raw_score: 
+                                benchmark = b
+                                sex_score = benchmark.percentile
+                            else:
+                                sex_score = calc_benchmark(benchmark.raw_score_girl, b.raw_score_girl, benchmark.percentile, b.percentile, raw_score)
+                                break                      
                     
                     if not benchmark.raw_score == 9999:
                         if unisex_score < 1: unisex_score = '<1'
@@ -375,41 +373,38 @@ def download_summary(request, study_obj, administrations = None): # Download stu
                     benchmarks = Benchmark.objects.filter(instrument_score=f, age=age)
                     raw_score = scoring_dict[f.title]
 
-                    if raw_score > 0:
+                    unisex_score = sex_score = 0
+                    benchmark = benchmarks[0]
+                    if not benchmark.raw_score == 9999:
+                        unisex_score = benchmark.percentile
+                        for b in benchmarks[1:]:
+                            if b.raw_score <= raw_score: 
+                                benchmark = b
+                                unisex_score = benchmark.percentile
+                            else:
+                                unisex_score = calc_benchmark(benchmark.raw_score, b.raw_score, benchmark.percentile, b.percentile, raw_score)
+                                break
+                    
+                    if sex == 'M':
                         benchmark = benchmarks[0]
-                        if not benchmark.raw_score == 9999:
-                            unisex_score = benchmark.percentile
-                            for b in benchmarks[1:]:
-                                if b.raw_score <= raw_score: 
-                                    benchmark = b
-                                    unisex_score = benchmark.percentile
-                                else:
-                                    unisex_score = calc_benchmark(benchmark.raw_score, b.raw_score, benchmark.percentile, b.percentile, raw_score)
-                                    break
-                            
-                        
-                        if sex == 'M':
-                            benchmark = benchmarks[0]
-                            sex_score = benchmark.percentile
-                            for b in benchmarks[1:]:
-                                if b.raw_score_boy <= raw_score: 
-                                    benchmark = b
-                                    sex_score = benchmark.percentile
-                                else:
-                                    sex_score = calc_benchmark(benchmark.raw_score_boy, b.raw_score_boy, benchmark.percentile, b.percentile, raw_score)
-                                    break
-                        elif sex == 'F':
-                            benchmark = benchmarks[0]
-                            sex_score = benchmark.percentile
-                            for b in benchmarks[1:]:
-                                if b.raw_score_girl <= raw_score: 
-                                    benchmark = b
-                                    sex_score = benchmark.percentile
-                                else:
-                                    sex_score = calc_benchmark(benchmark.raw_score_girl, b.raw_score_girl, benchmark.percentile, b.percentile, raw_score)
-                                    break
-                    else:
-                        unisex_score = sex_score = 0
+                        sex_score = benchmark.percentile
+                        for b in benchmarks[1:]:
+                            if b.raw_score_boy <= raw_score: 
+                                benchmark = b
+                                sex_score = benchmark.percentile
+                            else:
+                                sex_score = calc_benchmark(benchmark.raw_score_boy, b.raw_score_boy, benchmark.percentile, b.percentile, raw_score)
+                                break
+                    elif sex == 'F':
+                        benchmark = benchmarks[0]
+                        sex_score = benchmark.percentile
+                        for b in benchmarks[1:]:
+                            if b.raw_score_girl <= raw_score: 
+                                benchmark = b
+                                sex_score = benchmark.percentile
+                            else:
+                                sex_score = calc_benchmark(benchmark.raw_score_girl, b.raw_score_girl, benchmark.percentile, b.percentile, raw_score)
+                                break
                     
                     if not benchmark.raw_score == 9999:
                         if unisex_score < 1: unisex_score = '<1'
