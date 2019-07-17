@@ -98,6 +98,8 @@ def download_data(request, study_obj, administrations = None): # Download study 
     
     score_forms = InstrumentScore.objects.filter(instrument=study_obj.instrument)
     score_header = []
+    if Benchmark.objects.filter(instrument=study_obj.instrument).exists():
+            score_header.append('benchmark age')
     for f in score_forms: # let's get the scoring headers
         score_header.append(f.title)
         if Benchmark.objects.filter(instrument_score=f).exists():
@@ -108,9 +110,15 @@ def download_data(request, study_obj, administrations = None): # Download study 
                 score_header.append(f.title + ' Percentile-sex')
                 if not benchmark.raw_score == 9999: score_header.append(f.title + ' Percentile-both')
     
-
+    #set max and min age for benchmark
+    try:
+        max_age = Benchmark.objects.filter(instrument=study_obj.instrument).order_by('-age')[0].age
+        min_age = Benchmark.objects.filter(instrument=study_obj.instrument).order_by('age')[0].age
+    except: pass
+        
     for administration_id in administrations:
         scoring_dict = {'administration_id':administration_id.id}  # add administration_id so we know the respondent
+        
         #set each head in dictionary
         for f in score_forms: #and ensure each score is at least 0
             if f.kind == 'count' : 
@@ -157,6 +165,10 @@ def download_data(request, study_obj, administrations = None): # Download study 
             sex = None
         try:
             age = BackgroundInfo.objects.get(administration=administration_id).age
+            if age < min_age: age = min_age
+            if age > max_age: age = max_age
+            scoring_dict['benchmark age'] = age
+    
         except:
             age=None
         for f in score_forms:
@@ -305,6 +317,9 @@ def download_summary(request, study_obj, administrations = None): # Download stu
     
     score_forms = InstrumentScore.objects.filter(instrument=study_obj.instrument)
     score_header = []
+    if Benchmark.objects.filter(instrument=study_obj.instrument).exists():
+        score_header.append('benchmark age')
+        
     for f in score_forms: # let's get the scoring headers
         score_header.append(f.title)
         if Benchmark.objects.filter(instrument_score=f).exists():
@@ -315,6 +330,12 @@ def download_summary(request, study_obj, administrations = None): # Download stu
                 score_header.append(f.title + ' Percentile-sex')
                 if not benchmark.raw_score == 9999: score_header.append(f.title + ' Percentile-both')
     
+    #set max and min age for benchmark
+    try:
+        max_age = Benchmark.objects.filter(instrument=study_obj.instrument).order_by('-age')[0].age
+        min_age = Benchmark.objects.filter(instrument=study_obj.instrument).order_by('age')[0].age
+    except: pass
+
     for administration_id in administrations:
         scoring_dict = {'administration_id':administration_id.id}  # add administration_id so we know the respondent
         #set each head in dictionary
@@ -359,6 +380,9 @@ def download_summary(request, study_obj, administrations = None): # Download stu
             sex = None
         try:
             age = BackgroundInfo.objects.get(administration=administration_id).age
+            if age < min_age: age = min_age
+            if age > max_age: age = max_age
+            scoring_dict['benchmark age'] = age
         except:
             age=None
         for f in score_forms:
