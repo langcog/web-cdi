@@ -1,0 +1,47 @@
+[
+    {
+        "title" : "Total Produced",
+        "category" : "word",
+        "measure" : "produces",
+        "order" : 1
+    },
+    {
+        "title" : "Combining",
+        "category" : "combine",
+        "measure" : "sometimes;often",
+        "order" : 2
+    },
+    {
+        "title" : "Complexity",
+        "category" : "complexity",
+        "measure" : "complex",
+        "order" : 3
+    },
+    {
+        "title" : "How to Use Words",
+        "category" : "usage",
+        "measure" : "yes",
+        "order" : 4
+    },
+    {
+        "title" : "Combination Example 1",
+        "category" : "combination_example1",
+        "measure" : "complex",
+        "order" : 10,
+        "kind" : "list"
+    },
+    {
+        "title" : "Combination Example 2",
+        "category" : "combination_example2",
+        "measure" : "complex",
+        "order" : 11,
+        "kind" : "list"
+    },
+    {
+        "title" : "Combination Example 3",
+        "category" : "combination_example3",
+        "measure" : "complex",
+        "order" : 12,
+        "kind" : "list"
+    }
+]

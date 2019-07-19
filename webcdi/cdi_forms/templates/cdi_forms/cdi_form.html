@@ -182,7 +182,7 @@
             </div>
                    
 
-        {% elif form  == "WS" or form == "L2A" or form == "L2B" %}
+        {% elif form  == "WS" or form == "L2A" or form == "L2B" or form == "CDI3" %}
             {% load staticfiles %}
 
             <div id = "intro_part1" class = "page_div collapse">
@@ -501,7 +501,8 @@
     var current_page
 
     //Naming types that are containers of smaller sections. Important for creating pages from a nested structure!
-    var larger_types = ["intro","word_div", "gestures_div", "word_ending_div", "word_form_div", "word_forms_div"];
+    //TODO this needs changing to something that isn't hard coded
+    var larger_types = ["intro","word_div", "gestures_div", "word_ending_div", "word_form_div", "word_forms_div", "imitating_adults_div"];
 
     // Going through all the named type and section divisions and pulling out those that are not just containers for smaller sections
     var filterednames = $(".page_div").filter(function(index, value) {

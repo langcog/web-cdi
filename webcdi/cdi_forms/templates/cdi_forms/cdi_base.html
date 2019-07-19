@@ -19,6 +19,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/locales/bootstrap-datepicker.fr.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.en-CA.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.en-GB.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.nl.min.js"></script>
     <script src="{% static 'cdi_forms/selectize.js' %}"></script>
 <!--     <script src="{% static 'cdi_forms/bootstrap-datepicker.js' %}"></script>
  -->    <script src="{% static 'cdi_forms/moment.js' %}"></script>
@@ -84,6 +85,8 @@
                             var due_date_local = moment(due_date_utc).local().locale('es').format("lll");
                         } else if ("{{language}}" == 'French Quebec') {
                             var due_date_local = moment(due_date_utc).local().locale('fr_CA').format("lll");
+                        } else if ("{{language}}" == 'Dutch' ) {
+                            var due_date_local = moment(due_date_utc).local().locale('nl').format("lll");
                         } else {
                             var due_date_local = moment(due_date_utc).local().format("lll");
                         }
@@ -91,7 +94,7 @@
                         $('#due_time').html("<p><b> {% trans 'Due date' %} </b>: <span>" + due_date_local + "</span></p>");
                         </script>
 
-                        <!-- If study has an associated body of text in it's waiver field, gives option to pull up a modal window containing the waiver text by clicking button -->
+                        <!-- If study has an associated body of text in its waiver field, gives option to pull up a modal window containing the waiver text by clicking button -->
                         {% if study_waiver and study_waiver != "" %}
                             <a href="#" id="show_waiver" onclick = "$('#consent_waiver').modal('show');"> {% trans "Show waiver of documentation" %} </a><br>
                         {% endif %}

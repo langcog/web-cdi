@@ -1,5 +1,5 @@
 from django.test import TestCase, LiveServerTestCase, Client
-from selenium.webdriver.firefox.webdriver import WebDriver
+from selenium.webdriver.chrome.webdriver import WebDriver
 from django.core.urlresolvers import reverse
 import pickle, os
 
@@ -47,24 +47,34 @@ class SeleniumTestCase(LiveServerTestCase):
     def open(self, url):
         self.wd.get("%s%s" % (self.live_server_url, url))
 
+from django.test.utils import override_settings
+
+@override_settings(DEBUG=True)
 class TestParentInterface(SeleniumTestCase):
 
     def setUp(self):
         # setUp is where you setup call fixture creation scripts
         # and instantiate the WebDriver, which in turns loads up the browser.
         
-        process = Popen(['psql', settings.DATABASES['default']['TEST']['NAME'], '-U', settings.DATABASES['default']['USER']], stdout=PIPE, stdin=PIPE)
-        filename = 'webcdi-backup.sql'
-        output = process.communicate('\i ' + filename)[0]
+        #process = Popen(['psql', settings.DATABASES['default']['TEST']['NAME'], '-U', settings.DATABASES['default']['USER']], stdout=PIPE, stdin=PIPE)
+        #filename = 'webcdi-backup.sql'
+        #output = process.communicate('\i ' + filename)[0]
 
         self.admin = User.objects.create_user(username='admin', password = 'pw')
         self.admin.is_superuser = True
         self.admin.is_staff = True
         self.admin.save()
-        self.study_obj = study.objects.get(name = 'Debug-V6-WG', researcher = User.objects.get(username='langcoglab'))
-        self.study_obj.pk = None
-        self.study_obj.name = 'Test'
-        self.study_obj.researcher = self.admin
+
+        self.researcher = User.objects.create_user(username="researcher", password="pw")
+
+        self.instrument = instrument.objects.all()[5]
+
+        self.study_obj = study.objects.create(
+            researcher=self.admin,
+            name="Test Study",
+            instrument=self.instrument,
+            min_age=16,
+            max_age=30 )
         self.study_obj.save()
 
         self.client = Client()
@@ -138,21 +148,28 @@ class TestParentInterface(SeleniumTestCase):
                 administration_data.objects.bulk_create(understood_words)
 
         new_administrations.update(completedBackgroundInfo = True, completed = True)
+    
+    def researcher_login(self):
+        self.open('/interface/')
+        username_input = self.wd.find_css("username")
+        username_input.send_keys(self.researcher.username)
+        password_input = self.wd.find_element_by_name("password")
+        password_input.send_keys('pw')
+        self.wd.find_element_by_id('id_log_in').click()
 
     def test_parent_UI(self):
-
         test_url = reverse('administer_new_parent', args=[self.study_obj.researcher, self.study_obj.name])
         self.open(test_url)
 
         try:
             self.wd.wait_for_css('#okaybtn',5).click()
-        except NoSuchElementException:
+        except: #NoSuchElementException:
             pass
-
+        
         self.wd.execute_script('fastforward()')
-        self.wd.wait_for_css('input[name="btn-next"]',5)[0].click()
-
+        self.wd.wait_for_css('input[name="btn-next"]',5)[1].click()
+        import time
+        time.sleep(5)
         self.wd.execute_script('fastforward()')
-
-        self.wd.wait_for_css('.submit-button')[0].click()
+        self.wd.wait_for_css('.submit-button')[1].click()
 

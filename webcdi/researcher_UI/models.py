@@ -23,7 +23,7 @@ class researcher(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     institution = models.CharField(verbose_name = "Name of Institution", max_length=101) # Name of research institution they are affiliated with
     position = models.CharField(verbose_name = "Position in Institution", max_length=101) # Title of position within research institution
-    allowed_instruments = models.ManyToManyField(instrument, verbose_name = "Instruments this researcher has access to")
+    allowed_instruments = models.ManyToManyField(instrument, verbose_name = "Instruments this researcher has access to", blank=True)
     def __unicode__(self):
         return "%s %s (%s, %s)" % (self.user.first_name, self.user.last_name, self.position, self.institution)
     def __str__(self):
@@ -122,3 +122,46 @@ class ip_address(models.Model):
     study = models.ForeignKey("study") # Study associated with IP address
     ip_address = models.CharField(max_length = 30) # Actual IP address
     date_added = models.DateTimeField(verbose_name = "Date IP address was added to database", auto_now_add = True) # Date that IP address was added to database.
+
+
+KIND_OPTIONS = (
+    ('count','count'),
+    ('list','list')
+)
+
+class InstrumentScore(models.Model):
+    '''
+    Class to store the instrument scoring mechanisms loaded from json files held in 
+    /cdi_forms/form_data/scoring/
+    '''
+    instrument = models.ForeignKey(instrument, on_delete=models.CASCADE)
+    title = models.CharField(max_length=101)
+    category = models.CharField(max_length=101)
+    measure = models.CharField(max_length=101)
+    order = models.IntegerField(default=999)
+    kind = models.CharField(max_length=5, default="count", choices=KIND_OPTIONS) 
+
+    def __unicode__(self):
+        return '%s: %s' % (self.instrument, self.title)
+
+    class Meta:
+        ordering = ['instrument', 'order']
+
+class Benchmark(models.Model):
+    '''
+    Class to store benchmark data for each instrument and score.
+    Data is loaded from csv files held in /cdi_forms/form_data/benchmarking/
+    '''
+    instrument = models.ForeignKey(instrument, on_delete=models.CASCADE)
+    instrument_score = models.ForeignKey(InstrumentScore, on_delete=models.CASCADE)
+    percentile = models.IntegerField()
+    age = models.IntegerField()
+    raw_score = models.IntegerField()
+    raw_score_boy = models.IntegerField()
+    raw_score_girl = models.IntegerField()
+
+    def __unicode__(self):
+        return '%s : %s : %s' % (self.instrument_score, self.percentile, self.age)
+
+    class Meta:
+        ordering = ['instrument_score','age','percentile']

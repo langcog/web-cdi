@@ -22,7 +22,11 @@
     <div class="flex-row">
         <h4>{% trans "Instructions for completing the language inventory" %}</h4>
         <ul>
-            <li> {% trans "Try to complete the inventory when you have at least 30 quiet minutes, without interruptions. An example might be when your child is sleeping." %} </li>
+            {% if form == "WG" or form == "WS" %}
+                <li> {% trans "Try to complete the inventory when you have at least 30 quiet minutes, without interruptions. An example might be when your child is sleeping." %} </li>
+            {% else %}
+                <li> {% trans "Try to complete the inventory when you have at least 10-15 quiet minutes, without interruptions. An example might be when your child is sleeping." %} </li>
+            {% endif %}
             <li> {% trans "You do not have to complete the inventory in one sitting. If you are interrupted, it is ok to put it down and come back to it when you have more time." %} </li>
             <li> {% trans "Feel free to ask others (e.g. other family members, nanny, child care providers) to help you fill out this form." %} </li>
             <li> {% trans "Please read all of the instructions on the inventory carefully, and make sure you complete all of the sections." %} </li>
@@ -267,6 +271,7 @@
 
     <script>
         function fastforward() {
+            $('#id_form_filler').val('mother');
             $('#id_child_dob').val(moment().subtract(17,'M').format(date_format.toUpperCase()))
             $('#id_sex_1').click();
             $('#id_country').val('US');
@@ -283,6 +288,7 @@
             }
 
             $('#id_born_on_due_date_1').click();
+            $('#id_primary_caregiver').val('mother');
             $('#id_mother_yob').val(1990);
             $('#id_mother_education').val(16);
             $('#id_father_yob').val(1990);

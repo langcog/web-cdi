@@ -1,13 +1,20 @@
-@font-face {
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+/*@font-face {
     font-family: Karla;
     src: url('../fonts/Karla.woff2') format('woff2'),
          url('../fonts/Karla.woff') format('woff');
+}*/
+
+@font-face {
+  font-family: 'Roboto', sans-serif;
+  src : url('https://fonts.googleapis.com/css?family=Roboto')
 }
 
 
 @media (max-width:991px){
   body {
-    font-family: "Karla", "sans-serif";
+    font-family: "Roboto", "sans-serif";
     font-size: 40px;
   }
 
@@ -31,7 +38,7 @@
 
 @media (min-width:992px) and (max-width:1199px) {
   body {
-    font-family: "Karla", "sans-serif";
+    font-family: "Roboto", "sans-serif";
     font-size: 24px;
   }
   label.btn span {
@@ -51,7 +58,7 @@
 
 @media (min-width:1200px){
     body {
-      font-family: "Karla", "sans-serif";
+      font-family: "Roboto", "sans-serif";
       font-size: 18px;
     }
   label.btn span {
@@ -173,4 +180,8 @@ strong { text-decoration: underline; }
 label.btn{
     white-space:normal !important;
     word-wrap: break-word; 
+}
+
+.choice { 
+  text-align: left
 }

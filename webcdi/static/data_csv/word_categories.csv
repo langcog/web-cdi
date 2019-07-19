@@ -1,4 +1,4 @@
-id,English_WG,English_WS,Spanish_WG,Spanish_WS,French_Quebec_WG,French_Quebec_WS,Canadian_English_WG,Canadian_English_WS
+id,English_WG,English_WS,Spanish_WG,Spanish_WS,French_Quebec_WG,French_Quebec_WS,Canadian_English_WG,Canadian_English_WS,English_CDI3
 action_words,Action Words,Action Words,Acciones y Procesos (Verbos),Acciones y Procesos (Verbos),Verbes D’action,Verbes,Action Words,Action Words
 animals,Animals (Real Or Toy),Animals (Real Or Toy),Animales (de Verdad y de Juguete),Animales (de Verdad y de Juguete),Animaux (réels ou jouets),Animaux (réels ou jouets),Animals (Real Or Toy),Animals (Real Or Toy)
 articles,,,Artículos,,,,,
@@ -25,3 +25,7 @@ states,,,Estados,Estados,,,,
 time_words,Words about Time,Words about Time,Tiempo,Tiempo,Mots pour Parler du Temps,Mots pour Parler du Temps,Words about Time,Words about Time
 toys,Toys,Toys,Juguetes,Juguetes,Jouets,Jouets,Toys,Toys
 vehicles,Vehicles (Real Or Toy),Vehicles (Real Or Toy),Vehículos (de Verdad y de Juguete),Vehículos (de Verdad y de Juguete),Véhicules (réels ou jouets),Véhicules (réels ou jouets),Vehicles (Real Or Toy),Vehicles (Real Or Toy)
+col_1,,,,,,,,,Col1
+col_2,,,,,,,,,Col2
+col_3,,,,,,,,,Col3
+col_4,,,,,,,,,Col4

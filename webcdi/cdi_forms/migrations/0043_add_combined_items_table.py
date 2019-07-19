@@ -59,7 +59,8 @@ def populate_items(apps, schema_editor):
                 item_category = row_values[col_names.index('category')]
                 item_choices = row_values[col_names.index('choices')]
                 choices_key = None
-                if item_type not in ['combination_examples']:
+                #if item_type not in ['combination_examples']:
+                if not 'examples' in item_type:
                     try:
                         if Choices:
                             choices_key = Choices.objects.get(choice_set_en = item_choices)

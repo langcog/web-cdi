@@ -2,7 +2,7 @@
 
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseServerError, Http404
 from .forms import *
 from .models import researcher, study, administration, administration_data, get_meta_header, get_background_header, payment_code, ip_address
 import codecs, json, os, re, random, csv, datetime, cStringIO, math, StringIO, zipfile
@@ -20,23 +20,32 @@ import requests
 from django.urls import reverse
 from decimal import Decimal
 from django.contrib.sites.shortcuts import get_current_site
+from django.contrib import messages
 from ipware.ip import get_ip
 from psycopg2.extras import NumericRange
 from django.conf import settings
 from django.utils import timezone
 
 
+from django.utils.translation import ugettext_lazy as _
+from cdi_forms.models import Instrument_Forms
 
+def calc_benchmark(x1, x2, y1, y2, raw_score):
+    if x1 == x2: return int((y1+y2)/2)
+    gradient = float(y2-y1)/(x2-x1)
+    a = float(y1 - (x1 * gradient))
+    return int(a + raw_score * gradient)
 
 @login_required # For researchers only, requires user to be logged in (test-takers do not have an account and are blocked from this interface)
 def download_data(request, study_obj, administrations = None): # Download study data
     # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse(content_type='text/csv') # Format response as a CSV
-    response['Content-Disposition'] = 'attachment; filename='+study_obj.name+'_data.csv''' # Name the CSV response
+    filename = study_obj.name+'_items.csv'
+    response['Content-Disposition'] = 'attachment; filename="' + filename + '"'# Name the CSV response
     
     administrations = administrations if administrations is not None else administration.objects.filter(study = study_obj)
     model_header = get_model_header(study_obj.instrument.name) # Fetch the associated instrument model's variables
-    
+
     # Fetch administration variables
     admin_header = ['study_name', 'subject_id','repeat_num', 'administration_id', 'link', 'completed', 'completedBackgroundInfo', 'due_date', 'last_modified','created_date']
 
@@ -50,6 +59,237 @@ def download_data(request, study_obj, administrations = None): # Download study 
         melted_answers.reset_index(level=0, inplace=True)
     except:
         melted_answers = pd.DataFrame(columns = get_model_header(study_obj.instrument.name))
+
+    # Change column headers from item ID to item's definition - note: should be gloss for comparison across languages
+    
+    new_headers = Instrument_Forms.objects.values('itemID', 'definition', 'gloss').filter(instrument=study_obj.instrument).distinct()
+    new_headers = {x['itemID'] : x['gloss'] if len(x['gloss']) > 0 else x['definition'] if len(x['definition']) > 0 else x['itemID'] for x in new_headers}
+    model_header = [new_headers.get(n, n) for n in model_header]
+    
+    melted_answers.rename(columns=new_headers, inplace=True)
+    
+    # Format background data responses for pandas dataframe and eventual printing
+    #try:
+    background_data = BackgroundInfo.objects.values().filter(administration__in = administrations)
+
+    BI_choices = {}
+
+    fields = BackgroundInfo._meta.get_fields()
+    for field in fields:
+        if field.choices:
+            field_choices = dict(field.choices)
+            for k, v in field_choices.items():
+                if unicode(k) == unicode(v):
+                    field_choices.pop(k, None)
+            BI_choices[field.name] = {unicode(k):unicode(v) for k,v in field_choices.items()}
+
+    new_background = pd.DataFrame.from_records(background_data).astype(unicode).replace(BI_choices)
+    try:
+        new_background['administration_id'] = new_background['administration_id'].astype('int64')
+    except Exception as e:
+        messages.add_message(request, messages.ERROR, "You must select at least 1 completed response")
+        return render (request, 'error-page.html')
+
+    #except:
+    #    new_background = pd.DataFrame(columns = ['administration_id'] + background_header)
+
+    # Add scoring
+    scores = []
+    
+    score_forms = InstrumentScore.objects.filter(instrument=study_obj.instrument)
+    score_header = []
+    if Benchmark.objects.filter(instrument=study_obj.instrument).exists():
+            score_header.append('benchmark age')
+    for f in score_forms: # let's get the scoring headers
+        score_header.append(f.title)
+        if Benchmark.objects.filter(instrument_score=f).exists():
+            benchmark = Benchmark.objects.filter(instrument_score=f)[0]
+            if benchmark.percentile == 999:
+                score_header.append(f.title + ' % yes answers at this age and sex')
+            else:
+                score_header.append(f.title + ' Percentile-sex')
+                if not benchmark.raw_score == 9999: score_header.append(f.title + ' Percentile-both')
+    
+    #set max and min age for benchmark
+    try:
+        max_age = Benchmark.objects.filter(instrument=study_obj.instrument).order_by('-age')[0].age
+        min_age = Benchmark.objects.filter(instrument=study_obj.instrument).order_by('age')[0].age
+    except: pass
+        
+    for administration_id in administrations:
+        scoring_dict = {'administration_id':administration_id.id}  # add administration_id so we know the respondent
+        
+        #set each head in dictionary
+        for f in score_forms: #and ensure each score is at least 0
+            if f.kind == 'count' : 
+                if administration_id.completedBackgroundInfo:
+                    scoring_dict[f.title] = 0
+                else:
+                    scoring_dict[f.title] = ''
+            else : scoring_dict[f.title] = ''
+        for administration_data_item in administration_data.objects.filter(administration_id=administration_id):
+            inst = Instrument_Forms.objects.get(instrument=study_obj.instrument,itemID=administration_data_item.item_ID)
+            scoring_category = inst.scoring_category if inst.scoring_category else inst.item_type
+            for f in score_forms: #items can be counted under multiple Titles check category against all categories
+                if f.kind == "count" :
+                    if scoring_category in f.category.split(';'):
+                        if administration_data_item.value in f.measure.split(';'): #and check all values to see if we increment
+                            scoring_dict[f.title] += 1
+                else : 
+                    if scoring_category in f.category.split(';'):
+                        scoring_dict[f.title] +=  administration_data_item.value + '\n'
+            
+                #add benchmark titles
+            if Benchmark.objects.filter(instrument_score=f).exists():
+                benchmark = Benchmark.objects.filter(instrument_score=f)[0]
+                if benchmark.percentile == 999:
+                    if administration_id.completedBackgroundInfo:
+                        scoring_dict[f.title + ' % yes answers at this age and sex'] = 0
+                    else :
+                        scoring_dict[f.title + ' % yes answers at this age and sex'] = ''
+                else:
+                    if administration_id.completedBackgroundInfo:
+                        scoring_dict[f.title + ' Percentile-sex'] = 0
+                    else:
+                        scoring_dict[f.title + ' Percentile-sex'] = ''
+                    if not benchmark.raw_score == 9999: 
+                        if administration_id.completedBackgroundInfo:
+                            scoring_dict[f.title + ' Percentile-both'] = 0
+                        else:
+                            scoring_dict[f.title + ' Percentile-both'] = ''
+                
+        # now add in the benchmark scores
+        try:
+            sex = BackgroundInfo.objects.get(administration=administration_id).sex
+        except:
+            sex = None
+        try:
+            age = BackgroundInfo.objects.get(administration=administration_id).age
+            if age < min_age: age = min_age
+            if age > max_age: age = max_age
+            scoring_dict['benchmark age'] = age
+    
+        except:
+            age=None
+        for f in score_forms:
+            if Benchmark.objects.filter(instrument_score=f, age=age).exists():
+                benchmark = Benchmark.objects.filter(instrument_score=f)[0]
+                if benchmark.percentile == 999:
+                    benchmark = Benchmark.objects.get(instrument_score=f, age=age)
+                    if sex == 'M': scoring_dict[f.title + ' % yes answers at this age and sex'] = benchmark.raw_score_boy
+                    if sex == 'F': scoring_dict[f.title + ' % yes answers at this age and sex'] = benchmark.raw_score_girl
+                    
+                else:
+                    benchmarks = Benchmark.objects.filter(instrument_score=f, age=age)
+                    raw_score = scoring_dict[f.title]
+
+                    unisex_score = sex_score = 0
+                    benchmark = benchmarks[0]
+                    if not benchmark.raw_score == 9999:
+                        unisex_score = benchmark.percentile
+                        for b in benchmarks[1:]:
+                            if b.raw_score <= raw_score: 
+                                benchmark = b
+                                unisex_score = benchmark.percentile
+                            else:
+                                unisex_score = calc_benchmark(benchmark.raw_score, b.raw_score, benchmark.percentile, b.percentile, raw_score)
+                                break
+                        
+                    
+                    if sex == 'M':
+                        benchmark = benchmarks[0]
+                        sex_score = benchmark.percentile
+                        for b in benchmarks[1:]:
+                            if b.raw_score_boy <= raw_score: 
+                                benchmark = b
+                                sex_score = benchmark.percentile
+                            else:
+                                sex_score = calc_benchmark(benchmark.raw_score_boy, b.raw_score_boy, benchmark.percentile, b.percentile, raw_score)
+                                break
+                    elif sex == 'F':
+                        benchmark = benchmarks[0]
+                        sex_score = benchmark.percentile
+                        for b in benchmarks[1:]:
+                            if b.raw_score_girl <= raw_score: 
+                                benchmark = b
+                                sex_score = benchmark.percentile
+                            else:
+                                sex_score = calc_benchmark(benchmark.raw_score_girl, b.raw_score_girl, benchmark.percentile, b.percentile, raw_score)
+                                break                      
+                    
+                    if not benchmark.raw_score == 9999:
+                        if unisex_score < 1: unisex_score = '<1'
+                    if sex_score < 1: sex_score = '<1'
+                
+                    if not benchmark.raw_score == 9999: scoring_dict[f.title + ' Percentile-both'] = unisex_score
+                    scoring_dict[f.title + ' Percentile-sex'] = sex_score
+
+        scores.append(scoring_dict)
+    melted_scores = pd.DataFrame(scores)
+    melted_scores.set_index('administration_id')
+    
+    # Try to combine background data and CDI responses
+    try:
+        background_answers1 = pd.merge(new_background, melted_answers, how='outer', on = 'administration_id')
+        background_answers = pd.merge(background_answers1, melted_scores, how='outer', on = 'administration_id')
+    except:
+        background_answers = pd.DataFrame(columns = list(new_background) + list(melted_answers) + list(melted_scores))
+    
+    # Try to format administration data for pandas dataframe
+    try:
+        admin_data = pd.DataFrame.from_records(administrations.values(
+            'id', 'study__name','url_hash', 'repeat_num', 'subject_id','completed','completedBackgroundInfo','due_date','last_modified','created_date'
+        )).rename(columns = {'id':'administration_id', 'study__name': 'study_name', 'url_hash': 'link'})
+    except:
+        admin_data = pd.DataFrame(columns = admin_header)
+    
+    # Replace study ID# with actual study name
+    #admin_data['study_name'] = study_obj.name
+
+    # Merge administration data into already combined background/CDI form dataframe
+    try: 
+        combined_data = pd.merge(admin_data, background_answers, how='outer', on = 'administration_id')
+    except Exception as e:
+        messages.add_message(request, messages.ERROR, "You must select at least 1 completed response")
+        return render (request, 'error-page.html')
+
+    # Recreate link for administration
+    test_url = ''.join(['http://', get_current_site(request).domain, reverse('administer_cdi_form', args=['a'*64])]).replace('a'*64+'/','')
+    combined_data['link'] = test_url + combined_data['link']
+
+    # If there are any missing columns (e.g., all test-takers for one study did not answer an item so it does not appear in database responses), add the empty columns in and don't break!
+    s2 = combined_data.columns.to_series()
+    combined_data.columns = (combined_data.columns + 
+                            s2.groupby(s2).cumcount().astype(str).radd('_').str.replace('_0',''))
+
+    missing_columns = list(set(model_header) - set(combined_data.columns))
+    if missing_columns:
+        combined_data = combined_data.reindex(columns=np.append(combined_data.columns.values, missing_columns))
+    
+    # Organize columns  
+    combined_data = combined_data[admin_header + background_header + model_header + score_header]
+    
+    # Turn pandas dataframe into a CSV
+    combined_data.to_csv(response, encoding='utf-8', index=False)
+
+    # Return CSV
+    return response
+
+@login_required # For researchers only, requires user to be logged in (test-takers do not have an account and are blocked from this interface)
+def download_summary(request, study_obj, administrations = None): # Download study data
+    start_time = datetime.datetime.now()
+    # Create the HttpResponse object with the appropriate CSV header.
+    response = HttpResponse(content_type='text/csv') # Format response as a CSV
+    filename = study_obj.name+'_summary.csv'
+    response['Content-Disposition'] = 'attachment; filename="' + filename + '"'# Name the CSV response
+    
+    administrations = administrations if administrations is not None else administration.objects.filter(study = study_obj)
+
+    # Fetch administration variables
+    admin_header = ['study_name', 'subject_id','repeat_num', 'administration_id', 'link', 'completed', 'completedBackgroundInfo', 'due_date', 'last_modified','created_date']
+
+    # Fetch background data variables
+    background_header = ['age','sex','zip_code','birth_order', 'birth_weight_lb', 'birth_weight_kg','multi_birth_boolean','multi_birth', 'born_on_due_date', 'early_or_late', 'due_date_diff', 'mother_yob', 'mother_education','father_yob', 'father_education', 'annual_income', 'child_hispanic_latino', 'child_ethnicity', 'caregiver_info', 'other_languages_boolean','other_languages','language_from', 'language_days_per_week', 'language_hours_per_day', 'ear_infections_boolean','ear_infections', 'hearing_loss_boolean','hearing_loss', 'vision_problems_boolean','vision_problems', 'illnesses_boolean','illnesses', 'services_boolean','services','worried_boolean','worried','learning_disability_boolean','learning_disability']
 
     # Format background data responses for pandas dataframe and eventual printing
     #try:
@@ -66,27 +306,157 @@ def download_data(request, study_obj, administrations = None): # Download study 
                     field_choices.pop(k, None)
             BI_choices[field.name] = {unicode(k):unicode(v) for k,v in field_choices.items()}
 
-    new_background = pd.DataFrame.from_records(background_data).astype(str).replace(BI_choices)
+    new_background = pd.DataFrame.from_records(background_data).astype(unicode).replace(BI_choices)
     new_background['administration_id'] = new_background['administration_id'].astype('int64')
 
     #except:
     #    new_background = pd.DataFrame(columns = ['administration_id'] + background_header)
 
+    # Add scoring
+    scores = []
+    
+    score_forms = InstrumentScore.objects.filter(instrument=study_obj.instrument)
+    score_header = []
+    if Benchmark.objects.filter(instrument=study_obj.instrument).exists():
+        score_header.append('benchmark age')
+        
+    for f in score_forms: # let's get the scoring headers
+        score_header.append(f.title)
+        if Benchmark.objects.filter(instrument_score=f).exists():
+            benchmark = Benchmark.objects.filter(instrument_score=f)[0]
+            if benchmark.percentile == 999:
+                score_header.append(f.title + ' % yes answers at this age and sex')
+            else:
+                score_header.append(f.title + ' Percentile-sex')
+                if not benchmark.raw_score == 9999: score_header.append(f.title + ' Percentile-both')
+    
+    #set max and min age for benchmark
+    try:
+        max_age = Benchmark.objects.filter(instrument=study_obj.instrument).order_by('-age')[0].age
+        min_age = Benchmark.objects.filter(instrument=study_obj.instrument).order_by('age')[0].age
+    except: pass
 
+    for administration_id in administrations:
+        scoring_dict = {'administration_id':administration_id.id}  # add administration_id so we know the respondent
+        #set each head in dictionary
+        for f in score_forms: #and ensure each score is at least 0
+            insts = Instrument_Forms.objects.filter(instrument=study_obj.instrument, scoring_category__in=f.category.split(';'))
+            insts_IDs = []
+            for inst in insts: insts_IDs.append(inst.itemID)
+            if f.kind == 'count' : 
+                if administration_id.completedBackgroundInfo:
+                    scoring_dict[f.title] = administration_data.objects.filter(administration_id=administration_id, value__in=f.measure.split(';'), item_ID__in=insts_IDs).count()
+                else:
+                    scoring_dict[f.title] = ''
+            else : 
+                items = administration_data.objects.filter(administration_id=administration_id, item_ID__in=insts_IDs)
+                scoring_dict[f.title] = ''
+                for item in items :
+                    scoring_dict[f.title] +=  item.value + '\n'
+            
+            #add benchmark titles
+            if Benchmark.objects.filter(instrument_score=f).exists():
+                benchmark = Benchmark.objects.filter(instrument_score=f)[0]
+                if benchmark.percentile == 999:
+                    if administration_id.completedBackgroundInfo:
+                        scoring_dict[f.title + ' % yes answers at this age and sex'] = 0
+                    else: 
+                        scoring_dict[f.title + ' % yes answers at this age and sex'] = ''
+                else:
+                    if administration_id.completedBackgroundInfo:
+                        scoring_dict[f.title + ' Percentile-sex'] = 0
+                    else:
+                        scoring_dict[f.title + ' Percentile-sex'] = ''
+                    if not benchmark.raw_score == 9999: 
+                        if administration_id.completedBackgroundInfo:
+                            scoring_dict[f.title + ' Percentile-both'] = 0
+                        else: 
+                            scoring_dict[f.title + ' Percentile-both'] = ''
+                
+        # now add in the benchmark scores
+        try:
+            sex = BackgroundInfo.objects.get(administration=administration_id).sex
+        except:
+            sex = None
+        try:
+            age = BackgroundInfo.objects.get(administration=administration_id).age
+            if age < min_age: age = min_age
+            if age > max_age: age = max_age
+            scoring_dict['benchmark age'] = age
+        except:
+            age=None
+        for f in score_forms:
+            if Benchmark.objects.filter(instrument_score=f, age=age).exists():
+                benchmark = Benchmark.objects.filter(instrument_score=f)[0]
+                if benchmark.percentile == 999:
+                    benchmark = Benchmark.objects.get(instrument_score=f, age=age)
+                    if sex == 'M': scoring_dict[f.title + ' % yes answers at this age and sex'] = benchmark.raw_score_boy
+                    if sex == 'F': scoring_dict[f.title + ' % yes answers at this age and sex'] = benchmark.raw_score_girl
+                    
+                else:
+                    benchmarks = Benchmark.objects.filter(instrument_score=f, age=age)
+                    raw_score = scoring_dict[f.title]
+
+                    unisex_score = sex_score = 0
+                    benchmark = benchmarks[0]
+                    if not benchmark.raw_score == 9999:
+                        unisex_score = benchmark.percentile
+                        for b in benchmarks[1:]:
+                            if b.raw_score <= raw_score: 
+                                benchmark = b
+                                unisex_score = benchmark.percentile
+                            else:
+                                unisex_score = calc_benchmark(benchmark.raw_score, b.raw_score, benchmark.percentile, b.percentile, raw_score)
+                                break
+                    
+                    if sex == 'M':
+                        benchmark = benchmarks[0]
+                        sex_score = benchmark.percentile
+                        for b in benchmarks[1:]:
+                            if b.raw_score_boy <= raw_score: 
+                                benchmark = b
+                                sex_score = benchmark.percentile
+                            else:
+                                sex_score = calc_benchmark(benchmark.raw_score_boy, b.raw_score_boy, benchmark.percentile, b.percentile, raw_score)
+                                break
+                    elif sex == 'F':
+                        benchmark = benchmarks[0]
+                        sex_score = benchmark.percentile
+                        for b in benchmarks[1:]:
+                            if b.raw_score_girl <= raw_score: 
+                                benchmark = b
+                                sex_score = benchmark.percentile
+                            else:
+                                sex_score = calc_benchmark(benchmark.raw_score_girl, b.raw_score_girl, benchmark.percentile, b.percentile, raw_score)
+                                break
+                    
+                    if not benchmark.raw_score == 9999:
+                        if unisex_score < 1: unisex_score = '<1'
+                    if sex_score < 1: sex_score = '<1'
+                
+                    if not benchmark.raw_score == 9999: scoring_dict[f.title + ' Percentile-both'] = unisex_score
+                    scoring_dict[f.title + ' Percentile-sex'] = sex_score
+        
+        scores.append(scoring_dict)
+    melted_scores = pd.DataFrame(scores)
+    melted_scores.set_index('administration_id')
+    
     # Try to combine background data and CDI responses
     try:
-        background_answers = pd.merge(new_background, melted_answers, how='outer', on = 'administration_id')
+        background_answers = pd.merge(new_background, melted_scores, how='outer', on = 'administration_id')
     except:
-        background_answers = pd.DataFrame(columns = list(new_background) + list(melted_answers))
-
+        background_answers = pd.DataFrame(columns = list(new_background) + list(melted_scores))
+    
     # Try to format administration data for pandas dataframe
     try:
-        admin_data = pd.DataFrame.from_records(administrations.values()).rename(columns = {'id':'administration_id', 'study_id': 'study_name', 'url_hash': 'link'})
+        admin_data = pd.DataFrame.from_records(administrations.values(
+            'id', 'study__name','url_hash', 'repeat_num', 'subject_id','completed','completedBackgroundInfo','due_date','last_modified','created_date'
+        )).rename(columns = {'id':'administration_id', 'study__name': 'study_name', 'url_hash': 'link'})
     except:
         admin_data = pd.DataFrame(columns = admin_header)
     
     # Replace study ID# with actual study name
-    admin_data['study_name'] = study_obj.name
+    #admin_data['study_name'] = study_obj.name
 
     # Merge administration data into already combined background/CDI form dataframe
     combined_data = pd.merge(admin_data, background_answers, how='outer', on = 'administration_id')
@@ -95,20 +465,15 @@ def download_data(request, study_obj, administrations = None): # Download study 
     test_url = ''.join(['http://', get_current_site(request).domain, reverse('administer_cdi_form', args=['a'*64])]).replace('a'*64+'/','')
     combined_data['link'] = test_url + combined_data['link']
 
-    # If there are any missing columns (e.g., all test-takers for one study did not answer an item so it does not appear in database responses), add the empty columns in and don't break!
-    missing_columns = list(set(model_header) - set(combined_data.columns))
-    if missing_columns:
-        combined_data = combined_data.reindex(columns = np.append( combined_data.columns.values, missing_columns))
-
     # Organize columns  
-    combined_data = combined_data[admin_header + background_header + model_header ]
-
+    combined_data = combined_data[admin_header + background_header + score_header]
+    
     # Turn pandas dataframe into a CSV
     combined_data.to_csv(response, encoding='utf-8', index=False)
 
     # Return CSV
+    end_time = datetime.datetime.now()
     return response
-
 
 @login_required
 def download_dictionary(request, study_obj): # Download dictionary for instrument, lists relevant information for each item
@@ -260,6 +625,12 @@ def console(request, study_name = None, num_per_page = 20): # Main giant functio
                     administrations = administration.objects.filter(id__in = num_ids) # Grab a queryset of administration objects with administration IDs found in list
                     return download_data(request, study_obj, administrations) # Send queryset to download_data function to return a CSV of subject data
                     refresh = True # Refresh page to reflect table changes
+                
+                elif 'download-selected-summary' in request.POST: # If 'Download Selected Data' was clicked
+                    num_ids = list(set(map(int, ids))) # Force IDs into a list of integers
+                    administrations = administration.objects.filter(id__in = num_ids) # Grab a queryset of administration objects with administration IDs found in list
+                    return download_summary(request, study_obj, administrations) # Send queryset to download_data function to return a CSV of subject data
+                    refresh = True # Refresh page to reflect table changes
 
                 elif 'delete-study' in request.POST: # If 'Delete Study' button is clicked
                     study_obj.active = False # soft delete
@@ -270,6 +641,10 @@ def console(request, study_name = None, num_per_page = 20): # Main giant functio
                 elif 'download-study-csv' in request.POST: # If 'Download Data' button is clicked
                     administrations = administration.objects.filter(study = study_obj) # Grab a queryset of administration objects within study
                     return download_data(request, study_obj, administrations) # Send queryset to download_data and receive a CSV of responses
+                
+                elif 'download-summary-csv' in request.POST: # If 'Download Summary' button is clicked
+                    administrations = administration.objects.filter(study = study_obj) # Grab a queryset of administration objects within study
+                    return download_summary(request, study_obj, administrations) # Send queryset to download_data and receive a CSV of responses
                 
                 elif 'download-study-scoring' in request.POST: # If 'Download Data' button is clicked
                     administrations = administration.objects.filter(study = study_obj) # Grab a queryset of administration objects within study
@@ -738,7 +1113,7 @@ def administer_new_parent(request, username, study_name): # For creating single 
         new_admin = administration.objects.create(study =study_obj, subject_id = max_subject_id+1, repeat_num = 1, url_hash = random_url_generator(), completed = False, due_date = datetime.datetime.now()+datetime.timedelta(days=test_period)) # Create an administration object for participant within database
         new_hash_id = new_admin.url_hash # Note the generated hash ID
         if bypass: # If the user explicitly wanted to continue with the test despite being told they would not be compensated
-            new_admin.bypass = True # Mark administation object with 'bypass'
+            new_admin.bypass = True # Mark administration object with 'bypass'
             new_admin.save() # Update object in database
         redirect_url = reverse('administer_cdi_form', args=[new_hash_id]) # Generate the administration URL given the object's hash ID
     else: # If not marked as allowed

@@ -20,7 +20,6 @@ from django.views.generic import TemplateView
 from supplementtut.views import *
 from django.contrib.auth import views as auth_views
 
-
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name="researcher_UI/home.html")),
     url(r'^favicon\.ico', RedirectView.as_view(url='/static/images/favicon.ico', permanent=True)),
