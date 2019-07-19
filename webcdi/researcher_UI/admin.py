@@ -4,11 +4,18 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 from django.db.models import Count 
 
+from .admin_actions import scoring_data, scoring_summary
+
 # Register your models here.
 admin.site.register(instrument)
 admin.site.register(administration_data)
 admin.site.register(researcher)
+admin.site.register(Benchmark)
 
+class InstrumentScoreAdmin(admin.ModelAdmin):
+    list_display = ['instrument','title']
+    list_filter = ['instrument__language','instrument__form']
+admin.site.register(InstrumentScore,InstrumentScoreAdmin)
 
 class AdministrationSummaryAdmin(admin.ModelAdmin):
     change_list_template = 'admin/administration_summary_change_list.html'
@@ -50,9 +57,15 @@ class AdministrationAdmin(admin.ModelAdmin):
 admin.site.register(administration, AdministrationAdmin)
 
 class StudyAdmin(admin.ModelAdmin):
-    list_display=['name','instrument','researcher']
+    list_display=['name','get_responses','instrument','researcher']
     list_filter = ['instrument','researcher']
-    search_fields = ['instrument','researcher','name']
+    search_fields = ['instrument__name','researcher__username','name']
+    actions = [scoring_data, scoring_summary]
+
+    def get_responses(self, obj):
+        return len(obj.administration_set.all())
+    get_responses.short_description = "Responses"
+
 admin.site.register(study, StudyAdmin)
 
 # Define an inline admin descriptor for Researcher model

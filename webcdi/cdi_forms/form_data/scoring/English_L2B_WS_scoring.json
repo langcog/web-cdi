@@ -1,0 +1,14 @@
+[
+    {
+        "title" : "Produces",
+        "category" : "word",
+        "measure" : "produces",
+        "order" : 1
+    },
+    {
+        "title" : "Combines",
+        "category" : "word",
+        "measure" : "sometimes;often",
+        "order" : 2
+    }
+]

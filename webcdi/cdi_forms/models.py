@@ -52,6 +52,7 @@ class Instrument_Forms(models.Model):
     complexity_category = models.CharField(max_length = 101, null=True, blank=True) # category for complexity item. Currently blank.
     uni_lemma = models.CharField(max_length= 101, null=True, blank=True) # ID for matching terms across languages. Currently unused.
     item_order = models.IntegerField(validators=[MinValueValidator(1)])
+    scoring_category = models.CharField(max_length = 101, null=True, blank=True) # used to provide scoring granulatity - uses item_type if blank
     def __unicode__(self):
         return "%s (%s, %s)" % (self.definition, self.instrument.verbose_name, self.itemID)
     class Meta:

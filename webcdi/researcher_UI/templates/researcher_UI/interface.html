@@ -134,6 +134,7 @@
                                           </button>
                                           <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                             <button class="dropdown-item btn btn-secondary btn-block" type="submit" name='download-study-csv' id='download-study-csv'>Download Data (CSV format)</button>
+                                            <button class="dropdown-item btn btn-secondary btn-block" type="submit" name='download-summary-csv' id='download-summary-csv'>Download Summary (CSV format)</button>
                                             <button class="dropdown-item btn btn-secondary btn-block" type="submit" name='download-study-scoring' id='download-study-scoring'>Download Data (CDI scoring format)</button> 
                                             <button class="dropdown-item btn btn-secondary btn-block" type="submit" name='download-dictionary' id='download-dictionary'>Download Dictionary (CSV format)</button>
                                           </div>
@@ -156,8 +157,33 @@
             <div class='row'>
                 <form method='post' action = '/interface/study/{{ current_study }}/' id='administration-form' class="form-inline">
                     {% csrf_token %}
-
                         <fieldset>
+                        <div class="row d-flex align-items-stretch">
+                            <div class='col-md-3'>
+                                <button style='width:100%; height: 100%;' class="btn btn-secondary selected-btn btn-block" id='add-selected' type='submit' name='administer-selected' value='administer-selected' disabled  >Re-administer Participants</button>
+                            </div>
+                            <div class='col-md-3'>
+                                <div class="dropdown selected-btn">
+                                    <button class="btn btn-secondary selected-btn btn-block dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
+                                        Download Selected Data
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                        <button class="dropdown-item btn btn-secondary selected-btn btn-block" id='download-selected' type='submit' name='download-selected' value='download-selected'  disabled >Download Selected Data (CSV/All)</button>
+                                        <button class="dropdown-item btn btn-secondary selected-btn btn-block" id='download-selected-summary' type="submit" name='download-selected-summary' value='download-selected-summary' disabled>Download Summary (CSV format)</button>
+                                        <button class="dropdown-item btn btn-secondary selected-btn btn-block" id='download-links' type='submit' name='download-links' value='download-links'  disabled >Download Selected Data (CSV/Links)</button>
+                                        <button class="dropdown-item btn btn-secondary selected-btn btn-block" id='download-study-scoring-selected' type='submit' name='download-study-scoring-selected' value='download-study-scoring-selected'  disabled >Download Selected Data (CDI Scoring Format/All)</button>
+                                    </div>
+                                </div>                                            
+                            </div> 
+                            <div class="col-md-3"></div>
+                            <div class='col-md-3'>
+                                    <button style='width:100%; height: 100%;' class="btn btn-secondary selected-btn btn-block" id='delete-selected' type='submit' name='delete-selected' value='administer-selected' disabled onclick='return confirm("Are you sure you want to delete the selected administration record and all the data associated with it?");' >Delete Selected Data</button>
+
+                            </div>
+
+
+                        </div>
+                        
                             <legend> Data :</legend>
                             <div class='col-md-12'>
                                 {% include "researcher_UI/table.html" with table=study_administrations %}
@@ -172,32 +198,7 @@
                                     });
                                 </script>
                             </div>
-                            <div class="row d-flex align-items-stretch">
-                                <div class='col-md-4 align-self-stretch'>
-                                        <button style='width:100%; height: 100%;' class="btn btn-secondary selected-btn btn-block" id='add-selected' type='submit' name='administer-selected' value='administer-selected' disabled  >Re-administer Participants</button>
-                                </div>
-                                <div class='col-md-4 align-self-stretch'>
-                                        <button style='width:100%; height: 100%;' class="btn btn-secondary selected-btn btn-block" id='delete-selected' type='submit' name='delete-selected' value='administer-selected' disabled onclick='return confirm("Are you sure you want to delete the selected administration record and all the data associated with it?");' >Delete Selected Data</button>
-
-                                </div>
-
-                                <div class='col-md-4 align-self-stretch'>
-                                    <div class="dropdown show selected-btn">
-                                      <button class="btn btn-secondary selected-btn btn-block dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Download Selected Data
-                                      </button>
-                                      <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-
-                                        <button class="dropdown-item btn btn-secondary selected-btn btn-block" id='download-selected' type='submit' name='download-selected' value='download-selected'  disabled >Download Selected Data (CSV/All)</button>
-
-                                        <button class="dropdown-item btn btn-secondary selected-btn btn-block" id='download-links' type='submit' name='download-links' value='download-links'  disabled >Download Selected Data (CSV/Links)</button>
-
-                                        <button class="dropdown-item btn btn-secondary selected-btn btn-block" id='download-study-scoring-selected' type='submit' name='download-study-scoring-selected' value='download-study-scoring-selected'  disabled >Download Selected Data (CDI Scoring Format/All)</button>
-                                      </div>
-                                    </div>                                            
-                                </div> 
-
-                            </div>
+                            
 
                             
                             

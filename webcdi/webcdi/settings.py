@@ -48,18 +48,19 @@ except ImportError:
 #NOTE FROM BEN: I CHANGED DEBUG = False to DEBUG = True 
 # DEBUG = False
 
-DEBUG = True
+DEBUG = bool(os.environ.get('DEBUG', False))
+#DEBUG = False
 TEMPLATE_DEBUG = False
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
 
 ADMINS = (
-    ('Alessandro Sanchez', 'sanchez7@stanford.edu'),
+    ('Henry Mehta', 'hjsmehta@gmail.com'),
 )
 
 MANAGERS = ADMINS
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1','52.32.108.131','webcdi-dev.us-west-2.elasticbeanstalk.com','webcdi-prod.us-west-2.elasticbeanstalk.com', 'webcdi.stanford.edu', 'webcdi-dev.stanford.edu', '.elb.amazonaws.com']
+ALLOWED_HOSTS = ['web-cdi-dev6.mfpemr5vcz.us-west-2.elasticbeanstalk.com','web-cdi-dev8.mfpemr5vcz.us-west-2.elasticbeanstalk.com','localhost', '127.0.0.1','52.32.108.131','webcdi-dev.us-west-2.elasticbeanstalk.com','webcdi-prod.us-west-2.elasticbeanstalk.com', 'webcdi.stanford.edu', 'webcdi-dev.stanford.edu', '.elb.amazonaws.com']
 
 IPS_TO_ADD = ['webcdi-dev.us-west-2.elasticbeanstalk.com', 'webcdi-prod.us-west-2.elasticbeanstalk.com', 'webcdi.stanford.edu', socket.gethostname()]
 
@@ -101,6 +102,7 @@ INSTALLED_APPS = (
     'health_check.storage',
     'localflavor',
     'django_countries',
+    'webcdi',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -218,6 +220,7 @@ LANGUAGES = [
     ('es', _('Spanish')),
     ('fr-ca', _('French Quebec')),
     ('en-ca', _('Canadian English')),
+    ('nl', _('Dutch')),
 ]
 
 
@@ -227,3 +230,6 @@ COUNTRIES_FIRST = [
 
 if SITE_ID == 3: USER_ADMIN_EMAIL = 'henrymehta@hotmail.com'
 else : USER_ADMIN_EMAIL = 'webcdi-contact@stanford.edu'
+
+#CSRF_COOKIE_SECURE=False
+#CSRF_TRUSTED_ORIGINS = ('.elasticbeanstalk.com',)

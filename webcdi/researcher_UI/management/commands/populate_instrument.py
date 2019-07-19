@@ -18,8 +18,8 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 	
-	PROJECT_ROOT = settings.BASE_DIR
-	instruments = json.load(open(os.path.realpath(PROJECT_ROOT + '/static/json/instruments.json')))
+        PROJECT_ROOT = settings.BASE_DIR
+        instruments = json.load(open(os.path.realpath(PROJECT_ROOT + '/static/json/instruments.json')))
         var_safe = lambda s: ''.join([c for c in '_'.join(s.split()) if c in string.letters + string.digits + '_'])
 
         if options['language'] and options['form']:

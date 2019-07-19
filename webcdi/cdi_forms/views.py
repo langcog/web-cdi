@@ -293,6 +293,8 @@ def prefilled_cdi_data(administration_instance):
             field_values += ['choices__choice_set_fr_ca']
         elif administration_instance.study.instrument.language == 'Canadian English':
             field_values += ['choices__choice_set_en_ca']
+        elif administration_instance.study.instrument.language == 'Dutch':
+            field_values += ['choices__choice_set_nl']
         #As some items are nested on different levels, carefully parse and store items for rendering.
         for part in data['parts']:
             for item_type in part['types']:
@@ -302,7 +304,6 @@ def prefilled_cdi_data(administration_instance):
                         if "type" not in section:
                             section['type'] = item_type['type']
                         x = cdi_items(group_objects, section['type'], prefilled_data, item_type['id'])
-                        
                         section['objects'] = x
                         if administration_instance.study.show_feedback: raw_objects.extend(x)
                         if any(['*' in x['definition'] for x in section['objects']]):
@@ -560,6 +561,7 @@ def find_paired_studies(request, username, study_group):
         models.When(instrument__language='English', then=models.Value('en')),
         models.When(instrument__language='Spanish', then=models.Value('es')),
         models.When(instrument__language='French Quebec', then=models.Value('fr_ca')),
+        models.When(instrument__language='Canadian English', then=models.Value('en_ca')),
     default=models.Value('en'), output_field=models.CharField())).order_by('min_age')
 
     first_study = study.objects.filter(study_group = study_group, researcher = researcher)[:1].get()

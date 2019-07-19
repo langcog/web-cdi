@@ -90,6 +90,13 @@ class Command(BaseCommand):
                     else:
                         uni_lemma = None
 
+                    if 'scoring_category' in col_names:
+                        scoring_category = row_values[col_names.index('scoring_category')]
+                        if len(scoring_category) < 1:
+                            scoring_category = item_type
+                    else:
+                        scoring_category = item_type                        
+
                     data_dict = {'item': item,
                                  'item_type': item_type,
                                  'category': item_category,
@@ -98,7 +105,8 @@ class Command(BaseCommand):
                                  'gloss': gloss,
                                  'complexity_category': complexity_category,
                                  'uni_lemma': uni_lemma,
-                                 'item_order': row}
+                                 'item_order': row,
+                                 'scoring_category' : scoring_category}
 
                     cdi_item, created = instrument_forms.objects.update_or_create(instrument = instrument_obj, itemID = itemID, defaults=data_dict,)
 
