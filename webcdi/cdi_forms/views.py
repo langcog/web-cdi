@@ -235,7 +235,7 @@ def cdi_items(object_group, item_type, prefilled_data, item_id):
 
             prefilled_values = [False if obj['itemID'] not in prefilled_data else x == prefilled_data[obj['itemID']] for x in raw_split_choices]
 
-            obj['text'] = obj['definition'][0].upper() + obj['definition'][1:] if obj['definition'][0].isalpha() else obj['definition'][0] + obj['definition'][1].upper() + obj['definition'][2:]
+            obj['text'] = obj['definition'][0] + obj['definition'][1:] if obj['definition'][0].isalpha() else obj['definition'][0] + obj['definition'][1].upper() + obj['definition'][2:]
 
             if obj['definition'] is not None and obj['definition'].find('/') >= 0 and item_id in ['complexity', 'pronoun_usage']:
                 split_definition = map(unicode.strip, obj['definition'].split('/'))
@@ -243,7 +243,7 @@ def cdi_items(object_group, item_type, prefilled_data, item_id):
             else:
                 obj['choices'] = zip(split_choices_translated, raw_split_choices, prefilled_values)
                 if obj['definition'] is not None:
-                    obj['text'] = obj['definition'][0].upper() + obj['definition'][1:] if obj['definition'][0].isalpha() else obj['definition'][0] + obj['definition'][1].upper() + obj['definition'][2:]
+                    obj['text'] = obj['definition'][0] + obj['definition'][1:] if obj['definition'][0].isalpha() else obj['definition'][0] + obj['definition'][1].upper() + obj['definition'][2:]
 
         if item_type == 'textbox':
             if obj['itemID'] in prefilled_data:
