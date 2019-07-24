@@ -8,6 +8,7 @@ LANGUAGE_OPTIONS = (
     ("Afrikaans", _(u"Afrikaans (Afrikaans)")),
     ("Akan", _(u"Akan (Akan)")),
     ("Albanian", _(u"Shqip (Albanian)")),
+    ("ASL", _(u'American Sign Language')),
     ("Amharic", _(u"አማርኛ (Amharic)")),
     ("Arabic", _(u"العربية (Arabic)")),
     ("Aragonese", _(u"Aragonés (Aragonese)")),

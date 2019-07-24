@@ -502,8 +502,8 @@
 
     //Naming types that are containers of smaller sections. Important for creating pages from a nested structure!
     //TODO this needs changing to something that isn't hard coded
-    var larger_types = ["intro","word_div", "gestures_div", "word_ending_div", "word_form_div", "word_forms_div", "imitating_adults_div"];
-
+    //var larger_types = ["intro","word_div", "gestures_div", "word_ending_div", "word_form_div", "word_forms_div", "imitating_adults_div"];
+    var larger_types = ['intro', {% for part in parts %}{% for types in part.types %}{% if types.sections %}'{{types.id}}_div', {% endif %}{% endfor %}{% endfor %}];
     // Going through all the named type and section divisions and pulling out those that are not just containers for smaller sections
     var filterednames = $(".page_div").filter(function(index, value) {
         return ($.inArray( value.id, larger_types ) == -1);
@@ -602,6 +602,20 @@
 
     $('#analysis_div div label').css('font-size', $('#analysis_div li').css('font-size'));
 
+</script>
+
+<script type="text/javascript">
+$(document).ready(function () {
+    //Disable cut copy paste
+    $('body').bind('cut copy paste', function (e) {
+        e.preventDefault();
+    });
+   
+    //Disable mouse right click
+    $("body").on("contextmenu",function(e){
+        return false;
+    });
+});
 </script>
 
 {% if user.is_authenticated %}
