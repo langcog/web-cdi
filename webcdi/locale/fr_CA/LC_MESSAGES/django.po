@@ -1436,8 +1436,8 @@ msgid ""
 "Try to complete the inventory when you have at least 30 quiet minutes, "
 "without interruptions. An example might be when your child is sleeping."
 msgstr ""
-"Essayez de remplir l’inventaire lorsque vous avez au moins 30 minutes sans "
-"interruption. Un exemple pourrait être lorsque votre enfant dort."
+"Essayez de compléter l’inventaire lorsque vous avez au moins 30 minutes "
+"sans interruptions. Un exemple pourrait être lorsque votre enfant dort.​"
 
 #: cdi_forms/templates/cdi_forms/background_info.html:26
 #: cdi_forms/templates/cdi_forms/study_group.html:23
