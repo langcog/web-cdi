@@ -232,15 +232,31 @@
     // Display modal for consent waiver. Also add warnings regarding age under age in months field
     var study_waiver = "{{ study_waiver|length }}";
     window.onload = function() { 
-
         if (parseInt(study_waiver) > 0) {
-            if (Cookies.get('old_visitor') == null) {
-                $('#consent_waiver').modal('show');
-                Cookies.set('old_visitor','yes',{path: ''});
+            if ((Cookies.get('old_visitor') == 'false') || (Cookies.get('old_visitor') == null)) {
+                $('#consent_waiver').modal({backdrop:"static", keyboard:false});
+                Cookies.set('old_visitor',false,{path: ''});
             }
         }
         addWarnings();
     };
+
+    // The following 3 functions ensure we only progress is consent is given
+    function giveConsent () {
+        Cookies.set('old_visitor',true,{path: ''});
+    }
+
+    function withholdConsent () {
+        Cookies.set('old_visitor',false,{path: ''});
+        $('#withheld_consent_modal').modal({backdrop:"static", keyboard:false});
+        $('#consent_waiver').modal('hide');
+    }
+
+    function reviewConsent () {
+        Cookies.set('old_visitor',false,{path: ''});
+        $('#consent_waiver').modal({backdrop:"static", keyboard:false});
+        $('#withheld_consent_modal').modal('hide');
+    }
 
     // Function reminding parents of age in months. In green and underlined for parents to notice.
     // If there is a study paired with current study, page will suggest the parents look at the paired study if their child is not the right age.
