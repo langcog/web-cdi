@@ -223,13 +223,16 @@ def background_info_form(request, hash_id):
 # Stitch section nesting in cdi_forms/form_data/*.json and instrument models together and prepare for CDI form rendering
 def cdi_items(object_group, item_type, prefilled_data, item_id):
     for obj in object_group:
-        if item_type == 'checkbox':
+        if 'textbox' in obj['item']:
+            obj['text'] = obj['definition']
+            if obj['itemID'] in prefilled_data:
+                obj['prefilled_value'] = prefilled_data[obj['itemID']]
+        elif item_type == 'checkbox':
             obj['prefilled_value'] = obj['itemID'] in prefilled_data
             obj['definition'] = obj['definition'][0] + obj['definition'][1:] if obj['definition'][0].isalpha() else obj['definition'][0] + obj['definition'][1] + obj['definition'][2:]
             obj['choices'] = obj['choices__choice_set']
 
-        if item_type in ['radiobutton', 'modified_checkbox']:
-
+        elif item_type in ['radiobutton', 'modified_checkbox']:
             raw_split_choices = map(unicode.strip, obj['choices__choice_set'].split(';'))
 
             split_choices_translated = map(unicode.strip, [value for key, value in obj.items() if 'choice_set_' in key][0].split(';'))
@@ -246,7 +249,7 @@ def cdi_items(object_group, item_type, prefilled_data, item_id):
                 if obj['definition'] is not None:
                     obj['text'] = obj['definition'][0] + obj['definition'][1:] if obj['definition'][0].isalpha() else obj['definition'][0] + obj['definition'][1] + obj['definition'][2:]
 
-        if item_type == 'textbox':
+        elif item_type == 'textbox':
             if obj['itemID'] in prefilled_data:
                 obj['prefilled_value'] = prefilled_data[obj['itemID']]
 
@@ -285,7 +288,7 @@ def prefilled_cdi_data(administration_instance):
         data['confirm_completion'] = administration_instance.study.confirm_completion
         raw_objects = []
 
-        field_values = ['itemID', 'item_type', 'category', 'definition', 'choices__choice_set']
+        field_values = ['itemID', 'item', 'item_type', 'category', 'definition', 'choices__choice_set']
         if administration_instance.study.instrument.language == 'English':
             field_values += ['choices__choice_set_en']
         elif administration_instance.study.instrument.language == 'Spanish':
@@ -649,6 +652,10 @@ def save_answer(request):
         if len(items) == 1:
             item = items[0]
             value = request.POST[key]
+            
+            if 'textbox' in item.item:
+                if value:
+                    administration_data.objects.update_or_create(administration = administration_instance, item_ID = key, defaults = {'value': value})
             if item.choices:
                 choices = map(unicode.strip, item.choices.choice_set_en.split(';'))
                 if value in choices:

@@ -12,7 +12,16 @@
         <p class="lead"> {{ type.text | capfirst }}</p>
         <div class="row alternate-color">
             {% for object in type.objects %}
-                {% if type.type == "radiobutton" or type.type == "modified_checkbox" %}
+                {% if 'textbox' in object.item %}
+                    <div class="col-md-12 alco-child"> 
+                        <div class="row alco-child1" >
+                            <div class="col-lg-5 col-12"><span class="choice">{{ object.text }}</span></div>
+                            <div class="col-lg-7 col-12">
+                                <textarea class="boxsizingBorder" id="{{ object.itemID }}" name="{{ object.itemID }}" width="100%" rows=5 {% if completed %} disabled {% endif %}>{{ object.prefilled_value }}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                {% elif type.type == "radiobutton" or type.type == "modified_checkbox" %}
                     {% if object.text != '' %}
                     <div class="col-md-12 alco-child" name = "{{ object.itemID }}_div">
                         <div class="row alco-child1" >

@@ -523,12 +523,11 @@
             'csrfmiddlewaretoken': csrfmiddlewaretoken,
         };
 
-        $(current_page).find('input:checked, input[type="text"], input[type="textbox"]').each(function() {
+        $(current_page).find('input:checked, input[type="text"], input[type="textbox"], textarea').each(function() {
             page_data[$(this).prop('name')] = $(this).val()
         });
 
-
-
+        console.log(page_data)
         $.post(save_answer_link, page_data);        
 
     };

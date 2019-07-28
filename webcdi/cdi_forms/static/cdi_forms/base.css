@@ -185,3 +185,11 @@ label.btn{
 .choice { 
   text-align: left
 }
+
+/* make textarea 100% width available */
+.boxsizingBorder {
+  width:100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  }
