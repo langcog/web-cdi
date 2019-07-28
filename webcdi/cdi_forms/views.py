@@ -194,6 +194,7 @@ def background_info_form(request, hash_id):
     data['study_waiver'] = administration_instance.study.waiver
     data['allow_payment'] = administration_instance.study.allow_payment
     data['hint'] = _("Your child should be between %(min_age)d to %(max_age)d months of age.") % {"min_age": data['min_age'], "max_age": data['max_age']}
+    data['form'] = administration_instance.study.instrument.form
     
     if data['allow_payment'] and administration_instance.bypass is None:
         try:
