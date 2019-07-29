@@ -186,3 +186,17 @@ class ImportDataForm(BetterForm):
         if self.study:
             self.fields['study'].initial = self.study
 
+class EditSubjectIDForm(forms.ModelForm):
+    class Meta:
+        model = administration
+        fields = ['subject_id', 'study']
+        widgets = {
+            'study' : forms.HiddenInput()
+        }
+
+    def clean(self):
+        cleaned_data = super(EditSubjectIDForm,self).clean()
+        if administration.objects.filter(study=cleaned_data['study'], subject_id=cleaned_data['subject_id']).exists():
+            raise forms.ValidationError("An Administration with this id already exists.  Select a unique value")
+        return cleaned_data
+

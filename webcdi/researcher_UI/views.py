@@ -7,6 +7,9 @@ from .forms import *
 from .models import researcher, study, administration, administration_data, get_meta_header, get_background_header, payment_code, ip_address
 import codecs, json, os, re, random, csv, datetime, cStringIO, math, StringIO, zipfile
 from .tables  import StudyAdministrationTable
+from .mixins import StudyOwnerMixin
+from django.views.generic import UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django_tables2   import RequestConfig
 from django.db.models import Max
 from cdi_forms.views import model_map, get_model_header, background_info_form, prefilled_background_form
@@ -1387,3 +1390,32 @@ def import_data(request, study_name):
     else: # If fetching form
         form = ImportDataForm(researcher = request.user, study = study_obj) # Pull up a blank copy of form and render
         return render(request, 'researcher_UI/import_data.html', {'form': form})
+
+
+from .forms import EditSubjectIDForm
+class EditAdministrationView(LoginRequiredMixin, StudyOwnerMixin, UpdateView):
+    model = administration
+    form_class = EditSubjectIDForm
+    old_subject_id = None # we need to store this so we can update all repeats for this subject id
+
+    def get_success_url(self):
+        return reverse('console', kwargs={'study_name':self.object.study.name})
+
+    def get_context_data(self, **kwargs):
+        ctx = super(EditAdministrationView, self).get_context_data(**kwargs)
+        self.study = ctx ['study'] = self.object.study
+        return ctx
+
+    def post(self, request, *args, **kwargs):
+        form = EditSubjectIDForm(self.request.POST)
+        if form.is_valid():
+            self.old_subject_id = self.get_object().subject_id       
+        return super(EditAdministrationView, self).post(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        instances = administration.objects.filter(study=self.object.study, subject_id=self.old_subject_id)
+        new_subject_id = int(self.request.POST['subject_id'])
+        for instance in instances:
+            instance.subject_id = new_subject_id
+            instance.save()
+        return super(EditAdministrationView, self).form_valid(form)

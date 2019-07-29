@@ -7,6 +7,7 @@ from .models import administration
 # Table for organizing administration objects into a table on the researcher interface
 class StudyAdministrationTable(tables.Table):
     select_col = tables.columns.CheckBoxColumn(accessor='id') # Creates a column of checkboxes associated with each administration ID
+    subject_id = tables.TemplateColumn('<a href="/interface/edit-administration/{{ record.pk }}/">{{ record.subject_id }}</a>') #Generate Link to edit subject_id
     link = tables.TemplateColumn('<a href="/form/fill/{{ record.url_hash }}" target="_blank">link</a>', orderable=False) # Generates a column of administration links in each row
 
     # Associates administration table with administration model
