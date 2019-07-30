@@ -223,6 +223,14 @@ LANGUAGES = [
     ('nl', _('Dutch')),
 ]
 
+# this is used to find the right choices etc for a language
+LANGUAGE_DICT = {
+    'English' : 'en',
+    'Spanish' : 'es',
+    'French Quebec' : 'fr_CA',
+    'Canadian English' : 'en_CA',
+    'Dutch' : 'nl',
+}
 
 COUNTRIES_FIRST = [
     'US','CA',
