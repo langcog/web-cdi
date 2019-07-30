@@ -227,8 +227,8 @@ LANGUAGES = [
 LANGUAGE_DICT = {
     'English' : 'en',
     'Spanish' : 'es',
-    'French Quebec' : 'fr_CA',
-    'Canadian English' : 'en_CA',
+    'French Quebec' : 'fr_ca',
+    'Canadian English' : 'en_ca',
     'Dutch' : 'nl',
 }
 
