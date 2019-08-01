@@ -41,7 +41,8 @@
 		"max_age": 30,
 		"csv_file": "cdi_form_csv/[Spanish_WS].csv",
 		"json_data": "cdi_forms/form_data/Spanish_WS_meta.json",
-		"scoring_json" : "cdi_forms/form_data/scoring/Spanish_WS_scoring.json"
+		"scoring_json" : "cdi_forms/form_data/scoring/Spanish_WS_scoring.json",
+		"benchmark" : "cdi_forms/form_data/benchmarking/Spanish_WS_benchmark.csv"
 	},
 	{
 		"language": "Spanish",
@@ -51,7 +52,8 @@
 		"max_age": 18,
 		"csv_file": "cdi_form_csv/[Spanish_WG].csv",
 		"json_data": "cdi_forms/form_data/Spanish_WG_meta.json",
-		"scoring_json" : "cdi_forms/form_data/scoring/Spanish_WG_scoring.json"
+		"scoring_json" : "cdi_forms/form_data/scoring/Spanish_WG_scoring.json",
+		"benchmark" : "cdi_forms/form_data/benchmarking/Spanish_WG_benchmark.csv"
 	},
 	{
 		"language": "French Quebec",
