@@ -1,30 +1,30 @@
 [
     {
-        "title" : "First Signs",
+        "title" : "Comprension Temprana",
         "category" : "first_signs",
         "measure" : "yes",
         "order" : 1
     },
     {
-        "title" : "Phrases",
+        "title" : "Primeras Frases",
         "category" : "phrases",
         "measure" : "understands",
         "order" : 2
     },
     {
-        "title" : "Imitation",
+        "title" : "Maneras de Habla: Imitation",
         "category" : "imitation",
         "measure" : "sometimes;often",
         "order" : 3
     },
     {
-        "title" : "Labeling",
+        "title" : "Maneras de Hablar: Labeling",
         "category" : "label",
         "measure" : "sometimes;often",
         "order" : 4
     },
     {
-        "title" : "Words Understood",
+        "title" : "Lista de Vocabulario: Words_Understood",
         "category" : "word",
         "measure" : "understands;produces",
         "order" : 5
@@ -36,13 +36,13 @@
         "order" : 6
     },
     {
-        "title" : "First Gestures",
+        "title" : "Primeros Gestos",
         "category" : "gestures_first",
         "measure" : "sometimes;often",
         "order" : 7
     },
     {
-        "title" : "Games Gestures",
+        "title" : "Juegos con Adultos y Rutinas",
         "category" : "gestures_games",
         "measure" : "yes",
         "order" : 8
@@ -54,19 +54,19 @@
         "order" : 13
     },
     {
-        "title" : "Object Gestures",
+        "title" : "Acciones con Objetos",
         "category" : "gestures_objects",
         "measure" : "yes",
         "order" : 10
     },
     {
-        "title" : "Adult Gestures",
+        "title" : "Jugar a Ser Adulto",
         "category" : "gestures_adults",
         "measure" : "yes",
         "order" : 11
     },
     {
-        "title" : "Parent Gestures",
+        "title" : "Imitacion de Otros Tipos de Actividades de Adultos",
         "category" : "gestures_parents",
         "measure" : "yes",
         "order" : 12

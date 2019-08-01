@@ -684,30 +684,30 @@ item_682,habnovel,usage,how_use_words,not yet; sometimes; often,"¿Su hijo/a hab
 item_683,usefuture,usage,how_use_words,not yet; sometimes; often,"¿Su hijo/a habla de situaciones que van a suceder en el futuro? Por ejemplo, al ponerse el suéter, ¿dice que va a ir a los columpios o le platica a otra persona que va a ver a su abuelita?",,,
 item_684,misscomp,usage,how_use_words,not yet; sometimes; often,"¿Su hijo/a entiende cuando le piden que traiga algo de otro cuarto? Por ejemplo, si le preguntan, “¿dónde está tu pelota?” ¿el niño/a va a buscarla a otro cuarto?",,,
 item_685,dicenombre,usage,how_use_words,not yet; sometimes; often,"¿Al señalar o tomar un objeto, su hijo/a dice el nombre de la persona a la que pertenece aunque esa persona no esté presente? Por ejemplo, ¿encuentra los lentes de su papá y dice “papá”?",,,
-item_686,pracabo,word_forms,word_forms_prese,produces,acab__o__,,(I) end (present),
-item_687,pracabas,word_forms,word_forms_prese,produces,acab__as__,,(you) end (present),
-item_688,pracaba,word_forms,word_forms_prese,produces,acab__a__,,(he) ends (present),
-item_689,pracabms,word_forms,word_forms_prese,produces,acab__amos__,,(we) end (present),
-item_690,prcomo,word_forms,word_forms_prese,produces,com__o__,,(I) eat (present),
-item_691,prcomes,word_forms,word_forms_prese,produces,com__es__,,(you) eat (present),
-item_692,prcome,word_forms,word_forms_prese,produces,com__e__,,(he) eats (present),
-item_693,prcomems,word_forms,word_forms_prese,produces,com__emos__,,(we) eat (present),
-item_694,prsubo,word_forms,word_forms_prese,produces,sub__o__,,(I) rise (present),
-item_695,prsubes,word_forms,word_forms_prese,produces,sub__es__,,(you) rise (present),
-item_696,prsube,word_forms,word_forms_prese,produces,sub__e__,,(he) rises (present),
-item_697,prsubims,word_forms,word_forms_prese,produces,sub__imos__,,(we) rise (present),
-item_698,paacabe,word_forms,word_forms_suced,produces,acab__é__,,(I) ended (past),
-item_699,paacabo,word_forms,word_forms_suced,produces,acab__ó__,,(he) ended (past),
-item_700,pacomi,word_forms,word_forms_suced,produces,com__í__,,(I) ate (past),
-item_701,pacomio,word_forms,word_forms_suced,produces,com__ió__,,(he) ate (past),
-item_702,pasubi,word_forms,word_forms_suced,produces,sub__í__,,(I) rose (past),
-item_703,pasubio,word_forms,word_forms_suced,produces,sub__ió__,,(he) rose (past),
-item_704,iacaba,word_forms,word_forms_orden,produces,acab__a__,,finish (imperative),
-item_705,iacabate,word_forms,word_forms_orden,produces,acáb__ate__ (la leche),,finish your (imperative),
-item_706,icome,word_forms,word_forms_orden,produces,com__e__,,eat (imperative),
-item_707,icomete,word_forms,word_forms_orden,produces,cóm__ete__ (la carne),,eat your (imperative),
-item_708,isube,word_forms,word_forms_orden,produces,sub__e__,,rise (imperative),
-item_709,isubete,word_forms,word_forms_orden,produces,súb__ete__,,rise (imperative),
+item_686,pracabo,word_forms,word_forms_prese,produces,acab__o__,,(I) end (present),word_forms_prese
+item_687,pracabas,word_forms,word_forms_prese,produces,acab__as__,,(you) end (present),word_forms_prese
+item_688,pracaba,word_forms,word_forms_prese,produces,acab__a__,,(he) ends (present),word_forms_prese
+item_689,pracabms,word_forms,word_forms_prese,produces,acab__amos__,,(we) end (present),word_forms_prese
+item_690,prcomo,word_forms,word_forms_prese,produces,com__o__,,(I) eat (present),word_forms_prese
+item_691,prcomes,word_forms,word_forms_prese,produces,com__es__,,(you) eat (present),word_forms_prese
+item_692,prcome,word_forms,word_forms_prese,produces,com__e__,,(he) eats (present),word_forms_prese
+item_693,prcomems,word_forms,word_forms_prese,produces,com__emos__,,(we) eat (present),word_forms_prese
+item_694,prsubo,word_forms,word_forms_prese,produces,sub__o__,,(I) rise (present),word_forms_prese
+item_695,prsubes,word_forms,word_forms_prese,produces,sub__es__,,(you) rise (present),word_forms_prese
+item_696,prsube,word_forms,word_forms_prese,produces,sub__e__,,(he) rises (present),word_forms_prese
+item_697,prsubims,word_forms,word_forms_prese,produces,sub__imos__,,(we) rise (present),word_forms_prese
+item_698,paacabe,word_forms,word_forms_suced,produces,acab__é__,,(I) ended (past),word_forms_suced
+item_699,paacabo,word_forms,word_forms_suced,produces,acab__ó__,,(he) ended (past),word_forms_suced
+item_700,pacomi,word_forms,word_forms_suced,produces,com__í__,,(I) ate (past),word_forms_suced
+item_701,pacomio,word_forms,word_forms_suced,produces,com__ió__,,(he) ate (past),word_forms_suced
+item_702,pasubi,word_forms,word_forms_suced,produces,sub__í__,,(I) rose (past),word_forms_suced
+item_703,pasubio,word_forms,word_forms_suced,produces,sub__ió__,,(he) rose (past),word_forms_suced
+item_704,iacaba,word_forms,word_forms_orden,produces,acab__a__,,finish (imperative),word_forms_orden
+item_705,iacabate,word_forms,word_forms_orden,produces,acáb__ate__ (la leche),,finish your (imperative),word_forms_orden
+item_706,icome,word_forms,word_forms_orden,produces,com__e__,,eat (imperative),word_forms_orden
+item_707,icomete,word_forms,word_forms_orden,produces,cóm__ete__ (la carne),,eat your (imperative),word_forms_orden
+item_708,isube,word_forms,word_forms_orden,produces,sub__e__,,rise (imperative),word_forms_orden
+item_709,isubete,word_forms,word_forms_orden,produces,súb__ete__,,rise (imperative),word_forms_orden
 item_710,scombine,combine,combine,not yet; sometimes; often,"¿Su hijo/a ya empezó a combinar palabras, como “papá coche” o “más agua”?",,,
 item_example1,combination_example1,combination_examples,combination_examples,,,,,
 item_example2,combination_example2,combination_examples,combination_examples,,,,,
