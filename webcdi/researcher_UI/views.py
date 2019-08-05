@@ -1392,7 +1392,7 @@ def import_data(request, study_name):
         return render(request, 'researcher_UI/import_data.html', {'form': form})
 
 
-from .forms import EditSubjectIDForm
+from .forms import EditSubjectIDForm, EditLocalLabIDForm
 class EditAdministrationView(LoginRequiredMixin, StudyOwnerMixin, UpdateView):
     model = administration
     form_class = EditSubjectIDForm
@@ -1419,3 +1419,15 @@ class EditAdministrationView(LoginRequiredMixin, StudyOwnerMixin, UpdateView):
             instance.subject_id = new_subject_id
             instance.save()
         return super(EditAdministrationView, self).form_valid(form)
+
+class EditLocalLabIdView(LoginRequiredMixin, StudyOwnerMixin, UpdateView):
+    model = administration
+    form_class = EditLocalLabIDForm
+
+    def get_success_url(self):
+        return reverse('console', kwargs={'study_name':self.object.study.name})
+
+    def get_context_data(self, **kwargs):
+        ctx = super(EditLocalLabIdView, self).get_context_data(**kwargs)
+        self.study = ctx ['study'] = self.object.study
+        return ctx
