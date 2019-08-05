@@ -200,3 +200,10 @@ class EditSubjectIDForm(forms.ModelForm):
             raise forms.ValidationError("An Administration with this id already exists.  Select a unique value")
         return cleaned_data
 
+class EditLocalLabIDForm(forms.ModelForm):
+    class Meta:
+        model = administration
+        fields = ['local_lab_id', 'study']
+        widgets = {
+            'study' : forms.HiddenInput()
+        }
