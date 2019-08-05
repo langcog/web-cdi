@@ -62,19 +62,21 @@
               <a href="{% url 'administer_new_parent' username study_name %}" id="reusable_link">Click here</a><br>
               (For mass emails or adding to a website. Does not track IP addresses or use cookies. Every link click creates a new administration.)
 
+              
               {% if study_group %}
+              <!--
               <br><br><a href="{% url 'find_paired_studies' username study_group %}" id="study_group_link" >Click here</a><br class="study_group">
               <font id="study_group_hint">(For mass distribution of this study along with other studies within its group)</font>
-
+              -->
               {% endif %}
 
               <script type="text/javascript">
                 $('#reusable_link').html($('#reusable_link')[0].href).css;
 
-                var study_group = "{{ study_group }}";
-                if (study_group != "") {
-                  $('#study_group_link').html($('#study_group_link')[0].href);
-                }
+                //var study_group = "{{ study_group }}";
+                //if (study_group != "") {
+                //  $('#study_group_link').html($('#study_group_link')[0].href);
+                //}
               </script>
             </div>
         </div>
