@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-28 12:44+0000\n"
+"POT-Creation-Date: 2019-08-08 14:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -48,7 +48,7 @@ msgid "My child is (check all that apply):"
 msgstr "Su niño(a) es: (marque todos lo que aplican)"
 
 #: cdi_forms/forms.py:40 cdi_forms/forms.py:41
-#: cdi_forms/templates/cdi_forms/cdi_base.html:147
+#: cdi_forms/templates/cdi_forms/cdi_base.html:146
 msgid "No"
 msgstr "No"
 
@@ -1516,37 +1516,37 @@ msgstr "Informe Historial"
 msgid "Form unavailable. Contact admin."
 msgstr "Formulario no disponible. Contacte admin."
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:50
+#: cdi_forms/templates/cdi_forms/cdi_base.html:49
 msgid "Instructions: "
 msgstr "Instrucciones: "
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:54
+#: cdi_forms/templates/cdi_forms/cdi_base.html:53
 msgid "This form can be filled any time before the due date."
 msgstr ""
 "Este formulario puede ser completado en cualquier momento antes la fecha de "
 "entrega."
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:55
+#: cdi_forms/templates/cdi_forms/cdi_base.html:54
 msgid ""
 "It can also be saved at any time and resumed later by using the same link"
 msgstr ""
 "También se puede guardar en cualquier momento y puede continuar más tarde "
 "utilizando la misma página."
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:55
+#: cdi_forms/templates/cdi_forms/cdi_base.html:54
 msgid "create bookmark"
 msgstr "cree el marcador"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:56
+#: cdi_forms/templates/cdi_forms/cdi_base.html:55
 msgid "After the form is submitted, it cannot be altered."
 msgstr "Después de enviar el formulario, no se podrá modificar."
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:57
+#: cdi_forms/templates/cdi_forms/cdi_base.html:56
 msgid "The form also cannot be altered after the due date."
 msgstr ""
 "El formulario también no se podrá modificar después de la fecha de entrega."
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:58
+#: cdi_forms/templates/cdi_forms/cdi_base.html:57
 msgid ""
 "Please use the navigation buttons below. Do not use the \"back\" and "
 "\"forward\" buttons on your browser."
@@ -1554,7 +1554,7 @@ msgstr ""
 "Por favor, use los botones de navegación al final de la página. No use los "
 "botones \"Atrás\" y \"Adelante\" en su navegador."
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:59
+#: cdi_forms/templates/cdi_forms/cdi_base.html:58
 msgid ""
 "You can use the tab button and arrows keys to quickly navigate and answer "
 "questions."
@@ -1562,53 +1562,53 @@ msgstr ""
 "Puede usar el botón de tab y las teclas de flechas para navegar rápidamente "
 "y responder preguntas."
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:94
+#: cdi_forms/templates/cdi_forms/cdi_base.html:93
 msgid "Due date"
 msgstr "Fecha de entrega"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:99
+#: cdi_forms/templates/cdi_forms/cdi_base.html:98
 msgid "Show waiver of documentation"
 msgstr "Mostrar exención de documentación"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:104
+#: cdi_forms/templates/cdi_forms/cdi_base.html:103
 msgid "Reach out to the Web-CDI Team!"
 msgstr "¡Póngase en contacto con el equipo del Web-CDI!"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:138
-msgid "Waiver of Documentation"
-msgstr "Exención de Documentación"
+#: cdi_forms/templates/cdi_forms/cdi_base.html:137
+msgid "Waiver of Documentation of Informed Consent."
+msgstr "Renuncia a la Documentación de su Consentimiento"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:148
+#: cdi_forms/templates/cdi_forms/cdi_base.html:147
 msgid "Okay"
 msgstr "Bien"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:161
-msgid "Waiver Consent Withheld"
-msgstr ""
+#: cdi_forms/templates/cdi_forms/cdi_base.html:160
+msgid "Waiver Denied"
+msgstr "Renuncia Denegada"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:165
+#: cdi_forms/templates/cdi_forms/cdi_base.html:164
 msgid ""
-"Thank you for your feedback. We are unable to continue without consent.  "
-"Please close the window"
-msgstr ""
+"Thank you for your response. We are unable to continue. Please close the "
+"window. If you would like, you may review the Waiver."
+msgstr "Gracias por su respuesta. Por el momento, no podemos continuar. Por favor cierre la ventana. Si desea, puede repasar el documento de exención."
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:168
+#: cdi_forms/templates/cdi_forms/cdi_base.html:167
 msgid "Review Waiver"
 msgstr ""
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:10
 #: cdi_forms/templates/cdi_forms/cdi_form.html:326
-#: cdi_forms/templates/cdi_forms/study_group.html:6 cdi_forms/views.py:363
+#: cdi_forms/templates/cdi_forms/study_group.html:6 cdi_forms/views.py:371
 msgid "Save"
 msgstr "Guardar"
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:11
-#: cdi_forms/templates/cdi_forms/cdi_form.html:322 cdi_forms/views.py:379
+#: cdi_forms/templates/cdi_forms/cdi_form.html:322 cdi_forms/views.py:387
 msgid "Submit"
 msgstr "Enviar"
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:14
-#: cdi_forms/templates/cdi_forms/cdi_form.html:327 cdi_forms/views.py:375
+#: cdi_forms/templates/cdi_forms/cdi_form.html:327 cdi_forms/views.py:383
 msgid "Go back to Background Info"
 msgstr "Volver a Información de Fondo"
 
@@ -2068,12 +2068,12 @@ msgstr "Nacido(a) entre STARTDATE y ENDDATE"
 msgid "Your child should be between %(min_age)d to %(max_age)d months of age."
 msgstr "Su niño(a) debe estar entre %(min_age)d y %(max_age)d meses de edad."
 
-#: cdi_forms/views.py:208
+#: cdi_forms/views.py:209
 #, python-format
 msgid " Not the right age? <a href='%(sgurl)s'> Click here</a>"
 msgstr " ¿No la edad apropiada? <a href='%(sgurl)s'> Haga click aquí</a>"
 
-#: cdi_forms/views.py:212
+#: cdi_forms/views.py:213
 msgid ""
 " Not the right age? You should contact your researcher for steps on what to "
 "do next."
