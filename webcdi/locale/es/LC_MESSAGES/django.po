@@ -1590,7 +1590,7 @@ msgstr "Renuncia Denegada"
 msgid ""
 "Thank you for your response. We are unable to continue. Please close the "
 "window. If you would like, you may review the Waiver."
-msgstr "Gracias por su respuesta. Por el momento, no podemos continuar. Por favor cierre la ventana. Si desea, puede repasar el documento de exención."
+msgstr "Gracias por su respuesta. Por el momento, no podemos continuar. Por favor cierre la ventana. Si desea, puede revisar la renuncia a la documentación de su consentimiento."
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:167
 msgid "Review Waiver"
