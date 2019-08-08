@@ -50,7 +50,7 @@ def download_data(request, study_obj, administrations = None): # Download study 
     model_header = get_model_header(study_obj.instrument.name) # Fetch the associated instrument model's variables
 
     # Fetch administration variables
-    admin_header = ['study_name', 'subject_id','repeat_num', 'administration_id', 'link', 'completed', 'completedBackgroundInfo', 'due_date', 'last_modified','created_date']
+    admin_header = ['study_name', 'subject_id','local_lab_id','repeat_num', 'administration_id', 'link', 'completed', 'completedBackgroundInfo', 'due_date', 'last_modified','created_date']
 
     # Fetch background data variables
     background_header = ['age','sex','zip_code','birth_order', 'birth_weight_lb', 'birth_weight_kg','multi_birth_boolean','multi_birth', 'born_on_due_date', 'early_or_late', 'due_date_diff', 'mother_yob', 'mother_education','father_yob', 'father_education', 'annual_income', 'child_hispanic_latino', 'child_ethnicity', 'caregiver_info', 'other_languages_boolean','other_languages','language_from', 'language_days_per_week', 'language_hours_per_day', 'ear_infections_boolean','ear_infections', 'hearing_loss_boolean','hearing_loss', 'vision_problems_boolean','vision_problems', 'illnesses_boolean','illnesses', 'services_boolean','services','worried_boolean','worried','learning_disability_boolean','learning_disability']
@@ -241,7 +241,7 @@ def download_data(request, study_obj, administrations = None): # Download study 
     # Try to format administration data for pandas dataframe
     try:
         admin_data = pd.DataFrame.from_records(administrations.values(
-            'id', 'study__name','url_hash', 'repeat_num', 'subject_id','completed','completedBackgroundInfo','due_date','last_modified','created_date'
+            'id', 'study__name','url_hash', 'repeat_num', 'subject_id','local_lab_id','completed','completedBackgroundInfo','due_date','last_modified','created_date'
         )).rename(columns = {'id':'administration_id', 'study__name': 'study_name', 'url_hash': 'link'})
     except:
         admin_data = pd.DataFrame(columns = admin_header)
@@ -289,7 +289,7 @@ def download_summary(request, study_obj, administrations = None): # Download stu
     administrations = administrations if administrations is not None else administration.objects.filter(study = study_obj)
 
     # Fetch administration variables
-    admin_header = ['study_name', 'subject_id','repeat_num', 'administration_id', 'link', 'completed', 'completedBackgroundInfo', 'due_date', 'last_modified','created_date']
+    admin_header = ['study_name', 'subject_id','local_lab_id','repeat_num', 'administration_id', 'link', 'completed', 'completedBackgroundInfo', 'due_date', 'last_modified','created_date']
 
     # Fetch background data variables
     background_header = ['age','sex','zip_code','birth_order', 'birth_weight_lb', 'birth_weight_kg','multi_birth_boolean','multi_birth', 'born_on_due_date', 'early_or_late', 'due_date_diff', 'mother_yob', 'mother_education','father_yob', 'father_education', 'annual_income', 'child_hispanic_latino', 'child_ethnicity', 'caregiver_info', 'other_languages_boolean','other_languages','language_from', 'language_days_per_week', 'language_hours_per_day', 'ear_infections_boolean','ear_infections', 'hearing_loss_boolean','hearing_loss', 'vision_problems_boolean','vision_problems', 'illnesses_boolean','illnesses', 'services_boolean','services','worried_boolean','worried','learning_disability_boolean','learning_disability']
@@ -453,7 +453,7 @@ def download_summary(request, study_obj, administrations = None): # Download stu
     # Try to format administration data for pandas dataframe
     try:
         admin_data = pd.DataFrame.from_records(administrations.values(
-            'id', 'study__name','url_hash', 'repeat_num', 'subject_id','completed','completedBackgroundInfo','due_date','last_modified','created_date'
+            'id', 'study__name','url_hash', 'repeat_num', 'subject_id','local_lab_id','completed','completedBackgroundInfo','due_date','last_modified','created_date'
         )).rename(columns = {'id':'administration_id', 'study__name': 'study_name', 'url_hash': 'link'})
     except:
         admin_data = pd.DataFrame(columns = admin_header)
