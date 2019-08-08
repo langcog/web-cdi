@@ -709,9 +709,9 @@ item_707,icomete,word_forms,word_forms_orden,produces,cóm__ete__ (la carne),,ea
 item_708,isube,word_forms,word_forms_orden,produces,sub__e__,,rise (imperative),word_forms_orden
 item_709,isubete,word_forms,word_forms_orden,produces,súb__ete__,,rise (imperative),word_forms_orden
 item_710,scombine,combine,combine,not yet; sometimes; often,"¿Su hijo/a ya empezó a combinar palabras, como “papá coche” o “más agua”?",,,
-item_example1,combination_example1,combination_examples,combination_examples,,,,,
-item_example2,combination_example2,combination_examples,combination_examples,,,,,
-item_example3,combination_example3,combination_examples,combination_examples,,,,,
+item_example1,combination_example1,combination_example1,combination_examples,,,,,combination_example1
+item_example2,combination_example2,combination_example2,combination_examples,,,,,combination_example2
+item_example3,combination_example3,combination_example3,combination_examples,,,,,combination_example3
 item_711,cmplx01,complexity,complexity,simple; complex,nene quiere / quiero paleta,,baby wants / I want lollipop,syntax
 item_712,cmplx02,complexity,complexity,simple; complex,tuyo esto / este es tuyo,,yours this / this is yours,syntax
 item_713,cmplx03,complexity,complexity,simple; complex,Tito malo / soy malo,,Tito bad / I'm bad,syntax

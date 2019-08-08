@@ -58,7 +58,7 @@
     },
     {
         "title" : "Complejidad",
-        "category" : "complex",
+        "category" : "complexity",
         "measure" : "complex",
         "order" : 13
     }
