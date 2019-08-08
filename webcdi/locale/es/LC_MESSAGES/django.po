@@ -1594,7 +1594,7 @@ msgstr "Gracias por su respuesta. Por el momento, no podemos continuar. Por favo
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:167
 msgid "Review Waiver"
-msgstr ""
+msgstr "Revisar el documento de renuncia"
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:10
 #: cdi_forms/templates/cdi_forms/cdi_form.html:326

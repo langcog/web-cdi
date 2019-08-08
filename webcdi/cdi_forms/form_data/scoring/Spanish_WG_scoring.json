@@ -1,36 +1,36 @@
 [
     {
-        "title" : "Comprension Temprana",
+        "title" : "Comprension temprana",
         "category" : "first_signs",
         "measure" : "yes",
         "order" : 1
     },
     {
-        "title" : "Primeras Frases",
+        "title" : "Frases comprendidas",
         "category" : "phrases",
         "measure" : "understands",
         "order" : 2
     },
     {
-        "title" : "Maneras de Habla: Imitation",
+        "title" : "Maneras de Habla: Imitación",
         "category" : "imitation",
         "measure" : "sometimes;often",
         "order" : 3
     },
     {
-        "title" : "Maneras de Hablar: Labeling",
+        "title" : "Maneras de Hablar: Nombrar",
         "category" : "label",
         "measure" : "sometimes;often",
         "order" : 4
     },
     {
-        "title" : "Lista de Vocabulario: Words_Understood",
+        "title" : "Palabras que comprende",
         "category" : "word",
         "measure" : "understands;produces",
         "order" : 5
     },
     {
-        "title" : "Words Produced",
+        "title" : "Palabras que dice",
         "category" : "word",
         "measure" : "produces",
         "order" : 6
@@ -48,7 +48,7 @@
         "order" : 8
     },
     {
-        "title" : "Early Gestures",
+        "title" : "Gestos Tempranos",
         "category" : "gestures_first;gestures_games",
         "measure" : "sometimes;often;yes",
         "order" : 13
@@ -72,13 +72,13 @@
         "order" : 12
     },
     {
-        "title" : "Later Gestures",
+        "title" : "Gestos Tardíos",
         "category" : "gestures_parents;gestures_adults;gestures_objects",
         "measure" : "yes",
         "order" : 14
     },
     {
-        "title" : "Total Gestures",
+        "title" : "Total de Gestos",
         "category" : "gestures_parents;gestures_adults;gestures_objects;gestures_first;gestures_games",
         "measure" : "sometimes;often;yes",
         "order" : 15
