@@ -230,7 +230,7 @@ class BackgroundForm(BetterModelForm):
         elif self.curr_context['birthweight_units'] == "kg":
             self.birth_weight_field = 'birth_weight_kg'
 
-        if self.curr_context['language'] == "English":
+        if self.curr_context['language'] in ["English", "Spanish"]:
             self.fields['child_dob'].input_formats = ('%m/%d/%Y', '%m/%d/%y',)
             self.fields['child_dob'].widget.attrs['placeholder'] = _('mm/dd/yyyy')
         else:

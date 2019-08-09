@@ -168,11 +168,11 @@
         language: language_code
     }
 
-    var date_format = language_code == "en"? "mm/dd/yyyy" : "dd/mm/yyyy"
+    var date_format = ["en","es"].indexOf(language_code) >= 0 ? "mm/dd/yyyy" : "dd/mm/yyyy"
     console.log(date_format)
     $('#id_child_dob').datepicker(datepicker_options)
         .on('changeDate', function() {
-            getDiffinMonths(language_code == "en"? "mm/dd/yyyy" : "dd/mm/yyyy");
+            getDiffinMonths(language_code == "en" ? "mm/dd/yyyy" : "dd/mm/yyyy");
         });
 
 
