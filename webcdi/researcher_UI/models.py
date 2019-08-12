@@ -71,6 +71,7 @@ class administration(models.Model):
     url_hash = models.CharField(max_length=128, unique=True) # Associated URL hash
     completed = models.BooleanField() # Whether administration has been marked as completed
     completedBackgroundInfo = models.BooleanField(default=False) # Whether backgroundinfo has been completed
+    completedSurvey = models.BooleanField(default=False) # Because we're adding the functionality to add background info after completing the survey, this tells us if the survey has been completed - note, it is only used when background info collected after survey
     due_date = models.DateTimeField(verbose_name = "Expiration date") # Expiration date for administration
     last_modified = models.DateTimeField(auto_now = True) # Date when the administration object was last updated
     created_date = models.DateTimeField(verbose_name = "Creation date", auto_now_add = True) # Date administration object was created
