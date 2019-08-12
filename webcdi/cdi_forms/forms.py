@@ -201,9 +201,9 @@ class BackgroundForm(BetterModelForm):
         
         # Check responses to 'early_or_late' and 'due_date_diff' to ensure biologically believable values.
         if cleaned_data.get('early_or_late') == 'early' and cleaned_data.get('due_date_diff') > 18:
-            self.add_error(dependent, _("Cannot be more than 18 weeks early"))
+            self.add_error('born_on_due_date', _("Cannot be more than 18 weeks early"))
         if cleaned_data.get('early_or_late') == 'late' and cleaned_data.get('due_date_diff') > 4:
-            self.add_error(dependent, _("Cannot be more than 4 weeks late"))
+            self.add_error('born_on_due_date', _("Cannot be more than 4 weeks late"))
         
         # Ensure that the 'age' field is not empty.
         if cleaned_data.get('age') == '':
@@ -328,7 +328,7 @@ class BackgroundForm(BetterModelForm):
             self.birth_weight_field = 'birth_weight_kg'
         else : self.birth_weight_required = False
 
-        if self.curr_context['language'] == "English":
+        if self.curr_context['language'] in ["English", "Spanish"]:
             self.fields['child_dob'].input_formats = ('%m/%d/%Y', '%m/%d/%y',)
             self.fields['child_dob'].widget.attrs['placeholder'] = _('mm/dd/yyyy')
         else:

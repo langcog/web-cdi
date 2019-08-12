@@ -7,6 +7,9 @@ from .forms import *
 from .models import researcher, study, administration, administration_data, get_meta_header, get_background_header, payment_code, ip_address
 import codecs, json, os, re, random, csv, datetime, cStringIO, math, StringIO, zipfile
 from .tables  import StudyAdministrationTable
+from .mixins import StudyOwnerMixin
+from django.views.generic import UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django_tables2   import RequestConfig
 from django.db.models import Max
 from cdi_forms.views import model_map, get_model_header, background_info_form, prefilled_background_form
@@ -47,7 +50,7 @@ def download_data(request, study_obj, administrations = None): # Download study 
     model_header = get_model_header(study_obj.instrument.name) # Fetch the associated instrument model's variables
 
     # Fetch administration variables
-    admin_header = ['study_name', 'subject_id','repeat_num', 'administration_id', 'link', 'completed', 'completedBackgroundInfo', 'due_date', 'last_modified','created_date']
+    admin_header = ['study_name', 'subject_id','local_lab_id','repeat_num', 'administration_id', 'link', 'completed', 'completedBackgroundInfo', 'due_date', 'last_modified','created_date']
 
     # Fetch background data variables
     background_header = ['age','sex','zip_code','birth_order', 'birth_weight_lb', 'birth_weight_kg','multi_birth_boolean','multi_birth', 'born_on_due_date', 'early_or_late', 'due_date_diff', 'mother_yob', 'mother_education','father_yob', 'father_education', 'annual_income', 'child_hispanic_latino', 'child_ethnicity', 'caregiver_info', 'other_languages_boolean','other_languages','language_from', 'language_days_per_week', 'language_hours_per_day', 'ear_infections_boolean','ear_infections', 'hearing_loss_boolean','hearing_loss', 'vision_problems_boolean','vision_problems', 'illnesses_boolean','illnesses', 'services_boolean','services','worried_boolean','worried','learning_disability_boolean','learning_disability']
@@ -238,7 +241,7 @@ def download_data(request, study_obj, administrations = None): # Download study 
     # Try to format administration data for pandas dataframe
     try:
         admin_data = pd.DataFrame.from_records(administrations.values(
-            'id', 'study__name','url_hash', 'repeat_num', 'subject_id','completed','completedBackgroundInfo','due_date','last_modified','created_date'
+            'id', 'study__name','url_hash', 'repeat_num', 'subject_id','local_lab_id','completed','completedBackgroundInfo','due_date','last_modified','created_date'
         )).rename(columns = {'id':'administration_id', 'study__name': 'study_name', 'url_hash': 'link'})
     except:
         admin_data = pd.DataFrame(columns = admin_header)
@@ -286,7 +289,7 @@ def download_summary(request, study_obj, administrations = None): # Download stu
     administrations = administrations if administrations is not None else administration.objects.filter(study = study_obj)
 
     # Fetch administration variables
-    admin_header = ['study_name', 'subject_id','repeat_num', 'administration_id', 'link', 'completed', 'completedBackgroundInfo', 'due_date', 'last_modified','created_date']
+    admin_header = ['study_name', 'subject_id','local_lab_id','repeat_num', 'administration_id', 'link', 'completed', 'completedBackgroundInfo', 'due_date', 'last_modified','created_date']
 
     # Fetch background data variables
     background_header = ['age','sex','zip_code','birth_order', 'birth_weight_lb', 'birth_weight_kg','multi_birth_boolean','multi_birth', 'born_on_due_date', 'early_or_late', 'due_date_diff', 'mother_yob', 'mother_education','father_yob', 'father_education', 'annual_income', 'child_hispanic_latino', 'child_ethnicity', 'caregiver_info', 'other_languages_boolean','other_languages','language_from', 'language_days_per_week', 'language_hours_per_day', 'ear_infections_boolean','ear_infections', 'hearing_loss_boolean','hearing_loss', 'vision_problems_boolean','vision_problems', 'illnesses_boolean','illnesses', 'services_boolean','services','worried_boolean','worried','learning_disability_boolean','learning_disability']
@@ -450,7 +453,7 @@ def download_summary(request, study_obj, administrations = None): # Download stu
     # Try to format administration data for pandas dataframe
     try:
         admin_data = pd.DataFrame.from_records(administrations.values(
-            'id', 'study__name','url_hash', 'repeat_num', 'subject_id','completed','completedBackgroundInfo','due_date','last_modified','created_date'
+            'id', 'study__name','url_hash', 'repeat_num', 'subject_id','local_lab_id','completed','completedBackgroundInfo','due_date','last_modified','created_date'
         )).rename(columns = {'id':'administration_id', 'study__name': 'study_name', 'url_hash': 'link'})
     except:
         admin_data = pd.DataFrame(columns = admin_header)
@@ -1387,3 +1390,44 @@ def import_data(request, study_name):
     else: # If fetching form
         form = ImportDataForm(researcher = request.user, study = study_obj) # Pull up a blank copy of form and render
         return render(request, 'researcher_UI/import_data.html', {'form': form})
+
+
+from .forms import EditSubjectIDForm, EditLocalLabIDForm
+class EditAdministrationView(LoginRequiredMixin, StudyOwnerMixin, UpdateView):
+    model = administration
+    form_class = EditSubjectIDForm
+    old_subject_id = None # we need to store this so we can update all repeats for this subject id
+
+    def get_success_url(self):
+        return reverse('console', kwargs={'study_name':self.object.study.name})
+
+    def get_context_data(self, **kwargs):
+        ctx = super(EditAdministrationView, self).get_context_data(**kwargs)
+        self.study = ctx ['study'] = self.object.study
+        return ctx
+
+    def post(self, request, *args, **kwargs):
+        form = EditSubjectIDForm(self.request.POST)
+        if form.is_valid():
+            self.old_subject_id = self.get_object().subject_id       
+        return super(EditAdministrationView, self).post(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        instances = administration.objects.filter(study=self.object.study, subject_id=self.old_subject_id)
+        new_subject_id = int(self.request.POST['subject_id'])
+        for instance in instances:
+            instance.subject_id = new_subject_id
+            instance.save()
+        return super(EditAdministrationView, self).form_valid(form)
+
+class EditLocalLabIdView(LoginRequiredMixin, StudyOwnerMixin, UpdateView):
+    model = administration
+    form_class = EditLocalLabIDForm
+
+    def get_success_url(self):
+        return reverse('console', kwargs={'study_name':self.object.study.name})
+
+    def get_context_data(self, **kwargs):
+        ctx = super(EditLocalLabIdView, self).get_context_data(**kwargs)
+        self.study = ctx ['study'] = self.object.study
+        return ctx

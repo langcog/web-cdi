@@ -10,7 +10,11 @@ from .admin_actions import scoring_data, scoring_summary
 admin.site.register(instrument)
 admin.site.register(administration_data)
 admin.site.register(researcher)
-admin.site.register(Benchmark)
+
+class BenchmarkAdmin(admin.ModelAdmin):
+    list_display = ['instrument','instrument_score','age','percentile']
+    list_filter = ['instrument__language','instrument__form','age','percentile']
+admin.site.register(Benchmark,BenchmarkAdmin)
 
 class InstrumentScoreAdmin(admin.ModelAdmin):
     list_display = ['instrument','title']

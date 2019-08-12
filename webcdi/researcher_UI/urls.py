@@ -14,5 +14,6 @@ urlpatterns = [
             url(r'^(?P<username>[^/]+)/(?P<study_name>[^/]+)/new_parent/$', views.administer_new_parent, name='administer_new_parent'),
             url(r'^(?P<username>[^/]+)/(?P<study_name>[^/]+)/new_participant/$', views.administer_new_participant, name='administer_new_participant'),
             url(r'^(?P<username>[^/]+)/(?P<study_name>[^/]+)/overflow/$', views.overflow, name='overflow'),
-
+            url(r'^edit-administration/(?P<pk>[0-9]+)/$', views.EditAdministrationView.as_view(), name='edit-administration'),
+            url(r'^edit-local-lab-id/(?P<pk>[0-9]+)/$', views.EditLocalLabIdView.as_view(), name='edit-local-lab-id'),
             ]

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html style="background: #29A9E6;">
+<head lang="en">
+
+    <meta charset="UTF-8">
+    {% load static %}
+    <title>Web CDI  - 403: Access Forbidden</title>
+
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <style>
+    @font-face {
+        font-family: Karla;
+        src: url(https://fonts.gstatic.com/s/karla/v5/suoMYBGv5sGCUIrF9mVTfXYhjbSpvc47ee6xR_80Hnw.woff2);
+    }
+    body {
+        font-family: "Karla", "sans-serif";
+    }
+    </style>
+</head>
+<body>
+
+<section>
+    <div class="main">
+        <div class="main-inner">
+            <div class="container">
+                <div class="content">
+                    <div class="caution text-center">
+                        <h1>403</h1>
+                        <h2>Access Forbidden</h2>
+                        <p>{{ exception }}</p>
+                    </div><!-- /.page-header -->
+                </div><!-- /.content -->
+            </div><!-- /.container -->
+        </div><!-- /.main-inner -->
+    </div><!-- /.main -->
+</section>
+</body>
+</html>

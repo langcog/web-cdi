@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en"> <head> <meta charset="utf-8">
+
+    {% load staticfiles %}
+
+    <title>WebCDI Interface</title>
+    <meta name="description" content="English Words and Sentences CDI form">
+    <meta name="author" content="Ashwin Paranjape">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" ></script>
+<!--     <script src="{% static 'jquery/jquery-1.11.3.min.js' %}"></script>
+ -->    <script src="//code.jquery.com/jquery-1.11.3.js"></script>
+    <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+    <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
+    <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
+    <script src="{% static 'researcher_UI/django_modal_forms.js' %}"></script>
+    <script src="{% static 'researcher_UI/researcher_UI.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'researcher_UI/console.css' %}" />
+    <link rel="stylesheet" href="{% static 'researcher_UI/table.css' %}" />
+    <script src="{% static 'cdi_forms/moment.js' %}"></script>
+
+
+</head>
+
+<style >
+    .btn{
+        white-space:normal !important;
+        word-wrap: break-word; 
+    }
+
+    label input ~ i.material-icons.radio_button_unchecked ,label input ~ i.material-icons.check_box_outline_blank {
+        display: inline;
+    }
+    label input ~ i.material-icons.radio_button_checked ,label input ~ i.material-icons.check_box {
+        display: none;
+    }
+    label input:checked ~ i.material-icons.radio_button_unchecked ,label input:checked ~ i.material-icons.check_box_outline_blank {
+        display: none;
+    }
+    label input:checked ~ i.material-icons.radio_button_checked ,label input:checked ~ i.material-icons.check_box {
+        display: inline;
+    }
+</style>
+<!-- Researcher interface -->
+<body>
+    <div class='container'>
+        <!-- Row displaying username, help button, and logout button. -->
+        <div class='row'>
+        	<form style="width:100%" action="/accounts/logout/">
+
+                <fieldset>
+                    <legend>User:</legend>
+                    <div class="d-flex">
+                		<div class='col'>
+                		    <big>{{ request.user.username }}</big>
+                		</div>
+                		<div class='col-2'>
+                		    <input type="button" value="Help" onclick="window.open('https://docs.google.com/document/d/1naFm2U-77YcOwFD7jcQIes2HhNz98qQM2wm1J1cmwck/pub')" class='btn btn-primary' style="width:100%">
+                		</div>
+                		<div class='col-2'>
+                		    <input type="submit" value="Logout" class='btn btn-primary' style="width:100%">
+                		</div>
+                    </div>
+                </fieldset>
+        	</form>
+        </div>
+
+        <div class='row'>
+            <form method='post' action ='' style="width:100%">
+                <fieldset>
+                    <legend>Update Administration:</legend>
+                    {% csrf_token %}
+                    <div class="d-flex">
+                        <div class="col">
+                            {{ form.as_table }}
+                        </div>
+                        <div class='col-2'>
+                            <a href="{% url 'console' study.name %}" class="btn btn-warning" style="width:100%">Return</a>
+                        </div>
+                        <div class='col-2'>
+                            <button type="submit" class="btn btn-primary" style="width:100%">Update</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

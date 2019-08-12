@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-08 08:24+0000\n"
+"POT-Creation-Date: 2019-08-08 14:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -48,6 +48,7 @@ msgid "My child is (check all that apply):"
 msgstr "Mijn kind is (vink alles aan wat van toepassing is)"
 
 #: cdi_forms/forms.py:40 cdi_forms/forms.py:41
+#: cdi_forms/templates/cdi_forms/cdi_base.html:146
 msgid "No"
 msgstr "Nee"
 
@@ -66,7 +67,7 @@ msgid ""
 "To protect your privacy, we never store your child's date of birth, we only "
 "record age in months."
 msgstr ""
-"Om uw privacy te beschermen slaan wij het geboortedatum van uw kind niet op, "
+"Om uw privacy te beschermen slaan wij de geboortedatum van uw kind niet op, "
 "we noteren alleen de leeftijd in maanden"
 
 #: cdi_forms/forms.py:47
@@ -80,7 +81,7 @@ msgstr "leeftijd (in maanden)<span class=\"asteriskField\">*</span>"
 #: cdi_forms/forms.py:50
 msgid "This field will update when you enter or change your child's DOB."
 msgstr ""
-"Dit vak wordt bijgewerkt als je het geboortedatum van uw kind invoert of "
+"Dit veld wordt bijgewerkt als u de geboortedatum van uw kind invoert of "
 "verandert"
 
 #: cdi_forms/forms.py:53
@@ -113,15 +114,15 @@ msgstr "Was hij/zij vroeg of laat?"
 
 #: cdi_forms/forms.py:71 cdi_forms/models.py:66
 msgid "Male"
-msgstr "Man"
+msgstr "Jongen"
 
 #: cdi_forms/forms.py:71 cdi_forms/models.py:66
 msgid "Female"
-msgstr "Vrouw"
+msgstr "Meisje"
 
 #: cdi_forms/forms.py:71
 msgid "Other / Prefer not to disclose"
-msgstr "Anders/ Zeg ik liever niet"
+msgstr "Anders / Zeg ik liever niet"
 
 #: cdi_forms/forms.py:72
 msgid "Sex"
@@ -133,7 +134,7 @@ msgstr "Is uw kind een van een meerling"
 
 #: cdi_forms/forms.py:81
 msgid "Does your child regularly hear a language other than English?"
-msgstr "Hoort uw kind regelmatig een andere taal dan Engels?"
+msgstr "Hoort uw kind regelmatig een andere taal dan Nederlands?"
 
 #: cdi_forms/forms.py:87
 msgid "Has your child experienced chronic ear infections (5 or more)?"
@@ -168,7 +169,7 @@ msgstr ""
 msgid ""
 "Are you worried about your child's progress in language or communication?"
 msgstr ""
-"Maakt u zich zorgen om de ontwikkeling van de taalvaardigheid of "
+"Maakt u zich zorgen over de ontwikkeling van de taalvaardigheid of "
 "communicatieve vaardigheden van uw kind?"
 
 #: cdi_forms/forms.py:129 cdi_forms/models.py:238
@@ -176,7 +177,7 @@ msgid ""
 "Have you or anyone in your immediate family been diagnosed with a language "
 "or learning disability?"
 msgstr ""
-"is er iemand in het gezin van het kind met een taalprobleem of "
+"Is er iemand in het gezin van het kind met een taalprobleem of "
 "leerachterstand"
 
 #: cdi_forms/forms.py:135
@@ -187,7 +188,7 @@ msgstr "Welke talen?"
 #, fuzzy
 #| msgid "Please describe"
 msgid "Please specify"
-msgstr "leg uit"
+msgstr "Leg uit"
 
 #: cdi_forms/forms.py:181 cdi_forms/forms.py:209
 msgid "This field cannot be empty"
@@ -203,7 +204,7 @@ msgstr "Kan niet meer dan 4 weken te laat zijn"
 
 #: cdi_forms/forms.py:191 cdi_forms/forms.py:206
 msgid "Please enter your child's DOB in the field above."
-msgstr "Voer het geboortedatum van uw kind in het vak hierboven in."
+msgstr "Voer de geboortedatum van uw kind in het vak hierboven in."
 
 #: cdi_forms/forms.py:202
 msgid "Your baby is too young for this version of the CDI."
@@ -211,7 +212,7 @@ msgstr "Uw kind is te jong voor deze versie van de CDI"
 
 #: cdi_forms/forms.py:204
 msgid "Your baby is too old for this version of the CDI."
-msgstr "Uw kind is te jong voor deze versie van de CDI"
+msgstr "Uw kind is te oud voor deze versie van de CDI"
 
 #: cdi_forms/forms.py:225 cdi_forms/forms.py:226 cdi_forms/models.py:143
 #: cdi_forms/models.py:144
@@ -220,11 +221,11 @@ msgstr "Geboortegewicht"
 
 #: cdi_forms/forms.py:235
 msgid "mm/dd/yyyy"
-msgstr ""
+msgstr "mm/dd/jjjj"
 
 #: cdi_forms/forms.py:238
 msgid "dd/mm/yyyy"
-msgstr ""
+msgstr "dd/mm/jjjj"
 
 #: cdi_forms/forms.py:241
 msgid "Basic Information"
@@ -232,7 +233,7 @@ msgstr "Basisinformatie"
 
 #: cdi_forms/forms.py:242
 msgid "Family Background"
-msgstr "Achtergrond Gezin"
+msgstr "Gezinsachtergrond"
 
 #: cdi_forms/forms.py:243
 msgid "Child's Ethnicity"
@@ -246,13 +247,13 @@ msgid ""
 "inclusiveness of our research. Your cooperation is appreciated, but optional."
 msgstr ""
 "De volgende informatie wordt alleen verzameld voor ons beurs verlenend "
-"instituut. bijv. NIH9 National Institute of Health). NIH vereist deze "
+"instituut. bijv. NIH (National Institute of Health). NIH vereist deze "
 "informatie nodig om de correctheid en inclusiviteit van ons onderzoek te "
 "garanderen. Uw medewerking wordt gewaardeerd, maar is vrijwillig "
 
 #: cdi_forms/forms.py:244
 msgid "Caregiver Information"
-msgstr "Informatie Verzorger"
+msgstr "Informatie verzorger"
 
 #: cdi_forms/forms.py:245
 msgid "Language Exposure"
@@ -299,712 +300,716 @@ msgid "Shqip (Albanian)"
 msgstr ""
 
 #: cdi_forms/languages.py:11
-msgid "አማርኛ (Amharic)"
+msgid "American Sign Language"
 msgstr ""
 
 #: cdi_forms/languages.py:12
-msgid "العربية (Arabic)"
+msgid "አማርኛ (Amharic)"
 msgstr ""
 
 #: cdi_forms/languages.py:13
-msgid "Aragonés (Aragonese)"
+msgid "العربية (Arabic)"
 msgstr ""
 
 #: cdi_forms/languages.py:14
-msgid "Հայերեն (Armenian)"
+msgid "Aragonés (Aragonese)"
 msgstr ""
 
 #: cdi_forms/languages.py:15
-msgid "অসমীয়া (Assamese)"
+msgid "Հայերեն (Armenian)"
 msgstr ""
 
 #: cdi_forms/languages.py:16
-msgid "авар мацӀ, магӀарул мацӀ (Avaric)"
+msgid "অসমীয়া (Assamese)"
 msgstr ""
 
 #: cdi_forms/languages.py:17
-msgid "avesta (Avestan)"
+msgid "авар мацӀ, магӀарул мацӀ (Avaric)"
 msgstr ""
 
 #: cdi_forms/languages.py:18
-msgid "aymar aru (Aymara)"
+msgid "avesta (Avestan)"
 msgstr ""
 
 #: cdi_forms/languages.py:19
-msgid "Հայեazərbaycan diliրեն (Azerbaijani)"
+msgid "aymar aru (Aymara)"
 msgstr ""
 
 #: cdi_forms/languages.py:20
-msgid "bamanankan (Bambara)"
+msgid "Հայեazərbaycan diliրեն (Azerbaijani)"
 msgstr ""
 
 #: cdi_forms/languages.py:21
-msgid "башҡорт теле (Bashkir)"
+msgid "bamanankan (Bambara)"
 msgstr ""
 
 #: cdi_forms/languages.py:22
-msgid "euskara, euskera (Basque)"
+msgid "башҡорт теле (Bashkir)"
 msgstr ""
 
 #: cdi_forms/languages.py:23
-msgid "Հայեazərbaycan diliրեն (Belarusian)"
+msgid "euskara, euskera (Basque)"
 msgstr ""
 
 #: cdi_forms/languages.py:24
-msgid "বাংলা (Bengali)"
+msgid "Հայեazərbaycan diliրեն (Belarusian)"
 msgstr ""
 
 #: cdi_forms/languages.py:25
-msgid "भोजपुरी (Bihari)"
+msgid "বাংলা (Bengali)"
 msgstr ""
 
 #: cdi_forms/languages.py:26
-msgid "Bislama (Bislama)"
+msgid "भोजपुरी (Bihari)"
 msgstr ""
 
 #: cdi_forms/languages.py:27
-msgid "bosanski jezik (Bosnian)"
+msgid "Bislama (Bislama)"
 msgstr ""
 
 #: cdi_forms/languages.py:28
-msgid "brezhoneg (Breton)"
+msgid "bosanski jezik (Bosnian)"
 msgstr ""
 
 #: cdi_forms/languages.py:29
-msgid "български език (Bulgarian)"
+msgid "brezhoneg (Breton)"
 msgstr ""
 
 #: cdi_forms/languages.py:30
-msgid "ဗမာစာ (Burmese)"
+msgid "български език (Bulgarian)"
 msgstr ""
 
 #: cdi_forms/languages.py:31
-msgid "Català (Catalan; Valencian)"
+msgid "ဗမာစာ (Burmese)"
 msgstr ""
 
 #: cdi_forms/languages.py:32
-msgid "Chamoru (Chamorro)"
+msgid "Català (Catalan; Valencian)"
 msgstr ""
 
 #: cdi_forms/languages.py:33
-msgid "нохчийн мотт (Chechen)"
+msgid "Chamoru (Chamorro)"
 msgstr ""
 
 #: cdi_forms/languages.py:34
-msgid "chiCheŵa, chinyanja (Chichewa; Chewa; Nyanja)"
+msgid "нохчийн мотт (Chechen)"
 msgstr ""
 
 #: cdi_forms/languages.py:35
-msgid "中文 (Zhōngwén), 汉语, 漢語 (Chinese)"
+msgid "chiCheŵa, chinyanja (Chichewa; Chewa; Nyanja)"
 msgstr ""
 
 #: cdi_forms/languages.py:36
-msgid "чӑваш чӗлхи (Chuvash)"
+msgid "中文 (Zhōngwén), 汉语, 漢語 (Chinese)"
 msgstr ""
 
 #: cdi_forms/languages.py:37
-msgid "Kernewek (Cornish)"
+msgid "чӑваш чӗлхи (Chuvash)"
 msgstr ""
 
 #: cdi_forms/languages.py:38
-msgid "corsu, lingua corsa (Corsican)"
+msgid "Kernewek (Cornish)"
 msgstr ""
 
 #: cdi_forms/languages.py:39
-msgid "ᓀᐦᐃᔭᐍᐏᐣ (Cree)"
+msgid "corsu, lingua corsa (Corsican)"
 msgstr ""
 
 #: cdi_forms/languages.py:40
-msgid "hrvatski (Croatian)"
+msgid "ᓀᐦᐃᔭᐍᐏᐣ (Cree)"
 msgstr ""
 
 #: cdi_forms/languages.py:41
-msgid "česky, čeština (Czech)"
+msgid "hrvatski (Croatian)"
 msgstr ""
 
 #: cdi_forms/languages.py:42
-msgid "dansk (Danish)"
+msgid "česky, čeština (Czech)"
 msgstr ""
 
 #: cdi_forms/languages.py:43
-msgid "ދިވެހި (Divehi; Dhivehi; Maldivian;)"
+msgid "dansk (Danish)"
 msgstr ""
 
 #: cdi_forms/languages.py:44
-msgid "Nederlands, Vlaams (Dutch)"
+msgid "ދިވެހި (Divehi; Dhivehi; Maldivian;)"
 msgstr ""
 
 #: cdi_forms/languages.py:45
-msgid "English (English)"
+msgid "Nederlands, Vlaams (Dutch)"
 msgstr ""
 
 #: cdi_forms/languages.py:46
-msgid "Esperanto (Esperanto)"
+msgid "English (English)"
 msgstr ""
 
 #: cdi_forms/languages.py:47
-msgid "eesti, eesti keel (Estonian)"
+msgid "Esperanto (Esperanto)"
 msgstr ""
 
 #: cdi_forms/languages.py:48
-msgid "Eʋegbe (Ewe)"
+msgid "eesti, eesti keel (Estonian)"
 msgstr ""
 
 #: cdi_forms/languages.py:49
-msgid "føroyskt (Faroese)"
+msgid "Eʋegbe (Ewe)"
 msgstr ""
 
 #: cdi_forms/languages.py:50
-msgid "vosa Vakaviti (Fijian)"
+msgid "føroyskt (Faroese)"
 msgstr ""
 
 #: cdi_forms/languages.py:51
-msgid "suomi, suomen kieli (Finnish)"
+msgid "vosa Vakaviti (Fijian)"
 msgstr ""
 
 #: cdi_forms/languages.py:52
-msgid "français, langue française (French)"
+msgid "suomi, suomen kieli (Finnish)"
 msgstr ""
 
 #: cdi_forms/languages.py:53
-msgid "Fulfulde, Pulaar, Pular (Fula; Fulah; Pulaar; Pular)"
+msgid "français, langue française (French)"
 msgstr ""
 
 #: cdi_forms/languages.py:54
-msgid "Galego (Galician)"
+msgid "Fulfulde, Pulaar, Pular (Fula; Fulah; Pulaar; Pular)"
 msgstr ""
 
 #: cdi_forms/languages.py:55
-msgid "ქართული (Georgian)"
+msgid "Galego (Galician)"
 msgstr ""
 
 #: cdi_forms/languages.py:56
-msgid "Deutsch (German)"
+msgid "ქართული (Georgian)"
 msgstr ""
 
 #: cdi_forms/languages.py:57
-msgid "Ελληνικά (Greek, Modern)"
+msgid "Deutsch (German)"
 msgstr ""
 
 #: cdi_forms/languages.py:58
-msgid "Avañeẽ (Guaraní)"
+msgid "Ελληνικά (Greek, Modern)"
 msgstr ""
 
 #: cdi_forms/languages.py:59
-msgid "ગુજરાતી (Gujarati)"
+msgid "Avañeẽ (Guaraní)"
 msgstr ""
 
 #: cdi_forms/languages.py:60
-msgid "Kreyòl ayisyen (Haitian; Haitian Creole)"
+msgid "ગુજરાતી (Gujarati)"
 msgstr ""
 
 #: cdi_forms/languages.py:61
-msgid "Hausa, هَوُسَ (Hausa)"
+msgid "Kreyòl ayisyen (Haitian; Haitian Creole)"
 msgstr ""
 
 #: cdi_forms/languages.py:62
-msgid "עברית (Hebrew (modern))"
+msgid "Hausa, هَوُسَ (Hausa)"
 msgstr ""
 
 #: cdi_forms/languages.py:63
-msgid "Otjiherero (Herero)"
+msgid "עברית (Hebrew (modern))"
 msgstr ""
 
 #: cdi_forms/languages.py:64
-msgid "हिन्दी, हिंदी (Hindi)"
+msgid "Otjiherero (Herero)"
 msgstr ""
 
 #: cdi_forms/languages.py:65
-msgid "Hiri Motu (Hiri Motu)"
+msgid "हिन्दी, हिंदी (Hindi)"
 msgstr ""
 
 #: cdi_forms/languages.py:66
-msgid "Magyar (Hungarian)"
+msgid "Hiri Motu (Hiri Motu)"
 msgstr ""
 
 #: cdi_forms/languages.py:67
-msgid "Interlingua (Interlingua)"
+msgid "Magyar (Hungarian)"
 msgstr ""
 
 #: cdi_forms/languages.py:68
-msgid "Bahasa Indonesia (Indonesian)"
+msgid "Interlingua (Interlingua)"
 msgstr ""
 
 #: cdi_forms/languages.py:69
-msgid "Originally called Occidental; then Interlingue after WWII (Interlingue)"
+msgid "Bahasa Indonesia (Indonesian)"
 msgstr ""
 
 #: cdi_forms/languages.py:70
-msgid "Gaeilge (Irish)"
+msgid "Originally called Occidental; then Interlingue after WWII (Interlingue)"
 msgstr ""
 
 #: cdi_forms/languages.py:71
-msgid "Asụsụ Igbo (Igbo)"
+msgid "Gaeilge (Irish)"
 msgstr ""
 
 #: cdi_forms/languages.py:72
-msgid "Iñupiaq, Iñupiatun (Inupiaq)"
+msgid "Asụsụ Igbo (Igbo)"
 msgstr ""
 
 #: cdi_forms/languages.py:73
-msgid "Ido (Ido)"
+msgid "Iñupiaq, Iñupiatun (Inupiaq)"
 msgstr ""
 
 #: cdi_forms/languages.py:74
-msgid "Íslenska (Icelandic)"
+msgid "Ido (Ido)"
 msgstr ""
 
 #: cdi_forms/languages.py:75
-msgid "Italiano (Italian)"
+msgid "Íslenska (Icelandic)"
 msgstr ""
 
 #: cdi_forms/languages.py:76
-msgid "ᐃᓄᒃᑎᑐᑦ (Inuktitut)"
+msgid "Italiano (Italian)"
 msgstr ""
 
 #: cdi_forms/languages.py:77
-msgid "日本語 (にほんご／にっぽんご) (Japanese)"
+msgid "ᐃᓄᒃᑎᑐᑦ (Inuktitut)"
 msgstr ""
 
 #: cdi_forms/languages.py:78
-msgid "basa Jawa (Javanese)"
+msgid "日本語 (にほんご／にっぽんご) (Japanese)"
 msgstr ""
 
 #: cdi_forms/languages.py:79
-msgid "kalaallisut, kalaallit oqaasii (Kalaallisut, Greenlandic)"
+msgid "basa Jawa (Javanese)"
 msgstr ""
 
 #: cdi_forms/languages.py:80
-msgid "ಕನ್ನಡ (Kannada)"
+msgid "kalaallisut, kalaallit oqaasii (Kalaallisut, Greenlandic)"
 msgstr ""
 
 #: cdi_forms/languages.py:81
-msgid "Kanuri (Kanuri)"
+msgid "ಕನ್ನಡ (Kannada)"
 msgstr ""
 
 #: cdi_forms/languages.py:82
-msgid "कश्मीरी, كشميري‎ (Kashmiri)"
+msgid "Kanuri (Kanuri)"
 msgstr ""
 
 #: cdi_forms/languages.py:83
-msgid "Қазақ тілі (Kazakh)"
+msgid "कश्मीरी, كشميري‎ (Kashmiri)"
 msgstr ""
 
 #: cdi_forms/languages.py:84
-msgid "ភាសាខ្មែរ (Khmer)"
+msgid "Қазақ тілі (Kazakh)"
 msgstr ""
 
 #: cdi_forms/languages.py:85
-msgid "Gĩkũyũ (Kikuyu, Gikuyu)"
+msgid "ភាសាខ្មែរ (Khmer)"
 msgstr ""
 
 #: cdi_forms/languages.py:86
-msgid "Ikinyarwanda (Kinyarwanda)"
+msgid "Gĩkũyũ (Kikuyu, Gikuyu)"
 msgstr ""
 
 #: cdi_forms/languages.py:87
-msgid "кыргыз тили (Kirghiz, Kyrgyz)"
+msgid "Ikinyarwanda (Kinyarwanda)"
 msgstr ""
 
 #: cdi_forms/languages.py:88
-msgid "коми кыв (Komi)"
+msgid "кыргыз тили (Kirghiz, Kyrgyz)"
 msgstr ""
 
 #: cdi_forms/languages.py:89
-msgid "KiKongo (Kongo)"
+msgid "коми кыв (Komi)"
 msgstr ""
 
 #: cdi_forms/languages.py:90
-msgid "한국어 (韓國語), 조선말 (朝鮮語) (Korean)"
+msgid "KiKongo (Kongo)"
 msgstr ""
 
 #: cdi_forms/languages.py:91
-msgid "Kurdî, كوردی (Kurdish)"
+msgid "한국어 (韓國語), 조선말 (朝鮮語) (Korean)"
 msgstr ""
 
 #: cdi_forms/languages.py:92
-msgid "Kuanyama (Kwanyama, Kuanyama)"
+msgid "Kurdî, كوردی (Kurdish)"
 msgstr ""
 
 #: cdi_forms/languages.py:93
-msgid "latine, lingua latina (Latin)"
+msgid "Kuanyama (Kwanyama, Kuanyama)"
 msgstr ""
 
 #: cdi_forms/languages.py:94
-msgid "Lëtzebuergesch (Luxembourgish, Letzeburgesch)"
+msgid "latine, lingua latina (Latin)"
 msgstr ""
 
 #: cdi_forms/languages.py:95
-msgid "Luganda (Luganda)"
+msgid "Lëtzebuergesch (Luxembourgish, Letzeburgesch)"
 msgstr ""
 
 #: cdi_forms/languages.py:96
-msgid "Limburgs (Limburgish, Limburgan, Limburger)"
+msgid "Luganda (Luganda)"
 msgstr ""
 
 #: cdi_forms/languages.py:97
-msgid "Lingála (Lingala)"
+msgid "Limburgs (Limburgish, Limburgan, Limburger)"
 msgstr ""
 
 #: cdi_forms/languages.py:98
-msgid "ພາສາລາວ (Lao)"
+msgid "Lingála (Lingala)"
 msgstr ""
 
 #: cdi_forms/languages.py:99
-msgid "lietuvių kalba (Lithuanian)"
+msgid "ພາສາລາວ (Lao)"
 msgstr ""
 
 #: cdi_forms/languages.py:100
-msgid "Luba-Katanga (Luba-Katanga)"
+msgid "lietuvių kalba (Lithuanian)"
 msgstr ""
 
 #: cdi_forms/languages.py:101
-msgid "latviešu valoda (Latvian)"
+msgid "Luba-Katanga (Luba-Katanga)"
 msgstr ""
 
 #: cdi_forms/languages.py:102
-msgid "Gaelg, Gailck (Manx)"
+msgid "latviešu valoda (Latvian)"
 msgstr ""
 
 #: cdi_forms/languages.py:103
-msgid "македонски јазик (Macedonian)"
+msgid "Gaelg, Gailck (Manx)"
 msgstr ""
 
 #: cdi_forms/languages.py:104
-msgid "Malagasy fiteny (Malagasy)"
+msgid "македонски јазик (Macedonian)"
 msgstr ""
 
 #: cdi_forms/languages.py:105
-msgid "bahasa Melayu, بهاس ملايو (Malay)"
+msgid "Malagasy fiteny (Malagasy)"
 msgstr ""
 
 #: cdi_forms/languages.py:106
-msgid "മലയാളം (Malayalam)"
+msgid "bahasa Melayu, بهاس ملايو (Malay)"
 msgstr ""
 
 #: cdi_forms/languages.py:107
-msgid "Malti (Maltese)"
+msgid "മലയാളം (Malayalam)"
 msgstr ""
 
 #: cdi_forms/languages.py:108
-msgid "te reo Māori (Māori)"
+msgid "Malti (Maltese)"
 msgstr ""
 
 #: cdi_forms/languages.py:109
-msgid "मराठी (Marathi (Marāṭhī))"
+msgid "te reo Māori (Māori)"
 msgstr ""
 
 #: cdi_forms/languages.py:110
-msgid "Kajin M̧ajeļ (Marshallese)"
+msgid "मराठी (Marathi (Marāṭhī))"
 msgstr ""
 
 #: cdi_forms/languages.py:111
-msgid "монгол (Mongolian)"
+msgid "Kajin M̧ajeļ (Marshallese)"
 msgstr ""
 
 #: cdi_forms/languages.py:112
-msgid "Ekakairũ Naoero (Nauru)"
+msgid "монгол (Mongolian)"
 msgstr ""
 
 #: cdi_forms/languages.py:113
-msgid "Diné bizaad, Dinékʼehǰí (Navajo, Navaho)"
+msgid "Ekakairũ Naoero (Nauru)"
 msgstr ""
 
 #: cdi_forms/languages.py:114
-msgid "Norsk bokmål (Norwegian Bokmål)"
+msgid "Diné bizaad, Dinékʼehǰí (Navajo, Navaho)"
 msgstr ""
 
 #: cdi_forms/languages.py:115
-msgid "isiNdebele (North Ndebele)"
+msgid "Norsk bokmål (Norwegian Bokmål)"
 msgstr ""
 
 #: cdi_forms/languages.py:116
-msgid "नेपाली (Nepali)"
+msgid "isiNdebele (North Ndebele)"
 msgstr ""
 
 #: cdi_forms/languages.py:117
-msgid "Owambo (Ndonga)"
+msgid "नेपाली (Nepali)"
 msgstr ""
 
 #: cdi_forms/languages.py:118
-msgid "Norsk nynorsk (Norwegian Nynorsk)"
+msgid "Owambo (Ndonga)"
 msgstr ""
 
 #: cdi_forms/languages.py:119
-msgid "Norsk (Norwegian)"
+msgid "Norsk nynorsk (Norwegian Nynorsk)"
 msgstr ""
 
 #: cdi_forms/languages.py:120
-msgid "Nuosuhxop (Nuosu)"
+msgid "Norsk (Norwegian)"
 msgstr ""
 
 #: cdi_forms/languages.py:121
-msgid "isiNdebele (South Ndebele)"
+msgid "Nuosuhxop (Nuosu)"
 msgstr ""
 
 #: cdi_forms/languages.py:122
-msgid "Occitan (Occitan)"
+msgid "isiNdebele (South Ndebele)"
 msgstr ""
 
 #: cdi_forms/languages.py:123
-msgid "ᐊᓂᔑᓈᐯᒧᐎᓐ (Ojibwe, Ojibwa)"
+msgid "Occitan (Occitan)"
 msgstr ""
 
 #: cdi_forms/languages.py:124
+msgid "ᐊᓂᔑᓈᐯᒧᐎᓐ (Ojibwe, Ojibwa)"
+msgstr ""
+
+#: cdi_forms/languages.py:125
 msgid ""
 "ѩзыкъ словѣньскъ (Old Church Slavonic, Church Slavic, Church Slavonic, Old "
 "Bulgarian, Old Slavonic)"
 msgstr ""
 
-#: cdi_forms/languages.py:125
+#: cdi_forms/languages.py:126
 msgid "Afaan Oromoo (Oromo)"
 msgstr ""
 
-#: cdi_forms/languages.py:126
+#: cdi_forms/languages.py:127
 msgid "ଓଡ଼ିଆ (Oriya)"
 msgstr ""
 
-#: cdi_forms/languages.py:127
+#: cdi_forms/languages.py:128
 msgid "ирон æвзаг (Ossetian, Ossetic)"
 msgstr ""
 
-#: cdi_forms/languages.py:128
+#: cdi_forms/languages.py:129
 msgid "ਪੰਜਾਬੀ, پنجابی (Panjabi, Punjabi)"
 msgstr ""
 
-#: cdi_forms/languages.py:129
+#: cdi_forms/languages.py:130
 msgid "पाऴि (Pāli)"
 msgstr ""
 
-#: cdi_forms/languages.py:130
+#: cdi_forms/languages.py:131
 msgid "فارسی (Persian)"
 msgstr ""
 
-#: cdi_forms/languages.py:131
+#: cdi_forms/languages.py:132
 msgid "polski (Polish)"
 msgstr ""
 
-#: cdi_forms/languages.py:132
+#: cdi_forms/languages.py:133
 msgid "پښتو (Pashto, Pushto)"
 msgstr ""
 
-#: cdi_forms/languages.py:133
+#: cdi_forms/languages.py:134
 msgid "Português (Portuguese)"
 msgstr ""
 
-#: cdi_forms/languages.py:134
+#: cdi_forms/languages.py:135
 msgid "Runa Simi, Kichwa (Quechua)"
 msgstr ""
 
-#: cdi_forms/languages.py:135
+#: cdi_forms/languages.py:136
 msgid "rumantsch grischun (Romansh)"
 msgstr ""
 
-#: cdi_forms/languages.py:136
+#: cdi_forms/languages.py:137
 msgid "kiRundi (Kirundi)"
 msgstr ""
 
-#: cdi_forms/languages.py:137
+#: cdi_forms/languages.py:138
 msgid "română (Romanian, Moldavian, Moldovan)"
 msgstr ""
 
-#: cdi_forms/languages.py:138
+#: cdi_forms/languages.py:139
 msgid "русский язык (Russian)"
 msgstr ""
 
-#: cdi_forms/languages.py:139
+#: cdi_forms/languages.py:140
 msgid "संस्कृतम् (Sanskrit (Saṁskṛta))"
 msgstr ""
 
-#: cdi_forms/languages.py:140
+#: cdi_forms/languages.py:141
 msgid "sardu (Sardinian)"
 msgstr ""
 
-#: cdi_forms/languages.py:141
+#: cdi_forms/languages.py:142
 msgid "सिन्धी, سنڌي، سندھی (Sindhi)"
 msgstr ""
 
-#: cdi_forms/languages.py:142
+#: cdi_forms/languages.py:143
 msgid "Davvisámegiella (Northern Sami)"
 msgstr ""
 
-#: cdi_forms/languages.py:143
+#: cdi_forms/languages.py:144
 msgid "gagana faa Samoa (Samoan)"
 msgstr ""
 
-#: cdi_forms/languages.py:144
+#: cdi_forms/languages.py:145
 msgid "yângâ tî sängö (Sango)"
 msgstr ""
 
-#: cdi_forms/languages.py:145
+#: cdi_forms/languages.py:146
 msgid "српски језик (Serbian)"
 msgstr ""
 
-#: cdi_forms/languages.py:146
+#: cdi_forms/languages.py:147
 msgid "Gàidhlig (Scottish Gaelic; Gaelic)"
 msgstr ""
 
-#: cdi_forms/languages.py:147
+#: cdi_forms/languages.py:148
 msgid "chiShona (Shona)"
 msgstr ""
 
-#: cdi_forms/languages.py:148
+#: cdi_forms/languages.py:149
 msgid "සිංහල (Sinhala, Sinhalese)"
 msgstr ""
 
-#: cdi_forms/languages.py:149
+#: cdi_forms/languages.py:150
 msgid "slovenčina (Slovak)"
 msgstr ""
 
-#: cdi_forms/languages.py:150
+#: cdi_forms/languages.py:151
 msgid "slovenščina (Slovene)"
 msgstr ""
 
-#: cdi_forms/languages.py:151
+#: cdi_forms/languages.py:152
 msgid "Soomaaliga, af Soomaali (Somali)"
 msgstr ""
 
-#: cdi_forms/languages.py:152
+#: cdi_forms/languages.py:153
 msgid "Sesotho (Southern Sotho)"
 msgstr ""
 
-#: cdi_forms/languages.py:153
+#: cdi_forms/languages.py:154
 msgid "español, castellano (Spanish; Castilian)"
 msgstr ""
 
-#: cdi_forms/languages.py:154
+#: cdi_forms/languages.py:155
 msgid "Basa Sunda (Sundanese)"
 msgstr ""
 
-#: cdi_forms/languages.py:155
+#: cdi_forms/languages.py:156
 msgid "Kiswahili (Swahili)"
 msgstr ""
 
-#: cdi_forms/languages.py:156
+#: cdi_forms/languages.py:157
 msgid "SiSwati (Swati)"
 msgstr ""
 
-#: cdi_forms/languages.py:157
+#: cdi_forms/languages.py:158
 msgid "svenska (Swedish)"
 msgstr ""
 
-#: cdi_forms/languages.py:158
+#: cdi_forms/languages.py:159
 msgid "தமிழ் (Tamil)"
 msgstr ""
 
-#: cdi_forms/languages.py:159
+#: cdi_forms/languages.py:160
 msgid "тоҷикӣ, toğikī, تاجیکی‎ (Telugu)"
 msgstr ""
 
-#: cdi_forms/languages.py:160
+#: cdi_forms/languages.py:161
 msgid "తెలుగు (Tajik)"
 msgstr ""
 
-#: cdi_forms/languages.py:161
+#: cdi_forms/languages.py:162
 msgid "ไทย (Thai)"
 msgstr ""
 
-#: cdi_forms/languages.py:162
+#: cdi_forms/languages.py:163
 msgid "ትግርኛ (Tigrinya)"
 msgstr ""
 
-#: cdi_forms/languages.py:163
+#: cdi_forms/languages.py:164
 msgid "བོད་ཡིག (Tibetan Standard, Tibetan, Central)"
 msgstr ""
 
-#: cdi_forms/languages.py:164
+#: cdi_forms/languages.py:165
 msgid "Türkmen, Түркмен (Turkmen)"
 msgstr ""
 
-#: cdi_forms/languages.py:165
+#: cdi_forms/languages.py:166
 msgid "Wikang Tagalog (Tagalog)"
 msgstr ""
 
-#: cdi_forms/languages.py:166
+#: cdi_forms/languages.py:167
 msgid "Setswana (Tswana)"
 msgstr ""
 
-#: cdi_forms/languages.py:167
+#: cdi_forms/languages.py:168
 msgid "faka Tonga (Tonga (Tonga Islands))"
 msgstr ""
 
-#: cdi_forms/languages.py:168
+#: cdi_forms/languages.py:169
 msgid "Türkçe (Turkish)"
 msgstr ""
 
-#: cdi_forms/languages.py:169
+#: cdi_forms/languages.py:170
 msgid "Xitsonga (Tsonga)"
 msgstr ""
 
-#: cdi_forms/languages.py:170
+#: cdi_forms/languages.py:171
 msgid "татарча, tatarça, تاتارچا (Tatar)"
 msgstr ""
 
-#: cdi_forms/languages.py:171
+#: cdi_forms/languages.py:172
 msgid "Twi (Twi)"
 msgstr ""
 
-#: cdi_forms/languages.py:172
+#: cdi_forms/languages.py:173
 msgid "Reo Tahiti (Tahitian)"
 msgstr ""
 
-#: cdi_forms/languages.py:173
+#: cdi_forms/languages.py:174
 msgid "Uyƣurqə, ئۇيغۇرچە (Uighur, Uyghur)"
 msgstr ""
 
-#: cdi_forms/languages.py:174
+#: cdi_forms/languages.py:175
 msgid "українська (Ukrainian)"
 msgstr ""
 
-#: cdi_forms/languages.py:175
+#: cdi_forms/languages.py:176
 msgid "اردو (Urdu)"
 msgstr ""
 
-#: cdi_forms/languages.py:176
+#: cdi_forms/languages.py:177
 msgid "zbek, Ўзбек, أۇزبېك (Uzbek)"
 msgstr ""
 
-#: cdi_forms/languages.py:177
+#: cdi_forms/languages.py:178
 msgid "Tshivenḓa (Venda)"
 msgstr ""
 
-#: cdi_forms/languages.py:178
+#: cdi_forms/languages.py:179
 msgid "Tiếng Việt (Vietnamese)"
 msgstr ""
 
-#: cdi_forms/languages.py:179
+#: cdi_forms/languages.py:180
 msgid "Volapük (Volapük)"
 msgstr ""
 
-#: cdi_forms/languages.py:180
+#: cdi_forms/languages.py:181
 msgid "Waloon (Walloon)"
 msgstr ""
 
-#: cdi_forms/languages.py:181
+#: cdi_forms/languages.py:182
 msgid "Cymraeg (Welsh)"
 msgstr ""
 
-#: cdi_forms/languages.py:182
+#: cdi_forms/languages.py:183
 msgid "Wollof (Wolof)"
 msgstr ""
 
-#: cdi_forms/languages.py:183
+#: cdi_forms/languages.py:184
 msgid "Frysk (Western Frisian)"
 msgstr ""
 
-#: cdi_forms/languages.py:184
+#: cdi_forms/languages.py:185
 msgid "isiXhosa (Xhosa)"
 msgstr ""
 
-#: cdi_forms/languages.py:185
+#: cdi_forms/languages.py:186
 msgid "ייִדיש (Yiddish)"
 msgstr ""
 
-#: cdi_forms/languages.py:186
+#: cdi_forms/languages.py:187
 msgid "Yorùbá (Yoruba)"
 msgstr ""
 
-#: cdi_forms/languages.py:187
+#: cdi_forms/languages.py:188
 msgid "Saɯ cueŋƅ, Saw cuengh (Zhuang, Chuang)"
 msgstr ""
 
@@ -1014,7 +1019,7 @@ msgstr "Leeftijd (in maanden)"
 
 #: cdi_forms/models.py:67
 msgid "Country"
-msgstr ""
+msgstr "Land"
 
 #: cdi_forms/models.py:68
 msgid "Zip Code (if you live in the U.S.)"
@@ -1022,7 +1027,7 @@ msgstr "Postcode"
 
 #: cdi_forms/models.py:68
 msgid "Please enter a valid U.S. zip code"
-msgstr "Voer a.u.b. uw geldige postcode in"
+msgstr "Voer a.u.b. een geldige postcode in"
 
 #: cdi_forms/models.py:72
 msgid "1 (First)"
@@ -1066,31 +1071,31 @@ msgstr "10 of meer (tiende of later)"
 
 #: cdi_forms/models.py:86
 msgid "Birth order"
-msgstr "geboortevolgorde"
+msgstr "Geboortevolgorde"
 
 #: cdi_forms/models.py:90
 msgid "Twins"
-msgstr "tweeling"
+msgstr "Tweeling"
 
 #: cdi_forms/models.py:91
 msgid "Triplets"
-msgstr "drieling"
+msgstr "Drieling"
 
 #: cdi_forms/models.py:92
 msgid "Quadruplets"
-msgstr "vierling"
+msgstr "Vierling"
 
 #: cdi_forms/models.py:93
 msgid "Quintuplets or greater"
-msgstr "vijfling of meer"
+msgstr "Vijfling of meer"
 
 #: cdi_forms/models.py:97
 msgid "Twins, triplets, quadruplets, other?"
-msgstr "tweeling, drieling, vierling, andere?"
+msgstr "Tweeling, drieling, vierling, andere?"
 
 #: cdi_forms/models.py:101
 msgid "Less than 3 lbs, 0 oz"
-msgstr "minder dan 3lbs, 0 oz"
+msgstr "Minder dan 3 lbs, 0 oz"
 
 #: cdi_forms/models.py:102
 msgid "3 lbs, 0 oz - 3 lbs, 7 oz"
@@ -1248,57 +1253,57 @@ msgstr "23 of meer"
 #, fuzzy
 #| msgid "Other"
 msgid "Mother"
-msgstr "Andere"
+msgstr "Moeder"
 
 #: cdi_forms/models.py:165 cdi_forms/models.py:243
 #, fuzzy
 #| msgid "Other"
 msgid "Father"
-msgstr "Andere"
+msgstr "Vader"
 
 #: cdi_forms/models.py:166 cdi_forms/models.py:245
 msgid "Grandparent(s)"
-msgstr ""
+msgstr "Grootouder(s)"
 
 #: cdi_forms/models.py:170
 msgid "Primary Caregiver"
-msgstr ""
+msgstr "Hoofdverzorger"
 
 #: cdi_forms/models.py:172
 msgid "Primary Caregiver Year of birth"
-msgstr ""
+msgstr "Geboortedatum hoofdverzorger"
 
 #: cdi_forms/models.py:173
 #, fuzzy
 #| msgid "Caregiver Information"
 msgid "Primary Caregiver Education"
-msgstr "Informatie Verzorger"
+msgstr "Informatie hoofdverzorger"
 
 #: cdi_forms/models.py:173 cdi_forms/models.py:178
 msgid ""
 "Choose highest grade completed (12 = high school graduate; 16 = college "
 "graduate; 18 = advanced degree)"
-msgstr "Kies het hoogste afgeronde niveau"
+msgstr "Kies het hoogst afgeronde niveau"
 
 #: cdi_forms/models.py:175
 msgid "Secondary Caregiver"
-msgstr ""
+msgstr "Tweede verzorger"
 
 #: cdi_forms/models.py:177
 msgid "Secondary Caregiver Year of birth"
-msgstr ""
+msgstr "Geboortedatum tweede verzorger"
 
 #: cdi_forms/models.py:178
 #, fuzzy
 #| msgid "Caregiver Information"
 msgid "Secondary Caregiver Education"
-msgstr "Informatie Verzorger"
+msgstr "Informatie tweede verzorger"
 
 #: cdi_forms/models.py:187
 #, fuzzy
 #| msgid "Under "
 msgid "Under $25,000"
-msgstr "Onder"
+msgstr "Onder €10,000"
 
 #: cdi_forms/models.py:188
 msgid "$25,000-$50,000"
@@ -1330,7 +1335,7 @@ msgstr ""
 
 #: cdi_forms/models.py:195
 msgid "Over $200,000"
-msgstr ""
+msgstr " "
 
 #: cdi_forms/models.py:198
 msgid "Estimated Annual Family Income (in USD)"
@@ -1338,19 +1343,19 @@ msgstr "Geschat jaarlijks gezinsinkomen"
 
 #: cdi_forms/models.py:205
 msgid "Two parents"
-msgstr "twee ouders"
+msgstr "Twee ouders"
 
 #: cdi_forms/models.py:206
 msgid "One parent"
-msgstr "een ouder"
+msgstr "Een ouder"
 
 #: cdi_forms/models.py:207
 msgid "One or both parents and other caregiver(s) (e.g., grandparent)"
-msgstr "een of beide ouders en andere verzorger(s) (bijv. grootouder(s))"
+msgstr "Een of beide ouders en andere verzorger(s) (bijv. grootouder(s))"
 
 #: cdi_forms/models.py:208
 msgid "Other caregivers (e.g., grandparent or grandparents)"
-msgstr "Andere verzorgers (bijv. grootouder of grootouders)"
+msgstr "Andere verzorgers (bijv. grootouder(s))"
 
 #: cdi_forms/models.py:212
 msgid "Who does your child live with?"
@@ -1396,7 +1401,7 @@ msgstr ""
 #: cdi_forms/models.py:224 cdi_forms/models.py:227 cdi_forms/models.py:230
 #: cdi_forms/models.py:233 cdi_forms/models.py:236
 msgid "Please describe"
-msgstr "leg uit"
+msgstr "Leg uit"
 
 #: cdi_forms/models.py:239
 msgid "Indicate which family member and provide a description"
@@ -1404,14 +1409,14 @@ msgstr "Noem het familielid en leg uit"
 
 #: cdi_forms/models.py:244
 msgid "Both caregivers"
-msgstr ""
+msgstr "Beide verzorgers"
 
 #: cdi_forms/models.py:248
 msgid "Who is filling in the form?"
-msgstr ""
+msgstr "Wie vult de vragenlijst in?"
 
 #: cdi_forms/templates/cdi_forms/background_info.html:7
-#: cdi_forms/templates/cdi_forms/background_info.html:52
+#: cdi_forms/templates/cdi_forms/background_info.html:56
 #: cdi_forms/templates/cdi_forms/study_group.html:7 cdi_forms/views.py:146
 msgid "Next"
 msgstr "Volgende"
@@ -1426,52 +1431,63 @@ msgstr "MacArthur-Bates Communicative Development Inventory"
 #: cdi_forms/templates/cdi_forms/study_group.html:17
 #, python-format
 msgid "For %(min_age)s- to %(max_age)s-month-old children"
-msgstr "Voor %(min_age)s- tot %(max_age)s-maand-oude kinderen"
+msgstr "Voor %(min_age)s tot %(max_age)s maand oude kinderen"
 
 #: cdi_forms/templates/cdi_forms/background_info.html:23
 #: cdi_forms/templates/cdi_forms/study_group.html:20
 msgid "Instructions for completing the language inventory"
 msgstr "Instructies voor het afronden van de vragenlijst over taalontwikkeling"
 
-#: cdi_forms/templates/cdi_forms/background_info.html:25
+#: cdi_forms/templates/cdi_forms/background_info.html:26
 #: cdi_forms/templates/cdi_forms/study_group.html:22
 msgid ""
 "Try to complete the inventory when you have at least 30 quiet minutes, "
 "without interruptions. An example might be when your child is sleeping."
 msgstr ""
-"Probeer de vragenlijst afte ronden wanneer je 30 rustige minuten hebt, "
-"zonder onderbrekingen. Bijvorbeeld op momenten waar uw kind aan hte slapen "
-"is."
+"Probeer de vragenlijst af te ronden wanneer je 30 minuten de tijd hebt. "
+"Bijvoorbeeld op momenten waar uw kind aan het slapen is. "
 
-#: cdi_forms/templates/cdi_forms/background_info.html:26
+#: cdi_forms/templates/cdi_forms/background_info.html:28
+#, fuzzy
+#| msgid ""
+#| "Try to complete the inventory when you have at least 30 quiet minutes, "
+#| "without interruptions. An example might be when your child is sleeping."
+msgid ""
+"Try to complete the inventory when you have at least 10-15 quiet minutes, "
+"without interruptions. An example might be when your child is sleeping."
+msgstr ""
+"Probeer de vragenlijst af te ronden wanneer je 30 minuten de tijd hebt. "
+"Bijvoorbeeld op momenten waar uw kind aan het slapen is. "
+
+#: cdi_forms/templates/cdi_forms/background_info.html:30
 #: cdi_forms/templates/cdi_forms/study_group.html:23
 msgid ""
 "You do not have to complete the inventory in one sitting. If you are "
 "interrupted, it is ok to put it down and come back to it when you have more "
 "time."
 msgstr ""
-"Uw hoeft de vragenlijst niet in een keer af te maken. Als uw onderbroken "
-"wordt is het geen probleem om t estoppen en op een ander moment verder te "
-"gaan."
+"U hoeft de vragenlijst niet in een keer af te maken. Als u onderbroken wordt "
+"is het geen probleem om te stoppen en op een ander moment verder te gaan."
 
-#: cdi_forms/templates/cdi_forms/background_info.html:27
+#: cdi_forms/templates/cdi_forms/background_info.html:31
 #: cdi_forms/templates/cdi_forms/study_group.html:24
 msgid ""
 "Feel free to ask others (e.g. other family members, nanny, child care "
 "providers) to help you fill out this form."
 msgstr ""
-"Uw kunt andere mensen om hulp vragen met het invullen van deze vragenlijst "
+"U kunt andere mensen om hulp vragen met het invullen van deze vragenlijst "
 "(bijv. andere familieleden, oppas, kinderopvang)"
 
-#: cdi_forms/templates/cdi_forms/background_info.html:28
+#: cdi_forms/templates/cdi_forms/background_info.html:32
 #: cdi_forms/templates/cdi_forms/study_group.html:25
 msgid ""
 "Please read all of the instructions on the inventory carefully, and make "
 "sure you complete all of the sections."
 msgstr ""
-"Lees alle instructies van de vragenlijst zorgvuldig en vul alle onderdelen in"
+"Lees alle instructies van de vragenlijst zorgvuldig door en vul alle "
+"onderdelen in"
 
-#: cdi_forms/templates/cdi_forms/background_info.html:32
+#: cdi_forms/templates/cdi_forms/background_info.html:36
 #, fuzzy, python-format
 #| msgid ""
 #| "You will receive an Amazon.com gift card after you complete the form. As "
@@ -1482,72 +1498,72 @@ msgid ""
 "the form. As we are a research lab with limited funds, we ask that you only "
 "complete this questionnaire once."
 msgstr ""
-"Uw gaat een Amazon.com cadeaubon ontvangen na het afronden van deze "
-"vragenlijst. Aangezien we een onderzoekslabor met beperkte fondsen zijn, "
-"willen we uw vragen om de vragenlijst maar een keer in te vullen"
+"U gaat een Amazon.com cadeaubon ontvangen na het afronden van deze "
+"vragenlijst. Aangezien we een onderzoekslab met beperkte middelen zijn, "
+"willen we u vragen om de vragenlijst maar een keer in te vullen"
 
-#: cdi_forms/templates/cdi_forms/background_info.html:38
+#: cdi_forms/templates/cdi_forms/background_info.html:42
 #: cdi_forms/templates/cdi_forms/study_group.html:29
 msgid "For more information about the MB-CDI,"
-msgstr "Voor meer informatie over de MB-CDI"
+msgstr "Voor meer informatie over de MB-CDI (de informatie is in het Engels)"
 
-#: cdi_forms/templates/cdi_forms/background_info.html:38
+#: cdi_forms/templates/cdi_forms/background_info.html:42
 #: cdi_forms/templates/cdi_forms/study_group.html:29
 msgid "click here"
 msgstr "klik hier"
 
-#: cdi_forms/templates/cdi_forms/background_info.html:39
+#: cdi_forms/templates/cdi_forms/background_info.html:43
 #: cdi_forms/templates/cdi_forms/study_group.html:30
 msgid "Thank you! We appreciate your time and effort!"
 msgstr "Bedankt! We waarderen uw tijd en moeite"
 
-#: cdi_forms/templates/cdi_forms/background_info.html:44
+#: cdi_forms/templates/cdi_forms/background_info.html:48
 msgid "Background Information"
 msgstr "Achtergrondinformatie"
 
-#: cdi_forms/templates/cdi_forms/background_info.html:57
+#: cdi_forms/templates/cdi_forms/background_info.html:61
 #: cdi_forms/templates/cdi_forms/cdi_form.html:338
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:183
 #: cdi_forms/templates/cdi_forms/study_group.html:113
 msgid "Form unavailable. Contact admin."
 msgstr "Bestand niet beschikbaar. Contacteer beheerder"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:50
+#: cdi_forms/templates/cdi_forms/cdi_base.html:49
 msgid "Instructions: "
 msgstr "Instructies"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:54
+#: cdi_forms/templates/cdi_forms/cdi_base.html:53
 msgid "This form can be filled any time before the due date."
-msgstr "Dit document kan op ieder moment voor het vervaldatum ingevuld worden"
+msgstr "Dit document kan op ieder moment voor de vervaldatum ingevuld worden"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:55
+#: cdi_forms/templates/cdi_forms/cdi_base.html:54
 msgid ""
 "It can also be saved at any time and resumed later by using the same link"
 msgstr ""
-"Het kan worden opgeslagen en op ieder moment verder worden ingevuld doot "
+"Het kan ook worden opgeslagen en op ieder moment verder worden ingevuld door "
 "dezelfde link te gebruiken"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:55
+#: cdi_forms/templates/cdi_forms/cdi_base.html:54
 msgid "create bookmark"
-msgstr "creër en bladwijzer"
+msgstr "creëer een bladwijzer"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:56
+#: cdi_forms/templates/cdi_forms/cdi_base.html:55
 msgid "After the form is submitted, it cannot be altered."
 msgstr "Nadat het document is verstuurd, kan het niet meer veranderd worden"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:57
+#: cdi_forms/templates/cdi_forms/cdi_base.html:56
 msgid "The form also cannot be altered after the due date."
-msgstr "ook kan het document niet veranderd worden na de vervaldatum"
+msgstr "Het document kan ook niet veranderd worden na de vervaldatum"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:58
+#: cdi_forms/templates/cdi_forms/cdi_base.html:57
 msgid ""
 "Please use the navigation buttons below. Do not use the \"back\" and "
 "\"forward\" buttons on your browser."
 msgstr ""
-"Gebruik a.u.b. de navigatieknoppen hieronder. gebruik niet de \"terug\"en "
-"\"voor\" knoppen van uw browser"
+"Gebruik a.u.b. de navigatieknoppen hieronder. Gebruik niet de \"terug\" en "
+"\"vooruit\" knoppen van uw browser"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:59
+#: cdi_forms/templates/cdi_forms/cdi_base.html:58
 msgid ""
 "You can use the tab button and arrows keys to quickly navigate and answer "
 "questions."
@@ -1555,39 +1571,57 @@ msgstr ""
 "U kunt de tab en de pijltjestoetsen gebruiken om snel tussen de vragen te "
 "navigeren en ze te beantwoorden"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:94
+#: cdi_forms/templates/cdi_forms/cdi_base.html:93
 msgid "Due date"
 msgstr "Vervaldatum"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:99
+#: cdi_forms/templates/cdi_forms/cdi_base.html:98
 msgid "Show waiver of documentation"
 msgstr "Laat toestemmingsverklaring zien"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:104
+#: cdi_forms/templates/cdi_forms/cdi_base.html:103
 msgid "Reach out to the Web-CDI Team!"
 msgstr "Contacteer het Web-CDI Team!"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:138
-msgid "Waiver of Documentation"
+#: cdi_forms/templates/cdi_forms/cdi_base.html:137
+#, fuzzy
+#| msgid "Waiver of Documentation"
+msgid "Waiver of Documentation of Informed Consent."
 msgstr "Toestemmingsverklaring"
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:147
 msgid "Okay"
-msgstr "Oke"
+msgstr "Ik geef toestemming"
+
+#: cdi_forms/templates/cdi_forms/cdi_base.html:160
+#, fuzzy
+#| msgid "Waiver of Documentation"
+msgid "Waiver Denied"
+msgstr "Toestemmingsverklaring"
+
+#: cdi_forms/templates/cdi_forms/cdi_base.html:164
+msgid ""
+"Thank you for your response. We are unable to continue. Please close the "
+"window. If you would like, you may review the Waiver."
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_base.html:167
+msgid "Review Waiver"
+msgstr ""
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:10
 #: cdi_forms/templates/cdi_forms/cdi_form.html:326
-#: cdi_forms/templates/cdi_forms/study_group.html:6 cdi_forms/views.py:364
+#: cdi_forms/templates/cdi_forms/study_group.html:6 cdi_forms/views.py:371
 msgid "Save"
 msgstr "Opslaan"
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:11
-#: cdi_forms/templates/cdi_forms/cdi_form.html:322 cdi_forms/views.py:380
+#: cdi_forms/templates/cdi_forms/cdi_form.html:322 cdi_forms/views.py:387
 msgid "Submit"
 msgstr "Sturen"
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:14
-#: cdi_forms/templates/cdi_forms/cdi_form.html:327 cdi_forms/views.py:376
+#: cdi_forms/templates/cdi_forms/cdi_form.html:327 cdi_forms/views.py:383
 msgid "Go back to Background Info"
 msgstr "Ga terug naar achtergrondinformatie"
 
@@ -1607,9 +1641,9 @@ msgid ""
 "lot of the words on the form. That is perfectly fine!"
 msgstr ""
 "In dit gedeelte wordt u gevraagd om over woorden en zinnen te denken die uw "
-"kind\"begrijpt\" en \"begrijpt en zegt.\" Deze vragenlijst voor kinderen van "
-"verschillende leeftijden. Uw kind hoeft niet veel van de worden te begrijpen "
-"of te zeggen die in de vragenlijst wordengenoemd. Dat is helemaal prima!"
+"kind \"begrijpt\" en \"begrijpt en zegt.\" Deze vragenlijst is voor kinderen "
+"van verschillende leeftijden. Het kan zijn dat uw kind niet veel woorden "
+"begrijpt of zegt die in de vragenlijst worden genoemd. Dat is helemaal prima!"
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:62
 msgid ""
@@ -1617,25 +1651,25 @@ msgid ""
 "means, even though they may not be able to say it themselves. Here are some "
 "examples."
 msgstr ""
-"uw kind \"begrijpt\" een woord/zin als hij/zij weet wat dit woord/ deze zin "
-"betekent,ookal kan hij/zij het zelf nog niet zeggen. Hier zijn een paar "
+"Uw kind \"begrijpt\" een woord/zin als hij/zij weet wat dit woord/deze zin "
+"betekent, ook al kan hij/zij het zelf nog niet zeggen. Hier zijn een paar "
 "voorbeelden."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:76
 msgid "DO check \"understands\" if:"
-msgstr "Vink aan \"begrijpt\" als:"
+msgstr "Vink \"begrijpen\" WEL aan als:"
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:78
 msgid ""
 "Your child responds appropriately to the word/phrase. For example, when you "
 "say \"Get the ball,\" s/he turns and tries to find the ball."
 msgstr ""
-"Uw kind goed reageert op een woord/zin. Bijvoorbeeld: als u \"Haal de bal\" "
-"zegt en hij/zijprobeert de bal te vinden."
+"Uw kind reageert goed op een woord/zin. Bijvoorbeeld: als u \"Haal de bal\" "
+"zegt en hij/zij probeert de bal te vinden."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:93
 msgid "DON'T check \"understands\" if:"
-msgstr "Vink \"begrijpt\" niet aan als:"
+msgstr "Vink \"begrijpen\" NIET aan als:"
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:95
 msgid ""
@@ -1643,7 +1677,7 @@ msgid ""
 "it before, like in a story, but you don't think s/he knows what it means."
 msgstr ""
 "Uw kind de betekenis van een woord/zin niet weet. Hij/zij heeft het woord "
-"eventueelal eerder gehoord, bijvoorbeeld in een verhaal, maar weet niet wat "
+"eventueel al eerder gehoord, bijvoorbeeld in een verhaal, maar weet niet wat "
 "het betekent."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:105
@@ -1652,13 +1686,13 @@ msgid ""
 "phrase means AND they are able to say it by themselves. Here are some "
 "examples."
 msgstr ""
-"Uw kind \"begrijpt en zegt\" een woord/zin als hij/zij weet wat dit woord/ "
-"deze zin betekentEN als ze dit woord/ deze zin zelf kunnen zeggen. Hier zijn "
+"Uw kind \"begrijpt en zegt\" een woord/zin als hij/zij weet wat dit woord/"
+"deze zin betekent EN als ze dit woord/deze zin zelf kan zeggen. Hier zijn "
 "een paar voorbeelden"
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:117
 msgid "DO check \"understands and says\" if:"
-msgstr "Vink \"begrijpt en zegt\" aan als:"
+msgstr "Vink \"begrijpen en zeggen\" WEL aan als:"
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:119
 msgid ""
@@ -1666,8 +1700,8 @@ msgid ""
 "something that happened.  You think s/he has a meaning for that word/phrase."
 msgstr ""
 "Uw kind een woord/zin zegt wanneer hij/zij probeert een object te benoemen "
-"of een situatie probeert te beschrijven. Uw denkt dat hij/zij de betekenis "
-"voor dit word/ deze zin kent"
+"of een situatie probeert te beschrijven. U denkt dat hij/zij de betekenis "
+"voor dit woord/deze zin kent"
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:136
 msgid ""
@@ -1679,28 +1713,27 @@ msgstr ""
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:138
 msgid "DO check \"understands and says.\""
-msgstr "Vink \"begrijpt en zegt\" aan als:"
+msgstr "Vink \"begrijpen en zeggen\" dan WEL aan."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:155
 msgid ""
 "DON'T check if your child is just stringing sounds together.  This is not a "
 "real word that means something."
 msgstr ""
-"Vink \"begrijpt en zegt\" niet aan als uw kind alleen maar klanken uitstoot. "
-"Dat is geen echt woord met een betekenis."
+"Vink \"begrijpen en zegtgen\" NIET aan als uw kind alleen maar klanken "
+"uitstoot. Dat is geen echt woord met een betekenis."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:157
 #: cdi_forms/templates/cdi_forms/cdi_form.html:175
 msgid "DON'T check \"understands and says.\""
-msgstr "Vink \"begrijpt en zegt\"niet aan"
+msgstr "Vink \"begrijpen en zeggen\" NIET aan."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:173
 #: cdi_forms/templates/cdi_forms/cdi_form.html:260
 msgid ""
 "DON'T ask your child to repeat the words on the list. This doesn't count!"
 msgstr ""
-"Vraag uw kind niet om het woord van de lijst te herhalen. Deze tellen niet "
-"mee!"
+"Vraag uw kind NIET om het woord van de lijst te herhalen. Dit telt niet mee!"
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:191
 msgid ""
@@ -1711,24 +1744,25 @@ msgid ""
 "be able to understand or say a lot of the words on the form. That is "
 "perfectly fine!"
 msgstr ""
-"In dit gedeelte wordt uw gevraagd over woorden die uw kind \"begrijpt en zegt"
-"\". Uw kind \"begrijpt en zegt\"een woordt van de vragenlijst als hij/zij "
+"In dit gedeelte wordt u gevraagd over woorden die uw kind \"begrijpt en zegt"
+"\". Uw kind \"begrijpt en zegt\" een woord van de vragenlijst als hij/zij "
 "weet wat dit woord betekent EN als hij/zij het woord zelf kan zeggen. Hier "
 "zijn een paar voorbeelden. Deze vragenlijst is voor kinderen van "
-"verschillende leeftijden. Uw kind zal niet veel woorden van de vragenlijst "
-"kunnen begrijpen of zeggen. Dat is helemaal prima!"
+"verschillende leeftijden. Het kan zijn dat uw kind niet veel woorden van de "
+"vragenlijst kan begrijpen of zeggen. Dat is helemaal prima!"
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:205
 msgid "DO check the box if:"
-msgstr "Vink deze box aan als:"
+msgstr "Vink deze box WEL aan als:"
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:207
 msgid ""
 "Your child says the word when trying to name an object or describe something "
 "that happened.  You think s/he has a meaning for that word."
 msgstr ""
-"Uw kind zegt het woord als hij/zij probeert een object te benoemen of een "
-"situatie te beschrijven.U denkt dat hij/zij de betekenis van het woord kent."
+"Uw kind het woord zegt wanneer hij/zij probeert een object te benoemen of "
+"een situatie te beschrijven. U denkt dat hij/zij de betekenis van het woord "
+"kent."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:225
 msgid ""
@@ -1737,19 +1771,19 @@ msgid ""
 "Grandma), that is ok too!"
 msgstr ""
 "Het is ook goed als uw kind niet het hele woord kan zeggen of als uw kind "
-"zijn/haar \"speciale\" manier heeft om hette zeggen. Als uw een ander woord "
+"zijn/haar \"speciale\" manier heeft om het te zeggen. Als u een ander woord "
 "gebruikt in uw familie (bijv. omi in plaats van oma) is dat ook goed."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:227
 msgid "DO check the box."
-msgstr "Vink deze box aan"
+msgstr "Vink deze box WEL aan."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:244
 msgid ""
 "DON'T check the box if your child is just stringing sounds together. This is "
 "not a real word that means something."
 msgstr ""
-"Vink deze box niet aan als uw kind alleen maar klanken uitstoot. Dat is geen "
+"Vink deze box NIET aan als uw kind alleen maar klanken uitstoot. Dat is geen "
 "echt woord met een betekenis."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:284
@@ -1758,9 +1792,9 @@ msgid ""
 "points. Your answer will not affect your results. There is nothing wrong "
 "with choosing \"No\":"
 msgstr ""
-"U bent bijna klaar! Klik \"Ja\" als u akkord gaat met de volgende punten. Uw "
-"antwoord zal geen invloed hebben op uw resultaten. U kunt gerust voor \"Nee"
-"\" kiezen."
+"U bent bijna klaar! Klik \"Ja\" als u akkoord gaat met de volgende punten. "
+"Uw antwoord zal geen invloed hebben op uw resultaten. U kunt gerust voor "
+"\"Nee\" kiezen."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:288
 #, python-format
@@ -1769,11 +1803,11 @@ msgstr "U heeft een kind dat %(age)s maanden oud is"
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:289
 msgid "You filled out the entire questionnaire to the best of your ability."
-msgstr "Uw heeft de hele vragenlijst zo goed mogelijk ingevuld"
+msgstr "U heeft de hele vragenlijst zo goed mogelijk ingevuld"
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:290
 msgid "You are taking this questionnaire for the FIRST time."
-msgstr "Uw heeft deze vragenlijst voor de eerste keer ingevuld"
+msgstr "U heeft deze vragenlijst voor de eerste keer ingevuld"
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:299
 #, python-format
@@ -1790,8 +1824,8 @@ msgid ""
 "No, I do NOT have a child who is %(age.0)s months old, I have NOT filled out "
 "the entire questionnaire, and/or I have taken this questionnaire before."
 msgstr ""
-"Nee, ik heb geen kind dat %(age.0)s maanden oud is, ik heb de vragenlijst "
-"niet ingevuld, en/of ik heb deze vragenlijst al eerder ingevuld."
+"Nee, ik heb GEEN kind dat %(age.0)s maanden oud is, ik heb de vragenlijst "
+"NIET helemaal ingevuld, en/of ik heb deze vragenlijst al eerder ingevuld."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:311
 msgid ""
@@ -1830,7 +1864,7 @@ msgstr "MB-CDI Lab logo"
 #: cdi_forms/templates/cdi_forms/overflow.html:40
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:88
 msgid "Thank you!"
-msgstr "Bedankt"
+msgstr "Bedankt!"
 
 #: cdi_forms/templates/cdi_forms/overflow.html:44
 msgid ""
@@ -1843,13 +1877,13 @@ msgid ""
 "\">here</a>. Again, we appreciate your interest!"
 msgstr ""
 "Bedankt voor uw interesse en voor het sturen van de MacArthur-Bates "
-"Communicative Development Inventory (CDI)! Het lijkt alsof u de CDI al "
+"Communicative Development Inventory (CDI)! Het lijkt erop alsof u de CDI al "
 "eerder heeft ingevuld. We vragen u om de vragenlijst maar een keer in te "
 "vullen. Als u bezorgd bent over de ontwikkeling van uw kind, raden wij u aan "
-"om contact met uw huisarts op te nemen. Als u de vragenlijst met plezier "
-"heeft ingevuld, kunt u hier meer informatie over de CDI krijgen0<a href="
-"\"http://mb-cdi.stanford.edu/\" target=\"_blank\"here</a>. We waarderen uw "
-"interesse."
+"om contact met uw huisarts op te nemen. Als u het leuk vond om de "
+"vragenlijst in te vullen, kunt u hier meer informatie over de CDI vinden <a "
+"href=\"http://mb-cdi.stanford.edu/\" target=\"_blank\"here</a>. We waarderen "
+"uw interesse."
 
 #: cdi_forms/templates/cdi_forms/overflow.html:49
 #, python-format
@@ -1867,16 +1901,16 @@ msgid ""
 "interest!"
 msgstr ""
 "Bedankt voor uw interesse in de MacArthur-Bates CommunicativeDevelopment "
-"Inventory (CDI)! Op dit moment zitten de tijdslots van de studie alvol en "
+"Inventory (CDI)! Op dit moment zitten de tijdslots van de studie al vol en "
 "hebben we geen bedankjes meer als compensatie voor uw tijd! Als u nog steeds "
-"geïnteresseerd bent in het invullen vanCDI en als u meer over de "
-"woordenschat van uw kind wilt weten, kunt u hier klikken <a href="
-"\"%(bypass_url)s\" target=\"_blank\">here</a>om de 30-minuten vragenlijst in "
-"te vullen.  Als u bezorgd bent over de ontwikkeling van uw kind, raden wij u "
-"aan om contact met uw huisarts op te nemen. Als u de vragenlijst met plezier "
-"heeft ingevuld, kunt u hier meer informatie over de CDI krijgen0<a href="
-"\"http://mb-cdi.stanford.edu/\" target=\"_blank\"here</a>. We waarderen uw "
-"interesse."
+"geïnteresseerd bent in het invullen van de CDI en meer over de woordenschat "
+"van uw kind te weten wilt komen, kunt u hier klikken <a href=\"%(bypass_url)s"
+"\" target=\"_blank\">here</a>om de 30 minuten durende vragenlijst in te "
+"vullen.  Als u bezorgd bent over de ontwikkeling van uw kind, raden wij u "
+"aan om contact met uw huisarts op te nemen. Als u het leuk vond om de "
+"vragenlijst in te vullen, kunt u hier meer informatie over de CDI vinden <a "
+"href=\"http://mb-cdi.stanford.edu/\" target=\"_blank\"here</a>. We waarderen "
+"uw interesse!"
 
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:34
 msgid "Interesting tidbits learned from how your child speaks!"
@@ -1899,15 +1933,17 @@ msgid ""
 msgstr ""
 "Bedankt dat u de tijd heeft genomen om de MacArthur-Bates Communicative "
 "Development Inventory (CDI) in te vullen. Met behulp van ouders en "
-"verzorgers zoals u kunnen Vergeet niet dat de CDI verschillende woorden "
-"bevat die van verschillende kinderen worden gebruikt. Maak u geen zorgen als "
-"uw kind op dit moment maar een paar van de woorden kent. Hieronder krijgt u "
-"een indruk over de ontwikkeling van de woordenschat van uw kind, gebaseerd "
-"op ons onderzoek. Deze samenvatting is geen klinische evaluatie. Als u "
-"bezorgd bent over de ontwikkeling van uw kind, raden wij u aan om contact "
-"met uw huisarts op te nemen. Als u de vragenlijst met plezier heeft "
-"ingevuld, kunt u hier meer informatie over de CDI krijgen0<a href=\"http://"
-"mb-cdi.stanford.edu/\" target=\"_blank\"here</a>. We waarderen uw deelname!"
+"verzorgers zoals u kunnen we meer leren over de taalontwikkeling van "
+"kinderen en hoe deze variëert binnen verschillende kinderen en culturen. "
+"Vergeet niet dat de CDI verschillende woorden bevat die van verschillende "
+"kinderen worden gebruikt. Maak u geen zorgen als uw kind op dit moment maar "
+"een paar van de woorden kent. Hieronder krijgt u een indruk over de "
+"ontwikkeling van de woordenschat van uw kind, gebaseerd op ons onderzoek. "
+"Deze samenvatting is geen klinische evaluatie. Als u bezorgd bent over de "
+"ontwikkeling van uw kind, raden wij u aan om contact met uw huisarts op te "
+"nemen. Als u het leuk vond om de vragenlijst in te vullen, kunt u hier meer "
+"informatie over de CDI vinden <a href=\"http:// mb-cdi.stanford.edu/\" "
+"target=\"_blank\"here</a>. We waarderen uw deelname!"
 
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:97
 #, python-format
@@ -1916,7 +1952,7 @@ msgid ""
 "Please <a href=\"%(contact_url)s\" target=\"_blank\">reach out to us</a> and "
 "we will quickly fix this issue."
 msgstr ""
-"Het spijt ons, maar we hebben geen Amazon.com cadeaubonnetjes meer!  <a href="
+"Het spijt ons, maar we hebben geen Amazon.com cadeaubonnen meer!  <a href="
 "\"%(contact_url)s\" target=\"_blank\">Contacteer ons a.u.b.</a> en wij "
 "proberen het probleem zo snel mogelijk op te lossen."
 
@@ -1937,7 +1973,7 @@ msgid ""
 msgstr ""
 "Bedankt voor de deelname aan ons Web-CDI project! het is ons een genoegen om "
 "u deze Amazon.com cadeaubon te sturen waarmee u veel dingen kan kopen. "
-"Misschien wilt u een printscreen van deze pagina maken voor latere "
+"Wellicht wilt u een printscreen van deze pagina maken voor latere "
 "referenties--u heeft de claim code hieronder nodig"
 
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:106
@@ -1946,7 +1982,7 @@ msgstr "Waarde van cadeaubon"
 
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:107
 msgid "Claim Code"
-msgstr "claim code"
+msgstr "Claim code"
 
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:111
 #, fuzzy, python-format
@@ -1961,15 +1997,15 @@ msgid ""
 msgstr ""
 "kijk op <a href=\"%(redeem_url)s\" target=\"_blank\">%(redeem_url)s</a> om "
 "uw cadeaubon in te leveren. Kijk op <a href=\"%(legal_url)s\" target=\"_blank"
-"\">%(legal_url)s</a> voor geldende beperkingen."
+"\">%(legal_url)s</a> voor restricties."
 
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:129
 msgid "Graph My Data!"
-msgstr "grafiek van mijn gegevens"
+msgstr "Grafiek van mijn gegevens"
 
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:135
 msgid "Show Me My Answers"
-msgstr "laat mijn antwoorden zien"
+msgstr "Laat mijn antwoorden zien"
 
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:143
 msgid "Share on Facebook"
@@ -1987,43 +2023,43 @@ msgstr "Mijn kind zegt PPP woorden"
 msgid "My child understands UUU words."
 msgstr "Mijn kind begrijpt UUU woorden"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:302
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:304
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:356
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:306
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:358
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:360
 msgid "Category"
 msgstr "Categorie"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:305
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:322
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:307
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:324
 #, fuzzy, python-format
 #| msgid "Percentage of Words Understood (%%)"
 msgid "Words Understood (%%)"
 msgstr "Percentage begrepen woorden (%%)"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:359
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:377
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:361
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:379
 #, python-format
 msgid "Words Produced (%%)"
-msgstr ""
+msgstr "Percentage woorden die het kind kan zeggen"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:509
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:512
 #, fuzzy
 #| msgid "My child says the most words in the bestProdCat category."
 msgid "My child produces the most words in the bestProdCat category."
 msgstr "Mijn kind zegt de meeste woorden in de bestProdCat categorie"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:513
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:516
 #, fuzzy
 #| msgid "My child says the most words in the bestCompCat category."
 msgid "My child understands the most words in the bestCompCat category."
-msgstr "Mijn kind zegt de meeste woorden in de bestCompCat categorie"
+msgstr "Mijn kind begrijpt de meeste woorden in de bestCompCat categorie"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:599
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:602
 msgid "The hardest word my child says is INSERTWORDHERE."
 msgstr "Het moeilijkste woord dat mijn kind kan zeggen is INSERTWORDHERE"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:603
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:606
 msgid "The hardest word my child understands is INSERTWORDHERE."
 msgstr "Het moeilijkste woord dat mijn kind kan begrijpen is INSERTWORDHERE"
 
@@ -2048,18 +2084,27 @@ msgstr "Geboren tussen STARTDATE en ENDDATE"
 msgid "Your child should be between %(min_age)d to %(max_age)d months of age."
 msgstr "Uw kind moet tussen de %(min_age)d en %(max_age)d maanden oud zijn"
 
-#: cdi_forms/views.py:208
+#: cdi_forms/views.py:209
 #, python-format
 msgid " Not the right age? <a href='%(sgurl)s'> Click here</a>"
 msgstr "Niet de goede leeftijd? <a href='%(sgurl)s'> Klik hier</a>"
 
-#: cdi_forms/views.py:212
+#: cdi_forms/views.py:213
 msgid ""
 " Not the right age? You should contact your researcher for steps on what to "
 "do next."
 msgstr ""
 "Niet de goede leeftijd? Contacteer uw onderzoeker om vervolgstappen te "
 "bespreken"
+
+#: researcher_UI/admin_actions.py:13 researcher_UI/admin_actions.py:27
+msgid "Instruments for all Studies must be the same"
+msgstr ""
+
+#: researcher_UI/admin_actions.py:16 researcher_UI/admin_actions.py:30
+#, python-format
+msgid "Studies must have at least 1 responsent. %s has none"
+msgstr ""
 
 #: researcher_UI/templates/admin/admin_base.html:41
 msgid "Welcome,"
@@ -2137,32 +2182,32 @@ msgstr "De activatielink hierboven vervalt in %(expiration_days)s dagen."
 #: supplementtut/templates/supplementtut/acceptance_email_subject.txt:2
 #, python-format
 msgid "Your registration was accepted -- %(site_name)s"
-msgstr "Uw registratie werd geaccepteerd -- %(site_name)s"
+msgstr "Uw registratie is geaccepteerd -- %(site_name)s"
 
 #: researcher_UI/templates/registration/activation_complete.html:4
 #: researcher_UI/templates/registration/activation_complete.html:6
 #: supplementtut/templates/supplementtut/activation_complete.html:4
 #: supplementtut/templates/supplementtut/activation_complete.html:6
 msgid "Activation was complete"
-msgstr "Activatie was compleet"
+msgstr "Activatie is compleet"
 
 #: researcher_UI/templates/registration/activation_complete.html:11
 #: supplementtut/templates/supplementtut/activation_complete.html:11
 msgid "Your account has been activated!"
-msgstr "Uw account is geactiveerd"
+msgstr "Uw account is geactiveerd!"
 
 #: researcher_UI/templates/registration/activation_email.txt:4
 #, python-format
 msgid "Your account at %(site_name)s was activated by the Web-CDI Team"
-msgstr "Uw account bij %(site_name)s werd geactiveerd door het Web-CDI Team"
+msgstr "Uw account bij %(site_name)s is geactiveerd door het Web-CDI Team"
 
 #: researcher_UI/templates/registration/activation_email.txt:6
 #: supplementtut/templates/supplementtut/activation_email.txt:6
 msgid ""
 "The password of your account was generated automatically and displayed below."
 msgstr ""
-"Het wachtwoord van uw account werd automatisch gegenereerd en is hieronder "
-"te zien."
+"Het wachtwoord van uw account is automatisch gegenereerd en is hieronder te "
+"zien."
 
 #: researcher_UI/templates/registration/activation_email.txt:7
 #: researcher_UI/templates/registration/activation_email.txt:18
@@ -2177,7 +2222,7 @@ msgid ""
 "It is strongly recommended that you change your initial password to "
 "something more secure."
 msgstr ""
-"Het word sterk aangeraden om uw beginwachtwoord te vernaderen in een "
+"Het word sterk aangeraden om uw beginwachtwoord te veranderen in een "
 "veiliger wachtwoord."
 
 #: researcher_UI/templates/registration/activation_email.txt:10
@@ -2205,7 +2250,7 @@ msgstr "WACHTWOORD: %(password)s"
 #, python-format
 msgid ""
 "Your account at %(site_name)s was successfully activated by the Web-CDI Team"
-msgstr "Uw account bij %(site_name)s werd geactiveerd door het Web-CDI Team"
+msgstr "Uw account bij %(site_name)s is geactiveerd door het Web-CDI Team"
 
 #: researcher_UI/templates/registration/activation_email_subject.txt:2
 #: supplementtut/templates/supplementtut/activation_email_subject.txt:2
@@ -2267,7 +2312,7 @@ msgid ""
 "page. Would you like to login to a different account?"
 msgstr ""
 "U bent geauthenticeerd als %(username)s, maar u bent niet gemachtigd om "
-"toegang tot deze pagina te hebben.  Wilt u met een ander account inloggen?"
+"toegang tot deze pagina te hebben. Wilt u met een ander account inloggen?"
 
 #: researcher_UI/templates/registration/logout.html:4
 #: researcher_UI/templates/registration/logout.html:6
@@ -2285,7 +2330,7 @@ msgstr "Wachtwoord veranderen"
 
 #: researcher_UI/templates/registration/password_change_done.html:15
 msgid "Your password was changed."
-msgstr "Uw wachtwoord werd veranderd."
+msgstr "Uw wachtwoord is veranderd."
 
 #: researcher_UI/templates/registration/password_change_form.html:22
 msgid ""
@@ -2305,7 +2350,7 @@ msgstr "Verander mijn wachtwoord"
 #: researcher_UI/templates/registration/password_reset_done.html:7
 #: researcher_UI/templates/registration/password_reset_form.html:9
 msgid "Password reset"
-msgstr "Wachtwoord terugzetten"
+msgstr "Wachtwoord resetten"
 
 #: researcher_UI/templates/registration/password_reset_complete.html:16
 msgid "Your password has been set.  You may go ahead and log in now."
@@ -2313,7 +2358,7 @@ msgstr "Uw wachtwoord is ingesteld. U kunt nu doorgaan en inloggen."
 
 #: researcher_UI/templates/registration/password_reset_confirm.html:9
 msgid "Password reset confirmation"
-msgstr "Wachtwoord terugzetten bevestiging"
+msgstr "Wachtwoord reset bevestiging"
 
 #: researcher_UI/templates/registration/password_reset_confirm.html:22
 msgid ""
@@ -2328,9 +2373,9 @@ msgid ""
 "The password reset link was invalid, possibly because it has already been "
 "used.  Please request a new password reset."
 msgstr ""
-"De link om het wachtwoord terug te zetten is niet geldig, misschien omdat "
-"deze al eerderwerd gebruikt. Vraag het terugzetten van uw wachtwoord a.u.b. "
-"opnieuw aan."
+"De link om het wachtwoord te resetten is niet geldig, waarschijnlijk omdat "
+"deze al eerder gebruikt is. Vraag a.u.b. een nieuwe reset van uw wachtwoord "
+"aan."
 
 #: researcher_UI/templates/registration/password_reset_done.html:15
 msgid ""
@@ -2338,7 +2383,7 @@ msgid ""
 "with the email you entered, you should receive them shortly."
 msgstr ""
 "We hebben instructies over het instellen van uw wachtwoord gemaild. Als er "
-"al een account voor dit e-mailadres bestaat, zal u deze snel ontvangen."
+"al een account voor dit e-mailadres bestaat, zult u deze snel ontvangen."
 
 #: researcher_UI/templates/registration/password_reset_done.html:17
 msgid ""
@@ -2346,7 +2391,7 @@ msgid ""
 "registered with and check your spam folder."
 msgstr ""
 "Als u geen e-mail ontvangt, controleer het e-mailadres dat u tijdens de "
-"registratie heeft ingevoerd en check de spam-map. "
+"registratie heeft ingevoerd en check de spam-folder. "
 
 #: researcher_UI/templates/registration/password_reset_email.html:2
 #, python-format
@@ -2355,7 +2400,7 @@ msgid ""
 "account at %(site_name)s."
 msgstr ""
 "U heeft deze e-mail ontvangen omdat u uw wachtwoord voor uw "
-"gebruikersaccountbij %(site_name)s wilde terugzetten."
+"gebruikersaccount bij %(site_name)s wilt resetten."
 
 #: researcher_UI/templates/registration/password_reset_email.html:4
 msgid "Please go to the following page and choose a new password:"
@@ -2367,7 +2412,7 @@ msgstr "Uw gebruikersnaam, voor het geval dat u deze bent vergeten:"
 
 #: researcher_UI/templates/registration/password_reset_email.html:10
 msgid "Thank you for using Web-CDI!"
-msgstr "Bedankt dat u de Web-CDI gebruikt!"
+msgstr "Bedankt dat u de Web-CDI heeft gebruikt!"
 
 #: researcher_UI/templates/registration/password_reset_email.html:12
 #, python-format
@@ -2379,12 +2424,12 @@ msgid ""
 "Forgotten your password? Enter your email address below and we will email "
 "instructions for setting a new one."
 msgstr ""
-"Wachtwoord vergeten? Voer uw e-mailadrs hieronder in en wij sturen u "
-"instructies voorhet veranderen van uw wachtwoord."
+"Wachtwoord vergeten? Voer uw e-mailadres hieronder in en wij sturen u "
+"instructies voor het veranderen van uw wachtwoord."
 
 #: researcher_UI/templates/registration/password_reset_form.html:31
 msgid "Reset my password"
-msgstr "Zet mijn wachtwoord terug."
+msgstr "Reset mijn wachtwoord."
 
 #: researcher_UI/templates/registration/registration_closed.html:4
 #: researcher_UI/templates/registration/registration_closed.html:6
@@ -2396,7 +2441,7 @@ msgstr "Registratie is gesloten"
 #: researcher_UI/templates/registration/registration_closed.html:10
 #: supplementtut/templates/supplementtut/registration_closed.html:10
 msgid "The registration is currently closed."
-msgstr "De registratie is op dat moment gesloten"
+msgstr "De registratie is op dit moment gesloten"
 
 #: researcher_UI/templates/registration/registration_complete.html:4
 #: researcher_UI/templates/registration/registration_complete.html:6
@@ -2448,7 +2493,7 @@ msgstr "Registratie"
 #: researcher_UI/templates/registration/registration_form.html:13
 #: supplementtut/templates/supplementtut/registration_form.html:13
 msgid "Please fill the following fields to create your registration"
-msgstr "Vul a.u.b. de volgende vakken in om uw registratie te creëren."
+msgstr "Vul a.u.b. de volgende velden in om uw registratie te creëren."
 
 #: researcher_UI/templates/registration/registration_form.html:34
 #: supplementtut/templates/supplementtut/registration_form.html:18
@@ -2457,22 +2502,22 @@ msgstr "Registreren"
 
 #: researcher_UI/templates/registration/rejection_email.txt:4
 msgid "Your account registration was rejected by the Web-CDI Team."
-msgstr "Uw registratie werd afgewezen door het Web-CDI team"
+msgstr "Uw registratie is afgewezen door het Web-CDI team"
 
 #: researcher_UI/templates/registration/rejection_email.txt:7
 msgid "Your application was rejected due to:"
-msgstr "Uw aanmelding werd afgewezen omdat: "
+msgstr "Uw aanmelding is afgewezen omdat: "
 
 #: researcher_UI/templates/registration/rejection_email.txt:8
 #: supplementtut/templates/supplementtut/rejection_email.txt:7
 msgid "Rejection reasons:"
-msgstr "Redenen voor afwijzing"
+msgstr "Redenen voor afwijzing:"
 
 #: researcher_UI/templates/registration/rejection_email_subject.txt:2
 #: supplementtut/templates/supplementtut/rejection_email_subject.txt:2
 #, python-format
 msgid "Your registration was rejected -- %(site_name)s"
-msgstr "Uw registratie werd afgewezen -- %(site_name)s"
+msgstr "Uw registratie is afgewezen -- %(site_name)s"
 
 #: researcher_UI/templates/researcher_UI/login.html:3
 msgid "WebCDI"
@@ -2484,26 +2529,26 @@ msgstr "WebCDI Login"
 
 #: researcher_UI/templates/researcher_UI/login.html:79
 msgid "Forgotten your password or username?"
-msgstr "Wachtwoord of gebruikersnaam vergeten?"
+msgstr "Bent u uw wachtwoord of gebruikersnaam vergeten?"
 
 #: supplementtut/templates/supplementtut/acceptance_email.txt:4
 #, python-format
 msgid "Your registration of %(site_name)s was accepted by inspector."
-msgstr "Uw registratie bij %(site_name)s werd geaccepteerd door inspecteur."
+msgstr "Uw registratie bij %(site_name)s is geaccepteerd door de inspecteur."
 
 #: supplementtut/templates/supplementtut/activation_email.txt:4
 #, python-format
 msgid "Your account of %(site_name)s was activated by inspector"
-msgstr "Uw account bij %(site_name)s werd geactiveerd door inspecteur"
+msgstr "Uw account bij %(site_name)s is geactiveerd door de inspecteur"
 
 #: supplementtut/templates/supplementtut/activation_email.txt:16
 #, python-format
 msgid "Your account of %(site_name)s was successfully activated"
-msgstr "Uw account bij %(site_name)s werd geactiveerd"
+msgstr "Uw account bij %(site_name)s is geactiveerd"
 
 #: supplementtut/templates/supplementtut/registration_email.txt:3
 msgid "Your account registration was created successfully."
-msgstr "De registratie van uw account werd gecreëerd."
+msgstr "De registratie van uw account is gecreëerd."
 
 #: supplementtut/templates/supplementtut/registration_email.txt:5
 msgid "Please wait until the inspector verify your registration."
@@ -2511,44 +2556,43 @@ msgstr "Wacht a.u.b. totdat de inspecteur uw registratie heeft goedgekeurd"
 
 #: supplementtut/templates/supplementtut/rejection_email.txt:4
 msgid "I am afraid that your account registration was rejected by inspector."
-msgstr ""
-"Helaas werd de registratie van uw account door de inspecteur afgewezen."
+msgstr "Helaas is de registratie van uw account door de inspecteur afgewezen."
 
-#: webcdi/settings.py:218
+#: webcdi/settings.py:219
 msgid "English"
 msgstr "Engels"
 
-#: webcdi/settings.py:219
+#: webcdi/settings.py:220
 msgid "Spanish"
 msgstr "Spaans"
 
-#: webcdi/settings.py:220
+#: webcdi/settings.py:221
 #, fuzzy
 #| msgid "French"
 msgid "French Quebec"
 msgstr "Frans"
 
-#: webcdi/settings.py:221
+#: webcdi/settings.py:222
 #, fuzzy
 #| msgid "English"
 msgid "Canadian English"
 msgstr "Engels"
 
-#: webcdi/settings.py:222
+#: webcdi/settings.py:223
 msgid "Dutch"
 msgstr ""
 
 #~ msgid "Mother / Parent or Guardian 1 Year of birth"
-#~ msgstr "Moeder/ Ouder of voogd 1 Geboortejaar"
+#~ msgstr "Moeder/Ouder of voogd 1 Geboortejaar"
 
 #~ msgid "Mother / Parent or Guardian 1 Education"
-#~ msgstr "Moeder/ Ouder of voogd 1 Onderwijs/Opleidingsniveau"
+#~ msgstr "Moeder/Ouder of voogd 1 Onderwijs/Opleidingsniveau"
 
 #~ msgid "Father / Parent or Guardian 2 Year of birth"
-#~ msgstr "Vader/ Ouder of voogd 2 Geboortejaar"
+#~ msgstr "Vader/Ouder of voogd 2 Geboortejaar"
 
 #~ msgid "Father / Parent or Guardian 2 Education"
-#~ msgstr "Vander/ Ouder of voogd 2 Onderwijs/Opleidingsniveau"
+#~ msgstr "Vader/Ouder of voogd 2 Onderwijs/Opleidingsniveau"
 
 #~ msgid "Over "
 #~ msgstr "Boven"
