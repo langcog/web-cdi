@@ -35,7 +35,6 @@
     <script src="{% static 'jquery/jquery.inputmask.bundle.js' %}"></script>
     <script src="https://www.google.com/recaptcha/api.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
 </head>
 
 <body data-spy="scroll" data-target="#navbar">
@@ -136,7 +135,7 @@
         <div class="modal-content">
 
             <div class="modal-header">
-                <h2 class="modal-title" >{% trans "Waiver of Documentation" %}</h2>
+                <h2 class="modal-title" >{% trans "Waiver of Documentation of Informed Consent." %}</h2>
             </div>
 
             <div class="modal-body">
@@ -145,10 +144,29 @@
                 {% endif %}
             </div>
             <div class="modal-footer">
-                <button type="button" data-dismiss="modal" class="btn btn-primary" id="okaybtn">{% trans "Okay" %}</button>
+                <button class="btn btn-warning" onclick="withholdConsent();">{% trans 'No' %}</button>
+                <button type="button" data-dismiss="modal" class="btn btn-primary" id="okaybtn" onclick="giveConsent();">{% trans "Okay" %}</button>
             </div>
 
         
+        </div>
+    </div>
+</div>
+
+<div id="withheld_consent_modal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h2 class="modal-title" >{% trans "Waiver Denied" %}</h2>
+            </div>
+
+            <div class="modal-body">
+                <p>{% trans 'Thank you for your response. We are unable to continue. Please close the window. If you would like, you may review the Waiver.' %}</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-warning" onclick="reviewConsent();">{% trans 'Review Waiver' %}</button>
+            </div>       
         </div>
     </div>
 </div>

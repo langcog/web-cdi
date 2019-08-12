@@ -1,32 +1,65 @@
 [
     {
-        "title" : "Total Produced",
+        "title" : "Palabras que dice",
         "category" : "word",
         "measure" : "produces",
         "order" : 1
     },
     {
-        "title" : "How Children Use Words",
+        "title" : "Como Usa y Comprende",
         "category" : "usage",
         "measure" : "sometimes;often",
         "order" : 2
     },
     {
-        "title" : "Word Forms",
-        "category" : "word_forms",
+        "title" : "Formas de Verbos: Presente",
+        "category" : "word_forms_prese",
         "measure" : "produces",
         "order" : 3
     },
     {
-        "title" : "Combining",
-        "category" : "combine",
-        "measure" : "sometimes;often",
+        "title" : "Formas de Verbos: Sucedieron",
+        "category" : "word_forms_suced",
+        "measure" : "produces",
         "order" : 4
     },
     {
-        "title" : "Complexity",
-        "category" : "complex",
-        "measure" : "complex",
+        "title" : "Formas de Verbos: Imperativos",
+        "category" : "word_forms_orden",
+        "measure" : "produces",
         "order" : 5
+    },
+    {
+        "title" : "Combinar palabras",
+        "category" : "combine",
+        "measure" : "sometimes;often",
+        "order" : 6
+    },
+    {
+        "title" : "Exemplo 1",
+        "category" : "combination_example1",
+        "measure" : "complex",
+        "order" : 10,
+        "kind" : "list"
+    },
+    {
+        "title" : "Exemplo 2",
+        "category" : "combination_example2",
+        "measure" : "complex",
+        "order" : 11,
+        "kind" : "list"
+    },
+    {
+        "title" : "Exemplo 3",
+        "category" : "combination_example3",
+        "measure" : "complex",
+        "order" : 12,
+        "kind" : "list"
+    },
+    {
+        "title" : "Complejidad",
+        "category" : "complexity",
+        "measure" : "complex",
+        "order" : 13
     }
 ]

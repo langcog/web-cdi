@@ -23,8 +23,6 @@ import pandas as pd
 from django.views.generic import UpdateView
 
 
-
-
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__)) # Declare root folder for project and files. Varies between Mac and Linux installations.
 
 # This function is not written properly...
@@ -386,6 +384,7 @@ def background_info_form(request, hash_id):
     data['study_waiver'] = administration_instance.study.waiver
     data['allow_payment'] = administration_instance.study.allow_payment
     data['hint'] = _("Your child should be between %(min_age)d to %(max_age)d months of age.") % {"min_age": data['min_age'], "max_age": data['max_age']}
+    data['form'] = administration_instance.study.instrument.form
     
     if data['allow_payment'] and administration_instance.bypass is None:
         try:
@@ -414,20 +413,23 @@ def background_info_form(request, hash_id):
 # Stitch section nesting in cdi_forms/form_data/*.json and instrument models together and prepare for CDI form rendering
 def cdi_items(object_group, item_type, prefilled_data, item_id):
     for obj in object_group:
-        if item_type == 'checkbox':
+        if 'textbox' in obj['item']:
+            obj['text'] = obj['definition']
+            if obj['itemID'] in prefilled_data:
+                obj['prefilled_value'] = prefilled_data[obj['itemID']]
+        elif item_type == 'checkbox':
             obj['prefilled_value'] = obj['itemID'] in prefilled_data
-            obj['definition'] = obj['definition'][0].upper() + obj['definition'][1:] if obj['definition'][0].isalpha() else obj['definition'][0] + obj['definition'][1].upper() + obj['definition'][2:]
+            obj['definition'] = obj['definition'][0] + obj['definition'][1:] if obj['definition'][0].isalpha() else obj['definition'][0] + obj['definition'][1] + obj['definition'][2:]
             obj['choices'] = obj['choices__choice_set']
 
-        if item_type in ['radiobutton', 'modified_checkbox']:
-
+        elif item_type in ['radiobutton', 'modified_checkbox']:
             raw_split_choices = map(unicode.strip, obj['choices__choice_set'].split(';'))
 
             split_choices_translated = map(unicode.strip, [value for key, value in obj.items() if 'choice_set_' in key][0].split(';'))
 
             prefilled_values = [False if obj['itemID'] not in prefilled_data else x == prefilled_data[obj['itemID']] for x in raw_split_choices]
 
-            obj['text'] = obj['definition'][0].upper() + obj['definition'][1:] if obj['definition'][0].isalpha() else obj['definition'][0] + obj['definition'][1].upper() + obj['definition'][2:]
+            obj['text'] = obj['definition'][0] + obj['definition'][1:] if obj['definition'][0].isalpha() else obj['definition'][0] + obj['definition'][1] + obj['definition'][2:]
 
             if obj['definition'] is not None and obj['definition'].find('/') >= 0 and item_id in ['complexity', 'pronoun_usage']:
                 split_definition = map(unicode.strip, obj['definition'].split('/'))
@@ -435,9 +437,9 @@ def cdi_items(object_group, item_type, prefilled_data, item_id):
             else:
                 obj['choices'] = zip(split_choices_translated, raw_split_choices, prefilled_values)
                 if obj['definition'] is not None:
-                    obj['text'] = obj['definition'][0].upper() + obj['definition'][1:] if obj['definition'][0].isalpha() else obj['definition'][0] + obj['definition'][1].upper() + obj['definition'][2:]
+                    obj['text'] = obj['definition'][0] + obj['definition'][1:] if obj['definition'][0].isalpha() else obj['definition'][0] + obj['definition'][1] + obj['definition'][2:]
 
-        if item_type == 'textbox':
+        elif item_type == 'textbox':
             if obj['itemID'] in prefilled_data:
                 obj['prefilled_value'] = prefilled_data[obj['itemID']]
 
@@ -476,7 +478,8 @@ def prefilled_cdi_data(administration_instance):
         data['confirm_completion'] = administration_instance.study.confirm_completion
         raw_objects = []
 
-        field_values = ['itemID', 'item_type', 'category', 'definition', 'choices__choice_set']
+        field_values = ['itemID', 'item', 'item_type', 'category', 'definition', 'choices__choice_set']
+        '''
         if administration_instance.study.instrument.language == 'English':
             field_values += ['choices__choice_set_en']
         elif administration_instance.study.instrument.language == 'Spanish':
@@ -487,6 +490,9 @@ def prefilled_cdi_data(administration_instance):
             field_values += ['choices__choice_set_en_ca']
         elif administration_instance.study.instrument.language == 'Dutch':
             field_values += ['choices__choice_set_nl']
+        '''
+        field_values += ['choices__choice_set_' + settings.LANGUAGE_DICT[administration_instance.study.instrument.language]]
+        
         #As some items are nested on different levels, carefully parse and store items for rendering.
         for part in data['parts']:
             for item_type in part['types']:
@@ -858,6 +864,10 @@ def save_answer(request):
         if len(items) == 1:
             item = items[0]
             value = request.POST[key]
+            
+            if 'textbox' in item.item:
+                if value:
+                    administration_data.objects.update_or_create(administration = administration_instance, item_ID = key, defaults = {'value': value})
             if item.choices:
                 choices = map(unicode.strip, item.choices.choice_set_en.split(';'))
                 if value in choices:

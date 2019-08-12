@@ -67,6 +67,7 @@ def get_background_header(): # Returns a list of variables for backgroundinfo ob
 class administration(models.Model):
     study = models.ForeignKey("study") # Study name
     subject_id = models.IntegerField() # Subject ID, unique to the associated study
+    local_lab_id = models.CharField(max_length=101, blank=True, null=True) #Id for local labs to use as they see fit
     repeat_num = models.IntegerField(verbose_name = "Administration number") # Ordinal number of tests given to this particular subject ID. For example, if this is Subject 30's third test, this field will have '3' stored
     url_hash = models.CharField(max_length=128, unique=True) # Associated URL hash
     completed = models.BooleanField() # Whether administration has been marked as completed

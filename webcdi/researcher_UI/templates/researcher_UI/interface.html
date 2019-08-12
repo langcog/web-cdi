@@ -50,7 +50,6 @@
         <!-- Row displaying username, help button, and logout button. -->
         <div class='row'>
         	<form style="width:100%" action="/accounts/logout/">
-
                 <fieldset>
                     <legend>User:</legend>
                     <div class="d-flex">
@@ -111,16 +110,12 @@
                 			{% if current_study %}
                                 <div class="row">
                                     <div class="col-3">
-<!--                                         <button type="button" class="btn btn-secondary btn-block"   onclick = "modal_form('/interface/study/{{ current_study|urlencode }}/administer_new/')" >Add Participants</button> -->
-
                                         <div class="btn-group btn-block">
                                           <button type="button" class="btn btn-secondary btn-block" onclick = "modal_form('/interface/study/{{ current_study|urlencode }}/administer_new/')">Add Participants</button>
-
                                           <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <span class="sr-only">Toggle Dropdown</span>
                                           </button>
                                           <div class="dropdown-menu">
-                                            <!-- <button class="dropdown-item btn btn-secondary btn-block">Do an Action</button> -->
                                             <button type="button" class="dropdown-item btn btn-secondary btn-block"   onclick = "modal_form('/interface/study/{{ current_study|urlencode }}/import_data/')" >Import Spreadsheet Data</button>
                                           </div>
                                         </div>
@@ -158,32 +153,29 @@
                 <form method='post' action = '/interface/study/{{ current_study }}/' id='administration-form' class="form-inline">
                     {% csrf_token %}
                         <fieldset>
-                        <div class="row d-flex align-items-stretch">
-                            <div class='col-md-3'>
-                                <button style='width:100%; height: 100%;' class="btn btn-secondary selected-btn btn-block" id='add-selected' type='submit' name='administer-selected' value='administer-selected' disabled  >Re-administer Participants</button>
+                            <div class="row d-flex align-items-stretch">
+                                <div class='col-md-3'>
+                                    <button style='width:100%; height: 100%;' class="btn btn-secondary selected-btn btn-block" id='add-selected' type='submit' name='administer-selected' value='administer-selected' disabled  >Re-administer Participants</button>
+                                </div>
+                                <div class='col-md-3'>
+                                    <div class="dropdown selected-btn">
+                                        <button class="btn btn-secondary selected-btn btn-block dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
+                                            Download Selected Data
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                            <button class="dropdown-item btn btn-secondary selected-btn btn-block" id='download-selected' type='submit' name='download-selected' value='download-selected'  disabled >Download Selected Data (CSV/All)</button>
+                                            <button class="dropdown-item btn btn-secondary selected-btn btn-block" id='download-selected-summary' type="submit" name='download-selected-summary' value='download-selected-summary' disabled>Download Summary (CSV format)</button>
+                                            <button class="dropdown-item btn btn-secondary selected-btn btn-block" id='download-links' type='submit' name='download-links' value='download-links'  disabled >Download Selected Data (CSV/Links)</button>
+                                            <button class="dropdown-item btn btn-secondary selected-btn btn-block" id='download-study-scoring-selected' type='submit' name='download-study-scoring-selected' value='download-study-scoring-selected'  disabled >Download Selected Data (CDI Scoring Format/All)</button>
+                                        </div>
+                                    </div>                                            
+                                </div> 
+                                <div class="col-md-3"></div>
+                                <div class='col-md-3'>
+                                        <button style='width:100%; height: 100%;' class="btn btn-secondary selected-btn btn-block" id='delete-selected' type='submit' name='delete-selected' value='administer-selected' disabled onclick='return confirm("Are you sure you want to delete the selected administration record and all the data associated with it?");' >Delete Selected Data</button>
+                                </div>
                             </div>
-                            <div class='col-md-3'>
-                                <div class="dropdown selected-btn">
-                                    <button class="btn btn-secondary selected-btn btn-block dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
-                                        Download Selected Data
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                        <button class="dropdown-item btn btn-secondary selected-btn btn-block" id='download-selected' type='submit' name='download-selected' value='download-selected'  disabled >Download Selected Data (CSV/All)</button>
-                                        <button class="dropdown-item btn btn-secondary selected-btn btn-block" id='download-selected-summary' type="submit" name='download-selected-summary' value='download-selected-summary' disabled>Download Summary (CSV format)</button>
-                                        <button class="dropdown-item btn btn-secondary selected-btn btn-block" id='download-links' type='submit' name='download-links' value='download-links'  disabled >Download Selected Data (CSV/Links)</button>
-                                        <button class="dropdown-item btn btn-secondary selected-btn btn-block" id='download-study-scoring-selected' type='submit' name='download-study-scoring-selected' value='download-study-scoring-selected'  disabled >Download Selected Data (CDI Scoring Format/All)</button>
-                                    </div>
-                                </div>                                            
-                            </div> 
-                            <div class="col-md-3"></div>
-                            <div class='col-md-3'>
-                                    <button style='width:100%; height: 100%;' class="btn btn-secondary selected-btn btn-block" id='delete-selected' type='submit' name='delete-selected' value='administer-selected' disabled onclick='return confirm("Are you sure you want to delete the selected administration record and all the data associated with it?");' >Delete Selected Data</button>
-
-                            </div>
-
-
-                        </div>
-                        
+                       
                             <legend> Data :</legend>
                             <div class='col-md-12'>
                                 {% include "researcher_UI/table.html" with table=study_administrations %}
@@ -194,22 +186,17 @@
                                         utc_time = moment.utc($(this).html(), "MM/DD/YYYY hh:mm a");
                                         local_time = moment(utc_time).local().format("MM/DD/YYYY hh:mm a");
                                         $(this).html(local_time);
-
                                     });
                                 </script>
                             </div>
-                            
-
-                            
-                            
                         </fieldset>
                 </form>
             </div>
         {% endif %}
     </div>
 
-<!-- New Study Modal -->
-<div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="new study"></div>
+    <!-- New Study Modal -->
+    <div class="modal" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="new study"></div>
 
 <script>
     // Function from static/researcher_UI.js. Disables the 'selected' buttons unless at least one of the checkboxes in select_col is selected.
