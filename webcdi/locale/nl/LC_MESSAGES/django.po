@@ -185,8 +185,6 @@ msgid "Which language(s)"
 msgstr "Welke talen?"
 
 #: cdi_forms/forms.py:141 cdi_forms/forms.py:146 cdi_forms/forms.py:151
-#, fuzzy
-#| msgid "Please describe"
 msgid "Please specify"
 msgstr "Leg uit"
 
@@ -1250,14 +1248,10 @@ msgid "23 or more"
 msgstr "23 of meer"
 
 #: cdi_forms/models.py:164 cdi_forms/models.py:242
-#, fuzzy
-#| msgid "Other"
 msgid "Mother"
 msgstr "Moeder"
 
 #: cdi_forms/models.py:165 cdi_forms/models.py:243
-#, fuzzy
-#| msgid "Other"
 msgid "Father"
 msgstr "Vader"
 
@@ -1274,8 +1268,6 @@ msgid "Primary Caregiver Year of birth"
 msgstr "Geboortedatum hoofdverzorger"
 
 #: cdi_forms/models.py:173
-#, fuzzy
-#| msgid "Caregiver Information"
 msgid "Primary Caregiver Education"
 msgstr "Informatie hoofdverzorger"
 
@@ -1294,14 +1286,10 @@ msgid "Secondary Caregiver Year of birth"
 msgstr "Geboortedatum tweede verzorger"
 
 #: cdi_forms/models.py:178
-#, fuzzy
-#| msgid "Caregiver Information"
 msgid "Secondary Caregiver Education"
 msgstr "Informatie tweede verzorger"
 
 #: cdi_forms/models.py:187
-#, fuzzy
-#| msgid "Under "
 msgid "Under $25,000"
 msgstr "Onder €10,000"
 
@@ -1448,10 +1436,6 @@ msgstr ""
 "Bijvoorbeeld op momenten waar uw kind aan het slapen is. "
 
 #: cdi_forms/templates/cdi_forms/background_info.html:28
-#, fuzzy
-#| msgid ""
-#| "Try to complete the inventory when you have at least 30 quiet minutes, "
-#| "without interruptions. An example might be when your child is sleeping."
 msgid ""
 "Try to complete the inventory when you have at least 10-15 quiet minutes, "
 "without interruptions. An example might be when your child is sleeping."
@@ -1488,11 +1472,6 @@ msgstr ""
 "onderdelen in"
 
 #: cdi_forms/templates/cdi_forms/background_info.html:36
-#, fuzzy, python-format
-#| msgid ""
-#| "You will receive an Amazon.com gift card after you complete the form. As "
-#| "we are a research lab with limited funds, we ask that you only complete "
-#| "this questionnaire once."
 msgid ""
 "You will receive a $%(gift_amount)s Amazon.com gift card after you complete "
 "the form. As we are a research lab with limited funds, we ask that you only "
@@ -1584,8 +1563,6 @@ msgid "Reach out to the Web-CDI Team!"
 msgstr "Contacteer het Web-CDI Team!"
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:137
-#, fuzzy
-#| msgid "Waiver of Documentation"
 msgid "Waiver of Documentation of Informed Consent."
 msgstr "Toestemmingsverklaring"
 
@@ -1594,8 +1571,6 @@ msgid "Okay"
 msgstr "Ik geef toestemming"
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:160
-#, fuzzy
-#| msgid "Waiver of Documentation"
 msgid "Waiver Denied"
 msgstr "Toestemmingsverklaring"
 
@@ -1957,13 +1932,6 @@ msgstr ""
 "proberen het probleem zo snel mogelijk op te lossen."
 
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:102
-#, fuzzy
-#| msgid ""
-#| "Thank you for participating in the participating our Web-CDI project! It "
-#| "is our pleasure to send you this Amazon.com Gift Card that can be "
-#| "redeemed towards millions of items at <a href=\"http://www.amazon.com\" "
-#| "target=\"_blank\">www.amazon.com</a>. You may want to print this screen "
-#| "for easy reference later--you’ll need the gift card claim code below."
 msgid ""
 "Thank you for participating in our Web-CDI project! It is our pleasure to "
 "send you this Amazon.com Gift Card that can be redeemed towards millions of "
@@ -1985,11 +1953,6 @@ msgid "Claim Code"
 msgstr "Claim code"
 
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:111
-#, fuzzy, python-format
-#| msgid ""
-#| "To redeem your gift card, visit <a href=\"%(redeem_url)s\" target=\"_blank"
-#| "\">%(redeem_url)s</a>. Restrictions apply, see <a href=\"%(legal_url)s\" "
-#| "target=\"_blank\">%(legal_url)s</a>."
 msgid ""
 "To redeem your gift card, visit <a href=\"%(redeem_url)s\" target=\"_blank"
 "\">www.amazon.com/redeem</a>. Restrictions apply, see <a href=\"%(legal_url)s"
@@ -2032,26 +1995,19 @@ msgstr "Categorie"
 
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:307
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:324
-#, fuzzy, python-format
-#| msgid "Percentage of Words Understood (%%)"
 msgid "Words Understood (%%)"
 msgstr "Percentage begrepen woorden (%%)"
 
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:361
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:379
-#, python-format
 msgid "Words Produced (%%)"
 msgstr "Percentage woorden die het kind kan zeggen"
 
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:512
-#, fuzzy
-#| msgid "My child says the most words in the bestProdCat category."
 msgid "My child produces the most words in the bestProdCat category."
 msgstr "Mijn kind zegt de meeste woorden in de bestProdCat categorie"
 
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:516
-#, fuzzy
-#| msgid "My child says the most words in the bestCompCat category."
 msgid "My child understands the most words in the bestCompCat category."
 msgstr "Mijn kind begrijpt de meeste woorden in de bestCompCat categorie"
 
@@ -2567,14 +2523,10 @@ msgid "Spanish"
 msgstr "Spaans"
 
 #: webcdi/settings.py:221
-#, fuzzy
-#| msgid "French"
 msgid "French Quebec"
 msgstr "Frans"
 
 #: webcdi/settings.py:222
-#, fuzzy
-#| msgid "English"
 msgid "Canadian English"
 msgstr "Engels"
 
