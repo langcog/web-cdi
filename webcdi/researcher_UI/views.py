@@ -128,7 +128,7 @@ def download_data(request, study_obj, administrations = None): # Download study 
                 if administration_id.completedBackgroundInfo:
                     scoring_dict[f.title] = 0
                 else:
-                    scoring_dict[f.title] = ''
+                    scoring_dict[f.title] = 0
             else : scoring_dict[f.title] = ''
         for administration_data_item in administration_data.objects.filter(administration_id=administration_id):
             inst = Instrument_Forms.objects.get(instrument=study_obj.instrument,itemID=administration_data_item.item_ID)
