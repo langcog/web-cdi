@@ -19,7 +19,7 @@
             "field" : "multi_birth_boolean",
             "div" : ["multi_birth"]
         }, {
-            "field" : "birth_weight_lb",
+            "field" : "birth_weight_kg",
             "choices" : [
                 {
                     "key" : "",

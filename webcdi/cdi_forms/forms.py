@@ -226,6 +226,7 @@ class BackgroundForm(BetterModelForm):
         
         if self.birth_weight_required:
             c_weight = cleaned_data.get(self.birth_weight_field)
+            print c_weight, self.birth_weight_field
             if not c_weight and c_weight != 0:
                 self.add_error(self.birth_weight_field, _('This field cannot be empty'))
 
