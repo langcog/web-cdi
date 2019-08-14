@@ -8,8 +8,12 @@ from .admin_actions import scoring_data, scoring_summary
 
 # Register your models here.
 admin.site.register(instrument)
-admin.site.register(administration_data)
 admin.site.register(researcher)
+
+class AdministrationDataAdmin(admin.ModelAdmin):
+    list_filter = ['administration__study','item_ID']
+admin.site.register(administration_data, AdministrationDataAdmin)
+
 
 class BenchmarkAdmin(admin.ModelAdmin):
     list_display = ['instrument','instrument_score','age','percentile']
