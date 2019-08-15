@@ -6,7 +6,7 @@
         "order" : 1
     },
     {
-        "title" : "Frases comprendidas",
+        "title" : "Primeras frases",
         "category" : "phrases",
         "measure" : "understands",
         "order" : 2
@@ -72,7 +72,7 @@
         "order" : 12
     },
     {
-        "title" : "Gestos Tardíos",
+        "title" : "Gestos Tardios",
         "category" : "gestures_parents;gestures_adults;gestures_objects",
         "measure" : "yes",
         "order" : 14
