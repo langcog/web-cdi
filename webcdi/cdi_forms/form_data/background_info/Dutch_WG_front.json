@@ -6,8 +6,7 @@
           "div":["form_filler_other"]  
       },{
         "field" : "child_dob"
-      },
-      {
+      },{
           "field":"age"
       },
       {
