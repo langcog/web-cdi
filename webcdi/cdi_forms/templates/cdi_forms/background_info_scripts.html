@@ -246,3 +246,12 @@
     </script>
     
 {% endif %}
+
+<script>
+if ($('#id_child_ethnicity').val() == '[]') {
+    $('#id_child_ethnicity').removeAttr('value');
+}
+if ($('#id_other_languages').val() == '[]') {
+    $('#id_other_languages').removeAttr('value');
+}
+</script>

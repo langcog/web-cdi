@@ -7,6 +7,7 @@
       },
       {
           "field":"birth_weight_kg",
+          "widget_type": "Select",
           "choices":[
           {
                "key" : "",
@@ -58,8 +59,8 @@
           "field":"birth_order"
       },
       {
-          "field":"multiple_birth_boolean",
-          "div":["multiple_birth"]
+          "field":"multi_birth_boolean",
+          "div":["multi_birth"]
       }    
       ]
 },{
@@ -71,46 +72,45 @@
       },
       {
           "field":"mother_yob"
-      },
+      },{
+        "field":"mother_education",
+        "choices":[
+            {
+                "key" : "",
+                "value" : "--------"
+            },{
+                "key":16,
+                "value":"Basisonderwijs"
+            },{
+                "key":17,
+                "value":"VMBO/MAVO"
+            },{
+                "key":18,
+                "value":"HAVO"
+            },{
+                "key":19,
+                "value":"VWO"
+            },{
+                "key":20,
+                "value":"MBO"
+            },{
+                "key":21,
+                "value":"HBO"
+            },{
+                "key":22,
+                "value":"WO Bachelor"
+            },{
+                "key":23,
+                "value":"WO Master of hoger"
+            },{
+                "key":0,
+                "value":"Zeg ik liever niet"
+            }
+        ],
+        "help":"Selecteer de hoogst afgeronde opleiding"
+    },
       {
-          "field":"mother_education",
-          "choices":[
-              {
-                  "key" : "",
-                  "value" : "--------"
-              },{
-                  "key":"Basisonderwijs",
-                  "value":"Basisonderwijs"
-              },{
-                  "key":"VMBO/MAVO",
-                  "value":"VMBO/MAVO"
-              },{
-                  "key":"HAVO",
-                  "value":"HAVO"
-              },{
-                  "key":"VWO",
-                  "value":"VWO"
-              },{
-                  "key":"MBO",
-                  "value":"MBO"
-              },{
-                  "key":"HBO",
-                  "value":"HBO"
-              },{
-                  "key":"WO Bachelor",
-                  "value":"WO Bachelor"
-              },{
-                  "key":"WO Master of higher",
-                  "value":"WO Master of hoger"
-              },{
-                  "key":"Prefer not to disclose",
-                  "value":"Zeg ik liever niet"
-              }
-          ],
-          "help":"Selecteer de hoogst afgeronde opleiding"
-      },
-      {
-          "field":"secondaty_caregiver",
+          "field":"secondary_caregiver",
           "div":["secondary_caregiver_other"]
       },
       {
@@ -122,40 +122,43 @@
                   "key" : "",
                   "value" : "--------"
               },{
-                  "key":"Basisonderwijs",
+                  "key":16,
                   "value":"Basisonderwijs"
               },{
-                  "key":"VMBO/MAVO",
+                  "key":17,
                   "value":"VMBO/MAVO"
               },{
-                  "key":"HAVO",
+                  "key":18,
                   "value":"HAVO"
               },{
-                  "key":"VWO",
+                  "key":19,
                   "value":"VWO"
               },{
-                  "key":"MBO",
+                  "key":20,
                   "value":"MBO"
               },{
-                  "key":"HBO",
+                  "key":21,
                   "value":"HBO"
               },{
-                  "key":"WO Bachelor",
+                  "key":22,
                   "value":"WO Bachelor"
               },{
-                  "key":"WO Master of higher",
+                  "key":23,
                   "value":"WO Master of hoger"
               },{
-                  "key":"Prefer not to disclose",
+                  "key":0,
                   "value":"Zeg ik liever niet"
               }
           ],
           "help":"Selecteer de hoogst afgeronde opleiding"
       },{
           "field":"annual_income",
-          "widget_type":"select",
+          "widget_type":"Select",
           "choices":[
-              {
+            {
+                "key" : "",
+                "value" : "--------"
+            },{
                   "key" : "0-2000",
                   "value" : "€0 - €2000"
               },{
@@ -187,7 +190,7 @@
           {
               "field":"other_languages",
               "css":"make-selectize",
-              "div":["other_languages","language_from","language_days_per_week","language_hours_per_day"]
+              "div":["language_from","language_days_per_week","language_hours_per_day"]
           }
           ]
       }
