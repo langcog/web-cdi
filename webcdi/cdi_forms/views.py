@@ -431,8 +431,13 @@ def cdi_items(object_group, item_type, prefilled_data, item_id):
 
             obj['text'] = obj['definition'][0] + obj['definition'][1:] if obj['definition'][0].isalpha() else obj['definition'][0] + obj['definition'][1] + obj['definition'][2:]
 
-            if obj['definition'] is not None and obj['definition'].find('/') >= 0 and item_id in ['complexity', 'pronoun_usage']:
-                split_definition = map(unicode.strip, obj['definition'].split('/'))
+            if obj['definition'] is not None and obj['definition'].find('\\') >= 0 and item_id in ['complexity', 'pronoun_usage']:
+                instruction = re.search('<b>(.+?)</b>', obj['definition'])
+                if instruction:
+                    obj_choices = obj['definition'].split(instruction.group(1) + '</b><br />')[1]
+                else :
+                    obj_choices = obj['definition']
+                split_definition = map(unicode.strip, obj_choices.split('\\'))
                 obj['choices'] = zip(split_definition, raw_split_choices, prefilled_values)
             else:
                 obj['choices'] = zip(split_choices_translated, raw_split_choices, prefilled_values)
@@ -479,18 +484,6 @@ def prefilled_cdi_data(administration_instance):
         raw_objects = []
 
         field_values = ['itemID', 'item', 'item_type', 'category', 'definition', 'choices__choice_set']
-        '''
-        if administration_instance.study.instrument.language == 'English':
-            field_values += ['choices__choice_set_en']
-        elif administration_instance.study.instrument.language == 'Spanish':
-            field_values += ['choices__choice_set_es']
-        elif administration_instance.study.instrument.language == 'French Quebec':
-            field_values += ['choices__choice_set_fr_ca']
-        elif administration_instance.study.instrument.language == 'Canadian English':
-            field_values += ['choices__choice_set_en_ca']
-        elif administration_instance.study.instrument.language == 'Dutch':
-            field_values += ['choices__choice_set_nl']
-        '''
         field_values += ['choices__choice_set_' + settings.LANGUAGE_DICT[administration_instance.study.instrument.language]]
         
         #As some items are nested on different levels, carefully parse and store items for rendering.
