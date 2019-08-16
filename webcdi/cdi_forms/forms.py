@@ -93,12 +93,14 @@ BIRTH_WEIGHT_KG_CHOICES = [
 class BackgroundForm(BetterModelForm):
     
     # Multiple checkbox question regarding child's ethnicity. Not required.
+    '''
     child_ethnicity = forms.MultipleChoiceField(
         widget=forms.CheckboxSelectMultiple,
         choices = CHILD_ETHNICITY_CHOICES, 
         label = _("My child is (check all that apply):"), 
         required = False)
-  
+    '''
+
     # Child's DOB. Formatted weirdly to only be required if Age in months in not already stored in database.
     child_dob = forms.DateField(
         input_formats=['%m/%d/%Y'], 
@@ -172,7 +174,7 @@ class BackgroundForm(BetterModelForm):
     # Cleaning input data for views.py and later database storage.
     def clean(self):
         cleaned_data = super(BackgroundForm, self).clean()
-        
+
         # Nesting fields. Some questions, like 'born_on_due_date' trigger related subsequent questions like 'early_or_late' and 'due_date_diff' to inquire more depending on earlier answers.
         enabler_dependent_fields = (
             ('form_filler', ['form_filler_other']),
@@ -226,9 +228,10 @@ class BackgroundForm(BetterModelForm):
         
         if self.birth_weight_required:
             c_weight = cleaned_data.get(self.birth_weight_field)
-            print c_weight, self.birth_weight_field
             if not c_weight and c_weight != 0:
                 self.add_error(self.birth_weight_field, _('This field cannot be empty'))
+
+        return cleaned_data
 
     def get_json_filename(self):
         return os.path.realpath(PROJECT_ROOT + '/form_data/background_info/' + self.curr_context['instrument'] + '_front.json')
