@@ -702,10 +702,10 @@ item_700,en,word,connecting_words,understands; produces,en,,and,
 item_701,maar,word,connecting_words,understands; produces,maar,,but,
 item_702,omdat,word,connecting_words,understands; produces,omdat,,because,
 item_703,vroeger,usage,how_use_words,not yet; sometimes; often,"Praat uw kind over voorbije gebeurtenissen en mensen die niet aanwezig zijn? Bijvoorbeeld een kind dat vorige week naar het circus is geweest, kan nadien woordjes als 'circus', 'clown', 'leeuw', ... zeggen.",,,
-item_704,toekomst,usage,how_use_words,not yet; sometimes; often,"Praat uw kind over toekomstige gebeurtenissen? Bijvoorbeeld 'schommel' (of 'sommel') zeggen als jullie naar het park of de speeltuin gaan.",,,
+item_704,toekomst,usage,how_use_words,not yet; sometimes; often,Praat uw kind over toekomstige gebeurtenissen? Bijvoorbeeld 'schommel' (of 'sommel') zeggen als jullie naar het park of de speeltuin gaan.,,,
 item_705,praatnietaanwezig,usage,how_use_words,not yet; sometimes; often,"Praat uw kind over dingen die niet aanwezig zijn? Bijvoorbeeld vragen naar afwezig speelgoed, een huisdier buiten het gezichtsveld, iemand die niet aanwezig is.",,,
-item_706,begrijptnietaanwezig,usage,how_use_words,not yet; sometimes; often,"Begrijpt uw kind als u vraagt naar iets dat niet in de kamer aanwezig is? Bijvoorbeeld door naar de slaapkamer te gaan en de teddybeer te halen als u vraagt 'waar is de beer?'.",,,
-item_707,wijzenbenoemen,usage,how_use_words,not yet; sometimes; often,"Wijst uw kind naar voorwerpen die van iemand anders zijn terwijl het de persoon van wie de voorwerpen zijn noemt? Bijvoorbeeld wijzen naar mama's schoen en 'mama' zeggen.",,,
+item_706,begrijptnietaanwezig,usage,how_use_words,not yet; sometimes; often,Begrijpt uw kind als u vraagt naar iets dat niet in de kamer aanwezig is? Bijvoorbeeld door naar de slaapkamer te gaan en de teddybeer te halen als u vraagt 'waar is de beer?'.,,,
+item_707,wijzenbenoemen,usage,how_use_words,not yet; sometimes; often,Wijst uw kind naar voorwerpen die van iemand anders zijn terwijl het de persoon van wie de voorwerpen zijn noemt? Bijvoorbeeld wijzen naar mama's schoen en 'mama' zeggen.,,,
 item_708,meervoud,ending,word_ending,not yet; sometimes; often,"Wanneer we spreken over meer dan 1 ding, voegen we vaak een -s aan woorden toe. Bijvoorbeeld sleutels (voor meer dan 1 sleutel), auto's, liedjes, tafels, winkels, ... Doet uw kind dit al?",,,
 item_709,bezit,ending,word_ending,not yet; sometimes; often,"Wanneer we spreken over bezit, voegen we vaak een -s toe. Bijvoorbeeld papa's auto, oma's huis, baby's fles, ... Doet uw kind dit al?",,,
 item_710,aanhetww,ending,word_ending,not yet; sometimes; often,"Wanneer we spreken over activiteiten, gebruiken we vaak 'aan het + werkwoord'. Bijvoorbeeld aan het kijken, aan het spelen, aan het lopen, ... Doet uw kind dit al?",,,
@@ -733,7 +733,7 @@ item_731,gekrijgd,word_ending,word_ending_verb,produces,gekrijgd/gekreegd,,,
 item_732,geloopt,word_ending,word_ending_verb,produces,geloopt,,,
 item_733,geneemd,word_ending,word_ending_verb,produces,geneemd,,,
 item_734,gevald,word_ending,word_ending_verb,produces,gevald,,,
-item_735,gevliegd,word_ending,word_ending_nouns,produces,gevliegd,,,
+item_735,gevliegd,word_ending,word_ending_verb,produces,gevliegd,,,
 item_736,gezit,word_ending,word_ending_verb,produces,gezit,,,
 item_737,verliesd,word_ending,word_ending_verb,produces,verliesd,,,
 item_738,blaasde,word_ending,word_ending_verbs,produces,blaasde,,,
@@ -802,38 +802,38 @@ item_800,zat,word_form,word_form_verbs,produces,zat/ zaten,,,
 item_example1,combination_example1,combination_examples,combination_examples,,,,,
 item_example2,combination_example2,combination_examples,combination_examples,,,,,
 item_example3,combination_example3,combination_examples,combination_examples,,,,,
-item_801,cmplx01,complexity,complexity,simple; complex,Twee schoen. / Twee schoenen.,,,syntax
-item_802,cmplx02,complexity,complexity,simple; complex,Twee voet/voets. / Twee voeten.,,,syntax
-item_803,cmplx03,complexity,complexity,simple; complex,Papa auto/auto papa. / Papa's auto.,,,syntax
-item_804,cmplx04,complexity,complexity,simple; complex,(praten over iets dat nu gebeurt) Poes slapen. / Poes slaapt.,,,syntax
-item_805,cmplx05,complexity,complexity,simple; complex,(praten over iets dat al gebeurd is) Ik val. / Ik viel.,,,syntax
-item_806,cmplx06,complexity,complexity,simple; complex,Nog koek! / Nog koeken!,,,syntax
-item_807,cmplx07,complexity,complexity,simple; complex,Kijk mijn tand. / Kijk mijn tandjes.,,,syntax
-item_808,cmplx08,complexity,complexity,simple; complex,Kindje doekje. / Kindjes doekje/Doekje van kindje.,,,syntax
-item_809,cmplx09,complexity,complexity,simple; complex,(praten over iets dat al gebeurd is) Hondje likt mij. / Hondje likte mij.,,,syntax
-item_810,cmplx10,complexity,complexity,simple; complex,(praten over iets dat al gebeurd is) Papa pakt mij/Papa pakken. / Papa pakte mij.,,,syntax
-item_811,cmplx11,complexity,complexity,simple; complex,(praten over iets dat al gebeurd is) Poesje gaat weg. / Poesje ging weg.,,,syntax
-item_812,cmplx12,complexity,complexity,simple; complex,Hondje tafel. / Hondje op tafel.,,,syntax
-item_813,cmplx13,complexity,complexity,simple; complex,Dat mijn auto. / Dat is mijn auto.,,,syntax
-item_814,cmplx14,complexity,complexity,simple; complex,Kindje wenen/huilen. / Kindje weent/huilt.,,,syntax
-item_815,cmplx15,complexity,complexity,simple; complex,Jij maken? / Kan jij het maken?,,,syntax
-item_816,cmplx16,complexity,complexity,simple; complex,Mama boekje lezen? / Mama een boekje lezen?,,,syntax
-item_817,cmplx17,complexity,complexity,simple; complex,Pop niet gooien. / Gooi de pop niet.,,,syntax
-item_818,cmplx18,complexity,complexity,simple; complex,Nog fruitsap. / Fruitsap in beker.,,,syntax
-item_819,cmplx19,complexity,complexity,simple; complex,Daar poesje. / Daar is een poesje.,,,syntax
-item_820,cmplx20,complexity,complexity,simple; complex,Dada gaan/Weggaan. / Wil dada doen/Wil weggaan.,,,syntax
-item_821,cmplx21,complexity,complexity,simple; complex,Waar mama naar toe? / Waar is mama naar toe?,,,syntax
-item_822,cmplx22,complexity,complexity,simple; complex,Vuur warm. / Vuur is warm.,,,syntax
-item_823,cmplx23,complexity,complexity,simple; complex,Ik niet kunnen. / Ik kan (dat) niet.,,,syntax
-item_824,cmplx24,complexity,complexity,simple; complex,Ik boekje lezen. / Ik wil (een) boekje lezen.,,,syntax
-item_825,cmplx25,complexity,complexity,simple; complex,Boek niet lezen. / Ik wil boek niet lezen.,,,syntax
-item_826,cmplx26,complexity,complexity,simple; complex,Ik wil dat. / Ik wil wat jij hebt.,,,syntax
-item_827,cmplx27,complexity,complexity,simple; complex,Koek hebben. / Koek en melk hebben.,,,syntax
-item_828,cmplx28,complexity,complexity,simple; complex,Koek mama. / Koek voor mama.,,,syntax
-item_829,cmplx29,complexity,complexity,simple; complex,Kindje eten. /  Kindje wil eten.,,,syntax
-item_830,cmplx30,complexity,complexity,simple; complex,Kijken mij! / Kijk ik springen!,,,syntax
-item_831,cmplx31,complexity,complexity,simple; complex,Kijk! / Kijk wat ik heb!,,,syntax
-item_832,cmplx32,complexity,complexity,simple; complex,Wij hebben dit gemaakt. / Ik en Jan hebben dit gemaakt.,,,syntax
-item_833,cmplx33,complexity,complexity,simple; complex,Ik zing liedje. / Ik zing liedje voor jou.,,,syntax
-item_834,cmplx34,complexity,complexity,simple; complex,Baby weent/huilt. / Baby weent/huilt omdat ze ziek is.,,,syntax
-item_835,cmplx35,complexity,complexity,simple; complex,"Licht(je) aan/Lampje aan. / Doe het licht aan, dan kan ik zien",,,syntax
+item_801,cmplx01,complexity,complexity,simple; complex,Twee schoen. \ Twee schoenen.,,,syntax
+item_802,cmplx02,complexity,complexity,simple; complex,Twee voet / voets. \ Twee voeten.,,,syntax
+item_803,cmplx03,complexity,complexity,simple; complex,Papa auto / auto papa. \ Papa's auto.,,,syntax
+item_804,cmplx04,complexity,complexity,simple; complex,<b>praten over iets dat nu gebeurt</b><br />Poes slapen. \ Poes slaapt.,,,syntax
+item_805,cmplx05,complexity,complexity,simple; complex,<b>praten over iets dat al gebeurd is</b><br /> Ik val. \ Ik viel.,,,syntax
+item_806,cmplx06,complexity,complexity,simple; complex,Nog koek! \ Nog koeken!,,,syntax
+item_807,cmplx07,complexity,complexity,simple; complex,Kijk mijn tand. \ Kijk mijn tandjes.,,,syntax
+item_808,cmplx08,complexity,complexity,simple; complex,Kindje doekje. \ Kindjes doekje / Doekje van kindje.,,,syntax
+item_809,cmplx09,complexity,complexity,simple; complex,<b>praten over iets dat al gebeurd is</b><br /> Hondje likt mij. \ Hondje likte mij.,,,syntax
+item_810,cmplx10,complexity,complexity,simple; complex,<b>praten over iets dat al gebeurd is</b><br /> Papa pakt mij / Papa pakken. \ Papa pakte mij.,,,syntax
+item_811,cmplx11,complexity,complexity,simple; complex,<b>praten over iets dat al gebeurd is</b><br /> Poesje gaat weg. \ Poesje ging weg.,,,syntax
+item_812,cmplx12,complexity,complexity,simple; complex,Hondje tafel. \ Hondje op tafel.,,,syntax
+item_813,cmplx13,complexity,complexity,simple; complex,Dat mijn auto. \ Dat is mijn auto.,,,syntax
+item_814,cmplx14,complexity,complexity,simple; complex,Kindje wenen / huilen. \ Kindje weent / huilt.,,,syntax
+item_815,cmplx15,complexity,complexity,simple; complex,Jij maken? \ Kan jij het maken?,,,syntax
+item_816,cmplx16,complexity,complexity,simple; complex,Mama boekje lezen? \ Mama een boekje lezen?,,,syntax
+item_817,cmplx17,complexity,complexity,simple; complex,Pop niet gooien. \ Gooi de pop niet.,,,syntax
+item_818,cmplx18,complexity,complexity,simple; complex,Nog fruitsap. \ Fruitsap in beker.,,,syntax
+item_819,cmplx19,complexity,complexity,simple; complex,Daar poesje. \ Daar is een poesje.,,,syntax
+item_820,cmplx20,complexity,complexity,simple; complex,Dada gaan / Weggaan. \ Wil dada doen / Wil weggaan.,,,syntax
+item_821,cmplx21,complexity,complexity,simple; complex,Waar mama naar toe? \ Waar is mama naar toe?,,,syntax
+item_822,cmplx22,complexity,complexity,simple; complex,Vuur warm. \ Vuur is warm.,,,syntax
+item_823,cmplx23,complexity,complexity,simple; complex,Ik niet kunnen. \ Ik kan (dat) niet.,,,syntax
+item_824,cmplx24,complexity,complexity,simple; complex,Ik boekje lezen. \ Ik wil (een) boekje lezen.,,,syntax
+item_825,cmplx25,complexity,complexity,simple; complex,Boek niet lezen. \ Ik wil boek niet lezen.,,,syntax
+item_826,cmplx26,complexity,complexity,simple; complex,Ik wil dat. \ Ik wil wat jij hebt.,,,syntax
+item_827,cmplx27,complexity,complexity,simple; complex,Koek hebben. \ Koek en melk hebben.,,,syntax
+item_828,cmplx28,complexity,complexity,simple; complex,Koek mama. \ Koek voor mama.,,,syntax
+item_829,cmplx29,complexity,complexity,simple; complex,Kindje eten. \  Kindje wil eten.,,,syntax
+item_830,cmplx30,complexity,complexity,simple; complex,Kijken mij! \ Kijk ik springen!,,,syntax
+item_831,cmplx31,complexity,complexity,simple; complex,Kijk! \ Kijk wat ik heb!,,,syntax
+item_832,cmplx32,complexity,complexity,simple; complex,Wij hebben dit gemaakt. \ Ik en Jan hebben dit gemaakt.,,,syntax
+item_833,cmplx33,complexity,complexity,simple; complex,Ik zing liedje. \ Ik zing liedje voor jou.,,,syntax
+item_834,cmplx34,complexity,complexity,simple; complex,Baby weent / huilt. \ Baby weent / huilt omdat ze ziek is.,,,syntax
+item_835,cmplx35,complexity,complexity,simple; complex,"Licht(je) aan / Lampje aan. \ Doe het licht aan, dan kan ik zien",,,syntax
