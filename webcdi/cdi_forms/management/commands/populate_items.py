@@ -64,6 +64,7 @@ class Command(BaseCommand):
                 raise IOError("Instrument file must be a CSV.")
 
             for row in xrange(1, nrows):
+                #print(row)
                 row_values = get_row(row)
                 if len(row_values) > 1:
                     #print(row_values)
