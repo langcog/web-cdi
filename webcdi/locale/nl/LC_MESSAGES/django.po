@@ -1261,7 +1261,7 @@ msgstr "Is uw kind eerder of later geboren dan de uitgerekende datum?"
 
 #: cdi_forms/models.py:103
 msgid "By how many weeks? (round to the nearest week)"
-msgstr "Hoeveel weken? (Rond af naar de meest dichtbije week)"
+msgstr "Hoeveel weken? (Rond af naar de dichtbijzijnste week)"
 
 #: cdi_forms/models.py:103
 msgid "Number of weeks cannot be less than 1"
@@ -1297,15 +1297,15 @@ msgstr "Grootouder(s)"
 
 #: cdi_forms/models.py:124
 msgid "Primary Caregiver"
-msgstr "Hoofdverzorger"
+msgstr "Eerste verzorger"
 
 #: cdi_forms/models.py:126
 msgid "Primary Caregiver Year of birth"
-msgstr "Geboortedatum hoofdverzorger"
+msgstr "Geboortedatum eerste verzorger"
 
 #: cdi_forms/models.py:127
 msgid "Primary Caregiver Education"
-msgstr "Informatie hoofdverzorger"
+msgstr "Opleiding eerste verzorger"
 
 #: cdi_forms/models.py:127 cdi_forms/models.py:132
 msgid ""
@@ -1323,11 +1323,11 @@ msgstr "Geboortedatum tweede verzorger"
 
 #: cdi_forms/models.py:132
 msgid "Secondary Caregiver Education"
-msgstr "Informatie tweede verzorger"
+msgstr "Opleiding tweede verzorger"
 
 #: cdi_forms/models.py:134
 msgid "Estimated Annual Family Income (in USD)"
-msgstr "Geschat jaarlijks gezinsinkomen"
+msgstr "Gezinsinkomen (netto) per maand"
 
 #: cdi_forms/models.py:141
 msgid "Two parents"
@@ -1529,10 +1529,8 @@ msgid "Go back to Background Info"
 msgstr "Ga terug naar achtergrondinformatie"
 
 #: cdi_forms/templates/cdi_forms/backpage_info.html:27
-#, fuzzy
-#| msgid "Background Information"
 msgid "Background Information Continued"
-msgstr "Achtergrondinformatie"
+msgstr "Vervolg achtergrondinformatie"
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:50
 msgid "Instructions: "
@@ -1540,7 +1538,7 @@ msgstr "Instructies"
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:54
 msgid "This form can be filled any time before the due date."
-msgstr "Dit document kan op ieder moment voor de vervaldatum ingevuld worden"
+msgstr "Dit document kan op ieder moment voor de uiterlijke datum ingevuld worden"
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:55
 msgid ""
@@ -1559,14 +1557,14 @@ msgstr "Nadat het document is verstuurd, kan het niet meer veranderd worden"
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:57
 msgid "The form also cannot be altered after the due date."
-msgstr "Het document kan ook niet veranderd worden na de vervaldatum"
+msgstr "Het document kan ook niet veranderd worden na de uiterlijke datum van invullen"
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:58
 msgid ""
 "Please use the navigation buttons below. Do not use the \"back\" and "
 "\"forward\" buttons on your browser."
 msgstr ""
-"Gebruik a.u.b. de navigatieknoppen hieronder. Gebruik niet de \"terug\" en "
+"Gebruik a.u.b. de navigatieknoppen onder aan de pagina. Gebruik niet de \"terug\" en "
 "\"vooruit\" knoppen van uw browser"
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:59
@@ -1579,7 +1577,7 @@ msgstr ""
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:94
 msgid "Due date"
-msgstr "Vervaldatum"
+msgstr "Uiterlijk invullen voor"
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:99
 msgid "Show waiver of documentation"
@@ -1587,7 +1585,7 @@ msgstr "Laat toestemmingsverklaring zien"
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:104
 msgid "Reach out to the Web-CDI Team!"
-msgstr "Contacteer het Web-CDI Team!"
+msgstr "Neem contact op met het Web-CDI Team!"
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:138
 msgid "Waiver of Documentation of Informed Consent."
@@ -1599,17 +1597,18 @@ msgstr "Ik geef toestemming"
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:161
 msgid "Waiver Denied"
-msgstr "Toestemmingsverklaring"
+msgstr "Ik geef geen toestemming"
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:165
 msgid ""
 "Thank you for your response. We are unable to continue. Please close the "
 "window. If you would like, you may review the Waiver."
-msgstr ""
+msgstr "Dank u voor uw antwoord. U kunt het scherm sluiten."
+"Mocht u willen, kunt u de toestemmingsverklaring opnieuw bekijken."
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:168
 msgid "Review Waiver"
-msgstr ""
+msgstr "Toestemmingsverklaring opnieuw bekijken"
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:10
 #: cdi_forms/templates/cdi_forms/cdi_form.html:326
@@ -1637,7 +1636,7 @@ msgid ""
 "for children of many ages. Your child may not be able to understand or say a "
 "lot of the words on the form. That is perfectly fine!"
 msgstr ""
-"In dit gedeelte wordt u gevraagd om over woorden en zinnen te denken die uw "
+"In dit gedeelte wordt u gevraagd om na te denken over welke woorden en zinnen uw "
 "kind \"begrijpt\" en \"begrijpt en zegt.\" Deze vragenlijst is voor kinderen "
 "van verschillende leeftijden. Het kan zijn dat uw kind niet veel woorden "
 "begrijpt of zegt die in de vragenlijst worden genoemd. Dat is helemaal prima!"
@@ -1649,7 +1648,7 @@ msgid ""
 "examples."
 msgstr ""
 "Uw kind \"begrijpt\" een woord/zin als hij/zij weet wat dit woord/deze zin "
-"betekent, ook al kan hij/zij het zelf nog niet zeggen. Hier zijn een paar "
+"betekent, ook al kan hij/zij het zelf nog niet zeggen. Hierbeneden staan een paar "
 "voorbeelden."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:76
@@ -1661,7 +1660,7 @@ msgid ""
 "Your child responds appropriately to the word/phrase. For example, when you "
 "say \"Get the ball,\" s/he turns and tries to find the ball."
 msgstr ""
-"Uw kind reageert goed op een woord/zin. Bijvoorbeeld: als u \"Haal de bal\" "
+"Uw kind goed reageert op een woord/zin. Bijvoorbeeld, als u \"Pak de bal\" "
 "zegt en hij/zij probeert de bal te vinden."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:93
@@ -1684,7 +1683,7 @@ msgid ""
 "examples."
 msgstr ""
 "Uw kind \"begrijpt en zegt\" een woord/zin als hij/zij weet wat dit woord/"
-"deze zin betekent EN als ze dit woord/deze zin zelf kan zeggen. Hier zijn "
+"deze zin betekent EN als hij/zij dit woord/deze zin zelf kan zeggen. Hier zijn "
 "een paar voorbeelden"
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:117
@@ -1698,7 +1697,7 @@ msgid ""
 msgstr ""
 "Uw kind een woord/zin zegt wanneer hij/zij probeert een object te benoemen "
 "of een situatie probeert te beschrijven. U denkt dat hij/zij de betekenis "
-"voor dit woord/deze zin kent"
+"voor dit woord/deze zin kent."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:136
 msgid ""
@@ -1706,7 +1705,7 @@ msgid ""
 "\"special\" way."
 msgstr ""
 "Het is ook goed als uw kind niet het hele woord kan zeggen of als uw kind "
-"zijn/haar \"speciale\" manier heeft om het te zeggen"
+"zijn/haar \"speciale\" manier heeft om het te zeggen."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:138
 msgid "DO check \"understands and says.\""
@@ -1717,7 +1716,7 @@ msgid ""
 "DON'T check if your child is just stringing sounds together.  This is not a "
 "real word that means something."
 msgstr ""
-"Vink \"begrijpen en zegtgen\" NIET aan als uw kind alleen maar klanken "
+"Vink \"begrijpen en zeggen\" NIET aan als uw kind alleen maar klanken "
 "uitstoot. Dat is geen echt woord met een betekenis."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:157
@@ -1741,16 +1740,18 @@ msgid ""
 "be able to understand or say a lot of the words on the form. That is "
 "perfectly fine!"
 msgstr ""
-"In dit gedeelte wordt u gevraagd over woorden die uw kind \"begrijpt en zegt"
-"\". Uw kind \"begrijpt en zegt\" een woord van de vragenlijst als hij/zij "
-"weet wat dit woord betekent EN als hij/zij het woord zelf kan zeggen. Hier "
-"zijn een paar voorbeelden. Deze vragenlijst is voor kinderen van "
-"verschillende leeftijden. Het kan zijn dat uw kind niet veel woorden van de "
-"vragenlijst kan begrijpen of zeggen. Dat is helemaal prima!"
+"In dit gedeelte wordt u gevraagd om na te denken over welke woorden uw kind"
+"\"begrijpt\" of \"begrijpt en zegt\". Uw kind \"begrijpt\" een woord van de"
+"vragenlijst als hij/zij weet wat dit woord betekent. Uw kind \"begrijpt en zegt\""
+"een woord van de vragenlijst als hij/zij weet wat dit woord betekent EN als"
+"hij/zij het woord zelf kan zeggen. Hierbeneden zijn een paar voorbeelden."
+"Deze vragenlijst is voor kinderen van verschillende leeftijden. Het kan zijn"
+"dat uw kind niet veel woorden van de vragenlijst kan begrijpen of zeggen."
+"Dat is helemaal prima!"
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:205
 msgid "DO check the box if:"
-msgstr "Vink deze box WEL aan als:"
+msgstr "Vink \"begrijpen en zeggen\" WEL aan als:"
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:207
 msgid ""
@@ -1773,14 +1774,14 @@ msgstr ""
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:227
 msgid "DO check the box."
-msgstr "Vink deze box WEL aan."
+msgstr "Vink \"begrijpen en zeggen\" WEL aan."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:244
 msgid ""
 "DON'T check the box if your child is just stringing sounds together. This is "
 "not a real word that means something."
 msgstr ""
-"Vink deze box NIET aan als uw kind alleen maar klanken uitstoot. Dat is geen "
+"Vink \"begrijpen en zeggen\" NIET aan als uw kind alleen maar klanken uitstoot. Dat is geen "
 "echt woord met een betekenis."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:284
@@ -1940,7 +1941,7 @@ msgstr ""
 "ontwikkeling van uw kind, raden wij u aan om contact met uw huisarts op te "
 "nemen. Als u het leuk vond om de vragenlijst in te vullen, kunt u hier meer "
 "informatie over de CDI vinden <a href=\"http:// mb-cdi.stanford.edu/\" "
-"target=\"_blank\"here</a>. We waarderen uw deelname!"
+"target=\"_blank\">here</a>. We waarderen uw deelname!"
 
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:97
 #, python-format
