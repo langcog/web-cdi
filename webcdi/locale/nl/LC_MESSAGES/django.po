@@ -1935,7 +1935,7 @@ msgstr ""
 "Deze samenvatting is geen klinische evaluatie. Als u bezorgd bent over de "
 "ontwikkeling van uw kind, raden wij u aan om contact met uw huisarts op te "
 "nemen. Als u het leuk vond om de vragenlijst in te vullen, kunt u <a href="
-"\"http:// mb-cdi.stanford.edu/\" target=\"_blank\">hier</a> meer informatie "
+"\"http://mb-cdi.stanford.edu/\" target=\"_blank\">hier</a> meer informatie "
 "over de CDI vinden. We waarderen uw deelname!"
 
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:97
