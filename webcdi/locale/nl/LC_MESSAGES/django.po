@@ -35,39 +35,39 @@ msgstr "Zeg ik liever niet"
 
 #: cdi_forms/forms.py:29
 msgid "Under $25,000"
-msgstr "Onder €10,000"
+msgstr "Onder €25,000"
 
 #: cdi_forms/forms.py:30
 msgid "$25,000-$50,000"
-msgstr ""
+msgstr "€25,000-€50,000"
 
 #: cdi_forms/forms.py:31
 msgid "$50,000-$75,000"
-msgstr ""
+msgstr "€50,000-€75,000"
 
 #: cdi_forms/forms.py:32
 msgid "$75,000-$100,000"
-msgstr ""
+msgstr "€75,000-€100,000"
 
 #: cdi_forms/forms.py:33
 msgid "$100,000-$125,000"
-msgstr ""
+msgstr "€100,000-€125,000"
 
 #: cdi_forms/forms.py:34
 msgid "$125,000-$150,000"
-msgstr ""
+msgstr "€125,000-€150,000"
 
 #: cdi_forms/forms.py:35
 msgid "$150,000-$175,000"
-msgstr ""
+msgstr "€150,000-€175,000"
 
 #: cdi_forms/forms.py:36
 msgid "$175,000-$200,000"
-msgstr ""
+msgstr "€175,000-€200,000"
 
 #: cdi_forms/forms.py:37
 msgid "Over $200,000"
-msgstr " "
+msgstr "Meer dan €200,000"
 
 #: cdi_forms/forms.py:41
 msgid "American Indian / Alaska Native"
@@ -92,7 +92,7 @@ msgstr "Blank"
 #: cdi_forms/forms.py:46 cdi_forms/models.py:66 cdi_forms/models.py:121
 #: cdi_forms/models.py:182
 msgid "Other"
-msgstr "Andere"
+msgstr "Anders"
 
 #: cdi_forms/forms.py:51
 msgid "Less than 3 lbs, 0 oz"
@@ -228,7 +228,7 @@ msgid ""
 "record age in months."
 msgstr ""
 "Om uw privacy te beschermen slaan wij de geboortedatum van uw kind niet op, "
-"we noteren alleen de leeftijd in maanden"
+"we noteren alleen de leeftijd in maanden."
 
 #: cdi_forms/forms.py:109
 msgid "Child DOB<span class=\"asteriskField\">*</span>"
@@ -242,7 +242,7 @@ msgstr "leeftijd (in maanden)<span class=\"asteriskField\">*</span>"
 msgid "This field will update when you enter or change your child's DOB."
 msgstr ""
 "Dit veld wordt bijgewerkt als u de geboortedatum van uw kind invoert of "
-"verandert"
+"verandert."
 
 #: cdi_forms/forms.py:126
 msgid "What is your postal/zip code?"
@@ -282,7 +282,7 @@ msgstr "Geslacht"
 
 #: cdi_forms/forms.py:154
 msgid "Which language(s)"
-msgstr "Welke talen?"
+msgstr "Welke taal/talen?"
 
 #: cdi_forms/forms.py:160 cdi_forms/forms.py:166 cdi_forms/forms.py:172
 msgid "Please specify"
@@ -306,11 +306,11 @@ msgstr "Voer de geboortedatum van uw kind in het vak hierboven in."
 
 #: cdi_forms/forms.py:223
 msgid "Your baby is too young for this version of the CDI."
-msgstr "Uw kind is te jong voor deze versie van de CDI"
+msgstr "Uw kind is te jong voor deze versie van de CDI."
 
 #: cdi_forms/forms.py:225
 msgid "Your baby is too old for this version of the CDI."
-msgstr "Uw kind is te oud voor deze versie van de CDI"
+msgstr "Uw kind is te oud voor deze versie van de CDI."
 
 #: cdi_forms/forms.py:252 cdi_forms/forms.py:253 cdi_forms/models.py:98
 #: cdi_forms/models.py:99
@@ -319,15 +319,15 @@ msgstr "Geboortegewicht"
 
 #: cdi_forms/forms.py:262 cdi_forms/models.py:95
 msgid "Was your child born as part of a multiple birth?"
-msgstr "Is uw kind een van een meerling"
+msgstr "Is uw kind een van een meerling?"
 
 #: cdi_forms/forms.py:269
 msgid ""
 "Was your child born early or late (more than one week before or after the "
 "due date)?"
 msgstr ""
-"Is uw kind te vroeg of te laat geboren? (meer dan een week voor of na de "
-"uitgerekende datum?)"
+"Is uw kind te vroeg of te laat geboren (meer dan een week voor of na de "
+"uitgerekende datum)?"
 
 #: cdi_forms/forms.py:275
 msgid "Does your child regularly hear a language other than English?"
@@ -335,7 +335,7 @@ msgstr "Hoort uw kind regelmatig een andere taal dan Nederlands?"
 
 #: cdi_forms/forms.py:281
 msgid "Has your child experienced chronic ear infections (5 or more)?"
-msgstr "Heeft uw kind een chronische oorontsteking gehad? (5 of meer)"
+msgstr "Heeft uw kind een chronische oorontsteking gehad (5 of meer)?"
 
 #: cdi_forms/forms.py:287 cdi_forms/models.py:159
 msgid "Do you suspect that your child may have hearing loss?"
@@ -345,37 +345,36 @@ msgstr "Verwacht u dat uw kind last heeft van slechthorendheid?"
 msgid ""
 "Is there some reason to suspect that your child may have vision problems?"
 msgstr ""
-"Zijn er redenen om te verwachten dat uw kind visuele beperkingen heeft?"
+"Heeft uw kind oogproblemen?"
 
 #: cdi_forms/forms.py:299 cdi_forms/models.py:165
 msgid ""
 "Has your child had any major illnesses, hospitalizations, or diagnosed "
 "disabilities?"
 msgstr ""
-"Heeft uw kind ernstige ziektes, ziekenhuisopnames, of gediagnosticeerde "
-"beperkingen gehad?"
+"Zijn er bijzonderheden in de ontwikkeling van uw kind? (bijv. met bewegen, "
+"in het gedrag, lichamelijk enz.)"
 
 #: cdi_forms/forms.py:305 cdi_forms/models.py:168
 msgid ""
 "Has your child ever received any services for speech, language, or "
 "development issues?"
 msgstr ""
-"Is uw kind ooit behandeld voor spraak-, taal-, of ontwikkelingsproblemen? "
+"Is uw kind ooit behandeld voor spraak-, taal-, of ontwikkelingsproblemen?"
 
 #: cdi_forms/forms.py:311 cdi_forms/models.py:171
 msgid ""
 "Are you worried about your child's progress in language or communication?"
 msgstr ""
-"Maakt u zich zorgen over de ontwikkeling van de taalvaardigheid of "
-"communicatieve vaardigheden van uw kind?"
+"Zijn er zorgen (geweest) over hoe uw kind communiceert (praten, luisteren en reageren)?"
 
 #: cdi_forms/forms.py:317 cdi_forms/models.py:174
 msgid ""
 "Have you or anyone in your immediate family been diagnosed with a language "
 "or learning disability?"
 msgstr ""
-"Is er iemand in het gezin van het kind met een taalprobleem of "
-"leerachterstand"
+"Is er iemand in het gezin van het kind (alleen biologische broers / zussen / "
+"ouders) met een spraak / taalprobleem of dyslexie?"
 
 #: cdi_forms/forms.py:337
 msgid "mm/dd/yyyy"
@@ -407,7 +406,7 @@ msgstr ""
 "De volgende informatie wordt alleen verzameld voor ons beurs verlenend "
 "instituut. bijv. NIH (National Institute of Health). NIH vereist deze "
 "informatie nodig om de correctheid en inclusiviteit van ons onderzoek te "
-"garanderen. Uw medewerking wordt gewaardeerd, maar is vrijwillig "
+"garanderen. Uw medewerking wordt gewaardeerd, maar is vrijwillig."
 
 #: cdi_forms/forms.py:408
 msgid "Caregiver Information"
@@ -1249,7 +1248,7 @@ msgstr "Vijfling of meer"
 
 #: cdi_forms/models.py:96
 msgid "Twins, triplets, quadruplets, other?"
-msgstr "Tweeling, drieling, vierling, andere?"
+msgstr "Tweeling, drieling, vierling, anders?"
 
 #: cdi_forms/models.py:101
 msgid "Was your child born earlier or later than their due date?"
@@ -1351,7 +1350,7 @@ msgstr "Van wie?"
 
 #: cdi_forms/models.py:153
 msgid "How many days per week is the child exposed to these languages?"
-msgstr "Hoeveel dagen per week is het kind blootgesteld aan deze talen?"
+msgstr "Hoeveel dagen per week is het kind blootgesteld aan deze taal/talen?"
 
 #: cdi_forms/models.py:153
 msgid "Number of days per week cannot exceed 7"
@@ -1363,7 +1362,7 @@ msgstr "Aantal dagen kan niet lager zijn dan 1"
 
 #: cdi_forms/models.py:154
 msgid "How many hours per day is the child exposed to these languages?"
-msgstr "Hoeveel uur per dag is het kind blootgesteld aan deze talen?"
+msgstr "Hoeveel uur per dag is het kind blootgesteld aan deze taal/talen?"
 
 #: cdi_forms/models.py:154
 msgid "Number of hours per day cannot exceed 24"
@@ -1508,7 +1507,7 @@ msgstr "De vragenlijst is niet beschikbaar. Neem contact op met de beheerder."
 #: cdi_forms/templates/cdi_forms/backpage_info.html:8
 #: cdi_forms/templates/cdi_forms/backpage_info.html:35 cdi_forms/views.py:244
 msgid "Finish"
-msgstr "Spaans"
+msgstr "Afronden"
 
 #: cdi_forms/templates/cdi_forms/backpage_info.html:12
 #: cdi_forms/templates/cdi_forms/cdi_form.html:14
@@ -1577,7 +1576,7 @@ msgstr "Laat toestemmingsverklaring zien"
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:104
 msgid "Reach out to the Web-CDI Team!"
-msgstr "Neem contact op met het Web-CDI Team!"
+msgstr "Neem contact op met het Web-CDI Team"
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:138
 msgid "Waiver of Documentation of Informed Consent."
@@ -1596,7 +1595,7 @@ msgid ""
 "Thank you for your response. We are unable to continue. Please close the "
 "window. If you would like, you may review the Waiver."
 msgstr ""
-"Dank u voor uw antwoord. U kunt het scherm sluiten.U kunt de "
+"Dank u voor uw antwoord. U kunt het scherm sluiten. U kunt de "
 "toestemmingsverklaring opnieuw bekijken, mocht u dat willen."
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:168
@@ -1836,7 +1835,7 @@ msgstr "Volgende Pagina"
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:333
 msgid "Don't forget to save your progress whenever you can!"
-msgstr "Vergeet niet uw voortgang op te slaan als dit mogelijk is!"
+msgstr "Vergeet niet uw voortgang tussendoor op te slaan."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:379
 msgid ""
@@ -1977,7 +1976,7 @@ msgid ""
 "\">www.amazon.com/redeem</a>. Restrictions apply, see <a href=\"%(legal_url)s"
 "\" target=\"_blank\">www.amazon.com/gc-legal</a>."
 msgstr ""
-"kijk op <a href=\"%(redeem_url)s\" target=\"_blank\">%(redeem_url)s</a> om "
+"Kijk op <a href=\"%(redeem_url)s\" target=\"_blank\">%(redeem_url)s</a> om "
 "uw cadeaubon in te leveren. Kijk op <a href=\"%(legal_url)s\" target=\"_blank"
 "\">%(legal_url)s\" target=\"_blank\">www.amazon.com/gc-legal</a> voor "
 "restricties."
@@ -2004,7 +2003,7 @@ msgstr "Mijn kind zegt PPP woorden."
 
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:253
 msgid "My child understands UUU words."
-msgstr "Mijn kind begrijpt UUU woorden"
+msgstr "Mijn kind begrijpt UUU woorden."
 
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:304
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:306
@@ -2028,12 +2027,12 @@ msgstr "Percentage woorden wat uw kind kan zeggen (%%)"
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:512
 msgid "My child produces the most words in the bestProdCat category."
 msgstr ""
-"Mijn kind zegt het grootste aantal woorden van de bestProdCat categorie."
+"Mijn kind zegt de meeste woorden van de bestProdCat categorie."
 
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:516
 msgid "My child understands the most words in the bestCompCat category."
 msgstr ""
-"Mijn kind begrijpt het grootste aantal woorden van de bestCompCat categorie."
+"Mijn kind begrijpt de meeste woorden van de bestCompCat categorie."
 
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:602
 msgid "The hardest word my child says is INSERTWORDHERE."
@@ -2560,19 +2559,19 @@ msgid "Dutch"
 msgstr "Nederlands"
 
 #~ msgid "My child is (check all that apply):"
-#~ msgstr "Mijn kind is (vink alles aan wat van toepassing is)"
+#~ msgstr "Mijn kind is (vink alles aan wat van toepassing is):"
 
 #~ msgid "Mother / Parent or Guardian 1 Year of birth"
 #~ msgstr "Moeder / Ouder of voogd 1 Geboortejaar"
 
 #~ msgid "Mother / Parent or Guardian 1 Education"
-#~ msgstr "Moeder / Ouder of voogd 1 Onderwijs/Opleidingsniveau"
+#~ msgstr "Moeder / Ouder of voogd 1 Onderwijs / Opleidingsniveau"
 
 #~ msgid "Father / Parent or Guardian 2 Year of birth"
 #~ msgstr "Vader / Ouder of voogd 2 Geboortejaar"
 
 #~ msgid "Father / Parent or Guardian 2 Education"
-#~ msgstr "Vader / Ouder of voogd 2 Onderwijs/Opleidingsniveau"
+#~ msgstr "Vader / Ouder of voogd 2 Onderwijs / Opleidingsniveau"
 
 #~ msgid "Over "
 #~ msgstr "Boven"
