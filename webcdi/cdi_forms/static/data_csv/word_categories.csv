@@ -1,30 +1,30 @@
-id,English_WG,English_WS,Spanish_WG,Spanish_WS,French_Quebec_WG,French_Quebec_WS,Dutch_WS,Dutch_WG,English_CDI3
-action_words,Action Words,Action Words,Acciones y Procesos (Verbos),Acciones y Procesos (Verbos),Verbes D’action,Verbes,Actie Woorden,Actie Woorden
-animals,Animals (Real Or Toy),Animals (Real Or Toy),Animales (de Verdad y de Juguete),Animales (de Verdad y de Juguete),Animaux (réels ou jouets),Animaux (réels ou jouets),Dieren,Dieren
-articles,,,Artículos,,,,Artikelen,Artikelen
-body_parts,Body Parts,Body Parts,Partes del Cuerpo,Partes del Cuerpo,Parties du Corps,Parties du Corps,Lichaamsdelen,Lichaamsdelen
-clothing,Clothing,Clothing,Ropa,Ropa,Vêtements,Vêtements,Kleding,Kleding
-connecting_words,,Connecting Words,,Conectivos,,Conjonctions,Verbindende Woorden,Verbindende Woorden
-descriptive_words,Descriptive Words,Descriptive Words,Cualidades y Atributos,Cualidades y Atributos,Mots Descriptifs,Mots Descriptifs,Beschrijvende Woorden,Beschrijvende Woorden
-food_drink,Food And Drink,Food And Drink,Alimentos y Bebidas,Alimentos y Bebidas,Nourriture et Boissons,Nourriture et Boissons,Eten en Drinken,Eten en Drinken
-furniture_rooms,Furniture And Rooms,Furniture And Rooms,Muebles y Cuartos,Muebles y Cuartos,Meubles et Pièces,Meubles et Pièces,Meubels en Kamers,Meubels en Kamers
-games_routines,Games And Routines,Games And Routines,"Rutina Diaria, Reglas Sociales y Juegos","Rutina Diaria, Reglas Sociales y Juegos",Jeux et Routines,Jeux et Routines,Spellen en Routines,Spellen en Routines
-helping_verbs,,Helping Verbs,,,,,Helpende Werkwoorden,Helpende Werkwoorden
-household,Small Household Items,Small Household Items,Utensilios de la Casa,Utensilios de la Casa,Petits Articles Ménagers,Petits Articles Ménagers,Kleine Huishoudelijke Artikelen,Kleine Huishoudelijke Artikelen
-locations,Prepositions And Locations,Prepositions and Locations,Locativos,Locativos,"Prépositions, Adverbes et Termes Locatifs",Prépositions et Termes Locatifs,Voorzetsels en Locaties,Voorzetsels en Locaties
-outside,Outside Things And Places to Go,Outside Things,Lugares y Objetos Fuera de la Casa,Objetos Fuera de la Casa,Choses de L’extérieur et Endroits où Aller,Choses de L’extérieur,Buiten Dingen,Buiten Dingen
-outside_places,Outside Things And Places to Go,Outside Things,Lugares y Objetos Fuera de la Casa,Objetos Fuera de la Casa,Choses de L’extérieur et Endroits où Aller,Choses de L’extérieur,Buiten Dingen,Buiten Dingen
-people,People,People,Personas,Personas,Gens,Gens,Mensen,Mensen
-places,,Places to Go,,Lugares Fuera de la Casa,,Endroits où Aller,Plaatsen om Naartoe te Gaan,Plaatsen om Naartoe te Gaan
-prepositions,,,Preposiciones,Preposiciones y Artículos,,,Voorzetsels,Voorzetsels
-pronouns,Pronouns,Pronouns,Pronombres,Pronombres y Modificadores,Pronoms,Pronoms,Voornaamwoorden,Voornaamwoorden
-quantifiers,Quantifiers And Articles,Quantifiers And Articles,Cuantificadores y Adverbios,Cuantificadores y Adverbios,Quantificateurs,Quantificateurs et Articles,Kwantificatoren en Artikelen,Kwantificatoren en Artikelen
-question_words,Question Words,Question Words,Preguntas,Preguntas,Mots D’interrogation,Mots D’interrogation,Vraagwoorden,Vraagwoorden
-sounds,Sound Effects And Animal Sounds,Sound Effects And Animal Sounds,Sonidos de Cosas y Animales,Sonidos de Cosas y Animales,Effets Sonores et Sons D’animaux,Effets Sonores et Sons D’animaux,Geluidseffecten en Dierengeluiden,Geluidseffecten en Dierengeluiden
-states,,,Estados,Estados,,,,
-time_words,Words about Time,Words about Time,Tiempo,Tiempo,Mots pour Parler du Temps,Mots pour Parler du Temps,Woorden over Tijd,Woorden over Tijd
-toys,Toys,Toys,Juguetes,Juguetes,Jouets,Jouets,Speelgoed,Speelgoed
-vehicles,Vehicles (Real Or Toy),Vehicles (Real Or Toy),Vehículos (de Verdad y de Juguete),Vehículos (de Verdad y de Juguete),Véhicules (réels ou jouets),Véhicules (réels ou jouets),Voertuigen,Voertuigen
+id,English_WG,English_WS,Spanish_WG,Spanish_WS,French_Quebec_WG,French_Quebec_WS,Dutch_WG,Dutch_WS,English_CDI3
+action_words,Action Words,Action Words,Acciones y Procesos (Verbos),Acciones y Procesos (Verbos),Verbes D’action,Verbes,Werkwoorden,Werkwoorden,
+animals,Animals (Real Or Toy),Animals (Real Or Toy),Animales (de Verdad y de Juguete),Animales (de Verdad y de Juguete),Animaux (réels ou jouets),Animaux (réels ou jouets),Dierennamen,Dierennamen,
+articles,,,Artículos,,,,,,
+body_parts,Body Parts,Body Parts,Partes del Cuerpo,Partes del Cuerpo,Parties du Corps,Parties du Corps,Delen van het lichaam,Delen van het lichaam,
+clothing,Clothing,Clothing,Ropa,Ropa,Vêtements,Vêtements,Kleding,Kleding,
+connecting_words,,Connecting Words,,Conectivos,,Conjonctions,,Voegwoorden,
+descriptive_words,Descriptive Words,Descriptive Words,Cualidades y Atributos,Cualidades y Atributos,Mots Descriptifs,Mots Descriptifs,Omschrijvende woorden,Omschrijvende woorden,
+food_drink,Food And Drink,Food And Drink,Alimentos y Bebidas,Alimentos y Bebidas,Nourriture et Boissons,Nourriture et Boissons,Eten en drinken,Eten en drinken,
+furniture_rooms,Furniture And Rooms,Furniture And Rooms,Muebles y Cuartos,Muebles y Cuartos,Meubles et Pièces,Meubles et Pièces,Meubels en kamers,Meubels en kamers,
+games_routines,Games And Routines,Games And Routines,"Rutina Diaria, Reglas Sociales y Juegos","Rutina Diaria, Reglas Sociales y Juegos",Jeux et Routines,Jeux et Routines,Spelletjes en routines,Spelletjes en routines,
+helping_verbs,,Helping Verbs,,,,,,Hulpwerkwoorden,
+household,Small Household Items,Small Household Items,Utensilios de la Casa,Utensilios de la Casa,Petits Articles Ménagers,Petits Articles Ménagers,Kleine huishoudelijke voorwerpen,Kleine huishoudelijke voorwerpen,
+locations,Prepositions And Locations,Prepositions and Locations,Locativos,Locativos,"Prépositions, Adverbes et Termes Locatifs",Prépositions et Termes Locatifs,Voorzetsels en plaatsbepalingen,,
+outside,Outside Things And Places to Go,Outside Things,Lugares y Objetos Fuera de la Casa,Objetos Fuera de la Casa,Choses de L’extérieur et Endroits où Aller,Choses de L’extérieur,,Voorwerpen buitenshuis,
+outside_places,Outside Things And Places to Go,Outside Things,Lugares y Objetos Fuera de la Casa,Objetos Fuera de la Casa,Choses de L’extérieur et Endroits où Aller,Choses de L’extérieur,Voorwerpen en plaatsen buitenshuis,,
+people,People,People,Personas,Personas,Gens,Gens,Mensen,Mensen,
+places,,Places to Go,,Lugares Fuera de la Casa,,Endroits où Aller,,Plaatsen buitenshuis,
+prepositions,,,Preposiciones,Preposiciones y Artículos,,,,Voorzetsels en plaatsbepalingen,
+pronouns,Pronouns,Pronouns,Pronombres,Pronombres y Modificadores,Pronoms,Pronoms,Voornaamwoorden,Voornaamwoorden,
+quantifiers,Quantifiers And Articles,Quantifiers And Articles,Cuantificadores y Adverbios,Cuantificadores y Adverbios,Quantificateurs,Quantificateurs et Articles,Hoeveelheden,Hoeveelheden en lidwoorden,
+question_words,Question Words,Question Words,Preguntas,Preguntas,Mots D’interrogation,Mots D’interrogation,Vragende woordjes,Vragende woordjes,
+sounds,Sound Effects And Animal Sounds,Sound Effects And Animal Sounds,Sonidos de Cosas y Animales,Sonidos de Cosas y Animales,Effets Sonores et Sons D’animaux,Effets Sonores et Sons D’animaux,Geluidseffecten en dierengeluiden,Geluidseffecten en dierengeluiden,
+states,,,Estados,Estados,,,,,
+time_words,Words about Time,Words about Time,Tiempo,Tiempo,Mots pour Parler du Temps,Mots pour Parler du Temps,Woorden over tijd,Woorden over tijd,
+toys,Toys,Toys,Juguetes,Juguetes,Jouets,Jouets,Speelgoed,Speelgoed,
+vehicles,Vehicles (Real Or Toy),Vehicles (Real Or Toy),Vehículos (de Verdad y de Juguete),Vehículos (de Verdad y de Juguete),Véhicules (réels ou jouets),Véhicules (réels ou jouets),Voertuigen,Voertuigen,
 col_1,,,,,,,,,Section 1
 col_2,,,,,,,,,Section 2
 col_3,,,,,,,,,Section 3
