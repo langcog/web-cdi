@@ -283,6 +283,8 @@
         // If child only had responses of one type (all words are 'understands' or all words are 'produces'), produce 1 graph and double its width
         d3.csv("{% static 'data_csv/word_categories.csv' %}", function(data) {
             word_categories = data;
+            console.log('Categories: ', word_categories)
+            console.log('Categorie Size: ', categorySize)
             var list_names = objectMap(categorySize,'key')
             console.log('List Name: ', list_names)
             updateCategoryInfo();
