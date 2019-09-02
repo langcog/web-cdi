@@ -628,5 +628,17 @@ $(document).ready(function () {
     </script>
 {% endif %}
 
+<script>
+$(':radio').on('click', function(){
+    //Make radio buttons uncheckable
+    if ($(this).hasClass('imChecked')){
+        $(this).removeClass('imChecked');
+        $(this).prop('checked', false)
+    } else {
+        $(this).addClass('imChecked');
+        $(this).prop('checked', true)
+    }
+})
 
+</script>
 {% endblock %}
