@@ -65,8 +65,8 @@ def download_data(request, study_obj, administrations = None): # Download study 
 
     # Change column headers from item ID to item's definition - note: should be gloss for comparison across languages
     
-    new_headers = Instrument_Forms.objects.values('itemID', 'definition', 'gloss').filter(instrument=study_obj.instrument).distinct()
-    new_headers = {x['itemID'] : x['definition'] if len(x['definition']) > 0 else x['itemID'] for x in new_headers}
+    new_headers = Instrument_Forms.objects.values('itemID', 'item').filter(instrument=study_obj.instrument).distinct()
+    new_headers = {x['itemID'] : x['item'] for x in new_headers}
     model_header = [new_headers.get(n, n) for n in model_header]
     
     melted_answers.rename(columns=new_headers, inplace=True)
