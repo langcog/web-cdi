@@ -1745,17 +1745,16 @@ msgstr ""
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:205
 msgid "DO check the box if:"
-msgstr "Vink \"begrijpen\" WEL aan als uw kind goed reageert op een woord/zin. "
-"Bijvoorbeeld, als u \"Pak de bal\" zegt en hij/zij probeert de bal te vinden."
+msgstr "Vink \"begrijpen en zeggen\" WEL aan als:"
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:207
 msgid ""
 "Your child says the word when trying to name an object or describe something "
 "that happened.  You think s/he has a meaning for that word."
 msgstr ""
-"Vink \"begrijpen\" NIET aan als uw kind de betekenis van een woord/zin niet "
-"weet. Hij/zij heeft het woord eventueel al eerder gehoord, bijvoorbeeld in "
-"een verhaal, maar weet niet wat het betekent."
+"Uw kind het woord zegt wanneer hij/zij probeert een object te benoemen of "
+"een situatie te beschrijven. U denkt dat hij/zij de betekenis van het woord "
+"kent."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:225
 msgid ""
@@ -1763,16 +1762,13 @@ msgid ""
 "\"special\" way. If you use another word in your family (e.g., Nana for "
 "Grandma), that is ok too!"
 msgstr ""
-"Vink \"begrijpen en zeggen\" WEL aan als uw kind een woord/zin zegt wanneer "
-"hij/zij probeert een object te benoemen of een situatie probeert te "
-"beschrijven. U denkt dat hij/zij de betekenis voor dit woord/deze zin kent."
+"Het is ook goed als uw kind niet het hele woord kan zeggen of als uw kind "
+"zijn/haar \"speciale\" manier heeft om het te zeggen. Als u een ander woord "
+"gebruikt in uw familie (bijv. omi in plaats van oma) is dat ook goed."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:227
 msgid "DO check the box."
-msgstr "Het is ook goed als uw kind niet het hele woord kan zeggen of als uw "
-"kind zijn/haar \"speciale\" manier heeft om het te zeggen. Als u een ander "
-"woord gebruikt in uw familie (bijv. omi in plaats van oma) is dat ook goed. "
-"Vink \"begrijpen en zeggen\" dan WEL aan."
+msgstr "Vink \"begrijpen en zeggen\" WEL aan."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:244
 msgid ""
