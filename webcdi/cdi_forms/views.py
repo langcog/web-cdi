@@ -126,7 +126,8 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
         data['study_waiver'] = self.administration_instance.study.waiver
         data['allow_payment'] = self.administration_instance.study.allow_payment
         data['hint'] = _("Your child should be between %(min_age)d to %(max_age)d months of age.") % {"min_age": data['min_age'], "max_age": data['max_age']}
-        
+        data['form'] = self.administration_instance.study.instrument.form
+
         if data['allow_payment'] and self.administration_instance.bypass is None:
             try:
                 data['gift_amount'] = payment_code.objects.filter(study = self.administration_instance.study).values_list('gift_amount', flat=True).first()

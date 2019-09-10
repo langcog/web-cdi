@@ -12,7 +12,6 @@
 {% block main %}
 
 {% if background_form %}
-{{ background_form.errors }}
     <input type="hidden" name="background-info-form" value="background-info-form"/>{% csrf_token %}
 
 <div class="row">

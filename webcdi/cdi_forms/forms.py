@@ -400,7 +400,9 @@ class BackgroundForm(BetterModelForm):
             self.fields['birth_weight_kg'].widget=forms.Select()
             self.fields['birth_weight_kg'].widget.choices = BIRTH_WEIGHT_KG_CHOICES
             self.fields['annual_income'] = forms.ChoiceField(choices = INCOME_CHOICES)
-            
+            self.fields['annual_income'].label = _('Estimated Annual Family Income (in USD)')
+            self.fields['child_ethnicity'].label = _("Child's Ethnicity")
+
             self.helper.layout = Layout(
                 Fieldset( _('Basic Information'), Field('form_filler', css_class='enabler'), Div('form_filler_other', css_class='dependent'), 'child_dob','age', 'sex', Field('country', css_class='enabler'), Div('zip_code', css_class='dependent'),'birth_order', Field('multi_birth_boolean', css_class='enabler'), Div('multi_birth', css_class='dependent'), self.birth_weight_field, Field('born_on_due_date', css_class='enabler'), Div('early_or_late', 'due_date_diff', css_class='dependent')),
                 Fieldset( _('Family Background'), Field('primary_caregiver', css_class='enabler'), Div('primary_caregiver_other', css_class='dependent'), 'mother_yob', 'mother_education',Field('secondary_caregiver', css_class='enabler'), Div('secondary_caregiver_other', css_class='dependent'), 'father_yob', 'father_education', 'annual_income'),
