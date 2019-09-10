@@ -427,6 +427,10 @@ def download_summary(request, study_obj, administrations = None): # Download stu
 
     # Organize columns  
     combined_data = combined_data[admin_header + background_header + score_header]
+    combined_data = combined_data.replace('nan', '', regex=True)
+    combined_data = combined_data.replace('None', '', regex=True)
+    combined_data['child_ethnicity'].replace('[]', '', inplace=True)
+    combined_data['other_languages'].replace('[]', '', inplace=True)
     
     # Turn pandas dataframe into a CSV
     combined_data.to_csv(response, encoding='utf-8', index=False)
