@@ -253,7 +253,7 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
                     request.method = "GET"
                     background_instance = BackgroundInfo.objects.get(administration = self.administration_instance) 
                     return redirect('background-info', pk=background_instance.pk) 
-            else : print (self.background_form.errors)
+            #else : print (self.background_form.errors)
 
         response = render(request, self.template_name, self.get_context_data()) # Render template   
         response.set_cookie(settings.LANGUAGE_COOKIE_NAME, self.user_language)
