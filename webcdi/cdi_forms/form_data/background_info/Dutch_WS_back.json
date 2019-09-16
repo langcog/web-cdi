@@ -7,22 +7,22 @@
       },
       {
           "field":"birth_weight_kg",
-          "widget_type": "Select",
+          "widget_type":"Select",
           "choices":[
           {
                "key" : "",
                "value" : "--------"
           },{
-              "key":2.5,
+              "key":"2.5 kg",
               "value":"2.5 kg of minder"
           },{
-              "key":2.6,
+              "key":"2.6 to 4.5 kg",
               "value":"2.6 kg tot 4.5 kg"
           },{
-              "key":4.6,
+              "key":"4.6 kg",
               "value":"4.6 kg of meer"
           },{
-              "key":0,
+              "key":"Prefer not to disclose",
               "value":"Zeg ik liever niet /  weet ik niet (meer)"
           }
           ]
@@ -59,9 +59,26 @@
           "field":"birth_order"
       },
       {
-          "field":"multi_birth_boolean",
-          "div":["multi_birth"]
+          "field":"multiple_birth_boolean",
+          "div":["multiple_birth"]
       }    
+      ]
+},{
+  "fieldset":"De omgeving van het kind",
+  "fields":[
+      {
+          "field":"caregiver_info"
+      },
+      {
+          "field":"other_languages_boolean",
+          "divs":[
+          {
+              "field":"other_languages",
+              "css":"make-selectize",
+              "div":["language_from","language_days_per_week","language_hours_per_day"]
+          }
+          ]
+      }
       ]
 },{
   "fieldset":"De ouders van het kind",
@@ -72,45 +89,46 @@
       },
       {
           "field":"mother_yob"
-      },{
-        "field":"mother_education",
-        "choices":[
-            {
-                "key" : "",
-                "value" : "--------"
-            },{
-                "key":16,
-                "value":"Basisonderwijs"
-            },{
-                "key":17,
-                "value":"VMBO/MAVO"
-            },{
-                "key":18,
-                "value":"HAVO"
-            },{
-                "key":19,
-                "value":"VWO"
-            },{
-                "key":20,
-                "value":"MBO"
-            },{
-                "key":21,
-                "value":"HBO"
-            },{
-                "key":22,
-                "value":"WO Bachelor"
-            },{
-                "key":23,
-                "value":"WO Master of hoger"
-            },{
-                "key":0,
-                "value":"Zeg ik liever niet"
-            }
-        ],
-        "help":"Selecteer de hoogst afgeronde opleiding"
-    },
+      },
       {
-          "field":"secondary_caregiver",
+          "field":"mother_education",
+          "choices":[
+              {
+                  "key" : "",
+                  "value" : "--------"
+              },{
+                  "key":8,
+                  "value":"Basisonderwijs"
+              },{
+                  "key":12,
+                  "value":"VMBO/MAVO"
+              },{
+                  "key":13,
+                  "value":"HAVO"
+              },{
+                  "key":14,
+                  "value":"VWO"
+              },{
+                  "key":15,
+                  "value":"MBO"
+              },{
+                  "key":16,
+                  "value":"HBO"
+              },{
+                  "key":17,
+                  "value":"WO Bachelor"
+              },{
+                  "key":18,
+                  "value":"WO Master of hoger"
+              },{
+                  "key":0,
+                  "value":"Zeg ik liever niet"
+              }
+          ],
+          "help":"Selecteer de hoogst afgeronde opleiding"
+      },
+      {
+          "field":"secondaty_caregiver",
           "div":["secondary_caregiver_other"]
       },
       {
@@ -122,28 +140,28 @@
                   "key" : "",
                   "value" : "--------"
               },{
-                  "key":16,
+                  "key":8,
                   "value":"Basisonderwijs"
               },{
-                  "key":17,
+                  "key":12,
                   "value":"VMBO/MAVO"
               },{
-                  "key":18,
+                  "key":13,
                   "value":"HAVO"
               },{
-                  "key":19,
+                  "key":14,
                   "value":"VWO"
               },{
-                  "key":20,
+                  "key":15,
                   "value":"MBO"
               },{
-                  "key":21,
+                  "key":16,
                   "value":"HBO"
               },{
-                  "key":22,
+                  "key":17,
                   "value":"WO Bachelor"
               },{
-                  "key":23,
+                  "key":18,
                   "value":"WO Master of hoger"
               },{
                   "key":0,
@@ -155,10 +173,10 @@
           "field":"annual_income",
           "widget_type":"Select",
           "choices":[
-            {
-                "key" : "",
-                "value" : "--------"
-            },{
+              {
+                  "key" : "",
+                  "value" : "--------"
+              },{
                   "key" : "0-2000",
                   "value" : "€0 - €2000"
               },{
@@ -176,23 +194,6 @@
               }
           ],
           "help":"Wat is het totale maandelijkse besteedbare gezinsinkomen (netto) in het huishouden van uw kind? Tel hierbij ook alle toeslagen en uitkeringen die u krijgt (bijv. kinderbijslag)."
-      }
-      ]
-},{
-  "fieldset":"De omgeving van het kind",
-  "fields":[
-      {
-          "field":"caregiver_info"
-      },
-      {
-          "field":"other_languages_boolean",
-          "divs":[
-          {
-              "field":"other_languages",
-              "css":"make-selectize",
-              "div":["language_from","language_days_per_week","language_hours_per_day"]
-          }
-          ]
       }
       ]
 }

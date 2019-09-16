@@ -232,7 +232,7 @@ msgstr ""
 
 #: cdi_forms/forms.py:109
 msgid "Child DOB<span class=\"asteriskField\">*</span>"
-msgstr "Verjaardag van het kind<span class=\"asteriskField\">*</span>"
+msgstr "Geboortedatum van het kind<span class=\"asteriskField\">*</span>"
 
 #: cdi_forms/forms.py:114
 msgid "Age (in months)<span class=\"asteriskField\">*</span>"
@@ -434,7 +434,7 @@ msgstr "Uw Test URL"
 
 #: cdi_forms/forms.py:451
 msgid "What would you like to tell us?"
-msgstr "Wat wilt uw ons vertellen?"
+msgstr "Wat wilt u ons vertellen?"
 
 #: cdi_forms/languages.py:6
 msgid "аҧсуа (Abkhaz)"
@@ -1350,7 +1350,7 @@ msgstr "Van wie?"
 
 #: cdi_forms/models.py:153
 msgid "How many days per week is the child exposed to these languages?"
-msgstr "Hoeveel dagen per week is het kind blootgesteld aan deze taal/talen?"
+msgstr "Hoeveel dagen per week hoort het kind deze taal/talen?"
 
 #: cdi_forms/models.py:153
 msgid "Number of days per week cannot exceed 7"
@@ -1362,7 +1362,7 @@ msgstr "Aantal dagen kan niet lager zijn dan 1"
 
 #: cdi_forms/models.py:154
 msgid "How many hours per day is the child exposed to these languages?"
-msgstr "Hoeveel uur per dag is het kind blootgesteld aan deze taal/talen?"
+msgstr "Hoeveel uur per dag hoort het kind deze taal/talen?"
 
 #: cdi_forms/models.py:154
 msgid "Number of hours per day cannot exceed 24"
@@ -1420,7 +1420,7 @@ msgstr "Voor %(min_age)s tot %(max_age)s maand oude kinderen"
 #: cdi_forms/templates/cdi_forms/background_info.html:24
 #: cdi_forms/templates/cdi_forms/study_group.html:20
 msgid "Instructions for completing the language inventory"
-msgstr "Instructies voor het afronden van de vragenlijst over taalontwikkeling"
+msgstr "Instructies voor het invullen van de vragenlijst over taalontwikkeling"
 
 #: cdi_forms/templates/cdi_forms/background_info.html:27
 #: cdi_forms/templates/cdi_forms/study_group.html:22
@@ -1428,7 +1428,7 @@ msgid ""
 "Try to complete the inventory when you have at least 30 quiet minutes, "
 "without interruptions. An example might be when your child is sleeping."
 msgstr ""
-"Probeer de vragenlijst af te ronden wanneer je 30 minuten de tijd hebt. "
+"Probeer de vragenlijst in te vullen wanneer u 30 minuten de tijd heeft. "
 "Bijvoorbeeld op momenten waar uw kind aan het slapen is. "
 
 #: cdi_forms/templates/cdi_forms/background_info.html:29
@@ -1436,7 +1436,7 @@ msgid ""
 "Try to complete the inventory when you have at least 10-15 quiet minutes, "
 "without interruptions. An example might be when your child is sleeping."
 msgstr ""
-"Probeer de vragenlijst af te ronden wanneer je 30 minuten de tijd hebt. "
+"Probeer de vragenlijst in te vullen wanneer u 30 minuten de tijd heeft. "
 "Bijvoorbeeld op momenten waar uw kind aan het slapen is. "
 
 #: cdi_forms/templates/cdi_forms/background_info.html:31
@@ -1527,14 +1527,14 @@ msgstr "Instructies:"
 #: cdi_forms/templates/cdi_forms/cdi_base.html:54
 msgid "This form can be filled any time before the due date."
 msgstr ""
-"Dit document kan op ieder moment voor de uiterlijke datum ingevuld worden."
+"Deze vragenlijst kan op ieder moment voor de uiterlijke datum ingevuld worden."
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:55
 msgid ""
 "It can also be saved at any time and resumed later by using the same link"
 msgstr ""
-"Het kan ook worden opgeslagen en op ieder moment verder worden ingevuld door "
-"dezelfde link te gebruiken"
+"U kunt de vragenlijst ook opslaan en op een later moment verder gaan met "
+"invullen door dezelfde link te gebruiken"
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:55
 msgid "create bookmark"
@@ -1542,12 +1542,12 @@ msgstr "creëer een bladwijzer voor deze link"
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:56
 msgid "After the form is submitted, it cannot be altered."
-msgstr "Nadat het document is verstuurd, kan het niet meer veranderd worden."
+msgstr "Nadat de vragenlijst is verstuurd, kan hij niet meer veranderd worden."
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:57
 msgid "The form also cannot be altered after the due date."
 msgstr ""
-"Het document kan ook niet veranderd worden na de uiterlijke datum van "
+"De vragenlijst kan ook niet aangepast worden na de uiterlijke datum van "
 "invullen."
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:58
