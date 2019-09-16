@@ -19,7 +19,6 @@
 {% endblock %}
 
 {% block main %}
-    {{ background_form.errors }}
     {% if background_form %}
         <input type="hidden" name="background-info-form" value="background-info-form"/>{% csrf_token %}
 
