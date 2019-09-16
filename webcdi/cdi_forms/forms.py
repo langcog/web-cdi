@@ -392,9 +392,7 @@ class BackgroundForm(BetterModelForm):
             else : self.birth_weight_required = True
            
         # otherwise use the standard format
-        else:
-
-            
+        else:            
             self.fields['birth_weight_lb'].widget=forms.Select()
             self.fields['birth_weight_lb'].widget.choices = BIRTH_WEIGHT_LB_CHOICES
             self.fields['birth_weight_kg'].widget=forms.Select()
