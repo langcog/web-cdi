@@ -401,7 +401,11 @@ class BackgroundForm(BetterModelForm):
             self.fields['birth_weight_kg'].widget.choices = BIRTH_WEIGHT_KG_CHOICES
             self.fields['annual_income'] = forms.ChoiceField(choices = INCOME_CHOICES)
             self.fields['annual_income'].label = _('Estimated Annual Family Income (in USD)')
-            self.fields['child_ethnicity'].label = _("Child's Ethnicity")
+            self.fields['child_ethnicity'] = forms.MultipleChoiceField(choices=CHILD_ETHNICITY_CHOICES)
+            self.fields['child_ethnicity'].widget = forms.CheckboxSelectMultiple()
+            self.fields['child_ethnicity'].required = False
+            self.fields['child_ethnicity'].label = _("My child is (check all that apply):")
+
 
             self.helper.layout = Layout(
                 Fieldset( _('Basic Information'), Field('form_filler', css_class='enabler'), Div('form_filler_other', css_class='dependent'), 'child_dob','age', 'sex', Field('country', css_class='enabler'), Div('zip_code', css_class='dependent'),'birth_order', Field('multi_birth_boolean', css_class='enabler'), Div('multi_birth', css_class='dependent'), self.birth_weight_field, Field('born_on_due_date', css_class='enabler'), Div('early_or_late', 'due_date_diff', css_class='dependent')),
