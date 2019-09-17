@@ -13,16 +13,16 @@
                "key" : "",
                "value" : "--------"
           },{
-              "key":"2.5 kg",
+              "key":"2.5",
               "value":"2.5 kg of minder"
           },{
-              "key":"2.6 to 4.5 kg",
+              "key":"2.6",
               "value":"2.6 kg tot 4.5 kg"
           },{
-              "key":"4.6 kg",
+              "key":"4.6",
               "value":"4.6 kg of meer"
           },{
-              "key":"Prefer not to disclose",
+              "key":"0",
               "value":"Zeg ik liever niet /  weet ik niet (meer)"
           }
           ]
@@ -128,7 +128,7 @@
           "help":"Selecteer de hoogst afgeronde opleiding"
       },
       {
-          "field":"secondaty_caregiver",
+          "field":"secondary_caregiver",
           "div":["secondary_caregiver_other"]
       },
       {
