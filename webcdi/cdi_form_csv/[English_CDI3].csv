@@ -100,18 +100,18 @@ item_98,although,word,col_4,produces,although,although,
 item_99,because,word,col_4,produces,because,because,
 item_100,however,word,col_4,produces,however,however,
 item_101,combine,combine,combine,not yet; sometimes; often,"Has your child begun to combine words yet, such as ""nother cookie"" or ""doggie bite""?",,
-item_102,complx01,complexity,complexity,simple; complex,daddy pick me up / daddy picked me up,,morphology
-item_103,complx02,complexity,complexity,simple; complex,that my truck / that's my truck,,morphology
-item_104,complx03,complexity,complexity,simple; complex,coffee hot / that coffee hot,,syntax
-item_105,complx04,complexity,complexity,simple; complex,I like read stories / I like to read stories,,syntax
-item_106,complx05,complexity,complexity,simple; complex,don't read book / don't want you to read that book,,syntax
-item_107,complx06,complexity,complexity,simple; complex,why he run away / why did he run away,,syntax
-item_108,complx07,complexity,complexity,simple; complex,he did it / I know who did it,,syntax
-item_109,complx08,complexity,complexity,simple; complex,we got to go now / I think we got to go now,,syntax
-item_110,complx09,complexity,complexity,simple; complex,I want truck / I want truck like Tommie has,,syntax
-item_111,complx10,complexity,complexity,simple; complex,this dolly big / this dolly big and this dolly little,,syntax
-item_112,complx11,complexity,complexity,simple; complex,this pig have a broken leg / this pig have a broken leg but kitty don't,,syntax
-item_113,complx12,complexity,complexity,simple; complex,it got broken / it got broken by the car,,syntax
+item_102,complx01,complexity,complexity,simple; complex,daddy pick me up \ daddy picked me up,,morphology
+item_103,complx02,complexity,complexity,simple; complex,that my truck \ that's my truck,,morphology
+item_104,complx03,complexity,complexity,simple; complex,coffee hot \ that coffee hot,,syntax
+item_105,complx04,complexity,complexity,simple; complex,I like read stories \ I like to read stories,,syntax
+item_106,complx05,complexity,complexity,simple; complex,don't read book \ don't want you to read that book,,syntax
+item_107,complx06,complexity,complexity,simple; complex,why he run away \ why did he run away,,syntax
+item_108,complx07,complexity,complexity,simple; complex,he did it \ I know who did it,,syntax
+item_109,complx08,complexity,complexity,simple; complex,we got to go now \ I think we got to go now,,syntax
+item_110,complx09,complexity,complexity,simple; complex,I want truck \ I want truck like Tommie has,,syntax
+item_111,complx10,complexity,complexity,simple; complex,this dolly big \ this dolly big and this dolly little,,syntax
+item_112,complx11,complexity,complexity,simple; complex,this pig have a broken leg \ this pig have a broken leg but kitty don't,,syntax
+item_113,complx12,complexity,complexity,simple; complex,it got broken \ it got broken by the car,,syntax
 item_114,useone,usage,how_use_words,no; yes,"Does your child understand the concept of ""one""? If you ask for just one (cookie, strawberry, etc.) will your child give you only one and then stop?",,
 item_115,usewhatwhere,usage,how_use_words,no; yes,"Does your child ask questions with more than one word that begin ""what"" or ""where""?",,
 item_116,usewhyhow,usage,how_use_words,no; yes,"Does your child ask questions with more than one word that begin ""why"" or ""how""?",,

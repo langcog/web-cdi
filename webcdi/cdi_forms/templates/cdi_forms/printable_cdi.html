@@ -225,15 +225,23 @@
         $.each(words, function(index, value){
             value.definition = value.definition.toLowerCase();
             value.num_value = 'neither';
-            if ((root.instrument_name.indexOf('WS') > -1) | (root.instrument_name.indexOf('CDI3') > -1)) {
-                if (value.prefilled_value) {
-                    value.num_value = 'produces';
-                }
-            } else if (root.instrument_name.indexOf('WG') > -1) {
-                if (value.choices[0][2]) {
-                    value.num_value = 'understands';
-                } else if (value.choices[1][2]) {
-                    value.num_value = 'produces';
+            if (value.item.indexOf('textbox')<0) {
+                if ((root.instrument_name.indexOf('WS') > -1) | (root.instrument_name.indexOf('CDI3') > -1)) {
+                    if (value.prefilled_value) {
+                        value.num_value = 'produces';
+                    } else {
+                        if (value.choices[0][2]) {
+                            value.num_value = 'understands';
+                        } else if (value.choices[1][2]) {
+                            value.num_value = 'produces';
+                        }    
+                    }
+                } else if (root.instrument_name.indexOf('WG') > -1) {
+                    if (value.choices[0][2]) {
+                        value.num_value = 'understands';
+                    } else if (value.choices[1][2]) {
+                        value.num_value = 'produces';
+                    }
                 }
             }
         });
@@ -242,7 +250,6 @@
         var raw_words_understood = words.filter(function(d) { return d.num_value == 'understands' ; }).length;
         var words_understood = words.filter(function(d) { return d.num_value == 'produces' | d.num_value == 'understands' ; }).length;
         var words_produced = words.filter(function(d) { return (d.num_value == 'produces'); }).length;
-        
         // Create summary text depending on number of words in bins.
 
         if (words_produced > 0 & raw_words_understood > 0) {
@@ -273,11 +280,13 @@
         var new_chart_understood;
 
         // Load csv matching informal category labels with formal category titles and generate 2 category-level summary graph.
-        // If chid only had responses of one type (all words are 'understands' or all words are 'produces'), produce 1 graph and double its width
+        // If child only had responses of one type (all words are 'understands' or all words are 'produces'), produce 1 graph and double its width
         d3.csv("{% static 'data_csv/word_categories.csv' %}", function(data) {
             word_categories = data;
+            console.log('Categories: ', word_categories)
+            console.log('Categorie Size: ', categorySize)
             var list_names = objectMap(categorySize,'key')
-            console.log(list_names)
+            console.log('List Name: ', list_names)
             updateCategoryInfo();
             
             $.each(word_categories, function(index){
@@ -287,7 +296,7 @@
                 categorySize[name_location].category_name = word_categories[index][root.instrument_name];
                 }
             });
-            console.log(categorySize)
+            
 
             if (raw_words_understood == 0 ) {
                 prod_graph_width = graph_width*2;
@@ -298,6 +307,7 @@
             }
 
             if (raw_words_understood > 0) {
+                console.log(objectMap(categorySize,'category_name'))
                 new_chart_understood = c3.generate({
                     bindto: '#categories_charts_understood',
                     data: {
@@ -351,7 +361,6 @@
             }
 
             if (words_produced > 0) {
-                console.log(words_produced)
                 new_chart_produced = c3.generate({
                     bindto: '#categories_charts_produced',
                     data: {
@@ -434,7 +443,6 @@
 
                 for (var i = 0; i < categorySize[index].values.length; i++) {
                     var current_val = categorySize[index].values[i]
-                    console.log(categorySize[index].values[i])
                     if(current_val.key == 'neither') {
                         value.neither = current_val.values;
                     }
@@ -446,7 +454,6 @@
                     }
 
                 }
-
 
                 value.num_all = value.neither + value.understands + value.produces
                 value.prop_understood = 100*(value.understands + value.produces)/(value.num_all)

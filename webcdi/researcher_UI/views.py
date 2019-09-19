@@ -41,7 +41,6 @@ def calc_benchmark(x1, x2, y1, y2, raw_score):
 
 @login_required # For researchers only, requires user to be logged in (test-takers do not have an account and are blocked from this interface)
 def download_data(request, study_obj, administrations = None): # Download study data
-    print (datetime.datetime.now())
     # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse(content_type='text/csv') # Format response as a CSV
     filename = study_obj.name+'_items.csv'
@@ -66,12 +65,13 @@ def download_data(request, study_obj, administrations = None): # Download study 
 
     # Change column headers from item ID to item's definition - note: should be gloss for comparison across languages
     
-    new_headers = Instrument_Forms.objects.values('itemID', 'definition', 'gloss').filter(instrument=study_obj.instrument).distinct()
-    new_headers = {x['itemID'] : x['gloss'] if len(x['gloss']) > 0 else x['definition'] if len(x['definition']) > 0 else x['itemID'] for x in new_headers}
+    new_headers = Instrument_Forms.objects.values('itemID', 'item').filter(instrument=study_obj.instrument).distinct()
+    new_headers = {x['itemID'] : x['item'] for x in new_headers}
     model_header = [new_headers.get(n, n) for n in model_header]
     
     melted_answers.rename(columns=new_headers, inplace=True)
     
+    # Format background data responses for pandas dataframe and eventual printing
     background_data = BackgroundInfo.objects.values().filter(administration__in = administrations)
 
     BI_choices = {}
@@ -91,9 +91,6 @@ def download_data(request, study_obj, administrations = None): # Download study 
     except Exception as e:
         messages.add_message(request, messages.ERROR, "You must select at least 1 completed response")
         return render (request, 'error-page.html')
-
-    #except:
-    #    new_background = pd.DataFrame(columns = ['administration_id'] + background_header)
 
     # Add scoring
     scores = []
@@ -118,6 +115,7 @@ def download_data(request, study_obj, administrations = None): # Download study 
         min_age = Benchmark.objects.filter(instrument=study_obj.instrument).order_by('age')[0].age
     except: pass
         
+    
     #set up scoring dict titles
     base_scoring_dict = {}
     for f in score_forms: #and ensure each score is at least 0
@@ -134,6 +132,7 @@ def download_data(request, study_obj, administrations = None): # Download study 
                 if not benchmark.raw_score == 9999: 
                     base_scoring_dict[f.title + ' Percentile-both'] = 0
                     
+
     for administration_id in administrations:
         scoring_dict = base_scoring_dict.copy()
         scoring_dict['administration_id'] = administration_id.id  # add administration_id so we know the respondent
@@ -150,6 +149,7 @@ def download_data(request, study_obj, administrations = None): # Download study 
                     if scoring_category in f.category.split(';'):
                         scoring_dict[f.title] +=  administration_data_item.value + '\n'
 
+                
         # now add in the benchmark scores
         try:
             sex = BackgroundInfo.objects.get(administration=administration_id).sex
@@ -173,10 +173,10 @@ def download_data(request, study_obj, administrations = None): # Download study 
                 else:
                     benchmarks = Benchmark.objects.filter(instrument_score=f, age=age)
                     raw_score = scoring_dict[f.title]
-
                     unisex_score = sex_score = 0
                     benchmark = benchmarks[0]
                        
+                    
                     if sex == 'M':
                         benchmark = benchmarks[0]
                         sex_score = benchmark.percentile
@@ -212,7 +212,6 @@ def download_data(request, study_obj, administrations = None): # Download study 
                     if sex_score < 1: sex_score = '<1'
                     scoring_dict[f.title + ' Percentile-sex'] = sex_score
         scores.append(scoring_dict)
-        
     melted_scores = pd.DataFrame(scores)
     melted_scores.set_index('administration_id')
     
@@ -256,12 +255,15 @@ def download_data(request, study_obj, administrations = None): # Download study 
     
     # Organize columns  
     combined_data = combined_data[admin_header + background_header + model_header + score_header]
-    
+    combined_data = combined_data.replace('nan', '', regex=True)
+    combined_data = combined_data.replace('None', '', regex=True)
+    combined_data['child_ethnicity'].replace('[]', '', inplace=True)
+    combined_data['other_languages'].replace('[]', '', inplace=True)
+
     # Turn pandas dataframe into a CSV
     combined_data.to_csv(response, encoding='utf-8', index=False)
 
     # Return CSV
-    print (datetime.datetime.now())
     return response
 
 @login_required # For researchers only, requires user to be logged in (test-takers do not have an account and are blocked from this interface)
@@ -298,17 +300,13 @@ def download_summary(request, study_obj, administrations = None): # Download stu
     new_background = pd.DataFrame.from_records(background_data).astype(unicode).replace(BI_choices)
     new_background['administration_id'] = new_background['administration_id'].astype('int64')
 
-    #except:
-    #    new_background = pd.DataFrame(columns = ['administration_id'] + background_header)
-
     # Add scoring
     scores = []
     
     score_forms = InstrumentScore.objects.filter(instrument=study_obj.instrument)
     score_header = []
     if Benchmark.objects.filter(instrument=study_obj.instrument).exists():
-        score_header.append('benchmark age')
-        
+        score_header.append('benchmark age') 
     for f in score_forms: # let's get the scoring headers
         score_header.append(f.title)
         if Benchmark.objects.filter(instrument_score=f).exists():
@@ -325,43 +323,26 @@ def download_summary(request, study_obj, administrations = None): # Download stu
         min_age = Benchmark.objects.filter(instrument=study_obj.instrument).order_by('age')[0].age
     except: pass
 
+    #set up scoring dict titles
+    base_scoring_dict = {}
+    for f in score_forms: #and ensure each score is at least 0
+        if f.kind == 'count' : base_scoring_dict[f.title] = 0
+        else : base_scoring_dict[f.title] = ''
+       
+        #add benchmark titles
+        if Benchmark.objects.filter(instrument_score=f).exists():
+            benchmark = Benchmark.objects.filter(instrument_score=f)[0]
+            if benchmark.percentile == 999:
+                base_scoring_dict[f.title + ' % yes answers at this age and sex'] = 0
+            else:
+                base_scoring_dict[f.title + ' Percentile-sex'] = 0
+                if not benchmark.raw_score == 9999: 
+                    base_scoring_dict[f.title + ' Percentile-both'] = 0
+
     for administration_id in administrations:
-        scoring_dict = {'administration_id':administration_id.id}  # add administration_id so we know the respondent
-        #set each head in dictionary
-        for f in score_forms: #and ensure each score is at least 0
-            insts = Instrument_Forms.objects.filter(instrument=study_obj.instrument, scoring_category__in=f.category.split(';'))
-            insts_IDs = []
-            for inst in insts: insts_IDs.append(inst.itemID)
-            if f.kind == 'count' : 
-                if administration_id.completedBackgroundInfo:
-                    scoring_dict[f.title] = administration_data.objects.filter(administration_id=administration_id, value__in=f.measure.split(';'), item_ID__in=insts_IDs).count()
-                else:
-                    scoring_dict[f.title] = ''
-            else : 
-                items = administration_data.objects.filter(administration_id=administration_id, item_ID__in=insts_IDs)
-                scoring_dict[f.title] = ''
-                for item in items :
-                    scoring_dict[f.title] +=  item.value + '\n'
-            
-            #add benchmark titles
-            if Benchmark.objects.filter(instrument_score=f).exists():
-                benchmark = Benchmark.objects.filter(instrument_score=f)[0]
-                if benchmark.percentile == 999:
-                    if administration_id.completedBackgroundInfo:
-                        scoring_dict[f.title + ' % yes answers at this age and sex'] = 0
-                    else: 
-                        scoring_dict[f.title + ' % yes answers at this age and sex'] = ''
-                else:
-                    if administration_id.completedBackgroundInfo:
-                        scoring_dict[f.title + ' Percentile-sex'] = 0
-                    else:
-                        scoring_dict[f.title + ' Percentile-sex'] = ''
-                    if not benchmark.raw_score == 9999: 
-                        if administration_id.completedBackgroundInfo:
-                            scoring_dict[f.title + ' Percentile-both'] = 0
-                        else: 
-                            scoring_dict[f.title + ' Percentile-both'] = ''
-                
+        scoring_dict = base_scoring_dict.copy()
+        scoring_dict['administration_id'] = administration_id.id  # add administration_id so we know the respondent
+        
         # now add in the benchmark scores
         try:
             sex = BackgroundInfo.objects.get(administration=administration_id).sex
@@ -374,6 +355,7 @@ def download_summary(request, study_obj, administrations = None): # Download stu
             scoring_dict['benchmark age'] = age
         except:
             age=None
+
         for f in score_forms:
             if Benchmark.objects.filter(instrument_score=f, age=age).exists():
                 benchmark = Benchmark.objects.filter(instrument_score=f)[0]
@@ -381,22 +363,11 @@ def download_summary(request, study_obj, administrations = None): # Download stu
                     benchmark = Benchmark.objects.get(instrument_score=f, age=age)
                     if sex == 'M': scoring_dict[f.title + ' % yes answers at this age and sex'] = benchmark.raw_score_boy
                     if sex == 'F': scoring_dict[f.title + ' % yes answers at this age and sex'] = benchmark.raw_score_girl
-                    
                 else:
                     benchmarks = Benchmark.objects.filter(instrument_score=f, age=age)
                     raw_score = scoring_dict[f.title]
-
                     unisex_score = sex_score = 0
                     benchmark = benchmarks[0]
-                    if not benchmark.raw_score == 9999:
-                        unisex_score = benchmark.percentile
-                        for b in benchmarks[1:]:
-                            if b.raw_score <= raw_score: 
-                                benchmark = b
-                                unisex_score = benchmark.percentile
-                            else:
-                                unisex_score = calc_benchmark(benchmark.raw_score, b.raw_score, benchmark.percentile, b.percentile, raw_score)
-                                break
                     
                     if sex == 'M':
                         benchmark = benchmarks[0]
@@ -420,10 +391,17 @@ def download_summary(request, study_obj, administrations = None): # Download stu
                                 break
                     
                     if not benchmark.raw_score == 9999:
+                        unisex_score = benchmark.percentile
+                        for b in benchmarks[1:]:
+                            if b.raw_score <= raw_score: 
+                                benchmark = b
+                                unisex_score = benchmark.percentile
+                            else:
+                                unisex_score = calc_benchmark(benchmark.raw_score, b.raw_score, benchmark.percentile, b.percentile, raw_score)
+                                break
                         if unisex_score < 1: unisex_score = '<1'
+                        scoring_dict[f.title + ' Percentile-both'] = unisex_score
                     if sex_score < 1: sex_score = '<1'
-                
-                    if not benchmark.raw_score == 9999: scoring_dict[f.title + ' Percentile-both'] = unisex_score
                     scoring_dict[f.title + ' Percentile-sex'] = sex_score
         
         scores.append(scoring_dict)
@@ -456,6 +434,10 @@ def download_summary(request, study_obj, administrations = None): # Download stu
 
     # Organize columns  
     combined_data = combined_data[admin_header + background_header + score_header]
+    combined_data = combined_data.replace('nan', '', regex=True)
+    combined_data = combined_data.replace('None', '', regex=True)
+    combined_data['child_ethnicity'].replace('[]', '', inplace=True)
+    combined_data['other_languages'].replace('[]', '', inplace=True)
     
     # Turn pandas dataframe into a CSV
     combined_data.to_csv(response, encoding='utf-8', index=False)
