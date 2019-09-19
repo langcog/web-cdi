@@ -1,0 +1,43 @@
+{% extends 'cdi_forms/cdi_base.html' %}
+{% load i18n %}
+
+{% block nav_buttons %}
+    {% if not completed %}
+    <div class="button-wrapper">
+        <div class="flex-row d-flex justify-content-center">
+            <input name="btn-next" value='{% trans "Finish" %}' class="btn btn-primary" type="submit">
+        </div>
+        <!--
+        <div class="flex-row d-flex justify-content-center">
+            <input name="btn-back" value="{% trans 'Go back to Background Info' %}" class="btn btn-primary" type="submit">
+        </div>
+        -->
+    </div>
+    <div class="row d-flex justify-content-center">
+    </div>
+    {% endif %}
+{% endblock %}
+
+{% block main %}
+    {% if background_form %}
+        <input type="hidden" name="background-info-form" value="background-info-form"/>{% csrf_token %}
+
+        <div class="row">
+            <h1>{% trans "Background Information Continued" %}</h1><br>
+            <!-- Load backgroundform in crispy format. -->
+            <div class="flex-row">{% load crispy_forms_tags %}
+            {% crispy background_form %}</div>
+
+        </div>
+
+        <div class="row d-flex justify-content-center">
+            <input name="btn-next" value='{% trans "Finish" %}' class="btn btn-primary" type="submit">
+        </div>
+    {% else %}
+        <p>{% trans "Form unavailable. Contact admin." %} </p>
+    {% endif %}
+{% endblock %}
+
+{% block scripts %}
+    {% include 'cdi_forms/background_info_scripts.html' %}
+{% endblock %}

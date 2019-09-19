@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import  *
 import os.path, json, datetime, dateutil.relativedelta, itertools, requests, re
 from researcher_UI.models import *
 from django.http import Http404, JsonResponse, HttpResponse
-from .forms import BackgroundForm, ContactForm
+from .forms import BackgroundForm, ContactForm, BackpageBackgroundForm
 from django.utils import timezone, translation
 from django.core.serializers.json import DjangoJSONEncoder
 from django.core.mail import EmailMessage
@@ -20,8 +20,7 @@ from ipware.ip import get_ip
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 import pandas as pd
-from django.conf import settings
-
+from django.views.generic import UpdateView
 
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__)) # Declare root folder for project and files. Varies between Mac and Linux installations.
@@ -75,10 +74,204 @@ def get_administration_instance(hash_id):
         raise Http404("Administration not found")
     return administration_instance
 
+class AdministrationMixin(object):
+    hash_id = None
+    administration_instance = None
+    study_context = {}
+    user_language = None
+
+    def get_administration_instance(self):
+        self.administration_instance = self.get_object().administration
+        return self.administration_instance
+
+    def get_hash_id(self):
+        self.hash_id = self.get_administration_instance().url_hash
+        return self.hash_id
+
+    def get_study_context(self):
+        self.study_context = {}
+        self.study_context['language'] = self.administration_instance.study.instrument.language
+        self.study_context['instrument'] = self.administration_instance.study.instrument.name
+        self.study_context['min_age'] = self.administration_instance.study.min_age
+        self.study_context['max_age'] = self.administration_instance.study.max_age
+        self.study_context['birthweight_units'] = self.administration_instance.study.birth_weight_units
+        self.study_context['child_age'] = None
+        self.study_context['zip_code'] = ''
+        return self.study_context
+
+    def get_user_language(self):
+        self.user_language = language_map(self.administration_instance.study.instrument.language)
+        translation.activate(self.user_language)
+        return self.user_language
+
+class BackgroundInfoView(AdministrationMixin, UpdateView):
+    template_name = 'cdi_forms/background_info.html'
+    model = BackgroundInfo
+    form_class = BackgroundForm
+    background_form = None
+
+    def get_context_data(self, **kwargs):
+        #data = super(BackgroundInfoView, self).get_context_data(**kwargs)
+        data = {}
+        data['background_form'] = self.background_form
+        data['hash_id'] = self.hash_id
+        data['username'] = self.administration_instance.study.researcher.username
+        data['completed'] = self.administration_instance.completed
+        data['due_date'] = self.administration_instance.due_date.strftime('%b %d, %Y, %I:%M %p')
+        data['language'] = self.administration_instance.study.instrument.language
+        data['language_code'] = self.user_language
+        data['title'] = self.administration_instance.study.instrument.verbose_name
+        data['max_age'] = self.administration_instance.study.max_age
+        data['min_age'] = self.administration_instance.study.min_age
+        data['study_waiver'] = self.administration_instance.study.waiver
+        data['allow_payment'] = self.administration_instance.study.allow_payment
+        data['hint'] = _("Your child should be between %(min_age)d to %(max_age)d months of age.") % {"min_age": data['min_age'], "max_age": data['max_age']}
+        data['form'] = self.administration_instance.study.instrument.form
+
+        if data['allow_payment'] and self.administration_instance.bypass is None:
+            try:
+                data['gift_amount'] = payment_code.objects.filter(study = self.administration_instance.study).values_list('gift_amount', flat=True).first()
+            except:
+                data['gift_amount'] = None
+        study_name = self.administration_instance.study.name
+        study_group = self.administration_instance.study.study_group
+        if study_group:
+            data['study_group'] = study_group
+            data['alt_study_info'] = study.objects.filter(study_group = study_group, researcher = self.administration_instance.study.researcher ).exclude(name = study_name).values_list("name","instrument__min_age", "instrument__max_age", "instrument__language")
+            data['study_group_hint'] = _(" Not the right age? <a href='%(sgurl)s'> Click here</a>") % {"sgurl": reverse('find_paired_studies', args=[data['username'], data['study_group']])}
+        else:
+            data['study_group'] = None
+            data['alt_study_info'] = None
+            data['study_group_hint'] = _(" Not the right age? You should contact your researcher for steps on what to do next.")
+        return data
+
+    def get_background_form(self):
+        try:
+            # Fetch responses stored in BackgroundInfo model
+            if self.object.age:
+                self.study_context['child_age'] = self.object.age
+            if len(self.object.zip_code) == 3:
+                self.object.zip_code = self.object.zip_code + '**'
+            background_form = self.form_class(instance = self.object, context = self.study_context)
+        except:
+            if (self.administration_instance.repeat_num > 1 or self.administration_instance.study.study_group) and self.administration_instance.study.prefilled_data >= 1:
+                if self.administration_instance.study.study_group:
+                    related_studies = study.objects.filter(researcher = self.administration_instance.study.researcher, study_group = self.administration_instance.study.study_group)
+                elif self.administration_instance.repeat_num > 1 and not self.administration_instance.study.study_group:
+                    related_studies = study.objects.filter(id=self.administration_instance.study.id)
+                old_admins = administration.objects.filter(study__in = related_studies, subject_id = self.administration_instance.subject_id, completedBackgroundInfo = True)
+                if old_admins:
+                    self.get_object = BackgroundInfo.objects.get(administration = old_admins.latest(field_name='last_modified'))
+                    self.object.pk = None
+                    self.object.administration = self.administration_instance
+                    self.object.age = None
+                    background_form = self.form_class(instance = self.get_object, context = self.study_context)
+                else:
+                    background_form = self.form_class(context = self.study_context)  
+            else:
+                # If you cannot fetch responses, render a blank form
+                background_form = self.form_class(context = self.study_context)
+        return background_form
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.get_administration_instance()
+        self.get_study_context()
+        self.get_user_language()
+        self.background_form = self.get_background_form()        
+        
+        response = render(request, self.template_name, self.get_context_data()) # Render form template
+        response.set_cookie(settings.LANGUAGE_COOKIE_NAME, self.user_language)
+        return response
+        #return super(BackgroundInfoView, self).get(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.get_administration_instance()
+        self.get_hash_id()
+        self.get_study_context()
+        self.get_user_language()
+        
+        if not self.administration_instance.completed and self.administration_instance.due_date > timezone.now(): # And test has yet to be completed and has not timed out
+            try:
+                if self.object.age:
+                    self.study_context['child_age'] = self.object.age # Populate dictionary with child's age for validation in forms.py.
+                self.background_form = self.form_class(request.POST, instance=self.object, context=self.study_context) # Save filled out form as an object
+            except:
+                self.background_form = BackgroundForm(request.POST, context = self.study_context) # Pull up an empty BackgroundForm with information regarding only the instrument.
+            
+            if self.background_form.is_valid(): # If form passed forms.py validation (clean function)
+                obj = self.background_form.save(commit = False) # Save but do not commit form just yet.
+
+                child_dob = self.background_form.cleaned_data.get('child_dob') # Try to fetch DOB
+
+                if child_dob: # If DOB was entered into form, calculate age based on DOB and today's date.
+                    raw_age = datetime.date.today() - child_dob
+                    age = int(float(raw_age.days)/(365.2425/12.0))
+                    # day_diff = datetime.date.today().day - child_dob.day
+                    # age = (datetime.date.today().year - child_dob.year) * 12 +  (datetime.date.today().month - child_dob.month) + (1 if day_diff >=15 else 0)
+                else:
+                    age = None
+
+                # If age was properly calculated from 'child_dob', save it to the model object
+                if age: obj.age = age
+
+                if obj.child_hispanic_latino == '':
+                    obj.child_hispanic_latino = 'None'
+
+                # Find the raw zip code value and make it compliant with Safe Harbor guidelines. Only store the first 3 digits if the total population for that prefix is greataer than 20,000 (found prohibited prefixes via Census API data). If prohibited zip code, replace value with state abbreviations.
+                zip_prefix = ''
+                raw_zip = self.object.zip_code
+                if raw_zip and raw_zip != 'None':
+                    zip_prefix = raw_zip[:3]
+                    if Zipcode.objects.filter(zip_prefix = zip_prefix).exists():
+                        zip_prefix = Zipcode.objects.filter(zip_prefix = zip_prefix).first().state
+                    else:
+                        zip_prefix = zip_prefix + '**'
+                obj.zip_code = zip_prefix
+
+                # Save model object to database
+                obj.administration = self.administration_instance
+                obj.save()
+
+                # If 'Next' button is pressed, update last_modified and mark completion of BackgroundInfo. Fetch CDI form by hash ID.
+                if 'btn-next' in request.POST and request.POST['btn-next'] == _('Next'):
+                    administration.objects.filter(url_hash = self.hash_id).update(last_modified = timezone.now())
+                    administration.objects.filter(url_hash = self.hash_id).update(completedBackgroundInfo = True)
+                    request.method = "GET"
+                    return redirect('administer_cdi_form', hash_id=self.hash_id)
+                    #return cdi_form(request, self.hash_id)
+
+                elif 'btn-next' in request.POST and request.POST['btn-next'] == _('Finish'):
+                    administration.objects.filter(url_hash = self.hash_id).update(last_modified = timezone.now())
+                    administration.objects.filter(url_hash = self.hash_id).update(completed = True)
+                    request.method = "GET"
+                    return redirect('administer_cdi_form', hash_id=self.hash_id)
+            
+                elif 'btn-back' in request.POST and request.POST['btn-back'] == _('Go back to Background Info'): # If Back button was pressed
+                    administration.objects.filter(url_hash = self.hash_id).update(last_modified = timezone.now()) # Update last_modified
+                    request.method = "GET"
+                    background_instance = BackgroundInfo.objects.get(administration = self.administration_instance) 
+                    return redirect('background-info', pk=background_instance.pk) 
+            #else : print (self.background_form.errors)
+
+        response = render(request, self.template_name, self.get_context_data()) # Render template   
+        response.set_cookie(settings.LANGUAGE_COOKIE_NAME, self.user_language)
+        return response
+
+class BackpageBackgroundInfoView(BackgroundInfoView):
+    form_class = BackpageBackgroundForm
+    template_name = 'cdi_forms/backpage_info.html'
+
+    def get_context_data(self, **kwargs):
+        ctx = super(BackpageBackgroundInfoView, self).get_context_data(**kwargs)
+        ctx['dont_show_waiver'] = True
+        return ctx
+
 # Finds and renders BackgroundForm based on given hash ID code.
 def background_info_form(request, hash_id):
     administration_instance = get_administration_instance(hash_id) # Get administation object based on hash ID
-
+    
     # Populate a dictionary with information regarding the instrument (age range, language, and name) along with information on child's age and zipcode for modification. Will be sent to forms.py for form validation.
     context = {}
     context['language'] = administration_instance.study.instrument.language
@@ -96,8 +289,6 @@ def background_info_form(request, hash_id):
     background_form = None
         
     if request.method == 'POST' : #if test-taker is sending in form responses
-        print "\n\n\n background req post"
-        print context
         if not administration_instance.completed and administration_instance.due_date > timezone.now(): # And test has yet to be completed and has not timed out
             try:
                 background_instance = BackgroundInfo.objects.get(administration = administration_instance) # Try to fetch BackgroundInfo model already stored in database.
@@ -241,8 +432,13 @@ def cdi_items(object_group, item_type, prefilled_data, item_id):
 
             obj['text'] = obj['definition'][0] + obj['definition'][1:] if obj['definition'][0].isalpha() else obj['definition'][0] + obj['definition'][1] + obj['definition'][2:]
 
-            if obj['definition'] is not None and obj['definition'].find('/') >= 0 and item_id in ['complexity', 'pronoun_usage']:
-                split_definition = map(unicode.strip, obj['definition'].split('/'))
+            if obj['definition'] is not None and obj['definition'].find('\\') >= 0 and item_id in ['complexity', 'pronoun_usage']:
+                instruction = re.search('<b>(.+?)</b>', obj['definition'])
+                if instruction:
+                    obj_choices = obj['definition'].split(instruction.group(1) + '</b><br />')[1]
+                else :
+                    obj_choices = obj['definition']
+                split_definition = map(unicode.strip, obj_choices.split('\\'))
                 obj['choices'] = zip(split_definition, raw_split_choices, prefilled_values)
             else:
                 obj['choices'] = zip(split_choices_translated, raw_split_choices, prefilled_values)
@@ -289,18 +485,6 @@ def prefilled_cdi_data(administration_instance):
         raw_objects = []
 
         field_values = ['itemID', 'item', 'item_type', 'category', 'definition', 'choices__choice_set']
-        '''
-        if administration_instance.study.instrument.language == 'English':
-            field_values += ['choices__choice_set_en']
-        elif administration_instance.study.instrument.language == 'Spanish':
-            field_values += ['choices__choice_set_es']
-        elif administration_instance.study.instrument.language == 'French Quebec':
-            field_values += ['choices__choice_set_fr_ca']
-        elif administration_instance.study.instrument.language == 'Canadian English':
-            field_values += ['choices__choice_set_en_ca']
-        elif administration_instance.study.instrument.language == 'Dutch':
-            field_values += ['choices__choice_set_nl']
-        '''
         field_values += ['choices__choice_set_' + settings.LANGUAGE_DICT[administration_instance.study.instrument.language]]
         
         #As some items are nested on different levels, carefully parse and store items for rendering.
@@ -383,7 +567,8 @@ def cdi_form(request, hash_id):
             elif 'btn-back' in request.POST and request.POST['btn-back'] == _('Go back to Background Info'): # If Back button was pressed
                 administration.objects.filter(url_hash = hash_id).update(last_modified = timezone.now()) # Update last_modified
                 request.method = "GET"
-                return background_info_form(request, hash_id) # Fetch Background info template
+                background_instance = BackgroundInfo.objects.get(administration = administration_instance) 
+                return redirect('background-info', pk=background_instance.pk) #background_info_form(request, hash_id) # Fetch Background info template
             elif 'btn-submit' in request.POST and request.POST['btn-submit'] == _('Submit'): # If 'Submit' button was pressed
                 
                 #Some studies may require successfully passing a ReCaptcha test for submission. If so, get for a passing response before marking form as complete.
@@ -431,8 +616,18 @@ def cdi_form(request, hash_id):
                     administration.objects.filter(url_hash = hash_id).update(last_modified = timezone.now(), analysis = analysis) #Update administration object
                 except: # If grabbing the analysis response failed
                     administration.objects.filter(url_hash = hash_id).update(last_modified = timezone.now()) # Update last_modified               
-                administration.objects.filter(url_hash = hash_id).update(completed = True) # Mark test as complete
-                return printable_view(request, hash_id) # Render completion page
+                
+
+                #check if we have a background info page after the survey and act accordingly
+                filename = os.path.realpath(PROJECT_ROOT + '/form_data/background_info/' + instrument_name + '_back.json')
+                if os.path.isfile(filename) :
+                    administration.objects.filter(url_hash = hash_id).update(completedSurvey = True)
+                    request.method = "GET"
+                    background_instance = BackgroundInfo.objects.get(administration = administration_instance) 
+                    return redirect('backpage-background-info', pk=background_instance.pk) # Render back page
+                else:
+                    administration.objects.filter(url_hash = hash_id).update(completed = True) # Mark test as complete
+                    return printable_view(request, hash_id) # Render completion page
 
     # Fetch prefilled responses
     data = dict()
@@ -540,6 +735,9 @@ def administer_cdi_form(request, hash_id):
             elif 'cdi-form' in request.POST:
                 return cdi_form(request, hash_id)
 
+            elif 'back-page' in request.POST:
+                return background_info_form(request, hash_id)
+
             else:
                 refresh = True
         else:
@@ -548,10 +746,14 @@ def administer_cdi_form(request, hash_id):
     if request.method == 'GET' or refresh:
         requests_log.objects.create(url_hash = hash_id, request_type="GET")
         if not administration_instance.completed and administration_instance.due_date > timezone.now():
-            if administration_instance.completedBackgroundInfo:
+            background_instance, created = BackgroundInfo.objects.get_or_create(administration = administration_instance) 
+            if administration_instance.completedSurvey:
+                return redirect('backpage-background-info', pk=background_instance.pk)
+            elif administration_instance.completedBackgroundInfo:
                 return cdi_form(request, hash_id)
             else:
-                return background_info_form(request, hash_id)
+                return redirect('background-info', pk=background_instance.pk)
+                # return background_info_form(request, hash_id)
         else:
             # only printable
             return printable_view(request, hash_id)

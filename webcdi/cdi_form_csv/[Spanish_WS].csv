@@ -712,40 +712,40 @@ item_710,scombine,combine,combine,not yet; sometimes; often,"¿Su hijo/a ya empe
 item_example1,combination_example1,combination_example1,combination_examples,,,,,combination_example1
 item_example2,combination_example2,combination_example2,combination_examples,,,,,combination_example2
 item_example3,combination_example3,combination_example3,combination_examples,,,,,combination_example3
-item_711,cmplx01,complexity,complexity,simple; complex,nene quiere / quiero paleta,,baby wants / I want lollipop,syntax
-item_712,cmplx02,complexity,complexity,simple; complex,tuyo esto / este es tuyo,,yours this / this is yours,syntax
-item_713,cmplx03,complexity,complexity,simple; complex,Tito malo / soy malo,,Tito bad / I'm bad,syntax
-item_714,cmplx04,complexity,complexity,simple; complex,Pepe uvas / quiero uvas,,Pepe grapes / I want grapes,syntax
-item_715,cmplx05,complexity,complexity,simple; complex,agua vamos / vamos al agua,,water let / let the water,syntax
-item_716,cmplx06,complexity,complexity,simple; complex,a silla / en la silla,,to chair / in the chair,syntax
-item_717,cmplx07,complexity,complexity,simple; complex,pollo no / no quiero pollo,,chicken not / I do not want chicken,syntax
-item_718,cmplx08,complexity,complexity,simple; complex,Paloma llorando / Paloma está llorando,,Paloma crying / Paloma is crying,syntax
-item_719,cmplx09,complexity,complexity,simple; complex,mío lápiz / éste es mi lápiz,,my pen / this is my pen,syntax
-item_720,cmplx10,complexity,complexity,simple; complex,más leche / dame más leche,,more milk / gimme more milk,syntax
-item_721,cmplx11,complexity,complexity,simple; complex,papo mami / el zapato es de mami,,shoe Mommy / the shoe is Mommy's,syntax
-item_722,cmplx12,complexity,complexity,simple; complex,no aquí / ése no está aquí,,not here / that is not here,syntax
-item_723,cmplx13,complexity,complexity,simple; complex,rompió globo / se rompió el globo,,broke balloon / the balloon broke,syntax
-item_724,cmplx14,complexity,complexity,simple; complex,leche caliente / la leche está caliente,,hot milk / milk is hot,syntax
-item_725,cmplx15,complexity,complexity,simple; complex,duele panza / me duele la panza,,hurt tummy / my tummy hurts,syntax
-item_726,cmplx16,complexity,complexity,simple; complex,guaguá grande / tengo un perro grande,,Woof woof big / I have a big dog,syntax
-item_727,cmplx17,complexity,complexity,simple; complex,calle allá está / allá está la calle,,Street there is / there is the street,syntax
-item_728,cmplx18,complexity,complexity,simple; complex,puse a mano / lo puse en mi mano,,I put hand / I put it in my hand,syntax
-item_729,cmplx19,complexity,complexity,simple; complex,acabó agua / se me acabó el agua,,finished water / I ran out of water,syntax
-item_730,cmplx20,complexity,complexity,simple; complex,fue casa / se fue a su casa,,went home / he went home,syntax
-item_731,cmplx21,complexity,complexity,simple; complex,silla subir / me quiero subir a la silla,,chair up / I want to climb the chair,syntax
-item_732,cmplx22,complexity,complexity,simple; complex,Marta papá / quiero ir con papá,,Dad go / want to go with dad,syntax
-item_733,cmplx23,complexity,complexity,simple; complex,bravo Tello circo / dije bravo en el circo,,bravo said circus / I said bravo at the circus,syntax
-item_734,cmplx24,complexity,complexity,simple; complex,papá calle / papá se fue a trabajar,,Street Dad / Dad went to work,syntax
-item_735,cmplx25,complexity,complexity,simple; complex,ya puse / ya se lo puse,,I already put / and I put it,syntax
-item_736,cmplx26,complexity,complexity,simple; complex,Chalo osito coche / Chalo dejó el osito en el coche,,Chalo teddy bear car / Chalo left the teddy bear in the car,syntax
-item_737,cmplx27,complexity,complexity,simple; complex,lápiz dibujar / dibujo con el lápiz,,pencil drawing / drawing with pencil,syntax
-item_738,cmplx28,complexity,complexity,simple; complex,ya pinté / ya acabé de pintar,,and I painted / and I finished painting,syntax
-item_739,cmplx29,complexity,complexity,simple; complex,nene rompió bici Danny / el niño rompió la bici de Danny,,baby broke Danny bike / the boy broke Danny's bike,syntax
-item_740,cmplx30,complexity,complexity,simple; complex,pone no / no lo pongas,,puts no / do not put,syntax
-item_741,cmplx31,complexity,complexity,simple; complex,vamos comer papas carne / vamos a comer papas y carne,,we eat potatoes meat / we eat potatoes and meat,syntax
-item_742,cmplx32,complexity,complexity,simple; complex,niño llora cayó / el niño llora porque se cayó,,child cries fell / child cries because he fell,syntax
-item_743,cmplx33,complexity,complexity,simple; complex,mamá nene compra / mamá y nene fueron a comprar,,mom baby buy / mom and baby went to buy,syntax
-item_744,cmplx34,complexity,complexity,simple; complex,abre dame galleta / abre la caja y dame una galleta,,gimme cookie open / open the box and give me a cookie,syntax
-item_745,cmplx35,complexity,complexity,simple; complex,"no toca, quemas / no lo toques porque te quemas",,not touch; burning / do not touch it because you burn,syntax
-item_746,cmplx36,complexity,complexity,simple; complex,quiero libro papá / quiero el libra que compró papá,,l want Dad book / I want the book Dad bought,syntax
-item_747,cmplx37,complexity,complexity,simple; complex,pongo agua flores / pongo agua para que crezcan las flores,,put water flowers / put water to grow flowers,syntax
+item_711,cmplx01,complexity,complexity,simple; complex,nene quiere \ quiero paleta,,baby wants / I want lollipop,
+item_712,cmplx02,complexity,complexity,simple; complex,tuyo esto \ este es tuyo,,yours this / this is yours,
+item_713,cmplx03,complexity,complexity,simple; complex,Tito malo \ soy malo,,Tito bad / I'm bad,
+item_714,cmplx04,complexity,complexity,simple; complex,Pepe uvas \ quiero uvas,,Pepe grapes / I want grapes,
+item_715,cmplx05,complexity,complexity,simple; complex,agua vamos \ vamos al agua,,water let / let the water,
+item_716,cmplx06,complexity,complexity,simple; complex,a silla \ en la silla,,to chair / in the chair,
+item_717,cmplx07,complexity,complexity,simple; complex,pollo no \ no quiero pollo,,chicken not / I do not want chicken,
+item_718,cmplx08,complexity,complexity,simple; complex,Paloma llorando \ Paloma está llorando,,Paloma crying / Paloma is crying,
+item_719,cmplx09,complexity,complexity,simple; complex,mío lápiz \ éste es mi lápiz,,my pen / this is my pen,
+item_720,cmplx10,complexity,complexity,simple; complex,más leche \ dame más leche,,more milk / gimme more milk,
+item_721,cmplx11,complexity,complexity,simple; complex,papo mami \ el zapato es de mami,,shoe Mommy / the shoe is Mommy's,
+item_722,cmplx12,complexity,complexity,simple; complex,no aquí \ ése no está aquí,,not here / that is not here,
+item_723,cmplx13,complexity,complexity,simple; complex,rompió globo \ se rompió el globo,,broke balloon / the balloon broke,
+item_724,cmplx14,complexity,complexity,simple; complex,leche caliente \ la leche está caliente,,hot milk / milk is hot,
+item_725,cmplx15,complexity,complexity,simple; complex,duele panza \ me duele la panza,,hurt tummy / my tummy hurts,
+item_726,cmplx16,complexity,complexity,simple; complex,guaguá grande \ tengo un perro grande,,Woof woof big / I have a big dog,
+item_727,cmplx17,complexity,complexity,simple; complex,calle allá está \ allá está la calle,,Street there is / there is the street,
+item_728,cmplx18,complexity,complexity,simple; complex,puse a mano \ lo puse en mi mano,,I put hand / I put it in my hand,
+item_729,cmplx19,complexity,complexity,simple; complex,acabó agua \ se me acabó el agua,,finished water / I ran out of water,
+item_730,cmplx20,complexity,complexity,simple; complex,fue casa \ se fue a su casa,,went home / he went home,
+item_731,cmplx21,complexity,complexity,simple; complex,silla subir \ me quiero subir a la silla,,chair up / I want to climb the chair,
+item_732,cmplx22,complexity,complexity,simple; complex,Marta papá \ quiero ir con papá,,Dad go / want to go with dad,
+item_733,cmplx23,complexity,complexity,simple; complex,bravo Tello circo \ dije bravo en el circo,,bravo said circus / I said bravo at the circus,
+item_734,cmplx24,complexity,complexity,simple; complex,papá calle \ papá se fue a trabajar,,Street Dad / Dad went to work,
+item_735,cmplx25,complexity,complexity,simple; complex,ya puse \ ya se lo puse,,I already put / and I put it,
+item_736,cmplx26,complexity,complexity,simple; complex,Chalo osito coche \ Chalo dejó el osito en el coche,,Chalo teddy bear car / Chalo left the teddy bear in the car,
+item_737,cmplx27,complexity,complexity,simple; complex,lápiz dibujar \ dibujo con el lápiz,,pencil drawing / drawing with pencil,
+item_738,cmplx28,complexity,complexity,simple; complex,ya pinté \ ya acabé de pintar,,and I painted / and I finished painting,
+item_739,cmplx29,complexity,complexity,simple; complex,nene rompió bici Danny \ el niño rompió la bici de Danny,,baby broke Danny bike / the boy broke Danny's bike,
+item_740,cmplx30,complexity,complexity,simple; complex,pone no \ no lo pongas,,puts no / do not put,
+item_741,cmplx31,complexity,complexity,simple; complex,vamos comer papas carne \ vamos a comer papas y carne,,we eat potatoes meat / we eat potatoes and meat,
+item_742,cmplx32,complexity,complexity,simple; complex,niño llora cayó \ el niño llora porque se cayó,,child cries fell / child cries because he fell,
+item_743,cmplx33,complexity,complexity,simple; complex,mamá nene compra \ mamá y nene fueron a comprar,,mom baby buy / mom and baby went to buy,
+item_744,cmplx34,complexity,complexity,simple; complex,abre dame galleta \ abre la caja y dame una galleta,,gimme cookie open / open the box and give me a cookie,
+item_745,cmplx35,complexity,complexity,simple; complex,"no toca, quemas \ no lo toques porque te quemas",,not touch; burning / do not touch it because you burn,
+item_746,cmplx36,complexity,complexity,simple; complex,quiero libro papá \ quiero el libra que compró papá,,l want Dad book / I want the book Dad bought,
+item_747,cmplx37,complexity,complexity,simple; complex,pongo agua flores \ pongo agua para que crezcan las flores,,put water flowers / put water to grow flowers,

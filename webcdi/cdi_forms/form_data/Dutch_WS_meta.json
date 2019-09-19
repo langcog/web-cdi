@@ -9,8 +9,7 @@
                     "sections": [
                         {
                             "id": "sounds",
-                            "title": "1. Geluidseffecten en dierengeluiden"
-                            
+                            "title": "1. Geluidseffecten en dierengeluiden"                         
                         },
                         {
                             "id": "animals",
@@ -21,10 +20,17 @@
                             "title": "3. Voertuigen (echte of speelgoed)"
                         },
                         {
+                            "footnote":  "* of het woord dat u gebruikt",
+                            "id": "toys",
+                            "title": "4. Speelgoed"
+                        },
+                        {
+                            "footnote":  "* of het woord dat u gebruikt",
                             "id": "food_drink",
                             "title": "5. Eten en Drinken"
                         },
                         {
+                            "footnote":  "* of het woord dat u gebruikt",
                             "id": "clothing",
                             "title": "6. Kleding"
                         },
@@ -33,15 +39,14 @@
                             "id": "body_parts",
                             "title":"7. Delen van het lichaam"
                         },
+
                         {
-                            "id": "toys",
-                            "title": "4. Speelgoed"
-                        },
-                        {
+                            "footnote":  "* of het woord dat u gebruikt",
                             "id": "household",
                             "title": "8. Kleine huishoudelijke voorwerpen"
                         },
                         {
+                            "footnote":  "* of het woord dat u gebruikt",
                             "id": "furniture_rooms",
                             "title": "9. Meubels en Kamers"
                         },
@@ -50,53 +55,50 @@
                             "title": "10. Voorwerpen buitenshuis"
                         },
                         {
+                            "footnote":  "* of het woord dat u gebruikt",
                             "id": "places",
                             "title": "11. Plaatsen buitenshuis"
                         },
                         {
                             "footnote": "* of het woord dat u gebruikt",
-                            "id": "12. Mensen",
-                            "title": "12. Personas"
+                            "id": "people",
+                            "title": "12. Mensen"
                         },
                         {
                             "id": "games_routines",
                             "title": "13. Spelletjes en routines"
                         },
                         {
-                            "id": "action_words",
-                            "title": "14. Werkwoorden"
-                        },
-                        {
-                            "id": "states",
-                            "title": "15. Estados"
-                        },
-                        {
                             "id": "descriptive_words",
-                            "title": "15. Omschrijvende woorden"
+                            "title": "14. Omschrijvende woorden"
+                        },
+                        {
+                            "id": "action_words",
+                            "title": "15. Werkwoorden"
                         },
                         {
                             "id": "time_words",
                             "title": "16. Woorden over tijd"
-                        },
+                        },                   
                         {
                             "id": "pronouns",
                             "title": "17. Voornaamwoorden"
                         },
                         {
                             "id": "question_words",
-                            "title": "18. Vraagwoorden"
+                            "title": "18. Vragende woordjes"
                         },
                         {
                             "id": "prepositions",
-                            "title": "20. Preposiciones y Artículos"
+                            "title": "19. Voorzetsels en plaatsbepalingen"
                         },
                         {
                             "id": "quantifiers",
                             "title": "20. Hoeveelheden en lidwoorden"
                         },
                         {
-                            "id": "locations",
-                            "title": "22. Locativos"
+                            "id":"helping_verbs",
+                            "title":"21. Hulpwerkwoorden"
                         },
                         {
                             "id": "connecting_words",
@@ -119,27 +121,9 @@
             "title": "Deel 2: Zinnen en zinsbouw",
             "types": [
                 {
-                    "id": "word_forms",
-                    "sections": [
-                        {
-                            "id": "word_forms_prese",
-                            "title": "",
-                            "text": "Para hablar de lo que sucede en el presente, ¿cuáles de estas formas usa?"
-                        },
-                        {
-                            "id": "word_forms_suced",
-                            "title": "",
-                            "text": "Para hablar de cosas que ya sucedieron, ¿cuáles de estas formas usa?"
-                        },
-                        {
-                            "id": "word_forms_orden",
-                            "title": "",
-                            "text": "Para pedir algo u ordenar, ¿cuáles de estas formas usa?"
-                        }
-                    ],
-                    "text": "A continuación encontrará una lista de diferentes terminaciones de verbos. Indique si su hijo/a usa palabras de la lista. En caso de que no use la misma palabra, pero que usa la misma terminación con palabras similares, por favor, rellene el circulo de la palabra que más se la parezca. Por ejemplo, en vez de \"comes\" dice \"duermes\" o \"puedes\" marque la línea de \"comes\".",
-                    "title": "A. Formas de Verbos",
-                    "type": "checkbox"
+                  "id":"ending",
+                  "title":"A. Woorduiteinden - deel 1",
+                  "type":"radiobutton"
                 },
                 {
                     "id": "combine",
@@ -147,15 +131,55 @@
                     "type": "radiobutton"
                 },
                 {
+                    "id": "word_ending",
+                    "sections": [
+                        {
+                            "id": "word_ending_nouns",
+                            "title": "Substantieven"
+                        },
+                        {
+                            "id": "word_ending_verb",
+                            "title": "Werkwoorden -1"
+                        },
+                        {
+                            "id": "word_ending_verbs",
+                            "title": "Werkwoorden -2"
+                        }
+                    ],
+                    "text": "Jonge kinderen maken vaak 'verkeerde woorden'. Bijvoorbeeld een kind kan zeggen 'gekoopt', 'geloopt'. Dergelijke 'fouten' worden vaak gemaakt omdat de taal nog in ontwikkeling is. Duid in de lijst hieronder de 'fouten' aan die u uw kind reeds hoorde maken.",
+                    "title": "B. Woorduiteinden - deel 2",
+                    "type": "checkbox"
+                },
+                {
+                    "id": "word_form",
+                    "sections": [
+                        {
+                            "id": "word_form_nouns",
+                            "title": "Substantieven"
+                        },
+                        {
+                            "id": "word_form_verb",
+                            "title": "Werkwoorden -1"
+                        },
+                        {
+                            "id": "word_form_verbs",
+                            "title": "Werkwoorden -2"
+                        }
+                    ],
+                    "text": "Hieronder staan een aantal woorden die kinderen leren. Kruis die woorden aan die uw kind zegt.",
+                    "title": "C. Woordvormen",
+                    "type": "checkbox"
+                },
+                {
                     "id": "combination_examples",
-                    "title": "B. Ejemplos",
-                    "text": "Por favor escriba tres ejemplos de las frases más largas que recuerde que su hijo/a haya dicho últimamente.",
+                    "title": "D. Voorbeelden",
+                    "text": "Schrijf hieronder 3 van de langste zinnen die uw kind onlangs gezegd heeft.",
                     "type": "textbox"
                 },
                 {
                     "id": "complexity",
-                    "text": "A continuación encontrará pares de frases. Por favor señale la que más se parezca a la forma en como hable su hijo/a, en este momento. Si su hijo/a usa frases más largas o complicadas de las que vienen en los ejemplos, por favor marque la segunda frase. El niño/a no tiene que decir exáctamente la misma frase; lo que le pedimos es que marque la frase que se parezca más a la manera en que su hijo/a habla.",
-                    "title": "C. Complejidad de Frases",
+                    "text": "Duid hieronder in de lijst met telkens 2 mogelijkheden die combinatie aan die het meest lijkt op wat uw kind momenteel zegt. Als uw kind (een) ander(e) woord(en) gebruikt, bvb. ‘kindje tafel’ i.p.v. ‘hondje tafel’ (zinnen 12), of ‘kindje tutje’ i.p.v. ‘kindje doekje’ (zinnen 8), dan mag u toch één van de 2 mogelijkheden aanduiden. Als uw kind langere zinnen of moeilijkere zinnen zegt dan hieronder aangeduid is, duid dan de tweede mogelijkheid aan.",
+                    "title": "E. Zinnen",
                     "type": "radiobutton"
                 }
             ]
