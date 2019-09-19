@@ -759,9 +759,9 @@ item_757,sitted,word_ending,word_endings_verbs,produces,sitted,sitted,,word_endi
 item_758,taked,word_ending,word_endings_verbs,produces,taked,taked,,word_endings_verbs_2
 item_759,wented,word_ending,word_endings_verbs,produces,wented,wented,,word_endings_verbs_2
 item_760,combine,combine,combine,not yet; sometimes; often,Has your child begun to combine words yet?,,,
-item_example1,combination_example1,combination_examples1,combination_examples,,,,,combination_example1
-item_example2,combination_example2,combination_examples2,combination_examples,,,,,combination_example2
-item_example3,combination_example3,combination_examples3,combination_examples,,,,,combination_example3
+item_example1,combination_example1,combination_examples,combination_examples,,,,,combination_example1
+item_example2,combination_example2,combination_examples,combination_examples,,,,,combination_example2
+item_example3,combination_example3,combination_examples,combination_examples,,,,,combination_example3
 item_761,complx01,complexity,complexity,simple; complex,two shoe / two shoes,two shoe / two shoes,morphology,
 item_762,complx02,complexity,complexity,simple; complex,two foot / two feet,two foot / two feet,morphology,
 item_763,complx03,complexity,complexity,simple; complex,daddy car / daddy's car,daddy car / daddy's car,morphology,
