@@ -811,7 +811,7 @@ item_769,complx09,complexity,complexity,simple; complex,baby blanket \ baby's bl
 item_770,complx10,complexity,complexity,simple; complex,doggie kiss me \ doggie kissed me,doggie kiss me / doggie kissed me,morphology,
 item_771,complx11,complexity,complexity,simple; complex,daddy pick me up \ daddy picked me up,daddy pick me up / daddy picked me up,morphology,
 item_772,complx12,complexity,complexity,simple; complex,kitty go away \ kitty went away,kitty go away / kitty went away,morphology,
-item_773,complx13,complexity,complexity,simple; complex,doggie table \ doggie on tabl\e,doggie table / doggie on table,syntax,
+item_773,complx13,complexity,complexity,simple; complex,doggie table \ doggie on table,doggie table / doggie on table,syntax,
 item_774,complx14,complexity,complexity,simple; complex,that my truck \ that's my truck,that my truck / that's my truck,syntax,
 item_775,complx15,complexity,complexity,simple; complex,baby crying \ baby is crying,baby crying / baby is crying,syntax,
 item_776,complx16,complexity,complexity,simple; complex,you fix it \ can you fix it,you fix it / can you fix it,syntax,
