@@ -14,6 +14,7 @@
       </div>
       <div class="modal-body">
         {% load crispy_forms_tags %}
+        {{ form.media }}
         {% crispy form %}
 
         <script>

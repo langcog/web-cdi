@@ -687,6 +687,7 @@ def rename_study(request, study_name): # Function for study settings modal
 
         if form.is_valid(): # If form passed validation checks in forms.py
             print("update form valid")
+            print(form.cleaned_data.get('waiver'))
 
             # Grab submitted data along with username
             researcher = request.user

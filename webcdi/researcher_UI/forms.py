@@ -6,12 +6,13 @@ from form_utils.forms import BetterModelForm, BetterForm
 from django.urls import reverse
 import os
 from django.contrib.postgres.forms import IntegerRangeField
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 # Form for creating a new study
 class AddStudyForm(BetterModelForm):
     name = forms.CharField(label='Study Name', max_length=51) # Study name
     instrument = forms.ModelChoiceField(queryset=instrument.objects.filter(language='English'), empty_label="(choose from the list)") # Study instrument (CANNOT BE CHANGED LATER)
-    waiver = forms.CharField(widget=forms.Textarea, label='Waiver of Documentation text (no titles)', required = False) # Addition of an IRB waiver of documentation or any other instructive text can be added here
+    waiver = forms.CharField(widget=CKEditorUploadingWidget(), label='Waiver of Documentation text (no titles)', required = False) # Addition of an IRB waiver of documentation or any other instructive text can be added here
     allow_payment = forms.BooleanField(required=False, label="Would you like to pay subjects in the form of Amazon gift cards? (You will need to upload gift card codes under \"Update Study\").") # Whether study participants will be compensated in the form of gift card codes upon completion
     anon_collection = forms.BooleanField(required=False, label="Do you plan on collecting only anonymous data in this study? (e.g., posting ads on social media, mass emails, etc)") # Whether the study will have only anonymous participants (opens up a range of other settings for anonymous data collection)
     subject_cap = forms.IntegerField(label = "Maximum number of participants", required = False, min_value = 1, help_text = "Leave this blank if you do NOT want to limit the number of participants.", widget=forms.NumberInput(attrs={'placeholder': 'XXX participants'})) # If there are anonymous participants, you can set a cap that limits the number of tests that can be completed. Tests initiated before the cutoff can still be finished even after the cutoff is reached
@@ -99,7 +100,8 @@ class AddPairedStudyForm(forms.Form):
 # Form for updating a study. Most study settings can be updated EXCEPT FOR INSTRUMENT.
 class RenameStudyForm(BetterModelForm):
     name = forms.CharField(label='Study Name', max_length=51, required=False) # Update study name
-    waiver = forms.CharField(widget=forms.Textarea, label='Waiver of Documentation', required=False) # update IRB waiver of documentation
+    #waiver = forms.CharField(widget=forms.Textarea, label='Waiver of Documentation', required=False) # update IRB waiver of documentation
+    waiver = forms.CharField(widget=CKEditorUploadingWidget(), label='Waiver of Documentation', required=False)
     test_period = forms.IntegerField(label = "# Days Before Expiration", help_text= "Between 1 and 28. Default is 14 days. (e.g., 14 = 14 days for parents to complete a form)", required = False, widget= forms.NumberInput(attrs={'placeholder':'(e.g., 14 = 14 days to complete a form)', 'min': '1', 'max': '28'})) # Update testing period. Can range from 1 to 28 days.
     gift_codes = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Paste Amazon gift card codes here. Can be separated by spaces, commas, or new lines.'}), required=False, label='Gift Card Codes') # Can add a list of gift card codes (separated by new lines, commas, or spaces) to the PaymentCode model that are given out to participants upon completion of current study.
     gift_amount = forms.CharField(max_length=7, required=False, label="Amount per Card (in USD)", widget=forms.TextInput(attrs={'placeholder': '$XX.XX'})) # Specify monetary value of the list of gift card codes in the gift_codes field. Assumed that all codes in the list have the same monetary value.
@@ -121,7 +123,7 @@ class RenameStudyForm(BetterModelForm):
     # Form validation. Form is passed automatically to views.py for higher level checking.
     def clean(self):
         cleaned_data = super(RenameStudyForm, self).clean()
-
+        
     # Form initiation. Specific form and field layout.
     def __init__(self, old_study_name, *args, **kwargs):
         self.age_range = kwargs.pop('age_range', None)

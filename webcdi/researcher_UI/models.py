@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator,MinValueValidator
+from ckeditor_uploader.fields import RichTextUploadingField
 
 # Model for individual instruments
 class instrument(models.Model):
@@ -34,7 +35,8 @@ class study(models.Model):
     researcher = models.ForeignKey("auth.user") # Researcher's name
     name = models.CharField(max_length = 51) # Study name
     instrument = models.ForeignKey("instrument") # Instrument associated with study
-    waiver = models.TextField(blank = True) # IRB Waiver of documentation for study or any additional instructions provided to participant
+    #waiver = models.TextField(blank = True) # IRB Waiver of documentation for study or any additional instructions provided to participant
+    waiver = RichTextUploadingField(blank = True)
     study_group = models.CharField(max_length = 51, blank = True) # Study group
     anon_collection = models.BooleanField(default=False) # Whether participants in study will all be anonymous
     subject_cap = models.IntegerField(blank = True, null=True) # Subject cap to limit number of completed administrations
