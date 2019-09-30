@@ -8,6 +8,9 @@ function modal_form(form_url){
             $('#'+modal_id).html(data);
             $('#'+modal_id).modal('show');
             var callback = function() {
+                for (var instance in CKEDITOR.instances) {
+                    CKEDITOR.instances[instance].updateElement();
+                }
                 $.ajax({
                     type: 'POST',
                     url: form_url,
