@@ -19,7 +19,8 @@ django-bootstrap3-datetimepicker==2.2.3
 django-bootstrap4==0.0.3
 django-ckeditor==5.7.1
 django-countries==5.3.1
-django-crispy-forms==1.7.2
+#django-crispy-forms==1.7.2
+git+git://github.com/django-crispy-forms/django-crispy-forms.git@c243b01a41ff2cab28fba219f39f996c1125195d
 django-csvimport==2.4
 django-form-utils==1.0.3
 django-health-check==3.5.1
