@@ -39,6 +39,7 @@ function modal_form(form_url){
                 });                
             };
             $("#"+modal_id+" input").keypress(function() {
+                console.log(event.which)
                 if (event.which == 13) callback();
             });
             $("#"+modal_id+" [name=submit]").click(callback); 

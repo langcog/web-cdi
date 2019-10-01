@@ -43,6 +43,7 @@
     }
     .django-ckeditor-widget{min-width:100% !important}
     
+    
 </style>
 <!-- Researcher interface -->
 <body>
@@ -196,7 +197,7 @@
     </div>
 
     <!-- New Study Modal -->
-    <div class="modal" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="new study"></div>
+    <div class="modal" id="modal-form" tabindex="" role="dialog" aria-labelledby="new study"></div>
 
 <script>
     // Function from static/researcher_UI.js. Disables the 'selected' buttons unless at least one of the checkboxes in select_col is selected.
@@ -229,7 +230,7 @@
 
     // Track whether Shift key is being held down. Used up Shift-Select motions
     $(document).on('keyup keydown', function(e){
-        console.log(e.shiftKey);
+        console.log("XXX", e.shiftKey);
         shifted = e.shiftKey;
     });
 
@@ -271,7 +272,7 @@
         $('#download-study').addClass('disabled');
     }
 
-
 </script>
+
 </body>
 </html>

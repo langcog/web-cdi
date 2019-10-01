@@ -102,7 +102,7 @@ class AddPairedStudyForm(forms.Form):
 class RenameStudyForm(BetterModelForm):
     name = forms.CharField(label='Study Name', max_length=51, required=False) # Update study name
     #waiver = forms.CharField(widget=forms.Textarea, label='Waiver of Documentation', required=False) # update IRB waiver of documentation
-    waiver = forms.CharField(widget=CKEditorUploadingWidget(), label='Waiver of Documentation', required=False)
+    waiver = forms.CharField(widget=CKEditorUploadingWidget, label='Waiver of Documentation', required=False)
     test_period = forms.IntegerField(label = "# Days Before Expiration", help_text= "Between 1 and 28. Default is 14 days. (e.g., 14 = 14 days for parents to complete a form)", required = False, widget= forms.NumberInput(attrs={'placeholder':'(e.g., 14 = 14 days to complete a form)', 'min': '1', 'max': '28'})) # Update testing period. Can range from 1 to 28 days.
     gift_codes = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Paste Amazon gift card codes here. Can be separated by spaces, commas, or new lines.'}), required=False, label='Gift Card Codes') # Can add a list of gift card codes (separated by new lines, commas, or spaces) to the PaymentCode model that are given out to participants upon completion of current study.
     gift_amount = forms.CharField(max_length=7, required=False, label="Amount per Card (in USD)", widget=forms.TextInput(attrs={'placeholder': '$XX.XX'})) # Specify monetary value of the list of gift card codes in the gift_codes field. Assumed that all codes in the list have the same monetary value.

@@ -250,8 +250,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 CKEDITOR_UPLOAD_PATH = "ckeditor_uploads/"
 CKEDITOR_CONFIGS = {
     'default': {
+        'skin': 'moono',
         #'toolbar': None,
         'height': '100%',
         'width': '100%',
     }
 }
+
