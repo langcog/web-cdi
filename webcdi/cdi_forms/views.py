@@ -97,6 +97,7 @@ class AdministrationMixin(object):
         self.study_context['birthweight_units'] = self.administration_instance.study.birth_weight_units
         self.study_context['child_age'] = None
         self.study_context['zip_code'] = ''
+        self.study_context['language_code'] =self.user_language
         return self.study_context
 
     def get_user_language(self):

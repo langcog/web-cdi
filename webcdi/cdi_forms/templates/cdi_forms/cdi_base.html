@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html lang="en">
+<html {% if language_code %}lang="{{ language_code }}"{% else %}lang="en"{% endif %}>
 <head>
     <meta charset="utf-8">
     {% load i18n %}

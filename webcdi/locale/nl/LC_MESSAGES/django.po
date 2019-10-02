@@ -236,7 +236,7 @@ msgstr "Geboortedatum van het kind<span class=\"asteriskField\">*</span>"
 
 #: cdi_forms/forms.py:114
 msgid "Age (in months)<span class=\"asteriskField\">*</span>"
-msgstr "leeftijd (in maanden)<span class=\"asteriskField\">*</span>"
+msgstr "Leeftijd (in maanden)<span class=\"asteriskField\">*</span>"
 
 #: cdi_forms/forms.py:116
 msgid "This field will update when you enter or change your child's DOB."
