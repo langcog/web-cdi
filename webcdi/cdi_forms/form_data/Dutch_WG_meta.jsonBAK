@@ -7,7 +7,7 @@
           "id": "understanding",
           "type": "radiobutton",
           "title": "A: Eerste tekens van begrijpen",
-          "text": "Voordat kinderen beginnen te spreken, begrijpen ze toch onze taal door te reageren op bekende woordjes en zinnetjes. Hieronder worden enkele situaties beschreven. Heeft u dit uw kind al zien doen?"
+          "text": "Voordat kinderen beginnen te spreken, begrijpen ze toch onze taal door te reageren op bekende woordjes en zinnetjes. Hieronder worden enkele situaties beschreven. hebt u uw kind dit al zien doen?"
         },
         {
           "id": "sentence",
@@ -41,7 +41,7 @@
             },
             {
               "id": "food_drink",
-              "title": "5. Eten en drinken"
+              "title": "5. Eten en Drinken"
             },
             {
               "footnote":  "* of het woord dat u gebruikt",
@@ -102,7 +102,7 @@
               "title": "19. Hoeveelheden"
             }
           ],
-          "text": "Nu volgt er een lijst met mogelijke woorden van jonge kinderen. Vink het woord in de kolom \"begrijpen\" aan als uw kind dit woord begrijpt, maar nog niet zelf zegt. Vink het woord in de kolom \"begrijpen en zeggen\" aan als uw kind dit woord begrijpt en zelf zegt. Als uw kind een woord anders uitspreekt (bijv. \"ojanne\" voor \"oranje\" of \"sjille\" voor \"schillen\") dan mag u toch het woord in de kolom \"begrijpen en zeggen\" aanvinken. Als u of uw kind een ander woord gebruikt, bijv. \"boke\" of \"ham ham\" voor \"boterham\", dan mag u toch het het woord aanvinken als uw kind dit woord begrijpt en/of zelf zegt. Deze lijst is eigenlijk een verzameling woorden die afkomstig is van verschillende kinderen, wees niet ongerust als uw kind er maar enkele van begrijpt of kent op dit moment.",
+          "text": "Nu volgt er een lijst met mogelijke woorden van jonge kinderen. Markeer het woord in de kolom \"begrijpen\" als uw kind dit woord begrijpt, maar nog niet zelf zegt. Markeer het woord in de kolom \"begrijpen en zeggen\" als uw kind dit woord begrijpt en zelf zegt. Als uw kind een woord anders uitspreekt (bijv. \"ojanne\" voor \"oranje\" of \"sjille\" voor \"schillen\") dan mag u toch het woord in de kolom \"begrijpen en zeggen\" markeren. Als u of uw kind een ander woord gebruikt, bijv. \"boke\" of \"ham ham\" voor \"boterham\", dan mag u toch het het woord markeren als uw kind dit woord begrijpt en/of zelf zegt. Deze lijst is eigenlijk een verzameling woorden die afkomstig is van verschillende kinderen; wees niet ongerust als uw kind er maar enkele van begrijpt of kent op dit moment.",
           "title": "D: Woordenschatlijst",
           "type": "radiobutton"
         }
@@ -115,7 +115,7 @@
         {
           "id": "first_gestures",
           "title": "A: Eerste communicatieve gebaren",
-          "text": "Wanneer kinderen beginnen te communiceren, maken ze vaak aan de hand van gebaren duidelijk wat ze willen. Vink hieronder de acties aan die uw kind op dit moment doet.",
+          "text": "Wanneer kinderen beginnen te communiceren, maken ze vaak aan de hand van gebaren duidelijk wat ze willen. Markeer hieronder de acties die uw kind op dit moment doet.",
           "type": "radiobutton"
         },
         {
@@ -149,7 +149,7 @@
         {
           "id": "fantasy_example",
           "title": "E: Gefantaseerde voorwerpen",
-          "text": "Als kinderen aan het spelen zijn, gebruiken ze soms een ander voorwerp in plaats van het echte. Bijvoorbeeld als een kind zijn/haar beer eten wil geven, kan het doen alsof een speelgoedblokje een appel is. Of een kind kan doen alsof een (grote) kom een hoed is. Heeft u uw kind die dingen al zien doen?",
+          "text": "Als kinderen aan het spelen zijn, gebruiken ze soms een ander voorwerp in plaats van het echte. Bijv. als een kind zijn/haar beer eten wil geven, kan het doen alsof een speelgoedblokje een appel is. Of een kind kan doen alsof een (grote) kom een hoed is. Hebt u uw kind die dingen al zien doen?",
           "type": "textbox"
         }
       ],

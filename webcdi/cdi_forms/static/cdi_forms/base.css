@@ -193,3 +193,11 @@ label.btn{
   -moz-box-sizing: border-box;
           box-sizing: border-box;
   }
+
+.bs-docs-sidebar.affix {
+  position: fixed;
+  top: 20px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 80vh;
+}

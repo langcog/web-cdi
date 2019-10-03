@@ -236,7 +236,7 @@ msgstr "Geboortedatum van het kind<span class=\"asteriskField\">*</span>"
 
 #: cdi_forms/forms.py:114
 msgid "Age (in months)<span class=\"asteriskField\">*</span>"
-msgstr "leeftijd (in maanden)<span class=\"asteriskField\">*</span>"
+msgstr "Leeftijd (in maanden)<span class=\"asteriskField\">*</span>"
 
 #: cdi_forms/forms.py:116
 msgid "This field will update when you enter or change your child's DOB."
@@ -1296,7 +1296,7 @@ msgstr "Eerste verzorger"
 
 #: cdi_forms/models.py:126
 msgid "Primary Caregiver Year of birth"
-msgstr "Geboortedatum eerste verzorger"
+msgstr "Geboortejaar eerste verzorger"
 
 #: cdi_forms/models.py:127
 msgid "Primary Caregiver Education"
@@ -1314,7 +1314,7 @@ msgstr "Tweede verzorger"
 
 #: cdi_forms/models.py:131
 msgid "Secondary Caregiver Year of birth"
-msgstr "Geboortedatum tweede verzorger"
+msgstr "Geboortejaar tweede verzorger"
 
 #: cdi_forms/models.py:132
 msgid "Secondary Caregiver Education"
@@ -1342,7 +1342,7 @@ msgstr "Andere verzorgers (bijv. grootouder(s))"
 
 #: cdi_forms/models.py:148
 msgid "Who does your child live with?"
-msgstr "Wie woont er samen met het kind?"
+msgstr "Welke verzorgers wonen er samen met het kind?"
 
 #: cdi_forms/models.py:152
 msgid "From whom?"
@@ -1428,16 +1428,16 @@ msgid ""
 "Try to complete the inventory when you have at least 30 quiet minutes, "
 "without interruptions. An example might be when your child is sleeping."
 msgstr ""
-"Probeer de vragenlijst in te vullen wanneer u 30 minuten de tijd heeft. "
-"Bijvoorbeeld op momenten waar uw kind aan het slapen is. "
+"Probeer de vragenlijst in te vullen wanneer u 30 minuten de tijd heeft, "
+"bijvoorbeeld als uw kind slaapt. "
 
 #: cdi_forms/templates/cdi_forms/background_info.html:29
 msgid ""
 "Try to complete the inventory when you have at least 10-15 quiet minutes, "
 "without interruptions. An example might be when your child is sleeping."
 msgstr ""
-"Probeer de vragenlijst in te vullen wanneer u 30 minuten de tijd heeft. "
-"Bijvoorbeeld op momenten waar uw kind aan het slapen is. "
+"Probeer de vragenlijst in te vullen wanneer u 30 minuten de tijd heeft, "
+"bijvoorbeeld als uw kind slaapt. "
 
 #: cdi_forms/templates/cdi_forms/background_info.html:31
 #: cdi_forms/templates/cdi_forms/study_group.html:23
@@ -1446,8 +1446,8 @@ msgid ""
 "interrupted, it is ok to put it down and come back to it when you have more "
 "time."
 msgstr ""
-"U hoeft de vragenlijst niet in een keer af te maken. Als u onderbroken wordt "
-"is het geen probleem om te stoppen en op een ander moment verder te gaan."
+"U hoeft de vragenlijst niet in een keer af te maken. Als u onderbroken wordt, "
+"kunt u de lijst opslaan en op een ander moment verder te gaan."
 
 #: cdi_forms/templates/cdi_forms/background_info.html:32
 #: cdi_forms/templates/cdi_forms/study_group.html:24
@@ -1455,8 +1455,8 @@ msgid ""
 "Feel free to ask others (e.g. other family members, nanny, child care "
 "providers) to help you fill out this form."
 msgstr ""
-"U kunt andere mensen om hulp vragen met het invullen van deze vragenlijst "
-"(bijv. andere familieleden, oppas, kinderopvang)."
+"U kunt andere mensen om hulp vragen met het invullen van deze vragenlijst, "
+"bijvoorbeeld familieleden, oppas of kinderopvang."
 
 #: cdi_forms/templates/cdi_forms/background_info.html:33
 #: cdi_forms/templates/cdi_forms/study_group.html:25
@@ -1490,7 +1490,7 @@ msgstr "klik hier"
 #: cdi_forms/templates/cdi_forms/background_info.html:44
 #: cdi_forms/templates/cdi_forms/study_group.html:30
 msgid "Thank you! We appreciate your time and effort!"
-msgstr "Bedankt! We waarderen uw tijd en moeite."
+msgstr "Bedankt dat u deze vragenlijst in wilt vullen!"
 
 #: cdi_forms/templates/cdi_forms/background_info.html:49
 msgid "Background Information"
@@ -1533,8 +1533,8 @@ msgstr ""
 msgid ""
 "It can also be saved at any time and resumed later by using the same link"
 msgstr ""
-"U kunt de vragenlijst ook opslaan en op een later moment verder gaan met "
-"invullen door dezelfde link te gebruiken"
+"U kunt de vragenlijst tussentijds opslaan en op een later moment verder "
+"gaan met invullen door dezelfde link te gebruiken"
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:55
 msgid "create bookmark"
@@ -1542,13 +1542,15 @@ msgstr "creëer een bladwijzer voor deze link"
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:56
 msgid "After the form is submitted, it cannot be altered."
-msgstr "Nadat de vragenlijst is verstuurd, kan hij niet meer veranderd worden."
+msgstr ""
+"Nadat de ingevulde vragenlijst is verstuurd, kan hij niet meer "
+"veranderd worden."
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:57
 msgid "The form also cannot be altered after the due date."
 msgstr ""
-"De vragenlijst kan ook niet aangepast worden na de uiterlijke datum van "
-"invullen."
+"Ook kan de vragenlijst niet worden aangepast na de uiterlijke "
+"invuldatum."
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:58
 msgid ""
@@ -1688,7 +1690,7 @@ msgid ""
 "Your child says a word/phrase when trying to name an object or describe "
 "something that happened.  You think s/he has a meaning for that word/phrase."
 msgstr ""
-"Uw kind een woord/zin zegt wanneer hij/zij probeert een object te benoemen "
+"Uw kind een woord/zin zegt wanneer hij/zij probeert een voorwerp te benoemen "
 "of een situatie probeert te beschrijven. U denkt dat hij/zij de betekenis "
 "voor dit woord/deze zin kent."
 
@@ -1740,8 +1742,8 @@ msgstr ""
 "zegt\" een woord van de vragenlijst als hij/zij weet wat dit woord betekent "
 "EN als hij/zij het woord zelf kan zeggen. Hierbeneden zijn een paar "
 "voorbeelden. Deze vragenlijst is voor kinderen van verschillende leeftijden. "
-"Het kan zijn dat uw kind niet veel woorden van de vragenlijst kan begrijpen "
-"of zeggen. Dat is helemaal prima!"
+"Het kan zijn dat uw kind niet veel woorden van de vragenlijst begrijpt of "
+"zegt. Dat is helemaal prima!"
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:205
 msgid "DO check the box if:"
@@ -1764,7 +1766,7 @@ msgid ""
 "Grandma), that is ok too!"
 msgstr ""
 "Vink \"begrijpen en zeggen\" WEL aan als uw kind een woord/zin zegt wanneer "
-"hij/zij probeert een object te benoemen of een situatie probeert te "
+"hij/zij probeert een voorwerp te benoemen of een situatie probeert te "
 "beschrijven. U denkt dat hij/zij de betekenis voor dit woord/deze zin kent."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:227
@@ -1928,7 +1930,7 @@ msgid ""
 "\">here</a>. We appreciate your contribution!"
 msgstr ""
 "Bedankt dat u de tijd heeft genomen om de MacArthur-Bates Communicative "
-"Development Inventory (CDI) in te vullen. Met behulp van ouders en "
+"Development Inventory (CDI) in te vullen. Met de hulp van ouders en "
 "verzorgers zoals u kunnen we meer leren over de taalontwikkeling van "
 "kinderen en hoe deze variëert binnen verschillende kinderen en culturen. "
 "Vergeet niet dat de CDI verschillende woorden bevat die door verschillende "

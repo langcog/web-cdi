@@ -19,6 +19,8 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 from supplementtut.views import *
 from django.contrib.auth import views as auth_views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name="researcher_UI/home.html")),
@@ -33,4 +35,9 @@ urlpatterns = [
     url(r'^registration/', include('registration.urls')),
     url(r'^lockout/$', TemplateView.as_view(template_name="registration/lockout.html")),
     url(r'^health/?', include('health_check.urls')),
+    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

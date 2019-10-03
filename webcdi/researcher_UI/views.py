@@ -686,8 +686,6 @@ def rename_study(request, study_name): # Function for study settings modal
         amount_regex = None
 
         if form.is_valid(): # If form passed validation checks in forms.py
-            print("update form valid")
-
             # Grab submitted data along with username
             researcher = request.user
             new_study_name = form.cleaned_data.get('name')
