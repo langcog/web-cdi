@@ -27,7 +27,7 @@
                         {
                             "footnote":  "* of het woord dat u gebruikt",
                             "id": "food_drink",
-                            "title": "5. Eten en drinken"
+                            "title": "5. Eten en Drinken"
                         },
                         {
                             "footnote":  "* of het woord dat u gebruikt",
@@ -48,7 +48,7 @@
                         {
                             "footnote":  "* of het woord dat u gebruikt",
                             "id": "furniture_rooms",
-                            "title": "9. Meubels en kamers"
+                            "title": "9. Meubels en Kamers"
                         },
                         {
                             "id": "outside",
@@ -105,7 +105,7 @@
                             "title": "22. Voegwoorden"
                         }
                     ],
-                    "text": "Nu volgt er een lijst met mogelijke woorden van jonge kinderen. Vink het woord in de kolom \"begrijpen\" aan als uw kind dit woord begrijpt, maar nog niet zelf zegt. Vink het woord in de kolom \"begrijpen en zeggen\" aan als uw kind dit woord begrijpt en zelf zegt. Als uw kind een woord anders uitspreekt (bijv. 'ojanne' voor 'oranje' of 'sjille' voor 'schillen') dan mag u toch het woord in de kolom \"begrijpen en zeggen\" aanvinken. Als u of uw kind een ander woord gebruikt (bijv. 'paleis' voor 'kasteel'), dan mag u toch het het woord aanvinken als uw kind dit woord begrijpt en/of zelf zegt. Deze lijst is eigenlijk een verzameling woorden die afkomstig is van verschillende kinderen, wees niet ongerust als uw kind er maar enkele van begrijpt of kent op dit moment.",
+                    "text": "Nu volgt er een lijst met mogelijke woorden van jonge kinderen. Markeer het woord in de kolom \"begrijpen\" als uw kind dit woord begrijpt, maar nog niet zelf zegt. Markeer het woord in de kolom \"begrijpen en zeggen\" als uw kind dit woord begrijpt en zelf zegt. Als uw kind een woord anders uitspreekt (bijv. 'ojanne' voor 'oranje' of 'sjille' voor 'schillen') dan mag u toch het woord in de kolom \"begrijpen en zeggen\" markeren. Als u of uw kind een ander woord gebruikt (bijv. 'paleis' voor 'kasteel'), dan mag u toch het het woord markeren als uw kind dit woord begrijpt en/of zelf zegt. Deze lijst is eigenlijk een verzameling woorden die afkomstig is van verschillende kinderen; wees niet ongerust als uw kind er maar enkele van begrijpt of kent op dit moment.",
                     "title": "A: Woordenschatlijst",
                     "type": "radiobutton"
                 },
@@ -166,7 +166,7 @@
                             "title": "Werkwoorden -2"
                         }
                     ],
-                    "text": "Hieronder staan een aantal woorden die kinderen leren. Kruis de woorden aan die uw kind op de juiste manier zegt.",
+                    "text": "Hieronder staan een aantal woorden die kinderen leren. Kruis die woorden aan die uw kind zegt.",
                     "title": "C. Woordvormen",
                     "type": "checkbox"
                 },
@@ -178,7 +178,7 @@
                 },
                 {
                     "id": "complexity",
-                    "text": "Duid hieronder in de lijst met telkens 2 mogelijkheden die combinatie aan die het meest lijkt op wat uw kind momenteel zegt. Als uw kind (een) ander(e) woord(en) gebruikt, bijv. ‘kindje tafel’ i.p.v. ‘hondje tafel’ (zinnen 12), of ‘kindje tutje’ i.p.v. ‘kindje doekje’ (zinnen 8), dan mag u toch één van de 2 mogelijkheden aanduiden. Als uw kind langere zinnen of moeilijkere zinnen zegt dan hieronder aangeduid is, duid dan de tweede mogelijkheid aan.",
+                    "text": "Duid hieronder in de lijst met telkens 2 mogelijkheden die combinatie aan die het meest lijkt op wat uw kind momenteel zegt. Als uw kind (een) ander(e) woord(en) gebruikt, bvb. ‘kindje tafel’ i.p.v. ‘hondje tafel’ (zinnen 12), of ‘kindje tutje’ i.p.v. ‘kindje doekje’ (zinnen 8), dan mag u toch één van de 2 mogelijkheden aanduiden. Als uw kind langere zinnen of moeilijkere zinnen zegt dan hieronder aangeduid is, duid dan de tweede mogelijkheid aan.",
                     "title": "E. Zinnen",
                     "type": "radiobutton"
                 }

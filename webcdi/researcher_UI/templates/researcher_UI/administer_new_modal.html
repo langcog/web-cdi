@@ -72,6 +72,9 @@
 
               <script type="text/javascript">
                 $('#reusable_link').html($('#reusable_link')[0].href).css;
+                $('#reusable_link').on('click', function() {
+                  $('#reusable_link').hide();
+                })
 
                 //var study_group = "{{ study_group }}";
                 //if (study_group != "") {

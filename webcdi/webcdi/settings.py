@@ -103,6 +103,8 @@ INSTALLED_APPS = (
     'localflavor',
     'django_countries',
     'webcdi',
+    'ckeditor',
+    'ckeditor_uploader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -233,7 +235,7 @@ LANGUAGE_DICT = {
 }
 
 COUNTRIES_FIRST = [
-    'US','CA',
+    'US','CA','NL'
 ]
 
 if SITE_ID == 3: USER_ADMIN_EMAIL = 'henrymehta@hotmail.com'
@@ -241,3 +243,17 @@ else : USER_ADMIN_EMAIL = 'webcdi-contact@stanford.edu'
 
 #CSRF_COOKIE_SECURE=False
 #CSRF_TRUSTED_ORIGINS = ('.elasticbeanstalk.com',)
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+CKEDITOR_UPLOAD_PATH = "ckeditor_uploads/"
+CKEDITOR_CONFIGS = {
+    'default': {
+        'skin': 'moono',
+        #'toolbar': None,
+        'height': '100%',
+        'width': '100%',
+    }
+}
+
