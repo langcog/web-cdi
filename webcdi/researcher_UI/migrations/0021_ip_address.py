@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('ip_address', models.CharField(max_length=30)),
                 ('date_added', models.DateTimeField(auto_now_add=True, verbose_name=b'Date IP address was added to database')),
-                ('study', models.ForeignKey(to='researcher_UI.study')),
+                ('study', models.ForeignKey(to='researcher_UI.study', on_delete=models.PROTECT)),
             ],
         ),
     ]

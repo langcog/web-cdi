@@ -5,7 +5,9 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseServerError, Http404
 from .forms import *
 from .models import researcher, study, administration, administration_data, get_meta_header, get_background_header, payment_code, ip_address
-import codecs, json, os, re, random, csv, datetime, cStringIO, math, StringIO, zipfile
+import codecs, json, os, re, random, csv, datetime, math, zipfile
+from io import StringIO
+#import cStringIO, StringIO
 from .tables  import StudyAdministrationTable
 from .mixins import StudyOwnerMixin
 from django.views.generic import UpdateView
@@ -781,7 +783,7 @@ def add_study(request): # Function for adding studies modal
         form = AddStudyForm(request.POST, researcher = researcher) # Grab submitted form
 
         if form.is_valid(): # If form passed validation checks in forms.py
-            print "Valid form"
+            print ("Valid form")
             study_instance = form.save(commit=False) # Save study object but do not commit to database just yet
             study_name = form.cleaned_data.get('name')
             age_range = form.cleaned_data.get('age_range')
@@ -818,7 +820,7 @@ def add_study(request): # Function for adding studies modal
                 data['error_message'] = "Study name has a forward slash ('/') inside. Please remove or replace this character.";
                 return HttpResponse(json.dumps(data), content_type="application/json") # Display error message about non-unique study back to user                
         else: # If form failed validation checks
-            print "Invalid form"
+            print ("Invalid form")
             data['stat'] = "re-render"; # Re-render form
             return render(request, 'researcher_UI/add_study_modal.html', {'form': form, 'form_name': 'Add New Study'})
     else: # If fetching modal

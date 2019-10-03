@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='study',
             name='researcher',
-            field=models.ForeignKey(default=0, to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(default=0, to=settings.AUTH_USER_MODEL, on_delete=models.PROTECT),
             preserve_default=False,
         ),
     ]

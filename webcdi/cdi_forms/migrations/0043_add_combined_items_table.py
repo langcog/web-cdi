@@ -28,7 +28,7 @@ def populate_items(apps, schema_editor):
 
         instrument_language, instrument_form = curr_instrument['language'], curr_instrument['form']
         instrument_name = var_safe(instrument_language) + '_' + var_safe(instrument_form)
-        print "    Populating items for", instrument_language, instrument_form
+        print ("    Populating items for", instrument_language, instrument_form)
 
         if instrument.objects.filter(form=instrument_form, language=instrument_language).exists():
             instrument_obj = instrument.objects.get(form=instrument_form, language=instrument_language)
