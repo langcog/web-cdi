@@ -5,7 +5,7 @@
 
     <title>WebCDI Interface</title>
     <meta name="description" content="English Words and Sentences CDI form">
-    <meta name="author" content="Ashwin Paranjape">
+    <meta name="author" content="Henry Mehta">
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" ></script>
@@ -103,7 +103,7 @@
                     				</div>
                 			    </div>
                 			    <div class='col-md-2'>
-                				    <button type="button" style='width:100%;' class="btn btn-primary"   onclick = "modal_form('/interface/add_study/')" >New Study</button>
+                				    <button id="id_new_study" type="button" style='width:100%;' class="btn btn-primary"   onclick = "modal_form('/interface/add_study/')" >New Study</button>
                                     <br><br>
                                     <button type="button" style='width:100%; margin-bottom: 5%;' class="btn btn-primary"   onclick = "modal_form('/interface/add_paired_study/')" >Group Study</button>
                 			    </div>
@@ -112,7 +112,7 @@
                                 <div class="row">
                                     <div class="col-3">
                                         <div class="btn-group btn-block">
-                                          <button type="button" class="btn btn-secondary btn-block" onclick = "modal_form('/interface/study/{{ current_study|urlencode }}/administer_new/')">Add Participants</button>
+                                          <button id="id_add_participants" type="button" class="btn btn-secondary btn-block" onclick = "modal_form('/interface/study/{{ current_study|urlencode }}/administer_new/')">Add Participants</button>
                                           <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <span class="sr-only">Toggle Dropdown</span>
                                           </button>
@@ -137,7 +137,7 @@
                                         </div>                                            
                                     </div>
                                     <div class="col-3">
-                                        <button type="button" class="btn btn-secondary btn-block"   onclick = "modal_form('/interface/study/{{ current_study|urlencode }}/rename_study/')" >Update Study</button>
+                                        <button id="id_update_study" type="button" class="btn btn-secondary btn-block"   onclick = "modal_form('/interface/study/{{ current_study|urlencode }}/rename_study/')" >Update Study</button>
                                     </div>
                                     <div class="col-3">
                                         <button type="submit" class="btn btn-secondary btn-block" name='delete-study' id='delete-study' onclick='return confirm("Are you sure you want to delete the entire study and all the data associated with it?");' >Delete Study</button>
@@ -160,10 +160,10 @@
                                 </div>
                                 <div class='col-md-3'>
                                     <div class="dropdown selected-btn">
-                                        <button class="btn btn-secondary selected-btn btn-block dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
+                                        <button class="btn btn-secondary selected-btn btn-block dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
                                             Download Selected Data
                                         </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenu">
                                             <button class="dropdown-item btn btn-secondary selected-btn btn-block" id='download-selected' type='submit' name='download-selected' value='download-selected'  disabled >Download Selected Data (CSV/All)</button>
                                             <button class="dropdown-item btn btn-secondary selected-btn btn-block" id='download-selected-summary' type="submit" name='download-selected-summary' value='download-selected-summary' disabled>Download Summary (CSV format)</button>
                                             <button class="dropdown-item btn btn-secondary selected-btn btn-block" id='download-links' type='submit' name='download-links' value='download-links'  disabled >Download Selected Data (CSV/Links)</button>
@@ -228,34 +228,26 @@
     });
     var shifted = false;
 
-    // Track whether Shift key is being held down. Used up Shift-Select motions
-    $(document).on('keyup keydown', function(e){
-        console.log("XXX", e.shiftKey);
-        shifted = e.shiftKey;
-    });
-
     // Checkboxes selected while Shift button is held down select all checkboxes in between as well
     var lastChecked = null;
     var handleChecked = function(e) {
+        shifted = e.shiftKey;
         if(lastChecked && shifted) {
-            console.log("yes")
             var i = $('input[type="checkbox"]').index(lastChecked);
-        var j = $('input[type="checkbox"]').index(e.target);
-        var checkboxes = [];
-        if (j > i) {
-            checkboxes = $('input[type="checkbox"]:gt('+ (i-1) +'):lt('+ (j-i) +')');
-        } else {
-            checkboxes = $('input[type="checkbox"]:gt('+ j +'):lt('+ (i-j) +')');
-        }
-     
-        if (!$(e.target).is(':checked')) {
-            $(checkboxes).removeAttr('checked');
-        } else {
-            $(checkboxes).attr('checked', 'checked');
-        }
+            var j = $('input[type="checkbox"]').index(e.target);
+            var checkboxes = [];
+            if (j > i) {
+                checkboxes = $('input[type="checkbox"]:gt('+ (i-1) +'):lt('+ (j-i) +')');
+            } else {
+                checkboxes = $('input[type="checkbox"]:gt('+ j +'):lt('+ (i-j) +')');
+            }
+            if (!$(e.target).is(':checked')) {
+                $(checkboxes).prop('checked', false);
+            } else {
+                $(checkboxes).prop('checked', true);
+            }
         }
         lastChecked = e.target;
-          
     }
 
     $('input[name="select_col"').click( function() {
@@ -272,6 +264,7 @@
         $('#download-study').addClass('disabled');
     }
 
+    
 </script>
 
 </body>

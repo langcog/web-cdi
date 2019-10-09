@@ -95,7 +95,7 @@ INSTALLED_APPS = (
     'supplementtut',
     'django.contrib.sites',
     'axes',
-    'csvimport.app.CSVImportConf',
+    #'csvimport.app.CSVImportConf',
     'health_check',
     'health_check.db',
     'health_check.cache',
@@ -175,6 +175,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
+DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap-responsive.html"
 
 LOGGING = {
     'version': 1,
@@ -261,7 +262,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 CKEDITOR_UPLOAD_PATH = "ckeditor_uploads/"
 CKEDITOR_CONFIGS = {
     'default': {
-        'skin': 'moono',
+        #'skin': 'moono',
         #'toolbar': None,
         'height': '100%',
         'width': '100%',

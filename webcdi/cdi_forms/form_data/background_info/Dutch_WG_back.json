@@ -59,8 +59,8 @@
           "field":"birth_order"
       },
       {
-          "field":"multiple_birth_boolean",
-          "div":["multiple_birth"]
+          "field":"multi_birth_boolean",
+          "div":["multi_birth"]
       }    
       ]
 },{

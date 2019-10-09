@@ -41,12 +41,12 @@ class Choices(models.Model):
 
 #Model for storing CDI items for all forms. Each row represents a single item for a single type of CDI questionnaire and its descriptive variables     
 class Instrument_Forms(models.Model):
-    instrument = models.ForeignKey('researcher_UI.instrument', db_index=True, on_delete=models.PROTECT)
+    instrument = models.ForeignKey('researcher_UI.instrument', db_index=True, on_delete=models.CASCADE)
     itemID = models.CharField(max_length = 101, db_index=True) # ID number for identification
     item = models.CharField(max_length = 101) # string variable name
     item_type = models.CharField(max_length = 101) # type of variable (word, phrase, etc.)
     category = models.CharField(max_length = 101) # if word, the subcategory for item (animals, sounds, etc.)
-    choices = models.ForeignKey('Choices', null=True, on_delete=models.deletion.PROTECT)
+    choices = models.ForeignKey('Choices', null=True, on_delete=models.deletion.CASCADE)
     definition = models.CharField(max_length = 1001, null=True, blank=True) # item listed in plaintext. This is what is displayed to test-takers along with possible choices
     gloss = models.CharField(max_length = 1001, null=True, blank=True) # English translation for item. At the moment, we only have English instruments so definition and gloss are identical
     complexity_category = models.CharField(max_length = 101, null=True, blank=True) # category for complexity item. Currently blank.
@@ -55,13 +55,15 @@ class Instrument_Forms(models.Model):
     scoring_category = models.CharField(max_length = 101, null=True, blank=True) # used to provide scoring granulatity - uses item_type if blank
     def __unicode__(self):
         return "%s (%s, %s)" % (self.definition, self.instrument.verbose_name, self.itemID)
+    def __str__(self):
+        return f"%s (%s, %s)" % (self.definition, self.instrument.verbose_name, self.itemID)
     class Meta:
         unique_together = ('instrument', 'itemID') # Each instrument in the database must have a unique combination of instrument and itemID
 
 
 #Model for storing demographic variables associated with a subject.
 class BackgroundInfo(models.Model):
-    administration = models.OneToOneField("researcher_UI.administration", on_delete=models.PROTECT) # Administration ID# unique to the entire database
+    administration = models.OneToOneField("researcher_UI.administration", on_delete=models.CASCADE) # Administration ID# unique to the entire database
     age = models.IntegerField(verbose_name = _("Age (in months)"), validators=[MinValueValidator(0)], default = 999) #age in months for child (views.py converts DOB field in forms.py into age for this model)
     sex = models.CharField(max_length = 1, blank=True, null=True, choices = (('M', _("Male")), ('F', _("Female")), ('O', _("Other")))) # Reported gender for child
     country = CountryField(verbose_name=_("Country"), blank = True, null=True)

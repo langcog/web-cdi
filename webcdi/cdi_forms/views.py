@@ -218,7 +218,7 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
                 if age: obj.age = age
 
                 if obj.child_hispanic_latino == '':
-                    obj.child_hispanic_latino = 'None'
+                    obj.child_hispanic_latino = None
 
                 # Find the raw zip code value and make it compliant with Safe Harbor guidelines. Only store the first 3 digits if the total population for that prefix is greataer than 20,000 (found prohibited prefixes via Census API data). If prohibited zip code, replace value with state abbreviations.
                 zip_prefix = ''
@@ -425,8 +425,7 @@ def cdi_items(object_group, item_type, prefilled_data, item_id):
             obj['choices'] = obj['choices__choice_set']
 
         elif item_type in ['radiobutton', 'modified_checkbox']:
-            #raw_split_choices = map(str.strip, obj['choices__choice_set'].split(';'))
-            raw_split_choices = obj['choices__choice_set'].split(';')
+            raw_split_choices = [i.strip() for i in obj['choices__choice_set'].split(';')]
 
             #split_choices_translated = map(str.strip, [value for key, value in obj.items() if 'choice_set_' in key][0].split(';'))
             split_choices_translated = [value for key, value in obj.items() if 'choice_set_' in key][0].split(';')

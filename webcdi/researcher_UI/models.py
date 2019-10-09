@@ -35,9 +35,9 @@ class researcher(models.Model):
 
 # Model for individual studies
 class study(models.Model):
-    researcher = models.ForeignKey("auth.user", on_delete=models.PROTECT) # Researcher's name
+    researcher = models.ForeignKey("auth.user", on_delete=models.CASCADE) # Researcher's name
     name = models.CharField(max_length = 51) # Study name
-    instrument = models.ForeignKey("instrument", on_delete=models.PROTECT) # Instrument associated with study
+    instrument = models.ForeignKey("instrument", on_delete=models.CASCADE) # Instrument associated with study
     #waiver = models.TextField(blank = True) # IRB Waiver of documentation for study or any additional instructions provided to participant
     waiver = RichTextUploadingField(blank = True)
     study_group = models.CharField(max_length = 51, blank = True) # Study group
@@ -71,7 +71,7 @@ def get_background_header(): # Returns a list of variables for backgroundinfo ob
 
 # Model for individual administrations
 class administration(models.Model):
-    study = models.ForeignKey("study", on_delete=models.PROTECT) # Study name
+    study = models.ForeignKey("study", on_delete=models.CASCADE) # Study name
     subject_id = models.IntegerField() # Subject ID, unique to the associated study
     local_lab_id = models.CharField(max_length=101, blank=True, null=True) #Id for local labs to use as they see fit
     repeat_num = models.IntegerField(verbose_name = "Administration number") # Ordinal number of tests given to this particular subject ID. For example, if this is Subject 30's third test, this field will have '3' stored
@@ -107,7 +107,7 @@ class AdministrationSummary(administration):
 
 # Model for item responses within an administration
 class administration_data(models.Model):
-    administration = models.ForeignKey("administration", on_delete=models.PROTECT) # Associated administration
+    administration = models.ForeignKey("administration", on_delete=models.CASCADE) # Associated administration
     item_ID = models.CharField(max_length = 101) # ID associated for each CDI item
     value = models.CharField(max_length=200) # Response given by participant to this particular item
     class Meta:
@@ -119,7 +119,7 @@ class administration_data(models.Model):
 
 # Model for stored gift card codes
 class payment_code(models.Model):
-    study = models.ForeignKey("study", on_delete=models.PROTECT) # Associated study name
+    study = models.ForeignKey("study", on_delete=models.CASCADE) # Associated study name
     hash_id = models.CharField(max_length=128, unique=True, null=True) # Populated with hash ID of participant that code was given to. Null until code is rewarded. Uniqueness is enforced (one administration can only have 1 code)
     added_date = models.DateTimeField(verbose_name = "Date code was added to database", auto_now_add = True) # Date that payment code was first added to database
     assignment_date = models.DateTimeField(verbose_name = "Date code was given to participant", null=True) # Date that payment code was given to a participant
@@ -132,7 +132,7 @@ class payment_code(models.Model):
 
 # Model for stored IP addresses (only stored for studies created by 'langcoglab' and specific studies marked to log IP addresses, under Stanford's IRB approval)
 class ip_address(models.Model):
-    study = models.ForeignKey("study", on_delete=models.PROTECT) # Study associated with IP address
+    study = models.ForeignKey("study", on_delete=models.CASCADE) # Study associated with IP address
     ip_address = models.CharField(max_length = 30) # Actual IP address
     date_added = models.DateTimeField(verbose_name = "Date IP address was added to database", auto_now_add = True) # Date that IP address was added to database.
 

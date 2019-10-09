@@ -259,6 +259,45 @@
             $('#id_learning_disability_boolean_1').click();
         }
     </script>
+    <script>
+        function dutch_fastforward() {
+            $('#id_form_filler').val('mother');
+            $('#id_child_dob').val(moment().subtract(17,'M').format(date_format.toUpperCase()))
+            $('#id_sex_1').click();
+        }
+    </script>
+    <script>
+        function dutch_backpage_fastforward() {
+            $('#id_country').val('NL');
+            $('#id_birth_order').val(4);
+            $('#id_multi_birth_boolean_1').click();
+
+            if( $('#id_birth_weight_lb').length ) {
+                $('#id_birth_weight_lb').val(7.5);
+            }
+
+            if( $('#id_birth_weight_kg').length ) {
+                $('#id_birth_weight_kg').val(2.5);
+            }
+
+            $('#id_born_on_due_date_1').click();
+            $('#id_primary_caregiver').val('mother');
+            $('#id_mother_yob').val(1990);
+            $('#id_mother_education').val(16);
+            $('#id_father_yob').val(1990);
+            $('#id_father_education').val(16);
+            $('#id_annual_income').val('2001-3000');
+            $('#id_caregiver_info').val(2);
+            $('#id_other_languages_boolean_1').click();
+            $('#id_ear_infections_boolean_3').click();
+            $('#id_hearing_loss_boolean_1').click();
+            $('#id_vision_problems_boolean_1').click();
+            $('#id_illnesses_boolean_1').click();
+            $('#id_services_boolean_3').click();
+            $('#id_worried_boolean_1').click();
+            $('#id_learning_disability_boolean_1').click();
+        }
+    </script>
     
 {% endif %}
 

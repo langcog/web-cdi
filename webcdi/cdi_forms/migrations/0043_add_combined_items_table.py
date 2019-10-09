@@ -11,13 +11,13 @@ from django.core.exceptions import FieldError
 def unicode_csv_reader(utf8_data, dialect=csv.excel, **kwargs):
     csv_reader = csv.reader(utf8_data, dialect=dialect, **kwargs)
     for row in csv_reader:
-        yield [unicode(cell, 'utf-8') for cell in row]
+        yield [cell for cell in row]
 
 def populate_items(apps, schema_editor):
     PROJECT_ROOT = settings.BASE_DIR
     input_instruments = json.load(open(os.path.realpath(PROJECT_ROOT + '/static/json/instruments.json')))
     instrument = apps.get_model('researcher_UI', 'instrument')
-    var_safe = lambda s: ''.join([c for c in '_'.join(s.split()) if c in string.letters + string.digits + '_'])
+    var_safe = lambda s: ''.join([c for c in '_'.join(s.split()) if c in string.ascii_letters + string.digits + '_'])
 
     try:
         Choices = apps.get_model('cdi_forms', 'Choices')
@@ -43,14 +43,14 @@ def populate_items(apps, schema_editor):
 
         if ftype == 'csv':
 
-            contents = list(unicode_csv_reader(open(os.path.realpath(PROJECT_ROOT + '/' + curr_instrument['csv_file']))))
+            contents = list(unicode_csv_reader(open(os.path.realpath(PROJECT_ROOT + '/' + curr_instrument['csv_file']), encoding="utf-8")))
             col_names = contents[0]
             nrows = len(contents)
             get_row = lambda row: contents[row]
         else:
             raise IOError("Instrument file must be a CSV.")
 
-        for row in xrange(1, nrows):
+        for row in range(1, nrows):
             row_values = get_row(row)
             if len(row_values) > 1:
                 itemID = row_values[col_names.index('itemID')]

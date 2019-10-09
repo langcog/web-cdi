@@ -26,10 +26,12 @@ function action_selected(url){
         }
     });
 }
-$(document).ready(function(){
-    $("th.select_col>input").change(function(){
-        $('input[name="select_col"]').prop('checked', $(this).prop("checked"));
-        $('.selected-btn').attr("disabled", !checkboxes.is(":checked"));
-    });
-});
-	
+function toggle(source) {
+    checkboxes = $('input[name="select_col"]')
+    if (!source.checked) {
+        $(checkboxes).prop('checked', false);
+    } else {
+        $(checkboxes).prop('checked', true);
+    }
+    $('.selected-btn').attr("disabled", !checkboxes.is(":checked"));
+}

@@ -15,7 +15,7 @@ from django.conf import settings
 def unicode_csv_reader(utf8_data, dialect=csv.excel, **kwargs):
     csv_reader = csv.reader(utf8_data, dialect=dialect, **kwargs)
     for row in csv_reader:
-        yield [unicode(cell, 'utf-8') for cell in row]
+        yield [cell for cell in row]
         
 class Command(BaseCommand):
 
@@ -47,10 +47,10 @@ class Command(BaseCommand):
             instrument_language, instrument_form = curr_instrument['language'], curr_instrument['form']
 
             if not 'benchmark' in curr_instrument:
-                print "    No Benchmark data for", instrument_language, instrument_form
+                print ("    No Benchmark data for", instrument_language, instrument_form)
                 continue
             
-            print "    Populating Benchmark data for", instrument_language, instrument_form
+            print ("    Populating Benchmark data for", instrument_language, instrument_form)
             
             instrument_obj = instrument.objects.get(form=instrument_form, language=instrument_language)
 
@@ -58,7 +58,7 @@ class Command(BaseCommand):
 
             if ftype == 'csv':
 
-                contents = list(unicode_csv_reader(open(os.path.realpath(PROJECT_ROOT + '/' + curr_instrument['benchmark']))))
+                contents = list(unicode_csv_reader(open(os.path.realpath(PROJECT_ROOT + '/' + curr_instrument['benchmark']), encoding="utf8")))
                 col_names = contents[0]
                 nrows = len(contents)
                 get_row = lambda row: contents[row]
@@ -66,7 +66,7 @@ class Command(BaseCommand):
                 raise IOError("Instrument file must be a CSV.")
 
 
-            for row in xrange(1, nrows):
+            for row in range(1, nrows):
                 row_values = get_row(row)
                 if len(row_values) > 1:
                     title = row_values[col_names.index('title')]
