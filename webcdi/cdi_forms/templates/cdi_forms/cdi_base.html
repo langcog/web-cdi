@@ -178,6 +178,13 @@
     })
 </script>
 
+<!-- To translate the Javascript -->
+<script>
+$("input[required]").on("invalid", function() {
+    this.setCustomValidity("{% trans 'Please fill in this field' %}");
+});
+</script>
+
 {% block scripts %}
 
 
