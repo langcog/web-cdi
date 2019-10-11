@@ -47,7 +47,7 @@ class Command(BaseCommand):
 
             print ("    Populating Scoring Methodology for", instrument_language, instrument_form)
 
-            scores = json.load(open(os.path.realpath(PROJECT_ROOT + '/' + instrument_scoring)))
+            scores = json.load(open(os.path.realpath(PROJECT_ROOT + '/' + instrument_scoring), encoding="utf8"))
 
             for score in scores:
                 data_dict = {
