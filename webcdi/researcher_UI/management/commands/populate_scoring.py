@@ -21,7 +21,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
 
         PROJECT_ROOT = settings.BASE_DIR
-        instruments = json.load(open(os.path.realpath(PROJECT_ROOT + '/static/json/instruments.json')))
+        instruments = json.load(open(os.path.realpath(PROJECT_ROOT + '/static/json/instruments.json'), encoding="utf8"))
         if options['language'] and options['form']:
             input_language, input_form = options['language'], options['form']
             input_instruments = filter(lambda instrument: instrument['language'] == input_language and
