@@ -45,11 +45,7 @@ except ImportError:
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-#NOTE FROM BEN: I CHANGED DEBUG = False to DEBUG = True 
-# DEBUG = False
-
 DEBUG = bool(os.environ.get('DEBUG', False))
-#DEBUG = False
 TEMPLATE_DEBUG = False
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
