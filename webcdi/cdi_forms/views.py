@@ -473,7 +473,7 @@ def prefilled_cdi_data(administration_instance):
             prefilled_data_list = administration_data.objects.filter(administration = administration_instance).values('item_ID', 'value')
 
     prefilled_data = {x['item_ID']: x['value'] for x in prefilled_data_list} # Store prefilled data in a dictionary with item_ID as the key and response as the value.
-    with open(PROJECT_ROOT+'/form_data/'+instrument_name+'_meta.json', 'r') as content_file: # Open associated json file with section ordering and nesting
+    with open(PROJECT_ROOT+'/form_data/'+instrument_name+'_meta.json', 'r', encoding='utf-8') as content_file: # Open associated json file with section ordering and nesting
         # Read json file and store additional variables regarding the instrument, study, and the administration
         data = json.loads(content_file.read())
         data['title'] = administration_instance.study.instrument.verbose_name
