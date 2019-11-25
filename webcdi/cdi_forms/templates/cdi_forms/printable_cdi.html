@@ -205,6 +205,7 @@
 {% if show_feedback %}
     <!-- Script for generating D3 graphs. Very long!!-->
     <script>
+        console.log("Creating graph")
         // Set variables for graph sizes and line thickness
         var graph_height = 500;
         var graph_width = 500;
@@ -227,14 +228,24 @@
             value.num_value = 'neither';
             if (value.item.indexOf('textbox')<0) {
                 if ((root.instrument_name.indexOf('WS') > -1) | (root.instrument_name.indexOf('CDI3') > -1)) {
+                    console.log(value.choices, value.prefilled_value)
                     if (value.prefilled_value) {
                         value.num_value = 'produces';
                     } else {
                         if (value.choices[0][2]) {
                             value.num_value = 'understands';
-                        } else if (value.choices[1][2]) {
-                            value.num_value = 'produces';
-                        }    
+                        } else 
+                            try {
+                                if (value.choices[1][2]) {
+                                    value.num_value = 'produces';
+                                }
+                            }
+                            catch {
+                                console.log('no value.choices[1][2]')
+                            }
+                            finally {
+                                value.num_value = 'produces';
+                            } 
                     }
                 } else if (root.instrument_name.indexOf('WG') > -1) {
                     if (value.choices[0][2]) {
