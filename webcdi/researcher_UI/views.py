@@ -556,6 +556,12 @@ def download_cdi_format(request, study_obj, administrations = None):
 
 @login_required
 def console(request, study_name = None, num_per_page = 20): # Main giant function that manages the interface page
+    #try and force English in Admin console
+    user_language = 'en'
+    translation.activate(user_language)
+    request.session[translation.LANGUAGE_SESSION_KEY] = user_language
+
+    #now back to normal
     refresh = False
     if request.method == 'POST' : # If submitting data, make sure that study is allowed to be edited by current user
         data = {}
