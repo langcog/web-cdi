@@ -30,7 +30,8 @@ from ipware.ip import get_ip
 from psycopg2.extras import NumericRange
 from django.conf import settings
 from django.utils import timezone
-
+from django.utils import translation
+    
 
 from django.utils.translation import ugettext_lazy as _
 from cdi_forms.models import Instrument_Forms
