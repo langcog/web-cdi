@@ -15,7 +15,7 @@ from django.conf import settings
 def unicode_csv_reader(utf8_data, dialect=csv.excel, **kwargs):
     csv_reader = csv.reader(utf8_data, dialect=dialect, **kwargs)
     for row in csv_reader:
-        yield [unicode(cell, 'utf-8') for cell in row]
+        yield [cell for cell in row]
         
 class Command(BaseCommand):
 
@@ -26,7 +26,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
 
         PROJECT_ROOT = settings.BASE_DIR
-        instruments = json.load(open(os.path.realpath(PROJECT_ROOT + '/static/json/instruments.json')))
+        instruments = json.load(open(os.path.realpath(PROJECT_ROOT + '/static/json/instruments.json'), encoding="utf8"))
         if options['language'] and options['form']:
             input_language, input_form = options['language'], options['form']
             input_instruments = filter(lambda instrument: instrument['language'] == input_language and
@@ -50,24 +50,22 @@ class Command(BaseCommand):
             instrument_obj = instrument.objects.get(form=instrument_form, language=instrument_language)
             instrument_forms = apps.get_model(app_label='cdi_forms', model_name='Instrument_Forms')
 
-            print "    Populating items for", instrument_language, instrument_form
+            print ("    Populating items for", instrument_language, instrument_form)
 
             ftype = curr_instrument['csv_file'].split('.')[-1]
 
             if ftype == 'csv':
 
-                contents = list(unicode_csv_reader(open(os.path.realpath(PROJECT_ROOT + '/' + curr_instrument['csv_file']))))
+                contents = list(unicode_csv_reader(open(os.path.realpath(PROJECT_ROOT + '/' + curr_instrument['csv_file']), encoding="utf8")))
                 col_names = contents[0]
                 nrows = len(contents)
                 get_row = lambda row: contents[row]
             else:
                 raise IOError("Instrument file must be a CSV.")
 
-            for row in xrange(1, nrows):
-                #print(row)
+            for row in range(1, nrows):
                 row_values = get_row(row)
                 if len(row_values) > 1:
-                    #print(row_values)
                     itemID = row_values[col_names.index('itemID')]
                     item = row_values[col_names.index('item')]
                     item_type = row_values[col_names.index('item_type')]

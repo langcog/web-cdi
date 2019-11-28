@@ -302,6 +302,8 @@ var google, django, gettext;
             var tabs = [];
 
             $.each(groupedTranslations, function (groupId, lang) {
+                if (groupId.includes("__prefix__"))
+                    return;
                 var tabsContainer = $('<td></td>'),
                     tabsList = $('<ul></ul>'),
                     insertionPoint;
@@ -326,6 +328,7 @@ var google, django, gettext;
                     $.each($container[0].attributes, function(idx, attr) {
                         attrs[attr.nodeName] = attr.nodeValue;
                     });
+
                     $container.replaceWith(function () {
                         return $('<div />', attrs).append($(this).contents());
                     });
@@ -395,14 +398,14 @@ var google, django, gettext;
             // Group normal fields and fields in (existing) stacked inlines
             var grouper = new TranslationFieldGrouper({
                 $fields: $('.mt').filter(
-                    'input:visible, textarea:visible, select:visible, iframe, div').filter(':parents(.tabular)')
+                    'input, textarea, select, iframe, div').filter(':parents(.tabular)')
             });
             MainSwitch.init(grouper.groupedTranslations, createTabs(grouper.groupedTranslations));
 
             // Note: The add another functionality in admin is injected through inline javascript,
             // here we have to run after that (and after all other ready events just to be sure).
             $(document).ready(function() {
-                $(window).load(function() {
+                $(window).on('load', function() {
                     handleAddAnotherInline();
                 });
             });
@@ -416,7 +419,7 @@ var google, django, gettext;
                     createTabularTabs(tabularInlineGroup.getAllGroupedTranslations()));
 
                 $(document).ready(function() {
-                    $(window).load(function() {
+                    $(window).on('load', function() {
                         handleTabularAddAnotherInline(tabularInlineGroup);
                     });
                 });

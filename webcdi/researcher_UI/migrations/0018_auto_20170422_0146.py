@@ -36,7 +36,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='payment_code',
             name='study',
-            field=models.ForeignKey(to='researcher_UI.study'),
+            field=models.ForeignKey(to='researcher_UI.study', on_delete=models.PROTECT),
         ),
         migrations.AlterUniqueTogether(
             name='payment_code',

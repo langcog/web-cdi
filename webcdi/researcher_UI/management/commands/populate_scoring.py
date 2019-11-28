@@ -11,11 +11,6 @@ from django.conf import settings
 # Populates the ItemInfo and ItemMap models with data from instrument definition files.
 # Given no arguments, does so for all instruments in 'static/json/instruments.json'.
 # Given a language with -l and a form with -f, does so for only their Instrument object.
-
-def unicode_csv_reader(utf8_data, dialect=csv.excel, **kwargs):
-    csv_reader = csv.reader(utf8_data, dialect=dialect, **kwargs)
-    for row in csv_reader:
-        yield [unicode(cell, 'utf-8') for cell in row]
         
 class Command(BaseCommand):
 
@@ -26,7 +21,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
 
         PROJECT_ROOT = settings.BASE_DIR
-        instruments = json.load(open(os.path.realpath(PROJECT_ROOT + '/static/json/instruments.json')))
+        instruments = json.load(open(os.path.realpath(PROJECT_ROOT + '/static/json/instruments.json'), encoding="utf8"))
         if options['language'] and options['form']:
             input_language, input_form = options['language'], options['form']
             input_instruments = filter(lambda instrument: instrument['language'] == input_language and
@@ -50,9 +45,9 @@ class Command(BaseCommand):
             instrument_obj = instrument.objects.get(form=instrument_form, language=instrument_language)
             instrument_forms = apps.get_model(app_label='cdi_forms', model_name='Instrument_Forms')
 
-            print "    Populating Scoring Methodology for", instrument_language, instrument_form
+            print ("    Populating Scoring Methodology for", instrument_language, instrument_form)
 
-            scores = json.load(open(os.path.realpath(PROJECT_ROOT + '/' + instrument_scoring)))
+            scores = json.load(open(os.path.realpath(PROJECT_ROOT + '/' + instrument_scoring), encoding="utf8"))
 
             for score in scores:
                 data_dict = {
