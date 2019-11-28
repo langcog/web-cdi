@@ -9,7 +9,7 @@ import json, os, string
 def populate_instrument(apps, schema_editor):
     PROJECT_ROOT = settings.BASE_DIR
     input_instruments = json.load(open(os.path.realpath(PROJECT_ROOT + '/static/json/instruments.json')))
-    var_safe = lambda s: ''.join([c for c in '_'.join(s.split()) if c in string.letters + string.digits + '_'])
+    var_safe = lambda s: ''.join([c for c in '_'.join(s.split()) if c in string.ascii_letters + string.digits + '_'])
     instrument = apps.get_model('researcher_UI', 'instrument')
     instrument_fields = [f.name for f in instrument._meta.get_fields()]
 

@@ -13,10 +13,10 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 from django.utils.translation import gettext_lazy as _
-from databases import *
-from email import *
+from .databases import *
+from .email import *
 import socket
-from captcha import *
+from .captcha import *
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -35,21 +35,17 @@ def generate_secret_key(fname):
 
 # SECURITY WARNING: keep the secret key used in production secret!
 try:
-    from secret_key import *
+    from .secret_key import *
 except ImportError:
     SETTINGS_DIR=os.path.abspath(os.path.dirname(__file__))
     generate_secret_key(os.path.join(SETTINGS_DIR, 'secret_key.py'))
-    from secret_key import *
+    from .secret_key import *
 
 #SECRET_KEY = 'bt8n72d_ks+(7d-s&9%3g^b(m3g#_grs#ir!m-p5$^5se@fdsu'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-#NOTE FROM BEN: I CHANGED DEBUG = False to DEBUG = True 
-# DEBUG = False
-
 DEBUG = bool(os.environ.get('DEBUG', False))
-#DEBUG = False
 TEMPLATE_DEBUG = False
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
@@ -60,9 +56,9 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-ALLOWED_HOSTS = ['ec2-52-88-52-34.us-west-2.compute.amazonaws.com','web-cdi-dev6.mfpemr5vcz.us-west-2.elasticbeanstalk.com','web-cdi-dev8.mfpemr5vcz.us-west-2.elasticbeanstalk.com','localhost', '127.0.0.2','127.0.0.1','webcdi-dev.us-west-2.elasticbeanstalk.com','webcdi-prod.us-west-2.elasticbeanstalk.com', 'webcdi.stanford.edu', 'webcdi-dev.stanford.edu', '.elb.amazonaws.com']
+ALLOWED_HOSTS = ['webcdi-dev-py36.us-west-2.elasticbeanstalk.com', 'ec2-34-208-105-171.us-west-2.compute.amazonaws.com','ec2-52-88-52-34.us-west-2.compute.amazonaws.com','web-cdi-dev6.mfpemr5vcz.us-west-2.elasticbeanstalk.com','web-cdi-dev8.mfpemr5vcz.us-west-2.elasticbeanstalk.com','localhost', '127.0.0.2','127.0.0.1','webcdi-dev.us-west-2.elasticbeanstalk.com','webcdi-prod.us-west-2.elasticbeanstalk.com', 'webcdi.stanford.edu', 'webcdi-dev.stanford.edu', '.elb.amazonaws.com']
 
-IPS_TO_ADD = ['webcdi-dev.us-west-2.elasticbeanstalk.com', 'webcdi-prod.us-west-2.elasticbeanstalk.com', 'webcdi.stanford.edu', socket.gethostname()]
+IPS_TO_ADD = ['webcdi-prod.us-west-2.elasticbeanstalk.com', 'webcdi.stanford.edu', socket.gethostname()]
 
 NEW_IPS = set()
 
@@ -95,7 +91,7 @@ INSTALLED_APPS = (
     'supplementtut',
     'django.contrib.sites',
     'axes',
-    'csvimport.app.CSVImportConf',
+    #'csvimport.app.CSVImportConf',
     'health_check',
     'health_check.db',
     'health_check.cache',
@@ -107,7 +103,7 @@ INSTALLED_APPS = (
     'ckeditor_uploader',
 )
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = [
     'django.middleware.common.BrokenLinkEmailsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -116,7 +112,18 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-)
+    'axes.middleware.AxesMiddleware',
+]
+
+AUTHENTICATION_BACKENDS = [
+    # AxesBackend should be the first backend in the AUTHENTICATION_BACKENDS list.
+    'axes.backends.AxesBackend',
+
+    # Django ModelBackend is the default authentication backend.
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+AXES_ENABLED = False
 
 ROOT_URLCONF = 'webcdi.urls'
 
@@ -164,6 +171,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
+DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap-responsive.html"
 
 LOGGING = {
     'version': 1,
@@ -250,7 +258,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 CKEDITOR_UPLOAD_PATH = "ckeditor_uploads/"
 CKEDITOR_CONFIGS = {
     'default': {
-        'skin': 'moono',
+        #'skin': 'moono',
         #'toolbar': None,
         'height': '100%',
         'width': '100%',

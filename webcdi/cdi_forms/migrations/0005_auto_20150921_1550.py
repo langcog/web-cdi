@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='backgroundinfo',
             name='administration',
-            field=models.OneToOneField(to='researcher_UI.administration'),
+            field=models.OneToOneField(to='researcher_UI.administration', on_delete=models.PROTECT),
         ),
     ]

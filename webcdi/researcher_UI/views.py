@@ -5,7 +5,9 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseServerError, Http404
 from .forms import *
 from .models import researcher, study, administration, administration_data, get_meta_header, get_background_header, payment_code, ip_address
-import codecs, json, os, re, random, csv, datetime, cStringIO, math, StringIO, zipfile
+import codecs, json, os, re, random, csv, datetime, math, zipfile
+from io import StringIO, BytesIO
+#import cStringIO, StringIO
 from .tables  import StudyAdministrationTable
 from .mixins import StudyOwnerMixin
 from django.views.generic import UpdateView
@@ -28,7 +30,8 @@ from ipware.ip import get_ip
 from psycopg2.extras import NumericRange
 from django.conf import settings
 from django.utils import timezone
-
+from django.utils import translation
+    
 
 from django.utils.translation import ugettext_lazy as _
 from cdi_forms.models import Instrument_Forms
@@ -53,7 +56,7 @@ def download_data(request, study_obj, administrations = None): # Download study 
     admin_header = ['study_name', 'subject_id','local_lab_id','repeat_num', 'administration_id', 'link', 'completed', 'completedBackgroundInfo', 'due_date', 'last_modified','created_date']
 
     # Fetch background data variables
-    background_header = ['age','sex','zip_code','birth_order', 'birth_weight_lb', 'birth_weight_kg','multi_birth_boolean','multi_birth', 'born_on_due_date', 'early_or_late', 'due_date_diff', 'mother_yob', 'mother_education','father_yob', 'father_education', 'annual_income', 'child_hispanic_latino', 'child_ethnicity', 'caregiver_info', 'other_languages_boolean','other_languages','language_from', 'language_days_per_week', 'language_hours_per_day', 'ear_infections_boolean','ear_infections', 'hearing_loss_boolean','hearing_loss', 'vision_problems_boolean','vision_problems', 'illnesses_boolean','illnesses', 'services_boolean','services','worried_boolean','worried','learning_disability_boolean','learning_disability']
+    background_header = ['age','sex','country','zip_code','birth_order', 'birth_weight_lb', 'birth_weight_kg','multi_birth_boolean','multi_birth', 'born_on_due_date', 'early_or_late', 'due_date_diff', 'mother_yob', 'mother_education','father_yob', 'father_education', 'annual_income', 'child_hispanic_latino', 'child_ethnicity', 'caregiver_info', 'other_languages_boolean','other_languages','language_from', 'language_days_per_week', 'language_hours_per_day', 'ear_infections_boolean','ear_infections', 'hearing_loss_boolean','hearing_loss', 'vision_problems_boolean','vision_problems', 'illnesses_boolean','illnesses', 'services_boolean','services','worried_boolean','worried','learning_disability_boolean','learning_disability']
 
     # Try to properly format CDI responses for pandas dataframe
     try:
@@ -80,12 +83,12 @@ def download_data(request, study_obj, administrations = None): # Download study 
     for field in fields:
         if field.choices:
             field_choices = dict(field.choices)
-            for k, v in field_choices.items():
-                if unicode(k) == unicode(v):
+            for k, v in list(field_choices.items()):
+                if str(k) == str(v):
                     field_choices.pop(k, None)
-            BI_choices[field.name] = {unicode(k):unicode(v) for k,v in field_choices.items()}
+            BI_choices[field.name] = {str(k):str(v) for k,v in field_choices.items()}
 
-    new_background = pd.DataFrame.from_records(background_data).astype(unicode).replace(BI_choices)
+    new_background = pd.DataFrame.from_records(background_data).astype(str).replace(BI_choices)
     try:
         new_background['administration_id'] = new_background['administration_id'].astype('int64')
     except Exception as e:
@@ -292,12 +295,12 @@ def download_summary(request, study_obj, administrations = None): # Download stu
     for field in fields:
         if field.choices:
             field_choices = dict(field.choices)
-            for k, v in field_choices.items():
-                if unicode(k) == unicode(v):
+            for k, v in list(field_choices.items()):
+                if str(k) == str(v):
                     field_choices.pop(k, None)
-            BI_choices[field.name] = {unicode(k):unicode(v) for k,v in field_choices.items()}
+            BI_choices[field.name] = {str(k):str(v) for k,v in field_choices.items()}
 
-    new_background = pd.DataFrame.from_records(background_data).astype(unicode).replace(BI_choices)
+    new_background = pd.DataFrame.from_records(background_data).astype(str).replace(BI_choices)
     new_background['administration_id'] = new_background['administration_id'].astype('int64')
 
     # Add scoring
@@ -483,14 +486,15 @@ def download_links(request, study_obj, administrations = None): # Download only 
 
 def write_to_zip(x, zf, vocab_start):
     curr_name = "{0}_S{1}_{2}".format(x['study_name'], x['subject_id'], x['repeat_num'])
-    vocab_string = x[vocab_start:].to_string(header = False, index = False).replace('\n','').encode("utf-8")
-    demo_string = ("{:<25}"*(vocab_start)).format(*x[0:vocab_start].replace(r'', np.nan, regex=True))
+    vocab_string = x[vocab_start:].to_string(header = False, index = False).replace('\n','')
+    demo_string = ("{!s:<25}"*(vocab_start)).format(*x[0:vocab_start].replace(r'', np.nan, regex=True))
     string_to_write = demo_string + vocab_string
     zf.writestr("{}.txt".format(curr_name), string_to_write)
 
 @login_required
 def download_cdi_format(request, study_obj, administrations = None):
-    outfile = StringIO.StringIO()
+    #outfile = StringIO()
+    outfile = BytesIO()
     
     if administrations is not None:
         completed_admins = administrations.filter(completed = True)
@@ -499,7 +503,7 @@ def download_cdi_format(request, study_obj, administrations = None):
 
     r = re.compile('item_[0-9]{1,3}')
 
-    model_header = filter(r.match, get_model_header(study_obj.instrument.name))
+    model_header = list(filter(r.match, get_model_header(study_obj.instrument.name)))
     admin_header = ['study_name', 'subject_id','repeat_num', 'completed', 'last_modified']
     background_header = ['age','sex','zip_code','birth_order', 'birth_weight_lb', 'birth_weight_kg', 'multi_birth_boolean','multi_birth', 'born_on_due_date', 'early_or_late', 'due_date_diff', 'mother_yob', 'mother_education','father_yob', 'father_education', 'annual_income', 'child_hispanic_latino', 'child_ethnicity', 'caregiver_info', 'other_languages_boolean', 'language_days_per_week', 'language_hours_per_day', 'ear_infections_boolean', 'hearing_loss_boolean', 'vision_problems_boolean', 'illnesses_boolean', 'services_boolean','worried_boolean','learning_disability_boolean']
 
@@ -517,12 +521,12 @@ def download_cdi_format(request, study_obj, administrations = None):
     new_answers = melted_answers
 
     def my_fun(arg):
-        if isinstance(arg, unicode):
+        if isinstance(arg, str):
             return arg.encode('utf-8')
         else:
             return str(arg)
 
-    new_answers.ix[:,1:] = new_answers.ix[:,1:].applymap(my_fun)
+    new_answers.loc[:,1:] = new_answers.iloc[:,1:].applymap(my_fun)
 
     if study_obj.instrument.form == 'WG':
         for c in new_answers.columns[1:]:
@@ -553,6 +557,12 @@ def download_cdi_format(request, study_obj, administrations = None):
 
 @login_required
 def console(request, study_name = None, num_per_page = 20): # Main giant function that manages the interface page
+    #try and force English in Admin console
+    user_language = 'en'
+    translation.activate(user_language)
+    request.session[translation.LANGUAGE_SESSION_KEY] = user_language
+
+    #now back to normal
     refresh = False
     if request.method == 'POST' : # If submitting data, make sure that study is allowed to be edited by current user
         data = {}
@@ -781,7 +791,6 @@ def add_study(request): # Function for adding studies modal
         form = AddStudyForm(request.POST, researcher = researcher) # Grab submitted form
 
         if form.is_valid(): # If form passed validation checks in forms.py
-            print "Valid form"
             study_instance = form.save(commit=False) # Save study object but do not commit to database just yet
             study_name = form.cleaned_data.get('name')
             age_range = form.cleaned_data.get('age_range')
@@ -818,7 +827,6 @@ def add_study(request): # Function for adding studies modal
                 data['error_message'] = "Study name has a forward slash ('/') inside. Please remove or replace this character.";
                 return HttpResponse(json.dumps(data), content_type="application/json") # Display error message about non-unique study back to user                
         else: # If form failed validation checks
-            print "Invalid form"
             data['stat'] = "re-render"; # Re-render form
             return render(request, 'researcher_UI/add_study_modal.html', {'form': form, 'form_name': 'Add New Study'})
     else: # If fetching modal
@@ -918,6 +926,7 @@ def administer_new(request, study_name): # For creating new administrations
 
             if params['new-subject-ids'][0] != '': # If there was text entered in the textbox field
                 subject_ids = re.split('[,;\s\t\n]+', str(params['new-subject-ids'][0])) # Parse string into a list of string IDs by commas, semicolons, spaces, tabs, and new lines
+                #subject_ids = re.split('[,;\s\t\n]+', bytes(params['new-subject-ids'][0])) # Parse string into a list of string IDs by commas, semicolons, spaces, tabs, and new lines
                 subject_ids = filter(None, subject_ids)
                 subject_ids_numbers = all([x.isdigit() for x in subject_ids]) # Check that all string IDs are only digits
                 if not subject_ids_numbers: # If not all the string IDs are digits
@@ -937,7 +946,7 @@ def administer_new(request, study_name): # For creating new administrations
                 if raw_ids_csv: # If a CSV was uploaded
 
                     subject_ids = list(np.unique(ids_to_add.tolist())) # Convert pandas dataframe column into a python list
-
+                    
                     for sid in subject_ids: # For each ID within the list
                         new_hash = random_url_generator() # Generate a unique hash ID
                         old_rep = administration.objects.filter(study = study_obj, subject_id = sid).count() # Count the number of administrations previously given to this subject ID
@@ -946,8 +955,7 @@ def administer_new(request, study_name): # For creating new administrations
 
                 if params['new-subject-ids'][0] != '': # If there was text in the new_subject_ids field
                     subject_ids = re.split('[,;\s\t\n]+', str(params['new-subject-ids'][0])) # Parse by numerous text delimiters
-                    subject_ids = filter(None, subject_ids)
-                    subject_ids = list(np.unique(map(int, subject_ids))) # Convert into a list of integers
+                    subject_ids = list(filter(None, subject_ids))
                     for sid in subject_ids: # For each subject ID
                         new_hash = random_url_generator() # Generate a unique hash ID
                         old_rep = administration.objects.filter(study = study_obj, subject_id = sid).count() # Count the number of administrations previously given to this subject ID
@@ -998,6 +1006,7 @@ def administer_new_participant(request, username, study_name): # used for wordfu
     let_through = None # By default, users are not given access to administration and must be approved
     prev_visitor = 0 
     visitor_ip = str(get_ip(request)) # Get IP address for current visitor
+    #visitor_ip = bytes(get_ip(request)) # Get IP address for current visitor
     completed = int(request.get_signed_cookie('completed_num', '0')) # Check if there is a cookie stored on device for a previously completed administration
     if visitor_ip: # If the visitor IP was successfully pulled
         prev_visitor = ip_address.objects.filter(ip_address = visitor_ip).count() # Check if IP address was logged previously in the database (only logged for specific studies under the langcoglab account. This is under Stanford's IRB approval)
@@ -1058,14 +1067,15 @@ def administer_new_parent(request, username, study_name): # For creating single 
     let_through = None # By default, users are not given access to administration and must be approved
     prev_visitor = 0 
     visitor_ip = str(get_ip(request)) # Get IP address for current visitor
+    #visitor_ip = bytes(get_ip(request)) # Get IP address for current visitor
     completed = int(request.get_signed_cookie('completed_num', '0')) # Check if there is a cookie stored on device for a previously completed administration
     if visitor_ip: # If the visitor IP was successfully pulled
         prev_visitor = ip_address.objects.filter(ip_address = visitor_ip).count() # Check if IP address was logged previously in the database (only logged for specific studies under the langcoglab account. This is under Stanford's IRB approval)
 
     if (prev_visitor < 1 and completed < 2) or request.user.is_authenticated: # If the user if the user has not visited an excessive number of times based on IP logs and cookies or if they are logged-in (therefore a vetted researcher) 
-        if completed_admins < subject_cap: # If the number of completed tests has not reached the subject cap
+        if subject_cap is None: # If there was no subject cap sent up
             let_through = True # Mark as allowed
-        elif subject_cap is None: # If there was no subject cap sent up
+        elif completed_admins < subject_cap: # If the number of completed tests has not reached the subject cap
             let_through = True # Mark as allowed
         elif bypass: # If the user explicitly wanted to continue with the test despite being told they would not be compensated
             let_through = True # Mark as allowed
@@ -1097,6 +1107,7 @@ def overflow(request, username, study_name): # Page for overflowed studies. For 
     study_obj = study.objects.get(name= study_name, researcher = researcher) 
     data['title'] = study_obj.instrument.verbose_name
     visitor_ip = str(get_ip(request)) # Get visitor's IP address
+    #visitor_ip = bytes(get_ip(request)) # Get visitor's IP address
     prev_visitor = 0
     if (visitor_ip and visitor_ip != 'None'): # If visitor IP address was properly caught
         prev_visitor = ip_address.objects.filter(ip_address = visitor_ip).count() # Check if IP address was logged previously in the database (only logged for specific studies under the langcoglab account. This is under Stanford's IRB approval)
@@ -1116,8 +1127,8 @@ def try_parsing_date(text):
             pass
     raise ValueError('no valid date format found')
 
-def make_unicode(s):
-    if type(s) != unicode:
+def make_str(s):
+    if type(s) != str:
         s =  s.decode('utf-8')
         return s
     else:
@@ -1136,15 +1147,15 @@ def processDemos(csv_file, demo_list = None):
             elif col == 'birth_order':
                 recoded_df[col] = recoded_df[col].apply(lambda x: int(x) if x in range(1,10) else 0).astype('int')
             elif col in ['ear_infections', 'hearing_loss', 'illnesses', 'learning_disability', 'multi_birth', 'services', 'vision_problems', 'worried']:
-                recoded_df[col] = recoded_df[col].apply(lambda x: make_unicode(x) if x and len(x) <= 1000 else None)
+                recoded_df[col] = recoded_df[col].apply(lambda x: make_str(x) if x and len(x) <= 1000 else None)
             elif col == 'language_from':
-                recoded_df[col] = recoded_df[col].apply(lambda x: make_unicode(x) if x and len(x) <= 50 else None)
+                recoded_df[col] = recoded_df[col].apply(lambda x: make_str(x) if x and len(x) <= 50 else None)
             elif 'yob' in col:
                 recoded_df[col] = recoded_df[col].apply(lambda x: int(x) if x in range(1950, datetime.datetime.today().year + 1) else 0).astype('int')
             elif 'education' in col:
                 recoded_df[col] = recoded_df[col].apply(lambda x: int(x) if x in range(1,24) else 0).astype('int')
             elif col == 'early_or_late':
-                recoded_df[col] = recoded_df[col].apply(lambda x: make_unicode(x.lower()) if x and x.lower() in ['early', 'late'] else None)
+                recoded_df[col] = recoded_df[col].apply(lambda x: make_str(x.lower()) if x and x.lower() in ['early', 'late'] else None)
             elif col == 'zip_code':
                 def parse_zipcode(c):
                     if c and re.match("(\d{3}([*]{2})?)", c):
@@ -1153,7 +1164,7 @@ def processDemos(csv_file, demo_list = None):
                         else:
                             return c + '**'
                     elif c and re.match("([A-Z]{2})", c):
-                        return make_unicode(c)
+                        return make_str(c)
                     else:
                         return u''
                 recoded_df[col] = recoded_df[col].str[:3].apply(parse_zipcode)
@@ -1180,12 +1191,12 @@ def processDemos(csv_file, demo_list = None):
                     return c 
                 recoded_df[col] = recoded_df[col].apply(round_kg)
             elif col == 'annual_income':
-                recoded_df[col] = recoded_df[col].apply(lambda x: make_unicode(x) if x and x in dict(BackgroundInfo._meta.get_field(col).choices).keys() else u'Prefer not to disclose')                 
+                recoded_df[col] = recoded_df[col].apply(lambda x: make_str(x) if x and x in dict(BackgroundInfo._meta.get_field(col).choices).keys() else u'Prefer not to disclose')                 
             elif col == 'child_ethnicity':
-                recoded_df[col] = recoded_df[col].apply(lambda x: list(set(make_unicode(x).upper().split('/')) & set([u'N', u'H', u'W', u'B', u'A', u'O'])) if x else [])
+                recoded_df[col] = recoded_df[col].apply(lambda x: list(set(make_str(x).upper().split('/')) & set([u'N', u'H', u'W', u'B', u'A', u'O'])) if x else [])
             elif col == 'other_languages':
-                lang_choices = [make_unicode(v['name']) for k,v in json.load(codecs.open(PROJECT_ROOT + '/languages.json', 'r', 'utf-8')).iteritems()]
-                recoded_df[col] = recoded_df[col].apply(lambda x: list(set([y.strip() for y in make_unicode(x).split('/')]) & set(lang_choices)) if x else [])
+                lang_choices = [make_str(v['name']) for k,v in json.load(codecs.open(PROJECT_ROOT + '/languages.json', 'r', 'utf-8')).iteritems()]
+                recoded_df[col] = recoded_df[col].apply(lambda x: list(set([y.strip() for y in make_str(x).split('/')]) & set(lang_choices)) if x else [])
 
     recoded_df = recoded_df.where((pd.notnull(recoded_df)), None)
     return recoded_df
@@ -1230,6 +1241,7 @@ def import_data(request, study_name):
             for index, admin_row in csv_file.iterrows():
 
                 raw_sid = str(admin_row['name_of_child'])
+                #raw_sid = bytes(admin_row['name_of_child'])
                 if raw_sid.isdigit():
                     sid = int(raw_sid)
                 else:
@@ -1294,6 +1306,7 @@ def import_data(request, study_name):
                     for index, response_row in cdi_responses_df.iterrows():
                         item_value = None
                         raw_value = str(response_row['value']).lower()
+                        #raw_value = bytes(response_row['value']).lower()
                         if study_obj.instrument.form == 'WS':
                             if response_row['item_type'] in ['word', 'word_form', 'word_ending'] and raw_value in yes_list:
                                 item_value = 'produces'
@@ -1301,6 +1314,7 @@ def import_data(request, study_name):
                                 item_value = raw_value
                             elif response_row['item_type'] == 'combination_examples':
                                 item_value = str(response_row['value'])
+                                #item_value = bytes(response_row['value'])
                             elif response_row['item_type'] == 'complexity':
                                 if raw_value in no_list + ['simple']:
                                     item_value = 'simple'

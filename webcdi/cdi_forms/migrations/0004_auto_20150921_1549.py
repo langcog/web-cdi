@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='backgroundinfo',
             name='administration',
-            field=models.ForeignKey(to='researcher_UI.administration', unique=True),
+            field=models.ForeignKey(to='researcher_UI.administration', unique=True, on_delete=models.PROTECT),
         ),
     ]

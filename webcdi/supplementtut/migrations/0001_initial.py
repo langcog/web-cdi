@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(help_text='Please fill your full name here', max_length=101, verbose_name='Full name')),
                 ('institution', models.CharField(max_length=101, verbose_name='Name of institution')),
                 ('comments', models.TextField(verbose_name='Comments', blank=True)),
-                ('registration_profile', models.OneToOneField(related_name='_supplementtut_myregistrationsupplement_supplement', editable=False, to='registration.RegistrationProfile', verbose_name='registration profile')),
+                ('registration_profile', models.OneToOneField(related_name='_supplementtut_myregistrationsupplement_supplement', editable=False, to='registration.RegistrationProfile', verbose_name='registration profile', on_delete=models.CASCADE)),
             ],
             options={
                 'abstract': False,

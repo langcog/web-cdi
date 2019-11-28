@@ -64,7 +64,7 @@
 
 </style>
 
-<body >
+<body id="id_results">
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -232,9 +232,13 @@
                     } else {
                         if (value.choices[0][2]) {
                             value.num_value = 'understands';
-                        } else if (value.choices[1][2]) {
-                            value.num_value = 'produces';
-                        }    
+                        } else 
+                            try {
+                                if (value.choices[1][2]) {
+                                    value.num_value = 'produces';
+                                }
+                            }
+                            catch { console.log("No value.choices[1][2]")}    
                     }
                 } else if (root.instrument_name.indexOf('WG') > -1) {
                     if (value.choices[0][2]) {

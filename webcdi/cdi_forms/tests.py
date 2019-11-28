@@ -1,20 +1,23 @@
 from django.test import TestCase, LiveServerTestCase, Client
 from selenium.webdriver.chrome.webdriver import WebDriver
-from django.core.urlresolvers import reverse
-import pickle, os
+from django.urls import reverse
+import pickle, os, time, random
 
 from django.conf import settings
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.select import Select
+
+from django.test.utils import override_settings
 from subprocess import Popen, PIPE
 from django.core.management import call_command
 
 from django.contrib.auth.models import User
 from researcher_UI.models import *
+from researcher_UI.tests import generate_fake_results
 from .models import *
-
-
-
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
@@ -47,18 +50,13 @@ class SeleniumTestCase(LiveServerTestCase):
     def open(self, url):
         self.wd.get("%s%s" % (self.live_server_url, url))
 
-from django.test.utils import override_settings
-
 @override_settings(DEBUG=True)
 class TestParentInterface(SeleniumTestCase):
+    fixtures = ['researcher_UI/fixtures/instrument-fixtures.json','cdi_forms/fixtures/choices.json']
 
     def setUp(self):
         # setUp is where you setup call fixture creation scripts
         # and instantiate the WebDriver, which in turns loads up the browser.
-        
-        #process = Popen(['psql', settings.DATABASES['default']['TEST']['NAME'], '-U', settings.DATABASES['default']['USER']], stdout=PIPE, stdin=PIPE)
-        #filename = 'webcdi-backup.sql'
-        #output = process.communicate('\i ' + filename)[0]
 
         self.admin = User.objects.create_user(username='admin', password = 'pw')
         self.admin.is_superuser = True
@@ -67,14 +65,14 @@ class TestParentInterface(SeleniumTestCase):
 
         self.researcher = User.objects.create_user(username="researcher", password="pw")
 
-        self.instrument = instrument.objects.all()[5]
+        self.instrument = instrument.objects.get(name="English_WS")
 
         self.study_obj = study.objects.create(
             researcher=self.admin,
             name="Test Study",
             instrument=self.instrument,
             min_age=16,
-            max_age=30 )
+            max_age=30)
         self.study_obj.save()
 
         self.client = Client()
@@ -102,53 +100,7 @@ class TestParentInterface(SeleniumTestCase):
         elif not elems:
             raise NoSuchElementException(css_selector)
         return elems        
-
-    def generate_fake_results(study_obj,autogenerate_count):
-
-        new_administrations = [] # Create a list for adding new administration objects
-        test_period = int(study_obj.test_period)
-
-        max_subject_id = administration.objects.filter(study=study_obj).aggregate(Max('subject_id'))['subject_id__max'] 
-        if max_subject_id is None: # If there is no max subject ID number (study has 0 participants)
-            max_subject_id = 0 # Mark the max as 0
-        for sid in range(max_subject_id+1, max_subject_id+autogenerate_count+1): 
-            new_hash = random_url_generator() # Generate a unique hash ID
-            new_administrations.append(administration(study =study_obj, subject_id = sid, repeat_num = 1, url_hash = new_hash, completed = False, due_date = datetime.datetime.now()+datetime.timedelta(days=test_period))) # Create a new administration object and add to list
-
-        administration.objects.bulk_create(new_administrations)
-        new_administrations = administration.objects.filter(study = study_obj, subject_id__in = range(max_subject_id+1, max_subject_id+autogenerate_count+1))
-
-        item_set = model_map(study_obj.instrument.name).objects.filter(item_type = 'word').values_list('itemID',flat=True)
-        for admin_obj in new_administrations:
-            BackgroundInfo.objects.update_or_create(administration = admin_obj, 
-            age = np.random.choice(range(study_obj.instrument.min_age, study_obj.instrument.max_age+1),size = 1)[0], 
-            sex = np.random.choice(['M','F','O'],size = 1, p = [0.49,0.49,0.02])[0], 
-            birth_order = np.random.choice(range(1,10), size = 1),
-            multi_birth_boolean = 0, birth_weight = 6.5,
-            born_on_due_date = 0, mother_education = np.random.choice(range(9,20),size = 1)[0],
-            father_education = np.random.choice(range(9,20),size = 1)[0],
-            mother_yob = 1985, father_yob = 1985, annual_income = '50000-75000', caregiver_info = 2,
-            other_languages_boolean = 0, ear_infections_boolean = 0, hearing_loss_boolean = 0, vision_problems_boolean = 0, 
-            illnesses_boolean = 0, services_boolean = 0, worried_boolean = 0, learning_disability_boolean = 0)
-            answered_items = np.random.choice(item_set, replace = False, size = len(item_set)/2)
-            produced_words = []
-            understood_words = []
-            if study_obj.instrument.form == 'WS':
-                produced_items = answered_items
-                understood_items = None
-            elif study_obj.instrument.form == 'WG':
-                produced_items = np.random.choice(answered_items, replace = False, size = len(answered_items)/2)
-                understood_items = list(set(answered_items) - set(produced_items))
-            for word in produced_items:
-                produced_words.append(administration_data(administration = admin_obj, item_ID = word, value = 'produces'))
-            administration_data.objects.bulk_create(produced_words)
-            if understood_items:
-                for word in understood_items:
-                    understood_words.append(administration_data(administration = admin_obj, item_ID = word, value = 'understands'))
-                administration_data.objects.bulk_create(understood_words)
-
-        new_administrations.update(completedBackgroundInfo = True, completed = True)
-    
+        
     def researcher_login(self):
         self.open('/interface/')
         username_input = self.wd.find_css("username")
@@ -158,6 +110,7 @@ class TestParentInterface(SeleniumTestCase):
         self.wd.find_element_by_id('id_log_in').click()
 
     def test_parent_UI(self):
+        call_command('populate_items')
         test_url = reverse('administer_new_parent', args=[self.study_obj.researcher, self.study_obj.name])
         self.open(test_url)
 
@@ -168,8 +121,74 @@ class TestParentInterface(SeleniumTestCase):
         
         self.wd.execute_script('fastforward()')
         self.wd.wait_for_css('input[name="btn-next"]',5)[1].click()
-        import time
+        
         time.sleep(5)
         self.wd.execute_script('fastforward()')
-        self.wd.wait_for_css('.submit-button')[1].click()
 
+        # not sure why I have to do it like this, but deosn't get the alert if any quicker
+        WebDriverWait(self.wd, 10).until(EC.element_to_be_clickable((By.ID, "id_submit_btn2")))
+        time.sleep(5)
+        WebDriverWait(self.wd, 10).until(EC.element_to_be_clickable((By.ID, "id_submit_btn2"))).click()
+        
+        alert = self.wd.switch_to_alert()
+        alert.accept()
+        try:
+            WebDriverWait(self.wd, 10).until(EC.presence_of_element_located((By.ID, "id_results")))
+            self.assertEqual(True,True)
+        except:
+            self.assertEqual(True, "Did not go to results page")
+
+    def test_parent_UI_with_waiver(self):
+        self.study_obj.waiver = "<p>This is a Waiver Example</p>"
+        self.study_obj.save()
+
+        test_url = reverse('administer_new_parent', args=[self.study_obj.researcher, self.study_obj.name])
+        self.open(test_url)
+
+        try:
+            self.wd.wait_for_css('#okaybtn',5).click()
+        except: #NoSuchElementException:
+            pass
+        
+        time.sleep(5)
+        try:
+            WebDriverWait(self.wd, 10).until(EC.presence_of_element_located((By.ID, "consent_waiver")))
+            self.assertEqual(True,True)
+        except:
+            self.assertEqual(True, "Waiver Modal didn't open")
+
+    def test_parent_UI_dutch_background_info(self):
+        call_command('populate_items')
+        self.instrument = instrument.objects.get(name="Dutch_WG")
+        self.study_obj = study.objects.create(
+            researcher=self.admin,
+            name="Dutch Test Study",
+            instrument=self.instrument,
+            min_age=16,
+            max_age=30)
+        self.study_obj.save()
+
+        test_url = reverse('administer_new_parent', args=[self.study_obj.researcher, self.study_obj.name])
+        self.open(test_url)
+
+        #complete background page
+        self.wd.execute_script('fastforward()')
+        self.wd.wait_for_css('input[name="btn-next"]',5)[1].click()
+        time.sleep(5)
+        #complete questionnaire
+        self.wd.execute_script('fastforward()')
+        WebDriverWait(self.wd, 10).until(EC.element_to_be_clickable((By.ID, "id_submit_btn2")))
+        time.sleep(5)
+        WebDriverWait(self.wd, 10).until(EC.element_to_be_clickable((By.ID, "id_submit_btn2"))).click()
+        alert = self.wd.switch_to_alert()
+        alert.accept()
+        #complete backpage
+        self.wd.execute_script('dutch_backpage_fastforward()')
+        WebDriverWait(self.wd, 10).until(EC.element_to_be_clickable((By.ID, "id_submit_btn"))).click()
+        
+        try:
+            WebDriverWait(self.wd, 10).until(EC.presence_of_element_located((By.ID, "id_results")))
+            self.assertEqual(True,True)
+        except:
+            self.assertEqual(True, "Did not go to results page")
+        

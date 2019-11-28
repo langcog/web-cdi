@@ -343,7 +343,7 @@ class BackgroundForm(BetterModelForm):
         if os.path.isfile(self.filename) :
             rows = []
             selected_fields = []
-            fieldsets = json.load(open(self.filename))
+            fieldsets = json.load(open(self.filename, encoding='utf-8'))
             for fieldset in fieldsets:
                 fields = []
                 for field in fieldset['fields']:

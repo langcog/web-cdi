@@ -32,7 +32,7 @@ def language_map(language):
         trimmed_lang = re.sub(r'(\s+)?\([^)]*\)', '', language).strip()
         lang_code = None
 
-        for code, language in available_langs.iteritems(): 
+        for code, language in available_langs.items(): 
             if language == trimmed_lang:
                 lang_code = code
 
@@ -218,7 +218,7 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
                 if age: obj.age = age
 
                 if obj.child_hispanic_latino == '':
-                    obj.child_hispanic_latino = 'None'
+                    obj.child_hispanic_latino = None
 
                 # Find the raw zip code value and make it compliant with Safe Harbor guidelines. Only store the first 3 digits if the total population for that prefix is greataer than 20,000 (found prohibited prefixes via Census API data). If prohibited zip code, replace value with state abbreviations.
                 zip_prefix = ''
@@ -425,10 +425,10 @@ def cdi_items(object_group, item_type, prefilled_data, item_id):
             obj['choices'] = obj['choices__choice_set']
 
         elif item_type in ['radiobutton', 'modified_checkbox']:
-            raw_split_choices = map(unicode.strip, obj['choices__choice_set'].split(';'))
+            raw_split_choices = [i.strip() for i in obj['choices__choice_set'].split(';')]
 
-            split_choices_translated = map(unicode.strip, [value for key, value in obj.items() if 'choice_set_' in key][0].split(';'))
-
+            #split_choices_translated = map(str.strip, [value for key, value in obj.items() if 'choice_set_' in key][0].split(';'))
+            split_choices_translated = [value for key, value in obj.items() if 'choice_set_' in key][0].split(';')
             prefilled_values = [False if obj['itemID'] not in prefilled_data else x == prefilled_data[obj['itemID']] for x in raw_split_choices]
 
             obj['text'] = obj['definition'][0] + obj['definition'][1:] if obj['definition'][0].isalpha() else obj['definition'][0] + obj['definition'][1] + obj['definition'][2:]
@@ -439,10 +439,11 @@ def cdi_items(object_group, item_type, prefilled_data, item_id):
                     obj_choices = obj['definition'].split(instruction.group(1) + '</b><br />')[1]
                 else :
                     obj_choices = obj['definition']
-                split_definition = map(unicode.strip, obj_choices.split('\\'))
-                obj['choices'] = zip(split_definition, raw_split_choices, prefilled_values)
+                #split_definition = map(str.strip, obj_choices.split('\\'))
+                split_definition = obj_choices.split('\\')
+                obj['choices'] = list(zip(split_definition, raw_split_choices, prefilled_values))
             else:
-                obj['choices'] = zip(split_choices_translated, raw_split_choices, prefilled_values)
+                obj['choices'] = list(zip(split_choices_translated, raw_split_choices, prefilled_values))
                 if obj['definition'] is not None:
                     obj['text'] = obj['definition'][0] + obj['definition'][1:] if obj['definition'][0].isalpha() else obj['definition'][0] + obj['definition'][1] + obj['definition'][2:]
 
@@ -472,7 +473,7 @@ def prefilled_cdi_data(administration_instance):
             prefilled_data_list = administration_data.objects.filter(administration = administration_instance).values('item_ID', 'value')
 
     prefilled_data = {x['item_ID']: x['value'] for x in prefilled_data_list} # Store prefilled data in a dictionary with item_ID as the key and response as the value.
-    with open(PROJECT_ROOT+'/form_data/'+instrument_name+'_meta.json', 'r') as content_file: # Open associated json file with section ordering and nesting
+    with open(PROJECT_ROOT+'/form_data/'+instrument_name+'_meta.json', 'r', encoding='utf-8') as content_file: # Open associated json file with section ordering and nesting
         # Read json file and store additional variables regarding the instrument, study, and the administration
         data = json.loads(content_file.read())
         data['title'] = administration_instance.study.instrument.verbose_name
@@ -507,7 +508,8 @@ def prefilled_cdi_data(administration_instance):
                     x = cdi_items(group_objects, item_type['type'], prefilled_data, item_type['id'])
                     item_type['objects'] = x
                     if administration_instance.study.show_feedback: raw_objects.extend(x)
-        if administration_instance.study.show_feedback: data['cdi_items'] = json.dumps(raw_objects, cls=DjangoJSONEncoder)
+        #print (raw_objects)
+        if administration_instance.study.show_feedback: data['cdi_items'] = json.dumps(raw_objects)#, cls=DjangoJSONEncoder)
 
         # If age is stored in database, add it to dictionary
         try:
@@ -547,7 +549,7 @@ def cdi_form(request, hash_id):
                     item = items[0]
                     value = request.POST[key]
                     if item.choices:
-                        choices = map(unicode.strip, item.choices.choice_set_en.split(';'))
+                        choices = map(str.strip, item.choices.choice_set_en.split(';'))
                         if value in choices:
                             administration_data.objects.update_or_create(administration = administration_instance, item_ID = key, defaults = {'value': value})
                     else:
@@ -607,7 +609,8 @@ def cdi_form(request, hash_id):
 
                 # If the study is run by langcoglab and the study allows for subject payments, store the IP address for security purposes
                 if administration_instance.study.researcher.username == "langcoglab" and administration_instance.study.allow_payment:
-                    user_ip = str(get_ip(request))
+                    #user_ip = str(get_ip(request))
+                    user_ip = bytes(get_ip(request))
 
                     if user_ip and user_ip != 'None':
                         ip_address.objects.create(study = administration_instance.study,ip_address = user_ip)
@@ -714,7 +717,8 @@ def printable_view(request, hash_id):
     response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
 
     if administration_instance.study.researcher.username == "langcoglab" and administration_instance.study.allow_payment:
-        response.set_signed_cookie('completed_num',str(completed))
+        #response.set_signed_cookie('completed_num',str(completed))
+        response.set_signed_cookie('completed_num',bytes(completed))
     return response
 
 
@@ -864,7 +868,7 @@ def save_answer(request):
                 if value:
                     administration_data.objects.update_or_create(administration = administration_instance, item_ID = key, defaults = {'value': value})
             if item.choices:
-                choices = map(unicode.strip, item.choices.choice_set_en.split(';'))
+                choices = map(str.strip, item.choices.choice_set_en.split(';'))
                 if value in choices:
                     administration_data.objects.update_or_create(administration = administration_instance, item_ID = key, defaults = {'value': value})
             else:
