@@ -20,6 +20,6 @@ webcdi/media/*
 
 env/
 __pycache__/
-.vscode/
+*/.vscode/
 
 static/
