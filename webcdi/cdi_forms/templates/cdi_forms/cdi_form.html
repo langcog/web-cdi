@@ -285,7 +285,7 @@
         </h4>
 
         <ul>
-            <li>{% blocktrans with age=age.0 %}You have a child who is {{ age }} months old.{% endblocktrans %}</li>
+            <li>{% blocktrans with age=age %}You have a child who is {{ age }} months old.{% endblocktrans %}</li>
             <li>{% trans "You filled out the entire questionnaire to the best of your ability." %}</li>
             <li>{% trans "You are taking this questionnaire for the FIRST time." %}</li>
         </ul>
@@ -296,13 +296,13 @@
                 <input  type="radio" id="analysis_yes" name="analysis" value="True">
                 <i class="material-icons radio_button_checked align-middle" aria-hidden="true">radio_button_checked</i>
                 <i class="material-icons radio_button_unchecked align-middle" aria-hidden="true">radio_button_unchecked</i>
-                <p class="text-left">{% blocktrans with age=age.0 %}Yes, I have a child who is {{ age.0 }} months old, I filled out the entire questionnaire, and I am taking this questionnaire for the first time.{% endblocktrans %}</p>
+                <p class="text-left">{% blocktrans with age=age %}Yes, I have a child who is {{ age }} months old, I filled out the entire questionnaire, and I am taking this questionnaire for the first time.{% endblocktrans %}</p>
             </label>
             <label class = "btn d-flex justify-content-start">
                 <input  type="radio" id="analysis_no" name="analysis" value="False">
                 <i class="material-icons radio_button_checked align-middle" aria-hidden="true">radio_button_checked</i>
                 <i class="material-icons radio_button_unchecked align-middle" aria-hidden="true">radio_button_unchecked</i>
-                <p class="text-left">{% blocktrans with age=age.0 %}No, I do NOT have a child who is {{ age.0 }} months old, I have NOT filled out the entire questionnaire, and/or I have taken this questionnaire before.{% endblocktrans %}</p>
+                <p class="text-left">{% blocktrans with age=age %}No, I do NOT have a child who is {{ age }} months old, I have NOT filled out the entire questionnaire, and/or I have taken this questionnaire before.{% endblocktrans %}</p>
             </label>
         </div>
 
