@@ -1447,7 +1447,7 @@ msgid ""
 "time."
 msgstr ""
 "U hoeft de vragenlijst niet in een keer af te maken. Als u onderbroken wordt, "
-"kunt u de lijst opslaan en op een ander moment verder te gaan."
+"kunt u de lijst opslaan en op een ander moment verder gaan."
 
 #: cdi_forms/templates/cdi_forms/background_info.html:32
 #: cdi_forms/templates/cdi_forms/study_group.html:24
@@ -1455,7 +1455,7 @@ msgid ""
 "Feel free to ask others (e.g. other family members, nanny, child care "
 "providers) to help you fill out this form."
 msgstr ""
-"U kunt andere mensen om hulp vragen met het invullen van deze vragenlijst, "
+"U kunt andere mensen om hulp vragen bij het invullen van deze vragenlijst, "
 "bijvoorbeeld familieleden, oppas of kinderopvang."
 
 #: cdi_forms/templates/cdi_forms/background_info.html:33
@@ -1514,7 +1514,7 @@ msgstr "Afronden"
 #: cdi_forms/templates/cdi_forms/cdi_form.html:327 cdi_forms/views.py:250
 #: cdi_forms/views.py:566
 msgid "Go back to Background Info"
-msgstr "Ga terug naar de achtergrondinformatie"
+msgstr "Terug naar achtergrondinformatie"
 
 #: cdi_forms/templates/cdi_forms/backpage_info.html:27
 msgid "Background Information Continued"
