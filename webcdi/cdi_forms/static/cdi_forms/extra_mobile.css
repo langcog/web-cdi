@@ -22,7 +22,7 @@ select.form-control:not([size]):not([multiple]) {
     height: calc(5.25rem + 2px);
 }
 
-@media only screen and (min-width: 600px) {
+@media (min-width: 981px) {
     select.form-control:not([size]):not([multiple]) {
         height: calc(2.25rem + 2px);
     }
