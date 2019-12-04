@@ -1,4 +1,4 @@
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 980px) {
    
     .material-icons {
         font-size: 46px
@@ -15,15 +15,5 @@
 
     select.form-control:not([size]):not([multiple]) {
         height: calc(5.25rem + 2px);
-    }
-}
-
-select.form-control:not([size]):not([multiple]) {
-    height: calc(5.25rem + 2px);
-}
-
-@media (min-width: 981px) {
-    select.form-control:not([size]):not([multiple]) {
-        height: calc(2.25rem + 2px);
     }
 }
