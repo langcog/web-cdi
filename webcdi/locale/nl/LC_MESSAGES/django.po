@@ -1810,19 +1810,19 @@ msgstr "U heeft deze vragenlijst voor de eerste keer ingevuld."
 #: cdi_forms/templates/cdi_forms/cdi_form.html:299
 #, python-format
 msgid ""
-"Yes, I have a child who is %(age.0)s months old, I filled out the entire "
+"Yes, I have a child who is %(age)s months old, I filled out the entire "
 "questionnaire, and I am taking this questionnaire for the first time."
 msgstr ""
-"Ja, ik heb een kind dat %(age.0)s maanden oud is, ik heb de hele vragenlijst "
+"Ja, ik heb een kind dat %(age)s maanden oud is, ik heb de hele vragenlijst "
 "ingevuld, en ik heb de vragenlijst voor de eerste keer ingevuld."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:305
 #, python-format
 msgid ""
-"No, I do NOT have a child who is %(age.0)s months old, I have NOT filled out "
+"No, I do NOT have a child who is %(age)s months old, I have NOT filled out "
 "the entire questionnaire, and/or I have taken this questionnaire before."
 msgstr ""
-"Nee, ik heb GEEN kind dat %(age.0)s maanden oud is, ik heb de vragenlijst "
+"Nee, ik heb GEEN kind dat %(age)s maanden oud is, ik heb de vragenlijst "
 "NIET helemaal ingevuld, en/of ik heb deze vragenlijst al eerder ingevuld."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:311

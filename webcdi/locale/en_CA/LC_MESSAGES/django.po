@@ -1722,14 +1722,14 @@ msgstr ""
 #: cdi_forms/templates/cdi_forms/cdi_form.html:299
 #, python-format
 msgid ""
-"Yes, I have a child who is %(age.0)s months old, I filled out the entire "
+"Yes, I have a child who is %(age)s months old, I filled out the entire "
 "questionnaire, and I am taking this questionnaire for the first time."
 msgstr ""
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:305
 #, python-format
 msgid ""
-"No, I do NOT have a child who is %(age.0)s months old, I have NOT filled out "
+"No, I do NOT have a child who is %(age)s months old, I have NOT filled out "
 "the entire questionnaire, and/or I have taken this questionnaire before."
 msgstr ""
 

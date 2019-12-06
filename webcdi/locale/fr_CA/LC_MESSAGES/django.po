@@ -1824,19 +1824,19 @@ msgstr "Vous remplissez ce questionnaire pour la PREMIÈRE fois."
 #: cdi_forms/templates/cdi_forms/cdi_form.html:299
 #, python-format
 msgid ""
-"Yes, I have a child who is %(age.0)s months old, I filled out the entire "
+"Yes, I have a child who is %(age)s months old, I filled out the entire "
 "questionnaire, and I am taking this questionnaire for the first time."
 msgstr ""
-"Oui, j'ai un enfant qui a %(age.0)s mois, j'ai rempli le questionnaire en "
+"Oui, j'ai un enfant qui a %(age)s mois, j'ai rempli le questionnaire en "
 "entier, et je réponds à ce questionnaire pour la première fois."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:305
 #, python-format
 msgid ""
-"No, I do NOT have a child who is %(age.0)s months old, I have NOT filled out "
+"No, I do NOT have a child who is %(age)s months old, I have NOT filled out "
 "the entire questionnaire, and/or I have taken this questionnaire before."
 msgstr ""
-"Non, je n'ai PAS d'enfant âgé de %(age.0)s mois, je n'ai PAS rempli le "
+"Non, je n'ai PAS d'enfant âgé de %(age)s mois, je n'ai PAS rempli le "
 "questionnaire en entier et / ou j'ai déjà répondu à ce questionnaire "
 "auparavant."
 
