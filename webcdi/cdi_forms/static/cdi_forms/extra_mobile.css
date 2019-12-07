@@ -1,0 +1,23 @@
+@media only screen and (max-width: 980px) {
+   
+    .material-icons {
+        font-size: 46px
+    }
+    
+    .datepicker table tr td, .datepicker table tr th {
+        text-align: center;
+        width: 90px;
+        height: 90px;
+        border-radius: 4px;
+        border: none;
+        font-size: 60px;
+    } 
+
+    select.form-control:not([size]):not([multiple]) {
+        height: calc(5.25rem + 2px);
+    }
+
+    .modal-dialog {
+        max-width: 100%
+    }
+}
