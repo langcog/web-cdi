@@ -31,6 +31,7 @@ django-ipware==2.1.0
 django-js-asset==1.2.2
 django-localflavor==2.2
 django-modeltranslation==0.13.3
+django-storages==1.8
 django-tables2==2.1.1
 docker==3.7.3
 docker-compose==1.23.2
