@@ -6,11 +6,11 @@
     
     .datepicker table tr td, .datepicker table tr th {
         text-align: center;
-        width: 90px;
-        height: 90px;
+        width: 60px;
+        height: 60px;
         border-radius: 4px;
         border: none;
-        font-size: 60px;
+        font-size: 40px;
     } 
 
     select.form-control:not([size]):not([multiple]) {
@@ -19,5 +19,10 @@
 
     .modal-dialog {
         max-width: 100%
+    }
+
+    .btn {
+        padding: 2.5rem 2.75rem;
+        font-size: 2rem;
     }
 }
