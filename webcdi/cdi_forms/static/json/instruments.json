@@ -34,6 +34,16 @@
 		"benchmark" : "cdi_forms/form_data/benchmarking/English_WG_benchmark.csv"
 	},
 	{
+		"language": "Hebrew",
+		"form": "WG",
+		"verbose_name": "Words and Gestures",
+		"min_age": 8,
+		"max_age": 18,
+		"csv_file": "cdi_form_csv/[Hebrew_WG].csv",
+		"json_data": "cdi_forms/form_data/Hebrew_WG_meta.json",
+		"scoring_json" : "cdi_forms/form_data/scoring/Hebrew_WG_scoring.json",
+	},
+	{
 		"language": "Spanish",
 		"form": "WS",
 		"verbose_name": "Palabras & Enunciados",
