@@ -26,3 +26,9 @@
         font-size: 2rem;
     }
 }
+
+@media only screen and (min-width: 992px) {
+    .modal-lg {
+        max-width: 1050px;
+    }
+}
