@@ -21,7 +21,7 @@
         max-width: 100%
     }
 
-    .btn {
+    .modal-footer > .btn {
         padding: 2.5rem 2.75rem;
         font-size: 2rem;
     }
