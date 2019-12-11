@@ -610,7 +610,8 @@ def cdi_form(request, hash_id):
                 # If the study is run by langcoglab and the study allows for subject payments, store the IP address for security purposes
                 if administration_instance.study.researcher.username == "langcoglab" and administration_instance.study.allow_payment:
                     #user_ip = str(get_ip(request))
-                    user_ip = bytes(get_ip(request))
+                    #user_ip = bytes(get_ip(request))
+                    user_ip = get_ip(request)
 
                     if user_ip and user_ip != 'None':
                         ip_address.objects.create(study = administration_instance.study,ip_address = user_ip)
@@ -788,7 +789,8 @@ def find_paired_studies(request, username, study_group):
     context['max_age'] = first_study.max_age
     context['birthweight_units'] = first_study.birth_weight_units
 
-    user_language = language_map(administration_instance.study.instrument.language)
+    #user_language = language_map(administration_instance.study.instrument.language)
+    user_language = language_map(first_study.instrument.language)
 
     translation.activate(user_language)
 
