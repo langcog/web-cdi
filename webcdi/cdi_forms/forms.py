@@ -202,10 +202,14 @@ class BackgroundForm(BetterModelForm):
                         self.add_error(dependent, _("This field cannot be empty"))
         
         # Check responses to 'early_or_late' and 'due_date_diff' to ensure biologically believable values.
-        if cleaned_data.get('early_or_late') == 'early' and cleaned_data.get('due_date_diff') > 18:
-            self.add_error('born_on_due_date', _("Cannot be more than 18 weeks early"))
-        if cleaned_data.get('early_or_late') == 'late' and cleaned_data.get('due_date_diff') > 4:
-            self.add_error('born_on_due_date', _("Cannot be more than 4 weeks late"))
+        if cleaned_data.get('early_or_late') in ['early','late']:
+            if not cleaned_data.get('due_date_diff'):
+                self.add_error('born_on_due_date', _("Please enter number of weeks"))    
+            else:
+                if cleaned_data.get('early_or_late') == 'early' and cleaned_data.get('due_date_diff') > 18:
+                    self.add_error('born_on_due_date', _("Cannot be more than 18 weeks early"))
+                if cleaned_data.get('early_or_late') == 'late' and cleaned_data.get('due_date_diff') > 4:
+                    self.add_error('born_on_due_date', _("Cannot be more than 4 weeks late"))
         
         # Ensure that the 'age' field is not empty.
         if cleaned_data.get('age') == '':
