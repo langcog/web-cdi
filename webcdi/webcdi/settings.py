@@ -72,6 +72,7 @@ ALLOWED_HOSTS = [
     'webcdi-dev.stanford.edu', 
     '.elb.amazonaws.com']
 
+'''
 IPS_TO_ADD = ['webcdi-prod.us-west-2.elasticbeanstalk.com', 'webcdi.stanford.edu', socket.gethostname()]
 
 NEW_IPS = set()
@@ -82,7 +83,7 @@ for IP in IPS_TO_ADD:
 
 for IP in list(NEW_IPS):
 	ALLOWED_HOSTS.append(IP)
-
+'''
 # Application definition
 
 INSTALLED_APPS = (
