@@ -72,7 +72,6 @@ ALLOWED_HOSTS = [
     'webcdi-dev.stanford.edu', 
     '.elb.amazonaws.com']
 
-
 IPS_TO_ADD = [socket.gethostname()]
 
 NEW_IPS = set()
