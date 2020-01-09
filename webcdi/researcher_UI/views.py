@@ -151,7 +151,7 @@ def download_data(request, study_obj, administrations = None): # Download study 
                 else : 
                     if scoring_category in f.category.split(';'):
                         scoring_dict[f.title] +=  administration_data_item.value + '\n'
-  
+
         # now add in the benchmark scores
         try:
             sex = BackgroundInfo.objects.get(administration=administration_id).sex
