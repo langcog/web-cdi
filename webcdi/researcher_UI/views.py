@@ -151,7 +151,6 @@ def download_data(request, study_obj, administrations = None): # Download study 
                 else : 
                     if scoring_category in f.category.split(';'):
                         scoring_dict[f.title] +=  administration_data_item.value + '\n'
-
                 
         # now add in the benchmark scores
         try:
@@ -286,7 +285,6 @@ def download_summary(request, study_obj, administrations = None): # Download stu
     background_header = ['age','sex','zip_code','birth_order', 'birth_weight_lb', 'birth_weight_kg','multi_birth_boolean','multi_birth', 'born_on_due_date', 'early_or_late', 'due_date_diff', 'mother_yob', 'mother_education','father_yob', 'father_education', 'annual_income', 'child_hispanic_latino', 'child_ethnicity', 'caregiver_info', 'other_languages_boolean','other_languages','language_from', 'language_days_per_week', 'language_hours_per_day', 'ear_infections_boolean','ear_infections', 'hearing_loss_boolean','hearing_loss', 'vision_problems_boolean','vision_problems', 'illnesses_boolean','illnesses', 'services_boolean','services','worried_boolean','worried','learning_disability_boolean','learning_disability']
 
     # Format background data responses for pandas dataframe and eventual printing
-    #try:
     background_data = BackgroundInfo.objects.values().filter(administration__in = administrations)
 
     BI_choices = {}
@@ -346,6 +344,18 @@ def download_summary(request, study_obj, administrations = None): # Download stu
         scoring_dict = base_scoring_dict.copy()
         scoring_dict['administration_id'] = administration_id.id  # add administration_id so we know the respondent
         
+        for administration_data_item in administration_data.objects.filter(administration_id=administration_id):
+            inst = Instrument_Forms.objects.get(instrument=study_obj.instrument,itemID=administration_data_item.item_ID)
+            scoring_category = inst.scoring_category if inst.scoring_category else inst.item_type
+            for f in score_forms: #items can be counted under multiple Titles check category against all categories
+                if f.kind == "count" :
+                    if scoring_category in f.category.split(';'):
+                        if administration_data_item.value in f.measure.split(';'): #and check all values to see if we increment
+                            scoring_dict[f.title] += 1
+                else : 
+                    if scoring_category in f.category.split(';'):
+                        scoring_dict[f.title] +=  administration_data_item.value + '\n'
+
         # now add in the benchmark scores
         try:
             sex = BackgroundInfo.objects.get(administration=administration_id).sex
@@ -406,7 +416,6 @@ def download_summary(request, study_obj, administrations = None): # Download stu
                         scoring_dict[f.title + ' Percentile-both'] = unisex_score
                     if sex_score < 1: sex_score = '<1'
                     scoring_dict[f.title + ' Percentile-sex'] = sex_score
-        
         scores.append(scoring_dict)
     melted_scores = pd.DataFrame(scores)
     melted_scores.set_index('administration_id')
