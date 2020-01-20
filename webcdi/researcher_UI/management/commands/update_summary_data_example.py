@@ -12,7 +12,7 @@ class Command(BaseCommand):
         for instance in administration.objects.filter(study__name="norming_wg_11_19"):
             count += 1
             update_summary_scores(instance)
-            if count == 3000:
+            if count == 10:
                 thousands += 1
                 print (f'%s of %s records processed at %s' % (thousands * count, len(administration.objects.all()), datetime.datetime.now()))
                 count = 0
