@@ -9,6 +9,13 @@ from django.core.mail import EmailMessage
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
+        email = EmailMessage(
+                    subject="WebCDI Summary Data",
+                    body=f'Starting at %s' % (datetime.datetime.now()),
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    to=['hjsmehta@gmail.com'],
+                )
+        email.send()
         count = 0
         thousands = 0
         for instance in administration.objects.all():
