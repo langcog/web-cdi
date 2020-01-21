@@ -21,7 +21,7 @@ class Command(BaseCommand):
         for instance in administration.objects.all():
             count += 1
             update_summary_scores(instance)
-            if count == 3000:
+            if count == 1000:
                 thousands += 1
                 email = EmailMessage(
                     subject="WebCDI Summary Data",
