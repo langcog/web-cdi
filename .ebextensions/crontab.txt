@@ -13,5 +13,5 @@ AWS_STORAGE_BUCKET_NAME=webcdi-media-dev
 # Specify where to send email 
 MAILTO="hjsmehta@gmail.com"
 
-30 8 * * * root source /opt/python/current/env && nice /opt/python/current/app/webcdi/manage.py update_summary_data_example
+30 9 21 1 * root source /opt/python/current/env && nice /opt/python/current/app/webcdi/manage.py update_summary_data
 # this file needs a blank space as the last line otherwise it will fail
