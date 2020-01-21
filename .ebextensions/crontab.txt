@@ -1,0 +1,17 @@
+# Set the cron to run with utf8 encoding
+PYTHONIOENCODING=utf8
+
+RDS_DB_NAME=webcdi-admin
+RDS_HOSTNAME=webcdi-dev.canyiscnpddk.us-west-2.rds.amazonaws.com
+RDS_PASSWORD=bears1stlexicon
+RDS_PORT=5432
+RDS_USERNAME=webcdi-admin
+AWS_ACCESS_KEY_ID=AKIAT5D2WB2Y3VUR2YWP
+AWS_SECRET_ACCESS_KEY=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
+AWS_STORAGE_BUCKET_NAME=webcdi-media-dev
+
+# Specify where to send email 
+MAILTO="hjsmehta@gmail.com"
+
+30 8 * * * root source /opt/python/current/env && nice /opt/python/current/app/webcdi/manage.py update_summary_data_example
+# this file needs a blank space as the last line otherwise it will fail
