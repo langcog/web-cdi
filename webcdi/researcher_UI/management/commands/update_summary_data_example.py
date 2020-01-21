@@ -23,5 +23,6 @@ class Command(BaseCommand):
                     from_email=settings.DEFAULT_FROM_EMAIL,
                     to=['hjsmehta@gmail.com'],
                 )
-                email.send()print (f'%s of %s records processed at %s' % (thousands * count, len(administration.objects.all()), datetime.datetime.now()))
+                email.send()
+                print (f'%s of %s records processed at %s' % (thousands * count, len(administration.objects.all()), datetime.datetime.now()))
                 count = 0
