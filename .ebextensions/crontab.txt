@@ -10,7 +10,7 @@ RDS_USERNAME=webcdi-admin
 # Specify where to send email 
 MAILTO="hjsmehta@gmail.com"
 
-45	15	*	*	*	root	source	/opt/python/current/env	&&	nice	/opt/python/current/app/webcdi/manage.py	update_summary_data_all
+45	17	*	*	*	root	source	/opt/python/current/env	&&	nice	/opt/python/current/app/webcdi/manage.py	update_summary_data_all
 
 
 # this file needs a blank space as the last line otherwise it will fail
