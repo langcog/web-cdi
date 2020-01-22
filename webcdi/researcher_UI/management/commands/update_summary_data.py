@@ -35,7 +35,7 @@ class Command(BaseCommand):
                 thousands += 1
                 email = EmailMessage(
                     subject=subject,
-                    body=f'%s of %s records processed at %s' % (thousands * count, len(administration.objects.all()), datetime.datetime.now()),
+                    body=f'%s of %s records processed at %s' % (thousands * count, len(administrations), datetime.datetime.now()),
                     from_email=settings.DEFAULT_FROM_EMAIL,
                     to=['hjsmehta@gmail.com'],
                 )
@@ -44,7 +44,7 @@ class Command(BaseCommand):
 
         email = EmailMessage(
                     subject=subject,
-                    body=f'COMPLETED',
+                    body=f'COMPLETED at %s' % datetime.datetime.now(),
                     from_email=settings.DEFAULT_FROM_EMAIL,
                     to=['hjsmehta@gmail.com'],
                 )
