@@ -57,9 +57,9 @@ def update_summary_scores(administration_instance):
                 benchmark = Benchmark.objects.filter(instrument_score=f, age=age)[0]
                 if benchmark.percentile == 999:
                     summary, created = SummaryData.objects.get_or_create(administration=administration_instance, title=f.title + ' % yes answers at this age and sex')
-                    if BackgroundInfo.sex == 'M' :
+                    if background_info.sex == 'M' :
                         summary.value = str(benchmark.raw_score_boy)
-                    elif BackgroundInfo.sex == 'F' :
+                    elif background_info.sex == 'F' :
                         summary.value = str(benchmark.raw_score_girl)
                     summary.save()
 

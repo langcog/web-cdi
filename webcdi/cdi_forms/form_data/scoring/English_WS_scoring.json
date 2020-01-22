@@ -14,7 +14,7 @@
     {
         "title" : "Word Endings 1",
         "category" : "word_endings_1",
-        "measure" : "produces",
+        "measure" : "sometimes;often",
         "order" : 3
     },
     {
