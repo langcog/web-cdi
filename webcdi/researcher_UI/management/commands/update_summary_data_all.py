@@ -20,7 +20,9 @@ class Command(BaseCommand):
                     from_email=settings.DEFAULT_FROM_EMAIL,
                     to=['hjsmehta@gmail.com'],
                 )
-            email.send()
+            try:
+                email.send()
+            except: pass
             for instance in administrations:
                 count += 1
                 update_summary_scores(instance)
@@ -32,7 +34,9 @@ class Command(BaseCommand):
                         from_email=settings.DEFAULT_FROM_EMAIL,
                         to=['hjsmehta@gmail.com'],
                     )
-                    email.send()
+                    try:
+                        email.send()
+                    except: pass
                     count = 0
 
             email = EmailMessage(
@@ -41,4 +45,13 @@ class Command(BaseCommand):
                         from_email=settings.DEFAULT_FROM_EMAIL,
                         to=['hjsmehta@gmail.com'],
                     )
-            email.send()
+            try:
+                email.send()
+            except: pass
+        email = EmailMessage(
+                        subject='COMPLETED ALL DATA SUMMARIES',
+                        body=f'COMPLETED ALL DATA SUMMARIES at %s' % datetime.datetime.now(),
+                        from_email=settings.DEFAULT_FROM_EMAIL,
+                        to=['hjsmehta@gmail.com'],
+                    )
+        email.send()
