@@ -421,7 +421,7 @@ class CreateBackgroundInfoView(CreateView):
                 obj.child_hispanic_latino = None
 
             # Find the raw zip code value and make it compliant with Safe Harbor guidelines. Only store the first 3 digits if the total population for that prefix is greataer than 20,000 (found prohibited prefixes via Census API data). If prohibited zip code, replace value with state abbreviations.
-            zip_prefix = ''
+            zip_prefix = '' 
             raw_zip = obj.zip_code
             if raw_zip and raw_zip != 'None':
                 zip_prefix = raw_zip[:3]
