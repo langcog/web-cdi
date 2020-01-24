@@ -341,7 +341,7 @@
 
 {% block scripts %}
 
-<!-- ReCaptcha. If study has a ReCaptcha option, the participant must have worked on the test for at least 4 minutes AND pass the ReCaptcha test for the submit button to appear. Otherwise, participant only has to have worked on the test for 4 minutes. -->
+<!-- ReCaptcha. If study has a ReCaptcha option, the participant must have worked on the test for at least 6 minutes AND pass the ReCaptcha test for the submit button to appear. Otherwise, participant only has to have worked on the test for 6 minutes. -->
 {% if captcha == 'True' %}
     <script>
         captcha_clicked = false;
@@ -349,7 +349,7 @@
         // Triggers when participant successfully passes ReCaptcha
         function enableBtn(){
             captcha_clicked = true;
-            if (gotToEnd && test_duration >= 4) {
+            if (gotToEnd && test_duration >= 6) {
                 $('.submit-button').show();
             }
         }
@@ -461,7 +461,7 @@
 
         test_duration = moment.utc().diff(moment.utc(created_date, "MMM DD, YYYY, hh:mm a"),'minutes')
 
-        if (gotToEnd && test_duration >= 4 && captcha_clicked) {
+        if (gotToEnd && test_duration >= 6 && captcha_clicked) {
             $('.submit-button').show();
         }
 

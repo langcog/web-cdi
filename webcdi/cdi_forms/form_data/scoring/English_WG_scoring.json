@@ -61,25 +61,25 @@
     },
     {
         "title" : "Adult Gestures",
-        "category" : "gestures_adults",
+        "category" : "gestures_adult",
         "measure" : "yes",
         "order" : 11
     },
     {
         "title" : "Parent Gestures",
-        "category" : "gestures_parents",
+        "category" : "gestures_parent",
         "measure" : "yes",
         "order" : 12
     },
     {
         "title" : "Later Gestures",
-        "category" : "gestures_parents;gestures_adults;gestures_objects",
+        "category" : "gestures_parent;gestures_adult;gestures_objects",
         "measure" : "yes",
         "order" : 14
     },
     {
         "title" : "Total Gestures",
-        "category" : "gestures_parents;gestures_adults;gestures_objects;gestures_first;gestures_games",
+        "category" : "gestures_parent;gestures_adult;gestures_objects;gestures_first;gestures_games",
         "measure" : "sometimes;often;yes",
         "order" : 15
     }

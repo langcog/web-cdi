@@ -36,11 +36,28 @@ from django.utils import translation
 from django.utils.translation import ugettext_lazy as _
 from cdi_forms.models import Instrument_Forms
 
-def calc_benchmark(x1, x2, y1, y2, raw_score):
-    if x1 == x2: return int((y1+y2)/2)
-    gradient = float(y2-y1)/(x2-x1)
-    a = float(y1 - (x1 * gradient))
-    return int(a + raw_score * gradient)
+def get_study_scores(administrations):
+    scores = SummaryData.objects.values('administration_id', 'title','value').filter(administration_id__in = administrations)
+    melted_scores = pd.DataFrame.from_records(scores).pivot(index='administration_id', columns='title', values='value')
+    melted_scores.reset_index(level=0, inplace=True)
+    return melted_scores
+
+def get_score_headers(study_obj):
+    score_forms = InstrumentScore.objects.filter(instrument=study_obj.instrument)
+    score_header = []
+    if Benchmark.objects.filter(instrument=study_obj.instrument).exists():
+            score_header.append('benchmark age')
+    for f in score_forms: # let's get the scoring headers
+        score_header.append(f.title)
+        if Benchmark.objects.filter(instrument_score=f).exists():
+            benchmark = Benchmark.objects.filter(instrument_score=f)[0]
+            if benchmark.percentile == 999:
+                score_header.append(f.title + ' % yes answers at this age and sex')
+            else:
+                score_header.append(f.title + ' Percentile-sex')
+                if not benchmark.raw_score == 9999: score_header.append(f.title + ' Percentile-both')
+    return score_header
+
 
 @login_required # For researchers only, requires user to be logged in (test-takers do not have an account and are blocked from this interface)
 def download_data(request, study_obj, administrations = None): # Download study data
@@ -96,126 +113,12 @@ def download_data(request, study_obj, administrations = None): # Download study 
         return render (request, 'error-page.html')
 
     # Add scoring
-    scores = []
-    
-    score_forms = InstrumentScore.objects.filter(instrument=study_obj.instrument)
-    score_header = []
-    if Benchmark.objects.filter(instrument=study_obj.instrument).exists():
-            score_header.append('benchmark age')
-    for f in score_forms: # let's get the scoring headers
-        score_header.append(f.title)
-        if Benchmark.objects.filter(instrument_score=f).exists():
-            benchmark = Benchmark.objects.filter(instrument_score=f)[0]
-            if benchmark.percentile == 999:
-                score_header.append(f.title + ' % yes answers at this age and sex')
-            else:
-                score_header.append(f.title + ' Percentile-sex')
-                if not benchmark.raw_score == 9999: score_header.append(f.title + ' Percentile-both')
-    
-    #set max and min age for benchmark
-    try:
-        max_age = Benchmark.objects.filter(instrument=study_obj.instrument).order_by('-age')[0].age
-        min_age = Benchmark.objects.filter(instrument=study_obj.instrument).order_by('age')[0].age
-    except: pass
-        
-    
-    #set up scoring dict titles
-    base_scoring_dict = {}
-    for f in score_forms: #and ensure each score is at least 0
-        if f.kind == 'count' : base_scoring_dict[f.title] = 0
-        else : base_scoring_dict[f.title] = ''
-       
-        #add benchmark titles
-        if Benchmark.objects.filter(instrument_score=f).exists():
-            benchmark = Benchmark.objects.filter(instrument_score=f)[0]
-            if benchmark.percentile == 999:
-                base_scoring_dict[f.title + ' % yes answers at this age and sex'] = 0
-            else:
-                base_scoring_dict[f.title + ' Percentile-sex'] = 0
-                if not benchmark.raw_score == 9999: 
-                    base_scoring_dict[f.title + ' Percentile-both'] = 0
-                    
-
-    for administration_id in administrations:
-        scoring_dict = base_scoring_dict.copy()
-        scoring_dict['administration_id'] = administration_id.id  # add administration_id so we know the respondent
-        
-        for administration_data_item in administration_data.objects.filter(administration_id=administration_id):
-            inst = Instrument_Forms.objects.get(instrument=study_obj.instrument,itemID=administration_data_item.item_ID)
-            scoring_category = inst.scoring_category if inst.scoring_category else inst.item_type
-            for f in score_forms: #items can be counted under multiple Titles check category against all categories
-                if f.kind == "count" :
-                    if scoring_category in f.category.split(';'):
-                        if administration_data_item.value in f.measure.split(';'): #and check all values to see if we increment
-                            scoring_dict[f.title] += 1
-                else : 
-                    if scoring_category in f.category.split(';'):
-                        scoring_dict[f.title] +=  administration_data_item.value + '\n'
-
-        # now add in the benchmark scores
-        try:
-            sex = BackgroundInfo.objects.get(administration=administration_id).sex
-        except:
-            sex = None
-        try:
-            age = BackgroundInfo.objects.get(administration=administration_id).age
-            if age < min_age: age = min_age
-            if age > max_age: age = max_age
-            scoring_dict['benchmark age'] = age
-        except:
-            age=None
-
-        for f in score_forms:
-            if Benchmark.objects.filter(instrument_score=f, age=age).exists():
-                benchmark = Benchmark.objects.filter(instrument_score=f)[0]
-                if benchmark.percentile == 999:
-                    benchmark = Benchmark.objects.get(instrument_score=f, age=age)
-                    if sex == 'M': scoring_dict[f.title + ' % yes answers at this age and sex'] = benchmark.raw_score_boy
-                    elif sex == 'F': scoring_dict[f.title + ' % yes answers at this age and sex'] = benchmark.raw_score_girl
-                else:
-                    benchmarks = Benchmark.objects.filter(instrument_score=f, age=age)
-                    raw_score = scoring_dict[f.title]
-                    unisex_score = sex_score = 0
-                    benchmark = benchmarks[0]
-                       
-                    
-                    if sex == 'M':
-                        benchmark = benchmarks[0]
-                        sex_score = benchmark.percentile
-                        for b in benchmarks[1:]:
-                            if b.raw_score_boy <= raw_score: 
-                                benchmark = b
-                                sex_score = benchmark.percentile
-                            else:
-                                sex_score = calc_benchmark(benchmark.raw_score_boy, b.raw_score_boy, benchmark.percentile, b.percentile, raw_score)
-                                break
-                    elif sex == 'F':
-                        benchmark = benchmarks[0]
-                        sex_score = benchmark.percentile
-                        for b in benchmarks[1:]:
-                            if b.raw_score_girl <= raw_score: 
-                                benchmark = b
-                                sex_score = benchmark.percentile
-                            else:
-                                sex_score = calc_benchmark(benchmark.raw_score_girl, b.raw_score_girl, benchmark.percentile, b.percentile, raw_score)
-                                break                      
-                    
-                    if not benchmark.raw_score == 9999:
-                        unisex_score = benchmark.percentile
-                        for b in benchmarks[1:]:
-                            if b.raw_score <= raw_score: 
-                                benchmark = b
-                                unisex_score = benchmark.percentile
-                            else:
-                                unisex_score = calc_benchmark(benchmark.raw_score, b.raw_score, benchmark.percentile, b.percentile, raw_score)
-                                break
-                        if unisex_score < 1: unisex_score = '<1'
-                        scoring_dict[f.title + ' Percentile-both'] = unisex_score
-                    if sex_score < 1: sex_score = '<1'
-                    scoring_dict[f.title + ' Percentile-sex'] = sex_score
-        scores.append(scoring_dict)
-    melted_scores = pd.DataFrame(scores)
+    melted_scores = get_study_scores(administrations)
+    score_header = get_score_headers(study_obj)
     melted_scores.set_index('administration_id')
+    missing_columns = list(set(score_header) - set(melted_scores.columns))
+    if missing_columns:
+        melted_scores = melted_scores.reindex(columns=np.append(melted_scores.columns.values, missing_columns))
     
     # Try to combine background data and CDI responses
     try:
@@ -301,125 +204,15 @@ def download_summary(request, study_obj, administrations = None): # Download stu
     new_background = pd.DataFrame.from_records(background_data).astype(str).replace(BI_choices)
     new_background['administration_id'] = new_background['administration_id'].astype('int64')
 
+
     # Add scoring
-    scores = []
-    
-    score_forms = InstrumentScore.objects.filter(instrument=study_obj.instrument)
-    score_header = []
-    if Benchmark.objects.filter(instrument=study_obj.instrument).exists():
-        score_header.append('benchmark age') 
-    for f in score_forms: # let's get the scoring headers
-        score_header.append(f.title)
-        if Benchmark.objects.filter(instrument_score=f).exists():
-            benchmark = Benchmark.objects.filter(instrument_score=f)[0]
-            if benchmark.percentile == 999:
-                score_header.append(f.title + ' % yes answers at this age and sex')
-            else:
-                score_header.append(f.title + ' Percentile-sex')
-                if not benchmark.raw_score == 9999: score_header.append(f.title + ' Percentile-both')
-    
-    #set max and min age for benchmark
-    try:
-        max_age = Benchmark.objects.filter(instrument=study_obj.instrument).order_by('-age')[0].age
-        min_age = Benchmark.objects.filter(instrument=study_obj.instrument).order_by('age')[0].age
-    except: pass
-
-    #set up scoring dict titles
-    base_scoring_dict = {}
-    for f in score_forms: #and ensure each score is at least 0
-        if f.kind == 'count' : base_scoring_dict[f.title] = 0
-        else : base_scoring_dict[f.title] = ''
-       
-        #add benchmark titles
-        if Benchmark.objects.filter(instrument_score=f).exists():
-            benchmark = Benchmark.objects.filter(instrument_score=f)[0]
-            if benchmark.percentile == 999:
-                base_scoring_dict[f.title + ' % yes answers at this age and sex'] = 0
-            else:
-                base_scoring_dict[f.title + ' Percentile-sex'] = 0
-                if not benchmark.raw_score == 9999: 
-                    base_scoring_dict[f.title + ' Percentile-both'] = 0
-
-    for administration_id in administrations:
-        scoring_dict = base_scoring_dict.copy()
-        scoring_dict['administration_id'] = administration_id.id  # add administration_id so we know the respondent
-        
-        for administration_data_item in administration_data.objects.filter(administration_id=administration_id):
-            inst = Instrument_Forms.objects.get(instrument=study_obj.instrument,itemID=administration_data_item.item_ID)
-            scoring_category = inst.scoring_category if inst.scoring_category else inst.item_type
-            for f in score_forms: #items can be counted under multiple Titles check category against all categories
-                if f.kind == "count" :
-                    if scoring_category in f.category.split(';'):
-                        if administration_data_item.value in f.measure.split(';'): #and check all values to see if we increment
-                            scoring_dict[f.title] += 1
-                else : 
-                    if scoring_category in f.category.split(';'):
-                        scoring_dict[f.title] +=  administration_data_item.value + '\n'
-
-        # now add in the benchmark scores
-        try:
-            sex = BackgroundInfo.objects.get(administration=administration_id).sex
-        except:
-            sex = None
-        try:
-            age = BackgroundInfo.objects.get(administration=administration_id).age
-            if age < min_age: age = min_age
-            if age > max_age: age = max_age
-            scoring_dict['benchmark age'] = age
-        except:
-            age=None
-
-        for f in score_forms:
-            if Benchmark.objects.filter(instrument_score=f, age=age).exists():
-                benchmark = Benchmark.objects.filter(instrument_score=f)[0]
-                if benchmark.percentile == 999:
-                    benchmark = Benchmark.objects.get(instrument_score=f, age=age)
-                    if sex == 'M': scoring_dict[f.title + ' % yes answers at this age and sex'] = benchmark.raw_score_boy
-                    if sex == 'F': scoring_dict[f.title + ' % yes answers at this age and sex'] = benchmark.raw_score_girl
-                else:
-                    benchmarks = Benchmark.objects.filter(instrument_score=f, age=age)
-                    raw_score = scoring_dict[f.title]
-                    unisex_score = sex_score = 0
-                    benchmark = benchmarks[0]
-                    
-                    if sex == 'M':
-                        benchmark = benchmarks[0]
-                        sex_score = benchmark.percentile
-                        for b in benchmarks[1:]:
-                            if b.raw_score_boy <= raw_score: 
-                                benchmark = b
-                                sex_score = benchmark.percentile
-                            else:
-                                sex_score = calc_benchmark(benchmark.raw_score_boy, b.raw_score_boy, benchmark.percentile, b.percentile, raw_score)
-                                break
-                    elif sex == 'F':
-                        benchmark = benchmarks[0]
-                        sex_score = benchmark.percentile
-                        for b in benchmarks[1:]:
-                            if b.raw_score_girl <= raw_score: 
-                                benchmark = b
-                                sex_score = benchmark.percentile
-                            else:
-                                sex_score = calc_benchmark(benchmark.raw_score_girl, b.raw_score_girl, benchmark.percentile, b.percentile, raw_score)
-                                break
-                    
-                    if not benchmark.raw_score == 9999:
-                        unisex_score = benchmark.percentile
-                        for b in benchmarks[1:]:
-                            if b.raw_score <= raw_score: 
-                                benchmark = b
-                                unisex_score = benchmark.percentile
-                            else:
-                                unisex_score = calc_benchmark(benchmark.raw_score, b.raw_score, benchmark.percentile, b.percentile, raw_score)
-                                break
-                        if unisex_score < 1: unisex_score = '<1'
-                        scoring_dict[f.title + ' Percentile-both'] = unisex_score
-                    if sex_score < 1: sex_score = '<1'
-                    scoring_dict[f.title + ' Percentile-sex'] = sex_score
-        scores.append(scoring_dict)
-    melted_scores = pd.DataFrame(scores)
+    melted_scores = get_study_scores(administrations)
+    score_header = get_score_headers(study_obj)
     melted_scores.set_index('administration_id')
-    
+    missing_columns = list(set(score_header) - set(melted_scores.columns))
+    if missing_columns:
+        melted_scores = melted_scores.reindex(columns=np.append(melted_scores.columns.values, missing_columns))
+
     # Try to combine background data and CDI responses
     try:
         background_answers = pd.merge(new_background, melted_scores, how='outer', on = 'administration_id')

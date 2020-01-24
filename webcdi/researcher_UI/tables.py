@@ -3,6 +3,7 @@ from cdi_forms import views
 from django_tables2.utils import A
 from django.conf.urls import url
 from .models import administration
+from django.utils.html import mark_safe
 
 # Table for organizing administration objects into a table on the researcher interface
 class StudyAdministrationTable(tables.Table):
@@ -13,6 +14,10 @@ class StudyAdministrationTable(tables.Table):
     subject_id = tables.TemplateColumn('<a href="/interface/edit-administration/{{ record.pk }}/">{{ record.subject_id }}</a>') #Generate Link to edit subject_id
     local_lab_id = tables.TemplateColumn('<a href="/interface/edit-local-lab-id/{{ record.pk }}/">{{ record.local_lab_id }}</a>') #Generate Link to edit local_lab_id
     link = tables.TemplateColumn('<a href="/form/fill/{{ record.url_hash }}" target="_blank">link</a>', orderable=False) # Generates a column of administration links in each row
+    analysis = tables.Column(orderable=True, order_by=['analysis','pk'])
+
+    def render_analysis(self, value):
+        return mark_safe('<span class="true">✔</span>') if value else mark_safe('<span class="false">✘</span>') if not value else ''
 
     # Associates administration table with administration model
     class Meta:
