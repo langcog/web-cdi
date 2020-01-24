@@ -204,7 +204,8 @@ def download_summary(request, study_obj, administrations = None): # Download stu
     new_background = pd.DataFrame.from_records(background_data).astype(str).replace(BI_choices)
     new_background['administration_id'] = new_background['administration_id'].astype('int64')
 
-        # Add scoring
+
+    # Add scoring
     melted_scores = get_study_scores(administrations)
     score_header = get_score_headers(study_obj)
     melted_scores.set_index('administration_id')
