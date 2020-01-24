@@ -23,4 +23,4 @@ env/
 __pycache__/
 */.vscode/
 
-crontab.txt
+.elasticbeanstalk/crontab.txt
