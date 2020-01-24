@@ -883,6 +883,7 @@ def administer_new_parent(request, username, study_name): # For creating single 
             let_through = True # Mark as allowed
 
     if let_through: # If marked as allowed
+        return redirect (reverse('create-new-background-info', kwargs={'study_id' : study_obj.id, 'bypass' : bypass}))
         if study_obj.study_group:
             related_studies = study.objects.filter(researcher=researcher, study_group=study_obj.study_group)
             max_subject_id = administration.objects.filter(study__in=related_studies).aggregate(Max('subject_id'))['subject_id__max']

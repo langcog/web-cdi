@@ -15,13 +15,14 @@ from django.template.loader import get_template
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models import Max
 from django.contrib.sites.shortcuts import get_current_site
 from django.urls import reverse
 from ipware.ip import get_ip
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 import pandas as pd
-from django.views.generic import UpdateView
+from django.views.generic import UpdateView, CreateView
 
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__)) # Declare root folder for project and files. Varies between Mac and Linux installations.
@@ -261,6 +262,7 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
         response.set_cookie(settings.LANGUAGE_COOKIE_NAME, self.user_language)
         return response
 
+
 class BackpageBackgroundInfoView(BackgroundInfoView):
     form_class = BackpageBackgroundForm
     template_name = 'cdi_forms/backpage_info.html'
@@ -269,6 +271,178 @@ class BackpageBackgroundInfoView(BackgroundInfoView):
         ctx = super(BackpageBackgroundInfoView, self).get_context_data(**kwargs)
         ctx['dont_show_waiver'] = True
         return ctx
+
+class CreateBackgroundInfoView(CreateView):
+    template_name = 'cdi_forms/background_info.html'
+    model = BackgroundInfo
+    form_class = BackgroundForm
+    background_form = None
+    study = None
+    bypass = None
+    hash_id = None
+
+    def get_bypass(self):
+        self.bypass = self.kwargs['bypass']
+
+    def get_study(self):
+        self.study = study.objects.get(id=int(self.kwargs['study_id']))
+
+    def get_study_context(self):
+        self.study_context = {}
+        self.study_context['language'] = self.study.instrument.language
+        self.study_context['instrument'] = self.study.instrument.name
+        self.study_context['min_age'] = self.study.min_age
+        self.study_context['max_age'] = self.study.max_age
+        self.study_context['birthweight_units'] = self.study.birth_weight_units
+        self.study_context['child_age'] = None
+        self.study_context['zip_code'] = ''
+        self.study_context['language_code'] =self.user_language
+        return self.study_context
+
+    def get_user_language(self):
+        self.user_language = language_map(self.study.instrument.language)
+        translation.activate(self.user_language)
+        return self.user_language
+
+    def get_context_data(self, **kwargs):
+        data = {}
+        data['background_form'] = self.background_form
+        data['username'] = self.study.researcher.username
+        data['completed'] = False
+        data['due_date'] = (datetime.datetime.now().date() + datetime.timedelta(days=self.study.test_period)).strftime('%b %d, %Y, %I:%M %p')
+        data['language'] = self.study.instrument.language
+        data['language_code'] = self.user_language
+        data['title'] = self.study.instrument.verbose_name
+        data['max_age'] = self.study.max_age
+        data['min_age'] = self.study.min_age
+        data['study_waiver'] = self.study.waiver
+        data['allow_payment'] = self.study.allow_payment
+        data['hint'] = _("Your child should be between %(min_age)d to %(max_age)d months of age.") % {"min_age": data['min_age'], "max_age": data['max_age']}
+        data['form'] = self.study.instrument.form
+
+        if data['allow_payment'] and self.bypass is None:
+            try:
+                data['gift_amount'] = payment_code.objects.filter(study = self.study).values_list('gift_amount', flat=True).first()
+            except:
+                data['gift_amount'] = None
+        study_name = self.study.name
+        study_group = self.study.study_group
+        if study_group:
+            data['study_group'] = study_group
+            data['alt_study_info'] = study.objects.filter(study_group = study_group, researcher = self.study.researcher ).exclude(name = study_name).values_list("name","instrument__min_age", "instrument__max_age", "instrument__language")
+            data['study_group_hint'] = _(" Not the right age? <a href='%(sgurl)s'> Click here</a>") % {"sgurl": reverse('find_paired_studies', args=[data['username'], data['study_group']])}
+        else:
+            data['study_group'] = None
+            data['alt_study_info'] = None
+            data['study_group_hint'] = _(" Not the right age? You should contact your researcher for steps on what to do next.")
+        return data
+
+    def get_background_form(self):
+        background_form = self.form_class(context = self.study_context)
+        return background_form
+
+    def get(self, request, *args, **kwargs):
+        self.get_bypass()
+        self.get_study()
+        self.get_user_language()
+        self.get_study_context()
+        self.background_form = self.get_background_form()        
+        
+        response = render(request, self.template_name, self.get_context_data()) # Render form template
+        response.set_cookie(settings.LANGUAGE_COOKIE_NAME, self.user_language)
+        return response
+
+    def form_valid(self, form):
+        if self.study.study_group:
+            related_studies = study.objects.filter(researcher=researcher, study_group=self.study.study_group)
+            max_subject_id = administration.objects.filter(study__in=related_studies).aggregate(Max('subject_id'))['subject_id__max']
+        else:
+            max_subject_id = administration.objects.filter(study=self.study).aggregate(Max('subject_id'))['subject_id__max'] # Find the subject ID in this study with the highest number
+
+        if max_subject_id is None: # If the max subject ID could not be found (e.g., study has 0 participants)
+            max_subject_id = 0 # Mark as zero
+        from researcher_UI.views import random_url_generator            
+        new_admin = administration.objects.create(study =self.study, subject_id = max_subject_id+1, repeat_num = 1, url_hash = random_url_generator(), completed = False, due_date = datetime.datetime.now()+datetime.timedelta(days=self.study.test_period)) # Create an administration object for participant within database
+        self.hash_id = new_admin.url_hash
+        if self.bypass: # If the user explicitly wanted to continue with the test despite being told they would not be compensated
+            new_admin.bypass = True # Mark administration object with 'bypass'
+            new_admin.save() # Update object in database
+
+        #for field in new_admin._fields:  print(field)
+        print (self.request.POST)
+        form = BackgroundForm(self.request.POST, instance=new_admin, context=self.study_context)
+        
+        self.object = form.save()
+        return
+        return super().form_valid(form)
+        
+    def get_success_url(self, *args, **kwargs):
+        self.request.method = "GET"
+        return reverse('administer_cdi_form', args=[self.hash_id])
+    
+    def post(self, request, *args, **kwargs):
+        self.get_bypass()
+        self.get_study()
+        self.get_user_language()
+        self.get_study_context()
+        self.background_form = self.get_background_form()
+
+        self.background_form = BackgroundForm(request.POST, context=self.study_context)
+        if self.background_form.is_valid():
+            # First create the administration_instance
+            if self.study.study_group:
+                related_studies = study.objects.filter(researcher=researcher, study_group=self.study.study_group)
+                max_subject_id = administration.objects.filter(study__in=related_studies).aggregate(Max('subject_id'))['subject_id__max']
+            else:
+                max_subject_id = administration.objects.filter(study=self.study).aggregate(Max('subject_id'))['subject_id__max'] # Find the subject ID in this study with the highest number
+
+            if max_subject_id is None: # If the max subject ID could not be found (e.g., study has 0 participants)
+                max_subject_id = 0 # Mark as zero
+            from researcher_UI.views import random_url_generator            
+            administration_instance = administration.objects.create(study =self.study, subject_id = max_subject_id+1, repeat_num = 1, url_hash = random_url_generator(), completed = False, due_date = datetime.datetime.now()+datetime.timedelta(days=self.study.test_period)) # Create an administration object for participant within database
+            self.hash_id = administration_instance.url_hash
+            if self.bypass: # If the user explicitly wanted to continue with the test despite being told they would not be compensated
+                administration_instance.bypass = True # Mark administration object with 'bypass'
+                administration_instance.save() # Update object in database
+
+            obj = self.background_form.save(commit=False)
+            child_dob = self.background_form.cleaned_data.get('child_dob') # Try to fetch DOB
+
+            if child_dob: # If DOB was entered into form, calculate age based on DOB and today's date.
+                raw_age = datetime.date.today() - child_dob
+                age = int(float(raw_age.days)/(365.2425/12.0))
+            else:
+                age = None
+
+            # If age was properly calculated from 'child_dob', save it to the model object
+            if age: obj.age = age
+
+            if obj.child_hispanic_latino == '':
+                obj.child_hispanic_latino = None
+
+            # Find the raw zip code value and make it compliant with Safe Harbor guidelines. Only store the first 3 digits if the total population for that prefix is greataer than 20,000 (found prohibited prefixes via Census API data). If prohibited zip code, replace value with state abbreviations.
+            zip_prefix = ''
+            raw_zip = obj.zip_code
+            if raw_zip and raw_zip != 'None':
+                zip_prefix = raw_zip[:3]
+                if Zipcode.objects.filter(zip_prefix = zip_prefix).exists():
+                    zip_prefix = Zipcode.objects.filter(zip_prefix = zip_prefix).first().state
+                else:
+                    zip_prefix = zip_prefix + '**'
+            obj.zip_code = zip_prefix
+
+            # Save model object to database
+            obj.administration = administration_instance
+            obj.save()
+            administration.objects.filter(url_hash = self.hash_id).update(last_modified = timezone.now())
+            administration.objects.filter(url_hash = self.hash_id).update(completedBackgroundInfo = True)
+            self.request = 'GET'
+            return redirect('administer_cdi_form', hash_id=self.hash_id)
+        
+        response = render(request, self.template_name, self.get_context_data()) # Render template   
+        response.set_cookie(settings.LANGUAGE_COOKIE_NAME, self.user_language)
+        return response
+    
 
 # Finds and renders BackgroundForm based on given hash ID code.
 def background_info_form(request, hash_id):
