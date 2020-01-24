@@ -901,7 +901,7 @@ def printable_view(request, hash_id):
     if administration_instance.study.researcher.username == "langcoglab" and administration_instance.study.allow_payment:
         #response.set_signed_cookie('completed_num',str(completed))
         #response.set_signed_cookie('completed_num',bytes(completed))
-        #response.set_signed_cookie('completed_num', completed)
+        response.set_signed_cookie('completed_num', completed)
     return response
 
 
