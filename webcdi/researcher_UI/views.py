@@ -884,20 +884,6 @@ def administer_new_parent(request, username, study_name): # For creating single 
 
     if let_through: # If marked as allowed
         return redirect (reverse('create-new-background-info', kwargs={'study_id' : study_obj.id, 'bypass' : bypass}))
-        if study_obj.study_group:
-            related_studies = study.objects.filter(researcher=researcher, study_group=study_obj.study_group)
-            max_subject_id = administration.objects.filter(study__in=related_studies).aggregate(Max('subject_id'))['subject_id__max']
-        else:
-            max_subject_id = administration.objects.filter(study=study_obj).aggregate(Max('subject_id'))['subject_id__max'] # Find the subject ID in this study with the highest number
-
-        if max_subject_id is None: # If the max subject ID could not be found (e.g., study has 0 participants)
-            max_subject_id = 0 # Mark as zero
-        new_admin = administration.objects.create(study =study_obj, subject_id = max_subject_id+1, repeat_num = 1, url_hash = random_url_generator(), completed = False, due_date = datetime.datetime.now()+datetime.timedelta(days=test_period)) # Create an administration object for participant within database
-        new_hash_id = new_admin.url_hash # Note the generated hash ID
-        if bypass: # If the user explicitly wanted to continue with the test despite being told they would not be compensated
-            new_admin.bypass = True # Mark administration object with 'bypass'
-            new_admin.save() # Update object in database
-        redirect_url = reverse('administer_cdi_form', args=[new_hash_id]) # Generate the administration URL given the object's hash ID
     else: # If not marked as allowed
         redirect_url = reverse('overflow', args=[username, study_name]) # Generate URL for overflowed participants. May or may not have option for bypass depending on context (IP address and cookies)
     return redirect(redirect_url) # Redirect to generated URL
