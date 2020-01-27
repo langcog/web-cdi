@@ -24,6 +24,7 @@ from django.utils.translation import ugettext_lazy as _
 import pandas as pd
 from django.views.generic import UpdateView, CreateView
 
+from .scores import update_summary_scores
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__)) # Declare root folder for project and files. Varies between Mac and Linux installations.
 
@@ -812,7 +813,8 @@ def cdi_form(request, hash_id):
                 else:
                     administration.objects.filter(url_hash = hash_id).update(completed = True) # Mark test as complete
                     return printable_view(request, hash_id) # Render completion page
-
+        update_summary_scores(administration_instance)
+        
     # Fetch prefilled responses
     data = dict()
     if request.method == 'GET' or refresh:
@@ -1057,6 +1059,6 @@ def save_answer(request):
                 if value:
                     administration_data.objects.update_or_create(administration = administration_instance, item_ID = key, defaults = {'value': value})
     administration.objects.filter(url_hash = hash_id).update(last_modified = timezone.now()) # Update administration object with date of last modification
-
+    update_summary_scores(administration_instance)
     # Return a response. An empty dictionary is still a 200
     return HttpResponse(json.dumps([{}]), content_type='application/json')
