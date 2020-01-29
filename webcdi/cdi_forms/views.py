@@ -652,6 +652,7 @@ def prefilled_cdi_data(administration_instance):
     with open(PROJECT_ROOT+'/form_data/'+instrument_name+'_meta.json', 'r', encoding='utf-8') as content_file: # Open associated json file with section ordering and nesting
         # Read json file and store additional variables regarding the instrument, study, and the administration
         data = json.loads(content_file.read())
+        data['object'] = administration_instance
         data['title'] = administration_instance.study.instrument.verbose_name
         data['instrument_name'] = administration_instance.study.instrument.name
         data['completed'] = administration_instance.completed
@@ -1061,4 +1062,21 @@ def save_answer(request):
     administration.objects.filter(url_hash = hash_id).update(last_modified = timezone.now()) # Update administration object with date of last modification
     update_summary_scores(administration_instance)
     # Return a response. An empty dictionary is still a 200
+    return HttpResponse(json.dumps([{}]), content_type='application/json')
+
+
+def update_administration_data_item(request):
+    if not request.POST: return
+
+    hash_id = request.POST.get('hash_id')
+    administration_instance = get_administration_instance(hash_id)
+    instrument_name = administration_instance.study.instrument.name # Get instrument name associated with study
+    instrument_model = model_map(instrument_name).filter(itemID__in = request.POST) # Fetch instrument model based on instrument name.
+    
+    value = ''
+    if request.POST['check'] == 'true': value = request.POST['value']
+    
+    administration_data.objects.update_or_create(administration = administration_instance, item_ID = request.POST['item'], defaults = {'value': value})
+    administration.objects.filter(url_hash = hash_id).update(last_modified = timezone.now()) # Update administration object with date of last modification
+    update_summary_scores(administration_instance)
     return HttpResponse(json.dumps([{}]), content_type='application/json')

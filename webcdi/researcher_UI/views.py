@@ -37,7 +37,6 @@ from django.utils.translation import ugettext_lazy as _
 from cdi_forms.models import Instrument_Forms
 
 def get_study_scores(administrations):
-    for a in administrations: print(a.id)
     scores = SummaryData.objects.values('administration_id', 'title','value').filter(administration_id__in = administrations)
     melted_scores = pd.DataFrame.from_records(scores).pivot(index='administration_id', columns='title', values='value')
     melted_scores.reset_index(level=0, inplace=True)
@@ -619,11 +618,11 @@ def add_study(request): # Function for adding studies modal
 
                 study_instance.save() # Save study to database
                 data['stat'] = "ok"; # Mark entry as 'ok'
-                data['redirect_url'] = "/interface/study/"+study_name+"/";
+                data['redirect_url'] = "/interface/study/"+study_name+"/"
                 return HttpResponse(json.dumps(data), content_type="application/json") # Redirect back to interface
             elif not_unique_name: # If study with same name already exists
                 data['stat'] = "error"; # Mark entry as 'error'
-                data['error_message'] = "Study already exists; Use a unique name";
+                data['error_message'] = "Study already exists; Use a unique name"
                 return HttpResponse(json.dumps(data), content_type="application/json") # Display error message about non-unique study back to user
             elif slash_in_name:
                 data['stat'] = "error"; # Mark entry as 'error'

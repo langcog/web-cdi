@@ -53,6 +53,7 @@ class study(models.Model):
     birth_weight_units = models.CharField(max_length = 5, default="lb")
     show_feedback = models.BooleanField(default=True)
     active = models.BooleanField(default=True)
+    timing = models.IntegerField(default=6)
 
     def __unicode__(self):
         return self.name
