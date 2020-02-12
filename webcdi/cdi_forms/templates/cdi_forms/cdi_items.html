@@ -76,7 +76,7 @@
                         </div>
                     </div>
                 {% elif type.type == "textbox" %}
-                    <div class="col-md-12"> <input type="textbox" class="rounded border border-secondary" id="{{ object.itemID }}" name="{{ object.itemID }}" maxlength="200" value="{{ object.prefilled_value }}" {% if completed %} disabled {% endif %}></div>
+                    <div class="col-md-12"> <input type="text" class="rounded border border-secondary" id="{{ object.itemID }}" name="{{ object.itemID }}" maxlength="200" value="{{ object.prefilled_value }}" {% if completed %} disabled {% endif %}></div>
                 {% endif %}
             {% endfor %}
         </div>
@@ -152,7 +152,7 @@
                                 </div>
                             </div>
                         {% elif section.type == "textbox" %}
-                            <div class="col-md-12"> <input type="textbox" class="rounded border border-secondary" id="{{ object.itemID }}" name="{{ object.itemID }}" maxlength="200" value="{{ object.prefilled_value }}" {% if completed %} disabled {% endif %}></div>
+                            <div class="col-md-12"> <input type="text" class="rounded border border-secondary" id="{{ object.itemID }}" name="{{ object.itemID }}" maxlength="200" value="{{ object.prefilled_value }}" {% if completed %} disabled {% endif %}></div>
                         {% endif %}
                     {% endfor %}
                     <div class="col-md-12">{{ section.footnote }}</div>
