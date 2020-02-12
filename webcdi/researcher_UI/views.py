@@ -39,7 +39,6 @@ from cdi_forms.models import Instrument_Forms
 def get_study_scores(administrations):
     scores = SummaryData.objects.values('administration_id', 'title','value').filter(administration_id__in = administrations)
     melted_scores = pd.DataFrame.from_records(scores).pivot(index='administration_id', columns='title', values='value')
-    #melted_scores.fillna(0, inplace=True)
     melted_scores.reset_index(level=0, inplace=True)
     return melted_scores
 
@@ -120,7 +119,12 @@ def download_data(request, study_obj, administrations = None): # Download study 
     missing_columns = list(set(score_header) - set(melted_scores.columns))
     if missing_columns:
         melted_scores = melted_scores.reindex(columns=np.append(melted_scores.columns.values, missing_columns))
-    
+    from .models import InstrumentScore
+    for instance in InstrumentScore.objects.filter(instrument=study_obj.instrument): 
+        if instance.kind == "count": 
+            melted_scores[instance.title].replace(r'^\s*$', 0, regex=True, inplace=True)
+            melted_scores[instance.title].replace(np.NaN, 0, inplace=True)
+
     # Try to combine background data and CDI responses
     try:
         background_answers1 = pd.merge(new_background, melted_answers, how='outer', on = 'administration_id')

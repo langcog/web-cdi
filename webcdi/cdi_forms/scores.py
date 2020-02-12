@@ -8,7 +8,7 @@ def calc_benchmark(x1, x2, y1, y2, raw_score):
     return int(a + raw_score * gradient)
 
 def update_summary_scores(administration_instance):
-    SummaryData.objects.filter(administration=administration_instance).update(value='0')
+    SummaryData.objects.filter(administration=administration_instance).update(value='')
     
     instrument_scores = InstrumentScore.objects.filter(instrument=administration_instance.study.instrument)
         
