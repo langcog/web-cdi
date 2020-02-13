@@ -24,3 +24,8 @@ __pycache__/
 */.vscode/
 
 crontab.txt
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
