@@ -29,7 +29,7 @@ def update_summary_scores(administration_instance):
                             summary.value = str(int(summary.value)+1)
                         
                 else : 
-                    summary.value += administration_data_item.value + '\n'
+                    summary.value = administration_data_item.value
             
             summary.save()
 

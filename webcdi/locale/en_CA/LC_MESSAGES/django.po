@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-12 15:14+0000\n"
+"POT-Creation-Date: 2020-02-12 12:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1393,7 +1393,11 @@ msgstr ""
 #: webcdi/cdi_forms/templates/cdi_forms/background_info.html:7
 #: webcdi/cdi_forms/templates/cdi_forms/background_info.html:56
 #: webcdi/cdi_forms/templates/cdi_forms/study_group.html:7
+<<<<<<< HEAD
 #: webcdi/cdi_forms/views.py:242 webcdi/cdi_forms/views.py:514
+=======
+#: webcdi/cdi_forms/views.py:242 webcdi/cdi_forms/views.py:513
+>>>>>>> f473ec5e52dde6c83f5589d72e4a31df64e63d0b
 msgid "Next"
 msgstr ""
 
@@ -1568,8 +1572,13 @@ msgstr ""
 msgid "Review Waiver"
 msgstr ""
 
+<<<<<<< HEAD
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:189
 msgid "Please fill in this field"
+=======
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:187
+msgid "Please select an item in the list."
+>>>>>>> f473ec5e52dde6c83f5589d72e4a31df64e63d0b
 msgstr ""
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:10
@@ -1934,19 +1943,31 @@ msgid "Born between STARTDATE and ENDDATE"
 msgstr ""
 
 #: webcdi/cdi_forms/views.py:132 webcdi/cdi_forms/views.py:321
+<<<<<<< HEAD
 #: webcdi/cdi_forms/views.py:564
+=======
+#: webcdi/cdi_forms/views.py:563
+>>>>>>> f473ec5e52dde6c83f5589d72e4a31df64e63d0b
 #, python-format
 msgid "Your child should be between %(min_age)d to %(max_age)d months of age."
 msgstr ""
 
 #: webcdi/cdi_forms/views.py:145 webcdi/cdi_forms/views.py:334
+<<<<<<< HEAD
 #: webcdi/cdi_forms/views.py:577
+=======
+#: webcdi/cdi_forms/views.py:576
+>>>>>>> f473ec5e52dde6c83f5589d72e4a31df64e63d0b
 #, python-format
 msgid " Not the right age? <a href='%(sgurl)s'> Click here</a>"
 msgstr ""
 
 #: webcdi/cdi_forms/views.py:149 webcdi/cdi_forms/views.py:338
+<<<<<<< HEAD
 #: webcdi/cdi_forms/views.py:581
+=======
+#: webcdi/cdi_forms/views.py:580
+>>>>>>> f473ec5e52dde6c83f5589d72e4a31df64e63d0b
 msgid ""
 " Not the right age? You should contact your researcher for steps on what to "
 "do next."
@@ -2388,6 +2409,7 @@ msgstr ""
 msgid "I am afraid that your account registration was rejected by inspector."
 msgstr ""
 
+<<<<<<< HEAD
 #: webcdi/webcdi/settings.py:201
 msgid "English"
 msgstr ""
@@ -2409,5 +2431,28 @@ msgid "Dutch"
 msgstr ""
 
 #: webcdi/webcdi/settings.py:206
+=======
+#: webcdi/webcdi/settings.py:241
+msgid "English"
+msgstr ""
+
+#: webcdi/webcdi/settings.py:242
+msgid "Spanish"
+msgstr ""
+
+#: webcdi/webcdi/settings.py:243
+msgid "French Quebec"
+msgstr ""
+
+#: webcdi/webcdi/settings.py:244
+msgid "Canadian English"
+msgstr ""
+
+#: webcdi/webcdi/settings.py:245
+msgid "Dutch"
+msgstr ""
+
+#: webcdi/webcdi/settings.py:246
+>>>>>>> f473ec5e52dde6c83f5589d72e4a31df64e63d0b
 msgid "Hebrew"
 msgstr ""

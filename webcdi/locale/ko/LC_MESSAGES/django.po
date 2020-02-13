@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-22 17:39+0000\n"
+"POT-Creation-Date: 2020-02-12 12:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1394,7 +1394,7 @@ msgstr ""
 #: webcdi/cdi_forms/templates/cdi_forms/background_info.html:7
 #: webcdi/cdi_forms/templates/cdi_forms/background_info.html:56
 #: webcdi/cdi_forms/templates/cdi_forms/study_group.html:7
-#: webcdi/cdi_forms/views.py:240 webcdi/cdi_forms/views.py:339
+#: webcdi/cdi_forms/views.py:242 webcdi/cdi_forms/views.py:513
 msgid "Next"
 msgstr ""
 
@@ -1487,14 +1487,14 @@ msgstr ""
 
 #: webcdi/cdi_forms/templates/cdi_forms/backpage_info.html:8
 #: webcdi/cdi_forms/templates/cdi_forms/backpage_info.html:34
-#: webcdi/cdi_forms/views.py:247
+#: webcdi/cdi_forms/views.py:249
 msgid "Finish"
 msgstr ""
 
 #: webcdi/cdi_forms/templates/cdi_forms/backpage_info.html:12
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:14
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:327
-#: webcdi/cdi_forms/views.py:253 webcdi/cdi_forms/views.py:575
+#: webcdi/cdi_forms/views.py:255 webcdi/cdi_forms/views.py:750
 msgid "Go back to Background Info"
 msgstr ""
 
@@ -1570,19 +1570,19 @@ msgid "Review Waiver"
 msgstr ""
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:187
-msgid "Please fill in this field"
+msgid "Please select an item in the list."
 msgstr ""
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:10
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:326
 #: webcdi/cdi_forms/templates/cdi_forms/study_group.html:6
-#: webcdi/cdi_forms/views.py:563
+#: webcdi/cdi_forms/views.py:738
 msgid "Save"
 msgstr ""
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:11
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:322
-#: webcdi/cdi_forms/views.py:580
+#: webcdi/cdi_forms/views.py:755
 msgid "Submit"
 msgstr ""
 
@@ -1934,17 +1934,20 @@ msgstr ""
 msgid "Born between STARTDATE and ENDDATE"
 msgstr ""
 
-#: webcdi/cdi_forms/views.py:130 webcdi/cdi_forms/views.py:389
+#: webcdi/cdi_forms/views.py:132 webcdi/cdi_forms/views.py:321
+#: webcdi/cdi_forms/views.py:563
 #, python-format
 msgid "Your child should be between %(min_age)d to %(max_age)d months of age."
 msgstr ""
 
-#: webcdi/cdi_forms/views.py:143 webcdi/cdi_forms/views.py:402
+#: webcdi/cdi_forms/views.py:145 webcdi/cdi_forms/views.py:334
+#: webcdi/cdi_forms/views.py:576
 #, python-format
 msgid " Not the right age? <a href='%(sgurl)s'> Click here</a>"
 msgstr ""
 
-#: webcdi/cdi_forms/views.py:147 webcdi/cdi_forms/views.py:406
+#: webcdi/cdi_forms/views.py:149 webcdi/cdi_forms/views.py:338
+#: webcdi/cdi_forms/views.py:580
 msgid ""
 " Not the right age? You should contact your researcher for steps on what to "
 "do next."
