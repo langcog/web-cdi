@@ -183,14 +183,12 @@
 
 <!-- To translate the Javascript -->
 <script>
-$("input[required]").on("invalid", function() {
-    this.setCustomValidity("{% trans 'Please fill in this field' %}");
+$("select[required]").on("invalid", function() {
+    this.setCustomValidity("{% trans 'Please select an item in the list.' %}");
 });
 </script>
 
 {% block scripts %}
-
-
 {% endblock %}
 </body>
 </html>

@@ -37,7 +37,6 @@ from django.utils.translation import ugettext_lazy as _
 from cdi_forms.models import Instrument_Forms
 
 def get_study_scores(administrations):
-    for a in administrations: print(a.id)
     scores = SummaryData.objects.values('administration_id', 'title','value').filter(administration_id__in = administrations)
     melted_scores = pd.DataFrame.from_records(scores).pivot(index='administration_id', columns='title', values='value')
     melted_scores.reset_index(level=0, inplace=True)
@@ -120,7 +119,12 @@ def download_data(request, study_obj, administrations = None): # Download study 
     missing_columns = list(set(score_header) - set(melted_scores.columns))
     if missing_columns:
         melted_scores = melted_scores.reindex(columns=np.append(melted_scores.columns.values, missing_columns))
-    
+    from .models import InstrumentScore
+    for instance in InstrumentScore.objects.filter(instrument=study_obj.instrument): 
+        if instance.kind == "count": 
+            melted_scores[instance.title].replace(r'^\s*$', 0, regex=True, inplace=True)
+            melted_scores[instance.title].replace(np.NaN, 0, inplace=True)
+
     # Try to combine background data and CDI responses
     try:
         background_answers1 = pd.merge(new_background, melted_answers, how='outer', on = 'administration_id')
@@ -619,11 +623,11 @@ def add_study(request): # Function for adding studies modal
 
                 study_instance.save() # Save study to database
                 data['stat'] = "ok"; # Mark entry as 'ok'
-                data['redirect_url'] = "/interface/study/"+study_name+"/";
+                data['redirect_url'] = "/interface/study/"+study_name+"/"
                 return HttpResponse(json.dumps(data), content_type="application/json") # Redirect back to interface
             elif not_unique_name: # If study with same name already exists
                 data['stat'] = "error"; # Mark entry as 'error'
-                data['error_message'] = "Study already exists; Use a unique name";
+                data['error_message'] = "Study already exists; Use a unique name"
                 return HttpResponse(json.dumps(data), content_type="application/json") # Display error message about non-unique study back to user
             elif slash_in_name:
                 data['stat'] = "error"; # Mark entry as 'error'

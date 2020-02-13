@@ -12,7 +12,6 @@ from ckeditor_uploader.widgets import CKEditorUploadingWidget
 class AddStudyForm(BetterModelForm):
     name = forms.CharField(label='Study Name', max_length=51) # Study name
     instrument = forms.ModelChoiceField(queryset=instrument.objects.filter(language='English'), empty_label="(choose from the list)") # Study instrument (CANNOT BE CHANGED LATER)
-    #waiver = forms.CharField(widget=forms.Textarea, label='Waiver of Documentation', required=False) # update IRB waiver of documentation
     waiver = forms.CharField(widget=CKEditorUploadingWidget(), label='Waiver of Documentation text (no titles)', required = False) # Addition of an IRB waiver of documentation or any other instructive text can be added here
     allow_payment = forms.BooleanField(required=False, label="Would you like to pay subjects in the form of Amazon gift cards? (You will need to upload gift card codes under \"Update Study\").") # Whether study participants will be compensated in the form of gift card codes upon completion
     anon_collection = forms.BooleanField(required=False, label="Do you plan on collecting only anonymous data in this study? (e.g., posting ads on social media, mass emails, etc)") # Whether the study will have only anonymous participants (opens up a range of other settings for anonymous data collection)
@@ -28,6 +27,8 @@ class AddStudyForm(BetterModelForm):
     
     birth_weight_choices = (("lb", "Measure birthweight in pounds and ounces"), ("kg", "Measure birthweight in kilograms"))
     birth_weight_units = forms.ChoiceField(choices = birth_weight_choices, label = "Measurement units for birthweight")
+    timing = forms.IntegerField(label="Minimum time (minutes) a parent must take to complete the study (default=6)", required=True,
+        widget=forms.NumberInput(),initial=6)
 
     # Form validation. Form is passed automatically to views.py for higher level checking.
     def clean(self):
@@ -56,6 +57,7 @@ class AddStudyForm(BetterModelForm):
             Field('age_range'),
             Field('test_period'),
             Field('birth_weight_units'),
+            Field('timing'),
             Field('waiver'),
             Field('prefilled_data'),            
             Field('allow_payment'),
@@ -90,7 +92,6 @@ class AddPairedStudyForm(forms.Form):
         self.helper = FormHelper()
         self.helper.form_id = 'add-paired-study'
         self.helper.form_class = 'form-horizontal'
-        # self.helper.template = PROJECT_ROOT + '/../cdi_forms/templates/bootstrap3/whole_uni_form.html'        
         self.helper.label_class = 'col-3'
         self.helper.field_class = 'col-9'
         self.helper.form_method = 'post'
@@ -101,7 +102,6 @@ class AddPairedStudyForm(forms.Form):
 # Form for updating a study. Most study settings can be updated EXCEPT FOR INSTRUMENT.
 class RenameStudyForm(BetterModelForm):
     name = forms.CharField(label='Study Name', max_length=51, required=False) # Update study name
-    #waiver = forms.CharField(widget=forms.Textarea, label='Waiver of Documentation', required=False) # update IRB waiver of documentation
     waiver = forms.CharField(widget=CKEditorUploadingWidget, label='Waiver of Documentation', required=False)
     test_period = forms.IntegerField(label = "# Days Before Expiration", help_text= "Between 1 and 28. Default is 14 days. (e.g., 14 = 14 days for parents to complete a form)", required = False, widget= forms.NumberInput(attrs={'placeholder':'(e.g., 14 = 14 days to complete a form)', 'min': '1', 'max': '28'})) # Update testing period. Can range from 1 to 28 days.
     gift_codes = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Paste Amazon gift card codes here. Can be separated by spaces, commas, or new lines.'}), required=False, label='Gift Card Codes') # Can add a list of gift card codes (separated by new lines, commas, or spaces) to the PaymentCode model that are given out to participants upon completion of current study.
@@ -120,6 +120,7 @@ class RenameStudyForm(BetterModelForm):
     confirm_completion = forms.BooleanField(required = False, label="At the end of the form, would you like parents to confirm the age of their child and that they completed the entire test? (Best for anonymous data collections where you haven't personally vetted each participant)") # Asks participants to verify the child's age and that they completed the form to the best of their ability. Only for participants that have not been vetted.
     allow_sharing = forms.BooleanField(required=False, label="Would you like participants to be able to share their Web-CDI results via Facebook?") # Gives option for participants to be able to share their results via Facebook. Default off.
     show_feedback = forms.BooleanField(required=False, label="Would you like to show participants graphs of their data after completion?")
+    timing = forms.IntegerField(label="Minimum time (minutes) a parent must take to complete the study (default=6)", required=True)
 
     # Form validation. Form is passed automatically to views.py for higher level checking.
     def clean(self):
@@ -144,6 +145,7 @@ class RenameStudyForm(BetterModelForm):
             Field('age_range'),
             Field('test_period'),
             Field('birth_weight_units'),
+            Field('timing'),
             Field('waiver'),
             Field('prefilled_data'),
             Field('anon_collection'),
