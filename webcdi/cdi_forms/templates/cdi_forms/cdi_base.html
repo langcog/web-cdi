@@ -181,11 +181,13 @@
     })
 </script>
 
-<!-- To translate the Javascript -->
+<!-- To translate the Javascript messages-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/localization/messages_nl.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/localization/messages_fr.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/localization/messages_es.min.js"></script>
 <script>
-$("select[required]").on("invalid", function() {
-    this.setCustomValidity("{% trans 'Please select an item in the list.' %}");
-});
+$('#cdi_form').validate()
 </script>
 
 {% block scripts %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-12 12:24+0000\n"
+"POT-Creation-Date: 2020-02-13 10:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -390,27 +390,27 @@ msgstr "mm/dd/jjjj"
 msgid "dd/mm/yyyy"
 msgstr "dd/mm/jjjj"
 
-#: webcdi/cdi_forms/forms.py:405 webcdi/cdi_forms/models.py:136
+#: webcdi/cdi_forms/forms.py:408 webcdi/cdi_forms/models.py:136
 msgid "Estimated Annual Family Income (in USD)"
 msgstr "Gezinsinkomen (netto) per maand"
 
-#: webcdi/cdi_forms/forms.py:409
+#: webcdi/cdi_forms/forms.py:412
 msgid "My child is (check all that apply):"
 msgstr "Mijn kind is (vink alles aan wat van toepassing is):"
 
-#: webcdi/cdi_forms/forms.py:413
+#: webcdi/cdi_forms/forms.py:416
 msgid "Basic Information"
 msgstr "Basisinformatie"
 
-#: webcdi/cdi_forms/forms.py:414
+#: webcdi/cdi_forms/forms.py:417
 msgid "Family Background"
 msgstr "Gezinsachtergrond"
 
-#: webcdi/cdi_forms/forms.py:415
+#: webcdi/cdi_forms/forms.py:418
 msgid "Child's Ethnicity"
 msgstr "Etniciteit van het kind"
 
-#: webcdi/cdi_forms/forms.py:415
+#: webcdi/cdi_forms/forms.py:418
 msgid ""
 "The following information is being collected for the sole purpose of "
 "reporting to our grant-funding institute, i.e.,  NIH (National Institute of "
@@ -422,31 +422,31 @@ msgstr ""
 "informatie nodig om de correctheid en inclusiviteit van ons onderzoek te "
 "garanderen. Uw medewerking wordt gewaardeerd, maar is vrijwillig."
 
-#: webcdi/cdi_forms/forms.py:416
+#: webcdi/cdi_forms/forms.py:419
 msgid "Caregiver Information"
 msgstr "Informatie verzorger"
 
-#: webcdi/cdi_forms/forms.py:417
+#: webcdi/cdi_forms/forms.py:420
 msgid "Language Exposure"
 msgstr "Blootstelling aan taal"
 
-#: webcdi/cdi_forms/forms.py:420
+#: webcdi/cdi_forms/forms.py:423
 msgid "Health"
 msgstr "Gezondheid"
 
-#: webcdi/cdi_forms/forms.py:456
+#: webcdi/cdi_forms/forms.py:459
 msgid "Your Name"
 msgstr "Uw naam"
 
-#: webcdi/cdi_forms/forms.py:457
+#: webcdi/cdi_forms/forms.py:460
 msgid "Your Email Address"
 msgstr "Uw e-mailadres"
 
-#: webcdi/cdi_forms/forms.py:458
+#: webcdi/cdi_forms/forms.py:461
 msgid "Your Test URL"
 msgstr "Uw Test URL"
 
-#: webcdi/cdi_forms/forms.py:459
+#: webcdi/cdi_forms/forms.py:462
 msgid "What would you like to tell us?"
 msgstr "Wat wilt u ons vertellen?"
 
@@ -1617,7 +1617,7 @@ msgstr ""
 msgid "Review Waiver"
 msgstr "Toestemmingsverklaring opnieuw bekijken"
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:187
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:190
 msgid "Please select an item in the list."
 msgstr "Selecteer een item in de lijst."
 
