@@ -1,4 +1,4 @@
-{% load i18n cdiform_tags %}
+{% load i18n %}
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -32,76 +32,6 @@
   	<meta property="og:image" content="http://webcdi.stanford.edu/{% static 'researcher_UI/images/logo.png' %}" />
   	<meta property="og:title" content="{% trans 'MacArthur-Bates Communicative Development Inventory' %}" />
   	<meta property="og:description" content="{% trans 'Interesting tidbits learned from how your child speaks!' %}" />
-
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-
-      // Load the Visualization API and the corechart package.
-      google.charts.load('current', {'packages':['corechart']});
-
-      // Set a callback to run when the Google Visualization API is loaded.
-      google.charts.setOnLoadCallback(drawProducesChart);
-
-      // Callback that creates and populates a data table,
-      // instantiates the pie chart, passes in the data and
-      // draws it.
-      function drawProducesChart() {
-
-        // Create the data table.
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Category');
-        data.addColumn('number', 'Number');
-        data.addRows([
-            {% for category in graph_data %}
-                {% if graph_data|get_item:category|get_item:'produces' > 0 %}
-                ['{{ category }}', {{ graph_data|get_item:category|get_item:'produces' }}],
-                {% endif %}
-            {% endfor %}
-        ]);
-
-        // Set chart options
-        var options = {
-            'title':'Words Produced',
-            'width' : {% if 'WG' in instrument %}500{% else %}1000{% endif %},
-            'height':750,
-            'legend': {position: 'none'}
-            };
-
-        // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.BarChart(document.getElementById('categories_charts_produced'));
-        chart.draw(data, options);
-      }
-    
-        {% if 'WG' in instrument %}
-            google.charts.setOnLoadCallback(drawUnderstoodChart);
-            function drawUnderstoodChart() {
-
-                // Create the data table.
-                var data = new google.visualization.DataTable();
-                data.addColumn('string', 'Category');
-                data.addColumn('number', 'Number');
-                data.addRows([
-                    {% for category in graph_data %}
-                        {% if graph_data|get_item:category|get_item:'understands' > 0 %}
-                        ['{{ category }}', {{ graph_data|get_item:category|get_item:'understands' }}],
-                        {% endif %}
-                    {% endfor %}
-                ]);
-
-                // Set chart options
-                var options = {
-                    'title':'Words Understood',
-                    'width':500,
-                    'height':750,
-                    'legend': {position: 'none'}
-                    };
-
-                // Instantiate and draw our chart, passing in some options.
-                var chart = new google.visualization.BarChart(document.getElementById('categories_charts_understood'));
-                chart.draw(data, options);
-            }
-        {% endif%}
-    </script>
 
 </head>
 
@@ -227,12 +157,8 @@
             </div>
             <br>
             <div class = "row"> 
-                {% if 'WG' in instrument %}
-                    <div class="col-md-6 text-center" id="categories_charts_understood"></div>
-                    <div class="col-md-6 text-center" id="categories_charts_produced"></div>
-                {% else %}
-                    <div class="col-md-12 text-center" id="categories_charts_produced"></div>
-                {% endif %}
+                <div class="col-md-6 text-center" id="categories_charts_understood"></div>
+                <div class="col-md-6 text-center" id="categories_charts_produced"></div>
             </div>
             <br>
             <div class = "row justify-content-center"> 
@@ -473,6 +399,8 @@
                     }                 
 
                 });
+
+                console.log("STILL OKAY")
 
                 setTimeout(function () {
                     if (raw_words_understood > 0){
