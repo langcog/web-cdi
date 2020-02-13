@@ -22,8 +22,11 @@ from .languages import LANGUAGE_OPTIONS as language_choices
 def string_bool_coerce(val):
     return val == 'True'
 
-YESNO_CHOICES = ((False, _('No')), (True, _('Yes')))
-YESNONA_CHOICES = ((0, _('No')), (1, _('Yes')), (2, _('Prefer not to disclose')))
+
+from django.utils.translation import pgettext_lazy
+
+YESNO_CHOICES = ((False, _('No')), (True, pgettext_lazy("YESNO_CHOICES_YES", "Yes")))
+YESNONA_CHOICES = ((0, _('No')), (1, pgettext_lazy("YESNONA_CHOICES_YES", "Yes")), (2, _('Prefer not to disclose')))
 INCOME_CHOICES = [
     ('','--------'),
     ('<25000',_('Under $25,000')),
