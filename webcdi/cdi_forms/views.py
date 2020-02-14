@@ -24,7 +24,6 @@ from django.utils.translation import ugettext_lazy as _
 import pandas as pd
 from django.views.generic import UpdateView, CreateView
 
-from .scores import update_summary_scores
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__)) # Declare root folder for project and files. Varies between Mac and Linux installations.
 
@@ -631,7 +630,6 @@ def cdi_items(object_group, item_type, prefilled_data, item_id):
 # Prepare items with prefilled reponses for later rendering. Dependent on cdi_items
 def prefilled_cdi_data(administration_instance):
     prefilled_data_list = administration_data.objects.filter(administration = administration_instance).values('item_ID', 'value') # Grab a list of prefilled responses
-    print(prefilled_data_list)
     instrument_name = administration_instance.study.instrument.name # Grab instrument name
     instrument_model = model_map(instrument_name) # Grab appropriate model given the instrument name associated with test
     
@@ -896,6 +894,41 @@ def printable_view(request, hash_id):
 
     prefilled_data['allow_sharing'] = administration_instance.study.allow_sharing
 
+    # calculate graph data
+    cdi_items = json.loads(prefilled_data['cdi_items'])
+    categories = {}
+    from cdi_forms.management.commands.populate_items import unicode_csv_reader
+    categories_data = list(unicode_csv_reader(open(os.path.realpath(settings.BASE_DIR + '/static/data_csv/word_categories.csv'), encoding="utf8")))
+
+    col_names = categories_data[0]
+    nrows = len(categories_data)
+    get_row = lambda row: categories_data[row]
+    categories = {}
+    for row in range(1, nrows):
+        row_values = get_row(row)
+        if len(row_values) > 1:
+            if row_values[col_names.index(administration_instance.study.instrument.name)]:
+                mapped_name = row_values[col_names.index(administration_instance.study.instrument.name)]
+            else :
+                mapped_name = row_values[col_names.index('id')]
+            categories[row_values[col_names.index('id')]] = {'produces' : 0, 'understands': 0, 'count' : 0, 'mappedName' : mapped_name}
+    for row in cdi_items:
+        if row['item_type'] == 'word':
+            categories[row['category']]['count'] += 1
+
+    prefilled_data_list = administration_data.objects.filter(administration = administration_instance).values('item_ID', 'value')
+    for item in prefilled_data_list:
+        instance = Instrument_Forms.objects.get(itemID=item['item_ID'],instrument=administration_instance.study.instrument)
+        if instance.item_type == 'word':
+            if item['value'] == 'produces':
+                categories[instance.category]['produces'] += 1
+                categories[instance.category]['understands'] += 1
+            if item['value'] == 'understands':
+                categories[instance.category]['understands'] += 1
+
+    prefilled_data['graph_data'] = categories
+    prefilled_data['instrument'] = administration_instance.study.instrument.name
+
     response = render(request, 'cdi_forms/printable_cdi.html', prefilled_data) # Render contact form template   
     response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
 
@@ -1059,7 +1092,7 @@ def save_answer(request):
                     administration_data.objects.update_or_create(administration = administration_instance, item_ID = key, defaults = {'value': value})
 
     administration.objects.filter(url_hash = hash_id).update(last_modified = timezone.now()) # Update administration object with date of last modification
-    update_summary_scores(administration_instance)
+    #update_summary_scores(administration_instance)
     # Return a response. An empty dictionary is still a 200
     return HttpResponse(json.dumps([{}]), content_type='application/json')
 
@@ -1080,5 +1113,5 @@ def update_administration_data_item(request):
     else:
         administration_data.objects.get(administration = administration_instance, item_ID = request.POST['item']).delete()
     administration.objects.filter(url_hash = hash_id).update(last_modified = timezone.now()) # Update administration object with date of last modification
-    update_summary_scores(administration_instance)
+    #update_summary_scores(administration_instance)
     return HttpResponse(json.dumps([{}]), content_type='application/json')
