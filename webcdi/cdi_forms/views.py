@@ -894,9 +894,12 @@ def printable_view(request, hash_id):
 
     prefilled_data['allow_sharing'] = administration_instance.study.allow_sharing
 
+    # calculate graph data
     cdi_items = json.loads(prefilled_data['cdi_items'])
+    categories = {}
     from cdi_forms.management.commands.populate_items import unicode_csv_reader
     categories_data = list(unicode_csv_reader(open(os.path.realpath(settings.BASE_DIR + '/static/data_csv/word_categories.csv'), encoding="utf8")))
+
     col_names = categories_data[0]
     nrows = len(categories_data)
     get_row = lambda row: categories_data[row]
@@ -904,7 +907,15 @@ def printable_view(request, hash_id):
     for row in range(1, nrows):
         row_values = get_row(row)
         if len(row_values) > 1:
-            categories[row_values[col_names.index('id')]] = {'produces' : 0, 'understands': 0}
+            if row_values[col_names.index(administration_instance.study.instrument.name)]:
+                mapped_name = row_values[col_names.index(administration_instance.study.instrument.name)]
+            else :
+                mapped_name = row_values[col_names.index('id')]
+            categories[row_values[col_names.index('id')]] = {'produces' : 0, 'understands': 0, 'count' : 0, 'mappedName' : mapped_name}
+    for row in cdi_items:
+        if row['item_type'] == 'word':
+            categories[row['category']]['count'] += 1
+
     prefilled_data_list = administration_data.objects.filter(administration = administration_instance).values('item_ID', 'value')
     for item in prefilled_data_list:
         instance = Instrument_Forms.objects.get(itemID=item['item_ID'],instrument=administration_instance.study.instrument)
@@ -914,7 +925,7 @@ def printable_view(request, hash_id):
                 categories[instance.category]['understands'] += 1
             if item['value'] == 'understands':
                 categories[instance.category]['understands'] += 1
-    
+
     prefilled_data['graph_data'] = categories
     prefilled_data['instrument'] = administration_instance.study.instrument.name
 

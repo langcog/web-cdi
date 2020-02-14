@@ -33,38 +33,45 @@
   	<meta property="og:title" content="{% trans 'MacArthur-Bates Communicative Development Inventory' %}" />
   	<meta property="og:description" content="{% trans 'Interesting tidbits learned from how your child speaks!' %}" />
 
+    <script src="{% static 'jquery/jquery-1.11.3.min.js' %}"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-
+           
       // Load the Visualization API and the corechart package.
       google.charts.load('current', {'packages':['corechart']});
 
       // Set a callback to run when the Google Visualization API is loaded.
       google.charts.setOnLoadCallback(drawProducesChart);
 
+        var graph_colors = [
+            "#ff0000","#cc0066","#cc0099","#9933ff",'#3333cc','#0033cc','#0099cc','#009999','#00cc66','#009933','#669900','#cccc00','#ff9900','#ff3300',
+            '#ff0000','#cc0066','#cc0099','#9933ff','#3333cc','#0033cc','#0099cc','#009999','#00cc66','#009933','#669900','#cccc00','#ff9900','#ff3300',
+            '#ff0000','#cc0066','#cc0099','#9933ff','#3333cc','#0033cc','#0099cc','#009999','#00cc66','#009933','#669900','#cccc00','#ff9900','#ff3300',
+            '#ff0000','#cc0066','#cc0099','#9933ff','#3333cc','#0033cc','#0099cc','#009999','#00cc66','#009933','#669900','#cccc00','#ff9900','#ff3300'];
       // Callback that creates and populates a data table,
       // instantiates the pie chart, passes in the data and
       // draws it.
       function drawProducesChart() {
 
         // Create the data table.
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Category');
-        data.addColumn('number', 'Number');
-        data.addRows([
+        var data = new google.visualization.arrayToDataTable([
+            ['Category','Percentage', {role: 'style'}],
             {% for category in graph_data %}
-                {% if graph_data|get_item:category|get_item:'produces' > 0 %}
-                ['{{ category }}', {{ graph_data|get_item:category|get_item:'produces' }}],
-                {% endif %}
+                {% if graph_data|get_item:category|get_item:'count' > 0 %}
+                ['{{ graph_data|get_item:category|get_item:'mappedName' }}', {{ graph_data|get_item:category|get_item_perc:'produces' }}, graph_colors[{{ forloop.counter0 }}]],
+                {% endif %}                
             {% endfor %}
         ]);
+        console.log (data)
 
         // Set chart options
         var options = {
-            'title':'Words Produced',
+            'title': '{% trans 'Words Produced (%)' %}',
             'width' : {% if 'WG' in instrument %}500{% else %}1000{% endif %},
             'height':750,
-            'legend': {position: 'none'}
+            'legend': {position: 'none'},
+            'vAxis' : { textStyle : { fontSize: 10} },
+            'hAxis' : {viewWindow: { min:0 }},
             };
 
         // Instantiate and draw our chart, passing in some options.
@@ -77,23 +84,23 @@
             function drawUnderstoodChart() {
 
                 // Create the data table.
-                var data = new google.visualization.DataTable();
-                data.addColumn('string', 'Category');
-                data.addColumn('number', 'Number');
-                data.addRows([
+                var data = new google.visualization.arrayToDataTable([
+                    ['Category','Percentage', {role: 'style'}],
                     {% for category in graph_data %}
-                        {% if graph_data|get_item:category|get_item:'understands' > 0 %}
-                        ['{{ category }}', {{ graph_data|get_item:category|get_item:'understands' }}],
-                        {% endif %}
-                    {% endfor %}
+                        {% if graph_data|get_item:category|get_item:'count' > 0 %}
+                        ['{{ graph_data|get_item:category|get_item:'mappedName' }}', {{ graph_data|get_item:category|get_item_perc:'understands' }}, graph_colors[{{ forloop.counter0 }}]],
+                        {% endif %}                
+                    {% endfor %}                    
                 ]);
 
                 // Set chart options
                 var options = {
-                    'title':'Words Understood',
+                    'title': '{% trans 'Words Understood (%)' %}',
                     'width':500,
                     'height':750,
-                    'legend': {position: 'none'}
+                    'legend': {position: 'none'},
+                    'vAxis' : { textStyle : { fontSize: 10} },
+                    'hAxis' : {viewWindow: { min:0 }},
                     };
 
                 // Instantiate and draw our chart, passing in some options.
@@ -104,35 +111,6 @@
     </script>
 
 </head>
-
-<style>
-    .axis {
-    font: 12px sans-serif;
-  }
-
-  .axis path,
-  .axis line {
-    fill: none;
-    stroke: #000;
-    shape-rendering: crispEdges;
-  }
-
-    .c3-line {
-        stroke-width: 4px;
-    }
-    .c3-axis-y , .c3-axis-x 
-    {
-      font-size: 1.1em; 
-    }
-
-
-    .c3-axis-x-label , .c3-axis-y-label 
-    {
-        font-size: 1.1em;
-    }
-
-
-</style>
 
 <body id="id_results">
 <div id="fb-root"></div>
@@ -361,10 +339,7 @@
         // If child only had responses of one type (all words are 'understands' or all words are 'produces'), produce 1 graph and double its width
         d3.csv("{% static 'data_csv/word_categories.csv' %}", function(data) {
             word_categories = data;
-            console.log('Categories: ', word_categories)
-            console.log('Categorie Size: ', categorySize)
             var list_names = objectMap(categorySize,'key')
-            console.log('List Name: ', list_names)
             updateCategoryInfo();
             
             $.each(word_categories, function(index){
@@ -374,124 +349,7 @@
                 categorySize[name_location].category_name = word_categories[index][root.instrument_name];
                 }
             });
-
-            if (raw_words_understood == 0 ) {
-                prod_graph_width = graph_width*2;
-            }
-
-            if (words_produced == 0 ) {
-                comp_graph_width = graph_width*2;
-            }
-
-            if (raw_words_understood > 0) {
-                console.log(objectMap(categorySize,'category_name'))
-                new_chart_understood = c3.generate({
-                    bindto: '#categories_charts_understood',
-                    data: {
-                        x: '{% trans "Category" %}',
-                        columns: [
-                            ['{% trans "Category" %}'].concat(objectMap(categorySize,'category_name')),
-                            ['{% trans "Words Understood (%)" %}'].concat(objectMap(categorySize,'prop_understood'))
-                        ],
-                        type: 'bar',
-                        color : function (color, d) {
-                            return d.index? categorySize[d.index].hex : color;
-                        },                                                     
-                    },
-                    axis: {
-                      rotated: true,
-                        x: {
-                            type: 'category',
-                            tick: {
-                                width: 110
-                            } 
-                        },
-                        y: {
-                            label: {
-                                text: '{% trans "Words Understood (%)" %}',
-                                position: 'outer-center'
-                            }
-                        }                    
-
-                    },
-                    legend: {
-                        show: false
-                    }                   
-
-                });
-
-                setTimeout(function () {
-                    if (words_produced > 0){
-                        new_chart_understood.resize({
-                            height: $("#num_words_text").innerWidth()*1.2,
-                            width: $("#categories_charts_understood").innerWidth()*0.85
-                    })} else {
-                        $('#categories_charts_produced').remove();
-                        $('#categories_charts_understood').removeClass('col-md-6').addClass('col-md-12');
-                        new_chart_understood.resize({
-                            height: $("#num_words_text").innerWidth()*1.2,
-                            width: $("#categories_charts_understood").innerWidth()*0.85
-                        })
-                    }
-
-                }, refresh_time);
-            }
-
-            if (words_produced > 0) {
-                
-                new_chart_produced = c3.generate({
-                    bindto: '#categories_charts_produced',
-                    data: {
-                        x: '{% trans "Category" %}',
-                        columns: [
-                            ['{% trans "Category" %}'].concat(objectMap(categorySize,'category_name')),
-                            ['{% trans "Words Produced (%)" %}'].concat(objectMap(categorySize,'prop_produced'))
-                        ],
-                        type: 'bar',
-                        color : function (color, d) {
-                            return d.index? categorySize[d.index].hex : color;
-                        },                                                     
-                    },
-                    axis: {
-                      rotated: true,
-                        x: {
-                            type: 'category',
-                            tick: {
-                                width: 110
-                            }
-                            
-                        },
-                        y: {
-                            label: {
-                                text: '{% trans "Words Produced (%)" %}',
-                                position: 'outer-center'
-                            }
-                        }
-                    },
-                    legend: {
-                        show: false
-                    }                 
-
-                });
-
-                setTimeout(function () {
-                    if (raw_words_understood > 0){
-                        new_chart_produced.resize({
-                            height: $("#num_words_text").innerWidth()*1.2,
-                            width: $("#categories_charts_produced").innerWidth()*0.85
-                    })} else {
-                        $('#categories_charts_understood').remove();
-                        $('#categories_charts_produced').removeClass('col-md-6').addClass('col-md-12');
-                        new_chart_produced.resize({
-                            height: $("#num_words_text").innerWidth()*1.2,
-                            width: $("#categories_charts_produced").innerWidth()*0.85
-                        })
-                    }
-
-                }, refresh_time);  
-        
-            }
-
+            
             bestCategories();
 
         });
@@ -537,8 +395,6 @@
                 value.prop_understood = 100*(value.understands + value.produces)/(value.num_all)
                 value.prop_produced = 100*(value.produces)/(value.num_all)
             });
-
-            console.log("Category Size: ", categorySize)
         }
 
         // Function for shuffling the order of an array.
