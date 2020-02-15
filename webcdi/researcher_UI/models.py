@@ -87,6 +87,7 @@ class administration(models.Model):
     analysis = models.NullBooleanField(verbose_name = "Confirmed Age and Completion", default = None) # Whether participant confirmed child's age and that form was completed to best of ability
     bypass = models.NullBooleanField(verbose_name = "Willing to forgo payment", default = None) # Whether participant explicitly bypassed overflow page if study has reached subject cap
     include = models.NullBooleanField(verbose_name = "Include for eventual analysis", default = True) # Field for marking if a researcher wants to include data in study. Currently not used.
+    opt_out = models.NullBooleanField(verbose_name="Participant opted out of broader sharing", default=None)
 
     class Meta:
         unique_together = ('study', 'subject_id', 'repeat_num') # Each administration object has a unique combination of study ID, subject ID, and administration number. They also have a unique hash ID identifier but uniqueness of hash ID is not enforced due to odds of 2 participants having the same hash ID being cosmically low.
