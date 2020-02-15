@@ -55,7 +55,7 @@ def get_model_header(name):
     return list(model_map(name).values_list('itemID', flat=True))
     
 # If the BackgroundInfo model was filled out before, populate BackgroundForm with responses based on administation object
-def prefilled_background_form(administration_instance):
+def prefilled_background_form(administration_instance, front_page=True):
     background_instance = BackgroundInfo.objects.get(administration = administration_instance)
     
     context = {}
@@ -64,8 +64,10 @@ def prefilled_background_form(administration_instance):
     context['min_age'] = administration_instance.study.min_age
     context['max_age'] = administration_instance.study.max_age
     context['birthweight_units'] = administration_instance.study.birth_weight_units
-
-    background_form = BackgroundForm(instance = background_instance, context = context)  
+    
+    if front_page: background_form = BackgroundForm(instance = background_instance, context = context)  
+    else: 
+        background_form = BackpageBackgroundForm(instance = background_instance, context = context)  
     return background_form
 
 # Find the administration object for a test-taker based on their unique hash code.
@@ -857,12 +859,16 @@ def printable_view(request, hash_id):
     try:
         #Get form from database
         background_form = prefilled_background_form(administration_instance)
+        filename = os.path.realpath(PROJECT_ROOT + '/form_data/background_info/' + administration_instance.study.instrument.name + '_back.json')
+        if os.path.isfile(filename) :
+            backpage_background_form = prefilled_background_form(administration_instance, False)
     except:
         #Blank form
         background_form = BackgroundForm(context = context)
-
+    
     prefilled_data['language'] = administration_instance.study.instrument.language
     prefilled_data['background_form'] = background_form
+    prefilled_data['backpage_background_form'] = backpage_background_form
     prefilled_data['hash_id'] = hash_id
     prefilled_data['gift_code'] = None
     prefilled_data['gift_amount'] = None
