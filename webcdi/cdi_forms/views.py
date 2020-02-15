@@ -1110,7 +1110,7 @@ def update_administration_data_item(request):
 
     if len(value) > 0:
         administration_data.objects.update_or_create(administration = administration_instance, item_ID = request.POST['item'], defaults = {'value': value})
-    else:
+    elif administration_data.objects.filter(administration = administration_instance, item_ID = request.POST['item']).exists():
         administration_data.objects.get(administration = administration_instance, item_ID = request.POST['item']).delete()
     administration.objects.filter(url_hash = hash_id).update(last_modified = timezone.now()) # Update administration object with date of last modification
     #update_summary_scores(administration_instance)
