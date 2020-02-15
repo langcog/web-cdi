@@ -1,0 +1,167 @@
+{
+    "parts": [
+        {
+            "id": 1,
+            "title": "Iª Parte: Primeras Palabras",
+            "types": [
+                {
+                    "text": "Antes de que un niño/a empiece a decir sus primeras palabras, parece entender el lenguaje. Eso lo sabemos porque responde a palabras y frases. ¿Su hijo/a hace algunas de las siguientes cosas?",
+                    "type": "radiobutton",
+                    "id": "first_signs",
+                    "title": "A. Comprehensión Temprana"
+                },
+                {
+                    "text": "En la lista que viene a continuación, por favor, marque la caja que corresponda a las frases que su hijo/a comprende.",
+                    "type": "checkbox",
+                    "id": "phrases",
+                    "title": "B. Comprehensión de las Primeras Frases"
+                },
+                {
+                    "id": "starting_to_talk",
+                    "type": "radiobutton",
+                    "title": "C. Maneras de Hablar"
+                },
+                {
+                    "text": "A continuación encontrará una lista de palabras frecuentes en el vocabulario de los niños pequeños. Si su hijo/a ya comprende, pero no dice las palabras, marque la caja de la palabra correspondiente en la columna que dice \"comprende\". Si su hijo/a dice palabras de la lista aunque de manera distinta (ej., \"tete\" por \"leche\"), o si su hijo/a dice otra palabra que se usa en su familia y que significa lo mismo que la que viene en el cuestionario (ej., si dice \"coca\" en vez de \"refresco\", o \"super\" en vez de \"tienda\", o \"kleenex\" en vez de \"pañuelo\"), marque la caja de las palabra correspondiente en la columna \"comp. y dice\". Recuerde que esta lista incluye las palabras que muchos niños comprenden o pueden decir. No se preocupe si su hijo/a no comprende o no dice todas las palabras.",
+                    "id": "word",
+                    "title": "D. Lista de Vocabulario",
+                    "sections": [
+                        {
+                            "id": "sounds",
+                            "title": "1. Sonidos de Cosas y Animales"
+                        },
+                        {
+                            "id": "animals",
+                            "title": "2. Animales (de Verdad y de Juguete)"
+                        },
+                        {
+                            "id": "vehicles",
+                            "title": "3. Vehículos (de Verdad y de Juguete)"
+                        },
+                        {
+                            "id": "food_drink",
+                            "title": "4. Alimentos y Bebidas"
+                        },
+                        {
+                            "id": "clothing",
+                            "title": "5. Ropa"
+                        },
+                        {
+                            "id": "body_parts",
+                            "title": "6. Partes del Cuerpo"
+                        },
+                        {
+                            "id": "toys",
+                            "title": "7. Juguetes"
+                        },
+                        {
+                            "id": "household",
+                            "title": "8. Utensilios de la Casa"
+                        },
+                        {
+                            "id": "furniture_rooms",
+                            "title": "9. Muebles y Cuartos"
+                        },
+                        {
+                            "id": "outside",
+                            "title": "10. Lugares y Objetos Fuera de la Casa"
+                        },
+                        {
+                            "id": "people",
+                            "title": "11. Personas",
+                            "footnote": "* o el nombre de esta persona",
+                            "text": "Los niños les dicen de manera diferente a sus parientes. A veces le dicen \"tía\" o \"abuela\" o en otros casos le dicen por su nombre, or por su nombre de cariño, por ejemplo, \"Chacha\". Si su hijo/a hace cualquiera de las dos cosas, le dice \"tía\" o \"Chacha\", marque la caja de las palabra indicada en la columna correspondiente."
+                        },
+                        {
+                            "id": "games_routines",
+                            "title": "12. Rutina Diaria, Reglas Sociales y Juegos"
+                        },
+                        {
+                            "id": "action_words",
+                            "title": "13. Acciones y Procesos (Verbos)",
+                            "text": "Cuando los niños hablan, por lo general, usan verbos en distinta formas. Por ejemplo, pueden decir \"abrir\", \"abrí\", \"abre\", \"está abierto\", o \"se abrió\". Si su hijo/a comprende o usa algunos de los verbos de la lista en cualquier forma o conjugación, por favor, marque la caja de las palabra indicada en la columna correspondiente."
+                        },
+                        {
+                            "id": "states",
+                            "title": "14. Estados"
+                        },
+                        {
+                            "id": "time_words",
+                            "title": "15. Tiempo"
+                        },
+                        {
+                            "id": "descriptive_words",
+                            "title": "16. Cualidades y Atributos",
+                            "text": "Muchas de estas palabras pueden aparecer en masculino, por ejemplo, \"bueno\", o en feminino \"buena\". Si su hijo/a comprende o comprende y dice la palabra en cualquiera de las dos formas, por favor, marque la caja de la palabra en la columna correspondiente."
+                        },
+                        {
+                            "id": "pronouns",
+                            "title": "17. Pronombres",
+                            "text": "Su hijo/a puede comprender o decir y comprender estas palabras solas, por ejemplo, \"ésta\" o junto con otra palabra, como \"dámelo\". Rellene el circulo de la columna correspondiente si hijo/a comprende o comprende y dice algunas de las palabras de la lista. Recuerde que no importa si lo dice en forma separada o como parte de otra palabra."
+                        },
+                        {
+                            "id": "question_words",
+                            "title": "18. Preguntas"
+                        },
+                        {
+                            "id": "articles",
+                            "title": "19. Artículos"
+                        },
+                        {
+                            "id": "quantifiers",
+                            "title": "20. Cuantificadores y Adverbios"
+                        },
+                        {
+                            "id": "locations",
+                            "title": "21. Locativos"
+                        },
+                        {
+                            "id": "prepositions",
+                            "title": "22. Preposiciones"
+                        }
+                    ],
+                    "type": "modified_checkbox"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "title": "IIª Parte: Gestos y Acciones",
+            "types": [
+                {
+                    "type": "radiobutton",
+                    "id": "gestures",
+                    "sections": [
+
+                        {
+                            "text": "Instrucciones: Cuando un niño/a pequeño/a empieza a comunicarse, frecuentemente usa gestos para dar entender sus necesidades. Por favor, rellene el circulo en la columna correspondiente de los gestos o acciones que su hijo/a haga en este momento.",
+                            "id": "gestures_first",
+                            "title": "A. Primeros Gestos"
+                        },
+                        {
+                            "text": "¿Ha visto a su hijo/a hacer algunas de las siguientes actividades?",
+                            "id": "gestures_games",
+                            "title": "B. Juegos con Adultos y Rutinas"
+                        },
+                        {
+                            "text": "¿Su hijo/a trata de hacer o hace algunas de las siguientes actividades?",
+                            "id": "gestures_objects",
+                            "title": "C. Acciones con Objetos"
+                        },
+                        {
+                            "text": "Muchas veces, los niños juegan con sus muñecos a hacer cosas que hacen los adultos. Si ha visto a su hijo/a hacer algunas de las siguientes actividades, por favor indíquelo.",
+                            "id": "gestures_parent",
+                            "title": "D. Jugar a Ser Adulto"
+                        },
+                        {
+                            "text": "¿Su hijo/a hace o ha tratado de hacer algunas de las siguientes actividades?",
+                            "id": "gestures_adult",
+                            "title": "E. Imitación de Otros Tipos de Actividades de Adultos (puede o no usar el objeto  o juguete real)"
+                        }
+
+                    ]
+                }
+            ]
+        }
+    ]
+}

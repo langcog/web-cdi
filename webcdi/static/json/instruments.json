@@ -160,7 +160,7 @@
 	{
 		"language": "English",
 		"form": "WS2",
-		"verbose_name": "English WS2",
+		"verbose_name": "Words and Sentences",
 		"min_age": 16,
 		"max_age": 30,
 		"csv_file": "cdi_form_csv/[English_WS].csv",
@@ -168,5 +168,119 @@
 		"fillable_headers": "cdi_form_csv/EnglishWS_pdf_headers.csv",
 		"scoring_json" : "cdi_forms/form_data/scoring/English_WS_scoring.json",
 		"benchmark" : "cdi_forms/form_data/benchmarking/English_WS_benchmark.csv"
+	},
+	{
+		"language": "English",
+		"form": "WG2",
+		"verbose_name": "Words and Gestures",
+		"min_age": 8,
+		"max_age": 18,
+		"csv_file": "cdi_form_csv/[English_WG].csv",
+		"json_data": "cdi_forms/form_data/English_WG_meta.json",
+		"fillable_headers": "cdi_form_csv/EnglishWG_pdf_headers.csv",
+		"scoring_json" : "cdi_forms/form_data/scoring/English_WG_scoring.json",
+		"benchmark" : "cdi_forms/form_data/benchmarking/English_WG_benchmark.csv"
+	},
+	{
+		"language": "Spanish",
+		"form": "WS2",
+		"verbose_name": "Palabras & Enunciados",
+		"min_age": 16,
+		"max_age": 30,
+		"csv_file": "cdi_form_csv/[Spanish_WS].csv",
+		"json_data": "cdi_forms/form_data/Spanish_WS_meta.json",
+		"scoring_json" : "cdi_forms/form_data/scoring/Spanish_WS_scoring.json",
+		"benchmark" : "cdi_forms/form_data/benchmarking/Spanish_WS_benchmark.csv"
+	},
+	{
+		"language": "Spanish",
+		"form": "WG2",
+		"verbose_name": "Primeras Palabras y Gestos",
+		"min_age": 8,
+		"max_age": 18,
+		"csv_file": "cdi_form_csv/[Spanish_WG].csv",
+		"json_data": "cdi_forms/form_data/Spanish_WG_meta.json",
+		"scoring_json" : "cdi_forms/form_data/scoring/Spanish_WG_scoring.json",
+		"benchmark" : "cdi_forms/form_data/benchmarking/Spanish_WG_benchmark.csv"
+	},
+	{
+		"language": "French Quebec",
+		"form": "WS2",
+		"verbose_name": "Mots et Énoncés",
+		"min_age": 16,
+		"max_age": 30,
+		"csv_file": "cdi_form_csv/[French_Quebec_WS].csv",
+		"json_data": "cdi_forms/form_data/French_Quebec_WS2_meta.json",
+		"scoring_json" : "cdi_forms/form_data/scoring/French_Quebec_WS_scoring.json"
+	},
+	{
+		"language": "French Quebec",
+		"form": "WG2",
+		"verbose_name": "Mots et Gestes",
+		"min_age": 8,
+		"max_age": 16,
+		"csv_file": "cdi_form_csv/[French_Quebec_WG].csv",
+		"json_data": "cdi_forms/form_data/French_Quebec_WG2_meta.json",
+		"scoring_json" : "cdi_forms/form_data/scoring/French_Quebec_WG_scoring.json"
+	},
+	{
+		"language": "Canadian English",
+		"form": "WS2",
+		"verbose_name": "Words and Sentences",
+		"min_age": 16,
+		"max_age": 30,
+		"csv_file": "cdi_form_csv/[Canadian_English_WS].csv",
+		"json_data": "cdi_forms/form_data/Canadian_English_WS2_meta.json",
+		"scoring_json" : "cdi_forms/form_data/scoring/Canadian_English_WS_scoring.json"
+	},
+	{
+		"language": "Canadian English",
+		"form": "WG2",
+		"verbose_name": "Words and Gertures",
+		"min_age": 8,
+		"max_age": 16,
+		"csv_file": "cdi_form_csv/[Canadian_English_WG].csv",
+		"json_data": "cdi_forms/form_data/Canadian_English_WG2_meta.json",
+		"scoring_json" : "cdi_forms/form_data/scoring/Canadian_English_WG_scoring.json"
+	},
+	{
+		"language": "English",
+		"form": "CDI3B",
+		"verbose_name": "CDI-III",
+		"min_age": 16,
+		"max_age": 30,
+		"csv_file": "cdi_form_csv/[English_CDI3].csv",
+		"json_data": "cdi_forms/form_data/English_CDI3B_meta.json",
+		"scoring_json" : "cdi_forms/form_data/scoring/English_CDI3_scoring.json"
+	},
+	{
+		"language": "English",
+		"form": "L1B",
+		"verbose_name": "Short Form Vocabulary Checklist: Level I",
+		"min_age": 8,
+		"max_age": 18,
+		"csv_file": "cdi_form_csv/[English_L1].csv",
+		"json_data": "cdi_forms/form_data/English_L1B_meta.json",
+		"scoring_json" : "cdi_forms/form_data/scoring/English_L1_WS_scoring.json"
+	},
+	{
+		"language": "English",
+		"form": "L2AB",
+		"verbose_name": "Short Form Vocabulary Checklist: Level II (Form A)",
+		"min_age": 16,
+		"max_age": 30,
+		"csv_file": "cdi_form_csv/[English_L2A].csv",
+		"json_data": "cdi_forms/form_data/English_L2AB_meta.json",
+		"scoring_json" : "cdi_forms/form_data/scoring/English_L2A_WS_scoring.json"
+	},
+	{
+		"language": "English",
+		"form": "L2BB",
+		"verbose_name": "Short Form Vocabulary Checklist: Level II (Form B)",
+		"min_age": 16,
+		"max_age": 30,
+		"csv_file": "cdi_form_csv/[English_L2B].csv",
+		"json_data": "cdi_forms/form_data/English_L2BB_meta.json",
+		"scoring_json" : "cdi_forms/form_data/scoring/English_L2B_WS_scoring.json"
 	}
 ]

@@ -1,0 +1,23 @@
+[{
+  "fieldset":"Basic Information",
+  "fields":[
+      {
+          "field":"form_filler",
+          "div":["form_filler_other"]  
+      },{
+        "field" : "child_dob"
+      },
+      {
+          "field":"age"
+      },
+      {
+          "field":"sex"
+      },
+      {
+          "field":"country",
+          "div":["zip_code"]
+      }
+      
+      ]
+  
+}]

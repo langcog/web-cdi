@@ -1533,10 +1533,8 @@ msgstr ""
 #: webcdi/cdi_forms/templates/cdi_forms/backpage_info.html:8
 #: webcdi/cdi_forms/templates/cdi_forms/backpage_info.html:34
 #: webcdi/cdi_forms/views.py:249
-#, fuzzy
-#| msgid "Finnish"
 msgid "Finish"
-msgstr "finnois"
+msgstr "Terminer"
 
 #: webcdi/cdi_forms/templates/cdi_forms/backpage_info.html:12
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:14
