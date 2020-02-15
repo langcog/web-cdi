@@ -868,7 +868,8 @@ def printable_view(request, hash_id):
     
     prefilled_data['language'] = administration_instance.study.instrument.language
     prefilled_data['background_form'] = background_form
-    prefilled_data['backpage_background_form'] = backpage_background_form
+    try: prefilled_data['backpage_background_form'] = backpage_background_form
+    except: pass
     prefilled_data['hash_id'] = hash_id
     prefilled_data['gift_code'] = None
     prefilled_data['gift_amount'] = None
