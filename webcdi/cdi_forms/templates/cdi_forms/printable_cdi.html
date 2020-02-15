@@ -204,6 +204,12 @@
         <div class="row justify-content-center">
             <h4><a href="#filled_form" data-toggle="collapse">{% trans "Show Me My Answers" %}</a></h4>
         </div>
+        <!--
+        <div class="row justify-content-center">
+            <h4 onclick="window.print();">{% trans "Print Page" %}</h4>
+        </div>
+        -->
+        
 
         <div class="row justify-content-center">
             <!-- If study allows participants to share results via Facebook, a link for FB sharing will appear in template. -->
@@ -220,33 +226,33 @@
         {% if show_feedback %}
             <!-- D3 graph div. Filled with empty divs which are populated by later D3 script -->
             <div class="col-md-12 collapse show" id="graph_data" style="height: 90vh;">
-            <br>
-            <div class = "row"> 
-                <div class="col-md-6 text-center" id="num_words_text"></div>
-                <div class="col-md-6 text-center" id="hardest_words"></div>
-            </div>
-            <br>
-            <div class = "row"> 
-                {% if 'WG' in instrument %}
-                    <div class="col-md-6 text-center">
-                        <div id="categories_charts_understood"></div>
-                        <input id="save-understood-pdf" type="button" value="Save as PDF" disabled />
-                    </div>
-                    <div class="col-md-6 text-center">
-                        <div id="categories_charts_produced"></div>
-                        <input id="save-produced-pdf" type="button" value="Save as PDF" disabled />
-                    </div>
-                {% else %}
-                    <div class="col-md-12 text-center">
-                        <div id="categories_charts_produced"></div>
-                        <input id="save-produced-pdf" type="button" value="Save as PDF" disabled />
-                    </div>
-                {% endif %}
-            </div>
-            <br>
-            <div class = "row justify-content-center"> 
-                <h4><div id="best_categories" class="text-center"></div></h4>
-            </div>
+                <br>
+                <div class = "row"> 
+                    <div class="col-md-6 text-center" id="num_words_text"></div>
+                    <div class="col-md-6 text-center" id="hardest_words"></div>
+                </div>
+                <br>
+                <div class = "row"> 
+                    {% if 'WG' in instrument %}
+                        <div class="col-md-6 text-center">
+                            <div id="categories_charts_understood"></div>
+                            <input id="save-understood-pdf" type="button" value="Save as PDF" disabled />
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <div id="categories_charts_produced"></div>
+                            <input id="save-produced-pdf" type="button" value="Save as PDF" disabled />
+                        </div>
+                    {% else %}
+                        <div class="col-md-12 text-center">
+                            <div id="categories_charts_produced"></div>
+                            <input id="save-produced-pdf" type="button" value="Save as PDF" disabled />
+                        </div>
+                    {% endif %}
+                </div>
+                <br>
+                <div class = "row justify-content-center"> 
+                    <h4><div id="best_categories" class="text-center"></div></h4>
+                </div>
             </div>
         {% endif %}
 
