@@ -12,7 +12,7 @@
         <div id="sectionInstructions{{type.id}}" class = "collapse in" style="font-size: .85em;">
             <p class="lead"> {{ type.text | capfirst }}</p>
         </div>
-        {% if type.sections|length > 1 %}
+        {% if type.sections|length > 1 and type.text|length > 0 %}
             <a href="#sectionInstructions{{type.id}}" data-toggle="collapse" id="section_instructions_title">
                 {% trans "Hide/Show Instructions: " %} <i class="material-icons">arrow_drop_up</i>
             </a>
