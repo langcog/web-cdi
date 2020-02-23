@@ -30,6 +30,7 @@ item_30,handsup,phrases,phrases,understands,,Hands on head rhyme,"""ידיים �
 item_32,imitate,starting_to_talk,starting_to_talk,never; sometimes; often,,"Some children like to ""parrot"" or imitate things that they've just heard (including new words that they are just learning, and/or parts of sentences, for example, repeating ""work now"" after mother says ""Mommy's going to work now."") How often does your children imitate words?",יש ילדים שאוהבים לחזור על מילים או חלק ממילים שהם שומעים. באיזו תדירות ילדכם מחקה מילים?,"Some children like to ""parrot"" or imitate things that they've just heard (including new words that they are just learning, and/or parts of sentences, for example, repeating ""work now"" after mother says ""Mommy's going to work now."") How often does your children imitate words?",,imitation
 item_33,label,starting_to_talk,starting_to_talk,never; sometimes; often,,"Some children like to go around naming or labeling things, as though proud of knowing the names and wanting to show this. How often does your child do this?","יש ילדים שאוהבים להסתובב בחדר, להצביע על דברים ולהגיד כיצד הם נקראים. באיזו תדירות ילדך עושה זאת? ","Some children like to go around naming or labeling things, as though proud of knowing the names and wanting to show this. How often does your child do this?",,label
 <<<<<<< HEAD
+<<<<<<< HEAD
 item_34,baa_baa,word,sounds,understands; produces,baa baa,baa baa,,baa baa,,
 item_35,choo_choo,word,sounds,understands; produces,choo choo,choo choo,,choo choo,,
 item_36,cockadoodledoo,word,sounds,understands; produces,cockadoodledoo,cockadoodledoo,,cockadoodledoo,,
@@ -43,6 +44,8 @@ item_43,vroom,word,sounds,understands; produces,vroom,vroom,,vroom,,
 item_44,woof_woof,word,sounds,understands; produces,woof woof,woof woof,,woof woof,,
 item_45,yum_yum,word,sounds,understands; produces,yum yum,yum yum,,yum yum,,
 =======
+=======
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_34,baa_baa,word,sounds,understands; produces,baa baa,baa baa,baa baa,baa baa,,
 item_35,choo_choo,word,sounds,understands; produces,choo choo,choo choo,choo choo,choo choo,,
 item_36,cockadoodledoo,word,sounds,understands; produces,cockadoodledoo,cockadoodledoo,cockadoodledoo,cockadoodledoo,,
@@ -55,7 +58,10 @@ item_42,uh_oh,word,sounds,understands; produces,uh oh,uh oh,uh oh,uh oh,,
 item_43,vroom,word,sounds,understands; produces,vroom,vroom,vroom,vroom,,
 item_44,woof_woof,word,sounds,understands; produces,woof woof,woof woof,woof woof,woof woof,,
 item_45,yum_yum,word,sounds,understands; produces,yum yum,yum yum,yum yum,yum yum,,
+<<<<<<< HEAD
 >>>>>>> Latest files
+=======
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_46,animal,word,animals,understands; produces,animal,animal,חיה,animal,,
 item_47,bear,word,animals,understands; produces,bear,bear,דב/ דובי,bear,,
 item_48,bee,word,animals,understands; produces,bee,bee,דבורה,bee,,
@@ -75,6 +81,7 @@ item_61,fish.animal,word,animals,understands; produces,fish (animal),fish (anima
 item_62,frog,word,animals,understands; produces,frog,frog,צפרדע,frog,,
 item_63,giraffe,word,animals,understands; produces,giraffe,giraffe,ג'ירפה,giraffe,,
 <<<<<<< HEAD
+<<<<<<< HEAD
 item_64,goose,word,animals,understands; produces,goose,goose,,goose,,
 item_65,horse,word,animals,understands; produces,horse,horse,סוס,horse,,
 item_66,kitty,word,animals,understands; produces,kitty,kitty,,kitty,,
@@ -83,12 +90,18 @@ item_64,goose,word,animals,understands; produces,goose,goose,goose,goose,,
 item_65,horse,word,animals,understands; produces,horse,horse,סוס,horse,,
 item_66,kitty,word,animals,understands; produces,kitty,kitty,kitty,kitty,,
 >>>>>>> Latest files
+=======
+item_64,goose,word,animals,understands; produces,goose,goose,goose,goose,,
+item_65,horse,word,animals,understands; produces,horse,horse,סוס,horse,,
+item_66,kitty,word,animals,understands; produces,kitty,kitty,kitty,kitty,,
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_67,lamb,word,animals,understands; produces,lamb,lamb,כבשה,lamb,,
 item_68,lion,word,animals,understands; produces,lion,lion,אריה,lion,,
 item_69,monkey,word,animals,understands; produces,monkey,monkey,קוף,monkey,,
 item_70,mouse,word,animals,understands; produces,mouse,mouse,עכבר,mouse,,
 item_71,owl,word,animals,understands; produces,owl,owl,ינשוף,owl,,
 item_72,penguin,word,animals,understands; produces,penguin,penguin,פינגווין,penguin,,
+<<<<<<< HEAD
 <<<<<<< HEAD
 item_73,pig,word,animals,understands; produces,pig,pig,,pig,,
 item_74,pony,word,animals,understands; produces,pony,pony,,pony,,
@@ -99,6 +112,8 @@ item_78,teddybear,word,animals,understands; produces,teddybear,teddybear,,teddyb
 item_79,tiger,word,animals,understands; produces,tiger,tiger,נמר,tiger,,
 item_80,turkey,word,animals,understands; produces,turkey,turkey,,turkey,,
 =======
+=======
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_73,pig,word,animals,understands; produces,pig,pig,pig,pig,,
 item_74,pony,word,animals,understands; produces,pony,pony,pony,pony,,
 item_75,puppy,word,animals,understands; produces,puppy,puppy,puppy,puppy,,
@@ -107,17 +122,24 @@ item_77,squirrel,word,animals,understands; produces,squirrel,squirrel,סנאי,s
 item_78,teddybear,word,animals,understands; produces,teddybear,teddybear,teddybear,teddybear,,
 item_79,tiger,word,animals,understands; produces,tiger,tiger,נמר,tiger,,
 item_80,turkey,word,animals,understands; produces,turkey,turkey,turkey,turkey,,
+<<<<<<< HEAD
 >>>>>>> Latest files
+=======
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_81,turtle,word,animals,understands; produces,turtle,turtle,צב,turtle,,
 item_82,airplane,word,vehicles,understands; produces,airplane,airplane,מטוס/ אווירון,airplane,,
 item_83,bicycle,word,vehicles,understands; produces,bicycle,bicycle,אופניים,bicycle,,
 item_84,bus,word,vehicles,understands; produces,bus,bus,אוטובוס,bus,,
 item_85,car,word,vehicles,understands; produces,car,car,אוטו/ מכונית,car,,
 <<<<<<< HEAD
+<<<<<<< HEAD
 item_86,firetruck,word,vehicles,understands; produces,firetruck,firetruck,,firetruck,,
 =======
 item_86,firetruck,word,vehicles,understands; produces,firetruck,firetruck,firetruck,firetruck,,
 >>>>>>> Latest files
+=======
+item_86,firetruck,word,vehicles,understands; produces,firetruck,firetruck,firetruck,firetruck,,
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_87,motorcycle,word,vehicles,understands; produces,motorcycle,motorcycle,אופנוע,motorcycle,,
 item_88,stroller,word,vehicles,understands; produces,stroller,stroller,עגלה,stroller,,
 item_89,train,word,vehicles,understands; produces,train,train,רכבת,train,,
@@ -133,6 +155,7 @@ item_98,toy,word,toys,understands; produces,toy,toy,צעצוע,toy,,
 item_99,apple,word,food_drink,understands; produces,apple,apple,תפוח,apple,,
 item_100,banana,word,food_drink,understands; produces,banana,banana,בננה,banana,,
 item_101,bread,word,food_drink,understands; produces,bread,bread,לחם,bread,,
+<<<<<<< HEAD
 <<<<<<< HEAD
 item_102,butter,word,food_drink,understands; produces,butter,butter,,butter,,
 item_103,cake,word,food_drink,understands; produces,cake,cake,עוגה,cake,,
@@ -151,6 +174,8 @@ item_115,fish.food,word,food_drink,understands; produces,fish (food),fish (food)
 item_116,food,word,food_drink,understands; produces,food,food,אוכל,food,,
 item_117,ice_cream,word,food_drink,understands; produces,ice cream,ice cream,,ice cream,,
 =======
+=======
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_102,butter,word,food_drink,understands; produces,butter,butter,butter,butter,,
 item_103,cake,word,food_drink,understands; produces,cake,cake,עוגה,cake,,
 item_104,candy,word,food_drink,understands; produces,candy,candy,ממתק,candy,,
@@ -167,7 +192,10 @@ item_114,egg,word,food_drink,understands; produces,egg,egg,חביתה/ ביצה,
 item_115,fish.food,word,food_drink,understands; produces,fish (food),fish (food),דג,fish (food),,
 item_116,food,word,food_drink,understands; produces,food,food,אוכל,food,,
 item_117,ice_cream,word,food_drink,understands; produces,ice cream,ice cream,ice cream,ice cream,,
+<<<<<<< HEAD
 >>>>>>> Latest files
+=======
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_118,juice,word,food_drink,understands; produces,juice,juice,מיץ,juice,,
 item_119,meat,word,food_drink,understands; produces,meat,meat,בשר,meat,,
 item_120,milk,word,food_drink,understands; produces,milk,milk,חלב,milk,,
@@ -177,18 +205,24 @@ item_123,peas,word,food_drink,understands; produces,peas,peas,אפונה,peas,,
 item_124,pizza,word,food_drink,understands; produces,pizza,pizza,פיצה,pizza,,
 item_125,raisin,word,food_drink,understands; produces,raisin,raisin,צימוקים,raisin,,
 <<<<<<< HEAD
+<<<<<<< HEAD
 item_126,spaghetti,word,food_drink,understands; produces,spaghetti,spaghetti,,spaghetti,,
 item_127,toast,word,food_drink,understands; produces,toast,toast,טוסט,toast,,
 item_128,water.beverage,word,food_drink,understands; produces,water (beverage),water (beverage),מים,water (beverage),,
 item_129,beads,word,clothing,understands; produces,beads,beads,,beads,,
 item_130,bib,word,clothing,understands; produces,bib,bib,,bib,,
 =======
+=======
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_126,spaghetti,word,food_drink,understands; produces,spaghetti,spaghetti,spaghetti,spaghetti,,
 item_127,toast,word,food_drink,understands; produces,toast,toast,טוסט,toast,,
 item_128,water.beverage,word,food_drink,understands; produces,water (beverage),water (beverage),מים,water (beverage),,
 item_129,beads,word,clothing,understands; produces,beads,beads,beads,beads,,
 item_130,bib,word,clothing,understands; produces,bib,bib,bib,bib,,
+<<<<<<< HEAD
 >>>>>>> Latest files
+=======
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_131,boots,word,clothing,understands; produces,boots,boots,מגפיים,boots,,
 item_132,button,word,clothing,understands; produces,button,button,כפתור,button,,
 item_133,coat,word,clothing,understands; produces,coat,coat,מעיל,coat,,
@@ -196,10 +230,14 @@ item_134,diaper,word,clothing,understands; produces,diaper,diaper,טיטול/ ח
 item_135,dress,word,clothing,understands; produces,dress,dress,שמלה,dress,,
 item_136,hat,word,clothing,understands; produces,hat,hat,כובע,hat,,
 <<<<<<< HEAD
+<<<<<<< HEAD
 item_137,jacket,word,clothing,understands; produces,jacket,jacket,,jacket,,
 =======
 item_137,jacket,word,clothing,understands; produces,jacket,jacket,jacket,jacket,,
 >>>>>>> Latest files
+=======
+item_137,jacket,word,clothing,understands; produces,jacket,jacket,jacket,jacket,,
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_138,jeans,word,clothing,understands; produces,jeans,jeans,ג'ינס,jeans,,
 item_139,necklace,word,clothing,understands; produces,necklace,necklace,שרשרת/ מחרוזת,necklace,,
 item_140,pajamas,word,clothing,understands; produces,pajamas,pajamas,פיג'מה,pajamas,,
@@ -207,10 +245,14 @@ item_141,pants,word,clothing,understands; produces,pants,pants,מכנסיים,pa
 item_142,shirt,word,clothing,understands; produces,shirt,shirt,חולצה,shirt,,
 item_143,shoe,word,clothing,understands; produces,shoe,shoe,נעל/ נעליים,shoe,,
 <<<<<<< HEAD
+<<<<<<< HEAD
 item_144,shorts,word,clothing,understands; produces,shorts,shorts,,shorts,,
 =======
 item_144,shorts,word,clothing,understands; produces,shorts,shorts,shorts,shorts,,
 >>>>>>> Latest files
+=======
+item_144,shorts,word,clothing,understands; produces,shorts,shorts,shorts,shorts,,
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_145,sock,word,clothing,understands; produces,sock,sock,גרביים,sock,,
 item_146,sweater,word,clothing,understands; produces,sweater,sweater,סוודר,sweater,,
 item_147,zipper,word,clothing,understands; produces,zipper,zipper,רוכסן/ ריצ'רץ,zipper,,
@@ -221,26 +263,36 @@ item_151,ear,word,body_parts,understands; produces,ear,ear,אוזן/ אוזני�
 item_152,eye,word,body_parts,understands; produces,eye,eye,עיין/ עיניים,eye,,
 item_153,face,word,body_parts,understands; produces,face,face,פנים,face,,
 <<<<<<< HEAD
+<<<<<<< HEAD
 item_154,foot,word,body_parts,understands; produces,foot,foot,,foot,,
 item_155,finger,word,body_parts,understands; produces,finger,finger,,finger,,
 item_156,hair,word,body_parts,understands; produces,hair,hair,שיער/ שערות,hair,,
 item_157,hand,word,body_parts,understands; produces,hand,hand,,hand,,
 =======
+=======
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_154,foot,word,body_parts,understands; produces,foot,foot,foot,foot,,
 item_155,finger,word,body_parts,understands; produces,finger,finger,finger,finger,,
 item_156,hair,word,body_parts,understands; produces,hair,hair,שיער/ שערות,hair,,
 item_157,hand,word,body_parts,understands; produces,hand,hand,hand,hand,,
+<<<<<<< HEAD
 >>>>>>> Latest files
+=======
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_158,head,word,body_parts,understands; produces,head,head,ראש,head,,
 item_159,knee,word,body_parts,understands; produces,knee,knee,ברך/ ברכיים,knee,,
 item_160,leg,word,body_parts,understands; produces,leg,leg,רגל/ רגליים,leg,,
 item_161,mouth,word,body_parts,understands; produces,mouth,mouth,פה,mouth,,
 item_162,nose,word,body_parts,understands; produces,nose,nose,אף,nose,,
 <<<<<<< HEAD
+<<<<<<< HEAD
 item_163,owie,word,body_parts,understands; produces,owie,owie/boo boo,,owie/boo boo,,
 =======
 item_163,owie,word,body_parts,understands; produces,owie,owie/boo boo,owie/boo boo,owie/boo boo,,
 >>>>>>> Latest files
+=======
+item_163,owie,word,body_parts,understands; produces,owie,owie/boo boo,owie/boo boo,owie/boo boo,,
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_164,tooth,word,body_parts,understands; produces,tooth,tooth,שן/ שיניים,tooth,,
 item_165,toe,word,body_parts,understands; produces,toe,toe,אגודל/ בוהן,toe,,
 item_166,tongue,word,body_parts,understands; produces,tongue,tongue,לשון,tongue,,
@@ -256,6 +308,7 @@ item_175,door,word,furniture_rooms,understands; produces,door,door,דלת,door,,
 item_176,drawer,word,furniture_rooms,understands; produces,drawer,drawer,מגירה,drawer,,
 item_177,garage,word,furniture_rooms,understands; produces,garage,garage,חניה/ מוסך,garage,,
 <<<<<<< HEAD
+<<<<<<< HEAD
 item_178,high_chair,word,furniture_rooms,understands; produces,high chair,high chair,,high chair,,
 item_179,kitchen,word,furniture_rooms,understands; produces,kitchen,kitchen,מטבח,kitchen,,
 item_180,living_room,word,furniture_rooms,understands; produces,living room,living room,סלון,living room,,
@@ -268,6 +321,8 @@ item_186,sink,word,furniture_rooms,understands; produces,sink,sink,כיור,sink
 item_187,stairs,word,furniture_rooms,understands; produces,stairs,stairs,מדרגות,stairs,,
 item_188,stove,word,furniture_rooms,understands; produces,stove,stove,,stove,,
 =======
+=======
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_178,high_chair,word,furniture_rooms,understands; produces,high chair,high chair,high chair,high chair,,
 item_179,kitchen,word,furniture_rooms,understands; produces,kitchen,kitchen,מטבח,kitchen,,
 item_180,living_room,word,furniture_rooms,understands; produces,living room,living room,סלון,living room,,
@@ -279,7 +334,10 @@ item_185,rocking_chair,word,furniture_rooms,understands; produces,rocking chair,
 item_186,sink,word,furniture_rooms,understands; produces,sink,sink,כיור,sink,,
 item_187,stairs,word,furniture_rooms,understands; produces,stairs,stairs,מדרגות,stairs,,
 item_188,stove,word,furniture_rooms,understands; produces,stove,stove,stove,stove,,
+<<<<<<< HEAD
 >>>>>>> Latest files
+=======
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_189,table,word,furniture_rooms,understands; produces,table,table,שולחן,table,,
 item_190,tv,word,furniture_rooms,understands; produces,tv,TV,טלויזיה,TV,,
 item_191,window,word,furniture_rooms,understands; produces,window,window,חלון,window,,
@@ -293,6 +351,7 @@ item_198,clock,word,household,understands; produces,clock,clock,שעון,clock,,
 item_199,comb,word,household,understands; produces,comb (object),comb,מסרק,comb,,
 item_200,cup,word,household,understands; produces,cup,cup,כוס/ ספל,cup,,
 <<<<<<< HEAD
+<<<<<<< HEAD
 item_201,dish,word,household,understands; produces,dish,dish,,dish,,
 item_202,fork,word,household,understands; produces,fork,fork,מזלג,fork,,
 item_203,glass,word,household,understands; produces,glass,glass,,glass,,
@@ -301,6 +360,11 @@ item_201,dish,word,household,understands; produces,dish,dish,dish,dish,,
 item_202,fork,word,household,understands; produces,fork,fork,מזלג,fork,,
 item_203,glass,word,household,understands; produces,glass,glass,glass,glass,,
 >>>>>>> Latest files
+=======
+item_201,dish,word,household,understands; produces,dish,dish,dish,dish,,
+item_202,fork,word,household,understands; produces,fork,fork,מזלג,fork,,
+item_203,glass,word,household,understands; produces,glass,glass,glass,glass,,
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_204,glasses,word,household,understands; produces,glasses,glasses,משקפיים,glasses,,
 item_205,hammer,word,household,understands; produces,hammer,hammer,פטיש,hammer,,
 item_206,keys,word,household,understands; produces,keys,keys,מפתחות,keys,,
@@ -310,10 +374,14 @@ item_209,medicine,word,household,understands; produces,medicine,medicine,תרו�
 item_210,money,word,household,understands; produces,money,money,כסף,money,,
 item_211,paper,word,household,understands; produces,paper,paper,נייר,paper,,
 <<<<<<< HEAD
+<<<<<<< HEAD
 item_212,penny,word,household,understands; produces,penny,penny,,penny,,
 =======
 item_212,penny,word,household,understands; produces,penny,penny,penny,penny,,
 >>>>>>> Latest files
+=======
+item_212,penny,word,household,understands; produces,penny,penny,penny,penny,,
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_213,picture,word,household,understands; produces,picture,picture,תמונה,picture,,
 item_214,pillow,word,household,understands; produces,pillow,pillow,כרית,pillow,,
 item_215,plant,word,household,understands; produces,plant,plant,צמח,plant,,
@@ -326,6 +394,7 @@ item_221,spoon,word,household,understands; produces,spoon,spoon,כף,spoon,,
 item_222,telephone,word,household,understands; produces,telephone,telephone/cellphone*,טלפון,telephone/cellphone*,,
 item_223,toothbrush,word,household,understands; produces,toothbrush,toothbrush,מברשת שיניים,toothbrush,,
 item_224,towel,word,household,understands; produces,towel,towel,מגבת,towel,,
+<<<<<<< HEAD
 <<<<<<< HEAD
 item_225,trash,word,household,understands; produces,trash,trash,,trash,,
 item_226,vacuum,word,household,understands; produces,vacuum,vacuum,שואב אבק,vacuum,,
@@ -341,6 +410,8 @@ item_235,moon,word,outside,understands; produces,moon,moon,ירח,moon,,
 item_236,outside,word,outside,understands; produces,outside,outside,,outside,,
 item_237,park,word,outside,understands; produces,park,park,,park,,
 =======
+=======
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_225,trash,word,household,understands; produces,trash,trash,trash,trash,,
 item_226,vacuum,word,household,understands; produces,vacuum,vacuum,שואב אבק,vacuum,,
 item_227,watch.object,word,household,understands; produces,watch (object),watch (object),watch (object),watch (object),,
@@ -354,7 +425,10 @@ item_234,house,word,outside,understands; produces,house,house,house,house,,
 item_235,moon,word,outside,understands; produces,moon,moon,ירח,moon,,
 item_236,outside,word,outside,understands; produces,outside,outside,outside,outside,,
 item_237,park,word,outside,understands; produces,park,park,park,park,,
+<<<<<<< HEAD
 >>>>>>> Latest files
+=======
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_238,party,word,outside,understands; produces,party,party,מסיבה,party,,
 item_239,pool,word,outside,understands; produces,pool,pool,בריכה,pool,,
 item_240,rain,word,outside,understands; produces,rain,rain,גשם,rain,,
@@ -364,24 +438,33 @@ item_243,shovel,word,outside,understands; produces,shovel,shovel,את/ מעדר,
 item_244,sky,word,outside,understands; produces,sky,sky,שמיים,sky,,
 item_245,slide,word,outside,understands; produces,slide (object),slide (object),מגלשה,slide (object),,
 <<<<<<< HEAD
+<<<<<<< HEAD
 item_246,snow,word,outside,understands; produces,snow,snow,,snow,,
 =======
 item_246,snow,word,outside,understands; produces,snow,snow,snow,snow,,
 >>>>>>> Latest files
+=======
+item_246,snow,word,outside,understands; produces,snow,snow,snow,snow,,
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_247,star,word,outside,understands; produces,star,star,כוכב/ כוכבים,star,,
 item_248,store,word,outside,understands; produces,store,store,חנות,store,,
 item_249,sun,word,outside,understands; produces,sun,sun,שמש,sun,,
 item_250,swing.object,word,outside,understands; produces,swing (object),swing (object),מגלשה,swing (object),,
 item_251,tree,word,outside,understands; produces,tree,tree,עץ,tree,,
 <<<<<<< HEAD
+<<<<<<< HEAD
 item_252,water.not_beverage,word,outside,understands; produces,water (not beverage),water (not beverage),,water (not beverage),,
 =======
 item_252,water.not_beverage,word,outside,understands; produces,water (not beverage),water (not beverage),water (not beverage),water (not beverage),,
 >>>>>>> Latest files
+=======
+item_252,water.not_beverage,word,outside,understands; produces,water (not beverage),water (not beverage),water (not beverage),water (not beverage),,
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_253,work,word,outside,understands; produces,work (place),work (place),עבודה,work (place),,
 item_254,zoo,word,outside,understands; produces,zoo,zoo,גן חיות,zoo,,
 item_255,aunt,word,people,understands; produces,aunt,aunt,דוד/ דודה,aunt,,
 item_256,baby,word,people,understands; produces,baby,baby,תינוק/ תינוקת,baby,,
+<<<<<<< HEAD
 <<<<<<< HEAD
 item_257,babysitter,word,people,understands; produces,babysitter,babysitter,,babysitter,,
 item_258,babysitter_name,word,people,understands; produces,babysitter's name,babysitter's name,,babysitter's name,,
@@ -410,6 +493,8 @@ item_280,hello,word,games_routines,understands; produces,hello,hello,היי/ ש�
 item_281,hi,word,games_routines,understands; produces,hi,hi,,hi,,
 item_282,lunch,word,games_routines,understands; produces,lunch,lunch,,lunch,,
 =======
+=======
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_257,babysitter,word,people,understands; produces,babysitter,babysitter,babysitter,babysitter,,
 item_258,babysitter_name,word,people,understands; produces,babysitter's name,babysitter's name,babysitter's name,babysitter's name,,
 item_259,boy,word,people,understands; produces,boy,boy,ילד/ ילדה,boy,,
@@ -436,7 +521,10 @@ item_279,dont,word,games_routines,understands; produces,don't,don't,די/ מספ
 item_280,hello,word,games_routines,understands; produces,hello,hello,היי/ שלום/ אהלן,hello,,
 item_281,hi,word,games_routines,understands; produces,hi,hi,hi,hi,,
 item_282,lunch,word,games_routines,understands; produces,lunch,lunch,lunch,lunch,,
+<<<<<<< HEAD
 >>>>>>> Latest files
+=======
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_283,nap,word,games_routines,understands; produces,nap,nap,ללכת לישון,nap,,
 item_284,nightnight,word,games_routines,understands; produces,night night,night night,לילה טוב,night night,,
 item_285,no,word,games_routines,understands; produces,no,no,לא,no,,
@@ -444,26 +532,36 @@ item_286,pattycake,word,games_routines,understands; produces,pattycake,pattycake
 item_287,peekaboo,word,games_routines,understands; produces,peekaboo,peekaboo,"לשחק ב""קוקו""",peekaboo,,
 item_288,please,word,games_routines,understands; produces,please,please,בבקשה,please,,
 <<<<<<< HEAD
+<<<<<<< HEAD
 item_289,shh,word,games_routines,understands; produces,shh,shh/shush/hush,,shh/shush/hush,,
 item_290,thank_you,word,games_routines,understands; produces,thank you,thank you,,thank you,,
 item_291,wait,word,games_routines,understands; produces,wait,wait,,wait,,
 item_292,wanna,word,games_routines,understands; produces,wanna,wanna/want to,,wanna/want to,,
 =======
+=======
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_289,shh,word,games_routines,understands; produces,shh,shh/shush/hush,shh/shush/hush,shh/shush/hush,,
 item_290,thank_you,word,games_routines,understands; produces,thank you,thank you,thank you,thank you,,
 item_291,wait,word,games_routines,understands; produces,wait,wait,wait,wait,,
 item_292,wanna,word,games_routines,understands; produces,wanna,wanna/want to,wanna/want to,wanna/want to,,
+<<<<<<< HEAD
 >>>>>>> Latest files
+=======
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_293,yes,word,games_routines,understands; produces,yes,yes,כן,yes,,
 item_294,bite,word,action_words,understands; produces,bite,bite,לנשוך,bite,,
 item_295,blow,word,action_words,understands; produces,blow,blow,לנשוף,blow,,
 item_296,break,word,action_words,understands; produces,break,break,לשבור,break,,
 item_297,bring,word,action_words,understands; produces,bring,bring,להביא,bring,,
 <<<<<<< HEAD
+<<<<<<< HEAD
 item_298,bump,word,action_words,understands; produces,bump,bump,,bump,,
 =======
 item_298,bump,word,action_words,understands; produces,bump,bump,bump,bump,,
 >>>>>>> Latest files
+=======
+item_298,bump,word,action_words,understands; produces,bump,bump,bump,bump,,
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_299,clean.action,word,action_words,understands; produces,clean (action),clean (action),לנקות,clean (action),,
 item_300,close,word,action_words,understands; produces,close,close,לסגור,close,,
 item_301,cry,word,action_words,understands; produces,cry,cry,לבכות,cry,,
@@ -476,10 +574,14 @@ item_307,fall,word,action_words,understands; produces,fall,fall,ליפול,fall,
 item_308,feed,word,action_words,understands; produces,feed,feed,להאכיל,feed,,
 item_309,finish,word,action_words,understands; produces,finish,finish,לגמור,finish,,
 <<<<<<< HEAD
+<<<<<<< HEAD
 item_310,get,word,action_words,understands; produces,get,get,,get,,
 =======
 item_310,get,word,action_words,understands; produces,get,get,get,get,,
 >>>>>>> Latest files
+=======
+item_310,get,word,action_words,understands; produces,get,get,get,get,,
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_311,give,word,action_words,understands; produces,give,give,לתת,give,,
 item_312,go,word,action_words,understands; produces,go,go,ללכת,go,,
 item_313,help,word,action_words,understands; produces,help,help,לעזור,help,,
@@ -504,10 +606,14 @@ item_331,see,word,action_words,understands; produces,see,see,לראות,see,,
 item_332,show,word,action_words,understands; produces,show,show,להראות,show,,
 item_333,sing,word,action_words,understands; produces,sing,sing,לשיר,sing,,
 <<<<<<< HEAD
+<<<<<<< HEAD
 item_334,sleep,word,action_words,understands; produces,sleep,sleep,,sleep,,
 =======
 item_334,sleep,word,action_words,understands; produces,sleep,sleep,sleep,sleep,,
 >>>>>>> Latest files
+=======
+item_334,sleep,word,action_words,understands; produces,sleep,sleep,sleep,sleep,,
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_335,smile,word,action_words,understands; produces,smile,smile,לחייך,smile,,
 item_336,splash,word,action_words,understands; produces,splash,splash,להתיז/ להשפריץ,splash,,
 item_337,stop,word,action_words,understands; produces,stop,stop,לעצור,stop,,
@@ -518,6 +624,7 @@ item_341,throw,word,action_words,understands; produces,throw,throw,לזרוק,th
 item_342,tickle,word,action_words,understands; produces,tickle,tickle,לדגדג,tickle,,
 item_343,touch,word,action_words,understands; produces,touch,touch,לגעת,touch,,
 <<<<<<< HEAD
+<<<<<<< HEAD
 item_344,watch.action,word,action_words,understands; produces,watch (action),watch (action),,watch (action),,
 item_345,walk,word,action_words,understands; produces,walk,walk,,walk,,
 item_346,wash,word,action_words,understands; produces,wash,wash,לרחוץ/ לשטוף,wash,,
@@ -525,19 +632,25 @@ item_347,wipe,word,action_words,understands; produces,wipe,wipe,לנגב,wipe,,
 item_348,write,word,action_words,understands; produces,write,write,לכתוב,write,,
 item_349,day,word,time_words,understands; produces,day,day,,day,,
 =======
+=======
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_344,watch.action,word,action_words,understands; produces,watch (action),watch (action),watch (action),watch (action),,
 item_345,walk,word,action_words,understands; produces,walk,walk,walk,walk,,
 item_346,wash,word,action_words,understands; produces,wash,wash,לרחוץ/ לשטוף,wash,,
 item_347,wipe,word,action_words,understands; produces,wipe,wipe,לנגב,wipe,,
 item_348,write,word,action_words,understands; produces,write,write,לכתוב,write,,
 item_349,day,word,time_words,understands; produces,day,day,day,day,,
+<<<<<<< HEAD
 >>>>>>> Latest files
+=======
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_350,later,word,time_words,understands; produces,later,later,אחר כך,later,,
 item_351,morning,word,time_words,understands; produces,morning,morning,בוקר,morning,,
 item_352,night,word,time_words,understands; produces,night,night,לילה,night,,
 item_353,now,word,time_words,understands; produces,now,now,עכשיו,now,,
 item_354,today,word,time_words,understands; produces,today,today,היום,today,,
 item_355,tomorrow,word,time_words,understands; produces,tomorrow,tomorrow,מחר,tomorrow,,
+<<<<<<< HEAD
 <<<<<<< HEAD
 item_356,tonight,word,time_words,understands; produces,tonight,tonight,,tonight,,
 item_357,allgone,word,descriptive_words,understands; produces,all gone,all gone,,all gone,,
@@ -546,18 +659,24 @@ item_359,bad,word,descriptive_words,understands; produces,bad,bad,רע,bad,,
 item_360,big,word,descriptive_words,understands; produces,big,big,גדול,big,,
 item_361,blue,word,descriptive_words,understands; produces,blue,blue,,blue,,
 =======
+=======
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_356,tonight,word,time_words,understands; produces,tonight,tonight,tonight,tonight,,
 item_357,allgone,word,descriptive_words,understands; produces,all gone,all gone,all gone,all gone,,
 item_358,asleep,word,descriptive_words,understands; produces,asleep,asleep,ישן,asleep,,
 item_359,bad,word,descriptive_words,understands; produces,bad,bad,רע,bad,,
 item_360,big,word,descriptive_words,understands; produces,big,big,גדול,big,,
 item_361,blue,word,descriptive_words,understands; produces,blue,blue,blue,blue,,
+<<<<<<< HEAD
 >>>>>>> Latest files
+=======
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_362,broken,word,descriptive_words,understands; produces,broken,broken,שבור,broken,,
 item_363,careful,word,descriptive_words,understands; produces,careful,careful,זהיר,careful,,
 item_364,clean.description,word,descriptive_words,understands; produces,clean (description),clean (description),נקי,clean (description),,
 item_365,cold,word,descriptive_words,understands; produces,cold,cold,קר,cold,,
 item_366,cute,word,descriptive_words,understands; produces,cute,cute,חמוד,cute,,
+<<<<<<< HEAD
 <<<<<<< HEAD
 item_367,dark,word,descriptive_words,understands; produces,dark,dark,,dark,,
 item_368,dirty,word,descriptive_words,understands; produces,dirty,dirty,מלוכלך,dirty,,
@@ -567,6 +686,8 @@ item_371,fast,word,descriptive_words,understands; produces,fast,fast,,fast,,
 item_372,fine,word,descriptive_words,understands; produces,fine,fine,,fine,,
 item_373,gentle,word,descriptive_words,understands; produces,gentle,gentle,,gentle,,
 =======
+=======
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_367,dark,word,descriptive_words,understands; produces,dark,dark,dark,dark,,
 item_368,dirty,word,descriptive_words,understands; produces,dirty,dirty,מלוכלך,dirty,,
 item_369,dry,word,descriptive_words,understands; produces,dry (description),dry (description),יבש,dry (description),,
@@ -574,38 +695,52 @@ item_370,empty,word,descriptive_words,understands; produces,empty,empty,ריק,e
 item_371,fast,word,descriptive_words,understands; produces,fast,fast,fast,fast,,
 item_372,fine,word,descriptive_words,understands; produces,fine,fine,fine,fine,,
 item_373,gentle,word,descriptive_words,understands; produces,gentle,gentle,gentle,gentle,,
+<<<<<<< HEAD
 >>>>>>> Latest files
+=======
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_374,good,word,descriptive_words,understands; produces,good,good,טוב,good,,
 item_375,happy,word,descriptive_words,understands; produces,happy,happy,שמח,happy,,
 item_376,hard,word,descriptive_words,understands; produces,hard,hard,קשה,hard,,
 item_377,hot,word,descriptive_words,understands; produces,hot,hot,חם,hot,,
 item_378,hungry,word,descriptive_words,understands; produces,hungry,hungry,רעב,hungry,,
 <<<<<<< HEAD
+<<<<<<< HEAD
 item_379,hurt,word,descriptive_words,understands; produces,hurt,hurt,,hurt,,
 =======
 item_379,hurt,word,descriptive_words,understands; produces,hurt,hurt,hurt,hurt,,
 >>>>>>> Latest files
+=======
+item_379,hurt,word,descriptive_words,understands; produces,hurt,hurt,hurt,hurt,,
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_380,little,word,descriptive_words,understands; produces,little (description),little (description),קטן,little (description),,
 item_381,naughty,word,descriptive_words,understands; produces,naughty,naughty,שובב,naughty,,
 item_382,nice,word,descriptive_words,understands; produces,nice,nice,נחמד,nice,,
 item_383,old,word,descriptive_words,understands; produces,old,old,זקן,old,,
 item_384,pretty,word,descriptive_words,understands; produces,pretty,pretty,יפה,pretty,,
 <<<<<<< HEAD
+<<<<<<< HEAD
 item_385,red,word,descriptive_words,understands; produces,red,red,,red,,
 item_386,scared,word,descriptive_words,understands; produces,scared,scared,,scared,,
 item_387,sick,word,descriptive_words,understands; produces,sick,sick,,sick,,
 item_388,sleepy,word,descriptive_words,understands; produces,sleepy,sleepy,,sleepy,,
 =======
+=======
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_385,red,word,descriptive_words,understands; produces,red,red,red,red,,
 item_386,scared,word,descriptive_words,understands; produces,scared,scared,scared,scared,,
 item_387,sick,word,descriptive_words,understands; produces,sick,sick,sick,sick,,
 item_388,sleepy,word,descriptive_words,understands; produces,sleepy,sleepy,sleepy,sleepy,,
+<<<<<<< HEAD
 >>>>>>> Latest files
+=======
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_389,soft,word,descriptive_words,understands; produces,soft,soft,רך,soft,,
 item_390,thirsty,word,descriptive_words,understands; produces,thirsty,thirsty,צמא,thirsty,,
 item_391,tired,word,descriptive_words,understands; produces,tired,tired,עייף,tired,,
 item_392,wet,word,descriptive_words,understands; produces,wet,wet,רטוב,wet,,
 item_393,yucky,word,descriptive_words,understands; produces,yucky,yucky,מגעיל,yucky,,
+<<<<<<< HEAD
 <<<<<<< HEAD
 item_394,his,word,pronouns,understands; produces,his,his,,his,,
 item_395,her,word,pronouns,understands; produces,her,her,,her,,
@@ -617,6 +752,8 @@ item_400,my,word,pronouns,understands; produces,my,my,,my,,
 item_401,that,word,pronouns,understands; produces,that,that,,that,,
 item_402,this,word,pronouns,understands; produces,this,this,,this,,
 =======
+=======
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_394,his,word,pronouns,understands; produces,his,his,his,his,,
 item_395,her,word,pronouns,understands; produces,her,her,her,her,,
 item_396,i,word,pronouns,understands; produces,i,I,אני,I,,
@@ -626,7 +763,10 @@ item_399,mine,word,pronouns,understands; produces,mine,mine,שלי,mine,,
 item_400,my,word,pronouns,understands; produces,my,my,my,my,,
 item_401,that,word,pronouns,understands; produces,that,that,that,that,,
 item_402,this,word,pronouns,understands; produces,this,this,this,this,,
+<<<<<<< HEAD
 >>>>>>> Latest files
+=======
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_403,you,word,pronouns,understands; produces,you,you,אתה/ את,you,,
 item_404,your,word,pronouns,understands; produces,your,your,שלך,your,,
 item_405,how,word,question_words,understands; produces,how,how,איך,how,,
@@ -636,6 +776,7 @@ item_408,where,word,question_words,understands; produces,where,where,איפה,wh
 item_409,who,word,question_words,understands; produces,who,who,מי,who,,
 item_410,why,word,question_words,understands; produces,why,why,למה,why,,
 item_411,away,word,locations,understands; produces,away,away,רחוק,away,,
+<<<<<<< HEAD
 <<<<<<< HEAD
 item_412,back,word,locations,understands; produces,back,back,,back,,
 item_413,down,word,locations,understands; produces,down,down,למטה,down,,
@@ -656,6 +797,8 @@ item_427,other,word,quantifiers,understands; produces,other,other,,other,,
 item_428,same,word,quantifiers,understands; produces,same,same,,same,,
 item_429,some,word,quantifiers,understands; produces,some,some,,some,,
 =======
+=======
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_412,back,word,locations,understands; produces,back,back,back,back,,
 item_413,down,word,locations,understands; produces,down,down,למטה,down,,
 item_414,in,word,locations,understands; produces,in,in,בפנים/ בתוך,in,,
@@ -674,7 +817,10 @@ item_426,not,word,quantifiers,understands; produces,not,not,not,not,,
 item_427,other,word,quantifiers,understands; produces,other,other,other,other,,
 item_428,same,word,quantifiers,understands; produces,same,same,same,same,,
 item_429,some,word,quantifiers,understands; produces,some,some,some,some,,
+<<<<<<< HEAD
 >>>>>>> Latest files
+=======
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_430,armshow,gestures,gestures_first,not yet; sometimes; often,,Extends arm to show you something he/she is holding.,מושיט את היד כדי להראות לך חפץ שהוא מחזיק ביד,Extends arm to show you something he/she is holding.,,gestures_first
 item_431,reachout,gestures,gestures_first,not yet; sometimes; often,,Reaches out and gives you a toy or some object that he/she is holding.,מושיט את היד לתת לך צעצוע או חפץ,Reaches out and gives you a toy or some object that he/she is holding.,,gestures_first
 item_432,points,gestures,gestures_first,not yet; sometimes; often,,Points (with arm and index finger extended) at some interesting object or event.,מצביע (עם היד והאצבע מתוחות) לעבר חפץ או אירוע מעניין,Points (with arm and index finger extended) at some interesting object or event.,,gestures_first
@@ -684,6 +830,7 @@ item_435,shakhead,gestures,gestures_first,not yet; sometimes; often,,"Shakes hea
 item_436,nodhead,gestures,gestures_first,not yet; sometimes; often,,"Nods head ""yes.""","מזיז את הראש למעלה ולמטה כדי לומר ""כן""","Nods head ""yes.""",,gestures_first
 item_437,showhush,gestures,gestures_first,not yet; sometimes; often,,"Gestures ""hush"" by placing finger to lips.","מקרב את האצבע לשפתיים כדי לומר ""ששש...""","Gestures ""hush"" by placing finger to lips.",,gestures_first
 item_438,request,gestures,gestures_first,not yet; sometimes; often,,Requests something by extending arm and opening and closing hand.,מבקש משהו על ידי פתיחה וסגירה של כף היד,Requests something by extending arm and opening and closing hand.,,gestures_first
+<<<<<<< HEAD
 <<<<<<< HEAD
 item_439,blowkiss,gestures,gestures_first,not yet; sometimes; often,,Blows kisses from a distance.,,Blows kisses from a distance.,,gestures_first
 item_440,smacklip,gestures,gestures_first,not yet; sometimes; often,,"Smacks lips in a ""yum yum"" gesture to indicate that something tastes good.",מהדק את השפתיים כדי לציין שמשהו טעים,"Smacks lips in a ""yum yum"" gesture to indicate that something tastes good.",,gestures_first
@@ -695,6 +842,8 @@ item_445,chase,gestures,gestures_games,no; yes,,Play chasing games.,,Play chasin
 item_446,dosing,gestures,gestures_games,no; yes,,Sing.,,Sing.,,gestures_games
 item_447,dodance,gestures,gestures_games,no; yes,,Dance.,,Dance.,,gestures_games
 =======
+=======
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_439,blowkiss,gestures,gestures_first,not yet; sometimes; often,,Blows kisses from a distance.,Blows kisses from a distance.,Blows kisses from a distance.,,gestures_first
 item_440,smacklip,gestures,gestures_first,not yet; sometimes; often,,"Smacks lips in a ""yum yum"" gesture to indicate that something tastes good.",מהדק את השפתיים כדי לציין שמשהו טעים,"Smacks lips in a ""yum yum"" gesture to indicate that something tastes good.",,gestures_first
 item_441,shrugs,gestures,gestures_first,not yet; sometimes; often,,"Shrugs to indicate ""all gone"" or ""where'd it go.""","Shrugs to indicate ""all gone"" or ""where'd it go.""","Shrugs to indicate ""all gone"" or ""where'd it go.""",,gestures_first
@@ -704,11 +853,15 @@ item_444,sobig,gestures,gestures_games,no; yes,,"Play ""so big.""","Play ""so bi
 item_445,chase,gestures,gestures_games,no; yes,,Play chasing games.,Play chasing games.,Play chasing games.,,gestures_games
 item_446,dosing,gestures,gestures_games,no; yes,,Sing.,Sing.,Sing.,,gestures_games
 item_447,dodance,gestures,gestures_games,no; yes,,Dance.,Dance.,Dance.,,gestures_games
+<<<<<<< HEAD
 >>>>>>> Latest files
+=======
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_448,eatspoon,gestures,gestures_objects,no; yes,,Eat with spoon or fork.,לאכול עם כפית או מזלג,Eat with spoon or fork.,,gestures_objects
 item_449,drinkcup,gestures,gestures_objects,no; yes,,Drink from a cup containing liquid.,לשתות מכוס שיש בה משקה,Drink from a cup containing liquid.,,gestures_objects
 item_450,combhair,gestures,gestures_objects,no; yes,,Comb or brush own hair.,להבריש או לסרק את השיער,Comb or brush own hair.,,gestures_objects
 item_451,bshteeth,gestures,gestures_objects,no; yes,,Brush teeth.,לצחצח שיניים עם מברשת שיניים,Brush teeth.,,gestures_objects
+<<<<<<< HEAD
 <<<<<<< HEAD
 item_452,wipeface,gestures,gestures_objects,no; yes,,Wipe face or hands with a towel or cloth.,,Wipe face or hands with a towel or cloth.,,gestures_objects
 item_453,puthat,gestures,gestures_objects,no; yes,,Put on hat.,,Put on hat.,,gestures_objects
@@ -722,6 +875,8 @@ item_460,snifflow,gestures,gestures_objects,no; yes,,Sniff flowers.,עושה ת�
 item_461,pushcar,gestures,gestures_objects,no; yes,,Push toy car or truck.,להסיע מכונית או משאית צעצוע,Push toy car or truck.,,gestures_objects
 item_462,throwges,gestures,gestures_objects,no; yes,,Throw a ball.,,Throw a ball.,,gestures_objects
 =======
+=======
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_452,wipeface,gestures,gestures_objects,no; yes,,Wipe face or hands with a towel or cloth.,Wipe face or hands with a towel or cloth.,Wipe face or hands with a towel or cloth.,,gestures_objects
 item_453,puthat,gestures,gestures_objects,no; yes,,Put on hat.,Put on hat.,Put on hat.,,gestures_objects
 item_454,putshoe,gestures,gestures_objects,no; yes,,Put on shoe or sock.,Put on shoe or sock.,Put on shoe or sock.,,gestures_objects
@@ -733,7 +888,10 @@ item_459,ptndtele,gestures,gestures_objects,no; yes,,Put telephone to ear.,לה�
 item_460,snifflow,gestures,gestures_objects,no; yes,,Sniff flowers.,עושה תנועה של הרחה כשהוא רואה פרחים או תמונות של פרחים,Sniff flowers.,,gestures_objects
 item_461,pushcar,gestures,gestures_objects,no; yes,,Push toy car or truck.,להסיע מכונית או משאית צעצוע,Push toy car or truck.,,gestures_objects
 item_462,throwges,gestures,gestures_objects,no; yes,,Throw a ball.,Throw a ball.,Throw a ball.,,gestures_objects
+<<<<<<< HEAD
 >>>>>>> Latest files
+=======
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_463,ptndpour,gestures,gestures_objects,no; yes,,Pour pretend liquid from one container to another.,מוזג נוזל דמיוני ממיכל אחד לאחר,Pour pretend liquid from one container to another.,,gestures_objects
 item_464,ptndstir,gestures,gestures_objects,no; yes,,Stir pretend liquid in a cup or pan with a spoon.,מערבב נוזל דמיוני בכוס או סיר עם כף,Stir pretend liquid in a cup or pan with a spoon.,,gestures_objects
 item_465,putobed,gestures,gestures_parent,no; yes,,Put to bed.,משכיב בובה או דובי לישון,Put to bed.,,gestures_parent
@@ -748,14 +906,19 @@ item_473,kissit,gestures,gestures_parent,no; yes,,Kiss or hug it.,מנשק או 
 item_474,dressit,gestures,gestures_parent,no; yes,,Try to put shoe or sock or hat on it.,"מנסה לנעול נעל, לגרוב גרב או לחבוש כובע לבובה או לדובי",Try to put shoe or sock or hat on it.,,gestures_parent
 item_475,wipeit,gestures,gestures_parent,no; yes,,Wipe its face or hands.,מנגב את הפנים או הידיים של הבובה או הדובי,Wipe its face or hands.,,gestures_parent
 <<<<<<< HEAD
+<<<<<<< HEAD
 item_476,talkit,gestures,gestures_parent,no; yes,,Talk to it.,,Talk to it.,,gestures_parent
 =======
 item_476,talkit,gestures,gestures_parent,no; yes,,Talk to it.,Talk to it.,Talk to it.,,gestures_parent
 >>>>>>> Latest files
+=======
+item_476,talkit,gestures,gestures_parent,no; yes,,Talk to it.,Talk to it.,Talk to it.,,gestures_parent
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_477,diaperit,gestures,gestures_parent,no; yes,,Try to put diaper on it.,מנסה לחתל את הבובה או את הדובי,Try to put diaper on it.,,gestures_parent
 item_478,sweep,gestures,gestures_adult,no; yes,,Sweep with broom or mop.,לטאטא את הריצפה,Sweep with broom or mop.,,gestures_adult
 item_479,putkey,gestures,gestures_adult,no; yes,,Put key in door or lock.,לשים מפתח במנעול הדלת או לנעול את הדלת,Put key in door or lock.,,gestures_adult
 item_480,pound,gestures,gestures_adult,no; yes,,Pound with hammer or mallet.,לדפוק עם פטיש,Pound with hammer or mallet.,,gestures_adult
+<<<<<<< HEAD
 <<<<<<< HEAD
 item_481,usesaw,gestures,gestures_adult,no; yes,,Attempt to use saw.,,Attempt to use saw.,,gestures_adult
 item_482,type,gestures,gestures_adult,no; yes,,"""Type"" at typewriter or computer keyboard.","""להקליד"" על מקלדת מחשב","""Type"" at typewriter or computer keyboard.",,gestures_adult
@@ -769,6 +932,8 @@ item_489,usecloth,gestures,gestures_adult,no; yes,,Clean with cloth or duster.,�
 item_490,usepen,gestures,gestures_adult,no; yes,,Write with pen or pencil or marker.,"לכתוב עם עט, עפרון או טוש",Write with pen or pencil or marker.,,gestures_adult
 item_491,dig,gestures,gestures_adult,no; yes,,Dig with shovel.,,Dig with shovel.,,gestures_adult
 =======
+=======
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_481,usesaw,gestures,gestures_adult,no; yes,,Attempt to use saw.,Attempt to use saw.,Attempt to use saw.,,gestures_adult
 item_482,type,gestures,gestures_adult,no; yes,,"""Type"" at typewriter or computer keyboard.","""להקליד"" על מקלדת מחשב","""Type"" at typewriter or computer keyboard.",,gestures_adult
 item_483,ptndread,gestures,gestures_adult,no; yes,,"""Read"" (opens book, turns page).","לפתוח ספר ולדפדף (""לקרוא"")","""Read"" (opens book, turns page).",,gestures_adult
@@ -780,5 +945,8 @@ item_488,washdish,gestures,gestures_adult,no; yes,,Wash dishes.,Wash dishes.,Was
 item_489,usecloth,gestures,gestures_adult,no; yes,,Clean with cloth or duster.,לנקות עם מטלית,Clean with cloth or duster.,,gestures_adult
 item_490,usepen,gestures,gestures_adult,no; yes,,Write with pen or pencil or marker.,"לכתוב עם עט, עפרון או טוש",Write with pen or pencil or marker.,,gestures_adult
 item_491,dig,gestures,gestures_adult,no; yes,,Dig with shovel.,Dig with shovel.,Dig with shovel.,,gestures_adult
+<<<<<<< HEAD
 >>>>>>> Latest files
+=======
+>>>>>>> 152c036c46f66bba67afd425814becb136df24f0
 item_492,wearglas,gestures,gestures_adult,no; yes,,Put on glasses.,להרכיב משקפיים,Put on glasses.,,gestures_adult
