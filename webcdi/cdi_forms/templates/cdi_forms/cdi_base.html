@@ -20,6 +20,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.en-CA.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.en-GB.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.nl.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.ko.min.js"></script>
     <script src="{% static 'cdi_forms/selectize.js' %}"></script>
 <!--     <script src="{% static 'cdi_forms/bootstrap-datepicker.js' %}"></script>
  -->    <script src="{% static 'cdi_forms/moment.js' %}"></script>
@@ -90,6 +91,8 @@
                             var due_date_local = moment(due_date_utc).local().locale('fr_CA').format("lll");
                         } else if ("{{language}}" == 'Dutch' ) {
                             var due_date_local = moment(due_date_utc).local().locale('nl').format("lll");
+                        } else if ("{{language_code}}" == 'ko' ) {
+                            var due_date_local = moment(due_date_utc).local().locale('ko').format("lll");
                         } else {
                             var due_date_local = moment(due_date_utc).local().format("lll");
                         }
@@ -185,6 +188,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/jquery.validate.min.js"></script>
 
 {% if language_code == 'nl' %}<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/localization/messages_nl.min.js"></script>{% endif %}
+{% if language_code == 'ko' %}<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/localization/messages_ko.min.js"></script>{% endif %}
 {% if language_code == 'fr' %}<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/localization/messages_fr.min.js"></script>{% endif %}
 {% if language_code == 'es' %}<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/localization/messages_es.min.js"></script>{% endif %}
 

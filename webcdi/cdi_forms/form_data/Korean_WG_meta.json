@@ -1,0 +1,30 @@
+{
+    "parts": [
+        {
+            "id": 1,
+            "title": "PART 1: Words Children Use",
+            "types": [
+                {
+                    "id": "word",
+                    "sections": [
+                        {
+                            "id": "sounds",
+                            "title": "1. Sound Effects And Animal Sounds"
+                        },
+                        {
+                            "id": "animals",
+                            "title": "2. Animals (Real Or Toy)"
+                        },
+                        {
+                            "id": "vehicles",
+                            "title": "3. Vehicles (Real Or Toy)"
+                        }
+                    ],
+                    "text": "Children understand many more words than they say. We are particularly interested in the words your child both understands and SAYS. Please go through the list and mark the words you have heard your child SAY on their own. If your child uses a different pronunciation of a word (for example, \"raffe\" instead of \"giraffe\" or \"sketti\" for \"spaghetti\") or says a different word that has a similar meaning as the word listed here (e.g., \"nana\" for \"grandma\"), go ahead and mark it. Remember that this is a \"catalogue\" of all the words that are used by many different children. Don't worry if your child only says a few of these right now.",
+                    "title": "A: Vocabulary Checklist",
+                    "type": "checkbox"
+                }
+            ]
+        }
+    ]
+}
