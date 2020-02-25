@@ -54,6 +54,7 @@ ADMINS = (
 MANAGERS = ADMINS
 
 ALLOWED_HOSTS = [
+    '.us-west-2.elasticbeanstalk.com',
     'webcdi-prod-py36.us-west-2.elasticbeanstalk.com',
     'webcdi-dev-py36.us-west-2.elasticbeanstalk.com', 
     'ec2-34-208-105-171.us-west-2.compute.amazonaws.com',
