@@ -685,8 +685,8 @@ def prefilled_cdi_data(administration_instance):
                     item_type['objects'] = x
                     if administration_instance.study.show_feedback: raw_objects.extend(x)
         #print (raw_objects)
-        if administration_instance.study.show_feedback: data['cdi_items'] = json.dumps(raw_objects)#, cls=DjangoJSONEncoder)
-
+        data['cdi_items'] = json.dumps(raw_objects)#, cls=DjangoJSONEncoder)
+        
         # If age is stored in database, add it to dictionary
         try:
             age = BackgroundInfo.objects.values_list('age', flat=True).get(administration = administration_instance)
