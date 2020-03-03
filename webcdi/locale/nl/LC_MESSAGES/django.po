@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-18 10:34+0000\n"
+"POT-Creation-Date: 2020-03-03 17:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: webcdi/cdi_forms/forms.py:25 webcdi/cdi_forms/forms.py:26
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:150
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:143
 msgid "No"
 msgstr "Nee"
 
@@ -1412,7 +1412,7 @@ msgstr "Wie vult de vragenlijst in?"
 #: webcdi/cdi_forms/templates/cdi_forms/background_info.html:7
 #: webcdi/cdi_forms/templates/cdi_forms/background_info.html:56
 #: webcdi/cdi_forms/templates/cdi_forms/study_group.html:7
-#: webcdi/cdi_forms/views.py:243 webcdi/cdi_forms/views.py:514
+#: webcdi/cdi_forms/views.py:243 webcdi/cdi_forms/views.py:519
 msgid "Next"
 msgstr "Volgende"
 
@@ -1531,7 +1531,7 @@ msgstr "Afronden"
 #: webcdi/cdi_forms/templates/cdi_forms/backpage_info.html:12
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:14
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:327
-#: webcdi/cdi_forms/views.py:256 webcdi/cdi_forms/views.py:750
+#: webcdi/cdi_forms/views.py:256 webcdi/cdi_forms/views.py:755
 msgid "Go back to Background Info"
 msgstr "Terug naar achtergrondinformatie"
 
@@ -1587,27 +1587,27 @@ msgstr ""
 "U kunt de tab en de pijltjestoetsen gebruiken om snel tussen de vragen te "
 "navigeren en ze te beantwoorden."
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:97
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:90
 msgid "Due date"
 msgstr "Uiterlijk invullen voor"
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:102
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:95
 msgid "Show waiver of documentation"
 msgstr "Laat toestemmingsverklaring zien"
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:107
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:100
 msgid "Reach out to the Web-CDI Team!"
 msgstr "Neem contact op met het Web-CDI Team"
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:151
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:144
 msgid "Okay"
 msgstr "Ik geef toestemming"
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:164
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:157
 msgid "Waiver Denied"
 msgstr "Ik geef geen toestemming"
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:168
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:161
 msgid ""
 "Thank you for your response. We are unable to continue. Please close the "
 "window. If you would like, you may review the Waiver."
@@ -1615,20 +1615,20 @@ msgstr ""
 "Dank u voor uw antwoord. U kunt het scherm sluiten. U kunt de "
 "toestemmingsverklaring opnieuw bekijken, mocht u dat willen."
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:171
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:164
 msgid "Review Waiver"
 msgstr "Toestemmingsverklaring opnieuw bekijken"
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:10
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:326
 #: webcdi/cdi_forms/templates/cdi_forms/study_group.html:6
-#: webcdi/cdi_forms/views.py:738
+#: webcdi/cdi_forms/views.py:743
 msgid "Save"
 msgstr "Opslaan"
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:11
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:322
-#: webcdi/cdi_forms/views.py:755
+#: webcdi/cdi_forms/views.py:760
 msgid "Submit"
 msgstr "Sturen"
 
@@ -2132,19 +2132,19 @@ msgid "Born between STARTDATE and ENDDATE"
 msgstr "Geboren tussen STARTDATE en ENDDATE"
 
 #: webcdi/cdi_forms/views.py:133 webcdi/cdi_forms/views.py:322
-#: webcdi/cdi_forms/views.py:564
+#: webcdi/cdi_forms/views.py:569
 #, python-format
 msgid "Your child should be between %(min_age)d to %(max_age)d months of age."
 msgstr "Uw kind moet tussen de %(min_age)d en %(max_age)d maanden oud zijn."
 
 #: webcdi/cdi_forms/views.py:146 webcdi/cdi_forms/views.py:335
-#: webcdi/cdi_forms/views.py:577
+#: webcdi/cdi_forms/views.py:582
 #, python-format
 msgid " Not the right age? <a href='%(sgurl)s'> Click here</a>"
 msgstr "Niet de goede leeftijd? <a href='%(sgurl)s'> Klik hier</a>"
 
 #: webcdi/cdi_forms/views.py:150 webcdi/cdi_forms/views.py:339
-#: webcdi/cdi_forms/views.py:581
+#: webcdi/cdi_forms/views.py:586
 msgid ""
 " Not the right age? You should contact your researcher for steps on what to "
 "do next."
