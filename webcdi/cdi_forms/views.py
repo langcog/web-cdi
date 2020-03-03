@@ -355,6 +355,8 @@ class CreateBackgroundInfoView(CreateView):
         return response
 
     def form_valid(self, form):
+        # I don't think is is ever used!
+
         if self.study.study_group:
             related_studies = study.objects.filter(researcher=researcher, study_group=self.study.study_group)
             max_subject_id = administration.objects.filter(study__in=related_studies).aggregate(Max('subject_id'))['subject_id__max']
@@ -400,7 +402,10 @@ class CreateBackgroundInfoView(CreateView):
             if max_subject_id is None: # If the max subject ID could not be found (e.g., study has 0 participants)
                 max_subject_id = 0 # Mark as zero
             from researcher_UI.views import random_url_generator            
-            administration_instance = administration.objects.create(study =self.study, subject_id = max_subject_id+1, repeat_num = 1, url_hash = random_url_generator(), completed = False, due_date = datetime.datetime.now()+datetime.timedelta(days=self.study.test_period)) # Create an administration object for participant within database
+            administration_instance = administration.objects.create(study =self.study, subject_id = max_subject_id+1, repeat_num = 1, \
+                url_hash = random_url_generator(), completed = False, \
+                #due_date = datetime.datetime.now()+datetime.timedelta(days=self.study.test_period)) # Create an administration object for participant within database
+                due_date = timezone.now()+datetime.timedelta(days=self.study.test_period)) # Create an administration object for participant within database
             self.hash_id = administration_instance.url_hash
             if self.bypass: # If the user explicitly wanted to continue with the test despite being told they would not be compensated
                 administration_instance.bypass = True # Mark administration object with 'bypass'
