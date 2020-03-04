@@ -98,7 +98,7 @@
 	{
 		"language": "Canadian English",
 		"form": "WG",
-		"verbose_name": "Words and Gertures",
+		"verbose_name": "Words and Gestures",
 		"min_age": 8,
 		"max_age": 16,
 		"csv_file": "cdi_form_csv/[Canadian_English_WG].csv",
@@ -236,7 +236,7 @@
 	{
 		"language": "Canadian English",
 		"form": "WG2",
-		"verbose_name": "Words and Gertures",
+		"verbose_name": "Words and Gestures",
 		"min_age": 8,
 		"max_age": 16,
 		"csv_file": "cdi_form_csv/[Canadian_English_WG].csv",
