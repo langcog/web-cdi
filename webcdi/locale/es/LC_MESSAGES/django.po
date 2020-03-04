@@ -2065,7 +2065,7 @@ msgstr "Contar en Facebook"
 #: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:243
 #: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:248
 msgid "Save as PDF"
-msgstr "Guardar como pdf"
+msgstr "Guardar como PDF"
 
 #: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:350
 #: webcdi/cdi_forms/templates/cdi_forms/printable_cdiBAK.html:260

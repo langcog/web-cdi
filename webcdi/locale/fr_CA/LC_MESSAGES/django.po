@@ -1878,7 +1878,7 @@ msgstr "comprend et dit"
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_items.html:17
 msgid "Hide/Show Instructions: "
-msgstr "Masquer/afficher les instructions: "
+msgstr "Afficher/Masquer Instructions: "
 
 #: webcdi/cdi_forms/templates/cdi_forms/overflow.html:37
 #: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:155
@@ -2070,7 +2070,7 @@ msgstr "Partagez sur Facebook"
 #: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:243
 #: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:248
 msgid "Save as PDF"
-msgstr "Enregistrer au format PDF"
+msgstr "Enregistrer au PDF"
 
 #: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:350
 #: webcdi/cdi_forms/templates/cdi_forms/printable_cdiBAK.html:260
