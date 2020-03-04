@@ -366,7 +366,8 @@ class CreateBackgroundInfoView(CreateView):
         if max_subject_id is None: # If the max subject ID could not be found (e.g., study has 0 participants)
             max_subject_id = 0 # Mark as zero
         from researcher_UI.views import random_url_generator            
-        new_admin = administration.objects.create(study =self.study, subject_id = max_subject_id+1, repeat_num = 1, url_hash = random_url_generator(), completed = False, due_date = datetime.datetime.now()+datetime.timedelta(days=self.study.test_period)) # Create an administration object for participant within database
+        #new_admin = administration.objects.create(study =self.study, subject_id = max_subject_id+1, repeat_num = 1, url_hash = random_url_generator(), completed = False, due_date = datetime.datetime.now()+datetime.timedelta(days=self.study.test_period)) # Create an administration object for participant within database
+        new_admin = administration.objects.create(study =self.study, subject_id = max_subject_id+1, repeat_num = 1, url_hash = random_url_generator(), completed = False, due_date = timezone.now()+datetime.timedelta(days=self.study.test_period)) # Create an administration object for participant within database
         self.hash_id = new_admin.url_hash
         if self.bypass: # If the user explicitly wanted to continue with the test despite being told they would not be compensated
             new_admin.bypass = True # Mark administration object with 'bypass'
