@@ -394,9 +394,20 @@ class BackgroundForm(BetterModelForm):
             rows.append(Fieldset('', *hidden_fields))
             self.helper.layout = Layout(*rows)
 
-            if not 'birth_weight_lb' in selected_fields and not 'birth_weight_kg' in selected_fields:
+            if 'birth_weight_lb' in selected_fields:
+                self.birth_weight_required = True
+                if len(self.fields['birth_weight_lb'].widget.choices) < 1:
+                    self.fields['birth_weight_lb'].widget.choices = BIRTH_WEIGHT_LB_CHOICES
+            elif 'birth_weight_kg' in selected_fields:
+                self.birth_weight_required = True
+                if len(self.fields['birth_weight_kg'].widget.choices) < 1:
+                    self.fields['birth_weight_kg'].widget.choices = BIRTH_WEIGHT_LB_CHOICES
+            else:
                 self.birth_weight_required = False
-            else : self.birth_weight_required = True
+
+            if 'annual_income' in selected_fields:
+                if len(self.fields['annual_income'].widget.choices) < 1:
+                    self.fields['annual_income'].widget.choices = INCOME_CHOICES
            
         # otherwise use the standard format
         else:            

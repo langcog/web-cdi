@@ -84,15 +84,8 @@
                         <script type="text/javascript">
                         var due_date = "{{ due_date }}";
                         var due_date_utc = moment.utc(due_date, "MMM DD, YYYY, hh:mm a");
-                        if ("{{language}}" == 'Spanish') {
-                            var due_date_local = moment(due_date_utc).local().locale('es').format("lll");
-                        } else if ("{{language}}" == 'French Quebec') {
-                            var due_date_local = moment(due_date_utc).local().locale('fr_CA').format("lll");
-                        } else if ("{{language}}" == 'Dutch' ) {
-                            var due_date_local = moment(due_date_utc).local().locale('nl').format("lll");
-                        } else {
-                            var due_date_local = moment(due_date_utc).local().format("lll");
-                        }
+                        var due_date_local = moment(due_date_utc).local().locale('{{ language_code }}').format("lll");
+                        console.log(due_date, due_date_utc, due_date_local)
                         
                         $('#due_time').html("<p><b> {% trans 'Due date' %} </b>: <span>" + due_date_local + "</span></p>");
                         </script>
