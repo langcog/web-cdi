@@ -67,6 +67,7 @@ def download_data(request, study_obj, administrations = None): # Download study 
     response['Content-Disposition'] = 'attachment; filename="' + filename + '"'# Name the CSV response
     
     administrations = administrations if administrations is not None else administration.objects.filter(study = study_obj)
+    administrations = administrations.exclude(opt_out=True)
     model_header = get_model_header(study_obj.instrument.name) # Fetch the associated instrument model's variables
 
     # Fetch administration variables
@@ -185,6 +186,7 @@ def download_summary(request, study_obj, administrations = None): # Download stu
     response['Content-Disposition'] = 'attachment; filename="' + filename + '"'# Name the CSV response
     
     administrations = administrations if administrations is not None else administration.objects.filter(study = study_obj)
+    administrations = adminitrations.exclude(opt_out=True)
 
     # Fetch administration variables
     admin_header = ['study_name', 'subject_id','local_lab_id','repeat_num', 'administration_id', 'link', 'completed', 'completedBackgroundInfo', 'due_date', 'last_modified','created_date']
@@ -1203,5 +1205,17 @@ class EditLocalLabIdView(LoginRequiredMixin, StudyOwnerMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         ctx = super(EditLocalLabIdView, self).get_context_data(**kwargs)
+        self.study = ctx ['study'] = self.object.study
+        return ctx
+
+class EditOptOutView(LoginRequiredMixin, StudyOwnerMixin, UpdateView):
+    model = administration
+    form_class = EditOptOutForm
+
+    def get_success_url(self):
+        return reverse('console', kwargs={'study_name':self.object.study.name})
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
         self.study = ctx ['study'] = self.object.study
         return ctx

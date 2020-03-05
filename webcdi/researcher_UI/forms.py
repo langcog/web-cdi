@@ -212,3 +212,11 @@ class EditLocalLabIDForm(forms.ModelForm):
         widgets = {
             'study' : forms.HiddenInput()
         }
+
+class EditOptOutForm(forms.ModelForm):
+    class Meta:
+        model = administration
+        fields = ['opt_out', 'study']
+        widgets = {
+            'study' : forms.HiddenInput()
+        }

@@ -9,7 +9,18 @@
     {% for type in part.types %}
     <div id = "{{ type.id }}_div" class = "page_div collapse">
         <h3 id = "{{ type.id }}"> {{ type.title }}</h3>
-        <p class="lead"> {{ type.text | capfirst }}</p>
+        <div id="sectionInstructions{{type.id}}" {% if type.sections|length > 1 and type.text|length > 0 %}class = "collapse in"{% endif %} style="font-size: .85em;">
+            <p class="lead"> {{ type.text | capfirst }}</p>
+        </div>
+        {% if type.sections|length > 1 and type.text|length > 0 %}
+            <a href="#sectionInstructions{{type.id}}" data-toggle="collapse" id="section_instructions_title">
+                {% trans "Hide/Show Instructions: " %} <i class="material-icons">arrow_drop_up</i>
+            </a>
+            <script>
+                $("#sectionInstructions{{type.id}}").collapse('show');
+            </script>
+        {% endif %}
+
         <div class="row alternate-color">
             {% for object in type.objects %}
                 {% if 'textbox' in object.item %}

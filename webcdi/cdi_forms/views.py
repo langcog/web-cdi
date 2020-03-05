@@ -55,7 +55,7 @@ def get_model_header(name):
     return list(model_map(name).values_list('itemID', flat=True))
     
 # If the BackgroundInfo model was filled out before, populate BackgroundForm with responses based on administation object
-def prefilled_background_form(administration_instance):
+def prefilled_background_form(administration_instance, front_page=True):
     background_instance = BackgroundInfo.objects.get(administration = administration_instance)
     
     context = {}
@@ -64,8 +64,10 @@ def prefilled_background_form(administration_instance):
     context['min_age'] = administration_instance.study.min_age
     context['max_age'] = administration_instance.study.max_age
     context['birthweight_units'] = administration_instance.study.birth_weight_units
-
-    background_form = BackgroundForm(instance = background_instance, context = context)  
+    
+    if front_page: background_form = BackgroundForm(instance = background_instance, context = context)  
+    else: 
+        background_form = BackpageBackgroundForm(instance = background_instance, context = context)  
     return background_form
 
 # Find the administration object for a test-taker based on their unique hash code.
@@ -353,6 +355,8 @@ class CreateBackgroundInfoView(CreateView):
         return response
 
     def form_valid(self, form):
+        # I don't think is is ever used!
+
         if self.study.study_group:
             related_studies = study.objects.filter(researcher=researcher, study_group=self.study.study_group)
             max_subject_id = administration.objects.filter(study__in=related_studies).aggregate(Max('subject_id'))['subject_id__max']
@@ -362,7 +366,8 @@ class CreateBackgroundInfoView(CreateView):
         if max_subject_id is None: # If the max subject ID could not be found (e.g., study has 0 participants)
             max_subject_id = 0 # Mark as zero
         from researcher_UI.views import random_url_generator            
-        new_admin = administration.objects.create(study =self.study, subject_id = max_subject_id+1, repeat_num = 1, url_hash = random_url_generator(), completed = False, due_date = datetime.datetime.now()+datetime.timedelta(days=self.study.test_period)) # Create an administration object for participant within database
+        #new_admin = administration.objects.create(study =self.study, subject_id = max_subject_id+1, repeat_num = 1, url_hash = random_url_generator(), completed = False, due_date = datetime.datetime.now()+datetime.timedelta(days=self.study.test_period)) # Create an administration object for participant within database
+        new_admin = administration.objects.create(study =self.study, subject_id = max_subject_id+1, repeat_num = 1, url_hash = random_url_generator(), completed = False, due_date = timezone.now()+datetime.timedelta(days=self.study.test_period)) # Create an administration object for participant within database
         self.hash_id = new_admin.url_hash
         if self.bypass: # If the user explicitly wanted to continue with the test despite being told they would not be compensated
             new_admin.bypass = True # Mark administration object with 'bypass'
@@ -398,7 +403,10 @@ class CreateBackgroundInfoView(CreateView):
             if max_subject_id is None: # If the max subject ID could not be found (e.g., study has 0 participants)
                 max_subject_id = 0 # Mark as zero
             from researcher_UI.views import random_url_generator            
-            administration_instance = administration.objects.create(study =self.study, subject_id = max_subject_id+1, repeat_num = 1, url_hash = random_url_generator(), completed = False, due_date = datetime.datetime.now()+datetime.timedelta(days=self.study.test_period)) # Create an administration object for participant within database
+            administration_instance = administration.objects.create(study =self.study, subject_id = max_subject_id+1, repeat_num = 1, \
+                url_hash = random_url_generator(), completed = False, \
+                #due_date = datetime.datetime.now()+datetime.timedelta(days=self.study.test_period)) # Create an administration object for participant within database
+                due_date = timezone.now()+datetime.timedelta(days=self.study.test_period)) # Create an administration object for participant within database
             self.hash_id = administration_instance.url_hash
             if self.bypass: # If the user explicitly wanted to continue with the test despite being told they would not be compensated
                 administration_instance.bypass = True # Mark administration object with 'bypass'
@@ -683,8 +691,8 @@ def prefilled_cdi_data(administration_instance):
                     item_type['objects'] = x
                     if administration_instance.study.show_feedback: raw_objects.extend(x)
         #print (raw_objects)
-        if administration_instance.study.show_feedback: data['cdi_items'] = json.dumps(raw_objects)#, cls=DjangoJSONEncoder)
-
+        data['cdi_items'] = json.dumps(raw_objects)#, cls=DjangoJSONEncoder)
+        
         # If age is stored in database, add it to dictionary
         try:
             age = BackgroundInfo.objects.values_list('age', flat=True).get(administration = administration_instance)
@@ -857,12 +865,17 @@ def printable_view(request, hash_id):
     try:
         #Get form from database
         background_form = prefilled_background_form(administration_instance)
+        filename = os.path.realpath(PROJECT_ROOT + '/form_data/background_info/' + administration_instance.study.instrument.name + '_back.json')
+        if os.path.isfile(filename) :
+            backpage_background_form = prefilled_background_form(administration_instance, False)
     except:
         #Blank form
         background_form = BackgroundForm(context = context)
-
+    
     prefilled_data['language'] = administration_instance.study.instrument.language
     prefilled_data['background_form'] = background_form
+    try: prefilled_data['backpage_background_form'] = backpage_background_form
+    except: pass
     prefilled_data['hash_id'] = hash_id
     prefilled_data['gift_code'] = None
     prefilled_data['gift_amount'] = None
@@ -1110,7 +1123,7 @@ def update_administration_data_item(request):
 
     if len(value) > 0:
         administration_data.objects.update_or_create(administration = administration_instance, item_ID = request.POST['item'], defaults = {'value': value})
-    else:
+    elif administration_data.objects.filter(administration = administration_instance, item_ID = request.POST['item']).exists():
         administration_data.objects.get(administration = administration_instance, item_ID = request.POST['item']).delete()
     administration.objects.filter(url_hash = hash_id).update(last_modified = timezone.now()) # Update administration object with date of last modification
     #update_summary_scores(administration_instance)

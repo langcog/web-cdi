@@ -19,8 +19,8 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % "
 "1 == 0) ? 1: (n % 10 == 0 && n % 1 == 0 && n > 10) ? 2 : 3;\n"
 
-#: cdi_forms/forms.py:25 cdi_forms/forms.py:26
-#: cdi_forms/templates/cdi_forms/cdi_base.html:147
+#: webcdi/cdi_forms/forms.py:25 webcdi/cdi_forms/forms.py:26
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:143
 msgid "No"
 msgstr "לא"
 
@@ -372,27 +372,27 @@ msgstr ""
 msgid "dd/mm/yyyy"
 msgstr ""
 
-#: cdi_forms/forms.py:401 cdi_forms/models.py:136
+#: webcdi/cdi_forms/forms.py:419 webcdi/cdi_forms/models.py:136
 msgid "Estimated Annual Family Income (in USD)"
 msgstr "הכנסה משפחתית חודשית בשקלים"
 
-#: cdi_forms/forms.py:405
+#: webcdi/cdi_forms/forms.py:423
 msgid "My child is (check all that apply):"
 msgstr "הילד שלי (נא לסמן את כל מה שרלוונטי):"
 
-#: cdi_forms/forms.py:409
+#: webcdi/cdi_forms/forms.py:427
 msgid "Basic Information"
 msgstr "מידע בסיסי"
 
-#: cdi_forms/forms.py:410
+#: webcdi/cdi_forms/forms.py:428
 msgid "Family Background"
 msgstr "רקע משפחתי"
 
-#: cdi_forms/forms.py:411
+#: webcdi/cdi_forms/forms.py:429
 msgid "Child's Ethnicity"
 msgstr ""
 
-#: cdi_forms/forms.py:411
+#: webcdi/cdi_forms/forms.py:429
 msgid ""
 "The following information is being collected for the sole purpose of "
 "reporting to our grant-funding institute, i.e.,  NIH (National Institute of "
@@ -400,31 +400,31 @@ msgid ""
 "inclusiveness of our research. Your cooperation is appreciated, but optional."
 msgstr ""
 
-#: cdi_forms/forms.py:412
+#: webcdi/cdi_forms/forms.py:430
 msgid "Caregiver Information"
 msgstr "מידע על ההורים"
 
-#: cdi_forms/forms.py:413
+#: webcdi/cdi_forms/forms.py:431
 msgid "Language Exposure"
 msgstr "חשיפה לשפות"
 
-#: cdi_forms/forms.py:416
+#: webcdi/cdi_forms/forms.py:434
 msgid "Health"
 msgstr "בריאות"
 
-#: cdi_forms/forms.py:452
+#: webcdi/cdi_forms/forms.py:470
 msgid "Your Name"
 msgstr "שמך"
 
-#: cdi_forms/forms.py:453
+#: webcdi/cdi_forms/forms.py:471
 msgid "Your Email Address"
 msgstr "כתובת המייל שלך"
 
-#: cdi_forms/forms.py:454
+#: webcdi/cdi_forms/forms.py:472
 msgid "Your Test URL"
 msgstr "הקישור שלך לשאלון"
 
-#: cdi_forms/forms.py:455
+#: webcdi/cdi_forms/forms.py:473
 msgid "What would you like to tell us?"
 msgstr "מה תרצה לספר לנו?"
 
@@ -1385,16 +1385,17 @@ msgstr "שני ההורים"
 msgid "Who is filling in the form?"
 msgstr "מי ממלא את השאלון?"
 
-#: cdi_forms/templates/cdi_forms/background_info.html:7
-#: cdi_forms/templates/cdi_forms/background_info.html:56
-#: cdi_forms/templates/cdi_forms/study_group.html:7 cdi_forms/views.py:239
-#: cdi_forms/views.py:338
+#: webcdi/cdi_forms/templates/cdi_forms/background_info.html:7
+#: webcdi/cdi_forms/templates/cdi_forms/background_info.html:56
+#: webcdi/cdi_forms/templates/cdi_forms/study_group.html:7
+#: webcdi/cdi_forms/views.py:243 webcdi/cdi_forms/views.py:519
 msgid "Next"
 msgstr "הבא"
 
-#: cdi_forms/templates/cdi_forms/background_info.html:18
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:33
-#: cdi_forms/templates/cdi_forms/study_group.html:15
+#: webcdi/cdi_forms/templates/cdi_forms/background_info.html:18
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:34
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdiBAK.html:33
+#: webcdi/cdi_forms/templates/cdi_forms/study_group.html:15
 msgid "MacArthur-Bates Communicative Development Inventory"
 msgstr "MacArthur-Bates Communicative Development Inventory"
 
@@ -1481,23 +1482,25 @@ msgstr "תודה רבה! אנחנו מעריכים מאוד את הזמן והמ
 msgid "Background Information"
 msgstr "פרטי רקע"
 
-#: cdi_forms/templates/cdi_forms/background_info.html:61
-#: cdi_forms/templates/cdi_forms/backpage_info.html:37
-#: cdi_forms/templates/cdi_forms/cdi_form.html:338
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:183
-#: cdi_forms/templates/cdi_forms/study_group.html:113
+#: webcdi/cdi_forms/templates/cdi_forms/background_info.html:61
+#: webcdi/cdi_forms/templates/cdi_forms/backpage_info.html:37
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:338
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:273
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdiBAK.html:183
+#: webcdi/cdi_forms/templates/cdi_forms/study_group.html:113
 msgid "Form unavailable. Contact admin."
 msgstr "טופס לא נמצא. פנה למנהל האתר."
 
-#: cdi_forms/templates/cdi_forms/backpage_info.html:8
-#: cdi_forms/templates/cdi_forms/backpage_info.html:34 cdi_forms/views.py:246
+#: webcdi/cdi_forms/templates/cdi_forms/backpage_info.html:8
+#: webcdi/cdi_forms/templates/cdi_forms/backpage_info.html:34
+#: webcdi/cdi_forms/views.py:250
 msgid "Finish"
 msgstr "סיום"
 
-#: cdi_forms/templates/cdi_forms/backpage_info.html:12
-#: cdi_forms/templates/cdi_forms/cdi_form.html:14
-#: cdi_forms/templates/cdi_forms/cdi_form.html:327 cdi_forms/views.py:252
-#: cdi_forms/views.py:570
+#: webcdi/cdi_forms/templates/cdi_forms/backpage_info.html:12
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:14
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:327
+#: webcdi/cdi_forms/views.py:256 webcdi/cdi_forms/views.py:755
 msgid "Go back to Background Info"
 msgstr "חזור לפרטי רקע"
 
@@ -1544,48 +1547,46 @@ msgid ""
 msgstr ""
 "ניתן להשתמש בכפתור tab ובחצים כדי לנווט במסמך ולענות על שאלות."
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:94
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:90
 msgid "Due date"
 msgstr "תאריך אחרון לשליחת השאלון (תאריך התפוגה של השאלון"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:99
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:95
 msgid "Show waiver of documentation"
 msgstr ""
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:104
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:100
 msgid "Reach out to the Web-CDI Team!"
 msgstr "צור קשר עם צוות Web-CDI"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:148
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:144
 msgid "Okay"
 msgstr "כן"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:161
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:157
 msgid "Waiver Denied"
 msgstr ""
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:165
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:161
 msgid ""
 "Thank you for your response. We are unable to continue. Please close the "
 "window. If you would like, you may review the Waiver."
 msgstr ""
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:168
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:164
 msgid "Review Waiver"
 msgstr ""
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:184
-msgid "Please fill in this field"
-msgstr "נא למלא שדה זה"
-
-#: cdi_forms/templates/cdi_forms/cdi_form.html:10
-#: cdi_forms/templates/cdi_forms/cdi_form.html:326
-#: cdi_forms/templates/cdi_forms/study_group.html:6 cdi_forms/views.py:558
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:10
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:326
+#: webcdi/cdi_forms/templates/cdi_forms/study_group.html:6
+#: webcdi/cdi_forms/views.py:743
 msgid "Save"
 msgstr "שמור"
 
-#: cdi_forms/templates/cdi_forms/cdi_form.html:11
-#: cdi_forms/templates/cdi_forms/cdi_form.html:322 cdi_forms/views.py:575
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:11
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:322
+#: webcdi/cdi_forms/views.py:760
 msgid "Submit"
 msgstr "שלח"
 
@@ -1809,13 +1810,19 @@ msgstr "האם אתה מוכן להגיש? לא תוכל לשנות את תשו�
 msgid "understands and says"
 msgstr "מבין ואומר"
 
-#: cdi_forms/templates/cdi_forms/overflow.html:37
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:85
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_items.html:17
+msgid "Hide/Show Instructions: "
+msgstr ""
+
+#: webcdi/cdi_forms/templates/cdi_forms/overflow.html:37
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:155
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdiBAK.html:85
 msgid "MB-CDI Lab Logo"
 msgstr ""
 
-#: cdi_forms/templates/cdi_forms/overflow.html:40
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:88
+#: webcdi/cdi_forms/templates/cdi_forms/overflow.html:40
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:158
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdiBAK.html:88
 msgid "Thank you!"
 msgstr "תודה!"
 
@@ -1854,11 +1861,27 @@ msgid ""
 "interest!"
 msgstr ""
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:34
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:35
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdiBAK.html:34
 msgid "Interesting tidbits learned from how your child speaks!"
 msgstr "מידע מעניין על הדיבור של ילדך!"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:90
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:69
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdiBAK.html:374
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdiBAK.html:392
+#, python-format
+msgid "Words Produced (%%)"
+msgstr ""
+
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:109
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdiBAK.html:320
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdiBAK.html:337
+#, python-format
+msgid "Words Understood (%%)"
+msgstr ""
+
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:160
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdiBAK.html:90
 msgid ""
 "Thank you for taking the time to complete the MacArthur-Bates Communicative "
 "Development Inventory (CDI). With the help of parents and caregivers like "
@@ -1884,6 +1907,9 @@ msgstr ""
 "\">כאן</a>. אנו מודים לך מקרב לב על השתתפותך במחקר!"
 
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:97
+
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:167
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdiBAK.html:97
 #, python-format
 msgid ""
 "We're sorry but it looks like we have run out of Amazon.com Gift Cards! "
@@ -1891,7 +1917,8 @@ msgid ""
 "we will quickly fix this issue."
 msgstr ""
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:102
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:172
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdiBAK.html:102
 msgid ""
 "Thank you for participating in our Web-CDI project! It is our pleasure to "
 "send you this Amazon.com Gift Card that can be redeemed towards millions of "
@@ -1900,15 +1927,18 @@ msgid ""
 "the gift card claim code below."
 msgstr ""
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:106
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:176
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdiBAK.html:106
 msgid "Gift Card Amount"
 msgstr ""
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:107
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:177
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdiBAK.html:107
 msgid "Claim Code"
 msgstr ""
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:111
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:181
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdiBAK.html:111
 #, python-format
 msgid ""
 "To redeem your gift card, visit <a href=\"%(redeem_url)s\" target=\"_blank"
@@ -1916,11 +1946,13 @@ msgid ""
 "\" target=\"_blank\">www.amazon.com/gc-legal</a>."
 msgstr ""
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:129
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:199
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdiBAK.html:129
 msgid "Graph My Data!"
 msgstr "צור גרף מהנתונים שלי"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:135
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:205
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdiBAK.html:135
 msgid "Show Me My Answers"
 msgstr "הראה לי את התשובות שלי"
 
@@ -1963,19 +1995,29 @@ msgstr "מילים שאומר (%%)"
 msgid "My child produces the most words in the bestProdCat category."
 msgstr "הילד שלי אומר הכי הרבה מילים מקטגוריה bestProdCat "
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:523
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:497
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdiBAK.html:531
 msgid "My child understands the most words in the bestCompCat category."
 msgstr "הילד שלי מבין הכי הרבה מילים מקטגוריה bestCompCat"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:609
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:583
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdiBAK.html:617
 msgid "The hardest word my child says is INSERTWORDHERE."
 msgstr "המילה הכי קשה שהילד/ה שלי אומר/ת היא INSERTWORDHERE:"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:613
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:587
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdiBAK.html:621
 msgid "The hardest word my child understands is INSERTWORDHERE."
 msgstr "המילה הכי קשה שהילד/ה שלי מבין/ה היא INSERTWORDHERE"
 
-#: cdi_forms/templates/cdi_forms/study_group.html:46
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdiBAK.html:317
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdiBAK.html:319
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdiBAK.html:371
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdiBAK.html:373
+msgid "Category"
+msgstr ""
+
+#: webcdi/cdi_forms/templates/cdi_forms/study_group.html:46
 msgid "How old is your child?"
 msgstr "בין כמה הילד/ה שלך?"
 
@@ -1989,17 +2031,20 @@ msgstr ""
 msgid "Born between STARTDATE and ENDDATE"
 msgstr ""
 
-#: cdi_forms/views.py:129 cdi_forms/views.py:388
+#: webcdi/cdi_forms/views.py:133 webcdi/cdi_forms/views.py:322
+#: webcdi/cdi_forms/views.py:569
 #, python-format
 msgid "Your child should be between %(min_age)d to %(max_age)d months of age."
 msgstr "לפי הרישומים שלנו הילד שלך אמור להיות בין גיל %(min_age)d לגיל %(max_age)d חודשים."
 
-#: cdi_forms/views.py:142 cdi_forms/views.py:401
+#: webcdi/cdi_forms/views.py:146 webcdi/cdi_forms/views.py:335
+#: webcdi/cdi_forms/views.py:582
 #, python-format
 msgid " Not the right age? <a href='%(sgurl)s'> Click here</a>"
 msgstr "לא הגיל הנכון? <a href='%(sgurl)s'> לחץ כאן</a>"
 
-#: cdi_forms/views.py:146 cdi_forms/views.py:405
+#: webcdi/cdi_forms/views.py:150 webcdi/cdi_forms/views.py:339
+#: webcdi/cdi_forms/views.py:586
 msgid ""
 " Not the right age? You should contact your researcher for steps on what to "
 "do next."
