@@ -1,0 +1,123 @@
+[{
+    "fieldset":"Informations de base",
+    "fields":[
+        {
+            "field":"birth_order"
+        },{
+            "field":"multi_birth_boolean",
+            "div":["multi_birth"]
+        },{    
+            "field":"birth_weight_lb",
+            "widget_type":"Select"          
+        },{
+            "field":"born_on_due_date",
+            "div":["early_or_late","due_date_diff"]
+        }]
+},{
+  "fieldset":"Contexte familial",
+  "fields":[ 
+      {
+          "field":"primary_caregiver",
+          "div":["primary_caregiver_other"]
+      },
+      {
+          "field":"mother_yob"
+      },
+      {
+          "field":"mother_education"          
+      },
+      {
+          "field":"secondary_caregiver",
+          "div":["secondary_caregiver_other"]
+      },
+      {
+          "field":"father_yob"
+      },{
+          "field":"father_education"          
+      },{
+          "field":"annual_income",
+          "widget_type":"Select"
+      }
+      ]
+},{
+    "fieldset" : "Ethnicité de l’enfant",
+    "fields" : [
+        {
+            "html" : "<p>Les informations suivantes sont recueillies dans certaines situations, lorsque l’agence de financement est le NIH (Institut américain de la santé). </p>"
+        },{
+            "field" : "child_hispanic_latino",
+            "label" : "Votre enfant est-il hispanique ou latino? "
+        },{
+            "field" : "child_ethnicity",
+            "widget_type" : "CheckboxSelectMultiple",
+            "choices" : [
+                { 
+                    "key" : "N",
+                    "value" : "Nativo Americano / Nativo de Alaska"
+                },{
+                    "key" : "A",
+                    "value" : "Asiático"
+                },{
+                    "key" : "H",
+                    "value" : "Nativo Hawaiano o Otro Isleño del Pacífico"
+                },{
+                    "key" : "B",
+                    "value" : "Negro o Afroamericano"
+                },{
+                    "key" : "W",
+                    "value" : "Blanco"
+                },{
+                    "key" : "O",
+                    "value" : "Otro"
+                }
+            ]
+        }
+    ]
+},{
+    "fieldset" : "Information sur les répondants",
+    "fields" : [
+        {
+            "field":"caregiver_info"
+        }
+    ]
+},{
+    "fieldset" : "Expérience linguistique",
+    "fields" : [
+        {
+            "field" : "other_languages_boolean",
+            "divs" : [
+                {
+                    "field" : "other_languages",
+                    "css" : "make-selectize",
+                    "div" : ["language_from","language_days_per_week","language_hours_per_day"]
+                }
+            ]
+        }
+    ]
+},{
+    "fieldset": "Santé",
+    "fields" : [
+        {
+            "field":"ear_infections_boolean",
+            "div":["ear_infections"]
+        },{
+            "field":"hearing_loss_boolean",
+            "div":["hearing_loss"]
+        },{
+            "field":"vision_problems_boolean",
+            "div":["vision_problems"]
+        },{
+            "field":"illnesses_boolean",
+            "div":["illnesses"]
+        },{
+            "field":"services_boolean",
+            "div":["services"]
+        },{
+            "field":"worried_boolean",
+            "div":["worried"]
+        },{
+            "field":"learning_disability_boolean",
+            "div":["learning_disability"]
+        }
+    ]
+}]

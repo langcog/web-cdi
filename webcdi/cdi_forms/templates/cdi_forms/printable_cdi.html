@@ -9,6 +9,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" ></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
 
     <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
     <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
@@ -62,8 +63,7 @@
                 {% endif %}                
             {% endfor %}
         ]);
-        console.log (data)
-
+        
         // Set chart options
         var options = {
             'title': '{% trans 'Words Produced (%)' %}',
@@ -76,6 +76,17 @@
 
         // Instantiate and draw our chart, passing in some options.
         var chart = new google.visualization.BarChart(document.getElementById('categories_charts_produced'));
+
+        var btnProducedSave = document.getElementById('save-produced-pdf')
+        google.visualization.events.addListener(chart, 'ready', function () {
+            btnProducedSave.disabled = false;
+        });
+        btnProducedSave.addEventListener('click', function () {
+            var doc = new jsPDF();
+            doc.addImage(chart.getImageURI(), 0, 0);
+            doc.save('chart.pdf');
+        }, false);
+
         chart.draw(data, options);
       }
     
@@ -105,6 +116,17 @@
 
                 // Instantiate and draw our chart, passing in some options.
                 var chart = new google.visualization.BarChart(document.getElementById('categories_charts_understood'));
+
+                var btnUnderstoodSave = document.getElementById('save-understood-pdf')
+                google.visualization.events.addListener(chart, 'ready', function () {
+                    btnUnderstoodSave.disabled = false;
+                });
+                btnUnderstoodSave.addEventListener('click', function () {
+                    var doc = new jsPDF();
+                    doc.addImage(chart.getImageURI(), 0, 0);
+                    doc.save('chart.pdf');
+                }, false);
+                
                 chart.draw(data, options);
             }
         {% endif%}
@@ -182,6 +204,12 @@
         <div class="row justify-content-center">
             <h4><a href="#filled_form" data-toggle="collapse">{% trans "Show Me My Answers" %}</a></h4>
         </div>
+        <!--
+        <div class="row justify-content-center">
+            <h4 onclick="window.print();">{% trans "Print Page" %}</h4>
+        </div>
+        -->
+        
 
         <div class="row justify-content-center">
             <!-- If study allows participants to share results via Facebook, a link for FB sharing will appear in template. -->
@@ -197,25 +225,34 @@
         <br>
         {% if show_feedback %}
             <!-- D3 graph div. Filled with empty divs which are populated by later D3 script -->
-            <div class="col-md-12 collapse show" id="graph_data" style="height: 90vh;">
-            <br>
-            <div class = "row"> 
-                <div class="col-md-6 text-center" id="num_words_text"></div>
-                <div class="col-md-6 text-center" id="hardest_words"></div>
-            </div>
-            <br>
-            <div class = "row"> 
-                {% if 'WG' in instrument %}
-                    <div class="col-md-6 text-center" id="categories_charts_understood"></div>
-                    <div class="col-md-6 text-center" id="categories_charts_produced"></div>
-                {% else %}
-                    <div class="col-md-12 text-center" id="categories_charts_produced"></div>
-                {% endif %}
-            </div>
-            <br>
-            <div class = "row justify-content-center"> 
-                <h4><div id="best_categories" class="text-center"></div></h4>
-            </div>
+            <div class="col-md-12 collapse hide" id="graph_data" style="height: 90vh;">
+                <br>
+                <div class = "row"> 
+                    <div class="col-md-6 text-center" id="num_words_text"></div>
+                    <div class="col-md-6 text-center" id="hardest_words"></div>
+                </div>
+                <br>
+                <div class = "row"> 
+                    {% if 'WG' in instrument %}
+                        <div class="col-md-6 text-center">
+                            <div id="categories_charts_understood"></div>
+                            <input id="save-understood-pdf" type="button" value="{% trans 'Save as PDF' %}" disabled />
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <div id="categories_charts_produced"></div>
+                            <input id="save-produced-pdf" type="button" value="{% trans 'Save as PDF' %}" disabled />
+                        </div>
+                    {% else %}
+                        <div class="col-md-12 text-center">
+                            <div id="categories_charts_produced"></div>
+                            <input id="save-produced-pdf" type="button" value="{% trans 'Save as PDF' %}" disabled />
+                        </div>
+                    {% endif %}
+                </div>
+                <br>
+                <div class = "row justify-content-center"> 
+                    <h4><div id="best_categories" class="text-center"></div></h4>
+                </div>
             </div>
         {% endif %}
 
@@ -225,6 +262,7 @@
             <div class="row">
                 {% load crispy_forms_tags %}
                 {% crispy background_form %}
+                {% if backpage_background_form%}{% crispy backpage_background_form %}{% endif %}
             </div>
             
             {% if parts %}

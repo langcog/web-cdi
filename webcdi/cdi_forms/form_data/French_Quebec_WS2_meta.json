@@ -1,0 +1,185 @@
+{
+    "parts": [
+        {
+            "id": 1,
+            "title": "PARTIE 1: MOTS QU'EMPLOIENT LES ENFANTS",
+            "types": [
+                {
+                    "id": "word",
+                    "sections": [
+                        {
+                            "id": "sounds",
+                            "title": "1. EFFETS SONORES ET SONS D'ANIMAUX"
+                        },
+                        {
+                            "id": "animals",
+                            "title": "2. ANIMAUX (réels ou jouets)"
+                        },
+                        {
+                            "id": "vehicles",
+                            "title": "3. VÉHICULES (réels ou jouets)"
+                        },
+                        {
+                            "id": "toys",
+                            "title": "4. JOUETS"
+                        },
+                        {
+                            "id": "food_drink",
+                            "title": "5. NOURRITURE ET BOISSONS"
+                        },
+                        {
+                            "id": "clothing",
+                            "title": "6. VÊTEMENTS"
+                        },
+                        {
+                            "footnote": "* ou tout autre mot utilisé dans votre famille",
+                            "id": "body_parts",
+                            "title": "7. PARTIES DU CORPS"
+                        },
+                        {
+                            "id": "household",
+                            "title": "8. PETITS ARTICLES MÉNAGERS"
+                        },
+                        {
+                            "id": "furniture_rooms",
+                            "title": "9. MEUBLES ET PIÈCES"
+                        },
+                        {
+                            "id": "outside",
+                            "title": "10. CHOSES DE L'EXTÉRIEUR"
+                        },
+                        {
+                            "id": "places",
+                            "title": "11. ENDROITS OÙ ALLER",
+                            "footnote": "* ou tout autre mot utilisé dans votre famille"
+                        },
+                        {
+                            "id": "people",
+                            "title": "12. GENS",
+                            "footnote": "* ou tout autre mot utilisé dans votre famille"
+                        },
+                        {
+                            "id": "games_routines",
+                            "title": "13. JEUX ET ROUTINES"
+                        },
+                        {
+                            "id": "action_words",
+                            "title": "14. VERBES",
+                            "text": "Les enfants utilisent habituellement des verbes pour s'exprimer. Ils peuvent dire, par exemple, \"chanter\", \"chantons\", \"chantes\". Veuillez noircir le cercle correspondant à un verbe si votre enfant utilise au moins une des conjugaisons du verbe."
+                        },
+                        {
+                            "id": "descriptive_words",
+                            "title": "15. MOTS DESCRIPTIFS",
+                            "text": "Plusieurs mots de cette catégorie existent dans la forme masculine ou féminine (par ex., vieux, vielle). Veuillez noircir le cercle si votre enfant utilise l'une ou l'autre de ces formes."
+                        },
+                        {
+                            "id": "time_words",
+                            "title": "16. MOTS POUR PARLER DU TEMPS"
+                        },
+                        {
+                            "id": "pronouns",
+                            "title": "17. PRONOMS"
+                        },
+                        {
+                            "id": "question_words",
+                            "title": "18. MOTS D'INTERROGATION"
+                        },
+                        {
+                            "id": "locations",
+                            "title": "19. PRÉPOSITIONS ET TERMES LOCATIFS"
+                        },
+                        {
+                            "id": "quantifiers",
+                            "title": "20. QUANTIFICATEURS ET ARTICLES",
+                            "text": "Plusieurs mots de cette catégorie existent dans la forme masculine ou féminine (par ex., tout, toute). Veuillez noircir le cercle si votre enfant utilise l'une ou l'autre de ces formes."
+                        },
+                        {
+                            "id": "connecting_words",
+                            "title": "21. CONJONCTIONS"
+                        }
+                    ],
+                    "text": "Les enfants comprennent bien plus de mots qu'ils n'en produisent. Nous sommes particulièrement intéressés aux mots que produit votre enfant. Lisez la liste et indiquez les mots que vous avez entendu votre enfant utiliser. Dans les cas où plus d'un mot est présenté, veuillez encercler le mot utilisé le plus souvent par votre enfant. Si votre enfant utilise une prononciation différente pour un mot, par exemple \"wawal\" pour \"cheval\" ou \"ghetti\" pour \"spaghetti\", ce mot est accepté. Souvenez-vous que cet inventaire est un \"catalogue\" de tous les mots utilisés par une foule d'enfants divers. Ne vous inquiétez pas si votre enfant n'en connaît que quelques-uns en ce moment. Veuillez sélectionner la case pour chaque mot qu'utilise votre enfant.",
+                    "title": "A. VOCABULAIRE",
+                    "type": "checkbox"
+                },
+                {
+                    "id": "usage",
+                    "title": "B. COMMENT LES ENFANTS UTILISENT LES MOTS",
+                    "type": "radiobutton"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "title": "PARTIE 2: ÉNONÇÉS ET GRAMMAIRE",
+            "types": [
+                {
+                    "id": "word_forms",
+                    "title": "A. FORMES GRAMMATICALES",
+                    "text": "Vous trouverez ci-dessous une liste de différentes terminaisons de verbes. Veuillez indiquer lesquelles votre enfant utilise. Si votre enfant n'emploie pas le verbe donné en exemple mais utilise ces terminaisons avec d'autres verbes, veuillez sélectionner la case tout de même. Par exemple, si votre enfant ne dit pas \"aime\" mais dit \"mange\", vous devez sélectionner la case pour le mot \"aime\".",
+                    "sections": [
+                        {
+                            "id": "word_forms_prese",
+                            "title": "",
+                            "type": "checkbox",
+                            "text": "Pour parler de choses se déroulant au présent, quelle forme utilise-t-il?"
+                        },
+                        {
+                            "id": "word_forms_futur",
+                            "title": "",
+                            "type": "checkbox",
+                            "text": "Pour parler de choses futures, quelle forme utilise-t-il?"
+                        },
+                        {
+                            "id": "word_forms_suced",
+                            "title": "",
+                            "type": "checkbox",
+                            "text": "Pour parler de choses passées, quelle forme utilise-t-il?"
+                        },
+                        {
+                            "id": "word_forms_orden",
+                            "title": "",
+                            "type": "checkbox",
+                            "text": "Pour donner des ordres, quelle forme utilise-t-il?"
+                        },
+                        {
+                            "id": "verb_endings",
+                            "title": "Auxiliaire",
+                            "type": "checkbox",
+                            "text": "Quelles formes de ces verbes votre enfant utilise-t-il?"
+                        },
+                        {
+                            "id": "adjectives",
+                            "title": "Adjectif",
+                            "type": "radiobutton",
+                            "text": "Votre enfant utilise-t-il la forme masculine et féminine d'un même adjectif (par ex., gros/grosse, beau/belle)"
+                        }
+                    ]
+                },
+                {
+                    "id": "combine",
+                    "title": "",
+                    "type": "radiobutton"
+                },
+                {
+                    "id": "combination_examples",
+                    "title": "B. EXEMPLES",
+                    "text": "Écrivez trois phrases parmi les plus longues que votre enfant a produites dernièrement.",
+                    "type": "textbox"
+                },
+                {
+                    "id": "complexity",
+                    "title": "C. COMPLEXITÉ DES PHRASES",
+                    "type": "radiobutton",
+                    "text": "Pour chacune des paires d'énoncés qui suivent, veuillez indiquer laquelle ressemble LE PLUS à ce que votre enfant peut produire présentement. Si votre enfant utilise des phrases plus longues ou plus compliquées que celles qui sont proposées, choisissez la deuxième. S'il utilise des phrases plus simples, choisissez la première. Veuillez-vous assurer qu'une des deux phrases est choisie pour chaque item."
+                },
+                {
+                    "id": "pronoun_usage",
+                    "title": "",
+                    "type": "radiobutton",
+                    "text": "Des enfants qui sont au même stade de développement ont parfois des façons différentes d'exprimer la même idée. Pour chacune des paires phrases qui suivent, choisissez celle qui ressemble LE PLUS à la façon dont votre enfant exprimerait cette idée. Dans les phrases avec \"Simon\", substituez le nom de votre enfant."
+                }
+            ]
+        }
+    ]
+}
