@@ -9,19 +9,97 @@
                     "sections": [
                         {
                             "id": "sounds",
-                            "title": "1. Sound Effects And Animal Sounds"
-                        },
-                        {
-                            "id": "animals",
-                            "title": "2. Animals (Real Or Toy)"
+                            "title": "1. 소리"
                         },
                         {
                             "id": "vehicles",
-                            "title": "3. Vehicles (Real Or Toy)"
+                            "title": "2. 탈 것"
+                        },{
+                            "id": "toys",
+                            "title": "3. 장난감 및 문구류"
+                        },{
+                            "id": "animals",
+                            "title": "4. 동물"
+                        },{
+                            "id": "clothing",
+                            "title": "5. 옷"
+                        },{
+                            "id": "furniture_rooms",
+                            "title": "6. 가구 및 방안"
+                        },{
+                            "id": "food_drink",
+                            "title": "7. 음식"
+                        },{
+                            "id": "body_parts",
+                            "title": "8. 신체 부위"
+                        },{
+                            "id": "household",
+                            "title": "9. 가정용품"
+                        },{
+                            "id": "outside",
+                            "title": "10. 외부사물"
+                        },{
+                            "id": "games_routines",
+                            "title": "11. 일상생활"
+                        },{
+                            "id": "places",
+                            "title": "12. 장소"
+                        },{
+                            "id": "quantifiers",
+                            "title": "13. 양, 정도"
+                        },{
+                            "id": "people",
+                            "title": "14. 사람"
+                        },{
+                            "id": "question_words",
+                            "title": "15. 의문사"
+                        },{
+                            "id": "action_words",
+                            "title": "16. 동사"
+                        },{
+                            "id": "descriptive_words",
+                            "title": "17. 형용사"
+                        },{
+                            "id": "other",
+                            "title": "18. 끝맺는 말"
+                        },{
+                            "id": "connecting_words",
+                            "title": "19. 조사"
+                        },{
+                            "id": "locations",
+                            "title": "20. 연결하는 말"
+                        },{
+                            "id": "time_words",
+                            "title": "21. 위치"
+                        },{
+                            "id": "pronouns",
+                            "title": "22. 시간"
+                        },{
+                            "id": "helping_verbs",
+                            "title": "21. 위치"
                         }
                     ],
                     "text": "Children understand many more words than they say. We are particularly interested in the words your child both understands and SAYS. Please go through the list and mark the words you have heard your child SAY on their own. If your child uses a different pronunciation of a word (for example, \"raffe\" instead of \"giraffe\" or \"sketti\" for \"spaghetti\") or says a different word that has a similar meaning as the word listed here (e.g., \"nana\" for \"grandma\"), go ahead and mark it. Remember that this is a \"catalogue\" of all the words that are used by many different children. Don't worry if your child only says a few of these right now.",
-                    "title": "A: Vocabulary Checklist",
+                    "type": "radiobutton"
+                },{
+                    "id": "combine",
+                    "title": "22. 시간",
+                    "type": "radiobutton"
+                },{
+                    "id": "combination_examples",
+                    "title": "23. 대명사",
+                    "type": "textbox"
+                },{
+                    "id": "morphological_marker",
+                    "title": "24. 돕는 말",
+                    "type": "radiobutton"
+                },{
+                    "id": "complexity",
+                    "title": "24. 돕는 말",
+                    "type": "radiobutton"
+                },{
+                    "id": "grammaticality",
+                    "title": "24. 돕는 말",
                     "type": "radiobutton"
                 }
             ]
