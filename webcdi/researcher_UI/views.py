@@ -186,7 +186,7 @@ def download_summary(request, study_obj, administrations = None): # Download stu
     response['Content-Disposition'] = 'attachment; filename="' + filename + '"'# Name the CSV response
     
     administrations = administrations if administrations is not None else administration.objects.filter(study = study_obj)
-    administrations = adminitrations.exclude(opt_out=True)
+    administrations = administrations.exclude(opt_out=True)
 
     # Fetch administration variables
     admin_header = ['study_name', 'subject_id','local_lab_id','repeat_num', 'administration_id', 'link', 'completed', 'completedBackgroundInfo', 'due_date', 'last_modified','created_date']
