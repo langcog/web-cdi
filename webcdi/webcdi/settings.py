@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from webcdi.utils import get_linux_ec2_private_ip
+
 from django.utils.translation import gettext_lazy as _
 from .secret_settings import *
 
@@ -69,6 +71,9 @@ ALLOWED_HOSTS = [
     'webcdi-dev.stanford.edu', 
     '.elb.amazonaws.com']
 
+private_ip = get_linux_ec2_private_ip()
+if private_ip:
+    ALLOWED_HOSTS.append(private_ip)
 
 IPS_TO_ADD = [socket.gethostname()]
 
@@ -151,6 +156,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'webcdi.context_processors.home_page',
             ],
         },
     },
