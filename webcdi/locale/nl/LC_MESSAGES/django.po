@@ -1890,8 +1890,7 @@ msgstr "Contact Formulier"
 msgid ""
 "Fill out the form below and a member of our team will get back to you soon!"
 msgstr ""
-"Vul het onderstaande formulier in en een lid van ons team zal so snel "
-"mogelijk contact met u opnemen!"
+"Vul het onderstaande formulier in en een lid van ons team zal zo snel mogelijk contact met u opnemen!"
 
 #: webcdi/cdi_forms/templates/cdi_forms/contact.html:67
 msgid " characters remaining"
