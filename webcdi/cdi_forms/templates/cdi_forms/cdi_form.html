@@ -25,6 +25,7 @@
 <div id = "nav_list" class = "collapse">
     <h4>{% trans "Contents:" %}</h4>
     <ul class="nav bs-docs-sidenav">
+        <li><a id="id_btn_instructions">{% trans 'Instructions:' %}</a></li>
         {% for part in parts %}
             <li><a href="#{{ part.id }}" onclick="findPage({{ part.types.0.id }}_div)">{{ part.title }}</a>
                 <ul class="nav">
@@ -445,7 +446,8 @@
         localStorage.setItem("prev_page_number", $('#page_number').val());
         localStorage.setItem("prev_hash_id", "{{ hash_id }}");
 
-        $('#progress').text((page_num+1) + "/" + filterednames.length)
+        var total_length = filterednames.length + {{ back_page }}
+        $('#progress').text((page_num+1) + "/" + total_length)
 
         checkPageNum() 
         closeParts()
@@ -613,6 +615,16 @@ $(document).ready(function () {
     //Disable mouse right click
     $("body").on("contextmenu",function(e){
         return false;
+    });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function () {
+    //Disable cut copy paste
+    $('#id_btn_instructions').on('click', function (e) {
+        e.preventDefault();
+        changePages(0)
     });
 });
 </script>
