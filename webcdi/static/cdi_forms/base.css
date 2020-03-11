@@ -105,7 +105,7 @@
     margin-right:5px;
 }
 
-input[type=textbox] {
+input[type=textbox], input[type=text] {
     width: 80%;
     margin-bottom: 10px;
 }
@@ -193,3 +193,11 @@ label.btn{
   -moz-box-sizing: border-box;
           box-sizing: border-box;
   }
+
+.bs-docs-sidebar.affix {
+  position: fixed;
+  top: 20px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 80vh;
+}

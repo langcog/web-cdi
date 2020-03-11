@@ -492,4 +492,4 @@ class ContactForm(forms.Form):
             Field('contact_email'), 
             Field('contact_id', css_class = "form-control-plaintext"), 
             Field('content'), 
-            Div(Submit('submit','Submit'), css_class="col-lg-offset-3 col-lg-9 text-center"))
+            Div(Submit('submit',_('Submit')), css_class="col-lg-offset-3 col-lg-9 text-center"))

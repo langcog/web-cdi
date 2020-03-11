@@ -1,31 +1,17 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    {% load staticfiles %}
+    {% load static i18n %}
 
-    <title>Words and Sentences CDI</title>
-    <meta name="description" content="English Words and Sentences CDI form">
-    <meta name="author" content="Ashwin Paranjape">
+    <title>{% trans "Contact Form " %} </title>
+    <meta name="description" content="Contact Form">
+    <meta name="author" content="Henry Mehta">
 
-<!--     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="{% static 'cdi_forms/selectize.js' %}"></script>
-    <script src="{% static 'cdi_forms/bootstrap-datepicker.js' %}"></script>
-    <link rel='stylesheet' href="{% static 'cdi_forms/selectize.bootstrap3.css' %}">
-    <link rel='stylesheet' href="{% static 'cdi_forms/datepicker.css' %}">
-    <link rel="stylesheet" href="{% static 'cdi_forms/docs.min.css' %}" />
-    <link rel='stylesheet' href="{% static 'cdi_forms/base.css' %}">
-    <script src="http://d3js.org/d3.v3.js"></script>
-    <script src="https://cdn.jsdelivr.net/lodash/4.17.2/lodash.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-queue/3.0.3/d3-queue.min.js"></script> -->
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" ></script>
-
     <script src="{% static 'jquery/jquery-1.11.3.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
-<!--     <link rel="stylesheet" href="{% static 'bootstrap/bootstrap-theme.min.css' %}">
- -->    <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
+	<script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
     <script src="{% static 'cdi_forms/selectize.js' %}"></script>
     <script src="{% static 'cdi_forms/bootstrap-datepicker.js' %}"></script>
     <link rel='stylesheet' href="{% static 'cdi_forms/selectize.bootstrap3.css' %}">
@@ -44,7 +30,7 @@
 <!-- Form for contacting the Web-CDI team -->
     <div class="container bs-docs-container" style='padding-top: 60px; padding-bottom: 60px;'>
     	<div class="col-9 ml-auto">
-    		<h2> Fill out the form below and a member of our team will get back to you soon! </h2>
+    		<h2> {% trans "Fill out the form below and a member of our team will get back to you soon!" %} </h2>
     	</div>
 	    {% load crispy_forms_tags %}
 	    {% crispy form %}
@@ -78,7 +64,7 @@
 
 		remaining_chars = max_length - val_length;
 
-		$('#'+current_textbox.name+'_char_counter').html(remaining_chars + "/" + max_length + " characters remaining");
+		$('#'+current_textbox.name+'_char_counter').html(remaining_chars + "/" + max_length + '{% trans " characters remaining" %}');
 
 	}
 
