@@ -258,6 +258,7 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
                     request.method = "GET"
                     background_instance = BackgroundInfo.objects.get(administration = self.administration_instance) 
                     return redirect('background-info', pk=background_instance.pk) 
+           
             #else : print (self.background_form.errors)
 
         response = render(request, self.template_name, self.get_context_data()) # Render template   
@@ -660,13 +661,19 @@ def prefilled_cdi_data(administration_instance):
         data = json.loads(content_file.read())
         data['object'] = administration_instance
         data['title'] = administration_instance.study.instrument.verbose_name
-        data['instrument_name'] = administration_instance.study.instrument.name
+        instrument_name = data['instrument_name'] = administration_instance.study.instrument.name
         data['completed'] = administration_instance.completed
         data['due_date'] = administration_instance.due_date.strftime('%b %d, %Y, %I:%M %p')
         data['page_number'] = administration_instance.page_number
         data['hash_id'] = administration_instance.url_hash
         data['study_waiver'] = administration_instance.study.waiver
         data['confirm_completion'] = administration_instance.study.confirm_completion
+
+        filename = os.path.realpath(PROJECT_ROOT + '/form_data/background_info/' + instrument_name + '_back.json')
+        if os.path.isfile(filename): data['back_page'] = 1
+        else: data['back_page'] = 0
+
+
         raw_objects = []
 
         field_values = ['itemID', 'item', 'item_type', 'category', 'definition', 'choices__choice_set']
@@ -759,6 +766,7 @@ def cdi_form(request, hash_id):
                 request.method = "GET"
                 background_instance = BackgroundInfo.objects.get(administration = administration_instance) 
                 return redirect('background-info', pk=background_instance.pk) #background_info_form(request, hash_id) # Fetch Background info template
+
             elif 'btn-submit' in request.POST and request.POST['btn-submit'] == _('Submit'): # If 'Submit' button was pressed
                 
                 #Some studies may require successfully passing a ReCaptcha test for submission. If so, get for a passing response before marking form as complete.

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-03 17:17+0000\n"
+"POT-Creation-Date: 2020-03-11 09:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: webcdi/cdi_forms/forms.py:25 webcdi/cdi_forms/forms.py:26
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:143
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:141
 msgid "No"
 msgstr ""
 
@@ -430,6 +430,13 @@ msgstr ""
 
 #: webcdi/cdi_forms/forms.py:473
 msgid "What would you like to tell us?"
+msgstr ""
+
+#: webcdi/cdi_forms/forms.py:492
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:11
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:323
+#: webcdi/cdi_forms/views.py:769
+msgid "Submit"
 msgstr ""
 
 #: webcdi/cdi_forms/languages.py:6
@@ -1393,7 +1400,7 @@ msgstr ""
 #: webcdi/cdi_forms/templates/cdi_forms/background_info.html:7
 #: webcdi/cdi_forms/templates/cdi_forms/background_info.html:56
 #: webcdi/cdi_forms/templates/cdi_forms/study_group.html:7
-#: webcdi/cdi_forms/views.py:243 webcdi/cdi_forms/views.py:519
+#: webcdi/cdi_forms/views.py:243 webcdi/cdi_forms/views.py:521
 msgid "Next"
 msgstr ""
 
@@ -1479,7 +1486,7 @@ msgstr ""
 
 #: webcdi/cdi_forms/templates/cdi_forms/background_info.html:61
 #: webcdi/cdi_forms/templates/cdi_forms/backpage_info.html:37
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:338
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:339
 #: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:273
 #: webcdi/cdi_forms/templates/cdi_forms/printable_cdiBAK.html:183
 #: webcdi/cdi_forms/templates/cdi_forms/study_group.html:113
@@ -1494,8 +1501,8 @@ msgstr ""
 
 #: webcdi/cdi_forms/templates/cdi_forms/backpage_info.html:12
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:14
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:327
-#: webcdi/cdi_forms/views.py:256 webcdi/cdi_forms/views.py:755
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:328
+#: webcdi/cdi_forms/views.py:256 webcdi/cdi_forms/views.py:763
 msgid "Go back to Background Info"
 msgstr ""
 
@@ -1503,84 +1510,78 @@ msgstr ""
 msgid "Background Information Continued"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:53
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:51
 msgid "Instructions: "
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:57
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:55
 msgid "This form can be filled any time before the due date."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:58
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:56
 msgid ""
 "It can also be saved at any time and resumed later by using the same link"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:58
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:56
 msgid "create bookmark"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:59
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:57
 msgid "After the form is submitted, it cannot be altered."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:60
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:58
 msgid "The form also cannot be altered after the due date."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:61
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:59
 msgid ""
 "Please use the navigation buttons below. Do not use the \"back\" and "
 "\"forward\" buttons on your browser."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:62
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:60
 msgid ""
 "You can use the tab button and arrows keys to quickly navigate and answer "
 "questions."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:90
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:88
 msgid "Due date"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:95
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:93
 msgid "Show waiver of documentation"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:100
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:98
 msgid "Reach out to the Web-CDI Team!"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:144
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:142
 msgid "Okay"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:157
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:155
 msgid "Waiver Denied"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:161
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:159
 msgid ""
 "Thank you for your response. We are unable to continue. Please close the "
 "window. If you would like, you may review the Waiver."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:164
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:162
 msgid "Review Waiver"
 msgstr ""
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:10
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:326
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:327
 #: webcdi/cdi_forms/templates/cdi_forms/study_group.html:6
-#: webcdi/cdi_forms/views.py:743
+#: webcdi/cdi_forms/views.py:751
 msgid "Save"
-msgstr ""
-
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:11
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:322
-#: webcdi/cdi_forms/views.py:760
-msgid "Submit"
 msgstr ""
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:24
@@ -1591,7 +1592,11 @@ msgstr ""
 msgid "Contents:"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:59
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:28
+msgid "Instructions:"
+msgstr ""
+
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:60
 msgid ""
 "In this section, you will be asked to think about which phrases and words "
 "your child \"understands\" and \"understands and says.\"  This assessment is "
@@ -1599,78 +1604,78 @@ msgid ""
 "lot of the words on the form. That is perfectly fine!"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:62
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:63
 msgid ""
 "Your child \"understands\" a word/phrase if they know what the word/phrase "
 "means, even though they may not be able to say it themselves. Here are some "
 "examples."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:76
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:77
 msgid "DO check \"understands\" if:"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:78
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:79
 msgid ""
 "Your child responds appropriately to the word/phrase. For example, when you "
 "say \"Get the ball,\" s/he turns and tries to find the ball."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:93
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:94
 msgid "DON'T check \"understands\" if:"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:95
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:96
 msgid ""
 "Your child doesn't have a meaning for the word/phrase.  S/he may have heard "
 "it before, like in a story, but you don't think s/he knows what it means."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:105
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:106
 msgid ""
 "Your child \"understands and says\" a word/phrase if they know what the word/"
 "phrase means AND they are able to say it by themselves. Here are some "
 "examples."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:117
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:118
 msgid "DO check \"understands and says\" if:"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:119
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:120
 msgid ""
 "Your child says a word/phrase when trying to name an object or describe "
 "something that happened.  You think s/he has a meaning for that word/phrase."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:136
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:137
 msgid ""
 "It's fine if your child can't say the whole word or says it his/her own "
 "\"special\" way."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:138
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:139
 msgid "DO check \"understands and says.\""
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:155
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:156
 msgid ""
 "DON'T check if your child is just stringing sounds together.  This is not a "
 "real word that means something."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:157
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:175
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:158
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:176
 msgid "DON'T check \"understands and says.\""
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:173
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:260
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:174
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:261
 msgid ""
 "DON'T ask your child to repeat the words on the list. This doesn't count!"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:191
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:192
 msgid ""
 "In this section, you will be asked about words that your child \"understands "
 "and says.\" Your child \"understands and says\" a word on the list if they "
@@ -1680,95 +1685,108 @@ msgid ""
 "perfectly fine!"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:205
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:206
 msgid "DO check the box if:"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:207
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:208
 msgid ""
 "Your child says the word when trying to name an object or describe something "
 "that happened.  You think s/he has a meaning for that word."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:225
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:226
 msgid ""
 "It's fine if your child can't say the whole word or says it his/her own "
 "\"special\" way. If you use another word in your family (e.g., Nana for "
 "Grandma), that is ok too!"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:227
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:228
 msgid "DO check the box."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:244
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:245
 msgid ""
 "DON'T check the box if your child is just stringing sounds together. This is "
 "not a real word that means something."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:284
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:285
 msgid ""
 "You are almost done! Click \"Yes\" if you agree with ALL of the following "
 "points. Your answer will not affect your results. There is nothing wrong "
 "with choosing \"No\":"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:288
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:289
 #, python-format
 msgid "You have a child who is %(age)s months old."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:289
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:290
 msgid "You filled out the entire questionnaire to the best of your ability."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:290
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:291
 msgid "You are taking this questionnaire for the FIRST time."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:299
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:300
 #, python-format
 msgid ""
 "Yes, I have a child who is %(age)s months old, I filled out the entire "
 "questionnaire, and I am taking this questionnaire for the first time."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:305
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:306
 #, python-format
 msgid ""
 "No, I do NOT have a child who is %(age)s months old, I have NOT filled out "
 "the entire questionnaire, and/or I have taken this questionnaire before."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:311
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:312
 msgid ""
 "Finally, please check the Captcha box below to display the submit button!"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:320
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:321
 msgid "Previous Page"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:321
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:322
 msgid "Next Page"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:333
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:334
 msgid "Don't forget to save your progress whenever you can!"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:379
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:380
 msgid ""
 "Are you ready to submit? You cannot change your answers after submission."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:408
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:409
 msgid "understands and says"
 msgstr ""
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_items.html:17
 msgid "Hide/Show Instructions: "
+msgstr ""
+
+#: webcdi/cdi_forms/templates/cdi_forms/contact.html:6
+msgid "Contact Form "
+msgstr ""
+
+#: webcdi/cdi_forms/templates/cdi_forms/contact.html:33
+msgid ""
+"Fill out the form below and a member of our team will get back to you soon!"
+msgstr ""
+
+#: webcdi/cdi_forms/templates/cdi_forms/contact.html:67
+msgid " characters remaining"
 msgstr ""
 
 #: webcdi/cdi_forms/templates/cdi_forms/overflow.html:37
@@ -1966,20 +1984,20 @@ msgstr ""
 msgid "Born between STARTDATE and ENDDATE"
 msgstr ""
 
-#: webcdi/cdi_forms/views.py:133 webcdi/cdi_forms/views.py:322
-#: webcdi/cdi_forms/views.py:569
+#: webcdi/cdi_forms/views.py:133 webcdi/cdi_forms/views.py:323
+#: webcdi/cdi_forms/views.py:571
 #, python-format
 msgid "Your child should be between %(min_age)d to %(max_age)d months of age."
 msgstr ""
 
-#: webcdi/cdi_forms/views.py:146 webcdi/cdi_forms/views.py:335
-#: webcdi/cdi_forms/views.py:582
+#: webcdi/cdi_forms/views.py:146 webcdi/cdi_forms/views.py:336
+#: webcdi/cdi_forms/views.py:584
 #, python-format
 msgid " Not the right age? <a href='%(sgurl)s'> Click here</a>"
 msgstr ""
 
-#: webcdi/cdi_forms/views.py:150 webcdi/cdi_forms/views.py:339
-#: webcdi/cdi_forms/views.py:586
+#: webcdi/cdi_forms/views.py:150 webcdi/cdi_forms/views.py:340
+#: webcdi/cdi_forms/views.py:588
 msgid ""
 " Not the right age? You should contact your researcher for steps on what to "
 "do next."
@@ -2421,26 +2439,26 @@ msgstr ""
 msgid "I am afraid that your account registration was rejected by inspector."
 msgstr ""
 
-#: webcdi/webcdi/settings.py:241
+#: webcdi/webcdi/settings.py:242
 msgid "English"
 msgstr ""
 
-#: webcdi/webcdi/settings.py:242
+#: webcdi/webcdi/settings.py:243
 msgid "Spanish"
 msgstr ""
 
-#: webcdi/webcdi/settings.py:243
+#: webcdi/webcdi/settings.py:244
 msgid "French Quebec"
 msgstr ""
 
-#: webcdi/webcdi/settings.py:244
+#: webcdi/webcdi/settings.py:245
 msgid "Canadian English"
 msgstr ""
 
-#: webcdi/webcdi/settings.py:245
+#: webcdi/webcdi/settings.py:246
 msgid "Dutch"
 msgstr ""
 
-#: webcdi/webcdi/settings.py:246
+#: webcdi/webcdi/settings.py:247
 msgid "Hebrew"
 msgstr ""
