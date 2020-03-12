@@ -1842,8 +1842,6 @@ msgid "understands and says"
 msgstr "이해하고 표현한다"
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_items.html:17
-#, fuzzy
-#| msgid "Instructions: "
 msgid "Hide/Show Instructions: "
 msgstr "안내 사항 보기/숨기기: "
 
