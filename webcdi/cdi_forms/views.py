@@ -604,7 +604,7 @@ def cdi_items(object_group, item_type, prefilled_data, item_id):
                 obj['prefilled_value'] = prefilled_data[obj['itemID']]
         elif item_type == 'checkbox':
             obj['prefilled_value'] = obj['itemID'] in prefilled_data
-            print ( obj['itemID'] )
+            #print ( obj['itemID'] )
             obj['definition'] = obj['definition'][0] + obj['definition'][1:] if obj['definition'][0].isalpha() else obj['definition'][0] + obj['definition'][1] + obj['definition'][2:]
             obj['choices'] = obj['choices__choice_set']
 
