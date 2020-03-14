@@ -391,7 +391,7 @@ msgstr "연 가계소득 추정치 (원)"
 
 #: webcdi/cdi_forms/forms.py:423
 msgid "My child is (check all that apply):"
-msgstr "우리 아이는 (해당하는 모든 칸에 체크 표시 해주십시오):"
+msgstr "우리 아이는 (해당하는 모든 칸에 표시해 주십시오):"
 
 #: webcdi/cdi_forms/forms.py:427
 msgid "Basic Information"
@@ -412,10 +412,10 @@ msgid ""
 "Health).  NIH requires this information to ensure the soundness and "
 "inclusiveness of our research. Your cooperation is appreciated, but optional."
 msgstr ""
-"다음 정보는 연구비를 제공하는 기관에 보고하기 위한 목적으로만 수집됩니다."
-"예: NIH (National Institute of Health) NIH는 본 연구가 적절한지 확인하기 "
-"위하여 다음과 같은 정보를 수집합니다. 귀하의 협조는 선택사항이지만, 수집에 응해주신다면"
-"감사하겠습니다."
+"다음 정보는 연구비를 제공하는 기관에 보고하기 위한 목적으로만 수집됩니"
+"다. 예: NIH (National Institute of Health) NIH는 본 연구가 적절한지 확인하기 "
+"위하여 다음과 같은 정보를 수집합니다. 귀하의 협조는 선택사항이지만, 수집에 응해"
+"주신다면 감사하겠습니다."
 
 #: webcdi/cdi_forms/forms.py:430
 msgid "Caregiver Information"
@@ -1437,14 +1437,16 @@ msgid ""
 "Try to complete the inventory when you have at least 30 quiet minutes, "
 "without interruptions. An example might be when your child is sleeping."
 msgstr ""
-"본 설문 작성을 위해, 가급적 방해 받지 않는 시간대에 최소 30분을 할애할 수 있는 상황에서 작성해 주세요. (예: 자녀의 취침시간)"
+"최소 30분을 할애 할 수 있으며 가급적 방해 받지 않는 시간대에 본 설문을 작성해 주세요. (예: 자녀의 "
+"취침시간)"
 
 #: webcdi/cdi_forms/templates/cdi_forms/background_info.html:28
 msgid ""
 "Try to complete the inventory when you have at least 10-15 quiet minutes, "
 "without interruptions. An example might be when your child is sleeping."
 msgstr ""
-"본 설문 작성을 위해, 가급적 방해 받지 않는 시간대에 최소 10-15분을 할애할 수 있는 상황에서 작성해 주세요. (예: 자녀의 취침시간)"
+"최소 10-15분을 할애 할 수 있으며 가급적 방해 받지 않는 시간대에 본 설문을 작성해 주세요. (예: 자녀"
+"의 취침시간)"
 
 #: webcdi/cdi_forms/templates/cdi_forms/background_info.html:30
 #: webcdi/cdi_forms/templates/cdi_forms/study_group.html:23
@@ -1453,8 +1455,8 @@ msgid ""
 "interrupted, it is ok to put it down and come back to it when you have more "
 "time."
 msgstr ""
-"귀하는 본 설문을 한번에 완료하지 않으셔도 됩니다. 만약 작성 도중 방해를 받는 경우, 잠시 설문을 중단하셔도 됩니다."
-"시간적 여유가 있을 때 다시 돌아와 응답해주셔도 됩니다."
+"귀하는 본 설문을 한번에 완료하지 않으셔도 됩니다. 만약 작성 도중 방해를 받는 경"
+"우, 잠시 설문을 중단하시고, 시간적 여유가 있을 때 다시 응답해 주세요."
 
 #: webcdi/cdi_forms/templates/cdi_forms/background_info.html:31
 #: webcdi/cdi_forms/templates/cdi_forms/study_group.html:24
@@ -1462,8 +1464,8 @@ msgid ""
 "Feel free to ask others (e.g. other family members, nanny, child care "
 "providers) to help you fill out this form."
 msgstr ""
-"본 설문은 다른 사람과 함께 작성하셔도 됩니다. (예: 다른 가족 구성원,육아 도우미,"
-"아동 돌봄 서비스 제공자)"
+"본 설문을 응답하기 위해 다른 사람과 함께 작성하셔도 됩니다. (예: 다른 가"
+"족 구성원, 육아 도우미, 아동 돌봄 서비스 제공자)"
 
 #: webcdi/cdi_forms/templates/cdi_forms/background_info.html:32
 #: webcdi/cdi_forms/templates/cdi_forms/study_group.html:25
@@ -1479,8 +1481,9 @@ msgid ""
 "the form. As we are a research lab with limited funds, we ask that you only "
 "complete this questionnaire once."
 msgstr ""
-"본 설문을 완료하시면 귀하께 $%(gift_amount)s Amazon.com 상품권을 드립니다. 저희"
-"연구실은 한정된 연구비를 가지고 있으므로 본 설문에는 한 번만 참여해 주십시오."
+"본 설문을 완료하시면 귀하께 $%(gift_amount)s Amazon.com 상품권을 드립니다. 저"
+"희 연구실은 한정된 연구비를 가지고 있으므로 본 설문에는 한 번만 참여해 주십시"
+"오."
 
 #: webcdi/cdi_forms/templates/cdi_forms/background_info.html:42
 #: webcdi/cdi_forms/templates/cdi_forms/study_group.html:29
@@ -1539,7 +1542,8 @@ msgstr "본 설문은 마감일 전까지 언제든지 응답할 수 있습니�
 msgid ""
 "It can also be saved at any time and resumed later by using the same link"
 msgstr ""
-"또한 설문을 저장한 뒤 언제든지 동일한 링크를 통해 다시 응답을 시작할 수 있습니다."
+"또한 설문을 저장한 뒤 언제든지 동일한 링크를 통해 다시 응답을 시작할 수 있습니"
+"다."
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:59
 msgid "create bookmark"
@@ -1558,8 +1562,8 @@ msgid ""
 "Please use the navigation buttons below. Do not use the \"back\" and "
 "\"forward\" buttons on your browser."
 msgstr ""
-"아래의 탐색 버튼을 사용해 주십시오. 브라우저의 \"뒤로\" 버튼과 \"앞으로\" 버튼을"
-"사용하지 마십시오."
+"아래의 탐색 버튼을 사용해 주십시오. 브라우저의 \"뒤로\" 버튼과 \"앞으로\" 버"
+"튼을 사용하지 마십시오."
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:63
 msgid ""
@@ -1644,7 +1648,7 @@ msgstr ""
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:76
 msgid "DO check \"understands\" if:"
-msgstr "다음과 같은 경우에는 \"이해한다\"에 체크 표시 해주십시오:"
+msgstr "다음과 같은 경우에는 \"이해한다\"에 표시해 주십시오:"
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:78
 msgid ""
@@ -1678,7 +1682,7 @@ msgstr ""
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:117
 msgid "DO check \"understands and says\" if:"
-msgstr "다음과 같은 경우에는 \"이해하고 표현한다\"에 체크 표시 해주세요:"
+msgstr "다음과 같은 경우에는 \"이해하고 표현한다\"에 표시해 주세요:"
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:119
 msgid ""
@@ -1698,7 +1702,7 @@ msgstr ""
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:138
 msgid "DO check \"understands and says.\""
-msgstr "\"이해하고 표현한다\"에 체크 표시 해주십시오."
+msgstr "\"이해하고 표현한다\"에 표시해 주십시오."
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:155
 msgid ""
@@ -1729,16 +1733,15 @@ msgid ""
 "be able to understand or say a lot of the words on the form. That is "
 "perfectly fine!"
 msgstr ""
-"본 영역에서는 아동이 이해와 표현이 모두 가능한 어휘에 대해 체크해야 합니다. "
+"본 장에서는 아동이 이해와 표현이 모두 가능한 어휘에 대해 체크해야 합니다."
 "만약 아동이 어휘의 뜻을 알고 있으며 그 어휘를 스스로 표현도 할 수 있다면,"
-"\"이해하고 표현한다\"에 체크해주세요."
-" 다음 예시를 참고해 주세요."
+"\"이해하고 표현한다\"에 체크해주세요. 다음 예시를 참고해 주세요."
 "본 설문은 다양한 연령의 아동을 대상으로 합니다. 아동이"
-" 본 설문의 많은 어휘를 모두 이해하거나 표현하지 못할 수도 있습니다. 그래도 괜찮습니다!"
+"본 설문의 많은 어휘를 모두 이해하거나 표현하지 못할 수도 있습니다. 그래도 괜찮습니다!"
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:205
 msgid "DO check the box if:"
-msgstr "다음과 같은 경우, 응답박스에 체크 표시 해주십시오:"
+msgstr "다음과 같은 경우에는 표시해 주십시오:"
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:207
 msgid ""
@@ -1756,18 +1759,18 @@ msgid ""
 msgstr ""
 "만약 아동이 어휘 전체를 정확하게 말하지 못하거나 아동만의 \"특별한\" 방식으로 "
 "표현하더라도 괜찮습니다. 귀하께서 가족 구성원을 지칭할 때 다른 표현을 사용하"
-"시는 경우(예: 기린을 긴이라 부르는 경우, 할머니를 함미라 부르는 경우)도 괜찮습니다."
+"시는 경우(예: 할머니를 함미라 부르는 경우)도 괜찮습니다."
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:227
 msgid "DO check the box."
-msgstr "응답박스에 체크 표시 해주십시오."
+msgstr "표시해 주십시오."
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:244
 msgid ""
 "DON'T check the box if your child is just stringing sounds together. This is "
 "not a real word that means something."
 msgstr ""
-"만약 아동이 단순히 소리를 이어 말하는 경우 (예: 바 바 바)에는 표시하지 마십시오. 이는 의미"
+"만약 아동이 단순히 소리를 이어 말하는 경우에는 표시하지 마십시오. 이는 의미"
 "를 지닌 실제 어휘가 아닙니다."
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:284
@@ -1815,7 +1818,7 @@ msgstr ""
 msgid ""
 "Finally, please check the Captcha box below to display the submit button!"
 msgstr ""
-"마지막으로, 제출 버튼을 누르기 위해 아래의 Captcha 박스를 체크 해주십시오."
+"마지막으로, 제출 버튼을 표시하기 위해 아래의 Captcha 칸에 표시해 주십시오."
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:320
 msgid "Previous Page"
@@ -1839,8 +1842,6 @@ msgid "understands and says"
 msgstr "이해하고 표현한다"
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_items.html:17
-#, fuzzy
-#| msgid "Instructions: "
 msgid "Hide/Show Instructions: "
 msgstr "안내 사항 보기/숨기기: "
 
