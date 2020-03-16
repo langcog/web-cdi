@@ -24,7 +24,7 @@
                             "title": "5. 옷"
                         },{
                             "id": "toys",
-                            "title": "6. 장난감 및 문구류"
+                            "title": "6. 장난감류"
                         },{
                             "id": "food_drink",
                             "title": "7. 음식"
@@ -36,7 +36,7 @@
                             "title": "9. 가구 및 방안"
                         },{
                             "id": "places",
-                            "title": "10. 장소"
+                            "title": "10. 장소 및 공간"
                         },{
                             "id": "outside",
                             "title": "11. 외부사물"
@@ -45,13 +45,13 @@
                             "title": "12. 사람"
                         },{
                             "id": "games_routines",
-                            "title": "13. 일상생활"
+                            "title": "13. 일상생활과 관련된 말"
                         },{
                             "id": "pronouns",
-                            "title": "14. 대명사"
+                            "title": "14. 대신하는 말"
                         },{
                             "id": "quantifiers",
-                            "title": "15. 양, 정도"
+                            "title": "15. 양, 수, 정도"
                         },{
                             "id": "action_words",
                             "title": "16. 동사"
