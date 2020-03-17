@@ -610,6 +610,7 @@ def rename_study(request, study_name): # Function for study settings modal
         form_package['allow_payment'] = study_obj.allow_payment
         form_package['min_age'] = age_range.lower
         form_package['max_age'] = age_range.upper
+        form_package['study_obj'] = study_obj
         return render(request, 'researcher_UI/add_study_modal.html', form_package) # Reload 'Update Study' modal
         
 @login_required 
