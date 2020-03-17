@@ -23,5 +23,5 @@ class StudyAdministrationTable(tables.Table):
     # Associates administration table with administration model
     class Meta:
         model = administration
-        exclude = ("study",'id', 'url_hash','completedBackgroundInfo', 'page_number', 'bypass', 'include') # Excludes some fields in administration objects from table
+        exclude = ("study",'id', 'url_hash', 'page_number', 'bypass', 'include') # Excludes some fields in administration objects from table
         sequence = ('select_col','subject_id', 'local_lab_id', 'repeat_num', 'link') # Specifies column order within table

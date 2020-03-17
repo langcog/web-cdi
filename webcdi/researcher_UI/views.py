@@ -58,6 +58,31 @@ def get_score_headers(study_obj):
                 if not benchmark.raw_score == 9999: score_header.append(f.title + ' Percentile-both')
     return score_header
 
+def format_admin_data(pd, study_obj, administrations, admin_header):
+    # Try to format administration data for pandas dataframe
+    try:
+        #exclude completedSurvey if no back background_info page
+        filename = os.path.realpath(settings.BASE_DIR + '/cdi_forms/form_data/background_info/' + study_obj.instrument.name + '_back.json')
+        if not os.path.isfile(filename):
+            admin_data = pd.DataFrame.from_records(administrations.values(
+                'id', 'study__name','url_hash', 'repeat_num', 'subject_id','local_lab_id','completed','completedBackgroundInfo','due_date','last_modified','created_date'
+            )).rename(columns = {'id':'administration_id', 'study__name': 'study_name', 'url_hash': 'link'})
+        else:
+            admin_data = pd.DataFrame.from_records(administrations.values(
+                'id', 'study__name','url_hash', 'repeat_num', 'subject_id','local_lab_id','completed','completedBackgroundInfo','completedSurvey','due_date','last_modified','created_date'
+            )).rename(columns = {'id':'administration_id', 'study__name': 'study_name', 'url_hash': 'link'})
+    except:
+        admin_data = pd.DataFrame(columns = admin_header)
+    return admin_data
+
+def format_admin_header(study_obj):
+    # Fetch administration variables
+    admin_header = ['study_name', 'subject_id','local_lab_id','repeat_num', 'administration_id', 'link', 'completed', 'completedBackgroundInfo', 'completedSurvey', 'due_date', 'last_modified','created_date']
+    # remove completedSurvey if no back page for background info
+    filename = os.path.realpath(settings.BASE_DIR + '/cdi_forms/form_data/background_info/' + study_obj.instrument.name + '_back.json')
+    if not os.path.isfile(filename):
+        admin_header.remove("completedSurvey")
+    return admin_header
 
 @login_required # For researchers only, requires user to be logged in (test-takers do not have an account and are blocked from this interface)
 def download_data(request, study_obj, administrations = None): # Download study data
@@ -71,8 +96,8 @@ def download_data(request, study_obj, administrations = None): # Download study 
     model_header = get_model_header(study_obj.instrument.name) # Fetch the associated instrument model's variables
 
     # Fetch administration variables
-    admin_header = ['study_name', 'subject_id','local_lab_id','repeat_num', 'administration_id', 'link', 'completed', 'completedBackgroundInfo', 'due_date', 'last_modified','created_date']
-
+    admin_header = format_admin_header(study_obj)
+    
     # Fetch background data variables
     background_header = ['age','sex','country','zip_code','birth_order', 'birth_weight_lb', 'birth_weight_kg','multi_birth_boolean','multi_birth', 'born_on_due_date', 'early_or_late', 'due_date_diff', 'mother_yob', 'mother_education','father_yob', 'father_education', 'annual_income', 'child_hispanic_latino', 'child_ethnicity', 'caregiver_info', 'other_languages_boolean','other_languages','language_from', 'language_days_per_week', 'language_hours_per_day', 'ear_infections_boolean','ear_infections', 'hearing_loss_boolean','hearing_loss', 'vision_problems_boolean','vision_problems', 'illnesses_boolean','illnesses', 'services_boolean','services','worried_boolean','worried','learning_disability_boolean','learning_disability']
 
@@ -134,13 +159,8 @@ def download_data(request, study_obj, administrations = None): # Download study 
         background_answers = pd.DataFrame(columns = list(new_background) + list(melted_answers) + list(melted_scores))
     
     # Try to format administration data for pandas dataframe
-    try:
-        admin_data = pd.DataFrame.from_records(administrations.values(
-            'id', 'study__name','url_hash', 'repeat_num', 'subject_id','local_lab_id','completed','completedBackgroundInfo','due_date','last_modified','created_date'
-        )).rename(columns = {'id':'administration_id', 'study__name': 'study_name', 'url_hash': 'link'})
-    except:
-        admin_data = pd.DataFrame(columns = admin_header)
-    
+    admin_data = format_admin_data(pd, study_obj, administrations, admin_header)
+        
     # Replace study ID# with actual study name
     #admin_data['study_name'] = study_obj.name
 
@@ -188,8 +208,7 @@ def download_summary(request, study_obj, administrations = None): # Download stu
     administrations = administrations if administrations is not None else administration.objects.filter(study = study_obj)
     administrations = administrations.exclude(opt_out=True)
 
-    # Fetch administration variables
-    admin_header = ['study_name', 'subject_id','local_lab_id','repeat_num', 'administration_id', 'link', 'completed', 'completedBackgroundInfo', 'due_date', 'last_modified','created_date']
+    admin_header = format_admin_header(study_obj)
 
     # Fetch background data variables
     background_header = ['age','sex','zip_code','birth_order', 'birth_weight_lb', 'birth_weight_kg','multi_birth_boolean','multi_birth', 'born_on_due_date', 'early_or_late', 'due_date_diff', 'mother_yob', 'mother_education','father_yob', 'father_education', 'annual_income', 'child_hispanic_latino', 'child_ethnicity', 'caregiver_info', 'other_languages_boolean','other_languages','language_from', 'language_days_per_week', 'language_hours_per_day', 'ear_infections_boolean','ear_infections', 'hearing_loss_boolean','hearing_loss', 'vision_problems_boolean','vision_problems', 'illnesses_boolean','illnesses', 'services_boolean','services','worried_boolean','worried','learning_disability_boolean','learning_disability']
@@ -226,14 +245,8 @@ def download_summary(request, study_obj, administrations = None): # Download stu
     except:
         background_answers = pd.DataFrame(columns = list(new_background) + list(melted_scores))
     
-    # Try to format administration data for pandas dataframe
-    try:
-        admin_data = pd.DataFrame.from_records(administrations.values(
-            'id', 'study__name','url_hash', 'repeat_num', 'subject_id','local_lab_id','completed','completedBackgroundInfo','due_date','last_modified','created_date'
-        )).rename(columns = {'id':'administration_id', 'study__name': 'study_name', 'url_hash': 'link'})
-    except:
-        admin_data = pd.DataFrame(columns = admin_header)
-    
+    admin_data = format_admin_data(pd, study_obj, administrations, admin_header)
+
     # Replace study ID# with actual study name
     #admin_data['study_name'] = study_obj.name
 
@@ -467,11 +480,19 @@ def console(request, study_name = None, num_per_page = 20): # Main giant functio
         context['studies'] = study.objects.filter(researcher = request.user, active = True).order_by('id')
         context['instruments'] = []
         if study_name is not None:
-            try:
+            #try:
                 current_study = study.objects.get(researcher= request.user, name= study_name)
                 administration_table = StudyAdministrationTable(administration.objects.filter(study = current_study))
                 if not current_study.confirm_completion:
-                    administration_table.exclude = ("study",'id', 'url_hash','completedBackgroundInfo', 'analysis')
+                    administration_table.exclude = ("study",'id', 'url_hash', 'analysis')
+                
+                # remove completedSurvey if no back page for background info
+                filename = os.path.realpath(settings.BASE_DIR + '/cdi_forms/form_data/background_info/' + current_study.instrument.name + '_back.json')
+                if not os.path.isfile(filename):
+                    excludes = list(administration_table.exclude)
+                    excludes.append("completedSurvey")
+                    administration_table.exclude = excludes
+
                 RequestConfig(request, paginate={'per_page': num_per_page}).configure(administration_table)
                 context['current_study'] = current_study.name
                 context['num_per_page'] = num_per_page
@@ -482,7 +503,7 @@ def console(request, study_name = None, num_per_page = 20): # Main giant functio
                 context['unique_children'] = count = administration.objects.filter(study = current_study, completed = True).values('subject_id').distinct().count()
                 context['allow_payment'] = current_study.allow_payment
                 context['available_giftcards'] = payment_code.objects.filter(hash_id__isnull = True, study = current_study).count()
-            except:
+            #except:
                 pass
         return render(request, 'researcher_UI/interface.html', context) # Render interface template
 
@@ -589,6 +610,7 @@ def rename_study(request, study_name): # Function for study settings modal
         form_package['allow_payment'] = study_obj.allow_payment
         form_package['min_age'] = age_range.lower
         form_package['max_age'] = age_range.upper
+        form_package['study_obj'] = study_obj
         return render(request, 'researcher_UI/add_study_modal.html', form_package) # Reload 'Update Study' modal
         
 @login_required 
