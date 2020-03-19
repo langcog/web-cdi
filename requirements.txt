@@ -13,7 +13,7 @@ certifi==2019.9.11
 chardet==3.0.4
 colorama==0.3.9
 confusable-homoglyphs==3.2.0
-Django<=2.2
+Django==2.2.6
 django-adaptors==0.2.5
 django-appconf==1.0.3
 django-axes==5.0.14
@@ -27,7 +27,8 @@ django-csvimport==2.13
 django-easy-pdf==0.1.1
 django-form-utils==1.0.3
 django-health-check==3.11.0
-django-inspectional-registration==0.6.2
+#django-inspectional-registration==0.6.2
+git+git://github.com/HenryMehta/django-inspectional-registration.git
 django-ipware==2.1.0
 django-js-asset==1.2.2
 django-localflavor==2.2
