@@ -1148,5 +1148,5 @@ class PDFAdministrationDetailView(PDFTemplateResponseMixin, DetailView):
         context = super().get_context_data(**kwargs)
         prefilled_data = prefilled_cdi_data(self.object)
         for field in prefilled_data:
-            context[field] = prefilled_data[field]
+            context[field] = prefilled_data[field]       
         return context

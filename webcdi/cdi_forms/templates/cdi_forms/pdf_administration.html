@@ -8,7 +8,6 @@
 {% block content %}
     <div id="content">
         <div class="main">
-
             {% for part in parts %}
                 <h2> {{ part.title }}</h2>
 
@@ -32,7 +31,7 @@
                                         </div>
                                     {% else %}
                                         {% for choice in object.choices %}
-                                            SECTION 2
+                                            <tr><td colspan=2>SECTION 2</td></tr>
                                             <div class="row">
                                                 <label class = "btn mult-choice" for="{{ object.itemID }}_{{ choice.1 }}">
                                                     <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.1 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
@@ -52,10 +51,8 @@
                                     <td>{{ object.definition|bleach_markdown }}</td>
                                     {% if object.prefilled_value %}<td>{{ object.choices|translate:instrument_name }}</td>{% endif %}
                                 {% elif type.type == "textbox" %}
-                                    SECTION 99
-                                    <div class="col-md-12"> <input type="text" class="rounded border border-secondary" id="{{ object.itemID }}" name="{{ object.itemID }}" maxlength="200" value="{{ object.prefilled_value }}" {% if completed %} disabled {% endif %}></div>
+                                    <tr><td colspan=2>{{ object.prefilled_value }}</td></tr>
                                 {% endif %}
-                        
                             </tr>
                         {% endfor %}
                     
@@ -108,7 +105,7 @@
                                     {% endif %}
                                 </tr>
                             {% endfor %}
-                            <tr><td colspan=2>{{ section.footnote }}</td></tr>
+                            <tr><td colspan=2>{{ section.footnote }}<br /></td></tr>
                             
                         {% endfor %}
                 
