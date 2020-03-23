@@ -98,7 +98,7 @@
                                         {% endif %}
                                     {% elif section.type == "checkbox" %}
                                         <td>{{ object.definition|bleach_markdown }}: </td>
-                                        {% if object.prefilled_value %}<td>{{ object.choices }}</td>{% endif %}
+                                        {% if object.prefilled_value %}<td>{{ object.choices|translate:instrument_name }}</td>{% endif %}
                                     {% elif section.type == "textbox" %}
                                         SECTION 98
                                         <div class="col-md-12"> <input type="text" class="rounded border border-secondary" id="{{ object.itemID }}" name="{{ object.itemID }}" maxlength="200" value="{{ object.prefilled_value }}" {% if completed %} disabled {% endif %}></div>
