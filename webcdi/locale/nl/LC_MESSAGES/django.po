@@ -2077,8 +2077,6 @@ msgid "Show Me My Answers"
 msgstr "Laat mijn antwoorden zien"
 
 #: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:208
-#, fuzzy
-#| msgid "Show Me My Answers"
 msgid "Print My Answers"
 msgstr "Print mijn antwoorden"
 

@@ -2073,8 +2073,6 @@ msgid "Show Me My Answers"
 msgstr "Mostarme mis Respuestas"
 
 #: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:208
-#, fuzzy
-#| msgid "Show Me My Answers"
 msgid "Print My Answers"
 msgstr "Imprime mis Respuestas"
 
