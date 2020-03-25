@@ -8,4 +8,4 @@ class InstrumentFormsAdmin(admin.ModelAdmin):
     list_filter = ['instrument']
 admin.site.register(Instrument_Forms, InstrumentFormsAdmin)
 
-#admin.site.register(Choices)
+admin.site.register(Choices)

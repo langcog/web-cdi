@@ -14,6 +14,6 @@ def get_item_perc(dictionary, key):
 
 @register.filter
 def translate(choice, instrument_name):
-    obj = Choices.objects.get(choice_set=choice)
+    obj = Choices.objects.get(choice_set_en=choice)
     instrument_obj = instrument.objects.get(name=instrument_name)
     return getattr(obj, 'choice_set_' + settings.LANGUAGE_DICT[instrument_obj.language])

@@ -287,8 +287,6 @@ msgstr "¿Qué idioma(s)?"
 
 #: webcdi/cdi_forms/forms.py:160 webcdi/cdi_forms/forms.py:166
 #: webcdi/cdi_forms/forms.py:172
-#, fuzzy
-#| msgid "Please describe"
 msgid "Please specify"
 msgstr "Por favor describa"
 
@@ -1454,10 +1452,6 @@ msgstr ""
 "llenar el inventario. Un ejemplo podría ser cuando su niño(a) este durmiendo."
 
 #: webcdi/cdi_forms/templates/cdi_forms/background_info.html:28
-#, fuzzy
-#| msgid ""
-#| "Try to complete the inventory when you have at least 30 quiet minutes, "
-#| "without interruptions. An example might be when your child is sleeping."
 msgid ""
 "Try to complete the inventory when you have at least 10-15 quiet minutes, "
 "without interruptions. An example might be when your child is sleeping."
@@ -1646,8 +1640,6 @@ msgid "Contents:"
 msgstr "El Índice:"
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:28
-#, fuzzy
-#| msgid "Instructions: "
 msgid "Instructions:"
 msgstr "Instrucciones: "
 
@@ -2015,13 +2007,6 @@ msgstr ""
 
 #: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:172
 #: webcdi/cdi_forms/templates/cdi_forms/printable_cdiBAK.html:102
-#, fuzzy
-#| msgid ""
-#| "Thank you for participating in the participating our Web-CDI project! It "
-#| "is our pleasure to send you this Amazon.com Gift Card that can be "
-#| "redeemed towards millions of items at <a href=\"http://www.amazon.com\" "
-#| "target=\"_blank\">www.amazon.com</a>. You may want to print this screen "
-#| "for easy reference later--you’ll need the gift card claim code below."
 msgid ""
 "Thank you for participating in our Web-CDI project! It is our pleasure to "
 "send you this Amazon.com Gift Card that can be redeemed towards millions of "
@@ -2048,11 +2033,6 @@ msgstr "Código de Reclamo"
 
 #: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:181
 #: webcdi/cdi_forms/templates/cdi_forms/printable_cdiBAK.html:111
-#, fuzzy, python-format
-#| msgid ""
-#| "To redeem your gift card, visit <a href=\"%(redeem_url)s\" target=\"_blank"
-#| "\">%(redeem_url)s</a>. Restrictions apply, see <a href=\"%(legal_url)s\" "
-#| "target=\"_blank\">%(legal_url)s</a>."
 msgid ""
 "To redeem your gift card, visit <a href=\"%(redeem_url)s\" target=\"_blank"
 "\">www.amazon.com/redeem</a>. Restrictions apply, see <a href=\"%(legal_url)s"
@@ -2611,14 +2591,10 @@ msgid "Spanish"
 msgstr "español"
 
 #: webcdi/webcdi/settings.py:206
-#, fuzzy
-#| msgid "French"
 msgid "French Quebec"
 msgstr "francés"
 
 #: webcdi/webcdi/settings.py:207
-#, fuzzy
-#| msgid "English"
 msgid "Canadian English"
 msgstr "inglés"
 
@@ -2629,73 +2605,3 @@ msgstr ""
 #: webcdi/webcdi/settings.py:209
 msgid "Hebrew"
 msgstr ""
-
-#, fuzzy
-#~| msgid "Previous Page"
-#~ msgid "Print Page"
-#~ msgstr "Página Anterior"
-
-#~ msgid "Please select an item in the list."
-#~ msgstr "Por favor seleccione un artículo en la lista."
-
-#~ msgid "Waiver of Documentation of Informed Consent."
-#~ msgstr "Renuncia a la Documentación de su Consentimiento"
-
-#~ msgid "What is your zip code?<br>(if you live in the U.S.)"
-#~ msgstr "¿Cuál es su código postal?"
-
-#~ msgid "Mother / Parent or Guardian 1 Year of birth"
-#~ msgstr "Madre / Tutor Legal 1 Año de nacimiento"
-
-#~ msgid "Mother / Parent or Guardian 1 Education"
-#~ msgstr "Madre / Tutor Legal 1 Educación"
-
-#~ msgid "Father / Parent or Guardian 2 Year of birth"
-#~ msgstr "Padre / Tutor Legal 2 Año de nacimiento"
-
-#~ msgid "Father / Parent or Guardian 2 Education"
-#~ msgstr "Padre / Tutor Legal 2 Educación"
-
-#~ msgid "Over "
-#~ msgstr "Más que "
-
-#~ msgid "Percentage of Words Spoken (%%)"
-#~ msgstr "Porcentaje de Palabras Hablado (%%)"
-
-#~ msgid ""
-#~ "Sorry but it looks like your child is outside of our age range for "
-#~ "predicting vocabulary size! This version of the CDI assessment is for "
-#~ "children between MIN_AGE to MAX_AGE months of age"
-#~ msgstr ""
-#~ "Lo siento, pero parece que su niño(a) está fuera de nuestro rango de edad "
-#~ "para predecir el tamaño del vocabulario. Esta versión del Inventario es "
-#~ "para niños entre MIN_AGE y MAX_AGE meses de edad"
-
-#~ msgid "Current Spoken Vocabulary"
-#~ msgstr "Vocabulario Hablado y Actual"
-
-#~ msgid "Current Understood Vocabulary"
-#~ msgstr "Vocabulario Comprendido y Actual"
-
-#~ msgid "Predicted %% of Words Spoken"
-#~ msgstr "%% Prevista de Palabras Hablado"
-
-#~ msgid "Predicted %% of Words Understood"
-#~ msgstr "%% Prevista de Palabras Comprendido"
-
-#~ msgid "Current Vocabulary Size"
-#~ msgstr "El Tamaño Actual del Vocabulario"
-
-#~ msgid "Age (in Months)"
-#~ msgstr "Edad (en meses)"
-
-#~ msgid "Predicted %% of Words on Test"
-#~ msgstr "%% Prevista de Palabras en Cuestionario"
-
-#~ msgid ""
-#~ "My baby speaks LANGUAGE and is between MIN_AGE and MAX_AGE months old."
-#~ msgstr ""
-#~ "Mi niño(a) habla LANGUAGE y está entre MIN_AGE y MAX_AGE meses de edad"
-
-#~ msgid "spots left"
-#~ msgstr "lugares más"

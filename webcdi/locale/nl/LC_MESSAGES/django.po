@@ -1487,11 +1487,6 @@ msgstr ""
 "onderdelen in."
 
 #: webcdi/cdi_forms/templates/cdi_forms/background_info.html:36
-#, fuzzy, python-format
-#| msgid ""
-#| "You will receive a $%(gift_amount)s Amazon.com gift card after you "
-#| "complete the form. As we are a research lab with limited funds, we ask "
-#| "that you only complete this questionnaire once."
 msgid ""
 "You will receive a $%(gift_amount)s Amazon.com gift card after you complete "
 "the form. As we are a research lab with limited funds, we ask that you only "
@@ -1929,19 +1924,6 @@ msgstr ""
 "waarderen uw interesse."
 
 #: webcdi/cdi_forms/templates/cdi_forms/overflow.html:49
-#, fuzzy, python-format
-#| msgid ""
-#| "Thank you for your interest in completing the MacArthur-Bates "
-#| "Communicative Development Inventory (CDI)! At this time, all of our study "
-#| "slots have already filled up and we have run out of thank-you gifts to "
-#| "compensate you for your time! If you are still interested in completing "
-#| "the CDI and learning more about your child's vocabulary, you may click <a "
-#| "href=\"%(bypass_url)s\" target=\"_blank\">here</a> to complete the 30-"
-#| "minute questionnaire. If you have any concerns about your child’s "
-#| "development, we recommend that you talk with your child’s physician. If "
-#| "you enjoyed our assessment, you can learn more about the CDI <a href="
-#| "\"http://mb-cdi.stanford.edu/\" target=\"_blank\">here</a>. Again, we "
-#| "appreciate your interest!"
 msgid ""
 "Thank you for your interest in completing the MacArthur-Bates Communicative "
 "Development Inventory (CDI)! At this time, all of our study slots have "
@@ -2658,41 +2640,3 @@ msgstr "Nederlands"
 msgid "Hebrew"
 msgstr ""
 
-#, fuzzy
-#~| msgid "Previous Page"
-#~ msgid "Print Page"
-#~ msgstr "Vorige Pagina"
-
-#, fuzzy
-#~| msgid "Instructions: "
-#~ msgid "Instructions"
-#~ msgstr "Instructies:"
-
-#, fuzzy
-#~| msgid "Instructions: "
-#~ msgid "Go back to Instructions"
-#~ msgstr "Instructies:"
-
-#~ msgid "Please select an item in the list."
-#~ msgstr "Selecteer een item in de lijst."
-
-#~ msgid "Waiver of Documentation of Informed Consent."
-#~ msgstr "Toestemmingsverklaring."
-
-#~ msgid "Mother / Parent or Guardian 1 Year of birth"
-#~ msgstr "Moeder / Ouder of voogd 1 Geboortejaar"
-
-#~ msgid "Mother / Parent or Guardian 1 Education"
-#~ msgstr "Moeder / Ouder of voogd 1 Onderwijs / Opleidingsniveau"
-
-#~ msgid "Father / Parent or Guardian 2 Year of birth"
-#~ msgstr "Vader / Ouder of voogd 2 Geboortejaar"
-
-#~ msgid "Father / Parent or Guardian 2 Education"
-#~ msgstr "Vader / Ouder of voogd 2 Onderwijs / Opleidingsniveau"
-
-#~ msgid "Over "
-#~ msgstr "Boven"
-
-#~ msgid "Percentage of Words Spoken (%%)"
-#~ msgstr "Percentage gesproken woorden (%%)"
