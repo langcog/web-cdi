@@ -17,3 +17,7 @@ def translate(choice, instrument_name):
     obj = Choices.objects.get(choice_set_en=choice)
     instrument_obj = instrument.objects.get(name=instrument_name)
     return getattr(obj, 'choice_set_' + settings.LANGUAGE_DICT[instrument_obj.language])
+
+@register.simple_tag
+def to_list(*args):
+    return args
