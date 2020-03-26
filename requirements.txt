@@ -24,6 +24,7 @@ django-ckeditor==5.7.1
 django-countries==5.5
 django-crispy-forms==1.7.2
 django-csvimport==2.13
+django-easy-pdf==0.1.1
 django-form-utils==1.0.3
 django-health-check==3.11.0
 #django-inspectional-registration==0.6.2
@@ -59,11 +60,13 @@ pathspec==0.5.9
 Pillow==6.2.0
 psycopg2==2.8.3
 pyparsing==2.4.2
+PyPDF2==1.26.0
 python-dateutil==2.8.0
 python-magic==0.4.15
 python-stdnum==1.11
 pytz==2019.2
 PyYAML==3.13
+reportlab==3.5.42
 requests==2.20.1
 s3transfer==0.2.1
 selenium==3.141.0
@@ -79,4 +82,5 @@ urllib3==1.24.3
 wcwidth==0.1.7
 webencodings==0.5.1
 websocket-client==0.56.0
+xhtml2pdf==0.2.4
 xlrd==1.2.0

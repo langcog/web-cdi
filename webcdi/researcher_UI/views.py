@@ -65,11 +65,11 @@ def format_admin_data(pd, study_obj, administrations, admin_header):
         filename = os.path.realpath(settings.BASE_DIR + '/cdi_forms/form_data/background_info/' + study_obj.instrument.name + '_back.json')
         if not os.path.isfile(filename):
             admin_data = pd.DataFrame.from_records(administrations.values(
-                'id', 'study__name','url_hash', 'repeat_num', 'subject_id','local_lab_id','completed','completedBackgroundInfo','due_date','last_modified','created_date'
+                'id','opt_out', 'study__name','url_hash', 'repeat_num', 'subject_id','local_lab_id','completed','completedBackgroundInfo','due_date','last_modified','created_date'
             )).rename(columns = {'id':'administration_id', 'study__name': 'study_name', 'url_hash': 'link'})
         else:
             admin_data = pd.DataFrame.from_records(administrations.values(
-                'id', 'study__name','url_hash', 'repeat_num', 'subject_id','local_lab_id','completed','completedBackgroundInfo','completedSurvey','due_date','last_modified','created_date'
+                'id', 'opt_out', 'study__name','url_hash', 'repeat_num', 'subject_id','local_lab_id','completed','completedBackgroundInfo','completedSurvey','due_date','last_modified','created_date'
             )).rename(columns = {'id':'administration_id', 'study__name': 'study_name', 'url_hash': 'link'})
     except:
         admin_data = pd.DataFrame(columns = admin_header)
@@ -77,7 +77,7 @@ def format_admin_data(pd, study_obj, administrations, admin_header):
 
 def format_admin_header(study_obj):
     # Fetch administration variables
-    admin_header = ['study_name', 'subject_id','local_lab_id','repeat_num', 'administration_id', 'link', 'completed', 'completedBackgroundInfo', 'completedSurvey', 'due_date', 'last_modified','created_date']
+    admin_header = ['opt_out','study_name', 'subject_id','local_lab_id','repeat_num', 'administration_id', 'link', 'completed', 'completedBackgroundInfo', 'completedSurvey', 'due_date', 'last_modified','created_date']
     # remove completedSurvey if no back page for background info
     filename = os.path.realpath(settings.BASE_DIR + '/cdi_forms/form_data/background_info/' + study_obj.instrument.name + '_back.json')
     if not os.path.isfile(filename):
@@ -92,7 +92,7 @@ def download_data(request, study_obj, administrations = None): # Download study 
     response['Content-Disposition'] = 'attachment; filename="' + filename + '"'# Name the CSV response
     
     administrations = administrations if administrations is not None else administration.objects.filter(study = study_obj)
-    administrations = administrations.exclude(opt_out=True)
+    #administrations = administrations.exclude(opt_out=True)
     model_header = get_model_header(study_obj.instrument.name) # Fetch the associated instrument model's variables
 
     # Fetch administration variables
@@ -206,7 +206,7 @@ def download_summary(request, study_obj, administrations = None): # Download stu
     response['Content-Disposition'] = 'attachment; filename="' + filename + '"'# Name the CSV response
     
     administrations = administrations if administrations is not None else administration.objects.filter(study = study_obj)
-    administrations = administrations.exclude(opt_out=True)
+    #administrations = administrations.exclude(opt_out=True)
 
     admin_header = format_admin_header(study_obj)
 

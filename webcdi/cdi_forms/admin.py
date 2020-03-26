@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Instrument_Forms
+from .models import Instrument_Forms, Choices
 # Register your models here.
 
 class InstrumentFormsAdmin(admin.ModelAdmin):
@@ -8,3 +8,4 @@ class InstrumentFormsAdmin(admin.ModelAdmin):
     list_filter = ['instrument']
 admin.site.register(Instrument_Forms, InstrumentFormsAdmin)
 
+admin.site.register(Choices)

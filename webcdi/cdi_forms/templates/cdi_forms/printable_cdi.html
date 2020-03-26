@@ -1,4 +1,6 @@
 {% load i18n cdiform_tags %}
+{% to_list 'Dutch' as language_list %}
+
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -67,7 +69,7 @@
         // Set chart options
         var options = {
             'title': '{% trans 'Words Produced (%)' %}',
-            'width' : {% if 'WG' in instrument %}500{% else %}1000{% endif %},
+            'width' : {% if 'WG' in instrument or language in language_list %}500{% else %}1000{% endif %},
             'height':750,
             'legend': {position: 'none'},
             'vAxis' : { textStyle : { fontSize: 10} },
@@ -90,7 +92,7 @@
         chart.draw(data, options);
       }
     
-        {% if 'WG' in instrument %}
+        {% if 'WG' in instrument or language in language_list  %}
             google.charts.setOnLoadCallback(drawUnderstoodChart);
             function drawUnderstoodChart() {
 
@@ -204,11 +206,9 @@
         <div class="row justify-content-center">
             <h4><a href="#filled_form" data-toggle="collapse">{% trans "Show Me My Answers" %}</a></h4>
         </div>
-        <!--
         <div class="row justify-content-center">
-            <h4 onclick="window.print();">{% trans "Print Page" %}</h4>
+            <h4><a href="{% url 'administration-pdf-view' object.pk %}">{% trans "Print My Answers" %}</a></h4>
         </div>
-        -->
         
 
         <div class="row justify-content-center">
@@ -233,7 +233,7 @@
                 </div>
                 <br>
                 <div class = "row"> 
-                    {% if 'WG' in instrument %}
+                    {% if 'WG' in instrument or language in language_list %}
                         <div class="col-md-6 text-center">
                             <div id="categories_charts_understood"></div>
                             <input id="save-understood-pdf" type="button" value="{% trans 'Save as PDF' %}" disabled />
