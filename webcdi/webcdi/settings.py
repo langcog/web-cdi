@@ -19,7 +19,6 @@ from .secret_settings import *
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 # Quick-start development settings - unsuitable for production
@@ -40,55 +39,11 @@ except ImportError:
     generate_secret_key(os.path.join(SETTINGS_DIR, 'secret_key.py'))
     from .secret_key import *
 
-#SECRET_KEY = 'bt8n72d_ks+(7d-s&9%3g^b(m3g#_grs#ir!m-p5$^5se@fdsu'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-
-DEBUG = bool(os.environ.get('DEBUG', False))
-TEMPLATE_DEBUG = False
-
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
-
-ADMINS = (
-    ('Henry Mehta', 'hjsmehta@gmail.com'),
-)
 
 MANAGERS = ADMINS
 
-ALLOWED_HOSTS = [
-    '.us-west-2.elasticbeanstalk.com',
-    'webcdi-prod-py36.us-west-2.elasticbeanstalk.com',
-    'webcdi-dev-py36.us-west-2.elasticbeanstalk.com', 
-    'ec2-34-208-105-171.us-west-2.compute.amazonaws.com',
-    'ec2-52-88-52-34.us-west-2.compute.amazonaws.com',
-    'web-cdi-dev6.mfpemr5vcz.us-west-2.elasticbeanstalk.com',
-    'web-cdi-dev8.mfpemr5vcz.us-west-2.elasticbeanstalk.com',
-    'localhost', 
-    '127.0.0.2',
-    '127.0.0.1',
-    'webcdi-dev.us-west-2.elasticbeanstalk.com',
-    'webcdi-prod.us-west-2.elasticbeanstalk.com', 
-    'webcdi.stanford.edu', 
-    'webcdi-dev.stanford.edu', 
-    '.elb.amazonaws.com']
-
-private_ip = get_linux_ec2_private_ip()
-if private_ip:
-    ALLOWED_HOSTS.append(private_ip)
-
-IPS_TO_ADD = [socket.gethostname()]
-
-NEW_IPS = set()
-
-for IP in IPS_TO_ADD:
-    for i in range(0,100):
-    	NEW_IPS.add(socket.gethostbyname(IP))
-
-for IP in list(NEW_IPS):
-	ALLOWED_HOSTS.append(IP)
-
 # Application definition
-
 INSTALLED_APPS = (
     'researcher_UI', 
     'modeltranslation',
@@ -119,6 +74,7 @@ INSTALLED_APPS = (
     'webcdi',
     'ckeditor',
     'ckeditor_uploader',
+    'easy_pdf',
 )
 
 MIDDLEWARE = [

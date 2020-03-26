@@ -22,7 +22,7 @@ from ipware.ip import get_ip
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 import pandas as pd
-from django.views.generic import UpdateView, CreateView
+from django.views.generic import UpdateView, CreateView, DetailView
 
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__)) # Declare root folder for project and files. Varies between Mac and Linux installations.
@@ -950,6 +950,7 @@ def printable_view(request, hash_id):
 
     prefilled_data['graph_data'] = categories
     prefilled_data['instrument'] = administration_instance.study.instrument.name
+    prefilled_data['object'] = administration_instance
 
     response = render(request, 'cdi_forms/printable_cdi.html', prefilled_data) # Render contact form template   
     response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
@@ -1137,3 +1138,16 @@ def update_administration_data_item(request):
     administration.objects.filter(url_hash = hash_id).update(last_modified = timezone.now()) # Update administration object with date of last modification
     #update_summary_scores(administration_instance)
     return HttpResponse(json.dumps([{}]), content_type='application/json')
+
+from easy_pdf.views import PDFTemplateResponseMixin
+
+class PDFAdministrationDetailView(PDFTemplateResponseMixin, DetailView):
+    model = administration
+    template_name = 'cdi_forms/pdf_administration.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        prefilled_data = prefilled_cdi_data(self.object)
+        for field in prefilled_data:
+            context[field] = prefilled_data[field]       
+        return context

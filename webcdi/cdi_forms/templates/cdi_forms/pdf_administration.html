@@ -1,0 +1,117 @@
+{% extends "easy_pdf/base.html" %}
+{% load static i18n bleach_markdown %}
+
+{% block extra_style %}
+
+{% endblock %}
+
+{% block content %}
+    <div id="content">
+        <div class="main">
+            {% for part in parts %}
+                <h2> {{ part.title }}</h2>
+
+                {% for type in part.types %}
+                    <h3> {{ type.title }}</h3>
+                    <table>
+                    
+                        {% for object in type.objects %}
+                            <tr>
+                                {% if 'textbox' in object.item %}
+                                    <td>{{ object.text }}</td>
+                                    <td>{{ object.prefilled_value }}</td>
+                                {% elif type.type == "radiobutton" or type.type == "modified_checkbox" %}
+                                    {% if object.text != '' %}
+                                        <td>{{ object.text|safe }}: </td>
+                                            {% for choice in object.choices %}
+                                                {% if choice.2 %} 
+                                                    <td>{{ choice.0 }}</td>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        {% for choice in object.choices %}
+                                            <tr><td colspan=2>SECTION 2</td></tr>
+                                            <div class="row">
+                                                <label class = "btn mult-choice" for="{{ object.itemID }}_{{ choice.1 }}">
+                                                    <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.1 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
+                                                    {% if type.type == "radiobutton" %} 
+                                                        <i class="material-icons radio_button_checked" aria-hidden="true">radio_button_checked</i>
+                                                        <i class="material-icons radio_button_unchecked" aria-hidden="true">radio_button_unchecked</i>
+                                                    {% elif type.type == "modified_checkbox"%} 
+                                                        <i class="material-icons check_box" aria-hidden="true">check_box</i>
+                                                        <i class="material-icons check_box_outline_blank" aria-hidden="true">check_box_outline_blank</i>
+                                                    {% endif %}
+                                                    &nbsp;&nbsp;<span class="choice">{{ choice.0 }}</span>
+                                                </label>
+                                            </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                {% elif type.type == "checkbox" %}
+                                    <td>{{ object.definition|bleach_markdown }}</td>
+                                    {% if object.prefilled_value %}<td>{{ object.choices|translate:instrument_name }}</td>{% endif %}
+                                {% elif type.type == "textbox" %}
+                                    <tr><td colspan=2>{{ object.prefilled_value }}</td></tr>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    
+
+                        {% for section in type.sections %}
+                            <tr><td colspan=2><h4>{{ section.title }}</h4></td></tr>
+                            <tr><td colspan=2>{{ section.text }}</td></tr>
+                            
+                            {% for object in section.objects %}
+                                <tr>
+                                    {% if 'textbox' in object.item %}
+                                        <td>{{ object.text }}</td>
+                                        <td>{{ object.prefilled_value }}</td>
+                                    {% elif section.type == "radiobutton" or section.type == "modified_checkbox" %}
+                                        {% if object.text != '' %}
+                                            <td>{{ object.text|safe }}: </td>
+                                                {% for choice in object.choices %}
+                                                    {% if choice.2 %} 
+                                                        <td>{{ choice.0 }}</td>
+                                                    {% endif %}
+                                                {% endfor %}
+                                        {% else %}
+                                            SECTION 5
+                                            <div class="col-lg-4 col-8 alco-child" name = "{{ object.itemID }}_div">
+                                                <div class="btn-groupbtn-group-justified " data-toggle="buttons">
+                                                    {% for choice in object.choices %}
+                                                        <div class="row">
+                                                            <label class = "btn mult-choice" for="{{ object.itemID }}_{{ choice.1 }}">
+                                                                <input {% if section.type == "radiobutton" %} type="radio" {% elif section.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.1 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
+                                                                {% if section.type == "radiobutton" %} 
+                                                                    <i class="material-icons radio_button_checked" aria-hidden="true">radio_button_checked</i>
+                                                                    <i class="material-icons radio_button_unchecked" aria-hidden="true">radio_button_unchecked</i>
+                                                                {% elif section.type == "modified_checkbox"%} 
+                                                                    <i class="material-icons check_box" aria-hidden="true">check_box</i>
+                                                                    <i class="material-icons check_box_outline_blank" aria-hidden="true">check_box_outline_blank</i>
+                                                                {% endif %}
+                                                                &nbsp;&nbsp;<span class="choice">{{ choice.0 }}</span>
+                                                            </label>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% elif section.type == "checkbox" %}
+                                        <td>{{ object.definition|bleach_markdown }}: </td>
+                                        {% if object.prefilled_value %}<td>{{ object.choices|translate:instrument_name }}</td>{% endif %}
+                                    {% elif section.type == "textbox" %}
+                                        SECTION 98
+                                        <div class="col-md-12"> <input type="text" class="rounded border border-secondary" id="{{ object.itemID }}" name="{{ object.itemID }}" maxlength="200" value="{{ object.prefilled_value }}" {% if completed %} disabled {% endif %}></div>
+                                    {% endif %}
+                                </tr>
+                            {% endfor %}
+                            <tr><td colspan=2>{{ section.footnote }}<br /></td></tr>
+                            
+                        {% endfor %}
+                
+                    </table>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,4 +1,6 @@
 {% load i18n cdiform_tags %}
+{% to_list 'Dutch' as language_list %}
+
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -45,57 +47,52 @@
         google.charts.setOnLoadCallback(drawProducesChart);
 
         var graph_colors = [
-            "#ff0000","#cc0066","#cc0099","#9933ff","#3333cc","#0033cc","#0099cc","#009999","#00cc66","#009933","#669900","#cccc00","#ff9900","#ff3300",
-            "#ff0000","#cc0066","#cc0099","#9933ff","#3333cc","#0033cc","#0099cc","#009999","#00cc66","#009933","#669900","#cccc00","#ff9900","#ff3300",
-            "#ff0000","#cc0066","#cc0099","#9933ff","#3333cc","#0033cc","#0099cc","#009999","#00cc66","#009933","#669900","#cccc00","#ff9900","#ff3300",
-            "#ff0000","#cc0066","#cc0099","#9933ff","#3333cc","#0033cc","#0099cc","#009999","#00cc66","#009933","#669900","#cccc00","#ff9900","#ff3300"
-            ];
-        // Callback that creates and populates a data table,
-        // instantiates the pie chart, passes in the data and
-        // draws it.
-        function drawProducesChart() {
+            "#ff0000","#cc0066","#cc0099","#9933ff",'#3333cc','#0033cc','#0099cc','#009999','#00cc66','#009933','#669900','#cccc00','#ff9900','#ff3300',
+            '#ff0000','#cc0066','#cc0099','#9933ff','#3333cc','#0033cc','#0099cc','#009999','#00cc66','#009933','#669900','#cccc00','#ff9900','#ff3300',
+            '#ff0000','#cc0066','#cc0099','#9933ff','#3333cc','#0033cc','#0099cc','#009999','#00cc66','#009933','#669900','#cccc00','#ff9900','#ff3300',
+            '#ff0000','#cc0066','#cc0099','#9933ff','#3333cc','#0033cc','#0099cc','#009999','#00cc66','#009933','#669900','#cccc00','#ff9900','#ff3300'];
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawProducesChart() {
 
-            // Create the data table.
-            var data = new google.visualization.arrayToDataTable([
-                ["Category","Percentage", {role: "style"}],
-                {% for category in graph_data %}
-                    {% if graph_data|get_item:category|get_item:"count" > 0 %}
-                        ["{{ graph_data|get_item:category|get_item:"mappedName" }}", {{ graph_data|get_item:category|get_item_perc:"produces" }}, graph_colors[{{ forloop.counter0 }}]],
-                    {% endif %}                
-                {% endfor %}
-            ]);
-            
-            // Set chart options
-            var options = {
-                title: "{% trans "Words Produced (%)" %}",
-                width : {% if 'WG' in instrument %}500{% else %}1000{% endif %},
-                height: 750,
-                legend: {position: "none"},
-                vAxis : {
-                    textStyle : { fontSize: 10},
-                },
-                hAxis : {
-                    minValue: 0,
-                }
+        // Create the data table.
+        var data = new google.visualization.arrayToDataTable([
+            ['Category','Percentage', {role: 'style'}],
+            {% for category in graph_data %}
+                {% if graph_data|get_item:category|get_item:'count' > 0 %}
+                ['{{ graph_data|get_item:category|get_item:'mappedName' }}', {{ graph_data|get_item:category|get_item_perc:'produces' }}, graph_colors[{{ forloop.counter0 }}]],
+                {% endif %}                
+            {% endfor %}
+        ]);
+        
+        // Set chart options
+        var options = {
+            'title': '{% trans 'Words Produced (%)' %}',
+            'width' : {% if 'WG' in instrument or language in language_list %}500{% else %}1000{% endif %},
+            'height':750,
+            'legend': {position: 'none'},
+            'vAxis' : { textStyle : { fontSize: 10} },
+            'hAxis' : {viewWindow: { min:0 }},
             };
 
             // Instantiate and draw our chart, passing in some options.
             var chart = new google.visualization.BarChart(document.getElementById('categories_charts_produced'));
 
-            var btnProducedSave = document.getElementById('save-produced-pdf')
-            google.visualization.events.addListener(chart, 'ready', function () {
-                btnProducedSave.disabled = false;
-            });
-            btnProducedSave.addEventListener('click', function () {
-                var doc = new jsPDF();
-                doc.addImage(chart.getImageURI(), 0, 0);
-                doc.save('chart.pdf');
-            }, false);
+        var btnProducedSave = document.getElementById('save-produced-pdf')
+        google.visualization.events.addListener(chart, 'ready', function () {
+            btnProducedSave.disabled = false;
+        });
+        btnProducedSave.addEventListener('click', function () {
+            var doc = new jsPDF();
+            doc.addImage(chart.getImageURI(), 0, 0);
+            doc.save('chart.pdf');
+        }, false);
 
-            chart.draw(data, options);
-        }
-        
-        {% if 'WG' in instrument %}
+        chart.draw(data, options);
+      }
+    
+        {% if 'WG' in instrument or language in language_list  %}
             google.charts.setOnLoadCallback(drawUnderstoodChart);
             function drawUnderstoodChart() {
 
@@ -209,11 +206,9 @@
         <div class="row justify-content-center">
             <h4><a href="#filled_form" data-toggle="collapse">{% trans "Show Me My Answers" %}</a></h4>
         </div>
-        <!--
         <div class="row justify-content-center">
-            <h4 onclick="window.print();">{% trans "Print Page" %}</h4>
+            <h4><a href="{% url 'administration-pdf-view' object.pk %}">{% trans "Print My Answers" %}</a></h4>
         </div>
-        -->
         
 
         <div class="row justify-content-center">
@@ -237,7 +232,7 @@
                 </div>
                 <br>
                 <div class = "row"> 
-                    {% if 'WG' in instrument %}
+                    {% if 'WG' in instrument or language in language_list %}
                         <div class="col-md-6 text-center">
                             <div id="categories_charts_understood"></div>
                             <input id="save-understood-pdf" type="button" value="{% trans 'Save as PDF' %}" disabled />

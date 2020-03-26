@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-11 09:28+0000\n"
+"POT-Creation-Date: 2020-03-24 16:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1462,10 +1462,6 @@ msgstr ""
 "interruptions. Un exemple pourrait être lorsque votre enfant dort.​"
 
 #: webcdi/cdi_forms/templates/cdi_forms/background_info.html:28
-#, fuzzy
-#| msgid ""
-#| "Try to complete the inventory when you have at least 30 quiet minutes, "
-#| "without interruptions. An example might be when your child is sleeping."
 msgid ""
 "Try to complete the inventory when you have at least 10-15 quiet minutes, "
 "without interruptions. An example might be when your child is sleeping."
@@ -1533,7 +1529,7 @@ msgstr "Information sur l’enfant et la famille"
 #: webcdi/cdi_forms/templates/cdi_forms/background_info.html:61
 #: webcdi/cdi_forms/templates/cdi_forms/backpage_info.html:37
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:339
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:273
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:271
 #: webcdi/cdi_forms/templates/cdi_forms/printable_cdiBAK.html:183
 #: webcdi/cdi_forms/templates/cdi_forms/study_group.html:113
 msgid "Form unavailable. Contact admin."
@@ -1553,8 +1549,6 @@ msgid "Go back to Background Info"
 msgstr "Revenir à l'information sur l’enfant et la famille"
 
 #: webcdi/cdi_forms/templates/cdi_forms/backpage_info.html:26
-#, fuzzy
-#| msgid "Background Information"
 msgid "Background Information Continued"
 msgstr "Information sur l’enfant et la famille"
 
@@ -1650,8 +1644,6 @@ msgid "Contents:"
 msgstr "Contenu:"
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:28
-#, fuzzy
-#| msgid "Instructions: "
 msgid "Instructions:"
 msgstr "Directives: "
 
@@ -1894,7 +1886,9 @@ msgstr "Formulaire de contact"
 #: webcdi/cdi_forms/templates/cdi_forms/contact.html:33
 msgid ""
 "Fill out the form below and a member of our team will get back to you soon!"
-msgstr "Remplissez le formulaire ci-dessous et un membre de notre équipe vous répondra bientôt!"
+msgstr ""
+"Remplissez le formulaire ci-dessous et un membre de notre équipe vous "
+"répondra bientôt!"
 
 #: webcdi/cdi_forms/templates/cdi_forms/contact.html:67
 msgid " characters remaining"
@@ -2051,11 +2045,6 @@ msgstr "Code de carte-cadeau"
 
 #: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:181
 #: webcdi/cdi_forms/templates/cdi_forms/printable_cdiBAK.html:111
-#, fuzzy, python-format
-#| msgid ""
-#| "To redeem your gift card, visit <a href=\"%(redeem_url)s\" target=\"_blank"
-#| "\">%(redeem_url)s</a>. Restrictions apply, see <a href=\"%(legal_url)s\" "
-#| "target=\"_blank\">%(legal_url)s</a>."
 msgid ""
 "To redeem your gift card, visit <a href=\"%(redeem_url)s\" target=\"_blank"
 "\">www.amazon.com/redeem</a>. Restrictions apply, see <a href=\"%(legal_url)s"
@@ -2075,54 +2064,52 @@ msgstr "Affichez mes données!"
 msgid "Show Me My Answers"
 msgstr "Affichez mes réponses"
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:209
-#, fuzzy
-#| msgid "Previous Page"
-msgid "Print Page"
-msgstr "Page précédente"
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:208
+msgid "Print My Answers"
+msgstr "Imprimer mes réponses"
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:219
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:217
 #: webcdi/cdi_forms/templates/cdi_forms/printable_cdiBAK.html:143
 msgid "Share on Facebook"
 msgstr "Partagez sur Facebook"
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:239
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:243
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:248
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:237
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:241
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:246
 msgid "Save as PDF"
 msgstr "Enregistrer au PDF"
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:350
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:348
 #: webcdi/cdi_forms/templates/cdi_forms/printable_cdiBAK.html:260
 msgid "My child says PPP words and understands UUU words."
 msgstr "Mon enfant dit PPP mots et comprend UUU mots."
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:352
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:350
 #: webcdi/cdi_forms/templates/cdi_forms/printable_cdiBAK.html:262
 msgid "My child says PPP words."
 msgstr "Mon enfant dit PPP mots."
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:354
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:352
 #: webcdi/cdi_forms/templates/cdi_forms/printable_cdiBAK.html:264
 msgid "My child understands UUU words."
 msgstr "Mon enfant comprend UUU mots."
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:493
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:491
 #: webcdi/cdi_forms/templates/cdi_forms/printable_cdiBAK.html:527
 msgid "My child produces the most words in the bestProdCat category."
 msgstr "Mon enfant produit le plus de mots dans la catégorie « bestProdCat »."
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:497
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:495
 #: webcdi/cdi_forms/templates/cdi_forms/printable_cdiBAK.html:531
 msgid "My child understands the most words in the bestCompCat category."
 msgstr "Mon enfant comprend le plus de mots dans la catégorie « bestCompCat »."
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:583
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:581
 #: webcdi/cdi_forms/templates/cdi_forms/printable_cdiBAK.html:617
 msgid "The hardest word my child says is INSERTWORDHERE."
 msgstr "Le mot le plus difficile que mon enfant dit est « INSERTWORDHERE »."
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:587
+#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:585
 #: webcdi/cdi_forms/templates/cdi_forms/printable_cdiBAK.html:621
 msgid "The hardest word my child understands is INSERTWORDHERE."
 msgstr ""
@@ -2610,448 +2597,26 @@ msgstr ""
 msgid "I am afraid that your account registration was rejected by inspector."
 msgstr ""
 
-#: webcdi/webcdi/settings.py:242
+#: webcdi/webcdi/settings.py:204
 msgid "English"
 msgstr "anglais"
 
-#: webcdi/webcdi/settings.py:243
+#: webcdi/webcdi/settings.py:205
 msgid "Spanish"
 msgstr ""
 
-#: webcdi/webcdi/settings.py:244
+#: webcdi/webcdi/settings.py:206
 msgid "French Quebec"
 msgstr ""
 
-#: webcdi/webcdi/settings.py:245
+#: webcdi/webcdi/settings.py:207
 msgid "Canadian English"
 msgstr ""
 
-#: webcdi/webcdi/settings.py:246
+#: webcdi/webcdi/settings.py:208
 msgid "Dutch"
 msgstr "néerlandais"
 
-#: webcdi/webcdi/settings.py:247
+#: webcdi/webcdi/settings.py:209
 msgid "Hebrew"
 msgstr ""
-
-#~ msgid "Please select an item in the list."
-#~ msgstr "Veuillez sélectionner un élément dans la liste."
-
-#~ msgid "Waiver of Documentation of Informed Consent."
-#~ msgstr "Demande de Dispense de la Documentation du Consentement Éclairé"
-
-#~ msgid "Afar"
-#~ msgstr "afar"
-
-#~ msgid "Akan"
-#~ msgstr "akan"
-
-#~ msgid "Amharic"
-#~ msgstr "amharique"
-
-#~ msgid "Arabic"
-#~ msgstr "arabe"
-
-#~ msgid "Armenian"
-#~ msgstr "arménien"
-
-#~ msgid "Assamese"
-#~ msgstr "assamais"
-
-#~ msgid "Avaric"
-#~ msgstr "avar"
-
-#~ msgid "Aymara"
-#~ msgstr "aymara; aimara"
-
-#~ msgid "Azerbaijani"
-#~ msgstr "azerbaïdjanais"
-
-#~ msgid "Bambara"
-#~ msgstr "bambara"
-
-#~ msgid "Bashkir"
-#~ msgstr "bachkir"
-
-#~ msgid "Basque"
-#~ msgstr "basque"
-
-#~ msgid "Belarusian"
-#~ msgstr "bélarussien"
-
-#~ msgid "Bengali"
-#~ msgstr "bengali"
-
-#~ msgid "Bihari"
-#~ msgstr "bihari"
-
-#~ msgid "Bislama"
-#~ msgstr "bichelamar"
-
-#~ msgid "Bosnian"
-#~ msgstr "bosnien; bosniaque"
-
-#~ msgid "Breton"
-#~ msgstr "breton"
-
-#~ msgid "Bulgarian"
-#~ msgstr "bulgare"
-
-#~ msgid "Burmese"
-#~ msgstr "birman"
-
-#~ msgid "Chechen"
-#~ msgstr "tchétchène"
-
-#~ msgid "Chinese"
-#~ msgstr "chinois"
-
-#~ msgid "Chuvash"
-#~ msgstr "tchouvache"
-
-#~ msgid "Cornish"
-#~ msgstr "cornouaillais"
-
-#~ msgid "Corsican"
-#~ msgstr "corse"
-
-#~ msgid "Cree"
-#~ msgstr "cri"
-
-#~ msgid "Croatian"
-#~ msgstr "croate"
-
-#~ msgid "Czech"
-#~ msgstr "tchèque"
-
-#~ msgid "Estonian"
-#~ msgstr "estonien"
-
-#~ msgid "Ewe"
-#~ msgstr "éwé"
-
-#~ msgid "Faroese"
-#~ msgstr "féroïen"
-
-#~ msgid "Fijian"
-#~ msgstr "fidjien"
-
-#~ msgid "French"
-#~ msgstr "français"
-
-#~ msgid "Georgian"
-#~ msgstr "géorgien"
-
-#~ msgid "German"
-#~ msgstr "allemand"
-
-#~ msgid "Greek, Modern"
-#~ msgstr "grec, moderne"
-
-#~ msgid "Guaraní"
-#~ msgstr "guarani"
-
-#~ msgid "Gujarati"
-#~ msgstr "gujarâtî"
-
-#~ msgid "Hausa"
-#~ msgstr "haoussa; hausa"
-
-#~ msgid "Herero"
-#~ msgstr "herero"
-
-#~ msgid "Hindi"
-#~ msgstr "hindi"
-
-#~ msgid "Indonesian"
-#~ msgstr "indonésien"
-
-#~ msgid "Interlingue"
-#~ msgstr "interlingue; occidental"
-
-#~ msgid "Irish"
-#~ msgstr "irlandais"
-
-#~ msgid "Igbo"
-#~ msgstr "igbo"
-
-#~ msgid "Inupiaq"
-#~ msgstr "inupiaq"
-
-#~ msgid "Ido"
-#~ msgstr "ido"
-
-#~ msgid "Italian"
-#~ msgstr "italien"
-
-#~ msgid "Inuktitut"
-#~ msgstr "inuktitut"
-
-#~ msgid "Japanese"
-#~ msgstr "japonais"
-
-#~ msgid "Javanese"
-#~ msgstr "javanais"
-
-#~ msgid "Kalaallisut, Greenlandic"
-#~ msgstr "kalaallisut, groenlandais"
-
-#~ msgid "Kannada"
-#~ msgstr "kannada"
-
-#~ msgid "Kanuri"
-#~ msgstr "kanouri"
-
-#~ msgid "Kashmiri"
-#~ msgstr "cachemiri; kashmiri"
-
-#~ msgid "Kazakh"
-#~ msgstr "kazakh; qazaq"
-
-#~ msgid "Khmer"
-#~ msgstr "khmer"
-
-#~ msgid "Kinyarwanda"
-#~ msgstr "kinyarwanda"
-
-#~ msgid "Kirghiz, Kyrgyz"
-#~ msgstr "kirghiz, kirghize"
-
-#~ msgid "Komi"
-#~ msgstr "komi"
-
-#~ msgid "Kongo"
-#~ msgstr "kikongo"
-
-#~ msgid "Korean"
-#~ msgstr "coréen"
-
-#~ msgid "Kurdish"
-#~ msgstr "kurde"
-
-#~ msgid "Latin"
-#~ msgstr "latin"
-
-#~ msgid "Luganda"
-#~ msgstr "luganda"
-
-#~ msgid "Lingala"
-#~ msgstr "lingala"
-
-#~ msgid "Lao"
-#~ msgstr "lao"
-
-#~ msgid "Lithuanian"
-#~ msgstr "lituanien"
-
-#~ msgid "Latvian"
-#~ msgstr "letton"
-
-#~ msgid "Manx"
-#~ msgstr "mannois"
-
-#~ msgid "Macedonian"
-#~ msgstr "macédonien"
-
-#~ msgid "Malagasy"
-#~ msgstr "malgache"
-
-#~ msgid "Malay"
-#~ msgstr "malais"
-
-#~ msgid "Malayalam"
-#~ msgstr "malayalam"
-
-#~ msgid "Māori"
-#~ msgstr "maori"
-
-#~ msgid "Nauru"
-#~ msgstr "nauruan"
-
-#~ msgid "Navajo, Navaho"
-#~ msgstr "navajo, navaho"
-
-#~ msgid "Nepali"
-#~ msgstr "népalais"
-
-#~ msgid "Ndonga"
-#~ msgstr "ndonga"
-
-#~ msgid "Nuosu"
-#~ msgstr "nuosu; nosu"
-
-#~ msgid "Occitan"
-#~ msgstr "occitan"
-
-#~ msgid "Ojibwe, Ojibwa"
-#~ msgstr "ojibway; ojibwa; ojibwé"
-
-#~ msgid "Oromo"
-#~ msgstr "oromo"
-
-#~ msgid "Oriya"
-#~ msgstr "oriya"
-
-#~ msgid "Panjabi, Punjabi"
-#~ msgstr "panjabi, punjabi"
-
-#~ msgid "Pāli"
-#~ msgstr "pâli"
-
-#~ msgid "Persian"
-#~ msgstr "persan; parsi"
-
-#~ msgid "Polish"
-#~ msgstr "polonais"
-
-#~ msgid "Quechua"
-#~ msgstr "quechua"
-
-#~ msgid "Romansh"
-#~ msgstr "romanche"
-
-#~ msgid "Kirundi"
-#~ msgstr "kirundi"
-
-#~ msgid "Russian"
-#~ msgstr "russe"
-
-#~ msgid "Sindhi"
-#~ msgstr "sindhi"
-
-#~ msgid "Northern Sami"
-#~ msgstr "same du Nord"
-
-#~ msgid "Samoan"
-#~ msgstr "samoan"
-
-#~ msgid "Sango"
-#~ msgstr "sango"
-
-#~ msgid "Serbian"
-#~ msgstr "serbe"
-
-#~ msgid "Shona"
-#~ msgstr "shona"
-
-#~ msgid "Slovak"
-#~ msgstr "slovaque"
-
-#~ msgid "Slovene"
-#~ msgstr "slovène"
-
-#~ msgid "Somali"
-#~ msgstr "somalien"
-
-#~ msgid "Sundanese"
-#~ msgstr "soundanais; sundanais"
-
-#~ msgid "Swahili"
-#~ msgstr "swahili"
-
-#~ msgid "Swati"
-#~ msgstr "swati; siswati"
-
-#~ msgid "Swedish"
-#~ msgstr "suédois"
-
-#~ msgid "Tamil"
-#~ msgstr "tamoul"
-
-#~ msgid "Telugu"
-#~ msgstr "télougou"
-
-#~ msgid "Tajik"
-#~ msgstr "tadjik"
-
-#~ msgid "Thai"
-#~ msgstr "thaï"
-
-#~ msgid "Tigrinya"
-#~ msgstr "tigrinya; tigrigna"
-
-#~ msgid "Turkmen"
-#~ msgstr "turkmène"
-
-#~ msgid "Tagalog"
-#~ msgstr "tagalog; tagal"
-
-#~ msgid "Tswana"
-#~ msgstr "tswana"
-
-#~ msgid "Turkish"
-#~ msgstr "turc"
-
-#~ msgid "Tsonga"
-#~ msgstr "tsonga"
-
-#~ msgid "Tatar"
-#~ msgstr "tatar"
-
-#, fuzzy
-#~| msgid "Twins"
-#~ msgid "Twi"
-#~ msgstr "Jumeaux"
-
-#~ msgid "Tahitian"
-#~ msgstr "tahitien"
-
-#~ msgid "Uighur, Uyghur"
-#~ msgstr "ouïgour"
-
-#~ msgid "Ukrainian"
-#~ msgstr "ukrainien"
-
-#~ msgid "Urdu"
-#~ msgstr "ourdou"
-
-#~ msgid "Uzbek"
-#~ msgstr "ouzbek"
-
-#~ msgid "Venda"
-#~ msgstr "venda"
-
-#~ msgid "Vietnamese"
-#~ msgstr "vietnamien"
-
-#~ msgid "Volapük"
-#~ msgstr "volapük"
-
-#~ msgid "Welsh"
-#~ msgstr "gallois"
-
-#~ msgid "Wolof"
-#~ msgstr "wolof"
-
-#~ msgid "Xhosa"
-#~ msgstr "xhosa"
-
-#~ msgid "Yiddish"
-#~ msgstr "yiddish; yidich"
-
-#~ msgid "Yoruba"
-#~ msgstr "yoruba"
-
-#~ msgid "Zhuang, Chuang"
-#~ msgstr "zhuang"
-
-#~ msgid "Abkhaz"
-#~ msgstr "abkhaz"
-
-#~ msgid "Percentage of Words Spoken (%%)"
-#~ msgstr "Pourcentage de mots parlés (%%)"
-
-#~ msgid "Mother / Parent or Guardian 1 Year of birth"
-#~ msgstr "Année de naissance de la Mère / du Parent ou Tuteur 1"
-
-#~ msgid "Mother / Parent or Guardian 1 Education"
-#~ msgstr "Éducation de la Mère / du Parent ou Tuteur 1"
-
-#~ msgid "Father / Parent or Guardian 2 Year of birth"
-#~ msgstr "Année de naissance du Père / Parent ou Tuteur 2"
-
-#~ msgid "Father / Parent or Guardian 2 Education"
-#~ msgstr "Éducation du Père / Parent ou Tuteur 2"
-
-#~ msgid "Over "
-#~ msgstr "Au-dessus de "
