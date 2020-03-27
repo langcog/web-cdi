@@ -100,11 +100,6 @@
                         {
                             "id": "locations",
                             "title": "18. מילות יחס/ מקום"
-                        },
-                        {
-                            "id": "quantifiers",
-                            "title": "19. Quantifiers And Articles"
-							
                         }
                     ],
                     "type": "modified_checkbox"
