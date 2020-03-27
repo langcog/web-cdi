@@ -223,7 +223,7 @@ LANGUAGE_DICT = {
 }
 
 COUNTRIES_FIRST = [
-    'US','CA','NL'
+    'US','CA','NL','IL'
 ]
 
 
