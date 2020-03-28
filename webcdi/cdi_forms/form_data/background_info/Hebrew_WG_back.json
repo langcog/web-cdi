@@ -93,7 +93,7 @@
       },
       {
           "field":"mother_education",
-          "help":"Choose highest grade completed (12 = high school graduate; 16 = college graduate; 18 = advanced degree)"
+          "help":"נא לציין את מספר שנות הלימוד שהושלמו לצורך קבלת התעודה"
       },
       {
           "field":"secondary_caregiver",
@@ -103,7 +103,7 @@
           "field":"father_yob"
       },{
           "field":"father_education",
-          "help":"Choose highest grade completed (12 = high school graduate; 16 = college graduate; 18 = advanced degree)"
+           "help":"נא לציין את מספר שנות הלימוד שהושלמו לצורך קבלת התעודה"
       },{
           "field":"annual_income",
           "widget_type":"Select",
