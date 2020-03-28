@@ -18,9 +18,10 @@
                 }
                 html {
                     font-family: "Karla", "sans-serif";
-                }
-                html, body, p, table, tr, td, span {
-                    direction: rtl;
+                    font-size: 65%;
+                    {% if language_code == 'he' %}
+                    direction:rtl;
+                    {% endif %}
                 }
 
                 @page {

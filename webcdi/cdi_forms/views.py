@@ -1139,9 +1139,9 @@ def update_administration_data_item(request):
     #update_summary_scores(administration_instance)
     return HttpResponse(json.dumps([{}]), content_type='application/json')
 
-from easy_pdf.views import PDFTemplateResponseMixin
+from django_weasyprint import WeasyTemplateResponseMixin
 
-class PDFAdministrationDetailView(PDFTemplateResponseMixin, DetailView):
+class PDFAdministrationDetailView(WeasyTemplateResponseMixin, DetailView):
     model = administration
     template_name = 'cdi_forms/pdf_administration.html'
 
