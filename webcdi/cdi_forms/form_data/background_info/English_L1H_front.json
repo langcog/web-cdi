@@ -1,0 +1,67 @@
+[{
+  "fieldset":"Basic Information",
+  "fields":[
+      {
+          "field":"form_filler",
+          "div":["form_filler_other"]  
+      },{
+        "field" : "child_dob"
+      },
+      {
+          "field":"age"
+      },
+      {
+          "field":"sex"
+      },
+      {
+            "field": "sibling_boolean",
+            "divs" : [
+                {
+                    "field" : "sibling_count",
+                    "css" : "",
+                    "div" : ["sibling_data"]
+                }
+            ]
+      },{
+          "field":"country",
+          "widget_type":"Select",
+                    "choices":[
+                        {
+                            "key" : "",
+                            "value" : "--------"
+                        },{
+                            "key":"IL",
+                            "value":"Israel"
+                        },{
+                            "key":"US",
+                            "value":"United States"
+                        }],
+          "div":["zip_code"]
+      }
+      
+      ]
+  
+},{
+    "fieldset" : "Language Exposure",
+    "fields" : [
+        {
+            "field" : "other_languages_boolean",
+            "divs" : [
+                {
+                    "field" : "other_languages",
+                    "widget_type":"Select",
+                    "choices":[
+                        {
+                            "key":"English",
+                            "value":"English"
+                        },{
+                            "key":"French",
+                            "value":"French"
+                        }],
+                    "css" : "make-selectize",
+                    "div" : ["language_from","language_days_per_week","language_hours_per_day"]
+                }
+            ]
+        }
+    ]
+}]

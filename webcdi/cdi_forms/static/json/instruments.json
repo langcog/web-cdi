@@ -282,5 +282,15 @@
 		"csv_file": "cdi_form_csv/[English_L2B].csv",
 		"json_data": "cdi_forms/form_data/English_L2BB_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/English_L2B_WS_scoring.json"
+	},
+	{
+		"language": "English",
+		"form": "L1H",
+		"verbose_name": "Short Form Vocabulary Checklist: Level I",
+		"min_age": 8,
+		"max_age": 18,
+		"csv_file": "cdi_form_csv/[English_L1].csv",
+		"json_data": "cdi_forms/form_data/Henry_L1_meta.json",
+		"scoring_json" : "cdi_forms/form_data/scoring/English_L1_WS_scoring.json"
 	}
 ]

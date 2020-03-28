@@ -94,15 +94,21 @@ BIRTH_WEIGHT_KG_CHOICES = [
 
 # Form for asking about demographic variables for child. Most questions are required unless explicitly stated to be false.
 class BackgroundForm(BetterModelForm):
-    
-    # Multiple checkbox question regarding child's ethnicity. Not required.
-    '''
-    child_ethnicity = forms.MultipleChoiceField(
-        widget=forms.CheckboxSelectMultiple,
-        choices = CHILD_ETHNICITY_CHOICES, 
-        label = _("My child is (check all that apply):"), 
-        required = False)
-    '''
+    sibling_boolean = forms.TypedChoiceField(
+        choices=YESNO_CHOICES, 
+        widget=forms.RadioSelect, 
+        coerce = string_bool_coerce, 
+        required=False, 
+        label=_("Does you child have siblings?"))
+    sibling_count = forms.IntegerField(
+        required=False,
+        label=_("How many siblings does you child have?")
+    )
+    sibling_data = forms.CharField(
+        widget=forms.Textarea, 
+        required=False,
+        label = _("Please provide the sex and age of each sibling")
+    )
 
     # Child's DOB. Formatted weirdly to only be required if Age in months in not already stored in database.
     child_dob = forms.DateField(
@@ -187,6 +193,7 @@ class BackgroundForm(BetterModelForm):
             ('multi_birth_boolean', ['multi_birth',]),
             ('born_on_due_date', ['early_or_late', 'due_date_diff',]),
             ('other_languages_boolean', ['other_languages', 'language_days_per_week', 'language_hours_per_day', 'language_from']),
+            ('sibling_boolean', ['sibling_count','sibling_data']),
             ('ear_infections_boolean', ['ear_infections',]),
             ('hearing_loss_boolean', ['hearing_loss',]),
             ('vision_problems_boolean', ['vision_problems',]),
@@ -199,8 +206,12 @@ class BackgroundForm(BetterModelForm):
         # If enabler field was answered as 'True', its related fields cannot be empty. 
         for (enabler, dependents) in enabler_dependent_fields:
             enabler_val = cleaned_data.get(enabler)
+            print (enabler, enabler_val)
             if enabler_val in ['1','other', 1]:
                 for dependent in dependents:
+                    if enabler == 'sibling_boolean':
+                        print (dependent)
+
                     if dependent not in cleaned_data or cleaned_data.get(dependent) == '' or cleaned_data.get(dependent) == None:
                         self.add_error(dependent, _("This field cannot be empty"))
         
@@ -255,6 +266,9 @@ class BackgroundForm(BetterModelForm):
         self.helper.field_class = 'col-lg-9'
         self.helper.form_method = 'post'
         self.helper.form_tag = False    
+
+        #siblings
+        #self.fields['siblings'].field = forms.IntegerField()
 
         self.fields['birth_weight_lb'].label = _('Birth weight') + '<span class="asteriskField">*</span>'
         self.fields['birth_weight_kg'].label = _('Birth weight') + '<span class="asteriskField">*</span>'
@@ -376,6 +390,13 @@ class BackgroundForm(BetterModelForm):
                         for div in field['divs']:
                             fields.append(Div(Field(div['field'], css_class=div["css"]),*div['div'], css_class="dependent"))
                             selected_fields.append(div['field'])
+                            if "choices" in div:
+                                choices = []
+                                for choice in div['choices']:
+                                    choices.append((choice['key'],choice['value']))
+                                self.fields[div['field']].widget.choices = choices    
+                                self.fields[div['field']].choices = choices
+                                self.initial[div['field']] = getattr(self.instance, div['field'])
                             for item in div['div'] : selected_fields.append(item)
                     elif 'div' in field:
                         fields.append(Field(field['field'], css_class="enabler"))
