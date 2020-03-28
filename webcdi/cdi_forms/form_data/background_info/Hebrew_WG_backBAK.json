@@ -1,5 +1,5 @@
 [{
-    "fieldset":"מידע כללי",
+    "fieldset":"Basic Information",
     "fields":[
         {
             "field":"birth_order"
@@ -15,55 +15,55 @@
                     "value" : "--------"
                 },{
                     "key":"1.0",
-                    "value":"פחות מ 1,500 גרם"
+                    "value":"Less than 3 lbs, 0 oz"
                 },{
                     "key":"3.0",
-                    "value":"1,500 - 1,749 גרם"
+                    "value":"3 lbs, 0 oz - 3 lbs, 7 oz"
                 },{
                     "key":"3.5",
-                    "value":"1,750 - 1,999 גרם"
+                    "value":"3 lbs, 8 oz - 3 lbs, 15 oz"
                 },{
                     "key":"4.0",
-                    "value":"2,000 - 2,249 גרם"
+                    "value":"4 lbs, 0 oz - 4 lbs, 7 oz"
                 },{
                     "key":"4.5",
-                    "value":"2,250 - 2,499 גרם"
+                    "value":"4 lbs, 8 oz - 4 lbs, 15 oz"
                 },{
                     "key":"5.0",
-                    "value":"2,500 - 2,749 גרם"
+                    "value":"5 lbs, 0 oz - 5 lbs, 7 oz"
                 },{
                     "key":"5.5",
-                    "value":"2,750 - 2,999 גרם"
+                    "value":"5 lbs, 8 oz - 5 lbs, 15 oz"
                 },{
                     "key":"6.0",
-                    "value":"3,000 - 3,249 גרם"
+                    "value":"6 lbs, 0 oz - 6 lbs, 7 oz"
                 },{
                     "key":"6.5",
-                    "value":"3,250 - 3,499 גרם"
+                    "value":"6 lbs, 8 oz - 6 lbs, 15 oz"
                 },{
                     "key":"7.0",
-                    "value":"3,500 - 3,749 גרם"
+                    "value":"7 lbs, 0 oz - 7 lbs, 7 oz"
                 },{
                     "key":"7.5",
-                    "value":"3,750 - 3,999 גרם"
+                    "value":"7 lbs, 8 oz - 7 lbs, 15 oz"
                 },{
                     "key":"8.0",
-                    "value":"4,000 - 4,249 גרם"
+                    "value":"8 lbs, 0 oz - 8 lbs, 7 oz"
                 },{
                     "key":"8.5",
-                    "value":"4,250 - 4,499 גרם"
+                    "value":"8 lbs, 8 oz - 8 lbs, 15 oz"
                 },{
                     "key":"9.0",
-                    "value":"4,500 - 4,749 גרם"
+                    "value":"9 lbs, 0 oz - 9 lbs, 7 oz"
                 },{
                     "key":"9.5",
-                    "value":"4,750 - 4,999 גרם"
+                    "value":"9 lbs, 8 oz - 9 lbs, 15 oz"
                 },{
                     "key":"10.0",
-                    "value":"5,000 גרם או יותר"
+                    "value":"10 lbs, 0 oz or more"
                 },{
                     "key":"0.0",
-                    "value":"מעדיף לא לענות"
+                    "value":"Prefer not to disclose"
                 }
             ]
         },{
@@ -82,7 +82,7 @@
         }
     ]
 },{
-  "fieldset":"רקע משפחתי",
+  "fieldset":"Family Background",
   "fields":[ 
       {
           "field":"primary_caregiver",
@@ -113,79 +113,78 @@
                 "value" : "--------"
             },{
                 "key" : "<25000",
-                "value" : "פחות מ5000 שח"
+                "value" : "Under $25,000"
             },{
                 "key" : "25000-50000",
-                "value" : "5,000-10,000 שח"
+                "value" : "$25,000-$50,000"
             },{
                 "key" : "50000-75000",
-                "value" : "10,000-15,000 שח"
+                "value" : "$50,000-$75,000"
             },{
                 "key" : "75000-100000",
-                "value" : "15,000-20,000 שח"
+                "value" : "$75,000-$100,000"
             },{
                 "key" : "100000-125000",
-                "value" : "20,000-25,000 שח"
+                "value" : "$100,000-$125,000"
             },{
                 "key" : "125000-150000",
-                "value" : "25,000-30,000 שח"
+                "value" : "$125,000-$150,000"
             },{
                 "key" : "150000-175000",
-                "value" : "30,000-40,000 שח"
+                "value" : "$150,000-$175,000"
             },{
                 "key" : "175000-200000",
-                "value" : "40,000-50,000 שח"
+                "value" : "$175,000-$200,000"
             },{
                 "key" : ">200000",
-                "value" : "מעל 50,000 שח"
+                "value" : "Over $200,000"
             },{
                     "key" : "Prefer not to disclose",
-                    "value" : "מעדיף לא לענות"
+                    "value" : "Prefer not to disclose"
                 }
           ]
       }
       ]
 },{
-    "fieldset" : "מידת הדתיות של המשפחה",
+    "fieldset" : "Child's Ethnicity",
     "fields" : [
         {
-            "html" : "<p>כיצד היית מגדיר את מידת התדיות של המשפחה שלך?</p>"
-        },
-		{
+            "html" : "<p>The following information is being collected for the sole purpose of reporting to our grant-funding institute, i.e.,  NIH (National Institute of Health).  NIH requires this information to ensure the soundness and inclusiveness of our research. Your cooperation is appreciated, but optional.</p>"
+        },{
             "field" : "child_ethnicity",
             "widget_type" : "CheckboxSelectMultiple",
             "choices" : [
                 { 
                     "key" : "N",
-                    "value" : "כלל לא דתי"
+                    "value" : "American Indian / Alaska Native"
                 },{
                     "key" : "A",
-                    "value" : "מסורתי"
+                    "value" : "Asian (Far East, Southeast Asia, Indian Sub-continent)"
                 },{
                     "key" : "H",
-                    "value" : "דתי"
+                    "value" : "Native Hawaiian or Other Pacific Islander"
                 },{
                     "key" : "B",
-                    "value" : "חרדי"
+                    "value" : "Black or African American"
                 },{
                     "key" : "W",
-                    "value" : "אחר"
+                    "value" : "White"
                 },{
                     "key" : "O",
-                    "value" : "מעדיף לא לענות"
+                    "value" : "Other"
                 }
             ]
         }
     ]
 },{
-    "fieldset" : "מידע על ההורים",
+    "fieldset" : "Caregiver Information",
     "fields" : [
         {
             "field":"caregiver_info"
         }
     ]
 },{
-    "fieldset" : "חשיפה לשפות",
+    "fieldset" : "Language Exposure",
     "fields" : [
         {
             "field" : "other_languages_boolean",
@@ -196,25 +195,25 @@
                     "choices":[
                         {
                             "key":"Russian",
-                            "value":"רוסית"
+                            "value":"Russian"
                         },{
                             "key":"Amharic",
-                            "value":"אמהרית"
+                            "value":"Amharic"
                         },{
                             "key":"French",
-                            "value":"צרפתית"
+                            "value":"French"
                         },{
                             "key":"English",
-                            "value":"אנגלית"
+                            "value":"English"
                         },{
                             "key":"Spanish",
-                            "value":"ספרדית"
+                            "value":"Spanish"
                         },{
                             "key":"Arabic",
-                            "value":"ערבית"
+                            "value":"Arabic"
                         },{
                             "key":"Other",
-                            "value":"אחר"
+                            "value":"Other"
                         }],
                     "css" : "",
                     "div" : ["language_from","language_days_per_week","language_hours_per_day"]
@@ -223,7 +222,7 @@
         }
     ]
 },{
-    "fieldset": "בריאות",
+    "fieldset": "Health",
     "fields" : [
         {
             "field":"ear_infections_boolean",

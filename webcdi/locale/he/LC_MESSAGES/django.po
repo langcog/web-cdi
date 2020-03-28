@@ -32,7 +32,7 @@ msgstr "כן"
 #: cdi_forms/forms.py:92 cdi_forms/models.py:84 cdi_forms/models.py:114
 #: cdi_forms/models.py:117 cdi_forms/models.py:147
 msgid "Prefer not to disclose"
-msgstr "מעדיף לא להגיד"
+msgstr "מעדיף לא לענות"
 
 #: cdi_forms/forms.py:32
 msgid "Under $25,000"
@@ -165,7 +165,7 @@ msgstr "פחות מ1500 גרם"
 
 #: cdi_forms/forms.py:77
 msgid "1500 grams - 1749 grams"
-msgstr "1550-1749 גרם"
+msgstr "1500-1749 גרם"
 
 #: cdi_forms/forms.py:78
 msgid "1750 grams - 1999 grams"
@@ -395,7 +395,7 @@ msgstr ""
 
 #: cdi_forms/forms.py:443 cdi_forms/models.py:136
 msgid "Estimated Annual Family Income (in USD)"
-msgstr "הכנסה משפחתית חודשית בשקלים"
+msgstr "הכנסה משפחתית חודשית בשקלים (ברוטו)"
 
 #: cdi_forms/forms.py:447
 msgid "My child is (check all that apply):"
@@ -1618,8 +1618,6 @@ msgid "Contents:"
 msgstr "תוכן:"
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:28
-#, fuzzy
-#| msgid "Instructions: "
 msgid "Instructions:"
 msgstr "הוראות"
 
@@ -1839,8 +1837,6 @@ msgid "understands and says"
 msgstr "מבין ואומר"
 
 #: cdi_forms/templates/cdi_forms/cdi_items.html:17
-#, fuzzy
-#| msgid "Instructions: "
 msgid "Hide/Show Instructions: "
 msgstr "הוראות"
 
@@ -1980,8 +1976,6 @@ msgid "Show Me My Answers"
 msgstr "הראה לי את התשובות שלי"
 
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:210
-#, fuzzy
-#| msgid "Show Me My Answers"
 msgid "Print My Answers"
 msgstr "הראה לי את התשובות שלי"
 

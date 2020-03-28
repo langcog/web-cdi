@@ -1,5 +1,5 @@
 [{
-  "fieldset":"מידע כללי",
+  "fieldset":"Basic Information",
   "fields":[
       {
           "field":"form_filler",
