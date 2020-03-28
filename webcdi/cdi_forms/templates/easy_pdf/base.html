@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang={{ language_code }}>
 <head>
     <title>{{ title|default:"" }}</title>
     <meta charset="utf-8">
@@ -13,11 +13,14 @@
         {% block layout_style %}
             <style type="text/css">
                 @font-face {
-                    font-family: Karla;
+                    font-family: "Karla";
                     src: url('fonts/rubik/Rubik-Regular.ttf');
                 }
                 html {
                     font-family: "Karla", "sans-serif";
+                }
+                html, body, p, table, tr, td, span {
+                    direction: rtl;
                 }
 
                 @page {
@@ -45,7 +48,8 @@
                 }
             </style>
         {%endblock%}
-        {% block extra_style %}{% endblock %}
+        {% block extra_style %}
+        {% endblock %}
     {% endblock %}
 </head>
 <body>

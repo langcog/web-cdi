@@ -2,18 +2,18 @@
 {% load static i18n bleach_markdown %}
 
 {% block extra_style %}
-
 {% endblock %}
 
 {% block content %}
     <div id="content">
         <div class="main">
+        <span style="direction:rtl">Language: {{ object.study.instrument.language }}</span>
             {% for part in parts %}
-                <h2> {{ part.title }}</h2>
+                <h2 dir="rtl"> {{ part.title }}</h2>
 
                 {% for type in part.types %}
-                    <h3> {{ type.title }}</h3>
-                    <table>
+                    <h3 > {{ type.title }}</h3>
+                    <table style="direction:rtl">
                     
                         {% for object in type.objects %}
                             <tr>
