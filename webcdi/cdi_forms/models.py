@@ -186,6 +186,10 @@ class BackgroundInfo(models.Model):
     form_filler = models.CharField(verbose_name=_('Who is filling in the form?'), max_length=20, choices=form_filler_choices, blank=True, null=True)
     form_filler_other = models.CharField(max_length=25, blank=True, null=True)
 
+    sibling_boolean = models.BooleanField(verbose_name=_('Does you child have siblings?'), default=False, blank=True, null=True)
+    sibling_count = models.IntegerField(verbose_name=_('How many siblings does you child have?'), blank=True, null=True)
+    sibling_data = models.TextField(blank=True, null=True)
+
 #Model of zipcodes reported to be in 3-digit zip code prefixes with a population lower than 20,000. Tests with a zipcode found in this model will have their digits replaced with their state abbreviation.
 class Zipcode(models.Model):
     zip_code=models.CharField(max_length = 5)

@@ -96,8 +96,7 @@ BIRTH_WEIGHT_KG_CHOICES = [
 class BackgroundForm(BetterModelForm):
     sibling_boolean = forms.TypedChoiceField(
         choices=YESNO_CHOICES, 
-        widget=forms.RadioSelect, 
-        coerce = string_bool_coerce, 
+        widget=forms.RadioSelect,
         required=False, 
         label=_("Does you child have siblings?"))
     sibling_count = forms.IntegerField(
@@ -266,9 +265,6 @@ class BackgroundForm(BetterModelForm):
         self.helper.field_class = 'col-lg-9'
         self.helper.form_method = 'post'
         self.helper.form_tag = False    
-
-        #siblings
-        #self.fields['siblings'].field = forms.IntegerField()
 
         self.fields['birth_weight_lb'].label = _('Birth weight') + '<span class="asteriskField">*</span>'
         self.fields['birth_weight_kg'].label = _('Birth weight') + '<span class="asteriskField">*</span>'
