@@ -225,15 +225,15 @@ msgstr "5000 גרם או יותר"
 
 #: cdi_forms/forms.py:102
 msgid "Does you child have siblings?"
-msgstr "עם מי גר ילדך?"
+msgstr "האם לילדך יש אחים?"
 
 #: cdi_forms/forms.py:105
 msgid "How many siblings does you child have?"
-msgstr "בין כמה הילד/ה שלך?"
+msgstr "כמה אחים יש לילד שלך?"
 
 #: cdi_forms/forms.py:110
 msgid "Please provide the sex and age of each sibling"
-msgstr ""
+msgstr "בבקשה ציין את גיל ומין האחים. לדוגמא, אם לילד עליו אתה ממלא את השאלון יש אחות בת ארבע, יש לרשום בת 4 שנים. אם לילד יש אח בן חצי שנה יש לרשום בן 6 חודשים. "
 
 #: cdi_forms/forms.py:117
 msgid ""
@@ -1575,7 +1575,7 @@ msgstr "ניתן להשתמש בכפתור tab ובחצים כדי לנווט ב
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:89
 msgid "Due date"
-msgstr ")תאריך אחרון לשליחת השאלון (תאריך התפוגה של השאלון"
+msgstr "תאריך אחרון לשליחת השאלון:"
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:94
 msgid "Show waiver of documentation"
@@ -1786,28 +1786,19 @@ msgid "You are taking this questionnaire for the FIRST time."
 msgstr "זו הפעם הראשונה שאתה ממלא את השאלון."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:300
-#, fuzzy, python-format
-#| msgid ""
-#| "Yes, I have a child who is %(age.0)s months old, I filled out the entire "
-#| "questionnaire, and I am taking this questionnaire for the first time."
 msgid ""
 "Yes, I have a child who is %(age)s months old, I filled out the entire "
 "questionnaire, and I am taking this questionnaire for the first time."
 msgstr ""
-"כן, יש לי ילד/ה בן/ת %(age.0)s חודשים, מילאתי את כל השאלון, וזו הפעם הראשונה "
+"כן, יש לי ילד/ה בן/ת %(age)s חודשים, מילאתי את כל השאלון, וזו הפעם הראשונה "
 "שאני ממלא שאלון זה."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:306
-#, fuzzy, python-format
-#| msgid ""
-#| "No, I do NOT have a child who is %(age.0)s months old, I have NOT filled "
-#| "out the entire questionnaire, and/or I have taken this questionnaire "
-#| "before."
 msgid ""
 "No, I do NOT have a child who is %(age)s months old, I have NOT filled out "
 "the entire questionnaire, and/or I have taken this questionnaire before."
 msgstr ""
-"לא, אין לי ילד/ה בן/ת %(age.0)s חודשים, לא מילאתי את כל השאלון ו/או זו אינה "
+"לא, אין לי ילד/ה בן/ת %(age)s חודשים, לא מילאתי את כל השאלון ו/או זו אינה "
 "הפעם הראשונה שאני ממלא את השאלון."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:312
@@ -1977,7 +1968,7 @@ msgstr "הראה לי את התשובות שלי"
 
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:210
 msgid "Print My Answers"
-msgstr "הראה לי את התשובות שלי"
+msgstr "התשובות שלי. גירסה להדפסה."
 
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:219
 msgid "Share on Facebook"
