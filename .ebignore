@@ -7,6 +7,6 @@ env/
 __pycache__/
 */.vscode/
 
-*/.git/
+.git/
 
 *.pyc
