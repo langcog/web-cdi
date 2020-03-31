@@ -1,0 +1,15 @@
+{% extends 'cdi_forms/cdi_base.html' %}
+{% load index %}
+
+{% block main %}
+<h1>Completed</h1>
+<table>
+{% for word in object.catresponse.administered_words %}
+    <tr>
+        <td>{{ word }}</td>
+        <td>{{ object.catresponse.administered_responses|index:forloop.counter0 }}</td> 
+    </tr>
+{% endfor %}
+
+</table>
+{% endblock %}

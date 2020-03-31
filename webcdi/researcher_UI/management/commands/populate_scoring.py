@@ -45,9 +45,14 @@ class Command(BaseCommand):
             instrument_obj = instrument.objects.get(form=instrument_form, language=instrument_language)
             instrument_forms = apps.get_model(app_label='cdi_forms', model_name='Instrument_Forms')
 
+            filename = os.path.realpath(PROJECT_ROOT + '/' + instrument_scoring)
+            if not os.path.isfile(filename):
+                print(f'     No scoring for {instrument_language} {instrument_form}.')
+                continue
+            
             print ("    Populating Scoring Methodology for", instrument_language, instrument_form)
 
-            scores = json.load(open(os.path.realpath(PROJECT_ROOT + '/' + instrument_scoring), encoding="utf8"))
+            scores = json.load(open(os.path.realpath(filename), encoding="utf8"))
 
             for score in scores:
                 data_dict = {

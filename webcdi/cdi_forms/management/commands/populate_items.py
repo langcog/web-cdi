@@ -44,6 +44,7 @@ class Command(BaseCommand):
             input_instruments = instruments
 
         for curr_instrument in input_instruments:
+            if curr_instrument['form'] in ['CAT']: continue
 
             instrument_language, instrument_form = curr_instrument['language'], curr_instrument['form']
 
@@ -63,6 +64,7 @@ class Command(BaseCommand):
             else:
                 raise IOError("Instrument file must be a CSV.")
 
+            
             for row in range(1, nrows):
                 row_values = get_row(row)
                 if len(row_values) > 1:

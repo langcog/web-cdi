@@ -912,7 +912,12 @@ def administer_new_parent(request, username, study_name): # For creating single 
             let_through = True # Mark as allowed
 
     if let_through: # If marked as allowed
-        return redirect (reverse('create-new-background-info', kwargs={'study_id' : study_obj.id, 'bypass' : bypass}))
+        if study_obj.instrument.form in ['CAT']:
+            print('CAT Instrument')
+            return redirect (reverse('cat_forms:create-new-background-info', kwargs={'study_id' : study_obj.id, 'bypass' : bypass}))
+        else:
+            print('CDI Instrument')
+            return redirect (reverse('create-new-background-info', kwargs={'study_id' : study_obj.id, 'bypass' : bypass}))
     else: # If not marked as allowed
         redirect_url = reverse('overflow', args=[username, study_name]) # Generate URL for overflowed participants. May or may not have option for bypass depending on context (IP address and cookies)
     return redirect(redirect_url) # Redirect to generated URL

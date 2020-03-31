@@ -722,6 +722,9 @@ def parse_analysis(raw_answer):
 def cdi_form(request, hash_id):
 
     administration_instance = get_administration_instance(hash_id) # Get administration instance.
+    if administration_instance.study.instrument.form in ['CAT'] : return redirect('cat_forms:administer_cat_form', hash_id=hash_id)
+
+
     instrument_name = administration_instance.study.instrument.name # Get instrument name associated with study
     instrument_model = model_map(instrument_name) # Fetch instrument model based on instrument name.
     refresh = False
