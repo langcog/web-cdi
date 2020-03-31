@@ -92,6 +92,39 @@ BIRTH_WEIGHT_KG_CHOICES = [
     (0.00, _("Prefer not to disclose"))
 ]
 
+EDUCATION_LEVELS = [(x,str(x)) for x in range(4,25)] #Declares tuple of integers for # of years of education
+# Appends additional text descriptions for years of education w/ milestones (high school diploma, bachelor's degree, and master's degree)
+EDUCATION_LEVELS[12-5] = (12, _("12 (High school graduate)"))
+EDUCATION_LEVELS[16-5] = (16, _("16 (College graduate)"))
+EDUCATION_LEVELS[18-5] = (18, _("18 (Advanced degree)"))
+EDUCATION_LEVELS[23-5] = (23, _("23 or more"))
+EDUCATION_LEVELS[-1] = (0, _("Prefer not to disclose"))
+EDUCATION_LEVELS[0] = ('','--------')
+
+EDUCATION_LEVELS = [
+    ('','--------'),
+    (5, str(5)),
+    (6, str(6)),
+    (7, str(7)),
+    (8, str(8)),
+    (9, str(9)),
+    (10, str(10)),
+    (11, str(11)),
+    (12, _("12 (High school graduate)")),
+    (13, str(13)),
+    (14, str(14)),
+    (15, str(15)),
+    (16, _("16 (College graduate)")),
+    (17, str(17)),
+    (18, _("18 (Advanced degree)")),
+    (19, str(19)),
+    (20, str(20)),
+    (21, str(21)),
+    (22, str(22)),
+    (23, _("23 or more")),
+    (0, _("Prefer not to disclose"))
+]
+
 # Form for asking about demographic variables for child. Most questions are required unless explicitly stated to be false.
 class BackgroundForm(BetterModelForm):
     sibling_boolean = forms.TypedChoiceField(
@@ -337,6 +370,9 @@ class BackgroundForm(BetterModelForm):
         self.fields['primary_caregiver'].required=True
         self.fields['mother_yob'].required=True
         self.fields['mother_education'].required=True
+        self.fields['mother_education'].choices=EDUCATION_LEVELS
+        self.fields['father_education'].choices=EDUCATION_LEVELS
+        
         self.fields['annual_income'].required= True
         self.fields['caregiver_info'].required= True
 

@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='backgroundinfo',
             name='sibling_boolean',
-            field=models.BooleanField(default=False, verbose_name='Does you child have siblings?'),
+            field=models.BooleanField(verbose_name='Does you child have siblings?',blank=True, null=True),
         ),
         migrations.AddField(
             model_name='backgroundinfo',

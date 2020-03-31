@@ -521,4 +521,3 @@ item_519,ptnddriv,gestures,gestures_adult,no; yes,,"""Drive"" car by turning ste
 item_520,usecloth,gestures,gestures_adult,no; yes,,Clean with cloth or duster.,לנקות עם מטלית,Clean with cloth or duster.,,gestures_adult
 item_521,usepen,gestures,gestures_adult,no; yes,,Write with pen or pencil or marker.,"לכתוב עם עט, עפרון או טוש",Write with pen or pencil or marker.,,gestures_adult
 item_522,wearglas,gestures,gestures_adult,no; yes,,Put on glasses.,להרכיב משקפיים,Put on glasses.,,gestures_adult
-item_761,complx01,gestures,gestures_adult,one; two; three; four,two shoe <br/> two shoes <br/> Three Shoes <br/> Four shoees,1. two shoe <br/> 2. two shoes <br/> 3. Three Shoes <br/> 4. Four shoees,This is my question and then a line break <br/> 1. two shoe <br/> 2. two shoes <br/> 3. Three Shoes <br/> 4. Four shoees,,,

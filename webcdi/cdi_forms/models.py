@@ -106,13 +106,6 @@ class BackgroundInfo(models.Model):
 
     education_levels = [(x,str(x)) for x in range(5,25)] #Declares tuple of integers for # of years of education
 
-    # Appends additional text descriptions for years of education w/ milestones (high school diploma, bachelor's degree, and master's degree)
-    education_levels[12-5] = (12, _("12 (High school graduate)"))
-    education_levels[16-5] = (16, _("16 (College graduate)"))
-    education_levels[18-5] = (18, _("18 (Advanced degree)"))
-    education_levels[23-5] = (23, _("23 or more"))
-    education_levels[-1] = (0, _("Prefer not to disclose"))
-
     years = [(x,str(x)) for x in range(1950, datetime.date.today().year+2)] #Declares tuple for year of birth for parents/guardians
     years[-1] = (0, _("Prefer not to disclose"))
 
@@ -186,7 +179,7 @@ class BackgroundInfo(models.Model):
     form_filler = models.CharField(verbose_name=_('Who is filling in the form?'), max_length=20, choices=form_filler_choices, blank=True, null=True)
     form_filler_other = models.CharField(max_length=25, blank=True, null=True)
 
-    sibling_boolean = models.BooleanField(verbose_name=_('Does you child have siblings?'), default=False, blank=True, null=True)
+    sibling_boolean = models.BooleanField(verbose_name=_('Does you child have siblings?'), blank=True, null=True)
     sibling_count = models.IntegerField(verbose_name=_('How many siblings does you child have?'), blank=True, null=True)
     sibling_data = models.TextField(blank=True, null=True)
 
