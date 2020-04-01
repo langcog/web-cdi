@@ -29,7 +29,8 @@ django-csvimport==2.13
 django-easy-pdf==0.1.1
 django-form-utils==1.0.3
 django-health-check==3.11.0
-django-inspectional-registration==0.6.2
+#django-inspectional-registration==0.6.2
+git+git://github.com/HenryMehta/django-inspectional-registration.git
 django-ipware==2.1.0
 django-js-asset==1.2.2
 django-localflavor==2.2
