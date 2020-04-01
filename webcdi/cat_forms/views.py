@@ -74,8 +74,9 @@ class AdministerAdministraionView(UpdateView):
         administered_responses.append(string_bool_coerce(self.request.POST['item']))
         items = self.get_items()
         for index, item in enumerate(self.instrument_items):
+            print(index)
             if item == instrument_item:
-                administered_items.append(index+1)
+                administered_items.append(index)
                 break
 
         estimator = HillClimbingEstimator()

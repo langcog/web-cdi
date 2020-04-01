@@ -8,11 +8,13 @@ blessed==1.15.0
 boto3==1.10.34
 botocore==1.13.34
 cached-property==1.5.1
+catsim==0.15.4
 cement==2.8.2
 certifi==2019.9.11
 chardet==3.0.4
 colorama==0.3.9
 confusable-homoglyphs==3.2.0
+cycler==0.10.0
 Django==2.2.6
 django-adaptors==0.2.5
 django-appconf==1.0.3
@@ -48,11 +50,16 @@ html5lib==1.0.1
 idna==2.7
 ipaddress==1.0.22
 jmespath==0.9.4
+joblib==0.14.1
 json-table-schema==0.2.1
+json-tricks==3.14.0
 jsonschema==2.6.0
+kiwisolver==1.1.0
 lxml==4.4.1
 Markdown==3.1.1
+matplotlib==3.2.1
 messytables==0.15.2
+numexpr==2.7.1
 numpy==1.17.2
 packaging==19.2
 pandas==0.25.1
@@ -69,6 +76,8 @@ PyYAML==3.13
 reportlab==3.5.42
 requests==2.20.1
 s3transfer==0.2.1
+scikit-learn==0.22.2.post1
+scipy==1.4.1
 selenium==3.141.0
 semantic-version==2.5.0
 six==1.11.0
@@ -78,6 +87,7 @@ tabulate==0.8.5
 termcolor==1.1.0
 texttable==0.9.1
 tolerance==0.1.2
+tqdm==4.44.1
 urllib3==1.24.3
 wcwidth==0.1.7
 webencodings==0.5.1
