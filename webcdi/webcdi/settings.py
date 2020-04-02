@@ -74,7 +74,6 @@ INSTALLED_APPS = (
     'webcdi',
     'ckeditor',
     'ckeditor_uploader',
-    'easy_pdf',
 )
 
 MIDDLEWARE = [

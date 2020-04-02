@@ -1139,9 +1139,9 @@ def update_administration_data_item(request):
     #update_summary_scores(administration_instance)
     return HttpResponse(json.dumps([{}]), content_type='application/json')
 
-from easy_pdf.views import PDFTemplateResponseMixin
+from django_weasyprint import WeasyTemplateResponseMixin
 
-class PDFAdministrationDetailView(PDFTemplateResponseMixin, DetailView):
+class PDFAdministrationDetailView(WeasyTemplateResponseMixin, DetailView):
     model = administration
     template_name = 'cdi_forms/pdf_administration.html'
 
@@ -1149,5 +1149,6 @@ class PDFAdministrationDetailView(PDFTemplateResponseMixin, DetailView):
         context = super().get_context_data(**kwargs)
         prefilled_data = prefilled_cdi_data(self.object)
         for field in prefilled_data:
-            context[field] = prefilled_data[field]       
+            context[field] = prefilled_data[field]
+        context['language_code'] = settings.LANGUAGE_DICT[context['object'].study.instrument.language]
         return context

@@ -2,6 +2,7 @@
 {% load static i18n bleach_markdown %}
 
 {% block extra_style %}
+
 {% endblock %}
 
 {% block content %}
@@ -11,7 +12,7 @@
                 <h2> {{ part.title }}</h2>
 
                 {% for type in part.types %}
-                    <h3 > {{ type.title }}</h3>
+                    <h3> {{ type.title }}</h3>
                     <table>
                     
                         {% for object in type.objects %}

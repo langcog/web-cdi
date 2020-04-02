@@ -8,11 +8,16 @@ blessed==1.15.0
 boto3==1.10.34
 botocore==1.13.34
 cached-property==1.5.1
+cairocffi==1.1.0
+CairoSVG==2.4.2
 cement==2.8.2
 certifi==2019.9.11
+cffi==1.14.0
 chardet==3.0.4
 colorama==0.3.9
 confusable-homoglyphs==3.2.0
+cssselect2==0.3.0
+defusedxml==0.6.0
 Django==2.2.6
 django-adaptors==0.2.5
 django-appconf==1.0.3
@@ -24,7 +29,6 @@ django-ckeditor==5.7.1
 django-countries==5.5
 django-crispy-forms==1.7.2
 django-csvimport==2.13
-django-easy-pdf==0.1.1
 django-form-utils==1.0.3
 django-health-check==3.11.0
 #django-inspectional-registration==0.6.2
@@ -35,6 +39,7 @@ django-localflavor==2.2
 django-modeltranslation==0.13.3
 django-storages==1.8
 django-tables2==2.1.1
+django-weasyprint==0.5.5
 docker==3.7.3
 docker-compose==1.23.2
 docker-pycreds==0.4.0
@@ -59,8 +64,10 @@ pandas==0.25.1
 pathspec==0.5.9
 Pillow==6.2.0
 psycopg2==2.8.3
+pycparser==2.20
 pyparsing==2.4.2
 PyPDF2==1.26.0
+Pyphen==0.9.5
 python-dateutil==2.8.0
 python-magic==0.4.15
 python-stdnum==1.11
@@ -77,9 +84,11 @@ sqlparse==0.3.0
 tabulate==0.8.5
 termcolor==1.1.0
 texttable==0.9.1
+tinycss2==1.0.2
 tolerance==0.1.2
 urllib3==1.24.3
 wcwidth==0.1.7
+WeasyPrint==51
 webencodings==0.5.1
 websocket-client==0.56.0
 xhtml2pdf==0.2.4
