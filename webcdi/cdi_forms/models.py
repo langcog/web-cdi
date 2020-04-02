@@ -129,7 +129,7 @@ class BackgroundInfo(models.Model):
     annual_income = models.CharField(max_length = 30, verbose_name = _("Estimated Annual Family Income (in USD)"), blank=True, null=True) # Asks for bracket of annual income
 
     child_hispanic_latino = models.NullBooleanField(verbose_name = _("Is your child Hispanic or Latino?"), blank=True, null=True) # Asks whether child is hispanic/latino
-    child_ethnicity = ArrayField(models.CharField(max_length = 1), blank=True, null=True) # Asks for child's ethnicity according to NIH ethnicity categories. Can check multiple answers.
+    child_ethnicity = ArrayField(models.CharField(max_length = 1), verbose_name=_("Child's Ethnicity"), blank=True, null=True) # Asks for child's ethnicity according to NIH ethnicity categories. Can check multiple answers.
 
     #Declares possible choices for child's family situation (# of caregivers, parents, grandparents, etc.)
     caregivers_choices = [

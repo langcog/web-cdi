@@ -192,7 +192,6 @@
             "divs" : [
                 {
                     "field" : "other_languages",
-                    "widget_type":"Select",
                     "choices":[
                         {
                             "key":"Russian",
@@ -216,7 +215,7 @@
                             "key":"Other",
                             "value":"אחר"
                         }],
-                    "css" : "",
+                    "css" : "make-selectize",
                     "div" : ["language_from","language_days_per_week","language_hours_per_day"]
                 }
             ]

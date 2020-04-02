@@ -105,7 +105,7 @@
             "title": "שימוש במילים",
             "types": [
                 {
-                    "id": "how_use_words",
+                    "id": "usage",
                     "title": "א. כיצד ילדים משתמשים במילים",
                     "type": "radiobutton"
                 },{      

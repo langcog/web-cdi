@@ -1,4 +1,4 @@
-itemID,item,item_type,category,choices,Definition-english,gloss,definition,complexity_category,scoring_category
+itemID,item,item_type,category,choices,definition English,gloss,definition,complexity_category,scoring_category
 item_1,baa_baa,word,sounds,produces,baa baa,baa baa,מה מה ,,
 item_2,choo_choo,word,sounds,produces,choo choo,choo choo,צ'יק צ'יק צ'אק,,
 item_3,cockadoodledoo,word,sounds,produces,cockadoodledoo,cockadoodledoo,קוקוקריקו,,
@@ -589,7 +589,7 @@ item_587,up,word,locations,produces,up,up,למעלה,,
 item_588,with,word,locations,produces,with,with,עם,,
 item_589,between,word,locations,produces,between,between,בין,,
 item_590,far,word,locations,produces,far,far,רחוק,,
-item_591,all,word,quantifiers,produces,all,all,כל,,
+Item_591,all,word,quantifiers,produces,all,all,כל,,
 item_592,a_lot,word,quantifiers,produces,a lot,a lot,הרבה,,
 item_593,every,word,quantifiers,produces,every,every,הכל,,
 item_594,more,word,quantifiers,produces,more,more,עוד ,,
