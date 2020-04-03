@@ -1,4 +1,4 @@
-itemID,item,item_type,category,choices,uni_lemma,English definition,definition,gloss,complexity_category,scoring_category
+itemID,item,item_type,category,choices,uni_lemma,definition English,definition,gloss,complexity_category,scoring_category
 item_1,respname,first_signs,first_signs,no; yes,,"Respond when name is called (e.g., by turning and looking at source).","מגיב שקוראים בשמו (לדוגמא, מפנה מבט לעבר מקור הקול)","Respond when name is called (e.g., by turning and looking at source).",,
 item_2,respno,first_signs,first_signs,no; yes,,"Respond to ""no no"" (by stopping what he/she is doing, at least for a moment).","מגיב ל""אסור""/ ""לא""/ ""נו, נו, נו"" (למשל על ידי הפסקת הפעולה שעושה, אפילו לרגע)","Respond to ""no no"" (by stopping what he/she is doing, at least for a moment).",,
 item_3,reactmd,first_signs,first_signs,no; yes,,"React to ""there's mommy/daddy"" by looking around for them.","מחפש את אמא או את אבא כאשר שומע: ""הנה אמא"" או ""הנה אבא""","React to ""there's mommy/daddy"" by looking around for them.",,
@@ -134,7 +134,7 @@ item_132,toast,word,food_drink,understands; produces,toast,toast,טוסט,toast,
 item_133,water.beverage,word,food_drink,understands; produces,water (beverage),water (beverage),מים,water (beverage),,
 item_134,watermelon,word,food_drink,understands; produces,watermelon,watermelon,אבטיח ,watermelon,,
 item_135,pear,word,food_drink,understands; produces,pear,pear,אגס,pear,,
-item_136,Rice,word,food_drink,understands; produces,Rice,rice,אורז,Rice,,
+item_136,Rice,word,food_drink,understands; produces,Rice,Rice,אורז,Rice,,
 item_137,peach,word,food_drink,understands; produces,peach,peach,אפרסק,peach,,
 item_138,bamba,word,food_drink,understands; produces,bamba,bamba,במבה,bamba,,
 item_139,honey,word,food_drink,understands; produces,honey,honey,דבש,honey,,
@@ -367,7 +367,7 @@ item_365,touch,word,action_words,understands; produces,touch,touch,לגעת,touc
 item_366,wash,word,action_words,understands; produces,wash,wash,לרחוץ/ לשטוף,wash,,
 item_367,wipe,word,action_words,understands; produces,wipe,wipe,לנגב,wipe,,
 item_368,write,word,action_words,understands; produces,write,write,לכתוב,write,,
-item_369,wish,word,action_words,understands; produces,wish,wish,לברך,wish,,
+item_369,congratulate,word,action_words,understands; produces,congratulate,congratulate,לברך,congratulate,,
 item_370,turn_on,word,action_words,understands; produces,turn on,turn on,להדליק,turn on,,
 item_371,bring_down,word,action_words,understands; produces,bring down,bring down,להוריד,bring down,,
 item_372,hide,word,action_words,understands; produces,hide,hide,להחביא,hide,,
