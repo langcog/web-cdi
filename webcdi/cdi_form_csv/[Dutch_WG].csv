@@ -1,4 +1,4 @@
-itemID,item,item_type,category,choices,definition,gloss,complexity_category,scoring_category		
+itemID,item,item_type,category,choices,definition,gloss,complexity_category,,		
 item_1,respond_name,understanding,first_signs,no; yes,1. Reageert op het roepen van zijn / haar naam (bv door zich te draaien en te kijken in de richting van het geluid).,responds to own name (by looking towards sound),,,	
 item_2,respond_no,understanding,first_signs,no; yes,"2. Reageert op 'nee, nee' (door (eventjes) te stoppen waarmee hij / zij bezig is).","responds to 'no, no' (by stopping what they're doing)",,,
 item_3,respond_there,understanding,first_signs,no; yes,3. Reageert op 'Daar is mama / papa' door rond te kijken om hen te zoeken.,responds to 'there's mommy / daddy' by looking around for them,,,
