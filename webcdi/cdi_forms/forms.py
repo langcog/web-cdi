@@ -264,8 +264,11 @@ class BackgroundForm(BetterModelForm):
         # Complex set of checks meant to ensure that there is an 'age' value stored in the database but 'DOB' is not. If there is no 'age' value in the database, enforce entry of 'child_dob'. If there is an age value, 'child_dob' is not necessary. Also check that 'age' is appropriate for the assigned Web-CDI form. Prevent continuing if not.
         c_dob = cleaned_data.get('child_dob')
         if c_dob:
-            day_diff = datetime.date.today().day - c_dob.day
-            c_age = (datetime.date.today().year - c_dob.year) * 12 +  (datetime.date.today().month - c_dob.month) + (1 if day_diff >=15 else 0)
+            #day_diff = datetime.date.today().day - c_dob.day
+            #c_age = (datetime.date.today().year - c_dob.year) * 12 +  (datetime.date.today().month - c_dob.month) + (1 if day_diff >=15 else 0)
+            #print(datetime.timedelta(datetime.date.today()-c_dob))
+            c_age = int((datetime.date.today()-c_dob).days/(365.2425/12.0))
+            
         else:
             c_age = self.curr_context['child_age']
         if c_age:
