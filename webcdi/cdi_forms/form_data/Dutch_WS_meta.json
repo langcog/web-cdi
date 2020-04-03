@@ -105,7 +105,7 @@
                             "title": "22. Voegwoorden"
                         }
                     ],
-                    "text": "Nu volgt er een lijst met mogelijke woorden van jonge kinderen. Vink het woord in de kolom \"begrijpen\" aan als uw kind dit woord begrijpt, maar nog niet zelf zegt. Vink het woord in de kolom \"begrijpen en zeggen\" aan als uw kind dit woord begrijpt en zelf zegt. Als uw kind een woord anders uitspreekt (bijv. 'ojanne' voor 'oranje' of 'sjille' voor 'schillen') dan mag u toch het woord in de kolom \"begrijpen en zeggen\" aanvinken. Als u of uw kind een ander woord gebruikt (bijv. 'paleis' voor 'kasteel'), dan mag u toch het het woord aanvinken als uw kind dit woord begrijpt en/of zelf zegt. Deze lijst is eigenlijk een verzameling woorden die afkomstig is van verschillende kinderen, wees niet ongerust als uw kind er maar enkele van begrijpt of kent op dit moment.",
+                    "text": "Dit deel is een lijst met woorden van jonge kinderen. Sommige woorden begrijpt uw kind wel, maar zegt het nog niet. Vink dan \"begrijpen\" aan. Andere woorden begrijpt uw kind én zegt het ook al. Vink dan \"begrijpen en zeggen\" aan. Als uw kind een woord anders uitspreekt (bijv. \"ojanne\" voor \"oranje\" of \"sjille\" voor \"schillen\"), dan mag u toch \"begrijpen en zeggen\" aanvinken. Als u of uw kind een ander woord gebruikt (bijv. \"paleis\" voor \"kasteel\"), dan mag u dit woord gewoon aanvinken. De woorden in deze lijst komen van verschillende kinderen, dus wees niet ongerust als uw kind er maar een paar van begrijpt of kent op dit moment.",
                     "title": "A: Woordenschatlijst",
                     "type": "radiobutton"
                 },
@@ -135,7 +135,7 @@
                     "sections": [
                         {
                             "id": "word_ending_nouns",
-                            "title": "Substantieven"
+                            "title": "Zelfstandig naamwoorden"
                         },
                         {
                             "id": "word_ending_verb",
@@ -146,7 +146,7 @@
                             "title": "Werkwoorden -2"
                         }
                     ],
-                    "text": "Jonge kinderen maken vaak 'verkeerde woorden'. Bijvoorbeeld een kind kan zeggen 'gekoopt', 'geloopt'. Dergelijke 'fouten' worden vaak gemaakt omdat de taal nog in ontwikkeling is. Duid in de lijst hieronder de 'fouten' aan die u uw kind reeds hoorde maken.",
+                    "text": "Jonge kinderen maken vaak \"verkeerde woorden\". Een kind kan bijvoorbeeld zeggen \"gekoopt\" of \"geloopt\". Dit soort \"fouten\" worden vaak gemaakt, omdat de taal nog in ontwikkeling is. Vink in de lijst hieronder de \"fouten\" aan die u uw kind hebt horen maken.",
                     "title": "B. Woorduiteinden - deel 2",
                     "type": "checkbox"
                 },
@@ -155,7 +155,7 @@
                     "sections": [
                         {
                             "id": "word_form_nouns",
-                            "title": "Substantieven"
+                            "title": "Zelfstandig naamwoorden"
                         },
                         {
                             "id": "word_form_verb",
@@ -166,19 +166,19 @@
                             "title": "Werkwoorden -2"
                         }
                     ],
-                    "text": "Hieronder staan een aantal woorden die kinderen leren. Kruis de woorden aan die uw kind op de juiste manier zegt.",
+                    "text": "Hieronder staat een aantal woorden die kinderen leren. Vink de woorden aan die uw kind op de juiste manier zegt.",
                     "title": "C. Woordvormen",
                     "type": "checkbox"
                 },
                 {
                     "id": "combination_examples",
                     "title": "D. Voorbeelden",
-                    "text": "Schrijf hieronder 3 van de langste zinnen die uw kind onlangs gezegd heeft.",
+                    "text": "Schrijf hieronder de drie langste zinnen op die uw kind onlangs heeft gezegd.",
                     "type": "textbox"
                 },
                 {
                     "id": "complexity",
-                    "text": "Duid hieronder in de lijst met telkens 2 mogelijkheden die combinatie aan die het meest lijkt op wat uw kind momenteel zegt. Als uw kind (een) ander(e) woord(en) gebruikt, bijv. ‘kindje tafel’ i.p.v. ‘hondje tafel’ (zinnen 12), of ‘kindje tutje’ i.p.v. ‘kindje doekje’ (zinnen 8), dan mag u toch één van de 2 mogelijkheden aanduiden. Als uw kind langere zinnen of moeilijkere zinnen zegt dan hieronder aangeduid is, duid dan de tweede mogelijkheid aan.",
+                    "text": "Hieronder staat een lijst met telkens twee zinnen. Vink de zin aan die het meest lijkt op wat uw kind zegt. Als uw kind een ander woord of andere woorden gebruikt, bijvoorbeeld \"kindje tafel\" i.p.v. \"hondje tafel\", of \"kindje tutje\" i.p.v. \"kindje doekje\", dan mag u toch die optie aanvinken. Als uw kind langere of moeilijkere zinnen zegt dan hieronder staan, vink dan de tweede optie aan.",
                     "title": "E. Zinnen",
                     "type": "radiobutton"
                 }
