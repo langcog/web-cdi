@@ -1796,7 +1796,7 @@ msgid ""
 "Yes, I have a child who is %(age)s months old, I filled out the entire "
 "questionnaire, and I am taking this questionnaire for the first time."
 msgstr ""
-"כן, יש לי ילד/ה בן/ת %(age.0)s חודשים, מילאתי את כל השאלון, וזו הפעם הראשונה "
+"כן, יש לי ילד/ה בן/ת %(age)s חודשים, מילאתי את כל השאלון, וזו הפעם הראשונה "
 "שאני ממלא שאלון זה."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:306
@@ -1809,7 +1809,7 @@ msgid ""
 "No, I do NOT have a child who is %(age)s months old, I have NOT filled out "
 "the entire questionnaire, and/or I have taken this questionnaire before."
 msgstr ""
-"לא, אין לי ילד/ה בן/ת %(age.0)s חודשים, לא מילאתי את כל השאלון ו/או זו אינה "
+"לא, אין לי ילד/ה בן/ת %(age)s חודשים, לא מילאתי את כל השאלון ו/או זו אינה "
 "הפעם הראשונה שאני ממלא את השאלון."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:312
