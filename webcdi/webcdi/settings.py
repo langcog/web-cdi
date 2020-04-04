@@ -269,6 +269,8 @@ CKEDITOR_CONFIGS = {
     }
 }
 
+CKEDITOR_IMAGE_BACKEND = "pillow"
+
 LOGOUT_REDIRECT_URL = '/'
 
 import urllib
