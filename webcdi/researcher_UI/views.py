@@ -479,6 +479,7 @@ def console(request, study_name = None, num_per_page = 20): # Main giant functio
         context['username'] =  username 
         context['studies'] = study.objects.filter(researcher = request.user, active = True).order_by('id')
         context['instruments'] = []
+        context['study_form'] = AddStudyForm()
         if study_name is not None:
             #try:
                 current_study = study.objects.get(researcher= request.user, name= study_name)
