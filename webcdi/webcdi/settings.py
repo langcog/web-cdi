@@ -161,7 +161,8 @@ LOGGING = {
     },
     'loggers': {
         'django.security.DisallowedHost': {
-            'handlers': ['null'],
+            'handlers': ['mail_admin'],
+            'lelel' : 'CRITICAL',
             'propagate': False,
         },
         'django.request': {
