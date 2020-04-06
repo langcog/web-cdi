@@ -112,6 +112,9 @@
             getDiffinMonths(['en','es'].includes(language_code) ? "mm/dd/yyyy" : "dd/mm/yyyy");
         });
 
+    $('#id_child_dob').on('focusout', function() {
+            getDiffinMonths(['en','es'].includes(language_code) ? "mm/dd/yyyy" : "dd/mm/yyyy");
+    })
 
     $('#id_child_dob').inputmask(date_format, 
               { 
