@@ -15,7 +15,7 @@
                     <table>
                     
                         {% for object in type.objects %}
-                            <tr>
+                            <tr style="border:1px">
                                 {% if 'textbox' in object.item %}
                                     <td>{{ object.text }}</td>
                                     <td>{{ object.prefilled_value }}</td>
@@ -104,7 +104,7 @@
                                     {% endif %}
                                 </tr>
                             {% endfor %}
-                            <tr><td colspan=2>{{ section.footnote }}<br /></td></tr>
+                            <tr><td colspan=2>{{ section.footnote }}<br /><br /></td></tr>
                             
                         {% endfor %}
                 
