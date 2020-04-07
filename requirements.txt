@@ -18,7 +18,7 @@ colorama==0.3.9
 confusable-homoglyphs==3.2.0
 cssselect2==0.3.0
 defusedxml==0.6.0
-Django==2.2.6
+Django==2.2.10
 django-adaptors==0.2.5
 django-appconf==1.0.3
 django-axes==5.0.14
