@@ -78,6 +78,7 @@ class Command(BaseCommand):
                         try:
                             choices_key = Choices.objects.get(choice_set = item_choices)
                         except:
+                            print (item, item_type, item_category, item_choices)
                             raise IOError("Can't find choice set %s in model for %s" % (item_category, itemID, ))
 
                     definition = row_values[col_names.index('definition')]

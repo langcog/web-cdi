@@ -1,0 +1,118 @@
+{
+    "parts": [
+        {
+            "id": 1,
+            "title": "PART 1: 아동이 사용하는 어휘",
+            "types": [
+                {
+                    "id": "word",
+                    "sections": [
+                        {
+                            "id": "sounds",
+                            "title": "1. 소리"
+                        },
+                        {
+                            "id": "vehicles",
+                            "title": "2. 탈 것"
+                        },{
+                            "id": "toys",
+                            "title": "3. 장난감 및 문구류"
+                        },{
+                            "id": "animals",
+                            "title": "4. 동물"
+                        },{
+                            "id": "clothing",
+                            "title": "5. 옷"
+                        },{
+                            "id": "furniture_rooms",
+                            "title": "6. 가구 및 방안"
+                        },{
+                            "id": "food_drink",
+                            "title": "7. 음식"
+                        },{
+                            "id": "body_parts",
+                            "title": "8. 신체부위"
+                        },{
+                            "id": "household",
+                            "title": "9. 가정용품"
+                        },{
+                            "id": "outside",
+                            "title": "10. 외부사물"
+                        },{
+                            "id": "games_routines",
+                            "title": "11. 일상생활"
+                        },{
+                            "id": "places",
+                            "title": "12. 장소"
+                        },{
+                            "id": "quantifiers",
+                            "title": "13. 양, 정도"
+                        },{
+                            "id": "people",
+                            "title": "14. 사람"
+                        },{
+                            "id": "question_words",
+                            "title": "15. 의문사"
+                        },{
+                            "id": "action_words",
+                            "title": "16. 동사"
+                        },{
+                            "id": "descriptive_words",
+                            "title": "17. 형용사"
+                        },{
+                            "id": "other",
+                            "title": "18. 끝맺는 말"
+                        },{
+                            "id": "case_markers",
+                            "title": "19. 조사"
+                        },{
+                            "id": "connecting_words",
+                            "title": "20. 연결하는 말"
+                        },{
+                            "id": "locations",
+                            "title": "21. 위치"
+                        },{
+                            "id": "time_words",
+                            "title": "22. 시간"
+                        },{
+                            "id": "pronouns",
+                            "title": "23. 대명사"
+                        },{
+                            "id": "helping_verbs",
+                            "title": "24. 돕는 말"
+                        }
+                    ],
+                    "text": "아동은 표현할 수 있는 어휘보다, 이해하고 있는 어휘가 더 많습니다. 본 검사에서는 아동이 이해하고, 표현할 수 있는 어휘를 모두 살펴보고자 합니다. 각 어휘 별로 아동이 일상에서 사용하는 어휘에 체크 표시를 해 주시기 바랍니다. 아동이 다른 방식으로 말 하거나 (예: \"아이스크림\"를 \"아이킴\"로 하거나 \"오리\"를 \"오디\"로 발음하는 경우), 다른 말로 바꾸어서 사용하는 경우 (예: \"할머니\"를 \"함미\"로 사용하는 경우)도 체크 표시를 해 주시기 바랍니다. 여기에 제시된 어휘는 또래 아동이 사용하는 어휘의 \"목록\"입니다. 아동이 현재 몇몇 어휘만 알고 있더라도 너무 걱정하지 마세요.",
+                    "type": "radiobutton"
+                }
+            ]
+        },{
+            "id": 2,
+            "title": "PART 2 : 문법과 문장",
+            "types": [
+                {
+                    "id": "combine",
+                    "title": "가. 문장표현 정도",
+                    "type": "radiobutton"
+                },{
+                    "id": "combination_examples",
+                    "title": "가. 문장표현 정도",
+                    "sub_title": "2. 1. 에서 '가끔', '종종' 중 하나에 표시하셨다면 아동이 최근에 말한 문장표현 중 가장 긴 것 세 가지를 작성해 주십시오. (1. 에서 '안함'에 표시하셨다면, 작성하지 않으셔도 됩니다.)",
+                    "type": "textbox"
+                },{
+                    "id": "morphological_marker",
+                    "title": "나. 우리 말에는 조사와 어미가 있어 문장 표현을 돕습니다. 아동이 아래 문법요소를 어느 정도 사용하고 있는지 보시고 가장 적절한 곳에 표시해 주십시오.",
+                    "type": "radiobutton"
+                },{
+                    "id": "complexity",
+                    "title": "다. 아동은 자라면서 문법적으로 불완전한 표현을 합니다. 아래 내용을 읽고 1, 2 중 아동이 하는 표현과 가장 비슷한 번호에 표시해 주십시오. 아직 이런 수준의 문장표현을 하지 않는 경우라면 어느 쪽에도 표시하지 마십시오.",
+                    "type": "radiobutton"
+                },{
+                    "id": "grammaticality",
+                    "title": "라. 아동은 보다 복잡한 문장 표현을 습득하면서 때로 정상적인 실수를 보이기도 합니다. 아래 내용을 읽고 1, 2 중 아동이 하는 표현과 가장 비슷한 번호에 표시해 주십시오. 아직 이런 수준의 문장표현을 하지 않는 경우라면 어느 쪽에도 표시하지 마십시오.",
+                    "type": "radiobutton"
+                }
+            ]
+        }
+    ]
+}
