@@ -6,24 +6,6 @@
         "order" : 1
     },
     {
-        "title" : "Phrases",
-        "category" : "phrases",
-        "measure" : "understands",
-        "order" : 2
-    },
-    {
-        "title" : "Imitation",
-        "category" : "imitation",
-        "measure" : "sometimes;often",
-        "order" : 3
-    },
-    {
-        "title" : "Labeling",
-        "category" : "label",
-        "measure" : "sometimes;often",
-        "order" : 4
-    },
-    {
         "title" : "Words Understood",
         "category" : "word",
         "measure" : "understands;produces",
@@ -48,12 +30,6 @@
         "order" : 8
     },
     {
-        "title" : "Early Gestures",
-        "category" : "gestures_first;gestures_games",
-        "measure" : "sometimes;often;yes",
-        "order" : 13
-    },
-    {
         "title" : "Object Gestures",
         "category" : "gestures_objects",
         "measure" : "yes",
@@ -70,12 +46,6 @@
         "category" : "gestures_parent",
         "measure" : "yes",
         "order" : 12
-    },
-    {
-        "title" : "Later Gestures",
-        "category" : "gestures_parent;gestures_adult;gestures_objects",
-        "measure" : "yes",
-        "order" : 14
     },
     {
         "title" : "Total Gestures",

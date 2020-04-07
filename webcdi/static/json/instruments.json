@@ -44,6 +44,16 @@
 		"scoring_json" : "cdi_forms/form_data/scoring/Hebrew_WG_scoring.json"
 	},
 	{
+		"language": "Hebrew",
+		"form": "WS",
+		"verbose_name": "Words and Sentences",
+		"min_age": 16,
+		"max_age": 30,
+		"csv_file": "cdi_form_csv/[Hebrew_WS].csv",
+		"json_data": "cdi_forms/form_data/Hebrew_WS_meta.json",
+		"scoring_json" : "cdi_forms/form_data/scoring/Hebrew_WG_scoring.json"
+	},
+	{
 		"language": "Spanish",
 		"form": "WS",
 		"verbose_name": "Palabras & Enunciados",
@@ -311,5 +321,14 @@
 		"csv_file": "cat_form_csv/[English_CAT].csv",
 		"json_data": "",
 		"scoring_json" : ""
+	},{
+		"language" : "English",
+		"form": "L1H",
+		"verbose_name": "Short Form Vocabulary Checklist: Level I",
+		"min_age": 8,
+		"max_age": 18,
+		"csv_file": "cdi_form_csv/[English_L1].csv",
+		"json_data": "cdi_forms/form_data/Henry_L1_meta.json",
+		"scoring_json" : "cdi_forms/form_data/scoring/English_L1_WS_scoring.json"
 	}
 ]

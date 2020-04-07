@@ -873,7 +873,7 @@ def printable_view(request, hash_id):
     context['min_age'] = administration_instance.study.min_age
     context['max_age'] = administration_instance.study.max_age
     context['birthweight_units'] = administration_instance.study.birth_weight_units
-
+    
     try:
         #Get form from database
         background_form = prefilled_background_form(administration_instance)
@@ -954,6 +954,7 @@ def printable_view(request, hash_id):
     prefilled_data['graph_data'] = categories
     prefilled_data['instrument'] = administration_instance.study.instrument.name
     prefilled_data['object'] = administration_instance
+    prefilled_data['language_code'] = settings.LANGUAGE_DICT[administration_instance.study.instrument.language]
 
     response = render(request, 'cdi_forms/printable_cdi.html', prefilled_data) # Render contact form template   
     response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
@@ -1142,9 +1143,9 @@ def update_administration_data_item(request):
     #update_summary_scores(administration_instance)
     return HttpResponse(json.dumps([{}]), content_type='application/json')
 
-from easy_pdf.views import PDFTemplateResponseMixin
+from django_weasyprint import WeasyTemplateResponseMixin
 
-class PDFAdministrationDetailView(PDFTemplateResponseMixin, DetailView):
+class PDFAdministrationDetailView(WeasyTemplateResponseMixin, DetailView):
     model = administration
     template_name = 'cdi_forms/pdf_administration.html'
 
@@ -1152,5 +1153,6 @@ class PDFAdministrationDetailView(PDFTemplateResponseMixin, DetailView):
         context = super().get_context_data(**kwargs)
         prefilled_data = prefilled_cdi_data(self.object)
         for field in prefilled_data:
-            context[field] = prefilled_data[field]       
+            context[field] = prefilled_data[field]
+        context['language_code'] = settings.LANGUAGE_DICT[context['object'].study.instrument.language]
         return context

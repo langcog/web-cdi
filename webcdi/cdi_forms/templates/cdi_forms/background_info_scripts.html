@@ -4,7 +4,7 @@
     // Some fields are labeled as enabler fields (refer to cdi_forms/forms.py). 
     // If the participant chooses 'Yes' (corresponds to value '1'), a textbox appears that demands a greater description. 
     // If the other two options ('Prefer to not disclose'/2 or 'No'/0), then the textbox field will be hiddent. 
-    $('.enabler[value="1"]').each(function(index, e){
+    $('.enabler[value="1"], .enabler[value="True"]').each(function(index, e){
         if(e.checked){
             $(e).closest('.form-group').next('.dependent').css('display','block');
         }
@@ -12,7 +12,7 @@
             $(e).closest('.form-group').next('.dependent').css('display','block');
         });
     });
-    $('.enabler[value="0"], .enabler[value="2"]').each(function(index, e){
+    $('.enabler[value="0"], .enabler[value="2"], .enabler[value="False"]').each(function(index, e){
         if(e.checked){
             $(e).closest('.form-group').next('.dependent').css('display','none');
         }
@@ -112,6 +112,9 @@
             getDiffinMonths(['en','es'].includes(language_code) ? "mm/dd/yyyy" : "dd/mm/yyyy");
         });
 
+    $('#id_child_dob').on('focusout', function() {
+            getDiffinMonths(['en','es'].includes(language_code) ? "mm/dd/yyyy" : "dd/mm/yyyy");
+    })
 
     $('#id_child_dob').inputmask(date_format, 
               { 
