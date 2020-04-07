@@ -2,7 +2,6 @@
 {% load static i18n bleach_markdown %}
 
 {% block extra_style %}
-
 {% endblock %}
 
 {% block content %}
@@ -12,11 +11,11 @@
                 <h2> {{ part.title }}</h2>
 
                 {% for type in part.types %}
-                    <h3> {{ type.title }}</h3>
+                    <h3 > {{ type.title }}</h3>
                     <table>
                     
                         {% for object in type.objects %}
-                            <tr>
+                            <tr style="border:1px">
                                 {% if 'textbox' in object.item %}
                                     <td>{{ object.text }}</td>
                                     <td>{{ object.prefilled_value }}</td>
@@ -105,7 +104,7 @@
                                     {% endif %}
                                 </tr>
                             {% endfor %}
-                            <tr><td colspan=2>{{ section.footnote }}<br /></td></tr>
+                            <tr><td colspan=2>{{ section.footnote }}<br /><br /></td></tr>
                             
                         {% endfor %}
                 

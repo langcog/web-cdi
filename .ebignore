@@ -2,3 +2,11 @@
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+
+env/
+__pycache__/
+*/.vscode/
+
+.git/
+
+*.pyc

@@ -20,6 +20,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.en-CA.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.en-GB.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.nl.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.he.min.js"></script>
     <script src="{% static 'cdi_forms/selectize.js' %}"></script>
     <script src="{% static 'cdi_forms/moment.js' %}"></script>
     <link rel='stylesheet' href="{% static 'cdi_forms/selectize.bootstrap3.css' %}">
@@ -43,7 +44,7 @@
     <form id="cdi_form" method="post" class="form-horizontal">
 
         <div class="row">
-            <div class="col-md-3 d-print-none d-none d-lg-block affix" role="complementary">
+            <div class="col-md-3 d-print-none d-none d-lg-block pull-left" role="complementary">
 
                 <nav id="navbar" class="bs-docs-sidebar affix" style="padding-top:60px;">
                     <div>
@@ -165,6 +166,8 @@
     </div>
 </div>
 
+
+
 <!-- Function un-focuses pressed buttons to avoid participant confusion after pressing a button. -->
 <script>
     $(".btn").mouseup(function(){
@@ -178,11 +181,67 @@
 {% if language_code == 'nl' %}<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/localization/messages_nl.min.js"></script>{% endif %}
 {% if language_code == 'fr' %}<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/localization/messages_fr.min.js"></script>{% endif %}
 {% if language_code == 'es' %}<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/localization/messages_es.min.js"></script>{% endif %}
+{% if language_code == 'he' %}<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/localization/messages_he.min.js"></script>{% endif %}
 
 <script>
 $('#cdi_form').validate()
 </script>
 
+<script>
+    // This is meant to change to RTL
+    var layout = {};
+    layout.setDirection = function (direction) {
+        layout.rtl = (direction === 'rtl');
+        document.getElementsByTagName("html")[0].style.direction = direction;
+        var styleSheets = document.styleSheets;
+        var modifyRule = function (rule) {
+            if (rule.style.getPropertyValue(layout.rtl ? 'left' : 'right') && rule.selectorText.match(/\.col-(xs|sm|md|lg)-push-\d\d*/)) {
+                rule.style.setProperty((layout.rtl ? 'right' : 'left'), rule.style.getPropertyValue((layout.rtl ? 'left' : 'right')));
+                rule.style.removeProperty((layout.rtl ? 'left' : 'right'));
+            }
+            if (rule.style.getPropertyValue(layout.rtl ? 'right' : 'left') && rule.selectorText.match(/\.col-(xs|sm|md|lg)-pull-\d\d*/)) {
+                rule.style.setProperty((layout.rtl ? 'left' : 'right'), rule.style.getPropertyValue((layout.rtl ? 'right' : 'left')));
+                rule.style.removeProperty((layout.rtl ? 'right' : 'left'));
+            }
+            if (rule.style.getPropertyValue(layout.rtl ? 'margin-left' : 'margin-right') && rule.selectorText.match(/\.col-(xs|sm|md|lg)-offset-\d\d*/)) {
+                rule.style.setProperty((layout.rtl ? 'margin-right' : 'margin-left'), rule.style.getPropertyValue((layout.rtl ? 'margin-left' : 'margin-right')));
+                rule.style.removeProperty((layout.rtl ? 'margin-left' : 'margin-right'));
+            }
+            if (rule.style.getPropertyValue('float') && rule.selectorText.match(/\.col-(xs|sm|md|lg)-\d\d*/)) {
+                rule.style.setProperty('float', (layout.rtl ? 'right' : 'left'));
+            }
+        };
+        try {
+            for (var i = 0; i < styleSheets.length; i++) {
+                var rules = styleSheets[i].cssRules || styleSheets[i].rules;
+                if (rules) {
+                    for (var j = 0; j < rules.length; j++) {
+                        if (rules[j].type === 4) {
+                            var mediaRules = rules[j].cssRules || rules[j].rules
+                            for (var y = 0; y < mediaRules.length; y++) {
+                                modifyRule(mediaRules[y]);
+                            }
+                        }
+                        if (rules[j].type === 1) {
+                            modifyRule(rules[j]);
+                        }
+
+                    }
+                }
+            }
+        } catch (e) {
+            // Firefox might throw a SecurityError exception but it will work
+            if (e.name !== 'SecurityError') {
+                throw e;
+            }
+        }
+    }
+
+    if ("{{ language_code }}"=="he") {
+        layout.setDirection("rtl")
+    }
+
+</script>
 {% block scripts %}
 {% endblock %}
 </body>

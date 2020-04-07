@@ -1577,6 +1577,14 @@ msgstr ""
 msgid "Review Waiver"
 msgstr ""
 
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:187
+msgid "Please select an item in the list."
+msgstr ""
+
+#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:189
+msgid "Please fill in this field"
+msgstr ""
+
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:10
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:327
 #: webcdi/cdi_forms/templates/cdi_forms/study_group.html:6
@@ -2002,7 +2010,6 @@ msgid ""
 " Not the right age? You should contact your researcher for steps on what to "
 "do next."
 msgstr ""
-
 #: webcdi/researcher_UI/admin_actions.py:13
 #: webcdi/researcher_UI/admin_actions.py:27
 msgid "Instruments for all Studies must be the same"

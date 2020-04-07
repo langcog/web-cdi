@@ -30,8 +30,6 @@
     <script src="https://d3js.org/d3-color.v1.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-
-
   	<meta property="og:image" content="http://webcdi.stanford.edu/{% static 'researcher_UI/images/logo.png' %}" />
   	<meta property="og:title" content="{% trans 'MacArthur-Bates Communicative Development Inventory' %}" />
   	<meta property="og:description" content="{% trans 'Interesting tidbits learned from how your child speaks!' %}" />
@@ -40,11 +38,11 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
            
-      // Load the Visualization API and the corechart package.
-      google.charts.load('current', {'packages':['corechart']});
+        // Load the Visualization API and the corechart package.
+        google.charts.load("current", {packages:["corechart"]});
 
-      // Set a callback to run when the Google Visualization API is loaded.
-      google.charts.setOnLoadCallback(drawProducesChart);
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.charts.setOnLoadCallback(drawProducesChart);
 
         var graph_colors = [
             "#ff0000","#cc0066","#cc0099","#9933ff",'#3333cc','#0033cc','#0099cc','#009999','#00cc66','#009933','#669900','#cccc00','#ff9900','#ff3300',
@@ -76,8 +74,8 @@
             'hAxis' : {viewWindow: { min:0 }},
             };
 
-        // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.BarChart(document.getElementById('categories_charts_produced'));
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.visualization.BarChart(document.getElementById('categories_charts_produced'));
 
         var btnProducedSave = document.getElementById('save-produced-pdf')
         google.visualization.events.addListener(chart, 'ready', function () {
@@ -224,8 +222,7 @@
 
         <br>
         {% if show_feedback %}
-            <!-- D3 graph div. Filled with empty divs which are populated by later D3 script -->
-            <div class="col-md-12 collapse hide" id="graph_data" style="height: 90vh;">
+            <div class="col-md-12 collapse show" id="graph_data" style="height: 90vh;">
                 <br>
                 <div class = "row"> 
                     <div class="col-md-6 text-center" id="num_words_text"></div>
@@ -257,7 +254,7 @@
         {% endif %}
 
         <!-- Div for submitted form. Identical to section in cdi_form.html however all inputs are disabled and all answers are displayed on one page. -->
-        <div class = "col-md-12 collapse" id="filled_form" role="main">
+        <div class = "col-md-12 collapse" id="filled_form" role="main" style="padding-top:220px">
 
             <div class="row">
                 {% load crispy_forms_tags %}
@@ -642,6 +639,62 @@
 
     </script>
 {% endif %}
+
+<script>
+    // This is meant to change to RTL
+    var layout = {};
+    layout.setDirection = function (direction) {
+        layout.rtl = (direction === 'rtl');
+        document.getElementsByTagName("html")[0].style.direction = direction;
+        var styleSheets = document.styleSheets;
+        var modifyRule = function (rule) {
+            if (rule.style.getPropertyValue(layout.rtl ? 'left' : 'right') && rule.selectorText.match(/\.col-(xs|sm|md|lg)-push-\d\d*/)) {
+                rule.style.setProperty((layout.rtl ? 'right' : 'left'), rule.style.getPropertyValue((layout.rtl ? 'left' : 'right')));
+                rule.style.removeProperty((layout.rtl ? 'left' : 'right'));
+            }
+            if (rule.style.getPropertyValue(layout.rtl ? 'right' : 'left') && rule.selectorText.match(/\.col-(xs|sm|md|lg)-pull-\d\d*/)) {
+                rule.style.setProperty((layout.rtl ? 'left' : 'right'), rule.style.getPropertyValue((layout.rtl ? 'right' : 'left')));
+                rule.style.removeProperty((layout.rtl ? 'right' : 'left'));
+            }
+            if (rule.style.getPropertyValue(layout.rtl ? 'margin-left' : 'margin-right') && rule.selectorText.match(/\.col-(xs|sm|md|lg)-offset-\d\d*/)) {
+                rule.style.setProperty((layout.rtl ? 'margin-right' : 'margin-left'), rule.style.getPropertyValue((layout.rtl ? 'margin-left' : 'margin-right')));
+                rule.style.removeProperty((layout.rtl ? 'margin-left' : 'margin-right'));
+            }
+            if (rule.style.getPropertyValue('float') && rule.selectorText.match(/\.col-(xs|sm|md|lg)-\d\d*/)) {
+                rule.style.setProperty('float', (layout.rtl ? 'right' : 'left'));
+            }
+        };
+        try {
+            for (var i = 0; i < styleSheets.length; i++) {
+                var rules = styleSheets[i].cssRules || styleSheets[i].rules;
+                if (rules) {
+                    for (var j = 0; j < rules.length; j++) {
+                        if (rules[j].type === 4) {
+                            var mediaRules = rules[j].cssRules || rules[j].rules
+                            for (var y = 0; y < mediaRules.length; y++) {
+                                modifyRule(mediaRules[y]);
+                            }
+                        }
+                        if (rules[j].type === 1) {
+                            modifyRule(rules[j]);
+                        }
+
+                    }
+                }
+            }
+        } catch (e) {
+            // Firefox might throw a SecurityError exception but it will work
+            if (e.name !== 'SecurityError') {
+                throw e;
+            }
+        }
+    }
+
+    if ("{{ language_code }}"=="he") {
+        layout.setDirection("rtl")
+    }
+
+</script>
 
 </body>
 </html>

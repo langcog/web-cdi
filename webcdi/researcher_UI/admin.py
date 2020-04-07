@@ -59,9 +59,9 @@ class AdministrationSummaryAdmin(admin.ModelAdmin):
 admin.site.register(AdministrationSummary, AdministrationSummaryAdmin)
 
 class AdministrationAdmin(admin.ModelAdmin):
-    list_display = ['study','subject_id','completed','completedBackgroundInfo']
+    list_display = ['study','subject_id','completed','completedBackgroundInfo','url_hash']
     list_filter = ['completed','completedBackgroundInfo']
-    search_fields = ['study__name']
+    search_fields = ['study__name','url_hash']
 admin.site.register(administration, AdministrationAdmin)
 
 class StudyAdmin(admin.ModelAdmin):
