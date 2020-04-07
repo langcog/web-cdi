@@ -1366,7 +1366,7 @@ msgstr "מי דובר שפה/ שפות אלו?"
 
 #: cdi_forms/models.py:155
 msgid "How many days per week is the child exposed to these languages?"
-msgstr "כמה ימים בשבוע ילדך נחשף לשפה/ שפות אלו?"
+msgstr "כמה ימים בשבוע ילדך נחשף לשפות אלו?"
 
 #: cdi_forms/models.py:155
 msgid "Number of days per week cannot exceed 7"
@@ -1378,7 +1378,7 @@ msgstr "מספר הימים בשבוע לא יכול להיות קטן מ1"
 
 #: cdi_forms/models.py:156
 msgid "How many hours per day is the child exposed to these languages?"
-msgstr "כמה שעות ביום ילדך חשוף לשפה/ שפות אלו?"
+msgstr "כמה שעות ביום ילדך חשוף לשפות אלו?"
 
 #: cdi_forms/models.py:156
 msgid "Number of hours per day cannot exceed 24"
@@ -1731,7 +1731,7 @@ msgid ""
 "perfectly fine!"
 msgstr ""
 "בחלק זה תתבקשו לסמן אילו מילים ילדך \"מבין ואומר\".ילדך \"מבין ואומר\" מילה "
-"ברשימה אם הוא יודע מה משמעות המילה ואומר אותה באופן עצמאי. להלן מספר דוגמאות."
+"ברשימה אם הוא יודע מה משמעות המילהואומר אותה באופן עצמאי. להלן מספר דוגמאות."
 "השאלון הזה מיועד לילדים בגילאים שונים. יכול להיות שילדך לא מבין או אומר הרבה "
 "מאוד מילים מתוך הרשימה.זה לגמרי בסדר! "
 
@@ -1763,7 +1763,7 @@ msgid ""
 "DON'T check the box if your child is just stringing sounds together. This is "
 "not a real word that means something."
 msgstr ""
-"אל תסמן את התיבה אם ילדך רק מצרף צלילים. זאת לא מילה אמיתית שיש לה משמעות."
+"אל תסמן את התיבה אם ילדך רק מצרף צלילים. זה לא מילה אמיתית שיש לה משמעות."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:285
 msgid ""

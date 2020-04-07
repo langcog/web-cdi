@@ -7,7 +7,7 @@
             "field":"multi_birth_boolean",
             "div":["multi_birth"]
         },{    
-            "field":"birth_weight_lb",
+            "field":"birth_weight_kg",
             "widget_type":"Select",
             "choices":[
                 {
@@ -69,7 +69,18 @@
         },{
             "field":"born_on_due_date",
             "div":["early_or_late","due_date_diff"]
-        }]
+        },
+        {
+              "field": "sibling_boolean",
+              "divs" : [
+                  {
+                      "field" : "sibling_count",
+                      "css" : "",
+                      "div" : ["sibling_data"]
+                  }
+              ]
+        }
+    ]
 },{
   "fieldset":"Family Background",
   "fields":[ 
@@ -180,7 +191,31 @@
             "divs" : [
                 {
                     "field" : "other_languages",
-                    "css" : "make-selectize",
+                    "widget_type":"Select",
+                    "choices":[
+                        {
+                            "key":"Russian",
+                            "value":"Russian"
+                        },{
+                            "key":"Amharic",
+                            "value":"Amharic"
+                        },{
+                            "key":"French",
+                            "value":"French"
+                        },{
+                            "key":"English",
+                            "value":"English"
+                        },{
+                            "key":"Spanish",
+                            "value":"Spanish"
+                        },{
+                            "key":"Arabic",
+                            "value":"Arabic"
+                        },{
+                            "key":"Other",
+                            "value":"Other"
+                        }],
+                    "css" : "",
                     "div" : ["language_from","language_days_per_week","language_hours_per_day"]
                 }
             ]

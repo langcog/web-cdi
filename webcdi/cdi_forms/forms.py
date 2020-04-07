@@ -22,8 +22,11 @@ from .languages import LANGUAGE_OPTIONS as language_choices
 def string_bool_coerce(val):
     return val == 'True'
 
-YESNO_CHOICES = ((False, _('No')), (True, _('Yes')))
-YESNONA_CHOICES = ((0, _('No')), (1, _('Yes')), (2, _('Prefer not to disclose')))
+
+from django.utils.translation import pgettext_lazy
+
+YESNO_CHOICES=((False, _('No')), (True, _("Yes")))
+YESNONA_CHOICES = ((0, _('No')), (1, _("Yes")), (2, _('Prefer not to disclose')))
 INCOME_CHOICES = [
     ('','--------'),
     ('<25000',_('Under $25,000')),
@@ -89,17 +92,55 @@ BIRTH_WEIGHT_KG_CHOICES = [
     (0.00, _("Prefer not to disclose"))
 ]
 
+EDUCATION_LEVELS = [(x,str(x)) for x in range(4,25)] #Declares tuple of integers for # of years of education
+# Appends additional text descriptions for years of education w/ milestones (high school diploma, bachelor's degree, and master's degree)
+EDUCATION_LEVELS[12-5] = (12, _("12 (High school graduate)"))
+EDUCATION_LEVELS[16-5] = (16, _("16 (College graduate)"))
+EDUCATION_LEVELS[18-5] = (18, _("18 (Advanced degree)"))
+EDUCATION_LEVELS[23-5] = (23, _("23 or more"))
+EDUCATION_LEVELS[-1] = (0, _("Prefer not to disclose"))
+EDUCATION_LEVELS[0] = ('','--------')
+
+EDUCATION_LEVELS = [
+    ('','--------'),
+    (5, str(5)),
+    (6, str(6)),
+    (7, str(7)),
+    (8, str(8)),
+    (9, str(9)),
+    (10, str(10)),
+    (11, str(11)),
+    (12, _("12 (High school graduate)")),
+    (13, str(13)),
+    (14, str(14)),
+    (15, str(15)),
+    (16, _("16 (College graduate)")),
+    (17, str(17)),
+    (18, _("18 (Advanced degree)")),
+    (19, str(19)),
+    (20, str(20)),
+    (21, str(21)),
+    (22, str(22)),
+    (23, _("23 or more")),
+    (0, _("Prefer not to disclose"))
+]
+
 # Form for asking about demographic variables for child. Most questions are required unless explicitly stated to be false.
 class BackgroundForm(BetterModelForm):
-    
-    # Multiple checkbox question regarding child's ethnicity. Not required.
-    '''
-    child_ethnicity = forms.MultipleChoiceField(
-        widget=forms.CheckboxSelectMultiple,
-        choices = CHILD_ETHNICITY_CHOICES, 
-        label = _("My child is (check all that apply):"), 
-        required = False)
-    '''
+    sibling_boolean = forms.TypedChoiceField(
+        choices=YESNO_CHOICES, 
+        widget=forms.RadioSelect,
+        required=False, 
+        label=_("Does you child have siblings?"))
+    sibling_count = forms.IntegerField(
+        required=False,
+        label=_("How many siblings does you child have?")
+    )
+    sibling_data = forms.CharField(
+        widget=forms.Textarea, 
+        required=False,
+        label = _("Please provide the sex and age of each sibling")
+    )
 
     # Child's DOB. Formatted weirdly to only be required if Age in months in not already stored in database.
     child_dob = forms.DateField(
@@ -184,6 +225,7 @@ class BackgroundForm(BetterModelForm):
             ('multi_birth_boolean', ['multi_birth',]),
             ('born_on_due_date', ['early_or_late', 'due_date_diff',]),
             ('other_languages_boolean', ['other_languages', 'language_days_per_week', 'language_hours_per_day', 'language_from']),
+            ('sibling_boolean', ['sibling_count','sibling_data']),
             ('ear_infections_boolean', ['ear_infections',]),
             ('hearing_loss_boolean', ['hearing_loss',]),
             ('vision_problems_boolean', ['vision_problems',]),
@@ -196,8 +238,12 @@ class BackgroundForm(BetterModelForm):
         # If enabler field was answered as 'True', its related fields cannot be empty. 
         for (enabler, dependents) in enabler_dependent_fields:
             enabler_val = cleaned_data.get(enabler)
+            print (enabler, enabler_val)
             if enabler_val in ['1','other', 1]:
                 for dependent in dependents:
+                    if enabler == 'sibling_boolean':
+                        print (dependent)
+
                     if dependent not in cleaned_data or cleaned_data.get(dependent) == '' or cleaned_data.get(dependent) == None:
                         self.add_error(dependent, _("This field cannot be empty"))
         
@@ -218,8 +264,11 @@ class BackgroundForm(BetterModelForm):
         # Complex set of checks meant to ensure that there is an 'age' value stored in the database but 'DOB' is not. If there is no 'age' value in the database, enforce entry of 'child_dob'. If there is an age value, 'child_dob' is not necessary. Also check that 'age' is appropriate for the assigned Web-CDI form. Prevent continuing if not.
         c_dob = cleaned_data.get('child_dob')
         if c_dob:
-            day_diff = datetime.date.today().day - c_dob.day
-            c_age = (datetime.date.today().year - c_dob.year) * 12 +  (datetime.date.today().month - c_dob.month) + (1 if day_diff >=15 else 0)
+            #day_diff = datetime.date.today().day - c_dob.day
+            #c_age = (datetime.date.today().year - c_dob.year) * 12 +  (datetime.date.today().month - c_dob.month) + (1 if day_diff >=15 else 0)
+            #print(datetime.timedelta(datetime.date.today()-c_dob))
+            c_age = int((datetime.date.today()-c_dob).days/(365.2425/12.0))
+            
         else:
             c_age = self.curr_context['child_age']
         if c_age:
@@ -324,6 +373,9 @@ class BackgroundForm(BetterModelForm):
         self.fields['primary_caregiver'].required=True
         self.fields['mother_yob'].required=True
         self.fields['mother_education'].required=True
+        self.fields['mother_education'].choices=EDUCATION_LEVELS
+        self.fields['father_education'].choices=EDUCATION_LEVELS
+        
         self.fields['annual_income'].required= True
         self.fields['caregiver_info'].required= True
 
@@ -373,6 +425,13 @@ class BackgroundForm(BetterModelForm):
                         for div in field['divs']:
                             fields.append(Div(Field(div['field'], css_class=div["css"]),*div['div'], css_class="dependent"))
                             selected_fields.append(div['field'])
+                            if "choices" in div:
+                                choices = []
+                                for choice in div['choices']:
+                                    choices.append((choice['key'],choice['value']))
+                                self.fields[div['field']].widget.choices = choices    
+                                self.fields[div['field']].choices = choices
+                                self.initial[div['field']] = getattr(self.instance, div['field'])
                             for item in div['div'] : selected_fields.append(item)
                     elif 'div' in field:
                         fields.append(Field(field['field'], css_class="enabler"))

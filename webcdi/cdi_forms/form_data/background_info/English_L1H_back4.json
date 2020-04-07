@@ -69,7 +69,18 @@
         },{
             "field":"born_on_due_date",
             "div":["early_or_late","due_date_diff"]
-        }]
+        },
+        {
+              "field": "sibling_boolean",
+              "divs" : [
+                  {
+                      "field" : "sibling_count",
+                      "css" : "",
+                      "div" : ["sibling_data"]
+                  }
+              ]
+        }
+    ]
 },{
   "fieldset":"Family Background",
   "fields":[ 
@@ -140,6 +151,9 @@
         {
             "html" : "<p>The following information is being collected for the sole purpose of reporting to our grant-funding institute, i.e.,  NIH (National Institute of Health).  NIH requires this information to ensure the soundness and inclusiveness of our research. Your cooperation is appreciated, but optional.</p>"
         },{
+            "field" : "child_hispanic_latino",
+            "label" : "Is your child Hispanic or Latino?:"
+        },{
             "field" : "child_ethnicity",
             "widget_type" : "CheckboxSelectMultiple",
             "choices" : [
@@ -170,20 +184,6 @@
     "fields" : [
         {
             "field":"caregiver_info"
-        }
-    ]
-},{
-    "fieldset" : "Language Exposure",
-    "fields" : [
-        {
-            "field" : "other_languages_boolean",
-            "divs" : [
-                {
-                    "field" : "other_languages",
-                    "css" : "make-selectize",
-                    "div" : ["language_from","language_days_per_week","language_hours_per_day"]
-                }
-            ]
         }
     ]
 },{

@@ -1,5 +1,5 @@
 [{
-    "fieldset":"Basic Information",
+    "fieldset":"מידע כללי",
     "fields":[
         {
             "field":"birth_order"
@@ -7,7 +7,7 @@
             "field":"multi_birth_boolean",
             "div":["multi_birth"]
         },{    
-            "field":"birth_weight_lb",
+            "field":"birth_weight_kg",
             "widget_type":"Select",
             "choices":[
                 {
@@ -15,63 +15,74 @@
                     "value" : "--------"
                 },{
                     "key":"1.0",
-                    "value":"Less than 3 lbs, 0 oz"
+                    "value":"פחות מ 1,500 גרם"
                 },{
                     "key":"3.0",
-                    "value":"3 lbs, 0 oz - 3 lbs, 7 oz"
+                    "value":"1,500 - 1,749 גרם"
                 },{
                     "key":"3.5",
-                    "value":"3 lbs, 8 oz - 3 lbs, 15 oz"
+                    "value":"1,750 - 1,999 גרם"
                 },{
                     "key":"4.0",
-                    "value":"4 lbs, 0 oz - 4 lbs, 7 oz"
+                    "value":"2,000 - 2,249 גרם"
                 },{
                     "key":"4.5",
-                    "value":"4 lbs, 8 oz - 4 lbs, 15 oz"
+                    "value":"2,250 - 2,499 גרם"
                 },{
                     "key":"5.0",
-                    "value":"5 lbs, 0 oz - 5 lbs, 7 oz"
+                    "value":"2,500 - 2,749 גרם"
                 },{
                     "key":"5.5",
-                    "value":"5 lbs, 8 oz - 5 lbs, 15 oz"
+                    "value":"2,750 - 2,999 גרם"
                 },{
                     "key":"6.0",
-                    "value":"6 lbs, 0 oz - 6 lbs, 7 oz"
+                    "value":"3,000 - 3,249 גרם"
                 },{
                     "key":"6.5",
-                    "value":"6 lbs, 8 oz - 6 lbs, 15 oz"
+                    "value":"3,250 - 3,499 גרם"
                 },{
                     "key":"7.0",
-                    "value":"7 lbs, 0 oz - 7 lbs, 7 oz"
+                    "value":"3,500 - 3,749 גרם"
                 },{
                     "key":"7.5",
-                    "value":"7 lbs, 8 oz - 7 lbs, 15 oz"
+                    "value":"3,750 - 3,999 גרם"
                 },{
                     "key":"8.0",
-                    "value":"8 lbs, 0 oz - 8 lbs, 7 oz"
+                    "value":"4,000 - 4,249 גרם"
                 },{
                     "key":"8.5",
-                    "value":"8 lbs, 8 oz - 8 lbs, 15 oz"
+                    "value":"4,250 - 4,499 גרם"
                 },{
                     "key":"9.0",
-                    "value":"9 lbs, 0 oz - 9 lbs, 7 oz"
+                    "value":"4,500 - 4,749 גרם"
                 },{
                     "key":"9.5",
-                    "value":"9 lbs, 8 oz - 9 lbs, 15 oz"
+                    "value":"4,750 - 4,999 גרם"
                 },{
                     "key":"10.0",
-                    "value":"10 lbs, 0 oz or more"
+                    "value":"5,000 גרם או יותר"
                 },{
                     "key":"0.0",
-                    "value":"Prefer not to disclose"
+                    "value":"מעדיף לא לענות"
                 }
             ]
         },{
             "field":"born_on_due_date",
             "div":["early_or_late","due_date_diff"]
-        }]
+        },
+        {
+              "field": "sibling_boolean",
+              "divs" : [
+                  {
+                      "field" : "sibling_count",
+                      "css" : "",
+                      "div" : ["sibling_data"]
+                  }
+              ]
+        }
+    ]
 },{
-  "fieldset":"Family Background",
+  "fieldset":"רקע משפחתי",
   "fields":[ 
       {
           "field":"primary_caregiver",
@@ -82,7 +93,7 @@
       },
       {
           "field":"mother_education",
-          "help":"Choose highest grade completed (12 = high school graduate; 16 = college graduate; 18 = advanced degree)"
+          "help":"נא לציין את מספר שנות הלימוד שהושלמו לצורך קבלת התעודה"
       },
       {
           "field":"secondary_caregiver",
@@ -92,7 +103,7 @@
           "field":"father_yob"
       },{
           "field":"father_education",
-          "help":"Choose highest grade completed (12 = high school graduate; 16 = college graduate; 18 = advanced degree)"
+           "help":"נא לציין את מספר שנות הלימוד שהושלמו לצורך קבלת התעודה"
       },{
           "field":"annual_income",
           "widget_type":"Select",
@@ -102,84 +113,108 @@
                 "value" : "--------"
             },{
                 "key" : "<25000",
-                "value" : "Under $25,000"
+                "value" : "פחות מ5000 שח"
             },{
                 "key" : "25000-50000",
-                "value" : "$25,000-$50,000"
+                "value" : "5,000-10,000 שח"
             },{
                 "key" : "50000-75000",
-                "value" : "$50,000-$75,000"
+                "value" : "10,000-15,000 שח"
             },{
                 "key" : "75000-100000",
-                "value" : "$75,000-$100,000"
+                "value" : "15,000-20,000 שח"
             },{
                 "key" : "100000-125000",
-                "value" : "$100,000-$125,000"
+                "value" : "20,000-25,000 שח"
             },{
                 "key" : "125000-150000",
-                "value" : "$125,000-$150,000"
+                "value" : "25,000-30,000 שח"
             },{
                 "key" : "150000-175000",
-                "value" : "$150,000-$175,000"
+                "value" : "30,000-40,000 שח"
             },{
                 "key" : "175000-200000",
-                "value" : "$175,000-$200,000"
+                "value" : "40,000-50,000 שח"
             },{
                 "key" : ">200000",
-                "value" : "Over $200,000"
+                "value" : "מעל 50,000 שח"
             },{
                     "key" : "Prefer not to disclose",
-                    "value" : "Prefer not to disclose"
+                    "value" : "מעדיף לא לענות"
                 }
           ]
       }
       ]
 },{
-    "fieldset" : "Child's Ethnicity",
+    "fieldset" : "מידת הדתיות של המשפחה",
     "fields" : [
         {
-            "html" : "<p>The following information is being collected for the sole purpose of reporting to our grant-funding institute, i.e.,  NIH (National Institute of Health).  NIH requires this information to ensure the soundness and inclusiveness of our research. Your cooperation is appreciated, but optional.</p>"
-        },{
+            "html" : "<p>כיצד היית מגדיר את מידת הדתיות של המשפחה שלך?</p>"
+        },
+		{
             "field" : "child_ethnicity",
             "widget_type" : "CheckboxSelectMultiple",
             "choices" : [
                 { 
                     "key" : "N",
-                    "value" : "American Indian / Alaska Native"
+                    "value" : "כלל לא דתי"
                 },{
                     "key" : "A",
-                    "value" : "Asian (Far East, Southeast Asia, Indian Sub-continent)"
+                    "value" : "מסורתי"
                 },{
                     "key" : "H",
-                    "value" : "Native Hawaiian or Other Pacific Islander"
+                    "value" : "דתי"
                 },{
                     "key" : "B",
-                    "value" : "Black or African American"
+                    "value" : "חרדי"
                 },{
                     "key" : "W",
-                    "value" : "White"
+                    "value" : "אחר"
                 },{
                     "key" : "O",
-                    "value" : "Other"
+                    "value" : "מעדיף לא לענות"
                 }
             ]
         }
     ]
 },{
-    "fieldset" : "Caregiver Information",
+    "fieldset" : "מידע על ההורים",
     "fields" : [
         {
             "field":"caregiver_info"
         }
     ]
 },{
-    "fieldset" : "Language Exposure",
+    "fieldset" : "חשיפה לשפות",
     "fields" : [
         {
             "field" : "other_languages_boolean",
             "divs" : [
                 {
                     "field" : "other_languages",
+                    "choices":[
+                        {
+                            "key":"Russian",
+                            "value":"רוסית"
+                        },{
+                            "key":"Amharic",
+                            "value":"אמהרית"
+                        },{
+                            "key":"French",
+                            "value":"צרפתית"
+                        },{
+                            "key":"English",
+                            "value":"אנגלית"
+                        },{
+                            "key":"Spanish",
+                            "value":"ספרדית"
+                        },{
+                            "key":"Arabic",
+                            "value":"ערבית"
+                        },{
+                            "key":"Other",
+                            "value":"אחר"
+                        }],
                     "css" : "make-selectize",
                     "div" : ["language_from","language_days_per_week","language_hours_per_day"]
                 }
@@ -187,7 +222,7 @@
         }
     ]
 },{
-    "fieldset": "Health",
+    "fieldset": "בריאות",
     "fields" : [
         {
             "field":"ear_infections_boolean",
