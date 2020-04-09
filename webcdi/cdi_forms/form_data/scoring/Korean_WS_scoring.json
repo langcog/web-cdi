@@ -1,77 +1,72 @@
 [
-    {
+{
         "title" : "Total Produced",
         "category" : "word",
         "measure" : "produces",
-        "order" : 1
+        "order" : 1,
+        "scores" : [
+             {
+                  "key" : "produces",
+                  "value" : 1
+             }
+        ]
     },
-    {
-        "title" : "How Children Use Words",
-        "category" : "usage",
+{
+        "title" : "Morphological Marker",
+        "category" : "morphological_marker",
         "measure" : "sometimes;often",
-        "order" : 2
+        "order" : 2,
+        "scores" : [{
+                  "key" : "sometimes",
+                  "value" : 1
+               },{
+                  "key" : "often",
+                  "value" : 2
+               }]
     },
-    {
-        "title" : "Word Endings 1",
-        "category" : "word_endings_1",
-        "measure" : "sometimes;often",
-        "order" : 3
-    },
-    {
-        "title" : "Word Forms 1 Nouns",
-        "category" : "word_forms_nouns_1",
-        "measure" : "produces",
-        "order" : 4
-    },
-    {
-        "title" : "Word Forms 1 Verbs",
-        "category" : "word_forms_verbs_1",
-        "measure" : "produces",
-        "order" : 5
-    },
-    {
-        "title" : "Word Forms 2 Nouns",
-        "category" : "word_endings_nouns_2",
-        "measure" : "produces",
-        "order" : 6
-    },
-    {
-        "title" : "Word Forms 2 Verbs",
-        "category" : "word_endings_verbs_2",
-        "measure" : "produces",
-        "order" : 7
-    },
-    {
-        "title" : "Combining",
-        "category" : "combine",
-        "measure" : "sometimes;often",
-        "order" : 8
-    },
-    {
+{
         "title" : "Complexity",
         "category" : "complexity",
-        "measure" : "complex",
-        "order" : 9
+        "measure" : "1;2",
+        "order" : 3,
+        "scores" : [{
+                  "key" : "1",
+                  "value" : 1
+               },{
+                  "key" : "2",
+                  "value" : 2
+               }]
     },
-    {
-        "title" : "Combination Example 1",
-        "category" : "combination_example1",
-        "measure" : "complex",
-        "order" : 10,
-        "kind" : "list"
+{
+        "title" : "Grammaticality",
+        "category" : "grammaticality",
+        "measure" : "1;2",
+        "order" : 4,
+        "scores" : [{
+                  "key" : "1",
+                  "value" : 1
+               },{
+                  "key" : "2",
+                  "value" : 2
+               }]
     },
-    {
-        "title" : "Combination Example 2",
-        "category" : "combination_example2",
-        "measure" : "complex",
-        "order" : 11,
-        "kind" : "list"
-    },
-    {
-        "title" : "Combination Example 3",
-        "category" : "combination_example3",
-        "measure" : "complex",
-        "order" : 12,
-        "kind" : "list"
+{
+        "title" : "Total Grammar",
+        "category" : "morphological_marker;complexity;grammaticality",
+        "measure" : "sometimes;often;1;2",
+        "order" : 5,
+        "scores" : [{
+                  "key" : "sometimes",
+                  "value" : 1
+               },{
+                  "key" : "often",
+                  "value" : 2
+               },{
+                  "key" : "1",
+                  "value" : 1
+               },{
+                  "key" : "2",
+                  "value" : 2
+               }]  
     }
 ]

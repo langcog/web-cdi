@@ -1,4 +1,4 @@
-from researcher_UI.models import InstrumentScore, administration_data, SummaryData, Benchmark
+from researcher_UI.models import InstrumentScore, administration_data, SummaryData, Benchmark, Measure
 from .models import Instrument_Forms, BackgroundInfo
 
 def calc_benchmark(x1, x2, y1, y2, raw_score):
@@ -22,9 +22,9 @@ def update_summary_scores(administration_instance):
 
             if scoring_category in f.category.split(';'):
                 if f.kind == "count" :
-                    if administration_data_item.value in f.measure.split(';'): #and check all values to see if we increment
+                    if administration_data_item.value in f.scoring_measures.split(';'): #and check all values to see if we increment
                         if summary.value == '': 
-                            summary.value = '1'
+                            summary.value = str(Measure.objects.get(instrument_score=f, key=administration_data_item.value).value)
                         else:
                             summary.value = str(int(summary.value)+1)
                         
