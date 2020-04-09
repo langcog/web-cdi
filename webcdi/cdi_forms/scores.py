@@ -27,7 +27,6 @@ def update_summary_scores(administration_instance):
                             summary.value = str(Measure.objects.get(instrument_score=f, key=administration_data_item.value).value)
                         else:
                             summary.value = str(int(summary.value)+1)
-                        
                 else : 
                     summary.value = administration_data_item.value
             
