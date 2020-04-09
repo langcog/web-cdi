@@ -15,8 +15,11 @@ packages:
     pango: []
 
 commands:
-    001_install_freetype:
-        command: yum -y install http://mirror.centos.org/centos/8/BaseOS/x86_64/os/Packages/freetype-2.9.1-4.el8.x86_64.rpm
+    001_install_libdatrie:
+        command: yum -y install http://mirror.centos.org/centos/8/AppStream/x86_64/os/Packages/libdatrie-0.2.9-7.el8.x86_64.rpm
+    002_install_libthai:
+        command: yum -y install http://mirror.centos.org/centos/8/PowerTools/x86_64/os/Packages/libthai-devel-0.1.27-2.el8.x86_64.rpm
+
     002_install_font_config:
         command: yum -y install http://mirror.centos.org/centos/8/BaseOS/x86_64/os/Packages/fontconfig-2.13.1-3.el8.x86_64.rpm
     003_install_libpango:
