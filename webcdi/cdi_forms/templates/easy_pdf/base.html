@@ -13,15 +13,15 @@
         {% block layout_style %}
             <style type="text/css">
                 @font-face {
-                    font-family: "serif";
+                    font-family: "Karla";
                     {% if language_code == 'ko' %}
-                        src: url('fonts/dohyeon/DoHyeon-Regular.otf');
+                        src: url('fonts/nanum/NanumMyeongio-Regular.ttf');
                     {% else %}
                         src: url('fonts/rubik/Rubik-Regular.ttf');
                     {% endif %}
                 }
                 html {
-                    font-family: "serif";
+                    font-family: "Karla", "sans-serif";;
                     font-size: 65%;
                     {% if language_code == 'he' %}
                         direction:rtl;

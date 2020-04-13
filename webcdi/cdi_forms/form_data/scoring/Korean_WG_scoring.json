@@ -1,56 +1,107 @@
 [
-    {
-        "title" : "First Signs",
-        "category" : "first_signs",
-        "measure" : "yes",
-        "order" : 1
-    },
-    {
-        "title" : "Words Understood",
+{
+        "title" : "Total Understood",
         "category" : "word",
         "measure" : "understands;produces",
-        "order" : 5
+        "order" : 1,
+        "scores" : [
+             {
+                  "key" : "understands",
+                  "value" : 1
+             },
+             {
+               "key" : "produces",
+               "value" : 1
+          }
+        ]
     },
-    {
-        "title" : "Words Produced",
+{
+        "title" : "Total Produced",
         "category" : "word",
         "measure" : "produces",
-        "order" : 6
+        "order" : 2,
+        "scores" : [
+             {
+                  "key" : "produces",
+                  "value" : 1
+             }
+        ]
     },
-    {
+{
         "title" : "First Gestures",
         "category" : "gestures_first",
         "measure" : "sometimes;often",
-        "order" : 7
+        "order" : 3,
+        "scores" : [{
+                  "key" : "sometimes",
+                  "value" : 1
+               },{
+                  "key" : "often",
+                  "value" : 2
+               }]
     },
-    {
-        "title" : "Games Gestures",
+{
+        "title" : "Game Gestures",
         "category" : "gestures_games",
         "measure" : "yes",
-        "order" : 8
+        "order" : 4,
+        "scores" : [
+             {
+                  "key" : "yes",
+                  "value" : 1
+             }
+        ]
     },
-    {
+{
         "title" : "Object Gestures",
         "category" : "gestures_objects",
         "measure" : "yes",
-        "order" : 10
+        "order" : 5,
+        "scores" : [
+             {
+                  "key" : "yes",
+                  "value" : 1
+             }
+        ]
     },
-    {
-        "title" : "Adult Gestures",
-        "category" : "gestures_adult",
-        "measure" : "yes",
-        "order" : 11
-    },
-    {
+{
         "title" : "Parent Gestures",
         "category" : "gestures_parent",
         "measure" : "yes",
-        "order" : 12
+        "order" : 6,
+        "scores" : [
+             {
+                  "key" : "yes",
+                  "value" : 1
+             }
+        ]
     },
-    {
+{
+        "title" : "Adult Gestures",
+        "category" : "gestures_adult",
+        "measure" : "yes",
+        "order" : 7,
+        "scores" : [
+             {
+                  "key" : "yes",
+                  "value" : 1
+             }
+        ]
+    },
+{
         "title" : "Total Gestures",
-        "category" : "gestures_parent;gestures_adult;gestures_objects;gestures_first;gestures_games",
+        "category" : "gestures_first;gestures_games;gestures_objects;gestures_parent;gestures_adult",
         "measure" : "sometimes;often;yes",
-        "order" : 15
+        "order" : 8,
+        "scores" : [{
+                  "key" : "sometimes",
+                  "value" : 1
+               },{
+                  "key" : "often",
+                  "value" : 2
+               },{
+                  "key" : "yes",
+                  "value" : 1
+               }]
     }
 ]

@@ -57,8 +57,22 @@ class Command(BaseCommand):
             for score in scores:
                 data_dict = {
                     'category': score['category'],
-                    'measure': score['measure'],
+                    'scoring_measures': score['measure'],
                     'order':score['order'],
                     'kind':score['kind'] if 'kind' in score else 'count'
                 }
                 row, created = InstrumentScore.objects.update_or_create(instrument = instrument_obj, title=score['title'], defaults=data_dict,)
+
+                measures = score['measure'].split(';')
+                for measure in measures:
+                    m, created = Measure.objects.update_or_create(instrument_score=row, key=measure)
+
+                # only need to do this if there are scores - otherwise defaults to 1
+                try:
+                    score_dict = score['scores']
+                    for s in score_dict:
+                        m = Measure.objects.get(instrument_score=row, key=s['key'])
+                        m.value = s['value']
+                        m.save()
+                except:
+                    pass

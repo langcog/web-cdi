@@ -1143,8 +1143,20 @@ def update_administration_data_item(request):
     #update_summary_scores(administration_instance)
     return HttpResponse(json.dumps([{}]), content_type='application/json')
 
-from django_weasyprint import WeasyTemplateResponseMixin
 
+class AdministrationDetailView(DetailView):
+    model = administration
+    template_name = 'cdi_forms/pdf_administration.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        prefilled_data = prefilled_cdi_data(self.object)
+        for field in prefilled_data:
+            context[field] = prefilled_data[field]
+        context['language_code'] = settings.LANGUAGE_DICT[context['object'].study.instrument.language]
+        return context
+
+from django_weasyprint import WeasyTemplateResponseMixin
 class PDFAdministrationDetailView(WeasyTemplateResponseMixin, DetailView):
     model = administration
     template_name = 'cdi_forms/pdf_administration.html'
@@ -1156,3 +1168,8 @@ class PDFAdministrationDetailView(WeasyTemplateResponseMixin, DetailView):
             context[field] = prefilled_data[field]
         context['language_code'] = settings.LANGUAGE_DICT[context['object'].study.instrument.language]
         return context
+
+    def get(self, request, *args, **kwargs):
+        if self.get_object().study.instrument.language == 'Korean':
+            return redirect('administration-view', pk=self.get_object().pk)
+        return super().get(request, *args, **kwargs)
