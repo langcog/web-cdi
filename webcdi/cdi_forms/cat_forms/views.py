@@ -30,7 +30,9 @@ class CATBackgroundInfoView(BackgroundInfoView):
     pass
 
 class CATCreateBackgroundInfoView(CreateBackgroundInfoView):
-    pass
+    def get(self, request, *args, **kwargs):
+        print("CAT Create backgroun")
+        return super().get(request, *args, **kwargs)
 
 class CATBackpageBackgroundInfoView(BackpageBackgroundInfoView):
     pass
@@ -40,7 +42,7 @@ class AdministerAdministraionView(UpdateView):
     refresh = False
     hash_id = None
     form_class = CatItemForm
-    template_name = 'cat_forms/cat_form.html'
+    template_name = 'cdi_forms/cat_forms/cat_form.html'
     word=None
     instrument_items = None
 
@@ -63,6 +65,7 @@ class AdministerAdministraionView(UpdateView):
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         if 'btn-back' in request.POST:
+            print("We're here")
             return redirect('cat_forms:background-info', pk=self.object.backgroundinfo.id)
 
         administered_responses = self.object.catresponse.administered_responses or []
@@ -103,11 +106,11 @@ class AdministerAdministraionView(UpdateView):
         return ctx
 
     def get(self, request, *args, **kwargs):
+        print("GET 2")
         self.object = self.get_object()
         requests_log.objects.create(url_hash=self.hash_id, request_type="GET")
         if self.object.completed or self.object.due_date < timezone.now():
-            return render(request, 'cat_forms/cat_completed.html', context=self.get_context_data())
-
+            return render(request, 'cdi_forms/cat_forms/cat_completed.html', context=self.get_context_data())
         background_instance, created = BackgroundInfo.objects.get_or_create(administration=self.object) 
         if self.object.completedSurvey:
             return redirect('backpage-background-info', pk=background_instance.pk)

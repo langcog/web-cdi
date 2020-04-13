@@ -1,7 +1,7 @@
 import json
 import re
 from django.core.management.base import BaseCommand
-from cat_forms.models import *
+from cdi_forms.cat_forms.models import *
 from researcher_UI.models import *
 import csv, os
 from django.apps import apps
@@ -46,7 +46,7 @@ class Command(BaseCommand):
             instrument_language, instrument_form = curr_instrument['language'], curr_instrument['form']
 
             instrument_obj = instrument.objects.get(form=instrument_form, language=instrument_language)
-            instrument_items = apps.get_model(app_label='cat_forms', model_name='InstrumentItem')
+            instrument_items = apps.get_model(app_label='cdi_forms', model_name='InstrumentItem')
 
             print ("    Populating items for", instrument_language, instrument_form)
 

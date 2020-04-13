@@ -238,12 +238,8 @@ class BackgroundForm(BetterModelForm):
         # If enabler field was answered as 'True', its related fields cannot be empty. 
         for (enabler, dependents) in enabler_dependent_fields:
             enabler_val = cleaned_data.get(enabler)
-            print (enabler, enabler_val)
             if enabler_val in ['1','other', 1]:
                 for dependent in dependents:
-                    if enabler == 'sibling_boolean':
-                        print (dependent)
-
                     if dependent not in cleaned_data or cleaned_data.get(dependent) == '' or cleaned_data.get(dependent) == None:
                         self.add_error(dependent, _("This field cannot be empty"))
         
@@ -264,9 +260,6 @@ class BackgroundForm(BetterModelForm):
         # Complex set of checks meant to ensure that there is an 'age' value stored in the database but 'DOB' is not. If there is no 'age' value in the database, enforce entry of 'child_dob'. If there is an age value, 'child_dob' is not necessary. Also check that 'age' is appropriate for the assigned Web-CDI form. Prevent continuing if not.
         c_dob = cleaned_data.get('child_dob')
         if c_dob:
-            #day_diff = datetime.date.today().day - c_dob.day
-            #c_age = (datetime.date.today().year - c_dob.year) * 12 +  (datetime.date.today().month - c_dob.month) + (1 if day_diff >=15 else 0)
-            #print(datetime.timedelta(datetime.date.today()-c_dob))
             c_age = int((datetime.date.today()-c_dob).days/(365.2425/12.0))
             
         else:
