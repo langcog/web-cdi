@@ -31,7 +31,6 @@ class CATBackgroundInfoView(BackgroundInfoView):
 
 class CATCreateBackgroundInfoView(CreateBackgroundInfoView):
     def get(self, request, *args, **kwargs):
-        print("CAT Create backgroun")
         return super().get(request, *args, **kwargs)
 
 class CATBackpageBackgroundInfoView(BackpageBackgroundInfoView):
@@ -45,6 +44,7 @@ class AdministerAdministraionView(UpdateView):
     template_name = 'cdi_forms/cat_forms/cat_form.html'
     word=None
     instrument_items = None
+    max_words = 20
 
     def get_object(self, queryset=None):
         try:
@@ -65,7 +65,6 @@ class AdministerAdministraionView(UpdateView):
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         if 'btn-back' in request.POST:
-            print("We're here")
             return redirect('cat_forms:background-info', pk=self.object.backgroundinfo.id)
 
         administered_responses = self.object.catresponse.administered_responses or []
@@ -74,10 +73,13 @@ class AdministerAdministraionView(UpdateView):
         
         instrument_item = InstrumentItem.objects.get(id=int(self.request.POST['word']))
         administered_words.append(instrument_item.definition)
-        administered_responses.append(string_bool_coerce(self.request.POST['item']))
+        if 'yes' in self.request.POST:
+            administered_responses.append(True)
+        else:
+            administered_responses.append(False)
+
         items = self.get_items()
         for index, item in enumerate(self.instrument_items):
-            print(index)
             if item == instrument_item:
                 administered_items.append(index)
                 break
@@ -90,7 +92,7 @@ class AdministerAdministraionView(UpdateView):
         self.object.catresponse.administered_words = administered_words
         self.object.catresponse.est_theta = new_theta
 
-        stopper = MaxItemStopper(20)
+        stopper = MaxItemStopper(self.max_words)
         if stopper.stop(administered_items=items[administered_items], theta=self.object.catresponse.est_theta):
             self.object.completed = True
             self.object.save()
@@ -103,10 +105,14 @@ class AdministerAdministraionView(UpdateView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         ctx['form'] = CatItemForm(context={'word':self.word}, initial={'word':self.word})
+        ctx['max_words'] = self.max_words
+        if self.object.catresponse.administered_words:
+            ctx['words_shown'] = len(self.object.catresponse.administered_words) + 1
+        else:
+            ctx['words_shown'] = 1
         return ctx
 
     def get(self, request, *args, **kwargs):
-        print("GET 2")
         self.object = self.get_object()
         requests_log.objects.create(url_hash=self.hash_id, request_type="GET")
         if self.object.completed or self.object.due_date < timezone.now():

@@ -1,6 +1,10 @@
 {% extends 'cdi_forms/cdi_base.html' %}
-{% load i18n %}
-{% load bleach_markdown %}
+{% load i18n bleach_markdown cat_forms_tags static %}
+
+
+{% block extra_css %}
+<link rel='stylesheet' href="{% static 'cdi_forms/cat_forms.css' %}">
+{% endblock %}
 
 <!-- Navigation buttons placed in cdi_base.html -->
 {% block nav_buttons %}
@@ -335,10 +339,29 @@
 
 </ul>
 {% elif object.study.instrument.form ==  'CAT' %}
-    <p>CAT Form</p>
-    <p>Does you child know?</p>
-    {{ form.as_p }}
-    <input type="submit" value="Next">
+    <div class="container">
+        <div class="row pt10vh">
+            <div class="progress" style="width:100%">
+                <div class="progress-bar" role="progressbar" aria-valuenow="{{ words_shown|div:max_words }}" aria-valuemin="0" aria-valuemax="100" style="width:{{ words_shown|div:max_words }}%">
+                {{ words_shown }} of {{ max_words }}
+                </div>
+            </div> 
+        </div>
+        <div class="row pt10vh">
+            <div class="col-12 center">
+                <h1>{{ form.item.label }}</h1>
+                {{ form.word }}
+            </div>
+        </div>
+        <div class="row pt10vh">
+            <div class="col-6 center">
+                <button type="submit" name="no" class="btn btn-danger btn-lg">{% trans 'No' %}</button>
+            </div>
+            <div class="col-6 center">
+                <button type="submit" name="yes" class="btn btn-success btn-lg">{% trans 'Yes' %}</button>
+            </div>
+        </div>
+    </div>
 {% else %}
     <p>{% trans "Form unavailable. Contact admin." %} </p>
 {% endif %}
