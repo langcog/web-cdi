@@ -15,5 +15,5 @@ urlpatterns = [
             url(r'contact/(?P<hash_id>[0-9a-f]{64})/$', views.contact, name='contact'),
             url(r'update_administration_data_item/$', views.update_administration_data_item, name="update-administration-data-item"),
             url(r'administraion-pdf-view/(?P<pk>[0-9]+)/$', views.PDFAdministrationDetailView.as_view(), name="administration-pdf-view"),
-            ]
+            url(r'administraion-view/(?P<pk>[0-9]+)/$', views.AdministrationDetailView.as_view(), name="administration-view"),]
 

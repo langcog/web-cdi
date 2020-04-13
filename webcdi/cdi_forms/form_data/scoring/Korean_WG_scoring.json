@@ -2,13 +2,17 @@
 {
         "title" : "Total Understood",
         "category" : "word",
-        "measure" : "understands",
+        "measure" : "understands;produces",
         "order" : 1,
         "scores" : [
              {
                   "key" : "understands",
                   "value" : 1
-             }
+             },
+             {
+               "key" : "produces",
+               "value" : 1
+          }
         ]
     },
 {
