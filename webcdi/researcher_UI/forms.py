@@ -30,6 +30,7 @@ class AddStudyForm(BetterModelForm):
     timing = forms.IntegerField(label="Minimum time (minutes) a parent must take to complete the study (default=6)", required=True,
         widget=forms.NumberInput(),initial=6)
 
+    confirmation_questions = forms.BooleanField(required=False, label="Would you like participants to answer the confirmation questions (only available when split background information forms are used)")
     # Form validation. Form is passed automatically to views.py for higher level checking.
     def clean(self):
         cleaned_data = super(AddStudyForm, self).clean()
@@ -66,6 +67,7 @@ class AddStudyForm(BetterModelForm):
             Field('confirm_completion'),
             Field('show_feedback'),
             Field('allow_sharing'),
+            Field('confirmation_questions')
         )
 
     # Form is related to the study model. Exclude study group designation (is done post-creation) and researcher name (filled automatically)
@@ -121,7 +123,8 @@ class RenameStudyForm(BetterModelForm):
     allow_sharing = forms.BooleanField(required=False, label="Would you like participants to be able to share their Web-CDI results via Facebook?") # Gives option for participants to be able to share their results via Facebook. Default off.
     show_feedback = forms.BooleanField(required=False, label="Would you like to show participants graphs of their data after completion?")
     timing = forms.IntegerField(label="Minimum time (minutes) a parent must take to complete the study (default=6)", required=True)
-
+    confirmation_questions = forms.BooleanField(required=False, label="Would you like participants to answer the confirmation questions (only available when split background information forms are used)")
+    
     # Form validation. Form is passed automatically to views.py for higher level checking.
     def clean(self):
         cleaned_data = super(RenameStudyForm, self).clean()
@@ -156,6 +159,8 @@ class RenameStudyForm(BetterModelForm):
             Div(Field('gift_amount'), css_class="gift_cards collapse"),
             Field('show_feedback'),
             Field('allow_sharing'),
+            Field('confirmation_questions')
+    
         )
 
     # Link form to study model. Exclude study group (specified in another form), researcher (automatically filled by current user), and instrument (chosen during study creation and CANNOT BE CHANGED)

@@ -54,6 +54,7 @@ class study(models.Model):
     show_feedback = models.BooleanField(default=True)
     active = models.BooleanField(default=True)
     timing = models.IntegerField(default=6)
+    confirmation_questions = models.BooleanField(default=False) #Whether to ask participant to restate primary carer age and child weight
 
     def __unicode__(self):
         return self.name
