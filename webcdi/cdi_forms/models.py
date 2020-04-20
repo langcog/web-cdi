@@ -122,7 +122,8 @@ class BackgroundInfo(models.Model):
     mother_education = models.IntegerField(verbose_name = _("Primary Caregiver Education"), help_text = _("Choose highest grade completed (12 = high school graduate; 16 = college graduate; 18 = advanced degree)"), choices = education_levels, blank=True, null=True) # Asks for # of years of maternal education
     
     mother_yob_confirmation = models.IntegerField(verbose_name = _("Primary Caregiver Year of birth"), choices=years, blank=True, null=True) # Confirmation check for year of birth for mother. Can be used to roughly determine maternal age
-    birth_weight_confirmation =  models.FloatField(verbose_name = _("Birth weight"), blank=True, null=True) # Confirmation check birthweight for subject
+    birth_weight_confirmation_lb =  models.FloatField(verbose_name = _("Birth weight"), blank=True, null=True) # Confirmation check birthweight for subject
+    birth_weight_confirmation_kg =  models.FloatField(verbose_name = _("Birth weight"), blank=True, null=True) # Confirmation check birthweight for subject
 
     secondary_caregiver = models.CharField(verbose_name=_('Secondary Caregiver'), choices=caregiver_choices, max_length=20, null=True, blank=True)
     secondary_caregiver_other = models.CharField(max_length=25, null=True, blank=True)

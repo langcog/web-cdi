@@ -377,8 +377,6 @@ class BackgroundForm(BetterModelForm):
 
         self.fields['birth_weight_lb'].field = forms.TypedChoiceField
         self.fields['birth_weight_kg'].field = forms.TypedChoiceField
-        self.fields['birth_weight_confirmation'].field = forms.Select()
-        self.fields['birth_weight_confirmation'].required=False
 
         self.birth_weight_required = True
         if self.curr_context['birthweight_units'] == "lb":
@@ -441,21 +439,11 @@ class BackgroundForm(BetterModelForm):
                         if 'field' in field: fields.append(field['field'])
                     
                 rows.append(Fieldset(fieldset['fieldset'], *fields))
-            
-            confirmation_fields = []
-            if self.backpage and self.curr_context['study'].confirmation_questions:    
-                confirmation_fields.append('mother_yob_confirmation')
-                self.fields['mother_yob_confirmation'].required=True
-                confirmation_fields.append('birth_weight_confirmation')
-                self.fields['birth_weight_confirmation'].required=True
-                self.fields['birth_weight_confirmation'].widget=forms.Select()
-                rows.append(Fieldset('Please confirm', *confirmation_fields))
-                
 
             # now remove required from any standard fields not included
             hidden_fields = []
             for x in self.fields: 
-                if x not in selected_fields and x not in confirmation_fields:
+                if x not in selected_fields:
                     self.fields[x].required = False
                     hidden_fields.append(x)
                     self.fields[x].widget = forms.HiddenInput()
@@ -466,16 +454,20 @@ class BackgroundForm(BetterModelForm):
                 self.birth_weight_required = True
                 if len(self.fields['birth_weight_lb'].widget.choices) < 1:
                     self.fields['birth_weight_lb'].widget.choices = BIRTH_WEIGHT_LB_CHOICES
-                print(f"Birth Weight {self.fields['birth_weight_lb'].widget.choices}")
-                self.fields['birth_weight_confirmation'].widget.choices = self.fields['birth_weight_lb'].widget.choices
-                print(f"Confirmation: {self.fields['birth_weight_confirmation'].widget.choices}")
             elif 'birth_weight_kg' in selected_fields:
                 self.birth_weight_required = True
                 if len(self.fields['birth_weight_kg'].widget.choices) < 1:
                     self.fields['birth_weight_kg'].widget.choices = BIRTH_WEIGHT_KG_CHOICES
-                self.fields['birth_weight_confirmation'].widget.choices = self.fields['birth_weight_kg'].widget.choices
             else:
                 self.birth_weight_required = False
+
+            if 'birth_weight_confirmation_lb' in selected_fields:
+                if len(self.fields['birth_weight_confirmation_lb'].widget.choices) < 1:
+                    self.fields['birth_weight_confirmation_lb'].widget.choices = BIRTH_WEIGHT_LB_CHOICES
+            if 'birth_weight_confirmation_kg' in selected_fields:
+                if len(self.fields['birth_weight_confirmation_kg'].widget.choices) < 1:
+                    self.fields['birth_weight_confirmation_kg'].widget.choices = BIRTH_WEIGHT_KG_CHOICES
+
 
             if 'annual_income' in selected_fields:
                 if len(self.fields['annual_income'].widget.choices) < 1:
