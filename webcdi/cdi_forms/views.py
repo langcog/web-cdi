@@ -301,6 +301,7 @@ class CreateBackgroundInfoView(CreateView):
         self.study_context['child_age'] = None
         self.study_context['zip_code'] = ''
         self.study_context['language_code'] =self.user_language
+        self.study_context['study'] =self.study
         return self.study_context
 
     def get_user_language(self):
