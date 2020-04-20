@@ -804,7 +804,8 @@ def cdi_form(request, hash_id):
                                 given_code.save()
 
                 # If the study is run by langcoglab and the study allows for subject payments, store the IP address for security purposes
-                if administration_instance.study.researcher.username == "langcoglab" and administration_instance.study.allow_payment:
+                #if administration_instance.study.researcher.username == "langcoglab" and administration_instance.study.allow_payment:
+                if administration_instance.study.allow_payment:
                     #user_ip = str(get_ip(request))
                     #user_ip = bytes(get_ip(request))
                     user_ip = get_ip(request)
@@ -842,7 +843,8 @@ def cdi_form(request, hash_id):
         data['form'] = administration_instance.study.instrument.form
         data['language_code'] = user_language
         
-        if administration_instance.study.confirm_completion and administration_instance.study.researcher.username == "langcoglab" and administration_instance.study.allow_payment:
+        #if administration_instance.study.confirm_completion and administration_instance.study.researcher.username == "langcoglab" and administration_instance.study.allow_payment:
+        if administration_instance.study.confirm_completion and administration_instance.study.allow_payment:
             data['captcha'] = 'True'
 
 
@@ -957,7 +959,8 @@ def printable_view(request, hash_id):
     response = render(request, 'cdi_forms/printable_cdi.html', prefilled_data) # Render contact form template   
     response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
 
-    if administration_instance.study.researcher.username == "langcoglab" and administration_instance.study.allow_payment:
+    #if administration_instance.study.researcher.username == "langcoglab" and administration_instance.study.allow_payment:
+    if administration_instance.study.allow_payment:
         response.set_signed_cookie('completed_num', completed)
     return response
 

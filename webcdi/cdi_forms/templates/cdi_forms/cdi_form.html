@@ -350,7 +350,7 @@
         // Triggers when participant successfully passes ReCaptcha
         function enableBtn(){
             captcha_clicked = true;
-            if (gotToEnd && test_duration >= {{ object.timing}}) {
+            if (gotToEnd && test_duration >= {{ object.study.timing }}) {
                 $('.submit-button').show();
             }
         }

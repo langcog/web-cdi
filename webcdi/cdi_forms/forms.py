@@ -467,11 +467,14 @@ class BackgroundForm(BetterModelForm):
             if 'birth_weight_confirmation_kg' in selected_fields:
                 if len(self.fields['birth_weight_confirmation_kg'].widget.choices) < 1:
                     self.fields['birth_weight_confirmation_kg'].widget.choices = BIRTH_WEIGHT_KG_CHOICES
-            if not self.curr_context['study'].confirmation_questions:
-                self.fields['birth_weight_confirmation_lb'].widget = forms.HiddenInput()
-                self.fields['birth_weight_confirmation_kg'].widget = forms.HiddenInput()
-                self.fields['mother_yob_confirmation'].widget = forms.HiddenInput()
-
+            try:
+                if not self.curr_context['study'].confirmation_questions:
+                    self.fields['birth_weight_confirmation_lb'].widget = forms.HiddenInput()
+                    self.fields['birth_weight_confirmation_kg'].widget = forms.HiddenInput()
+                    self.fields['mother_yob_confirmation'].widget = forms.HiddenInput()
+            except:
+                pass
+            
             if 'annual_income' in selected_fields:
                 if len(self.fields['annual_income'].widget.choices) < 1:
                     self.fields['annual_income'].widget.choices = INCOME_CHOICES
