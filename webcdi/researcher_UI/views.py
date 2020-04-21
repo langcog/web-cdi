@@ -99,8 +99,11 @@ def download_data(request, study_obj, administrations = None): # Download study 
     admin_header = format_admin_header(study_obj)
     
     # Fetch background data variables
-    background_header = ['age','sex','country','zip_code','birth_order', 'birth_weight_lb', 'birth_weight_kg','multi_birth_boolean','multi_birth', 'sibling_boolean','sibling_count','sibling_data','born_on_due_date', 'early_or_late', 'due_date_diff', 'mother_yob', 'mother_education','father_yob', 'father_education', 'annual_income', 'child_hispanic_latino', 'child_ethnicity', 'caregiver_info', 'other_languages_boolean','other_languages','language_from', 'language_days_per_week', 'language_hours_per_day', 'ear_infections_boolean','ear_infections', 'hearing_loss_boolean','hearing_loss', 'vision_problems_boolean','vision_problems', 'illnesses_boolean','illnesses', 'services_boolean','services','worried_boolean','worried','learning_disability_boolean','learning_disability']
-
+    background_header = ['age','sex','country','zip_code','birth_order', 'birth_weight_lb', 'birth_weight_confirmation_lb','birth_weight_kg','birth_weight_confirmation_kg','multi_birth_boolean','multi_birth', 'sibling_boolean','sibling_count','sibling_data','born_on_due_date', 'early_or_late', 'due_date_diff', 'mother_yob', 'mother_yob_confirmation', 'mother_education','father_yob', 'father_education', 'annual_income', 'child_hispanic_latino', 'child_ethnicity', 'caregiver_info', 'other_languages_boolean','other_languages','language_from', 'language_days_per_week', 'language_hours_per_day', 'ear_infections_boolean','ear_infections', 'hearing_loss_boolean','hearing_loss', 'vision_problems_boolean','vision_problems', 'illnesses_boolean','illnesses', 'services_boolean','services','worried_boolean','worried','learning_disability_boolean','learning_disability']
+    if not study_obj.confirmation_questions:
+        background_header.remove("birth_weight_confirmation_lb")
+        background_header.remove("birth_weight_confirmation_kg")
+        background_header.remove("mother_yob_confirmation")
     # Try to properly format CDI responses for pandas dataframe
     try:
         answers = administration_data.objects.values('administration_id', 'item_ID', 'value').filter(administration_id__in = administrations)
@@ -602,6 +605,7 @@ def rename_study(request, study_name): # Function for study settings modal
             form_package['form'] = form
             form_package['form_name'] = 'Update Study'
             form_package['allow_payment'] = study_obj.allow_payment
+            #form_package['confirmation_questions'] = os.path.isfile(os.path.realpath(PROJECT_ROOT + '/form_data/background_info/' + study_obj.instrument.name + '_front.json'))
             return render(request, 'researcher_UI/add_study_modal.html', form_package) # Reload 'Update Study' modal
     else:
 
@@ -612,6 +616,7 @@ def rename_study(request, study_name): # Function for study settings modal
         form_package['min_age'] = age_range.lower
         form_package['max_age'] = age_range.upper
         form_package['study_obj'] = study_obj
+        #form_package['confirmation_questions'] = os.path.isfile(os.path.realpath(PROJECT_ROOT + '/form_data/background_info/' + study_obj.instrument.name + '_front.json'))
         return render(request, 'researcher_UI/add_study_modal.html', form_package) # Reload 'Update Study' modal
         
 @login_required 
@@ -660,10 +665,19 @@ def add_study(request): # Function for adding studies modal
                 return HttpResponse(json.dumps(data), content_type="application/json") # Display error message about non-unique study back to user                
         else: # If form failed validation checks
             data['stat'] = "re-render"; # Re-render form
-            return render(request, 'researcher_UI/add_study_modal.html', {'form': form, 'form_name': 'Add New Study'})
+            form_package = {}
+            form_package['form'] = form
+            form_package['form_name'] = 'Add New Study'
+            #form_package['confirmation_questions'] = os.path.isfile(os.path.realpath(PROJECT_ROOT + '/form_data/background_info/' + study_obj.instrument.name + '_front.json'))
+
+            return render(request, 'researcher_UI/add_study_modal.html', form_package)
     else: # If fetching modal
         form = AddStudyForm(researcher=researcher) # Pull up blank form and render
-        return render(request, 'researcher_UI/add_study_modal.html', {'form': form, 'form_name': 'Add New Study'})
+        form_package = {}
+        form_package['form'] = form
+        form_package['form_name'] = 'Add New Study'
+        #form_package['confirmation_questions'] = os.path.isfile(os.path.realpath(PROJECT_ROOT + '/form_data/background_info/' + study_obj.instrument.name + '_front.json'))
+        return render(request, 'researcher_UI/add_study_modal.html', form_package)
 
 
 @login_required 
