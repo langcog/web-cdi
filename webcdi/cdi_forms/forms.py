@@ -127,6 +127,8 @@ EDUCATION_LEVELS = [
 
 # Form for asking about demographic variables for child. Most questions are required unless explicitly stated to be false.
 class BackgroundForm(BetterModelForm):
+    backpage = False
+
     sibling_boolean = forms.TypedChoiceField(
         choices=YESNO_CHOICES, 
         widget=forms.RadioSelect,
@@ -238,12 +240,8 @@ class BackgroundForm(BetterModelForm):
         # If enabler field was answered as 'True', its related fields cannot be empty. 
         for (enabler, dependents) in enabler_dependent_fields:
             enabler_val = cleaned_data.get(enabler)
-            print (enabler, enabler_val)
             if enabler_val in ['1','other', 1]:
                 for dependent in dependents:
-                    if enabler == 'sibling_boolean':
-                        print (dependent)
-
                     if dependent not in cleaned_data or cleaned_data.get(dependent) == '' or cleaned_data.get(dependent) == None:
                         self.add_error(dependent, _("This field cannot be empty"))
         
@@ -264,9 +262,6 @@ class BackgroundForm(BetterModelForm):
         # Complex set of checks meant to ensure that there is an 'age' value stored in the database but 'DOB' is not. If there is no 'age' value in the database, enforce entry of 'child_dob'. If there is an age value, 'child_dob' is not necessary. Also check that 'age' is appropriate for the assigned Web-CDI form. Prevent continuing if not.
         c_dob = cleaned_data.get('child_dob')
         if c_dob:
-            #day_diff = datetime.date.today().day - c_dob.day
-            #c_age = (datetime.date.today().year - c_dob.year) * 12 +  (datetime.date.today().month - c_dob.month) + (1 if day_diff >=15 else 0)
-            #print(datetime.timedelta(datetime.date.today()-c_dob))
             c_age = int((datetime.date.today()-c_dob).days/(365.2425/12.0))
             
         else:
@@ -372,6 +367,7 @@ class BackgroundForm(BetterModelForm):
 
         self.fields['primary_caregiver'].required=True
         self.fields['mother_yob'].required=True
+        self.fields['mother_yob_confirmation'].required=False
         self.fields['mother_education'].required=True
         self.fields['mother_education'].choices=EDUCATION_LEVELS
         self.fields['father_education'].choices=EDUCATION_LEVELS
@@ -381,6 +377,7 @@ class BackgroundForm(BetterModelForm):
 
         self.fields['birth_weight_lb'].field = forms.TypedChoiceField
         self.fields['birth_weight_kg'].field = forms.TypedChoiceField
+
         self.birth_weight_required = True
         if self.curr_context['birthweight_units'] == "lb":
             self.birth_weight_field = 'birth_weight_lb'
@@ -442,7 +439,7 @@ class BackgroundForm(BetterModelForm):
                         if 'field' in field: fields.append(field['field'])
                     
                 rows.append(Fieldset(fieldset['fieldset'], *fields))
-                    
+
             # now remove required from any standard fields not included
             hidden_fields = []
             for x in self.fields: 
@@ -460,16 +457,30 @@ class BackgroundForm(BetterModelForm):
             elif 'birth_weight_kg' in selected_fields:
                 self.birth_weight_required = True
                 if len(self.fields['birth_weight_kg'].widget.choices) < 1:
-                    self.fields['birth_weight_kg'].widget.choices = BIRTH_WEIGHT_LB_CHOICES
+                    self.fields['birth_weight_kg'].widget.choices = BIRTH_WEIGHT_KG_CHOICES
             else:
                 self.birth_weight_required = False
 
+            if 'birth_weight_confirmation_lb' in selected_fields:
+                if len(self.fields['birth_weight_confirmation_lb'].widget.choices) < 1:
+                    self.fields['birth_weight_confirmation_lb'].widget.choices = BIRTH_WEIGHT_LB_CHOICES
+            if 'birth_weight_confirmation_kg' in selected_fields:
+                if len(self.fields['birth_weight_confirmation_kg'].widget.choices) < 1:
+                    self.fields['birth_weight_confirmation_kg'].widget.choices = BIRTH_WEIGHT_KG_CHOICES
+            try:
+                if not self.curr_context['study'].confirmation_questions:
+                    self.fields['birth_weight_confirmation_lb'].widget = forms.HiddenInput()
+                    self.fields['birth_weight_confirmation_kg'].widget = forms.HiddenInput()
+                    self.fields['mother_yob_confirmation'].widget = forms.HiddenInput()
+            except:
+                pass
+            
             if 'annual_income' in selected_fields:
                 if len(self.fields['annual_income'].widget.choices) < 1:
                     self.fields['annual_income'].widget.choices = INCOME_CHOICES
            
         # otherwise use the standard format
-        else:            
+        else:
             self.fields['birth_weight_lb'].widget=forms.Select()
             self.fields['birth_weight_lb'].widget.choices = BIRTH_WEIGHT_LB_CHOICES
             self.fields['birth_weight_kg'].widget=forms.Select()
@@ -520,6 +531,8 @@ class BackgroundForm(BetterModelForm):
 
 # we want all the functionality of the BackgroundForm on the backpage, without redefining it
 class BackpageBackgroundForm(BackgroundForm):
+    backpage = True
+
     def get_json_filename(self):
         return os.path.realpath(PROJECT_ROOT + '/form_data/background_info/' + self.curr_context['instrument'] + '_back.json')
       
