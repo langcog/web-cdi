@@ -346,11 +346,13 @@
                 {{ words_shown }} of {{ max_words }}
                 </div>
             </div> 
+            <p>{{ est_theta }}</p>
         </div>
         <div class="row pt10vh">
             <div class="col-12 center">
                 <h1>{{ form.item.label }}</h1>
                 {{ form.word }}
+                {% if footnote %}{% trans "* or word used in your family" %}{% endif %}
             </div>
         </div>
         <div class="row pt10vh">

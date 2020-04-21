@@ -15,6 +15,7 @@ from catsim.selection import *
 from catsim.estimation import *
 # stopping package contains different stopping criteria for the CAT
 from catsim.stopping import *
+from .stopper import CustomStopper
 
 from cdi_forms.models import requests_log, BackgroundInfo
 
@@ -44,7 +45,10 @@ class AdministerAdministraionView(UpdateView):
     template_name = 'cdi_forms/cat_forms/cat_form.html'
     word=None
     instrument_items = None
-    max_words = 20
+    max_words = 50
+    min_words = 20
+    min_error = 0.15
+    est_theta = None
 
     def get_object(self, queryset=None):
         try:
@@ -85,14 +89,14 @@ class AdministerAdministraionView(UpdateView):
                 break
 
         estimator = HillClimbingEstimator()
-        new_theta = estimator.estimate(items=items, administered_items=administered_items, response_vector=administered_responses, est_theta=self.object.catresponse.est_theta)
+        self.est_theta = new_theta = estimator.estimate(items=items, administered_items=administered_items, response_vector=administered_responses, est_theta=self.object.catresponse.est_theta)
 
         self.object.catresponse.administered_responses=administered_responses
         self.object.catresponse.administered_items=administered_items
         self.object.catresponse.administered_words = administered_words
         self.object.catresponse.est_theta = new_theta
 
-        stopper = MaxItemStopper(self.max_words)
+        stopper = CustomStopper(self.min_words, self.max_words, self.min_error)
         if stopper.stop(administered_items=items[administered_items], theta=self.object.catresponse.est_theta):
             self.object.completed = True
             self.object.save()
@@ -104,12 +108,20 @@ class AdministerAdministraionView(UpdateView):
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
+        
         ctx['form'] = CatItemForm(context={'word':self.word}, initial={'word':self.word})
+        try:
+            if '*' in self.word.definition: ctx['footnote'] = True
+        except AttributeError:
+            pass
+
         ctx['max_words'] = self.max_words
         if self.object.catresponse.administered_words:
             ctx['words_shown'] = len(self.object.catresponse.administered_words) + 1
         else:
             ctx['words_shown'] = 1
+
+        ctx['est_theta'] = self.est_theta
         return ctx
 
     def get(self, request, *args, **kwargs):
@@ -127,7 +139,7 @@ class AdministerAdministraionView(UpdateView):
 
         initializer = RandomInitializer()
         selector = MaxInfoSelector()
-        est_theta = initializer.initialize()
+        self.est_theta = est_theta = initializer.initialize()
 
         cat_response, created = CatResponse.objects.get_or_create(administration=self.object)
         if created or not cat_response.est_theta:
