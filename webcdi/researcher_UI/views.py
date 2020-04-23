@@ -59,12 +59,20 @@ def get_score_headers(study_obj):
 
 def get_background_header(study_obj):
     # Fetch background data variables
-    background_header = ['age','sex','country','zip_code','birth_order', 'birth_weight_lb', 'birth_weight_confirmation_lb','birth_weight_kg','birth_weight_confirmation_kg','multi_birth_boolean','multi_birth', 'sibling_boolean','sibling_count','sibling_data','born_on_due_date', 'early_or_late', 'due_date_diff', 'mother_yob', 'mother_yob_confirmation', 'mother_education','father_yob', 'father_education', 'annual_income', 'child_hispanic_latino', 'child_ethnicity', 'caregiver_info', 'other_languages_boolean','other_languages','language_from', 'language_days_per_week', 'language_hours_per_day', 'ear_infections_boolean','ear_infections', 'hearing_loss_boolean','hearing_loss', 'vision_problems_boolean','vision_problems', 'illnesses_boolean','illnesses', 'services_boolean','services','worried_boolean','worried','learning_disability_boolean','learning_disability']
+    background_header = ['age','sex','country','zip_code', 
+        'birth_order', 'birth_weight_lb', 'birth_weight_confirmation_lb','birth_weight_kg','birth_weight_confirmation_kg', 
+        'multi_birth_boolean','multi_birth', 'sibling_boolean','sibling_count','sibling_data','born_on_due_date', 'early_or_late', 
+        'due_date_diff', 'mother_yob', 'mother_yob_confirmation', 'mother_education','father_yob', 'father_education', 
+        'annual_income', 'child_hispanic_latino', 'child_ethnicity', 'caregiver_info', 'other_languages_boolean', 
+        'other_languages','language_from', 'language_days_per_week', 'language_hours_per_day', 'ear_infections_boolean',
+        'ear_infections', 'hearing_loss_boolean','hearing_loss', 'vision_problems_boolean','vision_problems', 
+        'illnesses_boolean','illnesses', 'services_boolean','services','worried_boolean','worried',
+        'learning_disability_boolean','learning_disability']
     if not study_obj.confirmation_questions:
         background_header.remove("birth_weight_confirmation_lb")
         background_header.remove("birth_weight_confirmation_kg")
         background_header.remove("mother_yob_confirmation")
-    return get_background_header
+    return background_header
 
 def format_admin_data(pd, study_obj, administrations, admin_header):
     # Try to format administration data for pandas dataframe
@@ -220,7 +228,7 @@ def download_summary(request, study_obj, administrations = None): # Download stu
 
     # Fetch background data variables
     background_header = get_background_header(study_obj)
-    
+
     # Format background data responses for pandas dataframe and eventual printing
     background_data = BackgroundInfo.objects.values().filter(administration__in = administrations)
 
