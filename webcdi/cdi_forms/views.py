@@ -831,8 +831,6 @@ def cdi_form(request, hash_id):
                 else:
                     administration.objects.filter(url_hash = hash_id).update(completed = True) # Mark test as complete
                     return printable_view(request, hash_id) # Render completion page
-                    
-        update_summary_scores(administration_instance)
 
     # Fetch prefilled responses
     data = dict()
