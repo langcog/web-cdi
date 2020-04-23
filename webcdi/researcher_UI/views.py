@@ -7,7 +7,6 @@ from .forms import *
 from .models import researcher, study, administration, administration_data, get_meta_header, get_background_header, payment_code, ip_address
 import codecs, json, os, re, random, csv, datetime, math, zipfile
 from io import StringIO, BytesIO
-#import cStringIO, StringIO
 from .tables  import StudyAdministrationTable
 from .mixins import StudyOwnerMixin
 from django.views.generic import UpdateView
@@ -58,6 +57,15 @@ def get_score_headers(study_obj):
                 if not benchmark.raw_score == 9999: score_header.append(f.title + ' Percentile-both')
     return score_header
 
+def get_background_header(study_obj):
+    # Fetch background data variables
+    background_header = ['age','sex','country','zip_code','birth_order', 'birth_weight_lb', 'birth_weight_confirmation_lb','birth_weight_kg','birth_weight_confirmation_kg','multi_birth_boolean','multi_birth', 'sibling_boolean','sibling_count','sibling_data','born_on_due_date', 'early_or_late', 'due_date_diff', 'mother_yob', 'mother_yob_confirmation', 'mother_education','father_yob', 'father_education', 'annual_income', 'child_hispanic_latino', 'child_ethnicity', 'caregiver_info', 'other_languages_boolean','other_languages','language_from', 'language_days_per_week', 'language_hours_per_day', 'ear_infections_boolean','ear_infections', 'hearing_loss_boolean','hearing_loss', 'vision_problems_boolean','vision_problems', 'illnesses_boolean','illnesses', 'services_boolean','services','worried_boolean','worried','learning_disability_boolean','learning_disability']
+    if not study_obj.confirmation_questions:
+        background_header.remove("birth_weight_confirmation_lb")
+        background_header.remove("birth_weight_confirmation_kg")
+        background_header.remove("mother_yob_confirmation")
+    return get_background_header
+
 def format_admin_data(pd, study_obj, administrations, admin_header):
     # Try to format administration data for pandas dataframe
     try:
@@ -99,11 +107,8 @@ def download_data(request, study_obj, administrations = None): # Download study 
     admin_header = format_admin_header(study_obj)
     
     # Fetch background data variables
-    background_header = ['age','sex','country','zip_code','birth_order', 'birth_weight_lb', 'birth_weight_confirmation_lb','birth_weight_kg','birth_weight_confirmation_kg','multi_birth_boolean','multi_birth', 'sibling_boolean','sibling_count','sibling_data','born_on_due_date', 'early_or_late', 'due_date_diff', 'mother_yob', 'mother_yob_confirmation', 'mother_education','father_yob', 'father_education', 'annual_income', 'child_hispanic_latino', 'child_ethnicity', 'caregiver_info', 'other_languages_boolean','other_languages','language_from', 'language_days_per_week', 'language_hours_per_day', 'ear_infections_boolean','ear_infections', 'hearing_loss_boolean','hearing_loss', 'vision_problems_boolean','vision_problems', 'illnesses_boolean','illnesses', 'services_boolean','services','worried_boolean','worried','learning_disability_boolean','learning_disability']
-    if not study_obj.confirmation_questions:
-        background_header.remove("birth_weight_confirmation_lb")
-        background_header.remove("birth_weight_confirmation_kg")
-        background_header.remove("mother_yob_confirmation")
+    background_header = get_background_header(study_obj)
+
     # Try to properly format CDI responses for pandas dataframe
     try:
         answers = administration_data.objects.values('administration_id', 'item_ID', 'value').filter(administration_id__in = administrations)
@@ -214,8 +219,8 @@ def download_summary(request, study_obj, administrations = None): # Download stu
     admin_header = format_admin_header(study_obj)
 
     # Fetch background data variables
-    background_header = ['age','sex','zip_code','birth_order', 'birth_weight_lb', 'birth_weight_kg','multi_birth_boolean','multi_birth', 'born_on_due_date', 'early_or_late', 'due_date_diff', 'mother_yob', 'mother_education','father_yob', 'father_education', 'annual_income', 'child_hispanic_latino', 'child_ethnicity', 'caregiver_info', 'other_languages_boolean','other_languages','language_from', 'language_days_per_week', 'language_hours_per_day', 'ear_infections_boolean','ear_infections', 'hearing_loss_boolean','hearing_loss', 'vision_problems_boolean','vision_problems', 'illnesses_boolean','illnesses', 'services_boolean','services','worried_boolean','worried','learning_disability_boolean','learning_disability']
-
+    background_header = get_background_header(study_obj)
+    
     # Format background data responses for pandas dataframe and eventual printing
     background_data = BackgroundInfo.objects.values().filter(administration__in = administrations)
 
