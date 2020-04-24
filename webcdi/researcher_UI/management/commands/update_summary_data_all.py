@@ -8,12 +8,14 @@ from django.core.mail import EmailMessage
 
 class Command(BaseCommand):
 
-    def handle(self, *args, **options):      
-        for study_obj in study.objects.all():
+    def handle(self, *args, **options):
+        study_count = 75      
+        for study_obj in study.objects.all()[study_count:]:
+            study_count += 1
             count = 0
             thousands = 0
             administrations = administration.objects.filter(study=study_obj)
-            subject = f'WebCDI Summary Data for %s' % study_obj.name
+            subject = f'{study_count} WebCDI Summary Data for {study_obj.name}'
             email = EmailMessage(
                     subject=subject,
                     body=f'Starting at %s' % (datetime.datetime.now()),
