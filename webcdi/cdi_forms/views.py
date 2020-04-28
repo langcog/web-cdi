@@ -749,6 +749,7 @@ def cdi_form(request, hash_id):
                             administration_data.objects.update_or_create(administration = administration_instance, item_ID = key, defaults = {'value': value})
 
             # Update the Summary Data
+            print("Update Summery Scores")
             update_summary_scores(administration_instance)
 
             if 'btn-save' in request.POST and request.POST['btn-save'] == _('Save'): # If the save button was pressed
