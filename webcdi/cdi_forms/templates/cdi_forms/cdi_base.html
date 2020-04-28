@@ -178,7 +178,9 @@
 
 <!-- To translate the Javascript messages-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/jquery.validate.min.js"></script>
-
+<script>
+    console.log("Language Code: ", "{{language_code}}")
+</script>
 {% if language_code == 'nl' %}<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/localization/messages_nl.min.js"></script>{% endif %}
 {% if language_code == 'ko' %}<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/localization/messages_ko.min.js"></script>{% endif %}
 {% if language_code == 'fr' %}<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/localization/messages_fr.min.js"></script>{% endif %}
