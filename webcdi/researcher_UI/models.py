@@ -153,7 +153,7 @@ class InstrumentScore(models.Model):
     instrument = models.ForeignKey(instrument, on_delete=models.CASCADE)
     title = models.CharField(max_length=101)
     category = models.CharField(max_length=101)
-    measure = models.CharField(max_length=101)
+    scoring_measures = models.CharField(max_length=101)
     order = models.IntegerField(default=999)
     kind = models.CharField(max_length=5, default="count", choices=KIND_OPTIONS) 
 
@@ -165,6 +165,17 @@ class InstrumentScore(models.Model):
 
     class Meta:
         ordering = ['instrument', 'order']
+
+class Measure(models.Model):
+    '''
+    Class to store the measures and their values used for scoring
+    '''
+    instrument_score = models.ForeignKey(InstrumentScore, on_delete=models.CASCADE)
+    key = models.CharField(max_length=51)
+    value = models.IntegerField(default=1)
+
+    def __str__(self):
+        return f'{self.instrument_score} {self.key}'
 
 class SummaryData(models.Model):
     '''

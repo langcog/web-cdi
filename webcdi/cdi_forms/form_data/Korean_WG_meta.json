@@ -1,0 +1,103 @@
+{
+    "parts": [
+        {
+            "id": 1,
+            "title": "PART 1: 아동이 사용하는 어휘",
+            "types": [
+                {
+                    "id": "word",
+                    "sections": [
+                        {
+                            "id": "sounds",
+                            "title": "1. 소리"
+                        },{
+                            "id": "vehicles",
+                            "title": "2. 탈 것"
+                        },{
+                            "id": "animals",
+                            "title": "3. 동물"
+                        },{
+                            "id": "body_parts",
+                            "title": "4. 신체부위"
+                        },{
+                            "id": "clothing",
+                            "title": "5. 옷"
+                        },{
+                            "id": "toys",
+                            "title": "6. 장난감류"
+                        },{
+                            "id": "food_drink",
+                            "title": "7. 음식"
+                        },{
+                            "id": "household",
+                            "title": "8. 가정용품"
+                        },{
+                            "id": "furniture_rooms",
+                            "title": "9. 가구 및 방안"
+                        },{
+                            "id": "places",
+                            "title": "10. 장소 및 공간"
+                        },{
+                            "id": "outside",
+                            "title": "11. 외부사물"
+                        },{
+                            "id": "people",
+                            "title": "12. 사람"
+                        },{
+                            "id": "games_routines",
+                            "title": "13. 일상생활과 관련된 말"
+                        },{
+                            "id": "pronouns",
+                            "title": "14. 대신하는 말"
+                        },{
+                            "id": "quantifiers",
+                            "title": "15. 양, 수, 정도"
+                        },{
+                            "id": "action_words",
+                            "title": "16. 동사"
+                        },{
+                            "id": "descriptive_words",
+                            "title": "17. 형용사"
+                        },{
+                            "id": "function_words",
+                            "title": "18. 기능어"
+                        }
+                    ],
+                    "text": "아동은 표현할 수 있는 어휘보다, 이해하고 있는 어휘가 더 많습니다. 본 검사에서는 아동이 이해하고, 표현할 수 있는 어휘를 모두 살펴보고자 합니다. 각 어휘 별로 아동이 일상에서 사용하는 어휘에 체크 표시를 해 주시기 바랍니다. 아동이 다른 방식으로 말 하거나 (예: \"아이스크림\"를 \"아이킴\"로 하거나 \"오리\"를 \"오디\"로 발음하는 경우), 다른 말로 바꾸어서 사용하는 경우 (예: \"할머니\"를 \"함미\"로 사용하는 경우)도 체크 표시를 해 주시기 바랍니다. 여기에 제시된 어휘는 또래 아동이 사용하는 어휘의 \"목록\"입니다. 아동이 현재 몇몇 어휘만 알고 있더라도 너무 걱정하지 마세요.",
+                    "type": "radiobutton"
+                }
+            ]
+        },{
+            "id": 2,
+            "title": "PART 2 : 제스처와 놀이",
+            "types": [
+                {
+                    "id": "gestures_first",
+                    "title": "가. 의사소통을 위한 제스처 사용",
+                    "sub_title": "아동은 의사소통하는 방법을 습득하려 할 때 제스처를 사용합니다. 다음의 행동을 보시고 아동이 어디에 해당하는지 표시해 주십시오.",
+                    "type": "radiobutton"
+                },{
+                    "id": "gestures_games",
+                    "title": "나. 게임과 일상생활",
+                    "sub_title": "아동이 다음의 활동을 합니까?",
+                    "type": "radiobutton"
+                },{
+                    "id": "gestures_objects",
+                    "title": "다. 사물 가지고 놀기",
+                    "sub_title": "아동이 다음의 행동을 하거나 하려는 시늉을 보입니까?",
+                    "type": "radiobutton"
+                },{
+                    "id": "gestures_parent",
+                    "title": "라. 어른의 행동을 모방하기",
+                    "sub_title": "아동이 다음의 행동을 하거나 하려고 합니까?",
+                    "type": "radiobutton" 
+                },{
+                    "id": "gestures_adult",
+                    "title": "마. 인형놀이",
+                    "sub_title": "아동이 다음의 행동을 하거나 하려고 합니까?",
+                    "type": "radiobutton"
+                }
+            ]
+        }
+    ]
+}

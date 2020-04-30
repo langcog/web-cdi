@@ -606,6 +606,7 @@ def cdi_items(object_group, item_type, prefilled_data, item_id):
                 obj['prefilled_value'] = prefilled_data[obj['itemID']]
         elif item_type == 'checkbox':
             obj['prefilled_value'] = obj['itemID'] in prefilled_data
+            #print ( obj['itemID'] )
             obj['definition'] = obj['definition'][0] + obj['definition'][1:] if obj['definition'][0].isalpha() else obj['definition'][0] + obj['definition'][1] + obj['definition'][2:]
             obj['choices'] = obj['choices__choice_set']
 
@@ -748,6 +749,7 @@ def cdi_form(request, hash_id):
                             administration_data.objects.update_or_create(administration = administration_instance, item_ID = key, defaults = {'value': value})
 
             # Update the Summary Data
+            print("Update Summery Scores")
             update_summary_scores(administration_instance)
 
             if 'btn-save' in request.POST and request.POST['btn-save'] == _('Save'): # If the save button was pressed
@@ -830,8 +832,6 @@ def cdi_form(request, hash_id):
                 else:
                     administration.objects.filter(url_hash = hash_id).update(completed = True) # Mark test as complete
                     return printable_view(request, hash_id) # Render completion page
-                    
-        update_summary_scores(administration_instance)
 
     # Fetch prefilled responses
     data = dict()
@@ -1144,8 +1144,20 @@ def update_administration_data_item(request):
     #update_summary_scores(administration_instance)
     return HttpResponse(json.dumps([{}]), content_type='application/json')
 
-from django_weasyprint import WeasyTemplateResponseMixin
 
+class AdministrationDetailView(DetailView):
+    model = administration
+    template_name = 'cdi_forms/pdf_administration.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        prefilled_data = prefilled_cdi_data(self.object)
+        for field in prefilled_data:
+            context[field] = prefilled_data[field]
+        context['language_code'] = settings.LANGUAGE_DICT[context['object'].study.instrument.language]
+        return context
+
+from django_weasyprint import WeasyTemplateResponseMixin
 class PDFAdministrationDetailView(WeasyTemplateResponseMixin, DetailView):
     model = administration
     template_name = 'cdi_forms/pdf_administration.html'
@@ -1157,3 +1169,8 @@ class PDFAdministrationDetailView(WeasyTemplateResponseMixin, DetailView):
             context[field] = prefilled_data[field]
         context['language_code'] = settings.LANGUAGE_DICT[context['object'].study.instrument.language]
         return context
+
+    def get(self, request, *args, **kwargs):
+        if self.get_object().study.instrument.language == 'Korean':
+            return redirect('administration-view', pk=self.get_object().pk)
+        return super().get(request, *args, **kwargs)

@@ -20,6 +20,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.en-CA.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.en-GB.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.nl.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.ko.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.he.min.js"></script>
     <script src="{% static 'cdi_forms/selectize.js' %}"></script>
     <script src="{% static 'cdi_forms/moment.js' %}"></script>
@@ -177,11 +178,14 @@
 
 <!-- To translate the Javascript messages-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/jquery.validate.min.js"></script>
-
-{% if language_code == 'nl' %}<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/localization/messages_nl.min.js"></script>{% endif %}
-{% if language_code == 'fr' %}<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/localization/messages_fr.min.js"></script>{% endif %}
-{% if language_code == 'es' %}<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/localization/messages_es.min.js"></script>{% endif %}
-{% if language_code == 'he' %}<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/localization/messages_he.min.js"></script>{% endif %}
+<script>
+    console.log("Language Code: ", "{{language_code}}")
+</script>
+{% if 'nl' in language_code %}<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/localization/messages_nl.min.js"></script>{% endif %}
+{% if 'ko' in language_code %}<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/localization/messages_ko.min.js"></script>{% endif %}
+{% if 'fr' in language_code %}<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/localization/messages_fr.min.js"></script>{% endif %}
+{% if 'es' in language_code %}<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/localization/messages_es.min.js"></script>{% endif %}
+{% if 'he' in language_code %}<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/localization/messages_he.min.js"></script>{% endif %}
 
 <script>
 $('#cdi_form').validate()

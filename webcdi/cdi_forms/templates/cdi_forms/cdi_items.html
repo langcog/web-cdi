@@ -9,6 +9,7 @@
     {% for type in part.types %}
     <div id = "{{ type.id }}_div" class = "page_div collapse">
         <h3 id = "{{ type.id }}"> {{ type.title }}</h3>
+        {% if type.sub_title %}<h3 > {{ type.sub_title }}</h3>{% endif %}
         <div id="sectionInstructions{{type.id}}" {% if type.sections|length > 1 and type.text|length > 0 %}class = "collapse in"{% endif %} style="font-size: .85em;">
             <p class="lead"> {{ type.text | capfirst }}</p>
         </div>

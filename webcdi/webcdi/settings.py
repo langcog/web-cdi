@@ -212,6 +212,7 @@ LANGUAGES = [
     ('en-ca', _('Canadian English')),
     ('nl', _('Dutch')),
     ('he', _('Hebrew')),
+    ('ko', _('Korean')),
 ]
 
 # this is used to find the right choices etc for a language
@@ -222,6 +223,7 @@ LANGUAGE_DICT = {
     'Canadian English' : 'en_ca',
     'Dutch' : 'nl',
     'Hebrew' : 'he',
+    'Korean' : 'ko',
 }
 
 COUNTRIES_FIRST = [
