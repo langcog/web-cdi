@@ -51,7 +51,7 @@
 		"max_age": 30,
 		"csv_file": "cdi_form_csv/cdi_forms/[Hebrew_WS].csv",
 		"json_data": "cdi_forms/form_data/Hebrew_WS_meta.json",
-		"scoring_json" : "cdi_forms/form_data/scoring/Hebrew_WG_scoring.json"
+		"scoring_json" : "cdi_forms/form_data/scoring/Hebrew_WS_scoring.json"
 	},
 	{
 		"language": "Spanish",

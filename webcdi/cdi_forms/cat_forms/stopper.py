@@ -44,6 +44,7 @@ class CustomStopper(Stopper):
                 )
             )
         done = False
+        print(irt.see(theta, administered_items))
         if n_items == self._max_items: # hit the maximum
             done = True
         elif n_items > self._min_items and irt.see(theta, administered_items) < self._min_error:

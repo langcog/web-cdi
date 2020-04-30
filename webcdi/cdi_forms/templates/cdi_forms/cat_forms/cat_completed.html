@@ -6,6 +6,7 @@
 <table>
 {% for word in object.catresponse.administered_words %}
     <tr>
+        <td>{{ forloop.counter }}</td>
         <td>{{ word }}</td>
         <td>{{ object.catresponse.administered_responses|index:forloop.counter0 }}</td> 
     </tr>

@@ -89,7 +89,7 @@ class AdministerAdministraionView(UpdateView):
                 break
 
         estimator = HillClimbingEstimator()
-        self.est_theta = new_theta = estimator.estimate(items=items, administered_items=administered_items, response_vector=administered_responses, est_theta=self.object.catresponse.est_theta)
+        new_theta = estimator.estimate(items=items, administered_items=administered_items, response_vector=administered_responses, est_theta=self.object.catresponse.est_theta)
 
         self.object.catresponse.administered_responses=administered_responses
         self.object.catresponse.administered_items=administered_items
@@ -139,19 +139,19 @@ class AdministerAdministraionView(UpdateView):
 
         initializer = RandomInitializer()
         selector = MaxInfoSelector()
-        self.est_theta = est_theta = initializer.initialize()
+        self.est_theta = initializer.initialize()
 
         cat_response, created = CatResponse.objects.get_or_create(administration=self.object)
         if created or not cat_response.est_theta:
-            cat_response.est_theta = est_theta
+            cat_response.est_theta = self.est_theta
             cat_response.save()
 
         administered_responses = self.object.catresponse.administered_responses or []
         administered_items = self.object.catresponse.administered_items or []
         administered_words = self.object.catresponse.administered_words or []
-        est_theta = self.object.catresponse.est_theta
+        self.est_theta = self.object.catresponse.est_theta
 
-        item_index = selector.select(items=items, administered_items=administered_items, est_theta=est_theta)
+        item_index = selector.select(items=items, administered_items=administered_items, est_theta=self.est_theta)
 
         self.word = self.instrument_items[int(item_index)]
 
