@@ -24,9 +24,16 @@
 
         <div class="row">
             <h1>{% trans "Background Information Continued" %}</h1><br>
+        </div>
+        <div class="row">
+            <div>
+            {{ explanation }}
+            </div>
             <!-- Load backgroundform in crispy format. -->
-            <div class="flex-row">{% load crispy_forms_tags %}
-            {% crispy background_form %}</div>
+            <div class="flex-row">
+                {% load crispy_forms_tags %}
+                {% crispy background_form %}
+            </div>
 
         </div>
 

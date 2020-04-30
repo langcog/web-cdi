@@ -145,6 +145,7 @@ class BackgroundInfo(models.Model):
     ]
 
     caregiver_info = models.IntegerField(verbose_name = _("Who does your child live with?"), choices = caregivers_choices, blank=True, null=True) # Asks for child's family situation
+    caregiver_other = models.CharField(max_length=25, blank=True, null=True)
 
     other_languages_boolean = models.IntegerField(blank = True, null=True) #Asks whether child is regularly exposed to other languages besides the instrument's language (currently English)
     other_languages = ArrayField(models.CharField(max_length = 101), blank = True, null=True) # Lists possible languages from languages.json that child may be exposed to

@@ -22,6 +22,7 @@ from ipware.ip import get_ip
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 import pandas as pd
+from django.utils.safestring import mark_safe
 from django.views.generic import UpdateView, CreateView, DetailView
 
 
@@ -115,6 +116,15 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
     model = BackgroundInfo
     form_class = BackgroundForm
     background_form = None
+    which_page="front"
+
+    def get_explanation_text(self):
+        filename = os.path.realpath(PROJECT_ROOT + '/form_data/background_info/' + self.study_context['instrument'] + '_' + self.which_page + '_helptext.json')
+        if os.path.isfile(filename) :
+            rows = json.load(open(filename, encoding='utf-8'))
+            for row in rows:
+                if 'help-text' in row: return row['help-text']
+        else : return ''
 
     def get_context_data(self, **kwargs):
         #data = super(BackgroundInfoView, self).get_context_data(**kwargs)
@@ -133,6 +143,7 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
         data['allow_payment'] = self.administration_instance.study.allow_payment
         data['hint'] = _("Your child should be between %(min_age)d to %(max_age)d months of age.") % {"min_age": data['min_age'], "max_age": data['max_age']}
         data['form'] = self.administration_instance.study.instrument.form
+        data['explanation'] = mark_safe(self.get_explanation_text())
 
         if data['allow_payment'] and self.administration_instance.bypass is None:
             try:
@@ -270,6 +281,7 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
 class BackpageBackgroundInfoView(BackgroundInfoView):
     form_class = BackpageBackgroundForm
     template_name = 'cdi_forms/backpage_info.html'
+    which_page = 'back'
 
     def get_context_data(self, **kwargs):
         ctx = super(BackpageBackgroundInfoView, self).get_context_data(**kwargs)
@@ -749,7 +761,6 @@ def cdi_form(request, hash_id):
                             administration_data.objects.update_or_create(administration = administration_instance, item_ID = key, defaults = {'value': value})
 
             # Update the Summary Data
-            print("Update Summery Scores")
             update_summary_scores(administration_instance)
 
             if 'btn-save' in request.POST and request.POST['btn-save'] == _('Save'): # If the save button was pressed
@@ -857,6 +868,9 @@ def cdi_form(request, hash_id):
 # Render completion page
 def printable_view(request, hash_id):
     administration_instance = get_administration_instance(hash_id) # Get administration object based on hash ID
+    if not administration_instance.completedSurvey: 
+        return render (request, 'cdi_forms/expired.html', {})
+
     completed = int(request.get_signed_cookie('completed_num', '0')) # If there is a cookie for a previously completed test, get it
     
     # Create a blank dictionary and then fill it with prefilled background and CDI data, along with hash ID and information regarding the gift card code if subject is to be paid
