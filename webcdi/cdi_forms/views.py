@@ -868,7 +868,7 @@ def cdi_form(request, hash_id):
 # Render completion page
 def printable_view(request, hash_id):
     administration_instance = get_administration_instance(hash_id) # Get administration object based on hash ID
-    if not administration_instance.completedSurvey: 
+    if not administration_instance.completed: 
         return render (request, 'cdi_forms/expired.html', {})
 
     completed = int(request.get_signed_cookie('completed_num', '0')) # If there is a cookie for a previously completed test, get it

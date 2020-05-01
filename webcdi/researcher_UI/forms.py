@@ -31,6 +31,10 @@ class AddStudyForm(BetterModelForm):
         widget=forms.NumberInput(),initial=6)
 
     confirmation_questions = forms.BooleanField(required=False, label="Would you like participants to answer the confirmation questions (only available when split background information forms are used)")
+
+    redirect_boolean = forms.BooleanField(label="Provide redirect button at completion of study?", required=False) # Whether to give redirect button upon completion of administration
+    redirect_url = forms.URLField(label="Please enter URL")
+    
     # Form validation. Form is passed automatically to views.py for higher level checking.
     def clean(self):
         cleaned_data = super(AddStudyForm, self).clean()
@@ -67,7 +71,9 @@ class AddStudyForm(BetterModelForm):
             Field('confirm_completion'),
             Field('show_feedback'),
             Field('allow_sharing'),
-            Field('confirmation_questions')
+            Field('confirmation_questions'),
+            Field('redirect_boolean', css_class="css_enabler"),
+            Div(Field('redirect_url'), css_class="redirect_boolean collapse")
         )
 
     # Form is related to the study model. Exclude study group designation (is done post-creation) and researcher name (filled automatically)
@@ -125,6 +131,8 @@ class RenameStudyForm(BetterModelForm):
     timing = forms.IntegerField(label="Minimum time (minutes) a parent must take to complete the study (default=6)", required=True)
     confirmation_questions = forms.BooleanField(required=False, label="Would you like participants to answer the confirmation questions (only available when split background information forms are used)")
     
+    redirect_boolean = forms.BooleanField(label="Provide redirect button at completion of study?", required=False) # Whether to give redirect button upon completion of administration
+    redirect_url = forms.URLField(label="Please enter URL")
     # Form validation. Form is passed automatically to views.py for higher level checking.
     def clean(self):
         cleaned_data = super(RenameStudyForm, self).clean()
@@ -159,7 +167,9 @@ class RenameStudyForm(BetterModelForm):
             Div(Field('gift_amount'), css_class="gift_cards collapse"),
             Field('show_feedback'),
             Field('allow_sharing'),
-            Field('confirmation_questions')
+            Field('confirmation_questions'),
+            Field('redirect_boolean', css_class="css_enabler"), 
+            Div(Field('redirect_url'), css_class="redirect_boolean collapse")
     
         )
 
