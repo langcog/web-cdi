@@ -50,6 +50,18 @@ class AdministerAdministraionView(UpdateView):
     min_error = 0.15
     est_theta = None
 
+    def get_hardest_easiest(self):
+        try:
+            items = InstrumentItem.objects.filter(id__in=self.object.catresponse.administered_items)
+        except: items = None
+        if items :
+            hardest = items.order_by('-difficulty')[0].definition
+            easiest = items.order_by('difficulty')[0].definition
+        else : 
+            hardest = None
+            easiest = None
+        return hardest, easiest
+
     def get_object(self, queryset=None):
         try:
             self.hash_id = self.kwargs['hash_id']
@@ -122,6 +134,8 @@ class AdministerAdministraionView(UpdateView):
             ctx['words_shown'] = 1
 
         ctx['est_theta'] = self.est_theta
+        ctx['due_date'] = self.object.due_date.strftime('%b %d, %Y, %I:%M %p')
+        ctx['hardest'], ctx['easiest'] = self.get_hardest_easiest()
         return ctx
 
     def get(self, request, *args, **kwargs):

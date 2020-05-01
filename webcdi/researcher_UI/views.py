@@ -34,6 +34,7 @@ from django.utils import translation
 
 from django.utils.translation import ugettext_lazy as _
 from cdi_forms.models import Instrument_Forms
+from cdi_forms.cat_forms.models import CatResponse, InstrumentItem
 
 def get_study_scores(administrations):
     scores = SummaryData.objects.values('administration_id', 'title','value').filter(administration_id__in = administrations)
@@ -99,6 +100,93 @@ def format_admin_header(study_obj):
     if not os.path.isfile(filename):
         admin_header.remove("completedSurvey")
     return admin_header
+
+
+@login_required
+def download_cat_data(request, study_obj, administrations=None):
+    response = HttpResponse(content_type='text/csv') # Format response as a CSV
+    filename = study_obj.name+'_items.csv'
+    response['Content-Disposition'] = 'attachment; filename="' + filename + '"'# Name the CSV response
+    
+    administrations = administrations if administrations is not None else administration.objects.filter(study=study_obj)
+    
+    #model_header = get_model_header(study_obj.instrument.name) # Fetch the associated instrument model's variables
+    # Fetch administration variables
+    admin_header = format_admin_header(study_obj)
+    admin_data = format_admin_data(pd, study_obj, administrations, admin_header)
+
+    # Fetch background data variables
+    background_data = BackgroundInfo.objects.values().filter(administration__in=administrations)
+    pd_background_data = pd.DataFrame.from_records(background_data)
+
+    answer_headers = [x.definition for x in InstrumentItem.objects.filter(instrument=study_obj.instrument)]
+
+    answers = CatResponse.objects.values('administration_id','est_theta','administered_words','administered_responses').filter(administration__in=administrations)
+    rows = []
+    for answer in answers :
+        #print (answer)
+        row = {}
+        row['administration_id'] = answer['administration_id']
+        row['est_theta'] = answer['est_theta']
+        if answer['administered_words']:
+            count = 0
+            for word in answer['administered_words']:
+                row[word] = answer['administered_responses'][count]
+                count += 1
+        rows.append(row)
+
+    pd_answers = pd.DataFrame.from_dict(rows)
+    
+    pd_background_answers = pd.merge(pd_background_data, pd_answers, how='outer', on = 'administration_id')
+    
+    combined_data = pd.merge(admin_data, pd_background_answers, how='outer', on='administration_id')
+
+    # Turn pandas dataframe into a CSV
+    combined_data.to_csv(response, encoding='utf-8', index=False)
+
+    # Return CSV
+    return response
+
+@login_required
+def download_cat_summary(request, study_obj, administrations=None):
+    response = HttpResponse(content_type='text/csv') # Format response as a CSV
+    filename = study_obj.name+'_items.csv'
+    response['Content-Disposition'] = 'attachment; filename="' + filename + '"'# Name the CSV response
+    
+    administrations = administrations if administrations is not None else administration.objects.filter(study=study_obj)
+    
+    #model_header = get_model_header(study_obj.instrument.name) # Fetch the associated instrument model's variables
+    # Fetch administration variables
+    admin_header = format_admin_header(study_obj)
+    admin_data = format_admin_data(pd, study_obj, administrations, admin_header)
+
+    # Fetch background data variables
+    background_data = BackgroundInfo.objects.values().filter(administration__in=administrations)
+    pd_background_data = pd.DataFrame.from_records(background_data)
+
+    answer_headers = [x.definition for x in InstrumentItem.objects.filter(instrument=study_obj.instrument)]
+
+    answers = CatResponse.objects.values('administration_id','est_theta').filter(administration__in=administrations)
+    rows = []
+    for answer in answers :
+        #print (answer)
+        row = {}
+        row['administration_id'] = answer['administration_id']
+        row['est_theta'] = answer['est_theta']
+       
+        rows.append(row)
+
+    pd_answers = pd.DataFrame.from_dict(rows)
+    
+    pd_background_answers = pd.merge(pd_background_data, pd_answers, how='outer', on = 'administration_id')
+    
+    combined_data = pd.merge(admin_data, pd_background_answers, how='outer', on='administration_id')
+
+    # Turn pandas dataframe into a CSV
+    combined_data.to_csv(response, encoding='utf-8', index=False)
+
+    # Return CSV
+    return response
 
 @login_required # For researchers only, requires user to be logged in (test-takers do not have an account and are blocked from this interface)
 def download_data(request, study_obj, administrations = None): # Download study data
@@ -459,11 +547,17 @@ def console(request, study_name = None, num_per_page = 20): # Main giant functio
 
                 elif 'download-study-csv' in request.POST: # If 'Download Data' button is clicked
                     administrations = administration.objects.filter(study = study_obj) # Grab a queryset of administration objects within study
-                    return download_data(request, study_obj, administrations) # Send queryset to download_data and receive a CSV of responses
+                    if study_obj.instrument.form in ['CAT']:
+                        return download_cat_data(request, study_obj, administrations)
+                    else:
+                        return download_data(request, study_obj, administrations) # Send queryset to download_data and receive a CSV of responses
                 
                 elif 'download-summary-csv' in request.POST: # If 'Download Summary' button is clicked
                     administrations = administration.objects.filter(study = study_obj) # Grab a queryset of administration objects within study
-                    return download_summary(request, study_obj, administrations) # Send queryset to download_data and receive a CSV of responses
+                    if study_obj.instrument.form in ['CAT']:
+                        return download_cat_summary(request, study_obj, administrations)
+                    else:
+                        return download_summary(request, study_obj, administrations) # Send queryset to download_data and receive a CSV of responses
                 
                 elif 'download-study-scoring' in request.POST: # If 'Download Data' button is clicked
                     administrations = administration.objects.filter(study = study_obj) # Grab a queryset of administration objects within study
@@ -499,7 +593,7 @@ def console(request, study_name = None, num_per_page = 20): # Main giant functio
         if study_name is not None:
             #try:
                 current_study = study.objects.get(researcher= request.user, name= study_name)
-                administration_table = StudyAdministrationTable(administration.objects.filter(study = current_study))
+                administration_table = StudyAdministrationTable(administration.objects.filter(study=current_study))
                 if not current_study.confirm_completion:
                     administration_table.exclude = ("study",'id', 'url_hash', 'analysis')
                 
@@ -941,10 +1035,8 @@ def administer_new_parent(request, username, study_name): # For creating single 
 
     if let_through: # If marked as allowed
         if study_obj.instrument.form in ['CAT']:
-            print('CAT Instrument')
             return redirect (reverse('cat_forms:create-new-background-info', kwargs={'study_id' : study_obj.id, 'bypass' : bypass}))
         else:
-            print('CDI Instrument')
             return redirect (reverse('create-new-background-info', kwargs={'study_id' : study_obj.id, 'bypass' : bypass}))
     else: # If not marked as allowed
         redirect_url = reverse('overflow', args=[username, study_name]) # Generate URL for overflowed participants. May or may not have option for bypass depending on context (IP address and cookies)

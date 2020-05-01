@@ -8,337 +8,110 @@
 
 <!-- Navigation buttons placed in cdi_base.html -->
 {% block nav_buttons %}
-{% if not completed %}
-<div class="button-wrapper">
-    <div class="flex-row d-flex justify-content-center">
-        <input name="btn-save" value="{% trans 'Save' %}" class="btn btn-primary" type="submit">
-        <input name="btn-submit" value="{% trans 'Submit' %}" class="btn btn-success submit-button" type="submit" onclick="clicked(event)">
-    </div>
-    <div class="flex-row d-flex justify-content-center">    
-        <input name="btn-back" value="{% trans 'Go back to Background Info' %}" class="btn btn-primary" type="submit">
-    </div>
-</div>
-
-{% endif %}
+    {% if not completed %}
+        <div class="button-wrapper">
+            <div class="flex-row d-flex justify-content-center">    
+                <input name="btn-back" value="{% trans 'Go back to Background Info' %}" class="btn btn-primary" type="submit">
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}
-
-
-<!-- Navigation sidebar -->
-{% block navcontents %}
-<a href="#nav_list" data-toggle="collapse" id="tob_title"><h4>{% trans "Table of Contents:" %} <i class="material-icons">arrow_drop_down</i></h4></a>
-<div id = "nav_list" class = "collapse">
-    <h4>{% trans "Contents:" %}</h4>
-    <ul class="nav bs-docs-sidenav">
-        <li><a id="id_btn_instructions">{% trans 'Instructions:' %}</a></li>
-        {% for part in parts %}
-            <li><a href="#{{ part.id }}" onclick="findPage({{ part.types.0.id }}_div)">{{ part.title }}</a>
-                <ul class="nav">
-                    {% for type in part.types %}
-                        <li><a onclick="findPage({{ type.id }}_div)">{{ type.title }}</a></li>
-                        {% for section in type.sections %}
-                            <li><a onclick="findPage({{ section.id }}_div)">{{ section.title }}</a></li>
-                        {% endfor %}
-                    {% endfor %}
-                </ul>
-            </li>
-        {% endfor %}
-    </ul>
-</div>
-{% endblock %}
-
 
 {% block main%}
 {% csrf_token %}
-{% if parts %}
 
 <!-- Actual CDI form. Sections are broken into pages and automatically collapse and extend based on changePages function -->
 <ul>
     <!-- Instructions given to parents based on form. Includes photos. -->
-    <div id="intro" class = "page_div collapse"><div>
-        {% if form in "WG,WG2,L1" %}
-            {% load staticfiles %}
+    <div id = "intro_part1" class = "page_div collapse">
+        <p class="lead" id="intro_text">
+            {% blocktrans %}In this section, you will be asked about words that your child "understands and says." Your child "understands and says" a word on the list if they know what the word means AND they say it by themselves. Here are some examples. This assessment is for children of many ages. Your child may not be able to understand or say a lot of the words on the form. That is perfectly fine!{% endblocktrans %}
+        </p>
 
-            <div id = "intro_part1" class = "page_div collapse">
-                <p class="lead" id="intro_text">
-                    {% trans 'In this section, you will be asked to think about which phrases and words your child "understands" and "understands and says."  This assessment is for children of many ages. Your child may not be able to understand or say a lot of the words on the form. That is perfectly fine!' %}
-                </p>
+        <div class="row">
+            <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
+                {% with 'images/'|add:'en'|add:'_says-yes-ball_WS.png' as image_static %}
+                    <img src="{% static image_static %}" class="rounded mx-auto d-block" alt="Having your child say the word in the presence of the object can mean that your child understands and says the word." style="max-width: 90%; border: 1px solid black;">
+                {% endwith %}
+
+            </div>
+
+            <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
                 <h4>
-                    {% trans 'Your child "understands" a word/phrase if they know what the word/phrase means, even though they may not be able to say it themselves. Here are some examples.' %}
-                </h4> <br><br>
+                {% trans 'DO check the box if:' %}
+                <br><br>
+                {% trans 'Your child says the word when trying to name an object or describe something that happened.  You think s/he has a meaning for that word.' %}
+                </h4>
 
-                <div class="row">
-                    <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
-                        {% with 'images/'|add:language_code|add:'_understands-yes-get.png' as image_static %}
-                          
-                            <img src="{% static image_static %}" class="rounded mx-auto d-block" alt="Hearing the word AND looking for the object can mean that your child understands it." style="max-width: 90%; border: 1px solid black;">
-                        {% endwith %}
 
-                    </div>
-
-                    <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
-                        <h4>
-                        {% trans 'DO check "understands" if:' %}
-                        <br><br>
-                        {% trans 'Your child responds appropriately to the word/phrase. For example, when you say "Get the ball," s/he turns and tries to find the ball.' %}
-                        </h4>
-                    </div>
-                </div><br>
-
-                <div class="row">
-                    <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
-                        {% with 'images/'|add:language_code|add:'_understands-no-hear.png' as image_static %}
-                            <img src="{% static image_static %}" class="rounded mx-auto d-block" alt="Hearing the word is not enough to say that your child understands it." style="max-width: 90%; border: 1px solid black;">
-                        {% endwith %}
-
-                    </div>
-
-                    <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
-                        <h4>
-                        {% blocktrans %}DON'T check "understands" if:{% endblocktrans %}
-                        <br><br>
-                        {% blocktrans %}Your child doesn't have a meaning for the word/phrase.  S/he may have heard it before, like in a story, but you don't think s/he knows what it means.{% endblocktrans %}
-                        </h4>
-
-                    </div>
-                </div><br>
 
             </div>
-
-            <div id = "intro_part2" class = "page_div collapse">
-
-                <h4>{% trans 'Your child "understands and says" a word/phrase if they know what the word/phrase means AND they are able to say it by themselves. Here are some examples.' %}</h4> <br><br>
-
-                <div class="row">
-                    <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
-                        {% with 'images/'|add:language_code|add:'_says-yes-ball.png' as image_static %}
-                            <img src="{% static image_static %}" class="rounded mx-auto d-block" alt="Having your child say the word in the presence of the object can mean that your child understands and says the word." style="max-width: 90%; border: 1px solid black;">
-                        {% endwith %}
-
-                    </div>
-
-                    <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
-                        <h4>
-                        {% trans 'DO check "understands and says" if:' %}
-                        <br><br>
-                        {% trans 'Your child says a word/phrase when trying to name an object or describe something that happened.  You think s/he has a meaning for that word/phrase.' %}
-                        </h4>
-
-
-                    </div>
-                </div> <br>
-
-                <div class="row">
-                    <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
-                        {% with 'images/'|add:language_code|add:'_says-yes-raff.png' as image_static %}
-                            <img src="{% static image_static %}" class="rounded mx-auto d-block" alt="Having your child say the word in the presence of the object can mean that your child understands and says the word." style="max-width: 90%; border: 1px solid black;">
-                        {% endwith %}
-
-                    </div>
-
-                    <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
-                        <h4>
-                        {% blocktrans %}It's fine if your child can't say the whole word or says it his/her own "special" way.{% endblocktrans %}
-                        <br><br>
-                        {% trans 'DO check "understands and says."' %}
-                        </h4>
-
-
-                    </div>
-                </div> <br>
-
-                <div class="row">
-                    <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
-                        {% with 'images/'|add:language_code|add:'_says-no-baba.png' as image_static %}
-                            <img src="{% static image_static %}" class="rounded mx-auto d-block" alt="Saying the word alone is not enough to mean that your child understands and says a word. The context is important!" style="max-width: 90%; border: 1px solid black;">
-                        {% endwith %}
-
-                    </div>
-
-                    <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
-                        <h4>
-                        {% blocktrans %}DON'T check if your child is just stringing sounds together.  This is not a real word that means something.{% endblocktrans %}
-                        <br><br>
-                        {% blocktrans %}DON'T check "understands and says."{% endblocktrans %}
-                        </h4>
-
-                    </div>
-                </div><br>
-
-                <div class="row">
-                    <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
-                        {% with 'images/'|add:language_code|add:'_says-no-coaching.png' as image_static %}
-                            <img src="{% static image_static %}" class="rounded mx-auto d-block" alt="Having your child repeat back a taught word is not enough to mean that your child undestands the word." style="max-width: 90%; border: 1px solid black;">
-                        {% endwith %}
-
-                    </div>
-
-                    <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
-                        <h4>
-                        {% blocktrans %}DON'T ask your child to repeat the words on the list. This doesn't count!{% endblocktrans %}
-                        <br><br>
-                        {% blocktrans %}DON'T check "understands and says."{% endblocktrans %}
-                        </h4>
-
-
-                    </div>
-                </div>
-
-            </div>
-                   
-
-        {% elif form  in "WS,WS2,L2A,L2B,CDI3" %}
-            {% load staticfiles %}
-
-            <div id = "intro_part1" class = "page_div collapse">
-
-                <p class="lead" id="intro_text">
-                   {% blocktrans %}In this section, you will be asked about words that your child "understands and says." Your child "understands and says" a word on the list if they know what the word means AND they say it by themselves. Here are some examples. This assessment is for children of many ages. Your child may not be able to understand or say a lot of the words on the form. That is perfectly fine!{% endblocktrans %}
-                </p>
-
-
-                <div class="row">
-                    <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
-                        {% with 'images/'|add:language_code|add:'_says-yes-ball_WS.png' as image_static %}
-                            <img src="{% static image_static %}" class="rounded mx-auto d-block" alt="Having your child say the word in the presence of the object can mean that your child understands and says the word." style="max-width: 90%; border: 1px solid black;">
-                        {% endwith %}
-
-                    </div>
-
-                    <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
-                        <h4>
-                        {% trans 'DO check the box if:' %}
-                        <br><br>
-                        {% trans 'Your child says the word when trying to name an object or describe something that happened.  You think s/he has a meaning for that word.' %}
-                        </h4>
-
-
-
-                    </div>
-                </div> <br>
-
-                <div class="row">
-                    <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
-                        {% with 'images/'|add:language_code|add:'_says-yes-raff_WS.png' as image_static %}
-                            <img src="{% static image_static %}" class="rounded mx-auto d-block" alt="Having your child say the word in the presence of the object can mean that your child understands and says the word." style="max-width: 90%; border: 1px solid black;">
-                        {% endwith %}
-
-                    </div>
-
-                    <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
-                        <h4>
-                        {% blocktrans %}It's fine if your child can't say the whole word or says it his/her own "special" way. If you use another word in your family (e.g., Nana for Grandma), that is ok too!{% endblocktrans %}
-                        <br><br>
-                        {% trans 'DO check the box.' %}
-                        </h4>
-
-
-                    </div>
-                </div> <br>
-
-                <div class="row">
-                    <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
-                        {% with 'images/'|add:language_code|add:'_says-no-baba_WS.png' as image_static %}
-                            <img src="{% static image_static %}" class="rounded mx-auto d-block" alt="Saying the word alone is not enough to mean that your child understands and says a word. The context is important!" style="max-width: 90%; border: 1px solid black;">
-                        {% endwith %}
-
-                    </div>
-
-                    <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
-                        <h4>
-                        {% blocktrans %}DON'T check the box if your child is just stringing sounds together. This is not a real word that means something.{% endblocktrans %}
-                        </h4>
-
-                    </div>
-                </div><br>
-
-                <div class="row">
-                    <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
-                        {% with 'images/'|add:language_code|add:'_says-no-coaching_WS.png' as image_static %}
-                            <img src="{% static image_static %}" class="rounded mx-auto d-block" alt="Having your child repeat back a taught word is not enough to mean that your child undestands the word." style="max-width: 90%; border: 1px solid black;">
-                        {% endwith %}
-
-                    </div>
-
-                    <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
-                        <h4>
-                        {% blocktrans %}DON'T ask your child to repeat the words on the list. This doesn't count!{% endblocktrans %}
-                        </h4>
-
-
-                    </div>
-                </div>
-
-            </div>
-
-        {% endif %}
-    <br>
-    </div>
-    </div>
-
-</ul>
-
-<input type='hidden' name='cdi-form' value='cdi-form'/>
-
-<ul>
-    {% include "cdi_forms/cdi_items.html" with parts=parts %}
-    
-    <!-- Last page that asks parents to confirm that their data is suitable for analysis. May appear based on the study's confirm_completion setting. May also include a ReCaptcha based on if study is done by langcoglab and will pay participants -->
-    <div id = "analysis_div"  class = "collapse">    
-        <h4>
-            {% trans 'You are almost done! Click "Yes" if you agree with ALL of the following points. Your answer will not affect your results. There is nothing wrong with choosing "No":' %}
-        </h4>
-
-        <ul>
-            <li>{% blocktrans with age=age %}You have a child who is {{ age }} months old.{% endblocktrans %}</li>
-            <li>{% trans "You filled out the entire questionnaire to the best of your ability." %}</li>
-            <li>{% trans "You are taking this questionnaire for the FIRST time." %}</li>
-        </ul>
+        </div> 
         <br>
 
-        <div class="btn-group btn-group-vertical" data-toggle="buttons">
-            <label class = "btn d-flex justify-content-start">
-                <input  type="radio" id="analysis_yes" name="analysis" value="True">
-                <i class="material-icons radio_button_checked align-middle" aria-hidden="true">radio_button_checked</i>
-                <i class="material-icons radio_button_unchecked align-middle" aria-hidden="true">radio_button_unchecked</i>
-                <p class="text-left">{% blocktrans with age=age %}Yes, I have a child who is {{ age }} months old, I filled out the entire questionnaire, and I am taking this questionnaire for the first time.{% endblocktrans %}</p>
-            </label>
-            <label class = "btn d-flex justify-content-start">
-                <input  type="radio" id="analysis_no" name="analysis" value="False">
-                <i class="material-icons radio_button_checked align-middle" aria-hidden="true">radio_button_checked</i>
-                <i class="material-icons radio_button_unchecked align-middle" aria-hidden="true">radio_button_unchecked</i>
-                <p class="text-left">{% blocktrans with age=age %}No, I do NOT have a child who is {{ age }} months old, I have NOT filled out the entire questionnaire, and/or I have taken this questionnaire before.{% endblocktrans %}</p>
-            </label>
+        <div class="row">
+            <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
+                {% with 'images/'|add:'en'|add:'_says-yes-raff_WS.png' as image_static %}
+                    <img src="{% static image_static %}" class="rounded mx-auto d-block" alt="Having your child say the word in the presence of the object can mean that your child understands and says the word." style="max-width: 90%; border: 1px solid black;">
+                {% endwith %}
+
+            </div>
+
+            <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
+                <h4>
+                {% blocktrans %}It's fine if your child can't say the whole word or says it his/her own "special" way. If you use another word in your family (e.g., Nana for Grandma), that is ok too!{% endblocktrans %}
+                <br><br>
+                {% trans 'DO check the box.' %}
+                </h4>
+
+
+            </div>
+        </div> 
+        <br>
+
+        <div class="row">
+            <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
+                {% with 'images/'|add:'en'|add:'_says-no-baba_WS.png' as image_static %}
+                    <img src="{% static image_static %}" class="rounded mx-auto d-block" alt="Saying the word alone is not enough to mean that your child understands and says a word. The context is important!" style="max-width: 90%; border: 1px solid black;">
+                {% endwith %}
+
+            </div>
+
+            <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
+                <h4>
+                {% blocktrans %}DON'T check the box if your child is just stringing sounds together. This is not a real word that means something.{% endblocktrans %}
+                </h4>
+
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
+                {% with 'images/'|add:'en'|add:'_says-no-coaching_WS.png' as image_static %}
+                    <img src="{% static image_static %}" class="rounded mx-auto d-block" alt="Having your child repeat back a taught word is not enough to mean that your child undestands the word." style="max-width: 90%; border: 1px solid black;">
+                {% endwith %}
+
+            </div>
+
+            <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
+                <h4>
+                {% blocktrans %}DON'T ask your child to repeat the words on the list. This doesn't count!{% endblocktrans %}
+                </h4>
+            </div>
         </div>
 
-        {% if captcha == 'True' %}
-            <br><br>
-            <p>{% trans "Finally, please check the Captcha box below to display the submit button!" %}</p>
-            <div class="g-recaptcha d-flex justify-content-center" data-sitekey="6LfI0yEUAAAAALj8wAxmoXmWg8B64tvr866bXeYg" data-callback="enableBtn"></div>
-        {% endif %}
-
-    </div> <br><br>
-
-    <!-- Navigation buttons -->
-    <div class="button-wrapper">
-        <div class="flex-row  d-flex justify-content-center">
-            <a class="btn btn-primary prev-cdi-page" href="#">&#60;&#60; {% trans "Previous Page" %}</a>
-            <a class="btn btn-primary next-cdi-page" href="#">{% trans "Next Page" %} &#62;&#62;</a>
-            <input id="id_submit_btn2" name="btn-submit" value="{% trans 'Submit' %}" class="btn btn-success submit-button" type="submit" onclick="clicked(event)">
-            <font id="progress"></font>
+        <div class="row">
+            <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
+            <a id="next_button" class="btn btn-primary" value="Next">Next</a>
         </div>
-        <div class="flex-row d-flex justify-content-center">        
-            <input name="btn-save" value="{% trans 'Save' %}" class="btn btn-primary" type="submit">
-            <input name="btn-back" value="{% trans 'Go back to Background Info' %}" class="btn btn-primary" type="submit">
-        </div>
+
 
     </div>
-    <input type="hidden" id="page_number" name="page_number" value = "0">
-    <hr>
-    <div class="flex-row"><p class="text-center">{% trans "Don't forget to save your progress whenever you can!" %}</p></div>
-
-
+    <br>
 </ul>
-{% elif object.study.instrument.form ==  'CAT' %}
+
+<div id="cat_div" class = "page_div collapse">
     <div class="container">
         <div class="row pt10vh">
             <div class="progress" style="width:100%">
@@ -346,11 +119,10 @@
                 {{ words_shown }} of {{ max_words }}
                 </div>
             </div> 
-            <p>{{ est_theta }}</p>
         </div>
         <div class="row pt10vh">
             <div class="col-12 center">
-                <h1>{{ form.item.label }}</h1>
+                <h1>Can your child say ... {{ form.item.label }} ?</h1>
                 {{ form.word }}
                 {% if footnote %}{% trans "* or word used in your family" %}{% endif %}
             </div>
@@ -364,9 +136,7 @@
             </div>
         </div>
     </div>
-{% else %}
-    <p>{% trans "Form unavailable. Contact admin." %} </p>
-{% endif %}
+</div>
 
 {% endblock %}
 
@@ -385,254 +155,25 @@
             }
         }
     </script>
-
 {% else %}
     <script>
         captcha_clicked = true;
     </script>    
-
 {% endif %}
 
 <script type="text/javascript">
-
     // Automatically show instruction panel. 
+    if ({{ words_shown }} == 1) {
+        $("#intro_part1").collapse('show');
+    } else {
+        $("#cat_div").collapse('show');
+    }
     $("#instructions").collapse('show');
-    
-    //Prevent backspacing in form. Test-takers should use the provided Back and Next Buttons
-    history.pushState(null, null, document.URL);
-    window.addEventListener('popstate', function () {
-        history.pushState(null, null, document.URL);
-    });
 
-    // Confirm to prevent premature submissions
-    function clicked(e)
-    {
-        if(!confirm("{% trans 'Are you ready to submit? You cannot change your answers after submission.' %}"))e.preventDefault();
-        localStorage.removeItem('prev_page_number');
-    }
-
-    // Read Django administration creation date
-    created_date = "{{ created_date }}";
-
-    //Create mutually exclusive checkboxes. 0 or 1 checkbox in a group may be clicked.
-    $("label.btn.mult-choice").on('click', function(e) {
-      e.stopPropagation();
-      // in the handler, 'this' refers to the box clicked on
-      var $box = $(this).children("input:checkbox").eq(0);
-      //console.log($box)
-      var $group = $(this).parent().find("input:checkbox").not($box)
-      //console.log($group.length)
-      if ($group.length > 0 ) $group.prop('checked', false)
-
-      if ($box.is(':not(:checked)')) {
-        $box.prop('checked', true)
-      } else {
-        $box.prop('checked', false)
-      }
-
-    });   
- 
-
-    // Rename checkbox labels from 'produces' to 'understands and says'
-    $( "input[id$='produces']" ).each( function (){ 
-        var label_var = $(this).parent().find('span.choice');
-        $(label_var).text("{% trans 'understands and says' %}");
-    });
-
-    var gotToEnd = false;
-    $('.submit-button').hide(); // Hide submit button. Unhides upon certain events
-
-    var confirm_completion = "{{ confirm_completion }}";
-
-    // If confirm_completion is true for a study, add analysis_div to page_div class. Hidden otherwise.
-    if ($.inArray( confirm_completion, [ "true", "True", "T", "1",1 ] ) > -1) {
-        $('#analysis_div').addClass('page_div');
-    }
-
-    //Collapses and expands sections to act like a page-flipper. As some sections are nested within others, need to track 'parent pages' to make sure pages display properly. Also triggers other checks such as tracking the submit button
-    function changePages(which_page) {
-
-        if (which_page === undefined) {
-            which_page = page_num;
-        } else {
-            page_num = which_page;
-        }
-
-        current_page = filterednames[which_page];
-        parent_page = current_page.parentElement.parentElement;
-
-
-        if ($.inArray( parent_page.id, larger_types ) > -1) {
-            $(".page_div").not("#" + parent_page.id).collapse('hide')
-            $("#" + parent_page.id).collapse('show');
-        } else {
-            $(".page_div").collapse('hide');
-        }
-
-        $("#" + current_page.id).collapse('show');
-
-        $('#page_number').val(page_num);
-
-        localStorage.setItem("prev_page_number", $('#page_number').val());
-        localStorage.setItem("prev_hash_id", "{{ hash_id }}");
-
-        var total_length = filterednames.length + {{ back_page }}
-        $('#progress').text((page_num+1) + "/" + total_length)
-
-        checkPageNum() 
-        closeParts()
-        resizeButtonGroups()
-        $('span.choice').css('font-size', $('label.btn span').css('font-size'))
-
-        if ($('#combine_div :radio:checked').val() == "not yet") {
-            gotToEnd = true;
-        }
-        if (page_num == (filterednames.length - 1)) {
-            gotToEnd = true;
-        }
-
-        test_duration = moment.utc().diff(moment.utc(created_date, "MMM DD, YYYY, hh:mm a"),'minutes')
-
-        if (gotToEnd && test_duration >= {{ object.study.timing }} && captcha_clicked) {
-            $('.submit-button').show();
-        }
-
-        $('html, body').animate({scrollTop : 0},500);
-
-
-    }
-
-    //For types and sections nested in parts, keeps only the relevant part open 
-    // (e.g., "Part 2: Gestures" won't be open and visible while the test-taker is working on "Phrases")
-    function closeParts() {
-        $(".part_div").each( function () {
-            if ($(this).has("#" + current_page.id).length) {
-                $(this).collapse('show')
-            } else{
-                 $(this).collapse('hide')
-            }
-        });
-    }
-
-    //Defining starting variables. Page number is set to 0 (indexes are 0-based) unless cookie on browser or database says otherwise.
-    try {
-        if (localStorage.getItem("prev_hash_id") == "{{ hash_id }}") {
-            var old_page_num = localStorage.getItem("prev_page_number") || 0
-        } else {
-            var old_page_num = 0;
-        }
-
-
-        var page_num = Math.max(parseInt('{{ page_number }}'), old_page_num);
-    }
-    catch(err) {
-        var page_num = 0
-    }
-
-    var parent_page
-    var current_page
-
-    //Naming types that are containers of smaller sections. Important for creating pages from a nested structure!
-    //TODO this needs changing to something that isn't hard coded
-    //var larger_types = ["intro","word_div", "gestures_div", "word_ending_div", "word_form_div", "word_forms_div", "imitating_adults_div"];
-    var larger_types = ['intro', {% for part in parts %}{% for types in part.types %}{% if types.sections %}'{{types.id}}_div', {% endif %}{% endfor %}{% endfor %}];
-    // Going through all the named type and section divisions and pulling out those that are not just containers for smaller sections
-    var filterednames = $(".page_div").filter(function(index, value) {
-        return ($.inArray( value.id, larger_types ) == -1);
-    });
-
-        // note: this line only works in the template
-    save_answer_link = "{% url 'save_answer' %}";
-    hash_id = "{{ hash_id }}";
-
-
-    function save_answer(page_num) {
-        csrfmiddlewaretoken = $("input[name='csrfmiddlewaretoken']").val();
-        current_page = filterednames[page_num]
-
-        var page_data = {
-            'hash_id': hash_id,
-            'csrfmiddlewaretoken': csrfmiddlewaretoken,
-        };
-
-        $(current_page).find('input:checked, input[type="text"], input[type="textbox"], textarea').each(function() {
-            page_data[$(this).prop('name')] = $(this).val()
-        });
-
-        //console.log(page_data)
-        $.post(save_answer_link, page_data);        
-
-    };
-
-    //Initial page turning. Test starts on page 0 (first page)
-    changePages();
-
-    //Page changing buttons. Flip forwards or backwards
-    $('.prev-cdi-page').on('click', function (e) {
-        e.preventDefault();
-        save_answer(page_num);
-        page_num--;
-        changePages();
+    $('#next_button').on('click', function() {
+        $("#intro_part1").collapse('hide');
+        $("#cat_div").collapse('show');
     })
-
-    $('.next-cdi-page').on('click', function (e) {
-        e.preventDefault();
-        save_answer(page_num);
-        page_num++;
-        changePages();
-
-    })
-
-
-    //Prevent page_num from going below 0 or above (max number of pages - 1) by removing the capable buttons
-    function checkPageNum() {
-
-        if (page_num <= 0) {
-            $('.prev-cdi-page').hide();
-        } else{
-            $('.prev-cdi-page').show();
-        }
-
-        if (page_num >= filterednames.length -1) {
-            $('.next-cdi-page').hide();
-        } else{
-            $('.next-cdi-page').show();
-        }
-    }
-
-    //Navbar functionality. Clicking a section in the nav-bar flips you to the relevant page.
-    function findPage(page_title) {
-        var page_location = $.inArray( page_title, filterednames ); 
-        if (page_location > -1) {
-            var x = page_location;
-        } else {
-            var next_page = $(filterednames).filter(function(index, value) {
-                return ($("#" + page_title.id).has("#" + value.id).length);
-            }).first();
-            var x = $.inArray( next_page[0], filterednames ); 
-        }
-        changePages(x);
-    }
-
-    function resizeButtonGroups() {
-        $('div.btn-group.btn-group-justified').each( function (){ 
-            div_width = $(this).innerWidth();
-            width_tally = 0;
-
-            $(this).children('label').each( function() {
-                width_tally = width_tally + $(this).innerWidth();
-            })
-            if (width_tally > div_width) {
-                $(this).addClass('btn-group-vertical');
-                $(this).children('label').addClass('d-flex').addClass('justify-content-end');
-            }
-        })
-    }
-
-    resizeButtonGroups();
-
-    $('#analysis_div div label').css('font-size', $('#analysis_div li').css('font-size'));
-
 </script>
 
 <script type="text/javascript">
@@ -656,77 +197,6 @@ $(document).ready(function () {
         e.preventDefault();
         changePages(0)
     });
-});
-</script>
-
-{% if user.is_authenticated %}
-<!-- Logged-in users (vetted researchers) can use the fastforward debug functions. Not an option for not logged-in users (parents) -->
-
-    <script>
-        function fastforward() {
-            created_date = moment().subtract({{ object.study.timing }},'minutes')
-            changePages(filterednames.length-1)
-        }
-    </script>
-{% endif %}
-
-<script>
-$(':radio').on('click', function(){
-    //Make radio buttons uncheckable
-    if ($(this).hasClass('imChecked')){
-        $(this).removeClass('imChecked');
-        $(this).prop('checked', false)
-    } else {
-        $(this).addClass('imChecked');
-        $(this).prop('checked', true)
-    }
-})
-
-</script>
-
-<script>
-$(':checkbox').on('change', function(){
-    csrfmiddlewaretoken = $("input[name='csrfmiddlewaretoken']").val();
-    var data = {
-        'hash_id': '{{ hash_id }}',
-        'csrfmiddlewaretoken': csrfmiddlewaretoken,
-        'item' : $(this).attr('name'),
-        'value' : $(this).val(),
-        'check' : $(this).is(':checked')
-    }
-
-    //console.log(data);
-    $.post("{% url 'update-administration-data-item' %}", data);
-});
-</script>
-<script>
-$(':radio').on('click', function(){
-    csrfmiddlewaretoken = $("input[name='csrfmiddlewaretoken']").val();
-    var data = {
-        'hash_id': '{{ hash_id }}',
-        'csrfmiddlewaretoken': csrfmiddlewaretoken,
-        'item' : $(this).attr('name'),
-        'value' : $(this).val(),
-        'check' : $(this).is(':checked')
-    }
-
-    //console.log(data);
-    $.post("{% url 'update-administration-data-item' %}", data);
-});
-</script>
-<script>
-$(':text').on('change', function(){
-    csrfmiddlewaretoken = $("input[name='csrfmiddlewaretoken']").val();
-    var data = {
-        'hash_id': '{{ hash_id }}',
-        'csrfmiddlewaretoken': csrfmiddlewaretoken,
-        'item' : $(this).attr('name'),
-        'value' : $(this).val(),
-        'check' : 'true' //setting check to true will ensure the value is used
-    }
-
-    //console.log(data);
-    $.post("{% url 'update-administration-data-item' %}", data);
 });
 </script>
 

@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator,MinValueValidator
+from django.shortcuts import reverse, redirect
 from ckeditor_uploader.fields import RichTextUploadingField
 
 # Model for individual instruments
@@ -101,6 +102,13 @@ class administration(models.Model):
 
     def get_meta_data(self):
         return [self.study, self.subject_id, self.repeat_num, self.url_hash, self.completed, self.completedBackgroundInfo, self.due_date, self.last_modified]
+
+    def get_absolute_url(self):
+        if self.study.instrument.form in ['CAT']:
+            return reverse('cat_forms:administer_cat_form', kwargs={'hash_id' : self.url_hash})
+        else :
+            return reverse('administer_cdi_form', kwargs={'hash_id' :self.url_hash})
+    
 
 class AdministrationSummary(administration):
     class Meta:
