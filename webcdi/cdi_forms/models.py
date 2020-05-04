@@ -188,6 +188,8 @@ class BackgroundInfo(models.Model):
     sibling_count = models.IntegerField(verbose_name=_('How many siblings does you child have?'), blank=True, null=True)
     sibling_data = models.TextField(blank=True, null=True)
 
+    prolific_pid = models.CharField(max_length=255, blank=True, null=True)
+
 #Model of zipcodes reported to be in 3-digit zip code prefixes with a population lower than 20,000. Tests with a zipcode found in this model will have their digits replaced with their state abbreviation.
 class Zipcode(models.Model):
     zip_code=models.CharField(max_length = 5)

@@ -65,6 +65,7 @@ def prefilled_background_form(administration_instance, front_page=True):
     context['min_age'] = administration_instance.study.min_age
     context['max_age'] = administration_instance.study.max_age
     context['birthweight_units'] = administration_instance.study.birth_weight_units
+    context['study'] = administration_instance.study
     
     if front_page: background_form = BackgroundForm(instance = background_instance, context = context)  
     else: 
@@ -104,6 +105,7 @@ class AdministrationMixin(object):
         self.study_context['zip_code'] = ''
         self.study_context['language_code'] =self.user_language
         self.study_context['study'] = self.administration_instance.study
+        self.study_context['prolific_pid'] = self.administration_instance.backgroundinfo.prolific_pid
         return self.study_context
 
     def get_user_language(self):
@@ -171,6 +173,7 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
                 self.object.zip_code = self.object.zip_code + '**'
             background_form = self.form_class(instance = self.object, context = self.study_context)
         except:
+            print("EXCEPT")
             if (self.administration_instance.repeat_num > 1 or self.administration_instance.study.study_group) and self.administration_instance.study.prefilled_data >= 1:
                 if self.administration_instance.study.study_group:
                     related_studies = study.objects.filter(researcher = self.administration_instance.study.researcher, study_group = self.administration_instance.study.study_group)
@@ -296,12 +299,17 @@ class CreateBackgroundInfoView(CreateView):
     study = None
     bypass = None
     hash_id = None
+    prolific_pid = None
 
     def get_bypass(self):
         self.bypass = self.kwargs['bypass']
 
     def get_study(self):
         self.study = study.objects.get(id=int(self.kwargs['study_id']))
+
+    def get_prolific_pid(self):
+        self.prolific_pid = self.kwargs['prolific_pid']
+        return self.prolific_pid
 
     def get_study_context(self):
         self.study_context = {}
@@ -314,6 +322,7 @@ class CreateBackgroundInfoView(CreateView):
         self.study_context['zip_code'] = ''
         self.study_context['language_code'] =self.user_language
         self.study_context['study'] =self.study
+        self.study_context['prolific_pid'] = self.get_prolific_pid()
         return self.study_context
 
     def get_user_language(self):

@@ -6,6 +6,8 @@ from . import views
 urlpatterns = [
             url(r'demo/English_WS$', views.cdi_form, name='cdi_form'),
             url(r'background/(?P<pk>[0-9]+)/$', views.BackgroundInfoView.as_view(), name='background-info'),
+            url(r'background-create/(?P<study_id>[0-9]+)/bypass/(?P<prolific_pid>[0-9a-zA-Z]+)/$', views.CreateBackgroundInfoView.as_view(), {'bypass':True}, name='create-new-background-info'),
+            url(r'background-create/(?P<study_id>[0-9]+)/(?P<prolific_pid>[0-9a-zA-Z]+)/$', views.CreateBackgroundInfoView.as_view(), {'bypass':None}, name='create-new-background-info'),
             url(r'background-create/(?P<study_id>[0-9]+)/bypass/$', views.CreateBackgroundInfoView.as_view(), {'bypass':True}, name='create-new-background-info'),
             url(r'background-create/(?P<study_id>[0-9]+)/$', views.CreateBackgroundInfoView.as_view(), {'bypass':None}, name='create-new-background-info'),
             url(r'background-backpage/(?P<pk>[0-9]+)/$', views.BackpageBackgroundInfoView.as_view(), name='backpage-background-info'),
