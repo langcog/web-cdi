@@ -59,7 +59,7 @@ def get_score_headers(study_obj):
 
 def get_background_header(study_obj):
     # Fetch background data variables
-    background_header = ['age','sex','country','zip_code', 
+    background_header = ['prolific_pid','age','sex','country','zip_code', 
         'birth_order', 'birth_weight_lb', 'birth_weight_confirmation_lb','birth_weight_kg','birth_weight_confirmation_kg', 
         'multi_birth_boolean','multi_birth', 'sibling_boolean','sibling_count','sibling_data','born_on_due_date', 'early_or_late', 
         'due_date_diff', 'mother_yob', 'mother_yob_confirmation', 'mother_education','father_yob', 'father_education', 
@@ -72,6 +72,8 @@ def get_background_header(study_obj):
         background_header.remove("birth_weight_confirmation_lb")
         background_header.remove("birth_weight_confirmation_kg")
         background_header.remove("mother_yob_confirmation")
+    if not study_obj.prolific_boolean:
+        background_header.remove('prolific_pid')
     return background_header
 
 def format_admin_data(pd, study_obj, administrations, admin_header):
