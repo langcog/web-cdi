@@ -215,6 +215,12 @@ class BackgroundForm(BetterModelForm):
         widget = forms.TextInput(attrs={'placeholder': _('Please specify')})
     )
 
+    caregiver_other = forms.CharField(
+        label = ' ',
+        required=False,
+        widget = forms.TextInput(attrs={'placeholder': _('Please specify')})
+    )
+
     # Cleaning input data for views.py and later database storage.
     def clean(self):
         cleaned_data = super(BackgroundForm, self).clean()
