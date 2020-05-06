@@ -162,7 +162,7 @@ class BackgroundForm(BetterModelForm):
     # Zip code. Regex validation of zip code (3-digit prefix) occurs in models.py
     zip_code = forms.CharField(
         min_length = 2, 
-        max_length = 5, 
+        max_length = 6, 
         required = False, 
         widget=forms.TextInput(
             attrs={'placeholder': 'XXXXX'}), 
