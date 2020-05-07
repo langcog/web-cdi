@@ -878,8 +878,12 @@ def cdi_form(request, hash_id):
 # Render completion page
 def printable_view(request, hash_id):
     administration_instance = get_administration_instance(hash_id) # Get administration object based on hash ID
+    user_language = language_map(administration_instance.study.instrument.language)
+
     if not administration_instance.completed: 
-        return render (request, 'cdi_forms/expired.html', {})
+        response = render (request, 'cdi_forms/expired.html', {}) # Render contact form template   
+        response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
+        return response
 
     completed = int(request.get_signed_cookie('completed_num', '0')) # If there is a cookie for a previously completed test, get it
     
@@ -887,8 +891,7 @@ def printable_view(request, hash_id):
     prefilled_data = dict()
     prefilled_data = prefilled_cdi_data(administration_instance)
 
-    user_language = language_map(administration_instance.study.instrument.language)
-
+    
     translation.activate(user_language)
 
     context = {}
