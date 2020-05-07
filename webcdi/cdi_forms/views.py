@@ -879,6 +879,7 @@ def cdi_form(request, hash_id):
 def printable_view(request, hash_id):
     administration_instance = get_administration_instance(hash_id) # Get administration object based on hash ID
     user_language = language_map(administration_instance.study.instrument.language)
+    translation.activate(user_language)
 
     if not administration_instance.completed: 
         response = render (request, 'cdi_forms/expired.html', {}) # Render contact form template   
@@ -892,8 +893,6 @@ def printable_view(request, hash_id):
     prefilled_data = prefilled_cdi_data(administration_instance)
 
     
-    translation.activate(user_language)
-
     context = {}
     context['language'] = administration_instance.study.instrument.language
     context['instrument'] = administration_instance.study.instrument.name
