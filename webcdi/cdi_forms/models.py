@@ -67,7 +67,7 @@ class BackgroundInfo(models.Model):
     age = models.IntegerField(verbose_name = _("Age (in months)"), validators=[MinValueValidator(0)], default = 999) #age in months for child (views.py converts DOB field in forms.py into age for this model)
     sex = models.CharField(max_length = 1, blank=True, null=True, choices = (('M', _("Male")), ('F', _("Female")), ('O', _("Other")))) # Reported gender for child
     country = CountryField(verbose_name=_("Country"), blank = True, null=True)
-    zip_code = models.CharField(max_length = 5, verbose_name = _('Zip Code (if you live in the U.S.)'), blank = True, null=True, validators=[RegexValidator(regex='^(\d{3}([*]{2})?)|([A-Z]{2})$', message=_('Please enter a valid U.S. zip code'))]) # Reported zip code for family. Follows Safe Harbor guidelines. Stores first 3 digits of zip code or state abbreviation.
+    zip_code = models.CharField(max_length = 6, verbose_name = _('Zip Code (if you live in the U.S.)'), blank = True, null=True, validators=[RegexValidator(regex='^(\d{3}([*]{2})?)|([A-Z]{2}|\d{4}([A-Z]{2}}))$', message=_('Please enter a valid U.S. zip code'))]) # Reported zip code for family. Follows Safe Harbor guidelines. Stores first 3 digits of zip code or state abbreviation.
 
     #Declared set of choices for birth order. Displays text version of integer ("First" instead of 1)
     birth_order_choices = [
@@ -145,6 +145,7 @@ class BackgroundInfo(models.Model):
     ]
 
     caregiver_info = models.IntegerField(verbose_name = _("Who does your child live with?"), choices = caregivers_choices, blank=True, null=True) # Asks for child's family situation
+    caregiver_other = models.CharField(max_length=25, blank=True, null=True)
 
     other_languages_boolean = models.IntegerField(blank = True, null=True) #Asks whether child is regularly exposed to other languages besides the instrument's language (currently English)
     other_languages = ArrayField(models.CharField(max_length = 101), blank = True, null=True) # Lists possible languages from languages.json that child may be exposed to
@@ -186,6 +187,8 @@ class BackgroundInfo(models.Model):
     sibling_boolean = models.BooleanField(verbose_name=_('Does you child have siblings?'), blank=True, null=True)
     sibling_count = models.IntegerField(verbose_name=_('How many siblings does you child have?'), blank=True, null=True)
     sibling_data = models.TextField(blank=True, null=True)
+
+    prolific_pid = models.CharField(max_length=255, blank=True, null=True)
 
 #Model of zipcodes reported to be in 3-digit zip code prefixes with a population lower than 20,000. Tests with a zipcode found in this model will have their digits replaced with their state abbreviation.
 class Zipcode(models.Model):

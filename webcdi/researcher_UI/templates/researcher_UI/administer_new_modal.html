@@ -57,7 +57,7 @@
         <hr />
 
         <div class="row form-group">
-            <label for="add_new_parent" class="col-3 control-label">Single Reusable Link</label>
+            <label for="add_new_parent" class="col-3 control-label">Single Reusable Link:</label>
             <div class="col-9" id="reusable_link_div" style = "overflow: hidden; text-overflow: ellipsis;">
               <a href="{% url 'administer_new_parent' username study_name %}" id="reusable_link">Click here</a><br>
               (For mass emails or adding to a website. Does not track IP addresses or use cookies. Every link click creates a new administration.)
@@ -83,6 +83,18 @@
               </script>
             </div>
         </div>
+
+        {% if object.prolific_boolean %}
+        <hr />
+        <div class="row form-group">
+          <label for="add_new_parent" class="col-3 control-label">Prolific Link:</label>
+          <div class="col-9" id="prolific_link_div" style = "overflow: hidden; text-overflow: ellipsis;">
+            <a href="">{{ request.scheme }}://{{ request.META.HTTP_HOST }}{% url 'administer_new_parent' username study_name %}?prolific_pid={% verbatim %}{{%PROLIFIC_PID%}}{% endverbatim %}</a><br>
+            (This link will not open a new administration.  It is to be copied into Prolific and will enable openning on a new administration capturing the Prolific Id from there.  If you want a link \
+            with a blank Prolific Id, use the Single Reusable Link)
+          </div>
+        </div>
+        {% endif %}
 
       </form>
       <div class="alert alert-danger error-message" role="alert" style="display:none">

@@ -55,6 +55,10 @@ class study(models.Model):
     active = models.BooleanField(default=True)
     timing = models.IntegerField(default=6)
     confirmation_questions = models.BooleanField(default=False) #Whether to ask participant to restate primary carer age and child weight
+    redirect_boolean = models.BooleanField(verbose_name="Provide redirect button at completion of study?", default=False) # Whether to give redirect button upon completion of administration
+    redirect_url = models.URLField(blank=True, null=True) # The redirect URL
+    prolific_boolean = models.BooleanField(default=False) # Whether this is capturing a link from Prolific
+
 
     def __unicode__(self):
         return self.name

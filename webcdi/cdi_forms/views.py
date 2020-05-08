@@ -22,6 +22,7 @@ from ipware.ip import get_ip
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 import pandas as pd
+from django.utils.safestring import mark_safe
 from django.views.generic import UpdateView, CreateView, DetailView
 
 
@@ -64,6 +65,8 @@ def prefilled_background_form(administration_instance, front_page=True):
     context['min_age'] = administration_instance.study.min_age
     context['max_age'] = administration_instance.study.max_age
     context['birthweight_units'] = administration_instance.study.birth_weight_units
+    context['study'] = administration_instance.study
+    context['prolific_pid'] = administration_instance.backgroundinfo.prolific_pid
     
     if front_page: background_form = BackgroundForm(instance = background_instance, context = context)  
     else: 
@@ -103,6 +106,7 @@ class AdministrationMixin(object):
         self.study_context['zip_code'] = ''
         self.study_context['language_code'] =self.user_language
         self.study_context['study'] = self.administration_instance.study
+        self.study_context['prolific_pid'] = self.administration_instance.backgroundinfo.prolific_pid
         return self.study_context
 
     def get_user_language(self):
@@ -115,6 +119,15 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
     model = BackgroundInfo
     form_class = BackgroundForm
     background_form = None
+    which_page="front"
+
+    def get_explanation_text(self):
+        filename = os.path.realpath(PROJECT_ROOT + '/form_data/background_info/' + self.study_context['instrument'] + '_' + self.which_page + '_helptext.json')
+        if os.path.isfile(filename) :
+            rows = json.load(open(filename, encoding='utf-8'))
+            for row in rows:
+                if 'help-text' in row: return row['help-text']
+        else : return ''
 
     def get_context_data(self, **kwargs):
         #data = super(BackgroundInfoView, self).get_context_data(**kwargs)
@@ -133,6 +146,7 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
         data['allow_payment'] = self.administration_instance.study.allow_payment
         data['hint'] = _("Your child should be between %(min_age)d to %(max_age)d months of age.") % {"min_age": data['min_age'], "max_age": data['max_age']}
         data['form'] = self.administration_instance.study.instrument.form
+        data['explanation'] = mark_safe(self.get_explanation_text())
 
         if data['allow_payment'] and self.administration_instance.bypass is None:
             try:
@@ -160,6 +174,7 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
                 self.object.zip_code = self.object.zip_code + '**'
             background_form = self.form_class(instance = self.object, context = self.study_context)
         except:
+            print("EXCEPT")
             if (self.administration_instance.repeat_num > 1 or self.administration_instance.study.study_group) and self.administration_instance.study.prefilled_data >= 1:
                 if self.administration_instance.study.study_group:
                     related_studies = study.objects.filter(researcher = self.administration_instance.study.researcher, study_group = self.administration_instance.study.study_group)
@@ -270,6 +285,7 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
 class BackpageBackgroundInfoView(BackgroundInfoView):
     form_class = BackpageBackgroundForm
     template_name = 'cdi_forms/backpage_info.html'
+    which_page = 'back'
 
     def get_context_data(self, **kwargs):
         ctx = super(BackpageBackgroundInfoView, self).get_context_data(**kwargs)
@@ -284,12 +300,17 @@ class CreateBackgroundInfoView(CreateView):
     study = None
     bypass = None
     hash_id = None
+    prolific_pid = None
 
     def get_bypass(self):
         self.bypass = self.kwargs['bypass']
 
     def get_study(self):
         self.study = study.objects.get(id=int(self.kwargs['study_id']))
+
+    def get_prolific_pid(self):
+        self.prolific_pid = self.kwargs['prolific_pid']
+        return self.prolific_pid
 
     def get_study_context(self):
         self.study_context = {}
@@ -302,6 +323,7 @@ class CreateBackgroundInfoView(CreateView):
         self.study_context['zip_code'] = ''
         self.study_context['language_code'] =self.user_language
         self.study_context['study'] =self.study
+        self.study_context['prolific_pid'] = self.get_prolific_pid()
         return self.study_context
 
     def get_user_language(self):
@@ -749,7 +771,6 @@ def cdi_form(request, hash_id):
                             administration_data.objects.update_or_create(administration = administration_instance, item_ID = key, defaults = {'value': value})
 
             # Update the Summary Data
-            print("Update Summery Scores")
             update_summary_scores(administration_instance)
 
             if 'btn-save' in request.POST and request.POST['btn-save'] == _('Save'): # If the save button was pressed
@@ -857,16 +878,21 @@ def cdi_form(request, hash_id):
 # Render completion page
 def printable_view(request, hash_id):
     administration_instance = get_administration_instance(hash_id) # Get administration object based on hash ID
+    user_language = language_map(administration_instance.study.instrument.language)
+    translation.activate(user_language)
+
+    if not administration_instance.completed: 
+        response = render (request, 'cdi_forms/expired.html', {}) # Render contact form template   
+        response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
+        return response
+
     completed = int(request.get_signed_cookie('completed_num', '0')) # If there is a cookie for a previously completed test, get it
     
     # Create a blank dictionary and then fill it with prefilled background and CDI data, along with hash ID and information regarding the gift card code if subject is to be paid
     prefilled_data = dict()
     prefilled_data = prefilled_cdi_data(administration_instance)
 
-    user_language = language_map(administration_instance.study.instrument.language)
-
-    translation.activate(user_language)
-
+    
     context = {}
     context['language'] = administration_instance.study.instrument.language
     context['instrument'] = administration_instance.study.instrument.name

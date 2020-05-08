@@ -67,7 +67,8 @@
   "fieldset":"De omgeving van het kind",
   "fields":[
       {
-          "field":"caregiver_info"
+          "field":"caregiver_info",
+          "div":["caregiver_other"]
       },
       {
           "field":"other_languages_boolean",

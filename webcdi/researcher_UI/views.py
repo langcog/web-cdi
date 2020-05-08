@@ -59,11 +59,11 @@ def get_score_headers(study_obj):
 
 def get_background_header(study_obj):
     # Fetch background data variables
-    background_header = ['age','sex','country','zip_code', 
+    background_header = ['prolific_pid','age','sex','country','zip_code', 
         'birth_order', 'birth_weight_lb', 'birth_weight_confirmation_lb','birth_weight_kg','birth_weight_confirmation_kg', 
         'multi_birth_boolean','multi_birth', 'sibling_boolean','sibling_count','sibling_data','born_on_due_date', 'early_or_late', 
         'due_date_diff', 'mother_yob', 'mother_yob_confirmation', 'mother_education','father_yob', 'father_education', 
-        'annual_income', 'child_hispanic_latino', 'child_ethnicity', 'caregiver_info', 'other_languages_boolean', 
+        'annual_income', 'child_hispanic_latino', 'child_ethnicity', 'caregiver_info', 'caregiver_other','other_languages_boolean', 
         'other_languages','language_from', 'language_days_per_week', 'language_hours_per_day', 'ear_infections_boolean',
         'ear_infections', 'hearing_loss_boolean','hearing_loss', 'vision_problems_boolean','vision_problems', 
         'illnesses_boolean','illnesses', 'services_boolean','services','worried_boolean','worried',
@@ -72,6 +72,8 @@ def get_background_header(study_obj):
         background_header.remove("birth_weight_confirmation_lb")
         background_header.remove("birth_weight_confirmation_kg")
         background_header.remove("mother_yob_confirmation")
+    if not study_obj.prolific_boolean:
+        background_header.remove('prolific_pid')
     return background_header
 
 def format_admin_data(pd, study_obj, administrations, admin_header):
@@ -614,6 +616,7 @@ def rename_study(request, study_name): # Function for study settings modal
                 return HttpResponse(json.dumps(data), content_type="application/json")            
 
         else:
+            print(form.errors)
             data['stat'] = "re-render"; # Mark as entry needing re-rendering
             form_package['form'] = form
             form_package['form_name'] = 'Update Study'
@@ -852,6 +855,7 @@ def administer_new(request, study_name): # For creating new administrations
         context['username'] = request.user.username 
         context['study_name'] = study_name
         context['study_group'] = study_obj.study_group
+        context['object'] = study_obj
         return render(request, 'researcher_UI/administer_new_modal.html', context) # Render blank form with added context of username, current study name, and study group.
 
 def administer_new_participant(request, username, study_name): # used for wordful study
@@ -916,6 +920,9 @@ def administer_new_participant(request, username, study_name): # used for wordfu
             return redirect(reverse('administer_cdi_form', args=[admin.url_hash]))
 
 def administer_new_parent(request, username, study_name): # For creating single administrations. Does not require a log-in. Participants can generate their own single-use administration if given the proper link,
+    if 'prolific_pid' in request.GET: prolific_pid = request.GET['prolific_pid']
+    else : prolific_pid = None
+
     data={}
     researcher = User.objects.get(username = username) # Get researcher's username. Different method because current user may not be the researcher and may not be logged in
     study_obj = study.objects.get(name= study_name, researcher = researcher) # Find the study object associated with the researcher and study name
@@ -940,7 +947,7 @@ def administer_new_parent(request, username, study_name): # For creating single 
             let_through = True # Mark as allowed
 
     if let_through: # If marked as allowed
-        return redirect (reverse('create-new-background-info', kwargs={'study_id' : study_obj.id, 'bypass' : bypass}))
+        return redirect (reverse('create-new-background-info', kwargs={'study_id' : study_obj.id, 'bypass' : bypass, 'prolific_pid': prolific_pid }))
     else: # If not marked as allowed
         redirect_url = reverse('overflow', args=[username, study_name]) # Generate URL for overflowed participants. May or may not have option for bypass depending on context (IP address and cookies)
     return redirect(redirect_url) # Redirect to generated URL

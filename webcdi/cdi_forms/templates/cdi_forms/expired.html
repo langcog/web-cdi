@@ -1,0 +1,41 @@
+{% load i18n cdiform_tags %}
+{% to_list 'Dutch' as language_list %}
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    {% load staticfiles %}
+
+    <title>{% trans 'Link Expired' %}</title>
+    <meta name="description" content="MacArthur-Bates Communicative Development Inventory">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" ></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
+
+    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
+    <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
+    <script src="{% static 'cdi_forms/selectize.js' %}"></script>
+    <script src="{% static 'cdi_forms/bootstrap-datepicker.js' %}"></script>
+    <link rel='stylesheet' href="{% static 'cdi_forms/selectize.bootstrap3.css' %}">
+    <link rel='stylesheet' href="{% static 'cdi_forms/datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'cdi_forms/docs.min.css' %}" />
+    <link rel='stylesheet' href="{% static 'cdi_forms/base.css' %}">
+</head>
+<body id="id_results">
+<div class="container bs-docs-container" style='padding-top: 60px; padding-bottom: 60px;'>
+    <div class = "col-md-12">
+    <!-- Thank you letter written to participants upon completion with the CDI logo. If participant is meant to be compensated, letter will also include a gift card code, monetary amount, and instructions on how to redeem the gift card. -->
+        <div class="row">
+            <div class="row">
+                <div class="col-lg-4 col-8 mx-auto">
+                    <img src={% static 'images/logo_bg.jpg' %} class="rounded mx-auto d-block" alt="{% trans 'MB-CDI Lab Logo' %}" style="width: 100%"> <br>
+                </div>
+            </div>
+            <h4>
+                {% blocktrans %}Unfortunately the time allowed to complete this survey has expired.  Please contact your researcher.{% endblocktrans %}
+            </h4>
+        </div>
+    </div>
+</body>
+</html>

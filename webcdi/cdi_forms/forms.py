@@ -162,7 +162,7 @@ class BackgroundForm(BetterModelForm):
     # Zip code. Regex validation of zip code (3-digit prefix) occurs in models.py
     zip_code = forms.CharField(
         min_length = 2, 
-        max_length = 5, 
+        max_length = 6, 
         required = False, 
         widget=forms.TextInput(
             attrs={'placeholder': 'XXXXX'}), 
@@ -214,6 +214,13 @@ class BackgroundForm(BetterModelForm):
         required=False,
         widget = forms.TextInput(attrs={'placeholder': _('Please specify')})
     )
+
+    caregiver_other = forms.CharField(
+        label = ' ',
+        required=False,
+        widget = forms.TextInput(attrs={'placeholder': _('Please specify')})
+    )
+
     # Cleaning input data for views.py and later database storage.
     def clean(self):
         cleaned_data = super(BackgroundForm, self).clean()
@@ -378,6 +385,8 @@ class BackgroundForm(BetterModelForm):
         self.fields['birth_weight_lb'].field = forms.TypedChoiceField
         self.fields['birth_weight_kg'].field = forms.TypedChoiceField
 
+        self.fields['country'].initial = settings.LANGUAGE_DICT[self.curr_context['language']].upper()
+
         self.birth_weight_required = True
         if self.curr_context['birthweight_units'] == "lb":
             self.birth_weight_field = 'birth_weight_lb'
@@ -492,12 +501,17 @@ class BackgroundForm(BetterModelForm):
             self.fields['child_ethnicity'].required = False
             self.fields['child_ethnicity'].label = _("My child is (check all that apply):")
 
-
+            
+            if self.curr_context['study'].prolific_boolean == True:
+                basic_info_fieldset = Fieldset( _('Basic Information'), Field('form_filler', css_class='enabler'), Div('form_filler_other', css_class='dependent'), 'prolific_pid', 'child_dob','age', 'sex', Field('country', css_class='enabler'), Div('zip_code', css_class='dependent'),'birth_order', Field('multi_birth_boolean', css_class='enabler'), Div('multi_birth', css_class='dependent'), self.birth_weight_field, Field('born_on_due_date', css_class='enabler'), Div('early_or_late', 'due_date_diff', css_class='dependent'))
+            else:
+                basic_info_fieldset = Fieldset( _('Basic Information'), Field('form_filler', css_class='enabler'), Div('form_filler_other', css_class='dependent'), 'child_dob','age', 'sex', Field('country', css_class='enabler'), Div('zip_code', css_class='dependent'),'birth_order', Field('multi_birth_boolean', css_class='enabler'), Div('multi_birth', css_class='dependent'), self.birth_weight_field, Field('born_on_due_date', css_class='enabler'), Div('early_or_late', 'due_date_diff', css_class='dependent'))
+                self.fields['prolific_pid'].widget = forms.HiddenInput()
             self.helper.layout = Layout(
-                Fieldset( _('Basic Information'), Field('form_filler', css_class='enabler'), Div('form_filler_other', css_class='dependent'), 'child_dob','age', 'sex', Field('country', css_class='enabler'), Div('zip_code', css_class='dependent'),'birth_order', Field('multi_birth_boolean', css_class='enabler'), Div('multi_birth', css_class='dependent'), self.birth_weight_field, Field('born_on_due_date', css_class='enabler'), Div('early_or_late', 'due_date_diff', css_class='dependent')),
+                basic_info_fieldset,
                 Fieldset( _('Family Background'), Field('primary_caregiver', css_class='enabler'), Div('primary_caregiver_other', css_class='dependent'), 'mother_yob', 'mother_education',Field('secondary_caregiver', css_class='enabler'), Div('secondary_caregiver_other', css_class='dependent'), 'father_yob', 'father_education', 'annual_income'),
                 Fieldset( _("Child's Ethnicity"),HTML("<p> " + ugettext("The following information is being collected for the sole purpose of reporting to our grant-funding institute, i.e.,  NIH (National Institute of Health).  NIH requires this information to ensure the soundness and inclusiveness of our research. Your cooperation is appreciated, but optional.") + " </p>"), 'child_hispanic_latino', 'child_ethnicity'),
-                Fieldset( _("Caregiver Information"), 'caregiver_info'),
+                Fieldset( _("Caregiver Information"), Field('caregiver_info', css_class='enabler'), Div('caregiver_other', css_class='dependent')),
                 Fieldset( _("Language Exposure"), 
                     Field('other_languages_boolean', css_class = 'enabler'), 
                     Div(Field('other_languages', css_class='make-selectize'),'language_from', 'language_days_per_week', 'language_hours_per_day', css_class='dependent')),
@@ -511,6 +525,8 @@ class BackgroundForm(BetterModelForm):
                     Field('learning_disability_boolean', css_class = 'enabler'), Div('learning_disability', css_class='dependent'),
                 ),
             )
+            
+        if self.curr_context['prolific_pid'] != None : self.fields['prolific_pid'].initial = self.curr_context['prolific_pid']
         
 
     #Link form to BackgroundInfo model stored in database. Declare widget formatting for specific fields.

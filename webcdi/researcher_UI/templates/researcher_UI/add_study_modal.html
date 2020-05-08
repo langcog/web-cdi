@@ -124,6 +124,19 @@
             check_for_payment();
 
         });
+
+        function check_for_redirect() {
+          if ($('#id_redirect_boolean').prop('checked')) {
+            $('.redirect_boolean').removeClass('collapse')
+          } else {
+            $('.redirect_boolean').addClass('collapse');
+          }  
+        }        
+
+        check_for_redirect();
+        $('#id_redirect_boolean').on('change', function () {
+            check_for_redirect();      
+        });
         
 
         </script>
