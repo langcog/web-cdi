@@ -226,7 +226,7 @@ LANGUAGE_DICT = {
     'Korean' : 'ko',
 }
 
-LANGUAGE_TOCOUNTRY_DICT = {
+LANGUAGE_TO_COUNTRY_DICT = {
     'Dutch' : 'nl',
 }
 
