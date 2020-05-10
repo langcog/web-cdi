@@ -151,7 +151,7 @@ LANGUAGE_OPTIONS = (
     ("Slovene", _(u"slovenščina (Slovene)")),
     ("Somali", _(u"Soomaaliga, af Soomaali (Somali)")),
     ("Southern Sotho", _(u"Sesotho (Southern Sotho)")),
-    ("Spanish", _(u"español, castellano (Spanish; Castilian)")),
+    ("Spanish; Castilian", _(u"español, castellano (Spanish; Castilian)")),
     ("Sundanese", _(u"Basa Sunda (Sundanese)")),
     ("Swahili", _(u"Kiswahili (Swahili)")),
     ("Swati", _(u"SiSwati (Swati)")),
@@ -186,6 +186,7 @@ LANGUAGE_OPTIONS = (
     ("Yiddish", _(u"ייִדיש (Yiddish)")),
     ("Yoruba", _(u"Yorùbá (Yoruba)")),
     ("Zhuang, Chuang", _(u"Saɯ cueŋƅ, Saw cuengh (Zhuang, Chuang)")),
+    ("Spanish", _(u"español (Spanish")),
 )
 
 {
