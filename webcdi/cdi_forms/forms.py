@@ -385,7 +385,8 @@ class BackgroundForm(BetterModelForm):
         self.fields['birth_weight_lb'].field = forms.TypedChoiceField
         self.fields['birth_weight_kg'].field = forms.TypedChoiceField
 
-        self.fields['country'].initial = settings.LANGUAGE_DICT[self.curr_context['language']].upper()
+        try: self.fields['country'].initial = settings.LANGUAGE_TO_COUNTRY_DICT[self.curr_context['language']].upper()
+        except: pass
 
         self.birth_weight_required = True
         if self.curr_context['birthweight_units'] == "lb":

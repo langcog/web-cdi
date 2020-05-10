@@ -417,8 +417,11 @@ class CreateBackgroundInfoView(CreateView):
         self.background_form = self.get_background_form()
 
         self.background_form = BackgroundForm(request.POST, context=self.study_context)
+        print("POST")
+        print(self.background_form.errors)
         if self.background_form.is_valid():
             # First create the administration_instance
+            print("FORM VALID")
             if self.study.study_group:
                 related_studies = study.objects.filter(researcher=researcher, study_group=self.study.study_group)
                 max_subject_id = administration.objects.filter(study__in=related_studies).aggregate(Max('subject_id'))['subject_id__max']
