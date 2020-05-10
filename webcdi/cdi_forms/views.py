@@ -195,6 +195,7 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
         return background_form
 
     def get(self, request, *args, **kwargs):
+        print("BackgroundInfo GET")
         self.object = self.get_object()
         self.get_administration_instance()
         self.get_study_context()

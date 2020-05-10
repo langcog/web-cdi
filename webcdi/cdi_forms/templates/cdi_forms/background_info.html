@@ -48,6 +48,7 @@
     <h3>{% trans "Background Information" %}</h3><br>
     <!-- Load backgroundform in crispy format. -->
     <div class="flex-row">{% load crispy_forms_tags %}
+    {{ background_form.errors }}
     {% crispy background_form %}</div>
 
 </div>
