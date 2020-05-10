@@ -174,7 +174,6 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
                 self.object.zip_code = self.object.zip_code + '**'
             background_form = self.form_class(instance = self.object, context = self.study_context)
         except:
-            print("EXCEPT")
             if (self.administration_instance.repeat_num > 1 or self.administration_instance.study.study_group) and self.administration_instance.study.prefilled_data >= 1:
                 if self.administration_instance.study.study_group:
                     related_studies = study.objects.filter(researcher = self.administration_instance.study.researcher, study_group = self.administration_instance.study.study_group)
@@ -195,7 +194,6 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
         return background_form
 
     def get(self, request, *args, **kwargs):
-        print("BackgroundInfo GET")
         self.object = self.get_object()
         self.get_administration_instance()
         self.get_study_context()
@@ -213,7 +211,7 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
         self.get_hash_id()
         self.get_study_context()
         self.get_user_language()
-        
+       
         if not self.administration_instance.completed and self.administration_instance.due_date > timezone.now(): # And test has yet to be completed and has not timed out
             try:
                 if self.object.age:
@@ -418,11 +416,9 @@ class CreateBackgroundInfoView(CreateView):
         self.background_form = self.get_background_form()
 
         self.background_form = BackgroundForm(request.POST, context=self.study_context)
-        print("POST")
-        print(self.background_form.errors)
+
         if self.background_form.is_valid():
             # First create the administration_instance
-            print("FORM VALID")
             if self.study.study_group:
                 related_studies = study.objects.filter(researcher=researcher, study_group=self.study.study_group)
                 max_subject_id = administration.objects.filter(study__in=related_studies).aggregate(Max('subject_id'))['subject_id__max']

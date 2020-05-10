@@ -224,7 +224,6 @@ class BackgroundForm(BetterModelForm):
     # Cleaning input data for views.py and later database storage.
     def clean(self):
         cleaned_data = super(BackgroundForm, self).clean()
-
         # Nesting fields. Some questions, like 'born_on_due_date' trigger related subsequent questions like 'early_or_late' and 'due_date_diff' to inquire more depending on earlier answers.
         enabler_dependent_fields = (
             ('form_filler', ['form_filler_other']),
@@ -457,6 +456,7 @@ class BackgroundForm(BetterModelForm):
                     self.fields[x].required = False
                     hidden_fields.append(x)
                     self.fields[x].widget = forms.HiddenInput()
+                    if x == 'other_languages' : self.fields[x].widget = forms.MultipleHiddenInput()
             rows.append(Fieldset('', *hidden_fields))
             self.helper.layout = Layout(*rows)
 

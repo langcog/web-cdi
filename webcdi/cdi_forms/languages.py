@@ -151,7 +151,7 @@ LANGUAGE_OPTIONS = (
     ("Slovene", _(u"slovenščina (Slovene)")),
     ("Somali", _(u"Soomaaliga, af Soomaali (Somali)")),
     ("Southern Sotho", _(u"Sesotho (Southern Sotho)")),
-    ("Spanish; Castilian", _(u"español, castellano (Spanish; Castilian)")),
+    ("Spanish", _(u"español, castellano (Spanish; Castilian)")),
     ("Sundanese", _(u"Basa Sunda (Sundanese)")),
     ("Swahili", _(u"Kiswahili (Swahili)")),
     ("Swati", _(u"SiSwati (Swati)")),

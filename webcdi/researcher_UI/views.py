@@ -616,7 +616,6 @@ def rename_study(request, study_name): # Function for study settings modal
                 return HttpResponse(json.dumps(data), content_type="application/json")            
 
         else:
-            print(form.errors)
             data['stat'] = "re-render"; # Mark as entry needing re-rendering
             form_package['form'] = form
             form_package['form_name'] = 'Update Study'
