@@ -147,19 +147,19 @@ msgstr "8 lbs, 0 oz - 8 lbs, 7 oz (3629 grams - 3855 grams)"
 
 #: webcdi/cdi_forms/forms.py:66
 msgid "8 lbs, 8 oz - 8 lbs, 15 oz"
-msgstr "8 lbs, 8 oz - 8 lbs, 15 oz (3856 grams - 3628 grams)"
+msgstr "8 lbs, 8 oz - 8 lbs, 15 oz (3856 grams - 4081 grams)"
 
 #: webcdi/cdi_forms/forms.py:67
 msgid "9 lbs, 0 oz - 9 lbs, 7 oz"
-msgstr "9 lbs, 0 oz - 9 lbs, 7 oz (3629 grams - 4082 grams)"
+msgstr "9 lbs, 0 oz - 9 lbs, 7 oz (4082 grams - 4308 grams)"
 
 #: webcdi/cdi_forms/forms.py:68
 msgid "9 lbs, 8 oz - 9 lbs, 15 oz"
-msgstr "9 lbs, 8 oz - 9 lbs, 15 oz (4083 grams - 4309 grams)"
+msgstr "9 lbs, 8 oz - 9 lbs, 15 oz (4309 grams - 4534 grams)"
 
 #: webcdi/cdi_forms/forms.py:69
 msgid "10 lbs, 0 oz or more"
-msgstr "10 lbs, 0 oz or more (4310 grams or more)"
+msgstr "10 lbs, 0 oz or more (4535 grams or more)"
 
 #: webcdi/cdi_forms/forms.py:76
 msgid "Less than 1500 grams"
