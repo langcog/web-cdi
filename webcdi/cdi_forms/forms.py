@@ -288,12 +288,13 @@ class BackgroundForm(BetterModelForm):
         return cleaned_data
 
     def get_json_filename(self):
-        return os.path.realpath(PROJECT_ROOT + '/form_data/background_info/' + self.curr_context['instrument'] + '_front.json')
+        return os.path.realpath(PROJECT_ROOT + '/form_data/background_info/' + self.curr_context['instrument'] + '.json')
 
     #Initiation of form. Set values, page format according to crispy forms, store variables delivered by views.py, and organize fields on the form.
     def __init__(self, *args, **kwargs):
         self.curr_context = kwargs.pop('context', None)
         self.filename = self.get_json_filename()
+        self.page = kwargs.pop('page', False)
         super(BackgroundForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.template = PROJECT_ROOT + '/templates/bootstrap/whole_uni_form.html'
@@ -404,60 +405,106 @@ class BackgroundForm(BetterModelForm):
         #if we have a specified background info, use it
         if os.path.isfile(self.filename) :
             rows = []
-            selected_fields = []
-            fieldsets = json.load(open(self.filename, encoding='utf-8'))
-            for fieldset in fieldsets:
-                fields = []
-                for field in fieldset['fields']:
-                    if 'field' in field: selected_fields.append(field['field'])
-                    if 'widget_type' in field:
-                        if field['widget_type'] == 'Select': self.fields[field['field']].widget = forms.Select()
-                        if field['widget_type'] == 'CheckboxSelectMultiple': self.fields[field['field']].widget = forms.CheckboxSelectMultiple()
-                    if "label" in field:
-                        self.fields[field['field']].label = field['label']
-                    if "choices" in field:
-                        choices = []
-                        for choice in field['choices']:
-                            choices.append((choice['key'],choice['value']))
-                        self.fields[field['field']].widget.choices = choices    
-                        self.fields[field['field']].choices = choices
-                        self.initial[field['field']] = getattr(self.instance, field['field'])
-                    if 'help' in field:
-                        self.fields[field['field']].help_text = field['help']
-                    if 'html' in field:
-                        fields.append(HTML(field['html']))
-                    if 'divs' in field:
-                        fields.append(Field(field['field'], css_class="enabler"))
-                        for div in field['divs']:
-                            fields.append(Div(Field(div['field'], css_class=div["css"]),*div['div'], css_class="dependent"))
-                            selected_fields.append(div['field'])
-                            if "choices" in div:
+            pages = json.load(open(self.filename, encoding='utf-8'))
+            for page in pages:
+                if page['page'] == self.page:
+                    selected_fields = []
+                    fieldsets = page['contents']
+                    for fieldset in fieldsets:
+                        fields = []
+                        for field in fieldset['fields']:
+                            if 'field' in field: selected_fields.append(field['field'])
+                            if 'widget_type' in field:
+                                if field['widget_type'] == 'Select': self.fields[field['field']].widget = forms.Select()
+                                if field['widget_type'] == 'CheckboxSelectMultiple': self.fields[field['field']].widget = forms.CheckboxSelectMultiple()
+                            if "label" in field:
+                                self.fields[field['field']].label = field['label']
+                            if "choices" in field:
                                 choices = []
-                                for choice in div['choices']:
+                                for choice in field['choices']:
                                     choices.append((choice['key'],choice['value']))
-                                self.fields[div['field']].widget.choices = choices    
-                                self.fields[div['field']].choices = choices
-                                self.initial[div['field']] = getattr(self.instance, div['field'])
-                            for item in div['div'] : selected_fields.append(item)
-                    elif 'div' in field:
-                        fields.append(Field(field['field'], css_class="enabler"))
-                        fields.append(Div(*field['div'], css_class="dependent"))
-                        for f in field['div']:
-                            selected_fields.append(f)
-                    else:
-                        if 'field' in field: fields.append(field['field'])
-                    
-                rows.append(Fieldset(fieldset['fieldset'], *fields))
+                                self.fields[field['field']].widget.choices = choices    
+                                self.fields[field['field']].choices = choices
+                                self.initial[field['field']] = getattr(self.instance, field['field'])
+                            if 'help' in field:
+                                self.fields[field['field']].help_text = field['help']
+                            if 'html' in field:
+                                fields.append(HTML(field['html']))
+                            if 'divs' in field:
+                                fields.append(Field(field['field'], css_class="enabler"))
+                                for div in field['divs']:
+                                    fields.append(Div(Field(div['field'], css_class=div["css"]),*div['div'], css_class="dependent"))
+                                    selected_fields.append(div['field'])
+                                    if "choices" in div:
+                                        choices = []
+                                        for choice in div['choices']:
+                                            choices.append((choice['key'],choice['value']))
+                                        self.fields[div['field']].widget.choices = choices    
+                                        self.fields[div['field']].choices = choices
+                                        self.initial[div['field']] = getattr(self.instance, div['field'])
+                                    for item in div['div'] : selected_fields.append(item)
+                            elif 'div' in field:
+                                fields.append(Field(field['field'], css_class="enabler"))
+                                fields.append(Div(*field['div'], css_class="dependent"))
+                                for f in field['div']:
+                                    selected_fields.append(f)
+                            else:
+                                if 'field' in field: fields.append(field['field'])
+                            
+                        rows.append(Fieldset(fieldset['fieldset'], *fields))
+                else :
+                    fieldsets = page['contents']
+                    hidden_fields = []
+                    for fieldset in fieldsets:
+                        for field in fieldset['fields']:
+                            if 'field' in field: 
+                                hidden_fields.append(field['field'])
+                                self.fields[field['field']].widget = forms.HiddenInput()
+                            if 'widget_type' in field:
+                                if field['widget_type'] == 'CheckboxSelectMultiple': self.fields[field['field']].widget = forms.MultipleHiddenInput()
+                            if "choices" in field:
+                                choices = []
+                                for choice in field['choices']:
+                                    choices.append((choice['key'],choice['value']))
+                                self.fields[field['field']].widget.choices = choices    
+                                self.fields[field['field']].choices = choices
+                                self.initial[field['field']] = getattr(self.instance, field['field'])
+                            if 'divs' in field:
+                                for div in field['divs']:
+                                    hidden_fields.append(div['field'])
+                                    self.fields[div['field']].widget = forms.HiddenInput()
+                                    if 'css' in div:
+                                        if div['css'] == 'make-selectize':
+                                            self.fields[div['field']].widget = forms.MultipleHiddenInput()
+                                   
+                                    if "choices" in div:
+                                        choices = []
+                                        for choice in div['choices']:
+                                            choices.append((choice['key'],choice['value']))
+                                        self.fields[div['field']].widget.choices = choices    
+                                        self.fields[div['field']].choices = choices
+                                        self.initial[div['field']] = getattr(self.instance, div['field'])
 
+                                        
+                                    for item in div['div'] : 
+                                        hidden_fields.append(item)
+                                        self.fields[item].widget = forms.HiddenInput()
+                            elif 'div' in field:
+                                for f in field['div']:
+                                    hidden_fields.append(f)
+                                    self.fields[f].widget = forms.HiddenInput()
+                    for field in hidden_fields: self.fields[field].required=False
+                    rows.append(Fieldset('', *hidden_fields))
+                    
             # now remove required from any standard fields not included
-            hidden_fields = []
+            more_hidden_fields = []
             for x in self.fields: 
-                if x not in selected_fields:
+                if x not in selected_fields and x not in hidden_fields:
                     self.fields[x].required = False
-                    hidden_fields.append(x)
+                    more_hidden_fields.append(x)
                     self.fields[x].widget = forms.HiddenInput()
                     if x == 'other_languages' : self.fields[x].widget = forms.MultipleHiddenInput()
-            rows.append(Fieldset('', *hidden_fields))
+            rows.append(Fieldset('', *more_hidden_fields))
             self.helper.layout = Layout(*rows)
 
             if 'birth_weight_lb' in selected_fields:
@@ -528,7 +575,7 @@ class BackgroundForm(BetterModelForm):
             )
             
         if self.curr_context['prolific_pid'] != None : self.fields['prolific_pid'].initial = self.curr_context['prolific_pid']
-        
+        if not self.curr_context['study_obj'].prolific_boolean: self.fields['prolific_pid'].widget = forms.HiddenInput()
 
     #Link form to BackgroundInfo model stored in database. Declare widget formatting for specific fields.
     class Meta:
@@ -550,8 +597,6 @@ class BackgroundForm(BetterModelForm):
 class BackpageBackgroundForm(BackgroundForm):
     backpage = True
 
-    def get_json_filename(self):
-        return os.path.realpath(PROJECT_ROOT + '/form_data/background_info/' + self.curr_context['instrument'] + '_back.json')
       
 
 # Form for contacting Web-CDI team. Asks for basic contact information and test ID. Simple format.

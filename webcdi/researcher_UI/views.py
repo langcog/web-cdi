@@ -414,7 +414,7 @@ def console(request, study_name = None, num_per_page = 20): # Main giant functio
                 if 'administer-selected' in request.POST: # If the 'Re-administer Participants' button was clicked
                     num_ids = map(int, ids) # Force numeric IDs into a list of integers
                     new_administrations = []
-                    sids_created = set()
+                    sids_created = set() #This is used to ensure we don't add the same subject twice if it is ticked twice with different repeat_nums
 
                     for nid in num_ids: # For each ID number
                         admin_instance = administration.objects.get(id = nid) # Grab the associated administration object
@@ -439,7 +439,6 @@ def console(request, study_name = None, num_per_page = 20): # Main giant functio
                     administrations = administration.objects.filter(id__in = ids) # Grab a queryset of administration objects with administration IDs found in list
                     return download_links(request, study_obj, administrations) # Send queryset to download_links function to return a CSV of subject data
                     refresh = True # Refresh page to reflect table changes
-
 
                 elif 'download-selected' in request.POST: # If 'Download Selected Data' was clicked
                     num_ids = list(set(map(int, ids))) # Force IDs into a list of integers

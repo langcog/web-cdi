@@ -186,8 +186,8 @@ LANGUAGE_OPTIONS = (
     ("Yiddish", _(u"ייִדיש (Yiddish)")),
     ("Yoruba", _(u"Yorùbá (Yoruba)")),
     ("Zhuang, Chuang", _(u"Saɯ cueŋƅ, Saw cuengh (Zhuang, Chuang)")),
-    ("Spanish", _(u"español (Spanish)")),
-    ("Other", _(u"Other")),
+    #("Spanish", _(u"español (Spanish)")),
+    #("Other", _(u"Other")),
 )
 
 {
