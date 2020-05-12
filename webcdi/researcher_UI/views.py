@@ -511,7 +511,9 @@ def console(request, study_name = None, num_per_page = 20): # Main giant functio
                     excludes = list(administration_table.exclude)
                     excludes.append("completedSurvey")
                     administration_table.exclude = excludes
-
+                if 'view_all' in request.GET:
+                    study_obj = study.objects.get(researcher= request.user, name= study_name)
+                    if request.GET['view_all'] == 'all' : num_per_page = administration.objects.filter(study = study_obj).count()
                 RequestConfig(request, paginate={'per_page': num_per_page}).configure(administration_table)
                 context['current_study'] = current_study.name
                 context['num_per_page'] = num_per_page

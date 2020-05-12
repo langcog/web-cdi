@@ -15,7 +15,7 @@
     {% block pagination %}
         <div class = "col-md-12" style = "float:none; display:inline-block; vertical-align:middle;">
             <nav>{% bootstrap_pagination table.page url=request.get_full_path %}</nav>
-            <input name="view_all" id = "view_all" class="btn btn-link" role="link" type="submit" value = "Show All">
+            <a href="{% url 'console' current_study %}?view_all=all" id="view_all" class="btn btn-link" role="link">Show All</a>
         </div>
     {% endblock pagination %}
 

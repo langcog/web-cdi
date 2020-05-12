@@ -211,9 +211,11 @@
 
     // Depending on value stored in num_per_page, display the other option on the page
     if ((window.location.search.indexOf('per_page') != -1 && window.location.search.indexOf('per_page=20') == -1) || num_per_page != 20) {
-        $('#view_all').val("Show 20");
+        $('#view_all').text("Show 20");
+        $("#view_all").attr("href", "{% url 'console' current_study %}");
     } else if (num_per_page == 20 || window.location.search.indexOf('per_page=20') != -1) {
-        $('#view_all').val("Show All");
+        $('#view_all').text("Show All");
+        $("#view_all").attr("href", "{% url 'console' current_study %}?view_all=all");
     }
 
     var querystring = 'per_page=' + num_per_page;
