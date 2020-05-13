@@ -208,6 +208,7 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
         #return super(BackgroundInfoView, self).get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
+        print("BackgroundInfoView POST")
         self.object = self.get_object()
         self.get_administration_instance()
         self.get_hash_id()
@@ -764,7 +765,6 @@ def parse_analysis(raw_answer):
 
 # Render CDI form. Dependent on prefilled_cdi_data
 def cdi_form(request, hash_id):
-
     administration_instance = get_administration_instance(hash_id) # Get administration instance.
     instrument_name = administration_instance.study.instrument.name # Get instrument name associated with study
     instrument_model = model_map(instrument_name) # Fetch instrument model based on instrument name.
@@ -773,7 +773,7 @@ def cdi_form(request, hash_id):
     user_language = language_map(administration_instance.study.instrument.language)
 
     translation.activate(user_language)
-
+    
     if request.method == 'POST' : # If submitting responses to CDI form
         if not administration_instance.completed and administration_instance.due_date > timezone.now(): # If form has not been completed and it has not expired
             for key in request.POST: # Parse responses and individually save each item's response (empty checkboxes or radiobuttons are not saved)
@@ -925,7 +925,7 @@ def printable_view(request, hash_id):
     try:
         #Get form from database
         background_form = prefilled_background_form(administration_instance)
-        filename = os.path.realpath(PROJECT_ROOT + '/form_data/background_info/' + administration_instance.study.instrument.name + '_back.json')
+        filename = os.path.realpath(PROJECT_ROOT + '/form_data/background_info/' + administration_instance.study.instrument.name + '.json')
         if has_backpage(filename) :
             backpage_background_form = prefilled_background_form(administration_instance, False)
     except:
