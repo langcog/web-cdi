@@ -920,6 +920,7 @@ def printable_view(request, hash_id):
     context['birthweight_units'] = administration_instance.study.birth_weight_units
     context['prolific_pid'] = administration_instance.backgroundinfo.prolific_pid
     context['study_obj'] = administration_instance.study
+    context['study'] = administration_instance.study
     
     try:
         #Get form from database
