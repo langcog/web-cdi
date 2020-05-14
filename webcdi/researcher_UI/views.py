@@ -37,6 +37,7 @@ from cdi_forms.models import Instrument_Forms
 
 def get_study_scores(administrations):
     scores = SummaryData.objects.values('administration_id', 'title','value').filter(administration_id__in = administrations)
+    if not scores : return False
     melted_scores = pd.DataFrame.from_records(scores).pivot(index='administration_id', columns='title', values='value')
     melted_scores.reset_index(level=0, inplace=True)
     return melted_scores
@@ -160,6 +161,7 @@ def download_data(request, study_obj, administrations = None): # Download study 
 
     # Add scoring
     melted_scores = get_study_scores(administrations)
+    if not melted_scores: return HttpResponseServerError(f'There are no data in the study(ies) to report')
     score_header = get_score_headers(study_obj)
     melted_scores.set_index('administration_id')
     missing_columns = list(set(score_header) - set(melted_scores.columns))
@@ -255,6 +257,7 @@ def download_summary(request, study_obj, administrations = None): # Download stu
 
     # Add scoring
     melted_scores = get_study_scores(administrations)
+    if not melted_scores: return HttpResponseServerError(f'There are no data in the study(ies) to report')
     score_header = get_score_headers(study_obj)
     melted_scores.set_index('administration_id')
     missing_columns = list(set(score_header) - set(melted_scores.columns))
