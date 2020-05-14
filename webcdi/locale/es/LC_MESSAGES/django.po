@@ -2010,7 +2010,7 @@ msgstr ""
 "Si tiene alguna inquietud sobre el desarrollo de su niño(a), le recomendamos "
 "que hable con el médico de su niño(a). Si disfrutó de nuestra evaluación, "
 "puede obtener más información sobre el Inventario <a href=\"http://mb-cdi."
-"stanford.edu/\" target=\"_blank\">aquí</a>. ¡Apreciamos tu contribución!"
+"stanford.edu/\" target=\"_blank\">aquí</a>. ¡Apreciamos su contribución!"
 
 #: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:167
 #, python-format
