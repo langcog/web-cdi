@@ -110,6 +110,8 @@ def download_data(request, study_obj, administrations = None): # Download study 
     response['Content-Disposition'] = 'attachment; filename="' + filename + '"'# Name the CSV response
     
     administrations = administrations if administrations is not None else administration.objects.filter(study = study_obj)
+    if not administrations.filter(completed=True).exists():
+        return HttpResponseServerError("You must select at least 1 completed survery")
     #administrations = administrations.exclude(opt_out=True)
     model_header = get_model_header(study_obj.instrument.name) # Fetch the associated instrument model's variables
 
@@ -224,6 +226,8 @@ def download_summary(request, study_obj, administrations = None): # Download stu
     response['Content-Disposition'] = 'attachment; filename="' + filename + '"'# Name the CSV response
     
     administrations = administrations if administrations is not None else administration.objects.filter(study = study_obj)
+    if not administrations.filter(completed=True).exists():
+        return HttpResponseServerError("You must select at least 1 completed survery")
     #administrations = administrations.exclude(opt_out=True)
 
     admin_header = format_admin_header(study_obj)
