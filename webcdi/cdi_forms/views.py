@@ -68,9 +68,9 @@ def prefilled_background_form(administration_instance, front_page=True):
     context['study'] = administration_instance.study
     context['prolific_pid'] = administration_instance.backgroundinfo.prolific_pid
     
-    if front_page: background_form = BackgroundForm(instance = background_instance, context = context)  
+    if front_page: background_form = BackgroundForm(instance = background_instance, context = context, page="front")  
     else: 
-        background_form = BackpageBackgroundForm(instance = background_instance, context = context)  
+        background_form = BackpageBackgroundForm(instance = background_instance, context = context, page="back")  
     return background_form
 
 # Find the administration object for a test-taker based on their unique hash code.
@@ -107,6 +107,7 @@ class AdministrationMixin(object):
         self.study_context['language_code'] =self.user_language
         self.study_context['study'] = self.administration_instance.study
         self.study_context['prolific_pid'] = self.administration_instance.backgroundinfo.prolific_pid
+        self.study_context['study_obj'] = self.administration_instance.study
         return self.study_context
 
     def get_user_language(self):
@@ -122,12 +123,13 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
     which_page="front"
 
     def get_explanation_text(self):
-        filename = os.path.realpath(PROJECT_ROOT + '/form_data/background_info/' + self.study_context['instrument'] + '_' + self.which_page + '_helptext.json')
+        filename = os.path.realpath(PROJECT_ROOT + '/form_data/background_info/' + self.study_context['instrument'] + '.json')
         if os.path.isfile(filename) :
-            rows = json.load(open(filename, encoding='utf-8'))
-            for row in rows:
-                if 'help-text' in row: return row['help-text']
-        else : return ''
+            pages = json.load(open(filename, encoding='utf-8'))
+            for page in pages:
+                if page['page'] == self.which_page:
+                    if 'help-text' in page: return page['help-text']
+        return ''
 
     def get_context_data(self, **kwargs):
         #data = super(BackgroundInfoView, self).get_context_data(**kwargs)
@@ -172,7 +174,7 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
                 self.study_context['child_age'] = self.object.age
             if len(self.object.zip_code) == 3:
                 self.object.zip_code = self.object.zip_code + '**'
-            background_form = self.form_class(instance = self.object, context = self.study_context)
+            background_form = self.form_class(instance = self.object, context = self.study_context, page=self.which_page)
         except:
             if (self.administration_instance.repeat_num > 1 or self.administration_instance.study.study_group) and self.administration_instance.study.prefilled_data >= 1:
                 if self.administration_instance.study.study_group:
@@ -185,12 +187,12 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
                     self.object.pk = None
                     self.object.administration = self.administration_instance
                     self.object.age = None
-                    background_form = self.form_class(instance = self.get_object, context = self.study_context)
+                    background_form = self.form_class(instance = self.get_object, context = self.study_context, page=self.which_page)
                 else:
-                    background_form = self.form_class(context = self.study_context)  
+                    background_form = self.form_class(context = self.study_context, page=self.which_page)  
             else:
                 # If you cannot fetch responses, render a blank form
-                background_form = self.form_class(context = self.study_context)
+                background_form = self.form_class(context = self.study_context, page=self.which_page)
         return background_form
 
     def get(self, request, *args, **kwargs):
@@ -206,6 +208,7 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
         #return super(BackgroundInfoView, self).get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
+        print("BackgroundInfoView POST")
         self.object = self.get_object()
         self.get_administration_instance()
         self.get_hash_id()
@@ -216,9 +219,9 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
             try:
                 if self.object.age:
                     self.study_context['child_age'] = self.object.age # Populate dictionary with child's age for validation in forms.py.
-                self.background_form = self.form_class(request.POST, instance=self.object, context=self.study_context) # Save filled out form as an object
+                self.background_form = self.form_class(request.POST, instance=self.object, context=self.study_context, page=self.which_page) # Save filled out form as an object
             except:
-                self.background_form = BackgroundForm(request.POST, context = self.study_context) # Pull up an empty BackgroundForm with information regarding only the instrument.
+                self.background_form = BackgroundForm(request.POST, context = self.study_context, page=self.which_page) # Pull up an empty BackgroundForm with information regarding only the instrument.
             
             if self.background_form.is_valid(): # If form passed forms.py validation (clean function)
                 obj = self.background_form.save(commit = False) # Save but do not commit form just yet.
@@ -287,7 +290,7 @@ class BackpageBackgroundInfoView(BackgroundInfoView):
     which_page = 'back'
 
     def get_context_data(self, **kwargs):
-        ctx = super(BackpageBackgroundInfoView, self).get_context_data(**kwargs)
+        ctx = super().get_context_data(**kwargs)
         ctx['dont_show_waiver'] = True
         return ctx
 
@@ -300,6 +303,7 @@ class CreateBackgroundInfoView(CreateView):
     bypass = None
     hash_id = None
     prolific_pid = None
+    which_page="front"
 
     def get_bypass(self):
         self.bypass = self.kwargs['bypass']
@@ -310,6 +314,15 @@ class CreateBackgroundInfoView(CreateView):
     def get_prolific_pid(self):
         self.prolific_pid = self.kwargs['prolific_pid']
         return self.prolific_pid
+
+    def get_explanation_text(self):
+        filename = os.path.realpath(PROJECT_ROOT + '/form_data/background_info/' + self.study_context['instrument'] + '.json')
+        if os.path.isfile(filename) :
+            pages = json.load(open(filename, encoding='utf-8'))
+            for page in pages:
+                if page['page'] == self.which_page:
+                    if 'help-text' in page: return page['help-text']
+        return ''
 
     def get_study_context(self):
         self.study_context = {}
@@ -323,6 +336,7 @@ class CreateBackgroundInfoView(CreateView):
         self.study_context['language_code'] =self.user_language
         self.study_context['study'] =self.study
         self.study_context['prolific_pid'] = self.get_prolific_pid()
+        self.study_context['study_obj'] = self.study
         return self.study_context
 
     def get_user_language(self):
@@ -345,6 +359,7 @@ class CreateBackgroundInfoView(CreateView):
         data['allow_payment'] = self.study.allow_payment
         data['hint'] = _("Your child should be between %(min_age)d to %(max_age)d months of age.") % {"min_age": data['min_age'], "max_age": data['max_age']}
         data['form'] = self.study.instrument.form
+        data['explanation'] = mark_safe(self.get_explanation_text())
 
         if data['allow_payment'] and self.bypass is None:
             try:
@@ -364,7 +379,7 @@ class CreateBackgroundInfoView(CreateView):
         return data
 
     def get_background_form(self):
-        background_form = self.form_class(context = self.study_context)
+        background_form = self.form_class(context = self.study_context, page=self.which_page)
         return background_form
 
     def get(self, request, *args, **kwargs):
@@ -398,7 +413,7 @@ class CreateBackgroundInfoView(CreateView):
             new_admin.save() # Update object in database
 
         #for field in new_admin._fields:  print(field)
-        form = BackgroundForm(self.request.POST, instance=new_admin, context=self.study_context)
+        form = BackgroundForm(self.request.POST, instance=new_admin, context=self.study_context, page=self.which_page)
         
         self.object = form.save()
         return
@@ -415,7 +430,7 @@ class CreateBackgroundInfoView(CreateView):
         self.get_study_context()
         self.background_form = self.get_background_form()
 
-        self.background_form = BackgroundForm(request.POST, context=self.study_context)
+        self.background_form = BackgroundForm(request.POST, context=self.study_context, page=self.which_page)
 
         if self.background_form.is_valid():
             # First create the administration_instance
@@ -661,6 +676,14 @@ def cdi_items(object_group, item_type, prefilled_data, item_id):
 
     return object_group 
 
+def has_backpage(filename):
+    back_page = 0
+    if os.path.isfile(filename): 
+        pages = json.load(open(filename, encoding='utf-8'))
+        for page in pages:
+            if page['page'] == 'back' : back_page = 1
+    return back_page
+
 # Prepare items with prefilled reponses for later rendering. Dependent on cdi_items
 def prefilled_cdi_data(administration_instance):
     prefilled_data_list = administration_data.objects.filter(administration = administration_instance).values('item_ID', 'value') # Grab a list of prefilled responses
@@ -693,11 +716,8 @@ def prefilled_cdi_data(administration_instance):
         data['study_waiver'] = administration_instance.study.waiver
         data['confirm_completion'] = administration_instance.study.confirm_completion
 
-        filename = os.path.realpath(PROJECT_ROOT + '/form_data/background_info/' + instrument_name + '_back.json')
-        if os.path.isfile(filename): data['back_page'] = 1
-        else: data['back_page'] = 0
-
-
+        data['back_page'] = has_backpage(PROJECT_ROOT + '/form_data/background_info/' + instrument_name + '.json')
+        
         raw_objects = []
 
         field_values = ['itemID', 'item', 'item_type', 'category', 'definition', 'choices__choice_set']
@@ -745,7 +765,6 @@ def parse_analysis(raw_answer):
 
 # Render CDI form. Dependent on prefilled_cdi_data
 def cdi_form(request, hash_id):
-
     administration_instance = get_administration_instance(hash_id) # Get administration instance.
     instrument_name = administration_instance.study.instrument.name # Get instrument name associated with study
     instrument_model = model_map(instrument_name) # Fetch instrument model based on instrument name.
@@ -754,7 +773,7 @@ def cdi_form(request, hash_id):
     user_language = language_map(administration_instance.study.instrument.language)
 
     translation.activate(user_language)
-
+    
     if request.method == 'POST' : # If submitting responses to CDI form
         if not administration_instance.completed and administration_instance.due_date > timezone.now(): # If form has not been completed and it has not expired
             for key in request.POST: # Parse responses and individually save each item's response (empty checkboxes or radiobuttons are not saved)
@@ -844,8 +863,8 @@ def cdi_form(request, hash_id):
                 
 
                 #check if we have a background info page after the survey and act accordingly
-                filename = os.path.realpath(PROJECT_ROOT + '/form_data/background_info/' + instrument_name + '_back.json')
-                if os.path.isfile(filename) :
+                filename = os.path.realpath(PROJECT_ROOT + '/form_data/background_info/' + instrument_name + '.json')
+                if has_backpage(filename) :
                     administration.objects.filter(url_hash = hash_id).update(completedSurvey = True)
                     request.method = "GET"
                     background_instance = BackgroundInfo.objects.get(administration = administration_instance) 
@@ -899,16 +918,19 @@ def printable_view(request, hash_id):
     context['min_age'] = administration_instance.study.min_age
     context['max_age'] = administration_instance.study.max_age
     context['birthweight_units'] = administration_instance.study.birth_weight_units
+    context['prolific_pid'] = administration_instance.backgroundinfo.prolific_pid
+    context['study_obj'] = administration_instance.study
+    context['study'] = administration_instance.study
     
     try:
         #Get form from database
         background_form = prefilled_background_form(administration_instance)
-        filename = os.path.realpath(PROJECT_ROOT + '/form_data/background_info/' + administration_instance.study.instrument.name + '_back.json')
-        if os.path.isfile(filename) :
+        filename = os.path.realpath(PROJECT_ROOT + '/form_data/background_info/' + administration_instance.study.instrument.name + '.json')
+        if has_backpage(filename) :
             backpage_background_form = prefilled_background_form(administration_instance, False)
     except:
         #Blank form
-        background_form = BackgroundForm(context = context)
+        background_form = BackgroundForm(context = context, page="front")
     
     prefilled_data['language'] = administration_instance.study.instrument.language
     prefilled_data['background_form'] = background_form

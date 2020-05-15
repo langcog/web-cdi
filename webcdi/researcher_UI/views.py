@@ -37,6 +37,7 @@ from cdi_forms.models import Instrument_Forms
 
 def get_study_scores(administrations):
     scores = SummaryData.objects.values('administration_id', 'title','value').filter(administration_id__in = administrations)
+    if not scores : return ''
     melted_scores = pd.DataFrame.from_records(scores).pivot(index='administration_id', columns='title', values='value')
     melted_scores.reset_index(level=0, inplace=True)
     return melted_scores
@@ -110,6 +111,8 @@ def download_data(request, study_obj, administrations = None): # Download study 
     response['Content-Disposition'] = 'attachment; filename="' + filename + '"'# Name the CSV response
     
     administrations = administrations if administrations is not None else administration.objects.filter(study = study_obj)
+    if not administrations.filter(completed=True).exists():
+        return HttpResponseServerError("You must select at least 1 completed survery")
     #administrations = administrations.exclude(opt_out=True)
     model_header = get_model_header(study_obj.instrument.name) # Fetch the associated instrument model's variables
 
@@ -158,6 +161,7 @@ def download_data(request, study_obj, administrations = None): # Download study 
 
     # Add scoring
     melted_scores = get_study_scores(administrations)
+    if len(melted_scores) < 1 : return HttpResponseServerError(f'There are no data in the study(ies) to report')
     score_header = get_score_headers(study_obj)
     melted_scores.set_index('administration_id')
     missing_columns = list(set(score_header) - set(melted_scores.columns))
@@ -224,6 +228,8 @@ def download_summary(request, study_obj, administrations = None): # Download stu
     response['Content-Disposition'] = 'attachment; filename="' + filename + '"'# Name the CSV response
     
     administrations = administrations if administrations is not None else administration.objects.filter(study = study_obj)
+    if not administrations.filter(completed=True).exists():
+        return HttpResponseServerError("You must select at least 1 completed survery")
     #administrations = administrations.exclude(opt_out=True)
 
     admin_header = format_admin_header(study_obj)
@@ -251,6 +257,7 @@ def download_summary(request, study_obj, administrations = None): # Download stu
 
     # Add scoring
     melted_scores = get_study_scores(administrations)
+    if len(melted_scores) < 1 : return HttpResponseServerError(f'There are no data in the study(ies) to report')
     score_header = get_score_headers(study_obj)
     melted_scores.set_index('administration_id')
     missing_columns = list(set(score_header) - set(melted_scores.columns))
@@ -414,7 +421,7 @@ def console(request, study_name = None, num_per_page = 20): # Main giant functio
                 if 'administer-selected' in request.POST: # If the 'Re-administer Participants' button was clicked
                     num_ids = map(int, ids) # Force numeric IDs into a list of integers
                     new_administrations = []
-                    sids_created = set()
+                    sids_created = set() #This is used to ensure we don't add the same subject twice if it is ticked twice with different repeat_nums
 
                     for nid in num_ids: # For each ID number
                         admin_instance = administration.objects.get(id = nid) # Grab the associated administration object
@@ -439,7 +446,6 @@ def console(request, study_name = None, num_per_page = 20): # Main giant functio
                     administrations = administration.objects.filter(id__in = ids) # Grab a queryset of administration objects with administration IDs found in list
                     return download_links(request, study_obj, administrations) # Send queryset to download_links function to return a CSV of subject data
                     refresh = True # Refresh page to reflect table changes
-
 
                 elif 'download-selected' in request.POST: # If 'Download Selected Data' was clicked
                     num_ids = list(set(map(int, ids))) # Force IDs into a list of integers
@@ -511,7 +517,9 @@ def console(request, study_name = None, num_per_page = 20): # Main giant functio
                     excludes = list(administration_table.exclude)
                     excludes.append("completedSurvey")
                     administration_table.exclude = excludes
-
+                if 'view_all' in request.GET:
+                    study_obj = study.objects.get(researcher= request.user, name= study_name)
+                    if request.GET['view_all'] == 'all' : num_per_page = administration.objects.filter(study = study_obj).count()
                 RequestConfig(request, paginate={'per_page': num_per_page}).configure(administration_table)
                 context['current_study'] = current_study.name
                 context['num_per_page'] = num_per_page
