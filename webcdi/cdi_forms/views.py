@@ -243,15 +243,8 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
                     obj.child_hispanic_latino = None
 
                 # Find the raw zip code value and make it compliant with Safe Harbor guidelines. Only store the first 3 digits if the total population for that prefix is greataer than 20,000 (found prohibited prefixes via Census API data). If prohibited zip code, replace value with state abbreviations.
-                zip_prefix = ''
-                raw_zip = self.object.zip_code
-                if raw_zip and raw_zip != 'None':
-                    zip_prefix = raw_zip[:3]
-                    if Zipcode.objects.filter(zip_prefix = zip_prefix).exists():
-                        zip_prefix = Zipcode.objects.filter(zip_prefix = zip_prefix).first().state
-                    else:
-                        zip_prefix = zip_prefix + '**'
-                obj.zip_code = zip_prefix
+                if self.object.country == 'US': obj.zip_code = safe_harbor_zip_code(self.object)
+                else : obj.zip_code = self.object.zip_code
 
                 # Save model object to database
                 obj.administration = self.administration_instance
@@ -293,6 +286,19 @@ class BackpageBackgroundInfoView(BackgroundInfoView):
         ctx = super().get_context_data(**kwargs)
         ctx['dont_show_waiver'] = True
         return ctx
+
+def safe_harbor_zip_code(obj):
+    zip_prefix = ''
+    raw_zip = obj.zip_code
+    if raw_zip and raw_zip != 'None':
+        zip_prefix = raw_zip[:3]
+        if Zipcode.objects.filter(zip_prefix = zip_prefix).exists():
+            zip_prefix = Zipcode.objects.filter(zip_prefix = zip_prefix).first().state
+        else:
+            zip_prefix = zip_prefix + '**'
+    return zip_prefix
+            
+
 
 class CreateBackgroundInfoView(CreateView):
     template_name = 'cdi_forms/background_info.html'
@@ -468,15 +474,7 @@ class CreateBackgroundInfoView(CreateView):
                 obj.child_hispanic_latino = None
 
             # Find the raw zip code value and make it compliant with Safe Harbor guidelines. Only store the first 3 digits if the total population for that prefix is greataer than 20,000 (found prohibited prefixes via Census API data). If prohibited zip code, replace value with state abbreviations.
-            zip_prefix = '' 
-            raw_zip = obj.zip_code
-            if raw_zip and raw_zip != 'None':
-                zip_prefix = raw_zip[:3]
-                if Zipcode.objects.filter(zip_prefix = zip_prefix).exists():
-                    zip_prefix = Zipcode.objects.filter(zip_prefix = zip_prefix).first().state
-                else:
-                    zip_prefix = zip_prefix + '**'
-            obj.zip_code = zip_prefix
+            if obj.country == 'US': obj.zip_code = safe_harbor_zip_code(obj)
 
             # Save model object to database
             obj.administration = administration_instance
@@ -542,16 +540,8 @@ def background_info_form(request, hash_id):
                     background_instance.child_hispanic_latino = 'None'
 
                 # Find the raw zip code value and make it compliant with Safe Harbor guidelines. Only store the first 3 digits if the total population for that prefix is greataer than 20,000 (found prohibited prefixes via Census API data). If prohibited zip code, replace value with state abbreviations.
-                zip_prefix = ''
-                raw_zip = background_instance.zip_code
-                if raw_zip and raw_zip != 'None':
-                    zip_prefix = raw_zip[:3]
-                    if Zipcode.objects.filter(zip_prefix = zip_prefix).exists():
-                        zip_prefix = Zipcode.objects.filter(zip_prefix = zip_prefix).first().state
-                    else:
-                        zip_prefix = zip_prefix + '**'
-                background_instance.zip_code = zip_prefix
-
+                if background_instance.country == 'US': background_instance.zip_code = safe_harbor_zip_code(background_instance)
+                    
                 # Save model object to database
                 background_instance.administration = administration_instance
                 background_instance.save()
