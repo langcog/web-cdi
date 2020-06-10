@@ -227,6 +227,11 @@ LANGUAGE_DICT = {
     'Korean' : 'ko',
 }
 
+LANGUAGE_TO_COUNTRY_DICT = {
+    'Dutch' : 'nl',
+}
+
+
 COUNTRIES_FIRST = [
     'US','CA','NL','IL'
 ]

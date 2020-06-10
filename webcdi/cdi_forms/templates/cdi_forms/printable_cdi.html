@@ -207,6 +207,11 @@
         <div class="row justify-content-center">
             <h4><a href="{% url 'administration-pdf-view' object.pk %}">{% trans "Print My Answers" %}</a></h4>
         </div>
+        {% if object.study.redirect_boolean %}
+        <div class="row justify-content-center">
+            <h4><a class="btn btn-danger btn-lg active" href="{{ object.study.redirect_url }}">{% trans "Click to complete the study" %}</a></h4>
+        </div>
+        {% endif %}
         
 
         <div class="row justify-content-center">

@@ -38,6 +38,7 @@ from cdi_forms.cat_forms.models import CatResponse, InstrumentItem
 
 def get_study_scores(administrations):
     scores = SummaryData.objects.values('administration_id', 'title','value').filter(administration_id__in = administrations)
+    if not scores : return ''
     melted_scores = pd.DataFrame.from_records(scores).pivot(index='administration_id', columns='title', values='value')
     melted_scores.reset_index(level=0, inplace=True)
     return melted_scores
@@ -60,11 +61,11 @@ def get_score_headers(study_obj):
 
 def get_background_header(study_obj):
     # Fetch background data variables
-    background_header = ['age','sex','country','zip_code', 
+    background_header = ['prolific_pid','age','sex','country','zip_code', 
         'birth_order', 'birth_weight_lb', 'birth_weight_confirmation_lb','birth_weight_kg','birth_weight_confirmation_kg', 
         'multi_birth_boolean','multi_birth', 'sibling_boolean','sibling_count','sibling_data','born_on_due_date', 'early_or_late', 
         'due_date_diff', 'mother_yob', 'mother_yob_confirmation', 'mother_education','father_yob', 'father_education', 
-        'annual_income', 'child_hispanic_latino', 'child_ethnicity', 'caregiver_info', 'other_languages_boolean', 
+        'annual_income', 'child_hispanic_latino', 'child_ethnicity', 'caregiver_info', 'caregiver_other','other_languages_boolean', 
         'other_languages','language_from', 'language_days_per_week', 'language_hours_per_day', 'ear_infections_boolean',
         'ear_infections', 'hearing_loss_boolean','hearing_loss', 'vision_problems_boolean','vision_problems', 
         'illnesses_boolean','illnesses', 'services_boolean','services','worried_boolean','worried',
@@ -73,6 +74,8 @@ def get_background_header(study_obj):
         background_header.remove("birth_weight_confirmation_lb")
         background_header.remove("birth_weight_confirmation_kg")
         background_header.remove("mother_yob_confirmation")
+    if not study_obj.prolific_boolean:
+        background_header.remove('prolific_pid')
     return background_header
 
 def format_admin_data(pd, study_obj, administrations, admin_header):
@@ -196,6 +199,8 @@ def download_data(request, study_obj, administrations = None): # Download study 
     response['Content-Disposition'] = 'attachment; filename="' + filename + '"'# Name the CSV response
     
     administrations = administrations if administrations is not None else administration.objects.filter(study = study_obj)
+    if not administrations.filter(completed=True).exists():
+        return HttpResponseServerError("You must select at least 1 completed survery")
     #administrations = administrations.exclude(opt_out=True)
     model_header = get_model_header(study_obj.instrument.name) # Fetch the associated instrument model's variables
 
@@ -244,6 +249,7 @@ def download_data(request, study_obj, administrations = None): # Download study 
 
     # Add scoring
     melted_scores = get_study_scores(administrations)
+    if len(melted_scores) < 1 : return HttpResponseServerError(f'There are no data in the study(ies) to report')
     score_header = get_score_headers(study_obj)
     melted_scores.set_index('administration_id')
     missing_columns = list(set(score_header) - set(melted_scores.columns))
@@ -310,6 +316,8 @@ def download_summary(request, study_obj, administrations = None): # Download stu
     response['Content-Disposition'] = 'attachment; filename="' + filename + '"'# Name the CSV response
     
     administrations = administrations if administrations is not None else administration.objects.filter(study = study_obj)
+    if not administrations.filter(completed=True).exists():
+        return HttpResponseServerError("You must select at least 1 completed survery")
     #administrations = administrations.exclude(opt_out=True)
 
     admin_header = format_admin_header(study_obj)
@@ -337,6 +345,7 @@ def download_summary(request, study_obj, administrations = None): # Download stu
 
     # Add scoring
     melted_scores = get_study_scores(administrations)
+    if len(melted_scores) < 1 : return HttpResponseServerError(f'There are no data in the study(ies) to report')
     score_header = get_score_headers(study_obj)
     melted_scores.set_index('administration_id')
     missing_columns = list(set(score_header) - set(melted_scores.columns))
@@ -500,7 +509,7 @@ def console(request, study_name = None, num_per_page = 20): # Main giant functio
                 if 'administer-selected' in request.POST: # If the 'Re-administer Participants' button was clicked
                     num_ids = map(int, ids) # Force numeric IDs into a list of integers
                     new_administrations = []
-                    sids_created = set()
+                    sids_created = set() #This is used to ensure we don't add the same subject twice if it is ticked twice with different repeat_nums
 
                     for nid in num_ids: # For each ID number
                         admin_instance = administration.objects.get(id = nid) # Grab the associated administration object
@@ -525,7 +534,6 @@ def console(request, study_name = None, num_per_page = 20): # Main giant functio
                     administrations = administration.objects.filter(id__in = ids) # Grab a queryset of administration objects with administration IDs found in list
                     return download_links(request, study_obj, administrations) # Send queryset to download_links function to return a CSV of subject data
                     refresh = True # Refresh page to reflect table changes
-
 
                 elif 'download-selected' in request.POST: # If 'Download Selected Data' was clicked
                     num_ids = list(set(map(int, ids))) # Force IDs into a list of integers
@@ -603,7 +611,9 @@ def console(request, study_name = None, num_per_page = 20): # Main giant functio
                     excludes = list(administration_table.exclude)
                     excludes.append("completedSurvey")
                     administration_table.exclude = excludes
-
+                if 'view_all' in request.GET:
+                    study_obj = study.objects.get(researcher= request.user, name= study_name)
+                    if request.GET['view_all'] == 'all' : num_per_page = administration.objects.filter(study = study_obj).count()
                 RequestConfig(request, paginate={'per_page': num_per_page}).configure(administration_table)
                 context['current_study'] = current_study.name
                 context['num_per_page'] = num_per_page
@@ -946,6 +956,7 @@ def administer_new(request, study_name): # For creating new administrations
         context['username'] = request.user.username 
         context['study_name'] = study_name
         context['study_group'] = study_obj.study_group
+        context['object'] = study_obj
         return render(request, 'researcher_UI/administer_new_modal.html', context) # Render blank form with added context of username, current study name, and study group.
 
 def administer_new_participant(request, username, study_name): # used for wordful study
@@ -1010,6 +1021,9 @@ def administer_new_participant(request, username, study_name): # used for wordfu
             return redirect(reverse('administer_cdi_form', args=[admin.url_hash]))
 
 def administer_new_parent(request, username, study_name): # For creating single administrations. Does not require a log-in. Participants can generate their own single-use administration if given the proper link,
+    if 'prolific_pid' in request.GET: prolific_pid = request.GET['prolific_pid']
+    else : prolific_pid = None
+
     data={}
     researcher = User.objects.get(username = username) # Get researcher's username. Different method because current user may not be the researcher and may not be logged in
     study_obj = study.objects.get(name= study_name, researcher = researcher) # Find the study object associated with the researcher and study name
@@ -1037,7 +1051,7 @@ def administer_new_parent(request, username, study_name): # For creating single 
         if study_obj.instrument.form in ['CAT']:
             return redirect (reverse('cat_forms:create-new-background-info', kwargs={'study_id' : study_obj.id, 'bypass' : bypass}))
         else:
-            return redirect (reverse('create-new-background-info', kwargs={'study_id' : study_obj.id, 'bypass' : bypass}))
+            return redirect (reverse('create-new-background-info', kwargs={'study_id' : study_obj.id, 'bypass' : bypass, 'prolific_pid': prolific_pid}))
     else: # If not marked as allowed
         redirect_url = reverse('overflow', args=[username, study_name]) # Generate URL for overflowed participants. May or may not have option for bypass depending on context (IP address and cookies)
     return redirect(redirect_url) # Redirect to generated URL
