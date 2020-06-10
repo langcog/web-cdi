@@ -1049,7 +1049,7 @@ def administer_new_parent(request, username, study_name): # For creating single 
 
     if let_through: # If marked as allowed
         if study_obj.instrument.form in ['CAT']:
-            return redirect (reverse('cat_forms:create-new-background-info', kwargs={'study_id' : study_obj.id, 'bypass' : bypass}))
+            return redirect (reverse('cat_forms:create-new-background-info', kwargs={'study_id' : study_obj.id, 'bypass' : bypass, 'prolific_pid': prolific_pid}))
         else:
             return redirect (reverse('create-new-background-info', kwargs={'study_id' : study_obj.id, 'bypass' : bypass, 'prolific_pid': prolific_pid}))
     else: # If not marked as allowed
