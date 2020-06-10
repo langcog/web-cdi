@@ -42,7 +42,7 @@ class Command(BaseCommand):
             input_instruments = instruments
 
         for curr_instrument in input_instruments:
-            if not curr_instrument['form'] in ['CAT']: continue
+            if not curr_instrument['form'] in settings.CAT_FORMS: continue
             instrument_language, instrument_form = curr_instrument['language'], curr_instrument['form']
 
             instrument_obj = instrument.objects.get(form=instrument_form, language=instrument_language)

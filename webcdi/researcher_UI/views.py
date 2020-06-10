@@ -555,14 +555,14 @@ def console(request, study_name = None, num_per_page = 20): # Main giant functio
 
                 elif 'download-study-csv' in request.POST: # If 'Download Data' button is clicked
                     administrations = administration.objects.filter(study = study_obj) # Grab a queryset of administration objects within study
-                    if study_obj.instrument.form in ['CAT']:
+                    if study_obj.instrument.form in settings.CAT_FORMS:
                         return download_cat_data(request, study_obj, administrations)
                     else:
                         return download_data(request, study_obj, administrations) # Send queryset to download_data and receive a CSV of responses
                 
                 elif 'download-summary-csv' in request.POST: # If 'Download Summary' button is clicked
                     administrations = administration.objects.filter(study = study_obj) # Grab a queryset of administration objects within study
-                    if study_obj.instrument.form in ['CAT']:
+                    if study_obj.instrument.form in settings.CAT_FORMS:
                         return download_cat_summary(request, study_obj, administrations)
                     else:
                         return download_summary(request, study_obj, administrations) # Send queryset to download_data and receive a CSV of responses
@@ -1048,7 +1048,7 @@ def administer_new_parent(request, username, study_name): # For creating single 
             let_through = True # Mark as allowed
 
     if let_through: # If marked as allowed
-        if study_obj.instrument.form in ['CAT']:
+        if study_obj.instrument.form in settings.CAT_FORMS:
             return redirect (reverse('cat_forms:create-new-background-info', kwargs={'study_id' : study_obj.id, 'bypass' : bypass, 'prolific_pid': prolific_pid}))
         else:
             return redirect (reverse('create-new-background-info', kwargs={'study_id' : study_obj.id, 'bypass' : bypass, 'prolific_pid': prolific_pid}))

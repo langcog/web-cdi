@@ -313,3 +313,5 @@ def get_linux_ec2_private_ip():
 private_ip = get_linux_ec2_private_ip()
 if private_ip:
     ALLOWED_HOSTS.append(private_ip)
+
+CAT_FORMS = ['CAT','CAT2']

@@ -44,7 +44,7 @@ class Command(BaseCommand):
             input_instruments = instruments
 
         for curr_instrument in input_instruments:
-            if curr_instrument['form'] in ['CAT']: continue
+            if curr_instrument['form'] in settings.CAT_FORMS: continue
 
             instrument_language, instrument_form = curr_instrument['language'], curr_instrument['form']
 
