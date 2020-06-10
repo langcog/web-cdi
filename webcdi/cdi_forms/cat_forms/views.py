@@ -1,4 +1,4 @@
-import numpy
+import numpy, os.path
 
 from django.shortcuts import render, redirect
 from django.views.generic import UpdateView
@@ -19,12 +19,13 @@ from .stopper import CustomStopper
 
 from cdi_forms.models import requests_log, BackgroundInfo
 
-from cdi_forms.views import BackgroundInfoView, CreateBackgroundInfoView, BackpageBackgroundInfoView
+from cdi_forms.views import BackgroundInfoView, CreateBackgroundInfoView, BackpageBackgroundInfoView, PROJECT_ROOT
 from researcher_UI.models import administration
 
 from .forms import CatItemForm
 from .models import InstrumentItem, CatResponse
 from .utils import string_bool_coerce
+
 # Create your views here.
 
 class CATBackgroundInfoView(BackgroundInfoView):
@@ -110,7 +111,12 @@ class AdministerAdministraionView(UpdateView):
 
         stopper = CustomStopper(self.min_words, self.max_words, self.min_error)
         if stopper.stop(administered_items=items[administered_items], theta=self.object.catresponse.est_theta):
-            self.object.completed = True
+            filename = os.path.realpath(PROJECT_ROOT + '/form_data/background_info/' + self.object.study.instrument.name + '.json')
+            print(filename)
+            if  os.path.isfile(filename):
+                self.object.completedSurvey = True
+            else :
+                self.object.completed = True
             self.object.save()
 
         self.object.catresponse.save()
@@ -145,6 +151,7 @@ class AdministerAdministraionView(UpdateView):
             return render(request, 'cdi_forms/cat_forms/cat_completed.html', context=self.get_context_data())
         background_instance, created = BackgroundInfo.objects.get_or_create(administration=self.object) 
         if self.object.completedSurvey:
+            print("Completed Survey")
             return redirect('backpage-background-info', pk=background_instance.pk)
         elif not self.object.completedBackgroundInfo:
             return redirect('background-info', pk=background_instance.pk)
