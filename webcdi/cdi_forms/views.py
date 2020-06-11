@@ -198,6 +198,10 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
         self.get_administration_instance()
+        if self.which_page == 'back' and not self.administration_instance.study.backpage_boolean:
+            self.administration_instance.completed=True
+            self.administration_instance.save()
+            return redirect(self.administration_instance.get_absolute_url())      
         self.get_study_context()
         self.get_user_language()
         self.background_form = self.get_background_form()        
@@ -208,8 +212,7 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
         #return super(BackgroundInfoView, self).get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
-        print("BackgroundInfoView POST")
-        self.object = self.get_object()
+        self.object = self.get_object()  
         self.get_administration_instance()
         self.get_hash_id()
         self.get_study_context()

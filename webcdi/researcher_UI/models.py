@@ -59,7 +59,7 @@ class study(models.Model):
     redirect_boolean = models.BooleanField(verbose_name="Provide redirect button at completion of study?", default=False) # Whether to give redirect button upon completion of administration
     redirect_url = models.URLField(blank=True, null=True) # The redirect URL
     prolific_boolean = models.BooleanField(default=False) # Whether this is capturing a link from Prolific
-
+    backpage_boolean = models.BooleanField(default=True, help_text="When selected the final demographics page will be shown - deselect to not show the final page")
 
     def __unicode__(self):
         return self.name

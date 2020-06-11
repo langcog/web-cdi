@@ -36,6 +36,7 @@ class AddStudyForm(BetterModelForm):
     redirect_url = forms.URLField(label="Please enter URL", required=False)
     
     prolific_boolean = forms.BooleanField(label="Capture the Prolific Id for the participant?", required=False) # Whether to give redirect button upon completion of administration
+    backpage_boolean = forms.BooleanField(label="Show backpage in split background information study?", required=False)
     
     # Form validation. Form is passed automatically to views.py for higher level checking.
     def clean(self):
@@ -77,6 +78,7 @@ class AddStudyForm(BetterModelForm):
             Field('redirect_boolean', css_class="css_enabler"),
             Div(Field('redirect_url'), css_class="redirect_boolean collapse"),
             Field('prolific_boolean'),
+            Field('backpage_boolean'),
         )
 
     # Form is related to the study model. Exclude study group designation (is done post-creation) and researcher name (filled automatically)
@@ -138,6 +140,7 @@ class RenameStudyForm(BetterModelForm):
     redirect_url = forms.URLField(label="Please enter URL", required=False)
 
     prolific_boolean = forms.BooleanField(label="Capture the Prolific Id for the participant?", required=False) # Whether to give redirect button upon completion of administration
+    backpage_boolean = forms.BooleanField(label="Show backpage in split background information study?", required=False)
     
     # Form validation. Form is passed automatically to views.py for higher level checking.
     def clean(self):
@@ -177,7 +180,7 @@ class RenameStudyForm(BetterModelForm):
             Field('redirect_boolean', css_class="css_enabler"), 
             Div(Field('redirect_url'), css_class="redirect_boolean collapse"),
             Field('prolific_boolean'),
-    
+            Field('backpage_boolean'),
         )
 
     # Link form to study model. Exclude study group (specified in another form), researcher (automatically filled by current user), and instrument (chosen during study creation and CANNOT BE CHANGED)

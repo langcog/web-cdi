@@ -151,7 +151,6 @@ class AdministerAdministraionView(UpdateView):
             return render(request, 'cdi_forms/cat_forms/cat_completed.html', context=self.get_context_data())
         background_instance, created = BackgroundInfo.objects.get_or_create(administration=self.object) 
         if self.object.completedSurvey:
-            print("Completed Survey")
             return redirect('backpage-background-info', pk=background_instance.pk)
         elif not self.object.completedBackgroundInfo:
             return redirect('background-info', pk=background_instance.pk)
