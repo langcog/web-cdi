@@ -54,6 +54,7 @@ class AddStudyForm(BetterModelForm):
         self.helper.label_class = 'col-3'
         self.helper.field_class = 'col-9'
         self.helper.form_method = 'post'
+        self.fields['backpage_boolean'].initial = True
 
         if self.researcher:
             self.fields['instrument'] = forms.ModelChoiceField(queryset=instrument.objects.filter(researcher = self.researcher.researcher), empty_label="(choose from the list)")
