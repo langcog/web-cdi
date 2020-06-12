@@ -320,7 +320,8 @@
 		"max_age": 36,
 		"csv_file": "cdi_form_csv/cat_forms/[English_CAT].csv",
 		"json_data": "",
-		"scoring_json" : ""
+		"scoring_json" : "",
+		"starting_words" : "cdi_form_csv/cat_forms/starting_words/[English_Ages_CAT].csv"
 	},{
 		"language": "English",
 		"form": "CAT2",
