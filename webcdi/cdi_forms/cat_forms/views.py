@@ -23,7 +23,7 @@ from cdi_forms.views import BackgroundInfoView, CreateBackgroundInfoView, Backpa
 from researcher_UI.models import administration
 
 from .forms import CatItemForm
-from .models import InstrumentItem, CatResponse
+from .models import InstrumentItem, CatResponse, CatStartingWord
 from .utils import string_bool_coerce
 
 # Create your views here.
@@ -173,6 +173,9 @@ class AdministerAdministraionView(UpdateView):
 
         item_index = selector.select(items=items, administered_items=administered_items, est_theta=self.est_theta)
 
-        self.word = self.instrument_items[int(item_index)]
+        if created and CatStartingWord.objects.filter(age=self.object.backgroundinfo.age, instrument=self.object.study.instrument).exists(): # first word might be specified by age
+            self.word = CatStartingWord.objects.get(age=self.object.backgroundinfo.age, instrument=self.object.study.instrument).instrument_item
+        else:    
+            self.word = self.instrument_items[int(item_index)]
 
         return super().get(request, *args, **kwargs) 

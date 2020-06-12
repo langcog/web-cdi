@@ -77,3 +77,30 @@ class Command(BaseCommand):
 
                     cat_item, created = instrument_items.objects.update_or_create(instrument=instrument_obj, definition=definition, defaults=data_dict,)
 
+            # Now do starting words
+            cat_starting_words = apps.get_model(app_label='cdi_forms', model_name='CatStartingWord')
+            if 'starting_words' in curr_instrument :
+                starting_words_filename = os.path.realpath(settings.BASE_DIR + '/' + curr_instrument['starting_words'])
+                
+                ftype = starting_words_filename.split('.')[-1]
+                if ftype == 'csv':
+                    contents = list(unicode_csv_reader(open(starting_words_filename, encoding="utf8")))
+                    col_names = contents[0]
+                    nrows = len(contents)
+                    get_row = lambda row: contents[row]
+                else:
+                    raise IOError("Starting Words file must be a CSV.")
+
+                for row in range(1, nrows):
+                    row_values = get_row(row)
+                    if len(row_values) > 1:
+                        age = int(row_values[col_names.index('age')])
+                        definition = row_values[col_names.index('definition')]
+
+                        instrument_item = instrument_items.objects.get(instrument=instrument_obj,definition=definition)
+                        
+                        data_dict = {'instrument_item': instrument_item,}
+
+                        age_item, created = cat_starting_words.objects.update_or_create(instrument=instrument_obj, age=age, defaults=data_dict)
+                
+                print(f'      Processed Starting words for {instrument_obj}')
