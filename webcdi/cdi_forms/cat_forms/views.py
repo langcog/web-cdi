@@ -173,7 +173,7 @@ class AdministerAdministraionView(UpdateView):
 
         item_index = selector.select(items=items, administered_items=administered_items, est_theta=self.est_theta)
 
-        if created and CatStartingWord.objects.filter(age=self.object.backgroundinfo.age, instrument=self.object.study.instrument).exists(): # first word might be specified by age
+        if len(administered_words) < 1 and CatStartingWord.objects.filter(age=self.object.backgroundinfo.age, instrument=self.object.study.instrument).exists(): # first word might be specified by age
             self.word = CatStartingWord.objects.get(age=self.object.backgroundinfo.age, instrument=self.object.study.instrument).instrument_item
         else:    
             self.word = self.instrument_items[int(item_index)]
