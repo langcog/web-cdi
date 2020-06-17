@@ -12,7 +12,7 @@ class Command(BaseCommand):
         print (f'Starting at %s' % (datetime.datetime.now()))
         count = 0
         thousands = 0
-        for instance in administration.objects.filter(study__name="norming_wg_11_19"):
+        for instance in administration.objects.filter(study__name="ws1"):
             count += 1
             update_summary_scores(instance)
             if count == 10:
