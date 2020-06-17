@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import UpdateView
 from django.http import Http404
 from django.utils import timezone
+from django.db.models import Min
 
 # simulation package contains the Simulator and all abstract classes
 from catsim.simulation import *
@@ -101,9 +102,10 @@ class AdministerAdministraionView(UpdateView):
                 administered_items.append(index)
                 break
 
-        estimator = HillClimbingEstimator()
-        new_theta = estimator.estimate(items=items, administered_items=administered_items, response_vector=administered_responses, est_theta=self.object.catresponse.est_theta)
-
+        lower_bound = self.instrument_items.order_by('difficulty')[0].difficulty
+        upper_bound = self.instrument_items.order_by('-difficulty')[0].difficulty
+        estimator = DifferentialEvolutionEstimator(bounds=(lower_bound,upper_bound))
+        new_theta = estimator.estimate(items=items, administered_items=administered_items, response_vector=administered_responses, est_theta=self.object.catresponse.est_theta, verbose=True)
         self.object.catresponse.administered_responses=administered_responses
         self.object.catresponse.administered_items=administered_items
         self.object.catresponse.administered_words = administered_words
@@ -112,7 +114,6 @@ class AdministerAdministraionView(UpdateView):
         stopper = CustomStopper(self.min_words, self.max_words, self.min_error)
         if stopper.stop(administered_items=items[administered_items], theta=self.object.catresponse.est_theta):
             filename = os.path.realpath(PROJECT_ROOT + '/form_data/background_info/' + self.object.study.instrument.name + '.json')
-            print(filename)
             if  os.path.isfile(filename):
                 self.object.completedSurvey = True
             else :
