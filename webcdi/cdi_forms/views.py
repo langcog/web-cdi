@@ -66,6 +66,7 @@ def prefilled_background_form(administration_instance, front_page=True):
     context['max_age'] = administration_instance.study.max_age
     context['birthweight_units'] = administration_instance.study.birth_weight_units
     context['study_obj'] = administration_instance.study
+    context['study'] = administration_instance.study
     context['prolific_pid'] = administration_instance.backgroundinfo.prolific_pid
     
     if front_page: background_form = BackgroundForm(instance = background_instance, context = context, page="front")  
