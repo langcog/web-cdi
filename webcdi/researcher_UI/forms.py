@@ -36,7 +36,7 @@ class AddStudyForm(BetterModelForm):
     redirect_url = forms.URLField(label="Please enter URL", required=False)
     
     prolific_boolean = forms.BooleanField(label="Capture the Prolific Id for the participant?", required=False) # Whether to give redirect button upon completion of administration
-    
+    print_my_answers_boolean = forms.BooleanField(label="Allow participant to print their responses at end of Study?", required=False) 
     # Form validation. Form is passed automatically to views.py for higher level checking.
     def clean(self):
         cleaned_data = super(AddStudyForm, self).clean()
@@ -77,6 +77,7 @@ class AddStudyForm(BetterModelForm):
             Field('redirect_boolean', css_class="css_enabler"),
             Div(Field('redirect_url'), css_class="redirect_boolean collapse"),
             Field('prolific_boolean'),
+            Field('print_my_answers_boolean')
         )
 
     # Form is related to the study model. Exclude study group designation (is done post-creation) and researcher name (filled automatically)
@@ -138,7 +139,7 @@ class RenameStudyForm(BetterModelForm):
     redirect_url = forms.URLField(label="Please enter URL", required=False)
 
     prolific_boolean = forms.BooleanField(label="Capture the Prolific Id for the participant?", required=False) # Whether to give redirect button upon completion of administration
-    
+    print_my_answers_boolean = forms.BooleanField(label="Allow participant to print their responses at end of Study?", required=False) 
     # Form validation. Form is passed automatically to views.py for higher level checking.
     def clean(self):
         cleaned_data = super(RenameStudyForm, self).clean()
@@ -177,6 +178,7 @@ class RenameStudyForm(BetterModelForm):
             Field('redirect_boolean', css_class="css_enabler"), 
             Div(Field('redirect_url'), css_class="redirect_boolean collapse"),
             Field('prolific_boolean'),
+            Field('print_my_answers_boolean')
     
         )
 
