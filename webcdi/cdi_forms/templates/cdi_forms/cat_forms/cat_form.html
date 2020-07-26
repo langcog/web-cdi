@@ -123,7 +123,8 @@
         <div class="row pt10vh">
             <div class="col-12 center">
                 <h1>Can your child say ... {{ form.item.label }} ?</h1>
-                {{ form.word }}
+                {{ form.word_id }}
+                {{ form.label }}
                 {% if footnote %}{% trans "* or word used in your family" %}{% endif %}
             </div>
         </div>

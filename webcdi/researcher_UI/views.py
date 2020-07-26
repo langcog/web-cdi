@@ -34,7 +34,8 @@ from django.utils import translation
 
 from django.utils.translation import ugettext_lazy as _
 from cdi_forms.models import Instrument_Forms
-from cdi_forms.cat_forms.models import CatResponse, InstrumentItem
+from cdi_forms.cat_forms.models import CatResponse
+from cdi_forms.cat_forms.cdi_cat_api import cdi_cat_api
 
 def get_study_scores(administrations):
     scores = SummaryData.objects.values('administration_id', 'title','value').filter(administration_id__in = administrations)
@@ -122,7 +123,13 @@ def download_cat_data(request, study_obj, administrations=None):
     background_data = BackgroundInfo.objects.values().filter(administration__in=administrations)
     pd_background_data = pd.DataFrame.from_records(background_data)
 
-    answer_headers = [x.definition for x in InstrumentItem.objects.filter(instrument=study_obj.instrument)]
+    items = []
+    answer_headers = []
+    for count in range(678): 
+        items.append(count+1)
+        #print(f'itemDefinition?itemID={count+1}')
+        #answer_headers.append(cdi_cat_api(f'itemDefinition?itemID={count+1}'))
+    answer_headers = [x for x in cdi_cat_api(f'itemDefinitions?items={items}')]
 
     answers = CatResponse.objects.values('administration_id','est_theta','administered_words','administered_responses').filter(administration__in=administrations)
     rows = []
@@ -167,7 +174,11 @@ def download_cat_summary(request, study_obj, administrations=None):
     background_data = BackgroundInfo.objects.values().filter(administration__in=administrations)
     pd_background_data = pd.DataFrame.from_records(background_data)
 
-    answer_headers = [x.definition for x in InstrumentItem.objects.filter(instrument=study_obj.instrument)]
+    items = []
+    for count in range(670):
+        items.append(count+1)
+    #answer_headers = [x.definition for x in cdi_cat_api(f'{settings.CAT_API_BASE_URL}itemDefinitions?items={items}')]
+    answer_headers = [x for x in cdi_cat_api(f'itemDefinitions?items={items}')]
 
     answers = CatResponse.objects.values('administration_id','est_theta').filter(administration__in=administrations)
     rows = []

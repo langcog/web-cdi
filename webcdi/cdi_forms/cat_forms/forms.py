@@ -1,7 +1,6 @@
 from django import forms
 
 from researcher_UI.models import administration
-from .models import InstrumentItem
 
 from .utils import string_bool_coerce
 
@@ -15,21 +14,25 @@ class CatItemForm(forms.ModelForm):
         required=True, 
         label= "Does your child know?"
     )
-    word = forms.ModelChoiceField(
-        queryset=InstrumentItem.objects.all(),
+    word_id = forms.IntegerField(
+        widget=forms.HiddenInput,
+    )
+    label = forms.CharField(
+        max_length=50,
         widget=forms.HiddenInput,
     )
 
     class Meta:
         model = administration
-        fields = ['word','item']
+        fields = ['word_id','item','label']
         widgets = {
-            'word' : forms.HiddenInput()
+            'word_id' : forms.HiddenInput(),
+            'label' : forms.HiddenInput()
         }
 
     def __init__(self, *args, **kwargs):
         self.context = kwargs.pop('context', None)
         super().__init__(*args, **kwargs)
         try:
-            self.fields['item'].label = self.context['word'].definition
+            self.fields['item'].label = self.context['label']
         except: pass

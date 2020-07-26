@@ -24,8 +24,9 @@ from cdi_forms.views import BackgroundInfoView, CreateBackgroundInfoView, Backpa
 from researcher_UI.models import administration
 
 from .forms import CatItemForm
-from .models import InstrumentItem, CatResponse, CatStartingWord
+from .models import CatResponse
 from .utils import string_bool_coerce
+from .cdi_cat_api import cdi_cat_api
 
 # Create your views here.
 
@@ -57,8 +58,10 @@ class AdministerAdministraionView(UpdateView):
             items = InstrumentItem.objects.filter(id__in=self.object.catresponse.administered_items)
         except: items = None
         if items :
-            hardest = items.order_by('-difficulty')[0].definition
-            easiest = items.order_by('difficulty')[0].definition
+            hardest_item = cdi_cat_api(f'hardestWord?items={self.object.catresponse.administered_items}')
+            hardest = cdi_cat_api(f'itemDefinition?itemID={hardest_item}')
+            easiest_item = cdi_cat_api(f'easiestWord?items={self.object.catresponse.administered_items}')
+            easiest = cdi_cat_api(f'itemDefinition?itemID={easiest_item}')
         else : 
             hardest = None
             easiest = None
@@ -72,6 +75,7 @@ class AdministerAdministraionView(UpdateView):
             raise Http404("Administration not found")
         return obj
 
+    '''
     def get_items(self):
         self.instrument_items = InstrumentItem.objects.filter(instrument=self.object.study.instrument)
         items = []
@@ -79,6 +83,7 @@ class AdministerAdministraionView(UpdateView):
             items.append([instrument_item.discrimination, instrument_item.difficulty, instrument_item.guessing, instrument_item.upper_asymptote])
         
         return numpy.asarray(items, dtype=numpy.float32)
+    '''
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
@@ -89,30 +94,22 @@ class AdministerAdministraionView(UpdateView):
         administered_words = self.object.catresponse.administered_words or []
         administered_items = self.object.catresponse.administered_items or []
         
-        instrument_item = InstrumentItem.objects.get(id=int(self.request.POST['word']))
-        administered_words.append(instrument_item.definition)
+        self.word = {'index': self.request.POST['word_id'], 'definition' : self.request.POST['label']}
+        #instrument_item = InstrumentItem.objects.get(id=int(self.request.POST['word']))
+        administered_words.append(self.word['definition'])
         if 'yes' in self.request.POST:
             administered_responses.append(True)
         else:
             administered_responses.append(False)
 
-        items = self.get_items()
-        for index, item in enumerate(self.instrument_items):
-            if item == instrument_item:
-                administered_items.append(index)
-                break
-
-        lower_bound = self.instrument_items.order_by('difficulty')[0].difficulty
-        upper_bound = self.instrument_items.order_by('-difficulty')[0].difficulty
-        estimator = DifferentialEvolutionEstimator(bounds=(lower_bound,upper_bound))
-        new_theta = estimator.estimate(items=items, administered_items=administered_items, response_vector=administered_responses, est_theta=self.object.catresponse.est_theta, verbose=True)
-        self.object.catresponse.administered_responses=administered_responses
-        self.object.catresponse.administered_items=administered_items
+        administered_items.append(self.word['index'])
+        
+        self.object.catresponse.administered_responses = administered_responses
+        self.object.catresponse.administered_items = administered_items
         self.object.catresponse.administered_words = administered_words
-        self.object.catresponse.est_theta = new_theta
+        self.object.catresponse.save()
 
-        stopper = CustomStopper(self.min_words, self.max_words, self.min_error)
-        if stopper.stop(administered_items=items[administered_items], theta=self.object.catresponse.est_theta):
+        if len(administered_items) > 49 :
             filename = os.path.realpath(PROJECT_ROOT + '/form_data/background_info/' + self.object.study.instrument.name + '.json')
             if  os.path.isfile(filename):
                 self.object.completedSurvey = True
@@ -120,19 +117,18 @@ class AdministerAdministraionView(UpdateView):
                 self.object.completed = True
             self.object.save()
 
-        self.object.catresponse.save()
-
         self.request.METHOD = 'GET'
         return redirect('cat_forms:administer_cat_form', hash_id=self.hash_id)
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         
-        ctx['form'] = CatItemForm(context={'word':self.word}, initial={'word':self.word})
-        try:
-            if '*' in self.word.definition: ctx['footnote'] = True
-        except AttributeError:
-            pass
+        if self.word: 
+            ctx['form'] = CatItemForm(context={'label':self.word['definition']}, initial={'word_id':self.word['index'], 'label':self.word['definition']})
+            try:
+                if '*' in self.word['definition']: ctx['footnote'] = True
+            except AttributeError:
+                pass
 
         ctx['max_words'] = self.max_words
         if self.object.catresponse.administered_words:
@@ -156,7 +152,7 @@ class AdministerAdministraionView(UpdateView):
         elif not self.object.completedBackgroundInfo:
             return redirect('background-info', pk=background_instance.pk)
 
-        items = self.get_items()
+        #items = self.get_items()
 
         initializer = RandomInitializer()
         selector = MaxInfoSelector()
@@ -172,11 +168,15 @@ class AdministerAdministraionView(UpdateView):
         administered_words = self.object.catresponse.administered_words or []
         self.est_theta = self.object.catresponse.est_theta
 
-        item_index = selector.select(items=items, administered_items=administered_items, est_theta=self.est_theta)
+        #item_index = selector.select(items=items, administered_items=administered_items, est_theta=self.est_theta)
 
-        if len(administered_words) < 1 and CatStartingWord.objects.filter(age=self.object.backgroundinfo.age, instrument=self.object.study.instrument).exists(): # first word might be specified by age
-            self.word = CatStartingWord.objects.get(age=self.object.backgroundinfo.age, instrument=self.object.study.instrument).instrument_item
+        if len(administered_words) < 1 : # first word might be specified by age
+            self.word = cdi_cat_api(f'startItem?age_mos={self.object.backgroundinfo.age}')
+            #self.word = CatStartingWord.objects.get(age=self.object.backgroundinfo.age, instrument=self.object.study.instrument).instrument_item
         else:    
-            self.word = self.instrument_items[int(item_index)]
+            self.word = cdi_cat_api(f'nextItem?responses={list(map(int,administered_responses))}&items={administered_items}')
+            self.object.catresponse.est_theta = self.word['curTheta']
+            self.object.save()
+            #self.word = self.instrument_items[int(item_index)]
 
         return super().get(request, *args, **kwargs) 
