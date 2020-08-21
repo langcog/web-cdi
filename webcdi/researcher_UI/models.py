@@ -60,6 +60,7 @@ class study(models.Model):
     redirect_url = models.URLField(blank=True, null=True) # The redirect URL
     prolific_boolean = models.BooleanField(default=False) # Whether this is capturing a link from Prolific
     backpage_boolean = models.BooleanField(default=True, help_text="When selected the final demographics page will be shown - deselect to not show the final page")
+    print_my_answers_boolean = models.BooleanField(default=True) # Whether to show print my answers button to user
 
     def __unicode__(self):
         return self.name
@@ -124,7 +125,7 @@ class AdministrationSummary(administration):
 class administration_data(models.Model):
     administration = models.ForeignKey("administration", on_delete=models.CASCADE) # Associated administration
     item_ID = models.CharField(max_length = 101) # ID associated for each CDI item
-    value = models.CharField(max_length=200) # Response given by participant to this particular item
+    value = models.CharField(max_length=600) # Response given by participant to this particular item
     class Meta:
         unique_together = ('administration', 'item_ID') # Each administation_data object must have a unique combination of administration ID and item ID.
     def __unicode__(self):

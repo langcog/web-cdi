@@ -65,6 +65,7 @@ def prefilled_background_form(administration_instance, front_page=True):
     context['min_age'] = administration_instance.study.min_age
     context['max_age'] = administration_instance.study.max_age
     context['birthweight_units'] = administration_instance.study.birth_weight_units
+    context['study_obj'] = administration_instance.study
     context['study'] = administration_instance.study
     context['prolific_pid'] = administration_instance.backgroundinfo.prolific_pid
     
@@ -918,16 +919,15 @@ def printable_view(request, hash_id):
     context['prolific_pid'] = administration_instance.backgroundinfo.prolific_pid
     context['study_obj'] = administration_instance.study
     context['study'] = administration_instance.study
-    
-    try:
+    #try:
         #Get form from database
-        background_form = prefilled_background_form(administration_instance)
-        filename = os.path.realpath(PROJECT_ROOT + '/form_data/background_info/' + administration_instance.study.instrument.name + '.json')
-        if has_backpage(filename) :
-            backpage_background_form = prefilled_background_form(administration_instance, False)
-    except:
+    background_form = prefilled_background_form(administration_instance)
+    filename = os.path.realpath(PROJECT_ROOT + '/form_data/background_info/' + administration_instance.study.instrument.name + '.json')
+    if has_backpage(filename) :
+        backpage_background_form = prefilled_background_form(administration_instance, False)
+    #except:
         #Blank form
-        background_form = BackgroundForm(context = context, page="front")
+    #    background_form = BackgroundForm(context = context, page="front")
     
     prefilled_data['language'] = administration_instance.study.instrument.language
     prefilled_data['background_form'] = background_form
