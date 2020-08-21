@@ -116,7 +116,7 @@ class AdministrationSummary(administration):
 class administration_data(models.Model):
     administration = models.ForeignKey("administration", on_delete=models.CASCADE) # Associated administration
     item_ID = models.CharField(max_length = 101) # ID associated for each CDI item
-    value = models.CharField(max_length=200) # Response given by participant to this particular item
+    value = models.CharField(max_length=600) # Response given by participant to this particular item
     class Meta:
         unique_together = ('administration', 'item_ID') # Each administation_data object must have a unique combination of administration ID and item ID.
     def __unicode__(self):
