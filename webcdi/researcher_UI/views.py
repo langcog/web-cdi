@@ -550,13 +550,19 @@ def console(request, study_name = None, num_per_page = 20): # Main giant functio
                 elif 'download-selected' in request.POST: # If 'Download Selected Data' was clicked
                     num_ids = list(set(map(int, ids))) # Force IDs into a list of integers
                     administrations = administration.objects.filter(id__in = num_ids) # Grab a queryset of administration objects with administration IDs found in list
-                    return download_data(request, study_obj, administrations) # Send queryset to download_data function to return a CSV of subject data
+                    if study_obj.instrument.form in settings.CAT_FORMS:
+                        return download_cat_data(request, study_obj, administrations)
+                    else:
+                        return download_data(request, study_obj, administrations) # Send queryset to download_data function to return a CSV of subject data
                     refresh = True # Refresh page to reflect table changes
                 
                 elif 'download-selected-summary' in request.POST: # If 'Download Selected Data' was clicked
                     num_ids = list(set(map(int, ids))) # Force IDs into a list of integers
                     administrations = administration.objects.filter(id__in = num_ids) # Grab a queryset of administration objects with administration IDs found in list
-                    return download_summary(request, study_obj, administrations) # Send queryset to download_data function to return a CSV of subject data
+                    if study_obj.instrument.form in settings.CAT_FORMS:
+                        return download_cat_data(request, study_obj, administrations)
+                    else:
+                        return download_summary(request, study_obj, administrations) # Send queryset to download_data function to return a CSV of subject data
                     refresh = True # Refresh page to reflect table changes
 
                 elif 'delete-study' in request.POST: # If 'Delete Study' button is clicked
