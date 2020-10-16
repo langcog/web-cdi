@@ -104,10 +104,14 @@ class AdministerAdministraionView(UpdateView):
                 pass
 
         ctx['max_words'] = self.max_words
-        if self.object.catresponse.administered_words:
-            ctx['words_shown'] = len(self.object.catresponse.administered_words) + 1
-        else:
-            ctx['words_shown'] = 1
+        try:
+            if self.object.catresponse.administered_words:
+                ctx['words_shown'] = len(self.object.catresponse.administered_words) + 1
+            else:
+                ctx['words_shown'] = 1
+        except:
+            #we get here if the form is expired without being opened
+            ctx['words_shown'] = 0
 
         ctx['est_theta'] = self.est_theta
         ctx['due_date'] = self.object.due_date.strftime('%b %d, %Y, %I:%M %p')
