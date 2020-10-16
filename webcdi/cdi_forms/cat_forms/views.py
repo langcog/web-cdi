@@ -123,7 +123,7 @@ class AdministerAdministraionView(UpdateView):
 
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
-        if not self.object.completed and self.object.due_date > timezone.now(): 
+        if not self.object.completed and self.object.due_date < timezone.now(): 
             user_language = language_map(self.object.study.instrument.language)
             translation.activate(user_language)
             response = render (request, 'cdi_forms/expired.html', {}) # Render contact form template   
