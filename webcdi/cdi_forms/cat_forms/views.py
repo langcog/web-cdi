@@ -3,12 +3,12 @@ import os.path
 from django.shortcuts import render, redirect
 from django.views.generic import UpdateView
 from django.http import Http404
-from django.utils import timezone
+from django.utils import timezone, translation
 from django.db.models import Min
+from django.conf import settings
 
 from cdi_forms.models import requests_log, BackgroundInfo
-
-from cdi_forms.views import BackgroundInfoView, CreateBackgroundInfoView, BackpageBackgroundInfoView, PROJECT_ROOT
+from cdi_forms.views import BackgroundInfoView, CreateBackgroundInfoView, BackpageBackgroundInfoView, PROJECT_ROOT, language_map
 from researcher_UI.models import administration
 
 from .forms import CatItemForm
@@ -123,6 +123,12 @@ class AdministerAdministraionView(UpdateView):
 
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
+        if not self.object.completed and self.object.due_date > timezone.now(): 
+            user_language = language_map(self.object.study.instrument.language)
+            translation.activate(user_language)
+            response = render (request, 'cdi_forms/expired.html', {}) # Render contact form template   
+            response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
+            return response
         requests_log.objects.create(url_hash=self.hash_id, request_type="GET")
         if self.object.completed or self.object.due_date < timezone.now():
             return render(request, 'cdi_forms/cat_forms/cat_completed.html', context=self.get_context_data())
