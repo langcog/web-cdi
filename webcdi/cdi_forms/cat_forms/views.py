@@ -109,13 +109,16 @@ class AdministerAdministraionView(UpdateView):
                 ctx['words_shown'] = len(self.object.catresponse.administered_words) + 1
             else:
                 ctx['words_shown'] = 1
+            ctx['est_theta'] = self.est_theta
+            ctx['due_date'] = self.object.due_date.strftime('%b %d, %Y, %I:%M %p')
+            ctx['hardest'], ctx['easiest'] = self.get_hardest_easiest()
         except:
             #we get here if the form is expired without being opened
             ctx['words_shown'] = 0
-
-        ctx['est_theta'] = self.est_theta
-        ctx['due_date'] = self.object.due_date.strftime('%b %d, %Y, %I:%M %p')
-        ctx['hardest'], ctx['easiest'] = self.get_hardest_easiest()
+            ctx['est_theta'] = self.est_theta
+            ctx['due_date'] = self.object.due_date.strftime('%b %d, %Y, %I:%M %p')
+            ctx['hardest'], ctx['easiest'] = None, None
+        
         return ctx
 
     def get(self, request, *args, **kwargs):
