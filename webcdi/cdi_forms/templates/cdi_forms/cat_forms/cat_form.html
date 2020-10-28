@@ -143,6 +143,15 @@
 
 {% block scripts %}
 
+<script>
+function disableF5(e) { if ((e.which || e.keyCode) == 116) e.preventDefault(); };
+// To disable f5
+/* jQuery < 1.7 */
+$(document).bind("keydown", disableF5);
+/* OR jQuery >= 1.7 */
+//$(document).on("keydown", disableF5);
+</script>
+
 <!-- ReCaptcha. If study has a ReCaptcha option, the participant must have worked on the test for at least 6 minutes AND pass the ReCaptcha test for the submit button to appear. Otherwise, participant only has to have worked on the test for 6 minutes. -->
 {% if captcha == 'True' %}
     <script>
