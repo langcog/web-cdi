@@ -6,6 +6,7 @@ from django.core.validators import MaxValueValidator,MinValueValidator
 from django.shortcuts import reverse, redirect
 from ckeditor_uploader.fields import RichTextUploadingField
 
+from . import choices
 # Model for individual instruments
 class instrument(models.Model):
     name = models.CharField(max_length = 51, primary_key=True) # Instrument short name
@@ -61,6 +62,9 @@ class study(models.Model):
     prolific_boolean = models.BooleanField(default=False) # Whether this is capturing a link from Prolific
     backpage_boolean = models.BooleanField(default=True, help_text="When selected the final demographics page will be shown - deselect to not show the final page")
     print_my_answers_boolean = models.BooleanField(default=True) # Whether to show print my answers button to user
+
+    end_message = models.CharField(max_length=10, choices=choices.END_MESSAGE_CHOICES, default='standard')
+    end_message_text = RichTextUploadingField(blank=True, null=True)
 
     def __unicode__(self):
         return self.name

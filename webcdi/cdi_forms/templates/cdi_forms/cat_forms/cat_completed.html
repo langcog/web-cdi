@@ -27,11 +27,12 @@
     <div class = "col-md-12">
     <!-- Thank you letter written to participants upon completion with the CDI logo. If participant is meant to be compensated, letter will also include a gift card code, monetary amount, and instructions on how to redeem the gift card. -->
         <div class="row">
-            <div class="row">
-                <div class="col-lg-4 col-8 mx-auto">
-                    <img src={% static 'images/logo_bg.jpg' %} class="rounded mx-auto d-block" alt="{% trans 'MB-CDI Lab Logo' %}" style="width: 100%"> <br>
-                </div>
+            <div class="col-lg-4 col-8 mx-auto">
+                <img src={% static 'images/logo_bg.jpg' %} class="rounded mx-auto d-block" alt="{% trans 'MB-CDI Lab Logo' %}" style="width: 100%"> <br>
             </div>
+        </div>
+        {% if object.study.end_message == 'standard' or object.study.end_message == 'combined' %}
+        <div class="row">
             <h4>
                 {% blocktrans %}Thank you for filling this out! Of the words we asked, the hardest word your child knows is "{{ easiest }}" and the easiest word is "{{ hardest }}".{% endblocktrans %}
             </h4>
@@ -39,6 +40,13 @@
                 {% blocktrans %}Thank you for taking the time to complete the MacArthur-Bates Communicative Development Inventory (CDI). With the help of parents and caregivers like you, we are working to learn more about the way that children’s language develops, and how that development varies across individual children and cultures. Remember that the CDI lists many different words that are used by many different children. Don’t worry if your child only knows a few of them right now. If you have any concerns about your child’s development, we recommend that you talk with your child’s physician. If you enjoyed our assessment, you can learn more about the CDI here. We appreciate your contribution!{% endblocktrans %}
             </h4>
         </div>
+        {% endif %}
+        {% if object.study.end_message == 'bespoke' or object.study.end_message == 'combined' %}
+        <div class="row">
+            {{ object.study.end_message_text|safe }}
+        </div>
+        {% endif %}
+
     </div>
 </body>
 </html>
