@@ -17,7 +17,7 @@
     {% endif %}
 {% endblock %}
 
-{% block main%}
+{% block main %}
 {% csrf_token %}
 
 <!-- Actual CDI form. Sections are broken into pages and automatically collapse and extend based on changePages function -->
@@ -130,10 +130,10 @@
         </div>
         <div class="row pt10vh">
             <div class="col-6 center">
-                <button type="submit" name="no" class="btn btn-danger btn-lg">{% trans 'No' %}</button>
+                <button id="id_no" type="submit" name="no" class="btn btn-danger btn-lg">{% trans 'No' %}</button>
             </div>
             <div class="col-6 center">
-                <button type="submit" name="yes" class="btn btn-success btn-lg">{% trans 'Yes' %}</button>
+                <button id="id_yes" type="submit" name="yes" class="btn btn-success btn-lg">{% trans 'Yes' %}</button>
             </div>
         </div>
     </div>
@@ -206,6 +206,20 @@ $(document).ready(function () {
     $('#id_btn_instructions').on('click', function (e) {
         e.preventDefault();
         changePages(0)
+    });
+});
+</script>
+
+
+<script>
+
+$(document).ready(function() {
+    //Toggle form closed when Yes/No pressed
+    $("#id_yes").click(function() {
+        $("#cdi_form").toggle();
+    });
+    $("#id_no").click(function() {
+        $("#cdi_form").toggle();
     });
 });
 </script>
