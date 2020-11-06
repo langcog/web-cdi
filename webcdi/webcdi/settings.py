@@ -89,6 +89,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'axes.middleware.AxesMiddleware',
+    'webcdi.middleware.LoginRequiredMiddleware',
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -316,3 +317,15 @@ if private_ip:
 
 CAT_FORMS = ['CAT','CAT2']
 CAT_API_BASE_URL = os.environ.get('CAT_API_URL',"http://cdicatapi-env.eba-c2knb6uj.us-west-2.elasticbeanstalk.com/")
+
+LOGIN_EXEMPT_URLS = (
+  r'^registration/logout/$',
+  r'^registration/register/$',
+  r'^registration/password-reset/$',
+  r'^registration/password-reset/done/$',
+  r'^registration/password-reset/confirm/',
+  r'^registration/password-reset/complete/$',
+  r'^registration/password/change/$',
+  r'^registration/password/change/',
+  r'^',
+)
