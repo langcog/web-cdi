@@ -1,5 +1,5 @@
 END_MESSAGE_CHOICES = [
     ('standard' , 'Standard'),
-    ('bespoke', 'Bespoke'),
+    ('bespoke', 'Custom'),
     ('combined', 'Combined'),
 ]

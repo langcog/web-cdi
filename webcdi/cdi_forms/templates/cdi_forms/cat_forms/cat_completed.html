@@ -31,6 +31,11 @@
                 <img src={% static 'images/logo_bg.jpg' %} class="rounded mx-auto d-block" alt="{% trans 'MB-CDI Lab Logo' %}" style="width: 100%"> <br>
             </div>
         </div>
+        {% if object.study.end_message == 'bespoke' or object.study.end_message == 'combined' %}
+        <div class="row">
+            {{ object.study.end_message_text|safe }}
+        </div>
+        {% endif %}
         {% if object.study.end_message == 'standard' or object.study.end_message == 'combined' %}
         <div class="row">
             <h4>
@@ -41,11 +46,7 @@
             </h4>
         </div>
         {% endif %}
-        {% if object.study.end_message == 'bespoke' or object.study.end_message == 'combined' %}
-        <div class="row">
-            {{ object.study.end_message_text|safe }}
-        </div>
-        {% endif %}
+
 
     </div>
 </body>
