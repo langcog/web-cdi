@@ -1,7 +1,9 @@
 {% load i18n cdiform_tags %}
 {% to_list 'Dutch' as language_list %}
-{% if 'WG' in instrument or 'L1' in instrument or %}
+{% if 'WG' in instrument or 'L1' in instrument %}
     {% set_true as show_produced %}
+{% else %}
+    {% set_false as show_produced %}
 {% endif %}
 
 <html lang="en">
@@ -328,6 +330,7 @@
 
         // Load word-level data for participant. Parse into 2 or 3 bins depending on instrument type.
         var words = root.filter(function(d) { return d.item_type == "word"; });
+        console.log(words);
         $.each(words, function(index, value){
             value.definition = value.definition.toLowerCase();
             value.num_value = 'neither';
@@ -346,7 +349,7 @@
                             }
                             catch { console.log("No value.choices[1][2]")}    
                     }
-                } else if ({{ show_produced }} == True) {
+                } else if ('{{ show_produced }}' == 'True') {
                     if (value.choices[0][2]) {
                         value.num_value = 'understands';
                     } else if (value.choices[1][2]) {
@@ -599,8 +602,10 @@
                 $('#hardest_words').append('<h2>' + '{% trans "The hardest word my child says is INSERTWORDHERE." %}<br>'.replace(/INSERTWORDHERE/g, '"' + high_prod_word + '"') + '</h2>')
             }
 
-            if (typeof(high_comp_word) !== 'undefined') {
-                $('#hardest_words').append('<h2>' + '{% trans "The hardest word my child understands is INSERTWORDHERE." %}<br>'.replace(/INSERTWORDHERE/g,  '"' + high_comp_word + '"') + '</h2>')
+            else {
+                if (typeof(high_comp_word) !== 'undefined') {
+                    $('#hardest_words').append('<h2>' + '{% trans "The hardest word my child understands is INSERTWORDHERE." %}<br>'.replace(/INSERTWORDHERE/g,  '"' + high_comp_word + '"') + '</h2>')
+                }
             }
         });
 
