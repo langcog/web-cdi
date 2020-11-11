@@ -72,7 +72,7 @@
         // Set chart options
         var options = {
             'title': '{% trans 'Words Produced (%)' %}',
-            'width' : {% if show_produced or language in language_list %}500{% else %}1000{% endif %},
+            'width' : {% if show_produced or language in language_list %}550{% else %}1000{% endif %},
             'height':750,
             'legend': {position: 'none'},
             'vAxis' : { textStyle : { fontSize: 10} },
@@ -112,7 +112,7 @@
                 // Set chart options
                 var options = {
                     'title': '{% trans 'Words Understood (%)' %}',
-                    'width':500,
+                    'width':550,
                     'height':750,
                     'legend': {position: 'none'},
                     'vAxis' : { textStyle : { fontSize: 10} },
@@ -250,7 +250,7 @@
                     <div class="col-md-6 text-center" id="hardest_words"></div>
                 </div>
                 <br>
-                <div class = "row"> 
+                <div class = "row" style="margin-left:-65px; margin-right:-65px"> 
                     {% if show_produced or language in language_list %}
                         <div class="col-md-6 text-center">
                             <div id="categories_charts_understood"></div>
