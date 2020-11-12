@@ -199,6 +199,10 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
         self.get_administration_instance()
+        if self.which_page == 'back' and not self.administration_instance.study.backpage_boolean:
+            self.administration_instance.completed=True
+            self.administration_instance.save()
+            return redirect(self.administration_instance.get_absolute_url())      
         self.get_study_context()
         self.get_user_language()
         self.background_form = self.get_background_form()        
@@ -209,8 +213,7 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
         #return super(BackgroundInfoView, self).get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
-        print("BackgroundInfoView POST")
-        self.object = self.get_object()
+        self.object = self.get_object()  
         self.get_administration_instance()
         self.get_hash_id()
         self.get_study_context()
@@ -286,6 +289,7 @@ class BackpageBackgroundInfoView(BackgroundInfoView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         ctx['dont_show_waiver'] = True
+        print("BACKPAGE")
         return ctx
 
 def safe_harbor_zip_code(obj):
@@ -757,6 +761,9 @@ def parse_analysis(raw_answer):
 # Render CDI form. Dependent on prefilled_cdi_data
 def cdi_form(request, hash_id):
     administration_instance = get_administration_instance(hash_id) # Get administration instance.
+    if administration_instance.study.instrument.form in settings.CAT_FORMS : 
+        return redirect('cat_forms:administer_cat_form', hash_id=hash_id)
+
     instrument_name = administration_instance.study.instrument.name # Get instrument name associated with study
     instrument_model = model_map(instrument_name) # Fetch instrument model based on instrument name.
     refresh = False
@@ -1009,6 +1016,9 @@ def administer_cdi_form(request, hash_id):
         administration_instance = administration.objects.get(url_hash = hash_id)
     except:
         raise Http404("Administration not found")
+    
+    if administration_instance.study.instrument.form in settings.CAT_FORMS : 
+        return redirect('cat_forms:administer_cat_form', hash_id=hash_id)
 
     refresh = False
     if request.method == 'POST':

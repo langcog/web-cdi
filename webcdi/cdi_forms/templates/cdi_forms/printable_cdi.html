@@ -1,5 +1,10 @@
 {% load i18n cdiform_tags %}
 {% to_list 'Dutch' as language_list %}
+{% if 'WG' in instrument or 'L1' in instrument %}
+    {% set_true as show_produced %}
+{% else %}
+    {% set_false as show_produced %}
+{% endif %}
 
 <html lang="en">
 <head>
@@ -67,11 +72,11 @@
         // Set chart options
         var options = {
             'title': '{% trans 'Words Produced (%)' %}',
-            'width' : {% if 'WG' in instrument or language in language_list %}500{% else %}1000{% endif %},
+            'width' : {% if show_produced or language in language_list %}550{% else %}1000{% endif %},
             'height':750,
             'legend': {position: 'none'},
             'vAxis' : { textStyle : { fontSize: 10} },
-            'hAxis' : {viewWindow: { min:0 }},
+            'hAxis' : {viewWindow: { min:0, max:100 }},
             };
 
             // Instantiate and draw our chart, passing in some options.
@@ -90,7 +95,7 @@
         chart.draw(data, options);
       }
     
-        {% if 'WG' in instrument or language in language_list  %}
+        {% if show_produced or language in language_list  %}
             google.charts.setOnLoadCallback(drawUnderstoodChart);
             function drawUnderstoodChart() {
 
@@ -107,11 +112,11 @@
                 // Set chart options
                 var options = {
                     'title': '{% trans 'Words Understood (%)' %}',
-                    'width':500,
+                    'width':550,
                     'height':750,
                     'legend': {position: 'none'},
                     'vAxis' : { textStyle : { fontSize: 10} },
-                    'hAxis' : {viewWindow: { min:0 }},
+                    'hAxis' : {viewWindow: { min:0, max:100 }},
                     };
 
                 // Instantiate and draw our chart, passing in some options.
@@ -150,12 +155,15 @@
         <div class = "col-md-12">
         <!-- Thank you letter written to participants upon completion with the CDI logo. If participant is meant to be compensated, letter will also include a gift card code, monetary amount, and instructions on how to redeem the gift card. -->
             <div class="row">
-                <div class="row">
-                    <div class="col-lg-4 col-8 mx-auto">
-                        <img src={% static 'images/logo_bg.jpg' %} class="rounded mx-auto d-block" alt="{% trans 'MB-CDI Lab Logo' %}" style="width: 100%"> <br>
-                    </div>
+                <div class="col-lg-4 col-8 mx-auto">
+                    <img src={% static 'images/logo_bg.jpg' %} class="rounded mx-auto d-block" alt="{% trans 'MB-CDI Lab Logo' %}" style="width: 100%"> <br>
                 </div>
-                <h2>{% trans "Thank you!" %}</h2><br>
+            </div>
+            {% if object.study.end_message == 'standard' or object.study.end_message == 'combined' %}            
+            <div class="row">
+
+                <h2>{% trans "Thank you!" %} </h2><br>
+                <h1>{% for i in instrument_list%}{{ i }} X {% endfor %}</h1>
                 <h4>
                     {% blocktrans %}Thank you for taking the time to complete the MacArthur-Bates Communicative Development Inventory (CDI). With the help of parents and caregivers like you, we are working to learn more about the way that children’s language develops, and how that development varies across individual children and cultures. Remember that the CDI lists many different words that are used by many different children. Don’t worry if your child only knows a few of them right now. Below are some insights into your child’s developing vocabulary, based on our research. This summary is not a clinical evaluation. If you have any concerns about your child’s development, we recommend that you talk with your child’s physician. If you enjoyed our assessment, you can learn more about the CDI <a href="http://mb-cdi.stanford.edu/" target="_blank">here</a>. We appreciate your contribution!{% endblocktrans %}
                 </h4>
@@ -189,6 +197,12 @@
 
                 <br><br>
             </div>
+            {% endif %}
+            {% if object.study.end_message == 'bespoke' or object.study.end_message == 'combined' %}
+                <div class="row">
+                    {{ object.study.end_message_text|safe }}
+                </div>
+            {% endif %}
             <br>
 
         </div>
@@ -236,8 +250,8 @@
                     <div class="col-md-6 text-center" id="hardest_words"></div>
                 </div>
                 <br>
-                <div class = "row"> 
-                    {% if 'WG' in instrument or language in language_list %}
+                <div class = "row" style="margin-left:-65px; margin-right:-65px"> 
+                    {% if show_produced or language in language_list %}
                         <div class="col-md-6 text-center">
                             <div id="categories_charts_understood"></div>
                             <input id="save-understood-pdf" type="button" value="{% trans 'Save as PDF' %}" disabled />
@@ -316,6 +330,7 @@
 
         // Load word-level data for participant. Parse into 2 or 3 bins depending on instrument type.
         var words = root.filter(function(d) { return d.item_type == "word"; });
+        console.log(words);
         $.each(words, function(index, value){
             value.definition = value.definition.toLowerCase();
             value.num_value = 'neither';
@@ -334,7 +349,7 @@
                             }
                             catch { console.log("No value.choices[1][2]")}    
                     }
-                } else if (root.instrument_name.indexOf('WG') > -1) {
+                } else if ('{{ show_produced }}' == 'True') {
                     if (value.choices[0][2]) {
                         value.num_value = 'understands';
                     } else if (value.choices[1][2]) {
@@ -587,8 +602,10 @@
                 $('#hardest_words').append('<h2>' + '{% trans "The hardest word my child says is INSERTWORDHERE." %}<br>'.replace(/INSERTWORDHERE/g, '"' + high_prod_word + '"') + '</h2>')
             }
 
-            if (typeof(high_comp_word) !== 'undefined') {
-                $('#hardest_words').append('<h2>' + '{% trans "The hardest word my child understands is INSERTWORDHERE." %}<br>'.replace(/INSERTWORDHERE/g,  '"' + high_comp_word + '"') + '</h2>')
+            else {
+                if (typeof(high_comp_word) !== 'undefined') {
+                    $('#hardest_words').append('<h2>' + '{% trans "The hardest word my child understands is INSERTWORDHERE." %}<br>'.replace(/INSERTWORDHERE/g,  '"' + high_comp_word + '"') + '</h2>')
+                }
             }
         });
 

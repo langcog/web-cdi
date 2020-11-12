@@ -21,6 +21,7 @@ from supplementtut.views import *
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.urls import path
 from django.contrib import admin
 
 urlpatterns = [
@@ -29,6 +30,7 @@ urlpatterns = [
     url(r'^robots\.txt', RedirectView.as_view(url='/static/robots.txt', permanent=True)),
     url(r'^wcadmin/', admin.site.urls),
     url(r'^form/', include('cdi_forms.urls')),
+    #path('cat/', include(('cdi_forms.cat_forms.urls', 'cat_forms'), namespace="cat_forms")),
     url(r'^accounts/login/$', auth_views.LoginView.as_view(), {'template_name': 'registration/login.html'}),
     url(r'^accounts/logout/$', auth_views.LogoutView.as_view(), {'next_page': 'interface/'}),
     url(r'^accounts/profile/$', RedirectView.as_view(url='/interface/', permanent=False), name='interface'),

@@ -3,8 +3,10 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator,MinValueValidator
+from django.shortcuts import reverse, redirect
 from ckeditor_uploader.fields import RichTextUploadingField
 
+from . import choices
 # Model for individual instruments
 class instrument(models.Model):
     name = models.CharField(max_length = 51, primary_key=True) # Instrument short name
@@ -58,7 +60,11 @@ class study(models.Model):
     redirect_boolean = models.BooleanField(verbose_name="Provide redirect button at completion of study?", default=False) # Whether to give redirect button upon completion of administration
     redirect_url = models.URLField(blank=True, null=True) # The redirect URL
     prolific_boolean = models.BooleanField(default=False) # Whether this is capturing a link from Prolific
+    backpage_boolean = models.BooleanField(default=True, help_text="When selected the final demographics page will be shown - deselect to not show the final page")
     print_my_answers_boolean = models.BooleanField(default=True) # Whether to show print my answers button to user
+
+    end_message = models.CharField(max_length=10, choices=choices.END_MESSAGE_CHOICES, default='standard')
+    end_message_text = RichTextUploadingField(blank=True, null=True)
 
     def __unicode__(self):
         return self.name
@@ -105,6 +111,13 @@ class administration(models.Model):
 
     def get_meta_data(self):
         return [self.study, self.subject_id, self.repeat_num, self.url_hash, self.completed, self.completedBackgroundInfo, self.due_date, self.last_modified]
+
+    def get_absolute_url(self):
+        if self.study.instrument.form in ['CAT']:
+            return reverse('cat_forms:administer_cat_form', kwargs={'hash_id' : self.url_hash})
+        else :
+            return reverse('administer_cdi_form', kwargs={'hash_id' :self.url_hash})
+    
 
 class AdministrationSummary(administration):
     class Meta:

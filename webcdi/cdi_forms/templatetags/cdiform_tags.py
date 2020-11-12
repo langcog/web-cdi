@@ -21,3 +21,11 @@ def translate(choice, instrument_name):
 @register.simple_tag
 def to_list(*args):
     return args
+
+@register.simple_tag
+def set_true():
+    return True
+
+@register.simple_tag
+def set_false():
+    return False

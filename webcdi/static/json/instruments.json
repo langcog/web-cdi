@@ -5,9 +5,9 @@
 		"verbose_name": "Words and Sentences",
 		"min_age": 16,
 		"max_age": 30,
-		"csv_file": "cdi_form_csv/[English_WS].csv",
+		"csv_file": "cdi_form_csv/cdi_forms/[English_WS].csv",
 		"json_data": "cdi_forms/form_data/English_WS_meta.json",
-		"fillable_headers": "cdi_form_csv/EnglishWS_pdf_headers.csv",
+		"fillable_headers": "cdi_form_csv/cdi_forms/EnglishWS_pdf_headers.csv",
 		"scoring_json" : "cdi_forms/form_data/scoring/English_WS_scoring.json",
 		"benchmark" : "cdi_forms/form_data/benchmarking/English_WS_benchmark.csv"
 	},
@@ -17,7 +17,7 @@
 		"verbose_name": "CDI-III",
 		"min_age": 16,
 		"max_age": 30,
-		"csv_file": "cdi_form_csv/[English_CDI3].csv",
+		"csv_file": "cdi_form_csv/cdi_forms/[English_CDI3].csv",
 		"json_data": "cdi_forms/form_data/English_CDI3_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/English_CDI3_scoring.json"
 	},
@@ -27,9 +27,9 @@
 		"verbose_name": "Words and Gestures",
 		"min_age": 8,
 		"max_age": 18,
-		"csv_file": "cdi_form_csv/[English_WG].csv",
+		"csv_file": "cdi_form_csv/cdi_forms/[English_WG].csv",
 		"json_data": "cdi_forms/form_data/English_WG_meta.json",
-		"fillable_headers": "cdi_form_csv/EnglishWG_pdf_headers.csv",
+		"fillable_headers": "cdi_form_csv/cdi_forms/EnglishWG_pdf_headers.csv",
 		"scoring_json" : "cdi_forms/form_data/scoring/English_WG_scoring.json",
 		"benchmark" : "cdi_forms/form_data/benchmarking/English_WG_benchmark.csv"
 	},
@@ -39,7 +39,7 @@
 		"verbose_name": "Words and Gestures",
 		"min_age": 8,
 		"max_age": 18,
-		"csv_file": "cdi_form_csv/[Hebrew_WG].csv",
+		"csv_file": "cdi_form_csv/cdi_forms/[Hebrew_WG].csv",
 		"json_data": "cdi_forms/form_data/Hebrew_WG_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/Hebrew_WG_scoring.json"
 	},
@@ -49,7 +49,7 @@
 		"verbose_name": "Words and Sentences",
 		"min_age": 16,
 		"max_age": 30,
-		"csv_file": "cdi_form_csv/[Hebrew_WS].csv",
+		"csv_file": "cdi_form_csv/cdi_forms/[Hebrew_WS].csv",
 		"json_data": "cdi_forms/form_data/Hebrew_WS_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/Hebrew_WG_scoring.json"
 	},
@@ -59,7 +59,7 @@
 		"verbose_name": "Palabras & Enunciados",
 		"min_age": 16,
 		"max_age": 30,
-		"csv_file": "cdi_form_csv/[Spanish_WS].csv",
+		"csv_file": "cdi_form_csv/cdi_forms/[Spanish_WS].csv",
 		"json_data": "cdi_forms/form_data/Spanish_WS_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/Spanish_WS_scoring.json",
 		"benchmark" : "cdi_forms/form_data/benchmarking/Spanish_WS_benchmark.csv"
@@ -70,7 +70,7 @@
 		"verbose_name": "Primeras Palabras y Gestos",
 		"min_age": 8,
 		"max_age": 18,
-		"csv_file": "cdi_form_csv/[Spanish_WG].csv",
+		"csv_file": "cdi_form_csv/cdi_forms/[Spanish_WG].csv",
 		"json_data": "cdi_forms/form_data/Spanish_WG_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/Spanish_WG_scoring.json",
 		"benchmark" : "cdi_forms/form_data/benchmarking/Spanish_WG_benchmark.csv"
@@ -81,7 +81,7 @@
 		"verbose_name": "Mots et Énoncés",
 		"min_age": 16,
 		"max_age": 30,
-		"csv_file": "cdi_form_csv/[French_Quebec_WS].csv",
+		"csv_file": "cdi_form_csv/cdi_forms/[French_Quebec_WS].csv",
 		"json_data": "cdi_forms/form_data/French_Quebec_WS_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/French_Quebec_WS_scoring.json"
 	},
@@ -91,7 +91,7 @@
 		"verbose_name": "Mots et Gestes",
 		"min_age": 8,
 		"max_age": 16,
-		"csv_file": "cdi_form_csv/[French_Quebec_WG].csv",
+		"csv_file": "cdi_form_csv/cdi_forms/[French_Quebec_WG].csv",
 		"json_data": "cdi_forms/form_data/French_Quebec_WG_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/French_Quebec_WG_scoring.json"
 	},
@@ -101,7 +101,7 @@
 		"verbose_name": "Words and Sentences",
 		"min_age": 16,
 		"max_age": 30,
-		"csv_file": "cdi_form_csv/[Canadian_English_WS].csv",
+		"csv_file": "cdi_form_csv/cdi_forms/[Canadian_English_WS].csv",
 		"json_data": "cdi_forms/form_data/Canadian_English_WS_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/Canadian_English_WS_scoring.json"
 	},
@@ -111,7 +111,7 @@
 		"verbose_name": "Words and Gestures",
 		"min_age": 8,
 		"max_age": 16,
-		"csv_file": "cdi_form_csv/[Canadian_English_WG].csv",
+		"csv_file": "cdi_form_csv/cdi_forms/[Canadian_English_WG].csv",
 		"json_data": "cdi_forms/form_data/Canadian_English_WG_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/Canadian_English_WG_scoring.json"
 	},
@@ -121,7 +121,7 @@
 		"verbose_name": "Short Form Vocabulary Checklist: Level I",
 		"min_age": 8,
 		"max_age": 18,
-		"csv_file": "cdi_form_csv/[English_L1].csv",
+		"csv_file": "cdi_form_csv/cdi_forms/[English_L1].csv",
 		"json_data": "cdi_forms/form_data/English_L1_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/English_L1_WS_scoring.json"
 	},
@@ -131,7 +131,7 @@
 		"verbose_name": "Short Form Vocabulary Checklist: Level II (Form A)",
 		"min_age": 16,
 		"max_age": 30,
-		"csv_file": "cdi_form_csv/[English_L2A].csv",
+		"csv_file": "cdi_form_csv/cdi_forms/[English_L2A].csv",
 		"json_data": "cdi_forms/form_data/English_L2A_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/English_L2A_WS_scoring.json"
 	},
@@ -141,7 +141,7 @@
 		"verbose_name": "Short Form Vocabulary Checklist: Level II (Form B)",
 		"min_age": 16,
 		"max_age": 30,
-		"csv_file": "cdi_form_csv/[English_L2B].csv",
+		"csv_file": "cdi_form_csv/cdi_forms/[English_L2B].csv",
 		"json_data": "cdi_forms/form_data/English_L2B_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/English_L2B_WS_scoring.json"
 	},
@@ -151,9 +151,9 @@
 		"verbose_name": "Woorden en zinnen",
 		"min_age": 16,
 		"max_age": 30,
-		"csv_file": "cdi_form_csv/[Dutch_WS].csv",
+		"csv_file": "cdi_form_csv/cdi_forms/[Dutch_WS].csv",
 		"json_data": "cdi_forms/form_data/Dutch_WS_meta.json",
-		"fillable_headers": "cdi_form_csv/DutchWS_pdf_headers.csv",
+		"fillable_headers": "cdi_form_csv/cdi_forms/DutchWS_pdf_headers.csv",
 		"scoring_json" : "cdi_forms/form_data/scoring/Dutch_WS_scoring.json"
 	},
 	{
@@ -162,9 +162,9 @@
 		"verbose_name": "Woorden en gebaren",
 		"min_age": 8,
 		"max_age": 18,
-		"csv_file": "cdi_form_csv/[Dutch_WG].csv",
+		"csv_file": "cdi_form_csv/cdi_forms/[Dutch_WG].csv",
 		"json_data": "cdi_forms/form_data/Dutch_WG_meta.json",
-		"fillable_headers": "cdi_form_csv/DutchWG_pdf_headers.csv",
+		"fillable_headers": "cdi_form_csv/cdi_forms/DutchWG_pdf_headers.csv",
 		"scoring_json" : "cdi_forms/form_data/scoring/Dutch_WG_scoring.json"
 	},
 	{
@@ -173,9 +173,9 @@
 		"verbose_name": "Words and Sentences",
 		"min_age": 16,
 		"max_age": 30,
-		"csv_file": "cdi_form_csv/[English_WS].csv",
+		"csv_file": "cdi_form_csv/cdi_forms/[English_WS].csv",
 		"json_data": "cdi_forms/form_data/English_WS2_meta.json",
-		"fillable_headers": "cdi_form_csv/EnglishWS_pdf_headers.csv",
+		"fillable_headers": "cdi_form_csv/cdi_forms/EnglishWS_pdf_headers.csv",
 		"scoring_json" : "cdi_forms/form_data/scoring/English_WS_scoring.json",
 		"benchmark" : "cdi_forms/form_data/benchmarking/English_WS_benchmark.csv"
 	},
@@ -185,7 +185,7 @@
 		"verbose_name": "단어와 문장 (WS)",
 		"min_age": 16,
 		"max_age": 30,
-		"csv_file": "cdi_form_csv/[Korean_WS].csv",
+		"csv_file": "cdi_form_csv/cdi_forms/[Korean_WS].csv",
 		"json_data": "cdi_forms/form_data/Korean_WS_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/Korean_WS_scoring.json"
 	},
@@ -195,7 +195,7 @@
 		"verbose_name": "단어와 제스쳐 (WG)",
 		"min_age": 8,
 		"max_age": 18,
-		"csv_file": "cdi_form_csv/[Korean_WG].csv",
+		"csv_file": "cdi_form_csv/cdi_forms/[Korean_WG].csv",
 		"json_data": "cdi_forms/form_data/Korean_WG_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/Korean_WG_scoring.json"
 	},{
@@ -204,9 +204,9 @@
 		"verbose_name": "Words and Gestures",
 		"min_age": 8,
 		"max_age": 18,
-		"csv_file": "cdi_form_csv/[English_WG].csv",
+		"csv_file": "cdi_form_csv/cdi_forms/[English_WG].csv",
 		"json_data": "cdi_forms/form_data/English_WG_meta.json",
-		"fillable_headers": "cdi_form_csv/EnglishWG_pdf_headers.csv",
+		"fillable_headers": "cdi_form_csv/cdi_forms/EnglishWG_pdf_headers.csv",
 		"scoring_json" : "cdi_forms/form_data/scoring/English_WG_scoring.json",
 		"benchmark" : "cdi_forms/form_data/benchmarking/English_WG_benchmark.csv"
 	},
@@ -216,7 +216,7 @@
 		"verbose_name": "Palabras & Enunciados",
 		"min_age": 16,
 		"max_age": 30,
-		"csv_file": "cdi_form_csv/[Spanish_WS].csv",
+		"csv_file": "cdi_form_csv/cdi_forms/[Spanish_WS].csv",
 		"json_data": "cdi_forms/form_data/Spanish_WS_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/Spanish_WS_scoring.json",
 		"benchmark" : "cdi_forms/form_data/benchmarking/Spanish_WS_benchmark.csv"
@@ -227,7 +227,7 @@
 		"verbose_name": "Primeras Palabras y Gestos",
 		"min_age": 8,
 		"max_age": 18,
-		"csv_file": "cdi_form_csv/[Spanish_WG].csv",
+		"csv_file": "cdi_form_csv/cdi_forms/[Spanish_WG].csv",
 		"json_data": "cdi_forms/form_data/Spanish_WG_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/Spanish_WG_scoring.json",
 		"benchmark" : "cdi_forms/form_data/benchmarking/Spanish_WG_benchmark.csv"
@@ -238,7 +238,7 @@
 		"verbose_name": "Mots et Énoncés",
 		"min_age": 16,
 		"max_age": 30,
-		"csv_file": "cdi_form_csv/[French_Quebec_WS].csv",
+		"csv_file": "cdi_form_csv/cdi_forms/[French_Quebec_WS].csv",
 		"json_data": "cdi_forms/form_data/French_Quebec_WS2_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/French_Quebec_WS_scoring.json"
 	},
@@ -248,7 +248,7 @@
 		"verbose_name": "Mots et Gestes",
 		"min_age": 8,
 		"max_age": 16,
-		"csv_file": "cdi_form_csv/[French_Quebec_WG].csv",
+		"csv_file": "cdi_form_csv/cdi_forms/[French_Quebec_WG].csv",
 		"json_data": "cdi_forms/form_data/French_Quebec_WG2_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/French_Quebec_WG_scoring.json"
 	},
@@ -258,7 +258,7 @@
 		"verbose_name": "Words and Sentences",
 		"min_age": 16,
 		"max_age": 30,
-		"csv_file": "cdi_form_csv/[Canadian_English_WS].csv",
+		"csv_file": "cdi_form_csv/cdi_forms/[Canadian_English_WS].csv",
 		"json_data": "cdi_forms/form_data/Canadian_English_WS2_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/Canadian_English_WS_scoring.json"
 	},
@@ -268,7 +268,7 @@
 		"verbose_name": "Words and Gestures",
 		"min_age": 8,
 		"max_age": 16,
-		"csv_file": "cdi_form_csv/[Canadian_English_WG].csv",
+		"csv_file": "cdi_form_csv/cdi_forms/[Canadian_English_WG].csv",
 		"json_data": "cdi_forms/form_data/Canadian_English_WG2_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/Canadian_English_WG_scoring.json"
 	},
@@ -278,7 +278,7 @@
 		"verbose_name": "CDI-III",
 		"min_age": 16,
 		"max_age": 30,
-		"csv_file": "cdi_form_csv/[English_CDI3].csv",
+		"csv_file": "cdi_form_csv/cdi_forms/[English_CDI3].csv",
 		"json_data": "cdi_forms/form_data/English_CDI3B_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/English_CDI3_scoring.json"
 	},
@@ -288,7 +288,7 @@
 		"verbose_name": "Short Form Vocabulary Checklist: Level I",
 		"min_age": 8,
 		"max_age": 18,
-		"csv_file": "cdi_form_csv/[English_L1].csv",
+		"csv_file": "cdi_form_csv/cdi_forms/[English_L1].csv",
 		"json_data": "cdi_forms/form_data/English_L1B_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/English_L1_WS_scoring.json"
 	},
@@ -298,7 +298,7 @@
 		"verbose_name": "Short Form Vocabulary Checklist: Level II (Form A)",
 		"min_age": 16,
 		"max_age": 30,
-		"csv_file": "cdi_form_csv/[English_L2A].csv",
+		"csv_file": "cdi_form_csv/cdi_forms/[English_L2A].csv",
 		"json_data": "cdi_forms/form_data/English_L2AB_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/English_L2A_WS_scoring.json"
 	},
@@ -308,17 +308,37 @@
 		"verbose_name": "Short Form Vocabulary Checklist: Level II (Form B)",
 		"min_age": 16,
 		"max_age": 30,
-		"csv_file": "cdi_form_csv/[English_L2B].csv",
+		"csv_file": "cdi_form_csv/cdi_forms/[English_L2B].csv",
 		"json_data": "cdi_forms/form_data/English_L2BB_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/English_L2B_WS_scoring.json"
 	},
 	{
 		"language": "English",
+		"form": "CAT",
+		"verbose_name": "Computer Adaptive Test",
+		"min_age": 12,
+		"max_age": 36,
+		"csv_file": "cdi_form_csv/cat_forms/[English_CAT].csv",
+		"json_data": "",
+		"scoring_json" : "",
+		"starting_words" : "cdi_form_csv/cat_forms/starting_words/[English_Ages_CAT].csv"
+	},{
+		"language": "English",
+		"form": "CAT2",
+		"verbose_name": "CAT - Split Background Info",
+		"min_age": 12,
+		"max_age": 36,
+		"csv_file": "cdi_form_csv/cat_forms/[English_CAT].csv",
+		"json_data": "",
+		"scoring_json" : "",
+		"starting_words" : "cdi_form_csv/cat_forms/starting_words/[English_Ages_CAT].csv"
+	},{
+		"language" : "English",
 		"form": "L1H",
 		"verbose_name": "Short Form Vocabulary Checklist: Level I",
 		"min_age": 8,
 		"max_age": 18,
-		"csv_file": "cdi_form_csv/[English_L1].csv",
+		"csv_file": "cdi_form_csv/cdi_forms/[English_L1].csv",
 		"json_data": "cdi_forms/form_data/Henry_L1_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/English_L1_WS_scoring.json"
 	}

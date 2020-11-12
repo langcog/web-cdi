@@ -89,6 +89,15 @@
 
               $( "#id_age_range_0" ).val( '30' );
               $( "#id_age_range_1" ).val( '37' ); 
+            } else if ( current_instrument.indexOf('CAT') > -1 ) {
+              $('#slider_div').slider('values', 0, 12);
+              $('#slider_div').slider('values', 1, 36);     
+
+              $('#min').html( 12 );
+              $('#max').html( 36 ); 
+
+              $( "#id_age_range_0" ).val( '12' );
+              $( "#id_age_range_1" ).val( '36' ); 
             }
         });
 

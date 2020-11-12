@@ -1,0 +1,227 @@
+{% extends 'cdi_forms/cdi_base.html' %}
+{% load i18n bleach_markdown cat_forms_tags static %}
+
+
+{% block extra_css %}
+<link rel='stylesheet' href="{% static 'cdi_forms/cat_forms.css' %}">
+{% endblock %}
+
+<!-- Navigation buttons placed in cdi_base.html -->
+{% block nav_buttons %}
+    {% if not completed %}
+        <div class="button-wrapper">
+            <div class="flex-row d-flex justify-content-center">    
+                <input name="btn-back" value="{% trans 'Go back to Background Info' %}" class="btn btn-primary" type="submit">
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block main %}
+{% csrf_token %}
+
+<!-- Actual CDI form. Sections are broken into pages and automatically collapse and extend based on changePages function -->
+<ul>
+    <!-- Instructions given to parents based on form. Includes photos. -->
+    <div id = "intro_part1" class = "page_div collapse">
+        <p class="lead" id="intro_text">
+            {% blocktrans %}In this section, you will be asked about words that your child "understands and says." Your child "understands and says" a word on the list if they know what the word means AND they say it by themselves. Here are some examples. This assessment is for children of many ages. Your child may not be able to understand or say a lot of the words on the form. That is perfectly fine!{% endblocktrans %}
+        </p>
+
+        <div class="row">
+            <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
+                {% with 'images/'|add:'en'|add:'_says-yes-ball_WS.png' as image_static %}
+                    <img src="{% static image_static %}" class="rounded mx-auto d-block" alt="Having your child say the word in the presence of the object can mean that your child understands and says the word." style="max-width: 90%; border: 1px solid black;">
+                {% endwith %}
+
+            </div>
+
+            <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
+                <h4>
+                {% trans 'DO check the box if:' %}
+                <br><br>
+                {% trans 'Your child says the word when trying to name an object or describe something that happened.  You think s/he has a meaning for that word.' %}
+                </h4>
+
+
+
+            </div>
+        </div> 
+        <br>
+
+        <div class="row">
+            <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
+                {% with 'images/'|add:'en'|add:'_says-yes-raff_WS.png' as image_static %}
+                    <img src="{% static image_static %}" class="rounded mx-auto d-block" alt="Having your child say the word in the presence of the object can mean that your child understands and says the word." style="max-width: 90%; border: 1px solid black;">
+                {% endwith %}
+
+            </div>
+
+            <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
+                <h4>
+                {% blocktrans %}It's fine if your child can't say the whole word or says it his/her own "special" way. If you use another word in your family (e.g., Nana for Grandma), that is ok too!{% endblocktrans %}
+                <br><br>
+                {% trans 'DO check the box.' %}
+                </h4>
+
+
+            </div>
+        </div> 
+        <br>
+
+        <div class="row">
+            <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
+                {% with 'images/'|add:'en'|add:'_says-no-baba_WS.png' as image_static %}
+                    <img src="{% static image_static %}" class="rounded mx-auto d-block" alt="Saying the word alone is not enough to mean that your child understands and says a word. The context is important!" style="max-width: 90%; border: 1px solid black;">
+                {% endwith %}
+
+            </div>
+
+            <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
+                <h4>
+                {% blocktrans %}DON'T check the box if your child is just stringing sounds together. This is not a real word that means something.{% endblocktrans %}
+                </h4>
+
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
+                {% with 'images/'|add:'en'|add:'_says-no-coaching_WS.png' as image_static %}
+                    <img src="{% static image_static %}" class="rounded mx-auto d-block" alt="Having your child repeat back a taught word is not enough to mean that your child undestands the word." style="max-width: 90%; border: 1px solid black;">
+                {% endwith %}
+
+            </div>
+
+            <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
+                <h4>
+                {% blocktrans %}DON'T ask your child to repeat the words on the list. This doesn't count!{% endblocktrans %}
+                </h4>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
+            <a id="next_button" class="btn btn-primary" value="Next">Next</a>
+        </div>
+
+
+    </div>
+    <br>
+</ul>
+
+<div id="cat_div" class = "page_div collapse">
+    <div class="container">
+        <div class="row pt10vh">
+            <div class="progress" style="width:100%">
+                <div class="progress-bar" role="progressbar" aria-valuenow="{{ words_shown|div:max_words }}" aria-valuemin="0" aria-valuemax="100" style="width:{{ words_shown|div:max_words }}%">
+                {{ words_shown }} of {{ max_words }}
+                </div>
+            </div> 
+        </div>
+        <div class="row pt10vh">
+            <div class="col-12 center">
+                <h1>Can your child say ... {{ form.item.label }} ?</h1>
+                {{ form.word_id }}
+                {{ form.label }}
+                {% if footnote %}{% trans "* or word used in your family" %}{% endif %}
+            </div>
+        </div>
+        <div class="row pt10vh">
+            <div class="col-6 center">
+                <button id="id_no" type="submit" name="no" class="btn btn-danger btn-lg">{% trans 'No' %}</button>
+            </div>
+            <div class="col-6 center">
+                <button id="id_yes" type="submit" name="yes" class="btn btn-success btn-lg">{% trans 'Yes' %}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+function disableF5(e) { if ((e.which || e.keyCode) == 116) e.preventDefault(); };
+// To disable f5
+/* jQuery < 1.7 */
+$(document).bind("keydown", disableF5);
+/* OR jQuery >= 1.7 */
+//$(document).on("keydown", disableF5);
+</script>
+
+<!-- ReCaptcha. If study has a ReCaptcha option, the participant must have worked on the test for at least 6 minutes AND pass the ReCaptcha test for the submit button to appear. Otherwise, participant only has to have worked on the test for 6 minutes. -->
+{% if captcha == 'True' %}
+    <script>
+        captcha_clicked = false;
+
+        // Triggers when participant successfully passes ReCaptcha
+        function enableBtn(){
+            captcha_clicked = true;
+            if (gotToEnd && test_duration >= {{ object.timing}}) {
+                $('.submit-button').show();
+            }
+        }
+    </script>
+{% else %}
+    <script>
+        captcha_clicked = true;
+    </script>    
+{% endif %}
+
+<script type="text/javascript">
+    // Automatically show instruction panel. 
+    if ({{ words_shown }} == 1) {
+        $("#intro_part1").collapse('show');
+    } else {
+        $("#cat_div").collapse('show');
+    }
+    $("#instructions").collapse('show');
+
+    $('#next_button').on('click', function() {
+        $("#intro_part1").collapse('hide');
+        $("#cat_div").collapse('show');
+    })
+</script>
+
+<script type="text/javascript">
+$(document).ready(function () {
+    //Disable cut copy paste
+    $('body').bind('cut copy paste', function (e) {
+        e.preventDefault();
+    });
+   
+    //Disable mouse right click
+    $("body").on("contextmenu",function(e){
+        return false;
+    });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function () {
+    //Disable cut copy paste
+    $('#id_btn_instructions').on('click', function (e) {
+        e.preventDefault();
+        changePages(0)
+    });
+});
+</script>
+
+
+<script>
+
+$(document).ready(function() {
+    //Toggle form closed when Yes/No pressed
+    $("#id_yes").click(function() {
+        $("#cdi_form").toggle();
+    });
+    $("#id_no").click(function() {
+        $("#cdi_form").toggle();
+    });
+});
+</script>
+
+{% endblock %}

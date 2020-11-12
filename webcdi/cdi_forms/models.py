@@ -9,6 +9,7 @@ from django import forms
 from django.utils.translation import ugettext_lazy as _
 from django_countries.fields import CountryField
 
+from .cat_forms.models import *
 
 class requests_log(models.Model):
     url_hash = models.CharField(max_length=128)

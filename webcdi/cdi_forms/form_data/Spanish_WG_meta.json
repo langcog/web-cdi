@@ -70,7 +70,7 @@
                             "id": "people",
                             "title": "11. Personas",
                             "footnote": "* o el nombre de esta persona",
-                            "text": "Los niños les dicen de manera diferente a sus parientes. A veces le dicen \"tía\" o \"abuela\" o en otros casos le dicen por su nombre, or por su nombre de cariño, por ejemplo, \"Chacha\". Si su hijo/a hace cualquiera de las dos cosas, le dice \"tía\" o \"Chacha\", marque la caja de las palabra indicada en la columna correspondiente."
+                            "text": "Los niños les dicen de manera diferente a sus parientes. A veces le dicen \"tía\" o \"abuela\" o en otros casos le dicen por su nombre, o por su nombre de cariño, por ejemplo, \"Chacha\". Si su hijo/a hace cualquiera de las dos cosas, le dice \"tía\" o \"Chacha\", marque la caja de las palabra indicada en la columna correspondiente."
                         },
                         {
                             "id": "games_routines",
@@ -97,7 +97,7 @@
                         {
                             "id": "pronouns",
                             "title": "17. Pronombres",
-                            "text": "Su hijo/a puede comprender o decir y comprender estas palabras solas, por ejemplo, \"ésta\" o junto con otra palabra, como \"dámelo\". Rellene el circulo de la columna correspondiente si hijo/a comprende o comprende y dice algunas de las palabras de la lista. Recuerde que no importa si lo dice en forma separada o como parte de otra palabra."
+                            "text": "Su hijo/a puede comprender o decir y comprender estas palabras solas, por ejemplo, \"ésta\" o junto con otra palabra, como \"dámelo\". Rellene el círculo de la columna correspondiente si hijo/a comprende o comprende y dice algunas de las palabras de la lista. Recuerde que no importa si lo dice en forma separada o como parte de otra palabra."
                         },
                         {
                             "id": "question_words",
@@ -134,7 +134,7 @@
                     "sections": [
 
                         {
-                            "text": "Instrucciones: Cuando un niño/a pequeño/a empieza a comunicarse, frecuentemente usa gestos para dar entender sus necesidades. Por favor, rellene el circulo en la columna correspondiente de los gestos o acciones que su hijo/a haga en este momento.",
+                            "text": "Instrucciones: Cuando un niño/a pequeño/a empieza a comunicarse, frecuentemente usa gestos para dar entender sus necesidades. Por favor, rellene el círculo en la columna correspondiente de los gestos o acciones que su hijo/a haga en este momento.",
                             "id": "gestures_first",
                             "title": "A. Primeros Gestos"
                         },
@@ -156,7 +156,7 @@
                         {
                             "text": "¿Su hijo/a hace o ha tratado de hacer algunas de las siguientes actividades?",
                             "id": "gestures_adult",
-                            "title": "E. Imitación de Otros Tipos de Actividades de Adultos (puede o no usar el objeto  o juguete real)"
+                            "title": "E. Imitación de Otros Tipos de Actividades de Adultos (puede o no usar el objeto o juguete real)"
                         }
 
                     ]

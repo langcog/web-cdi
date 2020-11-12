@@ -57,6 +57,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'cdi_forms',
+    #'cdi_forms.cat_forms',
     'crispy_forms',
     'django_tables2',
     'bootstrap4',
@@ -88,6 +89,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'axes.middleware.AxesMiddleware',
+    'webcdi.middleware.LoginRequiredMiddleware',
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -312,3 +314,18 @@ def get_linux_ec2_private_ip():
 private_ip = get_linux_ec2_private_ip()
 if private_ip:
     ALLOWED_HOSTS.append(private_ip)
+
+CAT_FORMS = ['CAT','CAT2']
+CAT_API_BASE_URL = os.environ.get('CAT_API_URL',"http://cdicatapi-env.eba-c2knb6uj.us-west-2.elasticbeanstalk.com/")
+
+LOGIN_EXEMPT_URLS = (
+  r'^registration/logout/$',
+  r'^registration/register/$',
+  r'^registration/password-reset/$',
+  r'^registration/password-reset/done/$',
+  r'^registration/password-reset/confirm/',
+  r'^registration/password-reset/complete/$',
+  r'^registration/password/change/$',
+  r'^registration/password/change/',
+  r'^',
+)

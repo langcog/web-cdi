@@ -12,8 +12,8 @@ class StudyAdministrationTable(tables.Table):
                                         {"onclick": "toggle(this)"}},
                                         orderable=False)
     subject_id = tables.TemplateColumn('<a href="/interface/edit-administration/{{ record.pk }}/">{{ record.subject_id }}</a>') #Generate Link to edit subject_id
-    local_lab_id = tables.TemplateColumn('<a href="/interface/edit-local-lab-id/{{ record.pk }}/">{{ record.local_lab_id }}</a>') #Generate Link to edit local_lab_id
-    link = tables.TemplateColumn('<a href="/form/fill/{{ record.url_hash }}" target="_blank">link</a>', orderable=False) # Generates a column of administration links in each row
+    local_lab_id = tables.TemplateColumn('<a href="/interface/edit-local-lab-id/{{ record.pk }}/">{{ record.local_lab_id }}</a>') #Generate Link to edit local_lab_id    
+    link = tables.TemplateColumn('<a href="{{ record.get_absolute_url }}" target="_blank">link</a>', orderable=False) # Generates a column of administration links in each row
     analysis = tables.Column(orderable=True, order_by=['analysis','pk'])
     opt_out = tables.TemplateColumn('<a href="/interface/edit-opt-out/{{ record.pk }}/">{{ record.opt_out }}</a>')
     

@@ -8,6 +8,8 @@ import os
 from django.contrib.postgres.forms import IntegerRangeField
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
+from . import choices
+
 # Form for creating a new study
 class AddStudyForm(BetterModelForm):
     name = forms.CharField(label='Study Name', max_length=51) # Study name
@@ -36,7 +38,12 @@ class AddStudyForm(BetterModelForm):
     redirect_url = forms.URLField(label="Please enter URL", required=False)
     
     prolific_boolean = forms.BooleanField(label="Capture the Prolific Id for the participant?", required=False) # Whether to give redirect button upon completion of administration
+    backpage_boolean = forms.BooleanField(label="Show backpage in split background information study?", required=False)
+    
     print_my_answers_boolean = forms.BooleanField(label="Allow participant to print their responses at end of Study?", required=False) 
+
+    end_message = forms.ChoiceField(choices=choices.END_MESSAGE_CHOICES)
+    end_message_text = forms.CharField(widget=CKEditorUploadingWidget(), required=False)
     # Form validation. Form is passed automatically to views.py for higher level checking.
     def clean(self):
         cleaned_data = super(AddStudyForm, self).clean()
@@ -53,6 +60,7 @@ class AddStudyForm(BetterModelForm):
         self.helper.label_class = 'col-3'
         self.helper.field_class = 'col-9'
         self.helper.form_method = 'post'
+        self.fields['backpage_boolean'].initial = True
 
         if self.researcher:
             self.fields['instrument'] = forms.ModelChoiceField(queryset=instrument.objects.filter(researcher = self.researcher.researcher), empty_label="(choose from the list)")
@@ -77,7 +85,10 @@ class AddStudyForm(BetterModelForm):
             Field('redirect_boolean', css_class="css_enabler"),
             Div(Field('redirect_url'), css_class="redirect_boolean collapse"),
             Field('prolific_boolean'),
-            Field('print_my_answers_boolean')
+            Field('backpage_boolean'),
+            Field('print_my_answers_boolean'),
+            Field('end_message'),
+            Field('end_message_text')
         )
 
     # Form is related to the study model. Exclude study group designation (is done post-creation) and researcher name (filled automatically)
@@ -139,7 +150,12 @@ class RenameStudyForm(BetterModelForm):
     redirect_url = forms.URLField(label="Please enter URL", required=False)
 
     prolific_boolean = forms.BooleanField(label="Capture the Prolific Id for the participant?", required=False) # Whether to give redirect button upon completion of administration
+    backpage_boolean = forms.BooleanField(label="Show backpage in split background information study?", required=False)
+    
     print_my_answers_boolean = forms.BooleanField(label="Allow participant to print their responses at end of Study?", required=False) 
+
+    end_message = forms.ChoiceField(choices=choices.END_MESSAGE_CHOICES)
+    end_message_text = forms.CharField(widget=CKEditorUploadingWidget(), required=False)
     # Form validation. Form is passed automatically to views.py for higher level checking.
     def clean(self):
         cleaned_data = super(RenameStudyForm, self).clean()
@@ -178,7 +194,10 @@ class RenameStudyForm(BetterModelForm):
             Field('redirect_boolean', css_class="css_enabler"), 
             Div(Field('redirect_url'), css_class="redirect_boolean collapse"),
             Field('prolific_boolean'),
-            Field('print_my_answers_boolean')
+            Field('backpage_boolean'),
+            Field('print_my_answers_boolean'),
+            Field('end_message'),
+            Field('end_message_text')
     
         )
 
