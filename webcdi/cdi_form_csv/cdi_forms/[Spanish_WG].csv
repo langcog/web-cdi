@@ -133,7 +133,7 @@ item_131,panal,word,clothing,understands; produces,pañal,diaper,diaper,,
 item_132,pantalo,word,clothing,understands; produces,pantalón,pants,pants,,
 item_133,pijama,word,clothing,understands; produces,pijama,pajamas,pajamas,,
 item_134,playera,word,clothing,understands; produces,playera,t-shirt,shirt,,
-item_135,shorts,word,clothing,understands; produces,shorts,shorts,shorts,,
+item_135,shorts,word,clothing,understands; produces,shorts/calzoncillos,shorts,shorts,,
 item_136,sombrer,word,clothing,understands; produces,sombrero,hat,hat,,
 item_137,sueter,word,clothing,understands; produces,suéter,sweater,sweater,,
 item_138,vestido,word,clothing,understands; produces,vestido,dress (object),dress,,
@@ -155,7 +155,7 @@ item_153,ombligo,word,body_parts,understands; produces,ombligo,belly button,bell
 item_154,orejas,word,body_parts,understands; produces,orejas,ear,ears,,
 item_155,panza,word,body_parts,understands; produces,panza,tummy,belly,,
 item_156,pelo,word,body_parts,understands; produces,pelo,hair,hair,,
-item_157,piernas,word,body_parts,understands; produces,piernas,leg,legs,,
+item_157,piernas,word,body_parts,understands; produces,pierna/piernas,leg,legs,,
 item_158,pies,word,body_parts,understands; produces,pies,foot,feet,,
 item_159,rodilla,word,body_parts,understands; produces,rodillas,knee,knee,,
 item_160,globo,word,toys,understands; produces,globo/bomba,balloon,air balloon,,
@@ -275,7 +275,7 @@ item_273,nomnin,word,people,understands; produces,(nombre del niño/a),child's o
 item_274,acerrin,word,games_routines,understands; produces,acerrín,kid's song,sawdust (game),,
 item_275,adiosby,word,games_routines,understands; produces,adiós/byebye,bye,bye bye,,
 item_276,besitos,word,games_routines,understands; produces,besitos,kiss,little kisses,,
-item_277,buendia,word,games_routines,understands; produces,buenas días,good morning,good day,,
+item_277,buendia,word,games_routines,understands; produces,buenos días,good morning,good day,,
 item_278,buennoc,word,games_routines,understands; produces,buenas noches,good night,good night,,
 item_279,cosqlit,word,games_routines,understands; produces,cosquillitas,tickle,tickles,,
 item_280,gracias,word,games_routines,understands; produces,gracias,thank you,thank you,,
@@ -473,7 +473,7 @@ item_471,avienbes,gestures,gestures_first,not yet; sometimes; often,Avienta besi
 item_472,aprilabi,gestures,gestures_first,not yet; sometimes; often,Aprieta los labio como manera de decir “mmmm” cuando algo está sabroso.,,,,gestures_first
 item_473,levhombr,gestures,gestures_first,not yet; sometimes; often,Levanta los hombros y/o extiendo sus manos hacia los lados como para decir “dónde está” o “se fue”.,,,,gestures_first
 item_474,manoven,gestures,gestures_first,not yet; sometimes; often,Llama a alguien con la mano haciendo el gesto de “ven”.,,,,gestures_first
-item_475,juegtort,gestures,gestures_games,no; yes,Juego tortillitas.,,,,gestures_games
+item_475,juegtort,gestures,gestures_games,no; yes,Juega tortillitas.,,,,gestures_games
 item_476,haceojit,gestures,gestures_games,no; yes,Hace ojitos.,,,,gestures_games
 item_477,juegcern,gestures,gestures_games,no; yes,Juega acerrín.,,,,gestures_games
 item_478,juepntat,gestures,gestures_games,no; yes,Juega pon pon tata.,,,,gestures_games
@@ -497,11 +497,11 @@ item_495,huelflor,gestures,gestures_objects,no; yes,Huele flores.,,,,gestures_ob
 item_496,empujcar,gestures,gestures_objects,no; yes,Empuja un carro o un camión.,,,,gestures_objects
 item_497,avienpel,gestures,gestures_objects,no; yes,Avienta una pelota.,,,,gestures_objects
 item_498,acostrlo,gestures,gestures_parent,no; yes,Acostarlo,,,,gestures_parent
-item_499,taparlo,gestures,gestures_parent,no; yes,Taparlo con cobija,,,,gestures_parent
+item_499,taparlo,gestures,gestures_parent,no; yes,Taparlo con la cobija,,,,gestures_parent
 item_500,darlbotl,gestures,gestures_parent,no; yes,Darle su botella,,,,gestures_parent
 item_501,darlcuch,gestures,gestures_parent,no; yes,Darle de comer con una cuchara,,,,gestures_parent
 item_502,peinarlo,gestures,gestures_parent,no; yes,Peinarlo,,,,gestures_parent
-item_503,secarair,gestures,gestures_parent,no; yes,Sacarle el air con palmaditas en la espalda,,,,gestures_parent
+item_503,secarair,gestures,gestures_parent,no; yes,Sacarle el aire con palmaditas en la espalda,,,,gestures_parent
 item_504,empucart,gestures,gestures_parent,no; yes,Empujarlo en un carrito,,,,gestures_parent
 item_505,mecerarr,gestures,gestures_parent,no; yes,Mecerlo o arrullarlo,,,,gestures_parent
 item_506,darlbesi,gestures,gestures_parent,no; yes,Darle besitos,,,,gestures_parent
