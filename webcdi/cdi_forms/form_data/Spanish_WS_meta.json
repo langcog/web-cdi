@@ -62,7 +62,7 @@
                             "title": "13. Rutina Diaria, Reglas Sociales y Juegos"
                         },
                         {
-                            "text": "Cuando los niños hablan, por lo general, usan verbos. Así, pueden decir \"abrir\", \"abrí\", \"abre\", \"está abierto\", o \"se abrió\". Si su hijo/a usa algunos de los verbos de la lista en cualquier forma or conjugación, por favor, marque la caja del verbo correspondiente.",
+                            "text": "Cuando los niños hablan, por lo general, usan verbos. Así, pueden decir \"abrir\", \"abrí\", \"abre\", \"está abierto\", o \"se abrió\". Si su hijo/a usa algunos de los verbos de la lista en cualquier forma o conjugación, por favor, marque la caja del verbo correspondiente.",
                             "id": "action_words",
                             "title": "14. Acciones y Procesos (Verbos)"
                         },
@@ -71,7 +71,7 @@
                             "title": "15. Estados"
                         },
                         {
-                            "text": "Muchas de estas palabras pueden aparacer en masculino, por ejemplo, \"bueno\", o en feminino, \"buena\". Rellene el circulo de la palabra correspondiente si su hijo/a usa cualquiera de las dos formas.",
+                            "text": "Muchas de estas palabras pueden aparacer en masculino, por ejemplo, \"bueno\", o en feminino, \"buena\". Rellene el círculo de la palabra correspondiente si su hijo/a usa cualquiera de las dos formas.",
                             "id": "descriptive_words",
                             "title": "16. Cualidades y Atributos"
                         },
@@ -105,7 +105,7 @@
                             "title": "23. Conectivos"
                         }
                     ],
-                    "text": "Los niños comprenden más palabras de las que dicen. Aquí nos interesan la palabras que realmente DICEN. Muchas veces, las palabras que usan son poco distintas de las que aparacen en esta lista. Por ejemplo, dicen \"pupa\" en vez de \"ombligo\" o \"pica\" en vez de \"chile\". También pronuncian las palabras de diferentes maneras; por ejemplo, dicen \"tatamina\" en vez de \"vitamina\" o \"pato\" en vez de \"zapato\". Si su hijo/a dice otra palabra que se usa en su familia y significa lo mismo que la que viene en el cuestionario (por ejemplo, si dice \"coca\" en vez de \"refresco\", \"super\" en vez de \"tienda\", o \"kleenex\" en vez de \"pañuelo\"), rellene el circulo de la palabra correspondiente que viene en las lista. Recuerde que esta lista incluye las palabras que muchos niños pueden decir. No se preocupe si su hijo/a no dice todas las palabras.",
+                    "text": "Los niños comprenden más palabras de las que dicen. Aquí nos interesan la palabras que realmente DICEN. Muchas veces, las palabras que usan son poco distintas de las que aparacen en esta lista. Por ejemplo, dicen \"pupa\" en vez de \"ombligo\" o \"pica\" en vez de \"chile\". También pronuncian las palabras de diferentes maneras; por ejemplo, dicen \"tatamina\" en vez de \"vitamina\" o \"pato\" en vez de \"zapato\". Si su hijo/a dice otra palabra que se usa en su familia y significa lo mismo que la que viene en el cuestionario (por ejemplo, si dice \"coca\" en vez de \"refresco\", \"super\" en vez de \"tienda\", o \"kleenex\" en vez de \"pañuelo\"), rellene el círculo de la palabra correspondiente que viene en las lista. Recuerde que esta lista incluye las palabras que muchos niños pueden decir. No se preocupe si su hijo/a no dice todas las palabras.",
                     "title": "A: Lista de Vocabulario",
                     "type": "checkbox"
                 },
@@ -139,7 +139,7 @@
                             "text": "Para pedir algo u ordenar, ¿cuáles de estas formas usa?"
                         }
                     ],
-                    "text": "A continuación encontrará una lista de diferentes terminaciones de verbos. Indique si su hijo/a usa palabras de la lista. En caso de que no use la misma palabra, pero que usa la misma terminación con palabras similares, por favor, rellene el circulo de la palabra que más se la parezca. Por ejemplo, en vez de \"comes\" dice \"duermes\" o \"puedes\" marque la línea de \"comes\".",
+                    "text": "A continuación encontrará una lista de diferentes terminaciones de verbos. Indique si su hijo/a usa palabras de la lista. En caso de que no use la misma palabra, pero que usa la misma terminación con palabras similares, por favor, rellene el círculo de la palabra que más se la parezca. Por ejemplo, en vez de \"comes\" dice \"duermes\" o \"puedes\" marque la línea de \"comes\".",
                     "title": "A. Formas de Verbos",
                     "type": "checkbox"
                 },

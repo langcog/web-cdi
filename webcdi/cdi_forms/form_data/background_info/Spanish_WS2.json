@@ -64,7 +64,7 @@
                 "fieldset":"Etnicidad del Niño(a)",
                 "fields":[
                     {
-                        "html":"<p>La siguiente información es para el único propósito de informar a nuestro instituto de financiamiento, es decir NIH (Instituto Nacional de Salud). NIH requiere esta información para garantizar la solidez e inclusión de nuestras investigaciones. Su cooperación es apreciada, pero opcional.</p>"
+                        "html":"<p>El único propósito de la siguiente información es para informar a nuestro instituto de financiamiento, es decir NIH (Instituto Nacional de Salud). NIH requiere esta información para garantizar la solidez e inclusión de nuestras investigaciones. Su cooperación es apreciada, pero opcional.</p>"
                     },
                     {
                         "field":"child_hispanic_latino",
