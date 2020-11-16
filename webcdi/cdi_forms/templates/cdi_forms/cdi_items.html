@@ -29,7 +29,7 @@
                         <div class="row alco-child1" >
                             <div class="col-lg-5 col-12"><span class="choice">{{ object.text|safe }}</span></div>
                             <div class="col-lg-7 col-12">
-                                <textarea class="boxsizingBorder" id="{{ object.itemID }}" name="{{ object.itemID }}" width="100%" rows=5 {% if completed %} disabled {% endif %}>{{ object.prefilled_value }}</textarea>
+                                <textarea class="boxsizingBorder" id="{{ object.itemID }}" name="{{ object.itemID }}" width="100%" maxlength="600" rows=5 {% if completed %} disabled {% endif %}>{{ object.prefilled_value }}</textarea>
                             </div>
                         </div>
                     </div>
@@ -105,7 +105,7 @@
                                 <div class="row alco-child1" >
                                     <div class="col-lg-5 col-12"><span class="choice">{{ object.text|safe }}</span></div>
                                     <div class="col-lg-7 col-12">
-                                        <textarea class="boxsizingBorder" id="{{ object.itemID }}" name="{{ object.itemID }}" width="100%" rows=5 {% if completed %} disabled {% endif %}>{{ object.prefilled_value }}</textarea>
+                                        <textarea class="boxsizingBorder" id="{{ object.itemID }}" name="{{ object.itemID }}" width="100%" maxlength="600" rows=5 {% if completed %} disabled {% endif %}>{{ object.prefilled_value }}</textarea>
                                     </div>
                                 </div>
                             </div>
