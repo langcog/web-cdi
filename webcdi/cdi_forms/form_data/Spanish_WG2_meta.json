@@ -5,7 +5,7 @@
             "title": "Iª Parte: Primeras Palabras",
             "types": [
                 {
-                    "text": "Antes de que un niño/a empiece a decir sus primeras palabras, parece entender el lenguaje. Eso lo sabemos porque responde a palabras y frases. ¿Su hijo/a hace algunas de las siguientes cosas?",
+                    "text": "Antes de que un niño/a empiece a decir sus primeras palabras, parece entender el lenguaje. Eso lo sabemos porque responde a las palabras y frases. ¿Su hijo/a hace algunas de las siguientes cosas?",
                     "type": "radiobutton",
                     "id": "first_signs",
                     "title": "A. Comprehensión Temprana"
