@@ -348,6 +348,7 @@
 		"min_age": 8,
 		"max_age": 18,
 		"csv_file": "cdi_form_csv/cdi_forms/[Spanish_L1].csv",
-		"json_data": "cdi_forms/form_data/Spanish_L1_meta.json"
+		"json_data": "cdi_forms/form_data/Spanish_L1_meta.json",
+		"scoring_json" : "cdi_forms/form_data/scoring/English_L1_WS_scoring.json"
 	}
 ]
