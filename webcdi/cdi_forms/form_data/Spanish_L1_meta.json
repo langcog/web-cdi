@@ -5,9 +5,9 @@
             "title": "",
             "types": [
                 {
-                    "text": "For words your child understands but does not yet say on his/her own, mark the first column (understands). For words that your child not only understands but also says on his/her own, mark the second column (understands and says). If your child uses a different pronunciation of a word or another word with the same meaning (e.g., nana for grandma), mark it anyway.",
+                    "text": "Abajo encontrará una lista de palabras frecuentes en el vocabulario de los niños pequeños. Si su hijo/a ya comprende, pero no dice las palabras, marque la caja de la palabra correspondiente en la columna que dice 'comprende.'  Si su hijo/a dice palabras de la lista aunque de manera distinta (ej., 'tete' por leche), o si su hijo/a dice otra palabra que se usa en su familia y que significa lo mismo que la que viene en el cuestionario (ej., 'coca' en vez de 'refresco' o 'super' en vez de 'tiende,' o 'kleenex' en vez de 'pañelo'), marque la caja de la palabra correspondiente en la columna 'comp. y dice.' Recuerde que esta lista incluye las palabras que muchos niños comprenden o puenden decir. No se preocupe si su hijo/a no comprende o no dice todas las palabras.",
                     "id": "word",
-                    "title": "Vocabulary Checklist",
+                    "title": "Lista de Vocabulario",
                     "type": "modified_checkbox",
                     "sections": [
                         {
