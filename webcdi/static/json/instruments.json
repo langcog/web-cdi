@@ -350,5 +350,14 @@
 		"csv_file": "cdi_form_csv/cdi_forms/[Spanish_L1].csv",
 		"json_data": "cdi_forms/form_data/Spanish_L1_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/English_L1_WS_scoring.json"
+	},{
+		"language": "Spanish",
+		"form": "L2A",
+		"verbose_name": "Short Form Vocabulary Checklist: Level II (Form A)",
+		"min_age": 16,
+		"max_age": 30,
+		"csv_file": "cdi_form_csv/cdi_forms/[Spanish_L2A].csv",
+		"json_data": "cdi_forms/form_data/Spanish_L2A_meta.json",
+		"scoring_json" : "cdi_forms/form_data/scoring/Spanish_L2A_WS_scoring.json"
 	}
 ]
