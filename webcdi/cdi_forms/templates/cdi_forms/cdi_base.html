@@ -37,6 +37,14 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     
     <link rel='stylesheet' href="{% static 'cdi_forms/extra_mobile.css' %}">
+
+    <script>
+    function countChar(val) {
+        var len = val.value.length;
+        $('#charNum'+val.name).text(600 - len);
+      };
+    </script>
+
     {% block extra_css %}{% endblock %}
     
 </head>

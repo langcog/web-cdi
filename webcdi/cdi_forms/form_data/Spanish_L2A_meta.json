@@ -1,0 +1,39 @@
+{
+    "parts": [
+        {
+            "id": 1,
+            "title": "Lista de Vocabulario",
+            "types": [
+                {
+                    "id": "word",
+                    "sections": [
+                        {
+                            "id": "col_1"
+                        },
+                        {
+                            "id": "col_2"
+                        },
+                        {
+                            "id": "col_3"
+                        },
+                        {
+                            "id": "col_4"
+                        }
+                    ],
+                    "type": "checkbox",
+                    "text": "Los niños comprenden más palabras de las que dicen. Aquí nos interesa las palabras que realmente DICEN. Muchas veces, las palabras que usan son un poco distintas de las que aparecen en esta lista. Por ejemplo, dicen 'pupa' en vez de 'obligo' o 'pica' en vez de 'chile.' Rellene el círculo de la palabra correspondiente que viene en la lista."
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "title": "",
+            "types": [
+                {
+                    "id": "combine",
+                    "type": "radiobutton"
+                }
+            ]
+        }
+    ]
+}

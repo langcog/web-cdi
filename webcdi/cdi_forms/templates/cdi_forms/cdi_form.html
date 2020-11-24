@@ -699,5 +699,20 @@ $(':text').on('change', function(){
     $.post("{% url 'update-administration-data-item' %}", data);
 });
 </script>
+<script>
+$('textarea').on('change', function (){
+    csrfmiddlewaretoken = $("input[name='csrfmiddlewaretoken']").val();
+    var data = {
+        'hash_id': '{{ hash_id }}',
+        'csrfmiddlewaretoken': csrfmiddlewaretoken,
+        'item' : $(this).attr('name'),
+        'value' : $(this).val(),
+        'check' : 'true' //setting check to true will ensure the value is used
+    }
+
+    //console.log(data);
+    $.post("{% url 'update-administration-data-item' %}", data);
+});
+</script>
 
 {% endblock %}
