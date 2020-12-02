@@ -1,6 +1,5 @@
 app-version==1.0.1
 appdirs==1.4.3
-awsebcli==3.18.1
 backports.ssl-match-hostname==3.7.0.1
 bcrypt==3.1.7
 beautifulsoup4==4.8.0
@@ -46,7 +45,6 @@ django-storages==1.8
 django-tables2==2.1.1
 django-weasyprint==0.5.5
 docker==3.7.3
-docker-compose==1.23.2
 docker-pycreds==0.4.0
 dockerpty==0.4.1
 docopt==0.6.2
