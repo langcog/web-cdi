@@ -39,7 +39,7 @@ def populate_instrument(apps, schema_editor):
                     demographic, created = Demographic.objects.update_or_create(name=demo, path='/form_data/background_info/' + demo)
                     instrument_obj.demographics.add(demographic)
             except: 
-                print(f'    No demographic selections for {instrument_obj.name}')
+                pass
 
 def set_study_demographic(apps, schema_editor):
     studies = study.objects.all()
@@ -87,8 +87,6 @@ def set_study_demographic(apps, schema_editor):
         if obj.instrument.name == "Spanish_WS2":
             obj.instrument = instrument.objects.get(name="Spanish_WS")
             obj.demographic = Demographic.objects.get(name="Spanish_Split.json")
-        if obj.demographic:
-            print(f'    Saving {obj.name} with instrument {obj.instrument.name} and demographic {obj.demographic}')
         obj.save()
 
 class Migration(migrations.Migration):
