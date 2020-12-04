@@ -59,4 +59,10 @@ class Command(BaseCommand):
 
             instrument_obj, created = instrument.objects.update_or_create(name = instrument_name, defaults=data_dict,)
 
-
+            
+            try:
+                for demo in curr_instrument['demographics']:
+                    demographic, created = Demographic.objects.update_or_create(name=demo, path='/form_data/background_info/' + demo)
+                    instrument_obj.demographics.add(demographic)
+            except: 
+                print(f'    No demographic selections for {instrument_obj}')

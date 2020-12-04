@@ -17,4 +17,5 @@ urlpatterns = [
             url(r'^edit-administration/(?P<pk>[0-9]+)/$', views.EditAdministrationView.as_view(), name='edit-administration'),
             url(r'^edit-local-lab-id/(?P<pk>[0-9]+)/$', views.EditLocalLabIdView.as_view(), name='edit-local-lab-id'),
             url(r'^edit-opt-out/(?P<pk>[0-9]+)/$', views.EditOptOutView.as_view(), name='edit-opt-out'),
+            url(r'^ajax/get_demographic_forms/$', views.ajax_demographic_forms),
             ]

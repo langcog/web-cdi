@@ -7,6 +7,7 @@ from django.urls import reverse
 import os
 from django.contrib.postgres.forms import IntegerRangeField
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
+from django.utils.translation import ugettext_lazy as _
 
 from . import choices
 
@@ -14,6 +15,7 @@ from . import choices
 class AddStudyForm(BetterModelForm):
     name = forms.CharField(label='Study Name', max_length=51) # Study name
     instrument = forms.ModelChoiceField(queryset=instrument.objects.filter(language='English'), empty_label="(choose from the list)") # Study instrument (CANNOT BE CHANGED LATER)
+    demographic = forms.ModelChoiceField(queryset=Demographic.objects.all(), empty_label=_('Default'), required=False) # demographic cannot be changed later
     waiver = forms.CharField(widget=CKEditorUploadingWidget(), label='Waiver of Documentation text (no titles)', required = False) # Addition of an IRB waiver of documentation or any other instructive text can be added here
     allow_payment = forms.BooleanField(required=False, label="Would you like to pay subjects in the form of Amazon gift cards? (You will need to upload gift card codes under \"Update Study\").") # Whether study participants will be compensated in the form of gift card codes upon completion
     anon_collection = forms.BooleanField(required=False, label="Do you plan on collecting only anonymous data in this study? (e.g., posting ads on social media, mass emails, etc)") # Whether the study will have only anonymous participants (opens up a range of other settings for anonymous data collection)
@@ -69,6 +71,7 @@ class AddStudyForm(BetterModelForm):
         self.helper.layout = Layout(
             Field('name'),
             Field('instrument'),
+            Field('demographic'),
             Field('age_range'),
             Field('test_period'),
             Field('birth_weight_units'),

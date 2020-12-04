@@ -7,6 +7,17 @@ from django.shortcuts import reverse, redirect
 from ckeditor_uploader.fields import RichTextUploadingField
 
 from . import choices
+
+class Demographic(models.Model):
+    '''
+    Class to store the different Demographic Form (Background Info) that can be used by Studies
+    '''
+    name = models.CharField(max_length=30)
+    path = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f'{self.name}'
+
 # Model for individual instruments
 class instrument(models.Model):
     name = models.CharField(max_length = 51, primary_key=True) # Instrument short name
@@ -15,7 +26,8 @@ class instrument(models.Model):
     form = models.CharField(max_length = 51) # Instrument's form type abbreviation. For 'English Words & Sentences' this would be 'WS'
     min_age = models.IntegerField(verbose_name = "Minimum age") # Minimum age in months that instrument was built for
     max_age = models.IntegerField(verbose_name = "Maximum age") # Maximum age in months that instrument was built for
-    
+    demographics = models.ManyToManyField('Demographic')
+
     def __unicode__(self):
         return "%s (%s %s)" % (self.verbose_name, self.language, self.form)
     
@@ -65,6 +77,8 @@ class study(models.Model):
 
     end_message = models.CharField(max_length=10, choices=choices.END_MESSAGE_CHOICES, default='standard')
     end_message_text = RichTextUploadingField(blank=True, null=True)
+
+    demographic = models.ForeignKey('Demographic', on_delete=models.SET_NULL, blank=True, null=True)
 
     def __unicode__(self):
         return self.name
@@ -228,3 +242,4 @@ class Benchmark(models.Model):
 
     class Meta:
         ordering = ['instrument_score','age','percentile']
+

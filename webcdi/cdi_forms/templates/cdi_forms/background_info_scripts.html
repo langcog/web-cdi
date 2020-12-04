@@ -120,8 +120,7 @@
         language: language_code,
         format: ['en','es'].includes(language_code) ? "mm/dd/yyyy" : "dd/mm/yyyy",
     }
-    console.log(language_code)
-    console.log(['en','es'].includes(language_code))
+
     var date_format = ['en','es'].includes(language_code) ? "mm/dd/yyyy" : "dd/mm/yyyy"
     $('#id_child_dob').datepicker(datepicker_options)
         .on('changeDate', function() {
@@ -158,9 +157,7 @@
 
     // Function for calculating age in months. Final age in months is calculated in cdi_forms/views.py
     function getDiffinMonths(date_format) {
-        console.log(date_format)
         var b_date = moment($('#id_child_dob').val(), date_format.toUpperCase())
-        console.log(b_date)
         if (moment.isMoment(b_date) && $("#id_child_dob").val() != ''){
             var t_date = moment();
             // var day_diff = ((t_date.date() - b_date.date()) >= 15)? 1: 0
