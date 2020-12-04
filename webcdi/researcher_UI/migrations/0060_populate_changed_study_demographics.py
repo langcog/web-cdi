@@ -88,7 +88,7 @@ def set_study_demographic(apps, schema_editor):
             obj.instrument = instrument.objects.get(name="Spanish_WS")
             obj.demographic = Demographic.objects.get(name="Spanish_Split.json")
         if obj.demographic:
-            print(f'    Saving {obj} with instrument {obj.instrument} and demographic {obj.demographic}')
+            print(f'    Saving {obj.id} with instrument {obj.instrument} and demographic {obj.demographic}')
         obj.save()
 
 class Migration(migrations.Migration):
