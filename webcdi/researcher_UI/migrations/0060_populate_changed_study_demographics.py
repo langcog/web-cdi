@@ -39,7 +39,7 @@ def populate_instrument(apps, schema_editor):
                     demographic, created = Demographic.objects.update_or_create(name=demo, path='/form_data/background_info/' + demo)
                     instrument_obj.demographics.add(demographic)
             except: 
-                print(f'    No demographic selections for {instrument_obj}')
+                print(f'    No demographic selections for {instrument_obj.name}')
 
 def set_study_demographic(apps, schema_editor):
     studies = study.objects.all()
