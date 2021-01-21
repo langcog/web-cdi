@@ -25,6 +25,7 @@ import pandas as pd
 from django.utils.safestring import mark_safe
 from django.views.generic import UpdateView, CreateView, DetailView
 
+from .utils import get_demographic_filename
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__)) # Declare root folder for project and files. Varies between Mac and Linux installations.
 
@@ -124,7 +125,7 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
     which_page="front"
 
     def get_explanation_text(self):
-        filename = os.path.realpath(PROJECT_ROOT + '/form_data/background_info/' + self.study_context['instrument'] + '.json')
+        filename = os.path.realpath(PROJECT_ROOT + self.study_context['study'].demographic.path)
         if os.path.isfile(filename) :
             pages = json.load(open(filename, encoding='utf-8'))
             for page in pages:
@@ -327,7 +328,7 @@ class CreateBackgroundInfoView(CreateView):
         return self.prolific_pid
 
     def get_explanation_text(self):
-        filename = os.path.realpath(PROJECT_ROOT + '/form_data/background_info/' + self.study_context['instrument'] + '.json')
+        filename = get_demographic_filename (self.study_context['study'])
         if os.path.isfile(filename) :
             pages = json.load(open(filename, encoding='utf-8'))
             for page in pages:
@@ -711,7 +712,7 @@ def prefilled_cdi_data(administration_instance):
         data['study_waiver'] = administration_instance.study.waiver
         data['confirm_completion'] = administration_instance.study.confirm_completion
 
-        data['back_page'] = has_backpage(PROJECT_ROOT + '/form_data/background_info/' + instrument_name + '.json')
+        data['back_page'] = has_backpage(PROJECT_ROOT + administration_instance.study.demographic.path)
         
         raw_objects = []
 
@@ -861,7 +862,7 @@ def cdi_form(request, hash_id):
                 
 
                 #check if we have a background info page after the survey and act accordingly
-                filename = os.path.realpath(PROJECT_ROOT + '/form_data/background_info/' + instrument_name + '.json')
+                filename = os.path.realpath(PROJECT_ROOT + administration_instance.study.demographic.path)
                 if has_backpage(filename) :
                     administration.objects.filter(url_hash = hash_id).update(completedSurvey = True)
                     request.method = "GET"
@@ -922,7 +923,7 @@ def printable_view(request, hash_id):
     #try:
         #Get form from database
     background_form = prefilled_background_form(administration_instance)
-    filename = os.path.realpath(PROJECT_ROOT + '/form_data/background_info/' + administration_instance.study.instrument.name + '.json')
+    filename = os.path.realpath(PROJECT_ROOT + administration_instance.study.demographic.path)
     if has_backpage(filename) :
         backpage_background_form = prefilled_background_form(administration_instance, False)
     #except:

@@ -1398,3 +1398,14 @@ class EditOptOutView(LoginRequiredMixin, StudyOwnerMixin, UpdateView):
         ctx = super().get_context_data(**kwargs)
         self.study = ctx ['study'] = self.object.study
         return ctx
+
+
+from django.http import HttpResponse
+from django.core import serializers
+def ajax_demographic_forms(request):
+    pk = request.GET['id']
+    data = serializers.serialize('json', instrument.objects.get(name=pk).demographics.all().order_by('pk'), fields=('id','name'))
+    return HttpResponse(
+                data,
+                content_type="application/json"
+            )

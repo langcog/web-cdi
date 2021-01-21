@@ -101,6 +101,23 @@
             }
         });
 
+        // ajax to get available Demographics
+        $('#id_instrument').on('change', function () {
+          $.ajax({
+              url:'/interface/ajax/get_demographic_forms/',
+              type: 'GET',
+              data: {id : $(this).find('option:selected').val()},
+              cache: false,
+              success: function (data) {
+                  $('#id_demographic').find('option').not(':first').remove();
+                  for (item in data) {
+                    $('#id_demographic').append(new Option(data[item]['fields']['name'], data[item]['pk'])) 
+                  }
+
+              }
+          });
+        });
+
         // Automatically collapses fields dependent on whether the study involves anonymous participants and/or financial compensation. Upon checking/unchecking inputs for those 2 settings, other dependent fields appear.
         $('#div_id_subject_cap').addClass( "anon-collection" );
         $('#div_id_confirm_completion').addClass( "anon-collection" ); 

@@ -11,6 +11,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import EmailValidator, RegexValidator
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import ugettext
+from .utils import get_demographic_filename
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__)) # Declare project file directory
 
@@ -288,7 +289,8 @@ class BackgroundForm(BetterModelForm):
         return cleaned_data
 
     def get_json_filename(self):
-        return os.path.realpath(PROJECT_ROOT + '/form_data/background_info/' + self.curr_context['instrument'] + '.json')
+        print (get_demographic_filename(self.curr_context['study']))
+        return get_demographic_filename(self.curr_context['study'])
 
     #Initiation of form. Set values, page format according to crispy forms, store variables delivered by views.py, and organize fields on the form.
     def __init__(self, *args, **kwargs):
