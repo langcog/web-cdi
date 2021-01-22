@@ -252,50 +252,27 @@
                 ]
             },
             {
-                "fieldset":"Health",
+                "fieldset":"Parental Attitudes",
                 "fields":[
-                    {
-                        "field":"ear_infections_boolean",
-                        "div":[
-                            "ear_infections"
-                        ]
-                    },
-                    {
-                        "field":"hearing_loss_boolean",
-                        "div":[
-                            "hearing_loss"
-                        ]
-                    },
-                    {
-                        "field":"vision_problems_boolean",
-                        "div":[
-                            "vision_problems"
-                        ]
-                    },
-                    {
-                        "field":"illnesses_boolean",
-                        "div":[
-                            "illnesses"
-                        ]
-                    },
-                    {
-                        "field":"services_boolean",
-                        "div":[
-                            "services"
-                        ]
-                    },
-                    {
-                        "field":"worried_boolean",
-                        "div":[
-                            "worried"
-                        ]
-                    },
-                    {
-                        "field":"learning_disability_boolean",
-                        "div":[
-                            "learning_disability"
-                        ]
-                    }
+                    {"field":"children_comforted"},
+                    {"field":"show_respect"},
+                    {"field":"close_bonds"},
+                    {"field":"parents_help_learn"},
+                    {"field":"play_learning"},
+                    {"field":"explore_experiment"},
+                    {"field":"do_as_told"}
+                ]
+            },
+            {
+                "fieldset":"Literacy",
+                "fields":[
+                    {"field":"read_at_home"},
+                    {"field":"teach_alphbet"},
+                    {"field":"rhyming_games"},
+                    {"field":"read_for_pleasure"},
+                    {"field":"child_asks_for_reading"},
+                    {"field":"child_self_reads"},
+                    {"field":"child_asks_words_say"}
                 ]
             }
         ]
@@ -313,7 +290,7 @@
                         ]
                     },
                     {
-                        "field":"prolific_pid"
+                        "field":"source_id"
                     },
                     {
                         "field":"child_dob"

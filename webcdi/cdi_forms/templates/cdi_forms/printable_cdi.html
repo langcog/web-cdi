@@ -225,7 +225,7 @@
         {% endif %}
         {% if object.study.redirect_boolean %}
         <div class="row justify-content-center">
-            <h4><a class="btn btn-danger btn-lg active" href="{{ object.study.redirect_url }}">{% trans "Click to complete the study" %}</a></h4>
+            <h4><a class="btn btn-danger btn-lg active" href="{{ object.redirect_url }}">{% trans "Click to complete the study" %}</a></h4>
         </div>
         {% endif %}
         

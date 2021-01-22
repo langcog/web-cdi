@@ -68,7 +68,7 @@ def prefilled_background_form(administration_instance, front_page=True):
     context['birthweight_units'] = administration_instance.study.birth_weight_units
     context['study_obj'] = administration_instance.study
     context['study'] = administration_instance.study
-    context['prolific_pid'] = administration_instance.backgroundinfo.prolific_pid
+    context['source_id'] = administration_instance.backgroundinfo.source_id
     
     if front_page: background_form = BackgroundForm(instance = background_instance, context = context, page="front")  
     else: 
@@ -108,7 +108,7 @@ class AdministrationMixin(object):
         self.study_context['zip_code'] = ''
         self.study_context['language_code'] =self.user_language
         self.study_context['study'] = self.administration_instance.study
-        self.study_context['prolific_pid'] = self.administration_instance.backgroundinfo.prolific_pid
+        self.study_context['source_id'] = self.administration_instance.backgroundinfo.source_id
         self.study_context['study_obj'] = self.administration_instance.study
         return self.study_context
 
@@ -316,7 +316,7 @@ class CreateBackgroundInfoView(CreateView):
     study = None
     bypass = None
     hash_id = None
-    prolific_pid = None
+    source_id = None
     which_page="front"
 
     def get_bypass(self):
@@ -325,9 +325,9 @@ class CreateBackgroundInfoView(CreateView):
     def get_study(self):
         self.study = study.objects.get(id=int(self.kwargs['study_id']))
 
-    def get_prolific_pid(self):
-        self.prolific_pid = self.kwargs['prolific_pid']
-        return self.prolific_pid
+    def get_source_id(self):
+        self.source_id = self.kwargs['source_id']
+        return self.source_id
 
     def get_explanation_text(self):
         filename = get_demographic_filename (self.study_context['study'])
@@ -349,7 +349,7 @@ class CreateBackgroundInfoView(CreateView):
         self.study_context['zip_code'] = ''
         self.study_context['language_code'] =self.user_language
         self.study_context['study'] =self.study
-        self.study_context['prolific_pid'] = self.get_prolific_pid()
+        self.study_context['source_id'] = self.get_source_id()
         self.study_context['study_obj'] = self.study
         return self.study_context
 
@@ -923,7 +923,7 @@ def printable_view(request, hash_id):
     context['min_age'] = administration_instance.study.min_age
     context['max_age'] = administration_instance.study.max_age
     context['birthweight_units'] = administration_instance.study.birth_weight_units
-    context['prolific_pid'] = administration_instance.backgroundinfo.prolific_pid
+    context['source_id'] = administration_instance.backgroundinfo.source_id
     context['study_obj'] = administration_instance.study
     context['study'] = administration_instance.study
     #try:
