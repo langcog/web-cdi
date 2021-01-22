@@ -125,12 +125,14 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
     which_page="front"
 
     def get_explanation_text(self):
-        filename = os.path.realpath(PROJECT_ROOT + self.study_context['study'].demographic.path)
-        if os.path.isfile(filename) :
-            pages = json.load(open(filename, encoding='utf-8'))
-            for page in pages:
-                if page['page'] == self.which_page:
-                    if 'help-text' in page: return page['help-text']
+        try:
+            filename = os.path.realpath(PROJECT_ROOT + self.study_context['study'].demographic.path)
+            if os.path.isfile(filename) :
+                pages = json.load(open(filename, encoding='utf-8'))
+                for page in pages:
+                    if page['page'] == self.which_page:
+                        if 'help-text' in page: return page['help-text']
+        except: pass
         return ''
 
     def get_context_data(self, **kwargs):
@@ -712,7 +714,9 @@ def prefilled_cdi_data(administration_instance):
         data['study_waiver'] = administration_instance.study.waiver
         data['confirm_completion'] = administration_instance.study.confirm_completion
 
-        data['back_page'] = has_backpage(PROJECT_ROOT + administration_instance.study.demographic.path)
+        try:
+            data['back_page'] = has_backpage(PROJECT_ROOT + administration_instance.study.demographic.path)
+        except: data['back_page'] = 0
         
         raw_objects = []
 
@@ -862,7 +866,9 @@ def cdi_form(request, hash_id):
                 
 
                 #check if we have a background info page after the survey and act accordingly
-                filename = os.path.realpath(PROJECT_ROOT + administration_instance.study.demographic.path)
+                try:
+                    filename = os.path.realpath(PROJECT_ROOT + administration_instance.study.demographic.path)
+                except: filename="None"
                 if has_backpage(filename) :
                     administration.objects.filter(url_hash = hash_id).update(completedSurvey = True)
                     request.method = "GET"
@@ -923,7 +929,9 @@ def printable_view(request, hash_id):
     #try:
         #Get form from database
     background_form = prefilled_background_form(administration_instance)
-    filename = os.path.realpath(PROJECT_ROOT + administration_instance.study.demographic.path)
+    try:
+        filename = os.path.realpath(PROJECT_ROOT + administration_instance.study.demographic.path)
+    except: filename = "None"
     if has_backpage(filename) :
         backpage_background_form = prefilled_background_form(administration_instance, False)
     #except:
