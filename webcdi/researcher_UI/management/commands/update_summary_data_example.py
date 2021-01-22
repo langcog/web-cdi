@@ -10,19 +10,20 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         print (f'Starting at %s' % (datetime.datetime.now()))
-        count = 0
+        count = 90
         thousands = 0
-        for instance in administration.objects.filter(study__name="ws1"):
+        total = administration.objects.filter(study__name__in=["WG covid19","WS covid19"])
+        for instance in total[:count]:
             count += 1
             update_summary_scores(instance)
             if count == 10:
                 thousands += 1
                 email = EmailMessage(
                     subject="WebCDI Summary Data",
-                    body=f'%s of %s records processed at %s' % (thousands * count, len(administration.objects.all()), datetime.datetime.now()),
+                    body=f'%s of %s records processed at %s' % (thousands * count, len(total), datetime.datetime.now()),
                     from_email=settings.DEFAULT_FROM_EMAIL,
                     to=['hjsmehta@gmail.com'],
                 )
                 email.send()
-                print (f'%s of %s records processed at %s' % (thousands * count, len(administration.objects.all()), datetime.datetime.now()))
+                print (f'%s of %s records processed at %s' % (thousands * count, len(total), datetime.datetime.now()))
                 count = 0
