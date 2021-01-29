@@ -200,25 +200,39 @@
             {
                 "fieldset":"Parental Attitudes",
                 "fields":[
-                    {"field":"children_comforted"},
-                    {"field":"show_respect"},
-                    {"field":"close_bonds"},
-                    {"field":"parents_help_learn"},
-                    {"field":"play_learning"},
-                    {"field":"explore_experiment"},
-                    {"field":"do_as_told"}
+                    {"field":"children_comforted",
+                        "widget_type":"RadioSelect"},
+                    {"field":"show_respect",
+                        "widget_type":"RadioSelect"},
+                    {"field":"close_bonds",
+                        "widget_type":"RadioSelect"},
+                    {"field":"parents_help_learn",
+                        "widget_type":"RadioSelect"},
+                    {"field":"play_learning",
+                        "widget_type":"RadioSelect"},
+                    {"field":"explore_experiment",
+                        "widget_type":"RadioSelect"},
+                    {"field":"do_as_told",
+                        "widget_type":"RadioSelect"}
                 ]
             },
             {
                 "fieldset":"Literacy",
                 "fields":[
-                    {"field":"read_at_home"},
-                    {"field":"teach_alphbet"},
-                    {"field":"rhyming_games"},
-                    {"field":"read_for_pleasure"},
-                    {"field":"child_asks_for_reading"},
-                    {"field":"child_self_reads"},
-                    {"field":"child_asks_words_say"}
+                    {"field":"read_at_home",
+                        "widget_type":"RadioSelect"},
+                    {"field":"teach_alphbet",
+                        "widget_type":"RadioSelect"},
+                    {"field":"rhyming_games",
+                        "widget_type":"RadioSelect"},
+                    {"field":"read_for_pleasure",
+                        "widget_type":"RadioSelect"},
+                    {"field":"child_asks_for_reading",
+                        "widget_type":"RadioSelect"},
+                    {"field":"child_self_reads",
+                        "widget_type":"RadioSelect"},
+                    {"field":"child_asks_words_say",
+                        "widget_type":"RadioSelect"}
                 ]
             }
         ]

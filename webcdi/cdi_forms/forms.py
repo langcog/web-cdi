@@ -419,6 +419,9 @@ class BackgroundForm(BetterModelForm):
                             if 'widget_type' in field:
                                 if field['widget_type'] == 'Select': self.fields[field['field']].widget = forms.Select()
                                 if field['widget_type'] == 'CheckboxSelectMultiple': self.fields[field['field']].widget = forms.CheckboxSelectMultiple()
+                                if field['widget_type'] == 'RadioSelect': 
+                                    self.fields[field['field']].widget = forms.RadioSelect()
+                                    self.fields[field['field']].choices = self.fields[field['field']].choices[1:]
                             if "label" in field:
                                 self.fields[field['field']].label = field['label']
                             if "choices" in field:
