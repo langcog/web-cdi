@@ -114,10 +114,6 @@
                         "field":"mother_yob"
                     },
                     {
-                        "field":"mother_education",
-                        "help":"Choose highest grade completed (12 = high school graduate; 16 = college graduate; 18 = advanced degree)"
-                    },
-                    {
                         "field":"secondary_caregiver",
                         "div":[
                             "secondary_caregiver_other"
@@ -179,56 +175,6 @@
                                 "value":"Prefer not to disclose"
                             }
                         ]
-                    }
-                ]
-            },
-            {
-                "fieldset":"Child's Ethnicity",
-                "fields":[
-                    {
-                        "html":"<p>The following information is being collected for the sole purpose of reporting to our grant-funding institute, i.e.,  NIH (National Institute of Health).  NIH requires this information to ensure the soundness and inclusiveness of our research. Your cooperation is appreciated, but optional.</p>"
-                    },
-                    {
-                        "field" : "child_hispanic_latino",
-                        "label" : "Is your child Hispanic or Latino?:"
-                    },
-                    {
-                        "field":"child_ethnicity",
-                        "widget_type":"CheckboxSelectMultiple",
-                        "choices":[
-                            {
-                                "key":"N",
-                                "value":"American Indian / Alaska Native"
-                            },
-                            {
-                                "key":"A",
-                                "value":"Asian (Far East, Southeast Asia, Indian Sub-continent)"
-                            },
-                            {
-                                "key":"H",
-                                "value":"Native Hawaiian or Other Pacific Islander"
-                            },
-                            {
-                                "key":"B",
-                                "value":"Black or African American"
-                            },
-                            {
-                                "key":"W",
-                                "value":"White"
-                            },
-                            {
-                                "key":"O",
-                                "value":"Other"
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "fieldset":"Caregiver Information",
-                "fields":[
-                    {
-                        "field":"caregiver_info"
                     }
                 ]
             },
