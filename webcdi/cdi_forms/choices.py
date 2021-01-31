@@ -1,7 +1,7 @@
 STRONGLY_DISAGREE = "strongly disagree"
 DISAGREE = "disagree"
 SOMEWHAT_DISAGREE = "somewhat disagree"
-NEITHER = "neither agree no disagree"
+NEITHER = "neither agree nor disagree"
 SOMEWHAT_AGREE = "somewhat agree"
 AGREE = "agree"
 STRONGLY_AGREE = "strongly agree"

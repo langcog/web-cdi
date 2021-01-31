@@ -205,7 +205,7 @@ class BackgroundInfo(models.Model):
     rhyming_games =models.CharField(max_length=51, choices=choices.LITERACY_CHOICES, verbose_name="About how often do you play rhyming games with your child?", blank=True, null=True)
     read_for_pleasure =models.CharField(max_length=51, choices=choices.LITERACY_CHOICES, verbose_name="About how often do you read for fun and pleasure?", blank=True, null=True)
     child_asks_for_reading =models.CharField(max_length=51, choices=choices.LITERACY_CHOICES, verbose_name="About how many times per week does your child ask to be read to?", blank=True, null=True)
-    child_self_reads =models.CharField(max_length=51, choices=choices.LITERACY_CHOICES, verbose_name="About how many times per week does your child look at books by himself/herself?", blank=True, null=True)
+    child_self_reads =models.CharField(max_length=51, choices=choices.LITERACY_CHOICES, verbose_name="About how many times per week does your child look at books by themself?", blank=True, null=True)
     child_asks_words_say =models.CharField(max_length=51, choices=choices.LITERACY_CHOICES, verbose_name="About how often does your child ask you what printed words say?", blank=True, null=True)
 
 #Model of zipcodes reported to be in 3-digit zip code prefixes with a population lower than 20,000. Tests with a zipcode found in this model will have their digits replaced with their state abbreviation.
