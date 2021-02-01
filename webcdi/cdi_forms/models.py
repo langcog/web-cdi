@@ -194,7 +194,7 @@ class BackgroundInfo(models.Model):
 
     children_comforted = models.CharField(max_length=51, choices=choices.PARENTING_ATTITUDES_CHOICES, verbose_name="Children should be comforted when they are scared or unhappy.", blank=True, null=True)
     show_respect = models.CharField(max_length=51, choices=choices.PARENTING_ATTITUDES_CHOICES, verbose_name="It is very important that children learn to respect adults, such as parents and teachers.", blank=True, null=True)
-    close_bonds = models.CharField(max_length=51, choices=choices.PARENTING_ATTITUDES_CHOICES, verbose_name="A child who has close bonds with his or her parents will have better relationships later onin life.", blank=True, null=True)
+    close_bonds = models.CharField(max_length=51, choices=choices.PARENTING_ATTITUDES_CHOICES, verbose_name="A child who has close bonds with his or her parents will have better relationships later on in life.", blank=True, null=True)
     parents_help_learn = models.CharField(max_length=51, choices=choices.PARENTING_ATTITUDES_CHOICES, verbose_name="Parents can help babies learn language by talking to them.", blank=True, null=True)
     play_learning = models.CharField(max_length=51, choices=choices.PARENTING_ATTITUDES_CHOICES, verbose_name="Babies can learn a lot just by playing.", blank=True, null=True)
     explore_experiment = models.CharField(max_length=51, choices=choices.PARENTING_ATTITUDES_CHOICES, verbose_name="It is good to let children explore and experiment.", blank=True, null=True)

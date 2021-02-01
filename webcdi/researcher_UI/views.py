@@ -71,7 +71,9 @@ def get_background_header(study_obj):
         'other_languages','language_from', 'language_days_per_week', 'language_hours_per_day', 'ear_infections_boolean',
         'ear_infections', 'hearing_loss_boolean','hearing_loss', 'vision_problems_boolean','vision_problems', 
         'illnesses_boolean','illnesses', 'services_boolean','services','worried_boolean','worried',
-        'learning_disability_boolean','learning_disability']
+        'learning_disability_boolean','learning_disability',
+        'children_comforted','show_respect','close_bonds','parents_help_learn','play_learning','explore_experiment','do_as_told',
+        'read_at_home','teach_alphbet','rhyming_games','read_for_pleasure','child_asks_for_reading','child_self_reads','child_asks_words_say']
     if not study_obj.confirmation_questions:
         background_header.remove("birth_weight_confirmation_lb")
         background_header.remove("birth_weight_confirmation_kg")
