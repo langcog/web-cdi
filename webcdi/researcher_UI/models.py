@@ -70,8 +70,8 @@ class study(models.Model):
     timing = models.IntegerField(default=6)
     confirmation_questions = models.BooleanField(default=False) #Whether to ask participant to restate primary carer age and child weight
     redirect_boolean = models.BooleanField(verbose_name="Provide redirect button at completion of study?", default=False) # Whether to give redirect button upon completion of administration
-    redirect_url = models.URLField(blank=True, null=True) # The redirect URL
-    prolific_boolean = models.BooleanField(default=False) # Whether this is capturing a link from Prolific
+    redirect_url = models.URLField(blank=True, null=True, help_text="Enter the basic return URL - the Centiment aid will be added automatically") # The redirect URL
+    participant_source_boolean = models.IntegerField(default=0, choices=choices.PARTICIPANT_SOURCE_CHOICES) # Whether this is capturing a link from a Partner sourcing participants
     backpage_boolean = models.BooleanField(default=True, help_text="When selected the final demographics page will be shown - deselect to not show the final page")
     print_my_answers_boolean = models.BooleanField(default=True) # Whether to show print my answers button to user
 
@@ -132,6 +132,11 @@ class administration(models.Model):
         else :
             return reverse('administer_cdi_form', kwargs={'hash_id' :self.url_hash})
     
+    def redirect_url(self):
+        if self.study.participant_source_boolean == 2: #centiment
+            return self.study.redirect_url + '&aid=' + self.backgroundinfo.source_id
+        elif self.study.participant_source_boolean == 1: #prolific
+            return self.study.redirect_url
 
 class AdministrationSummary(administration):
     class Meta:

@@ -39,6 +39,7 @@ urlpatterns = [
     url(r'^lockout/$', TemplateView.as_view(template_name="registration/lockout.html")),
     url(r'^health/?', include('health_check.urls')),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+
 ]
 
 if settings.DEBUG:

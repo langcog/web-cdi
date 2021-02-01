@@ -10,6 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 from django_countries.fields import CountryField
 
 from .cat_forms.models import *
+from . import choices
 
 class requests_log(models.Model):
     url_hash = models.CharField(max_length=128)
@@ -189,7 +190,23 @@ class BackgroundInfo(models.Model):
     sibling_count = models.IntegerField(verbose_name=_('How many siblings does you child have?'), blank=True, null=True)
     sibling_data = models.TextField(blank=True, null=True)
 
-    prolific_pid = models.CharField(max_length=255, blank=True, null=True)
+    source_id = models.CharField(max_length=255, blank=True, null=True)
+
+    children_comforted = models.CharField(max_length=51, choices=choices.PARENTING_ATTITUDES_CHOICES, verbose_name="Children should be comforted when they are scared or unhappy.", blank=True, null=True)
+    show_respect = models.CharField(max_length=51, choices=choices.PARENTING_ATTITUDES_CHOICES, verbose_name="It is very important that children learn to respect adults, such as parents and teachers.", blank=True, null=True)
+    close_bonds = models.CharField(max_length=51, choices=choices.PARENTING_ATTITUDES_CHOICES, verbose_name="A child who has close bonds with his or her parents will have better relationships later on in life.", blank=True, null=True)
+    parents_help_learn = models.CharField(max_length=51, choices=choices.PARENTING_ATTITUDES_CHOICES, verbose_name="Parents can help babies learn language by talking to them.", blank=True, null=True)
+    play_learning = models.CharField(max_length=51, choices=choices.PARENTING_ATTITUDES_CHOICES, verbose_name="Babies can learn a lot just by playing.", blank=True, null=True)
+    explore_experiment = models.CharField(max_length=51, choices=choices.PARENTING_ATTITUDES_CHOICES, verbose_name="It is good to let children explore and experiment.", blank=True, null=True)
+    do_as_told = models.CharField(max_length=51, choices=choices.PARENTING_ATTITUDES_CHOICES, verbose_name="It is very important for young children to do as they are told, for example, waiting when they are told to wait.", blank=True, null=True)
+
+    read_at_home =models.CharField(max_length=51, choices=choices.LITERACY_CHOICES, verbose_name="About how many times per week do you read to your child at home?", blank=True, null=True)
+    teach_alphbet =models.CharField(max_length=51, choices=choices.LITERACY_CHOICES, verbose_name="About how often do you try to teach your child the letters of the alphabet?", blank=True, null=True)
+    rhyming_games =models.CharField(max_length=51, choices=choices.LITERACY_CHOICES, verbose_name="About how often do you play rhyming games with your child?", blank=True, null=True)
+    read_for_pleasure =models.CharField(max_length=51, choices=choices.LITERACY_CHOICES, verbose_name="About how often do you read for fun and pleasure?", blank=True, null=True)
+    child_asks_for_reading =models.CharField(max_length=51, choices=choices.LITERACY_CHOICES, verbose_name="About how many times per week does your child ask to be read to?", blank=True, null=True)
+    child_self_reads =models.CharField(max_length=51, choices=choices.LITERACY_CHOICES, verbose_name="About how many times per week does your child look at books by themself?", blank=True, null=True)
+    child_asks_words_say =models.CharField(max_length=51, choices=choices.LITERACY_CHOICES, verbose_name="About how often does your child ask you what printed words say?", blank=True, null=True)
 
 #Model of zipcodes reported to be in 3-digit zip code prefixes with a population lower than 20,000. Tests with a zipcode found in this model will have their digits replaced with their state abbreviation.
 class Zipcode(models.Model):

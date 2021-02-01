@@ -62,7 +62,7 @@ def get_score_headers(study_obj):
 
 def get_background_header(study_obj):
     # Fetch background data variables
-    background_header = ['prolific_pid','age','sex','country','zip_code', 
+    background_header = ['source_id','age','sex','country','zip_code', 
         'birth_order', 'birth_weight_lb', 'birth_weight_confirmation_lb','birth_weight_kg','birth_weight_confirmation_kg', 
         'multi_birth_boolean','multi_birth', 'sibling_boolean','sibling_count','sibling_data','born_on_due_date', 'early_or_late', 
         'due_date_diff', 'primary_caregiver','primary_caregiver_other','mother_yob', 'mother_yob_confirmation', 'mother_education',
@@ -71,13 +71,15 @@ def get_background_header(study_obj):
         'other_languages','language_from', 'language_days_per_week', 'language_hours_per_day', 'ear_infections_boolean',
         'ear_infections', 'hearing_loss_boolean','hearing_loss', 'vision_problems_boolean','vision_problems', 
         'illnesses_boolean','illnesses', 'services_boolean','services','worried_boolean','worried',
-        'learning_disability_boolean','learning_disability']
+        'learning_disability_boolean','learning_disability',
+        'children_comforted','show_respect','close_bonds','parents_help_learn','play_learning','explore_experiment','do_as_told',
+        'read_at_home','teach_alphbet','rhyming_games','read_for_pleasure','child_asks_for_reading','child_self_reads','child_asks_words_say']
     if not study_obj.confirmation_questions:
         background_header.remove("birth_weight_confirmation_lb")
         background_header.remove("birth_weight_confirmation_kg")
         background_header.remove("mother_yob_confirmation")
-    if not study_obj.prolific_boolean:
-        background_header.remove('prolific_pid')
+    if not study_obj.participant_source_boolean:
+        background_header.remove('source_id')
     return background_header
 
 def format_admin_data(pd, study_obj, administrations, admin_header):
@@ -1039,8 +1041,8 @@ def administer_new_participant(request, username, study_name): # used for wordfu
             return redirect(reverse('administer_cdi_form', args=[admin.url_hash]))
 
 def administer_new_parent(request, username, study_name): # For creating single administrations. Does not require a log-in. Participants can generate their own single-use administration if given the proper link,
-    if 'prolific_pid' in request.GET: prolific_pid = request.GET['prolific_pid']
-    else : prolific_pid = None
+    if 'source_id' in request.GET: source_id = request.GET['source_id']
+    else : source_id = None
 
     data={}
     researcher = User.objects.get(username = username) # Get researcher's username. Different method because current user may not be the researcher and may not be logged in
@@ -1067,9 +1069,9 @@ def administer_new_parent(request, username, study_name): # For creating single 
 
     if let_through: # If marked as allowed
         if study_obj.instrument.form in settings.CAT_FORMS:
-            return redirect (reverse('cat_forms:create-new-background-info', kwargs={'study_id' : study_obj.id, 'bypass' : bypass, 'prolific_pid': prolific_pid}))
+            return redirect (reverse('cat_forms:create-new-background-info', kwargs={'study_id' : study_obj.id, 'bypass' : bypass, 'source_id': source_id}))
         else:
-            return redirect (reverse('create-new-background-info', kwargs={'study_id' : study_obj.id, 'bypass' : bypass, 'prolific_pid': prolific_pid}))
+            return redirect (reverse('create-new-background-info', kwargs={'study_id' : study_obj.id, 'bypass' : bypass, 'source_id': source_id}))
     else: # If not marked as allowed
         redirect_url = reverse('overflow', args=[username, study_name]) # Generate URL for overflowed participants. May or may not have option for bypass depending on context (IP address and cookies)
     return redirect(redirect_url) # Redirect to generated URL

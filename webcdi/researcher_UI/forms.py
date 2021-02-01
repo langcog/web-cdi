@@ -37,9 +37,9 @@ class AddStudyForm(BetterModelForm):
     confirmation_questions = forms.BooleanField(required=False, label="Would you like participants to answer the confirmation questions (only available when split background information forms are used)")
 
     redirect_boolean = forms.BooleanField(label="Provide redirect button at completion of study?", required=False) # Whether to give redirect button upon completion of administration
-    redirect_url = forms.URLField(label="Please enter URL", required=False)
+    redirect_url = forms.URLField(label="Please enter URL", required=False, help_text="Enter the basic return URL - the Centiment aid will be added automatically")
     
-    prolific_boolean = forms.BooleanField(label="Capture the Prolific Id for the participant?", required=False) # Whether to give redirect button upon completion of administration
+    participant_source_boolean = forms.ChoiceField(label="Participant Source", choices=choices.PARTICIPANT_SOURCE_CHOICES) # Whether to give redirect button upon completion of administration
     backpage_boolean = forms.BooleanField(label="Show backpage in split background information study?", required=False)
     
     print_my_answers_boolean = forms.BooleanField(label="Allow participant to print their responses at end of Study?", required=False) 
@@ -87,7 +87,7 @@ class AddStudyForm(BetterModelForm):
             Field('confirmation_questions'),
             Field('redirect_boolean', css_class="css_enabler"),
             Div(Field('redirect_url'), css_class="redirect_boolean collapse"),
-            Field('prolific_boolean'),
+            Field('participant_source_boolean'),
             Field('backpage_boolean'),
             Field('print_my_answers_boolean'),
             Field('end_message'),
@@ -150,9 +150,9 @@ class RenameStudyForm(BetterModelForm):
     confirmation_questions = forms.BooleanField(required=False, label="Would you like participants to answer the confirmation questions (only available when split background information forms are used)")
     
     redirect_boolean = forms.BooleanField(label="Provide redirect button at completion of study?", required=False) # Whether to give redirect button upon completion of administration
-    redirect_url = forms.URLField(label="Please enter URL", required=False)
+    redirect_url = forms.URLField(label="Please enter URL", required=False, help_text="Enter the basic return URL - the Centiment aid will be added automatically")
 
-    prolific_boolean = forms.BooleanField(label="Capture the Prolific Id for the participant?", required=False) # Whether to give redirect button upon completion of administration
+    participant_source_boolean = forms.ChoiceField(label="Participant Source", choices=choices.PARTICIPANT_SOURCE_CHOICES) # Whether to give redirect button upon completion of administration
     backpage_boolean = forms.BooleanField(label="Show backpage in split background information study?", required=False)
     
     print_my_answers_boolean = forms.BooleanField(label="Allow participant to print their responses at end of Study?", required=False) 
@@ -196,7 +196,7 @@ class RenameStudyForm(BetterModelForm):
             Field('confirmation_questions'),
             Field('redirect_boolean', css_class="css_enabler"), 
             Div(Field('redirect_url'), css_class="redirect_boolean collapse"),
-            Field('prolific_boolean'),
+            Field('participant_source_boolean'),
             Field('backpage_boolean'),
             Field('print_my_answers_boolean'),
             Field('end_message'),

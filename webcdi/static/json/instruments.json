@@ -10,7 +10,7 @@
 		"fillable_headers": "cdi_form_csv/cdi_forms/EnglishWS_pdf_headers.csv",
 		"scoring_json" : "cdi_forms/form_data/scoring/English_WS_scoring.json",
 		"benchmark" : "cdi_forms/form_data/benchmarking/English_WS_benchmark.csv",
-		"demographics" : ["English_Split.json"]
+		"demographics" : ["English_Split.json", "English_Centiment.json"]
 	},
 	{
 		"language": "English",
@@ -21,7 +21,7 @@
 		"csv_file": "cdi_form_csv/cdi_forms/[English_CDI3].csv",
 		"json_data": "cdi_forms/form_data/English_CDI3_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/English_CDI3_scoring.json",
-		"demographics" : ["English_Split.json"]
+		"demographics" : ["English_Split.json", "English_Centiment.json"]
 	},
 	{
 		"language": "English",
@@ -34,7 +34,7 @@
 		"fillable_headers": "cdi_form_csv/cdi_forms/EnglishWG_pdf_headers.csv",
 		"scoring_json" : "cdi_forms/form_data/scoring/English_WG_scoring.json",
 		"benchmark" : "cdi_forms/form_data/benchmarking/English_WG_benchmark.csv",
-		"demographics" : ["English_Split.json"]
+		"demographics" : ["English_Split.json", "English_Centiment.json"]
 	},
 	{
 		"language": "Hebrew",
@@ -135,7 +135,7 @@
 		"csv_file": "cdi_form_csv/cdi_forms/[English_L1].csv",
 		"json_data": "cdi_forms/form_data/English_L1_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/English_L1_WS_scoring.json",
-		"demographics" : ["English_Split.json"]
+		"demographics" : ["English_Split.json", "English_Centiment.json"]
 	},
 	{
 		"language": "English",
@@ -146,7 +146,7 @@
 		"csv_file": "cdi_form_csv/cdi_forms/[English_L2A].csv",
 		"json_data": "cdi_forms/form_data/English_L2A_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/English_L2A_WS_scoring.json",
-		"demographics" : ["English_Split.json"]
+		"demographics" : ["English_Split.json", "English_Centiment.json"]
 	},
 	{
 		"language": "English",
@@ -157,7 +157,7 @@
 		"csv_file": "cdi_form_csv/cdi_forms/[English_L2B].csv",
 		"json_data": "cdi_forms/form_data/English_L2B_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/English_L2B_WS_scoring.json",
-		"demographics" : ["English_Split.json"]
+		"demographics" : ["English_Split.json", "English_Centiment.json"]
 	},
 	{
 		"language": "Dutch",
@@ -213,7 +213,7 @@
 		"json_data": "",
 		"scoring_json" : "",
 		"starting_words" : "cdi_form_csv/cat_forms/starting_words/[English_Ages_CAT].csv",
-		"demographics" : ["English_Split.json"]
+		"demographics" : ["English_Split.json", "English_Centiment.json"]
 	},{
 		"language": "Spanish",
 		"form": "L1",

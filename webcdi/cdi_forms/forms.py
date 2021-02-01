@@ -419,6 +419,9 @@ class BackgroundForm(BetterModelForm):
                             if 'widget_type' in field:
                                 if field['widget_type'] == 'Select': self.fields[field['field']].widget = forms.Select()
                                 if field['widget_type'] == 'CheckboxSelectMultiple': self.fields[field['field']].widget = forms.CheckboxSelectMultiple()
+                                if field['widget_type'] == 'RadioSelect': 
+                                    self.fields[field['field']].widget = forms.RadioSelect()
+                                    self.fields[field['field']].choices = self.fields[field['field']].choices[1:]
                             if "label" in field:
                                 self.fields[field['field']].label = field['label']
                             if "choices" in field:
@@ -552,11 +555,11 @@ class BackgroundForm(BetterModelForm):
             self.fields['child_ethnicity'].label = _("My child is (check all that apply):")
 
             
-            if self.curr_context['study'].prolific_boolean == True:
-                basic_info_fieldset = Fieldset( _('Basic Information'), Field('form_filler', css_class='enabler'), Div('form_filler_other', css_class='dependent'), 'prolific_pid', 'child_dob','age', 'sex', Field('country', css_class='enabler'), Div('zip_code', css_class='dependent'),'birth_order', Field('multi_birth_boolean', css_class='enabler'), Div('multi_birth', css_class='dependent'), self.birth_weight_field, Field('born_on_due_date', css_class='enabler'), Div('early_or_late', 'due_date_diff', css_class='dependent'))
+            if self.curr_context['study'].participant_source_boolean > 0:
+                basic_info_fieldset = Fieldset( _('Basic Information'), Field('form_filler', css_class='enabler'), Div('form_filler_other', css_class='dependent'), 'source_id', 'child_dob','age', 'sex', Field('country', css_class='enabler'), Div('zip_code', css_class='dependent'),'birth_order', Field('multi_birth_boolean', css_class='enabler'), Div('multi_birth', css_class='dependent'), self.birth_weight_field, Field('born_on_due_date', css_class='enabler'), Div('early_or_late', 'due_date_diff', css_class='dependent'))
             else:
                 basic_info_fieldset = Fieldset( _('Basic Information'), Field('form_filler', css_class='enabler'), Div('form_filler_other', css_class='dependent'), 'child_dob','age', 'sex', Field('country', css_class='enabler'), Div('zip_code', css_class='dependent'),'birth_order', Field('multi_birth_boolean', css_class='enabler'), Div('multi_birth', css_class='dependent'), self.birth_weight_field, Field('born_on_due_date', css_class='enabler'), Div('early_or_late', 'due_date_diff', css_class='dependent'))
-                self.fields['prolific_pid'].widget = forms.HiddenInput()
+                self.fields['source_id'].widget = forms.HiddenInput()
             self.helper.layout = Layout(
                 basic_info_fieldset,
                 Fieldset( _('Family Background'), Field('primary_caregiver', css_class='enabler'), Div('primary_caregiver_other', css_class='dependent'), 'mother_yob', 'mother_education',Field('secondary_caregiver', css_class='enabler'), Div('secondary_caregiver_other', css_class='dependent'), 'father_yob', 'father_education', 'annual_income'),
@@ -576,8 +579,8 @@ class BackgroundForm(BetterModelForm):
                 ),
             )
             
-        if self.curr_context['prolific_pid'] != None : self.fields['prolific_pid'].initial = self.curr_context['prolific_pid']
-        if not self.curr_context['study_obj'].prolific_boolean: self.fields['prolific_pid'].widget = forms.HiddenInput()
+        if self.curr_context['source_id'] != None : self.fields['source_id'].initial = self.curr_context['source_id']
+        if not self.curr_context['study_obj'].participant_source_boolean: self.fields['source_id'].widget = forms.HiddenInput()
 
     #Link form to BackgroundInfo model stored in database. Declare widget formatting for specific fields.
     class Meta:
