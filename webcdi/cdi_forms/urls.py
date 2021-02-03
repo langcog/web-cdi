@@ -1,14 +1,13 @@
 from django.conf.urls import url, include
-from django.urls import path
-
+from django.urls import path, re_path
 from . import views
 
 # Create URLs associated with some of the functions found in views.py 'views_FUNCTION NAME'. You can look up what each function renders in views.py. URLs are referenced in webcdi/urls.py
 urlpatterns = [
         url(r'^demo/English_WS$', views.cdi_form, name='cdi_form'),
         url(r'^background/(?P<pk>[0-9]+)/$', views.BackgroundInfoView.as_view(), name='background-info'),
-        path('background-create/<int:study_id>/bypass/<slug:source_id>/', views.CreateBackgroundInfoView.as_view(), {'bypass':True}, name='create-new-background-info'),
-        path('background-create/<int:study_id>/<slug:source_id>/', views.CreateBackgroundInfoView.as_view(), {'bypass':None}, name='create-new-background-info'),
+        re_path(r'^background-create/(?P<study_id>[0-9]+)/bypass/(?P<source_id>[a-zA-Z0-9~@#$^*()_+=[\]{}|\\,.?: -]+)/$', views.CreateBackgroundInfoView.as_view(), {'bypass':True}, name='create-new-background-info'),
+        path(r'^background-create/(?P<study_id>[0-9]+)/(?P<source_id>[a-zA-Z0-9~@#$^*()_+=[\]{}|\\,.?: -]+)/$', views.CreateBackgroundInfoView.as_view(), {'bypass':None}, name='create-new-background-info'),
         url(r'^background-create/(?P<study_id>[0-9]+)/bypass/$', views.CreateBackgroundInfoView.as_view(), {'bypass':True}, name='create-new-background-info'),
         url(r'^background-create/(?P<study_id>[0-9]+)/$', views.CreateBackgroundInfoView.as_view(), {'bypass':None}, name='create-new-background-info'),
         url(r'^background-backpage/(?P<pk>[0-9]+)/$', views.BackpageBackgroundInfoView.as_view(), name='backpage-background-info'),
