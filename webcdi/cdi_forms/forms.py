@@ -433,6 +433,8 @@ class BackgroundForm(BetterModelForm):
                                 self.initial[field['field']] = getattr(self.instance, field['field'])
                             if 'help' in field:
                                 self.fields[field['field']].help_text = field['help']
+                            if 'required' in field:
+                                self.fields[field['field']].required = True
                             if 'html' in field:
                                 fields.append(HTML(field['html']))
                             if 'divs' in field:

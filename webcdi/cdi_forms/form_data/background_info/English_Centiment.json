@@ -198,26 +198,41 @@
                 ]
             },
             {
-                "fieldset":"Parental Attitudes",
+                "fieldset":"Your Feelings on Parenting",
                 "fields":[
-                    {"field":"children_comforted",
-                        "widget_type":"RadioSelect"},
-                    {"field":"show_respect",
-                        "widget_type":"RadioSelect"},
-                    {"field":"close_bonds",
-                        "widget_type":"RadioSelect"},
-                    {"field":"parents_help_learn",
-                        "widget_type":"RadioSelect"},
-                    {"field":"play_learning",
-                        "widget_type":"RadioSelect"},
-                    {"field":"explore_experiment",
-                        "widget_type":"RadioSelect"},
-                    {"field":"do_as_told",
-                        "widget_type":"RadioSelect"}
+                    {   
+                        "field":"children_comforted",
+                        "widget_type":"RadioSelect",
+                        "required" : "True"
+                    },{   
+                        "field":"show_respect",
+                        "widget_type":"RadioSelect",
+                        "required" : "True"
+                    },{   
+                        "field":"close_bonds",
+                        "widget_type":"RadioSelect",
+                        "required" : "True"
+                    },{   
+                        "field":"parents_help_learn",
+                        "widget_type":"RadioSelect",
+                        "required" : "True"
+                    },{   
+                        "field":"play_learning",
+                        "widget_type":"RadioSelect",
+                        "required" : "True"
+                    },{   
+                        "field":"explore_experiment",
+                        "widget_type":"RadioSelect",
+                        "required" : "True"
+                    },{   
+                        "field":"do_as_told",
+                        "widget_type":"RadioSelect",
+                        "required" : "True"
+                    }
                 ]
             },
             {
-                "fieldset":"Literacy",
+                "fieldset":"Things That You and Your Family Do",
                 "fields":[
                     {"field":"read_at_home",
                         "widget_type":"RadioSelect"},
