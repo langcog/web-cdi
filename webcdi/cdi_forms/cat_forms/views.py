@@ -83,7 +83,7 @@ class AdministerAdministraionView(UpdateView):
         self.object.catresponse.save()
 
         if len(administered_items) > 49 :
-            filename = os.path.realpath(PROJECT_ROOT + '/form_data/background_info/' + self.object.study.instrument.name + '.json')
+            filename = os.path.realpath(PROJECT_ROOT + self.object.study.demographic.path)
             if  os.path.isfile(filename):
                 self.object.completedSurvey = True
             else :
@@ -155,7 +155,7 @@ class AdministerAdministraionView(UpdateView):
         else:    
             self.word = cdi_cat_api(f'nextItem?responses={list(map(int,administered_responses))}&items={administered_items}')
             if self.word == 'stop':
-                filename = os.path.realpath(PROJECT_ROOT + '/form_data/background_info/' + self.object.study.instrument.name + '.json')
+                filename = os.path.realpath(PROJECT_ROOT + self.object.study.demographic.path)
                 if  os.path.isfile(filename):
                     self.object.completedSurvey = True
                 else :
@@ -165,5 +165,4 @@ class AdministerAdministraionView(UpdateView):
             else :
                 self.object.catresponse.est_theta = self.word['curTheta']
                 self.object.save()
-        
         return super().get(request, *args, **kwargs) 
