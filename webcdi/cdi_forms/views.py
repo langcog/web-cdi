@@ -292,7 +292,6 @@ class BackpageBackgroundInfoView(BackgroundInfoView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         ctx['dont_show_waiver'] = True
-        print("BACKPAGE")
         return ctx
 
 def safe_harbor_zip_code(obj):
