@@ -113,7 +113,7 @@
 		"csv_file": "cdi_form_csv/cdi_forms/[Canadian_English_WS].csv",
 		"json_data": "cdi_forms/form_data/Canadian_English_WS_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/Canadian_English_WS_scoring.json",
-		"demographics" : ["Canadian_English_Split.json"]
+		"demographics" : ["English_Split.json"]
 	},
 	{
 		"language": "Canadian English",
@@ -124,7 +124,7 @@
 		"csv_file": "cdi_form_csv/cdi_forms/[Canadian_English_WG].csv",
 		"json_data": "cdi_forms/form_data/Canadian_English_WG_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/Canadian_English_WG_scoring.json",
-		"demographics" : ["Canadian_English_Split.json"]
+		"demographics" : ["English_Split.json"]
 	},
 	{
 		"language": "English",
