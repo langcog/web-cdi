@@ -21,7 +21,7 @@ cycler==0.10.0
 cryptography==2.9.2
 cssselect2==0.3.0
 defusedxml==0.6.0
-Django==2.2.13
+Django==2.2.20
 django-adaptors==0.2.5
 django-appconf==1.0.3
 django-axes==5.0.14
