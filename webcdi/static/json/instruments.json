@@ -235,7 +235,7 @@
 		"scoring_json" : "cdi_forms/form_data/scoring/Spanish_L2A_WS_scoring.json",
 		"demographics" : ["Spanish_Split.json"]
 	},{
-		"language": "Arengine Spanish",
+		"language": "Argentine Spanish",
 		"form": "WS",
 		"verbose_name": "Argentine Spanish WS (CDI II)",
 		"min_age": 16,
