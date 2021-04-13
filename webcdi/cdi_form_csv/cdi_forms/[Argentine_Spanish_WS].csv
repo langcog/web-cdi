@@ -1,0 +1,766 @@
+itemID,item,item_type,category,choices,definition,gloss
+item_1,am,word,sounds,produces,¡am!,¡am!
+item_2,ay,word,sounds,produces,¡ay!,¡ay!
+item_3,beemee,word,sounds,produces,bee/mee,bee/mee
+item_4,cuacua,word,sounds,produces,cua-cuá,cua-cuá
+item_5,guagua,word,sounds,produces,guau-guau/ba-bau,guau-guau/ba-bau
+item_6,miau,word,sounds,produces,miau,miau
+item_7,muu,word,sounds,produces,muu,muu
+item_8,piopio,word,sounds,produces,pio-pío,pio-pío
+item_9,pum,word,sounds,produces,¡pum!,¡pum!
+item_10,qiqiriqi,word,sounds,produces,qui-qui-ri-quí,qui-qui-ri-quí
+item_11,rumrum,word,sounds,produces,rum-rum (coche),rum-rum (coche)
+item_12,tutu,word,sounds,produces,tu-tú,tu-tú
+item_13,abeja,word,animals,produces,abeja,abeja
+item_14,animal,word,animals,produces,animal,animal
+item_15,arana,word,animals,produces,araña,araña
+item_16,ardilla,word,animals,produces,ardilla,ardilla
+item_17,ballena,word,animals,produces,ballena,ballena
+item_18,bicho,word,animals,produces,bicho,bicho
+item_19,burro,word,animals,produces,burro,burro
+item_20,caballo,word,animals,produces,caballo,caballo
+item_21,cebra,word,animals,produces,cebra,cebra
+item_22,chancho,word,animals,produces,chancho,chancho
+item_23,ciervo,word,animals,produces,ciervo/bambi,ciervo/bambi
+item_24,cocdrilo,word,animals,produces,cocodrilo,cocodrilo
+item_25,conejo,word,animals,produces,conejo,conejo
+item_26,cucaracha,word,animals,produces,cucaracha,cucaracha
+item_27,elefante,word,animals,produces,elefante,elefante
+item_28,foca,word,animals,produces,foca,foca
+item_29,gallina,word,animals,produces,gallina,gallina
+item_30,gato,word,animals,produces,gato,gato
+item_31,gusano,word,animals,produces,gusano,gusano
+item_32,hippotmo,word,animals,produces,hipopótamo,hipopótamo
+item_33,hormiga,word,animals,produces,hormiga,hormiga
+item_34,jirafa,word,animals,produces,jirafa,jirafa
+item_35,lechuza,word,animals,produces,lechuza,lechuza
+item_36,leon,word,animals,produces,león,león
+item_37,lobo,word,animals,produces,lobo,lobo
+item_38,mariposa,word,animals,produces,mariposa,mariposa
+item_39,mono,word,animals,produces,mono,mono
+item_40,mosca,word,animals,produces,mosca,mosca
+item_41,mosquito,word,animals,produces,mosquito,mosquito
+item_42,oso,word,animals,produces,oso,oso
+item_43,oveja,word,animals,produces,oveja,oveja
+item_44,pajaro,word,animals,produces,pájaro,pájaro
+item_45,pato,word,animals,produces,pato,pato
+item_46,pavo,word,animals,produces,pavo,pavo
+item_47,perro,word,animals,produces,perro,perro
+item_48,pescado1,word,animals,produces,pescado/pez,pescado/pez
+item_49,pinguino,word,animals,produces,pingüino,pingüino
+item_50,pollito,word,animals,produces,pollito,pollito
+item_51,rano,word,animals,produces,rana,rana
+item_52,raton,word,animals,produces,ratón/rata,ratón/rata
+item_53,sapo,word,animals,produces,sapo,sapo
+item_54,tigre,word,animals,produces,tigre,tigre
+item_55,tortuga,word,animals,produces,tortuga,tortuga
+item_56,vaca,word,animals,produces,vaca,vaca
+item_57,venado,word,animals,produces,venado,venado
+item_58,vibora,word,animals,produces,víbora,víbora
+item_59,ambulancia,word,vehicles,produces,ambulancia,ambulancia
+item_60,auto,word,vehicles,produces,auto,auto
+item_61,auto de policía,word,vehicles,produces,auto de policía,auto de policía
+item_62,avion,word,vehicles,produces,avión,avión
+item_63,barco,word,vehicles,produces,barco,barco
+item_64,biciclet,word,vehicles,produces,bicicleta/bici,bicicleta/bici
+item_65,camibomb,word,vehicles,produces,camión de bombero,camión de bombero
+item_66,cochecito,word,vehicles,produces,cochecito de bebé,cochecito de bebé
+item_67,helicptr,word,vehicles,produces,helicóptero,helicóptero
+item_68,micro,word,vehicles,produces,micro/colectivo,micro/colectivo
+item_69,moto,word,vehicles,produces,moto,moto
+item_70,tractor,word,vehicles,produces,tractor,tractor
+item_71,tren,word,vehicles,produces,tren,tren
+item_72,tricicl1,word,vehicles,produces,triciclo,triciclo
+item_73,taxi,word,vehicles,produces,taxi,taxi
+item_74,aceituna,word,vehicles,produces,aceituna,aceituna
+item_75,agua,word,food_drink,produces,agua,agua
+item_76,alfajor,word,food_drink,produces,alfajor,alfajor
+item_77,arroz,word,food_drink,produces,arroz,arroz
+item_78,atun,word,food_drink,produces,atún,atún
+item_79,azucar,word,food_drink,produces,azúcar,azúcar
+item_80,banana,word,food_drink,produces,banana,banana
+item_81,cafe,word,food_drink,produces,café,café
+item_82,calabaza,word,food_drink,produces,calabaza,calabaza
+item_83,caramelo,word,food_drink,produces,caramelo,caramelo
+item_84,carne,word,food_drink,produces,carne,carne
+item_85,cereal,word,food_drink,produces,cereales,cereales
+item_86,chicle,word,food_drink,produces,chicle,chicle
+item_87,choclo,word,food_drink,produces,choclo,choclo
+item_88,chocolatada,word,food_drink,produces,chocolatada,chocolatada
+item_89,chocolat,word,food_drink,produces,chocolate,chocolate
+item_90,chupetin,word,food_drink,produces,chupetín,chupetín
+item_91,coca,word,food_drink,produces,coca,coca
+item_92,comida,word,food_drink,produces,comida/papa,comida/papa
+item_93,dulce,word,food_drink,produces,dulce,dulce
+item_94,durazno,word,food_drink,produces,durazno,durazno
+item_95,empanada,word,food_drink,produces,empanada,empanada
+item_96,fideos,word,food_drink,produces,fideos,fideos
+item_97,frutilla,word,food_drink,produces,frutilla,frutilla
+item_98,galletita,word,food_drink,produces,galletita,galletita
+item_99,gellatin,word,food_drink,produces,gelatina,gelatina
+item_100,hamburgs,word,food_drink,produces,hamburguesa/Paty,hamburguesa/Paty
+item_101,helado,word,food_drink,produces,helado,helado
+item_102,hielo,word,food_drink,produces,hielo,hielo
+item_103,huevo,word,food_drink,produces,huevo,huevo
+item_104,jamon,word,food_drink,produces,jamón,jamón
+item_105,jugo,word,food_drink,produces,jugo,jugo
+item_106,leche,word,food_drink,produces,leche,leche
+item_107,lentejas,word,food_drink,produces,lentejas,lentejas
+item_108,licuado,word,food_drink,produces,licuado,licuado
+item_109,limonad,word,food_drink,produces,limonada,limonada
+item_110,mani,word,food_drink,produces,maní,maní
+item_111,manteca,word,food_drink,produces,manteca,manteca
+item_112,manzana,word,food_drink,produces,manzana,manzana
+item_113,mate,word,food_drink,produces,mate,mate
+item_114,melon,word,food_drink,produces,melón,melón
+item_115,mermelad,word,food_drink,produces,mermelada,mermelada
+item_116,milanesa,word,food_drink,produces,milanesa,milanesa
+item_117,naranja,word,food_drink,produces,naranja,naranja
+item_118,pan,word,food_drink,produces,pan,pan
+item_119,papasfritas,word,food_drink,produces,papas fritas,papas fritas
+item_120,pescado2,word,food_drink,produces,pescado,pescado
+item_121,pizza,word,food_drink,produces,pizza,pizza
+item_122,pochoclo,word,food_drink,produces,pochoclo,pochoclo
+item_123,pollo,word,food_drink,produces,pollo,pollo
+item_124,queso,word,food_drink,produces,queso,queso
+item_125,sal,word,food_drink,produces,sal,sal
+item_126,salchch,word,food_drink,produces,salchicha/pancho,salchicha/pancho
+item_127,salsa,word,food_drink,produces,salsa,salsa
+item_128,sandia,word,food_drink,produces,sandía,sandía
+item_129,soda,word,food_drink,produces,soda/gaseosa,soda/gaseosa
+item_130,sopa,word,food_drink,produces,sopa,sopa
+item_131,te1,word,food_drink,produces,té,té
+item_132,tomate,word,food_drink,produces,tomate,tomate
+item_133,torta,word,food_drink,produces,torta,torta
+item_134,tortila,word,food_drink,produces,tortilla,tortilla
+item_135,uvas,word,food_drink,produces,uvas,uvas
+item_136,vainilla,word,food_drink,produces,vainilla,vainilla
+item_137,yoghurt,word,food_drink,produces,yogurt,yogurt
+item_138,zanahori,word,food_drink,produces,zanahoria,zanahoria
+item_139,zapallo,word,food_drink,produces,zapallo,zapallo
+item_140,lentes,word,clothing,produces,anteojos/lentes,anteojos/lentes
+item_141,aros,word,clothing,produces,aros,aros
+item_142,babera,word,clothing,produces,babero,babero
+item_143,botas,word,clothing,produces,botas,botas
+item_144,boton,word,clothing,produces,botón,botón
+item_145,bufanda,word,clothing,produces,bufanda,bufanda
+item_146,buzo,word,clothing,produces,buzo,buzo
+item_147,calzon,word,clothing,produces,calzoncillo,calzoncillo
+item_148,camisa,word,clothing,produces,camisa,camisa
+item_149,campera,word,clothing,produces,campera,campera
+item_150,cartera,word,clothing,produces,cartera,cartera
+item_151,cierre,word,clothing,produces,cierre,cierre
+item_152,collar,word,clothing,produces,collar,collar
+item_153,gorra,word,clothing,produces,gorra/gorro,gorra/gorro
+item_154,guantes,word,clothing,produces,guantes,guantes
+item_155,gomitas,word,clothing,produces,hebilla (de pelo)/gomita,hebilla (de pelo)/gomita
+item_156,medias,word,clothing,produces,medias,medias
+item_157,mochila,word,clothing,produces,mochila,mochila
+item_158,ojotas,word,clothing,produces,ojotas,ojotas
+item_159,pantalon,word,clothing,produces,pantalón,pantalón
+item_160,panal,word,clothing,produces,pañal,pañal
+item_161,pijama,word,clothing,produces,pijama,pijama
+item_162,pollera,word,clothing,produces,pollera,pollera
+item_163,pullover,word,clothing,produces,pullover,pullover
+item_164,remera,word,clothing,produces,remera,remera
+item_165,ropas,word,clothing,produces,ropa,ropa
+item_166,saco,word,clothing,produces,saco,saco
+item_167,shorts,word,clothing,produces,shorts,shorts
+item_168,sombrero,word,clothing,produces,sombrero,sombrero
+item_169,vestido,word,clothing,produces,vestido,vestido
+item_170,zapatilla,word,clothing,produces,zapatilla,zapatilla
+item_171,zapato,word,clothing,produces,zapato,zapato
+item_172,barba,word,body_parts,produces,barba,barba
+item_173,bigote,word,body_parts,produces,bigote,bigote
+item_174,boca,word,body_parts,produces,boca,boca
+item_175,brazo,word,body_parts,produces,brazo,brazo
+item_176,cabeza,word,body_parts,produces,cabeza,cabeza
+item_177,cachete,word,body_parts,produces,cachete,cachete
+item_178,cara,word,body_parts,produces,cara,cara
+item_179,cola,word,body_parts,produces,cola/culo,cola/culo
+item_180,dedo,word,body_parts,produces,dedo,dedo
+item_181,dientes,word,body_parts,produces,dientes,dientes
+item_182,gargnta,word,body_parts,produces,garganta/cuello,garganta/cuello
+item_183,hombro,word,body_parts,produces,hombro,hombro
+item_184,labios,word,body_parts,produces,labios,labios
+item_185,lengua,word,body_parts,produces,lengua,lengua
+item_186,mano,word,body_parts,produces,mano,mano
+item_187,nariz,word,body_parts,produces,nariz,nariz
+item_188,ojos,word,body_parts,produces,ojos,ojos
+item_189,ombligo,word,body_parts,produces,ombligo/pupo*,ombligo/pupo*
+item_190,oreja,word,body_parts,produces,oreja,oreja
+item_191,panza,word,body_parts,produces,panza,panza
+item_192,pecho,word,body_parts,produces,pecho/teta*,pecho/teta*
+item_193,pelo,word,body_parts,produces,pelo,pelo
+item_194,pene,word,body_parts,produces,pene/pito*,pene/pito*
+item_195,piernas,word,body_parts,produces,pierna,pierna
+item_196,pies,word,body_parts,produces,pies/patas,pies/patas
+item_197,rodilla,word,body_parts,produces,rodilla,rodilla
+item_198,uñas,word,body_parts,produces,uñas,uñas
+item_199,vagina,word,body_parts,produces,vagina*,vagina*
+item_200,birome,word,toys,produces,birome/lapicera,birome/lapicera
+item_201,bolitas,word,toys,produces,bolitas,bolitas
+item_202,burbujas,word,toys,produces,burbujas,burbujas
+item_203,crayones,word,toys,produces,crayones,crayones
+item_204,fibras,word,toys,produces,fibras,fibras
+item_205,cubos,word,toys,produces,cubos,cubos
+item_206,globo,word,toys,produces,globo,globo
+item_207,hoja,word,toys,produces,hoja/papel,hoja/papel
+item_208,juguete,word,toys,produces,juguete/chiche(s),juguete/chiche(s)
+item_209,lapiz,word,toys,produces,lápiz,lápiz
+item_210,libro,word,toys,produces,libro/cuento,libro/cuento
+item_211,muneca,word,toys,produces,muñeca,muñeca
+item_212,osito,word,toys,produces,osito,osito
+item_213,patines,word,toys,produces,patines,patines
+item_214,pelicula,word,toys,produces,película/peli,película/peli
+item_215,pelota,word,toys,produces,pelota,pelota
+item_216,peluche,word,toys,produces,peluche,peluche
+item_217,pintura,word,toys,produces,pinturitas,pinturitas
+item_218,plastlin,word,toys,produces,plastilina,plastilina
+item_219,tambor,word,toys,produces,tambor,tambor
+item_220,alfombra,word,household,produces,alfombra,alfombra
+item_221,almohada,word,household,produces,almohada,almohada
+item_222,balde,word,household,produces,balde,balde
+item_223,basura,word,household,produces,basura,basura
+item_224,bolsa2,word,household,produces,bolsa/bolsita,bolsa/bolsita
+item_225,botlmaml,word,household,produces,botella,botella
+item_226,caja,word,household,produces,caja,caja
+item_227,camara,word,household,produces,cámara,cámara
+item_228,canasta,word,household,produces,canasta,canasta
+item_229,celular,word,household,produces,celular/celu,celular/celu
+item_230,cepillo,word,household,produces,cepillo,cepillo
+item_231,cepidnte,word,household,produces,cepillo de dientes,cepillo de dientes
+item_232,champu,word,household,produces,champú,champú
+item_233,chupete,word,household,produces,chupete,chupete
+item_234,cigarrs,word,household,produces,cigarros/puchos,cigarros/puchos
+item_235,clavo,word,household,produces,clavo,clavo
+item_236,cuadro,word,household,produces,cuadro,cuadro
+item_237,cuchara,word,household,produces,cuchara,cuchara
+item_238,cuchillo,word,household,produces,cuchillo,cuchillo
+item_239,diario,word,household,produces,diario,diario
+item_240,dinero,word,household,produces,dinero/plata,dinero/plata
+item_241,escoba,word,household,produces,escoba,escoba
+item_242,espejo,word,household,produces,espejo,espejo
+item_243,fosforo,word,household,produces,fósforo,fósforo
+item_244,fotos,word,household,produces,fotos,fotos
+item_245,frazada,word,household,produces,frazada,frazada
+item_246,jabon,word,household,produces,jabón,jabón
+item_247,lampara,word,household,produces,lámpara,lámpara
+item_248,llave,word,household,produces,llave,llave
+item_249,luz,word,household,produces,luz,luz
+item_250,mamadera,word,household,produces,mamadera/meme*,mamadera/meme*
+item_251,martillo,word,household,produces,martillo,martillo
+item_252,olla,word,household,produces,olla,olla
+item_253,panuelo,word,household,produces,pañuelo,pañuelo
+item_254,papel,word,household,produces,papel,papel
+item_255,pastdnte,word,household,produces,pasta de dientes,pasta de dientes
+item_256,peine,word,household,produces,peine,peine
+item_257,pelela,word,household,produces,pelela,pelela
+item_258,plancha,word,household,produces,plancha,plancha
+item_259,plato,word,household,produces,plato,plato
+item_260,reloj,word,household,produces,reloj,reloj
+item_261,remedio,word,household,produces,remedio,remedio
+item_262,servleta,word,household,produces,servilleta,servilleta
+item_263,tacho,word,household,produces,tacho de basura,tacho de basura
+item_264,taza,word,household,produces,taza,taza
+item_265,telefono,word,household,produces,teléfono,teléfono
+item_266,tenedor,word,household,produces,tenedor,tenedor
+item_267,tijeras,word,household,produces,tijeras,tijeras
+item_268,toalla,word,household,produces,toalla,toalla
+item_269,trapo,word,household,produces,trapo,trapo
+item_270,vasos,word,household,produces,vasos,vasos
+item_271,vela,word,household,produces,vela,vela
+item_272,banco1,word,furniture_rooms,produces,banco,banco
+item_273,banadera,word,furniture_rooms,produces,bañadera,bañadera
+item_274,bano,word,furniture_rooms,produces,baño,baño
+item_275,biblioteca,word,furniture_rooms,produces,biblioteca,biblioteca
+item_276,cajon,word,furniture_rooms,produces,cajón,cajón
+item_277,cama,word,furniture_rooms,produces,cama,cama
+item_278,cochera,word,furniture_rooms,produces,cochera/garage,cochera/garage
+item_279,cocina,word,furniture_rooms,produces,cocina,cocina
+item_280,comptdra,word,furniture_rooms,produces,computadora/compu,computadora/compu
+item_281,cuna,word,furniture_rooms,produces,cuna,cuna
+item_282,ducha,word,furniture_rooms,produces,ducha,ducha
+item_283,escalera,word,furniture_rooms,produces,escaleras,escaleras
+item_284,estufa,word,furniture_rooms,produces,estufa,estufa
+item_285,habitacion,word,furniture_rooms,produces,habitación/pieza,habitación/pieza
+item_286,heladera,word,furniture_rooms,produces,heladera,heladera
+item_287,horno,word,furniture_rooms,produces,horno,horno
+item_288,inodoro,word,furniture_rooms,produces,inodoro,inodoro
+item_289,lavarropas,word,furniture_rooms,produces,lavarropas,lavarropas
+item_290,mesa,word,furniture_rooms,produces,mesa,mesa
+item_291,mueble,word,furniture_rooms,produces,mueble,mueble
+item_292,patio1,word,furniture_rooms,produces,patio,patio
+item_293,pileta,word,furniture_rooms,produces,pileta de lavar las manos,pileta de lavar las manos
+item_294,piso,word,furniture_rooms,produces,piso,piso
+item_295,placard,word,furniture_rooms,produces,placard,placard
+item_296,puerta,word,furniture_rooms,produces,puerta,puerta
+item_297,silla,word,furniture_rooms,produces,silla,silla
+item_298,sillon,word,furniture_rooms,produces,sillón,sillón
+item_299,televisn,word,furniture_rooms,produces,televisión/tele,televisión/tele
+item_300,ventana,word,furniture_rooms,produces,ventana,ventana
+item_301,arbol,word,outside,produces,árbol,árbol
+item_302,arena,word,outside,produces,arena,arena
+item_303,bandera,word,outside,produces,bandera,bandera
+item_304,cielo,word,outside,produces,cielo,cielo
+item_305,cucha,word,outside,produces,cucha,cucha
+item_306,estrella,word,outside,produces,estrella,estrella
+item_307,flor,word,outside,produces,flor,flor
+item_308,fuego,word,outside,produces,fuego,fuego
+item_309,hamaca,word,outside,produces,hamaca,hamaca
+item_310,hojas,word,outside,produces,hojas,hojas
+item_311,humo,word,outside,produces,humo,humo
+item_312,lluvia,word,outside,produces,lluvia,lluvia
+item_313,luna,word,outside,produces,luna,luna
+item_314,maceta,word,outside,produces,maceta,maceta
+item_315,manguera,word,outside,produces,manguera,manguera
+item_316,nieve,word,outside,produces,nieve,nieve
+item_317,nube,word,outside,produces,nube,nube
+item_318,pala,word,outside,produces,pala,pala
+item_319,palo,word,outside,produces,palo,palo
+item_320,pasto,word,outside,produces,pasto,pasto
+item_321,piedra,word,outside,produces,piedra,piedra
+item_322,pile,word,outside,produces,pileta de natación/pile,pileta de natación/pile
+item_323,planta,word,outside,produces,planta,planta
+item_324,reja,word,outside,produces,reja,reja
+item_325,sol,word,outside,produces,sol,sol
+item_326,techo,word,outside,produces,techo,techo
+item_327,tierra,word,outside,produces,tierra/barro,tierra/barro
+item_328,timbre,word,outside,produces,timbre,timbre
+item_329,tobogan,word,outside,produces,tobogán,tobogán
+item_330,vientair,word,outside,produces,viento/aire,viento/aire
+item_331,banco2,word,places,produces,banco,banco
+item_332,bosque,word,places,produces,bosque,bosque
+item_333,calesita,word,places,produces,calesita,calesita
+item_334,calle,word,places,produces,calle,calle
+item_335,campo,word,places,produces,campo,campo
+item_336,casa,word,places,produces,casa,casa
+item_337,cerro,word,places,produces,cerro/montaña,cerro/montaña
+item_338,circo,word,places,produces,circo,circo
+item_339,cumple,word,places,produces,cumpleaños/cumple,cumpleaños/cumple
+item_340,escuela,word,places,produces,escuela/cole,escuela/cole
+item_341,fiesta,word,places,produces,fiesta,fiesta
+item_342,hospitl,word,places,produces,hospital/clínica,hospital/clínica
+item_343,iglstmpl,word,places,produces,iglesia/templo,iglesia/templo
+item_344,jardin,word,places,produces,jardín,jardín
+item_345,mar,word,places,produces,mar,mar
+item_346,pelotero,word,places,produces,pelotero,pelotero
+item_347,playa,word,places,produces,playa,playa
+item_348,plaza,word,places,produces,plaza,plaza
+item_349,rio,word,places,produces,río,río
+item_350,tienmerc,word,places,produces,supermercado/súper,supermercado/súper
+item_351,vereda,word,places,produces,vereda,vereda
+item_352,zoologic,word,places,produces,zoológico,zoológico
+item_353,abuela,word,people,produces,abuela*,abuela*
+item_354,abuelo,word,people,produces,abuelo*,abuelo*
+item_355,amiga,word,people,produces,amiga*,amiga*
+item_356,amigo,word,people,produces,amigo*,amigo*
+item_357,bebe,word,people,produces,bebé,bebé
+item_358,doctor,word,people,produces,doctor,doctor
+item_359,familia,word,people,produces,familia,familia
+item_360,hermana,word,people,produces,hermana*,hermana*
+item_361,hermano,word,people,produces,hermano*,hermano*
+item_362,madrina,word,people,produces,madrina*,madrina*
+item_363,maestra,word,people,produces,maestra/seño,maestra/seño
+item_364,mama,word,people,produces,mamá/mami*,mamá/mami*
+item_365,niña,word,people,produces,niña/nena,niña/nena
+item_366,niñera,word,people,produces,niñera*,niñera*
+item_367,niño,word,people,produces,niño/nene,niño/nene
+item_368,padrino,word,people,produces,padrino*,padrino*
+item_369,papa,word,people,produces,papá/papi,papá/papi
+item_370,payaso,word,people,produces,payaso,payaso
+item_371,policia,word,people,produces,policía,policía
+item_372,prima,word,people,produces,prima*,prima*
+item_373,primo,word,people,produces,primo*,primo*
+item_374,señor,word,people,produces,señor,señor
+item_375,señora,word,people,produces,señora,señora
+item_376,tia,word,people,produces,tía*,tía*
+item_377,tio,word,people,produces,tío*,tío*
+item_378,nombre,word,people,produces,(nombre del niño[a]),(nombre del niño[a])
+item_379,aver,word,games_routines,produces,a ver... a pasear,a ver... a pasear
+item_380,adioschau,word,games_routines,produces,adíos-chau,adíos-chau
+item_381,ahivoy,word,games_routines,produces,ahí voy,ahí voy
+item_382,alagapat,word,games_routines,produces,al agua patos...,al agua patos...
+item_383,basta,word,games_routines,produces,basta,basta
+item_384,besitos,word,games_routines,produces,besitos,besitos
+item_385,bravo,word,games_routines,produces,bravo,bravo
+item_386,buennoch,word,games_routines,produces,buenas noches,buenas noches
+item_387,buendias,word,games_routines,produces,buenos días,buenos días
+item_388,chaschas,word,games_routines,produces,chas chas,chas chas
+item_389,cosqlits,word,games_routines,produces,cosquillitas,cosquillitas
+item_390,cosquillita,word,games_routines,produces,cosquillita,cosquillita
+item_391,cuco,word,games_routines,produces,Cuco/acá está,Cuco/acá está
+item_392,dale,word,games_routines,produces,dale,dale
+item_393,gol,word,games_routines,produces,gol,gol
+item_394,gracias,word,games_routines,produces,gracias,gracias
+item_395,hola,word,games_routines,produces,hola,hola
+item_396,ojitos,word,games_routines,produces,ojitos,ojitos
+item_397,okey,word,games_routines,produces,okey,okey
+item_398,perdon,word,games_routines,produces,perdón,perdón
+item_399,pis,word,games_routines,produces,pis,pis
+item_400,porfavor,word,games_routines,produces,por favor/porfi,por favor/porfi
+item_401,pumba,word,games_routines,produces,pumba,pumba
+item_402,manito,word,games_routines,produces,qué linda manito,qué linda manito
+item_403,salud,word,games_routines,produces,salud/chin chin,salud/chin chin
+item_404,shhh,word,games_routines,produces,shhh,shhh
+item_405,siesta,word,games_routines,produces,siesta/noni noni,siesta/noni noni
+item_406,tortitas,word,games_routines,produces,tortitas,tortitas
+item_407,unodostres,word,games_routines,produces,"uno, dos, tres","uno, dos, tres"
+item_408,upa,word,games_routines,produces,upa,upa
+item_409,vamos,word,games_routines,produces,vamos,vamos
+item_410,vivaviva,word,games_routines,produces,viva viva,viva viva
+item_411,yaesta,word,games_routines,produces,ya está/listo,ya está/listo
+item_412,abrir,word,action_words,produces,abrir,abrir
+item_413,acabarse,word,action_words,produces,acabar,acabar
+item_414,acompnar,word,action_words,produces,acompañar,acompañar
+item_415,acostar,word,action_words,produces,acostar(se),acostar(se)
+item_416,agarrar,word,action_words,produces,agarrar,agarrar
+item_417,almorzar,word,action_words,produces,almorzar,almorzar
+item_418,andar,word,action_words,produces,andar,andar
+item_419,apagar,word,action_words,produces,apagar,apagar
+item_420,apurar,word,action_words,produces,apurar(se),apurar(se)
+item_421,arreglar,word,action_words,produces,arreglar(se),arreglar(se)
+item_422,asustar,word,action_words,produces,asustar(se),asustar(se)
+item_423,atar,word,action_words,produces,atar,atar
+item_424,ayudar,word,action_words,produces,ayudar,ayudar
+item_425,bailar,word,action_words,produces,bailar,bailar
+item_426,bajarse,word,action_words,produces,bajar(se),bajar(se)
+item_427,bañarse,word,action_words,produces,bañar(se),bañar(se)
+item_428,barrer,word,action_words,produces,barrer,barrer
+item_429,besar,word,action_words,produces,besar,besar
+item_430,buscar,word,action_words,produces,buscar,buscar
+item_431,caber,word,action_words,produces,caber,caber
+item_432,caer,word,action_words,produces,caer(se),caer(se)
+item_433,callarse,word,action_words,produces,callar(se),callar(se)
+item_434,caminar,word,action_words,produces,caminar,caminar
+item_435,cantar,word,action_words,produces,cantar,cantar
+item_436,cenar,word,action_words,produces,cenar,cenar
+item_437,cerrar,word,action_words,produces,cerrar,cerrar
+item_438,chupar,word,action_words,produces,chupar,chupar
+item_439,cocinar,word,action_words,produces,cocinar,cocinar
+item_440,comer,word,action_words,produces,comer(se),comer(se)
+item_441,comprar,word,action_words,produces,comprar,comprar
+item_442,correr,word,action_words,produces,correr,correr
+item_443,cortar,word,action_words,produces,cortar,cortar
+item_444,dar,word,action_words,produces,dar,dar
+item_445,decir,word,action_words,produces,decir,decir
+item_446,dejar,word,action_words,produces,dejar,dejar
+item_447,desyunar,word,action_words,produces,desayunar,desayunar
+item_448,dibujar,word,action_words,produces,dibujar,dibujar
+item_449,doler,word,action_words,produces,doler,doler
+item_450,dormir,word,action_words,produces,dormir(se),dormir(se)
+item_451,empujar,word,action_words,produces,empujar,empujar
+item_452,encontra,word,action_words,produces,encontrar,encontrar
+item_453,ensenar,word,action_words,produces,enseñar,enseñar
+item_454,entrar,word,action_words,produces,entrar,entrar
+item_455,equvcar,word,action_words,produces,equivocar(se),equivocar(se)
+item_456,esconder,word,action_words,produces,esconder(se),esconder(se)
+item_457,escribir,word,action_words,produces,escribir,escribir
+item_458,escuchar,word,action_words,produces,escuchar,escuchar
+item_459,esperar,word,action_words,produces,esperar(se),esperar(se)
+item_460,ganar,word,action_words,produces,ganar,ganar
+item_461,gritar,word,action_words,produces,gritar,gritar
+item_462,guardar,word,action_words,produces,guardar,guardar
+item_463,gustar,word,action_words,produces,gustar,gustar
+item_464,hablar,word,action_words,produces,hablar,hablar
+item_465,hacer,word,action_words,produces,hacer,hacer
+item_466,hamacar,word,action_words,produces,hamacar,hamacar
+item_467,ir,word,action_words,produces,ir(se),ir(se)
+item_468,jugar,word,action_words,produces,jugar,jugar
+item_469,juntar,word,action_words,produces,juntar,juntar
+item_470,lastimar,word,action_words,produces,lastimar(se),lastimar(se)
+item_471,lavar,word,action_words,produces,lavar(se),lavar(se)
+item_472,leer,word,action_words,produces,leer,leer
+item_473,levntar,word,action_words,produces,levantar(se),levantar(se)
+item_474,llevar,word,action_words,produces,llevar(se),llevar(se)
+item_475,llorar,word,action_words,produces,llorar,llorar
+item_476,meterse,word,action_words,produces,meter(se),meter(se)
+item_477,mirar,word,action_words,produces,mirar,mirar
+item_478,morder,word,action_words,produces,morder,morder
+item_479,mostrar,word,action_words,produces,mostrar,mostrar
+item_480,mover,word,action_words,produces,mover,mover
+item_481,nadar,word,action_words,produces,nadar,nadar
+item_482,oir,word,action_words,produces,oír,oír
+item_483,parar,word,action_words,produces,parar(se),parar(se)
+item_484,patear,word,action_words,produces,patear,patear
+item_485,patinar,word,action_words,produces,patinar,patinar
+item_486,pegar,word,action_words,produces,pegar,pegar
+item_487,peinarse,word,action_words,produces,peinar(se),peinar(se)
+item_488,pensar,word,action_words,produces,pensar,pensar
+item_489,perder,word,action_words,produces,perder,perder
+item_490,pintar,word,action_words,produces,pintar,pintar
+item_491,poder,word,action_words,produces,poder,poder
+item_492,poner,word,action_words,produces,poner(se),poner(se)
+item_493,prender,word,action_words,produces,prender,prender
+item_494,prestar,word,action_words,produces,prestar,prestar
+item_495,quedar,word,action_words,produces,quedar(se),quedar(se)
+item_496,quemar,word,action_words,produces,quemar(se),quemar(se)
+item_497,querer,word,action_words,produces,querer,querer
+item_498,quitarse,word,action_words,produces,quitar(se),quitar(se)
+item_499,regalar,word,action_words,produces,regalar,regalar
+item_500,romper,word,action_words,produces,romper,romper
+item_501,saber,word,action_words,produces,saber,saber
+item_502,sacar,word,action_words,produces,sacar,sacar
+item_503,salir,word,action_words,produces,salir(se),salir(se)
+item_504,saltar,word,action_words,produces,saltar,saltar
+item_505,saludar,word,action_words,produces,saludar,saludar
+item_506,sentar,word,action_words,produces,sentar(se),sentar(se)
+item_507,soplar,word,action_words,produces,soplar,soplar
+item_508,subir,word,action_words,produces,subir(se),subir(se)
+item_509,tapar,word,action_words,produces,tapar,tapar
+item_510,tener,word,action_words,produces,tener,tener
+item_511,terminar,word,action_words,produces,terminar,terminar
+item_512,tirar,word,action_words,produces,tirar,tirar
+item_513,tocar,word,action_words,produces,tocar,tocar
+item_514,tomar,word,action_words,produces,tomar(se),tomar(se)
+item_515,traer,word,action_words,produces,traer(se),traer(se)
+item_516,venir,word,action_words,produces,venir(se),venir(se)
+item_517,ver,word,action_words,produces,ver(se),ver(se)
+item_518,volar,word,action_words,produces,volar,volar
+item_519,estar,word,states,produces,estar,estar
+item_520,habrhay,word,states,produces,haber/hay,haber/hay
+item_521,ser,word,states,produces,ser,ser
+item_522,alto,word,descriptive_words,produces,alto,alto
+item_523,amarillo,word,descriptive_words,produces,amarillo,amarillo
+item_524,asco,word,descriptive_words,produces,asco/asqueroso,asco/asqueroso
+item_525,azul,word,descriptive_words,produces,azul,azul
+item_526,blanco,word,descriptive_words,produces,blanco,blanco
+item_527,bueno,word,descriptive_words,produces,bueno,bueno
+item_528,caca,word,descriptive_words,produces,caca/popó,caca/popó
+item_529,caliente,word,descriptive_words,produces,caliente,caliente
+item_530,cansado,word,descriptive_words,produces,cansado,cansado
+item_531,chico,word,descriptive_words,produces,chico/chiquito,chico/chiquito
+item_532,despiert,word,descriptive_words,produces,despierto,despierto
+item_533,difernte,word,descriptive_words,produces,diferente/distinto,diferente/distinto
+item_534,dificil,word,descriptive_words,produces,difícil,difícil
+item_535,duro,word,descriptive_words,produces,duro,duro
+item_536,enfermo,word,descriptive_words,produces,enfermo,enfermo
+item_537,enojado,word,descriptive_words,produces,enojado,enojado
+item_538,feliz,word,descriptive_words,produces,feliz,feliz
+item_539,feo,word,descriptive_words,produces,feo,feo
+item_540,frio,word,descriptive_words,produces,frío,frío
+item_541,fuerte,word,descriptive_words,produces,fuerte,fuerte
+item_542,gordo,word,descriptive_words,produces,gordo,gordo
+item_543,grande,word,descriptive_words,produces,grande,grande
+item_544,hambre,word,descriptive_words,produces,hambre,hambre
+item_545,igual,word,descriptive_words,produces,igual,igual
+item_546,largo,word,descriptive_words,produces,largo,largo
+item_547,lento,word,descriptive_words,produces,lento,lento
+item_548,limpio,word,descriptive_words,produces,limpio,limpio
+item_549,lindo,word,descriptive_words,produces,lindo,lindo
+item_550,loco,word,descriptive_words,produces,loco,loco
+item_551,lleno,word,descriptive_words,produces,lleno,lleno
+item_552,malo,word,descriptive_words,produces,malo,malo
+item_553,mejor,word,descriptive_words,produces,mejor,mejor
+item_554,mentiroso,word,descriptive_words,produces,mentiroso,mentiroso
+item_555,miedsust,word,descriptive_words,produces,miedo/susto,miedo/susto
+item_556,mojado,word,descriptive_words,produces,mojado,mojado
+item_557,mugriento,word,descriptive_words,produces,mugriento,mugriento
+item_558,negro,word,descriptive_words,produces,negro,negro
+item_559,nuevo,word,descriptive_words,produces,nuevo,nuevo
+item_560,oscuro,word,descriptive_words,produces,oscuro,oscuro
+item_561,pelgrso,word,descriptive_words,produces,peligroso,peligroso
+item_562,pesado,word,descriptive_words,produces,pesado,pesado
+item_563,pobre,word,descriptive_words,produces,pobre,pobre
+item_564,primero,word,descriptive_words,produces,primero,primero
+item_565,rapido1,word,descriptive_words,produces,rápido,rápido
+item_566,rico,word,descriptive_words,produces,rico,rico
+item_567,rojo,word,descriptive_words,produces,rojo,rojo
+item_568,rosa,word,descriptive_words,produces,rosa,rosa
+item_569,roto,word,descriptive_words,produces,roto,roto
+item_570,ruidoso,word,descriptive_words,produces,ruidoso,ruidoso
+item_571,seco,word,descriptive_words,produces,seco,seco
+item_572,solo,word,descriptive_words,produces,solo,solo
+item_573,suave,word,descriptive_words,produces,suave,suave
+item_574,sucio,word,descriptive_words,produces,sucio,sucio
+item_575,tonto,word,descriptive_words,produces,tonto/bobo,tonto/bobo
+item_576,tranquil,word,descriptive_words,produces,tranquilo,tranquilo
+item_577,triste,word,descriptive_words,produces,triste,triste
+item_578,ultimo,word,descriptive_words,produces,último,último
+item_579,vacio,word,descriptive_words,produces,vacío,vacío
+item_580,verde,word,descriptive_words,produces,verde,verde
+item_581,viejo,word,descriptive_words,produces,viejo,viejo
+item_582,violeta,word,descriptive_words,produces,violeta,violeta
+item_583,alamañana,word,time_words,produces,a la mañana,a la mañana
+item_584,alanoche,word,time_words,produces,a la noche,a la noche
+item_585,a la tarde,word,time_words,produces,a la tarde,a la tarde
+item_586,ahora,word,time_words,produces,ahora,ahora
+item_587,años,word,time_words,produces,años,años
+item_588,ayer,word,time_words,produces,ayer,ayer
+item_589,despues,word,time_words,produces,después,después
+item_590,dia,word,time_words,produces,día,día
+item_591,hoy,word,time_words,produces,hoy,hoy
+item_592,mañana,word,time_words,produces,mañana,mañana
+item_593,noche,word,time_words,produces,noche,noche
+item_594,aquel,word,pronouns,produces,aquel,aquel
+item_595,aquelos,word,pronouns,produces,aquellos,aquellos
+item_596,aquela,word,pronouns,produces,aquella,aquella
+item_597,aquelas,word,pronouns,produces,aquellas,aquellas
+item_598,el1,word,pronouns,produces,él,él
+item_599,ellos,word,pronouns,produces,ellos,ellos
+item_600,ella,word,pronouns,produces,ella,ella
+item_601,ellas,word,pronouns,produces,ellas,ellas
+item_602,esa,word,pronouns,produces,esa,esa
+item_603,esas,word,pronouns,produces,esas,esas
+item_604,ese,word,pronouns,produces,ese,ese
+item_605,eso,word,pronouns,produces,eso,eso
+item_606,esos,word,pronouns,produces,esos,esos
+item_607,esta,word,pronouns,produces,ésta,ésta
+item_608,estas,word,pronouns,produces,éstas,éstas
+item_609,este,word,pronouns,produces,éste,éste
+item_610,esto,word,pronouns,produces,esto,esto
+item_611,estos,word,pronouns,produces,éstos,éstos
+item_612,prole,word,pronouns,produces,le,le
+item_613,les,word,pronouns,produces,les,les
+item_614,lo,word,pronouns,produces,lo,lo
+item_615,me,word,pronouns,produces,me,me
+item_616,mi,word,pronouns,produces,mi,mi
+item_617,mia,word,pronouns,produces,mía,mía
+item_618,mias,word,pronouns,produces,mías,mías
+item_619,mio,word,pronouns,produces,mío,mío
+item_620,mios,word,pronouns,produces,míos,míos
+item_621,nosotros,word,pronouns,produces,nosotros,nosotros
+item_622,nuestro,word,pronouns,produces,nuestro,nuestro
+item_623,se,word,pronouns,produces,se,se
+item_624,su,word,pronouns,produces,su,su
+item_625,suya,word,pronouns,produces,suya,suya
+item_626,suyas,word,pronouns,produces,suyas,suyas
+item_627,suyo,word,pronouns,produces,suyo,suyo
+item_628,suyos,word,pronouns,produces,suyos,suyos
+item_629,te2,word,pronouns,produces,te,te
+item_630,tu,word,pronouns,produces,tú,tú
+item_631,tuya,word,pronouns,produces,tuya,tuya
+item_632,tuyas,word,pronouns,produces,tuyas,tuyas
+item_633,tuyo,word,pronouns,produces,tuyo,tuyo
+item_634,tuyos,word,pronouns,produces,tuyos,tuyos
+item_635,vos,word,pronouns,produces,vos,vos
+item_636,yo,word,pronouns,produces,yo,yo
+item_637,como,word,question_words,produces,cómo,cómo
+item_638,cual,word,question_words,produces,cuál,cuál
+item_639,cuando,word,question_words,produces,cuándo,cuándo
+item_640,donde,word,question_words,produces,dónde,dónde
+item_641,porque,word,question_words,produces,por qué,por qué
+item_642,que1,word,question_words,produces,qué,qué
+item_643,quien,word,question_words,produces,quién,quién
+item_644,a,word,prepositions,produces,a/al,a/al
+item_645,con,word,prepositions,produces,con,con
+item_646,de,word,prepositions,produces,de/del,de/del
+item_647,el2,word,prepositions,produces,el,el
+item_648,en,word,prepositions,produces,en,en
+item_649,entre,word,prepositions,produces,entre,entre
+item_650,la,word,prepositions,produces,la,la
+item_651,las,word,prepositions,produces,las,las
+item_652,los,word,prepositions,produces,los,los
+item_653,para,word,prepositions,produces,para,para
+item_654,pero,word,prepositions,produces,pero,pero
+item_655,un,word,prepositions,produces,un,un
+item_656,una,word,prepositions,produces,una,una
+item_657,unas,word,prepositions,produces,unas,unas
+item_658,unos,word,prepositions,produces,unos,unos
+item_659,asi,word,quantifiers,produces,así,así
+item_660,bien,word,quantifiers,produces,bien,bien
+item_661,despacio,word,quantifiers,produces,despacio,despacio
+item_662,mal,word,quantifiers,produces,mal,mal
+item_663,mas,word,quantifiers,produces,más,más
+item_664,mucho,word,quantifiers,produces,mucho,mucho
+item_665,nada,word,quantifiers,produces,nada,nada
+item_666,no,word,quantifiers,produces,no,no
+item_667,nohay,word,quantifiers,produces,no hay,no hay
+item_668,otravez,word,quantifiers,produces,otro/otra vez,otro/otra vez
+item_669,pocquito,word,quantifiers,produces,poco/poquito,poco/poquito
+item_670,rapido2,word,quantifiers,produces,rápido,rápido
+item_671,si,word,quantifiers,produces,sí (afirmación),sí (afirmación)
+item_672,todavia,word,quantifiers,produces,todavía,todavía
+item_673,todo,word,quantifiers,produces,todo,todo
+item_674,ya,word,quantifiers,produces,ya,ya
+item_675,abajo,word,locations,produces,abajo,abajo
+item_676,aca,word,locations,produces,acá,acá
+item_677,adelante,word,locations,produces,adelante,adelante
+item_678,adentro,word,locations,produces,adentro,adentro
+item_679,afuera,word,locations,produces,afuera,afuera
+item_680,ahi,word,locations,produces,ahí,ahí
+item_681,allado,word,locations,produces,al lado,al lado
+item_682,alla,word,locations,produces,allá,allá
+item_683,aqui,word,locations,produces,aquí,aquí
+item_684,arriba,word,locations,produces,arriba,arriba
+item_685,atras,word,locations,produces,atrás,atrás
+item_686,cerca,word,locations,produces,cerca,cerca
+item_687,enfrente,word,locations,produces,enfrente,enfrente
+item_688,lejos,word,locations,produces,lejos,lejos
+item_689,entonces,word,connecting_words,produces,entonces,entonces
+item_690,o,word,connecting_words,produces,o,o
+item_691,porque,word,connecting_words,produces,porque,porque
+item_692,que,word,connecting_words,produces,que,que
+item_693,siteportas,word,connecting_words,produces,si (te portás bien),si (te portás bien)
+item_694,sino,word,connecting_words,produces,sino,sino
+item_695,tambien,word,connecting_words,produces,también,también
+item_696,y,word,connecting_words,produces,y,y
+item_697,habpas,usage,how_use_words,not yet; sometimes; often,"¿Su hijo/a habla de las situaciones del pasado? Por ejemplo, si unos días antes fueron al circo y vieron un payaso, ¿lo menciona después?","¿Su hijo/a habla de las situaciones del pasado? Por ejemplo, si unos días antes fueron al circo y vieron un payaso, ¿lo menciona después?"
+item_698,habnovel,usage,how_use_words,not yet; sometimes; often,"¿Su hijo/a habla sobre objetos que no están presentes? Por ejemplo, ¿pide un juguete o un una comida preferida, o pregunta por una persona cuando no la puede ver?","¿Su hijo/a habla sobre objetos que no están presentes? Por ejemplo, ¿pide un juguete o un una comida preferida, o pregunta por una persona cuando no la puede ver?"
+item_699,usefuture,usage,how_use_words,not yet; sometimes; often,"¿Su hijo/a habla de situaciones que van a pasar en el futuro? Por ejemplo, al ponerse el abrigo, ¿dice que va a ir a las hamacas o le dice a otra persona que va a ver a su abuelita?","¿Su hijo/a habla de situaciones que van a pasar en el futuro? Por ejemplo, al ponerse el abrigo, ¿dice que va a ir a las hamacas o le dice a otra persona que va a ver a su abuelita?"
+item_700,misscomp,usage,how_use_words,not yet; sometimes; often,"¿Su hijo/a entiende cuando le piden que traiga algo de otro lugar? Por ejemplo, si le preguntan, “¿dónde está tu pelota?” ¿el niño/a va a buscarla a al lugar donde está?","¿Su hijo/a entiende cuando le piden que traiga algo de otro lugar? Por ejemplo, si le preguntan, “¿dónde está tu pelota?” ¿el niño/a va a buscarla a al lugar donde está?"
+item_701,dicenombre,usage,how_use_words,not yet; sometimes; often,"¿Al señalar o agarrar un objeto, tu hijo/a dice el nombre de la persona a la que pertenece ese objeto aunque esa persona no esté presente? Por ejemplo, ¿encuentra los anteojos de su papá y dice “papá”?","¿Al señalar o agarrar un objeto, tu hijo/a dice el nombre de la persona a la que pertenece ese objeto aunque esa persona no esté presente? Por ejemplo, ¿encuentra los anteojos de su papá y dice “papá”?"
+item_702,termino,word_forms,word_forms_prese,produces,termino,termino
+item_703,terminas,word_forms,word_forms_prese,produces,terminas,terminas
+item_704,termina,word_forms,word_forms_prese,produces,termina,termina
+item_705,terminamos,word_forms,word_forms_prese,produces,terminamos,terminamos
+item_706,acomer,word_forms,word_forms_prese,produces,a comer,a comer
+item_707,como,word_forms,word_forms_prese,produces,como,como
+item_708,comes,word_forms,word_forms_prese,produces,comes,comes
+item_709,come,word_forms,word_forms_prese,produces,come,come
+item_710,comemos,word_forms,word_forms_prese,produces,comemos,comemos
+item_711,arriba,word_forms,word_forms_prese,produces,arriba,arriba
+item_712,subo,word_forms,word_forms_prese,produces,subo,subo
+item_713,subis,word_forms,word_forms_prese,produces,subís,subís
+item_714,sube,word_forms,word_forms_suced,produces,sube,sube
+item_715,sibimos,word_forms,word_forms_suced,produces,sibimos,sibimos
+item_716,termine,word_forms,word_forms_suced,produces,terminé,terminé
+item_717,termino,word_forms,word_forms_suced,produces,terminó,terminó
+item_718,comi,word_forms,word_forms_suced,produces,comí,comí
+item_719,comio,word_forms,word_forms_suced,produces,comió,comió
+item_720,subi,word_forms,word_forms_orden,produces,subí,subí
+item_721,subio,word_forms,word_forms_orden,produces,subió,subió
+item_722,termina,word_forms,word_forms_orden,produces,terminá (la leche),terminá (la leche)
+item_723,come,word_forms,word_forms_orden,produces,comé (la carne),comé (la carne)
+item_724,subí,word_forms,word_forms_orden,produces,subí,subí
+item_725,scombine,combine,combine,not yet; sometimes; often,"¿Su hijo/a ya empezó a combinar palabras, como “papá coche” o “más agua”?","¿Su hijo/a ya empezó a combinar palabras, como “papá coche” o “más agua”?"
+item_726,combination_example1,combination_examples,combination_examples,,,
+item_727,combination_example2,combination_examples,combination_examples,,,
+item_728,combination_example3,combination_examples,combination_examples,,,
+item_729,cmplx01,complexity,complexity,simple; complex,Nene quiere / Quiero chupetín,Nene quiere / Quiero chupetín
+item_730,cmplx02,complexity,complexity,simple; complex,Tuyo esto / Este es tuyo.,Tuyo esto / Este es tuyo.
+item_731,cmplx03,complexity,complexity,simple; complex,Nene malo / Soy malo.,Nene malo / Soy malo.
+item_732,cmplx04,complexity,complexity,simple; complex,Pablo uvas.* / Quiero uvas.,Pablo uvas.* / Quiero uvas.
+item_733,cmplx05,complexity,complexity,simple; complex,Agua vamos. / Vamos al agua,Agua vamos. / Vamos al agua
+item_734,cmplx06,complexity,complexity,simple; complex,A silla / En la silla,A silla / En la silla
+item_735,cmplx07,complexity,complexity,simple; complex,Pollo no / No quiero pollo,Pollo no / No quiero pollo
+item_736,cmplx08,complexity,complexity,simple; complex,Llorando María.* / María esta llorando,Llorando María.* / María esta llorando
+item_737,cmplx09,complexity,complexity,simple; complex,Mío lápiz. / Este es mi lapiz,Mío lápiz. / Este es mi lapiz
+item_738,cmplx10,complexity,complexity,simple; complex,Mas leche / Dame más leche.,Mas leche / Dame más leche.
+item_739,cmplx11,complexity,complexity,simple; complex,Papo mami / El zapato es de mami,Papo mami / El zapato es de mami
+item_740,cmplx12,complexity,complexity,simple; complex,No acá / Ese no está acá,No acá / Ese no está acá
+item_741,cmplx13,complexity,complexity,simple; complex,Rompió globo / Se rompió el globo.,Rompió globo / Se rompió el globo.
+item_742,cmplx14,complexity,complexity,simple; complex,Leche quema / La leche está caliente,Leche quema / La leche está caliente
+item_743,cmplx15,complexity,complexity,simple; complex,Duele panza / Me duele la panza,Duele panza / Me duele la panza
+item_744,cmplx16,complexity,complexity,simple; complex,Guau-guau grande. / Tengo un perro grande,Guau-guau grande. / Tengo un perro grande
+item_745,cmplx17,complexity,complexity,simple; complex,Calle allá esta / Allá esta la calle,Calle allá esta / Allá esta la calle
+item_746,cmplx18,complexity,complexity,simple; complex,Puse a mano / Lo puse en mi mano,Puse a mano / Lo puse en mi mano
+item_747,cmplx19,complexity,complexity,simple; complex,Acabó agua / Se me acabó el agua,Acabó agua / Se me acabó el agua
+item_748,cmplx20,complexity,complexity,simple; complex,Fue casa / Se fue a casa.,Fue casa / Se fue a casa.
+item_749,cmplx21,complexity,complexity,simple; complex,Silla subir / Me quiero subir a la silla,Silla subir / Me quiero subir a la silla
+item_750,cmplx22,complexity,complexity,simple; complex,María papá.* / Quiero ir con papá,María papá.* / Quiero ir con papá
+item_751,cmplx23,complexity,complexity,simple; complex,Bravo Pablo circo.* / Dije bravo en el circo,Bravo Pablo circo.* / Dije bravo en el circo
+item_752,cmplx24,complexity,complexity,simple; complex,Papá calle / Papá se fué a trabajar,Papá calle / Papá se fué a trabajar
+item_753,cmplx25,complexity,complexity,simple; complex,Ya puse. / Ya se lo puse,Ya puse. / Ya se lo puse
+item_754,cmplx26,complexity,complexity,simple; complex,Manu osito coche.* / Manu dejó el osito en el coche,Manu osito coche.* / Manu dejó el osito en el coche
+item_755,cmplx27,complexity,complexity,simple; complex,Lapiz dibujar / DIbujo con el lápiz,Lapiz dibujar / DIbujo con el lápiz
+item_756,cmplx28,complexity,complexity,simple; complex,Ya pinté / Ya terminé de pintar,Ya pinté / Ya terminé de pintar
+item_757,cmplx29,complexity,complexity,simple; complex,nene rompió bici Danny \ el nene rompió la bici de Danny,nene rompió bici Danny \ el nene rompió la bici de Danny
+item_758,cmplx30,complexity,complexity,simple; complex,Pone no. / No lo pongas,Pone no. / No lo pongas
+item_759,cmplx31,complexity,complexity,simple; complex,Vamos comer papas carne \ vamos a comer papas y carne,Vamos comer papas carne \ vamos a comer papas y carne
+item_760,cmplx32,complexity,complexity,simple; complex,Nene llora cayó / El nene llora porque se cayó.,Nene llora cayó / El nene llora porque se cayó.
+item_761,cmplx33,complexity,complexity,simple; complex,Mamá nene compra / Mamá y el nene fueron a comprar,Mamá nene compra / Mamá y el nene fueron a comprar
+item_762,cmplx34,complexity,complexity,simple; complex,Abrí dame galletita / Abría la caja y dame una galletita,Abrí dame galletita / Abría la caja y dame una galletita
+item_763,cmplx35,complexity,complexity,simple; complex,"No toca, quemás / No lo toqués porque te quemás.","No toca, quemás / No lo toqués porque te quemás."
+item_764,cmplx36,complexity,complexity,simple; complex,Quiero libro papá / Quiero el libro que compró papá,Quiero libro papá / Quiero el libro que compró papá
+item_765,cmplx37,complexity,complexity,simple; complex,Pongo agua flores / pongo agua para que crezcan las flores.,Pongo agua flores / pongo agua para que crezcan las flores.
