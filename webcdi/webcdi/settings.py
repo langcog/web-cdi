@@ -210,6 +210,7 @@ LOCALE_PATHS = (
 LANGUAGES = [
     ('en', _('English')),
     ('es', _('Spanish')),
+    ('es-ar', ('Argentine Spanish')),
     ('fr-ca', _('French Quebec')),
     ('en-ca', _('Canadian English')),
     ('nl', _('Dutch')),
@@ -226,6 +227,7 @@ LANGUAGE_DICT = {
     'Dutch' : 'nl',
     'Hebrew' : 'he',
     'Korean' : 'ko',
+    'Argentine Spanish' : 'es_ar'
 }
 
 LANGUAGE_TO_COUNTRY_DICT = {
