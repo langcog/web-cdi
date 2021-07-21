@@ -107,7 +107,8 @@ class BackgroundInfo(models.Model):
     due_date_diff = models.IntegerField(verbose_name = _("By how many weeks? (round to the nearest week)"),blank=True, null=True, validators = [MinValueValidator(1, _("Number of weeks cannot be less than 1"))]) # Determines # of weeks between DOB and due date
 
     education_levels = [(x,str(x)) for x in range(5,25)] #Declares tuple of integers for # of years of education
-
+    education_levels[-1] = (0, _("Prefer not to disclose"))
+    
     years = [(x,str(x)) for x in range(1950, datetime.date.today().year+2)] #Declares tuple for year of birth for parents/guardians
     years[-1] = (0, _("Prefer not to disclose"))
 

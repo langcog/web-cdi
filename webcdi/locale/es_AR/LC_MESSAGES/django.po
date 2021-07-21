@@ -220,7 +220,7 @@ msgstr "Después"
 
 #: webcdi/cdi_forms/forms.py:184 webcdi/cdi_forms/models.py:104
 msgid "Was he/she early or late?"
-msgstr "¿Su niño/a nació temprano o tarde?"
+msgstr "¿Con cuántas semanas de gestación?"
 
 #: webcdi/cdi_forms/forms.py:189 webcdi/cdi_forms/models.py:68
 msgid "Male"
@@ -283,25 +283,25 @@ msgstr "Peso del niño(a) al nacer"
 
 #: webcdi/cdi_forms/forms.py:311 webcdi/cdi_forms/models.py:97
 msgid "Was your child born as part of a multiple birth?"
-msgstr "¿Su niño(a) nació de parto múltiple?"
+msgstr "¿Tu niño(a) nació de parto múltiple?"
 
 #: webcdi/cdi_forms/forms.py:318
 msgid ""
 "Was your child born early or late (more than one week before or after the "
 "due date)?"
-msgstr "¿Su niño(a) nació antes de los 9 meses?"
+msgstr "¿Tu niño(a) nació antes de los 9 meses?"
 
 #: webcdi/cdi_forms/forms.py:324
 msgid "Does your child regularly hear a language other than English?"
-msgstr "¿tu hijo(a) escucha otros idiomas, regularmente, aparte del español?"
+msgstr "¿Tu hijo escucha otros idiomas, regularmente, aparte del español?"
 
 #: webcdi/cdi_forms/forms.py:330
 msgid "Has your child experienced chronic ear infections (5 or more)?"
-msgstr "¿Su hijo(a) ha tenido infecciones crónicas de oído (cinco o más)?"
+msgstr "¿Tu hijo/a tuvo infecciones crónicas de oído?"
 
 #: webcdi/cdi_forms/forms.py:336 webcdi/cdi_forms/models.py:159
 msgid "Do you suspect that your child may have hearing loss?"
-msgstr "¿Sospechas que tu hijo(a) pueda haber sufrido pérdida auditiva?"
+msgstr "¿Sospechas que tu hijo/a pueda tener pérdida auditiva?"
 
 #: webcdi/cdi_forms/forms.py:342 webcdi/cdi_forms/models.py:162
 msgid ""
@@ -349,7 +349,7 @@ msgstr "Información básica"
 
 #: webcdi/cdi_forms/forms.py:506
 msgid "Family Background"
-msgstr "Información Familiar"
+msgstr "Información familiar"
 
 
 #: webcdi/cdi_forms/forms.py:508
@@ -1179,7 +1179,7 @@ msgstr "10 o más (Décimo o Posterior)"
 
 #: webcdi/cdi_forms/models.py:87
 msgid "Birth order"
-msgstr "Orden de nacimiento"
+msgstr "Orden de nacimiento del niño/a"
 
 #: webcdi/cdi_forms/models.py:91
 msgid "Twins"
@@ -1231,11 +1231,11 @@ msgstr "¿Con quién pasa tu hijo/a la mayor parte del día?"
 
 #: webcdi/cdi_forms/models.py:121 webcdi/cdi_forms/models.py:124
 msgid "Primary Caregiver Year of birth"
-msgstr "Año de nacimiento del/de la cuidador(a) principal"
+msgstr "Año de nacimiento de la madre o la cuidador/a principal"
 
 #: webcdi/cdi_forms/models.py:122
 msgid "Primary Caregiver Education"
-msgstr "Nivel de educación del/de la cuidador(a) principal"
+msgstr "Nivel de educación de la madre o cuidador/a principal"
 
 #: webcdi/cdi_forms/models.py:122 webcdi/cdi_forms/models.py:131
 msgid ""
@@ -1251,11 +1251,11 @@ msgstr "Cuidador(a) secundario"
 
 #: webcdi/cdi_forms/models.py:130
 msgid "Secondary Caregiver Year of birth"
-msgstr "Año de nacimiento del/de la cuidador(a) secundario"
+msgstr "Año de nacimiento del padre o cuidador/a secundario/a"
 
 #: webcdi/cdi_forms/models.py:131
 msgid "Secondary Caregiver Education"
-msgstr "Nivel de educación del/de la cuidador(a) secundario"
+msgstr "Nivel de educación del padre o cuidador/a secundario/a"
 
 #: webcdi/cdi_forms/models.py:140
 msgid "Two parents"
@@ -1312,8 +1312,7 @@ msgstr "¿Su niño(a) ha tenido infecciones crónicas del oído (cinco o más)
 #: webcdi/cdi_forms/models.py:157
 msgid "Has your child undergone interventions (e.g., tubes)?  Please describe"
 msgstr ""
-"¿Ha tenido alguna operación? Por favor "
-"describí el problema"
+"Por favor describí el problema"
 
 #: webcdi/cdi_forms/models.py:160 webcdi/cdi_forms/models.py:163
 #: webcdi/cdi_forms/models.py:166 webcdi/cdi_forms/models.py:169
@@ -1675,7 +1674,7 @@ msgid ""
 "Your child says the word when trying to name an object or describe something "
 "that happened.  You think s/he has a meaning for that word."
 msgstr ""
-"Tu hijo/a DICE esa palabra o frase cuando quiere nombrar el objeto o contarte"
+"Tu hijo/a DICE esa palabra o frase cuando quiere nombrar el objeto o contarte "
 "algo que pasó. Te das cuenta de que conoce el significado de la palabra."
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:226
@@ -1684,8 +1683,8 @@ msgid ""
 "\"special\" way. If you use another word in your family (e.g., Nana for "
 "Grandma), that is ok too!"
 msgstr ""
-"Marcá  la palabra aunque tu hijo/a todavía no pueda decirla completa o no"
-"pueda pronunciarla bien. También marcá la casilla si en tu familia se usa"
+"Marcá  la palabra aunque tu hijo/a todavía no pueda decirla completa o no "
+"pueda pronunciarla bien. También marcá la casilla si en tu familia se usa "
 "otro nombre diferente para nombrar alguna de las palabras de la lista"
 "( EJ: “lala” en lugar de “abuela” o “pupo” en lugar de “ombligo”)"
 
@@ -1698,7 +1697,7 @@ msgid ""
 "DON'T check the box if your child is just stringing sounds together. This is "
 "not a real word that means something."
 msgstr ""
-"No marques la palabra si tu hijo/a solo repite sonidos aislados en lugar de una"
+"No marques la palabra si tu hijo/a solo repite sonidos aislados en lugar de una "
 "palabra o un grupo fijo de sonidos que significan algo concreto."
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:285

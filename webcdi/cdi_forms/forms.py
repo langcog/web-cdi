@@ -407,6 +407,7 @@ class BackgroundForm(BetterModelForm):
         #if we have a specified background info, use it
         if os.path.isfile(self.filename) :
             rows = []
+            hidden_fields = []
             pages = json.load(open(self.filename, encoding='utf-8'))
             for page in pages:
                 if page['page'] == self.page:
@@ -461,7 +462,6 @@ class BackgroundForm(BetterModelForm):
                         rows.append(Fieldset(fieldset['fieldset'], *fields))
                 else :
                     fieldsets = page['contents']
-                    hidden_fields = []
                     for fieldset in fieldsets:
                         for field in fieldset['fields']:
                             if 'field' in field: 
