@@ -270,7 +270,7 @@
                 ]
             },
             {
-                "fieldset":"Exposición al lenguaje",
+                "fieldset":"Contacto con otras lenguas",
                 "fields":[
                     {
                         "field":"other_languages_boolean",

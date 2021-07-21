@@ -10,7 +10,7 @@ import datetime, codecs, json, os.path
 from django.core.exceptions import ValidationError
 from django.core.validators import EmailValidator, RegexValidator
 from django.utils.translation import ugettext_lazy as _
-from django.utils.translation import ugettext
+from django.utils.translation import ugettext, pgettext
 from .utils import get_demographic_filename
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__)) # Declare project file directory
@@ -219,7 +219,7 @@ class BackgroundForm(BetterModelForm):
     caregiver_other = forms.CharField(
         label = ' ',
         required=False,
-        widget = forms.TextInput(attrs={'placeholder': _('Please specify')})
+        widget = forms.TextInput(attrs={'placeholder': pgettext("caregiver_other", "Please specify")})
     )
 
     # Cleaning input data for views.py and later database storage.
