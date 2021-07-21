@@ -790,30 +790,33 @@ def cdi_form(request, hash_id):
                     else:
                         if value:
                             administration_data.objects.update_or_create(administration = administration_instance, item_ID = key, defaults = {'value': value})
-
+            
             # Update the Summary Data
             update_summary_scores(administration_instance)
-
+            print(request.POST)
             if 'btn-save' in request.POST and request.POST['btn-save'] == _('Save'): # If the save button was pressed
                 administration.objects.filter(url_hash = hash_id).update(last_modified = timezone.now()) # Update administration object with date of last modification
-
+                print(f'btn save')
                 if 'analysis' in request.POST:
+                    print(f'analysis')
                     analysis = parse_analysis(request.POST['analysis']) # Note whether test-taker asserted that the child's age was accurate and form was filled out to best of ability
                     administration.objects.filter(url_hash = hash_id).update(analysis = analysis) # Update administration object
 
                 if 'page_number' in request.POST:
+                    print(f'page number')
                     page_number = int(request.POST['page_number']) if request.POST['page_number'].isdigit() else 0  # Note the page number for completion
                     administration.objects.filter(url_hash = hash_id).update(page_number = page_number) # Update administration object
 
                 refresh = True
             elif 'btn-back' in request.POST and request.POST['btn-back'] == _('Go back to Background Info'): # If Back button was pressed
+                print(f'btn back')
                 administration.objects.filter(url_hash = hash_id).update(last_modified = timezone.now()) # Update last_modified
                 request.method = "GET"
                 background_instance = BackgroundInfo.objects.get(administration = administration_instance) 
                 return redirect('background-info', pk=background_instance.pk) #background_info_form(request, hash_id) # Fetch Background info template
 
             elif 'btn-submit' in request.POST and request.POST['btn-submit'] == _('Submit'): # If 'Submit' button was pressed
-                
+                print(f'btn submit')
                 #Some studies may require successfully passing a ReCaptcha test for submission. If so, get for a passing response before marking form as complete.
                 result = {'success': None}
                 recaptcha_response = request.POST.get('g-recaptcha-response', None)

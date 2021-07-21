@@ -243,6 +243,6 @@
 		"csv_file": "cdi_form_csv/cdi_forms/[Argentine_Spanish_WS].csv",
 		"json_data": "cdi_forms/form_data/Argentine_Spanish_WS_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/Argentine_Spanish_WS_scoring.json",
-		"demographics" : ["Spanish_Split.json"]
+		"demographics" : ["Argentine_Spanish.json"]
 	}
 ]
