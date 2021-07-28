@@ -59,6 +59,42 @@
                             "early_or_late",
                             "due_date_diff"
                         ]
+                    },
+                    {
+                        "field":"ear_infections_boolean",
+                        "div":[
+                            "ear_infections"
+                        ]
+                    },
+                    {
+                        "field":"hearing_loss_boolean",
+                        "div":[
+                            "hearing_loss"
+                        ]
+                    },
+                    {
+                        "field":"vision_problems_boolean",
+                        "div":[
+                            "vision_problems"
+                        ]
+                    },
+                    {
+                        "field":"illnesses_boolean",
+                        "div":[
+                            "illnesses"
+                        ]
+                    },
+                    {
+                        "field":"worried_boolean",
+                        "div":[
+                            "worried"
+                        ]
+                    },
+                    {
+                        "field":"learning_disability_boolean",
+                        "div":[
+                            "learning_disability"
+                        ]
                     }
                 ]
             },
@@ -66,6 +102,8 @@
                 "fieldset":"Información familiar",
                 "fields":[
                     {
+                        "field":"place_of_residence"
+                    },{
                         "field":"primary_caregiver",
                         "div":[
                             "primary_caregiver_other"
@@ -260,6 +298,20 @@
                         ]
                     }
                 ]
+            },{
+                "fieldset" : "Ocupación",
+                "HTML" : "<p>Por favor describí con claridad el trabajo de la madre o cuidador/a principal y del padre o cuidador/a secundario/a. Por ejemplo, si es empleado/a, indicá  también dónde trabaja (Ej. en un negocio de ropa, en casa de familia, administrativo/a etc.). Si es maestra/o,  aclará también el nivel (inicial, primaria, secundaria etc.). Si alguno/a de ustedes está desempleado/a o si es ama/o  de casa, por favor indicalo. </p>",
+                "fields" : [
+                    {
+                        "field":"primary_caregiver_occupation"
+                    },{
+                        "field":"primary_caregiver_occupation_description"
+                    },{
+                        "field":"secondary_caregiver_occupation"
+                    },{
+                        "field":"secondary_caregiver_occupation_description"
+                    }
+                ]
             },
             {
                 "fieldset":"Información del Tutor",
@@ -287,56 +339,19 @@
                         ]
                     }
                 ]
-            },
-            {
-                "fieldset":"Salud",
-                "fields":[
-                    {
-                        "field":"ear_infections_boolean",
-                        "div":[
-                            "ear_infections"
-                        ]
-                    },
-                    {
-                        "field":"hearing_loss_boolean",
-                        "div":[
-                            "hearing_loss"
-                        ]
-                    },
-                    {
-                        "field":"vision_problems_boolean",
-                        "div":[
-                            "vision_problems"
-                        ]
-                    },
-                    {
-                        "field":"illnesses_boolean",
-                        "div":[
-                            "illnesses"
-                        ]
-                    },
-                    {
-                        "field":"worried_boolean",
-                        "div":[
-                            "worried"
-                        ]
-                    },
-                    {
-                        "field":"learning_disability_boolean",
-                        "div":[
-                            "learning_disability"
-                        ]
-                    }
-                ]
             },{
                 "fieldset": "Escolarización",
                 "fields" : [
                     {
-
                         "field":"services_boolean",
                         "div":[
-                            "services"
+                            "services",
+                            "kindergarten_since_when",
+                            "kindergarten_hpd",
+                            "kindergarten_dpw"
                         ]
+                    },{
+
                     }
                 ]
             }

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-21 10:10+0000\n"
+"POT-Creation-Date: 2021-07-28 11:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -430,27 +430,27 @@ msgstr ""
 msgid "dd/mm/yyyy"
 msgstr ""
 
-#: webcdi/cdi_forms/forms.py:553 webcdi/cdi_forms/models.py:136
+#: webcdi/cdi_forms/forms.py:555 webcdi/cdi_forms/models.py:136
 msgid "Estimated Annual Family Income (in USD)"
 msgstr ""
 
-#: webcdi/cdi_forms/forms.py:557
+#: webcdi/cdi_forms/forms.py:559
 msgid "My child is (check all that apply):"
 msgstr ""
 
-#: webcdi/cdi_forms/forms.py:561 webcdi/cdi_forms/forms.py:563
+#: webcdi/cdi_forms/forms.py:563 webcdi/cdi_forms/forms.py:565
 msgid "Basic Information"
 msgstr "Información básica"
 
-#: webcdi/cdi_forms/forms.py:567
+#: webcdi/cdi_forms/forms.py:569
 msgid "Family Background"
 msgstr "Información familiar"
 
-#: webcdi/cdi_forms/forms.py:568 webcdi/cdi_forms/models.py:139
+#: webcdi/cdi_forms/forms.py:570 webcdi/cdi_forms/models.py:139
 msgid "Child's Ethnicity"
 msgstr ""
 
-#: webcdi/cdi_forms/forms.py:568
+#: webcdi/cdi_forms/forms.py:570
 msgid ""
 "The following information is being collected for the sole purpose of "
 "reporting to our grant-funding institute, i.e.,  NIH (National Institute of "
@@ -458,35 +458,35 @@ msgid ""
 "inclusiveness of our research. Your cooperation is appreciated, but optional."
 msgstr ""
 
-#: webcdi/cdi_forms/forms.py:569
+#: webcdi/cdi_forms/forms.py:571
 msgid "Caregiver Information"
 msgstr "Composición familiar"
 
-#: webcdi/cdi_forms/forms.py:570
+#: webcdi/cdi_forms/forms.py:572
 msgid "Language Exposure"
 msgstr "Contacto con otras lenguas"
 
-#: webcdi/cdi_forms/forms.py:573
+#: webcdi/cdi_forms/forms.py:575
 msgid "Health"
 msgstr "Información sobre la salud del niño(a)"
 
-#: webcdi/cdi_forms/forms.py:611
+#: webcdi/cdi_forms/forms.py:613
 msgid "Your Name"
 msgstr "Tu Nombre"
 
-#: webcdi/cdi_forms/forms.py:612
+#: webcdi/cdi_forms/forms.py:614
 msgid "Your Email Address"
 msgstr "Tu correo electrónico"
 
-#: webcdi/cdi_forms/forms.py:613
+#: webcdi/cdi_forms/forms.py:615
 msgid "Your Test URL"
 msgstr "Su URL del cuestionario"
 
-#: webcdi/cdi_forms/forms.py:614
+#: webcdi/cdi_forms/forms.py:616
 msgid "What would you like to tell us?"
 msgstr "¿Te gustaría agregar algo o transmitirnos alguna inquietud?"
 
-#: webcdi/cdi_forms/forms.py:633
+#: webcdi/cdi_forms/forms.py:635
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:11
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:323
 #: webcdi/cdi_forms/views.py:814
@@ -1313,7 +1313,7 @@ msgstr "¿Su niño(a) nació antes o después de la fecha que le dio el doctor?"
 
 #: webcdi/cdi_forms/models.py:107
 msgid "By how many weeks? (round to the nearest week)"
-msgstr "¿Cuantas semanas antes o después? (redondee a la semana próxima)"
+msgstr "¿Cuantas semanas antes o después?"
 
 #: webcdi/cdi_forms/models.py:107
 msgid "Number of weeks cannot be less than 1"
@@ -1418,7 +1418,7 @@ msgstr "¿Su niño(a) ha tenido infecciones crónicas del oído (cinco o más)
 
 #: webcdi/cdi_forms/models.py:160
 msgid "Has your child undergone interventions (e.g., tubes)?  Please describe"
-msgstr "Por favor describí el problema"
+msgstr "¿Cuántas?"
 
 #: webcdi/cdi_forms/models.py:163 webcdi/cdi_forms/models.py:166
 #: webcdi/cdi_forms/models.py:169 webcdi/cdi_forms/models.py:172
@@ -1437,6 +1437,50 @@ msgstr "Ambos cuidadores"
 #: webcdi/cdi_forms/models.py:187
 msgid "Who is filling in the form?"
 msgstr "¿Quién está respondiendo este cuestionario?"
+
+#: webcdi/cdi_forms/models.py:212
+msgid "Place of residence (neighnorhood/district)"
+msgstr "Lugar de residencia  (barrio/Localidad)"
+
+#: webcdi/cdi_forms/models.py:213
+msgid "Primary caregiver occupation"
+msgstr "Madre o cuidador/a principal - Ocupación"
+
+#: webcdi/cdi_forms/models.py:214
+msgid "Primary caregiver occupation description"
+msgstr "Madre o cuidador/a principal - Breve descripción"
+
+#: webcdi/cdi_forms/models.py:215
+msgid "Secondary caregiver occupation"
+msgstr "Padre o cuidador/a secundario/a - Ocupación"
+
+#: webcdi/cdi_forms/models.py:216
+msgid "Secondary caregiver occupation description"
+msgstr "Padre o cuidador/a secundario/a - Breve descripción"
+
+#: webcdi/cdi_forms/models.py:222
+msgid "Less than 6 months"
+msgstr "menos de 6 meses"
+
+#: webcdi/cdi_forms/models.py:223
+msgid "Between 6 and 12 months"
+msgstr "más de seis meses"
+
+#: webcdi/cdi_forms/models.py:224
+msgid "More than 12 months"
+msgstr "más de un año"
+
+#: webcdi/cdi_forms/models.py:226
+msgid "Since when"
+msgstr "¿Desde cuándo?"
+
+#: webcdi/cdi_forms/models.py:227
+msgid "Hours per day"
+msgstr "¿Cuántas horas al día?"
+
+#: webcdi/cdi_forms/models.py:228
+msgid "Days per week"
+msgstr "¿Cuántas veces por semana?"
 
 #: webcdi/cdi_forms/templates/cdi_forms/background_info.html:7
 #: webcdi/cdi_forms/templates/cdi_forms/background_info.html:59

@@ -209,6 +209,24 @@ class BackgroundInfo(models.Model):
     child_self_reads =models.CharField(max_length=51, choices=choices.LITERACY_CHOICES, verbose_name="About how many times per week does your child look at books by themself?", blank=True, null=True)
     child_asks_words_say =models.CharField(max_length=51, choices=choices.LITERACY_CHOICES, verbose_name="About how often does your child ask you what printed words say?", blank=True, null=True)
 
+    place_of_residence = models.CharField(max_length=51, blank=True, null=True, verbose_name=_("Place of residence (neighnorhood/district)"))
+    primary_caregiver_occupation = models.CharField(max_length=51, blank=True, null=True, verbose_name=_("Primary caregiver occupation"))
+    primary_caregiver_occupation_description = models.CharField(max_length=51, blank=True, null=True, verbose_name=_("Primary caregiver occupation description"))
+    secondary_caregiver_occupation = models.CharField(max_length=51, blank=True, null=True, verbose_name=_("Secondary caregiver occupation"))
+    secondary_caregiver_occupation_description = models.CharField(max_length=51, blank=True, null=True, verbose_name=_("Secondary caregiver occupation description"))
+
+    LESS_THAN_6 = "Less than 6 months"
+    SIX_TO_TWELVE = "Between 6 and 12 months"
+    MORE_THAN_12 = "More than 12 months"
+    KINDERGARETN_CHOICES = [
+        (LESS_THAN_6, _("Less than 6 months")),
+        (SIX_TO_TWELVE, _("Between 6 and 12 months")),
+        (MORE_THAN_12, _("More than 12 months"))
+    ]
+    kindergarten_since_when = models.CharField(max_length=51, blank=True, null=True, choices=KINDERGARETN_CHOICES, verbose_name=_("Since when"))
+    kindergarten_hpd = models.IntegerField(blank=True, null=True, verbose_name=_("Hours per day"))
+    kindergarten_dpw = models.IntegerField(blank=True, null=True, verbose_name=_("Days per week"))
+    
 #Model of zipcodes reported to be in 3-digit zip code prefixes with a population lower than 20,000. Tests with a zipcode found in this model will have their digits replaced with their state abbreviation.
 class Zipcode(models.Model):
     zip_code=models.CharField(max_length = 5)

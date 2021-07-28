@@ -1,3 +1,5 @@
+from django.utils.translation import ugettext_lazy as _
+
 STRONGLY_DISAGREE = "strongly disagree"
 DISAGREE = "disagree"
 SOMEWHAT_DISAGREE = "somewhat disagree"
@@ -34,3 +36,4 @@ LITERACY_CHOICES = [
     (FIVE_SIX, FIVE_SIX.title()),
     (DAILY, DAILY.title()),
 ]
+
