@@ -1428,7 +1428,7 @@ msgstr "Por favor describí el problema"
 #: webcdi/cdi_forms/models.py:173
 msgctxt "daycare"
 msgid "Please describe"
-msgstr "Por favor describí"
+msgstr "¿El Jardín es público, privado o subvencionado?. Por favor describí"
 
 #: webcdi/cdi_forms/models.py:179
 msgid "Indicate which family member and provide a description"
