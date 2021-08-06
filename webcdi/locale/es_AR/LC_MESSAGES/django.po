@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-28 11:03+0000\n"
+"POT-Creation-Date: 2021-08-06 06:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -32,8 +32,8 @@ msgstr "Sí"
 #: webcdi/cdi_forms/forms.py:30 webcdi/cdi_forms/forms.py:42
 #: webcdi/cdi_forms/forms.py:71 webcdi/cdi_forms/forms.py:93
 #: webcdi/cdi_forms/forms.py:102 webcdi/cdi_forms/forms.py:126
-#: webcdi/cdi_forms/models.py:86 webcdi/cdi_forms/models.py:110
-#: webcdi/cdi_forms/models.py:113 webcdi/cdi_forms/models.py:147
+#: webcdi/cdi_forms/models.py:87 webcdi/cdi_forms/models.py:111
+#: webcdi/cdi_forms/models.py:114 webcdi/cdi_forms/models.py:148
 msgid "Prefer not to disclose"
 msgstr "Prefiero no contestar"
 
@@ -93,8 +93,8 @@ msgstr ""
 msgid "White"
 msgstr ""
 
-#: webcdi/cdi_forms/forms.py:50 webcdi/cdi_forms/models.py:70
-#: webcdi/cdi_forms/models.py:119 webcdi/cdi_forms/models.py:185
+#: webcdi/cdi_forms/forms.py:50 webcdi/cdi_forms/models.py:71
+#: webcdi/cdi_forms/models.py:120 webcdi/cdi_forms/models.py:186
 #, fuzzy
 #| msgid "Mother"
 msgid "Other"
@@ -244,13 +244,13 @@ msgstr "18 (Título de posgrado)"
 msgid "23 or more"
 msgstr "23 o más"
 
-#: webcdi/cdi_forms/forms.py:137 webcdi/cdi_forms/models.py:190
+#: webcdi/cdi_forms/forms.py:137 webcdi/cdi_forms/models.py:191
 #, fuzzy
 #| msgid "Who does your child live with?"
 msgid "Does you child have siblings?"
 msgstr "¿Con quién vive su hijo(a)?"
 
-#: webcdi/cdi_forms/forms.py:140 webcdi/cdi_forms/models.py:191
+#: webcdi/cdi_forms/forms.py:140 webcdi/cdi_forms/models.py:192
 #, fuzzy
 #| msgid "How old is your child?"
 msgid "How many siblings does you child have?"
@@ -286,27 +286,27 @@ msgstr ""
 msgid "What is your postal/zip code?"
 msgstr "¿Cuál es tu código postal?"
 
-#: webcdi/cdi_forms/forms.py:178 webcdi/cdi_forms/models.py:138
+#: webcdi/cdi_forms/forms.py:178 webcdi/cdi_forms/models.py:139
 msgid "Is your child Hispanic or Latino?"
 msgstr ""
 
-#: webcdi/cdi_forms/forms.py:183 webcdi/cdi_forms/models.py:106
+#: webcdi/cdi_forms/forms.py:183 webcdi/cdi_forms/models.py:107
 msgid "Early"
 msgstr "Antes"
 
-#: webcdi/cdi_forms/forms.py:183 webcdi/cdi_forms/models.py:106
+#: webcdi/cdi_forms/forms.py:183 webcdi/cdi_forms/models.py:107
 msgid "Late"
 msgstr "Después"
 
-#: webcdi/cdi_forms/forms.py:185 webcdi/cdi_forms/models.py:106
+#: webcdi/cdi_forms/forms.py:185 webcdi/cdi_forms/models.py:107
 msgid "Was he/she early or late?"
 msgstr "¿Con cuántas semanas de gestación?"
 
-#: webcdi/cdi_forms/forms.py:190 webcdi/cdi_forms/models.py:70
+#: webcdi/cdi_forms/forms.py:190 webcdi/cdi_forms/models.py:71
 msgid "Male"
 msgstr "Masculino"
 
-#: webcdi/cdi_forms/forms.py:190 webcdi/cdi_forms/models.py:70
+#: webcdi/cdi_forms/forms.py:190 webcdi/cdi_forms/models.py:71
 msgid "Female"
 msgstr "Femenino"
 
@@ -363,12 +363,12 @@ msgid "Your baby is too old for this version of the CDI."
 msgstr "Tu hijo(a) ya es grande para esta versión del cuestionario"
 
 #: webcdi/cdi_forms/forms.py:309 webcdi/cdi_forms/forms.py:310
-#: webcdi/cdi_forms/models.py:102 webcdi/cdi_forms/models.py:103
-#: webcdi/cdi_forms/models.py:128 webcdi/cdi_forms/models.py:129
+#: webcdi/cdi_forms/models.py:103 webcdi/cdi_forms/models.py:104
+#: webcdi/cdi_forms/models.py:129 webcdi/cdi_forms/models.py:130
 msgid "Birth weight"
 msgstr "Peso del niño(a) al nacer"
 
-#: webcdi/cdi_forms/forms.py:319 webcdi/cdi_forms/models.py:99
+#: webcdi/cdi_forms/forms.py:319 webcdi/cdi_forms/models.py:100
 msgid "Was your child born as part of a multiple birth?"
 msgstr "¿Tu niño(a) nació de parto múltiple?"
 
@@ -386,34 +386,34 @@ msgstr "¿Tu hijo escucha otros idiomas, regularmente, aparte del español?"
 msgid "Has your child experienced chronic ear infections (5 or more)?"
 msgstr "¿Tu hijo/a tuvo infecciones crónicas de oído?"
 
-#: webcdi/cdi_forms/forms.py:344 webcdi/cdi_forms/models.py:162
+#: webcdi/cdi_forms/forms.py:344 webcdi/cdi_forms/models.py:163
 msgid "Do you suspect that your child may have hearing loss?"
 msgstr "¿Sospechas que tu hijo/a pueda tener pérdida auditiva?"
 
-#: webcdi/cdi_forms/forms.py:350 webcdi/cdi_forms/models.py:165
+#: webcdi/cdi_forms/forms.py:350 webcdi/cdi_forms/models.py:166
 msgid ""
 "Is there some reason to suspect that your child may have vision problems?"
 msgstr "¿Sospechas que tu hijo(a) pueda tener problemas de vista?"
 
-#: webcdi/cdi_forms/forms.py:356 webcdi/cdi_forms/models.py:168
+#: webcdi/cdi_forms/forms.py:356 webcdi/cdi_forms/models.py:169
 msgid ""
 "Has your child had any major illnesses, hospitalizations, or diagnosed "
 "disabilities?"
 msgstr "¿Tu hijo(a) ha tenido enfermedades serias u hospitalizaciones?"
 
-#: webcdi/cdi_forms/forms.py:362 webcdi/cdi_forms/models.py:171
+#: webcdi/cdi_forms/forms.py:362 webcdi/cdi_forms/models.py:172
 msgid ""
 "Has your child ever received any services for speech, language, or "
 "development issues?"
 msgstr "¿ Tu hijo(a) asiste a Jardín Maternal?"
 
-#: webcdi/cdi_forms/forms.py:368 webcdi/cdi_forms/models.py:174
+#: webcdi/cdi_forms/forms.py:368 webcdi/cdi_forms/models.py:175
 msgid ""
 "Are you worried about your child's progress in language or communication?"
 msgstr ""
 "¿Sospechas que tu hijo(a) pueda tener problemas para hablar y/o comunicarse?"
 
-#: webcdi/cdi_forms/forms.py:374 webcdi/cdi_forms/models.py:177
+#: webcdi/cdi_forms/forms.py:374 webcdi/cdi_forms/models.py:178
 msgid ""
 "Have you or anyone in your immediate family been diagnosed with a language "
 "or learning disability?"
@@ -430,7 +430,7 @@ msgstr ""
 msgid "dd/mm/yyyy"
 msgstr ""
 
-#: webcdi/cdi_forms/forms.py:555 webcdi/cdi_forms/models.py:136
+#: webcdi/cdi_forms/forms.py:555 webcdi/cdi_forms/models.py:137
 msgid "Estimated Annual Family Income (in USD)"
 msgstr ""
 
@@ -446,7 +446,7 @@ msgstr "Información básica"
 msgid "Family Background"
 msgstr "Información familiar"
 
-#: webcdi/cdi_forms/forms.py:570 webcdi/cdi_forms/models.py:139
+#: webcdi/cdi_forms/forms.py:570 webcdi/cdi_forms/models.py:140
 msgid "Child's Ethnicity"
 msgstr ""
 
@@ -1227,123 +1227,123 @@ msgstr ""
 msgid "Saɯ cueŋƅ, Saw cuengh (Zhuang, Chuang)"
 msgstr ""
 
-#: webcdi/cdi_forms/models.py:69
+#: webcdi/cdi_forms/models.py:70
 msgid "Age (in months)"
 msgstr "Edad (en meses)"
 
-#: webcdi/cdi_forms/models.py:71
+#: webcdi/cdi_forms/models.py:72
 msgid "Country"
 msgstr ""
 
-#: webcdi/cdi_forms/models.py:72
+#: webcdi/cdi_forms/models.py:73
 msgid "Zip Code (if you live in the U.S.)"
 msgstr "Código Postal (si usted vive en el E.E.U.U)"
 
-#: webcdi/cdi_forms/models.py:72
+#: webcdi/cdi_forms/models.py:73
 msgid "Please enter a valid U.S. zip code"
 msgstr "Por favor introduce un código postal válido de los EE. UU."
 
-#: webcdi/cdi_forms/models.py:76
+#: webcdi/cdi_forms/models.py:77
 msgid "1 (First)"
 msgstr "1 (Primero)"
 
-#: webcdi/cdi_forms/models.py:77
+#: webcdi/cdi_forms/models.py:78
 msgid "2 (Second)"
 msgstr "2 (Segundo)"
 
-#: webcdi/cdi_forms/models.py:78
+#: webcdi/cdi_forms/models.py:79
 msgid "3 (Third)"
 msgstr "3 (Tercero)"
 
-#: webcdi/cdi_forms/models.py:79
+#: webcdi/cdi_forms/models.py:80
 msgid "4 (Fourth)"
 msgstr "4 (Quarto)"
 
-#: webcdi/cdi_forms/models.py:80
+#: webcdi/cdi_forms/models.py:81
 msgid "5 (Fifth)"
 msgstr "5 (Quinto)"
 
-#: webcdi/cdi_forms/models.py:81
+#: webcdi/cdi_forms/models.py:82
 msgid "6 (Sixth)"
 msgstr "6 (Sexto)"
 
-#: webcdi/cdi_forms/models.py:82
+#: webcdi/cdi_forms/models.py:83
 msgid "7 (Seventh)"
 msgstr "7 (Séptimo)"
 
-#: webcdi/cdi_forms/models.py:83
+#: webcdi/cdi_forms/models.py:84
 msgid "8 (Eighth)"
 msgstr "8 (Octavo)"
 
-#: webcdi/cdi_forms/models.py:84
+#: webcdi/cdi_forms/models.py:85
 msgid "9 (Ninth)"
 msgstr "9 (Noveno)"
 
-#: webcdi/cdi_forms/models.py:85
+#: webcdi/cdi_forms/models.py:86
 msgid "10 or more (Tenth or Later)"
 msgstr "10 o más (Décimo o Posterior)"
 
-#: webcdi/cdi_forms/models.py:89
+#: webcdi/cdi_forms/models.py:90
 msgid "Birth order"
 msgstr "Orden de nacimiento del niño/a"
 
-#: webcdi/cdi_forms/models.py:93
+#: webcdi/cdi_forms/models.py:94
 msgid "Twins"
 msgstr "Gemelos"
 
-#: webcdi/cdi_forms/models.py:94
+#: webcdi/cdi_forms/models.py:95
 msgid "Triplets"
 msgstr "Trillizos"
 
-#: webcdi/cdi_forms/models.py:95
+#: webcdi/cdi_forms/models.py:96
 msgid "Quadruplets"
 msgstr "Cuatrillizos"
 
-#: webcdi/cdi_forms/models.py:96
+#: webcdi/cdi_forms/models.py:97
 msgid "Quintuplets or greater"
 msgstr "Quintillizos o más"
 
-#: webcdi/cdi_forms/models.py:100
+#: webcdi/cdi_forms/models.py:101
 msgid "Twins, triplets, quadruplets, other?"
 msgstr "¿Gemelos, trillizos, cuatrillizos, otros?"
 
-#: webcdi/cdi_forms/models.py:105
+#: webcdi/cdi_forms/models.py:106
 msgid "Was your child born earlier or later than their due date?"
 msgstr "¿Su niño(a) nació antes o después de la fecha que le dio el doctor?"
 
-#: webcdi/cdi_forms/models.py:107
+#: webcdi/cdi_forms/models.py:108
 msgid "By how many weeks? (round to the nearest week)"
 msgstr "¿Cuantas semanas antes o después?"
 
-#: webcdi/cdi_forms/models.py:107
+#: webcdi/cdi_forms/models.py:108
 msgid "Number of weeks cannot be less than 1"
 msgstr "El número de semanas no puede menos que 1"
 
-#: webcdi/cdi_forms/models.py:116 webcdi/cdi_forms/models.py:181
+#: webcdi/cdi_forms/models.py:117 webcdi/cdi_forms/models.py:182
 msgid "Mother"
 msgstr "Madre"
 
-#: webcdi/cdi_forms/models.py:117 webcdi/cdi_forms/models.py:182
+#: webcdi/cdi_forms/models.py:118 webcdi/cdi_forms/models.py:183
 msgid "Father"
 msgstr "Padre"
 
-#: webcdi/cdi_forms/models.py:118 webcdi/cdi_forms/models.py:184
+#: webcdi/cdi_forms/models.py:119 webcdi/cdi_forms/models.py:185
 msgid "Grandparent(s)"
 msgstr "Abuelo/a"
 
-#: webcdi/cdi_forms/models.py:122
+#: webcdi/cdi_forms/models.py:123
 msgid "Primary Caregiver"
 msgstr "¿Con quién pasa tu hijo/a la mayor parte del día?"
 
-#: webcdi/cdi_forms/models.py:124 webcdi/cdi_forms/models.py:127
+#: webcdi/cdi_forms/models.py:125 webcdi/cdi_forms/models.py:128
 msgid "Primary Caregiver Year of birth"
 msgstr "Año de nacimiento de la madre o la cuidador/a principal"
 
-#: webcdi/cdi_forms/models.py:125
+#: webcdi/cdi_forms/models.py:126
 msgid "Primary Caregiver Education"
 msgstr "Nivel de educación de la madre o cuidador/a principal"
 
-#: webcdi/cdi_forms/models.py:125 webcdi/cdi_forms/models.py:134
+#: webcdi/cdi_forms/models.py:126 webcdi/cdi_forms/models.py:135
 msgid ""
 "Choose highest grade completed (12 = high school graduate; 16 = college "
 "graduate; 18 = advanced degree)"
@@ -1352,133 +1352,137 @@ msgstr ""
 "secundaria completa, 15= Terciario completo, 17 = Universitario completo, + "
 "18  = título de posgrado)"
 
-#: webcdi/cdi_forms/models.py:131
+#: webcdi/cdi_forms/models.py:132
 msgid "Secondary Caregiver"
 msgstr "Cuidador(a) secundario"
 
-#: webcdi/cdi_forms/models.py:133
+#: webcdi/cdi_forms/models.py:134
 msgid "Secondary Caregiver Year of birth"
 msgstr "Año de nacimiento del padre o cuidador/a secundario/a"
 
-#: webcdi/cdi_forms/models.py:134
+#: webcdi/cdi_forms/models.py:135
 msgid "Secondary Caregiver Education"
 msgstr "Nivel de educación del padre o cuidador/a secundario/a"
 
-#: webcdi/cdi_forms/models.py:143
+#: webcdi/cdi_forms/models.py:144
 msgid "Two parents"
 msgstr "Dos padres"
 
-#: webcdi/cdi_forms/models.py:144
+#: webcdi/cdi_forms/models.py:145
 msgid "One parent"
 msgstr "Un padre"
 
-#: webcdi/cdi_forms/models.py:145
+#: webcdi/cdi_forms/models.py:146
 msgid "One or both parents and other caregiver(s) (e.g., grandparent)"
 msgstr "Padre(s) y otro(s) cuidador(es) (p. ej. abuelo)"
 
-#: webcdi/cdi_forms/models.py:146
+#: webcdi/cdi_forms/models.py:147
 msgid "Other caregivers (e.g., grandparent or grandparents)"
 msgstr "Otros cuidadores (p. ej. abuelo o abuelos)"
 
-#: webcdi/cdi_forms/models.py:150
+#: webcdi/cdi_forms/models.py:151
 msgid "Who does your child live with?"
 msgstr "¿Con quién vive su hijo(a)?"
 
-#: webcdi/cdi_forms/models.py:155
+#: webcdi/cdi_forms/models.py:156
 msgid "From whom?"
 msgstr "¿Con quien o quienes lo habla?"
 
-#: webcdi/cdi_forms/models.py:156
+#: webcdi/cdi_forms/models.py:157
 msgid "How many days per week is the child exposed to these languages?"
 msgstr "Cuántos días a la semana tu hijo(a) escucha este(os) idioma(s)?"
 
-#: webcdi/cdi_forms/models.py:156
+#: webcdi/cdi_forms/models.py:157
 msgid "Number of days per week cannot exceed 7"
 msgstr "El número de días no puede ser más que 7"
 
-#: webcdi/cdi_forms/models.py:156
+#: webcdi/cdi_forms/models.py:157
 msgid "Number of days per week cannot be less than 1"
 msgstr "El número de días no puede ser menos que 1"
 
-#: webcdi/cdi_forms/models.py:157
+#: webcdi/cdi_forms/models.py:158
 msgid "How many hours per day is the child exposed to these languages?"
 msgstr "¿Cuántas horas al día escuha este(os) idioma(s)?"
 
-#: webcdi/cdi_forms/models.py:157
+#: webcdi/cdi_forms/models.py:158
 msgid "Number of hours per day cannot exceed 24"
 msgstr "El número de horas por día no puede exceder 24"
 
-#: webcdi/cdi_forms/models.py:157
+#: webcdi/cdi_forms/models.py:158
 msgid "Number of hours per day cannot be less than 1"
 msgstr "El número de horas por día no puede ser menos de 1"
 
-#: webcdi/cdi_forms/models.py:159
+#: webcdi/cdi_forms/models.py:160
 msgid "Has your child experienced chronic ear infections (5 or more)? "
 msgstr "¿Su niño(a) ha tenido infecciones crónicas del oído (cinco o más)?"
 
-#: webcdi/cdi_forms/models.py:160
+#: webcdi/cdi_forms/models.py:161
 msgid "Has your child undergone interventions (e.g., tubes)?  Please describe"
 msgstr "¿Cuántas?"
 
-#: webcdi/cdi_forms/models.py:163 webcdi/cdi_forms/models.py:166
-#: webcdi/cdi_forms/models.py:169 webcdi/cdi_forms/models.py:172
-#: webcdi/cdi_forms/models.py:175
+#: webcdi/cdi_forms/models.py:164 webcdi/cdi_forms/models.py:167
+#: webcdi/cdi_forms/models.py:170 webcdi/cdi_forms/models.py:176
 msgid "Please describe"
 msgstr "Por favor describí el problema"
 
-#: webcdi/cdi_forms/models.py:178
+#: webcdi/cdi_forms/models.py:173
+msgctxt "daycare"
+msgid "Please describe"
+msgstr "Por favor describí"
+
+#: webcdi/cdi_forms/models.py:179
 msgid "Indicate which family member and provide a description"
 msgstr "Indicá cual miembro de la familia y especificá el problema"
 
-#: webcdi/cdi_forms/models.py:183
+#: webcdi/cdi_forms/models.py:184
 msgid "Both caregivers"
 msgstr "Ambos cuidadores"
 
-#: webcdi/cdi_forms/models.py:187
+#: webcdi/cdi_forms/models.py:188
 msgid "Who is filling in the form?"
 msgstr "¿Quién está respondiendo este cuestionario?"
 
-#: webcdi/cdi_forms/models.py:212
+#: webcdi/cdi_forms/models.py:213
 msgid "Place of residence (neighnorhood/district)"
 msgstr "Lugar de residencia  (barrio/Localidad)"
 
-#: webcdi/cdi_forms/models.py:213
+#: webcdi/cdi_forms/models.py:214
 msgid "Primary caregiver occupation"
 msgstr "Madre o cuidador/a principal - Ocupación"
 
-#: webcdi/cdi_forms/models.py:214
+#: webcdi/cdi_forms/models.py:215
 msgid "Primary caregiver occupation description"
 msgstr "Madre o cuidador/a principal - Breve descripción"
 
-#: webcdi/cdi_forms/models.py:215
+#: webcdi/cdi_forms/models.py:216
 msgid "Secondary caregiver occupation"
 msgstr "Padre o cuidador/a secundario/a - Ocupación"
 
-#: webcdi/cdi_forms/models.py:216
+#: webcdi/cdi_forms/models.py:217
 msgid "Secondary caregiver occupation description"
 msgstr "Padre o cuidador/a secundario/a - Breve descripción"
 
-#: webcdi/cdi_forms/models.py:222
+#: webcdi/cdi_forms/models.py:223
 msgid "Less than 6 months"
 msgstr "menos de 6 meses"
 
-#: webcdi/cdi_forms/models.py:223
+#: webcdi/cdi_forms/models.py:224
 msgid "Between 6 and 12 months"
 msgstr "más de seis meses"
 
-#: webcdi/cdi_forms/models.py:224
+#: webcdi/cdi_forms/models.py:225
 msgid "More than 12 months"
 msgstr "más de un año"
 
-#: webcdi/cdi_forms/models.py:226
+#: webcdi/cdi_forms/models.py:227
 msgid "Since when"
 msgstr "¿Desde cuándo?"
 
-#: webcdi/cdi_forms/models.py:227
+#: webcdi/cdi_forms/models.py:228
 msgid "Hours per day"
 msgstr "¿Cuántas horas al día?"
 
-#: webcdi/cdi_forms/models.py:228
+#: webcdi/cdi_forms/models.py:229
 msgid "Days per week"
 msgstr "¿Cuántas veces por semana?"
 

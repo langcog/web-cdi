@@ -7,6 +7,7 @@ from django.core.validators import validate_comma_separated_integer_list,MaxValu
 from django.contrib.postgres.fields import ArrayField
 from django import forms
 from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import pgettext_lazy
 from django_countries.fields import CountryField
 
 from .cat_forms.models import *
@@ -169,7 +170,7 @@ class BackgroundInfo(models.Model):
     illnesses = models.CharField(max_length = 1001, blank = True, null=True, verbose_name = _("Please describe")) # Free response asking for elaboration on child's symptoms and diagnoses
 
     services_boolean = models.IntegerField(verbose_name = _('Has your child ever received any services for speech, language, or development issues?'), blank=True, null=True ) # Asks whether child has ever received therapy for speech or development
-    services = models.CharField(max_length = 1001, blank = True, null=True, verbose_name = _("Please describe")) # Free response asking for elaboration on services received
+    services = models.CharField(max_length = 1001, blank = True, null=True, verbose_name = pgettext_lazy("daycare", "Please describe")) # Free response asking for elaboration on services received
 
     worried_boolean = models.IntegerField(verbose_name = _('Are you worried about your child\'s progress in language or communication?'), blank=True, null=True ) # Asks whether test-taker is worried about child's language acquisition
     worried = models.CharField(max_length = 1001, blank = True, null=True, verbose_name = _("Please describe")) # Free response asking for elaboration on test-taker's worries about child's language development
