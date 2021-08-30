@@ -65,7 +65,7 @@ def get_background_header(study_obj):
     background_header = ['source_id','age','sex','country','zip_code', 
         'birth_order', 'birth_weight_lb', 'birth_weight_confirmation_lb','birth_weight_kg','birth_weight_confirmation_kg', 
         'multi_birth_boolean','multi_birth', 'sibling_boolean','sibling_count','sibling_data','born_on_due_date', 'early_or_late', 
-        'due_date_diff', 'primary_caregiver','primary_caregiver_other','mother_yob', 'mother_yob_confirmation', 'mother_education',
+        'due_date_diff', 'form_filler', 'form_filler_other', 'primary_caregiver','primary_caregiver_other','mother_yob', 'mother_yob_confirmation', 'mother_education',
         'secondary_caregiver','secondary_caregiver_other','father_yob', 'father_education', 
         'annual_income', 'child_hispanic_latino', 'child_ethnicity', 'caregiver_info', 'caregiver_other','other_languages_boolean', 
         'other_languages','language_from', 'language_days_per_week', 'language_hours_per_day', 'ear_infections_boolean',
