@@ -10,7 +10,7 @@ import datetime, codecs, json, os.path
 from django.core.exceptions import ValidationError
 from django.core.validators import EmailValidator, RegexValidator
 from django.utils.translation import ugettext_lazy as _
-from django.utils.translation import ugettext
+from django.utils.translation import ugettext, pgettext
 from .utils import get_demographic_filename
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__)) # Declare project file directory
@@ -219,7 +219,7 @@ class BackgroundForm(BetterModelForm):
     caregiver_other = forms.CharField(
         label = ' ',
         required=False,
-        widget = forms.TextInput(attrs={'placeholder': _('Please specify')})
+        widget = forms.TextInput(attrs={'placeholder': pgettext("caregiver_other", "Please specify")})
     )
 
     # Cleaning input data for views.py and later database storage.
@@ -407,6 +407,7 @@ class BackgroundForm(BetterModelForm):
         #if we have a specified background info, use it
         if os.path.isfile(self.filename) :
             rows = []
+            hidden_fields = []
             pages = json.load(open(self.filename, encoding='utf-8'))
             for page in pages:
                 if page['page'] == self.page:
@@ -457,11 +458,12 @@ class BackgroundForm(BetterModelForm):
                                     selected_fields.append(f)
                             else:
                                 if 'field' in field: fields.append(field['field'])
-                            
-                        rows.append(Fieldset(fieldset['fieldset'], *fields))
+                        if 'HTML' in fieldset:
+                            rows.append(Fieldset(fieldset['fieldset'], HTML(fieldset['HTML']), *fields))
+                        else:
+                            rows.append(Fieldset(fieldset['fieldset'], *fields))
                 else :
                     fieldsets = page['contents']
-                    hidden_fields = []
                     for fieldset in fieldsets:
                         for field in fieldset['fields']:
                             if 'field' in field: 

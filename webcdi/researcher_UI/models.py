@@ -223,7 +223,7 @@ class SummaryData(models.Model):
     value = models.CharField(max_length=255)
 
     def __str__(self):
-        return f'%s: %s' % (self.adminitration, self.instrument_score)
+        return f'%s: %s' % (self.administration, self.title)
 
     class Meta:
         unique_together = ('administration', 'title')

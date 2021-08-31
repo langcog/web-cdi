@@ -7,6 +7,7 @@ from django.core.validators import validate_comma_separated_integer_list,MaxValu
 from django.contrib.postgres.fields import ArrayField
 from django import forms
 from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import pgettext_lazy
 from django_countries.fields import CountryField
 
 from .cat_forms.models import *
@@ -107,7 +108,8 @@ class BackgroundInfo(models.Model):
     due_date_diff = models.IntegerField(verbose_name = _("By how many weeks? (round to the nearest week)"),blank=True, null=True, validators = [MinValueValidator(1, _("Number of weeks cannot be less than 1"))]) # Determines # of weeks between DOB and due date
 
     education_levels = [(x,str(x)) for x in range(5,25)] #Declares tuple of integers for # of years of education
-
+    education_levels[-1] = (0, _("Prefer not to disclose"))
+    
     years = [(x,str(x)) for x in range(1950, datetime.date.today().year+2)] #Declares tuple for year of birth for parents/guardians
     years[-1] = (0, _("Prefer not to disclose"))
 
@@ -168,7 +170,7 @@ class BackgroundInfo(models.Model):
     illnesses = models.CharField(max_length = 1001, blank = True, null=True, verbose_name = _("Please describe")) # Free response asking for elaboration on child's symptoms and diagnoses
 
     services_boolean = models.IntegerField(verbose_name = _('Has your child ever received any services for speech, language, or development issues?'), blank=True, null=True ) # Asks whether child has ever received therapy for speech or development
-    services = models.CharField(max_length = 1001, blank = True, null=True, verbose_name = _("Please describe")) # Free response asking for elaboration on services received
+    services = models.CharField(max_length = 1001, blank = True, null=True, verbose_name = pgettext_lazy("daycare", "Please describe")) # Free response asking for elaboration on services received
 
     worried_boolean = models.IntegerField(verbose_name = _('Are you worried about your child\'s progress in language or communication?'), blank=True, null=True ) # Asks whether test-taker is worried about child's language acquisition
     worried = models.CharField(max_length = 1001, blank = True, null=True, verbose_name = _("Please describe")) # Free response asking for elaboration on test-taker's worries about child's language development
@@ -208,6 +210,24 @@ class BackgroundInfo(models.Model):
     child_self_reads =models.CharField(max_length=51, choices=choices.LITERACY_CHOICES, verbose_name="About how many times per week does your child look at books by themself?", blank=True, null=True)
     child_asks_words_say =models.CharField(max_length=51, choices=choices.LITERACY_CHOICES, verbose_name="About how often does your child ask you what printed words say?", blank=True, null=True)
 
+    place_of_residence = models.CharField(max_length=51, blank=True, null=True, verbose_name=_("Place of residence (neighnorhood/district)"))
+    primary_caregiver_occupation = models.CharField(max_length=51, blank=True, null=True, verbose_name=_("Primary caregiver occupation"))
+    primary_caregiver_occupation_description = models.CharField(max_length=51, blank=True, null=True, verbose_name=_("Primary caregiver occupation description"))
+    secondary_caregiver_occupation = models.CharField(max_length=51, blank=True, null=True, verbose_name=_("Secondary caregiver occupation"))
+    secondary_caregiver_occupation_description = models.CharField(max_length=51, blank=True, null=True, verbose_name=_("Secondary caregiver occupation description"))
+
+    LESS_THAN_6 = "Less than 6 months"
+    SIX_TO_TWELVE = "Between 6 and 12 months"
+    MORE_THAN_12 = "More than 12 months"
+    KINDERGARETN_CHOICES = [
+        (LESS_THAN_6, _("Less than 6 months")),
+        (SIX_TO_TWELVE, _("Between 6 and 12 months")),
+        (MORE_THAN_12, _("More than 12 months"))
+    ]
+    kindergarten_since_when = models.CharField(max_length=51, blank=True, null=True, choices=KINDERGARETN_CHOICES, verbose_name=_("Since when"))
+    kindergarten_hpd = models.IntegerField(blank=True, null=True, verbose_name=_("Hours per day"))
+    kindergarten_dpw = models.IntegerField(blank=True, null=True, verbose_name=_("Days per week"))
+    
 #Model of zipcodes reported to be in 3-digit zip code prefixes with a population lower than 20,000. Tests with a zipcode found in this model will have their digits replaced with their state abbreviation.
 class Zipcode(models.Model):
     zip_code=models.CharField(max_length = 5)

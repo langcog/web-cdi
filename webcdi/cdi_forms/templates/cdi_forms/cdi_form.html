@@ -377,8 +377,10 @@
     // Confirm to prevent premature submissions
     function clicked(e)
     {
+        console.log('entering clicked')
         if(!confirm("{% trans 'Are you ready to submit? You cannot change your answers after submission.' %}"))e.preventDefault();
         localStorage.removeItem('prev_page_number');
+        console.log('clicked completed')
     }
 
     // Read Django administration creation date

@@ -115,6 +115,7 @@ class AdministrationMixin(object):
     def get_user_language(self):
         self.user_language = language_map(self.administration_instance.study.instrument.language)
         translation.activate(self.user_language)
+        print(f'language {self.user_language}')
         return self.user_language
 
 class BackgroundInfoView(AdministrationMixin, UpdateView):
@@ -790,13 +791,11 @@ def cdi_form(request, hash_id):
                     else:
                         if value:
                             administration_data.objects.update_or_create(administration = administration_instance, item_ID = key, defaults = {'value': value})
-
+            
             # Update the Summary Data
             update_summary_scores(administration_instance)
-
             if 'btn-save' in request.POST and request.POST['btn-save'] == _('Save'): # If the save button was pressed
                 administration.objects.filter(url_hash = hash_id).update(last_modified = timezone.now()) # Update administration object with date of last modification
-
                 if 'analysis' in request.POST:
                     analysis = parse_analysis(request.POST['analysis']) # Note whether test-taker asserted that the child's age was accurate and form was filled out to best of ability
                     administration.objects.filter(url_hash = hash_id).update(analysis = analysis) # Update administration object
@@ -813,7 +812,6 @@ def cdi_form(request, hash_id):
                 return redirect('background-info', pk=background_instance.pk) #background_info_form(request, hash_id) # Fetch Background info template
 
             elif 'btn-submit' in request.POST and request.POST['btn-submit'] == _('Submit'): # If 'Submit' button was pressed
-                
                 #Some studies may require successfully passing a ReCaptcha test for submission. If so, get for a passing response before marking form as complete.
                 result = {'success': None}
                 recaptcha_response = request.POST.get('g-recaptcha-response', None)
