@@ -70,8 +70,12 @@ class study(models.Model):
     timing = models.IntegerField(default=6)
     confirmation_questions = models.BooleanField(default=False) #Whether to ask participant to restate primary carer age and child weight
     redirect_boolean = models.BooleanField(verbose_name="Provide redirect button at completion of study?", default=False) # Whether to give redirect button upon completion of administration
-    redirect_url = models.URLField(blank=True, null=True, help_text="Enter the basic return URL - the Centiment aid will be added automatically") # The redirect URL
+    
     participant_source_boolean = models.IntegerField(default=0, choices=choices.PARTICIPANT_SOURCE_CHOICES) # Whether this is capturing a link from a Partner sourcing participants
+    redirect_url = models.URLField(blank=True, null=True, help_text="Please enter redirect URL") # The redirect URL
+    append_source_id_to_redirect = models.BooleanField(verbose_name="Append source_id to redirect URL?", default = False)
+    source_id_url_parameter_key = models.CharField("URL parameter key", blank=True, null=True, max_length=51)
+
     backpage_boolean = models.BooleanField(default=True, help_text="When selected the final demographics page will be shown - deselect to not show the final page")
     print_my_answers_boolean = models.BooleanField(default=True) # Whether to show print my answers button to user
 
@@ -133,6 +137,10 @@ class administration(models.Model):
             return reverse('administer_cdi_form', kwargs={'hash_id' :self.url_hash})
     
     def redirect_url(self):
+        target = f'{self.study.redirect_url}'
+        if self.study.append_source_id_to_redirect:
+            target = f'{target}?{self.study.source_id_in_parameter_key}={self.backgroundinfo.source_id})'
+        return target
         if self.study.participant_source_boolean == 2: #centiment
             return self.study.redirect_url + '&aid=' + self.backgroundinfo.source_id
         elif self.study.participant_source_boolean == 1: #prolific

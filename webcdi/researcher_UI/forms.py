@@ -1,7 +1,7 @@
 from django import forms
 from .models import *
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Field, Div
+from crispy_forms.layout import Submit, Layout, Field, Div, Fieldset, HTML
 from form_utils.forms import BetterModelForm, BetterForm
 from django.urls import reverse
 import os
@@ -37,9 +37,11 @@ class AddStudyForm(BetterModelForm):
     confirmation_questions = forms.BooleanField(required=False, label="Would you like participants to answer the confirmation questions (only available when split background information forms are used)")
 
     redirect_boolean = forms.BooleanField(label="Provide redirect button at completion of study?", required=False) # Whether to give redirect button upon completion of administration
-    redirect_url = forms.URLField(label="Please enter URL", required=False, help_text="Enter the basic return URL - the Centiment aid will be added automatically")
-    
+    redirect_url = forms.URLField(required=False, help_text="Enter the basic return URL")
     participant_source_boolean = forms.ChoiceField(label="Participant Source", choices=choices.PARTICIPANT_SOURCE_CHOICES) # Whether to give redirect button upon completion of administration
+    append_source_id_to_redirect = forms.BooleanField(required=False)
+    source_id_url_parameter_key = forms.CharField(required=False)
+    
     backpage_boolean = forms.BooleanField(label="Show backpage in split background information study?", required=False)
     
     print_my_answers_boolean = forms.BooleanField(label="Allow participant to print their responses at end of Study?", required=False) 
@@ -85,9 +87,16 @@ class AddStudyForm(BetterModelForm):
             Field('show_feedback'),
             Field('allow_sharing'),
             Field('confirmation_questions'),
-            Field('redirect_boolean', css_class="css_enabler"),
-            Div(Field('redirect_url'), css_class="redirect_boolean collapse"),
-            Field('participant_source_boolean'),
+            Fieldset("Redirect Options",
+                HTML("""
+                    <p>You might want some explanation here - tell me what you would like</p>
+                """),
+                Field('redirect_boolean', css_class="css_enabler"),
+                Div(Field('redirect_url'), css_class="redirect_boolean collapse"),
+                Field('participant_source_boolean', css_class="css_enabler"),
+                Div(Field('append_source_id_to_redirect'), css_class="participant_source_boolean collapse"),
+                Div(Field('source_id_url_parameter_key'), css_class="participant_source_boolean collapse"),
+            ),
             Field('backpage_boolean'),
             Field('print_my_answers_boolean'),
             Field('end_message'),
@@ -154,7 +163,9 @@ class RenameStudyForm(BetterModelForm):
 
     participant_source_boolean = forms.ChoiceField(label="Participant Source", choices=choices.PARTICIPANT_SOURCE_CHOICES) # Whether to give redirect button upon completion of administration
     backpage_boolean = forms.BooleanField(label="Show backpage in split background information study?", required=False)
-    
+    append_source_id_to_redirect = forms.BooleanField(required=False)
+    source_id_url_parameter_key = forms.CharField(required=False)
+
     print_my_answers_boolean = forms.BooleanField(label="Allow participant to print their responses at end of Study?", required=False) 
 
     end_message = forms.ChoiceField(choices=choices.END_MESSAGE_CHOICES)
@@ -194,9 +205,13 @@ class RenameStudyForm(BetterModelForm):
             Field('show_feedback'),
             Field('allow_sharing'),
             Field('confirmation_questions'),
-            Field('redirect_boolean', css_class="css_enabler"), 
-            Div(Field('redirect_url'), css_class="redirect_boolean collapse"),
-            Field('participant_source_boolean'),
+            Fieldset("Redirect Options",
+                Field('redirect_boolean', css_class="css_enabler"),
+                Div(Field('redirect_url'), css_class="redirect_boolean collapse"),
+                Field('participant_source_boolean', css_class="css_enabler"),
+                Div(Field('append_source_id_to_redirect'), css_class="participant_source_boolean collapse"),
+                Div(Field('source_id_url_parameter_key'), css_class="participant_source_boolean collapse"),
+            ),
             Field('backpage_boolean'),
             Field('print_my_answers_boolean'),
             Field('end_message'),
