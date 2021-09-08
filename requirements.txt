@@ -36,7 +36,7 @@ django-form-utils==1.0.3
 django-health-check==3.11.0
 #django-inspectional-registration @ git+git://github.com/HenryMehta/django-inspectional-registration.git@7f13aad21909b0e321257d6df45349008935c60e
 #django-inspectional-registration==0.6.2
-git+git://github.com/HenryMehta/django-inspectional-registration.git
+git+git://github.com/HenryMehta/django-inspectional-registration.git@aws
 django-ipware==2.1.0
 django-js-asset==1.2.2
 django-localflavor==2.2
