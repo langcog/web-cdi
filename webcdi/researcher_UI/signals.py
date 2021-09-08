@@ -19,7 +19,7 @@ def notify_admin(sender, instance, created, **kwargs):
             Site.objects.get_current().name + ' new registration',
             instance.user.username + ' has registered - please review registration. \n\n' + \
                 'https://' + Site.objects.get_current().domain + '/wcadmin/registration/registrationprofile/' ,
-            'webmaster@localhost.com',
+            settings.DEFAULT_FROM_EMAIL,
             [settings.USER_ADMIN_EMAIL],
             fail_silently=False,
         )

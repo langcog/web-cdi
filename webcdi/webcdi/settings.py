@@ -247,6 +247,7 @@ COUNTRIES_FIRST = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 if 'RDS_HOSTNAME' in os.environ:
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', '<AWS_ACCESS_KEY>')
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', '<AWS_SECRET_KEY')
@@ -331,3 +332,13 @@ LOGIN_EXEMPT_URLS = (
   r'^registration/password/change/',
   r'^',
 )
+
+
+#EMAIL settings
+AWS_SES_REGION_NAME = 'us-west-2'
+AWS_SES_REGION_ENDPOINT = 'email.us-west-2.amazonaws.com'
+EMAIL_BACKEND = 'django_ses.SESBackend'
+DEFAULT_FROM_EMAIL_NAME = os.environ.get('DEFAULT_FROM_EMAIL_NAME','WebCDI Local')
+DEFAULT_FROM_EMAIL_ADDRESS = os.environ.get('DEFAULT_FROM_EMAIL_ADDRESS','hjsmehta@gmail.com')
+DEFAULT_FROM_EMAIL = DEFAULT_FROM_EMAIL_NAME + '<' + DEFAULT_FROM_EMAIL_ADDRESS + '>'
+DEFAULT_RECIPIENT_EMAIL = EMAIL_HOST_USER = os.environ.get('DEFAULT_RECIPIENT_EMAIL','hjsmehta@gmail.com')
