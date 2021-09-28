@@ -163,6 +163,19 @@
         $('#id_redirect_boolean').on('change', function () {
             check_for_redirect();      
         });
+
+        function check_for_participant_source() {
+          if ($('#id_participant_source_boolean').val() > 0) {
+            $('.participant_source_boolean').removeClass('collapse')
+          } else {
+            $('.participant_source_boolean').addClass('collapse');
+          }  
+        }        
+
+        check_for_participant_source();
+        $('#id_participant_source_boolean').on('change', function () {
+          check_for_participant_source();      
+        });
         
 
         </script>
