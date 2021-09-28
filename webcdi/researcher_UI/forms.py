@@ -89,7 +89,7 @@ class AddStudyForm(BetterModelForm):
             Field('confirmation_questions'),
             Fieldset("Redirect Options",
                 HTML("""
-                    <p>You might want some explanation here - tell me what you would like</p>
+                    <p>If you would like to connect web-cdi with an external service (e.g., prolific, mturk, lookit), please fill out the following options when applicable</p>
                 """),
                 Field('redirect_boolean', css_class="css_enabler"),
                 Div(Field('redirect_url'), css_class="redirect_boolean collapse"),
