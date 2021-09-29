@@ -139,7 +139,7 @@ class administration(models.Model):
     def redirect_url(self):
         target = f'{self.study.redirect_url}'
         if self.study.append_source_id_to_redirect:
-            target = f'{target}?{self.study.source_id_in_parameter_key}={self.backgroundinfo.source_id})'
+            target = f'{target}?{self.study.source_id_url_parameter_key}={self.backgroundinfo.source_id}'
         return target
         if self.study.participant_source_boolean == 2: #centiment
             return self.study.redirect_url + '&aid=' + self.backgroundinfo.source_id
