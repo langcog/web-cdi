@@ -25,7 +25,7 @@ from django.urls import reverse
 from decimal import Decimal
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib import messages
-from ipware.ip import get_ip
+from ipware.ip import get_client_ip
 from psycopg2.extras import NumericRange
 from django.conf import settings
 from django.utils import timezone
@@ -991,8 +991,8 @@ def administer_new_participant(request, username, study_name): # used for wordfu
     bypass = request.GET.get('bypass', None) # Check if user clicked the link to bypass study cap (studies that allow for payment will not pay participants in this case)
     let_through = None # By default, users are not given access to administration and must be approved
     prev_visitor = 0 
-    visitor_ip = str(get_ip(request)) # Get IP address for current visitor
-    #visitor_ip = bytes(get_ip(request)) # Get IP address for current visitor
+    visitor_ip = str(get_client_ip(request)) # Get IP address for current visitor
+    #visitor_ip = bytes(get_client_ip(request)) # Get IP address for current visitor
     completed = int(request.get_signed_cookie('completed_num', '0')) # Check if there is a cookie stored on device for a previously completed administration
     if visitor_ip: # If the visitor IP was successfully pulled
         prev_visitor = ip_address.objects.filter(ip_address = visitor_ip).count() # Check if IP address was logged previously in the database (only logged for specific studies under the langcoglab account. This is under Stanford's IRB approval)
@@ -1055,8 +1055,8 @@ def administer_new_parent(request, username, study_name): # For creating single 
     bypass = request.GET.get('bypass', None) # Check if user clicked the link to bypass study cap (studies that allow for payment will not pay participants in this case)
     let_through = None # By default, users are not given access to administration and must be approved
     prev_visitor = 0 
-    visitor_ip = str(get_ip(request)) # Get IP address for current visitor
-    #visitor_ip = bytes(get_ip(request)) # Get IP address for current visitor
+    visitor_ip = str(get_client_ip(request)) # Get IP address for current visitor
+    #visitor_ip = bytes(get_client_ip(request)) # Get IP address for current visitor
     completed = int(request.get_signed_cookie('completed_num', '0')) # Check if there is a cookie stored on device for a previously completed administration
     if visitor_ip: # If the visitor IP was successfully pulled
         prev_visitor = ip_address.objects.filter(ip_address = visitor_ip).count() # Check if IP address was logged previously in the database (only logged for specific studies under the langcoglab account. This is under Stanford's IRB approval)
@@ -1085,8 +1085,8 @@ def overflow(request, username, study_name): # Page for overflowed studies. For 
     researcher = User.objects.get(username = username) # Get researcher's username. Different method because current user may not be the researcher and may not be logged in
     study_obj = study.objects.get(name= study_name, researcher = researcher) 
     data['title'] = study_obj.instrument.verbose_name
-    visitor_ip = str(get_ip(request)) # Get visitor's IP address
-    #visitor_ip = bytes(get_ip(request)) # Get visitor's IP address
+    visitor_ip = str(get_client_ip(request)) # Get visitor's IP address
+    #visitor_ip = bytes(get_client_ip(request)) # Get visitor's IP address
     prev_visitor = 0
     if (visitor_ip and visitor_ip != 'None'): # If visitor IP address was properly caught
         prev_visitor = ip_address.objects.filter(ip_address = visitor_ip).count() # Check if IP address was logged previously in the database (only logged for specific studies under the langcoglab account. This is under Stanford's IRB approval)

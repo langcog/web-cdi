@@ -113,10 +113,10 @@ class administration(models.Model):
     last_modified = models.DateTimeField(auto_now = True) # Date when the administration object was last updated
     created_date = models.DateTimeField(verbose_name = "Creation date", auto_now_add = True) # Date administration object was created
     page_number = models.IntegerField(verbose_name = "Page number", default = 0) # Current progress for CDI form
-    analysis = models.NullBooleanField(verbose_name = "Confirmed Age and Completion", default = None) # Whether participant confirmed child's age and that form was completed to best of ability
-    bypass = models.NullBooleanField(verbose_name = "Willing to forgo payment", default = None) # Whether participant explicitly bypassed overflow page if study has reached subject cap
-    include = models.NullBooleanField(verbose_name = "Include for eventual analysis", default = True) # Field for marking if a researcher wants to include data in study. Currently not used.
-    opt_out = models.NullBooleanField(verbose_name="Participant opted out of broader sharing", default=None)
+    analysis = models.BooleanField(verbose_name = "Confirmed Age and Completion", default = None, null=True) # Whether participant confirmed child's age and that form was completed to best of ability
+    bypass = models.BooleanField(verbose_name = "Willing to forgo payment", default = None, null=True) # Whether participant explicitly bypassed overflow page if study has reached subject cap
+    include = models.BooleanField(verbose_name = "Include for eventual analysis", default = True, null=True) # Field for marking if a researcher wants to include data in study. Currently not used.
+    opt_out = models.BooleanField(verbose_name="Participant opted out of broader sharing", default=None, null=True)
 
     class Meta:
         unique_together = ('study', 'subject_id', 'repeat_num') # Each administration object has a unique combination of study ID, subject ID, and administration number. They also have a unique hash ID identifier but uniqueness of hash ID is not enforced due to odds of 2 participants having the same hash ID being cosmically low.
