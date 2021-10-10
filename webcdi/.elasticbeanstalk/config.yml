@@ -1,0 +1,23 @@
+branch-defaults:
+  hebrew:
+    environment: webcdi-dev-hebrew
+  master:
+    environment: null
+    group_suffix: null
+environment-defaults:
+  webcdi-dev-hebrew:
+    branch: null
+    repository: null
+global:
+  application_name: web-cdi
+  default_ec2_keyname: web-cdi_011017
+  default_platform: arn:aws:elasticbeanstalk:us-west-2::platform/Python 3.6 running
+    on 64bit Amazon Linux/2.9.3
+  default_region: us-west-2
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: web-cdi
+  sc: git
+  workspace_type: Application
