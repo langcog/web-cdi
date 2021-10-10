@@ -303,6 +303,7 @@ def is_ec2_linux():
     return False
 def get_linux_ec2_private_ip():
     """Get the private IP Address of the machine if running on an EC2 linux server"""
+    response = None
     if not is_ec2_linux():
         return None
     try:
