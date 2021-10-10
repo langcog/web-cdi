@@ -2,7 +2,6 @@
 
 source "$PYTHONPATH/activate" && {
     # migrate
-    python ./webcdi/manage.py migrate --database=stats_db --noinput;
     python ./webcdi/manage.py migrate --noinput;
     python ./webcdi/manage.py collectstatic --noinput;
     python ./webcdi/manage.py createsu;
