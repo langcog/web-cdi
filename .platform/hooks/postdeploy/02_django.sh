@@ -9,5 +9,4 @@ source "$PYTHONPATH/activate" && {
     python ./webcdi/manage.py populate_benchmark
     python ./webcdi/manage.py populate_choices;
     python ./webcdi/manage.py populate_items;
-    python ./webcdi/manage.py populate_cat_items;
 }
