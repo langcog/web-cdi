@@ -325,8 +325,6 @@ msgid "Please specify"
 msgstr "Leg uit"
 
 #: webcdi/cdi_forms/forms.py:222
-#, fuzzy
-#| msgid "Please specify"
 msgctxt "caregiver_other"
 msgid "Please specify"
 msgstr "Leg uit"
@@ -1430,8 +1428,6 @@ msgid "Please describe"
 msgstr "Leg uit"
 
 #: webcdi/cdi_forms/models.py:173
-#, fuzzy
-#| msgid "Please describe"
 msgctxt "daycare"
 msgid "Please describe"
 msgstr "Leg uit"
