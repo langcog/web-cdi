@@ -358,13 +358,6 @@
                     },
                     {
                         "field":"sex"
-                    },
-                    {
-                        "field":"mother_yob_confirmation"
-                    },
-                    {
-                        "field":"birth_weight_confirmation_lb",
-                        "widget_type":"Select"
                     }
                 ]
             }
