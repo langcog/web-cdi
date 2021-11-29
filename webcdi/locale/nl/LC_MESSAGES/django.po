@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-06 06:20+0000\n"
+"POT-Creation-Date: 2021-11-29 07:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2764,31 +2764,31 @@ msgstr "Wacht a.u.b. totdat de inspecteur uw registratie heeft goedgekeurd."
 msgid "I am afraid that your account registration was rejected by inspector."
 msgstr "Helaas is de registratie van uw account door de inspecteur afgewezen."
 
-#: webcdi/webcdi/settings.py:211
+#: webcdi/webcdi/settings.py:313
 msgid "English"
 msgstr "Engels"
 
-#: webcdi/webcdi/settings.py:212
+#: webcdi/webcdi/settings.py:314
 msgid "Spanish"
 msgstr "Spaans"
 
-#: webcdi/webcdi/settings.py:214
+#: webcdi/webcdi/settings.py:316
 msgid "French Quebec"
 msgstr "Frans"
 
-#: webcdi/webcdi/settings.py:215
+#: webcdi/webcdi/settings.py:317
 msgid "Canadian English"
 msgstr "Engels"
 
-#: webcdi/webcdi/settings.py:216
+#: webcdi/webcdi/settings.py:318
 msgid "Dutch"
 msgstr "Nederlands"
 
-#: webcdi/webcdi/settings.py:217
+#: webcdi/webcdi/settings.py:319
 msgid "Hebrew"
 msgstr ""
 
-#: webcdi/webcdi/settings.py:218
+#: webcdi/webcdi/settings.py:320
 msgid "Korean"
 msgstr ""
 
