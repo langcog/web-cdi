@@ -326,8 +326,6 @@ msgid "Please specify"
 msgstr "Veuillez spécifier"
 
 #: webcdi/cdi_forms/forms.py:222
-#, fuzzy
-#| msgid "Please specify"
 msgctxt "caregiver_other"
 msgid "Please specify"
 msgstr "Veuillez spécifier"
