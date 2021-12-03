@@ -1,0 +1,410 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-26 14:55+0800\n"
+"PO-Revision-Date: 2015-07-28 09:54+0200\n"
+"Last-Translator: Patrick Husi <patrick.husi@arpage.ch>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.8.2\n"
+
+#: admin/__init__.py:262
+msgid "(Re)Accept registrations of selected users"
+msgstr "Accepter les inscriptions des utilisateurs sélectionnés"
+
+#: admin/__init__.py:270
+msgid "Reject registrations of selected users"
+msgstr "Rejeter les inscriptions des utilisateurs sélectionnés"
+
+#: admin/__init__.py:279
+msgid "Activate selected users forcibly"
+msgstr "Activer les utilisateurs sélectionnés immédiatement"
+
+#: admin/__init__.py:297
+msgid "Re-send acceptance emails to selected users"
+msgstr ""
+"Envoyer à nouveau les e-mails d’acceptation aux utilisateurs sélectionnés"
+
+#: admin/__init__.py:311 admin/__init__.py:335
+msgid "Not available"
+msgstr "Non disponible"
+
+#: admin/__init__.py:313
+msgid "A summary of supplemental information"
+msgstr "Résumé des informations supplémentaires"
+
+#: admin/__init__.py:336
+msgid "Activation key"
+msgstr "Clé d’activation"
+
+#: admin/forms.py:33 admin/forms.py:44
+msgid "Accept this registration"
+msgstr "Accepter cet enregistrement"
+
+#: admin/forms.py:34
+msgid "Reject this registration"
+msgstr "Rejeter cette inscription"
+
+#: admin/forms.py:36 admin/forms.py:46
+msgid "Activate the associated user of this registration forcibly"
+msgstr "Activez l’utilisateur associé de cet enregistrement immédiatement"
+
+#: admin/forms.py:39
+msgid "Re-accept this registration"
+msgstr "Accepter à nouveau cette inscription"
+
+#: admin/forms.py:41
+msgid "Activate the associated user of this registration"
+msgstr "Activez l’utilisateur associé à cet enregistrement"
+
+#: admin/forms.py:49
+msgid "Action"
+msgstr "Action"
+
+#: admin/forms.py:50
+msgid "Message"
+msgstr "Message"
+
+#: admin/forms.py:53
+msgid ""
+"You can use the value of this field in templates for acceptance, rejection, "
+"and activation email with \"{{ message }}\". It is displayed in rejection "
+"email as \"Rejection reasons\" in default templates."
+msgstr ""
+
+#: admin/forms.py:84
+msgid "You cannot reject a previously accepted registration."
+msgstr "Vous ne pouvez pas refuser une inscription qui a déjà été acceptée."
+
+#: admin/forms.py:88
+msgid ""
+"You cannot activate a user whose registration has not been accepted yet."
+msgstr ""
+"Vous ne pouvez pas activer un utilisateur qui n’a pas encore été accepté."
+
+#: contrib/notification/templates/registration/notification_email.txt:2
+#, python-format
+msgid "A new registration of %(site_name)s was created by %(user)s."
+msgstr "Un nouvel enregistrement de %(site_name)s a été créé par %(user)s."
+
+#: contrib/notification/templates/registration/notification_email.txt:4
+msgid "Please click the following url and inspect his/her registration."
+msgstr "S’il vous plaît cliquez sur le lien suivant et verifiez l’inscription."
+
+#: contrib/notification/templates/registration/notification_email_subject.txt:2
+#, python-format
+msgid "A new registration was created by %(user)s -- %(site_name)s"
+msgstr "Un nouvel enregistrement de %(site_name)s a été créé par %(user)s"
+
+#: forms.py:67
+msgid "Password"
+msgstr "Mot de passe"
+
+#: forms.py:70
+msgid "Password (again)"
+msgstr "Mot de passe (confirmation)"
+
+#: forms.py:82
+msgid "The two password fields didn't match."
+msgstr "Les deux mots de passe ne correspondent pas."
+
+#: forms.py:100
+msgid "Username"
+msgstr "Nom d’utilisateur"
+
+#: forms.py:102
+msgid "This value must contain only letters, numbers and underscores."
+msgstr "Cette valeur doit contenir uniquement des lettres et des nombres."
+
+#: forms.py:108
+msgid "E-mail"
+msgstr "E-mail"
+
+#: forms.py:111
+msgid "E-mail (again)"
+msgstr "E-mail (confirmation)"
+
+#: forms.py:123
+msgid "A user with that username already exists."
+msgstr "Ce nom d’utilisateur existe déjà."
+
+#: forms.py:136
+msgid "The two email fields didn't match."
+msgstr "Les adresses e-mail ne correspondent pas."
+
+#: forms.py:147
+msgid "I have read and agree to the Terms of Service"
+msgstr "J’ai lu et j’accepte les conditions d’utilisation"
+
+#: forms.py:150
+msgid "You must agree to the terms to register"
+msgstr "Vous devez accepter les conditions d’utilisation"
+
+#: forms.py:163
+msgid ""
+"This email address is already in use. Please supply a different email "
+"address."
+msgstr ""
+"Cette adresse e-mail est déjà utilisée. S’il vous plaît essayez à nouveau."
+
+#: forms.py:191
+msgid ""
+"Registration using free email addresses is prohibited. Please supply a "
+"different email address."
+msgstr ""
+"Inscription en utilisant des adresses e-mail publiques est interdite. "
+"Veuillez saisir une adresse e-mail différente."
+
+#: models.py:362
+msgid "Unprocessed"
+msgstr ""
+
+#: models.py:363
+msgid "Registration accepted"
+msgstr "Inscription acceptée"
+
+#: models.py:364
+msgid "Registration rejected"
+msgstr "Inscription rejetée"
+
+#: models.py:366
+msgid "user"
+msgstr "utilisateur"
+
+#: models.py:369 models.py:441
+msgid "status"
+msgstr "status"
+
+#: models.py:372
+msgid "activation key"
+msgstr "clé d’activation"
+
+#: models.py:378 supplements/base.py:52
+msgid "registration profile"
+msgstr "profil utilisateur"
+
+#: models.py:379
+msgid "registration profiles"
+msgstr "profils des utilisateurs"
+
+#: models.py:438 views.py:83
+msgid "Activation key has expired"
+msgstr "La clé d’activation est expirée"
+
+#: models.py:475
+msgid "Activation Key Expired?"
+msgstr "La clé d’activation est expirée"
+
+#: supplements/default/models.py:16
+msgid "remarks"
+msgstr "remarques"
+
+#: templates/admin/registration/registrationprofile/change_form.html:6
+msgid "Inspect the registration of %(user)s"
+msgstr "Verifier l’enregistrement de %(user)s"
+
+#: templates/admin/registration/registrationprofile/change_form.html:11
+msgid "Please select an action and click the Save button on bottom."
+msgstr ""
+"Veuillez sélectionner une action et cliquer sur le bouton „Enregistrer“ en "
+"bas."
+
+#: templates/registration/acceptance_email.txt:2
+#: templates/registration/activation_email.txt:2
+#: templates/registration/registration_email.txt:2
+#: templates/registration/rejection_email.txt:2
+#, python-format
+msgid "Dear %(user)s,"
+msgstr "Madame, Monsieur %(user)s,"
+
+#: templates/registration/acceptance_email.txt:4
+#, python-format
+msgid "Your registration of %(site_name)s was accepted by inspector."
+msgstr "Votre enregistrement de %(site_name)s a été accepté."
+
+#: templates/registration/acceptance_email.txt:6
+msgid ""
+"Please click the following url and set your account password to finish "
+"activation."
+msgstr "Veuillez cliquer sur le lien suivant pour entrer votre mot de passe. "
+
+#: templates/registration/acceptance_email.txt:10
+#, python-format
+msgid "The activation link above will be expired in %(expiration_days)s days."
+msgstr ""
+"Le lien d’activation ci-dessus sera expiré dans %(expiration_days)s jours."
+
+#: templates/registration/acceptance_email_subject.txt:2
+#, python-format
+msgid "Your registration was accepted -- %(site_name)s"
+msgstr "Votre enregistrement de %(site_name)s a été accepté."
+
+#: templates/registration/activation_complete.html:4
+#: templates/registration/activation_complete.html:6
+msgid "Activation was complete"
+msgstr "L’activation est terminée"
+
+#: templates/registration/activation_complete.html:10
+msgid "Your account was activated"
+msgstr "Votre compte est activé"
+
+#: templates/registration/activation_email.txt:4
+#, python-format
+msgid "Your account of %(site_name)s was activated by inspector"
+msgstr "L’enregistrement de %(site_name)s a été accepté"
+
+#: templates/registration/activation_email.txt:6
+msgid ""
+"The password of your account was generated automatically and displayed below."
+msgstr ""
+"Le mot de passe de votre compte a été généré automatiquement et est affiché "
+"ci-dessous."
+
+#: templates/registration/activation_email.txt:7
+#: templates/registration/activation_email.txt:18
+msgid "Please click the following url to login."
+msgstr "Cliquez sur l’URL ci-dessous pour vous identifier."
+
+#: templates/registration/activation_email.txt:8
+msgid ""
+"It is strongly recommended that you change your initial password to "
+"something more secure."
+msgstr "Il est conseillé de changer votre mot de passe initial."
+
+#: templates/registration/activation_email.txt:10
+#: templates/registration/activation_email.txt:20
+msgid "::Your account information::"
+msgstr "::Informations de votre compte::"
+
+#: templates/registration/activation_email.txt:11
+#: templates/registration/activation_email.txt:21
+#, python-format
+msgid "USERNAME: %(user)s"
+msgstr "NOM D’UTILISATEUR: %(user)s"
+
+#: templates/registration/activation_email.txt:12
+#, python-format
+msgid "PASSWORD: %(password)s"
+msgstr "MOT DE PASSE: %(password)s"
+
+#: templates/registration/activation_email.txt:16
+#, python-format
+msgid "Your account of %(site_name)s was successfully activated"
+msgstr "Votre compte %(site_name)s a été activé avec succès"
+
+#: templates/registration/activation_email_subject.txt:2
+#, python-format
+msgid "Your account was activated -- %(site_name)s"
+msgstr "Votre compte a été activé -- %(site_name)s"
+
+#: templates/registration/activation_form.html:4
+#: templates/registration/activation_form.html:6
+msgid "Activate your account"
+msgstr "Activez votre compte"
+
+#: templates/registration/activation_form.html:10
+msgid "Please fill the password to complete account activation"
+msgstr "Veuillez remplir votre mot de passe pour activer votre compte"
+
+#: templates/registration/activation_form.html:13
+msgid "Activate"
+msgstr "Activer"
+
+#: templates/registration/login.html:4 templates/registration/login.html:6
+#: templates/registration/login.html:13
+msgid "Login"
+msgstr "Login"
+
+#: templates/registration/login.html:10
+msgid "Please fill your username and password to login"
+msgstr "Veuillez saisir votre nom d'utilisateur et mot de passe"
+
+#: templates/registration/logout.html:4 templates/registration/logout.html:6
+msgid "Logged out"
+msgstr "Déconnecter"
+
+#: templates/registration/logout.html:10
+msgid "You are logged out."
+msgstr "Vous êtes déconnecté."
+
+#: templates/registration/registration_closed.html:4
+#: templates/registration/registration_closed.html:6
+msgid "Registration is closed"
+msgstr "Inscriptions désactivées"
+
+#: templates/registration/registration_closed.html:10
+msgid "I am afraid that registration is currently closed."
+msgstr "Les inscriptions sont actuellement désactivées."
+
+#: templates/registration/registration_complete.html:4
+#: templates/registration/registration_complete.html:6
+msgid "Registration was complete"
+msgstr "Inscription terminée"
+
+#: templates/registration/registration_complete.html:10
+msgid "Your registration was created successfully."
+msgstr "Votre inscription a été créée avec succès."
+
+#: templates/registration/registration_complete.html:11
+#: templates/registration/registration_email.txt:5
+msgid "Please wait until the inspector verify your registration."
+msgstr ""
+"Veuillez patienter jusqu’à ce que l’inspecteur vérifie votre inscription."
+
+#: templates/registration/registration_complete.html:12
+#: templates/registration/registration_email.txt:6
+msgid "You will receive an acceptance or rejection email within several days."
+msgstr ""
+"Vous recevrez un e-mail d’acceptation ou de rejet dans les prochains jours."
+
+#: templates/registration/registration_email.txt:3
+msgid "Your account registration was created successfully."
+msgstr "Votre compte a été créé avec succès."
+
+#: templates/registration/registration_email_subject.txt:2
+#, python-format
+msgid "Your registration was created -- %(site_name)s"
+msgstr "Votre enregistrement de %(site_name)s a été créé"
+
+#: templates/registration/registration_form.html:4
+#: templates/registration/registration_form.html:6
+msgid "Registration"
+msgstr "Enregistrement"
+
+#: templates/registration/registration_form.html:10
+msgid "Please fill the following fields to create your registration"
+msgstr "Merci de bien vouloir saisir les champs suivants"
+
+#: templates/registration/registration_form.html:14
+msgid "Register"
+msgstr "Enregistrer"
+
+#: templates/registration/rejection_email.txt:4
+msgid "I am afraid that your account registration was rejected by inspector."
+msgstr "Votre inscription a été rejetée par l’inspecteur."
+
+#: templates/registration/rejection_email.txt:7
+msgid "Rejection reasons:"
+msgstr "Motifs du rejet:"
+
+#: templates/registration/rejection_email_subject.txt:2
+#, python-format
+msgid "Your registration was rejected -- %(site_name)s"
+msgstr "Votre enregistrement de %(site_name)s a été rejeté"
+
+#: views.py:85
+msgid "An invalid activation key has passed"
+msgstr "La clé d’activation est non-valide"
+
+#~ msgid "Untreated yet"
+#~ msgstr "Non traité"

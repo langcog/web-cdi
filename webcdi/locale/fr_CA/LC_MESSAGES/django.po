@@ -148,19 +148,19 @@ msgstr "8 lbs, 0 oz - 8 lbs, 7 oz (3629 grammes - 3855 grammes)"
 
 #: webcdi/cdi_forms/forms.py:67
 msgid "8 lbs, 8 oz - 8 lbs, 15 oz"
-msgstr "8 lbs, 8 oz - 8 lbs, 15 oz (3856 grammes - 3628 grammes)"
+msgstr "8 lbs, 8 oz - 8 lbs, 15 oz (3856 grammes - 4081 grammes)"
 
 #: webcdi/cdi_forms/forms.py:68
 msgid "9 lbs, 0 oz - 9 lbs, 7 oz"
-msgstr "9 lbs, 0 oz - 9 lbs, 7 oz (3629 grammes - 4082 grammes)"
+msgstr "9 lbs, 0 oz - 9 lbs, 7 oz (4082 grammes - 4308 grammes)"
 
 #: webcdi/cdi_forms/forms.py:69
 msgid "9 lbs, 8 oz - 9 lbs, 15 oz"
-msgstr "9 lbs, 8 oz - 9 lbs, 15 oz (4083 grammes - 4309 grammes)"
+msgstr "9 lbs, 8 oz - 9 lbs, 15 oz (4309 grammes - 4534 grammes)"
 
 #: webcdi/cdi_forms/forms.py:70
 msgid "10 lbs, 0 oz or more"
-msgstr "10 lbs, 0 oz ou plus (4310 grammes ou plus)"
+msgstr "10 lbs, 0 oz ou plus (4535 grammes ou plus)"
 
 #: webcdi/cdi_forms/forms.py:77
 msgid "Less than 1500 grams"
@@ -326,8 +326,6 @@ msgid "Please specify"
 msgstr "Veuillez spécifier"
 
 #: webcdi/cdi_forms/forms.py:222
-#, fuzzy
-#| msgid "Please specify"
 msgctxt "caregiver_other"
 msgid "Please specify"
 msgstr "Veuillez spécifier"

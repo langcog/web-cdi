@@ -18,7 +18,7 @@ from django.db import models
 from django.db.models import Max
 from django.contrib.sites.shortcuts import get_current_site
 from django.urls import reverse
-from ipware.ip import get_ip
+from ipware.ip import get_client_ip
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 import pandas as pd
@@ -848,9 +848,7 @@ def cdi_form(request, hash_id):
                 # If the study is run by langcoglab and the study allows for subject payments, store the IP address for security purposes
                 #if administration_instance.study.researcher.username == "langcoglab" and administration_instance.study.allow_payment:
                 if administration_instance.study.allow_payment:
-                    #user_ip = str(get_ip(request))
-                    #user_ip = bytes(get_ip(request))
-                    user_ip = get_ip(request)
+                    user_ip = get_client_ip(request)
 
                     if user_ip and user_ip != 'None':
                         ip_address.objects.create(study = administration_instance.study,ip_address = user_ip)

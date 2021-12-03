@@ -219,7 +219,7 @@ class BackgroundForm(BetterModelForm):
     caregiver_other = forms.CharField(
         label = ' ',
         required=False,
-        widget = forms.TextInput(attrs={'placeholder': pgettext("caregiver_other", "Please specify")})
+        widget = forms.TextInput(attrs={'placeholder': pgettext_lazy("caregiver_other", "Please specify")})
     )
 
     # Cleaning input data for views.py and later database storage.
