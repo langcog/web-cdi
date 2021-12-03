@@ -188,7 +188,7 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
                     related_studies = study.objects.filter(id=self.administration_instance.study.id)
                 old_admins = administration.objects.filter(study__in = related_studies, subject_id = self.administration_instance.subject_id, completedBackgroundInfo = True)
                 if old_admins:
-                    self.get_object = BackgroundInfo.objects.get(administration = old_admins.latest(field_name='last_modified'))
+                    self.get_object = BackgroundInfo.objects.get(administration = old_admins.latest('last_modified'))
                     self.object.pk = None
                     self.object.administration = self.administration_instance
                     self.object.age = None

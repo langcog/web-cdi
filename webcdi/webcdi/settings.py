@@ -89,7 +89,7 @@ else:
             'PORT': '5432',
         }
     }    
-
+    
 if 'RDS_HOSTNAME' in os.environ:
     if os.environ['RDS_HOSTNAME'] == 'webcdiadmin.canyiscnpddk.us-west-2.rds.amazonaws.com':
         os.environ['DJANGO_SERVER_TYPE'] = 'PROD'
