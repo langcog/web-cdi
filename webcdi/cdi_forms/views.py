@@ -692,7 +692,7 @@ def prefilled_cdi_data(administration_instance):
         word_items = instrument_model.filter(item_type = 'word').values_list('itemID', flat = True)
         old_admins = administration.objects.filter(study = administration_instance.study, subject_id = administration_instance.subject_id, completed = True)
         if old_admins:
-            old_admin = old_admins.latest(field_name='last_modified')
+            old_admin = old_admins.latest('last_modified')
             old_admin_data = administration_data.objects.filter(administration = old_admin, item_ID__in = word_items).values('item_ID', 'value')
             new_data_objs = []
             for admin_data_obj in old_admin_data:
