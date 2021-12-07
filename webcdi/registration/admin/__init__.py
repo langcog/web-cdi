@@ -55,7 +55,7 @@ from django.core.exceptions import ImproperlyConfigured
 from django.views.decorators.csrf import csrf_protect
 from django.utils.safestring import mark_safe
 from django.utils.decorators import method_decorator
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.utils.encoding import force_text
 
 from registration.conf import settings

@@ -6,7 +6,7 @@ A registration supplemental abstract model
 __author__ = 'Alisue <lambdalisue@hashnote.net>'
 from django.db import models
 from django.forms.models import modelform_factory
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 #from django.utils.encoding import python_2_unicode_compatible
 
 from six import python_2_unicode_compatible

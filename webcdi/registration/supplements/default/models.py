@@ -5,7 +5,7 @@ A simple registration supplement model which requires ``remarks``
 """
 __author__ = 'Alisue <lambdalisue@hashnote.net>'
 from django.db import models
-from django.utils.text import ugettext_lazy as _
+from django.utils.text import gettext_lazy as _
 from django.utils.encoding import python_2_unicode_compatible
 from registration.supplements.base import RegistrationSupplementBase
 

@@ -10,7 +10,7 @@ from __future__ import unicode_literals
 # from django.views.generic.edit import ProcessFormView, FormMixin
 # from django.views.generic.base import TemplateResponseMixin
 # from django.views.generic.detail import SingleObjectMixin
-# from django.utils.text import ugettext_lazy as _
+# from django.utils.text import gettext_lazy as _
 
 # from registration.backends import get_backend
 # from registration.models import RegistrationProfile

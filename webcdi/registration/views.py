@@ -11,7 +11,7 @@ from django.views.generic.edit import ProcessFormView
 from django.views.generic.edit import FormMixin
 from django.views.generic.base import TemplateResponseMixin
 from django.views.generic.detail import SingleObjectMixin
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from registration.backends import get_backend
 from registration.models import RegistrationProfile
