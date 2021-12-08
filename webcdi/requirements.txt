@@ -115,7 +115,7 @@ tomli==1.2.2
 tqdm==4.62.3
 trio==0.19.0
 trio-websocket==0.9.2
-urllib3==1.26.7
+urllib3==1.26.5
 wcwidth==0.2.5
 weasyprint==53.4
 webencodings==0.5.1
