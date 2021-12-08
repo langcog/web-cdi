@@ -23,7 +23,7 @@ chardet==4.0.0
 charset-normalizer==2.0.9
 colorama==0.4.4
 confusable-homoglyphs==3.2.0
-cryptography==36.0.0
+cryptography==3.3.2
 cssselect2==0.4.1
 cycler==0.11.0
 defusedxml==0.7.1
