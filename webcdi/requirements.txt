@@ -125,5 +125,3 @@ xhtml2pdf==0.2.5
 xlrd==2.0.1
 zipp==3.6.0
 zopfli==0.1.9
-
-git+git://github.com/HenryMehta/django-inspectional-registration.git

@@ -26,12 +26,15 @@ urlpatterns = [
 ]
 
 # django.contrib.auth
+
+from django.urls import path
 from registration.conf import settings
 from django.contrib.auth import views as auth_views
 if settings.REGISTRATION_DJANGO_AUTH_URLS_ENABLE:
     prefix = settings.REGISTRATION_DJANGO_AUTH_URL_NAMES_PREFIX
     suffix = settings.REGISTRATION_DJANGO_AUTH_URL_NAMES_SUFFIX
 
+    '''
     import django
     if django.VERSION >= (1, 6):
         uidb = r"(?P<uidb64>[0-9A-Za-z_\-]+)"
@@ -45,6 +48,7 @@ if settings.REGISTRATION_DJANGO_AUTH_URLS_ENABLE:
         password_reset_confirm_rule = (
             r"^password/reset/confirm/%s-%s/$" % (uidb, token)
         )
+    '''
 
     urlpatterns += [
         url(r'^login/$', auth_views.LoginView.as_view(),
@@ -60,7 +64,8 @@ if settings.REGISTRATION_DJANGO_AUTH_URLS_ENABLE:
         url(r'^password/reset/$', auth_views.PasswordResetView.as_view(),
             name=prefix+'password_reset'+suffix, kwargs=dict(
                 post_reset_redirect=prefix+'password_reset_done'+suffix)),
-        url(password_reset_confirm_rule,
+        path('password/reset/confirm/<str:uidb64>/<str:token>',
+        #url(password_reset_confirm_rule,
             auth_views.PasswordResetConfirmView.as_view(),
             name=prefix+'password_reset_confirm'+suffix),
         url(r'^password/reset/complete/$', auth_views.PasswordResetCompleteView.as_view(),
