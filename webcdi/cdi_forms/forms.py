@@ -404,6 +404,9 @@ class BackgroundForm(BetterModelForm):
             self.fields['child_dob'].input_formats = ('%d/%m/%Y', '%d/%m/%y',)
             self.fields['child_dob'].widget.attrs['placeholder'] = _('dd/mm/yyyy')
 
+        if self.curr_context['study'].hide_source_id:
+            self.fields['source_id'].widget = forms.HiddenInput()
+            
         #if we have a specified background info, use it
         if os.path.isfile(self.filename) :
             rows = []
