@@ -83,7 +83,10 @@ class AdministerAdministraionView(UpdateView):
         self.object.catresponse.save()
 
         if len(administered_items) > 49 :
-            filename = os.path.realpath(PROJECT_ROOT + self.object.study.demographic.path)
+            try:
+                filename = os.path.realpath(PROJECT_ROOT + self.object.study.demographic.path)
+            except Exception:
+                filename = 'None'
             if  os.path.isfile(filename):
                 self.object.completedSurvey = True
             else :
