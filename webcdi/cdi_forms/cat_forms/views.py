@@ -155,7 +155,10 @@ class AdministerAdministraionView(UpdateView):
         else:    
             self.word = cdi_cat_api(f'nextItem?responses={list(map(int,administered_responses))}&items={administered_items}')
             if self.word == 'stop':
-                filename = os.path.realpath(PROJECT_ROOT + self.object.study.demographic.path)
+                try:
+                    filename = os.path.realpath(PROJECT_ROOT + self.object.study.demographic.path)
+                except Exception:
+                    filename = 'None'
                 if  os.path.isfile(filename):
                     self.object.completedSurvey = True
                 else :
