@@ -449,7 +449,7 @@ class CreateBackgroundInfoView(CreateView):
         if self.background_form.is_valid():
             # First create the administration_instance
             if self.study.study_group:
-                related_studies = study.objects.filter(researcher=researcher, study_group=self.study.study_group)
+                related_studies = study.objects.filter(researcher=self.study.researcher, study_group=self.study.study_group)
                 max_subject_id = administration.objects.filter(study__in=related_studies).aggregate(Max('subject_id'))['subject_id__max']
             else:
                 max_subject_id = administration.objects.filter(study=self.study).aggregate(Max('subject_id'))['subject_id__max'] # Find the subject ID in this study with the highest number
