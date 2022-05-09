@@ -31,3 +31,8 @@ col_4,,,,,,,,,,,,,,,Section 4,Section 4,Section 4,Section 4,Section 4,Section 4,
 other,,,,,,,,,,,,,,,,,,,,,,,,,,,끝맺는 말,끝맺는 말,,,,,,
 case_markers,,,,,,,,,,,,,,,,,,,,,,,,,,,조사,조사,,,,,,
 function_words,Function Words,,,,,,,,,,,,,,,,,,,,,,,,,,,기능어,,,,,,
+action_words,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Action words
+gestures_first,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,First Gestures
+gestures_games,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Game Gestures
+gestures_objects,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Object Gestures
+gestures_parent,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Parent Gestures
