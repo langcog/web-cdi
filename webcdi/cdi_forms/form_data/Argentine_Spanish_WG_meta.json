@@ -138,15 +138,13 @@
                             "text": "Here are some things that young children sometimes do with stuffed animals or dolls. Please select the actions that you have seen your child do.",
                             "id": "gestures_parent",
                             "title": "Pretending to be a parent"
-                        },
-                        {
-                            "text": "Does your child do or try to do any of the following?",
-                            "id": "gestures_adult",
-                            "title": "Imitating other adult actions (using real or toy implements)",
-                            "type": "textbox"
-                        }
-
-                    ]
+                        }]
+                },
+                {
+                    "text": "Does your child do or try to do any of the following?",
+                    "id": "gestures_examples",
+                    "title": "Imitating other adult actions (using real or toy implements)",
+                    "type": "textbox"
                 }
             ]
         }

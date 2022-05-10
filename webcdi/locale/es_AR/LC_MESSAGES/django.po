@@ -1686,12 +1686,8 @@ msgid ""
 "perfectly fine!"
 msgstr ""
 "En esta sección te vamos a mostrar una lista de palabras y algunas frases "
-"sencillas: Queremos saber cuáles son las que tu hijo/a DICE. Consideramos "
-"que tu hijo/a DICE una palabra cuando la puede decir solito/a, y además "
-"cuando sabe lo que significa esa palabra. Tené en cuenta que este "
-"cuestionario es para niños y niñas de muchas edades. Puede ser que tu hijo/a "
-"no diga muchas de las palabras de la lista, o incluso que diga muy pocas. No "
-"te preocupes por eso. Es normal!!"
+"sencillas: Queremos saber cuáles son las que  tu hijo/a ENTIENDE, aunque "
+"todavía no las pueda decir y cuáles además de entender, DICE. "
 
 #: webcdi/cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:41
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:206
@@ -1741,7 +1737,7 @@ msgid ""
 "DON'T ask your child to repeat the words on the list. This doesn't count!"
 msgstr ""
 "No le pidas a tu hijo/a que repita cada palabra de este cuestionario para "
-"saber si la dice.La imitación no cuenta!"
+"saber si la dice. La imitación no cuenta! "
 
 #: webcdi/cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:128
 msgid "* or word used in your family"
@@ -1865,35 +1861,36 @@ msgid ""
 "means, even though they may not be able to say it themselves. Here are some "
 "examples."
 msgstr ""
-"Su niño/a \"comprende\" una palabra o frase sí sabe que lo que la palabra o "
-"frase significa, aunque tal vez todavía no la pueda decir solo(a). Aquí "
-"temostramos algunos ejemplos."
+"Sabemos que tu hijo/a ENTIENDE una palabra o una frase cuando mira o señala "
+"hacia el objeto, la persona  o el lugar que estás nombrando o bien responde "
+"a ordenes sencillas sobre ese objeto persona o lugar. "
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:77
 msgid "DO check \"understands\" if:"
-msgstr "Marcá \"comprende\" si:"
+msgstr " "
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:79
 msgid ""
 "Your child responds appropriately to the word/phrase. For example, when you "
 "say \"Get the ball,\" s/he turns and tries to find the ball."
 msgstr ""
-"Tu hijo/a responde apropiadamente a la palabra o a la frase que se le dice."
-"Por ejemplo, si le decis “dame la pelota” va y la trae, o al menos señala o "
-"mira hacia donde está la pelota."
+"Marca el casillero de COMPRENDE si tu hijo/a responde apropiadamente a la "
+"palabra o a la frase que se le dice. Por ejemplo, si le decís \"dame la "
+"pelota\" va y la trae, o al menos señala o mira hacia donde está "
+"la pelota. "
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:94
 msgid "DON'T check \"understands\" if:"
-msgstr "NO marques \"comprende\" si:"
+msgstr " "
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:96
 msgid ""
 "Your child doesn't have a meaning for the word/phrase.  S/he may have heard "
 "it before, like in a story, but you don't think s/he knows what it means."
 msgstr ""
-"Pensás que tu hijo/a no tiene un significado concreto para esa palabra.A lo "
-"mejor la escuchó antes, en un cuento por ejemplo, pero no parece "
-"entenderlani diferenciarla de otras palabras."
+"NO Marques el casillero de COMPRENDE si pensás  que tu hijo/a no tiene un "
+"significado concreto para esa palabra. A lo mejor la escuchó antes, en un "
+"cuento por ejemplo, pero no parece entenderla ni diferenciarla de otras palabras. "
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:106
 msgid ""
@@ -1902,48 +1899,48 @@ msgid ""
 "examples."
 msgstr ""
 "Tu hijo/a COMPRENDE Y DICE una palabra cuando además de entender su "
-"significadola puede decir solito/a, aunque todavía no la pronuncie bien. "
-"Aquí hay algunos ejemplos."
+"significado la puede decir solito/a, aunque todavía no la pronuncie bien. "
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:118
 msgid "DO check \"understands and says\" if:"
-msgstr "Marcá \"comprende y dice\" si:"
+msgstr " "
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:120
 msgid ""
 "Your child says a word/phrase when trying to name an object or describe "
 "something that happened.  You think s/he has a meaning for that word/phrase."
 msgstr ""
-"Si tu hijo/a DICE esa palabra o frase cuando quiere nombrar el objeto o "
-"contarte algo que pasó."
+"Marcá \"COMPRENDE y DICE\" si tu hijo/a DICE esa palabra o frase cuando "
+"quiere nombrar el objeto o contarte algo que pasó."
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:137
 msgid ""
 "It's fine if your child can't say the whole word or says it his/her own "
 "\"special\" way."
 msgstr ""
-" No importa si tu hijo/a todavía no pueda decir la palabra completa o no "
-"pueda pronunciarla bien (\"tota\" en lugar de \"pelota\" o \"ato\" en lugar "
-"de zapato).También marcá la casilla si en tu familia se usa otro nombre "
-"diferente para alguna de las palabras de la lista (Ej: \"lala\" en lugar de "
-"\"abuela\" \"pupo\" en lugar de \"ombligo\" o \"mema\" por \"mamadera\")."
+"Marcá \"COMPRENDE y DICE\" aunque tu hijo/a todavía no pueda decir la "
+"palabra completa o no pueda pronunciarla bien (\"tota\" en lugar de "
+"pelota/ \"ato\" en lugar de zapato). También marcá la casilla si en tu "
+"familia se usa otro nombre diferente para nombrar alguna de las palabras "
+"de la lista ( EJ: \"lala\" en lugar de \"abuela\" \"pupo\" en lugar de "
+"\"ombligo\" o \"mema\" por mamadera)."
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:139
 msgid "DO check \"understands and says.\""
-msgstr "Marcá \"comprende y dice\""
+msgstr " "
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:156
 msgid ""
 "DON'T check if your child is just stringing sounds together.  This is not a "
 "real word that means something."
 msgstr ""
-"No marques \"COMPRENDE Y DICE\" si tu hijo/a solo repite sonidos aislados en "
-"lugar de una palabra o un grupo fijo de sonidos que significan algo concreto."
+"No marques \"COMPRENDE Y DICE\" si tu hijo/a solo repite sonidos aislados "
+"en lugar de una palabra o un grupo fijo de sonidos que significan algo concreto."
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:158
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:176
 msgid "DON'T check \"understands and says.\""
-msgstr "NO marques \"comprende y dice\""
+msgstr " "
 
 #: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:285
 msgid ""
