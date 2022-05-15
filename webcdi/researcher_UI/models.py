@@ -74,6 +74,7 @@ class study(models.Model):
     participant_source_boolean = models.IntegerField(default=0, choices=choices.PARTICIPANT_SOURCE_CHOICES) # Whether this is capturing a link from a Partner sourcing participants
     redirect_url = models.URLField(blank=True, null=True, help_text="Please enter redirect URL") # The redirect URL
     append_source_id_to_redirect = models.BooleanField(verbose_name="Append source_id to redirect URL?", default = False)
+    hide_source_id = models.BooleanField(verbose_name='Hide source id from parents/participants?', default=False)
     source_id_url_parameter_key = models.CharField("URL parameter key", blank=True, null=True, max_length=51)
 
     backpage_boolean = models.BooleanField(default=True, help_text="When selected the final demographics page will be shown - deselect to not show the final page")

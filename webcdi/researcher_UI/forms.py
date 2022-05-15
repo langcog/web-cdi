@@ -40,6 +40,7 @@ class AddStudyForm(BetterModelForm):
     redirect_url = forms.URLField(required=False, help_text="Enter the basic return URL")
     participant_source_boolean = forms.ChoiceField(label="Participant Source", choices=choices.PARTICIPANT_SOURCE_CHOICES) # Whether to give redirect button upon completion of administration
     append_source_id_to_redirect = forms.BooleanField(required=False)
+    hide_source_id = forms.BooleanField(label="Hide source from participant/parent", required=False)
     source_id_url_parameter_key = forms.CharField(required=False)
     
     backpage_boolean = forms.BooleanField(label="Show backpage in split background information study?", required=False)
@@ -95,6 +96,7 @@ class AddStudyForm(BetterModelForm):
                 Div(Field('redirect_url'), css_class="redirect_boolean collapse"),
                 Field('participant_source_boolean', css_class="css_enabler"),
                 Div(Field('append_source_id_to_redirect'), css_class="participant_source_boolean collapse"),
+                Div(Field('hide_source_id'), css_class="participant_source_boolean collapse"),
                 Div(Field('source_id_url_parameter_key'), css_class="participant_source_boolean collapse"),
             ),
             Field('backpage_boolean'),
@@ -164,6 +166,7 @@ class RenameStudyForm(BetterModelForm):
     participant_source_boolean = forms.ChoiceField(label="Participant Source", choices=choices.PARTICIPANT_SOURCE_CHOICES) # Whether to give redirect button upon completion of administration
     backpage_boolean = forms.BooleanField(label="Show backpage in split background information study?", required=False)
     append_source_id_to_redirect = forms.BooleanField(required=False)
+    hide_source_id = forms.BooleanField(label="Hide source from participant/parent", required=False)
     source_id_url_parameter_key = forms.CharField(required=False)
 
     print_my_answers_boolean = forms.BooleanField(label="Allow participant to print their responses at end of Study?", required=False) 
@@ -210,6 +213,7 @@ class RenameStudyForm(BetterModelForm):
                 Div(Field('redirect_url'), css_class="redirect_boolean collapse"),
                 Field('participant_source_boolean', css_class="css_enabler"),
                 Div(Field('append_source_id_to_redirect'), css_class="participant_source_boolean collapse"),
+                Div(Field('hide_source_id'), css_class="participant_source_boolean collapse"),
                 Div(Field('source_id_url_parameter_key'), css_class="participant_source_boolean collapse"),
             ),
             Field('backpage_boolean'),
