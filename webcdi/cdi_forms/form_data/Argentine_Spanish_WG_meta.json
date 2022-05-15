@@ -2,108 +2,108 @@
     "parts": [
         {
             "id": 1,
-            "title": "PART 1: Early Words",
+            "title": "1° Parte: Primeras palabras",
             "types": [
                 {
-                    "text": "Before children begin to speak, they show signs of understanding language by responding to familiar words and phrases. Below are some common examples. Does your child do any of these?",
+                    "text": "Antes de que un niño/a empiece a decir sus primeras palabras, parece entender el lenguaje. Eso lo sabemos porque responde a palabras y frases. ¿Tu hijo/a hace algunas de las siguientes cosas?",
                     "type": "radiobutton",
                     "id": "first_signs",
                     "title": "First signs of understanding"
                 },
                 {
-                    "text": "In the list below, please mark the phrases that your child seems to understand",
+                    "text": "En la lista que viene a continuación, por favor, marcá el cuadrado que corresponda a las frases que tu hijo/a entiende.",
                     "type": "checkbox",
                     "id": "phrases",
-                    "title": "Phrases"
+                    "title": "Comprensión de las primeras frases "
                 },
                 {
                     "id": "starting_to_talk",
                     "type": "radiobutton",
-                    "title": "Starting to talk"
+                    "title": "Maneras de hablar "
                 },
                 {
-                    "text": "The following is a list of typical words in young children's vocabularies. For words your child UNDERSTANDS but does not yet say, choose the option \"understands\". For words that your child both understands and also SAYS, choose the option \"understands and says\". You only need to choose one option. If your child uses a different pronunciation of a word (for example, \"raffe\" for \"giraffe\" or \"sketti\" for \"spagetti\") or knows a different word that has a similar meaning as the word listed here (e.g., \"nana\" for \"grandma\"), go ahead and mark it.  Remember, this is a \"catalogue\" of words that are used by many different children. Don't worry if your child knows only a few right now.",
+                    "text": "A continuación, vas a encontrar una lista de palabras frecuentes en el vocabulario de los niños/as pequeños/as. Si tu hijo/a ya entiende, pero no dice las palabras, marcá la casilla de la palabra correspondiente en la columna que dice \"comprende\". Si tu hijo/a dice palabras de la lista aunque de manera distinta (ej., \"guaguau\" por \"perro\") o con diferente pronunciación (ej., \"ato\" por \"auto\"); o si dice otra palabra que significa lo mismo que la que viene en el cuestionario (ej., \"meme\" por \"leche\"), marcá el cuadrado de la palabra correspondiente en la columna de \"comprende y dice\". Acordate de que esta lista incluye palabras que muchos niños/as comprenden o pueden decir. No te preocupes si tu hijo/a no entiende o no dice todas las palabras.",
                     "id": "word",
-                    "title": "Vocabulary checklist",
+                    "title": "Lista de vocabulario ",
                     "sections": [
                         {
                             "id": "sounds",
-                            "title": "1. Sound Effects And Animal Sounds"
+                            "title": "1. Sonidos de cosas o animales"
                         },
                         {
                             "id": "animals",
-                            "title": "2. Animals (Real Or Toy)"
+                            "title": "2. Animales ( de verdad o de juguete) "
                         },
                         {
                             "id": "vehicles",
-                            "title": "3. Vehicles (Real Or Toy)"
+                            "title": "3. Vehiculos ( de verdad o de juguete)"
                         },
                         {
                             "id": "toys",
-                            "title": "4. Toys"
+                            "title": "4. Juguetes "
                         },
                         {
                             "id": "food_drink",
-                            "title": "5. Food And Drink"
+                            "title": "5. Alimentos y bebidas"
                         },
                         {
                             "id": "clothing",
-                            "title": "6. Clothing"
+                            "title": "6. Ropa"
                         },
                         {
                             "id": "body_parts",
-                            "title": "7. Body Parts"
+                            "title": "7. Partes del cuerpo "
                         },
                         {
                             "id": "household",
-                            "title": "8. Small Household Items",
-                            "footnote": "* or word used in your family"
+                            "title": "8. Utensilios de la casa ",
+                            "footnote": "*o la palabra que se use en tu familia"
                         },
                         {
                             "id": "furniture_rooms",
-                            "title": "9. Furniture And Rooms"
+                            "title": "9. Muebles y cuartos "
                         },
                         {
                             "id": "outside",
-                            "title": "10. Outside Things And Places to Go",
-                            "footnote": "* or word used in your family"
+                            "title": "10. Lugares y objetos fuera de la casa ",
+                            "footnote": "*o la palabra que se use en tu familia"
                         },
                         {
                             "id": "people",
-                            "title": "11. People",
-                            "footnote": "* or word used in your family"
+                            "title": "11. Personas ",
+                            "footnote": "*o la palabra que se use en tu familia"
                         },
                         {
                             "id": "games_routines",
-                            "title": "12. Games And Routines"
+                            "title": "12. Juegos y rutinas"
                         },
                         {
                             "id": "action_words",
-                            "title": "13. Action Words"
+                            "title": "13: Acciones y estados "
                         },
                         {
                             "id": "descriptive_words",
-                            "title": "14. Descriptive Words"
+                            "title": "14: Cualidades y atributos "
                         },
                         {
                             "id": "time_words",
-                            "title": "15. Words about Time"
+                            "title": "15. palabras sobre el tiempo "
                         },
                         {
                             "id": "pronouns",
-                            "title": "16. Pronouns"
+                            "title": "16. Pronombres "
                         },
                         {
                             "id": "question_words",
-                            "title": "17. Question Words"
+                            "title": "17. Preguntas "
                         },
                         {
                             "id": "locations",
-                            "title": "18. Prepositions And Locations"
+                            "title": "18: Presposiciones y artículos ( note that there is a little modification in the contents of this section and the next one) "
                         },
                         {
                             "id": "quantifiers",
-                            "title": "19. Quantifiers And Articles"
+                            "title": "19. Cuantificadores y Adverbios "
                         }
                     ],
                     "type": "modified_checkbox"
@@ -120,17 +120,17 @@
                     "sections": [
 
                         {
-                            "text": "When infants are learning to communicate, they often use gestures to make their wishes known. For each item below, choose the option that describes your child's actions right now.",
+                            "text": "Cuando un niño/a pequeño/a empieza a comunicarse, frecuentemente usa gestos para dar a entender sus necesidades. Por favor, marcá el cuadrado en la columna correspondiente de los gestos o acciones que tu hijo/a haga en este momento.",
                             "id": "gestures_first",
-                            "title": "First communicative gestures"
+                            "title": "Primeros gestos comunicativos "
                         },
                         {
-                            "text": "Does your child do any of the following?",
+                            "text": "¿Tu hijo/a hace algunas de las siguientes cosas ?",
                             "id": "gestures_games",
-                            "title": "Games and routines"
+                            "title": "Juegos y rutinas"
                         },
                         {
-                            "text": "Does your child do or try to do any of the following?",
+                            "text": "¿Viste a tu hijo/a hacer o participar de algunas de las siguientes actividades?",
                             "id": "gestures_objects",
                             "title": "Actions with objects"
                         },
@@ -141,7 +141,7 @@
                         }]
                 },
                 {
-                    "text": "Does your child do or try to do any of the following?",
+                    "text": "¿Su hijo trata de hacer o hace alguna de las siguientes actividades?",
                     "id": "gestures_examples",
                     "title": "Imitating other adult actions (using real or toy implements)",
                     "type": "textbox"
