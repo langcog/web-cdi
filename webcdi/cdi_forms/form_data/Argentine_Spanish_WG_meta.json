@@ -8,7 +8,7 @@
                     "text": "Antes de que un niño/a empiece a decir sus primeras palabras, parece entender el lenguaje. Eso lo sabemos porque responde a palabras y frases. ¿Tu hijo/a hace algunas de las siguientes cosas?",
                     "type": "radiobutton",
                     "id": "first_signs",
-                    "title": "First signs of understanding"
+                    "title": "Comprensión temprana"
                 },
                 {
                     "text": "En la lista que viene a continuación, por favor, marcá el cuadrado que corresponda a las frases que tu hijo/a entiende.",
@@ -57,7 +57,7 @@
                         {
                             "id": "household",
                             "title": "8. Utensilios de la casa ",
-                            "footnote": "*o la palabra que se use en tu familia"
+                            "footnote": "*o la palabra que se use en su familia"
                         },
                         {
                             "id": "furniture_rooms",
@@ -66,12 +66,12 @@
                         {
                             "id": "outside",
                             "title": "10. Lugares y objetos fuera de la casa ",
-                            "footnote": "*o la palabra que se use en tu familia"
+                            "footnote": "*o la palabra que se use en su familia"
                         },
                         {
                             "id": "people",
                             "title": "11. Personas ",
-                            "footnote": "*o la palabra que se use en tu familia"
+                            "footnote": "*o la palabra que se use en su familia"
                         },
                         {
                             "id": "games_routines",
@@ -99,11 +99,11 @@
                         },
                         {
                             "id": "locations",
-                            "title": "18: Presposiciones y artículos ( note that there is a little modification in the contents of this section and the next one) "
+                            "title": "18. Locativos "
                         },
                         {
                             "id": "quantifiers",
-                            "title": "19. Cuantificadores y Adverbios "
+                            "title": "19. Preposiciones y artículos "
                         }
                     ],
                     "type": "modified_checkbox"
@@ -112,7 +112,7 @@
         },
         {
             "id": 2,
-            "title": "Actions and Gestures",
+            "title": "Gestos y Acciones ",
             "types": [
                 {
                     "type": "radiobutton",
@@ -132,12 +132,12 @@
                         {
                             "text": "¿Viste a tu hijo/a hacer o participar de algunas de las siguientes actividades?",
                             "id": "gestures_objects",
-                            "title": "Actions with objects"
+                            "title": "Acciones con objetos "
                         },
                         {
-                            "text": "Here are some things that young children sometimes do with stuffed animals or dolls. Please select the actions that you have seen your child do.",
+                            "text": "Muchas veces, los niños/as juegan a hacer cosas que hacen las personas adultas. Si viste a tu hijo/a hacer alguna de estas actividades, por favor indicalo.",
                             "id": "gestures_parent",
-                            "title": "Pretending to be a parent"
+                            "title": "Jugar a ser adulto"
                         }]
                 },
                 {
