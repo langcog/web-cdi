@@ -446,4 +446,4 @@ item443,trata_tocar,gestures,gestures_parent,no; yes,"14. Trata de tocar un inst
 item444,juega_manejar,gestures,gestures_parent,no; yes,15. Juega a manejar el coche.,
 item445,limpia_la,gestures,gestures_parent,no; yes,16. Limpia la mesa con un trapo.,
 item446,trata_escribir,gestures,gestures_parent,no; yes,17. Trata de escribir con un lápiz o una lapicera.,
-item447,a_los_ninios,gestures_textbox,gestures_parent,no; yes,"A los niños les gusta jugar con un objeto como si fuera otra cosa. Por ejemplo, pueden agarrar el control del televisor y ponérselo en la oreja como si fuera un teléfono, o hacer como que una caja es un camión, o que un lápiz es un avión. ¿Viste a tu hijo/a hacer juegos parecidos?",
+item447,a_los_ninios,gestures_examples,gestures_examples,,"A los niños les gusta jugar con un objeto como si fuera otra cosa. Por ejemplo, pueden agarrar el control del televisor y ponérselo en la oreja como si fuera un teléfono, o hacer como que una caja es un camión, o que un lápiz es un avión. ¿Viste a tu hijo/a hacer juegos parecidos?",
