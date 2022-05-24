@@ -139,12 +139,6 @@
                             "id": "gestures_parent",
                             "title": "Jugar a ser adulto"
                         }]
-                },
-                {
-                    "text": "¿Su hijo trata de hacer o hace alguna de las siguientes actividades?",
-                    "id": "gestures_examples",
-                    "title": "E. Acciones con un objeto en lugar de otro",
-                    "type": "textbox"
                 }
             ]
         }
