@@ -26,8 +26,6 @@ DEBUG = True
 TEMPLATE_DEBUG = False
 
 ALLOWED_HOSTS = [
-    'webcdi-prod-py36.us-west-2.elasticbeanstalk.com',
-    'web-cdi-dev6.mfpemr5vcz.us-west-2.elasticbeanstalk.com',
     'ec2-52-88-52-34.us-west-2.compute.amazonaws.com',
     HOST_IP, HOST_NAME, 
     'localhost', 
@@ -86,7 +84,7 @@ else:
             'USER': 'webcdi-admin',
             'PASSWORD': 'bears1stlexicon',
             #'HOST': 'webcdiadmin.canyiscnpddk.us-west-2.rds.amazonaws.com',
-            'HOST': 'webcdi-local-henry.canyiscnpddk.us-west-2.rds.amazonaws.com',
+            'HOST': 'webcdi-dev-argentinian.canyiscnpddk.us-west-2.rds.amazonaws.com',
             'PORT': '5432',
         }
     }    

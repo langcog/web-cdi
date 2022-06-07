@@ -237,12 +237,22 @@
 	},{
 		"language": "Argentine Spanish",
 		"form": "WS",
-		"verbose_name": "Argentine Spanish WS (CDI II)",
+		"verbose_name": "Argentinian Spanish WS (CDI II)",
 		"min_age": 16,
 		"max_age": 30,
 		"csv_file": "cdi_form_csv/cdi_forms/[Argentine_Spanish_WS].csv",
 		"json_data": "cdi_forms/form_data/Argentine_Spanish_WS_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/Argentine_Spanish_WS_scoring.json",
+		"demographics" : ["Argentine_Spanish.json"]
+	},
+	{
+		"language": "Argentine Spanish",
+		"form": "WG",
+		"verbose_name": "Argentinian Spanish WG (CDI I)",
+		"min_age": 8,
+		"max_age": 18,
+		"csv_file": "cdi_form_csv/cdi_forms/[Argentine_Spanish_WG].csv",
+		"json_data": "cdi_forms/form_data/Argentine_Spanish_WG_meta.json",
 		"demographics" : ["Argentine_Spanish.json"]
 	}
 ]

@@ -1043,8 +1043,13 @@ def administer_new_participant(request, username, study_name): # used for wordfu
             return redirect(reverse('administer_cdi_form', args=[admin.url_hash]))
 
 def administer_new_parent(request, username, study_name): # For creating single administrations. Does not require a log-in. Participants can generate their own single-use administration if given the proper link,
-    if 'source_id' in request.GET: source_id = request.GET['source_id']
-    else : source_id = None
+    if 'source_id' in request.GET:
+        source_id = request.GET['source_id']
+    else:
+        source_id = None
+    if 'child' in request.GET and 'response' in request.GET:
+        source_id = f"{request.GET['child']}_{request.GET['response']}"
+
 
     data={}
     researcher = User.objects.get(username = username) # Get researcher's username. Different method because current user may not be the researcher and may not be logged in

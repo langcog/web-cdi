@@ -1,0 +1,146 @@
+{
+    "parts": [
+        {
+            "id": 1,
+            "title": "1° Parte: Primeras palabras",
+            "types": [
+                {
+                    "text": "Antes de que un niño/a empiece a decir sus primeras palabras, parece entender el lenguaje. Eso lo sabemos porque responde a palabras y frases. ¿Tu hijo/a hace algunas de las siguientes cosas?",
+                    "type": "radiobutton",
+                    "id": "first_signs",
+                    "title": "Comprensión temprana"
+                },
+                {
+                    "text": "En la lista que viene a continuación, por favor, marcá el cuadrado que corresponda a las frases que tu hijo/a entiende.",
+                    "type": "checkbox",
+                    "id": "phrases",
+                    "title": "Comprensión de las primeras frases "
+                },
+                {
+                    "id": "starting_to_talk",
+                    "type": "radiobutton",
+                    "title": "Maneras de hablar "
+                },
+                {
+                    "text": "A continuación, vas a encontrar una lista de palabras frecuentes en el vocabulario de los niños/as pequeños/as. Si tu hijo/a ya entiende, pero no dice las palabras, marcá la casilla de la palabra correspondiente en la columna que dice \"comprende\". Si tu hijo/a dice palabras de la lista aunque de manera distinta (ej., \"guaguau\" por \"perro\") o con diferente pronunciación (ej., \"ato\" por \"auto\"); o si dice otra palabra que significa lo mismo que la que viene en el cuestionario (ej., \"meme\" por \"leche\"), marcá el cuadrado de la palabra correspondiente en la columna de \"comprende y dice\". Acordate de que esta lista incluye palabras que muchos niños/as comprenden o pueden decir. No te preocupes si tu hijo/a no entiende o no dice todas las palabras.",
+                    "id": "word",
+                    "title": "Lista de vocabulario ",
+                    "sections": [
+                        {
+                            "id": "sounds",
+                            "title": "1. Sonidos de cosas o animales"
+                        },
+                        {
+                            "id": "animals",
+                            "title": "2. Animales ( de verdad o de juguete) "
+                        },
+                        {
+                            "id": "vehicles",
+                            "title": "3. Vehiculos ( de verdad o de juguete)"
+                        },
+                        {
+                            "id": "toys",
+                            "title": "4. Juguetes "
+                        },
+                        {
+                            "id": "food_drink",
+                            "title": "5. Alimentos y bebidas"
+                        },
+                        {
+                            "id": "clothing",
+                            "title": "6. Ropa"
+                        },
+                        {
+                            "id": "body_parts",
+                            "title": "7. Partes del cuerpo "
+                        },
+                        {
+                            "id": "household",
+                            "title": "8. Utensilios de la casa ",
+                            "footnote": "*o la palabra que se use en su familia"
+                        },
+                        {
+                            "id": "furniture_rooms",
+                            "title": "9. Muebles y cuartos "
+                        },
+                        {
+                            "id": "outside",
+                            "title": "10. Lugares y objetos fuera de la casa ",
+                            "footnote": "*o la palabra que se use en su familia"
+                        },
+                        {
+                            "id": "people",
+                            "title": "11. Personas ",
+                            "footnote": "*o el nombre de esa persona"
+                        },
+                        {
+                            "id": "games_routines",
+                            "title": "12. Juegos y rutinas"
+                        },
+                        {
+                            "id": "action_words",
+                            "title": "13: Acciones y estados "
+                        },
+                        {
+                            "id": "descriptive_words",
+                            "title": "14: Cualidades y atributos "
+                        },
+                        {
+                            "id": "time_words",
+                            "title": "15. palabras sobre el tiempo "
+                        },
+                        {
+                            "id": "pronouns",
+                            "title": "16. Pronombres "
+                        },
+                        {
+                            "id": "question_words",
+                            "title": "17. Preguntas "
+                        },
+                        {
+                            "id": "locations",
+                            "title": "18. Locativos "
+                        },
+                        {
+                            "id": "quantifiers",
+                            "title": "19. Preposiciones y artículos "
+                        }
+                    ],
+                    "type": "modified_checkbox"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "title": "Gestos y Acciones ",
+            "types": [
+                {
+                    "type": "radiobutton",
+                    "id": "gestures",
+                    "sections": [
+
+                        {
+                            "text": "Cuando un niño/a pequeño/a empieza a comunicarse, frecuentemente usa gestos para dar a entender sus necesidades. Por favor, marcá el cuadrado en la columna correspondiente de los gestos o acciones que tu hijo/a haga en este momento.",
+                            "id": "gestures_first",
+                            "title": "Primeros gestos comunicativos "
+                        },
+                        {
+                            "text": "¿Tu hijo/a hace algunas de las siguientes cosas ?",
+                            "id": "gestures_games",
+                            "title": "Juegos y rutinas"
+                        },
+                        {
+                            "text": "¿Viste a tu hijo/a hacer o participar de algunas de las siguientes actividades?",
+                            "id": "gestures_objects",
+                            "title": "Acciones con objetos "
+                        },
+                        {
+                            "text": "Muchas veces, los niños/as juegan a hacer cosas que hacen las personas adultas. Si viste a tu hijo/a hacer alguna de estas actividades, por favor indicalo.",
+                            "id": "gestures_parent",
+                            "title": "Jugar a ser adulto"
+                        }]
+                }
+            ]
+        }
+    ]
+}
