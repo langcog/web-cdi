@@ -16,6 +16,13 @@ from .models import CatResponse
 from .utils import string_bool_coerce
 from .cdi_cat_api import cdi_cat_api
 
+CAT_LANG_DICT = {
+    'en' : 'EN',
+    'es' : 'SP',
+    'fr_ca' : 'FR',
+    'en_ca' : 'EN',
+}
+
 # Create your views here.
 
 class CATBackgroundInfoView(BackgroundInfoView):
@@ -27,6 +34,8 @@ class CATCreateBackgroundInfoView(CreateBackgroundInfoView):
 
 class CATBackpageBackgroundInfoView(BackpageBackgroundInfoView):
     pass
+
+
 
 class AdministerAdministraionView(UpdateView):
     model = administration
@@ -43,8 +52,8 @@ class AdministerAdministraionView(UpdateView):
 
     def get_hardest_easiest(self):
         if self.object.catresponse.administered_items :
-            hardest = cdi_cat_api(f'hardestWord?items={self.object.catresponse.administered_items}')['definition']
-            easiest = cdi_cat_api(f'easiestWord?items={self.object.catresponse.administered_items}')['definition']
+            hardest = cdi_cat_api(f'hardestWord?items={self.object.catresponse.administered_items}&language={CAT_LANG_DICT[self.language]}')['definition']
+            easiest = cdi_cat_api(f'easiestWord?items={self.object.catresponse.administered_items}&language={CAT_LANG_DICT[self.language]}')['definition']
         else : 
             hardest = None
             easiest = None
@@ -128,6 +137,7 @@ class AdministerAdministraionView(UpdateView):
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
         user_language = language_map(self.object.study.instrument.language)
+        self.language=user_language
         translation.activate(user_language)
         if not self.object.completed and self.object.due_date < timezone.now(): 
             response = render (request, 'cdi_forms/expired.html', {}) # Render contact form template   
@@ -154,9 +164,9 @@ class AdministerAdministraionView(UpdateView):
 
         
         if len(administered_words) < 1 : # first word might be specified by age
-            self.word = cdi_cat_api(f'startItem?age_mos={self.object.backgroundinfo.age}')
+            self.word = cdi_cat_api(f'startItem?age_mos={self.object.backgroundinfo.age}&language={CAT_LANG_DICT[self.language]}')
         else:    
-            self.word = cdi_cat_api(f'nextItem?responses={list(map(int,administered_responses))}&items={administered_items}')
+            self.word = cdi_cat_api(f'nextItem?responses={list(map(int,administered_responses))}&items={administered_items}&language={CAT_LANG_DICT[self.language]}')
             if self.word == 'stop':
                 try:
                     filename = os.path.realpath(PROJECT_ROOT + self.object.study.demographic.path)

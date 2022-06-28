@@ -423,7 +423,7 @@ if private_ip:
     ALLOWED_HOSTS.append(private_ip)
 
 CAT_FORMS = ['CAT','CAT2']
-CAT_API_BASE_URL = os.environ.get('CAT_API_URL',"http://cdicatapi-env.eba-c2knb6uj.us-west-2.elasticbeanstalk.com/")
+CAT_API_BASE_URL = os.environ.get('CAT_API_URL',"http://cdicatapi-henry.us-west-2.elasticbeanstalk.com/")
 
 LOGIN_EXEMPT_URLS = (
   r'^registration/logout/$',
