@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-06 06:20+0000\n"
+"POT-Creation-Date: 2022-06-29 17:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,247 +18,246 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: webcdi/cdi_forms/forms.py:29 webcdi/cdi_forms/forms.py:30
-#: webcdi/cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:133
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:152
+#: cdi_forms/forms.py:29 cdi_forms/forms.py:30
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:133
+#: cdi_forms/templates/cdi_forms/cdi_base.html:152
 msgid "No"
 msgstr "아니오"
 
-#: webcdi/cdi_forms/forms.py:29 webcdi/cdi_forms/forms.py:30
-#: webcdi/cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:136
+#: cdi_forms/forms.py:29 cdi_forms/forms.py:30
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:136
 msgid "Yes"
 msgstr "네"
 
-#: webcdi/cdi_forms/forms.py:30 webcdi/cdi_forms/forms.py:42
-#: webcdi/cdi_forms/forms.py:71 webcdi/cdi_forms/forms.py:93
-#: webcdi/cdi_forms/forms.py:102 webcdi/cdi_forms/forms.py:126
-#: webcdi/cdi_forms/models.py:87 webcdi/cdi_forms/models.py:111
-#: webcdi/cdi_forms/models.py:114 webcdi/cdi_forms/models.py:148
+#: cdi_forms/forms.py:30 cdi_forms/forms.py:42 cdi_forms/forms.py:71
+#: cdi_forms/forms.py:93 cdi_forms/forms.py:102 cdi_forms/forms.py:126
+#: cdi_forms/models.py:87 cdi_forms/models.py:111 cdi_forms/models.py:114
+#: cdi_forms/models.py:148
 msgid "Prefer not to disclose"
 msgstr "공개하지 않겠습니다"
 
-#: webcdi/cdi_forms/forms.py:33
+#: cdi_forms/forms.py:33
 msgid "Under $25,000"
 msgstr "3,000만원 미만"
 
-#: webcdi/cdi_forms/forms.py:34
+#: cdi_forms/forms.py:34
 msgid "$25,000-$50,000"
 msgstr "3,000만원 이상 6,000만원 미만"
 
-#: webcdi/cdi_forms/forms.py:35
+#: cdi_forms/forms.py:35
 msgid "$50,000-$75,000"
 msgstr "6,000만원 이상 9,000만원 미만"
 
-#: webcdi/cdi_forms/forms.py:36
+#: cdi_forms/forms.py:36
 msgid "$75,000-$100,000"
 msgstr "9,000만원 이상 1억 2,000만원 미만"
 
-#: webcdi/cdi_forms/forms.py:37
+#: cdi_forms/forms.py:37
 msgid "$100,000-$125,000"
 msgstr "1억 2,000만원 이상 1억 5,000만원 미만"
 
-#: webcdi/cdi_forms/forms.py:38
+#: cdi_forms/forms.py:38
 msgid "$125,000-$150,000"
 msgstr "1억 5,000만원 이상 1억 8,000만원 미만"
 
-#: webcdi/cdi_forms/forms.py:39
+#: cdi_forms/forms.py:39
 msgid "$150,000-$175,000"
 msgstr "1억 8,000만원 이상 2억 1,000만원 미만"
 
-#: webcdi/cdi_forms/forms.py:40
+#: cdi_forms/forms.py:40
 msgid "$175,000-$200,000"
 msgstr "2억 1,000만원 이상 2억 4,000만원 미만"
 
-#: webcdi/cdi_forms/forms.py:41
+#: cdi_forms/forms.py:41
 msgid "Over $200,000"
 msgstr "2억 4,000만원 이상"
 
-#: webcdi/cdi_forms/forms.py:45
+#: cdi_forms/forms.py:45
 msgid "American Indian / Alaska Native"
 msgstr "아메리칸 인디언 / 알래스카 원주민"
 
-#: webcdi/cdi_forms/forms.py:46
+#: cdi_forms/forms.py:46
 msgid "Asian (Far East, Southeast Asia, Indian Sub-continent)"
 msgstr "아시아인 (동아시아, 동남아시아, 남아시아)"
 
-#: webcdi/cdi_forms/forms.py:47
+#: cdi_forms/forms.py:47
 msgid "Native Hawaiian or Other Pacific Islander"
 msgstr "하와이 원주민 또는 다른 태평양 섬의 주민"
 
-#: webcdi/cdi_forms/forms.py:48
+#: cdi_forms/forms.py:48
 msgid "Black or African American"
 msgstr "흑인 또는 아프리카계 미국인"
 
-#: webcdi/cdi_forms/forms.py:49
+#: cdi_forms/forms.py:49
 msgid "White"
 msgstr "백인"
 
-#: webcdi/cdi_forms/forms.py:50 webcdi/cdi_forms/models.py:71
-#: webcdi/cdi_forms/models.py:120 webcdi/cdi_forms/models.py:186
+#: cdi_forms/forms.py:50 cdi_forms/models.py:71 cdi_forms/models.py:120
+#: cdi_forms/models.py:186
 msgid "Other"
 msgstr "기타"
 
-#: webcdi/cdi_forms/forms.py:55
+#: cdi_forms/forms.py:55
 msgid "Less than 3 lbs, 0 oz"
 msgstr "1.36kg 미만"
 
-#: webcdi/cdi_forms/forms.py:56
+#: cdi_forms/forms.py:56
 msgid "3 lbs, 0 oz - 3 lbs, 7 oz"
 msgstr "1.36kg 이상 1.56kg 미만"
 
-#: webcdi/cdi_forms/forms.py:57
+#: cdi_forms/forms.py:57
 msgid "3 lbs, 8 oz - 3 lbs, 15 oz"
 msgstr "1.56kg 이상 1.79kg 미만"
 
-#: webcdi/cdi_forms/forms.py:58
+#: cdi_forms/forms.py:58
 msgid "4 lbs, 0 oz - 4 lbs, 7 oz"
 msgstr "1.79kg 이상 2.01kg 미만"
 
-#: webcdi/cdi_forms/forms.py:59
+#: cdi_forms/forms.py:59
 msgid "4 lbs, 8 oz - 4 lbs, 15 oz"
 msgstr "2.01kg 이상 2.24kg 미만"
 
-#: webcdi/cdi_forms/forms.py:60
+#: cdi_forms/forms.py:60
 msgid "5 lbs, 0 oz - 5 lbs, 7 oz"
 msgstr "2.24kg 이상 2.47kg 미만"
 
-#: webcdi/cdi_forms/forms.py:61
+#: cdi_forms/forms.py:61
 msgid "5 lbs, 8 oz - 5 lbs, 15 oz"
 msgstr "2.47kg 이상 2.7kg 미만"
 
-#: webcdi/cdi_forms/forms.py:62
+#: cdi_forms/forms.py:62
 msgid "6 lbs, 0 oz - 6 lbs, 7 oz"
 msgstr "2.7kg 이상 2.92kg 미만"
 
-#: webcdi/cdi_forms/forms.py:63
+#: cdi_forms/forms.py:63
 msgid "6 lbs, 8 oz - 6 lbs, 15 oz"
 msgstr "2.92kg 이상 3.15kg 미만"
 
-#: webcdi/cdi_forms/forms.py:64
+#: cdi_forms/forms.py:64
 msgid "7 lbs, 0 oz - 7 lbs, 7 oz"
 msgstr "3.15kg 이상 3.38kg 미만"
 
-#: webcdi/cdi_forms/forms.py:65
+#: cdi_forms/forms.py:65
 msgid "7 lbs, 8 oz - 7 lbs, 15 oz"
 msgstr "3.38kg 이상 3.61kg 미만"
 
-#: webcdi/cdi_forms/forms.py:66
+#: cdi_forms/forms.py:66
 msgid "8 lbs, 0 oz - 8 lbs, 7 oz"
 msgstr "3.61kg 이상 3.83kg 미만"
 
-#: webcdi/cdi_forms/forms.py:67
+#: cdi_forms/forms.py:67
 msgid "8 lbs, 8 oz - 8 lbs, 15 oz"
 msgstr "3.83kg 이상 4.06kg 미만"
 
-#: webcdi/cdi_forms/forms.py:68
+#: cdi_forms/forms.py:68
 msgid "9 lbs, 0 oz - 9 lbs, 7 oz"
 msgstr "4.06kg 이상 4.28kg 미만"
 
-#: webcdi/cdi_forms/forms.py:69
+#: cdi_forms/forms.py:69
 msgid "9 lbs, 8 oz - 9 lbs, 15 oz"
 msgstr "4.28kg 이상 4.51kg 미만"
 
-#: webcdi/cdi_forms/forms.py:70
+#: cdi_forms/forms.py:70
 msgid "10 lbs, 0 oz or more"
 msgstr "4.51kg 이상"
 
-#: webcdi/cdi_forms/forms.py:77
+#: cdi_forms/forms.py:77
 msgid "Less than 1500 grams"
 msgstr "1.5kg 미만"
 
-#: webcdi/cdi_forms/forms.py:78
+#: cdi_forms/forms.py:78
 msgid "1500 grams - 1749 grams"
 msgstr "1.5kg 이상 1.75kg 미만"
 
-#: webcdi/cdi_forms/forms.py:79
+#: cdi_forms/forms.py:79
 msgid "1750 grams - 1999 grams"
 msgstr "1.75kg 이상 2kg 미만"
 
-#: webcdi/cdi_forms/forms.py:80
+#: cdi_forms/forms.py:80
 msgid "2000 grams - 2249 grams"
 msgstr "2kg 이상 2.25kg 미만"
 
-#: webcdi/cdi_forms/forms.py:81
+#: cdi_forms/forms.py:81
 msgid "2250 grams - 2499 grams"
 msgstr "2.25kg 이상 2.5kg 미만"
 
-#: webcdi/cdi_forms/forms.py:82
+#: cdi_forms/forms.py:82
 msgid "2500 grams - 2749 grams"
 msgstr "2.5kg 이상 2.75kg 미만"
 
-#: webcdi/cdi_forms/forms.py:83
+#: cdi_forms/forms.py:83
 msgid "2750 grams - 2999 grams"
 msgstr "2.75kg 이상 3kg 미만"
 
-#: webcdi/cdi_forms/forms.py:84
+#: cdi_forms/forms.py:84
 msgid "3000 grams - 3249 grams"
 msgstr "3kg 이상 3.25kg 미만"
 
-#: webcdi/cdi_forms/forms.py:85
+#: cdi_forms/forms.py:85
 msgid "3250 grams - 3499 grams"
 msgstr "3.25kg 이상 3.5kg 미만"
 
-#: webcdi/cdi_forms/forms.py:86
+#: cdi_forms/forms.py:86
 msgid "3500 grams - 3749 grams"
 msgstr "3.5kg 이상 3.75kg 미만"
 
-#: webcdi/cdi_forms/forms.py:87
+#: cdi_forms/forms.py:87
 msgid "3750 grams - 3999 grams"
 msgstr "3.75kg 이상 4kg 미만"
 
-#: webcdi/cdi_forms/forms.py:88
+#: cdi_forms/forms.py:88
 msgid "4000 grams - 4249 grams"
 msgstr "4kg 이상 4.25kg 미만"
 
-#: webcdi/cdi_forms/forms.py:89
+#: cdi_forms/forms.py:89
 msgid "4250 grams - 4499 grams"
 msgstr "4.25kg 이상 4.5kg 미만"
 
-#: webcdi/cdi_forms/forms.py:90
+#: cdi_forms/forms.py:90
 msgid "4500 grams - 4749 grams"
 msgstr "4.5kg 이상 4.75kg 미만"
 
-#: webcdi/cdi_forms/forms.py:91
+#: cdi_forms/forms.py:91
 msgid "4750 grams - 4999 grams"
 msgstr "4.75kg 이상 5kg 미만"
 
-#: webcdi/cdi_forms/forms.py:92
+#: cdi_forms/forms.py:92
 msgid "5000 grams or more"
 msgstr "5kg 이상"
 
-#: webcdi/cdi_forms/forms.py:98 webcdi/cdi_forms/forms.py:114
+#: cdi_forms/forms.py:98 cdi_forms/forms.py:114
 msgid "12 (High school graduate)"
 msgstr "12 (고등학교 졸업)"
 
-#: webcdi/cdi_forms/forms.py:99 webcdi/cdi_forms/forms.py:118
+#: cdi_forms/forms.py:99 cdi_forms/forms.py:118
 msgid "16 (College graduate)"
 msgstr "16 (대학교 졸업)"
 
-#: webcdi/cdi_forms/forms.py:100 webcdi/cdi_forms/forms.py:120
+#: cdi_forms/forms.py:100 cdi_forms/forms.py:120
 msgid "18 (Advanced degree)"
 msgstr "18 (석사 및 박사 학위)"
 
-#: webcdi/cdi_forms/forms.py:101 webcdi/cdi_forms/forms.py:125
+#: cdi_forms/forms.py:101 cdi_forms/forms.py:125
 msgid "23 or more"
 msgstr "23 이상"
 
-#: webcdi/cdi_forms/forms.py:137 webcdi/cdi_forms/models.py:191
+#: cdi_forms/forms.py:137 cdi_forms/models.py:191
 #, fuzzy
 #| msgid "Who does your child live with?"
 msgid "Does you child have siblings?"
 msgstr "아동은 누구와 살고 있나요?"
 
-#: webcdi/cdi_forms/forms.py:140 webcdi/cdi_forms/models.py:192
+#: cdi_forms/forms.py:140 cdi_forms/models.py:192
 #, fuzzy
 #| msgid "How old is your child?"
 msgid "How many siblings does you child have?"
 msgstr "아동은 몇 살입니까?"
 
-#: webcdi/cdi_forms/forms.py:145
+#: cdi_forms/forms.py:145
 msgid "Please provide the sex and age of each sibling"
 msgstr ""
 
-#: webcdi/cdi_forms/forms.py:152
+#: cdi_forms/forms.py:152
 msgid ""
 "To protect your privacy, we never store your child's date of birth, we only "
 "record age in months."
@@ -266,109 +265,107 @@ msgstr ""
 "귀하의 개인정보를 보호하기 위하여 아동의 생년월일 대신, 만 연령(개월) 정보만 "
 "수집합니다."
 
-#: webcdi/cdi_forms/forms.py:153
+#: cdi_forms/forms.py:153
 msgid "Child DOB<span class=\"asteriskField\">*</span>"
 msgstr "아동의 생년월일<span class=\"asteriskField\">*</span>"
 
-#: webcdi/cdi_forms/forms.py:158
+#: cdi_forms/forms.py:158
 msgid "Age (in months)<span class=\"asteriskField\">*</span>"
 msgstr "만 연령 (개월)<span class=\"asteriskField\">*</span>"
 
-#: webcdi/cdi_forms/forms.py:160
+#: cdi_forms/forms.py:160
 msgid "This field will update when you enter or change your child's DOB."
 msgstr "자녀의 생년월일을 입력하거나 변경하시면 이 칸이 업데이트 됩니다."
 
-#: webcdi/cdi_forms/forms.py:170
+#: cdi_forms/forms.py:170
 msgid "What is your postal/zip code?"
 msgstr "귀하의 우편번호를 적어주세요"
 
-#: webcdi/cdi_forms/forms.py:178 webcdi/cdi_forms/models.py:139
+#: cdi_forms/forms.py:178 cdi_forms/models.py:139
 msgid "Is your child Hispanic or Latino?"
 msgstr "아동은 히스패닉계 또는 라틴계입니까?"
 
-#: webcdi/cdi_forms/forms.py:183 webcdi/cdi_forms/models.py:107
+#: cdi_forms/forms.py:183 cdi_forms/models.py:107
 msgid "Early"
 msgstr "일찍"
 
-#: webcdi/cdi_forms/forms.py:183 webcdi/cdi_forms/models.py:107
+#: cdi_forms/forms.py:183 cdi_forms/models.py:107
 msgid "Late"
 msgstr "늦게"
 
-#: webcdi/cdi_forms/forms.py:185 webcdi/cdi_forms/models.py:107
+#: cdi_forms/forms.py:185 cdi_forms/models.py:107
 msgid "Was he/she early or late?"
 msgstr "아동은 출산예정일보다 일찍 또는 늦게 태어났습니까?"
 
-#: webcdi/cdi_forms/forms.py:190 webcdi/cdi_forms/models.py:71
+#: cdi_forms/forms.py:190 cdi_forms/models.py:71
 msgid "Male"
 msgstr "남성"
 
-#: webcdi/cdi_forms/forms.py:190 webcdi/cdi_forms/models.py:71
+#: cdi_forms/forms.py:190 cdi_forms/models.py:71
 msgid "Female"
 msgstr "여성"
 
-#: webcdi/cdi_forms/forms.py:190
+#: cdi_forms/forms.py:190
 msgid "Other / Prefer not to disclose"
 msgstr "기타 / 공개하지 않겠습니다"
 
-#: webcdi/cdi_forms/forms.py:192
+#: cdi_forms/forms.py:192
 msgid "Sex"
 msgstr "성별"
 
-#: webcdi/cdi_forms/forms.py:198
+#: cdi_forms/forms.py:198
 msgid "Which language(s)"
 msgstr "언어"
 
-#: webcdi/cdi_forms/forms.py:204 webcdi/cdi_forms/forms.py:210
-#: webcdi/cdi_forms/forms.py:216
+#: cdi_forms/forms.py:204 cdi_forms/forms.py:210 cdi_forms/forms.py:216
 msgid "Please specify"
 msgstr "선택해 주세요"
 
-#: webcdi/cdi_forms/forms.py:222
+#: cdi_forms/forms.py:222
 #, fuzzy
 #| msgid "Please specify"
 msgctxt "caregiver_other"
 msgid "Please specify"
 msgstr "선택해 주세요"
 
-#: webcdi/cdi_forms/forms.py:253 webcdi/cdi_forms/forms.py:287
+#: cdi_forms/forms.py:253 cdi_forms/forms.py:287
 msgid "This field cannot be empty"
 msgstr "이 칸은 비어 있지 않아야 합니다"
 
-#: webcdi/cdi_forms/forms.py:258
+#: cdi_forms/forms.py:258
 msgid "Please enter number of weeks"
 msgstr "주수를 입력해 주십시오"
 
-#: webcdi/cdi_forms/forms.py:261
+#: cdi_forms/forms.py:261
 msgid "Cannot be more than 18 weeks early"
 msgstr "18주를 넘을 수 없습니다"
 
-#: webcdi/cdi_forms/forms.py:263
+#: cdi_forms/forms.py:263
 msgid "Cannot be more than 4 weeks late"
 msgstr "4주를 넘을 수 없습니다"
 
-#: webcdi/cdi_forms/forms.py:267 webcdi/cdi_forms/forms.py:282
+#: cdi_forms/forms.py:267 cdi_forms/forms.py:282
 msgid "Please enter your child's DOB in the field above."
 msgstr "아동의 생년월일을 입력해 주세요."
 
-#: webcdi/cdi_forms/forms.py:278
+#: cdi_forms/forms.py:278
 msgid "Your baby is too young for this version of the CDI."
 msgstr "아동은 본 검사지를 작성할 수 있는 연령보다 어립니다."
 
-#: webcdi/cdi_forms/forms.py:280
+#: cdi_forms/forms.py:280
 msgid "Your baby is too old for this version of the CDI."
 msgstr "아동은 본 검사지를 작성할 수 있는 연령을 초과하였습니다."
 
-#: webcdi/cdi_forms/forms.py:309 webcdi/cdi_forms/forms.py:310
-#: webcdi/cdi_forms/models.py:103 webcdi/cdi_forms/models.py:104
-#: webcdi/cdi_forms/models.py:129 webcdi/cdi_forms/models.py:130
+#: cdi_forms/forms.py:309 cdi_forms/forms.py:310 cdi_forms/models.py:103
+#: cdi_forms/models.py:104 cdi_forms/models.py:129 cdi_forms/models.py:130
 msgid "Birth weight"
 msgstr "출생 시 체중"
 
-#: webcdi/cdi_forms/forms.py:319 webcdi/cdi_forms/models.py:100
+#: cdi_forms/forms.py:319 cdi_forms/models.py:100
 msgid "Was your child born as part of a multiple birth?"
 msgstr "아동은 쌍둥이로 태어났나요?"
 
-#: webcdi/cdi_forms/forms.py:326
+#: cdi_forms/forms.py:326
 msgid ""
 "Was your child born early or late (more than one week before or after the "
 "due date)?"
@@ -376,31 +373,31 @@ msgstr ""
 "아동은 출산예정일보다 일찍 또는 늦게 태어났나요? (출산예정일보다 1주 일찍 또"
 "는 1주 늦게)"
 
-#: webcdi/cdi_forms/forms.py:332
+#: cdi_forms/forms.py:332
 msgid "Does your child regularly hear a language other than English?"
 msgstr "아동은 한국어 외에 다른 언어에 주기적으로 노출되나요?"
 
-#: webcdi/cdi_forms/forms.py:338
+#: cdi_forms/forms.py:338
 msgid "Has your child experienced chronic ear infections (5 or more)?"
 msgstr "아동은 만성 중이염을 앓은 적이 있나요? (5회 이상)"
 
-#: webcdi/cdi_forms/forms.py:344 webcdi/cdi_forms/models.py:163
+#: cdi_forms/forms.py:344 cdi_forms/models.py:163
 msgid "Do you suspect that your child may have hearing loss?"
 msgstr "아동이 청력에 이상이 있다고 생각하시나요?"
 
-#: webcdi/cdi_forms/forms.py:350 webcdi/cdi_forms/models.py:166
+#: cdi_forms/forms.py:350 cdi_forms/models.py:166
 msgid ""
 "Is there some reason to suspect that your child may have vision problems?"
 msgstr "아동이 시력에 이상이 있다고 생각하시는 이유가 있나요?"
 
-#: webcdi/cdi_forms/forms.py:356 webcdi/cdi_forms/models.py:169
+#: cdi_forms/forms.py:356 cdi_forms/models.py:169
 msgid ""
 "Has your child had any major illnesses, hospitalizations, or diagnosed "
 "disabilities?"
 msgstr ""
 "아동이 중증 질환을 앓거나, 입원을 하거나, 장애를 진단 받은 적이 있나요?"
 
-#: webcdi/cdi_forms/forms.py:362 webcdi/cdi_forms/models.py:172
+#: cdi_forms/forms.py:362 cdi_forms/models.py:172
 msgid ""
 "Has your child ever received any services for speech, language, or "
 "development issues?"
@@ -408,12 +405,12 @@ msgstr ""
 "아동은 말, 언어, 또는 발달 문제에 대해 전문가 상담, 진단, 치료 등을 받은 적"
 "이 있나요?"
 
-#: webcdi/cdi_forms/forms.py:368 webcdi/cdi_forms/models.py:175
+#: cdi_forms/forms.py:368 cdi_forms/models.py:175
 msgid ""
 "Are you worried about your child's progress in language or communication?"
 msgstr "아동의 언어 또는 의사소통 발달에 대해 걱정하고 계시나요?"
 
-#: webcdi/cdi_forms/forms.py:374 webcdi/cdi_forms/models.py:178
+#: cdi_forms/forms.py:374 cdi_forms/models.py:178
 msgid ""
 "Have you or anyone in your immediate family been diagnosed with a language "
 "or learning disability?"
@@ -421,35 +418,35 @@ msgstr ""
 "귀하 또는 직계가족 구성원 중 언어 장애 또는 학습 장애 진단을 받은 분이 계시나"
 "요?"
 
-#: webcdi/cdi_forms/forms.py:402
+#: cdi_forms/forms.py:402
 msgid "mm/dd/yyyy"
 msgstr "월/일/년"
 
-#: webcdi/cdi_forms/forms.py:405
+#: cdi_forms/forms.py:405
 msgid "dd/mm/yyyy"
 msgstr "일/월/년"
 
-#: webcdi/cdi_forms/forms.py:555 webcdi/cdi_forms/models.py:137
+#: cdi_forms/forms.py:558 cdi_forms/models.py:137
 msgid "Estimated Annual Family Income (in USD)"
 msgstr "연 가계소득 추정치 (원)"
 
-#: webcdi/cdi_forms/forms.py:559
+#: cdi_forms/forms.py:562
 msgid "My child is (check all that apply):"
 msgstr "우리 아이는 (해당하는 모든 칸에 체크 표시 해주십시오):"
 
-#: webcdi/cdi_forms/forms.py:563 webcdi/cdi_forms/forms.py:565
+#: cdi_forms/forms.py:566 cdi_forms/forms.py:568
 msgid "Basic Information"
 msgstr "기본 정보"
 
-#: webcdi/cdi_forms/forms.py:569
+#: cdi_forms/forms.py:572
 msgid "Family Background"
 msgstr "가족력"
 
-#: webcdi/cdi_forms/forms.py:570 webcdi/cdi_forms/models.py:140
+#: cdi_forms/forms.py:573 cdi_forms/models.py:140
 msgid "Child's Ethnicity"
 msgstr "아동의 인종"
 
-#: webcdi/cdi_forms/forms.py:570
+#: cdi_forms/forms.py:573
 msgid ""
 "The following information is being collected for the sole purpose of "
 "reporting to our grant-funding institute, i.e.,  NIH (National Institute of "
@@ -461,892 +458,890 @@ msgstr ""
 "여 다음과 같은 정보를 수집합니다. 귀하의 협조는 선택사항이지만, 수집에 응해주"
 "신다면 감사하겠습니다."
 
-#: webcdi/cdi_forms/forms.py:571
+#: cdi_forms/forms.py:574
 msgid "Caregiver Information"
 msgstr "주양육자 정보"
 
-#: webcdi/cdi_forms/forms.py:572
+#: cdi_forms/forms.py:575
 msgid "Language Exposure"
 msgstr "노출 언어"
 
-#: webcdi/cdi_forms/forms.py:575
+#: cdi_forms/forms.py:578
 msgid "Health"
 msgstr "건강"
 
-#: webcdi/cdi_forms/forms.py:613
+#: cdi_forms/forms.py:616
 msgid "Your Name"
 msgstr "성명"
 
-#: webcdi/cdi_forms/forms.py:614
+#: cdi_forms/forms.py:617
 msgid "Your Email Address"
 msgstr "이메일 주소"
 
-#: webcdi/cdi_forms/forms.py:615
+#: cdi_forms/forms.py:618
 msgid "Your Test URL"
 msgstr "귀하의 테스트 URL"
 
-#: webcdi/cdi_forms/forms.py:616
+#: cdi_forms/forms.py:619
 msgid "What would you like to tell us?"
 msgstr "저희에게 말씀해 주시고 싶은 것이 있습니까?"
 
-#: webcdi/cdi_forms/forms.py:635
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:11
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:323
-#: webcdi/cdi_forms/views.py:814
+#: cdi_forms/forms.py:638 cdi_forms/templates/cdi_forms/cdi_form.html:11
+#: cdi_forms/templates/cdi_forms/cdi_form.html:323 cdi_forms/views.py:814
 msgid "Submit"
 msgstr "제출"
 
-#: webcdi/cdi_forms/languages.py:6
+#: cdi_forms/languages.py:6
 msgid "аҧсуа (Abkhaz)"
 msgstr "아브하즈어"
 
-#: webcdi/cdi_forms/languages.py:7
+#: cdi_forms/languages.py:7
 msgid "Afaraf (Afar)"
 msgstr "아파르어"
 
-#: webcdi/cdi_forms/languages.py:8
+#: cdi_forms/languages.py:8
 msgid "Afrikaans (Afrikaans)"
 msgstr "아프리칸스어"
 
-#: webcdi/cdi_forms/languages.py:9
+#: cdi_forms/languages.py:9
 msgid "Akan (Akan)"
 msgstr "아칸어"
 
-#: webcdi/cdi_forms/languages.py:10
+#: cdi_forms/languages.py:10
 msgid "Shqip (Albanian)"
 msgstr "알바니아어"
 
-#: webcdi/cdi_forms/languages.py:11
+#: cdi_forms/languages.py:11
 msgid "American Sign Language"
 msgstr "미국식 수화"
 
-#: webcdi/cdi_forms/languages.py:12
+#: cdi_forms/languages.py:12
 msgid "አማርኛ (Amharic)"
 msgstr "암하라어"
 
-#: webcdi/cdi_forms/languages.py:13
+#: cdi_forms/languages.py:13
 msgid "العربية (Arabic)"
 msgstr "아랍어"
 
-#: webcdi/cdi_forms/languages.py:14
+#: cdi_forms/languages.py:14
 msgid "Aragonés (Aragonese)"
 msgstr "아라곤어"
 
-#: webcdi/cdi_forms/languages.py:15
+#: cdi_forms/languages.py:15
 msgid "Հայերեն (Armenian)"
 msgstr "아르메니아어"
 
-#: webcdi/cdi_forms/languages.py:16
+#: cdi_forms/languages.py:16
 msgid "অসমীয়া (Assamese)"
 msgstr "아삼어"
 
-#: webcdi/cdi_forms/languages.py:17
+#: cdi_forms/languages.py:17
 msgid "авар мацӀ, магӀарул мацӀ (Avaric)"
 msgstr "아바르어"
 
-#: webcdi/cdi_forms/languages.py:18
+#: cdi_forms/languages.py:18
 msgid "avesta (Avestan)"
 msgstr "아베스테어"
 
-#: webcdi/cdi_forms/languages.py:19
+#: cdi_forms/languages.py:19
 msgid "aymar aru (Aymara)"
 msgstr "아이마라어"
 
-#: webcdi/cdi_forms/languages.py:20
+#: cdi_forms/languages.py:20
 msgid "Հայեazərbaycan diliրեն (Azerbaijani)"
 msgstr "아제르바이잔어"
 
-#: webcdi/cdi_forms/languages.py:21
+#: cdi_forms/languages.py:21
 msgid "bamanankan (Bambara)"
 msgstr "밤바라어"
 
-#: webcdi/cdi_forms/languages.py:22
+#: cdi_forms/languages.py:22
 msgid "башҡорт теле (Bashkir)"
 msgstr "바슈키르어"
 
-#: webcdi/cdi_forms/languages.py:23
+#: cdi_forms/languages.py:23
 msgid "euskara, euskera (Basque)"
 msgstr "바스크어"
 
-#: webcdi/cdi_forms/languages.py:24
+#: cdi_forms/languages.py:24
 msgid "Հայեazərbaycan diliրեն (Belarusian)"
 msgstr "벨라루스어"
 
-#: webcdi/cdi_forms/languages.py:25
+#: cdi_forms/languages.py:25
 msgid "বাংলা (Bengali)"
 msgstr "벵골어"
 
-#: webcdi/cdi_forms/languages.py:26
+#: cdi_forms/languages.py:26
 msgid "भोजपुरी (Bihari)"
 msgstr "비하르어"
 
-#: webcdi/cdi_forms/languages.py:27
+#: cdi_forms/languages.py:27
 msgid "Bislama (Bislama)"
 msgstr "비슬라마어"
 
-#: webcdi/cdi_forms/languages.py:28
+#: cdi_forms/languages.py:28
 msgid "bosanski jezik (Bosnian)"
 msgstr "보스니아어"
 
-#: webcdi/cdi_forms/languages.py:29
+#: cdi_forms/languages.py:29
 msgid "brezhoneg (Breton)"
 msgstr "브르타뉴어"
 
-#: webcdi/cdi_forms/languages.py:30
+#: cdi_forms/languages.py:30
 msgid "български език (Bulgarian)"
 msgstr "불가리아어"
 
-#: webcdi/cdi_forms/languages.py:31
+#: cdi_forms/languages.py:31
 msgid "ဗမာစာ (Burmese)"
 msgstr "버마어"
 
-#: webcdi/cdi_forms/languages.py:32
+#: cdi_forms/languages.py:32
 msgid "Català (Catalan; Valencian)"
 msgstr "카탈로니아어"
 
-#: webcdi/cdi_forms/languages.py:33
+#: cdi_forms/languages.py:33
 msgid "Chamoru (Chamorro)"
 msgstr "차모로어"
 
-#: webcdi/cdi_forms/languages.py:34
+#: cdi_forms/languages.py:34
 msgid "нохчийн мотт (Chechen)"
 msgstr "체첸어"
 
-#: webcdi/cdi_forms/languages.py:35
+#: cdi_forms/languages.py:35
 msgid "chiCheŵa, chinyanja (Chichewa; Chewa; Nyanja)"
 msgstr "치체와어"
 
-#: webcdi/cdi_forms/languages.py:36
+#: cdi_forms/languages.py:36
 msgid "中文 (Zhōngwén), 汉语, 漢語 (Chinese)"
 msgstr "중국어"
 
-#: webcdi/cdi_forms/languages.py:37
+#: cdi_forms/languages.py:37
 msgid "чӑваш чӗлхи (Chuvash)"
 msgstr "추바시어"
 
-#: webcdi/cdi_forms/languages.py:38
+#: cdi_forms/languages.py:38
 msgid "Kernewek (Cornish)"
 msgstr "콘월어"
 
-#: webcdi/cdi_forms/languages.py:39
+#: cdi_forms/languages.py:39
 msgid "corsu, lingua corsa (Corsican)"
 msgstr "코르시카어"
 
-#: webcdi/cdi_forms/languages.py:40
+#: cdi_forms/languages.py:40
 msgid "ᓀᐦᐃᔭᐍᐏᐣ (Cree)"
 msgstr "크리어"
 
-#: webcdi/cdi_forms/languages.py:41
+#: cdi_forms/languages.py:41
 msgid "hrvatski (Croatian)"
 msgstr "크로아티아어"
 
-#: webcdi/cdi_forms/languages.py:42
+#: cdi_forms/languages.py:42
 msgid "česky, čeština (Czech)"
 msgstr "체코어"
 
-#: webcdi/cdi_forms/languages.py:43
+#: cdi_forms/languages.py:43
 msgid "dansk (Danish)"
 msgstr "덴마크어"
 
-#: webcdi/cdi_forms/languages.py:44
+#: cdi_forms/languages.py:44
 msgid "ދިވެހި (Divehi; Dhivehi; Maldivian;)"
 msgstr "디베히어"
 
-#: webcdi/cdi_forms/languages.py:45
+#: cdi_forms/languages.py:45
 msgid "Nederlands, Vlaams (Dutch)"
 msgstr "네덜란드어"
 
-#: webcdi/cdi_forms/languages.py:46
+#: cdi_forms/languages.py:46
 msgid "English (English)"
 msgstr "영어"
 
-#: webcdi/cdi_forms/languages.py:47
+#: cdi_forms/languages.py:47
 msgid "Esperanto (Esperanto)"
 msgstr "에스페란토어"
 
-#: webcdi/cdi_forms/languages.py:48
+#: cdi_forms/languages.py:48
 msgid "eesti, eesti keel (Estonian)"
 msgstr "에스토니아어"
 
-#: webcdi/cdi_forms/languages.py:49
+#: cdi_forms/languages.py:49
 msgid "Eʋegbe (Ewe)"
 msgstr "에웨어"
 
-#: webcdi/cdi_forms/languages.py:50
+#: cdi_forms/languages.py:50
 msgid "føroyskt (Faroese)"
 msgstr "페로어"
 
-#: webcdi/cdi_forms/languages.py:51
+#: cdi_forms/languages.py:51
 msgid "vosa Vakaviti (Fijian)"
 msgstr "피지어"
 
-#: webcdi/cdi_forms/languages.py:52
+#: cdi_forms/languages.py:52
 msgid "suomi, suomen kieli (Finnish)"
 msgstr "핀란드어"
 
-#: webcdi/cdi_forms/languages.py:53
+#: cdi_forms/languages.py:53
 msgid "français, langue française (French)"
 msgstr "프랑스어"
 
-#: webcdi/cdi_forms/languages.py:54
+#: cdi_forms/languages.py:54
 msgid "Fulfulde, Pulaar, Pular (Fula; Fulah; Pulaar; Pular)"
 msgstr "풀라니어"
 
-#: webcdi/cdi_forms/languages.py:55
+#: cdi_forms/languages.py:55
 msgid "Galego (Galician)"
 msgstr "갈리시아어"
 
-#: webcdi/cdi_forms/languages.py:56
+#: cdi_forms/languages.py:56
 msgid "ქართული (Georgian)"
 msgstr "그루지야어"
 
-#: webcdi/cdi_forms/languages.py:57
+#: cdi_forms/languages.py:57
 msgid "Deutsch (German)"
 msgstr "독일어"
 
-#: webcdi/cdi_forms/languages.py:58
+#: cdi_forms/languages.py:58
 msgid "Ελληνικά (Greek, Modern)"
 msgstr "그리스어"
 
-#: webcdi/cdi_forms/languages.py:59
+#: cdi_forms/languages.py:59
 msgid "Avañeẽ (Guaraní)"
 msgstr "과라니어"
 
-#: webcdi/cdi_forms/languages.py:60
+#: cdi_forms/languages.py:60
 msgid "ગુજરાતી (Gujarati)"
 msgstr "구자라트어"
 
-#: webcdi/cdi_forms/languages.py:61
+#: cdi_forms/languages.py:61
 msgid "Kreyòl ayisyen (Haitian; Haitian Creole)"
 msgstr "아이티어"
 
-#: webcdi/cdi_forms/languages.py:62
+#: cdi_forms/languages.py:62
 msgid "Hausa, هَوُسَ (Hausa)"
 msgstr "하우사어"
 
-#: webcdi/cdi_forms/languages.py:63
+#: cdi_forms/languages.py:63
 msgid "עברית (Hebrew (modern))"
 msgstr "히브리어"
 
-#: webcdi/cdi_forms/languages.py:64
+#: cdi_forms/languages.py:64
 msgid "Otjiherero (Herero)"
 msgstr "헤레로어"
 
-#: webcdi/cdi_forms/languages.py:65
+#: cdi_forms/languages.py:65
 msgid "हिन्दी, हिंदी (Hindi)"
 msgstr "힌디어"
 
-#: webcdi/cdi_forms/languages.py:66
+#: cdi_forms/languages.py:66
 msgid "Hiri Motu (Hiri Motu)"
 msgstr "모투어"
 
-#: webcdi/cdi_forms/languages.py:67
+#: cdi_forms/languages.py:67
 msgid "Magyar (Hungarian)"
 msgstr "헝가리어"
 
-#: webcdi/cdi_forms/languages.py:68
+#: cdi_forms/languages.py:68
 msgid "Interlingua (Interlingua)"
 msgstr "과학자용 인공 국제어"
 
-#: webcdi/cdi_forms/languages.py:69
+#: cdi_forms/languages.py:69
 msgid "Bahasa Indonesia (Indonesian)"
 msgstr "인도네시아어"
 
-#: webcdi/cdi_forms/languages.py:70
+#: cdi_forms/languages.py:70
 msgid "Originally called Occidental; then Interlingue after WWII (Interlingue)"
 msgstr "이전에는 옥시덴탈어였으나 제2차 세계 대전 이후로 인터링구어"
 
-#: webcdi/cdi_forms/languages.py:71
+#: cdi_forms/languages.py:71
 msgid "Gaeilge (Irish)"
 msgstr "아일랜드어"
 
-#: webcdi/cdi_forms/languages.py:72
+#: cdi_forms/languages.py:72
 msgid "Asụsụ Igbo (Igbo)"
 msgstr "이그보우어"
 
-#: webcdi/cdi_forms/languages.py:73
+#: cdi_forms/languages.py:73
 msgid "Iñupiaq, Iñupiatun (Inupiaq)"
 msgstr "이누피아크어"
 
-#: webcdi/cdi_forms/languages.py:74
+#: cdi_forms/languages.py:74
 msgid "Ido (Ido)"
 msgstr "이도어"
 
-#: webcdi/cdi_forms/languages.py:75
+#: cdi_forms/languages.py:75
 msgid "Íslenska (Icelandic)"
 msgstr "아이슬란드어"
 
-#: webcdi/cdi_forms/languages.py:76
+#: cdi_forms/languages.py:76
 msgid "Italiano (Italian)"
 msgstr "이탈리아어"
 
-#: webcdi/cdi_forms/languages.py:77
+#: cdi_forms/languages.py:77
 msgid "ᐃᓄᒃᑎᑐᑦ (Inuktitut)"
 msgstr "이누이트어"
 
-#: webcdi/cdi_forms/languages.py:78
+#: cdi_forms/languages.py:78
 msgid "日本語 (にほんご／にっぽんご) (Japanese)"
 msgstr "일본어"
 
-#: webcdi/cdi_forms/languages.py:79
+#: cdi_forms/languages.py:79
 msgid "basa Jawa (Javanese)"
 msgstr "자바어"
 
-#: webcdi/cdi_forms/languages.py:80
+#: cdi_forms/languages.py:80
 msgid "kalaallisut, kalaallit oqaasii (Kalaallisut, Greenlandic)"
 msgstr "그린란드어"
 
-#: webcdi/cdi_forms/languages.py:81
+#: cdi_forms/languages.py:81
 msgid "ಕನ್ನಡ (Kannada)"
 msgstr "칸나다어"
 
-#: webcdi/cdi_forms/languages.py:82
+#: cdi_forms/languages.py:82
 msgid "Kanuri (Kanuri)"
 msgstr "카누리어"
 
-#: webcdi/cdi_forms/languages.py:83
+#: cdi_forms/languages.py:83
 msgid "कश्मीरी, كشميري‎ (Kashmiri)"
 msgstr "카슈미르어"
 
-#: webcdi/cdi_forms/languages.py:84
+#: cdi_forms/languages.py:84
 msgid "Қазақ тілі (Kazakh)"
 msgstr "카자흐어"
 
-#: webcdi/cdi_forms/languages.py:85
+#: cdi_forms/languages.py:85
 msgid "ភាសាខ្មែរ (Khmer)"
 msgstr "크메르어"
 
-#: webcdi/cdi_forms/languages.py:86
+#: cdi_forms/languages.py:86
 msgid "Gĩkũyũ (Kikuyu, Gikuyu)"
 msgstr "키쿠유어"
 
-#: webcdi/cdi_forms/languages.py:87
+#: cdi_forms/languages.py:87
 msgid "Ikinyarwanda (Kinyarwanda)"
 msgstr "키냐르완다어"
 
-#: webcdi/cdi_forms/languages.py:88
+#: cdi_forms/languages.py:88
 msgid "кыргыз тили (Kirghiz, Kyrgyz)"
 msgstr "키르기스어"
 
-#: webcdi/cdi_forms/languages.py:89
+#: cdi_forms/languages.py:89
 msgid "коми кыв (Komi)"
 msgstr "코미어"
 
-#: webcdi/cdi_forms/languages.py:90
+#: cdi_forms/languages.py:90
 msgid "KiKongo (Kongo)"
 msgstr "콩고어"
 
-#: webcdi/cdi_forms/languages.py:91
+#: cdi_forms/languages.py:91
 msgid "한국어 (韓國語), 조선말 (朝鮮語) (Korean)"
 msgstr "한국어"
 
-#: webcdi/cdi_forms/languages.py:92
+#: cdi_forms/languages.py:92
 msgid "Kurdî, كوردی (Kurdish)"
 msgstr "쿠르드어"
 
-#: webcdi/cdi_forms/languages.py:93
+#: cdi_forms/languages.py:93
 msgid "Kuanyama (Kwanyama, Kuanyama)"
 msgstr "크완야마어"
 
-#: webcdi/cdi_forms/languages.py:94
+#: cdi_forms/languages.py:94
 msgid "latine, lingua latina (Latin)"
 msgstr "라틴어"
 
-#: webcdi/cdi_forms/languages.py:95
+#: cdi_forms/languages.py:95
 msgid "Lëtzebuergesch (Luxembourgish, Letzeburgesch)"
 msgstr "룩셈부르크어"
 
-#: webcdi/cdi_forms/languages.py:96
+#: cdi_forms/languages.py:96
 msgid "Luganda (Luganda)"
 msgstr "루간다어"
 
-#: webcdi/cdi_forms/languages.py:97
+#: cdi_forms/languages.py:97
 msgid "Limburgs (Limburgish, Limburgan, Limburger)"
 msgstr "림부르크어"
 
-#: webcdi/cdi_forms/languages.py:98
+#: cdi_forms/languages.py:98
 msgid "Lingála (Lingala)"
 msgstr "링갈라어"
 
-#: webcdi/cdi_forms/languages.py:99
+#: cdi_forms/languages.py:99
 msgid "ພາສາລາວ (Lao)"
 msgstr "라오어"
 
-#: webcdi/cdi_forms/languages.py:100
+#: cdi_forms/languages.py:100
 msgid "lietuvių kalba (Lithuanian)"
 msgstr "리투아니아어"
 
-#: webcdi/cdi_forms/languages.py:101
+#: cdi_forms/languages.py:101
 msgid "Luba-Katanga (Luba-Katanga)"
 msgstr "루바-카탕가어"
 
-#: webcdi/cdi_forms/languages.py:102
+#: cdi_forms/languages.py:102
 msgid "latviešu valoda (Latvian)"
 msgstr "라트비아어"
 
-#: webcdi/cdi_forms/languages.py:103
+#: cdi_forms/languages.py:103
 msgid "Gaelg, Gailck (Manx)"
 msgstr "맨어"
 
-#: webcdi/cdi_forms/languages.py:104
+#: cdi_forms/languages.py:104
 msgid "македонски јазик (Macedonian)"
 msgstr "마케도니아어"
 
-#: webcdi/cdi_forms/languages.py:105
+#: cdi_forms/languages.py:105
 msgid "Malagasy fiteny (Malagasy)"
 msgstr "마다가스카르어"
 
-#: webcdi/cdi_forms/languages.py:106
+#: cdi_forms/languages.py:106
 msgid "bahasa Melayu, بهاس ملايو (Malay)"
 msgstr "말레이어"
 
-#: webcdi/cdi_forms/languages.py:107
+#: cdi_forms/languages.py:107
 msgid "മലയാളം (Malayalam)"
 msgstr "말라얄람어"
 
-#: webcdi/cdi_forms/languages.py:108
+#: cdi_forms/languages.py:108
 msgid "Malti (Maltese)"
 msgstr "몰타어"
 
-#: webcdi/cdi_forms/languages.py:109
+#: cdi_forms/languages.py:109
 msgid "te reo Māori (Māori)"
 msgstr "마오리어"
 
-#: webcdi/cdi_forms/languages.py:110
+#: cdi_forms/languages.py:110
 msgid "मराठी (Marathi (Marāṭhī))"
 msgstr "마라티어"
 
-#: webcdi/cdi_forms/languages.py:111
+#: cdi_forms/languages.py:111
 msgid "Kajin M̧ajeļ (Marshallese)"
 msgstr "마셜어"
 
-#: webcdi/cdi_forms/languages.py:112
+#: cdi_forms/languages.py:112
 msgid "монгол (Mongolian)"
 msgstr "몽골어"
 
-#: webcdi/cdi_forms/languages.py:113
+#: cdi_forms/languages.py:113
 msgid "Ekakairũ Naoero (Nauru)"
 msgstr "나우루어"
 
-#: webcdi/cdi_forms/languages.py:114
+#: cdi_forms/languages.py:114
 msgid "Diné bizaad, Dinékʼehǰí (Navajo, Navaho)"
 msgstr "나바호어"
 
-#: webcdi/cdi_forms/languages.py:115
+#: cdi_forms/languages.py:115
 msgid "Norsk bokmål (Norwegian Bokmål)"
 msgstr "노르웨이 부크몰"
 
-#: webcdi/cdi_forms/languages.py:116
+#: cdi_forms/languages.py:116
 msgid "isiNdebele (North Ndebele)"
 msgstr "은데벨레어"
 
-#: webcdi/cdi_forms/languages.py:117
+#: cdi_forms/languages.py:117
 msgid "नेपाली (Nepali)"
 msgstr "네팔어"
 
-#: webcdi/cdi_forms/languages.py:118
+#: cdi_forms/languages.py:118
 msgid "Owambo (Ndonga)"
 msgstr "은동가어"
 
-#: webcdi/cdi_forms/languages.py:119
+#: cdi_forms/languages.py:119
 msgid "Norsk nynorsk (Norwegian Nynorsk)"
 msgstr "노르웨이 니노르스크"
 
-#: webcdi/cdi_forms/languages.py:120
+#: cdi_forms/languages.py:120
 msgid "Norsk (Norwegian)"
 msgstr "노르웨이어"
 
-#: webcdi/cdi_forms/languages.py:121
+#: cdi_forms/languages.py:121
 msgid "Nuosuhxop (Nuosu)"
 msgstr "쓰촨이어"
 
-#: webcdi/cdi_forms/languages.py:122
+#: cdi_forms/languages.py:122
 msgid "isiNdebele (South Ndebele)"
 msgstr "남부 은데벨레어"
 
-#: webcdi/cdi_forms/languages.py:123
+#: cdi_forms/languages.py:123
 msgid "Occitan (Occitan)"
 msgstr "옥시타니아어"
 
-#: webcdi/cdi_forms/languages.py:124
+#: cdi_forms/languages.py:124
 msgid "ᐊᓂᔑᓈᐯᒧᐎᓐ (Ojibwe, Ojibwa)"
 msgstr "오지브와어"
 
-#: webcdi/cdi_forms/languages.py:125
+#: cdi_forms/languages.py:125
 msgid ""
 "ѩзыкъ словѣньскъ (Old Church Slavonic, Church Slavic, Church Slavonic, Old "
 "Bulgarian, Old Slavonic)"
 msgstr "고대 교회 슬라브어"
 
-#: webcdi/cdi_forms/languages.py:126
+#: cdi_forms/languages.py:126
 msgid "Afaan Oromoo (Oromo)"
 msgstr "오로모어"
 
-#: webcdi/cdi_forms/languages.py:127
+#: cdi_forms/languages.py:127
 msgid "ଓଡ଼ିଆ (Oriya)"
 msgstr "오리아어"
 
-#: webcdi/cdi_forms/languages.py:128
+#: cdi_forms/languages.py:128
 msgid "ирон æвзаг (Ossetian, Ossetic)"
 msgstr "오세트어"
 
-#: webcdi/cdi_forms/languages.py:129
+#: cdi_forms/languages.py:129
 msgid "ਪੰਜਾਬੀ, پنجابی (Panjabi, Punjabi)"
 msgstr "펀자브어"
 
-#: webcdi/cdi_forms/languages.py:130
+#: cdi_forms/languages.py:130
 msgid "पाऴि (Pāli)"
 msgstr "팔리어"
 
-#: webcdi/cdi_forms/languages.py:131
+#: cdi_forms/languages.py:131
 msgid "فارسی (Persian)"
 msgstr "페르시아어"
 
-#: webcdi/cdi_forms/languages.py:132
+#: cdi_forms/languages.py:132
 msgid "polski (Polish)"
 msgstr "폴란드어"
 
-#: webcdi/cdi_forms/languages.py:133
+#: cdi_forms/languages.py:133
 msgid "پښتو (Pashto, Pushto)"
 msgstr "파슈토어"
 
-#: webcdi/cdi_forms/languages.py:134
+#: cdi_forms/languages.py:134
 msgid "Português (Portuguese)"
 msgstr "포르투갈어"
 
-#: webcdi/cdi_forms/languages.py:135
+#: cdi_forms/languages.py:135
 msgid "Runa Simi, Kichwa (Quechua)"
 msgstr "케츄아어"
 
-#: webcdi/cdi_forms/languages.py:136
+#: cdi_forms/languages.py:136
 msgid "rumantsch grischun (Romansh)"
 msgstr "로만시어"
 
-#: webcdi/cdi_forms/languages.py:137
+#: cdi_forms/languages.py:137
 msgid "kiRundi (Kirundi)"
 msgstr "키룬디어"
 
-#: webcdi/cdi_forms/languages.py:138
+#: cdi_forms/languages.py:138
 msgid "română (Romanian, Moldavian, Moldovan)"
 msgstr "루마니아어"
 
-#: webcdi/cdi_forms/languages.py:139
+#: cdi_forms/languages.py:139
 msgid "русский язык (Russian)"
 msgstr "러시아어"
 
-#: webcdi/cdi_forms/languages.py:140
+#: cdi_forms/languages.py:140
 msgid "संस्कृतम् (Sanskrit (Saṁskṛta))"
 msgstr "산스크리트어"
 
-#: webcdi/cdi_forms/languages.py:141
+#: cdi_forms/languages.py:141
 msgid "sardu (Sardinian)"
 msgstr "사르디니아어"
 
-#: webcdi/cdi_forms/languages.py:142
+#: cdi_forms/languages.py:142
 msgid "सिन्धी, سنڌي، سندھی (Sindhi)"
 msgstr "신드어"
 
-#: webcdi/cdi_forms/languages.py:143
+#: cdi_forms/languages.py:143
 msgid "Davvisámegiella (Northern Sami)"
 msgstr "북부 사미어"
 
-#: webcdi/cdi_forms/languages.py:144
+#: cdi_forms/languages.py:144
 msgid "gagana faa Samoa (Samoan)"
 msgstr "사모아어"
 
-#: webcdi/cdi_forms/languages.py:145
+#: cdi_forms/languages.py:145
 msgid "yângâ tî sängö (Sango)"
 msgstr "상고어"
 
-#: webcdi/cdi_forms/languages.py:146
+#: cdi_forms/languages.py:146
 msgid "српски језик (Serbian)"
 msgstr "세르비아어"
 
-#: webcdi/cdi_forms/languages.py:147
+#: cdi_forms/languages.py:147
 msgid "Gàidhlig (Scottish Gaelic; Gaelic)"
 msgstr "스코틀랜드 게일어"
 
-#: webcdi/cdi_forms/languages.py:148
+#: cdi_forms/languages.py:148
 msgid "chiShona (Shona)"
 msgstr "쇼나어"
 
-#: webcdi/cdi_forms/languages.py:149
+#: cdi_forms/languages.py:149
 msgid "සිංහල (Sinhala, Sinhalese)"
 msgstr "신할라어"
 
-#: webcdi/cdi_forms/languages.py:150
+#: cdi_forms/languages.py:150
 msgid "slovenčina (Slovak)"
 msgstr "슬로바키아어"
 
-#: webcdi/cdi_forms/languages.py:151
+#: cdi_forms/languages.py:151
 msgid "slovenščina (Slovene)"
 msgstr "슬로베니아어"
 
-#: webcdi/cdi_forms/languages.py:152
+#: cdi_forms/languages.py:152
 msgid "Soomaaliga, af Soomaali (Somali)"
 msgstr "소말리어"
 
-#: webcdi/cdi_forms/languages.py:153
+#: cdi_forms/languages.py:153
 msgid "Sesotho (Southern Sotho)"
 msgstr "소토어"
 
-#: webcdi/cdi_forms/languages.py:154
+#: cdi_forms/languages.py:154
 msgid "español, castellano (Spanish; Castilian)"
 msgstr "스페인어"
 
-#: webcdi/cdi_forms/languages.py:155
+#: cdi_forms/languages.py:155
 msgid "Basa Sunda (Sundanese)"
 msgstr "순다어"
 
-#: webcdi/cdi_forms/languages.py:156
+#: cdi_forms/languages.py:156
 msgid "Kiswahili (Swahili)"
 msgstr "스와힐리어"
 
-#: webcdi/cdi_forms/languages.py:157
+#: cdi_forms/languages.py:157
 msgid "SiSwati (Swati)"
 msgstr "스와티어"
 
-#: webcdi/cdi_forms/languages.py:158
+#: cdi_forms/languages.py:158
 msgid "svenska (Swedish)"
 msgstr "스웨덴어"
 
-#: webcdi/cdi_forms/languages.py:159
+#: cdi_forms/languages.py:159
 msgid "தமிழ் (Tamil)"
 msgstr "타밀어"
 
-#: webcdi/cdi_forms/languages.py:160
+#: cdi_forms/languages.py:160
 msgid "тоҷикӣ, toğikī, تاجیکی‎ (Telugu)"
 msgstr "텔루구어"
 
-#: webcdi/cdi_forms/languages.py:161
+#: cdi_forms/languages.py:161
 msgid "తెలుగు (Tajik)"
 msgstr "타지크어"
 
-#: webcdi/cdi_forms/languages.py:162
+#: cdi_forms/languages.py:162
 msgid "ไทย (Thai)"
 msgstr "태국어"
 
-#: webcdi/cdi_forms/languages.py:163
+#: cdi_forms/languages.py:163
 msgid "ትግርኛ (Tigrinya)"
 msgstr "티그리냐어"
 
-#: webcdi/cdi_forms/languages.py:164
+#: cdi_forms/languages.py:164
 msgid "བོད་ཡིག (Tibetan Standard, Tibetan, Central)"
 msgstr "티베트어"
 
-#: webcdi/cdi_forms/languages.py:165
+#: cdi_forms/languages.py:165
 msgid "Türkmen, Түркмен (Turkmen)"
 msgstr "투르크멘어"
 
-#: webcdi/cdi_forms/languages.py:166
+#: cdi_forms/languages.py:166
 msgid "Wikang Tagalog (Tagalog)"
 msgstr "타갈로그어"
 
-#: webcdi/cdi_forms/languages.py:167
+#: cdi_forms/languages.py:167
 msgid "Setswana (Tswana)"
 msgstr "츠와나어"
 
-#: webcdi/cdi_forms/languages.py:168
+#: cdi_forms/languages.py:168
 msgid "faka Tonga (Tonga (Tonga Islands))"
 msgstr "통가어"
 
-#: webcdi/cdi_forms/languages.py:169
+#: cdi_forms/languages.py:169
 msgid "Türkçe (Turkish)"
 msgstr "터키어"
 
-#: webcdi/cdi_forms/languages.py:170
+#: cdi_forms/languages.py:170
 msgid "Xitsonga (Tsonga)"
 msgstr "총가어"
 
-#: webcdi/cdi_forms/languages.py:171
+#: cdi_forms/languages.py:171
 msgid "татарча, tatarça, تاتارچا (Tatar)"
 msgstr "타타르어"
 
-#: webcdi/cdi_forms/languages.py:172
+#: cdi_forms/languages.py:172
 msgid "Twi (Twi)"
 msgstr "트위어"
 
-#: webcdi/cdi_forms/languages.py:173
+#: cdi_forms/languages.py:173
 msgid "Reo Tahiti (Tahitian)"
 msgstr "타히티어"
 
-#: webcdi/cdi_forms/languages.py:174
+#: cdi_forms/languages.py:174
 msgid "Uyƣurqə, ئۇيغۇرچە (Uighur, Uyghur)"
 msgstr "위그르어"
 
-#: webcdi/cdi_forms/languages.py:175
+#: cdi_forms/languages.py:175
 msgid "українська (Ukrainian)"
 msgstr "우크라이나어"
 
-#: webcdi/cdi_forms/languages.py:176
+#: cdi_forms/languages.py:176
 msgid "اردو (Urdu)"
 msgstr "우르두어"
 
-#: webcdi/cdi_forms/languages.py:177
+#: cdi_forms/languages.py:177
 msgid "zbek, Ўзбек, أۇزبېك (Uzbek)"
 msgstr "우즈베크어"
 
-#: webcdi/cdi_forms/languages.py:178
+#: cdi_forms/languages.py:178
 msgid "Tshivenḓa (Venda)"
 msgstr "벤다어"
 
-#: webcdi/cdi_forms/languages.py:179
+#: cdi_forms/languages.py:179
 msgid "Tiếng Việt (Vietnamese)"
 msgstr "베트남어"
 
-#: webcdi/cdi_forms/languages.py:180
+#: cdi_forms/languages.py:180
 msgid "Volapük (Volapük)"
 msgstr "블라뷔크어"
 
-#: webcdi/cdi_forms/languages.py:181
+#: cdi_forms/languages.py:181
 msgid "Waloon (Walloon)"
 msgstr "왈론어"
 
-#: webcdi/cdi_forms/languages.py:182
+#: cdi_forms/languages.py:182
 msgid "Cymraeg (Welsh)"
 msgstr "웨일스어"
 
-#: webcdi/cdi_forms/languages.py:183
+#: cdi_forms/languages.py:183
 msgid "Wollof (Wolof)"
 msgstr "월로프어"
 
-#: webcdi/cdi_forms/languages.py:184
+#: cdi_forms/languages.py:184
 msgid "Frysk (Western Frisian)"
 msgstr "서프리슬란트어"
 
-#: webcdi/cdi_forms/languages.py:185
+#: cdi_forms/languages.py:185
 msgid "isiXhosa (Xhosa)"
 msgstr "코사어"
 
-#: webcdi/cdi_forms/languages.py:186
+#: cdi_forms/languages.py:186
 msgid "ייִדיש (Yiddish)"
 msgstr "이디시어"
 
-#: webcdi/cdi_forms/languages.py:187
+#: cdi_forms/languages.py:187
 msgid "Yorùbá (Yoruba)"
 msgstr "요루바어"
 
-#: webcdi/cdi_forms/languages.py:188
+#: cdi_forms/languages.py:188
 msgid "Saɯ cueŋƅ, Saw cuengh (Zhuang, Chuang)"
 msgstr "좡어"
 
-#: webcdi/cdi_forms/models.py:70
+#: cdi_forms/models.py:70
 msgid "Age (in months)"
 msgstr "만 연령 (개월)"
 
-#: webcdi/cdi_forms/models.py:72
+#: cdi_forms/models.py:72
 msgid "Country"
 msgstr "국가"
 
-#: webcdi/cdi_forms/models.py:73
+#: cdi_forms/models.py:73
 msgid "Zip Code (if you live in the U.S.)"
 msgstr "우편번호 (미국 거주 시)"
 
-#: webcdi/cdi_forms/models.py:73
+#: cdi_forms/models.py:73
 msgid "Please enter a valid U.S. zip code"
 msgstr "유효한 미국 우편번호를 입력해 주십시오"
 
-#: webcdi/cdi_forms/models.py:77
+#: cdi_forms/models.py:77
 msgid "1 (First)"
 msgstr "1 (첫째)"
 
-#: webcdi/cdi_forms/models.py:78
+#: cdi_forms/models.py:78
 msgid "2 (Second)"
 msgstr "2 (둘째)"
 
-#: webcdi/cdi_forms/models.py:79
+#: cdi_forms/models.py:79
 msgid "3 (Third)"
 msgstr "3 (셋째)"
 
-#: webcdi/cdi_forms/models.py:80
+#: cdi_forms/models.py:80
 msgid "4 (Fourth)"
 msgstr "4 (넷째)"
 
-#: webcdi/cdi_forms/models.py:81
+#: cdi_forms/models.py:81
 msgid "5 (Fifth)"
 msgstr "5 (다섯째)"
 
-#: webcdi/cdi_forms/models.py:82
+#: cdi_forms/models.py:82
 msgid "6 (Sixth)"
 msgstr "6 (여섯째)"
 
-#: webcdi/cdi_forms/models.py:83
+#: cdi_forms/models.py:83
 msgid "7 (Seventh)"
 msgstr "7 (일곱째)"
 
-#: webcdi/cdi_forms/models.py:84
+#: cdi_forms/models.py:84
 msgid "8 (Eighth)"
 msgstr "8 (여덟째)"
 
-#: webcdi/cdi_forms/models.py:85
+#: cdi_forms/models.py:85
 msgid "9 (Ninth)"
 msgstr "9 (아홉째)"
 
-#: webcdi/cdi_forms/models.py:86
+#: cdi_forms/models.py:86
 msgid "10 or more (Tenth or Later)"
 msgstr "10 이상 (열째 또는 그 이후)"
 
-#: webcdi/cdi_forms/models.py:90
+#: cdi_forms/models.py:90
 msgid "Birth order"
 msgstr "출생 순서"
 
-#: webcdi/cdi_forms/models.py:94
+#: cdi_forms/models.py:94
 msgid "Twins"
 msgstr "쌍둥이"
 
-#: webcdi/cdi_forms/models.py:95
+#: cdi_forms/models.py:95
 msgid "Triplets"
 msgstr "세쌍둥이"
 
-#: webcdi/cdi_forms/models.py:96
+#: cdi_forms/models.py:96
 msgid "Quadruplets"
 msgstr "네쌍둥이"
 
-#: webcdi/cdi_forms/models.py:97
+#: cdi_forms/models.py:97
 msgid "Quintuplets or greater"
 msgstr "다섯쌍둥이 또는 그 이상"
 
-#: webcdi/cdi_forms/models.py:101
+#: cdi_forms/models.py:101
 msgid "Twins, triplets, quadruplets, other?"
 msgstr "쌍둥이, 세쌍둥이, 네쌍둥이, 기타?"
 
-#: webcdi/cdi_forms/models.py:106
+#: cdi_forms/models.py:106
 msgid "Was your child born earlier or later than their due date?"
 msgstr "아동은 출산예정일보다 일찍 또는 늦게 태어났나요?"
 
-#: webcdi/cdi_forms/models.py:108
+#: cdi_forms/models.py:108
 msgid "By how many weeks? (round to the nearest week)"
 msgstr "몇 주였습니까? (가장 가까운 주수로 반올림)"
 
-#: webcdi/cdi_forms/models.py:108
+#: cdi_forms/models.py:108
 msgid "Number of weeks cannot be less than 1"
 msgstr "주수는 1주 이상이어야 합니다"
 
-#: webcdi/cdi_forms/models.py:117 webcdi/cdi_forms/models.py:182
+#: cdi_forms/models.py:117 cdi_forms/models.py:182
 msgid "Mother"
 msgstr "모"
 
-#: webcdi/cdi_forms/models.py:118 webcdi/cdi_forms/models.py:183
+#: cdi_forms/models.py:118 cdi_forms/models.py:183
 msgid "Father"
 msgstr "부"
 
-#: webcdi/cdi_forms/models.py:119 webcdi/cdi_forms/models.py:185
+#: cdi_forms/models.py:119 cdi_forms/models.py:185
 msgid "Grandparent(s)"
 msgstr "조부모"
 
-#: webcdi/cdi_forms/models.py:123
+#: cdi_forms/models.py:123
 msgid "Primary Caregiver"
 msgstr "주양육자"
 
-#: webcdi/cdi_forms/models.py:125 webcdi/cdi_forms/models.py:128
+#: cdi_forms/models.py:125 cdi_forms/models.py:128
 msgid "Primary Caregiver Year of birth"
 msgstr "주양육자의 출생년도"
 
-#: webcdi/cdi_forms/models.py:126
+#: cdi_forms/models.py:126
 msgid "Primary Caregiver Education"
 msgstr "주양육자의 학력"
 
-#: webcdi/cdi_forms/models.py:126 webcdi/cdi_forms/models.py:135
+#: cdi_forms/models.py:126 cdi_forms/models.py:135
 msgid ""
 "Choose highest grade completed (12 = high school graduate; 16 = college "
 "graduate; 18 = advanced degree)"
@@ -1354,178 +1349,178 @@ msgstr ""
 "최종 학력을 선택해 주십시오 (12 = 고등학교 졸업; 16 = 대학교 졸업; 18 = 석사 "
 "및 박사 학위)"
 
-#: webcdi/cdi_forms/models.py:132
+#: cdi_forms/models.py:132
 msgid "Secondary Caregiver"
 msgstr "부양육자"
 
-#: webcdi/cdi_forms/models.py:134
+#: cdi_forms/models.py:134
 msgid "Secondary Caregiver Year of birth"
 msgstr "부양육자의 출생년도"
 
-#: webcdi/cdi_forms/models.py:135
+#: cdi_forms/models.py:135
 msgid "Secondary Caregiver Education"
 msgstr "부양육자의 학력"
 
-#: webcdi/cdi_forms/models.py:144
+#: cdi_forms/models.py:144
 msgid "Two parents"
 msgstr "부모"
 
-#: webcdi/cdi_forms/models.py:145
+#: cdi_forms/models.py:145
 msgid "One parent"
 msgstr "한부모"
 
-#: webcdi/cdi_forms/models.py:146
+#: cdi_forms/models.py:146
 msgid "One or both parents and other caregiver(s) (e.g., grandparent)"
 msgstr "한부모 또는 부모와 기타 양육자 (예: 조부 및 조모)"
 
-#: webcdi/cdi_forms/models.py:147
+#: cdi_forms/models.py:147
 msgid "Other caregivers (e.g., grandparent or grandparents)"
 msgstr "기타 양육자 (예: 조부 및 조모)"
 
-#: webcdi/cdi_forms/models.py:151
+#: cdi_forms/models.py:151
 msgid "Who does your child live with?"
 msgstr "아동은 누구와 살고 있나요?"
 
-#: webcdi/cdi_forms/models.py:156
+#: cdi_forms/models.py:156
 msgid "From whom?"
 msgstr "누구로부터입니까?"
 
-#: webcdi/cdi_forms/models.py:157
+#: cdi_forms/models.py:157
 msgid "How many days per week is the child exposed to these languages?"
 msgstr "이러한 언어에 아동은 한 주에 며칠정도 노출되나요?"
 
-#: webcdi/cdi_forms/models.py:157
+#: cdi_forms/models.py:157
 msgid "Number of days per week cannot exceed 7"
 msgstr "7일을 초과할 수 없습니다"
 
-#: webcdi/cdi_forms/models.py:157
+#: cdi_forms/models.py:157
 msgid "Number of days per week cannot be less than 1"
 msgstr "1일 이상이어야 합니다"
 
-#: webcdi/cdi_forms/models.py:158
+#: cdi_forms/models.py:158
 msgid "How many hours per day is the child exposed to these languages?"
 msgstr "이러한 언어에 아동은 하루에 몇 시간 노출되나요?"
 
-#: webcdi/cdi_forms/models.py:158
+#: cdi_forms/models.py:158
 msgid "Number of hours per day cannot exceed 24"
 msgstr "24시간을 초과할 수 없습니다"
 
-#: webcdi/cdi_forms/models.py:158
+#: cdi_forms/models.py:158
 msgid "Number of hours per day cannot be less than 1"
 msgstr "1시간 이상이어야 합니다"
 
-#: webcdi/cdi_forms/models.py:160
+#: cdi_forms/models.py:160
 msgid "Has your child experienced chronic ear infections (5 or more)? "
 msgstr "아동은 만성 중이염을 앓은 적이 있나요? (5회 또는 그 이상)"
 
-#: webcdi/cdi_forms/models.py:161
+#: cdi_forms/models.py:161
 msgid "Has your child undergone interventions (e.g., tubes)?  Please describe"
 msgstr "아동은 중이염 수술을 받은 적이 있나요 (예: 삽관)?  기술해 주세요"
 
-#: webcdi/cdi_forms/models.py:164 webcdi/cdi_forms/models.py:167
-#: webcdi/cdi_forms/models.py:170 webcdi/cdi_forms/models.py:176
+#: cdi_forms/models.py:164 cdi_forms/models.py:167 cdi_forms/models.py:170
+#: cdi_forms/models.py:176
 msgid "Please describe"
 msgstr "기술해 주세요"
 
-#: webcdi/cdi_forms/models.py:173
+#: cdi_forms/models.py:173
 #, fuzzy
 #| msgid "Please describe"
 msgctxt "daycare"
 msgid "Please describe"
 msgstr "기술해 주세요"
 
-#: webcdi/cdi_forms/models.py:179
+#: cdi_forms/models.py:179
 msgid "Indicate which family member and provide a description"
 msgstr "어느 가족 구성원인지 표시하고 기술해 주세요"
 
-#: webcdi/cdi_forms/models.py:184
+#: cdi_forms/models.py:184
 msgid "Both caregivers"
 msgstr "두 양육자 모두"
 
-#: webcdi/cdi_forms/models.py:188
+#: cdi_forms/models.py:188
 msgid "Who is filling in the form?"
 msgstr "본 설문에 응답하고 계신 분은 누구입니까?"
 
-#: webcdi/cdi_forms/models.py:213
+#: cdi_forms/models.py:213
 msgid "Place of residence (neighnorhood/district)"
 msgstr ""
 
-#: webcdi/cdi_forms/models.py:214
+#: cdi_forms/models.py:214
 #, fuzzy
 #| msgid "Primary Caregiver Education"
 msgid "Primary caregiver occupation"
 msgstr "주양육자의 학력"
 
-#: webcdi/cdi_forms/models.py:215
+#: cdi_forms/models.py:215
 #, fuzzy
 #| msgid "Primary Caregiver Education"
 msgid "Primary caregiver occupation description"
 msgstr "주양육자의 학력"
 
-#: webcdi/cdi_forms/models.py:216
+#: cdi_forms/models.py:216
 #, fuzzy
 #| msgid "Secondary Caregiver Education"
 msgid "Secondary caregiver occupation"
 msgstr "부양육자의 학력"
 
-#: webcdi/cdi_forms/models.py:217
+#: cdi_forms/models.py:217
 #, fuzzy
 #| msgid "Secondary Caregiver Education"
 msgid "Secondary caregiver occupation description"
 msgstr "부양육자의 학력"
 
-#: webcdi/cdi_forms/models.py:223
+#: cdi_forms/models.py:223
 #, fuzzy
 #| msgid "Less than 1500 grams"
 msgid "Less than 6 months"
 msgstr "1.5kg 미만"
 
-#: webcdi/cdi_forms/models.py:224
+#: cdi_forms/models.py:224
 msgid "Between 6 and 12 months"
 msgstr ""
 
-#: webcdi/cdi_forms/models.py:225
+#: cdi_forms/models.py:225
 msgid "More than 12 months"
 msgstr ""
 
-#: webcdi/cdi_forms/models.py:227
+#: cdi_forms/models.py:227
 msgid "Since when"
 msgstr ""
 
-#: webcdi/cdi_forms/models.py:228
+#: cdi_forms/models.py:228
 msgid "Hours per day"
 msgstr ""
 
-#: webcdi/cdi_forms/models.py:229
+#: cdi_forms/models.py:229
 msgid "Days per week"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/background_info.html:7
-#: webcdi/cdi_forms/templates/cdi_forms/background_info.html:59
-#: webcdi/cdi_forms/templates/cdi_forms/study_group.html:7
-#: webcdi/cdi_forms/views.py:262 webcdi/cdi_forms/views.py:558
+#: cdi_forms/templates/cdi_forms/background_info.html:7
+#: cdi_forms/templates/cdi_forms/background_info.html:59
+#: cdi_forms/templates/cdi_forms/study_group.html:7 cdi_forms/views.py:262
+#: cdi_forms/views.py:558
 msgid "Next"
 msgstr "다음"
 
-#: webcdi/cdi_forms/templates/cdi_forms/background_info.html:18
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:39
-#: webcdi/cdi_forms/templates/cdi_forms/study_group.html:15
+#: cdi_forms/templates/cdi_forms/background_info.html:18
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:39
+#: cdi_forms/templates/cdi_forms/study_group.html:15
 msgid "MacArthur-Bates Communicative Development Inventory"
 msgstr "맥아더-베이츠 의사소통발달 평가"
 
-#: webcdi/cdi_forms/templates/cdi_forms/background_info.html:20
-#: webcdi/cdi_forms/templates/cdi_forms/study_group.html:17
+#: cdi_forms/templates/cdi_forms/background_info.html:20
+#: cdi_forms/templates/cdi_forms/study_group.html:17
 #, python-format
 msgid "For %(min_age)s- to %(max_age)s-month-old children"
 msgstr "%(min_age)s개월부터 %(max_age)s개월까지의 아동"
 
-#: webcdi/cdi_forms/templates/cdi_forms/background_info.html:23
-#: webcdi/cdi_forms/templates/cdi_forms/study_group.html:20
+#: cdi_forms/templates/cdi_forms/background_info.html:23
+#: cdi_forms/templates/cdi_forms/study_group.html:20
 msgid "Instructions for completing the language inventory"
 msgstr "본 설문에 대한 안내"
 
-#: webcdi/cdi_forms/templates/cdi_forms/background_info.html:26
-#: webcdi/cdi_forms/templates/cdi_forms/study_group.html:22
+#: cdi_forms/templates/cdi_forms/background_info.html:26
+#: cdi_forms/templates/cdi_forms/study_group.html:22
 msgid ""
 "Try to complete the inventory when you have at least 30 quiet minutes, "
 "without interruptions. An example might be when your child is sleeping."
@@ -1533,7 +1528,7 @@ msgstr ""
 "본 설문 작성을 위해, 가급적 방해 받지 않는 시간대에 최소 30분을 할애할 수 있"
 "는 상황에서 작성해 주세요. (예: 자녀의 취침시간)"
 
-#: webcdi/cdi_forms/templates/cdi_forms/background_info.html:28
+#: cdi_forms/templates/cdi_forms/background_info.html:28
 msgid ""
 "Try to complete the inventory when you have at least 10-15 quiet minutes, "
 "without interruptions. An example might be when your child is sleeping."
@@ -1541,8 +1536,8 @@ msgstr ""
 "본 설문 작성을 위해, 가급적 방해 받지 않는 시간대에 최소 10-15분을 할애할 수 "
 "있는 상황에서 작성해 주세요. (예: 자녀의 취침시간)"
 
-#: webcdi/cdi_forms/templates/cdi_forms/background_info.html:30
-#: webcdi/cdi_forms/templates/cdi_forms/study_group.html:23
+#: cdi_forms/templates/cdi_forms/background_info.html:30
+#: cdi_forms/templates/cdi_forms/study_group.html:23
 msgid ""
 "You do not have to complete the inventory in one sitting. If you are "
 "interrupted, it is ok to put it down and come back to it when you have more "
@@ -1552,8 +1547,8 @@ msgstr ""
 "경우, 잠시 설문을 중단하셔도 됩니다. 시간적 여유가 있을 때 다시 돌아와 응답해"
 "주셔도 됩니다."
 
-#: webcdi/cdi_forms/templates/cdi_forms/background_info.html:31
-#: webcdi/cdi_forms/templates/cdi_forms/study_group.html:24
+#: cdi_forms/templates/cdi_forms/background_info.html:31
+#: cdi_forms/templates/cdi_forms/study_group.html:24
 msgid ""
 "Feel free to ask others (e.g. other family members, nanny, child care "
 "providers) to help you fill out this form."
@@ -1561,14 +1556,14 @@ msgstr ""
 "본 설문은 다른 사람과 함께 작성하셔도 됩니다. (예: 다른 가족 구성원, 육아 도"
 "우미, 아동 돌봄 서비스 제공자)"
 
-#: webcdi/cdi_forms/templates/cdi_forms/background_info.html:32
-#: webcdi/cdi_forms/templates/cdi_forms/study_group.html:25
+#: cdi_forms/templates/cdi_forms/background_info.html:32
+#: cdi_forms/templates/cdi_forms/study_group.html:25
 msgid ""
 "Please read all of the instructions on the inventory carefully, and make "
 "sure you complete all of the sections."
 msgstr "모든 안내문을 신중하게 읽고, 반드시 모든 영역을 작성해 주세요."
 
-#: webcdi/cdi_forms/templates/cdi_forms/background_info.html:36
+#: cdi_forms/templates/cdi_forms/background_info.html:36
 #, python-format
 msgid ""
 "You will receive a $%(gift_amount)s Amazon.com gift card after you complete "
@@ -1579,70 +1574,69 @@ msgstr ""
 "희 연구실은 한정된 연구비를 가지고 있으므로 본 설문에는 한 번만 참여해 주십시"
 "오."
 
-#: webcdi/cdi_forms/templates/cdi_forms/background_info.html:42
-#: webcdi/cdi_forms/templates/cdi_forms/study_group.html:29
+#: cdi_forms/templates/cdi_forms/background_info.html:42
+#: cdi_forms/templates/cdi_forms/study_group.html:29
 msgid "For more information about the MB-CDI,"
 msgstr "맥아더-베이츠 의사소통발달 평가에 관하여 더 알고 싶으시다면"
 
-#: webcdi/cdi_forms/templates/cdi_forms/background_info.html:42
-#: webcdi/cdi_forms/templates/cdi_forms/study_group.html:29
+#: cdi_forms/templates/cdi_forms/background_info.html:42
+#: cdi_forms/templates/cdi_forms/study_group.html:29
 msgid "click here"
 msgstr "이곳을 클릭하세요"
 
-#: webcdi/cdi_forms/templates/cdi_forms/background_info.html:43
-#: webcdi/cdi_forms/templates/cdi_forms/study_group.html:30
+#: cdi_forms/templates/cdi_forms/background_info.html:43
+#: cdi_forms/templates/cdi_forms/study_group.html:30
 msgid "Thank you! We appreciate your time and effort!"
 msgstr "귀중한 시간을 내어 본 설문에 응답해 주셔서 진심으로 감사드립니다."
 
-#: webcdi/cdi_forms/templates/cdi_forms/background_info.html:48
+#: cdi_forms/templates/cdi_forms/background_info.html:48
 msgid "Background Information"
 msgstr "배경 정보"
 
-#: webcdi/cdi_forms/templates/cdi_forms/background_info.html:64
-#: webcdi/cdi_forms/templates/cdi_forms/backpage_info.html:48
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:339
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:291
-#: webcdi/cdi_forms/templates/cdi_forms/study_group.html:113
+#: cdi_forms/templates/cdi_forms/background_info.html:64
+#: cdi_forms/templates/cdi_forms/backpage_info.html:48
+#: cdi_forms/templates/cdi_forms/cdi_form.html:339
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:291
+#: cdi_forms/templates/cdi_forms/study_group.html:113
 msgid "Form unavailable. Contact admin."
 msgstr "설문을 시작할 수 없습니다. 관리자에게 문의하십시오."
 
-#: webcdi/cdi_forms/templates/cdi_forms/backpage_info.html:12
-#: webcdi/cdi_forms/templates/cdi_forms/backpage_info.html:45
-#: webcdi/cdi_forms/views.py:269
+#: cdi_forms/templates/cdi_forms/backpage_info.html:12
+#: cdi_forms/templates/cdi_forms/backpage_info.html:45 cdi_forms/views.py:269
 msgid "Finish"
 msgstr "완료"
 
-#: webcdi/cdi_forms/templates/cdi_forms/backpage_info.html:16
-#: webcdi/cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:14
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:14
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:328
-#: webcdi/cdi_forms/views.py:275 webcdi/cdi_forms/views.py:808
+#: cdi_forms/templates/cdi_forms/backpage_info.html:16
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:14
+#: cdi_forms/templates/cdi_forms/cdi_form.html:14
+#: cdi_forms/templates/cdi_forms/cdi_form.html:328 cdi_forms/views.py:275
+#: cdi_forms/views.py:808
 msgid "Go back to Background Info"
 msgstr "배경 정보로 돌아가기"
 
-#: webcdi/cdi_forms/templates/cdi_forms/backpage_info.html:30
+#: cdi_forms/templates/cdi_forms/backpage_info.html:30
 msgid "Background Information Continued"
 msgstr "배경 정보 계속"
 
-#: webcdi/cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:9
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:9
 msgid "Study Completed"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:31
-#: webcdi/cdi_forms/templates/cdi_forms/expired.html:32
-#: webcdi/cdi_forms/templates/cdi_forms/overflow.html:37
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:159
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:31
+#: cdi_forms/templates/cdi_forms/expired.html:32
+#: cdi_forms/templates/cdi_forms/overflow.html:37
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:159
 msgid "MB-CDI Lab Logo"
 msgstr "맥아더-베이츠 의사소통발달 평가 연구실 로고"
 
-#: webcdi/cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:42
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:42
 #, python-format
 msgid ""
 "Thank you for filling this out! Of the words we asked, the hardest word your "
 "child knows is \"%(easiest)s\" and the easiest word is \"%(hardest)s\"."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:45
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:45
 #, fuzzy
 #| msgid ""
 #| "Thank you for taking the time to complete the MacArthur-Bates "
@@ -1681,8 +1675,8 @@ msgstr ""
 "stanford.edu/\" target=\"_blank\">이곳</a>에서 CDI에 관한 더 많은 정보를 얻으"
 "실 수 있습니다. 본 연구에 관심을 가져주셔서 다시 한 번 감사드립니다!"
 
-#: webcdi/cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:28
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:192
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:28
+#: cdi_forms/templates/cdi_forms/cdi_form.html:192
 msgid ""
 "In this section, you will be asked about words that your child \"understands "
 "and says.\" Your child \"understands and says\" a word on the list if they "
@@ -1697,13 +1691,13 @@ msgstr ""
 "양한 연령의 아동을 대상으로 합니다. 아동이 본 설문의 많은 어휘를 모두 이해하"
 "거나 표현하지 못할 수도 있습니다. 그래도 괜찮습니다!"
 
-#: webcdi/cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:41
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:206
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:41
+#: cdi_forms/templates/cdi_forms/cdi_form.html:206
 msgid "DO check the box if:"
 msgstr "다음과 같은 경우, 응답박스에 체크 표시 해주십시오:"
 
-#: webcdi/cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:43
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:208
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:43
+#: cdi_forms/templates/cdi_forms/cdi_form.html:208
 msgid ""
 "Your child says the word when trying to name an object or describe something "
 "that happened.  You think s/he has a meaning for that word."
@@ -1711,8 +1705,8 @@ msgstr ""
 "아동이 대상을 지칭하거나 일어난 일에 대해 묘사하기 위하여 어휘/문장을 표현하"
 "는 경우, 아동이 해당 어휘/문장의 뜻을 안다고 생각되는 경우"
 
-#: webcdi/cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:62
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:226
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:62
+#: cdi_forms/templates/cdi_forms/cdi_form.html:226
 msgid ""
 "It's fine if your child can't say the whole word or says it his/her own "
 "\"special\" way. If you use another word in your family (e.g., Nana for "
@@ -1723,13 +1717,13 @@ msgstr ""
 "하시는 경우(예: 기린을 긴이라 부르는 경우, 할머니를 함미라 부르는 경우)도 괜"
 "찮습니다."
 
-#: webcdi/cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:64
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:228
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:64
+#: cdi_forms/templates/cdi_forms/cdi_form.html:228
 msgid "DO check the box."
 msgstr "응답박스에 체크 표시 해주십시오."
 
-#: webcdi/cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:82
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:245
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:82
+#: cdi_forms/templates/cdi_forms/cdi_form.html:245
 msgid ""
 "DON'T check the box if your child is just stringing sounds together. This is "
 "not a real word that means something."
@@ -1737,46 +1731,52 @@ msgstr ""
 "만약 아동이 단순히 소리를 이어 말하는 경우 (예: 바 바 바)에는 표시하지 마십시"
 "오. 이는 의미를 지닌 실제 어휘가 아닙니다."
 
-#: webcdi/cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:99
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:174
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:261
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:99
+#: cdi_forms/templates/cdi_forms/cdi_form.html:174
+#: cdi_forms/templates/cdi_forms/cdi_form.html:261
 msgid ""
 "DON'T ask your child to repeat the words on the list. This doesn't count!"
 msgstr ""
 "아동에게 어휘를 따라 말하게 하지 마십시오. 이 경우는 포함되지 않습니다!"
 
-#: webcdi/cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:128
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:125
+#, fuzzy
+#| msgid "Who does your child live with?"
+msgid "Does your child say ... "
+msgstr "아동은 누구와 살고 있나요?"
+
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:128
 msgid "* or word used in your family"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:62
+#: cdi_forms/templates/cdi_forms/cdi_base.html:62
 msgid "Instructions: "
 msgstr "안내 사항: "
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:66
+#: cdi_forms/templates/cdi_forms/cdi_base.html:66
 msgid "This form can be filled any time before the due date."
 msgstr "본 설문은 마감일 전까지 언제든지 응답할 수 있습니다."
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:67
+#: cdi_forms/templates/cdi_forms/cdi_base.html:67
 msgid ""
 "It can also be saved at any time and resumed later by using the same link"
 msgstr ""
 "또한 설문을 저장한 뒤 언제든지 동일한 링크를 통해 다시 응답을 시작할 수 있습"
 "니다."
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:67
+#: cdi_forms/templates/cdi_forms/cdi_base.html:67
 msgid "create bookmark"
 msgstr "책갈피 만들기"
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:68
+#: cdi_forms/templates/cdi_forms/cdi_base.html:68
 msgid "After the form is submitted, it cannot be altered."
 msgstr "본 설문을 제출하신 후에는 응답 내용을 변경하실 수 없습니다."
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:69
+#: cdi_forms/templates/cdi_forms/cdi_base.html:69
 msgid "The form also cannot be altered after the due date."
 msgstr "또한 마감일 이후에도 본 설문의 응답 내용을 변경하실 수 없습니다."
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:70
+#: cdi_forms/templates/cdi_forms/cdi_base.html:70
 msgid ""
 "Please use the navigation buttons below. Do not use the \"back\" and "
 "\"forward\" buttons on your browser."
@@ -1784,33 +1784,33 @@ msgstr ""
 "아래의 탐색 버튼을 사용해 주십시오. 브라우저의 \"뒤로\" 버튼과 \"앞으로\" 버"
 "튼을 사용하지 마십시오."
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:71
+#: cdi_forms/templates/cdi_forms/cdi_base.html:71
 msgid ""
 "You can use the tab button and arrows keys to quickly navigate and answer "
 "questions."
 msgstr "탭 키와 방향 키를 사용하여 빠르게 탐색하고 질문에 답하실 수 있습니다."
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:99
+#: cdi_forms/templates/cdi_forms/cdi_base.html:99
 msgid "Due date"
 msgstr "마감일"
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:104
+#: cdi_forms/templates/cdi_forms/cdi_base.html:104
 msgid "Show waiver of documentation"
 msgstr "연구참여포기서 보기"
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:109
+#: cdi_forms/templates/cdi_forms/cdi_base.html:109
 msgid "Reach out to the Web-CDI Team!"
 msgstr "웹CDI 팀에 연락해 주십시오!"
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:153
+#: cdi_forms/templates/cdi_forms/cdi_base.html:153
 msgid "Okay"
 msgstr "네"
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:166
+#: cdi_forms/templates/cdi_forms/cdi_base.html:166
 msgid "Waiver Denied"
 msgstr "연구참여포기서 인정되지 않음"
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:170
+#: cdi_forms/templates/cdi_forms/cdi_base.html:170
 msgid ""
 "Thank you for your response. We are unable to continue. Please close the "
 "window. If you would like, you may review the Waiver."
@@ -1818,30 +1818,29 @@ msgstr ""
 "응답해 주셔서 감사합니다. 다음으로 진행할 수 없습니다. 브라우저 창을 닫아 주"
 "십시오. 원한다면 연구참여포기서를 다시 보실 수 있습니다."
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:173
+#: cdi_forms/templates/cdi_forms/cdi_base.html:173
 msgid "Review Waiver"
 msgstr "연구참여포기서 다시 보기"
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:10
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:327
-#: webcdi/cdi_forms/templates/cdi_forms/study_group.html:6
-#: webcdi/cdi_forms/views.py:797
+#: cdi_forms/templates/cdi_forms/cdi_form.html:10
+#: cdi_forms/templates/cdi_forms/cdi_form.html:327
+#: cdi_forms/templates/cdi_forms/study_group.html:6 cdi_forms/views.py:797
 msgid "Save"
 msgstr "저장"
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:24
+#: cdi_forms/templates/cdi_forms/cdi_form.html:24
 msgid "Table of Contents:"
 msgstr "목차:"
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:26
+#: cdi_forms/templates/cdi_forms/cdi_form.html:26
 msgid "Contents:"
 msgstr "내용:"
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:28
+#: cdi_forms/templates/cdi_forms/cdi_form.html:28
 msgid "Instructions:"
 msgstr "안내 사항: "
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:60
+#: cdi_forms/templates/cdi_forms/cdi_form.html:60
 msgid ""
 "In this section, you will be asked to think about which phrases and words "
 "your child \"understands\" and \"understands and says.\"  This assessment is "
@@ -1854,7 +1853,7 @@ msgstr ""
 "다양한 연령의 아동을 대상으로 합니다. 아동이 아직 본 설문에서 제시한 모든 어"
 "휘를 이해하거나 표현하지 못할 수도 있습니다. 그래도 괜찮습니다!"
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:63
+#: cdi_forms/templates/cdi_forms/cdi_form.html:63
 msgid ""
 "Your child \"understands\" a word/phrase if they know what the word/phrase "
 "means, even though they may not be able to say it themselves. Here are some "
@@ -1863,11 +1862,11 @@ msgstr ""
 "아동이 어휘/문장을 아직 정확히 표현하지 못하더라도 뜻은 이해하고 있다면, 아동"
 "은 해당 어휘/문장을 \"이해\"하는 것입니다. 다음 예시를 참고해 주십시오."
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:77
+#: cdi_forms/templates/cdi_forms/cdi_form.html:77
 msgid "DO check \"understands\" if:"
 msgstr "다음과 같은 경우에는 \"이해한다\"에 체크 표시 해주십시오:"
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:79
+#: cdi_forms/templates/cdi_forms/cdi_form.html:79
 msgid ""
 "Your child responds appropriately to the word/phrase. For example, when you "
 "say \"Get the ball,\" s/he turns and tries to find the ball."
@@ -1875,11 +1874,11 @@ msgstr ""
 "아동이 어휘/문장에 적절하게 반응하는 경우 (예: 귀하가 \"공 가져와\"라고 말할 "
 "때 아동이 공을 찾으려고 함)"
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:94
+#: cdi_forms/templates/cdi_forms/cdi_form.html:94
 msgid "DON'T check \"understands\" if:"
 msgstr "다음과 같은 경우에는 \"이해한다\"에 표시하지 마십시오:"
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:96
+#: cdi_forms/templates/cdi_forms/cdi_form.html:96
 msgid ""
 "Your child doesn't have a meaning for the word/phrase.  S/he may have heard "
 "it before, like in a story, but you don't think s/he knows what it means."
@@ -1887,7 +1886,7 @@ msgstr ""
 "아동이 어휘/문장의 뜻을 모르는 경우, 아동이 어휘/문장을 이야기에서 들어 본 적"
 "이 있지만, 그 뜻을 정확히는 모른다고 생각되는 경우"
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:106
+#: cdi_forms/templates/cdi_forms/cdi_form.html:106
 msgid ""
 "Your child \"understands and says\" a word/phrase if they know what the word/"
 "phrase means AND they are able to say it by themselves. Here are some "
@@ -1897,11 +1896,11 @@ msgstr ""
 "면 해당 어휘/문장을 \"이해하고 표현한다\"에 체크하셔야 합니다. 다음 예시를 참"
 "고 해 주세요."
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:118
+#: cdi_forms/templates/cdi_forms/cdi_form.html:118
 msgid "DO check \"understands and says\" if:"
 msgstr "다음과 같은 경우에는 \"이해하고 표현한다\"에 체크 표시 해주세요:"
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:120
+#: cdi_forms/templates/cdi_forms/cdi_form.html:120
 msgid ""
 "Your child says a word/phrase when trying to name an object or describe "
 "something that happened.  You think s/he has a meaning for that word/phrase."
@@ -1909,7 +1908,7 @@ msgstr ""
 "아동이 어떠한 대상을 지칭하거나, 일어난 일에 대해 묘사하기 위하여 어휘/문장"
 "을 표현하는 경우 아동이 해당 어휘/문장의 뜻을 정확히 안다고 생각되는 경우"
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:137
+#: cdi_forms/templates/cdi_forms/cdi_form.html:137
 msgid ""
 "It's fine if your child can't say the whole word or says it his/her own "
 "\"special\" way."
@@ -1917,11 +1916,11 @@ msgstr ""
 "만약 아동이 어휘를 정확히 발음하지 않거나, 자신만의 \"특별한\" 방식으로 표현"
 "하더라도 괜찮습니다."
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:139
+#: cdi_forms/templates/cdi_forms/cdi_form.html:139
 msgid "DO check \"understands and says.\""
 msgstr "\"이해하고 표현한다\"에 체크 표시 해주십시오."
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:156
+#: cdi_forms/templates/cdi_forms/cdi_form.html:156
 msgid ""
 "DON'T check if your child is just stringing sounds together.  This is not a "
 "real word that means something."
@@ -1929,12 +1928,12 @@ msgstr ""
 "만약 아동이 단순히 한 소리, 한 소리를 이어서 표현하는 경우에는 체크표시하지 "
 "마세요. 이는 실제 어휘라고 보기 어렵습니다."
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:158
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:176
+#: cdi_forms/templates/cdi_forms/cdi_form.html:158
+#: cdi_forms/templates/cdi_forms/cdi_form.html:176
 msgid "DON'T check \"understands and says.\""
 msgstr "\"이해하고 표현한다\"에 표시하지 마십시오."
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:285
+#: cdi_forms/templates/cdi_forms/cdi_form.html:285
 msgid ""
 "You are almost done! Click \"Yes\" if you agree with ALL of the following "
 "points. Your answer will not affect your results. There is nothing wrong "
@@ -1944,20 +1943,20 @@ msgstr ""
 "오. 귀하의 응답은 설문 결과에 영향을 주지 않을 것입니다. \"아니오\"를 선택하"
 "시더라도 아무런 문제가 되지 않습니다."
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:289
+#: cdi_forms/templates/cdi_forms/cdi_form.html:289
 #, python-format
 msgid "You have a child who is %(age)s months old."
 msgstr "아동은 %(age)s 개월입니다."
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:290
+#: cdi_forms/templates/cdi_forms/cdi_form.html:290
 msgid "You filled out the entire questionnaire to the best of your ability."
 msgstr "귀하는 최선을 다하여 전체 설문에 응답하였습니다."
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:291
+#: cdi_forms/templates/cdi_forms/cdi_form.html:291
 msgid "You are taking this questionnaire for the FIRST time."
 msgstr "귀하는 본 설문에 처음으로 참여하였습니다."
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:300
+#: cdi_forms/templates/cdi_forms/cdi_form.html:300
 #, python-format
 msgid ""
 "Yes, I have a child who is %(age)s months old, I filled out the entire "
@@ -1966,7 +1965,7 @@ msgstr ""
 "네, 우리 아이는 %(age)s 개월이고, 나는 전체 설문에 응답하였으며, 본 설문에 처"
 "음으로 참여하였습니다."
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:306
+#: cdi_forms/templates/cdi_forms/cdi_form.html:306
 #, python-format
 msgid ""
 "No, I do NOT have a child who is %(age)s months old, I have NOT filled out "
@@ -1975,66 +1974,66 @@ msgstr ""
 "아니오, 우리 아이는 %(age)s 개월이 아니고, 나는 전체 설문에 응답하지 않았으"
 "며, 본 설문에 참여했던 적이 있습니다."
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:312
+#: cdi_forms/templates/cdi_forms/cdi_form.html:312
 msgid ""
 "Finally, please check the Captcha box below to display the submit button!"
 msgstr ""
 "마지막으로, 제출 버튼을 누르기 위해 아래의 Captcha 박스를 체크 해주십시오."
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:321
+#: cdi_forms/templates/cdi_forms/cdi_form.html:321
 msgid "Previous Page"
 msgstr "이전 페이지"
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:322
+#: cdi_forms/templates/cdi_forms/cdi_form.html:322
 msgid "Next Page"
 msgstr "다음 페이지"
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:334
+#: cdi_forms/templates/cdi_forms/cdi_form.html:334
 msgid "Don't forget to save your progress whenever you can!"
 msgstr "가능한 한 설문 내용을 저장하면서 진행해 주십시오."
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:381
+#: cdi_forms/templates/cdi_forms/cdi_form.html:381
 msgid ""
 "Are you ready to submit? You cannot change your answers after submission."
 msgstr "제출하시겠습니까? 제출한 뒤에는 응답하신 내용을 변경할 수 없습니다."
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:411
+#: cdi_forms/templates/cdi_forms/cdi_form.html:411
 msgid "understands and says"
 msgstr "이해하고 표현한다"
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_items.html:18
+#: cdi_forms/templates/cdi_forms/cdi_items.html:18
 msgid "Hide/Show Instructions: "
 msgstr "안내 사항 보기/숨기기: "
 
-#: webcdi/cdi_forms/templates/cdi_forms/contact.html:6
+#: cdi_forms/templates/cdi_forms/contact.html:6
 msgid "Contact Form "
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/contact.html:33
+#: cdi_forms/templates/cdi_forms/contact.html:33
 msgid ""
 "Fill out the form below and a member of our team will get back to you soon!"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/contact.html:67
+#: cdi_forms/templates/cdi_forms/contact.html:67
 msgid " characters remaining"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/expired.html:9
+#: cdi_forms/templates/cdi_forms/expired.html:9
 msgid "Link Expired"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/expired.html:36
+#: cdi_forms/templates/cdi_forms/expired.html:36
 msgid ""
 "Unfortunately the time allowed to complete this survey has expired.  Please "
 "contact your researcher."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/overflow.html:40
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:165
+#: cdi_forms/templates/cdi_forms/overflow.html:40
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:165
 msgid "Thank you!"
 msgstr "감사합니다!"
 
-#: webcdi/cdi_forms/templates/cdi_forms/overflow.html:44
+#: cdi_forms/templates/cdi_forms/overflow.html:44
 msgid ""
 "Thank you for your interest in completing the MacArthur-Bates Communicative "
 "Development Inventory (CDI)! It looks like you have completed the CDI form "
@@ -2051,7 +2050,7 @@ msgstr ""
 "\"http://mb-cdi.stanford.edu/\" target=\"_blank\">이곳</a>에서 CDI에 관한 더 "
 "많은 정보를 얻으실 수 있습니다. 귀하의 관심에 다시 한 번 감사드립니다!"
 
-#: webcdi/cdi_forms/templates/cdi_forms/overflow.html:49
+#: cdi_forms/templates/cdi_forms/overflow.html:49
 #, python-format
 msgid ""
 "Thank you for your interest in completing the MacArthur-Bates Communicative "
@@ -2077,21 +2076,21 @@ msgstr ""
 "\"http://mb-cdi.stanford.edu/\" target=\"_blank\">이곳</a>에서 CDI에 관한 더 "
 "많은 정보를 얻으실 수 있습니다. 귀하의 관심에 다시 한 번 감사드립니다!"
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:40
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:40
 msgid "Interesting tidbits learned from how your child speaks!"
 msgstr "아동이 말하는 방식이 알려주는 흥미로운 이야기!"
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:74
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:74
 #, python-format
 msgid "Words Produced (%%)"
 msgstr "표현한 어휘 (%%)"
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:114
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:114
 #, python-format
 msgid "Words Understood (%%)"
 msgstr "이해한 어휘 (%%)"
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:168
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:168
 msgid ""
 "Thank you for taking the time to complete the MacArthur-Bates Communicative "
 "Development Inventory (CDI). With the help of parents and caregivers like "
@@ -2117,7 +2116,7 @@ msgstr ""
 "stanford.edu/\" target=\"_blank\">이곳</a>에서 CDI에 관한 더 많은 정보를 얻으"
 "실 수 있습니다. 본 연구에 관심을 가져주셔서 다시 한 번 감사드립니다!"
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:175
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:175
 #, python-format
 msgid ""
 "We're sorry but it looks like we have run out of Amazon.com Gift Cards! "
@@ -2128,7 +2127,7 @@ msgstr ""
 "\"%(contact_url)s\" target=\"_blank\">저희에게 연락</a>해 주시면 이 문제를 빠"
 "르게 해결하겠습니다."
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:180
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:180
 msgid ""
 "Thank you for participating in our Web-CDI project! It is our pleasure to "
 "send you this Amazon.com Gift Card that can be redeemed towards millions of "
@@ -2142,15 +2141,15 @@ msgstr ""
 "있도록 본 화면을 인쇄하시면 좋을 것입니다. 상품권 사용 시 아래의 상품권 청구 "
 "코드가 필요합니다."
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:184
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:184
 msgid "Gift Card Amount"
 msgstr "상품권 금액"
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:185
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:185
 msgid "Claim Code"
 msgstr "청구 코드"
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:189
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:189
 #, python-format
 msgid ""
 "To redeem your gift card, visit <a href=\"%(redeem_url)s\" target=\"_blank"
@@ -2162,67 +2161,67 @@ msgstr ""
 "다. <a href=\"%(legal_url)s\" target=\"_blank\">www.amazon.com/gc-legal</a>"
 "을 참고해 주십시오."
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:213
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:213
 msgid "Graph My Data!"
 msgstr "데이터를 그래프로 보기!"
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:219
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:219
 msgid "Show Me My Answers"
 msgstr "내 응답 보기"
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:223
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:223
 #, fuzzy
 #| msgid "Show Me My Answers"
 msgid "Print My Answers"
 msgstr "내 응답 보기"
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:228
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:228
 msgid "Click to complete the study"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:238
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:238
 msgid "Share on Facebook"
 msgstr "페이스북에 공유"
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:257
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:261
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:266
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:257
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:261
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:266
 msgid "Save as PDF"
 msgstr "PDF로 저장하기"
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:369
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:369
 msgid "My child says PPP words and understands UUU words."
 msgstr "우리 아이는 PPP 어휘를 표현하고 UUU 어휘를 이해합니다."
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:371
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:371
 msgid "My child says PPP words."
 msgstr "우리 아이는 PPP 어휘를 표현합니다."
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:373
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:373
 msgid "My child understands UUU words."
 msgstr "우리 아이는 UUU 어휘를 이해합니다."
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:512
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:512
 msgid "My child produces the most words in the bestProdCat category."
 msgstr "우리 아이는 bestProdCat 목록에 있는 대부분의 어휘들을 표현합니다."
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:516
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:516
 msgid "My child understands the most words in the bestCompCat category."
 msgstr "우리 아이는 bestCompCat 목록에 있는 대부분의 어휘들을 이해합니다."
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:602
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:602
 msgid "The hardest word my child says is INSERTWORDHERE."
 msgstr "우리 아이가 말하기에 가장 어려워하는 어휘는 INSERTWORDHERE 입니다."
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:607
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:607
 msgid "The hardest word my child understands is INSERTWORDHERE."
 msgstr "우리 아이가 이해하기에 가장 어려워하는 어휘는 INSERTWORDHERE 입니다."
 
-#: webcdi/cdi_forms/templates/cdi_forms/study_group.html:46
+#: cdi_forms/templates/cdi_forms/study_group.html:46
 msgid "How old is your child?"
 msgstr "아동은 몇 살입니까?"
 
-#: webcdi/cdi_forms/templates/cdi_forms/study_group.html:57
+#: cdi_forms/templates/cdi_forms/study_group.html:57
 msgid ""
 "My baby speaks LANGUAGE and is between MIN_AGE and MAX_AGE months old. [XX "
 "slot(s) left]"
@@ -2230,241 +2229,236 @@ msgstr ""
 "우리 아이는 LAUGNAGE 를 사용하고 MIN_AGE 이상 MAX_AGE 개월 이하입니다. [XX "
 "slot(s) left]"
 
-#: webcdi/cdi_forms/templates/cdi_forms/study_group.html:60
+#: cdi_forms/templates/cdi_forms/study_group.html:60
 msgid "Born between STARTDATE and ENDDATE"
 msgstr "STARTDATE 과 ENDDATE 사이에 태어났습니다"
 
-#: webcdi/cdi_forms/views.py:154 webcdi/cdi_forms/views.py:374
-#: webcdi/cdi_forms/views.py:608
+#: cdi_forms/views.py:154 cdi_forms/views.py:374 cdi_forms/views.py:608
 #, python-format
 msgid "Your child should be between %(min_age)d to %(max_age)d months of age."
 msgstr "아동의 연령은 %(min_age)d 개월에서 %(max_age)d 개월 사이여야 합니다."
 
-#: webcdi/cdi_forms/views.py:168 webcdi/cdi_forms/views.py:388
-#: webcdi/cdi_forms/views.py:621
+#: cdi_forms/views.py:168 cdi_forms/views.py:388 cdi_forms/views.py:621
 #, python-format
 msgid " Not the right age? <a href='%(sgurl)s'> Click here</a>"
 msgstr ""
 "해당하는 연령이 아닌가요? <a href='%(sgurl)s'>이곳을 클릭해 주십시오</a>"
 
-#: webcdi/cdi_forms/views.py:172 webcdi/cdi_forms/views.py:392
-#: webcdi/cdi_forms/views.py:625
+#: cdi_forms/views.py:172 cdi_forms/views.py:392 cdi_forms/views.py:625
 msgid ""
 " Not the right age? You should contact your researcher for steps on what to "
 "do next."
 msgstr ""
 "해당하는 연령이 아닌가요? 다음 단계를 위하여 연구원에게 연락해 주십시오."
 
-#: webcdi/researcher_UI/admin_actions.py:13
-#: webcdi/researcher_UI/admin_actions.py:27
+#: researcher_UI/admin_actions.py:13 researcher_UI/admin_actions.py:27
 msgid "Instruments for all Studies must be the same"
 msgstr "모든 연구 도구는 동일합니다"
 
-#: webcdi/researcher_UI/admin_actions.py:16
-#: webcdi/researcher_UI/admin_actions.py:30
+#: researcher_UI/admin_actions.py:16 researcher_UI/admin_actions.py:30
 #, python-format
 msgid "Studies must have at least 1 responsent. %s has none"
 msgstr "연구에는 최소 1명의 응답자가 있어야 합니다. %s 아무도 없습니다."
 
-#: webcdi/researcher_UI/forms.py:18
+#: researcher_UI/forms.py:18
 msgid "Default"
 msgstr ""
 
-#: webcdi/researcher_UI/templates/admin/admin_base.html:41
+#: researcher_UI/templates/admin/admin_base.html:41
 msgid "Welcome,"
 msgstr "어서 오세요,"
 
-#: webcdi/researcher_UI/templates/admin/admin_base.html:46
+#: researcher_UI/templates/admin/admin_base.html:46
 msgid "View site"
 msgstr "웹사이트 보기"
 
-#: webcdi/researcher_UI/templates/admin/admin_base.html:51
-#: webcdi/researcher_UI/templates/registration/password_change_done.html:3
-#: webcdi/researcher_UI/templates/registration/password_change_form.html:6
+#: researcher_UI/templates/admin/admin_base.html:51
+#: researcher_UI/templates/registration/password_change_done.html:3
+#: researcher_UI/templates/registration/password_change_form.html:6
 msgid "Documentation"
 msgstr "서류함"
 
-#: webcdi/researcher_UI/templates/admin/admin_base.html:55
-#: webcdi/researcher_UI/templates/registration/password_change_done.html:3
-#: webcdi/researcher_UI/templates/registration/password_change_form.html:6
+#: researcher_UI/templates/admin/admin_base.html:55
+#: researcher_UI/templates/registration/password_change_done.html:3
+#: researcher_UI/templates/registration/password_change_form.html:6
 msgid "Change password"
 msgstr "비밀번호 변경"
 
-#: webcdi/researcher_UI/templates/admin/admin_base.html:57
-#: webcdi/researcher_UI/templates/registration/password_change_done.html:3
-#: webcdi/researcher_UI/templates/registration/password_change_form.html:6
+#: researcher_UI/templates/admin/admin_base.html:57
+#: researcher_UI/templates/registration/password_change_done.html:3
+#: researcher_UI/templates/registration/password_change_form.html:6
 msgid "Log out"
 msgstr "로그아웃"
 
-#: webcdi/researcher_UI/templates/admin/admin_base.html:67
-#: webcdi/researcher_UI/templates/registration/password_change_done.html:6
-#: webcdi/researcher_UI/templates/registration/password_change_form.html:9
-#: webcdi/researcher_UI/templates/registration/password_reset_complete.html:6
-#: webcdi/researcher_UI/templates/registration/password_reset_confirm.html:8
-#: webcdi/researcher_UI/templates/registration/password_reset_done.html:6
-#: webcdi/researcher_UI/templates/registration/password_reset_form.html:8
+#: researcher_UI/templates/admin/admin_base.html:67
+#: researcher_UI/templates/registration/password_change_done.html:6
+#: researcher_UI/templates/registration/password_change_form.html:9
+#: researcher_UI/templates/registration/password_reset_complete.html:6
+#: researcher_UI/templates/registration/password_reset_confirm.html:8
+#: researcher_UI/templates/registration/password_reset_done.html:6
+#: researcher_UI/templates/registration/password_reset_form.html:8
 msgid "Home"
 msgstr "홈"
 
-#: webcdi/researcher_UI/templates/admin/admin_base_site.html:3
+#: researcher_UI/templates/admin/admin_base_site.html:3
 msgid "Django site admin"
 msgstr "Django 웹사이트 관리자"
 
-#: webcdi/researcher_UI/templates/registration/acceptance_email.txt:2
-#: webcdi/researcher_UI/templates/registration/activation_email.txt:2
-#: webcdi/researcher_UI/templates/registration/registration_email.txt:2
-#: webcdi/researcher_UI/templates/registration/rejection_email.txt:2
-#: webcdi/supplementtut/templates/supplementtut/acceptance_email.txt:2
-#: webcdi/supplementtut/templates/supplementtut/activation_email.txt:2
-#: webcdi/supplementtut/templates/supplementtut/registration_email.txt:2
-#: webcdi/supplementtut/templates/supplementtut/rejection_email.txt:2
+#: researcher_UI/templates/registration/acceptance_email.txt:2
+#: researcher_UI/templates/registration/activation_email.txt:2
+#: researcher_UI/templates/registration/registration_email.txt:2
+#: researcher_UI/templates/registration/rejection_email.txt:2
+#: supplementtut/templates/supplementtut/acceptance_email.txt:2
+#: supplementtut/templates/supplementtut/activation_email.txt:2
+#: supplementtut/templates/supplementtut/registration_email.txt:2
+#: supplementtut/templates/supplementtut/rejection_email.txt:2
 #, python-format
 msgid "Dear %(user)s,"
 msgstr "%(user)s 님"
 
-#: webcdi/researcher_UI/templates/registration/acceptance_email.txt:4
+#: researcher_UI/templates/registration/acceptance_email.txt:4
 #, python-format
 msgid "Your registration at %(site_name)s was accepted by the Web-CDI Team."
 msgstr "웹-CDI팀에 의해 %(site_name)s 에서의 등록에 성공하였습니다."
 
-#: webcdi/researcher_UI/templates/registration/acceptance_email.txt:6
-#: webcdi/supplementtut/templates/supplementtut/acceptance_email.txt:6
+#: researcher_UI/templates/registration/acceptance_email.txt:6
+#: supplementtut/templates/supplementtut/acceptance_email.txt:6
 msgid ""
 "Please click the following url and set your account password to finish "
 "activation."
 msgstr ""
 "활성화를 완료하기 위해 다음의 링크를 클릭하시고 비밀번호를 설정해 주십시오."
 
-#: webcdi/researcher_UI/templates/registration/acceptance_email.txt:10
-#: webcdi/supplementtut/templates/supplementtut/acceptance_email.txt:10
+#: researcher_UI/templates/registration/acceptance_email.txt:10
+#: supplementtut/templates/supplementtut/acceptance_email.txt:10
 #, python-format
 msgid "The activation link above will be expired in %(expiration_days)s days."
 msgstr "위의 활성화 링크는 %(expiration_days)s 일 내 만료될 것입니다."
 
-#: webcdi/researcher_UI/templates/registration/acceptance_email_subject.txt:2
-#: webcdi/supplementtut/templates/supplementtut/acceptance_email_subject.txt:2
+#: researcher_UI/templates/registration/acceptance_email_subject.txt:2
+#: supplementtut/templates/supplementtut/acceptance_email_subject.txt:2
 #, python-format
 msgid "Your registration was accepted -- %(site_name)s"
 msgstr "등록이 완료되었습니다 -- %(site_name)s"
 
-#: webcdi/researcher_UI/templates/registration/activation_complete.html:4
-#: webcdi/researcher_UI/templates/registration/activation_complete.html:6
-#: webcdi/supplementtut/templates/supplementtut/activation_complete.html:4
-#: webcdi/supplementtut/templates/supplementtut/activation_complete.html:6
+#: researcher_UI/templates/registration/activation_complete.html:4
+#: researcher_UI/templates/registration/activation_complete.html:6
+#: supplementtut/templates/supplementtut/activation_complete.html:4
+#: supplementtut/templates/supplementtut/activation_complete.html:6
 msgid "Activation was complete"
 msgstr "활성화가 완료되었습니다"
 
-#: webcdi/researcher_UI/templates/registration/activation_complete.html:11
-#: webcdi/supplementtut/templates/supplementtut/activation_complete.html:11
+#: researcher_UI/templates/registration/activation_complete.html:11
+#: supplementtut/templates/supplementtut/activation_complete.html:11
 msgid "Your account has been activated!"
 msgstr "귀하의 계정이 활성화되었습니다!"
 
-#: webcdi/researcher_UI/templates/registration/activation_email.txt:4
+#: researcher_UI/templates/registration/activation_email.txt:4
 #, python-format
 msgid "Your account at %(site_name)s was activated by the Web-CDI Team"
 msgstr "웹-CDI팀에 의해 %(site_name)s 계정이 활성화되었습니다"
 
-#: webcdi/researcher_UI/templates/registration/activation_email.txt:6
-#: webcdi/supplementtut/templates/supplementtut/activation_email.txt:6
+#: researcher_UI/templates/registration/activation_email.txt:6
+#: supplementtut/templates/supplementtut/activation_email.txt:6
 msgid ""
 "The password of your account was generated automatically and displayed below."
 msgstr "귀하의 비밀번호는 자동으로 생성되었으며 아래에 제시되어 있습니다."
 
-#: webcdi/researcher_UI/templates/registration/activation_email.txt:7
-#: webcdi/researcher_UI/templates/registration/activation_email.txt:18
-#: webcdi/supplementtut/templates/supplementtut/activation_email.txt:7
-#: webcdi/supplementtut/templates/supplementtut/activation_email.txt:18
+#: researcher_UI/templates/registration/activation_email.txt:7
+#: researcher_UI/templates/registration/activation_email.txt:18
+#: supplementtut/templates/supplementtut/activation_email.txt:7
+#: supplementtut/templates/supplementtut/activation_email.txt:18
 msgid "Please click the following url to login."
 msgstr "로그인하기 위해 다음의 링크를 클릭해 주십시오."
 
-#: webcdi/researcher_UI/templates/registration/activation_email.txt:8
-#: webcdi/supplementtut/templates/supplementtut/activation_email.txt:8
+#: researcher_UI/templates/registration/activation_email.txt:8
+#: supplementtut/templates/supplementtut/activation_email.txt:8
 msgid ""
 "It is strongly recommended that you change your initial password to "
 "something more secure."
 msgstr "귀하의 기존 비밀번호를 보다 안전한 비밀번호로 변경하시길 권합니다."
 
-#: webcdi/researcher_UI/templates/registration/activation_email.txt:10
-#: webcdi/researcher_UI/templates/registration/activation_email.txt:20
-#: webcdi/supplementtut/templates/supplementtut/activation_email.txt:10
-#: webcdi/supplementtut/templates/supplementtut/activation_email.txt:20
+#: researcher_UI/templates/registration/activation_email.txt:10
+#: researcher_UI/templates/registration/activation_email.txt:20
+#: supplementtut/templates/supplementtut/activation_email.txt:10
+#: supplementtut/templates/supplementtut/activation_email.txt:20
 msgid "::Your account information::"
 msgstr "::귀하의 계정 정보::"
 
-#: webcdi/researcher_UI/templates/registration/activation_email.txt:11
-#: webcdi/researcher_UI/templates/registration/activation_email.txt:21
-#: webcdi/supplementtut/templates/supplementtut/activation_email.txt:11
-#: webcdi/supplementtut/templates/supplementtut/activation_email.txt:21
+#: researcher_UI/templates/registration/activation_email.txt:11
+#: researcher_UI/templates/registration/activation_email.txt:21
+#: supplementtut/templates/supplementtut/activation_email.txt:11
+#: supplementtut/templates/supplementtut/activation_email.txt:21
 #, python-format
 msgid "USERNAME: %(user)s"
 msgstr "사용자 이름: %(user)s"
 
-#: webcdi/researcher_UI/templates/registration/activation_email.txt:12
-#: webcdi/supplementtut/templates/supplementtut/activation_email.txt:12
+#: researcher_UI/templates/registration/activation_email.txt:12
+#: supplementtut/templates/supplementtut/activation_email.txt:12
 #, python-format
 msgid "PASSWORD: %(password)s"
 msgstr "비밀번호: %(password)s"
 
-#: webcdi/researcher_UI/templates/registration/activation_email.txt:16
+#: researcher_UI/templates/registration/activation_email.txt:16
 #, python-format
 msgid ""
 "Your account at %(site_name)s was successfully activated by the Web-CDI Team"
 msgstr ""
 "웹-CDI팀에 의해 귀하의 계정 %(site_name)s 이 성공적으로 활성화되었습니다"
 
-#: webcdi/researcher_UI/templates/registration/activation_email_subject.txt:2
-#: webcdi/supplementtut/templates/supplementtut/activation_email_subject.txt:2
+#: researcher_UI/templates/registration/activation_email_subject.txt:2
+#: supplementtut/templates/supplementtut/activation_email_subject.txt:2
 #, python-format
 msgid "Your account was activated -- %(site_name)s"
 msgstr "귀하의 계정이 활성화되었습니다 -- %(site_name)s"
 
-#: webcdi/researcher_UI/templates/registration/activation_form.html:4
-#: webcdi/researcher_UI/templates/registration/activation_form.html:6
-#: webcdi/supplementtut/templates/supplementtut/activation_form.html:4
-#: webcdi/supplementtut/templates/supplementtut/activation_form.html:6
+#: researcher_UI/templates/registration/activation_form.html:4
+#: researcher_UI/templates/registration/activation_form.html:6
+#: supplementtut/templates/supplementtut/activation_form.html:4
+#: supplementtut/templates/supplementtut/activation_form.html:6
 msgid "Activate your account"
 msgstr "계정을 활성화하십시오"
 
-#: webcdi/researcher_UI/templates/registration/activation_form.html:12
-#: webcdi/supplementtut/templates/supplementtut/activation_form.html:12
+#: researcher_UI/templates/registration/activation_form.html:12
+#: supplementtut/templates/supplementtut/activation_form.html:12
 msgid "Please fill the password to complete account activation"
 msgstr "계정을 활성화하기 위하여 비밀번호를 입력해 주십시오"
 
-#: webcdi/researcher_UI/templates/registration/activation_form.html:25
-#: webcdi/supplementtut/templates/supplementtut/activation_form.html:16
+#: researcher_UI/templates/registration/activation_form.html:25
+#: supplementtut/templates/supplementtut/activation_form.html:16
 msgid "Activate"
 msgstr "활성화"
 
-#: webcdi/researcher_UI/templates/registration/lockout.html:5
-#: webcdi/researcher_UI/templates/registration/lockout.html:7
-#: webcdi/researcher_UI/templates/registration/login.html:5
-#: webcdi/researcher_UI/templates/registration/login.html:7
+#: researcher_UI/templates/registration/lockout.html:5
+#: researcher_UI/templates/registration/lockout.html:7
+#: researcher_UI/templates/registration/login.html:5
+#: researcher_UI/templates/registration/login.html:7
 msgid "Login"
 msgstr "로그인"
 
-#: webcdi/researcher_UI/templates/registration/login.html:14
+#: researcher_UI/templates/registration/login.html:14
 msgid "Please fill your username and password to login"
 msgstr "로그인하기 위해 사용자 이름과 비밀번호를 입력해 주십시오"
 
-#: webcdi/researcher_UI/templates/registration/login.html:18
-#: webcdi/researcher_UI/templates/registration/login.html:68
-#: webcdi/researcher_UI/templates/registration/password_reset_complete.html:18
-#: webcdi/researcher_UI/templates/researcher_UI/login.html:83
+#: researcher_UI/templates/registration/login.html:18
+#: researcher_UI/templates/registration/login.html:68
+#: researcher_UI/templates/registration/password_reset_complete.html:18
+#: researcher_UI/templates/researcher_UI/login.html:83
 msgid "Log in"
 msgstr "로그인"
 
-#: webcdi/researcher_UI/templates/registration/login.html:26
-#: webcdi/researcher_UI/templates/researcher_UI/login.html:26
+#: researcher_UI/templates/registration/login.html:26
+#: researcher_UI/templates/researcher_UI/login.html:26
 msgid "Please correct the error below."
 msgstr "아래의 오류 사항을 수정해 주십시오."
 
-#: webcdi/researcher_UI/templates/registration/login.html:26
-#: webcdi/researcher_UI/templates/researcher_UI/login.html:26
+#: researcher_UI/templates/registration/login.html:26
+#: researcher_UI/templates/researcher_UI/login.html:26
 msgid "Please correct the errors below."
 msgstr "아래의 오류 사항들을 수정해 주십시오."
 
-#: webcdi/researcher_UI/templates/registration/login.html:42
-#: webcdi/researcher_UI/templates/researcher_UI/login.html:42
+#: researcher_UI/templates/registration/login.html:42
+#: researcher_UI/templates/researcher_UI/login.html:42
 #, python-format
 msgid ""
 "You are authenticated as %(username)s, but are not authorized to access this "
@@ -2473,25 +2467,25 @@ msgstr ""
 "귀하는 %(username)s 로 인증되었지만, 본 페이지에 접속할 수 있는 권한이 없습니"
 "다. 다른 계정으로 로그인하시겠습니까?"
 
-#: webcdi/researcher_UI/templates/registration/logout.html:4
-#: webcdi/researcher_UI/templates/registration/logout.html:6
+#: researcher_UI/templates/registration/logout.html:4
+#: researcher_UI/templates/registration/logout.html:6
 msgid "Logged out"
 msgstr "로그아웃됨"
 
-#: webcdi/researcher_UI/templates/registration/logout.html:10
+#: researcher_UI/templates/registration/logout.html:10
 msgid "You are logged out."
 msgstr "로그아웃되었습니다."
 
-#: webcdi/researcher_UI/templates/registration/password_change_done.html:7
-#: webcdi/researcher_UI/templates/registration/password_change_form.html:10
+#: researcher_UI/templates/registration/password_change_done.html:7
+#: researcher_UI/templates/registration/password_change_form.html:10
 msgid "Password change"
 msgstr "비밀번호 변경"
 
-#: webcdi/researcher_UI/templates/registration/password_change_done.html:15
+#: researcher_UI/templates/registration/password_change_done.html:15
 msgid "Your password was changed."
 msgstr "비밀번호가 변경되었습니다."
 
-#: webcdi/researcher_UI/templates/registration/password_change_form.html:22
+#: researcher_UI/templates/registration/password_change_form.html:22
 msgid ""
 "Please enter your old password, for security's sake, and then enter your new "
 "password twice so we can verify you typed it in correctly."
@@ -2499,26 +2493,26 @@ msgstr ""
 "비밀번호가 올바르게 입력되었는지 확인할 수 있도록 보안을 위하여 기존 비밀번호"
 "를 입력하신 후 새로운 비밀번호를 두 번 입력해 주십시오."
 
-#: webcdi/researcher_UI/templates/registration/password_change_form.html:35
-#: webcdi/researcher_UI/templates/registration/password_reset_confirm.html:42
+#: researcher_UI/templates/registration/password_change_form.html:35
+#: researcher_UI/templates/registration/password_reset_confirm.html:42
 msgid "Change my password"
 msgstr "비밀번호 변경하기"
 
-#: webcdi/researcher_UI/templates/registration/password_reset_complete.html:7
-#: webcdi/researcher_UI/templates/registration/password_reset_done.html:7
-#: webcdi/researcher_UI/templates/registration/password_reset_form.html:9
+#: researcher_UI/templates/registration/password_reset_complete.html:7
+#: researcher_UI/templates/registration/password_reset_done.html:7
+#: researcher_UI/templates/registration/password_reset_form.html:9
 msgid "Password reset"
 msgstr "비밀번호 재설정"
 
-#: webcdi/researcher_UI/templates/registration/password_reset_complete.html:16
+#: researcher_UI/templates/registration/password_reset_complete.html:16
 msgid "Your password has been set.  You may go ahead and log in now."
 msgstr "비밀번호가 설정되었습니다. 지금부터 로그인하시면 됩니다."
 
-#: webcdi/researcher_UI/templates/registration/password_reset_confirm.html:9
+#: researcher_UI/templates/registration/password_reset_confirm.html:9
 msgid "Password reset confirmation"
 msgstr "비밀번호 재설정 확인"
 
-#: webcdi/researcher_UI/templates/registration/password_reset_confirm.html:22
+#: researcher_UI/templates/registration/password_reset_confirm.html:22
 msgid ""
 "Please enter your new password twice so we can verify you typed it in "
 "correctly."
@@ -2526,7 +2520,7 @@ msgstr ""
 "비밀번호가 올바르게 입력되었는지 확인하기 위해 새로운 비밀번호를 두 번 입력"
 "해 주십시오."
 
-#: webcdi/researcher_UI/templates/registration/password_reset_confirm.html:50
+#: researcher_UI/templates/registration/password_reset_confirm.html:50
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
 "used.  Please request a new password reset."
@@ -2534,7 +2528,7 @@ msgstr ""
 "비밀번호 재설정 링크가 이전에 사용되어 본 링크는 유효하지 않습니다. 비밀번호 "
 "재설정 링크를 다시 요청하십시오."
 
-#: webcdi/researcher_UI/templates/registration/password_reset_done.html:15
+#: researcher_UI/templates/registration/password_reset_done.html:15
 msgid ""
 "We emailed you instructions for setting your password. If an account exists "
 "with the email you entered, you should receive them shortly."
@@ -2542,7 +2536,7 @@ msgstr ""
 "귀하의 비밀번호를 설정하기 위한 안내 사항을 이메일로 보내 드렸습니다. 만약 귀"
 "하께서 입력하신 이메일로 등록된 계정이 있다면, 곧 이메일을 받으실 것입니다."
 
-#: webcdi/researcher_UI/templates/registration/password_reset_done.html:17
+#: researcher_UI/templates/registration/password_reset_done.html:17
 msgid ""
 "If you do not receive an email, please make sure you entered the address you "
 "registered with and check your spam folder."
@@ -2550,7 +2544,7 @@ msgstr ""
 "만약 이메일을 수신하지 않았다면, 등록했던 이메일 주소를 입력하였는지 확인하시"
 "고 스팸 메일함을 확인해 주십시오."
 
-#: webcdi/researcher_UI/templates/registration/password_reset_email.html:2
+#: researcher_UI/templates/registration/password_reset_email.html:2
 #, python-format
 msgid ""
 "You received this email because you requested a password reset for your user "
@@ -2559,24 +2553,24 @@ msgstr ""
 "%(site_name)s 에서 귀하의 비밀번호를 재설정하기 위해 요청하였기 때문에 본 이"
 "메일을 받으셨습니다."
 
-#: webcdi/researcher_UI/templates/registration/password_reset_email.html:4
+#: researcher_UI/templates/registration/password_reset_email.html:4
 msgid "Please go to the following page and choose a new password:"
 msgstr "다음 페이지로 가서 새로운 비밀번호를 입력하십시오:"
 
-#: webcdi/researcher_UI/templates/registration/password_reset_email.html:8
+#: researcher_UI/templates/registration/password_reset_email.html:8
 msgid "Your username, in case you have forgotten:"
 msgstr "사용자 이름을 잊은 경우:"
 
-#: webcdi/researcher_UI/templates/registration/password_reset_email.html:10
+#: researcher_UI/templates/registration/password_reset_email.html:10
 msgid "Thank you for using Web-CDI!"
 msgstr "웹-CDI를 사용해 주셔서 감사합니다!"
 
-#: webcdi/researcher_UI/templates/registration/password_reset_email.html:12
+#: researcher_UI/templates/registration/password_reset_email.html:12
 #, python-format
 msgid "The %(site_name)s team"
 msgstr "%(site_name)s 팀"
 
-#: webcdi/researcher_UI/templates/registration/password_reset_form.html:20
+#: researcher_UI/templates/registration/password_reset_form.html:20
 msgid ""
 "Forgotten your password? Enter your email address below and we will email "
 "instructions for setting a new one."
@@ -2584,160 +2578,160 @@ msgstr ""
 "비밀번호를 잊으셨나요? 아래 칸에 이메일 주소를 입력하면, 새로운 계정 등록을 "
 "위한 안내 사항을 이메일로 보내 드리겠습니다."
 
-#: webcdi/researcher_UI/templates/registration/password_reset_form.html:31
+#: researcher_UI/templates/registration/password_reset_form.html:31
 msgid "Reset my password"
 msgstr "비밀번호 재설정"
 
-#: webcdi/researcher_UI/templates/registration/registration_closed.html:4
-#: webcdi/researcher_UI/templates/registration/registration_closed.html:6
-#: webcdi/supplementtut/templates/supplementtut/registration_closed.html:4
-#: webcdi/supplementtut/templates/supplementtut/registration_closed.html:6
+#: researcher_UI/templates/registration/registration_closed.html:4
+#: researcher_UI/templates/registration/registration_closed.html:6
+#: supplementtut/templates/supplementtut/registration_closed.html:4
+#: supplementtut/templates/supplementtut/registration_closed.html:6
 msgid "Registration is closed"
 msgstr "등록할 수 없습니다"
 
-#: webcdi/researcher_UI/templates/registration/registration_closed.html:10
-#: webcdi/supplementtut/templates/supplementtut/registration_closed.html:10
+#: researcher_UI/templates/registration/registration_closed.html:10
+#: supplementtut/templates/supplementtut/registration_closed.html:10
 msgid "The registration is currently closed."
 msgstr "일시적으로 등록할 수 없습니다."
 
-#: webcdi/researcher_UI/templates/registration/registration_complete.html:4
-#: webcdi/researcher_UI/templates/registration/registration_complete.html:6
-#: webcdi/supplementtut/templates/supplementtut/registration_complete.html:4
-#: webcdi/supplementtut/templates/supplementtut/registration_complete.html:6
+#: researcher_UI/templates/registration/registration_complete.html:4
+#: researcher_UI/templates/registration/registration_complete.html:6
+#: supplementtut/templates/supplementtut/registration_complete.html:4
+#: supplementtut/templates/supplementtut/registration_complete.html:6
 msgid "Registration is complete!"
 msgstr "등록 완료!"
 
-#: webcdi/researcher_UI/templates/registration/registration_complete.html:12
-#: webcdi/supplementtut/templates/supplementtut/registration_complete.html:11
+#: researcher_UI/templates/registration/registration_complete.html:12
+#: supplementtut/templates/supplementtut/registration_complete.html:11
 msgid "You have successfully filled out our registration form."
 msgstr "등록 신청서 작성을 성공적으로 완료하였습니다."
 
-#: webcdi/researcher_UI/templates/registration/registration_complete.html:13
-#: webcdi/supplementtut/templates/supplementtut/registration_complete.html:12
+#: researcher_UI/templates/registration/registration_complete.html:13
+#: supplementtut/templates/supplementtut/registration_complete.html:12
 msgid "Please wait until the Web-CDI team can review your application."
 msgstr "웹-CDI 팀이 귀하의 신청서를 검토할 때까지 기다려 주십시오."
 
-#: webcdi/researcher_UI/templates/registration/registration_complete.html:14
-#: webcdi/researcher_UI/templates/registration/registration_email.txt:6
-#: webcdi/supplementtut/templates/supplementtut/registration_complete.html:13
-#: webcdi/supplementtut/templates/supplementtut/registration_email.txt:6
+#: researcher_UI/templates/registration/registration_complete.html:14
+#: researcher_UI/templates/registration/registration_email.txt:6
+#: supplementtut/templates/supplementtut/registration_complete.html:13
+#: supplementtut/templates/supplementtut/registration_email.txt:6
 msgid "You will receive an acceptance or rejection email within several days."
 msgstr "며칠 안으로 등록 또는 거절 이메일을 받을 것입니다."
 
-#: webcdi/researcher_UI/templates/registration/registration_email.txt:3
+#: researcher_UI/templates/registration/registration_email.txt:3
 msgid "Your account application was completed successfully."
 msgstr "귀하의 계정 신청이 성공적으로 완료되었습니다."
 
-#: webcdi/researcher_UI/templates/registration/registration_email.txt:5
+#: researcher_UI/templates/registration/registration_email.txt:5
 msgid "A member of the Web-CDI team will review your registration shortly."
 msgstr "곧 웹-CDI 팀원이 귀하의 등록을 검토할 것입니다."
 
-#: webcdi/researcher_UI/templates/registration/registration_email_subject.txt:2
-#: webcdi/supplementtut/templates/supplementtut/registration_email_subject.txt:2
+#: researcher_UI/templates/registration/registration_email_subject.txt:2
+#: supplementtut/templates/supplementtut/registration_email_subject.txt:2
 #, python-format
 msgid "Your registration was created -- %(site_name)s"
 msgstr "등록 계정이 생성되었습니다 -- %(site_name)s"
 
-#: webcdi/researcher_UI/templates/registration/registration_form.html:4
-#: webcdi/researcher_UI/templates/registration/registration_form.html:6
-#: webcdi/supplementtut/templates/supplementtut/registration_form.html:4
-#: webcdi/supplementtut/templates/supplementtut/registration_form.html:6
+#: researcher_UI/templates/registration/registration_form.html:4
+#: researcher_UI/templates/registration/registration_form.html:6
+#: supplementtut/templates/supplementtut/registration_form.html:4
+#: supplementtut/templates/supplementtut/registration_form.html:6
 msgid "Registration"
 msgstr "등록"
 
-#: webcdi/researcher_UI/templates/registration/registration_form.html:13
-#: webcdi/supplementtut/templates/supplementtut/registration_form.html:13
+#: researcher_UI/templates/registration/registration_form.html:13
+#: supplementtut/templates/supplementtut/registration_form.html:13
 msgid "Please fill the following fields to create your registration"
 msgstr "계정을 등록하기 위해 다음 칸을 작성해 주십시오."
 
-#: webcdi/researcher_UI/templates/registration/registration_form.html:34
-#: webcdi/supplementtut/templates/supplementtut/registration_form.html:18
+#: researcher_UI/templates/registration/registration_form.html:34
+#: supplementtut/templates/supplementtut/registration_form.html:18
 msgid "Register"
 msgstr "등록하기"
 
-#: webcdi/researcher_UI/templates/registration/rejection_email.txt:4
+#: researcher_UI/templates/registration/rejection_email.txt:4
 msgid "Your account registration was rejected by the Web-CDI Team."
 msgstr "웹-CDI팀에 의해 계정 등록이 거절되었습니다."
 
-#: webcdi/researcher_UI/templates/registration/rejection_email.txt:7
+#: researcher_UI/templates/registration/rejection_email.txt:7
 msgid "Your application was rejected due to:"
 msgstr "다음과 같은 사유로 신청을 실패하였습니다:"
 
-#: webcdi/researcher_UI/templates/registration/rejection_email.txt:8
-#: webcdi/supplementtut/templates/supplementtut/rejection_email.txt:7
+#: researcher_UI/templates/registration/rejection_email.txt:8
+#: supplementtut/templates/supplementtut/rejection_email.txt:7
 msgid "Rejection reasons:"
 msgstr "실패한 이유:"
 
-#: webcdi/researcher_UI/templates/registration/rejection_email_subject.txt:2
-#: webcdi/supplementtut/templates/supplementtut/rejection_email_subject.txt:2
+#: researcher_UI/templates/registration/rejection_email_subject.txt:2
+#: supplementtut/templates/supplementtut/rejection_email_subject.txt:2
 #, python-format
 msgid "Your registration was rejected -- %(site_name)s"
 msgstr "등록을 실패하였습니다 -- %(site_name)s"
 
-#: webcdi/researcher_UI/templates/researcher_UI/login.html:3
+#: researcher_UI/templates/researcher_UI/login.html:3
 msgid "WebCDI"
 msgstr "웹-CDI"
 
-#: webcdi/researcher_UI/templates/researcher_UI/login.html:13
+#: researcher_UI/templates/researcher_UI/login.html:13
 msgid "WebCDI Login"
 msgstr "웹-CDI 로그인"
 
-#: webcdi/researcher_UI/templates/researcher_UI/login.html:79
+#: researcher_UI/templates/researcher_UI/login.html:79
 msgid "Forgotten your password or username?"
 msgstr "비밀번호 또는 사용자 이름을 잊으셨습니까?"
 
-#: webcdi/supplementtut/templates/supplementtut/acceptance_email.txt:4
+#: supplementtut/templates/supplementtut/acceptance_email.txt:4
 #, python-format
 msgid "Your registration of %(site_name)s was accepted by inspector."
 msgstr "관리자가 귀하의 %(site_name)s 등록을 수락하였습니다."
 
-#: webcdi/supplementtut/templates/supplementtut/activation_email.txt:4
+#: supplementtut/templates/supplementtut/activation_email.txt:4
 #, python-format
 msgid "Your account of %(site_name)s was activated by inspector"
 msgstr "관리자가 귀하의 %(site_name)s 계정을 활성화 하였습니다."
 
-#: webcdi/supplementtut/templates/supplementtut/activation_email.txt:16
+#: supplementtut/templates/supplementtut/activation_email.txt:16
 #, python-format
 msgid "Your account of %(site_name)s was successfully activated"
 msgstr "귀하의 %(site_name)s 계정이 성공적으로 활성화되었습니다."
 
-#: webcdi/supplementtut/templates/supplementtut/registration_email.txt:3
+#: supplementtut/templates/supplementtut/registration_email.txt:3
 msgid "Your account registration was created successfully."
 msgstr "귀하의 계정이 성공적으로 등록되었습니다."
 
-#: webcdi/supplementtut/templates/supplementtut/registration_email.txt:5
+#: supplementtut/templates/supplementtut/registration_email.txt:5
 msgid "Please wait until the inspector verify your registration."
 msgstr "귀하의 등록을 확인할 때까지 기다려 주십시오."
 
-#: webcdi/supplementtut/templates/supplementtut/rejection_email.txt:4
+#: supplementtut/templates/supplementtut/rejection_email.txt:4
 msgid "I am afraid that your account registration was rejected by inspector."
 msgstr "귀하의 계정 등록이 거절되었습니다."
 
-#: webcdi/webcdi/settings.py:211
+#: webcdi/settings.py:312
 msgid "English"
 msgstr "영어"
 
-#: webcdi/webcdi/settings.py:212
+#: webcdi/settings.py:313
 msgid "Spanish"
 msgstr "스페인어"
 
-#: webcdi/webcdi/settings.py:214
+#: webcdi/settings.py:315
 msgid "French Quebec"
 msgstr "퀘벡 프랑스어"
 
-#: webcdi/webcdi/settings.py:215
+#: webcdi/settings.py:316
 msgid "Canadian English"
 msgstr "캐나다어"
 
-#: webcdi/webcdi/settings.py:216
+#: webcdi/settings.py:317
 msgid "Dutch"
 msgstr "독일어"
 
-#: webcdi/webcdi/settings.py:217
+#: webcdi/settings.py:318
 msgid "Hebrew"
 msgstr "히브리어"
 
-#: webcdi/webcdi/settings.py:218
+#: webcdi/settings.py:319
 msgid "Korean"
 msgstr "한국어"
 

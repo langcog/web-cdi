@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-06 06:20+0000\n"
+"POT-Creation-Date: 2022-06-29 17:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,435 +17,432 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: webcdi/cdi_forms/forms.py:29 webcdi/cdi_forms/forms.py:30
-#: webcdi/cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:133
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:152
+#: cdi_forms/forms.py:29 cdi_forms/forms.py:30
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:133
+#: cdi_forms/templates/cdi_forms/cdi_base.html:152
 msgid "No"
 msgstr "No"
 
-#: webcdi/cdi_forms/forms.py:29 webcdi/cdi_forms/forms.py:30
-#: webcdi/cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:136
+#: cdi_forms/forms.py:29 cdi_forms/forms.py:30
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:136
 msgid "Yes"
 msgstr "Yes"
 
-#: webcdi/cdi_forms/forms.py:30 webcdi/cdi_forms/forms.py:42
-#: webcdi/cdi_forms/forms.py:71 webcdi/cdi_forms/forms.py:93
-#: webcdi/cdi_forms/forms.py:102 webcdi/cdi_forms/forms.py:126
-#: webcdi/cdi_forms/models.py:87 webcdi/cdi_forms/models.py:111
-#: webcdi/cdi_forms/models.py:114 webcdi/cdi_forms/models.py:148
+#: cdi_forms/forms.py:30 cdi_forms/forms.py:42 cdi_forms/forms.py:71
+#: cdi_forms/forms.py:93 cdi_forms/forms.py:102 cdi_forms/forms.py:126
+#: cdi_forms/models.py:87 cdi_forms/models.py:111 cdi_forms/models.py:114
+#: cdi_forms/models.py:148
 msgid "Prefer not to disclose"
 msgstr "Prefer not to disclose"
 
-#: webcdi/cdi_forms/forms.py:33
+#: cdi_forms/forms.py:33
 #, fuzzy
 #| msgid "Under "
 msgid "Under $25,000"
 msgstr "Under "
 
-#: webcdi/cdi_forms/forms.py:34
+#: cdi_forms/forms.py:34
 msgid "$25,000-$50,000"
 msgstr ""
 
-#: webcdi/cdi_forms/forms.py:35
+#: cdi_forms/forms.py:35
 msgid "$50,000-$75,000"
 msgstr ""
 
-#: webcdi/cdi_forms/forms.py:36
+#: cdi_forms/forms.py:36
 msgid "$75,000-$100,000"
 msgstr ""
 
-#: webcdi/cdi_forms/forms.py:37
+#: cdi_forms/forms.py:37
 msgid "$100,000-$125,000"
 msgstr ""
 
-#: webcdi/cdi_forms/forms.py:38
+#: cdi_forms/forms.py:38
 msgid "$125,000-$150,000"
 msgstr ""
 
-#: webcdi/cdi_forms/forms.py:39
+#: cdi_forms/forms.py:39
 msgid "$150,000-$175,000"
 msgstr ""
 
-#: webcdi/cdi_forms/forms.py:40
+#: cdi_forms/forms.py:40
 msgid "$175,000-$200,000"
 msgstr ""
 
-#: webcdi/cdi_forms/forms.py:41
+#: cdi_forms/forms.py:41
 msgid "Over $200,000"
 msgstr ""
 
-#: webcdi/cdi_forms/forms.py:45
+#: cdi_forms/forms.py:45
 msgid "American Indian / Alaska Native"
 msgstr "American Indian / Alaska Native"
 
-#: webcdi/cdi_forms/forms.py:46
+#: cdi_forms/forms.py:46
 msgid "Asian (Far East, Southeast Asia, Indian Sub-continent)"
 msgstr "Asian (Far East, Southeast Asia, Indian Sub-continent)"
 
-#: webcdi/cdi_forms/forms.py:47
+#: cdi_forms/forms.py:47
 msgid "Native Hawaiian or Other Pacific Islander"
 msgstr "Native Hawaiian or Other Pacific Islander"
 
-#: webcdi/cdi_forms/forms.py:48
+#: cdi_forms/forms.py:48
 msgid "Black or African American"
 msgstr "Black or African American"
 
-#: webcdi/cdi_forms/forms.py:49
+#: cdi_forms/forms.py:49
 msgid "White"
 msgstr "White"
 
-#: webcdi/cdi_forms/forms.py:50 webcdi/cdi_forms/models.py:71
-#: webcdi/cdi_forms/models.py:120 webcdi/cdi_forms/models.py:186
+#: cdi_forms/forms.py:50 cdi_forms/models.py:71 cdi_forms/models.py:120
+#: cdi_forms/models.py:186
 msgid "Other"
 msgstr "Other"
 
-#: webcdi/cdi_forms/forms.py:55
+#: cdi_forms/forms.py:55
 msgid "Less than 3 lbs, 0 oz"
 msgstr "Less than 3 lbs, 0 oz (Less than 1360 grams)"
 
-#: webcdi/cdi_forms/forms.py:56
+#: cdi_forms/forms.py:56
 msgid "3 lbs, 0 oz - 3 lbs, 7 oz"
 msgstr "3 lbs, 0 oz - 3 lbs, 7 oz (1361 grams - 1587 grams)"
 
-#: webcdi/cdi_forms/forms.py:57
+#: cdi_forms/forms.py:57
 msgid "3 lbs, 8 oz - 3 lbs, 15 oz"
 msgstr "3 lbs, 8 oz - 3 lbs, 15 oz (1588 grams - 1814 grams)"
 
-#: webcdi/cdi_forms/forms.py:58
+#: cdi_forms/forms.py:58
 msgid "4 lbs, 0 oz - 4 lbs, 7 oz"
 msgstr "4 lbs, 0 oz - 4 lbs, 7 oz (1815 grams - 2041 grams)"
 
-#: webcdi/cdi_forms/forms.py:59
+#: cdi_forms/forms.py:59
 msgid "4 lbs, 8 oz - 4 lbs, 15 oz"
 msgstr "4 lbs, 8 oz - 4 lbs, 15 oz (2042 grams - 2267 grams)"
 
-#: webcdi/cdi_forms/forms.py:60
+#: cdi_forms/forms.py:60
 msgid "5 lbs, 0 oz - 5 lbs, 7 oz"
 msgstr "5 lbs, 0 oz - 5 lbs, 7 oz (2268 grams - 2494 grams)"
 
-#: webcdi/cdi_forms/forms.py:61
+#: cdi_forms/forms.py:61
 msgid "5 lbs, 8 oz - 5 lbs, 15 oz"
 msgstr "5 lbs, 8 oz - 5 lbs, 15 oz (2495 grams - 2721 grams)"
 
-#: webcdi/cdi_forms/forms.py:62
+#: cdi_forms/forms.py:62
 msgid "6 lbs, 0 oz - 6 lbs, 7 oz"
 msgstr "6 lbs, 0 oz - 6 lbs, 7 oz (2722 grams - 2948 grams)"
 
-#: webcdi/cdi_forms/forms.py:63
+#: cdi_forms/forms.py:63
 msgid "6 lbs, 8 oz - 6 lbs, 15 oz"
 msgstr "6 lbs, 8 oz - 6 lbs, 15 oz (2949 grams - 3175 grams)"
 
-#: webcdi/cdi_forms/forms.py:64
+#: cdi_forms/forms.py:64
 msgid "7 lbs, 0 oz - 7 lbs, 7 oz"
 msgstr "7 lbs, 0 oz - 7 lbs, 7 oz (3176 grams - 3401 grams)"
 
-#: webcdi/cdi_forms/forms.py:65
+#: cdi_forms/forms.py:65
 msgid "7 lbs, 8 oz - 7 lbs, 15 oz"
 msgstr "7 lbs, 8 oz - 7 lbs, 15 oz (3402 grams - 3628 grams)"
 
-#: webcdi/cdi_forms/forms.py:66
+#: cdi_forms/forms.py:66
 msgid "8 lbs, 0 oz - 8 lbs, 7 oz"
 msgstr "8 lbs, 0 oz - 8 lbs, 7 oz (3629 grams - 3855 grams)"
 
-#: webcdi/cdi_forms/forms.py:67
+#: cdi_forms/forms.py:67
 msgid "8 lbs, 8 oz - 8 lbs, 15 oz"
 msgstr "8 lbs, 8 oz - 8 lbs, 15 oz (3856 grams - 4081 grams)"
 
-#: webcdi/cdi_forms/forms.py:68
+#: cdi_forms/forms.py:68
 msgid "9 lbs, 0 oz - 9 lbs, 7 oz"
 msgstr "9 lbs, 0 oz - 9 lbs, 7 oz (4082 grams - 4308 grams)"
 
-#: webcdi/cdi_forms/forms.py:69
+#: cdi_forms/forms.py:69
 msgid "9 lbs, 8 oz - 9 lbs, 15 oz"
 msgstr "9 lbs, 8 oz - 9 lbs, 15 oz (4309 grams - 4534 grams)"
 
-#: webcdi/cdi_forms/forms.py:70
+#: cdi_forms/forms.py:70
 msgid "10 lbs, 0 oz or more"
 msgstr "10 lbs, 0 oz or more (4535 grams or more)"
 
-#: webcdi/cdi_forms/forms.py:77
+#: cdi_forms/forms.py:77
 msgid "Less than 1500 grams"
 msgstr "Less than 1500 grams (Less than 3 lbs, 4 oz)"
 
-#: webcdi/cdi_forms/forms.py:78
+#: cdi_forms/forms.py:78
 msgid "1500 grams - 1749 grams"
 msgstr "1500 grams - 1749 grams (3 lbs, 5 oz - 3 lbs, 13 oz)"
 
-#: webcdi/cdi_forms/forms.py:79
+#: cdi_forms/forms.py:79
 msgid "1750 grams - 1999 grams"
 msgstr "1750 grams - 1999 grams (3 lbs, 14 oz - 4 lbs, 6 oz)"
 
-#: webcdi/cdi_forms/forms.py:80
+#: cdi_forms/forms.py:80
 msgid "2000 grams - 2249 grams"
 msgstr "2000 grams - 2249 grams (4 lbs, 7 oz - 4 lbs, 15 oz)"
 
-#: webcdi/cdi_forms/forms.py:81
+#: cdi_forms/forms.py:81
 msgid "2250 grams - 2499 grams"
 msgstr "2250 grams - 2499 grams (5 lbs, 0 oz - 5 lbs, 8 oz)"
 
-#: webcdi/cdi_forms/forms.py:82
+#: cdi_forms/forms.py:82
 msgid "2500 grams - 2749 grams"
 msgstr "2500 grams - 2749 grams (5 lbs, 9 oz - 6 lbs, 1 oz)"
 
-#: webcdi/cdi_forms/forms.py:83
+#: cdi_forms/forms.py:83
 msgid "2750 grams - 2999 grams"
 msgstr "2750 grams - 2999 grams (6 lbs, 2 oz - 6 lbs, 9 oz)"
 
-#: webcdi/cdi_forms/forms.py:84
+#: cdi_forms/forms.py:84
 msgid "3000 grams - 3249 grams"
 msgstr "3000 grams - 3249 grams (6 lbs, 10 oz - 7 lbs, 2 oz)"
 
-#: webcdi/cdi_forms/forms.py:85
+#: cdi_forms/forms.py:85
 msgid "3250 grams - 3499 grams"
 msgstr "3250 grams - 3499 grams (7 lbs, 3 oz - 7 lbs, 11 oz)"
 
-#: webcdi/cdi_forms/forms.py:86
+#: cdi_forms/forms.py:86
 msgid "3500 grams - 3749 grams"
 msgstr "3500 grams - 3749 grams (7 lbs, 12 oz - 8 lbs, 4 oz)"
 
-#: webcdi/cdi_forms/forms.py:87
+#: cdi_forms/forms.py:87
 msgid "3750 grams - 3999 grams"
 msgstr "3750 grams - 3999 grams (8 lbs, 5 oz - 8 lbs, 13 oz)"
 
-#: webcdi/cdi_forms/forms.py:88
+#: cdi_forms/forms.py:88
 msgid "4000 grams - 4249 grams"
 msgstr "4000 grams - 4249 grams (8 lbs, 14 oz - 9 lbs, 5 oz)"
 
-#: webcdi/cdi_forms/forms.py:89
+#: cdi_forms/forms.py:89
 msgid "4250 grams - 4499 grams"
 msgstr "4250 grams - 4499 grams (9 lbs, 6 oz - 9 lbs, 14 oz)"
 
-#: webcdi/cdi_forms/forms.py:90
+#: cdi_forms/forms.py:90
 msgid "4500 grams - 4749 grams"
 msgstr "4500 grams - 4749 grams (9 lbs, 15 oz - 10 lbs, 7 oz)"
 
-#: webcdi/cdi_forms/forms.py:91
+#: cdi_forms/forms.py:91
 msgid "4750 grams - 4999 grams"
 msgstr "4750 grams - 4999 grams (10 lbs, 8 oz - 11 lbs, 0 oz)"
 
-#: webcdi/cdi_forms/forms.py:92
+#: cdi_forms/forms.py:92
 msgid "5000 grams or more"
 msgstr "5000 grams or more (11 lbs, 1 oz or more)"
 
-#: webcdi/cdi_forms/forms.py:98 webcdi/cdi_forms/forms.py:114
+#: cdi_forms/forms.py:98 cdi_forms/forms.py:114
 msgid "12 (High school graduate)"
 msgstr "12 (High school graduate)"
 
-#: webcdi/cdi_forms/forms.py:99 webcdi/cdi_forms/forms.py:118
+#: cdi_forms/forms.py:99 cdi_forms/forms.py:118
 msgid "16 (College graduate)"
 msgstr "16 (College graduate)"
 
-#: webcdi/cdi_forms/forms.py:100 webcdi/cdi_forms/forms.py:120
+#: cdi_forms/forms.py:100 cdi_forms/forms.py:120
 msgid "18 (Advanced degree)"
 msgstr "18 (Advanced degree)"
 
-#: webcdi/cdi_forms/forms.py:101 webcdi/cdi_forms/forms.py:125
+#: cdi_forms/forms.py:101 cdi_forms/forms.py:125
 msgid "23 or more"
 msgstr "23 or more"
 
-#: webcdi/cdi_forms/forms.py:137 webcdi/cdi_forms/models.py:191
+#: cdi_forms/forms.py:137 cdi_forms/models.py:191
 #, fuzzy
 #| msgid "Who does your child live with?"
 msgid "Does you child have siblings?"
 msgstr "Who does your child live with?"
 
-#: webcdi/cdi_forms/forms.py:140 webcdi/cdi_forms/models.py:192
+#: cdi_forms/forms.py:140 cdi_forms/models.py:192
 #, fuzzy
 #| msgid "Who does your child live with?"
 msgid "How many siblings does you child have?"
 msgstr "Who does your child live with?"
 
-#: webcdi/cdi_forms/forms.py:145
+#: cdi_forms/forms.py:145
 msgid "Please provide the sex and age of each sibling"
 msgstr ""
 
-#: webcdi/cdi_forms/forms.py:152
+#: cdi_forms/forms.py:152
 msgid ""
 "To protect your privacy, we never store your child's date of birth, we only "
 "record age in months."
 msgstr ""
 
-#: webcdi/cdi_forms/forms.py:153
+#: cdi_forms/forms.py:153
 msgid "Child DOB<span class=\"asteriskField\">*</span>"
 msgstr "Child DOB<span class=\"asteriskField\">*</span>"
 
-#: webcdi/cdi_forms/forms.py:158
+#: cdi_forms/forms.py:158
 msgid "Age (in months)<span class=\"asteriskField\">*</span>"
 msgstr "Age (in months)<span class=\"asteriskField\">*</span>"
 
-#: webcdi/cdi_forms/forms.py:160
+#: cdi_forms/forms.py:160
 msgid "This field will update when you enter or change your child's DOB."
 msgstr "This field will update when you enter or change your child's DOB."
 
-#: webcdi/cdi_forms/forms.py:170
+#: cdi_forms/forms.py:170
 msgid "What is your postal/zip code?"
 msgstr ""
 
-#: webcdi/cdi_forms/forms.py:178 webcdi/cdi_forms/models.py:139
+#: cdi_forms/forms.py:178 cdi_forms/models.py:139
 msgid "Is your child Hispanic or Latino?"
 msgstr "Is your child Hispanic or Latino?"
 
-#: webcdi/cdi_forms/forms.py:183 webcdi/cdi_forms/models.py:107
+#: cdi_forms/forms.py:183 cdi_forms/models.py:107
 msgid "Early"
 msgstr "Early"
 
-#: webcdi/cdi_forms/forms.py:183 webcdi/cdi_forms/models.py:107
+#: cdi_forms/forms.py:183 cdi_forms/models.py:107
 msgid "Late"
 msgstr "Late"
 
-#: webcdi/cdi_forms/forms.py:185 webcdi/cdi_forms/models.py:107
+#: cdi_forms/forms.py:185 cdi_forms/models.py:107
 msgid "Was he/she early or late?"
 msgstr "Was he/she early or late?"
 
-#: webcdi/cdi_forms/forms.py:190 webcdi/cdi_forms/models.py:71
+#: cdi_forms/forms.py:190 cdi_forms/models.py:71
 msgid "Male"
 msgstr "Male"
 
-#: webcdi/cdi_forms/forms.py:190 webcdi/cdi_forms/models.py:71
+#: cdi_forms/forms.py:190 cdi_forms/models.py:71
 msgid "Female"
 msgstr "Female"
 
-#: webcdi/cdi_forms/forms.py:190
+#: cdi_forms/forms.py:190
 msgid "Other / Prefer not to disclose"
 msgstr "Other /\tPrefer not to disclose"
 
-#: webcdi/cdi_forms/forms.py:192
+#: cdi_forms/forms.py:192
 msgid "Sex"
 msgstr ""
 
-#: webcdi/cdi_forms/forms.py:198
+#: cdi_forms/forms.py:198
 msgid "Which language(s)"
 msgstr "Which language(s)"
 
-#: webcdi/cdi_forms/forms.py:204 webcdi/cdi_forms/forms.py:210
-#: webcdi/cdi_forms/forms.py:216
+#: cdi_forms/forms.py:204 cdi_forms/forms.py:210 cdi_forms/forms.py:216
 #, fuzzy
 #| msgid "Please describe"
 msgid "Please specify"
 msgstr "Please describe"
 
-#: webcdi/cdi_forms/forms.py:222
+#: cdi_forms/forms.py:222
 #, fuzzy
 #| msgid "Please describe"
 msgctxt "caregiver_other"
 msgid "Please specify"
 msgstr "Please describe"
 
-#: webcdi/cdi_forms/forms.py:253 webcdi/cdi_forms/forms.py:287
+#: cdi_forms/forms.py:253 cdi_forms/forms.py:287
 msgid "This field cannot be empty"
 msgstr "This field cannot be empty"
 
-#: webcdi/cdi_forms/forms.py:258
+#: cdi_forms/forms.py:258
 msgid "Please enter number of weeks"
 msgstr ""
 
-#: webcdi/cdi_forms/forms.py:261
+#: cdi_forms/forms.py:261
 msgid "Cannot be more than 18 weeks early"
 msgstr "Cannot be more than 18 weeks early"
 
-#: webcdi/cdi_forms/forms.py:263
+#: cdi_forms/forms.py:263
 msgid "Cannot be more than 4 weeks late"
 msgstr "Cannot be more than 4 weeks late"
 
-#: webcdi/cdi_forms/forms.py:267 webcdi/cdi_forms/forms.py:282
+#: cdi_forms/forms.py:267 cdi_forms/forms.py:282
 msgid "Please enter your child's DOB in the field above."
 msgstr "Please enter your child's DOB in the field above."
 
-#: webcdi/cdi_forms/forms.py:278
+#: cdi_forms/forms.py:278
 msgid "Your baby is too young for this version of the CDI."
 msgstr "Your baby is too young for this version of the CDI."
 
-#: webcdi/cdi_forms/forms.py:280
+#: cdi_forms/forms.py:280
 msgid "Your baby is too old for this version of the CDI."
 msgstr "Your baby is too old for this version of the CDI."
 
-#: webcdi/cdi_forms/forms.py:309 webcdi/cdi_forms/forms.py:310
-#: webcdi/cdi_forms/models.py:103 webcdi/cdi_forms/models.py:104
-#: webcdi/cdi_forms/models.py:129 webcdi/cdi_forms/models.py:130
+#: cdi_forms/forms.py:309 cdi_forms/forms.py:310 cdi_forms/models.py:103
+#: cdi_forms/models.py:104 cdi_forms/models.py:129 cdi_forms/models.py:130
 msgid "Birth weight"
 msgstr "Birth weight"
 
-#: webcdi/cdi_forms/forms.py:319 webcdi/cdi_forms/models.py:100
+#: cdi_forms/forms.py:319 cdi_forms/models.py:100
 msgid "Was your child born as part of a multiple birth?"
 msgstr "Was your child born as part of a multiple birth?"
 
-#: webcdi/cdi_forms/forms.py:326
+#: cdi_forms/forms.py:326
 msgid ""
 "Was your child born early or late (more than one week before or after the "
 "due date)?"
 msgstr ""
 
-#: webcdi/cdi_forms/forms.py:332
+#: cdi_forms/forms.py:332
 msgid "Does your child regularly hear a language other than English?"
 msgstr "Does your child regularly hear a language other than English?"
 
-#: webcdi/cdi_forms/forms.py:338
+#: cdi_forms/forms.py:338
 msgid "Has your child experienced chronic ear infections (5 or more)?"
 msgstr "Has your child experienced chronic ear infections (5 or more)?"
 
-#: webcdi/cdi_forms/forms.py:344 webcdi/cdi_forms/models.py:163
+#: cdi_forms/forms.py:344 cdi_forms/models.py:163
 msgid "Do you suspect that your child may have hearing loss?"
 msgstr "Do you suspect that your child may have hearing loss?"
 
-#: webcdi/cdi_forms/forms.py:350 webcdi/cdi_forms/models.py:166
+#: cdi_forms/forms.py:350 cdi_forms/models.py:166
 msgid ""
 "Is there some reason to suspect that your child may have vision problems?"
 msgstr ""
 
-#: webcdi/cdi_forms/forms.py:356 webcdi/cdi_forms/models.py:169
+#: cdi_forms/forms.py:356 cdi_forms/models.py:169
 msgid ""
 "Has your child had any major illnesses, hospitalizations, or diagnosed "
 "disabilities?"
 msgstr ""
 
-#: webcdi/cdi_forms/forms.py:362 webcdi/cdi_forms/models.py:172
+#: cdi_forms/forms.py:362 cdi_forms/models.py:172
 msgid ""
 "Has your child ever received any services for speech, language, or "
 "development issues?"
 msgstr ""
 
-#: webcdi/cdi_forms/forms.py:368 webcdi/cdi_forms/models.py:175
+#: cdi_forms/forms.py:368 cdi_forms/models.py:175
 msgid ""
 "Are you worried about your child's progress in language or communication?"
 msgstr ""
 
-#: webcdi/cdi_forms/forms.py:374 webcdi/cdi_forms/models.py:178
+#: cdi_forms/forms.py:374 cdi_forms/models.py:178
 msgid ""
 "Have you or anyone in your immediate family been diagnosed with a language "
 "or learning disability?"
 msgstr ""
 
-#: webcdi/cdi_forms/forms.py:402
+#: cdi_forms/forms.py:402
 msgid "mm/dd/yyyy"
 msgstr ""
 
-#: webcdi/cdi_forms/forms.py:405
+#: cdi_forms/forms.py:405
 msgid "dd/mm/yyyy"
 msgstr ""
 
-#: webcdi/cdi_forms/forms.py:555 webcdi/cdi_forms/models.py:137
+#: cdi_forms/forms.py:558 cdi_forms/models.py:137
 msgid "Estimated Annual Family Income (in USD)"
 msgstr "Estimated Annual Family Income (in USD)"
 
-#: webcdi/cdi_forms/forms.py:559
+#: cdi_forms/forms.py:562
 msgid "My child is (check all that apply):"
 msgstr "My child is (check all that apply):"
 
-#: webcdi/cdi_forms/forms.py:563 webcdi/cdi_forms/forms.py:565
+#: cdi_forms/forms.py:566 cdi_forms/forms.py:568
 #, fuzzy
 #| msgid "::Your account information::"
 msgid "Basic Information"
 msgstr "::Your account information::"
 
-#: webcdi/cdi_forms/forms.py:569
+#: cdi_forms/forms.py:572
 msgid "Family Background"
 msgstr ""
 
-#: webcdi/cdi_forms/forms.py:570 webcdi/cdi_forms/models.py:140
+#: cdi_forms/forms.py:573 cdi_forms/models.py:140
 msgid "Child's Ethnicity"
 msgstr ""
 
-#: webcdi/cdi_forms/forms.py:570
+#: cdi_forms/forms.py:573
 msgid ""
 "The following information is being collected for the sole purpose of "
 "reporting to our grant-funding institute, i.e.,  NIH (National Institute of "
@@ -453,1115 +450,1113 @@ msgid ""
 "inclusiveness of our research. Your cooperation is appreciated, but optional."
 msgstr ""
 
-#: webcdi/cdi_forms/forms.py:571
+#: cdi_forms/forms.py:574
 #, fuzzy
 #| msgid "::Your account information::"
 msgid "Caregiver Information"
 msgstr "::Your account information::"
 
-#: webcdi/cdi_forms/forms.py:572
+#: cdi_forms/forms.py:575
 msgid "Language Exposure"
 msgstr ""
 
-#: webcdi/cdi_forms/forms.py:575
+#: cdi_forms/forms.py:578
 msgid "Health"
 msgstr ""
 
-#: webcdi/cdi_forms/forms.py:613
+#: cdi_forms/forms.py:616
 msgid "Your Name"
 msgstr "Your Name"
 
-#: webcdi/cdi_forms/forms.py:614
+#: cdi_forms/forms.py:617
 msgid "Your Email Address"
 msgstr "Your Email Address"
 
-#: webcdi/cdi_forms/forms.py:615
+#: cdi_forms/forms.py:618
 msgid "Your Test URL"
 msgstr "Your Test URL"
 
-#: webcdi/cdi_forms/forms.py:616
+#: cdi_forms/forms.py:619
 msgid "What would you like to tell us?"
 msgstr "What would you like to tell us?"
 
-#: webcdi/cdi_forms/forms.py:635
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:11
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:323
-#: webcdi/cdi_forms/views.py:814
+#: cdi_forms/forms.py:638 cdi_forms/templates/cdi_forms/cdi_form.html:11
+#: cdi_forms/templates/cdi_forms/cdi_form.html:323 cdi_forms/views.py:814
 msgid "Submit"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:6
+#: cdi_forms/languages.py:6
 msgid "аҧсуа (Abkhaz)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:7
+#: cdi_forms/languages.py:7
 msgid "Afaraf (Afar)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:8
+#: cdi_forms/languages.py:8
 msgid "Afrikaans (Afrikaans)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:9
+#: cdi_forms/languages.py:9
 msgid "Akan (Akan)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:10
+#: cdi_forms/languages.py:10
 msgid "Shqip (Albanian)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:11
+#: cdi_forms/languages.py:11
 msgid "American Sign Language"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:12
+#: cdi_forms/languages.py:12
 msgid "አማርኛ (Amharic)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:13
+#: cdi_forms/languages.py:13
 msgid "العربية (Arabic)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:14
+#: cdi_forms/languages.py:14
 msgid "Aragonés (Aragonese)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:15
+#: cdi_forms/languages.py:15
 msgid "Հայերեն (Armenian)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:16
+#: cdi_forms/languages.py:16
 msgid "অসমীয়া (Assamese)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:17
+#: cdi_forms/languages.py:17
 msgid "авар мацӀ, магӀарул мацӀ (Avaric)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:18
+#: cdi_forms/languages.py:18
 msgid "avesta (Avestan)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:19
+#: cdi_forms/languages.py:19
 msgid "aymar aru (Aymara)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:20
+#: cdi_forms/languages.py:20
 msgid "Հայեazərbaycan diliրեն (Azerbaijani)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:21
+#: cdi_forms/languages.py:21
 msgid "bamanankan (Bambara)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:22
+#: cdi_forms/languages.py:22
 msgid "башҡорт теле (Bashkir)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:23
+#: cdi_forms/languages.py:23
 msgid "euskara, euskera (Basque)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:24
+#: cdi_forms/languages.py:24
 msgid "Հայեazərbaycan diliրեն (Belarusian)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:25
+#: cdi_forms/languages.py:25
 msgid "বাংলা (Bengali)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:26
+#: cdi_forms/languages.py:26
 msgid "भोजपुरी (Bihari)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:27
+#: cdi_forms/languages.py:27
 msgid "Bislama (Bislama)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:28
+#: cdi_forms/languages.py:28
 msgid "bosanski jezik (Bosnian)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:29
+#: cdi_forms/languages.py:29
 msgid "brezhoneg (Breton)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:30
+#: cdi_forms/languages.py:30
 msgid "български език (Bulgarian)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:31
+#: cdi_forms/languages.py:31
 msgid "ဗမာစာ (Burmese)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:32
+#: cdi_forms/languages.py:32
 msgid "Català (Catalan; Valencian)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:33
+#: cdi_forms/languages.py:33
 msgid "Chamoru (Chamorro)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:34
+#: cdi_forms/languages.py:34
 msgid "нохчийн мотт (Chechen)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:35
+#: cdi_forms/languages.py:35
 msgid "chiCheŵa, chinyanja (Chichewa; Chewa; Nyanja)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:36
+#: cdi_forms/languages.py:36
 msgid "中文 (Zhōngwén), 汉语, 漢語 (Chinese)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:37
+#: cdi_forms/languages.py:37
 msgid "чӑваш чӗлхи (Chuvash)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:38
+#: cdi_forms/languages.py:38
 msgid "Kernewek (Cornish)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:39
+#: cdi_forms/languages.py:39
 msgid "corsu, lingua corsa (Corsican)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:40
+#: cdi_forms/languages.py:40
 msgid "ᓀᐦᐃᔭᐍᐏᐣ (Cree)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:41
+#: cdi_forms/languages.py:41
 msgid "hrvatski (Croatian)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:42
+#: cdi_forms/languages.py:42
 msgid "česky, čeština (Czech)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:43
+#: cdi_forms/languages.py:43
 msgid "dansk (Danish)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:44
+#: cdi_forms/languages.py:44
 msgid "ދިވެހި (Divehi; Dhivehi; Maldivian;)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:45
+#: cdi_forms/languages.py:45
 msgid "Nederlands, Vlaams (Dutch)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:46
+#: cdi_forms/languages.py:46
 msgid "English (English)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:47
+#: cdi_forms/languages.py:47
 msgid "Esperanto (Esperanto)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:48
+#: cdi_forms/languages.py:48
 msgid "eesti, eesti keel (Estonian)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:49
+#: cdi_forms/languages.py:49
 msgid "Eʋegbe (Ewe)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:50
+#: cdi_forms/languages.py:50
 msgid "føroyskt (Faroese)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:51
+#: cdi_forms/languages.py:51
 msgid "vosa Vakaviti (Fijian)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:52
+#: cdi_forms/languages.py:52
 msgid "suomi, suomen kieli (Finnish)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:53
+#: cdi_forms/languages.py:53
 msgid "français, langue française (French)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:54
+#: cdi_forms/languages.py:54
 msgid "Fulfulde, Pulaar, Pular (Fula; Fulah; Pulaar; Pular)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:55
+#: cdi_forms/languages.py:55
 msgid "Galego (Galician)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:56
+#: cdi_forms/languages.py:56
 msgid "ქართული (Georgian)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:57
+#: cdi_forms/languages.py:57
 msgid "Deutsch (German)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:58
+#: cdi_forms/languages.py:58
 msgid "Ελληνικά (Greek, Modern)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:59
+#: cdi_forms/languages.py:59
 msgid "Avañeẽ (Guaraní)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:60
+#: cdi_forms/languages.py:60
 msgid "ગુજરાતી (Gujarati)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:61
+#: cdi_forms/languages.py:61
 msgid "Kreyòl ayisyen (Haitian; Haitian Creole)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:62
+#: cdi_forms/languages.py:62
 msgid "Hausa, هَوُسَ (Hausa)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:63
+#: cdi_forms/languages.py:63
 msgid "עברית (Hebrew (modern))"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:64
+#: cdi_forms/languages.py:64
 msgid "Otjiherero (Herero)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:65
+#: cdi_forms/languages.py:65
 msgid "हिन्दी, हिंदी (Hindi)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:66
+#: cdi_forms/languages.py:66
 msgid "Hiri Motu (Hiri Motu)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:67
+#: cdi_forms/languages.py:67
 msgid "Magyar (Hungarian)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:68
+#: cdi_forms/languages.py:68
 msgid "Interlingua (Interlingua)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:69
+#: cdi_forms/languages.py:69
 msgid "Bahasa Indonesia (Indonesian)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:70
+#: cdi_forms/languages.py:70
 msgid "Originally called Occidental; then Interlingue after WWII (Interlingue)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:71
+#: cdi_forms/languages.py:71
 msgid "Gaeilge (Irish)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:72
+#: cdi_forms/languages.py:72
 msgid "Asụsụ Igbo (Igbo)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:73
+#: cdi_forms/languages.py:73
 msgid "Iñupiaq, Iñupiatun (Inupiaq)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:74
+#: cdi_forms/languages.py:74
 msgid "Ido (Ido)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:75
+#: cdi_forms/languages.py:75
 msgid "Íslenska (Icelandic)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:76
+#: cdi_forms/languages.py:76
 msgid "Italiano (Italian)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:77
+#: cdi_forms/languages.py:77
 msgid "ᐃᓄᒃᑎᑐᑦ (Inuktitut)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:78
+#: cdi_forms/languages.py:78
 msgid "日本語 (にほんご／にっぽんご) (Japanese)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:79
+#: cdi_forms/languages.py:79
 msgid "basa Jawa (Javanese)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:80
+#: cdi_forms/languages.py:80
 msgid "kalaallisut, kalaallit oqaasii (Kalaallisut, Greenlandic)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:81
+#: cdi_forms/languages.py:81
 msgid "ಕನ್ನಡ (Kannada)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:82
+#: cdi_forms/languages.py:82
 msgid "Kanuri (Kanuri)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:83
+#: cdi_forms/languages.py:83
 msgid "कश्मीरी, كشميري‎ (Kashmiri)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:84
+#: cdi_forms/languages.py:84
 msgid "Қазақ тілі (Kazakh)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:85
+#: cdi_forms/languages.py:85
 msgid "ភាសាខ្មែរ (Khmer)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:86
+#: cdi_forms/languages.py:86
 msgid "Gĩkũyũ (Kikuyu, Gikuyu)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:87
+#: cdi_forms/languages.py:87
 msgid "Ikinyarwanda (Kinyarwanda)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:88
+#: cdi_forms/languages.py:88
 msgid "кыргыз тили (Kirghiz, Kyrgyz)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:89
+#: cdi_forms/languages.py:89
 msgid "коми кыв (Komi)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:90
+#: cdi_forms/languages.py:90
 msgid "KiKongo (Kongo)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:91
+#: cdi_forms/languages.py:91
 msgid "한국어 (韓國語), 조선말 (朝鮮語) (Korean)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:92
+#: cdi_forms/languages.py:92
 msgid "Kurdî, كوردی (Kurdish)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:93
+#: cdi_forms/languages.py:93
 msgid "Kuanyama (Kwanyama, Kuanyama)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:94
+#: cdi_forms/languages.py:94
 msgid "latine, lingua latina (Latin)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:95
+#: cdi_forms/languages.py:95
 msgid "Lëtzebuergesch (Luxembourgish, Letzeburgesch)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:96
+#: cdi_forms/languages.py:96
 msgid "Luganda (Luganda)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:97
+#: cdi_forms/languages.py:97
 msgid "Limburgs (Limburgish, Limburgan, Limburger)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:98
+#: cdi_forms/languages.py:98
 msgid "Lingála (Lingala)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:99
+#: cdi_forms/languages.py:99
 msgid "ພາສາລາວ (Lao)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:100
+#: cdi_forms/languages.py:100
 msgid "lietuvių kalba (Lithuanian)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:101
+#: cdi_forms/languages.py:101
 msgid "Luba-Katanga (Luba-Katanga)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:102
+#: cdi_forms/languages.py:102
 msgid "latviešu valoda (Latvian)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:103
+#: cdi_forms/languages.py:103
 msgid "Gaelg, Gailck (Manx)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:104
+#: cdi_forms/languages.py:104
 msgid "македонски јазик (Macedonian)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:105
+#: cdi_forms/languages.py:105
 msgid "Malagasy fiteny (Malagasy)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:106
+#: cdi_forms/languages.py:106
 msgid "bahasa Melayu, بهاس ملايو (Malay)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:107
+#: cdi_forms/languages.py:107
 msgid "മലയാളം (Malayalam)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:108
+#: cdi_forms/languages.py:108
 msgid "Malti (Maltese)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:109
+#: cdi_forms/languages.py:109
 msgid "te reo Māori (Māori)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:110
+#: cdi_forms/languages.py:110
 msgid "मराठी (Marathi (Marāṭhī))"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:111
+#: cdi_forms/languages.py:111
 msgid "Kajin M̧ajeļ (Marshallese)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:112
+#: cdi_forms/languages.py:112
 msgid "монгол (Mongolian)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:113
+#: cdi_forms/languages.py:113
 msgid "Ekakairũ Naoero (Nauru)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:114
+#: cdi_forms/languages.py:114
 msgid "Diné bizaad, Dinékʼehǰí (Navajo, Navaho)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:115
+#: cdi_forms/languages.py:115
 msgid "Norsk bokmål (Norwegian Bokmål)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:116
+#: cdi_forms/languages.py:116
 msgid "isiNdebele (North Ndebele)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:117
+#: cdi_forms/languages.py:117
 msgid "नेपाली (Nepali)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:118
+#: cdi_forms/languages.py:118
 msgid "Owambo (Ndonga)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:119
+#: cdi_forms/languages.py:119
 msgid "Norsk nynorsk (Norwegian Nynorsk)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:120
+#: cdi_forms/languages.py:120
 msgid "Norsk (Norwegian)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:121
+#: cdi_forms/languages.py:121
 msgid "Nuosuhxop (Nuosu)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:122
+#: cdi_forms/languages.py:122
 msgid "isiNdebele (South Ndebele)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:123
+#: cdi_forms/languages.py:123
 msgid "Occitan (Occitan)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:124
+#: cdi_forms/languages.py:124
 msgid "ᐊᓂᔑᓈᐯᒧᐎᓐ (Ojibwe, Ojibwa)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:125
+#: cdi_forms/languages.py:125
 msgid ""
 "ѩзыкъ словѣньскъ (Old Church Slavonic, Church Slavic, Church Slavonic, Old "
 "Bulgarian, Old Slavonic)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:126
+#: cdi_forms/languages.py:126
 msgid "Afaan Oromoo (Oromo)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:127
+#: cdi_forms/languages.py:127
 msgid "ଓଡ଼ିଆ (Oriya)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:128
+#: cdi_forms/languages.py:128
 msgid "ирон æвзаг (Ossetian, Ossetic)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:129
+#: cdi_forms/languages.py:129
 msgid "ਪੰਜਾਬੀ, پنجابی (Panjabi, Punjabi)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:130
+#: cdi_forms/languages.py:130
 msgid "पाऴि (Pāli)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:131
+#: cdi_forms/languages.py:131
 msgid "فارسی (Persian)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:132
+#: cdi_forms/languages.py:132
 msgid "polski (Polish)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:133
+#: cdi_forms/languages.py:133
 msgid "پښتو (Pashto, Pushto)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:134
+#: cdi_forms/languages.py:134
 msgid "Português (Portuguese)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:135
+#: cdi_forms/languages.py:135
 msgid "Runa Simi, Kichwa (Quechua)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:136
+#: cdi_forms/languages.py:136
 msgid "rumantsch grischun (Romansh)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:137
+#: cdi_forms/languages.py:137
 msgid "kiRundi (Kirundi)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:138
+#: cdi_forms/languages.py:138
 msgid "română (Romanian, Moldavian, Moldovan)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:139
+#: cdi_forms/languages.py:139
 msgid "русский язык (Russian)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:140
+#: cdi_forms/languages.py:140
 msgid "संस्कृतम् (Sanskrit (Saṁskṛta))"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:141
+#: cdi_forms/languages.py:141
 msgid "sardu (Sardinian)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:142
+#: cdi_forms/languages.py:142
 msgid "सिन्धी, سنڌي، سندھی (Sindhi)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:143
+#: cdi_forms/languages.py:143
 msgid "Davvisámegiella (Northern Sami)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:144
+#: cdi_forms/languages.py:144
 msgid "gagana faa Samoa (Samoan)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:145
+#: cdi_forms/languages.py:145
 msgid "yângâ tî sängö (Sango)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:146
+#: cdi_forms/languages.py:146
 msgid "српски језик (Serbian)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:147
+#: cdi_forms/languages.py:147
 msgid "Gàidhlig (Scottish Gaelic; Gaelic)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:148
+#: cdi_forms/languages.py:148
 msgid "chiShona (Shona)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:149
+#: cdi_forms/languages.py:149
 msgid "සිංහල (Sinhala, Sinhalese)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:150
+#: cdi_forms/languages.py:150
 msgid "slovenčina (Slovak)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:151
+#: cdi_forms/languages.py:151
 msgid "slovenščina (Slovene)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:152
+#: cdi_forms/languages.py:152
 msgid "Soomaaliga, af Soomaali (Somali)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:153
+#: cdi_forms/languages.py:153
 msgid "Sesotho (Southern Sotho)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:154
+#: cdi_forms/languages.py:154
 msgid "español, castellano (Spanish; Castilian)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:155
+#: cdi_forms/languages.py:155
 msgid "Basa Sunda (Sundanese)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:156
+#: cdi_forms/languages.py:156
 msgid "Kiswahili (Swahili)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:157
+#: cdi_forms/languages.py:157
 msgid "SiSwati (Swati)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:158
+#: cdi_forms/languages.py:158
 msgid "svenska (Swedish)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:159
+#: cdi_forms/languages.py:159
 msgid "தமிழ் (Tamil)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:160
+#: cdi_forms/languages.py:160
 msgid "тоҷикӣ, toğikī, تاجیکی‎ (Telugu)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:161
+#: cdi_forms/languages.py:161
 msgid "తెలుగు (Tajik)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:162
+#: cdi_forms/languages.py:162
 msgid "ไทย (Thai)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:163
+#: cdi_forms/languages.py:163
 msgid "ትግርኛ (Tigrinya)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:164
+#: cdi_forms/languages.py:164
 msgid "བོད་ཡིག (Tibetan Standard, Tibetan, Central)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:165
+#: cdi_forms/languages.py:165
 msgid "Türkmen, Түркмен (Turkmen)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:166
+#: cdi_forms/languages.py:166
 msgid "Wikang Tagalog (Tagalog)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:167
+#: cdi_forms/languages.py:167
 msgid "Setswana (Tswana)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:168
+#: cdi_forms/languages.py:168
 msgid "faka Tonga (Tonga (Tonga Islands))"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:169
+#: cdi_forms/languages.py:169
 msgid "Türkçe (Turkish)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:170
+#: cdi_forms/languages.py:170
 msgid "Xitsonga (Tsonga)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:171
+#: cdi_forms/languages.py:171
 msgid "татарча, tatarça, تاتارچا (Tatar)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:172
+#: cdi_forms/languages.py:172
 msgid "Twi (Twi)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:173
+#: cdi_forms/languages.py:173
 msgid "Reo Tahiti (Tahitian)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:174
+#: cdi_forms/languages.py:174
 msgid "Uyƣurqə, ئۇيغۇرچە (Uighur, Uyghur)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:175
+#: cdi_forms/languages.py:175
 msgid "українська (Ukrainian)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:176
+#: cdi_forms/languages.py:176
 msgid "اردو (Urdu)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:177
+#: cdi_forms/languages.py:177
 msgid "zbek, Ўзбек, أۇزبېك (Uzbek)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:178
+#: cdi_forms/languages.py:178
 msgid "Tshivenḓa (Venda)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:179
+#: cdi_forms/languages.py:179
 msgid "Tiếng Việt (Vietnamese)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:180
+#: cdi_forms/languages.py:180
 msgid "Volapük (Volapük)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:181
+#: cdi_forms/languages.py:181
 msgid "Waloon (Walloon)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:182
+#: cdi_forms/languages.py:182
 msgid "Cymraeg (Welsh)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:183
+#: cdi_forms/languages.py:183
 msgid "Wollof (Wolof)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:184
+#: cdi_forms/languages.py:184
 msgid "Frysk (Western Frisian)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:185
+#: cdi_forms/languages.py:185
 msgid "isiXhosa (Xhosa)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:186
+#: cdi_forms/languages.py:186
 msgid "ייִדיש (Yiddish)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:187
+#: cdi_forms/languages.py:187
 msgid "Yorùbá (Yoruba)"
 msgstr ""
 
-#: webcdi/cdi_forms/languages.py:188
+#: cdi_forms/languages.py:188
 msgid "Saɯ cueŋƅ, Saw cuengh (Zhuang, Chuang)"
 msgstr ""
 
-#: webcdi/cdi_forms/models.py:70
+#: cdi_forms/models.py:70
 msgid "Age (in months)"
 msgstr "Age (in months)"
 
-#: webcdi/cdi_forms/models.py:72
+#: cdi_forms/models.py:72
 msgid "Country"
 msgstr ""
 
-#: webcdi/cdi_forms/models.py:73
+#: cdi_forms/models.py:73
 msgid "Zip Code (if you live in the U.S.)"
 msgstr "Zip Code (if you live in the U.S.)"
 
-#: webcdi/cdi_forms/models.py:73
+#: cdi_forms/models.py:73
 msgid "Please enter a valid U.S. zip code"
 msgstr "Please enter a valid U.S. zip code"
 
-#: webcdi/cdi_forms/models.py:77
+#: cdi_forms/models.py:77
 msgid "1 (First)"
 msgstr "1 (First)"
 
-#: webcdi/cdi_forms/models.py:78
+#: cdi_forms/models.py:78
 msgid "2 (Second)"
 msgstr "2 (Second)"
 
-#: webcdi/cdi_forms/models.py:79
+#: cdi_forms/models.py:79
 msgid "3 (Third)"
 msgstr "3 (Third)"
 
-#: webcdi/cdi_forms/models.py:80
+#: cdi_forms/models.py:80
 msgid "4 (Fourth)"
 msgstr "4 (Fourth)"
 
-#: webcdi/cdi_forms/models.py:81
+#: cdi_forms/models.py:81
 msgid "5 (Fifth)"
 msgstr "5 (Fifth)"
 
-#: webcdi/cdi_forms/models.py:82
+#: cdi_forms/models.py:82
 msgid "6 (Sixth)"
 msgstr "6 (Sixth)"
 
-#: webcdi/cdi_forms/models.py:83
+#: cdi_forms/models.py:83
 msgid "7 (Seventh)"
 msgstr "7 (Seventh)"
 
-#: webcdi/cdi_forms/models.py:84
+#: cdi_forms/models.py:84
 msgid "8 (Eighth)"
 msgstr "8 (Eighth)"
 
-#: webcdi/cdi_forms/models.py:85
+#: cdi_forms/models.py:85
 msgid "9 (Ninth)"
 msgstr "9 (Ninth)"
 
-#: webcdi/cdi_forms/models.py:86
+#: cdi_forms/models.py:86
 msgid "10 or more (Tenth or Later)"
 msgstr "10 or more (Tenth or Later)"
 
-#: webcdi/cdi_forms/models.py:90
+#: cdi_forms/models.py:90
 msgid "Birth order"
 msgstr "Birth order"
 
-#: webcdi/cdi_forms/models.py:94
+#: cdi_forms/models.py:94
 msgid "Twins"
 msgstr "Twins"
 
-#: webcdi/cdi_forms/models.py:95
+#: cdi_forms/models.py:95
 msgid "Triplets"
 msgstr "Triplets"
 
-#: webcdi/cdi_forms/models.py:96
+#: cdi_forms/models.py:96
 msgid "Quadruplets"
 msgstr "Quadruplets"
 
-#: webcdi/cdi_forms/models.py:97
+#: cdi_forms/models.py:97
 msgid "Quintuplets or greater"
 msgstr "Quintuplets or greater"
 
-#: webcdi/cdi_forms/models.py:101
+#: cdi_forms/models.py:101
 msgid "Twins, triplets, quadruplets, other?"
 msgstr "Twins, triplets, quadruplets, other?"
 
-#: webcdi/cdi_forms/models.py:106
+#: cdi_forms/models.py:106
 msgid "Was your child born earlier or later than their due date?"
 msgstr "Was your child born earlier or later than their due date?"
 
-#: webcdi/cdi_forms/models.py:108
+#: cdi_forms/models.py:108
 msgid "By how many weeks? (round to the nearest week)"
 msgstr "By how many weeks? (round to the nearest week)"
 
-#: webcdi/cdi_forms/models.py:108
+#: cdi_forms/models.py:108
 msgid "Number of weeks cannot be less than 1"
 msgstr "Number of weeks cannot be less than 1"
 
-#: webcdi/cdi_forms/models.py:117 webcdi/cdi_forms/models.py:182
+#: cdi_forms/models.py:117 cdi_forms/models.py:182
 #, fuzzy
 #| msgid "Other"
 msgid "Mother"
 msgstr "Other"
 
-#: webcdi/cdi_forms/models.py:118 webcdi/cdi_forms/models.py:183
+#: cdi_forms/models.py:118 cdi_forms/models.py:183
 #, fuzzy
 #| msgid "Other"
 msgid "Father"
 msgstr "Other"
 
-#: webcdi/cdi_forms/models.py:119 webcdi/cdi_forms/models.py:185
+#: cdi_forms/models.py:119 cdi_forms/models.py:185
 msgid "Grandparent(s)"
 msgstr ""
 
-#: webcdi/cdi_forms/models.py:123
+#: cdi_forms/models.py:123
 msgid "Primary Caregiver"
 msgstr ""
 
-#: webcdi/cdi_forms/models.py:125 webcdi/cdi_forms/models.py:128
+#: cdi_forms/models.py:125 cdi_forms/models.py:128
 msgid "Primary Caregiver Year of birth"
 msgstr ""
 
-#: webcdi/cdi_forms/models.py:126
+#: cdi_forms/models.py:126
 #, fuzzy
 #| msgid "::Your account information::"
 msgid "Primary Caregiver Education"
 msgstr "::Your account information::"
 
-#: webcdi/cdi_forms/models.py:126 webcdi/cdi_forms/models.py:135
+#: cdi_forms/models.py:126 cdi_forms/models.py:135
 msgid ""
 "Choose highest grade completed (12 = high school graduate; 16 = college "
 "graduate; 18 = advanced degree)"
 msgstr ""
 
-#: webcdi/cdi_forms/models.py:132
+#: cdi_forms/models.py:132
 msgid "Secondary Caregiver"
 msgstr ""
 
-#: webcdi/cdi_forms/models.py:134
+#: cdi_forms/models.py:134
 msgid "Secondary Caregiver Year of birth"
 msgstr ""
 
-#: webcdi/cdi_forms/models.py:135
+#: cdi_forms/models.py:135
 #, fuzzy
 #| msgid "::Your account information::"
 msgid "Secondary Caregiver Education"
 msgstr "::Your account information::"
 
-#: webcdi/cdi_forms/models.py:144
+#: cdi_forms/models.py:144
 msgid "Two parents"
 msgstr "Two parents"
 
-#: webcdi/cdi_forms/models.py:145
+#: cdi_forms/models.py:145
 msgid "One parent"
 msgstr "One parent"
 
-#: webcdi/cdi_forms/models.py:146
+#: cdi_forms/models.py:146
 #, fuzzy
 #| msgid "One parent plus other caregiver (e.g., grandparent)"
 msgid "One or both parents and other caregiver(s) (e.g., grandparent)"
 msgstr "One parent plus other caregiver (e.g., grandparent)"
 
-#: webcdi/cdi_forms/models.py:147
+#: cdi_forms/models.py:147
 msgid "Other caregivers (e.g., grandparent or grandparents)"
 msgstr "Other caregivers (e.g., grandparent or grandparents)"
 
-#: webcdi/cdi_forms/models.py:151
+#: cdi_forms/models.py:151
 msgid "Who does your child live with?"
 msgstr "Who does your child live with?"
 
-#: webcdi/cdi_forms/models.py:156
+#: cdi_forms/models.py:156
 msgid "From whom?"
 msgstr "From whom?"
 
-#: webcdi/cdi_forms/models.py:157
+#: cdi_forms/models.py:157
 msgid "How many days per week is the child exposed to these languages?"
 msgstr "How many days per week is the child exposed to these languages?"
 
-#: webcdi/cdi_forms/models.py:157
+#: cdi_forms/models.py:157
 msgid "Number of days per week cannot exceed 7"
 msgstr "Number of days per week cannot exceed 7"
 
-#: webcdi/cdi_forms/models.py:157
+#: cdi_forms/models.py:157
 msgid "Number of days per week cannot be less than 1"
 msgstr "Number of days per week cannot be less than 1"
 
-#: webcdi/cdi_forms/models.py:158
+#: cdi_forms/models.py:158
 msgid "How many hours per day is the child exposed to these languages?"
 msgstr "How many hours per day is the child exposed to these languages?"
 
-#: webcdi/cdi_forms/models.py:158
+#: cdi_forms/models.py:158
 msgid "Number of hours per day cannot exceed 24"
 msgstr "Number of hours per day cannot exceed 24"
 
-#: webcdi/cdi_forms/models.py:158
+#: cdi_forms/models.py:158
 msgid "Number of hours per day cannot be less than 1"
 msgstr "Number of hours per day cannot be less than 1"
 
-#: webcdi/cdi_forms/models.py:160
+#: cdi_forms/models.py:160
 msgid "Has your child experienced chronic ear infections (5 or more)? "
 msgstr "Has your child experienced chronic ear infections (5 or more)? "
 
-#: webcdi/cdi_forms/models.py:161
+#: cdi_forms/models.py:161
 msgid "Has your child undergone interventions (e.g., tubes)?  Please describe"
 msgstr "Has your child undergone interventions (e.g., tubes)?  Please describe"
 
-#: webcdi/cdi_forms/models.py:164 webcdi/cdi_forms/models.py:167
-#: webcdi/cdi_forms/models.py:170 webcdi/cdi_forms/models.py:176
+#: cdi_forms/models.py:164 cdi_forms/models.py:167 cdi_forms/models.py:170
+#: cdi_forms/models.py:176
 msgid "Please describe"
 msgstr "Please describe"
 
-#: webcdi/cdi_forms/models.py:173
+#: cdi_forms/models.py:173
 #, fuzzy
 #| msgid "Please describe"
 msgctxt "daycare"
 msgid "Please describe"
 msgstr "Please describe"
 
-#: webcdi/cdi_forms/models.py:179
+#: cdi_forms/models.py:179
 msgid "Indicate which family member and provide a description"
 msgstr "Indicate which family member and provide a description"
 
-#: webcdi/cdi_forms/models.py:184
+#: cdi_forms/models.py:184
 msgid "Both caregivers"
 msgstr ""
 
-#: webcdi/cdi_forms/models.py:188
+#: cdi_forms/models.py:188
 msgid "Who is filling in the form?"
 msgstr ""
 
-#: webcdi/cdi_forms/models.py:213
+#: cdi_forms/models.py:213
 msgid "Place of residence (neighnorhood/district)"
 msgstr ""
 
-#: webcdi/cdi_forms/models.py:214
+#: cdi_forms/models.py:214
 #, fuzzy
 #| msgid "::Your account information::"
 msgid "Primary caregiver occupation"
 msgstr "::Your account information::"
 
-#: webcdi/cdi_forms/models.py:215
+#: cdi_forms/models.py:215
 #, fuzzy
 #| msgid "::Your account information::"
 msgid "Primary caregiver occupation description"
 msgstr "::Your account information::"
 
-#: webcdi/cdi_forms/models.py:216
+#: cdi_forms/models.py:216
 #, fuzzy
 #| msgid "::Your account information::"
 msgid "Secondary caregiver occupation"
 msgstr "::Your account information::"
 
-#: webcdi/cdi_forms/models.py:217
+#: cdi_forms/models.py:217
 #, fuzzy
 #| msgid "::Your account information::"
 msgid "Secondary caregiver occupation description"
 msgstr "::Your account information::"
 
-#: webcdi/cdi_forms/models.py:223
+#: cdi_forms/models.py:223
 #, fuzzy
 #| msgid "Less than 1500 grams"
 msgid "Less than 6 months"
 msgstr "Less than 1500 grams (Less than 3 lbs, 4 oz)"
 
-#: webcdi/cdi_forms/models.py:224
+#: cdi_forms/models.py:224
 msgid "Between 6 and 12 months"
 msgstr ""
 
-#: webcdi/cdi_forms/models.py:225
+#: cdi_forms/models.py:225
 msgid "More than 12 months"
 msgstr ""
 
-#: webcdi/cdi_forms/models.py:227
+#: cdi_forms/models.py:227
 msgid "Since when"
 msgstr ""
 
-#: webcdi/cdi_forms/models.py:228
+#: cdi_forms/models.py:228
 msgid "Hours per day"
 msgstr ""
 
-#: webcdi/cdi_forms/models.py:229
+#: cdi_forms/models.py:229
 msgid "Days per week"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/background_info.html:7
-#: webcdi/cdi_forms/templates/cdi_forms/background_info.html:59
-#: webcdi/cdi_forms/templates/cdi_forms/study_group.html:7
-#: webcdi/cdi_forms/views.py:262 webcdi/cdi_forms/views.py:558
+#: cdi_forms/templates/cdi_forms/background_info.html:7
+#: cdi_forms/templates/cdi_forms/background_info.html:59
+#: cdi_forms/templates/cdi_forms/study_group.html:7 cdi_forms/views.py:262
+#: cdi_forms/views.py:558
 msgid "Next"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/background_info.html:18
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:39
-#: webcdi/cdi_forms/templates/cdi_forms/study_group.html:15
+#: cdi_forms/templates/cdi_forms/background_info.html:18
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:39
+#: cdi_forms/templates/cdi_forms/study_group.html:15
 msgid "MacArthur-Bates Communicative Development Inventory"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/background_info.html:20
-#: webcdi/cdi_forms/templates/cdi_forms/study_group.html:17
+#: cdi_forms/templates/cdi_forms/background_info.html:20
+#: cdi_forms/templates/cdi_forms/study_group.html:17
 #, python-format
 msgid "For %(min_age)s- to %(max_age)s-month-old children"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/background_info.html:23
-#: webcdi/cdi_forms/templates/cdi_forms/study_group.html:20
+#: cdi_forms/templates/cdi_forms/background_info.html:23
+#: cdi_forms/templates/cdi_forms/study_group.html:20
 msgid "Instructions for completing the language inventory"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/background_info.html:26
-#: webcdi/cdi_forms/templates/cdi_forms/study_group.html:22
+#: cdi_forms/templates/cdi_forms/background_info.html:26
+#: cdi_forms/templates/cdi_forms/study_group.html:22
 msgid ""
 "Try to complete the inventory when you have at least 30 quiet minutes, "
 "without interruptions. An example might be when your child is sleeping."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/background_info.html:28
+#: cdi_forms/templates/cdi_forms/background_info.html:28
 msgid ""
 "Try to complete the inventory when you have at least 10-15 quiet minutes, "
 "without interruptions. An example might be when your child is sleeping."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/background_info.html:30
-#: webcdi/cdi_forms/templates/cdi_forms/study_group.html:23
+#: cdi_forms/templates/cdi_forms/background_info.html:30
+#: cdi_forms/templates/cdi_forms/study_group.html:23
 msgid ""
 "You do not have to complete the inventory in one sitting. If you are "
 "interrupted, it is ok to put it down and come back to it when you have more "
 "time."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/background_info.html:31
-#: webcdi/cdi_forms/templates/cdi_forms/study_group.html:24
+#: cdi_forms/templates/cdi_forms/background_info.html:31
+#: cdi_forms/templates/cdi_forms/study_group.html:24
 msgid ""
 "Feel free to ask others (e.g. other family members, nanny, child care "
 "providers) to help you fill out this form."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/background_info.html:32
-#: webcdi/cdi_forms/templates/cdi_forms/study_group.html:25
+#: cdi_forms/templates/cdi_forms/background_info.html:32
+#: cdi_forms/templates/cdi_forms/study_group.html:25
 msgid ""
 "Please read all of the instructions on the inventory carefully, and make "
 "sure you complete all of the sections."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/background_info.html:36
+#: cdi_forms/templates/cdi_forms/background_info.html:36
 #, python-format
 msgid ""
 "You will receive a $%(gift_amount)s Amazon.com gift card after you complete "
@@ -1569,76 +1564,75 @@ msgid ""
 "complete this questionnaire once."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/background_info.html:42
-#: webcdi/cdi_forms/templates/cdi_forms/study_group.html:29
+#: cdi_forms/templates/cdi_forms/background_info.html:42
+#: cdi_forms/templates/cdi_forms/study_group.html:29
 msgid "For more information about the MB-CDI,"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/background_info.html:42
-#: webcdi/cdi_forms/templates/cdi_forms/study_group.html:29
+#: cdi_forms/templates/cdi_forms/background_info.html:42
+#: cdi_forms/templates/cdi_forms/study_group.html:29
 msgid "click here"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/background_info.html:43
-#: webcdi/cdi_forms/templates/cdi_forms/study_group.html:30
+#: cdi_forms/templates/cdi_forms/background_info.html:43
+#: cdi_forms/templates/cdi_forms/study_group.html:30
 msgid "Thank you! We appreciate your time and effort!"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/background_info.html:48
+#: cdi_forms/templates/cdi_forms/background_info.html:48
 #, fuzzy
 #| msgid "::Your account information::"
 msgid "Background Information"
 msgstr "::Your account information::"
 
-#: webcdi/cdi_forms/templates/cdi_forms/background_info.html:64
-#: webcdi/cdi_forms/templates/cdi_forms/backpage_info.html:48
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:339
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:291
-#: webcdi/cdi_forms/templates/cdi_forms/study_group.html:113
+#: cdi_forms/templates/cdi_forms/background_info.html:64
+#: cdi_forms/templates/cdi_forms/backpage_info.html:48
+#: cdi_forms/templates/cdi_forms/cdi_form.html:339
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:291
+#: cdi_forms/templates/cdi_forms/study_group.html:113
 msgid "Form unavailable. Contact admin."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/backpage_info.html:12
-#: webcdi/cdi_forms/templates/cdi_forms/backpage_info.html:45
-#: webcdi/cdi_forms/views.py:269
+#: cdi_forms/templates/cdi_forms/backpage_info.html:12
+#: cdi_forms/templates/cdi_forms/backpage_info.html:45 cdi_forms/views.py:269
 #, fuzzy
 #| msgid "Spanish"
 msgid "Finish"
 msgstr "Spanish"
 
-#: webcdi/cdi_forms/templates/cdi_forms/backpage_info.html:16
-#: webcdi/cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:14
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:14
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:328
-#: webcdi/cdi_forms/views.py:275 webcdi/cdi_forms/views.py:808
+#: cdi_forms/templates/cdi_forms/backpage_info.html:16
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:14
+#: cdi_forms/templates/cdi_forms/cdi_form.html:14
+#: cdi_forms/templates/cdi_forms/cdi_form.html:328 cdi_forms/views.py:275
+#: cdi_forms/views.py:808
 msgid "Go back to Background Info"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/backpage_info.html:30
+#: cdi_forms/templates/cdi_forms/backpage_info.html:30
 #, fuzzy
 #| msgid "::Your account information::"
 msgid "Background Information Continued"
 msgstr "::Your account information::"
 
-#: webcdi/cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:9
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:9
 msgid "Study Completed"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:31
-#: webcdi/cdi_forms/templates/cdi_forms/expired.html:32
-#: webcdi/cdi_forms/templates/cdi_forms/overflow.html:37
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:159
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:31
+#: cdi_forms/templates/cdi_forms/expired.html:32
+#: cdi_forms/templates/cdi_forms/overflow.html:37
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:159
 msgid "MB-CDI Lab Logo"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:42
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:42
 #, python-format
 msgid ""
 "Thank you for filling this out! Of the words we asked, the hardest word your "
 "child knows is \"%(easiest)s\" and the easiest word is \"%(hardest)s\"."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:45
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:45
 msgid ""
 "Thank you for taking the time to complete the MacArthur-Bates Communicative "
 "Development Inventory (CDI). With the help of parents and caregivers like "
@@ -1652,8 +1646,8 @@ msgid ""
 "stanford.edu/\" target=\"_blank\">here</a>. We appreciate your contribution!"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:28
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:192
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:28
+#: cdi_forms/templates/cdi_forms/cdi_form.html:192
 msgid ""
 "In this section, you will be asked about words that your child \"understands "
 "and says.\" Your child \"understands and says\" a word on the list if they "
@@ -1663,138 +1657,143 @@ msgid ""
 "perfectly fine!"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:41
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:206
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:41
+#: cdi_forms/templates/cdi_forms/cdi_form.html:206
 msgid "DO check the box if:"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:43
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:208
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:43
+#: cdi_forms/templates/cdi_forms/cdi_form.html:208
 msgid ""
 "Your child says the word when trying to name an object or describe something "
 "that happened.  You think s/he has a meaning for that word."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:62
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:226
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:62
+#: cdi_forms/templates/cdi_forms/cdi_form.html:226
 msgid ""
 "It's fine if your child can't say the whole word or says it his/her own "
 "\"special\" way. If you use another word in your family (e.g., Nana for "
 "Grandma), that is ok too!"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:64
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:228
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:64
+#: cdi_forms/templates/cdi_forms/cdi_form.html:228
 msgid "DO check the box."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:82
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:245
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:82
+#: cdi_forms/templates/cdi_forms/cdi_form.html:245
 msgid ""
 "DON'T check the box if your child is just stringing sounds together. This is "
 "not a real word that means something."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:99
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:174
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:261
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:99
+#: cdi_forms/templates/cdi_forms/cdi_form.html:174
+#: cdi_forms/templates/cdi_forms/cdi_form.html:261
 msgid ""
 "DON'T ask your child to repeat the words on the list. This doesn't count!"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:128
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:125
+#, fuzzy
+#| msgid "Who does your child live with?"
+msgid "Does your child say ... "
+msgstr "Who does your child live with?"
+
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:128
 msgid "* or word used in your family"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:62
+#: cdi_forms/templates/cdi_forms/cdi_base.html:62
 msgid "Instructions: "
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:66
+#: cdi_forms/templates/cdi_forms/cdi_base.html:66
 msgid "This form can be filled any time before the due date."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:67
+#: cdi_forms/templates/cdi_forms/cdi_base.html:67
 msgid ""
 "It can also be saved at any time and resumed later by using the same link"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:67
+#: cdi_forms/templates/cdi_forms/cdi_base.html:67
 msgid "create bookmark"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:68
+#: cdi_forms/templates/cdi_forms/cdi_base.html:68
 msgid "After the form is submitted, it cannot be altered."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:69
+#: cdi_forms/templates/cdi_forms/cdi_base.html:69
 msgid "The form also cannot be altered after the due date."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:70
+#: cdi_forms/templates/cdi_forms/cdi_base.html:70
 msgid ""
 "Please use the navigation buttons below. Do not use the \"back\" and "
 "\"forward\" buttons on your browser."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:71
+#: cdi_forms/templates/cdi_forms/cdi_base.html:71
 msgid ""
 "You can use the tab button and arrows keys to quickly navigate and answer "
 "questions."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:99
+#: cdi_forms/templates/cdi_forms/cdi_base.html:99
 msgid "Due date"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:104
+#: cdi_forms/templates/cdi_forms/cdi_base.html:104
 msgid "Show waiver of documentation"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:109
+#: cdi_forms/templates/cdi_forms/cdi_base.html:109
 msgid "Reach out to the Web-CDI Team!"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:153
+#: cdi_forms/templates/cdi_forms/cdi_base.html:153
 msgid "Okay"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:166
+#: cdi_forms/templates/cdi_forms/cdi_base.html:166
 #, fuzzy
 #| msgid "Documentation"
 msgid "Waiver Denied"
 msgstr "Documentation"
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:170
+#: cdi_forms/templates/cdi_forms/cdi_base.html:170
 msgid ""
 "Thank you for your response. We are unable to continue. Please close the "
 "window. If you would like, you may review the Waiver."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_base.html:173
+#: cdi_forms/templates/cdi_forms/cdi_base.html:173
 msgid "Review Waiver"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:10
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:327
-#: webcdi/cdi_forms/templates/cdi_forms/study_group.html:6
-#: webcdi/cdi_forms/views.py:797
+#: cdi_forms/templates/cdi_forms/cdi_form.html:10
+#: cdi_forms/templates/cdi_forms/cdi_form.html:327
+#: cdi_forms/templates/cdi_forms/study_group.html:6 cdi_forms/views.py:797
 msgid "Save"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:24
+#: cdi_forms/templates/cdi_forms/cdi_form.html:24
 msgid "Table of Contents:"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:26
+#: cdi_forms/templates/cdi_forms/cdi_form.html:26
 msgid "Contents:"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:28
+#: cdi_forms/templates/cdi_forms/cdi_form.html:28
 msgid "Instructions:"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:60
+#: cdi_forms/templates/cdi_forms/cdi_form.html:60
 msgid ""
 "In this section, you will be asked to think about which phrases and words "
 "your child \"understands\" and \"understands and says.\"  This assessment is "
@@ -1802,164 +1801,164 @@ msgid ""
 "lot of the words on the form. That is perfectly fine!"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:63
+#: cdi_forms/templates/cdi_forms/cdi_form.html:63
 msgid ""
 "Your child \"understands\" a word/phrase if they know what the word/phrase "
 "means, even though they may not be able to say it themselves. Here are some "
 "examples."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:77
+#: cdi_forms/templates/cdi_forms/cdi_form.html:77
 msgid "DO check \"understands\" if:"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:79
+#: cdi_forms/templates/cdi_forms/cdi_form.html:79
 msgid ""
 "Your child responds appropriately to the word/phrase. For example, when you "
 "say \"Get the ball,\" s/he turns and tries to find the ball."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:94
+#: cdi_forms/templates/cdi_forms/cdi_form.html:94
 msgid "DON'T check \"understands\" if:"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:96
+#: cdi_forms/templates/cdi_forms/cdi_form.html:96
 msgid ""
 "Your child doesn't have a meaning for the word/phrase.  S/he may have heard "
 "it before, like in a story, but you don't think s/he knows what it means."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:106
+#: cdi_forms/templates/cdi_forms/cdi_form.html:106
 msgid ""
 "Your child \"understands and says\" a word/phrase if they know what the word/"
 "phrase means AND they are able to say it by themselves. Here are some "
 "examples."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:118
+#: cdi_forms/templates/cdi_forms/cdi_form.html:118
 msgid "DO check \"understands and says\" if:"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:120
+#: cdi_forms/templates/cdi_forms/cdi_form.html:120
 msgid ""
 "Your child says a word/phrase when trying to name an object or describe "
 "something that happened.  You think s/he has a meaning for that word/phrase."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:137
+#: cdi_forms/templates/cdi_forms/cdi_form.html:137
 msgid ""
 "It's fine if your child can't say the whole word or says it his/her own "
 "\"special\" way."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:139
+#: cdi_forms/templates/cdi_forms/cdi_form.html:139
 msgid "DO check \"understands and says.\""
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:156
+#: cdi_forms/templates/cdi_forms/cdi_form.html:156
 msgid ""
 "DON'T check if your child is just stringing sounds together.  This is not a "
 "real word that means something."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:158
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:176
+#: cdi_forms/templates/cdi_forms/cdi_form.html:158
+#: cdi_forms/templates/cdi_forms/cdi_form.html:176
 msgid "DON'T check \"understands and says.\""
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:285
+#: cdi_forms/templates/cdi_forms/cdi_form.html:285
 msgid ""
 "You are almost done! Click \"Yes\" if you agree with ALL of the following "
 "points. Your answer will not affect your results. There is nothing wrong "
 "with choosing \"No\":"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:289
+#: cdi_forms/templates/cdi_forms/cdi_form.html:289
 #, python-format
 msgid "You have a child who is %(age)s months old."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:290
+#: cdi_forms/templates/cdi_forms/cdi_form.html:290
 msgid "You filled out the entire questionnaire to the best of your ability."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:291
+#: cdi_forms/templates/cdi_forms/cdi_form.html:291
 msgid "You are taking this questionnaire for the FIRST time."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:300
+#: cdi_forms/templates/cdi_forms/cdi_form.html:300
 #, python-format
 msgid ""
 "Yes, I have a child who is %(age)s months old, I filled out the entire "
 "questionnaire, and I am taking this questionnaire for the first time."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:306
+#: cdi_forms/templates/cdi_forms/cdi_form.html:306
 #, python-format
 msgid ""
 "No, I do NOT have a child who is %(age)s months old, I have NOT filled out "
 "the entire questionnaire, and/or I have taken this questionnaire before."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:312
+#: cdi_forms/templates/cdi_forms/cdi_form.html:312
 msgid ""
 "Finally, please check the Captcha box below to display the submit button!"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:321
+#: cdi_forms/templates/cdi_forms/cdi_form.html:321
 msgid "Previous Page"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:322
+#: cdi_forms/templates/cdi_forms/cdi_form.html:322
 msgid "Next Page"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:334
+#: cdi_forms/templates/cdi_forms/cdi_form.html:334
 msgid "Don't forget to save your progress whenever you can!"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:381
+#: cdi_forms/templates/cdi_forms/cdi_form.html:381
 msgid ""
 "Are you ready to submit? You cannot change your answers after submission."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_form.html:411
+#: cdi_forms/templates/cdi_forms/cdi_form.html:411
 msgid "understands and says"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/cdi_items.html:18
+#: cdi_forms/templates/cdi_forms/cdi_items.html:18
 msgid "Hide/Show Instructions: "
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/contact.html:6
+#: cdi_forms/templates/cdi_forms/contact.html:6
 msgid "Contact Form "
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/contact.html:33
+#: cdi_forms/templates/cdi_forms/contact.html:33
 msgid ""
 "Fill out the form below and a member of our team will get back to you soon!"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/contact.html:67
+#: cdi_forms/templates/cdi_forms/contact.html:67
 msgid " characters remaining"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/expired.html:9
+#: cdi_forms/templates/cdi_forms/expired.html:9
 msgid "Link Expired"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/expired.html:36
+#: cdi_forms/templates/cdi_forms/expired.html:36
 msgid ""
 "Unfortunately the time allowed to complete this survey has expired.  Please "
 "contact your researcher."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/overflow.html:40
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:165
+#: cdi_forms/templates/cdi_forms/overflow.html:40
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:165
 msgid "Thank you!"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/overflow.html:44
+#: cdi_forms/templates/cdi_forms/overflow.html:44
 msgid ""
 "Thank you for your interest in completing the MacArthur-Bates Communicative "
 "Development Inventory (CDI)! It looks like you have completed the CDI form "
@@ -1970,7 +1969,7 @@ msgid ""
 "\">here</a>. Again, we appreciate your interest!"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/overflow.html:49
+#: cdi_forms/templates/cdi_forms/overflow.html:49
 #, python-format
 msgid ""
 "Thank you for your interest in completing the MacArthur-Bates Communicative "
@@ -1987,21 +1986,21 @@ msgid ""
 "interest!"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:40
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:40
 msgid "Interesting tidbits learned from how your child speaks!"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:74
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:74
 #, python-format
 msgid "Words Produced (%%)"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:114
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:114
 #, python-format
 msgid "Words Understood (%%)"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:168
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:168
 msgid ""
 "Thank you for taking the time to complete the MacArthur-Bates Communicative "
 "Development Inventory (CDI). With the help of parents and caregivers like "
@@ -2017,7 +2016,7 @@ msgid ""
 "\">here</a>. We appreciate your contribution!"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:175
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:175
 #, python-format
 msgid ""
 "We're sorry but it looks like we have run out of Amazon.com Gift Cards! "
@@ -2025,7 +2024,7 @@ msgid ""
 "we will quickly fix this issue."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:180
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:180
 msgid ""
 "Thank you for participating in our Web-CDI project! It is our pleasure to "
 "send you this Amazon.com Gift Card that can be redeemed towards millions of "
@@ -2034,15 +2033,15 @@ msgid ""
 "the gift card claim code below."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:184
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:184
 msgid "Gift Card Amount"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:185
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:185
 msgid "Claim Code"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:189
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:189
 #, python-format
 msgid ""
 "To redeem your gift card, visit <a href=\"%(redeem_url)s\" target=\"_blank"
@@ -2050,562 +2049,557 @@ msgid ""
 "\" target=\"_blank\">www.amazon.com/gc-legal</a>."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:213
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:213
 msgid "Graph My Data!"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:219
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:219
 msgid "Show Me My Answers"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:223
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:223
 msgid "Print My Answers"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:228
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:228
 msgid "Click to complete the study"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:238
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:238
 msgid "Share on Facebook"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:257
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:261
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:266
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:257
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:261
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:266
 msgid "Save as PDF"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:369
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:369
 msgid "My child says PPP words and understands UUU words."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:371
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:371
 msgid "My child says PPP words."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:373
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:373
 msgid "My child understands UUU words."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:512
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:512
 msgid "My child produces the most words in the bestProdCat category."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:516
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:516
 msgid "My child understands the most words in the bestCompCat category."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:602
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:602
 msgid "The hardest word my child says is INSERTWORDHERE."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/printable_cdi.html:607
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:607
 msgid "The hardest word my child understands is INSERTWORDHERE."
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/study_group.html:46
+#: cdi_forms/templates/cdi_forms/study_group.html:46
 #, fuzzy
 #| msgid "Who does your child live with?"
 msgid "How old is your child?"
 msgstr "Who does your child live with?"
 
-#: webcdi/cdi_forms/templates/cdi_forms/study_group.html:57
+#: cdi_forms/templates/cdi_forms/study_group.html:57
 msgid ""
 "My baby speaks LANGUAGE and is between MIN_AGE and MAX_AGE months old. [XX "
 "slot(s) left]"
 msgstr ""
 
-#: webcdi/cdi_forms/templates/cdi_forms/study_group.html:60
+#: cdi_forms/templates/cdi_forms/study_group.html:60
 msgid "Born between STARTDATE and ENDDATE"
 msgstr ""
 
-#: webcdi/cdi_forms/views.py:154 webcdi/cdi_forms/views.py:374
-#: webcdi/cdi_forms/views.py:608
+#: cdi_forms/views.py:154 cdi_forms/views.py:374 cdi_forms/views.py:608
 #, python-format
 msgid "Your child should be between %(min_age)d to %(max_age)d months of age."
 msgstr ""
 
-#: webcdi/cdi_forms/views.py:168 webcdi/cdi_forms/views.py:388
-#: webcdi/cdi_forms/views.py:621
+#: cdi_forms/views.py:168 cdi_forms/views.py:388 cdi_forms/views.py:621
 #, python-format
 msgid " Not the right age? <a href='%(sgurl)s'> Click here</a>"
 msgstr ""
 
-#: webcdi/cdi_forms/views.py:172 webcdi/cdi_forms/views.py:392
-#: webcdi/cdi_forms/views.py:625
+#: cdi_forms/views.py:172 cdi_forms/views.py:392 cdi_forms/views.py:625
 msgid ""
 " Not the right age? You should contact your researcher for steps on what to "
 "do next."
 msgstr ""
 
-#: webcdi/researcher_UI/admin_actions.py:13
-#: webcdi/researcher_UI/admin_actions.py:27
+#: researcher_UI/admin_actions.py:13 researcher_UI/admin_actions.py:27
 msgid "Instruments for all Studies must be the same"
 msgstr ""
 
-#: webcdi/researcher_UI/admin_actions.py:16
-#: webcdi/researcher_UI/admin_actions.py:30
+#: researcher_UI/admin_actions.py:16 researcher_UI/admin_actions.py:30
 #, python-format
 msgid "Studies must have at least 1 responsent. %s has none"
 msgstr ""
 
-#: webcdi/researcher_UI/forms.py:18
+#: researcher_UI/forms.py:18
 msgid "Default"
 msgstr ""
 
-#: webcdi/researcher_UI/templates/admin/admin_base.html:41
+#: researcher_UI/templates/admin/admin_base.html:41
 msgid "Welcome,"
 msgstr "Welcome,"
 
-#: webcdi/researcher_UI/templates/admin/admin_base.html:46
+#: researcher_UI/templates/admin/admin_base.html:46
 msgid "View site"
 msgstr "View site"
 
-#: webcdi/researcher_UI/templates/admin/admin_base.html:51
-#: webcdi/researcher_UI/templates/registration/password_change_done.html:3
-#: webcdi/researcher_UI/templates/registration/password_change_form.html:6
+#: researcher_UI/templates/admin/admin_base.html:51
+#: researcher_UI/templates/registration/password_change_done.html:3
+#: researcher_UI/templates/registration/password_change_form.html:6
 msgid "Documentation"
 msgstr "Documentation"
 
-#: webcdi/researcher_UI/templates/admin/admin_base.html:55
-#: webcdi/researcher_UI/templates/registration/password_change_done.html:3
-#: webcdi/researcher_UI/templates/registration/password_change_form.html:6
+#: researcher_UI/templates/admin/admin_base.html:55
+#: researcher_UI/templates/registration/password_change_done.html:3
+#: researcher_UI/templates/registration/password_change_form.html:6
 msgid "Change password"
 msgstr "Change password"
 
-#: webcdi/researcher_UI/templates/admin/admin_base.html:57
-#: webcdi/researcher_UI/templates/registration/password_change_done.html:3
-#: webcdi/researcher_UI/templates/registration/password_change_form.html:6
+#: researcher_UI/templates/admin/admin_base.html:57
+#: researcher_UI/templates/registration/password_change_done.html:3
+#: researcher_UI/templates/registration/password_change_form.html:6
 msgid "Log out"
 msgstr "Log out"
 
-#: webcdi/researcher_UI/templates/admin/admin_base.html:67
-#: webcdi/researcher_UI/templates/registration/password_change_done.html:6
-#: webcdi/researcher_UI/templates/registration/password_change_form.html:9
-#: webcdi/researcher_UI/templates/registration/password_reset_complete.html:6
-#: webcdi/researcher_UI/templates/registration/password_reset_confirm.html:8
-#: webcdi/researcher_UI/templates/registration/password_reset_done.html:6
-#: webcdi/researcher_UI/templates/registration/password_reset_form.html:8
+#: researcher_UI/templates/admin/admin_base.html:67
+#: researcher_UI/templates/registration/password_change_done.html:6
+#: researcher_UI/templates/registration/password_change_form.html:9
+#: researcher_UI/templates/registration/password_reset_complete.html:6
+#: researcher_UI/templates/registration/password_reset_confirm.html:8
+#: researcher_UI/templates/registration/password_reset_done.html:6
+#: researcher_UI/templates/registration/password_reset_form.html:8
 msgid "Home"
 msgstr "Home"
 
-#: webcdi/researcher_UI/templates/admin/admin_base_site.html:3
+#: researcher_UI/templates/admin/admin_base_site.html:3
 msgid "Django site admin"
 msgstr "Django site admin"
 
-#: webcdi/researcher_UI/templates/registration/acceptance_email.txt:2
-#: webcdi/researcher_UI/templates/registration/activation_email.txt:2
-#: webcdi/researcher_UI/templates/registration/registration_email.txt:2
-#: webcdi/researcher_UI/templates/registration/rejection_email.txt:2
-#: webcdi/supplementtut/templates/supplementtut/acceptance_email.txt:2
-#: webcdi/supplementtut/templates/supplementtut/activation_email.txt:2
-#: webcdi/supplementtut/templates/supplementtut/registration_email.txt:2
-#: webcdi/supplementtut/templates/supplementtut/rejection_email.txt:2
+#: researcher_UI/templates/registration/acceptance_email.txt:2
+#: researcher_UI/templates/registration/activation_email.txt:2
+#: researcher_UI/templates/registration/registration_email.txt:2
+#: researcher_UI/templates/registration/rejection_email.txt:2
+#: supplementtut/templates/supplementtut/acceptance_email.txt:2
+#: supplementtut/templates/supplementtut/activation_email.txt:2
+#: supplementtut/templates/supplementtut/registration_email.txt:2
+#: supplementtut/templates/supplementtut/rejection_email.txt:2
 #, python-format
 msgid "Dear %(user)s,"
 msgstr "Dear %(user)s,"
 
-#: webcdi/researcher_UI/templates/registration/acceptance_email.txt:4
+#: researcher_UI/templates/registration/acceptance_email.txt:4
 #, python-format
 msgid "Your registration at %(site_name)s was accepted by the Web-CDI Team."
 msgstr "Your registration at %(site_name)s was accepted by the Web-CDI Team."
 
-#: webcdi/researcher_UI/templates/registration/acceptance_email.txt:6
-#: webcdi/supplementtut/templates/supplementtut/acceptance_email.txt:6
+#: researcher_UI/templates/registration/acceptance_email.txt:6
+#: supplementtut/templates/supplementtut/acceptance_email.txt:6
 msgid ""
 "Please click the following url and set your account password to finish "
 "activation."
 msgstr ""
 
-#: webcdi/researcher_UI/templates/registration/acceptance_email.txt:10
-#: webcdi/supplementtut/templates/supplementtut/acceptance_email.txt:10
+#: researcher_UI/templates/registration/acceptance_email.txt:10
+#: supplementtut/templates/supplementtut/acceptance_email.txt:10
 #, python-format
 msgid "The activation link above will be expired in %(expiration_days)s days."
 msgstr "The activation link above will be expired in %(expiration_days)s days."
 
-#: webcdi/researcher_UI/templates/registration/acceptance_email_subject.txt:2
-#: webcdi/supplementtut/templates/supplementtut/acceptance_email_subject.txt:2
+#: researcher_UI/templates/registration/acceptance_email_subject.txt:2
+#: supplementtut/templates/supplementtut/acceptance_email_subject.txt:2
 #, python-format
 msgid "Your registration was accepted -- %(site_name)s"
 msgstr "Your registration was accepted -- %(site_name)s"
 
-#: webcdi/researcher_UI/templates/registration/activation_complete.html:4
-#: webcdi/researcher_UI/templates/registration/activation_complete.html:6
-#: webcdi/supplementtut/templates/supplementtut/activation_complete.html:4
-#: webcdi/supplementtut/templates/supplementtut/activation_complete.html:6
+#: researcher_UI/templates/registration/activation_complete.html:4
+#: researcher_UI/templates/registration/activation_complete.html:6
+#: supplementtut/templates/supplementtut/activation_complete.html:4
+#: supplementtut/templates/supplementtut/activation_complete.html:6
 msgid "Activation was complete"
 msgstr "Activation was complete"
 
-#: webcdi/researcher_UI/templates/registration/activation_complete.html:11
-#: webcdi/supplementtut/templates/supplementtut/activation_complete.html:11
+#: researcher_UI/templates/registration/activation_complete.html:11
+#: supplementtut/templates/supplementtut/activation_complete.html:11
 msgid "Your account has been activated!"
 msgstr "Your account has been activated!"
 
-#: webcdi/researcher_UI/templates/registration/activation_email.txt:4
+#: researcher_UI/templates/registration/activation_email.txt:4
 #, python-format
 msgid "Your account at %(site_name)s was activated by the Web-CDI Team"
 msgstr "Your account at %(site_name)s was activated by the Web-CDI Team"
 
-#: webcdi/researcher_UI/templates/registration/activation_email.txt:6
-#: webcdi/supplementtut/templates/supplementtut/activation_email.txt:6
+#: researcher_UI/templates/registration/activation_email.txt:6
+#: supplementtut/templates/supplementtut/activation_email.txt:6
 msgid ""
 "The password of your account was generated automatically and displayed below."
 msgstr ""
 
-#: webcdi/researcher_UI/templates/registration/activation_email.txt:7
-#: webcdi/researcher_UI/templates/registration/activation_email.txt:18
-#: webcdi/supplementtut/templates/supplementtut/activation_email.txt:7
-#: webcdi/supplementtut/templates/supplementtut/activation_email.txt:18
+#: researcher_UI/templates/registration/activation_email.txt:7
+#: researcher_UI/templates/registration/activation_email.txt:18
+#: supplementtut/templates/supplementtut/activation_email.txt:7
+#: supplementtut/templates/supplementtut/activation_email.txt:18
 msgid "Please click the following url to login."
 msgstr "Please click the following url to login."
 
-#: webcdi/researcher_UI/templates/registration/activation_email.txt:8
-#: webcdi/supplementtut/templates/supplementtut/activation_email.txt:8
+#: researcher_UI/templates/registration/activation_email.txt:8
+#: supplementtut/templates/supplementtut/activation_email.txt:8
 msgid ""
 "It is strongly recommended that you change your initial password to "
 "something more secure."
 msgstr ""
 
-#: webcdi/researcher_UI/templates/registration/activation_email.txt:10
-#: webcdi/researcher_UI/templates/registration/activation_email.txt:20
-#: webcdi/supplementtut/templates/supplementtut/activation_email.txt:10
-#: webcdi/supplementtut/templates/supplementtut/activation_email.txt:20
+#: researcher_UI/templates/registration/activation_email.txt:10
+#: researcher_UI/templates/registration/activation_email.txt:20
+#: supplementtut/templates/supplementtut/activation_email.txt:10
+#: supplementtut/templates/supplementtut/activation_email.txt:20
 msgid "::Your account information::"
 msgstr "::Your account information::"
 
-#: webcdi/researcher_UI/templates/registration/activation_email.txt:11
-#: webcdi/researcher_UI/templates/registration/activation_email.txt:21
-#: webcdi/supplementtut/templates/supplementtut/activation_email.txt:11
-#: webcdi/supplementtut/templates/supplementtut/activation_email.txt:21
+#: researcher_UI/templates/registration/activation_email.txt:11
+#: researcher_UI/templates/registration/activation_email.txt:21
+#: supplementtut/templates/supplementtut/activation_email.txt:11
+#: supplementtut/templates/supplementtut/activation_email.txt:21
 #, python-format
 msgid "USERNAME: %(user)s"
 msgstr "USERNAME: %(user)s"
 
-#: webcdi/researcher_UI/templates/registration/activation_email.txt:12
-#: webcdi/supplementtut/templates/supplementtut/activation_email.txt:12
+#: researcher_UI/templates/registration/activation_email.txt:12
+#: supplementtut/templates/supplementtut/activation_email.txt:12
 #, python-format
 msgid "PASSWORD: %(password)s"
 msgstr "PASSWORD: %(password)s"
 
-#: webcdi/researcher_UI/templates/registration/activation_email.txt:16
+#: researcher_UI/templates/registration/activation_email.txt:16
 #, python-format
 msgid ""
 "Your account at %(site_name)s was successfully activated by the Web-CDI Team"
 msgstr ""
 
-#: webcdi/researcher_UI/templates/registration/activation_email_subject.txt:2
-#: webcdi/supplementtut/templates/supplementtut/activation_email_subject.txt:2
+#: researcher_UI/templates/registration/activation_email_subject.txt:2
+#: supplementtut/templates/supplementtut/activation_email_subject.txt:2
 #, python-format
 msgid "Your account was activated -- %(site_name)s"
 msgstr "Your account was activated -- %(site_name)s"
 
-#: webcdi/researcher_UI/templates/registration/activation_form.html:4
-#: webcdi/researcher_UI/templates/registration/activation_form.html:6
-#: webcdi/supplementtut/templates/supplementtut/activation_form.html:4
-#: webcdi/supplementtut/templates/supplementtut/activation_form.html:6
+#: researcher_UI/templates/registration/activation_form.html:4
+#: researcher_UI/templates/registration/activation_form.html:6
+#: supplementtut/templates/supplementtut/activation_form.html:4
+#: supplementtut/templates/supplementtut/activation_form.html:6
 msgid "Activate your account"
 msgstr "Activate your account"
 
-#: webcdi/researcher_UI/templates/registration/activation_form.html:12
-#: webcdi/supplementtut/templates/supplementtut/activation_form.html:12
+#: researcher_UI/templates/registration/activation_form.html:12
+#: supplementtut/templates/supplementtut/activation_form.html:12
 msgid "Please fill the password to complete account activation"
 msgstr "Please fill the password to complete account activation"
 
-#: webcdi/researcher_UI/templates/registration/activation_form.html:25
-#: webcdi/supplementtut/templates/supplementtut/activation_form.html:16
+#: researcher_UI/templates/registration/activation_form.html:25
+#: supplementtut/templates/supplementtut/activation_form.html:16
 msgid "Activate"
 msgstr "Activate"
 
-#: webcdi/researcher_UI/templates/registration/lockout.html:5
-#: webcdi/researcher_UI/templates/registration/lockout.html:7
-#: webcdi/researcher_UI/templates/registration/login.html:5
-#: webcdi/researcher_UI/templates/registration/login.html:7
+#: researcher_UI/templates/registration/lockout.html:5
+#: researcher_UI/templates/registration/lockout.html:7
+#: researcher_UI/templates/registration/login.html:5
+#: researcher_UI/templates/registration/login.html:7
 msgid "Login"
 msgstr "Login"
 
-#: webcdi/researcher_UI/templates/registration/login.html:14
+#: researcher_UI/templates/registration/login.html:14
 msgid "Please fill your username and password to login"
 msgstr "Please fill your username and password to login"
 
-#: webcdi/researcher_UI/templates/registration/login.html:18
-#: webcdi/researcher_UI/templates/registration/login.html:68
-#: webcdi/researcher_UI/templates/registration/password_reset_complete.html:18
-#: webcdi/researcher_UI/templates/researcher_UI/login.html:83
+#: researcher_UI/templates/registration/login.html:18
+#: researcher_UI/templates/registration/login.html:68
+#: researcher_UI/templates/registration/password_reset_complete.html:18
+#: researcher_UI/templates/researcher_UI/login.html:83
 msgid "Log in"
 msgstr "Log in"
 
-#: webcdi/researcher_UI/templates/registration/login.html:26
-#: webcdi/researcher_UI/templates/researcher_UI/login.html:26
+#: researcher_UI/templates/registration/login.html:26
+#: researcher_UI/templates/researcher_UI/login.html:26
 msgid "Please correct the error below."
 msgstr "Please correct the error below."
 
-#: webcdi/researcher_UI/templates/registration/login.html:26
-#: webcdi/researcher_UI/templates/researcher_UI/login.html:26
+#: researcher_UI/templates/registration/login.html:26
+#: researcher_UI/templates/researcher_UI/login.html:26
 msgid "Please correct the errors below."
 msgstr "Please correct the errors below."
 
-#: webcdi/researcher_UI/templates/registration/login.html:42
-#: webcdi/researcher_UI/templates/researcher_UI/login.html:42
+#: researcher_UI/templates/registration/login.html:42
+#: researcher_UI/templates/researcher_UI/login.html:42
 #, python-format
 msgid ""
 "You are authenticated as %(username)s, but are not authorized to access this "
 "page. Would you like to login to a different account?"
 msgstr ""
 
-#: webcdi/researcher_UI/templates/registration/logout.html:4
-#: webcdi/researcher_UI/templates/registration/logout.html:6
+#: researcher_UI/templates/registration/logout.html:4
+#: researcher_UI/templates/registration/logout.html:6
 msgid "Logged out"
 msgstr "Logged out"
 
-#: webcdi/researcher_UI/templates/registration/logout.html:10
+#: researcher_UI/templates/registration/logout.html:10
 msgid "You are logged out."
 msgstr "You are logged out."
 
-#: webcdi/researcher_UI/templates/registration/password_change_done.html:7
-#: webcdi/researcher_UI/templates/registration/password_change_form.html:10
+#: researcher_UI/templates/registration/password_change_done.html:7
+#: researcher_UI/templates/registration/password_change_form.html:10
 msgid "Password change"
 msgstr "Password change"
 
-#: webcdi/researcher_UI/templates/registration/password_change_done.html:15
+#: researcher_UI/templates/registration/password_change_done.html:15
 msgid "Your password was changed."
 msgstr "Your password was changed."
 
-#: webcdi/researcher_UI/templates/registration/password_change_form.html:22
+#: researcher_UI/templates/registration/password_change_form.html:22
 msgid ""
 "Please enter your old password, for security's sake, and then enter your new "
 "password twice so we can verify you typed it in correctly."
 msgstr ""
 
-#: webcdi/researcher_UI/templates/registration/password_change_form.html:35
-#: webcdi/researcher_UI/templates/registration/password_reset_confirm.html:42
+#: researcher_UI/templates/registration/password_change_form.html:35
+#: researcher_UI/templates/registration/password_reset_confirm.html:42
 msgid "Change my password"
 msgstr "Change my password"
 
-#: webcdi/researcher_UI/templates/registration/password_reset_complete.html:7
-#: webcdi/researcher_UI/templates/registration/password_reset_done.html:7
-#: webcdi/researcher_UI/templates/registration/password_reset_form.html:9
+#: researcher_UI/templates/registration/password_reset_complete.html:7
+#: researcher_UI/templates/registration/password_reset_done.html:7
+#: researcher_UI/templates/registration/password_reset_form.html:9
 msgid "Password reset"
 msgstr "Password reset"
 
-#: webcdi/researcher_UI/templates/registration/password_reset_complete.html:16
+#: researcher_UI/templates/registration/password_reset_complete.html:16
 msgid "Your password has been set.  You may go ahead and log in now."
 msgstr "Your password has been set.  You may go ahead and log in now."
 
-#: webcdi/researcher_UI/templates/registration/password_reset_confirm.html:9
+#: researcher_UI/templates/registration/password_reset_confirm.html:9
 msgid "Password reset confirmation"
 msgstr "Password reset confirmation"
 
-#: webcdi/researcher_UI/templates/registration/password_reset_confirm.html:22
+#: researcher_UI/templates/registration/password_reset_confirm.html:22
 msgid ""
 "Please enter your new password twice so we can verify you typed it in "
 "correctly."
 msgstr ""
 
-#: webcdi/researcher_UI/templates/registration/password_reset_confirm.html:50
+#: researcher_UI/templates/registration/password_reset_confirm.html:50
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
 "used.  Please request a new password reset."
 msgstr ""
 
-#: webcdi/researcher_UI/templates/registration/password_reset_done.html:15
+#: researcher_UI/templates/registration/password_reset_done.html:15
 msgid ""
 "We emailed you instructions for setting your password. If an account exists "
 "with the email you entered, you should receive them shortly."
 msgstr ""
 
-#: webcdi/researcher_UI/templates/registration/password_reset_done.html:17
+#: researcher_UI/templates/registration/password_reset_done.html:17
 msgid ""
 "If you do not receive an email, please make sure you entered the address you "
 "registered with and check your spam folder."
 msgstr ""
 
-#: webcdi/researcher_UI/templates/registration/password_reset_email.html:2
+#: researcher_UI/templates/registration/password_reset_email.html:2
 #, python-format
 msgid ""
 "You received this email because you requested a password reset for your user "
 "account at %(site_name)s."
 msgstr ""
 
-#: webcdi/researcher_UI/templates/registration/password_reset_email.html:4
+#: researcher_UI/templates/registration/password_reset_email.html:4
 msgid "Please go to the following page and choose a new password:"
 msgstr "Please go to the following page and choose a new password:"
 
-#: webcdi/researcher_UI/templates/registration/password_reset_email.html:8
+#: researcher_UI/templates/registration/password_reset_email.html:8
 msgid "Your username, in case you have forgotten:"
 msgstr "Your username, in case you have forgotten:"
 
-#: webcdi/researcher_UI/templates/registration/password_reset_email.html:10
+#: researcher_UI/templates/registration/password_reset_email.html:10
 msgid "Thank you for using Web-CDI!"
 msgstr "Thank you for using Web-CDI!"
 
-#: webcdi/researcher_UI/templates/registration/password_reset_email.html:12
+#: researcher_UI/templates/registration/password_reset_email.html:12
 #, python-format
 msgid "The %(site_name)s team"
 msgstr "The %(site_name)s team"
 
-#: webcdi/researcher_UI/templates/registration/password_reset_form.html:20
+#: researcher_UI/templates/registration/password_reset_form.html:20
 msgid ""
 "Forgotten your password? Enter your email address below and we will email "
 "instructions for setting a new one."
 msgstr ""
 
-#: webcdi/researcher_UI/templates/registration/password_reset_form.html:31
+#: researcher_UI/templates/registration/password_reset_form.html:31
 msgid "Reset my password"
 msgstr "Reset my password"
 
-#: webcdi/researcher_UI/templates/registration/registration_closed.html:4
-#: webcdi/researcher_UI/templates/registration/registration_closed.html:6
-#: webcdi/supplementtut/templates/supplementtut/registration_closed.html:4
-#: webcdi/supplementtut/templates/supplementtut/registration_closed.html:6
+#: researcher_UI/templates/registration/registration_closed.html:4
+#: researcher_UI/templates/registration/registration_closed.html:6
+#: supplementtut/templates/supplementtut/registration_closed.html:4
+#: supplementtut/templates/supplementtut/registration_closed.html:6
 msgid "Registration is closed"
 msgstr "Registration is closed"
 
-#: webcdi/researcher_UI/templates/registration/registration_closed.html:10
-#: webcdi/supplementtut/templates/supplementtut/registration_closed.html:10
+#: researcher_UI/templates/registration/registration_closed.html:10
+#: supplementtut/templates/supplementtut/registration_closed.html:10
 msgid "The registration is currently closed."
 msgstr "The registration is currently closed."
 
-#: webcdi/researcher_UI/templates/registration/registration_complete.html:4
-#: webcdi/researcher_UI/templates/registration/registration_complete.html:6
-#: webcdi/supplementtut/templates/supplementtut/registration_complete.html:4
-#: webcdi/supplementtut/templates/supplementtut/registration_complete.html:6
+#: researcher_UI/templates/registration/registration_complete.html:4
+#: researcher_UI/templates/registration/registration_complete.html:6
+#: supplementtut/templates/supplementtut/registration_complete.html:4
+#: supplementtut/templates/supplementtut/registration_complete.html:6
 msgid "Registration is complete!"
 msgstr "Registration is complete!"
 
-#: webcdi/researcher_UI/templates/registration/registration_complete.html:12
-#: webcdi/supplementtut/templates/supplementtut/registration_complete.html:11
+#: researcher_UI/templates/registration/registration_complete.html:12
+#: supplementtut/templates/supplementtut/registration_complete.html:11
 msgid "You have successfully filled out our registration form."
 msgstr "You have successfully filled out our registration form."
 
-#: webcdi/researcher_UI/templates/registration/registration_complete.html:13
-#: webcdi/supplementtut/templates/supplementtut/registration_complete.html:12
+#: researcher_UI/templates/registration/registration_complete.html:13
+#: supplementtut/templates/supplementtut/registration_complete.html:12
 msgid "Please wait until the Web-CDI team can review your application."
 msgstr "Please wait until the Web-CDI team can review your application."
 
-#: webcdi/researcher_UI/templates/registration/registration_complete.html:14
-#: webcdi/researcher_UI/templates/registration/registration_email.txt:6
-#: webcdi/supplementtut/templates/supplementtut/registration_complete.html:13
-#: webcdi/supplementtut/templates/supplementtut/registration_email.txt:6
+#: researcher_UI/templates/registration/registration_complete.html:14
+#: researcher_UI/templates/registration/registration_email.txt:6
+#: supplementtut/templates/supplementtut/registration_complete.html:13
+#: supplementtut/templates/supplementtut/registration_email.txt:6
 msgid "You will receive an acceptance or rejection email within several days."
 msgstr "You will receive an acceptance or rejection email within several days."
 
-#: webcdi/researcher_UI/templates/registration/registration_email.txt:3
+#: researcher_UI/templates/registration/registration_email.txt:3
 msgid "Your account application was completed successfully."
 msgstr "Your account application was completed successfully."
 
-#: webcdi/researcher_UI/templates/registration/registration_email.txt:5
+#: researcher_UI/templates/registration/registration_email.txt:5
 msgid "A member of the Web-CDI team will review your registration shortly."
 msgstr "A member of the Web-CDI team will review your registration shortly."
 
-#: webcdi/researcher_UI/templates/registration/registration_email_subject.txt:2
-#: webcdi/supplementtut/templates/supplementtut/registration_email_subject.txt:2
+#: researcher_UI/templates/registration/registration_email_subject.txt:2
+#: supplementtut/templates/supplementtut/registration_email_subject.txt:2
 #, python-format
 msgid "Your registration was created -- %(site_name)s"
 msgstr "Your registration was created -- %(site_name)s"
 
-#: webcdi/researcher_UI/templates/registration/registration_form.html:4
-#: webcdi/researcher_UI/templates/registration/registration_form.html:6
-#: webcdi/supplementtut/templates/supplementtut/registration_form.html:4
-#: webcdi/supplementtut/templates/supplementtut/registration_form.html:6
+#: researcher_UI/templates/registration/registration_form.html:4
+#: researcher_UI/templates/registration/registration_form.html:6
+#: supplementtut/templates/supplementtut/registration_form.html:4
+#: supplementtut/templates/supplementtut/registration_form.html:6
 msgid "Registration"
 msgstr "Registration"
 
-#: webcdi/researcher_UI/templates/registration/registration_form.html:13
-#: webcdi/supplementtut/templates/supplementtut/registration_form.html:13
+#: researcher_UI/templates/registration/registration_form.html:13
+#: supplementtut/templates/supplementtut/registration_form.html:13
 msgid "Please fill the following fields to create your registration"
 msgstr "Please fill the following fields to create your registration"
 
-#: webcdi/researcher_UI/templates/registration/registration_form.html:34
-#: webcdi/supplementtut/templates/supplementtut/registration_form.html:18
+#: researcher_UI/templates/registration/registration_form.html:34
+#: supplementtut/templates/supplementtut/registration_form.html:18
 msgid "Register"
 msgstr "Register"
 
-#: webcdi/researcher_UI/templates/registration/rejection_email.txt:4
+#: researcher_UI/templates/registration/rejection_email.txt:4
 msgid "Your account registration was rejected by the Web-CDI Team."
 msgstr "Your account registration was rejected by the Web-CDI Team."
 
-#: webcdi/researcher_UI/templates/registration/rejection_email.txt:7
+#: researcher_UI/templates/registration/rejection_email.txt:7
 msgid "Your application was rejected due to:"
 msgstr "Your application was rejected due to:"
 
-#: webcdi/researcher_UI/templates/registration/rejection_email.txt:8
-#: webcdi/supplementtut/templates/supplementtut/rejection_email.txt:7
+#: researcher_UI/templates/registration/rejection_email.txt:8
+#: supplementtut/templates/supplementtut/rejection_email.txt:7
 msgid "Rejection reasons:"
 msgstr "Rejection reasons:"
 
-#: webcdi/researcher_UI/templates/registration/rejection_email_subject.txt:2
-#: webcdi/supplementtut/templates/supplementtut/rejection_email_subject.txt:2
+#: researcher_UI/templates/registration/rejection_email_subject.txt:2
+#: supplementtut/templates/supplementtut/rejection_email_subject.txt:2
 #, python-format
 msgid "Your registration was rejected -- %(site_name)s"
 msgstr "Your registration was rejected -- %(site_name)s"
 
-#: webcdi/researcher_UI/templates/researcher_UI/login.html:3
+#: researcher_UI/templates/researcher_UI/login.html:3
 msgid "WebCDI"
 msgstr "WebCDI"
 
-#: webcdi/researcher_UI/templates/researcher_UI/login.html:13
+#: researcher_UI/templates/researcher_UI/login.html:13
 msgid "WebCDI Login"
 msgstr "WebCDI Login"
 
-#: webcdi/researcher_UI/templates/researcher_UI/login.html:79
+#: researcher_UI/templates/researcher_UI/login.html:79
 msgid "Forgotten your password or username?"
 msgstr "Forgotten your password or username?"
 
-#: webcdi/supplementtut/templates/supplementtut/acceptance_email.txt:4
+#: supplementtut/templates/supplementtut/acceptance_email.txt:4
 #, python-format
 msgid "Your registration of %(site_name)s was accepted by inspector."
 msgstr "Your registration of %(site_name)s was accepted by inspector."
 
-#: webcdi/supplementtut/templates/supplementtut/activation_email.txt:4
+#: supplementtut/templates/supplementtut/activation_email.txt:4
 #, python-format
 msgid "Your account of %(site_name)s was activated by inspector"
 msgstr "Your account of %(site_name)s was activated by inspector"
 
-#: webcdi/supplementtut/templates/supplementtut/activation_email.txt:16
+#: supplementtut/templates/supplementtut/activation_email.txt:16
 #, python-format
 msgid "Your account of %(site_name)s was successfully activated"
 msgstr "Your account of %(site_name)s was successfully activated"
 
-#: webcdi/supplementtut/templates/supplementtut/registration_email.txt:3
+#: supplementtut/templates/supplementtut/registration_email.txt:3
 msgid "Your account registration was created successfully."
 msgstr "Your account registration was created successfully."
 
-#: webcdi/supplementtut/templates/supplementtut/registration_email.txt:5
+#: supplementtut/templates/supplementtut/registration_email.txt:5
 msgid "Please wait until the inspector verify your registration."
 msgstr "Please wait until the inspector verify your registration."
 
-#: webcdi/supplementtut/templates/supplementtut/rejection_email.txt:4
+#: supplementtut/templates/supplementtut/rejection_email.txt:4
 msgid "I am afraid that your account registration was rejected by inspector."
 msgstr "I am afraid that your account registration was rejected by inspector."
 
-#: webcdi/webcdi/settings.py:211
+#: webcdi/settings.py:312
 msgid "English"
 msgstr "English"
 
-#: webcdi/webcdi/settings.py:212
+#: webcdi/settings.py:313
 msgid "Spanish"
 msgstr "Spanish"
 
-#: webcdi/webcdi/settings.py:214
+#: webcdi/settings.py:315
 msgid "French Quebec"
 msgstr ""
 
-#: webcdi/webcdi/settings.py:215
+#: webcdi/settings.py:316
 #, fuzzy
 #| msgid "English"
 msgid "Canadian English"
 msgstr "English"
 
-#: webcdi/webcdi/settings.py:216
+#: webcdi/settings.py:317
 msgid "Dutch"
 msgstr ""
 
-#: webcdi/webcdi/settings.py:217
+#: webcdi/settings.py:318
 msgid "Hebrew"
 msgstr ""
 
-#: webcdi/webcdi/settings.py:218
+#: webcdi/settings.py:319
 msgid "Korean"
 msgstr ""
 

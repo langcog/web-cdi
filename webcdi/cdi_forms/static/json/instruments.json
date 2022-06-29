@@ -244,5 +244,16 @@
 		"json_data": "cdi_forms/form_data/Argentine_Spanish_WS_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/Argentine_Spanish_WS_scoring.json",
 		"demographics" : ["Argentine_Spanish.json"]
+	},{
+		"language": "French Quebec",
+		"form": "CAT",
+		"verbose_name": "Computer Adaptive Test",
+		"min_age": 12,
+		"max_age": 36,
+		"csv_file": "cdi_form_csv/cat_forms/[English_CAT].csv",
+		"json_data": "",
+		"scoring_json" : "",
+		"starting_words" : "cdi_form_csv/cat_forms/starting_words/[French_Ages_CAT].csv",
+		"demographics" : ["French_Quebec_Split.json"]
 	}
 ]
