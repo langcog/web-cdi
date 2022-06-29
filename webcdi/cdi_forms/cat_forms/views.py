@@ -145,7 +145,9 @@ class AdministerAdministraionView(UpdateView):
             return response
         requests_log.objects.create(url_hash=self.hash_id, request_type="GET")
         if self.object.completed or self.object.due_date < timezone.now():
-            return render(request, 'cdi_forms/cat_forms/cat_completed.html', context=self.get_context_data())
+            response = render(request, 'cdi_forms/cat_forms/cat_completed.html', context=self.get_context_data())
+            response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
+            return response
         background_instance, created = BackgroundInfo.objects.get_or_create(administration=self.object) 
         if self.object.completedSurvey:
             return redirect('backpage-background-info', pk=background_instance.pk)
