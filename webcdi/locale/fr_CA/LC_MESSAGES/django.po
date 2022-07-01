@@ -1746,7 +1746,7 @@ msgstr ""
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:125
 msgid "Does your child say ... "
-msgstr "Est-ce que votre enfant dit ..."
+msgstr "Votre enfant dit-il ... "
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:128
 msgid "* or word used in your family"
