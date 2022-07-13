@@ -101,6 +101,7 @@ class AdministerAdministraionView(UpdateView):
         ctx['language_code'] = language_map(self.object.study.instrument.language)
         
         if self.word: 
+            print(self.word)
             ctx['form'] = CatItemForm(context={'label':self.word['definition']}, initial={'word_id':self.word['index'], 'label':self.word['definition']})
             try:
                 if '*' in self.word['definition']: ctx['footnote'] = True
@@ -155,6 +156,7 @@ class AdministerAdministraionView(UpdateView):
         
         if len(administered_words) < 1 : # first word might be specified by age
             self.word = cdi_cat_api(f'startItem?age_mos={self.object.backgroundinfo.age}')
+            print(self.word)
         else:    
             self.word = cdi_cat_api(f'nextItem?responses={list(map(int,administered_responses))}&items={administered_items}')
             if self.word == 'stop':
