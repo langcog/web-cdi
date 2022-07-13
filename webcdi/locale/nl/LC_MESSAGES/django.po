@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-30 08:25+0000\n"
+"POT-Creation-Date: 2022-06-29 17:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -427,27 +427,27 @@ msgstr "mm/dd/jjjj"
 msgid "dd/mm/yyyy"
 msgstr "dd/mm/jjjj"
 
-#: cdi_forms/forms.py:555 cdi_forms/models.py:137
+#: cdi_forms/forms.py:558 cdi_forms/models.py:137
 msgid "Estimated Annual Family Income (in USD)"
 msgstr "Gezinsinkomen (netto) per maand"
 
-#: cdi_forms/forms.py:559
+#: cdi_forms/forms.py:562
 msgid "My child is (check all that apply):"
 msgstr "Mijn kind is (vink alles aan wat van toepassing is):"
 
-#: cdi_forms/forms.py:563 cdi_forms/forms.py:565
+#: cdi_forms/forms.py:566 cdi_forms/forms.py:568
 msgid "Basic Information"
 msgstr "Basisinformatie"
 
-#: cdi_forms/forms.py:569
+#: cdi_forms/forms.py:572
 msgid "Family Background"
 msgstr "Gezinsachtergrond"
 
-#: cdi_forms/forms.py:570 cdi_forms/models.py:140
+#: cdi_forms/forms.py:573 cdi_forms/models.py:140
 msgid "Child's Ethnicity"
 msgstr "Etniciteit van het kind"
 
-#: cdi_forms/forms.py:570
+#: cdi_forms/forms.py:573
 msgid ""
 "The following information is being collected for the sole purpose of "
 "reporting to our grant-funding institute, i.e.,  NIH (National Institute of "
@@ -459,35 +459,35 @@ msgstr ""
 "informatie nodig om de correctheid en inclusiviteit van ons onderzoek te "
 "garanderen. Uw medewerking wordt gewaardeerd, maar is vrijwillig."
 
-#: cdi_forms/forms.py:571
+#: cdi_forms/forms.py:574
 msgid "Caregiver Information"
 msgstr "Informatie verzorger"
 
-#: cdi_forms/forms.py:572
+#: cdi_forms/forms.py:575
 msgid "Language Exposure"
 msgstr "Blootstelling aan taal"
 
-#: cdi_forms/forms.py:575
+#: cdi_forms/forms.py:578
 msgid "Health"
 msgstr "Gezondheid"
 
-#: cdi_forms/forms.py:613
+#: cdi_forms/forms.py:616
 msgid "Your Name"
 msgstr "Uw naam"
 
-#: cdi_forms/forms.py:614
+#: cdi_forms/forms.py:617
 msgid "Your Email Address"
 msgstr "Uw e-mailadres"
 
-#: cdi_forms/forms.py:615
+#: cdi_forms/forms.py:618
 msgid "Your Test URL"
 msgstr "Uw URL"
 
-#: cdi_forms/forms.py:616
+#: cdi_forms/forms.py:619
 msgid "What would you like to tell us?"
 msgstr "Wat wilt u ons vertellen?"
 
-#: cdi_forms/forms.py:635 cdi_forms/templates/cdi_forms/cdi_form.html:11
+#: cdi_forms/forms.py:638 cdi_forms/templates/cdi_forms/cdi_form.html:11
 #: cdi_forms/templates/cdi_forms/cdi_form.html:323 cdi_forms/views.py:814
 msgid "Submit"
 msgstr "Sturen"
@@ -1761,6 +1761,12 @@ msgid ""
 msgstr ""
 "Vraag uw kind NIET om het woord van de lijst te herhalen. Dit telt niet mee!"
 
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:125
+#, fuzzy
+#| msgid "Who does your child live with?"
+msgid "Does your child say ... "
+msgstr "Welke verzorgers wonen er samen met het kind?"
+
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:128
 msgid "* or word used in your family"
 msgstr ""
@@ -2752,31 +2758,31 @@ msgstr "Wacht a.u.b. totdat de inspecteur uw registratie heeft goedgekeurd."
 msgid "I am afraid that your account registration was rejected by inspector."
 msgstr "Helaas is de registratie van uw account door de inspecteur afgewezen."
 
-#: webcdi/settings.py:313
+#: webcdi/settings.py:312
 msgid "English"
 msgstr "Engels"
 
-#: webcdi/settings.py:314
+#: webcdi/settings.py:313
 msgid "Spanish"
 msgstr "Spaans"
 
-#: webcdi/settings.py:316
+#: webcdi/settings.py:315
 msgid "French Quebec"
 msgstr "Frans"
 
-#: webcdi/settings.py:317
+#: webcdi/settings.py:316
 msgid "Canadian English"
 msgstr "Engels"
 
-#: webcdi/settings.py:318
+#: webcdi/settings.py:317
 msgid "Dutch"
 msgstr "Nederlands"
 
-#: webcdi/settings.py:319
+#: webcdi/settings.py:318
 msgid "Hebrew"
 msgstr ""
 
-#: webcdi/settings.py:320
+#: webcdi/settings.py:319
 msgid "Korean"
 msgstr ""
 
