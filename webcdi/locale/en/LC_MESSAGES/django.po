@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-29 17:12+0000\n"
+"POT-Creation-Date: 2022-08-08 08:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -280,7 +280,7 @@ msgstr "This field will update when you enter or change your child's DOB."
 msgid "What is your postal/zip code?"
 msgstr ""
 
-#: cdi_forms/forms.py:178 cdi_forms/models.py:139
+#: cdi_forms/forms.py:178
 msgid "Is your child Hispanic or Latino?"
 msgstr "Is your child Hispanic or Latino?"
 
@@ -438,7 +438,7 @@ msgstr "::Your account information::"
 msgid "Family Background"
 msgstr ""
 
-#: cdi_forms/forms.py:573 cdi_forms/models.py:140
+#: cdi_forms/forms.py:573 cdi_forms/models.py:139
 msgid "Child's Ethnicity"
 msgstr ""
 
@@ -1361,6 +1361,10 @@ msgstr ""
 msgid "Secondary Caregiver Education"
 msgstr "::Your account information::"
 
+#: cdi_forms/models.py:140
+msgid "Child's Race"
+msgstr ""
+
 #: cdi_forms/models.py:144
 msgid "Two parents"
 msgstr "Two parents"
@@ -1499,6 +1503,7 @@ msgstr ""
 
 #: cdi_forms/templates/cdi_forms/background_info.html:7
 #: cdi_forms/templates/cdi_forms/background_info.html:59
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:106
 #: cdi_forms/templates/cdi_forms/study_group.html:7 cdi_forms/views.py:262
 #: cdi_forms/views.py:558
 msgid "Next"
@@ -2573,33 +2578,33 @@ msgstr "Please wait until the inspector verify your registration."
 msgid "I am afraid that your account registration was rejected by inspector."
 msgstr "I am afraid that your account registration was rejected by inspector."
 
-#: webcdi/settings.py:312
+#: webcdi/settings.py:218
 msgid "English"
 msgstr "English"
 
-#: webcdi/settings.py:313
+#: webcdi/settings.py:219
 msgid "Spanish"
 msgstr "Spanish"
 
-#: webcdi/settings.py:315
+#: webcdi/settings.py:221
 msgid "French Quebec"
 msgstr ""
 
-#: webcdi/settings.py:316
+#: webcdi/settings.py:222
 #, fuzzy
 #| msgid "English"
 msgid "Canadian English"
 msgstr "English"
 
-#: webcdi/settings.py:317
+#: webcdi/settings.py:223
 msgid "Dutch"
 msgstr ""
 
-#: webcdi/settings.py:318
+#: webcdi/settings.py:224
 msgid "Hebrew"
 msgstr ""
 
-#: webcdi/settings.py:319
+#: webcdi/settings.py:225
 msgid "Korean"
 msgstr ""
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-29 17:12+0000\n"
+"POT-Creation-Date: 2022-08-08 08:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -283,7 +283,7 @@ msgstr ""
 msgid "What is your postal/zip code?"
 msgstr "Quel est votre code postal?"
 
-#: cdi_forms/forms.py:178 cdi_forms/models.py:139
+#: cdi_forms/forms.py:178
 msgid "Is your child Hispanic or Latino?"
 msgstr "Votre enfant est-il hispanique ou latino?"
 
@@ -445,7 +445,7 @@ msgstr "Informations de base"
 msgid "Family Background"
 msgstr "Contexte familial"
 
-#: cdi_forms/forms.py:573 cdi_forms/models.py:140
+#: cdi_forms/forms.py:573 cdi_forms/models.py:139
 msgid "Child's Ethnicity"
 msgstr "Ethnicité de l’enfant"
 
@@ -1368,6 +1368,12 @@ msgstr "Date de Naissance du Répondant Secondaire"
 msgid "Secondary Caregiver Education"
 msgstr "Éducation du Répondant Secondaire"
 
+#: cdi_forms/models.py:140
+#, fuzzy
+#| msgid "Child's Ethnicity"
+msgid "Child's Race"
+msgstr "Ethnicité de l’enfant"
+
 #: cdi_forms/models.py:144
 msgid "Two parents"
 msgstr "Deux parents"
@@ -1509,6 +1515,7 @@ msgstr ""
 
 #: cdi_forms/templates/cdi_forms/background_info.html:7
 #: cdi_forms/templates/cdi_forms/background_info.html:59
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:106
 #: cdi_forms/templates/cdi_forms/study_group.html:7 cdi_forms/views.py:262
 #: cdi_forms/views.py:558
 msgid "Next"
@@ -1646,8 +1653,10 @@ msgstr ""
 msgid ""
 "Thank you for filling this out! Of the words we asked, the hardest word your "
 "child knows is \"%(easiest)s\" and the easiest word is \"%(hardest)s\"."
-msgstr "Merci d'avoir rempli ce questionnaire ! Parmi les mots que nous avons demandés, le mot le plus difficile est votre "
-"l'enfant sait que c'est \"%(easiest)s\" et que le mot le plus simple est \"%(hardest)s\"."
+msgstr ""
+"Merci d'avoir rempli ce questionnaire ! Parmi les mots que nous avons "
+"demandés, le mot le plus difficile est votre l'enfant sait que c'est "
+"\"%(easiest)s\" et que le mot le plus simple est \"%(hardest)s\"."
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:45
 msgid ""
@@ -2715,31 +2724,31 @@ msgstr ""
 msgid "I am afraid that your account registration was rejected by inspector."
 msgstr ""
 
-#: webcdi/settings.py:312
+#: webcdi/settings.py:218
 msgid "English"
 msgstr "anglais"
 
-#: webcdi/settings.py:313
+#: webcdi/settings.py:219
 msgid "Spanish"
 msgstr ""
 
-#: webcdi/settings.py:315
+#: webcdi/settings.py:221
 msgid "French Quebec"
 msgstr ""
 
-#: webcdi/settings.py:316
+#: webcdi/settings.py:222
 msgid "Canadian English"
 msgstr ""
 
-#: webcdi/settings.py:317
+#: webcdi/settings.py:223
 msgid "Dutch"
 msgstr "néerlandais"
 
-#: webcdi/settings.py:318
+#: webcdi/settings.py:224
 msgid "Hebrew"
 msgstr ""
 
-#: webcdi/settings.py:319
+#: webcdi/settings.py:225
 msgid "Korean"
 msgstr ""
 
