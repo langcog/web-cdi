@@ -254,6 +254,9 @@ class Benchmark(models.Model):
     def __unicode__(self):
         return '%s : %s : %s' % (self.instrument_score, self.percentile, self.age)
 
+    def __str__(self):
+        return f'{self.instrument_score} {self.percentile} {self.age}'
+
     class Meta:
         ordering = ['instrument_score','age','percentile']
 

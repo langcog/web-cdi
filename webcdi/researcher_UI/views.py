@@ -38,26 +38,36 @@ from cdi_forms.cat_forms.models import CatResponse
 from cdi_forms.cat_forms.cdi_cat_api import cdi_cat_api
 
 def get_study_scores(administrations):
-    scores = SummaryData.objects.values('administration_id', 'title','value').filter(administration_id__in = administrations)
-    if not scores : return ''
+    scores = SummaryData.objects.values('administration_id', 'title', 'value').filter(administration_id__in = administrations)
+    if not scores:
+        return ''
     melted_scores = pd.DataFrame.from_records(scores).pivot(index='administration_id', columns='title', values='value')
     melted_scores.reset_index(level=0, inplace=True)
     return melted_scores
 
-def get_score_headers(study_obj):
+def get_score_headers(study_obj, adjusted_benchmark=False):
     score_forms = InstrumentScore.objects.filter(instrument=study_obj.instrument)
     score_header = []
     if Benchmark.objects.filter(instrument=study_obj.instrument).exists():
-            score_header.append('benchmark age')
+        score_header.append('benchmark age')
+        if adjusted_benchmark:
+            score_header.append('adjusted benchmark age')
     for f in score_forms: # let's get the scoring headers
         score_header.append(f.title)
         if Benchmark.objects.filter(instrument_score=f).exists():
             benchmark = Benchmark.objects.filter(instrument_score=f)[0]
             if benchmark.percentile == 999:
                 score_header.append(f.title + ' % yes answers at this age and sex')
+                if adjusted_benchmark:
+                    score_header.append(f.title + ' % yes answers at this age and sex (adjusted)')
             else:
                 score_header.append(f.title + ' Percentile-sex')
-                if not benchmark.raw_score == 9999: score_header.append(f.title + ' Percentile-both')
+                if adjusted_benchmark:
+                    score_header.append(f.title + 'Percentile-sex (adjusted)')
+                if not benchmark.raw_score == 9999: 
+                    score_header.append(f.title + ' Percentile-both')
+                    if adjusted_benchmark:
+                        score_header.append(f.title + ' Percentile-both (adjusted)')
     return score_header
 
 def get_background_header(study_obj):
@@ -208,7 +218,7 @@ def download_cat_summary(request, study_obj, administrations=None):
     return response
 
 @login_required # For researchers only, requires user to be logged in (test-takers do not have an account and are blocked from this interface)
-def download_data(request, study_obj, administrations = None): # Download study data
+def download_data(request, study_obj, administrations = None, adjusted_benchmark=True): # Download study data
     # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse(content_type='text/csv') # Format response as a CSV
     filename = study_obj.name+'_items.csv'
@@ -265,8 +275,9 @@ def download_data(request, study_obj, administrations = None): # Download study 
 
     # Add scoring
     melted_scores = get_study_scores(administrations)
-    if len(melted_scores) < 1 : return HttpResponseServerError(f'There are no data in the study(ies) to report')
-    score_header = get_score_headers(study_obj)
+    if len(melted_scores) < 1:
+        return HttpResponseServerError(f'There are no data in the study(ies) to report')
+    score_header = get_score_headers(study_obj, adjusted_benchmark)
     melted_scores.set_index('administration_id')
     missing_columns = list(set(score_header) - set(melted_scores.columns))
     if missing_columns:
@@ -560,6 +571,15 @@ def console(request, study_name = None, num_per_page = 20): # Main giant functio
                         return download_data(request, study_obj, administrations) # Send queryset to download_data function to return a CSV of subject data
                     refresh = True # Refresh page to reflect table changes
                 
+                elif 'download-selected-adjusted' in request.POST: # If 'Download Selected Data' was clicked
+                    num_ids = list(set(map(int, ids))) # Force IDs into a list of integers
+                    administrations = administration.objects.filter(id__in = num_ids) # Grab a queryset of administration objects with administration IDs found in list
+                    if study_obj.instrument.form in settings.CAT_FORMS:
+                        return download_cat_data(request, study_obj, administrations)
+                    else:
+                        return download_data(request, study_obj, administrations, adjusted_benchmark=True) # Send queryset to download_data function to return a CSV of subject data
+                    refresh = True # Refresh page to reflect table changes
+                
                 elif 'download-selected-summary' in request.POST: # If 'Download Selected Data' was clicked
                     num_ids = list(set(map(int, ids))) # Force IDs into a list of integers
                     administrations = administration.objects.filter(id__in = num_ids) # Grab a queryset of administration objects with administration IDs found in list
@@ -581,6 +601,13 @@ def console(request, study_name = None, num_per_page = 20): # Main giant functio
                         return download_cat_data(request, study_obj, administrations)
                     else:
                         return download_data(request, study_obj, administrations) # Send queryset to download_data and receive a CSV of responses
+                                        
+                elif 'download-study-csv-adjusted' in request.POST: # If 'Download Data' button is clicked
+                    administrations = administration.objects.filter(study = study_obj) # Grab a queryset of administration objects within study
+                    if study_obj.instrument.form in settings.CAT_FORMS:
+                        return download_cat_data(request, study_obj, administrations)
+                    else:
+                        return download_data(request, study_obj, administrations, adjusted_benchmark=True) # Send queryset to download_data and receive a CSV of responses
                 
                 elif 'download-summary-csv' in request.POST: # If 'Download Summary' button is clicked
                     administrations = administration.objects.filter(study = study_obj) # Grab a queryset of administration objects within study
