@@ -123,7 +123,10 @@ def update_summary_scores(administration_instance):
         for f in InstrumentScore.objects.filter(instrument=administration_instance.study.instrument):
             if Benchmark.objects.filter(instrument_score=f).exists():
                 benchmark = Benchmark.objects.filter(instrument_score=f, age=age)[0]
-                adjusted_benchmark = Benchmark.objects.filter(instrument_score=f, age=adjusted_benchmark_age)[0]
+                try:
+                    adjusted_benchmark = Benchmark.objects.filter(instrument_score=f, age=adjusted_benchmark_age)[0]
+                except:
+                    adjusted_benchmark = Benchmark.objects.filter(instrument_score=f).order_by('age')[0]
                 create_benchmark_score(benchmark, age, background_info, administration_instance, f, '')
                 create_benchmark_score(adjusted_benchmark, adjusted_benchmark_age, background_info, administration_instance, f, ' (adjusted)')
                 
