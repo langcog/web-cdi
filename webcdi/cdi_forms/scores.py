@@ -109,7 +109,10 @@ def update_summary_scores(administration_instance):
         summary.save()
 
         if age is not None and background_info.early_or_late == 'early':
-            adjusted_benchmark_age = age - int(background_info.due_date_diff / 4)
+            try:
+                adjusted_benchmark_age = age - int(background_info.due_date_diff / 4)
+            except:
+                adjusted_benchmark_age = age
         else:
             adjusted_benchmark_age = age
         summary, created = SummaryData.objects.get_or_create(administration=administration_instance, title='adjusted benchmark age')
