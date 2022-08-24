@@ -1,0 +1,463 @@
+title,percentile,age,raw_score,raw_score_boy,raw_score_girl
+Understands,5,8,0,0,0
+Understands,5,9,0,0,0
+Understands,5,10,1,1,1
+Understands,5,11,1,1,1
+Understands,5,12,2,2,2
+Understands,5,13,3,3,3
+Understands,5,14,5,5,5
+Understands,5,15,7,7,7
+Understands,5,16,9,10,10
+Understands,5,17,12,13,13
+Understands,5,18,16,16,16
+Understands,10,8,0,0,1
+Understands,10,9,1,1,1
+Understands,10,10,2,1,2
+Understands,10,11,3,2,3
+Understands,10,12,4,4,5
+Understands,10,13,6,6,7
+Understands,10,14,9,9,10
+Understands,10,15,12,12,13
+Understands,10,16,16,16,17
+Understands,10,17,20,20,21
+Understands,10,18,24,24,26
+Understands,15,8,1,1,1
+Understands,15,9,2,1,2
+Understands,15,10,3,2,4
+Understands,15,11,4,4,5
+Understands,15,12,7,6,8
+Understands,15,13,9,9,11
+Understands,15,14,13,12,14
+Understands,15,15,17,16,18
+Understands,15,16,21,20,23
+Understands,15,17,26,25,28
+Understands,15,18,31,30,34
+Understands,20,8,1,1,2
+Understands,20,9,3,2,3
+Understands,20,10,4,4,5
+Understands,20,11,6,6,8
+Understands,20,12,9,8,11
+Understands,20,13,12,11,14
+Understands,20,14,17,15,19
+Understands,20,15,21,20,23
+Understands,20,16,26,25,29
+Understands,20,17,31,30,34
+Understands,20,18,37,35,40
+Understands,25,8,2,2,3
+Understands,25,9,4,3,5
+Understands,25,10,6,5,7
+Understands,25,11,8,7,10
+Understands,25,12,12,10,14
+Understands,25,13,16,14,18
+Understands,25,14,20,18,23
+Understands,25,15,25,23,28
+Understands,25,16,31,29,34
+Understands,25,17,37,34,40
+Understands,25,18,42,40,46
+Understands,30,8,3,2,5
+Understands,30,9,5,4,7
+Understands,30,10,8,6,9
+Understands,30,11,11,9,13
+Understands,30,12,14,13,17
+Understands,30,13,19,17,22
+Understands,30,14,24,22,27
+Understands,30,15,29,27,33
+Understands,30,16,35,32,39
+Understands,30,17,41,38,45
+Understands,30,18,47,44,52
+Understands,35,8,4,3,6
+Understands,35,9,7,5,9
+Understands,35,10,10,8,12
+Understands,35,11,13,11,16
+Understands,35,12,17,15,20
+Understands,35,13,22,20,26
+Understands,35,14,28,25,31
+Understands,35,15,33,30,38
+Understands,35,16,40,36,44
+Understands,35,17,46,42,50
+Understands,35,18,52,48,57
+Understands,40,8,6,4,8
+Understands,40,9,8,7,11
+Understands,40,10,12,10,15
+Understands,40,11,16,13,19
+Understands,40,12,20,17,24
+Understands,40,13,26,22,30
+Understands,40,14,31,28,36
+Understands,40,15,37,34,42
+Understands,40,16,44,40,49
+Understands,40,17,50,46,55
+Understands,40,18,56,52,61
+Understands,45,8,7,6,10
+Understands,45,9,10,8,13
+Understands,45,10,14,12,17
+Understands,45,11,18,15,22
+Understands,45,12,24,20,28
+Understands,45,13,29,25,34
+Understands,45,14,35,31,40
+Understands,45,15,41,37,46
+Understands,45,16,48,43,53
+Understands,45,17,54,49,59
+Understands,45,18,60,56,65
+Understands,50,8,9,7,12
+Understands,50,9,13,10,16
+Understands,50,10,17,14,20
+Understands,50,11,21,18,26
+Understands,50,12,27,23,31
+Understands,50,13,33,28,38
+Understands,50,14,39,34,44
+Understands,50,15,45,40,51
+Understands,50,16,52,47,57
+Understands,50,17,58,53,63
+Understands,50,18,64,59,69
+Understands,55,8,11,9,15
+Understands,55,9,15,12,19
+Understands,55,10,20,16,24
+Understands,55,11,25,20,29
+Understands,55,12,30,26,35
+Understands,55,13,36,31,42
+Understands,55,14,43,37,48
+Understands,55,15,49,44,55
+Understands,55,16,55,50,61
+Understands,55,17,61,56,67
+Understands,55,18,67,62,72
+Understands,60,8,14,11,17
+Understands,60,9,18,14,22
+Understands,60,10,23,18,27
+Understands,60,11,28,23,33
+Understands,60,12,34,29,40
+Understands,60,13,40,35,46
+Understands,60,14,47,41,53
+Understands,60,15,53,47,59
+Understands,60,16,59,54,65
+Understands,60,17,65,60,71
+Understands,60,18,70,66,76
+Understands,65,8,16,13,21
+Understands,65,9,21,17,26
+Understands,65,10,26,21,31
+Understands,65,11,32,26,37
+Understands,65,12,38,32,44
+Understands,65,13,44,38,50
+Understands,65,14,51,44,57
+Understands,65,15,57,51,63
+Understands,65,16,63,57,69
+Understands,65,17,68,63,74
+Understands,65,18,73,69,78
+Understands,70,8,20,15,24
+Understands,70,9,24,20,30
+Understands,70,10,30,24,36
+Understands,70,11,36,30,42
+Understands,70,12,42,36,48
+Understands,70,13,49,42,55
+Understands,70,14,55,48,61
+Understands,70,15,61,54,67
+Understands,70,16,67,61,72
+Understands,70,17,72,66,77
+Understands,70,18,76,72,81
+Understands,75,8,23,19,29
+Understands,75,9,29,23,34
+Understands,75,10,34,28,40
+Understands,75,11,40,34,47
+Understands,75,12,47,40,53
+Understands,75,13,53,46,60
+Understands,75,14,59,52,66
+Understands,75,15,65,58,71
+Understands,75,16,70,64,76
+Understands,75,17,75,70,80
+Understands,75,18,79,75,83
+Understands,80,8,28,22,34
+Understands,80,9,33,27,40
+Understands,80,10,39,32,46
+Understands,80,11,45,38,52
+Understands,80,12,52,44,58
+Understands,80,13,58,50,64
+Understands,80,14,64,56,70
+Understands,80,15,69,62,75
+Understands,80,16,74,68,79
+Understands,80,17,78,73,82
+Understands,80,18,82,78,85
+Understands,85,8,33,27,40
+Understands,85,9,39,32,46
+Understands,85,10,45,37,52
+Understands,85,11,51,43,58
+Understands,85,12,57,49,64
+Understands,85,13,63,55,69
+Understands,85,14,69,61,74
+Understands,85,15,73,67,79
+Understands,85,16,78,72,82
+Understands,85,17,81,77,85
+Understands,85,18,84,80,86
+Understands,90,8,40,33,47
+Understands,90,9,46,38,53
+Understands,90,10,52,44,59
+Understands,90,11,58,50,65
+Understands,90,12,64,55,70
+Understands,90,13,69,61,75
+Understands,90,14,74,67,79
+Understands,90,15,78,72,82
+Understands,90,16,81,76,85
+Understands,90,17,84,80,87
+Understands,90,18,86,83,88
+Understands,95,8,51,43,58
+Understands,95,9,56,48,63
+Understands,95,10,62,53,69
+Understands,95,11,67,59,73
+Understands,95,12,72,64,77
+Understands,95,13,76,69,81
+Understands,95,14,80,73,84
+Understands,95,15,83,78,86
+Understands,95,16,85,81,87
+Understands,95,17,87,84,88
+Understands,95,18,88,86,89
+Understands,99,8,68,60,74
+Understands,99,9,72,64,78
+Understands,99,10,76,68,81
+Understands,99,11,79,72,83
+Understands,99,12,82,76,85
+Understands,99,13,84,79,87
+Understands,99,14,86,82,88
+Understands,99,15,87,85,88
+Understands,99,16,88,86,89
+Understands,99,17,89,88,89
+Understands,99,18,89,88,89
+Understands and Produces,5,8,0,0,0
+Understands and Produces,5,9,0,0,0
+Understands and Produces,5,10,0,0,0
+Understands and Produces,5,11,0,0,0
+Understands and Produces,5,12,0,0,0
+Understands and Produces,5,13,0,0,0
+Understands and Produces,5,14,0,0,0
+Understands and Produces,5,15,0,0,0
+Understands and Produces,5,16,1,1,1
+Understands and Produces,5,17,1,1,1
+Understands and Produces,5,18,1,1,2
+Understands and Produces,10,8,0,0,0
+Understands and Produces,10,9,0,0,0
+Understands and Produces,10,10,0,0,0
+Understands and Produces,10,11,0,0,0
+Understands and Produces,10,12,0,0,0
+Understands and Produces,10,13,0,0,0
+Understands and Produces,10,14,1,0,1
+Understands and Produces,10,15,1,1,1
+Understands and Produces,10,16,1,1,2
+Understands and Produces,10,17,2,2,3
+Understands and Produces,10,18,3,3,4
+Understands and Produces,15,8,0,0,0
+Understands and Produces,15,9,0,0,0
+Understands and Produces,15,10,0,0,0
+Understands and Produces,15,11,0,0,0
+Understands and Produces,15,12,0,0,0
+Understands and Produces,15,13,1,1,1
+Understands and Produces,15,14,1,1,1
+Understands and Produces,15,15,2,1,2
+Understands and Produces,15,16,2,2,3
+Understands and Produces,15,17,4,3,5
+Understands and Produces,15,18,5,4,7
+Understands and Produces,20,8,0,0,0
+Understands and Produces,20,9,0,0,0
+Understands and Produces,20,10,0,0,0
+Understands and Produces,20,11,0,0,0
+Understands and Produces,20,12,1,1,1
+Understands and Produces,20,13,1,1,1
+Understands and Produces,20,14,2,1,2
+Understands and Produces,20,15,2,2,3
+Understands and Produces,20,16,4,3,5
+Understands and Produces,20,17,5,4,7
+Understands and Produces,20,18,8,6,10
+Understands and Produces,25,8,0,0,0
+Understands and Produces,25,9,0,0,0
+Understands and Produces,25,10,0,0,0
+Understands and Produces,25,11,1,0,1
+Understands and Produces,25,12,1,1,1
+Understands and Produces,25,13,1,1,2
+Understands and Produces,25,14,2,2,3
+Understands and Produces,25,15,3,3,4
+Understands and Produces,25,16,5,4,6
+Understands and Produces,25,17,7,6,9
+Understands and Produces,25,18,10,8,14
+Understands and Produces,30,8,0,0,0
+Understands and Produces,30,9,0,0,0
+Understands and Produces,30,10,0,0,1
+Understands and Produces,30,11,1,1,1
+Understands and Produces,30,12,1,1,1
+Understands and Produces,30,13,2,2,2
+Understands and Produces,30,14,3,3,3
+Understands and Produces,30,15,4,4,5
+Understands and Produces,30,16,6,5,8
+Understands and Produces,30,17,9,7,12
+Understands and Produces,30,18,13,10,17
+Understands and Produces,35,8,0,0,0
+Understands and Produces,35,9,0,0,0
+Understands and Produces,35,10,1,1,1
+Understands and Produces,35,11,1,1,1
+Understands and Produces,35,12,2,1,2
+Understands and Produces,35,13,2,2,3
+Understands and Produces,35,14,4,3,4
+Understands and Produces,35,15,5,5,6
+Understands and Produces,35,16,8,6,10
+Understands and Produces,35,17,11,9,14
+Understands and Produces,35,18,15,11,21
+Understands and Produces,40,8,0,0,0
+Understands and Produces,40,9,1,1,1
+Understands and Produces,40,10,1,1,1
+Understands and Produces,40,11,1,1,1
+Understands and Produces,40,12,2,2,2
+Understands and Produces,40,13,3,3,3
+Understands and Produces,40,14,4,4,5
+Understands and Produces,40,15,7,6,8
+Understands and Produces,40,16,9,8,12
+Understands and Produces,40,17,13,10,17
+Understands and Produces,40,18,18,13,25
+Understands and Produces,45,8,0,0,0
+Understands and Produces,45,9,1,1,1
+Understands and Produces,45,10,1,1,1
+Understands and Produces,45,11,2,2,2
+Understands and Produces,45,12,2,2,3
+Understands and Produces,45,13,4,3,4
+Understands and Produces,45,14,5,5,6
+Understands and Produces,45,15,8,7,9
+Understands and Produces,45,16,11,9,14
+Understands and Produces,45,17,16,12,20
+Understands and Produces,45,18,21,15,29
+Understands and Produces,50,8,1,1,1
+Understands and Produces,50,9,1,1,1
+Understands and Produces,50,10,1,1,1
+Understands and Produces,50,11,2,2,2
+Understands and Produces,50,12,3,3,3
+Understands and Produces,50,13,5,4,5
+Understands and Produces,50,14,7,6,7
+Understands and Produces,50,15,9,8,11
+Understands and Produces,50,16,13,11,16
+Understands and Produces,50,17,18,14,24
+Understands and Produces,50,18,24,18,33
+Understands and Produces,55,8,1,1,1
+Understands and Produces,55,9,1,1,1
+Understands and Produces,55,10,2,2,2
+Understands and Produces,55,11,3,3,2
+Understands and Produces,55,12,4,4,4
+Understands and Produces,55,13,5,5,6
+Understands and Produces,55,14,8,7,9
+Understands and Produces,55,15,11,9,13
+Understands and Produces,55,16,15,12,19
+Understands and Produces,55,17,21,16,27
+Understands and Produces,55,18,28,20,38
+Understands and Produces,60,8,1,1,1
+Understands and Produces,60,9,1,2,1
+Understands and Produces,60,10,2,2,2
+Understands and Produces,60,11,3,3,3
+Understands and Produces,60,12,5,5,4
+Understands and Produces,60,13,6,6,7
+Understands and Produces,60,14,9,8,10
+Understands and Produces,60,15,13,11,15
+Understands and Produces,60,16,18,14,22
+Understands and Produces,60,17,24,18,31
+Understands and Produces,60,18,31,23,42
+Understands and Produces,65,8,1,2,1
+Understands and Produces,65,9,2,2,2
+Understands and Produces,65,10,3,3,2
+Understands and Produces,65,11,4,4,3
+Understands and Produces,65,12,5,6,5
+Understands and Produces,65,13,8,7,8
+Understands and Produces,65,14,11,10,12
+Understands and Produces,65,15,15,13,17
+Understands and Produces,65,16,20,16,25
+Understands and Produces,65,17,27,20,35
+Understands and Produces,65,18,35,25,47
+Understands and Produces,70,8,2,2,1
+Understands and Produces,70,9,2,3,2
+Understands and Produces,70,10,3,4,3
+Understands and Produces,70,11,5,5,4
+Understands and Produces,70,12,6,7,6
+Understands and Produces,70,13,9,9,9
+Understands and Produces,70,14,13,11,14
+Understands and Produces,70,15,17,15,20
+Understands and Produces,70,16,23,19,28
+Understands and Produces,70,17,30,23,39
+Understands and Produces,70,18,39,29,52
+Understands and Produces,75,8,2,3,1
+Understands and Produces,75,9,3,3,2
+Understands and Produces,75,10,4,5,3
+Understands and Produces,75,11,6,6,5
+Understands and Produces,75,12,8,8,7
+Understands and Produces,75,13,11,10,11
+Understands and Produces,75,14,15,13,16
+Understands and Produces,75,15,20,17,23
+Understands and Produces,75,16,26,21,32
+Understands and Produces,75,17,34,26,44
+Understands and Produces,75,18,44,32,57
+Understands and Produces,80,8,2,3,2
+Understands and Produces,80,9,3,4,3
+Understands and Produces,80,10,5,6,4
+Understands and Produces,80,11,7,8,6
+Understands and Produces,80,12,9,10,9
+Understands and Produces,80,13,13,13,13
+Understands and Produces,80,14,17,16,19
+Understands and Produces,80,15,23,20,26
+Understands and Produces,80,16,30,24,37
+Understands and Produces,80,17,39,30,49
+Understands and Produces,80,18,49,36,63
+Understands and Produces,85,8,3,4,2
+Understands and Produces,85,9,4,6,3
+Understands and Produces,85,10,6,7,5
+Understands and Produces,85,11,8,10,7
+Understands and Produces,85,12,11,12,11
+Understands and Produces,85,13,16,15,15
+Understands and Produces,85,14,21,19,22
+Understands and Produces,85,15,27,23,31
+Understands and Produces,85,16,35,28,42
+Understands and Produces,85,17,44,34,55
+Understands and Produces,85,18,55,41,68
+Understands and Produces,90,8,4,6,3
+Understands and Produces,90,9,6,8,4
+Understands and Produces,90,10,8,10,6
+Understands and Produces,90,11,11,12,9
+Understands and Produces,90,12,14,15,13
+Understands and Produces,90,13,19,19,19
+Understands and Produces,90,14,25,23,27
+Understands and Produces,90,15,33,28,36
+Understands and Produces,90,16,41,34,48
+Understands and Produces,90,17,51,40,62
+Understands and Produces,90,18,61,47,74
+Understands and Produces,95,8,6,9,4
+Understands and Produces,95,9,8,11,6
+Understands and Produces,95,10,11,14,8
+Understands and Produces,95,11,15,17,12
+Understands and Produces,95,12,19,21,17
+Understands and Produces,95,13,25,25,24
+Understands and Produces,95,14,32,30,34
+Understands and Produces,95,15,41,35,45
+Understands and Produces,95,16,50,41,58
+Understands and Produces,95,17,60,48,71
+Understands and Produces,95,18,70,55,81
+Understands and Produces,99,8,10,16,6
+Understands and Produces,99,9,14,20,9
+Understands and Produces,99,10,18,23,13
+Understands and Produces,99,11,23,27,19
+Understands and Produces,99,12,30,32,27
+Understands and Produces,99,13,38,37,36
+Understands and Produces,99,14,46,43,48
+Understands and Produces,99,15,56,49,60
+Understands and Produces,99,16,65,56,72
+Understands and Produces,99,17,74,62,82
+Understands and Produces,99,18,81,69,87
+Understands and Produces,0,18,0,0,0
+Understands and Produces,0,17,0,0,0
+Understands and Produces,0,16,0,0,0
+Understands and Produces,0,15,0,0,0
+Understands and Produces,0,14,0,0,0
+Understands and Produces,0,13,0,0,0
+Understands and Produces,0,12,0,0,0
+Understands and Produces,0,11,0,0,0
+Understands and Produces,0,10,0,0,0
+Understands and Produces,0,9,0,0,0
+Understands and Produces,0,8,0,0,0
+Understands,0,18,0,0,0
+Understands,0,17,0,0,0
+Understands,0,16,0,0,0
+Understands,0,15,0,0,0
+Understands,0,14,0,0,0
+Understands,0,13,0,0,0
+Understands,0,12,0,0,0
+Understands,0,11,0,0,0
+Understands,0,10,0,0,0
+Understands,0,9,0,0,0
+Understands,0,8,0,0,0

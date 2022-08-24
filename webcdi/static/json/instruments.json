@@ -135,6 +135,7 @@
 		"csv_file": "cdi_form_csv/cdi_forms/[English_L1].csv",
 		"json_data": "cdi_forms/form_data/English_L1_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/English_L1_WS_scoring.json",
+		"benchmark" : "cdi_forms/form_data/benchmarking/English_L1_WS_benchmark.csv",
 		"demographics" : ["English_Split.json", "English_Centiment.json"]
 	},
 	{
@@ -146,6 +147,7 @@
 		"csv_file": "cdi_form_csv/cdi_forms/[English_L2A].csv",
 		"json_data": "cdi_forms/form_data/English_L2A_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/English_L2A_WS_scoring.json",
+		"benchmark" : "cdi_forms/form_data/benchmarking/English_L2A_WS_benchmark.csv",
 		"demographics" : ["English_Split.json", "English_Centiment.json"]
 	},
 	{
@@ -157,6 +159,7 @@
 		"csv_file": "cdi_form_csv/cdi_forms/[English_L2B].csv",
 		"json_data": "cdi_forms/form_data/English_L2B_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/English_L2B_WS_scoring.json",
+		"benchmark" : "cdi_forms/form_data/benchmarking/English_L2B_WS_benchmark.csv",
 		"demographics" : ["English_Split.json", "English_Centiment.json"]
 	},
 	{
