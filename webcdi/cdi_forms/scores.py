@@ -17,7 +17,7 @@ def create_benchmark_score(benchmark, age, background_info, administration_insta
                     summary.save()
 
                 else:
-                    summary, created = SummaryData.objects.get_or_create(administration=administration_instance, title=f.title + f'Percentile-sex{adjusted}')
+                    summary, created = SummaryData.objects.get_or_create(administration=administration_instance, title=f'{f.title} Percentile-sex{adjusted}')
                     benchmarks = Benchmark.objects.filter(instrument_score=f, age=age)
                     unisex_score = sex_score = 0
                     try:

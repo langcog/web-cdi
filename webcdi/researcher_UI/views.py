@@ -63,7 +63,7 @@ def get_score_headers(study_obj, adjusted_benchmark=False):
             else:
                 score_header.append(f.title + ' Percentile-sex')
                 if adjusted_benchmark:
-                    score_header.append(f.title + 'Percentile-sex (adjusted)')
+                    score_header.append(f.title + ' Percentile-sex (adjusted)')
                 if not benchmark.raw_score == 9999: 
                     score_header.append(f.title + ' Percentile-both')
                     if adjusted_benchmark:
