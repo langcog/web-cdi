@@ -218,7 +218,7 @@ def download_cat_summary(request, study_obj, administrations=None):
     return response
 
 @login_required # For researchers only, requires user to be logged in (test-takers do not have an account and are blocked from this interface)
-def download_data(request, study_obj, administrations = None, adjusted_benchmark=True): # Download study data
+def download_data(request, study_obj, administrations = None, adjusted_benchmark=False): # Download study data
     # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse(content_type='text/csv') # Format response as a CSV
     filename = study_obj.name+'_items.csv'
