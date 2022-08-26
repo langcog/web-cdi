@@ -2225,7 +2225,7 @@ msgstr "Download mijn antwoorden"
 
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:228
 msgid "Click to complete the study"
-msgstr ""
+msgstr "Klik hier om het onderzoek af te ronden"
 
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:238
 msgid "Share on Facebook"
