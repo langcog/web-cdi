@@ -48,6 +48,7 @@
 
         // Set a callback to run when the Google Visualization API is loaded.
         google.charts.setOnLoadCallback(drawProducesChart);
+        google.charts.setOnLoadCallback(drawProducesChart2);
 
         var graph_colors = [
             "#ff0000","#cc0066","#cc0099","#9933ff",'#3333cc','#0033cc','#0099cc','#009999','#00cc66','#009933','#669900','#cccc00','#ff9900','#ff3300',
@@ -71,12 +72,12 @@
         
         // Set chart options
         var options = {
-            'title': '{% trans 'Words Produced (%)' %}',
-            'width' : {% if show_produced or language in language_list %}550{% else %}1000{% endif %},
+            'title': '{% trans 'Words Produced in Category (%)' %}',
+            'width' : 550,
             'height':750,
             'legend': {position: 'none'},
             'vAxis' : { textStyle : { fontSize: 10} },
-            'hAxis' : {viewWindow: { min:0, max:100 }},
+            'hAxis' : {viewWindow: { min:0 }},
             };
 
             // Instantiate and draw our chart, passing in some options.
@@ -94,9 +95,48 @@
 
         chart.draw(data, options);
       }
+
+    function drawProducesChart2() {
+
+        // Create the data table.
+        var data = new google.visualization.arrayToDataTable([
+            ['Category','Percentage', {role: 'style'}],
+            {% for category in graph_data %}
+                {% if graph_data|get_item:category|get_item:'count' > 0 %}
+                ['{{ graph_data|get_item:category|get_item:'mappedName' }}', {{ graph_data|get_item:category|get_item_count:'produces'|get_usage_perc:totals.produces }}, graph_colors[{{ forloop.counter0 }}]],
+                {% endif %}                
+            {% endfor %}
+        ]);
+
+        // Set chart options
+        var options = {
+            'title': '{% trans 'Words Produced for Child (%)' %}',
+            'width' : 550,
+            'height':750,
+            'legend': {position: 'none'},
+            'vAxis' : { textStyle : { fontSize: 10} },
+            'hAxis' : {viewWindow: { min:0 }},
+            };
+
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.visualization.BarChart(document.getElementById('categories_charts_produced2'));
+
+        var btnProducedSave = document.getElementById('save-produced2-pdf')
+        google.visualization.events.addListener(chart, 'ready', function () {
+            btnProducedSave.disabled = false;
+        });
+        btnProducedSave.addEventListener('click', function () {
+            var doc = new jsPDF();
+            doc.addImage(chart.getImageURI(), 0, 0);
+            doc.save('chart.pdf');
+        }, false);
+
+        chart.draw(data, options);
+    }
     
         {% if show_produced or language in language_list  %}
             google.charts.setOnLoadCallback(drawUnderstoodChart);
+            google.charts.setOnLoadCallback(drawUnderstoodChart2);
             function drawUnderstoodChart() {
 
                 // Create the data table.
@@ -111,12 +151,12 @@
 
                 // Set chart options
                 var options = {
-                    'title': '{% trans 'Words Understood (%)' %}',
+                    'title': '{% trans 'Words Understood in Category(%)' %}',
                     'width':550,
                     'height':750,
                     'legend': {position: 'none'},
                     'vAxis' : { textStyle : { fontSize: 10} },
-                    'hAxis' : {viewWindow: { min:0, max:100 }},
+                    'hAxis' : {viewWindow: { min:0 }},
                     };
 
                 // Instantiate and draw our chart, passing in some options.
@@ -134,9 +174,54 @@
                 
                 chart.draw(data, options);
             }
-        {% endif%}
-    </script>
 
+            function drawUnderstoodChart2() {
+                // Create the data table.
+                var data = new google.visualization.arrayToDataTable([
+                    ['Category','Percentage', {role: 'style'}],
+                    {% for category in graph_data %}
+                        {% if graph_data|get_item:category|get_item:'count' > 0 %}
+                        ['{{ graph_data|get_item:category|get_item:'mappedName' }}', {{ graph_data|get_item:category|get_item_count:'understands'|get_usage_perc:totals.understands }}, graph_colors[{{ forloop.counter0 }}]],
+                        {% endif %}                
+                    {% endfor %}                    
+                ]);
+
+                // Set chart options
+                var options = {
+                    'title': '{% trans 'Words Understood for Child (%)' %}',
+                    'width':550,
+                    'height':750,
+                    'legend': {position: 'none'},
+                    'vAxis' : { textStyle : { fontSize: 10} },
+                    'hAxis' : {viewWindow: { min:0 }},
+                    };
+
+                // Instantiate and draw our chart, passing in some options.
+                var chart = new google.visualization.BarChart(document.getElementById('categories_charts_understood2'));
+
+                var btnUnderstoodSave = document.getElementById('save-understood-pdf')
+                google.visualization.events.addListener(chart, 'ready', function () {
+                    btnUnderstoodSave.disabled = false;
+                });
+                btnUnderstoodSave.addEventListener('click', function () {
+                    var doc = new jsPDF();
+                    doc.addImage(chart.getImageURI(), 0, 0);
+                    doc.save('chart.pdf');
+                }, false);
+
+                chart.draw(data, options);
+                }
+        {% endif %}
+    </script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=328947117"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+        
+          gtag('config', '328947117');
+        </script>
 </head>
 
 <body id="id_results">
@@ -257,15 +342,18 @@
                             <input id="save-understood-pdf" type="button" value="{% trans 'Save as PDF' %}" disabled />
                         </div>
                         <div class="col-md-6 text-center">
-                            <div id="categories_charts_produced"></div>
-                            <input id="save-produced-pdf" type="button" value="{% trans 'Save as PDF' %}" disabled />
-                        </div>
-                    {% else %}
-                        <div class="col-md-12 text-center">
-                            <div id="categories_charts_produced"></div>
-                            <input id="save-produced-pdf" type="button" value="{% trans 'Save as PDF' %}" disabled />
+                            <div id="categories_charts_understood2"></div>
+                            <input id="save-understood2-pdf" type="button" value="{% trans 'Save as PDF' %}" disabled />
                         </div>
                     {% endif %}
+                    <div class="col-md-6 text-center">
+                        <div id="categories_charts_produced"></div>
+                        <input id="save-produced-pdf" type="button" value="{% trans 'Save as PDF' %}" disabled />
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <div id="categories_charts_produced2"></div>
+                        <input id="save-produced2-pdf" type="button" value="{% trans 'Save as PDF' %}" disabled />
+                    </div>
                 </div>
                 <br>
                 <div class = "row justify-content-center"> 
@@ -309,360 +397,6 @@
         $('.fb-share-button span').css('width', '20%');
     }, 200);      
 </script>
-
-{% if show_feedback %}
-    <!-- Script for generating D3 graphs. Very long!!-->
-    <script>
-        // Set variables for graph sizes and line thickness
-        var graph_height = 500;
-        var graph_width = 500;
-        var stroke_thickness = 4;
-
-        refresh_time = 10;
-
-        // Parse Django string object data. Grab relevant variables
-        var raw_data = '{{ cdi_items |escapejs }}';
-        var root = JSON.parse(raw_data);
-        var raw_age = '{{ age }}';
-        root.age = JSON.parse(raw_age);
-        root.completed = '{{ completed }}';
-        root.instrument_name = '{{ instrument_name }}';
-
-        // Load word-level data for participant. Parse into 2 or 3 bins depending on instrument type.
-        var words = root.filter(function(d) { return d.item_type == "word"; });
-        console.log(words);
-        $.each(words, function(index, value){
-            value.definition = value.definition.toLowerCase();
-            value.num_value = 'neither';
-            if (value.item.indexOf('textbox')<0) {
-                if ((root.instrument_name.indexOf('WS') > -1) | (root.instrument_name.indexOf('CDI3') > -1)) {
-                    if (value.prefilled_value) {
-                        value.num_value = 'produces';
-                    } else {
-                        if (value.choices[0][2]) {
-                            value.num_value = 'understands';
-                        } else 
-                            try {
-                                if (value.choices[1][2]) {
-                                    value.num_value = 'produces';
-                                }
-                            }
-                            catch { console.log("No value.choices[1][2]")}    
-                    }
-                } else if ('{{ show_produced }}' == 'True') {
-                    if (value.choices[0][2]) {
-                        value.num_value = 'understands';
-                    } else if (value.choices[1][2]) {
-                        value.num_value = 'produces';
-                    }
-                }
-            }
-        });
-
-        // Sort words into bins as 'understands' (only), 'understands'|'produces', and 'produces' (only)
-        var raw_words_understood = words.filter(function(d) { return d.num_value == 'understands' ; }).length;
-        var words_understood = words.filter(function(d) { return d.num_value == 'produces' | d.num_value == 'understands' ; }).length;
-        var words_produced = words.filter(function(d) { return (d.num_value == 'produces'); }).length;
-        // Create summary text depending on number of words in bins.
-
-        if (words_produced > 0 & raw_words_understood > 0) {
-            var num_words = "{% trans 'My child says PPP words and understands UUU words.' %}".replace(/PPP/g, words_produced).replace(/UUU/g, words_understood)
-        } else if (words_produced > 0 & raw_words_understood == 0) {
-            var num_words = "{% trans 'My child says PPP words.' %}".replace(/PPP/g, words_produced)
-        } else if (words_produced == 0 & raw_words_understood > 0) {
-            var num_words = "{% trans 'My child understands UUU words.' %}".replace(/UUU/g, words_understood)
-        }
-        
-
-        // Place text variable into div
-        if (words_produced > 0 | raw_words_understood > 0) {
-            $("#num_words_text").html("<h2>"+num_words+"</h2>");
-        }
-
-        // Generate a category-level summary of vocabulary
-        var categorySize = d3.nest()
-            .key(function(d) { return d.category; })
-            .key(function(d) { return d.num_value; })
-            .rollup(function(v) { return v.length; })
-            .entries(words);
-
-        // Declare variables for word_categories graph
-        var word_categories;
-        var prod_graph_width = graph_width;
-        var comp_graph_width = graph_width;
-        var new_chart_understood;
-
-        // Load csv matching informal category labels with formal category titles and generate 2 category-level summary graph.
-        // If child only had responses of one type (all words are 'understands' or all words are 'produces'), produce 1 graph and double its width
-        d3.csv("{% static 'data_csv/word_categories.csv' %}", function(data) {
-            word_categories = data;
-            var list_names = objectMap(categorySize,'key')
-            updateCategoryInfo();
-            
-            $.each(word_categories, function(index){
-                var category_id = word_categories[index].id;
-                var name_location = list_names.indexOf(category_id)
-                if (name_location > -1 ) {
-                categorySize[name_location].category_name = word_categories[index][root.instrument_name];
-                }
-            });
-            
-            bestCategories();
-
-        });
-
-        // Returns a list of values for variables nested in a list of objects.
-        function objectMap (obj, variable) {
-            var values = []
-            i = 0;
-            $.each(obj, function(index){ 
-                values[i] = obj[index][variable]
-                i = i + 1;
-            });
-            return values;
-        }
-
-        // Assign categories colors. Also summary performance data for each individual category
-        function updateCategoryInfo() {
-
-            var category_colors = colorHue(categorySize.length)
-
-            $.each(categorySize, function(index, value){
-                value.color = category_colors[index]
-                value.hex = value.color.toString()
-                value.neither = 0;
-                value.understands = 0;
-                value.produces = 0;
-
-                for (var i = 0; i < categorySize[index].values.length; i++) {
-                    var current_val = categorySize[index].values[i]
-                    if(current_val.key == 'neither') {
-                        value.neither = current_val.values;
-                    }
-                    if(current_val.key == 'understands') {
-                        value.understands = current_val.values;
-                    }
-                    if(current_val.key == 'produces') {
-                        value.produces = current_val.values;
-                    }
-
-                }
-
-                value.num_all = value.neither + value.understands + value.produces
-                value.prop_understood = 100*(value.understands + value.produces)/(value.num_all)
-                value.prop_produced = 100*(value.produces)/(value.num_all)
-            });
-        }
-
-        // Function for shuffling the order of an array.
-        function shuffle(array) {
-            var currentIndex = array.length, temporaryValue, randomIndex;
-
-            while (0 !== currentIndex) {
-
-                randomIndex = Math.floor(Math.random() * currentIndex);
-                currentIndex -= 1;
-
-                temporaryValue = array[currentIndex];
-                array[currentIndex] = array[randomIndex];
-                array[randomIndex] = temporaryValue;
-            }
-
-            return array;
-        }
-
-        // Function for generating a color palette spanning the color range and dependent on the # of unique hues needed
-        function colorHue(n) {
-            var hues = []
-            var step_count = 360/n
-
-            for (var i = 0; i < n; i++) {
-                hue = Math.round(15 + i*step_count);
-                hues.push(d3.hcl(hue, 100, 60));
-            }
-            return shuffle(hues);
-        }
-
-        // Declare both category charts
-        var chart_understood;
-        var chart_produced;
-
-
-        var bestProdCat_num = 0;
-        var bestCompCat_num = 0;
-        var bestProdCat;
-        var bestCompCat;
-
-        // Determine categories with highest performance and produce a text summary for presentation
-        function bestCategories() {
-
-            for (var i = 0; i < categorySize.length; i++) {
-                if (categorySize[i].prop_produced > bestProdCat_num & words_produced > 0) {
-                    bestProdCat_num = categorySize[i].prop_produced;
-                    bestProdCat = categorySize[i].category_name;
-                }
-
-                if (categorySize[i].prop_understood > bestCompCat_num & raw_words_understood > 0) {
-                    bestCompCat_num = categorySize[i].prop_understood;
-                    bestCompCat = categorySize[i].category_name;
-                }
-            }
-
-            if (typeof(bestProdCat) !== 'undefined') {
-                $("#best_categories").append('{% trans "My child produces the most words in the bestProdCat category." %}<br>'.replace(/bestProdCat/g, '"' + bestProdCat + '"'));
-            }
-
-            if (typeof(bestCompCat) !== 'undefined') {
-                $("#best_categories").append('{% trans "My child understands the most words in the bestCompCat category." %}<br>'.replace(/bestCompCat/g, '"' + bestCompCat + '"'));
-            }
-        }
-
-        var aoa_data;
-        var words_prod;
-        var words_comp;
-        var aoa_data_prod;
-        var aoa_data_comp;
-        var aoa_prod_combined;
-        var aoa_comp_combined;
-        var high_prod_aoa;
-        var high_comp_aoa;
-        var high_prod_word;
-        var high_comp_word;
-
-        // Merge objects by matching values in specific keys
-        function join(lookupTable, mainTable, lookupKey, mainKey, select) {
-            var l = lookupTable.length,
-            m = mainTable.length,
-            lookupIndex = [],
-            output = [];
-
-            for (var i = 0; i < l; i++) { // loop through l items
-                var row = lookupTable[i];
-                lookupIndex[row[lookupKey]] = row; // create an index for lookup table
-            }
-
-            for (var j = 0; j < m; j++) { // loop through m items
-                var y = mainTable[j];
-                var x = lookupIndex[y[mainKey]]; // get corresponding row from lookupTable
-                output.push(select(y, x)); // select only the columns you need
-            }
-
-            return output;
-        };
-
-
-        // Take age of acquisition (AOA) data produced by Mika Braginsky. Match it with individual's word performance to determine the words understood/produced with the highest AOA values.
-        d3.csv("{% static 'data_csv/language_aoas.csv' %}", function(data) {
-            aoa_data = data.filter(function(d) { return (d.language == '{{ language }}'); });
-
-            words_prod = words.filter(function(d) { return (d.num_value == 'produces'); });
-            words_comp = words.filter(function(d) { return (d.num_value == 'understands'); });
-
-            aoa_data_prod = aoa_data.filter(function(d) { return (d.measure == 'produces'); });
-            aoa_data_comp = aoa_data.filter(function(d) { return (d.measure == 'understands'); });
-
-            aoa_prod_combined = join(aoa_data_prod, words_prod, "words", "definition", function(word, aoa) {
-                return {
-                    word: word.definition,
-                    aoa: (aoa !== undefined) ? parseFloat(aoa.aoa) : null
-                };
-            });
-
-            aoa_comp_combined = join(aoa_data_comp, words_comp, "words", "definition", function(word, aoa) {
-                return {
-                    word: word.definition,
-                    aoa: (aoa !== undefined) ? parseFloat(aoa.aoa) : null
-                };
-            });
-
-            if (aoa_prod_combined.length > 0) {
-                high_prod_aoa = 0
-
-                for (var i = 0; i < aoa_prod_combined.length; i++) {
-                    if (aoa_prod_combined[i].aoa > high_prod_aoa) {
-                        high_prod_aoa = aoa_prod_combined[i].aoa;
-                        high_prod_word = aoa_prod_combined[i].word;
-                    }
-                }
-            }
-
-            if (aoa_comp_combined.length > 0) {
-                high_comp_aoa = 0
-
-                for (var j = 0; j < aoa_comp_combined.length; j++) {
-                    if (aoa_comp_combined[j].aoa > high_comp_aoa) {
-                        high_comp_aoa = aoa_comp_combined[j].aoa;
-                        high_comp_word = aoa_comp_combined[j].word;
-                    }
-                }
-            }
-
-
-            if (typeof(high_prod_word) !== 'undefined') {
-                $('#hardest_words').append('<h2>' + '{% trans "The hardest word my child says is INSERTWORDHERE." %}<br>'.replace(/INSERTWORDHERE/g, '"' + high_prod_word + '"') + '</h2>')
-            }
-
-            else {
-                if (typeof(high_comp_word) !== 'undefined') {
-                    $('#hardest_words').append('<h2>' + '{% trans "The hardest word my child understands is INSERTWORDHERE." %}<br>'.replace(/INSERTWORDHERE/g,  '"' + high_comp_word + '"') + '</h2>')
-                }
-            }
-        });
-
-        var predicted_vocab;
-        var pred_prod_min;
-        var pred_comp_min;
-        var pred_prod_quant;
-        var pred_comp_quant;
-        var quant_prod;
-        var quant_age_loc_prod;
-        var adjust_prod;
-        var quant_comp;
-        var quant_age_loc_comp;
-        var adjust_comp;
-        var adjusted_quant_prod = [];
-        var adjusted_quant_comp = [];
-        var current_vocab = [];
-        var new_pred_chart;
-
-        var pred_chart;
-        var node;
-
-
-        // Function wraps lengthy text labels for proper spacing between items
-        function wrap(text, width) {
-            text.each(function() {
-                var text = d3.select(this),
-                    words = text.text().split(/\s+/).reverse(),
-                    word,
-                    line = [],
-                    lineNumber = 0,
-                    lineHeight = 0.9, // ems
-                    y = text.attr("y"),
-                    dx = parseFloat(text.attr("dx")),
-                    dy = parseFloat(text.attr("dy")),
-                    tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dx", dx + "em").attr("dy", dy + "em");
-
-                while (word = words.pop()) {
-                    line.push(word);
-                    tspan.text(line.join(" "));
-                    if (tspan.node().getComputedTextLength() > width) {
-                        line.pop();
-                        tspan.text(line.join(" "));
-                        line = [word];
-                        tspan = text.append("tspan")
-                            .attr("x", 0)
-                            .attr("y", y)
-                            .attr("dx", dx + "em")
-                            .attr("dy", ++lineNumber * lineHeight + dy + "em")
-                            .text(word);
-                    }
-                }
-            });
-        }
-
-    </script>
-{% endif %}
 
 <script>
     // This is meant to change to RTL

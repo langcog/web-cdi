@@ -13,6 +13,14 @@ def get_item_perc(dictionary, key):
     return str(float(float(dictionary.get(key))/float(dictionary.get('count')))*100)
 
 @register.filter
+def get_item_count(dictionary, key):
+    return dictionary.get(key)
+
+@register.filter
+def get_usage_perc(count, total):
+    return str(float(count/total)*100)
+
+@register.filter
 def translate(choice, instrument_name):
     obj = Choices.objects.get(choice_set_en=choice)
     instrument_obj = instrument.objects.get(name=instrument_name)

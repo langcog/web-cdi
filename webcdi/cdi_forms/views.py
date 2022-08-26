@@ -978,6 +978,7 @@ def printable_view(request, hash_id):
     nrows = len(categories_data)
     get_row = lambda row: categories_data[row]
     categories = {}
+    totals = {'produces' : 0, 'understands': 0}
     for row in range(1, nrows):
         row_values = get_row(row)
         if len(row_values) > 1:
@@ -997,10 +998,14 @@ def printable_view(request, hash_id):
             if item['value'] == 'produces':
                 categories[instance.category]['produces'] += 1
                 categories[instance.category]['understands'] += 1
+                totals['produces'] += 1
+                totals['understands'] +=1
             if item['value'] == 'understands':
                 categories[instance.category]['understands'] += 1
+                totals['understands'] +=1
 
     prefilled_data['graph_data'] = categories
+    prefilled_data['totals'] = totals
     prefilled_data['instrument'] = administration_instance.study.instrument.name
     prefilled_data['object'] = administration_instance
     prefilled_data['language_code'] = settings.LANGUAGE_DICT[administration_instance.study.instrument.language]
