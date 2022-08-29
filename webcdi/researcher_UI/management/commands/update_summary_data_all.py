@@ -9,7 +9,7 @@ from django.core.mail import EmailMessage
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
-        study_count = 165      
+        study_count = 0      
         for study_obj in study.objects.all()[study_count:]:
             study_count += 1
             count = 0
