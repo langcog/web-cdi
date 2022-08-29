@@ -50,7 +50,7 @@ def create_benchmark_score(benchmark, age, background_info, administration_insta
                     summary.save()
                     
                     if not benchmark.raw_score == 9999: 
-                        summary, created = SummaryData.objects.get_or_create(administration=administration_instance, title=f.title + f'Percentile-both{adjusted}')
+                        summary, created = SummaryData.objects.get_or_create(administration=administration_instance, title=f.title + f' Percentile-both{adjusted}')
                         unisex_score = benchmark.percentile
                         for b in benchmarks[1:]:
                             if b.raw_score <= raw_score: 
