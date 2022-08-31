@@ -7,7 +7,7 @@
     },
     {
         "title" : "Combines",
-        "category" : "word",
+        "category" : "combine",
         "measure" : "sometimes;often",
         "order" : 2
     }
