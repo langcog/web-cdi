@@ -10,6 +10,7 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument('-s', '--study_id', type=int)
         parser.add_argument('-l', '--language', type=str)
+        parser.add_argument('-f', '--form', type=str)
 
     def handle(self, *args, **options):
         subject = f'WebCDI Summary Data'
@@ -17,9 +18,11 @@ class Command(BaseCommand):
         if options['study_id']:
             study_obj = study.objects.get(pk=options['study_id'])
             query = Q(study=study_obj)
-            administrations = administration.objects.filter(study=study_obj)
+            #administrations = administration.objects.filter(study=study_obj)
         if options['language']:
             query = Q(query) & Q(study__instrument__language=options['language']) 
+        if options['form']:
+            query = Q(query) & Q(study__instrument__form=options['form']) 
 
         administrations = administration.objects.filter(query)
         
