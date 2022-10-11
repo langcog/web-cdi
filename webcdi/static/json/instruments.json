@@ -245,7 +245,7 @@
 		"scoring_json" : "cdi_forms/form_data/scoring/Argentine_Spanish_WS_scoring.json",
 		"demographics" : ["Argentine_Spanish.json"]
 	},{
-		"language": "French Quebec",
+		"language": "French French",
 		"form": "CAT",
 		"verbose_name": "Computer Adaptive Test",
 		"min_age": 12,
