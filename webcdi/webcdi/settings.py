@@ -19,7 +19,7 @@ import os
 
 
 DEBUG = bool(os.environ.get('DEBUG', False))
-DEBUG = True
+#DEBUG = True
 TEMPLATE_DEBUG = False
 
 from .secret_settings import *
