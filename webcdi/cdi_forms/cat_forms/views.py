@@ -19,6 +19,7 @@ from .cdi_cat_api import cdi_cat_api
 CAT_LANG_DICT = {
     'en' : 'EN',
     'es' : 'SP',
+    'fr' : 'FR',
     'fr-ca' : 'FR',
     'en-ca' : 'EN',
 }
