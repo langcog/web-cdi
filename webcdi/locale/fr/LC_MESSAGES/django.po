@@ -1705,7 +1705,7 @@ msgstr ""
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:41
 #: cdi_forms/templates/cdi_forms/cdi_form.html:206
 msgid "DO check the box if:"
-msgstr "COCHEZ la boîte si:"
+msgstr "Cliquez sur “<span style='color: blue'>Oui</span>” si : "
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:43
 #: cdi_forms/templates/cdi_forms/cdi_form.html:208
@@ -1713,9 +1713,8 @@ msgid ""
 "Your child says the word when trying to name an object or describe something "
 "that happened.  You think s/he has a meaning for that word."
 msgstr ""
-"Votre enfant dit un mot/une phrase quand il essaie de nommer un objet ou de "
-"décrire quelque chose qui s’est passé. Vous pensez que votre enfant associe "
-"un sens à ce mot/cette phrase."
+"Votre enfant dit le mot quand il essaye de nommer un objet ou de décrire "
+"une situation. Vous pensez qu’il donne un sens à ce mot."
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:62
 #: cdi_forms/templates/cdi_forms/cdi_form.html:226
@@ -1724,14 +1723,13 @@ msgid ""
 "\"special\" way. If you use another word in your family (e.g., Nana for "
 "Grandma), that is ok too!"
 msgstr ""
-"C’est correct si votre enfant ne peut pas dire le mot au complet ou s’il le "
-"dit à sa façon. Si vous utilisez un autre mot dans votre famille (par ex., "
-"Mamie pour grand-mère), cela est correct aussi!"
+"Peu importe si votre enfant ne peut pas dire tout le mot, s'il a sa façon "
+"à lui de le dire ou s'il utilise un autre mot comme mamie pour grand-mère.  "
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:64
 #: cdi_forms/templates/cdi_forms/cdi_form.html:228
 msgid "DO check the box."
-msgstr "COCHEZ la boîte."
+msgstr "Cliquez sur “<span style='color: blue'>Oui</span>” si : "
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:82
 #: cdi_forms/templates/cdi_forms/cdi_form.html:245
@@ -1739,8 +1737,9 @@ msgid ""
 "DON'T check the box if your child is just stringing sounds together. This is "
 "not a real word that means something."
 msgstr ""
-"NE PAS cocher la boîte si votre enfant ne fait que babiller, produisant le "
-"même son à répétition. Ceci n’est pas un vrai mot qui signifie quelque chose."
+"Cliquez sur “<span style='color: red'>Non</span>” si : <br /><br />"
+"Votre enfant émet uniquement des sons à répétition, qu’il babille. "
+"Ce n’est pas un vrai mot qui veut dire quelque chose pour lui."
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:99
 #: cdi_forms/templates/cdi_forms/cdi_form.html:174
@@ -1748,8 +1747,8 @@ msgstr ""
 msgid ""
 "DON'T ask your child to repeat the words on the list. This doesn't count!"
 msgstr ""
-"NE PAS demander à votre enfant de répéter les mots de ce questionnaire. Cela "
-"ne compte pas!"
+"Cliquez sur “<span style='color: red'>Non</span>” si : <br /><br />"
+"Ne demandez pas à votre enfant de répéter les mots de la liste, ça ne compte pas !"
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:125
 msgid "Does your child say ... "
