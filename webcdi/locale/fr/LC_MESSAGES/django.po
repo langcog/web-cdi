@@ -276,7 +276,7 @@ msgstr "Âge (en mois)<span class=\"asteriskField\">*</span>"
 #: cdi_forms/forms.py:160
 msgid "This field will update when you enter or change your child's DOB."
 msgstr ""
-"Ce champ sera mis à jour lorsque vous entrez ou modifiez la date de "
+"Ce champ est mis à jour automatiquement lorsque vous entrez la date de "
 "naissance de votre enfant."
 
 #: cdi_forms/forms.py:170
@@ -474,19 +474,19 @@ msgstr "Santé"
 
 #: cdi_forms/forms.py:616
 msgid "Your Name"
-msgstr ""
+msgstr "Votre nom"
 
 #: cdi_forms/forms.py:617
 msgid "Your Email Address"
-msgstr ""
+msgstr "Votre email"
 
 #: cdi_forms/forms.py:618
 msgid "Your Test URL"
-msgstr ""
+msgstr "Votre lien"
 
 #: cdi_forms/forms.py:619
 msgid "What would you like to tell us?"
-msgstr ""
+msgstr "Que voudriez-vous nous dire ?"
 
 #: cdi_forms/forms.py:638 cdi_forms/templates/cdi_forms/cdi_form.html:11
 #: cdi_forms/templates/cdi_forms/cdi_form.html:323 cdi_forms/views.py:814
@@ -1624,7 +1624,7 @@ msgstr "Terminer"
 #: cdi_forms/templates/cdi_forms/cdi_form.html:328 cdi_forms/views.py:275
 #: cdi_forms/views.py:808
 msgid "Go back to Background Info"
-msgstr "Revenir à l'information sur l’enfant et la famille"
+msgstr "Revenir à l’information sur l’enfant"
 
 #: cdi_forms/templates/cdi_forms/backpage_info.html:30
 msgid "Background Information Continued"
@@ -1646,8 +1646,10 @@ msgstr ""
 msgid ""
 "Thank you for filling this out! Of the words we asked, the hardest word your "
 "child knows is \"%(easiest)s\" and the easiest word is \"%(hardest)s\"."
-msgstr "Merci d'avoir rempli ce questionnaire ! Parmi les mots que nous avons demandés, le mot le plus difficile est votre "
-"l'enfant sait que c'est \"%(easiest)s\" et que le mot le plus simple est \"%(hardest)s\"."
+msgstr ""
+"Merci d’avoir rempli ce questionnaire ! Parmi les mots que nous vous avons "
+"demandés, le mot le plus difficile que votre enfant sait dire est \"%(easiest)s\" "
+"et le mot le plus simple est \"%(hardest)s\"."
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:45
 msgid ""
@@ -1662,20 +1664,20 @@ msgid ""
 "assessment, you can learn more about the CDI <a href=\"http://mb-cdi."
 "stanford.edu/\" target=\"_blank\">here</a>. We appreciate your contribution!"
 msgstr ""
-"<br/>Nous vous remercions pour votre intérêt à remplir l'inventaire de "
-"développement communicatif de MacArthur-Bates! Avec l'aide de parents et "
-"responsables comme vous, nous en apprenons davantage sur le développement du "
-"langage chez l’enfant, et sur la façon dont ce développement varie chez "
-"chaque enfant et chaque culture. <br/><br/> Rappelez-vous que l’inventaire "
-"répertorie de nombreux mots qui sont utilisés par  beaucoup d’enfants. Ne "
-"vous inquiétez pas si votre enfant ne connaît que quelques mots en ce "
-"moment. Voici un aperçu du vocabulaire émergent de votre enfant, d’après "
-"notre recherche. Ce résumé n'est pas une évaluation clinique. Si vous avez "
-"des inquiétudes concernant le développement de votre enfant, nous vous "
-"recommandons d’en parler avec le médecin de votre enfant. Si vous avez aimé "
-"notre inventaire, vous pouvez en apprendre plus ici <a href=\"http://mb-cdi."
-"stanford.edu/\" target=\"_blank\">(lien en anglais)</a>. Encore une fois, "
-"nous vous remercions de votre intérêt!"
+"<br/>Nous vous remercions pour votre intérêt porté à l’inventaire de "
+"développement communicatif de MacArthur-Bates ! Avec l’aide de parents "
+"et éducateurs comme vous, nous en apprenons davantage sur le "
+"développement du langage chez l’enfant, et sur la façon dont il varie "
+"pour chaque enfant et chaque culture.  <br/><br/> N’oubliez pas que cet "
+"inventaire liste de nombreux mots qui sont utilisés par les enfants d’âges "
+"variés. Ne vous inquiétez pas si votre enfant ne connaît pas encore tous "
+"les mots. Vos réponses donnent un aperçu du vocabulaire émergent de votre "
+"enfant, d’après notre recherche. Ce résumé n’est pas une évaluation clinique. "
+"Si vous avez des inquiétudes concernant le développement de votre enfant, nous "
+"vous recommandons d’en parler avec son médecin. Si vous avez aimé notre "
+"inventaire, vous pouvez en apprendre plus ici "
+"<a href=\"http://mb-cdi.stanford.edu/\" target=\"_blank\">(lien en anglais)</a>. "
+"Merci encore de votre intérêt !"
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:28
 #: cdi_forms/templates/cdi_forms/cdi_form.html:192
@@ -1687,13 +1689,18 @@ msgid ""
 "be able to understand or say a lot of the words on the form. That is "
 "perfectly fine!"
 msgstr ""
-"Dans cette section, nous vous demanderons quelles sont les phrases et les "
-"mots que votre enfant « comprend et dit. » Votre enfant « comprend et dit » "
-"un mot/une phrase du questionnaire s’il sait ce que le mot/la phrase veut "
-"dire ET s’il est capable de le/la dire lui-même. Voici quelques exemples. Ce "
-"questionnaire est conçu pour des enfants de plusieurs âges. Il se pourrait "
-"que votre enfant ne soit pas capable de comprendre ou de dire beaucoup de "
-"mots inclus dans ce questionnaire et cela est parfaitement normal!"
+"<strong style='text-align:center'>Comment remplir le questionnaire de vocabulaire ?"
+" </strong><br /><br />"
+"Nous allons vous présenter une liste de mots du français. Pour chaque mot, "
+"nous vous demanderons si votre enfant “<span style='color:blue'>comprend et "
+"dit</span>” le mot. Votre enfant “<span style='color:blue'>comprend "
+"et dit</span>” un mot s'il sait ce qu’il veut dire ET s’il peut le dire tout "
+"seul. <br/>" 
+"Ce questionnaire est destiné à des enfants d’âges différents. Votre enfant peut "
+"ne pas comprendre ou dire beaucoup des mots du questionnaire et c’est "
+"parfaitement normal ! <br />"
+"Voici quelques indications pour vous aider à répondre."
+
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:41
 #: cdi_forms/templates/cdi_forms/cdi_form.html:206
@@ -1754,18 +1761,17 @@ msgstr ""
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:62
 msgid "Instructions: "
-msgstr "Directives: "
+msgstr "Indications: "
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:66
 msgid "This form can be filled any time before the due date."
-msgstr "Ce formulaire peut être rempli à tout moment avant la date d'échéance."
+msgstr "Ce formulaire peut être rempli à tout moment avant la date limite."
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:67
 msgid ""
 "It can also be saved at any time and resumed later by using the same link"
 msgstr ""
-"Il peut également être sauvegardé à tout moment et repris plus tard en "
-"utilisant le même lien"
+"Il peut être sauvegardé et repris plus tard en utilisant le même lien"
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:67
 msgid "create bookmark"
@@ -1785,8 +1791,8 @@ msgid ""
 "Please use the navigation buttons below. Do not use the \"back\" and "
 "\"forward\" buttons on your browser."
 msgstr ""
-"Veuillez s’il-vous-plaît utiliser les boutons de navigation ci-dessous. "
-"N'utilisez pas les boutons \"précédent\" et \"suivant\" de votre navigateur."
+"Utilisez les boutons de navigation ci-dessous. N’utilisez pas les "
+"boutons “précédent” et “suivant” de votre navigateur"
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:71
 msgid ""
@@ -1798,7 +1804,7 @@ msgstr ""
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:99
 msgid "Due date"
-msgstr "Date d'échéance"
+msgstr "Date limite"
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:104
 msgid "Show waiver of documentation"
@@ -2027,7 +2033,7 @@ msgid ""
 "Fill out the form below and a member of our team will get back to you soon!"
 msgstr ""
 "Remplissez le formulaire ci-dessous et un membre de notre équipe vous "
-"répondra bientôt!"
+"répondra bientôt !"
 
 #: cdi_forms/templates/cdi_forms/contact.html:67
 msgid " characters remaining"
