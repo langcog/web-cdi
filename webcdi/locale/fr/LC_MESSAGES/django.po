@@ -1545,7 +1545,7 @@ msgid ""
 "Try to complete the inventory when you have at least 10-15 quiet minutes, "
 "without interruptions. An example might be when your child is sleeping."
 msgstr ""
-"Essayez de compléter l’inventaire lorsque vous avez au moins 30 minutes sans "
+"Essayez de compléter l’inventaire lorsque vous avez au moins 10-15 minutes sans "
 "interruptions. Un exemple pourrait être lorsque votre enfant dort.​"
 
 #: cdi_forms/templates/cdi_forms/background_info.html:30
@@ -1783,7 +1783,7 @@ msgstr "Une fois le formulaire envoyé, il ne peut plus être modifié."
 #: cdi_forms/templates/cdi_forms/cdi_base.html:69
 msgid "The form also cannot be altered after the due date."
 msgstr ""
-"Le formulaire ne peut pas non plus être modifié après la date d'échéance."
+"Le formulaire ne peut pas être modifié après la date limite."
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:70
 msgid ""
@@ -1798,8 +1798,7 @@ msgid ""
 "You can use the tab button and arrows keys to quickly navigate and answer "
 "questions."
 msgstr ""
-"Vous pouvez utiliser le bouton de tabulation et les flèches de votre clavier "
-"pour naviguer rapidement et répondre aux questions."
+"Ce formulaire ne doit vous prendre plus de 10 min."
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:99
 msgid "Due date"
