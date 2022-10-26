@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-29 17:12+0000\n"
+"POT-Creation-Date: 2022-10-26 18:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -472,23 +472,28 @@ msgstr "Expérience linguistique"
 msgid "Health"
 msgstr "Santé"
 
-#: cdi_forms/forms.py:616
+#: cdi_forms/forms.py:593
+#, python-format
+msgid "Your identifier for %(source)s"
+msgstr "%(source)s: Votre numéro de participation anonyme"
+
+#: cdi_forms/forms.py:619
 msgid "Your Name"
 msgstr "Votre nom"
 
-#: cdi_forms/forms.py:617
+#: cdi_forms/forms.py:620
 msgid "Your Email Address"
 msgstr "Votre email"
 
-#: cdi_forms/forms.py:618
+#: cdi_forms/forms.py:621
 msgid "Your Test URL"
 msgstr "Votre lien"
 
-#: cdi_forms/forms.py:619
+#: cdi_forms/forms.py:622
 msgid "What would you like to tell us?"
 msgstr "Que voudriez-vous nous dire ?"
 
-#: cdi_forms/forms.py:638 cdi_forms/templates/cdi_forms/cdi_form.html:11
+#: cdi_forms/forms.py:641 cdi_forms/templates/cdi_forms/cdi_form.html:11
 #: cdi_forms/templates/cdi_forms/cdi_form.html:323 cdi_forms/views.py:814
 msgid "Submit"
 msgstr "Soumettre"
@@ -1509,6 +1514,7 @@ msgstr ""
 
 #: cdi_forms/templates/cdi_forms/background_info.html:7
 #: cdi_forms/templates/cdi_forms/background_info.html:59
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:106
 #: cdi_forms/templates/cdi_forms/study_group.html:7 cdi_forms/views.py:262
 #: cdi_forms/views.py:558
 msgid "Next"
@@ -1545,8 +1551,8 @@ msgid ""
 "Try to complete the inventory when you have at least 10-15 quiet minutes, "
 "without interruptions. An example might be when your child is sleeping."
 msgstr ""
-"Essayez de compléter l’inventaire lorsque vous avez au moins 10-15 minutes sans "
-"interruptions. Un exemple pourrait être lorsque votre enfant dort.​"
+"Essayez de compléter l’inventaire lorsque vous avez au moins 10-15 minutes "
+"sans interruptions. Un exemple pourrait être lorsque votre enfant dort.​"
 
 #: cdi_forms/templates/cdi_forms/background_info.html:30
 #: cdi_forms/templates/cdi_forms/study_group.html:23
@@ -1648,8 +1654,8 @@ msgid ""
 "child knows is \"%(easiest)s\" and the easiest word is \"%(hardest)s\"."
 msgstr ""
 "Merci d’avoir rempli ce questionnaire ! Parmi les mots que nous vous avons "
-"demandés, le mot le plus difficile que votre enfant sait dire est \"%(easiest)s\" "
-"et le mot le plus simple est \"%(hardest)s\"."
+"demandés, le mot le plus difficile que votre enfant sait dire est "
+"\"%(easiest)s\" et le mot le plus simple est \"%(hardest)s\"."
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:45
 msgid ""
@@ -1665,19 +1671,24 @@ msgid ""
 "stanford.edu/\" target=\"_blank\">here</a>. We appreciate your contribution!"
 msgstr ""
 "<br/>Nous vous remercions pour votre intérêt porté à l’inventaire de "
-"développement communicatif de MacArthur-Bates ! Avec l’aide de parents "
-"et éducateurs comme vous, nous en apprenons davantage sur le "
-"développement du langage chez l’enfant, et sur la façon dont il varie "
-"pour chaque enfant et chaque culture.  <br/><br/> N’oubliez pas que cet "
-"inventaire liste de nombreux mots qui sont utilisés par les enfants d’âges "
-"variés. Ne vous inquiétez pas si votre enfant ne connaît pas encore tous "
-"les mots. Vos réponses donnent un aperçu du vocabulaire émergent de votre "
-"enfant, d’après notre recherche. Ce résumé n’est pas une évaluation clinique. "
-"Si vous avez des inquiétudes concernant le développement de votre enfant, nous "
-"vous recommandons d’en parler avec son médecin. Si vous avez aimé notre "
-"inventaire, vous pouvez en apprendre plus ici "
-"<a href=\"http://mb-cdi.stanford.edu/\" target=\"_blank\">(lien en anglais)</a>. "
-"Merci encore de votre intérêt !"
+"développement communicatif de MacArthur-Bates ! Avec l’aide de parents et "
+"éducateurs comme vous, nous en apprenons davantage sur le développement du "
+"langage chez l’enfant, et sur la façon dont il varie pour chaque enfant et "
+"chaque culture.  <br/><br/> N’oubliez pas que cet inventaire liste de "
+"nombreux mots qui sont utilisés par les enfants d’âges variés. Ne vous "
+"inquiétez pas si votre enfant ne connaît pas encore tous les mots. Vos "
+"réponses donnent un aperçu du vocabulaire émergent de votre enfant, d’après "
+"notre recherche. Ce résumé n’est pas une évaluation clinique. Si vous avez "
+"des inquiétudes concernant le développement de votre enfant, nous vous "
+"recommandons d’en parler avec son médecin. Si vous avez aimé notre "
+"inventaire, vous pouvez en apprendre plus ici <a href=\"http://mb-cdi."
+"stanford.edu/\" target=\"_blank\">(lien en anglais)</a>. Merci encore de "
+"votre intérêt !"
+
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:52
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:228
+msgid "Click to complete the study"
+msgstr ""
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:28
 #: cdi_forms/templates/cdi_forms/cdi_form.html:192
@@ -1689,18 +1700,15 @@ msgid ""
 "be able to understand or say a lot of the words on the form. That is "
 "perfectly fine!"
 msgstr ""
-"<strong style='text-align:center'>Comment remplir le questionnaire de vocabulaire ?"
-" </strong><br /><br />"
-"Nous allons vous présenter une liste de mots du français. Pour chaque mot, "
-"nous vous demanderons si votre enfant “<span style='color:blue'>comprend et "
-"dit</span>” le mot. Votre enfant “<span style='color:blue'>comprend "
-"et dit</span>” un mot s'il sait ce qu’il veut dire ET s’il peut le dire tout "
-"seul. <br/>" 
-"Ce questionnaire est destiné à des enfants d’âges différents. Votre enfant peut "
-"ne pas comprendre ou dire beaucoup des mots du questionnaire et c’est "
-"parfaitement normal ! <br />"
-"Voici quelques indications pour vous aider à répondre."
-
+"<strong style='text-align:center'>Comment remplir le questionnaire de "
+"vocabulaire ? </strong><br /><br />Nous allons vous présenter une liste de "
+"mots du français. Pour chaque mot, nous vous demanderons si votre enfant "
+"“<span style='color:blue'>comprend et dit</span>” le mot. Votre enfant "
+"“<span style='color:blue'>comprend et dit</span>” un mot s'il sait ce qu’il "
+"veut dire ET s’il peut le dire tout seul. <br/>Ce questionnaire est destiné "
+"à des enfants d’âges différents. Votre enfant peut ne pas comprendre ou dire "
+"beaucoup des mots du questionnaire et c’est parfaitement normal ! <br /"
+">Voici quelques indications pour vous aider à répondre."
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:41
 #: cdi_forms/templates/cdi_forms/cdi_form.html:206
@@ -1713,8 +1721,8 @@ msgid ""
 "Your child says the word when trying to name an object or describe something "
 "that happened.  You think s/he has a meaning for that word."
 msgstr ""
-"Votre enfant dit le mot quand il essaye de nommer un objet ou de décrire "
-"une situation. Vous pensez qu’il donne un sens à ce mot."
+"Votre enfant dit le mot quand il essaye de nommer un objet ou de décrire une "
+"situation. Vous pensez qu’il donne un sens à ce mot."
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:62
 #: cdi_forms/templates/cdi_forms/cdi_form.html:226
@@ -1723,8 +1731,8 @@ msgid ""
 "\"special\" way. If you use another word in your family (e.g., Nana for "
 "Grandma), that is ok too!"
 msgstr ""
-"Peu importe si votre enfant ne peut pas dire tout le mot, s'il a sa façon "
-"à lui de le dire ou s'il utilise un autre mot comme mamie pour grand-mère.  "
+"Peu importe si votre enfant ne peut pas dire tout le mot, s'il a sa façon à "
+"lui de le dire ou s'il utilise un autre mot comme mamie pour grand-mère.  "
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:64
 #: cdi_forms/templates/cdi_forms/cdi_form.html:228
@@ -1737,9 +1745,9 @@ msgid ""
 "DON'T check the box if your child is just stringing sounds together. This is "
 "not a real word that means something."
 msgstr ""
-"Cliquez sur “<span style='color: red'>Non</span>” si : <br /><br />"
-"Votre enfant émet uniquement des sons à répétition, qu’il babille. "
-"Ce n’est pas un vrai mot qui veut dire quelque chose pour lui."
+"Cliquez sur “<span style='color: red'>Non</span>” si : <br /><br />Votre "
+"enfant émet uniquement des sons à répétition, qu’il babille. Ce n’est pas un "
+"vrai mot qui veut dire quelque chose pour lui."
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:99
 #: cdi_forms/templates/cdi_forms/cdi_form.html:174
@@ -1747,8 +1755,9 @@ msgstr ""
 msgid ""
 "DON'T ask your child to repeat the words on the list. This doesn't count!"
 msgstr ""
-"Cliquez sur “<span style='color: red'>Non</span>” si : <br /><br />"
-"Ne demandez pas à votre enfant de répéter les mots de la liste, ça ne compte pas !"
+"Cliquez sur “<span style='color: red'>Non</span>” si : <br /><br />Ne "
+"demandez pas à votre enfant de répéter les mots de la liste, ça ne compte "
+"pas !"
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:125
 msgid "Does your child say ... "
@@ -1769,8 +1778,7 @@ msgstr "Ce formulaire peut être rempli à tout moment avant la date limite."
 #: cdi_forms/templates/cdi_forms/cdi_base.html:67
 msgid ""
 "It can also be saved at any time and resumed later by using the same link"
-msgstr ""
-"Il peut être sauvegardé et repris plus tard en utilisant le même lien"
+msgstr "Il peut être sauvegardé et repris plus tard en utilisant le même lien"
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:67
 msgid "create bookmark"
@@ -1782,23 +1790,21 @@ msgstr "Une fois le formulaire envoyé, il ne peut plus être modifié."
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:69
 msgid "The form also cannot be altered after the due date."
-msgstr ""
-"Le formulaire ne peut pas être modifié après la date limite."
+msgstr "Le formulaire ne peut pas être modifié après la date limite."
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:70
 msgid ""
 "Please use the navigation buttons below. Do not use the \"back\" and "
 "\"forward\" buttons on your browser."
 msgstr ""
-"Utilisez les boutons de navigation ci-dessous. N’utilisez pas les "
-"boutons “précédent” et “suivant” de votre navigateur"
+"Utilisez les boutons de navigation ci-dessous. N’utilisez pas les boutons "
+"“précédent” et “suivant” de votre navigateur"
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:71
 msgid ""
 "You can use the tab button and arrows keys to quickly navigate and answer "
 "questions."
-msgstr ""
-"Ce formulaire ne doit vous prendre plus de 10 min."
+msgstr "Ce formulaire ne doit vous prendre plus de 10 min."
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:99
 msgid "Due date"
@@ -2201,10 +2207,6 @@ msgstr "Affichez mes réponses"
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:223
 msgid "Print My Answers"
 msgstr "Imprimer mes réponses"
-
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:228
-msgid "Click to complete the study"
-msgstr ""
 
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:238
 msgid "Share on Facebook"
@@ -2719,33 +2721,44 @@ msgstr ""
 msgid "I am afraid that your account registration was rejected by inspector."
 msgstr ""
 
-#: webcdi/settings.py:312
+#: webcdi/settings.py:218
 msgid "English"
 msgstr "anglais"
 
-#: webcdi/settings.py:313
+#: webcdi/settings.py:219
 msgid "Spanish"
 msgstr ""
 
-#: webcdi/settings.py:315
+#: webcdi/settings.py:221
 msgid "French Quebec"
 msgstr ""
 
-#: webcdi/settings.py:316
+#: webcdi/settings.py:222
+msgid "French French"
+msgstr ""
+
+#: webcdi/settings.py:223
 msgid "Canadian English"
 msgstr ""
 
-#: webcdi/settings.py:317
+#: webcdi/settings.py:224
 msgid "Dutch"
 msgstr "néerlandais"
 
-#: webcdi/settings.py:318
+#: webcdi/settings.py:225
 msgid "Hebrew"
 msgstr ""
 
-#: webcdi/settings.py:319
+#: webcdi/settings.py:226
 msgid "Korean"
 msgstr ""
+
+#~ msgid ""
+#~ "Your identifier for { self.curr_context[\"study_obj\"]."
+#~ "get_participant_source_boolean_display() }"
+#~ msgstr ""
+#~ "Votre numéro de participation anonyme { self.curr_context[\"study_obj\"]."
+#~ "get_participant_source_boolean_display() }"
 
 #~ msgid "Category"
 #~ msgstr "Catégorie"

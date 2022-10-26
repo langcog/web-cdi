@@ -13,6 +13,6 @@ PARTICIPANT_SOURCE_CHOICES = (
     (3, 'RedCap'),
     (4, 'Lookit'),
     (5, 'Mturk'),
-    (6, 'Qualmetrics'),
+    (6, 'Qualtrics'),
     (99, 'Other')
 )
