@@ -1,0 +1,21 @@
+[
+    {
+        "page":"front",
+        "contents":[
+            {
+                "fieldset":"Informations de base",
+                "fields":[
+                    {
+                        "field":"source_id"
+                    },
+                    {
+                        "field":"child_dob"
+                    },
+                    {
+                        "field":"age"
+                    }
+                ]
+            }
+        ]
+    }
+]
