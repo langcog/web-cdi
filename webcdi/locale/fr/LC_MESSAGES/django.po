@@ -1737,7 +1737,7 @@ msgstr ""
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:64
 #: cdi_forms/templates/cdi_forms/cdi_form.html:228
 msgid "DO check the box."
-msgstr "Cliquez sur “<span style='color: blue'>Oui</span>” si : "
+msgstr "Cliquez sur “<span style='color: blue'>Oui</span>”  "
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:82
 #: cdi_forms/templates/cdi_forms/cdi_form.html:245
@@ -1755,7 +1755,7 @@ msgstr ""
 msgid ""
 "DON'T ask your child to repeat the words on the list. This doesn't count!"
 msgstr ""
-"Cliquez sur “<span style='color: red'>Non</span>” si : <br /><br />Ne "
+"Cliquez sur “<span style='color: red'>Non</span>”  <br /><br />Ne "
 "demandez pas à votre enfant de répéter les mots de la liste, ça ne compte "
 "pas !"
 
