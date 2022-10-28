@@ -586,8 +586,15 @@ class BackgroundForm(BetterModelForm):
                 ),
             )
             
-        if self.curr_context['source_id'] != None : self.fields['source_id'].initial = self.curr_context['source_id']
-        if not self.curr_context['study_obj'].participant_source_boolean: self.fields['source_id'].widget = forms.HiddenInput()
+        if self.curr_context['source_id'] != None: 
+            self.fields['source_id'].initial = self.curr_context['source_id']
+            if self.fields['source_id'].initial == 'None':
+                self.fields['source_id'].initial = ''
+
+        if not self.curr_context['study_obj'].participant_source_boolean: 
+            self.fields['source_id'].widget = forms.HiddenInput()
+        else:
+            self.fields['source_id'].label = _('Your identifier for %(source)s') % {'source': self.curr_context["study_obj"].get_participant_source_boolean_display() }
 
     #Link form to BackgroundInfo model stored in database. Declare widget formatting for specific fields.
     class Meta:

@@ -111,7 +111,6 @@ class AdministerAdministraionView(UpdateView):
         ctx['language_code'] = language_map(self.object.study.instrument.language)
         
         if self.word: 
-            print(self.word)
             ctx['form'] = CatItemForm(context={'label':self.word['definition']}, initial={'word_id':self.word['index'], 'label':self.word['definition']})
             try:
                 if '*' in self.word['definition']: ctx['footnote'] = True
