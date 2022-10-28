@@ -1535,7 +1535,7 @@ msgstr "Pour enfants âgés de %(min_age)s à %(max_age)s mois"
 #: cdi_forms/templates/cdi_forms/background_info.html:23
 #: cdi_forms/templates/cdi_forms/study_group.html:20
 msgid "Instructions for completing the language inventory"
-msgstr "Directives pour remplir l’inventaire de communication"
+msgstr "indications pour remplir l’inventaire de communication"
 
 #: cdi_forms/templates/cdi_forms/background_info.html:26
 #: cdi_forms/templates/cdi_forms/study_group.html:22
@@ -1572,7 +1572,7 @@ msgid ""
 "providers) to help you fill out this form."
 msgstr ""
 "N’hésitez pas à demander aux autres (par ex. à d’autres membres de la "
-"famille, une gardienne, d’autres gens fournissant des services de garde) de "
+"famille, une babysitter, d’autres gens fournissant des services de garde) de "
 "vous aider à remplir ce formulaire."
 
 #: cdi_forms/templates/cdi_forms/background_info.html:32
@@ -1581,7 +1581,7 @@ msgid ""
 "Please read all of the instructions on the inventory carefully, and make "
 "sure you complete all of the sections."
 msgstr ""
-"Veuillez lire toutes les directives de l’inventaire attentivement et vous "
+"Veuillez lire toutes les indications de l’inventaire attentivement et vous "
 "assurer d’avoir rempli toutes les sections."
 
 #: cdi_forms/templates/cdi_forms/background_info.html:36
@@ -1688,7 +1688,7 @@ msgstr ""
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:52
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:228
 msgid "Click to complete the study"
-msgstr ""
+msgstr "Cliquez ici pour compléter l'étude"
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:28
 #: cdi_forms/templates/cdi_forms/cdi_form.html:192
@@ -1707,8 +1707,14 @@ msgstr ""
 "“<span style='color:blue'>comprend et dit</span>” un mot s'il sait ce qu’il "
 "veut dire ET s’il peut le dire tout seul. <br/>Ce questionnaire est destiné "
 "à des enfants d’âges différents. Votre enfant peut ne pas comprendre ou dire "
-"beaucoup des mots du questionnaire et c’est parfaitement normal ! <br /"
-">Voici quelques indications pour vous aider à répondre."
+"beaucoup des mots du questionnaire et c’est parfaitement normal ! <br />"
+"Il porte <span style='color:blue'>uniquement sur le français</span>. "
+"Votre enfant connaît peut-être des mots "
+"dans d'autres langues, mais ne les connaît pas en français. C'est tout à "
+"fait normal ! Dans ce cas, pour les mots présentés, vous répondrez ce qu'il "
+"“comprend et dit” en français. Par exemple, s’il comprend un mot en français "
+"mais le dit seulement dans une autre langue, vous cliquerez sur “Non“. <br />"
+"Voici quelques indications pour vous aider à répondre."
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:41
 #: cdi_forms/templates/cdi_forms/cdi_form.html:206
@@ -1804,7 +1810,7 @@ msgstr ""
 msgid ""
 "You can use the tab button and arrows keys to quickly navigate and answer "
 "questions."
-msgstr "Ce formulaire ne doit vous prendre plus de 10 min."
+msgstr "Ce formulaire ne doit pas vous prendre plus de 10 min."
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:99
 msgid "Due date"
@@ -1812,7 +1818,7 @@ msgstr "Date limite"
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:104
 msgid "Show waiver of documentation"
-msgstr "Afficher la renonciation à la documentation"
+msgstr "Voir les informations sur ma participation"
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:109
 msgid "Reach out to the Web-CDI Team!"
@@ -1854,7 +1860,7 @@ msgstr "Contenu:"
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:28
 msgid "Instructions:"
-msgstr "Directives: "
+msgstr "indications: "
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:60
 msgid ""

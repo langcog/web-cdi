@@ -6,7 +6,8 @@
                 "fieldset":"Informations de base",
                 "fields":[
                     {
-                        "field":"source_id"
+                        "field":"source_id",
+                        "required":"True"
                     },
                     {
                         "field":"child_dob"

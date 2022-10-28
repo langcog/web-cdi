@@ -586,7 +586,11 @@ class BackgroundForm(BetterModelForm):
                 ),
             )
             
-        if self.curr_context['source_id'] != None : self.fields['source_id'].initial = self.curr_context['source_id']
+        if self.curr_context['source_id'] != None: 
+            self.fields['source_id'].initial = self.curr_context['source_id']
+            if self.fields['source_id'].initial == 'None':
+                self.fields['source_id'].initial = ''
+
         if not self.curr_context['study_obj'].participant_source_boolean: 
             self.fields['source_id'].widget = forms.HiddenInput()
         else:
