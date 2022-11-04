@@ -116,7 +116,7 @@
         <div class="row pt10vh">
             <div class="progress" style="width:100%">
                 <div class="progress-bar" role="progressbar" aria-valuenow="{{ words_shown|div:max_words }}" aria-valuemin="0" aria-valuemax="100" style="width:{{ words_shown|div:max_words }}%">
-                {{ words_shown }} of {{ max_words }}
+                    {% blocktrans %}{{ words_shown }} of {{ max_words }} (maximum) {% endblocktrans %}
                 </div>
             </div> 
         </div>

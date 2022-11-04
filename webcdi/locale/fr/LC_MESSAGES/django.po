@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-26 18:40+0000\n"
+"POT-Creation-Date: 2022-11-04 08:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -472,28 +472,28 @@ msgstr "Expérience linguistique"
 msgid "Health"
 msgstr "Santé"
 
-#: cdi_forms/forms.py:593
+#: cdi_forms/forms.py:597
 #, python-format
 msgid "Your identifier for %(source)s"
 msgstr "%(source)s: Votre numéro de participation anonyme"
 
-#: cdi_forms/forms.py:619
+#: cdi_forms/forms.py:623
 msgid "Your Name"
 msgstr "Votre nom"
 
-#: cdi_forms/forms.py:620
+#: cdi_forms/forms.py:624
 msgid "Your Email Address"
 msgstr "Votre email"
 
-#: cdi_forms/forms.py:621
+#: cdi_forms/forms.py:625
 msgid "Your Test URL"
 msgstr "Votre lien"
 
-#: cdi_forms/forms.py:622
+#: cdi_forms/forms.py:626
 msgid "What would you like to tell us?"
 msgstr "Que voudriez-vous nous dire ?"
 
-#: cdi_forms/forms.py:641 cdi_forms/templates/cdi_forms/cdi_form.html:11
+#: cdi_forms/forms.py:645 cdi_forms/templates/cdi_forms/cdi_form.html:11
 #: cdi_forms/templates/cdi_forms/cdi_form.html:323 cdi_forms/views.py:814
 msgid "Submit"
 msgstr "Soumettre"
@@ -1707,14 +1707,14 @@ msgstr ""
 "“<span style='color:blue'>comprend et dit</span>” un mot s'il sait ce qu’il "
 "veut dire ET s’il peut le dire tout seul. <br/>Ce questionnaire est destiné "
 "à des enfants d’âges différents. Votre enfant peut ne pas comprendre ou dire "
-"beaucoup des mots du questionnaire et c’est parfaitement normal ! <br />"
-"Il porte <span style='color:blue'>uniquement sur le français</span>. "
-"Votre enfant connaît peut-être des mots "
-"dans d'autres langues, mais ne les connaît pas en français. C'est tout à "
-"fait normal ! Dans ce cas, pour les mots présentés, vous répondrez ce qu'il "
-"“comprend et dit” en français. Par exemple, s’il comprend un mot en français "
-"mais le dit seulement dans une autre langue, vous cliquerez sur “Non“. <br />"
-"Voici quelques indications pour vous aider à répondre."
+"beaucoup des mots du questionnaire et c’est parfaitement normal ! <br />Il "
+"porte <span style='color:blue'>uniquement sur le français</span>. Votre "
+"enfant connaît peut-être des mots dans d'autres langues, mais ne les connaît "
+"pas en français. C'est tout à fait normal ! Dans ce cas, pour les mots "
+"présentés, vous répondrez ce qu'il “comprend et dit” en français. Par "
+"exemple, s’il comprend un mot en français mais le dit seulement dans une "
+"autre langue, vous cliquerez sur “Non“. <br />Voici quelques indications "
+"pour vous aider à répondre."
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:41
 #: cdi_forms/templates/cdi_forms/cdi_form.html:206
@@ -1761,13 +1761,17 @@ msgstr ""
 msgid ""
 "DON'T ask your child to repeat the words on the list. This doesn't count!"
 msgstr ""
-"Cliquez sur “<span style='color: red'>Non</span>”  <br /><br />Ne "
-"demandez pas à votre enfant de répéter les mots de la liste, ça ne compte "
-"pas !"
+"Cliquez sur “<span style='color: red'>Non</span>”  <br /><br />Ne demandez "
+"pas à votre enfant de répéter les mots de la liste, ça ne compte pas !"
+
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:119
+#, python-format
+msgid "%(words_shown)s of %(max_words)s (maximum) "
+msgstr "%(words_shown)s sur %(max_words)s (maximum) "
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:125
 msgid "Does your child say ... "
-msgstr "Votre enfant dit-il ... "
+msgstr "Votre enfant comprend-il et dit-il ... "
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:128
 msgid "* or word used in your family"
