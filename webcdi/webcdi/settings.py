@@ -22,7 +22,12 @@ DEBUG = bool(os.environ.get('DEBUG', False))
 #DEBUG = True
 TEMPLATE_DEBUG = False
 
-from .local_settings import *
+try:
+    from .secret_settings import *
+    print('Importing Secret Settings')
+except Exception as e:
+    print('Importing Local Settings')
+    from .local_settings import *
 
 
 
