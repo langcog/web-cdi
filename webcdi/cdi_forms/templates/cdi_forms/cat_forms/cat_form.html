@@ -4,6 +4,24 @@
 
 {% block extra_css %}
 <link rel='stylesheet' href="{% static 'cdi_forms/cat_forms.css' %}">
+
+<style>
+    .progress {
+        position: relative;
+      }
+      
+      .progress-bar-title {
+        position: absolute;
+        text-align: center;
+        line-height: 20px; /* line-height should be equal to bar height */
+        overflow: hidden;
+        color: #000;
+        margin-top: 10px;
+        right: 0;
+        left: 0;
+        top: 0;
+      }
+</style>
 {% endblock %}
 
 <!-- Navigation buttons placed in cdi_base.html -->
@@ -115,9 +133,8 @@
     <div class="container">
         <div class="row pt10vh">
             <div class="progress" style="width:100%">
-                <div class="progress-bar" role="progressbar" aria-valuenow="{{ words_shown|div:max_words }}" aria-valuemin="0" aria-valuemax="100" style="width:{{ words_shown|div:max_words }}%">
-                    {% blocktrans %}{{ words_shown }} of {{ max_words }} (maximum) {% endblocktrans %}
-                </div>
+                <div class="progress-bar" role="progressbar" aria-valuenow="{{ words_shown|div:max_words }}" aria-valuemin="0" aria-valuemax="100" style="width:{{ words_shown|div:max_words }}%"></div>                   
+                <div class="progress-bar-title">{% blocktrans %}{{ words_shown }} of {{ max_words }} (maximum) {% endblocktrans %}</div>
             </div> 
         </div>
         <div class="row pt10vh">
