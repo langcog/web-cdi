@@ -638,6 +638,7 @@ def console(request, study_name = None, num_per_page = 20): # Main giant functio
                     if request.GET['view_all'] == 'all' : num_per_page = administration.objects.filter(study = study_obj).count()
                 RequestConfig(request, paginate={'per_page': num_per_page}).configure(administration_table)
                 context['current_study'] = current_study.name
+                context['study'] = current_study
                 context['num_per_page'] = num_per_page
                 context['study_instrument'] = current_study.instrument.verbose_name
                 context['study_group'] = current_study.study_group
