@@ -132,7 +132,6 @@ class AdministerAdministraionView(UpdateView):
             ctx['est_theta'] = self.est_theta
             ctx['due_date'] = self.object.due_date.strftime('%b %d, %Y, %I:%M %p')
             ctx['hardest'], ctx['easiest'] = None, None
-        
         return ctx
 
     def get(self, request, *args, **kwargs):
@@ -184,4 +183,5 @@ class AdministerAdministraionView(UpdateView):
             else :
                 self.object.catresponse.est_theta = self.word['curTheta']
                 self.object.save()
+                self.object.catresponse.save()
         return super().get(request, *args, **kwargs) 
