@@ -1031,7 +1031,8 @@ def administer_cdi_form(request, hash_id):
     except:
         raise Http404("Administration not found")
     
-    if administration_instance.study.instrument.form in settings.CAT_FORMS : 
+    if administration_instance.study.instrument.form in settings.CAT_FORMS: 
+        logger.debug(f'Administration { hash_id } is a CAT administration')
         return redirect('cat_forms:administer_cat_form', hash_id=hash_id)
 
     refresh = False
