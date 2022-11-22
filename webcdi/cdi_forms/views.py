@@ -115,7 +115,6 @@ class AdministrationMixin(object):
     def get_user_language(self):
         self.user_language = language_map(self.administration_instance.study.instrument.language)
         translation.activate(self.user_language)
-        print(f'language {self.user_language}')
         return self.user_language
 
 class BackgroundInfoView(AdministrationMixin, UpdateView):

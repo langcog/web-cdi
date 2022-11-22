@@ -169,7 +169,7 @@ class AdministerAdministraionView(UpdateView):
             self.word = cdi_cat_api(f'startItem?age_mos={self.object.backgroundinfo.age}&language={CAT_LANG_DICT[self.language]}')
         else:    
             self.word = cdi_cat_api(f'nextItem?responses={list(map(int,administered_responses))}&items={administered_items}&language={CAT_LANG_DICT[self.language]}')
-            if self.word == 'stop':
+            if self.word['stop'] == True:
                 try:
                     filename = os.path.realpath(PROJECT_ROOT + self.object.study.demographic.path)
                 except Exception:
@@ -178,7 +178,9 @@ class AdministerAdministraionView(UpdateView):
                     self.object.completedSurvey = True
                 else :
                     self.object.completed = True
+                self.object.catresponse.est_theta = self.word['curTheta']
                 self.object.save()
+                self.object.catresponse.save()
                 return redirect('cat_forms:administer_cat_form', hash_id=self.hash_id)
             else :
                 self.object.catresponse.est_theta = self.word['curTheta']
