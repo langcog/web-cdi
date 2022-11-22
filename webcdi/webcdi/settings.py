@@ -167,6 +167,16 @@ LOGGING = {
             '()': 'django.utils.log.RequireDebugFalse'
         }
     },
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {pathname} {lineno} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
     'handlers': {
         'mail_admins': {
             'level': 'ERROR',
@@ -180,6 +190,7 @@ LOGGING = {
             # 'class': 'logging.StreamHandler',
             "class": "logging.FileHandler",
             "filename": f"{LOG_FILE_PATH}django.log",
+            'formatter': 'verbose'
         },
     },
     'loggers': {

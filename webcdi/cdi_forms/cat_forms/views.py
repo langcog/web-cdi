@@ -67,7 +67,9 @@ class AdministerAdministraionView(UpdateView):
             self.hash_id = self.kwargs['hash_id']
             obj = administration.objects.get(url_hash=self.hash_id)
         except:
+            logger.debug(f"Obj for { self.kwargs['hash_id'] } not found")
             raise Http404("Administration not found")
+        logger.debug(f'Found object {obj}')
         return obj
 
     def post(self, request, *args, **kwargs):
