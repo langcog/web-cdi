@@ -72,6 +72,7 @@ class AdministerAdministraionView(UpdateView):
         return obj
 
     def post(self, request, *args, **kwargs):
+        logger.debug(f'Administer CAT Form POST')
         self.object = self.get_object()
         if 'btn-back' in request.POST:
             return redirect('cat_forms:background-info', pk=self.object.backgroundinfo.id)
