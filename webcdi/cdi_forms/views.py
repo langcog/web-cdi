@@ -27,6 +27,10 @@ from django.views.generic import UpdateView, CreateView, DetailView
 
 from .utils import get_demographic_filename
 
+import logging
+# Get an instance of a logger
+logger = logging.getLogger("debug")
+
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__)) # Declare root folder for project and files. Varies between Mac and Linux installations.
 
 # This function is not written properly...
@@ -221,8 +225,10 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
         self.get_hash_id()
         self.get_study_context()
         self.get_user_language()
-       
+
         if not self.administration_instance.completed and self.administration_instance.due_date > timezone.now(): # And test has yet to be completed and has not timed out
+            logger.debug(f'Admin completed for {self.object}: { self.administration_instance.completed }')
+            logger.debug(f'Due Date for {self.object}: { self.administration_instance.due_date }')
             try:
                 if self.object.age:
                     self.study_context['child_age'] = self.object.age # Populate dictionary with child's age for validation in forms.py.
@@ -231,6 +237,7 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
                 self.background_form = BackgroundForm(request.POST, context = self.study_context, page=self.which_page) # Pull up an empty BackgroundForm with information regarding only the instrument.
             
             if self.background_form.is_valid(): # If form passed forms.py validation (clean function)
+                logger.debug(f'Background form for { self.object } is valid')
                 obj = self.background_form.save(commit = False) # Save but do not commit form just yet.
 
                 child_dob = self.background_form.cleaned_data.get('child_dob') # Try to fetch DOB
@@ -256,6 +263,7 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
                 # Save model object to database
                 obj.administration = self.administration_instance
                 obj.save()
+                logger.debug(f'Saving { obj } to database')
 
                 # If 'Next' button is pressed, update last_modified and mark completion of BackgroundInfo. Fetch CDI form by hash ID.
                 if 'btn-next' in request.POST and request.POST['btn-next'] == _('Next'):
@@ -266,6 +274,7 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
                     #return cdi_form(request, self.hash_id)
 
                 elif 'btn-next' in request.POST and request.POST['btn-next'] == _('Finish'):
+                    logger.debug(f'{ self.object } is at the finish line')
                     administration.objects.filter(url_hash = self.hash_id).update(last_modified = timezone.now())
                     administration.objects.filter(url_hash = self.hash_id).update(completed = True)
                     request.method = "GET"
@@ -277,7 +286,8 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
                     background_instance = BackgroundInfo.objects.get(administration = self.administration_instance) 
                     return redirect('background-info', pk=background_instance.pk) 
            
-            #else : print (self.background_form.errors)
+            else : 
+                logger.debug(f'Background info errors for { self.object } are { self.background_form.errors }')
 
         response = render(request, self.template_name, self.get_context_data()) # Render template   
         response.set_cookie(settings.LANGUAGE_COOKIE_NAME, self.user_language)
@@ -1015,6 +1025,7 @@ def printable_view(request, hash_id):
 
 # As the entire test (background --> CDI --> completion page) share the same URL, access the database to determine current status of test and render the appropriate template
 def administer_cdi_form(request, hash_id):
+    logger.debug(f'Administering CDI form for { hash_id }')
     try:
         administration_instance = administration.objects.get(url_hash = hash_id)
     except:

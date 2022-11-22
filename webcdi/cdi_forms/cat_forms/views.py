@@ -16,6 +16,10 @@ from .models import CatResponse
 from .utils import string_bool_coerce
 from .cdi_cat_api import cdi_cat_api
 
+import logging
+# Get an instance of a logger
+logger = logging.getLogger("debug")
+
 CAT_LANG_DICT = {
     'en' : 'EN',
     'es' : 'SP',
@@ -143,16 +147,18 @@ class AdministerAdministraionView(UpdateView):
             return response
         requests_log.objects.create(url_hash=self.hash_id, request_type="GET")
         if self.object.completed or self.object.due_date < timezone.now():
-            print("COMPLETED")
+            logger.debug(f"Completed for {self.object} is { self.object.completed }")
+            logger.debug(f"Due date for {self.object} is { self.object.due_date }")
+            logger.debug(f"Administration instance {self.object} COMPLETED")
             response = render(request, 'cdi_forms/cat_forms/cat_completed.html', context=self.get_context_data())
             response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
             return response
         background_instance, created = BackgroundInfo.objects.get_or_create(administration=self.object) 
         if self.object.completedSurvey:
-            print("BACKPAGE")
+            logger.debug(f"Administration instance {self.object} BACKPAGE")
             return redirect('backpage-background-info', pk=background_instance.pk)
         elif not self.object.completedBackgroundInfo:
-            print("BACKGROUND INFO")
+            logger.debug(f"Administration instance {self.object} BACKGROUND INFO")
             return redirect('background-info', pk=background_instance.pk)
 
         cat_response, created = CatResponse.objects.get_or_create(administration=self.object)

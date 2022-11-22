@@ -158,6 +158,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap-responsive.html"
 
+LOG_FILE_PATH = str(os.environ.get("LOG_FILE_PATH", "/tmp/"))
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -170,8 +171,16 @@ LOGGING = {
         'mail_admins': {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler'
-        }
+            #'class': 'django.utils.log.AdminEmailHandler'
+            "class": "logging.FileHandler",
+            "filename": f"{LOG_FILE_PATH}django_error.log",
+        },
+        "file": {
+            "level": "DEBUG",
+            # 'class': 'logging.StreamHandler',
+            "class": "logging.FileHandler",
+            "filename": f"{LOG_FILE_PATH}django.log",
+        },
     },
     'loggers': {
         'django.security.DisallowedHost': {
@@ -183,6 +192,11 @@ LOGGING = {
             'handlers': ['mail_admins'],
             'level': 'ERROR',
             'propagate': True,
+        },
+        "debug": {
+            "level": "DEBUG",
+            "handlers": ["file"],
+            "propagate": False,
         },
     }
 }
