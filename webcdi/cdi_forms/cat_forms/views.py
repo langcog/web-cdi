@@ -66,10 +66,9 @@ class AdministerAdministraionView(UpdateView):
         try:
             self.hash_id = self.kwargs['hash_id']
             obj = administration.objects.get(url_hash=self.hash_id)
-        except:
-            logger.debug(f"Obj for { self.kwargs['hash_id'] } not found")
+        except Exception as e:
+            logger.debug(f"Obj for { self.kwargs['hash_id'] } not found with error { e }")
             raise Http404("Administration not found")
-        logger.debug(f'Found object {obj}')
         return obj
 
     def post(self, request, *args, **kwargs):
@@ -114,7 +113,8 @@ class AdministerAdministraionView(UpdateView):
         ctx = super().get_context_data(**kwargs)
         ctx['language_code'] = language_map(self.object.study.instrument.language)
         
-        if self.word: 
+        if self.word:
+            logger.debug(f'word is { self.word }')
             ctx['form'] = CatItemForm(context={'label':self.word['definition']}, initial={'word_id':self.word['index'], 'label':self.word['definition']})
             try:
                 if '*' in self.word['definition']: ctx['footnote'] = True
