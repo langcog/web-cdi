@@ -1033,6 +1033,7 @@ def administer_cdi_form(request, hash_id):
     
     if administration_instance.study.instrument.form in settings.CAT_FORMS: 
         logger.debug(f'Administration { hash_id } is a CAT administration')
+        logger.debug(f'This is a { request.method } redirect')
         return redirect('cat_forms:administer_cat_form', hash_id=hash_id)
 
     refresh = False

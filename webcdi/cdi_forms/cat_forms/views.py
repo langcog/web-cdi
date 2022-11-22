@@ -137,13 +137,12 @@ class AdministerAdministraionView(UpdateView):
         return ctx
 
     def get(self, request, *args, **kwargs):
-
         self.object = self.get_object()
         user_language = language_map(self.object.study.instrument.language)
         self.language=user_language
         translation.activate(user_language)
         if not self.object.completed and self.object.due_date < timezone.now(): 
-            logger.debug(f'{self.object} is not completed by can be still')
+            logger.debug(f'{self.object} is not completed it is too late')
             response = render (request, 'cdi_forms/expired.html', {}) # Render contact form template   
             response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
             return response
