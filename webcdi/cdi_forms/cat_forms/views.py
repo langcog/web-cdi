@@ -138,6 +138,7 @@ class AdministerAdministraionView(UpdateView):
 
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
+        logger.debug(f'Object: { self.object }; Completed: { self.object.completed }; CompletedSurvey: { self.object.completedSurvey }; CompletedDemographics: { self.object.completedBackgroundInfo } ')
         user_language = language_map(self.object.study.instrument.language)
         self.language=user_language
         translation.activate(user_language)
@@ -178,6 +179,7 @@ class AdministerAdministraionView(UpdateView):
         else:    
             self.word = cdi_cat_api(f'nextItem?responses={list(map(int,administered_responses))}&items={administered_items}&language={CAT_LANG_DICT[self.language]}')
             if self.word['stop'] == True:
+                logger.debug(f'CAT Completed { self.word } ')
                 try:
                     filename = os.path.realpath(PROJECT_ROOT + self.object.study.demographic.path)
                 except Exception:
