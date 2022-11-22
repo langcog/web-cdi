@@ -139,6 +139,7 @@ class AdministerAdministraionView(UpdateView):
         return ctx
 
     def get(self, request, *args, **kwargs):
+        logger.log(f'Administer CAT Form')
         self.object = self.get_object()
         logger.debug(f'Object: { self.object }; Completed: { self.object.completed }; CompletedSurvey: { self.object.completedSurvey }; CompletedDemographics: { self.object.completedBackgroundInfo } ')
         user_language = language_map(self.object.study.instrument.language)
