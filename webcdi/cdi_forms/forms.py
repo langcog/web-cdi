@@ -411,7 +411,6 @@ class BackgroundForm(BetterModelForm):
         if os.path.isfile(self.filename) :
             rows = []
             hidden_fields = []
-            selected_fields = []
             pages = json.load(open(self.filename, encoding='utf-8'))
             for page in pages:
                 if page['page'] == self.page:
