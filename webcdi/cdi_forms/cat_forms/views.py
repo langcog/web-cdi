@@ -36,8 +36,6 @@ class CATCreateBackgroundInfoView(CreateBackgroundInfoView):
 class CATBackpageBackgroundInfoView(BackpageBackgroundInfoView):
     pass
 
-
-
 class AdministerAdministraionView(UpdateView):
     model = administration
     refresh = False
@@ -145,13 +143,16 @@ class AdministerAdministraionView(UpdateView):
             return response
         requests_log.objects.create(url_hash=self.hash_id, request_type="GET")
         if self.object.completed or self.object.due_date < timezone.now():
+            print("COMPLETED")
             response = render(request, 'cdi_forms/cat_forms/cat_completed.html', context=self.get_context_data())
             response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
             return response
         background_instance, created = BackgroundInfo.objects.get_or_create(administration=self.object) 
         if self.object.completedSurvey:
+            print("BACKPAGE")
             return redirect('backpage-background-info', pk=background_instance.pk)
         elif not self.object.completedBackgroundInfo:
+            print("BACKGROUND INFO")
             return redirect('background-info', pk=background_instance.pk)
 
         cat_response, created = CatResponse.objects.get_or_create(administration=self.object)
