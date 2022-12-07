@@ -24,6 +24,8 @@ from django.conf.urls.static import static
 from django.urls import path
 from django.contrib import admin
 
+from webcdi.views import signup
+
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name="researcher_UI/home.html")),
     url(r'^favicon\.ico', RedirectView.as_view(url='/static/images/favicon.ico', permanent=True)),
@@ -36,6 +38,7 @@ urlpatterns = [
     url(r'^accounts/profile/$', RedirectView.as_view(url='/interface/', permanent=False), name='interface'),
     url(r'interface/', include('researcher_UI.urls')),
     url(r'^registration/', include('registration.urls')),
+    url(r'^signup/$', signup, name='signup'),
     url(r'^lockout/$', TemplateView.as_view(template_name="registration/lockout.html")),
     url(r'^health/?', include('health_check.urls')),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),

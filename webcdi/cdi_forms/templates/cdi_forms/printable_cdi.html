@@ -43,7 +43,7 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
         {% for category in graph_data %}
-            console.log("{{ category }}", "{{ graph_data|get_item:category }}", "{{ graph_data|get_item:category|get_item:'mappedName' }}")
+            console.log("{{ category }}",  "{{ graph_data|get_item:category|get_item:'mappedName' }}", "{{ graph_data|get_item:category|get_item_perc:'produces' }}")
         {% endfor %}
 
         // Load the Visualization API and the corechart package.
@@ -333,7 +333,6 @@
 
         // Load word-level data for participant. Parse into 2 or 3 bins depending on instrument type.
         var words = root.filter(function(d) { return d.item_type == "word"; });
-        console.log(words);
         $.each(words, function(index, value){
             value.definition = value.definition.toLowerCase();
             value.num_value = 'neither';
