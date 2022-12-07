@@ -36,6 +36,7 @@ class instrument(models.Model):
 
     class Meta:
          unique_together = ('language', 'form') # Each instrument in the database must have a unique combination of language and form type
+         ordering = ['language', 'form', 'name']
 
 class researcher(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -46,6 +47,13 @@ class researcher(models.Model):
         return "%s %s (%s, %s)" % (self.user.first_name, self.user.last_name, self.position, self.institution)
     def __str__(self):
         return f"%s %s (%s, %s)" % (self.user.first_name, self.user.last_name, self.position, self.institution)
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+@receiver(post_save, sender=User)
+def update_user_profile(sender, instance, created, **kwargs):
+    if created:
+        researcher.objects.create(user=instance)
+    instance.researcher.save()
 
 # Model for individual studies
 class study(models.Model):

@@ -285,3 +285,11 @@ class EditOptOutForm(forms.ModelForm):
         widgets = {
             'study' : forms.HiddenInput()
         }
+
+class AddInstrumentForm(forms.ModelForm):
+    class Meta:
+        model = researcher
+        fields = ['allowed_instruments']
+        widgets = {
+            'allowed_instruments': forms.CheckboxSelectMultiple()
+        }

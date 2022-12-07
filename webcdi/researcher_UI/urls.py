@@ -1,4 +1,5 @@
 from django.conf.urls import url
+from django.urls import path
 
 from . import views
 
@@ -18,4 +19,5 @@ urlpatterns = [
             url(r'^edit-local-lab-id/(?P<pk>[0-9]+)/$', views.EditLocalLabIdView.as_view(), name='edit-local-lab-id'),
             url(r'^edit-opt-out/(?P<pk>[0-9]+)/$', views.EditOptOutView.as_view(), name='edit-opt-out'),
             url(r'^ajax/get_demographic_forms/$', views.ajax_demographic_forms),
+            path('researcher/<int:pk>/', views.ResearcherAddInstruments.as_view(), name='researcher_add_instruments')
             ]
