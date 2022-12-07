@@ -19,10 +19,15 @@ import os
 
 
 DEBUG = bool(os.environ.get('DEBUG', False))
-DEBUG = True
+#DEBUG = True
 TEMPLATE_DEBUG = False
 
-from .secret_settings import *
+try:
+    from .secret_settings import *
+    print('Importing Secret Settings')
+except Exception as e:
+    print('Importing Local Settings')
+    from .local_settings import *
 
 
 
@@ -153,6 +158,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap-responsive.html"
 
+LOG_FILE_PATH = str(os.environ.get("LOG_FILE_PATH", "/tmp/"))
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -161,12 +167,31 @@ LOGGING = {
             '()': 'django.utils.log.RequireDebugFalse'
         }
     },
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {pathname} {lineno} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
     'handlers': {
         'mail_admins': {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler'
-        }
+            #'class': 'django.utils.log.AdminEmailHandler'
+            "class": "logging.FileHandler",
+            "filename": f"{LOG_FILE_PATH}django_error.log",
+        },
+        "file": {
+            "level": "DEBUG",
+            # 'class': 'logging.StreamHandler',
+            "class": "logging.FileHandler",
+            "filename": f"{LOG_FILE_PATH}django.log",
+            'formatter': 'verbose'
+        },
     },
     'loggers': {
         'django.security.DisallowedHost': {
@@ -178,6 +203,11 @@ LOGGING = {
             'handlers': ['mail_admins'],
             'level': 'ERROR',
             'propagate': True,
+        },
+        "debug": {
+            "level": "DEBUG",
+            "handlers": ["file"],
+            "propagate": False,
         },
     }
 }
@@ -219,6 +249,7 @@ LANGUAGES = [
     ('es', _('Spanish')),
     ('es-ar', ('Argentine Spanish')),
     ('fr-ca', _('French Quebec')),
+    ('fr', _('French French')),
     ('en-ca', _('Canadian English')),
     ('nl', _('Dutch')),
     ('he', _('Hebrew')),
@@ -230,6 +261,7 @@ LANGUAGE_DICT = {
     'English' : 'en',
     'Spanish' : 'es',
     'French Quebec' : 'fr_ca',
+    'French French' : 'fr',
     'Canadian English' : 'en_ca',
     'Dutch' : 'nl',
     'Hebrew' : 'he',
@@ -254,14 +286,6 @@ COUNTRIES_FIRST = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', '<AWS_ACCESS_KEY>')
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', '<AWS_SECRET_KEY')
-if 'RDS_HOSTNAME' in os.environ:
-    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', '<AWS_ACCESS_KEY>')
-    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', '<AWS_SECRET_KEY')
-    AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME','AWS_STORAGE_BUCKET')
-    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     
 CKEDITOR_UPLOAD_PATH = "ckeditor_uploads/"
 CKEDITOR_CONFIGS = {
@@ -329,7 +353,6 @@ if private_ip:
     ALLOWED_HOSTS.append(private_ip)
 
 CAT_FORMS = ['CAT','CAT2']
-CAT_API_BASE_URL = os.environ.get('CAT_API_URL',"http://cdicatapi-henry.us-west-2.elasticbeanstalk.com/")
 
 LOGIN_EXEMPT_URLS = (
   r'^registration/logout/$',
@@ -342,16 +365,6 @@ LOGIN_EXEMPT_URLS = (
   r'^registration/password/change/',
   r'^',
 )
-
-
-#EMAIL settings
-AWS_SES_REGION_NAME = 'us-west-2'
-AWS_SES_REGION_ENDPOINT = 'email.us-west-2.amazonaws.com'
-EMAIL_BACKEND = 'django_ses.SESBackend'
-DEFAULT_FROM_EMAIL_NAME = os.environ.get('DEFAULT_FROM_EMAIL_NAME','WebCDI Local')
-DEFAULT_FROM_EMAIL_ADDRESS = os.environ.get('DEFAULT_FROM_EMAIL_ADDRESS','hjsmehta@gmail.com')
-DEFAULT_FROM_EMAIL = DEFAULT_FROM_EMAIL_NAME + '<' + DEFAULT_FROM_EMAIL_ADDRESS + '>'
-DEFAULT_RECIPIENT_EMAIL = EMAIL_HOST_USER = os.environ.get('DEFAULT_RECIPIENT_EMAIL','hjsmehta@gmail.com')
 
 
 DEFAULT_AUTO_FIELD='django.db.models.AutoField' 

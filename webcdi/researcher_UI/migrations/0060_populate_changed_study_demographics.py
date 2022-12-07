@@ -99,5 +99,5 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.RunPython(populate_instrument),
-        migrations.RunPython(set_study_demographic),
+        #migrations.RunPython(set_study_demographic),
     ]

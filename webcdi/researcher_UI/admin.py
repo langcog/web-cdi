@@ -82,7 +82,8 @@ class ResearcherInline(admin.StackedInline):
     model = researcher
     can_delete = False
     verbose_name_plural = 'researchers'
-
+    filter_horizontal = ['allowed_instruments']
+    
 # Define a new User admin
 class UserAdmin(BaseUserAdmin):
     inlines = (ResearcherInline, )

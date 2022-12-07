@@ -16,9 +16,14 @@ from .models import CatResponse
 from .utils import string_bool_coerce
 from .cdi_cat_api import cdi_cat_api
 
+import logging
+# Get an instance of a logger
+logger = logging.getLogger("debug")
+
 CAT_LANG_DICT = {
     'en' : 'EN',
     'es' : 'SP',
+    'fr' : 'FR',
     'fr-ca' : 'FR',
     'en-ca' : 'EN',
 }
@@ -34,8 +39,6 @@ class CATCreateBackgroundInfoView(CreateBackgroundInfoView):
 
 class CATBackpageBackgroundInfoView(BackpageBackgroundInfoView):
     pass
-
-
 
 class AdministerAdministraionView(UpdateView):
     model = administration
@@ -63,11 +66,13 @@ class AdministerAdministraionView(UpdateView):
         try:
             self.hash_id = self.kwargs['hash_id']
             obj = administration.objects.get(url_hash=self.hash_id)
-        except:
+        except Exception as e:
+            logger.debug(f"Obj for { self.kwargs['hash_id'] } not found with error { e }")
             raise Http404("Administration not found")
         return obj
 
     def post(self, request, *args, **kwargs):
+        logger.debug(f'Administer CAT Form POST')
         self.object = self.get_object()
         if 'btn-back' in request.POST:
             return redirect('cat_forms:background-info', pk=self.object.backgroundinfo.id)
@@ -109,8 +114,8 @@ class AdministerAdministraionView(UpdateView):
         ctx = super().get_context_data(**kwargs)
         ctx['language_code'] = language_map(self.object.study.instrument.language)
         
-        if self.word: 
-            print(self.word)
+        if self.word:
+            logger.debug(f'word is { self.word }')
             ctx['form'] = CatItemForm(context={'label':self.word['definition']}, initial={'word_id':self.word['index'], 'label':self.word['definition']})
             try:
                 if '*' in self.word['definition']: ctx['footnote'] = True
@@ -132,27 +137,34 @@ class AdministerAdministraionView(UpdateView):
             ctx['est_theta'] = self.est_theta
             ctx['due_date'] = self.object.due_date.strftime('%b %d, %Y, %I:%M %p')
             ctx['hardest'], ctx['easiest'] = None, None
-        
         return ctx
 
     def get(self, request, *args, **kwargs):
+        logger.debug(f'Administer CAT Form')
         self.object = self.get_object()
+        logger.debug(f'Object: { self.object }; Completed: { self.object.completed }; CompletedSurvey: { self.object.completedSurvey }; CompletedDemographics: { self.object.completedBackgroundInfo } ')
         user_language = language_map(self.object.study.instrument.language)
         self.language=user_language
         translation.activate(user_language)
         if not self.object.completed and self.object.due_date < timezone.now(): 
+            logger.debug(f'{self.object} is not completed it is too late')
             response = render (request, 'cdi_forms/expired.html', {}) # Render contact form template   
             response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
             return response
         requests_log.objects.create(url_hash=self.hash_id, request_type="GET")
         if self.object.completed or self.object.due_date < timezone.now():
+            logger.debug(f"Completed for {self.object} is { self.object.completed }")
+            logger.debug(f"Due date for {self.object} is { self.object.due_date }")
+            logger.debug(f"Administration instance {self.object} COMPLETED")
             response = render(request, 'cdi_forms/cat_forms/cat_completed.html', context=self.get_context_data())
             response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
             return response
         background_instance, created = BackgroundInfo.objects.get_or_create(administration=self.object) 
         if self.object.completedSurvey:
+            logger.debug(f"Administration instance {self.object} BACKPAGE")
             return redirect('backpage-background-info', pk=background_instance.pk)
         elif not self.object.completedBackgroundInfo:
+            logger.debug(f"Administration instance {self.object} BACKGROUND INFO")
             return redirect('background-info', pk=background_instance.pk)
 
         cat_response, created = CatResponse.objects.get_or_create(administration=self.object)
@@ -170,7 +182,8 @@ class AdministerAdministraionView(UpdateView):
             self.word = cdi_cat_api(f'startItem?age_mos={self.object.backgroundinfo.age}&language={CAT_LANG_DICT[self.language]}')
         else:    
             self.word = cdi_cat_api(f'nextItem?responses={list(map(int,administered_responses))}&items={administered_items}&language={CAT_LANG_DICT[self.language]}')
-            if self.word == 'stop':
+            if self.word['stop'] == True:
+                logger.debug(f'CAT Completed { self.word } ')
                 try:
                     filename = os.path.realpath(PROJECT_ROOT + self.object.study.demographic.path)
                 except Exception:
@@ -179,9 +192,12 @@ class AdministerAdministraionView(UpdateView):
                     self.object.completedSurvey = True
                 else :
                     self.object.completed = True
+                self.object.catresponse.est_theta = self.word['curTheta']
                 self.object.save()
+                self.object.catresponse.save()
                 return redirect('cat_forms:administer_cat_form', hash_id=self.hash_id)
             else :
                 self.object.catresponse.est_theta = self.word['curTheta']
                 self.object.save()
+                self.object.catresponse.save()
         return super().get(request, *args, **kwargs) 
