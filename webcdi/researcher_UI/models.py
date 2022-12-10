@@ -27,6 +27,7 @@ class instrument(models.Model):
     min_age = models.IntegerField(verbose_name = "Minimum age") # Minimum age in months that instrument was built for
     max_age = models.IntegerField(verbose_name = "Maximum age") # Maximum age in months that instrument was built for
     demographics = models.ManyToManyField('Demographic')
+    active = models.BooleanField(default=True)
 
     def __unicode__(self):
         return "%s (%s %s)" % (self.verbose_name, self.language, self.form)
@@ -47,6 +48,8 @@ class researcher(models.Model):
         return "%s %s (%s, %s)" % (self.user.first_name, self.user.last_name, self.position, self.institution)
     def __str__(self):
         return f"%s %s (%s, %s)" % (self.user.first_name, self.user.last_name, self.position, self.institution)
+
+
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 @receiver(post_save, sender=User)
@@ -54,6 +57,10 @@ def update_user_profile(sender, instance, created, **kwargs):
     if created:
         researcher.objects.create(user=instance)
     instance.researcher.save()
+
+from django.contrib.auth.models import User
+User._meta.get_field('email')._unique = True
+
 
 # Model for individual studies
 class study(models.Model):
