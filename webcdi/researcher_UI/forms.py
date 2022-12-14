@@ -293,3 +293,7 @@ class AddInstrumentForm(forms.ModelForm):
         widgets = {
             'allowed_instruments': forms.CheckboxSelectMultiple()
         }
+
+    def __init__(self, current_user, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['allowed_instruments'].queryset = self.fields['allowed_instruments'].queryset.filter(active=True)
