@@ -2,7 +2,7 @@
 	{
 		"language": "English",
 		"form": "WS",
-		"verbose_name": "Words and Sentences",
+		"verbose_name": "English (American) WS",
 		"min_age": 16,
 		"max_age": 30,
 		"csv_file": "cdi_form_csv/cdi_forms/[English_WS].csv",
@@ -15,7 +15,7 @@
 	{
 		"language": "English",
 		"form": "CDI3",
-		"verbose_name": "CDI-III",
+		"verbose_name": "English (American) CDI-III",
 		"min_age": 16,
 		"max_age": 30,
 		"csv_file": "cdi_form_csv/cdi_forms/[English_CDI3].csv",
@@ -26,7 +26,7 @@
 	{
 		"language": "English",
 		"form": "WG",
-		"verbose_name": "Words and Gestures",
+		"verbose_name": "English (American) WG",
 		"min_age": 8,
 		"max_age": 18,
 		"csv_file": "cdi_form_csv/cdi_forms/[English_WG].csv",
@@ -39,7 +39,7 @@
 	{
 		"language": "Hebrew",
 		"form": "WG",
-		"verbose_name": "Words and Gestures",
+		"verbose_name": "Hebrew WG",
 		"min_age": 8,
 		"max_age": 18,
 		"csv_file": "cdi_form_csv/cdi_forms/[Hebrew_WG].csv",
@@ -50,7 +50,7 @@
 	{
 		"language": "Hebrew",
 		"form": "WS",
-		"verbose_name": "Words and Sentences",
+		"verbose_name": "Hebrew WS",
 		"min_age": 16,
 		"max_age": 30,
 		"csv_file": "cdi_form_csv/cdi_forms/[Hebrew_WS].csv",
@@ -61,7 +61,7 @@
 	{
 		"language": "Spanish",
 		"form": "WS",
-		"verbose_name": "Palabras & Enunciados",
+		"verbose_name": "Spanish (Mexican) WS",
 		"min_age": 16,
 		"max_age": 30,
 		"csv_file": "cdi_form_csv/cdi_forms/[Spanish_WS].csv",
@@ -73,7 +73,7 @@
 	{
 		"language": "Spanish",
 		"form": "WG",
-		"verbose_name": "Primeras Palabras y Gestos",
+		"verbose_name": "Spanish (Mexican) WG",
 		"min_age": 8,
 		"max_age": 18,
 		"csv_file": "cdi_form_csv/cdi_forms/[Spanish_WG].csv",
@@ -85,7 +85,7 @@
 	{
 		"language": "French Quebec",
 		"form": "WS",
-		"verbose_name": "Mots et Énoncés",
+		"verbose_name": "French (Canadian) WS",
 		"min_age": 16,
 		"max_age": 30,
 		"csv_file": "cdi_form_csv/cdi_forms/[French_Quebec_WS].csv",
@@ -96,7 +96,7 @@
 	{
 		"language": "French Quebec",
 		"form": "WG",
-		"verbose_name": "Mots et Gestes",
+		"verbose_name": "French (Canadian) WG",
 		"min_age": 8,
 		"max_age": 16,
 		"csv_file": "cdi_form_csv/cdi_forms/[French_Quebec_WG].csv",
@@ -107,7 +107,7 @@
 	{
 		"language": "Canadian English",
 		"form": "WS",
-		"verbose_name": "Words and Sentences",
+		"verbose_name": "English (Canadian) WS",
 		"min_age": 16,
 		"max_age": 30,
 		"csv_file": "cdi_form_csv/cdi_forms/[Canadian_English_WS].csv",
@@ -118,7 +118,7 @@
 	{
 		"language": "Canadian English",
 		"form": "WG",
-		"verbose_name": "Words and Gestures",
+		"verbose_name": "English (Canadian) WG",
 		"min_age": 8,
 		"max_age": 16,
 		"csv_file": "cdi_form_csv/cdi_forms/[Canadian_English_WG].csv",
@@ -129,7 +129,7 @@
 	{
 		"language": "English",
 		"form": "L1",
-		"verbose_name": "Short Form Vocabulary Checklist: Level I",
+		"verbose_name": "English (American) L1",
 		"min_age": 8,
 		"max_age": 18,
 		"csv_file": "cdi_form_csv/cdi_forms/[English_L1].csv",
@@ -141,7 +141,7 @@
 	{
 		"language": "English",
 		"form": "L2A",
-		"verbose_name": "Short Form Vocabulary Checklist: Level II (Form A)",
+		"verbose_name": "English (American) L2A",
 		"min_age": 16,
 		"max_age": 30,
 		"csv_file": "cdi_form_csv/cdi_forms/[English_L2A].csv",
@@ -153,7 +153,7 @@
 	{
 		"language": "English",
 		"form": "L2B",
-		"verbose_name": "Short Form Vocabulary Checklist: Level II (Form B)",
+		"verbose_name": "English (American) L2B",
 		"min_age": 16,
 		"max_age": 30,
 		"csv_file": "cdi_form_csv/cdi_forms/[English_L2B].csv",
@@ -165,7 +165,7 @@
 	{
 		"language": "Dutch",
 		"form": "WS",
-		"verbose_name": "Woorden en zinnen",
+		"verbose_name": "Dutch WS",
 		"min_age": 16,
 		"max_age": 30,
 		"csv_file": "cdi_form_csv/cdi_forms/[Dutch_WS].csv",
@@ -177,7 +177,7 @@
 	{
 		"language": "Dutch",
 		"form": "WG",
-		"verbose_name": "Woorden en gebaren",
+		"verbose_name": "Dutch WG",
 		"min_age": 8,
 		"max_age": 18,
 		"csv_file": "cdi_form_csv/cdi_forms/[Dutch_WG].csv",
@@ -189,7 +189,7 @@
 	{
 		"language": "Korean",
 		"form": "WS",
-		"verbose_name": "단어와 문장 (WS)",
+		"verbose_name": "Korean WS",
 		"min_age": 16,
 		"max_age": 30,
 		"csv_file": "cdi_form_csv/cdi_forms/[Korean_WS].csv",
@@ -199,7 +199,7 @@
 	{
 		"language": "Korean",
 		"form": "WG",
-		"verbose_name": "단어와 제스쳐 (WG)",
+		"verbose_name": "Korean WG",
 		"min_age": 8,
 		"max_age": 18,
 		"csv_file": "cdi_form_csv/cdi_forms/[Korean_WG].csv",
@@ -209,7 +209,7 @@
 	{
 		"language": "English",
 		"form": "CAT",
-		"verbose_name": "Computer Adaptive Test",
+		"verbose_name": "English (American) CAT",
 		"min_age": 12,
 		"max_age": 36,
 		"csv_file": "cdi_form_csv/cat_forms/[English_CAT].csv",
@@ -220,7 +220,7 @@
 	},{
 		"language": "Spanish",
 		"form": "L1",
-		"verbose_name": "Short Form Vocabulary Checklist: Level I",
+		"verbose_name": "Spanish (Mexican) L1",
 		"min_age": 8,
 		"max_age": 18,
 		"csv_file": "cdi_form_csv/cdi_forms/[Spanish_L1].csv",
@@ -230,7 +230,7 @@
 	},{
 		"language": "Spanish",
 		"form": "L2A",
-		"verbose_name": "Short Form Vocabulary Checklist: Level II (Form A)",
+		"verbose_name": "Spanish (Mexican) L2A",
 		"min_age": 16,
 		"max_age": 30,
 		"csv_file": "cdi_form_csv/cdi_forms/[Spanish_L2A].csv",
@@ -240,7 +240,7 @@
 	},{
 		"language": "Argentine Spanish",
 		"form": "WS",
-		"verbose_name": "Argentine Spanish WS (CDI II)",
+		"verbose_name": "Spanish (Argentinian) CDI II",
 		"min_age": 16,
 		"max_age": 30,
 		"csv_file": "cdi_form_csv/cdi_forms/[Argentine_Spanish_WS].csv",
@@ -248,9 +248,19 @@
 		"scoring_json" : "cdi_forms/form_data/scoring/Argentine_Spanish_WS_scoring.json",
 		"demographics" : ["Argentine_Spanish.json"]
 	},{
+		"language": "Argentine Spanish",
+		"form": "WG",
+		"verbose_name": "Spanish (Argentinian) CDI I",
+		"min_age": 8,
+		"max_age": 18,
+		"csv_file": "cdi_form_csv/cdi_forms/[Argentine_Spanish_WG].csv",
+		"json_data": "cdi_forms/form_data/Argentine_Spanish_WG_meta.json",
+		"scoring_json" : "cdi_forms/form_data/scoring/Argentine_Spanish_WG_scoring.json",
+		"demographics" : ["Argentine_Spanish.json"]
+	},{
 		"language": "French French",
 		"form": "CAT",
-		"verbose_name": "Computer Adaptive Test",
+		"verbose_name": "French (French) CAT",
 		"min_age": 12,
 		"max_age": 36,
 		"csv_file": "cdi_form_csv/cat_forms/[English_CAT].csv",
@@ -261,7 +271,7 @@
 	},{
 		"language": "French Quebec",
 		"form": "CAT",
-		"verbose_name": "Computer Adaptive Test",
+		"verbose_name": "French (Canadian) CAT",
 		"min_age": 12,
 		"max_age": 36,
 		"csv_file": "cdi_form_csv/cat_forms/[English_CAT].csv",
@@ -272,7 +282,7 @@
 	},{
 		"language": "Spanish",
 		"form": "CAT",
-		"verbose_name": "Computer Adaptive Test",
+		"verbose_name": "Spanish (Mexican) CAT",
 		"min_age": 12,
 		"max_age": 36,
 		"csv_file": "cdi_form_csv/cat_forms/[English_CAT].csv",

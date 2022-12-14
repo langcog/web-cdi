@@ -218,7 +218,7 @@ class RegistrationAdmin(admin.ModelAdmin):
 
     def has_delete_permission(self, request, obj=None):
         """registration profile should not be created by hand"""
-        return False
+        return True
 
     def has_accept_permission(self, request, obj):
         """whether the user has accept permission"""

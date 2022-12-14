@@ -1446,3 +1446,10 @@ def ajax_demographic_forms(request):
                 data,
                 content_type="application/json"
             )
+
+class ResearcherAddInstruments(UpdateView):
+    model = researcher
+    form_class = AddInstrumentForm
+
+    def get_success_url(self) -> str:
+        return reverse('console')
