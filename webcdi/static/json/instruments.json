@@ -245,6 +245,16 @@
 		"scoring_json" : "cdi_forms/form_data/scoring/Argentine_Spanish_WS_scoring.json",
 		"demographics" : ["Argentine_Spanish.json"]
 	},{
+		"language": "Argentine Spanish",
+		"form": "WG",
+		"verbose_name": "Spanish (Argentinian) CDI I",
+		"min_age": 8,
+		"max_age": 18,
+		"csv_file": "cdi_form_csv/cdi_forms/[Argentine_Spanish_WG].csv",
+		"json_data": "cdi_forms/form_data/Argentine_Spanish_WG_meta.json",
+		"scoring_json" : "cdi_forms/form_data/scoring/Argentine_Spanish_WG_scoring.json",
+		"demographics" : ["Argentine_Spanish.json"]
+	},{
 		"language": "French French",
 		"form": "CAT",
 		"verbose_name": "French (French) CAT",
