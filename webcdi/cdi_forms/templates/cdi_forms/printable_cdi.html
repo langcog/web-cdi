@@ -43,7 +43,7 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
         {% for category in graph_data %}
-            console.log("{{ category }}", "{{ graph_data|get_item:category }}", "{{ graph_data|get_item:category|get_item:'mappedName' }}")
+            console.log("{{ category }}",  "{{ graph_data|get_item:category|get_item:'mappedName' }}", "{{ graph_data|get_item:category|get_item_perc:'produces' }}")
         {% endfor %}
 
         // Load the Visualization API and the corechart package.
@@ -232,18 +232,6 @@
         </div>
         {% endif %}
         
-
-        <div class="row justify-content-center">
-            <!-- If study allows participants to share results via Facebook, a link for FB sharing will appear in template. -->
-              {% if allow_sharing %}
-                {% url 'administer_cdi_form' hash_id=hash_id as form_url %}
-                <div class="fb-share-button" data-href="{{ form_url }}" data-layout="link" data-mobile-iframe="false">
-                       <a class="fb-xfbml-parse-ignore" target="_blank" style="width: 100%;" href="https://www.facebook.com/sharer/sharer.php?u={{ form_url | urlencode }}&amp;src=sdkpreparse">{% trans "Share on Facebook" %}</a>
-                </div>
-              {% endif %}
-        </div>
-
-
         <br>
         {% if show_feedback %}
             <div class="col-md-12 collapse show" id="graph_data" style="height: 90vh;">
@@ -333,7 +321,6 @@
 
         // Load word-level data for participant. Parse into 2 or 3 bins depending on instrument type.
         var words = root.filter(function(d) { return d.item_type == "word"; });
-        console.log(words);
         $.each(words, function(index, value){
             value.definition = value.definition.toLowerCase();
             value.num_value = 'neither';

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en"> <head> 
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+    {% load static %}
+
+    <title>WebCDI Interface</title>
+    <meta name="description" content="English Words and Sentences CDI form">
+    <meta name="author" content="Henry Mehta">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" ></script>
+    
+    <script src="//code.jquery.com/jquery-1.11.3.js"></script>
+    <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+    <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
+    <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
+    <script src="{% static 'researcher_UI/django_modal_forms.js' %}"></script>
+    <script src="{% static 'researcher_UI/researcher_UI.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'researcher_UI/console.css' %}" />
+    <link rel="stylesheet" href="{% static 'researcher_UI/table.css' %}" />
+    <script src="{% static 'cdi_forms/moment.js' %}"></script>
+
+</head>
+
+<!-- Researcher interface -->
+<body>
+    <div class='container'>
+        <!-- Row displaying username, help button, and logout button. -->
+        <h1>{{ request.user.username }}</h1>
+        <p>Select the instruments you want to use</p>
+        <div class='row'>
+        	<form style="width:100%" action="." method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" class="btn btn-primary">
+        	</form>
+        </div>
+    </div>
+</body>
+</html>

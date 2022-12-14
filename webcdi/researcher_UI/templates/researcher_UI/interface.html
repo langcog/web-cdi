@@ -77,6 +77,17 @@
                     <legend>Study:</legend>
                         <div class='col-md-12'>
                 			<div class="row">
+                                <div class='col'>
+                                    <a href="{% url 'researcher_add_instruments' request.user.researcher.id %}" type="button" type="button" style='width:100%;' class="btn btn-primary">Add Instruments</a>
+                                </div>
+                                <div class="col">
+                				    <button id="id_new_study" type="button" style='width:100%;' class="btn btn-primary"   onclick = "modal_form('/interface/add_study/')" >New Study</button>
+                                </div>
+                                <div class="col">
+                                    <button type="button" style='width:100%; margin-bottom: 5%;' class="btn btn-primary"   onclick = "modal_form('/interface/add_paired_study/')" >Group Study</button>
+                			    </div>
+                            </div>
+                            <div class="row">
                 			    <div class='col'>
                 				    <div style = 'width:100%' class="form-group">
                     					<select  style = 'width:100%;' id="study-selector" class="form-control" onchange="location = encodeURI(this.options[this.selectedIndex].value);">
@@ -104,11 +115,7 @@
                                         {% endif %}                    
                     				</div>
                 			    </div>
-                			    <div class='col-md-2'>
-                				    <button id="id_new_study" type="button" style='width:100%;' class="btn btn-primary"   onclick = "modal_form('/interface/add_study/')" >New Study</button>
-                                    <br><br>
-                                    <button type="button" style='width:100%; margin-bottom: 5%;' class="btn btn-primary"   onclick = "modal_form('/interface/add_paired_study/')" >Group Study</button>
-                			    </div>
+                			    
                 			</div>
                 			{% if current_study %}
                                 <div class="row">
