@@ -33,11 +33,11 @@ class instrument(models.Model):
         return "%s (%s %s)" % (self.verbose_name, self.language, self.form)
     
     def __str__(self):
-        return f"%s (%s %s)" % (self.verbose_name, self.language, self.form)
+        return f"%s (%s %s)" % (self.verbose_name)
 
     class Meta:
          unique_together = ('language', 'form') # Each instrument in the database must have a unique combination of language and form type
-         ordering = ['language', 'form', 'name']
+         ordering = ['verbose_name']
 
 class researcher(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
