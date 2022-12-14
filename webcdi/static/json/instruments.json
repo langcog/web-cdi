@@ -73,7 +73,7 @@
 	{
 		"language": "Spanish",
 		"form": "WG",
-		"verbose_name": "Spanish (Mexican (WG)",
+		"verbose_name": "Spanish (Mexican) WG",
 		"min_age": 8,
 		"max_age": 18,
 		"csv_file": "cdi_form_csv/cdi_forms/[Spanish_WG].csv",
