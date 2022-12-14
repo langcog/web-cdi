@@ -33,7 +33,7 @@ class instrument(models.Model):
         return "%s (%s %s)" % (self.verbose_name, self.language, self.form)
     
     def __str__(self):
-        return f"%s (%s %s)" % (self.verbose_name)
+        return f"%s" % (self.verbose_name)
 
     class Meta:
          unique_together = ('language', 'form') # Each instrument in the database must have a unique combination of language and form type
