@@ -38,10 +38,15 @@ urlpatterns = [
     url(r'^accounts/profile/$', RedirectView.as_view(url='/interface/', permanent=False), name='interface'),
     url(r'interface/', include('researcher_UI.urls')),
     url(r'^registration/', include('registration.urls')),
+
     url(r'^signup/$', signup, name='signup'),
     url(r'^lockout/$', TemplateView.as_view(template_name="registration/lockout.html")),
     url(r'^health/?', include('health_check.urls')),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+
+    #=======================New Test URL============================
+    url(r'endalk/', include('researcher_UI.urls_endalk')),
+    #=======================New Test URL ============================
 
 ]
 

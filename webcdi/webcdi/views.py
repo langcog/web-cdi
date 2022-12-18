@@ -1,5 +1,6 @@
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
+from django.views import generic
 
 from webcdi.forms import SignUpForm
 
@@ -20,3 +21,4 @@ def signup(request):
     else:
         form = SignUpForm()
     return render(request, 'webcdi/signup.html', {'form': form})
+
