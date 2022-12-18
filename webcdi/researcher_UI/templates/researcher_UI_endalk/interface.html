@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en"> <head> 
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+    {% load static %}
+
+    <title>WebCDI Interface</title>
+    <meta name="description" content="English Words and Sentences CDI form">
+    <meta name="author" content="Henry Mehta">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" ></script>
+    
+    <script src="//code.jquery.com/jquery-1.11.3.js"></script>
+    <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+    <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
+    <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
+    <script src="{% static 'researcher_UI/django_modal_forms.js' %}"></script>
+    <script src="{% static 'researcher_UI/researcher_UI.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'researcher_UI/console.css' %}" />
+    <link rel="stylesheet" href="{% static 'researcher_UI/table.css' %}" />
+    <script src="{% static 'cdi_forms/moment.js' %}"></script>
+
+</head>
+
+<style >
+    .btn{
+        white-space:normal !important;
+        word-wrap: break-word; 
+    }
+
+    label input ~ i.material-icons.radio_button_unchecked ,label input ~ i.material-icons.check_box_outline_blank {
+        display: inline;
+    }
+    label input ~ i.material-icons.radio_button_checked ,label input ~ i.material-icons.check_box {
+        display: none;
+    }
+    label input:checked ~ i.material-icons.radio_button_unchecked ,label input:checked ~ i.material-icons.check_box_outline_blank {
+        display: none;
+    }
+    label input:checked ~ i.material-icons.radio_button_checked ,label input:checked ~ i.material-icons.check_box {
+        display: inline;
+    }
+    .django-ckeditor-widget{min-width:100% !important}
+    
+    
+    nav.primary-navigation {
+        margin: 0 auto;
+        display: block;
+        padding: 10px 0 0 0;
+        text-align: center;
+        font-size: 16px;
+   }
+    nav.primary-navigation ul li {
+        list-style: none;
+        margin: 0 auto;
+        border-left: 2px solid #3ca0e7;
+        display: inline-block;
+        padding: 0 30px;
+        position: relative;
+        text-decoration: none;
+        text-align: center;
+        font-family: arvo;
+   }
+    nav.primary-navigation li a {
+        color: white;
+   }
+    nav.primary-navigation li a:hover {
+        color: #3ca0e7;
+   }
+    nav.primary-navigation li:hover {
+        cursor: pointer;
+   }
+    nav.primary-navigation ul li ul {
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+        padding-left: 0;
+        left: 0;
+        display: none;
+        background: white;
+        width:100px;
+        
+        
+   }
+    nav.primary-navigation ul li:hover > ul, nav.primary-navigation ul li ul:hover {
+        visibility: visible;
+        opacity: 1;
+        display: block;
+        min-width: 250px;
+        text-align: left;
+        padding-top: 20px;
+        box-shadow: 0px 3px 5px -1px #ccc;
+   }
+    nav.primary-navigation ul li ul li {
+        clear: both;
+        width: 100%;
+        text-align: left;
+        margin-bottom: 20px;
+        border-style: none;
+   }
+    nav.primary-navigation ul li ul li a:hover {
+        padding-left: 10px;
+        border-left: 2px solid #3ca0e7;
+        transition: all 0.3s ease;
+   }
+    a {
+        text-decoration: none;
+   }
+    a:hover {
+        color: #3ca0e7;
+   }
+    ul li ul li a {
+        transition: all 0.5s ease;
+   }
+   .login-card {
+        padding-top: 10px;
+        margin: 0 auto 10px;
+        border-radius: 10px;
+        overflow: scroll;
+        background-color: white;
+  }
+    
+    
+</style>
+<!-- Researcher interface -->
+<body style="background:#4d90fe">
+    <div class='container'>
+        <!-- Row displaying username, help button, and logout button. -->
+        <nav role="navigation" class="primary-navigation d-flex justify-content-end">
+            <ul>
+              <li><a href="/">Home</a>
+    
+              <li><a href="#" onclick="window.open('https://docs.google.com/document/d/1naFm2U-77YcOwFD7jcQIes2HhNz98qQM2wm1J1cmwck/pub')" onclick="window.open('https://docs.google.com/document/d/1naFm2U-77YcOwFD7jcQIes2HhNz98qQM2wm1J1cmwck/pub')">Help</a></li>
+              <li><a href="#">{{ username }} &dtrif;</a>
+                <ul class="dropdown">
+                    <li><a href="/accounts/logout/" style="color:#4d90fe">Logout</a></li>
+                </ul>
+              </li>
+            </ul>
+        </nav>
+
+        <div class='row login-card'>
+            <form method='post' action = '/endalk/study/{{ current_study }}/' id='study-form' style="width:100%">
+           		{% csrf_token %}
+                <fieldset>
+                    <legend>Study:</legend>
+                        <div class='col-md-12'>
+                			<div class="row">
+                                <div class='col'>
+                                    <a href="{% url 'researcher_add_instruments_endalk' request.user.researcher.id %}" type="button" type="button" style='width:100%;' class="btn btn-primary">Add Instruments</a>
+                                </div>
+                                <div class="col">
+                				    <button id="id_new_study" type="button" style='width:100%;' class="btn btn-primary"   onclick = "modal_form('/endalk/add_study/')" >New Study</button>
+                                </div>
+                                <div class="col">
+                                    <button type="button" style='width:100%; margin-bottom: 5%;' class="btn btn-primary"   onclick = "modal_form('/endalk/add_paired_study/')" >Group Study</button>
+                			    </div>
+                            </div>
+                            <div class="row">
+                			    <div class='col'>
+                				    <div style = 'width:100%' class="form-group">
+                    					<select  style = 'width:100%;' id="study-selector" class="form-control" onchange="location = encodeURI(this.options[this.selectedIndex].value);">
+                    					    <option value="/endalk/" selected disabled>Please select study</option>
+                    					    {% for study in studies %}
+                    						  <option value="/endalk/study/{{ study }}/"{% if study.name == current_study %} selected="" {% endif %}>{{ study }}</option>
+                    					    {% endfor %}
+                    					</select> 
+                				    </div>
+                    				<div>
+                    				    {% if study_instrument %}
+                    					   <h4>Instrument: {{ study_instrument }}</h4>
+                    				    {% endif %}
+
+                                        {% if study_group %}
+                                            <h4>Study Group: {{ study_group }}</h4>
+                                        {% endif %}
+
+                                        {% if completed_admins %}
+                                            <h4># Completed Administrations: {{ completed_admins }} Tests, {{ unique_children }} Children</h4>
+                                        {% endif %}
+
+                                        {% if allow_payment %}
+                                            <h4># Gift Cards Left: {{ available_giftcards }}</h4>
+                                        {% endif %}                    
+                    				</div>
+                			    </div>
+                			    
+                			</div>
+                			{% if current_study %}
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div class="btn-group btn-block">
+                                          <button id="id_add_participants" type="button" class="btn btn-secondary btn-block" onclick = "modal_form('/endalk/study/{{ current_study|urlencode }}/administer_new/')">Add Participants</button>
+                                          <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span class="sr-only">Toggle Dropdown</span>
+                                          </button>
+                                          <div class="dropdown-menu">
+                                            <button type="button" class="dropdown-item btn btn-secondary btn-block"   onclick = "modal_form('/endalk/study/{{ current_study|urlencode }}/import_data/')" >Import Spreadsheet Data</button>
+                                          </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-3">
+                                        <div class="dropdown">
+                                          <button class="btn btn-secondary  btn-block dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Download Data
+                                          </button>
+                                          <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                            <button class="dropdown-item btn btn-secondary btn-block" type="submit" name='download-study-csv' id='download-study-csv'>Download Data (CSV format)</button>
+                                            <button class="dropdown-item btn btn-secondary btn-block" type="submit" name='download-summary-csv' id='download-summary-csv'>Download Summary (CSV format)</button>
+                                            {% if not study.instrument.form == 'CAT' %}
+                                            <button class="dropdown-item btn btn-secondary btn-block" type="submit" name='download-study-scoring' id='download-study-scoring'>Download Data (CDI scoring format)</button> 
+                                            <button class="dropdown-item btn btn-secondary btn-block" type="submit" name='download-dictionary' id='download-dictionary'>Download Dictionary (CSV format)</button>
+                                            {% endif %}
+                                          </div>
+                                        </div>                                            
+                                    </div>
+                                    <div class="col-3">
+                                        <button id="id_update_study" type="button" class="btn btn-secondary btn-block"   onclick = "modal_form('/endalk/study/{{ current_study|urlencode }}/rename_study/')" >Update Study</button>
+                                    </div>
+                                    <div class="col-3">
+                                        <button type="submit" class="btn btn-secondary btn-block" name='delete-study' id='delete-study' onclick='return confirm("Are you sure you want to delete the entire study and all the data associated with it?");' >Delete Study</button>
+                                    </div>                                                                                
+                                </div>
+                    		{% endif %}
+                        </div>
+                </fieldset>
+            </form>
+        </div>
+
+        {% if current_study %}
+            <div class='row login-card'>
+                <form method='post' action = '/endalk/study/{{ current_study }}/' id='administration-form' class="form-inline">
+                    {% csrf_token %}
+                        <fieldset>
+                            <div class="row d-flex align-items-stretch">
+                                <div class='col-md-3'>
+                                    <button style='width:100%; height: 100%;' class="btn btn-secondary selected-btn btn-block" id='add-selected' type='submit' name='administer-selected' value='administer-selected' disabled  >Re-administer Participants</button>
+                                </div>
+                                <div class='col-md-3'>
+                                    <div class="dropdown selected-btn">
+                                        <button class="btn btn-secondary selected-btn btn-block dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
+                                            Download Selected Data
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+                                            <button class="dropdown-item btn btn-secondary selected-btn btn-block" id='download-selected' type='submit' name='download-selected' value='download-selected'  disabled >Download Selected Data (CSV/All)</button>
+                                            <button class="dropdown-item btn btn-secondary selected-btn btn-block" id='download-selected-summary' type="submit" name='download-selected-summary' value='download-selected-summary' disabled>Download Summary (CSV format)</button>
+                                            {% if not study.instrument.form == 'CAT' %}
+                                            <button class="dropdown-item btn btn-secondary selected-btn btn-block" id='download-links' type='submit' name='download-links' value='download-links'  disabled >Download Selected Data (CSV/Links)</button>
+                                            <button class="dropdown-item btn btn-secondary selected-btn btn-block" id='download-study-scoring-selected' type='submit' name='download-study-scoring-selected' value='download-study-scoring-selected'  disabled >Download Selected Data (CDI Scoring Format/All)</button>
+                                            {% endif %}
+                                        </div>
+                                    </div>                                            
+                                </div> 
+                                <div class="col-md-3"></div>
+                                <div class='col-md-3'>
+                                        <button style='width:100%; height: 100%;' class="btn btn-secondary selected-btn btn-block" id='delete-selected' type='submit' name='delete-selected' value='administer-selected' disabled onclick='return confirm("Are you sure you want to delete the selected administration record and all the data associated with it?");' >Delete Selected Data</button>
+                                </div>
+                            </div>
+                       
+                            <legend> Data :</legend>
+                            <div class='col-md-12'>
+                                {% include "researcher_UI/table.html" with table=study_administrations %}
+                                <script type="text/javascript">
+                                    var utc_time;
+                                    var local_time;
+                                    $('.due_date, .last_modified, .created_date').not('.orderable, .sortable').each( function () {
+                                        utc_time = moment.utc($(this).html(), "MM/DD/YYYY hh:mm a");
+                                        local_time = moment(utc_time).local().format("MM/DD/YYYY hh:mm a");
+                                        $(this).html(local_time);
+                                    });
+                                </script>
+                            </div>
+                        </fieldset>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- New Study Modal -->
+    <div class="modal" id="modal-form" tabindex="" role="dialog" aria-labelledby="new study"></div>
+
+<script>
+    // Function from static/researcher_UI.js. Disables the 'selected' buttons unless at least one of the checkboxes in select_col is selected.
+    checked_only()
+    $('form').each(function(){this.onkeypress = checkEnter;});
+
+    // Tracks the number of administrations to be displayed per page.
+    var num_per_page = parseInt("{{ num_per_page }}");
+
+    // Depending on value stored in num_per_page, display the other option on the page
+    if ((window.location.search.indexOf('per_page') != -1 && window.location.search.indexOf('per_page=20') == -1) || num_per_page != 20) {
+        $('#view_all').text("Show 20");
+        {% if current_study %}
+            $("#view_all").attr("href", "{% url 'console' current_study %}");
+        {% endif %}
+    } else if (num_per_page == 20 || window.location.search.indexOf('per_page=20') != -1) {
+        $('#view_all').text("Show All");
+        {% if current_study %}
+            $("#view_all").attr("href", "{% url 'console' current_study %}?view_all=all");
+        {% endif %}
+    }
+
+    var querystring = 'per_page=' + num_per_page;
+
+    $('.column_sort_links').each(function() {
+        var href = $(this).attr('href');
+
+        if (href) {
+            if (href.indexOf('per_page') == -1) {
+                href += (href.match(/\?/) ? '&' : '?') + querystring;
+                $(this).attr('href', href);
+            }
+        }
+    });
+    var shifted = false;
+
+    // Checkboxes selected while Shift button is held down select all checkboxes in between as well
+    var lastChecked = null;
+    var handleChecked = function(e) {
+        shifted = e.shiftKey;
+        if(lastChecked && shifted) {
+            var i = $('input[type="checkbox"]').index(lastChecked);
+            var j = $('input[type="checkbox"]').index(e.target);
+            var checkboxes = [];
+            if (j > i) {
+                checkboxes = $('input[type="checkbox"]:gt('+ (i-1) +'):lt('+ (j-i) +')');
+            } else {
+                checkboxes = $('input[type="checkbox"]:gt('+ j +'):lt('+ (i-j) +')');
+            }
+            if (!$(e.target).is(':checked')) {
+                $(checkboxes).prop('checked', false);
+            } else {
+                $(checkboxes).prop('checked', true);
+            }
+        }
+        lastChecked = e.target;
+    }
+
+    $('input[name="select_col"').click( function() {
+        handleChecked(event);
+    });
+
+    // Check for the number of completed tests as reported by Django. If none of the tests are completed, disables download_data option.
+    var completed_admins = "{{ completed_admins }}";
+
+    if (parseInt("{{ completed_admins }}")) {
+        $('#download-study').removeClass('disabled');
+    } else
+    {
+        $('#download-study').addClass('disabled');
+    }
+
+    
+</script>
+
+</body>
+</html>

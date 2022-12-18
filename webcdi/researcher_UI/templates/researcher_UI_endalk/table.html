@@ -1,0 +1,26 @@
+{% load querystring from django_tables2 %}
+{% load django_tables2 %}
+{% load trans blocktrans from i18n %}
+{% load bootstrap4 %}
+
+{% if table.page %}
+    <div class="table-container">
+{% endif %}
+ 
+{% block table %}
+    {% render_table table %}
+{% endblock table %}
+ 
+{% if table.page %}
+    {% block pagination %}
+        <div class = "col-md-12" style = "float:none; display:inline-block; vertical-align:middle;">
+            <nav>{% bootstrap_pagination table.page url=request.get_full_path %}</nav>
+            <a href="{% url 'console' current_study %}?view_all=all" id="view_all" class="btn btn-link" role="link">Show All</a>
+        </div>
+    {% endblock pagination %}
+
+{% endif %}
+
+{% if table.page %}
+    </div>
+{% endif %}

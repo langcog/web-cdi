@@ -12,21 +12,21 @@
     <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
     <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'supplementtut/base.css' %}" />
+    <link rel="stylesheet" href="{% static 'supplementtut/researcher_ui.css' %}" />
     <script src="{% static 'cdi_forms/moment.js' %}"></script>
 
 </head>
 <body>
-	<div class="container bs-docs-container" style="padding-top: 100px; padding-bottom: 60px;">
 
-		<div class="flex-row">
-			{% block content_title %}{% endblock %}
-        </div>
-        <div class="flex-row">
-		    {% block contents %}
-		    {% endblock %}
-		</div>
+    <div class="flex-row">
+        {% block content_title %}{% endblock %}
+    </div>
+    <div class="flex-row">
+        {% block contents %}
+        {% endblock %}
+    </div>
 
-	</div>
+</div>
 </body>
 </html>
 
