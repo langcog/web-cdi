@@ -10,7 +10,10 @@ def get_item(dictionary, key):
 
 @register.filter
 def get_item_perc(dictionary, key):
-    return str(float(float(dictionary.get(key))/float(dictionary.get('count')))*100)
+    try:
+        return str(float(float(dictionary.get(key))/float(dictionary.get('count')))*100)
+    except:
+        return 0
 
 @register.filter
 def translate(choice, instrument_name):
