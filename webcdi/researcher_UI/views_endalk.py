@@ -57,7 +57,7 @@ class RenameStudy(LoginRequiredMixin, generic.View):
         form_package["min_age"] = age_range.lower
         form_package["max_age"] = age_range.upper
         form_package["study_obj"] = study_obj
-        return render(request, "researcher_UI_endalk/add_study_modal.html", form_package)
+        return render(request, "researcher_UI_endalk/rename_study_modal.html", form_package)
 
     def post(self, request, study_name):
         data = {}
@@ -99,14 +99,14 @@ class RenameStudy(LoginRequiredMixin, generic.View):
             data = raw_gift_code_fun(
                 raw_gift_amount, study_obj, new_study_name, raw_gift_codes
             )
-            return HttpResponse(json.dumps(data), content_type="application/json")
+            return redirect('console', study_name=study_name)
 
         else:
             data["stat"] = "re-render"
             form_package["form"] = form
             form_package["form_name"] = "Update Study"
             form_package["allow_payment"] = study_obj.allow_payment
-            return render(request, "researcher_UI_endalk/add_study_modal.html", form_package)
+            return render(request, "researcher_UI_endalk/rename_study_modal.html", form_package)
 
 
 class AddStudy(LoginRequiredMixin, generic.View):
@@ -122,8 +122,7 @@ class AddStudy(LoginRequiredMixin, generic.View):
             data = add_study_fun(
                 study_instance, form, study_name, researcher, age_range
             )
-            print("posted.")
-            return HttpResponse(json.dumps(data), content_type="application/json")
+            return redirect('console', study_name=study_name)
         else:
             data["stat"] = "re-render"
             form_package = {}
@@ -147,7 +146,7 @@ class AddPairedStudy(LoginRequiredMixin, generic.View):
         form = AddPairedStudyForm(request.POST)
         if form.is_valid():
             data = add_paired_study_fun(form, researcher)
-            return HttpResponse(json.dumps(data), content_type="application/json")
+            return redirect('console')
         else:
             data["stat"] = "re-render"
             return render(

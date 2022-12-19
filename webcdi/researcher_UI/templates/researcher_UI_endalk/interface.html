@@ -89,7 +89,7 @@
         visibility: visible;
         opacity: 1;
         display: block;
-        min-width: 250px;
+        min-width: 100px;
         text-align: left;
         padding-top: 20px;
         box-shadow: 0px 3px 5px -1px #ccc;
@@ -153,10 +153,10 @@
                                     <a href="{% url 'researcher_add_instruments_endalk' request.user.researcher.id %}" type="button" type="button" style='width:100%;' class="btn btn-primary">Add Instruments</a>
                                 </div>
                                 <div class="col">
-                				    <button id="id_new_study" type="button" style='width:100%;' class="btn btn-primary"   onclick = "modal_form('/endalk/add_study/')" >New Study</button>
+                				    <a id="id_new_study" href="/endalk/add_study" type="button" style='width:100%;' class="btn btn-primary">New Study</a>
                                 </div>
                                 <div class="col">
-                                    <button type="button" style='width:100%; margin-bottom: 5%;' class="btn btn-primary"   onclick = "modal_form('/endalk/add_paired_study/')" >Group Study</button>
+                                    <a style='width:100%; margin-bottom: 5%;' class="btn btn-primary"  href="/endalk/add_paired_study">Group Study</a>
                 			    </div>
                             </div>
                             <div class="row">
@@ -220,7 +220,7 @@
                                         </div>                                            
                                     </div>
                                     <div class="col-3">
-                                        <button id="id_update_study" type="button" class="btn btn-secondary btn-block"   onclick = "modal_form('/endalk/study/{{ current_study|urlencode }}/rename_study/')" >Update Study</button>
+                                        <a id="id_update_study" type="button" class="btn btn-secondary btn-block" href="/endalk/study/{{ current_study }}/rename_study/" >Update Study</a>
                                     </div>
                                     <div class="col-3">
                                         <button type="submit" class="btn btn-secondary btn-block" name='delete-study' id='delete-study' onclick='return confirm("Are you sure you want to delete the entire study and all the data associated with it?");' >Delete Study</button>

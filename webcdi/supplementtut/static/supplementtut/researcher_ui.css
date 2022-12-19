@@ -23,6 +23,15 @@
   border-radius: 10px;
 
 }
+.login-card input[type=button] {
+  width: 100%;
+  display: block;
+  margin-bottom: 10px;
+  position: relative;
+  border-radius: 10px;
+  background: red;
+
+}
 
 .login-card input[type=text], input[type=password] {
   height: 44px;
