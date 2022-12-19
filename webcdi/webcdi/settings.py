@@ -92,7 +92,7 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE = [
-    'django.middleware.common.BrokenLinkEmailsMiddleware',
+    #'django.middleware.common.BrokenLinkEmailsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
