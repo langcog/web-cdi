@@ -12,7 +12,7 @@ def get_item(dictionary, key):
 def get_item_perc(dictionary, key):
     try:
         return str(float(float(dictionary.get(key))/float(dictionary.get('count')))*100)
-    except:
+    except Exception:
         return 0
 
 @register.filter
