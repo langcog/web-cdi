@@ -78,7 +78,7 @@ INSTALLED_APPS = (
     'registration',
     'supplementtut',
     'django.contrib.sites',
-    'axes',
+    #'axes',
     #'csvimport.app.CSVImportConf',
     'health_check',
     'health_check.db',
@@ -100,7 +100,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    'axes.middleware.AxesMiddleware',
+    #'axes.middleware.AxesMiddleware',
     'webcdi.middleware.LoginRequiredMiddleware',
 ]
 
