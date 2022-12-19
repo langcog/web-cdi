@@ -90,7 +90,7 @@ else:
 #USER_ADMIN_EMAIL = 'webcdi-contact@stanford.edu'
 USER_ADMIN_EMAIL = 'hjsmehta@gmail.com'
 
-SERVER_MAIL = 'webcdi.contact@gmail.com'
+SERVER_EMAIL = 'webcdi.contact@gmail.com'
 
 #captcha settings
 RECAPTCHA_PUBLIC_KEY = '6LfI0yEUAAAAALj8wAxmoXmWg8B64tvr866bXeYg'
