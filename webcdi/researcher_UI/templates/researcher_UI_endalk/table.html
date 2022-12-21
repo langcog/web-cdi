@@ -13,6 +13,15 @@
         console.log(id)
         $('#'+id).modal()
     }
+    function Convert_to_localtime(utcDate){
+        let newStr = utcDate.replace('p.m.','PM');
+        newStr = newStr.replace('a.m.','AM');
+        const date = new Date(newStr); 
+        var local_date = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(),  date.getHours(), date.getMinutes(), date.getSeconds()));
+        var local_date_formatted= local_date.toLocaleString([], { hour12: true});
+        return local_date_formatted
+    }
+    
 </script>
 <style>
     .login-card {
@@ -109,6 +118,7 @@
 <table class="table">
 
 
+
     {% block table.thead %}
     {% if table.show_header %}
         <thead {{ table.attrs.thead.as_html }}>
@@ -177,7 +187,9 @@
         {% for column, cell in row.items %}
                     {% if column|stringformat:"s" in '"Last modified","Expiration date","Creation date"' %}
                         <td>
-                                {{cell}}
+                            <span id="converted_result{{forloop.parentloop.counter}}{{forloop.counter}}"></span>
+                            <script>document.getElementById('converted_result{{forloop.parentloop.counter}}{{forloop.counter}}').innerText = Convert_to_localtime("{{cell}}")</script>
+                            
                         </td>
                     {% else %}
                         <td>
