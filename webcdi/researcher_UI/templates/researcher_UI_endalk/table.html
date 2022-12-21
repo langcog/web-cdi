@@ -177,9 +177,7 @@
         {% for column, cell in row.items %}
                     {% if column|stringformat:"s" in '"Last modified","Expiration date","Creation date"' %}
                         <td>
-                            {% localtime on %}
-                                {{cell|stringformat:"s"}}
-                            {% endlocaltime %}
+                                {{cell}}
                         </td>
                     {% else %}
                         <td>
