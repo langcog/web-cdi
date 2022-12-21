@@ -143,10 +143,10 @@
             </ul>
         </nav>
 
-        <div class='row login-card d-flex justify-content-start' style="width:100%" >
+        <div class='login-card' style="width:100%; min-height:200px;" >
             <form method='post' action = '/endalk/study/{{ current_study }}/' id='study-form'>
            		{% csrf_token %}
-                <div style="padding:1rem;">
+                <div style="width:100%;" class="col-md-12">
                     <legend>Study</legend>
                         <div class='col-md-12'>
                 			<div class="row">
