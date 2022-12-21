@@ -297,3 +297,9 @@ class AddInstrumentForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['allowed_instruments'].queryset = self.fields['allowed_instruments'].queryset.filter(active=True)
+
+# Update study form
+class StudyFormForm(forms.ModelForm):
+    class Meta:
+        model = administration
+        fields = ['id', 'subject_id', 'local_lab_id', "opt_out"]

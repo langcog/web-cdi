@@ -10,11 +10,12 @@
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" ></script>
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js">
     <script src="//code.jquery.com/jquery-1.11.3.js"></script>
     <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
     <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
     <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
     <script src="{% static 'researcher_UI/django_modal_forms.js' %}"></script>
@@ -25,7 +26,7 @@
 
 </head>
 
-<style >
+<style>
     .btn{
         white-space:normal !important;
         word-wrap: break-word; 
@@ -126,8 +127,8 @@
     
 </style>
 <!-- Researcher interface -->
-<body style="background:#4d90fe">
-    <div class='container'>
+<body style="background:#4d90fe;">
+    <div class=''>
         <!-- Row displaying username, help button, and logout button. -->
         <nav role="navigation" class="primary-navigation d-flex justify-content-end">
             <ul>
@@ -142,11 +143,11 @@
             </ul>
         </nav>
 
-        <div class='row login-card'>
-            <form method='post' action = '/endalk/study/{{ current_study }}/' id='study-form' style="width:100%">
+        <div class='row login-card d-flex justify-content-start' style="width:100%" >
+            <form method='post' action = '/endalk/study/{{ current_study }}/' id='study-form'>
            		{% csrf_token %}
-                <fieldset>
-                    <legend>Study:</legend>
+                <div style="padding:1rem;">
+                    <legend>Study</legend>
                         <div class='col-md-12'>
                 			<div class="row">
                                 <div class='col'>
@@ -228,16 +229,16 @@
                                 </div>
                     		{% endif %}
                         </div>
-                </fieldset>
+                    </div>
             </form>
         </div>
 
         {% if current_study %}
-            <div class='row login-card'>
-                <form method='post' action = '/endalk/study/{{ current_study }}/' id='administration-form' class="form-inline">
+            <div class='row login-card' style="padding:1rem;">
+                <div id='administration-form' class="form-inline">
                     {% csrf_token %}
-                        <fieldset>
-                            <div class="row  d-flex justify-content-center">
+                        <div>
+                            <form method='post' action = '/endalk/study/{{ current_study }}/'  class="row  d-flex justify-content-center">
                                 <div class='col-md-3'>
                                     <button style='width:100%; height: 100%;' class="btn btn-secondary selected-btn btn-block" id='add-selected' type='submit' name='administer-selected' value='administer-selected' disabled  >Re-administer Participants</button>
                                 </div>
@@ -260,11 +261,11 @@
                                 <div class='col-md-3'>
                                         <button style='width:100%; height: 100%;' class="btn btn-secondary selected-btn btn-block" id='delete-selected' type='submit' name='delete-selected' value='administer-selected' disabled onclick='return confirm("Are you sure you want to delete the selected administration record and all the data associated with it?");' >Delete Selected Data</button>
                                 </div>
-                            </div>
+                            </form>
                        
-                            <legend> Data :</legend>
+                            <legend> Data </legend>
                             <div class='col-md-12'>
-                                {% include "researcher_UI/table.html" with table=study_administrations %}
+                                {% include "researcher_UI_endalk/table.html" with table=study_administrations %}
                                 <script type="text/javascript">
                                     var utc_time;
                                     var local_time;
@@ -275,8 +276,8 @@
                                     });
                                 </script>
                             </div>
-                        </fieldset>
-                </form>
+                        </div>
+                    </div>
             </div>
         {% endif %}
     </div>

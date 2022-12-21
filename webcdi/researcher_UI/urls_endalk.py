@@ -44,20 +44,15 @@ urlpatterns = [
         views.EditAdministrationView.as_view(),
         name="edit-administration",
     ),
-    url(
-        r"^edit-local-lab-id/(?P<pk>[0-9]+)/$",
-        views.EditLocalLabIdView.as_view(),
-        name="edit-local-lab-id",
-    ),
-    url(
-        r"^edit-opt-out/(?P<pk>[0-9]+)/$",
-        views.EditOptOutView.as_view(),
-        name="edit-opt-out",
-    ),
+
     url(r"^ajax/get_demographic_forms/$", views.AjaxDemographicForms.as_view()),
     path(
         "researcher/<int:pk>/",
         views.ResearcherAddInstruments.as_view(),
         name="researcher_add_instruments_endalk",
+    ),
+    url(r"^edit-study-new/(?P<pk>[0-9]+)/$",
+        views.EditStudyView.as_view(),
+        name="edit_study_new",
     ),
 ]

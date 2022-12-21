@@ -29,15 +29,17 @@ class Console(LoginRequiredMixin, generic.View):
         permitted = study.objects.filter(
             researcher=request.user, name=study_name
         ).exists()
-
         if permitted:
             study_obj = study.objects.get(researcher=request.user, name=study_name)
             ids = request.POST.getlist("select_col")
-
             if all([x.isdigit() for x in ids]):
                 """Check that the administration numbers are all numeric"""
-                return post_condition(request, ids, study_obj)
-
+                res =  post_condition(request, ids, study_obj)
+                if res == None:
+                    context = get_helper(request, study_name, 20)
+                    return render(request, "researcher_UI_endalk/interface.html", context)
+                return res
+        
     def get(self, request, study_name=None, num_per_page=20):
         context = get_helper(request, study_name, num_per_page)
         return render(request, "researcher_UI_endalk/interface.html", context)
@@ -287,6 +289,38 @@ class EditLocalLabIdView(LoginRequiredMixin, StudyOwnerMixin, UpdateView):
         self.study = ctx["study"] = self.object.study
         return ctx
 
+class EditLocalLabIdView(LoginRequiredMixin, StudyOwnerMixin, UpdateView):
+    model = administration
+    form_class = EditLocalLabIDForm
+
+    def get_success_url(self):
+        return reverse("console", kwargs={"study_name": self.object.study.name})
+
+    def get_context_data(self, **kwargs):
+        ctx = super(EditLocalLabIdView, self).get_context_data(**kwargs)
+        self.study = ctx["study"] = self.object.study
+        return ctx
+
+
+class EditStudyView(LoginRequiredMixin, generic.UpdateView):
+    model = administration
+    form_class = StudyFormForm
+
+
+    def get_context_data(self, **kwargs):
+        ctx = super(EditStudyView, self).get_context_data(**kwargs)
+        self.study = ctx["study"] = self.object.study
+        return ctx
+
+    def form_valid(self, form):
+        form.save()
+        context = get_helper(self.request,  self.object.study.name, 20)
+        return render(self.request, "researcher_UI_endalk/interface.html", context)
+
+    def get(self, request, pk):
+        obj = administration.objects.get(pk=pk)
+        context = get_helper(self.request,  obj.study.name, 20)
+        return render(self.request, "researcher_UI_endalk/interface.html", context)
 
 class EditOptOutView(LoginRequiredMixin, StudyOwnerMixin, UpdateView):
     model = administration
