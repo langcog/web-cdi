@@ -17,7 +17,6 @@ def add_study_fun(study_instance, form, study_name, researcher, age_range):
     )
 
     study_instance.researcher = researcher
-    print(form.cleaned_data)
     if not form.cleaned_data.get("test_period"):
             study_instance.test_period = 14
 
@@ -35,5 +34,4 @@ def add_study_fun(study_instance, form, study_name, researcher, age_range):
         data[
             "error_message"
         ] = "Study name has a forward slash ('/') inside. Please remove or replace this character."
-    print(data)
     return data

@@ -24,7 +24,7 @@ from researcher_UI.utils.overflow import overflow_fun
 from researcher_UI.utils.import_data import import_data_fun
 
 
-class Console(LoginRequiredMixin, generic.View):
+class Console(LoginRequiredMixin, generic.CreateView):
     def post(self, request, study_name=None):
         permitted = study.objects.filter(
             researcher=request.user, name=study_name
@@ -34,18 +34,20 @@ class Console(LoginRequiredMixin, generic.View):
             ids = request.POST.getlist("select_col")
             if all([x.isdigit() for x in ids]):
                 """Check that the administration numbers are all numeric"""
-                res =  post_condition(request, ids, study_obj)
+                res = post_condition(request, ids, study_obj)
                 if res == None:
                     context = get_helper(request, study_name, 20)
-                    return render(request, "researcher_UI_endalk/interface.html", context)
+                    return render(
+                        request, "researcher_UI_endalk/interface.html", context
+                    )
                 return res
-        
+
     def get(self, request, study_name=None, num_per_page=20):
         context = get_helper(request, study_name, num_per_page)
         return render(request, "researcher_UI_endalk/interface.html", context)
 
 
-class RenameStudy(LoginRequiredMixin, generic.View):
+class RenameStudy(LoginRequiredMixin, generic.CreateView):
     def get(self, request, study_name):
         form_package = {}
         study_obj = study.objects.get(researcher=request.user, name=study_name)
@@ -59,7 +61,9 @@ class RenameStudy(LoginRequiredMixin, generic.View):
         form_package["min_age"] = age_range.lower
         form_package["max_age"] = age_range.upper
         form_package["study_obj"] = study_obj
-        return render(request, "researcher_UI_endalk/rename_study_modal.html", form_package)
+        return render(
+            request, "researcher_UI_endalk/rename_study_modal.html", form_package
+        )
 
     def post(self, request, study_name):
         data = {}
@@ -101,58 +105,52 @@ class RenameStudy(LoginRequiredMixin, generic.View):
             data = raw_gift_code_fun(
                 raw_gift_amount, study_obj, new_study_name, raw_gift_codes
             )
-            return redirect('console', study_name=study_name)
+            return redirect("console", study_name=study_name)
 
         else:
             data["stat"] = "re-render"
             form_package["form"] = form
             form_package["form_name"] = "Update Study"
             form_package["allow_payment"] = study_obj.allow_payment
-            return render(request, "researcher_UI_endalk/rename_study_modal.html", form_package)
-
-
-class AddStudy(LoginRequiredMixin, generic.View):
-    def post(self, request):
-        data = {}
-        researcher = request.user
-        form = AddStudyForm(request.POST, researcher=researcher)
-        if form.is_valid():
-            study_instance = form.save(commit=False)
-            study_name = form.cleaned_data.get("name")
-            age_range = form.cleaned_data.get("age_range")
-            study_instance.active = True
-            data = add_study_fun(
-                study_instance, form, study_name, researcher, age_range
+            return render(
+                request, "researcher_UI_endalk/rename_study_modal.html", form_package
             )
-            return redirect('console', study_name=study_name)
-        else:
-            data["stat"] = "re-render"
-            form_package = {}
-            form_package["form"] = form
-            form_package["form_name"] = "Add New Study"
-            return render(request, "researcher_UI_endalk/add_study_modal.html", form_package)
-
-    def get(self, request):
-        researcher = request.user
-        form = AddStudyForm(researcher=researcher)
-        form_package = {}
-        form_package["form"] = form
-        form_package["form_name"] = "Add New Study"
-        return render(request, "researcher_UI_endalk/add_study_modal.html", form_package)
 
 
-class AddPairedStudy(LoginRequiredMixin, generic.View):
+class AddStudy(LoginRequiredMixin, generic.CreateView):
+    template_name = "researcher_UI_endalk/add_study_modal.html"
+    form_class = AddStudyForm
+
+    def form_valid(self, form):
+        study_instance = form.save(commit=False)
+        study_name = form.cleaned_data.get("name")
+        age_range = form.cleaned_data.get("age_range")
+        study_instance.active = True
+        researcher = self.request.user
+        add_study_fun(study_instance, form, study_name, researcher, age_range)
+        return redirect("console", study_name=study_name)
+
+    def get_initial(self, *args, **kwargs):
+        initial = super(AddStudy, self).get_initial(**kwargs)
+        initial["researcher"] = self.request.user
+        return initial
+
+
+class AddPairedStudy(LoginRequiredMixin, generic.CreateView):
     def post(self, request):
         data = {}
         researcher = request.user
         form = AddPairedStudyForm(request.POST)
         if form.is_valid():
             data = add_paired_study_fun(form, researcher)
-            return redirect('console')
+            print("success")
+            return redirect("console")
         else:
             data["stat"] = "re-render"
             return render(
-                request, "researcher_UI_endalk/add_paired_study_modal.html", {"form": form}
+                request,
+                "researcher_UI_endalk/add_paired_study_modal.html",
+                {"form": form},
             )
 
     def get(self, request):
@@ -163,7 +161,7 @@ class AddPairedStudy(LoginRequiredMixin, generic.View):
         )
 
 
-class AdminNew(LoginRequiredMixin,generic.View):
+class AdminNew(LoginRequiredMixin, generic.CreateView):
     def post(self, request, study_name):
         permitted = study.objects.filter(
             researcher=request.user, name=study_name
@@ -179,16 +177,18 @@ class AdminNew(LoginRequiredMixin,generic.View):
         context["study_name"] = study_name
         context["study_group"] = study_obj.study_group
         context["object"] = study_obj
-        return render(request, "researcher_UI_endalk/administer_new_modal.html", context)
+        return render(
+            request, "researcher_UI_endalk/administer_new_modal.html", context
+        )
 
 
-class AdministerNewParticipant(LoginRequiredMixin,generic.View):
+class AdministerNewParticipant(LoginRequiredMixin, generic.CreateView):
     def post(self, request, username, study_name):
         admin = admin_new_participant_fun(request, username, study_name)
         return redirect(reverse("administer_cdi_form", args=[admin.url_hash]))
 
 
-class AdminNewParent(LoginRequiredMixin,generic.View):
+class AdminNewParent(LoginRequiredMixin, generic.View):
     def get(self, request, username, study_name):
         study_obj, let_through, bypass, source_id = admin_new_parent_fun(
             request, username, study_name
@@ -221,13 +221,13 @@ class AdminNewParent(LoginRequiredMixin,generic.View):
         return redirect(redirect_url)
 
 
-class Overflow(LoginRequiredMixin,generic.View):
+class Overflow(LoginRequiredMixin, generic.View):
     def get(self, request, username, study_name):
         data = overflow_fun(request, username, study_name)
         return render(request, "cdi_forms/overflow.html", data)
 
 
-class ImportData(LoginRequiredMixin,generic.View):
+class ImportData(LoginRequiredMixin, generic.CreateView):
     def post(self, request, study_name):
         data = {}
         study_obj = study.objects.get(researcher=request.user, name=study_name)
@@ -239,7 +239,9 @@ class ImportData(LoginRequiredMixin,generic.View):
             return HttpResponse(json.dumps(data), content_type="application/json")
         else:
             data["stat"] = "re-render"
-            return render(request, "researcher_UI_endalk/import_data.html", {"form": form})
+            return render(
+                request, "researcher_UI_endalk/import_data.html", {"form": form}
+            )
 
     def get(self, request, study_name):
         study_obj = study.objects.get(researcher=request.user, name=study_name)
@@ -277,35 +279,9 @@ class EditAdministrationView(LoginRequiredMixin, StudyOwnerMixin, UpdateView):
         return super(EditAdministrationView, self).form_valid(form)
 
 
-class EditLocalLabIdView(LoginRequiredMixin, StudyOwnerMixin, UpdateView):
-    model = administration
-    form_class = EditLocalLabIDForm
-
-    def get_success_url(self):
-        return reverse("console", kwargs={"study_name": self.object.study.name})
-
-    def get_context_data(self, **kwargs):
-        ctx = super(EditLocalLabIdView, self).get_context_data(**kwargs)
-        self.study = ctx["study"] = self.object.study
-        return ctx
-
-class EditLocalLabIdView(LoginRequiredMixin, StudyOwnerMixin, UpdateView):
-    model = administration
-    form_class = EditLocalLabIDForm
-
-    def get_success_url(self):
-        return reverse("console", kwargs={"study_name": self.object.study.name})
-
-    def get_context_data(self, **kwargs):
-        ctx = super(EditLocalLabIdView, self).get_context_data(**kwargs)
-        self.study = ctx["study"] = self.object.study
-        return ctx
-
-
 class EditStudyView(LoginRequiredMixin, generic.UpdateView):
     model = administration
     form_class = StudyFormForm
-
 
     def get_context_data(self, **kwargs):
         ctx = super(EditStudyView, self).get_context_data(**kwargs)
@@ -314,25 +290,13 @@ class EditStudyView(LoginRequiredMixin, generic.UpdateView):
 
     def form_valid(self, form):
         form.save()
-        context = get_helper(self.request,  self.object.study.name, 20)
+        context = get_helper(self.request, self.object.study.name, 20)
         return render(self.request, "researcher_UI_endalk/interface.html", context)
 
     def get(self, request, pk):
         obj = administration.objects.get(pk=pk)
-        context = get_helper(self.request,  obj.study.name, 20)
+        context = get_helper(self.request, obj.study.name, 20)
         return render(self.request, "researcher_UI_endalk/interface.html", context)
-
-class EditOptOutView(LoginRequiredMixin, StudyOwnerMixin, UpdateView):
-    model = administration
-    form_class = EditOptOutForm
-
-    def get_success_url(self):
-        return reverse("console", kwargs={"study_name": self.object.study.name})
-
-    def get_context_data(self, **kwargs):
-        ctx = super().get_context_data(**kwargs)
-        self.study = ctx["study"] = self.object.study
-        return ctx
 
 
 class AjaxDemographicForms(generic.View):
