@@ -45,7 +45,7 @@ def get_helper(request, study_name, num_per_page):
             RequestConfig(request, paginate={"per_page": num_per_page}).configure(
                 administration_table
             )
-            context["current_study"] = current_study.name
+            context["current_study"] = current_study
             context["study"] = current_study
             context["num_per_page"] = num_per_page
             context["study_instrument"] = current_study.instrument.verbose_name

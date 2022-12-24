@@ -142,7 +142,7 @@
         <tr>
         <!--Modal-->
         <div class="modal"  id="{{row.record.pk}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <form class="login-card"  action="{% url 'edit_study_new' pk=row.record.pk %}"  method="post">
+            <form class="login-card"  action="{% url 'researcher_ui:edit_study_new' pk=row.record.pk %}"  method="post">
                 {% csrf_token %}
  
                  <div class="modal-dialog" role="document">

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .forms import *
+from .forms_endalk import *
 from .models import researcher, study, administration
 import json
 from .mixins import StudyOwnerMixin
@@ -25,96 +25,81 @@ from researcher_UI.utils.import_data import import_data_fun
 
 
 class Console(LoginRequiredMixin, generic.CreateView):
+    model = study
+    template_name = "researcher_UI_endalk/interface.html"
+
+    def get_context_data(self, *args, **kwargs):
+        studies = study.objects.filter(
+            researcher=self.request.user, active=True
+        ).order_by("id")
+        context = {
+            "studies": studies,
+        }
+        return context
+
     def post(self, request, study_name=None):
         permitted = study.objects.filter(
             researcher=request.user, name=study_name
         ).exists()
+
         if permitted:
             study_obj = study.objects.get(researcher=request.user, name=study_name)
             ids = request.POST.getlist("select_col")
             if all([x.isdigit() for x in ids]):
                 """Check that the administration numbers are all numeric"""
                 res = post_condition(request, ids, study_obj)
-                if res == None:
-                    context = get_helper(request, study_name, 20)
-                    return render(
-                        request, "researcher_UI_endalk/interface.html", context
-                    )
                 return res
 
-    def get(self, request, study_name=None, num_per_page=20):
-        context = get_helper(request, study_name, num_per_page)
-        return render(request, "researcher_UI_endalk/interface.html", context)
+
+class StudyDetailView(LoginRequiredMixin, generic.DetailView):
+    model = study
+    template_name = "researcher_UI_endalk/interface.html"
+    pk_url_kwarg = "pk"
+
+    def get_context_data(self, *args, **kwargs):
+        num_per_page = 20
+        context = get_helper(self.request, self.get_object().name, num_per_page)
+        return context
 
 
-class RenameStudy(LoginRequiredMixin, generic.CreateView):
-    def get(self, request, study_name):
-        form_package = {}
-        study_obj = study.objects.get(researcher=request.user, name=study_name)
+class RenameStudy(LoginRequiredMixin, generic.UpdateView):
+    model = study
+    template_name = "researcher_UI_endalk/rename_study_modal.html"
+    form_class = RenameStudyForm
+
+    def get_success_url(self):
+        return reverse("researcher_ui:console", kwargs={"study_name": self.object.name})
+
+    def get_context_data(self, **kwargs):
+        context = super(RenameStudy, self).get_context_data(**kwargs)
+        study_obj = self.get_object()
         age_range = NumericRange(study_obj.min_age, study_obj.max_age)
-        form = RenameStudyForm(
-            instance=study_obj, old_study_name=study_obj.name, age_range=age_range
-        )
-        form_package["form"] = form
-        form_package["form_name"] = "Update Study"
-        form_package["allow_payment"] = study_obj.allow_payment
-        form_package["min_age"] = age_range.lower
-        form_package["max_age"] = age_range.upper
-        form_package["study_obj"] = study_obj
-        return render(
-            request, "researcher_UI_endalk/rename_study_modal.html", form_package
-        )
+        context["form_name"] = "Update Study"
+        context["allow_payment"] = study_obj.allow_payment
+        context["min_age"] = age_range.lower
+        context["max_age"] = age_range.upper
+        context["study_obj"] = study_obj
+        return context
 
-    def post(self, request, study_name):
-        data = {}
-        form_package = {}
-        raw_gift_codes = None
+    def form_valid(self, form):
+        raw_gift_codes = form.cleaned_data.get("gift_codes")
+        raw_gift_amount = form.cleaned_data.get("gift_amount")
+        raw_test_period = form.cleaned_data.get("test_period")
+        new_study_name = form.cleaned_data.get("name")
+        new_age_range = form.cleaned_data.get("age_range")
+        study_obj = self.object
 
-        study_obj = study.objects.get(researcher=request.user, name=study_name)
-        age_range = NumericRange(study_obj.min_age, study_obj.max_age)
-        form = RenameStudyForm(
-            study_name, request.POST, instance=study_obj, age_range=age_range
-        )
-
-        if form.is_valid():
-            researcher = request.user
-            new_study_name = form.cleaned_data.get("name")
-            raw_gift_codes = form.cleaned_data.get("gift_codes")
-            raw_gift_amount = form.cleaned_data.get("gift_amount")
-            raw_test_period = form.cleaned_data.get("test_period")
-            new_age_range = form.cleaned_data.get("age_range")
-            study_obj.min_age = new_age_range.lower
-            study_obj.max_age = new_age_range.upper
-            study_obj = form.save(commit=False)
-
-            if raw_test_period >= 1 and raw_test_period <= 28:
-                study_obj.test_period = raw_test_period
-            else:
-                study_obj.test_period = 14
-
-            if new_study_name != study_name:
-                is_existed = study.objects.filter(
-                    researcher=researcher, name=new_study_name
-                ).exists()
-
-                if is_existed or "/" in new_study_name:
-                    study_obj.name = study_name
-
-            study_obj.save()
-            new_study_name = study_obj.name
-            data = raw_gift_code_fun(
-                raw_gift_amount, study_obj, new_study_name, raw_gift_codes
-            )
-            return redirect("console", study_name=study_name)
-
+        if raw_test_period >= 1 and raw_test_period <= 28:
+            study_obj.test_period = raw_test_period
         else:
-            data["stat"] = "re-render"
-            form_package["form"] = form
-            form_package["form_name"] = "Update Study"
-            form_package["allow_payment"] = study_obj.allow_payment
-            return render(
-                request, "researcher_UI_endalk/rename_study_modal.html", form_package
-            )
+            study_obj.test_period = 14
+
+        study_obj.min_age = new_age_range.lower
+        study_obj.max_age = new_age_range.upper
+        study_obj.save()
+
+        raw_gift_code_fun(raw_gift_amount, study_obj, new_study_name, raw_gift_codes)
+        return super().form_valid(form)
 
 
 class AddStudy(LoginRequiredMixin, generic.CreateView):
@@ -130,38 +115,30 @@ class AddStudy(LoginRequiredMixin, generic.CreateView):
         add_study_fun(study_instance, form, study_name, researcher, age_range)
         return redirect("console", study_name=study_name)
 
-    def get_initial(self, *args, **kwargs):
-        initial = super(AddStudy, self).get_initial(**kwargs)
-        initial["researcher"] = self.request.user
-        return initial
+    def get_context_data(self, **kwargs):
+        context = super(AddStudy, self).get_context_data(**kwargs)
+        context["researcher"] = self.request.user
+        return context
 
 
 class AddPairedStudy(LoginRequiredMixin, generic.CreateView):
-    def post(self, request):
-        data = {}
-        researcher = request.user
-        form = AddPairedStudyForm(request.POST)
-        if form.is_valid():
-            data = add_paired_study_fun(form, researcher)
-            print("success")
-            return redirect("console")
-        else:
-            data["stat"] = "re-render"
-            return render(
-                request,
-                "researcher_UI_endalk/add_paired_study_modal.html",
-                {"form": form},
-            )
+    model = study
+    form_class = AddPairedStudyForm
+    template_name = "researcher_UI_endalk/add_paired_study_modal.html"
 
-    def get(self, request):
-        researcher = request.user
-        form = AddPairedStudyForm(researcher=researcher)
-        return render(
-            request, "researcher_UI_endalk/add_paired_study_modal.html", {"form": form}
-        )
+    def form_valid(self, form):
+        add_paired_study_fun(form, self.request.user)
+        return redirect(reverse("researcher_ui:console"))
+
+    def get_context_data(self, **kwargs):
+        context = super(AddPairedStudy, self).get_context_data(**kwargs)
+        researcher = self.request.user
+        context["researcher"] = researcher
+        return context
 
 
-class AdminNew(LoginRequiredMixin, generic.CreateView):
+class AdminNew(LoginRequiredMixin, generic.UpdateView):
+
     def post(self, request, study_name):
         permitted = study.objects.filter(
             researcher=request.user, name=study_name
@@ -171,6 +148,7 @@ class AdminNew(LoginRequiredMixin, generic.CreateView):
         return HttpResponse(json.dumps(data), content_type="application/json")
 
     def get(self, request, study_name):
+        print("========================xaxaxa")
         context = {}
         study_obj = study.objects.get(researcher=request.user, name=study_name)
         context["username"] = request.user.username

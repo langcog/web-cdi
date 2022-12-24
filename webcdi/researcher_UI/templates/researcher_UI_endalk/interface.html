@@ -9,19 +9,21 @@
     <meta name="author" content="Henry Mehta">
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" ></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js">
-    <script src="//code.jquery.com/jquery-1.11.3.js"></script>
-    <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
-    <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'researcher_UI/console.css' %}" />
+    <link rel="stylesheet" href="{% static 'researcher_UI/table.css' %}" />
+
+    <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.3.js"></script>
+    <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+    
     <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
     <script src="{% static 'researcher_UI/django_modal_forms.js' %}"></script>
     <script src="{% static 'researcher_UI/researcher_UI.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'researcher_UI/console.css' %}" />
-    <link rel="stylesheet" href="{% static 'researcher_UI/table.css' %}" />
     <script src="{% static 'cdi_forms/moment.js' %}"></script>
 
 </head>
@@ -67,7 +69,7 @@
    }
     nav.primary-navigation li a {
         color: white;
-   }
+    }
     nav.primary-navigation li a:hover {
         color: #3ca0e7;
    }
@@ -83,8 +85,6 @@
         display: none;
         background: white;
         width:100px;
-        
-        
    }
     nav.primary-navigation ul li:hover > ul, nav.primary-navigation ul li ul:hover {
         visibility: visible;
@@ -122,8 +122,7 @@
         border-radius: 10px;
         overflow: scroll;
         background-color: white;
-  }
-    
+  };
     
 </style>
 <!-- Researcher interface -->
@@ -151,7 +150,7 @@
                         <div class='col-md-12'>
                 			<div class="row">
                                 <div class='col'>
-                                    <a href="{% url 'researcher_add_instruments_endalk' request.user.researcher.id %}" type="button" type="button" style='width:100%;' class="btn btn-primary">Add Instruments</a>
+                                    <a href="{% url 'researcher_ui:researcher_add_instruments_endalk' request.user.researcher.id %}" type="button" type="button" style='width:100%;' class="btn btn-primary">Add Instruments</a>
                                 </div>
                                 <div class="col">
                 				    <a id="id_new_study" href="/endalk/add_study" type="button" style='width:100%;' class="btn btn-primary">New Study</a>
@@ -166,7 +165,7 @@
                     					<select  style = 'width:100%;' id="study-selector" class="form-control" onchange="location = encodeURI(this.options[this.selectedIndex].value);">
                     					    <option value="/endalk/" selected disabled>Please select study</option>
                     					    {% for study in studies %}
-                    						  <option value="/endalk/study/{{ study }}/"{% if study.name == current_study %} selected="" {% endif %}>{{ study }}</option>
+                    						  <option value="{% url 'researcher_ui:console_study' pk=study.pk %}"{% if study.pk == current_study.pk %} selected="" {% endif %}>{{ study }}</option>
                     					    {% endfor %}
                     					</select> 
                 				    </div>
@@ -221,7 +220,7 @@
                                         </div>                                            
                                     </div>
                                     <div class="col-3">
-                                        <a id="id_update_study" type="button" class="btn btn-secondary btn-block" href="/endalk/study/{{ current_study }}/rename_study/" >Update Study</a>
+                                        <a id="id_update_study" type="button" class="btn btn-secondary btn-block" href="{% url 'researcher_ui:rename_study' pk=current_study.pk %}" >Update Study</a>
                                     </div>
                                     <div class="col-3">
                                         <button type="submit" class="btn btn-secondary btn-block" name='delete-study' id='delete-study' onclick='return confirm("Are you sure you want to delete the entire study and all the data associated with it?");' >Delete Study</button>
@@ -238,7 +237,7 @@
                 <div id='administration-form' class="form-inline">
                     {% csrf_token %}
                         <div>
-                            <form method='post' action = '/endalk/study/{{ current_study }}/'  class="row  d-flex justify-content-center">
+                            <form method='post' action = '{% url "researcher_ui:administer_new" pk=current_study.pk %}'  class="row  d-flex justify-content-center">
                                 <div class='col-md-3'>
                                     <button style='width:100%; height: 100%;' class="btn btn-secondary selected-btn btn-block" id='add-selected' type='submit' name='administer-selected' value='administer-selected' disabled  >Re-administer Participants</button>
                                 </div>
