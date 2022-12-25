@@ -422,11 +422,15 @@ class RenameStudyForm(BetterModelForm):
         exclude = ["study_group", "researcher", "instrument", "active", "demographic"]
 
 
-class ImportDataForm(BetterForm):
+class ImportDataForm(forms.ModelForm):
     study = forms.ModelChoiceField(
         queryset=study.objects.all(), empty_label="(choose from the list)"
-    )  # Study instrument (CANNOT BE CHANGED LATER)
+    )
     imported_file = forms.FileField()
+
+    class Meta:
+        model = study
+        fields = ["study", "imported_file"]
 
     # Form validation. Form is passed automatically to views.py for higher level checking.
     def clean(self):
@@ -442,10 +446,10 @@ class ImportDataForm(BetterForm):
         self.helper = FormHelper()
         self.helper.form_id = "import-data"
         self.helper.form_class = "form-horizontal"
-        # self.helper.template = PROJECT_ROOT + '/../cdi_forms/templates/bootstrap3/whole_uni_form.html'
         self.helper.label_class = "col-3"
         self.helper.field_class = "col-9"
         self.helper.form_method = "post"
+
         if self.researcher:
             self.fields["study"] = forms.ModelChoiceField(
                 queryset=study.objects.filter(researcher=self.researcher),
@@ -504,4 +508,3 @@ class StudyFormForm(forms.ModelForm):
     class Meta:
         model = administration
         fields = ["id", "subject_id", "local_lab_id", "opt_out"]
-
