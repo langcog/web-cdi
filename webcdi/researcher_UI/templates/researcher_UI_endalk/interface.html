@@ -150,13 +150,13 @@
                         <div class='col-md-12'>
                 			<div class="row">
                                 <div class='col'>
-                                    <a href="{% url 'researcher_ui:researcher_add_instruments_endalk' request.user.researcher.id %}" type="button" type="button" style='width:100%;' class="btn btn-primary">Add Instruments</a>
+                                    <a href="{% url 'researcher_ui:researcher_add_instruments' pk=request.user.researcher.pk %}" type="button" type="button" style='width:100%;' class="btn btn-primary">Add Instruments</a>
                                 </div>
                                 <div class="col">
-                				    <a id="id_new_study" href="/endalk/add_study" type="button" style='width:100%;' class="btn btn-primary">New Study</a>
+                				    <a id="id_new_study" href="{% url 'researcher_ui:add_study' %}" type="button" style='width:100%;' class="btn btn-primary">New Study</a>
                                 </div>
                                 <div class="col">
-                                    <a style='width:100%; margin-bottom: 5%;' class="btn btn-primary"  href="/endalk/add_paired_study">Group Study</a>
+                                    <a style='width:100%; margin-bottom: 5%;' class="btn btn-primary"  href="{% url 'researcher_ui:add_paired_study' %}">Group Study</a>
                 			    </div>
                             </div>
                             <div class="row">
@@ -198,7 +198,7 @@
                                             <span class="sr-only">Toggle Dropdown</span>
                                           </button>
                                           <div class="dropdown-menu">
-                                            <button type="button" class="dropdown-item btn btn-secondary btn-block"   onclick = "modal_form('/endalk/study/{{ current_study|urlencode }}/import_data/')" >Import Spreadsheet Data</button>
+                                            <button type="button" class="dropdown-item btn btn-secondary btn-block"   onclick = "modal_form('/endalk/study/{{ current_study.pk|urlencode }}/import_data/')" >Import Spreadsheet Data</button>
                                           </div>
                                         </div>
 
@@ -237,7 +237,7 @@
                 <div id='administration-form' class="form-inline">
                     {% csrf_token %}
                         <div>
-                            <form method='post' action = '{% url "researcher_ui:administer_new" pk=current_study.pk %}'  class="row  d-flex justify-content-center">
+                            <form method='post' action = '/endalk/study/{{ current_study }}/'  class="row  d-flex justify-content-center">
                                 <div class='col-md-3'>
                                     <button style='width:100%; height: 100%;' class="btn btn-secondary selected-btn btn-block" id='add-selected' type='submit' name='administer-selected' value='administer-selected' disabled  >Re-administer Participants</button>
                                 </div>
