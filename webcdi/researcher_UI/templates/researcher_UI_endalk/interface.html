@@ -142,8 +142,13 @@
             </ul>
         </nav>
 
-        <div class='login-card' style="width:100%; min-height:200px;" >
-            <form method='post'  action='{% url "researcher_ui:console_study" pk=current_study.pk %}' id='study-form'>
+        <div class='login-card' style="width:100%; min-height:200px;">
+            {% if current_study %}
+                <form method='post'  action='{% url "researcher_ui:console_study" pk=current_study.pk %}' id='study-form'>
+            {% else %}
+                <form method='post'  action='' id='study-form'>
+            {% endif %}
+
            		{% csrf_token %}
                 <div style="width:100%;" class="col-md-12">
                     <legend>Study</legend>
