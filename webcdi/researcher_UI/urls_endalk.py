@@ -5,35 +5,22 @@ from . import views_endalk as views
 app_name = "researcher_ui"
 
 urlpatterns = [
-    url(r"^$", views.Console.as_view(), name="console"),  # progessing
+    path("", views.Console.as_view(), name="console"),
     path(
         "study/<int:pk>/detail", views.StudyDetailView.as_view(), name="console_study"
     ),
-    url(r"^add_study/$", views.AddStudy.as_view(), name="add_study"),
-    url(
-        r"^add_paired_study/$", views.AddPairedStudy.as_view(), name="add_paired_study"
-    ),
-    # url(
-    #     r"^study/(?P<study_name>[^/]+)/administer_new/$",
-    #     views.AdminNew.as_view(),
-    #     name="administer_new",
-    # ),
+    path("add_study/", views.AddStudy.as_view(), name="add_study"),
+    path("add_paired_study/", views.AddPairedStudy.as_view(), name="add_paired_study"),
     path(
         "study/<int:pk>/administer_new/",
         views.AdminNew.as_view(),
         name="administer_new",
     ),
-    
-    url(
-        r"^study/(?P<study_name>[^/]+)/import_data/$",
+    path(
+        "study/<int:pk>/import_data/",
         views.ImportData.as_view(),
         name="import_data",
     ),
-    # url(
-    #     r"^study/(?P<study_name>[^/]+)/rename_study/$",
-    #     views.RenameStudy.as_view(),
-    #     name="rename_study",
-    # ),
     path(
         "study/<int:pk>/rename_study/", views.RenameStudy.as_view(), name="rename_study"
     ),
@@ -52,19 +39,18 @@ urlpatterns = [
         views.Overflow.as_view(),
         name="overflow",
     ),
-    url(
-        r"^edit-administration/(?P<pk>[0-9]+)/$",
-        views.EditAdministrationView.as_view(),
-        name="edit-administration",
+    path(
+        "ajax/get_demographic_forms/",
+        views.AjaxDemographicForms.as_view(),
+        name="get_demographic_forms",
     ),
-    url(r"^ajax/get_demographic_forms/$", views.AjaxDemographicForms.as_view()),
     path(
         "researcher/<int:pk>/",
         views.ResearcherAddInstruments.as_view(),
-        name="researcher_add_instruments_endalk",
+        name="researcher_add_instruments",
     ),
-    url(
-        r"^edit-study-new/(?P<pk>[0-9]+)/$",
+    path(
+        "edit-study-new/<int:pk>/",
         views.EditStudyView.as_view(),
         name="edit_study_new",
     ),
