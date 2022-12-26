@@ -18,8 +18,8 @@ def admin_new_fun(request, permitted, study_name, study_obj):
             else None
         )
         if (
-            params["new-subject-ids"][0] == ""
-            and params["autogenerate-count"][0] == ""
+            params["new_subject_ids"][0] == ""
+            and params["autogenerate_count"][0] == ""
             and raw_ids_csv is None
         ):
             validity = False
@@ -61,16 +61,16 @@ def admin_new_fun(request, permitted, study_name, study_obj):
                             "error_message"
                         ] += "Non integer subject ids\n"  # Save this error message
 
-        if params["new-subject-ids"][0] != "":
-            subject_ids = re.split("[,;\s\t\n]+", str(params["new-subject-ids"][0]))
+        if params["new_subject_ids"][0] != "":
+            subject_ids = re.split("[,;\s\t\n]+", str(params["new_subject_ids"][0]))
             subject_ids = filter(None, subject_ids)
             subject_ids_numbers = all([x.isdigit() for x in subject_ids])
             if not subject_ids_numbers:
                 validity = False
                 data["error_message"] += "Non integer subject ids\n"
 
-        if params["autogenerate-count"][0] != "":
-            autogenerate_count = params["autogenerate-count"][0]
+        if params["autogenerate_count"][0] != "":
+            autogenerate_count = params["autogenerate_count"][0]
             autogenerate_count_isdigit = autogenerate_count.isdigit()
             if not autogenerate_count_isdigit:
                 validity = False
@@ -102,11 +102,11 @@ def admin_new_fun(request, permitted, study_name, study_obj):
                             + datetime.timedelta(days=test_period),
                         )
 
-            if params["new-subject-ids"][0] != "":
-                subject_ids = re.split("[,;\s\t\n]+", str(params["new-subject-ids"][0]))
+            if params["new_subject_ids"][0] != "":
+                subject_ids = re.split("[,;\s\t\n]+", str(params["new_subject_ids"][0]))
                 subject_ids = list(filter(None, subject_ids))
                 for sid in subject_ids:
-                    new_hash = random_url_generator()
+                    new_hash = random_url_generator.random_url_generator()
                     old_rep = administration.objects.filter(
                         study=study_obj, subject_id=sid
                     ).count()
@@ -123,8 +123,8 @@ def admin_new_fun(request, permitted, study_name, study_obj):
                             + datetime.timedelta(days=test_period),
                         )
 
-            if params["autogenerate-count"][0] != "":
-                autogenerate_count = int(params["autogenerate-count"][0])
+            if params["autogenerate_count"][0] != "":
+                autogenerate_count = int(params["autogenerate_count"][0])
                 if study_obj.study_group:
                     related_studies = study.objects.filter(
                         researcher=study_obj.researcher,
@@ -140,7 +140,7 @@ def admin_new_fun(request, permitted, study_name, study_obj):
                 for sid in range(
                     max_subject_id + 1, max_subject_id + autogenerate_count + 1
                 ):
-                    new_hash = random_url_generator()
+                    new_hash = random_url_generator.random_url_generator()
                     administration.objects.create(
                         study=study_obj,
                         subject_id=sid,
