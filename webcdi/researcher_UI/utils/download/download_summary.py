@@ -36,7 +36,7 @@ def download_summary(request, study_obj, administrations=None):
     admin_header = format_admin_header(study_obj)
 
     # Fetch background data variables
-    background_header = get_background_header(study_obj)
+    background_header = get_background_header()
 
     # Format background data responses for pandas dataframe and eventual printing
     background_data = BackgroundInfo.objects.values().filter(
@@ -65,7 +65,7 @@ def download_summary(request, study_obj, administrations=None):
     melted_scores = get_study_scores(administrations)
     if len(melted_scores) < 1:
         return HttpResponseServerError(f"There are no data in the study(ies) to report")
-        
+
     score_header = get_score_headers(study_obj)
     melted_scores.set_index("administration_id")
     missing_columns = list(set(score_header) - set(melted_scores.columns))
