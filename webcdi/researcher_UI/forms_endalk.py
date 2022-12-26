@@ -508,3 +508,12 @@ class StudyFormForm(forms.ModelForm):
     class Meta:
         model = administration
         fields = ["id", "subject_id", "local_lab_id", "opt_out"]
+
+
+class AdminNewForm(forms.ModelForm):
+    new_subject_ids = forms.CharField()
+    autogenerate_count = forms.CharField()
+
+    class Meta:
+        model = study
+        fields = ("new_subject_ids", "autogenerate_count")
