@@ -27,7 +27,6 @@ def download_cdi_format(request, study_obj, administrations=None):
         )
 
     r = re.compile("item_[0-9]{1,3}")
-
     model_header = list(filter(r.match, get_model_header(study_obj.instrument.name)))
     admin_header = [
         "study_name",
@@ -148,10 +147,7 @@ def download_cdi_format(request, study_obj, administrations=None):
             "url_hash": "link",
         }
     )
-    admin_data[
-        "study_name"
-    ] = study_obj.name  # Replace study ID number with actual study name
-
+    admin_data["study_name"] = study_obj.name
     background_answers = pd.merge(
         new_background, new_answers, how="outer", on="administration_id"
     )

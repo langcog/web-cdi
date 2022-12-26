@@ -237,7 +237,7 @@
                 <div id='administration-form' class="form-inline">
                     {% csrf_token %}
                         <div>
-                            <form method='post' action = '/endalk/study/{{ current_study }}/'  class="row  d-flex justify-content-center">
+                            <form method='post' action='{% url "researcher_ui:console_study" pk=current_study.pk %}'  class="row  d-flex justify-content-center">
                                 <div class='col-md-3'>
                                     <button style='width:100%; height: 100%;' class="btn btn-secondary selected-btn btn-block" id='add-selected' type='submit' name='administer-selected' value='administer-selected' disabled  >Re-administer Participants</button>
                                 </div>
@@ -260,8 +260,7 @@
                                 <div class='col-md-3'>
                                         <button style='width:100%; height: 100%;' class="btn btn-secondary selected-btn btn-block" id='delete-selected' type='submit' name='delete-selected' value='administer-selected' disabled onclick='return confirm("Are you sure you want to delete the selected administration record and all the data associated with it?");' >Delete Selected Data</button>
                                 </div>
-                            </form>
-                       
+                                                       
                             <legend> Data </legend>
                             <div class='col-md-12'>
                                 {% include "researcher_UI_endalk/table.html" with table=study_administrations %}
@@ -275,6 +274,8 @@
                                     });
                                 </script>
                             </div>
+                            </form>
+
                         </div>
                     </div>
             </div>
