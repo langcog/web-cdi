@@ -7,7 +7,7 @@ app_name = "researcher_ui"
 urlpatterns = [
     path("", views.Console.as_view(), name="console"),
     path(
-        "study/<int:pk>/detail", views.StudyDetailView.as_view(), name="console_study"
+        "study/<int:pk>/detail/", views.StudyDetailView.as_view(), name="console_study"
     ),
     path("add_study/", views.AddStudy.as_view(), name="add_study"),
     path("add_paired_study/", views.AddPairedStudy.as_view(), name="add_paired_study"),
