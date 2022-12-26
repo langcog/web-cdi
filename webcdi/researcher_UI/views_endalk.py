@@ -24,7 +24,7 @@ from researcher_UI.utils.overflow import overflow_fun
 from researcher_UI.utils.import_data import import_data_fun
 
 
-class Console(LoginRequiredMixin, generic.CreateView):
+class Console(LoginRequiredMixin, generic.ListView):
     model = study
     template_name = "researcher_UI_endalk/interface.html"
 
@@ -32,9 +32,7 @@ class Console(LoginRequiredMixin, generic.CreateView):
         studies = study.objects.filter(
             researcher=self.request.user, active=True
         ).order_by("id")
-        context = {
-            "studies": studies,
-        }
+        context = {"studies": studies}
         return context
 
 
@@ -118,7 +116,7 @@ class AddStudy(LoginRequiredMixin, generic.CreateView):
         study_instance.active = True
         researcher = self.request.user
         add_study_fun(study_instance, form, study_name, researcher, age_range)
-        return redirect("console", study_name=study_name)
+        return redirect(reverse("researcher_ui:console"))
 
     def get_context_data(self, **kwargs):
         context = super(AddStudy, self).get_context_data(**kwargs)
@@ -167,24 +165,7 @@ class AdminNew(LoginRequiredMixin, generic.UpdateView):
 
         study_obj = study.objects.get(researcher=researcher, name=study_obj.name)
         data = admin_new_fun(self.request, permitted, study_obj.name, study_obj)
-
         return HttpResponse(json.dumps(data), content_type="application/json")
-
-    def form_invalid(self, form):
-        print("=================================")
-        print(form.errors)
-        return super().form_invalid(form)
-
-    # def post(self, request, *args, **kwargs):
-    #     print("-----------------------------------")
-
-    #     study_obj = self.get_object()
-    #     permitted = study.objects.filter(
-    #         researcher=request.user, name=study_obj.name
-    #     ).exists()
-    #     study_obj = study.objects.get(researcher=request.user, name=study_obj.name)
-    #     data = admin_new_fun(request, permitted, study_obj.name, study_obj)
-    #     return HttpResponse(json.dumps(data), content_type="application/json")
 
 
 class AdministerNewParticipant(LoginRequiredMixin, generic.CreateView):
@@ -253,7 +234,7 @@ class ImportData(LoginRequiredMixin, generic.UpdateView):
         return context
 
 
-class EditStudyView(LoginRequiredMixin, generic.UpdateView):
+class EditStudyView(LoginRequiredMixin, StudyOwnerMixin, generic.UpdateView):
     model = administration
     form_class = StudyFormForm
 
@@ -290,4 +271,4 @@ class ResearcherAddInstruments(UpdateView):
     template_name = "researcher_UI_endalk/researcher_form.html"
 
     def get_success_url(self):
-        return reverse("console")
+        return redirect(reverse("researcher_ui:console"))
