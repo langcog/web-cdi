@@ -6,7 +6,7 @@ from researcher_UI.models import (
     administration,
     administration_data,
     get_background_header,
-    InstrumentScore
+    InstrumentScore,
 )
 from cdi_forms.models import BackgroundInfo
 
@@ -46,7 +46,7 @@ def download_data(request, study_obj, administrations=None):  # Download study d
     admin_header = format_admin_header(study_obj)
 
     # Fetch background data variables
-    background_header = get_background_header(study_obj)
+    background_header = get_background_header()
 
     try:
         answers = administration_data.objects.values(
