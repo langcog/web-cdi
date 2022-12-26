@@ -37,29 +37,29 @@ class Console(LoginRequiredMixin, generic.CreateView):
         }
         return context
 
-    def post(self, request, study_name=None):
-        permitted = study.objects.filter(
-            researcher=request.user, name=study_name
-        ).exists()
 
-        if permitted:
-            study_obj = study.objects.get(researcher=request.user, name=study_name)
-            ids = request.POST.getlist("select_col")
-            if all([x.isdigit() for x in ids]):
-                """Check that the administration numbers are all numeric"""
-                res = post_condition(request, ids, study_obj)
-                return res
-
-
-class StudyDetailView(LoginRequiredMixin, generic.DetailView):
+class StudyDetailView(LoginRequiredMixin, generic.CreateView):
     model = study
     template_name = "researcher_UI_endalk/interface.html"
-    pk_url_kwarg = "pk"
 
     def get_context_data(self, *args, **kwargs):
         num_per_page = 20
         context = get_helper(self.request, self.get_object().name, num_per_page)
         return context
+
+    def post(self, request, *args, **kwargs):
+        study_obj = self.get_object()
+        permitted = study.objects.filter(
+            researcher=request.user, name=study_obj.name
+        ).exists()
+        if permitted:
+            study_obj = study.objects.get(researcher=request.user, name=study_obj.name)
+            ids = request.POST.getlist("select_col")
+
+            if all([x.isdigit() for x in ids]):
+                """Check that the administration numbers are all numeric"""
+                res = post_condition(request, ids, study_obj)
+                return res
 
 
 class RenameStudy(LoginRequiredMixin, generic.UpdateView):
@@ -68,7 +68,7 @@ class RenameStudy(LoginRequiredMixin, generic.UpdateView):
     form_class = RenameStudyForm
 
     def get_success_url(self):
-        return reverse("researcher_ui:console", kwargs={"study_name": self.object.name})
+        return reverse("researcher_ui:console_study", kwargs={"pk": self.object.pk})
 
     def get_context_data(self, **kwargs):
         context = super(RenameStudy, self).get_context_data(**kwargs)
@@ -138,7 +138,6 @@ class AddPairedStudy(LoginRequiredMixin, generic.CreateView):
 
 
 class AdminNew(LoginRequiredMixin, generic.UpdateView):
-
     def post(self, request, study_name):
         permitted = study.objects.filter(
             researcher=request.user, name=study_name
@@ -200,61 +199,30 @@ class AdminNewParent(LoginRequiredMixin, generic.View):
 
 
 class Overflow(LoginRequiredMixin, generic.View):
+    """
+    TODO
+    I wanted to change to detailview, but I couldn't find the page to test after doing that.
+    """
+
     def get(self, request, username, study_name):
         data = overflow_fun(request, username, study_name)
         return render(request, "cdi_forms/overflow.html", data)
 
 
-class ImportData(LoginRequiredMixin, generic.CreateView):
-    def post(self, request, study_name):
-        data = {}
-        study_obj = study.objects.get(researcher=request.user, name=study_name)
-        form = ImportDataForm(
-            request.POST, request.FILES, researcher=request.user, study=study_obj
-        )
-        if form.is_valid():
-            data = import_data_fun(request, study_obj)
-            return HttpResponse(json.dumps(data), content_type="application/json")
-        else:
-            data["stat"] = "re-render"
-            return render(
-                request, "researcher_UI_endalk/import_data.html", {"form": form}
-            )
-
-    def get(self, request, study_name):
-        study_obj = study.objects.get(researcher=request.user, name=study_name)
-        form = ImportDataForm(researcher=request.user, study=study_obj)
-        return render(request, "researcher_UI_endalk/import_data.html", {"form": form})
-
-
-class EditAdministrationView(LoginRequiredMixin, StudyOwnerMixin, UpdateView):
-    model = administration
-    form_class = EditSubjectIDForm
-    old_subject_id = None
-
-    def get_success_url(self):
-        return reverse("console", kwargs={"study_name": self.object.study.name})
-
-    def get_context_data(self, **kwargs):
-        ctx = super(EditAdministrationView, self).get_context_data(**kwargs)
-        self.study = ctx["study"] = self.object.study
-        return ctx
-
-    def post(self, request, *args, **kwargs):
-        form = EditSubjectIDForm(self.request.POST)
-        if form.is_valid():
-            self.old_subject_id = self.get_object().subject_id
-        return super(EditAdministrationView, self).post(request, *args, **kwargs)
+class ImportData(LoginRequiredMixin, generic.UpdateView):
+    model = study
+    form_class = ImportDataForm
+    template_name = "researcher_UI_endalk/import_data.html"
 
     def form_valid(self, form):
-        instances = administration.objects.filter(
-            study=self.object.study, subject_id=self.old_subject_id
-        )
-        new_subject_id = int(self.request.POST["subject_id"])
-        for instance in instances:
-            instance.subject_id = new_subject_id
-            instance.save()
-        return super(EditAdministrationView, self).form_valid(form)
+        data = import_data_fun(self.request, self.get_object())
+        return HttpResponse(json.dumps(data), content_type="application/json")
+
+    def get_context_data(self, **kwargs):
+        context = super(ImportData, self).get_context_data(**kwargs)
+        study_obj = self.get_object()
+        context["form"] = ImportDataForm(researcher=self.request.user, study=study_obj)
+        return context
 
 
 class EditStudyView(LoginRequiredMixin, generic.UpdateView):
@@ -277,7 +245,7 @@ class EditStudyView(LoginRequiredMixin, generic.UpdateView):
         return render(self.request, "researcher_UI_endalk/interface.html", context)
 
 
-class AjaxDemographicForms(generic.View):
+class AjaxDemographicForms(generic.DetailView):
     def get(self, request):
         pk = request.GET["id"]
         data = serializers.serialize(
@@ -293,5 +261,5 @@ class ResearcherAddInstruments(UpdateView):
     form_class = AddInstrumentForm
     template_name = "researcher_UI_endalk/researcher_form.html"
 
-    def get_success_url(self) -> str:
+    def get_success_url(self):
         return reverse("console")
