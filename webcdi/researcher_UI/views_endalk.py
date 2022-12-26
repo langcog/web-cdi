@@ -39,6 +39,11 @@ class Console(LoginRequiredMixin, generic.CreateView):
 
 
 class StudyDetailView(LoginRequiredMixin, generic.CreateView):
+    """
+    We used createView but we didn't extend form_valid method,
+    Becuase We can't use form_class or get_form method.
+    """
+
     model = study
     template_name = "researcher_UI_endalk/interface.html"
 
@@ -138,25 +143,48 @@ class AddPairedStudy(LoginRequiredMixin, generic.CreateView):
 
 
 class AdminNew(LoginRequiredMixin, generic.UpdateView):
-    def post(self, request, study_name):
-        permitted = study.objects.filter(
-            researcher=request.user, name=study_name
-        ).exists()
-        study_obj = study.objects.get(researcher=request.user, name=study_name)
-        data = admin_new_fun(request, permitted, study_name, study_obj)
-        return HttpResponse(json.dumps(data), content_type="application/json")
+    model = study
+    form_class = AdminNewForm
+    template_name = "researcher_UI_endalk/administer_new_modal.html"
 
-    def get(self, request, study_name):
-        print("========================xaxaxa")
-        context = {}
-        study_obj = study.objects.get(researcher=request.user, name=study_name)
-        context["username"] = request.user.username
-        context["study_name"] = study_name
+    def get_context_data(self, **kwargs):
+        context = super(AdminNew, self).get_context_data(**kwargs)
+        researcher = self.request.user
+        study_obj = self.get_object()
+        study_obj = study.objects.get(researcher=researcher, name=study_obj.name)
+        context["username"] = researcher.username
+        context["study_name"] = study_obj.name
         context["study_group"] = study_obj.study_group
         context["object"] = study_obj
-        return render(
-            request, "researcher_UI_endalk/administer_new_modal.html", context
-        )
+        return context
+
+    def form_valid(self, form, *args, **kwargs):
+        researcher = self.request.user
+        study_obj = self.get_object()
+        permitted = study.objects.filter(
+            researcher=researcher, name=study_obj.name
+        ).exists()
+
+        study_obj = study.objects.get(researcher=researcher, name=study_obj.name)
+        data = admin_new_fun(self.request, permitted, study_obj.name, study_obj)
+
+        return HttpResponse(json.dumps(data), content_type="application/json")
+
+    def form_invalid(self, form):
+        print("=================================")
+        print(form.errors)
+        return super().form_invalid(form)
+
+    # def post(self, request, *args, **kwargs):
+    #     print("-----------------------------------")
+
+    #     study_obj = self.get_object()
+    #     permitted = study.objects.filter(
+    #         researcher=request.user, name=study_obj.name
+    #     ).exists()
+    #     study_obj = study.objects.get(researcher=request.user, name=study_obj.name)
+    #     data = admin_new_fun(request, permitted, study_obj.name, study_obj)
+    #     return HttpResponse(json.dumps(data), content_type="application/json")
 
 
 class AdministerNewParticipant(LoginRequiredMixin, generic.CreateView):
