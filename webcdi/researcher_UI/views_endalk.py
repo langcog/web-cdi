@@ -38,7 +38,7 @@ class Console(LoginRequiredMixin, generic.CreateView):
         return context
 
 
-class StudyDetailView(LoginRequiredMixin, generic.CreateView):
+class StudyCreateView(LoginRequiredMixin, generic.CreateView):
     """
     We used createView but we didn't extend form_valid method,
     Becuase We can't use form_class or get_form method.
