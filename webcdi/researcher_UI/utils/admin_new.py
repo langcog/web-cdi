@@ -4,6 +4,7 @@ import numpy as np
 import re, datetime
 from researcher_UI.models import administration, study
 from researcher_UI.utils import random_url_generator
+from django.urls import reverse
 
 
 def admin_new_fun(request, permitted, study_name, study_obj):
@@ -152,8 +153,10 @@ def admin_new_fun(request, permitted, study_name, study_obj):
                     )
 
             data["stat"] = "ok"
+
             data["redirect_url"] = (
-                "/endalk/study/" + study_name + "/?sort=-created_date"
+                reverse("researcher_ui:console_study", args=[study_obj.pk])
+                + "?sort=-created_date"
             )
             data["study_name"] = study_name
         else:
