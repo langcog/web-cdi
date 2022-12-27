@@ -51,14 +51,10 @@ class StudyCreateView(LoginRequiredMixin, generic.CreateView):
         return context
 
     def post(self, request, *args, **kwargs):
-        print(request.POST)
         study_obj = self.get_object()
         permitted = study.objects.filter(
             researcher=request.user, name=study_obj.name
         ).exists()
-
-        print(permitted, request.POST.getlist("select_col"))
-
         if permitted:
             study_obj = study.objects.get(researcher=request.user, name=study_obj.name)
             ids = request.POST.getlist("select_col")
