@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from .forms_endalk import *
 from .models import researcher, study, administration
 import json
@@ -51,10 +51,14 @@ class StudyCreateView(LoginRequiredMixin, generic.CreateView):
         return context
 
     def post(self, request, *args, **kwargs):
+        print(request.POST)
         study_obj = self.get_object()
         permitted = study.objects.filter(
             researcher=request.user, name=study_obj.name
         ).exists()
+
+        print(permitted, request.POST.getlist("select_col"))
+
         if permitted:
             study_obj = study.objects.get(researcher=request.user, name=study_obj.name)
             ids = request.POST.getlist("select_col")
@@ -237,21 +241,34 @@ class ImportData(LoginRequiredMixin, generic.UpdateView):
 class EditStudyView(LoginRequiredMixin, StudyOwnerMixin, generic.UpdateView):
     model = administration
     form_class = StudyFormForm
+    template_name = "researcher_UI_endalk/interface.html"
 
     def get_context_data(self, **kwargs):
-        ctx = super(EditStudyView, self).get_context_data(**kwargs)
-        self.study = ctx["study"] = self.object.study
-        return ctx
+        context = get_helper(self.request, self.object.study.name, 20)
+        context["study"] = self.object.study
+        return context
 
     def form_valid(self, form):
-        form.save()
-        context = get_helper(self.request, self.object.study.name, 20)
-        return render(self.request, "researcher_UI_endalk/interface.html", context)
+        obj = self.get_object()
+        if "subject_id" in form.changed_data:
+            obj.subject_id = form.cleaned_data["subject_id"]
+            count = administration.objects.filter(
+                study_id=obj.study.pk, subject_id=form.cleaned_data["subject_id"]
+            ).count()
+            if count > 1:
+                return JsonResponse(
+                    {"error": "subject id is already existed."}, status=400
+                )
+        if "local_lab_id" in form.changed_data:
+            obj.local_lab_id = form.cleaned_data["local_lab_id"]
+        if "opt_out" in form.changed_data:
+            obj.opt_out = form.cleaned_data["opt_out"]
 
-    def get(self, request, pk):
-        obj = administration.objects.get(pk=pk)
-        context = get_helper(self.request, obj.study.name, 20)
-        return render(self.request, "researcher_UI_endalk/interface.html", context)
+        obj.save()
+
+        return JsonResponse(
+            {"message": "Your data is updated successfully"}, status=200
+        )
 
 
 class AjaxDemographicForms(generic.DetailView):
