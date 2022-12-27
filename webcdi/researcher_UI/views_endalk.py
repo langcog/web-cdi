@@ -282,10 +282,10 @@ class AjaxDemographicForms(generic.DetailView):
         return HttpResponse(data, content_type="application/json")
 
 
-class ResearcherAddInstruments(UpdateView):
+class ResearcherAddInstruments(LoginRequiredMixin, UpdateView):
     model = researcher
     form_class = AddInstrumentForm
     template_name = "researcher_UI_endalk/researcher_form.html"
 
     def get_success_url(self):
-        return redirect(reverse("researcher_ui:console"))
+        return reverse("researcher_ui:console")
