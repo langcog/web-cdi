@@ -61,7 +61,11 @@ class StudyCreateView(LoginRequiredMixin, generic.CreateView):
 
             if all([x.isdigit() for x in ids]):
                 """Check that the administration numbers are all numeric"""
-                res = post_condition(request, ids, study_obj)
+                try:
+                    res = post_condition(request, ids, study_obj)
+                except:
+                    res = None
+
                 if res:
                     return res
                 else:
