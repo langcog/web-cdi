@@ -62,7 +62,18 @@ class StudyCreateView(LoginRequiredMixin, generic.CreateView):
             if all([x.isdigit() for x in ids]):
                 """Check that the administration numbers are all numeric"""
                 res = post_condition(request, ids, study_obj)
-                return res
+                if res:
+                    return res
+                else:
+                    return redirect(
+                        reverse(
+                            "researcher_ui:console_study", kwargs={"pk": study_obj.pk}
+                        )
+                    )
+            else:
+                return redirect(
+                    reverse("researcher_ui:console_study", kwargs={"pk": study_obj.pk})
+                )
 
 
 class RenameStudy(LoginRequiredMixin, generic.UpdateView):

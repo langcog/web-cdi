@@ -15,7 +15,6 @@ import re, zipfile
 from researcher_UI.utils.write_to_zip import write_to_zip
 
 
-@login_required
 def download_cdi_format(request, study_obj, administrations=None):
     outfile = BytesIO()
 
