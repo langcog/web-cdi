@@ -232,7 +232,7 @@ class AddPairedStudyForm(forms.ModelForm):
         self.helper.label_class = "col-3"
         self.helper.field_class = "col-9"
         self.helper.form_method = "post"
-        self.helper.form_action = reverse("add_paired_study")
+        self.helper.form_action = reverse("researcher_ui:add_paired_study")
         if self.researcher:
             self.fields["paired_studies"] = forms.ModelMultipleChoiceField(
                 queryset=study.objects.filter(
