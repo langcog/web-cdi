@@ -505,9 +505,17 @@ class AddInstrumentForm(forms.ModelForm):
 
 # Update study form
 class StudyFormForm(forms.ModelForm):
+    subject_id_old = forms.IntegerField()
+
     class Meta:
         model = administration
-        fields = ["id", "subject_id", "local_lab_id", "opt_out"]
+        fields = [
+            "id",
+            "subject_id",
+            "local_lab_id",
+            "opt_out",
+            "subject_id_old",
+        ]
 
 
 class AdminNewForm(forms.ModelForm):

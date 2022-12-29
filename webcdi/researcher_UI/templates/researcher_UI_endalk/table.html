@@ -35,6 +35,7 @@
             subject_id: $("#subject_id"+id).val(),
             opt_out: $("#opt_out"+id).val(),
             local_lab_id: $("#local_lab_id"+id).val(),
+            subject_id_old: $("#subject_id_old"+id).val(),
         },
         success: function(data){
             $('#'+id).modal('hide')
@@ -221,6 +222,7 @@
                          <div class="form-group">
                          <label for="recipient-name" class="col-form-label">Subject Id</label>
                          <input type="text" class="form-control" name="subject_id" id="subject_id{{row.record.pk}}" value="{{row.record.subject_id}}">
+                         <input type="hidden"  name="subject_id_old" id="subject_id_old{{row.record.pk}}" value="{{row.record.subject_id}}">
                          <span style="color: red; font-size: 12px;" id="subject_id_error_message{{row.record.pk}}">
                             <p></p>
                         </span>
