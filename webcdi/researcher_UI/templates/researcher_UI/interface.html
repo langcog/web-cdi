@@ -9,23 +9,26 @@
     <meta name="author" content="Henry Mehta">
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" ></script>
-    
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'researcher_UI/console.css' %}" />
+    <link rel="stylesheet" href="{% static 'researcher_UI/table.css' %}" />
+
+    <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.3.js"></script>
     <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
-    <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
-    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
+    
     <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
     <script src="{% static 'researcher_UI/django_modal_forms.js' %}"></script>
     <script src="{% static 'researcher_UI/researcher_UI.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'researcher_UI/console.css' %}" />
-    <link rel="stylesheet" href="{% static 'researcher_UI/table.css' %}" />
     <script src="{% static 'cdi_forms/moment.js' %}"></script>
 
 </head>
 
-<style >
+<style>
     .btn{
         white-space:normal !important;
         word-wrap: break-word; 
@@ -46,45 +49,119 @@
     .django-ckeditor-widget{min-width:100% !important}
     
     
+    nav.primary-navigation {
+        margin: 0 auto;
+        display: block;
+        padding: 10px 0 0 0;
+        text-align: center;
+        font-size: 16px;
+   }
+    nav.primary-navigation ul li {
+        list-style: none;
+        margin: 0 auto;
+        border-left: 2px solid #3ca0e7;
+        display: inline-block;
+        padding: 0 30px;
+        position: relative;
+        text-decoration: none;
+        text-align: center;
+        font-family: arvo;
+   }
+    nav.primary-navigation li a {
+        color: white;
+    }
+    nav.primary-navigation li a:hover {
+        color: #3ca0e7;
+   }
+    nav.primary-navigation li:hover {
+        cursor: pointer;
+   }
+    nav.primary-navigation ul li ul {
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+        padding-left: 0;
+        left: 0;
+        display: none;
+        background: white;
+        width:100px;
+   }
+    nav.primary-navigation ul li:hover > ul, nav.primary-navigation ul li ul:hover {
+        visibility: visible;
+        opacity: 1;
+        display: block;
+        min-width: 100px;
+        text-align: left;
+        padding-top: 20px;
+        box-shadow: 0px 3px 5px -1px #ccc;
+   }
+    nav.primary-navigation ul li ul li {
+        clear: both;
+        width: 100%;
+        text-align: left;
+        margin-bottom: 20px;
+        border-style: none;
+   }
+    nav.primary-navigation ul li ul li a:hover {
+        padding-left: 10px;
+        border-left: 2px solid #3ca0e7;
+        transition: all 0.3s ease;
+   }
+    a {
+        text-decoration: none;
+   }
+    a:hover {
+        color: #3ca0e7;
+   }
+    ul li ul li a {
+        transition: all 0.5s ease;
+   }
+   .login-card {
+        padding-top: 10px;
+        margin: 0 auto 10px;
+        border-radius: 10px;
+        overflow: scroll;
+        background-color: white;
+  };
+    
 </style>
 <!-- Researcher interface -->
-<body>
-    <div class='container'>
+<body style="background:#4d90fe;">
+    <div class=''>
         <!-- Row displaying username, help button, and logout button. -->
-        <div class='row'>
-        	<form style="width:100%" action="/accounts/logout/">
-                <fieldset>
-                    <legend>User:</legend>
-                    <div class="d-flex">
-                		<div class='col'>
-                		    <big>{{ username }}</big>
-                		</div>
-                		<div class='col-2'>
-                		    <input type="button" value="Help" onclick="window.open('https://docs.google.com/document/d/1naFm2U-77YcOwFD7jcQIes2HhNz98qQM2wm1J1cmwck/pub')" class='btn btn-primary' style="width:100%">
-                		</div>
-                		<div class='col-2'>
-                		    <input type="submit" value="Logout" class='btn btn-primary' style="width:100%">
-                		</div>
-                    </div>
-                </fieldset>
-        	</form>
-        </div>
+        <nav role="navigation" class="primary-navigation d-flex justify-content-end">
+            <ul>
+              <li><a href="/">Home</a>
+    
+              <li><a href="#" onclick="window.open('https://docs.google.com/document/d/1naFm2U-77YcOwFD7jcQIes2HhNz98qQM2wm1J1cmwck/pub')" onclick="window.open('https://docs.google.com/document/d/1naFm2U-77YcOwFD7jcQIes2HhNz98qQM2wm1J1cmwck/pub')">Help</a></li>
+              <li><a href="#">{{ username }} &dtrif;</a>
+                <ul class="dropdown">
+                    <li><a href="/accounts/logout/" style="color:#4d90fe">Logout</a></li>
+                </ul>
+              </li>
+            </ul>
+        </nav>
 
-        <div class='row'>
-            <form method='post' action = '/interface/study/{{ current_study }}/' id='study-form' style="width:100%">
+        <div class='login-card' style="width:100%; min-height:200px;">
+            {% if current_study %}
+                <form method='post'  action='{% url "researcher_ui:console_study" pk=current_study.pk %}' id='study-form'>
+            {% else %}
+                <form method='post'  action='' id='study-form'>
+            {% endif %}
+
            		{% csrf_token %}
-                <fieldset>
-                    <legend>Study:</legend>
+                <div style="width:100%;" class="col-md-12">
+                    <legend>Study</legend>
                         <div class='col-md-12'>
                 			<div class="row">
                                 <div class='col'>
-                                    <a href="{% url 'researcher_add_instruments' request.user.researcher.id %}" type="button" type="button" style='width:100%;' class="btn btn-primary">Add Instruments</a>
+                                    <a href="{% url 'researcher_ui:researcher_add_instruments' pk=request.user.researcher.pk %}" type="button" type="button" style='width:100%;' class="btn btn-primary">Add Instruments</a>
                                 </div>
                                 <div class="col">
-                				    <button id="id_new_study" type="button" style='width:100%;' class="btn btn-primary"   onclick = "modal_form('/interface/add_study/')" >New Study</button>
+                				    <a id="id_new_study" href="{% url 'researcher_ui:add_study' %}" type="button" style='width:100%;' class="btn btn-primary">New Study</a>
                                 </div>
                                 <div class="col">
-                                    <button type="button" style='width:100%; margin-bottom: 5%;' class="btn btn-primary"   onclick = "modal_form('/interface/add_paired_study/')" >Group Study</button>
+                                    <a style='width:100%; margin-bottom: 5%;' class="btn btn-primary"  href="{% url 'researcher_ui:add_paired_study' %}">Group Study</a>
                 			    </div>
                             </div>
                             <div class="row">
@@ -93,7 +170,7 @@
                     					<select  style = 'width:100%;' id="study-selector" class="form-control" onchange="location = encodeURI(this.options[this.selectedIndex].value);">
                     					    <option value="/interface/" selected disabled>Please select study</option>
                     					    {% for study in studies %}
-                    						  <option value="/interface/study/{{ study }}/"{% if study.name == current_study %} selected="" {% endif %}>{{ study }}</option>
+                    						  <option value="{% url 'researcher_ui:console_study' pk=study.pk %}"{% if study.pk == current_study.pk %} selected="" {% endif %}>{{ study }}</option>
                     					    {% endfor %}
                     					</select> 
                 				    </div>
@@ -121,12 +198,12 @@
                                 <div class="row">
                                     <div class="col-3">
                                         <div class="btn-group btn-block">
-                                          <button id="id_add_participants" type="button" class="btn btn-secondary btn-block" onclick = "modal_form('/interface/study/{{ current_study|urlencode }}/administer_new/')">Add Participants</button>
+                                          <button id="id_add_participants" type="button" class="btn btn-secondary btn-block" onclick = "modal_form('/interface/study/{{ current_study.pk|urlencode }}/administer_new/')">Add Participants</button>
                                           <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <span class="sr-only">Toggle Dropdown</span>
                                           </button>
                                           <div class="dropdown-menu">
-                                            <button type="button" class="dropdown-item btn btn-secondary btn-block"   onclick = "modal_form('/interface/study/{{ current_study|urlencode }}/import_data/')" >Import Spreadsheet Data</button>
+                                            <button type="button" class="dropdown-item btn btn-secondary btn-block"   onclick = "modal_form('/interface/study/{{ current_study.pk|urlencode }}/import_data/')" >Import Spreadsheet Data</button>
                                           </div>
                                         </div>
 
@@ -148,7 +225,7 @@
                                         </div>                                            
                                     </div>
                                     <div class="col-3">
-                                        <button id="id_update_study" type="button" class="btn btn-secondary btn-block"   onclick = "modal_form('/interface/study/{{ current_study|urlencode }}/rename_study/')" >Update Study</button>
+                                        <a id="id_update_study" type="button" class="btn btn-secondary btn-block" href="{% url 'researcher_ui:rename_study' pk=current_study.pk %}" >Update Study</a>
                                     </div>
                                     <div class="col-3">
                                         <button type="submit" class="btn btn-secondary btn-block" name='delete-study' id='delete-study' onclick='return confirm("Are you sure you want to delete the entire study and all the data associated with it?");' >Delete Study</button>
@@ -156,21 +233,22 @@
                                 </div>
                     		{% endif %}
                         </div>
-                </fieldset>
+                    </div>
             </form>
         </div>
 
         {% if current_study %}
-            <div class='row'>
-                <form method='post' action = '/interface/study/{{ current_study }}/' id='administration-form' class="form-inline">
+            <div class='row login-card' style="padding:1rem;">
+                <div id='administration-form' class="form-inline">
                     {% csrf_token %}
-                        <fieldset>
-                            <div class="row d-flex align-items-stretch">
+                        <div>
+                            <form method='post' action='{% url "researcher_ui:console_study" pk=current_study.pk %}'  class="row  d-flex justify-content-center">
                                 <div class='col-md-3'>
                                     <button style='width:100%; height: 100%;' class="btn btn-secondary selected-btn btn-block" id='add-selected' type='submit' name='administer-selected' value='administer-selected' disabled  >Re-administer Participants</button>
                                 </div>
+                                
                                 <div class='col-md-3'>
-                                    <div class="dropdown selected-btn">
+                                    <div class="dropdown selected-btn" >
                                         <button class="btn btn-secondary selected-btn btn-block dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
                                             Download Selected Data
                                         </button>
@@ -184,13 +262,11 @@
                                         </div>
                                     </div>                                            
                                 </div> 
-                                <div class="col-md-3"></div>
                                 <div class='col-md-3'>
                                         <button style='width:100%; height: 100%;' class="btn btn-secondary selected-btn btn-block" id='delete-selected' type='submit' name='delete-selected' value='administer-selected' disabled onclick='return confirm("Are you sure you want to delete the selected administration record and all the data associated with it?");' >Delete Selected Data</button>
                                 </div>
-                            </div>
-                       
-                            <legend> Data :</legend>
+                                                       
+                            <legend> Data </legend>
                             <div class='col-md-12'>
                                 {% include "researcher_UI/table.html" with table=study_administrations %}
                                 <script type="text/javascript">
@@ -203,8 +279,10 @@
                                     });
                                 </script>
                             </div>
-                        </fieldset>
-                </form>
+                            </form>
+
+                        </div>
+                    </div>
             </div>
         {% endif %}
     </div>
@@ -224,12 +302,12 @@
     if ((window.location.search.indexOf('per_page') != -1 && window.location.search.indexOf('per_page=20') == -1) || num_per_page != 20) {
         $('#view_all').text("Show 20");
         {% if current_study %}
-            $("#view_all").attr("href", "{% url 'console' current_study %}");
+            $("#view_all").attr("href", "{% url 'researcher_ui:console_study' current_study.pk %}");
         {% endif %}
     } else if (num_per_page == 20 || window.location.search.indexOf('per_page=20') != -1) {
         $('#view_all').text("Show All");
         {% if current_study %}
-            $("#view_all").attr("href", "{% url 'console' current_study %}?view_all=all");
+            $("#view_all").attr("href", "{% url 'researcher_ui:console_study' current_study.pk %}?view_all=all");
         {% endif %}
     }
 

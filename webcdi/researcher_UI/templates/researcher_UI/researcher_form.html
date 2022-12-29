@@ -22,20 +22,144 @@
     <link rel="stylesheet" href="{% static 'researcher_UI/console.css' %}" />
     <link rel="stylesheet" href="{% static 'researcher_UI/table.css' %}" />
     <script src="{% static 'cdi_forms/moment.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
+    <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
+    <style>
+        nav.primary-navigation {
+            margin: 0 auto;
+            display: block;
+            padding: 10px 0 0 0;
+            text-align: center;
+            font-size: 16px;
+       }
+        nav.primary-navigation ul li {
+            list-style: none;
+            margin: 0 auto;
+            border-left: 2px solid #3ca0e7;
+            display: inline-block;
+            padding: 0 30px;
+            position: relative;
+            text-decoration: none;
+            text-align: center;
+            font-family: arvo;
+       }
+        nav.primary-navigation li a {
+            color: white;
+       }
+        nav.primary-navigation li a:hover {
+            color: #3ca0e7;
+       }
+        nav.primary-navigation li:hover {
+            cursor: pointer;
+       }
+        nav.primary-navigation ul li ul {
+            visibility: hidden;
+            opacity: 0;
+            position: absolute;
+            padding-left: 0;
+            left: 0;
+            display: none;
+            background: white;
+            width:100px;
+            
+            
+       }
+        nav.primary-navigation ul li:hover > ul, nav.primary-navigation ul li ul:hover {
+            visibility: visible;
+            opacity: 1;
+            display: block;
+            min-width: 250px;
+            text-align: left;
+            padding-top: 20px;
+            box-shadow: 0px 3px 5px -1px #ccc;
+       }
+        nav.primary-navigation ul li ul li {
+            clear: both;
+            width: 100%;
+            text-align: left;
+            margin-bottom: 20px;
+            border-style: none;
+       }
+        nav.primary-navigation ul li ul li a:hover {
+            padding-left: 10px;
+            border-left: 2px solid #3ca0e7;
+            transition: all 0.3s ease;
+       }
+        a {
+            text-decoration: none;
+       }
+        a:hover {
+            color: #3ca0e7;
+       }
+        ul li ul li a {
+            transition: all 0.5s ease;
+       }
+        .allowed_instruments{
+            list-style-type: none;
 
+        }
+        li {
+            float: left;
+            margin-left:20px;
+            margin-right: 20px;
+        }
+        .login-card {
+            padding-top: 10px;
+            margin: 0 auto 10px;
+            border-radius: 10px;
+            overflow: scroll;
+            background-color: white;
+            padding: 2rem;
+      }
+    </style>
 </head>
 
 <!-- Researcher interface -->
-<body>
-    <div class='container'>
-        <!-- Row displaying username, help button, and logout button. -->
-        <h1>{{ request.user.username }}</h1>
-        <p>Select the instruments you want to use</p>
+<body style="background:#4d90fe">
+    <nav role="navigation" class="primary-navigation d-flex justify-content-end" style="margin-right:20px;">
+        <ul>
+          <li><a href="/">Home</a>
+
+          <li><a href="#" onclick="window.open('https://docs.google.com/document/d/1naFm2U-77YcOwFD7jcQIes2HhNz98qQM2wm1J1cmwck/pub')" onclick="window.open('https://docs.google.com/document/d/1naFm2U-77YcOwFD7jcQIes2HhNz98qQM2wm1J1cmwck/pub')">Help</a></li>
+          <li><a href="#">{{ request.user.username }} &dtrif;</a>
+            <ul class="dropdown">
+                <li><a href="/accounts/logout/" style="color:#4d90fe">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+    </nav>
+ 
+    <div class='container login-card d-flex justify-content-center' style="padding-left:3rem;">
         <div class='row'>
-        	<form style="width:100%" action="." method="post">
+            <div  class="col-1">
+            <button type="button" class="btn-primary" data-dismiss="modal" aria-label="Close"
+            style="border-radius:50%;" onclick="history.back()"
+            ><span aria-hidden="true">&larr;</span></button>
+            </div>
+
+            <div class="col-11" style="margin-bottom:1rem;">
+                <h4> Select the instruments you want to use</h4>
+                </div>
+
+        	<form action="." method="post">
                 {% csrf_token %}
-                {{ form.as_p }}
-                <input type="submit" class="btn btn-primary">
+
+                <div class="row">
+                    {%for field in form %}
+                        <div class="row">
+                
+                            {% for i in field %}
+                                <div class="col-md-4 col-sm-12">{{i}}</div>
+
+
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
+ 
+                <div class="d-flex justify-content-center">
+                    <input type="submit" class="btn btn-primary" style="width:200px;" value="Save">
+                </div>
         	</form>
         </div>
     </div>
