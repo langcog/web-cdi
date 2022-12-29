@@ -5,7 +5,6 @@ from researcher_UI.forms import *
 from researcher_UI.models import (
     administration,
     administration_data,
-    get_background_header,
     InstrumentScore,
 )
 from cdi_forms.models import BackgroundInfo
@@ -22,16 +21,14 @@ from researcher_UI.utils.format_admin import format_admin_header
 from researcher_UI.utils.study_score import get_study_scores
 from researcher_UI.utils.score_headers import get_score_headers
 from researcher_UI.utils.format_admin import format_admin_data
+from researcher_UI.utils.background_header import get_background_header
 
 
-@login_required  # For researchers only, requires user to be logged in (test-takers do not have an account and are blocked from this interface)
 def download_data(request, study_obj, administrations=None):  # Download study data
     # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse(content_type="text/csv")  # Format response as a CSV
     filename = study_obj.name + "_items.csv"
-    response["Content-Disposition"] = (
-        'attachment; filename="' + filename + '"'
-    )  # Name the CSV response
+    response["Content-Disposition"] = 'attachment; filename="' + filename + '"'
 
     administrations = (
         administrations
@@ -46,7 +43,7 @@ def download_data(request, study_obj, administrations=None):  # Download study d
     admin_header = format_admin_header(study_obj)
 
     # Fetch background data variables
-    background_header = get_background_header()
+    background_header = get_background_header(study_obj)
 
     try:
         answers = administration_data.objects.values(
@@ -166,6 +163,7 @@ def download_data(request, study_obj, administrations=None):  # Download study d
     combined_data = combined_data[
         admin_header + background_header + model_header + score_header
     ]
+
     combined_data = combined_data.replace("nan", "", regex=True)
     combined_data = combined_data.replace("None", "", regex=True)
     combined_data["child_ethnicity"].replace("[]", "", inplace=True)
