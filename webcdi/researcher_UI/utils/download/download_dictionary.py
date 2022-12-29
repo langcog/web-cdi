@@ -1,4 +1,3 @@
-from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from researcher_UI.forms import *
 from cdi_forms.views import model_map
@@ -7,7 +6,6 @@ from django.utils.translation import ugettext_lazy as _
 import re
 
 
-@login_required
 def download_dictionary(request, study_obj):
     response = HttpResponse(content_type="text/csv")  # Format the response as a CSV
     response["Content-Disposition"] = (

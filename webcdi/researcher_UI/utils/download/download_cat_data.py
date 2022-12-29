@@ -1,11 +1,8 @@
-from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-
 from researcher_UI.utils.format_admin import (
     format_admin_data,
     format_admin_header,
 )
-
 from researcher_UI.forms import *
 from researcher_UI.models import administration
 from cdi_forms.models import BackgroundInfo
@@ -15,7 +12,6 @@ from cdi_forms.cat_forms.models import CatResponse
 from researcher_UI.utils.format_admin import format_admin_header, format_admin_data
 
 
-@login_required
 def download_cat_data(request, study_obj, administrations=None):
     response = HttpResponse(content_type="text/csv")
     filename = study_obj.name + "_items.csv"
