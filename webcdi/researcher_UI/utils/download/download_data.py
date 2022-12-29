@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseServerError
 from researcher_UI.forms import *
 from researcher_UI.models import (
