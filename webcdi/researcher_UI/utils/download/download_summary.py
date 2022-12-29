@@ -35,7 +35,7 @@ def download_summary(request, study_obj, administrations=None):
     admin_header = format_admin_header(study_obj)
 
     # Fetch background data variables
-    background_header = get_background_header()
+    background_header = get_background_header(study_obj)
 
     # Format background data responses for pandas dataframe and eventual printing
     background_data = BackgroundInfo.objects.values().filter(
