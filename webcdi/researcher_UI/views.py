@@ -63,8 +63,9 @@ class StudyCreateView(LoginRequiredMixin, generic.CreateView):
                 """Check that the administration numbers are all numeric"""
                 try:
                     res = post_condition(request, ids, study_obj)
-                except:
-                    res = None
+                except Exception as e:
+                    context = {"error": "This combination is already existed."}
+                    return render(request, "researcher_UI/500_error.html", context)
 
                 if res:
                     return res
@@ -281,7 +282,6 @@ class EditStudyView(LoginRequiredMixin, StudyOwnerMixin, generic.UpdateView):
             for _instance in _instances:
                 _instance.subject_id = new_subject_id
                 _instance.save()
-                print(_instance, type(new_subject_id))
 
         if "local_lab_id" in form.changed_data:
             obj.local_lab_id = form.cleaned_data["local_lab_id"]
