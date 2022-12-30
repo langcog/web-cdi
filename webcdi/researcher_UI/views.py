@@ -261,6 +261,7 @@ class EditStudyView(LoginRequiredMixin, StudyOwnerMixin, generic.UpdateView):
 
     def form_valid(self, form):
         obj = self.get_object()
+
         if "subject_id" in form.changed_data:
             count = administration.objects.filter(
                 study_id=obj.study.pk, subject_id=form.cleaned_data["subject_id"]
@@ -271,14 +272,16 @@ class EditStudyView(LoginRequiredMixin, StudyOwnerMixin, generic.UpdateView):
                     {"error": "subject id is already existed."}, status=400
                 )
 
-            instances = administration.objects.filter(
+            _instances = administration.objects.filter(
                 study=obj.study, subject_id=form.cleaned_data["subject_id_old"]
             )
+
             new_subject_id = int(form.cleaned_data["subject_id"])
 
-            for instance in instances:
-                instance.subject_id = new_subject_id
-                instance.save()
+            for _instance in _instances:
+                _instance.subject_id = new_subject_id
+                _instance.save()
+                print(_instance, type(new_subject_id))
 
         if "local_lab_id" in form.changed_data:
             obj.local_lab_id = form.cleaned_data["local_lab_id"]
