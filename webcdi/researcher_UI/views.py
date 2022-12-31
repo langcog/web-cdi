@@ -290,6 +290,8 @@ class EditStudyView(LoginRequiredMixin, StudyOwnerMixin, generic.UpdateView):
             obj.opt_out = form.cleaned_data["opt_out"]
             obj.save()
 
+        super(EditStudyView, self).form_valid(form)
+
         return JsonResponse(
             {"message": "Your data is updated successfully"}, status=200
         )
