@@ -16,7 +16,7 @@
 <div style="background: #29A9E6; height:100%;">
   <div class="container" style="padding-bottom:2rem;">
       <!--Start Logo-->
-      <a class="row" align="center" href="/" style="height:100px; width:150px;">
+      <a class="row" align="center" href="/" style="height: 69px; width: 149px;">
         <img width="100%" src="{% static 'researcher_UI/images/logo.png' %}">
       </a>
       <!--End Logo-->
@@ -43,12 +43,12 @@
             {%  endfor  %}
 
               <div  class="input-row">
-                <input type="submit" name="login" class="login login-submit" value="{% trans "Register" %}">
+                <input type="submit" name="login" style="font-size: 16px;" class="login login-submit" value="{% trans "Register" %}">
               </div>
           </form>
           
           <div class="login-help input-row">
-              <a href="{% url 'login' %}" style="color:#4d90fe; font-size:12px;font-family:none">Do you have an account?  Login.</a> <br>
+              <a href="{% url 'login' %}" style="color:#4d90fe; font-size:16px;font-family:none">Do you already have an account?  Login.</a> <br>
           </div>
     </div>
 
