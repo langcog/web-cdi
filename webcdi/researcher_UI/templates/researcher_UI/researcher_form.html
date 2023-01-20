@@ -2,7 +2,7 @@
 <html lang="en"> <head> 
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 
-    {% load static %}
+    {% load static instrument_filter %}
 
     <title>WebCDI Interface</title>
     <meta name="description" content="English Words and Sentences CDI form">
@@ -133,36 +133,45 @@
     <div class='container login-card d-flex justify-content-center' style="padding-left:3rem;">
         <div class='row'>
             <div  class="col-1">
-            <button type="button" class="btn-primary" data-dismiss="modal" aria-label="Close"
-            style="border-radius:50%;" onclick="history.back()"
-            ><span aria-hidden="true">&larr;</span></button>
+                <button type="button" class="btn-primary" data-dismiss="modal" aria-label="Close"style="border-radius:50%;" onclick="history.back()">
+                    <span aria-hidden="true">&larr;</span>
+                </button>
             </div>
-
             <div class="col-11" style="margin-bottom:1rem;">
                 <h4> Select the instruments you want to use</h4>
-                </div>
+            </div>
+            <div class="col-12"> 
+                <form action="." method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        {% for field in form %}
+                            {% instrument_filter field  as instrument_res%}
+                                <div class="col-md-4">
+                                    {% for i in instrument_res.0 %}
+                                        {{i}} <br>
+                                    {% endfor %}
+                                </div>
 
-        	<form action="." method="post">
-                {% csrf_token %}
+                                <div class="col-md-4">
+                                    {% for i in instrument_res.1 %}
+                                        {{i}}  <br>
+                                    {% endfor %}
+                                </div>
 
-                <div class="row">
-                    {%for field in form %}
-                        <div class="row">
-                
-                            {% for i in field %}
-                                <div class="col-md-4 col-sm-12">{{i}}</div>
+                                <div  class="col-md-4">
+                                    {% for i in instrument_res.2 %}
+                                        {{i}} <br>
+                                    {% endfor %}
+                                </div>
+                        {% endfor %}
+                    </div>
 
-
-                            {% endfor %}
-                        </div>
-                    {% endfor %}
-                </div>
- 
-                <div class="d-flex justify-content-center">
-                    <input type="submit" class="btn btn-primary" style="width:200px;" value="Save">
-                </div>
-        	</form>
-        </div>
+                    <div class="d-flex justify-content-center">
+                        <input type="submit" class="btn btn-primary" style="width:200px;" value="Save">
+                    </div>
+                </form>
+            </div>
+        <div>
     </div>
 </body>
 </html>
