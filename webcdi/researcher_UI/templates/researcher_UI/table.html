@@ -253,13 +253,13 @@
         <!--Modal-->
         {% for column, cell in row.items %}
                     {% if column|stringformat:"s" in '"Last modified","Expiration date","Creation date"' %}
-                        <td>
+                        <td style="text-align: center;">
                             <span id="converted_result{{forloop.parentloop.counter}}{{forloop.counter}}"></span>
                             <script>document.getElementById('converted_result{{forloop.parentloop.counter}}{{forloop.counter}}').innerText = Convert_to_localtime("{{cell}}")</script>
                             
                         </td>
                     {% else %}
-                        <td>
+                        <td style="text-align: center;">
                             {{cell}}
                         </td>
                     {% endif %}
