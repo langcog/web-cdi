@@ -27,7 +27,7 @@
             
             {% for field in form %}
               <div class="input-row">
-                  <label for="{{ field.label }}" style="font-family:none">{{ field.label }}  <span style="color: red;font-family:none"> * </span></label>
+                  <label for="{{ field.label }}" style="font-family:Arial, Helvetica, sans-serif;">{{ field.label }}  <span style="color: red;font-family:none"> * </span></label>
                     {{ field }}
                     {% with errors=field.errors %}
                       {% include 'registration/alert.html' %}
