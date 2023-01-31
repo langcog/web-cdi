@@ -90,7 +90,7 @@ item_88,dondest,word,col_3,understands; produces,where is,¿dónde esta?,where i
 item_89,quien,word,col_3,understands; produces,who,quién,who,,89
 item_90,ellas,word,col_3,understands; produces,they,ellas,they,,90
 item_91,su,word,col_3,understands; produces,its,su,its,,91
-item_92,mio,word,col_3,understands; produces,mine,mio,mine,,92
+item_92,mio,word,col_3,understands; produces,mine,mío,mine,,92
 item_93,este,word,col_3,understands; produces,this,éste,this,,93
 item_94,un,word,col_3,understands; produces,one,un,one,,94
 item_95,mas,word,col_3,understands; produces,more,más,more,,95
