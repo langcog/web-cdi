@@ -223,7 +223,7 @@ def import_data_fun(request, study_obj):
 
     if error_msg is None:
         data["stat"] = "ok"
-        data["redirect_url"] = reverse("console", args=[study_obj.name])
+        data["redirect_url"] = reverse("researcher_ui:console", args=[study_obj.name])
     else:
         administration.objects.filter(pk__in=new_admin_pks).delete()
         data["stat"] = "error"
