@@ -125,6 +125,10 @@ class AddStudy(LoginRequiredMixin, generic.CreateView):
     template_name = "researcher_UI/add_study_modal.html"
     form_class = AddStudyForm
 
+    def get_form(self):
+        form_class = AddStudyForm(researcher=self.request.user)
+        return form_class
+
     def form_valid(self, form):
         study_instance = form.save(commit=False)
         study_name = form.cleaned_data.get("name")
