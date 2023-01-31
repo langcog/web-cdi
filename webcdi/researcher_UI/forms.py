@@ -519,8 +519,8 @@ class StudyFormForm(forms.ModelForm):
 
 
 class AdminNewForm(forms.ModelForm):
-    new_subject_ids = forms.CharField()
-    autogenerate_count = forms.CharField()
+    new_subject_ids = forms.CharField(required=False)
+    autogenerate_count = forms.CharField(required=False)
 
     class Meta:
         model = study
