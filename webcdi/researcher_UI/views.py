@@ -126,6 +126,7 @@ class AddStudy(LoginRequiredMixin, generic.CreateView):
     form_class = AddStudyForm
 
     def get_form(self):
+        self.request.user.refresh_from_db()
         form_class = AddStudyForm(researcher=self.request.user)
         return form_class
 
@@ -139,7 +140,7 @@ class AddStudy(LoginRequiredMixin, generic.CreateView):
         return redirect(reverse("researcher_ui:console"))
 
     def get_context_data(self, **kwargs):
-        context = super(AddStudy, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context["researcher"] = self.request.user
         return context
 
