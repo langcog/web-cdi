@@ -7,6 +7,7 @@
 <a class="row" align="center" href="/">
     <img width="150px" src="{% static 'researcher_UI/images/logo.png' %}">
   </a>
+  
   <!--End Logo-->
 <div class="breadcrumbs container bs-docs-container" style="padding-top: 60px;">
 <a href="{% url 'console' %}">{% trans 'Home' %}</a>
@@ -33,7 +34,7 @@
     <form method="post" action="" class="form-reset-pass col-md-6 col-sm-12">
         
         {% csrf_token %}
-        <p style="font-size:12px; font-family:Arial, Helvetica, sans-serif;;">{% trans "Forgotten your password? Enter your email address below and we will email instructions for setting a new one." %}</p>
+        <p style="font-size:12px; font-family:Arial, Helvetica, sans-serif;">{% trans "Forgotten your password? Enter your email address below and we will email instructions for setting a new one." %}</p>
 
         <!-- {{ form|crispy }} -->
 		<div class="form-group">
