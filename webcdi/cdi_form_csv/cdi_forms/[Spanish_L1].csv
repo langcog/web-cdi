@@ -60,7 +60,7 @@ item_58,buendia,word,col_2,understands; produces,good morning,buenos días,good 
 item_59,porfavo,word,col_2,understands; produces,please,por favor,please,,59
 item_60,shhh,word,col_2,understands; produces,shh,shhh,shh,,60
 item_61,ojitos,word,col_2,understands; produces,little eyes,ojitos,little eyes,,61
-item_62,unodstr,word,col_2,understands; produces,one, two, three,uno, dos, tres,one, two, three,,62
+item_62,unodstr,word,col_2,understands; produces,one; two; three,uno; dos; tres,one; two; three,,62
 item_63,si,word,col_2,understands; produces,yes,sí,yes,,63
 item_64,caer,word,col_2,understands; produces,fall,caer(se),fall,,64
 item_65,comer,word,col_2,understands; produces,eat,comer,eat,,65
