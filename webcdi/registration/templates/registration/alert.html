@@ -1,0 +1,9 @@
+<!-- For Non field errors -->
+{% if errors %}
+  {% for error in errors %}
+      <div style="color:red; font-size:12px; font-family:none" role="alert" class="col-12">
+        <span href="#">{{error}}</span>
+      </div>
+{% endfor %}
+{% endif %}
+

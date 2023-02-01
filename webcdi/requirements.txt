@@ -47,7 +47,7 @@ django-modeltranslation==0.17.3
 django-ses==2.3.1
 django-storages==1.12.3
 django-tables2==2.4.1
-django-weasyprint==2.1.0
+django-weasyprint==1.1.0
 docopt==0.6.2
 docutils==0.18.1
 enum-compat==0.0.3
@@ -118,7 +118,7 @@ trio==0.19.0
 trio-websocket==0.9.2
 urllib3==1.26.7
 wcwidth==0.2.5
-weasyprint==53.4
+weasyprint==52.5
 webencodings==0.5.1
 websocket-client==1.2.3
 wsproto==1.0.0
