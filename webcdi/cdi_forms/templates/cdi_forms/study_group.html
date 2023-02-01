@@ -53,7 +53,7 @@
                         {% language curr_study.user_language %}
                         <div id="div_{{curr_study.name}}">
                         
-                            <h3><a href = "{% url 'administer_new_parent' username=username study_name=curr_study.name %}">
+                            <h3><a href = "{% url 'researcher_ui:administer_new_parent' username=username study_name=curr_study.name %}">
                             {% trans 'My baby speaks LANGUAGE and is between MIN_AGE and MAX_AGE months old. [XX slot(s) left]' %}
                             </a> </h3> 
                             <ul><li>

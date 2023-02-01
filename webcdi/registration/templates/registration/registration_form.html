@@ -1,16 +1,53 @@
-{% extends 'registration/base.html' %}
+{% extends "admin/admin_base_site.html" %}
 {% load i18n %}
+{% load crispy_forms_tags static %}
 
-{% block title %}{% trans 'Registration' %}{% endblock %}
 
-{% block content_title %}<h1>{% trans 'Registration' %}</h1>{% endblock %}
+{% block breadcrumbs %}
+<a class="row" align="center" href="/">
+    <img width="150px" src="{% static 'researcher_UI/images/logo.png' %}">
+  </a>
+  
+  <!--End Logo-->
+<div class="breadcrumbs container bs-docs-container" style="padding-top: 60px;">
+<a href="{% url 'console' %}">{% trans 'Home' %}</a>
+&rsaquo; {% trans 'Password reset' %}
+</div>
+{% endblock %}
 
-{% block contents %}
-{{ block.super }}
-<p>{% trans 'Please fill the following fields to create your registration' %}</p>
-<form action="" method="post">{% csrf_token %}
-    {{ form.as_p }}
-    {{ supplement_form.as_p }}
-    <p><input type="submit" value="{% trans 'Register' %}"></p>
-</form>
+{% block title %}{{ title }}{% endblock %}
+{% block content_title %}<div class="container bs-docs-container"><h1>{{ "" }}</h1></div>{% endblock %}
+{% block content %}
+<style>
+    .form-reset-pass{
+        padding: 40px;
+        width: 100%;
+        margin-bottom: 10rem;
+        border-radius: 10px;
+        overflow: scroll;
+        background: #29A9E6;
+      
+      }
+</style>
+<div id="content-main" class="container bs-docs-container">
+
+    <form method="post" action="" class="form-reset-pass col-md-6 col-sm-12">
+        
+        {% csrf_token %}
+        <p style="font-size:12px; font-family:Arial, Helvetica, sans-serif;">{% trans "Forgotten your password? Enter your email address below and we will email instructions for setting a new one." %}</p>
+
+        <!-- {{ form|crispy }} -->
+		<div class="form-group">
+			{{ form.email.errors }}
+			<label class="col-form-label" for="{{ form.email.id_for_label }}">Email</label>
+			<div class="">
+			  	{{ form.email }}
+			</div>
+		</div>
+        <div>
+        <button type="submit" class="btn btn-primary">{% trans 'Reset my password' %}</button>
+        </div>
+    </form>
+</div>
+
 {% endblock %}

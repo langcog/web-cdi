@@ -21,6 +21,7 @@ from .models import *
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
+
 class CustomWebDriver(WebDriver):
     """Our own WebDriver with some helpers added"""
 
@@ -35,30 +36,37 @@ class CustomWebDriver(WebDriver):
         return elems
 
     def wait_for_css(self, css_selector, timeout=7):
-        """ Shortcut for WebDriverWait"""
+        """Shortcut for WebDriverWait"""
         try:
-            return WebDriverWait(self, timeout).until(lambda driver : driver.find_css(css_selector))
+            return WebDriverWait(self, timeout).until(
+                lambda driver: driver.find_css(css_selector)
+            )
         except:
             self.quit()
+
 
 class SeleniumTestCase(LiveServerTestCase):
     """
     A base test case for selenium, providing hepler methods for generating
     clients and logging in profiles.
     """
-        
+
     def open(self, url):
         self.wd.get("%s%s" % (self.live_server_url, url))
 
+
 @override_settings(DEBUG=True)
 class TestParentInterface(SeleniumTestCase):
-    fixtures = ['researcher_UI/fixtures/instrument-fixtures.json','cdi_forms/fixtures/choices.json']
+    fixtures = [
+        "researcher_UI/fixtures/instrument-fixtures.json",
+        "cdi_forms/fixtures/choices.json",
+    ]
 
     def setUp(self):
         # setUp is where you setup call fixture creation scripts
         # and instantiate the WebDriver, which in turns loads up the browser.
 
-        self.admin = User.objects.create_user(username='admin', password = 'pw')
+        self.admin = User.objects.create_user(username="admin", password="pw")
         self.admin.is_superuser = True
         self.admin.is_staff = True
         self.admin.save()
@@ -72,19 +80,22 @@ class TestParentInterface(SeleniumTestCase):
             name="Test Study",
             instrument=self.instrument,
             min_age=16,
-            max_age=30)
+            max_age=30,
+        )
         self.study_obj.save()
 
         self.client = Client()
-        login = self.client.login(username='admin', password = 'pw')
+        login = self.client.login(username="admin", password="pw")
         self.assertTrue(login)
 
         self.wd = CustomWebDriver()
         self.wd.implicitly_wait(10)
-        cookie = self.client.cookies['sessionid']
-        self.open('/')  # initial page load
-        self.wd.add_cookie({'name': 'sessionid', 'value': cookie.value, 'secure': False, 'path': '/'})
-        self.wd.refresh() # refresh page for logged in user
+        cookie = self.client.cookies["sessionid"]
+        self.open("/")  # initial page load
+        self.wd.add_cookie(
+            {"name": "sessionid", "value": cookie.value, "secure": False, "path": "/"}
+        )
+        self.wd.refresh()  # refresh page for logged in user
 
     def tearDown(self):
         # Don't forget to call quit on your webdriver, so that
@@ -99,42 +110,51 @@ class TestParentInterface(SeleniumTestCase):
             return elems[0]
         elif not elems:
             raise NoSuchElementException(css_selector)
-        return elems        
-        
+        return elems
+
     def researcher_login(self):
-        self.open('/interface/')
+        self.open("/interface/")
         username_input = self.wd.find_css("username")
         username_input.send_keys(self.researcher.username)
         password_input = self.wd.find_element_by_name("password")
-        password_input.send_keys('pw')
-        self.wd.find_element_by_id('id_log_in').click()
+        password_input.send_keys("pw")
+        self.wd.find_element_by_id("id_log_in").click()
 
     def test_parent_UI(self):
-        call_command('populate_items')
-        test_url = reverse('administer_new_parent', args=[self.study_obj.researcher, self.study_obj.name])
+        call_command("populate_items")
+        test_url = reverse(
+            "researcher_ui:administer_new_parent",
+            args=[self.study_obj.researcher, self.study_obj.name],
+        )
         self.open(test_url)
 
         try:
-            self.wd.wait_for_css('#okaybtn',5).click()
-        except: #NoSuchElementException:
+            self.wd.wait_for_css("#okaybtn", 5).click()
+        except:  # NoSuchElementException:
             pass
-        
-        self.wd.execute_script('fastforward()')
-        self.wd.wait_for_css('input[name="btn-next"]',5)[1].click()
-        
+
+        self.wd.execute_script("fastforward()")
+        self.wd.wait_for_css('input[name="btn-next"]', 5)[1].click()
+
         time.sleep(5)
-        self.wd.execute_script('fastforward()')
+        self.wd.execute_script("fastforward()")
 
         # not sure why I have to do it like this, but deosn't get the alert if any quicker
-        WebDriverWait(self.wd, 10).until(EC.element_to_be_clickable((By.ID, "id_submit_btn2")))
+        WebDriverWait(self.wd, 10).until(
+            EC.element_to_be_clickable((By.ID, "id_submit_btn2"))
+        )
         time.sleep(5)
-        WebDriverWait(self.wd, 10).until(EC.element_to_be_clickable((By.ID, "id_submit_btn2"))).click()
-        
+        WebDriverWait(self.wd, 10).until(
+            EC.element_to_be_clickable((By.ID, "id_submit_btn2"))
+        ).click()
+
         alert = self.wd.switch_to_alert()
         alert.accept()
         try:
-            WebDriverWait(self.wd, 10).until(EC.presence_of_element_located((By.ID, "id_results")))
-            self.assertEqual(True,True)
+            WebDriverWait(self.wd, 10).until(
+                EC.presence_of_element_located((By.ID, "id_results"))
+            )
+            self.assertEqual(True, True)
         except:
             self.assertEqual(True, "Did not go to results page")
 
@@ -142,53 +162,69 @@ class TestParentInterface(SeleniumTestCase):
         self.study_obj.waiver = "<p>This is a Waiver Example</p>"
         self.study_obj.save()
 
-        test_url = reverse('administer_new_parent', args=[self.study_obj.researcher, self.study_obj.name])
+        test_url = reverse(
+            "researcher_ui:administer_new_parent",
+            args=[self.study_obj.researcher, self.study_obj.name],
+        )
         self.open(test_url)
 
         try:
-            self.wd.wait_for_css('#okaybtn',5).click()
-        except: #NoSuchElementException:
+            self.wd.wait_for_css("#okaybtn", 5).click()
+        except:  # NoSuchElementException:
             pass
-        
+
         time.sleep(5)
         try:
-            WebDriverWait(self.wd, 10).until(EC.presence_of_element_located((By.ID, "consent_waiver")))
-            self.assertEqual(True,True)
+            WebDriverWait(self.wd, 10).until(
+                EC.presence_of_element_located((By.ID, "consent_waiver"))
+            )
+            self.assertEqual(True, True)
         except:
             self.assertEqual(True, "Waiver Modal didn't open")
 
     def test_parent_UI_dutch_background_info(self):
-        call_command('populate_items')
+        call_command("populate_items")
         self.instrument = instrument.objects.get(name="Dutch_WG")
         self.study_obj = study.objects.create(
             researcher=self.admin,
             name="Dutch Test Study",
             instrument=self.instrument,
             min_age=16,
-            max_age=30)
+            max_age=30,
+        )
         self.study_obj.save()
 
-        test_url = reverse('administer_new_parent', args=[self.study_obj.researcher, self.study_obj.name])
+        test_url = reverse(
+            "researcher_ui:administer_new_parent",
+            args=[self.study_obj.researcher, self.study_obj.name],
+        )
         self.open(test_url)
 
-        #complete background page
-        self.wd.execute_script('fastforward()')
-        self.wd.wait_for_css('input[name="btn-next"]',5)[1].click()
+        # complete background page
+        self.wd.execute_script("fastforward()")
+        self.wd.wait_for_css('input[name="btn-next"]', 5)[1].click()
         time.sleep(5)
-        #complete questionnaire
-        self.wd.execute_script('fastforward()')
-        WebDriverWait(self.wd, 10).until(EC.element_to_be_clickable((By.ID, "id_submit_btn2")))
+        # complete questionnaire
+        self.wd.execute_script("fastforward()")
+        WebDriverWait(self.wd, 10).until(
+            EC.element_to_be_clickable((By.ID, "id_submit_btn2"))
+        )
         time.sleep(5)
-        WebDriverWait(self.wd, 10).until(EC.element_to_be_clickable((By.ID, "id_submit_btn2"))).click()
+        WebDriverWait(self.wd, 10).until(
+            EC.element_to_be_clickable((By.ID, "id_submit_btn2"))
+        ).click()
         alert = self.wd.switch_to_alert()
         alert.accept()
-        #complete backpage
-        self.wd.execute_script('dutch_backpage_fastforward()')
-        WebDriverWait(self.wd, 10).until(EC.element_to_be_clickable((By.ID, "id_submit_btn"))).click()
-        
+        # complete backpage
+        self.wd.execute_script("dutch_backpage_fastforward()")
+        WebDriverWait(self.wd, 10).until(
+            EC.element_to_be_clickable((By.ID, "id_submit_btn"))
+        ).click()
+
         try:
-            WebDriverWait(self.wd, 10).until(EC.presence_of_element_located((By.ID, "id_results")))
-            self.assertEqual(True,True)
+            WebDriverWait(self.wd, 10).until(
+                EC.presence_of_element_located((By.ID, "id_results"))
+            )
+            self.assertEqual(True, True)
         except:
             self.assertEqual(True, "Did not go to results page")
-        
