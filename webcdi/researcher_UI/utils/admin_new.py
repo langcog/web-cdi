@@ -3,7 +3,7 @@ from django.db.models import Max
 import numpy as np
 import re, datetime
 from researcher_UI.models import administration, study
-from researcher_UI.utils import random_url_generator
+from researcher_UI.utils.random_url_generator import random_url_generator
 from django.urls import reverse
 
 
