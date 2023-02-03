@@ -34,7 +34,7 @@ msgstr "Oui"
 #: cdi_forms/models.py:87 cdi_forms/models.py:111 cdi_forms/models.py:114
 #: cdi_forms/models.py:148
 msgid "Prefer not to disclose"
-msgstr "Préfère ne pas divulguer/non applicable"
+msgstr "Préfère ne pas répondre"
 
 #: cdi_forms/forms.py:33
 msgid "Under $25,000"
@@ -163,67 +163,67 @@ msgstr "10 lbs, 0 oz ou plus (4535 grammes ou plus)"
 
 #: cdi_forms/forms.py:77
 msgid "Less than 1500 grams"
-msgstr "Moins de 1500 grammes (Moins de 3 lbs, 4 oz)"
+msgstr "Moins de 1500 grammes"
 
 #: cdi_forms/forms.py:78
 msgid "1500 grams - 1749 grams"
-msgstr "1500 grammes - 1749 grammes (3 lbs, 5 oz - 3 lbs, 13 oz)"
+msgstr "1500 grammes - 1749 grammes"
 
 #: cdi_forms/forms.py:79
 msgid "1750 grams - 1999 grams"
-msgstr "1750 grammes - 1999 grammes (3 lbs, 14 oz - 4 lbs, 6 oz)"
+msgstr "1750 grammes - 1999 grammes"
 
 #: cdi_forms/forms.py:80
 msgid "2000 grams - 2249 grams"
-msgstr "2000 grammes - 2249 grammes (4 lbs, 7 oz - 4 lbs, 15 oz)"
+msgstr "2000 grammes - 2249 grammes"
 
 #: cdi_forms/forms.py:81
 msgid "2250 grams - 2499 grams"
-msgstr "2250 grammes - 2499 grammes (5 lbs, 0 oz - 5 lbs, 8 oz)"
+msgstr "2250 grammes - 2499 grammes"
 
 #: cdi_forms/forms.py:82
 msgid "2500 grams - 2749 grams"
-msgstr "2500 grammes - 2749 grammes (5 lbs, 9 oz - 6 lbs, 1 oz)"
+msgstr "2500 grammes - 2749 grammes"
 
 #: cdi_forms/forms.py:83
 msgid "2750 grams - 2999 grams"
-msgstr "2750 grammes - 2999 grammes (6 lbs, 2 oz - 6 lbs, 9 oz)"
+msgstr "2750 grammes - 2999 grammes"
 
 #: cdi_forms/forms.py:84
 msgid "3000 grams - 3249 grams"
-msgstr "3000 grammes - 3249 grammes (6 lbs, 10 oz - 7 lbs, 2 oz)"
+msgstr "3000 grammes - 3249 grammes"
 
 #: cdi_forms/forms.py:85
 msgid "3250 grams - 3499 grams"
-msgstr "3250 grammes - 3499 grammes (7 lbs, 3 oz - 7 lbs, 11 oz)"
+msgstr "3250 grammes - 3499 grammes"
 
 #: cdi_forms/forms.py:86
 msgid "3500 grams - 3749 grams"
-msgstr "3500 grammes - 3749 grammes (7 lbs, 12 oz - 8 lbs, 4 oz)"
+msgstr "3500 grammes - 3749 grammes"
 
 #: cdi_forms/forms.py:87
 msgid "3750 grams - 3999 grams"
-msgstr "3750 grammes - 3999 grammes (8 lbs, 5 oz - 8 lbs, 13 oz)"
+msgstr "3750 grammes - 3999 grammes"
 
 #: cdi_forms/forms.py:88
 msgid "4000 grams - 4249 grams"
-msgstr "4000 grammes - 4249 grammes (8 lbs, 14 oz - 9 lbs, 5 oz)"
+msgstr "4000 grammes - 4249 grammes"
 
 #: cdi_forms/forms.py:89
 msgid "4250 grams - 4499 grams"
-msgstr "4250 grammes - 4499 grammes (9 lbs, 6 oz - 9 lbs, 14 oz)"
+msgstr "4250 grammes - 4499 grammes"
 
 #: cdi_forms/forms.py:90
 msgid "4500 grams - 4749 grams"
-msgstr "4500 grammes - 4749 grammes (9 lbs, 15 oz - 10 lbs, 7 oz)"
+msgstr "4500 grammes - 4749 grammes"
 
 #: cdi_forms/forms.py:91
 msgid "4750 grams - 4999 grams"
-msgstr "4750 grammes - 4999 grammes (10 lbs, 8 oz - 11 lbs, 0 oz)"
+msgstr "4750 grammes - 4999 grammes"
 
 #: cdi_forms/forms.py:92
 msgid "5000 grams or more"
-msgstr "5000 grammes ou plus (11 lbs, 1 oz ou plus)"
+msgstr "5000 grammes ou plus"
 
 #: cdi_forms/forms.py:98 cdi_forms/forms.py:114
 msgid "12 (High school graduate)"
@@ -309,7 +309,7 @@ msgstr "Féminin"
 
 #: cdi_forms/forms.py:190
 msgid "Other / Prefer not to disclose"
-msgstr "Autre/Préfère ne pas divulguer"
+msgstr "Autre/Préfère ne pas répondre"
 
 #: cdi_forms/forms.py:192
 msgid "Sex"
@@ -371,8 +371,7 @@ msgid ""
 "Was your child born early or late (more than one week before or after the "
 "due date)?"
 msgstr ""
-"Votre enfant est-il né plus tôt ou plus tard que prévu (plus d'une semaine "
-"avant ou après la date d’accouchement prévue)?"
+"À combien de semaines de grossesse est né votre enfant ?"
 
 #: cdi_forms/forms.py:332
 msgid "Does your child regularly hear a language other than English?"
@@ -1252,47 +1251,47 @@ msgstr "Veuillez entrer un code postal canadien valide"
 
 #: cdi_forms/models.py:77
 msgid "1 (First)"
-msgstr "1 (Premier né)"
+msgstr "1er"
 
 #: cdi_forms/models.py:78
 msgid "2 (Second)"
-msgstr "2 (Deuxième né)"
+msgstr "2er"
 
 #: cdi_forms/models.py:79
 msgid "3 (Third)"
-msgstr "3 (Troisième né)"
+msgstr "3er"
 
 #: cdi_forms/models.py:80
 msgid "4 (Fourth)"
-msgstr "4 (Quatrième né)"
+msgstr "4er"
 
 #: cdi_forms/models.py:81
 msgid "5 (Fifth)"
-msgstr "5 (Cinquième né)"
+msgstr "5er"
 
 #: cdi_forms/models.py:82
 msgid "6 (Sixth)"
-msgstr "6 (Sixième né)"
+msgstr "6er"
 
 #: cdi_forms/models.py:83
 msgid "7 (Seventh)"
-msgstr "7 (Septième né)"
+msgstr "7er"
 
 #: cdi_forms/models.py:84
 msgid "8 (Eighth)"
-msgstr "8 (Huitième né)"
+msgstr "8er"
 
 #: cdi_forms/models.py:85
 msgid "9 (Ninth)"
-msgstr "9 (Neuvième né)"
+msgstr "9er"
 
 #: cdi_forms/models.py:86
 msgid "10 or more (Tenth or Later)"
-msgstr "10 ou plus (Dixième né ou après)"
+msgstr "10 ou plus"
 
 #: cdi_forms/models.py:90
 msgid "Birth order"
-msgstr "Ordre de naissance"
+msgstr "Rang de naissance dans la fratrie"
 
 #: cdi_forms/models.py:94
 msgid "Twins"

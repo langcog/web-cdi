@@ -22,19 +22,26 @@
     <div class="flex-row">
         <h4>{% trans "Instructions for completing the language inventory" %}</h4>
         <ul>
-            {% if form == "WG" or form == "WS" %}
-                <li> {% trans "Try to complete the inventory when you have at least 30 quiet minutes, without interruptions. An example might be when your child is sleeping." %} </li>
+            {% if form == 'CAT' %}
+                <li>{% trans "In this survey, we ask you about words that your child “says” in English." %}</li>
+                <li>{% trans "Try to complete the survey when you have a few quiet minutes, without interruptions. An example might be when your child is sleeping." %}</li>
+                <li>{% trans "Don’t worry! Your child does not need to pronounce the words exactly as you do (e.g., “raff” instead of “giraffe”).  And there might be some words in your family that you use instead (e.g., “nana” for “grandma”)." %} </li>
+                <li>{% trans "Remember, these words are just some of the words that a child might say, so it is ok if they do not say all of them!" %}</li>
             {% else %}
-                <li> {% trans "Try to complete the inventory when you have at least 10-15 quiet minutes, without interruptions. An example might be when your child is sleeping." %} </li>
-            {% endif %}
-            <li> {% trans "You do not have to complete the inventory in one sitting. If you are interrupted, it is ok to put it down and come back to it when you have more time." %} </li>
-            <li> {% trans "Feel free to ask others (e.g. other family members, nanny, child care providers) to help you fill out this form." %} </li>
-            <li> {% trans "Please read all of the instructions on the inventory carefully, and make sure you complete all of the sections." %} </li>
-            <!-- Added optional bullet point describing compensation post-submission. Only appears if participant will be compensated. -->
-            {% if gift_amount %}
-                <li> 
-                    {% blocktrans with gift_amount=gift_amount %}You will receive a ${{ gift_amount }} Amazon.com gift card after you complete the form. As we are a research lab with limited funds, we ask that you only complete this questionnaire once.{% endblocktrans %}
-                </li>
+                {% if form == "WG" or form == "WS" %}
+                    <li> {% trans "Try to complete the inventory when you have at least 30 quiet minutes, without interruptions. An example might be when your child is sleeping." %} </li>
+                {% else %}
+                    <li> {% trans "Try to complete the inventory when you have at least 10-15 quiet minutes, without interruptions. An example might be when your child is sleeping." %} </li>
+                {% endif %}
+                <li> {% trans "You do not have to complete the inventory in one sitting. If you are interrupted, it is ok to put it down and come back to it when you have more time." %} </li>
+                <li> {% trans "Feel free to ask others (e.g. other family members, nanny, child care providers) to help you fill out this form." %} </li>
+                <li> {% trans "Please read all of the instructions on the inventory carefully, and make sure you complete all of the sections." %} </li>
+                <!-- Added optional bullet point describing compensation post-submission. Only appears if participant will be compensated. -->
+                {% if gift_amount %}
+                    <li> 
+                        {% blocktrans with gift_amount=gift_amount %}You will receive a ${{ gift_amount }} Amazon.com gift card after you complete the form. As we are a research lab with limited funds, we ask that you only complete this questionnaire once.{% endblocktrans %}
+                    </li>
+                {% endif %}
             {% endif %}
         </ul>
     </div>
