@@ -22,7 +22,7 @@
     <div class="flex-row">
         <h4>{% trans "Instructions for completing the language inventory" %}</h4>
         <ul>
-            {% if form == 'CAT' %}
+            {% if form == 'CAT' or form == 'CAT2' %}
                 <li>{% trans "In this survey, we ask you about words that your child “says” in English." %}</li>
                 <li>{% trans "Try to complete the survey when you have a few quiet minutes, without interruptions. An example might be when your child is sleeping." %}</li>
                 <li>{% trans "Don’t worry! Your child does not need to pronounce the words exactly as you do (e.g., “raff” instead of “giraffe”).  And there might be some words in your family that you use instead (e.g., “nana” for “grandma”)." %} </li>
