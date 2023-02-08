@@ -102,6 +102,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     #'axes.middleware.AxesMiddleware',
     'webcdi.middleware.LoginRequiredMiddleware',
+    'webcdi.middleware.AdminLocaleMiddleware',
 ]
 
 AUTHENTICATION_BACKENDS = [

@@ -24,3 +24,12 @@ class LoginRequiredMiddleware(MiddlewareMixin):
                     redirect_to = f"{settings.LOGIN_URL}?next={request.path_info}"
 
                 return HttpResponseRedirect(redirect_to)
+
+from django.utils import translation
+
+class AdminLocaleMiddleware(MiddlewareMixin):
+
+    def process_request(self, request):
+        if request.path.startswith('/wcadmin') or request.path.startswith('/interface'):
+            translation.activate("en")
+            request.LANGUAGE_CODE = translation.get_language()
