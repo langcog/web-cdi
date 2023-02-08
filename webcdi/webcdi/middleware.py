@@ -27,9 +27,9 @@ class LoginRequiredMiddleware(MiddlewareMixin):
 
 from django.utils import translation
 
-class AdminLocaleMiddleware(object):
+class AdminLocaleMiddleware(MiddlewareMixin):
 
     def process_request(self, request):
-        if request.path.startswith('/wcadmin'):
+        if request.path.startswith('/wcadmin') or request.path.startswith('/interface'):
             translation.activate("en")
             request.LANGUAGE_CODE = translation.get_language()
