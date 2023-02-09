@@ -30,6 +30,6 @@ from django.utils import translation
 class AdminLocaleMiddleware(MiddlewareMixin):
 
     def process_request(self, request):
-        if request.path.startswith('/wcadmin') or request.path.startswith('/interface'):
+        if request.path.startswith('/wcadmin') or request.path.startswith('/interface') or request.path.startswith('/signup'):
             translation.activate("en")
             request.LANGUAGE_CODE = translation.get_language()
