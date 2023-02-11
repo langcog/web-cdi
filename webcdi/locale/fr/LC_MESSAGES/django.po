@@ -1538,19 +1538,15 @@ msgstr "indications pour remplir l’inventaire de communication"
 #: cdi_forms/templates/cdi_forms/background_info.html:26
 msgid ""
 "In this survey, we ask you about words that your child “says” in English."
-msgstr ""
+msgstr "Dans cette étude, nous vous montrerons des mots et vous demanderons quels mots votre enfant utilise en français, les mots qu'il 'dit'."
 
 #: cdi_forms/templates/cdi_forms/background_info.html:27
 #, fuzzy
-#| msgid ""
-#| "Try to complete the inventory when you have at least 30 quiet minutes, "
-#| "without interruptions. An example might be when your child is sleeping."
 msgid ""
 "Try to complete the survey when you have a few quiet minutes, without "
 "interruptions. An example might be when your child is sleeping."
 msgstr ""
-"Essayez de compléter l’inventaire lorsque vous avez au moins 30 minutes sans "
-"interruptions. Un exemple pourrait être lorsque votre enfant dort.​"
+"Essayez de remplir l'étude quand vous avez quelques minutes au calme et sans interruption, par exemple lorsque votre enfant dort. ​"
 
 #: cdi_forms/templates/cdi_forms/background_info.html:28
 msgid ""
@@ -1558,12 +1554,15 @@ msgid ""
 "do (e.g., “raff” instead of “giraffe”).  And there might be some words in "
 "your family that you use instead (e.g., “nana” for “grandma”)."
 msgstr ""
+"Ne vous inquiétez pas, votre enfant n'a pas besoin de prononcer les mots exactement comme vous (par exemple 'potame' au lieu de 'hippopotame'). Vous aurez peut-être aussi des mots spécifiques à votre famille (par exemple 'mamoune' pour 'grand-mère'). Si votre enfant est capable de les dire, cela compte aussi. "
 
 #: cdi_forms/templates/cdi_forms/background_info.html:29
 msgid ""
 "Remember, these words are just some of the words that a child might say, so "
 "it is ok if they do not say all of them!"
 msgstr ""
+"Les mots que nous vous montrons représentent une petite partie de tous les mots que les enfants peuvent être capables de dire, c'est parfaitement normal si votre enfant ne peut pas tous les dire !"
+
 
 #: cdi_forms/templates/cdi_forms/background_info.html:32
 #: cdi_forms/templates/cdi_forms/study_group.html:22
