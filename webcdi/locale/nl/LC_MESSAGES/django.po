@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-29 17:12+0000\n"
+"POT-Creation-Date: 2023-02-11 17:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,13 +19,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: cdi_forms/forms.py:29 cdi_forms/forms.py:30
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:133
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:150
 #: cdi_forms/templates/cdi_forms/cdi_base.html:152
 msgid "No"
 msgstr "Nee"
 
 #: cdi_forms/forms.py:29 cdi_forms/forms.py:30
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:136
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:153
 msgid "Yes"
 msgstr "Ja"
 
@@ -427,27 +427,27 @@ msgstr "mm/dd/jjjj"
 msgid "dd/mm/yyyy"
 msgstr "dd/mm/jjjj"
 
-#: cdi_forms/forms.py:558 cdi_forms/models.py:137
+#: cdi_forms/forms.py:559 cdi_forms/models.py:137
 msgid "Estimated Annual Family Income (in USD)"
 msgstr "Gezinsinkomen (netto) per maand"
 
-#: cdi_forms/forms.py:562
+#: cdi_forms/forms.py:563
 msgid "My child is (check all that apply):"
 msgstr "Mijn kind is (vink alles aan wat van toepassing is):"
 
-#: cdi_forms/forms.py:566 cdi_forms/forms.py:568
+#: cdi_forms/forms.py:567 cdi_forms/forms.py:569
 msgid "Basic Information"
 msgstr "Basisinformatie"
 
-#: cdi_forms/forms.py:572
+#: cdi_forms/forms.py:573
 msgid "Family Background"
 msgstr "Gezinsachtergrond"
 
-#: cdi_forms/forms.py:573 cdi_forms/models.py:140
+#: cdi_forms/forms.py:574 cdi_forms/models.py:140
 msgid "Child's Ethnicity"
 msgstr "Etniciteit van het kind"
 
-#: cdi_forms/forms.py:573
+#: cdi_forms/forms.py:574
 msgid ""
 "The following information is being collected for the sole purpose of "
 "reporting to our grant-funding institute, i.e.,  NIH (National Institute of "
@@ -459,36 +459,41 @@ msgstr ""
 "informatie nodig om de correctheid en inclusiviteit van ons onderzoek te "
 "garanderen. Uw medewerking wordt gewaardeerd, maar is vrijwillig."
 
-#: cdi_forms/forms.py:574
+#: cdi_forms/forms.py:575
 msgid "Caregiver Information"
 msgstr "Informatie verzorger"
 
-#: cdi_forms/forms.py:575
+#: cdi_forms/forms.py:576
 msgid "Language Exposure"
 msgstr "Blootstelling aan taal"
 
-#: cdi_forms/forms.py:578
+#: cdi_forms/forms.py:579
 msgid "Health"
 msgstr "Gezondheid"
 
-#: cdi_forms/forms.py:616
+#: cdi_forms/forms.py:598
+#, python-format
+msgid "Your identifier for %(source)s"
+msgstr ""
+
+#: cdi_forms/forms.py:624
 msgid "Your Name"
 msgstr "Uw naam"
 
-#: cdi_forms/forms.py:617
+#: cdi_forms/forms.py:625
 msgid "Your Email Address"
 msgstr "Uw e-mailadres"
 
-#: cdi_forms/forms.py:618
+#: cdi_forms/forms.py:626
 msgid "Your Test URL"
 msgstr "Uw URL"
 
-#: cdi_forms/forms.py:619
+#: cdi_forms/forms.py:627
 msgid "What would you like to tell us?"
 msgstr "Wat wilt u ons vertellen?"
 
-#: cdi_forms/forms.py:638 cdi_forms/templates/cdi_forms/cdi_form.html:11
-#: cdi_forms/templates/cdi_forms/cdi_form.html:323 cdi_forms/views.py:814
+#: cdi_forms/forms.py:646 cdi_forms/templates/cdi_forms/cdi_form.html:11
+#: cdi_forms/templates/cdi_forms/cdi_form.html:323 cdi_forms/views.py:823
 msgid "Submit"
 msgstr "Sturen"
 
@@ -1494,9 +1499,10 @@ msgid "Days per week"
 msgstr ""
 
 #: cdi_forms/templates/cdi_forms/background_info.html:7
-#: cdi_forms/templates/cdi_forms/background_info.html:59
-#: cdi_forms/templates/cdi_forms/study_group.html:7 cdi_forms/views.py:262
-#: cdi_forms/views.py:558
+#: cdi_forms/templates/cdi_forms/background_info.html:66
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:124
+#: cdi_forms/templates/cdi_forms/study_group.html:7 cdi_forms/views.py:269
+#: cdi_forms/views.py:567
 msgid "Next"
 msgstr "Volgende"
 
@@ -1520,6 +1526,37 @@ msgid "Instructions for completing the language inventory"
 msgstr "Instructies voor het invullen van de vragenlijst"
 
 #: cdi_forms/templates/cdi_forms/background_info.html:26
+msgid ""
+"In this survey, we ask you about words that your child “says” in English."
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/background_info.html:27
+#, fuzzy
+#| msgid ""
+#| "Try to complete the inventory when you have at least 30 quiet minutes, "
+#| "without interruptions. An example might be when your child is sleeping."
+msgid ""
+"Try to complete the survey when you have a few quiet minutes, without "
+"interruptions. An example might be when your child is sleeping."
+msgstr ""
+"Probeer de vragenlijst in te vullen wanneer u 30 minuten de tijd heeft, "
+"bijvoorbeeld als uw kind slaapt. U hoeft de vragenlijst niet in één keer af "
+"te maken. U kunt de lijst opslaan en een andere keer verder gaan."
+
+#: cdi_forms/templates/cdi_forms/background_info.html:28
+msgid ""
+"Don’t worry! Your child does not need to pronounce the words exactly as you "
+"do (e.g., “raff” instead of “giraffe”).  And there might be some words in "
+"your family that you use instead (e.g., “nana” for “grandma”)."
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/background_info.html:29
+msgid ""
+"Remember, these words are just some of the words that a child might say, so "
+"it is ok if they do not say all of them!"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/background_info.html:32
 #: cdi_forms/templates/cdi_forms/study_group.html:22
 msgid ""
 "Try to complete the inventory when you have at least 30 quiet minutes, "
@@ -1529,7 +1566,7 @@ msgstr ""
 "bijvoorbeeld als uw kind slaapt. U hoeft de vragenlijst niet in één keer af "
 "te maken. U kunt de lijst opslaan en een andere keer verder gaan."
 
-#: cdi_forms/templates/cdi_forms/background_info.html:28
+#: cdi_forms/templates/cdi_forms/background_info.html:34
 msgid ""
 "Try to complete the inventory when you have at least 10-15 quiet minutes, "
 "without interruptions. An example might be when your child is sleeping."
@@ -1538,7 +1575,7 @@ msgstr ""
 "bijvoorbeeld als uw kind slaapt. U hoeft de vragenlijst niet in één keer af "
 "te maken. U kunt de lijst opslaan en een andere keer verder gaan."
 
-#: cdi_forms/templates/cdi_forms/background_info.html:30
+#: cdi_forms/templates/cdi_forms/background_info.html:36
 #: cdi_forms/templates/cdi_forms/study_group.html:23
 msgid ""
 "You do not have to complete the inventory in one sitting. If you are "
@@ -1548,7 +1585,7 @@ msgstr ""
 "U hoeft de vragenlijst niet alleen in te vullen. U mag andere mensen vragen "
 "om dit samen met u te doen, bijvoorbeeld familieleden, oppas of kinderopvang."
 
-#: cdi_forms/templates/cdi_forms/background_info.html:31
+#: cdi_forms/templates/cdi_forms/background_info.html:37
 #: cdi_forms/templates/cdi_forms/study_group.html:24
 msgid ""
 "Feel free to ask others (e.g. other family members, nanny, child care "
@@ -1556,7 +1593,7 @@ msgid ""
 msgstr ""
 "Lees alle instructies van de vragenlijst goed door en vul alle onderdelen in."
 
-#: cdi_forms/templates/cdi_forms/background_info.html:32
+#: cdi_forms/templates/cdi_forms/background_info.html:38
 #: cdi_forms/templates/cdi_forms/study_group.html:25
 msgid ""
 "Please read all of the instructions on the inventory carefully, and make "
@@ -1566,7 +1603,7 @@ msgstr ""
 "jonge kinderen zult u niet heel veel kunnen invullen. Die antwoorden blijven "
 "dan gewoon leeg."
 
-#: cdi_forms/templates/cdi_forms/background_info.html:36
+#: cdi_forms/templates/cdi_forms/background_info.html:42
 #, fuzzy, python-format
 #| msgid ""
 #| "You will receive a $%(gift_amount)s Amazon.com gift card after you "
@@ -1581,43 +1618,43 @@ msgstr ""
 "vragenlijst. Aangezien we een onderzoekslab met beperkte middelen zijn, "
 "willen we u vragen om de vragenlijst maar een keer in te vullen."
 
-#: cdi_forms/templates/cdi_forms/background_info.html:42
+#: cdi_forms/templates/cdi_forms/background_info.html:49
 #: cdi_forms/templates/cdi_forms/study_group.html:29
 msgid "For more information about the MB-CDI,"
 msgstr "Voor meer informatie over de MB-CDI (de informatie is in het Engels)"
 
-#: cdi_forms/templates/cdi_forms/background_info.html:42
+#: cdi_forms/templates/cdi_forms/background_info.html:49
 #: cdi_forms/templates/cdi_forms/study_group.html:29
 msgid "click here"
 msgstr "klik hier"
 
-#: cdi_forms/templates/cdi_forms/background_info.html:43
+#: cdi_forms/templates/cdi_forms/background_info.html:50
 #: cdi_forms/templates/cdi_forms/study_group.html:30
 msgid "Thank you! We appreciate your time and effort!"
 msgstr "Bedankt dat u deze vragenlijst in wilt vullen!"
 
-#: cdi_forms/templates/cdi_forms/background_info.html:48
+#: cdi_forms/templates/cdi_forms/background_info.html:55
 msgid "Background Information"
 msgstr "Achtergrondinformatie"
 
-#: cdi_forms/templates/cdi_forms/background_info.html:64
+#: cdi_forms/templates/cdi_forms/background_info.html:71
 #: cdi_forms/templates/cdi_forms/backpage_info.html:48
 #: cdi_forms/templates/cdi_forms/cdi_form.html:339
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:291
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:282
 #: cdi_forms/templates/cdi_forms/study_group.html:113
 msgid "Form unavailable. Contact admin."
 msgstr "De vragenlijst is niet beschikbaar. Neem contact op met de beheerder."
 
 #: cdi_forms/templates/cdi_forms/backpage_info.html:12
-#: cdi_forms/templates/cdi_forms/backpage_info.html:45 cdi_forms/views.py:269
+#: cdi_forms/templates/cdi_forms/backpage_info.html:45 cdi_forms/views.py:276
 msgid "Finish"
 msgstr "Afronden"
 
 #: cdi_forms/templates/cdi_forms/backpage_info.html:16
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:14
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:32
 #: cdi_forms/templates/cdi_forms/cdi_form.html:14
-#: cdi_forms/templates/cdi_forms/cdi_form.html:328 cdi_forms/views.py:275
-#: cdi_forms/views.py:808
+#: cdi_forms/templates/cdi_forms/cdi_form.html:328 cdi_forms/views.py:283
+#: cdi_forms/views.py:817
 msgid "Go back to Background Info"
 msgstr "Naar achtergrondinformatie"
 
@@ -1632,7 +1669,7 @@ msgstr ""
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:31
 #: cdi_forms/templates/cdi_forms/expired.html:32
 #: cdi_forms/templates/cdi_forms/overflow.html:37
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:159
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:162
 msgid "MB-CDI Lab Logo"
 msgstr "MB-CDI Lab logo"
 
@@ -1685,7 +1722,12 @@ msgstr ""
 "stanford.edu/\" target=\"_blank\">hier</a> meer informatie over de CDI "
 "vinden. We zijn heel blij met uw deelname!"
 
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:28
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:52
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:231
+msgid "Click to complete the study"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:46
 #: cdi_forms/templates/cdi_forms/cdi_form.html:192
 msgid ""
 "In this section, you will be asked about words that your child \"understands "
@@ -1706,7 +1748,7 @@ msgstr ""
 "uw kind niet veel woorden van de vragenlijst begrijpt of zegt. Dat is "
 "helemaal prima!"
 
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:41
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:59
 #: cdi_forms/templates/cdi_forms/cdi_form.html:206
 msgid "DO check the box if:"
 msgstr ""
@@ -1714,7 +1756,7 @@ msgstr ""
 "woord(groep). Bijvoorbeeld, als u \"Pak de bal\" zegt en hij/zij probeert de "
 "bal te vinden."
 
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:43
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:61
 #: cdi_forms/templates/cdi_forms/cdi_form.html:208
 msgid ""
 "Your child says the word when trying to name an object or describe something "
@@ -1724,7 +1766,7 @@ msgstr ""
 "niet weet. Hij/zij heeft het woord misschien al eerder gehoord, bijvoorbeeld "
 "in een verhaal, maar weet niet wat het betekent."
 
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:62
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:80
 #: cdi_forms/templates/cdi_forms/cdi_form.html:226
 msgid ""
 "It's fine if your child can't say the whole word or says it his/her own "
@@ -1735,7 +1777,7 @@ msgstr ""
 "wanneer hij/zij probeert een voorwerp te benoemen of een situatie probeert "
 "te beschrijven. U denkt dat hij/zij de betekenis kent."
 
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:64
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:82
 #: cdi_forms/templates/cdi_forms/cdi_form.html:228
 msgid "DO check the box."
 msgstr ""
@@ -1744,7 +1786,7 @@ msgstr ""
 "gebruikt in uw familie (bijv. omi in plaats van oma) is dat ook goed. Vink "
 "\"begrijpen en zeggen\" dan WEL aan."
 
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:82
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:100
 #: cdi_forms/templates/cdi_forms/cdi_form.html:245
 msgid ""
 "DON'T check the box if your child is just stringing sounds together. This is "
@@ -1753,7 +1795,7 @@ msgstr ""
 "Vink \"begrijpen en zeggen\" NIET aan als uw kind alleen maar geluiden "
 "maakt. Dat is geen echt woord met een betekenis."
 
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:99
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:117
 #: cdi_forms/templates/cdi_forms/cdi_form.html:174
 #: cdi_forms/templates/cdi_forms/cdi_form.html:261
 msgid ""
@@ -1761,13 +1803,18 @@ msgid ""
 msgstr ""
 "Vraag uw kind NIET om het woord van de lijst te herhalen. Dit telt niet mee!"
 
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:125
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:137
+#, python-format
+msgid "%(words_shown)s of %(max_words)s (maximum) "
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:142
 #, fuzzy
 #| msgid "Who does your child live with?"
 msgid "Does your child say ... "
 msgstr "Welke verzorgers wonen er samen met het kind?"
 
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:128
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:145
 msgid "* or word used in your family"
 msgstr ""
 
@@ -1851,7 +1898,7 @@ msgstr "Toestemmingsverklaring opnieuw bekijken"
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:10
 #: cdi_forms/templates/cdi_forms/cdi_form.html:327
-#: cdi_forms/templates/cdi_forms/study_group.html:6 cdi_forms/views.py:797
+#: cdi_forms/templates/cdi_forms/study_group.html:6 cdi_forms/views.py:806
 msgid "Save"
 msgstr "Opslaan"
 
@@ -1875,8 +1922,8 @@ msgid ""
 "lot of the words on the form. That is perfectly fine!"
 msgstr ""
 "Deze vragenlijst bestaat uit twee delen. Dit deel van de vragenlijst gaat "
-"over woorden en woordgroepen die uw kind \"begrijpt\" en \"begrijpt en zegt"
-"\". Met de term woord(groep) bedoelen we in deze vragenlijst een woord, "
+"over woorden en woordgroepen die uw kind \"begrijpt\" en \"begrijpt en "
+"zegt\". Met de term woord(groep) bedoelen we in deze vragenlijst een woord, "
 "enkele woorden of een zin. Deze vragenlijst is voor kinderen van "
 "verschillende leeftijden. Het kan zijn dat uw kind niet veel woorden uit "
 "deze lijst begrijpt of zegt. Dat is helemaal prima!"
@@ -2067,7 +2114,7 @@ msgstr ""
 "opnemen met de onderzoeker."
 
 #: cdi_forms/templates/cdi_forms/overflow.html:40
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:165
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:168
 msgid "Thank you!"
 msgstr "Bedankt!"
 
@@ -2078,8 +2125,8 @@ msgid ""
 "before. We ask that you only complete our assessment once. If you have any "
 "concerns about your child’s development, we recommend that you talk with "
 "your child’s physician. If you enjoyed our assessment, you can learn more "
-"about the CDI <a href=\"http://mb-cdi.stanford.edu/\" target=\"_blank"
-"\">here</a>. Again, we appreciate your interest!"
+"about the CDI <a href=\"http://mb-cdi.stanford.edu/\" "
+"target=\"_blank\">here</a>. Again, we appreciate your interest!"
 msgstr ""
 "Bedankt voor het invullen van de MacArthur-Bates Communicative Development "
 "Inventory (CDI)! Het lijkt erop dat u de CDI al eerder heeft ingevuld. We "
@@ -2096,42 +2143,42 @@ msgid ""
 "Development Inventory (CDI)! At this time, all of our study slots have "
 "already filled up and we have run out of thank-you gifts to compensate you "
 "for your time. If you are still interested in completing the CDI and "
-"learning more about your child's vocabulary, you may click <a href="
-"\"%(bypass_url)s\" target=\"_blank\">here</a> to complete the questionnaire, "
-"but you will not receive compensation. You can also keep an eye out for "
-"another study ad in the future! If you have any concerns about your child’s "
-"development, we recommend that you talk with your child’s physician. If you "
-"enjoyed our assessment, you can learn more about the CDI <a href=\"http://mb-"
-"cdi.stanford.edu/\" target=\"_blank\">here</a>. Again, we appreciate your "
-"interest!"
+"learning more about your child's vocabulary, you may click <a "
+"href=\"%(bypass_url)s\" target=\"_blank\">here</a> to complete the "
+"questionnaire, but you will not receive compensation. You can also keep an "
+"eye out for another study ad in the future! If you have any concerns about "
+"your child’s development, we recommend that you talk with your child’s "
+"physician. If you enjoyed our assessment, you can learn more about the CDI "
+"<a href=\"http://mb-cdi.stanford.edu/\" target=\"_blank\">here</a>. Again, "
+"we appreciate your interest!"
 msgstr ""
 "Bedankt voor uw interesse in de MacArthur-Bates Communicative Development "
 "Inventory (CDI)! Op dit moment hebben we geen ouders meer nodig en hebben we "
 "geen bedankjes meer als compensatie voor uw tijd. Als u nog steeds "
 "geïnteresseerd bent in het invullen van de CDI en meer over de woordenschat "
-"van uw kind wilt weten, kunt u <a href=\"%(bypass_url)s\" target=\"_blank"
-"\">hier</a> klikken om de 30 minuten durende vragenlijst in te vullen.  Als "
-"u bezorgd bent over de ontwikkeling van uw kind, raden wij aan om contact "
-"met uw huisarts op te nemen. Als u het leuk vond om de vragenlijst in te "
-"vullen, kunt u <a href=\"http://mb-cdi.stanford.edu/\"\" target=\"_blank"
-"\">hier</a> meer informatie over de CDI vinden. We zijn heel blij met uw "
-"interesse!"
+"van uw kind wilt weten, kunt u <a href=\"%(bypass_url)s\" "
+"target=\"_blank\">hier</a> klikken om de 30 minuten durende vragenlijst in "
+"te vullen.  Als u bezorgd bent over de ontwikkeling van uw kind, raden wij "
+"aan om contact met uw huisarts op te nemen. Als u het leuk vond om de "
+"vragenlijst in te vullen, kunt u <a href=\"http://mb-cdi.stanford.edu/\"\" "
+"target=\"_blank\">hier</a> meer informatie over de CDI vinden. We zijn heel "
+"blij met uw interesse!"
 
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:40
 msgid "Interesting tidbits learned from how your child speaks!"
 msgstr "Interessante weetjes geleerd door hoe uw kind praat!"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:74
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:77
 #, python-format
 msgid "Words Produced (%%)"
 msgstr "Percentage woorden wat uw kind kan zeggen (%%)"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:114
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:117
 #, python-format
 msgid "Words Understood (%%)"
 msgstr "Percentage begrepen woorden (%%)"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:168
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:171
 msgid ""
 "Thank you for taking the time to complete the MacArthur-Bates Communicative "
 "Development Inventory (CDI). With the help of parents and caregivers like "
@@ -2143,8 +2190,8 @@ msgid ""
 "based on our research. This summary is not a clinical evaluation. If you "
 "have any concerns about your child’s development, we recommend that you talk "
 "with your child’s physician. If you enjoyed our assessment, you can learn "
-"more about the CDI <a href=\"http://mb-cdi.stanford.edu/\" target=\"_blank"
-"\">here</a>. We appreciate your contribution!"
+"more about the CDI <a href=\"http://mb-cdi.stanford.edu/\" "
+"target=\"_blank\">here</a>. We appreciate your contribution!"
 msgstr ""
 "Bedankt dat u de MacArthur-Bates Communicative Development Inventory (CDI) "
 "ingevuld heeft. Met de hulp van ouders en verzorgers zoals u kunnen we meer "
@@ -2160,18 +2207,18 @@ msgstr ""
 "stanford.edu/\" target=\"_blank\">hier</a> meer informatie over de CDI "
 "vinden. We zijn heel blij met uw deelname!"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:175
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:178
 #, python-format
 msgid ""
 "We're sorry but it looks like we have run out of Amazon.com Gift Cards! "
 "Please <a href=\"%(contact_url)s\" target=\"_blank\">reach out to us</a> and "
 "we will quickly fix this issue."
 msgstr ""
-"Het spijt ons, maar we hebben geen Amazon.com cadeaubonnen meer! <a href="
-"\"%(contact_url)s\" target=\"_blank\">Neem contact op.</a> en wij proberen "
-"het probleem zo snel mogelijk op te lossen."
+"Het spijt ons, maar we hebben geen Amazon.com cadeaubonnen meer! <a "
+"href=\"%(contact_url)s\" target=\"_blank\">Neem contact op.</a> en wij "
+"proberen het probleem zo snel mogelijk op te lossen."
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:180
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:183
 msgid ""
 "Thank you for participating in our Web-CDI project! It is our pleasure to "
 "send you this Amazon.com Gift Card that can be redeemed towards millions of "
@@ -2184,77 +2231,69 @@ msgstr ""
 "wilt u een printscreen van deze pagina maken voor om later op terug te "
 "komen--u heeft de code hieronder nodig."
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:184
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:187
 msgid "Gift Card Amount"
 msgstr "Waarde van cadeaubon"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:185
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:188
 msgid "Claim Code"
 msgstr "Code"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:189
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:192
 #, python-format
 msgid ""
-"To redeem your gift card, visit <a href=\"%(redeem_url)s\" target=\"_blank"
-"\">www.amazon.com/redeem</a>. Restrictions apply, see <a href=\"%(legal_url)s"
-"\" target=\"_blank\">www.amazon.com/gc-legal</a>."
+"To redeem your gift card, visit <a href=\"%(redeem_url)s\" "
+"target=\"_blank\">www.amazon.com/redeem</a>. Restrictions apply, see <a "
+"href=\"%(legal_url)s\" target=\"_blank\">www.amazon.com/gc-legal</a>."
 msgstr ""
 "Kijk op <a href=\"%(redeem_url)s\" target=\"_blank\">%(redeem_url)s</a> om "
-"uw cadeaubon in te leveren. Kijk op <a href=\"%(legal_url)s\" target=\"_blank"
-"\">%(legal_url)s\" target=\"_blank\">www.amazon.com/gc-legal</a> voor "
-"restricties."
+"uw cadeaubon in te leveren. Kijk op <a href=\"%(legal_url)s\" "
+"target=\"_blank\">%(legal_url)s\" target=\"_blank\">www.amazon.com/gc-legal</"
+"a> voor restricties."
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:213
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:216
 msgid "Graph My Data!"
 msgstr "Grafiek van mijn gegevens"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:219
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:222
 msgid "Show Me My Answers"
 msgstr "Achtergrondvragen weergeven"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:223
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:226
 msgid "Print My Answers"
 msgstr "Download mijn antwoorden"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:228
-msgid "Click to complete the study"
-msgstr ""
-
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:238
-msgid "Share on Facebook"
-msgstr "Deel op facebook"
-
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:248
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:252
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:257
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:261
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:266
 msgid "Save as PDF"
 msgstr "Opslaan als PDF"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:369
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:359
 msgid "My child says PPP words and understands UUU words."
 msgstr "Mijn kind zegt PPP woorden en begrijpt UUU woorden."
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:371
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:361
 msgid "My child says PPP words."
 msgstr "Mijn kind zegt PPP woorden."
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:373
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:363
 msgid "My child understands UUU words."
 msgstr "Mijn kind begrijpt UUU woorden."
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:512
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:502
 msgid "My child produces the most words in the bestProdCat category."
 msgstr "Mijn kind zegt de meeste woorden van de bestProdCat categorie."
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:516
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:506
 msgid "My child understands the most words in the bestCompCat category."
 msgstr "Mijn kind begrijpt de meeste woorden van de bestCompCat categorie."
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:602
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:592
 msgid "The hardest word my child says is INSERTWORDHERE."
 msgstr "Het moeilijkste woord dat mijn kind kan zeggen is INSERTWORDHERE."
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:607
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:597
 msgid "The hardest word my child understands is INSERTWORDHERE."
 msgstr "Het moeilijkste woord dat mijn kind kan begrijpen is INSERTWORDHERE."
 
@@ -2274,17 +2313,17 @@ msgstr ""
 msgid "Born between STARTDATE and ENDDATE"
 msgstr "Geboren tussen STARTDATE en ENDDATE"
 
-#: cdi_forms/views.py:154 cdi_forms/views.py:374 cdi_forms/views.py:608
+#: cdi_forms/views.py:157 cdi_forms/views.py:383 cdi_forms/views.py:617
 #, python-format
 msgid "Your child should be between %(min_age)d to %(max_age)d months of age."
 msgstr "Uw kind moet tussen de %(min_age)d en %(max_age)d maanden oud zijn."
 
-#: cdi_forms/views.py:168 cdi_forms/views.py:388 cdi_forms/views.py:621
+#: cdi_forms/views.py:171 cdi_forms/views.py:397 cdi_forms/views.py:630
 #, python-format
 msgid " Not the right age? <a href='%(sgurl)s'> Click here</a>"
 msgstr "Niet de goede leeftijd? <a href='%(sgurl)s'> Klik hier</a>"
 
-#: cdi_forms/views.py:172 cdi_forms/views.py:392 cdi_forms/views.py:625
+#: cdi_forms/views.py:175 cdi_forms/views.py:401 cdi_forms/views.py:634
 msgid ""
 " Not the right age? You should contact your researcher for steps on what to "
 "do next."
@@ -2292,16 +2331,16 @@ msgstr ""
 "Niet de goede leeftijd? Neem contact op met de onderzoeker om te kijken wat "
 "mogelijk is."
 
-#: researcher_UI/admin_actions.py:13 researcher_UI/admin_actions.py:27
+#: researcher_UI/admin_actions.py:14 researcher_UI/admin_actions.py:32
 msgid "Instruments for all Studies must be the same"
 msgstr "De instrumenten voor all onderzoeken moeten hetzelfde zijn"
 
-#: researcher_UI/admin_actions.py:16 researcher_UI/admin_actions.py:30
+#: researcher_UI/admin_actions.py:19 researcher_UI/admin_actions.py:37
 #, python-format
 msgid "Studies must have at least 1 responsent. %s has none"
 msgstr "Onderzoeken moeten tenminste 1 response hebben. %s heeft er geen."
 
-#: researcher_UI/forms.py:18
+#: researcher_UI/forms.py:22
 msgid "Default"
 msgstr ""
 
@@ -2337,7 +2376,6 @@ msgstr "Log uit"
 #: researcher_UI/templates/registration/password_reset_complete.html:6
 #: researcher_UI/templates/registration/password_reset_confirm.html:8
 #: researcher_UI/templates/registration/password_reset_done.html:6
-#: researcher_UI/templates/registration/password_reset_form.html:8
 msgid "Home"
 msgstr "Home"
 
@@ -2477,41 +2515,16 @@ msgstr "Activeren"
 
 #: researcher_UI/templates/registration/lockout.html:5
 #: researcher_UI/templates/registration/lockout.html:7
-#: researcher_UI/templates/registration/login.html:5
-#: researcher_UI/templates/registration/login.html:7
+#: researcher_UI/templates/registration/login.html:4
+#: researcher_UI/templates/registration/password_reset_form.html:4
+#: researcher_UI/templates/researcher_UI/500_error.html:4
 msgid "Login"
 msgstr "Inloggen"
 
-#: researcher_UI/templates/registration/login.html:14
-msgid "Please fill your username and password to login"
-msgstr "Vul a.u.b. uw gebruikersnaam en wachtwoord in om in te loggen"
-
-#: researcher_UI/templates/registration/login.html:18
-#: researcher_UI/templates/registration/login.html:68
+#: researcher_UI/templates/registration/login.html:40
 #: researcher_UI/templates/registration/password_reset_complete.html:18
-#: researcher_UI/templates/researcher_UI/login.html:83
 msgid "Log in"
 msgstr "Log in"
-
-#: researcher_UI/templates/registration/login.html:26
-#: researcher_UI/templates/researcher_UI/login.html:26
-msgid "Please correct the error below."
-msgstr "Corrigeer a.u.b. de fout hieronder."
-
-#: researcher_UI/templates/registration/login.html:26
-#: researcher_UI/templates/researcher_UI/login.html:26
-msgid "Please correct the errors below."
-msgstr "Corrigeer a.u.b. de fouten hieronder."
-
-#: researcher_UI/templates/registration/login.html:42
-#: researcher_UI/templates/researcher_UI/login.html:42
-#, python-format
-msgid ""
-"You are authenticated as %(username)s, but are not authorized to access this "
-"page. Would you like to login to a different account?"
-msgstr ""
-"U bent geverifieerd als %(username)s, maar u bent niet gemachtigd om toegang "
-"tot deze pagina te hebben. Wilt u met een ander account inloggen?"
 
 #: researcher_UI/templates/registration/logout.html:4
 #: researcher_UI/templates/registration/logout.html:6
@@ -2547,7 +2560,6 @@ msgstr "Verander mijn wachtwoord"
 
 #: researcher_UI/templates/registration/password_reset_complete.html:7
 #: researcher_UI/templates/registration/password_reset_done.html:7
-#: researcher_UI/templates/registration/password_reset_form.html:9
 msgid "Password reset"
 msgstr "Wachtwoord resetten"
 
@@ -2619,7 +2631,7 @@ msgstr "Bedankt dat u de Web-CDI heeft gebruikt!"
 msgid "The %(site_name)s team"
 msgstr "De %(site_name)s team"
 
-#: researcher_UI/templates/registration/password_reset_form.html:20
+#: researcher_UI/templates/registration/password_reset_form.html:26
 msgid ""
 "Forgotten your password? Enter your email address below and we will email "
 "instructions for setting a new one."
@@ -2627,9 +2639,9 @@ msgstr ""
 "Wachtwoord vergeten? Voer uw e-mailadres hieronder in en wij sturen u "
 "instructies voor het veranderen van uw wachtwoord."
 
-#: researcher_UI/templates/registration/password_reset_form.html:31
-msgid "Reset my password"
-msgstr "Reset mijn wachtwoord"
+#: researcher_UI/templates/registration/password_reset_form.html:38
+msgid "Reset"
+msgstr ""
 
 #: researcher_UI/templates/registration/registration_closed.html:4
 #: researcher_UI/templates/registration/registration_closed.html:6
@@ -2685,8 +2697,12 @@ msgstr "Uw registratie is gecreëerd -- %(site_name)s"
 
 #: researcher_UI/templates/registration/registration_form.html:4
 #: researcher_UI/templates/registration/registration_form.html:6
+#: researcher_UI/templates/researcher_UI/add_paired_study_modal.html:5
+#: researcher_UI/templates/researcher_UI/add_study_modal.html:5
+#: researcher_UI/templates/researcher_UI/rename_study_modal.html:5
 #: supplementtut/templates/supplementtut/registration_form.html:4
 #: supplementtut/templates/supplementtut/registration_form.html:6
+#: webcdi/templates/webcdi/signup.html:4
 msgid "Registration"
 msgstr "Registratie"
 
@@ -2697,6 +2713,7 @@ msgstr "Vul a.u.b. de volgende velden in om uw registratie te creëren"
 
 #: researcher_UI/templates/registration/registration_form.html:34
 #: supplementtut/templates/supplementtut/registration_form.html:18
+#: webcdi/templates/webcdi/signup.html:46
 msgid "Register"
 msgstr "Registreren"
 
@@ -2719,17 +2736,14 @@ msgstr "Redenen voor afwijzing:"
 msgid "Your registration was rejected -- %(site_name)s"
 msgstr "Uw registratie is afgewezen -- %(site_name)s"
 
-#: researcher_UI/templates/researcher_UI/login.html:3
-msgid "WebCDI"
-msgstr "WebCDI"
-
-#: researcher_UI/templates/researcher_UI/login.html:13
-msgid "WebCDI Login"
-msgstr "WebCDI Login"
-
-#: researcher_UI/templates/researcher_UI/login.html:79
-msgid "Forgotten your password or username?"
-msgstr "Uw wachtwoord of gebruikersnaam vergeten?"
+#: researcher_UI/templates/researcher_UI/add_paired_study_modal.html:9
+#: researcher_UI/templates/researcher_UI/add_study_modal.html:9
+#: researcher_UI/templates/researcher_UI/rename_study_modal.html:9
+#: webcdi/templates/webcdi/signup.html:8
+#, fuzzy
+#| msgid "Registration"
+msgid "WebCDI Registration"
+msgstr "Registratie"
 
 #: supplementtut/templates/supplementtut/acceptance_email.txt:4
 #, python-format
@@ -2758,33 +2772,71 @@ msgstr "Wacht a.u.b. totdat de inspecteur uw registratie heeft goedgekeurd."
 msgid "I am afraid that your account registration was rejected by inspector."
 msgstr "Helaas is de registratie van uw account door de inspecteur afgewezen."
 
-#: webcdi/settings.py:312
+#: webcdi/settings.py:249
 msgid "English"
 msgstr "Engels"
 
-#: webcdi/settings.py:313
+#: webcdi/settings.py:250
 msgid "Spanish"
 msgstr "Spaans"
 
-#: webcdi/settings.py:315
+#: webcdi/settings.py:252
 msgid "French Quebec"
 msgstr "Frans"
 
-#: webcdi/settings.py:316
+#: webcdi/settings.py:253
+#, fuzzy
+#| msgid "French Quebec"
+msgid "French French"
+msgstr "Frans"
+
+#: webcdi/settings.py:254
 msgid "Canadian English"
 msgstr "Engels"
 
-#: webcdi/settings.py:317
+#: webcdi/settings.py:255
 msgid "Dutch"
 msgstr "Nederlands"
 
-#: webcdi/settings.py:318
+#: webcdi/settings.py:256
 msgid "Hebrew"
 msgstr ""
 
-#: webcdi/settings.py:319
+#: webcdi/settings.py:257
 msgid "Korean"
 msgstr ""
+
+#~ msgid "Share on Facebook"
+#~ msgstr "Deel op facebook"
+
+#~ msgid "Please fill your username and password to login"
+#~ msgstr "Vul a.u.b. uw gebruikersnaam en wachtwoord in om in te loggen"
+
+#~ msgid "Please correct the error below."
+#~ msgstr "Corrigeer a.u.b. de fout hieronder."
+
+#~ msgid "Please correct the errors below."
+#~ msgstr "Corrigeer a.u.b. de fouten hieronder."
+
+#, python-format
+#~ msgid ""
+#~ "You are authenticated as %(username)s, but are not authorized to access "
+#~ "this page. Would you like to login to a different account?"
+#~ msgstr ""
+#~ "U bent geverifieerd als %(username)s, maar u bent niet gemachtigd om "
+#~ "toegang tot deze pagina te hebben. Wilt u met een ander account inloggen?"
+
+#~ msgid "Reset my password"
+#~ msgstr "Reset mijn wachtwoord"
+
+#~ msgid "WebCDI"
+#~ msgstr "WebCDI"
+
+#~ msgid "WebCDI Login"
+#~ msgstr "WebCDI Login"
+
+#~ msgid "Forgotten your password or username?"
+#~ msgstr "Uw wachtwoord of gebruikersnaam vergeten?"
 
 #~ msgid "Category"
 #~ msgstr "Categorie"
