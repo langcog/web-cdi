@@ -48,13 +48,13 @@ class AddStudyForm(BetterModelForm):
     # allow_sharing = forms.BooleanField(required=False, label="Would you like participants to be able to share their Web-CDI results via Facebook?") # Gives option for participants to be able to share their results via Facebook. Default off.
     test_period = forms.IntegerField(
         label="# Days Before Expiration",
-        help_text="Between 1 and 365. Default is 14 days. (e.g., 14 = 14 days for parents to complete a form)",
+        help_text="Between 1 and 1095. Default is 14 days. (e.g., 14 = 14 days for parents to complete a form)",
         required=False,
         widget=forms.NumberInput(
             attrs={
                 "placeholder": "(e.g., 14 = 14 days to complete a form)",
                 "min": "1",
-                "max": "365",
+                "max": "1095",
             }
         ),
     )  # Number of days that a participant can use to complete an administration before expiration. By default, participants have 14 days to complete test. Ranges from 1-28 days.
@@ -67,7 +67,7 @@ class AddStudyForm(BetterModelForm):
 
     prefilled_data_choices = (
         (0, "No, do not populate the any part of the form"),
-        (1, "Only the Background Information Form"),
+        (1, "Background Information Form"),
         # (2, "The Background Information Form and the Vocabulary Checklist"),
     )
     prefilled_data = forms.ChoiceField(
@@ -280,7 +280,7 @@ class RenameStudyForm(BetterModelForm):
 
     prefilled_data_choices = (
         (0, "No, do not populate the any part of the form"),
-        (1, "Only the Background Information Form"),
+        (1, "Background Information Form"),
         # (2, "The Background Information Form and the Vocabulary Checklist"),
     )
     prefilled_data = forms.ChoiceField(
