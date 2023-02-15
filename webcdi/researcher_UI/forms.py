@@ -1,15 +1,17 @@
-from django import forms
-from .models import *
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Field, Div, Fieldset, HTML
-from form_utils.forms import BetterModelForm, BetterForm
-from django.urls import reverse
 import os
-from django.contrib.postgres.forms import IntegerRangeField
+
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import HTML, Div, Field, Fieldset, Layout, Submit
+from django import forms
+from django.contrib.postgres.forms import IntegerRangeField
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
+from form_utils.forms import BetterForm, BetterModelForm
 
 from . import choices
+from .models import *
+
 
 # Form for creating a new study
 class AddStudyForm(BetterModelForm):
@@ -121,6 +123,7 @@ class AddStudyForm(BetterModelForm):
 
     end_message = forms.ChoiceField(choices=choices.END_MESSAGE_CHOICES)
     end_message_text = forms.CharField(widget=CKEditorUploadingWidget(), required=False)
+
     # Form validation. Form is passed automatically to views.py for higher level checking.
     def clean(self):
         cleaned_data = super(AddStudyForm, self).clean()
@@ -358,6 +361,7 @@ class RenameStudyForm(BetterModelForm):
 
     end_message = forms.ChoiceField(choices=choices.END_MESSAGE_CHOICES)
     end_message_text = forms.CharField(widget=CKEditorUploadingWidget(), required=False)
+
     # Form validation. Form is passed automatically to views.py for higher level checking.
     def clean(self):
         cleaned_data = super(RenameStudyForm, self).clean()
