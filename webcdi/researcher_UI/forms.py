@@ -1,5 +1,3 @@
-import os
-
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import HTML, Div, Field, Fieldset, Layout
@@ -127,6 +125,7 @@ class AddStudyForm(BetterModelForm):
     # Form validation. Form is passed automatically to views.py for higher level checking.
     def clean(self):
         cleaned_data = super(AddStudyForm, self).clean()
+        return cleaned_data
 
     # Initiating form and field layout.
     def __init__(self, *args, **kwargs):
@@ -365,6 +364,7 @@ class RenameStudyForm(BetterModelForm):
     # Form validation. Form is passed automatically to views.py for higher level checking.
     def clean(self):
         cleaned_data = super(RenameStudyForm, self).clean()
+        return cleaned_data
 
     # Form initiation. Specific form and field layout.
     def __init__(self, *args, **kwargs):
