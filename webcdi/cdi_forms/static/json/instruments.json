@@ -264,7 +264,7 @@
 		"json_data": "",
 		"scoring_json" : "",
 		"starting_words" : "cdi_form_csv/cat_forms/starting_words/[French_Ages_CAT].csv",
-		"demographics" : ["French_CAT.json, French_Cecile.json"]
+		"demographics" : ["French_CAT.json", "French_Cecile.json"]
 	},{
 		"language": "French Quebec",
 		"form": "CAT",
