@@ -1,27 +1,29 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse, JsonResponse
-from .forms import *
-from .models import researcher, study, administration
 import json
-from .mixins import StudyOwnerMixin
-from django.views.generic import UpdateView
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse
-from psycopg2.extras import NumericRange
+
 from django.conf import settings
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core import serializers
-from django.views import generic
+from django.http import HttpResponse, JsonResponse
+from django.shortcuts import redirect, render
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
-from researcher_UI.utils.console_helper.post_helper import post_condition
-from researcher_UI.utils.console_helper.get_helper import get_helper
-from researcher_UI.utils.raw_gift_codes import raw_gift_code_fun
-from researcher_UI.utils.add_study import add_study_fun
+from django.views import generic
+from django.views.generic import UpdateView
+from psycopg2.extras import NumericRange
 from researcher_UI.utils.add_paired_study import add_paired_study_fun
+from researcher_UI.utils.add_study import add_study_fun
 from researcher_UI.utils.admin_new import admin_new_fun
-from researcher_UI.utils.admin_new_participant import admin_new_participant_fun
 from researcher_UI.utils.admin_new_parent import admin_new_parent_fun
-from researcher_UI.utils.overflow import overflow_fun
+from researcher_UI.utils.admin_new_participant import admin_new_participant_fun
+from researcher_UI.utils.console_helper.get_helper import get_helper
+from researcher_UI.utils.console_helper.post_helper import post_condition
 from researcher_UI.utils.import_data import import_data_fun
+from researcher_UI.utils.overflow import overflow_fun
+from researcher_UI.utils.raw_gift_codes import raw_gift_code_fun
+
+from .forms import *
+from .mixins import StudyOwnerMixin
+from .models import administration, researcher, study
 
 
 class Console(LoginRequiredMixin, generic.ListView):
