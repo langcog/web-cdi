@@ -124,7 +124,7 @@ class AddStudyForm(BetterModelForm):
 
     # Form validation. Form is passed automatically to views.py for higher level checking.
     def clean(self):
-        cleaned_data = super(AddStudyForm, self).clean()
+        cleaned_data = super().clean()
         print(cleaned_data)
         return cleaned_data
 
@@ -195,10 +195,7 @@ class AddStudyForm(BetterModelForm):
             Field("print_my_answers_boolean"),
             Field("end_message"),
             Field("end_message_text"),
-            Div(
-                Submit("submit", _("Submit")),
-                css_class="col-lg-offset-3 col-lg-9 text-center",
-            ),
+            
         )
 
     # Form is related to the study model. Exclude study group designation (is done post-creation) and researcher name (filled automatically)
