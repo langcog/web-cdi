@@ -195,7 +195,6 @@ class AddStudyForm(BetterModelForm):
             Field("print_my_answers_boolean"),
             Field("end_message"),
             Field("end_message_text"),
-            
         )
 
     # Form is related to the study model. Exclude study group designation (is done post-creation) and researcher name (filled automatically)

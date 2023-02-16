@@ -130,7 +130,9 @@ class AddStudy(LoginRequiredMixin, generic.CreateView):
 
     def get_form(self):
         self.request.user.refresh_from_db()
-        form_class = AddStudyForm(self.request.POST or None, researcher=self.request.user)
+        form_class = AddStudyForm(
+            self.request.POST or None, researcher=self.request.user
+        )
         return form_class
 
     def form_valid(self, form):
