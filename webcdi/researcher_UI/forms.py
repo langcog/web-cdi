@@ -1,6 +1,6 @@
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import HTML, Div, Field, Fieldset, Layout
+from crispy_forms.layout import HTML, Div, Field, Fieldset, Layout, Submit
 from django import forms
 from django.contrib.postgres.forms import IntegerRangeField
 from django.urls import reverse
@@ -125,6 +125,7 @@ class AddStudyForm(BetterModelForm):
     # Form validation. Form is passed automatically to views.py for higher level checking.
     def clean(self):
         cleaned_data = super(AddStudyForm, self).clean()
+        print(cleaned_data)
         return cleaned_data
 
     # Initiating form and field layout.
@@ -194,6 +195,7 @@ class AddStudyForm(BetterModelForm):
             Field("print_my_answers_boolean"),
             Field("end_message"),
             Field("end_message_text"),
+            Div(Submit('submit',_('Submit')), css_class="col-lg-offset-3 col-lg-9 text-center")
         )
 
     # Form is related to the study model. Exclude study group designation (is done post-creation) and researcher name (filled automatically)

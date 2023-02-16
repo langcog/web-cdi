@@ -123,6 +123,7 @@ class RenameStudy(LoginRequiredMixin, generic.UpdateView):
 
 class AddStudy(LoginRequiredMixin, generic.CreateView):
     template_name = "researcher_UI/add_study_modal.html"
+    model = study
     form_class = AddStudyForm
 
     def get_form(self):
@@ -130,7 +131,12 @@ class AddStudy(LoginRequiredMixin, generic.CreateView):
         form_class = AddStudyForm(researcher=self.request.user)
         return form_class
 
+    def form_invalid(self, form):
+        print(form.errors.as_json())
+        return super().form_invalid(form)
+
     def form_valid(self, form):
+        print("form valid")
         study_instance = form.save(commit=False)
         study_name = form.cleaned_data.get("name")
         age_range = form.cleaned_data.get("age_range")

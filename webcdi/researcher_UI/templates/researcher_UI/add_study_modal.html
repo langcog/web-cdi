@@ -14,237 +14,233 @@
 <div style="background: #29A9E6; height:100%; margin-bottom:10rem;">
 
 
-<div style="background: #29A9E6; height:100%;">
-  <div class="container" style="padding-bottom:2rem;">
-    <div class="row">
-    <!--Start Logo-->
-    <a class="col-2" href="/">
-      <img width="150px"  src="{% static 'researcher_UI/images/logo_black.png' %}">
-    </a>
-    <!--End Logo-->
+  <div style="background: #29A9E6; height:100%;">
+    <div class="container" style="padding-bottom:2rem;">
+      <div class="row">
+        <!--Start Logo-->
+        <a class="col-2" href="/">
+          <img width="150px"  src="{% static 'researcher_UI/images/logo_black.png' %}">
+        </a>
+        <!--End Logo-->
 
-      <!--Start login card-->
-      <nav role="navigation" class="primary-navigation d-flex justify-content-end col-10">
-        <ul>
-          <li><a href="/" style="font-family:Arial, Helvetica, sans-serif;">Home</a>
-    
-          <li><a href="#" style="font-family:Arial, Helvetica, sans-serif;" onclick="window.open('https://docs.google.com/document/d/1naFm2U-77YcOwFD7jcQIes2HhNz98qQM2wm1J1cmwck/pub')" onclick="window.open('https://docs.google.com/document/d/1naFm2U-77YcOwFD7jcQIes2HhNz98qQM2wm1J1cmwck/pub')">Help</a></li>
-          <li><a href="#" style="font-family:Arial, Helvetica, sans-serif;">{{ request.user.username }} &dtrif;</a>
-            <ul class="dropdown">
-                <li><a href="/accounts/logout/" style="color:#4d90fe;font-family:Arial, Helvetica, sans-serif;">Logout</a></li>
-            </ul>
-          </li>
-        </ul>
-    </nav>
-    </div>
-
-
-  <form class="login-card" role="document" action="/interface/add_study/" method="post">
-    <div class="">
-      <div class="modal-header">
-        <button type="button" class="btn-primary" data-dismiss="modal" aria-label="Close"
-        style="border-radius:50%;" onclick="history.back()"
-        ><span aria-hidden="true">&larr;</span></button>
-        <h4 id="modal-title" class="modal-title" >
-        {% if form_name %}
-          {{ form_name }} - {{ study_obj.instrument }}
-        {% else %}
-          Add new study
-        {% endif %}
-        </h4>
-      </div>
-      <div class="modal-body">
-        {% load crispy_forms_tags %}
-        {% crispy form %}
-
-        <script>
-
-        $( function() {
-          $( "#div_id_age_range div" ).prepend( "<div id='slider_div' style='margin: 2%;' ></div><span id='min'></span><span id='max'></span>" );
-          $( "#id_age_range_0" ).hide();
-          $( "#id_age_range_1" ).hide();
-
-          $( "#slider_div" ).slider({
-            range: true,
-            min: 0,
-            max: 96,
-            values: [ parseInt("{{ min_age }}") , parseInt("{{ max_age }}") ],
-            create: function() {
-              $('#min').css('font-family', $('div.modal-body').css('font-family') ).css('font-size', $('div.modal-body').css('font-size') ).appendTo($('#slider_div span.ui-slider-handle').get(0));
-              $('#max').css('font-family', $('div.modal-body').css('font-family') ).css('font-size', $('div.modal-body').css('font-size') ).appendTo($('#slider_div span.ui-slider-handle').get(1));
-            },
-            slide: function( event, ui ) {
-              $( "#id_age_range_0" ).val( ui.values[ 0 ] );
-              $( "#id_age_range_1" ).val( ui.values[ 1 ] );
-              $(ui.handle).find('span').html(ui.value);
-            }
-          });
-
-          $( "#id_age_range_0" ).val( $( "#slider_div" ).slider( "values", 0 ) );
-          $( "#id_age_range_1" ).val( $( "#slider_div" ).slider( "values", 1 ) );
-
-
-          $('#min').html( $('#slider_div').slider('values', 0)).position({
-            my: 'center top',
-            at: 'center bottom',
-            of: $('#slider_div span.ui-slider-handle:eq(0)'),
-            offset: "0, 10"
-          });
-
-          $('#max').html( $('#slider_div').slider('values', 1)).position({
-            my: 'center top',
-            at: 'center bottom',
-            of: $('#slider_div span.ui-slider-handle:eq(1)'),
-            offset: "0, 10"
-          });
-        } );
-
-        $('#id_instrument').on('change', function () {
-            var current_instrument = $(this).val();   
-
-            if ( current_instrument.indexOf('WS') > -1 | current_instrument.indexOf('L2') > -1 ) {
-              $('#slider_div').slider('values', 0, 16);
-              $('#slider_div').slider('values', 1, 30);
-
-              $('#min').html( 16 );
-              $('#max').html( 30 );
-
-              $( "#id_age_range_0" ).val( '16' );
-              $( "#id_age_range_1" ).val( '30' );
-
-            } else if ( current_instrument.indexOf('WG') > -1 | current_instrument.indexOf('L1') > -1) {
-              $('#slider_div').slider('values', 0, 8);
-              $('#slider_div').slider('values', 1, 18);     
-
-              $('#min').html( 8 );
-              $('#max').html( 18 ); 
-
-              $( "#id_age_range_0" ).val( '8' );
-              $( "#id_age_range_1" ).val( '18' );                      
-            } else if ( current_instrument.indexOf('CDI3') > -1 ) {
-              $('#slider_div').slider('values', 0, 30);
-              $('#slider_div').slider('values', 1, 37);     
-
-              $('#min').html( 30 );
-              $('#max').html( 37 ); 
-
-              $( "#id_age_range_0" ).val( '30' );
-              $( "#id_age_range_1" ).val( '37' ); 
-            } else if ( current_instrument.indexOf('CAT') > -1 ) {
-              $('#slider_div').slider('values', 0, 12);
-              $('#slider_div').slider('values', 1, 36);     
-
-              $('#min').html( 12 );
-              $('#max').html( 36 ); 
-
-              $( "#id_age_range_0" ).val( '12' );
-              $( "#id_age_range_1" ).val( '36' ); 
-            }
-        });
-
-        // ajax to get available Demographics
-        $('#id_instrument').on('change', function () {
-          $.ajax({
-              url:'/interface/ajax/get_demographic_forms/',
-              type: 'GET',
-              data: {id : $(this).find('option:selected').val()},
-              cache: false,
-              success: function (data) {
-                  $('#id_demographic').find('option').not(':first').remove();
-                  for (item in data) {
-                    $('#id_demographic').append(new Option(data[item]['fields']['name'], data[item]['pk'])) 
-                  }
-
-              }
-          });
-        });
-
-        // Automatically collapses fields dependent on whether the study involves anonymous participants and/or financial compensation. Upon checking/unchecking inputs for those 2 settings, other dependent fields appear.
-        $('#div_id_subject_cap').addClass( "anon-collection" );
-        $('#div_id_confirm_completion').addClass( "anon-collection" ); 
-
-        function check_for_payment() {
-            if($('#id_allow_payment').prop('checked')) {
-                $('.gift_cards').removeClass('collapse')
-            } else {
-                $('.gift_cards').addClass('collapse');
-            }
-        }
-
-        function check_for_anon() {
-
-          if ($('#id_anon_collection').prop('checked')) {
-            $('.anon-collection').removeClass('collapse')
-          } else {
-            $('.anon-collection').addClass('collapse');
-          }  
-        }        
-
-        check_for_payment();
-        check_for_anon();
-
-        $('#id_anon_collection').on('change', function () {
-            check_for_anon();      
-        });
-
-        $("#id_allow_payment").on('change', function () {
-            check_for_payment();
-
-        });
-
-        function check_for_redirect() {
-          if ($('#id_redirect_boolean').prop('checked')) {
-            $('.redirect_boolean').removeClass('collapse')
-          } else {
-            $('.redirect_boolean').addClass('collapse');
-          }  
-        }        
-
-        check_for_redirect();
-        $('#id_redirect_boolean').on('change', function () {
-            check_for_redirect();      
-        });
-
-        function check_for_participant_source() {
-          if ($('#id_participant_source_boolean').val() > 0) {
-            $('.participant_source_boolean').removeClass('collapse')
-          } else {
-            $('.participant_source_boolean').addClass('collapse');
-          }  
-        }        
-
-        check_for_participant_source();
-        $('#id_participant_source_boolean').on('change', function () {
-          check_for_participant_source();      
-        });
+          <!--Start login card-->
+          <nav role="navigation" class="primary-navigation d-flex justify-content-end col-10">
+            <ul>
+              <li><a href="/" style="font-family:Arial, Helvetica, sans-serif;">Home</a>
         
-
-        </script>
-    </div>
-    {% if form.errors %}
-        {% for field in form %}
-            {% for error in field.errors %}
-                <div class="alert alert-error">
-                    <strong>{{ error|escape }}</strong>
-                </div>
-            {% endfor %}
-        {% endfor %}
-        {% for error in form.non_field_errors %}
-            <div class="alert alert-error">
-                <strong>{{ error|escape }}</strong>
-            </div>
-        {% endfor %}
-    {% endif %}
-      <div class="alert alert-danger error-message" role="alert" style="display:none">
+              <li><a href="#" style="font-family:Arial, Helvetica, sans-serif;" onclick="window.open('https://docs.google.com/document/d/1naFm2U-77YcOwFD7jcQIes2HhNz98qQM2wm1J1cmwck/pub')" onclick="window.open('https://docs.google.com/document/d/1naFm2U-77YcOwFD7jcQIes2HhNz98qQM2wm1J1cmwck/pub')">Help</a></li>
+              <li><a href="#" style="font-family:Arial, Helvetica, sans-serif;">{{ request.user.username }} &dtrif;</a>
+                <ul class="dropdown">
+                    <li><a href="/accounts/logout/" style="color:#4d90fe;font-family:Arial, Helvetica, sans-serif;">Logout</a></li>
+                </ul>
+              </li>
+            </ul>
+        </nav>
+      </div>
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 id="modal-title" class="modal-title" >
+            {% if form_name %}
+              {{ form_name }} - {{ study_obj.instrument }}
+            {% else %}
+              Add new study
+            {% endif %}
+            </h4>
+          </div>
+          <div class="modal-body">
+            {% load crispy_forms_tags %}
+            {% crispy form %}
+    
+            <script>
+  
+              $( function() {
+                $( "#div_id_age_range div" ).prepend( "<div id='slider_div' style='margin: 2%;' ></div><span id='min'></span><span id='max'></span>" );
+                $( "#id_age_range_0" ).hide();
+                $( "#id_age_range_1" ).hide();
+      
+                $( "#slider_div" ).slider({
+                  range: true,
+                  min: 0,
+                  max: 96,
+                  values: [ parseInt("{{ min_age }}") , parseInt("{{ max_age }}") ],
+                  create: function() {
+                    $('#min').css('font-family', $('div.modal-body').css('font-family') ).css('font-size', $('div.modal-body').css('font-size') ).appendTo($('#slider_div span.ui-slider-handle').get(0));
+                    $('#max').css('font-family', $('div.modal-body').css('font-family') ).css('font-size', $('div.modal-body').css('font-size') ).appendTo($('#slider_div span.ui-slider-handle').get(1));
+                  },
+                  slide: function( event, ui ) {
+                    $( "#id_age_range_0" ).val( ui.values[ 0 ] );
+                    $( "#id_age_range_1" ).val( ui.values[ 1 ] );
+                    $(ui.handle).find('span').html(ui.value);
+                  }
+                });
+      
+                $( "#id_age_range_0" ).val( $( "#slider_div" ).slider( "values", 0 ) );
+                $( "#id_age_range_1" ).val( $( "#slider_div" ).slider( "values", 1 ) );
+      
+      
+                $('#min').html( $('#slider_div').slider('values', 0)).position({
+                  my: 'center top',
+                  at: 'center bottom',
+                  of: $('#slider_div span.ui-slider-handle:eq(0)'),
+                  offset: "0, 10"
+                });
+      
+                $('#max').html( $('#slider_div').slider('values', 1)).position({
+                  my: 'center top',
+                  at: 'center bottom',
+                  of: $('#slider_div span.ui-slider-handle:eq(1)'),
+                  offset: "0, 10"
+                });
+              } );
+  
+              $('#id_instrument').on('change', function () {
+                var current_instrument = $(this).val();   
+    
+                if ( current_instrument.indexOf('WS') > -1 | current_instrument.indexOf('L2') > -1 ) {
+                  $('#slider_div').slider('values', 0, 16);
+                  $('#slider_div').slider('values', 1, 30);
+    
+                  $('#min').html( 16 );
+                  $('#max').html( 30 );
+    
+                  $( "#id_age_range_0" ).val( '16' );
+                  $( "#id_age_range_1" ).val( '30' );
+    
+                } else if ( current_instrument.indexOf('WG') > -1 | current_instrument.indexOf('L1') > -1) {
+                  $('#slider_div').slider('values', 0, 8);
+                  $('#slider_div').slider('values', 1, 18);     
+    
+                  $('#min').html( 8 );
+                  $('#max').html( 18 ); 
+    
+                  $( "#id_age_range_0" ).val( '8' );
+                  $( "#id_age_range_1" ).val( '18' );                      
+                } else if ( current_instrument.indexOf('CDI3') > -1 ) {
+                  $('#slider_div').slider('values', 0, 30);
+                  $('#slider_div').slider('values', 1, 37);     
+    
+                  $('#min').html( 30 );
+                  $('#max').html( 37 ); 
+    
+                  $( "#id_age_range_0" ).val( '30' );
+                  $( "#id_age_range_1" ).val( '37' ); 
+                } else if ( current_instrument.indexOf('CAT') > -1 ) {
+                  $('#slider_div').slider('values', 0, 12);
+                  $('#slider_div').slider('values', 1, 36);     
+    
+                  $('#min').html( 12 );
+                  $('#max').html( 36 ); 
+    
+                  $( "#id_age_range_0" ).val( '12' );
+                  $( "#id_age_range_1" ).val( '36' ); 
+                }
+              });
+    
+              // ajax to get available Demographics
+              $('#id_instrument').on('change', function () {
+                $.ajax({
+                    url:'/interface/ajax/get_demographic_forms/',
+                    type: 'GET',
+                    data: {id : $(this).find('option:selected').val()},
+                    cache: false,
+                    success: function (data) {
+                        $('#id_demographic').find('option').not(':first').remove();
+                        for (item in data) {
+                          $('#id_demographic').append(new Option(data[item]['fields']['name'], data[item]['pk'])) 
+                        }
+      
+                    }
+                });
+              });
+      
+              // Automatically collapses fields dependent on whether the study involves anonymous participants and/or financial compensation. Upon checking/unchecking inputs for those 2 settings, other dependent fields appear.
+              $('#div_id_subject_cap').addClass( "anon-collection" );
+              $('#div_id_confirm_completion').addClass( "anon-collection" ); 
+      
+              function check_for_payment() {
+                  if($('#id_allow_payment').prop('checked')) {
+                      $('.gift_cards').removeClass('collapse')
+                  } else {
+                      $('.gift_cards').addClass('collapse');
+                  }
+              }
+      
+              function check_for_anon() {
+      
+                if ($('#id_anon_collection').prop('checked')) {
+                  $('.anon-collection').removeClass('collapse')
+                } else {
+                  $('.anon-collection').addClass('collapse');
+                }  
+              }        
+      
+              check_for_payment();
+              check_for_anon();
+      
+              $('#id_anon_collection').on('change', function () {
+                  check_for_anon();      
+              });
+      
+              $("#id_allow_payment").on('change', function () {
+                  check_for_payment();
+      
+              });
+      
+              function check_for_redirect() {
+                if ($('#id_redirect_boolean').prop('checked')) {
+                  $('.redirect_boolean').removeClass('collapse')
+                } else {
+                  $('.redirect_boolean').addClass('collapse');
+                }  
+              }        
+      
+              check_for_redirect();
+              $('#id_redirect_boolean').on('change', function () {
+                  check_for_redirect();      
+              });
+      
+              function check_for_participant_source() {
+                if ($('#id_participant_source_boolean').val() > 0) {
+                  $('.participant_source_boolean').removeClass('collapse')
+                } else {
+                  $('.participant_source_boolean').addClass('collapse');
+                }  
+              }        
+      
+              check_for_participant_source();
+              $('#id_participant_source_boolean').on('change', function () {
+                check_for_participant_source();      
+              });
+          
+  
+            </script>
+          </div>
+          {% if form.errors %}
+              {% for field in form %}
+                  {% for error in field.errors %}
+                      <div class="alert alert-error">
+                          <strong>{{ error|escape }}</strong>
+                      </div>
+                  {% endfor %}
+              {% endfor %}
+              {% for error in form.non_field_errors %}
+                  <div class="alert alert-error">
+                      <strong>{{ error|escape }}</strong>
+                  </div>
+              {% endfor %}
+          {% endif %}
+          <div class="alert alert-danger error-message" role="alert" style="display:none">
             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-              <span class="sr-only">Error:</span>
-              <div style='display:inline' id='error-message-text'></div>
+            <span class="sr-only">Error:</span>
+            <div style='display:inline' id='error-message-text'></div>
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
       </div>
-      <div class="modal-footer">
-        <input id="id_add_study_modal_submit" name="submit" value="Save" class="btn btn-primary col-3"  type="submit">
-      </div>
-    </form>
-</div>
-</div>
+    </div>
+  </div>
 </div>
 {% endblock %}
