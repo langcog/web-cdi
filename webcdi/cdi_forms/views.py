@@ -118,6 +118,9 @@ class AdministrationMixin(object):
 
     def get_user_language(self):
         self.user_language = language_map(self.administration_instance.study.instrument.language)
+        # set countries first in certain situations
+        if self.administration_instance.study.instrument.language == 'French French':
+            settings.COUNTRIES_FIRST = ['FR','CH','BE','LU']
         translation.activate(self.user_language)
         return self.user_language
 
@@ -136,7 +139,8 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
                 for page in pages:
                     if page['page'] == self.which_page:
                         if 'help-text' in page: return page['help-text']
-        except: pass
+        except: 
+            pass
         return ''
 
     def get_context_data(self, **kwargs):
@@ -217,7 +221,6 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
         response = render(request, self.template_name, self.get_context_data()) # Render form template
         response.set_cookie(settings.LANGUAGE_COOKIE_NAME, self.user_language)
         return response
-        #return super(BackgroundInfoView, self).get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()  

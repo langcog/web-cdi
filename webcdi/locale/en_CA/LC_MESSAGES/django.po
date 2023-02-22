@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-11 17:34+0000\n"
+"POT-Creation-Date: 2023-02-22 11:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1214,6 +1214,10 @@ msgstr ""
 msgid "Age (in months)"
 msgstr ""
 
+#: cdi_forms/models.py:71
+msgid "Prefer not to respond"
+msgstr ""
+
 #: cdi_forms/models.py:72
 msgid "Country"
 msgstr ""
@@ -1959,8 +1963,8 @@ msgid ""
 "before. We ask that you only complete our assessment once. If you have any "
 "concerns about your child’s development, we recommend that you talk with "
 "your child’s physician. If you enjoyed our assessment, you can learn more "
-"about the CDI <a href=\"http://mb-cdi.stanford.edu/\" "
-"target=\"_blank\">here</a>. Again, we appreciate your interest!"
+"about the CDI <a href=\"http://mb-cdi.stanford.edu/\" target=\"_blank"
+"\">here</a>. Again, we appreciate your interest!"
 msgstr ""
 
 #: cdi_forms/templates/cdi_forms/overflow.html:49
@@ -1970,14 +1974,14 @@ msgid ""
 "Development Inventory (CDI)! At this time, all of our study slots have "
 "already filled up and we have run out of thank-you gifts to compensate you "
 "for your time. If you are still interested in completing the CDI and "
-"learning more about your child's vocabulary, you may click <a "
-"href=\"%(bypass_url)s\" target=\"_blank\">here</a> to complete the "
-"questionnaire, but you will not receive compensation. You can also keep an "
-"eye out for another study ad in the future! If you have any concerns about "
-"your child’s development, we recommend that you talk with your child’s "
-"physician. If you enjoyed our assessment, you can learn more about the CDI "
-"<a href=\"http://mb-cdi.stanford.edu/\" target=\"_blank\">here</a>. Again, "
-"we appreciate your interest!"
+"learning more about your child's vocabulary, you may click <a href="
+"\"%(bypass_url)s\" target=\"_blank\">here</a> to complete the questionnaire, "
+"but you will not receive compensation. You can also keep an eye out for "
+"another study ad in the future! If you have any concerns about your child’s "
+"development, we recommend that you talk with your child’s physician. If you "
+"enjoyed our assessment, you can learn more about the CDI <a href=\"http://mb-"
+"cdi.stanford.edu/\" target=\"_blank\">here</a>. Again, we appreciate your "
+"interest!"
 msgstr ""
 
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:40
@@ -2006,8 +2010,8 @@ msgid ""
 "based on our research. This summary is not a clinical evaluation. If you "
 "have any concerns about your child’s development, we recommend that you talk "
 "with your child’s physician. If you enjoyed our assessment, you can learn "
-"more about the CDI <a href=\"http://mb-cdi.stanford.edu/\" "
-"target=\"_blank\">here</a>. We appreciate your contribution!"
+"more about the CDI <a href=\"http://mb-cdi.stanford.edu/\" target=\"_blank"
+"\">here</a>. We appreciate your contribution!"
 msgstr ""
 
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:178
@@ -2038,9 +2042,9 @@ msgstr ""
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:192
 #, python-format
 msgid ""
-"To redeem your gift card, visit <a href=\"%(redeem_url)s\" "
-"target=\"_blank\">www.amazon.com/redeem</a>. Restrictions apply, see <a "
-"href=\"%(legal_url)s\" target=\"_blank\">www.amazon.com/gc-legal</a>."
+"To redeem your gift card, visit <a href=\"%(redeem_url)s\" target=\"_blank"
+"\">www.amazon.com/redeem</a>. Restrictions apply, see <a href=\"%(legal_url)s"
+"\" target=\"_blank\">www.amazon.com/gc-legal</a>."
 msgstr ""
 
 #: cdi_forms/templates/cdi_forms/printable_cdi.html:216
@@ -2130,6 +2134,10 @@ msgstr ""
 
 #: researcher_UI/forms.py:22
 msgid "Default"
+msgstr ""
+
+#: researcher_UI/forms.py:26 researcher_UI/forms.py:253
+msgid "Opening Dialog Box"
 msgstr ""
 
 #: researcher_UI/templates/admin/admin_base.html:41

@@ -68,7 +68,7 @@ class Instrument_Forms(models.Model):
 class BackgroundInfo(models.Model):
     administration = models.OneToOneField("researcher_UI.administration", on_delete=models.CASCADE) # Administration ID# unique to the entire database
     age = models.IntegerField(verbose_name = _("Age (in months)"), validators=[MinValueValidator(0)], default = 999) #age in months for child (views.py converts DOB field in forms.py into age for this model)
-    sex = models.CharField(max_length = 1, blank=True, null=True, choices = (('M', _("Male")), ('F', _("Female")), ('O', _("Other")))) # Reported gender for child
+    sex = models.CharField(max_length = 1, blank=True, null=True, choices = (('M', _("Male")), ('F', _("Female")), ('O', _("Other")), ('P', _("Prefer not to respond")))) # Reported gender for child
     country = CountryField(verbose_name=_("Country"), blank = True, null=True)
     zip_code = models.CharField(max_length = 6, verbose_name = _('Zip Code (if you live in the U.S.)'), blank = True, null=True, validators=[RegexValidator(regex='^(\d{3}([*]{2})?)|([A-Z]{2}|\d{4}([A-Z]{2}}))$', message=_('Please enter a valid U.S. zip code'))]) # Reported zip code for family. Follows Safe Harbor guidelines. Stores first 3 digits of zip code or state abbreviation.
 
