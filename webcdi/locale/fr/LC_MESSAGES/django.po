@@ -297,7 +297,7 @@ msgstr "Tard"
 
 #: cdi_forms/forms.py:185 cdi_forms/models.py:107
 msgid "Was he/she early or late?"
-msgstr "Est-il né plus tôt ou plus tard que prévu?"
+msgstr "Est-il né plus tôt ou plus tard que prévu ?"
 
 #: cdi_forms/forms.py:190 cdi_forms/models.py:71
 msgid "Male"
@@ -334,7 +334,7 @@ msgstr "Ce champ ne peut pas être vide"
 
 #: cdi_forms/forms.py:258
 msgid "Please enter number of weeks"
-msgstr ""
+msgstr "De combien de semaines ? (arrondir à la semaine près)"
 
 #: cdi_forms/forms.py:261
 msgid "Cannot be more than 18 weeks early"
