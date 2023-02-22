@@ -317,7 +317,7 @@ msgstr "Sexe de l’enfant"
 
 #: cdi_forms/forms.py:198
 msgid "Which language(s)"
-msgstr "Quelle(s) langue(s)"
+msgstr "Quelle(s) langue(s) ?"
 
 #: cdi_forms/forms.py:204 cdi_forms/forms.py:210 cdi_forms/forms.py:216
 msgid "Please specify"
@@ -378,16 +378,16 @@ msgstr "Votre enfant entend-il régulièrement une autre langue que le français
 
 #: cdi_forms/forms.py:338
 msgid "Has your child experienced chronic ear infections (5 or more)?"
-msgstr "Votre enfant a-t-il déjà eu des otites chroniques (5 ou plus)?"
+msgstr "Votre enfant a-t-il déjà eu des otites chroniques (5 ou plus) ?"
 
 #: cdi_forms/forms.py:344 cdi_forms/models.py:163
 msgid "Do you suspect that your child may have hearing loss?"
-msgstr "Pensez-vous que votre enfant pourrait avoir un problème auditif?"
+msgstr "Pensez-vous que votre enfant pourrait avoir un problème auditif ?"
 
 #: cdi_forms/forms.py:350 cdi_forms/models.py:166
 msgid ""
 "Is there some reason to suspect that your child may have vision problems?"
-msgstr "Pensez-vous que votre enfant pourrait avoir des problèmes de vision?"
+msgstr "Pensez-vous que votre enfant pourrait avoir des problèmes de vision "
 
 #: cdi_forms/forms.py:356 cdi_forms/models.py:169
 msgid ""
@@ -395,29 +395,28 @@ msgid ""
 "disabilities?"
 msgstr ""
 "Votre enfant a-t-il eu des maladies graves, des hospitalisations ou des "
-"handicaps diagnostiqués?"
+"handicaps diagnostiqués ?"
 
 #: cdi_forms/forms.py:362 cdi_forms/models.py:172
 msgid ""
 "Has your child ever received any services for speech, language, or "
 "development issues?"
 msgstr ""
-"Votre enfant a-t-il déjà reçu des services pour des problèmes d'élocution, "
-"de langage ou de développement?"
+"Votre enfant a-t-il déjà reçu des traitements pour des problèmes d'élocution, "
+"de langage ou de développement ?"
 
 #: cdi_forms/forms.py:368 cdi_forms/models.py:175
 msgid ""
 "Are you worried about your child's progress in language or communication?"
 msgstr ""
-"Êtes-vous inquiet du progrès de votre enfant en langage ou en communication?"
+"Êtes-vous inquiet ou inquiète du progrès du langage ou de la communication de votre enfant ?"
 
 #: cdi_forms/forms.py:374 cdi_forms/models.py:178
 msgid ""
 "Have you or anyone in your immediate family been diagnosed with a language "
 "or learning disability?"
 msgstr ""
-"Vous-même ou un autre membre de votre famille immédiate a-t-il déjà été "
-"diagnostiqué avec un trouble du langage ou un trouble d'apprentissage?"
+"Vous-même ou un autre membre de votre famille proche a-t-il déjà été diagnostiqué avec un trouble du langage ou un trouble de l'apprentissage ? "
 
 #: cdi_forms/forms.py:402
 msgid "mm/dd/yyyy"
@@ -1365,15 +1364,15 @@ msgstr ""
 
 #: cdi_forms/models.py:132
 msgid "Secondary Caregiver"
-msgstr "Répondant Secondaire"
+msgstr "La deuxième personne qui garde le plus l'enfant est "
 
 #: cdi_forms/models.py:134
 msgid "Secondary Caregiver Year of birth"
-msgstr "Date de Naissance du Répondant Secondaire"
+msgstr "Son année de naissance est"
 
 #: cdi_forms/models.py:135
 msgid "Secondary Caregiver Education"
-msgstr "Éducation du Répondant Secondaire"
+msgstr "Son niveau de diplôme le plus haut complété est "
 
 #: cdi_forms/models.py:144
 msgid "Two parents"
@@ -1386,24 +1385,24 @@ msgstr "Un parent"
 #: cdi_forms/models.py:146
 msgid "One or both parents and other caregiver(s) (e.g., grandparent)"
 msgstr ""
-"Un ou les deux parents et autre(s) répondant(s) (par ex., grand-parent)"
+"Un ou les deux parents et une autre personne s'occupant de l'enfant (par exemple un grand-parent)"
 
 #: cdi_forms/models.py:147
 msgid "Other caregivers (e.g., grandparent or grandparents)"
-msgstr "Autres répondants (par ex. grand-parent ou grands-parents)"
+msgstr "Une autre personne s'occupant de l'enfant (par exemple un ou des grand-parents)"
 
 #: cdi_forms/models.py:151
 msgid "Who does your child live with?"
-msgstr "Avec qui vit votre enfant?"
+msgstr "Avec qui vit votre enfant ?"
 
 #: cdi_forms/models.py:156
 msgid "From whom?"
-msgstr "De qui?"
+msgstr "Par qui (par exemple, père, tante ...) ?"
 
 #: cdi_forms/models.py:157
 msgid "How many days per week is the child exposed to these languages?"
 msgstr ""
-"Combien de jours par semaine l'enfant est-il exposé à ces/cette langue(s)?"
+"Combien de jours par semaine l'enfant est-il exposé à cette/ces langue(s) ?"
 
 #: cdi_forms/models.py:157
 msgid "Number of days per week cannot exceed 7"
@@ -1416,7 +1415,7 @@ msgstr "Le nombre de jours par semaine ne peut pas être moins que 1"
 #: cdi_forms/models.py:158
 msgid "How many hours per day is the child exposed to these languages?"
 msgstr ""
-"Combien d'heures par jour l'enfant est-il exposé à ces/cette langue(s)?"
+"Combien d'heures par jour l'enfant est-il exposé à cette/ces langue(s) ?"
 
 #: cdi_forms/models.py:158
 msgid "Number of hours per day cannot exceed 24"
@@ -1428,29 +1427,28 @@ msgstr "Le nombre d’heures par jour ne peut pas être moins de 1"
 
 #: cdi_forms/models.py:160
 msgid "Has your child experienced chronic ear infections (5 or more)? "
-msgstr "Votre enfant a-t-il déjà eu des otites chroniques (5 ou plus)?"
+msgstr "Votre enfant a-t-il déjà eu des otites chroniques (5 ou plus) ?"
 
 #: cdi_forms/models.py:161
 msgid "Has your child undergone interventions (e.g., tubes)?  Please describe"
 msgstr ""
-"Votre enfant a-t-il subi des interventions (par ex., tubes)? Veuillez "
-"spécifier"
+"Votre enfant a-t-il subi des interventions (par ex. des drains)? Veuillez précisez"
 
 #: cdi_forms/models.py:164 cdi_forms/models.py:167 cdi_forms/models.py:170
 #: cdi_forms/models.py:176
 msgid "Please describe"
-msgstr "Veuillez spécifier"
+msgstr "Veuillez préciser"
 
 #: cdi_forms/models.py:173
 #, fuzzy
 #| msgid "Please describe"
 msgctxt "daycare"
 msgid "Please describe"
-msgstr "Veuillez spécifier"
+msgstr "Veuillez préciser"
 
 #: cdi_forms/models.py:179
 msgid "Indicate which family member and provide a description"
-msgstr "Indiquez quel membre de la famille et veuillez spécifiez"
+msgstr "Indiquez quel(s) membre(s) de la famille et précisez quel trouble"
 
 #: cdi_forms/models.py:184
 msgid "Both caregivers"

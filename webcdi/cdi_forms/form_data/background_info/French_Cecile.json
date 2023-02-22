@@ -99,15 +99,11 @@
                     },
                     {
                         "field":"father_education"
-                    },
-                    {
-                        "field":"annual_income",
-                        "widget_type":"Select"
                     }
                 ]
             },
             {
-                "fieldset":"Information sur les répondants",
+                "fieldset":"Information sur les personnes s'occupant de l'enfant",
                 "fields":[
                     {
                         "field":"caregiver_info"
