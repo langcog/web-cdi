@@ -86,7 +86,89 @@
                         "field":"mother_yob"
                     },
                     {
-                        "field":"mother_education"
+                        "field":"mother_education",
+                        "choices": [
+                            {
+                                "key":"",
+                                "value":"--------"
+                            },
+                            {
+                                "key":14,
+                                "value":"4e"
+                            },
+                            {
+                                "key":15,
+                                "value":"3e"
+                            },
+                            {
+                                "key":16,
+                                "value":"Seconde"
+                            },
+                            {
+                                "key":17,
+                                "value":"Première (CAP, BEP…)"
+                            },
+                            {
+                                "key":18,
+                                "value":"Terminale (Baccalauréat…)"
+                            },
+                            {
+                                "key":19,
+                                "value":"Bac +1"
+                            },
+                            {
+                                "key":20,
+                                "value":"Bac +2 (BTS, DUT, DEUG…)"
+                            },
+                            {
+                                "key":21,
+                                "value":"Bac +3 (Licence, Bachelor…)"
+                            },
+                            {
+                                "key":22,
+                                "value":"Bac +4 (Maîtrise…)"
+                            },
+                            {
+                                "key":23,
+                                "value":"Bac +5 (Master, DEA…) "
+                            },
+                            {
+                                "key":24,
+                                "value":"Bac +6"
+                            },
+                            {
+                                "key":25,
+                                "value":"Bac +7"
+                            }, 
+                            {
+                                "key":26,
+                                "value":"Bac +8 (Doctorat…)"
+                            },
+                            {
+                                "key":27,
+                                "value":"Bac +9"
+                            },
+                            {
+                                "key":28,
+                                "value":"Bac +10"
+                            }, 
+                            {
+                                "key":29,
+                                "value":"Bac +11"
+                            },
+                            {
+                                "key":30,
+                                "value":"Bac +12"
+                            },
+                            {
+                                "key":99,
+                                "value":"Autre"
+                            },
+                            {
+                                "key":0,
+                                "value":"Je ne sais pas"
+                            }
+                        ]
                     },
                     {
                         "field":"secondary_caregiver",
@@ -98,7 +180,89 @@
                         "field":"father_yob"
                     },
                     {
-                        "field":"father_education"
+                        "field":"father_education",
+                        "choices": [
+                            {
+                                "key":"",
+                                "value":"--------"
+                            },
+                            {
+                                "key":14,
+                                "value":"4e"
+                            },
+                            {
+                                "key":15,
+                                "value":"3e"
+                            },
+                            {
+                                "key":16,
+                                "value":"Seconde"
+                            },
+                            {
+                                "key":17,
+                                "value":"Première (CAP, BEP…)"
+                            },
+                            {
+                                "key":18,
+                                "value":"Terminale (Baccalauréat…)"
+                            },
+                            {
+                                "key":19,
+                                "value":"Bac +1"
+                            },
+                            {
+                                "key":20,
+                                "value":"Bac +2 (BTS, DUT, DEUG…)"
+                            },
+                            {
+                                "key":21,
+                                "value":"Bac +3 (Licence, Bachelor…)"
+                            },
+                            {
+                                "key":22,
+                                "value":"Bac +4 (Maîtrise…)"
+                            },
+                            {
+                                "key":23,
+                                "value":"Bac +5 (Master, DEA…) "
+                            },
+                            {
+                                "key":24,
+                                "value":"Bac +6"
+                            },
+                            {
+                                "key":25,
+                                "value":"Bac +7"
+                            }, 
+                            {
+                                "key":26,
+                                "value":"Bac +8 (Doctorat…)"
+                            },
+                            {
+                                "key":27,
+                                "value":"Bac +9"
+                            },
+                            {
+                                "key":28,
+                                "value":"Bac +10"
+                            }, 
+                            {
+                                "key":29,
+                                "value":"Bac +11"
+                            },
+                            {
+                                "key":30,
+                                "value":"Bac +12"
+                            },
+                            {
+                                "key":99,
+                                "value":"Autre"
+                            },
+                            {
+                                "key":0,
+                                "value":"Je ne sais pas"
+                            }
+                        ]
                     }
                 ]
             },
