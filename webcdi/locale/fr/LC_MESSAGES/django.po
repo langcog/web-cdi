@@ -1353,7 +1353,7 @@ msgstr "Son année de naissance est"
 
 #: cdi_forms/models.py:126
 msgid "Primary Caregiver Education"
-msgstr "Éducation du Répondant Primaire"
+msgstr "Son niveau de diplôme le plus haut complété est"
 
 #: cdi_forms/models.py:126 cdi_forms/models.py:135
 msgid ""

@@ -215,7 +215,7 @@ class BackgroundInfo(models.Model):
     )  # Determines # of weeks between DOB and due date
 
     education_levels = [
-        (x, str(x)) for x in range(5, 25)
+        (x, str(x)) for x in range(5, 35)
     ]  # Declares tuple of integers for # of years of education
     education_levels[-1] = (0, _("Prefer not to disclose"))
 
