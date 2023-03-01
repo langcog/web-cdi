@@ -1691,7 +1691,7 @@ msgid ""
 msgstr ""
 "Merci d’avoir rempli ce questionnaire ! Parmi les mots que nous vous avons "
 "demandés, le mot le plus difficile que votre enfant sait dire est "
-"\"%(easiest)s\" et le mot le plus simple est \"%(hardest)s\"."
+"\"%(hardest)s\" et le mot le plus simple est \"%(easiest)s\"."
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:45
 msgid ""
