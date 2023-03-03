@@ -1463,10 +1463,8 @@ msgid "Place of residence (neighnorhood/district)"
 msgstr ""
 
 #: cdi_forms/models.py:214
-#, fuzzy
-#| msgid "Primary Caregiver Education"
 msgid "Primary caregiver occupation"
-msgstr "Éducation du Répondant Primaire"
+msgstr "Sa catégorie socio-professionnelle (métier) est (ou était)"
 
 #: cdi_forms/models.py:215
 #, fuzzy
@@ -1475,10 +1473,8 @@ msgid "Primary caregiver occupation description"
 msgstr "Éducation du Répondant Primaire"
 
 #: cdi_forms/models.py:216
-#, fuzzy
-#| msgid "Secondary Caregiver Education"
 msgid "Secondary caregiver occupation"
-msgstr "Éducation du Répondant Secondaire"
+msgstr "Sa catégorie socio-professionnelle (métier) est (ou était)"
 
 #: cdi_forms/models.py:217
 #, fuzzy

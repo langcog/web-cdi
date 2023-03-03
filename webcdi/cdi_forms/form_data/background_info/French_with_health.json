@@ -171,6 +171,48 @@
                         ]
                     },
                     {
+                        "field":"primary_caregiver_occupation",
+                        "widget_type":"Select",
+                        "choices": [
+                            {
+                                "key":"",
+                                "value":"--------"
+                            },
+                            {
+                                "key":"Agriculteur",
+                                "value":"Agriculteur"
+                            },
+                            {
+                                "key":"Artisan, commerçant, chef d’entreprise…",
+                                "value":"Artisan, commerçant, chef d’entreprise…"
+                            },
+                            {
+                                "key":"Cadre (ingénieur, médecin, avocat, professeur…)",
+                                "value":"Cadre (ingénieur, médecin, avocat, professeur…)"
+                            },
+                            {
+                                "key":"Profession intermédiaire (technicien, infirmier, professeur des écoles…)",
+                                "value":"Profession intermédiaire (technicien, infirmier, professeur des écoles…)"
+                            },
+                            {
+                                "key":"Ouvrier (dans le bâtiment, en usine…)",
+                                "value":"Ouvrier (dans le bâtiment, en usine…)"
+                            },
+                            {
+                                "key":"Employé",
+                                "value":"Employé"
+                            },
+                            {
+                                "key":"Sans activité professionnelle (étudiant, mère ou père au foyer, en recherche d’emploi…)",
+                                "value":"Sans activité professionnelle (étudiant, mère ou père au foyer, en recherche d’emploi…)"
+                            },
+                            {
+                                "key":"Je ne sais pas",
+                                "value":"Je ne sais pas"
+                            }                            
+                        ]
+                    },
+                    {
                         "field":"secondary_caregiver",
                         "div":[
                             "secondary_caregiver_other"
@@ -263,9 +305,52 @@
                                 "value":"Je ne sais pas"
                             }
                         ]
+                    },
+                    {
+                        "field":"secondary_caregiver_occupation",
+                        "widget_type":"Select",
+                        "choices": [
+                            {
+                                "key":"",
+                                "value":"--------"
+                            },
+                            {
+                                "key":"Agriculteur",
+                                "value":"Agriculteur"
+                            },
+                            {
+                                "key":"Artisan, commerçant, chef d’entreprise…",
+                                "value":"Artisan, commerçant, chef d’entreprise…"
+                            },
+                            {
+                                "key":"Cadre (ingénieur, médecin, avocat, professeur…)",
+                                "value":"Cadre (ingénieur, médecin, avocat, professeur…)"
+                            },
+                            {
+                                "key":"Profession intermédiaire (technicien, infirmier, professeur des écoles…)",
+                                "value":"Profession intermédiaire (technicien, infirmier, professeur des écoles…)"
+                            },
+                            {
+                                "key":"Ouvrier (dans le bâtiment, en usine…)",
+                                "value":"Ouvrier (dans le bâtiment, en usine…)"
+                            },
+                            {
+                                "key":"Employé",
+                                "value":"Employé"
+                            },
+                            {
+                                "key":"Sans activité professionnelle (étudiant, mère ou père au foyer, en recherche d’emploi…)",
+                                "value":"Sans activité professionnelle (étudiant, mère ou père au foyer, en recherche d’emploi…)"
+                            },
+                            {
+                                "key":"Je ne sais pas",
+                                "value":"Je ne sais pas"
+                            }                            
+                        ]
                     }
                 ]
             },
+            
             {
                 "fieldset":"Information sur les personnes s'occupant de l'enfant",
                 "fields":[
