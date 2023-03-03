@@ -623,6 +623,20 @@ class BackgroundInfo(models.Model):
         blank=True, null=True, verbose_name=_("Days per week")
     )
 
+    GENERIC_HEALTH_CHOICES = (
+        ('Yes', _("Yes")),
+        ('No', _("No")),
+        ("Don't know", _("Don't know")),
+        ('Prefer not to disclose', _("Prefer not to disclose")),
+        
+    )
+    generic_health_question = models.CharField(
+        verbose_name = _("Has your child been diagnosed with any troubles, for example, hearing, vision, speech, learning difficulty"),
+        blank = True,
+        null = True,
+        max_length = 51,
+        choices = GENERIC_HEALTH_CHOICES
+    )
 
 # Model of zipcodes reported to be in 3-digit zip code prefixes with a population lower than 20,000. Tests with a zipcode found in this model will have their digits replaced with their state abbreviation.
 class Zipcode(models.Model):
