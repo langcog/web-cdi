@@ -635,7 +635,7 @@ class BackgroundInfo(models.Model):
         ),
         blank=True,
         null=True,
-        max_length=51,
+        max_length=151,
         choices=GENERIC_HEALTH_CHOICES,
     )
 

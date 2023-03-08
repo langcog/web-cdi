@@ -278,7 +278,7 @@ LANGUAGE_TO_COUNTRY_DICT = {
 }
 
 
-COUNTRIES_FIRST = ["US", "CA", "NL", "IL"]
+COUNTRIES_FIRST = ["US", "CA", "NL", "IL", "FR", "CH", "BE", "LU"]
 
 
 # CSRF_COOKIE_SECURE=False

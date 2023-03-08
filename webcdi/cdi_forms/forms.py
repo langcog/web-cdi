@@ -564,6 +564,8 @@ class BackgroundForm(BetterModelForm):
                     fieldsets = page["contents"]
                     for fieldset in fieldsets:
                         fields = []
+                        if 'html' in fieldset:
+                            fields.append(HTML(fieldset["html"]))
                         for field in fieldset["fields"]:
                             if "field" in field:
                                 selected_fields.append(field["field"])
