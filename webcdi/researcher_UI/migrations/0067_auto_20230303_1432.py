@@ -5,19 +5,20 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('researcher_UI', '0066_auto_20221210_0644'),
+        ("researcher_UI", "0066_auto_20221210_0644"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='instrument',
-            options={'ordering': ['verbose_name']},
+            name="instrument",
+            options={"ordering": ["verbose_name"]},
         ),
         migrations.AlterField(
-            model_name='study',
-            name='waiver',
-            field=ckeditor_uploader.fields.RichTextUploadingField(blank=True, verbose_name='Opening Dialog Box'),
+            model_name="study",
+            name="waiver",
+            field=ckeditor_uploader.fields.RichTextUploadingField(
+                blank=True, verbose_name="Opening Dialog Box"
+            ),
         ),
     ]

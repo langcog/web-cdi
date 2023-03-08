@@ -1880,19 +1880,20 @@ msgstr "OK"
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:166
 msgid "Waiver Denied"
-msgstr "Demande Refusée"
+msgstr "Consentement de participation refusé"
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:170
 msgid ""
 "Thank you for your response. We are unable to continue. Please close the "
 "window. If you would like, you may review the Waiver."
 msgstr ""
-"Merci pour votre réponse. Il n’est pas possible de continuer. Veuillez "
-"fermer la fenêtre. Si vous le souhaitez, vous pouvez revoir la Dispense."
+"Merci pour votre réponse. Si vous ne voulez pas que vos réponses soient "
+"utilisées, il n'est pas possible de continuer le questionnaire. Vous "
+"pouvez fermer la page. Si vous le souhaitez, vous pouvez revoir le formulaire de consentement. "
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:173
 msgid "Review Waiver"
-msgstr ""
+msgstr "Revoir le consentement"
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:10
 #: cdi_forms/templates/cdi_forms/cdi_form.html:327
