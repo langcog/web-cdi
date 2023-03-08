@@ -248,7 +248,6 @@ msgid "Does you child have siblings?"
 msgstr "Avec qui vit votre enfant?"
 
 #: cdi_forms/forms.py:151 cdi_forms/models.py:467
-#, fuzzy
 msgid "How many siblings does you child have?"
 msgstr "Combien a-t-il de frères et soeurs ?"
 
