@@ -4,15 +4,25 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('cdi_forms', '0085_auto_20230303_1432'),
+        ("cdi_forms", "0085_auto_20230303_1432"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='backgroundinfo',
-            name='generic_health_question',
-            field=models.CharField(blank=True, choices=[('Yes', 'Yes'), ('No', 'No'), ("Don't know", "Don't know"), ('Prefer not to disclose', 'Prefer not to disclose')], max_length=151, null=True, verbose_name='Has your child been diagnosed with any troubles, for example, hearing, vision, speech, learning difficulty'),
+            model_name="backgroundinfo",
+            name="generic_health_question",
+            field=models.CharField(
+                blank=True,
+                choices=[
+                    ("Yes", "Yes"),
+                    ("No", "No"),
+                    ("Don't know", "Don't know"),
+                    ("Prefer not to disclose", "Prefer not to disclose"),
+                ],
+                max_length=151,
+                null=True,
+                verbose_name="Has your child been diagnosed with any troubles, for example, hearing, vision, speech, learning difficulty",
+            ),
         ),
     ]
