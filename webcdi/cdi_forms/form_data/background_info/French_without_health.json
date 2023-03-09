@@ -179,6 +179,7 @@
                     {
                         "field":"primary_caregiver_occupation",
                         "widget_type":"Select",
+                        "required":"True",
                         "choices": [
                             {
                                 "key":"",
@@ -316,6 +317,7 @@
                     {
                         "field":"secondary_caregiver_occupation",
                         "widget_type":"Select",
+                        "required":"True",
                         "choices": [
                             {
                                 "key":"",
@@ -389,7 +391,8 @@
                 "fieldset":"Santé",
                 "fields":[
                     {
-                        "field":"generic_health_question"
+                        "field":"generic_health_question",
+                        "required":"True"
                     }
                 ]
             }
