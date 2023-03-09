@@ -4,30 +4,49 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('cdi_forms', '0086_alter_backgroundinfo_generic_health_question'),
+        ("cdi_forms", "0086_alter_backgroundinfo_generic_health_question"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='backgroundinfo',
-            name='primary_caregiver_occupation',
-            field=models.CharField(blank=True, max_length=101, null=True, verbose_name='Primary caregiver occupation'),
+            model_name="backgroundinfo",
+            name="primary_caregiver_occupation",
+            field=models.CharField(
+                blank=True,
+                max_length=101,
+                null=True,
+                verbose_name="Primary caregiver occupation",
+            ),
         ),
         migrations.AlterField(
-            model_name='backgroundinfo',
-            name='primary_caregiver_occupation_description',
-            field=models.CharField(blank=True, max_length=101, null=True, verbose_name='Primary caregiver occupation description'),
+            model_name="backgroundinfo",
+            name="primary_caregiver_occupation_description",
+            field=models.CharField(
+                blank=True,
+                max_length=101,
+                null=True,
+                verbose_name="Primary caregiver occupation description",
+            ),
         ),
         migrations.AlterField(
-            model_name='backgroundinfo',
-            name='secondary_caregiver_occupation',
-            field=models.CharField(blank=True, max_length=101, null=True, verbose_name='Secondary caregiver occupation'),
+            model_name="backgroundinfo",
+            name="secondary_caregiver_occupation",
+            field=models.CharField(
+                blank=True,
+                max_length=101,
+                null=True,
+                verbose_name="Secondary caregiver occupation",
+            ),
         ),
         migrations.AlterField(
-            model_name='backgroundinfo',
-            name='secondary_caregiver_occupation_description',
-            field=models.CharField(blank=True, max_length=101, null=True, verbose_name='Secondary caregiver occupation description'),
+            model_name="backgroundinfo",
+            name="secondary_caregiver_occupation_description",
+            field=models.CharField(
+                blank=True,
+                max_length=101,
+                null=True,
+                verbose_name="Secondary caregiver occupation description",
+            ),
         ),
     ]
