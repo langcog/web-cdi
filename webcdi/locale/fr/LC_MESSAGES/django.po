@@ -249,7 +249,7 @@ msgstr "Avec qui vit votre enfant?"
 
 #: cdi_forms/forms.py:151 cdi_forms/models.py:467
 msgid "How many siblings does you child have?"
-msgstr "Combien a-t-il de frères et soeurs ?"
+msgstr "Combien a-t-il de frères et soeurs ?*"
 
 #: cdi_forms/forms.py:156
 msgid "Please provide the sex and age of each sibling"
