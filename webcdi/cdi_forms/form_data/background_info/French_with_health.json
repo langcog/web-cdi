@@ -6,6 +6,10 @@
                 "fieldset":"Informations de base",
                 "fields":[
                     {
+                        "field":"sibling_count",
+                        "required":"True"
+                    }, 
+                    {
                         "field":"birth_order"
                     },
                     {
@@ -73,14 +77,7 @@
                     }
                 ]
             },
-            {
-                "fieldset":"Informations sur l’enfant et la famille",
-                "fields":[
-                    {
-                        "field":"sibling_count"
-                    }
-                ]
-            },
+            
             {
                 "fieldset":"Contexte familial",
                 "html":"<p>Pour les deux personnes qui gardent le plus l'enfant, veuillez préciser leur lien de parenté avec l'enfant (par exemple : père, tante, frère, voisin..), son niveau de diplôme et son métier. </p>",

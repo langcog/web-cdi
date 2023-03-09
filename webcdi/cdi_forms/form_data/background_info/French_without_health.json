@@ -6,6 +6,10 @@
                 "fieldset":"Informations de base",
                 "fields":[
                     {
+                        "field":"sibling_count",
+                        "required":"True"
+                    }, 
+                    {
                         "field":"birth_order"
                     },
                     {
@@ -70,14 +74,6 @@
                             "early_or_late",
                             "due_date_diff"
                         ]
-                    }
-                ]
-            }, 
-            {
-                "fieldset":"Informations sur l’enfant et la famille",
-                "fields":[
-                    {
-                        "field":"sibling_count"
                     }
                 ]
             },

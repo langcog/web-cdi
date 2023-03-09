@@ -463,7 +463,7 @@ class BackgroundInfo(models.Model):
     sibling_boolean = models.BooleanField(
         verbose_name=_("Does you child have siblings?"), blank=True, null=True
     )
-    sibling_count = models.IntegerField(
+    sibling_count = models.PositiveIntegerField(
         verbose_name=_("How many siblings does you child have?"), blank=True, null=True
     )
     sibling_data = models.TextField(blank=True, null=True)
@@ -577,25 +577,25 @@ class BackgroundInfo(models.Model):
         verbose_name=_("Place of residence (neighnorhood/district)"),
     )
     primary_caregiver_occupation = models.CharField(
-        max_length=51,
+        max_length=101,
         blank=True,
         null=True,
         verbose_name=_("Primary caregiver occupation"),
     )
     primary_caregiver_occupation_description = models.CharField(
-        max_length=51,
+        max_length=101,
         blank=True,
         null=True,
         verbose_name=_("Primary caregiver occupation description"),
     )
     secondary_caregiver_occupation = models.CharField(
-        max_length=51,
+        max_length=101,
         blank=True,
         null=True,
         verbose_name=_("Secondary caregiver occupation"),
     )
     secondary_caregiver_occupation_description = models.CharField(
-        max_length=51,
+        max_length=101,
         blank=True,
         null=True,
         verbose_name=_("Secondary caregiver occupation description"),

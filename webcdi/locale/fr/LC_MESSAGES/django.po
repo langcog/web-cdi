@@ -1570,7 +1570,9 @@ msgstr ""
 "exactement comme vous (par exemple 'potame' au lieu de 'hippopotame'). Vous "
 "aurez peut-être aussi des mots spécifiques à votre famille (par exemple "
 "'mamoune' pour 'grand-mère'). Si votre enfant est capable de les dire, cela "
-"compte aussi. "
+"compte aussi. Pour les verbes, toutes les formes conjuguées sont bonnes. Par "
+"exemple, si pour le verbe manger, votre enfant peut dire 'mange' ou 'a mangé', "
+"cela compte aussi. "
 
 #: cdi_forms/templates/cdi_forms/background_info.html:29
 msgid ""
