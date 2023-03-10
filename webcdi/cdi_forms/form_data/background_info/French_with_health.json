@@ -1,0 +1,470 @@
+[
+    {
+        "page":"back",
+        "contents":[
+            {
+                "fieldset":"Informations de base",
+                "fields":[
+                    {
+                        "field":"sibling_count",
+                        "required":"True"
+                    }, 
+                    {
+                        "field":"birth_order"
+                    },
+                    {
+                        "field":"multi_birth_boolean",
+                        "div":[
+                            "multi_birth"
+                        ]
+                    },
+                    {
+                        "field":"birth_weight_kg",
+                        "widget_type":"Select",
+                        "choices":[
+                            {
+                                "key":"",
+                                "value":"--------"
+                            },
+                            {
+                                "key":"1.5",
+                                "value":"moins de 1,5 kg"
+                            },
+                            {
+                                "key":"1.6",
+                                "value":"1,5 à 1,9 kg"
+                            },
+                            {
+                                "key":"2.0",
+                                "value":"2 à 2,4 kg"
+                            },
+                            {
+                                "key":"2.5",
+                                "value":"2,5 à 2,9 kg"
+                            },
+                            {  
+                                "key":"3.0",
+                                "value":"3 à 3,4 kg"
+                            },
+                            {
+                                "key":"3.5",
+                                "value":"3,5 à 3,9 kg"
+                            },
+                            {
+                                "key":"4.0",
+                                "value":"4 à 4,4 kg"
+                            },
+                            {
+                                "key":"4.5",
+                                "value":"4,5 à 4,9 kg"
+                            },
+                            {
+                                "key":"5",
+                                "value":"plus de 5 kg"
+                            },
+                            {
+                                "key":"0",
+                                "value":"Préfère ne pas répondre"
+                            }
+                        ]
+                    },
+                    {
+                        "field":"born_on_due_date",
+                        "div":[
+                            "early_or_late",
+                            "due_date_diff"
+                        ]
+                    }
+                ]
+            },
+            
+            {
+                "fieldset":"Contexte familial",
+                "html":"<p>Pour les deux personnes qui gardent le plus l'enfant, veuillez préciser leur lien de parenté avec l'enfant (par exemple : père, tante, frère, voisin..), son niveau de diplôme et son métier. </p>",
+                "fields":[
+                    {
+                        "field":"primary_caregiver",
+                        "div":[
+                            "primary_caregiver_other"
+                        ]
+                    },
+                    {
+                        "field":"mother_yob"
+                    },
+                    {
+                        "field":"mother_education",
+                        "help":"",
+                        "choices": [
+                            {
+                                "key":"",
+                                "value":"--------"
+                            },
+                            {
+                                "key":14,
+                                "value":"4e"
+                            },
+                            {
+                                "key":15,
+                                "value":"3e (Brevet…) "
+                            },
+                            {
+                                "key":16,
+                                "value":"Seconde"
+                            },
+                            {
+                                "key":17,
+                                "value":"Première (CAP, BEP…)"
+                            },
+                            {
+                                "key":18,
+                                "value":"Terminale (Baccalauréat…)"
+                            },
+                            {
+                                "key":19,
+                                "value":"Bac +1"
+                            },
+                            {
+                                "key":20,
+                                "value":"Bac +2 (BTS, DUT, DEUG…)"
+                            },
+                            {
+                                "key":21,
+                                "value":"Bac +3 (Licence, Bachelor…)"
+                            },
+                            {
+                                "key":22,
+                                "value":"Bac +4 (Maîtrise…)"
+                            },
+                            {
+                                "key":23,
+                                "value":"Bac +5 (Master, DEA…) "
+                            },
+                            {
+                                "key":24,
+                                "value":"Bac +6"
+                            },
+                            {
+                                "key":25,
+                                "value":"Bac +7"
+                            }, 
+                            {
+                                "key":26,
+                                "value":"Bac +8 (Doctorat…)"
+                            },
+                            {
+                                "key":27,
+                                "value":"Bac +9"
+                            },
+                            {
+                                "key":28,
+                                "value":"Bac +10"
+                            }, 
+                            {
+                                "key":29,
+                                "value":"Bac +11"
+                            },
+                            {
+                                "key":30,
+                                "value":"Bac +12"
+                            },
+                            {
+                                "key":99,
+                                "value":"Autre"
+                            },
+                            {
+                                "key":0,
+                                "value":"Je ne sais pas"
+                            }
+                        ]
+                    },
+                    {
+                        "field":"primary_caregiver_occupation",
+                        "widget_type":"Select",
+                        "required":"True",
+                        "choices": [
+                            {
+                                "key":"",
+                                "value":"--------"
+                            },
+                            {
+                                "key":"Agriculteur",
+                                "value":"Agriculteur"
+                            },
+                            {
+                                "key":"Artisan, commerçant, chef d’entreprise…",
+                                "value":"Artisan, commerçant, chef d’entreprise…"
+                            },
+                            {
+                                "key":"Cadre (ingénieur, médecin, avocat, professeur…)",
+                                "value":"Cadre (ingénieur, médecin, avocat, professeur…)"
+                            },
+                            {
+                                "key":"Profession intermédiaire (technicien, infirmier, professeur des écoles…)",
+                                "value":"Profession intermédiaire (technicien, infirmier, professeur des écoles…)"
+                            },
+                            {
+                                "key":"Ouvrier (dans le bâtiment, en usine…)",
+                                "value":"Ouvrier (dans le bâtiment, en usine…)"
+                            },
+                            {
+                                "key":"Employé",
+                                "value":"Employé"
+                            },
+                            {
+                                "key":"Sans activité professionnelle (étudiant, mère ou père au foyer, en recherche d’emploi…)",
+                                "value":"Sans activité professionnelle (étudiant, mère ou père au foyer, en recherche d’emploi…)"
+                            },
+                            {
+                                "key":"Je ne sais pas",
+                                "value":"Je ne sais pas"
+                            }                            
+                        ]
+                    },
+                    {
+                        "field":"secondary_caregiver",
+                        "div":[
+                            "secondary_caregiver_other"
+                        ]
+                    },
+                    {
+                        "field":"father_yob"
+                    },
+                    {
+                        "field":"father_education",
+                        "help":"",
+                        "choices": [
+                            {
+                                "key":"",
+                                "value":"--------"
+                            },
+                            {
+                                "key":14,
+                                "value":"4e"
+                            },
+                            {
+                                "key":15,
+                                "value":"3e (Brevet…) "
+                            },
+                            {
+                                "key":16,
+                                "value":"Seconde"
+                            },
+                            {
+                                "key":17,
+                                "value":"Première (CAP, BEP…)"
+                            },
+                            {
+                                "key":18,
+                                "value":"Terminale (Baccalauréat…)"
+                            },
+                            {
+                                "key":19,
+                                "value":"Bac +1"
+                            },
+                            {
+                                "key":20,
+                                "value":"Bac +2 (BTS, DUT, DEUG…)"
+                            },
+                            {
+                                "key":21,
+                                "value":"Bac +3 (Licence, Bachelor…)"
+                            },
+                            {
+                                "key":22,
+                                "value":"Bac +4 (Maîtrise…)"
+                            },
+                            {
+                                "key":23,
+                                "value":"Bac +5 (Master, DEA…) "
+                            },
+                            {
+                                "key":24,
+                                "value":"Bac +6"
+                            },
+                            {
+                                "key":25,
+                                "value":"Bac +7"
+                            }, 
+                            {
+                                "key":26,
+                                "value":"Bac +8 (Doctorat…)"
+                            },
+                            {
+                                "key":27,
+                                "value":"Bac +9"
+                            },
+                            {
+                                "key":28,
+                                "value":"Bac +10"
+                            }, 
+                            {
+                                "key":29,
+                                "value":"Bac +11"
+                            },
+                            {
+                                "key":30,
+                                "value":"Bac +12"
+                            },
+                            {
+                                "key":99,
+                                "value":"Autre"
+                            },
+                            {
+                                "key":0,
+                                "value":"Je ne sais pas"
+                            }
+                        ]
+                    },
+                    {
+                        "field":"secondary_caregiver_occupation",
+                        "widget_type":"Select",
+                        "choices": [
+                            {
+                                "key":"",
+                                "value":"--------"
+                            },
+                            {
+                                "key":"Agriculteur",
+                                "value":"Agriculteur"
+                            },
+                            {
+                                "key":"Artisan, commerçant, chef d’entreprise…",
+                                "value":"Artisan, commerçant, chef d’entreprise…"
+                            },
+                            {
+                                "key":"Cadre (ingénieur, médecin, avocat, professeur…)",
+                                "value":"Cadre (ingénieur, médecin, avocat, professeur…)"
+                            },
+                            {
+                                "key":"Profession intermédiaire (technicien, infirmier, professeur des écoles…)",
+                                "value":"Profession intermédiaire (technicien, infirmier, professeur des écoles…)"
+                            },
+                            {
+                                "key":"Ouvrier (dans le bâtiment, en usine…)",
+                                "value":"Ouvrier (dans le bâtiment, en usine…)"
+                            },
+                            {
+                                "key":"Employé",
+                                "value":"Employé"
+                            },
+                            {
+                                "key":"Sans activité professionnelle (étudiant, mère ou père au foyer, en recherche d’emploi…)",
+                                "value":"Sans activité professionnelle (étudiant, mère ou père au foyer, en recherche d’emploi…)"
+                            },
+                            {
+                                "key":"Je ne sais pas",
+                                "value":"Je ne sais pas"
+                            }                            
+                        ]
+                    }
+                ]
+            },
+            
+            {
+                "fieldset":"Information sur les personnes s'occupant de l'enfant",
+                "fields":[
+                    {
+                        "field":"caregiver_info"
+                    }
+                ]
+            },
+            {
+                "fieldset":"Expérience linguistique",
+                "fields":[
+                    {
+                        "field":"other_languages_boolean",
+                        "divs":[
+                            {
+                                "field":"other_languages",
+                                "css":"make-selectize",
+                                "div":[
+                                    "language_from",
+                                    "language_days_per_week",
+                                    "language_hours_per_day"
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "fieldset":"Santé",
+                "fields":[
+                    {
+                        "field":"ear_infections_boolean",
+                        "div":[
+                            "ear_infections"
+                        ]
+                    },
+                    {
+                        "field":"hearing_loss_boolean",
+                        "div":[
+                            "hearing_loss"
+                        ]
+                    },
+                    {
+                        "field":"vision_problems_boolean",
+                        "div":[
+                            "vision_problems"
+                        ]
+                    },
+                    {
+                        "field":"illnesses_boolean",
+                        "div":[
+                            "illnesses"
+                        ]
+                    },
+                    {
+                        "field":"services_boolean",
+                        "div":[
+                            "services"
+                        ]
+                    },
+                    {
+                        "field":"worried_boolean",
+                        "div":[
+                            "worried"
+                        ]
+                    },
+                    {
+                        "field":"learning_disability_boolean",
+                        "div":[
+                            "learning_disability"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "page":"front",
+        "contents":[
+            {
+                "fieldset":"Informations de base",
+                "fields":[
+                    {
+                        "field":"form_filler",
+                        "div":[
+                            "form_filler_other"
+                        ]
+                    },
+                    {
+                        "field":"child_dob"
+                    },
+                    {
+                        "field":"age"
+                    },
+                    {
+                        "field":"sex"
+                    },
+                    {
+                        "field":"country",
+                        "div":[
+                            "zip_code"
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

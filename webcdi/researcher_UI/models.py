@@ -68,7 +68,7 @@ class study(models.Model):
     name = models.CharField(max_length = 51) # Study name
     instrument = models.ForeignKey("instrument", on_delete=models.CASCADE) # Instrument associated with study
     #waiver = models.TextField(blank = True) # IRB Waiver of documentation for study or any additional instructions provided to participant
-    waiver = RichTextUploadingField(blank = True)
+    waiver = RichTextUploadingField(verbose_name="Opening Dialog Box", blank = True)
     study_group = models.CharField(max_length = 51, blank = True) # Study group
     anon_collection = models.BooleanField(default=False) # Whether participants in study will all be anonymous
     subject_cap = models.IntegerField(blank = True, null=True) # Subject cap to limit number of completed administrations

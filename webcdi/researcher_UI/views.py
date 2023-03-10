@@ -125,6 +125,7 @@ class RenameStudy(LoginRequiredMixin, generic.UpdateView):
 
 class AddStudy(LoginRequiredMixin, generic.CreateView):
     template_name = "researcher_UI/add_study_modal.html"
+    model = study
     form_class = AddStudyForm
 
     def get_form(self):

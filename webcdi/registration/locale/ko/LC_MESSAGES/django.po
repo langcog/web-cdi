@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-29 17:12+0000\n"
+"POT-Creation-Date: 2023-03-03 14:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
 #: registration/admin/__init__.py:268
 msgid "(Re)Accept registrations of selected users"
 msgstr ""
@@ -352,17 +353,22 @@ msgstr ""
 msgid "Your registration was created -- %(site_name)s"
 msgstr ""
 
-#: registration/templates/registration/registration_form.html:4
-#: registration/templates/registration/registration_form.html:6
-msgid "Registration"
-msgstr ""
-
-#: registration/templates/registration/registration_form.html:10
-msgid "Please fill the following fields to create your registration"
+#: registration/templates/registration/registration_form.html:13
+msgid "Home"
 msgstr ""
 
 #: registration/templates/registration/registration_form.html:14
-msgid "Register"
+msgid "Password reset"
+msgstr ""
+
+#: registration/templates/registration/registration_form.html:37
+msgid ""
+"Forgotten your password? Enter your email address below and we will email "
+"instructions for setting a new one."
+msgstr ""
+
+#: registration/templates/registration/registration_form.html:48
+msgid "Reset my password"
 msgstr ""
 
 #: registration/templates/registration/rejection_email.txt:4
