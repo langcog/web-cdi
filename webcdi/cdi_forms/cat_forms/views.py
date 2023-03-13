@@ -75,10 +75,10 @@ class AdministerAdministraionView(UpdateView):
     def get_hardest_easiest(self):
         if self.object.catresponse.administered_items:
             hardest = cdi_cat_api(
-                f"hardestWord?items={self.object.catresponse.administered_items}&language={CAT_LANG_DICT[self.language]}"
+                f"hardestWord?items={self.get_yes_responses()}&language={CAT_LANG_DICT[self.language]}"
             )["definition"]
             easiest = cdi_cat_api(
-                f"easiestWord?items={self.object.catresponse.administered_items}&language={CAT_LANG_DICT[self.language]}"
+                f"easiestWord?items={self.get_yes_responses()}&language={CAT_LANG_DICT[self.language]}"
             )["definition"]
         else:
             hardest = None
