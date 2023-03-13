@@ -64,12 +64,7 @@ class AdministerAdministraionView(UpdateView):
 
     def get_yes_responses(self):
         yes_list = []
-        for x, y in (
-            self.object.catresponse.administered_items,
-            self.object.catresponse.responses,
-        ):
-            if y:
-                yes_list.append(x)
+        yes_list = [x for x, y in zip(self.object.catresponse.administered_items, self.object.catresponse.administered_responses) if y]       
         return yes_list
 
     def get_hardest_easiest(self):
