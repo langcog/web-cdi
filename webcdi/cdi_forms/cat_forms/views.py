@@ -53,6 +53,13 @@ class AdministerAdministraionView(UpdateView):
     min_error = 0.15
     est_theta = None
 
+    def get_yes_responses(self):
+        yes_list = []
+        for x,y in self.object.catresponse.administered_items, self.object.catresponse.responses:
+            if y:
+                yes_list.append(x)
+        return yes_list
+
     def get_hardest_easiest(self):
         if self.object.catresponse.administered_items :
             hardest = cdi_cat_api(f'hardestWord?items={self.object.catresponse.administered_items}&language={CAT_LANG_DICT[self.language]}')['definition']
