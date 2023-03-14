@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-03 14:45+0000\n"
+"POT-Creation-Date: 2023-03-14 14:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -406,27 +406,27 @@ msgstr ""
 msgid "dd/mm/yyyy"
 msgstr ""
 
-#: cdi_forms/forms.py:768 cdi_forms/models.py:297
+#: cdi_forms/forms.py:770 cdi_forms/models.py:297
 msgid "Estimated Annual Family Income (in USD)"
 msgstr "Estimated Annual Family Income (in CAD)"
 
-#: cdi_forms/forms.py:776
+#: cdi_forms/forms.py:778
 msgid "My child is (check all that apply):"
 msgstr ""
 
-#: cdi_forms/forms.py:781 cdi_forms/forms.py:799
+#: cdi_forms/forms.py:783 cdi_forms/forms.py:801
 msgid "Basic Information"
 msgstr ""
 
-#: cdi_forms/forms.py:818
+#: cdi_forms/forms.py:820
 msgid "Family Background"
 msgstr ""
 
-#: cdi_forms/forms.py:830 cdi_forms/models.py:307
+#: cdi_forms/forms.py:832 cdi_forms/models.py:307
 msgid "Child's Ethnicity"
 msgstr ""
 
-#: cdi_forms/forms.py:834
+#: cdi_forms/forms.py:836
 msgid ""
 "The following information is being collected for the sole purpose of "
 "reporting to our grant-funding institute, i.e.,  NIH (National Institute of "
@@ -434,40 +434,40 @@ msgid ""
 "inclusiveness of our research. Your cooperation is appreciated, but optional."
 msgstr ""
 
-#: cdi_forms/forms.py:842
+#: cdi_forms/forms.py:844
 msgid "Caregiver Information"
 msgstr ""
 
-#: cdi_forms/forms.py:847
+#: cdi_forms/forms.py:849
 msgid "Language Exposure"
 msgstr ""
 
-#: cdi_forms/forms.py:858
+#: cdi_forms/forms.py:860
 msgid "Health"
 msgstr ""
 
-#: cdi_forms/forms.py:884
+#: cdi_forms/forms.py:886
 #, python-format
 msgid "Your identifier for %(source)s"
 msgstr ""
 
-#: cdi_forms/forms.py:914
+#: cdi_forms/forms.py:916
 msgid "Your Name"
 msgstr ""
 
-#: cdi_forms/forms.py:916
+#: cdi_forms/forms.py:918
 msgid "Your Email Address"
 msgstr ""
 
-#: cdi_forms/forms.py:922
+#: cdi_forms/forms.py:924
 msgid "Your Test URL"
 msgstr ""
 
-#: cdi_forms/forms.py:925
+#: cdi_forms/forms.py:927
 msgid "What would you like to tell us?"
 msgstr ""
 
-#: cdi_forms/forms.py:945 cdi_forms/templates/cdi_forms/cdi_form.html:11
+#: cdi_forms/forms.py:947 cdi_forms/templates/cdi_forms/cdi_form.html:11
 #: cdi_forms/templates/cdi_forms/cdi_form.html:323 cdi_forms/views.py:1304
 msgid "Submit"
 msgstr ""
@@ -1627,7 +1627,7 @@ msgstr ""
 #, python-format
 msgid ""
 "Thank you for filling this out! Of the words we asked, the hardest word your "
-"child knows is \"%(easiest)s\" and the easiest word is \"%(hardest)s\"."
+"child knows is \"%(hardest)s\" and the easiest word is \"%(easiest)s\"."
 msgstr ""
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:45

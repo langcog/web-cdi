@@ -317,7 +317,6 @@
                     {
                         "field":"secondary_caregiver_occupation",
                         "widget_type":"Select",
-                        "required":"True",
                         "choices": [
                             {
                                 "key":"",
