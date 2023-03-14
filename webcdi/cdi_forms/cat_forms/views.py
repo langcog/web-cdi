@@ -77,7 +77,7 @@ class AdministerAdministraionView(UpdateView):
     def get_hardest_easiest(self):
         if self.object.catresponse.administered_items:
             yes_list = self.get_yes_responses()
-            logger.debug(f'Yes List: {yes_list}')
+            logger.debug(f"Yes List: {yes_list}")
             hardest = cdi_cat_api(
                 f"hardestWord?items={yes_list}&language={CAT_LANG_DICT[self.language]}"
             )["definition"]
@@ -87,7 +87,7 @@ class AdministerAdministraionView(UpdateView):
         else:
             hardest = None
             easiest = None
-        logger.debug(f'Hardest: {hardest}; Easiest: {easiest}')
+        logger.debug(f"Hardest: {hardest}; Easiest: {easiest}")
         return hardest, easiest
 
     def get_object(self, queryset=None):
