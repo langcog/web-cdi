@@ -1546,7 +1546,7 @@ def printable_view(request, hash_id):
     nrows = len(categories_data)
     get_row = lambda row: categories_data[row]
     categories = {}
-    totals = {'produces' : 0, 'understands': 0}
+    totals = {"produces": 0, "understands": 0}
     for row in range(1, nrows):
         row_values = get_row(row)
         if len(row_values) > 1:
