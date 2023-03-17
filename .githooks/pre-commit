@@ -1,0 +1,38 @@
+#!/bin/sh
+#
+# An example hook script to verify what is about to be committed.
+# Called by "git commit" with no arguments.  The hook should
+# exit with non-zero status after issuing an appropriate message if
+# it wants to stop the commit.
+#
+export files=$(git status -s | grep -E '\.py$' | cut -c 4-)
+code_exit=0
+if [[ $files != *".py"* ]];
+then 
+exit 0
+fi
+echo "Isort format fix: "
+python -m isort --check --only-modified --remove-redundant-aliases --supported-extension py --python-version 38 --profile black $files
+code_exit+=$?
+python -m isort --quiet --only-modified --remove-redundant-aliases --only-modified --supported-extension py --python-version 38 --profile black $files
+
+echo "Black format fix: "
+python -m black --check $files
+code_exit+=$?
+python -m black --quiet $files
+
+echo "Flake8 Check: "
+python -m flake8 --extend-ignore=E501,F541,F811,W605,E722,E265,F405,W291,E203,F403 $files
+code_exit+=$?
+
+if [ $code_exit -gt 0 ]
+then 
+echo "Some changes were done or requested by the linters and formatters [isort, black & flake8]
+    Please fix requested changes and add new changes before committing again."
+exit 1
+fi
+# Redirect output to stderr.
+exec 1>&2
+
+
+

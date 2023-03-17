@@ -3,7 +3,7 @@ from django.db.models import Max
 import numpy as np
 import re, datetime
 from researcher_UI.models import administration, study
-from researcher_UI.utils import random_url_generator
+from researcher_UI.utils.random_url_generator import random_url_generator
 from django.urls import reverse
 
 
@@ -107,7 +107,7 @@ def admin_new_fun(request, permitted, study_name, study_obj):
                 subject_ids = re.split("[,;\s\t\n]+", str(params["new_subject_ids"][0]))
                 subject_ids = list(filter(None, subject_ids))
                 for sid in subject_ids:
-                    new_hash = random_url_generator.random_url_generator()
+                    new_hash = random_url_generator()
                     old_rep = administration.objects.filter(
                         study=study_obj, subject_id=sid
                     ).count()
@@ -141,7 +141,7 @@ def admin_new_fun(request, permitted, study_name, study_obj):
                 for sid in range(
                     max_subject_id + 1, max_subject_id + autogenerate_count + 1
                 ):
-                    new_hash = random_url_generator.random_url_generator()
+                    new_hash = random_url_generator()
                     administration.objects.create(
                         study=study_obj,
                         subject_id=sid,
