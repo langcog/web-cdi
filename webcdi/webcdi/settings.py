@@ -90,6 +90,8 @@ INSTALLED_APPS = (
     "webcdi",
     "ckeditor",
     "ckeditor_uploader",
+    'brookes',
+    'rangefilter',
 )
 
 MIDDLEWARE = [

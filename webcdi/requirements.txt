@@ -30,6 +30,7 @@ cycler==0.11.0
 defusedxml==0.7.1
 Django==3.2.18
 django-adaptors==0.2.5
+django-admin-rangefilter==0.9.0
 django-appconf==1.0.5
 django-axes==5.27.0
 django-bootstrap3==21.1
@@ -118,7 +119,7 @@ trio==0.19.0
 trio-websocket==0.9.2
 urllib3==1.26.7
 wcwidth==0.2.5
-weasyprint==52.5
+WeasyPrint==52.5
 webencodings==0.5.1
 websocket-client==1.2.3
 wsproto==1.0.0
