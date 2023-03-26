@@ -194,13 +194,13 @@ class AdminNew(LoginRequiredMixin, generic.UpdateView):
         return HttpResponse(json.dumps(data), content_type="application/json")
 
 
-class AdministerNewParticipant(LoginRequiredMixin, generic.CreateView):
+class AdministerNewParticipant(generic.CreateView):
     def post(self, request, username, study_name):
         admin = admin_new_participant_fun(request, username, study_name)
         return redirect(reverse("administer_cdi_form", args=[admin.url_hash]))
 
 
-class AdminNewParent(LoginRequiredMixin, generic.View):
+class AdminNewParent(generic.View):
     def get(self, request, username, study_name):
         study_obj, let_through, bypass, source_id = admin_new_parent_fun(
             request, username, study_name
