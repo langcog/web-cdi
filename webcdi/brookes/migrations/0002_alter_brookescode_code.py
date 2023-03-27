@@ -5,15 +5,20 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('brookes', '0001_initial'),
+        ("brookes", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='brookescode',
-            name='code',
-            field=models.CharField(default=brookes.utils.create_brookes_code, max_length=15, primary_key=True, serialize=False, unique=True),
+            model_name="brookescode",
+            name="code",
+            field=models.CharField(
+                default=brookes.utils.create_brookes_code,
+                max_length=15,
+                primary_key=True,
+                serialize=False,
+                unique=True,
+            ),
         ),
     ]
