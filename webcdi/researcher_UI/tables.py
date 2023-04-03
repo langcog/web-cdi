@@ -2,7 +2,7 @@ import django_tables2 as tables
 from cdi_forms import views
 from django_tables2.utils import A
 from django.conf.urls import url
-from .models import administration
+from .models.models import administration
 from django.utils.html import mark_safe
 
 # Table for organizing administration objects into a table on the researcher interface

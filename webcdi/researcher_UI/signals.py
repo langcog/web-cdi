@@ -1,7 +1,8 @@
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, m2m_changed
 from django.dispatch import receiver
 
 from registration.models import RegistrationProfile
+from researcher_UI.models import researcher
 
 from django.core.mail import send_mail
 from django.contrib.sites.models import Site
@@ -24,3 +25,18 @@ def notify_admin(sender, instance, created, **kwargs):
             fail_silently=False,
         )
 
+@receiver(post_save, sender=researcher)
+def update_instruments(sender, instance, **kwargs):
+    '''
+    Brings instruments for a researcher up to date on save
+    '''
+    for instrument in instance.allowed_instruments.all():
+        instance.allowed_instruments.remove(instrument)
+    for family in instance.allowed_instrument_families.all():
+        for instrument in family.instrument_set.all():
+            instance.allowed_instruments.add(instrument)
+
+m2m_changed.connect(
+    update_instruments,
+    sender=researcher.allowed_instrument_families.through,
+)

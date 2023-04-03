@@ -70,12 +70,15 @@ class Command(BaseCommand):
             instrument_min_age = curr_instrument["min_age"]
             instrument_max_age = curr_instrument["max_age"]
 
+            family = InstrumentFamily.objects.get(name=curr_instrument['family'])
+
             data_dict = {
                 "language": instrument_language,
                 "form": instrument_form,
                 "verbose_name": instrument_verbose_name,
                 "min_age": instrument_min_age,
                 "max_age": instrument_max_age,
+                'family': family
             }
 
             instrument_obj, created = instrument.objects.update_or_create(

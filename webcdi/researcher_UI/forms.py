@@ -8,7 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 from form_utils.forms import BetterModelForm
 
 from . import choices
-from .models import *
+from .models.models import *
 
 
 # Form for creating a new study
@@ -498,14 +498,14 @@ class EditOptOutForm(forms.ModelForm):
 class AddInstrumentForm(forms.ModelForm):
     class Meta:
         model = researcher
-        fields = ["allowed_instruments"]
-        widgets = {"allowed_instruments": forms.CheckboxSelectMultiple()}
+        fields = ["allowed_instrument_families"]
+        widgets = {"allowed_instrument_families": forms.CheckboxSelectMultiple()}
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["allowed_instruments"].queryset = self.fields[
-            "allowed_instruments"
-        ].queryset.filter(active=True)
+        self.fields["allowed_instrument_families"].queryset = self.fields[
+            "allowed_instrument_families"
+        ].queryset#.filter(chargeable=False)
 
 
 # Update study form

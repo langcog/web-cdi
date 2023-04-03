@@ -23,7 +23,7 @@ from researcher_UI.utils.raw_gift_codes import raw_gift_code_fun
 
 from .forms import *
 from .mixins import StudyOwnerMixin
-from .models import administration, researcher, study
+from .models.models import administration, researcher, study
 
 
 class Console(LoginRequiredMixin, generic.ListView):

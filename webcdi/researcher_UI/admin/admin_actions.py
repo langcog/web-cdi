@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
 
-from .models import administration
+from ..models.models import administration
 from researcher_UI.utils.download import download_data, download_summary
 
 

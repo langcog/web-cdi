@@ -7,7 +7,9 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.shortcuts import redirect, reverse
 
-from . import choices
+from .. import choices
+from .instrument import instrument
+from .researcher import researcher
 
 
 class Demographic(models.Model):
@@ -21,69 +23,6 @@ class Demographic(models.Model):
     def __str__(self):
         return f"{self.name}"
 
-
-# Model for individual instruments
-class instrument(models.Model):
-    name = models.CharField(max_length=51, primary_key=True)  # Instrument short name
-    verbose_name = models.CharField(
-        max_length=51, blank=True
-    )  # Instrument official title
-    language = models.CharField(
-        max_length=51
-    )  # Instrument's language. For 'English Words & Sentences' this would be 'English'
-    form = models.CharField(
-        max_length=51
-    )  # Instrument's form type abbreviation. For 'English Words & Sentences' this would be 'WS'
-    min_age = models.IntegerField(
-        verbose_name="Minimum age"
-    )  # Minimum age in months that instrument was built for
-    max_age = models.IntegerField(
-        verbose_name="Maximum age"
-    )  # Maximum age in months that instrument was built for
-    demographics = models.ManyToManyField("Demographic")
-    active = models.BooleanField(default=True)
-
-    def __unicode__(self):
-        return "%s (%s %s)" % (self.verbose_name, self.language, self.form)
-
-    def __str__(self):
-        return f"%s" % (self.verbose_name)
-
-    class Meta:
-        unique_together = (
-            "language",
-            "form",
-        )  # Each instrument in the database must have a unique combination of language and form type
-        ordering = ["verbose_name"]
-
-
-class researcher(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    institution = models.CharField(
-        verbose_name="Name of Institution", max_length=101
-    )  # Name of research institution they are affiliated with
-    position = models.CharField(
-        verbose_name="Position in Institution", max_length=101
-    )  # Title of position within research institution
-    allowed_instruments = models.ManyToManyField(
-        instrument, verbose_name="Instruments this researcher has access to", blank=True
-    )
-
-    def __unicode__(self):
-        return "%s %s (%s, %s)" % (
-            self.user.first_name,
-            self.user.last_name,
-            self.position,
-            self.institution,
-        )
-
-    def __str__(self):
-        return f"%s %s (%s, %s)" % (
-            self.user.first_name,
-            self.user.last_name,
-            self.position,
-            self.institution,
-        )
 
 
 from django.db.models.signals import post_save

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import *
+from researcher_UI.models import *
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 from django.db.models import Count 
