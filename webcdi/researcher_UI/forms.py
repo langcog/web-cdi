@@ -1,14 +1,15 @@
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import HTML, Div, Field, Fieldset, Layout, Submit
+from crispy_forms.layout import HTML, Div, Field, Fieldset, Layout
 from django import forms
 from django.contrib.postgres.forms import IntegerRangeField
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from form_utils.forms import BetterModelForm
 
+
 from . import choices
-from .models.models import *
+from researcher_UI.models import *
 
 
 # Form for creating a new study
@@ -125,7 +126,6 @@ class AddStudyForm(BetterModelForm):
     # Form validation. Form is passed automatically to views.py for higher level checking.
     def clean(self):
         cleaned_data = super().clean()
-        print(cleaned_data)
         return cleaned_data
 
     # Initiating form and field layout.
@@ -496,19 +496,11 @@ class EditOptOutForm(forms.ModelForm):
 
 
 class AddInstrumentForm(forms.ModelForm):
+
     class Meta:
         model = researcher
         fields = ["allowed_instrument_families"]
         widgets = {"allowed_instrument_families": forms.CheckboxSelectMultiple()}
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields["allowed_instrument_families"].queryset = self.fields[
-            "allowed_instrument_families"
-        ].queryset
-        self.chargeable_fields['chargebale'] = self.fields["allowed_instrument_families"].queryset.filter(chargeable=True)
-        self.non_chargeable_fields['non_chargebale'] = self.fields["allowed_instrument_families"].queryset.filter(chargeable=False)
-
 
 class AddChargeableInstrumentForm(forms.ModelForm):
     class Meta:

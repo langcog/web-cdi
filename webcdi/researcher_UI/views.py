@@ -1,5 +1,5 @@
 import json
-
+import datetime
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core import serializers
@@ -9,6 +9,8 @@ from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views import generic
 from django.views.generic import UpdateView
+
+from dateutil.relativedelta import relativedelta
 from psycopg2.extras import NumericRange
 from researcher_UI.utils.add_paired_study import add_paired_study_fun
 from researcher_UI.utils.add_study import add_study_fun
@@ -20,10 +22,10 @@ from researcher_UI.utils.console_helper.post_helper import post_condition
 from researcher_UI.utils.import_data import import_data_fun
 from researcher_UI.utils.overflow import overflow_fun
 from researcher_UI.utils.raw_gift_codes import raw_gift_code_fun
-
+from brookes.models import BrookesCode
 from .forms import *
 from .mixins import StudyOwnerMixin
-from .models.models import administration, researcher, study
+from researcher_UI.models import administration, researcher, study
 
 
 class Console(LoginRequiredMixin, generic.ListView):
@@ -324,7 +326,13 @@ class ResearcherAddInstruments(LoginRequiredMixin, UpdateView):
     template_name = "researcher_UI/researcher_form.html"
 
     def get_success_url(self):
-        return reverse("researcher_ui:console")
+        res = reverse("researcher_ui:console")
+        dt = datetime.date.today() - relativedelta(years=1)
+        for chargeable in self.object.allowed_instrument_families.filter(chargeable=True):
+            if not BrookesCode.objects.filter(researcher=self.request.user, instrument_family=chargeable, applied__gte=dt).exists():
+                res = reverse("brookes:enter_codes", args=(chargeable.id,))
+        
+        return res
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
