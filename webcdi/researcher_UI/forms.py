@@ -505,7 +505,22 @@ class AddInstrumentForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields["allowed_instrument_families"].queryset = self.fields[
             "allowed_instrument_families"
-        ].queryset#.filter(chargeable=False)
+        ].queryset
+        self.chargeable_fields['chargebale'] = self.fields["allowed_instrument_families"].queryset.filter(chargeable=True)
+        self.non_chargeable_fields['non_chargebale'] = self.fields["allowed_instrument_families"].queryset.filter(chargeable=False)
+
+
+class AddChargeableInstrumentForm(forms.ModelForm):
+    class Meta:
+        model = researcher
+        fields = ["allowed_instrument_families"]
+        widgets = {"allowed_instrument_families": forms.CheckboxSelectMultiple()}
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["allowed_instrument_families"].queryset = self.fields[
+            "allowed_instrument_families"
+        ].queryset.filter(chargeable=True)
 
 
 # Update study form

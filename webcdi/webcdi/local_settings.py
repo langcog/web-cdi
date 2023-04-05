@@ -62,7 +62,7 @@ else:
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'webcdi-admin', 
             'USER': 'webcdi-admin',
-            'PASSWORD': 'bears1stlexicon',
+            'PASSWORD': 'bears1stlexicon', 
             #'HOST': 'webcdiadmin.canyiscnpddk.us-west-2.rds.amazonaws.com',
             'HOST': 'webcdi-dev-argentinian.canyiscnpddk.us-west-2.rds.amazonaws.com',
             'PORT': '5432',

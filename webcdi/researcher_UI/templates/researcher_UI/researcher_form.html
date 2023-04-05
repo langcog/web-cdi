@@ -142,9 +142,17 @@
             </div>
             <div class="col-12"> 
                 <form action="." method="post">
+                    <h1>Non-chargeable Instruments</h1>
                     {% csrf_token %}
                     <div class="row">
-                        {% for field in form %}
+                        {% for field in form.non_chargeable_fields %}
+                        <div class="col-md-4">
+                            {{ field }}
+
+                            {{ field.error }}
+                        </div>
+
+                        <!--
                             {% instrument_filter field  as instrument_res%}
                                 <div class="col-md-4">
                                     {% for i in instrument_res.0 %}
@@ -163,8 +171,38 @@
                                         {{i}} <br>
                                     {% endfor %}
                                 </div>
+                            -->
                         {% endfor %}
                     </div>
+
+                    <h1>Chargeable Instruments</h1>
+                    <div class="row">
+                        {% for field in form.chargeable_fields %}
+                        <div class="col-md-4">
+                            {{ field }}
+                            {{ field.error }}
+                        </div>
+                        <!--    {% instrument_filter field  as instrument_res%}
+                                <div class="col-md-4">
+                                    {% for i in instrument_res.0 %}
+                                        {{i}} <br>
+                                    {% endfor %}
+                                </div>
+
+                                <div class="col-md-4">
+                                    {% for i in instrument_res.1 %}
+                                        {{i}}  <br>
+                                    {% endfor %}
+                                </div>
+
+                                <div  class="col-md-4">
+                                    {% for i in instrument_res.2 %}
+                                        {{i}} <br>
+                                    {% endfor %}
+                                </div>-->
+                        {% endfor %}
+                    </div>
+
 
                     <div class="d-flex justify-content-center">
                         <input type="submit" class="btn btn-primary" style="width:200px;" value="Save">
