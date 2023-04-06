@@ -1,7 +1,9 @@
-import os
+
 from researcher_UI.models import administration
 from researcher_UI.utils.random_url_generator import random_url_generator
 from django.conf import settings
+from django.contrib import messages
+from django.utils.safestring import mark_safe
 import datetime
 from researcher_UI.utils.download import (
     download_cat_data,
@@ -13,33 +15,38 @@ from researcher_UI.utils.download import (
     download_summary,
 )
 
+from django.shortcuts import redirect
 def post_condition(request, ids, study_obj):
     if "administer-selected" in request.POST:
-        num_ids = map(int, ids)  # Force numeric IDs into a list of integers
-        new_administrations = []
-        sids_created = set()
+        if not study_obj.valid_code(request.user):
+            messages.warning(request, mark_safe("Access to this form requires an active license, available for purchase through Brookes Publishing Co (<a href='https://brookespublishing.com/product/cdi' target='_blank'>https://brookespublishing.com/product/cdi</a>)"))
+            return None
+        else:
+            num_ids = map(int, ids)  # Force numeric IDs into a list of integers
+            new_administrations = []
+            sids_created = set()
 
-        for nid in num_ids:  # For each ID number
-            admin_instance = administration.objects.get(id=nid)
-            sid = admin_instance.subject_id
-            if sid in sids_created:
-                continue
-            old_rep = administration.objects.filter(
-                study=study_obj, subject_id=sid
-            ).count()
-            new_administrations.append(
-                administration(
-                    study=study_obj,
-                    subject_id=sid,
-                    repeat_num=old_rep + 1,
-                    url_hash=random_url_generator(),
-                    completed=False,
-                    due_date=datetime.datetime.now() + datetime.timedelta(days=14),
+            for nid in num_ids:  # For each ID number
+                admin_instance = administration.objects.get(id=nid)
+                sid = admin_instance.subject_id
+                if sid in sids_created:
+                    continue
+                old_rep = administration.objects.filter(
+                    study=study_obj, subject_id=sid
+                ).count()
+                new_administrations.append(
+                    administration(
+                        study=study_obj,
+                        subject_id=sid,
+                        repeat_num=old_rep + 1,
+                        url_hash=random_url_generator(),
+                        completed=False,
+                        due_date=datetime.datetime.now() + datetime.timedelta(days=14),
+                    )
                 )
-            )
-            sids_created.add(sid)
+                sids_created.add(sid)
 
-        administration.objects.bulk_create(new_administrations)
+            administration.objects.bulk_create(new_administrations)
 
     elif "delete-selected" in request.POST: 
         num_ids = list(set(map(int, ids)))

@@ -65,11 +65,11 @@ class StudyCreateView(LoginRequiredMixin, generic.CreateView):
 
             if all([x.isdigit() for x in ids]):
                 """Check that the administration numbers are all numeric"""
-                try:
-                    res = post_condition(request, ids, study_obj)
-                except Exception as e:
-                    context = {"error": "This combination is already existed."}
-                    return render(request, "researcher_UI/500_error.html", context)
+                #try:
+                res = post_condition(request, ids, study_obj)
+                #except Exception as e:
+                #    context = {"error": "This combination is already existed."}
+                #    return render(request, "researcher_UI/500_error.html", context)
 
                 if res:
                     return res
@@ -171,8 +171,16 @@ class AddPairedStudy(LoginRequiredMixin, generic.CreateView):
 class AdminNew(LoginRequiredMixin, generic.UpdateView):
     model = study
     form_class = AdminNewForm
-    template_name = "researcher_UI/administer_new_modal.html"
+    #template_name = "researcher_UI/administer_new_modal.html"
 
+    def get_template_names(self):
+        study_obj = self.get_object()
+        # check if valid code if chargeable
+        if not study_obj.valid_code(self.request.user):
+            return ['researcher_UI/no_brookes_code.html']
+        else:
+            return ['researcher_UI/administer_new_modal.html']
+        
     def get_context_data(self, **kwargs):
         context = super(AdminNew, self).get_context_data(**kwargs)
         researcher = self.request.user

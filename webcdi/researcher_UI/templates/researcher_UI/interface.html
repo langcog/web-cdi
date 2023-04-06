@@ -140,6 +140,13 @@
 </style>
 <!-- Researcher interface -->
 <body style="background:#3ca0e7;">
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
     <div class=''>
         <!-- Row displaying username, help button, and logout button. -->
         <nav role="navigation" class="primary-navigation d-flex justify-content-end">
