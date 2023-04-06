@@ -5,7 +5,8 @@ from brookes.models import BrookesCode
 
 
 class BrookesCodeForm(forms.Form):
-    code = forms.CharField(max_length=15)
+    code = forms.CharField(max_length=15, required=False)
+    cancel = forms.CharField(max_length=15, required=False)
     '''
     class Meta:
         model = BrookesCode
@@ -19,9 +20,13 @@ class BrookesCodeForm(forms.Form):
     
     def clean(self):
         cleaned_data = super().clean()
-        code = cleaned_data['code']
-        if not BrookesCode.objects.filter(code=code).exists():
-            raise ValidationError('Invalid code', code='invalid')
-        elif not BrookesCode.objects.filter(code=code, applied__isnull=True):
-            raise ValidationError('Code already applied', code='invalid')
+        if cleaned_data['cancel'] != 'Cancel':
+            code = cleaned_data['code']
+            if not BrookesCode.objects.filter(code=code).exists():
+                self.add_error('code', 'Invalid code')
+                #raise ValidationError('Invalid code', code='invalid')
+            elif not BrookesCode.objects.filter(code=code, applied__isnull=True):
+                self.add_error('code', 'Code already applied')
+                
+                #raise ValidationError('Code already applied', code='invalid')
         return cleaned_data

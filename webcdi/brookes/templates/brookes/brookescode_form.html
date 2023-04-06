@@ -145,10 +145,15 @@
                     <h1> Please enter a valid code for {{ instrument_family }}</h1>
                     {% csrf_token %}
                     <div class="row">
-                        {{ form }}
+                        {{ form.code.label }}: 
+                        {{ form.code }}
+                        {% for error in form.code.errors %}
+                            <p style="color: red">{{ error }}</p>
+                        {% endfor %}
                     </div>
 
                     <div class="d-flex justify-content-center">
+                        <input type='submit' class='btn' style="width:200px;" name='cancel' value="Cancel">
                         <input type="submit" class="btn btn-primary" style="width:200px;" value="Save">
                     </div>
                 </form>

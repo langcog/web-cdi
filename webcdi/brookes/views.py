@@ -33,9 +33,12 @@ class UpdateBrookesCode(LoginRequiredMixin, FormView):
         return ctx
     
     def form_valid(self, form):
-        bc = BrookesCode.objects.get(code=self.request.POST['code'])
-        bc.researcher = self.request.user
-        bc.instrument_family = InstrumentFamily.objects.get(id=self.kwargs['instrument_family'])
-        bc.applied = datetime.datetime.now()
-        bc.save()
+        if 'cancel' in self.request.POST:
+            self.request.user.researcher.allowed_instrument_families.remove(InstrumentFamily.objects.get(id=self.kwargs['instrument_family']))
+        else: 
+            bc = BrookesCode.objects.get(code=self.request.POST['code'])
+            bc.researcher = self.request.user
+            bc.instrument_family = InstrumentFamily.objects.get(id=self.kwargs['instrument_family'])
+            bc.applied = datetime.datetime.now()
+            bc.save()
         return super().form_valid(form)
