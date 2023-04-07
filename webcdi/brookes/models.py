@@ -1,6 +1,6 @@
 from brookes.utils import create_brookes_code
 from django.db import models
-from researcher_UI.models import User, InstrumentFamily
+from researcher_UI.models import InstrumentFamily, User
 
 # Create your models here.
 

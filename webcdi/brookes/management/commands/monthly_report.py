@@ -45,6 +45,6 @@ class Command(BaseCommand):
             body=f"Please find attached monthly report {filename_csv}",
             to=[self.to_email],
         )
-        with open(filename_csv, "r") as csvfile:           
+        with open(filename_csv, "r") as csvfile:
             email_message.attach(filename_csv, csvfile.read(), "text/csv")
             email_message.send()
