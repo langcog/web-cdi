@@ -1,14 +1,12 @@
 import datetime
 
+from brookes.models import BrookesCode
 from dateutil.relativedelta import relativedelta
-
+from django.contrib import messages
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.views import LoginView
 from django.shortcuts import redirect, render
 
-from django.contrib.auth.views import LoginView
-from django.contrib import messages
-
-from brookes.models import BrookesCode
 from webcdi.forms import SignUpForm
 
 
@@ -32,7 +30,6 @@ def signup(request):
 
 
 class CustomLoginView(LoginView):
-
     def get_success_url(self) -> str:
         # We might want to message researchers their licence is about to expire
 
@@ -40,10 +37,13 @@ class CustomLoginView(LoginView):
         to_date = (
             datetime.date.today() - relativedelta(years=1) + relativedelta(months=1)
         )
-        codes = BrookesCode.objects.filter(researcher=self.request.user, applied__gte=from_date, applied__lte=to_date)
+        codes = BrookesCode.objects.filter(
+            researcher=self.request.user, applied__gte=from_date, applied__lte=to_date
+        )
         for code in codes:
-            messages.warning(self.request, f'Your licence for {code.instrument_family} will expire on {code.applied + relativedelta(years=1)}')
+            messages.warning(
+                self.request,
+                f"Your licence for {code.instrument_family} will expire on {code.applied + relativedelta(years=1)}",
+            )
 
         return super().get_success_url()
-    
-    
