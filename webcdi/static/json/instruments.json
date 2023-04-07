@@ -91,7 +91,7 @@
 	},
 	{
 		"language": "French Quebec",
-		"family": "English (American/Canadian) Long",
+		"family": "French (Canadian) Long",
 		"form": "WS",
 		"verbose_name": "French (Canadian) WS",
 		"min_age": 16,
@@ -103,7 +103,7 @@
 	},
 	{
 		"language": "French Quebec",
-		"family": "English (American/Canadian) Long",
+		"family": "French (Canadian) Long",
 		"form": "WG",
 		"verbose_name": "French (Canadian) WG",
 		"min_age": 8,
@@ -115,7 +115,7 @@
 	},
 	{
 		"language": "Canadian English",
-		"family": "English (Canadian) Long",
+		"family": "English (American/Canadian) Long",
 		"form": "WS",
 		"verbose_name": "English (Canadian) WS",
 		"min_age": 16,
@@ -127,7 +127,7 @@
 	},
 	{
 		"language": "Canadian English",
-		"family": "English (Canadian) Long",
+		"family": "English (American/Canadian) Long",
 		"form": "WG",
 		"verbose_name": "English (Canadian) WG",
 		"min_age": 8,
