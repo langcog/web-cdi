@@ -11,5 +11,7 @@ RDS_USERNAME=webcdi-admin
 MAILTO="hjsmehta@gmail.com"
 
 0 * * * * root source /var/app/venv/*/bin/activate && export $(cat /opt/elasticbeanstalk/deployment/custom_env_var | xargs)  && /var/app/current/manage.py monthly_report
+#0 0 * * 0 root source /var/app/venv/*/bin/activate && export $(cat /opt/elasticbeanstalk/deployment/custom_env_var | xargs)  && /var/app/current/manage.py weekly_reminder
+0 * * * * root source /var/app/venv/*/bin/activate && export $(cat /opt/elasticbeanstalk/deployment/custom_env_var | xargs)  && /var/app/current/manage.py weekly_reminder
 
 # this file needs a blank space as the last line otherwise it will fail
