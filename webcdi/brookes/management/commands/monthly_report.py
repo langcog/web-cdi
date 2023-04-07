@@ -1,7 +1,7 @@
 import csv
 import datetime
 
-from brookes.models import BrookesCode  # , MonthlyReport
+from brookes.models import BrookesCode
 from django.conf import settings
 from django.core.mail import EmailMessage
 from django.core.management.base import BaseCommand
@@ -40,15 +40,11 @@ class Command(BaseCommand):
                     ]
                 )
 
-            # report = MonthlyReport()
-            # report.csv_file.save(filename_csv, csvfile)
-            # report.save()
-
         email_message = EmailMessage(
-            subject=f"{filename_csv}",
+            subject="WebCDI Monthly Report",
             body=f"Please find attached monthly report {filename_csv}",
             to=[self.to_email],
         )
-        with open(filename_csv, "r") as csvfile:
-            email_message.attach = [(filename_csv, csvfile.read(), "text/csv")]
+        with open(filename_csv, "r") as csvfile:           
+            email_message.attach(filename_csv, csvfile.read(), "text/csv")
             email_message.send()
