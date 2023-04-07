@@ -322,19 +322,6 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
             self.administration_instance.completed = True
             self.administration_instance.save()
             return redirect(self.administration_instance.get_absolute_url())
-        
-        # check if valid study and send email if not
-        if not self.administration_instance.study.valid_code(self.administration_instance.study.researcher):
-            # send email to remind researcher
-            
-            subject = 'WebCDI - Please pruchase a licence'
-            from_email = settings.DEFAULT_FROM_EMAIL 
-            to =  f'{self.administration_instance.study.researcher.email}'
-            html_content = "Access to this form requires an active license, available for purchase through Brookes Publishing Co (<a href='https://brookespublishing.com/product/cdi' target='_blank'>https://brookespublishing.com/product/cdi</a>)"
-            text_content = strip_tags(html_content)
-            msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
-            msg.attach_alternative(html_content, "text/html")
-            msg.send()
 
         self.get_study_context()
         self.get_user_language()
@@ -509,6 +496,21 @@ class CreateBackgroundInfoView(CreateView):
 
     def get_study(self):
         self.study = study.objects.get(id=int(self.kwargs["study_id"]))
+        
+        # check if valid study and send email if not
+        print('WE ARE HERE')
+        if not self.study.valid_code(self.study.researcher):
+            print('NO VALID CODE')
+            # send email to remind researcher
+            
+            subject = 'WebCDI - Please purchase a licence'
+            from_email = settings.DEFAULT_FROM_EMAIL 
+            to =  f'{self.study.researcher.email}'
+            html_content = "Access to this form requires an active license, available for purchase through Brookes Publishing Co (<a href='https://brookespublishing.com/product/cdi' target='_blank'>https://brookespublishing.com/product/cdi</a>)"
+            text_content = strip_tags(html_content)
+            msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
 
     def get_source_id(self):
         self.source_id = self.kwargs["source_id"]
