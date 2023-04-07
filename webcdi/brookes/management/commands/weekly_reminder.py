@@ -1,13 +1,11 @@
 import csv
 import datetime
 
+from brookes.models import BrookesCode
+from dateutil.relativedelta import relativedelta
 from django.conf import settings
 from django.core.mail import EmailMessage
 from django.core.management.base import BaseCommand
-
-from dateutil.relativedelta import relativedelta
-
-from brookes.models import BrookesCode
 
 
 class Command(BaseCommand):
@@ -15,7 +13,9 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         from_date = datetime.date.today() - relativedelta(years=1)
-        to_date = datetime.date.today() - relativedelta(years=1) + relativedelta(months=1)
+        to_date = (
+            datetime.date.today() - relativedelta(years=1) + relativedelta(months=1)
+        )
         codes = BrookesCode.objects.filter(applied__gte=from_date, applied__lte=to_date)
         for code in codes:
             email_message = EmailMessage(
