@@ -1,7 +1,7 @@
 import csv
 import datetime
 
-from brookes.models import BrookesCode
+from brookes.models import BrookesCode #, MonthlyReport
 from django.conf import settings
 from django.core.mail import EmailMessage
 from django.core.management.base import BaseCommand
@@ -13,7 +13,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         codes = BrookesCode.objects.all()
-        filename_csv = f'{settings.MEDIA_ROOT}/Brookes Codes as of {datetime.date.today().strftime("%b-%d-%Y")}.csv'
+        filename_csv = f'/tmp/Brookes Codes as of {datetime.date.today().strftime("%b-%d-%Y")}.csv'
         with open(filename_csv, "w", newline="") as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow(
@@ -37,6 +37,10 @@ class Command(BaseCommand):
                         code.applied,
                     ]
                 )
+
+            #report = MonthlyReport()
+            #report.csv_file.save(filename_csv, csvfile)
+            #report.save()
 
         email_message = EmailMessage(
             subject=f"{filename_csv}",

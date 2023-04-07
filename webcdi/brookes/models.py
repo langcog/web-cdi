@@ -21,3 +21,10 @@ class BrookesCode(models.Model):
 
     def __str__(self) -> str:
         return f"{self.code}"
+
+class MonthlyReport(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
+    csv_file = models.FileField(upload_to='brookes/')
+
+    def __str__(self) -> str:
+        return f"{self.created}"
