@@ -1,0 +1,29 @@
+import csv
+import datetime
+
+from django.conf import settings
+from django.core.management.base import BaseCommand
+from django.core.mail import EmailMessage
+
+from brookes.models import BrookesCode
+
+class Command(BaseCommand):
+    help = 'Sends monthly report to settings.BROOKES_EMAIL'
+    to_email = settings.BROOKES_EMAIL
+    
+    def handle(self, *args, **options):    
+        codes = BrookesCode.objects.all()
+        filename_csv = f'{settings.MEDIA_ROOT}/Brookes Codes as of {datetime.date.today().strftime("%b-%d-%Y")}.csv'
+        with open(filename_csv, 'w', newline='') as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow(['Code', 'Researcher', 'Created', 'Modified', 'Instrument Family', 'Applied'])
+            for code in codes:
+                writer.writerow([code.code, code.researcher, code.created, code.modified, code.instrument_family, code.applied])
+            
+        email_message = EmailMessage(
+            subject=f"{filename_csv}",
+            body=f"Please find attached monthly report {filename_csv}",
+            to=[self.to_email])
+        with open(filename_csv, 'r') as csvfile:
+            email_message.attach=[(filename_csv, csvfile.read(), 'text/csv')]
+            email_message.send()
