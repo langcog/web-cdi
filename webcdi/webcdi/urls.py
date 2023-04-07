@@ -24,7 +24,7 @@ from django.conf.urls.static import static
 from django.urls import path
 from django.contrib import admin
 
-from webcdi.views import signup
+from webcdi.views import signup, CustomLoginView
 
 urlpatterns = [
     url(r"^$", TemplateView.as_view(template_name="researcher_UI/home.html")),
@@ -39,7 +39,7 @@ urlpatterns = [
     url(r"^form/", include("cdi_forms.urls")),
     url(
         r"^accounts/login/$",
-        auth_views.LoginView.as_view(),
+        CustomLoginView.as_view(),
         {"template_name": "registration/login.html"},
     ),
     url(
