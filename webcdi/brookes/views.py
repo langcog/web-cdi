@@ -1,12 +1,12 @@
 import datetime
 
+from brookes.forms import BrookesCodeForm
+from brookes.models import BrookesCode
 from dateutil.relativedelta import relativedelta
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 from django.views.generic import FormView
 from researcher_UI.models import InstrumentFamily
-from brookes.forms import BrookesCodeForm
-from brookes.models import BrookesCode
 
 # Create your views here.
 
@@ -49,16 +49,18 @@ class UpdateBrookesCode(LoginRequiredMixin, FormView):
         else:
             bc = BrookesCode.objects.get(code=self.request.POST["code"])
             bc.researcher = self.request.user
-            family = InstrumentFamily.objects.get(
-                id=self.kwargs["instrument_family"]
-            )
+            family = InstrumentFamily.objects.get(id=self.kwargs["instrument_family"])
             bc.instrument_family = family
             dt = datetime.datetime.now()
             bc.applied = dt
             # is there an existing, and active code
             # if yes, set expiry date 1 year from then
-            if BrookesCode.objects.filter(researcher=bc.researcher, expiry__gte=dt, instrument_family=family).exists():
-                existing = BrookesCode.objects.filter(researcher=bc.researcher, expiry__gte=dt, instrument_family=family).order_by('-expiry')[0]
+            if BrookesCode.objects.filter(
+                researcher=bc.researcher, expiry__gte=dt, instrument_family=family
+            ).exists():
+                existing = BrookesCode.objects.filter(
+                    researcher=bc.researcher, expiry__gte=dt, instrument_family=family
+                ).order_by("-expiry")[0]
                 bc.expiry = existing.expiry + relativedelta(years=1)
             bc.save()
         return super().form_valid(form)

@@ -15,9 +15,9 @@ class Command(BaseCommand):
         codes = BrookesCode.objects.filter(expiry__gte=from_date, expiry__lte=to_date)
         for code in codes:
             if BrookesCode.objects.filter(
-                researcher=code.researcher, 
+                researcher=code.researcher,
                 expiry__gte=to_date,
-                instrument_family=code.instrument_family
+                instrument_family=code.instrument_family,
             ).exists():
                 codes = codes.exclude(pk=code.pk)
         for code in codes:

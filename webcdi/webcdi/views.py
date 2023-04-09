@@ -40,9 +40,9 @@ class CustomLoginView(LoginView):
         )
         for code in codes:
             if BrookesCode.objects.filter(
-                researcher=self.argsrequest.user, 
+                researcher=self.argsrequest.user,
                 expiry__gte=to_date,
-                instrument_family=code.instrument_family
+                instrument_family=code.instrument_family,
             ).exists():
                 codes = codes.exclude(pk=code.pk)
         for code in codes:
