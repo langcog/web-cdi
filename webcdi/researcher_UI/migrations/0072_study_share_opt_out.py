@@ -4,15 +4,17 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('researcher_UI', '0071_alter_instrumentfamily_options'),
+        ("researcher_UI", "0071_alter_instrumentfamily_options"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='study',
-            name='share_opt_out',
-            field=models.BooleanField(default=False, help_text='For chargeable instruments you may opt out of sharing the study data.  Selecting this will have no impact on non-chargeable instruments'),
+            model_name="study",
+            name="share_opt_out",
+            field=models.BooleanField(
+                default=False,
+                help_text="For chargeable instruments you may opt out of sharing the study data.  Selecting this will have no impact on non-chargeable instruments",
+            ),
         ),
     ]

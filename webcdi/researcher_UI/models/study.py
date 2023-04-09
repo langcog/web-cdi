@@ -89,7 +89,7 @@ class study(models.Model):
     )
     share_opt_out = models.BooleanField(
         default=False,
-        help_text="For chargeable instruments you may opt out of sharing the study data.  Selecting this will have no impact on non-chargeable instruments"
+        help_text="For chargeable instruments you may opt out of sharing the study data.  Selecting this will have no impact on non-chargeable instruments",
     )
 
     def __str__(self):
