@@ -33,17 +33,17 @@ class CustomLoginView(LoginView):
     def get_success_url(self) -> str:
         # We might want to message researchers their licence is about to expire
 
-        from_date = datetime.date.today() - relativedelta(years=1)
+        from_date = datetime.date.today() 
         to_date = (
-            datetime.date.today() - relativedelta(years=1) + relativedelta(months=1)
+            datetime.date.today() + relativedelta(months=1)
         )
         codes = BrookesCode.objects.filter(
-            researcher=self.request.user, applied__gte=from_date, applied__lte=to_date
+            researcher=self.request.user, expiry__gte=from_date, expiry__lte=to_date
         )
         for code in codes:
             messages.warning(
                 self.request,
-                f"Your licence for {code.instrument_family} will expire on {code.applied + relativedelta(years=1)}",
+                f"Your licence for {code.instrument_family} will expire on {code.expiry}",
             )
 
         return super().get_success_url()

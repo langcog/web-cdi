@@ -335,9 +335,9 @@ class ResearcherAddInstruments(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         res = reverse("researcher_ui:console")
-        dt = datetime.date.today() - relativedelta(years=1)
+        dt = datetime.date.today()
         for chargeable in self.object.allowed_instrument_families.filter(chargeable=True):
-            if not BrookesCode.objects.filter(researcher=self.request.user, instrument_family=chargeable, applied__gte=dt).exists():
+            if not BrookesCode.objects.filter(researcher=self.request.user, instrument_family=chargeable, expiry__gte=dt).exists():
                 res = reverse("brookes:enter_codes", args=(chargeable.id,))
         
         return res

@@ -4,8 +4,6 @@ from django.views.generic import FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 
-from dateutil.relativedelta import relativedelta
-
 from researcher_UI.models import InstrumentFamily
 from brookes.models import BrookesCode
 from brookes.forms import BrookesCodeForm
@@ -19,9 +17,9 @@ class UpdateBrookesCode(LoginRequiredMixin, FormView):
 
     def get_success_url(self):
         res = reverse("researcher_ui:console")
-        dt = datetime.date.today() - relativedelta(years=1)
+        dt = datetime.date.today()
         for chargeable in self.request.user.researcher.allowed_instrument_families.filter(chargeable=True):
-            if not BrookesCode.objects.filter(researcher=self.request.user, instrument_family=chargeable, applied__gte=dt).exists():
+            if not BrookesCode.objects.filter(researcher=self.request.user, instrument_family=chargeable, expiry__gte=dt).exists():
                 res = reverse("brookes:enter_codes", args=(chargeable.id,))
         
         return res

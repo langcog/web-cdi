@@ -3,8 +3,6 @@ from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.core.validators import MaxValueValidator, MinValueValidator
 
-from dateutil.relativedelta import relativedelta
-
 from brookes.models import BrookesCode
 
 from researcher_UI import choices
@@ -94,7 +92,7 @@ class study(models.Model):
         return self.name
 
     def valid_code(self, user):
-        if self.instrument.family.chargeable and not BrookesCode.objects.filter(researcher=user, instrument_family=self.instrument.family, applied__gte=datetime.date.today() - relativedelta(years=1)).exists():
+        if self.instrument.family.chargeable and not BrookesCode.objects.filter(researcher=user, instrument_family=self.instrument.family, expiry__gte=datetime.date.today()).exists():
             return False
         else:
             return True
