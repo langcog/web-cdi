@@ -40,7 +40,7 @@ class CustomLoginView(LoginView):
         )
         for code in codes:
             if BrookesCode.objects.filter(
-                researcher=self.argsrequest.user,
+                researcher=self.request.user,
                 expiry__gte=to_date,
                 instrument_family=code.instrument_family,
             ).exists():

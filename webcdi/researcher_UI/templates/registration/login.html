@@ -1,4 +1,4 @@
-{% extends 'registration/base.html' %}
+{% extends 'researcher_UI/base.html' %}
 {% load i18n %}
 {% load static %}
 	{% block title %}{% trans 'Login' %}{% endblock %}
@@ -6,20 +6,14 @@
 
 {% load crispy_forms_tags %}
 
-{% block contents %}
+{% block main %}
 {{ block.super }}
 
-<div style="height:100%; margin-bottom:10rem;">
+<div style="margin-top:100px; margin-bottom:10rem;">
   <div class="container">
-      <!--Start Logo-->
-      <a class="flex-row" href="/">
-        <img width="200px"  src="{% static 'researcher_UI/images/logo_black.png' %}">
-      </a>
-      <!--End Logo-->
-
       <!--Start login card-->
-      <div class="login-card  col-md-6 col-sm-12" >
-          <h1 style="color:#4d90fe;">Login</h1><br>
+      <div class="login-card col-12" align="center" >
+          <h1>Login</h1><br>
 
           <!--End login card-->
           <form action="{{ app_path }}" method="post" id="login-form">
@@ -37,7 +31,7 @@
             {%  endfor  %}
 
               <div  class="input-row">
-                <input type="submit" name="login" class="login login-submit" value="{% trans "Log in" %}">
+                <input type="submit" name="login" class="btn btn-primary" value="{% trans "Log in" %}">
               </div>
           </form>
           
