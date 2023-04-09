@@ -2,7 +2,6 @@ import datetime
 
 from brookes.models import BrookesCode
 from dateutil.relativedelta import relativedelta
-from django.conf import settings
 from django.core.mail import EmailMessage
 from django.core.management.base import BaseCommand
 
