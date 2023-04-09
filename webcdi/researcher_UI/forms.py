@@ -6,10 +6,9 @@ from django.contrib.postgres.forms import IntegerRangeField
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from form_utils.forms import BetterModelForm
-
+from researcher_UI.models import *
 
 from . import choices
-from researcher_UI.models import *
 
 
 # Form for creating a new study
@@ -123,7 +122,10 @@ class AddStudyForm(BetterModelForm):
     end_message = forms.ChoiceField(choices=choices.END_MESSAGE_CHOICES)
     end_message_text = forms.CharField(widget=CKEditorUploadingWidget(), required=False)
 
-    share_opt_out = forms.BooleanField(required=False, help_text="For chargeable instruments you may opt out of sharing the study data.  Selecting this will have no impact on non-chargeable instruments")
+    share_opt_out = forms.BooleanField(
+        required=False,
+        help_text="For chargeable instruments you may opt out of sharing the study data.  Selecting this will have no impact on non-chargeable instruments",
+    )
 
     # Form validation. Form is passed automatically to views.py for higher level checking.
     def clean(self):
@@ -365,7 +367,10 @@ class RenameStudyForm(BetterModelForm):
     end_message = forms.ChoiceField(choices=choices.END_MESSAGE_CHOICES)
     end_message_text = forms.CharField(widget=CKEditorUploadingWidget(), required=False)
 
-    share_opt_out = forms.BooleanField(required=False, help_text="For chargeable instruments you may opt out of sharing the study data.  Selecting this will have no impact on non-chargeable instruments")
+    share_opt_out = forms.BooleanField(
+        required=False,
+        help_text="For chargeable instruments you may opt out of sharing the study data.  Selecting this will have no impact on non-chargeable instruments",
+    )
 
     # Form validation. Form is passed automatically to views.py for higher level checking.
     def clean(self):
@@ -424,7 +429,7 @@ class RenameStudyForm(BetterModelForm):
             Field("print_my_answers_boolean"),
             Field("end_message"),
             Field("end_message_text"),
-            Field('share_opt_out'),
+            Field("share_opt_out"),
         )
 
     # Link form to study model. Exclude study group (specified in another form), researcher (automatically filled by current user), and instrument (chosen during study creation and CANNOT BE CHANGED)
@@ -502,11 +507,11 @@ class EditOptOutForm(forms.ModelForm):
 
 
 class AddInstrumentForm(forms.ModelForm):
-
     class Meta:
         model = researcher
         fields = ["allowed_instrument_families"]
         widgets = {"allowed_instrument_families": forms.CheckboxSelectMultiple()}
+
 
 class AddChargeableInstrumentForm(forms.ModelForm):
     class Meta:

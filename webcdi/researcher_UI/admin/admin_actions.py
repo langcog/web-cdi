@@ -1,9 +1,8 @@
-from django.contrib import admin
 from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
+from researcher_UI.utils.download import download_data, download_summary
 
 from ..models.models import administration
-from researcher_UI.utils.download import download_data, download_summary
 
 
 def scoring_data(modeladmin, request, queryset):
@@ -22,12 +21,15 @@ def scoring_data(modeladmin, request, queryset):
         if q.instrument.family.chargeable and q.share_opt_out:
             messages.error(
                 request,
-                _(f"You cannot download data for {q.name}.  The study has opted out of datasharing"),
+                _(
+                    f"You cannot download data for {q.name}.  The study has opted out of datasharing"
+                ),
             )
             return
 
-
-    administrations = administration.objects.filter(study__in=queryset).exclude(opt_out=True)
+    administrations = administration.objects.filter(study__in=queryset).exclude(
+        opt_out=True
+    )
     return download_data.download_data(request, study_obj, administrations)
 
 
@@ -47,9 +49,13 @@ def scoring_summary(modeladmin, request, queryset):
         if q.instrument.family.chargeable and q.share_opt_out:
             messages.error(
                 request,
-                _(f"You cannot download data for {q.name}.  The study has opted out of datasharing"),
+                _(
+                    f"You cannot download data for {q.name}.  The study has opted out of datasharing"
+                ),
             )
             return
 
-    administrations = administration.objects.filter(study__in=queryset).exclude(opt_out=True)
+    administrations = administration.objects.filter(study__in=queryset).exclude(
+        opt_out=True
+    )
     return download_summary.download_summary(request, study_obj, administrations)
