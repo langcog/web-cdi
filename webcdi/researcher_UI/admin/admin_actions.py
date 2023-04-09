@@ -19,8 +19,15 @@ def scoring_data(modeladmin, request, queryset):
                 _("Studies must have at least 1 responsent. %s has none" % (q.name)),
             )
             return
+        if q.instrument.family.chargeable and q.share_opt_out:
+            messages.error(
+                request,
+                _(f"You cannot download data for {q.name}.  The study has opted out of datasharing"),
+            )
+            return
 
-    administrations = administration.objects.filter(study__in=queryset)
+
+    administrations = administration.objects.filter(study__in=queryset).exclude(opt_out=True)
     return download_data.download_data(request, study_obj, administrations)
 
 
@@ -37,6 +44,12 @@ def scoring_summary(modeladmin, request, queryset):
                 _("Studies must have at least 1 responsent. %s has none" % (q.name)),
             )
             return
+        if q.instrument.family.chargeable and q.share_opt_out:
+            messages.error(
+                request,
+                _(f"You cannot download data for {q.name}.  The study has opted out of datasharing"),
+            )
+            return
 
-    administrations = administration.objects.filter(study__in=queryset)
+    administrations = administration.objects.filter(study__in=queryset).exclude(opt_out=True)
     return download_summary.download_summary(request, study_obj, administrations)

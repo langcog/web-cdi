@@ -123,6 +123,8 @@ class AddStudyForm(BetterModelForm):
     end_message = forms.ChoiceField(choices=choices.END_MESSAGE_CHOICES)
     end_message_text = forms.CharField(widget=CKEditorUploadingWidget(), required=False)
 
+    share_opt_out = forms.BooleanField(required=False, help_text="For chargeable instruments you may opt out of sharing the study data.  Selecting this will have no impact on non-chargeable instruments")
+
     # Form validation. Form is passed automatically to views.py for higher level checking.
     def clean(self):
         cleaned_data = super().clean()
@@ -195,6 +197,7 @@ class AddStudyForm(BetterModelForm):
             Field("print_my_answers_boolean"),
             Field("end_message"),
             Field("end_message_text"),
+            Field("share_opt_out"),
         )
 
     # Form is related to the study model. Exclude study group designation (is done post-creation) and researcher name (filled automatically)
@@ -362,6 +365,8 @@ class RenameStudyForm(BetterModelForm):
     end_message = forms.ChoiceField(choices=choices.END_MESSAGE_CHOICES)
     end_message_text = forms.CharField(widget=CKEditorUploadingWidget(), required=False)
 
+    share_opt_out = forms.BooleanField(required=False, help_text="For chargeable instruments you may opt out of sharing the study data.  Selecting this will have no impact on non-chargeable instruments")
+
     # Form validation. Form is passed automatically to views.py for higher level checking.
     def clean(self):
         cleaned_data = super(RenameStudyForm, self).clean()
@@ -419,6 +424,7 @@ class RenameStudyForm(BetterModelForm):
             Field("print_my_answers_boolean"),
             Field("end_message"),
             Field("end_message_text"),
+            Field('share_opt_out'),
         )
 
     # Link form to study model. Exclude study group (specified in another form), researcher (automatically filled by current user), and instrument (chosen during study creation and CANNOT BE CHANGED)

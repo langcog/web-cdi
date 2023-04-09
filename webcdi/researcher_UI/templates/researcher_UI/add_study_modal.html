@@ -2,13 +2,6 @@
 {% extends 'researcher_UI/base.html' %}
 {% load i18n static %}
 
-{% block title %}{% trans 'Registration' %}{% endblock %}
-
-
-{% block branding %}
-<h1 id="site-name"><a href="{% url 'researcher_ui:console' %}">{{ site_header|default:_('WebCDI Registration') }}</a></h1>
-{% endblock %}
-
 {% block main %}
 {{ block.super }}
 <div style="margin-top:100px; margin-bottom:10rem;">
