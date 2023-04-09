@@ -1,150 +1,15 @@
-<!doctype html>
-<html lang="en"> <head> 
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+{% extends 'researcher_UI/base.html' %}
+{% load static %}
 
-    {% load static instrument_filter %}
-
-    <title>WebCDI Interface</title>
-    <meta name="description" content="English Words and Sentences CDI form">
-    <meta name="author" content="Henry Mehta">
-
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" ></script>
-    
-    <script src="//code.jquery.com/jquery-1.11.3.js"></script>
-    <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
-    <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
-    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
-    <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
-    <script src="{% static 'researcher_UI/django_modal_forms.js' %}"></script>
-    <script src="{% static 'researcher_UI/researcher_UI.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'researcher_UI/console.css' %}" />
-    <link rel="stylesheet" href="{% static 'researcher_UI/table.css' %}" />
-    <script src="{% static 'cdi_forms/moment.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
-    <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
-    <style>
-        nav.primary-navigation {
-            margin: 0 auto;
-            display: block;
-            padding: 10px 0 0 0;
-            text-align: center;
-            font-size: 18px;
-       }
-        nav.primary-navigation ul li {
-            list-style: none;
-            margin: 0 auto;
-            border-left: 2px solid #3ca0e7;
-            display: inline-block;
-            padding: 0 30px;
-            position: relative;
-            text-decoration: none;
-            text-align: center;
-            font-family: arvo;
-       }
-        nav.primary-navigation li a {
-            color: white;
-       }
-        nav.primary-navigation li a:hover {
-            color: white;
-       }
-        nav.primary-navigation li:hover {
-            cursor: pointer;
-       }
-        nav.primary-navigation ul li ul {
-            visibility: hidden;
-            opacity: 0;
-            position: absolute;
-            padding-left: 0;
-            left: 0;
-            display: none;
-            background: white;
-            width:100px; 
-            font-family: "Karla", "sans-serif";
-
-       }
-        nav.primary-navigation ul li:hover > ul, nav.primary-navigation ul li ul:hover {
-            visibility: visible;
-            opacity: 1;
-            display: block;
-            min-width: 250px;
-            text-align: left;
-            padding-top: 20px;
-            box-shadow: 0px 3px 5px -1px #ccc;
-       }
-        nav.primary-navigation ul li ul li {
-            clear: both;
-            width: 100%;
-            text-align: left;
-            margin-bottom: 20px;
-            border-style: none;
-            font-family: "Karla", "sans-serif";
-       }
-        nav.primary-navigation ul li ul li a:hover {
-            padding-left: 10px;
-            border-left: 2px solid #3ca0e7;
-            transition: all 0.3s ease;
-       }
-        a {
-            text-decoration: none;
-       }
-        a:hover {
-            color: #3ca0e7;
-       }
-        ul li ul li a {
-            transition: all 0.5s ease;
-       }
-        .allowed_instruments{
-            list-style-type: none;
-
-        }
-        li {
-            float: left;
-            margin-left:20px;
-            margin-right: 20px;
-        }
-        .login-card {
-            padding-top: 10px;
-            margin: 0 auto 10px;
-            border-radius: 10px;
-            overflow: scroll;
-            background-color: white;
-            padding: 2rem;
-      }
-    </style>
-</head>
-
-<!-- Researcher interface -->
-<body style="background:#3ca0e7">
-    <nav role="navigation" class="primary-navigation d-flex justify-content-end" style="margin-right:20px;">
-        <ul>
-          <li><a href="/" style="font-family:Arial, Helvetica, sans-serif;">Home</a>
-
-          <li><a href="#" style="font-family:Arial, Helvetica, sans-serif;" onclick="window.open('https://docs.google.com/document/d/1naFm2U-77YcOwFD7jcQIes2HhNz98qQM2wm1J1cmwck/pub')" onclick="window.open('https://docs.google.com/document/d/1naFm2U-77YcOwFD7jcQIes2HhNz98qQM2wm1J1cmwck/pub')">Help</a></li>
-          <li><a href="#" style="font-family:Arial, Helvetica, sans-serif;">{{ request.user.username }} &dtrif;</a>
-            <ul class="dropdown">
-                <li><a href="/accounts/logout/" style="color:#4d90fe; font-family:Arial, Helvetica, sans-serif;">Logout</a></li>
-            </ul>
-          </li>
-        </ul>
-    </nav>
- 
-    <div class='container login-card d-flex justify-content-center' style="padding-left:3rem;">
+{% block main %}
+    <div class='container login-card d-flex justify-content-center' style="margin-top:100px; padding-left:3rem;">
         <div class='row'>
-            <div  class="col-1">
-                <button type="button" class="btn-primary" data-dismiss="modal" aria-label="Close"style="border-radius:50%;" onclick="history.back()">
-                    <span aria-hidden="true">&larr;</span>
-                </button>
-            </div>
-            <div class="col-11" style="margin-bottom:1rem;">
-                <h4> Select the instruments you want to use</h4>
-            </div>
             <div class="col-12"> 
                 <form action="." method="post">
                     <h1> Please enter a valid code for {{ instrument_family }}</h1>
                     {% csrf_token %}
-                    <div class="row">
+                    <div class="col-12">
+
                         {{ form.code.label }}: 
                         {{ form.code }}
                         {% for error in form.code.errors %}
@@ -152,7 +17,7 @@
                         {% endfor %}
                     </div>
 
-                    <div class="d-flex justify-content-center">
+                    <div class="col-12 justify-content-center">
                         <input type='submit' class='btn' style="width:200px;" name='cancel' value="Cancel">
                         <input type="submit" class="btn btn-primary" style="width:200px;" value="Save">
                     </div>
@@ -160,5 +25,5 @@
             </div>
         <div>
     </div>
-</body>
-</html>
+
+{% endblock %}

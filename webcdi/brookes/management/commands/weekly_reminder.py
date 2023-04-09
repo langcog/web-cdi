@@ -14,6 +14,13 @@ class Command(BaseCommand):
         to_date = datetime.date.today() + relativedelta(months=1)
         codes = BrookesCode.objects.filter(expiry__gte=from_date, expiry__lte=to_date)
         for code in codes:
+            if BrookesCode.objects.filter(
+                researcher=code.researcher, 
+                expiry__gte=to_date,
+                instrument_family=code.instrument_family
+            ).exists():
+                codes = codes.exclude(pk=code.pk)
+        for code in codes:
             email_message = EmailMessage(
                 subject=f"WebCDI {code.instrument_family} renewal is due",
                 body=f"You annual license for WebCDI {code.instrument_family} will expire on {code.expiry}.  Please renew your subscription.",

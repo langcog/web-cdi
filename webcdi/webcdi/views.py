@@ -39,6 +39,13 @@ class CustomLoginView(LoginView):
             researcher=self.request.user, expiry__gte=from_date, expiry__lte=to_date
         )
         for code in codes:
+            if BrookesCode.objects.filter(
+                researcher=self.argsrequest.user, 
+                expiry__gte=to_date,
+                instrument_family=code.instrument_family
+            ).exists():
+                codes = codes.exclude(pk=code.pk)
+        for code in codes:
             messages.warning(
                 self.request,
                 f"Your licence for {code.instrument_family} will expire on {code.expiry}",

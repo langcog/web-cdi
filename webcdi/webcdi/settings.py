@@ -131,6 +131,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "webcdi.context_processors.home_page",
+                "brookes.context_processors.renewal_codes",
             ],
         },
     },
