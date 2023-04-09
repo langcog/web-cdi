@@ -39,7 +39,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 
-
 def generate_secret_key(fname):
     chars = "abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)"
     f = open(fname, "w")
@@ -401,7 +400,6 @@ CKEDITOR_CONFIGS = {
 AWS_QUERYSTRING_AUTH = False
 
 LOGOUT_REDIRECT_URL = "/"
-
 
 
 def is_ec2_linux():
