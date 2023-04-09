@@ -31,7 +31,7 @@ class StudyAdmin(admin.ModelAdmin):
     def get_chargeable(self, obj):
         try:
             result = obj.instrument.family.chargeable
-        except Exception as e: #  noqa
+        except Exception as e:  # noqa
             result = False
         return result
 
