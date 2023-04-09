@@ -87,6 +87,10 @@ class study(models.Model):
     demographic = models.ForeignKey(
         "Demographic", on_delete=models.SET_NULL, blank=True, null=True
     )
+    share_opt_out = models.BooleanField(
+        default=False,
+        help_text="For chargeable instruments you may opt out of sharing the study data.  Selecting this will have no impact on non-chargeable instruments"
+    )
 
     def __str__(self):
         return self.name
