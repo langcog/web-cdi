@@ -35,7 +35,7 @@ class StudyAdmin(admin.ModelAdmin):
             result = False
         return result
 
-    get_chargeable.short_description = "Chrageable"
+    get_chargeable.short_description = "Chargeable"
 
 
 admin.site.register(study, StudyAdmin)
