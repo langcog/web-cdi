@@ -12,9 +12,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         from_date = datetime.date.today()
-        to_date = (
-            datetime.date.today() + relativedelta(months=1)
-        )
+        to_date = datetime.date.today() + relativedelta(months=1)
         codes = BrookesCode.objects.filter(expiry__gte=from_date, expiry__lte=to_date)
         for code in codes:
             email_message = EmailMessage(

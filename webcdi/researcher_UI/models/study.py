@@ -1,11 +1,11 @@
 import datetime
-from django.db import models
-from ckeditor_uploader.fields import RichTextUploadingField
-from django.core.validators import MaxValueValidator, MinValueValidator
 
 from brookes.models import BrookesCode
-
+from ckeditor_uploader.fields import RichTextUploadingField
+from django.core.validators import MaxValueValidator, MinValueValidator
+from django.db import models
 from researcher_UI import choices
+
 
 # Model for individual studies
 class study(models.Model):
@@ -92,7 +92,14 @@ class study(models.Model):
         return self.name
 
     def valid_code(self, user):
-        if self.instrument.family.chargeable and not BrookesCode.objects.filter(researcher=user, instrument_family=self.instrument.family, expiry__gte=datetime.date.today()).exists():
+        if (
+            self.instrument.family.chargeable
+            and not BrookesCode.objects.filter(
+                researcher=user,
+                instrument_family=self.instrument.family,
+                expiry__gte=datetime.date.today(),
+            ).exists()
+        ):
             return False
         else:
             return True

@@ -26,7 +26,7 @@ class Command(BaseCommand):
                     "Modified",
                     "Instrument Family",
                     "Applied",
-                    'Expiry'
+                    "Expiry",
                 ]
             )
             for code in codes:

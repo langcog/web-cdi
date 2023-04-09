@@ -1,15 +1,13 @@
 import csv
 import datetime
 
+from brookes.filters import DropdownFilter
+from brookes.models import BrookesCode
 from django.conf import settings
 from django.contrib import admin, messages
 from django.core.mail import EmailMessage
 from rangefilter.filters import DateRangeFilter
-from brookes.filters import (
-    DropdownFilter
-)
 
-from brookes.models import BrookesCode
 # Register your models here.
 
 
@@ -39,8 +37,13 @@ def create_50_codes(modeladmin, request, queryset):
 
 @admin.register(BrookesCode)
 class BrookesCodeAdmin(admin.ModelAdmin):
-    list_display = ["code", "researcher", "instrument_family", "applied", 'expiry']
-    list_filter = [("applied", DateRangeFilter), ('expiry', DateRangeFilter), ("researcher", DropdownFilter), "instrument_family"]
+    list_display = ["code", "researcher", "instrument_family", "applied", "expiry"]
+    list_filter = [
+        ("applied", DateRangeFilter),
+        ("expiry", DateRangeFilter),
+        ("researcher", DropdownFilter),
+        "instrument_family",
+    ]
     actions = [
         create_50_codes,
     ]
