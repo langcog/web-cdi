@@ -7,14 +7,14 @@
     <div id="content" style="break-after: page;">
         <div class="main" style="border:2px solid black; text-align: center; margin-bottom: 20px">
             <h2>{% trans 'MacArthur-Bates Communicative Development Inventory' %} </h2>
-            <h2>{% trans object.instrument.verbose_name %}</h2>
+            <h2>American English: Words and Sentences</h2>
             <h2>{% trans 'Child Report Form' %}</h2>
         </div>
 
         <table >
             <tr >
                 <td>{% trans 'Child ID:' %}</td>
-                <td>{{ administration.id }}</td>
+                <td>{{ administration.subject_id }}</td>
                 <td>{% trans 'Date of Report:' %}</td>
                 <td>{% now "jS F Y H:i" %}</td>
             </tr>
