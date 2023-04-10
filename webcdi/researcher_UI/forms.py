@@ -1,6 +1,6 @@
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import HTML, Div, Field, Fieldset, Layout
+from crispy_forms.layout import HTML, Div, Field, Fieldset, Layout, Submit
 from django import forms
 from django.contrib.postgres.forms import IntegerRangeField
 from django.urls import reverse
@@ -125,7 +125,10 @@ class AddStudyForm(BetterModelForm):
     share_opt_out = forms.BooleanField(
         required=False,
         help_text="For chargeable instruments you may opt out of sharing the study data.",
-        disabled=True,
+    )
+    demographic_opt_out = forms.BooleanField(
+        required=False,
+        help_text="For chargeable instruments you may opt out of collecting demographic data if you opt out of sharing the study data.",
     )
 
     # Form validation. Form is passed automatically to views.py for higher level checking.
@@ -160,6 +163,7 @@ class AddStudyForm(BetterModelForm):
             Field("name"),
             Field("instrument"),
             Field("share_opt_out"),
+            Field("demographic_opt_out"),
             Field("demographic"),
             Field("age_range"),
             Field("test_period"),
@@ -201,6 +205,8 @@ class AddStudyForm(BetterModelForm):
             Field("print_my_answers_boolean"),
             Field("end_message"),
             Field("end_message_text"),
+            Submit("submit", _("Save"),
+                             css_class="btn btn-primary right"),
         )
 
     # Form is related to the study model. Exclude study group designation (is done post-creation) and researcher name (filled automatically)
@@ -425,6 +431,8 @@ class RenameStudyForm(BetterModelForm):
             Field("print_my_answers_boolean"),
             Field("end_message"),
             Field("end_message_text"),
+            Submit("submit", _("Save"),
+                             css_class="btn btn-primary right"),
         )
 
     # Link form to study model. Exclude study group (specified in another form), researcher (automatically filled by current user), and instrument (chosen during study creation and CANNOT BE CHANGED)

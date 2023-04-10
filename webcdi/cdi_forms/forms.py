@@ -13,6 +13,8 @@ from django.core.validators import EmailValidator, RegexValidator
 from django.templatetags.static import static
 from django.utils.translation import pgettext, ugettext
 from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import pgettext_lazy
+
 from form_utils.forms import BetterModelForm
 
 from .models import *
@@ -31,8 +33,6 @@ from .languages import LANGUAGE_OPTIONS as language_choices
 def string_bool_coerce(val):
     return val == "True"
 
-
-from django.utils.translation import pgettext_lazy
 
 YESNO_CHOICES = ((False, _("No")), (True, _("Yes")))
 YESNONA_CHOICES = ((0, _("No")), (1, _("Yes")), (2, _("Prefer not to disclose")))
@@ -399,7 +399,6 @@ class BackgroundForm(BetterModelForm):
         return cleaned_data
 
     def get_json_filename(self):
-        print(get_demographic_filename(self.curr_context["study"]))
         return get_demographic_filename(self.curr_context["study"])
 
     # Initiation of form. Set values, page format according to crispy forms, store variables delivered by views.py, and organize fields on the form.

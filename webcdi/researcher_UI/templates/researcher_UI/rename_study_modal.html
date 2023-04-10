@@ -7,7 +7,6 @@
 <div style="margin-bottom:10rem;">
 
   <div class="container" style="padding-bottom:2rem;">
-    <form class="login-card" role="document" action="{% url 'researcher_ui:rename_study' pk=study_obj.pk%}"   method="post">
       <div class="">
         <div class="modal-header">
           <h4 id="modal-title" class="modal-title" >
@@ -205,11 +204,6 @@
               <span class="sr-only">Error:</span>
               <div style='display:inline' id='error-message-text'></div>
         </div>
-        <div class="modal-footer">
-          <input id="id_add_study_modal_submit" name="submit" value="Submit" class="btn btn-primary col-3" type="submit">
-        </div>
-      </div>
-    </form>
   </div>
 </div>
 {% endblock %}

@@ -7,7 +7,6 @@
 <div style="margin-top:100px; margin-bottom:10rem;">
   <div>
     <div class="container" style="padding-bottom:2rem;">
-      <form class="login-card" role="document" action="/interface/add_study/" method="post">
           <div class="modal-header">
             <h4 id="modal-title" class="modal-title" >
               {% if form_name %}
@@ -61,6 +60,13 @@
                 of: $('#slider_div span.ui-slider-handle:eq(1)'),
                 offset: "0, 10"
               });
+              document.getElementById("id_share_opt_out").disabled = true;
+              document.getElementById("div_id_share_opt_out").style.color = 'lightgrey';
+              document.getElementById("id_share_opt_out").checked = false;
+
+              document.getElementById('id_demographic_opt_out').disabled = true;
+              document.getElementById("id_demographic_opt_out").checked = false;
+              document.getElementById("div_id_demographic_opt_out").style.color = 'lightgrey';
             } );
 
             $('#id_instrument').on('change', function () {
@@ -131,17 +137,47 @@
                   data: {id : $(this).find('option:selected').val()},
                   cache: false,
                   success: function (data) {
-                      console.log(data)
-                      console.log(data['chargeable'])
                       if (data['chargeable']) {
                         document.getElementById("id_share_opt_out").disabled = false;
+                        document.getElementById("div_id_share_opt_out").style.color = 'black';
                       } else {
                         document.getElementById("id_share_opt_out").disabled = true;
+                        document.getElementById("div_id_share_opt_out").style.color = 'lightgrey';
                         document.getElementById("id_share_opt_out").checked = false;
+
+                        document.getElementById('id_demographic_opt_out').disabled = true;
+                        document.getElementById("id_demographic_opt_out").checked = false;
+                        document.getElementById("div_id_demographic_opt_out").style.color = 'lightgrey';
                       }
                   }
               });
             });
+
+            // offer opt out of demographics
+            $('#id_share_opt_out').on('change', function () {
+              if ($('#id_share_opt_out').is(':checked')) {
+                document.getElementById('id_demographic_opt_out').disabled = false;
+                document.getElementById("div_id_demographic_opt_out").style.color = 'black';
+              } else {
+                document.getElementById('id_demographic_opt_out').disabled = true;
+                document.getElementById("id_demographic_opt_out").checked = false;
+                document.getElementById("div_id_demographic_opt_out").style.color = 'lightgrey';
+
+                document.getElementById('id_demographic').disabled = false;
+                document.getElementById("div_id_demographic").style.color = 'black';
+              }
+            });
+
+            $('#id_demographic_opt_out').on('change', function () {
+              if ($('#id_demographic_opt_out').is(':checked')) {
+                  document.getElementById('id_demographic').disabled = true;
+                  document.getElementById("div_id_demographic").style.color = 'lightgrey';
+                  $("#id_demographic").val('');
+              } else {
+                document.getElementById('id_demographic').disabled = false;
+                document.getElementById("div_id_demographic").style.color = 'black';
+              }
+            })
 
             // Automatically collapses fields dependent on whether the study involves anonymous participants and/or financial compensation. Upon checking/unchecking inputs for those 2 settings, other dependent fields appear.
             $('#div_id_subject_cap').addClass( "anon-collection" );
@@ -224,10 +260,6 @@
                   <span class="sr-only">Error:</span>
                   <div style='display:inline' id='error-message-text'></div>
           </div>
-          <div class="modal-footer">
-            <input id="id_add_study_modal_submit" name="submit" value="Save" class="btn btn-primary col-3"  type="submit">
-          </div>
-      </form>
     </div>
   </div>
 </div>

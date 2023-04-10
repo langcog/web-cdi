@@ -7,6 +7,7 @@ from researcher_UI.models import *
 # Register your models here.
 admin.site.register(instrument)
 admin.site.register(researcher)
+admin.site.register(Demographic)
 
 
 class AdministrationDataAdmin(admin.ModelAdmin):

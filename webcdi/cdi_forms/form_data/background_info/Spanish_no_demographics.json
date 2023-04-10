@@ -1,0 +1,21 @@
+[
+    {
+        "page":"front",
+        "contents":[
+            {
+                "fieldset":"Basic Information",
+                "fields":[
+                    {
+                        "field":"child_dob"
+                    },
+                    {
+                        "field":"age"
+                    },
+                    {
+                        "field":"sex"
+                    }
+                ]
+            }
+        ]
+    }
+]

@@ -51,6 +51,7 @@
 
         // Set a callback to run when the Google Visualization API is loaded.
         google.charts.setOnLoadCallback(drawProducesChart);
+        google.charts.setOnLoadCallback(drawProducesChart2);
 
         var graph_colors = [
             "#ff0000","#cc0066","#cc0099","#9933ff",'#3333cc','#0033cc','#0099cc','#009999','#00cc66','#009933','#669900','#cccc00','#ff9900','#ff3300',
@@ -74,12 +75,12 @@
         
         // Set chart options
         var options = {
-            'title': '{% trans 'Words Produced (%)' %}',
-            'width' : {% if show_produced or language in language_list %}550{% else %}1000{% endif %},
+            'title': '{% trans 'Words Produced in Category (%)' %}',
+            'width' : 550,
             'height':750,
             'legend': {position: 'none'},
             'vAxis' : { textStyle : { fontSize: 10} },
-            'hAxis' : {viewWindow: { min:0, max:100 }},
+            'hAxis' : {viewWindow: { min:0 }},
             };
 
             // Instantiate and draw our chart, passing in some options.
@@ -97,9 +98,48 @@
 
         chart.draw(data, options);
       }
+
+    function drawProducesChart2() {
+
+        // Create the data table.
+        var data = new google.visualization.arrayToDataTable([
+            ['Category','Percentage', {role: 'style'}],
+            {% for category in graph_data %}
+                {% if graph_data|get_item:category|get_item:'count' > 0 %}
+                ['{{ graph_data|get_item:category|get_item:'mappedName' }}', {{ graph_data|get_item:category|get_item_count:'produces'|get_usage_perc:totals.produces }}, graph_colors[{{ forloop.counter0 }}]],
+                {% endif %}                
+            {% endfor %}
+        ]);
+
+        // Set chart options
+        var options = {
+            'title': '{% trans 'Words Produced for Child (%)' %}',
+            'width' : 550,
+            'height':750,
+            'legend': {position: 'none'},
+            'vAxis' : { textStyle : { fontSize: 10} },
+            'hAxis' : {viewWindow: { min:0 }},
+            };
+
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.visualization.BarChart(document.getElementById('categories_charts_produced2'));
+
+        var btnProducedSave = document.getElementById('save-produced2-pdf')
+        google.visualization.events.addListener(chart, 'ready', function () {
+            btnProducedSave.disabled = false;
+        });
+        btnProducedSave.addEventListener('click', function () {
+            var doc = new jsPDF();
+            doc.addImage(chart.getImageURI(), 0, 0);
+            doc.save('chart.pdf');
+        }, false);
+
+        chart.draw(data, options);
+    }
     
         {% if show_produced or language in language_list  %}
             google.charts.setOnLoadCallback(drawUnderstoodChart);
+            google.charts.setOnLoadCallback(drawUnderstoodChart2);
             function drawUnderstoodChart() {
 
                 // Create the data table.
@@ -114,12 +154,12 @@
 
                 // Set chart options
                 var options = {
-                    'title': '{% trans 'Words Understood (%)' %}',
+                    'title': '{% trans 'Words Understood in Category(%)' %}',
                     'width':550,
                     'height':750,
                     'legend': {position: 'none'},
                     'vAxis' : { textStyle : { fontSize: 10} },
-                    'hAxis' : {viewWindow: { min:0, max:100 }},
+                    'hAxis' : {viewWindow: { min:0 }},
                     };
 
                 // Instantiate and draw our chart, passing in some options.
@@ -137,9 +177,54 @@
                 
                 chart.draw(data, options);
             }
-        {% endif%}
-    </script>
 
+            function drawUnderstoodChart2() {
+                // Create the data table.
+                var data = new google.visualization.arrayToDataTable([
+                    ['Category','Percentage', {role: 'style'}],
+                    {% for category in graph_data %}
+                        {% if graph_data|get_item:category|get_item:'count' > 0 %}
+                        ['{{ graph_data|get_item:category|get_item:'mappedName' }}', {{ graph_data|get_item:category|get_item_count:'understands'|get_usage_perc:totals.understands }}, graph_colors[{{ forloop.counter0 }}]],
+                        {% endif %}                
+                    {% endfor %}                    
+                ]);
+
+                // Set chart options
+                var options = {
+                    'title': '{% trans 'Words Understood for Child (%)' %}',
+                    'width':550,
+                    'height':750,
+                    'legend': {position: 'none'},
+                    'vAxis' : { textStyle : { fontSize: 10} },
+                    'hAxis' : {viewWindow: { min:0 }},
+                    };
+
+                // Instantiate and draw our chart, passing in some options.
+                var chart = new google.visualization.BarChart(document.getElementById('categories_charts_understood2'));
+
+                var btnUnderstoodSave = document.getElementById('save-understood2-pdf')
+                google.visualization.events.addListener(chart, 'ready', function () {
+                    btnUnderstoodSave.disabled = false;
+                });
+                btnUnderstoodSave.addEventListener('click', function () {
+                    var doc = new jsPDF();
+                    doc.addImage(chart.getImageURI(), 0, 0);
+                    doc.save('chart.pdf');
+                }, false);
+
+                chart.draw(data, options);
+                }
+        {% endif %}
+    </script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=328947117"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+        
+          gtag('config', '328947117');
+        </script>
 </head>
 
 <body id="id_results">
@@ -248,15 +333,18 @@
                             <input id="save-understood-pdf" type="button" value="{% trans 'Save as PDF' %}" disabled />
                         </div>
                         <div class="col-md-6 text-center">
-                            <div id="categories_charts_produced"></div>
-                            <input id="save-produced-pdf" type="button" value="{% trans 'Save as PDF' %}" disabled />
-                        </div>
-                    {% else %}
-                        <div class="col-md-12 text-center">
-                            <div id="categories_charts_produced"></div>
-                            <input id="save-produced-pdf" type="button" value="{% trans 'Save as PDF' %}" disabled />
+                            <div id="categories_charts_understood2"></div>
+                            <input id="save-understood2-pdf" type="button" value="{% trans 'Save as PDF' %}" disabled />
                         </div>
                     {% endif %}
+                    <div class="col-md-6 text-center">
+                        <div id="categories_charts_produced"></div>
+                        <input id="save-produced-pdf" type="button" value="{% trans 'Save as PDF' %}" disabled />
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <div id="categories_charts_produced2"></div>
+                        <input id="save-produced2-pdf" type="button" value="{% trans 'Save as PDF' %}" disabled />
+                    </div>
                 </div>
                 <br>
                 <div class = "row justify-content-center"> 
