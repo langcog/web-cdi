@@ -44,4 +44,4 @@ class instrument(models.Model):
     def item_count(self):
         from cdi_forms.models import Instrument_Forms
 
-        return Instrument_Forms.objects.filter(instrument=self).count()
+        return Instrument_Forms.objects.filter(instrument=self, item_type='word').count()

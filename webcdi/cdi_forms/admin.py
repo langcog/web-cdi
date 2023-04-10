@@ -4,7 +4,7 @@ from .models import Instrument_Forms, Choices
 # Register your models here.
 
 class InstrumentFormsAdmin(admin.ModelAdmin):
-    search_fields = ['gloss','definition']
+    search_fields = ['gloss','definition', 'itemID']
     list_filter = ['instrument']
 admin.site.register(Instrument_Forms, InstrumentFormsAdmin)
 

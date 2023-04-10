@@ -1,5 +1,5 @@
 from django import template
-from researcher_UI.models import SummaryData
+from researcher_UI.models import SummaryData, administration_data
 
 register = template.Library()
 
@@ -10,6 +10,16 @@ def get_summary_data(administration_id, data):
         res = SummaryData.objects.get(
             administration=administration_id, title=data
         ).value
-    except:
-        res = ""
+        if res == '': 
+            res = 0
+    except Exception as e:
+        res = f"{e}"
+    return res
+
+@register.filter
+def get_form_data(administration_id, data):
+    try:
+        res = administration_data.objects.get(administration=administration_id, item_ID=data).value
+    except Exception as e:
+        res = f"{e}"
     return res
