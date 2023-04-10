@@ -11,6 +11,7 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.views import generic
 from django.views.generic import UpdateView
+from django.utils.text import slugify
 from django_weasyprint import WeasyTemplateResponseMixin
 from psycopg2.extras import NumericRange
 from researcher_UI.models import administration, researcher, study
@@ -366,9 +367,9 @@ class PDFAdministrationDetailView(WeasyTemplateResponseMixin, generic.DetailView
     model = study
 
     def get_template_names(self):
-        if self.object.instrument.form in ["WG"]:
-            return ["researcher_UI/individual/wg.html"]
-        elif self.object.instrument.form in ["WS"]:
-            return ["researcher_UI/individual/ws.html"]
-        else:
-            raise ValidationError("No templates for this form type")
+        name = slugify(f'{self.object.instrument.verbose_name}')
+        print(name)
+        try:
+            return [f"researcher_UI/individual/{name}.html"]
+        except Exception as e:
+            raise ValidationError(f"No templates for this form type")
