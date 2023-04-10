@@ -9,9 +9,9 @@ from django.core.exceptions import ValidationError
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
+from django.utils.text import slugify
 from django.views import generic
 from django.views.generic import UpdateView
-from django.utils.text import slugify
 from django_weasyprint import WeasyTemplateResponseMixin
 from psycopg2.extras import NumericRange
 from researcher_UI.models import administration, researcher, study
@@ -367,7 +367,7 @@ class PDFAdministrationDetailView(WeasyTemplateResponseMixin, generic.DetailView
     model = study
 
     def get_template_names(self):
-        name = slugify(f'{self.object.instrument.verbose_name}')
+        name = slugify(f"{self.object.instrument.verbose_name}")
         print(name)
         try:
             return [f"researcher_UI/individual/{name}.html"]
