@@ -60,4 +60,9 @@ urlpatterns = [
         views.EditStudyView.as_view(),
         name="edit_study_new",
     ),
+    path(
+        'study/<int:pk>/pdf/',
+        views.PDFAdministrationDetailView.as_view(),
+        name='pdf_summary'
+    ),
 ]

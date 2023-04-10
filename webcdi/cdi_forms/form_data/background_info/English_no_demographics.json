@@ -13,6 +13,13 @@
                     },
                     {
                         "field":"sex"
+                    },
+                    {
+                        "field":"born_on_due_date",
+                        "div":[
+                            "early_or_late",
+                            "due_date_diff"
+                        ]
                     }
                 ]
             }

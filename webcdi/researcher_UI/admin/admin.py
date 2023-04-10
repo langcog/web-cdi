@@ -8,6 +8,7 @@ from researcher_UI.models import *
 admin.site.register(instrument)
 admin.site.register(researcher)
 admin.site.register(Demographic)
+admin.site.register(SummaryData)
 
 
 class AdministrationDataAdmin(admin.ModelAdmin):

@@ -358,3 +358,19 @@ class ResearcherAddInstruments(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         return ctx
+
+
+from django_weasyprint import WeasyTemplateResponseMixin
+
+from django.core.exceptions import ValidationError
+
+class PDFAdministrationDetailView(WeasyTemplateResponseMixin, generic.DetailView):
+    model = study
+
+    def get_template_names(self):
+        if self.object.instrument.form in ['WG']:
+            return ["researcher_UI/individual/wg.html"]
+        elif self.object.instrument.form in ['WS']:
+            return ["researcher_UI/individual/ws.html"]
+        else:
+            raise ValidationError('No templates for this form type')

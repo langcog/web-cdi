@@ -35,3 +35,8 @@ class instrument(models.Model):
             "form",
         )  # Each instrument in the database must have a unique combination of language and form type
         ordering = ["verbose_name"]
+
+    @property
+    def item_count(self):
+        from cdi_forms.models import Instrument_Forms
+        return Instrument_Forms.objects.filter(instrument=self).count()

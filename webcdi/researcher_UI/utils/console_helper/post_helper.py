@@ -14,8 +14,6 @@ from researcher_UI.utils.download import (
     download_links,
     download_summary,
 )
-
-from django.shortcuts import redirect
 def post_condition(request, ids, study_obj):
     if "administer-selected" in request.POST:
         if not study_obj.valid_code(request.user):
@@ -103,7 +101,7 @@ def post_condition(request, ids, study_obj):
             return download_summary.download_summary(
                 request, study_obj, administrations
             )
-
+    
     elif "download-study-scoring" in request.POST:
         administrations = administration.objects.filter(study=study_obj)
         return download_cdi_format.download_cdi_format(

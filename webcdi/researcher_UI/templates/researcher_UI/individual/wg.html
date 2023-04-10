@@ -1,0 +1,70 @@
+{% extends 'researcher_UI/individual/base.html' %}
+{% load static i18n bleach_markdown pdf_template_tags%}
+
+{% block content %} 
+    {% for administration in object.administration_set.all %} 
+    {% if administration.completed %}
+    <div id="content" style="break-after: page;">
+        <div class="main" style="border:2px solid black; text-align: center; margin-bottom: 20px">
+            <h2>{% trans 'MacArthur-Bates Communicative Development Inventory' %} </h2>
+            <h2>{% trans object.instrument.verbose_name %}</h2>
+            <h2>{% trans 'Child Report Form' %}</h2>
+        </div>
+
+        <table >
+            <tr >
+                <td>{% trans 'Child ID:' %}</td>
+                <td>{{ administration.id }}</td>
+                <td>{% trans 'Date of Report:' %}</td>
+                <td>{% now "jS F Y H:i" %}</td>
+            </tr>
+            <tr>
+                <td>{% trans 'Child Sex:' %}</td>
+                <td>{{ administration.backgroundinfo.get_sex_display }}</td>
+                <td>{% trans 'Date of CDI' %}</td>
+                <td>{{ administration.last_modified|date:"M d, Y" }}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>{% trans 'Age in months:' %}</td>
+                <td>{{ administration.backgroundinfo.age }}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>{% trans 'Age to compare:' %}</td>
+                <td>{{ administration.id|get_summary_data:"adjusted benchmark age" }}</td>
+            </tr>
+        </table>
+
+        <table>
+            <tr>
+                <th colspan="5">{% trans 'Words Children Use' %}</th>
+            </tr>
+            <tr>
+                <th colspan="5">{% trans 'Vocabulary Checklist' %}</th>
+            </tr>
+            <tr>
+                <td>{% trans 'Total Produced' %}</td>
+                <td>{% trans 'Number:' %}</td>
+                <td>{% trans 'Total Produced' %}</td>
+                <td>({% trans 'of' %} {{ object.instrument.item_count }})</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="3"></td>
+                <td>{% trans 'Percentile (by sex):' %}</td>
+                <td>{{ administration.id|get_summary_data:"Total Produced Percentile-sex" }}</td>
+            </tr>
+            <tr>
+                <td colspan="3"></td>
+                <td>{% trans 'Percentile (both sexes):' %}</td>
+                <td>{{ administration.id|get_summary_data:"Total Produced Percentile-both" }}</td>
+            </tr>
+        </table>
+    </div>
+    {% endif %}
+    {% endfor %}
+
+{% endblock %}
