@@ -9,6 +9,9 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.views import generic
+
+from django.core.exceptions import ValidationError
+from django_weasyprint import WeasyTemplateResponseMixin
 from django.views.generic import UpdateView
 from psycopg2.extras import NumericRange
 from researcher_UI.models import administration, researcher, study
@@ -360,17 +363,15 @@ class ResearcherAddInstruments(LoginRequiredMixin, UpdateView):
         return ctx
 
 
-from django_weasyprint import WeasyTemplateResponseMixin
 
-from django.core.exceptions import ValidationError
 
 class PDFAdministrationDetailView(WeasyTemplateResponseMixin, generic.DetailView):
     model = study
 
     def get_template_names(self):
-        if self.object.instrument.form in ['WG']:
+        if self.object.instrument.form in ["WG"]:
             return ["researcher_UI/individual/wg.html"]
-        elif self.object.instrument.form in ['WS']:
+        elif self.object.instrument.form in ["WS"]:
             return ["researcher_UI/individual/ws.html"]
         else:
-            raise ValidationError('No templates for this form type')
+            raise ValidationError("No templates for this form type")

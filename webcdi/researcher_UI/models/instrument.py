@@ -1,5 +1,7 @@
 from django.db import models
+
 from .instrument_family import InstrumentFamily
+
 
 # Model for individual instruments
 class instrument(models.Model):
@@ -21,7 +23,9 @@ class instrument(models.Model):
     )  # Maximum age in months that instrument was built for
     demographics = models.ManyToManyField("Demographic")
     active = models.BooleanField(default=True)
-    family = models.ForeignKey(InstrumentFamily, on_delete=models.SET_NULL, null=True, blank=True)
+    family = models.ForeignKey(
+        InstrumentFamily, on_delete=models.SET_NULL, null=True, blank=True
+    )
 
     def __unicode__(self):
         return "%s (%s %s)" % (self.verbose_name, self.language, self.form)
@@ -39,4 +43,5 @@ class instrument(models.Model):
     @property
     def item_count(self):
         from cdi_forms.models import Instrument_Forms
+
         return Instrument_Forms.objects.filter(instrument=self).count()

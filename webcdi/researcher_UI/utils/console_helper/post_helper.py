@@ -1,10 +1,9 @@
+import datetime
 
-from researcher_UI.models import administration
-from researcher_UI.utils.random_url_generator import random_url_generator
 from django.conf import settings
 from django.contrib import messages
 from django.utils.safestring import mark_safe
-import datetime
+from researcher_UI.models import administration
 from researcher_UI.utils.download import (
     download_cat_data,
     download_cat_summary,
@@ -14,10 +13,18 @@ from researcher_UI.utils.download import (
     download_links,
     download_summary,
 )
+from researcher_UI.utils.random_url_generator import random_url_generator
+
+
 def post_condition(request, ids, study_obj):
     if "administer-selected" in request.POST:
         if not study_obj.valid_code(request.user):
-            messages.warning(request, mark_safe("Access to this form requires an active license, available for purchase through Brookes Publishing Co (<a href='https://brookespublishing.com/product/cdi' target='_blank'>https://brookespublishing.com/product/cdi</a>)"))
+            messages.warning(
+                request,
+                mark_safe(
+                    "Access to this form requires an active license, available for purchase through Brookes Publishing Co (<a href='https://brookespublishing.com/product/cdi' target='_blank'>https://brookespublishing.com/product/cdi</a>)"
+                ),
+            )
             return None
         else:
             num_ids = map(int, ids)  # Force numeric IDs into a list of integers
@@ -46,7 +53,7 @@ def post_condition(request, ids, study_obj):
 
             administration.objects.bulk_create(new_administrations)
 
-    elif "delete-selected" in request.POST: 
+    elif "delete-selected" in request.POST:
         num_ids = list(set(map(int, ids)))
         administration.objects.filter(id__in=num_ids).delete()
 
@@ -101,7 +108,7 @@ def post_condition(request, ids, study_obj):
             return download_summary.download_summary(
                 request, study_obj, administrations
             )
-    
+
     elif "download-study-scoring" in request.POST:
         administrations = administration.objects.filter(study=study_obj)
         return download_cdi_format.download_cdi_format(
@@ -122,4 +129,3 @@ def post_condition(request, ids, study_obj):
             num_per_page = administration.objects.filter(study=study_obj).count()
         elif request.POST["view_all"] == "Show 20":
             num_per_page = 20  # Set num_per_page to 20
-
