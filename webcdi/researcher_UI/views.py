@@ -327,6 +327,15 @@ class AjaxDemographicForms(generic.DetailView):
         return HttpResponse(data, content_type="application/json")
 
 
+class AjaxChargeStatus(generic.DetailView):
+    def get(self, request):
+        pk = request.GET["id"]
+
+        data = {
+            'chargeable': instrument.objects.get(name=pk).family.chargeable
+        }
+        return JsonResponse(data, content_type="application/json")
+    
 class ResearcherAddInstruments(LoginRequiredMixin, UpdateView):
     model = researcher
     form_class = AddInstrumentForm

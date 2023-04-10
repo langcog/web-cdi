@@ -123,6 +123,26 @@
               });
             });
 
+            // check if this instrument can opt out
+            $('#id_instrument').on('change', function () {
+              $.ajax({
+                  url:'/interface/ajax/get_charge_status/',
+                  type: 'GET',
+                  data: {id : $(this).find('option:selected').val()},
+                  cache: false,
+                  success: function (data) {
+                      console.log(data)
+                      console.log(data['chargeable'])
+                      if (data['chargeable']) {
+                        document.getElementById("id_share_opt_out").disabled = false;
+                      } else {
+                        document.getElementById("id_share_opt_out").disabled = true;
+                        document.getElementById("id_share_opt_out").checked = false;
+                      }
+                  }
+              });
+            });
+
             // Automatically collapses fields dependent on whether the study involves anonymous participants and/or financial compensation. Upon checking/unchecking inputs for those 2 settings, other dependent fields appear.
             $('#div_id_subject_cap').addClass( "anon-collection" );
             $('#div_id_confirm_completion').addClass( "anon-collection" ); 

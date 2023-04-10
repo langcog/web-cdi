@@ -45,6 +45,11 @@ urlpatterns = [
         name="get_demographic_forms",
     ),
     path(
+        "ajax/get_charge_status/",
+        views.AjaxChargeStatus.as_view(),
+        name="get_charge_status",
+    ),
+    path(
         "researcher/<int:pk>/",
         views.ResearcherAddInstruments.as_view(),
         name="researcher_add_instruments",
