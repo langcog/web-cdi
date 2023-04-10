@@ -5,14 +5,13 @@ from brookes.models import BrookesCode
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core import serializers
+from django.core.exceptions import ValidationError
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.views import generic
-
-from django.core.exceptions import ValidationError
-from django_weasyprint import WeasyTemplateResponseMixin
 from django.views.generic import UpdateView
+from django_weasyprint import WeasyTemplateResponseMixin
 from psycopg2.extras import NumericRange
 from researcher_UI.models import administration, researcher, study
 from researcher_UI.utils.add_paired_study import add_paired_study_fun
@@ -361,8 +360,6 @@ class ResearcherAddInstruments(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         return ctx
-
-
 
 
 class PDFAdministrationDetailView(WeasyTemplateResponseMixin, generic.DetailView):
