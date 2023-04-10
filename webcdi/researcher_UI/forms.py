@@ -205,8 +205,7 @@ class AddStudyForm(BetterModelForm):
             Field("print_my_answers_boolean"),
             Field("end_message"),
             Field("end_message_text"),
-            Submit("submit", _("Save"),
-                             css_class="btn btn-primary right"),
+            Submit("submit", _("Save"), css_class="btn btn-primary right"),
         )
 
     # Form is related to the study model. Exclude study group designation (is done post-creation) and researcher name (filled automatically)
@@ -431,8 +430,7 @@ class RenameStudyForm(BetterModelForm):
             Field("print_my_answers_boolean"),
             Field("end_message"),
             Field("end_message_text"),
-            Submit("submit", _("Save"),
-                             css_class="btn btn-primary right"),
+            Submit("submit", _("Save"), css_class="btn btn-primary right"),
         )
 
     # Link form to study model. Exclude study group (specified in another form), researcher (automatically filled by current user), and instrument (chosen during study creation and CANNOT BE CHANGED)

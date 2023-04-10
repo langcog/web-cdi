@@ -4,20 +4,25 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('researcher_UI', '0072_study_share_opt_out'),
+        ("researcher_UI", "0072_study_share_opt_out"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='study',
-            name='demographic_opt_out',
-            field=models.BooleanField(default=False, help_text='For chargeable instruments you may opt out of collecting demographic data.'),
+            model_name="study",
+            name="demographic_opt_out",
+            field=models.BooleanField(
+                default=False,
+                help_text="For chargeable instruments you may opt out of collecting demographic data.",
+            ),
         ),
         migrations.AlterField(
-            model_name='study',
-            name='share_opt_out',
-            field=models.BooleanField(default=False, help_text='For chargeable instruments you may opt out of sharing the study data.'),
+            model_name="study",
+            name="share_opt_out",
+            field=models.BooleanField(
+                default=False,
+                help_text="For chargeable instruments you may opt out of sharing the study data.",
+            ),
         ),
     ]

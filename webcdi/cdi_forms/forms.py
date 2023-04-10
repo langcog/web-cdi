@@ -1,22 +1,16 @@
-import codecs
 import datetime
 import json
 import os.path
 
-from crispy_forms.bootstrap import InlineField
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import HTML, Div, Field, Fieldset, Layout, Row, Submit
+from crispy_forms.layout import HTML, Div, Field, Fieldset, Layout, Submit
 from django import forms
 from django.conf import settings
-from django.core.exceptions import ValidationError
-from django.core.validators import EmailValidator, RegexValidator
-from django.templatetags.static import static
-from django.utils.translation import pgettext, ugettext
+from django.core.validators import EmailValidator
+from django.utils.translation import pgettext_lazy, ugettext
 from django.utils.translation import ugettext_lazy as _
-from django.utils.translation import pgettext_lazy
-
 from form_utils.forms import BetterModelForm
-
+from .languages import LANGUAGE_OPTIONS as language_choices
 from .models import *
 from .utils import get_demographic_filename
 
@@ -26,7 +20,7 @@ PROJECT_ROOT = os.path.abspath(
 
 # isoLangs = json.load(codecs.open(PROJECT_ROOT + '/../' + 'languages.json', 'r', 'utf-8')) # Load up languages stored in languages.json in project root for other_languages question
 # language_choices = [(v['name'],v['nativeName'] + " ("+ v['name'] + ")") for k,v in isoLangs.iteritems()] # Create a tuple of possible other languages child is exposed to
-from .languages import LANGUAGE_OPTIONS as language_choices
+
 
 
 # Function for converting string 'True' into boolean True
