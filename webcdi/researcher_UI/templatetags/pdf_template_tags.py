@@ -13,7 +13,7 @@ def get_summary_data(administration_id, data):
         if res == "":
             res = 0
     except Exception as e:
-        res = ''
+        res = ""
     return res
 
 

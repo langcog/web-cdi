@@ -9,10 +9,14 @@ admin.site.register(instrument)
 admin.site.register(researcher)
 admin.site.register(Demographic)
 
+
 class SummaryDataAdmin(admin.ModelAdmin):
-    list_filter = ['administration__study__instrument']
+    list_filter = ["administration__study__instrument"]
+
 
 admin.site.register(SummaryData, SummaryDataAdmin)
+
+
 class AdministrationDataAdmin(admin.ModelAdmin):
     list_filter = ["administration__study", "item_ID"]
 
