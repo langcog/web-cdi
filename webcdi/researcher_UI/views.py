@@ -331,11 +331,10 @@ class AjaxChargeStatus(generic.DetailView):
     def get(self, request):
         pk = request.GET["id"]
 
-        data = {
-            'chargeable': instrument.objects.get(name=pk).family.chargeable
-        }
+        data = {"chargeable": instrument.objects.get(name=pk).family.chargeable}
         return JsonResponse(data, content_type="application/json")
-    
+
+
 class ResearcherAddInstruments(LoginRequiredMixin, UpdateView):
     model = researcher
     form_class = AddInstrumentForm

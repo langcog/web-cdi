@@ -125,7 +125,7 @@ class AddStudyForm(BetterModelForm):
     share_opt_out = forms.BooleanField(
         required=False,
         help_text="For chargeable instruments you may opt out of sharing the study data.",
-        disabled=True
+        disabled=True,
     )
 
     # Form validation. Form is passed automatically to views.py for higher level checking.
