@@ -10,6 +10,7 @@ from django.core.validators import EmailValidator
 from django.utils.translation import pgettext_lazy, ugettext
 from django.utils.translation import ugettext_lazy as _
 from form_utils.forms import BetterModelForm
+
 from .languages import LANGUAGE_OPTIONS as language_choices
 from .models import *
 from .utils import get_demographic_filename
@@ -20,7 +21,6 @@ PROJECT_ROOT = os.path.abspath(
 
 # isoLangs = json.load(codecs.open(PROJECT_ROOT + '/../' + 'languages.json', 'r', 'utf-8')) # Load up languages stored in languages.json in project root for other_languages question
 # language_choices = [(v['name'],v['nativeName'] + " ("+ v['name'] + ")") for k,v in isoLangs.iteritems()] # Create a tuple of possible other languages child is exposed to
-
 
 
 # Function for converting string 'True' into boolean True
@@ -332,7 +332,7 @@ class BackgroundForm(BetterModelForm):
                     if (
                         dependent not in cleaned_data
                         or cleaned_data.get(dependent) == ""
-                        or cleaned_data.get(dependent) == None
+                        or cleaned_data.get(dependent) is None
                     ):
                         self.add_error(dependent, _("This field cannot be empty"))
 
@@ -868,7 +868,7 @@ class BackgroundForm(BetterModelForm):
                 ),
             )
 
-        if self.curr_context["source_id"] != None:
+        if self.curr_context["source_id"] is not None:
             self.fields["source_id"].initial = self.curr_context["source_id"]
             if self.fields["source_id"].initial == "None":
                 self.fields["source_id"].initial = ""
