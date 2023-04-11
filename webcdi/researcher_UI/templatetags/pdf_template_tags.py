@@ -13,7 +13,7 @@ def get_summary_data(administration_id, data):
         if res == "":
             res = 0
     except Exception as e:
-        res = f'{e}'
+        res = f"{e}"
     return res
 
 
@@ -23,8 +23,8 @@ def get_form_data(administration_id, data):
         res = administration_data.objects.get(
             administration=administration_id, item_ID=data
         ).value
-        if res == '':
-            res = 'Nil return'
+        if res == "":
+            res = "Nil return"
     except Exception:
         res = f"no response provided"
     return res

@@ -370,5 +370,5 @@ class PDFAdministrationDetailView(WeasyTemplateResponseMixin, generic.DetailView
         name = slugify(f"{self.object.instrument.verbose_name}")
         try:
             return [f"researcher_UI/individual/{name}.html"]
-        except Exception as e:
+        except:
             raise ValidationError(f"No templates for this form type")
