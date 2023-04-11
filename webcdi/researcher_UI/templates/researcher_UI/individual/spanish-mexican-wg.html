@@ -1,0 +1,158 @@
+{% extends 'researcher_UI/individual/base.html' %}
+{% load static i18n bleach_markdown pdf_template_tags%}
+
+{% block content %} 
+    {% for administration in object.administration_set.all %} 
+    {% if administration.completed %}
+    <div id="content" style="break-after: page;">
+        <div class="main" style="border:2px solid black; text-align: center; margin-bottom: 20px">
+            <h2>MacArthur-Bates Inventario del Desarrollo de Habilidades Comunicativas</h2>
+            <h2>Inventario I</h2>
+            <h2>Informe del Niño</h2>
+        </div>
+
+        <table >
+            <tr >
+                <td>Número de ID:</td>
+                <td>{{ administration.subject_id }}</td>
+                <td>Fecha del Reporte:</td>
+                <td>{% now "jS F Y H:i" %}</td>
+            </tr>
+            <tr>
+                <td>Sexo:</td>
+                <td>{{ administration.backgroundinfo.get_sex_display }}</td>
+                <td>Fecha del Inventario:</td>
+                <td>{{ administration.last_modified|date:"M d, Y" }}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>Edad en meses:</td>
+                <td>{{ administration.backgroundinfo.age }}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>Edad para comparar:</td>
+                <td>{{ administration.id|get_summary_data:"adjusted benchmark age" }}</td>
+            </tr>
+        </table>
+
+        <table>
+            <tr>
+                <th colspan="6"> Primeras Palabras</th>
+            </tr>
+            <tr>
+                <td>Comprensión Temprana</td>
+                <td>Número:</td>
+                <td>{{ administration.id|get_summary_data:"Comprension temprana" }}</td>
+                <td>(of 3)</td>
+                <td>Percentil:</td>
+                <td>{{ administration.id|get_summary_data:"Comprension temprana Percentile-sex" }}%</td>
+            </tr>
+            <tr>
+                <td>Comprensión de las Primeras Frases</td>
+                <td>Número:</td>
+                <td>{{ administration.id|get_summary_data:"Primeras frases" }}</td>
+                <td>(of 28)</td>
+                <td>Percentil:</td>
+                <td>{{ administration.id|get_summary_data:"Primeras frases Percentile-sex" }}%</td>
+            </tr>
+            <tr>
+                <td colspan="6"></td>
+            </tr>
+            <tr>
+                <th colspan="6">Maneras de Hablar</th>
+            </tr>
+            <tr>
+                <td colspan="1">Imita:</td>
+                <td colspan="5">{{ administration.id|get_summary_data:"Maneras de Habla: Imitacion" }}</td>
+            </tr>
+            <tr>
+                <td colspan="1">Nombre:</td>
+                <td colspan="5">{{ administration.id|get_summary_data:"Maneras de Hablar: Nombrar" }}</td>
+            </tr>
+            <tr>
+                <td colspan="6"></td>
+            </tr>
+            <tr>
+                <th colspan="6">Vocabulario</th>
+            </tr>
+            <tr>
+                <td>Palabras que Comprende:</td>
+                <td>Número:</td>
+                <td>{{ administration.id|get_summary_data:"Palabras que comprende" }}</td>
+                <td>(of 428)</td>
+                <td>Percentil (por sexo):</td>
+                <td>{{ administration.id|get_summary_data:"Palabras que comprende Percentile-sex" }}%</td>
+            </tr>
+            <tr>
+                <td colspan="4"></td>
+                <td>Percentil (todos):</td>
+                <td>{{ administration.id|get_summary_data:"Palabras que comprende Percentile-both" }}%</td>
+            </tr>
+            <tr>
+                <td>Palabras que Dice:</td>
+                <td>Número:</td>
+                <td>{{ administration.id|get_summary_data:"Palabras que dice" }}</td>
+                <td>(of 428)</td>
+                <td>Percentile (por sexo):</td>
+                <td>{{ administration.id|get_summary_data:"Palabras que dice Percentile-sex" }}%</td>
+            </tr>
+            <tr>
+                <td colspan="4"></td>
+                <td>Percentile (todos):</td>
+                <td>{{ administration.id|get_summary_data:"Palabras que dice Percentile-both" }}%</td>
+            </tr>
+            <tr>
+                <td colspan="6"></td>
+            </tr>
+            <tr>
+                <th colspan="6">Gestos y Acciones</th>
+            </tr>
+            <tr>
+                <td>Gestos Tempranos</td>
+                <td>Número:</td>
+                <td>{{ administration.id|get_summary_data:"Gestos Tempranos" }}</td>
+                <td>(of 21)</td>
+                <td>Percentil (por sexo):</td>
+                <td>{{ administration.id|get_summary_data:"Gestos Tempranos Percentile-sex" }}%</td>
+            </tr>
+            <tr>
+                <td colspan="4"></td>
+                <td>Percentil (todos):</td>
+                <td>{{ administration.id|get_summary_data:"Gestos Tempranos Percentile-both" }}%</td>
+            </tr>
+            <tr>
+                <td>Gestos Tardíos</td>
+                <td>Número:</td>
+                <td>{{ administration.id|get_summary_data:"Gestos Tardios" }}</td>
+                <td>(of 43)</td>
+                <td>Percentil (por sexo):</td>
+                <td>{{ administration.id|get_summary_data:"Gestos Tardios Percentile-sex" }}%</td>
+            </tr>
+            <tr>
+                <td colspan="4"></td>
+                <td>Percentil (todos):</td>
+                <td>{{ administration.id|get_summary_data:"Gestos Tardios Percentile-both" }}%</td>
+            </tr>
+            <tr>
+                <td>Total de Gestos</td>
+                <td>Número:</td>
+                <td>{{ administration.id|get_summary_data:"Total de Gestos" }}</td>
+                <td>(of 64)</td>
+                <td>Percentil (por sexo):</td>
+                <td>{{ administration.id|get_summary_data:"Total de Gestos Percentile-sex" }}%</td>
+            </tr>
+            <tr>
+                <td colspan="4"></td>
+                <td>Percentil (todos):</td>
+                <td>{{ administration.id|get_summary_data:"Total de Gestos Percentile-both" }}%</td>
+            </tr>
+            
+        </table>
+    </div>
+    {% endif %}
+    {% endfor %}
+
+{% endblock %}
