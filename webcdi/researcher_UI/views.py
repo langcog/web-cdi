@@ -368,7 +368,6 @@ class PDFAdministrationDetailView(WeasyTemplateResponseMixin, generic.DetailView
 
     def get_template_names(self):
         name = slugify(f"{self.object.instrument.verbose_name}")
-        print(name)
         try:
             return [f"researcher_UI/individual/{name}.html"]
         except Exception as e:
