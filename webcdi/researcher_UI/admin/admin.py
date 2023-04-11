@@ -11,7 +11,7 @@ admin.site.register(Demographic)
 
 
 class SummaryDataAdmin(admin.ModelAdmin):
-    list_filter = ["administration__study__instrument",'title']
+    list_filter = ["administration__study__instrument", "title"]
 
 
 admin.site.register(SummaryData, SummaryDataAdmin)
