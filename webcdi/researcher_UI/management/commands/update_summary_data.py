@@ -24,7 +24,7 @@ class Command(BaseCommand):
         if options['form']:
             query = Q(query) & Q(study__instrument__form=options['form']) 
 
-        administrations = administration.objects.filter(query)
+        administrations = administration.objects.filter(query).filter(completed=True)
         
         email = EmailMessage(
                     subject=subject,
@@ -37,6 +37,7 @@ class Command(BaseCommand):
         thousands = 0
         for instance in administrations:
             count += 1
+            print(f'Processing item {count} of {len(administrations)}')
             update_summary_scores(instance)
             if count == 1000:
                 thousands += 1
