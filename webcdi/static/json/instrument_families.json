@@ -1,6 +1,6 @@
 [
 	{
-		"name": "English (American) Long",
+		"name": "English (American/Canadian) Long",
 		"chargeable": 1
 	},	{
 		"name": "English (American) Short",
@@ -25,10 +25,6 @@
 		"name": "Hebrew Long",
 		"chargeable": 0
 	},
-	{
-		"name": "French (Canadian) Long",
-		"chargeable": 0
-	},
     {
 		"name": "French (Canadian) CAT",
 		"chargeable": 0
@@ -47,7 +43,7 @@
 	},
 	{
 		"name": "Spanish (Argentinian) Long",
-		"chargeable": 1
+		"chargeable": 0
 	},
     {
 		"name": "French (French) CAT",

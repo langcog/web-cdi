@@ -1,9 +1,19 @@
 import os
 
-PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__)) # Declare project file directory
+PROJECT_ROOT = os.path.abspath(
+    os.path.dirname(__file__)
+)  # Declare project file directory
+
 
 def get_demographic_filename(std):
+    if std.demographic_opt_out:
+        return os.path.realpath(
+            PROJECT_ROOT
+            + "/form_data/background_info/"
+            + std.instrument.language
+            + "_no_demographics.json"
+        )
     try:
         return os.path.realpath(PROJECT_ROOT + std.demographic.path)
     except:
-        return ''
+        return ""

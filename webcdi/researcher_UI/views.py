@@ -1,17 +1,20 @@
-import json
 import datetime
+import json
+
+from brookes.models import BrookesCode
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core import serializers
+from django.core.exceptions import ValidationError
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
-from django.utils.translation import ugettext_lazy as _
+from django.utils.text import slugify
 from django.views import generic
 from django.views.generic import UpdateView
-
-from dateutil.relativedelta import relativedelta
+from django_weasyprint import WeasyTemplateResponseMixin
 from psycopg2.extras import NumericRange
+from researcher_UI.models import administration, researcher, study
 from researcher_UI.utils.add_paired_study import add_paired_study_fun
 from researcher_UI.utils.add_study import add_study_fun
 from researcher_UI.utils.admin_new import admin_new_fun
@@ -22,10 +25,9 @@ from researcher_UI.utils.console_helper.post_helper import post_condition
 from researcher_UI.utils.import_data import import_data_fun
 from researcher_UI.utils.overflow import overflow_fun
 from researcher_UI.utils.raw_gift_codes import raw_gift_code_fun
-from brookes.models import BrookesCode
+
 from .forms import *
 from .mixins import StudyOwnerMixin
-from researcher_UI.models import administration, researcher, study
 
 
 class Console(LoginRequiredMixin, generic.ListView):
@@ -65,9 +67,9 @@ class StudyCreateView(LoginRequiredMixin, generic.CreateView):
 
             if all([x.isdigit() for x in ids]):
                 """Check that the administration numbers are all numeric"""
-                #try:
+                # try:
                 res = post_condition(request, ids, study_obj)
-                #except Exception as e:
+                # except Exception as e:
                 #    context = {"error": "This combination is already existed."}
                 #    return render(request, "researcher_UI/500_error.html", context)
 
@@ -171,16 +173,16 @@ class AddPairedStudy(LoginRequiredMixin, generic.CreateView):
 class AdminNew(LoginRequiredMixin, generic.UpdateView):
     model = study
     form_class = AdminNewForm
-    #template_name = "researcher_UI/administer_new_modal.html"
+    # template_name = "researcher_UI/administer_new_modal.html"
 
     def get_template_names(self):
         study_obj = self.get_object()
         # check if valid code if chargeable
         if not study_obj.valid_code(self.request.user):
-            return ['researcher_UI/no_brookes_code.html']
+            return ["researcher_UI/no_brookes_code.html"]
         else:
-            return ['researcher_UI/administer_new_modal.html']
-        
+            return ["researcher_UI/administer_new_modal.html"]
+
     def get_context_data(self, **kwargs):
         context = super(AdminNew, self).get_context_data(**kwargs)
         researcher = self.request.user
@@ -328,6 +330,14 @@ class AjaxDemographicForms(generic.DetailView):
         return HttpResponse(data, content_type="application/json")
 
 
+class AjaxChargeStatus(generic.DetailView):
+    def get(self, request):
+        pk = request.GET["id"]
+
+        data = {"chargeable": instrument.objects.get(name=pk).family.chargeable}
+        return JsonResponse(data, content_type="application/json")
+
+
 class ResearcherAddInstruments(LoginRequiredMixin, UpdateView):
     model = researcher
     form_class = AddInstrumentForm
@@ -335,14 +345,30 @@ class ResearcherAddInstruments(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         res = reverse("researcher_ui:console")
-        dt = datetime.date.today() - relativedelta(years=1)
-        for chargeable in self.object.allowed_instrument_families.filter(chargeable=True):
-            if not BrookesCode.objects.filter(researcher=self.request.user, instrument_family=chargeable, applied__gte=dt).exists():
+        dt = datetime.date.today()
+        for chargeable in self.object.allowed_instrument_families.filter(
+            chargeable=True
+        ):
+            if not BrookesCode.objects.filter(
+                researcher=self.request.user,
+                instrument_family=chargeable,
+                expiry__gte=dt,
+            ).exists():
                 res = reverse("brookes:enter_codes", args=(chargeable.id,))
-        
+
         return res
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         return ctx
-    
+
+
+class PDFAdministrationDetailView(WeasyTemplateResponseMixin, generic.DetailView):
+    model = study
+
+    def get_template_names(self):
+        name = slugify(f"{self.object.instrument.verbose_name}")
+        try:
+            return [f"researcher_UI/individual/{name}.html"]
+        except:
+            raise ValidationError(f"No templates for this form type")

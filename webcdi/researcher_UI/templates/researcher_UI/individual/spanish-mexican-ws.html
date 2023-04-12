@@ -1,0 +1,152 @@
+{% extends 'researcher_UI/individual/base.html' %}
+{% load static i18n bleach_markdown pdf_template_tags%}
+
+{% block content %} 
+    {% for administration in object.administration_set.all %} 
+    {% if administration.completed %}
+    <div id="content" style="break-after: page;">
+        <div class="main" style="border:2px solid black; text-align: center; margin-bottom: 20px">
+            <h2>MacArthur-Bates Inventario del Desarrollo 
+                de Habilidades Comunicativas</h2>
+            <h2>Inventario I</h2>
+            <h2>Informe del Niño</h2>
+        </div>
+
+        <table >
+            <tr >
+                <td>Número de ID:</td>
+                <td>{{ administration.subject_id }}</td>
+                <td>Fecha del Reporte:</td>
+                <td>{% now "jS F Y H:i" %}</td>
+            </tr>
+            <tr>
+                <td>Sexo:</td>
+                <td>{{ administration.backgroundinfo.get_sex_display }}</td>
+                <td>Fecha del Inventario:</td>
+                <td>{{ administration.last_modified|date:"M d, Y" }}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>Edad en meses:</td>
+                <td>{{ administration.backgroundinfo.age }}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>Edad para comparar: </td>
+                <td>{{ administration.id|get_summary_data:"adjusted benchmark age" }}</td>
+            </tr>
+        </table>
+
+        <table>
+            <tr>
+                <th colspan="4">Parte I: El Uso de Palabras</th>
+            </tr>
+            <tr>
+                <th colspan="4">Vocabulario</th>
+            </tr>
+            <tr>
+                <td>Palabras que Dice:</td>
+                <td>Número:</td>
+                <td>{{ administration.id|get_summary_data:"Palabras que dice" }}</td>
+                <td>(de 680)</td>
+            </tr>
+            <tr>
+                <td colspan="1"></td>
+                <td>Percentil (por sexo):</td>
+                <td colspan="2">{{ administration.id|get_summary_data:"Palabras que dice Percentile-sex" }}</td>
+            </tr>
+            <tr>
+                <td colspan="1"></td>
+                <td>Percentil (todos):</td>
+                <td colspan="2">{{ administration.id|get_summary_data:"Palabras que dice Percentile-both" }}%</td>
+            </tr>
+            <tr>
+                <th colspan="4"> Cómo Usa y Comprende el Niño el Lenguaje</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Número:</td>
+                <td>{{ administration.id|get_summary_data:"Como Usa y Comprende" }}</td>
+                <td>(de 5)</td>
+            </tr>
+        </table>
+
+        <table>
+            <tr>
+                <th colspan="4">Parte II: Oraciones y Gramática</th>
+            </tr>
+            <tr>
+                <th colspan="4">Formas de Verbos</th>
+            </tr>
+            <tr>
+                <td>Presente:</td>
+                <td>Número:</td>
+                <td>{{ administration.id|get_summary_data:"Formas de Verbos: Presente" }}</td>
+                <td>(de 12)</td>
+            </tr>
+            <tr>
+                <td>Pasado:</td>
+                <td>Número:</td>
+                <td>{{ administration.id|get_summary_data:"Formas de Verbos: Sucedieron" }}</td>
+                <td>(de 6)</td>
+            </tr>
+            <tr>
+                <td>Imperativo:</td>
+                <td>Número:</td>
+                <td>{{ administration.id|get_summary_data:"Formas de Verbos: Imperativos" }}</td>
+                <td>(de 6)</td>
+            </tr>
+            <tr><td colspan="4"></td></tr>
+            <tr>
+                <td colspan="3"></td>
+                <td>Porcentaje de respuestas afirmativas para su edad</td>
+            </tr>
+            <tr>
+                <th colspan="2">¿El niño combina palabras?</th>
+                <td>{{ administration.id|get_summary_data:"Combinar palabras" }}</td>
+                <td>{{ administration.id|get_summary_data:"Combinar palabras % yes answers at this age and sex" }}</td>
+            </tr>
+            <tr>
+                <th colspan="4">Longitud de las tres oraciones más largas</th>
+            </tr>
+            
+            <tr>                
+                <td>{% trans 'Example' %} 1</td>
+                <td colspan="3">{{ administration.id|get_form_data:"item_example1" }}</td>
+            </tr>
+            <tr>                
+                <td>{% trans 'Example' %} 2</td>
+                <td colspan="3">{{ administration.id|get_form_data:"item_example2" }}</td>
+            </tr>
+            <tr>                
+                <td>{% trans 'Example' %} 3</td>
+                <td colspan="3">{{ administration.id|get_form_data:"item_example3" }}</td>
+            </tr>
+            <tr><td colspan="4"></td></tr>
+            <tr>                
+                <th colspan="4">Complejidad de Frases</th>
+            </tr>
+            <tr>
+                <td>Número de veces que se seleccionó la frase mas compleja:</td>
+                <td>{{ administration.id|get_summary_data:"Complejidad" }}</td>
+                <td colspan="2">(of 37)</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>{% trans 'Percentile (by sex):' %}</td>
+                <td colspan="2">{{ administration.id|get_summary_data:"Complejidad Percentile-sex" }}%</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>{% trans 'Percentile (both sexes):' %}</td>
+                <td colspan="2">{{ administration.id|get_summary_data:"Complejidad Percentile-both" }}%</td>
+            </tr>
+            
+        </table>
+    </div>
+    {% endif %}
+    {% endfor %}
+
+{% endblock %}

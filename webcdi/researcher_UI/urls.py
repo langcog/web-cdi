@@ -1,6 +1,7 @@
 from django.conf.urls import url
 from django.urls import path
-from . import views as views
+
+from . import views
 
 app_name = "researcher_ui"
 
@@ -45,6 +46,11 @@ urlpatterns = [
         name="get_demographic_forms",
     ),
     path(
+        "ajax/get_charge_status/",
+        views.AjaxChargeStatus.as_view(),
+        name="get_charge_status",
+    ),
+    path(
         "researcher/<int:pk>/",
         views.ResearcherAddInstruments.as_view(),
         name="researcher_add_instruments",
@@ -53,5 +59,10 @@ urlpatterns = [
         "edit-study-new/<int:pk>/",
         views.EditStudyView.as_view(),
         name="edit_study_new",
+    ),
+    path(
+        "study/<int:pk>/pdf/",
+        views.PDFAdministrationDetailView.as_view(),
+        name="pdf_summary",
     ),
 ]

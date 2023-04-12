@@ -13,18 +13,17 @@ Including another URLconf
     1. Add an import:  from blog import urls as blog_urls
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
-from django.conf.urls import include, url
-from django.views.generic.base import RedirectView
-from django.contrib import admin
-from django.views.generic import TemplateView
-from supplementtut.views import *
-from django.contrib.auth import views as auth_views
 from django.conf import settings
+from django.conf.urls import include, url
 from django.conf.urls.static import static
-from django.urls import path
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
+from django.urls import path
+from django.views.generic import TemplateView
+from django.views.generic.base import RedirectView
+from supplementtut.views import *
 
-from webcdi.views import signup
+from webcdi.views import CustomLoginView, signup
 
 urlpatterns = [
     url(r"^$", TemplateView.as_view(template_name="researcher_UI/home.html")),
@@ -39,7 +38,7 @@ urlpatterns = [
     url(r"^form/", include("cdi_forms.urls")),
     url(
         r"^accounts/login/$",
-        auth_views.LoginView.as_view(),
+        CustomLoginView.as_view(),
         {"template_name": "registration/login.html"},
     ),
     url(
@@ -58,7 +57,7 @@ urlpatterns = [
     url(r"^lockout/$", TemplateView.as_view(template_name="registration/lockout.html")),
     url(r"^health/?", include("health_check.urls")),
     url(r"^ckeditor/", include("ckeditor_uploader.urls")),
-    path('brookes/', include("brookes.urls")),
+    path("brookes/", include("brookes.urls")),
 ]
 
 if settings.DEBUG:

@@ -1,13 +1,11 @@
 import datetime
-from django.db import models
-from ckeditor_uploader.fields import RichTextUploadingField
-from django.core.validators import MaxValueValidator, MinValueValidator
-
-from dateutil.relativedelta import relativedelta
 
 from brookes.models import BrookesCode
-
+from ckeditor_uploader.fields import RichTextUploadingField
+from django.core.validators import MaxValueValidator, MinValueValidator
+from django.db import models
 from researcher_UI import choices
+
 
 # Model for individual studies
 class study(models.Model):
@@ -89,12 +87,27 @@ class study(models.Model):
     demographic = models.ForeignKey(
         "Demographic", on_delete=models.SET_NULL, blank=True, null=True
     )
+    share_opt_out = models.BooleanField(
+        default=False,
+        help_text="For chargeable instruments you may opt out of sharing the study data.",
+    )
+    demographic_opt_out = models.BooleanField(
+        default=False,
+        help_text="For chargeable instruments you may opt out of collecting demographic data.",
+    )
 
     def __str__(self):
         return self.name
 
     def valid_code(self, user):
-        if self.instrument.family.chargeable and not BrookesCode.objects.filter(researcher=user, instrument_family=self.instrument.family, applied__gte=datetime.date.today() - relativedelta(years=1)).exists():
+        if (
+            self.instrument.family.chargeable
+            and not BrookesCode.objects.filter(
+                researcher=user,
+                instrument_family=self.instrument.family,
+                expiry__gte=datetime.date.today(),
+            ).exists()
+        ):
             return False
         else:
             return True

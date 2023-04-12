@@ -1,7 +1,7 @@
 [
 	{
 		"language": "English",
-		"family": "English (American) Long",
+		"family": "English (American/Canadian) Long",
 		"form": "WS",
 		"verbose_name": "English (American) WS",
 		"min_age": 16,
@@ -15,7 +15,7 @@
 	},
 	{
 		"language": "English",
-		"family": "English (American) Long",
+		"family": "English (American/Canadian) Long",
 		"form": "CDI3",
 		"verbose_name": "English (American) CDI-III",
 		"min_age": 16,
@@ -27,7 +27,7 @@
 	},
 	{
 		"language": "English",
-		"family": "English (American) Long",
+		"family": "English (American/Canadian) Long",
 		"form": "WG",
 		"verbose_name": "English (American) WG",
 		"min_age": 8,
@@ -115,7 +115,7 @@
 	},
 	{
 		"language": "Canadian English",
-		"family": "English (Canadian) Long",
+		"family": "English (American/Canadian) Long",
 		"form": "WS",
 		"verbose_name": "English (Canadian) WS",
 		"min_age": 16,
@@ -127,7 +127,7 @@
 	},
 	{
 		"language": "Canadian English",
-		"family": "English (Canadian) Long",
+		"family": "English (American/Canadian) Long",
 		"form": "WG",
 		"verbose_name": "English (Canadian) WG",
 		"min_age": 8,

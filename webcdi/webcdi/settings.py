@@ -12,7 +12,9 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import urllib
 
+from django.utils.crypto import get_random_string
 from django.utils.translation import gettext_lazy as _
 
 from webcdi.utils import get_linux_ec2_private_ip
@@ -35,8 +37,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
-
-from django.utils.crypto import get_random_string
 
 
 def generate_secret_key(fname):
@@ -131,6 +131,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "webcdi.context_processors.home_page",
+                "brookes.context_processors.renewal_codes",
             ],
         },
     },
@@ -399,8 +400,6 @@ CKEDITOR_CONFIGS = {
 AWS_QUERYSTRING_AUTH = False
 
 LOGOUT_REDIRECT_URL = "/"
-
-import urllib
 
 
 def is_ec2_linux():

@@ -1,0 +1,28 @@
+[
+    {
+        "page":"front",
+        "contents":[
+            {
+                "fieldset":"Basic Information",
+                "fields":[
+                    {
+                        "field":"child_dob"
+                    },
+                    {
+                        "field":"age"
+                    },
+                    {
+                        "field":"sex"
+                    },
+                    {
+                        "field":"born_on_due_date",
+                        "div":[
+                            "early_or_late",
+                            "due_date_diff"
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
