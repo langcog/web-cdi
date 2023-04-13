@@ -227,6 +227,7 @@
 
 <script>
     // This add ticked items to url call for Clinical/PDF downloads
+    {% if current_study %}
     append_url_checkboxes = function (){
         var url = new URL("{{ request.scheme }}://{{request.get_host }}{% url 'researcher_ui:pdf_summary' current_study.pk %}");
         var checkedBoxes = document.querySelectorAll('input[name=select_col]:checked');
@@ -236,6 +237,7 @@
  
         $('#id_select_clinical').attr('href', url)
         //window.open(url)
-    }
+        }
+    {% endif %}
 </script>
 {% endblock %}
