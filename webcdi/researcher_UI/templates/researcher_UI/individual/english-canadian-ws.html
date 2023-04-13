@@ -2,7 +2,7 @@
 {% load static i18n bleach_markdown pdf_template_tags%}
 
 {% block content %} 
-    {% for administration in object.administration_set.all %} 
+    {% for administration in administrations %} 
     {% if administration.completed %}
     <div id="content" style="break-after: page;">
         <div class="main" style="border:2px solid black; text-align: center; margin-bottom: 20px">

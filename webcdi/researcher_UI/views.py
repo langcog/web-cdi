@@ -372,3 +372,16 @@ class PDFAdministrationDetailView(WeasyTemplateResponseMixin, generic.DetailView
             return [f"researcher_UI/individual/{name}.html"]
         except:
             raise ValidationError(f"No templates for this form type")
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx['administrations'] = self.object.administration_set.all().filter(completed=True)
+        if 'id' in self.request.GET:
+            ids = self.request.GET.getlist('id')
+            int_ids = []
+            for id in ids:
+                int_ids.append(int(id))
+            ctx['administrations'] = ctx['administrations'].filter(pk__in=int_ids)
+
+        print(self.request.GET.getlist('id'))
+        return ctx
