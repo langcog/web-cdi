@@ -1544,19 +1544,16 @@ msgstr "Instrucciones para completar el inventario del lenguaje."
 #: cdi_forms/templates/cdi_forms/background_info.html:26
 msgid ""
 "In this survey, we ask you about words that your child “says” in English."
-msgstr ""
+msgstr "Marque las palabras que su hijo(a) COMPRENDE Y DICE en ESPAÑOL."
 
 #: cdi_forms/templates/cdi_forms/background_info.html:27
-#, fuzzy
-#| msgid ""
-#| "Try to complete the inventory when you have at least 30 quiet minutes, "
-#| "without interruptions. An example might be when your child is sleeping."
 msgid ""
 "Try to complete the survey when you have a few quiet minutes, without "
 "interruptions. An example might be when your child is sleeping."
 msgstr ""
-"Cuando tenga por lo menos 30 minutos tranquilos sin interrupciones, trate de "
-"llenar el inventario. Un ejemplo podría ser cuando su niño(a) este durmiendo."
+"Cuando tenga por lo menos 10 minutos tranquilos sin interrupciones, "
+"trate de llenar el inventario. Un ejemplo"
+"podría ser cuando su niño(a) este durmiendo."
 
 #: cdi_forms/templates/cdi_forms/background_info.html:28
 msgid ""
@@ -1564,12 +1561,19 @@ msgid ""
 "do (e.g., “raff” instead of “giraffe”).  And there might be some words in "
 "your family that you use instead (e.g., “nana” for “grandma”)."
 msgstr ""
+"Marque las palabras aunque su hijo(a) las pronuncie de manera diferente; "
+"por ejemplo, si dice “tatamina” en vez de “vitamina” o “papo” en vez de “zapato”."
+"Marque las palabras que sean diferentes, pero que tienen el mismo significado que "
+"las que vienen en el inventario. (Por ejemplo, si su hijo(a) dice “coca” en vez "
+"de “refresco”, o “súper” en vez de “tienda”.)"
 
 #: cdi_forms/templates/cdi_forms/background_info.html:29
 msgid ""
 "Remember, these words are just some of the words that a child might say, so "
 "it is ok if they do not say all of them!"
 msgstr ""
+"Recuerde, estas palabras son solo algunas de las palabras que un niño podría decir, "
+"¡así que está bien si no las dice todas!"
 
 #: cdi_forms/templates/cdi_forms/background_info.html:32
 #: cdi_forms/templates/cdi_forms/study_group.html:22
@@ -1685,18 +1689,12 @@ msgid "MB-CDI Lab Logo"
 msgstr "Logotipo del Inventario"
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:42
-#, fuzzy, python-format
-#| msgid ""
-#| "Thank you for filling this out! Of the words we asked, the hardest word "
-#| "your child knows is \"%(easiest)s\" and the easiest word is \"%(hardest)s"
-#| "\"."
 msgid ""
 "Thank you for filling this out! Of the words we asked, the hardest word your "
 "child knows is \"%(hardest)s\" and the easiest word is \"%(easiest)s\"."
 msgstr ""
-"¡Gracias por llenar esto! De las palabras que te pedimos, la palabra más "
-"difícil es tuel niño sabe que es\"%(easiest)s\" y la palabra más fácil es "
-"\"%(hardest)s\"."
+"¡Muchas gracias! De las palabras que pedimos, la palabra más difícil "
+"que su niño(a) dice es \"%(hardest)s\" y la palabra más fácil es \"%(easiest)s\"."
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:45
 msgid ""
