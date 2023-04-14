@@ -12,7 +12,7 @@ MAILTO="hjsmehta@gmail.com"
 
 0 1 1 * * root source /var/app/venv/*/bin/activate && export $(cat /opt/elasticbeanstalk/deployment/custom_env_var | xargs)  && /var/app/current/manage.py monthly_report
 0 0 * * 0 root source /var/app/venv/*/bin/activate && export $(cat /opt/elasticbeanstalk/deployment/custom_env_var | xargs)  && /var/app/current/manage.py weekly_reminder
-0 0 11 20 0 root source /var/app/venv/*/bin/activate && export $(cat /opt/elasticbeanstalk/deployment/custom_env_var | xargs)  && /var/app/current/manage.py update_summary_data -s 137
-0 0 11 21 0 root source /var/app/venv/*/bin/activate && export $(cat /opt/elasticbeanstalk/deployment/custom_env_var | xargs)  && /var/app/current/manage.py update_summary_data -s 276
+0 0 14 20 0 root source /var/app/venv/*/bin/activate && export $(cat /opt/elasticbeanstalk/deployment/custom_env_var | xargs)  && /var/app/current/manage.py update_summary_data -s 137
+0 0 14 21 0 root source /var/app/venv/*/bin/activate && export $(cat /opt/elasticbeanstalk/deployment/custom_env_var | xargs)  && /var/app/current/manage.py update_summary_data -s 276
 
 # this file needs a blank space as the last line otherwise it will fail
