@@ -19,6 +19,10 @@ def download_dictionary(request, study_obj):
     item_data["definition"] = item_data["definition"].apply(
         lambda x: re.sub("__", "", x)
     )
+
+    # add footer
+    item_data = item_data.append({'itemID': '3rd Edition (Marchman et al., 2023)'}, ignore_index=True)
+
     item_data[["itemID", "item_type", "category", "definition", "gloss"]].to_csv(
         response, encoding="utf-8", index=False
     )  # Convert nested dictionary into a pandas dataframe and then into a CSV

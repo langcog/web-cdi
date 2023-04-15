@@ -80,11 +80,14 @@
     </div>
 
     <div id="page-footer">
-        {%block page_foot%}
+        {% block page_foot %}
+            <div>
+                <p>3rd Edition (Marchman et al., 2023)</p>
+            </div>
             {% comment %}
                 <pdf:pagenumber />
             {% endcomment %}
-        {%endblock%}
+        {% endblock %}
     </div>
 </body>
 </html>

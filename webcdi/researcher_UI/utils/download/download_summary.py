@@ -106,6 +106,9 @@ def download_summary(request, study_obj, administrations=None):
     combined_data["child_ethnicity"].replace("[]", "", inplace=True)
     combined_data["other_languages"].replace("[]", "", inplace=True)
 
+    # add footer
+    combined_data = combined_data.append({'study_name': '3rd Edition (Marchman et al., 2023)'}, ignore_index=True)
+
     # Turn pandas dataframe into a CSV
     combined_data.to_csv(response, encoding="utf-8", index=False)
 

@@ -382,6 +382,4 @@ class PDFAdministrationDetailView(WeasyTemplateResponseMixin, generic.DetailView
             for id in ids:
                 int_ids.append(int(id))
             ctx['administrations'] = ctx['administrations'].filter(pk__in=int_ids)
-
-        print(self.request.GET.getlist('id'))
         return ctx
