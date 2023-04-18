@@ -27,7 +27,7 @@ try:
 
     print("Importing Secret Settings")
 except Exception as e:
-    print("Importing Local Settings")
+    print(f"Importing Local Settings with error {e}")
     from .local_settings import *
 
 
