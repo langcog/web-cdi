@@ -21,7 +21,7 @@ from django.contrib.auth import views as auth_views
 from django.urls import path
 from django.views.generic import TemplateView
 from django.views.generic.base import RedirectView
-from supplementtut.views import *
+from supplementtut.views import *  # noqa
 
 from webcdi.views import CustomLoginView, signup
 
