@@ -1,7 +1,10 @@
 from django.conf import settings
 import pandas as pd
 from researcher_UI.utils.make_str import make_str_fun
-import codecs, json, datetime, re
+import codecs
+import json
+import datetime
+import re
 from cdi_forms.models import BackgroundInfo, Zipcode
 import pandas as pd
 from django.conf import settings

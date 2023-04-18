@@ -1,12 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from researcher_UI.forms import *
 from researcher_UI.models import administration
 import pandas as pd
 from django.urls import reverse
 from django.contrib.sites.shortcuts import get_current_site
 
-from django.utils.translation import ugettext_lazy as _
 
 
 @login_required

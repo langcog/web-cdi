@@ -1,6 +1,7 @@
 from django.conf import settings
 import pandas as pd
-import os, json
+import os
+import json
 from researcher_UI.models import administration, administration_data
 from cdi_forms.models import BackgroundInfo
 from researcher_UI.utils.try_parsing_date import try_parsing_date_fun

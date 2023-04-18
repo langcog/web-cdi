@@ -1,12 +1,10 @@
 from django.http import HttpResponse, HttpResponseServerError
-from researcher_UI.forms import *
 from researcher_UI.models import administration
 from cdi_forms.models import BackgroundInfo
 import pandas as pd
 import numpy as np
 from django.urls import reverse
 from django.contrib.sites.shortcuts import get_current_site
-from django.utils.translation import ugettext_lazy as _
 from researcher_UI.utils.format_admin import format_admin_header, format_admin_data
 from researcher_UI.utils.study_score import get_study_scores
 from researcher_UI.utils.score_headers import get_score_headers
