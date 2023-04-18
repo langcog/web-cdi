@@ -64,9 +64,9 @@ def create_benchmark_score(benchmark, age, background_info, administration_insta
                         summary.save()
 
 def update_summary_scores(administration_instance):
-    SummaryData.objects.filter(administration=administration_instance).update(value='')
-    
-    instrument_scores = InstrumentScore.objects.filter(instrument=administration_instance.study.instrument)
+    if not administration_instance.completed:
+        return
+    SummaryData.objects.filter(administration=administration_instance).delete()
         
     for administration_data_item in administration_data.objects.filter(administration=administration_instance):
         inst = Instrument_Forms.objects.get(instrument=administration_instance.study.instrument, itemID=administration_data_item.item_ID)
