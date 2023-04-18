@@ -375,11 +375,13 @@ class PDFAdministrationDetailView(WeasyTemplateResponseMixin, generic.DetailView
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        ctx['administrations'] = self.object.administration_set.all().filter(completed=True)
-        if 'id' in self.request.GET:
-            ids = self.request.GET.getlist('id')
+        ctx["administrations"] = self.object.administration_set.all().filter(
+            completed=True
+        )
+        if "id" in self.request.GET:
+            ids = self.request.GET.getlist("id")
             int_ids = []
             for id in ids:
                 int_ids.append(int(id))
-            ctx['administrations'] = ctx['administrations'].filter(pk__in=int_ids)
+            ctx["administrations"] = ctx["administrations"].filter(pk__in=int_ids)
         return ctx

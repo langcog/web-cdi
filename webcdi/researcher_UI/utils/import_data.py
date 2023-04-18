@@ -1,13 +1,14 @@
-from django.conf import settings
-import pandas as pd
-import os
 import json
-from researcher_UI.models import administration, administration_data
+import os
+
+import pandas as pd
 from cdi_forms.models import BackgroundInfo
-from researcher_UI.utils.try_parsing_date import try_parsing_date_fun
+from django.conf import settings
+from django.urls import reverse
+from researcher_UI.models import administration, administration_data
 from researcher_UI.utils.processDemos import processDemos_fun
 from researcher_UI.utils.random_url_generator import random_url_generator
-from django.urls import reverse
+from researcher_UI.utils.try_parsing_date import try_parsing_date_fun
 
 
 def get_default_dict():
@@ -78,7 +79,6 @@ def import_data_fun(request, study_obj):
     new_admin_pks = []
 
     for index, admin_row in csv_file.iterrows():
-
         raw_sid = str(admin_row["name_of_child"])
         if raw_sid.isdigit():
             sid = int(raw_sid)

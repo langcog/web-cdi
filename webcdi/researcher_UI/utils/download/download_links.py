@@ -1,10 +1,9 @@
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
-from researcher_UI.models import administration
 import pandas as pd
-from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 from django.contrib.sites.shortcuts import get_current_site
-
+from django.http import HttpResponse
+from django.urls import reverse
+from researcher_UI.models import administration
 
 
 @login_required
@@ -44,7 +43,9 @@ def download_links(request, study_obj, administrations=None):
     ).replace("a" * 64 + "/", "")
     admin_data["link"] = test_url + admin_data["link"]
 
-    admin_data = admin_data.append({'study_name': '3rd Edition (Marchman et al., 2023)'}, ignore_index=True)
+    admin_data = admin_data.append(
+        {"study_name": "3rd Edition (Marchman et al., 2023)"}, ignore_index=True
+    )
 
     admin_data.to_csv(
         response, encoding="utf-8", index=False
