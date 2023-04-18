@@ -2,9 +2,9 @@ import re
 
 from django.conf import settings
 from django.http import HttpResponseRedirect
+from django.utils import translation
 from django.utils.deprecation import MiddlewareMixin
 from django.utils.http import is_safe_url
-from django.utils import translation
 
 EXEMPT_URLS = [re.compile(settings.LOGIN_URL.lstrip("/"))]
 if hasattr(settings, "LOGIN_EXEMPT_URLS"):
@@ -25,7 +25,6 @@ class LoginRequiredMiddleware(MiddlewareMixin):
                     redirect_to = f"{settings.LOGIN_URL}?next={request.path_info}"
 
                 return HttpResponseRedirect(redirect_to)
-
 
 
 class AdminLocaleMiddleware(MiddlewareMixin):
