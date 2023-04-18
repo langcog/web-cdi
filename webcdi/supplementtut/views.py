@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from registration.signals import user_registered, user_activated
-from researcher_UI.models import *
+
 from django.contrib.auth import login
+from registration.signals import user_activated, user_registered
+from researcher_UI.models import *
 
 
 def save_researcher_profile_receiver(sender, user, profile, request, **kwargs):
@@ -18,11 +19,12 @@ def save_researcher_profile_receiver(sender, user, profile, request, **kwargs):
 
 def activate_user_profile_receiver(sender, user, request, **kwargs):
     if not user.is_active:
-    	user.is_active = True
-    
-    user.backend = 'django.contrib.auth.backends.ModelBackend'
+        user.is_active = True
+
+    user.backend = "django.contrib.auth.backends.ModelBackend"
     user.save()
     login(request, user)
+
 
 user_registered.connect(save_researcher_profile_receiver)
 
