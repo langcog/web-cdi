@@ -3,14 +3,14 @@ import json
 
 from brookes.models import BrookesCode
 from django.conf import settings
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core import serializers
 from django.http import HttpResponse, JsonResponse
-from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.template.loader import get_template
-from django.utils.safestring import mark_safe
 from django.urls import reverse
+from django.utils.safestring import mark_safe
 from django.utils.text import slugify
 from django.views import generic
 from django.views.generic import UpdateView
@@ -370,12 +370,12 @@ class PDFAdministrationDetailView(WeasyTemplateResponseMixin, generic.DetailView
 
     def get_template_names(self):
         name = slugify(f"{self.object.instrument.verbose_name}")
-        template_name = f"researcher_UI/individual/{name}.html" 
+        template_name = f"researcher_UI/individual/{name}.html"
         try:
             get_template(template_name)
             return [template_name]
         except:
-            return ['researcher_UI/individual/no_clinical_template.html']
+            return ["researcher_UI/individual/no_clinical_template.html"]
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
@@ -393,20 +393,20 @@ class PDFAdministrationDetailView(WeasyTemplateResponseMixin, generic.DetailView
     def get(self, request, *args, **kwargs) -> HttpResponse:
         self.object = self.get_object()
         name = slugify(f"{self.object.instrument.verbose_name}")
-        template_name = f"researcher_UI/individual/{name}.html" 
+        template_name = f"researcher_UI/individual/{name}.html"
         try:
             get_template(template_name)
         except:
             messages.info(
                 self.request,
                 mark_safe(
-                    f'''
+                    f"""
                     <h1>No Clinical Template Available</h1>
                     <p>We do not have a clinical template available for { self.object.instrument } studies.  Please contact the WebCDI team to arrange one.</p>
-                    ''',
-                    )
-                )
+                    """,
+                ),
+            )
 
-            return redirect(request.META.get('HTTP_REFERER'))
+            return redirect(request.META.get("HTTP_REFERER"))
 
         return super().get(request, *args, **kwargs)
