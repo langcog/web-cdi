@@ -84,7 +84,9 @@ def download_data(
         ].astype("int64")
     except Exception as e:
         messages.add_message(
-            request, messages.ERROR, f"System error {e}.  You must select at least 1 completed response"
+            request,
+            messages.ERROR,
+            f"System error {e}.  You must select at least 1 completed response",
         )
         return render(request, "error-page.html")
 
@@ -126,7 +128,9 @@ def download_data(
         )
     except Exception as e:
         messages.add_message(
-            request, messages.ERROR, f"System error {e}:   You must select at least 1 completed response"
+            request,
+            messages.ERROR,
+            f"System error {e}:   You must select at least 1 completed response",
         )
         return render(request, "error-page.html")
 
