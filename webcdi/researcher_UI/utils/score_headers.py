@@ -1,4 +1,4 @@
-from researcher_UI.models import InstrumentScore, Benchmark
+from researcher_UI.models import Benchmark, InstrumentScore
 
 
 def get_score_headers(study_obj, adjusted=False):
@@ -15,7 +15,9 @@ def get_score_headers(study_obj, adjusted=False):
             if benchmark.percentile == 999:
                 score_header.append(f.title + " % yes answers at this age and sex")
                 if adjusted:
-                    score_header.append(f.title + " % yes answers at this age and sex (adjusted)")
+                    score_header.append(
+                        f.title + " % yes answers at this age and sex (adjusted)"
+                    )
             else:
                 score_header.append(f.title + " Percentile-sex")
                 if adjusted:

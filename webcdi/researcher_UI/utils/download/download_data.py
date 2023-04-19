@@ -1,29 +1,22 @@
-from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseServerError
-from researcher_UI.forms import *
-from researcher_UI.models import (
-    administration,
-    administration_data,
-    InstrumentScore,
-)
-from cdi_forms.models import BackgroundInfo
-
-from cdi_forms.views import get_model_header
-import pandas as pd
 import numpy as np
-from django.urls import reverse
-from django.contrib.sites.shortcuts import get_current_site
+import pandas as pd
+from cdi_forms.models import BackgroundInfo, Instrument_Forms
+from cdi_forms.views import get_model_header
 from django.contrib import messages
-from django.utils.translation import ugettext_lazy as _
-from cdi_forms.models import Instrument_Forms
-from researcher_UI.utils.format_admin import format_admin_header
-from researcher_UI.utils.study_score import get_study_scores
-from researcher_UI.utils.score_headers import get_score_headers
-from researcher_UI.utils.format_admin import format_admin_data
+from django.contrib.sites.shortcuts import get_current_site
+from django.http import HttpResponse, HttpResponseServerError
+from django.shortcuts import render
+from django.urls import reverse
+from researcher_UI.models import InstrumentScore, administration, administration_data
 from researcher_UI.utils.background_header import get_background_header
+from researcher_UI.utils.format_admin import format_admin_data, format_admin_header
+from researcher_UI.utils.score_headers import get_score_headers
+from researcher_UI.utils.study_score import get_study_scores
 
 
-def download_data(request, study_obj, administrations=None, adjusted=False):  # Download study data
+def download_data(
+    request, study_obj, administrations=None, adjusted=False
+):  # Download study data
     # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse(content_type="text/csv")  # Format response as a CSV
     filename = study_obj.name + "_items.csv"
@@ -91,7 +84,7 @@ def download_data(request, study_obj, administrations=None, adjusted=False):  # 
         ].astype("int64")
     except Exception as e:
         messages.add_message(
-            request, messages.ERROR, "You must select at least 1 completed response"
+            request, messages.ERROR, f"System error {e}.  You must select at least 1 completed response"
         )
         return render(request, "error-page.html")
 
@@ -133,7 +126,7 @@ def download_data(request, study_obj, administrations=None, adjusted=False):  # 
         )
     except Exception as e:
         messages.add_message(
-            request, messages.ERROR, "You must select at least 1 completed response"
+            request, messages.ERROR, f"System error {e}:   You must select at least 1 completed response"
         )
         return render(request, "error-page.html")
 
@@ -168,9 +161,10 @@ def download_data(request, study_obj, administrations=None, adjusted=False):  # 
     combined_data["child_ethnicity"].replace("[]", "", inplace=True)
     combined_data["other_languages"].replace("[]", "", inplace=True)
 
-    
     # add footer
-    combined_data = combined_data.append({'study_name': '3rd Edition (Marchman et al., 2023)'}, ignore_index=True)
+    combined_data = combined_data.append(
+        {"study_name": "3rd Edition (Marchman et al., 2023)"}, ignore_index=True
+    )
 
     # Turn pandas dataframe into a CSV
     combined_data.to_csv(response, encoding="utf-8", index=False)

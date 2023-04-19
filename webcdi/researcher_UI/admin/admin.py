@@ -12,7 +12,7 @@ admin.site.register(Demographic)
 
 class SummaryDataAdmin(admin.ModelAdmin):
     list_filter = ["administration__study__instrument", "title"]
-    readonly_fields = ['administration', 'title', 'value']
+    readonly_fields = ["administration", "title", "value"]
 
 
 admin.site.register(SummaryData, SummaryDataAdmin)
