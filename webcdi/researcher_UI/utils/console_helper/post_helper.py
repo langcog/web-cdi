@@ -73,6 +73,16 @@ def post_condition(request, ids, study_obj):
         else:
             return download_data.download_data(request, study_obj, administrations)
 
+    elif "download-selected-adjusted" in request.POST:  # If 'Download Selected Data' was clicked
+        num_ids = list(set(map(int, ids)))  # Force IDs into a list of integers
+        administrations = administration.objects.filter(id__in=num_ids)
+        if study_obj.instrument.form in settings.CAT_FORMS:
+            return download_cat_data.download_cat_data(
+                request, study_obj, administrations
+            )
+        else:
+            return download_data.download_data(request, study_obj, administrations, adjusted=True)
+        
     elif "download-selected-summary" in request.POST:
         num_ids = list(set(map(int, ids)))  # Force IDs into a list of integers
         administrations = administration.objects.filter(id__in=num_ids)
@@ -97,6 +107,15 @@ def post_condition(request, ids, study_obj):
             )
         else:
             return download_data.download_data(request, study_obj, administrations)
+    
+    elif "download-study-csv-adjusted" in request.POST:  # If 'Download Data' button is clicked
+        administrations = administration.objects.filter(study=study_obj)
+        if study_obj.instrument.form in settings.CAT_FORMS:
+            return download_cat_data.download_cat_data(
+                request, study_obj, administrations
+            )
+        else:
+            return download_data.download_data(request, study_obj, administrations, adjusted=True)
 
     elif "download-summary-csv" in request.POST:
         administrations = administration.objects.filter(study=study_obj)

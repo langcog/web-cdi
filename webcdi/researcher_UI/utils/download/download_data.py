@@ -23,7 +23,7 @@ from researcher_UI.utils.format_admin import format_admin_data
 from researcher_UI.utils.background_header import get_background_header
 
 
-def download_data(request, study_obj, administrations=None):  # Download study data
+def download_data(request, study_obj, administrations=None, adjusted=False):  # Download study data
     # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse(content_type="text/csv")  # Format response as a CSV
     filename = study_obj.name + "_items.csv"
@@ -99,7 +99,7 @@ def download_data(request, study_obj, administrations=None):  # Download study d
     melted_scores = get_study_scores(administrations)
     if len(melted_scores) < 1:
         return HttpResponseServerError(f"There are no data in the study(ies) to report")
-    score_header = get_score_headers(study_obj)
+    score_header = get_score_headers(study_obj, adjusted=adjusted)
     melted_scores.set_index("administration_id")
     missing_columns = list(set(score_header) - set(melted_scores.columns))
     if missing_columns:
