@@ -1,9 +1,8 @@
-from django.http import HttpResponse
-from researcher_UI.forms import *
-from cdi_forms.views import model_map
-import pandas as pd
-from django.utils.translation import ugettext_lazy as _
 import re
+
+import pandas as pd
+from cdi_forms.views import model_map
+from django.http import HttpResponse
 
 
 def download_dictionary(request, study_obj):

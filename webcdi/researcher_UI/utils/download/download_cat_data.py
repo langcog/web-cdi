@@ -1,15 +1,9 @@
-from django.http import HttpResponse
-from researcher_UI.utils.format_admin import (
-    format_admin_data,
-    format_admin_header,
-)
-from researcher_UI.forms import *
-from researcher_UI.models import administration
-from cdi_forms.models import BackgroundInfo
 import pandas as pd
-from django.utils.translation import ugettext_lazy as _
 from cdi_forms.cat_forms.models import CatResponse
-from researcher_UI.utils.format_admin import format_admin_header, format_admin_data
+from cdi_forms.models import BackgroundInfo
+from django.http import HttpResponse
+from researcher_UI.models import administration
+from researcher_UI.utils.format_admin import format_admin_data, format_admin_header
 
 
 def download_cat_data(request, study_obj, administrations=None):
