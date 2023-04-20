@@ -21,7 +21,10 @@ def download_dictionary(request, study_obj):
     )
 
     # add footer
-    item_data = item_data.append({'itemID': '3rd Edition (Marchman et al., 2023)'}, ignore_index=True)
+    if study_obj.instrument.language in ["English"] and study_obj.form in ["WS", "WG"]:
+        item_data = item_data.append(
+            {"study_name": "3rd Edition (Marchman et al., 2023)"}, ignore_index=True
+        )
 
     item_data[["itemID", "item_type", "category", "definition", "gloss"]].to_csv(
         response, encoding="utf-8", index=False
