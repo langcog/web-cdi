@@ -402,7 +402,7 @@ class PDFAdministrationDetailView(WeasyTemplateResponseMixin, generic.DetailView
                 mark_safe(
                     f"""
                     <h1>No Clinical Template Available</h1>
-                    <p>We do not have a clinical template available for { self.object.instrument } studies.  Please contact the WebCDI team to arrange one.</p>
+                    <p>We do not have a clinical template available for { self.object.instrument } studies.</p>
                     """,
                 ),
             )

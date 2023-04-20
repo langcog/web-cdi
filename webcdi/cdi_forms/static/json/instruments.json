@@ -23,7 +23,8 @@
 		"csv_file": "cdi_form_csv/cdi_forms/[English_CDI3].csv",
 		"json_data": "cdi_forms/form_data/English_CDI3_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/English_CDI3_scoring.json",
-		"demographics" : ["English_Split.json", "English_Centiment.json"]
+		"demographics" : ["English_Split.json", "English_Centiment.json"],
+		"benchmark" : "cdi_forms/form_data/benchmarking/English_CDI3_benchmark.csv"
 	},
 	{
 		"language": "English",
