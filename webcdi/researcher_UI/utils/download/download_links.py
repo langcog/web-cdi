@@ -43,7 +43,7 @@ def download_links(request, study_obj, administrations=None):
     ).replace("a" * 64 + "/", "")
     admin_data["link"] = test_url + admin_data["link"]
 
-    if study_obj.instrument.language in ["English"] and study_obj.form in ["WS", "WG"]:
+    if study_obj.instrument.language in ["English"] and study_obj.instrument.form in ["WS", "WG"]:
         admin_data = admin_data.append(
             {"study_name": "3rd Edition (Marchman et al., 2023)"}, ignore_index=True
         )

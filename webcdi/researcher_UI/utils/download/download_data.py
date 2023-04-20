@@ -166,7 +166,7 @@ def download_data(
     combined_data["other_languages"].replace("[]", "", inplace=True)
 
     # add footer
-    if study_obj.instrument.language in ["English"] and study_obj.form in ["WS", "WG"]:
+    if study_obj.instrument.language in ["English"] and study_obj.instrument.form in ["WS", "WG"]:
         combined_data = combined_data.append(
             {"study_name": "3rd Edition (Marchman et al., 2023)"}, ignore_index=True
         )
