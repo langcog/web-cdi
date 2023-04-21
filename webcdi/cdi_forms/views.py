@@ -14,7 +14,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.sites.shortcuts import get_current_site
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMessage, EmailMultiAlternatives
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
 from django.db.models import Max
@@ -24,12 +24,10 @@ from django.template import Context
 from django.template.loader import get_template
 from django.urls import reverse
 from django.utils import timezone, translation
+from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import CreateView, DetailView, UpdateView
-from django.core.mail import EmailMultiAlternatives
-from django.utils.html import strip_tags
-
 from ipware.ip import get_client_ip
 from researcher_UI.models import *
 
@@ -495,17 +493,17 @@ class CreateBackgroundInfoView(CreateView):
 
     def get_study(self):
         self.study = study.objects.get(id=int(self.kwargs["study_id"]))
-        
+
         # check if valid study and send email if not
         if not self.study.valid_code(self.study.researcher):
             # send email to remind researcher
-            
-            subject = 'WebCDI - Please purchase a licence'
-            from_email = settings.DEFAULT_FROM_EMAIL 
-            to =  f'{self.study.researcher.email}'
-            html_content = f''' 
+
+            subject = "WebCDI - Please purchase a licence"
+            from_email = settings.DEFAULT_FROM_EMAIL
+            to = f"{self.study.researcher.email}"
+            html_content = f""" 
                A parent has accessed an administration for study {self.study}.  Access to this form requires an active license, available for purchase through Brookes Publishing Co (<a href='https://brookespublishing.com/product/cdi' target='_blank'>https://brookespublishing.com/product/cdi</a>)"
-            '''
+            """
             text_content = strip_tags(html_content)
             msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
             msg.attach_alternative(html_content, "text/html")
@@ -1834,9 +1832,7 @@ def save_answer(request):
                         defaults={"value": value},
                     )
 
-    administration.objects.filter(url_hash=hash_id).update(
-        last_modified=timezone.now()
-    ) 
+    administration.objects.filter(url_hash=hash_id).update(last_modified=timezone.now())
     return HttpResponse(json.dumps([{}]), content_type="application/json")
 
 
@@ -1869,9 +1865,7 @@ def update_administration_data_item(request):
         administration_data.objects.get(
             administration=administration_instance, item_ID=request.POST["item"]
         ).delete()
-    administration.objects.filter(url_hash=hash_id).update(
-        last_modified=timezone.now()
-    )  
+    administration.objects.filter(url_hash=hash_id).update(last_modified=timezone.now())
     return HttpResponse(json.dumps([{}]), content_type="application/json")
 
 

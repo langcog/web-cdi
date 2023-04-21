@@ -21,7 +21,6 @@ class Demographic(models.Model):
         return f"{self.name}"
 
 
-
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
@@ -36,8 +35,6 @@ def update_user_profile(sender, instance, created, **kwargs):
 from django.contrib.auth.models import User
 
 User._meta.get_field("email")._unique = True
-
-
 
 
 def get_meta_header():  # Returns a list of variables for administration objects
@@ -94,9 +91,7 @@ class administration(models.Model):
         verbose_name="Administration number"
     )  # Ordinal number of tests given to this particular subject ID. For example, if this is Subject 30's third test, this field will have '3' stored
     url_hash = models.CharField(max_length=128, unique=True)  # Associated URL hash
-    scored = models.BooleanField(
-        default=False
-    )
+    scored = models.BooleanField(default=False)
     completed = (
         models.BooleanField()
     )  # Whether administration has been marked as completed
@@ -130,7 +125,6 @@ class administration(models.Model):
     opt_out = models.BooleanField(
         verbose_name="Participant opted out of broader sharing", default=None, null=True
     )
-
 
     class Meta:
         unique_together = (

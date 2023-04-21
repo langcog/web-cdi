@@ -243,5 +243,5 @@ def update_summary_scores(administration_instance):
                     f,
                     " (adjusted)",
                 )
-    administration_instance.scored=True
+    administration_instance.scored = True
     administration_instance.save()
