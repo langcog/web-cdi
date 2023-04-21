@@ -35,7 +35,6 @@ from researcher_UI.models import *
 
 from .forms import BackgroundForm, BackpageBackgroundForm, ContactForm
 from .models import *
-from .scores import update_summary_scores
 from .utils import get_demographic_filename
 
 # Get an instance of a logger
@@ -1278,8 +1277,6 @@ def cdi_form(request, hash_id):
                                 defaults={"value": value},
                             )
 
-            # Update the Summary Data
-            update_summary_scores(administration_instance)
             if "btn-save" in request.POST and request.POST["btn-save"] == _(
                 "Save"
             ):  # If the save button was pressed
@@ -1839,9 +1836,7 @@ def save_answer(request):
 
     administration.objects.filter(url_hash=hash_id).update(
         last_modified=timezone.now()
-    )  # Update administration object with date of last modification
-    # update_summary_scores(administration_instance)
-    # Return a response. An empty dictionary is still a 200
+    ) 
     return HttpResponse(json.dumps([{}]), content_type="application/json")
 
 
@@ -1876,8 +1871,7 @@ def update_administration_data_item(request):
         ).delete()
     administration.objects.filter(url_hash=hash_id).update(
         last_modified=timezone.now()
-    )  # Update administration object with date of last modification
-    # update_summary_scores(administration_instance)
+    )  
     return HttpResponse(json.dumps([{}]), content_type="application/json")
 
 
