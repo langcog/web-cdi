@@ -15,7 +15,7 @@ MAILTO="hjsmehta@gmail.com"
 30 * * * * root source /var/app/venv/*/bin/activate && export $(cat /opt/elasticbeanstalk/deployment/custom_env_var | xargs)  && /var/app/current/manage.py crontab_scoring
 40 * * * * root source /var/app/venv/*/bin/activate && export $(cat /opt/elasticbeanstalk/deployment/custom_env_var | xargs)  && /var/app/current/manage.py crontab_scoring
 50 * * * * root source /var/app/venv/*/bin/activate && export $(cat /opt/elasticbeanstalk/deployment/custom_env_var | xargs)  && /var/app/current/manage.py crontab_scoring
-60 * * * * root source /var/app/venv/*/bin/activate && export $(cat /opt/elasticbeanstalk/deployment/custom_env_var | xargs)  && /var/app/current/manage.py crontab_scoring
+00 * * * * root source /var/app/venv/*/bin/activate && export $(cat /opt/elasticbeanstalk/deployment/custom_env_var | xargs)  && /var/app/current/manage.py crontab_scoring
 0 1 1 * * root source /var/app/venv/*/bin/activate && export $(cat /opt/elasticbeanstalk/deployment/custom_env_var | xargs)  && /var/app/current/manage.py monthly_report
 0 0 * * 0 root source /var/app/venv/*/bin/activate && export $(cat /opt/elasticbeanstalk/deployment/custom_env_var | xargs)  && /var/app/current/manage.py weekly_reminder
 0 0 15 15 0 root source /var/app/venv/*/bin/activate && export $(cat /opt/elasticbeanstalk/deployment/custom_env_var | xargs)  && /var/app/current/manage.py update_summary_data -s 137
