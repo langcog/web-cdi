@@ -14,4 +14,4 @@ class CatResponse(models.Model):
     est_theta = models.FloatField(null=True)
 
     def __str__(self):
-        return self.administration
+        return f'{self.administration}'
