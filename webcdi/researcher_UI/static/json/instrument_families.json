@@ -6,7 +6,7 @@
 		"name": "English (American) Short",
 		"chargeable": 0
 	},	{
-		"name": "English (American) CAT",
+		"name": "English (American/Canadian) CAT",
 		"chargeable": 1
 	},
 	{
@@ -23,14 +23,6 @@
 	},
 	{
 		"name": "Hebrew Long",
-		"chargeable": 0
-	},
-    {
-		"name": "French (Canadian) CAT",
-		"chargeable": 0
-	},
-	{
-		"name": "English (Canadian) Long",
 		"chargeable": 0
 	},
 	{

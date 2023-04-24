@@ -227,7 +227,7 @@
 	},
 	{
 		"language": "English",
-		"family": "English (American) CAT",
+		"family": "English (American/Canadian) CAT",
 		"form": "CAT",
 		"verbose_name": "English (American) CAT",
 		"min_age": 12,
@@ -296,18 +296,6 @@
 		"scoring_json" : "",
 		"starting_words" : "cdi_form_csv/cat_forms/starting_words/[French_Ages_CAT].csv",
 		"demographics" : ["French_CAT.json", "French_with_health.json", "French_without_health.json"]
-	},{
-		"language": "French Quebec",
-		"family": "French (Canadian) CAT",
-		"form": "CAT",
-		"verbose_name": "French (Canadian) CAT",
-		"min_age": 12,
-		"max_age": 36,
-		"csv_file": "cdi_form_csv/cat_forms/[English_CAT].csv",
-		"json_data": "",
-		"scoring_json" : "",
-		"starting_words" : "cdi_form_csv/cat_forms/starting_words/[French_Ages_CAT].csv",
-		"demographics" : ["French_Quebec_Split.json"]
 	},{
 		"language": "Spanish",
 		"family": "Spanish (Mexican) CAT",
