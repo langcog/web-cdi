@@ -24,9 +24,10 @@ TEMPLATE_DEBUG = False
 
 try:
     from .secret_settings import *
+
     print("Importing Secret Settings")
 except Exception as e:
-    #print(f"Importing Local Settings with error {e}")
+    # print(f"Importing Local Settings with error {e}")
     from .local_settings import *
 
 
