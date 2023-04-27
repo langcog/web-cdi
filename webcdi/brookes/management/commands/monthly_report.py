@@ -5,7 +5,7 @@ from brookes.models import BrookesCode
 from django.conf import settings
 from django.core.mail import EmailMessage
 from django.core.management.base import BaseCommand
-
+from django.contrib.sites.models import Site
 
 class Command(BaseCommand):
     help = "Sends monthly report to settings.BROOKES_EMAIL"
@@ -43,7 +43,7 @@ class Command(BaseCommand):
                 )
 
         email_message = EmailMessage(
-            subject="WebCDI Monthly Report",
+            subject=f"WebCDI Monthly Report - {Site.objects.get(id=settings.SITE_ID).name}",
             body=f"Please find attached monthly report {filename_csv}",
             to=[self.to_email],
         )
