@@ -3,9 +3,10 @@ import datetime
 
 from brookes.models import BrookesCode
 from django.conf import settings
+from django.contrib.sites.models import Site
 from django.core.mail import EmailMessage
 from django.core.management.base import BaseCommand
-from django.contrib.sites.models import Site
+
 
 class Command(BaseCommand):
     help = "Sends monthly report to settings.BROOKES_EMAIL"
