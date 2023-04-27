@@ -4,6 +4,7 @@ import datetime
 from brookes.filters import DropdownFilter
 from brookes.models import BrookesCode
 from django.conf import settings
+from django.contrib.sites.models import Site
 from django.contrib import admin, messages
 from django.core.mail import EmailMessage
 from rangefilter.filters import DateRangeFilter
@@ -24,7 +25,7 @@ def create_50_codes(modeladmin, request, queryset):
             writer.writerow([x.code])
 
     email_message = EmailMessage(
-        subject="New WebCDI Codes",
+        subject=f"New WebCDI Codes - {Site.objects.get(id=settings.SITE_ID).name}",
         body=f"Please find attached new WebCDI Codes {filename_csv}",
         to=[settings.BROOKES_EMAIL],
     )
