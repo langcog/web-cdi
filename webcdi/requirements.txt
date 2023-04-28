@@ -45,6 +45,7 @@ django-ipware==4.0.0
 django-js-asset==1.2.2
 django-localflavor==3.1
 django-modeltranslation==0.17.3
+django-registration==3.3
 django-ses==2.3.1
 django-storages==1.12.3
 django-tables2==2.4.1
@@ -62,7 +63,7 @@ importlib-metadata==4.8.2
 importlib-resources==5.4.0
 ipaddress==1.0.23
 jmespath==0.10.0
-joblib==1.1.0
+joblib==1.1.1
 json-table-schema==0.2.1
 json-tricks==3.15.5
 jsonschema==4.2.1
@@ -83,7 +84,7 @@ psycopg2-binary==2.9.3
 pycparser==2.21
 pydyf==0.1.2
 PyNaCl==1.4.0
-pyOpenSSL>21.1.0
+pyOpenSSL==23.1.1
 pyparsing==3.0.6
 PyPDF2==1.27.5
 pyphen==0.11.0
@@ -106,7 +107,7 @@ six==1.16.0
 sniffio==1.2.0
 sortedcontainers==2.4.0
 soupsieve==2.3.1
-sqlparse==0.4.2
+sqlparse==0.4.4
 tabulate==0.8.9
 termcolor==1.1.0
 texttable==1.6.4

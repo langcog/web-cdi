@@ -1,13 +1,14 @@
 from django.db.models.signals import post_save, m2m_changed
 from django.dispatch import receiver
 
-from registration.models import RegistrationProfile
+#from registration.models import RegistrationProfile
 from researcher_UI.models import researcher
 
 from django.core.mail import send_mail
 from django.contrib.sites.models import Site
 from django.conf import settings
 
+"""
 @receiver(post_save, sender=RegistrationProfile)
 def notify_admin(sender, instance, created, **kwargs):
     '''
@@ -24,6 +25,7 @@ def notify_admin(sender, instance, created, **kwargs):
             [settings.USER_ADMIN_EMAIL],
             fail_silently=False,
         )
+"""
 
 @receiver(post_save, sender=researcher)
 def update_instruments(sender, instance, **kwargs):

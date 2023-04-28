@@ -11,8 +11,10 @@
 {% blocktrans %}USERNAME: {{ user }}{% endblocktrans %}
 {% blocktrans %}PASSWORD: {{ password }}{% endblocktrans %}
 
-http://{{ site.domain }}{% url 'researcher_ui:console' %}
+{{ request.scheme }}://{{ request.get_host }}{% url 'django_registration_activate' activation_key %}
+
 {% else %}
+
 {% blocktrans with site.name as site_name %}Your account at {{ site_name }} was successfully activated by the Web-CDI Team{% endblocktrans %}
 
 {% trans 'Please click the following url to login.' %}
@@ -20,5 +22,5 @@ http://{{ site.domain }}{% url 'researcher_ui:console' %}
 {% trans '::Your account information::' %}
 {% blocktrans %}USERNAME: {{ user }}{% endblocktrans %}
 
-http://{{ site.domain }}{% url 'researcher_ui:console' %}
+{{ request.scheme }}://{{ request.get_host }}{% url 'django_registration_activate' activation_key %}
 {% endif %}

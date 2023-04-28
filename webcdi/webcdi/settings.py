@@ -75,8 +75,8 @@ INSTALLED_APPS = (
     "bootstrap4",
     "bootstrap3",
     "form_utils",
-    "registration",
-    "supplementtut",
+    #"registration",
+    #"supplementtut",
     "django.contrib.sites",
     #'axes',
     #'csvimport.app.CSVImportConf',
@@ -231,7 +231,7 @@ DATE_INPUT_FORMATS = (
 
 
 REGISTRATION_SUPPLEMENT_CLASS = "supplementtut.models.MyRegistrationSupplement"
-ACCOUNT_ACTIVATION_DAYS = 3
+ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_OPEN = True
 
 AXES_LOGIN_FAILURE_LIMIT = 4

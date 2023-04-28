@@ -1,0 +1,46 @@
+{% extends 'researcher_UI/base.html' %}
+{% load i18n static %}
+
+{% block title %}{% trans 'Registration' %}{% endblock %}
+
+
+{% block main %}
+{{ block.super }}
+
+<div style="margin-top:100px; margin-bottom:10rem;">
+  <div class="container">
+      <!--Start login card-->
+      <div class="login-card col-12" align="center" >
+          <h1>Registration</h1><br>
+
+          <!--End login card-->
+          <form action="{{ app_path }}" method="post" id="login-form">
+            {% csrf_token %}
+            {% include 'registration/alert_none_fields.html' %}
+            
+            {% for field in form %}
+              <div class="row">
+                  <label class="col-12" for="{{ field.label }}" style="font-family:Arial, Helvetica, sans-serif;">{{ field.label }} <span style="color: red;font-family:none"> * </span></label>
+                  <div class="col-12">
+                    {{ field }}
+                  </div>
+                  
+                    {% with errors=field.errors %}
+                      {% include 'registration/alert.html' %}
+                    {% endwith%}
+              </div>
+            {%  endfor  %}
+
+              <div  class="input-row">
+                <input type="submit" name="login" style="font-size: 16px;" class="btn btn-primary" value="{% trans "Register" %}">
+              </div>
+          </form>
+          
+          <div class="login-help input-row">
+              <a href="{% url 'login' %}" >Do you already have an account?  Login.</a> <br>
+          </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

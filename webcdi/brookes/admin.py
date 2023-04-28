@@ -4,8 +4,8 @@ import datetime
 from brookes.filters import DropdownFilter
 from brookes.models import BrookesCode
 from django.conf import settings
-from django.contrib.sites.models import Site
 from django.contrib import admin, messages
+from django.contrib.sites.models import Site
 from django.core.mail import EmailMessage
 from rangefilter.filters import DateRangeFilter
 
