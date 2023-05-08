@@ -4,15 +4,16 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('researcher_UI', '0070_researcher_allowed_instrument_families'),
+        ("researcher_UI", "0070_researcher_allowed_instrument_families"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='instrumentfamily',
-            options={'ordering': ['name'], 'verbose_name_plural': 'Instrument Families'},
+            name="instrumentfamily",
+            options={
+                "ordering": ["name"],
+                "verbose_name_plural": "Instrument Families",
+            },
         ),
-
     ]
