@@ -64,7 +64,7 @@ else:
             "USER": "webcdi-admin",
             "PASSWORD": "bears1stlexicon",
             #'HOST': 'webcdiadmin.canyiscnpddk.us-west-2.rds.amazonaws.com',
-            "HOST": "webcdi-dev-argentinian.canyiscnpddk.us-west-2.rds.amazonaws.com",
+            "HOST": "webcdi-local-2.canyiscnpddk.us-west-2.rds.amazonaws.com",
             "PORT": "5432",
         }
     }

@@ -14,4 +14,5 @@ class Migration(migrations.Migration):
             name='instrumentfamily',
             options={'ordering': ['name'], 'verbose_name_plural': 'Instrument Families'},
         ),
+
     ]
