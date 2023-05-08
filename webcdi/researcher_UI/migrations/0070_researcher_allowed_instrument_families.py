@@ -17,13 +17,6 @@ def add_families(apps, schema_editor):
             encoding="utf8",
         )
     )
-    var_safe = lambda s: "".join(
-        [
-            c
-            for c in "_".join(s.split())
-            if c in string.ascii_letters + string.digits + "_"
-        ]
-    )
 
     for family in families:
         family_name = family["name"]
