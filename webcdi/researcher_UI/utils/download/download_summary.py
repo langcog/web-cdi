@@ -1,16 +1,14 @@
-from django.http import HttpResponse, HttpResponseServerError
-from researcher_UI.forms import *
-from researcher_UI.models import administration
-from cdi_forms.models import BackgroundInfo
-import pandas as pd
 import numpy as np
-from django.urls import reverse
+import pandas as pd
+from cdi_forms.models import BackgroundInfo
 from django.contrib.sites.shortcuts import get_current_site
-from django.utils.translation import ugettext_lazy as _
-from researcher_UI.utils.format_admin import format_admin_header, format_admin_data
-from researcher_UI.utils.study_score import get_study_scores
-from researcher_UI.utils.score_headers import get_score_headers
+from django.http import HttpResponse, HttpResponseServerError
+from django.urls import reverse
+from researcher_UI.models import administration
 from researcher_UI.utils.background_header import get_background_header
+from researcher_UI.utils.format_admin import format_admin_data, format_admin_header
+from researcher_UI.utils.score_headers import get_score_headers
+from researcher_UI.utils.study_score import get_study_scores
 
 
 def download_summary(request, study_obj, administrations=None):
@@ -105,6 +103,15 @@ def download_summary(request, study_obj, administrations=None):
     combined_data = combined_data.replace("None", "", regex=True)
     combined_data["child_ethnicity"].replace("[]", "", inplace=True)
     combined_data["other_languages"].replace("[]", "", inplace=True)
+
+    # add footer
+    if study_obj.instrument.language in ["English"] and study_obj.instrument.form in [
+        "WS",
+        "WG",
+    ]:
+        combined_data = combined_data.append(
+            {"study_name": "3rd Edition (Marchman et al., 2023)"}, ignore_index=True
+        )
 
     # Turn pandas dataframe into a CSV
     combined_data.to_csv(response, encoding="utf-8", index=False)

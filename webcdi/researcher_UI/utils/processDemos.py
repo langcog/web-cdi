@@ -1,10 +1,12 @@
-from django.conf import settings
+import codecs
+import datetime
+import json
+import re
+
 import pandas as pd
-from researcher_UI.utils.make_str import make_str_fun
-import codecs, json, datetime, re
 from cdi_forms.models import BackgroundInfo, Zipcode
-import pandas as pd
 from django.conf import settings
+from researcher_UI.utils.make_str import make_str_fun
 
 
 def processDemos_fun(csv_file, demo_list=None):

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html style="background: #29A9E6;">
+<html >
 <head lang="en">
 
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -33,7 +33,7 @@
 </head>
 <body>
 
-<div style="background: #29A9E6;">
+<div >
     <div class="container" style="margin-top: 50px;">
         <div class="flex-row">
             <img width="400px" class="rounded mx-auto d-block" src="{% static 'researcher_UI/images/logo_black.png' %}">
@@ -45,17 +45,27 @@
         </div>
         <br>
         <div class="flex-row d-flex justify-content-center">
-            <a class="btn btn-light" href="/interface" role="button">Researcher Login</a>
-            <a class="btn btn-light" href="/wcadmin" role="button">Admin Login</a>
+            <a class="btn btn-primary" href="{% url 'researcher_ui:console' %}" role="button">User Login</a>
         </div>
         <br><br>
         
         <div class="flex-row" style="font-size: 18px;">
             <p class="text-center">
-                Web-CDI is sponsored by the MacArthur-Bates Communicative Development Inventory (CDI) Advisory Board and distributed through Brookes Publishing Company.
+                Web-CDI is sponsored by the MacArthur-Bates Communicative Development Inventory (CDI) Advisory Board. 
+                The English long forms (American/Canadian English WG and WS), Mexican Spanish long forms (WG and WS), English CDI III, 
+                and English/Mexican Spanish CDI-CAT are distributed through Brookes Publishing Company and require an access code that can be purchased at 
+                <a href="https://brookespublishing.com/product/cdi">https://brookespublishing.com/product/cdi</a>.
+                
+                <strong>If you are having any issues with your code, please contact the Brookes support team at: <a href="https://support.brookespublishing.com/">https://support.brookespublishing.com/</a>.</strong>
             </p>
-            <p class="text-center">If you're a parent, please follow the link sent to you by a researcher to fill out an MB-CDI form. <wbr>If you lost your link, please contact your researcher or the <a href="mailto:{{ CONTACT_EMAIL }}">Web-CDI team</a>.</p>
-            <p class="text-center">If you're a researcher interested in using WebCDI, please  <a class="btn btn-primary" href="{% url 'signup' %}">Register Here</a>.</p>
+            <p class="text-center"> 
+                More information about the English CDI suite of instruments can be found in the MacArthur-Bates User's Guide and Technical Manual, 
+                3rd Edition (Marchman, Dale, and Fenson, 2023), also available from Brookes Publishing Company. 
+                See deMayo et al. (2021) <span style="font-style: italic">Language Development Research </span> for more information about Web-CDI; 
+                See Kachergis et al. (2022) <span style="font-style: italic">Journal of Speech, Language & Hearing Research</span> for more information about CDI-CAT.
+            </p>
+            <p class="text-center">If you are having technical difficulties with the site, please contact the Web-CDI team as <a href="mailto:webcdi-contact@stanford.edu">webcdi-contact@stanford.edu</a>.</p>
+            <p class="text-center">If you're a researcher or clinician interested in using WebCDI, please  <a class="btn btn-primary" href="{% url 'django_registration_register' %}">Register Here</a>.</p>
             <p class="text-center">For more information about the MB-CDI, <a href="{{ MORE_INFO_LINK }}" target="_blank">click here</a>.</p>
         </div>
     </div>

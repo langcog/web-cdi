@@ -1,0 +1,29 @@
+{% extends 'researcher_UI/base.html' %}
+{% load static %}
+
+{% block main %}
+    <div class='container login-card d-flex justify-content-center' style="margin-top:100px; padding-left:3rem;">
+        <div class='row'>
+            <div class="col-12"> 
+                <form action="." method="post">
+                    <h1> Please enter a valid code for {{ instrument_family }}</h1>
+                    {% csrf_token %}
+                    <div class="col-12">
+
+                        {{ form.code.label }}: 
+                        {{ form.code }}
+                        {% for error in form.code.errors %}
+                            <p style="color: red">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+
+                    <div class="col-12 justify-content-center">
+                        <input type='submit' class='btn' style="width:200px;" name='cancel' value="Cancel">
+                        <input type="submit" class="btn btn-primary" style="width:200px;" value="Save">
+                    </div>
+                </form>
+            </div>
+        <div>
+    </div>
+
+{% endblock %}

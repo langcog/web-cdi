@@ -1,0 +1,53 @@
+{% extends 'researcher_UI/base.html' %}
+{% load i18n %}
+{% load static %}
+	{% block title %}{% trans 'Login' %}{% endblock %}
+
+
+{% load crispy_forms_tags %}
+
+{% block main %}
+{{ block.super }}
+
+<div style="margin-top:100px; margin-bottom:10rem;">
+  <div class="container">
+      <!--Start login card-->
+      <div class="login-card col-12" align="center" >
+          <h1>Login</h1><br>
+
+          <!--End login card-->
+          <form action="{{ app_path }}" method="post" id="login-form">
+            {% csrf_token %}
+            {% include 'registration/alert_none_fields.html' %}
+            
+            {% for field in form %}
+              <div class="input-row">
+                  <label for="{{ field.label }}" style="font-family:Arial, Helvetica, sans-serif;">{{ field.label }}  <span style="color: red;font-family:none"> * </span></label>
+                    {{ field }}
+                    {% with errors=field.errors %}
+                      {% include 'registration/alert.html' %}
+                    {% endwith%}
+              </div>
+            {%  endfor  %}
+
+              <div  class="input-row">
+                <input type="submit" name="login" class="btn btn-primary" value="{% trans "Log in" %}">
+              </div>
+          </form>
+          
+          <div class="login-help input-row">
+              <a  href="{% url 'password_reset' %}" style="color:#4d90fe; font-size:16px;font-family:Arial, Helvetica, sans-serif;" >Forgot your password? Click here to reset.</a>
+              <br>
+                OR
+              <br>
+              <a href="{% url 'django_registration_register' %}" style="color:#4d90fe; font-size:16px;font-family:Arial, Helvetica, sans-serif;">Don't have an account yet? Click here to register.</a> <br>
+          </div>
+    </div>
+
+  </div>
+  <script type="text/javascript">
+    document.getElementById('id_username').focus()
+    </script>
+</div>
+
+{% endblock %}

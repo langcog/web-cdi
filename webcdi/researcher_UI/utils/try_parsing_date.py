@@ -1,5 +1,6 @@
 import datetime
 
+
 def try_parsing_date_fun(text):
     date_formats = (
         "%Y.%m.%d",

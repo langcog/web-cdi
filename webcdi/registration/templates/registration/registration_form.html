@@ -1,34 +1,10 @@
-{% extends "admin/admin_base_site.html" %}
+{% extends "researcher_UI/base.html" %}
 {% load i18n %}
 {% load crispy_forms_tags static %}
 
-
-{% block breadcrumbs %}
-<a class="row" align="center" href="/">
-    <img width="150px" src="{% static 'researcher_UI/images/logo.png' %}">
-  </a>
-  
-  <!--End Logo-->
-<div class="breadcrumbs container bs-docs-container" style="padding-top: 60px;">
-<a href="{% url 'console' %}">{% trans 'Home' %}</a>
-&rsaquo; {% trans 'Password reset' %}
-</div>
-{% endblock %}
-
-{% block title %}{{ title }}{% endblock %}
+{% block title %}WebCDI Registration{% endblock %}
 {% block content_title %}<div class="container bs-docs-container"><h1>{{ "" }}</h1></div>{% endblock %}
-{% block content %}
-<style>
-    .form-reset-pass{
-        padding: 40px;
-        width: 100%;
-        margin-bottom: 10rem;
-        border-radius: 10px;
-        overflow: scroll;
-        background: #29A9E6;
-      
-      }
-</style>
+{% block main %}
 <div id="content-main" class="container bs-docs-container">
 
     <form method="post" action="" class="form-reset-pass col-md-6 col-sm-12">

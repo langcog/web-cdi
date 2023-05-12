@@ -2,6 +2,7 @@ import re
 
 from django.conf import settings
 from django.http import HttpResponseRedirect
+from django.utils import translation
 from django.utils.deprecation import MiddlewareMixin
 from django.utils.http import is_safe_url
 
@@ -24,9 +25,6 @@ class LoginRequiredMiddleware(MiddlewareMixin):
                     redirect_to = f"{settings.LOGIN_URL}?next={request.path_info}"
 
                 return HttpResponseRedirect(redirect_to)
-
-
-from django.utils import translation
 
 
 class AdminLocaleMiddleware(MiddlewareMixin):

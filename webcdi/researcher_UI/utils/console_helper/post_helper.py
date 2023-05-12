@@ -1,8 +1,9 @@
-import os
-from researcher_UI.models import administration
-from researcher_UI.utils.random_url_generator import random_url_generator
-from django.conf import settings
 import datetime
+
+from django.conf import settings
+from django.contrib import messages
+from django.utils.safestring import mark_safe
+from researcher_UI.models import administration
 from researcher_UI.utils.download import (
     download_cat_data,
     download_cat_summary,
@@ -12,36 +13,47 @@ from researcher_UI.utils.download import (
     download_links,
     download_summary,
 )
+from researcher_UI.utils.random_url_generator import random_url_generator
+
 
 def post_condition(request, ids, study_obj):
     if "administer-selected" in request.POST:
-        num_ids = map(int, ids)  # Force numeric IDs into a list of integers
-        new_administrations = []
-        sids_created = set()
-
-        for nid in num_ids:  # For each ID number
-            admin_instance = administration.objects.get(id=nid)
-            sid = admin_instance.subject_id
-            if sid in sids_created:
-                continue
-            old_rep = administration.objects.filter(
-                study=study_obj, subject_id=sid
-            ).count()
-            new_administrations.append(
-                administration(
-                    study=study_obj,
-                    subject_id=sid,
-                    repeat_num=old_rep + 1,
-                    url_hash=random_url_generator(),
-                    completed=False,
-                    due_date=datetime.datetime.now() + datetime.timedelta(days=14),
-                )
+        if not study_obj.valid_code(request.user):
+            messages.warning(
+                request,
+                mark_safe(
+                    "Access to this form requires an active license, available for purchase through Brookes Publishing Co (<a href='https://brookespublishing.com/product/cdi' target='_blank'>https://brookespublishing.com/product/cdi</a>)"
+                ),
             )
-            sids_created.add(sid)
+            return None
+        else:
+            num_ids = map(int, ids)  # Force numeric IDs into a list of integers
+            new_administrations = []
+            sids_created = set()
 
-        administration.objects.bulk_create(new_administrations)
+            for nid in num_ids:  # For each ID number
+                admin_instance = administration.objects.get(id=nid)
+                sid = admin_instance.subject_id
+                if sid in sids_created:
+                    continue
+                old_rep = administration.objects.filter(
+                    study=study_obj, subject_id=sid
+                ).count()
+                new_administrations.append(
+                    administration(
+                        study=study_obj,
+                        subject_id=sid,
+                        repeat_num=old_rep + 1,
+                        url_hash=random_url_generator(),
+                        completed=False,
+                        due_date=datetime.datetime.now() + datetime.timedelta(days=14),
+                    )
+                )
+                sids_created.add(sid)
 
-    elif "delete-selected" in request.POST: 
+            administration.objects.bulk_create(new_administrations)
+
+    elif "delete-selected" in request.POST:
         num_ids = list(set(map(int, ids)))
         administration.objects.filter(id__in=num_ids).delete()
 
@@ -60,6 +72,20 @@ def post_condition(request, ids, study_obj):
             )
         else:
             return download_data.download_data(request, study_obj, administrations)
+
+    elif (
+        "download-selected-adjusted" in request.POST
+    ):  # If 'Download Selected Data' was clicked
+        num_ids = list(set(map(int, ids)))  # Force IDs into a list of integers
+        administrations = administration.objects.filter(id__in=num_ids)
+        if study_obj.instrument.form in settings.CAT_FORMS:
+            return download_cat_data.download_cat_data(
+                request, study_obj, administrations
+            )
+        else:
+            return download_data.download_data(
+                request, study_obj, administrations, adjusted=True
+            )
 
     elif "download-selected-summary" in request.POST:
         num_ids = list(set(map(int, ids)))  # Force IDs into a list of integers
@@ -85,6 +111,19 @@ def post_condition(request, ids, study_obj):
             )
         else:
             return download_data.download_data(request, study_obj, administrations)
+
+    elif (
+        "download-study-csv-adjusted" in request.POST
+    ):  # If 'Download Data' button is clicked
+        administrations = administration.objects.filter(study=study_obj)
+        if study_obj.instrument.form in settings.CAT_FORMS:
+            return download_cat_data.download_cat_data(
+                request, study_obj, administrations
+            )
+        else:
+            return download_data.download_data(
+                request, study_obj, administrations, adjusted=True
+            )
 
     elif "download-summary-csv" in request.POST:
         administrations = administration.objects.filter(study=study_obj)
@@ -112,9 +151,3 @@ def post_condition(request, ids, study_obj):
 
     elif "download-dictionary" in request.POST:
         return download_dictionary.download_dictionary(request, study_obj)
-    elif "view_all" in request.POST:  # If 'Show All' or 'Show 20' button is clicked
-        if request.POST["view_all"] == "Show All":
-            num_per_page = administration.objects.filter(study=study_obj).count()
-        elif request.POST["view_all"] == "Show 20":
-            num_per_page = 20  # Set num_per_page to 20
-

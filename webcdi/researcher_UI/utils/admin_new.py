@@ -1,10 +1,12 @@
+import datetime
+import re
+
+import numpy as np
 import pandas as pd
 from django.db.models import Max
-import numpy as np
-import re, datetime
+from django.urls import reverse
 from researcher_UI.models import administration, study
 from researcher_UI.utils.random_url_generator import random_url_generator
-from django.urls import reverse
 
 
 def admin_new_fun(request, permitted, study_name, study_obj):
@@ -82,7 +84,6 @@ def admin_new_fun(request, permitted, study_name, study_obj):
         if validity:
             test_period = int(study_obj.test_period)
             if raw_ids_csv:
-
                 subject_ids = list(np.unique(ids_to_add.tolist()))
 
                 for sid in subject_ids:

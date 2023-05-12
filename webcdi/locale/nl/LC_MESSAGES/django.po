@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-14 14:03+0000\n"
+"POT-Creation-Date: 2023-03-17 15:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: cdi_forms/forms.py:37 cdi_forms/forms.py:38 cdi_forms/models.py:628
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:150
-#: cdi_forms/templates/cdi_forms/cdi_base.html:152
+#: cdi_forms/templates/cdi_forms/cdi_base.html:160
 msgid "No"
 msgstr "Nee"
 
@@ -1652,7 +1652,7 @@ msgstr "Achtergrondinformatie"
 #: cdi_forms/templates/cdi_forms/background_info.html:71
 #: cdi_forms/templates/cdi_forms/backpage_info.html:48
 #: cdi_forms/templates/cdi_forms/cdi_form.html:339
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:282
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:370
 #: cdi_forms/templates/cdi_forms/study_group.html:113
 msgid "Form unavailable. Contact admin."
 msgstr "De vragenlijst is niet beschikbaar. Neem contact op met de beheerder."
@@ -1681,7 +1681,7 @@ msgstr ""
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:31
 #: cdi_forms/templates/cdi_forms/expired.html:32
 #: cdi_forms/templates/cdi_forms/overflow.html:37
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:162
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:247
 msgid "MB-CDI Lab Logo"
 msgstr "MB-CDI Lab logo"
 
@@ -1735,7 +1735,7 @@ msgstr ""
 "vinden. We zijn heel blij met uw deelname!"
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:52
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:231
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:316
 msgid "Click to complete the study"
 msgstr ""
 
@@ -1830,39 +1830,39 @@ msgstr "Welke verzorgers wonen er samen met het kind?"
 msgid "* or word used in your family"
 msgstr ""
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:62
+#: cdi_forms/templates/cdi_forms/cdi_base.html:70
 msgid "Instructions: "
 msgstr "Instructies:"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:66
+#: cdi_forms/templates/cdi_forms/cdi_base.html:74
 msgid "This form can be filled any time before the due date."
 msgstr ""
 "De vragenlijst kan op ieder moment vóór de uiterlijke datum worden ingevuld."
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:67
+#: cdi_forms/templates/cdi_forms/cdi_base.html:75
 msgid ""
 "It can also be saved at any time and resumed later by using the same link"
 msgstr ""
 "U kunt de vragenlijst tussendoor opslaan en op een ander moment verdergaan "
 "met invullen. Hiervoor kunt u dezelfde link gebruiken"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:67
+#: cdi_forms/templates/cdi_forms/cdi_base.html:75
 msgid "create bookmark"
 msgstr "u kunt hier een bladwijzer voor deze link maken"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:68
+#: cdi_forms/templates/cdi_forms/cdi_base.html:76
 msgid "After the form is submitted, it cannot be altered."
 msgstr ""
 "Gebruik de knoppen onderaan de vragenlijst om naar de volgende/vorige pagina "
 "te gaan. Gebruik niet de \"terug\" en \"vooruit\" knoppen van uw browser."
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:69
+#: cdi_forms/templates/cdi_forms/cdi_base.html:77
 msgid "The form also cannot be altered after the due date."
 msgstr ""
 "U kunt de tab- en de pijltjestoetsen gebruiken om snel naar de volgende/"
 "vorige vraag te gaan en deze te beantwoorden."
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:70
+#: cdi_forms/templates/cdi_forms/cdi_base.html:78
 msgid ""
 "Please use the navigation buttons below. Do not use the \"back\" and "
 "\"forward\" buttons on your browser."
@@ -1870,33 +1870,33 @@ msgstr ""
 "Nadat de ingevulde vragenlijst eenmaal is verstuurd, kan hij niet meer "
 "aangepast worden."
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:71
+#: cdi_forms/templates/cdi_forms/cdi_base.html:79
 msgid ""
 "You can use the tab button and arrows keys to quickly navigate and answer "
 "questions."
 msgstr "U kunt de vragenlijst na de uiterlijke invuldatum niet meer aanpassen."
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:99
+#: cdi_forms/templates/cdi_forms/cdi_base.html:107
 msgid "Due date"
 msgstr "Uiterlijk invullen voor"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:104
+#: cdi_forms/templates/cdi_forms/cdi_base.html:112
 msgid "Show waiver of documentation"
 msgstr "Laat toestemmingsverklaring zien"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:109
+#: cdi_forms/templates/cdi_forms/cdi_base.html:117
 msgid "Reach out to the Web-CDI Team!"
 msgstr "Neem contact op met het Web-CDI Team"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:153
+#: cdi_forms/templates/cdi_forms/cdi_base.html:161
 msgid "Okay"
 msgstr "Ik geef toestemming"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:166
+#: cdi_forms/templates/cdi_forms/cdi_base.html:174
 msgid "Waiver Denied"
 msgstr "Ik geef geen toestemming"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:170
+#: cdi_forms/templates/cdi_forms/cdi_base.html:178
 msgid ""
 "Thank you for your response. We are unable to continue. Please close the "
 "window. If you would like, you may review the Waiver."
@@ -1904,7 +1904,7 @@ msgstr ""
 "Dank u voor uw antwoord. U kunt het scherm sluiten. U kunt de "
 "toestemmingsverklaring opnieuw bekijken, mocht u dat willen."
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:173
+#: cdi_forms/templates/cdi_forms/cdi_base.html:181
 msgid "Review Waiver"
 msgstr "Toestemmingsverklaring opnieuw bekijken"
 
@@ -2126,7 +2126,7 @@ msgstr ""
 "opnemen met de onderzoeker."
 
 #: cdi_forms/templates/cdi_forms/overflow.html:40
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:168
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:253
 msgid "Thank you!"
 msgstr "Bedankt!"
 
@@ -2180,17 +2180,31 @@ msgstr ""
 msgid "Interesting tidbits learned from how your child speaks!"
 msgstr "Interessante weetjes geleerd door hoe uw kind praat!"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:77
-#, python-format
-msgid "Words Produced (%%)"
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:78
+#, fuzzy, python-format
+#| msgid "Words Produced (%%)"
+msgid "Words Produced in Category (%%)"
 msgstr "Percentage woorden wat uw kind kan zeggen (%%)"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:117
-#, python-format
-msgid "Words Understood (%%)"
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:116
+#, fuzzy, python-format
+#| msgid "Words Produced (%%)"
+msgid "Words Produced for Child (%%)"
+msgstr "Percentage woorden wat uw kind kan zeggen (%%)"
+
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:157
+#, fuzzy, python-format
+#| msgid "Words Understood (%%)"
+msgid "Words Understood in Category(%%)"
 msgstr "Percentage begrepen woorden (%%)"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:171
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:194
+#, fuzzy, python-format
+#| msgid "Words Understood (%%)"
+msgid "Words Understood for Child (%%)"
+msgstr "Percentage begrepen woorden (%%)"
+
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:256
 msgid ""
 "Thank you for taking the time to complete the MacArthur-Bates Communicative "
 "Development Inventory (CDI). With the help of parents and caregivers like "
@@ -2219,7 +2233,7 @@ msgstr ""
 "stanford.edu/\" target=\"_blank\">hier</a> meer informatie over de CDI "
 "vinden. We zijn heel blij met uw deelname!"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:178
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:263
 #, python-format
 msgid ""
 "We're sorry but it looks like we have run out of Amazon.com Gift Cards! "
@@ -2230,7 +2244,7 @@ msgstr ""
 "\"%(contact_url)s\" target=\"_blank\">Neem contact op.</a> en wij proberen "
 "het probleem zo snel mogelijk op te lossen."
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:183
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:268
 msgid ""
 "Thank you for participating in our Web-CDI project! It is our pleasure to "
 "send you this Amazon.com Gift Card that can be redeemed towards millions of "
@@ -2243,15 +2257,15 @@ msgstr ""
 "wilt u een printscreen van deze pagina maken voor om later op terug te "
 "komen--u heeft de code hieronder nodig."
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:187
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:272
 msgid "Gift Card Amount"
 msgstr "Waarde van cadeaubon"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:188
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:273
 msgid "Claim Code"
 msgstr "Code"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:192
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:277
 #, python-format
 msgid ""
 "To redeem your gift card, visit <a href=\"%(redeem_url)s\" target=\"_blank"
@@ -2263,49 +2277,50 @@ msgstr ""
 "\">%(legal_url)s\" target=\"_blank\">www.amazon.com/gc-legal</a> voor "
 "restricties."
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:216
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:301
 msgid "Graph My Data!"
 msgstr "Grafiek van mijn gegevens"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:222
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:307
 msgid "Show Me My Answers"
 msgstr "Achtergrondvragen weergeven"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:226
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:311
 msgid "Print My Answers"
 msgstr "Download mijn antwoorden"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:248
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:252
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:257
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:333
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:337
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:342
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:346
 msgid "Save as PDF"
 msgstr "Opslaan als PDF"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:359
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:447
 msgid "My child says PPP words and understands UUU words."
 msgstr "Mijn kind zegt PPP woorden en begrijpt UUU woorden."
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:361
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:449
 msgid "My child says PPP words."
 msgstr "Mijn kind zegt PPP woorden."
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:363
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:451
 msgid "My child understands UUU words."
 msgstr "Mijn kind begrijpt UUU woorden."
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:502
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:590
 msgid "My child produces the most words in the bestProdCat category."
 msgstr "Mijn kind zegt de meeste woorden van de bestProdCat categorie."
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:506
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:594
 msgid "My child understands the most words in the bestCompCat category."
 msgstr "Mijn kind begrijpt de meeste woorden van de bestCompCat categorie."
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:592
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:680
 msgid "The hardest word my child says is INSERTWORDHERE."
 msgstr "Het moeilijkste woord dat mijn kind kan zeggen is INSERTWORDHERE."
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:597
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:685
 msgid "The hardest word my child understands is INSERTWORDHERE."
 msgstr "Het moeilijkste woord dat mijn kind kan begrijpen is INSERTWORDHERE."
 
@@ -2823,6 +2838,14 @@ msgid "Korean"
 msgstr ""
 
 #, fuzzy
+#~| msgid "Child's Ethnicity"
+#~ msgid "Child's Race"
+#~ msgstr "Etniciteit van het kind"
+
+#~ msgid "Share on Facebook"
+#~ msgstr "Deel op facebook"
+
+#, fuzzy
 #~| msgid "Prefer not to disclose"
 #~ msgid "Prefer not to close"
 #~ msgstr "Zeg ik liever niet"
@@ -2834,9 +2857,6 @@ msgstr ""
 
 #~ msgid "Other / Prefer not to disclose"
 #~ msgstr "Anders / Zeg ik liever niet"
-
-#~ msgid "Share on Facebook"
-#~ msgstr "Deel op facebook"
 
 #~ msgid "Please fill your username and password to login"
 #~ msgstr "Vul a.u.b. uw gebruikersnaam en wachtwoord in om in te loggen"

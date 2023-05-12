@@ -1,0 +1,160 @@
+{% extends 'researcher_UI/individual/base.html' %}
+{% load static i18n bleach_markdown pdf_template_tags%}
+
+{% block content %} 
+    {% for administration in administrations %} 
+    {% if administration.completed %}
+    <div id="content" style="break-after: page;">
+        <div class="main" style="border:2px solid black; text-align: center; margin-bottom: 20px">
+            <h2>{% trans 'MacArthur-Bates Communicative Development Inventory' %} </h2>
+            <h2>Canadian English: Words and Gestures</h2>
+            <h2>{% trans 'Child Report Form' %}</h2>
+        </div>
+
+        <table >
+            <tr >
+                <td>{% trans 'Child ID:' %}</td>
+                <td>{{ administration.subject_id }}</td>
+                <td>{% trans 'Date of Report:' %}</td>
+                <td>{% now "jS F Y H:i" %}</td>
+            </tr>
+            <tr>
+                <td>{% trans 'Child Sex:' %}</td>
+                <td>{{ administration.backgroundinfo.get_sex_display }}</td>
+                <td>{% trans 'Date of CDI' %}</td>
+                <td>{{ administration.last_modified|date:"M d, Y" }}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>{% trans 'Age in months:' %}</td>
+                <td>{{ administration.backgroundinfo.age }}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>{% trans 'Age to compare:' %}</td>
+                <td>{{ administration.id|get_summary_data:"adjusted benchmark age" }}</td>
+            </tr>
+        </table>
+
+        <table>
+            <tr>
+                <th colspan="6">{% trans 'Early Words' %}</th>
+            </tr>
+            <tr>
+                <td>{% trans 'First Signs of Understanding:' %}</td>
+                <td>{% trans 'Number:' %}</td>
+                <td>{{ administration.id|get_summary_data:"First Signs" }}</td>
+                <td colspan="3">(of 3)</td>
+            </tr>
+            <tr>
+                <td>{% trans 'Phrases Understood:' %}</td>
+                <td>{% trans 'Number:' %}</td>
+                <td>{{ administration.id|get_summary_data:"Phrases" }}</td>
+                <td>(of 28)</td>
+                <td>Percentile:</td>
+                <td>{{ administration.id|get_summary_data:"Phrases Percentile-sex" }}%</td>
+            </tr>
+            <tr>
+                <td colspan="6"></td>
+            </tr>
+            <tr>
+                <th colspan="6">{% trans 'Starting to Talk' %}</th>
+            </tr>
+            <tr>
+                <td colspan="1">Imitation:</td>
+                <td colspan="5">{{ administration.id|get_summary_data:"Imitation" }}</td>
+            </tr>
+            <tr>
+                <td colspan="1">Labeling:</td>
+                <td colspan="5">{{ administration.id|get_summary_data:"Labeling" }}</td>
+            </tr>
+            <tr>
+                <td colspan="6"></td>
+            </tr>
+            <tr>
+                <th colspan="6">{% trans 'Vocabulary Checklist' %}</th>
+            </tr>
+            <tr>
+                <td>{% trans 'Understands' %}</td>
+                <td>{% trans 'Number:' %}</td>
+                <td>{{ administration.id|get_summary_data:"Words Understood" }}</td>
+                <td>(of 396)</td>
+                <td>Percentile (by sex):</td>
+                <td>{{ administration.id|get_summary_data:"Words Understood Percentile-sex" }}%</td>
+            </tr>
+            <tr>
+                <td colspan="4"></td>
+                <td>Percentile (both sexes):</td>
+                <td>{{ administration.id|get_summary_data:"Words Understood Percentile-both" }}%</td>
+            </tr>
+            <tr>
+                <td>{% trans 'Understands & Says' %}</td>
+                <td>{% trans 'Number:' %}</td>
+                <td>{{ administration.id|get_summary_data:"Words Produced" }}</td>
+                <td>(of 396)</td>
+                <td>Percentile (by sex):</td>
+                <td>{{ administration.id|get_summary_data:"Words Produced Percentile-sex" }}%</td>
+            </tr>
+            <tr>
+                <td colspan="4"></td>
+                <td>Percentile (both sexes):</td>
+                <td>{{ administration.id|get_summary_data:"Words Produced Percentile-both" }}%</td>
+            </tr>
+            <tr>
+                <td colspan="6"></td>
+            </tr>
+            <tr>
+                <th colspan="6">{% trans 'Actions and Gestures' %}</th>
+            </tr>
+            <tr>
+                <td>{% trans 'Early Gestures' %}</td>
+                <td>{% trans 'Number:' %}</td>
+                <td>{{ administration.id|get_summary_data:"Early Gestures" }}</td>
+                <td>(of 18)</td>
+                <td>Percentile (by sex):</td>
+                <td>{{ administration.id|get_summary_data:"Early Gestures Percentile-sex" }}%</td>
+            </tr>
+            <tr>
+                <td colspan="4"></td>
+                <td>Percentile (both sexes):</td>
+                <td>{{ administration.id|get_summary_data:"Early Gestures Percentile-both" }}%</td>
+            </tr>
+            <tr>
+                <td>{% trans 'Later Gestures' %}</td>
+                <td>{% trans 'Number:' %}</td>
+                <td>{{ administration.id|get_summary_data:"Later Gestures" }}</td>
+                <td>(of 45)</td>
+                <td>Percentile (by sex):</td>
+                <td>{{ administration.id|get_summary_data:"Later Gestures Percentile-sex" }}%</td>
+            </tr>
+            <tr>
+                <td colspan="4"></td>
+                <td>Percentile (both sexes):</td>
+                <td>{{ administration.id|get_summary_data:"Later Gestures Percentile-both" }}%</td>
+            </tr>
+            <tr>
+                <td>{% trans 'Total Gestures' %}</td>
+                <td>{% trans 'Number:' %}</td>
+                <td>{{ administration.id|get_summary_data:"Total Gestures" }}</td>
+                <td>(of 63)</td>
+                <td>Percentile (by sex):</td>
+                <td>{{ administration.id|get_summary_data:"Total Gestures Percentile-sex" }}%</td>
+            </tr>
+            <tr>
+                <td colspan="4"></td>
+                <td>Percentile (both sexes):</td>
+                <td>{{ administration.id|get_summary_data:"Total Gestures Percentile-both" }}%</td>
+            </tr>
+            
+        </table>
+        <div>
+            <p>3rd Edition (Marchman et al., 2023)</p>
+        </div>
+    </div>
+
+    {% endif %}
+    {% endfor %}
+
+{% endblock %}

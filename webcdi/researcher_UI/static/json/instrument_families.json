@@ -1,0 +1,45 @@
+[
+	{
+		"name": "English (American/Canadian) Long",
+		"chargeable": 1
+	},	{
+		"name": "English (American) Short",
+		"chargeable": 0
+	},	{
+		"name": "English (American/Canadian) CAT",
+		"chargeable": 1
+	},
+	{
+		"name": "Spanish (Mexican) Long",
+		"chargeable": 1
+	},	
+    {
+		"name": "Spanish (Mexican) Short",
+		"chargeable": 0
+	},	
+    {
+		"name": "Spanish (Mexican) CAT",
+		"chargeable": 1
+	},
+	{
+		"name": "Hebrew Long",
+		"chargeable": 0
+	},
+	{
+		"name": "Dutch Long",
+		"chargeable": 0
+	},
+	{
+		"name": "Korean Long",
+		"chargeable": 0
+	},
+	{
+		"name": "Spanish (Argentinian) Long",
+		"chargeable": 0
+	},
+    {
+		"name": "French (French) CAT",
+		"chargeable": 0
+	}
+
+]

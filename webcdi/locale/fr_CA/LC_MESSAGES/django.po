@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-14 14:03+0000\n"
+"POT-Creation-Date: 2023-03-17 15:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: cdi_forms/forms.py:37 cdi_forms/forms.py:38 cdi_forms/models.py:628
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:150
-#: cdi_forms/templates/cdi_forms/cdi_base.html:152
+#: cdi_forms/templates/cdi_forms/cdi_base.html:160
 msgid "No"
 msgstr "Non"
 
@@ -1656,7 +1656,7 @@ msgstr "Information sur l’enfant et la famille"
 #: cdi_forms/templates/cdi_forms/background_info.html:71
 #: cdi_forms/templates/cdi_forms/backpage_info.html:48
 #: cdi_forms/templates/cdi_forms/cdi_form.html:339
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:282
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:370
 #: cdi_forms/templates/cdi_forms/study_group.html:113
 msgid "Form unavailable. Contact admin."
 msgstr ""
@@ -1685,7 +1685,7 @@ msgstr ""
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:31
 #: cdi_forms/templates/cdi_forms/expired.html:32
 #: cdi_forms/templates/cdi_forms/overflow.html:37
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:162
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:247
 msgid "MB-CDI Lab Logo"
 msgstr ""
 
@@ -1732,7 +1732,7 @@ msgstr ""
 "nous vous remercions de votre intérêt!"
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:52
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:231
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:316
 msgid "Click to complete the study"
 msgstr ""
 
@@ -1816,35 +1816,35 @@ msgstr "Votre enfant dit-il ... "
 msgid "* or word used in your family"
 msgstr ""
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:62
+#: cdi_forms/templates/cdi_forms/cdi_base.html:70
 msgid "Instructions: "
 msgstr "Directives: "
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:66
+#: cdi_forms/templates/cdi_forms/cdi_base.html:74
 msgid "This form can be filled any time before the due date."
 msgstr "Ce formulaire peut être rempli à tout moment avant la date d'échéance."
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:67
+#: cdi_forms/templates/cdi_forms/cdi_base.html:75
 msgid ""
 "It can also be saved at any time and resumed later by using the same link"
 msgstr ""
 "Il peut également être sauvegardé à tout moment et repris plus tard en "
 "utilisant le même lien"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:67
+#: cdi_forms/templates/cdi_forms/cdi_base.html:75
 msgid "create bookmark"
 msgstr "créer un signet"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:68
+#: cdi_forms/templates/cdi_forms/cdi_base.html:76
 msgid "After the form is submitted, it cannot be altered."
 msgstr "Une fois le formulaire envoyé, il ne peut plus être modifié."
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:69
+#: cdi_forms/templates/cdi_forms/cdi_base.html:77
 msgid "The form also cannot be altered after the due date."
 msgstr ""
 "Le formulaire ne peut pas non plus être modifié après la date d'échéance."
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:70
+#: cdi_forms/templates/cdi_forms/cdi_base.html:78
 msgid ""
 "Please use the navigation buttons below. Do not use the \"back\" and "
 "\"forward\" buttons on your browser."
@@ -1852,7 +1852,7 @@ msgstr ""
 "Veuillez s’il-vous-plaît utiliser les boutons de navigation ci-dessous. "
 "N'utilisez pas les boutons \"précédent\" et \"suivant\" de votre navigateur."
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:71
+#: cdi_forms/templates/cdi_forms/cdi_base.html:79
 msgid ""
 "You can use the tab button and arrows keys to quickly navigate and answer "
 "questions."
@@ -1860,27 +1860,27 @@ msgstr ""
 "Vous pouvez utiliser le bouton de tabulation et les flèches de votre clavier "
 "pour naviguer rapidement et répondre aux questions."
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:99
+#: cdi_forms/templates/cdi_forms/cdi_base.html:107
 msgid "Due date"
 msgstr "Date d'échéance"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:104
+#: cdi_forms/templates/cdi_forms/cdi_base.html:112
 msgid "Show waiver of documentation"
 msgstr "Afficher la renonciation à la documentation"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:109
+#: cdi_forms/templates/cdi_forms/cdi_base.html:117
 msgid "Reach out to the Web-CDI Team!"
 msgstr "Contactez l'équipe responsable de cet inventaire."
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:153
+#: cdi_forms/templates/cdi_forms/cdi_base.html:161
 msgid "Okay"
 msgstr "OK"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:166
+#: cdi_forms/templates/cdi_forms/cdi_base.html:174
 msgid "Waiver Denied"
 msgstr "Demande Refusée"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:170
+#: cdi_forms/templates/cdi_forms/cdi_base.html:178
 msgid ""
 "Thank you for your response. We are unable to continue. Please close the "
 "window. If you would like, you may review the Waiver."
@@ -1888,7 +1888,7 @@ msgstr ""
 "Merci pour votre réponse. Il n’est pas possible de continuer. Veuillez "
 "fermer la fenêtre. Si vous le souhaitez, vous pouvez revoir la Dispense."
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:173
+#: cdi_forms/templates/cdi_forms/cdi_base.html:181
 msgid "Review Waiver"
 msgstr ""
 
@@ -2108,7 +2108,7 @@ msgid ""
 msgstr ""
 
 #: cdi_forms/templates/cdi_forms/overflow.html:40
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:168
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:253
 msgid "Thank you!"
 msgstr "Merci!"
 
@@ -2165,17 +2165,31 @@ msgstr ""
 msgid "Interesting tidbits learned from how your child speaks!"
 msgstr ""
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:77
-#, python-format
-msgid "Words Produced (%%)"
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:78
+#, fuzzy, python-format
+#| msgid "Words Produced (%%)"
+msgid "Words Produced in Category (%%)"
 msgstr "Mots Produits (%%)"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:117
-#, python-format
-msgid "Words Understood (%%)"
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:116
+#, fuzzy, python-format
+#| msgid "Words Produced (%%)"
+msgid "Words Produced for Child (%%)"
+msgstr "Mots Produits (%%)"
+
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:157
+#, fuzzy, python-format
+#| msgid "Words Understood (%%)"
+msgid "Words Understood in Category(%%)"
 msgstr "Mots Compris (%%)"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:171
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:194
+#, fuzzy, python-format
+#| msgid "Words Understood (%%)"
+msgid "Words Understood for Child (%%)"
+msgstr "Mots Compris (%%)"
+
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:256
 msgid ""
 "Thank you for taking the time to complete the MacArthur-Bates Communicative "
 "Development Inventory (CDI). With the help of parents and caregivers like "
@@ -2205,7 +2219,7 @@ msgstr ""
 "stanford.edu/\" target=\"_blank\">(lien en anglais)</a>. Encore une fois, "
 "nous vous remercions de votre intérêt!"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:178
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:263
 #, python-format
 msgid ""
 "We're sorry but it looks like we have run out of Amazon.com Gift Cards! "
@@ -2216,7 +2230,7 @@ msgstr ""
 "Amazon.com! Veuillez nous <a href=\"%(contact_url)s\" target=\"_blank"
 "\">contacter</a> et nous réglerons ce problème rapidement."
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:183
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:268
 msgid ""
 "Thank you for participating in our Web-CDI project! It is our pleasure to "
 "send you this Amazon.com Gift Card that can be redeemed towards millions of "
@@ -2231,15 +2245,15 @@ msgstr ""
 "facilement plus tard - vous aurez besoin du code ci-dessous pour utiliser "
 "votre carte-cadeau."
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:187
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:272
 msgid "Gift Card Amount"
 msgstr "Montant de la carte-cadeau"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:188
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:273
 msgid "Claim Code"
 msgstr "Code de carte-cadeau"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:192
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:277
 #, python-format
 msgid ""
 "To redeem your gift card, visit <a href=\"%(redeem_url)s\" target=\"_blank"
@@ -2250,49 +2264,50 @@ msgstr ""
 "target=\"_blank\">%(redeem_url)s</a>. Certaines restrictions s'appliquent, "
 "voir <a href=\"%(legal_url)s\" target=\"_blank\">%(legal_url)s</a>."
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:216
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:301
 msgid "Graph My Data!"
 msgstr "Affichez mes données!"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:222
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:307
 msgid "Show Me My Answers"
 msgstr "Affichez mes réponses"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:226
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:311
 msgid "Print My Answers"
 msgstr "Imprimer mes réponses"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:248
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:252
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:257
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:333
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:337
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:342
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:346
 msgid "Save as PDF"
 msgstr "Enregistrer au PDF"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:359
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:447
 msgid "My child says PPP words and understands UUU words."
 msgstr "Mon enfant dit PPP mots et comprend UUU mots."
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:361
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:449
 msgid "My child says PPP words."
 msgstr "Mon enfant dit PPP mots."
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:363
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:451
 msgid "My child understands UUU words."
 msgstr "Mon enfant comprend UUU mots."
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:502
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:590
 msgid "My child produces the most words in the bestProdCat category."
 msgstr "Mon enfant produit le plus de mots dans la catégorie « bestProdCat »."
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:506
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:594
 msgid "My child understands the most words in the bestCompCat category."
 msgstr "Mon enfant comprend le plus de mots dans la catégorie « bestCompCat »."
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:592
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:680
 msgid "The hardest word my child says is INSERTWORDHERE."
 msgstr "Le mot le plus difficile que mon enfant dit est « INSERTWORDHERE »."
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:597
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:685
 msgid "The hardest word my child understands is INSERTWORDHERE."
 msgstr ""
 "Le mot le plus difficile que mon enfant comprend est « INSERTWORDHERE »."
@@ -2781,6 +2796,11 @@ msgstr ""
 #: webcdi/settings.py:260
 msgid "Korean"
 msgstr ""
+
+#, fuzzy
+#~| msgid "Child's Ethnicity"
+#~ msgid "Child's Race"
+#~ msgstr "Ethnicité de l’enfant"
 
 #, fuzzy
 #~| msgid "Prefer not to disclose"

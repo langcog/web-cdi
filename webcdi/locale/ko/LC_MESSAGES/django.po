@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-14 14:03+0000\n"
+"POT-Creation-Date: 2023-03-17 15:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: cdi_forms/forms.py:37 cdi_forms/forms.py:38 cdi_forms/models.py:628
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:150
-#: cdi_forms/templates/cdi_forms/cdi_base.html:152
+#: cdi_forms/templates/cdi_forms/cdi_base.html:160
 msgid "No"
 msgstr "아니오"
 
@@ -1644,7 +1644,7 @@ msgstr "배경 정보"
 #: cdi_forms/templates/cdi_forms/background_info.html:71
 #: cdi_forms/templates/cdi_forms/backpage_info.html:48
 #: cdi_forms/templates/cdi_forms/cdi_form.html:339
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:282
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:370
 #: cdi_forms/templates/cdi_forms/study_group.html:113
 msgid "Form unavailable. Contact admin."
 msgstr "설문을 시작할 수 없습니다. 관리자에게 문의하십시오."
@@ -1673,7 +1673,7 @@ msgstr ""
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:31
 #: cdi_forms/templates/cdi_forms/expired.html:32
 #: cdi_forms/templates/cdi_forms/overflow.html:37
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:162
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:247
 msgid "MB-CDI Lab Logo"
 msgstr "맥아더-베이츠 의사소통발달 평가 연구실 로고"
 
@@ -1724,7 +1724,7 @@ msgstr ""
 "실 수 있습니다. 본 연구에 관심을 가져주셔서 다시 한 번 감사드립니다!"
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:52
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:231
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:316
 msgid "Click to complete the study"
 msgstr ""
 
@@ -1807,34 +1807,34 @@ msgstr "아동은 누구와 살고 있나요?"
 msgid "* or word used in your family"
 msgstr ""
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:62
+#: cdi_forms/templates/cdi_forms/cdi_base.html:70
 msgid "Instructions: "
 msgstr "안내 사항: "
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:66
+#: cdi_forms/templates/cdi_forms/cdi_base.html:74
 msgid "This form can be filled any time before the due date."
 msgstr "본 설문은 마감일 전까지 언제든지 응답할 수 있습니다."
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:67
+#: cdi_forms/templates/cdi_forms/cdi_base.html:75
 msgid ""
 "It can also be saved at any time and resumed later by using the same link"
 msgstr ""
 "또한 설문을 저장한 뒤 언제든지 동일한 링크를 통해 다시 응답을 시작할 수 있습"
 "니다."
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:67
+#: cdi_forms/templates/cdi_forms/cdi_base.html:75
 msgid "create bookmark"
 msgstr "책갈피 만들기"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:68
+#: cdi_forms/templates/cdi_forms/cdi_base.html:76
 msgid "After the form is submitted, it cannot be altered."
 msgstr "본 설문을 제출하신 후에는 응답 내용을 변경하실 수 없습니다."
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:69
+#: cdi_forms/templates/cdi_forms/cdi_base.html:77
 msgid "The form also cannot be altered after the due date."
 msgstr "또한 마감일 이후에도 본 설문의 응답 내용을 변경하실 수 없습니다."
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:70
+#: cdi_forms/templates/cdi_forms/cdi_base.html:78
 msgid ""
 "Please use the navigation buttons below. Do not use the \"back\" and "
 "\"forward\" buttons on your browser."
@@ -1842,33 +1842,33 @@ msgstr ""
 "아래의 탐색 버튼을 사용해 주십시오. 브라우저의 \"뒤로\" 버튼과 \"앞으로\" 버"
 "튼을 사용하지 마십시오."
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:71
+#: cdi_forms/templates/cdi_forms/cdi_base.html:79
 msgid ""
 "You can use the tab button and arrows keys to quickly navigate and answer "
 "questions."
 msgstr "탭 키와 방향 키를 사용하여 빠르게 탐색하고 질문에 답하실 수 있습니다."
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:99
+#: cdi_forms/templates/cdi_forms/cdi_base.html:107
 msgid "Due date"
 msgstr "마감일"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:104
+#: cdi_forms/templates/cdi_forms/cdi_base.html:112
 msgid "Show waiver of documentation"
 msgstr "연구참여포기서 보기"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:109
+#: cdi_forms/templates/cdi_forms/cdi_base.html:117
 msgid "Reach out to the Web-CDI Team!"
 msgstr "웹CDI 팀에 연락해 주십시오!"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:153
+#: cdi_forms/templates/cdi_forms/cdi_base.html:161
 msgid "Okay"
 msgstr "네"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:166
+#: cdi_forms/templates/cdi_forms/cdi_base.html:174
 msgid "Waiver Denied"
 msgstr "연구참여포기서 인정되지 않음"
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:170
+#: cdi_forms/templates/cdi_forms/cdi_base.html:178
 msgid ""
 "Thank you for your response. We are unable to continue. Please close the "
 "window. If you would like, you may review the Waiver."
@@ -1876,7 +1876,7 @@ msgstr ""
 "응답해 주셔서 감사합니다. 다음으로 진행할 수 없습니다. 브라우저 창을 닫아 주"
 "십시오. 원한다면 연구참여포기서를 다시 보실 수 있습니다."
 
-#: cdi_forms/templates/cdi_forms/cdi_base.html:173
+#: cdi_forms/templates/cdi_forms/cdi_base.html:181
 msgid "Review Waiver"
 msgstr "연구참여포기서 다시 보기"
 
@@ -2087,7 +2087,7 @@ msgid ""
 msgstr ""
 
 #: cdi_forms/templates/cdi_forms/overflow.html:40
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:168
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:253
 msgid "Thank you!"
 msgstr "감사합니다!"
 
@@ -2138,17 +2138,31 @@ msgstr ""
 msgid "Interesting tidbits learned from how your child speaks!"
 msgstr "아동이 말하는 방식이 알려주는 흥미로운 이야기!"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:77
-#, python-format
-msgid "Words Produced (%%)"
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:78
+#, fuzzy, python-format
+#| msgid "Words Produced (%%)"
+msgid "Words Produced in Category (%%)"
 msgstr "표현한 어휘 (%%)"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:117
-#, python-format
-msgid "Words Understood (%%)"
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:116
+#, fuzzy, python-format
+#| msgid "Words Produced (%%)"
+msgid "Words Produced for Child (%%)"
+msgstr "표현한 어휘 (%%)"
+
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:157
+#, fuzzy, python-format
+#| msgid "Words Understood (%%)"
+msgid "Words Understood in Category(%%)"
 msgstr "이해한 어휘 (%%)"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:171
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:194
+#, fuzzy, python-format
+#| msgid "Words Understood (%%)"
+msgid "Words Understood for Child (%%)"
+msgstr "이해한 어휘 (%%)"
+
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:256
 msgid ""
 "Thank you for taking the time to complete the MacArthur-Bates Communicative "
 "Development Inventory (CDI). With the help of parents and caregivers like "
@@ -2174,7 +2188,7 @@ msgstr ""
 "stanford.edu/\" target=\"_blank\">이곳</a>에서 CDI에 관한 더 많은 정보를 얻으"
 "실 수 있습니다. 본 연구에 관심을 가져주셔서 다시 한 번 감사드립니다!"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:178
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:263
 #, python-format
 msgid ""
 "We're sorry but it looks like we have run out of Amazon.com Gift Cards! "
@@ -2185,7 +2199,7 @@ msgstr ""
 "\"%(contact_url)s\" target=\"_blank\">저희에게 연락</a>해 주시면 이 문제를 빠"
 "르게 해결하겠습니다."
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:183
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:268
 msgid ""
 "Thank you for participating in our Web-CDI project! It is our pleasure to "
 "send you this Amazon.com Gift Card that can be redeemed towards millions of "
@@ -2199,15 +2213,15 @@ msgstr ""
 "있도록 본 화면을 인쇄하시면 좋을 것입니다. 상품권 사용 시 아래의 상품권 청구 "
 "코드가 필요합니다."
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:187
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:272
 msgid "Gift Card Amount"
 msgstr "상품권 금액"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:188
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:273
 msgid "Claim Code"
 msgstr "청구 코드"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:192
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:277
 #, python-format
 msgid ""
 "To redeem your gift card, visit <a href=\"%(redeem_url)s\" target=\"_blank"
@@ -2219,51 +2233,52 @@ msgstr ""
 "다. <a href=\"%(legal_url)s\" target=\"_blank\">www.amazon.com/gc-legal</a>"
 "을 참고해 주십시오."
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:216
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:301
 msgid "Graph My Data!"
 msgstr "데이터를 그래프로 보기!"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:222
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:307
 msgid "Show Me My Answers"
 msgstr "내 응답 보기"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:226
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:311
 #, fuzzy
 #| msgid "Show Me My Answers"
 msgid "Print My Answers"
 msgstr "내 응답 보기"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:248
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:252
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:257
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:333
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:337
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:342
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:346
 msgid "Save as PDF"
 msgstr "PDF로 저장하기"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:359
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:447
 msgid "My child says PPP words and understands UUU words."
 msgstr "우리 아이는 PPP 어휘를 표현하고 UUU 어휘를 이해합니다."
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:361
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:449
 msgid "My child says PPP words."
 msgstr "우리 아이는 PPP 어휘를 표현합니다."
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:363
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:451
 msgid "My child understands UUU words."
 msgstr "우리 아이는 UUU 어휘를 이해합니다."
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:502
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:590
 msgid "My child produces the most words in the bestProdCat category."
 msgstr "우리 아이는 bestProdCat 목록에 있는 대부분의 어휘들을 표현합니다."
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:506
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:594
 msgid "My child understands the most words in the bestCompCat category."
 msgstr "우리 아이는 bestCompCat 목록에 있는 대부분의 어휘들을 이해합니다."
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:592
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:680
 msgid "The hardest word my child says is INSERTWORDHERE."
 msgstr "우리 아이가 말하기에 가장 어려워하는 어휘는 INSERTWORDHERE 입니다."
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:597
+#: cdi_forms/templates/cdi_forms/printable_cdi.html:685
 msgid "The hardest word my child understands is INSERTWORDHERE."
 msgstr "우리 아이가 이해하기에 가장 어려워하는 어휘는 INSERTWORDHERE 입니다."
 
@@ -2769,6 +2784,11 @@ msgstr "히브리어"
 #: webcdi/settings.py:260
 msgid "Korean"
 msgstr "한국어"
+
+#, fuzzy
+#~| msgid "Child's Ethnicity"
+#~ msgid "Child's Race"
+#~ msgstr "아동의 인종"
 
 #, fuzzy
 #~| msgid "Prefer not to disclose"

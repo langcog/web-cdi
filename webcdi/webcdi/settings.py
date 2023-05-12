@@ -12,32 +12,30 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import urllib
 
+from django.utils.crypto import get_random_string
 from django.utils.translation import gettext_lazy as _
 
 from webcdi.utils import get_linux_ec2_private_ip
 
 DEBUG = bool(os.environ.get("DEBUG", False))
-# DEBUG = True
 TEMPLATE_DEBUG = False
 
 try:
     from .secret_settings import *
 
     print("Importing Secret Settings")
-except Exception as e:
-    print("Importing Local Settings")
+except Exception:
+    # print(f"Importing Local Settings with error {e}")
     from .local_settings import *
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
-
-from django.utils.crypto import get_random_string
 
 
 def generate_secret_key(fname):
@@ -76,8 +74,8 @@ INSTALLED_APPS = (
     "bootstrap4",
     "bootstrap3",
     "form_utils",
-    "registration",
-    "supplementtut",
+    # "registration",
+    # "supplementtut",
     "django.contrib.sites",
     #'axes',
     #'csvimport.app.CSVImportConf',
@@ -90,6 +88,8 @@ INSTALLED_APPS = (
     "webcdi",
     "ckeditor",
     "ckeditor_uploader",
+    "brookes",
+    "rangefilter",
 )
 
 MIDDLEWARE = [
@@ -130,6 +130,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "webcdi.context_processors.home_page",
+                "brookes.context_processors.renewal_codes",
             ],
         },
     },
@@ -229,7 +230,7 @@ DATE_INPUT_FORMATS = (
 
 
 REGISTRATION_SUPPLEMENT_CLASS = "supplementtut.models.MyRegistrationSupplement"
-ACCOUNT_ACTIVATION_DAYS = 3
+ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_OPEN = True
 
 AXES_LOGIN_FAILURE_LIMIT = 4
@@ -398,8 +399,6 @@ CKEDITOR_CONFIGS = {
 AWS_QUERYSTRING_AUTH = False
 
 LOGOUT_REDIRECT_URL = "/"
-
-import urllib
 
 
 def is_ec2_linux():

@@ -1,0 +1,13 @@
+<!-- For Non field errors -->
+
+
+{% if form.non_field_errors %}
+
+{% for error in form.non_field_errors %}
+  <div style="color:red; font-size:12px; font-family:none" role="alert">
+    <span href="#">{{error}}</span>
+  </div>
+{% endfor %}
+{% endif %}
+
+

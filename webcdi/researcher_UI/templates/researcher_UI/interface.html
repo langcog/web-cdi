@@ -1,281 +1,136 @@
-<!doctype html>
-<html lang="en"> <head> 
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+{% extends 'researcher_UI/base.html' %}
+{% load static %}
 
-    {% load static %}
+{% block main %}
+    <div class='login-card' style="margin-top:100px; width:100%">
+        {% if current_study %}
+            <form method='post'  action='{% url "researcher_ui:console_study" pk=current_study.pk %}' id='study-form'>
+        {% else %}
+            <form method='post'  action='' id='study-form'>
+        {% endif %}
 
-    <title>WebCDI Interface</title>
-    <meta name="description" content="English Words and Sentences CDI form">
-    <meta name="author" content="Henry Mehta">
-
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'researcher_UI/console.css' %}" />
-    <link rel="stylesheet" href="{% static 'researcher_UI/table.css' %}" />
-
-    <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.3.js"></script>
-    <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
-    
-    <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
-    <script src="{% static 'researcher_UI/django_modal_forms.js' %}"></script>
-    <script src="{% static 'researcher_UI/researcher_UI.js' %}"></script>
-    <script src="{% static 'cdi_forms/moment.js' %}"></script>
-
-</head>
-
-<style>
-    .btn{
-        white-space:normal !important;
-        word-wrap: break-word; 
-    }
-
-    label input ~ i.material-icons.radio_button_unchecked ,label input ~ i.material-icons.check_box_outline_blank {
-        display: inline;
-    }
-    label input ~ i.material-icons.radio_button_checked ,label input ~ i.material-icons.check_box {
-        display: none;
-    }
-    label input:checked ~ i.material-icons.radio_button_unchecked ,label input:checked ~ i.material-icons.check_box_outline_blank {
-        display: none;
-    }
-    label input:checked ~ i.material-icons.radio_button_checked ,label input:checked ~ i.material-icons.check_box {
-        display: inline;
-    }
-    .django-ckeditor-widget{min-width:100% !important}
-    
-    nav.primary-navigation {
-        margin: 0 auto;
-        display: block;
-        padding: 10px 0 0 0;
-        text-align: center;
-        font-size: 18px;    
-
-   }
-    nav.primary-navigation ul li {
-        list-style: none;
-        margin: 0 auto;
-        border-left: 2px solid #3ca0e7;
-        display: inline-block;
-        padding: 0 30px;
-        position: relative;
-        text-decoration: none;
-        text-align: center;
-        font-family: arvo;
-   }
-    nav.primary-navigation li a {
-        color: white;
-    }
-    nav.primary-navigation li a:hover {
-        color: white;
-   }
-    nav.primary-navigation li:hover {
-        cursor: pointer;
-   }
-    nav.primary-navigation ul li ul {
-        visibility: hidden;
-        opacity: 0;
-        position: absolute;
-        padding-left: 0;
-        left: 0;
-        display: none;
-        background: white;
-        width:100px;
-   }
-    nav.primary-navigation ul li:hover > ul, nav.primary-navigation ul li ul:hover {
-        visibility: visible;
-        opacity: 1;
-        display: block;
-        min-width: 100px;
-        text-align: left;
-        padding-top: 20px;
-        box-shadow: 0px 3px 5px -1px #ccc;
-   }
-    nav.primary-navigation ul li ul li {
-        clear: both;
-        width: 100%;
-        text-align: left;
-        margin-bottom: 20px;
-        border-style: none;
-        font-family: "Karla", "sans-serif";
-
-
-   }
-    nav.primary-navigation ul li ul li a:hover {
-        padding-left: 10px;
-        border-left: 2px solid #3ca0e7;
-        transition: all 0.3s ease;
-   }
-    a {
-        text-decoration: none;
-   }
-    a:hover {
-        color: #3ca0e7;
-   }
-    ul li ul li a {
-        transition: all 0.5s ease;
-   }
-   .login-card {
-        padding-top: 10px;
-        margin: 0 auto 10px;
-        border-radius: 10px;
-        overflow: scroll;
-        background-color: white;
-  };
-    
-</style>
-<!-- Researcher interface -->
-<body style="background:#3ca0e7;">
-    <div class=''>
-        <!-- Row displaying username, help button, and logout button. -->
-        <nav role="navigation" class="primary-navigation d-flex justify-content-end">
-            <ul>
-              <li><a href="/" style="font-family:Arial, Helvetica, sans-serif;">Home</a>
-    
-              <li><a href="#" style="font-family:Arial, Helvetica, sans-serif;" onclick="window.open('https://docs.google.com/document/d/1naFm2U-77YcOwFD7jcQIes2HhNz98qQM2wm1J1cmwck/pub')" onclick="window.open('https://docs.google.com/document/d/1naFm2U-77YcOwFD7jcQIes2HhNz98qQM2wm1J1cmwck/pub')">Help</a></li>
-              <li><a href="#" style="font-family:Arial, Helvetica, sans-serif;">{{ request.user.username }} &dtrif;</a>
-                <ul class="dropdown">
-                    <li><a href="/accounts/logout/" style="color:#3ca0e7;font-family:Arial, Helvetica, sans-serif;">Logout</a></li>
-                </ul>
-              </li>
-            </ul>
-        </nav>
-
-        <div class='login-card' style="width:100%; min-height:200px;">
-            {% if current_study %}
-                <form method='post'  action='{% url "researcher_ui:console_study" pk=current_study.pk %}' id='study-form'>
-            {% else %}
-                <form method='post'  action='' id='study-form'>
-            {% endif %}
-
-           		{% csrf_token %}
-                <div style="width:100%;" class="col-md-12">
-                    <legend>Study</legend>
-                        <div class='col-md-12'>
-                			<div class="row">
-                                <div class='col'>
-                                    <a href="{% url 'researcher_ui:researcher_add_instruments' pk=request.user.researcher.pk %}" type="button" type="button" style='width:100%;' class="btn btn-primary">Add Instruments</a>
-                                </div>
-                                <div class="col">
-                				    <a id="id_new_study" href="{% url 'researcher_ui:add_study' %}" type="button" style='width:100%;' class="btn btn-primary">New Study</a>
-                                </div>
-                                <div class="col">
-                                    <a style='width:100%; margin-bottom: 5%;' class="btn btn-primary"  href="{% url 'researcher_ui:add_paired_study' %}">Group Study</a>
-                			    </div>
+            {% csrf_token %}
+            <div style="width:100%;" class="col-md-12">
+                <legend>Study</legend>
+                    <div class='col-md-12'>
+                        <div class="row">
+                            <div class='col'>
+                                <a href="{% url 'researcher_ui:researcher_add_instruments' pk=request.user.researcher.pk %}" type="button" type="button" style='width:100%;' class="btn btn-primary">Add Instruments</a>
                             </div>
+                            <div class="col">
+                                <a id="id_new_study" href="{% url 'researcher_ui:add_study' %}" type="button" style='width:100%;' class="btn btn-primary">New Study</a>
+                            </div>
+                            <div class="col">
+                                <a style='width:100%; margin-bottom: 5%;' class="btn btn-primary"  href="{% url 'researcher_ui:add_paired_study' %}">Group Study</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class='col'>
+                                <div style = 'width:100%' class="form-group">
+                                    <select  style = 'width:100%;' id="study-selector" class="form-control" onchange="location = encodeURI(this.options[this.selectedIndex].value);">
+                                        <option value="/interface/" selected disabled>Please select study</option>
+                                        {% for study in studies %}
+                                            <option value="{% url 'researcher_ui:console_study' pk=study.pk %}"{% if study.pk == current_study.pk %} selected="" {% endif %}>{{ study }}</option>
+                                        {% endfor %}
+                                    </select> 
+                                </div>
+                                <div>
+                                    {% if study_instrument %}
+                                        <h4>Instrument: {{ study_instrument }}</h4>
+                                    {% endif %}
+
+                                    {% if study_group %}
+                                        <h4>Study Group: {{ study_group }}</h4>
+                                    {% endif %}
+
+                                    {% if completed_admins %}
+                                        <h4># Completed Administrations: {{ completed_admins }} Tests, {{ unique_children }} Children</h4>
+                                    {% endif %}
+
+                                    {% if allow_payment %}
+                                        <h4># Gift Cards Left: {{ available_giftcards }}</h4>
+                                    {% endif %}                    
+                                </div>
+                            </div>
+                            
+                        </div>
+                        {% if current_study %}
                             <div class="row">
-                			    <div class='col'>
-                				    <div style = 'width:100%' class="form-group">
-                    					<select  style = 'width:100%;' id="study-selector" class="form-control" onchange="location = encodeURI(this.options[this.selectedIndex].value);">
-                    					    <option value="/interface/" selected disabled>Please select study</option>
-                    					    {% for study in studies %}
-                    						  <option value="{% url 'researcher_ui:console_study' pk=study.pk %}"{% if study.pk == current_study.pk %} selected="" {% endif %}>{{ study }}</option>
-                    					    {% endfor %}
-                    					</select> 
-                				    </div>
-                    				<div>
-                    				    {% if study_instrument %}
-                    					   <h4>Instrument: {{ study_instrument }}</h4>
-                    				    {% endif %}
-
-                                        {% if study_group %}
-                                            <h4>Study Group: {{ study_group }}</h4>
-                                        {% endif %}
-
-                                        {% if completed_admins %}
-                                            <h4># Completed Administrations: {{ completed_admins }} Tests, {{ unique_children }} Children</h4>
-                                        {% endif %}
-
-                                        {% if allow_payment %}
-                                            <h4># Gift Cards Left: {{ available_giftcards }}</h4>
-                                        {% endif %}                    
-                    				</div>
-                			    </div>
-                			    
-                			</div>
-                			{% if current_study %}
-                                <div class="row">
-                                    <div class="col-3">
-                                        <div class="btn-group btn-block">
-                                          <button id="id_add_participants" type="button" class="btn btn-secondary btn-block" onclick = "modal_form('/interface/study/{{ current_study.pk|urlencode }}/administer_new/')">Add Participants</button>
-                                          <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <span class="sr-only">Toggle Dropdown</span>
-                                          </button>
-                                          <div class="dropdown-menu">
-                                            <button type="button" class="dropdown-item btn btn-secondary btn-block"   onclick = "modal_form('/interface/study/{{ current_study.pk|urlencode }}/import_data/')" >Import Spreadsheet Data</button>
-                                          </div>
+                                <div class="col-3">
+                                    <div class="btn-group btn-block">
+                                        <button id="id_add_participants" type="button" class="btn btn-secondary btn-block" onclick = "modal_form('/interface/study/{{ current_study.pk|urlencode }}/administer_new/')">Add Participants</button>
+                                        <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                        </button>
+                                        <div class="dropdown-menu">
+                                        <button type="button" class="dropdown-item btn btn-secondary btn-block"   onclick = "modal_form('/interface/study/{{ current_study.pk|urlencode }}/import_data/')" >Import Spreadsheet Data</button>
                                         </div>
-
                                     </div>
 
-                                    <div class="col-3">
-                                        <div class="dropdown">
-                                          <button class="btn btn-secondary  btn-block dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Download Data
-                                          </button>
-                                          <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                </div>
+
+                                <div class="col-3">
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary  btn-block dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Download Data
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                             <button class="dropdown-item btn btn-secondary btn-block" type="submit" name='download-study-csv' id='download-study-csv'>Download Data (CSV format)</button>
+                                            <button class="dropdown-item btn btn-secondary btn-block" type="submit" name='download-study-csv-adjusted' id='download-study-csv-adjusted'>Download Data with Adjusted Benchmarks (CSV format)</button>
                                             <button class="dropdown-item btn btn-secondary btn-block" type="submit" name='download-summary-csv' id='download-summary-csv'>Download Summary (CSV format)</button>
                                             <!--
-                                            {% if not study.instrument.form == 'CAT' %}
-                                            <button class="dropdown-item btn btn-secondary btn-block" type="submit" name='download-study-scoring' id='download-study-scoring'>Download Data (CDI scoring format)</button> 
-                                            <button class="dropdown-item btn btn-secondary btn-block" type="submit" name='download-dictionary' id='download-dictionary'>Download Dictionary (CSV format)</button>
-                                            {% endif %}
+                                                <a href="{% url 'researcher_ui:pdf_summary' current_study.pk %}" class="dropdown-item btn btn-secondary btn-block" >Download Individual Summaries (PDF format)</a>
                                             -->
-                                          </div>
-                                        </div>                                            
-                                    </div>
-                                    <div class="col-3">
-                                        <a id="id_update_study" type="button" class="btn btn-secondary btn-block" href="{% url 'researcher_ui:rename_study' pk=current_study.pk %}" >Update Study</a>
-                                    </div>
-                                    <div class="col-3">
-                                        <button type="submit" class="btn btn-secondary btn-block" name='delete-study' id='delete-study' onclick='return confirm("Are you sure you want to delete the entire study and all the data associated with it?");' >Delete Study</button>
-                                    </div>                                                                                
-                                </div>
-                    		{% endif %}
-                        </div>
-                    </div>
-            </form>
-        </div>
-
-        {% if current_study %}
-            <div class='row login-card' style="padding:1rem;">
-                <div id='administration-form' class="form-inline">
-                    {% csrf_token %}
-                        <div>
-                            <form method='post' action='{% url "researcher_ui:console_study" pk=current_study.pk %}'  class="row  d-flex justify-content-center">
-                                <div class='col-md-3'>
-                                    <button style='width:100%; height: 100%;' class="btn btn-secondary selected-btn btn-block" id='add-selected' type='submit' name='administer-selected' value='administer-selected' disabled  >Re-administer Participants</button>
-                                </div>
-                                
-                                <div class='col-md-3'>
-                                    <div class="dropdown selected-btn" >
-                                        <button class="btn btn-secondary selected-btn btn-block dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
-                                            Download Selected Data
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-                                            <button class="dropdown-item btn btn-secondary selected-btn btn-block" id='download-selected' type='submit' name='download-selected' value='download-selected'  disabled >Download Selected Data (CSV/All)</button>
-                                            <button class="dropdown-item btn btn-secondary selected-btn btn-block" id='download-selected-summary' type="submit" name='download-selected-summary' value='download-selected-summary' disabled>Download Summary (CSV format)</button>
-                                            
-                                            {% if not study.instrument.form == 'CAT' %}
-                                            <button class="dropdown-item btn btn-secondary selected-btn btn-block" id='download-links' type='submit' name='download-links' value='download-links'  disabled >Download Selected Data (CSV/Links)</button>
-                                            <!--
-                                                <button class="dropdown-item btn btn-secondary selected-btn btn-block" id='download-study-scoring-selected' type='submit' name='download-study-scoring-selected' value='download-study-scoring-selected'  disabled >Download Selected Data (CDI Scoring Format/All)</button>
-                                            -->
-                                            {% endif %}
-                                            
                                         </div>
                                     </div>                                            
-                                </div> 
-                                <div class='col-md-3'>
-                                        <button style='width:100%; height: 100%;' class="btn btn-secondary selected-btn btn-block" id='delete-selected' type='submit' name='delete-selected' value='administer-selected' disabled onclick='return confirm("Are you sure you want to delete the selected administration record and all the data associated with it?");' >Delete Selected Data</button>
                                 </div>
-                                                       
-                            <legend> Data </legend>
+                                <div class="col-3">
+                                    <a id="id_update_study" type="button" class="btn btn-secondary btn-block" href="{% url 'researcher_ui:rename_study' pk=current_study.pk %}" >Update Study</a>
+                                </div>
+                                <div class="col-3">
+                                    <button type="submit" class="btn btn-secondary btn-block" name='delete-study' id='delete-study' onclick='return confirm("Are you sure you want to delete the entire study and all the data associated with it?");' >Delete Study</button>
+                                </div>                                                                                
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+        </form>
+    </div>
+
+    {% if current_study %}
+        <div class='row login-card' style="padding:1rem;">
+            <div id='administration-form' class="form-inline">
+                {% csrf_token %}
+                    <div>
+                        <form method='post' action='{% url "researcher_ui:console_study" pk=current_study.pk %}'  class="row  d-flex justify-content-center">
+                            <div class='col-md-3'>
+                                <button style='width:100%; height: 100%;' class="btn btn-secondary selected-btn btn-block" id='add-selected' type='submit' name='administer-selected' value='administer-selected' disabled  >Re-administer Participants</button>
+                            </div>
+                            
+                            <div class='col-md-3'>
+                                <div class="dropdown selected-btn" >
+                                    <button class="btn btn-secondary selected-btn btn-block dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
+                                        Download Selected Data
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+                                        <button class="dropdown-item btn btn-secondary selected-btn btn-block" id='download-selected' type='submit' name='download-selected' value='download-selected'  disabled >Download Selected Data (CSV/All)</button>
+                                        <button class="dropdown-item btn btn-secondary selected-btn btn-block" id='download-selected-adjusted' type='submit' name='download-selected-adjusted' value='download-selected-adjusted'  disabled >Download Selected Data with Adjusted Benchmarks(CSV/All)</button>
+                                        <button class="dropdown-item btn btn-secondary selected-btn btn-block" id='download-selected-summary' type="submit" name='download-selected-summary' value='download-selected-summary' disabled>Download Summary (CSV format)</button>
+                                        <a id="id_select_clinical" class="dropdown-item btn btn-secondary selected-btn btn-block" onclick="javascript:append_url_checkboxes()">Download Clinical PDFs</a>
+                                        {% if not study.instrument.form == 'CAT' %}
+                                        <button class="dropdown-item btn btn-secondary selected-btn btn-block" id='download-links' type='submit' name='download-links' value='download-links'  disabled >Download Selected Data (CSV/Links)</button>
+                                        <!--
+                                            <button class="dropdown-item btn btn-secondary selected-btn btn-block" id='download-study-scoring-selected' type='submit' name='download-study-scoring-selected' value='download-study-scoring-selected'  disabled >Download Selected Data (CDI Scoring Format/All)</button>
+                                        -->
+                                        {% endif %}
+                                        
+                                    </div>
+                                </div>                                            
+                            </div> 
+                            <div class='col-md-3'>
+                                    <button style='width:100%; height: 100%;' class="btn btn-secondary selected-btn btn-block" id='delete-selected' type='submit' name='delete-selected' value='administer-selected' disabled onclick='return confirm("Are you sure you want to delete the selected administration record and all the data associated with it?");' >Delete Selected Data</button>
+                            </div>
+                                                    
                             <div class='col-md-12'>
                                 {% include "researcher_UI/table.html" with table=study_administrations %}
                                 <script type="text/javascript">
@@ -288,17 +143,18 @@
                                     });
                                 </script>
                             </div>
-                            </form>
+                        </form>
 
-                        </div>
                     </div>
-            </div>
-        {% endif %}
-    </div>
+                </div>
+        </div>
+    {% endif %}
 
     <!-- New Study Modal -->
     <div class="modal" id="modal-form" tabindex="" role="dialog" aria-labelledby="new study"></div>
+{% endblock %} 
 
+{% block scripts %}
 <script>
     // Function from static/researcher_UI.js. Disables the 'selected' buttons unless at least one of the checkboxes in select_col is selected.
     checked_only()
@@ -369,9 +225,21 @@
     {
         $('#download-study').addClass('disabled');
     }
-
-    
 </script>
 
-</body>
-</html>
+<script>
+    // This add ticked items to url call for Clinical/PDF downloads
+    {% if current_study %}
+    append_url_checkboxes = function (){
+        var url = new URL("{{ request.scheme }}://{{request.get_host }}{% url 'researcher_ui:pdf_summary' current_study.pk %}");
+        var checkedBoxes = document.querySelectorAll('input[name=select_col]:checked');
+        for (let i = 0; i < checkedBoxes.length; i++) {
+            url.searchParams.append('id', checkedBoxes[i].value);
+          }
+ 
+        $('#id_select_clinical').attr('href', url)
+        //window.open(url)
+        }
+    {% endif %}
+</script>
+{% endblock %}

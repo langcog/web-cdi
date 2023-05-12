@@ -1,20 +1,17 @@
-import codecs
 import datetime
 import json
 import os.path
 
-from crispy_forms.bootstrap import InlineField
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import HTML, Div, Field, Fieldset, Layout, Row, Submit
+from crispy_forms.layout import HTML, Div, Field, Fieldset, Layout, Submit
 from django import forms
 from django.conf import settings
-from django.core.exceptions import ValidationError
-from django.core.validators import EmailValidator, RegexValidator
-from django.templatetags.static import static
-from django.utils.translation import pgettext, ugettext
+from django.core.validators import EmailValidator
+from django.utils.translation import pgettext_lazy, ugettext
 from django.utils.translation import ugettext_lazy as _
 from form_utils.forms import BetterModelForm
 
+from .languages import LANGUAGE_OPTIONS as language_choices
 from .models import *
 from .utils import get_demographic_filename
 
@@ -24,15 +21,12 @@ PROJECT_ROOT = os.path.abspath(
 
 # isoLangs = json.load(codecs.open(PROJECT_ROOT + '/../' + 'languages.json', 'r', 'utf-8')) # Load up languages stored in languages.json in project root for other_languages question
 # language_choices = [(v['name'],v['nativeName'] + " ("+ v['name'] + ")") for k,v in isoLangs.iteritems()] # Create a tuple of possible other languages child is exposed to
-from .languages import LANGUAGE_OPTIONS as language_choices
 
 
 # Function for converting string 'True' into boolean True
 def string_bool_coerce(val):
     return val == "True"
 
-
-from django.utils.translation import pgettext_lazy
 
 YESNO_CHOICES = ((False, _("No")), (True, _("Yes")))
 YESNONA_CHOICES = ((0, _("No")), (1, _("Yes")), (2, _("Prefer not to disclose")))
@@ -338,7 +332,7 @@ class BackgroundForm(BetterModelForm):
                     if (
                         dependent not in cleaned_data
                         or cleaned_data.get(dependent) == ""
-                        or cleaned_data.get(dependent) == None
+                        or cleaned_data.get(dependent) is None
                     ):
                         self.add_error(dependent, _("This field cannot be empty"))
 
@@ -399,7 +393,6 @@ class BackgroundForm(BetterModelForm):
         return cleaned_data
 
     def get_json_filename(self):
-        print(get_demographic_filename(self.curr_context["study"]))
         return get_demographic_filename(self.curr_context["study"])
 
     # Initiation of form. Set values, page format according to crispy forms, store variables delivered by views.py, and organize fields on the form.
@@ -875,7 +868,7 @@ class BackgroundForm(BetterModelForm):
                 ),
             )
 
-        if self.curr_context["source_id"] != None:
+        if self.curr_context["source_id"] is not None:
             self.fields["source_id"].initial = self.curr_context["source_id"]
             if self.fields["source_id"].initial == "None":
                 self.fields["source_id"].initial = ""

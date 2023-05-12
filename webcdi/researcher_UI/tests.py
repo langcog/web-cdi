@@ -20,7 +20,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from django.core.management import call_command
 from django.db.models import Max
 from django.test.utils import override_settings
-from .models import study, researcher, instrument, administration, administration_data
+from .models.models import study, researcher, instrument, administration, administration_data
 from .views import random_url_generator
 from cdi_forms.models import BackgroundInfo, Instrument_Forms
 from cdi_forms.views import model_map
