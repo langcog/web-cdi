@@ -54,7 +54,7 @@
                     <a class="nav-link" href="{% url 'researcher_ui:console' %}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="" onclick="window.open('https://docs.google.com/document/d/1naFm2U-77YcOwFD7jcQIes2HhNz98qQM2wm1J1cmwck/pub')" onclick="window.open('https://docs.google.com/document/d/1naFm2U-77YcOwFD7jcQIes2HhNz98qQM2wm1J1cmwck/pub')">Help</a>
+                    <a class="nav-link" target="_blank" href="{% static '/webcdi/pdf/webCDIManual.pdf' %}">Help</a>
                 </li>
                 {% if RENEWAL_CODES %}
                     <li class="nav-item dropdown">
