@@ -23,7 +23,7 @@ class Command(BaseCommand):
         for code in codes:
             email_message = EmailMessage(
                 subject=f"WebCDI {code.instrument_family} renewal is due",
-                body=f"You annual license for WebCDI {code.instrument_family} will expire on {code.expiry}.  Please renew your subscription.",
+                body=f"Your annual license for WebCDI {code.instrument_family} will expire on {code.expiry}.  Please renew your subscription.",
                 to=[code.researcher.email],
             )
             email_message.send()
