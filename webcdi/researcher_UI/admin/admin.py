@@ -1,7 +1,10 @@
+import csv
+
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 from django.db.models import Count
+from django.http import HttpResponse
 from researcher_UI.models import *
 
 # Register your models here.
@@ -96,8 +99,32 @@ class ResearcherInline(admin.StackedInline):
     filter_horizontal = ["allowed_instruments"]
 
 
+def email_list(modeladmin, request, queryset):
+    response = HttpResponse(content_type="text/csv")
+    response[
+        "Content-Disposition"
+    ] = f'attachment; filename="User Email CSV Export for {request.user.email}.csv"'
+
+    response.write("\ufeff".encode("utf8"))
+    writer = csv.writer(response, dialect="excel")
+
+    writer.writerow(
+        [
+            "email",
+        ]
+    )
+    for q in queryset:
+        writer.writerow(
+            [
+                q.email,
+            ]
+        )
+    return response
+
+
 # Define a new User admin
 class UserAdmin(BaseUserAdmin):
+    actions = [email_list]
     inlines = (ResearcherInline,)
 
 
