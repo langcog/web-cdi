@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.db.models import Count
 from django.http import HttpResponse
 from researcher_UI.models import *
+from rangefilter.filters import DateRangeFilterBuilder
 
 # Register your models here.
 admin.site.register(instrument)
@@ -125,6 +126,7 @@ def email_list(modeladmin, request, queryset):
 # Define a new User admin
 class UserAdmin(BaseUserAdmin):
     actions = [email_list]
+    list_filter = [('date_joined', DateRangeFilterBuilder())]
     inlines = (ResearcherInline,)
 
 
