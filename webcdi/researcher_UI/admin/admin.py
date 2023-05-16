@@ -7,8 +7,10 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 from django.db.models import Count
+
 <<<<<<< HEAD
 from django.http import HttpResponse
+
 =======
 >>>>>>> 13a288bb2025bd188942000aa937b989368193ab
 from researcher_UI.models import *
