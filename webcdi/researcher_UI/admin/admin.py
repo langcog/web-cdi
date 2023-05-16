@@ -1,10 +1,16 @@
+<<<<<<< HEAD
 import csv
 
+=======
+>>>>>>> 13a288bb2025bd188942000aa937b989368193ab
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 from django.db.models import Count
+<<<<<<< HEAD
 from django.http import HttpResponse
+=======
+>>>>>>> 13a288bb2025bd188942000aa937b989368193ab
 from researcher_UI.models import *
 
 # Register your models here.
@@ -99,6 +105,7 @@ class ResearcherInline(admin.StackedInline):
     filter_horizontal = ["allowed_instruments"]
 
 
+<<<<<<< HEAD
 def email_list(modeladmin, request, queryset):
     response = HttpResponse(content_type="text/csv")
     response[
@@ -125,6 +132,10 @@ def email_list(modeladmin, request, queryset):
 # Define a new User admin
 class UserAdmin(BaseUserAdmin):
     actions = [email_list]
+=======
+# Define a new User admin
+class UserAdmin(BaseUserAdmin):
+>>>>>>> 13a288bb2025bd188942000aa937b989368193ab
     inlines = (ResearcherInline,)
 
 
