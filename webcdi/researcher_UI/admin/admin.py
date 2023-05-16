@@ -100,7 +100,6 @@ class ResearcherInline(admin.StackedInline):
 
 
 def email_list(modeladmin, request, queryset):
-
     response = HttpResponse(content_type="text/csv")
     response[
         "Content-Disposition"
