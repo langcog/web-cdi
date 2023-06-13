@@ -42,7 +42,7 @@ class BrookesCodeAdmin(admin.ModelAdmin):
     list_filter = [
         ("applied", DateRangeFilter),
         ("expiry", DateRangeFilter),
-        ("researcher", DropdownFilter),
+        ("researcher__username", DropdownFilter),
         "instrument_family",
     ]
     actions = [
