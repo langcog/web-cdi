@@ -58,7 +58,6 @@ def download_cat_data(request, study_obj, administrations=None):
     )
 
     # TODO norms
-    
 
     # Turn pandas dataframe into a CSV
     combined_data.to_csv(response, encoding="utf-8", index=False)
