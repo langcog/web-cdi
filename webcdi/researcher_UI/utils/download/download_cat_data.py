@@ -37,7 +37,6 @@ def download_cat_data(request, study_obj, administrations=None):
     ).filter(administration__in=administrations)
     rows = []
     for answer in answers:
-        # print (answer)
         row = {}
         row["administration_id"] = answer["administration_id"]
         row["est_theta"] = answer["est_theta"]
@@ -57,6 +56,9 @@ def download_cat_data(request, study_obj, administrations=None):
     combined_data = pd.merge(
         admin_data, pd_background_answers, how="outer", on="administration_id"
     )
+
+    # TODO norms
+    
 
     # Turn pandas dataframe into a CSV
     combined_data.to_csv(response, encoding="utf-8", index=False)
