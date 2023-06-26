@@ -2,7 +2,7 @@ import pandas as pd
 from cdi_forms.cat_forms.models import CatResponse
 from cdi_forms.models import BackgroundInfo
 from django.http import HttpResponse
-from researcher_UI.models import administration, Benchmark
+from researcher_UI.models import Benchmark, administration
 from researcher_UI.utils.format_admin import format_admin_data, format_admin_header
 
 
@@ -40,7 +40,7 @@ def download_cat_data(request, study_obj, administrations=None):
         row = {}
         row["administration_id"] = answer["administration_id"]
         row["est_theta"] = answer["est_theta"]
-    
+
         if answer["administered_words"]:
             count = 0
             for word in answer["administered_words"]:
@@ -60,9 +60,11 @@ def download_cat_data(request, study_obj, administrations=None):
 
     # TODO norms
     if Benchmark.objects.filter(instrument=study_obj.instrument).exists():
-        benchmarks = Benchmark.objects.filter(instrument=study_obj.instrument).order_by('percen')
-        combined_data['benchmark_est_theta'] = []
-    
+        benchmarks = Benchmark.objects.filter(instrument=study_obj.instrument).order_by(
+            "percen"
+        )
+        combined_data["benchmark_est_theta"] = []
+
     for row in combined_data:
         print(row)
     # Turn pandas dataframe into a CSV

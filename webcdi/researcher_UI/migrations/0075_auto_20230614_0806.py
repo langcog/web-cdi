@@ -4,25 +4,24 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('researcher_UI', '0074_administration_scored'),
+        ("researcher_UI", "0074_administration_scored"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='benchmark',
-            name='raw_score',
+            model_name="benchmark",
+            name="raw_score",
             field=models.FloatField(),
         ),
         migrations.AlterField(
-            model_name='benchmark',
-            name='raw_score_boy',
+            model_name="benchmark",
+            name="raw_score_boy",
             field=models.FloatField(),
         ),
         migrations.AlterField(
-            model_name='benchmark',
-            name='raw_score_girl',
+            model_name="benchmark",
+            name="raw_score_girl",
             field=models.FloatField(),
         ),
     ]
