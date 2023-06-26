@@ -307,9 +307,9 @@ class Benchmark(models.Model):
     instrument_score = models.ForeignKey(InstrumentScore, on_delete=models.CASCADE)
     percentile = models.IntegerField()
     age = models.IntegerField()
-    raw_score = models.IntegerField()
-    raw_score_boy = models.IntegerField()
-    raw_score_girl = models.IntegerField()
+    raw_score = models.FloatField()
+    raw_score_boy = models.FloatField()
+    raw_score_girl = models.FloatField()
 
     def __unicode__(self):
         return "%s : %s : %s" % (self.instrument_score, self.percentile, self.age)
