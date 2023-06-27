@@ -265,13 +265,13 @@ class RenameStudyForm(BetterModelForm):
     )
     test_period = forms.IntegerField(
         label="# Days Before Expiration",
-        help_text="Between 1 and 365. Default is 14 days. (e.g., 14 = 14 days for parents to complete a form)",
+        help_text="Between 1 and 1095. Default is 14 days. (e.g., 14 = 14 days for parents to complete a form)",
         required=False,
         widget=forms.NumberInput(
             attrs={
                 "placeholder": "(e.g., 14 = 14 days to complete a form)",
                 "min": "1",
-                "max": "365",
+                "max": "1095",
             }
         ),
     )  # Update testing period. Can range from 1 to 28 days.

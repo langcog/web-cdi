@@ -116,7 +116,7 @@ class RenameStudy(LoginRequiredMixin, generic.UpdateView):
         new_age_range = form.cleaned_data.get("age_range")
         study_obj = self.object
 
-        if raw_test_period >= 1 and raw_test_period <= 28:
+        if raw_test_period >= 1 and raw_test_period <= 1095:
             study_obj.test_period = raw_test_period
         else:
             study_obj.test_period = 14
