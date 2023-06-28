@@ -7,7 +7,7 @@
     <div id="content" style="break-after: page;">
         <div class="main" style="border:2px solid black; text-align: center; margin-bottom: 20px">
             <h2>{% trans 'MacArthur-Bates Communicative Development Inventory' %} </h2>
-            <h2>Canadian English: Words and Sentences</h2>
+            <h2>American English: Words and Sentences</h2>
             <h2>{% trans 'Child Report Form' %}</h2>
         </div>
 
@@ -77,10 +77,22 @@
                 <th colspan="4">{% trans 'Sentences and Grammar' %}</th>
             </tr>
             <tr>
-                <td>{% trans 'Word Endings' %}</td>
-                <td>{% trans 'Number:' %}</td>
-                <td>{{ administration.id|get_summary_data:"Word Endings 1" }}</td>
-                <td>({% trans 'of' %} 4)</td>
+                <td>
+                    {% trans 'Word Endings' %}
+                    <br />&nbsp;&nbsp;&nbsp;{% trans 'plural -s' %}
+                    <br />&nbsp;&nbsp;&nbsp;{% trans "possessive 's" %}
+                    <br />&nbsp;&nbsp;&nbsp;{% trans 'progressive -ing' %}
+                    <br />&nbsp;&nbsp;&nbsp;{% trans 'past tense -ed' %}
+                </td>
+                <td style='vertical-align:top'>{% trans 'Number:' %}</td>
+                <td>
+                    {{ administration.id|get_summary_data:"Word Endings 1" }}
+                    <br />{{ administration.id|get_form_data_endings:"item_686" }}
+                    <br />{{ administration.id|get_form_data_endings:"item_687" }}
+                    <br />{{ administration.id|get_form_data_endings:"item_688" }}
+                    <br />{{ administration.id|get_form_data_endings:"item_689" }}
+                </td>
+                <td style='vertical-align:top'>({% trans 'of' %} 4)</td>
             </tr>
             <tr>
                 <td>{% trans 'Word Forms 1: Nouns' %}</td>

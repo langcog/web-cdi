@@ -18,7 +18,6 @@ from django_weasyprint import WeasyTemplateResponseMixin
 from psycopg2.extras import NumericRange
 from researcher_UI.models import administration, researcher, study
 from researcher_UI.utils.add_paired_study import add_paired_study_fun
-from researcher_UI.utils.add_study import add_study_fun
 from researcher_UI.utils.admin_new import admin_new_fun
 from researcher_UI.utils.admin_new_parent import admin_new_parent_fun
 from researcher_UI.utils.admin_new_participant import admin_new_participant_fun
@@ -29,7 +28,7 @@ from researcher_UI.utils.overflow import overflow_fun
 from researcher_UI.utils.raw_gift_codes import raw_gift_code_fun
 
 from .forms import *
-from .mixins import StudyOwnerMixin
+from .mixins import StudyOwnerMixin, ReseacherOwnsStudyMixin
 
 
 class Console(LoginRequiredMixin, generic.ListView):
@@ -89,7 +88,7 @@ class StudyCreateView(LoginRequiredMixin, generic.CreateView):
                 )
 
 
-class RenameStudy(LoginRequiredMixin, generic.UpdateView):
+class RenameStudy(LoginRequiredMixin, ReseacherOwnsStudyMixin, generic.UpdateView):
     model = study
     template_name = "researcher_UI/rename_study_modal.html"
     form_class = RenameStudyForm
@@ -116,7 +115,7 @@ class RenameStudy(LoginRequiredMixin, generic.UpdateView):
         new_age_range = form.cleaned_data.get("age_range")
         study_obj = self.object
 
-        if raw_test_period >= 1 and raw_test_period <= 28:
+        if raw_test_period >= 1 and raw_test_period <= 1095:
             study_obj.test_period = raw_test_period
         else:
             study_obj.test_period = 14
@@ -143,13 +142,25 @@ class AddStudy(LoginRequiredMixin, generic.CreateView):
 
     def form_valid(self, form):
         study_instance = form.save(commit=False)
-        study_name = form.cleaned_data.get("name")
         age_range = form.cleaned_data.get("age_range")
         study_instance.active = True
         researcher = self.request.user
-        add_study_fun(study_instance, form, study_name, researcher, age_range)
-        return redirect(reverse("researcher_ui:console"))
+        
+        try:
+            study_instance.min_age = age_range.lower
+            study_instance.max_age = age_range.upper
+        except:
+            study_instance.min_age = study_instance.instrument.min_age
+            study_instance.max_age = study_instance.instrument.max_age
 
+        study_instance.researcher = researcher
+        if not form.cleaned_data.get("test_period"):
+                study_instance.test_period = 14
+    
+        study_instance.save() 
+        
+        return redirect(reverse('researcher_ui:console_study', args=(study_instance.pk,)))
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["researcher"] = self.request.user

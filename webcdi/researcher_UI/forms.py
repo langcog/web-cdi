@@ -134,6 +134,13 @@ class AddStudyForm(BetterModelForm):
     # Form validation. Form is passed automatically to views.py for higher level checking.
     def clean(self):
         cleaned_data = super().clean()
+        
+        if '/' in cleaned_data['name']:
+            self.add_error("name", f"{cleaned_data['name']} has a slash(/) in it.  This is not a valid character. Please remove")    
+        
+        elif study.objects.filter(name=cleaned_data['name']).exists():
+            self.add_error("name", f"{cleaned_data['name']} is used elsewhere in WebCDI.  Study names must be unique")    
+        
         return cleaned_data
 
     # Initiating form and field layout.
@@ -265,13 +272,13 @@ class RenameStudyForm(BetterModelForm):
     )
     test_period = forms.IntegerField(
         label="# Days Before Expiration",
-        help_text="Between 1 and 365. Default is 14 days. (e.g., 14 = 14 days for parents to complete a form)",
+        help_text="Between 1 and 1095. Default is 14 days. (e.g., 14 = 14 days for parents to complete a form)",
         required=False,
         widget=forms.NumberInput(
             attrs={
                 "placeholder": "(e.g., 14 = 14 days to complete a form)",
                 "min": "1",
-                "max": "365",
+                "max": "1095",
             }
         ),
     )  # Update testing period. Can range from 1 to 28 days.
@@ -375,7 +382,14 @@ class RenameStudyForm(BetterModelForm):
 
     # Form validation. Form is passed automatically to views.py for higher level checking.
     def clean(self):
-        cleaned_data = super(RenameStudyForm, self).clean()
+        cleaned_data = super().clean()
+        
+        if '/' in cleaned_data['name']:
+            self.add_error("name", f"{cleaned_data['name']} has a slash(/) in it.  This is not a valid character. Please remove")    
+        
+        elif study.objects.filter(name=cleaned_data['name']).exists():
+            self.add_error("name", f"{cleaned_data['name']} is used elsewhere in WebCDI.  Study names must be unique")    
+        
         return cleaned_data
 
     # Form initiation. Specific form and field layout.
@@ -544,7 +558,7 @@ class StudyFormForm(forms.ModelForm):
 
 class AdminNewForm(forms.ModelForm):
     new_subject_ids = forms.CharField(required=False)
-    autogenerate_count = forms.CharField(required=False)
+    autogenerate_count = forms.IntegerField(required=False)
 
     class Meta:
         model = study
