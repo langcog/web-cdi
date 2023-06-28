@@ -28,7 +28,7 @@ from researcher_UI.utils.overflow import overflow_fun
 from researcher_UI.utils.raw_gift_codes import raw_gift_code_fun
 
 from .forms import *
-from .mixins import StudyOwnerMixin
+from .mixins import StudyOwnerMixin, ReseacherOwnsStudyMixin
 
 
 class Console(LoginRequiredMixin, generic.ListView):
@@ -88,7 +88,7 @@ class StudyCreateView(LoginRequiredMixin, generic.CreateView):
                 )
 
 
-class RenameStudy(LoginRequiredMixin, generic.UpdateView):
+class RenameStudy(LoginRequiredMixin, ReseacherOwnsStudyMixin, generic.UpdateView):
     model = study
     template_name = "researcher_UI/rename_study_modal.html"
     form_class = RenameStudyForm
