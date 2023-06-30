@@ -90,6 +90,17 @@ class Instrument_Forms(models.Model):
         max_length=101, null=True, blank=True
     )  # used to provide scoring granulatity - uses item_type if blank
 
+    enabler = models.CharField(
+        max_length=21,
+        blank=True,
+        null=True
+    ) # if this record depends on another, enter the other itemID here
+    enable_response = models.CharField(
+        max_length=51,
+        blank=True,
+        null=True
+    ) # if this records depends on another, enterr the accepted responses here
+    
     def __unicode__(self):
         return "%s (%s, %s)" % (
             self.definition,
