@@ -89,7 +89,7 @@ class Instrument_Forms(models.Model):
     scoring_category = models.CharField(
         max_length=101, null=True, blank=True
     )  # used to provide scoring granulatity - uses item_type if blank
-
+    
     def __unicode__(self):
         return "%s (%s, %s)" % (
             self.definition,
