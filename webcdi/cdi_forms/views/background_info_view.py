@@ -567,7 +567,6 @@ class CreateBackgroundInfoView(CreateView):
 
         self.object = form.save()
         return
-        return super().form_valid(form)
 
     def get_success_url(self, *args, **kwargs):
         self.request.method = "GET"

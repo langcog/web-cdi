@@ -1,5 +1,6 @@
 import os
 import json
+import re 
 
 from researcher_UI.models import administration_data, instrument, administration
 from django.conf import settings
