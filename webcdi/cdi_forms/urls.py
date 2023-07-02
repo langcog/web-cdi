@@ -19,4 +19,7 @@ urlpatterns = [
         url(r'^administraion-pdf-view/(?P<pk>[0-9]+)/$', views.PDFAdministrationDetailView.as_view(), name="administration-pdf-view"),
         url(r'^administraion-view/(?P<pk>[0-9]+)/$', views.AdministrationDetailView.as_view(), name="administration-view"),
         path('cat/', include(('cdi_forms.cat_forms.urls', 'cat_forms'), namespace="cat_forms")),
+
+        path('instructions/<str:hash_id>/', views.InstructionDetailView.as_view(), name='instructions'),
+        path('fill/<str:hash_id>/page1/', views.AdministrationUpdateView.as_view(), name='update_administration'),
 ]

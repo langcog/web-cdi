@@ -15,6 +15,7 @@ from cdi_forms.models import BackgroundInfo
 from cdi_forms.forms import BackgroundForm, BackpageBackgroundForm
 from researcher_UI.models import payment_code, study, administration, researcher
 
+from django.utils.translation import ugettext_lazy as _
 from django.db.models import Max
 
 from cdi_forms.utils import get_demographic_filename

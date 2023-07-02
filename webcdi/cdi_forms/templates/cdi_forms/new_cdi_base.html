@@ -1,0 +1,258 @@
+<!doctype html>
+
+<html {% if language_code %}lang="{{ language_code }}"{% else %}lang="en"{% endif %}>
+<head>
+    <meta charset="utf-8">
+    {% load i18n %}
+    {% load static %}
+
+    <title>{% trans title %}</title>
+    <meta name="description" content="MacArthur-Bates Communicative Development Inventory">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" ></script>
+
+    <script src="{% static 'jquery/jquery-1.11.3.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
+    <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/locales/bootstrap-datepicker.es.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/locales/bootstrap-datepicker.fr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.en-CA.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.en-GB.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.nl.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.ko.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.he.min.js"></script>
+    <script src="{% static 'cdi_forms/selectize.js' %}"></script>
+    <script src="{% static 'cdi_forms/moment.js' %}"></script>
+    <link rel='stylesheet' href="{% static 'cdi_forms/selectize.bootstrap3.css' %}">
+    <link rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker3.css">
+    <link rel="stylesheet" href="{% static 'cdi_forms/docs.min.css' %}" />
+    <link rel='stylesheet' href="{% static 'cdi_forms/base.css' %}">
+    <script src="{% static 'd3/d3.v3.js' %}"></script>
+    <script src="{% static 'lodash/lodash.min.js' %}"></script>
+    <script src="{% static 'd3/d3-queue.min.js' %}"></script>
+    <script src="{% static 'cdi_forms/js.cookie.js' %}"></script>
+    <script src="{% static 'jquery/jquery.inputmask.bundle.js' %}"></script>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <link rel='stylesheet' href="{% static 'cdi_forms/extra_mobile.css' %}">
+
+    <script>
+        function countChar(val) {
+            var len = val.value.length;
+            $('#charNum'+val.name).text(600 - len);
+        };
+    </script>
+
+    {% block extra_css %}{% endblock %}
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=328947117"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    gtag('config', '328947117');
+    </script>
+</head>
+
+<body data-spy="scroll" data-target="#navbar">
+    <div class="container bs-docs-container" style="padding-top: 60px; padding-bottom: 60px;">
+        <form id="cdi_form" method="post" class="form-horizontal">
+            <div class="row">
+                <div class="col-md-3 d-print-none d-none d-lg-block pull-left" role="complementary">
+                    <nav id="navbar" class="bs-docs-sidebar affix" style="padding-top:60px;">
+                        <div>
+                            <!-- Instructions for completing CDI form -->
+                            <a href="#instructions" data-toggle="collapse" id="instructions_title">
+                                <h4>{% trans "Instructions: " %}<i class="material-icons">arrow_drop_down</i></h4>
+                            </a>
+                            <div id="instructions" class = "collapse" style="font-size: .85em;">
+                                <ul>
+                                    <li> {% trans "This form can be filled any time before the due date." %} </li>
+                                    <li> {% trans "It can also be saved at any time and resumed later by using the same link" %} (<a id="bookmarkme" href="">{% trans "create bookmark" %}</a>).</li>
+                                    <li> {% trans "After the form is submitted, it cannot be altered." %} </li>
+                                    <li> {% trans "The form also cannot be altered after the due date." %} </li>
+                                    <li> {% trans 'Please use the navigation buttons below. Do not use the "back" and "forward" buttons on your browser.' %} </li>
+                                    <li> {% trans "You can use the tab button and arrows keys to quickly navigate and answer questions." %} </li>
+                                </ul>
+                            </div>
+
+                            <!-- Script for guiding participants to bookmark link -->
+                            <script type="text/javascript">
+                                $(function() {
+                                    $("#bookmarkme").click(function() {
+                                        // Mozilla Firefox Bookmark
+                                        if ('sidebar' in window && 'addPanel' in window.sidebar) {
+                                            window.sidebar.addPanel(location.href,document.title,"");
+                                        } else if( /*@cc_on!@*/false) { // IE Favorite
+                                            window.external.AddFavorite(location.href,document.title);
+                                        } else { // webkit - safari/chrome
+                                            alert('Press ' + (navigator.userAgent.toLowerCase().indexOf('mac') != - 1 ? 'Command/Cmd' : 'CTRL') + ' + D to bookmark this page.');
+                                        }
+                                    });
+                                });
+                            </script>
+
+                            <!-- Script for calculating the test's expiration date in the browser's local time -->
+                            <div id="due_time"></div>
+                            <script type="text/javascript">
+                                var due_date = "{{ object.due_date|date:'b d, Y, I%M p' }}";
+                                var due_date_utc = moment.utc(due_date, "MMM DD, YYYY, hh:mm a");
+                                var due_date_local = moment(due_date_utc).local().locale('{{ language_code }}').format("lll");
+                                console.log(due_date, due_date_utc, due_date_local)
+                                
+                                $('#due_time').html("<p><b> {% trans 'Due date' %} </b>: <span>" + due_date_local + "</span></p>");
+                            </script>
+
+                            <!-- If study has an associated body of text in its waiver field, gives option to pull up a modal window containing the waiver text by clicking button -->
+                            {% if study_waiver and study_waiver != "" %}
+                                <a href="#" id="show_waiver" onclick = "$('#consent_waiver').modal('show');"> {% trans "Show waiver of documentation" %} </a><br>
+                            {% endif %}
+
+                            <!-- Gives option to render contact.html and send an email to the web-cdi team -->
+                            {% if hash_id %}
+                                <a href="{% url 'contact' hash_id=hash_id %}" target="_blank">{% trans "Reach out to the Web-CDI Team!" %}</a>
+                            {% endif %}
+
+                            <div>
+                                {% block nav_buttons %}
+                                {% endblock %}
+                            </div>
+
+                        </div>
+
+                        {% block navcontents %}
+                        {% endblock %}
+                    </nav>
+                </div>
+                <!-- Holds main form. Can be backgroundform or cdi_form -->
+                <div class = "col-12 col-lg-9" role="main">
+                    {% block main %}
+                    {% endblock %}
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Modal window housing study waiver text -->
+    <div id="consent_waiver" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" ></h2>
+                </div>
+                <div class="modal-body">
+                    {% if study_waiver and study_waiver != "" %}
+                        {{ study_waiver|safe }}
+                    {% endif %}
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-warning" onclick="withholdConsent();">{% trans 'No' %}</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-primary" id="okaybtn" onclick="giveConsent();">{% trans "Okay" %}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="withheld_consent_modal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h2 class="modal-title" >{% trans "Waiver Denied" %}</h2>
+                </div>
+
+                <div class="modal-body">
+                    <p>{% trans 'Thank you for your response. We are unable to continue. Please close the window. If you would like, you may review the Waiver.' %}</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-warning" onclick="reviewConsent();">{% trans 'Review Waiver' %}</button>
+                </div>       
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Function un-focuses pressed buttons to avoid participant confusion after pressing a button. -->
+    <script>
+        $(".btn").mouseup(function(){
+            $(this).blur();
+        })
+    </script>
+
+    <!-- To translate the Javascript messages-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/jquery.validate.min.js"></script>
+    <script>
+        console.log("Language Code: ", "{{language_code}}")
+    </script>
+    {% if 'nl' in language_code %}<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/localization/messages_nl.min.js"></script>{% endif %}
+    {% if 'ko' in language_code %}<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/localization/messages_ko.min.js"></script>{% endif %}
+    {% if 'fr' in language_code %}<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/localization/messages_fr.min.js"></script>{% endif %}
+    {% if 'es' in language_code %}<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/localization/messages_es.min.js"></script>{% endif %}
+    {% if 'he' in language_code %}<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/localization/messages_he.min.js"></script>{% endif %}
+
+    <script>
+    $('#cdi_form').validate()
+    </script>
+
+    <script>
+        // This is meant to change to RTL
+        var layout = {};
+        layout.setDirection = function (direction) {
+            layout.rtl = (direction === 'rtl');
+            document.getElementsByTagName("html")[0].style.direction = direction;
+            var styleSheets = document.styleSheets;
+            var modifyRule = function (rule) {
+                if (rule.style.getPropertyValue(layout.rtl ? 'left' : 'right') && rule.selectorText.match(/\.col-(xs|sm|md|lg)-push-\d\d*/)) {
+                    rule.style.setProperty((layout.rtl ? 'right' : 'left'), rule.style.getPropertyValue((layout.rtl ? 'left' : 'right')));
+                    rule.style.removeProperty((layout.rtl ? 'left' : 'right'));
+                }
+                if (rule.style.getPropertyValue(layout.rtl ? 'right' : 'left') && rule.selectorText.match(/\.col-(xs|sm|md|lg)-pull-\d\d*/)) {
+                    rule.style.setProperty((layout.rtl ? 'left' : 'right'), rule.style.getPropertyValue((layout.rtl ? 'right' : 'left')));
+                    rule.style.removeProperty((layout.rtl ? 'right' : 'left'));
+                }
+                if (rule.style.getPropertyValue(layout.rtl ? 'margin-left' : 'margin-right') && rule.selectorText.match(/\.col-(xs|sm|md|lg)-offset-\d\d*/)) {
+                    rule.style.setProperty((layout.rtl ? 'margin-right' : 'margin-left'), rule.style.getPropertyValue((layout.rtl ? 'margin-left' : 'margin-right')));
+                    rule.style.removeProperty((layout.rtl ? 'margin-left' : 'margin-right'));
+                }
+                if (rule.style.getPropertyValue('float') && rule.selectorText.match(/\.col-(xs|sm|md|lg)-\d\d*/)) {
+                    rule.style.setProperty('float', (layout.rtl ? 'right' : 'left'));
+                }
+            };
+            try {
+                for (var i = 0; i < styleSheets.length; i++) {
+                    var rules = styleSheets[i].cssRules || styleSheets[i].rules;
+                    if (rules) {
+                        for (var j = 0; j < rules.length; j++) {
+                            if (rules[j].type === 4) {
+                                var mediaRules = rules[j].cssRules || rules[j].rules
+                                for (var y = 0; y < mediaRules.length; y++) {
+                                    modifyRule(mediaRules[y]);
+                                }
+                            }
+                            if (rules[j].type === 1) {
+                                modifyRule(rules[j]);
+                            }
+
+                        }
+                    }
+                }
+            } catch (e) {
+                // Firefox might throw a SecurityError exception but it will work
+                if (e.name !== 'SecurityError') {
+                    throw e;
+                }
+            }
+        }
+
+        if ("{{ language_code }}"=="he") {
+            layout.setDirection("rtl")
+        }
+
+    </script>
+    {% block scripts %}
+    {% endblock %}
+</body>
+</html>

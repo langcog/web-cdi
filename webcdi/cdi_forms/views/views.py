@@ -18,7 +18,6 @@ from django.template.loader import get_template
 from django.urls import reverse
 from django.utils import timezone, translation
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import DetailView
 from ipware.ip import get_client_ip
 from researcher_UI.models import *
 
@@ -729,6 +728,7 @@ def administer_cdi_form(request, hash_id):
             if administration_instance.completedSurvey:
                 return redirect("backpage-background-info", pk=background_instance.pk)
             elif administration_instance.completedBackgroundInfo:
+                return redirect('instructions', hash_id=administration_instance.url_hash)
                 return cdi_form(request, hash_id)
             else:
                 return redirect("background-info", pk=background_instance.pk)

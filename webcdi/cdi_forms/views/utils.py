@@ -7,9 +7,8 @@ from django.conf import settings
 from cdi_forms.models import Instrument_Forms, BackgroundInfo, Zipcode
 from django.utils import translation
 
-PROJECT_ROOT = os.path.abspath(
-    os.path.dirname(__file__)
-)  # Declare root folder for project and files. Varies between Mac and Linux installations.
+from pathlib import Path
+PROJECT_ROOT = str(Path(os.path.dirname(__file__)).parent.absolute()) # Declare root folder for project and files. Varies between Mac and Linux installations.
 
 # This function is not written properly...
 def language_map(language):

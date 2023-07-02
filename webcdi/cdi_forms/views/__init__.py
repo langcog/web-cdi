@@ -1,4 +1,5 @@
 from .views import *  # noqa
-from .pdf_detail_view import PDFAdministrationDetailView  # noqa
-from .background_info_view import BackgroundInfoView, BackpageBackgroundInfoView, CreateBackgroundInfoView  # noqa
-from .administration_views import AdministrationDetailView  # noqa
+from .pdf_detail_views import PDFAdministrationDetailView  # noqa
+from .background_info_views import BackgroundInfoView, BackpageBackgroundInfoView, CreateBackgroundInfoView  # noqa
+from .administration_views import AdministrationDetailView, AdministrationUpdateView  # noqa
+from .instructions_views import InstructionDetailView  # noqa

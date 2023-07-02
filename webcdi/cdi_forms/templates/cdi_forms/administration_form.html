@@ -1,0 +1,233 @@
+{% extends 'cdi_forms/new_cdi_base.html' %}
+{% load static %}
+{% load i18n %}
+{% load bleach_markdown %}
+
+<!-- Navigation buttons placed in cdi_base.html -->
+{% block nav_buttons %}
+    {% if not completed %}
+    <div class="button-wrapper">
+        <div class="flex-row d-flex justify-content-center">
+            <a href="{% url 'update_administration' object.url_hash %}" name="btn-save" value="{% trans 'Save' %}" class="btn btn-primary" type="submit">{% trans 'Save' %}</a>
+            <input name="btn-submit" value="{% trans 'Submit' %}" class="btn btn-success submit-button" type="submit" onclick="clicked(event)">
+        </div>
+        <div class="flex-row d-flex justify-content-center">    
+            <input name="btn-back" value="{% trans 'Go back to Background Info' %}" class="btn btn-primary" type="submit">
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}
+
+
+<!-- Navigation sidebar -->
+{% block navcontentsx %}
+<a href="#nav_list" data-toggle="" id="tob_title"><h4>{% trans "Table of Contents:" %} <i class="material-icons">arrow_drop_down</i></h4></a>
+<div id = "nav_list" class = "">
+    <h4>{% trans "Contents:" %}</h4>
+    <ul class="nav bs-docs-sidenav">
+        <li><a id="id_btn_instructions">{% trans 'Instructions:' %}</a></li>
+        {% for part in parts %}
+            <li><a href="#{{ part.id }}" onclick="findPage({{ part.types.0.id }}_div)">{{ part.title }}</a>
+                <ul class="nav">
+                    {% for type in part.types %}
+                        <li><a onclick="findPage({{ type.id }}_div)">{{ type.title }}</a></li>
+                        {% for section in type.sections %}
+                            <li><a onclick="findPage({{ section.id }}_div)">{{ section.title }}</a></li>
+                        {% endfor %}
+
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+    {{ language_code }}
+    {{ object.study.instrument.form }}
+</div>
+{% endblock %}
+
+
+{% block main %}
+{% csrf_token %}
+
+DATA
+{{ data }}
+    {% for part in parts %}
+    <div id = "{{ part.id }}_div" class="part_div collapse">
+
+        <h2 id="{{ part.id }}"> {{ part.title }}</h2>
+
+        {% for type in part.types %}
+        <div id = "{{ type.id }}_div" class = "page_div collapse">
+            <h3 id = "{{ type.id }}"> {{ type.title }}</h3>
+            {% if type.sub_title %}<h3 > {{ type.sub_title }}</h3>{% endif %}
+            <div id="sectionInstructions{{type.id}}" {% if type.sections|length > 1 and type.text|length > 0 %}class = "collapse in"{% endif %} style="font-size: .85em;">
+                <p class="lead"> {{ type.text | capfirst }}</p>
+            </div>
+            {% if type.sections|length > 1 and type.text|length > 0 %}
+                <a href="#sectionInstructions{{type.id}}" data-toggle="collapse" id="section_instructions_title">
+                    {% trans "Hide/Show Instructions: " %} <i class="material-icons">arrow_drop_up</i>
+                </a>
+                <script>
+                    $("#sectionInstructions{{type.id}}").collapse('show');
+                </script>
+            {% endif %}
+
+            <div class="row alternate-color">
+                {% for object in type.objects %}
+                    {% if 'textbox' in object.item %}
+                        <div class="col-md-12 alco-child"> 
+                            <div class="row alco-child1" >
+                                <div class="col-lg-5 col-12"><span class="choice">{{ object.text|safe }}</span></div>
+                                <div class="col-lg-7 col-12">
+                                    <textarea class="boxsizingBorder" onkeyup="countChar(this)" id="{{ object.itemID }}" name="{{ object.itemID }}" width="100%" maxlength="600" rows=5 {% if completed %} disabled {% endif %}>{{ object.prefilled_value }}</textarea>
+                                    <div id="charNum{{ object.itemID }}"></div>
+                                </div>
+                            </div>
+                        </div>
+                    {% elif type.type == "radiobutton" or type.type == "modified_checkbox" %}
+                        {% if object.text != '' %}
+                        <div class="col-md-12 alco-child" name = "{{ object.itemID }}_div">
+                            <div class="row alco-child1" >
+                                <div class="col-lg-5 col-12"><span class="choice">{{ object.text|safe }}</span></div>
+                                <div class="col-lg-7 col-12 align-items-center btn-group btn-group-justified d-flex justify-content-end btn-group-vertical" data-toggle="buttons">
+                                    {% for choice in object.choices %}
+                                        <label class = "btn mult-choice d-flex justify-content-end" for="{{ object.itemID }}_{{ choice.1 }}">
+                                            <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.1 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
+                                            {% if type.type == "radiobutton" %} 
+                                                <i class="material-icons radio_button_checked" aria-hidden="true">radio_button_checked</i>
+                                                <i class="material-icons radio_button_unchecked" aria-hidden="true">radio_button_unchecked</i>
+                                            {% elif type.type == "modified_checkbox"%} 
+                                                <i class="material-icons check_box" aria-hidden="true">check_box</i>
+                                                <i class="material-icons check_box_outline_blank" aria-hidden="true">check_box_outline_blank</i>
+                                            {% endif %}
+                                            &nbsp;&nbsp;<span class="choice">{{ choice.0 }}</span>
+                                        </label>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="col-lg-4 col-8 alco-child" name = "{{ object.itemID }}_div" >
+                            <div class="btn-group btn-group-justified" data-toggle="buttons">
+                                {% for choice in object.choices %}
+                                    <div class="row">
+                                        <label class = "btn mult-choice" for="{{ object.itemID }}_{{ choice.1 }}">
+                                            <input {% if type.type == "radiobutton" %} type="radio" {% elif type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.1 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
+                                            {% if type.type == "radiobutton" %} 
+                                                <i class="material-icons radio_button_checked" aria-hidden="true">radio_button_checked</i>
+                                                <i class="material-icons radio_button_unchecked" aria-hidden="true">radio_button_unchecked</i>
+                                            {% elif type.type == "modified_checkbox"%} 
+                                                <i class="material-icons check_box" aria-hidden="true">check_box</i>
+                                                <i class="material-icons check_box_outline_blank" aria-hidden="true">check_box_outline_blank</i>
+                                            {% endif %}
+                                            &nbsp;&nbsp;<span class="choice">{{ choice.0 }}</span>
+                                        </label>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+                    {% elif type.type == "checkbox" %}
+                        <div class="col-lg-4 col-8 alco-child"> 
+                            <div class="btn-group btn-block" data-toggle="buttons"> 
+                                <label class = "btn btn-block d-flex justify-content-start" for="{{ object.itemID }}">
+                                    <input type="checkbox" id="{{ object.itemID }}" name="{{ object.itemID }}" value="{{ object.choices }}"{% if completed %} disabled {% endif %} {% if object.prefilled_value %} checked {% endif %}> 
+                                    <i class="material-icons check_box" aria-hidden="true">check_box</i>
+                                    <i class="material-icons check_box_outline_blank" aria-hidden="true">check_box_outline_blank</i>
+                                    &nbsp;&nbsp;<span class="choice">{{ object.definition|bleach_markdown }}</span>
+                                </label>
+                            </div>
+                        </div>
+                    {% elif type.type == "textbox" %}
+                        <div class="col-md-12"> <input type="text" class="rounded border border-secondary" id="{{ object.itemID }}" name="{{ object.itemID }}" maxlength="200" value="{{ object.prefilled_value }}" {% if completed %} disabled {% endif %}></div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <ul>
+                {% for section in type.sections %}
+                <div id = "{{ section.id }}_div"  class = "page_div collapse">
+
+                    <h4 id ="{{ section.id }}" >{{ section.title }}</h4>
+                    <div class="col-md-12">{{ section.text }}</div>
+                    <div class="row ">
+                        {% for object in section.objects %}
+                            {% if 'textbox' in object.item %}
+                                <div class="col-md-12 alco-child"> 
+                                    <div class="row alco-child1" >
+                                        <div class="col-lg-5 col-12"><span class="choice">{{ object.text|safe }}</span></div>
+                                        <div class="col-lg-7 col-12">
+                                            <textarea class="boxsizingBorder" onkeyup="countChar(this)" id="{{ object.itemID }}" name="{{ object.itemID }}" width="100%" maxlength="600" rows=5 {% if completed %} disabled {% endif %}>{{ object.prefilled_value }}</textarea>
+                                            <div id="charNum{{ object.itemID }}"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% elif section.type == "radiobutton" or section.type == "modified_checkbox" %}
+                                {% if object.text != '' %}
+                                <div class="col-md-12 alco-child" name = "{{ object.itemID }}_div">
+                                    <div class="row alco-child1" >
+                                        <div class="col-lg-5 col-12"><span class="choice"> {{ object.text|safe }}</span></div>
+                                        <div class="col-lg-7 col-12 align-items-center btn-group btn-group-justified d-flex justify-content-end btn-group-vertical" data-toggle="buttons">
+                                            {% for choice in object.choices %}
+                                                <label class = "btn mult-choice d-flex justify-content-end" for="{{ object.itemID }}_{{ choice.1 }}">
+                                                    <input {% if section.type == "radiobutton" %} type="radio" {% elif section.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.1 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
+                                                    {% if section.type == "radiobutton" %} 
+                                                        <i class="material-icons radio_button_checked" aria-hidden="true">radio_button_checked</i>
+                                                        <i class="material-icons radio_button_unchecked" aria-hidden="true">radio_button_unchecked</i>
+                                                    {% elif section.type == "modified_checkbox"%} 
+                                                        <i class="material-icons check_box" aria-hidden="true">check_box</i>
+                                                        <i class="material-icons check_box_outline_blank" aria-hidden="true">check_box_outline_blank</i>
+                                                    {% endif %}
+                                                    &nbsp;&nbsp;<span class="choice">{{ choice.0 }}</span>
+                                                </label>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                {% else %}
+                                <div class="col-lg-4 col-8 alco-child" name = "{{ object.itemID }}_div">
+                                    <div class="btn-groupbtn-group-justified " data-toggle="buttons">
+                                        {% for choice in object.choices %}
+                                            <div class="row">
+                                                <label class = "btn mult-choice" for="{{ object.itemID }}_{{ choice.1 }}">
+                                                    <input {% if section.type == "radiobutton" %} type="radio" {% elif section.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.1 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
+                                                    {% if section.type == "radiobutton" %} 
+                                                        <i class="material-icons radio_button_checked" aria-hidden="true">radio_button_checked</i>
+                                                        <i class="material-icons radio_button_unchecked" aria-hidden="true">radio_button_unchecked</i>
+                                                    {% elif section.type == "modified_checkbox"%} 
+                                                        <i class="material-icons check_box" aria-hidden="true">check_box</i>
+                                                        <i class="material-icons check_box_outline_blank" aria-hidden="true">check_box_outline_blank</i>
+                                                    {% endif %}
+                                                    &nbsp;&nbsp;<span class="choice">{{ choice.0 }}</span>
+                                                </label>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                {% endif %}
+                            {% elif section.type == "checkbox" %}
+                                <div class="col-lg-4 col-8 alco-child">
+                                    <div class="btn-group btn-block" data-toggle="buttons"> 
+                                        <label class = "btn btn-block d-flex justify-content-start" for="{{ object.itemID }}">
+                                            <input type="checkbox" id="{{ object.itemID }}" name="{{ object.itemID }}" value="{{ object.choices }}"{% if completed %} disabled {% endif %} {% if object.prefilled_value %} checked {% endif %}> 
+                                            <i class="material-icons check_box" aria-hidden="true">check_box</i>
+                                            <i class="material-icons check_box_outline_blank" aria-hidden="true">check_box_outline_blank</i>
+                                            &nbsp;&nbsp;<span class="choice">{{ object.definition|bleach_markdown }}</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            {% elif section.type == "textbox" %}
+                                <div class="col-md-12"> <input type="text" class="rounded border border-secondary" id="{{ object.itemID }}" name="{{ object.itemID }}" maxlength="200" value="{{ object.prefilled_value }}" {% if completed %} disabled {% endif %}></div>
+                            {% endif %}
+                        {% endfor %}
+                        <div class="col-md-12">{{ section.footnote }}</div>
+                    </div>
+                </div>
+                {% endfor %}
+            </ul>
+        </div>
+
+        {% endfor %}
+    </div>
+    {% endfor %}
+
+{% endblock %}

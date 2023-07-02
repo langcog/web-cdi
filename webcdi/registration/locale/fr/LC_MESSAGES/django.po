@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-17 15:57+0000\n"
+"POT-Creation-Date: 2023-07-02 17:59+0000\n"
 "PO-Revision-Date: 2015-07-28 09:54+0200\n"
 "Last-Translator: Patrick Husi <patrick.husi@arpage.ch>\n"
 "Language-Team: \n"
@@ -366,22 +366,12 @@ msgid "Your registration was created -- %(site_name)s"
 msgstr "Votre enregistrement de %(site_name)s a été créé"
 
 #: registration/templates/registration/registration_form.html:13
-msgid "Home"
-msgstr ""
-
-#: registration/templates/registration/registration_form.html:14
-#, fuzzy
-#| msgid "Password"
-msgid "Password reset"
-msgstr "Mot de passe"
-
-#: registration/templates/registration/registration_form.html:37
 msgid ""
 "Forgotten your password? Enter your email address below and we will email "
 "instructions for setting a new one."
 msgstr ""
 
-#: registration/templates/registration/registration_form.html:48
+#: registration/templates/registration/registration_form.html:24
 msgid "Reset my password"
 msgstr ""
 
@@ -401,6 +391,11 @@ msgstr "Votre enregistrement de %(site_name)s a été rejeté"
 #: registration/views.py:85
 msgid "An invalid activation key has passed"
 msgstr "La clé d’activation est non-valide"
+
+#, fuzzy
+#~| msgid "Password"
+#~ msgid "Password reset"
+#~ msgstr "Mot de passe"
 
 #~ msgid "Registration"
 #~ msgstr "Enregistrement"
