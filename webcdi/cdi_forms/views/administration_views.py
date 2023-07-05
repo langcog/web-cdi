@@ -11,6 +11,8 @@ from cdi_forms.views.utils import prefilled_cdi_data, PROJECT_ROOT, model_map, c
 from cdi_forms.utils import previous_and_next
 from django.conf import settings
 
+import logging
+logger = logging.getLogger("debug")
 
 class AdministrationDetailView(DetailView):
     model = administration
@@ -145,7 +147,7 @@ class AdministrationUpdateView(UpdateView):
 
         raw_objects = []
         for part in data["parts"]:
-            for item_type in part["types"]:
+            for previous_type, item_type, next_type in previous_and_next(part["types"]):
                 if "sections" in item_type:
                     for previous_section, section, next_section in previous_and_next(item_type['sections']):
                         if target_section == None or target_section == section['id']:
@@ -169,10 +171,13 @@ class AdministrationUpdateView(UpdateView):
                                 return_data['previous_section'] = None
                             if next_section:
                                 return_data['next_section'] = next_section['id']
+                            elif next_type:
+                                return_data['next_section'] = next_type['id']
                             else:
                                 return_data['next_section'] = None
                             return return_data
                 else:
+                    logger.debug (f'IN ELSE SECTION')
                     group_objects = instrument_model.filter(
                         item_type__exact=item_type["id"]
                     ).values(*self.get_field_values())
