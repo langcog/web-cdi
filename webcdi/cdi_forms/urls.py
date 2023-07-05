@@ -21,5 +21,7 @@ urlpatterns = [
         path('cat/', include(('cdi_forms.cat_forms.urls', 'cat_forms'), namespace="cat_forms")),
 
         path('instructions/<str:hash_id>/', views.InstructionDetailView.as_view(), name='instructions'),
-        path('fill/<str:hash_id>/page1/', views.AdministrationUpdateView.as_view(), name='update_administration'),
+        path('administration/<str:hash_id>/first-page/', views.AdministrationUpdateView.as_view(), name='update_administration'),
+        path('administration/<str:hash_id>/<str:section>/', views.AdministrationUpdateView.as_view(), name='update_administration_section'),
+        
 ]

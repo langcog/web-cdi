@@ -23,7 +23,7 @@ from researcher_UI.models import *
 
 from cdi_forms.forms import BackgroundForm, BackpageBackgroundForm, ContactForm
 from cdi_forms.models import *
-from cdi_forms.views.utils import model_map, PROJECT_ROOT, has_backpage, prefilled_cdi_data, language_map, safe_harbor_zip_code
+from cdi_forms.views.utils import model_map, PROJECT_ROOT, has_backpage, prefilled_cdi_data, language_map, safe_harbor_zip_code, get_administration_instance
 
 # Get an instance of a logger
 logger = logging.getLogger("debug")
@@ -59,14 +59,6 @@ def prefilled_background_form(administration_instance, front_page=True):
         )
     return background_form
 
-
-# Find the administration object for a test-taker based on their unique hash code.
-def get_administration_instance(hash_id):
-    try:
-        administration_instance = administration.objects.get(url_hash=hash_id)
-    except:
-        raise Http404("Administration not found")
-    return administration_instance
 
 # Finds and renders BackgroundForm based on given hash ID code.
 def background_info_form(request, hash_id):
@@ -904,34 +896,4 @@ def save_answer(request):
     return HttpResponse(json.dumps([{}]), content_type="application/json")
 
 
-def update_administration_data_item(request):
-    if not request.POST:
-        return
 
-    hash_id = request.POST.get("hash_id")
-    administration_instance = get_administration_instance(hash_id)
-    instrument_name = (
-        administration_instance.study.instrument.name
-    )  # Get instrument name associated with study
-    instrument_model = model_map(instrument_name).filter(
-        itemID__in=request.POST
-    )  # Fetch instrument model based on instrument name.
-
-    value = ""
-    if request.POST["check"] == "true":
-        value = request.POST["value"]
-
-    if len(value) > 0:
-        administration_data.objects.update_or_create(
-            administration=administration_instance,
-            item_ID=request.POST["item"],
-            defaults={"value": value},
-        )
-    elif administration_data.objects.filter(
-        administration=administration_instance, item_ID=request.POST["item"]
-    ).exists():
-        administration_data.objects.get(
-            administration=administration_instance, item_ID=request.POST["item"]
-        ).delete()
-    administration.objects.filter(url_hash=hash_id).update(last_modified=timezone.now())
-    return HttpResponse(json.dumps([{}]), content_type="application/json")

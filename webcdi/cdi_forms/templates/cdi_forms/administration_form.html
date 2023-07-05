@@ -8,7 +8,7 @@
     {% if not completed %}
     <div class="button-wrapper">
         <div class="flex-row d-flex justify-content-center">
-            <a href="{% url 'update_administration' object.url_hash %}" name="btn-save" value="{% trans 'Save' %}" class="btn btn-primary" type="submit">{% trans 'Save' %}</a>
+            <input name="btn-save" value="{% trans 'Save' %}" class="btn btn-primary" type="submit">
             <input name="btn-submit" value="{% trans 'Submit' %}" class="btn btn-success submit-button" type="submit" onclick="clicked(event)">
         </div>
         <div class="flex-row d-flex justify-content-center">    
@@ -18,62 +18,24 @@
     {% endif %}
 {% endblock %}
 
-
-<!-- Navigation sidebar -->
-{% block navcontentsx %}
-<a href="#nav_list" data-toggle="" id="tob_title"><h4>{% trans "Table of Contents:" %} <i class="material-icons">arrow_drop_down</i></h4></a>
-<div id = "nav_list" class = "">
-    <h4>{% trans "Contents:" %}</h4>
-    <ul class="nav bs-docs-sidenav">
-        <li><a id="id_btn_instructions">{% trans 'Instructions:' %}</a></li>
-        {% for part in parts %}
-            <li><a href="#{{ part.id }}" onclick="findPage({{ part.types.0.id }}_div)">{{ part.title }}</a>
-                <ul class="nav">
-                    {% for type in part.types %}
-                        <li><a onclick="findPage({{ type.id }}_div)">{{ type.title }}</a></li>
-                        {% for section in type.sections %}
-                            <li><a onclick="findPage({{ section.id }}_div)">{{ section.title }}</a></li>
-                        {% endfor %}
-
-                    {% endfor %}
-                </ul>
-            </li>
-        {% endfor %}
-    </ul>
-    {{ language_code }}
-    {{ object.study.instrument.form }}
-</div>
-{% endblock %}
-
-
 {% block main %}
 {% csrf_token %}
-
-DATA
-{{ data }}
-    {% for part in parts %}
-    <div id = "{{ part.id }}_div" class="part_div collapse">
-
-        <h2 id="{{ part.id }}"> {{ part.title }}</h2>
-
-        {% for type in part.types %}
-        <div id = "{{ type.id }}_div" class = "page_div collapse">
-            <h3 id = "{{ type.id }}"> {{ type.title }}</h3>
-            {% if type.sub_title %}<h3 > {{ type.sub_title }}</h3>{% endif %}
-            <div id="sectionInstructions{{type.id}}" {% if type.sections|length > 1 and type.text|length > 0 %}class = "collapse in"{% endif %} style="font-size: .85em;">
-                <p class="lead"> {{ type.text | capfirst }}</p>
+    <div id = "{{ part.id }}_div" class="part_div ">
+        <h2 id="{{ part.id }}"> {{ data.part }}</h2>
+        <div id = "{{ data.type.id }}_div" class = "page_div ">
+            <h3 id = "{{ data.type.id }}"> {{ data.type.title }}</h3>
+            {% if data.type.subtitle %}<h3 > {{ data.type.subtitle }}</h3>{% endif %}
+            <div id="sectionInstructions{{data.type.id}}" class="collapse" data-toggle="collapse" style="font-size: .85em;">
+                <p class="lead"> {{ data.type.instructions | capfirst }}</p>
             </div>
-            {% if type.sections|length > 1 and type.text|length > 0 %}
-                <a href="#sectionInstructions{{type.id}}" data-toggle="collapse" id="section_instructions_title">
+            {% if data.type.instructions|length > 0 %}
+                <a href="#sectionInstructions{{data.type.id}}" data-toggle="collapse" id="section_instructions_title">
                     {% trans "Hide/Show Instructions: " %} <i class="material-icons">arrow_drop_up</i>
                 </a>
-                <script>
-                    $("#sectionInstructions{{type.id}}").collapse('show');
-                </script>
             {% endif %}
 
             <div class="row alternate-color">
-                {% for object in type.objects %}
+                {% for object in data.objects %}
                     {% if 'textbox' in object.item %}
                         <div class="col-md-12 alco-child"> 
                             <div class="row alco-child1" >
@@ -84,7 +46,7 @@ DATA
                                 </div>
                             </div>
                         </div>
-                    {% elif type.type == "radiobutton" or type.type == "modified_checkbox" %}
+                    {% elif data.type.type == "radiobutton" or data.type.type == "modified_checkbox" %}
                         {% if object.text != '' %}
                         <div class="col-md-12 alco-child" name = "{{ object.itemID }}_div">
                             <div class="row alco-child1" >
@@ -127,7 +89,7 @@ DATA
                             </div>
                         </div>
                         {% endif %}
-                    {% elif type.type == "checkbox" %}
+                    {% elif data.type.type == "checkbox" %}
                         <div class="col-lg-4 col-8 alco-child"> 
                             <div class="btn-group btn-block" data-toggle="buttons"> 
                                 <label class = "btn btn-block d-flex justify-content-start" for="{{ object.itemID }}">
@@ -226,8 +188,134 @@ DATA
             </ul>
         </div>
 
-        {% endfor %}
+        {% include 'cdi_forms/_navigation_buttons.html' %}
     </div>
-    {% endfor %}
 
+{% endblock %}
+
+{% block scripts %}
+    <!-- ReCaptcha. If study has a ReCaptcha option, the participant must have worked on the test for at least 6 minutes AND pass the ReCaptcha test for the submit button to appear. Otherwise, participant only has to have worked on the test for 6 minutes. -->
+    {% if object.study.confirm_completion and object.study.allow_payment == 'True' %}
+        <script>
+            captcha_clicked = false;
+            // Triggers when participant successfully passes ReCaptcha
+            function enableBtn(){
+                captcha_clicked = true;
+                if (gotToEnd && test_duration >= {{ object.study.timing }}) {
+                    $('.submit-button').show();
+                }
+            }
+        </script>
+    {% else %}
+        <script>
+            captcha_clicked = true;
+        </script>    
+    {% endif %}
+
+    <script>
+        // Scripts to set state of instructions (show/hide)
+        function setCookie(name,value,days) {
+            console.log(name, value, days)
+            var expires = "";
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days*24*60*60*1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "")  + expires + "; path=/;SameSite=Strict";
+        }
+        function getCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0;i < ca.length;i++) {
+                var c = ca[i];
+                while (c.charAt(0)==' ') c = c.substring(1,c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+            }
+            return null;
+        }
+        function eraseCookie(name) {   
+            document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        }
+        window.onload = function() {
+            state = getCookie('sectionInstructions{{data.type.id}}')
+            if (state == 1) {
+                console.log('Set cookie 2')
+                $("#sectionInstructions{{data.type.id}}").collapse('show');
+                $('#section_instructions_title').addClass("collaped");
+                $("#section_instructions_title").attr("aria-expanded","true");
+            } else {
+                console.log('Set cookie 1')
+                $("#sectionInstructions{{data.type.id}}").collapse('hide');
+                $('#section_instructions_title').addClass("collaped");
+                $("#section_instructions_title").attr("aria-expanded","false");
+            }
+            state = getCookie('sectionInstructions{{data.type.id}}')
+        }
+        $("#section_instructions_title").click(function(){
+            $("#sectionInstructions{{data.type.id}}").collapse('toggle');
+            state = state % 2 + 1
+            setCookie('sectionInstructions{{data.type.id}}',state,7) 
+        });
+    </script>
+    <script>
+        $(':checkbox').on('change', function(){
+            csrfmiddlewaretoken = $("input[name='csrfmiddlewaretoken']").val();
+            var data = {
+                'hash_id': '{{ object.url_hash }}',
+                'csrfmiddlewaretoken': csrfmiddlewaretoken,
+                'item' : $(this).attr('name'),
+                'value' : $(this).val(),
+                'check' : $(this).is(':checked')
+            }
+        
+            //console.log(data);
+            $.post("{% url 'update-administration-data-item' %}", data);
+        });
+        </script>
+        <script>
+        $(':radio').on('click', function(){
+            csrfmiddlewaretoken = $("input[name='csrfmiddlewaretoken']").val();
+            var data = {
+                'hash_id': '{{  object.url_hash }}',
+                'csrfmiddlewaretoken': csrfmiddlewaretoken,
+                'item' : $(this).attr('name'),
+                'value' : $(this).val(),
+                'check' : $(this).is(':checked')
+            }
+        
+            //console.log(data);
+            $.post("{% url 'update-administration-data-item' %}", data);
+        });
+        </script>
+        <script>
+        $(':text').on('change', function(){
+            csrfmiddlewaretoken = $("input[name='csrfmiddlewaretoken']").val();
+            var data = {
+                'hash_id': '{{  object.url_hash }}',
+                'csrfmiddlewaretoken': csrfmiddlewaretoken,
+                'item' : $(this).attr('name'),
+                'value' : $(this).val(),
+                'check' : 'true' //setting check to true will ensure the value is used
+            }
+        
+            //console.log(data);
+            $.post("{% url 'update-administration-data-item' %}", data);
+        });
+        </script>
+        <script>
+        $('textarea').on('change', function (){
+            csrfmiddlewaretoken = $("input[name='csrfmiddlewaretoken']").val();
+            var data = {
+                'hash_id': '{{  object.url_hash }}',
+                'csrfmiddlewaretoken': csrfmiddlewaretoken,
+                'item' : $(this).attr('name'),
+                'value' : $(this).val(),
+                'check' : 'true' //setting check to true will ensure the value is used
+            }
+        
+            //console.log(data);
+            $.post("{% url 'update-administration-data-item' %}", data);
+        });
+        </script>
 {% endblock %}

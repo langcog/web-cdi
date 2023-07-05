@@ -1,11 +1,14 @@
 import json
 from typing import Any, Dict, Optional
-from django.db import models
-
+from django.urls import reverse
+from django.shortcuts import redirect
+from django.http import HttpRequest, HttpResponse
+from django.utils import timezone
 from django.views.generic import DetailView, UpdateView
 from researcher_UI.models import administration, administration_data
 
-from cdi_forms.views.utils import prefilled_cdi_data, PROJECT_ROOT, model_map, cdi_items
+from cdi_forms.views.utils import prefilled_cdi_data, PROJECT_ROOT, model_map, cdi_items, get_administration_instance
+from cdi_forms.utils import previous_and_next
 from django.conf import settings
 
 
@@ -32,11 +35,25 @@ class AdministrationUpdateView(UpdateView):
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         ctx = super().get_context_data(**kwargs)
         ctx['data'] = self.get_section()
+        ctx['contents'] = ctx['data']['contents']
         return ctx
     
     def get_object(self, queryset=None):
         return administration.objects.get(url_hash=self.kwargs['hash_id'])
-        return super().get_object(queryset)
+    
+    def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
+        if 'btn-save' in request.POST:
+            response = self.request.get_full_path()
+        if 'btn-previous' in request.POST:
+            response = reverse('update_administration_section', args=(self.get_object().url_hash, request.POST['previous'] ))
+        if 'btn-next' in request.POST:
+            response = reverse('update_administration_section', args=(self.get_object().url_hash, request.POST['next'] ))
+        if 'btn-back' in request.POST:
+            response = reverse('background-info', args=(self.get_object().backgroundinfo.pk,))
+
+        administration.objects.filter(url_hash=self.get_object().url_hash).update(last_modified=timezone.now())
+
+        return redirect(response)
     
     def get_field_values(self):
         field_values = [
@@ -130,12 +147,31 @@ class AdministrationUpdateView(UpdateView):
         for part in data["parts"]:
             for item_type in part["types"]:
                 if "sections" in item_type:
-                    for section in item_type["sections"]:
-                        if target_section == None:
-                            return self.return_data(section, item_type, prefilled_data)
-                        if section == target_section:
-                            return self.return_data(section, item_type, prefilled_data)
-                            
+                    for previous_section, section, next_section in previous_and_next(item_type['sections']):
+                        if target_section == None or target_section == section['id']:
+                            return_data =  self.return_data(section, item_type, prefilled_data)
+                            return_data['part'] = part['title']
+                            if 'sub_title' in item_type:
+                                subtitle = item_type['sub_title']
+                            else:
+                                subtitle = ''
+                            return_data['type'] = {
+                                'title': item_type['title'],
+                                'subtitle': subtitle,
+                                'type': item_type['type'],
+                                'instructions': item_type['text'],
+                                'id': item_type['id'],
+                            }
+                            return_data['contents'] = data['parts']
+                            if previous_section:
+                                return_data['previous_section'] = previous_section['id']
+                            else:
+                                return_data['previous_section'] = None
+                            if next_section:
+                                return_data['next_section'] = next_section['id']
+                            else:
+                                return_data['next_section'] = None
+                            return return_data
                 else:
                     group_objects = instrument_model.filter(
                         item_type__exact=item_type["id"]
@@ -149,4 +185,36 @@ class AdministrationUpdateView(UpdateView):
                     item_type["objects"] = x
                     if self.object.study.show_feedback:
                         raw_objects.extend(x)
-        
+    
+
+def update_administration_data_item(request):
+    if not request.POST:
+        return
+
+    hash_id = request.POST.get("hash_id")
+    administration_instance = get_administration_instance(hash_id)
+    instrument_name = (
+        administration_instance.study.instrument.name
+    )  # Get instrument name associated with study
+    instrument_model = model_map(instrument_name).filter(
+        itemID__in=request.POST
+    )  # Fetch instrument model based on instrument name.
+
+    value = ""
+    if request.POST["check"] == "true":
+        value = request.POST["value"]
+
+    if len(value) > 0:
+        administration_data.objects.update_or_create(
+            administration=administration_instance,
+            item_ID=request.POST["item"],
+            defaults={"value": value},
+        )
+    elif administration_data.objects.filter(
+        administration=administration_instance, item_ID=request.POST["item"]
+    ).exists():
+        administration_data.objects.get(
+            administration=administration_instance, item_ID=request.POST["item"]
+        ).delete()
+    administration.objects.filter(url_hash=hash_id).update(last_modified=timezone.now())
+    return HttpResponse(json.dumps([{}]), content_type="application/json")

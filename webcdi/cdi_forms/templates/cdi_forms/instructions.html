@@ -6,43 +6,12 @@
 <!-- Navigation buttons placed in cdi_base.html -->
 {% block nav_buttons %}
     {% if not completed %}
-    <div class="button-wrapper">
-        <div class="flex-row d-flex justify-content-center">
-            <a href="{% url 'update_administration' object.url_hash %}" name="btn-save" value="{% trans 'Save' %}" class="btn btn-primary" type="submit">{% trans 'Save' %}</a>
-            <a href="{% url 'update_administration' object.url_hash %}" name="btn-submit" value="{% trans 'Submit' %}" class="btn btn-success submit-button" type="submit" onclick="clicked(event)">{% trans 'Submit' %}</a>
+        <div class="button-wrapper">
+            <div class="flex-row d-flex justify-content-center">    
+                <a href="{% url 'background-info' object.backgroundinfo.pk %}" name="btn-back" value="{% trans 'Go back to Background Info' %}" class="btn btn-primary" type="submit">{% trans 'Go back to Background Info' %}</a>
+            </div>
         </div>
-        <div class="flex-row d-flex justify-content-center">    
-            <a href="{% url 'background-info' object.backgroundinfo.pk %}" name="btn-back" value="{% trans 'Go back to Background Info' %}" class="btn btn-primary" type="submit">{% trans 'Go back to Background Info' %}</a>
-        </div>
-    </div>
     {% endif %}
-{% endblock %}
-
-
-<!-- Navigation sidebar -->
-{% block navcontentsx %}
-<a href="#nav_list" data-toggle="" id="tob_title"><h4>{% trans "Table of Contents:" %} <i class="material-icons">arrow_drop_down</i></h4></a>
-<div id = "nav_list" class = "">
-    <h4>{% trans "Contents:" %}</h4>
-    <ul class="nav bs-docs-sidenav">
-        <li><a id="id_btn_instructions">{% trans 'Instructions:' %}</a></li>
-        {% for part in parts %}
-            <li><a href="#{{ part.id }}" onclick="findPage({{ part.types.0.id }}_div)">{{ part.title }}</a>
-                <ul class="nav">
-                    {% for type in part.types %}
-                        <li><a onclick="findPage({{ type.id }}_div)">{{ type.title }}</a></li>
-                        {% for section in type.sections %}
-                            <li><a onclick="findPage({{ section.id }}_div)">{{ section.title }}</a></li>
-                        {% endfor %}
-
-                    {% endfor %}
-                </ul>
-            </li>
-        {% endfor %}
-    </ul>
-    {{ language_code }}
-    {{ object.study.instrument.form }}
-</div>
 {% endblock %}
 
 
@@ -51,24 +20,23 @@
 <!-- Actual CDI form. Sections are broken into pages and automatically  and extend based on changePages function -->
 <ul>
     <!-- Instructions given to parents based on form. Includes photos. -->
-    <div id="intro" class = "page_div "><div>
+    <div id="intro" class = "page_div ">
+        <div>
         {% if object.study.instrument.form in "WG,WG2,L1" %}
-
             <div id = "intro_part1" class = "page_div ">
                 <p class="lead" id="intro_text">
                     {% trans 'In this section, you will be asked to think about which phrases and words your child "understands" and "understands and says."  This assessment is for children of many ages. Your child may not be able to understand or say a lot of the words on the form. That is perfectly fine!' %}
                 </p>
                 <h4>
                     {% trans 'Your child "understands" a word/phrase if they know what the word/phrase means, even though they may not be able to say it themselves. Here are some examples.' %}
-                </h4> <br><br>
+                </h4> 
+                <br><br>
 
                 <div class="row">
                     <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
                         {% with 'images/'|add:language_code|add:'_understands-yes-get.png' as image_static %}
-                          
                             <img src="{% static image_static %}" class="rounded mx-auto d-block" alt="Hearing the word AND looking for the object can mean that your child understands it." style="max-width: 90%; border: 1px solid black;">
                         {% endwith %}
-
                     </div>
 
                     <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
@@ -78,14 +46,14 @@
                         {% trans 'Your child responds appropriately to the word/phrase. For example, when you say "Get the ball," s/he turns and tries to find the ball.' %}
                         </h4>
                     </div>
-                </div><br>
+                </div>
+                <br>
 
                 <div class="row">
                     <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
                         {% with 'images/'|add:language_code|add:'_understands-no-hear.png' as image_static %}
                             <img src="{% static image_static %}" class="rounded mx-auto d-block" alt="Hearing the word is not enough to say that your child understands it." style="max-width: 90%; border: 1px solid black;">
                         {% endwith %}
-
                     </div>
 
                     <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
@@ -94,22 +62,18 @@
                         <br><br>
                         {% blocktrans %}Your child doesn't have a meaning for the word/phrase.  S/he may have heard it before, like in a story, but you don't think s/he knows what it means.{% endblocktrans %}
                         </h4>
-
                     </div>
-                </div><br>
-
+                </div>
+                <br>
             </div>
 
             <div id = "intro_part2" class = "page_div ">
-
                 <h4>{% trans 'Your child "understands and says" a word/phrase if they know what the word/phrase means AND they are able to say it by themselves. Here are some examples.' %}</h4> <br><br>
-
                 <div class="row">
                     <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
                         {% with 'images/'|add:language_code|add:'_says-yes-ball.png' as image_static %}
                             <img src="{% static image_static %}" class="rounded mx-auto d-block" alt="Having your child say the word in the presence of the object can mean that your child understands and says the word." style="max-width: 90%; border: 1px solid black;">
                         {% endwith %}
-
                     </div>
 
                     <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
@@ -118,36 +82,32 @@
                         <br><br>
                         {% trans 'Your child says a word/phrase when trying to name an object or describe something that happened.  You think s/he has a meaning for that word/phrase.' %}
                         </h4>
-
-
                     </div>
-                </div> <br>
+                </div> 
+                <br>
 
                 <div class="row">
                     <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
                         {% with 'images/'|add:language_code|add:'_says-yes-raff.png' as image_static %}
                             <img src="{% static image_static %}" class="rounded mx-auto d-block" alt="Having your child say the word in the presence of the object can mean that your child understands and says the word." style="max-width: 90%; border: 1px solid black;">
                         {% endwith %}
-
                     </div>
 
                     <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
                         <h4>
-                        {% blocktrans %}It's fine if your child can't say the whole word or says it his/her own "special" way.{% endblocktrans %}
-                        <br><br>
-                        {% trans 'DO check "understands and says."' %}
+                            {% blocktrans %}It's fine if your child can't say the whole word or says it his/her own "special" way.{% endblocktrans %}
+                            <br><br>
+                            {% trans 'DO check "understands and says."' %}
                         </h4>
-
-
                     </div>
-                </div> <br>
+                </div> 
+                <br>
 
                 <div class="row">
                     <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
                         {% with 'images/'|add:language_code|add:'_says-no-baba.png' as image_static %}
                             <img src="{% static image_static %}" class="rounded mx-auto d-block" alt="Saying the word alone is not enough to mean that your child understands and says a word. The context is important!" style="max-width: 90%; border: 1px solid black;">
                         {% endwith %}
-
                     </div>
 
                     <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
@@ -156,16 +116,15 @@
                         <br><br>
                         {% blocktrans %}DON'T check "understands and says."{% endblocktrans %}
                         </h4>
-
                     </div>
-                </div><br>
+                </div>
+                <br>
 
                 <div class="row">
                     <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
                         {% with 'images/'|add:language_code|add:'_says-no-coaching.png' as image_static %}
                             <img src="{% static image_static %}" class="rounded mx-auto d-block" alt="Having your child repeat back a taught word is not enough to mean that your child undestands the word." style="max-width: 90%; border: 1px solid black;">
                         {% endwith %}
-
                     </div>
 
                     <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
@@ -174,23 +133,14 @@
                         <br><br>
                         {% blocktrans %}DON'T check "understands and says."{% endblocktrans %}
                         </h4>
-
-
                     </div>
                 </div>
-
             </div>
-                   
-
         {% elif object.study.instrument.form  in "WS,WS2,L2A,L2B,CDI3,L2AB,L2AB,CDI3B" %}
-            {% load static %}
-
             <div id = "intro_part1" class = "page_div ">
-
                 <p class="lead" id="intro_text">
                    {% blocktrans %}In this section, you will be asked about words that your child "understands and says." Your child "understands and says" a word on the list if they know what the word means AND they say it by themselves. Here are some examples. This assessment is for children of many ages. Your child may not be able to understand or say a lot of the words on the form. That is perfectly fine!{% endblocktrans %}
                 </p>
-
 
                 <div class="row">
                     <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
@@ -206,11 +156,9 @@
                         <br><br>
                         {% trans 'Your child says the word when trying to name an object or describe something that happened.  You think s/he has a meaning for that word.' %}
                         </h4>
-
-
-
                     </div>
-                </div> <br>
+                </div> 
+                <br>
 
                 <div class="row">
                     <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
@@ -229,49 +177,49 @@
 
 
                     </div>
-                </div> <br>
+                </div> 
+                <br>
 
                 <div class="row">
                     <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
                         {% with 'images/'|add:language_code|add:'_says-no-baba_WS.png' as image_static %}
                             <img src="{% static image_static %}" class="rounded mx-auto d-block" alt="Saying the word alone is not enough to mean that your child understands and says a word. The context is important!" style="max-width: 90%; border: 1px solid black;">
                         {% endwith %}
-
                     </div>
 
                     <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
                         <h4>
                         {% blocktrans %}DON'T check the box if your child is just stringing sounds together. This is not a real word that means something.{% endblocktrans %}
                         </h4>
-
                     </div>
-                </div><br>
+                </div>
+                <br>
 
                 <div class="row">
                     <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
                         {% with 'images/'|add:language_code|add:'_says-no-coaching_WS.png' as image_static %}
                             <img src="{% static image_static %}" class="rounded mx-auto d-block" alt="Having your child repeat back a taught word is not enough to mean that your child undestands the word." style="max-width: 90%; border: 1px solid black;">
                         {% endwith %}
-
                     </div>
 
                     <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
                         <h4>
                         {% blocktrans %}DON'T ask your child to repeat the words on the list. This doesn't count!{% endblocktrans %}
                         </h4>
-
-
                     </div>
                 </div>
-
             </div>
-
         {% endif %}
-    <br>
+        <br>
+        </div>
     </div>
+    <div class="button-wrapper">
+        <div class="flex-row  d-flex justify-content-center">
+            <a class="btn btn-primary next-cdi-page" href="{% url 'update_administration' object.url_hash %}">{% trans "Next Page" %} &#62;&#62;</a>
+        </div>
     </div>
-
+    <input type="hidden" id="page_number" name="page_number" value = "0">
+    <hr>
+    <div class="flex-row"><p class="text-center">{% trans "Don't forget to save your progress whenever you can!" %}</p></div>
 </ul>
-
-
 {% endblock %}

@@ -4,6 +4,7 @@ import re
 
 from researcher_UI.models import administration_data, instrument, administration
 from django.conf import settings
+from django.http import Http404
 from cdi_forms.models import Instrument_Forms, BackgroundInfo, Zipcode
 from django.utils import translation
 
@@ -278,3 +279,11 @@ def safe_harbor_zip_code(obj):
         else:
             zip_prefix = zip_prefix + "**"
     return zip_prefix
+
+# Find the administration object for a test-taker based on their unique hash code.
+def get_administration_instance(hash_id):
+    try:
+        administration_instance = administration.objects.get(url_hash=hash_id)
+    except:
+        raise Http404("Administration not found")
+    return administration_instance
