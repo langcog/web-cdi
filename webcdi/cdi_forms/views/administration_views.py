@@ -37,7 +37,8 @@ class AdministrationUpdateView(UpdateView):
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         ctx = super().get_context_data(**kwargs)
         ctx['data'] = self.get_section()
-        ctx['contents'] = ctx['data']['contents']
+        if 'contents' in ctx['data']:
+            ctx['contents'] = ctx['data']['contents']
         return ctx
     
     def get_object(self, queryset=None):
@@ -72,17 +73,23 @@ class AdministrationUpdateView(UpdateView):
         ]
         return field_values
     
-    def return_data(self, section, item_type, prefilled_data):
+    def return_data(self, section, item_type, prefilled_data, target='category'):
         raw_objects = []
         instrument_model = model_map(
             self.object.study.instrument.name
         )
-        group_objects = instrument_model.filter(
-            category__exact=section["id"]
-        ).values(*self.get_field_values())
+        if target == 'category':
+            group_objects = instrument_model.filter(
+                category__exact=section["id"]
+            ).values(*self.get_field_values())
+            
+        elif target == 'item_type':
+            group_objects = instrument_model.filter(
+                item_type__exact=item_type["id"]
+            ).values(*self.get_field_values())
+                    
         if "type" not in section:
-            section["type"] = item_type["type"]
-
+            section["type"] = item_type["type"]            
         x = cdi_items(
             group_objects,
             section["type"],
@@ -97,7 +104,7 @@ class AdministrationUpdateView(UpdateView):
             section["starred"] = "*Or the word used in your family"
             
         return section
-
+ 
     def get_section(self, target_section=None):
         if 'section' in self.kwargs:
             target_section = self.kwargs['section']
@@ -176,8 +183,57 @@ class AdministrationUpdateView(UpdateView):
                             else:
                                 return_data['next_section'] = None
                             return return_data
+                    '''
+                    for section in item_type["sections"]:
+                        group_objects = instrument_model.filter(
+                            category__exact=section["id"]
+                        ).values(*field_values)
+                        if "type" not in section:
+                            section["type"] = item_type["type"]
+                        x = cdi_items(
+                            group_objects,
+                            section["type"],
+                            prefilled_data,
+                            item_type["id"],
+                        )
+                        section["objects"] = x
+                        if administration_instance.study.show_feedback:
+                            raw_objects.extend(x)
+                        if any(["*" in x["definition"] for x in section["objects"]]):
+                            section["starred"] = "*Or the word used in your family"
+                    '''
                 else:
                     logger.debug (f'IN ELSE SECTION')
+                    if target_section == item_type['id']:
+                        continue
+                        return_data =  self.return_data(section, item_type, prefilled_data)
+                        return_data['part'] = part['title']
+                        if 'sub_title' in item_type:
+                            subtitle = item_type['sub_title']
+                        else:
+                            subtitle = ''
+                        
+                        instructions = item_type['text'] if 'text' in item_type else None
+                        return_data['type'] = {
+                            'title': item_type['title'],
+                            'subtitle': subtitle,
+                            'type': item_type['type'],
+                            'instructions': instructions,
+                            'id': item_type['id'],
+                        }
+                        return_data['contents'] = data['parts']
+                        if previous_section:
+                            return_data['previous_section'] = previous_section['id']
+                        else:
+                            return_data['previous_section'] = None
+                        if next_section:
+                            return_data['next_section'] = next_section['id']
+                        elif next_type:
+                            return_data['next_section'] = next_type['id']
+                        else:
+                            return_data['next_section'] = None
+                        return return_data
+                    '''
                     group_objects = instrument_model.filter(
                         item_type__exact=item_type["id"]
                     ).values(*self.get_field_values())
@@ -190,7 +246,7 @@ class AdministrationUpdateView(UpdateView):
                     item_type["objects"] = x
                     if self.object.study.show_feedback:
                         raw_objects.extend(x)
-    
+                    '''
 
 def update_administration_data_item(request):
     if not request.POST:
