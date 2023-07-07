@@ -20,8 +20,15 @@ urlpatterns = [
         url(r'^administraion-view/(?P<pk>[0-9]+)/$', views.AdministrationDetailView.as_view(), name="administration-view"),
         path('cat/', include(('cdi_forms.cat_forms.urls', 'cat_forms'), namespace="cat_forms")),
 
-        path('instructions/<str:hash_id>/', views.InstructionDetailView.as_view(), name='instructions'),
-        path('administration/<str:hash_id>/first-page/', views.AdministrationUpdateView.as_view(), name='update_administration'),
-        path('administration/<str:hash_id>/<str:section>/', views.AdministrationUpdateView.as_view(), name='update_administration_section'),
-        
+
+        path (
+                'administration/<str:hash_id>/',
+                include ([ 
+                        path('instructions/', views.InstructionDetailView.as_view(), name='instructions'),
+                        path('first-page/', views.AdministrationUpdateView.as_view(), name='update_administration'),
+                        path('<int:section>/', views.AdministrationUpdateView.as_view(), name='update_administration_section'),
+                        path('summary/', views.AdministrationSummaryView.as_view(), name='administration_summary_view'),
+                ])
+        )
+
 ]

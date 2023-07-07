@@ -7,7 +7,7 @@ from cdi_forms.views.utils import language_map, PROJECT_ROOT
 
 class InstructionDetailView(DetailView):
     model = administration
-    template_name = 'cdi_forms/instructions.html'
+    template_name = 'cdi_forms/administration_instructions.html'
 
     def get_object(self, queryset = None ):
         return administration.objects.get(url_hash=self.kwargs['hash_id'])

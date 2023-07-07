@@ -3,16 +3,18 @@
 <!-- Navigation buttons -->
 <div class="button-wrapper">
     <div class="flex-row  d-flex justify-content-center">
-        {% if data.previous_section %}
+        {% if data.menu > 1 %}
             <input name="btn-previous" value="&#60;&#60; {% trans 'Previous Page' %}" class="btn btn-primary" type="submit">
-            <input type="hidden" id="id_previous" name="previous" value = "{{ data.previous_section }}">
+            <input type="hidden" id="id_previous" name="previous" value = "{{ data.menu|add:'-1' }}">
         {% endif %}
-        {% if data.next_section %}
+        {% if data.menu < contents|max_page %}
             <input name="btn-next" value="{% trans 'Next Page' %} &#62;&#62;" class="btn btn-primary" type="submit">
-            <input type="hidden" id="id_next" name="next" value = "{{ data.next_section }}">
+            <input type="hidden" id="id_next" name="next" value = "{{ data.menu|add:'1' }}">
         {% endif %}
-        <input id="id_submit_btn2" name="btn-submit" value="{% trans 'Submit' %}" class="btn btn-success submit-button" type="submit" onclick="clicked(event)">
-        <font id="progress"></font>
+        {% if data.menu == contents|max_page and timer %}
+            <input id="id_submit_btn2" name="btn-submit" value="{% trans 'Submit' %}" class="btn btn-success submit-button" type="submit" onclick="clicked(event)">
+        {% endif %}
+        <font id="progress">{{ data.menu }}/{{ contents|max_page }}</font>
     </div>
     <div class="flex-row d-flex justify-content-center">        
         <input name="btn-save" value="{% trans 'Save' %}" class="btn btn-primary" type="submit">

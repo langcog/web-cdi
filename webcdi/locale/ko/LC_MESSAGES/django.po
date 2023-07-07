@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-02 17:59+0000\n"
+"POT-Creation-Date: 2023-07-07 06:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,9 +19,9 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: cdi_forms/forms.py:31 cdi_forms/forms.py:32 cdi_forms/models.py:639
+#: cdi_forms/templates/cdi_forms/administration_base.html:166
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:150
 #: cdi_forms/templates/cdi_forms/cdi_base.html:160
-#: cdi_forms/templates/cdi_forms/new_cdi_base.html:151
 msgid "No"
 msgstr "아니오"
 
@@ -489,11 +489,10 @@ msgid "What would you like to tell us?"
 msgstr "저희에게 말씀해 주시고 싶은 것이 있습니까?"
 
 #: cdi_forms/forms.py:940
-#: cdi_forms/templates/cdi_forms/administration_form.html:12
+#: cdi_forms/templates/cdi_forms/_navigation_buttons.html:15
+#: cdi_forms/templates/cdi_forms/administration_form.html:13
 #: cdi_forms/templates/cdi_forms/cdi_form.html:11
-#: cdi_forms/templates/cdi_forms/cdi_form.html:323
-#: cdi_forms/templates/cdi_forms/instructions.html:12
-#: cdi_forms/views/views.py:385
+#: cdi_forms/templates/cdi_forms/cdi_form.html:323 cdi_forms/views/views.py:377
 msgid "Submit"
 msgstr "제출"
 
@@ -1517,59 +1516,339 @@ msgid ""
 "vision, speech, learning difficulty"
 msgstr ""
 
+#: cdi_forms/templates/cdi_forms/_navigation_buttons.html:7
+#: cdi_forms/templates/cdi_forms/cdi_form.html:321
+msgid "Previous Page"
+msgstr "이전 페이지"
+
+#: cdi_forms/templates/cdi_forms/_navigation_buttons.html:11
+#: cdi_forms/templates/cdi_forms/administration_instructions.html:218
+#: cdi_forms/templates/cdi_forms/cdi_form.html:322
+msgid "Next Page"
+msgstr "다음 페이지"
+
+#: cdi_forms/templates/cdi_forms/_navigation_buttons.html:20
 #: cdi_forms/templates/cdi_forms/administration_form.html:11
 #: cdi_forms/templates/cdi_forms/cdi_form.html:10
 #: cdi_forms/templates/cdi_forms/cdi_form.html:327
-#: cdi_forms/templates/cdi_forms/instructions.html:11
 #: cdi_forms/templates/cdi_forms/study_group.html:6
-#: cdi_forms/views/views.py:346 researcher_UI/forms.py:215
+#: cdi_forms/views/views.py:338 researcher_UI/forms.py:215
 #: researcher_UI/forms.py:447
 msgid "Save"
 msgstr "저장"
 
-#: cdi_forms/templates/cdi_forms/administration_form.html:15
+#: cdi_forms/templates/cdi_forms/_navigation_buttons.html:21
+#: cdi_forms/templates/cdi_forms/administration_form.html:17
+#: cdi_forms/templates/cdi_forms/administration_instructions.html:11
 #: cdi_forms/templates/cdi_forms/backpage_info.html:16
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:32
 #: cdi_forms/templates/cdi_forms/cdi_form.html:14
 #: cdi_forms/templates/cdi_forms/cdi_form.html:328
-#: cdi_forms/templates/cdi_forms/instructions.html:15
-#: cdi_forms/views/background_info_views.py:342 cdi_forms/views/views.py:371
+#: cdi_forms/views/background_info_views.py:342 cdi_forms/views/views.py:363
 msgid "Go back to Background Info"
 msgstr "배경 정보로 돌아가기"
 
-#: cdi_forms/templates/cdi_forms/administration_form.html:24
+#: cdi_forms/templates/cdi_forms/_navigation_buttons.html:26
+#: cdi_forms/templates/cdi_forms/administration_instructions.html:223
+#: cdi_forms/templates/cdi_forms/cdi_form.html:334
+msgid "Don't forget to save your progress whenever you can!"
+msgstr "가능한 한 설문 내용을 저장하면서 진행해 주십시오."
+
+#: cdi_forms/templates/cdi_forms/administration_base.html:71
+#: cdi_forms/templates/cdi_forms/cdi_base.html:70
+msgid "Instructions: "
+msgstr "안내 사항: "
+
+#: cdi_forms/templates/cdi_forms/administration_base.html:75
+#: cdi_forms/templates/cdi_forms/cdi_base.html:74
+msgid "This form can be filled any time before the due date."
+msgstr "본 설문은 마감일 전까지 언제든지 응답할 수 있습니다."
+
+#: cdi_forms/templates/cdi_forms/administration_base.html:76
+#: cdi_forms/templates/cdi_forms/cdi_base.html:75
+msgid ""
+"It can also be saved at any time and resumed later by using the same link"
+msgstr ""
+"또한 설문을 저장한 뒤 언제든지 동일한 링크를 통해 다시 응답을 시작할 수 있습"
+"니다."
+
+#: cdi_forms/templates/cdi_forms/administration_base.html:76
+#: cdi_forms/templates/cdi_forms/cdi_base.html:75
+msgid "create bookmark"
+msgstr "책갈피 만들기"
+
+#: cdi_forms/templates/cdi_forms/administration_base.html:77
+#: cdi_forms/templates/cdi_forms/cdi_base.html:76
+msgid "After the form is submitted, it cannot be altered."
+msgstr "본 설문을 제출하신 후에는 응답 내용을 변경하실 수 없습니다."
+
+#: cdi_forms/templates/cdi_forms/administration_base.html:78
+#: cdi_forms/templates/cdi_forms/cdi_base.html:77
+msgid "The form also cannot be altered after the due date."
+msgstr "또한 마감일 이후에도 본 설문의 응답 내용을 변경하실 수 없습니다."
+
+#: cdi_forms/templates/cdi_forms/administration_base.html:79
+#: cdi_forms/templates/cdi_forms/cdi_base.html:78
+msgid ""
+"Please use the navigation buttons below. Do not use the \"back\" and "
+"\"forward\" buttons on your browser."
+msgstr ""
+"아래의 탐색 버튼을 사용해 주십시오. 브라우저의 \"뒤로\" 버튼과 \"앞으로\" 버"
+"튼을 사용하지 마십시오."
+
+#: cdi_forms/templates/cdi_forms/administration_base.html:80
+#: cdi_forms/templates/cdi_forms/cdi_base.html:79
+msgid ""
+"You can use the tab button and arrows keys to quickly navigate and answer "
+"questions."
+msgstr "탭 키와 방향 키를 사용하여 빠르게 탐색하고 질문에 답하실 수 있습니다."
+
+#: cdi_forms/templates/cdi_forms/administration_base.html:107
+#: cdi_forms/templates/cdi_forms/cdi_base.html:107
+msgid "Due date"
+msgstr "마감일"
+
+#: cdi_forms/templates/cdi_forms/administration_base.html:112
+#: cdi_forms/templates/cdi_forms/cdi_base.html:112
+msgid "Show waiver of documentation"
+msgstr "연구참여포기서 보기"
+
+#: cdi_forms/templates/cdi_forms/administration_base.html:117
+#: cdi_forms/templates/cdi_forms/cdi_base.html:117
+msgid "Reach out to the Web-CDI Team!"
+msgstr "웹CDI 팀에 연락해 주십시오!"
+
+#: cdi_forms/templates/cdi_forms/administration_base.html:129
 #: cdi_forms/templates/cdi_forms/cdi_form.html:24
-#: cdi_forms/templates/cdi_forms/instructions.html:24
 msgid "Table of Contents:"
 msgstr "목차:"
 
-#: cdi_forms/templates/cdi_forms/administration_form.html:26
+#: cdi_forms/templates/cdi_forms/administration_base.html:131
 #: cdi_forms/templates/cdi_forms/cdi_form.html:26
-#: cdi_forms/templates/cdi_forms/instructions.html:26
 msgid "Contents:"
 msgstr "내용:"
 
-#: cdi_forms/templates/cdi_forms/administration_form.html:28
+#: cdi_forms/templates/cdi_forms/administration_base.html:133
 #: cdi_forms/templates/cdi_forms/cdi_form.html:28
-#: cdi_forms/templates/cdi_forms/instructions.html:28
 msgid "Instructions:"
 msgstr "안내 사항: "
 
-#: cdi_forms/templates/cdi_forms/administration_form.html:66
+#: cdi_forms/templates/cdi_forms/administration_base.html:167
+#: cdi_forms/templates/cdi_forms/cdi_base.html:161
+msgid "Okay"
+msgstr "네"
+
+#: cdi_forms/templates/cdi_forms/administration_base.html:178
+#: cdi_forms/templates/cdi_forms/cdi_base.html:174
+msgid "Waiver Denied"
+msgstr "연구참여포기서 인정되지 않음"
+
+#: cdi_forms/templates/cdi_forms/administration_base.html:182
+#: cdi_forms/templates/cdi_forms/cdi_base.html:178
+msgid ""
+"Thank you for your response. We are unable to continue. Please close the "
+"window. If you would like, you may review the Waiver."
+msgstr ""
+"응답해 주셔서 감사합니다. 다음으로 진행할 수 없습니다. 브라우저 창을 닫아 주"
+"십시오. 원한다면 연구참여포기서를 다시 보실 수 있습니다."
+
+#: cdi_forms/templates/cdi_forms/administration_base.html:185
+#: cdi_forms/templates/cdi_forms/cdi_base.html:181
+msgid "Review Waiver"
+msgstr "연구참여포기서 다시 보기"
+
+#: cdi_forms/templates/cdi_forms/administration_form.html:35
 #: cdi_forms/templates/cdi_forms/cdi_items.html:18
 msgid "Hide/Show Instructions: "
 msgstr "안내 사항 보기/숨기기: "
 
-#: cdi_forms/templates/cdi_forms/background_info.html:7
-#: cdi_forms/templates/cdi_forms/background_info.html:66
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:124
-#: cdi_forms/templates/cdi_forms/study_group.html:7
-#: cdi_forms/views/background_info_views.py:317 cdi_forms/views/views.py:155
-msgid "Next"
-msgstr "다음"
+#: cdi_forms/templates/cdi_forms/administration_form.html:326
+#: cdi_forms/templates/cdi_forms/cdi_form.html:381
+msgid ""
+"Are you ready to submit? You cannot change your answers after submission."
+msgstr "제출하시겠습니까? 제출한 뒤에는 응답하신 내용을 변경할 수 없습니다."
 
+#: cdi_forms/templates/cdi_forms/administration_instructions.html:28
+#: cdi_forms/templates/cdi_forms/cdi_form.html:60
+msgid ""
+"In this section, you will be asked to think about which phrases and words "
+"your child \"understands\" and \"understands and says.\"  This assessment is "
+"for children of many ages. Your child may not be able to understand or say a "
+"lot of the words on the form. That is perfectly fine!"
+msgstr ""
+"본 장에서 귀하는 제시되는 여러 어휘 및 문장에 대해 아동이 이해는 가능한지, 이"
+"해도 가능하고 표현도 가능한지 체크해주셔야 합니다. 이해가 가능한 경우 \"이해"
+"한다\"에, 표현도 가능한 경우 \"이해하고 표현한다\"에 체크해주세요. 본 설문은 "
+"다양한 연령의 아동을 대상으로 합니다. 아동이 아직 본 설문에서 제시한 모든 어"
+"휘를 이해하거나 표현하지 못할 수도 있습니다. 그래도 괜찮습니다!"
+
+#: cdi_forms/templates/cdi_forms/administration_instructions.html:31
+#: cdi_forms/templates/cdi_forms/cdi_form.html:63
+msgid ""
+"Your child \"understands\" a word/phrase if they know what the word/phrase "
+"means, even though they may not be able to say it themselves. Here are some "
+"examples."
+msgstr ""
+"아동이 어휘/문장을 아직 정확히 표현하지 못하더라도 뜻은 이해하고 있다면, 아동"
+"은 해당 어휘/문장을 \"이해\"하는 것입니다. 다음 예시를 참고해 주십시오."
+
+#: cdi_forms/templates/cdi_forms/administration_instructions.html:44
+#: cdi_forms/templates/cdi_forms/cdi_form.html:77
+msgid "DO check \"understands\" if:"
+msgstr "다음과 같은 경우에는 \"이해한다\"에 체크 표시 해주십시오:"
+
+#: cdi_forms/templates/cdi_forms/administration_instructions.html:46
+#: cdi_forms/templates/cdi_forms/cdi_form.html:79
+msgid ""
+"Your child responds appropriately to the word/phrase. For example, when you "
+"say \"Get the ball,\" s/he turns and tries to find the ball."
+msgstr ""
+"아동이 어휘/문장에 적절하게 반응하는 경우 (예: 귀하가 \"공 가져와\"라고 말할 "
+"때 아동이 공을 찾으려고 함)"
+
+#: cdi_forms/templates/cdi_forms/administration_instructions.html:61
+#: cdi_forms/templates/cdi_forms/cdi_form.html:94
+msgid "DON'T check \"understands\" if:"
+msgstr "다음과 같은 경우에는 \"이해한다\"에 표시하지 마십시오:"
+
+#: cdi_forms/templates/cdi_forms/administration_instructions.html:63
+#: cdi_forms/templates/cdi_forms/cdi_form.html:96
+msgid ""
+"Your child doesn't have a meaning for the word/phrase.  S/he may have heard "
+"it before, like in a story, but you don't think s/he knows what it means."
+msgstr ""
+"아동이 어휘/문장의 뜻을 모르는 경우, 아동이 어휘/문장을 이야기에서 들어 본 적"
+"이 있지만, 그 뜻을 정확히는 모른다고 생각되는 경우"
+
+#: cdi_forms/templates/cdi_forms/administration_instructions.html:71
+#: cdi_forms/templates/cdi_forms/cdi_form.html:106
+msgid ""
+"Your child \"understands and says\" a word/phrase if they know what the word/"
+"phrase means AND they are able to say it by themselves. Here are some "
+"examples."
+msgstr ""
+"만약 아동이 어휘/문장의 뜻을 알고 있고, 어휘/문장을 스스로 표현도 할 수 있다"
+"면 해당 어휘/문장을 \"이해하고 표현한다\"에 체크하셔야 합니다. 다음 예시를 참"
+"고 해 주세요."
+
+#: cdi_forms/templates/cdi_forms/administration_instructions.html:81
+#: cdi_forms/templates/cdi_forms/cdi_form.html:118
+msgid "DO check \"understands and says\" if:"
+msgstr "다음과 같은 경우에는 \"이해하고 표현한다\"에 체크 표시 해주세요:"
+
+#: cdi_forms/templates/cdi_forms/administration_instructions.html:83
+#: cdi_forms/templates/cdi_forms/cdi_form.html:120
+msgid ""
+"Your child says a word/phrase when trying to name an object or describe "
+"something that happened.  You think s/he has a meaning for that word/phrase."
+msgstr ""
+"아동이 어떠한 대상을 지칭하거나, 일어난 일에 대해 묘사하기 위하여 어휘/문장"
+"을 표현하는 경우 아동이 해당 어휘/문장의 뜻을 정확히 안다고 생각되는 경우"
+
+#: cdi_forms/templates/cdi_forms/administration_instructions.html:98
+#: cdi_forms/templates/cdi_forms/cdi_form.html:137
+msgid ""
+"It's fine if your child can't say the whole word or says it his/her own "
+"\"special\" way."
+msgstr ""
+"만약 아동이 어휘를 정확히 발음하지 않거나, 자신만의 \"특별한\" 방식으로 표현"
+"하더라도 괜찮습니다."
+
+#: cdi_forms/templates/cdi_forms/administration_instructions.html:100
+#: cdi_forms/templates/cdi_forms/cdi_form.html:139
+msgid "DO check \"understands and says.\""
+msgstr "\"이해하고 표현한다\"에 체크 표시 해주십시오."
+
+#: cdi_forms/templates/cdi_forms/administration_instructions.html:115
+#: cdi_forms/templates/cdi_forms/cdi_form.html:156
+msgid ""
+"DON'T check if your child is just stringing sounds together.  This is not a "
+"real word that means something."
+msgstr ""
+"만약 아동이 단순히 한 소리, 한 소리를 이어서 표현하는 경우에는 체크표시하지 "
+"마세요. 이는 실제 어휘라고 보기 어렵습니다."
+
+#: cdi_forms/templates/cdi_forms/administration_instructions.html:117
+#: cdi_forms/templates/cdi_forms/administration_instructions.html:134
+#: cdi_forms/templates/cdi_forms/cdi_form.html:158
+#: cdi_forms/templates/cdi_forms/cdi_form.html:176
+msgid "DON'T check \"understands and says.\""
+msgstr "\"이해하고 표현한다\"에 표시하지 마십시오."
+
+#: cdi_forms/templates/cdi_forms/administration_instructions.html:132
+#: cdi_forms/templates/cdi_forms/administration_instructions.html:207
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:117
+#: cdi_forms/templates/cdi_forms/cdi_form.html:174
+#: cdi_forms/templates/cdi_forms/cdi_form.html:261
+msgid ""
+"DON'T ask your child to repeat the words on the list. This doesn't count!"
+msgstr ""
+"아동에게 어휘를 따라 말하게 하지 마십시오. 이 경우는 포함되지 않습니다!"
+
+#: cdi_forms/templates/cdi_forms/administration_instructions.html:142
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:46
+#: cdi_forms/templates/cdi_forms/cdi_form.html:192
+msgid ""
+"In this section, you will be asked about words that your child \"understands "
+"and says.\" Your child \"understands and says\" a word on the list if they "
+"know what the word means AND they say it by themselves. Here are some "
+"examples. This assessment is for children of many ages. Your child may not "
+"be able to understand or say a lot of the words on the form. That is "
+"perfectly fine!"
+msgstr ""
+"본 영역에서는 아동이 이해와 표현이 모두 가능한 어휘에 대해 체크해야 합니다. "
+"만약 아동이 어휘의 뜻을 알고 있으며 그 어휘를 스스로 표현도 할 수 있다면, "
+"\"이해하고 표현한다\"에 체크해주세요. 다음 예시를 참고해 주세요. 본 설문은 다"
+"양한 연령의 아동을 대상으로 합니다. 아동이 본 설문의 많은 어휘를 모두 이해하"
+"거나 표현하지 못할 수도 있습니다. 그래도 괜찮습니다!"
+
+#: cdi_forms/templates/cdi_forms/administration_instructions.html:155
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:59
+#: cdi_forms/templates/cdi_forms/cdi_form.html:206
+msgid "DO check the box if:"
+msgstr "다음과 같은 경우, 응답박스에 체크 표시 해주십시오:"
+
+#: cdi_forms/templates/cdi_forms/administration_instructions.html:157
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:61
+#: cdi_forms/templates/cdi_forms/cdi_form.html:208
+msgid ""
+"Your child says the word when trying to name an object or describe something "
+"that happened.  You think s/he has a meaning for that word."
+msgstr ""
+"아동이 대상을 지칭하거나 일어난 일에 대해 묘사하기 위하여 어휘/문장을 표현하"
+"는 경우, 아동이 해당 어휘/문장의 뜻을 안다고 생각되는 경우"
+
+#: cdi_forms/templates/cdi_forms/administration_instructions.html:173
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:80
+#: cdi_forms/templates/cdi_forms/cdi_form.html:226
+msgid ""
+"It's fine if your child can't say the whole word or says it his/her own "
+"\"special\" way. If you use another word in your family (e.g., Nana for "
+"Grandma), that is ok too!"
+msgstr ""
+"만약 아동이 어휘 전체를 정확하게 말하지 못하거나 아동만의 \"특별한\" 방식으"
+"로 표현하더라도 괜찮습니다. 귀하께서 가족 구성원을 지칭할 때 다른 표현을 사용"
+"하시는 경우(예: 기린을 긴이라 부르는 경우, 할머니를 함미라 부르는 경우)도 괜"
+"찮습니다."
+
+#: cdi_forms/templates/cdi_forms/administration_instructions.html:175
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:82
+#: cdi_forms/templates/cdi_forms/cdi_form.html:228
+msgid "DO check the box."
+msgstr "응답박스에 체크 표시 해주십시오."
+
+#: cdi_forms/templates/cdi_forms/administration_instructions.html:192
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:100
+#: cdi_forms/templates/cdi_forms/cdi_form.html:245
+msgid ""
+"DON'T check the box if your child is just stringing sounds together. This is "
+"not a real word that means something."
+msgstr ""
+"만약 아동이 단순히 소리를 이어 말하는 경우 (예: 바 바 바)에는 표시하지 마십시"
+"오. 이는 의미를 지닌 실제 어휘가 아닙니다."
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html:39
 #: cdi_forms/templates/cdi_forms/background_info.html:18
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:39
 #: cdi_forms/templates/cdi_forms/study_group.html:15
 #: researcher_UI/templates/researcher_UI/individual/english-american-wg.html:9
 #: researcher_UI/templates/researcher_UI/individual/english-american-ws.html:9
@@ -1577,6 +1856,174 @@ msgstr "다음"
 #: researcher_UI/templates/researcher_UI/individual/english-canadian-ws.html:9
 msgid "MacArthur-Bates Communicative Development Inventory"
 msgstr "맥아더-베이츠 의사소통발달 평가"
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html:40
+msgid "Interesting tidbits learned from how your child speaks!"
+msgstr "아동이 말하는 방식이 알려주는 흥미로운 이야기!"
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html:77
+#, fuzzy, python-format
+#| msgid "Words Produced (%%)"
+msgid "Words Produced (%%)"
+msgstr "표현한 어휘 (%%)"
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html:117
+#, fuzzy, python-format
+#| msgid "Words Understood (%%)"
+msgid "Words Understood (%%)"
+msgstr "이해한 어휘 (%%)"
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html:162
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:31
+#: cdi_forms/templates/cdi_forms/expired.html:32
+#: cdi_forms/templates/cdi_forms/overflow.html:37
+msgid "MB-CDI Lab Logo"
+msgstr "맥아더-베이츠 의사소통발달 평가 연구실 로고"
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html:168
+#: cdi_forms/templates/cdi_forms/overflow.html:40
+msgid "Thank you!"
+msgstr "감사합니다!"
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html:171
+msgid ""
+"Thank you for taking the time to complete the MacArthur-Bates Communicative "
+"Development Inventory (CDI). With the help of parents and caregivers like "
+"you, we are working to learn more about the way that children’s language "
+"develops, and how that development varies across individual children and "
+"cultures. Remember that the CDI lists many different words that are used by "
+"many different children. Don’t worry if your child only knows a few of them "
+"right now. Below are some insights into your child’s developing vocabulary, "
+"based on our research. This summary is not a clinical evaluation. If you "
+"have any concerns about your child’s development, we recommend that you talk "
+"with your child’s physician. If you enjoyed our assessment, you can learn "
+"more about the CDI <a href=\"http://mb-cdi.stanford.edu/\" target=\"_blank"
+"\">here</a>. We appreciate your contribution!"
+msgstr ""
+"맥아더-베이츠 의사소통발달 평가 (CDI) 작성을 위해 시간을 내어주셔서 감사합니"
+"다. 부모님 및 양육자 분들의 도움으로 인하여 저희는 아동의 언어 발달이 어떻게 "
+"이루어지며 언어 및 문화에 따라 발달이 어떻게 달라질 수 있는지 지속적으로 연구"
+"할 수 있었습니다. 다양한 아동이 사용하는 많은 어휘가 CDI 목록에 포함되었다는 "
+"점을 명심해주세요. 아동이 당장은 몇몇 어휘만 알고 있더라도 너무 걱정하지 마세"
+"요. 본 연구를 바탕으로, 아동이 습득하고 있는 어휘에 대한 정보를 살펴보실 수 "
+"있습니다. 본 검사 결과는 임상 평가가 아닙니다. 만약 아동의 의사소통 발달이 걱"
+"정되신다면, 아동발달 전문가와의 상담을 권합니다. <a href=\"http://mb-cdi."
+"stanford.edu/\" target=\"_blank\">이곳</a>에서 CDI에 관한 더 많은 정보를 얻으"
+"실 수 있습니다. 본 연구에 관심을 가져주셔서 다시 한 번 감사드립니다!"
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html:178
+#, python-format
+msgid ""
+"We're sorry but it looks like we have run out of Amazon.com Gift Cards! "
+"Please <a href=\"%(contact_url)s\" target=\"_blank\">reach out to us</a> and "
+"we will quickly fix this issue."
+msgstr ""
+"죄송합니다. Amazon.com 상품권이 모두 소진되었습니다! <a href="
+"\"%(contact_url)s\" target=\"_blank\">저희에게 연락</a>해 주시면 이 문제를 빠"
+"르게 해결하겠습니다."
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html:183
+msgid ""
+"Thank you for participating in our Web-CDI project! It is our pleasure to "
+"send you this Amazon.com Gift Card that can be redeemed towards millions of "
+"items at <a href=\"http://www.amazon.com\" target=\"_blank\">www.amazon.com</"
+"a>. You may want to print this screen for easy reference later--you’ll need "
+"the gift card claim code below."
+msgstr ""
+"웹-CDI 프로젝트에 참여해 주셔서 감사합니다! <a href=\"http://www.amazon.com"
+"\" target=\"_blank\">www.amazon.com</a>의 다양한 상품 중에서 교환할 수 있는 "
+"Amazon.com 상품권을 귀하께 보내 드리게 되어 기쁩니다. 추후에 쉽게 찾아볼 수 "
+"있도록 본 화면을 인쇄하시면 좋을 것입니다. 상품권 사용 시 아래의 상품권 청구 "
+"코드가 필요합니다."
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html:187
+msgid "Gift Card Amount"
+msgstr "상품권 금액"
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html:188
+msgid "Claim Code"
+msgstr "청구 코드"
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html:192
+#, python-format
+msgid ""
+"To redeem your gift card, visit <a href=\"%(redeem_url)s\" target=\"_blank"
+"\">www.amazon.com/redeem</a>. Restrictions apply, see <a href=\"%(legal_url)s"
+"\" target=\"_blank\">www.amazon.com/gc-legal</a>."
+msgstr ""
+"상품권을 상품으로 교환하기 위해 <a href=\"%(redeem_url)s\" target=\"_blank"
+"\">www.amazon.com/redeem</a>을 방문해 주십시오. 제한 사항이 적용될 수 있습니"
+"다. <a href=\"%(legal_url)s\" target=\"_blank\">www.amazon.com/gc-legal</a>"
+"을 참고해 주십시오."
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html:216
+msgid "Graph My Data!"
+msgstr "데이터를 그래프로 보기!"
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html:222
+msgid "Show Me My Answers"
+msgstr "내 응답 보기"
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html:226
+#, fuzzy
+#| msgid "Show Me My Answers"
+msgid "Print My Answers"
+msgstr "내 응답 보기"
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html:231
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:52
+msgid "Click to complete the study"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html:248
+#: cdi_forms/templates/cdi_forms/administration_summary.html:252
+#: cdi_forms/templates/cdi_forms/administration_summary.html:257
+msgid "Save as PDF"
+msgstr "PDF로 저장하기"
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html:282
+#: cdi_forms/templates/cdi_forms/background_info.html:71
+#: cdi_forms/templates/cdi_forms/backpage_info.html:48
+#: cdi_forms/templates/cdi_forms/cdi_form.html:339
+#: cdi_forms/templates/cdi_forms/study_group.html:113
+msgid "Form unavailable. Contact admin."
+msgstr "설문을 시작할 수 없습니다. 관리자에게 문의하십시오."
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html:359
+msgid "My child says PPP words and understands UUU words."
+msgstr "우리 아이는 PPP 어휘를 표현하고 UUU 어휘를 이해합니다."
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html:361
+msgid "My child says PPP words."
+msgstr "우리 아이는 PPP 어휘를 표현합니다."
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html:363
+msgid "My child understands UUU words."
+msgstr "우리 아이는 UUU 어휘를 이해합니다."
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html:502
+msgid "My child produces the most words in the bestProdCat category."
+msgstr "우리 아이는 bestProdCat 목록에 있는 대부분의 어휘들을 표현합니다."
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html:506
+msgid "My child understands the most words in the bestCompCat category."
+msgstr "우리 아이는 bestCompCat 목록에 있는 대부분의 어휘들을 이해합니다."
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html:592
+msgid "The hardest word my child says is INSERTWORDHERE."
+msgstr "우리 아이가 말하기에 가장 어려워하는 어휘는 INSERTWORDHERE 입니다."
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html:597
+msgid "The hardest word my child understands is INSERTWORDHERE."
+msgstr "우리 아이가 이해하기에 가장 어려워하는 어휘는 INSERTWORDHERE 입니다."
+
+#: cdi_forms/templates/cdi_forms/background_info.html:7
+#: cdi_forms/templates/cdi_forms/background_info.html:66
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:124
+#: cdi_forms/templates/cdi_forms/study_group.html:7
+#: cdi_forms/views/background_info_views.py:317 cdi_forms/views/views.py:147
+msgid "Next"
+msgstr "다음"
 
 #: cdi_forms/templates/cdi_forms/background_info.html:20
 #: cdi_forms/templates/cdi_forms/study_group.html:17
@@ -1693,14 +2140,6 @@ msgstr "귀중한 시간을 내어 본 설문에 응답해 주셔서 진심으�
 msgid "Background Information"
 msgstr "배경 정보"
 
-#: cdi_forms/templates/cdi_forms/background_info.html:71
-#: cdi_forms/templates/cdi_forms/backpage_info.html:48
-#: cdi_forms/templates/cdi_forms/cdi_form.html:339
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:282
-#: cdi_forms/templates/cdi_forms/study_group.html:113
-msgid "Form unavailable. Contact admin."
-msgstr "설문을 시작할 수 없습니다. 관리자에게 문의하십시오."
-
 #: cdi_forms/templates/cdi_forms/backpage_info.html:12
 #: cdi_forms/templates/cdi_forms/backpage_info.html:45
 #: cdi_forms/views/background_info_views.py:329
@@ -1714,13 +2153,6 @@ msgstr "배경 정보 계속"
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:9
 msgid "Study Completed"
 msgstr ""
-
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:31
-#: cdi_forms/templates/cdi_forms/expired.html:32
-#: cdi_forms/templates/cdi_forms/overflow.html:37
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:162
-msgid "MB-CDI Lab Logo"
-msgstr "맥아더-베이츠 의사소통발달 평가 연구실 로고"
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:42
 #, python-format
@@ -1768,83 +2200,6 @@ msgstr ""
 "stanford.edu/\" target=\"_blank\">이곳</a>에서 CDI에 관한 더 많은 정보를 얻으"
 "실 수 있습니다. 본 연구에 관심을 가져주셔서 다시 한 번 감사드립니다!"
 
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:52
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:231
-msgid "Click to complete the study"
-msgstr ""
-
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:46
-#: cdi_forms/templates/cdi_forms/cdi_form.html:192
-#: cdi_forms/templates/cdi_forms/instructions.html:191
-msgid ""
-"In this section, you will be asked about words that your child \"understands "
-"and says.\" Your child \"understands and says\" a word on the list if they "
-"know what the word means AND they say it by themselves. Here are some "
-"examples. This assessment is for children of many ages. Your child may not "
-"be able to understand or say a lot of the words on the form. That is "
-"perfectly fine!"
-msgstr ""
-"본 영역에서는 아동이 이해와 표현이 모두 가능한 어휘에 대해 체크해야 합니다. "
-"만약 아동이 어휘의 뜻을 알고 있으며 그 어휘를 스스로 표현도 할 수 있다면, "
-"\"이해하고 표현한다\"에 체크해주세요. 다음 예시를 참고해 주세요. 본 설문은 다"
-"양한 연령의 아동을 대상으로 합니다. 아동이 본 설문의 많은 어휘를 모두 이해하"
-"거나 표현하지 못할 수도 있습니다. 그래도 괜찮습니다!"
-
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:59
-#: cdi_forms/templates/cdi_forms/cdi_form.html:206
-#: cdi_forms/templates/cdi_forms/instructions.html:205
-msgid "DO check the box if:"
-msgstr "다음과 같은 경우, 응답박스에 체크 표시 해주십시오:"
-
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:61
-#: cdi_forms/templates/cdi_forms/cdi_form.html:208
-#: cdi_forms/templates/cdi_forms/instructions.html:207
-msgid ""
-"Your child says the word when trying to name an object or describe something "
-"that happened.  You think s/he has a meaning for that word."
-msgstr ""
-"아동이 대상을 지칭하거나 일어난 일에 대해 묘사하기 위하여 어휘/문장을 표현하"
-"는 경우, 아동이 해당 어휘/문장의 뜻을 안다고 생각되는 경우"
-
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:80
-#: cdi_forms/templates/cdi_forms/cdi_form.html:226
-#: cdi_forms/templates/cdi_forms/instructions.html:225
-msgid ""
-"It's fine if your child can't say the whole word or says it his/her own "
-"\"special\" way. If you use another word in your family (e.g., Nana for "
-"Grandma), that is ok too!"
-msgstr ""
-"만약 아동이 어휘 전체를 정확하게 말하지 못하거나 아동만의 \"특별한\" 방식으"
-"로 표현하더라도 괜찮습니다. 귀하께서 가족 구성원을 지칭할 때 다른 표현을 사용"
-"하시는 경우(예: 기린을 긴이라 부르는 경우, 할머니를 함미라 부르는 경우)도 괜"
-"찮습니다."
-
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:82
-#: cdi_forms/templates/cdi_forms/cdi_form.html:228
-#: cdi_forms/templates/cdi_forms/instructions.html:227
-msgid "DO check the box."
-msgstr "응답박스에 체크 표시 해주십시오."
-
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:100
-#: cdi_forms/templates/cdi_forms/cdi_form.html:245
-#: cdi_forms/templates/cdi_forms/instructions.html:244
-msgid ""
-"DON'T check the box if your child is just stringing sounds together. This is "
-"not a real word that means something."
-msgstr ""
-"만약 아동이 단순히 소리를 이어 말하는 경우 (예: 바 바 바)에는 표시하지 마십시"
-"오. 이는 의미를 지닌 실제 어휘가 아닙니다."
-
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:117
-#: cdi_forms/templates/cdi_forms/cdi_form.html:174
-#: cdi_forms/templates/cdi_forms/cdi_form.html:261
-#: cdi_forms/templates/cdi_forms/instructions.html:173
-#: cdi_forms/templates/cdi_forms/instructions.html:260
-msgid ""
-"DON'T ask your child to repeat the words on the list. This doesn't count!"
-msgstr ""
-"아동에게 어휘를 따라 말하게 하지 마십시오. 이 경우는 포함되지 않습니다!"
-
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:137
 #, python-format
 msgid "%(words_shown)s of %(max_words)s (maximum) "
@@ -1859,201 +2214,6 @@ msgstr "아동은 누구와 살고 있나요?"
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:145
 msgid "* or word used in your family"
 msgstr ""
-
-#: cdi_forms/templates/cdi_forms/cdi_base.html:70
-#: cdi_forms/templates/cdi_forms/new_cdi_base.html:68
-msgid "Instructions: "
-msgstr "안내 사항: "
-
-#: cdi_forms/templates/cdi_forms/cdi_base.html:74
-#: cdi_forms/templates/cdi_forms/new_cdi_base.html:72
-msgid "This form can be filled any time before the due date."
-msgstr "본 설문은 마감일 전까지 언제든지 응답할 수 있습니다."
-
-#: cdi_forms/templates/cdi_forms/cdi_base.html:75
-#: cdi_forms/templates/cdi_forms/new_cdi_base.html:73
-msgid ""
-"It can also be saved at any time and resumed later by using the same link"
-msgstr ""
-"또한 설문을 저장한 뒤 언제든지 동일한 링크를 통해 다시 응답을 시작할 수 있습"
-"니다."
-
-#: cdi_forms/templates/cdi_forms/cdi_base.html:75
-#: cdi_forms/templates/cdi_forms/new_cdi_base.html:73
-msgid "create bookmark"
-msgstr "책갈피 만들기"
-
-#: cdi_forms/templates/cdi_forms/cdi_base.html:76
-#: cdi_forms/templates/cdi_forms/new_cdi_base.html:74
-msgid "After the form is submitted, it cannot be altered."
-msgstr "본 설문을 제출하신 후에는 응답 내용을 변경하실 수 없습니다."
-
-#: cdi_forms/templates/cdi_forms/cdi_base.html:77
-#: cdi_forms/templates/cdi_forms/new_cdi_base.html:75
-msgid "The form also cannot be altered after the due date."
-msgstr "또한 마감일 이후에도 본 설문의 응답 내용을 변경하실 수 없습니다."
-
-#: cdi_forms/templates/cdi_forms/cdi_base.html:78
-#: cdi_forms/templates/cdi_forms/new_cdi_base.html:76
-msgid ""
-"Please use the navigation buttons below. Do not use the \"back\" and "
-"\"forward\" buttons on your browser."
-msgstr ""
-"아래의 탐색 버튼을 사용해 주십시오. 브라우저의 \"뒤로\" 버튼과 \"앞으로\" 버"
-"튼을 사용하지 마십시오."
-
-#: cdi_forms/templates/cdi_forms/cdi_base.html:79
-#: cdi_forms/templates/cdi_forms/new_cdi_base.html:77
-msgid ""
-"You can use the tab button and arrows keys to quickly navigate and answer "
-"questions."
-msgstr "탭 키와 방향 키를 사용하여 빠르게 탐색하고 질문에 답하실 수 있습니다."
-
-#: cdi_forms/templates/cdi_forms/cdi_base.html:107
-#: cdi_forms/templates/cdi_forms/new_cdi_base.html:105
-msgid "Due date"
-msgstr "마감일"
-
-#: cdi_forms/templates/cdi_forms/cdi_base.html:112
-#: cdi_forms/templates/cdi_forms/new_cdi_base.html:110
-msgid "Show waiver of documentation"
-msgstr "연구참여포기서 보기"
-
-#: cdi_forms/templates/cdi_forms/cdi_base.html:117
-#: cdi_forms/templates/cdi_forms/new_cdi_base.html:115
-msgid "Reach out to the Web-CDI Team!"
-msgstr "웹CDI 팀에 연락해 주십시오!"
-
-#: cdi_forms/templates/cdi_forms/cdi_base.html:161
-#: cdi_forms/templates/cdi_forms/new_cdi_base.html:152
-msgid "Okay"
-msgstr "네"
-
-#: cdi_forms/templates/cdi_forms/cdi_base.html:174
-#: cdi_forms/templates/cdi_forms/new_cdi_base.html:163
-msgid "Waiver Denied"
-msgstr "연구참여포기서 인정되지 않음"
-
-#: cdi_forms/templates/cdi_forms/cdi_base.html:178
-#: cdi_forms/templates/cdi_forms/new_cdi_base.html:167
-msgid ""
-"Thank you for your response. We are unable to continue. Please close the "
-"window. If you would like, you may review the Waiver."
-msgstr ""
-"응답해 주셔서 감사합니다. 다음으로 진행할 수 없습니다. 브라우저 창을 닫아 주"
-"십시오. 원한다면 연구참여포기서를 다시 보실 수 있습니다."
-
-#: cdi_forms/templates/cdi_forms/cdi_base.html:181
-#: cdi_forms/templates/cdi_forms/new_cdi_base.html:170
-msgid "Review Waiver"
-msgstr "연구참여포기서 다시 보기"
-
-#: cdi_forms/templates/cdi_forms/cdi_form.html:60
-#: cdi_forms/templates/cdi_forms/instructions.html:59
-msgid ""
-"In this section, you will be asked to think about which phrases and words "
-"your child \"understands\" and \"understands and says.\"  This assessment is "
-"for children of many ages. Your child may not be able to understand or say a "
-"lot of the words on the form. That is perfectly fine!"
-msgstr ""
-"본 장에서 귀하는 제시되는 여러 어휘 및 문장에 대해 아동이 이해는 가능한지, 이"
-"해도 가능하고 표현도 가능한지 체크해주셔야 합니다. 이해가 가능한 경우 \"이해"
-"한다\"에, 표현도 가능한 경우 \"이해하고 표현한다\"에 체크해주세요. 본 설문은 "
-"다양한 연령의 아동을 대상으로 합니다. 아동이 아직 본 설문에서 제시한 모든 어"
-"휘를 이해하거나 표현하지 못할 수도 있습니다. 그래도 괜찮습니다!"
-
-#: cdi_forms/templates/cdi_forms/cdi_form.html:63
-#: cdi_forms/templates/cdi_forms/instructions.html:62
-msgid ""
-"Your child \"understands\" a word/phrase if they know what the word/phrase "
-"means, even though they may not be able to say it themselves. Here are some "
-"examples."
-msgstr ""
-"아동이 어휘/문장을 아직 정확히 표현하지 못하더라도 뜻은 이해하고 있다면, 아동"
-"은 해당 어휘/문장을 \"이해\"하는 것입니다. 다음 예시를 참고해 주십시오."
-
-#: cdi_forms/templates/cdi_forms/cdi_form.html:77
-#: cdi_forms/templates/cdi_forms/instructions.html:76
-msgid "DO check \"understands\" if:"
-msgstr "다음과 같은 경우에는 \"이해한다\"에 체크 표시 해주십시오:"
-
-#: cdi_forms/templates/cdi_forms/cdi_form.html:79
-#: cdi_forms/templates/cdi_forms/instructions.html:78
-msgid ""
-"Your child responds appropriately to the word/phrase. For example, when you "
-"say \"Get the ball,\" s/he turns and tries to find the ball."
-msgstr ""
-"아동이 어휘/문장에 적절하게 반응하는 경우 (예: 귀하가 \"공 가져와\"라고 말할 "
-"때 아동이 공을 찾으려고 함)"
-
-#: cdi_forms/templates/cdi_forms/cdi_form.html:94
-#: cdi_forms/templates/cdi_forms/instructions.html:93
-msgid "DON'T check \"understands\" if:"
-msgstr "다음과 같은 경우에는 \"이해한다\"에 표시하지 마십시오:"
-
-#: cdi_forms/templates/cdi_forms/cdi_form.html:96
-#: cdi_forms/templates/cdi_forms/instructions.html:95
-msgid ""
-"Your child doesn't have a meaning for the word/phrase.  S/he may have heard "
-"it before, like in a story, but you don't think s/he knows what it means."
-msgstr ""
-"아동이 어휘/문장의 뜻을 모르는 경우, 아동이 어휘/문장을 이야기에서 들어 본 적"
-"이 있지만, 그 뜻을 정확히는 모른다고 생각되는 경우"
-
-#: cdi_forms/templates/cdi_forms/cdi_form.html:106
-#: cdi_forms/templates/cdi_forms/instructions.html:105
-msgid ""
-"Your child \"understands and says\" a word/phrase if they know what the word/"
-"phrase means AND they are able to say it by themselves. Here are some "
-"examples."
-msgstr ""
-"만약 아동이 어휘/문장의 뜻을 알고 있고, 어휘/문장을 스스로 표현도 할 수 있다"
-"면 해당 어휘/문장을 \"이해하고 표현한다\"에 체크하셔야 합니다. 다음 예시를 참"
-"고 해 주세요."
-
-#: cdi_forms/templates/cdi_forms/cdi_form.html:118
-#: cdi_forms/templates/cdi_forms/instructions.html:117
-msgid "DO check \"understands and says\" if:"
-msgstr "다음과 같은 경우에는 \"이해하고 표현한다\"에 체크 표시 해주세요:"
-
-#: cdi_forms/templates/cdi_forms/cdi_form.html:120
-#: cdi_forms/templates/cdi_forms/instructions.html:119
-msgid ""
-"Your child says a word/phrase when trying to name an object or describe "
-"something that happened.  You think s/he has a meaning for that word/phrase."
-msgstr ""
-"아동이 어떠한 대상을 지칭하거나, 일어난 일에 대해 묘사하기 위하여 어휘/문장"
-"을 표현하는 경우 아동이 해당 어휘/문장의 뜻을 정확히 안다고 생각되는 경우"
-
-#: cdi_forms/templates/cdi_forms/cdi_form.html:137
-#: cdi_forms/templates/cdi_forms/instructions.html:136
-msgid ""
-"It's fine if your child can't say the whole word or says it his/her own "
-"\"special\" way."
-msgstr ""
-"만약 아동이 어휘를 정확히 발음하지 않거나, 자신만의 \"특별한\" 방식으로 표현"
-"하더라도 괜찮습니다."
-
-#: cdi_forms/templates/cdi_forms/cdi_form.html:139
-#: cdi_forms/templates/cdi_forms/instructions.html:138
-msgid "DO check \"understands and says.\""
-msgstr "\"이해하고 표현한다\"에 체크 표시 해주십시오."
-
-#: cdi_forms/templates/cdi_forms/cdi_form.html:156
-#: cdi_forms/templates/cdi_forms/instructions.html:155
-msgid ""
-"DON'T check if your child is just stringing sounds together.  This is not a "
-"real word that means something."
-msgstr ""
-"만약 아동이 단순히 한 소리, 한 소리를 이어서 표현하는 경우에는 체크표시하지 "
-"마세요. 이는 실제 어휘라고 보기 어렵습니다."
-
-#: cdi_forms/templates/cdi_forms/cdi_form.html:158
-#: cdi_forms/templates/cdi_forms/cdi_form.html:176
-#: cdi_forms/templates/cdi_forms/instructions.html:157
-#: cdi_forms/templates/cdi_forms/instructions.html:175
-msgid "DON'T check \"understands and says.\""
-msgstr "\"이해하고 표현한다\"에 표시하지 마십시오."
 
 #: cdi_forms/templates/cdi_forms/cdi_form.html:285
 msgid ""
@@ -2102,23 +2262,6 @@ msgid ""
 msgstr ""
 "마지막으로, 제출 버튼을 누르기 위해 아래의 Captcha 박스를 체크 해주십시오."
 
-#: cdi_forms/templates/cdi_forms/cdi_form.html:321
-msgid "Previous Page"
-msgstr "이전 페이지"
-
-#: cdi_forms/templates/cdi_forms/cdi_form.html:322
-msgid "Next Page"
-msgstr "다음 페이지"
-
-#: cdi_forms/templates/cdi_forms/cdi_form.html:334
-msgid "Don't forget to save your progress whenever you can!"
-msgstr "가능한 한 설문 내용을 저장하면서 진행해 주십시오."
-
-#: cdi_forms/templates/cdi_forms/cdi_form.html:381
-msgid ""
-"Are you ready to submit? You cannot change your answers after submission."
-msgstr "제출하시겠습니까? 제출한 뒤에는 응답하신 내용을 변경할 수 없습니다."
-
 #: cdi_forms/templates/cdi_forms/cdi_form.html:411
 msgid "understands and says"
 msgstr "이해하고 표현한다"
@@ -2145,11 +2288,6 @@ msgid ""
 "Unfortunately the time allowed to complete this survey has expired.  Please "
 "contact your researcher."
 msgstr ""
-
-#: cdi_forms/templates/cdi_forms/overflow.html:40
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:168
-msgid "Thank you!"
-msgstr "감사합니다!"
 
 #: cdi_forms/templates/cdi_forms/overflow.html:44
 msgid ""
@@ -2194,141 +2332,6 @@ msgstr ""
 "\"http://mb-cdi.stanford.edu/\" target=\"_blank\">이곳</a>에서 CDI에 관한 더 "
 "많은 정보를 얻으실 수 있습니다. 귀하의 관심에 다시 한 번 감사드립니다!"
 
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:40
-msgid "Interesting tidbits learned from how your child speaks!"
-msgstr "아동이 말하는 방식이 알려주는 흥미로운 이야기!"
-
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:77
-#, fuzzy, python-format
-#| msgid "Words Produced (%%)"
-msgid "Words Produced (%%)"
-msgstr "표현한 어휘 (%%)"
-
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:117
-#, fuzzy, python-format
-#| msgid "Words Understood (%%)"
-msgid "Words Understood (%%)"
-msgstr "이해한 어휘 (%%)"
-
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:171
-msgid ""
-"Thank you for taking the time to complete the MacArthur-Bates Communicative "
-"Development Inventory (CDI). With the help of parents and caregivers like "
-"you, we are working to learn more about the way that children’s language "
-"develops, and how that development varies across individual children and "
-"cultures. Remember that the CDI lists many different words that are used by "
-"many different children. Don’t worry if your child only knows a few of them "
-"right now. Below are some insights into your child’s developing vocabulary, "
-"based on our research. This summary is not a clinical evaluation. If you "
-"have any concerns about your child’s development, we recommend that you talk "
-"with your child’s physician. If you enjoyed our assessment, you can learn "
-"more about the CDI <a href=\"http://mb-cdi.stanford.edu/\" target=\"_blank"
-"\">here</a>. We appreciate your contribution!"
-msgstr ""
-"맥아더-베이츠 의사소통발달 평가 (CDI) 작성을 위해 시간을 내어주셔서 감사합니"
-"다. 부모님 및 양육자 분들의 도움으로 인하여 저희는 아동의 언어 발달이 어떻게 "
-"이루어지며 언어 및 문화에 따라 발달이 어떻게 달라질 수 있는지 지속적으로 연구"
-"할 수 있었습니다. 다양한 아동이 사용하는 많은 어휘가 CDI 목록에 포함되었다는 "
-"점을 명심해주세요. 아동이 당장은 몇몇 어휘만 알고 있더라도 너무 걱정하지 마세"
-"요. 본 연구를 바탕으로, 아동이 습득하고 있는 어휘에 대한 정보를 살펴보실 수 "
-"있습니다. 본 검사 결과는 임상 평가가 아닙니다. 만약 아동의 의사소통 발달이 걱"
-"정되신다면, 아동발달 전문가와의 상담을 권합니다. <a href=\"http://mb-cdi."
-"stanford.edu/\" target=\"_blank\">이곳</a>에서 CDI에 관한 더 많은 정보를 얻으"
-"실 수 있습니다. 본 연구에 관심을 가져주셔서 다시 한 번 감사드립니다!"
-
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:178
-#, python-format
-msgid ""
-"We're sorry but it looks like we have run out of Amazon.com Gift Cards! "
-"Please <a href=\"%(contact_url)s\" target=\"_blank\">reach out to us</a> and "
-"we will quickly fix this issue."
-msgstr ""
-"죄송합니다. Amazon.com 상품권이 모두 소진되었습니다! <a href="
-"\"%(contact_url)s\" target=\"_blank\">저희에게 연락</a>해 주시면 이 문제를 빠"
-"르게 해결하겠습니다."
-
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:183
-msgid ""
-"Thank you for participating in our Web-CDI project! It is our pleasure to "
-"send you this Amazon.com Gift Card that can be redeemed towards millions of "
-"items at <a href=\"http://www.amazon.com\" target=\"_blank\">www.amazon.com</"
-"a>. You may want to print this screen for easy reference later--you’ll need "
-"the gift card claim code below."
-msgstr ""
-"웹-CDI 프로젝트에 참여해 주셔서 감사합니다! <a href=\"http://www.amazon.com"
-"\" target=\"_blank\">www.amazon.com</a>의 다양한 상품 중에서 교환할 수 있는 "
-"Amazon.com 상품권을 귀하께 보내 드리게 되어 기쁩니다. 추후에 쉽게 찾아볼 수 "
-"있도록 본 화면을 인쇄하시면 좋을 것입니다. 상품권 사용 시 아래의 상품권 청구 "
-"코드가 필요합니다."
-
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:187
-msgid "Gift Card Amount"
-msgstr "상품권 금액"
-
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:188
-msgid "Claim Code"
-msgstr "청구 코드"
-
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:192
-#, python-format
-msgid ""
-"To redeem your gift card, visit <a href=\"%(redeem_url)s\" target=\"_blank"
-"\">www.amazon.com/redeem</a>. Restrictions apply, see <a href=\"%(legal_url)s"
-"\" target=\"_blank\">www.amazon.com/gc-legal</a>."
-msgstr ""
-"상품권을 상품으로 교환하기 위해 <a href=\"%(redeem_url)s\" target=\"_blank"
-"\">www.amazon.com/redeem</a>을 방문해 주십시오. 제한 사항이 적용될 수 있습니"
-"다. <a href=\"%(legal_url)s\" target=\"_blank\">www.amazon.com/gc-legal</a>"
-"을 참고해 주십시오."
-
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:216
-msgid "Graph My Data!"
-msgstr "데이터를 그래프로 보기!"
-
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:222
-msgid "Show Me My Answers"
-msgstr "내 응답 보기"
-
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:226
-#, fuzzy
-#| msgid "Show Me My Answers"
-msgid "Print My Answers"
-msgstr "내 응답 보기"
-
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:248
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:252
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:257
-msgid "Save as PDF"
-msgstr "PDF로 저장하기"
-
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:359
-msgid "My child says PPP words and understands UUU words."
-msgstr "우리 아이는 PPP 어휘를 표현하고 UUU 어휘를 이해합니다."
-
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:361
-msgid "My child says PPP words."
-msgstr "우리 아이는 PPP 어휘를 표현합니다."
-
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:363
-msgid "My child understands UUU words."
-msgstr "우리 아이는 UUU 어휘를 이해합니다."
-
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:502
-msgid "My child produces the most words in the bestProdCat category."
-msgstr "우리 아이는 bestProdCat 목록에 있는 대부분의 어휘들을 표현합니다."
-
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:506
-msgid "My child understands the most words in the bestCompCat category."
-msgstr "우리 아이는 bestCompCat 목록에 있는 대부분의 어휘들을 이해합니다."
-
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:592
-msgid "The hardest word my child says is INSERTWORDHERE."
-msgstr "우리 아이가 말하기에 가장 어려워하는 어휘는 INSERTWORDHERE 입니다."
-
-#: cdi_forms/templates/cdi_forms/printable_cdi.html:597
-msgid "The hardest word my child understands is INSERTWORDHERE."
-msgstr "우리 아이가 이해하기에 가장 어려워하는 어휘는 INSERTWORDHERE 입니다."
-
 #: cdi_forms/templates/cdi_forms/study_group.html:46
 msgid "How old is your child?"
 msgstr "아동은 몇 살입니까?"
@@ -2346,20 +2349,20 @@ msgid "Born between STARTDATE and ENDDATE"
 msgstr "STARTDATE 과 ENDDATE 사이에 태어났습니다"
 
 #: cdi_forms/views/background_info_views.py:117
-#: cdi_forms/views/background_info_views.py:458 cdi_forms/views/views.py:232
+#: cdi_forms/views/background_info_views.py:458 cdi_forms/views/views.py:224
 #, python-format
 msgid "Your child should be between %(min_age)d to %(max_age)d months of age."
 msgstr "아동의 연령은 %(min_age)d 개월에서 %(max_age)d 개월 사이여야 합니다."
 
 #: cdi_forms/views/background_info_views.py:151
-#: cdi_forms/views/background_info_views.py:489 cdi_forms/views/views.py:263
+#: cdi_forms/views/background_info_views.py:489 cdi_forms/views/views.py:255
 #, python-format
 msgid " Not the right age? <a href='%(sgurl)s'> Click here</a>"
 msgstr ""
 "해당하는 연령이 아닌가요? <a href='%(sgurl)s'>이곳을 클릭해 주십시오</a>"
 
 #: cdi_forms/views/background_info_views.py:161
-#: cdi_forms/views/background_info_views.py:499 cdi_forms/views/views.py:273
+#: cdi_forms/views/background_info_views.py:499 cdi_forms/views/views.py:265
 msgid ""
 " Not the right age? You should contact your researcher for steps on what to "
 "do next."

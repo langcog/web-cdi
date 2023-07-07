@@ -1,11 +1,13 @@
 <!doctype html>
 
+{% load i18n %}
+{% load static %}
+{% load cdiform_tags %}
+
+
 <html {% if language_code %}lang="{{ language_code }}"{% else %}lang="en"{% endif %}>
 <head>
     <meta charset="utf-8">
-    {% load i18n %}
-    {% load static %}
-
     <title>{% trans title %}</title>
     <meta name="description" content="MacArthur-Bates Communicative Development Inventory">
 
@@ -128,18 +130,10 @@
                             <div id = "nav_list" class = "">
                                 <h4>{% trans "Contents:" %}</h4>
                                 <ul class=" bs-docs-sidenav">
-                                    <li><a href="{% url 'instructions' object.url_hash %}" id="id_btn_instructions">{% trans 'Instructions:' %}</a></li>
+                                    <li style="list-style-type: none"><a href="{% url 'instructions' object.url_hash %}" id="id_btn_instructions">{% trans 'Instructions:' %}</a></li>
                                     {% for part in contents %}
-                                        <li>
-                                            <a href="#{{ part.id }}" onclick="findPage({{ part.types.0.id }}_div)">{{ part.title }}</a>
-                                            <ul class="nav">
-                                                {% for type in part.types %}
-                                                    <li><a onclick="findPage({{ type.id }}_div)">{{ type.title }}</a></li>
-                                                    {% for section in type.sections %}
-                                                        <li><a href="{% if section.id %}{% url 'update_administration_section' object.url_hash section.id %}{% endif %}">{{ section.title }}</a></li>
-                                                    {% endfor %}
-                                                {% endfor %}
-                                            </ul>
+                                        <li style="list-style-type: none">
+                                            <a href="{% url 'update_administration_section' object.url_hash part|get_part_menu_number %}" >{{ part.title }}</a>
                                         </li>
                                     {% endfor %}
                                 </ul>
@@ -273,10 +267,6 @@
         }
     </script>
 
-    <script>
-        var gotToEnd = false;
-        $('.submit-button').hide(); // Hide submit button. Unhides upon certain events
-    </script>
     {% block scripts %}
     {% endblock %}
 </body>

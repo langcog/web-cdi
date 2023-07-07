@@ -663,7 +663,7 @@ def printable_view(request, hash_id):
     ]
 
     response = render(
-        request, "cdi_forms/printable_cdi.html", prefilled_data
+        request, "cdi_forms/administration_summary.html", prefilled_data
     )  # Render contact form template
     response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
 

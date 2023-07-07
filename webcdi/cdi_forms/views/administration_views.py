@@ -1,18 +1,35 @@
 import json
-from typing import Any, Dict, Optional
+import os
+import datetime
+from typing import Any, Dict
 from django.urls import reverse
 from django.shortcuts import redirect
 from django.http import HttpRequest, HttpResponse
 from django.utils import timezone
 from django.views.generic import DetailView, UpdateView
 from researcher_UI.models import administration, administration_data
-
-from cdi_forms.views.utils import prefilled_cdi_data, PROJECT_ROOT, model_map, cdi_items, get_administration_instance
-from cdi_forms.utils import previous_and_next
+from cdi_forms.views.utils import prefilled_cdi_data, PROJECT_ROOT, model_map, cdi_items, get_administration_instance, has_backpage
 from django.conf import settings
+from cdi_forms.views import printable_view
 
 import logging
 logger = logging.getLogger("debug")
+
+class AdministrationSummaryView(DetailView):
+    model = administration
+    template_name = "cdi_forms/administration_summary.html"
+
+    def get_object(self, queryset=None):
+        self.object = administration.objects.get(url_hash=self.kwargs['hash_id'])
+        return self.object
+    
+    def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
+        self.get_object()
+        return super().dispatch(request, *args, **kwargs)
+    
+    def get(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
+        return printable_view (request, self.object.url_hash)
+    
 
 class AdministrationDetailView(DetailView):
     model = administration
@@ -39,22 +56,81 @@ class AdministrationUpdateView(UpdateView):
         ctx['data'] = self.get_section()
         if 'contents' in ctx['data']:
             ctx['contents'] = ctx['data']['contents']
+        ctx['timer'] = True if (timezone.now()-self.object.created_date).total_seconds() / 60.0 > self.object.study.timing else False
         return ctx
     
     def get_object(self, queryset=None):
-        return administration.objects.get(url_hash=self.kwargs['hash_id'])
+        self.object = administration.objects.get(url_hash=self.kwargs['hash_id'])
+        return self.object
     
+    def get_instrument(self):
+        self.instrument = model_map(
+            self.object.study.instrument.name
+        )
+    
+    def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
+        self.get_object()
+        self.get_instrument()
+        return super().dispatch(request, *args, **kwargs)
+    
+    def get(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
+        if self.object.completed:
+            return redirect(reverse('administration_summary_view', args=(self.object.url_hash,)))
+        return super().get(request, *args, **kwargs)
+        
     def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
+        logger.debug(f'COMPLETED {self.object.completed}')
+        if self.object.completed:
+            return redirect(reverse('administration_summary_view', args=(self.object.url_hash,)))
         if 'btn-save' in request.POST:
             response = self.request.get_full_path()
         if 'btn-previous' in request.POST:
-            response = reverse('update_administration_section', args=(self.get_object().url_hash, request.POST['previous'] ))
+            response = reverse('update_administration_section', args=(self.object.url_hash, request.POST['previous'] ))
         if 'btn-next' in request.POST:
-            response = reverse('update_administration_section', args=(self.get_object().url_hash, request.POST['next'] ))
+            response = reverse('update_administration_section', args=(self.object.url_hash, request.POST['next'] ))
         if 'btn-back' in request.POST:
-            response = reverse('background-info', args=(self.get_object().backgroundinfo.pk,))
+            response = reverse('background-info', args=(self.object.backgroundinfo.pk,))
+        if 'btn-submit' in request.POST:
+            try:
+                filename = os.path.realpath(
+                    PROJECT_ROOT + self.object.study.demographic.path
+                )
+            except:
+                filename = "None"
+            if has_backpage(filename):
+                self.object.completedSurvey = True
+                self.object.save()
+                response = reverse("backpage-background-info", args=(self.object.backgroundinfo.pk,))
+            else:
+                self.object.completed = True
+                self.object.save()
+                response = reverse('administration_summary_view', args=(self.object.url_hash,))
 
-        administration.objects.filter(url_hash=self.get_object().url_hash).update(last_modified=timezone.now())
+        for (
+                key
+            ) in (
+                request.POST
+            ):  # Parse responses and individually save each item's response (empty checkboxes or radiobuttons are not saved)
+                items = self.instrument.filter(itemID=key)
+                if len(items) == 1:
+                    item = items[0]
+                    value = request.POST[key]
+                    if item.choices:
+                        choices = map(str.strip, item.choices.choice_set_en.split(";"))
+                        if value in choices:
+                            administration_data.objects.update_or_create(
+                                administration=self.object,
+                                item_ID=key,
+                                defaults={"value": value},
+                            )
+                    else:
+                        if value:
+                            administration_data.objects.update_or_create(
+                                administration=self.object,
+                                item_ID=key,
+                                defaults={"value": value},
+                            )
+        administration.objects.filter(url_hash=self.object.url_hash).update(last_modified=timezone.now())
 
         return redirect(response)
     
@@ -75,16 +151,14 @@ class AdministrationUpdateView(UpdateView):
     
     def return_data(self, section, item_type, prefilled_data, target='category'):
         raw_objects = []
-        instrument_model = model_map(
-            self.object.study.instrument.name
-        )
+
         if target == 'category':
-            group_objects = instrument_model.filter(
+            group_objects = self.instrument.filter(
                 category__exact=section["id"]
             ).values(*self.get_field_values())
             
         elif target == 'item_type':
-            group_objects = instrument_model.filter(
+            group_objects = self.instrument.filter(
                 item_type__exact=item_type["id"]
             ).values(*self.get_field_values())
                     
@@ -102,22 +176,35 @@ class AdministrationUpdateView(UpdateView):
             raw_objects.extend(x)
         if any(["*" in x["definition"] for x in section["objects"]]):
             section["starred"] = "*Or the word used in your family"
-            
+        
+        if 'sub_title' in item_type:
+            subtitle = item_type['sub_title']
+        else:
+            subtitle = ''
+        if 'text' in item_type:
+            instructions = item_type['text']
+        else:
+            instructions = ''
+
+        section['type'] = {
+            'title': item_type['title'],
+            'subtitle': subtitle,
+            'type': item_type['type'],
+            'instructions': instructions,
+            'id': item_type['id'],
+        }
         return section
- 
+    
     def get_section(self, target_section=None):
         if 'section' in self.kwargs:
             target_section = self.kwargs['section']
 
-        instrument_model = model_map(
-            self.object.study.instrument.name
-        )
         old_admins = administration.objects.filter(
             study=self.object.study,
             subject_id=self.object.subject_id,
             completed=True,
         )
-        word_items = instrument_model.filter(item_type="word").values_list(
+        word_items = self.instrument.filter(item_type="word").values_list(
             "itemID", flat=True
         )
         if old_admins:
@@ -152,98 +239,28 @@ class AdministrationUpdateView(UpdateView):
             # Read json file and store additional variables regarding the instrument, study, and the administration
             data = json.loads(content_file.read())
 
-        raw_objects = []
         for part in data["parts"]:
-            for previous_type, item_type, next_type in previous_and_next(part["types"]):
-                if "sections" in item_type:
-                    for previous_section, section, next_section in previous_and_next(item_type['sections']):
-                        if target_section == None or target_section == section['id']:
-                            return_data =  self.return_data(section, item_type, prefilled_data)
-                            return_data['part'] = part['title']
-                            if 'sub_title' in item_type:
-                                subtitle = item_type['sub_title']
-                            else:
-                                subtitle = ''
-                            return_data['type'] = {
-                                'title': item_type['title'],
-                                'subtitle': subtitle,
-                                'type': item_type['type'],
-                                'instructions': item_type['text'],
-                                'id': item_type['id'],
-                            }
-                            return_data['contents'] = data['parts']
-                            if previous_section:
-                                return_data['previous_section'] = previous_section['id']
-                            else:
-                                return_data['previous_section'] = None
-                            if next_section:
-                                return_data['next_section'] = next_section['id']
-                            elif next_type:
-                                return_data['next_section'] = next_type['id']
-                            else:
-                                return_data['next_section'] = None
-                            return return_data
-                    '''
-                    for section in item_type["sections"]:
-                        group_objects = instrument_model.filter(
-                            category__exact=section["id"]
-                        ).values(*field_values)
-                        if "type" not in section:
-                            section["type"] = item_type["type"]
-                        x = cdi_items(
-                            group_objects,
-                            section["type"],
-                            prefilled_data,
-                            item_type["id"],
-                        )
-                        section["objects"] = x
-                        if administration_instance.study.show_feedback:
-                            raw_objects.extend(x)
-                        if any(["*" in x["definition"] for x in section["objects"]]):
-                            section["starred"] = "*Or the word used in your family"
-                    '''
-                else:
-                    logger.debug (f'IN ELSE SECTION')
-                    if target_section == item_type['id']:
-                        continue
-                        return_data =  self.return_data(section, item_type, prefilled_data)
+            for item_type in part["types"]:
+                if 'page' in item_type:
+                    if target_section == item_type['page']:
+                        return_data = self.return_data(item_type, item_type, prefilled_data, target='item_type')
                         return_data['part'] = part['title']
-                        if 'sub_title' in item_type:
-                            subtitle = item_type['sub_title']
-                        else:
-                            subtitle = ''
-                        
-                        instructions = item_type['text'] if 'text' in item_type else None
-                        return_data['type'] = {
-                            'title': item_type['title'],
-                            'subtitle': subtitle,
-                            'type': item_type['type'],
-                            'instructions': instructions,
-                            'id': item_type['id'],
-                        }
                         return_data['contents'] = data['parts']
-                        if previous_section:
-                            return_data['previous_section'] = previous_section['id']
-                        else:
-                            return_data['previous_section'] = None
-                        if next_section:
-                            return_data['next_section'] = next_section['id']
-                        elif next_type:
-                            return_data['next_section'] = next_type['id']
-                        else:
-                            return_data['next_section'] = None
+                        return_data['menu'] = target_section
                         return return_data
+                elif "sections" in item_type:
+                    for section in item_type['sections']:
+                        if target_section == section['page']:
+                            return_data = self.return_data(section, item_type, prefilled_data)
+                            return_data['part'] = part['title']
+                            return_data['contents'] = data['parts']
+                            return_data['menu'] = target_section
+                            return return_data
+                else:
+                    return_data =  {}
+
+                        
                     '''
-                    group_objects = instrument_model.filter(
-                        item_type__exact=item_type["id"]
-                    ).values(*self.get_field_values())
-                    x = cdi_items(
-                        group_objects,
-                        item_type["type"],
-                        prefilled_data,
-                        item_type["id"],
-                    )
-                    item_type["objects"] = x
                     if self.object.study.show_feedback:
                         raw_objects.extend(x)
                     '''
