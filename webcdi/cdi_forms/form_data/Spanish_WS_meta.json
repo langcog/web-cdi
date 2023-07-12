@@ -9,100 +9,123 @@
                     "sections": [
                         {
                             "id": "sounds",
-                            "title": "1. Sonidos de Cosas y Animales"
+                            "title": "1. Sonidos de Cosas y Animales",
+                            "page": 1
                         },
                         {
                             "id": "animals",
-                            "title": "2. Animales (de Verdad y de Juguete)"
+                            "title": "2. Animales (de Verdad y de Juguete)",
+                            "page": 2
                         },
                         {
                             "id": "vehicles",
-                            "title": "3. Vehículos (de Verdad y de Juguete)"
+                            "title": "3. Vehículos (de Verdad y de Juguete)",
+                            "page": 3
                         },
                         {
                             "id": "food_drink",
-                            "title": "4. Alimentos y Bebidas"
+                            "title": "4. Alimentos y Bebidas",
+                            "page": 4
                         },
                         {
                             "id": "clothing",
-                            "title": "5. Ropa"
+                            "title": "5. Ropa",
+                            "page": 5
                         },
                         {
                             "footnote": "* o palabra que use su familia para esto",
                             "id": "body_parts",
-                            "title": "6. Partes del Cuerpo"
+                            "title": "6. Partes del Cuerpo",
+                            "page": 6
                         },
                         {
                             "id": "toys",
-                            "title": "7. Juguetes"
+                            "title": "7. Juguetes",
+                            "page": 7
                         },
                         {
                             "id": "household",
-                            "title": "8. Utensilios de la Casa"
+                            "title": "8. Utensilios de la Casa",
+                            "page": 8
                         },
                         {
                             "id": "furniture_rooms",
-                            "title": "9. Muebles y Cuartos"
+                            "title": "9. Muebles y Cuartos",
+                            "page": 9
                         },
                         {
                             "id": "outside",
-                            "title": "10. Objetos Fuera de la Casa"
+                            "title": "10. Objetos Fuera de la Casa",
+                            "page": 10
                         },
                         {
                             "id": "places",
-                            "title": "11. Lugares Fuera de la Casa"
+                            "title": "11. Lugares Fuera de la Casa",
+                            "page": 11
                         },
                         {
                             "footnote": "* o el nombre de esta persona",
                             "id": "people",
-                            "title": "12. Personas"
+                            "title": "12. Personas",
+                            "page": 12
                         },
                         {
                             "id": "games_routines",
-                            "title": "13. Rutina Diaria, Reglas Sociales y Juegos"
+                            "title": "13. Rutina Diaria, Reglas Sociales y Juegos",
+                            "page": 13
                         },
                         {
                             "text": "Cuando los niños hablan, por lo general, usan verbos. Así, pueden decir \"abrir\", \"abrí\", \"abre\", \"está abierto\", o \"se abrió\". Si su hijo/a usa algunos de los verbos de la lista en cualquier forma o conjugación, por favor, marque la caja del verbo correspondiente.",
                             "id": "action_words",
-                            "title": "14. Acciones y Procesos (Verbos)"
+                            "title": "14. Acciones y Procesos (Verbos)",
+                            "page": 14
                         },
                         {
                             "id": "states",
-                            "title": "15. Estados"
+                            "title": "15. Estados",
+                            "page": 15
                         },
                         {
                             "text": "Muchas de estas palabras pueden aparacer en masculino, por ejemplo, \"bueno\", o en feminino, \"buena\". Rellene el círculo de la palabra correspondiente si su hijo/a usa cualquiera de las dos formas.",
                             "id": "descriptive_words",
-                            "title": "16. Cualidades y Atributos"
+                            "title": "16. Cualidades y Atributos",
+                            "page": 16
                         },
                         {
                             "id": "time_words",
-                            "title": "17. Tiempo"
+                            "title": "17. Tiempo",
+                            "page": 17
                         },
                         {
                             "text": "Su hijo/a puede decir estas palabras solas, por ejemplo, \"ésta\" o junto con otra palabra, como \"dámelo\". Marque la caja de la palabra correspondiente si su hijo/a dice algunas de las palabras de la lista. Recuerde que no importa si lo dice en forma separada o como parte de otra palabra.",
                             "id": "pronouns",
-                            "title": "18. Pronombres y Modificadores"
+                            "title": "18. Pronombres y Modificadores",
+                            "page": 18
                         },
                         {
                             "id": "question_words",
-                            "title": "19. Preguntas"
+                            "title": "19. Preguntas",
+                            "page": 19
                         },
                         {
                             "id": "prepositions",
-                            "title": "20. Preposiciones y Artículos"
+                            "title": "20. Preposiciones y Artículos",
+                            "page": 20
                         },
                         {
                             "id": "quantifiers",
-                            "title": "21. Cuantificadores y Adverbios"
+                            "title": "21. Cuantificadores y Adverbios",
+                            "page": 21
                         },
                         {
                             "id": "locations",
-                            "title": "22. Locativos"
+                            "title": "22. Locativos",
+                            "page": 22
                         },
                         {
                             "id": "connecting_words",
-                            "title": "23. Conectivos"
+                            "title": "23. Conectivos",
+                            "page": 23
                         }
                     ],
                     "text": "Los niños comprenden más palabras de las que dicen. Aquí nos interesan las palabras que realmente DICEN. Muchas veces, las palabras que usan son poco distintas de las que aparacen en esta lista. Por ejemplo, dicen \"pupa\" en vez de \"ombligo\" o \"pica\" en vez de \"chile\". También pronuncian las palabras de diferentes maneras; por ejemplo, dicen \"tatamina\" en vez de \"vitamina\" o \"pato\" en vez de \"zapato\". Si su hijo/a dice otra palabra que se usa en su familia y significa lo mismo que la que viene en el cuestionario (por ejemplo, si dice \"coca\" en vez de \"refresco\", \"super\" en vez de \"tienda\", o \"kleenex\" en vez de \"pañuelo\"), rellene el círculo de la palabra correspondiente que viene en la lista. Recuerde que esta lista incluye las palabras que muchos niños pueden decir. No se preocupe si su hijo/a no dice todas las palabras.",
@@ -112,7 +135,8 @@
                 {
                     "id": "usage",
                     "title": "Cómo Usa y Comprende el Niño/a el Lenguaje",
-                    "type": "radiobutton"
+                    "type": "radiobutton",
+                    "page": 24
                 }
             ]
         },
@@ -126,17 +150,20 @@
                         {
                             "id": "word_forms_prese",
                             "title": "",
-                            "text": "Para hablar de lo que sucede en el presente, ¿cuáles de estas formas usa?"
+                            "text": "Para hablar de lo que sucede en el presente, ¿cuáles de estas formas usa?",
+                            "page": 25
                         },
                         {
                             "id": "word_forms_suced",
                             "title": "",
-                            "text": "Para hablar de cosas que ya sucedieron, ¿cuáles de estas formas usa?"
+                            "text": "Para hablar de cosas que ya sucedieron, ¿cuáles de estas formas usa?",
+                            "page": 26
                         },
                         {
                             "id": "word_forms_orden",
                             "title": "",
-                            "text": "Para pedir algo u ordenar, ¿cuáles de estas formas usa?"
+                            "text": "Para pedir algo u ordenar, ¿cuáles de estas formas usa?",
+                            "page": 27
                         }
                     ],
                     "text": "A continuación encontrará una lista de diferentes terminaciones de verbos. Indique si su hijo/a usa palabras de la lista. En caso de que no use la misma palabra, pero que usa la misma terminación con palabras similares, por favor, rellene el círculo de la palabra que más se la parezca. Por ejemplo, en vez de \"comes\" dice \"duermes\" o \"puedes\" marque la línea de \"comes\".",
@@ -146,19 +173,22 @@
                 {
                     "id": "combine",
                     "title": "",
-                    "type": "radiobutton"
+                    "type": "radiobutton",
+                    "page": 28
                 },
                 {
                     "id": "combination_examples",
                     "title": "B. Ejemplos",
                     "text": "Por favor escriba tres ejemplos de las frases más largas que recuerde que su hijo/a haya dicho últimamente.",
-                    "type": "textbox"
+                    "type": "textbox",
+                    "page": 29
                 },
                 {
                     "id": "complexity",
                     "text": "A continuación encontrará pares de frases. Por favor señale la que más se parezca a la forma en como hable su hijo/a, en este momento. Si su hijo/a usa frases más largas o complicadas de las que vienen en los ejemplos, por favor marque la segunda frase. El niño/a no tiene que decir exáctamente la misma frase; lo que le pedimos es que marque la frase que se parezca más a la manera en que su hijo/a habla.",
                     "title": "C. Complejidad de Frases",
-                    "type": "radiobutton"
+                    "type": "radiobutton",
+                    "page": 30
                 }
             ]
         }

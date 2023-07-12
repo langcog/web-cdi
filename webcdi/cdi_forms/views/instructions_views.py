@@ -1,7 +1,9 @@
 from typing import Any, Dict
 import json
+from django.http import HttpResponse, HttpRequest
 from django.views.generic import DetailView
 
+from django.utils import translation
 from researcher_UI.models import administration
 from cdi_forms.views.utils import language_map, PROJECT_ROOT
 
@@ -9,6 +11,12 @@ class InstructionDetailView(DetailView):
     model = administration
     template_name = 'cdi_forms/administration_instructions.html'
 
+    def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
+        language = language_map(self.get_object().study.instrument.language)
+        translation.activate(language)
+        request.LANGUAGE_CODE = translation.get_language()
+        return super().dispatch(request, *args, **kwargs)
+    
     def get_object(self, queryset = None ):
         return administration.objects.get(url_hash=self.kwargs['hash_id'])
         return super().get_object(queryset)

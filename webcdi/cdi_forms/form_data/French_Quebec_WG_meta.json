@@ -8,23 +8,27 @@
                     "text": "Avant de commencer à parler, les enfants manifestent des signes de compréhension en répondant à des mots et des phrases familiers. Parmi les exemples qui suivent, indiquez ce que votre enfant fait.", 
                     "type": "radiobutton",
                     "id": "first_signs",
-                    "title": "A. PREMIERS SIGNES DE COMPRÉHENSION"
+                    "title": "A. PREMIERS SIGNES DE COMPRÉHENSION",
+                    "page": 1
                 },
                 {
                     "text": "Dans la liste ci-dessous, veuillez indiquer les phrases que votre enfant semble comprendre.",
                     "type": "checkbox",
                     "id": "phrases",
-                    "title": "B. PHRASES"
+                    "title": "B. PHRASES",
+                    "page": 2
                 },
                 {
                     "text": "Autres phrases:",
                     "type": "textbox",
-                    "id": "phrase_examples"
+                    "id": "phrase_examples",
+                    "page": 3
                 },
                 {
                     "id": "starting_to_talk",
                     "type": "radiobutton",
-                    "title": "C. DÉBUT DE L’EXPRESSION VERBALE"
+                    "title": "C. DÉBUT DE L’EXPRESSION VERBALE",
+                    "page": 4
                 },
                 {
                     "text": "La liste qui suit contient des mots fréquents dans le vocabulaire des jeunes enfants. Indiquez quels mots votre enfant comprend mais ne dit pas encore en noircissant le cercle de la première colonne (comprend). Pour les mots que votre enfant non seulement comprend mais utilise aussi spontanément, veuillez noircir le cercle de la seconde colonne (comprend et dit). Si votre enfant utilise une prononciation différente pour un mot, par exemple “wawal” pour “cheval” ou “ghetti” pour “spaghetti”, ce mot est accepté. Souvenez-vous que cet inventaire est un “catalogue” de tous les mots utilisés par une foule d’enfants divers. Ne vous inquiétez pas si votre enfant n’en connaît que quelques-uns en ce moment.",
@@ -33,80 +37,99 @@
                     "sections": [
                         {
                             "id": "sounds",
-                            "title": "1. EFFETS SONORES ET SONS D’ANIMAUX"
+                            "title": "1. EFFETS SONORES ET SONS D’ANIMAUX",
+                            "page": 5
                         },
                         {
                             "id": "animals",
-                            "title": "2. ANIMAUX (réels ou jouets)"
+                            "title": "2. ANIMAUX (réels ou jouets)",
+                            "page": 6
                         },
                         {
                             "id": "vehicles",
-                            "title": "3. VÉHICULES (réels ou jouets)"
+                            "title": "3. VÉHICULES (réels ou jouets)",
+                            "page": 7
                         },
                         {
                             "id": "toys",
-                            "title": "4. JOUETS"
+                            "title": "4. JOUETS",
+                            "page": 8
                         },
                         {
                             "id": "food_drink",
-                            "title": "5. NOURRITURE ET BOISSONS"
+                            "title": "5. NOURRITURE ET BOISSONS",
+                            "page": 9
                         },
                         {
                             "id": "clothing",
-                            "title": "6. VÊTEMENTS"
+                            "title": "6. VÊTEMENTS",
+                            "page": 10
                         },
                         {
                             "id": "body_parts",
-                            "title": "7. PARTIES DU CORPS"
+                            "title": "7. PARTIES DU CORPS",
+                            "page": 11
                         },
                         {
                             "id": "furniture_rooms",
-                            "title": "8. MEUBLES ET PIÈCES"
+                            "title": "8. MEUBLES ET PIÈCES",
+                            "page": 12
                         },
                         {
                             "id": "household",
-                            "title": "9. PETITS ARTICLES MÉNAGERS"
+                            "title": "9. PETITS ARTICLES MÉNAGERS",
+                            "page": 13
                         },
                         {
                             "id": "outside_places",
-                            "title": "10. CHOSES DE L’EXTÉRIEUR ET ENDROITS OÙ ALLER"
+                            "title": "10. CHOSES DE L’EXTÉRIEUR ET ENDROITS OÙ ALLER",
+                            "page": 14
                         },
                         {
                             "id": "people",
                             "title": "11. GENS",
-                            "footnote": "* ou tout autre mot utilisé dans votre famille"
+                            "footnote": "* ou tout autre mot utilisé dans votre famille",
+                            "page": 15
                         },
                         {
                             "id": "games_routines",
-                            "title": "12. JEUX ET ROUTINES"
+                            "title": "12. JEUX ET ROUTINES",
+                            "page": 16
                         },
                         {
                             "id": "action_words",
-                            "title": "13. VERBES D’ACTION"
+                            "title": "13. VERBES D’ACTION",
+                            "page": 17
                         },
                         {
                             "id": "time_words",
-                            "title": "14. MOTS POUR PARLER DU TEMPS"
+                            "title": "14. MOTS POUR PARLER DU TEMPS",
+                            "page": 18
                         },
                         {
                             "id": "descriptive_words",
-                            "title": "15. MOTS DESCRIPTIFS"
+                            "title": "15. MOTS DESCRIPTIFS",
+                            "page": 19
                         },
                         {
                             "id": "pronouns",
-                            "title": "16. PRONOMS"
+                            "title": "16. PRONOMS",
+                            "page": 20
                         },
                         {
                             "id": "question_words",
-                            "title": "17. MOTS D’INTERROGATION"
+                            "title": "17. MOTS D’INTERROGATION",
+                            "page": 21
                         },
                         {
                             "id": "locations",
-                            "title": "18. PRÉPOSITIONS, ADVERBES ET TERMES LOCATIFS"
+                            "title": "18. PRÉPOSITIONS, ADVERBES ET TERMES LOCATIFS",
+                            "page": 22
                         },
                         {
                             "id": "quantifiers",
-                            "title": "19. QUANTIFICATEURS"
+                            "title": "19. QUANTIFICATEURS",
+                            "page": 23
                         }
                     ],
                     "type": "modified_checkbox"
@@ -125,27 +148,32 @@
                         {
                             "text": "Quand les enfants commencent à communiquer, ils expriment souvent leurs désirs par des gestes. Pour chaque item de la liste, indiquez si votre enfant manifeste actuellement ce genre de comportement.",
                             "id": "gestures_first",
-                            "title": "A. PREMIERS GESTES COMMUNICATIFS"
+                            "title": "A. PREMIERS GESTES COMMUNICATIFS",
+                            "page": 24
                         },
                         {
                             "text": "Votre enfant fait-il les choses suivantes?",
                             "id": "gestures_games",
-                            "title": "B. JEUX ET ROUTINES"
+                            "title": "B. JEUX ET ROUTINES",
+                            "page": 25
                         },
                         {
                             "text": "Votre enfant fait-il ou essaie-t-il de faire les choses suivantes?",
                             "id": "gestures_objects",
-                            "title": "C. ACTIONS AVEC LES OBJETS"
+                            "title": "C. ACTIONS AVEC LES OBJETS",
+                            "page": 26
                         },
                         {
                             "text": "Voici des exemples de gestes que les enfants font parfois avec une poupée ou un animal en peluche. Indiquez les gestes que vous avez vu votre enfant poser avec ce genre d’objet.",
                             "id": "gestures_parent",
-                            "title": "D. FAIRE SEMBLANT D’ÊTRE UN PARENT"
+                            "title": "D. FAIRE SEMBLANT D’ÊTRE UN PARENT",
+                            "page": 27
                         },
                         {
                             "text": "Votre enfant fait-il ou essaie-t-il de faire les choses suivantes?",
                             "id": "gestures_adult",
-                            "title": "E. IMITATION D’AUTRES ACTIONS DES ADULTES (avec objets réels ou jouets)"
+                            "title": "E. IMITATION D’AUTRES ACTIONS DES ADULTES (avec objets réels ou jouets)",
+                            "page": 28
                         }
 
                     ]
@@ -159,13 +187,15 @@
                 {
                     "id": "pretend",
                     "title": "F. JEU SYMBOLIQUE",
-                    "type": "radiobutton"
+                    "type": "radiobutton",
+                    "page": 29
                 },
                 {
                     "id": "pretend_examples",
                     "title": "F. JEU SYMBOLIQUE",
                     "text": "Si oui, donnez plusieurs exemples:",
-                    "type": "textbox"
+                    "type": "textbox",
+                    "page": 30
                 }                  
             ]
         }

@@ -1,14 +1,15 @@
 import json
 import os
-import datetime
+
 from typing import Any, Dict
+from django import http
 from django.urls import reverse
 from django.shortcuts import redirect
 from django.http import HttpRequest, HttpResponse
-from django.utils import timezone
+from django.utils import timezone, translation
 from django.views.generic import DetailView, UpdateView
 from researcher_UI.models import administration, administration_data
-from cdi_forms.views.utils import prefilled_cdi_data, PROJECT_ROOT, model_map, cdi_items, get_administration_instance, has_backpage
+from cdi_forms.views.utils import prefilled_cdi_data, PROJECT_ROOT, model_map, cdi_items, get_administration_instance, has_backpage, language_map
 from django.conf import settings
 from cdi_forms.views import printable_view
 
@@ -25,6 +26,9 @@ class AdministrationSummaryView(DetailView):
     
     def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
         self.get_object()
+        language = language_map(self.get_object().study.instrument.language)
+        translation.activate(language)
+        request.LANGUAGE_CODE = translation.get_language()
         return super().dispatch(request, *args, **kwargs)
     
     def get(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
@@ -45,6 +49,12 @@ class AdministrationDetailView(DetailView):
         ]
         return context
     
+    def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
+        language = language_map(self.get_object().study.instrument.language)
+        translation.activate(language)
+        request.LANGUAGE_CODE = translation.get_language()
+        return super().dispatch(request, *args, **kwargs)
+    
 
 class AdministrationUpdateView(UpdateView):
     model = administration
@@ -57,6 +67,7 @@ class AdministrationUpdateView(UpdateView):
         if 'contents' in ctx['data']:
             ctx['contents'] = ctx['data']['contents']
         ctx['timer'] = True if (timezone.now()-self.object.created_date).total_seconds() / 60.0 > self.object.study.timing else False
+        ctx['language_code'] = language_map(self.get_object().study.instrument.language)
         return ctx
     
     def get_object(self, queryset=None):
@@ -71,6 +82,9 @@ class AdministrationUpdateView(UpdateView):
     def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
         self.get_object()
         self.get_instrument()
+        language = language_map(self.get_object().study.instrument.language)
+        translation.activate(language)
+        request.LANGUAGE_CODE = translation.get_language()
         return super().dispatch(request, *args, **kwargs)
     
     def get(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
@@ -79,7 +93,6 @@ class AdministrationUpdateView(UpdateView):
         return super().get(request, *args, **kwargs)
         
     def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
-        logger.debug(f'COMPLETED {self.object.completed}')
         if self.object.completed:
             return redirect(reverse('administration_summary_view', args=(self.object.url_hash,)))
         if 'btn-save' in request.POST:
@@ -153,17 +166,27 @@ class AdministrationUpdateView(UpdateView):
         raw_objects = []
 
         if target == 'category':
+            logger.debug(f'Category: Section id {section["id"]}')
             group_objects = self.instrument.filter(
                 category__exact=section["id"]
             ).values(*self.get_field_values())
+                
+            section['section'] = {
+                'title': None if not 'title' in section else section['title'],
+                'text': '' if not 'text' in section else section['text'],
+                'footnote': '' if not 'footnote' in section else section['footnote']
+            }
             
         elif target == 'item_type':
             group_objects = self.instrument.filter(
                 item_type__exact=item_type["id"]
             ).values(*self.get_field_values())
                     
-        if "type" not in section:
-            section["type"] = item_type["type"]            
+        if 'type' not in section:
+            section['type'] = item_type['type']
+        if "type" not in item_type:
+            item_type["type"] = section["type"]
+
         x = cdi_items(
             group_objects,
             section["type"],
@@ -171,26 +194,17 @@ class AdministrationUpdateView(UpdateView):
             item_type["id"],
         )
         section["objects"] = x
-
+        
         if self.object.study.show_feedback:
             raw_objects.extend(x)
         if any(["*" in x["definition"] for x in section["objects"]]):
             section["starred"] = "*Or the word used in your family"
-        
-        if 'sub_title' in item_type:
-            subtitle = item_type['sub_title']
-        else:
-            subtitle = ''
-        if 'text' in item_type:
-            instructions = item_type['text']
-        else:
-            instructions = ''
 
         section['type'] = {
-            'title': item_type['title'],
-            'subtitle': subtitle,
-            'type': item_type['type'],
-            'instructions': instructions,
+            'title': '' if not 'title' in item_type else item_type['title'],
+            'subtitle': '' if not 'sub_title' in item_type else item_type['sub_title'],
+            'type': '' if not 'type' in item_type else item_type['type'],
+            'instructions': '' if not 'text' in item_type else item_type['text'],
             'id': item_type['id'],
         }
         return section
@@ -243,6 +257,7 @@ class AdministrationUpdateView(UpdateView):
             for item_type in part["types"]:
                 if 'page' in item_type:
                     if target_section == item_type['page']:
+                        logger.debug(1)
                         return_data = self.return_data(item_type, item_type, prefilled_data, target='item_type')
                         return_data['part'] = part['title']
                         return_data['contents'] = data['parts']
@@ -251,6 +266,7 @@ class AdministrationUpdateView(UpdateView):
                 elif "sections" in item_type:
                     for section in item_type['sections']:
                         if target_section == section['page']:
+                            logger.debug('Sections')
                             return_data = self.return_data(section, item_type, prefilled_data)
                             return_data['part'] = part['title']
                             return_data['contents'] = data['parts']
@@ -258,7 +274,6 @@ class AdministrationUpdateView(UpdateView):
                             return return_data
                 else:
                     return_data =  {}
-
                         
                     '''
                     if self.object.study.show_feedback:

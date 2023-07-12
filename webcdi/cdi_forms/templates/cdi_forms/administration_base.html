@@ -129,7 +129,7 @@
                             <a href="#nav_list" data-toggle="collapse" id="tob_title"><h4>{% trans "Table of Contents:" %} <i class="material-icons">arrow_drop_down</i></h4></a>
                             <div id = "nav_list" class = "">
                                 <h4>{% trans "Contents:" %}</h4>
-                                <ul class=" bs-docs-sidenav">
+                                <ul class="nav bs-docs-sidenav">
                                     <li style="list-style-type: none"><a href="{% url 'instructions' object.url_hash %}" id="id_btn_instructions">{% trans 'Instructions:' %}</a></li>
                                     {% for part in contents %}
                                         <li style="list-style-type: none">

@@ -11,13 +11,16 @@
                     "type": "modified_checkbox",
                     "sections": [
                         {
-                            "id": "col_1"
+                            "id": "col_1",
+                            "page": 1
                         },
                         {
-                            "id": "col_2"
+                            "id": "col_2",
+                            "page": 2
                         },
                         {
-                            "id": "col_3"
+                            "id": "col_3",
+                            "page": 3
                         }
                     ]
                 }
