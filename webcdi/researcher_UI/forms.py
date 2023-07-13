@@ -134,13 +134,19 @@ class AddStudyForm(BetterModelForm):
     # Form validation. Form is passed automatically to views.py for higher level checking.
     def clean(self):
         cleaned_data = super().clean()
-        
-        if '/' in cleaned_data['name']:
-            self.add_error("name", f"{cleaned_data['name']} has a slash(/) in it.  This is not a valid character. Please remove")    
-        
-        elif study.objects.filter(name=cleaned_data['name']).exists():
-            self.add_error("name", f"{cleaned_data['name']} is used elsewhere in WebCDI.  Study names must be unique")    
-        
+
+        if "/" in cleaned_data["name"]:
+            self.add_error(
+                "name",
+                f"{cleaned_data['name']} has a slash(/) in it.  This is not a valid character. Please remove",
+            )
+
+        elif study.objects.filter(name=cleaned_data["name"]).exists():
+            self.add_error(
+                "name",
+                f"{cleaned_data['name']} is used elsewhere in WebCDI.  Study names must be unique",
+            )
+
         return cleaned_data
 
     # Initiating form and field layout.
@@ -382,7 +388,7 @@ class RenameStudyForm(BetterModelForm):
 
     # Form validation. Form is passed automatically to views.py for higher level checking.
     def clean(self):
-        cleaned_data = super().clean()        
+        cleaned_data = super().clean()
         return cleaned_data
 
     # Form initiation. Specific form and field layout.

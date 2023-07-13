@@ -1,31 +1,29 @@
-import os 
+import datetime
 import json
 import logging
-import datetime
+import os
 from typing import Any
+
+from cdi_forms.forms import BackgroundForm, BackpageBackgroundForm
+from cdi_forms.models import BackgroundInfo
+from cdi_forms.utils import get_demographic_filename
+from cdi_forms.views.utils import PROJECT_ROOT, language_map, safe_harbor_zip_code
+from django.conf import settings
+from django.core.mail import EmailMultiAlternatives
+from django.db.models import Max
+from django.http import HttpRequest, HttpResponse
+from django.shortcuts import redirect, render
+from django.urls import reverse
+from django.utils import timezone, translation
 from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
-from django.views.generic import UpdateView, CreateView
-
-from django.http import HttpRequest, HttpResponse
-from django.core.mail import EmailMultiAlternatives
-from django.conf import settings
-from cdi_forms.views.utils import language_map, PROJECT_ROOT, safe_harbor_zip_code
-from django.utils import timezone, translation
-from cdi_forms.models import BackgroundInfo
-from cdi_forms.forms import BackgroundForm, BackpageBackgroundForm
-from researcher_UI.models import payment_code, study, administration, researcher
-
 from django.utils.translation import ugettext_lazy as _
-from django.db.models import Max
-
-from cdi_forms.utils import get_demographic_filename
-
-from django.urls import reverse
-from django.shortcuts import redirect, render
+from django.views.generic import CreateView, UpdateView
+from researcher_UI.models import administration, payment_code, researcher, study
 
 # Get an instance of a logger
 logger = logging.getLogger("debug")
+
 
 class AdministrationMixin(object):
     hash_id = None
@@ -83,7 +81,9 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
     which_page = "front"
 
     def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
-        language = language_map(self.get_object().administration.study.instrument.language)
+        language = language_map(
+            self.get_object().administration.study.instrument.language
+        )
         translation.activate(language)
         request.LANGUAGE_CODE = translation.get_language()
         return super().dispatch(request, *args, **kwargs)
@@ -106,7 +106,7 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
     def get_context_data(self, **kwargs):
         # data = super(BackgroundInfoView, self).get_context_data(**kwargs)
         data = {}
-        data['object'] = self.administration_instance
+        data["object"] = self.administration_instance
         data["background_form"] = self.background_form
         data["hash_id"] = self.hash_id
         data["username"] = self.administration_instance.study.researcher.username
@@ -379,6 +379,7 @@ class BackpageBackgroundInfoView(BackgroundInfoView):
         ctx = super().get_context_data(**kwargs)
         ctx["dont_show_waiver"] = True
         return ctx
+
 
 class CreateBackgroundInfoView(CreateView):
     template_name = "cdi_forms/background_info.html"
