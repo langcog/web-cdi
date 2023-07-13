@@ -1,16 +1,21 @@
-import os
 import json
-import re 
+import logging
+import os
+import re
 
-from researcher_UI.models import administration_data, instrument, administration
+from cdi_forms.models import BackgroundInfo, Instrument_Forms, Zipcode
 from django.conf import settings
 from django.http import Http404
-from cdi_forms.models import Instrument_Forms, BackgroundInfo, Zipcode
 from django.utils import translation
-import logging
+from researcher_UI.models import administration, administration_data, instrument
+
 logger = logging.getLogger("debug")
 from pathlib import Path
-PROJECT_ROOT = str(Path(os.path.dirname(__file__)).parent.absolute()) # Declare root folder for project and files. Varies between Mac and Linux installations.
+
+PROJECT_ROOT = str(
+    Path(os.path.dirname(__file__)).parent.absolute()
+)  # Declare root folder for project and files. Varies between Mac and Linux installations.
+
 
 # This function is not written properly...
 def language_map(language):
@@ -28,7 +33,8 @@ def language_map(language):
             % trimmed_lang
         )
         return lang_code
-    
+
+
 def has_backpage(filename):
     back_page = 0
     if os.path.isfile(filename):
@@ -37,6 +43,7 @@ def has_backpage(filename):
             if page["page"] == "back":
                 back_page = 1
     return back_page
+
 
 # Map name of instrument model to its string title
 def model_map(name):
@@ -198,8 +205,8 @@ def prefilled_cdi_data(administration_instance):
 # Stitch section nesting in cdi_forms/form_data/*.json and instrument models together and prepare for CDI form rendering
 def cdi_items(object_group, item_type, prefilled_data, item_id):
     for obj in object_group:
-        logger.debug(f'{obj}')
-        if obj['enabler']:
+        logger.debug(f"{obj}")
+        if obj["enabler"]:
             logger.debug(prefilled_data)
         if "textbox" in obj["item"]:
             obj["text"] = obj["definition"]
@@ -273,6 +280,7 @@ def cdi_items(object_group, item_type, prefilled_data, item_id):
 
     return object_group
 
+
 def safe_harbor_zip_code(obj):
     zip_prefix = ""
     raw_zip = obj.zip_code
@@ -283,6 +291,7 @@ def safe_harbor_zip_code(obj):
         else:
             zip_prefix = zip_prefix + "**"
     return zip_prefix
+
 
 # Find the administration object for a test-taker based on their unique hash code.
 def get_administration_instance(hash_id):
