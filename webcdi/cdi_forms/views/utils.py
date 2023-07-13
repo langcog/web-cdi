@@ -9,8 +9,9 @@ from django.http import Http404
 from django.utils import translation
 from researcher_UI.models import administration, administration_data, instrument
 
-logger = logging.getLogger("debug")
 from pathlib import Path
+
+logger = logging.getLogger("debug")
 
 PROJECT_ROOT = str(
     Path(os.path.dirname(__file__)).parent.absolute()

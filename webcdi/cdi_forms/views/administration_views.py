@@ -13,7 +13,7 @@ from cdi_forms.views.utils import (
     model_map,
     prefilled_cdi_data,
 )
-from django import http
+
 from django.conf import settings
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect
@@ -303,9 +303,9 @@ class AdministrationUpdateView(UpdateView):
             ).values(*self.get_field_values())
 
             section["section"] = {
-                "title": None if not "title" in section else section["title"],
-                "text": "" if not "text" in section else section["text"],
-                "footnote": "" if not "footnote" in section else section["footnote"],
+                "title": None if "title" not in section else section["title"],
+                "text": "" if "text" not in section else section["text"],
+                "footnote": "" if "footnote" not in section else section["footnote"],
             }
 
         elif target == "item_type":
