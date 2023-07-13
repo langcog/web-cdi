@@ -27,6 +27,7 @@ urlpatterns = [
                         path('instructions/', views.InstructionDetailView.as_view(), name='instructions'),
                         path('first-page/', views.AdministrationUpdateView.as_view(), name='update_administration'),
                         path('<int:section>/', views.AdministrationUpdateView.as_view(), name='update_administration_section'),
+                        path('<int:section>/<str:previous>/', views.AdministrationUpdateView.as_view(), name='update_administration_section_previous'),
                         path('summary/', views.AdministrationSummaryView.as_view(), name='administration_summary_view'),
                 ])
         )

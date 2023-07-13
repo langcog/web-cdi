@@ -1,5 +1,6 @@
 import json
 import os
+import re
 
 from typing import Any, Dict
 from django import http
@@ -9,7 +10,7 @@ from django.http import HttpRequest, HttpResponse
 from django.utils import timezone, translation
 from django.views.generic import DetailView, UpdateView
 from researcher_UI.models import administration, administration_data
-from cdi_forms.views.utils import prefilled_cdi_data, PROJECT_ROOT, model_map, cdi_items, get_administration_instance, has_backpage, language_map
+from cdi_forms.views.utils import prefilled_cdi_data, PROJECT_ROOT, model_map, get_administration_instance, has_backpage, language_map
 from django.conf import settings
 from cdi_forms.views import printable_view
 
@@ -82,6 +83,11 @@ class AdministrationUpdateView(UpdateView):
     def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
         self.get_object()
         self.get_instrument()
+        logger.debug(f'Kwargs {self.kwargs}')
+        if 'btn-previous' in request.POST or 'previous' in self.kwargs:
+            self.goto_previous_page=True
+        else:
+            self.goto_previous_page=False
         language = language_map(self.get_object().study.instrument.language)
         translation.activate(language)
         request.LANGUAGE_CODE = translation.get_language()
@@ -98,7 +104,7 @@ class AdministrationUpdateView(UpdateView):
         if 'btn-save' in request.POST:
             response = self.request.get_full_path()
         if 'btn-previous' in request.POST:
-            response = reverse('update_administration_section', args=(self.object.url_hash, request.POST['previous'] ))
+            response = reverse('update_administration_section_previous', args=(self.object.url_hash, request.POST['previous'], 'previous' ))
         if 'btn-next' in request.POST:
             response = reverse('update_administration_section', args=(self.object.url_hash, request.POST['next'] ))
         if 'btn-back' in request.POST:
@@ -155,6 +161,8 @@ class AdministrationUpdateView(UpdateView):
             "category",
             "definition",
             "choices__choice_set",
+            "enabler",
+            "enable_response"
         ]
         field_values += [
             "choices__choice_set_"
@@ -162,11 +170,92 @@ class AdministrationUpdateView(UpdateView):
         ]
         return field_values
     
+    def cdi_items(self, object_group, item_type, prefilled_data, item_id):
+        remove_list=[]
+        for obj in object_group:
+            if obj['enabler']:
+                if administration_data.objects.filter(administration=self.object, item_ID=obj['enabler']).exists():
+                    if not administration_data.objects.get(administration=self.object, item_ID=obj['enabler']).value in obj['enable_response']:
+                        remove_list.append(obj)
+                        continue
+            if "textbox" in obj["item"]:
+                obj["text"] = obj["definition"]
+                if obj["itemID"] in prefilled_data:
+                    obj["prefilled_value"] = prefilled_data[obj["itemID"]]
+            elif item_type == "checkbox":
+                obj["prefilled_value"] = obj["itemID"] in prefilled_data
+                obj["definition"] = (
+                    obj["definition"][0] + obj["definition"][1:]
+                    if obj["definition"][0].isalpha()
+                    else obj["definition"][0] + obj["definition"][1] + obj["definition"][2:]
+                )
+                obj["choices"] = obj["choices__choice_set"]
+
+            elif item_type in ["radiobutton", "modified_checkbox"]:
+                raw_split_choices = [
+                    i.strip() for i in obj["choices__choice_set"].split(";")
+                ]
+
+                # split_choices_translated = map(str.strip, [value for key, value in obj.items() if 'choice_set_' in key][0].split(';'))
+                split_choices_translated = [
+                    value for key, value in obj.items() if "choice_set_" in key
+                ][0].split(";")
+                prefilled_values = [
+                    False
+                    if obj["itemID"] not in prefilled_data
+                    else x == prefilled_data[obj["itemID"]]
+                    for x in raw_split_choices
+                ]
+
+                obj["text"] = (
+                    obj["definition"][0] + obj["definition"][1:]
+                    if obj["definition"][0].isalpha()
+                    else obj["definition"][0] + obj["definition"][1] + obj["definition"][2:]
+                )
+
+                if (
+                    obj["definition"] is not None
+                    and obj["definition"].find("\\") >= 0
+                    and item_id in ["complexity", "pronoun_usage"]
+                ):
+                    instruction = re.search("<b>(.+?)</b>", obj["definition"])
+                    if instruction:
+                        obj_choices = obj["definition"].split(
+                            instruction.group(1) + "</b><br />"
+                        )[1]
+                    else:
+                        obj_choices = obj["definition"]
+                    # split_definition = map(str.strip, obj_choices.split('\\'))
+                    split_definition = obj_choices.split("\\")
+                    obj["choices"] = list(
+                        zip(split_definition, raw_split_choices, prefilled_values)
+                    )
+                else:
+                    obj["choices"] = list(
+                        zip(split_choices_translated, raw_split_choices, prefilled_values)
+                    )
+                    if obj["definition"] is not None:
+                        obj["text"] = (
+                            obj["definition"][0] + obj["definition"][1:]
+                            if obj["definition"][0].isalpha()
+                            else obj["definition"][0]
+                            + obj["definition"][1]
+                            + obj["definition"][2:]
+                        )
+
+            elif item_type == "textbox":
+                if obj["itemID"] in prefilled_data:
+                    obj["prefilled_value"] = prefilled_data[obj["itemID"]]
+
+        #now clear out those removed:
+        for obj in remove_list:
+            object_group.remove(obj)
+        return object_group
+    
     def return_data(self, section, item_type, prefilled_data, target='category'):
         raw_objects = []
 
         if target == 'category':
-            logger.debug(f'Category: Section id {section["id"]}')
             group_objects = self.instrument.filter(
                 category__exact=section["id"]
             ).values(*self.get_field_values())
@@ -187,8 +276,8 @@ class AdministrationUpdateView(UpdateView):
         if "type" not in item_type:
             item_type["type"] = section["type"]
 
-        x = cdi_items(
-            group_objects,
+        x = self.cdi_items(
+            list(group_objects),
             section["type"],
             prefilled_data,
             item_type["id"],
@@ -210,7 +299,7 @@ class AdministrationUpdateView(UpdateView):
         return section
     
     def get_section(self, target_section=None):
-        if 'section' in self.kwargs:
+        if not target_section and 'section' in self.kwargs:
             target_section = self.kwargs['section']
 
         old_admins = administration.objects.filter(
@@ -257,8 +346,14 @@ class AdministrationUpdateView(UpdateView):
             for item_type in part["types"]:
                 if 'page' in item_type:
                     if target_section == item_type['page']:
-                        logger.debug(1)
                         return_data = self.return_data(item_type, item_type, prefilled_data, target='item_type')
+                        if len(return_data['objects']) < 1:
+                            logger.debug(f'Old target is {target_section}')
+                            logger.debug(f'Previous Page {self.goto_previous_page}')
+                            
+                            new_target = target_section+1 if not self.goto_previous_page else target_section-1
+                            logger.debug(f'New target is {new_target}')
+                            return self.get_section(target_section=new_target)
                         return_data['part'] = part['title']
                         return_data['contents'] = data['parts']
                         return_data['menu'] = target_section
@@ -266,8 +361,12 @@ class AdministrationUpdateView(UpdateView):
                 elif "sections" in item_type:
                     for section in item_type['sections']:
                         if target_section == section['page']:
-                            logger.debug('Sections')
                             return_data = self.return_data(section, item_type, prefilled_data)
+                            if len(return_data['objects']) < 1:
+                                logger.debug(f'Old target is {target_section}')
+                                new_target = target_section+1 if not self.goto_previous_page else target_section-1
+                                logger.debug(f'New target is {new_target}')
+                                return self.get_section(target_section=new_target)
                             return_data['part'] = part['title']
                             return_data['contents'] = data['parts']
                             return_data['menu'] = target_section
@@ -275,10 +374,12 @@ class AdministrationUpdateView(UpdateView):
                 else:
                     return_data =  {}
                         
+
                     '''
                     if self.object.study.show_feedback:
                         raw_objects.extend(x)
                     '''
+
 
 def update_administration_data_item(request):
     if not request.POST:

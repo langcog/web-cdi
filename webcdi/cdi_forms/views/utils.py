@@ -7,7 +7,8 @@ from django.conf import settings
 from django.http import Http404
 from cdi_forms.models import Instrument_Forms, BackgroundInfo, Zipcode
 from django.utils import translation
-
+import logging
+logger = logging.getLogger("debug")
 from pathlib import Path
 PROJECT_ROOT = str(Path(os.path.dirname(__file__)).parent.absolute()) # Declare root folder for project and files. Varies between Mac and Linux installations.
 
@@ -197,6 +198,9 @@ def prefilled_cdi_data(administration_instance):
 # Stitch section nesting in cdi_forms/form_data/*.json and instrument models together and prepare for CDI form rendering
 def cdi_items(object_group, item_type, prefilled_data, item_id):
     for obj in object_group:
+        logger.debug(f'{obj}')
+        if obj['enabler']:
+            logger.debug(prefilled_data)
         if "textbox" in obj["item"]:
             obj["text"] = obj["definition"]
             if obj["itemID"] in prefilled_data:
