@@ -98,7 +98,7 @@
                             </script>
 
                             <!-- Script for calculating the test's expiration date in the browser's local time -->
-                            <div id="due_time"><p><b> {% trans 'Due date' %} </b>: {{ object}} {{ object.administration.due_date|date:'F d, Y, P' }}<span></span></p></div>
+                            <div id="due_time"><p><b> {% trans 'Due date' %} </b>: {{ object.due_date|date:'F d, Y, P' }}<span></span></p></div>
 
                             
                             <!-- If study has an associated body of text in its waiver field, gives option to pull up a modal window containing the waiver text by clicking button -->
