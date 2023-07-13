@@ -13,7 +13,6 @@ from cdi_forms.views.utils import (
     model_map,
     prefilled_cdi_data,
 )
-
 from django.conf import settings
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect
@@ -212,6 +211,8 @@ class AdministrationUpdateView(UpdateView):
                     ):
                         remove_list.append(obj)
                         continue
+                else:
+                    continue
             if "textbox" in obj["item"]:
                 obj["text"] = obj["definition"]
                 if obj["itemID"] in prefilled_data:
@@ -332,10 +333,10 @@ class AdministrationUpdateView(UpdateView):
             section["starred"] = "*Or the word used in your family"
 
         section["type"] = {
-            "title": "" if not "title" in item_type else item_type["title"],
-            "subtitle": "" if not "sub_title" in item_type else item_type["sub_title"],
-            "type": "" if not "type" in item_type else item_type["type"],
-            "instructions": "" if not "text" in item_type else item_type["text"],
+            "title": "" if "title" not in item_type else item_type["title"],
+            "subtitle": "" if "sub_title" not in item_type else item_type["sub_title"],
+            "type": "" if "type" not in item_type else item_type["type"],
+            "instructions": "" if "text" not in item_type else item_type["text"],
             "id": item_type["id"],
         }
         return section
@@ -443,12 +444,6 @@ def update_administration_data_item(request):
 
     hash_id = request.POST.get("hash_id")
     administration_instance = get_administration_instance(hash_id)
-    instrument_name = (
-        administration_instance.study.instrument.name
-    )  # Get instrument name associated with study
-    instrument_model = model_map(instrument_name).filter(
-        itemID__in=request.POST
-    )  # Fetch instrument model based on instrument name.
 
     value = ""
     if request.POST["check"] == "true":

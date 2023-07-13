@@ -2,14 +2,13 @@ import json
 import logging
 import os
 import re
+from pathlib import Path
 
 from cdi_forms.models import BackgroundInfo, Instrument_Forms, Zipcode
 from django.conf import settings
 from django.http import Http404
 from django.utils import translation
 from researcher_UI.models import administration, administration_data, instrument
-
-from pathlib import Path
 
 logger = logging.getLogger("debug")
 
@@ -206,9 +205,6 @@ def prefilled_cdi_data(administration_instance):
 # Stitch section nesting in cdi_forms/form_data/*.json and instrument models together and prepare for CDI form rendering
 def cdi_items(object_group, item_type, prefilled_data, item_id):
     for obj in object_group:
-        logger.debug(f"{obj}")
-        if obj["enabler"]:
-            logger.debug(prefilled_data)
         if "textbox" in obj["item"]:
             obj["text"] = obj["definition"]
             if obj["itemID"] in prefilled_data:

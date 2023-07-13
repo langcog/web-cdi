@@ -2,11 +2,12 @@ import os
 import json
 import logging
 import datetime
-
+from typing import Any
 from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
 from django.views.generic import UpdateView, CreateView
 
+from django.http import HttpRequest, HttpResponse
 from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
 from cdi_forms.views.utils import language_map, PROJECT_ROOT, safe_harbor_zip_code
@@ -81,6 +82,12 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
     background_form = None
     which_page = "front"
 
+    def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
+        language = language_map(self.get_object().administration.study.instrument.language)
+        translation.activate(language)
+        request.LANGUAGE_CODE = translation.get_language()
+        return super().dispatch(request, *args, **kwargs)
+
     def get_explanation_text(self):
         try:
             filename = os.path.realpath(
@@ -99,6 +106,7 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
     def get_context_data(self, **kwargs):
         # data = super(BackgroundInfoView, self).get_context_data(**kwargs)
         data = {}
+        data['object'] = self.administration_instance
         data["background_form"] = self.background_form
         data["hash_id"] = self.hash_id
         data["username"] = self.administration_instance.study.researcher.username
