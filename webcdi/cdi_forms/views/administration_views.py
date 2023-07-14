@@ -341,18 +341,18 @@ class AdministrationUpdateView(UpdateView):
         return section
 
     def max_page(self, contents):
-        page=0
+        page = 0
         for part in contents:
-            for item in part['types']:
-                if 'page' in item:
-                    if item['page'] > page:
-                        page = item['page']
-                if 'sections' in item:
-                    for section in item['sections']:
-                        if section['page'] > page:
-                            page = section['page']
+            for item in part["types"]:
+                if "page" in item:
+                    if item["page"] > page:
+                        page = item["page"]
+                if "sections" in item:
+                    for section in item["sections"]:
+                        if section["page"] > page:
+                            page = section["page"]
         return page
-    
+
     def get_section(self, target_section=None):
         if not target_section and "section" in self.kwargs:
             target_section = self.kwargs["section"]
@@ -407,12 +407,14 @@ class AdministrationUpdateView(UpdateView):
                         return_data = self.return_data(
                             item_type, item_type, prefilled_data, target="item_type"
                         )
-                        if len(return_data["objects"]) < 1 and target_section < self.max_page(data['parts']):
+                        if len(
+                            return_data["objects"]
+                        ) < 1 and target_section < self.max_page(data["parts"]):
                             new_target = (
                                 target_section + 1
                                 if not self.goto_previous_page
                                 else target_section - 1
-                            ) 
+                            )
                             return self.get_section(target_section=new_target)
                         return_data["part"] = part["title"]
                         return_data["contents"] = data["parts"]
