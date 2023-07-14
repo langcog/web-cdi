@@ -93,7 +93,6 @@ class AdministrationUpdateView(UpdateView):
     def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
         self.get_object()
         self.get_instrument()
-        logger.debug(f"Kwargs {self.kwargs}")
         if "btn-previous" in request.POST or "previous" in self.kwargs:
             self.goto_previous_page = True
         else:
@@ -341,6 +340,19 @@ class AdministrationUpdateView(UpdateView):
         }
         return section
 
+    def max_page(self, contents):
+        page=0
+        for part in contents:
+            for item in part['types']:
+                if 'page' in item:
+                    if item['page'] > page:
+                        page = item['page']
+                if 'sections' in item:
+                    for section in item['sections']:
+                        if section['page'] > page:
+                            page = section['page']
+        return page
+    
     def get_section(self, target_section=None):
         if not target_section and "section" in self.kwargs:
             target_section = self.kwargs["section"]
@@ -395,16 +407,12 @@ class AdministrationUpdateView(UpdateView):
                         return_data = self.return_data(
                             item_type, item_type, prefilled_data, target="item_type"
                         )
-                        if len(return_data["objects"]) < 1:
-                            logger.debug(f"Old target is {target_section}")
-                            logger.debug(f"Previous Page {self.goto_previous_page}")
-
+                        if len(return_data["objects"]) < 1 and target_section < self.max_page(data['parts']):
                             new_target = (
                                 target_section + 1
                                 if not self.goto_previous_page
                                 else target_section - 1
-                            )
-                            logger.debug(f"New target is {new_target}")
+                            ) 
                             return self.get_section(target_section=new_target)
                         return_data["part"] = part["title"]
                         return_data["contents"] = data["parts"]
@@ -416,14 +424,12 @@ class AdministrationUpdateView(UpdateView):
                             return_data = self.return_data(
                                 section, item_type, prefilled_data
                             )
-                            if len(return_data["objects"]) < 1:
-                                logger.debug(f"Old target is {target_section}")
+                            if len(return_data["objects"]) < 1 and target_section:
                                 new_target = (
                                     target_section + 1
                                     if not self.goto_previous_page
                                     else target_section - 1
                                 )
-                                logger.debug(f"New target is {new_target}")
                                 return self.get_section(target_section=new_target)
                             return_data["part"] = part["title"]
                             return_data["contents"] = data["parts"]
