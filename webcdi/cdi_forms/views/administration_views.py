@@ -2,10 +2,9 @@ import json
 import logging
 import os
 import re
-import requests
 from typing import Any, Dict
-from ipware.ip import get_client_ip
 
+import requests
 from cdi_forms.views import printable_view
 from cdi_forms.views.utils import (
     PROJECT_ROOT,
@@ -21,7 +20,13 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils import timezone, translation
 from django.views.generic import DetailView, UpdateView
-from researcher_UI.models import administration, administration_data, payment_code, ip_address
+from ipware.ip import get_client_ip
+from researcher_UI.models import (
+    administration,
+    administration_data,
+    ip_address,
+    payment_code,
+)
 
 logger = logging.getLogger("debug")
 
@@ -145,18 +150,15 @@ class AdministrationUpdateView(UpdateView):
                 result = r.json()
 
             # If study allows for subject payment and has yet to hit its cap on subjects, try to provide the test-taker with a gift card code.
-            if (
-                self.object.study.allow_payment
-                and self.object.bypass is None
-            ):
+            if self.object.study.allow_payment and self.object.bypass is None:
                 if (
-                    self.object.study.confirm_completion
-                    and result["success"]
+                    self.object.study.confirm_completion and result["success"]
                 ) or not self.object.study.confirm_completion:
-                    if not payment_code.objects.filter(hash_id=self.object.url_hash).exists():
+                    if not payment_code.objects.filter(
+                        hash_id=self.object.url_hash
+                    ).exists():
                         if (
-                            self.object.study.name
-                            == "Wordful Study (Official)"
+                            self.object.study.name == "Wordful Study (Official)"
                         ):  # for wordful study: if its second admin, give 25 bucks else 5
                             if self.object.repeat_num == 2:
                                 # if this subject already has claimed $25: give them $5 this time
