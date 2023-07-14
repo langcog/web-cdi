@@ -43,7 +43,7 @@
             {% endif %}
 
             <div class="row alternate-color">
-                {% if objects|length > 0 %}
+                {% if data.objects|length > 0 %}
                     {% for object in data.objects %}
                         {% if 'textbox' in object.item %}
                             <div class="col-md-12 alco-child"> 
@@ -123,6 +123,9 @@
             </div>
             <div class="col-md-12">{{ data.section.footnote }}</div>
         </div>
+
+        
+        {% include 'cdi_forms/_captcha_page.html' %}
 
         {% include 'cdi_forms/_navigation_buttons.html' %}
     </div>

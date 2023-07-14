@@ -2,7 +2,9 @@ import json
 import logging
 import os
 import re
+import requests
 from typing import Any, Dict
+from ipware.ip import get_client_ip
 
 from cdi_forms.views import printable_view
 from cdi_forms.views.utils import (
@@ -19,7 +21,7 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils import timezone, translation
 from django.views.generic import DetailView, UpdateView
-from researcher_UI.models import administration, administration_data
+from researcher_UI.models import administration, administration_data, payment_code, ip_address
 
 logger = logging.getLogger("debug")
 
@@ -129,6 +131,69 @@ class AdministrationUpdateView(UpdateView):
         if "btn-back" in request.POST:
             response = reverse("background-info", args=(self.object.backgroundinfo.pk,))
         if "btn-submit" in request.POST:
+            # Some studies may require successfully passing a ReCaptcha test for submission. If so, get for a passing response before marking form as complete.
+            result = {"success": None}
+            recaptcha_response = request.POST.get("g-recaptcha-response", None)
+            if recaptcha_response:
+                dt = {
+                    "secret": settings.RECAPTCHA_PRIVATE_KEY,
+                    "response": recaptcha_response,
+                }
+                r = requests.post(
+                    "https://www.google.com/recaptcha/api/siteverify", data=dt
+                )
+                result = r.json()
+
+            # If study allows for subject payment and has yet to hit its cap on subjects, try to provide the test-taker with a gift card code.
+            if (
+                self.object.study.allow_payment
+                and self.object.bypass is None
+            ):
+                if (
+                    self.object.study.confirm_completion
+                    and result["success"]
+                ) or not self.object.study.confirm_completion:
+                    if not payment_code.objects.filter(hash_id=self.object.url_hash).exists():
+                        if (
+                            self.object.study.name
+                            == "Wordful Study (Official)"
+                        ):  # for wordful study: if its second admin, give 25 bucks else 5
+                            if self.object.repeat_num == 2:
+                                # if this subject already has claimed $25: give them $5 this time
+                                if payment_code.objects.filter(
+                                    hash_id=self.object.url_hash,
+                                    gift_amount=25.0,
+                                ).exists():
+                                    gift_amount_search = 5.0
+                                else:
+                                    gift_amount_search = 25.0
+                            else:
+                                gift_amount_search = 5.0
+                            given_code = payment_code.objects.filter(
+                                hash_id__isnull=True,
+                                study=self.object.study,
+                                gift_amount=gift_amount_search,
+                            ).first()
+                        else:
+                            given_code = payment_code.objects.filter(
+                                hash_id__isnull=True,
+                                study=self.object.study,
+                            ).first()
+
+                        if given_code:
+                            given_code.hash_id = self.object.url_hash
+                            given_code.assignment_date = timezone.now()
+                            given_code.save()
+
+            # If the study is run by langcoglab and the study allows for subject payments, store the IP address for security purposes
+            # if self.object.study.researcher.username == "langcoglab" and self.object.study.allow_payment:
+            if self.object.study.allow_payment:
+                user_ip = get_client_ip(request)
+
+                if user_ip and user_ip != "None":
+                    ip_address.objects.create(
+                        study=self.object.study, ip_address=user_ip
+                    )
             try:
                 filename = os.path.realpath(
                     PROJECT_ROOT + self.object.study.demographic.path

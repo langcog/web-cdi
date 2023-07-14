@@ -1,0 +1,39 @@
+{% load static i18n %}
+
+{% if data.menu == contents|max_page and object.study.confirm_completion %}
+<!-- Last page that asks parents to confirm that their data is suitable for analysis. May appear based on the study's confirm_completion setting. May also include a ReCaptcha based on if study is done by langcoglab and will pay participants -->
+<div id = "analysis_div">    
+    <h4>
+        {% trans 'You are almost done! Click "Yes" if you agree with ALL of the following points. Your answer will not affect your results. There is nothing wrong with choosing "No":' %}
+    </h4>
+
+    <ul>
+        <li>{% blocktrans with age=age %}You have a child who is {{ age }} months old.{% endblocktrans %}</li>
+        <li>{% trans "You filled out the entire questionnaire to the best of your ability." %}</li>
+        <li>{% trans "You are taking this questionnaire for the FIRST time." %}</li>
+    </ul>
+    <br>
+
+    <div class="btn-group btn-group-vertical" data-toggle="buttons">
+        <label class = "btn d-flex justify-content-start">
+            <input  type="radio" id="analysis_yes" name="analysis" value="True">
+            <i class="material-icons radio_button_checked align-middle" aria-hidden="true">radio_button_checked</i>
+            <i class="material-icons radio_button_unchecked align-middle" aria-hidden="true">radio_button_unchecked</i>
+            <p class="text-left">{% blocktrans with age=age %}Yes, I have a child who is {{ age }} months old, I filled out the entire questionnaire, and I am taking this questionnaire for the first time.{% endblocktrans %}</p>
+        </label>
+        <label class = "btn d-flex justify-content-start">
+            <input  type="radio" id="analysis_no" name="analysis" value="False">
+            <i class="material-icons radio_button_checked align-middle" aria-hidden="true">radio_button_checked</i>
+            <i class="material-icons radio_button_unchecked align-middle" aria-hidden="true">radio_button_unchecked</i>
+            <p class="text-left">{% blocktrans with age=age %}No, I do NOT have a child who is {{ age }} months old, I have NOT filled out the entire questionnaire, and/or I have taken this questionnaire before.{% endblocktrans %}</p>
+        </label>
+    </div>
+
+    {% if object.study.confirm_completion and object.study.allow_payment  %}
+        <br><br>
+        <p>{% trans "Finally, please check the Captcha box below to display the submit button!" %}</p>
+        <div class="g-recaptcha d-flex justify-content-center" data-sitekey="6LfI0yEUAAAAALj8wAxmoXmWg8B64tvr866bXeYg" data-callback="enableBtn"></div>
+    {% endif %}
+
+</div> <br><br>
+{% endif %}
