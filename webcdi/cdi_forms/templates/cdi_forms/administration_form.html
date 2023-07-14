@@ -116,7 +116,7 @@
                 {% else %} 
                     <div class="col-md-12 alco-child"> 
                         <div class="col-12">
-                            <p>{% trans 'Due to previous responses there is nothing to display on the final page.  Please submit or review your previous responses.' %}</p>
+                            <p style="text-align: center;"><br /><br />{% trans 'Thank you for completing!  Please review your responses and if you are ready, click submit!' %}<br /><br /></p>
                         </div>
                     </div>
                 {% endif %}
@@ -295,4 +295,20 @@
             $(label_var).text("{% trans 'understands and says' %}");
         });
     </script>
+
+    {% if data.menu == contents|max_page and object.study.confirm_completion %}
+    <!-- ReCaptcha. If study has a ReCaptcha option, the participant must have worked on the test for at least 6 minutes AND pass the ReCaptcha test for the submit button to appear. Otherwise, participant only has to have worked on the test for 6 minutes. -->
+    <script>
+        captcha_clicked = false;
+
+        $('.submit-button').hide()
+
+        // Triggers when participant successfully passes ReCaptcha
+        function enableBtn(){
+            captcha_clicked = true;    
+            $('.submit-button').show();   
+        }
+        
+    </script>
+    {% endif %}
 {% endblock %}
