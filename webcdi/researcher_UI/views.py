@@ -272,7 +272,7 @@ class AdminNewParent(generic.View):
                     )
                 )
         else:
-            redirect_url = reverse("overflow", args=[username, study_name])
+            redirect_url = reverse("researcher_ui:overflow", args=[study_obj.id])
         return redirect(redirect_url)
 
 
@@ -283,7 +283,8 @@ class Overflow(LoginRequiredMixin, generic.View):
     """
 
     def get(self, request, username, study_name):
-        data = overflow_fun(request, username, study_name)
+        study_obj = study.objects.get(id=self.kwargs['id'])
+        data = overflow_fun(request, study_obj.researcher.username, study_obj.name)
         return render(request, "cdi_forms/overflow.html", data)
 
 
