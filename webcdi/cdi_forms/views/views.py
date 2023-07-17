@@ -6,32 +6,32 @@ import logging
 import os.path
 
 import requests
+from cdi_forms.forms.forms import BackgroundForm
+from cdi_forms.models import *
+from cdi_forms.views.utils import (
+    PROJECT_ROOT,
+    get_administration_instance,
+    has_backpage,
+    language_map,
+    model_map,
+    prefilled_background_form,
+    prefilled_cdi_data,
+    safe_harbor_zip_code,
+)
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
 from django.http import Http404, HttpResponse
-from django.shortcuts import  redirect, render
+from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.utils import timezone, translation
 from django.utils.translation import ugettext_lazy as _
 from ipware.ip import get_client_ip
 from researcher_UI.models import *
 
-from cdi_forms.forms.forms import BackgroundForm
-from cdi_forms.models import *
-from cdi_forms.views.utils import (
-    model_map, 
-    PROJECT_ROOT, 
-    has_backpage, 
-    prefilled_cdi_data, 
-    language_map, 
-    safe_harbor_zip_code, 
-    get_administration_instance,
-    prefilled_background_form
-)
-
 # Get an instance of a logger
 logger = logging.getLogger("debug")
+
 
 # Gets list of itemIDs 'item_XX' from an instrument model
 def get_model_header(name):
@@ -251,6 +251,7 @@ def background_info_form(request, hash_id):
     response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
     return response
 
+
 # Convert string boolean to true boolean
 def parse_analysis(raw_answer):
     if raw_answer == "True":
@@ -347,10 +348,8 @@ def cdi_form(request, hash_id):
                 background_instance = BackgroundInfo.objects.get(
                     administration=administration_instance
                 )
-                return redirect(
-                    "background-info", pk=background_instance.pk
-                )  
-            
+                return redirect("background-info", pk=background_instance.pk)
+
             elif "btn-submit" in request.POST and request.POST["btn-submit"] == _(
                 "Submit"
             ):  # If 'Submit' button was pressed
@@ -452,7 +451,9 @@ def cdi_form(request, hash_id):
                     administration.objects.filter(url_hash=hash_id).update(
                         completed=True
                     )  # Mark test as complete
-                    return redirect(reverse('administration_summary_view', args=(hash_id,)))
+                    return redirect(
+                        reverse("administration_summary_view", args=(hash_id,))
+                    )
                     return printable_view(request, hash_id)  # Render completion page
 
     # Fetch prefilled responses
@@ -696,14 +697,16 @@ def administer_cdi_form(request, hash_id):
             if administration_instance.completedSurvey:
                 return redirect("backpage-background-info", pk=background_instance.pk)
             elif administration_instance.completedBackgroundInfo:
-                return redirect('instructions', hash_id=administration_instance.url_hash)
+                return redirect(
+                    "instructions", hash_id=administration_instance.url_hash
+                )
                 return cdi_form(request, hash_id)
             else:
                 return redirect("background-info", pk=background_instance.pk)
                 # return background_info_form(request, hash_id)
         else:
             # only printable
-            return redirect(reverse('administration_summary_view', args=(hash_id,)))
+            return redirect(reverse("administration_summary_view", args=(hash_id,)))
             return printable_view(request, hash_id)
 
 
@@ -816,6 +819,3 @@ def save_answer(request):
 
     administration.objects.filter(url_hash=hash_id).update(last_modified=timezone.now())
     return HttpResponse(json.dumps([{}]), content_type="application/json")
-
-
-

@@ -5,6 +5,7 @@ import re
 from typing import Any, Dict, List
 
 import requests
+from cdi_forms.models import Instrument_Forms
 from cdi_forms.views import printable_view
 from cdi_forms.views.utils import (
     PROJECT_ROOT,
@@ -12,8 +13,8 @@ from cdi_forms.views.utils import (
     has_backpage,
     language_map,
     model_map,
+    prefilled_background_form,
     prefilled_cdi_data,
-    prefilled_background_form
 )
 from django.conf import settings
 from django.http import HttpRequest, HttpResponse
@@ -28,16 +29,16 @@ from researcher_UI.models import (
     ip_address,
     payment_code,
 )
-from cdi_forms.models import Instrument_Forms
 
 logger = logging.getLogger("debug")
+
 
 class AdministrationSummaryView(DetailView):
     model = administration
     template_name = "cdi_forms/administration_summary.html"
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
-        ctx =  super().get_context_data(**kwargs)
+        ctx = super().get_context_data(**kwargs)
         # Create a blank dictionary and then fill it with prefilled background and CDI data, along with hash ID and information regarding the gift card code if subject is to be paid
         prefilled_data = dict()
         prefilled_data = prefilled_cdi_data(self.object)
@@ -53,17 +54,12 @@ class AdministrationSummaryView(DetailView):
         except:
             filename = "None"
         if has_backpage(filename):
-            backpage_background_form = prefilled_background_form(
-                self.object, False
-            )
+            backpage_background_form = prefilled_background_form(self.object, False)
             ctx["backpage_background_form"] = backpage_background_form
         ctx["gift_code"] = None
         ctx["gift_amount"] = None
 
-        if (
-            self.object.study.allow_payment
-            and self.object.bypass is None
-        ):
+        if self.object.study.allow_payment and self.object.bypass is None:
             amazon_urls = {
                 "English": {
                     "redeem_url": "http://www.amazon.com/redeem",
@@ -91,7 +87,7 @@ class AdministrationSummaryView(DetailView):
                 ctx["redeem_url"] = None
                 ctx["legal_url"] = None
         # calculate graph data
-        ctx['cdi_items'] = prefilled_cdi_data(self.object)["cdi_items"]
+        ctx["cdi_items"] = prefilled_cdi_data(self.object)["cdi_items"]
         cdi_items = json.loads(ctx["cdi_items"])
         categories = {}
         from cdi_forms.management.commands.populate_items import unicode_csv_reader
@@ -114,9 +110,7 @@ class AdministrationSummaryView(DetailView):
         for row in range(1, nrows):
             row_values = get_row(row)
             if len(row_values) > 1:
-                if row_values[
-                    col_names.index(self.object.study.instrument.name)
-                ]:
+                if row_values[col_names.index(self.object.study.instrument.name)]:
                     mapped_name = row_values[
                         col_names.index(self.object.study.instrument.name)
                     ]
@@ -152,13 +146,13 @@ class AdministrationSummaryView(DetailView):
         ]
 
         return ctx
-    
+
     def get_template_names(self) -> List[str]:
         if not self.object.completed:
-            return ['cdi_forms/expired.html']
+            return ["cdi_forms/expired.html"]
         else:
-            return ['cdi_forms/administration_summary.html']
-    
+            return ["cdi_forms/administration_summary.html"]
+
     def get_object(self, queryset=None):
         self.object = administration.objects.get(url_hash=self.kwargs["hash_id"])
         return self.object
@@ -173,10 +167,10 @@ class AdministrationSummaryView(DetailView):
     def get(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
         if not self.object.completed:
             return render(
-                    request, "cdi_forms/administration_expired.html", {}
-                )  # Render contact form template
-        
-        #return printable_view(request, self.object.url_hash)
+                request, "cdi_forms/administration_expired.html", {}
+            )  # Render contact form template
+
+        # return printable_view(request, self.object.url_hash)
         completed = int(
             request.get_signed_cookie("completed_num", "0")
         )  # If there is a cookie for a previously completed test, get it

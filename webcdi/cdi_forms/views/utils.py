@@ -4,12 +4,12 @@ import os
 import re
 from pathlib import Path
 
+from cdi_forms.forms import BackgroundForm, BackpageBackgroundForm
 from cdi_forms.models import BackgroundInfo, Instrument_Forms, Zipcode
 from django.conf import settings
 from django.http import Http404
 from django.utils import translation
 from researcher_UI.models import administration, administration_data, instrument
-from cdi_forms.forms import BackgroundForm, BackpageBackgroundForm
 
 logger = logging.getLogger("debug")
 
@@ -298,6 +298,7 @@ def get_administration_instance(hash_id):
     except:
         raise Http404("Administration not found")
     return administration_instance
+
 
 # If the BackgroundInfo model was filled out before, populate BackgroundForm with responses based on administation object
 def prefilled_background_form(administration_instance, front_page=True):

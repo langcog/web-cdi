@@ -901,5 +901,3 @@ class BackgroundForm(BetterModelForm):
 # we want all the functionality of the BackgroundForm on the backpage, without redefining it
 class BackpageBackgroundForm(BackgroundForm):
     backpage = True
-
-
