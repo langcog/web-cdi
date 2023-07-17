@@ -103,7 +103,7 @@ RECAPTCHA_PUBLIC_KEY = "6LfI0yEUAAAAALj8wAxmoXmWg8B64tvr866bXeYg"
 RECAPTCHA_PRIVATE_KEY = "6LfI0yEUAAAAALgfbuvciUNhUCLAgslLOtnsFnx3"
 
 # Home page links
-CONTACT_EMAIL = "webcdi-contact@stanford.edu"
+CONTACT_EMAIL = "webcdi.contact@gmail.com"
 MORE_INFO_ADDRESS = "http://mb-cdi.stanford.edu/"
 
 # AWS creds

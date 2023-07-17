@@ -4,7 +4,7 @@ import logging
 import os
 from typing import Any
 
-from cdi_forms.forms import BackgroundForm, BackpageBackgroundForm
+from cdi_forms.forms.forms import BackgroundForm, BackpageBackgroundForm
 from cdi_forms.models import BackgroundInfo
 from cdi_forms.utils import get_demographic_filename
 from cdi_forms.views.utils import PROJECT_ROOT, language_map, safe_harbor_zip_code

@@ -19,7 +19,6 @@ class InstructionDetailView(DetailView):
     
     def get_object(self, queryset = None ):
         return administration.objects.get(url_hash=self.kwargs['hash_id'])
-        return super().get_object(queryset)
     
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         ctx = super().get_context_data(**kwargs)

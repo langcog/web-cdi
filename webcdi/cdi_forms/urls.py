@@ -5,7 +5,6 @@ from . import views
 
 # Create URLs associated with some of the functions found in views.py 'views_FUNCTION NAME'. You can look up what each function renders in views.py. URLs are referenced in webcdi/urls.py
 urlpatterns = [
-    url(r"^demo/English_WS$", views.cdi_form, name="cdi_form"),
     url(
         r"^background/(?P<pk>[0-9]+)/$",
         views.BackgroundInfoView.as_view(),
@@ -51,7 +50,7 @@ urlpatterns = [
         views.find_paired_studies,
         name="find_paired_studies",
     ),
-    url(r"^contact/(?P<hash_id>[0-9a-f]{64})/$", views.contact, name="contact"),
+    url(r"^contact/(?P<hash_id>[0-9a-f]{64})/$", views.AdministrationContactView.as_view(), name="contact"),
     url(
         r"^update_administration_data_item/$",
         views.update_administration_data_item,

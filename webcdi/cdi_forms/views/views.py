@@ -21,7 +21,7 @@ from django.utils.translation import ugettext_lazy as _
 from ipware.ip import get_client_ip
 from researcher_UI.models import *
 
-from cdi_forms.forms import BackgroundForm, BackpageBackgroundForm, ContactForm
+from cdi_forms.forms.forms import BackgroundForm, BackpageBackgroundForm
 from cdi_forms.models import *
 from cdi_forms.views.utils import model_map, PROJECT_ROOT, has_backpage, prefilled_cdi_data, language_map, safe_harbor_zip_code, get_administration_instance
 
@@ -790,61 +790,6 @@ def find_paired_studies(request, username, study_group):
 
     response = render(request, "cdi_forms/study_group.html", data)
     response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
-    return response
-
-
-# For test-takers contacting a Web-CDI admin
-def contact(request, hash_id):
-    administration_instance = get_administration_instance(hash_id)
-    # Determine administration URL
-    redirect_url = "".join(
-        [
-            "http://",
-            get_current_site(request).domain,
-            reverse("administer_cdi_form", args=[hash_id]),
-        ]
-    )
-
-    # Render bare contact form
-    form = ContactForm(redirect_url=redirect_url)
-
-    if request.method == "POST":  # If submitting a responses
-        form = ContactForm(request.POST, redirect_url=redirect_url)
-
-        if form.is_valid():  # If form is validated
-            # Access responses and render an email to be sent to administrator.
-            contact_name = request.POST.get("contact_name", "")
-            contact_email = request.POST.get("contact_email", "")
-            contact_id = request.POST.get("contact_id", "")
-            form_content = request.POST.get("content", "")
-            template = get_template("cdi_forms/contact_template.txt")
-            context = {
-                "contact_name": contact_name,
-                "contact_id": contact_id,
-                "contact_email": contact_email,
-                "form_content": form_content,
-            }
-            content = template.render(context)
-            email = EmailMessage(
-                "New contact form submission",
-                content,
-                "webcdi.stanford.edu" + "",
-                ["dkellier@stanford.edu"],
-                headers={"Reply-To": contact_email},
-            )
-            email.send()
-            messages.success(
-                request, "Form submission successful!"
-            )  # Provide sender with a message the form was properly sent.
-
-    user_language = language_map(administration_instance.study.instrument.language)
-
-    translation.activate(user_language)
-    response = render(
-        request, "cdi_forms/contact.html", {"form": form}
-    )  # Render contact form template
-    response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
-
     return response
 
 
