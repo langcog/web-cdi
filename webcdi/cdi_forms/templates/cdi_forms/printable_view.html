@@ -1,6 +1,6 @@
 {% load i18n cdiform_tags %}
 {% to_list 'Dutch' as language_list %}
-{% if 'WG' in object.study.instrument.name or 'L1' in object.study.instrument.name %}
+{% if 'WG' in instrument or 'L1' in instrument %}
     {% set_true as show_produced %}
 {% else %}
     {% set_false as show_produced %}
@@ -75,7 +75,7 @@
         // Set chart options
         var options = {
             'title': '{% trans 'Words Produced (%)' %}',
-            'width' : {% if show_produced or object.study.instrument.language in language_list %}550{% else %}1000{% endif %},
+            'width' : {% if show_produced or language in language_list %}550{% else %}1000{% endif %},
             'height':750,
             'legend': {position: 'none'},
             'vAxis' : { textStyle : { fontSize: 10} },
@@ -98,7 +98,7 @@
         chart.draw(data, options);
       }
     
-        {% if show_produced or object.study.intrument.language in language_list  %}
+        {% if show_produced or language in language_list  %}
             google.charts.setOnLoadCallback(drawUnderstoodChart);
             function drawUnderstoodChart() {
 
@@ -210,7 +210,7 @@
 
         </div>
 
-        {% if object.study.show_feedback %}
+        {% if show_feedback %}
             <!-- Button triggers the D3 graph div to appear. -->
             <div class="row justify-content-center" style="padding-bottom: 1%;">
                 <a class="btn btn-primary btn-lg active" href="#graph_data" data-toggle="collapse">{% trans "Graph My Data!" %}</a>
@@ -233,7 +233,7 @@
         {% endif %}
         
         <br>
-        {% if object.study.show_feedback %}
+        {% if show_feedback %}
             <div class="col-md-12 collapse show" id="graph_data" style="height: 90vh;">
                 <br>
                 <div class = "row"> 
@@ -242,7 +242,7 @@
                 </div>
                 <br>
                 <div class = "row" style="margin-left:-65px; margin-right:-65px"> 
-                    {% if object.study.show_produced or object.study.instrument.language in language_list %}
+                    {% if show_produced or language in language_list %}
                         <div class="col-md-6 text-center">
                             <div id="categories_charts_understood"></div>
                             <input id="save-understood-pdf" type="button" value="{% trans 'Save as PDF' %}" disabled />
@@ -301,7 +301,7 @@
     }, 200);      
 </script>
 
-{% if object.study.show_feedback %}
+{% if show_feedback %}
     <!-- Script for generating D3 graphs. Very long!!-->
     <script>
         // Set variables for graph sizes and line thickness
@@ -314,10 +314,10 @@
         // Parse Django string object data. Grab relevant variables
         var raw_data = '{{ cdi_items |escapejs }}';
         var root = JSON.parse(raw_data);
-        var raw_age = '{{ object.backgroundinfo.age }}';
+        var raw_age = '{{ age }}';
         root.age = JSON.parse(raw_age);
-        root.completed = '{{ object.completed }}';
-        root.instrument_name = '{{ object.study.instrument.name }}';
+        root.completed = '{{ completed }}';
+        root.instrument_name = '{{ instrument_name }}';
 
         // Load word-level data for participant. Parse into 2 or 3 bins depending on instrument type.
         var words = root.filter(function(d) { return d.item_type == "word"; });
@@ -543,7 +543,7 @@
 
         // Take age of acquisition (AOA) data produced by Mika Braginsky. Match it with individual's word performance to determine the words understood/produced with the highest AOA values.
         d3.csv("{% static 'data_csv/language_aoas.csv' %}", function(data) {
-            aoa_data = data.filter(function(d) { return (d.language == '{{ object.study.instrument.language }}'); });
+            aoa_data = data.filter(function(d) { return (d.language == '{{ language }}'); });
 
             words_prod = words.filter(function(d) { return (d.num_value == 'produces'); });
             words_comp = words.filter(function(d) { return (d.num_value == 'understands'); });

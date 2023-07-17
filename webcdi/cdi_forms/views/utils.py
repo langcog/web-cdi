@@ -9,6 +9,7 @@ from django.conf import settings
 from django.http import Http404
 from django.utils import translation
 from researcher_UI.models import administration, administration_data, instrument
+from cdi_forms.forms import BackgroundForm, BackpageBackgroundForm
 
 logger = logging.getLogger("debug")
 
@@ -297,3 +298,29 @@ def get_administration_instance(hash_id):
     except:
         raise Http404("Administration not found")
     return administration_instance
+
+# If the BackgroundInfo model was filled out before, populate BackgroundForm with responses based on administation object
+def prefilled_background_form(administration_instance, front_page=True):
+    background_instance = BackgroundInfo.objects.get(
+        administration=administration_instance
+    )
+
+    context = {}
+    context["language"] = administration_instance.study.instrument.language
+    context["instrument"] = administration_instance.study.instrument.name
+    context["min_age"] = administration_instance.study.min_age
+    context["max_age"] = administration_instance.study.max_age
+    context["birthweight_units"] = administration_instance.study.birth_weight_units
+    context["study_obj"] = administration_instance.study
+    context["study"] = administration_instance.study
+    context["source_id"] = administration_instance.backgroundinfo.source_id
+
+    if front_page:
+        background_form = BackgroundForm(
+            instance=background_instance, context=context, page="front"
+        )
+    else:
+        background_form = BackpageBackgroundForm(
+            instance=background_instance, context=context, page="back"
+        )
+    return background_form

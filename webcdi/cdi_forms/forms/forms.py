@@ -401,7 +401,7 @@ class BackgroundForm(BetterModelForm):
         self.page = kwargs.pop("page", False)
         super(BackgroundForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
-        self.helper.template = PROJECT_ROOT + "/templates/bootstrap/whole_uni_form.html"
+        self.helper.template = "bootstrap/whole_uni_form.html"
         self.helper.form_class = "form-horizontal"
         self.helper.label_class = "col-lg-3"
         self.helper.field_class = "col-lg-9"

@@ -7,23 +7,28 @@ import os.path
 
 import requests
 from django.conf import settings
-from django.contrib import messages
 from django.contrib.auth.models import User
-from django.contrib.sites.shortcuts import get_current_site
-from django.core.mail import EmailMessage
 from django.db import models
 from django.http import Http404, HttpResponse
 from django.shortcuts import  redirect, render
-from django.template.loader import get_template
 from django.urls import reverse
 from django.utils import timezone, translation
 from django.utils.translation import ugettext_lazy as _
 from ipware.ip import get_client_ip
 from researcher_UI.models import *
 
-from cdi_forms.forms.forms import BackgroundForm, BackpageBackgroundForm
+from cdi_forms.forms.forms import BackgroundForm
 from cdi_forms.models import *
-from cdi_forms.views.utils import model_map, PROJECT_ROOT, has_backpage, prefilled_cdi_data, language_map, safe_harbor_zip_code, get_administration_instance
+from cdi_forms.views.utils import (
+    model_map, 
+    PROJECT_ROOT, 
+    has_backpage, 
+    prefilled_cdi_data, 
+    language_map, 
+    safe_harbor_zip_code, 
+    get_administration_instance,
+    prefilled_background_form
+)
 
 # Get an instance of a logger
 logger = logging.getLogger("debug")
@@ -31,33 +36,6 @@ logger = logging.getLogger("debug")
 # Gets list of itemIDs 'item_XX' from an instrument model
 def get_model_header(name):
     return list(model_map(name).values_list("itemID", flat=True))
-
-
-# If the BackgroundInfo model was filled out before, populate BackgroundForm with responses based on administation object
-def prefilled_background_form(administration_instance, front_page=True):
-    background_instance = BackgroundInfo.objects.get(
-        administration=administration_instance
-    )
-
-    context = {}
-    context["language"] = administration_instance.study.instrument.language
-    context["instrument"] = administration_instance.study.instrument.name
-    context["min_age"] = administration_instance.study.min_age
-    context["max_age"] = administration_instance.study.max_age
-    context["birthweight_units"] = administration_instance.study.birth_weight_units
-    context["study_obj"] = administration_instance.study
-    context["study"] = administration_instance.study
-    context["source_id"] = administration_instance.backgroundinfo.source_id
-
-    if front_page:
-        background_form = BackgroundForm(
-            instance=background_instance, context=context, page="front"
-        )
-    else:
-        background_form = BackpageBackgroundForm(
-            instance=background_instance, context=context, page="back"
-        )
-    return background_form
 
 
 # Finds and renders BackgroundForm based on given hash ID code.
@@ -474,6 +452,7 @@ def cdi_form(request, hash_id):
                     administration.objects.filter(url_hash=hash_id).update(
                         completed=True
                     )  # Mark test as complete
+                    return redirect(reverse('administration_summary_view', args=(hash_id,)))
                     return printable_view(request, hash_id)  # Render completion page
 
     # Fetch prefilled responses
@@ -549,9 +528,6 @@ def printable_view(request, hash_id):
         backpage_background_form = prefilled_background_form(
             administration_instance, False
         )
-    # except:
-    # Blank form
-    #    background_form = BackgroundForm(context = context, page="front")
 
     prefilled_data["language"] = administration_instance.study.instrument.language
     prefilled_data["background_form"] = background_form
@@ -663,7 +639,7 @@ def printable_view(request, hash_id):
     ]
 
     response = render(
-        request, "cdi_forms/administration_summary.html", prefilled_data
+        request, "cdi_forms/printable_view.html", prefilled_data
     )  # Render contact form template
     response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
 
@@ -727,6 +703,7 @@ def administer_cdi_form(request, hash_id):
                 # return background_info_form(request, hash_id)
         else:
             # only printable
+            return redirect(reverse('administration_summary_view', args=(hash_id,)))
             return printable_view(request, hash_id)
 
 

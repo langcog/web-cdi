@@ -2,7 +2,7 @@ import json
 import logging
 import os
 import re
-from typing import Any, Dict
+from typing import Any, Dict, List
 
 import requests
 from cdi_forms.views import printable_view
@@ -13,10 +13,11 @@ from cdi_forms.views.utils import (
     language_map,
     model_map,
     prefilled_cdi_data,
+    prefilled_background_form
 )
 from django.conf import settings
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.utils import timezone, translation
 from django.views.generic import DetailView, UpdateView
@@ -27,14 +28,137 @@ from researcher_UI.models import (
     ip_address,
     payment_code,
 )
+from cdi_forms.models import Instrument_Forms
 
 logger = logging.getLogger("debug")
-
 
 class AdministrationSummaryView(DetailView):
     model = administration
     template_name = "cdi_forms/administration_summary.html"
 
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        ctx =  super().get_context_data(**kwargs)
+        # Create a blank dictionary and then fill it with prefilled background and CDI data, along with hash ID and information regarding the gift card code if subject is to be paid
+        prefilled_data = dict()
+        prefilled_data = prefilled_cdi_data(self.object)
+
+        # try:
+        # Get form from database
+        background_form = prefilled_background_form(self.object)
+        ctx["background_form"] = background_form
+        try:
+            filename = os.path.realpath(
+                PROJECT_ROOT + self.object.study.demographic.path
+            )
+        except:
+            filename = "None"
+        if has_backpage(filename):
+            backpage_background_form = prefilled_background_form(
+                self.object, False
+            )
+            ctx["backpage_background_form"] = backpage_background_form
+        ctx["gift_code"] = None
+        ctx["gift_amount"] = None
+
+        if (
+            self.object.study.allow_payment
+            and self.object.bypass is None
+        ):
+            amazon_urls = {
+                "English": {
+                    "redeem_url": "http://www.amazon.com/redeem",
+                    "legal_url": "http://www.amazon.com/gc-legal",
+                },
+                "Spanish": {
+                    "redeem_url": "http://www.amazon.com/gc/redeem/?language=es_US",
+                    "legal_url": "http://www.amazon.com/gc-legal/?language=es_US",
+                },
+                "French Quebec": {
+                    "redeem_url": "http://www.amazon.ca/gc/redeem/?language=fr_CA",
+                    "legal_url": "http://www.amazon.ca/gc-legal/?language=fr_CA",
+                },
+            }
+            url_obj = amazon_urls[self.object.study.instrument.language]
+            if payment_code.objects.filter(hash_id=self.object.url_hash).exists():
+                gift_card = payment_code.objects.get(hash_id=self.object.url_hash)
+                ctx["gift_code"] = gift_card.gift_code
+                ctx["gift_amount"] = "${:,.2f}".format(gift_card.gift_amount)
+                ctx["redeem_url"] = url_obj["redeem_url"]
+                ctx["legal_url"] = url_obj["legal_url"]
+            else:
+                ctx["gift_code"] = "ran out"
+                ctx["gift_amount"] = "ran out"
+                ctx["redeem_url"] = None
+                ctx["legal_url"] = None
+        # calculate graph data
+        ctx['cdi_items'] = prefilled_cdi_data(self.object)["cdi_items"]
+        cdi_items = json.loads(ctx["cdi_items"])
+        categories = {}
+        from cdi_forms.management.commands.populate_items import unicode_csv_reader
+
+        categories_data = list(
+            unicode_csv_reader(
+                open(
+                    os.path.realpath(
+                        settings.BASE_DIR + "/static/data_csv/word_categories.csv"
+                    ),
+                    encoding="utf8",
+                )
+            )
+        )
+
+        col_names = categories_data[0]
+        nrows = len(categories_data)
+        get_row = lambda row: categories_data[row]
+        categories = {}
+        for row in range(1, nrows):
+            row_values = get_row(row)
+            if len(row_values) > 1:
+                if row_values[
+                    col_names.index(self.object.study.instrument.name)
+                ]:
+                    mapped_name = row_values[
+                        col_names.index(self.object.study.instrument.name)
+                    ]
+                else:
+                    mapped_name = row_values[col_names.index("id")]
+                categories[row_values[col_names.index("id")]] = {
+                    "produces": 0,
+                    "understands": 0,
+                    "count": 0,
+                    "mappedName": mapped_name,
+                }
+        for row in cdi_items:
+            if row["item_type"] == "word":
+                categories[row["category"]]["count"] += 1
+
+        prefilled_data_list = administration_data.objects.filter(
+            administration=self.object
+        ).values("item_ID", "value")
+        for item in prefilled_data_list:
+            instance = Instrument_Forms.objects.get(
+                itemID=item["item_ID"], instrument=self.object.study.instrument
+            )
+            if instance.item_type == "word":
+                if item["value"] == "produces":
+                    categories[instance.category]["produces"] += 1
+                    categories[instance.category]["understands"] += 1
+                if item["value"] == "understands":
+                    categories[instance.category]["understands"] += 1
+
+        ctx["graph_data"] = categories
+        ctx["language_code"] = settings.LANGUAGE_DICT[
+            self.object.study.instrument.language
+        ]
+
+        return ctx
+    
+    def get_template_names(self) -> List[str]:
+        if not self.object.completed:
+            return ['cdi_forms/expired.html']
+        else:
+            return ['cdi_forms/administration_summary.html']
+    
     def get_object(self, queryset=None):
         self.object = administration.objects.get(url_hash=self.kwargs["hash_id"])
         return self.object
@@ -47,6 +171,20 @@ class AdministrationSummaryView(DetailView):
         return super().dispatch(request, *args, **kwargs)
 
     def get(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
+        if not self.object.completed:
+            return render(
+                    request, "cdi_forms/administration_expired.html", {}
+                )  # Render contact form template
+        
+        #return printable_view(request, self.object.url_hash)
+        completed = int(
+            request.get_signed_cookie("completed_num", "0")
+        )  # If there is a cookie for a previously completed test, get it
+
+        response = super().get(request, *args, **kwargs)
+        if self.object.study.allow_payment:
+            response.set_signed_cookie("completed_num", completed)
+        return response
         return printable_view(request, self.object.url_hash)
 
 
