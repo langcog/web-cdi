@@ -644,40 +644,40 @@ item_642,combine,combine,combine,not yet; sometimes; often,Has your child begun 
 item_example1,combination_example01,combination_examples,combination_examples,,,,,Item_642,sometimes; often
 item_example2,combination_example02,combination_examples,combination_examples,,,,,Item_642,sometimes; often
 item_example3,combination_example03,combination_examples,combination_examples,,,,,Item_642,sometimes; often
-item_643,case_marker,morphological_marker,morphological_marker,not yet; sometimes; often,case marker,"조사 ""-가, -는, -도""를 명사 뒤에 붙인다. 예를 들어 ""엄마가, 아빠는, 나도""처럼 조사를 붙여서 말한다.",morphology,,
-item_644,verb_inflection,morphological_marker,morphological_marker,not yet; sometimes; often,verb inflection,"""-어, -지, -다, -네""를 사용하여 어미를 변화시킨다. 예를 들어 ""먹어, 먹지, 먹네"", ""커, 크지, 크다, 크네""처럼 어미변화를 시킨다.",morphology,,
-item_645,connective_ending,morphological_marker,morphological_marker,not yet; sometimes; often,connective ending,"""-는, -야""와 같은 어미를 낱말과 낱말을 연결하기 위해 적절하게 사용한다. 예를 들어 ""먹는 거, 먹어야 돼"", ""가는 사람, 가야 돼""에서처럼 표현한다.",morphology,,
-item_646,determinal_ending,morphological_marker,morphological_marker,not yet; sometimes; often,determinal ending,"사건이 일어나는 때와 연관시켜 어미 ""ㄴ/은, 는, ㄹ/을""를 적절하게 사용한다. 예를 들어 ""먹은 거, 먹는 거, 먹을 거"", ""본 거, 보는 거, 볼 거""를 사용한다.",morphology,,
-item_647,passive_marker,morphological_marker,morphological_marker,not yet; sometimes; often,passive marker,"""이, 히, 기, 리""와 같은 피동형이나 사동형 접사를 사용한다. 예를 들어 ""먹여, 잡혔어, 신겨 줘, 울리네""와 같은 말을 사용한다.",morphology,,
-item_648,complx01,complexity,complexity,1; 2,big flower,1. 큰 거 꽃 <br /> 2. 큰 꽃,syntax,,
-item_649,complx02,complexity,complexity,1; 2,sister's snack,1. 언니 거 까까 <br /> 2. 언니 까까,syntax,,
-item_650,complx03,complexity,complexity,1; 2,father's watch,1. 아빠 거 시계 <br /> 2. 아빠 시계,syntax,,
-item_651,complx04,complexity,complexity,1; 2,won't eat,1. 먹어 아니야 <br /> 2. 안 먹어,syntax,,
-item_652,complx05,complexity,complexity,1; 2,be allowed to do so,1. 안돼 아니야 <br /> 2. 해도 돼,syntax,,
-item_653,complx06,complexity,complexity,1; 2,have not eaten yet,1. 안 다 먹었다 <br /> 2. 다 안 먹었다,syntax,,
-item_654,complx07,complexity,complexity,1; 2,won't read a book,1. 안 책 봐 <br /> 2. 책 안 봐,syntax,,
-item_655,complx08,complexity,complexity,1; 2,pour in a cup,1. 컵을 부어 <br /> 2. 컵에 부어,syntax,,
-item_656,complx09,complexity,complexity,1; 2,make something at home,1. 집에 만들어 <br /> 2. 집에서 만들어,syntax,,
-item_657,complx10,complexity,complexity,1; 2,Mother likes father,1. 엄마가 아빠가 좋아해 <br /> 2. 엄마가 아빠를 좋아해,syntax,,
-item_658,complx11,complexity,complexity,1; 2,Go to the hospital because I am sick,1. 아파 병원 가 <br /> 2. 아파서 병원 가,syntax,,
-item_659,complx12,complexity,complexity,1; 2,don't eat,1. 먹어 안돼<br /> 2. 먹으면 안돼,syntax,,
-item_660,complx13,complexity,complexity,1; 2,let's put it in here,1. 여기 넣으자<br /> 2. 여기 넣자,syntax,,
-item_661,complx14,complexity,complexity,1; 2,you should pour it in (here),1. 부으는 건데<br /> 2. 붓는 건데,syntax,,
-item_662,complx15,complexity,complexity,1; 2,eat a lot,1. 많이 먹은다 <br /> 2. 많이 먹는다,syntax,,
-item_663,complx16,complexity,complexity,1; 2,baby cries,1. 아가 울은다 <br /> 2. 아가 운다,syntax,,
-item_664,grammar01,grammaticality,grammaticality,1; 2,It is a car that Daddy drives,1. 아빠가 타는 거 차야 <br /> 2. 아빠가 타는 거야,syntax,,
-item_665,grammar02,grammaticality,grammaticality,1; 2,there is a door that does this,1. 이렇게 하는 거 문 있어<br /> 2. 이렇게 하는 문 있어,syntax,,
-item_666,grammar03,grammaticality,grammaticality,1; 2,It is something that is in your room,1. 방이잖아<br /> 2. 방에 있는 거잖아,syntax,,
-item_667,grammar04,grammaticality,grammaticality,1; 2,it flew away because it deflated,1. 바람이 씽 날아갔는데 <br /> 2. 바람이 빠져서 씽 날아갔는데,syntax,,
-item_668,grammar05,grammaticality,grammaticality,1; 2,the window is broken while my mom touches the flower,1. 엄마는 꽃을 깨져서 <br /> 2. 엄마가 꽃을 만지는데 창문이 깨져서,syntax,,
-item_669,grammar06,grammaticality,grammaticality,1; 2,I have seen a video like this before,1. 한번 그런 비디오 있는데<br /> 2. 그런 비디오 본 적 있는데,syntax,,
-item_670,grammar07,grammaticality,grammaticality,1; 2,I heard a helicopter sound from the sky,1. 내가 헬리콥터 소리가 하늘높이에서 들었어 <br /> 2. 내가 헬리콥터 소리가 하늘에서 나는 거 들었어,syntax,,
-item_671,grammar08,grammaticality,grammaticality,1; 2,It hurts but I love you because you are a baby,1. 아파서 아기서 사랑해 <br /> 2. 아프지만 아기니까 사랑해,syntax,,
-item_672,grammar09,grammaticality,grammaticality,1; 2,I said I am sorry,1. 미안하다 해<br /> 2. 미안하다고 했어,syntax,,
-item_673,grammar10,grammaticality,grammaticality,1; 2,Crying because of bleeding,1. 피나고 울고 있네<br /> 2. 피나서 울고 있네,syntax,,
-item_674,grammar11,grammaticality,grammaticality,1; 2,Please put my shoes on,1. 신어줘요 <br /> 2. 신겨줘요,syntax,,
-item_675,grammar12,grammaticality,grammaticality,1; 2,give me a ride,1. 타줘 <br /> 2. 태워줘,syntax,,
-item_676,grammar13,grammaticality,grammaticality,1; 2,Someone hurt somebody else,1. 다쳤어 <br /> 2. 다치게 했어,syntax,,
-item_677,grammar14,grammaticality,grammaticality,1; 2,it doesn’t open. what should we do?,1. 안 열은데 어떡하지 <br /> 2. 안 열리는데 어떡하지,syntax,,
-item_678,grammar15,grammaticality,grammaticality,1; 2,were you sick?,1. 아팠는 거야<br /> 2. 아팠던 거야,syntax,,
-item_679,grammar16,grammaticality,grammaticality,1; 2,This thing can open,1. 이건 열은 거야<br /> 2. 이건 여는 거야,syntax,,
+item_643,case_marker,morphological_marker,morphological_marker,not yet; sometimes; often,case marker,"조사 ""-가, -는, -도""를 명사 뒤에 붙인다. 예를 들어 ""엄마가, 아빠는, 나도""처럼 조사를 붙여서 말한다.",morphology,Item_642,sometimes; often
+item_644,verb_inflection,morphological_marker,morphological_marker,not yet; sometimes; often,verb inflection,"""-어, -지, -다, -네""를 사용하여 어미를 변화시킨다. 예를 들어 ""먹어, 먹지, 먹네"", ""커, 크지, 크다, 크네""처럼 어미변화를 시킨다.",morphology,Item_642,sometimes; often
+item_645,connective_ending,morphological_marker,morphological_marker,not yet; sometimes; often,connective ending,"""-는, -야""와 같은 어미를 낱말과 낱말을 연결하기 위해 적절하게 사용한다. 예를 들어 ""먹는 거, 먹어야 돼"", ""가는 사람, 가야 돼""에서처럼 표현한다.",morphology,Item_642,sometimes; often
+item_646,determinal_ending,morphological_marker,morphological_marker,not yet; sometimes; often,determinal ending,"사건이 일어나는 때와 연관시켜 어미 ""ㄴ/은, 는, ㄹ/을""를 적절하게 사용한다. 예를 들어 ""먹은 거, 먹는 거, 먹을 거"", ""본 거, 보는 거, 볼 거""를 사용한다.",morphology,Item_642,sometimes; often
+item_647,passive_marker,morphological_marker,morphological_marker,not yet; sometimes; often,passive marker,"""이, 히, 기, 리""와 같은 피동형이나 사동형 접사를 사용한다. 예를 들어 ""먹여, 잡혔어, 신겨 줘, 울리네""와 같은 말을 사용한다.",morphology,Item_642,sometimes; often
+item_648,complx01,complexity,complexity,1; 2,big flower,1. 큰 거 꽃 <br /> 2. 큰 꽃,syntax,Item_642,sometimes; often
+item_649,complx02,complexity,complexity,1; 2,sister's snack,1. 언니 거 까까 <br /> 2. 언니 까까,syntax,Item_642,sometimes; often
+item_650,complx03,complexity,complexity,1; 2,father's watch,1. 아빠 거 시계 <br /> 2. 아빠 시계,syntax,Item_642,sometimes; often
+item_651,complx04,complexity,complexity,1; 2,won't eat,1. 먹어 아니야 <br /> 2. 안 먹어,syntax,Item_642,sometimes; often
+item_652,complx05,complexity,complexity,1; 2,be allowed to do so,1. 안돼 아니야 <br /> 2. 해도 돼,syntax,Item_642,sometimes; often
+item_653,complx06,complexity,complexity,1; 2,have not eaten yet,1. 안 다 먹었다 <br /> 2. 다 안 먹었다,syntax,Item_642,sometimes; often
+item_654,complx07,complexity,complexity,1; 2,won't read a book,1. 안 책 봐 <br /> 2. 책 안 봐,syntax,Item_642,sometimes; often
+item_655,complx08,complexity,complexity,1; 2,pour in a cup,1. 컵을 부어 <br /> 2. 컵에 부어,syntax,Item_642,sometimes; often
+item_656,complx09,complexity,complexity,1; 2,make something at home,1. 집에 만들어 <br /> 2. 집에서 만들어,syntax,Item_642,sometimes; often
+item_657,complx10,complexity,complexity,1; 2,Mother likes father,1. 엄마가 아빠가 좋아해 <br /> 2. 엄마가 아빠를 좋아해,syntax,Item_642,sometimes; often
+item_658,complx11,complexity,complexity,1; 2,Go to the hospital because I am sick,1. 아파 병원 가 <br /> 2. 아파서 병원 가,syntax,Item_642,sometimes; often
+item_659,complx12,complexity,complexity,1; 2,don't eat,1. 먹어 안돼<br /> 2. 먹으면 안돼,syntax,Item_642,sometimes; often
+item_660,complx13,complexity,complexity,1; 2,let's put it in here,1. 여기 넣으자<br /> 2. 여기 넣자,syntax,Item_642,sometimes; often
+item_661,complx14,complexity,complexity,1; 2,you should pour it in (here),1. 부으는 건데<br /> 2. 붓는 건데,syntax,Item_642,sometimes; often
+item_662,complx15,complexity,complexity,1; 2,eat a lot,1. 많이 먹은다 <br /> 2. 많이 먹는다,syntax,Item_642,sometimes; often
+item_663,complx16,complexity,complexity,1; 2,baby cries,1. 아가 울은다 <br /> 2. 아가 운다,syntax,Item_642,sometimes; often
+item_664,grammar01,grammaticality,grammaticality,1; 2,It is a car that Daddy drives,1. 아빠가 타는 거 차야 <br /> 2. 아빠가 타는 거야,syntax,Item_642,sometimes; often
+item_665,grammar02,grammaticality,grammaticality,1; 2,there is a door that does this,1. 이렇게 하는 거 문 있어<br /> 2. 이렇게 하는 문 있어,syntax,Item_642,sometimes; often
+item_666,grammar03,grammaticality,grammaticality,1; 2,It is something that is in your room,1. 방이잖아<br /> 2. 방에 있는 거잖아,syntax,Item_642,sometimes; often
+item_667,grammar04,grammaticality,grammaticality,1; 2,it flew away because it deflated,1. 바람이 씽 날아갔는데 <br /> 2. 바람이 빠져서 씽 날아갔는데,syntax,Item_642,sometimes; often
+item_668,grammar05,grammaticality,grammaticality,1; 2,the window is broken while my mom touches the flower,1. 엄마는 꽃을 깨져서 <br /> 2. 엄마가 꽃을 만지는데 창문이 깨져서,syntax,Item_642,sometimes; often
+item_669,grammar06,grammaticality,grammaticality,1; 2,I have seen a video like this before,1. 한번 그런 비디오 있는데<br /> 2. 그런 비디오 본 적 있는데,syntax,Item_642,sometimes; often
+item_670,grammar07,grammaticality,grammaticality,1; 2,I heard a helicopter sound from the sky,1. 내가 헬리콥터 소리가 하늘높이에서 들었어 <br /> 2. 내가 헬리콥터 소리가 하늘에서 나는 거 들었어,syntax,Item_642,sometimes; often
+item_671,grammar08,grammaticality,grammaticality,1; 2,It hurts but I love you because you are a baby,1. 아파서 아기서 사랑해 <br /> 2. 아프지만 아기니까 사랑해,syntax,Item_642,sometimes; often
+item_672,grammar09,grammaticality,grammaticality,1; 2,I said I am sorry,1. 미안하다 해<br /> 2. 미안하다고 했어,syntax,Item_642,sometimes; often
+item_673,grammar10,grammaticality,grammaticality,1; 2,Crying because of bleeding,1. 피나고 울고 있네<br /> 2. 피나서 울고 있네,syntax,Item_642,sometimes; often
+item_674,grammar11,grammaticality,grammaticality,1; 2,Please put my shoes on,1. 신어줘요 <br /> 2. 신겨줘요,syntax,Item_642,sometimes; often
+item_675,grammar12,grammaticality,grammaticality,1; 2,give me a ride,1. 타줘 <br /> 2. 태워줘,syntax,Item_642,sometimes; often
+item_676,grammar13,grammaticality,grammaticality,1; 2,Someone hurt somebody else,1. 다쳤어 <br /> 2. 다치게 했어,syntax,Item_642,sometimes; often
+item_677,grammar14,grammaticality,grammaticality,1; 2,it doesn’t open. what should we do?,1. 안 열은데 어떡하지 <br /> 2. 안 열리는데 어떡하지,syntax,Item_642,sometimes; often
+item_678,grammar15,grammaticality,grammaticality,1; 2,were you sick?,1. 아팠는 거야<br /> 2. 아팠던 거야,syntax,Item_642,sometimes; often
+item_679,grammar16,grammaticality,grammaticality,1; 2,This thing can open,1. 이건 열은 거야<br /> 2. 이건 여는 거야,syntax,Item_642,sometimes; often

@@ -708,51 +708,51 @@ item_706,scombine,combine,combine,not yet; sometimes; often,"Votre enfant a-t-il
 item_example1,combination_example1,combination_examples,combination_examples,,,,,,,Item_706,sometimes; often
 item_example2,combination_example2,combination_examples,combination_examples,,,,,,,Item_706,sometimes; often
 item_example3,combination_example3,combination_examples,combination_examples,,,,,,,Item_706,sometimes; often
-item_707,cmplx01,complexity,complexity,simple; complex,Auto papa \ Auto à papa,,,,,,
-item_708,cmplx02,complexity,complexity,simple; complex,Toutou bébé \ Toutou au bébé,,,,,,
-item_709,cmplx03,complexity,complexity,simple; complex,Fille maison \ Fille dans maison,,,,,,
-item_710,cmplx04,complexity,complexity,simple; complex,Biscuit maman \ Biscuit pour maman,,,,,,
-item_711,cmplx05,complexity,complexity,simple; complex,Chien table \ Chien sur (la) table,,,,,,
-item_712,cmplx06,complexity,complexity,simple; complex,Encore biscuit \ Encore des biscuits,,,,,,
-item_713,cmplx07,complexity,complexity,simple; complex,"Donne pomme, maman \ Donne une pomme, maman",,,,,,
-item_714,cmplx08,complexity,complexity,simple; complex,Papa parti \ Papa est parti,,,,,,
-item_715,cmplx09,complexity,complexity,simple; complex,Pelle Pascal \ Pascal a une pelle,,,,,,
-item_716,cmplx10,complexity,complexity,simple; complex,Belle ta robe \ Ta robe est belle,,,,,,
-item_717,cmplx11,complexity,complexity,simple; complex,Où maman? \ Est où maman?,,,,,,
-item_718,cmplx12,complexity,complexity,simple; complex,Mon camion \ C'est mon camion,,,,,,
-item_719,cmplx13,complexity,complexity,simple; complex,Chat là \ (Il) y un chat,,,,,,
-item_720,cmplx14,complexity,complexity,simple; complex,Lancer balle \ Lance (la) balle,,,,,,
-item_721,cmplx15,complexity,complexity,simple; complex,Pas laver poupée \ Lave pas poupée,,,,,,
-item_722,cmplx16,complexity,complexity,simple; complex,Encore jus \ Veux d'autre jus,,,,,,
-item_723,cmplx17,complexity,complexity,simple; complex,Regarder télé \ Veux regarder télé,,,,,,
-item_724,cmplx18,complexity,complexity,simple; complex,Donner un bec \ Veux donner un bec,,,,,,
-item_725,cmplx19,complexity,complexity,simple; complex,Toi saute? \ Peux-tu sauter,,,,,,
-item_726,cmplx20,complexity,complexity,simple; complex,Moi pas faire ça \ Moi peux pas faire ça,,,,,,
-item_727,cmplx21,complexity,complexity,simple; complex,Pipi dehors minou \ Minou fait pipi dehors,,,,,,
-item_728,cmplx22,complexity,complexity,simple; complex,Pas marcher là \ Faut pas marcher là,,,,,,
-item_729,cmplx23,complexity,complexity,simple; complex,Moi livre \ Le livre à moi,,,,,,
-item_730,cmplx24,complexity,complexity,simple; complex,Mange une pomme \ Je mange une pomme,,,,,,
-item_731,cmplx25,complexity,complexity,simple; complex,La tête tombé \ Il (est) tombé sur la tête,,,,,,
-item_732,cmplx26,complexity,complexity,simple; complex,Papa parti \ Papa parti travailler,,,,,,
-item_733,cmplx27,complexity,complexity,simple; complex,Regarde-moi \ Regarde-moi danser,,,,,,
-item_734,cmplx28,complexity,complexity,simple; complex,Donne cuillère \ Donne (la) cuillère pour manger,,,,,,
-item_735,cmplx29,complexity,complexity,simple; complex,Veux biscuits \ Veux biscuits et (pis) lait,,,,,,
-item_736,cmplx30,complexity,complexity,simple; complex,On a fait ça \ Sophie et (pis) moi a fait ça,,,,,,
-item_737,cmplx31,complexity,complexity,simple; complex,Je chante une chanson \ Je chante une chanson pour toi,,,,,,
-item_738,cmplx32,complexity,complexity,simple; complex,Pas lire le livre \ Veux pas tu lis le livre,,,,,,
-item_739,cmplx33,complexity,complexity,simple; complex,C'est maman chante \ C'est maman qui chante,,,,,,
-item_740,cmplx34,complexity,complexity,simple; complex,Je veux lui \ Je veux lui que tu as,,,,,,
-item_741,cmplx35,complexity,complexity,simple; complex,Regarde ça \ Regarde ce que j'ai,,,,,,
-item_742,cmplx36,complexity,complexity,simple; complex,Bébé rit \ Bébé rit parce que content,,,,,,
-item_743,cmplx37,complexity,complexity,simple; complex,Le chapeau de le monsieur \ Le chapeau du monsieur,,,,,,
-item_744,pronoun1,pronoun_usage,pronoun_usage,pronoun; article,Mon camion \ Camion Simon,,,,,,
-item_745,pronoun2,pronoun_usage,pronoun_usage,pronoun; article,Moi sali \ Simon sali,,,,,,
-item_746,pronoun3,pronoun_usage,pronoun_usage,pronoun; article,Prends-moi \ Prends Simon,,,,,,
-item_747,pronoun4,pronoun_usage,pronoun_usage,pronoun; article,Veux jus \ Simon jus,,,,,,
-item_748,pronoun5,pronoun_usage,pronoun_usage,pronoun; article,Toi belle \ Maman belle,,,,,,
-item_749,pronoun6,pronoun_usage,pronoun_usage,pronoun; article,Brosse les dents \ Brosse dents maman,,,,,,
-item_750,pronoun7,pronoun_usage,pronoun_usage,pronoun; article,Il dort \ Le chat dort,,,,,,
-item_751,pronoun8,pronoun_usage,pronoun_usage,pronoun; article,Ouvre-la \ Ouvre la porte,,,,,,
-item_752,pronoun9,pronoun_usage,pronoun_usage,pronoun; article,C'est chaud \ La soupe est chaude,,,,,,
-item_753,pronoun10,pronoun_usage,pronoun_usage,pronoun; article,Pas faire ça \ Pas laver cheveux,,,,,,
-item_754,pronoun11,pronoun_usage,pronoun_usage,pronoun; article,Jus dedans \ Jus dans tasse,,,,,,
+item_707,cmplx01,complexity,complexity,simple; complex,Auto papa \ Auto à papa,,,,,Item_706,sometimes; often
+item_708,cmplx02,complexity,complexity,simple; complex,Toutou bébé \ Toutou au bébé,,,,,Item_706,sometimes; often
+item_709,cmplx03,complexity,complexity,simple; complex,Fille maison \ Fille dans maison,,,,,Item_706,sometimes; often
+item_710,cmplx04,complexity,complexity,simple; complex,Biscuit maman \ Biscuit pour maman,,,,,Item_706,sometimes; often
+item_711,cmplx05,complexity,complexity,simple; complex,Chien table \ Chien sur (la) table,,,,,Item_706,sometimes; often
+item_712,cmplx06,complexity,complexity,simple; complex,Encore biscuit \ Encore des biscuits,,,,,Item_706,sometimes; often
+item_713,cmplx07,complexity,complexity,simple; complex,"Donne pomme, maman \ Donne une pomme, maman",,,,,Item_706,sometimes; often
+item_714,cmplx08,complexity,complexity,simple; complex,Papa parti \ Papa est parti,,,,,Item_706,sometimes; often
+item_715,cmplx09,complexity,complexity,simple; complex,Pelle Pascal \ Pascal a une pelle,,,,,Item_706,sometimes; often
+item_716,cmplx10,complexity,complexity,simple; complex,Belle ta robe \ Ta robe est belle,,,,,Item_706,sometimes; often
+item_717,cmplx11,complexity,complexity,simple; complex,Où maman? \ Est où maman?,,,,,Item_706,sometimes; often
+item_718,cmplx12,complexity,complexity,simple; complex,Mon camion \ C'est mon camion,,,,,Item_706,sometimes; often
+item_719,cmplx13,complexity,complexity,simple; complex,Chat là \ (Il) y un chat,,,,,Item_706,sometimes; often
+item_720,cmplx14,complexity,complexity,simple; complex,Lancer balle \ Lance (la) balle,,,,,Item_706,sometimes; often
+item_721,cmplx15,complexity,complexity,simple; complex,Pas laver poupée \ Lave pas poupée,,,,,Item_706,sometimes; often
+item_722,cmplx16,complexity,complexity,simple; complex,Encore jus \ Veux d'autre jus,,,,,Item_706,sometimes; often
+item_723,cmplx17,complexity,complexity,simple; complex,Regarder télé \ Veux regarder télé,,,,,Item_706,sometimes; often
+item_724,cmplx18,complexity,complexity,simple; complex,Donner un bec \ Veux donner un bec,,,,,Item_706,sometimes; often
+item_725,cmplx19,complexity,complexity,simple; complex,Toi saute? \ Peux-tu sauter,,,,,Item_706,sometimes; often
+item_726,cmplx20,complexity,complexity,simple; complex,Moi pas faire ça \ Moi peux pas faire ça,,,,,Item_706,sometimes; often
+item_727,cmplx21,complexity,complexity,simple; complex,Pipi dehors minou \ Minou fait pipi dehors,,,,,Item_706,sometimes; often
+item_728,cmplx22,complexity,complexity,simple; complex,Pas marcher là \ Faut pas marcher là,,,,,Item_706,sometimes; often
+item_729,cmplx23,complexity,complexity,simple; complex,Moi livre \ Le livre à moi,,,,,Item_706,sometimes; often
+item_730,cmplx24,complexity,complexity,simple; complex,Mange une pomme \ Je mange une pomme,,,,,Item_706,sometimes; often
+item_731,cmplx25,complexity,complexity,simple; complex,La tête tombé \ Il (est) tombé sur la tête,,,,,Item_706,sometimes; often
+item_732,cmplx26,complexity,complexity,simple; complex,Papa parti \ Papa parti travailler,,,,,Item_706,sometimes; often
+item_733,cmplx27,complexity,complexity,simple; complex,Regarde-moi \ Regarde-moi danser,,,,,Item_706,sometimes; often
+item_734,cmplx28,complexity,complexity,simple; complex,Donne cuillère \ Donne (la) cuillère pour manger,,,,,Item_706,sometimes; often
+item_735,cmplx29,complexity,complexity,simple; complex,Veux biscuits \ Veux biscuits et (pis) lait,,,,,Item_706,sometimes; often
+item_736,cmplx30,complexity,complexity,simple; complex,On a fait ça \ Sophie et (pis) moi a fait ça,,,,,Item_706,sometimes; often
+item_737,cmplx31,complexity,complexity,simple; complex,Je chante une chanson \ Je chante une chanson pour toi,,,,,Item_706,sometimes; often
+item_738,cmplx32,complexity,complexity,simple; complex,Pas lire le livre \ Veux pas tu lis le livre,,,,,Item_706,sometimes; often
+item_739,cmplx33,complexity,complexity,simple; complex,C'est maman chante \ C'est maman qui chante,,,,,Item_706,sometimes; often
+item_740,cmplx34,complexity,complexity,simple; complex,Je veux lui \ Je veux lui que tu as,,,,,Item_706,sometimes; often
+item_741,cmplx35,complexity,complexity,simple; complex,Regarde ça \ Regarde ce que j'ai,,,,,Item_706,sometimes; often
+item_742,cmplx36,complexity,complexity,simple; complex,Bébé rit \ Bébé rit parce que content,,,,,Item_706,sometimes; often
+item_743,cmplx37,complexity,complexity,simple; complex,Le chapeau de le monsieur \ Le chapeau du monsieur,,,,,Item_706,sometimes; often
+item_744,pronoun1,pronoun_usage,pronoun_usage,pronoun; article,Mon camion \ Camion Simon,,,,,Item_706,sometimes; often
+item_745,pronoun2,pronoun_usage,pronoun_usage,pronoun; article,Moi sali \ Simon sali,,,,,Item_706,sometimes; often
+item_746,pronoun3,pronoun_usage,pronoun_usage,pronoun; article,Prends-moi \ Prends Simon,,,,,Item_706,sometimes; often
+item_747,pronoun4,pronoun_usage,pronoun_usage,pronoun; article,Veux jus \ Simon jus,,,,,Item_706,sometimes; often
+item_748,pronoun5,pronoun_usage,pronoun_usage,pronoun; article,Toi belle \ Maman belle,,,,,Item_706,sometimes; often
+item_749,pronoun6,pronoun_usage,pronoun_usage,pronoun; article,Brosse les dents \ Brosse dents maman,,,,,Item_706,sometimes; often
+item_750,pronoun7,pronoun_usage,pronoun_usage,pronoun; article,Il dort \ Le chat dort,,,,,Item_706,sometimes; often
+item_751,pronoun8,pronoun_usage,pronoun_usage,pronoun; article,Ouvre-la \ Ouvre la porte,,,,,Item_706,sometimes; often
+item_752,pronoun9,pronoun_usage,pronoun_usage,pronoun; article,C'est chaud \ La soupe est chaude,,,,,Item_706,sometimes; often
+item_753,pronoun10,pronoun_usage,pronoun_usage,pronoun; article,Pas faire ça \ Pas laver cheveux,,,,,Item_706,sometimes; often
+item_754,pronoun11,pronoun_usage,pronoun_usage,pronoun; article,Jus dedans \ Jus dans tasse,,,,,Item_706,sometimes; often
