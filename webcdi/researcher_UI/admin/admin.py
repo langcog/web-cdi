@@ -134,11 +134,21 @@ class UserAdmin(BaseUserAdmin):
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 
+
 class PaymentCodeAdmin(admin.ModelAdmin):
-    list_display = ['study','get_researcher','assignment_date','added_date','payment_type','gift_amount','gift_code']
-    
+    list_display = [
+        "study",
+        "get_researcher",
+        "assignment_date",
+        "added_date",
+        "payment_type",
+        "gift_amount",
+        "gift_code",
+    ]
+
     def get_researcher(self, obj):
         return obj.study.researcher
+
     get_researcher.short_description = "Researcher"
     get_researcher.admin_order_field = "study__researcher"
 
