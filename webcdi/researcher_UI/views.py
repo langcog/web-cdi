@@ -28,7 +28,7 @@ from researcher_UI.utils.overflow import overflow_fun
 from researcher_UI.utils.raw_gift_codes import raw_gift_code_fun
 
 from .forms import *
-from .mixins import StudyOwnerMixin, ReseacherOwnsStudyMixin
+from .mixins import ReseacherOwnsStudyMixin, StudyOwnerMixin
 
 
 class Console(LoginRequiredMixin, generic.ListView):
@@ -124,11 +124,23 @@ class RenameStudy(LoginRequiredMixin, ReseacherOwnsStudyMixin, generic.UpdateVie
         study_obj.max_age = new_age_range.upper
         study_obj.save()
 
-        res = raw_gift_code_fun(raw_gift_amount, study_obj, new_study_name, raw_gift_codes)
-        if res['stat'] == 'ok':
-            messages.success(self.request,mark_safe(f'The following gift codes of value {raw_gift_amount} have been added: {raw_gift_codes}'))
-        elif res['stat'] == 'error':
-            messages.error(self.request, mark_safe(f'There was an error with the gift codes.  None were added.  The error message is: {res["error_message"]}'))
+        res = raw_gift_code_fun(
+            raw_gift_amount, study_obj, new_study_name, raw_gift_codes
+        )
+        if res["stat"] == "ok":
+            messages.success(
+                self.request,
+                mark_safe(
+                    f"The following gift codes of value {raw_gift_amount} have been added: {raw_gift_codes}"
+                ),
+            )
+        elif res["stat"] == "error":
+            messages.error(
+                self.request,
+                mark_safe(
+                    f'There was an error with the gift codes.  None were added.  The error message is: {res["error_message"]}'
+                ),
+            )
         return super().form_valid(form)
 
 
@@ -149,7 +161,7 @@ class AddStudy(LoginRequiredMixin, generic.CreateView):
         age_range = form.cleaned_data.get("age_range")
         study_instance.active = True
         researcher = self.request.user
-        
+
         try:
             study_instance.min_age = age_range.lower
             study_instance.max_age = age_range.upper
@@ -159,12 +171,14 @@ class AddStudy(LoginRequiredMixin, generic.CreateView):
 
         study_instance.researcher = researcher
         if not form.cleaned_data.get("test_period"):
-                study_instance.test_period = 14
-    
-        study_instance.save() 
-        
-        return redirect(reverse('researcher_ui:console_study', args=(study_instance.pk,)))
-    
+            study_instance.test_period = 14
+
+        study_instance.save()
+
+        return redirect(
+            reverse("researcher_ui:console_study", args=(study_instance.pk,))
+        )
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["researcher"] = self.request.user

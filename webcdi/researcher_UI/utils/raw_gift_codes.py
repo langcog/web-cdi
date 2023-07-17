@@ -1,9 +1,11 @@
+import logging
 import re
 from decimal import Decimal
-from researcher_UI.models import payment_code
-import logging
 
-logger = logging.getLogger('debug')
+from researcher_UI.models import payment_code
+
+logger = logging.getLogger("debug")
+
 
 def raw_gift_code_fun(raw_gift_amount, study_obj, new_study_name, raw_gift_codes):
     all_new_codes = None
@@ -40,7 +42,6 @@ def raw_gift_code_fun(raw_gift_amount, study_obj, new_study_name, raw_gift_codes
 
         if not used_codes:
             all_new_codes = True
-
 
     if raw_gift_codes:
         if not all_new_codes or not amount_regex:
