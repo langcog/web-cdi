@@ -25,9 +25,7 @@ urlpatterns = [
     path(
         "study/<int:pk>/rename_study/", views.RenameStudy.as_view(), name="rename_study"
     ),
-    path(
-        "study/<int:pk>/overflow/", views.Overflow.as_view(), name="overflow"
-    ),
+    path("study/<int:pk>/overflow/", views.Overflow.as_view(), name="overflow"),
     url(
         r"^(?P<username>[^/]+)/(?P<study_name>[^/]+)/new_parent/$",
         views.AdminNewParent.as_view(),

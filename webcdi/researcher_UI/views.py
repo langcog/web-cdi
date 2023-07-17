@@ -283,7 +283,7 @@ class Overflow(LoginRequiredMixin, generic.View):
     """
 
     def get(self, request, username, study_name):
-        study_obj = study.objects.get(id=self.kwargs['id'])
+        study_obj = study.objects.get(id=self.kwargs["id"])
         data = overflow_fun(request, study_obj.researcher.username, study_obj.name)
         return render(request, "cdi_forms/overflow.html", data)
 
