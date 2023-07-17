@@ -22,3 +22,15 @@ legend {
     border-bottom:none;
     margin-bottom: 0;
 }
+
+.success {
+    background-color: green;
+}
+
+.warning {
+    background-color: yellow;
+}
+
+.error {
+    background-color: red;
+}

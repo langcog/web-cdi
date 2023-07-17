@@ -124,7 +124,11 @@ class RenameStudy(LoginRequiredMixin, ReseacherOwnsStudyMixin, generic.UpdateVie
         study_obj.max_age = new_age_range.upper
         study_obj.save()
 
-        raw_gift_code_fun(raw_gift_amount, study_obj, new_study_name, raw_gift_codes)
+        res = raw_gift_code_fun(raw_gift_amount, study_obj, new_study_name, raw_gift_codes)
+        if res['stat'] == 'ok':
+            messages.success(self.request,mark_safe(f'The following gift codes of value {raw_gift_amount} have been added: {raw_gift_codes}'))
+        elif res['stat'] == 'error':
+            messages.error(self.request, mark_safe(f'There was an error with the gift codes.  None were added.  The error message is: {res["error_message"]}'))
         return super().form_valid(form)
 
 
