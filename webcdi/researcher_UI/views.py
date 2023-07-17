@@ -282,7 +282,7 @@ class Overflow(LoginRequiredMixin, generic.View):
     I wanted to change to detailview, but I couldn't find the page to test after doing that.
     """
 
-    def get(self, request, username, study_name):
+    def get(self, request, *args, **kwargs):
         study_obj = study.objects.get(id=self.kwargs["id"])
         data = overflow_fun(request, study_obj.researcher.username, study_obj.name)
         return render(request, "cdi_forms/overflow.html", data)
