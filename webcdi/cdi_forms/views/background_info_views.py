@@ -24,6 +24,13 @@ from researcher_UI.models import administration, payment_code, researcher, study
 # Get an instance of a logger
 logger = logging.getLogger("debug")
 
+'''
+There is a lot of duplication of code here because it is based on the original request views
+and we do not want to create an object until the form is submitted.  So we have to set
+all the values we're going to use early.
+
+For this reason the BackgroundInfor view templates continue to use the cdi_base.html template
+'''
 
 class AdministrationMixin(object):
     hash_id = None
