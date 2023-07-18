@@ -96,14 +96,14 @@ else:
 # USER_ADMIN_EMAIL = 'webcdi-contact@stanford.edu'
 USER_ADMIN_EMAIL = "hjsmehta@gmail.com"
 
-SERVER_EMAIL = "webcdi.contact@gmail.com"
+SERVER_EMAIL = "webcdi-contact@stanford.edu"
 
 # captcha settings
 RECAPTCHA_PUBLIC_KEY = "6LfI0yEUAAAAALj8wAxmoXmWg8B64tvr866bXeYg"
 RECAPTCHA_PRIVATE_KEY = "6LfI0yEUAAAAALgfbuvciUNhUCLAgslLOtnsFnx3"
 
 # Home page links
-CONTACT_EMAIL = "webcdi.contact@gmail.com"
+CONTACT_EMAIL = "webcdi-contact@stanford.edu"
 MORE_INFO_ADDRESS = "http://mb-cdi.stanford.edu/"
 
 # AWS creds
