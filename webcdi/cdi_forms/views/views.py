@@ -36,6 +36,7 @@ logger = logging.getLogger("debug")
 def get_model_header(name):
     return list(model_map(name).values_list("itemID", flat=True))
 
+
 # Convert string boolean to true boolean
 def parse_analysis(raw_answer):
     if raw_answer == "True":
@@ -287,13 +288,18 @@ def administer_cdi_form(request, hash_id):
             requests_log.objects.create(url_hash=hash_id, request_type="POST")
 
             if "background-info-form" in request.POST:
-                return redirect("background-info", pk=administration_instance.backgroundinfo.pk)
+                return redirect(
+                    "background-info", pk=administration_instance.backgroundinfo.pk
+                )
 
             elif "cdi-form" in request.POST:
                 return cdi_form(request, hash_id)
 
             elif "back-page" in request.POST:
-                return redirect("backpage-background-info", pk=administration_instance.backgroundinfo.pk)
+                return redirect(
+                    "backpage-background-info",
+                    pk=administration_instance.backgroundinfo.pk,
+                )
 
             else:
                 refresh = True

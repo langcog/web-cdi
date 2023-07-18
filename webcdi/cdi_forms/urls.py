@@ -9,43 +9,44 @@ urlpatterns = [
         "background/<int:pk>/",
         include(
             [
-            path(
-                "",
-                views.BackgroundInfoView.as_view(),
-                name="background-info",
-            ),
-            path(
-                "backpage/",
-                views.BackpageBackgroundInfoView.as_view(),
-                name="backpage-background-info",
-            ),
+                path(
+                    "",
+                    views.BackgroundInfoView.as_view(),
+                    name="background-info",
+                ),
+                path(
+                    "backpage/",
+                    views.BackpageBackgroundInfoView.as_view(),
+                    name="backpage-background-info",
+                ),
             ]
-        )),
+        ),
+    ),
     path(
         "background/create/<int:study_id>/",
         include(
             [
-            path(
-                "bypass/<slug:source_id>/",
-                views.CreateBackgroundInfoView.as_view(),
-                {"bypass": True},
-                name="create-new-background-info",
-            ),
-            path(
-                "<slug:source_id>/",
-                views.CreateBackgroundInfoView.as_view(),
-                {"bypass": None},
-                name="create-new-background-info",
-            ),
-            path(
-                "bypass/",
-                views.CreateBackgroundInfoView.as_view(),
-                {"bypass": True},
-                name="create-new-background-info",
-            ),           
+                path(
+                    "bypass/<slug:source_id>/",
+                    views.CreateBackgroundInfoView.as_view(),
+                    {"bypass": True},
+                    name="create-new-background-info",
+                ),
+                path(
+                    "<slug:source_id>/",
+                    views.CreateBackgroundInfoView.as_view(),
+                    {"bypass": None},
+                    name="create-new-background-info",
+                ),
+                path(
+                    "bypass/",
+                    views.CreateBackgroundInfoView.as_view(),
+                    {"bypass": True},
+                    name="create-new-background-info",
+                ),
             ]
-        )),
-
+        ),
+    ),
     url(
         r"^fill/(?P<hash_id>[0-9a-f]{64})/$",
         views.administer_cdi_form,
@@ -62,7 +63,6 @@ urlpatterns = [
         views.update_administration_data_item,
         name="update-administration-data-item",
     ),
-
     path(
         "cat/",
         include(("cdi_forms.cat_forms.urls", "cat_forms"), namespace="cat_forms"),
@@ -82,7 +82,7 @@ urlpatterns = [
                     name="administration-view",
                 ),
             ]
-        )
+        ),
     ),
     path(
         "administration/<str:hash_id>/",
@@ -113,8 +113,11 @@ urlpatterns = [
                     views.AdministrationSummaryView.as_view(),
                     name="administration_summary_view",
                 ),
-                path("contact/", views.AdministrationContactView.as_view(), name="contact"),
-    
+                path(
+                    "contact/",
+                    views.AdministrationContactView.as_view(),
+                    name="contact",
+                ),
             ]
         ),
     ),
