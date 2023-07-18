@@ -454,7 +454,6 @@ def cdi_form(request, hash_id):
                     return redirect(
                         reverse("administration_summary_view", args=(hash_id,))
                     )
-                    return printable_view(request, hash_id)  # Render completion page
 
     # Fetch prefilled responses
     data = dict()
@@ -482,173 +481,6 @@ def cdi_form(request, hash_id):
 
     response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
     return response
-
-
-# Render completion page
-def printable_view(request, hash_id):
-    administration_instance = get_administration_instance(
-        hash_id
-    )  # Get administration object based on hash ID
-    user_language = language_map(administration_instance.study.instrument.language)
-    translation.activate(user_language)
-
-    if not administration_instance.completed:
-        response = render(
-            request, "cdi_forms/expired.html", {}
-        )  # Render contact form template
-        response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
-        return response
-
-    completed = int(
-        request.get_signed_cookie("completed_num", "0")
-    )  # If there is a cookie for a previously completed test, get it
-
-    # Create a blank dictionary and then fill it with prefilled background and CDI data, along with hash ID and information regarding the gift card code if subject is to be paid
-    prefilled_data = dict()
-    prefilled_data = prefilled_cdi_data(administration_instance)
-
-    context = {}
-    context["language"] = administration_instance.study.instrument.language
-    context["instrument"] = administration_instance.study.instrument.name
-    context["min_age"] = administration_instance.study.min_age
-    context["max_age"] = administration_instance.study.max_age
-    context["birthweight_units"] = administration_instance.study.birth_weight_units
-    context["source_id"] = administration_instance.backgroundinfo.source_id
-    context["study_obj"] = administration_instance.study
-    context["study"] = administration_instance.study
-    # try:
-    # Get form from database
-    background_form = prefilled_background_form(administration_instance)
-    try:
-        filename = os.path.realpath(
-            PROJECT_ROOT + administration_instance.study.demographic.path
-        )
-    except:
-        filename = "None"
-    if has_backpage(filename):
-        backpage_background_form = prefilled_background_form(
-            administration_instance, False
-        )
-
-    prefilled_data["language"] = administration_instance.study.instrument.language
-    prefilled_data["background_form"] = background_form
-    try:
-        prefilled_data["backpage_background_form"] = backpage_background_form
-    except:
-        pass
-    prefilled_data["hash_id"] = hash_id
-    prefilled_data["gift_code"] = None
-    prefilled_data["gift_amount"] = None
-    prefilled_data["min_age"] = administration_instance.study.instrument.min_age
-    prefilled_data["max_age"] = administration_instance.study.instrument.max_age
-    prefilled_data["show_feedback"] = administration_instance.study.show_feedback
-
-    if (
-        administration_instance.study.allow_payment
-        and administration_instance.bypass is None
-    ):
-        amazon_urls = {
-            "English": {
-                "redeem_url": "http://www.amazon.com/redeem",
-                "legal_url": "http://www.amazon.com/gc-legal",
-            },
-            "Spanish": {
-                "redeem_url": "http://www.amazon.com/gc/redeem/?language=es_US",
-                "legal_url": "http://www.amazon.com/gc-legal/?language=es_US",
-            },
-            "French Quebec": {
-                "redeem_url": "http://www.amazon.ca/gc/redeem/?language=fr_CA",
-                "legal_url": "http://www.amazon.ca/gc-legal/?language=fr_CA",
-            },
-        }
-        url_obj = amazon_urls[administration_instance.study.instrument.language]
-        if payment_code.objects.filter(hash_id=hash_id).exists():
-            gift_card = payment_code.objects.get(hash_id=hash_id)
-            prefilled_data["gift_code"] = gift_card.gift_code
-            prefilled_data["gift_amount"] = "${:,.2f}".format(gift_card.gift_amount)
-            prefilled_data["redeem_url"] = url_obj["redeem_url"]
-            prefilled_data["legal_url"] = url_obj["legal_url"]
-        else:
-            prefilled_data["gift_code"] = "ran out"
-            prefilled_data["gift_amount"] = "ran out"
-            prefilled_data["redeem_url"] = None
-            prefilled_data["legal_url"] = None
-
-    prefilled_data["allow_sharing"] = administration_instance.study.allow_sharing
-
-    # calculate graph data
-    cdi_items = json.loads(prefilled_data["cdi_items"])
-    categories = {}
-    from cdi_forms.management.commands.populate_items import unicode_csv_reader
-
-    categories_data = list(
-        unicode_csv_reader(
-            open(
-                os.path.realpath(
-                    settings.BASE_DIR + "/static/data_csv/word_categories.csv"
-                ),
-                encoding="utf8",
-            )
-        )
-    )
-
-    col_names = categories_data[0]
-    nrows = len(categories_data)
-    get_row = lambda row: categories_data[row]
-    categories = {}
-    totals = {"produces": 0, "understands": 0}
-    for row in range(1, nrows):
-        row_values = get_row(row)
-        if len(row_values) > 1:
-            if row_values[
-                col_names.index(administration_instance.study.instrument.name)
-            ]:
-                mapped_name = row_values[
-                    col_names.index(administration_instance.study.instrument.name)
-                ]
-            else:
-                mapped_name = row_values[col_names.index("id")]
-            categories[row_values[col_names.index("id")]] = {
-                "produces": 0,
-                "understands": 0,
-                "count": 0,
-                "mappedName": mapped_name,
-            }
-    for row in cdi_items:
-        if row["item_type"] == "word":
-            categories[row["category"]]["count"] += 1
-
-    prefilled_data_list = administration_data.objects.filter(
-        administration=administration_instance
-    ).values("item_ID", "value")
-    for item in prefilled_data_list:
-        instance = Instrument_Forms.objects.get(
-            itemID=item["item_ID"], instrument=administration_instance.study.instrument
-        )
-        if instance.item_type == "word":
-            if item["value"] == "produces":
-                categories[instance.category]["produces"] += 1
-                categories[instance.category]["understands"] += 1
-            if item["value"] == "understands":
-                categories[instance.category]["understands"] += 1
-
-    prefilled_data["graph_data"] = categories
-    prefilled_data["instrument"] = administration_instance.study.instrument.name
-    prefilled_data["object"] = administration_instance
-    prefilled_data["language_code"] = settings.LANGUAGE_DICT[
-        administration_instance.study.instrument.language
-    ]
-
-    response = render(
-        request, "cdi_forms/printable_view.html", prefilled_data
-    )  # Render contact form template
-    response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
-
-    # if administration_instance.study.researcher.username == "langcoglab" and administration_instance.study.allow_payment:
-    if administration_instance.study.allow_payment:
-        response.set_signed_cookie("completed_num", completed)
-    return response
-
 
 # As the entire test (background --> CDI --> completion page) share the same URL, access the database to determine current status of test and render the appropriate template
 def administer_cdi_form(request, hash_id):
@@ -707,7 +539,6 @@ def administer_cdi_form(request, hash_id):
         else:
             # only printable
             return redirect(reverse("administration_summary_view", args=(hash_id,)))
-            return printable_view(request, hash_id)
 
 
 # For studies that are grouped together, render a modal form that properly displays information regarding each study.

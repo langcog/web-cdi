@@ -6,7 +6,6 @@ from typing import Any, Dict, List
 
 import requests
 from cdi_forms.models import Instrument_Forms
-from cdi_forms.views import printable_view
 from cdi_forms.views.utils import (
     PROJECT_ROOT,
     get_administration_instance,
@@ -170,7 +169,6 @@ class AdministrationSummaryView(DetailView):
                 request, "cdi_forms/administration_expired.html", {}
             )  # Render contact form template
 
-        # return printable_view(request, self.object.url_hash)
         completed = int(
             request.get_signed_cookie("completed_num", "0")
         )  # If there is a cookie for a previously completed test, get it
@@ -179,7 +177,6 @@ class AdministrationSummaryView(DetailView):
         if self.object.study.allow_payment:
             response.set_signed_cookie("completed_num", completed)
         return response
-        return printable_view(request, self.object.url_hash)
 
 
 class AdministrationDetailView(DetailView):

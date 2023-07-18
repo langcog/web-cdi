@@ -278,10 +278,6 @@ class AdminNewParent(generic.View):
 
 
 class Overflow(generic.DetailView):
-    """
-    TODO
-    I wanted to change to detailview, but I couldn't find the page to test after doing that.
-    """
     model = study
     template_name = "cdi_forms/overflow.html"
 
@@ -300,7 +296,6 @@ class Overflow(generic.DetailView):
         )
         return ctx
     
-
 
 class ImportData(LoginRequiredMixin, generic.UpdateView):
     model = study
