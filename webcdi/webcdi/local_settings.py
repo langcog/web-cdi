@@ -56,18 +56,7 @@ elif "MPI_INSTANCE" in os.environ:
             "PORT": os.environ["MPI_PORT"],
         }
     }
-else:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql_psycopg2",
-            "NAME": "webcdi-admin",
-            "USER": "webcdi-admin",
-            "PASSWORD": "bears1stlexicon",
-            #'HOST': 'webcdiadmin.canyiscnpddk.us-west-2.rds.amazonaws.com',
-            "HOST": "webcdi-local-2.canyiscnpddk.us-west-2.rds.amazonaws.com",
-            "PORT": "5432",
-        }
-    }
+
 
 DJANGO_SERVER_TYPE = os.environ.get("DJANGO_SERVER_TYPE", "DEV") # DEV or PROD
 SITE_ID = int(os.environ.get("SITE_ID", 3)) # 4 for MPI, 2 for DEV, 3 for local
