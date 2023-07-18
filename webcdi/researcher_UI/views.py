@@ -127,7 +127,7 @@ class RenameStudy(LoginRequiredMixin, ReseacherOwnsStudyMixin, generic.UpdateVie
         res = raw_gift_code_fun(
             raw_gift_amount, study_obj, new_study_name, raw_gift_codes
         )
-        if res["stat"] == "ok":
+        if res["stat"] == "ok" and raw_gift_amount:
             messages.success(
                 self.request,
                 mark_safe(

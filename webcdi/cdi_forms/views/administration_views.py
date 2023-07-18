@@ -556,33 +556,41 @@ class AdministrationUpdateView(UpdateView):
         if not target_section and "section" in self.kwargs:
             target_section = self.kwargs["section"]
 
-        old_admins = administration.objects.filter(
-            study=self.object.study,
-            subject_id=self.object.subject_id,
-            completed=True,
-        )
-        word_items = self.instrument.filter(item_type="word").values_list(
-            "itemID", flat=True
-        )
-        if old_admins:
-            old_admin = old_admins.latest("last_modified")
-            old_admin_data = administration_data.objects.filter(
-                administration=old_admin, item_ID__in=word_items
-            ).values("item_ID", "value")
-            new_data_objs = []
-            for admin_data_obj in old_admin_data:
-                new_data_objs.append(
-                    administration_data(
-                        administration=self.object,
-                        item_ID=admin_data_obj["item_ID"],
-                        value=admin_data_obj["value"],
-                    )
-                )
-            administration_data.objects.bulk_create(new_data_objs)
-
         prefilled_data_list = administration_data.objects.filter(
             administration=self.object
         ).values("item_ID", "value")
+
+        if (
+            not prefilled_data_list
+            and self.object.repeat_num > 1
+            and self.object.study.prefilled_data >= 2
+        ):
+            old_admins = administration.objects.filter(
+                study=self.object.study,
+                subject_id=self.object.subject_id,
+                completed=True,
+            )
+            word_items = self.instrument.filter(item_type="word").values_list(
+                "itemID", flat=True
+            )
+            if old_admins:
+                old_admin = old_admins.latest("last_modified")
+                old_admin_data = administration_data.objects.filter(
+                    administration=old_admin, item_ID__in=word_items
+                ).values("item_ID", "value")
+                new_data_objs = []
+                for admin_data_obj in old_admin_data:
+                    new_data_objs.append(
+                        administration_data(
+                            administration=self.object,
+                            item_ID=admin_data_obj["item_ID"],
+                            value=admin_data_obj["value"],
+                        )
+                    )
+                administration_data.objects.bulk_create(new_data_objs)
+                prefilled_data_list = administration_data.objects.filter(
+                    administration=self.object
+                ).values("item_ID", "value")
 
         prefilled_data = {
             x["item_ID"]: x["value"] for x in prefilled_data_list
