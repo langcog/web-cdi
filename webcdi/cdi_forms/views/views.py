@@ -14,7 +14,6 @@ from cdi_forms.views.utils import (
     has_backpage,
     language_map,
     model_map,
-    prefilled_background_form,
     prefilled_cdi_data,
     safe_harbor_zip_code,
 )
@@ -37,221 +36,6 @@ logger = logging.getLogger("debug")
 def get_model_header(name):
     return list(model_map(name).values_list("itemID", flat=True))
 
-
-# Finds and renders BackgroundForm based on given hash ID code.
-def background_info_form(request, hash_id):
-    administration_instance = get_administration_instance(
-        hash_id
-    )  # Get administation object based on hash ID
-
-    # Populate a dictionary with information regarding the instrument (age range, language, and name) along with information on child's age and zipcode for modification. Will be sent to forms.py for form validation.
-    context = {}
-    context["language"] = administration_instance.study.instrument.language
-    context["instrument"] = administration_instance.study.instrument.name
-    context["min_age"] = administration_instance.study.min_age
-    context["max_age"] = administration_instance.study.max_age
-    context["birthweight_units"] = administration_instance.study.birth_weight_units
-    context["child_age"] = None
-    context["zip_code"] = ""
-
-    user_language = language_map(administration_instance.study.instrument.language)
-    translation.activate(user_language)
-
-    refresh = False  # Refreshing page is automatically off
-    background_form = None
-
-    if request.method == "POST":  # if test-taker is sending in form responses
-        if (
-            not administration_instance.completed
-            and administration_instance.due_date > timezone.now()
-        ):  # And test has yet to be completed and has not timed out
-            try:
-                background_instance = BackgroundInfo.objects.get(
-                    administration=administration_instance
-                )  # Try to fetch BackgroundInfo model already stored in database.
-                if background_instance.age:
-                    context[
-                        "child_age"
-                    ] = (
-                        background_instance.age
-                    )  # Populate dictionary with child's age for validation in forms.py.
-                background_form = BackgroundForm(
-                    request.POST, instance=background_instance, context=context
-                )  # Save filled out form as an object
-            except:
-                background_form = BackgroundForm(
-                    request.POST, context=context
-                )  # Pull up an empty BackgroundForm with information regarding only the instrument.
-
-            if (
-                background_form.is_valid()
-            ):  # If form passed forms.py validation (clean function)
-                background_instance = background_form.save(
-                    commit=False
-                )  # Save but do not commit form just yet.
-
-                child_dob = background_form.cleaned_data.get(
-                    "child_dob"
-                )  # Try to fetch DOB
-
-                if (
-                    child_dob
-                ):  # If DOB was entered into form, calculate age based on DOB and today's date.
-                    raw_age = datetime.date.today() - child_dob
-                    age = int(float(raw_age.days) / (365.2425 / 12.0))
-                    # day_diff = datetime.date.today().day - child_dob.day
-                    # age = (datetime.date.today().year - child_dob.year) * 12 +  (datetime.date.today().month - child_dob.month) + (1 if day_diff >=15 else 0)
-                else:
-                    age = None
-
-                # If age was properly calculated from 'child_dob', save it to the model object
-                if age:
-                    background_instance.age = age
-
-                if background_instance.child_hispanic_latino == "":
-                    background_instance.child_hispanic_latino = "None"
-
-                # Find the raw zip code value and make it compliant with Safe Harbor guidelines. Only store the first 3 digits if the total population for that prefix is greataer than 20,000 (found prohibited prefixes via Census API data). If prohibited zip code, replace value with state abbreviations.
-                if background_instance.country == "US":
-                    background_instance.zip_code = safe_harbor_zip_code(
-                        background_instance
-                    )
-
-                # Save model object to database
-                background_instance.administration = administration_instance
-                background_instance.save()
-
-                # If 'Next' button is pressed, update last_modified and mark completion of BackgroundInfo. Fetch CDI form by hash ID.
-                if "btn-next" in request.POST and request.POST["btn-next"] == _("Next"):
-                    administration.objects.filter(url_hash=hash_id).update(
-                        last_modified=timezone.now()
-                    )
-                    administration.objects.filter(url_hash=hash_id).update(
-                        completedBackgroundInfo=True
-                    )
-                    request.method = "GET"
-                    return cdi_form(request, hash_id)
-
-    # For fetching or refreshing background form.
-    if request.method == "GET" or refresh:
-        try:
-            # Fetch responses stored in BackgroundInfo model
-            background_instance = BackgroundInfo.objects.get(
-                administration=administration_instance
-            )
-            if background_instance.age:
-                context["child_age"] = background_instance.age
-            if len(background_instance.zip_code) == 3:
-                background_instance.zip_code = background_instance.zip_code + "**"
-            background_form = BackgroundForm(
-                instance=background_instance, context=context
-            )
-        except:
-            if (
-                administration_instance.repeat_num > 1
-                or administration_instance.study.study_group
-            ) and administration_instance.study.prefilled_data >= 1:
-                if administration_instance.study.study_group:
-                    related_studies = study.objects.filter(
-                        researcher=administration_instance.study.researcher,
-                        study_group=administration_instance.study.study_group,
-                    )
-                elif (
-                    administration_instance.repeat_num > 1
-                    and not administration_instance.study.study_group
-                ):
-                    related_studies = study.objects.filter(
-                        id=administration_instance.study.id
-                    )
-                old_admins = administration.objects.filter(
-                    study__in=related_studies,
-                    subject_id=administration_instance.subject_id,
-                    completedBackgroundInfo=True,
-                )
-                if old_admins:
-                    background_instance = BackgroundInfo.objects.get(
-                        administration=old_admins.latest(field_name="last_modified")
-                    )
-                    background_instance.pk = None
-                    background_instance.administration = administration_instance
-                    background_instance.age = None
-                    background_form = BackgroundForm(
-                        instance=background_instance, context=context
-                    )
-                else:
-                    background_form = BackgroundForm(context=context)
-            else:
-                # If you cannot fetch responses, render a blank form
-                background_form = BackgroundForm(context=context)
-
-    # Store relevant variables in a dictionary for template rendering. Includes prefilled responses, hash ID, data on study (researcher's name, instrument language, age range, related studies, etc.)
-    data = {}
-    data["background_form"] = background_form
-    data["hash_id"] = hash_id
-    data["username"] = administration_instance.study.researcher.username
-    data["completed"] = administration_instance.completed
-    data["due_date"] = administration_instance.due_date.strftime("%b %d, %Y, %I:%M %p")
-    data["language"] = administration_instance.study.instrument.language
-    data["language_code"] = user_language
-    data["title"] = administration_instance.study.instrument.verbose_name
-    data["max_age"] = administration_instance.study.max_age
-    data["min_age"] = administration_instance.study.min_age
-    data["study_waiver"] = administration_instance.study.waiver
-    data["allow_payment"] = administration_instance.study.allow_payment
-    data["hint"] = _(
-        "Your child should be between %(min_age)d to %(max_age)d months of age."
-    ) % {"min_age": data["min_age"], "max_age": data["max_age"]}
-    data["form"] = administration_instance.study.instrument.form
-
-    if data["allow_payment"] and administration_instance.bypass is None:
-        try:
-            data["gift_amount"] = (
-                payment_code.objects.filter(study=administration_instance.study)
-                .values_list("gift_amount", flat=True)
-                .first()
-            )
-        except:
-            data["gift_amount"] = None
-    study_name = administration_instance.study.name
-    study_group = administration_instance.study.study_group
-    if study_group:
-        data["study_group"] = study_group
-        data["alt_study_info"] = (
-            study.objects.filter(
-                study_group=study_group,
-                researcher=administration_instance.study.researcher,
-            )
-            .exclude(name=study_name)
-            .values_list(
-                "name",
-                "instrument__min_age",
-                "instrument__max_age",
-                "instrument__language",
-            )
-        )
-        data["study_group_hint"] = _(
-            " Not the right age? <a href='%(sgurl)s'> Click here</a>"
-        ) % {
-            "sgurl": reverse(
-                "find_paired_studies", args=[data["username"], data["study_group"]]
-            )
-        }
-    else:
-        data["study_group"] = None
-        data["alt_study_info"] = None
-        data["study_group_hint"] = _(
-            " Not the right age? You should contact your researcher for steps on what to do next."
-        )
-
-    # Render CDI form with prefilled responses and study context
-    response = render(
-        request, "cdi_forms/background_info.html", data
-    )  # Render contact form template
-
-    response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
-    return response
-
-
 # Convert string boolean to true boolean
 def parse_analysis(raw_answer):
     if raw_answer == "True":
@@ -264,6 +48,7 @@ def parse_analysis(raw_answer):
 
 
 # Render CDI form. Dependent on prefilled_cdi_data
+# I think this can probably be deleted.  It is now only called from administer_cdi_form and I don't think the if statement is ever hit
 def cdi_form(request, hash_id):
     administration_instance = get_administration_instance(
         hash_id
@@ -485,15 +270,12 @@ def cdi_form(request, hash_id):
 
 # As the entire test (background --> CDI --> completion page) share the same URL, access the database to determine current status of test and render the appropriate template
 def administer_cdi_form(request, hash_id):
-    logger.debug(f"Administering CDI form for { hash_id }")
     try:
         administration_instance = administration.objects.get(url_hash=hash_id)
     except:
         raise Http404("Administration not found")
 
     if administration_instance.study.instrument.form in settings.CAT_FORMS:
-        logger.debug(f"Administration { hash_id } is a CAT administration")
-        logger.debug(f"This is a { request.method } redirect")
         return redirect("cat_forms:administer_cat_form", hash_id=hash_id)
 
     refresh = False
@@ -505,13 +287,13 @@ def administer_cdi_form(request, hash_id):
             requests_log.objects.create(url_hash=hash_id, request_type="POST")
 
             if "background-info-form" in request.POST:
-                return background_info_form(request, hash_id)
+                return redirect("background-info", pk=administration_instance.backgroundinfo.pk)
 
             elif "cdi-form" in request.POST:
                 return cdi_form(request, hash_id)
 
             elif "back-page" in request.POST:
-                return background_info_form(request, hash_id)
+                return redirect("backpage-background-info", pk=administration_instance.backgroundinfo.pk)
 
             else:
                 refresh = True
@@ -533,10 +315,8 @@ def administer_cdi_form(request, hash_id):
                 return redirect(
                     "instructions", hash_id=administration_instance.url_hash
                 )
-                return cdi_form(request, hash_id)
             else:
                 return redirect("background-info", pk=background_instance.pk)
-                # return background_info_form(request, hash_id)
         else:
             # only printable
             return redirect(reverse("administration_summary_view", args=(hash_id,)))

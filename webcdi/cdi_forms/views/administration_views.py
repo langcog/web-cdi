@@ -38,11 +38,7 @@ class AdministrationSummaryView(DetailView):
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         ctx = super().get_context_data(**kwargs)
-        # Create a blank dictionary and then fill it with prefilled background and CDI data, along with hash ID and information regarding the gift card code if subject is to be paid
-        prefilled_data = dict()
-        prefilled_data = prefilled_cdi_data(self.object)
 
-        # try:
         # Get form from database
         background_form = prefilled_background_form(self.object)
         ctx["background_form"] = background_form
