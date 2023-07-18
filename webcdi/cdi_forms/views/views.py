@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import datetime
 import json
 import logging
 import os.path
@@ -15,7 +14,6 @@ from cdi_forms.views.utils import (
     language_map,
     model_map,
     prefilled_cdi_data,
-    safe_harbor_zip_code,
 )
 from django.conf import settings
 from django.contrib.auth.models import User
