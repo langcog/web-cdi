@@ -69,29 +69,8 @@ else:
         }
     }
 
-if "RDS_HOSTNAME" in os.environ:
-    if (
-        os.environ["RDS_HOSTNAME"]
-        == "webcdiadmin.canyiscnpddk.us-west-2.rds.amazonaws.com"
-    ):
-        os.environ["DJANGO_SERVER_TYPE"] = "PROD"
-        os.environ["VANITY_URL"] = "webcdi.stanford.edu"
-        SITE_ID = 1
-    elif (
-        os.environ["RDS_HOSTNAME"]
-        == "webcdi-dev-1-py36.canyiscnpddk.us-west-2.rds.amazonaws.com"
-    ):
-        os.environ["DJANGO_SERVER_TYPE"] = "DEV"
-        SITE_ID = 2
-    else:
-        os.environ["DJANGO_SERVER_TYPE"] = "DEV"
-        SITE_ID = 2
-elif "MPI_INSTANCE" in os.environ:
-    os.environ["DJANGO_SERVER_TYPE"] = "PROD"
-    SITE_ID = 4
-else:
-    os.environ["DJANGO_SERVER_TYPE"] = "DEV"
-    SITE_ID = 3
+DJANGO_SERVER_TYPE = os.environ.get("DJANGO_SERVER_TYPE", "DEV") # DEV or PROD
+SITE_ID = int(os.environ.get("SITE_ID", 3)) # 4 for MPI, 2 for DEV, 3 for local
 
 # USER_ADMIN_EMAIL = 'webcdi-contact@stanford.edu'
 USER_ADMIN_EMAIL = "hjsmehta@gmail.com"
@@ -99,9 +78,8 @@ USER_ADMIN_EMAIL = "hjsmehta@gmail.com"
 SERVER_EMAIL = "webcdi-contact@stanford.edu"
 
 # captcha settings
-RECAPTCHA_PUBLIC_KEY = "6LfI0yEUAAAAALj8wAxmoXmWg8B64tvr866bXeYg"
-RECAPTCHA_PRIVATE_KEY = "6LfI0yEUAAAAALgfbuvciUNhUCLAgslLOtnsFnx3"
-
+RECAPTCHA_PUBLIC_KEY = os.environ.get("RECAPTCHA_PUBLIC_KEY", "<RECAPTCHA_PUBLIC_KEY>")
+RECAPTCHA_PRIVATE_KEY = os.environ.get("RECAPTCHA_PRIVATE_KEY", "<RECAPTCHA_PRIVATE_KEY>")
 # Home page links
 CONTACT_EMAIL = "webcdi-contact@stanford.edu"
 MORE_INFO_ADDRESS = "http://mb-cdi.stanford.edu/"

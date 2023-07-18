@@ -1,6 +1,8 @@
 import datetime
 import json
+from typing import Any, Dict
 
+from ipware.ip import get_client_ip
 from brookes.models import BrookesCode
 from django.conf import settings
 from django.contrib import messages
@@ -24,7 +26,6 @@ from researcher_UI.utils.admin_new_participant import admin_new_participant_fun
 from researcher_UI.utils.console_helper.get_helper import get_helper
 from researcher_UI.utils.console_helper.post_helper import post_condition
 from researcher_UI.utils.import_data import import_data_fun
-from researcher_UI.utils.overflow import overflow_fun
 from researcher_UI.utils.raw_gift_codes import raw_gift_code_fun
 
 from .forms import *
@@ -276,16 +277,29 @@ class AdminNewParent(generic.View):
         return redirect(redirect_url)
 
 
-class Overflow(LoginRequiredMixin, generic.View):
+class Overflow(generic.DetailView):
     """
     TODO
     I wanted to change to detailview, but I couldn't find the page to test after doing that.
     """
+    model = study
+    template_name = "cdi_forms/overflow.html"
 
-    def get(self, request, *args, **kwargs):
-        study_obj = study.objects.get(id=self.kwargs["pk"])
-        data = overflow_fun(request, study_obj.researcher.username, study_obj.name)
-        return render(request, "cdi_forms/overflow.html", data)
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        ctx = super().get_context_data(**kwargs)
+
+        visitor_ip = str(get_client_ip(self.request))
+        prev_visitor = 0
+        if visitor_ip and visitor_ip != "None":
+            prev_visitor = ip_address.objects.filter(ip_address=visitor_ip).count()
+        if prev_visitor > 0 and not self.request.user.is_authenticated:
+            ctx["repeat"] = True
+        ctx["bypass_url"] = (
+            reverse("researcher_ui:administer_new_parent", args=[self.object.researcher.username, self.object.name])
+            + "?bypass=true"
+        )
+        return ctx
+    
 
 
 class ImportData(LoginRequiredMixin, generic.UpdateView):
