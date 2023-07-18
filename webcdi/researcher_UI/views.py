@@ -2,7 +2,6 @@ import datetime
 import json
 from typing import Any, Dict
 
-from ipware.ip import get_client_ip
 from brookes.models import BrookesCode
 from django.conf import settings
 from django.contrib import messages
@@ -17,6 +16,7 @@ from django.utils.text import slugify
 from django.views import generic
 from django.views.generic import UpdateView
 from django_weasyprint import WeasyTemplateResponseMixin
+from ipware.ip import get_client_ip
 from psycopg2.extras import NumericRange
 from researcher_UI.models import administration, researcher, study
 from researcher_UI.utils.add_paired_study import add_paired_study_fun
@@ -291,11 +291,14 @@ class Overflow(generic.DetailView):
         if prev_visitor > 0 and not self.request.user.is_authenticated:
             ctx["repeat"] = True
         ctx["bypass_url"] = (
-            reverse("researcher_ui:administer_new_parent", args=[self.object.researcher.username, self.object.name])
+            reverse(
+                "researcher_ui:administer_new_parent",
+                args=[self.object.researcher.username, self.object.name],
+            )
             + "?bypass=true"
         )
         return ctx
-    
+
 
 class ImportData(LoginRequiredMixin, generic.UpdateView):
     model = study

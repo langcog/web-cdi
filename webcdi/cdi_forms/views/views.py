@@ -482,6 +482,7 @@ def cdi_form(request, hash_id):
     response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
     return response
 
+
 # As the entire test (background --> CDI --> completion page) share the same URL, access the database to determine current status of test and render the appropriate template
 def administer_cdi_form(request, hash_id):
     logger.debug(f"Administering CDI form for { hash_id }")
