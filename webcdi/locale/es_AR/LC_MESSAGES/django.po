@@ -1756,7 +1756,7 @@ msgstr "Ocultar/mostrar instrucciones: "
 msgid ""
 "Thank you for completing!  Please review your responses and if you are "
 "ready, click submit!"
-msgstr 'Gracias por completar el cuestionario! Revisá tus respuestas y si estás listo/a apretá "envíar"'
+msgstr "Gracias por completar el cuestionario! Revisá tus respuestas y si estás listo/a apretá \"envíar\""
 
 #: cdi_forms/templates/cdi_forms/administration_form.html:263
 #: cdi_forms/templates/cdi_forms/cdi_form.html:381
