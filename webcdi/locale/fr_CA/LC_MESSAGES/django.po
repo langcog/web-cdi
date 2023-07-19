@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-07 06:21+0000\n"
+"POT-Creation-Date: 2023-07-19 13:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,247 +18,274 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: cdi_forms/forms.py:31 cdi_forms/forms.py:32 cdi_forms/models.py:639
-#: cdi_forms/templates/cdi_forms/administration_base.html:166
+#: cdi_forms/forms/contact_form.py:15
+msgid "Your Name"
+msgstr ""
+
+#: cdi_forms/forms/contact_form.py:17
+msgid "Your Email Address"
+msgstr ""
+
+#: cdi_forms/forms/contact_form.py:23
+msgid "Your Test URL"
+msgstr ""
+
+#: cdi_forms/forms/contact_form.py:26
+msgid "What would you like to tell us?"
+msgstr ""
+
+#: cdi_forms/forms/contact_form.py:46
+#: cdi_forms/templates/cdi_forms/_navigation_buttons.html:15
+#: cdi_forms/templates/cdi_forms/administration_form.html:13
+#: cdi_forms/templates/cdi_forms/cdi_form.html:11
+#: cdi_forms/templates/cdi_forms/cdi_form.html:323 cdi_forms/views/views.py:138
+msgid "Submit"
+msgstr "Soumettre"
+
+#: cdi_forms/forms/forms.py:30 cdi_forms/forms/forms.py:31
+#: cdi_forms/models.py:639
+#: cdi_forms/templates/cdi_forms/administration_base.html:162
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:150
-#: cdi_forms/templates/cdi_forms/cdi_base.html:160
+#: cdi_forms/templates/cdi_forms/cdi_base.html:153
 msgid "No"
 msgstr "Non"
 
-#: cdi_forms/forms.py:31 cdi_forms/forms.py:32 cdi_forms/models.py:638
+#: cdi_forms/forms/forms.py:30 cdi_forms/forms/forms.py:31
+#: cdi_forms/models.py:638
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:153
 msgid "Yes"
 msgstr "Oui"
 
-#: cdi_forms/forms.py:32 cdi_forms/forms.py:44 cdi_forms/forms.py:73
-#: cdi_forms/forms.py:95 cdi_forms/forms.py:106 cdi_forms/forms.py:130
-#: cdi_forms/forms.py:209 cdi_forms/models.py:172 cdi_forms/models.py:231
+#: cdi_forms/forms/forms.py:31 cdi_forms/forms/forms.py:43
+#: cdi_forms/forms/forms.py:72 cdi_forms/forms/forms.py:94
+#: cdi_forms/forms/forms.py:105 cdi_forms/forms/forms.py:129
+#: cdi_forms/forms/forms.py:208 cdi_forms/models.py:172 cdi_forms/models.py:231
 #: cdi_forms/models.py:236 cdi_forms/models.py:329 cdi_forms/models.py:641
 msgid "Prefer not to disclose"
 msgstr "Préfère ne pas divulguer/non applicable"
 
-#: cdi_forms/forms.py:35
+#: cdi_forms/forms/forms.py:34
 msgid "Under $25,000"
 msgstr "Au-dessous de 25 000$"
 
-#: cdi_forms/forms.py:36
+#: cdi_forms/forms/forms.py:35
 msgid "$25,000-$50,000"
 msgstr "25 000$-50 000$"
 
-#: cdi_forms/forms.py:37
+#: cdi_forms/forms/forms.py:36
 msgid "$50,000-$75,000"
 msgstr "50 000$-75 000$"
 
-#: cdi_forms/forms.py:38
+#: cdi_forms/forms/forms.py:37
 msgid "$75,000-$100,000"
 msgstr "75 000$-100 000$"
 
-#: cdi_forms/forms.py:39
+#: cdi_forms/forms/forms.py:38
 msgid "$100,000-$125,000"
 msgstr "100 000$-125 000$"
 
-#: cdi_forms/forms.py:40
+#: cdi_forms/forms/forms.py:39
 msgid "$125,000-$150,000"
 msgstr "250 000$-150 000$"
 
-#: cdi_forms/forms.py:41
+#: cdi_forms/forms/forms.py:40
 msgid "$150,000-$175,000"
 msgstr "150 000$-175 000$"
 
-#: cdi_forms/forms.py:42
+#: cdi_forms/forms/forms.py:41
 msgid "$175,000-$200,000"
 msgstr "175 000$-200 000$"
 
-#: cdi_forms/forms.py:43
+#: cdi_forms/forms/forms.py:42
 msgid "Over $200,000"
 msgstr "Au-dessus de 200 000$"
 
-#: cdi_forms/forms.py:47
+#: cdi_forms/forms/forms.py:46
 msgid "American Indian / Alaska Native"
 msgstr "Indigène / Autochtone / Métis / Inuk (Inuit)"
 
-#: cdi_forms/forms.py:48
+#: cdi_forms/forms/forms.py:47
 msgid "Asian (Far East, Southeast Asia, Indian Sub-continent)"
 msgstr "Asiatique (Extrême-Orient, Asie du Sud-Est, Sous-continent indien)"
 
-#: cdi_forms/forms.py:49
+#: cdi_forms/forms/forms.py:48
 msgid "Native Hawaiian or Other Pacific Islander"
 msgstr "Hawaïen indigène ou d’une autre île du Pacifique"
 
-#: cdi_forms/forms.py:50
+#: cdi_forms/forms/forms.py:49
 msgid "Black or African American"
 msgstr "Noir ou Afro-Canadien"
 
-#: cdi_forms/forms.py:51
+#: cdi_forms/forms/forms.py:50
 msgid "White"
 msgstr "Blanc"
 
-#: cdi_forms/forms.py:52 cdi_forms/forms.py:208 cdi_forms/models.py:142
-#: cdi_forms/models.py:242 cdi_forms/models.py:463
+#: cdi_forms/forms/forms.py:51 cdi_forms/forms/forms.py:207
+#: cdi_forms/models.py:142 cdi_forms/models.py:242 cdi_forms/models.py:463
 msgid "Other"
 msgstr "Autre"
 
-#: cdi_forms/forms.py:57
+#: cdi_forms/forms/forms.py:56
 msgid "Less than 3 lbs, 0 oz"
 msgstr "Moins de 3 lbs, 0 oz (Moins de 1360 grammes)"
 
-#: cdi_forms/forms.py:58
+#: cdi_forms/forms/forms.py:57
 msgid "3 lbs, 0 oz - 3 lbs, 7 oz"
 msgstr "3 lbs, 0 oz - 3 lbs, 7 oz (1361 grammes - 1587 grammes)"
 
-#: cdi_forms/forms.py:59
+#: cdi_forms/forms/forms.py:58
 msgid "3 lbs, 8 oz - 3 lbs, 15 oz"
 msgstr "3 lbs, 8 oz - 3 lbs, 15 oz (1588 grammes - 1814 grammes)"
 
-#: cdi_forms/forms.py:60
+#: cdi_forms/forms/forms.py:59
 msgid "4 lbs, 0 oz - 4 lbs, 7 oz"
 msgstr "4 lbs, 0 oz - 4 lbs, 7 oz (1815 grammes - 2041 grammes)"
 
-#: cdi_forms/forms.py:61
+#: cdi_forms/forms/forms.py:60
 msgid "4 lbs, 8 oz - 4 lbs, 15 oz"
 msgstr "4 lbs, 8 oz - 4 lbs, 15 oz (2042 grammes - 2267 grammes)"
 
-#: cdi_forms/forms.py:62
+#: cdi_forms/forms/forms.py:61
 msgid "5 lbs, 0 oz - 5 lbs, 7 oz"
 msgstr "5 lbs, 0 oz - 5 lbs, 7 oz (2268 grammes - 2494 grammes)"
 
-#: cdi_forms/forms.py:63
+#: cdi_forms/forms/forms.py:62
 msgid "5 lbs, 8 oz - 5 lbs, 15 oz"
 msgstr "5 lbs, 8 oz - 5 lbs, 15 oz (2495 grammes - 2721 grammes)"
 
-#: cdi_forms/forms.py:64
+#: cdi_forms/forms/forms.py:63
 msgid "6 lbs, 0 oz - 6 lbs, 7 oz"
 msgstr "6 lbs, 0 oz - 6 lbs, 7 oz (2722 grammes - 2948 grammes)"
 
-#: cdi_forms/forms.py:65
+#: cdi_forms/forms/forms.py:64
 msgid "6 lbs, 8 oz - 6 lbs, 15 oz"
 msgstr "6 lbs, 8 oz - 6 lbs, 15 oz (2949 grammes - 3175 grammes)"
 
-#: cdi_forms/forms.py:66
+#: cdi_forms/forms/forms.py:65
 msgid "7 lbs, 0 oz - 7 lbs, 7 oz"
 msgstr "7 lbs, 0 oz - 7 lbs, 7 oz (3176 grammes - 3401 grammes)"
 
-#: cdi_forms/forms.py:67
+#: cdi_forms/forms/forms.py:66
 msgid "7 lbs, 8 oz - 7 lbs, 15 oz"
 msgstr "7 lbs, 8 oz - 7 lbs, 15 oz (3402 grammes - 3628 grammes)"
 
-#: cdi_forms/forms.py:68
+#: cdi_forms/forms/forms.py:67
 msgid "8 lbs, 0 oz - 8 lbs, 7 oz"
 msgstr "8 lbs, 0 oz - 8 lbs, 7 oz (3629 grammes - 3855 grammes)"
 
-#: cdi_forms/forms.py:69
+#: cdi_forms/forms/forms.py:68
 msgid "8 lbs, 8 oz - 8 lbs, 15 oz"
 msgstr "8 lbs, 8 oz - 8 lbs, 15 oz (3856 grammes - 4081 grammes)"
 
-#: cdi_forms/forms.py:70
+#: cdi_forms/forms/forms.py:69
 msgid "9 lbs, 0 oz - 9 lbs, 7 oz"
 msgstr "9 lbs, 0 oz - 9 lbs, 7 oz (4082 grammes - 4308 grammes)"
 
-#: cdi_forms/forms.py:71
+#: cdi_forms/forms/forms.py:70
 msgid "9 lbs, 8 oz - 9 lbs, 15 oz"
 msgstr "9 lbs, 8 oz - 9 lbs, 15 oz (4309 grammes - 4534 grammes)"
 
-#: cdi_forms/forms.py:72
+#: cdi_forms/forms/forms.py:71
 msgid "10 lbs, 0 oz or more"
 msgstr "10 lbs, 0 oz ou plus (4535 grammes ou plus)"
 
-#: cdi_forms/forms.py:79
+#: cdi_forms/forms/forms.py:78
 msgid "Less than 1500 grams"
 msgstr "Moins de 1500 grammes (Moins de 3 lbs, 4 oz)"
 
-#: cdi_forms/forms.py:80
+#: cdi_forms/forms/forms.py:79
 msgid "1500 grams - 1749 grams"
 msgstr "1500 grammes - 1749 grammes (3 lbs, 5 oz - 3 lbs, 13 oz)"
 
-#: cdi_forms/forms.py:81
+#: cdi_forms/forms/forms.py:80
 msgid "1750 grams - 1999 grams"
 msgstr "1750 grammes - 1999 grammes (3 lbs, 14 oz - 4 lbs, 6 oz)"
 
-#: cdi_forms/forms.py:82
+#: cdi_forms/forms/forms.py:81
 msgid "2000 grams - 2249 grams"
 msgstr "2000 grammes - 2249 grammes (4 lbs, 7 oz - 4 lbs, 15 oz)"
 
-#: cdi_forms/forms.py:83
+#: cdi_forms/forms/forms.py:82
 msgid "2250 grams - 2499 grams"
 msgstr "2250 grammes - 2499 grammes (5 lbs, 0 oz - 5 lbs, 8 oz)"
 
-#: cdi_forms/forms.py:84
+#: cdi_forms/forms/forms.py:83
 msgid "2500 grams - 2749 grams"
 msgstr "2500 grammes - 2749 grammes (5 lbs, 9 oz - 6 lbs, 1 oz)"
 
-#: cdi_forms/forms.py:85
+#: cdi_forms/forms/forms.py:84
 msgid "2750 grams - 2999 grams"
 msgstr "2750 grammes - 2999 grammes (6 lbs, 2 oz - 6 lbs, 9 oz)"
 
-#: cdi_forms/forms.py:86
+#: cdi_forms/forms/forms.py:85
 msgid "3000 grams - 3249 grams"
 msgstr "3000 grammes - 3249 grammes (6 lbs, 10 oz - 7 lbs, 2 oz)"
 
-#: cdi_forms/forms.py:87
+#: cdi_forms/forms/forms.py:86
 msgid "3250 grams - 3499 grams"
 msgstr "3250 grammes - 3499 grammes (7 lbs, 3 oz - 7 lbs, 11 oz)"
 
-#: cdi_forms/forms.py:88
+#: cdi_forms/forms/forms.py:87
 msgid "3500 grams - 3749 grams"
 msgstr "3500 grammes - 3749 grammes (7 lbs, 12 oz - 8 lbs, 4 oz)"
 
-#: cdi_forms/forms.py:89
+#: cdi_forms/forms/forms.py:88
 msgid "3750 grams - 3999 grams"
 msgstr "3750 grammes - 3999 grammes (8 lbs, 5 oz - 8 lbs, 13 oz)"
 
-#: cdi_forms/forms.py:90
+#: cdi_forms/forms/forms.py:89
 msgid "4000 grams - 4249 grams"
 msgstr "4000 grammes - 4249 grammes (8 lbs, 14 oz - 9 lbs, 5 oz)"
 
-#: cdi_forms/forms.py:91
+#: cdi_forms/forms/forms.py:90
 msgid "4250 grams - 4499 grams"
 msgstr "4250 grammes - 4499 grammes (9 lbs, 6 oz - 9 lbs, 14 oz)"
 
-#: cdi_forms/forms.py:92
+#: cdi_forms/forms/forms.py:91
 msgid "4500 grams - 4749 grams"
 msgstr "4500 grammes - 4749 grammes (9 lbs, 15 oz - 10 lbs, 7 oz)"
 
-#: cdi_forms/forms.py:93
+#: cdi_forms/forms/forms.py:92
 msgid "4750 grams - 4999 grams"
 msgstr "4750 grammes - 4999 grammes (10 lbs, 8 oz - 11 lbs, 0 oz)"
 
-#: cdi_forms/forms.py:94
+#: cdi_forms/forms/forms.py:93
 msgid "5000 grams or more"
 msgstr "5000 grammes ou plus (11 lbs, 1 oz ou plus)"
 
-#: cdi_forms/forms.py:102 cdi_forms/forms.py:118
+#: cdi_forms/forms/forms.py:101 cdi_forms/forms/forms.py:117
 msgid "12 (High school graduate)"
 msgstr "12"
 
-#: cdi_forms/forms.py:103 cdi_forms/forms.py:122
+#: cdi_forms/forms/forms.py:102 cdi_forms/forms/forms.py:121
 msgid "16 (College graduate)"
 msgstr "16"
 
-#: cdi_forms/forms.py:104 cdi_forms/forms.py:124
+#: cdi_forms/forms/forms.py:103 cdi_forms/forms/forms.py:123
 msgid "18 (Advanced degree)"
 msgstr "18"
 
-#: cdi_forms/forms.py:105 cdi_forms/forms.py:129
+#: cdi_forms/forms/forms.py:104 cdi_forms/forms/forms.py:128
 msgid "23 or more"
 msgstr "23 ou plus"
 
-#: cdi_forms/forms.py:142 cdi_forms/models.py:475
+#: cdi_forms/forms/forms.py:141 cdi_forms/models.py:475
 #, fuzzy
 #| msgid "Who does your child live with?"
 msgid "Does you child have siblings?"
 msgstr "Avec qui vit votre enfant?"
 
-#: cdi_forms/forms.py:145 cdi_forms/models.py:478
+#: cdi_forms/forms/forms.py:144 cdi_forms/models.py:478
 #, fuzzy
 #| msgid "How old is your child?"
 msgid "How many siblings does you child have?"
 msgstr "Quel âge a votre enfant?"
 
-#: cdi_forms/forms.py:150
+#: cdi_forms/forms/forms.py:149
 msgid "Please provide the sex and age of each sibling"
 msgstr ""
 
-#: cdi_forms/forms.py:160
+#: cdi_forms/forms/forms.py:159
 msgid ""
 "To protect your privacy, we never store your child's date of birth, we only "
 "record age in months."
@@ -266,104 +293,106 @@ msgstr ""
 "Pour protéger vos informations personnelles, ce site ne conserve pas la date "
 "de naissance de votre enfant, seulement son âge en mois."
 
-#: cdi_forms/forms.py:163
+#: cdi_forms/forms/forms.py:162
 msgid "Child DOB<span class=\"asteriskField\">*</span>"
 msgstr "Date de naissance de l’enfant<span class=\"asteriskField\">*</span>"
 
-#: cdi_forms/forms.py:169
+#: cdi_forms/forms/forms.py:168
 msgid "Age (in months)<span class=\"asteriskField\">*</span>"
 msgstr "Âge (en mois)<span class=\"asteriskField\">*</span>"
 
-#: cdi_forms/forms.py:172
+#: cdi_forms/forms/forms.py:171
 msgid "This field will update when you enter or change your child's DOB."
 msgstr ""
 "Ce champ sera mis à jour lorsque vous entrez ou modifiez la date de "
 "naissance de votre enfant."
 
-#: cdi_forms/forms.py:183
+#: cdi_forms/forms/forms.py:182
 msgid "What is your postal/zip code?"
 msgstr "Quel est votre code postal?"
 
-#: cdi_forms/forms.py:192 cdi_forms/models.py:314
+#: cdi_forms/forms/forms.py:191 cdi_forms/models.py:314
 msgid "Is your child Hispanic or Latino?"
 msgstr "Votre enfant est-il hispanique ou latino?"
 
-#: cdi_forms/forms.py:197 cdi_forms/models.py:217
+#: cdi_forms/forms/forms.py:196 cdi_forms/models.py:217
 msgid "Early"
 msgstr "Tôt"
 
-#: cdi_forms/forms.py:197 cdi_forms/models.py:217
+#: cdi_forms/forms/forms.py:196 cdi_forms/models.py:217
 msgid "Late"
 msgstr "Tard"
 
-#: cdi_forms/forms.py:199 cdi_forms/models.py:215
+#: cdi_forms/forms/forms.py:198 cdi_forms/models.py:215
 msgid "Was he/she early or late?"
 msgstr "Est-il né plus tôt ou plus tard que prévu?"
 
-#: cdi_forms/forms.py:206 cdi_forms/models.py:140
+#: cdi_forms/forms/forms.py:205 cdi_forms/models.py:140
 msgid "Male"
 msgstr "Masculin"
 
-#: cdi_forms/forms.py:207 cdi_forms/models.py:141
+#: cdi_forms/forms/forms.py:206 cdi_forms/models.py:141
 msgid "Female"
 msgstr "Féminin"
 
-#: cdi_forms/forms.py:212
+#: cdi_forms/forms/forms.py:211
 msgid "Sex"
 msgstr "Sexe de l’enfant"
 
-#: cdi_forms/forms.py:217
+#: cdi_forms/forms/forms.py:216
 msgid "Which language(s)"
 msgstr "Quelle(s) langue(s)"
 
-#: cdi_forms/forms.py:223 cdi_forms/forms.py:229 cdi_forms/forms.py:235
+#: cdi_forms/forms/forms.py:222 cdi_forms/forms/forms.py:228
+#: cdi_forms/forms/forms.py:234
 msgid "Please specify"
 msgstr "Veuillez spécifier"
 
-#: cdi_forms/forms.py:242
+#: cdi_forms/forms/forms.py:241
 msgctxt "caregiver_other"
 msgid "Please specify"
 msgstr "Veuillez spécifier"
 
-#: cdi_forms/forms.py:337 cdi_forms/forms.py:391
+#: cdi_forms/forms/forms.py:336 cdi_forms/forms/forms.py:390
 msgid "This field cannot be empty"
 msgstr "Ce champ ne peut pas être vide"
 
-#: cdi_forms/forms.py:344
+#: cdi_forms/forms/forms.py:343
 msgid "Please enter number of weeks"
 msgstr ""
 
-#: cdi_forms/forms.py:351
+#: cdi_forms/forms/forms.py:350
 msgid "Cannot be more than 18 weeks early"
 msgstr "Ne peut pas être plus que 18 semaines d’avance"
 
-#: cdi_forms/forms.py:358
+#: cdi_forms/forms/forms.py:357
 msgid "Cannot be more than 4 weeks late"
 msgstr "Ne peut pas être plus que 4 semaines de retard"
 
-#: cdi_forms/forms.py:364 cdi_forms/forms.py:385
+#: cdi_forms/forms/forms.py:363 cdi_forms/forms/forms.py:384
 msgid "Please enter your child's DOB in the field above."
 msgstr ""
 "Veuillez entrer la date de naissance de votre enfant dans le champ ci-dessus."
 
-#: cdi_forms/forms.py:377
+#: cdi_forms/forms/forms.py:376
 msgid "Your baby is too young for this version of the CDI."
 msgstr "Votre bébé est trop jeune pour cette version de l’inventaire."
 
-#: cdi_forms/forms.py:381
+#: cdi_forms/forms/forms.py:380
 msgid "Your baby is too old for this version of the CDI."
 msgstr "Votre bébé est trop vieux pour cette version de l’inventaire."
 
-#: cdi_forms/forms.py:413 cdi_forms/forms.py:416 cdi_forms/models.py:203
-#: cdi_forms/models.py:206 cdi_forms/models.py:276 cdi_forms/models.py:279
+#: cdi_forms/forms/forms.py:412 cdi_forms/forms/forms.py:415
+#: cdi_forms/models.py:203 cdi_forms/models.py:206 cdi_forms/models.py:276
+#: cdi_forms/models.py:279
 msgid "Birth weight"
 msgstr "Poids à la naissance"
 
-#: cdi_forms/forms.py:427 cdi_forms/models.py:191
+#: cdi_forms/forms/forms.py:426 cdi_forms/models.py:191
 msgid "Was your child born as part of a multiple birth?"
 msgstr "Est-ce que votre enfant a fait partie d’une naissance multiple?"
 
-#: cdi_forms/forms.py:436
+#: cdi_forms/forms/forms.py:435
 msgid ""
 "Was your child born early or late (more than one week before or after the "
 "due date)?"
@@ -371,24 +400,24 @@ msgstr ""
 "Votre enfant est-il né plus tôt ou plus tard que prévu (plus d'une semaine "
 "avant ou après la date d’accouchement prévue)?"
 
-#: cdi_forms/forms.py:444
+#: cdi_forms/forms/forms.py:443
 msgid "Does your child regularly hear a language other than English?"
 msgstr "Votre enfant entend-il régulièrement une autre langue que le français?"
 
-#: cdi_forms/forms.py:452
+#: cdi_forms/forms/forms.py:451
 msgid "Has your child experienced chronic ear infections (5 or more)?"
 msgstr "Votre enfant a-t-il déjà eu des otites chroniques (5 ou plus)?"
 
-#: cdi_forms/forms.py:460 cdi_forms/models.py:389
+#: cdi_forms/forms/forms.py:459 cdi_forms/models.py:389
 msgid "Do you suspect that your child may have hearing loss?"
 msgstr "Pensez-vous que votre enfant pourrait avoir un problème auditif?"
 
-#: cdi_forms/forms.py:468 cdi_forms/models.py:399
+#: cdi_forms/forms/forms.py:467 cdi_forms/models.py:399
 msgid ""
 "Is there some reason to suspect that your child may have vision problems?"
 msgstr "Pensez-vous que votre enfant pourrait avoir des problèmes de vision?"
 
-#: cdi_forms/forms.py:476 cdi_forms/models.py:410
+#: cdi_forms/forms/forms.py:475 cdi_forms/models.py:410
 msgid ""
 "Has your child had any major illnesses, hospitalizations, or diagnosed "
 "disabilities?"
@@ -396,7 +425,7 @@ msgstr ""
 "Votre enfant a-t-il eu des maladies graves, des hospitalisations ou des "
 "handicaps diagnostiqués?"
 
-#: cdi_forms/forms.py:484 cdi_forms/models.py:421
+#: cdi_forms/forms/forms.py:483 cdi_forms/models.py:421
 msgid ""
 "Has your child ever received any services for speech, language, or "
 "development issues?"
@@ -404,13 +433,13 @@ msgstr ""
 "Votre enfant a-t-il déjà reçu des services pour des problèmes d'élocution, "
 "de langage ou de développement?"
 
-#: cdi_forms/forms.py:492 cdi_forms/models.py:435
+#: cdi_forms/forms/forms.py:491 cdi_forms/models.py:435
 msgid ""
 "Are you worried about your child's progress in language or communication?"
 msgstr ""
 "Êtes-vous inquiet du progrès de votre enfant en langage ou en communication?"
 
-#: cdi_forms/forms.py:500 cdi_forms/models.py:446
+#: cdi_forms/forms/forms.py:499 cdi_forms/models.py:446
 msgid ""
 "Have you or anyone in your immediate family been diagnosed with a language "
 "or learning disability?"
@@ -418,35 +447,35 @@ msgstr ""
 "Vous-même ou un autre membre de votre famille immédiate a-t-il déjà été "
 "diagnostiqué avec un trouble du langage ou un trouble d'apprentissage?"
 
-#: cdi_forms/forms.py:537
+#: cdi_forms/forms/forms.py:536
 msgid "mm/dd/yyyy"
 msgstr "mm/jj/aaaa"
 
-#: cdi_forms/forms.py:543
+#: cdi_forms/forms/forms.py:542
 msgid "dd/mm/yyyy"
 msgstr "jj/mm/aaaa"
 
-#: cdi_forms/forms.py:763 cdi_forms/models.py:308
+#: cdi_forms/forms/forms.py:762 cdi_forms/models.py:308
 msgid "Estimated Annual Family Income (in USD)"
 msgstr "Revenu familial annuel estimé (en dollars Canadiens)"
 
-#: cdi_forms/forms.py:771
+#: cdi_forms/forms/forms.py:770
 msgid "My child is (check all that apply):"
 msgstr "Mon enfant est (cochez tout ce qui s'applique):"
 
-#: cdi_forms/forms.py:776 cdi_forms/forms.py:794
+#: cdi_forms/forms/forms.py:775 cdi_forms/forms/forms.py:793
 msgid "Basic Information"
 msgstr "Informations de base"
 
-#: cdi_forms/forms.py:813
+#: cdi_forms/forms/forms.py:812
 msgid "Family Background"
 msgstr "Contexte familial"
 
-#: cdi_forms/forms.py:825 cdi_forms/models.py:318
+#: cdi_forms/forms/forms.py:824 cdi_forms/models.py:318
 msgid "Child's Ethnicity"
 msgstr "Ethnicité de l’enfant"
 
-#: cdi_forms/forms.py:829
+#: cdi_forms/forms/forms.py:828
 msgid ""
 "The following information is being collected for the sole purpose of "
 "reporting to our grant-funding institute, i.e.,  NIH (National Institute of "
@@ -457,46 +486,22 @@ msgstr ""
 "lorsque l’agence de financement est le NIH (Institut américain de la "
 "santé).  "
 
-#: cdi_forms/forms.py:837
+#: cdi_forms/forms/forms.py:836
 msgid "Caregiver Information"
 msgstr "Information sur les répondants"
 
-#: cdi_forms/forms.py:842
+#: cdi_forms/forms/forms.py:841
 msgid "Language Exposure"
 msgstr "Expérience linguistique"
 
-#: cdi_forms/forms.py:853
+#: cdi_forms/forms/forms.py:852
 msgid "Health"
 msgstr "Santé"
 
-#: cdi_forms/forms.py:879
+#: cdi_forms/forms/forms.py:878
 #, python-format
 msgid "Your identifier for %(source)s"
 msgstr ""
-
-#: cdi_forms/forms.py:909
-msgid "Your Name"
-msgstr ""
-
-#: cdi_forms/forms.py:911
-msgid "Your Email Address"
-msgstr ""
-
-#: cdi_forms/forms.py:917
-msgid "Your Test URL"
-msgstr ""
-
-#: cdi_forms/forms.py:920
-msgid "What would you like to tell us?"
-msgstr ""
-
-#: cdi_forms/forms.py:940
-#: cdi_forms/templates/cdi_forms/_navigation_buttons.html:15
-#: cdi_forms/templates/cdi_forms/administration_form.html:13
-#: cdi_forms/templates/cdi_forms/cdi_form.html:11
-#: cdi_forms/templates/cdi_forms/cdi_form.html:323 cdi_forms/views/views.py:377
-msgid "Submit"
-msgstr "Soumettre"
 
 #: cdi_forms/languages.py:6
 msgid "аҧсуа (Abkhaz)"
@@ -1528,6 +1533,60 @@ msgid ""
 "vision, speech, learning difficulty"
 msgstr ""
 
+#: cdi_forms/templates/cdi_forms/_captcha_page.html:7
+#: cdi_forms/templates/cdi_forms/cdi_form.html:285
+msgid ""
+"You are almost done! Click \"Yes\" if you agree with ALL of the following "
+"points. Your answer will not affect your results. There is nothing wrong "
+"with choosing \"No\":"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/_captcha_page.html:11
+#: cdi_forms/templates/cdi_forms/cdi_form.html:289
+#, python-format
+msgid "You have a child who is %(age)s months old."
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/_captcha_page.html:12
+#: cdi_forms/templates/cdi_forms/cdi_form.html:290
+msgid "You filled out the entire questionnaire to the best of your ability."
+msgstr ""
+"Vous avez rempli tout le questionnaire au meilleur de vos connaissances."
+
+#: cdi_forms/templates/cdi_forms/_captcha_page.html:13
+#: cdi_forms/templates/cdi_forms/cdi_form.html:291
+msgid "You are taking this questionnaire for the FIRST time."
+msgstr "Vous remplissez ce questionnaire pour la PREMIÈRE fois."
+
+#: cdi_forms/templates/cdi_forms/_captcha_page.html:22
+#: cdi_forms/templates/cdi_forms/cdi_form.html:300
+#, python-format
+msgid ""
+"Yes, I have a child who is %(age)s months old, I filled out the entire "
+"questionnaire, and I am taking this questionnaire for the first time."
+msgstr ""
+"Oui, j'ai un enfant qui a %(age)s mois, j'ai rempli le questionnaire en "
+"entier, et je réponds à ce questionnaire pour la première fois."
+
+#: cdi_forms/templates/cdi_forms/_captcha_page.html:28
+#: cdi_forms/templates/cdi_forms/cdi_form.html:306
+#, python-format
+msgid ""
+"No, I do NOT have a child who is %(age)s months old, I have NOT filled out "
+"the entire questionnaire, and/or I have taken this questionnaire before."
+msgstr ""
+"Non, je n'ai PAS d'enfant âgé de %(age)s mois, je n'ai PAS rempli le "
+"questionnaire en entier et / ou j'ai déjà répondu à ce questionnaire "
+"auparavant."
+
+#: cdi_forms/templates/cdi_forms/_captcha_page.html:34
+#: cdi_forms/templates/cdi_forms/cdi_form.html:312
+msgid ""
+"Finally, please check the Captcha box below to display the submit button!"
+msgstr ""
+"Finalement, veuillez cocher la case Captcha ci-dessous pour afficher le "
+"bouton de soumission!"
+
 #: cdi_forms/templates/cdi_forms/_navigation_buttons.html:7
 #: cdi_forms/templates/cdi_forms/cdi_form.html:321
 msgid "Previous Page"
@@ -1544,8 +1603,8 @@ msgstr "Page suivante"
 #: cdi_forms/templates/cdi_forms/cdi_form.html:10
 #: cdi_forms/templates/cdi_forms/cdi_form.html:327
 #: cdi_forms/templates/cdi_forms/study_group.html:6
-#: cdi_forms/views/views.py:338 researcher_UI/forms.py:215
-#: researcher_UI/forms.py:447
+#: cdi_forms/views/views.py:101 researcher_UI/forms.py:221
+#: researcher_UI/forms.py:446
 msgid "Save"
 msgstr "Sauvegarder"
 
@@ -1556,7 +1615,7 @@ msgstr "Sauvegarder"
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:32
 #: cdi_forms/templates/cdi_forms/cdi_form.html:14
 #: cdi_forms/templates/cdi_forms/cdi_form.html:328
-#: cdi_forms/views/background_info_views.py:342 cdi_forms/views/views.py:363
+#: cdi_forms/views/background_info_views.py:348 cdi_forms/views/views.py:126
 msgid "Go back to Background Info"
 msgstr "Revenir à l'information sur l’enfant et la famille"
 
@@ -1618,48 +1677,48 @@ msgstr ""
 "Vous pouvez utiliser le bouton de tabulation et les flèches de votre clavier "
 "pour naviguer rapidement et répondre aux questions."
 
-#: cdi_forms/templates/cdi_forms/administration_base.html:107
-#: cdi_forms/templates/cdi_forms/cdi_base.html:107
+#: cdi_forms/templates/cdi_forms/administration_base.html:102
+#: cdi_forms/templates/cdi_forms/cdi_base.html:100
 msgid "Due date"
 msgstr "Date d'échéance"
 
-#: cdi_forms/templates/cdi_forms/administration_base.html:112
-#: cdi_forms/templates/cdi_forms/cdi_base.html:112
+#: cdi_forms/templates/cdi_forms/administration_base.html:107
+#: cdi_forms/templates/cdi_forms/cdi_base.html:105
 msgid "Show waiver of documentation"
 msgstr "Afficher la renonciation à la documentation"
 
-#: cdi_forms/templates/cdi_forms/administration_base.html:117
-#: cdi_forms/templates/cdi_forms/cdi_base.html:117
+#: cdi_forms/templates/cdi_forms/administration_base.html:112
+#: cdi_forms/templates/cdi_forms/cdi_base.html:110
 msgid "Reach out to the Web-CDI Team!"
 msgstr "Contactez l'équipe responsable de cet inventaire."
 
-#: cdi_forms/templates/cdi_forms/administration_base.html:129
+#: cdi_forms/templates/cdi_forms/administration_base.html:124
 #: cdi_forms/templates/cdi_forms/cdi_form.html:24
 msgid "Table of Contents:"
 msgstr "Table des matières:"
 
-#: cdi_forms/templates/cdi_forms/administration_base.html:131
+#: cdi_forms/templates/cdi_forms/administration_base.html:126
 #: cdi_forms/templates/cdi_forms/cdi_form.html:26
 msgid "Contents:"
 msgstr "Contenu:"
 
-#: cdi_forms/templates/cdi_forms/administration_base.html:133
+#: cdi_forms/templates/cdi_forms/administration_base.html:128
 #: cdi_forms/templates/cdi_forms/cdi_form.html:28
 msgid "Instructions:"
 msgstr "Directives: "
 
-#: cdi_forms/templates/cdi_forms/administration_base.html:167
-#: cdi_forms/templates/cdi_forms/cdi_base.html:161
+#: cdi_forms/templates/cdi_forms/administration_base.html:163
+#: cdi_forms/templates/cdi_forms/cdi_base.html:154
 msgid "Okay"
 msgstr "OK"
 
-#: cdi_forms/templates/cdi_forms/administration_base.html:178
-#: cdi_forms/templates/cdi_forms/cdi_base.html:174
+#: cdi_forms/templates/cdi_forms/administration_base.html:174
+#: cdi_forms/templates/cdi_forms/cdi_base.html:167
 msgid "Waiver Denied"
 msgstr "Demande Refusée"
 
-#: cdi_forms/templates/cdi_forms/administration_base.html:182
-#: cdi_forms/templates/cdi_forms/cdi_base.html:178
+#: cdi_forms/templates/cdi_forms/administration_base.html:178
+#: cdi_forms/templates/cdi_forms/cdi_base.html:171
 msgid ""
 "Thank you for your response. We are unable to continue. Please close the "
 "window. If you would like, you may review the Waiver."
@@ -1667,9 +1726,48 @@ msgstr ""
 "Merci pour votre réponse. Il n’est pas possible de continuer. Veuillez "
 "fermer la fenêtre. Si vous le souhaitez, vous pouvez revoir la Dispense."
 
-#: cdi_forms/templates/cdi_forms/administration_base.html:185
-#: cdi_forms/templates/cdi_forms/cdi_base.html:181
+#: cdi_forms/templates/cdi_forms/administration_base.html:181
+#: cdi_forms/templates/cdi_forms/cdi_base.html:174
 msgid "Review Waiver"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/administration_contact.html:6
+#: cdi_forms/templates/cdi_forms/contact.html:6
+msgid "Contact Form "
+msgstr "Formulaire de contact"
+
+#: cdi_forms/templates/cdi_forms/administration_contact.html:33
+#: cdi_forms/templates/cdi_forms/contact.html:33
+msgid ""
+"Fill out the form below and a member of our team will get back to you soon!"
+msgstr ""
+"Remplissez le formulaire ci-dessous et un membre de notre équipe vous "
+"répondra bientôt!"
+
+#: cdi_forms/templates/cdi_forms/administration_contact.html:67
+#: cdi_forms/templates/cdi_forms/contact.html:67
+msgid " characters remaining"
+msgstr " caractères restants"
+
+#: cdi_forms/templates/cdi_forms/administration_expired.html:9
+#: cdi_forms/templates/cdi_forms/expired.html:9
+msgid "Link Expired"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/administration_expired.html:32
+#: cdi_forms/templates/cdi_forms/administration_summary.html:162
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:31
+#: cdi_forms/templates/cdi_forms/expired.html:32
+#: cdi_forms/templates/cdi_forms/overflow.html:37
+#: cdi_forms/templates/cdi_forms/study_overflow.html:37
+msgid "MB-CDI Lab Logo"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/administration_expired.html:36
+#: cdi_forms/templates/cdi_forms/expired.html:36
+msgid ""
+"Unfortunately the time allowed to complete this survey has expired.  Please "
+"contact your researcher."
 msgstr ""
 
 #: cdi_forms/templates/cdi_forms/administration_form.html:35
@@ -1677,13 +1775,24 @@ msgstr ""
 msgid "Hide/Show Instructions: "
 msgstr "Afficher/Masquer Instructions: "
 
-#: cdi_forms/templates/cdi_forms/administration_form.html:326
+#: cdi_forms/templates/cdi_forms/administration_form.html:119
+msgid ""
+"Thank you for completing!  Please review your responses and if you are "
+"ready, click submit!"
+msgstr "Merci d'avoir terminé !  Veuillez réviser vos réponses et si vous êtes prêt, cliquez sur soumettre !"
+
+#: cdi_forms/templates/cdi_forms/administration_form.html:263
 #: cdi_forms/templates/cdi_forms/cdi_form.html:381
 msgid ""
 "Are you ready to submit? You cannot change your answers after submission."
 msgstr ""
 "Êtes-vous prêt à soumettre? Vous ne pourrez pas modifier vos réponses après "
 "la soumission des informations."
+
+#: cdi_forms/templates/cdi_forms/administration_form.html:295
+#: cdi_forms/templates/cdi_forms/cdi_form.html:411
+msgid "understands and says"
+msgstr "comprend et dit"
 
 #: cdi_forms/templates/cdi_forms/administration_instructions.html:28
 #: cdi_forms/templates/cdi_forms/cdi_form.html:60
@@ -1898,15 +2007,9 @@ msgstr "Mots Produits (%%)"
 msgid "Words Understood (%%)"
 msgstr "Mots Compris (%%)"
 
-#: cdi_forms/templates/cdi_forms/administration_summary.html:162
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:31
-#: cdi_forms/templates/cdi_forms/expired.html:32
-#: cdi_forms/templates/cdi_forms/overflow.html:37
-msgid "MB-CDI Lab Logo"
-msgstr ""
-
 #: cdi_forms/templates/cdi_forms/administration_summary.html:168
 #: cdi_forms/templates/cdi_forms/overflow.html:40
+#: cdi_forms/templates/cdi_forms/study_overflow.html:40
 msgid "Thank you!"
 msgstr "Merci!"
 
@@ -2049,7 +2152,7 @@ msgstr ""
 #: cdi_forms/templates/cdi_forms/background_info.html:66
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:124
 #: cdi_forms/templates/cdi_forms/study_group.html:7
-#: cdi_forms/views/background_info_views.py:317 cdi_forms/views/views.py:147
+#: cdi_forms/views/background_info_views.py:325
 msgid "Next"
 msgstr "Suivant"
 
@@ -2170,7 +2273,7 @@ msgstr "Information sur l’enfant et la famille"
 
 #: cdi_forms/templates/cdi_forms/backpage_info.html:12
 #: cdi_forms/templates/cdi_forms/backpage_info.html:45
-#: cdi_forms/views/background_info_views.py:329
+#: cdi_forms/views/background_info_views.py:336
 msgid "Finish"
 msgstr "Terminer"
 
@@ -2237,83 +2340,8 @@ msgstr "Votre enfant dit-il ... "
 msgid "* or word used in your family"
 msgstr ""
 
-#: cdi_forms/templates/cdi_forms/cdi_form.html:285
-msgid ""
-"You are almost done! Click \"Yes\" if you agree with ALL of the following "
-"points. Your answer will not affect your results. There is nothing wrong "
-"with choosing \"No\":"
-msgstr ""
-
-#: cdi_forms/templates/cdi_forms/cdi_form.html:289
-#, python-format
-msgid "You have a child who is %(age)s months old."
-msgstr ""
-
-#: cdi_forms/templates/cdi_forms/cdi_form.html:290
-msgid "You filled out the entire questionnaire to the best of your ability."
-msgstr ""
-"Vous avez rempli tout le questionnaire au meilleur de vos connaissances."
-
-#: cdi_forms/templates/cdi_forms/cdi_form.html:291
-msgid "You are taking this questionnaire for the FIRST time."
-msgstr "Vous remplissez ce questionnaire pour la PREMIÈRE fois."
-
-#: cdi_forms/templates/cdi_forms/cdi_form.html:300
-#, python-format
-msgid ""
-"Yes, I have a child who is %(age)s months old, I filled out the entire "
-"questionnaire, and I am taking this questionnaire for the first time."
-msgstr ""
-"Oui, j'ai un enfant qui a %(age)s mois, j'ai rempli le questionnaire en "
-"entier, et je réponds à ce questionnaire pour la première fois."
-
-#: cdi_forms/templates/cdi_forms/cdi_form.html:306
-#, python-format
-msgid ""
-"No, I do NOT have a child who is %(age)s months old, I have NOT filled out "
-"the entire questionnaire, and/or I have taken this questionnaire before."
-msgstr ""
-"Non, je n'ai PAS d'enfant âgé de %(age)s mois, je n'ai PAS rempli le "
-"questionnaire en entier et / ou j'ai déjà répondu à ce questionnaire "
-"auparavant."
-
-#: cdi_forms/templates/cdi_forms/cdi_form.html:312
-msgid ""
-"Finally, please check the Captcha box below to display the submit button!"
-msgstr ""
-"Finalement, veuillez cocher la case Captcha ci-dessous pour afficher le "
-"bouton de soumission!"
-
-#: cdi_forms/templates/cdi_forms/cdi_form.html:411
-msgid "understands and says"
-msgstr "comprend et dit"
-
-#: cdi_forms/templates/cdi_forms/contact.html:6
-msgid "Contact Form "
-msgstr "Formulaire de contact"
-
-#: cdi_forms/templates/cdi_forms/contact.html:33
-msgid ""
-"Fill out the form below and a member of our team will get back to you soon!"
-msgstr ""
-"Remplissez le formulaire ci-dessous et un membre de notre équipe vous "
-"répondra bientôt!"
-
-#: cdi_forms/templates/cdi_forms/contact.html:67
-msgid " characters remaining"
-msgstr " caractères restants"
-
-#: cdi_forms/templates/cdi_forms/expired.html:9
-msgid "Link Expired"
-msgstr ""
-
-#: cdi_forms/templates/cdi_forms/expired.html:36
-msgid ""
-"Unfortunately the time allowed to complete this survey has expired.  Please "
-"contact your researcher."
-msgstr ""
-
 #: cdi_forms/templates/cdi_forms/overflow.html:44
+#: cdi_forms/templates/cdi_forms/study_overflow.html:44
 msgid ""
 "Thank you for your interest in completing the MacArthur-Bates Communicative "
 "Development Inventory (CDI)! It looks like you have completed the CDI form "
@@ -2334,6 +2362,7 @@ msgstr ""
 "remercions de votre intérêt!"
 
 #: cdi_forms/templates/cdi_forms/overflow.html:49
+#: cdi_forms/templates/cdi_forms/study_overflow.html:49
 #, python-format
 msgid ""
 "Thank you for your interest in completing the MacArthur-Bates Communicative "
@@ -2378,22 +2407,22 @@ msgstr ""
 msgid "Born between STARTDATE and ENDDATE"
 msgstr "Né entre DATEDÉBUT et DATEFIN"
 
-#: cdi_forms/views/background_info_views.py:117
-#: cdi_forms/views/background_info_views.py:458 cdi_forms/views/views.py:224
+#: cdi_forms/views/background_info_views.py:133
+#: cdi_forms/views/background_info_views.py:465
 #, python-format
 msgid "Your child should be between %(min_age)d to %(max_age)d months of age."
 msgstr ""
 "Votre enfant devrait être âgé entre %(min_age)d et %(max_age)d mois.  "
 "Veuillez communiquer avec le chercheur de votre étude"
 
-#: cdi_forms/views/background_info_views.py:151
-#: cdi_forms/views/background_info_views.py:489 cdi_forms/views/views.py:255
+#: cdi_forms/views/background_info_views.py:167
+#: cdi_forms/views/background_info_views.py:496
 #, python-format
 msgid " Not the right age? <a href='%(sgurl)s'> Click here</a>"
 msgstr " Pas du bon âge? <a href='%(sgurl)s'> Cliquez ici</a>"
 
-#: cdi_forms/views/background_info_views.py:161
-#: cdi_forms/views/background_info_views.py:499 cdi_forms/views/views.py:265
+#: cdi_forms/views/background_info_views.py:177
+#: cdi_forms/views/background_info_views.py:506
 msgid ""
 " Not the right age? You should contact your researcher for steps on what to "
 "do next."
@@ -2424,7 +2453,7 @@ msgstr ""
 msgid "Default"
 msgstr ""
 
-#: researcher_UI/forms.py:26 researcher_UI/forms.py:271
+#: researcher_UI/forms.py:26 researcher_UI/forms.py:277
 msgid "Opening Dialog Box"
 msgstr ""
 

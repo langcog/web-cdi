@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-07 06:21+0000\n"
+"POT-Creation-Date: 2023-07-19 13:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,246 +19,273 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % "
 "1 == 0) ? 1: (n % 10 == 0 && n % 1 == 0 && n > 10) ? 2 : 3;\n"
 
-#: cdi_forms/forms.py:31 cdi_forms/forms.py:32 cdi_forms/models.py:639
-#: cdi_forms/templates/cdi_forms/administration_base.html:166
+#: cdi_forms/forms/contact_form.py:15
+msgid "Your Name"
+msgstr "שמך"
+
+#: cdi_forms/forms/contact_form.py:17
+msgid "Your Email Address"
+msgstr "כתובת המייל שלך"
+
+#: cdi_forms/forms/contact_form.py:23
+msgid "Your Test URL"
+msgstr "הקישור שלך לשאלון"
+
+#: cdi_forms/forms/contact_form.py:26
+msgid "What would you like to tell us?"
+msgstr "מה תרצה לספר לנו?"
+
+#: cdi_forms/forms/contact_form.py:46
+#: cdi_forms/templates/cdi_forms/_navigation_buttons.html:15
+#: cdi_forms/templates/cdi_forms/administration_form.html:13
+#: cdi_forms/templates/cdi_forms/cdi_form.html:11
+#: cdi_forms/templates/cdi_forms/cdi_form.html:323 cdi_forms/views/views.py:138
+msgid "Submit"
+msgstr "שלח"
+
+#: cdi_forms/forms/forms.py:30 cdi_forms/forms/forms.py:31
+#: cdi_forms/models.py:639
+#: cdi_forms/templates/cdi_forms/administration_base.html:162
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:150
-#: cdi_forms/templates/cdi_forms/cdi_base.html:160
+#: cdi_forms/templates/cdi_forms/cdi_base.html:153
 msgid "No"
 msgstr "לא"
 
-#: cdi_forms/forms.py:31 cdi_forms/forms.py:32 cdi_forms/models.py:638
+#: cdi_forms/forms/forms.py:30 cdi_forms/forms/forms.py:31
+#: cdi_forms/models.py:638
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:153
 msgid "Yes"
 msgstr "כן"
 
-#: cdi_forms/forms.py:32 cdi_forms/forms.py:44 cdi_forms/forms.py:73
-#: cdi_forms/forms.py:95 cdi_forms/forms.py:106 cdi_forms/forms.py:130
-#: cdi_forms/forms.py:209 cdi_forms/models.py:172 cdi_forms/models.py:231
+#: cdi_forms/forms/forms.py:31 cdi_forms/forms/forms.py:43
+#: cdi_forms/forms/forms.py:72 cdi_forms/forms/forms.py:94
+#: cdi_forms/forms/forms.py:105 cdi_forms/forms/forms.py:129
+#: cdi_forms/forms/forms.py:208 cdi_forms/models.py:172 cdi_forms/models.py:231
 #: cdi_forms/models.py:236 cdi_forms/models.py:329 cdi_forms/models.py:641
 msgid "Prefer not to disclose"
 msgstr "מעדיף לא לענות"
 
-#: cdi_forms/forms.py:35
+#: cdi_forms/forms/forms.py:34
 msgid "Under $25,000"
 msgstr "פחות מ5000 שח"
 
-#: cdi_forms/forms.py:36
+#: cdi_forms/forms/forms.py:35
 msgid "$25,000-$50,000"
 msgstr "5,000-10,000 שח"
 
-#: cdi_forms/forms.py:37
+#: cdi_forms/forms/forms.py:36
 msgid "$50,000-$75,000"
 msgstr "10,000-15,000 שח"
 
-#: cdi_forms/forms.py:38
+#: cdi_forms/forms/forms.py:37
 msgid "$75,000-$100,000"
 msgstr "15,000-20,000 שח"
 
-#: cdi_forms/forms.py:39
+#: cdi_forms/forms/forms.py:38
 msgid "$100,000-$125,000"
 msgstr "20,000-25,000 שח"
 
-#: cdi_forms/forms.py:40
+#: cdi_forms/forms/forms.py:39
 msgid "$125,000-$150,000"
 msgstr "25,000-30,000 שח"
 
-#: cdi_forms/forms.py:41
+#: cdi_forms/forms/forms.py:40
 msgid "$150,000-$175,000"
 msgstr "30,000-35,000 שח"
 
-#: cdi_forms/forms.py:42
+#: cdi_forms/forms/forms.py:41
 msgid "$175,000-$200,000"
 msgstr "35,000-40,000 שח"
 
-#: cdi_forms/forms.py:43
+#: cdi_forms/forms/forms.py:42
 msgid "Over $200,000"
 msgstr "מעל 40,000 שח"
 
-#: cdi_forms/forms.py:47
+#: cdi_forms/forms/forms.py:46
 msgid "American Indian / Alaska Native"
 msgstr "כלל לא דתי"
 
-#: cdi_forms/forms.py:48
+#: cdi_forms/forms/forms.py:47
 msgid "Asian (Far East, Southeast Asia, Indian Sub-continent)"
 msgstr "מסורתי"
 
-#: cdi_forms/forms.py:49
+#: cdi_forms/forms/forms.py:48
 msgid "Native Hawaiian or Other Pacific Islander"
 msgstr "דתי"
 
-#: cdi_forms/forms.py:50
+#: cdi_forms/forms/forms.py:49
 msgid "Black or African American"
 msgstr "חרדי"
 
-#: cdi_forms/forms.py:51
+#: cdi_forms/forms/forms.py:50
 msgid "White"
 msgstr "מעדיף לא לענות"
 
-#: cdi_forms/forms.py:52 cdi_forms/forms.py:208 cdi_forms/models.py:142
-#: cdi_forms/models.py:242 cdi_forms/models.py:463
+#: cdi_forms/forms/forms.py:51 cdi_forms/forms/forms.py:207
+#: cdi_forms/models.py:142 cdi_forms/models.py:242 cdi_forms/models.py:463
 msgid "Other"
 msgstr "אחר"
 
-#: cdi_forms/forms.py:57
+#: cdi_forms/forms/forms.py:56
 msgid "Less than 3 lbs, 0 oz"
 msgstr ""
 
-#: cdi_forms/forms.py:58
+#: cdi_forms/forms/forms.py:57
 msgid "3 lbs, 0 oz - 3 lbs, 7 oz"
 msgstr ""
 
-#: cdi_forms/forms.py:59
+#: cdi_forms/forms/forms.py:58
 msgid "3 lbs, 8 oz - 3 lbs, 15 oz"
 msgstr ""
 
-#: cdi_forms/forms.py:60
+#: cdi_forms/forms/forms.py:59
 msgid "4 lbs, 0 oz - 4 lbs, 7 oz"
 msgstr ""
 
-#: cdi_forms/forms.py:61
+#: cdi_forms/forms/forms.py:60
 msgid "4 lbs, 8 oz - 4 lbs, 15 oz"
 msgstr ""
 
-#: cdi_forms/forms.py:62
+#: cdi_forms/forms/forms.py:61
 msgid "5 lbs, 0 oz - 5 lbs, 7 oz"
 msgstr ""
 
-#: cdi_forms/forms.py:63
+#: cdi_forms/forms/forms.py:62
 msgid "5 lbs, 8 oz - 5 lbs, 15 oz"
 msgstr ""
 
-#: cdi_forms/forms.py:64
+#: cdi_forms/forms/forms.py:63
 msgid "6 lbs, 0 oz - 6 lbs, 7 oz"
 msgstr ""
 
-#: cdi_forms/forms.py:65
+#: cdi_forms/forms/forms.py:64
 msgid "6 lbs, 8 oz - 6 lbs, 15 oz"
 msgstr ""
 
-#: cdi_forms/forms.py:66
+#: cdi_forms/forms/forms.py:65
 msgid "7 lbs, 0 oz - 7 lbs, 7 oz"
 msgstr ""
 
-#: cdi_forms/forms.py:67
+#: cdi_forms/forms/forms.py:66
 msgid "7 lbs, 8 oz - 7 lbs, 15 oz"
 msgstr ""
 
-#: cdi_forms/forms.py:68
+#: cdi_forms/forms/forms.py:67
 msgid "8 lbs, 0 oz - 8 lbs, 7 oz"
 msgstr ""
 
-#: cdi_forms/forms.py:69
+#: cdi_forms/forms/forms.py:68
 msgid "8 lbs, 8 oz - 8 lbs, 15 oz"
 msgstr ""
 
-#: cdi_forms/forms.py:70
+#: cdi_forms/forms/forms.py:69
 msgid "9 lbs, 0 oz - 9 lbs, 7 oz"
 msgstr ""
 
-#: cdi_forms/forms.py:71
+#: cdi_forms/forms/forms.py:70
 msgid "9 lbs, 8 oz - 9 lbs, 15 oz"
 msgstr ""
 
-#: cdi_forms/forms.py:72
+#: cdi_forms/forms/forms.py:71
 msgid "10 lbs, 0 oz or more"
 msgstr ""
 
-#: cdi_forms/forms.py:79
+#: cdi_forms/forms/forms.py:78
 msgid "Less than 1500 grams"
 msgstr "פחות מ1500 גרם"
 
-#: cdi_forms/forms.py:80
+#: cdi_forms/forms/forms.py:79
 msgid "1500 grams - 1749 grams"
 msgstr "1500-1749 גרם"
 
-#: cdi_forms/forms.py:81
+#: cdi_forms/forms/forms.py:80
 msgid "1750 grams - 1999 grams"
 msgstr "1750-1999 גרם"
 
-#: cdi_forms/forms.py:82
+#: cdi_forms/forms/forms.py:81
 msgid "2000 grams - 2249 grams"
 msgstr "2000-2249 גרם"
 
-#: cdi_forms/forms.py:83
+#: cdi_forms/forms/forms.py:82
 msgid "2250 grams - 2499 grams"
 msgstr "2250-2499 גרם"
 
-#: cdi_forms/forms.py:84
+#: cdi_forms/forms/forms.py:83
 msgid "2500 grams - 2749 grams"
 msgstr "2500-2749 גרם"
 
-#: cdi_forms/forms.py:85
+#: cdi_forms/forms/forms.py:84
 msgid "2750 grams - 2999 grams"
 msgstr "2750-2999 גרם"
 
-#: cdi_forms/forms.py:86
+#: cdi_forms/forms/forms.py:85
 msgid "3000 grams - 3249 grams"
 msgstr "3000-3249 גרם"
 
-#: cdi_forms/forms.py:87
+#: cdi_forms/forms/forms.py:86
 msgid "3250 grams - 3499 grams"
 msgstr "3250-3499 גרם"
 
-#: cdi_forms/forms.py:88
+#: cdi_forms/forms/forms.py:87
 msgid "3500 grams - 3749 grams"
 msgstr "3500-3749 גרם"
 
-#: cdi_forms/forms.py:89
+#: cdi_forms/forms/forms.py:88
 msgid "3750 grams - 3999 grams"
 msgstr "3750-3999 גרם"
 
-#: cdi_forms/forms.py:90
+#: cdi_forms/forms/forms.py:89
 msgid "4000 grams - 4249 grams"
 msgstr "4000-4249 גרם"
 
-#: cdi_forms/forms.py:91
+#: cdi_forms/forms/forms.py:90
 msgid "4250 grams - 4499 grams"
 msgstr ""
 
-#: cdi_forms/forms.py:92
+#: cdi_forms/forms/forms.py:91
 msgid "4500 grams - 4749 grams"
 msgstr ""
 
-#: cdi_forms/forms.py:93
+#: cdi_forms/forms/forms.py:92
 msgid "4750 grams - 4999 grams"
 msgstr "4750-4999 גרם"
 
-#: cdi_forms/forms.py:94
+#: cdi_forms/forms/forms.py:93
 msgid "5000 grams or more"
 msgstr "5000 גרם או יותר"
 
-#: cdi_forms/forms.py:102 cdi_forms/forms.py:118
+#: cdi_forms/forms/forms.py:101 cdi_forms/forms/forms.py:117
 msgid "12 (High school graduate)"
 msgstr "12 (בוגר תיכון)"
 
-#: cdi_forms/forms.py:103 cdi_forms/forms.py:122
+#: cdi_forms/forms/forms.py:102 cdi_forms/forms/forms.py:121
 msgid "16 (College graduate)"
 msgstr "16 (בוגר ב.א)"
 
-#: cdi_forms/forms.py:104 cdi_forms/forms.py:124
+#: cdi_forms/forms/forms.py:103 cdi_forms/forms/forms.py:123
 msgid "18 (Advanced degree)"
 msgstr "18 (בוגר מ.א)"
 
-#: cdi_forms/forms.py:105 cdi_forms/forms.py:129
+#: cdi_forms/forms/forms.py:104 cdi_forms/forms/forms.py:128
 msgid "23 or more"
 msgstr "23 או יותר"
 
-#: cdi_forms/forms.py:142 cdi_forms/models.py:475
+#: cdi_forms/forms/forms.py:141 cdi_forms/models.py:475
 msgid "Does you child have siblings?"
 msgstr "האם לילדך יש אחים?"
 
-#: cdi_forms/forms.py:145 cdi_forms/models.py:478
+#: cdi_forms/forms/forms.py:144 cdi_forms/models.py:478
 msgid "How many siblings does you child have?"
 msgstr "כמה אחים יש לילד שלך?"
 
-#: cdi_forms/forms.py:150
+#: cdi_forms/forms/forms.py:149
 msgid "Please provide the sex and age of each sibling"
 msgstr ""
 "בבקשה ציין את גיל ומין האחים. לדוגמא, אם לילד עליו אתה ממלא את השאלון יש "
 "אחות בת ארבע, יש לרשום בת 4 שנים. אם לילד יש אח בן חצי שנה יש לרשום בן 6 "
 "חודשים. "
 
-#: cdi_forms/forms.py:160
+#: cdi_forms/forms/forms.py:159
 msgid ""
 "To protect your privacy, we never store your child's date of birth, we only "
 "record age in months."
@@ -266,126 +293,128 @@ msgstr ""
 "כדי לשמור על פרטיותך, אנחנו לא שומרים במערכת שלנו את תאריך הלידה של ילדך אלא "
 "רק את גילו בחודשים."
 
-#: cdi_forms/forms.py:163
+#: cdi_forms/forms/forms.py:162
 msgid "Child DOB<span class=\"asteriskField\">*</span>"
 msgstr "<span class=\"asteriskField\">*</span> תאריך הלידה של הילד/ה "
 
-#: cdi_forms/forms.py:169
+#: cdi_forms/forms/forms.py:168
 msgid "Age (in months)<span class=\"asteriskField\">*</span>"
 msgstr "גיל (בחודשים)"
 
-#: cdi_forms/forms.py:172
+#: cdi_forms/forms/forms.py:171
 msgid "This field will update when you enter or change your child's DOB."
 msgstr "השדה הזה יתעדכן כאשר יוזן תאריך הלידה של ילדך."
 
-#: cdi_forms/forms.py:183
+#: cdi_forms/forms/forms.py:182
 msgid "What is your postal/zip code?"
 msgstr "מהו המיקוד של ביתך?"
 
-#: cdi_forms/forms.py:192 cdi_forms/models.py:314
+#: cdi_forms/forms/forms.py:191 cdi_forms/models.py:314
 msgid "Is your child Hispanic or Latino?"
 msgstr ""
 
-#: cdi_forms/forms.py:197 cdi_forms/models.py:217
+#: cdi_forms/forms/forms.py:196 cdi_forms/models.py:217
 msgid "Early"
 msgstr "לפני תאריך הלידה המשוער"
 
-#: cdi_forms/forms.py:197 cdi_forms/models.py:217
+#: cdi_forms/forms/forms.py:196 cdi_forms/models.py:217
 msgid "Late"
 msgstr "אחרי תאריך הלידה המשוער"
 
-#: cdi_forms/forms.py:199 cdi_forms/models.py:215
+#: cdi_forms/forms/forms.py:198 cdi_forms/models.py:215
 msgid "Was he/she early or late?"
 msgstr "האם ילדך נולד לפני או אחרי תאריך הלידה המשוער?"
 
-#: cdi_forms/forms.py:206 cdi_forms/models.py:140
+#: cdi_forms/forms/forms.py:205 cdi_forms/models.py:140
 msgid "Male"
 msgstr "זכר"
 
-#: cdi_forms/forms.py:207 cdi_forms/models.py:141
+#: cdi_forms/forms/forms.py:206 cdi_forms/models.py:141
 msgid "Female"
 msgstr "נקבה"
 
-#: cdi_forms/forms.py:212
+#: cdi_forms/forms/forms.py:211
 msgid "Sex"
 msgstr "מין"
 
-#: cdi_forms/forms.py:217
+#: cdi_forms/forms/forms.py:216
 msgid "Which language(s)"
 msgstr "איזו שפה/ אילו שפות"
 
-#: cdi_forms/forms.py:223 cdi_forms/forms.py:229 cdi_forms/forms.py:235
+#: cdi_forms/forms/forms.py:222 cdi_forms/forms/forms.py:228
+#: cdi_forms/forms/forms.py:234
 msgid "Please specify"
 msgstr "נא לציין"
 
-#: cdi_forms/forms.py:242
+#: cdi_forms/forms/forms.py:241
 #, fuzzy
 #| msgid "Please specify"
 msgctxt "caregiver_other"
 msgid "Please specify"
 msgstr "נא לציין"
 
-#: cdi_forms/forms.py:337 cdi_forms/forms.py:391
+#: cdi_forms/forms/forms.py:336 cdi_forms/forms/forms.py:390
 msgid "This field cannot be empty"
 msgstr "לא ניתן להשאיר ריק"
 
-#: cdi_forms/forms.py:344
+#: cdi_forms/forms/forms.py:343
 msgid "Please enter number of weeks"
 msgstr ""
 
-#: cdi_forms/forms.py:351
+#: cdi_forms/forms/forms.py:350
 msgid "Cannot be more than 18 weeks early"
 msgstr ""
 
-#: cdi_forms/forms.py:358
+#: cdi_forms/forms/forms.py:357
 msgid "Cannot be more than 4 weeks late"
 msgstr ""
 
-#: cdi_forms/forms.py:364 cdi_forms/forms.py:385
+#: cdi_forms/forms/forms.py:363 cdi_forms/forms/forms.py:384
 msgid "Please enter your child's DOB in the field above."
 msgstr "בבקשה ציין את תאריך הלידה של ילדך"
 
-#: cdi_forms/forms.py:377
+#: cdi_forms/forms/forms.py:376
 msgid "Your baby is too young for this version of the CDI."
 msgstr "ילדך צעיר מדי כדי למלא את הגירסה הזו של השאלון"
 
-#: cdi_forms/forms.py:381
+#: cdi_forms/forms/forms.py:380
 msgid "Your baby is too old for this version of the CDI."
 msgstr "ילדך מבוגר מדי כדי למלא את הגירסה הזו של השאלון"
 
-#: cdi_forms/forms.py:413 cdi_forms/forms.py:416 cdi_forms/models.py:203
-#: cdi_forms/models.py:206 cdi_forms/models.py:276 cdi_forms/models.py:279
+#: cdi_forms/forms/forms.py:412 cdi_forms/forms/forms.py:415
+#: cdi_forms/models.py:203 cdi_forms/models.py:206 cdi_forms/models.py:276
+#: cdi_forms/models.py:279
 msgid "Birth weight"
 msgstr "משקל לידה"
 
-#: cdi_forms/forms.py:427 cdi_forms/models.py:191
+#: cdi_forms/forms/forms.py:426 cdi_forms/models.py:191
 msgid "Was your child born as part of a multiple birth?"
 msgstr "האם הילד תאום?"
 
-#: cdi_forms/forms.py:436
+#: cdi_forms/forms/forms.py:435
 msgid ""
 "Was your child born early or late (more than one week before or after the "
 "due date)?"
 msgstr "האם ילדך נולד יותר משבוע לפני או אחרי תאריך הלידה המשוער?"
 
-#: cdi_forms/forms.py:444
+#: cdi_forms/forms/forms.py:443
 msgid "Does your child regularly hear a language other than English?"
 msgstr "האם ילדך חשוף באופן קבוע לשפה נוספת?"
 
-#: cdi_forms/forms.py:452
+#: cdi_forms/forms/forms.py:451
 msgid "Has your child experienced chronic ear infections (5 or more)?"
 msgstr "האם ילדך סובל מדלקות אוזניים חוזרות (5 פעמים או יותר)"
 
-#: cdi_forms/forms.py:460 cdi_forms/models.py:389
+#: cdi_forms/forms/forms.py:459 cdi_forms/models.py:389
 msgid "Do you suspect that your child may have hearing loss?"
 msgstr "האם יש לך סיבה לחשוש שילדך סובל מאובדן שמיעה?"
 
-#: cdi_forms/forms.py:468 cdi_forms/models.py:399
+#: cdi_forms/forms/forms.py:467 cdi_forms/models.py:399
 msgid ""
 "Is there some reason to suspect that your child may have vision problems?"
 msgstr "האם יש לך סיבה לחשוש שילדך סובל מקשיי ראיה?"
 
-#: cdi_forms/forms.py:476 cdi_forms/models.py:410
+#: cdi_forms/forms/forms.py:475 cdi_forms/models.py:410
 msgid ""
 "Has your child had any major illnesses, hospitalizations, or diagnosed "
 "disabilities?"
@@ -393,53 +422,53 @@ msgstr ""
 "האם ילדך סבל מחבלות, מחלות משמעותיות, אשפוז בבית חולים או אובחן עם לקות "
 "כלשהי?"
 
-#: cdi_forms/forms.py:484 cdi_forms/models.py:421
+#: cdi_forms/forms/forms.py:483 cdi_forms/models.py:421
 msgid ""
 "Has your child ever received any services for speech, language, or "
 "development issues?"
 msgstr "האם ילדך טופל עקב קשיי שפה, דיבור או התפתחות?"
 
-#: cdi_forms/forms.py:492 cdi_forms/models.py:435
+#: cdi_forms/forms/forms.py:491 cdi_forms/models.py:435
 msgid ""
 "Are you worried about your child's progress in language or communication?"
 msgstr "האם את/ה מודאג/ת לגבי התקדמות השפה והתקשורת של ילדך?"
 
-#: cdi_forms/forms.py:500 cdi_forms/models.py:446
+#: cdi_forms/forms/forms.py:499 cdi_forms/models.py:446
 msgid ""
 "Have you or anyone in your immediate family been diagnosed with a language "
 "or learning disability?"
 msgstr ""
 "האם את/ה או מישהו מבני משפחתך הגרעינית אובחן עם לקות שפה או לקות למידה?"
 
-#: cdi_forms/forms.py:537
+#: cdi_forms/forms/forms.py:536
 msgid "mm/dd/yyyy"
 msgstr ""
 
-#: cdi_forms/forms.py:543
+#: cdi_forms/forms/forms.py:542
 msgid "dd/mm/yyyy"
 msgstr ""
 
-#: cdi_forms/forms.py:763 cdi_forms/models.py:308
+#: cdi_forms/forms/forms.py:762 cdi_forms/models.py:308
 msgid "Estimated Annual Family Income (in USD)"
 msgstr "הכנסה משפחתית חודשית בשקלים (ברוטו)"
 
-#: cdi_forms/forms.py:771
+#: cdi_forms/forms/forms.py:770
 msgid "My child is (check all that apply):"
 msgstr "הילד שלי (נא לסמן את כל מה שרלוונטי):"
 
-#: cdi_forms/forms.py:776 cdi_forms/forms.py:794
+#: cdi_forms/forms/forms.py:775 cdi_forms/forms/forms.py:793
 msgid "Basic Information"
 msgstr "מידע בסיסי"
 
-#: cdi_forms/forms.py:813
+#: cdi_forms/forms/forms.py:812
 msgid "Family Background"
 msgstr "רקע משפחתי"
 
-#: cdi_forms/forms.py:825 cdi_forms/models.py:318
+#: cdi_forms/forms/forms.py:824 cdi_forms/models.py:318
 msgid "Child's Ethnicity"
 msgstr "מידת הדתיות של המשפחה"
 
-#: cdi_forms/forms.py:829
+#: cdi_forms/forms/forms.py:828
 msgid ""
 "The following information is being collected for the sole purpose of "
 "reporting to our grant-funding institute, i.e.,  NIH (National Institute of "
@@ -447,46 +476,22 @@ msgid ""
 "inclusiveness of our research. Your cooperation is appreciated, but optional."
 msgstr ""
 
-#: cdi_forms/forms.py:837
+#: cdi_forms/forms/forms.py:836
 msgid "Caregiver Information"
 msgstr "מידע על ההורים"
 
-#: cdi_forms/forms.py:842
+#: cdi_forms/forms/forms.py:841
 msgid "Language Exposure"
 msgstr "חשיפה לשפות"
 
-#: cdi_forms/forms.py:853
+#: cdi_forms/forms/forms.py:852
 msgid "Health"
 msgstr "בריאות"
 
-#: cdi_forms/forms.py:879
+#: cdi_forms/forms/forms.py:878
 #, python-format
 msgid "Your identifier for %(source)s"
 msgstr ""
-
-#: cdi_forms/forms.py:909
-msgid "Your Name"
-msgstr "שמך"
-
-#: cdi_forms/forms.py:911
-msgid "Your Email Address"
-msgstr "כתובת המייל שלך"
-
-#: cdi_forms/forms.py:917
-msgid "Your Test URL"
-msgstr "הקישור שלך לשאלון"
-
-#: cdi_forms/forms.py:920
-msgid "What would you like to tell us?"
-msgstr "מה תרצה לספר לנו?"
-
-#: cdi_forms/forms.py:940
-#: cdi_forms/templates/cdi_forms/_navigation_buttons.html:15
-#: cdi_forms/templates/cdi_forms/administration_form.html:13
-#: cdi_forms/templates/cdi_forms/cdi_form.html:11
-#: cdi_forms/templates/cdi_forms/cdi_form.html:323 cdi_forms/views/views.py:377
-msgid "Submit"
-msgstr "שלח"
 
 #: cdi_forms/languages.py:6
 msgid "аҧсуа (Abkhaz)"
@@ -1504,6 +1509,65 @@ msgid ""
 "vision, speech, learning difficulty"
 msgstr ""
 
+#: cdi_forms/templates/cdi_forms/_captcha_page.html:7
+#: cdi_forms/templates/cdi_forms/cdi_form.html:285
+msgid ""
+"You are almost done! Click \"Yes\" if you agree with ALL of the following "
+"points. Your answer will not affect your results. There is nothing wrong "
+"with choosing \"No\":"
+msgstr ""
+"כמעט סיימת! לחץ \"כן\" אם את/ה מסכים עם כל הנקודות הבאות. התשובות שלך לא "
+"ישפיעו על התוצאות. אין שום בעיה  לבחור \"לא\""
+
+#: cdi_forms/templates/cdi_forms/_captcha_page.html:11
+#: cdi_forms/templates/cdi_forms/cdi_form.html:289
+#, python-format
+msgid "You have a child who is %(age)s months old."
+msgstr "יש לך ילד/ה בן/ת %(age)s חודשים. "
+
+#: cdi_forms/templates/cdi_forms/_captcha_page.html:12
+#: cdi_forms/templates/cdi_forms/cdi_form.html:290
+msgid "You filled out the entire questionnaire to the best of your ability."
+msgstr "מילאת את כל השאלון כמיטב יכולתך."
+
+#: cdi_forms/templates/cdi_forms/_captcha_page.html:13
+#: cdi_forms/templates/cdi_forms/cdi_form.html:291
+msgid "You are taking this questionnaire for the FIRST time."
+msgstr "זו הפעם הראשונה שאתה ממלא את השאלון."
+
+#: cdi_forms/templates/cdi_forms/_captcha_page.html:22
+#: cdi_forms/templates/cdi_forms/cdi_form.html:300
+#, fuzzy, python-format
+#| msgid ""
+#| "Yes, I have a child who is %(age.0)s months old, I filled out the entire "
+#| "questionnaire, and I am taking this questionnaire for the first time."
+msgid ""
+"Yes, I have a child who is %(age)s months old, I filled out the entire "
+"questionnaire, and I am taking this questionnaire for the first time."
+msgstr ""
+"כן, יש לי ילד/ה בן/ת %(age.0)s חודשים, מילאתי את כל השאלון, וזו הפעם הראשונה "
+"שאני ממלא שאלון זה."
+
+#: cdi_forms/templates/cdi_forms/_captcha_page.html:28
+#: cdi_forms/templates/cdi_forms/cdi_form.html:306
+#, fuzzy, python-format
+#| msgid ""
+#| "No, I do NOT have a child who is %(age.0)s months old, I have NOT filled "
+#| "out the entire questionnaire, and/or I have taken this questionnaire "
+#| "before."
+msgid ""
+"No, I do NOT have a child who is %(age)s months old, I have NOT filled out "
+"the entire questionnaire, and/or I have taken this questionnaire before."
+msgstr ""
+"לא, אין לי ילד/ה בן/ת %(age.0)s חודשים, לא מילאתי את כל השאלון ו/או זו אינה "
+"הפעם הראשונה שאני ממלא את השאלון."
+
+#: cdi_forms/templates/cdi_forms/_captcha_page.html:34
+#: cdi_forms/templates/cdi_forms/cdi_form.html:312
+msgid ""
+"Finally, please check the Captcha box below to display the submit button!"
+msgstr "סמן בתיבה להלן אם את/ה לא רובוט!"
+
 #: cdi_forms/templates/cdi_forms/_navigation_buttons.html:7
 #: cdi_forms/templates/cdi_forms/cdi_form.html:321
 msgid "Previous Page"
@@ -1520,8 +1584,8 @@ msgstr "לעמוד הבא"
 #: cdi_forms/templates/cdi_forms/cdi_form.html:10
 #: cdi_forms/templates/cdi_forms/cdi_form.html:327
 #: cdi_forms/templates/cdi_forms/study_group.html:6
-#: cdi_forms/views/views.py:338 researcher_UI/forms.py:215
-#: researcher_UI/forms.py:447
+#: cdi_forms/views/views.py:101 researcher_UI/forms.py:221
+#: researcher_UI/forms.py:446
 msgid "Save"
 msgstr "שמור"
 
@@ -1532,7 +1596,7 @@ msgstr "שמור"
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:32
 #: cdi_forms/templates/cdi_forms/cdi_form.html:14
 #: cdi_forms/templates/cdi_forms/cdi_form.html:328
-#: cdi_forms/views/background_info_views.py:342 cdi_forms/views/views.py:363
+#: cdi_forms/views/background_info_views.py:348 cdi_forms/views/views.py:126
 msgid "Go back to Background Info"
 msgstr "חזור לפרטי רקע"
 
@@ -1591,59 +1655,96 @@ msgid ""
 "questions."
 msgstr "ניתן להשתמש בכפתור tab ובחצים כדי לנווט במסמך ולענות על שאלות."
 
-#: cdi_forms/templates/cdi_forms/administration_base.html:107
-#: cdi_forms/templates/cdi_forms/cdi_base.html:107
+#: cdi_forms/templates/cdi_forms/administration_base.html:102
+#: cdi_forms/templates/cdi_forms/cdi_base.html:100
 msgid "Due date"
 msgstr "תאריך אחרון לשליחת השאלון:"
 
-#: cdi_forms/templates/cdi_forms/administration_base.html:112
-#: cdi_forms/templates/cdi_forms/cdi_base.html:112
+#: cdi_forms/templates/cdi_forms/administration_base.html:107
+#: cdi_forms/templates/cdi_forms/cdi_base.html:105
 msgid "Show waiver of documentation"
 msgstr "הראה את נוסח ההודעה שאישרתי"
 
-#: cdi_forms/templates/cdi_forms/administration_base.html:117
-#: cdi_forms/templates/cdi_forms/cdi_base.html:117
+#: cdi_forms/templates/cdi_forms/administration_base.html:112
+#: cdi_forms/templates/cdi_forms/cdi_base.html:110
 msgid "Reach out to the Web-CDI Team!"
 msgstr "צור קשר עם צוות Web-CDI"
 
-#: cdi_forms/templates/cdi_forms/administration_base.html:129
+#: cdi_forms/templates/cdi_forms/administration_base.html:124
 #: cdi_forms/templates/cdi_forms/cdi_form.html:24
 msgid "Table of Contents:"
 msgstr "תוכן עניינים:"
 
-#: cdi_forms/templates/cdi_forms/administration_base.html:131
+#: cdi_forms/templates/cdi_forms/administration_base.html:126
 #: cdi_forms/templates/cdi_forms/cdi_form.html:26
 msgid "Contents:"
 msgstr "תוכן:"
 
-#: cdi_forms/templates/cdi_forms/administration_base.html:133
+#: cdi_forms/templates/cdi_forms/administration_base.html:128
 #: cdi_forms/templates/cdi_forms/cdi_form.html:28
 #, fuzzy
 #| msgid "Instructions: "
 msgid "Instructions:"
 msgstr "הוראות"
 
-#: cdi_forms/templates/cdi_forms/administration_base.html:167
-#: cdi_forms/templates/cdi_forms/cdi_base.html:161
+#: cdi_forms/templates/cdi_forms/administration_base.html:163
+#: cdi_forms/templates/cdi_forms/cdi_base.html:154
 msgid "Okay"
 msgstr "כן"
 
-#: cdi_forms/templates/cdi_forms/administration_base.html:178
-#: cdi_forms/templates/cdi_forms/cdi_base.html:174
+#: cdi_forms/templates/cdi_forms/administration_base.html:174
+#: cdi_forms/templates/cdi_forms/cdi_base.html:167
 msgid "Waiver Denied"
 msgstr "האישור נדחה"
 
-#: cdi_forms/templates/cdi_forms/administration_base.html:182
-#: cdi_forms/templates/cdi_forms/cdi_base.html:178
+#: cdi_forms/templates/cdi_forms/administration_base.html:178
+#: cdi_forms/templates/cdi_forms/cdi_base.html:171
 msgid ""
 "Thank you for your response. We are unable to continue. Please close the "
 "window. If you would like, you may review the Waiver."
 msgstr "תודה על תגובתך. ניתן להמשיך ולמלא את השאלון רק לאחר אישור הודעה זו."
 
-#: cdi_forms/templates/cdi_forms/administration_base.html:185
-#: cdi_forms/templates/cdi_forms/cdi_base.html:181
+#: cdi_forms/templates/cdi_forms/administration_base.html:181
+#: cdi_forms/templates/cdi_forms/cdi_base.html:174
 msgid "Review Waiver"
 msgstr "הצג שוב את ההודעה"
+
+#: cdi_forms/templates/cdi_forms/administration_contact.html:6
+#: cdi_forms/templates/cdi_forms/contact.html:6
+msgid "Contact Form "
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/administration_contact.html:33
+#: cdi_forms/templates/cdi_forms/contact.html:33
+msgid ""
+"Fill out the form below and a member of our team will get back to you soon!"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/administration_contact.html:67
+#: cdi_forms/templates/cdi_forms/contact.html:67
+msgid " characters remaining"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/administration_expired.html:9
+#: cdi_forms/templates/cdi_forms/expired.html:9
+msgid "Link Expired"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/administration_expired.html:32
+#: cdi_forms/templates/cdi_forms/administration_summary.html:162
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:31
+#: cdi_forms/templates/cdi_forms/expired.html:32
+#: cdi_forms/templates/cdi_forms/overflow.html:37
+#: cdi_forms/templates/cdi_forms/study_overflow.html:37
+msgid "MB-CDI Lab Logo"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/administration_expired.html:36
+#: cdi_forms/templates/cdi_forms/expired.html:36
+msgid ""
+"Unfortunately the time allowed to complete this survey has expired.  Please "
+"contact your researcher."
+msgstr ""
 
 #: cdi_forms/templates/cdi_forms/administration_form.html:35
 #: cdi_forms/templates/cdi_forms/cdi_items.html:18
@@ -1652,11 +1753,22 @@ msgstr "הצג שוב את ההודעה"
 msgid "Hide/Show Instructions: "
 msgstr "הוראות"
 
-#: cdi_forms/templates/cdi_forms/administration_form.html:326
+#: cdi_forms/templates/cdi_forms/administration_form.html:119
+msgid ""
+"Thank you for completing!  Please review your responses and if you are "
+"ready, click submit!"
+msgstr ""
+
+#: cdi_forms/templates/cdi_forms/administration_form.html:263
 #: cdi_forms/templates/cdi_forms/cdi_form.html:381
 msgid ""
 "Are you ready to submit? You cannot change your answers after submission."
 msgstr "האם אתה מוכן להגיש? לא תוכל לשנות את תשובותיך לאחר הגשת השאלון."
+
+#: cdi_forms/templates/cdi_forms/administration_form.html:295
+#: cdi_forms/templates/cdi_forms/cdi_form.html:411
+msgid "understands and says"
+msgstr "מבין ואומר"
 
 #: cdi_forms/templates/cdi_forms/administration_instructions.html:28
 #: cdi_forms/templates/cdi_forms/cdi_form.html:60
@@ -1856,15 +1968,9 @@ msgstr "מילים שאומר (%%)"
 msgid "Words Understood (%%)"
 msgstr "מילים שמבין (%%)"
 
-#: cdi_forms/templates/cdi_forms/administration_summary.html:162
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:31
-#: cdi_forms/templates/cdi_forms/expired.html:32
-#: cdi_forms/templates/cdi_forms/overflow.html:37
-msgid "MB-CDI Lab Logo"
-msgstr ""
-
 #: cdi_forms/templates/cdi_forms/administration_summary.html:168
 #: cdi_forms/templates/cdi_forms/overflow.html:40
+#: cdi_forms/templates/cdi_forms/study_overflow.html:40
 msgid "Thank you!"
 msgstr "תודה!"
 
@@ -1990,7 +2096,7 @@ msgstr "המילה הכי קשה שהילד/ה שלי מבין/ה היא INSERTW
 #: cdi_forms/templates/cdi_forms/background_info.html:66
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:124
 #: cdi_forms/templates/cdi_forms/study_group.html:7
-#: cdi_forms/views/background_info_views.py:317 cdi_forms/views/views.py:147
+#: cdi_forms/views/background_info_views.py:325
 msgid "Next"
 msgstr "הבא"
 
@@ -2108,7 +2214,7 @@ msgstr "פרטי רקע"
 
 #: cdi_forms/templates/cdi_forms/backpage_info.html:12
 #: cdi_forms/templates/cdi_forms/backpage_info.html:45
-#: cdi_forms/views/background_info_views.py:329
+#: cdi_forms/views/background_info_views.py:336
 msgid "Finish"
 msgstr "סיום"
 
@@ -2179,86 +2285,8 @@ msgstr "האם לילדך יש אחים?"
 msgid "* or word used in your family"
 msgstr ""
 
-#: cdi_forms/templates/cdi_forms/cdi_form.html:285
-msgid ""
-"You are almost done! Click \"Yes\" if you agree with ALL of the following "
-"points. Your answer will not affect your results. There is nothing wrong "
-"with choosing \"No\":"
-msgstr ""
-"כמעט סיימת! לחץ \"כן\" אם את/ה מסכים עם כל הנקודות הבאות. התשובות שלך לא "
-"ישפיעו על התוצאות. אין שום בעיה  לבחור \"לא\""
-
-#: cdi_forms/templates/cdi_forms/cdi_form.html:289
-#, python-format
-msgid "You have a child who is %(age)s months old."
-msgstr "יש לך ילד/ה בן/ת %(age)s חודשים. "
-
-#: cdi_forms/templates/cdi_forms/cdi_form.html:290
-msgid "You filled out the entire questionnaire to the best of your ability."
-msgstr "מילאת את כל השאלון כמיטב יכולתך."
-
-#: cdi_forms/templates/cdi_forms/cdi_form.html:291
-msgid "You are taking this questionnaire for the FIRST time."
-msgstr "זו הפעם הראשונה שאתה ממלא את השאלון."
-
-#: cdi_forms/templates/cdi_forms/cdi_form.html:300
-#, fuzzy, python-format
-#| msgid ""
-#| "Yes, I have a child who is %(age.0)s months old, I filled out the entire "
-#| "questionnaire, and I am taking this questionnaire for the first time."
-msgid ""
-"Yes, I have a child who is %(age)s months old, I filled out the entire "
-"questionnaire, and I am taking this questionnaire for the first time."
-msgstr ""
-"כן, יש לי ילד/ה בן/ת %(age.0)s חודשים, מילאתי את כל השאלון, וזו הפעם הראשונה "
-"שאני ממלא שאלון זה."
-
-#: cdi_forms/templates/cdi_forms/cdi_form.html:306
-#, fuzzy, python-format
-#| msgid ""
-#| "No, I do NOT have a child who is %(age.0)s months old, I have NOT filled "
-#| "out the entire questionnaire, and/or I have taken this questionnaire "
-#| "before."
-msgid ""
-"No, I do NOT have a child who is %(age)s months old, I have NOT filled out "
-"the entire questionnaire, and/or I have taken this questionnaire before."
-msgstr ""
-"לא, אין לי ילד/ה בן/ת %(age.0)s חודשים, לא מילאתי את כל השאלון ו/או זו אינה "
-"הפעם הראשונה שאני ממלא את השאלון."
-
-#: cdi_forms/templates/cdi_forms/cdi_form.html:312
-msgid ""
-"Finally, please check the Captcha box below to display the submit button!"
-msgstr "סמן בתיבה להלן אם את/ה לא רובוט!"
-
-#: cdi_forms/templates/cdi_forms/cdi_form.html:411
-msgid "understands and says"
-msgstr "מבין ואומר"
-
-#: cdi_forms/templates/cdi_forms/contact.html:6
-msgid "Contact Form "
-msgstr ""
-
-#: cdi_forms/templates/cdi_forms/contact.html:33
-msgid ""
-"Fill out the form below and a member of our team will get back to you soon!"
-msgstr ""
-
-#: cdi_forms/templates/cdi_forms/contact.html:67
-msgid " characters remaining"
-msgstr ""
-
-#: cdi_forms/templates/cdi_forms/expired.html:9
-msgid "Link Expired"
-msgstr ""
-
-#: cdi_forms/templates/cdi_forms/expired.html:36
-msgid ""
-"Unfortunately the time allowed to complete this survey has expired.  Please "
-"contact your researcher."
-msgstr ""
-
 #: cdi_forms/templates/cdi_forms/overflow.html:44
+#: cdi_forms/templates/cdi_forms/study_overflow.html:44
 msgid ""
 "Thank you for your interest in completing the MacArthur-Bates Communicative "
 "Development Inventory (CDI)! It looks like you have completed the CDI form "
@@ -2275,6 +2303,7 @@ msgstr ""
 "edu/\" target=\"_blank\">כאן</a>."
 
 #: cdi_forms/templates/cdi_forms/overflow.html:49
+#: cdi_forms/templates/cdi_forms/study_overflow.html:49
 #, python-format
 msgid ""
 "Thank you for your interest in completing the MacArthur-Bates Communicative "
@@ -2305,22 +2334,22 @@ msgstr ""
 msgid "Born between STARTDATE and ENDDATE"
 msgstr ""
 
-#: cdi_forms/views/background_info_views.py:117
-#: cdi_forms/views/background_info_views.py:458 cdi_forms/views/views.py:224
+#: cdi_forms/views/background_info_views.py:133
+#: cdi_forms/views/background_info_views.py:465
 #, python-format
 msgid "Your child should be between %(min_age)d to %(max_age)d months of age."
 msgstr ""
 "לפי הרישומים שלנו הילד שלך אמור להיות בין גיל %(min_age)d לגיל %(max_age)d "
 "חודשים."
 
-#: cdi_forms/views/background_info_views.py:151
-#: cdi_forms/views/background_info_views.py:489 cdi_forms/views/views.py:255
+#: cdi_forms/views/background_info_views.py:167
+#: cdi_forms/views/background_info_views.py:496
 #, python-format
 msgid " Not the right age? <a href='%(sgurl)s'> Click here</a>"
 msgstr "לא הגיל הנכון? <a href='%(sgurl)s'> לחץ כאן</a>"
 
-#: cdi_forms/views/background_info_views.py:161
-#: cdi_forms/views/background_info_views.py:499 cdi_forms/views/views.py:265
+#: cdi_forms/views/background_info_views.py:177
+#: cdi_forms/views/background_info_views.py:506
 msgid ""
 " Not the right age? You should contact your researcher for steps on what to "
 "do next."
@@ -2349,7 +2378,7 @@ msgstr ""
 msgid "Default"
 msgstr ""
 
-#: researcher_UI/forms.py:26 researcher_UI/forms.py:271
+#: researcher_UI/forms.py:26 researcher_UI/forms.py:277
 msgid "Opening Dialog Box"
 msgstr ""
 
