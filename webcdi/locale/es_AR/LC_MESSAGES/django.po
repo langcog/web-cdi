@@ -1910,8 +1910,7 @@ msgid ""
 "perfectly fine!"
 msgstr ""
 "En esta sección te vamos a mostrar una lista de palabras y algunas frases "
-"sencillas: Queremos saber cuáles son las que  tu hijo/a ENTIENDE, aunque "
-"todavía no las pueda decir y cuáles además de entender, DICE. "
+"sencillas. Queremos saber cuáles son las que  tu hijo/a DICE. "  
 
 #: cdi_forms/templates/cdi_forms/administration_instructions.html:155
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:59
