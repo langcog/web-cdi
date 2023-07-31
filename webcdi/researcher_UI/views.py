@@ -2,14 +2,13 @@ import datetime
 import json
 from typing import Any, Dict
 
-from ipware.ip import get_client_ip
 from brookes.models import BrookesCode
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core import serializers
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect
 from django.template.loader import get_template
 from django.urls import reverse
 from django.utils.safestring import mark_safe
@@ -17,6 +16,7 @@ from django.utils.text import slugify
 from django.views import generic
 from django.views.generic import UpdateView
 from django_weasyprint import WeasyTemplateResponseMixin
+from ipware.ip import get_client_ip
 from psycopg2.extras import NumericRange
 from researcher_UI.models import administration, researcher, study
 from researcher_UI.utils.add_paired_study import add_paired_study_fun
@@ -278,10 +278,6 @@ class AdminNewParent(generic.View):
 
 
 class Overflow(generic.DetailView):
-    """
-    TODO
-    I wanted to change to detailview, but I couldn't find the page to test after doing that.
-    """
     model = study
     template_name = "cdi_forms/overflow.html"
 
@@ -295,11 +291,13 @@ class Overflow(generic.DetailView):
         if prev_visitor > 0 and not self.request.user.is_authenticated:
             ctx["repeat"] = True
         ctx["bypass_url"] = (
-            reverse("researcher_ui:administer_new_parent", args=[self.object.researcher.username, self.object.name])
+            reverse(
+                "researcher_ui:administer_new_parent",
+                args=[self.object.researcher.username, self.object.name],
+            )
             + "?bypass=true"
         )
         return ctx
-    
 
 
 class ImportData(LoginRequiredMixin, generic.UpdateView):

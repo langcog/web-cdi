@@ -265,12 +265,6 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
             not self.administration_instance.completed
             and self.administration_instance.due_date > timezone.now()
         ):  # And test has yet to be completed and has not timed out
-            logger.debug(
-                f"Admin completed for {self.object}: { self.administration_instance.completed }"
-            )
-            logger.debug(
-                f"Due Date for {self.object}: { self.administration_instance.due_date }"
-            )
             try:
                 if self.object.age:
                     self.study_context[
@@ -292,7 +286,6 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
             if (
                 self.background_form.is_valid()
             ):  # If form passed forms.py validation (clean function)
-                logger.debug(f"Background form for { self.object } is valid")
                 obj = self.background_form.save(
                     commit=False
                 )  # Save but do not commit form just yet.
@@ -327,7 +320,6 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
                 # Save model object to database
                 obj.administration = self.administration_instance
                 obj.save()
-                logger.debug(f"Saving { obj } to database")
 
                 # If 'Next' button is pressed, update last_modified and mark completion of BackgroundInfo. Fetch CDI form by hash ID.
                 if "btn-next" in request.POST and request.POST["btn-next"] == _("Next"):
@@ -339,12 +331,10 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
                     )
                     request.method = "GET"
                     return redirect("administer_cdi_form", hash_id=self.hash_id)
-                    # return cdi_form(request, self.hash_id)
 
                 elif "btn-next" in request.POST and request.POST["btn-next"] == _(
                     "Finish"
                 ):
-                    logger.debug(f"{ self.object } is at the finish line")
                     administration.objects.filter(url_hash=self.hash_id).update(
                         last_modified=timezone.now()
                     )

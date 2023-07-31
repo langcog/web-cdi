@@ -6,7 +6,6 @@ from typing import Any, Dict, List
 
 import requests
 from cdi_forms.models import Instrument_Forms
-from cdi_forms.views import printable_view
 from cdi_forms.views.utils import (
     PROJECT_ROOT,
     get_administration_instance,
@@ -39,11 +38,7 @@ class AdministrationSummaryView(DetailView):
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         ctx = super().get_context_data(**kwargs)
-        # Create a blank dictionary and then fill it with prefilled background and CDI data, along with hash ID and information regarding the gift card code if subject is to be paid
-        prefilled_data = dict()
-        prefilled_data = prefilled_cdi_data(self.object)
 
-        # try:
         # Get form from database
         background_form = prefilled_background_form(self.object)
         ctx["background_form"] = background_form
@@ -170,7 +165,6 @@ class AdministrationSummaryView(DetailView):
                 request, "cdi_forms/administration_expired.html", {}
             )  # Render contact form template
 
-        # return printable_view(request, self.object.url_hash)
         completed = int(
             request.get_signed_cookie("completed_num", "0")
         )  # If there is a cookie for a previously completed test, get it
@@ -179,7 +173,6 @@ class AdministrationSummaryView(DetailView):
         if self.object.study.allow_payment:
             response.set_signed_cookie("completed_num", completed)
         return response
-        return printable_view(request, self.object.url_hash)
 
 
 class AdministrationDetailView(DetailView):
