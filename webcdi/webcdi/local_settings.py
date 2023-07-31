@@ -1,6 +1,35 @@
 # This file contains settings changed for MPI instance
 import os
 import socket
+import boto3
+from botocore.exceptions import ClientError
+import json
+
+def get_secret():
+
+    secret_name = f"{os.environ.get('DJANGO_SERVER_TYPE','dev').lower()}/webcdi/RDS_PASSWORD"
+    region_name = "us-west-2"
+
+    # Create a Secrets Manager client
+    session = boto3.session.Session()
+    client = session.client(
+        service_name='secretsmanager',
+        region_name=region_name
+    )
+
+    try:
+        get_secret_value_response = client.get_secret_value(
+            SecretId=secret_name
+        )
+    except ClientError as e:
+        # For a list of exceptions thrown, see
+        # https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
+        raise e
+
+    # Decrypts secret using the associated KMS key.
+    secret = get_secret_value_response['SecretString']
+
+    return json.loads(secret)['password']
 
 HOST_NAME = socket.gethostname()
 HOST_IP = socket.gethostbyname(HOST_NAME)
@@ -40,7 +69,7 @@ if "RDS_HOSTNAME" in os.environ:
             "ENGINE": "django.db.backends.postgresql_psycopg2",
             "NAME": os.environ["RDS_DB_NAME"],
             "USER": os.environ["RDS_USERNAME"],
-            "PASSWORD": os.environ["RDS_PASSWORD"],
+            "PASSWORD": get_secret(),
             "HOST": os.environ["RDS_HOSTNAME"],
             "PORT": os.environ["RDS_PORT"],
         }
