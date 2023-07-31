@@ -1,5 +1,8 @@
 import datetime
+from typing import Any
 
+from django.http import HttpRequest, HttpResponse
+from django.utils import translation
 from brookes.models import BrookesCode
 from dateutil.relativedelta import relativedelta
 from django.contrib import messages
@@ -52,3 +55,8 @@ class CustomLoginView(LoginView):
             )
 
         return super().get_success_url()
+
+    def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
+        translation.activate('en')
+        request.LANGUAGE_CODE = translation.get_language()
+        return super().dispatch(request, *args, **kwargs)

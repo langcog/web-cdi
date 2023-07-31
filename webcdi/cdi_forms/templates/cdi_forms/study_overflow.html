@@ -1,0 +1,62 @@
+{% load i18n %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    {% load static %}
+
+    <title>{% trans object.instrument.verbose_name %}</title>
+    <meta name="description" content="MacArthur-Bates Communicative Development Inventory">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-queue/3.0.3/d3-queue.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" ></script>
+
+    <script src="{% static 'jquery/jquery-1.11.3.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
+    <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
+    <script src="{% static 'cdi_forms/selectize.js' %}"></script>
+    <script src="{% static 'cdi_forms/bootstrap-datepicker.js' %}"></script>
+    <link rel='stylesheet' href="{% static 'cdi_forms/selectize.bootstrap3.css' %}">
+    <link rel='stylesheet' href="{% static 'cdi_forms/datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'cdi_forms/docs.min.css' %}" />
+    <link rel='stylesheet' href="{% static 'cdi_forms/base.css' %}">
+    <script src="{% static 'd3/d3.v3.js' %}"></script>
+    <script src="{% static 'lodash/lodash.min.js' %}"></script>
+    <script src="{% static 'd3/d3-queue.min.js' %}"></script>
+
+</head>
+
+
+<body >
+
+
+    <div class="container bs-docs-container" style='padding-top: 60px; padding-bottom: 60px;'>
+    <div class = "col-md-12">
+    <!-- Written letter explaining that study has reached its desired number of participants. May or may not give an option to allow participants to take the test despite reaching the cap. Depends on cookies stored on device and IP logs in database. -->
+        <div class="row">
+            <div class="col-md-12">
+                <img src="{% static 'images/logo_bg.jpg' %}" class="rounded img-responsive center-block" alt="{% trans 'MB-CDI Lab Logo' %}" style="max-width: 40%;"> <br>
+            </div>
+
+            <h2>{% trans "Thank you!" %}</h2><br>
+
+            {% if repeat %}
+                <h4>
+                    {% blocktrans %}Thank you for your interest in completing the MacArthur-Bates Communicative Development Inventory (CDI)! It looks like you have completed the CDI form before. We ask that you only complete our assessment once. If you have any concerns about your child’s development, we recommend that you talk with your child’s physician. If you enjoyed our assessment, you can learn more about the CDI <a href="http://mb-cdi.stanford.edu/" target="_blank">here</a>. Again, we appreciate your interest!{% endblocktrans %}
+                </h4>
+            {% else %}
+
+                <h4>
+                    {% blocktrans with bypass_url=bypass_url %}Thank you for your interest in completing the MacArthur-Bates Communicative Development Inventory (CDI)! At this time, all of our study slots have already filled up and we have run out of thank-you gifts to compensate you for your time. If you are still interested in completing the CDI and learning more about your child's vocabulary, you may click <a href="{{ bypass_url }}" target="_blank">here</a> to complete the questionnaire, but you will not receive compensation. You can also keep an eye out for another study ad in the future! If you have any concerns about your child’s development, we recommend that you talk with your child’s physician. If you enjoyed our assessment, you can learn more about the CDI <a href="http://mb-cdi.stanford.edu/" target="_blank">here</a>. Again, we appreciate your interest!{% endblocktrans %}
+                </h4>
+
+            {% endif %}
+            <br><br>
+
+        </div>
+    </div>
+
+
+    </div>
+
+</body>
+</html>

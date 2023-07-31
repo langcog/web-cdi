@@ -24,11 +24,11 @@ chardet==4.0.0
 charset-normalizer==2.0.9
 colorama==0.4.4
 confusable-homoglyphs==3.2.0
-cryptography==41.0.0
+cryptography==41.0.2
 cssselect2==0.4.1
 cycler==0.11.0
 defusedxml==0.7.1
-Django==3.2.19
+Django==3.2.20
 django-adaptors==0.2.5
 django-admin-rangefilter==0.10.0
 django-appconf==1.0.5
@@ -63,7 +63,7 @@ importlib-metadata==4.8.2
 importlib-resources==5.4.0
 ipaddress==1.0.23
 jmespath==0.10.0
-joblib==1.1.1
+joblib==1.2.0
 json-table-schema==0.2.1
 json-tricks==3.15.5
 jsonschema==4.2.1
@@ -86,7 +86,7 @@ pydyf==0.1.2
 PyNaCl==1.4.0
 pyOpenSSL==23.2.0
 pyparsing==3.0.6
-PyPDF2==1.27.5
+PyPDF2==1.27.9
 pyphen==0.11.0
 pyrsistent==0.18.0
 python-bidi==0.4.2
@@ -99,7 +99,7 @@ reportlab==3.6.3
 requests==2.31.0
 s3transfer==0.5.0
 scikit-learn==1.0.1
-scipy==1.9.0
+scipy==1.10.0
 selenium==4.1.0
 semantic-version==2.8.5
 setuptools-scm==6.3.2

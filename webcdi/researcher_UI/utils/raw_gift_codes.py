@@ -1,6 +1,10 @@
+import logging
 import re
 from decimal import Decimal
+
 from researcher_UI.models import payment_code
+
+logger = logging.getLogger("debug")
 
 
 def raw_gift_code_fun(raw_gift_amount, study_obj, new_study_name, raw_gift_codes):
@@ -21,7 +25,6 @@ def raw_gift_code_fun(raw_gift_amount, study_obj, new_study_name, raw_gift_codes
             pass
 
         if amount_regex:
-
             for gift_code in gift_codes:
                 if not payment_code.objects.filter(
                     payment_type=gift_type, gift_code=gift_code
@@ -36,6 +39,7 @@ def raw_gift_code_fun(raw_gift_amount, study_obj, new_study_name, raw_gift_codes
                     )
                 else:
                     used_codes.append(gift_code)
+
         if not used_codes:
             all_new_codes = True
 
@@ -60,9 +64,7 @@ def raw_gift_code_fun(raw_gift_amount, study_obj, new_study_name, raw_gift_codes
             if all_new_codes:
                 payment_code.objects.bulk_create(new_payment_codes)
                 data["stat"] = "ok"
-                data["redirect_url"] = "/endalk/study/" + new_study_name + "/"
     else:
         data["stat"] = "ok"
-        data["redirect_url"] = "/endalk/study/" + new_study_name + "/"
 
     return data

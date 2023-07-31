@@ -1,0 +1,314 @@
+{% extends 'cdi_forms/administration_base.html' %}
+{% load static %}
+{% load i18n %}
+{% load bleach_markdown %}
+
+<!-- Navigation buttons placed in cdi_base.html -->
+{% block nav_buttons %}
+    {% if not completed %}
+    <div class="button-wrapper">
+        <div class="flex-row d-flex justify-content-center">
+            <input name="btn-save" value="{% trans 'Save' %}" class="btn btn-primary" type="submit">
+            {% if data.menu == contents|max_page and timer %}
+                <input name="btn-submit" name="btn-submit" value="{% trans 'Submit' %}" class="btn btn-success submit-button" type="submit" onclick="clicked(event)">
+            {% endif %}
+        </div>
+        <div class="flex-row d-flex justify-content-center">    
+            <input name="btn-back" value="{% trans 'Go back to Background Info' %}" class="btn btn-primary" type="submit">
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}
+
+{% block main %}
+{% csrf_token %}
+    <div id = "{{ part.id }}_div" class="part_div ">
+        <h2 id="{{ part.id }}"> {{ data.part }}</h2>
+        <div id = "{{ data.type.id }}_div" class = "page_div ">
+            <h3 id = "{{ data.type.id }}"> {{ data.type.title }}</h3>
+            {% if data.type.subtitle %}<h3 > {{ data.type.subtitle }}</h3>{% endif %}
+            <div id="sectionInstructions{{data.type.id}}" class="collapse" data-toggle="collapse" style="font-size: .85em;">
+                <p class="lead"> {{ data.type.instructions | capfirst }}</p>
+            </div>
+            {% if data.type.instructions|length > 0 %}
+                <a href="#sectionInstructions{{data.type.id}}" data-toggle="collapse" id="section_instructions_title">
+                    {% trans "Hide/Show Instructions: " %} <i class="material-icons">arrow_drop_up</i>
+                </a>
+            {% endif %}
+            {% if data.section.title %}
+                <h4 id ="{{ section.id }}" >{{ data.section.title }}</h4>
+            {% endif %}
+            {% if data.section.text %}
+                <div class="col-md-12">{{ data.section.text }}</div>
+            {% endif %}
+
+            <div class="row alternate-color">
+                {% if data.objects|length > 0 %}
+                    {% for object in data.objects %}
+                        {% if 'textbox' in object.item %}
+                            <div class="col-md-12 alco-child"> 
+                                <div class="row alco-child1" >
+                                    <div class="col-lg-5 col-12"><span class="choice">{{ object.text|safe }}</span></div>
+                                    <div class="col-lg-7 col-12">
+                                        <textarea class="boxsizingBorder" onkeyup="countChar(this)" id="{{ object.itemID }}" name="{{ object.itemID }}" width="100%" maxlength="600" rows=5 {% if completed %} disabled {% endif %}>{{ object.prefilled_value }}</textarea>
+                                        <div id="charNum{{ object.itemID }}"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% elif data.type.type == "radiobutton" or data.type.type == "modified_checkbox" %}
+                            {% if object.text != '' %}
+                            <div class="col-md-12 alco-child" name = "{{ object.itemID }}_div">
+                                <div class="row alco-child1" >
+                                    <div class="col-lg-5 col-12"><span class="choice">{{ object.text|safe }}</span></div>
+                                    <div class="col-lg-7 col-12 align-items-center btn-group btn-group-justified d-flex justify-content-end btn-group-vertical" data-toggle="buttons">
+                                        {% for choice in object.choices %}
+                                            <label class = "btn mult-choice d-flex justify-content-end" for="{{ object.itemID }}_{{ choice.1 }}">
+                                                <input {% if data.type.type == "radiobutton" %} type="radio" {% elif data.type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.1 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
+                                                {% if data.type.type == "radiobutton" %} 
+                                                    <i class="material-icons radio_button_checked" aria-hidden="true">radio_button_checked</i>
+                                                    <i class="material-icons radio_button_unchecked" aria-hidden="true">radio_button_unchecked</i>
+                                                {% elif data.type.type == "modified_checkbox"%} 
+                                                    <i class="material-icons check_box" aria-hidden="true">check_box</i>
+                                                    <i class="material-icons check_box_outline_blank" aria-hidden="true">check_box_outline_blank</i>
+                                                {% endif %}
+                                                &nbsp;&nbsp;<span class="choice">{{ choice.0 }}</span>
+                                            </label>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% else %}
+                            <div class="col-lg-4 col-8 alco-child" name = "{{ object.itemID }}_div" >
+                                <div class="btn-group btn-group-justified" data-toggle="buttons">
+                                    {% for choice in object.choices %}
+                                        <div class="row">
+                                            <label class = "btn mult-choice" for="{{ object.itemID }}_{{ choice.1 }}">
+                                                <input {% if data.type.type == "radiobutton" %} type="radio" {% elif data.type.type == "modified_checkbox"%} type="checkbox" {% endif %} id="{{ object.itemID }}_{{ choice.1 }}" name="{{ object.itemID }}" value="{{ choice.1 }}" {% if completed %} disabled {% endif %}{% if choice.2 %} checked {% endif %}>
+                                                {% if data.type.type == "radiobutton" %} 
+                                                    <i class="material-icons radio_button_checked" aria-hidden="true">radio_button_checked</i>
+                                                    <i class="material-icons radio_button_unchecked" aria-hidden="true">radio_button_unchecked</i>
+                                                {% elif data.type.type == "modified_checkbox"%} 
+                                                    <i class="material-icons check_box" aria-hidden="true">check_box</i>
+                                                    <i class="material-icons check_box_outline_blank" aria-hidden="true">check_box_outline_blank</i>
+                                                {% endif %}
+                                                &nbsp;&nbsp;<span class="choice">{{ choice.0 }}</span>
+                                            </label>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% endif %}
+                        {% elif data.type.type == "checkbox" %}
+                            <div class="col-lg-4 col-8 alco-child"> 
+                                <div class="btn-group btn-block" data-toggle="buttons"> 
+                                    <label class = "btn btn-block d-flex justify-content-start" for="{{ object.itemID }}">
+                                        <input type="checkbox" id="{{ object.itemID }}" name="{{ object.itemID }}" value="{{ object.choices }}"{% if completed %} disabled {% endif %} {% if object.prefilled_value %} checked {% endif %}> 
+                                        <i class="material-icons check_box" aria-hidden="true">check_box</i>
+                                        <i class="material-icons check_box_outline_blank" aria-hidden="true">check_box_outline_blank</i>
+                                        &nbsp;&nbsp;<span class="choice">{{ object.definition|bleach_markdown }}</span>
+                                    </label>
+                                </div>
+                            </div>
+                        {% elif data.type.type == "textbox" %}
+                            <div class="col-md-12"> <input type="text" class="rounded border border-secondary" id="{{ object.itemID }}" name="{{ object.itemID }}" maxlength="200" value="{{ object.prefilled_value }}" {% if completed %} disabled {% endif %}></div>
+                        {% endif %}
+                    {% endfor %}
+                {% else %} 
+                    <div class="col-md-12 alco-child"> 
+                        <div class="col-12">
+                            <p style="text-align: center;"><br /><br />{% trans 'Thank you for completing!  Please review your responses and if you are ready, click submit!' %}<br /><br /></p>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-md-12">{{ data.section.footnote }}</div>
+        </div>
+
+        
+        {% include 'cdi_forms/_captcha_page.html' %}
+
+        {% include 'cdi_forms/_navigation_buttons.html' %}
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <!-- ReCaptcha. If study has a ReCaptcha option, the participant must have worked on the test for at least 6 minutes AND pass the ReCaptcha test for the submit button to appear. Otherwise, participant only has to have worked on the test for 6 minutes. -->
+    {% if object.study.confirm_completion and object.study.allow_payment == 'True' %}
+        <script>
+            captcha_clicked = false;
+            // Triggers when participant successfully passes ReCaptcha
+            function enableBtn(){
+                captcha_clicked = true;
+                if (gotToEnd && test_duration >= {{ object.study.timing }}) {
+                    $('.submit-button').show();
+                }
+            }
+        </script>
+    {% else %}
+        <script>
+            captcha_clicked = true;
+        </script>    
+    {% endif %}
+
+    <script>
+        // Scripts to set state of instructions (show/hide)
+        function setCookie(name,value,days) {
+            console.log(name, value, days)
+            var expires = "";
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days*24*60*60*1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "")  + expires + "; path=/;SameSite=Strict";
+        }
+        function getCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0;i < ca.length;i++) {
+                var c = ca[i];
+                while (c.charAt(0)==' ') c = c.substring(1,c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+            }
+            return null;
+        }
+        function eraseCookie(name) {   
+            document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        }
+        window.onload = function() {
+            state = getCookie('sectionInstructions{{data.type.id}}')
+            if (state == 1) {
+                console.log('Set cookie 2')
+                $("#sectionInstructions{{data.type.id}}").collapse('show');
+                $('#section_instructions_title').addClass("collaped");
+                $("#section_instructions_title").attr("aria-expanded","true");
+            } else {
+                console.log('Set cookie 1')
+                $("#sectionInstructions{{data.type.id}}").collapse('hide');
+                $('#section_instructions_title').addClass("collaped");
+                $("#section_instructions_title").attr("aria-expanded","false");
+            }
+            state = getCookie('sectionInstructions{{data.type.id}}')
+        }
+        $("#section_instructions_title").click(function(){
+            $("#sectionInstructions{{data.type.id}}").collapse('toggle');
+            state = state % 2 + 1
+            setCookie('sectionInstructions{{data.type.id}}',state,1) 
+        });
+    </script>
+    <script>
+        $(':checkbox').on('change', function(){
+            csrfmiddlewaretoken = $("input[name='csrfmiddlewaretoken']").val();
+            var data = {
+                'hash_id': '{{ object.url_hash }}',
+                'csrfmiddlewaretoken': csrfmiddlewaretoken,
+                'item' : $(this).attr('name'),
+                'value' : $(this).val(),
+                'check' : $(this).is(':checked')
+            }
+        
+            //console.log(data);
+            $.post("{% url 'update-administration-data-item' %}", data);
+        });
+    </script>
+    <script>
+        $(':radio').on('click', function(){
+            csrfmiddlewaretoken = $("input[name='csrfmiddlewaretoken']").val();
+            var data = {
+                'hash_id': '{{  object.url_hash }}',
+                'csrfmiddlewaretoken': csrfmiddlewaretoken,
+                'item' : $(this).attr('name'),
+                'value' : $(this).val(),
+                'check' : $(this).is(':checked')
+            }
+        
+            //console.log(data);
+            $.post("{% url 'update-administration-data-item' %}", data);
+        });
+    </script>
+    <script>
+        $(':text').on('change', function(){
+            csrfmiddlewaretoken = $("input[name='csrfmiddlewaretoken']").val();
+            var data = {
+                'hash_id': '{{  object.url_hash }}',
+                'csrfmiddlewaretoken': csrfmiddlewaretoken,
+                'item' : $(this).attr('name'),
+                'value' : $(this).val(),
+                'check' : 'true' //setting check to true will ensure the value is used
+            }
+        
+            //console.log(data);
+            $.post("{% url 'update-administration-data-item' %}", data);
+        });
+    </script>
+    <script>
+        $('textarea').on('change', function (){
+            csrfmiddlewaretoken = $("input[name='csrfmiddlewaretoken']").val();
+            var data = {
+                'hash_id': '{{  object.url_hash }}',
+                'csrfmiddlewaretoken': csrfmiddlewaretoken,
+                'item' : $(this).attr('name'),
+                'value' : $(this).val(),
+                'check' : 'true' //setting check to true will ensure the value is used
+            }
+        
+            //console.log(data);
+            $.post("{% url 'update-administration-data-item' %}", data);
+        });
+    </script>
+    <script>
+        function clicked(e) {
+            console.log('entering clicked')
+            if(!confirm("{% trans 'Are you ready to submit? You cannot change your answers after submission.' %}")) {
+                e.preventDefault();
+            } else {
+                $('.submit-button').hide();
+            }
+            localStorage.removeItem('prev_page_number');
+            console.log('clicked completed')
+        }
+    </script>
+    <script>
+        //Create mutually exclusive checkboxes. 0 or 1 checkbox in a group may be clicked.
+        $("label.btn.mult-choice").on('click', function(e) {
+            e.stopPropagation();
+            // in the handler, 'this' refers to the box clicked on
+            var $box = $(this).children("input:checkbox").eq(0);
+            //console.log($box)
+            var $group = $(this).parent().find("input:checkbox").not($box)
+            //console.log($group.length)
+            if ($group.length > 0 ) $group.prop('checked', false)
+    
+            if ($box.is(':not(:checked)')) {
+            $box.prop('checked', true)
+            } else {
+            $box.prop('checked', false)
+            }
+    
+        });   
+    </script>
+    <script>
+        // Rename checkbox labels from 'produces' to 'understands and says'
+        $( "input[id$='produces']" ).each( function (){ 
+            var label_var = $(this).parent().find('span.choice');
+            $(label_var).text("{% trans 'understands and says' %}");
+        });
+    </script>
+
+    {% if data.menu == contents|max_page and object.study.confirm_completion %}
+    <!-- ReCaptcha. If study has a ReCaptcha option, the participant must have worked on the test for at least 6 minutes AND pass the ReCaptcha test for the submit button to appear. Otherwise, participant only has to have worked on the test for 6 minutes. -->
+    <script>
+        captcha_clicked = false;
+
+        $('.submit-button').hide()
+
+        // Triggers when participant successfully passes ReCaptcha
+        function enableBtn(){
+            captcha_clicked = true;    
+            $('.submit-button').show();   
+        }
+        
+    </script>
+    {% endif %}
+{% endblock %}
