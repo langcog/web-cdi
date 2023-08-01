@@ -5,10 +5,15 @@ import boto3
 from botocore.exceptions import ClientError
 import json
 
-def get_secret():
+# Use this code snippet in your app.
+# If you need more information about configurations
+# or implementing the sample code, visit the AWS docs:
+# https://aws.amazon.com/developer/language/python/
 
-    secret_name = f"{os.environ.get('DJANGO_SERVER_TYPE','dev').lower()}/webcdi/RDS_PASSWORD"
-    region_name = "us-west-2"
+import boto3
+from botocore.exceptions import ClientError
+
+def get_secret(secret_name, region_name="us-west-2"):
 
     # Create a Secrets Manager client
     session = boto3.session.Session()
@@ -29,7 +34,7 @@ def get_secret():
     # Decrypts secret using the associated KMS key.
     secret = get_secret_value_response['SecretString']
 
-    return json.loads(secret)['password']
+    return json.loads(secret)
 
 HOST_NAME = socket.gethostname()
 HOST_IP = socket.gethostbyname(HOST_NAME)
@@ -69,7 +74,7 @@ if "RDS_HOSTNAME" in os.environ:
             "ENGINE": "django.db.backends.postgresql_psycopg2",
             "NAME": os.environ["RDS_DB_NAME"],
             "USER": os.environ["RDS_USERNAME"],
-            "PASSWORD": get_secret(),
+            "PASSWORD": get_secret(f"{os.environ.get('DJANGO_SERVER_TYPE','dev').lower()}/webcdi/RDS_PASSWORD")['password'],
             "HOST": os.environ["RDS_HOSTNAME"],
             "PORT": os.environ["RDS_PORT"],
         }
@@ -103,11 +108,10 @@ CONTACT_EMAIL = "webcdi-contact@stanford.edu"
 MORE_INFO_ADDRESS = "http://mb-cdi.stanford.edu/"
 
 # AWS creds
-AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID", "<AWS_ACCESS_KEY>")
-AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY", "<AWS_SECRET_KEY")
+secret =  get_secret("webcdi/webcdi-IAM")
+AWS_ACCESS_KEY_ID = secret["AWS_ACCESS_KEY_ID"]
+AWS_SECRET_ACCESS_KEY = secret["AWS_SECRET_ACCESS_KEY"]
 if "RDS_HOSTNAME" in os.environ:
-    AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID", "<AWS_ACCESS_KEY>")
-    AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY", "<AWS_SECRET_KEY")
     AWS_STORAGE_BUCKET_NAME = os.environ.get(
         "AWS_STORAGE_BUCKET_NAME", "AWS_STORAGE_BUCKET"
     )
