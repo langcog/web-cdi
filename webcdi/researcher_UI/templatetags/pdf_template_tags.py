@@ -28,3 +28,17 @@ def get_form_data(administration_id, data):
     except Exception:
         res = f"no response provided"
     return res
+
+@register.filter
+def get_form_data_endings(administration_id, data):
+    try:
+        res = administration_data.objects.get(
+            administration=administration_id, item_ID=data
+        ).value
+        if res in ['sometimes','yes']:
+            res = "Yes"
+        else:
+            res='No'
+    except Exception:
+        res = f"No"
+    return res

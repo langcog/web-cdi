@@ -1,5 +1,6 @@
 import datetime
 import json
+from typing import Any, Dict
 
 from brookes.models import BrookesCode
 from django.conf import settings
@@ -7,7 +8,7 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core import serializers
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect
 from django.template.loader import get_template
 from django.urls import reverse
 from django.utils.safestring import mark_safe
@@ -15,21 +16,20 @@ from django.utils.text import slugify
 from django.views import generic
 from django.views.generic import UpdateView
 from django_weasyprint import WeasyTemplateResponseMixin
+from ipware.ip import get_client_ip
 from psycopg2.extras import NumericRange
 from researcher_UI.models import administration, researcher, study
 from researcher_UI.utils.add_paired_study import add_paired_study_fun
-from researcher_UI.utils.add_study import add_study_fun
 from researcher_UI.utils.admin_new import admin_new_fun
 from researcher_UI.utils.admin_new_parent import admin_new_parent_fun
 from researcher_UI.utils.admin_new_participant import admin_new_participant_fun
 from researcher_UI.utils.console_helper.get_helper import get_helper
 from researcher_UI.utils.console_helper.post_helper import post_condition
 from researcher_UI.utils.import_data import import_data_fun
-from researcher_UI.utils.overflow import overflow_fun
 from researcher_UI.utils.raw_gift_codes import raw_gift_code_fun
 
 from .forms import *
-from .mixins import StudyOwnerMixin
+from .mixins import ReseacherOwnsStudyMixin, StudyOwnerMixin
 
 
 class Console(LoginRequiredMixin, generic.ListView):
@@ -89,7 +89,7 @@ class StudyCreateView(LoginRequiredMixin, generic.CreateView):
                 )
 
 
-class RenameStudy(LoginRequiredMixin, generic.UpdateView):
+class RenameStudy(LoginRequiredMixin, ReseacherOwnsStudyMixin, generic.UpdateView):
     model = study
     template_name = "researcher_UI/rename_study_modal.html"
     form_class = RenameStudyForm
@@ -116,7 +116,7 @@ class RenameStudy(LoginRequiredMixin, generic.UpdateView):
         new_age_range = form.cleaned_data.get("age_range")
         study_obj = self.object
 
-        if raw_test_period >= 1 and raw_test_period <= 28:
+        if raw_test_period >= 1 and raw_test_period <= 1095:
             study_obj.test_period = raw_test_period
         else:
             study_obj.test_period = 14
@@ -125,7 +125,23 @@ class RenameStudy(LoginRequiredMixin, generic.UpdateView):
         study_obj.max_age = new_age_range.upper
         study_obj.save()
 
-        raw_gift_code_fun(raw_gift_amount, study_obj, new_study_name, raw_gift_codes)
+        res = raw_gift_code_fun(
+            raw_gift_amount, study_obj, new_study_name, raw_gift_codes
+        )
+        if res["stat"] == "ok" and raw_gift_amount:
+            messages.success(
+                self.request,
+                mark_safe(
+                    f"The following gift codes of value {raw_gift_amount} have been added: {raw_gift_codes}"
+                ),
+            )
+        elif res["stat"] == "error":
+            messages.error(
+                self.request,
+                mark_safe(
+                    f'There was an error with the gift codes.  None were added.  The error message is: {res["error_message"]}'
+                ),
+            )
         return super().form_valid(form)
 
 
@@ -143,12 +159,26 @@ class AddStudy(LoginRequiredMixin, generic.CreateView):
 
     def form_valid(self, form):
         study_instance = form.save(commit=False)
-        study_name = form.cleaned_data.get("name")
         age_range = form.cleaned_data.get("age_range")
         study_instance.active = True
         researcher = self.request.user
-        add_study_fun(study_instance, form, study_name, researcher, age_range)
-        return redirect(reverse("researcher_ui:console"))
+
+        try:
+            study_instance.min_age = age_range.lower
+            study_instance.max_age = age_range.upper
+        except:
+            study_instance.min_age = study_instance.instrument.min_age
+            study_instance.max_age = study_instance.instrument.max_age
+
+        study_instance.researcher = researcher
+        if not form.cleaned_data.get("test_period"):
+            study_instance.test_period = 14
+
+        study_instance.save()
+
+        return redirect(
+            reverse("researcher_ui:console_study", args=(study_instance.pk,))
+        )
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -243,19 +273,31 @@ class AdminNewParent(generic.View):
                     )
                 )
         else:
-            redirect_url = reverse("overflow", args=[username, study_name])
+            redirect_url = reverse("researcher_ui:overflow", args=[study_obj.id])
         return redirect(redirect_url)
 
 
-class Overflow(LoginRequiredMixin, generic.View):
-    """
-    TODO
-    I wanted to change to detailview, but I couldn't find the page to test after doing that.
-    """
+class Overflow(generic.DetailView):
+    model = study
+    template_name = "cdi_forms/overflow.html"
 
-    def get(self, request, username, study_name):
-        data = overflow_fun(request, username, study_name)
-        return render(request, "cdi_forms/overflow.html", data)
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        ctx = super().get_context_data(**kwargs)
+
+        visitor_ip = str(get_client_ip(self.request))
+        prev_visitor = 0
+        if visitor_ip and visitor_ip != "None":
+            prev_visitor = ip_address.objects.filter(ip_address=visitor_ip).count()
+        if prev_visitor > 0 and not self.request.user.is_authenticated:
+            ctx["repeat"] = True
+        ctx["bypass_url"] = (
+            reverse(
+                "researcher_ui:administer_new_parent",
+                args=[self.object.researcher.username, self.object.name],
+            )
+            + "?bypass=true"
+        )
+        return ctx
 
 
 class ImportData(LoginRequiredMixin, generic.UpdateView):

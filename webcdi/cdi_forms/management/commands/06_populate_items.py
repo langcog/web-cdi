@@ -100,6 +100,16 @@ class Command(BaseCommand):
                     else:
                         scoring_category = item_type                        
 
+                    if 'enabler' in col_names:
+                        enabler = row_values[col_names.index('enabler')]
+                    else:
+                        enabler = None
+
+                    if 'enable_response' in col_names:
+                        enable_response = row_values[col_names.index('enable_response')]
+                    else:
+                        enable_response = None
+                    
                     data_dict = {'item': item,
                                  'item_type': item_type,
                                  'category': item_category,
@@ -109,7 +119,10 @@ class Command(BaseCommand):
                                  'complexity_category': complexity_category,
                                  'uni_lemma': uni_lemma,
                                  'item_order': row,
-                                 'scoring_category' : scoring_category}
+                                 'scoring_category' : scoring_category,
+                                 'enabler': enabler,
+                                 'enable_response': enable_response
+                                }
 
                     cdi_item, created = instrument_forms.objects.update_or_create(instrument = instrument_obj, itemID = itemID, defaults=data_dict,)
 

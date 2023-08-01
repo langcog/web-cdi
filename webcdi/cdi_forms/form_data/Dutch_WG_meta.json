@@ -7,99 +7,121 @@
           "id": "understanding",
           "type": "radiobutton",
           "title": "A: Eerste tekens van begrijpen",
+          "page": 1,
           "text": "Kinderen die nog te klein zijn om te praten, kunnen vaak wel begrijpen wat anderen zeggen. We zien dat aan hun reacties. Hieronder staan een paar situaties. Doet uw kind dit al?"
         },
         {
           "id": "sentence",
           "title": "B: Zinnen",
           "type": "checkbox",
-          "text": "Geef aan welke zinnen uw kind begrijpt."
+          "text": "Geef aan welke zinnen uw kind begrijpt.",
+          "page": 2
         },
         {
           "id": "first_words",
           "title": "C: Eerste woordjes",
-          "type": "radiobutton"
+          "type": "radiobutton",
+          "page": 3
         },
         {
           "id": "word",
           "sections": [
             {
               "id": "sounds",
-              "title": "1. Geluidseffecten en dierengeluiden"
+              "title": "1. Geluidseffecten en dierengeluiden",
+              "page": 4
             },
             {
               "id": "animals",
-              "title": "2. Dierennamen (echte dieren of speelgoed)"
+              "title": "2. Dierennamen (echte dieren of speelgoed)",
+              "page": 5
             },
             {
               "id": "vehicles",
-              "title": "3. Voertuigen (echte of speelgoed)"
+              "title": "3. Voertuigen (echte of speelgoed)",
+              "page": 6
             },
             {
               "id": "toys",
-              "title": "4. Speelgoed"
+              "title": "4. Speelgoed",
+              "page": 7
             },
             {
               "id": "food_drink",
-              "title": "5. Eten en drinken"
+              "title": "5. Eten en drinken",
+              "page": 8
             },
             {
               "footnote":  "* of het woord dat u gebruikt",
               "id": "games_routines",
-              "title": "6. Spelletjes en routines"
+              "title": "6. Spelletjes en routines",
+              "page": 9
             },
             {
               "id": "clothing",
-              "title": "7. Kleding"
+              "title": "7. Kleding",
+              "page": 10
             },
             {
               "id": "body_parts",
-              "title": "8. Delen van het lichaam"
+              "title": "8. Delen van het lichaam",
+              "page": 11
             },
             {
               "id": "furniture_rooms",
-              "title": "9. Meubels en kamers"
+              "title": "9. Meubels en kamers",
+              "page": 12
             },
             {
               "id": "household",
-              "title": "10. Kleine huishoudelijke voorwerpen"
+              "title": "10. Kleine huishoudelijke voorwerpen",
+              "page": 13
             },
             {
               "id": "outside",
-              "title": "11. Voorwerpen en plaatsen buitenshuis"
+              "title": "11. Voorwerpen en plaatsen buitenshuis",
+              "page": 14
             },
             {
               "id": "people",
               "title": "12. Mensen",
-              "footnote": "* of het woord dat u gebruikt"
+              "footnote": "* of het woord dat u gebruikt",
+              "page": 15
             },
             {
               "id": "action_words",
-              "title": "13. Werkwoorden"
+              "title": "13. Werkwoorden",
+              "page": 16
             },
             {
               "id": "time_words",
-              "title": "14. Woorden over tijd"
+              "title": "14. Woorden over tijd",
+              "page": 17
             },
             {
               "id": "descriptive_words",
-              "title": "15. Omschrijvende woorden"
+              "title": "15. Omschrijvende woorden",
+              "page": 18
             },
             {
               "id": "pronouns",
-              "title": "16. Voornaamwoorden"
+              "title": "16. Voornaamwoorden",
+              "page": 19
             },
             {
               "id": "question_words",
-              "title": "17. Vragende woordjes"
+              "title": "17. Vragende woordjes",
+              "page": 20
             },
             {
               "id": "locations",
-              "title": "18. Voorzetsels en plaatsbepalingen"
+              "title": "18. Voorzetsels en plaatsbepalingen",
+              "page": 21
             },
             {
               "id": "quantifiers",
-              "title": "19. Hoeveelheden"
+              "title": "19. Hoeveelheden",
+              "page": 22
             }
           ],
           "text": "Dit deel is een lijst met woorden van jonge kinderen. Sommige woorden begrijpt uw kind wel, maar zegt het nog niet. Vink dan \"begrijpen\" aan. Andere woorden begrijpt uw kind én zegt het ook al. Vink dan \"begrijpen en zeggen\" aan. Als uw kind een woord anders uitspreekt (bijv. \"ojanne\" voor \"oranje\" of \"sjille\" voor \"schillen\") dan mag u toch \"begrijpen en zeggen\" aanvinken. Als u of uw kind een ander woord kent of gebruikt, bijv. \"ham ham\" voor \"boterham\", dan mag u dit woord gewoon aanvinken. De woorden in deze lijst komen van verschillende kinderen, dus wees niet ongerust als uw kind er maar enkele van begrijpt of zegt op dit moment.",
@@ -116,30 +138,35 @@
           "id": "first_gestures",
           "title": "A: Eerste gebaren",
           "text": "Jonge kinderen gebruiken vaak gebaren om duidelijk te maken wat ze willen. Vink hieronder de gebaren aan die uw kind maakt.",
-          "type": "radiobutton"
+          "type": "radiobutton",
+          "page": 23
         },
         {
           "id": "games_and_routines",
           "title": "B: Spelletjes en routines",
           "type": "radiobutton",
-          "text": "Doet uw kind de volgende dingen?"
+          "text": "Doet uw kind de volgende dingen?",
+          "page": 24
         },
         {
           "id": "actions_objects",
           "title": "C: Acties met objecten",
           "type": "radiobutton",
-          "text": "Doet uw kind de volgende dingen of probeert hij/zij deze te doen?"
+          "text": "Doet uw kind de volgende dingen of probeert hij/zij deze te doen?",
+          "page": 25
         },
         {
           "id": "imitating_adults",
           "sections": [
             {
               "id": "beer_pop",
-              "text": "a. De beer / pop"
+              "text": "a. De beer / pop",
+              "page": 26
             },
             {
               "id": "met_objecten",
-              "text": "b. Met echte of speelgoedvoorwerpen:"
+              "text": "b. Met echte of speelgoedvoorwerpen:",
+              "page": 27
             }
           ],
           "text": "Hieronder staat een aantal dingen die kinderen soms doen met hun speelgoeddieren of poppen. Geef aan welke dingen uw kind al eens gedaan heeft.",
@@ -150,7 +177,8 @@
           "id": "fantasy_example",
           "title": "E: Gefantaseerde voorwerpen",
           "text": "Kinderen gebruiken soms een ander voorwerp in plaats van het echte voorwerp. Bijvoorbeeld als een kind zijn/haar beer eten wil geven, kan het doen alsof een speelgoedblokje een appel is. Of een kind kan doen alsof een (grote) kom een hoed is. Heeft u uw kind dit soort dingen al zien doen?",
-          "type": "textbox"
+          "type": "textbox",
+          "page": 28
         }
       ],
       "title": "DEEL 2: Acties en gebaren"

@@ -9,100 +9,122 @@
                     "sections": [
                         {
                             "id": "sounds",
-                            "title": "1. Geluidseffecten en dierengeluiden"                         
+                            "title": "1. Geluidseffecten en dierengeluiden",
+                            "page": 1                        
                         },
                         {
                             "id": "animals",
-                            "title": "2. Dierennamen (echte dieren of speelgoed)"
+                            "title": "2. Dierennamen (echte dieren of speelgoed)",
+                            "page": 2
                         },
                         {
                             "id": "vehicles",
-                            "title": "3. Voertuigen (echte of speelgoed)"
+                            "title": "3. Voertuigen (echte of speelgoed)",
+                            "page": 3
                         },
                         {
                             "footnote":  "* of het woord dat u gebruikt",
                             "id": "toys",
-                            "title": "4. Speelgoed"
+                            "title": "4. Speelgoed",
+                            "page": 4
                         },
                         {
                             "footnote":  "* of het woord dat u gebruikt",
                             "id": "food_drink",
-                            "title": "5. Eten en drinken"
+                            "title": "5. Eten en drinken",
+                            "page": 5
                         },
                         {
                             "footnote":  "* of het woord dat u gebruikt",
                             "id": "clothing",
-                            "title": "6. Kleding"
+                            "title": "6. Kleding",
+                            "page": 6
                         },
                         {
                             "footnote":  "* of het woord dat u gebruikt",
                             "id": "body_parts",
-                            "title":"7. Delen van het lichaam"
+                            "title":"7. Delen van het lichaam",
+                            "page": 7
                         },
 
                         {
                             "footnote":  "* of het woord dat u gebruikt",
                             "id": "household",
-                            "title": "8. Kleine huishoudelijke voorwerpen"
+                            "title": "8. Kleine huishoudelijke voorwerpen",
+                            "page": 8
                         },
                         {
                             "footnote":  "* of het woord dat u gebruikt",
                             "id": "furniture_rooms",
-                            "title": "9. Meubels en kamers"
+                            "title": "9. Meubels en kamers",
+                            "page": 9
                         },
                         {
                             "id": "outside",
-                            "title": "10. Voorwerpen buitenshuis"
+                            "title": "10. Voorwerpen buitenshuis",
+                            "page": 10
                         },
                         {
                             "footnote":  "* of het woord dat u gebruikt",
                             "id": "places",
-                            "title": "11. Plaatsen buitenshuis"
+                            "title": "11. Plaatsen buitenshuis",
+                            "page": 11
                         },
                         {
                             "footnote": "* of het woord dat u gebruikt",
                             "id": "people",
-                            "title": "12. Mensen"
+                            "title": "12. Mensen",
+                            "page": 12
                         },
                         {
                             "id": "games_routines",
-                            "title": "13. Spelletjes en routines"
+                            "title": "13. Spelletjes en routines",
+                            "page": 13
                         },
                         {
                             "id": "descriptive_words",
-                            "title": "14. Omschrijvende woorden"
+                            "title": "14. Omschrijvende woorden",
+                            "page": 14
                         },
                         {
                             "id": "action_words",
-                            "title": "15. Werkwoorden"
+                            "title": "15. Werkwoorden",
+                            "page": 15
                         },
                         {
                             "id": "time_words",
-                            "title": "16. Woorden over tijd"
+                            "title": "16. Woorden over tijd",
+                            "page": 16
                         },                   
                         {
                             "id": "pronouns",
-                            "title": "17. Voornaamwoorden"
+                            "title": "17. Voornaamwoorden",
+                            "page": 17
                         },
                         {
                             "id": "question_words",
-                            "title": "18. Vragende woordjes"
+                            "title": "18. Vragende woordjes",
+                            "page": 18
                         },
                         {
                             "id": "prepositions",
-                            "title": "19. Voorzetsels en plaatsbepalingen"
+                            "title": "19. Voorzetsels en plaatsbepalingen",
+                            "page": 19
                         },
                         {
                             "id": "quantifiers",
-                            "title": "20. Hoeveelheden en lidwoorden"
+                            "title": "20. Hoeveelheden en lidwoorden",
+                            "page": 20
                         },
                         {
                             "id":"helping_verbs",
-                            "title":"21. Hulpwerkwoorden"
+                            "title":"21. Hulpwerkwoorden",
+                            "page": 21
                         },
                         {
                             "id": "connecting_words",
-                            "title": "22. Voegwoorden"
+                            "title": "22. Voegwoorden",
+                            "page": 22
                         }
                     ],
                     "text": "Dit deel is een lijst met woorden van jonge kinderen. Sommige woorden begrijpt uw kind wel, maar zegt het nog niet. Vink dan \"begrijpen\" aan. Andere woorden begrijpt uw kind én zegt het ook al. Vink dan \"begrijpen en zeggen\" aan. Als uw kind een woord anders uitspreekt (bijv. \"ojanne\" voor \"oranje\" of \"sjille\" voor \"schillen\"), dan mag u toch \"begrijpen en zeggen\" aanvinken. Als u of uw kind een ander woord gebruikt (bijv. \"paleis\" voor \"kasteel\"), dan mag u dit woord gewoon aanvinken. De woorden in deze lijst komen van verschillende kinderen, dus wees niet ongerust als uw kind er maar een paar van begrijpt of kent op dit moment.",
@@ -112,7 +134,8 @@
                 {
                     "id": "usage",
                     "title": "B: Hoe kinderen woorden gebruiken",
-                    "type": "radiobutton"
+                    "type": "radiobutton",
+                    "page": 23
                 }
             ]
         },
@@ -123,27 +146,32 @@
                 {
                   "id":"ending",
                   "title":"A. Woorduiteinden - deel 1",
-                  "type":"radiobutton"
+                  "type":"radiobutton",
+                  "page": 24
                 },
                 {
                     "id": "combine",
                     "title": "",
-                    "type": "radiobutton"
+                    "type": "radiobutton",
+                    "page": 25
                 },
                 {
                     "id": "word_ending",
                     "sections": [
                         {
                             "id": "word_ending_nouns",
-                            "title": "Zelfstandig naamwoorden"
+                            "title": "Zelfstandig naamwoorden",
+                            "page": 26
                         },
                         {
                             "id": "word_ending_verb",
-                            "title": "Werkwoorden -1"
+                            "title": "Werkwoorden -1",
+                            "page": 27
                         },
                         {
                             "id": "word_ending_verbs",
-                            "title": "Werkwoorden -2"
+                            "title": "Werkwoorden -2",
+                            "page": 28
                         }
                     ],
                     "text": "Jonge kinderen maken vaak \"verkeerde woorden\". Een kind kan bijvoorbeeld zeggen \"gekoopt\" of \"geloopt\". Dit soort \"fouten\" worden vaak gemaakt, omdat de taal nog in ontwikkeling is. Vink in de lijst hieronder de \"fouten\" aan die u uw kind hebt horen maken.",
@@ -155,15 +183,18 @@
                     "sections": [
                         {
                             "id": "word_form_nouns",
-                            "title": "Zelfstandig naamwoorden"
+                            "title": "Zelfstandig naamwoorden",
+                            "page": 29
                         },
                         {
                             "id": "word_form_verb",
-                            "title": "Werkwoorden -1"
+                            "title": "Werkwoorden -1",
+                            "page": 30
                         },
                         {
                             "id": "word_form_verbs",
-                            "title": "Werkwoorden -2"
+                            "title": "Werkwoorden -2",
+                            "page": 31
                         }
                     ],
                     "text": "Hieronder staat een aantal woorden die kinderen leren. Vink de woorden aan die uw kind op de juiste manier zegt.",
@@ -174,13 +205,15 @@
                     "id": "combination_examples",
                     "title": "D. Voorbeelden",
                     "text": "Schrijf hieronder de drie langste zinnen op die uw kind onlangs heeft gezegd.",
-                    "type": "textbox"
+                    "type": "textbox",
+                    "page": 32
                 },
                 {
                     "id": "complexity",
                     "text": "Hieronder staat een lijst met telkens twee zinnen. Vink de zin aan die het meest lijkt op wat uw kind zegt. Als uw kind een ander woord of andere woorden gebruikt, bijvoorbeeld \"kindje tafel\" i.p.v. \"hondje tafel\", of \"kindje tutje\" i.p.v. \"kindje doekje\", dan mag u toch die optie aanvinken. Als uw kind langere of moeilijkere zinnen zegt dan hieronder staan, vink dan de tweede optie aan.",
                     "title": "E. Zinnen",
-                    "type": "radiobutton"
+                    "type": "radiobutton",
+                    "page": 33
                 }
             ]
         }

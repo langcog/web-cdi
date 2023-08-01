@@ -35,7 +35,7 @@ class study(models.Model):
         default=False
     )  # Whether to allow participants to share results via Facebook
     test_period = models.IntegerField(
-        default=14, validators=[MinValueValidator(1), MaxValueValidator(28)]
+        default=14, validators=[MinValueValidator(1), MaxValueValidator(1095)]
     )  # Number of days after test creation that a participant may work on and complete administration
     prefilled_data = models.IntegerField(default=0)
     min_age = models.IntegerField(

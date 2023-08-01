@@ -8,16 +8,20 @@
                     "id": "word",
                     "sections": [
                         {
-                            "id": "col_1"
+                            "id": "col_1",
+                            "page": 1
                         },
                         {
-                            "id": "col_2"
+                            "id": "col_2",
+                            "page": 2
                         },
                         {
-                            "id": "col_3"
+                            "id": "col_3",
+                            "page": 3
                         },
                         {
-                            "id": "col_4"
+                            "id": "col_4",
+                            "page": 4
                         }
                     ],
                     "type": "checkbox",
@@ -31,7 +35,8 @@
             "types": [
                 {
                     "id": "combine",
-                    "type": "radiobutton"
+                    "type": "radiobutton",
+                    "page": 5
                 }
             ]
         }

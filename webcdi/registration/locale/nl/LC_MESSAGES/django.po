@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-17 15:57+0000\n"
+"POT-Creation-Date: 2023-07-19 13:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -354,20 +354,12 @@ msgid "Your registration was created -- %(site_name)s"
 msgstr ""
 
 #: registration/templates/registration/registration_form.html:13
-msgid "Home"
-msgstr ""
-
-#: registration/templates/registration/registration_form.html:14
-msgid "Password reset"
-msgstr ""
-
-#: registration/templates/registration/registration_form.html:37
 msgid ""
 "Forgotten your password? Enter your email address below and we will email "
 "instructions for setting a new one."
 msgstr ""
 
-#: registration/templates/registration/registration_form.html:48
+#: registration/templates/registration/registration_form.html:24
 msgid "Reset my password"
 msgstr ""
 
