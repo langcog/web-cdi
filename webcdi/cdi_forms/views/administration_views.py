@@ -15,6 +15,7 @@ from cdi_forms.views.utils import (
     prefilled_background_form,
     prefilled_cdi_data,
 )
+
 from django.conf import settings
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
@@ -85,8 +86,7 @@ class AdministrationSummaryView(DetailView):
         ctx["cdi_items"] = prefilled_cdi_data(self.object)["cdi_items"]
         cdi_items = json.loads(ctx["cdi_items"])
         categories = {}
-        from cdi_forms.management.commands.populate_items import unicode_csv_reader
-
+        
         categories_data = list(
             unicode_csv_reader(
                 open(
@@ -146,6 +146,9 @@ class AdministrationSummaryView(DetailView):
         if not self.object.completed:
             return ["cdi_forms/expired.html"]
         else:
+            if not self.object.scored:
+                self.object.scored = True
+                self.object.save()
             return ["cdi_forms/administration_summary.html"]
 
     def get_object(self, queryset=None):

@@ -142,6 +142,7 @@ class AdministerAdministraionView(UpdateView):
                 self.object.completedSurvey = True
             else:
                 self.object.completed = True
+            self.object.scored = True
             self.object.save()
 
         self.request.METHOD = "GET"
@@ -253,6 +254,7 @@ class AdministerAdministraionView(UpdateView):
                     self.object.completedSurvey = True
                 else:
                     self.object.completed = True
+                self.object.scored = True
                 self.object.catresponse.est_theta = self.word["curTheta"]
                 self.object.save()
                 self.object.catresponse.save()
