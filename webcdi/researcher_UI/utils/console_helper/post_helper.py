@@ -80,7 +80,7 @@ def post_condition(request, ids, study_obj):
         administrations = administration.objects.filter(id__in=num_ids)
         if study_obj.instrument.form in settings.CAT_FORMS:
             return download_cat_data.download_cat_data(
-                request, study_obj, administrations
+                request, study_obj, administrations, adjusted=True
             )
         else:
             return download_data.download_data(
@@ -118,7 +118,7 @@ def post_condition(request, ids, study_obj):
         administrations = administration.objects.filter(study=study_obj)
         if study_obj.instrument.form in settings.CAT_FORMS:
             return download_cat_data.download_cat_data(
-                request, study_obj, administrations
+                request, study_obj, administrations, adjusted=True
             )
         else:
             return download_data.download_data(

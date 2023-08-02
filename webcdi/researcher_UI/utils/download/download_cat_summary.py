@@ -2,7 +2,7 @@ import pandas as pd
 from cdi_forms.cat_forms.models import CatResponse
 from cdi_forms.models import BackgroundInfo
 from django.http import HttpResponse
-from researcher_UI.models import administration
+from researcher_UI.models import administration, Benchmark
 from researcher_UI.utils.format_admin import format_admin_data, format_admin_header
 
 
@@ -43,6 +43,7 @@ def download_cat_summary(request, study_obj, administrations=None):
 
         rows.append(row)
 
+    answer_rows = rows
     pd_answers = pd.DataFrame.from_dict(rows)
 
     pd_background_answers = pd.merge(
@@ -53,6 +54,30 @@ def download_cat_summary(request, study_obj, administrations=None):
         admin_data, pd_background_answers, how="outer", on="administration_id"
     )
 
+    # norms
+    if Benchmark.objects.filter(instrument=study_obj.instrument).exists():
+        benchmarks = Benchmark.objects.filter(instrument=study_obj.instrument).order_by('percentile')
+        rows = []
+        for obj in administrations:
+            row = {}
+            row["administration_id"] = obj.id
+            answer = next(item for item in answer_rows if item["administration_id"] == obj.id)
+            for b in benchmarks.filter(age=obj.backgroundinfo.age):
+                if answer['est_theta']:
+                    if answer['est_theta'] < b.raw_score:
+                        row['est_theta_percentile'] = b.percentile
+                    if obj.backgroundinfo.sex == 'M':
+                        if answer['est_theta'] < b.raw_score_boy:
+                            row['est_theta_percentile_sex'] = b.percentile
+                    if obj.backgroundinfo.sex == 'F':
+                        if answer['est_theta'] < b.raw_score_girl:
+                            row['est_theta_percentile_sex'] = b.percentile
+            rows.append(row)
+        pd_norms = pd.DataFrame.from_dict(rows)
+
+    combined_data = pd.merge(
+        combined_data, pd_norms, how="outer", on="administration_id"
+    )
     # Turn pandas dataframe into a CSV
     combined_data.to_csv(response, encoding="utf-8", index=False)
 

@@ -6,7 +6,7 @@ from researcher_UI.models import Benchmark, administration
 from researcher_UI.utils.format_admin import format_admin_data, format_admin_header
 
 
-def download_cat_data(request, study_obj, administrations=None):
+def download_cat_data(request, study_obj, administrations=None, adjusted=False):
     response = HttpResponse(content_type="text/csv")
     filename = study_obj.name + "_items.csv"
     response["Content-Disposition"] = (
@@ -60,15 +60,24 @@ def download_cat_data(request, study_obj, administrations=None):
         admin_data, pd_background_answers, how="outer", on="administration_id"
     )
 
-    # TODO norms
+    # norms
     if Benchmark.objects.filter(instrument=study_obj.instrument).exists():
         benchmarks = Benchmark.objects.filter(instrument=study_obj.instrument).order_by('percentile')
         rows = []
         for obj in administrations:
             row = {}
             row["administration_id"] = obj.id
+            
+            age = obj.backgroundinfo.age
+            if adjusted and not obj.backgroundinfo.born_on_due_date:
+                if obj.backgroundinfo.early_or_late == 'early':
+                    age = obj.backgroundinfo.age + obj.backgroundinfo.due_date_diff
+                elif obj.backgroundinfo.early_or_late == 'late':
+                    age = obj.backgroundinfo.age - obj.backgroundinfo.due_date_diff
+                row['adjusted age'] = age
+                
             answer = next(item for item in answer_rows if item["administration_id"] == obj.id)
-            for b in benchmarks.filter(age=obj.backgroundinfo.age):
+            for b in benchmarks.filter(age=age):
                 if answer['est_theta']:
                     if answer['est_theta'] < b.raw_score:
                         row['est_theta_percentile'] = b.percentile
