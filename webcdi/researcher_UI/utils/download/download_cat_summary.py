@@ -64,13 +64,13 @@ def download_cat_summary(request, study_obj, administrations=None):
             answer = next(item for item in answer_rows if item["administration_id"] == obj.id)
             for b in benchmarks.filter(age=obj.backgroundinfo.age):
                 if answer['est_theta']:
-                    if answer['est_theta'] < b.raw_score:
+                    if answer['est_theta'] > b.raw_score:
                         row['est_theta_percentile'] = b.percentile
                     if obj.backgroundinfo.sex == 'M':
-                        if answer['est_theta'] < b.raw_score_boy:
+                        if answer['est_theta'] > b.raw_score_boy:
                             row['est_theta_percentile_sex'] = b.percentile
                     if obj.backgroundinfo.sex == 'F':
-                        if answer['est_theta'] < b.raw_score_girl:
+                        if answer['est_theta'] > b.raw_score_girl:
                             row['est_theta_percentile_sex'] = b.percentile
             rows.append(row)
         pd_norms = pd.DataFrame.from_dict(rows)

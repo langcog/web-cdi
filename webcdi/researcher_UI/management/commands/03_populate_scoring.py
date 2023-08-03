@@ -62,7 +62,6 @@ class Command(BaseCommand):
                     'kind':score['kind'] if 'kind' in score else 'count'
                 }
                 row, created = InstrumentScore.objects.update_or_create(instrument = instrument_obj, title=score['title'], defaults=data_dict,)
-
                 measures = score['measure'].split(';')
                 for measure in measures:
                     m, created = Measure.objects.update_or_create(instrument_score=row, key=measure)
