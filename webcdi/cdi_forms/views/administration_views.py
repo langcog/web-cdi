@@ -15,6 +15,7 @@ from cdi_forms.views.utils import (
     prefilled_background_form,
     prefilled_cdi_data,
 )
+from cdi_forms.utils import unicode_csv_reader
 
 from django.conf import settings
 from django.http import HttpRequest, HttpResponse
@@ -146,9 +147,6 @@ class AdministrationSummaryView(DetailView):
         if not self.object.completed:
             return ["cdi_forms/expired.html"]
         else:
-            if not self.object.scored:
-                self.object.scored = True
-                self.object.save()
             return ["cdi_forms/administration_summary.html"]
 
     def get_object(self, queryset=None):
