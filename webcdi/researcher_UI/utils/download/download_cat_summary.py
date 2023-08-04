@@ -87,7 +87,7 @@ def download_cat_summary(request, study_obj, administrations=None, adjusted=Fals
                             instrument_score__title__in=[
                                 "Total Produced",
                                 "Words Produced",
-                                'Palabras que dice',
+                                "Palabras que dice",
                             ],
                             instrument__language=obj.study.instrument.language,
                             percentile=row["est_theta_percentile"],
