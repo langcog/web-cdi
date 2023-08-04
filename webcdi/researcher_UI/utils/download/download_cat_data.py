@@ -87,6 +87,15 @@ def download_cat_data(request, study_obj, administrations=None, adjusted=False):
                     if obj.backgroundinfo.sex == 'F':
                         if answer['est_theta'] > b.raw_score_girl:
                             row['est_theta_percentile_sex'] = b.percentile
+            if 'est_theta_percentile' in row:
+                try:
+                    row['raw_score'] = Benchmark.objects.filter(age=age, instrument_score__title__in=['Total Produced','Words Produced'], instrument__language=obj.study.instrument.language, percentile=row['est_theta_percentile']).order_by('instrument_score__title')[0].raw_score
+                    if obj.backgroundinfo.sex == 'M':
+                        row['raw_score_sex'] = Benchmark.objects.filter(age=age, instrument_score__title__in=['Total Produced','Words Produced'], instrument__language=obj.study.instrument.language, percentile=row['est_theta_percentile_sex']).order_by('instrument_score__title')[0].raw_score_boy
+                    elif obj.backgroundinfo.sex == 'F':
+                        row['raw_score_sex'] = Benchmark.objects.filter(age=age, instrument_score__title__in=['Total Produced','Words Produced'], instrument__language=obj.study.instrument.language, percentile=row['est_theta_percentile_sex']).order_by('instrument_score__title')[0].raw_score_girl
+                except Exception as e:
+                    pass
             rows.append(row)
         pd_norms = pd.DataFrame.from_dict(rows)
 

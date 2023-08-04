@@ -6,7 +6,7 @@ from researcher_UI.models import administration, Benchmark
 from researcher_UI.utils.format_admin import format_admin_data, format_admin_header
 
 
-def download_cat_summary(request, study_obj, administrations=None):
+def download_cat_summary(request, study_obj, administrations=None, adjusted=False):
     response = HttpResponse(content_type="text/csv")  # Format response as a CSV
     filename = study_obj.name + "_items.csv"
     response["Content-Disposition"] = (
@@ -61,8 +61,11 @@ def download_cat_summary(request, study_obj, administrations=None):
         for obj in administrations:
             row = {}
             row["administration_id"] = obj.id
+
+            age = obj.backgroundinfo.age
+
             answer = next(item for item in answer_rows if item["administration_id"] == obj.id)
-            for b in benchmarks.filter(age=obj.backgroundinfo.age):
+            for b in benchmarks.filter(age=age):
                 if answer['est_theta']:
                     if answer['est_theta'] > b.raw_score:
                         row['est_theta_percentile'] = b.percentile
@@ -72,6 +75,15 @@ def download_cat_summary(request, study_obj, administrations=None):
                     if obj.backgroundinfo.sex == 'F':
                         if answer['est_theta'] > b.raw_score_girl:
                             row['est_theta_percentile_sex'] = b.percentile
+            if 'est_theta_percentile' in row:
+                try:
+                    row['raw_score'] = Benchmark.objects.filter(age=age, instrument_score__title__in=['Total Produced','Words Produced'], instrument__language=obj.study.instrument.language, percentile=row['est_theta_percentile']).order_by('instrument_score__title')[0].raw_score
+                    if obj.backgroundinfo.sex == 'M':
+                        row['raw_score_sex'] = Benchmark.objects.filter(age=age, instrument_score__title__in=['Total Produced','Words Produced'], instrument__language=obj.study.instrument.language, percentile=row['est_theta_percentile_sex']).order_by('instrument_score__title')[0].raw_score_boy
+                    elif obj.backgroundinfo.sex == 'F':
+                        row['raw_score_sex'] = Benchmark.objects.filter(age=age, instrument_score__title__in=['Total Produced','Words Produced'], instrument__language=obj.study.instrument.language, percentile=row['est_theta_percentile_sex']).order_by('instrument_score__title')[0].raw_score_girl
+                except Exception as e:
+                    pass
             rows.append(row)
         pd_norms = pd.DataFrame.from_dict(rows)
 
