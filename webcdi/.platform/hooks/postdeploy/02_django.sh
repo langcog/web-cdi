@@ -7,6 +7,7 @@ source "$PYTHONPATH/activate" && {
     python ./manage.py 01_populate_instrument_family;
     python ./manage.py 02_populate_instrument;
     python ./manage.py 03_populate_scoring;
+    python ./manage.py 04a_delete_benchmark;
     python ./manage.py 04_populate_benchmark;
     python ./manage.py 05_populate_choices;
     python ./manage.py 06_populate_items;
