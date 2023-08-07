@@ -55,7 +55,7 @@ def post_condition(request, ids, study_obj):
 
     elif "delete-selected" in request.POST:
         num_ids = list(set(map(int, ids)))
-        administration.objects.filter(id__in=num_ids).delete()
+        administration.objects.filter(id__in=num_ids).update(is_active=False)
 
     elif "download-links" in request.POST:
         administrations = []

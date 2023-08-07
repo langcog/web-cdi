@@ -22,7 +22,7 @@ def get_helper(request, study_name, num_per_page):
     if study_name is not None:
         current_study = study.objects.get(researcher=request.user, name=study_name)
         administration_table = StudyAdministrationTable(
-            administration.objects.filter(study=current_study)
+            administration.objects.filter(study=current_study, is_active=True)
         )
         if not current_study.confirm_completion:
             administration_table.exclude = ("study", "id", "url_hash", "analysis")
