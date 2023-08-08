@@ -23,12 +23,13 @@ from django.views.generic import TemplateView
 from django.views.generic.base import RedirectView
 from django_registration.backends.activation.views import RegistrationView
 from supplementtut.views import *  # noqa
+from django.views.decorators.cache import never_cache
 
 from webcdi.forms import SignUpForm
 from webcdi.views import CustomLoginView
 
 urlpatterns = [
-    url(r"^$", TemplateView.as_view(template_name="researcher_UI/home.html")),
+    path("", never_cache(TemplateView.as_view(template_name="researcher_UI/home.html"))),
     url(
         r"^favicon\.ico",
         RedirectView.as_view(url="/static/images/favicon.ico", permanent=True),
