@@ -75,28 +75,6 @@ class AdministrationSummaryAdmin(admin.ModelAdmin):
 
 admin.site.register(AdministrationSummary, AdministrationSummaryAdmin)
 
-from brookes.filters import DropdownFilter
-class AdministrationAdmin(admin.ModelAdmin):
-    list_display = [
-        "study",
-        "subject_id",
-        "completed",
-        "completedBackgroundInfo",
-        'is_active',
-        "url_hash",
-    ]
-    list_filter = [
-        "completed", 
-        "completedBackgroundInfo", 
-        'is_active',
-        ('study__name', DropdownFilter),
-        ('study__researcher__username', DropdownFilter),
-        ]
-    search_fields = ["study__name", "url_hash"]
-
-
-admin.site.register(administration, AdministrationAdmin)
-
 
 # Define an inline admin descriptor for Researcher model
 # which acts a bit like a singleton
