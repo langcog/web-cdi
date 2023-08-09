@@ -67,32 +67,20 @@ for IP in list(NEW_IPS):
 ADMINS = (("Henry Mehta", "hjsmehta@gmail.com"),)
 
 
-# Database Settings
-if "RDS_HOSTNAME" in os.environ:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql_psycopg2",
-            "NAME": os.environ["RDS_DB_NAME"],
-            "USER": os.environ["RDS_USERNAME"],
-            "PASSWORD": get_secret(f"{os.environ.get('DJANGO_SERVER_TYPE','dev').lower()}/webcdi/RDS_PASSWORD")['password'],
-            "HOST": os.environ["RDS_HOSTNAME"],
-            "PORT": os.environ["RDS_PORT"],
-        }
-    }
-elif "MPI_INSTANCE" in os.environ:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql_psycopg2",
-            "NAME": os.environ["MPI_DB_NAME"],
-            "USER": os.environ["MPI_USERNAME"],
-            "PASSWORD": os.environ["MPI_PASSWORD"],
-            "HOST": os.environ["MPI_HOSTNAME"],
-            "PORT": os.environ["MPI_PORT"],
-        }
-    }
-
-
 DJANGO_SERVER_TYPE = os.environ.get("DJANGO_SERVER_TYPE", "DEV") # DEV or PROD
+
+# Database Settings
+DATABASES = {
+    "default": {
+        "ENGINE": "webcdi_postgresql_engine",
+        "NAME": os.environ["RDS_DB_NAME"],
+        "USER": os.environ["RDS_USERNAME"],
+        "PASSWORD": get_secret(f"{os.environ.get('DJANGO_SERVER_TYPE','dev').lower()}/webcdi/RDS_PASSWORD")['password'],
+        "HOST": os.environ["RDS_HOSTNAME"],
+        "PORT": os.environ["RDS_PORT"],
+    }
+}
+
 SITE_ID = int(os.environ.get("SITE_ID", 3)) # 4 for MPI, 2 for DEV, 3 for local
 
 # USER_ADMIN_EMAIL = 'webcdi-contact@stanford.edu'
