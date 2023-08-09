@@ -67,12 +67,10 @@ for IP in list(NEW_IPS):
 ADMINS = (("Henry Mehta", "hjsmehta@gmail.com"),)
 
 
-DJANGO_SERVER_TYPE = os.environ.get("DJANGO_SERVER_TYPE", "DEV") # DEV or PROD
-
 # Database Settings
 DATABASES = {
     "default": {
-        "ENGINE": "webcdi_postgresql_engine",
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
         "NAME": os.environ["RDS_DB_NAME"],
         "USER": os.environ["RDS_USERNAME"],
         "PASSWORD": get_secret(f"{os.environ.get('DJANGO_SERVER_TYPE','dev').lower()}/webcdi/RDS_PASSWORD")['password'],
@@ -81,6 +79,7 @@ DATABASES = {
     }
 }
 
+DJANGO_SERVER_TYPE = os.environ.get("DJANGO_SERVER_TYPE", "DEV") # DEV or PROD
 SITE_ID = int(os.environ.get("SITE_ID", 3)) # 4 for MPI, 2 for DEV, 3 for local
 
 # USER_ADMIN_EMAIL = 'webcdi-contact@stanford.edu'
