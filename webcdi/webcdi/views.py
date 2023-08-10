@@ -14,10 +14,10 @@ from webcdi.forms import SignUpForm
 
 from django.views.decorators.cache import never_cache
 
-@never_cache
 class HomeView(TemplateView):
     template_name = 'webcdi/home.html'
 
+    @never_cache
     def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
         translation.activate('en')
         request.LANGUAGE_CODE = translation.get_language()
