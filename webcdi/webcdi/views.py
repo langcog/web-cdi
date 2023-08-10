@@ -1,6 +1,5 @@
 import datetime
 from typing import Any
-from django import http
 
 from django.http import HttpRequest, HttpResponse
 from django.utils import translation
@@ -13,7 +12,6 @@ from django.shortcuts import redirect, render
 from django.views.generic import TemplateView
 from webcdi.forms import SignUpForm
 
-from django.utils import translation
 from django.views.decorators.cache import never_cache
 
 @never_cache
