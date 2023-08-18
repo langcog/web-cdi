@@ -18,6 +18,12 @@ class AddStudyForm(BetterModelForm):
         queryset=instrument.objects.filter(language="English"),
         empty_label="(choose from the list)",
     )  # Study instrument (CANNOT BE CHANGED LATER)
+    no_demographic_boolean = forms.BooleanField(
+        label = 'No Demogaphic data collection',
+        help_text="You will need to include DOB, sex and age offset in the link URL.  For example http://127.0.0.1:8000/interface/henry/Henry%20Test%20-%20ws1/new_parent/?dob=yyyymmdd&offset=-3&sex=F",
+        required = False,
+        #initial = False
+    )
     demographic = forms.ModelChoiceField(
         queryset=Demographic.objects.all(), empty_label=_("Default"), required=False
     )  # demographic cannot be changed later
@@ -67,7 +73,7 @@ class AddStudyForm(BetterModelForm):
 
     prefilled_data_choices = (
         (0, "No, do not populate the any part of the form"),
-        (1, "Background Information Form"),
+        (1, "Demographic Information Form"),
         # (2, "The Background Information Form and the Vocabulary Checklist"),
     )
     prefilled_data = forms.ChoiceField(
@@ -92,15 +98,26 @@ class AddStudyForm(BetterModelForm):
 
     confirmation_questions = forms.BooleanField(
         required=False,
-        label="Would you like participants to answer the confirmation questions (only available when split background information forms are used)",
+        label="Would you like participants to answer the confirmation questions (only available when split demographic information forms are used)",
     )
 
     redirect_boolean = forms.BooleanField(
         label="Provide redirect button at completion of study?", required=False
     )  # Whether to give redirect button upon completion of administration
     redirect_url = forms.URLField(
-        required=False, help_text="Enter the basic return URL"
+        required=False, 
+        help_text="Enter the basic return URL including source_id within curly brackets {} if required",
+        widget=forms.URLInput(
+            attrs={
+                'placeholder': 'https://my_example.com/redirect_url/{source_id}/'
+            }
+        )
     )
+    direct_redirect_boolean = forms.BooleanField(
+        initial=True,
+        help_text="Deselect this if the redirect url calls an API to get the actual redirect url"
+    )
+
     participant_source_boolean = forms.ChoiceField(
         label="Participant Source", choices=choices.PARTICIPANT_SOURCE_CHOICES
     )  # Whether to give redirect button upon completion of administration
@@ -111,7 +128,7 @@ class AddStudyForm(BetterModelForm):
     source_id_url_parameter_key = forms.CharField(required=False)
 
     backpage_boolean = forms.BooleanField(
-        label="Show backpage in split background information study?", required=False
+        label="Show backpage in split demographic information study?", required=False
     )
 
     print_my_answers_boolean = forms.BooleanField(
@@ -130,7 +147,15 @@ class AddStudyForm(BetterModelForm):
         required=False,
         help_text="For chargeable instruments you may opt out of collecting demographic data if you opt out of sharing the study data.",
     )
-
+    send_completion_flag_url = forms.URLField(
+        required=False,
+        help_text='Provide a URL to send a completion flag including source_id within curly brackets {} if required',
+        widget=forms.URLInput(
+            attrs={
+                'placeholder': 'https://my_example.com/completed/{source_id}/'
+            }
+        )
+    )
     # Form validation. Form is passed automatically to views.py for higher level checking.
     def clean(self):
         cleaned_data = super().clean()
@@ -173,24 +198,37 @@ class AddStudyForm(BetterModelForm):
 
         self.helper.form_action = reverse("researcher_ui:add_study")
         self.helper.layout = Layout(
-            Field("name"),
-            Field("instrument"),
-            Field("share_opt_out"),
-            Field("demographic_opt_out"),
-            Field("demographic"),
-            Field("age_range"),
-            Field("test_period"),
-            Field("birth_weight_units"),
-            Field("timing"),
-            Field("waiver"),
-            Field("prefilled_data"),
-            Field("allow_payment"),
-            Field("anon_collection"),
-            Field("subject_cap"),
-            Field("confirm_completion"),
-            Field("show_feedback"),
-            # Field('allow_sharing'),
-            Field("confirmation_questions"),
+            Fieldset(
+                'Study Options',
+                Field("name"),
+                Field("instrument"),
+                Field("share_opt_out"),
+                Field("test_period"),
+                Field("birth_weight_units"),
+                Field("timing"),
+                Field("allow_payment"),
+                Field("anon_collection"),
+                Field("subject_cap"),
+            ),
+            Fieldset(
+                'Demographic Options',
+                Field('no_demographic_boolean', css_class="css_enabler"),
+                Div(
+                    Field("demographic_opt_out"), 
+                    Field("age_range"),
+                    Field("demographic"), 
+                    Field("backpage_boolean"),
+                    Field("confirmation_questions"),
+                    Field("prefilled_data"),
+                    css_class="no_demographic_boolean collapse"
+                ),
+            ),
+            
+            Fieldset(
+                'Opening Dialog',
+                Field("waiver"),
+            ),
+            
             Fieldset(
                 "Redirect Options",
                 HTML(
@@ -199,25 +237,30 @@ class AddStudyForm(BetterModelForm):
                 """
                 ),
                 Field("redirect_boolean", css_class="css_enabler"),
-                Div(Field("redirect_url"), css_class="redirect_boolean collapse"),
-                Field("participant_source_boolean", css_class="css_enabler"),
                 Div(
-                    Field("append_source_id_to_redirect"),
-                    css_class="participant_source_boolean collapse",
+                    Field("redirect_url"), 
+                    Field("direct_redirect_boolean"),
+                    css_class="redirect_boolean collapse"
                 ),
+                Field("participant_source_boolean", css_class="css_enabler"),
                 Div(
                     Field("hide_source_id"),
                     css_class="participant_source_boolean collapse",
                 ),
+                Field('send_completion_flag_url'),
+            ),
+            Fieldset(
+                'Completion Page Details',
+                Field("print_my_answers_boolean"),
+                Field("confirm_completion"),
+                Field("show_feedback"), 
+                Field("end_message", css_class="css_enabler"),
                 Div(
-                    Field("source_id_url_parameter_key"),
-                    css_class="participant_source_boolean collapse",
+                    Field("end_message_text"),
+                    css_class="end_message collapse",
                 ),
             ),
-            Field("backpage_boolean"),
-            Field("print_my_answers_boolean"),
-            Field("end_message"),
-            Field("end_message_text"),
+            
             Submit("submit", _("Save"), css_class="btn btn-primary right"),
         )
 
@@ -307,7 +350,7 @@ class RenameStudyForm(BetterModelForm):
 
     prefilled_data_choices = (
         (0, "No, do not populate the any part of the form"),
-        (1, "Background Information Form"),
+        (1, "Demographic Information Form"),
         # (2, "The Background Information Form and the Vocabulary Checklist"),
     )
     prefilled_data = forms.ChoiceField(
@@ -354,7 +397,7 @@ class RenameStudyForm(BetterModelForm):
     )
     confirmation_questions = forms.BooleanField(
         required=False,
-        label="Would you like participants to answer the confirmation questions (only available when split background information forms are used)",
+        label="Would you like participants to answer the confirmation questions (only available when split demographic information forms are used)",
     )
 
     redirect_boolean = forms.BooleanField(
@@ -363,14 +406,18 @@ class RenameStudyForm(BetterModelForm):
     redirect_url = forms.URLField(
         label="Please enter URL",
         required=False,
-        help_text="Enter the basic return URL - the Centiment aid will be added automatically",
+        help_text="Enter the basic return URL including source_id within curly brackets {} if required",
+    )
+    direct_redirect_boolean = forms.BooleanField(
+        initial=True,
+        help_text="Deselect this if the redirect url calls an API to get the actual redirect url"
     )
 
     participant_source_boolean = forms.ChoiceField(
         label="Participant Source", choices=choices.PARTICIPANT_SOURCE_CHOICES
     )  # Whether to give redirect button upon completion of administration
     backpage_boolean = forms.BooleanField(
-        label="Show backpage in split background information study?", required=False
+        label="Show backpage in split demographic information study?", required=False
     )
     append_source_id_to_redirect = forms.BooleanField(required=False)
     hide_source_id = forms.BooleanField(
@@ -425,6 +472,7 @@ class RenameStudyForm(BetterModelForm):
                 "Redirect Options",
                 Field("redirect_boolean", css_class="css_enabler"),
                 Div(Field("redirect_url"), css_class="redirect_boolean collapse"),
+                Div(Field("direct_redirect_boolean"), css_class="redirect_boolean collapse"),
                 Field("participant_source_boolean", css_class="css_enabler"),
                 Div(
                     Field("append_source_id_to_redirect"),

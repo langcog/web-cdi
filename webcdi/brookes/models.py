@@ -1,7 +1,9 @@
 from brookes.utils import create_brookes_code
 from dateutil.relativedelta import relativedelta
 from django.db import models
-from researcher_UI.models import InstrumentFamily, User
+from researcher_UI.models import InstrumentFamily
+
+from django.contrib.auth.models import User
 
 # Create your models here.
 

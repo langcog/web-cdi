@@ -212,6 +212,32 @@
 
             });
 
+            function check_for_no_demographic_boolean() {
+              if ($('#id_no_demographic_boolean').prop('checked')) {
+                $('.no_demographic_boolean').addClass('collapse')
+              } else {
+                $('.no_demographic_boolean').removeClass('collapse');
+              }  
+            }        
+
+            check_for_no_demographic_boolean();
+            $('#id_no_demographic_boolean').on('change', function () {
+              check_for_no_demographic_boolean();      
+            });
+
+            function check_for_end_message() {
+              if ($('#id_end_message').find(":selected").val() == 'standard') {
+                $('.end_message').addClass('collapse')
+              } else {
+                $('.end_message').removeClass('collapse');
+              }  
+            }        
+
+            check_for_end_message();
+            $('#id_end_message').on('change', function () {
+                check_for_end_message();      
+            });
+            
             function check_for_redirect() {
               if ($('#id_redirect_boolean').prop('checked')) {
                 $('.redirect_boolean').removeClass('collapse')

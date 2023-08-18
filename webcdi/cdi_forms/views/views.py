@@ -316,9 +316,14 @@ def administer_cdi_form(request, hash_id):
             if administration_instance.completedSurvey:
                 return redirect("backpage-background-info", pk=background_instance.pk)
             elif administration_instance.completedBackgroundInfo:
-                return redirect(
-                    "instructions", hash_id=administration_instance.url_hash
-                )
+                if administration_instance.page_number > 0:
+                    return redirect(
+                        "update_administration_section", hash_id=administration_instance.url_hash, section=administration_instance.page_number+1
+                    )
+                else:
+                    return redirect(
+                        "instructions", hash_id=administration_instance.url_hash
+                    )
             else:
                 return redirect("background-info", pk=background_instance.pk)
         else:

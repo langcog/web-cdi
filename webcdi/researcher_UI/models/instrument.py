@@ -27,9 +27,6 @@ class instrument(models.Model):
         InstrumentFamily, on_delete=models.SET_NULL, null=True, blank=True
     )
 
-    def __unicode__(self):
-        return "%s (%s %s)" % (self.verbose_name, self.language, self.form)
-
     def __str__(self):
         return f"%s" % (self.verbose_name)
 

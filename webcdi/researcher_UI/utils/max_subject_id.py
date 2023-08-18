@@ -1,0 +1,24 @@
+from researcher_UI.models import study, researcher, administration
+from django.db.models import Max
+
+def max_subject_id(study_obj):
+    if study_obj.study_group:
+        related_studies = study.objects.filter(
+            researcher=researcher, study_group=study_obj.study_group
+        )
+        max_id = administration.objects.filter(
+            study__in=related_studies
+        ).aggregate(Max("subject_id"))["subject_id__max"]
+    else:
+        max_id = administration.objects.filter(study=study_obj).aggregate(
+            Max("subject_id")
+        )[
+            "subject_id__max"
+        ]  # Find the subject ID in this study with the highest number
+
+    if (
+        max_id is None
+    ):  # If the max subject ID could not be found (e.g., study has 0 participants)
+        max_id = 0  # Mark as zero
+
+    return max_id

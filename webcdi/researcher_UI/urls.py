@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from django.urls import path
 
-from . import views
+from researcher_UI import views
 
 app_name = "researcher_ui"
 
@@ -28,7 +28,7 @@ urlpatterns = [
     path("study/<int:pk>/overflow/", views.Overflow.as_view(), name="overflow"),
     url(
         r"^(?P<username>[^/]+)/(?P<study_name>[^/]+)/new_parent/$",
-        views.AdminNewParent.as_view(),
+        views.AddNewParent.as_view(),
         name="administer_new_parent",
     ),
     url(

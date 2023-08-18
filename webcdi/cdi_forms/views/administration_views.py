@@ -53,9 +53,10 @@ class AdministrationSummaryView(DetailView):
         if has_backpage(filename):
             backpage_background_form = prefilled_background_form(self.object, False)
             ctx["backpage_background_form"] = backpage_background_form
+        
+        # calc gift data
         ctx["gift_code"] = None
         ctx["gift_amount"] = None
-
         if self.object.study.allow_payment and self.object.bypass is None:
             amazon_urls = {
                 "English": {
@@ -83,6 +84,7 @@ class AdministrationSummaryView(DetailView):
                 ctx["gift_amount"] = "ran out"
                 ctx["redeem_url"] = None
                 ctx["legal_url"] = None
+        
         # calculate graph data
         ctx["cdi_items"] = prefilled_cdi_data(self.object)["cdi_items"]
         cdi_items = json.loads(ctx["cdi_items"])
@@ -218,6 +220,7 @@ class AdministrationUpdateView(UpdateView):
 
     def get_object(self, queryset=None):
         self.object = administration.objects.get(url_hash=self.kwargs["hash_id"])
+        logger.debug(f'Redirect URL is {self.object.redirect_url()}')
         return self.object
 
     def get_instrument(self):
@@ -336,6 +339,9 @@ class AdministrationUpdateView(UpdateView):
                 )
             else:
                 self.object.completed = True
+
+                # TODO Check if send_completion_flag field has a URL and send if it does
+
                 self.object.save()
                 response = reverse(
                     "administration_summary_view", args=(self.object.url_hash,)
@@ -366,7 +372,8 @@ class AdministrationUpdateView(UpdateView):
                             defaults={"value": value},
                         )
         administration.objects.filter(url_hash=self.object.url_hash).update(
-            last_modified=timezone.now()
+            last_modified=timezone.now(),
+            page_number = 0 if not 'section' in self.kwargs else int(self.kwargs["section"])
         )
 
         return redirect(response)
@@ -549,6 +556,8 @@ class AdministrationUpdateView(UpdateView):
     def get_section(self, target_section=None):
         if not target_section and "section" in self.kwargs:
             target_section = self.kwargs["section"]
+        elif  not target_section and self.object.page_number > 0:
+            target_section = self.object.page_number+1
 
         prefilled_data_list = administration_data.objects.filter(
             administration=self.object

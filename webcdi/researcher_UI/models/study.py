@@ -61,6 +61,10 @@ class study(models.Model):
     redirect_url = models.URLField(
         blank=True, null=True, help_text="Please enter redirect URL"
     )  # The redirect URL
+    direct_redirect_boolean = models.BooleanField(
+        default=True,
+        help_text="Deselect this if the redirect url calls an API to get the actual redirect url"
+    )
     append_source_id_to_redirect = models.BooleanField(
         verbose_name="Append source_id to redirect URL?", default=False
     )
@@ -84,6 +88,10 @@ class study(models.Model):
     )
     end_message_text = RichTextUploadingField(blank=True, null=True)
 
+    no_demographic_boolean = models.BooleanField(
+        default = False,
+        help_text ='You must include DOB, age offset and sex in the Link URL'
+    )
     demographic = models.ForeignKey(
         "Demographic", on_delete=models.SET_NULL, blank=True, null=True
     )
@@ -94,6 +102,11 @@ class study(models.Model):
     demographic_opt_out = models.BooleanField(
         default=False,
         help_text="For chargeable instruments you may opt out of collecting demographic data.",
+    )
+    send_completion_flag_url = models.URLField(
+        blank=True,
+        null=True,
+        help_text = 'Send completion flag to URL'
     )
 
     def __str__(self):

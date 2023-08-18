@@ -14,7 +14,9 @@
             {% endif %}
         </div>
         <div class="flex-row d-flex justify-content-center">    
-            <input name="btn-back" value="{% trans 'Go back to Background Info' %}" class="btn btn-primary" type="submit">
+            {% if not object.study.no_demographic_boolean %}
+                <input name="btn-back" value="{% trans 'Go back to Background Info' %}" class="btn btn-primary" type="submit">
+            {% endif %}
         </div>
     </div>
     {% endif %}

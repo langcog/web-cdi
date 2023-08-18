@@ -54,9 +54,11 @@
 
 
         </script>
-        <hr />
 
-        <div class="row form-group">
+        {% if not object.no_demographic_boolean %}
+
+        <hr />
+        <div class="row form-group">  
             <label for="add_new_parent" class="col-3 control-label">Single Reusable Link:</label>
             <div class="col-9" id="reusable_link_div" style = "overflow: hidden; text-overflow: ellipsis;">
               <a href="{% url 'researcher_ui:administer_new_parent' username study_name %}" id="reusable_link">Click here</a><br>
@@ -80,15 +82,16 @@
               </script>
             </div>
         </div>
+        {% endif %}
 
         {% if object.participant_source_boolean > 0 %}
         <hr />
         <div class="row form-group">
           <label for="add_new_parent" class="col-3 control-label">External Source Link:</label>
           <div class="col-9" id="prolific_link_div" style = "overflow: hidden; text-overflow: ellipsis;">
-            <a href="">{{ request.scheme }}://{{ request.META.HTTP_HOST }}{% url 'researcher_ui:administer_new_parent' username study_name %}?source_id={% verbatim %}{{%source_id%}}{% endverbatim %}</a><br>
-            (This link will not open a new administration.  It is to be copied into External Source and will enable openning on a new administration capturing the External Source Id from there.  If you want a link \
-            with a blank Prolific Id, use the Single Reusable Link)
+            <a href="">{{ request.scheme }}://{{ request.META.HTTP_HOST }}{% url 'researcher_ui:administer_new_parent' username study_name %}?source_id={% verbatim %}{{%source_id%}}{% endverbatim %}{% if object.no_demographic_boolean %}&age={% verbatim %}{{%age%}}{% endverbatim %}&sex={% verbatim %}{{%sex%}}{% endverbatim %}&offset={% verbatim %}{{%offset%}}{% endverbatim %}{% endif %}</a><br>
+            (This link will not open a new administration.  It is to be copied into External Source and will enable openning on a new administration capturing the External Source Id from there.  
+            {% if not object.no_demographic_boolean %}If you want a link with a blank source Id, use the Single Reusable Link.{% endif %})
           </div>
         </div>
         {% endif %}

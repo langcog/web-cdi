@@ -1,6 +1,9 @@
+import logging
 from django.db import models
 
 from django.shortcuts import reverse
+
+logger = logging.getLogger('debug')
 
 class AdministrationManager(models.Manager):
     def is_active(self):
@@ -86,7 +89,13 @@ class administration(models.Model):
             return reverse("administer_cdi_form", kwargs={"hash_id": self.url_hash})
 
     def redirect_url(self):
-        target = f"{self.study.redirect_url}"
+        target = f"{self.study.redirect_url}".strip()
+        if '{source_id}' in target:
+            logger.debug('Got a source_id')
+            target = target.replace('{source_id}', self.backgroundinfo.source_id)
+
+        # TODO if study completed and redirect_url is a call to a redirect, get the actual URL
+        
         if self.study.append_source_id_to_redirect:
             target = f"{target}?{self.study.source_id_url_parameter_key}={self.backgroundinfo.source_id}"
         return target

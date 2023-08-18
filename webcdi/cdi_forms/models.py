@@ -210,7 +210,7 @@ class BackgroundInfo(models.Model):
         verbose_name=_("Was your child born earlier or later than their due date?"),
         blank=True,
         null=True,
-    )  # Boolean for whether child was born on due date
+    )  # Boolean for whether child was born on due date - True (1) is born early or late
     early_or_late = models.CharField(
         verbose_name=_("Was he/she early or late?"),
         max_length=5,

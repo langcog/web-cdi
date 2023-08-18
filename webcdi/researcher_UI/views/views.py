@@ -21,15 +21,14 @@ from psycopg2.extras import NumericRange
 from researcher_UI.models import administration, researcher, study
 from researcher_UI.utils.add_paired_study import add_paired_study_fun
 from researcher_UI.utils.admin_new import admin_new_fun
-from researcher_UI.utils.admin_new_parent import admin_new_parent_fun
 from researcher_UI.utils.admin_new_participant import admin_new_participant_fun
 from researcher_UI.utils.console_helper.get_helper import get_helper
 from researcher_UI.utils.console_helper.post_helper import post_condition
 from researcher_UI.utils.import_data import import_data_fun
 from researcher_UI.utils.raw_gift_codes import raw_gift_code_fun
 
-from .forms import *
-from .mixins import ReseacherOwnsStudyMixin, StudyOwnerMixin
+from ..forms import *
+from ..mixins import ReseacherOwnsStudyMixin, StudyOwnerMixin
 
 
 class Console(LoginRequiredMixin, generic.ListView):
@@ -242,40 +241,6 @@ class AdministerNewParticipant(generic.CreateView):
     def post(self, request, username, study_name):
         admin = admin_new_participant_fun(request, username, study_name)
         return redirect(reverse("administer_cdi_form", args=[admin.url_hash]))
-
-
-class AdminNewParent(generic.View):
-    def get(self, request, username, study_name):
-        study_obj, let_through, bypass, source_id = admin_new_parent_fun(
-            request, username, study_name
-        )
-        if let_through:
-            if study_obj.instrument.form in settings.CAT_FORMS:
-                return redirect(
-                    reverse(
-                        "cat_forms:create-new-background-info",
-                        kwargs={
-                            "study_id": study_obj.id,
-                            "bypass": bypass,
-                            "source_id": source_id,
-                        },
-                    )
-                )
-            else:
-                return redirect(
-                    reverse(
-                        "create-new-background-info",
-                        kwargs={
-                            "study_id": study_obj.id,
-                            "bypass": bypass,
-                            "source_id": source_id,
-                        },
-                    )
-                )
-        else:
-            redirect_url = reverse("researcher_ui:overflow", args=[study_obj.id])
-        return redirect(redirect_url)
-
 
 class Overflow(generic.DetailView):
     model = study
