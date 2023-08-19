@@ -1,34 +1,19 @@
-import datetime
+
 import json
 from typing import Any, Dict
 
-from brookes.models import BrookesCode
-from django.conf import settings
-from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core import serializers
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse
 from django.shortcuts import redirect
-from django.template.loader import get_template
 from django.urls import reverse
-from django.utils.safestring import mark_safe
-from django.utils.text import slugify
 from django.views import generic
-from django.views.generic import UpdateView
-from django_weasyprint import WeasyTemplateResponseMixin
 from ipware.ip import get_client_ip
-from psycopg2.extras import NumericRange
-from researcher_UI.models import administration, researcher, study
-from researcher_UI.utils.add_paired_study import add_paired_study_fun
+from researcher_UI.models import  study
 from researcher_UI.utils.admin_new import admin_new_fun
-from researcher_UI.utils.admin_new_participant import admin_new_participant_fun
 from researcher_UI.utils.console_helper.get_helper import get_helper
 from researcher_UI.utils.console_helper.post_helper import post_condition
-from researcher_UI.utils.import_data import import_data_fun
-from researcher_UI.utils.raw_gift_codes import raw_gift_code_fun
 
 from ..forms import *
-from ..mixins import ReseacherOwnsStudyMixin, StudyOwnerMixin
 
 
 class Console(LoginRequiredMixin, generic.ListView):
@@ -88,118 +73,6 @@ class StudyCreateView(LoginRequiredMixin, generic.CreateView):
                 )
 
 
-class RenameStudy(LoginRequiredMixin, ReseacherOwnsStudyMixin, generic.UpdateView):
-    model = study
-    template_name = "researcher_UI/rename_study_modal.html"
-    form_class = RenameStudyForm
-
-    def get_success_url(self):
-        return reverse("researcher_ui:console_study", kwargs={"pk": self.object.pk})
-
-    def get_context_data(self, **kwargs):
-        context = super(RenameStudy, self).get_context_data(**kwargs)
-        study_obj = self.get_object()
-        age_range = NumericRange(study_obj.min_age, study_obj.max_age)
-        context["form_name"] = "Update Study"
-        context["allow_payment"] = study_obj.allow_payment
-        context["min_age"] = age_range.lower
-        context["max_age"] = age_range.upper
-        context["study_obj"] = study_obj
-        return context
-
-    def form_valid(self, form):
-        raw_gift_codes = form.cleaned_data.get("gift_codes")
-        raw_gift_amount = form.cleaned_data.get("gift_amount")
-        raw_test_period = form.cleaned_data.get("test_period")
-        new_study_name = form.cleaned_data.get("name")
-        new_age_range = form.cleaned_data.get("age_range")
-        study_obj = self.object
-
-        if raw_test_period >= 1 and raw_test_period <= 1095:
-            study_obj.test_period = raw_test_period
-        else:
-            study_obj.test_period = 14
-
-        study_obj.min_age = new_age_range.lower
-        study_obj.max_age = new_age_range.upper
-        study_obj.save()
-
-        res = raw_gift_code_fun(
-            raw_gift_amount, study_obj, new_study_name, raw_gift_codes
-        )
-        if res["stat"] == "ok" and raw_gift_amount:
-            messages.success(
-                self.request,
-                mark_safe(
-                    f"The following gift codes of value {raw_gift_amount} have been added: {raw_gift_codes}"
-                ),
-            )
-        elif res["stat"] == "error":
-            messages.error(
-                self.request,
-                mark_safe(
-                    f'There was an error with the gift codes.  None were added.  The error message is: {res["error_message"]}'
-                ),
-            )
-        return super().form_valid(form)
-
-
-class AddStudy(LoginRequiredMixin, generic.CreateView):
-    template_name = "researcher_UI/add_study_modal.html"
-    model = study
-    form_class = AddStudyForm
-
-    def get_form(self):
-        self.request.user.refresh_from_db()
-        form_class = AddStudyForm(
-            self.request.POST or None, researcher=self.request.user
-        )
-        return form_class
-
-    def form_valid(self, form):
-        study_instance = form.save(commit=False)
-        age_range = form.cleaned_data.get("age_range")
-        study_instance.active = True
-        researcher = self.request.user
-
-        try:
-            study_instance.min_age = age_range.lower
-            study_instance.max_age = age_range.upper
-        except:
-            study_instance.min_age = study_instance.instrument.min_age
-            study_instance.max_age = study_instance.instrument.max_age
-
-        study_instance.researcher = researcher
-        if not form.cleaned_data.get("test_period"):
-            study_instance.test_period = 14
-
-        study_instance.save()
-
-        return redirect(
-            reverse("researcher_ui:console_study", args=(study_instance.pk,))
-        )
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["researcher"] = self.request.user
-        return context
-
-
-class AddPairedStudy(LoginRequiredMixin, generic.CreateView):
-    model = study
-    form_class = AddPairedStudyForm
-    template_name = "researcher_UI/add_paired_study_modal.html"
-
-    def form_valid(self, form):
-        add_paired_study_fun(form, self.request.user)
-        return redirect(reverse("researcher_ui:console"))
-
-    def get_context_data(self, **kwargs):
-        context = super(AddPairedStudy, self).get_context_data(**kwargs)
-        researcher = self.request.user
-        context["researcher"] = researcher
-        return context
-
 
 class AdminNew(LoginRequiredMixin, generic.UpdateView):
     model = study
@@ -237,10 +110,6 @@ class AdminNew(LoginRequiredMixin, generic.UpdateView):
         return HttpResponse(json.dumps(data), content_type="application/json")
 
 
-class AdministerNewParticipant(generic.CreateView):
-    def post(self, request, username, study_name):
-        admin = admin_new_participant_fun(request, username, study_name)
-        return redirect(reverse("administer_cdi_form", args=[admin.url_hash]))
 
 class Overflow(generic.DetailView):
     model = study
@@ -263,157 +132,3 @@ class Overflow(generic.DetailView):
             + "?bypass=true"
         )
         return ctx
-
-
-class ImportData(LoginRequiredMixin, generic.UpdateView):
-    model = study
-    form_class = ImportDataForm
-    template_name = "researcher_UI/import_data.html"
-
-    def form_valid(self, form):
-        data = import_data_fun(self.request, self.get_object())
-        return HttpResponse(json.dumps(data), content_type="application/json")
-
-    def get_context_data(self, **kwargs):
-        context = super(ImportData, self).get_context_data(**kwargs)
-        study_obj = self.get_object()
-        context["form"] = ImportDataForm(researcher=self.request.user, study=study_obj)
-        return context
-
-
-class EditStudyView(LoginRequiredMixin, StudyOwnerMixin, generic.UpdateView):
-    model = administration
-    form_class = StudyFormForm
-    template_name = "researcher_UI/interface.html"
-
-    def get_context_data(self, **kwargs):
-        context = get_helper(self.request, self.object.study.name, 20)
-        context["study"] = self.object.study
-        return context
-
-    def form_valid(self, form):
-        obj = self.get_object()
-
-        if "subject_id" in form.changed_data:
-            count = administration.objects.filter(
-                study_id=obj.study.pk, subject_id=form.cleaned_data["subject_id"]
-            ).count()
-
-            if count > 1:
-                return JsonResponse(
-                    {"error": "subject id is already existed."}, status=400
-                )
-
-            _instances = administration.objects.filter(
-                study=obj.study, subject_id=form.cleaned_data["subject_id_old"]
-            )
-
-            new_subject_id = int(form.cleaned_data["subject_id"])
-
-            for _instance in _instances:
-                _instance.subject_id = new_subject_id
-                _instance.save()
-
-        if "local_lab_id" in form.changed_data:
-            obj.local_lab_id = form.cleaned_data["local_lab_id"]
-            obj.save()
-        if "opt_out" in form.changed_data:
-            obj.opt_out = form.cleaned_data["opt_out"]
-            obj.save()
-
-        super(EditStudyView, self).form_valid(form)
-
-        return JsonResponse(
-            {"message": "Your data is updated successfully"}, status=200
-        )
-
-
-class AjaxDemographicForms(generic.DetailView):
-    def get(self, request):
-        pk = request.GET["id"]
-        data = serializers.serialize(
-            "json",
-            instrument.objects.get(name=pk).demographics.all().order_by("pk"),
-            fields=("id", "name"),
-        )
-        return HttpResponse(data, content_type="application/json")
-
-
-class AjaxChargeStatus(generic.DetailView):
-    def get(self, request):
-        pk = request.GET["id"]
-
-        data = {"chargeable": instrument.objects.get(name=pk).family.chargeable}
-        return JsonResponse(data, content_type="application/json")
-
-
-class ResearcherAddInstruments(LoginRequiredMixin, UpdateView):
-    model = researcher
-    form_class = AddInstrumentForm
-    template_name = "researcher_UI/researcher_form.html"
-
-    def get_success_url(self):
-        res = reverse("researcher_ui:console")
-        dt = datetime.date.today()
-        for chargeable in self.object.allowed_instrument_families.filter(
-            chargeable=True
-        ):
-            if not BrookesCode.objects.filter(
-                researcher=self.request.user,
-                instrument_family=chargeable,
-                expiry__gte=dt,
-            ).exists():
-                res = reverse("brookes:enter_codes", args=(chargeable.id,))
-
-        return res
-
-    def get_context_data(self, **kwargs):
-        ctx = super().get_context_data(**kwargs)
-        return ctx
-
-
-class PDFAdministrationDetailView(WeasyTemplateResponseMixin, generic.DetailView):
-    model = study
-
-    def get_template_names(self):
-        name = slugify(f"{self.object.instrument.verbose_name}")
-        template_name = f"researcher_UI/individual/{name}.html"
-        try:
-            get_template(template_name)
-            return [template_name]
-        except:
-            return ["researcher_UI/individual/no_clinical_template.html"]
-
-    def get_context_data(self, **kwargs):
-        ctx = super().get_context_data(**kwargs)
-        ctx["administrations"] = self.object.administration_set.all().filter(
-            completed=True
-        )
-        if "id" in self.request.GET:
-            ids = self.request.GET.getlist("id")
-            int_ids = []
-            for id in ids:
-                int_ids.append(int(id))
-            ctx["administrations"] = ctx["administrations"].filter(pk__in=int_ids)
-        return ctx
-
-    def get(self, request, *args, **kwargs) -> HttpResponse:
-        self.object = self.get_object()
-        name = slugify(f"{self.object.instrument.verbose_name}")
-        template_name = f"researcher_UI/individual/{name}.html"
-        try:
-            get_template(template_name)
-        except:
-            messages.info(
-                self.request,
-                mark_safe(
-                    f"""
-                    <h1>No Clinical Template Available</h1>
-                    <p>We do not have a clinical template available for { self.object.instrument } studies.</p>
-                    """,
-                ),
-            )
-
-            return redirect(request.META.get("HTTP_REFERER"))
-
-        return super().get(request, *args, **kwargs)

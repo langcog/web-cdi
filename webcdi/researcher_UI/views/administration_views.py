@@ -1,7 +1,7 @@
 import datetime
 from typing import Any, Optional
 from django.db import models
-from django.views.generic import DetailView
+from django.views.generic import DetailView, UpdateView, CreateView
 from django.conf import settings
 from django.http import Http404
 from django.shortcuts import redirect
@@ -11,9 +11,70 @@ from django.utils import timezone
 from ipware.ip import get_client_ip
 from researcher_UI.models import administration, study
 from researcher_UI.views import ip_address
+from researcher_UI.mixins import StudyOwnerMixin
+from researcher_UI.forms import StudyFormForm
 from researcher_UI.utils import random_url_generator, max_subject_id
 from cdi_forms.models import BackgroundInfo
 
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import JsonResponse
+
+from researcher_UI.utils.console_helper import get_helper
+
+from researcher_UI.utils import admin_new_participant_fun
+
+class EditAdministrationView(LoginRequiredMixin, StudyOwnerMixin, UpdateView):
+    model = administration
+    form_class = StudyFormForm
+    template_name = "researcher_UI/interface.html"
+
+    def get_context_data(self, **kwargs):
+        context = get_helper(self.request, self.object.study.name, 20)
+        context["study"] = self.object.study
+        return context
+
+    def form_valid(self, form):
+        obj = self.get_object()
+
+        if "subject_id" in form.changed_data:
+            count = administration.objects.filter(
+                study_id=obj.study.pk, subject_id=form.cleaned_data["subject_id"]
+            ).count()
+
+            if count > 1:
+                return JsonResponse(
+                    {"error": "subject id is already existed."}, status=400
+                )
+
+            _instances = administration.objects.filter(
+                study=obj.study, subject_id=form.cleaned_data["subject_id_old"]
+            )
+
+            new_subject_id = int(form.cleaned_data["subject_id"])
+
+            for _instance in _instances:
+                _instance.subject_id = new_subject_id
+                _instance.save()
+
+        if "local_lab_id" in form.changed_data:
+            obj.local_lab_id = form.cleaned_data["local_lab_id"]
+            obj.save()
+        if "opt_out" in form.changed_data:
+            obj.opt_out = form.cleaned_data["opt_out"]
+            obj.save()
+
+        super().form_valid(form)
+
+        return JsonResponse(
+            {"message": "Your data is updated successfully"}, status=200
+        )
+
+
+class AdministerNewParticipant(CreateView):
+    def post(self, request, username, study_name):
+        admin = admin_new_participant_fun(request, username, study_name)
+        return redirect(reverse("administer_cdi_form", args=[admin.url_hash]))
+    
 class AddNewParent(DetailView):
     model = study
 

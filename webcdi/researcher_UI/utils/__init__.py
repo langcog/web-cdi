@@ -1,2 +1,6 @@
 from .random_url_generator import random_url_generator  # noqa
 from .max_subject_id import max_subject_id  # noqa
+from .import_data import import_data_fun  # noqa
+from .admin_new_participant import admin_new_participant_fun  # noqa
+from .add_paired_study import add_paired_study_fun  # noqa
+from .raw_gift_codes import raw_gift_code_fun  # noqa

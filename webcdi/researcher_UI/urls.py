@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from django.urls import path
+from django.urls import path, include
 
 from researcher_UI import views
 
@@ -8,24 +8,20 @@ app_name = "researcher_ui"
 urlpatterns = [
     path("", views.Console.as_view(), name="console"),
     path(
-        "study/<int:pk>/detail/", views.StudyCreateView.as_view(), name="console_study"
+        "study/",
+        include(
+            [
+                path("<int:pk>/detail/", views.StudyCreateView.as_view(), name="console_study"), 
+                path("add/", views.AddStudy.as_view(), name="add_study"),
+                path("add_paired/", views.AddPairedStudy.as_view(), name="add_paired_study"),
+                path("<int:pk>/administer_new/", views.AdminNew.as_view(), name="administer_new"),
+                path("<int:pk>/import_data/", views.ImportData.as_view(), name="import_data",),
+                path("<int:pk>/rename_study/", views.RenameStudy.as_view(), name="rename_study"),
+                path("<int:pk>/overflow/", views.Overflow.as_view(), name="overflow"),
+            ]
+        )
     ),
-    path("add_study/", views.AddStudy.as_view(), name="add_study"),
-    path("add_paired_study/", views.AddPairedStudy.as_view(), name="add_paired_study"),
-    path(
-        "study/<int:pk>/administer_new/",
-        views.AdminNew.as_view(),
-        name="administer_new",
-    ),
-    path(
-        "study/<int:pk>/import_data/",
-        views.ImportData.as_view(),
-        name="import_data",
-    ),
-    path(
-        "study/<int:pk>/rename_study/", views.RenameStudy.as_view(), name="rename_study"
-    ),
-    path("study/<int:pk>/overflow/", views.Overflow.as_view(), name="overflow"),
+
     url(
         r"^(?P<username>[^/]+)/(?P<study_name>[^/]+)/new_parent/$",
         views.AddNewParent.as_view(),
@@ -53,12 +49,12 @@ urlpatterns = [
     ),
     path(
         "researcher/<int:pk>/",
-        views.ResearcherAddInstruments.as_view(),
+        views.AddInstruments.as_view(),
         name="researcher_add_instruments",
     ),
     path(
         "edit-study-new/<int:pk>/",
-        views.EditStudyView.as_view(),
+        views.EditAdministrationView.as_view(),
         name="edit_study_new",
     ),
     path(

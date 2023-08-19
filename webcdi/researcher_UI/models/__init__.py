@@ -1,4 +1,3 @@
-from .models import *  # noqa
 from .instrument_family import InstrumentFamily  # noqa
 from .instrument import instrument  # noqa
 from .researcher import researcher  # noqa
