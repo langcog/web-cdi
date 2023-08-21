@@ -16,7 +16,7 @@ urlpatterns = [
                 path("add_paired/", views.AddPairedStudy.as_view(), name="add_paired_study"),
                 path("<int:pk>/administer_new/", views.AdminNew.as_view(), name="administer_new"),
                 path("<int:pk>/import_data/", views.ImportData.as_view(), name="import_data",),
-                path("<int:pk>/rename_study/", views.RenameStudy.as_view(), name="rename_study"),
+                path("<int:pk>/update/", views.UpdateStudyView.as_view(), name="rename_study"),
                 path("<int:pk>/overflow/", views.Overflow.as_view(), name="overflow"),
             ]
         )

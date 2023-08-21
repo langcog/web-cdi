@@ -20,7 +20,7 @@ class AddStudyForm(BetterModelForm):
     )  # Study instrument (CANNOT BE CHANGED LATER)
     no_demographic_boolean = forms.BooleanField(
         label = 'No Demogaphic data collection',
-        help_text="You will need to include DOB, sex and age offset in the link URL.  For example http://127.0.0.1:8000/interface/henry/Henry%20Test%20-%20ws1/new_parent/?dob=yyyymmdd&offset=-3&sex=F",
+        help_text="You will need to include DOB, sex and age offset in the link URL.  For example http://127.0.0.1:8000/interface/henry/Henry%20Test%20-%20ws1/new_parent/?age={age}&offset={offset}&sex={sex}",
         required = False,
         #initial = False
     )
@@ -156,6 +156,22 @@ class AddStudyForm(BetterModelForm):
             }
         )
     )
+    gift_codes = forms.CharField(
+        widget=forms.Textarea(
+            attrs={
+                "placeholder": "Paste Amazon gift card codes here. Can be separated by spaces, commas, or new lines."
+            }
+        ),
+        required=False,
+        label="Gift Card Codes",
+    )  # Can add a list of gift card codes (separated by new lines, commas, or spaces) to the PaymentCode model that are given out to participants upon completion of current study.
+    gift_amount = forms.CharField(
+        max_length=7,
+        required=False,
+        label="Amount per Card (in USD)",
+        widget=forms.TextInput(attrs={"placeholder": "$XX.XX"}),
+    )  
+
     # Form validation. Form is passed automatically to views.py for higher level checking.
     def clean(self):
         cleaned_data = super().clean()
@@ -177,7 +193,7 @@ class AddStudyForm(BetterModelForm):
     # Initiating form and field layout.
     def __init__(self, *args, **kwargs):
         self.researcher = kwargs.pop("researcher", None)
-        super(AddStudyForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_id = "add-study"
         self.helper.form_class = "form-horizontal"
@@ -206,7 +222,9 @@ class AddStudyForm(BetterModelForm):
                 Field("test_period"),
                 Field("birth_weight_units"),
                 Field("timing"),
-                Field("allow_payment"),
+                Field("allow_payment", css_class="css_enabler"),
+                Div(Field("gift_codes"), css_class="allow_payment collapse"),
+                Div(Field("gift_amount"), css_class="allow_payment collapse"),
                 Field("anon_collection"),
                 Field("subject_cap"),
             ),
@@ -245,9 +263,10 @@ class AddStudyForm(BetterModelForm):
                 Field("participant_source_boolean", css_class="css_enabler"),
                 Div(
                     Field("hide_source_id"),
+                    Field('send_completion_flag_url'),
                     css_class="participant_source_boolean collapse",
                 ),
-                Field('send_completion_flag_url'),
+                
             ),
             Fieldset(
                 'Completion Page Details',
@@ -269,6 +288,19 @@ class AddStudyForm(BetterModelForm):
         model = study
         exclude = ["study_group", "researcher"]
 
+class EditStudyForm(AddStudyForm):
+    def __init__(self, *args, **kwargs):
+        self.researcher = kwargs.pop("researcher", None)
+        super().__init__(*args, **kwargs)
+        self.fields["instrument"].widget.attrs['readonly'] = True
+        self.fields["allow_payment"].widget.attrs['disabled'] = True
+        self.fields["no_demographic_boolean"].widget.attrs['disabled'] = True
+        self.fields["demographic_opt_out"].widget.attrs['disabled'] = True
+        self.fields["age_range"].widget.attrs['readonly'] = True
+        self.fields["demographic"].widget.attrs['readonly'] = True
+        self.fields["backpage_boolean"].widget.attrs['disabled'] = True
+        self.fields["confirmation_questions"].widget.attrs['disabled'] = True
+        self.fields["prefilled_data"].widget.attrs['readonly'] = True
 
 # Form for grouping studies together
 class AddPairedStudyForm(forms.ModelForm):
@@ -309,196 +341,6 @@ class AddPairedStudyForm(forms.ModelForm):
                     study_group="", researcher=self.researcher
                 )
             )
-
-
-# Form for updating a study. Most study settings can be updated EXCEPT FOR INSTRUMENT.
-class RenameStudyForm(BetterModelForm):
-    name = forms.CharField(
-        label="Study Name", max_length=51, required=False
-    )  # Update study name
-    waiver = forms.CharField(
-        widget=CKEditorUploadingWidget, label=_("Opening Dialog Box"), required=False
-    )
-    test_period = forms.IntegerField(
-        label="# Days Before Expiration",
-        help_text="Between 1 and 1095. Default is 14 days. (e.g., 14 = 14 days for parents to complete a form)",
-        required=False,
-        widget=forms.NumberInput(
-            attrs={
-                "placeholder": "(e.g., 14 = 14 days to complete a form)",
-                "min": "1",
-                "max": "1095",
-            }
-        ),
-    )  # Update testing period. Can range from 1 to 28 days.
-    gift_codes = forms.CharField(
-        widget=forms.Textarea(
-            attrs={
-                "placeholder": "Paste Amazon gift card codes here. Can be separated by spaces, commas, or new lines."
-            }
-        ),
-        required=False,
-        label="Gift Card Codes",
-    )  # Can add a list of gift card codes (separated by new lines, commas, or spaces) to the PaymentCode model that are given out to participants upon completion of current study.
-    gift_amount = forms.CharField(
-        max_length=7,
-        required=False,
-        label="Amount per Card (in USD)",
-        widget=forms.TextInput(attrs={"placeholder": "$XX.XX"}),
-    )  # Specify monetary value of the list of gift card codes in the gift_codes field. Assumed that all codes in the list have the same monetary value.
-    age_range = IntegerRangeField(label="Age Range For Study (in months)")
-
-    prefilled_data_choices = (
-        (0, "No, do not populate the any part of the form"),
-        (1, "Demographic Information Form"),
-        # (2, "The Background Information Form and the Vocabulary Checklist"),
-    )
-    prefilled_data = forms.ChoiceField(
-        choices=prefilled_data_choices,
-        label="Pre-fill data for longitudinal participants?",
-        help_text="For longitudinal participants, would you like to populate the test with responses from earlier tests?",
-    )
-
-    birth_weight_choices = (
-        ("lb", "Measure birthweight in pounds and ounces"),
-        ("kg", "Measure birthweight in kilograms"),
-    )
-    birth_weight_units = forms.ChoiceField(
-        choices=birth_weight_choices, label="Measurement units for birthweight"
-    )
-
-    anon_collection = forms.BooleanField(
-        required=False,
-        label="Do you plan on collecting only anonymous data in this study? (e.g., posting ads on social media, mass emails, etc)",
-    )  # Whether the study will have only anonymous participants (opens up a range of other settings for anonymous data collection)
-    allow_payment = forms.BooleanField(
-        required=False,
-        label='Would you like to pay subjects in the form of Amazon gift cards? (You will need to upload gift card codes under "Update Study").',
-    )  # Whether study participants will be compensated in the form of gift card codes upon completion
-    subject_cap = forms.IntegerField(
-        label="Maximum number of participants",
-        required=False,
-        min_value=1,
-        help_text="Leave this blank if you do NOT want to limit the number of participants.",
-        widget=forms.NumberInput(attrs={"placeholder": "XXX participants"}),
-    )  # If there are anonymous participants, you can set a cap that limits the number of tests that can be completed. Tests initiated before the cutoff can still be finished even after the cutoff is reached
-    confirm_completion = forms.BooleanField(
-        required=False,
-        label="At the end of the form, would you like parents to confirm the age of their child and that they completed the entire test? (Best for anonymous data collections where you haven't personally vetted each participant)",
-    )  # Asks participants to verify the child's age and that they completed the form to the best of their ability. Only for participants that have not been vetted.
-    # allow_sharing = forms.BooleanField(required=False, label="Would you like participants to be able to share their Web-CDI results via Facebook?") # Gives option for participants to be able to share their results via Facebook. Default off.
-    show_feedback = forms.BooleanField(
-        required=False,
-        label="Would you like to show participants graphs of their data after completion?",
-    )
-    timing = forms.IntegerField(
-        label="Minimum time (minutes) a parent must take to complete the study (default=6)",
-        required=True,
-    )
-    confirmation_questions = forms.BooleanField(
-        required=False,
-        label="Would you like participants to answer the confirmation questions (only available when split demographic information forms are used)",
-    )
-
-    redirect_boolean = forms.BooleanField(
-        label="Provide redirect button at completion of study?", required=False
-    )  # Whether to give redirect button upon completion of administration
-    redirect_url = forms.URLField(
-        label="Please enter URL",
-        required=False,
-        help_text="Enter the basic return URL including source_id within curly brackets {} if required",
-    )
-    direct_redirect_boolean = forms.BooleanField(
-        initial=True,
-        help_text="Deselect this if the redirect url calls an API to get the actual redirect url"
-    )
-
-    participant_source_boolean = forms.ChoiceField(
-        label="Participant Source", choices=choices.PARTICIPANT_SOURCE_CHOICES
-    )  # Whether to give redirect button upon completion of administration
-    backpage_boolean = forms.BooleanField(
-        label="Show backpage in split demographic information study?", required=False
-    )
-    append_source_id_to_redirect = forms.BooleanField(required=False)
-    hide_source_id = forms.BooleanField(
-        label="Hide source from participant/parent", required=False
-    )
-    source_id_url_parameter_key = forms.CharField(required=False)
-
-    print_my_answers_boolean = forms.BooleanField(
-        label="Allow participant to print their responses at end of Study?",
-        required=False,
-    )
-
-    end_message = forms.ChoiceField(choices=choices.END_MESSAGE_CHOICES)
-    end_message_text = forms.CharField(widget=CKEditorUploadingWidget(), required=False)
-
-    # Form validation. Form is passed automatically to views.py for higher level checking.
-    def clean(self):
-        cleaned_data = super().clean()
-        return cleaned_data
-
-    # Form initiation. Specific form and field layout.
-    def __init__(self, *args, **kwargs):
-        self.age_range = kwargs.pop("age_range", None)
-        super(RenameStudyForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_id = "rename_study"
-        self.helper.form_class = "form-horizontal"
-        # self.helper.template = PROJECT_ROOT + '/../cdi_forms/templates/bootstrap3/whole_uni_form.html'
-        self.helper.label_class = "col-3"
-        self.helper.field_class = "col-9"
-        self.helper.form_method = "post"
-        if self.age_range:
-            self.fields["age_range"].initial = self.age_range
-        self.helper.layout = Layout(
-            Field("name"),
-            Field("age_range"),
-            Field("test_period"),
-            Field("birth_weight_units"),
-            Field("timing"),
-            Field("waiver"),
-            Field("prefilled_data"),
-            Field("anon_collection"),
-            Field("subject_cap"),
-            Field("confirm_completion"),
-            Field("allow_payment"),
-            Div(Field("gift_codes"), css_class="gift_cards collapse"),
-            Div(Field("gift_amount"), css_class="gift_cards collapse"),
-            Field("show_feedback"),
-            # Field('allow_sharing'),
-            Field("confirmation_questions"),
-            Fieldset(
-                "Redirect Options",
-                Field("redirect_boolean", css_class="css_enabler"),
-                Div(Field("redirect_url"), css_class="redirect_boolean collapse"),
-                Div(Field("direct_redirect_boolean"), css_class="redirect_boolean collapse"),
-                Field("participant_source_boolean", css_class="css_enabler"),
-                Div(
-                    Field("append_source_id_to_redirect"),
-                    css_class="participant_source_boolean collapse",
-                ),
-                Div(
-                    Field("hide_source_id"),
-                    css_class="participant_source_boolean collapse",
-                ),
-                Div(
-                    Field("source_id_url_parameter_key"),
-                    css_class="participant_source_boolean collapse",
-                ),
-            ),
-            Field("backpage_boolean"),
-            Field("print_my_answers_boolean"),
-            Field("end_message"),
-            Field("end_message_text"),
-            Submit("submit", _("Save"), css_class="btn btn-primary right"),
-        )
-
-    # Link form to study model. Exclude study group (specified in another form), researcher (automatically filled by current user), and instrument (chosen during study creation and CANNOT BE CHANGED)
-    class Meta:
-        model = study
-        exclude = ["study_group", "researcher", "instrument", "active", "demographic"]
-
 
 class ImportDataForm(forms.ModelForm):
     study = forms.ModelChoiceField(

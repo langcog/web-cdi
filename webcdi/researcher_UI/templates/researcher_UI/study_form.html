@@ -263,6 +263,19 @@
             $('#id_participant_source_boolean').on('change', function () {
               check_for_participant_source();      
             });
+
+            function check_for_allow_payment() {
+              if ($('#id_allow_payment').prop('checked')) {
+                $('.allow_payment').removeClass('collapse')
+              } else {
+                $('.allow_payment').addClass('collapse');
+              }  
+            }        
+
+            check_for_allow_payment();
+            $('#id_allow_payment').on('change', function () {
+              check_for_allow_payment();      
+            });
             
             $(document).ready(function() {
               $(window).keydown(function(event){

@@ -9,7 +9,7 @@ from psycopg2.extras import NumericRange
 
 from researcher_UI.utils import raw_gift_code_fun, add_paired_study_fun
 from researcher_UI.models import study
-from researcher_UI.forms import RenameStudyForm, AddStudyForm, AddPairedStudyForm
+from researcher_UI.forms import AddStudyForm, AddPairedStudyForm, EditStudyForm
 from researcher_UI.mixins import ReseacherOwnsStudyMixin
 
 
@@ -29,16 +29,16 @@ class AddPairedStudy(LoginRequiredMixin, CreateView):
         return context
 
 
-class RenameStudy(LoginRequiredMixin, ReseacherOwnsStudyMixin, UpdateView):
+class UpdateStudyView(LoginRequiredMixin, ReseacherOwnsStudyMixin, UpdateView):
     model = study
-    template_name = "researcher_UI/rename_study_modal.html"
-    form_class = RenameStudyForm
+    template_name = "researcher_UI/study_form.html"
+    form_class = EditStudyForm
 
     def get_success_url(self):
         return reverse("researcher_ui:console_study", kwargs={"pk": self.object.pk})
 
     def get_context_data(self, **kwargs):
-        context = super(RenameStudy, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         study_obj = self.get_object()
         age_range = NumericRange(study_obj.min_age, study_obj.max_age)
         context["form_name"] = "Update Study"
@@ -86,7 +86,7 @@ class RenameStudy(LoginRequiredMixin, ReseacherOwnsStudyMixin, UpdateView):
 
 
 class AddStudy(LoginRequiredMixin, CreateView):
-    template_name = "researcher_UI/add_study_modal.html"
+    template_name = "researcher_UI/study_form.html"
     model = study
     form_class = AddStudyForm
 
