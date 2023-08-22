@@ -237,6 +237,19 @@
             $('#id_end_message').on('change', function () {
                 check_for_end_message();      
             });
+
+            function check_for_demographic() {
+              if ($('#id_demographic').find(":selected").val() > 0) {
+                $('.demographic').removeClass('collapse')
+              } else {
+                $('.demographic').addClass('collapse');
+              }  
+            }        
+
+            check_for_demographic();
+            $('#id_demographic').on('change', function () {
+                check_for_demographic();      
+            });
             
             function check_for_redirect() {
               if ($('#id_redirect_boolean').prop('checked')) {

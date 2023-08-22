@@ -39,13 +39,12 @@ class UpdateStudyView(LoginRequiredMixin, ReseacherOwnsStudyMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        study_obj = self.get_object()
-        age_range = NumericRange(study_obj.min_age, study_obj.max_age)
+        age_range = NumericRange(self.object.min_age, self.object.max_age)
         context["form_name"] = "Update Study"
-        context["allow_payment"] = study_obj.allow_payment
+        context["allow_payment"] = self.object.allow_payment
         context["min_age"] = age_range.lower
         context["max_age"] = age_range.upper
-        context["study_obj"] = study_obj
+        context["study_obj"] = self.object
         return context
 
     def form_valid(self, form):
@@ -53,20 +52,18 @@ class UpdateStudyView(LoginRequiredMixin, ReseacherOwnsStudyMixin, UpdateView):
         raw_gift_amount = form.cleaned_data.get("gift_amount")
         raw_test_period = form.cleaned_data.get("test_period")
         new_study_name = form.cleaned_data.get("name")
-        new_age_range = form.cleaned_data.get("age_range")
-        study_obj = self.object
 
         if raw_test_period >= 1 and raw_test_period <= 1095:
-            study_obj.test_period = raw_test_period
+            self.object.test_period = raw_test_period
         else:
-            study_obj.test_period = 14
+            self.object.test_period = 14
 
-        study_obj.min_age = new_age_range.lower
-        study_obj.max_age = new_age_range.upper
-        study_obj.save()
+        self.object.active = True
+        self.object.researcher = self.request.user
+        self.object.save()
 
         res = raw_gift_code_fun(
-            raw_gift_amount, study_obj, new_study_name, raw_gift_codes
+            raw_gift_amount, self.object, new_study_name, raw_gift_codes
         )
         if res["stat"] == "ok" and raw_gift_amount:
             messages.success(

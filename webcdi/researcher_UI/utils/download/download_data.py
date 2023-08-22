@@ -8,10 +8,10 @@ from django.http import HttpResponse, HttpResponseServerError
 from django.shortcuts import render
 from django.urls import reverse
 from researcher_UI.models import InstrumentScore, administration, administration_data
-from researcher_UI.utils.background_header import get_background_header
-from researcher_UI.utils.format_admin import format_admin_data, format_admin_header
-from researcher_UI.utils.score_headers import get_score_headers
-from researcher_UI.utils.study_score import get_study_scores
+from researcher_UI.utils import get_background_header
+from researcher_UI.utils import format_admin_data, format_admin_header
+from researcher_UI.utils import get_score_headers
+from researcher_UI.utils import get_study_scores
 
 
 def download_data(

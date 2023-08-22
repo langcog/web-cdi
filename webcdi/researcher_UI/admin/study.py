@@ -19,6 +19,7 @@ class StudyAdmin(admin.ModelAdmin):
         "share_opt_out",
         ("researcher__username", DropdownFilter),
         ("instrument__verbose_name", DropdownFilter),
+        'active',
     ]
     search_fields = ["instrument__name", "researcher__username", "name"]
     actions = [scoring_data, scoring_summary]

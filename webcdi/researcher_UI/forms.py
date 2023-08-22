@@ -175,19 +175,6 @@ class AddStudyForm(BetterModelForm):
     # Form validation. Form is passed automatically to views.py for higher level checking.
     def clean(self):
         cleaned_data = super().clean()
-
-        if "/" in cleaned_data["name"]:
-            self.add_error(
-                "name",
-                f"{cleaned_data['name']} has a slash(/) in it.  This is not a valid character. Please remove",
-            )
-
-        elif study.objects.filter(name=cleaned_data["name"]).exists():
-            self.add_error(
-                "name",
-                f"{cleaned_data['name']} is used elsewhere in WebCDI.  Study names must be unique",
-            )
-
         return cleaned_data
 
     # Initiating form and field layout.
@@ -211,10 +198,42 @@ class AddStudyForm(BetterModelForm):
                 ),
                 empty_label="(choose from the list)",
             )
+        else:
+            try:
+                self.fields["instrument"] = forms.ModelChoiceField(
+                    queryset=instrument.objects.filter(
+                        pk=self.instance.instrument.pk
+                    ),
+                    empty_label=None
+                )
+            except:
+                pass
+            if self.instance.demographic:
+                self.fields['demographic'] = forms.ModelChoiceField(
+                    queryset=Demographic.objects.filter(
+                    pk=self.instance.demographic.pk
+                    ),
+                    empty_label=None
+                )
+            else:
+                self.fields['demographic'] = forms.ModelChoiceField(
+                    queryset=None,
+                    empty_label='Default'
+                )
 
-        self.helper.form_action = reverse("researcher_ui:add_study")
+        #self.helper.form_action = reverse("researcher_ui:add_study")
+        
         self.helper.layout = Layout(
-            Fieldset(
+            self.study_options_fieldset(),
+            self.demographic_options_fieldset(),
+            self.opening_dialog_fieldset(),
+            self.redirect_options_fieldset(),
+            self.completion_page_fieldset(),
+            self.submit_fieldset(),
+        )
+
+    def study_options_fieldset(self):
+        return Fieldset(
                 'Study Options',
                 Field("name"),
                 Field("instrument"),
@@ -227,27 +246,31 @@ class AddStudyForm(BetterModelForm):
                 Div(Field("gift_amount"), css_class="allow_payment collapse"),
                 Field("anon_collection"),
                 Field("subject_cap"),
-            ),
-            Fieldset(
+            )
+    
+    def demographic_options_fieldset(self):
+        return Fieldset(
                 'Demographic Options',
                 Field('no_demographic_boolean', css_class="css_enabler"),
                 Div(
                     Field("demographic_opt_out"), 
                     Field("age_range"),
-                    Field("demographic"), 
-                    Field("backpage_boolean"),
+                    Field("demographic", css_class="css_enabler"), 
+                    Div(Field("backpage_boolean"), css_class='demographic'),
                     Field("confirmation_questions"),
                     Field("prefilled_data"),
                     css_class="no_demographic_boolean collapse"
                 ),
-            ),
-            
-            Fieldset(
+            )
+    
+    def opening_dialog_fieldset(self):
+        return Fieldset(
                 'Opening Dialog',
                 Field("waiver"),
-            ),
-            
-            Fieldset(
+            )
+    
+    def redirect_options_fieldset(self):
+        return Fieldset(
                 "Redirect Options",
                 HTML(
                     """
@@ -266,9 +289,10 @@ class AddStudyForm(BetterModelForm):
                     Field('send_completion_flag_url'),
                     css_class="participant_source_boolean collapse",
                 ),
-                
-            ),
-            Fieldset(
+            )
+    
+    def completion_page_fieldset(self):
+        return Fieldset(
                 'Completion Page Details',
                 Field("print_my_answers_boolean"),
                 Field("confirm_completion"),
@@ -278,11 +302,10 @@ class AddStudyForm(BetterModelForm):
                     Field("end_message_text"),
                     css_class="end_message collapse",
                 ),
-            ),
-            
-            Submit("submit", _("Save"), css_class="btn btn-primary right"),
-        )
-
+            )
+        
+    def submit_fieldset(self):
+        return Submit("submit", _("Save"), css_class="btn btn-primary right")
     # Form is related to the study model. Exclude study group designation (is done post-creation) and researcher name (filled automatically)
     class Meta:
         model = study
@@ -292,15 +315,24 @@ class EditStudyForm(AddStudyForm):
     def __init__(self, *args, **kwargs):
         self.researcher = kwargs.pop("researcher", None)
         super().__init__(*args, **kwargs)
-        self.fields["instrument"].widget.attrs['readonly'] = True
-        self.fields["allow_payment"].widget.attrs['disabled'] = True
-        self.fields["no_demographic_boolean"].widget.attrs['disabled'] = True
-        self.fields["demographic_opt_out"].widget.attrs['disabled'] = True
-        self.fields["age_range"].widget.attrs['readonly'] = True
-        self.fields["demographic"].widget.attrs['readonly'] = True
-        self.fields["backpage_boolean"].widget.attrs['disabled'] = True
-        self.fields["confirmation_questions"].widget.attrs['disabled'] = True
-        self.fields["prefilled_data"].widget.attrs['readonly'] = True
+        self.helper.layout = Layout(
+            self.study_options_fieldset(),
+            self.opening_dialog_fieldset(),
+            self.redirect_options_fieldset(),
+            self.completion_page_fieldset(),
+            self.submit_fieldset(),
+        )
+        del self.fields['no_demographic_boolean']
+        del self.fields['demographic_opt_out']
+        del self.fields['age_range']
+        del self.fields['demographic']
+        del self.fields['backpage_boolean']
+        del self.fields['confirmation_questions']
+        del self.fields['prefilled_data']
+
+
+    def clean(self):
+        return super().clean()
 
 # Form for grouping studies together
 class AddPairedStudyForm(forms.ModelForm):

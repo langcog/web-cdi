@@ -68,6 +68,7 @@ urlpatterns = [
     url(r"^health/?", include("health_check.urls")),
     url(r"^ckeditor/", include("ckeditor_uploader.urls")),
     path("brookes/", include("brookes.urls")),
+    path('api/', include('api.urls')),
 ]
 
 if settings.DEBUG:
