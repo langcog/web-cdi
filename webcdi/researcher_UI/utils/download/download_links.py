@@ -37,7 +37,7 @@ def download_links(request, study_obj, administrations=None):
     test_url = "".join(
         [
             "http://",
-            get_current_site().domain,
+            get_current_site(request).domain,
             reverse("administer_cdi_form", args=["a" * 64]),
         ]
     ).replace("a" * 64 + "/", "")
