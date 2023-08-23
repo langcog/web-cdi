@@ -45,7 +45,7 @@ class Command(BaseCommand):
             if not curr_instrument['form'] in settings.CAT_FORMS: continue
             instrument_language, instrument_form = curr_instrument['language'], curr_instrument['form']
 
-            instrument_obj = instrument.objects.get(form=instrument_form, language=instrument_language)
+            instrument_obj = Instrument.objects.get(form=instrument_form, language=instrument_language)
             instrument_items = apps.get_model(app_label='cdi_forms', model_name='InstrumentItem')
 
             print ("    Populating items for", instrument_language, instrument_form)

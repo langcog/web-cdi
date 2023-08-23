@@ -52,7 +52,7 @@ class Command(BaseCommand):
             
             print ("    Populating Benchmark data for", instrument_language, instrument_form)
             
-            instrument_obj = instrument.objects.get(form=instrument_form, language=instrument_language)
+            instrument_obj = Instrument.objects.get(form=instrument_form, language=instrument_language)
 
             ftype = curr_instrument['csv_file'].split('.')[-1]
 
