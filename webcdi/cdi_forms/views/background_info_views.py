@@ -19,7 +19,7 @@ from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import CreateView, UpdateView
-from researcher_UI.models import administration, payment_code, researcher, study
+from researcher_UI.models import payment_code, Researcher, Study, Administration
 
 # Get an instance of a logger
 logger = logging.getLogger("debug")
@@ -151,7 +151,7 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
         if study_group:
             data["study_group"] = study_group
             data["alt_study_info"] = (
-                study.objects.filter(
+                Study.objects.filter(
                     study_group=study_group,
                     researcher=self.administration_instance.study.researcher,
                 )
@@ -194,7 +194,7 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
                 or self.administration_instance.study.study_group
             ) and self.administration_instance.study.prefilled_data >= 1:
                 if self.administration_instance.study.study_group:
-                    related_studies = study.objects.filter(
+                    related_studies = Study.objects.filter(
                         researcher=self.administration_instance.study.researcher,
                         study_group=self.administration_instance.study.study_group,
                     )
@@ -202,10 +202,10 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
                     self.administration_instance.repeat_num > 1
                     and not self.administration_instance.study.study_group
                 ):
-                    related_studies = study.objects.filter(
+                    related_studies = Study.objects.filter(
                         id=self.administration_instance.study.id
                     )
-                old_admins = administration.objects.filter(
+                old_admins = Administration.objects.filter(
                     study__in=related_studies,
                     subject_id=self.administration_instance.subject_id,
                     completedBackgroundInfo=True,
@@ -323,10 +323,10 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
 
                 # If 'Next' button is pressed, update last_modified and mark completion of BackgroundInfo. Fetch CDI form by hash ID.
                 if "btn-next" in request.POST and request.POST["btn-next"] == _("Next"):
-                    administration.objects.filter(url_hash=self.hash_id).update(
+                    Administration.objects.filter(url_hash=self.hash_id).update(
                         last_modified=timezone.now()
                     )
-                    administration.objects.filter(url_hash=self.hash_id).update(
+                    Administration.objects.filter(url_hash=self.hash_id).update(
                         completedBackgroundInfo=True
                     )
                     request.method = "GET"
@@ -335,10 +335,10 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
                 elif "btn-next" in request.POST and request.POST["btn-next"] == _(
                     "Finish"
                 ):
-                    administration.objects.filter(url_hash=self.hash_id).update(
+                    Administration.objects.filter(url_hash=self.hash_id).update(
                         last_modified=timezone.now()
                     )
-                    administration.objects.filter(url_hash=self.hash_id).update(
+                    Administration.objects.filter(url_hash=self.hash_id).update(
                         completed=True
                     )
                     request.method = "GET"
@@ -347,7 +347,7 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
                 elif "btn-back" in request.POST and request.POST["btn-back"] == _(
                     "Go back to Background Info"
                 ):  # If Back button was pressed
-                    administration.objects.filter(url_hash=self.hash_id).update(
+                    Administration.objects.filter(url_hash=self.hash_id).update(
                         last_modified=timezone.now()
                     )  # Update last_modified
                     request.method = "GET"
@@ -394,7 +394,7 @@ class CreateBackgroundInfoView(CreateView):
         self.bypass = self.kwargs["bypass"]
 
     def get_study(self):
-        self.study = study.objects.get(id=int(self.kwargs["study_id"]))
+        self.study = Study.objects.get(id=int(self.kwargs["study_id"]))
 
         # check if valid study and send email if not
         if not self.study.valid_code(self.study.researcher):
@@ -481,7 +481,7 @@ class CreateBackgroundInfoView(CreateView):
         if study_group:
             data["study_group"] = study_group
             data["alt_study_info"] = (
-                study.objects.filter(
+                Study.objects.filter(
                     study_group=study_group, researcher=self.study.researcher
                 )
                 .exclude(name=study_name)
@@ -530,14 +530,14 @@ class CreateBackgroundInfoView(CreateView):
         # I don't think is is ever used!
 
         if self.study.study_group:
-            related_studies = study.objects.filter(
+            related_studies = Study.objects.filter(
                 researcher=researcher, study_group=self.study.study_group
             )
-            max_subject_id = administration.objects.filter(
+            max_subject_id = Administration.objects.filter(
                 study__in=related_studies
             ).aggregate(Max("subject_id"))["subject_id__max"]
         else:
-            max_subject_id = administration.objects.filter(study=self.study).aggregate(
+            max_subject_id = Administration.objects.filter(study=self.study).aggregate(
                 Max("subject_id")
             )[
                 "subject_id__max"
@@ -549,8 +549,8 @@ class CreateBackgroundInfoView(CreateView):
             max_subject_id = 0  # Mark as zero
         from researcher_UI.utils.random_url_generator import random_url_generator
 
-        # new_admin = administration.objects.create(study =self.study, subject_id = max_subject_id+1, repeat_num = 1, url_hash = random_url_generator(), completed = False, due_date = datetime.datetime.now()+datetime.timedelta(days=self.study.test_period)) # Create an administration object for participant within database
-        new_admin = administration.objects.create(
+        # new_admin = Administration.objects.create(study =self.study, subject_id = max_subject_id+1, repeat_num = 1, url_hash = random_url_generator(), completed = False, due_date = datetime.datetime.now()+datetime.timedelta(days=self.study.test_period)) # Create an administration object for participant within database
+        new_admin = Administration.objects.create(
             study=self.study,
             subject_id=max_subject_id + 1,
             repeat_num=1,
@@ -594,14 +594,14 @@ class CreateBackgroundInfoView(CreateView):
         if self.background_form.is_valid():
             # First create the administration_instance
             if self.study.study_group:
-                related_studies = study.objects.filter(
+                related_studies = Study.objects.filter(
                     researcher=self.study.researcher, study_group=self.study.study_group
                 )
-                max_subject_id = administration.objects.filter(
+                max_subject_id = Administration.objects.filter(
                     study__in=related_studies
                 ).aggregate(Max("subject_id"))["subject_id__max"]
             else:
-                max_subject_id = administration.objects.filter(
+                max_subject_id = Administration.objects.filter(
                     study=self.study
                 ).aggregate(Max("subject_id"))[
                     "subject_id__max"
@@ -613,7 +613,7 @@ class CreateBackgroundInfoView(CreateView):
                 max_subject_id = 0  # Mark as zero
             from researcher_UI.utils.random_url_generator import random_url_generator
 
-            administration_instance = administration.objects.create(
+            administration_instance = Administration.objects.create(
                 study=self.study,
                 subject_id=max_subject_id + 1,
                 repeat_num=1,
@@ -658,10 +658,10 @@ class CreateBackgroundInfoView(CreateView):
             # Save model object to database
             obj.administration = administration_instance
             obj.save()
-            administration.objects.filter(url_hash=self.hash_id).update(
+            Administration.objects.filter(url_hash=self.hash_id).update(
                 last_modified=timezone.now()
             )
-            administration.objects.filter(url_hash=self.hash_id).update(
+            Administration.objects.filter(url_hash=self.hash_id).update(
                 completedBackgroundInfo=True
             )
             self.request = "GET"

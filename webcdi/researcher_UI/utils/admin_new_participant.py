@@ -1,17 +1,18 @@
 from researcher_UI.utils import random_url_generator
-from researcher_UI.models import User, study, administration, ip_address
+from researcher_UI.models import User, Study, ip_address, Administration
 from ipware.ip import get_client_ip
 import requests
 from django.utils import timezone
 import datetime
 
 
+
 def admin_new_participant_fun(request, username, study_name):
     researcher = User.objects.get(username=username)
-    study_obj = study.objects.get(name=study_name, researcher=researcher)
+    study_obj = Study.objects.get(name=study_name, researcher=researcher)
     subject_cap = study_obj.subject_cap
     test_period = int(study_obj.test_period)
-    completed_admins = administration.objects.filter(
+    completed_admins = Administration.objects.filter(
         study=study_obj, completed=True
     ).count()
     bypass = request.GET.get("bypass", None)
@@ -38,7 +39,7 @@ def admin_new_participant_fun(request, username, study_name):
             return
         subject_id = sid1
         if subject_id:
-            num_admins = administration.objects.filter(
+            num_admins = Administration.objects.filter(
                 study=study_obj, subject_id=subject_id
             ).count()
             if num_admins == 0:
@@ -60,7 +61,7 @@ def admin_new_participant_fun(request, username, study_name):
                 
             elif num_admins == 1:
                 if request.GET.get("final_cdi"):
-                    admin = administration.objects.create(
+                    admin = Administration.objects.create(
                         study=study_obj,
                         subject_id=subject_id,
                         repeat_num=2,
@@ -69,11 +70,11 @@ def admin_new_participant_fun(request, username, study_name):
                         due_date=datetime.datetime.now() + datetime.timedelta(days=14),
                     )
                 else:
-                    admin = administration.objects.get(
+                    admin = Administration.objects.get(
                         study=study_obj, subject_id=subject_id, repeat_num=1
                     )
             else:
-                admin = administration.objects.get(
+                admin = Administration.objects.get(
                     study=study_obj, subject_id=subject_id, repeat_num=2
                 )
             return admin

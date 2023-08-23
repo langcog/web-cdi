@@ -1,6 +1,6 @@
 from brookes.filters import DropdownFilter
 from django.contrib import admin
-from researcher_UI.models import study
+from researcher_UI.models import Study
 
 from .admin_actions import scoring_data, scoring_summary
 
@@ -38,4 +38,4 @@ class StudyAdmin(admin.ModelAdmin):
     get_chargeable.short_description = "Chargeable"
 
 
-admin.site.register(study, StudyAdmin)
+admin.site.register(Study, StudyAdmin)

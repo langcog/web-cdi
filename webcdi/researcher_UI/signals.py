@@ -2,7 +2,7 @@ from django.db.models.signals import m2m_changed, post_save
 from django.dispatch import receiver
 
 # from registration.models import RegistrationProfile
-from researcher_UI.models import researcher
+from researcher_UI.models import Researcher
 
 """
 @receiver(post_save, sender=RegistrationProfile)
@@ -24,7 +24,7 @@ def notify_admin(sender, instance, created, **kwargs):
 """
 
 
-@receiver(post_save, sender=researcher)
+@receiver(post_save, sender=Researcher)
 def update_instruments(sender, instance, **kwargs):
     """
     Brings instruments for a researcher up to date on save
@@ -38,5 +38,5 @@ def update_instruments(sender, instance, **kwargs):
 
 m2m_changed.connect(
     update_instruments,
-    sender=researcher.allowed_instrument_families.through,
+    sender=Researcher.allowed_instrument_families.through,
 )

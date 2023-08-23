@@ -1,6 +1,5 @@
-from researcher_UI.models import User, administration, study, ip_address
+from researcher_UI.models import User, Study, ip_address, Administration
 from ipware.ip import get_client_ip
-
 
 def admin_new_parent_fun(request, username, study_name):
     if "source_id" in request.GET:
@@ -11,9 +10,9 @@ def admin_new_parent_fun(request, username, study_name):
         source_id = f"{request.GET['child']}_{request.GET['response']}"
 
     researcher = User.objects.get(username=username)
-    study_obj = study.objects.get(name=study_name, researcher=researcher)
+    study_obj = Study.objects.get(name=study_name, researcher=researcher)
     subject_cap = study_obj.subject_cap
-    completed_admins = administration.objects.filter(
+    completed_admins = Administration.objects.filter(
         study=study_obj, completed=True
     ).count()
     bypass = request.GET.get("bypass", None)

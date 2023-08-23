@@ -6,7 +6,7 @@ import string
 
 from django.conf import settings
 from django.db import migrations, models
-from researcher_UI.models import Demographic, InstrumentFamily, instrument
+from researcher_UI.models import Demographic, InstrumentFamily, Instrument
 
 
 def add_families(apps, schema_editor):
@@ -84,7 +84,7 @@ def update_instruments(apps, schema_editor):
             "family": family,
         }
 
-        instrument_obj, created = instrument.objects.update_or_create(
+        instrument_obj, created = Instrument.objects.update_or_create(
             name=instrument_name,
             defaults=data_dict,
         )

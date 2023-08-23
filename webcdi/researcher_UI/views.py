@@ -18,7 +18,7 @@ from django.views.generic import UpdateView
 from django_weasyprint import WeasyTemplateResponseMixin
 from ipware.ip import get_client_ip
 from psycopg2.extras import NumericRange
-from researcher_UI.models import administration, researcher, study
+from researcher_UI.models import Researcher, Study, Administration
 from researcher_UI.utils.add_paired_study import add_paired_study_fun
 from researcher_UI.utils.admin_new import admin_new_fun
 from researcher_UI.utils.admin_new_parent import admin_new_parent_fun
@@ -33,11 +33,11 @@ from .mixins import ReseacherOwnsStudyMixin, StudyOwnerMixin
 
 
 class Console(LoginRequiredMixin, generic.ListView):
-    model = study
+    model = Study
     template_name = "researcher_UI/interface.html"
 
     def get_context_data(self, *args, **kwargs):
-        studies = study.objects.filter(
+        studies = Study.objects.filter(
             researcher=self.request.user, active=True
         ).order_by("id")
         context = {"studies": studies}
@@ -50,7 +50,7 @@ class StudyCreateView(LoginRequiredMixin, generic.CreateView):
     Becuase We can't use form_class or get_form method.
     """
 
-    model = study
+    model = Study
     template_name = "researcher_UI/interface.html"
 
     def get_context_data(self, *args, **kwargs):
@@ -60,11 +60,11 @@ class StudyCreateView(LoginRequiredMixin, generic.CreateView):
 
     def post(self, request, *args, **kwargs):
         study_obj = self.get_object()
-        permitted = study.objects.filter(
+        permitted = Study.objects.filter(
             researcher=request.user, name=study_obj.name
         ).exists()
         if permitted:
-            study_obj = study.objects.get(researcher=request.user, name=study_obj.name)
+            study_obj = Study.objects.get(researcher=request.user, name=study_obj.name)
             ids = request.POST.getlist("select_col")
 
             if all([x.isdigit() for x in ids]):
@@ -80,17 +80,17 @@ class StudyCreateView(LoginRequiredMixin, generic.CreateView):
                 else:
                     return redirect(
                         reverse(
-                            "researcher_ui:console_study", kwargs={"pk": study_obj.pk}
+                            "researcher_ui:console_study", kwargs={"pk": Study_obj.pk}
                         )
                     )
             else:
                 return redirect(
-                    reverse("researcher_ui:console_study", kwargs={"pk": study_obj.pk})
+                    reverse("researcher_ui:console_study", kwargs={"pk": Study_obj.pk})
                 )
 
 
 class RenameStudy(LoginRequiredMixin, ReseacherOwnsStudyMixin, generic.UpdateView):
-    model = study
+    model = Study
     template_name = "researcher_UI/rename_study_modal.html"
     form_class = RenameStudyForm
 
@@ -147,7 +147,7 @@ class RenameStudy(LoginRequiredMixin, ReseacherOwnsStudyMixin, generic.UpdateVie
 
 class AddStudy(LoginRequiredMixin, generic.CreateView):
     template_name = "researcher_UI/add_study_modal.html"
-    model = study
+    model = Study
     form_class = AddStudyForm
 
     def get_form(self):
@@ -187,7 +187,7 @@ class AddStudy(LoginRequiredMixin, generic.CreateView):
 
 
 class AddPairedStudy(LoginRequiredMixin, generic.CreateView):
-    model = study
+    model = Study
     form_class = AddPairedStudyForm
     template_name = "researcher_UI/add_paired_study_modal.html"
 
@@ -203,7 +203,7 @@ class AddPairedStudy(LoginRequiredMixin, generic.CreateView):
 
 
 class AdminNew(LoginRequiredMixin, generic.UpdateView):
-    model = study
+    model = Study
     form_class = AdminNewForm
     # template_name = "researcher_UI/administer_new_modal.html"
 
@@ -219,7 +219,7 @@ class AdminNew(LoginRequiredMixin, generic.UpdateView):
         context = super(AdminNew, self).get_context_data(**kwargs)
         researcher = self.request.user
         study_obj = self.get_object()
-        study_obj = study.objects.get(researcher=researcher, name=study_obj.name)
+        study_obj = Study.objects.get(researcher=researcher, name=study_obj.name)
         context["username"] = researcher.username
         context["study_name"] = study_obj.name
         context["study_group"] = study_obj.study_group
@@ -229,11 +229,11 @@ class AdminNew(LoginRequiredMixin, generic.UpdateView):
     def form_valid(self, form, *args, **kwargs):
         researcher = self.request.user
         study_obj = self.get_object()
-        permitted = study.objects.filter(
+        permitted = Study.objects.filter(
             researcher=researcher, name=study_obj.name
         ).exists()
 
-        study_obj = study.objects.get(researcher=researcher, name=study_obj.name)
+        study_obj = Study.objects.get(researcher=researcher, name=study_obj.name)
         data = admin_new_fun(self.request, permitted, study_obj.name, study_obj)
         return HttpResponse(json.dumps(data), content_type="application/json")
 
@@ -278,7 +278,7 @@ class AdminNewParent(generic.View):
 
 
 class Overflow(generic.DetailView):
-    model = study
+    model = Study
     template_name = "cdi_forms/overflow.html"
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
@@ -301,7 +301,7 @@ class Overflow(generic.DetailView):
 
 
 class ImportData(LoginRequiredMixin, generic.UpdateView):
-    model = study
+    model = Study
     form_class = ImportDataForm
     template_name = "researcher_UI/import_data.html"
 
@@ -317,7 +317,7 @@ class ImportData(LoginRequiredMixin, generic.UpdateView):
 
 
 class EditStudyView(LoginRequiredMixin, StudyOwnerMixin, generic.UpdateView):
-    model = administration
+    model = Administration
     form_class = StudyFormForm
     template_name = "researcher_UI/interface.html"
 
@@ -330,7 +330,7 @@ class EditStudyView(LoginRequiredMixin, StudyOwnerMixin, generic.UpdateView):
         obj = self.get_object()
 
         if "subject_id" in form.changed_data:
-            count = administration.objects.filter(
+            count = Administration.objects.filter(
                 study_id=obj.study.pk, subject_id=form.cleaned_data["subject_id"]
             ).count()
 
@@ -339,7 +339,7 @@ class EditStudyView(LoginRequiredMixin, StudyOwnerMixin, generic.UpdateView):
                     {"error": "subject id is already existed."}, status=400
                 )
 
-            _instances = administration.objects.filter(
+            _instances = Administration.objects.filter(
                 study=obj.study, subject_id=form.cleaned_data["subject_id_old"]
             )
 
@@ -383,7 +383,7 @@ class AjaxChargeStatus(generic.DetailView):
 
 
 class ResearcherAddInstruments(LoginRequiredMixin, UpdateView):
-    model = researcher
+    model = Researcher
     form_class = AddInstrumentForm
     template_name = "researcher_UI/researcher_form.html"
 
@@ -408,7 +408,7 @@ class ResearcherAddInstruments(LoginRequiredMixin, UpdateView):
 
 
 class PDFAdministrationDetailView(WeasyTemplateResponseMixin, generic.DetailView):
-    model = study
+    model = Study
 
     def get_template_names(self):
         name = slugify(f"{self.object.instrument.verbose_name}")

@@ -1,6 +1,6 @@
 from django import forms
 
-from researcher_UI.models import administration
+from researcher_UI.models import Administration
 
 from .utils import string_bool_coerce
 
@@ -23,7 +23,7 @@ class CatItemForm(forms.ModelForm):
     )
 
     class Meta:
-        model = administration
+        model = Administration
         fields = ['word_id','item','label']
         widgets = {
             'word_id' : forms.HiddenInput(),

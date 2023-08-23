@@ -5,8 +5,8 @@ import numpy as np
 import pandas as pd
 from django.db.models import Max
 from django.urls import reverse
-from researcher_UI.models import administration, study
 from researcher_UI.utils.random_url_generator import random_url_generator
+from researcher_UI.models import Administration, Study
 
 
 def admin_new_fun(request, permitted, study_name, study_obj):
@@ -93,13 +93,13 @@ def admin_new_fun(request, permitted, study_name, study_obj):
 
                 for sid in subject_ids:
                     new_hash = random_url_generator()
-                    old_rep = administration.objects.filter(
+                    old_rep = Administration.objects.filter(
                         study=study_obj, subject_id=sid
                     ).count()
-                    if not administration.objects.filter(
+                    if not Administration.objects.filter(
                         study=study_obj, subject_id=sid, repeat_num=old_rep + 1
                     ).exists():
-                        administration.objects.create(
+                        Administration.objects.create(
                             study=study_obj,
                             subject_id=sid,
                             repeat_num=old_rep + 1,
@@ -114,13 +114,13 @@ def admin_new_fun(request, permitted, study_name, study_obj):
                 subject_ids = list(filter(None, subject_ids))
                 for sid in subject_ids:
                     new_hash = random_url_generator()
-                    old_rep = administration.objects.filter(
+                    old_rep = Administration.objects.filter(
                         study=study_obj, subject_id=sid
                     ).count()
-                    if not administration.objects.filter(
+                    if not Administration.objects.filter(
                         study=study_obj, subject_id=sid, repeat_num=old_rep + 1
                     ).exists():
-                        administration.objects.create(
+                        Administration.objects.create(
                             study=study_obj,
                             subject_id=sid,
                             repeat_num=old_rep + 1,
@@ -133,13 +133,13 @@ def admin_new_fun(request, permitted, study_name, study_obj):
             if params["autogenerate_count"][0] != "":
                 autogenerate_count = int(params["autogenerate_count"][0])
                 if study_obj.study_group:
-                    related_studies = study.objects.filter(
+                    related_studies = Study.objects.filter(
                         researcher=study_obj.researcher,
                         study_group=study_obj.study_group,
                     )
                 else:
-                    related_studies = study.objects.filter(id=study_obj.id)
-                max_subject_id = administration.objects.filter(
+                    related_studies = Study.objects.filter(id=study_obj.id)
+                max_subject_id = Administration.objects.filter(
                     study__in=related_studies
                 ).aggregate(Max("subject_id"))["subject_id__max"]
                 if max_subject_id is None:
@@ -148,7 +148,7 @@ def admin_new_fun(request, permitted, study_name, study_obj):
                     max_subject_id + 1, max_subject_id + autogenerate_count + 1
                 ):
                     new_hash = random_url_generator()
-                    administration.objects.create(
+                    Administration.objects.create(
                         study=study_obj,
                         subject_id=sid,
                         repeat_num=1,

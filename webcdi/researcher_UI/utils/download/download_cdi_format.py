@@ -1,7 +1,6 @@
 from django.http import HttpResponse
 from researcher_UI.forms import *
 from researcher_UI.models import (
-    administration,
     administration_data,
 )
 from cdi_forms.views import get_model_header
@@ -12,6 +11,7 @@ from django.utils.translation import ugettext_lazy as _
 from io import BytesIO
 import re, zipfile
 from researcher_UI.utils.write_to_zip import write_to_zip
+from researcher_UI.models import Administration
 
 
 def download_cdi_format(request, study_obj, administrations=None):
@@ -20,7 +20,7 @@ def download_cdi_format(request, study_obj, administrations=None):
     if administrations is not None:
         completed_admins = administrations.filter(completed=True)
     else:
-        completed_admins = administration.objects.filter(
+        completed_admins = Administration.objects.filter(
             study=study_obj, completed=True
         )
 

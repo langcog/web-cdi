@@ -15,7 +15,7 @@ from . import choices
 class AddStudyForm(BetterModelForm):
     name = forms.CharField(label="Study Name", max_length=51)  # Study name
     instrument = forms.ModelChoiceField(
-        queryset=instrument.objects.filter(language="English"),
+        queryset=Instrument.objects.filter(language="English"),
         empty_label="(choose from the list)",
     )  # Study instrument (CANNOT BE CHANGED LATER)
     demographic = forms.ModelChoiceField(
@@ -141,7 +141,7 @@ class AddStudyForm(BetterModelForm):
                 f"{cleaned_data['name']} has a slash(/) in it.  This is not a valid character. Please remove",
             )
 
-        elif study.objects.filter(name=cleaned_data["name"]).exists():
+        elif Study.objects.filter(name=cleaned_data["name"]).exists():
             self.add_error(
                 "name",
                 f"{cleaned_data['name']} is used elsewhere in WebCDI.  Study names must be unique",
@@ -165,7 +165,7 @@ class AddStudyForm(BetterModelForm):
 
         if self.researcher:
             self.fields["instrument"] = forms.ModelChoiceField(
-                queryset=instrument.objects.filter(
+                queryset=Instrument.objects.filter(
                     researcher=self.researcher.researcher
                 ),
                 empty_label="(choose from the list)",
@@ -223,7 +223,7 @@ class AddStudyForm(BetterModelForm):
 
     # Form is related to the study model. Exclude study group designation (is done post-creation) and researcher name (filled automatically)
     class Meta:
-        model = study
+        model = Study
         exclude = ["study_group", "researcher"]
 
 
@@ -233,11 +233,11 @@ class AddPairedStudyForm(forms.ModelForm):
         label="Study Group Name", max_length=51
     )  # Type out study group's name
     paired_studies = forms.ModelMultipleChoiceField(
-        queryset=study.objects.all()
+        queryset=Study.objects.all()
     )  # List all studies created by researcher that are currently unpaired.
 
     class Meta:
-        model = study
+        model = Study
         fields = (
             "study_group",
             "paired_studies",
@@ -262,7 +262,7 @@ class AddPairedStudyForm(forms.ModelForm):
         self.helper.form_action = reverse("researcher_ui:add_paired_study")
         if self.researcher:
             self.fields["paired_studies"] = forms.ModelMultipleChoiceField(
-                queryset=study.objects.filter(
+                queryset=Study.objects.filter(
                     study_group="", researcher=self.researcher
                 )
             )
@@ -448,18 +448,18 @@ class RenameStudyForm(BetterModelForm):
 
     # Link form to study model. Exclude study group (specified in another form), researcher (automatically filled by current user), and instrument (chosen during study creation and CANNOT BE CHANGED)
     class Meta:
-        model = study
+        model = Study
         exclude = ["study_group", "researcher", "instrument", "active", "demographic"]
 
 
 class ImportDataForm(forms.ModelForm):
     study = forms.ModelChoiceField(
-        queryset=study.objects.all(), empty_label="(choose from the list)"
+        queryset=Study.objects.all(), empty_label="(choose from the list)"
     )
     imported_file = forms.FileField()
 
     class Meta:
-        model = study
+        model = Study
         fields = ["study", "imported_file"]
 
     # Form validation. Form is passed automatically to views.py for higher level checking.
@@ -482,7 +482,7 @@ class ImportDataForm(forms.ModelForm):
 
         if self.researcher:
             self.fields["study"] = forms.ModelChoiceField(
-                queryset=study.objects.filter(researcher=self.researcher),
+                queryset=Study.objects.filter(researcher=self.researcher),
                 empty_label="(choose from the list)",
             )
         if self.study:
@@ -491,13 +491,13 @@ class ImportDataForm(forms.ModelForm):
 
 class EditSubjectIDForm(forms.ModelForm):
     class Meta:
-        model = administration
+        model = Administration
         fields = ["subject_id", "study"]
         widgets = {"study": forms.HiddenInput()}
 
     def clean(self):
         cleaned_data = super(EditSubjectIDForm, self).clean()
-        if administration.objects.filter(
+        if Administration.objects.filter(
             study=cleaned_data["study"], subject_id=cleaned_data["subject_id"]
         ).exists():
             raise forms.ValidationError(
@@ -508,28 +508,28 @@ class EditSubjectIDForm(forms.ModelForm):
 
 class EditLocalLabIDForm(forms.ModelForm):
     class Meta:
-        model = administration
+        model = Administration
         fields = ["local_lab_id", "study"]
         widgets = {"study": forms.HiddenInput()}
 
 
 class EditOptOutForm(forms.ModelForm):
     class Meta:
-        model = administration
+        model = Administration
         fields = ["opt_out", "study"]
         widgets = {"study": forms.HiddenInput()}
 
 
 class AddInstrumentForm(forms.ModelForm):
     class Meta:
-        model = researcher
+        model = Researcher
         fields = ["allowed_instrument_families"]
         widgets = {"allowed_instrument_families": forms.CheckboxSelectMultiple()}
 
 
 class AddChargeableInstrumentForm(forms.ModelForm):
     class Meta:
-        model = researcher
+        model = Researcher
         fields = ["allowed_instrument_families"]
         widgets = {"allowed_instrument_families": forms.CheckboxSelectMultiple()}
 
@@ -545,7 +545,7 @@ class StudyFormForm(forms.ModelForm):
     subject_id_old = forms.IntegerField()
 
     class Meta:
-        model = administration
+        model = Administration
         fields = [
             "id",
             "subject_id",
@@ -560,5 +560,5 @@ class AdminNewForm(forms.ModelForm):
     autogenerate_count = forms.IntegerField(required=False)
 
     class Meta:
-        model = study
+        model = Study
         fields = ("new_subject_ids", "autogenerate_count")

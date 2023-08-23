@@ -25,7 +25,7 @@ from django.utils import timezone, translation
 from django.views.generic import DetailView, UpdateView
 from ipware.ip import get_client_ip
 from researcher_UI.models import (
-    administration,
+    Administration,
     administration_data,
     ip_address,
     payment_code,
@@ -35,7 +35,7 @@ logger = logging.getLogger("debug")
 
 
 class AdministrationSummaryView(DetailView):
-    model = administration
+    model = Administration
     template_name = "cdi_forms/administration_summary.html"
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
@@ -150,7 +150,7 @@ class AdministrationSummaryView(DetailView):
             return ["cdi_forms/administration_summary.html"]
 
     def get_object(self, queryset=None):
-        self.object = administration.objects.get(url_hash=self.kwargs["hash_id"])
+        self.object = Administration.objects.get(url_hash=self.kwargs["hash_id"])
         return self.object
 
     def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
@@ -177,7 +177,7 @@ class AdministrationSummaryView(DetailView):
 
 
 class AdministrationDetailView(DetailView):
-    model = administration
+    model = Administration
     template_name = "cdi_forms/pdf_administration.html"
 
     def get_context_data(self, **kwargs):
@@ -198,7 +198,7 @@ class AdministrationDetailView(DetailView):
 
 
 class AdministrationUpdateView(UpdateView):
-    model = administration
+    model = Administration
     template_name = "cdi_forms/administration_form.html"
     fields = ["id"]
 
@@ -217,7 +217,7 @@ class AdministrationUpdateView(UpdateView):
         return ctx
 
     def get_object(self, queryset=None):
-        self.object = administration.objects.get(url_hash=self.kwargs["hash_id"])
+        self.object = Administration.objects.get(url_hash=self.kwargs["hash_id"])
         return self.object
 
     def get_instrument(self):
@@ -365,7 +365,7 @@ class AdministrationUpdateView(UpdateView):
                             item_ID=key,
                             defaults={"value": value},
                         )
-        administration.objects.filter(url_hash=self.object.url_hash).update(
+        Administration.objects.filter(url_hash=self.object.url_hash).update(
             last_modified=timezone.now()
         )
 
@@ -559,7 +559,7 @@ class AdministrationUpdateView(UpdateView):
             and self.object.repeat_num > 1
             and self.object.study.prefilled_data >= 2
         ):
-            old_admins = administration.objects.filter(
+            old_admins = Administration.objects.filter(
                 study=self.object.study,
                 subject_id=self.object.subject_id,
                 completed=True,
@@ -670,5 +670,5 @@ def update_administration_data_item(request):
         administration_data.objects.get(
             administration=administration_instance, item_ID=request.POST["item"]
         ).delete()
-    administration.objects.filter(url_hash=hash_id).update(last_modified=timezone.now())
+    Administration.objects.filter(url_hash=hash_id).update(last_modified=timezone.now())
     return HttpResponse(json.dumps([{}]), content_type="application/json")

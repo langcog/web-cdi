@@ -4,9 +4,9 @@ from __future__ import unicode_literals
 from django.contrib.auth.models import User
 from django.db import models
 
-from .instrument import instrument
-from .researcher import researcher
-from .administration import administration
+from .instrument_model import Instrument
+from .researcher_model import Researcher
+from .administration_model import Administration
 
 class Demographic(models.Model):
     """
@@ -27,7 +27,7 @@ from django.dispatch import receiver
 @receiver(post_save, sender=User)
 def update_user_profile(sender, instance, created, **kwargs):
     if created:
-        researcher.objects.create(user=instance)
+        Researcher.objects.create(user=instance)
     instance.researcher.save()
 
 
@@ -129,7 +129,7 @@ class InstrumentScore(models.Model):
     /cdi_forms/form_data/scoring/
     """
 
-    instrument = models.ForeignKey(instrument, on_delete=models.CASCADE)
+    instrument = models.ForeignKey(Instrument, on_delete=models.CASCADE)
     title = models.CharField(max_length=101)
     category = models.CharField(max_length=101)
     scoring_measures = models.CharField(max_length=101)
@@ -165,7 +165,7 @@ class SummaryData(models.Model):
     /cdi_forms/form_data/scoring/
     """
 
-    administration = models.ForeignKey(administration, on_delete=models.CASCADE)
+    administration = models.ForeignKey(Administration, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     value = models.CharField(max_length=255)
 

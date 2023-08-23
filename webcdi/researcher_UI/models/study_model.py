@@ -8,7 +8,7 @@ from researcher_UI import choices
 
 
 # Model for individual studies
-class study(models.Model):
+class Study(models.Model):
     researcher = models.ForeignKey(
         "auth.user", on_delete=models.CASCADE
     )  # Researcher's name
