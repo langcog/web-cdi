@@ -81,7 +81,7 @@ class Command(BaseCommand):
                 'family': family
             }
 
-            instrument_obj, created = instrument.objects.update_or_create(
+            instrument_obj, created = Instrument.objects.update_or_create(
                 name=instrument_name,
                 defaults=data_dict,
             )
