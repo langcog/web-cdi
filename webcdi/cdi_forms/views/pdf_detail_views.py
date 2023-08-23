@@ -1,13 +1,13 @@
 from django_weasyprint import WeasyTemplateResponseMixin
 from django.shortcuts import redirect
 from django.conf import settings
-from researcher_UI.models import administration
+from researcher_UI.models import Administration
 from django.views.generic import DetailView
 
 from cdi_forms.views.utils import prefilled_cdi_data
 
 class PDFAdministrationDetailView(WeasyTemplateResponseMixin, DetailView):
-    model = administration
+    model = Administration
     template_name = "cdi_forms/pdf_administration.html"
 
     def get_context_data(self, **kwargs):

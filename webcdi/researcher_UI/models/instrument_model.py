@@ -4,7 +4,7 @@ from .instrument_family import InstrumentFamily
 
 
 # Model for individual instruments
-class instrument(models.Model):
+class Instrument(models.Model):
     name = models.CharField(max_length=51, primary_key=True)  # Instrument short name
     verbose_name = models.CharField(
         max_length=51, blank=True

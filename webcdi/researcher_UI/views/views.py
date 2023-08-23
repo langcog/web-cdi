@@ -8,7 +8,7 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.views import generic
 from ipware.ip import get_client_ip
-from researcher_UI.models import  study
+from researcher_UI.models import  Study
 from researcher_UI.utils.admin_new import admin_new_fun
 from researcher_UI.utils.console_helper.get_helper import get_helper
 from researcher_UI.utils.console_helper.post_helper import post_condition
@@ -17,11 +17,11 @@ from ..forms import *
 
 
 class Console(LoginRequiredMixin, generic.ListView):
-    model = study
+    model = Study
     template_name = "researcher_UI/interface.html"
 
     def get_context_data(self, *args, **kwargs):
-        studies = study.objects.filter(
+        studies = Study.objects.filter(
             researcher=self.request.user, active=True
         ).order_by("id")
         context = {"studies": studies}
@@ -34,7 +34,7 @@ class StudyCreateView(LoginRequiredMixin, generic.CreateView):
     Becuase We can't use form_class or get_form method.
     """
 
-    model = study
+    model = Study
     template_name = "researcher_UI/interface.html"
 
     def get_context_data(self, *args, **kwargs):
@@ -44,11 +44,11 @@ class StudyCreateView(LoginRequiredMixin, generic.CreateView):
 
     def post(self, request, *args, **kwargs):
         study_obj = self.get_object()
-        permitted = study.objects.filter(
+        permitted = Study.objects.filter(
             researcher=request.user, name=study_obj.name
         ).exists()
         if permitted:
-            study_obj = study.objects.get(researcher=request.user, name=study_obj.name)
+            study_obj = Study.objects.get(researcher=request.user, name=study_obj.name)
             ids = request.POST.getlist("select_col")
 
             if all([x.isdigit() for x in ids]):
@@ -75,7 +75,7 @@ class StudyCreateView(LoginRequiredMixin, generic.CreateView):
 
 
 class AdminNew(LoginRequiredMixin, generic.UpdateView):
-    model = study
+    model = Study
     form_class = AdminNewForm
     # template_name = "researcher_UI/administer_new_modal.html"
 
@@ -91,28 +91,28 @@ class AdminNew(LoginRequiredMixin, generic.UpdateView):
         context = super(AdminNew, self).get_context_data(**kwargs)
         researcher = self.request.user
         study_obj = self.get_object()
-        study_obj = study.objects.get(researcher=researcher, name=study_obj.name)
+        study_obj = Study.objects.get(researcher=researcher, name=study_obj.name)
         context["username"] = researcher.username
-        context["study_name"] = study_obj.name
-        context["study_group"] = study_obj.study_group
-        context["object"] = study_obj
+        context["study_name"] = Study_obj.name
+        context["study_group"] = Study_obj.study_group
+        context["object"] = Study_obj
         return context
 
     def form_valid(self, form, *args, **kwargs):
         researcher = self.request.user
         study_obj = self.get_object()
-        permitted = study.objects.filter(
+        permitted = Study.objects.filter(
             researcher=researcher, name=study_obj.name
         ).exists()
 
-        study_obj = study.objects.get(researcher=researcher, name=study_obj.name)
+        study_obj = Study.objects.get(researcher=researcher, name=study_obj.name)
         data = admin_new_fun(self.request, permitted, study_obj.name, study_obj)
         return HttpResponse(json.dumps(data), content_type="application/json")
 
 
 
 class Overflow(generic.DetailView):
-    model = study
+    model = Study
     template_name = "cdi_forms/overflow.html"
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:

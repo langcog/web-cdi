@@ -1,6 +1,6 @@
 from django.db import models
 
-from researcher_UI.models import administration
+from researcher_UI.models import Administration
 
 class SummaryData(models.Model):
     """
@@ -8,7 +8,7 @@ class SummaryData(models.Model):
     /cdi_forms/form_data/scoring/
     """
 
-    administration = models.ForeignKey(administration, on_delete=models.CASCADE)
+    administration = models.ForeignKey(Administration, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     value = models.CharField(max_length=255)
 

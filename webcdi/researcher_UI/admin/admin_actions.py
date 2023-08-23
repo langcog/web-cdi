@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
 from researcher_UI.utils.download import download_data, download_summary
 
-from researcher_UI.models import administration
+from researcher_UI.models import Administration
 
 
 def scoring_data(modeladmin, request, queryset):
@@ -27,7 +27,7 @@ def scoring_data(modeladmin, request, queryset):
             )
             return
 
-    administrations = administration.objects.filter(study__in=queryset).exclude(
+    administrations = Administration.objects.filter(study__in=queryset).exclude(
         opt_out=True
     )
     return download_data.download_data(request, study_obj, administrations)
@@ -55,7 +55,7 @@ def scoring_summary(modeladmin, request, queryset):
             )
             return
 
-    administrations = administration.objects.filter(study__in=queryset).exclude(
+    administrations = Administration.objects.filter(study__in=queryset).exclude(
         opt_out=True
     )
     return download_summary.download_summary(request, study_obj, administrations)

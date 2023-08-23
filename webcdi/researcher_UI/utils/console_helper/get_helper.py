@@ -1,10 +1,9 @@
 import os
-from researcher_UI.models import administration, researcher, study, payment_code
+from researcher_UI.models import Researcher, Study, payment_code, Administration
 from django.conf import settings
 from researcher_UI.forms import AddStudyForm
 from researcher_UI.tables import StudyAdministrationTable
 from django_tables2 import RequestConfig
-
 
 def get_helper(request, study_name, num_per_page):
     username = None  # Set username to None at first
@@ -13,16 +12,16 @@ def get_helper(request, study_name, num_per_page):
 
     context = {}
     context["username"] = username
-    context["studies"] = study.objects.filter(
+    context["studies"] = Study.objects.filter(
         researcher=request.user, active=True
     ).order_by("id")
     context["instruments"] = []
     context["study_form"] = AddStudyForm()
 
     if study_name is not None:
-        current_study = study.objects.get(researcher=request.user, name=study_name)
+        current_study = Study.objects.get(researcher=request.user, name=study_name)
         administration_table = StudyAdministrationTable(
-            administration.objects.filter(study=current_study, is_active=True)
+            Administration.objects.filter(study=current_study, is_active=True)
         )
         if not current_study.confirm_completion:
             administration_table.exclude = ("study", "id", "url_hash", "analysis")
@@ -38,9 +37,9 @@ def get_helper(request, study_name, num_per_page):
             excludes.append("completedSurvey")
             administration_table.exclude = excludes
         if "view_all" in request.GET:
-            study_obj = study.objects.get(researcher=request.user, name=study_name)
+            study_obj = Study.objects.get(researcher=request.user, name=study_name)
             if request.GET["view_all"] == "all":
-                num_per_page = administration.objects.filter(study=study_obj).count()
+                num_per_page = Administration.objects.filter(study=study_obj).count()
         RequestConfig(request, paginate={"per_page": num_per_page}).configure(
             administration_table
         )
@@ -50,11 +49,11 @@ def get_helper(request, study_name, num_per_page):
         context["study_instrument"] = current_study.instrument.verbose_name
         context["study_group"] = current_study.study_group
         context["study_administrations"] = administration_table
-        context["completed_admins"] = administration.objects.filter(
+        context["completed_admins"] = Administration.objects.filter(
             study=current_study, completed=True
         ).count()
         context["unique_children"] = count = (
-            administration.objects.filter(study=current_study, completed=True)
+            Administration.objects.filter(study=current_study, completed=True)
             .values("subject_id")
             .distinct()
             .count()

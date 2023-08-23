@@ -7,11 +7,11 @@ from django.template.loader import get_template
 from django.utils.text import slugify
 from django_weasyprint import WeasyTemplateResponseMixin
 
-from researcher_UI.models import study
+from researcher_UI.models import Study
 
 
 class PDFAdministrationDetailView(WeasyTemplateResponseMixin, DetailView):
-    model = study
+    model = Study
 
     def get_template_names(self):
         name = slugify(f"{self.object.instrument.verbose_name}")

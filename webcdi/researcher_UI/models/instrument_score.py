@@ -1,6 +1,6 @@
 from django.db import models
 
-from researcher_UI.models import instrument
+from researcher_UI.models import Instrument
 
 KIND_OPTIONS = (("count", "count"), ("list", "list"))
 
@@ -11,7 +11,7 @@ class InstrumentScore(models.Model):
     /cdi_forms/form_data/scoring/
     """
 
-    instrument = models.ForeignKey(instrument, on_delete=models.CASCADE)
+    instrument = models.ForeignKey(Instrument, on_delete=models.CASCADE)
     title = models.CharField(max_length=101)
     category = models.CharField(max_length=101)
     scoring_measures = models.CharField(max_length=101)

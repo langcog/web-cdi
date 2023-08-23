@@ -2,7 +2,7 @@ import json
 
 from django.http import HttpResponse
 from django.views.generic import UpdateView
-from researcher_UI.models import study
+from researcher_UI.models import Study
 from researcher_UI.forms import ImportDataForm
 
 
@@ -10,7 +10,7 @@ from researcher_UI.utils import import_data_fun
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 class ImportData(LoginRequiredMixin, UpdateView):
-    model = study
+    model = Study
     form_class = ImportDataForm
     template_name = "researcher_UI/import_data.html"
 

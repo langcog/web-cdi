@@ -2,7 +2,7 @@ import pandas as pd
 from cdi_forms.cat_forms.models import CatResponse
 from cdi_forms.models import BackgroundInfo
 from django.http import HttpResponse
-from researcher_UI.models import Benchmark, administration
+from researcher_UI.models import Benchmark, Administration
 from researcher_UI.utils.format_admin import format_admin_data, format_admin_header
 
 
@@ -16,7 +16,7 @@ def download_cat_data(request, study_obj, administrations=None, adjusted=False):
     administrations = (
         administrations
         if administrations is not None
-        else administration.objects.filter(study=study_obj)
+        else Administration.objects.filter(study=study_obj)
     )
 
     admin_header = format_admin_header(study_obj)

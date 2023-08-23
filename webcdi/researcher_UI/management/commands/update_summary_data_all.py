@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 from cdi_forms.scores import update_summary_scores
 import datetime
-from researcher_UI.models import administration, study
+from researcher_UI.models import Administration, study
 
 from django.conf import settings
 from django.core.mail import EmailMessage
@@ -14,7 +14,7 @@ class Command(BaseCommand):
             study_count += 1
             count = 0
             thousands = 0
-            administrations = administration.objects.filter(study=study_obj)
+            administrations = Administration.objects.filter(study=study_obj)
             subject = f'{study_count} WebCDI Summary Data for {study_obj.name}'
             email = EmailMessage(
                     subject=subject,

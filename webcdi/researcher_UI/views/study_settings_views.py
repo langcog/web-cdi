@@ -8,13 +8,13 @@ from django.contrib import messages
 from psycopg2.extras import NumericRange
 
 from researcher_UI.utils import raw_gift_code_fun, add_paired_study_fun
-from researcher_UI.models import study
+from researcher_UI.models import Study
 from researcher_UI.forms import AddStudyForm, AddPairedStudyForm, EditStudyForm
 from researcher_UI.mixins import ReseacherOwnsStudyMixin
 
 
 class AddPairedStudy(LoginRequiredMixin, CreateView):
-    model = study
+    model = Study
     form_class = AddPairedStudyForm
     template_name = "researcher_UI/add_paired_study_modal.html"
 
@@ -30,7 +30,7 @@ class AddPairedStudy(LoginRequiredMixin, CreateView):
 
 
 class UpdateStudyView(LoginRequiredMixin, ReseacherOwnsStudyMixin, UpdateView):
-    model = study
+    model = Study
     template_name = "researcher_UI/study_form.html"
     form_class = EditStudyForm
 
@@ -84,7 +84,7 @@ class UpdateStudyView(LoginRequiredMixin, ReseacherOwnsStudyMixin, UpdateView):
 
 class AddStudy(LoginRequiredMixin, CreateView):
     template_name = "researcher_UI/study_form.html"
-    model = study
+    model = Study
     form_class = AddStudyForm
 
     def get_form(self):
@@ -104,8 +104,8 @@ class AddStudy(LoginRequiredMixin, CreateView):
             study_instance.min_age = age_range.lower
             study_instance.max_age = age_range.upper
         except:
-            study_instance.min_age = study_instance.instrument.min_age
-            study_instance.max_age = study_instance.instrument.max_age
+            study_instance.min_age = Study_instance.instrument.min_age
+            study_instance.max_age = Study_instance.instrument.max_age
 
         study_instance.researcher = researcher
         if not form.cleaned_data.get("test_period"):

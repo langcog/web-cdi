@@ -10,7 +10,7 @@ class AdministrationManager(models.Manager):
         return super().get_queryset().filter(is_active=True)
 
 # Model for individual administrations
-class administration(models.Model):
+class Administration(models.Model):
     study = models.ForeignKey("study", on_delete=models.CASCADE)  # Study name
     subject_id = models.IntegerField()  # Subject ID, unique to the associated study
     local_lab_id = models.CharField(
@@ -101,7 +101,7 @@ class administration(models.Model):
         return target
 
 
-class AdministrationSummary(administration):
+class AdministrationSummary(Administration):
     class Meta:
         proxy = True
         verbose_name = "Administration Summary"

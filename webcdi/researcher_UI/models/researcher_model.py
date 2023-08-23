@@ -2,10 +2,10 @@ from django.db import models
 
 from django.contrib.auth.models import User
 
-from .instrument import instrument
+from .instrument_model import Instrument
 from .instrument_family import InstrumentFamily
 
-class researcher(models.Model):
+class Researcher(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     institution = models.CharField(
         verbose_name="Name of Institution", max_length=101
@@ -14,7 +14,7 @@ class researcher(models.Model):
         verbose_name="Position in Institution", max_length=101
     )  # Title of position within research institution
     allowed_instruments = models.ManyToManyField(
-        instrument, verbose_name="Instruments this researcher has access to", blank=True
+        Instrument, verbose_name="Instruments this researcher has access to", blank=True
     )
     allowed_instrument_families = models.ManyToManyField(
         InstrumentFamily,

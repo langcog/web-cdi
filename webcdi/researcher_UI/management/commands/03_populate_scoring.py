@@ -42,7 +42,7 @@ class Command(BaseCommand):
 
             instrument_language, instrument_form, instrument_scoring = curr_instrument['language'], curr_instrument['form'], curr_instrument['scoring_json']
             
-            instrument_obj = instrument.objects.get(form=instrument_form, language=instrument_language)
+            instrument_obj = Instrument.objects.get(form=instrument_form, language=instrument_language)
             instrument_forms = apps.get_model(app_label='cdi_forms', model_name='Instrument_Forms')
 
             filename = os.path.realpath(PROJECT_ROOT + '/' + instrument_scoring)

@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 from cdi_forms.scores import update_summary_scores
 import datetime
-from researcher_UI.models import administration
+from researcher_UI.models import Administration
 
 from django.conf import settings
 from django.core.mail import EmailMessage
@@ -12,7 +12,7 @@ class Command(BaseCommand):
         print (f'Starting at %s' % (datetime.datetime.now()))
         count = 90
         thousands = 0
-        total = administration.objects.filter(study__name__in=["WG covid19","WS covid19"])
+        total = Administration.objects.filter(study__name__in=["WG covid19","WS covid19"])
         for instance in total[:count]:
             count += 1
             update_summary_scores(instance)

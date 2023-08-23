@@ -9,7 +9,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import TemplateView
-from researcher_UI.models import study, administration, administration_data, InstrumentScore
+from researcher_UI.models import Study, Administration, administration_data, InstrumentScore
 from researcher_UI.utils import get_background_header
 from researcher_UI.utils import format_admin_data, format_admin_header
 from researcher_UI.utils import get_score_headers
@@ -26,7 +26,7 @@ class BaseAPIView(TemplateView):
         administrations = (
             administrations
             if administrations is not None
-            else administration.objects.filter(study=study_obj)
+            else Administration.objects.filter(study=study_obj)
         )
         if not administrations.filter(completed=True).exists():
             return json.dumps({'Error':"You must select at least 1 completed survey"})
@@ -181,7 +181,7 @@ class BaseAPIView(TemplateView):
 
 class StudyAPI(BaseAPIView):
     def get(self, request, *args, **kwargs):
-        study_obj = study.objects.get(pk=kwargs.pop('pk'))
+        study_obj = Study.objects.get(pk=kwargs.pop('pk'))
         qs_json = self.get_json(request, study_obj)
 
         # Return CSV
@@ -190,8 +190,8 @@ class StudyAPI(BaseAPIView):
 
 class SourceAPI(BaseAPIView):
     def get(self, request, *args, **kwargs):
-        study_obj = study.objects.get(pk=kwargs.pop('pk'))
-        administrations = administration.objects.filter(backgroundinfo__in=BackgroundInfo.objects.filter(source_id=kwargs.pop('source_id')))
+        study_obj = Study.objects.get(pk=kwargs.pop('pk'))
+        administrations = Administration.objects.filter(backgroundinfo__in=BackgroundInfo.objects.filter(source_id=kwargs.pop('source_id')))
         qs_json = self.get_json(request, study_obj, administrations)
 
         # Return CSV
@@ -199,8 +199,8 @@ class SourceAPI(BaseAPIView):
     
 class AdministrationAPI(BaseAPIView):
     def get(self, request, *args, **kwargs):
-        study_obj = study.objects.get(pk=kwargs.pop('pk'))
-        administrations = administration.objects.filter(pk=kwargs.pop('administration_id'))
+        study_obj = Study.objects.get(pk=kwargs.pop('pk'))
+        administrations = Administration.objects.filter(pk=kwargs.pop('administration_id'))
         qs_json = self.get_json(request, study_obj, administrations)
 
         # Return CSV

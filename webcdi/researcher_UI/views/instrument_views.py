@@ -1,5 +1,5 @@
 from researcher_UI.forms import AddInstrumentForm
-from researcher_UI.models import researcher
+from researcher_UI.models import Researcher
 from brookes.models import BrookesCode
 from django.views.generic import UpdateView
 import datetime
@@ -8,7 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 
 class AddInstruments(LoginRequiredMixin, UpdateView):
-    model = researcher
+    model = Researcher
     form_class = AddInstrumentForm
     template_name = "researcher_UI/researcher_form.html"
 

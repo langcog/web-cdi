@@ -7,7 +7,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.http import HttpResponse, HttpResponseServerError
 from django.shortcuts import render
 from django.urls import reverse
-from researcher_UI.models import InstrumentScore, administration, administration_data
+from researcher_UI.models import InstrumentScore, Administration, administration_data
 from researcher_UI.utils import get_background_header
 from researcher_UI.utils import format_admin_data, format_admin_header
 from researcher_UI.utils import get_score_headers
@@ -25,7 +25,7 @@ def download_data(
     administrations = (
         administrations
         if administrations is not None
-        else administration.objects.filter(study=study_obj)
+        else Administration.objects.filter(study=study_obj)
     )
     if not administrations.filter(completed=True).exists():
         return HttpResponseServerError("You must select at least 1 completed survery")

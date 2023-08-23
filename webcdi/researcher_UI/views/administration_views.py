@@ -9,7 +9,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from django.utils import timezone
 from ipware.ip import get_client_ip
-from researcher_UI.models import administration, study
+from researcher_UI.models import Administration, Study
 from researcher_UI.views import ip_address
 from researcher_UI.mixins import StudyOwnerMixin
 from researcher_UI.forms import StudyFormForm
@@ -24,7 +24,7 @@ from researcher_UI.utils.console_helper import get_helper
 from researcher_UI.utils import admin_new_participant_fun
 
 class EditAdministrationView(LoginRequiredMixin, StudyOwnerMixin, UpdateView):
-    model = administration
+    model = Administration
     form_class = StudyFormForm
     template_name = "researcher_UI/interface.html"
 
@@ -37,7 +37,7 @@ class EditAdministrationView(LoginRequiredMixin, StudyOwnerMixin, UpdateView):
         obj = self.get_object()
 
         if "subject_id" in form.changed_data:
-            count = administration.objects.filter(
+            count = Administration.objects.filter(
                 study_id=obj.study.pk, subject_id=form.cleaned_data["subject_id"]
             ).count()
 
@@ -46,7 +46,7 @@ class EditAdministrationView(LoginRequiredMixin, StudyOwnerMixin, UpdateView):
                     {"error": "subject id is already existed."}, status=400
                 )
 
-            _instances = administration.objects.filter(
+            _instances = Administration.objects.filter(
                 study=obj.study, subject_id=form.cleaned_data["subject_id_old"]
             )
 
@@ -76,7 +76,7 @@ class AdministerNewParticipant(CreateView):
         return redirect(reverse("administer_cdi_form", args=[admin.url_hash]))
     
 class AddNewParent(DetailView):
-    model = study
+    model = Study
 
     def admin_new_parent_fun(self, request):
         if "source_id" in request.GET:
@@ -87,7 +87,7 @@ class AddNewParent(DetailView):
             source_id = f"{request.GET['child']}_{request.GET['response']}"
 
         subject_cap = self.object.subject_cap
-        completed_admins = administration.objects.filter(
+        completed_admins = Administration.objects.filter(
             study=self.object, completed=True
         ).count()
         bypass = request.GET.get("bypass", None)
@@ -110,7 +110,7 @@ class AddNewParent(DetailView):
 
     def get_object(self) -> models.Model:
         researcher = User.objects.get(username=self.kwargs['username'])
-        self.object = study.objects.get(name=self.kwargs['study_name'], researcher=researcher)
+        self.object = Study.objects.get(name=self.kwargs['study_name'], researcher=researcher)
         return self.object
         return super().get_object(queryset)
     
@@ -128,7 +128,7 @@ class AddNewParent(DetailView):
                 if not 'source_id' in request.GET or not 'age' in request.GET or not 'sex' in request.GET:
                     raise Http404("Age, sex and source_id must be included in the a no demographic call.")
                 
-                new_admin = administration.objects.create(
+                new_admin = Administration.objects.create(
                     study=self.object,
                     subject_id=max_subject_id(self.object) + 1,
                     repeat_num=1,
