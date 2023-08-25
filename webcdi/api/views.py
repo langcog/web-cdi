@@ -190,9 +190,12 @@ class StudyAPI(BaseAPIView):
 
 class SourceAPI(BaseAPIView):
     def get(self, request, *args, **kwargs):
-        study_obj = Study.objects.get(pk=kwargs.pop('pk'))
-        administrations = Administration.objects.filter(backgroundinfo__in=BackgroundInfo.objects.filter(source_id=kwargs.pop('source_id')))
-        qs_json = self.get_json(request, study_obj, administrations)
+        study = Study.objects.get(pk=kwargs.pop('pk'))
+        if 'event_id' in kwargs:
+            administrations = Administration.objects.filter(backgroundinfo__in=BackgroundInfo.objects.filter(event_id=kwargs.pop('event_id'), source_id=kwargs.pop('source_id')))
+        else:
+            administrations = Administration.objects.filter(backgroundinfo__in=BackgroundInfo.objects.filter(source_id=kwargs.pop('source_id')))
+        qs_json = self.get_json(request, study, administrations)
 
         # Return CSV
         return HttpResponse(qs_json, content_type='application/json')

@@ -22,3 +22,17 @@ def max_subject_id(study_obj):
         max_id = 0  # Mark as zero
 
     return max_id
+
+def max_repeat_num(administration):
+    max_id = Administration.objects.filter(study=administration.study, subject_id=administration.subject_id).aggregate(
+        Max("repeat_num")
+    )[
+        "repeat_num__max"
+    ]  # Find the subject ID in this study with the highest number
+
+    if (
+        max_id is None
+    ):  # If the max subject ID could not be found (e.g., study has 0 participants)
+        max_id = 0  # Mark as zero
+
+    return max_id

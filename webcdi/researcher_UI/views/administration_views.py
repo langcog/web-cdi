@@ -13,7 +13,7 @@ from researcher_UI.models import Administration, Study
 from researcher_UI.views import ip_address
 from researcher_UI.mixins import StudyOwnerMixin
 from researcher_UI.forms import StudyFormForm
-from researcher_UI.utils import random_url_generator, max_subject_id
+from researcher_UI.utils import random_url_generator, max_subject_id, max_repeat_num
 from cdi_forms.models import BackgroundInfo
 
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -112,7 +112,6 @@ class AddNewParent(DetailView):
         researcher = User.objects.get(username=self.kwargs['username'])
         self.object = Study.objects.get(name=self.kwargs['study_name'], researcher=researcher)
         return self.object
-        return super().get_object(queryset)
     
     def get(self, request, username, study_name):
         self.get_object()
@@ -121,21 +120,33 @@ class AddNewParent(DetailView):
         )
         if let_through:
             if self.object.no_demographic_boolean:
-                if BackgroundInfo.objects.filter(source_id=request.GET['source_id'],  administration__study=self.object).exists():
+                event_id = None if not 'event_id' in request.GET else request.GET['event_id']
+                if BackgroundInfo.objects.filter(source_id=request.GET['source_id'],  event_id=event_id, administration__study=self.object).exists():
                     background_info = BackgroundInfo.objects.get(source_id=request.GET['source_id'], administration__study=self.object)
                     return redirect("administer_cdi_form", hash_id=background_info.administration.url_hash)
-
+             
                 if not 'source_id' in request.GET or not 'age' in request.GET or not 'sex' in request.GET:
                     raise Http404("Age, sex and source_id must be included in the a no demographic call.")
-                
-                new_admin = Administration.objects.create(
-                    study=self.object,
-                    subject_id=max_subject_id(self.object) + 1,
-                    repeat_num=1,
-                    url_hash=random_url_generator(),
-                    completed=False,
-                    due_date=timezone.now() + datetime.timedelta(days=self.object.test_period),
-                )
+
+                if BackgroundInfo.objects.filter(source_id=request.GET['source_id'], administration__study=self.object).exists():
+                    old_admin = BackgroundInfo.objects.filter(source_id=request.GET['source_id'], administration__study=self.object)[0].administration
+                    new_admin = Administration.objects.create(
+                        study=self.object,
+                        subject_id=old_admin.subject_id,
+                        repeat_num=max_repeat_num(old_admin)+1,
+                        url_hash=random_url_generator(),
+                        completed=False,
+                        due_date=timezone.now() + datetime.timedelta(days=self.object.test_period),
+                    )
+                else:    
+                    new_admin = Administration.objects.create(
+                        study=self.object,
+                        subject_id=max_subject_id(self.object) + 1,
+                        repeat_num=1,
+                        url_hash=random_url_generator(),
+                        completed=False,
+                        due_date=timezone.now() + datetime.timedelta(days=self.object.test_period),
+                    )
 
                 if 'offset' in request.GET:
                     offset = int(request.GET['offset'])
@@ -158,6 +169,7 @@ class AddNewParent(DetailView):
                     administration=new_admin,
                     sex = request.GET['sex'].upper(),
                     source_id = request.GET['source_id'],
+                    event_id = event_id,
                     age = int(request.GET['age']),
                     born_on_due_date=born_on_due_date,
                     due_date_diff=due_date_diff,

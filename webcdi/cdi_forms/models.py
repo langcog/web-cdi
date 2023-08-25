@@ -480,6 +480,7 @@ class BackgroundInfo(models.Model):
     sibling_data = models.TextField(blank=True, null=True)
 
     source_id = models.CharField(max_length=255, blank=True, null=True)
+    event_id = models.CharField(max_length=255, blank=True, null=True)
 
     children_comforted = models.CharField(
         max_length=51,

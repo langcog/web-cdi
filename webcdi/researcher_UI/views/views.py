@@ -1,9 +1,11 @@
 
 import json
 from typing import Any, Dict
+from django import http
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
+from django.http.response import HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.views import generic
@@ -79,10 +81,13 @@ class AdminNew(LoginRequiredMixin, generic.UpdateView):
     form_class = AdminNewForm
     # template_name = "researcher_UI/administer_new_modal.html"
 
+    def dispatch(self, request, *args: Any, **kwargs: Any) -> HttpResponse:
+        self.object = self.get_object()
+        return super().dispatch(request, *args, **kwargs)
+    
     def get_template_names(self):
-        study_obj = self.get_object()
         # check if valid code if chargeable
-        if not study_obj.valid_code(self.request.user):
+        if not self.object.valid_code(self.request.user):
             return ["researcher_UI/no_brookes_code.html"]
         else:
             return ["researcher_UI/administer_new_modal.html"]
@@ -90,23 +95,18 @@ class AdminNew(LoginRequiredMixin, generic.UpdateView):
     def get_context_data(self, **kwargs):
         context = super(AdminNew, self).get_context_data(**kwargs)
         researcher = self.request.user
-        study_obj = self.get_object()
-        study_obj = Study.objects.get(researcher=researcher, name=study_obj.name)
         context["username"] = researcher.username
-        context["study_name"] = Study_obj.name
-        context["study_group"] = Study_obj.study_group
-        context["object"] = Study_obj
+        context["study_name"] = self.object.name
+        context["study_group"] = self.object.study_group
         return context
 
     def form_valid(self, form, *args, **kwargs):
         researcher = self.request.user
-        study_obj = self.get_object()
         permitted = Study.objects.filter(
-            researcher=researcher, name=study_obj.name
+            researcher=researcher, name=self.object.name
         ).exists()
 
-        study_obj = Study.objects.get(researcher=researcher, name=study_obj.name)
-        data = admin_new_fun(self.request, permitted, study_obj.name, study_obj)
+        data = admin_new_fun(self.request, permitted, self.object.name, self.object)
         return HttpResponse(json.dumps(data), content_type="application/json")
 
 
