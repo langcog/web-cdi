@@ -115,7 +115,26 @@ class AddStudyForm(BetterModelForm):
     )
     direct_redirect_boolean = forms.BooleanField(
         initial=True,
+        required=False,
         help_text="Deselect this if the redirect url calls an API to get the actual redirect url"
+    )
+    JSON_REDIRECT_PLACEHOLDER = '''
+        {
+            "token": "DD266E7616FE86C190DEBC530CE5E435"
+            "content": "surveyLink"
+            "format": "json"
+            "instrument": "webcdi"
+            "event": "v01_arm_1"
+            "record": "YISKL0001"
+            "returnFormat": "json"
+        }
+    '''
+    json_redirect = forms.JSONField(
+        help_text="Enter redirect json here",
+        required=False,
+        widget = forms.Textarea(
+            attrs={'placeholder': JSON_REDIRECT_PLACEHOLDER}
+        )
     )
 
     participant_source_boolean = forms.ChoiceField(
@@ -153,6 +172,20 @@ class AddStudyForm(BetterModelForm):
         widget=forms.URLInput(
             attrs={
                 'placeholder': 'https://my_example.com/completed/{source_id}/'
+            }
+        )
+    )
+    api_token = forms.CharField(
+        required=False,
+        help_text='Enter the API token required',
+        widget=forms.TextInput()
+    )
+    completion_data = forms.CharField(
+        required=False,
+        help_text='Provide JSON data to be included when sending the completion flag source_id and event_id within double curly brackets {{}} if required',
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': '[{"record_id": "{{source_id}}", "redcap_event_name": "{{event_id}}", "webcdi_completion_status": 1}]'
             }
         )
     )
@@ -201,7 +234,7 @@ class AddStudyForm(BetterModelForm):
         else:
             try:
                 self.fields["instrument"] = forms.ModelChoiceField(
-                    queryset=instrument.objects.filter(
+                    queryset=Instrument.objects.filter(
                         pk=self.instance.instrument.pk
                     ),
                     empty_label=None
@@ -280,13 +313,22 @@ class AddStudyForm(BetterModelForm):
                 Field("redirect_boolean", css_class="css_enabler"),
                 Div(
                     Field("redirect_url"), 
-                    Field("direct_redirect_boolean"),
+                    Field("direct_redirect_boolean", css_class="css_enabler"),
+                    Div(
+                        Field("json_redirect"),
+                        css_class="direct_redirect_boolean collapse"
+                    ),
                     css_class="redirect_boolean collapse"
                 ),
                 Field("participant_source_boolean", css_class="css_enabler"),
                 Div(
                     Field("hide_source_id"),
-                    Field('send_completion_flag_url'),
+                    Field('send_completion_flag_url', css_class="css_enabler"),
+                    Div(
+                        Field('api_token'),
+                        Field('completion_data'),
+                        css_class="send_completion_flag_url collapse"
+                    ),
                     css_class="participant_source_boolean collapse",
                 ),
             )

@@ -13,4 +13,8 @@ class InstrumentFormsAdmin(admin.ModelAdmin):
 admin.site.register(Instrument_Forms, InstrumentFormsAdmin)
 
 admin.site.register(Choices)
-admin.site.register(BackgroundInfo)
+
+class BackgroundInfoAdmin(admin.ModelAdmin):
+    readonly_fields = ['administration']
+
+admin.site.register(BackgroundInfo, BackgroundInfoAdmin)

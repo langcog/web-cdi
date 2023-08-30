@@ -651,6 +651,9 @@ class BackgroundInfo(models.Model):
         choices=GENERIC_HEALTH_CHOICES,
     )
 
+    def __str__(self):
+        return f'{self.administration}'
+    
 
 # Model of zipcodes reported to be in 3-digit zip code prefixes with a population lower than 20,000. Tests with a zipcode found in this model will have their digits replaced with their state abbreviation.
 class Zipcode(models.Model):

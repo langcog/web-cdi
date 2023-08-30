@@ -336,7 +336,7 @@ def find_paired_studies(request, username, study_group):
     data = {}
     researcher = User.objects.get(username=username)
     possible_studies = (
-        study.objects.filter(study_group=study_group, researcher=researcher)
+        Study.objects.filter(study_group=study_group, researcher=researcher)
         .annotate(
             admin_count=models.Sum(
                 models.Case(
@@ -364,7 +364,7 @@ def find_paired_studies(request, username, study_group):
         .order_by("min_age")
     )
 
-    first_study = study.objects.filter(study_group=study_group, researcher=researcher)[
+    first_study = Study.objects.filter(study_group=study_group, researcher=researcher)[
         :1
     ].get()
 

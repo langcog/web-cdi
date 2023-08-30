@@ -65,6 +65,10 @@ class Study(models.Model):
         default=True,
         help_text="Deselect this if the redirect url calls an API to get the actual redirect url"
     )
+    json_redirect = models.JSONField(
+        blank=True, null=True,
+        help_text="Enter redirect json here"
+    )
     append_source_id_to_redirect = models.BooleanField(
         verbose_name="Append source_id to redirect URL?", default=False
     )
@@ -107,6 +111,13 @@ class Study(models.Model):
         blank=True,
         null=True,
         help_text = 'Send completion flag to URL'
+    )
+    api_token = models.CharField(max_length=101, blank=True, null=True)
+    completion_data = models.CharField(
+        max_length=255,
+        blank=True,
+        null=True,
+        help_text="Data to be included in the completion url."
     )
 
     def __str__(self):

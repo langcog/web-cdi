@@ -41,6 +41,20 @@ class AdministrationSummaryView(DetailView):
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         ctx = super().get_context_data(**kwargs)
 
+        # Get redirect button
+        if self.object.study.redirect_boolean:
+            redirect_url = self.object.study.redirect_url.replace('{{source_id}}',self.object.backgroundinfo.source_id).replace('{{event_id}}', self.object.backgroundinfo.event_id)
+            if self.object.study.direct_redirect_boolean:
+                ctx['redirect_url'] = redirect_url
+            else:
+                data = self.object.study.json_redirect
+                for item in data:
+                    data[item] = data[item].replace('{{source_id}}',self.object.backgroundinfo.source_id).replace('{{event_id}}', self.object.backgroundinfo.event_id)
+                print(data)
+                r = requests.post(redirect_url, data=data)
+                print('HTTP Status: ' + str(r.status_code))
+                print(r.content)
+                ctx['redirect_url'] = str(r.content, 'UTF-8')
         # Get form from database
         background_form = prefilled_background_form(self.object)
         ctx["background_form"] = background_form
@@ -220,7 +234,6 @@ class AdministrationUpdateView(UpdateView):
 
     def get_object(self, queryset=None):
         self.object = Administration.objects.get(url_hash=self.kwargs["hash_id"])
-        logger.debug(f'Redirect URL is {self.object.redirect_url()}')
         return self.object
 
     def get_instrument(self):
@@ -339,8 +352,26 @@ class AdministrationUpdateView(UpdateView):
                 )
             else:
                 self.object.completed = True
+                self.object.completed_date = timezone.now()
 
                 # TODO Check if send_completion_flag field has a URL and send if it does
+                data = {
+                    'token': self.object.study.api_token,
+                    'content': 'record',
+                    'action': 'import',
+                    'format': 'json',
+                    'type': 'flat',
+                    'overwriteBehavior': 'normal',
+                    'forceAutoNumber': 'false',
+                    'data': self.object.study.completion_data.replace('{{source_id}}', self.object.backgroundinfo.source_id or '').replace('{{event_id}}', self.object.backgroundinfo.event_id or ''),
+                    'returnContent': 'count',
+                    'returnFormat': 'json'
+                }
+                
+                if self.object.study.send_completion_flag_url:
+                    r = requests.post(self.object.study.send_completion_flag_url, data=data)
+                    print(f'Data is {data}')
+                    print (f'API Response is {r.reason}')
 
                 self.object.save()
                 response = reverse(

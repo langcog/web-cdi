@@ -17,6 +17,7 @@ def format_admin_header(study_obj):
         "due_date",
         "last_modified",
         "created_date",
+        "completed_date",
     ]
     filename = os.path.realpath(
         settings.BASE_DIR
@@ -56,6 +57,7 @@ def format_admin_data(pd, study_obj, administrations, admin_header):
                     "due_date",
                     "last_modified",
                     "created_date",
+                    "completed_date",
                 )
             ).rename(
                 columns={
@@ -80,6 +82,7 @@ def format_admin_data(pd, study_obj, administrations, admin_header):
                     "due_date",
                     "last_modified",
                     "created_date",
+                    "completed_date",
                 )
             ).rename(
                 columns={

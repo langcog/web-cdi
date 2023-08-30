@@ -39,6 +39,7 @@ class Administration(models.Model):
     created_date = models.DateTimeField(
         verbose_name="Creation date", auto_now_add=True
     )  # Date administration object was created
+    completed_date = models.DateTimeField(blank=True, null=True)
     page_number = models.IntegerField(
         verbose_name="Page number", default=0
     )  # Current progress for CDI form

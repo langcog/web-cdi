@@ -271,10 +271,36 @@
                 $('.participant_source_boolean').addClass('collapse');
               }  
             }        
-
             check_for_participant_source();
             $('#id_participant_source_boolean').on('change', function () {
               check_for_participant_source();      
+            });
+
+            
+            function check_for_send_completion_flag_url() {
+              console.log('LENGTH: ', $('#id_send_completion_flag_url').val().length)
+              if ($('#id_send_completion_flag_url').val().length > 0) {
+                $('.send_completion_flag_url').removeClass('collapse')
+              } else {
+                $('.send_completion_flag_url').addClass('collapse');
+              }  
+            }        
+            check_for_send_completion_flag_url();
+            $('#id_send_completion_flag_url').on('change', function () {
+              check_for_send_completion_flag_url();      
+            });
+
+            function check_for_direct_redirect_boolean() {
+              if ($('#id_direct_redirect_boolean').prop('checked')) {
+                $('.direct_redirect_boolean').addClass('collapse')
+              } else {
+                $('.direct_redirect_boolean').removeClass('collapse');
+              }  
+            }        
+
+            check_for_direct_redirect_boolean();
+            $('#id_direct_redirect_boolean').on('change', function () {
+              check_for_direct_redirect_boolean();      
             });
 
             function check_for_allow_payment() {
