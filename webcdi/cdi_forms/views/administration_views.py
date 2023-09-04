@@ -50,7 +50,7 @@ class AdministrationSummaryView(DetailView):
                 data = self.object.study.json_redirect
                 for item in data:
                     data[item] = data[item].replace('{{source_id}}',self.object.backgroundinfo.source_id).replace('{{event_id}}', self.object.backgroundinfo.event_id)
-                print(data)
+                print(f'REDIRECT {data}')
                 r = requests.post(redirect_url, data=data)
                 print('HTTP Status: ' + str(r.status_code))
                 print(r.content)
@@ -355,7 +355,7 @@ class AdministrationUpdateView(UpdateView):
                 self.object.completed_date = timezone.now()
 
                 # TODO Check if send_completion_flag field has a URL and send if it does
-                data = {
+                '''data = {
                     'token': self.object.study.api_token,
                     'content': 'record',
                     'action': 'import',
@@ -366,8 +366,11 @@ class AdministrationUpdateView(UpdateView):
                     'data': self.object.study.completion_data.replace('{{source_id}}', self.object.backgroundinfo.source_id or '').replace('{{event_id}}', self.object.backgroundinfo.event_id or ''),
                     'returnContent': 'count',
                     'returnFormat': 'json'
-                }
-                
+                }'''
+                data = self.object.study.completion_data
+                for item in data:
+                    data[item] = data[item].replace('{{source_id}}', self.object.backgroundinfo.source_id or '').replace('{{event_id}}', self.object.backgroundinfo.event_id or '')
+                print(data)
                 if self.object.study.send_completion_flag_url:
                     r = requests.post(self.object.study.send_completion_flag_url, data=data)
                     print(f'Data is {data}')

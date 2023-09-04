@@ -180,10 +180,10 @@ class AddStudyForm(BetterModelForm):
         help_text='Enter the API token required',
         widget=forms.TextInput()
     )
-    completion_data = forms.CharField(
+    completion_data = forms.JSONField(
         required=False,
         help_text='Provide JSON data to be included when sending the completion flag source_id and event_id within double curly brackets {{}} if required',
-        widget=forms.TextInput(
+        widget=forms.Textarea(
             attrs={
                 'placeholder': '[{"record_id": "{{source_id}}", "redcap_event_name": "{{event_id}}", "webcdi_completion_status": 1}]'
             }
@@ -362,37 +362,21 @@ class EditStudyForm(AddStudyForm):
 
         self.helper.layout = Layout(
             self.study_options_fieldset(),
-            self.demographic_options_fieldset(),
+            #self.demographic_options_fieldset(),
             self.opening_dialog_fieldset(),
             self.redirect_options_fieldset(),
             self.completion_page_fieldset(),
             self.submit_fieldset(),
         )
 
-        self.fields['no_demographic_boolean'].widget = forms.HiddenInput()
-        self.fields['demographic_opt_out'].widget = forms.HiddenInput()
-        self.fields['age_range'].widget = forms.HiddenInput()
-        self.fields['demographic'].widget = forms.HiddenInput()
-        self.fields['backpage_boolean'].widget = forms.HiddenInput()
-        self.fields['confirmation_questions'].widget = forms.HiddenInput()
-        self.fields['prefilled_data'].widget = forms.HiddenInput()
-        self.fields['instrument'].widget = forms.HiddenInput()
-
-    def demographic_options_fieldset(self):
-        return Fieldset(
-                'Demographic Options',
-                HTML('Demographic Fields cannot be updated.'),
-                Field('no_demographic_boolean', css_class="css_enabler"),
-                Div(
-                    Field("demographic_opt_out"), 
-                    Field("age_range"),
-                    Field("demographic", css_class="css_enabler"), 
-                    Div(Field("backpage_boolean"), css_class='demographic'),
-                    Field("confirmation_questions"),
-                    Field("prefilled_data"),
-                    css_class="no_demographic_boolean collapse"
-                ),
-            )
+        del self.fields['no_demographic_boolean']
+        del self.fields['demographic_opt_out']
+        del self.fields['age_range']
+        del self.fields['demographic']
+        del self.fields['backpage_boolean']
+        del self.fields['confirmation_questions']
+        del self.fields['prefilled_data']
+        del self.fields['instrument']
     
     def clean(self):
         return super().clean()
