@@ -364,15 +364,16 @@ class EditStudyForm(AddStudyForm):
             self.completion_page_fieldset(),
             self.submit_fieldset(),
         )
-        del self.fields['no_demographic_boolean']
-        del self.fields['demographic_opt_out']
-        del self.fields['age_range']
-        del self.fields['demographic']
-        del self.fields['backpage_boolean']
-        del self.fields['confirmation_questions']
-        del self.fields['prefilled_data']
 
-
+        self.fields['no_demographic_boolean'].widget = forms.HiddenInput()
+        self.fields['demographic_opt_out'].widget = forms.HiddenInput()
+        self.fields['age_range'].widget = forms.HiddenInput()
+        self.fields['demographic'].widget = forms.HiddenInput()
+        self.fields['backpage_boolean'].widget = forms.HiddenInput()
+        self.fields['confirmation_questions'].widget = forms.HiddenInput()
+        self.fields['prefilled_data'].widget = forms.HiddenInput()
+        self.fields['instrument'].widget = forms.HiddenInput()
+        
     def clean(self):
         return super().clean()
 
