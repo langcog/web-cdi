@@ -175,11 +175,7 @@ class AddStudyForm(BetterModelForm):
             }
         )
     )
-    api_token = forms.CharField(
-        required=False,
-        help_text='Enter the API token required',
-        widget=forms.TextInput()
-    )
+
     completion_data = forms.JSONField(
         required=False,
         help_text='Provide JSON data to be included when sending the completion flag source_id and event_id within double curly brackets {{}} if required',
@@ -325,7 +321,6 @@ class AddStudyForm(BetterModelForm):
                     Field("hide_source_id"),
                     Field('send_completion_flag_url', css_class="css_enabler"),
                     Div(
-                        Field('api_token'),
                         Field('completion_data'),
                         css_class="send_completion_flag_url collapse"
                     ),

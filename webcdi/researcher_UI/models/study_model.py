@@ -112,8 +112,7 @@ class Study(models.Model):
         null=True,
         help_text = 'Send completion flag to URL'
     )
-    api_token = models.CharField(max_length=101, blank=True, null=True)
-
+   
     completion_data = models.JSONField(
         max_length=255,
         blank=True,
