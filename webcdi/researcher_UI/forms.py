@@ -353,12 +353,16 @@ class AddStudyForm(BetterModelForm):
         model = Study
         exclude = ["study_group", "researcher"]
 
+
 class EditStudyForm(AddStudyForm):
+
     def __init__(self, *args, **kwargs):
         self.researcher = kwargs.pop("researcher", None)
         super().__init__(*args, **kwargs)
+
         self.helper.layout = Layout(
             self.study_options_fieldset(),
+            self.demographic_options_fieldset(),
             self.opening_dialog_fieldset(),
             self.redirect_options_fieldset(),
             self.completion_page_fieldset(),
@@ -373,7 +377,23 @@ class EditStudyForm(AddStudyForm):
         self.fields['confirmation_questions'].widget = forms.HiddenInput()
         self.fields['prefilled_data'].widget = forms.HiddenInput()
         self.fields['instrument'].widget = forms.HiddenInput()
-        
+
+    def demographic_options_fieldset(self):
+        return Fieldset(
+                'Demographic Options',
+                HTML('Demographic Fields cannot be updated.'),
+                Field('no_demographic_boolean', css_class="css_enabler"),
+                Div(
+                    Field("demographic_opt_out"), 
+                    Field("age_range"),
+                    Field("demographic", css_class="css_enabler"), 
+                    Div(Field("backpage_boolean"), css_class='demographic'),
+                    Field("confirmation_questions"),
+                    Field("prefilled_data"),
+                    css_class="no_demographic_boolean collapse"
+                ),
+            )
+    
     def clean(self):
         return super().clean()
 
