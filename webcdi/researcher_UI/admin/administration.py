@@ -1,6 +1,6 @@
 from django.contrib import admin, messages
 from brookes.filters import DropdownFilter
-from researcher_UI.models import administration
+from researcher_UI.models import Administration
 
 
 def set_is_active_true(modeladmin, request, queryset):
@@ -27,4 +27,4 @@ class AdministrationAdmin(admin.ModelAdmin):
     search_fields = ["study__name", "url_hash"]
     actions = [set_is_active_true, ]
 
-admin.site.register(administration, AdministrationAdmin)
+admin.site.register(Administration, AdministrationAdmin)

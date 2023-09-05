@@ -48,7 +48,7 @@ class Command(BaseCommand):
 
             instrument_language, instrument_form = curr_instrument['language'], curr_instrument['form']
 
-            instrument_obj = instrument.objects.get(form=instrument_form, language=instrument_language)
+            instrument_obj = Instrument.objects.get(form=instrument_form, language=instrument_language)
             instrument_forms = apps.get_model(app_label='cdi_forms', model_name='Instrument_Forms')
 
             print ("    Populating items for", instrument_language, instrument_form)

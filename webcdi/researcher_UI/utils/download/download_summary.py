@@ -4,7 +4,7 @@ from cdi_forms.models import BackgroundInfo
 from django.contrib.sites.shortcuts import get_current_site
 from django.http import HttpResponse, HttpResponseServerError
 from django.urls import reverse
-from researcher_UI.models import administration
+from researcher_UI.models import Administration
 from researcher_UI.utils.background_header import get_background_header
 from researcher_UI.utils.format_admin import format_admin_data, format_admin_header
 from researcher_UI.utils.score_headers import get_score_headers
@@ -25,7 +25,7 @@ def download_summary(request, study_obj, administrations=None):
     administrations = (
         administrations
         if administrations is not None
-        else administration.objects.filter(study=study_obj)
+        else Administration.objects.filter(study=study_obj)
     )
     if not administrations.filter(completed=True).exists():
         return HttpResponseServerError("You must select at least 1 completed survery")

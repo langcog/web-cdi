@@ -23,13 +23,12 @@ from django.views.generic import TemplateView
 from django.views.generic.base import RedirectView
 from django_registration.backends.activation.views import RegistrationView
 from supplementtut.views import *  # noqa
-from django.views.decorators.cache import never_cache
 
 from webcdi.forms import SignUpForm
-from webcdi.views import CustomLoginView
+from webcdi.views import CustomLoginView, HomeView
 
 urlpatterns = [
-    path("", never_cache(TemplateView.as_view(template_name="researcher_UI/home.html"))),
+    path("", HomeView.as_view(), name='home'),
     url(
         r"^favicon\.ico",
         RedirectView.as_view(url="/static/images/favicon.ico", permanent=True),
@@ -69,6 +68,7 @@ urlpatterns = [
     url(r"^health/?", include("health_check.urls")),
     url(r"^ckeditor/", include("ckeditor_uploader.urls")),
     path("brookes/", include("brookes.urls")),
+    path('api/', include('api.urls')),
 ]
 
 if settings.DEBUG:

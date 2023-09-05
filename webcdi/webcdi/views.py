@@ -9,10 +9,20 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import LoginView
 from django.shortcuts import redirect, render
-
+from django.views.generic import TemplateView
 from webcdi.forms import SignUpForm
 
+from django.views.decorators.cache import never_cache
 
+class HomeView(TemplateView):
+    template_name = 'webcdi/home.html'
+
+    @never_cache
+    def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
+        translation.activate('en')
+        request.LANGUAGE_CODE = translation.get_language()
+        return super().dispatch(request, *args, **kwargs)
+    
 def signup(request):
     if request.method == "POST":
         form = SignUpForm(request.POST)

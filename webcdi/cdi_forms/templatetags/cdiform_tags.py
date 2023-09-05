@@ -1,7 +1,7 @@
 from django.template.defaulttags import register
 
 from cdi_forms.models import Choices
-from researcher_UI.models import instrument
+from researcher_UI.models import Instrument
 from django.conf import settings
 
 @register.filter
@@ -26,7 +26,7 @@ def get_usage_perc(count, total):
 @register.filter
 def translate(choice, instrument_name):
     obj = Choices.objects.get(choice_set_en=choice)
-    instrument_obj = instrument.objects.get(name=instrument_name)
+    instrument_obj = Instrument.objects.get(name=instrument_name)
     return getattr(obj, 'choice_set_' + settings.LANGUAGE_DICT[instrument_obj.language])
 
 @register.simple_tag

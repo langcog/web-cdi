@@ -9,7 +9,8 @@ from cdi_forms.models import BackgroundInfo, Instrument_Forms, Zipcode
 from django.conf import settings
 from django.http import Http404
 from django.utils import translation
-from researcher_UI.models import administration, administration_data, instrument
+from researcher_UI.models import administration_data, Instrument
+from researcher_UI.models import Administration
 
 logger = logging.getLogger("debug")
 
@@ -48,10 +49,10 @@ def has_backpage(filename):
 
 # Map name of instrument model to its string title
 def model_map(name):
-    assert instrument.objects.filter(name=name).exists(), (
+    assert Instrument.objects.filter(name=name).exists(), (
         "%s is not registered as a valid instrument" % name
     )
-    instrument_obj = instrument.objects.get(name=name)
+    instrument_obj = Instrument.objects.get(name=name)
     cdi_items = Instrument_Forms.objects.filter(instrument=instrument_obj).order_by(
         "item_order"
     )
@@ -84,7 +85,7 @@ def prefilled_cdi_data(administration_instance):
         word_items = instrument_model.filter(item_type="word").values_list(
             "itemID", flat=True
         )
-        old_admins = administration.objects.filter(
+        old_admins = Administration.objects.filter(
             study=administration_instance.study,
             subject_id=administration_instance.subject_id,
             completed=True,
@@ -294,7 +295,7 @@ def safe_harbor_zip_code(obj):
 # Find the administration object for a test-taker based on their unique hash code.
 def get_administration_instance(hash_id):
     try:
-        administration_instance = administration.objects.get(url_hash=hash_id)
+        administration_instance = Administration.objects.get(url_hash=hash_id)
     except:
         raise Http404("Administration not found")
     return administration_instance

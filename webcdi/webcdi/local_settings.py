@@ -67,7 +67,7 @@ for IP in list(NEW_IPS):
 ADMINS = (("Henry Mehta", "hjsmehta@gmail.com"),)
 
 DJANGO_SERVER_TYPE = os.environ.get("DJANGO_SERVER_TYPE", "DEV") # DEV or PROD
-
+print(get_secret(f"{os.environ.get('DJANGO_SERVER_TYPE','dev').lower()}/webcdi/RDS_PASSWORD")['password'])
 # Database Settings
 DATABASES = {
     "default": {

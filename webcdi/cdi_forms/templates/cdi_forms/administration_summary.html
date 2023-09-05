@@ -137,7 +137,7 @@
                 
                 chart.draw(data, options);
             }
-        {% endif%}
+        {% endif %}
     </script>
 
 </head>
@@ -228,7 +228,7 @@
         {% endif %}
         {% if object.study.redirect_boolean %}
         <div class="row justify-content-center">
-            <h4><a class="btn btn-danger btn-lg active" href="{{ object.redirect_url }}">{% trans "Click to complete the study" %}</a></h4>
+            <h4><a class="btn btn-danger btn-lg active" href="{{ redirect_url }}">{% trans "Click to complete the study" %}</a></h4>
         </div>
         {% endif %}
         
@@ -242,7 +242,7 @@
                 </div>
                 <br>
                 <div class = "row" style="margin-left:-65px; margin-right:-65px"> 
-                    {% if object.study.show_produced or object.study.instrument.language in language_list %}
+                    {% if show_produced or object.study.instrument.language in language_list %}
                         <div class="col-md-6 text-center">
                             <div id="categories_charts_understood"></div>
                             <input id="save-understood-pdf" type="button" value="{% trans 'Save as PDF' %}" disabled />

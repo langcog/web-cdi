@@ -4,7 +4,7 @@ from .instrument_family import InstrumentFamily
 
 
 # Model for individual instruments
-class instrument(models.Model):
+class Instrument(models.Model):
     name = models.CharField(max_length=51, primary_key=True)  # Instrument short name
     verbose_name = models.CharField(
         max_length=51, blank=True
@@ -26,9 +26,6 @@ class instrument(models.Model):
     family = models.ForeignKey(
         InstrumentFamily, on_delete=models.SET_NULL, null=True, blank=True
     )
-
-    def __unicode__(self):
-        return "%s (%s %s)" % (self.verbose_name, self.language, self.form)
 
     def __str__(self):
         return f"%s" % (self.verbose_name)

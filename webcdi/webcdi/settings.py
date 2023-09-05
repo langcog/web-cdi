@@ -68,6 +68,7 @@ INSTALLED_APPS = (
     "django.contrib.staticfiles",
     "django.contrib.humanize",
     "cdi_forms",
+    'api',
     #'cdi_forms.cat_forms',
     "crispy_forms",
     "django_tables2",

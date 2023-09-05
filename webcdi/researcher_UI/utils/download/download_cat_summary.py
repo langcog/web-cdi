@@ -2,7 +2,7 @@ import pandas as pd
 from cdi_forms.cat_forms.models import CatResponse
 from cdi_forms.models import BackgroundInfo
 from django.http import HttpResponse
-from researcher_UI.models import Benchmark, administration
+from researcher_UI.models import Benchmark, Administration
 from researcher_UI.utils.format_admin import format_admin_data, format_admin_header
 
 
@@ -16,7 +16,7 @@ def download_cat_summary(request, study_obj, administrations=None, adjusted=Fals
     administrations = (
         administrations
         if administrations is not None
-        else administration.objects.filter(study=study_obj)
+        else Administration.objects.filter(study=study_obj)
     )
 
     admin_header = format_admin_header(study_obj)
@@ -131,6 +131,14 @@ def download_cat_summary(request, study_obj, administrations=None, adjusted=Fals
     combined_data = pd.merge(
         combined_data, pd_norms, how="outer", on="administration_id"
     )
+
+    if study_obj.instrument.language in ["French French"] and study_obj.instrument.form in [
+        "CAT",
+    ]:
+        combined_data = combined_data.append(
+            {"study_name": "NOTE:  The Ns for the by sex norms are small (some are <5)."}, ignore_index=True
+        )
+        
     # Turn pandas dataframe into a CSV
     combined_data.to_csv(response, encoding="utf-8", index=False)
 

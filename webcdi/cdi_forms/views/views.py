@@ -100,14 +100,14 @@ def cdi_form(request, hash_id):
             if "btn-save" in request.POST and request.POST["btn-save"] == _(
                 "Save"
             ):  # If the save button was pressed
-                administration.objects.filter(url_hash=hash_id).update(
+                Administration.objects.filter(url_hash=hash_id).update(
                     last_modified=timezone.now()
                 )  # Update administration object with date of last modification
                 if "analysis" in request.POST:
                     analysis = parse_analysis(
                         request.POST["analysis"]
                     )  # Note whether test-taker asserted that the child's age was accurate and form was filled out to best of ability
-                    administration.objects.filter(url_hash=hash_id).update(
+                    Administration.objects.filter(url_hash=hash_id).update(
                         analysis=analysis
                     )  # Update administration object
 
@@ -117,7 +117,7 @@ def cdi_form(request, hash_id):
                         if request.POST["page_number"].isdigit()
                         else 0
                     )  # Note the page number for completion
-                    administration.objects.filter(url_hash=hash_id).update(
+                    Administration.objects.filter(url_hash=hash_id).update(
                         page_number=page_number
                     )  # Update administration object
 
@@ -125,7 +125,7 @@ def cdi_form(request, hash_id):
             elif "btn-back" in request.POST and request.POST["btn-back"] == _(
                 "Go back to Background Info"
             ):  # If Back button was pressed
-                administration.objects.filter(url_hash=hash_id).update(
+                Administration.objects.filter(url_hash=hash_id).update(
                     last_modified=timezone.now()
                 )  # Update last_modified
                 request.method = "GET"
@@ -205,11 +205,11 @@ def cdi_form(request, hash_id):
                     analysis = parse_analysis(
                         request.POST["analysis"]
                     )  # Note whether the response given to the analysis question
-                    administration.objects.filter(url_hash=hash_id).update(
+                    Administration.objects.filter(url_hash=hash_id).update(
                         last_modified=timezone.now(), analysis=analysis
                     )  # Update administration object
                 except:  # If grabbing the analysis response failed
-                    administration.objects.filter(url_hash=hash_id).update(
+                    Administration.objects.filter(url_hash=hash_id).update(
                         last_modified=timezone.now()
                     )  # Update last_modified
 
@@ -221,7 +221,7 @@ def cdi_form(request, hash_id):
                 except:
                     filename = "None"
                 if has_backpage(filename):
-                    administration.objects.filter(url_hash=hash_id).update(
+                    Administration.objects.filter(url_hash=hash_id).update(
                         completedSurvey=True
                     )
                     request.method = "GET"
@@ -232,7 +232,7 @@ def cdi_form(request, hash_id):
                         "backpage-background-info", pk=background_instance.pk
                     )  # Render back page
                 else:
-                    administration.objects.filter(url_hash=hash_id).update(
+                    Administration.objects.filter(url_hash=hash_id).update(
                         completed=True
                     )  # Mark test as complete
                     return redirect(
@@ -270,7 +270,7 @@ def cdi_form(request, hash_id):
 # As the entire test (background --> CDI --> completion page) share the same URL, access the database to determine current status of test and render the appropriate template
 def administer_cdi_form(request, hash_id):
     try:
-        administration_instance = administration.objects.get(url_hash=hash_id)
+        administration_instance = Administration.objects.get(url_hash=hash_id)
     except:
         raise Http404("Administration not found")
 
@@ -316,9 +316,14 @@ def administer_cdi_form(request, hash_id):
             if administration_instance.completedSurvey:
                 return redirect("backpage-background-info", pk=background_instance.pk)
             elif administration_instance.completedBackgroundInfo:
-                return redirect(
-                    "instructions", hash_id=administration_instance.url_hash
-                )
+                if administration_instance.page_number > 0:
+                    return redirect(
+                        "update_administration_section", hash_id=administration_instance.url_hash, section=administration_instance.page_number+1
+                    )
+                else:
+                    return redirect(
+                        "instructions", hash_id=administration_instance.url_hash
+                    )
             else:
                 return redirect("background-info", pk=background_instance.pk)
         else:
@@ -331,7 +336,7 @@ def find_paired_studies(request, username, study_group):
     data = {}
     researcher = User.objects.get(username=username)
     possible_studies = (
-        study.objects.filter(study_group=study_group, researcher=researcher)
+        Study.objects.filter(study_group=study_group, researcher=researcher)
         .annotate(
             admin_count=models.Sum(
                 models.Case(
@@ -359,7 +364,7 @@ def find_paired_studies(request, username, study_group):
         .order_by("min_age")
     )
 
-    first_study = study.objects.filter(study_group=study_group, researcher=researcher)[
+    first_study = Study.objects.filter(study_group=study_group, researcher=researcher)[
         :1
     ].get()
 
@@ -433,5 +438,5 @@ def save_answer(request):
                         defaults={"value": value},
                     )
 
-    administration.objects.filter(url_hash=hash_id).update(last_modified=timezone.now())
+    Administration.objects.filter(url_hash=hash_id).update(last_modified=timezone.now())
     return HttpResponse(json.dumps([{}]), content_type="application/json")

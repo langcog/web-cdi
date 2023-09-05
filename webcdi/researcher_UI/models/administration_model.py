@@ -1,13 +1,16 @@
+import logging
 from django.db import models
 
 from django.shortcuts import reverse
+
+logger = logging.getLogger('debug')
 
 class AdministrationManager(models.Manager):
     def is_active(self):
         return super().get_queryset().filter(is_active=True)
 
 # Model for individual administrations
-class administration(models.Model):
+class Administration(models.Model):
     study = models.ForeignKey("study", on_delete=models.CASCADE)  # Study name
     subject_id = models.IntegerField()  # Subject ID, unique to the associated study
     local_lab_id = models.CharField(
@@ -36,6 +39,7 @@ class administration(models.Model):
     created_date = models.DateTimeField(
         verbose_name="Creation date", auto_now_add=True
     )  # Date administration object was created
+    completed_date = models.DateTimeField(blank=True, null=True)
     page_number = models.IntegerField(
         verbose_name="Page number", default=0
     )  # Current progress for CDI form
@@ -86,13 +90,19 @@ class administration(models.Model):
             return reverse("administer_cdi_form", kwargs={"hash_id": self.url_hash})
 
     def redirect_url(self):
-        target = f"{self.study.redirect_url}"
+        target = f"{self.study.redirect_url}".strip()
+        if '{source_id}' in target:
+            logger.debug('Got a source_id')
+            target = target.replace('{source_id}', self.backgroundinfo.source_id)
+
+        # TODO if study completed and redirect_url is a call to a redirect, get the actual URL
+        
         if self.study.append_source_id_to_redirect:
             target = f"{target}?{self.study.source_id_url_parameter_key}={self.backgroundinfo.source_id}"
         return target
 
 
-class AdministrationSummary(administration):
+class AdministrationSummary(Administration):
     class Meta:
         proxy = True
         verbose_name = "Administration Summary"
