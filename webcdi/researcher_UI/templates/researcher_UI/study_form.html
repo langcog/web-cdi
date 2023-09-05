@@ -315,6 +315,19 @@
             $('#id_allow_payment').on('change', function () {
               check_for_allow_payment();      
             });
+
+            function check_for_share_opt_out() {
+              if ($('#id_share_opt_out').prop('checked')) {
+                $('.share_opt_out').removeClass('collapse')
+              } else {
+                $('.share_opt_out').addClass('collapse');
+              }  
+            }        
+
+            check_for_share_opt_out();
+            $('#id_share_opt_out').on('change', function () {
+              check_for_share_opt_out();      
+            });
             
             $(document).ready(function() {
               $(window).keydown(function(event){

@@ -280,7 +280,10 @@ class AddStudyForm(BetterModelForm):
     def demographic_options_fieldset(self):
         return Fieldset(
                 'Demographic Options',
-                Field('no_demographic_boolean', css_class="css_enabler"),
+                Div(
+                    Field('no_demographic_boolean', css_class="css_enabler"),
+                    css_class="share_opt_out collapse"
+                ),
                 Div(
                     Field("demographic_opt_out"), 
                     Field("age_range"),
@@ -372,7 +375,8 @@ class EditStudyForm(AddStudyForm):
         del self.fields['confirmation_questions']
         del self.fields['prefilled_data']
         del self.fields['instrument']
-    
+        del self.fields['share_opt_out']
+
     def clean(self):
         return super().clean()
 
