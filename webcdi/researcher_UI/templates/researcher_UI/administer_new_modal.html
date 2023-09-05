@@ -9,12 +9,14 @@
       <div class="modal-body">
       <form method='post' class="form-horizontal" enctype="multipart/form-data">
         {% csrf_token %}
-        <p> The subject IDs should not include any identifiable information. For the same reason they are enforced to be numeric </p>
+        <p>Use ONE of these options to add participants to your interface. Use the "New Subject Ids" option to create links using your own ID numbers (numeric only). Typically, this is done in small batches when you are ready to send out the links. Use the "Autogenerate" or "Upload CSV" dialog if you want to create many links at the same time. In all cases, subject IDs should not include any identifiable information and are enforced to be numeric. Note that all links will expire in the time (default = 14 days) from their creation.</p>
         <hr />
         <div class="row form-group">
             <label for="new-subject-ids" class="col-3 control-label">New Subject Ids:</label>
             <div class="col-9">
-            <textarea name="new_subject_ids" class="form-control" rows="3" id='new-subject-ids' placeholder="Copy and paste in a list of subject IDs here (separated by spaces, commas, semicolons, or new lines)"></textarea>
+              <textarea name="new_subject_ids" class="form-control" rows="3" id='new-subject-ids' placeholder="Copy and paste in a list of subject IDs here (separated by spaces, commas, semicolons, or new lines)"></textarea>
+              <p> The subject IDs should not include any identifiable information. For the same reason they are enforced to be numeric </p>
+
             </div>
         </div>
         <hr />
