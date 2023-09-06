@@ -19,7 +19,7 @@ class AddStudyForm(BetterModelForm):
         empty_label="(choose from the list)",
     )  # Study instrument (CANNOT BE CHANGED LATER)
     no_demographic_boolean = forms.BooleanField(
-        label = 'No Demogaphic data collection',
+        label = 'Minimum demogaphic data provided in URL link',
         help_text="You will need to include DOB, sex and age offset in the link URL.  For example http://127.0.0.1:8000/interface/henry/Henry%20Test%20-%20ws1/new_parent/?age={age}&offset={offset}&sex={sex}",
         required = False,
         #initial = False
@@ -163,8 +163,9 @@ class AddStudyForm(BetterModelForm):
         help_text="For chargeable instruments you may opt out of sharing the study data.",
     )
     demographic_opt_out = forms.BooleanField(
+        label='Minimum demographic data (age, sex, age offset) collected.',
         required=False,
-        help_text="For chargeable instruments you may opt out of collecting demographic data if you opt out of sharing the study data.",
+        help_text="For chargeable instruments you may opt out of collecting demographic data.  We will still collect age, sex and whether born early or late for norming purposes.",
     )
     send_completion_flag_url = forms.URLField(
         required=False,

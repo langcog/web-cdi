@@ -5,7 +5,7 @@ from cdi_forms.models import BackgroundInfo, Instrument_Forms
 from cdi_forms.views import get_model_header
 from django.contrib import messages
 from django.contrib.sites.shortcuts import get_current_site
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import TemplateView
@@ -15,13 +15,20 @@ from researcher_UI.utils import format_admin_data, format_admin_header
 from researcher_UI.utils import get_score_headers
 from researcher_UI.utils import get_study_scores
 
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 
-class BaseAPIView(TemplateView):
+from api.mixins import StudyOwnerMixin
+
+@method_decorator(csrf_exempt, name='dispatch')
+class BaseAPIView(StudyOwnerMixin, TemplateView):
     http_method_names = [
-        "get",
+        "post",
     ]
 
     def get_json(self, request, study_obj, administrations = None):
+        if self.permission_denied_message:
+            return  JsonResponse({'error': self.permission_denied_message})
         adjusted=True
         administrations = (
             administrations
@@ -180,7 +187,7 @@ class BaseAPIView(TemplateView):
 
 
 class StudyAPI(BaseAPIView):
-    def get(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         study_obj = Study.objects.get(pk=kwargs.pop('pk'))
         qs_json = self.get_json(request, study_obj)
 
@@ -189,7 +196,7 @@ class StudyAPI(BaseAPIView):
 
 
 class SourceAPI(BaseAPIView):
-    def get(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         study = Study.objects.get(pk=kwargs.pop('pk'))
         if 'event_id' in kwargs:
             administrations = Administration.objects.filter(backgroundinfo__in=BackgroundInfo.objects.filter(event_id=kwargs.pop('event_id'), source_id=kwargs.pop('source_id')))
@@ -201,7 +208,7 @@ class SourceAPI(BaseAPIView):
         return HttpResponse(qs_json, content_type='application/json')
     
 class AdministrationAPI(BaseAPIView):
-    def get(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         study_obj = Study.objects.get(pk=kwargs.pop('pk'))
         administrations = Administration.objects.filter(pk=kwargs.pop('administration_id'))
         qs_json = self.get_json(request, study_obj, administrations)
