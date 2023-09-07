@@ -53,6 +53,14 @@ class UpdateStudyView(LoginRequiredMixin, ReseacherOwnsStudyMixin, UpdateView):
         raw_test_period = form.cleaned_data.get("test_period")
         new_study_name = form.cleaned_data.get("name")
 
+        try:
+            age_range = form.cleaned_data.get("age_range")
+            self.object.min_age = age_range.lower
+            self.object.max_age = age_range.upper
+        except:
+            self.object.min_age = self.object.instrument.min_age
+            self.object.max_age = self.object.instrument.max_age
+
         if raw_test_period >= 1 and raw_test_period <= 1095:
             self.object.test_period = raw_test_period
         else:
@@ -104,8 +112,8 @@ class AddStudy(LoginRequiredMixin, CreateView):
             study_instance.min_age = age_range.lower
             study_instance.max_age = age_range.upper
         except:
-            study_instance.min_age = Study_instance.instrument.min_age
-            study_instance.max_age = Study_instance.instrument.max_age
+            study_instance.min_age = study_instance.instrument.min_age
+            study_instance.max_age = study_instance.instrument.max_age
 
         study_instance.researcher = researcher
         if not form.cleaned_data.get("test_period"):

@@ -364,23 +364,13 @@ class EditStudyForm(AddStudyForm):
 
         self.helper.layout = Layout(
             self.study_options_fieldset(),
-            #self.demographic_options_fieldset(),
+            self.demographic_options_fieldset(),
             self.opening_dialog_fieldset(),
             self.redirect_options_fieldset(),
             self.completion_page_fieldset(),
             self.submit_fieldset(),
         )
-
-        del self.fields['no_demographic_boolean']
-        del self.fields['demographic_opt_out']
-        del self.fields['age_range']
-        del self.fields['demographic']
-        del self.fields['backpage_boolean']
-        del self.fields['confirmation_questions']
-        del self.fields['prefilled_data']
-        del self.fields['instrument']
-        del self.fields['share_opt_out']
-
+        
     def clean(self):
         return super().clean()
 

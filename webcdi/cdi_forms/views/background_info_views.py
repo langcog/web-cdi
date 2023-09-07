@@ -458,13 +458,13 @@ class CreateBackgroundInfoView(CreateView):
         data["language"] = self.study.instrument.language
         data["language_code"] = self.user_language
         data["title"] = self.study.instrument.verbose_name
-        data["max_age"] = self.study.max_age
-        data["min_age"] = self.study.min_age
+        data["max_age"] = self.study.max_age if self.study.max_age else 0
+        data["min_age"] = self.study.min_age if self.study.min_age else 0
         data["study_waiver"] = self.study.waiver
         data["allow_payment"] = self.study.allow_payment
         data["hint"] = _(
             "Your child should be between %(min_age)d to %(max_age)d months of age."
-        ) % {"min_age": data["min_age"], "max_age": data["max_age"]}
+        ) % {"min_age": data['min_age'], "max_age": data['max_age']}
         data["form"] = self.study.instrument.form
         data["explanation"] = mark_safe(self.get_explanation_text())
 

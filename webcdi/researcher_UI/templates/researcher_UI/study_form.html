@@ -60,10 +60,6 @@
                 of: $('#slider_div span.ui-slider-handle:eq(1)'),
                 offset: "0, 10"
               });
-              document.getElementById("id_share_opt_out").disabled = true;
-              document.getElementById("div_id_share_opt_out").style.color = 'lightgrey';
-              document.getElementById("id_share_opt_out").checked = false;
-
             } );
 
             $('#id_instrument').on('change', function () {
@@ -294,6 +290,7 @@
             });
 
             function check_for_share_opt_out() {
+              console.log('Share opt out ', $('#id_share_opt_out').prop('checked'))
               if ($('#id_share_opt_out').prop('checked')) {
                 $('.share_opt_out').removeClass('collapse')
               } else {

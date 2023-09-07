@@ -354,27 +354,12 @@ class AdministrationUpdateView(UpdateView):
                 self.object.completed = True
                 self.object.completed_date = timezone.now()
 
-                # TODO Check if send_completion_flag field has a URL and send if it does
-                '''data = {
-                    'token': self.object.study.api_token,
-                    'content': 'record',
-                    'action': 'import',
-                    'format': 'json',
-                    'type': 'flat',
-                    'overwriteBehavior': 'normal',
-                    'forceAutoNumber': 'false',
-                    'data': self.object.study.completion_data.replace('{{source_id}}', self.object.backgroundinfo.source_id or '').replace('{{event_id}}', self.object.backgroundinfo.event_id or ''),
-                    'returnContent': 'count',
-                    'returnFormat': 'json'
-                }'''
-                data = self.object.study.completion_data
-                for item in data:
-                    data[item] = data[item].replace('{{source_id}}', self.object.backgroundinfo.source_id or '').replace('{{event_id}}', self.object.backgroundinfo.event_id or '')
-                print(data)
-                if self.object.study.send_completion_flag_url:
-                    r = requests.post(self.object.study.send_completion_flag_url, data=data)
-                    print(f'Data is {data}')
-                    print (f'API Response is {r.reason}')
+                if self.object.study.completion_data:
+                    data = self.object.study.completion_data
+                    for item in data:
+                        data[item] = data[item].replace('{{source_id}}', self.object.backgroundinfo.source_id or '').replace('{{event_id}}', self.object.backgroundinfo.event_id or '')
+                    if self.object.study.send_completion_flag_url:
+                        r = requests.post(self.object.study.send_completion_flag_url, data=data)
 
                 self.object.save()
                 response = reverse(
