@@ -19,7 +19,7 @@ class AddStudyForm(BetterModelForm):
         empty_label="(choose from the list)",
     )  # Study instrument (CANNOT BE CHANGED LATER)
     no_demographic_boolean = forms.BooleanField(
-        label = 'Minimum demogaphic data provided in URL link',
+        label = 'Minimum demographic data provided in URL link',
         help_text="You will need to include DOB, sex and age offset in the link URL.  For example http://127.0.0.1:8000/interface/henry/Henry%20Test%20-%20ws1/new_parent/?age={age}&offset={offset}&sex={sex}",
         required = False,
         #initial = False
@@ -163,7 +163,7 @@ class AddStudyForm(BetterModelForm):
         help_text="For chargeable instruments you may opt out of sharing the study data.",
     )
     demographic_opt_out = forms.BooleanField(
-        label='Minimum demographic data (age, sex, age offset) collected.',
+        label='Collect only Minimum demographic data (age, sex, age offset).',
         required=False,
         help_text="For chargeable instruments you may opt out of collecting demographic data.  We will still collect age, sex and whether born early or late for norming purposes.",
     )
@@ -282,15 +282,18 @@ class AddStudyForm(BetterModelForm):
         return Fieldset(
                 'Demographic Options',
                 Div(
-                    Field('no_demographic_boolean', css_class="css_enabler"),
-                    css_class="share_opt_out collapse"
-                ),
-                Div(
                     Field("demographic_opt_out"), 
+                    Div(
+                        Field('no_demographic_boolean', css_class="css_enabler"),
+                        css_class="demographic_opt_out collapse"
+                    ),
+                    css_class="share_opt_out collapse"),
+                
+                Div(
                     Field("age_range"),
                     Field("demographic", css_class="css_enabler"), 
                     Div(Field("backpage_boolean"), css_class='demographic'),
-                    Field("confirmation_questions"),
+                    Div(Field("confirmation_questions"),  css_class='demographic'),
                     Field("prefilled_data"),
                     css_class="no_demographic_boolean collapse"
                 ),
