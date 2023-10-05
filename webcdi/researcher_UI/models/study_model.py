@@ -94,7 +94,7 @@ class Study(models.Model):
 
     no_demographic_boolean = models.BooleanField(
         default = False,
-        help_text ='You must include DOB, age offset and sex in the Link URL'
+        help_text ='You must include DOB, age offset and sex in the Link URL for norming purposes.  Only select this is this data will be provided in the link.'
     )
     demographic = models.ForeignKey(
         "Demographic", on_delete=models.SET_NULL, blank=True, null=True
@@ -105,7 +105,7 @@ class Study(models.Model):
     )
     demographic_opt_out = models.BooleanField(
         default=False,
-        help_text="For chargeable instruments you may opt out of collecting demographic data.",
+        help_text="For chargeable instruments you may opt out of collecting demographic data.  We will still collect age, sex and whether born early or late for norming purposes",
     )
     send_completion_flag_url = models.URLField(
         blank=True,

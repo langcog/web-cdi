@@ -60,13 +60,6 @@
                 of: $('#slider_div span.ui-slider-handle:eq(1)'),
                 offset: "0, 10"
               });
-              document.getElementById("id_share_opt_out").disabled = true;
-              document.getElementById("div_id_share_opt_out").style.color = 'lightgrey';
-              document.getElementById("id_share_opt_out").checked = false;
-
-              document.getElementById('id_demographic_opt_out').disabled = true;
-              document.getElementById("id_demographic_opt_out").checked = false;
-              document.getElementById("div_id_demographic_opt_out").style.color = 'lightgrey';
             } );
 
             $('#id_instrument').on('change', function () {
@@ -141,43 +134,10 @@
                         document.getElementById("id_share_opt_out").disabled = false;
                         document.getElementById("div_id_share_opt_out").style.color = 'black';
                       } else {
-                        document.getElementById("id_share_opt_out").disabled = true;
-                        document.getElementById("div_id_share_opt_out").style.color = 'lightgrey';
-                        document.getElementById("id_share_opt_out").checked = false;
-
-                        document.getElementById('id_demographic_opt_out').disabled = true;
-                        document.getElementById("id_demographic_opt_out").checked = false;
-                        document.getElementById("div_id_demographic_opt_out").style.color = 'lightgrey';
                       }
                   }
               });
             });
-
-            // offer opt out of demographics
-            $('#id_share_opt_out').on('change', function () {
-              if ($('#id_share_opt_out').is(':checked')) {
-                document.getElementById('id_demographic_opt_out').disabled = false;
-                document.getElementById("div_id_demographic_opt_out").style.color = 'black';
-              } else {
-                document.getElementById('id_demographic_opt_out').disabled = true;
-                document.getElementById("id_demographic_opt_out").checked = false;
-                document.getElementById("div_id_demographic_opt_out").style.color = 'lightgrey';
-
-                document.getElementById('id_demographic').disabled = false;
-                document.getElementById("div_id_demographic").style.color = 'black';
-              }
-            });
-
-            $('#id_demographic_opt_out').on('change', function () {
-              if ($('#id_demographic_opt_out').is(':checked')) {
-                  document.getElementById('id_demographic').disabled = true;
-                  document.getElementById("div_id_demographic").style.color = 'lightgrey';
-                  $("#id_demographic").val('');
-              } else {
-                document.getElementById('id_demographic').disabled = false;
-                document.getElementById("div_id_demographic").style.color = 'black';
-              }
-            })
 
             // Automatically collapses fields dependent on whether the study involves anonymous participants and/or financial compensation. Upon checking/unchecking inputs for those 2 settings, other dependent fields appear.
             $('#div_id_subject_cap').addClass( "anon-collection" );
@@ -223,6 +183,19 @@
             check_for_no_demographic_boolean();
             $('#id_no_demographic_boolean').on('change', function () {
               check_for_no_demographic_boolean();      
+            });
+
+            function check_for_demographic_opt_out() {
+              if ($('#id_demographic_opt_out').prop('checked')) {
+                $('.demographic_opt_out').removeClass('collapse')
+              } else {
+                $('.demographic_opt_out').addClass('collapse');
+              }  
+            }        
+
+            check_for_demographic_opt_out();
+            $('#id_demographic_opt_out').on('change', function () {
+              check_for_demographic_opt_out();      
             });
 
             function check_for_end_message() {
@@ -317,6 +290,7 @@
             });
 
             function check_for_share_opt_out() {
+              console.log('Share opt out ', $('#id_share_opt_out').prop('checked'))
               if ($('#id_share_opt_out').prop('checked')) {
                 $('.share_opt_out').removeClass('collapse')
               } else {
