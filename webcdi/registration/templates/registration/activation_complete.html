@@ -1,11 +1,11 @@
 {% extends 'registration/base.html' %}
 {% load i18n %}
 
-{% block title %}{% trans 'Activation was complete' %}{% endblock %}
+{% block title %}{% trans 'Activation is complete' %}{% endblock %}
 
-{% block content_title %}<h1>{% trans 'Activation was complete' %}</h1>{% endblock %}
+{% block content_title %}<h1>{% trans 'Your account has been activated' %}</h1>{% endblock %}
 
 {% block contents %}
 {{ block.super }}
-<p>{% trans 'Your account was activated' %}</p>
+<p>{% trans 'Your account it active.  Please login.' %}</p>
 {% endblock %}
