@@ -1,0 +1,11 @@
+{% extends 'registration/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans 'Activation Issue' %}{% endblock %}
+
+{% block content_title %}<h1>{% trans 'Something has gone wrong with your activation' %}</h1>{% endblock %}
+
+{% block contents %}
+{{ block.super }}
+<p>{% trans 'Please email hjsmehta@gmail.com with your username, stating you are received this message.' %}</p>
+{% endblock %}
