@@ -1,6 +1,8 @@
+import json
+
 import numpy as np
 import pandas as pd
-import json
+from api.mixins import StudyOwnerMixin
 from cdi_forms.models import BackgroundInfo, Instrument_Forms
 from cdi_forms.views import get_model_header
 from django.contrib import messages
@@ -8,35 +10,41 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
-from django.views.generic import TemplateView
-from researcher_UI.models import Study, Administration, administration_data, InstrumentScore
-from researcher_UI.utils import get_background_header
-from researcher_UI.utils import format_admin_data, format_admin_header
-from researcher_UI.utils import get_score_headers
-from researcher_UI.utils import get_study_scores
-
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import TemplateView
+from researcher_UI.models import (
+    Administration,
+    InstrumentScore,
+    Study,
+    administration_data,
+)
+from researcher_UI.utils import (
+    format_admin_data,
+    format_admin_header,
+    get_background_header,
+    get_score_headers,
+    get_study_scores,
+)
 
-from api.mixins import StudyOwnerMixin
 
-@method_decorator(csrf_exempt, name='dispatch')
+@method_decorator(csrf_exempt, name="dispatch")
 class BaseAPIView(StudyOwnerMixin, TemplateView):
     http_method_names = [
         "post",
     ]
 
-    def get_json(self, request, study_obj, administrations = None):
+    def get_json(self, request, study_obj, administrations=None):
         if self.permission_denied_message:
-            return  JsonResponse({'error': self.permission_denied_message})
-        adjusted=True
+            return JsonResponse({"error": self.permission_denied_message})
+        adjusted = True
         administrations = (
             administrations
             if administrations is not None
             else Administration.objects.filter(study=study_obj)
         )
         if not administrations.filter(completed=True).exists():
-            return json.dumps({'Error':"You must select at least 1 completed survey"})
+            return json.dumps({"Error": "You must select at least 1 completed survey"})
         model_header = get_model_header(study_obj.instrument.name)
 
         # Fetch administration variables
@@ -81,7 +89,9 @@ class BaseAPIView(StudyOwnerMixin, TemplateView):
                 for k, v in list(field_choices.items()):
                     if str(k) == str(v):
                         field_choices.pop(k, None)
-                BI_choices[field.name] = {str(k): str(v) for k, v in field_choices.items()}
+                BI_choices[field.name] = {
+                    str(k): str(v) for k, v in field_choices.items()
+                }
 
         new_background = (
             pd.DataFrame.from_records(background_data).astype(str).replace(BI_choices)
@@ -101,7 +111,9 @@ class BaseAPIView(StudyOwnerMixin, TemplateView):
         # Add scoring
         melted_scores = get_study_scores(administrations)
         if len(melted_scores) < 1:
-            return json.dumps({'Error': f"There are no data in the study(ies) to report"})
+            return json.dumps(
+                {"Error": f"There are no data in the study(ies) to report"}
+            )
         score_header = get_score_headers(study_obj, adjusted=adjusted)
         melted_scores.set_index("administration_id")
         missing_columns = list(set(score_header) - set(melted_scores.columns))
@@ -112,7 +124,9 @@ class BaseAPIView(StudyOwnerMixin, TemplateView):
 
         for instance in InstrumentScore.objects.filter(instrument=study_obj.instrument):
             if instance.kind == "count":
-                melted_scores[instance.title].replace(r"^\s*$", 0, regex=True, inplace=True)
+                melted_scores[instance.title].replace(
+                    r"^\s*$", 0, regex=True, inplace=True
+                )
                 melted_scores[instance.title].replace(np.NaN, 0, inplace=True)
 
         try:
@@ -124,7 +138,9 @@ class BaseAPIView(StudyOwnerMixin, TemplateView):
             )
         except:
             background_answers = pd.DataFrame(
-                columns=list(new_background) + list(melted_answers) + list(melted_scores)
+                columns=list(new_background)
+                + list(melted_answers)
+                + list(melted_scores)
             )
 
         # Try to format administration data for pandas dataframe
@@ -153,9 +169,9 @@ class BaseAPIView(StudyOwnerMixin, TemplateView):
         combined_data["link"] = test_url + combined_data["link"]
 
         s2 = combined_data.columns.to_series()
-        combined_data.columns = combined_data.columns + s2.groupby(s2).cumcount().astype(
-            str
-        ).radd("_").str.replace("_0", "")
+        combined_data.columns = combined_data.columns + s2.groupby(
+            s2
+        ).cumcount().astype(str).radd("_").str.replace("_0", "")
 
         missing_columns = list(set(model_header) - set(combined_data.columns))
         if missing_columns:
@@ -174,7 +190,9 @@ class BaseAPIView(StudyOwnerMixin, TemplateView):
         combined_data["other_languages"].replace("[]", "", inplace=True)
 
         # add footer
-        if study_obj.instrument.language in ["English"] and study_obj.instrument.form in [
+        if study_obj.instrument.language in [
+            "English"
+        ] and study_obj.instrument.form in [
             "WS",
             "WG",
         ]:
@@ -188,30 +206,41 @@ class BaseAPIView(StudyOwnerMixin, TemplateView):
 
 class StudyAPI(BaseAPIView):
     def post(self, request, *args, **kwargs):
-        study_obj = Study.objects.get(pk=kwargs.pop('pk'))
+        study_obj = Study.objects.get(pk=kwargs.pop("pk"))
         qs_json = self.get_json(request, study_obj)
 
         # Return CSV
-        return HttpResponse(qs_json, content_type='application/json')
+        return HttpResponse(qs_json, content_type="application/json")
 
 
 class SourceAPI(BaseAPIView):
     def post(self, request, *args, **kwargs):
-        study = Study.objects.get(pk=kwargs.pop('pk'))
-        if 'event_id' in kwargs:
-            administrations = Administration.objects.filter(backgroundinfo__in=BackgroundInfo.objects.filter(event_id=kwargs.pop('event_id'), source_id=kwargs.pop('source_id')))
+        study = Study.objects.get(pk=kwargs.pop("pk"))
+        if "event_id" in kwargs:
+            administrations = Administration.objects.filter(
+                backgroundinfo__in=BackgroundInfo.objects.filter(
+                    event_id=kwargs.pop("event_id"), source_id=kwargs.pop("source_id")
+                )
+            )
         else:
-            administrations = Administration.objects.filter(backgroundinfo__in=BackgroundInfo.objects.filter(source_id=kwargs.pop('source_id')))
+            administrations = Administration.objects.filter(
+                backgroundinfo__in=BackgroundInfo.objects.filter(
+                    source_id=kwargs.pop("source_id")
+                )
+            )
         qs_json = self.get_json(request, study, administrations)
 
         # Return CSV
-        return HttpResponse(qs_json, content_type='application/json')
-    
+        return HttpResponse(qs_json, content_type="application/json")
+
+
 class AdministrationAPI(BaseAPIView):
     def post(self, request, *args, **kwargs):
-        study_obj = Study.objects.get(pk=kwargs.pop('pk'))
-        administrations = Administration.objects.filter(pk=kwargs.pop('administration_id'))
+        study_obj = Study.objects.get(pk=kwargs.pop("pk"))
+        administrations = Administration.objects.filter(
+            pk=kwargs.pop("administration_id")
+        )
         qs_json = self.get_json(request, study_obj, administrations)
 
         # Return CSV
-        return HttpResponse(qs_json, content_type='application/json')
+        return HttpResponse(qs_json, content_type="application/json")

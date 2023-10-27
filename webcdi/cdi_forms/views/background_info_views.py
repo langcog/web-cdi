@@ -19,8 +19,8 @@ from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import CreateView, UpdateView
+from researcher_UI.models import Administration, Researcher, Study, payment_code
 from researcher_UI.utils import max_subject_id
-from researcher_UI.models import payment_code, Researcher, Study, Administration
 
 # Get an instance of a logger
 logger = logging.getLogger("debug")
@@ -464,7 +464,7 @@ class CreateBackgroundInfoView(CreateView):
         data["allow_payment"] = self.study.allow_payment
         data["hint"] = _(
             "Your child should be between %(min_age)d to %(max_age)d months of age."
-        ) % {"min_age": data['min_age'], "max_age": data['max_age']}
+        ) % {"min_age": data["min_age"], "max_age": data["max_age"]}
         data["form"] = self.study.instrument.form
         data["explanation"] = mark_safe(self.get_explanation_text())
 

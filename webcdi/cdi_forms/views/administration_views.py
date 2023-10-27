@@ -6,6 +6,7 @@ from typing import Any, Dict, List
 
 import requests
 from cdi_forms.models import Instrument_Forms
+from cdi_forms.utils import unicode_csv_reader
 from cdi_forms.views.utils import (
     PROJECT_ROOT,
     get_administration_instance,
@@ -15,8 +16,6 @@ from cdi_forms.views.utils import (
     prefilled_background_form,
     prefilled_cdi_data,
 )
-from cdi_forms.utils import unicode_csv_reader
-
 from django.conf import settings
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
@@ -43,18 +42,24 @@ class AdministrationSummaryView(DetailView):
 
         # Get redirect button
         if self.object.study.redirect_boolean:
-            redirect_url = self.object.study.redirect_url.replace('{{source_id}}',self.object.backgroundinfo.source_id).replace('{{event_id}}', self.object.backgroundinfo.event_id)
+            redirect_url = self.object.study.redirect_url.replace(
+                "{{source_id}}", self.object.backgroundinfo.source_id
+            ).replace("{{event_id}}", self.object.backgroundinfo.event_id)
             if self.object.study.direct_redirect_boolean:
-                ctx['redirect_url'] = redirect_url
+                ctx["redirect_url"] = redirect_url
             else:
                 data = self.object.study.json_redirect
                 for item in data:
-                    data[item] = data[item].replace('{{source_id}}',self.object.backgroundinfo.source_id).replace('{{event_id}}', self.object.backgroundinfo.event_id)
-                print(f'REDIRECT {data}')
+                    data[item] = (
+                        data[item]
+                        .replace("{{source_id}}", self.object.backgroundinfo.source_id)
+                        .replace("{{event_id}}", self.object.backgroundinfo.event_id)
+                    )
+                print(f"REDIRECT {data}")
                 r = requests.post(redirect_url, data=data)
-                print('HTTP Status: ' + str(r.status_code))
+                print("HTTP Status: " + str(r.status_code))
                 print(r.content)
-                ctx['redirect_url'] = str(r.content, 'UTF-8')
+                ctx["redirect_url"] = str(r.content, "UTF-8")
         # Get form from database
         background_form = prefilled_background_form(self.object)
         ctx["background_form"] = background_form
@@ -67,7 +72,7 @@ class AdministrationSummaryView(DetailView):
         if has_backpage(filename):
             backpage_background_form = prefilled_background_form(self.object, False)
             ctx["backpage_background_form"] = backpage_background_form
-        
+
         # calc gift data
         ctx["gift_code"] = None
         ctx["gift_amount"] = None
@@ -98,12 +103,12 @@ class AdministrationSummaryView(DetailView):
                 ctx["gift_amount"] = "ran out"
                 ctx["redeem_url"] = None
                 ctx["legal_url"] = None
-        
+
         # calculate graph data
         ctx["cdi_items"] = prefilled_cdi_data(self.object)["cdi_items"]
         cdi_items = json.loads(ctx["cdi_items"])
         categories = {}
-        
+
         categories_data = list(
             unicode_csv_reader(
                 open(
@@ -357,9 +362,21 @@ class AdministrationUpdateView(UpdateView):
                 if self.object.study.completion_data:
                     data = self.object.study.completion_data
                     for item in data:
-                        data[item] = data[item].replace('{{source_id}}', self.object.backgroundinfo.source_id or '').replace('{{event_id}}', self.object.backgroundinfo.event_id or '')
+                        data[item] = (
+                            data[item]
+                            .replace(
+                                "{{source_id}}",
+                                self.object.backgroundinfo.source_id or "",
+                            )
+                            .replace(
+                                "{{event_id}}",
+                                self.object.backgroundinfo.event_id or "",
+                            )
+                        )
                     if self.object.study.send_completion_flag_url:
-                        r = requests.post(self.object.study.send_completion_flag_url, data=data)
+                        r = requests.post(
+                            self.object.study.send_completion_flag_url, data=data
+                        )
 
                 self.object.save()
                 response = reverse(
@@ -392,9 +409,10 @@ class AdministrationUpdateView(UpdateView):
                         )
         Administration.objects.filter(url_hash=self.object.url_hash).update(
             last_modified=timezone.now(),
-            page_number = 0 if not 'section' in self.kwargs else int(self.kwargs["section"])
+            page_number=0
+            if not "section" in self.kwargs
+            else int(self.kwargs["section"]),
         )
-        
 
         return redirect(response)
 
@@ -576,8 +594,8 @@ class AdministrationUpdateView(UpdateView):
     def get_section(self, target_section=None):
         if not target_section and "section" in self.kwargs:
             target_section = self.kwargs["section"]
-        elif  not target_section and self.object.page_number > 0:
-            target_section = self.object.page_number+1
+        elif not target_section and self.object.page_number > 0:
+            target_section = self.object.page_number + 1
 
         prefilled_data_list = administration_data.objects.filter(
             administration=self.object

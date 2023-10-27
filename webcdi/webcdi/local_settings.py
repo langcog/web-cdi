@@ -1,40 +1,34 @@
 # This file contains settings changed for MPI instance
+import json
 import os
 import socket
+
 import boto3
 from botocore.exceptions import ClientError
-import json
 
 # Use this code snippet in your app.
 # If you need more information about configurations
 # or implementing the sample code, visit the AWS docs:
 # https://aws.amazon.com/developer/language/python/
 
-import boto3
-from botocore.exceptions import ClientError
 
 def get_secret(secret_name, region_name="us-west-2"):
-
     # Create a Secrets Manager client
     session = boto3.session.Session()
-    client = session.client(
-        service_name='secretsmanager',
-        region_name=region_name
-    )
+    client = session.client(service_name="secretsmanager", region_name=region_name)
 
     try:
-        get_secret_value_response = client.get_secret_value(
-            SecretId=secret_name
-        )
+        get_secret_value_response = client.get_secret_value(SecretId=secret_name)
     except ClientError as e:
         # For a list of exceptions thrown, see
         # https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
         raise e
 
     # Decrypts secret using the associated KMS key.
-    secret = get_secret_value_response['SecretString']
+    secret = get_secret_value_response["SecretString"]
 
     return json.loads(secret)
+
 
 HOST_NAME = socket.gethostname()
 HOST_IP = socket.gethostbyname(HOST_NAME)
@@ -66,7 +60,7 @@ for IP in list(NEW_IPS):
 
 ADMINS = (("Henry Mehta", "hjsmehta@gmail.com"),)
 
-DJANGO_SERVER_TYPE = os.environ.get("DJANGO_SERVER_TYPE", "DEV") # DEV or PROD
+DJANGO_SERVER_TYPE = os.environ.get("DJANGO_SERVER_TYPE", "DEV")  # DEV or PROD
 # print(get_secret(f"{os.environ.get('DJANGO_SERVER_TYPE','dev').lower()}/webcdi/RDS_PASSWORD")['password'])
 # Database Settings
 DATABASES = {
@@ -74,13 +68,15 @@ DATABASES = {
         "ENGINE": "webcdi_postgresql_engine",
         "NAME": os.environ["RDS_DB_NAME"],
         "USER": os.environ["RDS_USERNAME"],
-        "PASSWORD": get_secret(f"{os.environ.get('DJANGO_SERVER_TYPE','dev').lower()}/webcdi/RDS_PASSWORD")['password'],
+        "PASSWORD": get_secret(
+            f"{os.environ.get('DJANGO_SERVER_TYPE','dev').lower()}/webcdi/RDS_PASSWORD"
+        )["password"],
         "HOST": os.environ["RDS_HOSTNAME"],
         "PORT": os.environ["RDS_PORT"],
     }
 }
 
-SITE_ID = int(os.environ.get("SITE_ID", 3)) # 4 for MPI, 2 for DEV, 3 for local
+SITE_ID = int(os.environ.get("SITE_ID", 3))  # 4 for MPI, 2 for DEV, 3 for local
 
 # USER_ADMIN_EMAIL = 'webcdi-contact@stanford.edu'
 USER_ADMIN_EMAIL = "hjsmehta@gmail.com"
@@ -89,13 +85,15 @@ SERVER_EMAIL = "webcdi-contact@stanford.edu"
 
 # captcha settings
 RECAPTCHA_PUBLIC_KEY = os.environ.get("RECAPTCHA_PUBLIC_KEY", "<RECAPTCHA_PUBLIC_KEY>")
-RECAPTCHA_PRIVATE_KEY = os.environ.get("RECAPTCHA_PRIVATE_KEY", "<RECAPTCHA_PRIVATE_KEY>")
+RECAPTCHA_PRIVATE_KEY = os.environ.get(
+    "RECAPTCHA_PRIVATE_KEY", "<RECAPTCHA_PRIVATE_KEY>"
+)
 # Home page links
 CONTACT_EMAIL = "webcdi-contact@stanford.edu"
 MORE_INFO_ADDRESS = "http://mb-cdi.stanford.edu/"
 
 # AWS creds
-secret =  get_secret("webcdi/webcdi-IAM")
+secret = get_secret("webcdi/webcdi-IAM")
 AWS_ACCESS_KEY_ID = secret["AWS_ACCESS_KEY_ID"]
 AWS_SECRET_ACCESS_KEY = secret["AWS_SECRET_ACCESS_KEY"]
 if "RDS_HOSTNAME" in os.environ:

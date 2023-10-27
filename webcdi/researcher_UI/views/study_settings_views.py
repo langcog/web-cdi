@@ -1,16 +1,14 @@
-from django.views.generic import UpdateView, CreateView
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
-from django.utils.safestring import mark_safe
 from django.urls import reverse
-from django.contrib import messages
-
+from django.utils.safestring import mark_safe
+from django.views.generic import CreateView, UpdateView
 from psycopg2.extras import NumericRange
-
-from researcher_UI.utils import raw_gift_code_fun, add_paired_study_fun
-from researcher_UI.models import Study
-from researcher_UI.forms import AddStudyForm, AddPairedStudyForm, EditStudyForm
+from researcher_UI.forms import AddPairedStudyForm, AddStudyForm, EditStudyForm
 from researcher_UI.mixins import ReseacherOwnsStudyMixin
+from researcher_UI.models import Study
+from researcher_UI.utils import add_paired_study_fun, raw_gift_code_fun
 
 
 class AddPairedStudy(LoginRequiredMixin, CreateView):

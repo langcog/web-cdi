@@ -19,10 +19,10 @@ class AddStudyForm(BetterModelForm):
         empty_label="(choose from the list)",
     )  # Study instrument (CANNOT BE CHANGED LATER)
     no_demographic_boolean = forms.BooleanField(
-        label = 'Minimum demographic data provided in URL link',
+        label="Minimum demographic data provided in URL link",
         help_text="You will need to include DOB, sex and age offset in the link URL.  For example http://127.0.0.1:8000/interface/henry/Henry%20Test%20-%20ws1/new_parent/?age={age}&offset={offset}&sex={sex}",
-        required = False,
-        #initial = False
+        required=False,
+        # initial = False
     )
     demographic = forms.ModelChoiceField(
         queryset=Demographic.objects.all(), empty_label=_("Default"), required=False
@@ -105,20 +105,18 @@ class AddStudyForm(BetterModelForm):
         label="Provide redirect button at completion of study?", required=False
     )  # Whether to give redirect button upon completion of administration
     redirect_url = forms.URLField(
-        required=False, 
+        required=False,
         help_text="Enter the basic return URL including source_id within curly brackets {} if required",
         widget=forms.URLInput(
-            attrs={
-                'placeholder': 'https://my_example.com/redirect_url/{source_id}/'
-            }
-        )
+            attrs={"placeholder": "https://my_example.com/redirect_url/{source_id}/"}
+        ),
     )
     direct_redirect_boolean = forms.BooleanField(
         initial=True,
         required=False,
-        help_text="Deselect this if the redirect url calls an API to get the actual redirect url"
+        help_text="Deselect this if the redirect url calls an API to get the actual redirect url",
     )
-    JSON_REDIRECT_PLACEHOLDER = '''
+    JSON_REDIRECT_PLACEHOLDER = """
         {
             "token": "DD266E7616FE86C190DEBC530CE5E435"
             "content": "surveyLink"
@@ -128,13 +126,11 @@ class AddStudyForm(BetterModelForm):
             "record": "YISKL0001"
             "returnFormat": "json"
         }
-    '''
+    """
     json_redirect = forms.JSONField(
         help_text="Enter redirect json here",
         required=False,
-        widget = forms.Textarea(
-            attrs={'placeholder': JSON_REDIRECT_PLACEHOLDER}
-        )
+        widget=forms.Textarea(attrs={"placeholder": JSON_REDIRECT_PLACEHOLDER}),
     )
 
     participant_source_boolean = forms.ChoiceField(
@@ -163,28 +159,26 @@ class AddStudyForm(BetterModelForm):
         help_text="For chargeable instruments you may opt out of sharing the study data.",
     )
     demographic_opt_out = forms.BooleanField(
-        label='Collect only Minimum demographic data (age, sex, age offset).',
+        label="Collect only Minimum demographic data (age, sex, age offset).",
         required=False,
         help_text="For chargeable instruments you may opt out of collecting demographic data.  We will still collect age, sex and whether born early or late for norming purposes.",
     )
     send_completion_flag_url = forms.URLField(
         required=False,
-        help_text='Provide a URL to send a completion flag including source_id within curly brackets {} if required',
+        help_text="Provide a URL to send a completion flag including source_id within curly brackets {} if required",
         widget=forms.URLInput(
-            attrs={
-                'placeholder': 'https://my_example.com/completed/{source_id}/'
-            }
-        )
+            attrs={"placeholder": "https://my_example.com/completed/{source_id}/"}
+        ),
     )
 
     completion_data = forms.JSONField(
         required=False,
-        help_text='Provide JSON data to be included when sending the completion flag source_id and event_id within double curly brackets {{}} if required',
+        help_text="Provide JSON data to be included when sending the completion flag source_id and event_id within double curly brackets {{}} if required",
         widget=forms.Textarea(
             attrs={
-                'placeholder': '[{"record_id": "{{source_id}}", "redcap_event_name": "{{event_id}}", "webcdi_completion_status": 1}]'
+                "placeholder": '[{"record_id": "{{source_id}}", "redcap_event_name": "{{event_id}}", "webcdi_completion_status": 1}]'
             }
-        )
+        ),
     )
     gift_codes = forms.CharField(
         widget=forms.Textarea(
@@ -200,7 +194,7 @@ class AddStudyForm(BetterModelForm):
         required=False,
         label="Amount per Card (in USD)",
         widget=forms.TextInput(attrs={"placeholder": "$XX.XX"}),
-    )  
+    )
 
     # Form validation. Form is passed automatically to views.py for higher level checking.
     def clean(self):
@@ -231,28 +225,28 @@ class AddStudyForm(BetterModelForm):
         else:
             try:
                 self.fields["instrument"] = forms.ModelChoiceField(
-                    queryset=Instrument.objects.filter(
-                        pk=self.instance.instrument.pk
-                    ),
-                    empty_label=None
+                    queryset=Instrument.objects.filter(pk=self.instance.instrument.pk),
+                    empty_label=None,
                 )
             except:
                 pass
+            
+            '''
             if self.instance.demographic:
-                self.fields['demographic'] = forms.ModelChoiceField(
+                self.fields["demographic"] = forms.ModelChoiceField(
                     queryset=Demographic.objects.filter(
-                    pk=self.instance.demographic.pk
+                        pk=self.instance.demographic.pk
                     ),
-                    empty_label=None
+                    empty_label=None,
                 )
             else:
-                self.fields['demographic'] = forms.ModelChoiceField(
-                    queryset=None,
-                    empty_label='Default'
+                self.fields["demographic"] = forms.ModelChoiceField(
+                    queryset=None, empty_label="Default"
                 )
+            '''
 
-        #self.helper.form_action = reverse("researcher_ui:add_study")
-        
+        # self.helper.form_action = reverse("researcher_ui:add_study")
+
         self.helper.layout = Layout(
             self.study_options_fieldset(),
             self.demographic_options_fieldset(),
@@ -264,92 +258,92 @@ class AddStudyForm(BetterModelForm):
 
     def study_options_fieldset(self):
         return Fieldset(
-                'Study Options',
-                Field("name"),
-                Field("instrument"),
-                Field("share_opt_out"),
-                Field("test_period"),
-                Field("birth_weight_units"),
-                Field("timing"),
-                Field("allow_payment", css_class="css_enabler"),
-                Div(Field("gift_codes"), css_class="allow_payment collapse"),
-                Div(Field("gift_amount"), css_class="allow_payment collapse"),
-                Field("anon_collection"),
-                Field("subject_cap"),
-            )
-    
+            "Study Options",
+            Field("name"),
+            Field("instrument"),
+            Field("share_opt_out"),
+            Field("test_period"),
+            Field("birth_weight_units"),
+            Field("timing"),
+            Field("allow_payment", css_class="css_enabler"),
+            Div(Field("gift_codes"), css_class="allow_payment collapse"),
+            Div(Field("gift_amount"), css_class="allow_payment collapse"),
+            Field("anon_collection"),
+            Field("subject_cap"),
+        )
+
     def demographic_options_fieldset(self):
         return Fieldset(
-                'Demographic Options',
+            "Demographic Options",
+            Div(
+                Field("demographic_opt_out"),
                 Div(
-                    Field("demographic_opt_out"), 
-                    Div(
-                        Field('no_demographic_boolean', css_class="css_enabler"),
-                        css_class="demographic_opt_out collapse"
-                    ),
-                    css_class="share_opt_out collapse"),
-                
-                Div(
-                    Field("age_range"),
-                    Field("demographic", css_class="css_enabler"), 
-                    Div(Field("backpage_boolean"), css_class='demographic'),
-                    Div(Field("confirmation_questions"),  css_class='demographic'),
-                    Field("prefilled_data"),
-                    css_class="no_demographic_boolean collapse"
+                    Field("no_demographic_boolean", css_class="css_enabler"),
+                    css_class="demographic_opt_out collapse",
                 ),
-            )
-    
+                css_class="share_opt_out collapse",
+            ),
+            Div(
+                Field("age_range"),
+                Field("demographic", css_class="css_enabler"),
+                Div(Field("backpage_boolean"), css_class="demographic"),
+                Div(Field("confirmation_questions"), css_class="demographic"),
+                Field("prefilled_data"),
+                css_class="no_demographic_boolean collapse",
+            ),
+        )
+
     def opening_dialog_fieldset(self):
         return Fieldset(
-                'Opening Dialog',
-                Field("waiver"),
-            )
-    
+            "Opening Dialog",
+            Field("waiver"),
+        )
+
     def redirect_options_fieldset(self):
         return Fieldset(
-                "Redirect Options",
-                HTML(
-                    """
+            "Redirect Options",
+            HTML(
+                """
                     <p>If you would like to connect web-cdi with an external service (e.g., prolific, mturk, lookit), please fill out the following options when applicable</p>
                 """
-                ),
-                Field("redirect_boolean", css_class="css_enabler"),
+            ),
+            Field("redirect_boolean", css_class="css_enabler"),
+            Div(
+                Field("redirect_url"),
+                Field("direct_redirect_boolean", css_class="css_enabler"),
                 Div(
-                    Field("redirect_url"), 
-                    Field("direct_redirect_boolean", css_class="css_enabler"),
-                    Div(
-                        Field("json_redirect"),
-                        css_class="direct_redirect_boolean collapse"
-                    ),
-                    css_class="redirect_boolean collapse"
+                    Field("json_redirect"), css_class="direct_redirect_boolean collapse"
                 ),
-                Field("participant_source_boolean", css_class="css_enabler"),
+                css_class="redirect_boolean collapse",
+            ),
+            Field("participant_source_boolean", css_class="css_enabler"),
+            Div(
+                Field("hide_source_id"),
+                Field("send_completion_flag_url", css_class="css_enabler"),
                 Div(
-                    Field("hide_source_id"),
-                    Field('send_completion_flag_url', css_class="css_enabler"),
-                    Div(
-                        Field('completion_data'),
-                        css_class="send_completion_flag_url collapse"
-                    ),
-                    css_class="participant_source_boolean collapse",
+                    Field("completion_data"),
+                    css_class="send_completion_flag_url collapse",
                 ),
-            )
-    
+                css_class="participant_source_boolean collapse",
+            ),
+        )
+
     def completion_page_fieldset(self):
         return Fieldset(
-                'Completion Page Details',
-                Field("print_my_answers_boolean"),
-                Field("confirm_completion"),
-                Field("show_feedback"), 
-                Field("end_message", css_class="css_enabler"),
-                Div(
-                    Field("end_message_text"),
-                    css_class="end_message collapse",
-                ),
-            )
-        
+            "Completion Page Details",
+            Field("print_my_answers_boolean"),
+            Field("confirm_completion"),
+            Field("show_feedback"),
+            Field("end_message", css_class="css_enabler"),
+            Div(
+                Field("end_message_text"),
+                css_class="end_message collapse",
+            ),
+        )
+
     def submit_fieldset(self):
         return Submit("submit", _("Save"), css_class="btn btn-primary right")
+
     # Form is related to the study model. Exclude study group designation (is done post-creation) and researcher name (filled automatically)
     class Meta:
         model = Study
@@ -357,7 +351,6 @@ class AddStudyForm(BetterModelForm):
 
 
 class EditStudyForm(AddStudyForm):
-
     def __init__(self, *args, **kwargs):
         self.researcher = kwargs.pop("researcher", None)
         super().__init__(*args, **kwargs)
@@ -370,9 +363,10 @@ class EditStudyForm(AddStudyForm):
             self.completion_page_fieldset(),
             self.submit_fieldset(),
         )
-        
+
     def clean(self):
         return super().clean()
+
 
 # Form for grouping studies together
 class AddPairedStudyForm(forms.ModelForm):
@@ -413,6 +407,7 @@ class AddPairedStudyForm(forms.ModelForm):
                     study_group="", researcher=self.researcher
                 )
             )
+
 
 class ImportDataForm(forms.ModelForm):
     study = forms.ModelChoiceField(
