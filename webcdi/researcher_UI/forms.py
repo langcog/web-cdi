@@ -230,8 +230,8 @@ class AddStudyForm(BetterModelForm):
                 )
             except:
                 pass
-            
-            '''
+
+            """
             if self.instance.demographic:
                 self.fields["demographic"] = forms.ModelChoiceField(
                     queryset=Demographic.objects.filter(
@@ -243,7 +243,7 @@ class AddStudyForm(BetterModelForm):
                 self.fields["demographic"] = forms.ModelChoiceField(
                     queryset=None, empty_label="Default"
                 )
-            '''
+            """
 
         # self.helper.form_action = reverse("researcher_ui:add_study")
 
