@@ -5,7 +5,7 @@ import pandas as pd
 from cdi_forms.models import BackgroundInfo
 from django.conf import settings
 from django.urls import reverse
-from researcher_UI.models import administration, administration_data
+from researcher_UI.models import Administration, administration_data
 from researcher_UI.utils.processDemos import processDemos_fun
 from researcher_UI.utils.random_url_generator import random_url_generator
 from researcher_UI.utils.try_parsing_date import try_parsing_date_fun
@@ -86,7 +86,7 @@ def import_data_fun(request, study_obj):
             error_msg = "Subject IDs must be numeric only."
             break
 
-        old_rep = administration.objects.filter(study=study_obj, subject_id=sid).count()
+        old_rep = Administration.objects.filter(study=study_obj, subject_id=sid).count()
 
         try:
             due_date = try_parsing_date_fun(admin_row["date_today"])
@@ -94,7 +94,7 @@ def import_data_fun(request, study_obj):
             error_msg = "Invalid date format. Please submit dates as MM-DD-YYYY or YYYY-MM-DD. '/' and '.' delimiters are alsoacceptable."
             break
 
-        new_admin = administration.objects.create(
+        new_admin = Administration.objects.create(
             study=study_obj,
             subject_id=sid,
             repeat_num=old_rep + 1,
@@ -226,7 +226,7 @@ def import_data_fun(request, study_obj):
         data["stat"] = "ok"
         data["redirect_url"] = reverse("researcher_ui:console", args=[study_obj.name])
     else:
-        administration.objects.filter(pk__in=new_admin_pks).delete()
+        Administration.objects.filter(pk__in=new_admin_pks).delete()
         data["stat"] = "error"
         data["error_message"] = error_msg
 

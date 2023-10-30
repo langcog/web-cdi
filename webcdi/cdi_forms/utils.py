@@ -1,4 +1,5 @@
 import os
+import csv
 
 PROJECT_ROOT = os.path.abspath(
     os.path.dirname(__file__)
@@ -25,3 +26,9 @@ def previous_and_next(some_iterable):
     prevs = chain([None], prevs)
     nexts = chain(islice(nexts, 1, None), [None])
     return zip(prevs, items, nexts)
+
+def unicode_csv_reader(utf8_data, dialect=csv.excel, **kwargs):
+    csv_reader = csv.reader(utf8_data, dialect=dialect, **kwargs)
+    for row in csv_reader:
+        yield [cell for cell in row]
+        

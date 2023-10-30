@@ -9,8 +9,8 @@ from rangefilter.filters import DateRangeFilterBuilder
 from researcher_UI.models import *
 
 # Register your models here.
-admin.site.register(instrument)
-admin.site.register(researcher)
+admin.site.register(Instrument)
+admin.site.register(Researcher)
 admin.site.register(Demographic)
 
 
@@ -76,25 +76,10 @@ class AdministrationSummaryAdmin(admin.ModelAdmin):
 admin.site.register(AdministrationSummary, AdministrationSummaryAdmin)
 
 
-class AdministrationAdmin(admin.ModelAdmin):
-    list_display = [
-        "study",
-        "subject_id",
-        "completed",
-        "completedBackgroundInfo",
-        "url_hash",
-    ]
-    list_filter = ["completed", "completedBackgroundInfo"]
-    search_fields = ["study__name", "url_hash"]
-
-
-admin.site.register(administration, AdministrationAdmin)
-
-
 # Define an inline admin descriptor for Researcher model
 # which acts a bit like a singleton
 class ResearcherInline(admin.StackedInline):
-    model = researcher
+    model = Researcher
     can_delete = False
     verbose_name_plural = "researchers"
     filter_horizontal = ["allowed_instruments"]

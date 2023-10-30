@@ -234,9 +234,10 @@
 		"max_age": 36,
 		"csv_file": "cdi_form_csv/cat_forms/[English_CAT].csv",
 		"json_data": "",
-		"scoring_json" : "",
 		"starting_words" : "cdi_form_csv/cat_forms/starting_words/[English_Ages_CAT].csv",
-		"demographics" : ["English_Split.json", "English_Centiment.json"]
+		"demographics" : ["English_Split.json", "English_Centiment.json"],
+		"benchmark" : "cdi_forms/form_data/benchmarking/English_CAT_benchmark.csv",
+		"scoring_json" : "cdi_forms/form_data/scoring/English_CAT_scoring.json"
 	},
 	{
 		"language": "Spanish",
@@ -293,8 +294,9 @@
 		"max_age": 36,
 		"csv_file": "cdi_form_csv/cat_forms/[English_CAT].csv",
 		"json_data": "",
-		"scoring_json" : "",
+		"scoring_json" : "cdi_forms/form_data/scoring/French_CAT_scoring.json",
 		"starting_words" : "cdi_form_csv/cat_forms/starting_words/[French_Ages_CAT].csv",
+		"benchmark" : "cdi_forms/form_data/benchmarking/French_CAT_benchmark.csv",
 		"demographics" : ["French_CAT.json", "French_with_health.json", "French_without_health.json"]
 	},{
 		"language": "Spanish",
@@ -305,8 +307,9 @@
 		"max_age": 36,
 		"csv_file": "cdi_form_csv/cat_forms/[English_CAT].csv",
 		"json_data": "",
-		"scoring_json" : "",
+		"scoring_json" : "cdi_forms/form_data/scoring/Spanish_CAT_scoring.json",
 		"starting_words" : "cdi_form_csv/cat_forms/starting_words/[Spanish_Ages_CAT].csv",
+		"benchmark" : "cdi_forms/form_data/benchmarking/Spanish_CAT_benchmark.csv",
 		"demographics" : ["Spanish_Split.json"]
 	}
 ]

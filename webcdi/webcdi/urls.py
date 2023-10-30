@@ -25,10 +25,10 @@ from django_registration.backends.activation.views import RegistrationView
 from supplementtut.views import *  # noqa
 
 from webcdi.forms import SignUpForm
-from webcdi.views import CustomLoginView
+from webcdi.views import CustomLoginView, HomeView
 
 urlpatterns = [
-    url(r"^$", TemplateView.as_view(template_name="researcher_UI/home.html")),
+    path("", HomeView.as_view(), name='home'),
     url(
         r"^favicon\.ico",
         RedirectView.as_view(url="/static/images/favicon.ico", permanent=True),
@@ -68,6 +68,7 @@ urlpatterns = [
     url(r"^health/?", include("health_check.urls")),
     url(r"^ckeditor/", include("ckeditor_uploader.urls")),
     path("brookes/", include("brookes.urls")),
+    path('api/', include('api.urls')),
 ]
 
 if settings.DEBUG:

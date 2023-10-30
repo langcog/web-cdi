@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 from cdi_forms.scores import update_summary_scores
 import datetime
-from researcher_UI.models import administration
+from researcher_UI.models import Administration
 
 from django.conf import settings
 from django.core.mail import EmailMessage
@@ -14,7 +14,7 @@ class Command(BaseCommand):
         print (f'Starting at %s' % (datetime.datetime.now()))
 
         try :
-            instance = administration.objects.get(pk=options['administration_id'])
+            instance = Administration.objects.get(pk=options['administration_id'])
         except: 
             print(f'No valid administration id given')
             return

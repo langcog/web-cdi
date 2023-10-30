@@ -15,7 +15,7 @@ from django.http import Http404
 from django.shortcuts import redirect, render
 from django.utils import timezone, translation
 from django.views.generic import UpdateView
-from researcher_UI.models import administration
+from researcher_UI.models import Administration
 
 from .cdi_cat_api import cdi_cat_api
 from .forms import CatItemForm
@@ -50,7 +50,7 @@ class CATBackpageBackgroundInfoView(BackpageBackgroundInfoView):
 
 
 class AdministerAdministraionView(UpdateView):
-    model = administration
+    model = Administration
     refresh = False
     hash_id = None
     form_class = CatItemForm
@@ -93,7 +93,7 @@ class AdministerAdministraionView(UpdateView):
     def get_object(self, queryset=None):
         try:
             self.hash_id = self.kwargs["hash_id"]
-            obj = administration.objects.get(url_hash=self.hash_id)
+            obj = Administration.objects.get(url_hash=self.hash_id)
         except Exception as e:
             logger.debug(
                 f"Obj for { self.kwargs['hash_id'] } not found with error { e }"
@@ -142,6 +142,7 @@ class AdministerAdministraionView(UpdateView):
                 self.object.completedSurvey = True
             else:
                 self.object.completed = True
+            self.object.scored = True
             self.object.save()
 
         self.request.METHOD = "GET"
@@ -253,6 +254,7 @@ class AdministerAdministraionView(UpdateView):
                     self.object.completedSurvey = True
                 else:
                     self.object.completed = True
+                self.object.scored = True
                 self.object.catresponse.est_theta = self.word["curTheta"]
                 self.object.save()
                 self.object.catresponse.save()

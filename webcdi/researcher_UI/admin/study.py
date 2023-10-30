@@ -1,6 +1,6 @@
 from brookes.filters import DropdownFilter
 from django.contrib import admin
-from researcher_UI.models import study
+from researcher_UI.models import Study
 
 from .admin_actions import scoring_data, scoring_summary
 
@@ -17,8 +17,9 @@ class StudyAdmin(admin.ModelAdmin):
     ]
     list_filter = [
         "share_opt_out",
-        ("researcher", DropdownFilter),
-        "instrument",
+        ("researcher__username", DropdownFilter),
+        ("instrument__verbose_name", DropdownFilter),
+        'active',
     ]
     search_fields = ["instrument__name", "researcher__username", "name"]
     actions = [scoring_data, scoring_summary]
@@ -38,4 +39,4 @@ class StudyAdmin(admin.ModelAdmin):
     get_chargeable.short_description = "Chargeable"
 
 
-admin.site.register(study, StudyAdmin)
+admin.site.register(Study, StudyAdmin)

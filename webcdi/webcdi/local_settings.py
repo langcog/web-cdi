@@ -1,6 +1,34 @@
 # This file contains settings changed for MPI instance
+import json
 import os
 import socket
+
+import boto3
+from botocore.exceptions import ClientError
+
+# Use this code snippet in your app.
+# If you need more information about configurations
+# or implementing the sample code, visit the AWS docs:
+# https://aws.amazon.com/developer/language/python/
+
+
+def get_secret(secret_name, region_name="us-west-2"):
+    # Create a Secrets Manager client
+    session = boto3.session.Session()
+    client = session.client(service_name="secretsmanager", region_name=region_name)
+
+    try:
+        get_secret_value_response = client.get_secret_value(SecretId=secret_name)
+    except ClientError as e:
+        # For a list of exceptions thrown, see
+        # https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
+        raise e
+
+    # Decrypts secret using the associated KMS key.
+    secret = get_secret_value_response["SecretString"]
+
+    return json.loads(secret)
+
 
 HOST_NAME = socket.gethostname()
 HOST_IP = socket.gethostbyname(HOST_NAME)
@@ -32,34 +60,23 @@ for IP in list(NEW_IPS):
 
 ADMINS = (("Henry Mehta", "hjsmehta@gmail.com"),)
 
-
+DJANGO_SERVER_TYPE = os.environ.get("DJANGO_SERVER_TYPE", "DEV")  # DEV or PROD
+# print(get_secret(f"{os.environ.get('DJANGO_SERVER_TYPE','dev').lower()}/webcdi/RDS_PASSWORD")['password'])
 # Database Settings
-if "RDS_HOSTNAME" in os.environ:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql_psycopg2",
-            "NAME": os.environ["RDS_DB_NAME"],
-            "USER": os.environ["RDS_USERNAME"],
-            "PASSWORD": os.environ["RDS_PASSWORD"],
-            "HOST": os.environ["RDS_HOSTNAME"],
-            "PORT": os.environ["RDS_PORT"],
-        }
+DATABASES = {
+    "default": {
+        "ENGINE": "webcdi_postgresql_engine",
+        "NAME": os.environ["RDS_DB_NAME"],
+        "USER": os.environ["RDS_USERNAME"],
+        "PASSWORD": get_secret(
+            f"{os.environ.get('DJANGO_SERVER_TYPE','dev').lower()}/webcdi/RDS_PASSWORD"
+        )["password"],
+        "HOST": os.environ["RDS_HOSTNAME"],
+        "PORT": os.environ["RDS_PORT"],
     }
-elif "MPI_INSTANCE" in os.environ:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql_psycopg2",
-            "NAME": os.environ["MPI_DB_NAME"],
-            "USER": os.environ["MPI_USERNAME"],
-            "PASSWORD": os.environ["MPI_PASSWORD"],
-            "HOST": os.environ["MPI_HOSTNAME"],
-            "PORT": os.environ["MPI_PORT"],
-        }
-    }
+}
 
-
-DJANGO_SERVER_TYPE = os.environ.get("DJANGO_SERVER_TYPE", "DEV") # DEV or PROD
-SITE_ID = int(os.environ.get("SITE_ID", 3)) # 4 for MPI, 2 for DEV, 3 for local
+SITE_ID = int(os.environ.get("SITE_ID", 3))  # 4 for MPI, 2 for DEV, 3 for local
 
 # USER_ADMIN_EMAIL = 'webcdi-contact@stanford.edu'
 USER_ADMIN_EMAIL = "hjsmehta@gmail.com"
@@ -68,17 +85,18 @@ SERVER_EMAIL = "webcdi-contact@stanford.edu"
 
 # captcha settings
 RECAPTCHA_PUBLIC_KEY = os.environ.get("RECAPTCHA_PUBLIC_KEY", "<RECAPTCHA_PUBLIC_KEY>")
-RECAPTCHA_PRIVATE_KEY = os.environ.get("RECAPTCHA_PRIVATE_KEY", "<RECAPTCHA_PRIVATE_KEY>")
+RECAPTCHA_PRIVATE_KEY = os.environ.get(
+    "RECAPTCHA_PRIVATE_KEY", "<RECAPTCHA_PRIVATE_KEY>"
+)
 # Home page links
 CONTACT_EMAIL = "webcdi-contact@stanford.edu"
 MORE_INFO_ADDRESS = "http://mb-cdi.stanford.edu/"
 
 # AWS creds
-AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID", "<AWS_ACCESS_KEY>")
-AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY", "<AWS_SECRET_KEY")
+secret = get_secret("webcdi/webcdi-IAM")
+AWS_ACCESS_KEY_ID = secret["AWS_ACCESS_KEY_ID"]
+AWS_SECRET_ACCESS_KEY = secret["AWS_SECRET_ACCESS_KEY"]
 if "RDS_HOSTNAME" in os.environ:
-    AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID", "<AWS_ACCESS_KEY>")
-    AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY", "<AWS_SECRET_KEY")
     AWS_STORAGE_BUCKET_NAME = os.environ.get(
         "AWS_STORAGE_BUCKET_NAME", "AWS_STORAGE_BUCKET"
     )

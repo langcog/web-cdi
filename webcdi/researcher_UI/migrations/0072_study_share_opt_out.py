@@ -5,7 +5,7 @@ import datetime
 from brookes.models import BrookesCode
 from django.db import migrations, models
 from django.utils import timezone
-from researcher_UI.models import researcher as Researcher
+from researcher_UI.models import Researcher
 
 
 def update_researchers(apps, schema_editor):

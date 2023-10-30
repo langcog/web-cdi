@@ -4,14 +4,14 @@ from django.views.generic import DetailView, FormView
 from django.urls import reverse
 
 from django.utils import translation
-from researcher_UI.models import administration
+from researcher_UI.models import Administration
 
 from django.contrib import messages
 from cdi_forms.views.utils import language_map
 from cdi_forms.forms import ContactForm
 
 class AdministrationContactView(FormView, DetailView):
-    model = administration
+    model = Administration
     template_name = "cdi_forms/administration_contact.html"
     form_class = ContactForm
 
@@ -19,7 +19,7 @@ class AdministrationContactView(FormView, DetailView):
         return reverse("administer_cdi_form", args=[self.object.url_hash])
     
     def get_object(self, queryset=None):
-        self.object = administration.objects.get(url_hash=self.kwargs['hash_id'])
+        self.object = Administration.objects.get(url_hash=self.kwargs['hash_id'])
         return self.object
 
     def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:

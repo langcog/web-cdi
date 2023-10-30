@@ -210,7 +210,7 @@ class BackgroundInfo(models.Model):
         verbose_name=_("Was your child born earlier or later than their due date?"),
         blank=True,
         null=True,
-    )  # Boolean for whether child was born on due date
+    )  # Boolean for whether child was born on due date - True (1) is born early or late
     early_or_late = models.CharField(
         verbose_name=_("Was he/she early or late?"),
         max_length=5,
@@ -480,6 +480,7 @@ class BackgroundInfo(models.Model):
     sibling_data = models.TextField(blank=True, null=True)
 
     source_id = models.CharField(max_length=255, blank=True, null=True)
+    event_id = models.CharField(max_length=255, blank=True, null=True)
 
     children_comforted = models.CharField(
         max_length=51,
@@ -650,6 +651,9 @@ class BackgroundInfo(models.Model):
         choices=GENERIC_HEALTH_CHOICES,
     )
 
+    def __str__(self):
+        return f'{self.administration}'
+    
 
 # Model of zipcodes reported to be in 3-digit zip code prefixes with a population lower than 20,000. Tests with a zipcode found in this model will have their digits replaced with their state abbreviation.
 class Zipcode(models.Model):

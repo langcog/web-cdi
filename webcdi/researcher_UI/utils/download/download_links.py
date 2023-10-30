@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.sites.shortcuts import get_current_site
 from django.http import HttpResponse
 from django.urls import reverse
-from researcher_UI.models import administration
+from researcher_UI.models import Administration
 
 
 @login_required
@@ -16,7 +16,7 @@ def download_links(request, study_obj, administrations=None):
     )  # Name CSV
 
     if administrations is None:
-        administrations = administration.objects.filter(study=study_obj)
+        administrations = Administration.objects.filter(study=study_obj)
 
     admin_data = pd.DataFrame.from_records(administrations.values()).rename(
         columns={

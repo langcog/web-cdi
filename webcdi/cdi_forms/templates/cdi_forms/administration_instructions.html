@@ -8,7 +8,9 @@
     {% if not completed %}
         <div class="button-wrapper">
             <div class="flex-row d-flex justify-content-center">    
-                <a href="{% url 'background-info' object.backgroundinfo.pk %}" name="btn-back" value="{% trans 'Go back to Background Info' %}" class="btn btn-primary" type="submit">{% trans 'Go back to Background Info' %}</a>
+                {% if not object.study.no_demographic_boolean %}
+                    <a href="{% url 'background-info' object.backgroundinfo.pk %}" name="btn-back" value="{% trans 'Go back to Background Info' %}" class="btn btn-primary" type="submit">{% trans 'Go back to Background Info' %}</a>
+                {% endif %}
             </div>
         </div>
     {% endif %}
