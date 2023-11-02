@@ -40,7 +40,7 @@ def post_condition(request, ids, study_obj):
                     study=study_obj, subject_id=sid
                 ).count()
                 new_administrations.append(
-                    administration(
+                    Administration(
                         study=study_obj,
                         subject_id=sid,
                         repeat_num=old_rep + 1,
