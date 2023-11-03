@@ -52,8 +52,8 @@ class AdministrationSummaryView(DetailView):
                 for item in data:
                     data[item] = (
                         data[item]
-                        .replace("{{source_id}}", self.object.backgroundinfo.source_id)
-                        .replace("{{event_id}}", self.object.backgroundinfo.event_id)
+                        .replace("{{source_id}}", str(self.object.backgroundinfo.source_id))
+                        .replace("{{event_id}}", str(self.object.backgroundinfo.event_id))
                     )
                 print(f"REDIRECT {data}")
                 r = requests.post(redirect_url, data=data)
