@@ -6,6 +6,17 @@ register = template.Library()
 
 @register.filter
 def get_summary_data(administration_id, data):
+    if SummaryData.objects.filter(
+            administration=administration_id, title=data
+        ).exists():
+        res = SummaryData.objects.get(
+            administration=administration_id, title=data
+        ).value
+        if res == "":
+            res = 0
+    else:
+        res = 0
+    '''    
     try:
         res = SummaryData.objects.get(
             administration=administration_id, title=data
@@ -13,7 +24,8 @@ def get_summary_data(administration_id, data):
         if res == "":
             res = 0
     except Exception as e:
-        res = f"{e}"
+        res = f"0"
+    '''
     return res
 
 
