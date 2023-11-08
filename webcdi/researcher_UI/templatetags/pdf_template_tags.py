@@ -4,6 +4,22 @@ from researcher_UI.models import SummaryData, administration_data
 register = template.Library()
 
 
+@register.simple_tag(takes_context=True)
+def get_adjusted_summary_date(context, administration_id, data):
+    if 'adjusted' in context:
+        data += ' (adjusted)'
+    if SummaryData.objects.filter(
+            administration=administration_id, title=data
+        ).exists():
+        res = SummaryData.objects.get(
+            administration=administration_id, title=data
+        ).value
+        if res == "":
+            res = 0
+    else:
+        res = 0
+    return res
+
 @register.filter
 def get_summary_data(administration_id, data):
     if SummaryData.objects.filter(

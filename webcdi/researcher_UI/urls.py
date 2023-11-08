@@ -62,4 +62,10 @@ urlpatterns = [
         views.PDFAdministrationDetailView.as_view(),
         name="pdf_summary",
     ),
+    path(
+        "study/<int:pk>/pdf/",
+        views.PDFAdministrationDetailView.as_view(),
+        kwargs={'adjusted':True},
+        name="pdf_summary_adjusted",
+    ),
 ]
