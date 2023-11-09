@@ -33,7 +33,7 @@ class PDFAdministrationDetailView(WeasyTemplateResponseMixin, DetailView):
             for id in ids:
                 int_ids.append(int(id))
             ctx["administrations"] = ctx["administrations"].filter(pk__in=int_ids)
-        if 'adjusted' in kwargs:
+        if 'adjusted' in self.kwargs:
             ctx['adjusted'] = True
         return ctx
 
@@ -44,7 +44,6 @@ class PDFAdministrationDetailView(WeasyTemplateResponseMixin, DetailView):
         try:
             get_template(template_name)
         except Exception as e:
-            print(e)
             messages.info(
                 self.request,
                 mark_safe(

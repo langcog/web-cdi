@@ -242,7 +242,7 @@
         //window.open(url)
         }
     append_url_checkboxes_adjusted = function (){
-        var url = new URL("{{ request.scheme }}://{{request.get_host }}{% url 'researcher_ui:pdf_summary_adjusted' current_study.pk %}");
+        var url = new URL("{{ request.scheme }}://{{request.get_host }}{% url 'researcher_ui:pdf_summary_adjusted' current_study.pk 'adjusted' %}");
         var checkedBoxes = document.querySelectorAll('input[name=select_col]:checked');
         for (let i = 0; i < checkedBoxes.length; i++) {
             url.searchParams.append('id', checkedBoxes[i].value);
