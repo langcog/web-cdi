@@ -86,6 +86,9 @@ class Command(BaseCommand):
                 defaults=data_dict,
             )
 
+            for demo in instrument_obj.demographics.all():
+                instrument_obj.demographics.remove(demo)
+                
             try:
                 for demo in curr_instrument["demographics"]:
                     demographic, created = Demographic.objects.update_or_create(
