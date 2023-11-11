@@ -358,6 +358,7 @@ class AdministrationUpdateView(UpdateView):
             else:
                 self.object.completed = True
                 self.object.completed_date = timezone.now()
+                print('This should be completed now')
 
                 if self.object.study.completion_data:
                     data = self.object.study.completion_data

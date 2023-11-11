@@ -93,4 +93,6 @@ def format_admin_data(pd, study_obj, administrations, admin_header):
             )
     except:
         admin_data = pd.DataFrame(columns=admin_header)
+
+    print(admin_data)
     return admin_data
