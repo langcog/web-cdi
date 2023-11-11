@@ -125,22 +125,22 @@
             $(window).on('load', function() {
                 // Get current demographic value
                 demographic_value = $('#id_demographic').val();
-                if (demographic_value) {
-                  $.ajax({
-                      url:'/interface/ajax/get_demographic_forms/',
-                      type: 'GET',
-                      data: {id : $('#id_instrument').find('option:selected').val()},
-                      cache: false,
-                      success: function (data) {
-                          $('#id_demographic').find('option').not(':first').remove();
-                          for (item in data) {
-                            $('#id_demographic').append(new Option(data[item]['fields']['name'], data[item]['pk'])) 
-                          }
-                          $("#id_demographic").val(demographic_value);
+                console.log('Demographic value: ', demographic_value)
+                $.ajax({
+                    url:'/interface/ajax/get_demographic_forms/',
+                    type: 'GET',
+                    data: {id : $('#id_instrument').find('option:selected').val()},
+                    cache: false,
+                    success: function (data) {
+                      console.log(data)
+                        $('#id_demographic').find('option').not(':first').remove();
+                        for (item in data) {
+                          $('#id_demographic').append(new Option(data[item]['fields']['name'], data[item]['pk'])) 
+                        }
+                        $("#id_demographic").val(demographic_value);
 
-                      }
-                  });
-                }
+                    }
+                });
             });
 
 
