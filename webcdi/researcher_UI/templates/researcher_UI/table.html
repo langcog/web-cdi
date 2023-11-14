@@ -174,110 +174,106 @@
     }
 
 </style>
+
 <table class="table">
     {% block table.thead %}
-    {% if table.show_header %}
-        <thead {{ table.attrs.thead.as_html }}>
-            <tr>
-            {% for column in table.columns %}
-                <th {{ column.attrs.th.as_html }} style="text-align:center;">
-                    {% if column.orderable %}
-                        <a href="{% querystring table.prefixed_order_by_field=column.order_by_alias.next %}">{{ column.header }}</a>
-                    {% else %}
-                        {{ column.header }}
-                    {% endif %}
-                </th>
-            {% endfor %}
-            <th> Action </th>
-            </tr>
-        </thead>
-    {% endif %}
+        {% if table.show_header %}
+            <thead {{ table.attrs.thead.as_html }}>
+                <tr>
+                {% for column in table.columns %}
+                    <th {{ column.attrs.th.as_html }} style="text-align:center;">
+                        {% if column.orderable %}
+                            <a href="{% querystring table.prefixed_order_by_field=column.order_by_alias.next %}">{{ column.header }}</a>
+                        {% else %}
+                            {{ column.header }}
+                        {% endif %}
+                    </th>
+                {% endfor %}
+                <th> Action </th>
+                </tr>
+            </thead>
+        {% endif %}
     {% endblock table.thead %}
     
+    <tbody>
     {% for row in table.paginated_rows %}      
         <tr>
-        <!--Modal-->
-        <div class="modal" id="{{row.record.pk}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <form class="login-card"  action="{% url 'researcher_ui:edit_study_new' pk=row.record.pk %}"    method="post">
-                {% csrf_token %}
-                <input type="hidden" value="{% url 'researcher_ui:edit_study_new' pk=row.record.pk %}" id="form_modal_hidden_id{{row.record.pk}}" > 
-               
-                <div class="overlay">
-                    <div class="cv-spinner">
-                      <span class="spinner"></span>
-                    </div>
-                  </div>
-
-                 <div class="modal-dialog" role="document">
-                 <div class="modal-content">
-                     <div class="modal-header">
-                     <h5 class="modal-title" id="exampleModalLabel">Update</h5>
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                         <span aria-hidden="true">&times;</span>
-                     </button>
-                     </div>
-  
-                     <div class="modal-body">
-                     <div>
-                         <div class="form-group">
-                         <label for="recipient-name" class="col-form-label">Subject Id</label>
-                         <input type="text" class="form-control" name="subject_id" id="subject_id{{row.record.pk}}" value="{{row.record.subject_id}}">
-                         <input type="hidden"  name="subject_id_old" id="subject_id_old{{row.record.pk}}" value="{{row.record.subject_id}}">
-                         <span style="color: red; font-size: 12px;" id="subject_id_error_message{{row.record.pk}}">
-                            <p></p>
-                        </span>
-                         </div>
-                         <div class="form-group">
-                             <label for="recipient-name" class="col-form-label">Local Lab Id</label>
-                             <input type="text" class="form-control" name="local_lab_id" id="local_lab_id{{row.record.pk}}" value="{{row.record.local_lab_id}}">
-                         </div>
-                         <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Participant opted out of broader sharing</label>
-                            <select name="opt_out" id="opt_out{{row.record.pk}}" class="form-group">
-                                <option value="None" {% if row.record.opt_out == None %} selected{% endif %}>Unknown</option>
-                                <option value="True" {% if row.record.opt_out == "Yes" %} selected {% endif %}> Yes</option>
-                                <option value="False" {% if row.record.opt_out == "No" %} selected {% endif %}>  No</option>
-                            </select>
+            <!--Modal-->
+            <div class="modal" id="{{row.record.pk}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <form class="login-card"  action="{% url 'researcher_ui:edit_study_new' pk=row.record.pk %}"    method="post">
+                    {% csrf_token %}
+                    <input type="hidden" value="{% url 'researcher_ui:edit_study_new' pk=row.record.pk %}" id="form_modal_hidden_id{{row.record.pk}}" > 
+                
+                    <div class="overlay">
+                        <div class="cv-spinner">
+                            <span class="spinner"></span>
                         </div>
-                     </div>
-                     </div>
-                     <div class="modal-footer">
-                     <button type="button" class="btn btn-secondary"  data-dismiss="modal">Close</button>
-                     <button type="button" onclick="edit_study_new('{{row.record.pk}}')" class="btn btn-primary">Save</button>
-                     </div>
- 
-                 </div>
-                 </div>
+                    </div>
+
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Update</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+    
+                            <div class="modal-body">
+                                <div>
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Subject Id</label>
+                                        <input type="text" class="form-control" name="subject_id" id="subject_id{{row.record.pk}}" value="{{row.record.subject_id}}">
+                                        <input type="hidden"  name="subject_id_old" id="subject_id_old{{row.record.pk}}" value="{{row.record.subject_id}}">
+                                        <span style="color: red; font-size: 12px;" id="subject_id_error_message{{row.record.pk}}">
+                                            <p></p>
+                                        </span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Local Lab Id</label>
+                                        <input type="text" class="form-control" name="local_lab_id" id="local_lab_id{{row.record.pk}}" value="{{row.record.local_lab_id}}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Participant opted out of broader sharing</label>
+                                        <select name="opt_out" id="opt_out{{row.record.pk}}" class="form-group">
+                                            <option value="None" {% if row.record.opt_out == None %} selected{% endif %}>Unknown</option>
+                                            <option value="True" {% if row.record.opt_out == "Yes" %} selected {% endif %}> Yes</option>
+                                            <option value="False" {% if row.record.opt_out == "No" %} selected {% endif %}>  No</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary"  data-dismiss="modal">Close</button>
+                                <button type="button" onclick="edit_study_new('{{row.record.pk}}')" class="btn btn-primary">Save</button>
+                            </div>
+    
+                        </div>
+                    </div>
                 </form>
-        </div>          
-        <!--Modal-->
-        {% for column, cell in row.items %}
-                    {% if column|stringformat:"s" in '"Last modified","Expiration date","Creation date"' %}
-                        <td style="text-align: center;">
-                            <span id="converted_result{{forloop.parentloop.counter}}{{forloop.counter}}"></span>
-                            <script>document.getElementById('converted_result{{forloop.parentloop.counter}}{{forloop.counter}}').innerText = Convert_to_localtime("{{cell}}")</script>
-                            
-                        </td>
-                    {% else %}
-                        <td style="text-align: center;">
-                            {{cell}}
-                        </td>
-                    {% endif %}
+            </div>          
+            <!--Modal-->
+            {% for column, cell in row.items %}
+                {% if column|stringformat:"s" in '"Last modified","Expiration date","Creation date"' %}
+                    <td style="text-align: center;">
+                        <span id="converted_result{{forloop.parentloop.counter}}{{forloop.counter}}"></span>
+                        <script>document.getElementById('converted_result{{forloop.parentloop.counter}}{{forloop.counter}}').innerText = Convert_to_localtime("{{cell}}")</script>
+                    </td>
+                {% else %}
+                    <td style="text-align: center;">
+                        {{cell}}
+                    </td>
+                {% endif %}
+            {% endfor %}
 
-
-        {% endfor %}
-
-        <td>
+            <td>
                 <button type="button" class="btn-primary" style="border-radius:50%;" 
-                onclick="edit_function({{row.record.pk}})">
-                <span class="fa fa-edit"></span>
-            </button>
-        </td>
+                    onclick="edit_function({{row.record.pk}})">
+                    <span class="fa fa-edit"></span>
+                </button>
+            </td>
         </tr>
-
-    
-    
-        {% endfor %}
+    {% endfor %}
     </tbody>
 </table>
 

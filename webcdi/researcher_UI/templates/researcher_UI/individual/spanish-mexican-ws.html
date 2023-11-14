@@ -35,7 +35,7 @@
                 <td></td>
                 <td></td>
                 <td>Edad para comparar: </td>
-                <td>{{ administration.id|get_summary_data:"adjusted benchmark age" }}</td>
+                <td>{% if adjusted %}{{ administration.id|get_summary_data:"adjusted benchmark age" }}{% else %}{{ administration.backgroundinfo.age }}{% endif %}</td>
             </tr>
         </table>
 
@@ -55,12 +55,12 @@
             <tr>
                 <td colspan="1"></td>
                 <td>Percentil (por sexo):</td>
-                <td colspan="2">{{ administration.id|get_summary_data:"Palabras que dice Percentile-sex" }}</td>
+                <td colspan="2">{% get_adjusted_summary_date administration.id "Palabras que dice Percentile-sex" %}</td>
             </tr>
             <tr>
                 <td colspan="1"></td>
                 <td>Percentil (todos):</td>
-                <td colspan="2">{{ administration.id|get_summary_data:"Palabras que dice Percentile-both" }}%</td>
+                <td colspan="2">{% get_adjusted_summary_date administration.id "Palabras que dice Percentile-both" %}</td>
             </tr>
             <tr>
                 <th colspan="4"> Cómo Usa y Comprende el Niño el Lenguaje</th>
@@ -136,12 +136,12 @@
             <tr>
                 <td></td>
                 <td>{% trans 'Percentile (by sex):' %}</td>
-                <td colspan="2">{{ administration.id|get_summary_data:"Complejidad Percentile-sex" }}%</td>
+                <td colspan="2">{% get_adjusted_summary_date administration.id "Complejidad Percentile-sex" %}</td>
             </tr>
             <tr>
                 <td></td>
                 <td>{% trans 'Percentile (both sexes):' %}</td>
-                <td colspan="2">{{ administration.id|get_summary_data:"Complejidad Percentile-both" }}%</td>
+                <td colspan="2">{% get_adjusted_summary_date administration.id "Complejidad Percentile-both" %}</td>
             </tr>
             
         </table>

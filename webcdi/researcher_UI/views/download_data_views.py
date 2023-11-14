@@ -33,6 +33,8 @@ class PDFAdministrationDetailView(WeasyTemplateResponseMixin, DetailView):
             for id in ids:
                 int_ids.append(int(id))
             ctx["administrations"] = ctx["administrations"].filter(pk__in=int_ids)
+        if 'adjusted' in self.kwargs:
+            ctx['adjusted'] = True
         return ctx
 
     def get(self, request, *args, **kwargs) -> HttpResponse:
@@ -41,7 +43,7 @@ class PDFAdministrationDetailView(WeasyTemplateResponseMixin, DetailView):
         template_name = f"researcher_UI/individual/{name}.html"
         try:
             get_template(template_name)
-        except:
+        except Exception as e:
             messages.info(
                 self.request,
                 mark_safe(
