@@ -5,7 +5,7 @@ from django.conf import settings
 from django.core.mail import EmailMessage
 from django.core.management.base import BaseCommand
 from django.db.models import Q
-from researcher_UI.models import Administration, study
+from researcher_UI.models import Administration, Study
 
 
 class Command(BaseCommand):
@@ -18,7 +18,7 @@ class Command(BaseCommand):
         subject = f"WebCDI Summary Data"
         query = Q()
         if options["study_id"]:
-            study_obj = study.objects.get(pk=options["study_id"])
+            study_obj = Study.objects.get(pk=options["study_id"])
             query = Q(study=study_obj)
             # administrations = Administration.objects.filter(study=study_obj)
         if options["language"]:
@@ -27,14 +27,15 @@ class Command(BaseCommand):
             query = Q(query) & Q(study__instrument__form=options["form"])
 
         administrations = Administration.objects.filter(query).filter(completed=True)
-
-        email = EmailMessage(
+        
+        '''email = EmailMessage(
             subject=subject,
             body=f"Starting at %s" % (datetime.datetime.now()),
             from_email=settings.DEFAULT_FROM_EMAIL,
             to=["hjsmehta@gmail.com"],
         )
         email.send()
+        '''
         count = 0
         thousands = 0
         for instance in administrations:
