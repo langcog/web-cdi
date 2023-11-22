@@ -25,7 +25,7 @@ __pycache__/
 
 .env
 
-# Elastic Beanstalk Files
+# Elastic Beanstalk Files 
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
