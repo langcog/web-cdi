@@ -1,0 +1,80 @@
+{% extends 'researcher_UI/individual/base.html' %}
+{% load static i18n bleach_markdown pdf_template_tags%}
+
+{% block content %} 
+    {% for administration in administrations %} 
+    {% if administration.completed %}
+    <div id="content" style="break-after: page;">
+        <div class="main" style="border:2px solid black; text-align: center; margin-bottom: 20px">
+            <h2>{% trans 'MacArthur-Bates Communicative Development Inventory' %} </h2>
+            <h2>{% trans 'Level 1 (WG1)' %}</h2>
+            <h2>{% trans 'Child Report Form' %}</h2>
+        </div>
+
+        <table >
+            <tr >
+                <td>{% trans 'Child ID:' %}</td>
+                <td>{{ administration.subject_id }}</td>
+                <td>{% trans 'Date of Report:' %}</td>
+                <td>{% now "jS F Y H:i" %}</td>
+            </tr>
+            <tr>
+                <td>{% trans 'Child Sex:' %}</td>
+                <td>{{ administration.backgroundinfo.get_sex_display }}</td>
+                <td>{% trans 'Date of CDI' %}</td>
+                <td>{{ administration.last_modified|date:"M d, Y" }}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>{% trans 'Age in months:' %}</td>
+                <td>{{ administration.backgroundinfo.age }}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>{% trans 'Age to compare:' %}</td>
+                <td>{% if adjusted %}{{ administration.id|get_summary_data:"adjusted benchmark age" }}{% else %}{{ administration.backgroundinfo.age }}{% endif %}</td>
+            </tr>
+        </table>
+
+        <table>
+            <tr>
+                <th colspan="6">{% trans 'Vocabulary Checklist' %}</th>
+            </tr>
+            <tr>
+                <td>{% trans 'Understands:' %}</td>
+                <td>{% trans 'Number:' %}</td>
+                <td>{{ administration.id|get_summary_data:"Understands" }}</td>
+                <td>(of 89)</td>
+                <td>{% trans 'Percentile (by sex):' %}</td>
+                <td>{% get_adjusted_summary_date administration.id "Understands Percentile-sex" %}%</td>
+            </tr>
+            <tr>
+                <td colspan="4"></td>
+                <td>{% trans 'Percentile (both sexes):' %}</td>
+                <td>{% get_adjusted_summary_date administration.id "Understands Percentile-both" %}%</td>
+            </tr>
+            <tr>
+                <td>{% trans 'Understands and Says:' %}</td>
+                <td>{% trans 'Number:' %}</td>
+                <td>{{ administration.id|get_summary_data:"Understands and Produces" }}</td>
+                <td>(of 89)</td>
+                <td>{% trans 'Percentile (by sex):' %}</td>
+                <td>{% get_adjusted_summary_date administration.id "Understands and Produces Percentile-sex" %}%</td>
+            </tr>
+            <tr>
+                <td colspan="4"></td>
+                <td>{% trans 'Percentile (both sexes):' %}</td>
+                <td>{% get_adjusted_summary_date administration.id "Understands and Produces Percentile-both" %}%</td>
+            </tr>
+        </table>
+        <div>
+            <p>3rd Edition (Marchman et al., 2023)</p>
+        </div>
+    </div>
+
+    {% endif %}
+    {% endfor %}
+
+{% endblock %}

@@ -58,12 +58,12 @@ urlpatterns = [
         name="edit_study_new",
     ),
     path(
-        "study/<int:pk>/pdf/",
+        "study/<int:pk>/clinical/",
         views.PDFAdministrationDetailView.as_view(),
         name="pdf_summary",
     ),
     path(
-        "study/<int:pk>/pdf/<str:adjusted>/",
+        "study/<int:pk>/clinical/<str:adjusted>/",
         views.PDFAdministrationDetailView.as_view(),
         name="pdf_summary_adjusted",
     ),

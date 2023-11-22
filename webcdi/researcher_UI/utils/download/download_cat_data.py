@@ -92,19 +92,6 @@ def download_cat_data(request, study_obj, administrations=None, adjusted=False):
                         if answer["est_theta"] > b.raw_score_girl:
                             row["est_theta_percentile_sex"] = b.percentile
             if "est_theta_percentile" in row:
-                """
-                attempts = Benchmark.objects.filter(
-                    age=age,
-                    instrument_score__title__in=[
-                        "Total Produced",
-                        "Words Produced",
-                        'Palabras que dice',
-                    ],
-                    instrument__language=obj.study.instrument.language,
-                    percentile=row["est_theta_percentile_sex"],
-                    ).order_by("-instrument__form")
-                for attempt in attempts: print(attempt)
-                """
                 try:
                     row["raw_score"] = (
                         Benchmark.objects.filter(

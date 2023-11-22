@@ -1,12 +1,6 @@
 # Set the cron to run with utf8 encoding
 PYTHONIOENCODING=utf8
 
-RDS_DB_NAME=webcdi-admin
-RDS_HOSTNAME=webcdi-dev.canyiscnpddk.us-west-2.rds.amazonaws.com
-RDS_PASSWORD=bears1stlexicon
-RDS_PORT=5432
-RDS_USERNAME=webcdi-admin
-
 # Specify where to send email 
 MAILTO="hjsmehta@gmail.com"
 
