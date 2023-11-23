@@ -20,6 +20,12 @@ def get_adjusted_summary_date(context, administration_id, data):
         res = 0
     return res
 
+@register.simple_tag(takes_context=True)
+def get_true_false(context, administration_id, data):
+    if get_adjusted_summary_date(context, administration_id, data) in [1, '1', True, 'true', 'True']:
+        return 'True'
+    return 'False'
+
 @register.filter
 def get_summary_data(administration_id, data):
     if SummaryData.objects.filter(
