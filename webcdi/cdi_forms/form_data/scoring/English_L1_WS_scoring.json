@@ -2,13 +2,13 @@
     {
         "title" : "Understands and Produces",
         "category" : "word",
-        "measure" : "understands;produces",
+        "measure" : "produces",
         "order" : 1
     },
     {
         "title" : "Understands",
         "category" : "word",
-        "measure" : "understands",
+        "measure" : "understands;produces",
         "order" : 2
     }
 ]
