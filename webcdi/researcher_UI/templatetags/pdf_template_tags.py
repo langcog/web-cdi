@@ -37,12 +37,11 @@ def get_cat_benchmark(context, administration_id, data):
     }
     
     age=administration.backgroundinfo.age
-    if 'adjusted' in context and not administration.backgroundinfo.born_on_due_date:
+    if 'adjusted' in context and administration.backgroundinfo.born_on_due_date:
         if administration.backgroundinfo.early_or_late == "early":
             age = administration.backgroundinfo.age + administration.backgroundinfo.due_date_diff
         elif administration.backgroundinfo.early_or_late == "late":
             age = administration.backgroundinfo.age - administration.backgroundinfo.due_date_diff
-            
     res = Benchmark.objects.filter(instrument=administration.study.instrument).aggregate(Max('age'), Min('age'))
     max = res['age__max']
     min = res['age__min']
@@ -55,7 +54,6 @@ def get_cat_benchmark(context, administration_id, data):
         benchmarks = Benchmark.objects.filter(instrument=administration.study.instrument, age=age).order_by(
             "percentile"
         )
-        
         for b in benchmarks.filter(age=age):
             if administration.catresponse.est_theta > b.raw_score:
                 row["est_theta_percentile"] = b.percentile
