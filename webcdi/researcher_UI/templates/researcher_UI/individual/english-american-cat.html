@@ -47,22 +47,22 @@
             <tr>
                 <td></td>
                 <td>{% trans 'Percentile (by sex):' %}</td>
-                <td>{% get_adjusted_summary_date administration.id "Benchmark Theta Percentile-sex" %}%</td>
+                <td>{% get_cat_benchmark administration.id "est_theta_percentile_sex" %}%</td>
             </tr>
             <tr>
                 <td></td>
                 <td>{% trans 'Percentile (by both sexes):' %}</td>
-                <td>{% get_adjusted_summary_date administration.id "Benchmark Theta Percentile-both" %}%</td>
+                <td>{% get_cat_benchmark administration.id "est_theta_percentile" %}%</td>
             </tr>
             <tr>
                 <td></td>
                 <td>{% trans 'Estimated Vocabulary Size (by sex):' %}</td>
-                <td>{% get_adjusted_summary_date administration.id "raw_score_sex" %}</td>
+                <td>{% get_cat_benchmark administration.id "raw_score_sex" %}</td>
             </tr>
             <tr>
                 <td></td>
                 <td>{% trans 'Estimated Vocabulary Size (by both sexes):' %}</td>
-                <td>{% get_adjusted_summary_date administration.id "raw_score" %}</td>
+                <td>{% get_cat_benchmark administration.id "raw_score" %}</td>
             </tr>
         </table>
         <div>

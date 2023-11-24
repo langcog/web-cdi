@@ -20,7 +20,6 @@ class Command(BaseCommand):
         if options["study_id"]:
             study_obj = Study.objects.get(pk=options["study_id"])
             query = Q(study=study_obj)
-            # administrations = Administration.objects.filter(study=study_obj)
         if options["language"]:
             query = Q(query) & Q(study__instrument__language=options["language"])
         if options["form"]:
@@ -28,14 +27,6 @@ class Command(BaseCommand):
 
         administrations = Administration.objects.filter(query).filter(completed=True)
         
-        '''email = EmailMessage(
-            subject=subject,
-            body=f"Starting at %s" % (datetime.datetime.now()),
-            from_email=settings.DEFAULT_FROM_EMAIL,
-            to=["hjsmehta@gmail.com"],
-        )
-        email.send()
-        '''
         count = 0
         thousands = 0
         for instance in administrations:

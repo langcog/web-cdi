@@ -41,7 +41,6 @@ class PDFAdministrationDetailView(WeasyTemplateResponseMixin, DetailView):
         self.object = self.get_object()
         name = slugify(f"{self.object.instrument.verbose_name}")
         template_name = f"researcher_UI/individual/{name}.html"
-        print(f'Template name: {template_name}')
         try:
             get_template(template_name)
         except Exception as e:

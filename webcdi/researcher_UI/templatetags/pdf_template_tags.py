@@ -1,6 +1,6 @@
 from django import template
-from researcher_UI.models import SummaryData, administration_data
-
+from researcher_UI.models import SummaryData, administration_data, Benchmark, Administration
+from django.db.models import Max, Min
 register = template.Library()
 
 
@@ -25,6 +25,89 @@ def get_true_false(context, administration_id, data):
     if get_adjusted_summary_date(context, administration_id, data) in [1, '1', True, 'true', 'True']:
         return 'True'
     return 'False'
+
+@register.simple_tag(takes_context=True)
+def get_cat_benchmark(context, administration_id, data):
+    administration = Administration.objects.get(id=int(administration_id))
+    row = {
+        'est_theta_percentile': 0,
+        'est_theta_percentile_sex': 0,
+        'raw_score': 0,
+        'raw_score_sex': 0
+    }
+    
+    age=administration.backgroundinfo.age
+    res = Benchmark.objects.filter(instrument=administration.study.instrument).aggregate(Max('age'), Min('age'))
+    max = res['age__max']
+    min = res['age__min']
+    if age > max:
+        age = max
+    if age < min:
+        age = min
+
+    if Benchmark.objects.filter(instrument=administration.study.instrument, age=age).exists():
+        benchmarks = Benchmark.objects.filter(instrument=administration.study.instrument, age=age).order_by(
+            "percentile"
+        )
+        
+        for b in benchmarks.filter(age=age):
+            if administration.catresponse.est_theta > b.raw_score:
+                row["est_theta_percentile"] = b.percentile
+            if administration.backgroundinfo.sex == "M":
+                if administration.catresponse.est_theta > b.raw_score_boy:
+                    row["est_theta_percentile_sex"] = b.percentile
+            if administration.backgroundinfo.sex == "F":
+                if administration.catresponse.est_theta > b.raw_score_girl:
+                    row["est_theta_percentile_sex"] = b.percentile
+        
+        try:
+            row["raw_score"] = int(
+                Benchmark.objects.filter(
+                    age=age,
+                    instrument_score__title__in=[
+                        "Total Produced",
+                        "Words Produced",
+                        "Palabras que dice",
+                    ],
+                    instrument__language=administration.study.instrument.language,
+                    percentile=row["est_theta_percentile"],
+                )
+                .order_by("-instrument__form")[0]
+                .raw_score
+            )
+            if administration.backgroundinfo.sex == "M":
+                row["raw_score_sex"] = int(
+                    Benchmark.objects.filter(
+                        age=age,
+                        instrument_score__title__in=[
+                            "Total Produced",
+                            "Words Produced",
+                            "Palabras que dice",
+                        ],
+                        instrument__language=administration.study.instrument.language,
+                        percentile=row["est_theta_percentile_sex"],
+                    )
+                    .order_by("-instrument__form")[0]
+                    .raw_score_boy
+                )
+            elif administration.backgroundinfo.sex == "F":
+                row["raw_score_sex"] =int(
+                    Benchmark.objects.filter(
+                        age=age,
+                        instrument_score__title__in=[
+                            "Total Produced",
+                            "Words Produced",
+                            "Palabras que dice",
+                        ],
+                        instrument__language=administration.study.instrument.language,
+                        percentile=row["est_theta_percentile_sex"],
+                    )
+                    .order_by("-instrument__form")[0]
+                    .raw_score_girl
+                )
+        except Exception as e:
+            pass
+    return row[data]
 
 @register.filter
 def get_summary_data(administration_id, data):
