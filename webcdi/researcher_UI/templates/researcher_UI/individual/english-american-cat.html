@@ -34,7 +34,7 @@
                 <td></td>
                 <td></td>
                 <td>{% trans 'Age to compare:' %}</td>
-                <td>{% if adjusted %}{{ administration.id|get_summary_data:"adjusted benchmark age" }}{% else %}{{ administration.backgroundinfo.age }}{% endif %}</td>
+                <td>{% if adjusted %}{{ administration.id|get_adjusted_benchmark_age }}{% else %}{{ administration.backgroundinfo.age }}{% endif %}</td>
             </tr>
         </table>
 

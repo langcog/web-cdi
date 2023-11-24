@@ -37,11 +37,11 @@ def get_cat_benchmark(context, administration_id, data):
     }
     
     age=administration.backgroundinfo.age
-    if 'adjusted' in context and not obj.backgroundinfo.born_on_due_date:
+    if 'adjusted' in context and not administration.backgroundinfo.born_on_due_date:
         if administration.backgroundinfo.early_or_late == "early":
-            age = administration.backgroundinfo.age + obj.backgroundinfo.due_date_diff
+            age = administration.backgroundinfo.age + administration.backgroundinfo.due_date_diff
         elif administration.backgroundinfo.early_or_late == "late":
-            age = administration.backgroundinfo.age - obj.backgroundinfo.due_date_diff
+            age = administration.backgroundinfo.age - administration.backgroundinfo.due_date_diff
             
     res = Benchmark.objects.filter(instrument=administration.study.instrument).aggregate(Max('age'), Min('age'))
     max = res['age__max']
@@ -116,6 +116,16 @@ def get_cat_benchmark(context, administration_id, data):
     return row[data]
 
 @register.filter
+def get_adjusted_benchmark_age(administration_id):
+    administration = Administration.objects.get(id=int(administration_id))
+    age=administration.backgroundinfo.age
+    if administration.backgroundinfo.early_or_late == "early":
+        age = administration.backgroundinfo.age + administration.backgroundinfo.due_date_diff
+    elif administration.backgroundinfo.early_or_late == "late":
+        age = administration.backgroundinfo.age - administration.backgroundinfo.due_date_diff
+    return age
+        
+@register.filter
 def get_summary_data(administration_id, data):
     if SummaryData.objects.filter(
             administration=administration_id, title=data
@@ -127,16 +137,6 @@ def get_summary_data(administration_id, data):
             res = 0
     else:
         res = 0
-    '''    
-    try:
-        res = SummaryData.objects.get(
-            administration=administration_id, title=data
-        ).value
-        if res == "":
-            res = 0
-    except Exception as e:
-        res = f"0"
-    '''
     return res
 
 
