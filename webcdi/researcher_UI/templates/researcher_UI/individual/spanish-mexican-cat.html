@@ -1,0 +1,76 @@
+{% extends 'researcher_UI/individual/base.html' %}
+{% load static i18n bleach_markdown pdf_template_tags%}
+
+{% block content %} 
+    {% for administration in administrations %} 
+    {% if administration.completed %}
+    <div id="content" style="break-after: page;">
+        <div class="main" style="border:2px solid black; text-align: center; margin-bottom: 20px">
+            <h2>{% trans 'MacArthur-Bates Communicative Development Inventory' %} </h2>
+            <h2>Computer Adaptive Test (CDI-CAT)</h2>
+            <h2>{% trans 'Informe del Niño' %}</h2>
+        </div>
+
+        <table >
+            <tr >
+                <td>{% trans 'Número de ID' %}</td>
+                <td>{{ administration.subject_id }}</td>
+                <td>{% trans 'Fecha del Reporte:' %}</td>
+                <td>{% now "jS F Y H:i" %}</td>
+            </tr>
+            <tr>
+                <td>{% trans 'Sexo:' %}</td>
+                <td>{{ administration.backgroundinfo.get_sex_display }}</td>
+                <td>{% trans 'Fecha del Inventario:' %}</td>
+                <td>{{ administration.last_modified|date:"M d, Y" }}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>{% trans 'Edad en meses:' %}</td>
+                <td>{{ administration.backgroundinfo.age }}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>{% trans 'Edad para comparar:' %}</td>
+                <td>{% if adjusted %}{{ administration.id|get_adjusted_benchmark_age }}{% else %}{{ administration.backgroundinfo.age }}{% endif %}</td>
+            </tr>
+        </table>
+
+        <table>
+            <tr>
+                <th>{% trans 'Palabras que Dice:' %}</th>
+                <td>{% trans 'Estimated Theta:' %}</td>
+                <td>{{ administration.catresponse.est_theta }}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>{% trans 'Percentil (por sexo):' %}</td>
+                <td>{% get_cat_benchmark administration.id "est_theta_percentile_sex" %}%</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>{% trans 'Percentil (todos):' %}</td>
+                <td>{% get_cat_benchmark administration.id "est_theta_percentile" %}%</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>{% trans 'vocabulario estimado (por sexo):' %}</td>
+                <td>{% get_cat_benchmark administration.id "raw_score_sex" %}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>{% trans 'vocabulario estimado (todos):' %}</td>
+                <td>{% get_cat_benchmark administration.id "raw_score" %}</td>
+            </tr>
+        </table>
+        <div>
+            <p>3rd Edition (Jackson-Maldonado et al. 2003)</p>
+        </div>
+    </div>
+
+    {% endif %}
+    {% endfor %}
+
+{% endblock %}
