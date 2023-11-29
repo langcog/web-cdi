@@ -177,7 +177,7 @@ def download_data(
             {"study_name": "3rd Edition (Marchman et al., 2023)"}, ignore_index=True
         )
     if study_obj.instrument.language in [
-        "Spanish (Mexican)"
+        "Spanish"
     ] and study_obj.instrument.form in [
         "WS",
         "WG",
