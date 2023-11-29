@@ -7,11 +7,14 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.http import HttpResponse, HttpResponseServerError
 from django.shortcuts import render
 from django.urls import reverse
-from researcher_UI.models import InstrumentScore, Administration, administration_data
-from researcher_UI.utils import get_background_header
-from researcher_UI.utils import format_admin_data, format_admin_header
-from researcher_UI.utils import get_score_headers
-from researcher_UI.utils import get_study_scores
+from researcher_UI.models import Administration, InstrumentScore, administration_data
+from researcher_UI.utils import (
+    format_admin_data,
+    format_admin_header,
+    get_background_header,
+    get_score_headers,
+    get_study_scores,
+)
 
 
 def download_data(
@@ -173,16 +176,14 @@ def download_data(
         combined_data = combined_data.append(
             {"study_name": "3rd Edition (Marchman et al., 2023)"}, ignore_index=True
         )
-    if study_obj.instrument.language in ["Spanish (Mexican)"] and study_obj.instrument.form in [
+    if study_obj.instrument.language in ["Spanish"] and study_obj.instrument.form in [
         "WS",
         "WG",
     ]:
         combined_data = combined_data.append(
-            {"study_name": "3rd Edition (Jackson-Maldonado et al. 2003)"}, ignore_index=True
+            {"study_name": "3rd Edition (Jackson-Maldonado et al. 2003)"},
+            ignore_index=True,
         )
-    
-
-    
 
     # Turn pandas dataframe into a CSV
     combined_data.to_csv(response, encoding="utf-8", index=False)
