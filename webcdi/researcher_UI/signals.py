@@ -45,5 +45,5 @@ m2m_changed.connect(
 @receiver(post_save, sender=User)
 def update_user_profile(sender, instance, created, **kwargs):
     if created:
-        researcher.objects.create(user=instance)
+        Researcher.objects.create(user=instance)
     instance.researcher.save()
