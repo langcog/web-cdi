@@ -95,33 +95,42 @@ def download_data(
 
     # Add scoring
     melted_scores = get_study_scores(administrations)
-    if len(melted_scores) < 1:
-        return HttpResponseServerError(f"There are no data in the study(ies) to report")
-    score_header = get_score_headers(study_obj, adjusted=adjusted)
-    melted_scores.set_index("administration_id")
-    missing_columns = list(set(score_header) - set(melted_scores.columns))
-    if missing_columns:
-        melted_scores = melted_scores.reindex(
-            columns=np.append(melted_scores.columns.values, missing_columns)
-        )
+    if len(melted_scores) > 0:
+        #return HttpResponseServerError(f"There are no data in the study(ies) to report")
+        score_header = get_score_headers(study_obj, adjusted=adjusted)
+        melted_scores.set_index("administration_id")
+        missing_columns = list(set(score_header) - set(melted_scores.columns))
+        if missing_columns:
+            melted_scores = melted_scores.reindex(
+                columns=np.append(melted_scores.columns.values, missing_columns)
+            )
 
-    for instance in InstrumentScore.objects.filter(instrument=study_obj.instrument):
-        if instance.kind == "count":
-            melted_scores[instance.title].replace(r"^\s*$", 0, regex=True, inplace=True)
-            melted_scores[instance.title].replace(np.NaN, 0, inplace=True)
+        for instance in InstrumentScore.objects.filter(instrument=study_obj.instrument):
+            if instance.kind == "count":
+                melted_scores[instance.title].replace(r"^\s*$", 0, regex=True, inplace=True)
+                melted_scores[instance.title].replace(np.NaN, 0, inplace=True)
 
-    try:
-        background_answers1 = pd.merge(
-            new_background, melted_answers, how="outer", on="administration_id"
-        )
-        background_answers = pd.merge(
-            background_answers1, melted_scores, how="outer", on="administration_id"
-        )
-    except:
-        background_answers = pd.DataFrame(
-            columns=list(new_background) + list(melted_answers) + list(melted_scores)
-        )
 
+        try:
+            background_answers1 = pd.merge(
+                new_background, melted_answers, how="outer", on="administration_id"
+            )
+            background_answers = pd.merge(
+                background_answers1, melted_scores, how="outer", on="administration_id"
+            )
+        except:
+            background_answers = pd.DataFrame(
+                columns=list(new_background) + list(melted_answers) + list(melted_scores)
+            )
+    else:
+        try:
+            background_answers = pd.merge(
+                new_background, melted_answers, how="outer", on="administration_id"
+            )
+        except:
+            background_answers = pd.DataFrame(
+                columns=list(new_background) + list(melted_answers)
+            )
     # Try to format administration data for pandas dataframe
     admin_data = format_admin_data(pd, study_obj, administrations, admin_header)
 
@@ -159,9 +168,14 @@ def download_data(
         )
 
     # Organize columns
-    combined_data = combined_data[
-        admin_header + background_header + model_header + score_header
-    ]
+    if len(melted_scores) > 0:
+        combined_data = combined_data[
+            admin_header + background_header + model_header + score_header
+        ]
+    else:
+        combined_data = combined_data[
+            admin_header + background_header + model_header
+        ]
 
     combined_data = combined_data.replace("nan", "", regex=True)
     combined_data = combined_data.replace("None", "", regex=True)
