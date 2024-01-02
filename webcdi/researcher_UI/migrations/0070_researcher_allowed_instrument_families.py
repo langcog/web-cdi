@@ -103,7 +103,6 @@ def update_instruments(apps, schema_editor):
 class Migration(migrations.Migration):
     dependencies = [
         ("researcher_UI", "0069_instrument_family"),
-        ("brookes", "0002_alter_brookescode_code"),
     ]
 
     operations = [

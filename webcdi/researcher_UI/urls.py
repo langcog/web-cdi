@@ -1,5 +1,4 @@
-from django.conf.urls import url
-from django.urls import path, include
+from django.urls import path, include, re_path
 
 from researcher_UI import views
 
@@ -22,17 +21,17 @@ urlpatterns = [
         )
     ),
 
-    url(
+    re_path(
         r"^(?P<username>[^/]+)/(?P<study_name>[^/]+)/new_parent/$",
         views.AddNewParent.as_view(),
         name="administer_new_parent",
     ),
-    url(
+    re_path(
         r"^(?P<username>[^/]+)/(?P<study_name>[^/]+)/new_participant/$",
         views.AdministerNewParticipant.as_view(),
         name="administer_new_participant",
     ),
-    url(
+    re_path(
         r"^(?P<username>[^/]+)/(?P<study_name>[^/]+)/overflow/$",
         views.Overflow.as_view(),
         name="overflow",

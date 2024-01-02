@@ -7,7 +7,7 @@ from cdi_forms.views import get_model_header
 from cdi_forms.models import BackgroundInfo
 import pandas as pd
 import numpy as np
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from io import BytesIO
 import re, zipfile
 from researcher_UI.utils.write_to_zip import write_to_zip

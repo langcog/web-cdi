@@ -6,8 +6,8 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import HTML, Div, Field, Fieldset, Layout, Submit
 from django import forms
 from django.conf import settings
-from django.utils.translation import pgettext_lazy, ugettext
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import pgettext_lazy, gettext
+from django.utils.translation import gettext_lazy as _
 from form_utils.forms import BetterModelForm
 
 from ..languages import LANGUAGE_OPTIONS as language_choices
@@ -824,7 +824,7 @@ class BackgroundForm(BetterModelForm):
                     _("Child's Ethnicity"),
                     HTML(
                         "<p> "
-                        + ugettext(
+                        + gettext(
                             "The following information is being collected for the sole purpose of reporting to our grant-funding institute, i.e.,  NIH (National Institute of Health).  NIH requires this information to ensure the soundness and inclusiveness of our research. Your cooperation is appreciated, but optional."
                         )
                         + " </p>"

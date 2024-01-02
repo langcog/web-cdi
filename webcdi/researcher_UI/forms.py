@@ -4,7 +4,7 @@ from crispy_forms.layout import HTML, Div, Field, Fieldset, Layout, Submit
 from django import forms
 from django.contrib.postgres.forms import IntegerRangeField
 from django.urls import reverse
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from form_utils.forms import BetterModelForm
 from researcher_UI.models import *
 
