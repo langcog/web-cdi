@@ -9,9 +9,9 @@ environment-defaults:
     branch: null
     repository: null
 global:
-  application_name: web-cdi
+  application_name: webcdi
   default_ec2_keyname: web-cdi_011017
-  default_platform: Python 3.8
+  default_platform: Python 3.11
   default_region: us-west-2
   include_git_submodules: true
   instance_profile: null
