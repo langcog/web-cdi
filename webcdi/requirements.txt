@@ -18,7 +18,6 @@ urllib3==2.0.7
 django-bootstrap3==21.1
 django-bootstrap3-datetimepicker==2.2.3
 django-bootstrap4==21.1
-django-crispy-forms==1.13.0
 django-health-check
 django-localflavor
 django-countries
