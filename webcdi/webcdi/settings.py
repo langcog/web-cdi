@@ -71,7 +71,8 @@ INSTALLED_APPS = (
     'api',
     "crispy_forms",
     "django_tables2",
-    "crispy_bootstrap4",
+    "crispy_bootstrap5",
+    "bootstrap3",
     "form_utils",
     "django.contrib.sites",
     "health_check",
@@ -152,7 +153,9 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 STATIC_URL = "/static/"
 
-CRISPY_TEMPLATE_PACK = "bootstrap3"
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 
 DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap-responsive.html"

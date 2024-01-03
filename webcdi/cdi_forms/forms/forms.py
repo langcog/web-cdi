@@ -9,6 +9,7 @@ from django.conf import settings
 from django.utils.translation import pgettext_lazy, gettext
 from django.utils.translation import gettext_lazy as _
 from form_utils.forms import BetterModelForm
+from django.utils.html import mark_safe
 
 from ..languages import LANGUAGE_OPTIONS as language_choices
 from ..models import *
@@ -159,13 +160,13 @@ class BackgroundForm(BetterModelForm):
             "To protect your privacy, we never store your child's date of birth, we only record age in months."
         ),
         validators=[MaxValueValidator(datetime.date.today())],
-        label=_('Child DOB<span class="asteriskField">*</span>'),
+        label=mark_safe(_('Child DOB<span class="asteriskField">*</span>')),
         required=False,
     )
 
     # Child's age in months. Formatted weirdly to ask for 'child_dob' when empty.
     age = forms.IntegerField(
-        label=_('Age (in months)<span class="asteriskField">*</span>'),
+        label=mark_safe(_('Age (in months)<span class="asteriskField">*</span>')),
         validators=[MinValueValidator(0)],
         help_text=_(
             "This field will update when you enter or change your child's DOB."
@@ -408,10 +409,10 @@ class BackgroundForm(BetterModelForm):
         self.helper.form_method = "post"
         self.helper.form_tag = False
 
-        self.fields["birth_weight_lb"].label = (
+        self.fields["birth_weight_lb"].label = mark_safe(
             _("Birth weight") + '<span class="asteriskField">*</span>'
         )
-        self.fields["birth_weight_kg"].label = (
+        self.fields["birth_weight_kg"].label = mark_safe(
             _("Birth weight") + '<span class="asteriskField">*</span>'
         )
 

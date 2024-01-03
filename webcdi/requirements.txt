@@ -4,7 +4,6 @@ beautifulsoup4==4.12.2
 boto3==1.33.12
 botocore==1.33.12
 Django==4.2.8
-crispy-bootstrap4==2023.1
 django-crispy-forms==2.1
 django-modeltranslation==0.18.11
 django-tables2==2.7.0
@@ -16,7 +15,10 @@ soupsieve==2.5
 sqlparse==0.4.4
 typing_extensions==4.9.0
 urllib3==2.0.7
-django-bootstrap3
+django-bootstrap3==21.1
+django-bootstrap3-datetimepicker==2.2.3
+django-bootstrap4==21.1
+django-crispy-forms==1.13.0
 django-health-check
 django-localflavor
 django-countries
