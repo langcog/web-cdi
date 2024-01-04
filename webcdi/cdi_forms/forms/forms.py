@@ -419,10 +419,8 @@ class BackgroundForm(BetterModelForm):
         self.fields["form_filler"].required = True
         self.fields["birth_order"].required = True
 
-        for visible in self.visible_fields():
-            visible.field.widget.attrs['class'] = 'form-control'
-        for hidden in self.hidden_fields():
-            hidden.field.widget.attrs['class'] = 'form-control'
+        for visible in self.fields:
+            self.fields[visible].widget.attrs['class'] = 'form-control' 
             
         
         # Whether child was a part of a multiple birth (twins, triplets, etc.)
@@ -568,9 +566,10 @@ class BackgroundForm(BetterModelForm):
                         for field in fieldset["fields"]:
                             if "field" in field:
                                 selected_fields.append(field["field"])
+                                self.fields[field["field"]].widget.attrs['class'] = 'form-control'
                             if "widget_type" in field:
                                 if field["widget_type"] == "Select":
-                                    self.fields[field["field"]].widget = forms.Select()
+                                    self.fields[field["field"]].widget = forms.Select(attrs={'class': 'form-control'})
                                 if field["widget_type"] == "CheckboxSelectMultiple":
                                     self.fields[
                                         field["field"]
@@ -601,14 +600,14 @@ class BackgroundForm(BetterModelForm):
                                 fields.append(HTML(field["html"]))
                             if "divs" in field:
                                 fields.append(
-                                    Field(field["field"], css_class="enabler")
+                                    Field(field["field"], css_class="form-control enabler")
                                 )
                                 for div in field["divs"]:
                                     fields.append(
                                         Div(
                                             Field(div["field"], css_class=div["css"]),
                                             *div["div"],
-                                            css_class="dependent"
+                                            css_class="form-control dependent"
                                         )
                                     )
                                     selected_fields.append(div["field"])
@@ -629,9 +628,9 @@ class BackgroundForm(BetterModelForm):
                                         selected_fields.append(item)
                             elif "div" in field:
                                 fields.append(
-                                    Field(field["field"], css_class="enabler")
+                                    Field(field["field"], css_class="form-control enabler")
                                 )
-                                fields.append(Div(*field["div"], css_class="dependent"))
+                                fields.append(Div(*field["div"], css_class="form-control dependent"))
                                 for f in field["div"]:
                                     selected_fields.append(f)
                             else:
@@ -757,7 +756,7 @@ class BackgroundForm(BetterModelForm):
             if "annual_income" in selected_fields:
                 if len(self.fields["annual_income"].widget.choices) < 1:
                     self.fields["annual_income"].widget.choices = INCOME_CHOICES
-
+                
         # otherwise use the standard format
         else:
             self.fields["birth_weight_lb"].widget = forms.Select()
@@ -783,49 +782,49 @@ class BackgroundForm(BetterModelForm):
             if self.curr_context["study"].participant_source_boolean > 0:
                 basic_info_fieldset = Fieldset(
                     _("Basic Information"),
-                    Field("form_filler", css_class="enabler form-control"),
-                    Div("form_filler_other", css_class="dependent"),
+                    Field("form_filler", css_class="form-control enabler form-control"),
+                    Div("form_filler_other", css_class="form-control dependent"),
                     "source_id",
                     "child_dob",
                     "age",
                     "sex",
-                    Field("country", css_class="enabler form-control"),
-                    Div("zip_code", css_class="dependent"),
+                    Field("country", css_class="form-control enabler form-control"),
+                    Div("zip_code", css_class="form-control dependent"),
                     "birth_order",
-                    Field("multi_birth_boolean", css_class="enabler"),
-                    Div("multi_birth", css_class="dependent"),
+                    Field("multi_birth_boolean", css_class="form-control enabler"),
+                    Div("multi_birth", css_class="form-control dependent"),
                     self.birth_weight_field,
-                    Field("born_on_due_date", css_class="enabler"),
-                    Div("early_or_late", "due_date_diff", css_class="dependent"),
+                    Field("born_on_due_date", css_class="form-control enabler"),
+                    Div("early_or_late", "due_date_diff", css_class="form-control dependent"),
                 )
             else:
                 basic_info_fieldset = Fieldset(
                     _("Basic Information"),
-                    Field("form_filler", css_class="enabler form-control"),
-                    Div("form_filler_other", css_class="dependent"),
+                    Field("form_filler", css_class="form-control enabler form-control"),
+                    Div("form_filler_other", css_class="form-control dependent"),
                     "child_dob",
                     "age",
                     "sex",
-                    Field("country", css_class="enabler form-control"),
-                    Div("zip_code", css_class="dependent"),
+                    Field("country", css_class="form-control enabler form-control"),
+                    Div("zip_code", css_class="form-control dependent"),
                     "birth_order",
-                    Field("multi_birth_boolean", css_class="enabler form-control"),
-                    Div("multi_birth", css_class="dependent"),
+                    Field("multi_birth_boolean", css_class="form-control enabler form-control"),
+                    Div("multi_birth", css_class="form-control dependent"),
                     self.birth_weight_field,
-                    Field("born_on_due_date", css_class="enabler form-control"),
-                    Div("early_or_late", "due_date_diff", css_class="dependent"),
+                    Field("born_on_due_date", css_class="form-control enabler form-control"),
+                    Div("early_or_late", "due_date_diff", css_class="form-control dependent"),
                 )
                 self.fields["source_id"].widget = forms.HiddenInput()
             self.helper.layout = Layout(
                 basic_info_fieldset,
                 Fieldset(
                     _("Family Background"),
-                    Field("primary_caregiver", css_class="enabler form-control"),
-                    Div("primary_caregiver_other", css_class="dependent"),
+                    Field("primary_caregiver", css_class="form-control enabler form-control"),
+                    Div("primary_caregiver_other", css_class="form-control dependent"),
                     "mother_yob",
                     "mother_education",
-                    Field("secondary_caregiver", css_class="enabler form-control"),
-                    Div("secondary_caregiver_other", css_class="dependent"),
+                    Field("secondary_caregiver", css_class="form-control enabler form-control"),
+                    Div("secondary_caregiver_other", css_class="form-control dependent"),
                     "father_yob",
                     "father_education",
                     "annual_income",
@@ -844,36 +843,36 @@ class BackgroundForm(BetterModelForm):
                 ),
                 Fieldset(
                     _("Caregiver Information"),
-                    Field("caregiver_info", css_class="enabler form-control"),
-                    Div("caregiver_other", css_class="dependent"),
+                    Field("caregiver_info", css_class="form-control enabler form-control"),
+                    Div("caregiver_other", css_class="form-control dependent"),
                 ),
                 Fieldset(
                     _("Language Exposure"),
-                    Field("other_languages_boolean", css_class="enabler form-control"),
+                    Field("other_languages_boolean", css_class="form-control enabler form-control"),
                     Div(
-                        Field("other_languages", css_class="make-selectize"),
+                        Field("other_languages", css_class="form-control make-selectize"),
                         "language_from",
                         "language_days_per_week",
                         "language_hours_per_day",
-                        css_class="dependent",
+                        css_class="form-control dependent",
                     ),
                 ),
                 Fieldset(
                     _("Health"),
-                    Field("ear_infections_boolean", css_class="enabler"),
-                    Div("ear_infections", css_class="dependent"),
-                    Field("hearing_loss_boolean", css_class="enabler"),
-                    Div("hearing_loss", css_class="dependent"),
-                    Field("vision_problems_boolean", css_class="enabler"),
-                    Div("vision_problems", css_class="dependent"),
-                    Field("illnesses_boolean", css_class="enabler"),
-                    Div("illnesses", css_class="dependent"),
-                    Field("services_boolean", css_class="enabler"),
-                    Div("services", css_class="dependent"),
-                    Field("worried_boolean", css_class="enabler"),
-                    Div("worried", css_class="dependent"),
-                    Field("learning_disability_boolean", css_class="enabler"),
-                    Div("learning_disability", css_class="dependent"),
+                    Field("ear_infections_boolean", css_class="form-control enabler"),
+                    Div("ear_infections", css_class="form-control dependent"),
+                    Field("hearing_loss_boolean", css_class="form-control enabler"),
+                    Div("hearing_loss", css_class="form-control dependent"),
+                    Field("vision_problems_boolean", css_class="form-control enabler"),
+                    Div("vision_problems", css_class="form-control dependent"),
+                    Field("illnesses_boolean", css_class="form-control enabler"),
+                    Div("illnesses", css_class="form-control dependent"),
+                    Field("services_boolean", css_class="form-control enabler"),
+                    Div("services", css_class="form-control dependent"),
+                    Field("worried_boolean", css_class="form-control enabler"),
+                    Div("worried", css_class="form-control dependent"),
+                    Field("learning_disability_boolean", css_class="form-control enabler"),
+                    Div("learning_disability", css_class="form-control dependent"),
                 ),
             )
 
