@@ -767,11 +767,12 @@ class BackgroundForm(BetterModelForm):
             self.fields["birth_weight_lb"].widget.attrs['class'] = 'form-control'
             self.fields["birth_weight_kg"].widget.attrs['class'] = 'form-control'
             self.fields["annual_income"] = forms.ChoiceField(choices=INCOME_CHOICES)
+            self.fields["annual_income"].widget.attrs["class"] = "form-control"
             self.fields["annual_income"].label = _(
                 "Estimated Annual Family Income (in USD)"
             )
             self.fields["child_ethnicity"] = forms.MultipleChoiceField(
-                choices=CHILD_ETHNICITY_CHOICES
+                choices=CHILD_ETHNICITY_CHOICES,
             )
             self.fields["child_ethnicity"].widget = forms.CheckboxSelectMultiple(attrs={"class": "form-control"})
             self.fields["child_ethnicity"].required = False
