@@ -36,3 +36,4 @@ app-version
 django-bootstrap3-datetimepicker
 django-ses
 django-storages
+weasyprint==60.2
