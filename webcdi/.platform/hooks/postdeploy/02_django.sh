@@ -2,7 +2,7 @@
 
 source "$PYTHONPATH/activate" && {
     # migrate
-    #python ./manage.py migrate --noinput;
+    python ./manage.py migrate --noinput;
     #python ./manage.py collectstatic --noinput;
     #python ./manage.py 01_populate_instrument_family;
     #python ./manage.py 02_populate_instrument;
