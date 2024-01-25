@@ -1,4 +1,4 @@
-app-version==0.2.1
+app-version
 asgiref==3.7.2
 beautifulsoup4==4.12.2
 bleach==6.1.0
