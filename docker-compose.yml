@@ -38,7 +38,7 @@ services:
     depends_on:
       - db
     ports:
-      - "5051:80"
+      - "5051"
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
