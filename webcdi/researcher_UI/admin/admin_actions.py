@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from researcher_UI.utils.download import download_data, download_summary
 
 from researcher_UI.models import Administration

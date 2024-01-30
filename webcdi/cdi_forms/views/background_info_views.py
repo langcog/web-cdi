@@ -17,7 +17,7 @@ from django.urls import reverse
 from django.utils import timezone, translation
 from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView, UpdateView
 from researcher_UI.models import Administration, Researcher, Study, payment_code
 from researcher_UI.utils import max_subject_id

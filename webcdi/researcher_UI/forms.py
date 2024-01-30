@@ -4,7 +4,7 @@ from crispy_forms.layout import HTML, Div, Field, Fieldset, Layout, Submit
 from django import forms
 from django.contrib.postgres.forms import IntegerRangeField
 from django.urls import reverse
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from form_utils.forms import BetterModelForm
 from researcher_UI.models import *
 
@@ -215,15 +215,15 @@ class AddStudyForm(BetterModelForm):
         self.helper.form_method = "post"
         self.fields["backpage_boolean"].initial = True
 
-        if self.researcher:
+        if self.researcher: 
             self.fields["instrument"] = forms.ModelChoiceField(
                 queryset=Instrument.objects.filter(
                     researcher=self.researcher.researcher
-                ),
+                ), 
                 empty_label="(choose from the list)",
             )
         else:
-            try:
+            try: 
                 self.fields["instrument"] = forms.ModelChoiceField(
                     queryset=Instrument.objects.filter(pk=self.instance.instrument.pk),
                     empty_label=None,
@@ -256,6 +256,14 @@ class AddStudyForm(BetterModelForm):
             self.submit_fieldset(),
         )
 
+        for field in self.fields:
+            if not isinstance(self.fields[field].widget, forms.widgets.CheckboxInput):
+                self.fields[field].widget.attrs['class'] = 'form-control'
+                print(f'Widget for {field} is {type(self.fields[field].widget)}') 
+                if isinstance(self.fields[field].widget, forms.widgets.Select):
+                    print(f'Widget attrs for {field} is {self.fields[field].widget.attrs}') 
+
+
     def study_options_fieldset(self):
         return Fieldset(
             "Study Options",
@@ -285,7 +293,7 @@ class AddStudyForm(BetterModelForm):
             ),
             Div(
                 Field("age_range"),
-                Field("demographic", css_class="css_enabler"),
+                Field("demographic", css_class="css_enabler form-control"),
                 Div(Field("backpage_boolean"), css_class="demographic"),
                 Div(Field("confirmation_questions"), css_class="demographic"),
                 Field("prefilled_data"),
@@ -316,10 +324,10 @@ class AddStudyForm(BetterModelForm):
                 ),
                 css_class="redirect_boolean collapse",
             ),
-            Field("participant_source_boolean", css_class="css_enabler"),
+            Field("participant_source_boolean", css_class="css_enabler form-control"),
             Div(
                 Field("hide_source_id"),
-                Field("send_completion_flag_url", css_class="css_enabler"),
+                Field("send_completion_flag_url", css_class="css_enabler form-control"),
                 Div(
                     Field("completion_data"),
                     css_class="send_completion_flag_url collapse",
@@ -334,7 +342,7 @@ class AddStudyForm(BetterModelForm):
             Field("print_my_answers_boolean"),
             Field("confirm_completion"),
             Field("show_feedback"),
-            Field("end_message", css_class="css_enabler"),
+            Field("end_message", css_class="css_enabler form-control"),
             Div(
                 Field("end_message_text"),
                 css_class="end_message collapse",

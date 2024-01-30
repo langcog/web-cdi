@@ -47,9 +47,7 @@ def download_links(request, study_obj, administrations=None):
         "WS",
         "WG",
     ]:
-        admin_data = admin_data.append(
-            {"study_name": "3rd Edition (Marchman et al., 2023)"}, ignore_index=True
-        )
+        pd.concat([admin_data, pd.DataFrame([ {"study_name": "3rd Edition (Marchman et al., 2023)"}])], ignore_index=True)
 
     admin_data.to_csv(
         response, encoding="utf-8", index=False

@@ -4,7 +4,7 @@ from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.utils import translation
 from django.utils.deprecation import MiddlewareMixin
-from django.utils.http import is_safe_url
+from django.utils.http import url_has_allowed_host_and_scheme
 
 EXEMPT_URLS = [re.compile(settings.LOGIN_URL.lstrip("/"))]
 if hasattr(settings, "LOGIN_EXEMPT_URLS"):
@@ -19,7 +19,7 @@ class LoginRequiredMiddleware(MiddlewareMixin):
             if not any(m.match(path) for m in EXEMPT_URLS):
                 redirect_to = settings.LOGIN_URL
                 # 'next' variable to support redirection to attempted page after login
-                if len(path) > 0 and is_safe_url(
+                if len(path) > 0 and url_has_allowed_host_and_scheme(
                     url=request.path_info, allowed_hosts=request.get_host()
                 ):
                     redirect_to = f"{settings.LOGIN_URL}?next={request.path_info}"

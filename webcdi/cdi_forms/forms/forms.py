@@ -6,9 +6,10 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import HTML, Div, Field, Fieldset, Layout, Submit
 from django import forms
 from django.conf import settings
-from django.utils.translation import pgettext_lazy, ugettext
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import pgettext_lazy, gettext
+from django.utils.translation import gettext_lazy as _
 from form_utils.forms import BetterModelForm
+from django.utils.html import mark_safe
 
 from ..languages import LANGUAGE_OPTIONS as language_choices
 from ..models import *
@@ -136,7 +137,7 @@ class BackgroundForm(BetterModelForm):
 
     sibling_boolean = forms.TypedChoiceField(
         choices=YESNO_CHOICES,
-        widget=forms.RadioSelect,
+        widget=forms.RadioSelect(attrs={"class": "form-control"}),
         required=False,
         label=_("Does you child have siblings?"),
     )
@@ -144,7 +145,7 @@ class BackgroundForm(BetterModelForm):
         required=False, label=_("How many siblings does you child have?")
     )
     sibling_data = forms.CharField(
-        widget=forms.Textarea,
+        widget=forms.Textarea(attrs={"class": "form-control"}),
         required=False,
         label=_("Please provide the sex and age of each sibling"),
     )
@@ -153,19 +154,19 @@ class BackgroundForm(BetterModelForm):
     child_dob = forms.DateField(
         input_formats=["%m/%d/%Y"],
         widget=forms.TextInput(
-            attrs={"max": datetime.datetime.now().strftime("%Y-%m-%d")}
+            attrs={"max": datetime.datetime.now().strftime("%Y-%m-%d"), "class": "form-control"}
         ),
         help_text=_(
             "To protect your privacy, we never store your child's date of birth, we only record age in months."
         ),
         validators=[MaxValueValidator(datetime.date.today())],
-        label=_('Child DOB<span class="asteriskField">*</span>'),
+        label=mark_safe(_('Child DOB<span class="asteriskField">*</span>')),
         required=False,
     )
 
     # Child's age in months. Formatted weirdly to ask for 'child_dob' when empty.
     age = forms.IntegerField(
-        label=_('Age (in months)<span class="asteriskField">*</span>'),
+        label=mark_safe(_('Age (in months)<span class="asteriskField">*</span>')),
         validators=[MinValueValidator(0)],
         help_text=_(
             "This field will update when you enter or change your child's DOB."
@@ -178,14 +179,14 @@ class BackgroundForm(BetterModelForm):
         min_length=2,
         max_length=6,
         required=False,
-        widget=forms.TextInput(attrs={"placeholder": "XXXXX"}),
+        widget=forms.TextInput(attrs={"placeholder": "XXXXX", "class": "form-control"}),
         label=_("What is your postal/zip code?"),
     )
 
     # Whether child is hispanic/latino. Yes/No question. Not required.
     child_hispanic_latino = forms.TypedChoiceField(
         choices=YESNO_CHOICES,
-        widget=forms.RadioSelect,
+        widget=forms.RadioSelect(attrs={"class": "form-control"}),
         coerce=string_bool_coerce,
         required=False,
         label=_("Is your child Hispanic or Latino?"),
@@ -194,7 +195,7 @@ class BackgroundForm(BetterModelForm):
     # Was child born early or late compared to due date. 2-choice question.
     early_or_late = forms.ChoiceField(
         choices=(("early", _("Early")), ("late", _("Late"))),
-        widget=forms.RadioSelect,
+        widget=forms.RadioSelect(attrs={"class": "form-control"}),
         label=_("Was he/she early or late?"),
         required=False,
     )
@@ -207,7 +208,7 @@ class BackgroundForm(BetterModelForm):
             ("O", _("Other")),
             ("P", _("Prefer not to disclose")),
         ),
-        widget=forms.RadioSelect,
+        widget=forms.RadioSelect (attrs={"class": "form-control"}),
         label=_("Sex"),
     )
 
@@ -219,26 +220,26 @@ class BackgroundForm(BetterModelForm):
     form_filler_other = forms.CharField(
         label=" ",
         required=False,
-        widget=forms.TextInput(attrs={"placeholder": _("Please specify")}),
+        widget=forms.TextInput(attrs={"placeholder": _("Please specify"), "class": "form-control"}),
     )
 
     primary_caregiver_other = forms.CharField(
         label=" ",
         required=False,
-        widget=forms.TextInput(attrs={"placeholder": _("Please specify")}),
+        widget=forms.TextInput(attrs={"placeholder": _("Please specify"), "class": "form-control"}),
     )
 
     secondary_caregiver_other = forms.CharField(
         label=" ",
         required=False,
-        widget=forms.TextInput(attrs={"placeholder": _("Please specify")}),
+        widget=forms.TextInput(attrs={"placeholder": _("Please specify"), "class": "form-control"}),
     )
 
     caregiver_other = forms.CharField(
         label=" ",
         required=False,
         widget=forms.TextInput(
-            attrs={"placeholder": pgettext_lazy("caregiver_other", "Please specify")}
+            attrs={"placeholder": pgettext_lazy("caregiver_other", "Please specify"), "class": "form-control"}
         ),
     )
 
@@ -408,16 +409,20 @@ class BackgroundForm(BetterModelForm):
         self.helper.form_method = "post"
         self.helper.form_tag = False
 
-        self.fields["birth_weight_lb"].label = (
+        self.fields["birth_weight_lb"].label = mark_safe(
             _("Birth weight") + '<span class="asteriskField">*</span>'
         )
-        self.fields["birth_weight_kg"].label = (
+        self.fields["birth_weight_kg"].label = mark_safe(
             _("Birth weight") + '<span class="asteriskField">*</span>'
         )
 
         self.fields["form_filler"].required = True
         self.fields["birth_order"].required = True
 
+        for visible in self.fields:
+            self.fields[visible].widget.attrs['class'] = 'form-control' 
+            
+        
         # Whether child was a part of a multiple birth (twins, triplets, etc.)
         self.fields["multi_birth_boolean"].field = forms.TypedChoiceField
         self.fields["multi_birth_boolean"].choices = YESNONA_CHOICES
@@ -561,9 +566,10 @@ class BackgroundForm(BetterModelForm):
                         for field in fieldset["fields"]:
                             if "field" in field:
                                 selected_fields.append(field["field"])
+                                self.fields[field["field"]].widget.attrs['class'] = 'form-control'
                             if "widget_type" in field:
                                 if field["widget_type"] == "Select":
-                                    self.fields[field["field"]].widget = forms.Select()
+                                    self.fields[field["field"]].widget = forms.Select(attrs={'class': 'form-control'})
                                 if field["widget_type"] == "CheckboxSelectMultiple":
                                     self.fields[
                                         field["field"]
@@ -594,14 +600,14 @@ class BackgroundForm(BetterModelForm):
                                 fields.append(HTML(field["html"]))
                             if "divs" in field:
                                 fields.append(
-                                    Field(field["field"], css_class="enabler")
+                                    Field(field["field"], css_class="form-control enabler")
                                 )
                                 for div in field["divs"]:
                                     fields.append(
                                         Div(
                                             Field(div["field"], css_class=div["css"]),
                                             *div["div"],
-                                            css_class="dependent"
+                                            css_class="form-control dependent"
                                         )
                                     )
                                     selected_fields.append(div["field"])
@@ -622,9 +628,9 @@ class BackgroundForm(BetterModelForm):
                                         selected_fields.append(item)
                             elif "div" in field:
                                 fields.append(
-                                    Field(field["field"], css_class="enabler")
+                                    Field(field["field"], css_class="form-control enabler")
                                 )
-                                fields.append(Div(*field["div"], css_class="dependent"))
+                                fields.append(Div(*field["div"], css_class="form-control dependent"))
                                 for f in field["div"]:
                                     selected_fields.append(f)
                             else:
@@ -750,21 +756,25 @@ class BackgroundForm(BetterModelForm):
             if "annual_income" in selected_fields:
                 if len(self.fields["annual_income"].widget.choices) < 1:
                     self.fields["annual_income"].widget.choices = INCOME_CHOICES
-
+                
         # otherwise use the standard format
         else:
             self.fields["birth_weight_lb"].widget = forms.Select()
             self.fields["birth_weight_lb"].widget.choices = BIRTH_WEIGHT_LB_CHOICES
             self.fields["birth_weight_kg"].widget = forms.Select()
             self.fields["birth_weight_kg"].widget.choices = BIRTH_WEIGHT_KG_CHOICES
+
+            self.fields["birth_weight_lb"].widget.attrs['class'] = 'form-control'
+            self.fields["birth_weight_kg"].widget.attrs['class'] = 'form-control'
             self.fields["annual_income"] = forms.ChoiceField(choices=INCOME_CHOICES)
+            self.fields["annual_income"].widget.attrs["class"] = "form-control"
             self.fields["annual_income"].label = _(
                 "Estimated Annual Family Income (in USD)"
             )
             self.fields["child_ethnicity"] = forms.MultipleChoiceField(
-                choices=CHILD_ETHNICITY_CHOICES
+                choices=CHILD_ETHNICITY_CHOICES,
             )
-            self.fields["child_ethnicity"].widget = forms.CheckboxSelectMultiple()
+            self.fields["child_ethnicity"].widget = forms.CheckboxSelectMultiple(attrs={"class": "form-control"})
             self.fields["child_ethnicity"].required = False
             self.fields["child_ethnicity"].label = _(
                 "My child is (check all that apply):"
@@ -773,49 +783,49 @@ class BackgroundForm(BetterModelForm):
             if self.curr_context["study"].participant_source_boolean > 0:
                 basic_info_fieldset = Fieldset(
                     _("Basic Information"),
-                    Field("form_filler", css_class="enabler"),
-                    Div("form_filler_other", css_class="dependent"),
+                    Field("form_filler", css_class="form-control enabler form-control"),
+                    Div("form_filler_other", css_class="form-control dependent"),
                     "source_id",
                     "child_dob",
                     "age",
                     "sex",
-                    Field("country", css_class="enabler"),
-                    Div("zip_code", css_class="dependent"),
+                    Field("country", css_class="form-control enabler form-control"),
+                    Div("zip_code", css_class="form-control dependent"),
                     "birth_order",
-                    Field("multi_birth_boolean", css_class="enabler"),
-                    Div("multi_birth", css_class="dependent"),
+                    Field("multi_birth_boolean", css_class="form-control enabler"),
+                    Div("multi_birth", css_class="form-control dependent"),
                     self.birth_weight_field,
-                    Field("born_on_due_date", css_class="enabler"),
-                    Div("early_or_late", "due_date_diff", css_class="dependent"),
+                    Field("born_on_due_date", css_class="form-control enabler"),
+                    Div("early_or_late", "due_date_diff", css_class="form-control dependent"),
                 )
             else:
                 basic_info_fieldset = Fieldset(
                     _("Basic Information"),
-                    Field("form_filler", css_class="enabler"),
-                    Div("form_filler_other", css_class="dependent"),
+                    Field("form_filler", css_class="form-control enabler form-control"),
+                    Div("form_filler_other", css_class="form-control dependent"),
                     "child_dob",
                     "age",
                     "sex",
-                    Field("country", css_class="enabler"),
-                    Div("zip_code", css_class="dependent"),
+                    Field("country", css_class="form-control enabler form-control"),
+                    Div("zip_code", css_class="form-control dependent"),
                     "birth_order",
-                    Field("multi_birth_boolean", css_class="enabler"),
-                    Div("multi_birth", css_class="dependent"),
+                    Field("multi_birth_boolean", css_class="form-control enabler form-control"),
+                    Div("multi_birth", css_class="form-control dependent"),
                     self.birth_weight_field,
-                    Field("born_on_due_date", css_class="enabler"),
-                    Div("early_or_late", "due_date_diff", css_class="dependent"),
+                    Field("born_on_due_date", css_class="form-control enabler form-control"),
+                    Div("early_or_late", "due_date_diff", css_class="form-control dependent"),
                 )
                 self.fields["source_id"].widget = forms.HiddenInput()
             self.helper.layout = Layout(
                 basic_info_fieldset,
                 Fieldset(
                     _("Family Background"),
-                    Field("primary_caregiver", css_class="enabler"),
-                    Div("primary_caregiver_other", css_class="dependent"),
+                    Field("primary_caregiver", css_class="form-control enabler form-control"),
+                    Div("primary_caregiver_other", css_class="form-control dependent"),
                     "mother_yob",
                     "mother_education",
-                    Field("secondary_caregiver", css_class="enabler"),
-                    Div("secondary_caregiver_other", css_class="dependent"),
+                    Field("secondary_caregiver", css_class="form-control enabler form-control"),
+                    Div("secondary_caregiver_other", css_class="form-control dependent"),
                     "father_yob",
                     "father_education",
                     "annual_income",
@@ -824,7 +834,7 @@ class BackgroundForm(BetterModelForm):
                     _("Child's Ethnicity"),
                     HTML(
                         "<p> "
-                        + ugettext(
+                        + gettext(
                             "The following information is being collected for the sole purpose of reporting to our grant-funding institute, i.e.,  NIH (National Institute of Health).  NIH requires this information to ensure the soundness and inclusiveness of our research. Your cooperation is appreciated, but optional."
                         )
                         + " </p>"
@@ -834,36 +844,36 @@ class BackgroundForm(BetterModelForm):
                 ),
                 Fieldset(
                     _("Caregiver Information"),
-                    Field("caregiver_info", css_class="enabler"),
-                    Div("caregiver_other", css_class="dependent"),
+                    Field("caregiver_info", css_class="form-control enabler form-control"),
+                    Div("caregiver_other", css_class="form-control dependent"),
                 ),
                 Fieldset(
                     _("Language Exposure"),
-                    Field("other_languages_boolean", css_class="enabler"),
+                    Field("other_languages_boolean", css_class="form-control enabler form-control"),
                     Div(
-                        Field("other_languages", css_class="make-selectize"),
+                        Field("other_languages", css_class="form-control make-selectize"),
                         "language_from",
                         "language_days_per_week",
                         "language_hours_per_day",
-                        css_class="dependent",
+                        css_class="form-control dependent",
                     ),
                 ),
                 Fieldset(
                     _("Health"),
-                    Field("ear_infections_boolean", css_class="enabler"),
-                    Div("ear_infections", css_class="dependent"),
-                    Field("hearing_loss_boolean", css_class="enabler"),
-                    Div("hearing_loss", css_class="dependent"),
-                    Field("vision_problems_boolean", css_class="enabler"),
-                    Div("vision_problems", css_class="dependent"),
-                    Field("illnesses_boolean", css_class="enabler"),
-                    Div("illnesses", css_class="dependent"),
-                    Field("services_boolean", css_class="enabler"),
-                    Div("services", css_class="dependent"),
-                    Field("worried_boolean", css_class="enabler"),
-                    Div("worried", css_class="dependent"),
-                    Field("learning_disability_boolean", css_class="enabler"),
-                    Div("learning_disability", css_class="dependent"),
+                    Field("ear_infections_boolean", css_class="form-control enabler"),
+                    Div("ear_infections", css_class="form-control dependent"),
+                    Field("hearing_loss_boolean", css_class="form-control enabler"),
+                    Div("hearing_loss", css_class="form-control dependent"),
+                    Field("vision_problems_boolean", css_class="form-control enabler"),
+                    Div("vision_problems", css_class="form-control dependent"),
+                    Field("illnesses_boolean", css_class="form-control enabler"),
+                    Div("illnesses", css_class="form-control dependent"),
+                    Field("services_boolean", css_class="form-control enabler"),
+                    Div("services", css_class="form-control dependent"),
+                    Field("worried_boolean", css_class="form-control enabler"),
+                    Div("worried", css_class="form-control dependent"),
+                    Field("learning_disability_boolean", css_class="form-control enabler"),
+                    Div("learning_disability", css_class="form-control dependent"),
                 ),
             )
 

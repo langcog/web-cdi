@@ -69,17 +69,12 @@ INSTALLED_APPS = (
     "django.contrib.humanize",
     "cdi_forms",
     'api',
-    #'cdi_forms.cat_forms',
     "crispy_forms",
-    "django_tables2",
     "bootstrap4",
     "bootstrap3",
+    "django_tables2",
     "form_utils",
-    # "registration",
-    # "supplementtut",
     "django.contrib.sites",
-    #'axes',
-    #'csvimport.app.CSVImportConf',
     "health_check",
     "health_check.db",
     "health_check.cache",
@@ -157,7 +152,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 STATIC_URL = "/static/"
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap3"
+
 CRISPY_TEMPLATE_PACK = "bootstrap3"
+
 
 DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap-responsive.html"
 

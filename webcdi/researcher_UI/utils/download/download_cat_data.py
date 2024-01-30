@@ -149,9 +149,7 @@ def download_cat_data(request, study_obj, administrations=None, adjusted=False):
     if study_obj.instrument.language in ["French French"] and study_obj.instrument.form in [
         "CAT",
     ]:
-        combined_data = combined_data.append(
-            {"study_name": "NOTE:  The Ns for the by sex norms are small (some are <5)."}, ignore_index=True
-        )
+        pd.concat([combined_data, pd.DataFrame([ {"study_name": "NOTE:  The Ns for the by sex norms are small (some are <5)."}])], ignore_index=True)
 
     # Turn pandas dataframe into a CSV
     combined_data.to_csv(response, encoding="utf-8", index=False)

@@ -24,14 +24,13 @@ __all__ = (
 from django.dispatch import Signal
 
 # A new user has registered
-user_registered = Signal(providing_args=['user', 'profile', 'request'])
+user_registered = Signal()
 
 # A user has been accepted his/her registration
-user_accepted = Signal(providing_args=['user', 'profile', 'request'])
+user_accepted = Signal()
 
 # A user has been rejected his/her registration
-user_rejected = Signal(providing_args=['user', 'profile', 'request'])
+user_rejected = Signal()
 
 # A user has activated his/her account.
-user_activated = Signal(providing_args=['user', 'password', 'is_generated',
-                                        'request'])
+user_activated = Signal()
