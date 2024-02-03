@@ -89,7 +89,7 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE = [
-    #'django.middleware.common.BrokenLinkEmailsMiddleware',
+    "webcdi.middleware.PrimaryHostRedirectMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -97,15 +97,11 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
-    #'axes.middleware.AxesMiddleware',
     "webcdi.middleware.LoginRequiredMiddleware",
     "webcdi.middleware.AdminLocaleMiddleware",
 ]
 
 AUTHENTICATION_BACKENDS = [
-    # AxesBackend should be the first backend in the AUTHENTICATION_BACKENDS list.
-    #'axes.backends.AxesBackend',
-    # Django ModelBackend is the default authentication backend.
     "django.contrib.auth.backends.ModelBackend"
 ]
 

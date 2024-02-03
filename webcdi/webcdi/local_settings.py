@@ -134,3 +134,5 @@ DEFAULT_RECIPIENT_EMAIL = EMAIL_HOST_USER = os.environ.get(
 )
 
 BROOKES_EMAIL = os.environ.get("BROOKES_EMAIL", "hjsmehta@gmail.com")
+
+PRIMARY_HOST = os.environ.get('PRIMARY_HOST', None)
