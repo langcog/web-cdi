@@ -1,9 +1,0 @@
-<VirtualHost *:80>
-ServerName www.webcdi-dev.stanford.edu
-Redirect 301 / http://www.testing.webcdi.org/
-</VirtualHost>
-
-<VirtualHost *:443>
-ServerName www.webcdi-dev.stanford.edu
-Redirect 301 / http://www.testing.webcdi.org/
-</VirtualHost>
