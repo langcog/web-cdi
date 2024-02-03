@@ -277,11 +277,6 @@ LANGUAGE_TO_COUNTRY_DICT = {
 
 COUNTRIES_FIRST = ["US", "CA", "NL", "IL", "FR", "CH", "BE", "LU"]
 
-
-# CSRF_COOKIE_SECURE=False
-# CSRF_TRUSTED_ORIGINS = ('.elasticbeanstalk.com',)
-
-
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
