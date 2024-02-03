@@ -89,7 +89,7 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE = [
-    "webcdi.middleware.PrimaryHostRedirectMiddleware",
+    #"webcdi.middleware.PrimaryHostRedirectMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
