@@ -180,14 +180,19 @@ class AddStudyForm(BetterModelForm):
             }
         ),
     )
+    gift_card_provider = forms.ChoiceField(
+        choices=payment_code.PAYMENT_TYPE_CHOICES,
+        help_text=("Selecting a card provider will check for valid codes.  Selecting 'Unspecified' will allow any alphanumeric (plus dash '-') combination.")
+    )
     gift_codes = forms.CharField(
         widget=forms.Textarea(
             attrs={
-                "placeholder": "Paste Amazon gift card codes here. Can be separated by spaces, commas, or new lines."
+                "placeholder": "Paste gift card codes here. Can be separated by spaces, commas, or new lines."
             }
         ),
         required=False,
         label="Gift Card Codes",
+        help_text="Paste gift card codes here. Can be separated by spaces, commas, or new lines."
     )  # Can add a list of gift card codes (separated by new lines, commas, or spaces) to the PaymentCode model that are given out to participants upon completion of current study.
     gift_amount = forms.CharField(
         max_length=7,
@@ -259,9 +264,6 @@ class AddStudyForm(BetterModelForm):
         for field in self.fields:
             if not isinstance(self.fields[field].widget, forms.widgets.CheckboxInput):
                 self.fields[field].widget.attrs['class'] = 'form-control'
-                print(f'Widget for {field} is {type(self.fields[field].widget)}') 
-                if isinstance(self.fields[field].widget, forms.widgets.Select):
-                    print(f'Widget attrs for {field} is {self.fields[field].widget.attrs}') 
 
 
     def study_options_fieldset(self):
@@ -274,6 +276,8 @@ class AddStudyForm(BetterModelForm):
             Field("birth_weight_units"),
             Field("timing"),
             Field("allow_payment", css_class="css_enabler"),
+
+            Div(Field("gift_card_provider", css_class="allow_payment collapse form-control")),
             Div(Field("gift_codes"), css_class="allow_payment collapse"),
             Div(Field("gift_amount"), css_class="allow_payment collapse"),
             Field("anon_collection"),

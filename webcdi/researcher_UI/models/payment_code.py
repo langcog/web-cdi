@@ -14,8 +14,13 @@ class payment_code(models.Model):
     assignment_date = models.DateTimeField(
         verbose_name="Date code was given to participant", null=True
     )  # Date that payment code was given to a participant
+    PAYMENT_TYPE_CHOICES = [
+        ('Unspecified', 'Unspecified'),
+        ('Amazon', 'Amazon')
+    ]
     payment_type = models.CharField(
-        max_length=50
+        max_length=50,
+        choices=PAYMENT_TYPE_CHOICES
     )  # Type of gift card code. Currently only 'Amazon' is allowed
     gift_amount = models.DecimalField(
         max_digits=6, decimal_places=2, verbose_name="Monetary value"

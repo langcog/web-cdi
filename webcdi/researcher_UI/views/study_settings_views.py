@@ -69,7 +69,7 @@ class UpdateStudyView(LoginRequiredMixin, ReseacherOwnsStudyMixin, UpdateView):
         self.object.save()
 
         res = raw_gift_code_fun(
-            self.request, raw_gift_amount, self.object, new_study_name, raw_gift_codes
+            self.request, form.cleaned_data.get("gift_card_provider"), raw_gift_amount, self.object, new_study_name, raw_gift_codes
         )
         
         return super().form_valid(form)

@@ -8,15 +8,18 @@ from researcher_UI.models import payment_code
 
 logger = logging.getLogger("debug")
 
+def get_gift_card_regex(gift_type):
+    if gift_type == "Amazon":
+        return re.compile(r"^[a-zA-Z0-9]{4}-[a-zA-Z0-9]{6}-[a-zA-Z0-9]{4}$")
+    return re.compile(r"^[A-Za-z0-9-]+$")
 
-def raw_gift_code_fun(request, raw_gift_amount, study_obj, new_study_name, raw_gift_codes):
-    all_new_codes = None
+def raw_gift_code_fun(request, gift_type, raw_gift_amount, study_obj, new_study_name, raw_gift_codes):
     amount_regex = None
-    data = {}
+    
     if raw_gift_codes:
         gift_codes = re.split("[,;\s\t\n]+", raw_gift_codes)
-        gift_regex = re.compile(r"^[a-zA-Z0-9]{4}-[a-zA-Z0-9]{6}-[a-zA-Z0-9]{4}$")
-        gift_type = "Amazon"
+        gift_type = gift_type
+        gift_regex = get_gift_card_regex(gift_type)
 
         # Get valid codes
         valid_gift_codes = []
@@ -82,8 +85,5 @@ def raw_gift_code_fun(request, raw_gift_amount, study_obj, new_study_name, raw_g
                     f"The amount {raw_gift_amount} is invalid"
                 ),
             )
-
-        if not used_codes:
-            all_new_codes = True
 
     return
