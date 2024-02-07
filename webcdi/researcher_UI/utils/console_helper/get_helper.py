@@ -1,5 +1,5 @@
 import os
-from researcher_UI.models import Researcher, Study, payment_code, Administration
+from researcher_UI.models import Study, payment_code, Administration
 from django.conf import settings
 from researcher_UI.forms import AddStudyForm
 from researcher_UI.tables import StudyAdministrationTable

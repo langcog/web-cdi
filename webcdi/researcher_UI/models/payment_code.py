@@ -15,7 +15,6 @@ class payment_code(models.Model):
         verbose_name="Date code was given to participant", null=True
     )  # Date that payment code was given to a participant
     PAYMENT_TYPE_CHOICES = [
-        ('Unspecified', 'Unspecified'),
         ('Amazon', 'Amazon'),
         ('Tango', 'Tango'),
     ]

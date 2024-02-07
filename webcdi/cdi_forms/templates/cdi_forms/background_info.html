@@ -37,10 +37,16 @@
                 <li> {% trans "Feel free to ask others (e.g. other family members, nanny, child care providers) to help you fill out this form." %} </li>
                 <li> {% trans "Please read all of the instructions on the inventory carefully, and make sure you complete all of the sections." %} </li>
                 <!-- Added optional bullet point describing compensation post-submission. Only appears if participant will be compensated. -->
-                {% if gift_amount %}
-                    <li> 
-                        {% blocktrans with gift_amount=gift_amount %}You will receive a ${{ gift_amount }} Amazon.com gift card after you complete the form. As we are a research lab with limited funds, we ask that you only complete this questionnaire once.{% endblocktrans %}
-                    </li>
+                {% if allow_payment %}
+                    {% if payment_code %}
+                        <li> 
+                            You will receive a ${{ payment_code.gift_amount }} {{ payment_code.payment_type }} gift card after you complete the form. As we are a research lab with limited funds, we ask that you only complete this questionnaire once.
+                        </li>
+                    {% else %}
+                        <li>
+                            We have no more gift cards available.  You can still complete the survey but you will not receive a gift card upon completion.
+                        </li>
+                    {% endif %}
                 {% endif %}
             {% endif %}
         </ul>

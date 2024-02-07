@@ -175,12 +175,12 @@
                 <br>
                     {% if gift_code == 'ran out' %}
                         <h4>
-                            {% blocktrans with contact_url=contact_url %}We're sorry but it looks like we have run out of Amazon.com Gift Cards! Please <a href="{{ contact_url }}" target="_blank">reach out to us</a> and we will quickly fix this issue.{% endblocktrans %}
+                            {% blocktrans with contact_url=contact_url %}We're sorry but it looks like we have run out of {{ payment_type }} Gift Cards! Please <a href="{{ contact_url }}" target="_blank">reach out to us</a> and we will quickly fix this issue.{% endblocktrans %}
                         </h4>
                     {% else %}
                         <h4>
                         <p>
-                            {% blocktrans %}Thank you for participating in our Web-CDI project! It is our pleasure to send you this Amazon.com Gift Card that can be redeemed towards millions of items at <a href="http://www.amazon.com" target="_blank">www.amazon.com</a>. You may want to print this screen for easy reference later--you’ll need the gift card claim code below.{% endblocktrans %}
+                            {% blocktrans %}Thank you for participating in our Web-CDI project! It is our pleasure to send you this {{ payment_type }} Gift Card that can be redeemed towards millions of items at <a href="https://{{ payment_type_url }}" target="_blank">{{ payment_type_url }}</a>. You may want to print this screen for easy reference later--you’ll need the gift card claim code below.{% endblocktrans %}
                         </p>
 
                         <p>
@@ -189,7 +189,7 @@
                         </p>
 
                         <p>
-                            {% blocktrans with redeem_url=redeem_url legal_url=legal_url %}To redeem your gift card, visit <a href="{{ redeem_url }}" target="_blank">www.amazon.com/redeem</a>. Restrictions apply, see <a href="{{ legal_url }}" target="_blank">www.amazon.com/gc-legal</a>.{% endblocktrans %}
+                            {% blocktrans with redeem_url=redeem_url legal_url=legal_url %}To redeem your gift card, visit <a href="{{ redeem_url }}" target="_blank">{{ redeem_url }}</a>. Restrictions apply, see <a href="{{ legal_url }}" target="_blank">{{ legal_url }}</a>.{% endblocktrans %}
                  
                         </p>
                         </h4>

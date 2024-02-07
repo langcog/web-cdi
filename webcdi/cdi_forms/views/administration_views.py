@@ -55,10 +55,7 @@ class AdministrationSummaryView(DetailView):
                         .replace("{{source_id}}", str(self.object.backgroundinfo.source_id))
                         .replace("{{event_id}}", str(self.object.backgroundinfo.event_id))
                     )
-                print(f"REDIRECT {data}")
                 r = requests.post(redirect_url, data=data)
-                print("HTTP Status: " + str(r.status_code))
-                print(r.content)
                 ctx["redirect_url"] = str(r.content, "UTF-8")
         # Get form from database
         background_form = prefilled_background_form(self.object)
@@ -96,8 +93,17 @@ class AdministrationSummaryView(DetailView):
                 gift_card = payment_code.objects.get(hash_id=self.object.url_hash)
                 ctx["gift_code"] = gift_card.gift_code
                 ctx["gift_amount"] = "${:,.2f}".format(gift_card.gift_amount)
-                ctx["redeem_url"] = url_obj["redeem_url"]
-                ctx["legal_url"] = url_obj["legal_url"]
+               
+                ctx['payment_type'] = gift_card.payment_type
+                if gift_card.payment_type == 'Amazon':
+                    ctx['payment_type_url'] = 'www.amazon.com'
+                    ctx["redeem_url"] = url_obj["redeem_url"]
+                    ctx["legal_url"] = url_obj["legal_url"]
+                if gift_card.payment_type == 'Tango':
+                    ctx['payment_type_url'] = 'Tango URL'
+                    ctx["redeem_url"] = 'Tango Redeem URL'
+                    ctx["legal_url"] = 'Tango Legal URL'
+                    
             else:
                 ctx["gift_code"] = "ran out"
                 ctx["gift_amount"] = "ran out"

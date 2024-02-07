@@ -181,8 +181,7 @@ class AddStudyForm(BetterModelForm):
         ),
     )
     gift_card_provider = forms.ChoiceField(
-        choices=payment_code.PAYMENT_TYPE_CHOICES,
-        help_text=("Selecting a card provider will check for valid codes.  Selecting 'Unspecified' will allow any alphanumeric (plus dash '-') combination.")
+        choices=payment_code.PAYMENT_TYPE_CHOICES
     )
     gift_codes = forms.CharField(
         widget=forms.Textarea(
@@ -213,8 +212,6 @@ class AddStudyForm(BetterModelForm):
         self.helper = FormHelper()
         self.helper.form_id = "add-study"
         self.helper.form_class = "form-horizontal"
-        # self.helper.template = PROJECT_ROOT + '/../cdi_forms/templates/bootstrap3/whole_uni_form.html'
-        # self.helper.template = 'bootstrap4/whole_uni_form.html'
         self.helper.label_class = "col-3"
         self.helper.field_class = "col-9"
         self.helper.form_method = "post"
@@ -235,22 +232,6 @@ class AddStudyForm(BetterModelForm):
                 )
             except:
                 pass
-
-            """
-            if self.instance.demographic:
-                self.fields["demographic"] = forms.ModelChoiceField(
-                    queryset=Demographic.objects.filter(
-                        pk=self.instance.demographic.pk
-                    ),
-                    empty_label=None,
-                )
-            else:
-                self.fields["demographic"] = forms.ModelChoiceField(
-                    queryset=None, empty_label="Default"
-                )
-            """
-
-        # self.helper.form_action = reverse("researcher_ui:add_study")
 
         self.helper.layout = Layout(
             self.study_options_fieldset(),
