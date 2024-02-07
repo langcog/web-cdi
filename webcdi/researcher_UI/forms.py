@@ -181,7 +181,7 @@ class AddStudyForm(BetterModelForm):
         ),
     )
     gift_card_provider = forms.ChoiceField(
-        choices=payment_code.PAYMENT_TYPE_CHOICES
+        choices=PaymentCode.PAYMENT_TYPE_CHOICES
     )
     gift_codes = forms.CharField(
         widget=forms.Textarea(

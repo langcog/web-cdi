@@ -19,7 +19,7 @@ from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView, UpdateView
-from researcher_UI.models import Administration, Study, payment_code
+from researcher_UI.models import Administration, Study, PaymentCode
 from researcher_UI.utils import max_subject_id
 
 # Get an instance of a logger
@@ -140,7 +140,7 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
             try:
 
                 data["payment_code"] = (
-                    payment_code.objects.filter(
+                    PaymentCode.objects.filter(
                         study=self.administration_instance.study
                     )
                     .first()
@@ -471,7 +471,7 @@ class CreateBackgroundInfoView(CreateView):
         if data["allow_payment"] and self.bypass is None:
             try:
                 data["payment_code"] = (
-                    payment_code.objects.filter(study=self.study)
+                    PaymentCode.objects.filter(study=self.study)
                     .first()
                 )
             except:

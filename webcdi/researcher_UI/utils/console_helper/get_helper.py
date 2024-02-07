@@ -1,5 +1,5 @@
 import os
-from researcher_UI.models import Study, payment_code, Administration
+from researcher_UI.models import Study, PaymentCode, Administration
 from django.conf import settings
 from researcher_UI.forms import AddStudyForm
 from researcher_UI.tables import StudyAdministrationTable
@@ -59,7 +59,7 @@ def get_helper(request, study_name, num_per_page):
             .count()
         )
         context["allow_payment"] = current_study.allow_payment
-        context["available_giftcards"] = payment_code.objects.filter(
+        context["available_giftcards"] = PaymentCode.objects.filter(
             hash_id__isnull=True, study=current_study
         ).count()
 

@@ -1,7 +1,7 @@
 from django.db import models
 
 # Model for stored gift card codes
-class payment_code(models.Model):
+class PaymentCode(models.Model):
     study = models.ForeignKey(
         "study", on_delete=models.CASCADE
     )  # Associated study name

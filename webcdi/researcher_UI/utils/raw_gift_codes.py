@@ -4,7 +4,7 @@ from decimal import Decimal
 
 from django.utils.safestring import mark_safe
 from django.contrib import messages
-from researcher_UI.models import payment_code
+from researcher_UI.models import PaymentCode
 
 logger = logging.getLogger("debug")
 
@@ -50,11 +50,11 @@ def raw_gift_code_fun(request, gift_type, raw_gift_amount, study_obj, new_study_
             used_codes = []
             new_codes = []
             for gift_code in valid_gift_codes:
-                if not payment_code.objects.filter(
+                if not PaymentCode.objects.filter(
                     payment_type=gift_type, gift_code=gift_code
                 ).exists():
                     new_payment_codes.append(
-                        payment_code(
+                        PaymentCode(
                             study=study_obj,
                             payment_type=gift_type,
                             gift_code=gift_code,
@@ -64,7 +64,7 @@ def raw_gift_code_fun(request, gift_type, raw_gift_amount, study_obj, new_study_
                     new_codes.append(gift_code)
                 else:
                     used_codes.append(gift_code)
-            payment_code.objects.bulk_create(new_payment_codes)
+            PaymentCode.objects.bulk_create(new_payment_codes)
 
             if len(used_codes) > 0:
                 messages.warning(

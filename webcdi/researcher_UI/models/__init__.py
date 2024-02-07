@@ -8,5 +8,5 @@ from .demographic import Demographic  # noqa
 from .instrument_score import InstrumentScore  # noqa
 from .ip_address import ip_address  # noqa
 from .measure import Measure  # noqa
-from .payment_code import payment_code  # noqa
+from .payment_code import PaymentCode  # noqa
 from .summary_data import SummaryData  # ßnoqa

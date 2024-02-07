@@ -27,7 +27,7 @@ from researcher_UI.models import (
     Administration,
     administration_data,
     ip_address,
-    payment_code,
+    PaymentCode,
 )
 
 logger = logging.getLogger("debug")
@@ -89,8 +89,8 @@ class AdministrationSummaryView(DetailView):
                 },
             }
             url_obj = amazon_urls[self.object.study.instrument.language]
-            if payment_code.objects.filter(hash_id=self.object.url_hash).exists():
-                gift_card = payment_code.objects.get(hash_id=self.object.url_hash)
+            if PaymentCode.objects.filter(hash_id=self.object.url_hash).exists():
+                gift_card = PaymentCode.objects.get(hash_id=self.object.url_hash)
                 ctx["gift_code"] = gift_card.gift_code
                 ctx["gift_amount"] = "${:,.2f}".format(gift_card.gift_amount)
                
@@ -307,7 +307,7 @@ class AdministrationUpdateView(UpdateView):
                 if (
                     self.object.study.confirm_completion and result["success"]
                 ) or not self.object.study.confirm_completion:
-                    if not payment_code.objects.filter(
+                    if not PaymentCode.objects.filter(
                         hash_id=self.object.url_hash
                     ).exists():
                         if (
@@ -315,7 +315,7 @@ class AdministrationUpdateView(UpdateView):
                         ):  # for wordful study: if its second admin, give 25 bucks else 5
                             if self.object.repeat_num == 2:
                                 # if this subject already has claimed $25: give them $5 this time
-                                if payment_code.objects.filter(
+                                if PaymentCode.objects.filter(
                                     hash_id=self.object.url_hash,
                                     gift_amount=25.0,
                                 ).exists():
@@ -324,13 +324,13 @@ class AdministrationUpdateView(UpdateView):
                                     gift_amount_search = 25.0
                             else:
                                 gift_amount_search = 5.0
-                            given_code = payment_code.objects.filter(
+                            given_code = PaymentCode.objects.filter(
                                 hash_id__isnull=True,
                                 study=self.object.study,
                                 gift_amount=gift_amount_search,
                             ).first()
                         else:
-                            given_code = payment_code.objects.filter(
+                            given_code = PaymentCode.objects.filter(
                                 hash_id__isnull=True,
                                 study=self.object.study,
                             ).first()
