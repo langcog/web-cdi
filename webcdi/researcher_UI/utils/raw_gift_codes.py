@@ -11,6 +11,8 @@ logger = logging.getLogger("debug")
 def get_gift_card_regex(gift_type):
     if gift_type == "Amazon":
         return re.compile(r"^[a-zA-Z0-9]{4}-[a-zA-Z0-9]{6}-[a-zA-Z0-9]{4}$")
+    if gift_type == 'Tango':
+         return re.compile(r"^[A-Z]{2}[0-9]{6}-[0-9]{7}-[0-9]{2}-[0-9]{1}$")
     return re.compile(r"^[A-Za-z0-9-]+$")
 
 def raw_gift_code_fun(request, gift_type, raw_gift_amount, study_obj, new_study_name, raw_gift_codes):

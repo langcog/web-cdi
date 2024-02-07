@@ -16,7 +16,8 @@ class payment_code(models.Model):
     )  # Date that payment code was given to a participant
     PAYMENT_TYPE_CHOICES = [
         ('Unspecified', 'Unspecified'),
-        ('Amazon', 'Amazon')
+        ('Amazon', 'Amazon'),
+        ('Tango', 'Tango'),
     ]
     payment_type = models.CharField(
         max_length=50,
