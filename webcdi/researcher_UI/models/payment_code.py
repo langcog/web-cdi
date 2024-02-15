@@ -25,7 +25,7 @@ class PaymentCode(models.Model):
     gift_amount = models.DecimalField(
         max_digits=6, decimal_places=2, verbose_name="Monetary value"
     )  # Monetary amount associated with gift card code
-    gift_code = models.CharField(max_length=50)  # Gift card code
+    gift_code = models.CharField(max_length=151)  # Gift card code
 
     class Meta:
         unique_together = (

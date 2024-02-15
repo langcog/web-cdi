@@ -171,27 +171,33 @@
                     {% blocktrans %}Thank you for taking the time to complete the MacArthur-Bates Communicative Development Inventory (CDI). With the help of parents and caregivers like you, we are working to learn more about the way that children’s language develops, and how that development varies across individual children and cultures. Remember that the CDI lists many different words that are used by many different children. Don’t worry if your child only knows a few of them right now. Below are some insights into your child’s developing vocabulary, based on our research. This summary is not a clinical evaluation. If you have any concerns about your child’s development, we recommend that you talk with your child’s physician. If you enjoyed our assessment, you can learn more about the CDI <a href="http://mb-cdi.stanford.edu/" target="_blank">here</a>. We appreciate your contribution!{% endblocktrans %}
                 </h4>
 
-                {% if gift_code %}
+                {% if gift_card %}
                 <br>
-                    {% if gift_code == 'ran out' %}
+                    {% if gift_card == 'ran out' %}
                         <h4>
-                            {% blocktrans with contact_url=contact_url %}We're sorry but it looks like we have run out of {{ payment_type }} Gift Cards! Please <a href="{{ contact_url }}" target="_blank">reach out to us</a> and we will quickly fix this issue.{% endblocktrans %}
+                            {% blocktrans with contact_url=contact_url email=object.study.researcher.email %}We're sorry but it looks like we have run out of Gift Cards. Please <a href="mailto:{{ email }}" target="_blank">reach out to us</a> and we will quickly fix this issue.{% endblocktrans %}
                         </h4>
                     {% else %}
                         <h4>
-                        <p>
-                            {% blocktrans %}Thank you for participating in our Web-CDI project! It is our pleasure to send you this {{ payment_type }} Gift Card that can be redeemed towards millions of items at <a href="https://{{ payment_type_url }}" target="_blank">{{ payment_type_url }}</a>. You may want to print this screen for easy reference later--you’ll need the gift card claim code below.{% endblocktrans %}
-                        </p>
-
-                        <p>
-                            {% trans "Gift Card Amount" %}: {{ gift_amount }}  <br>
-                            {% trans "Claim Code" %}: {{ gift_code }}
-                        </p>
-
-                        <p>
-                            {% blocktrans with redeem_url=redeem_url legal_url=legal_url %}To redeem your gift card, visit <a href="{{ redeem_url }}" target="_blank">{{ redeem_url }}</a>. Restrictions apply, see <a href="{{ legal_url }}" target="_blank">{{ legal_url }}</a>.{% endblocktrans %}
-                 
-                        </p>
+                            {% if gift_card.payment_type == 'Amazon' %}
+                                <p>
+                                    {% blocktrans %}Thank you for participating in our Web-CDI project! It is our pleasure to send you this {{ gift_card.payment_type }} Gift Card that can be redeemed towards millions of items at <a href="https://{{ payment_type_url }}" target="_blank">{{ payment_type_url }}</a>. You may want to print this screen for easy reference later--you’ll need the gift card claim code below.{% endblocktrans %}
+                                </p>
+                                <p>
+                                    {% trans "Gift Card Amount" %}: {{ gift_card.gift_amount }}  <br>
+                                    {% trans "Claim Code" %}: {{ gift_card.gift_code }}
+                                </p>
+                                <p>
+                                    {% blocktrans with redeem_url=redeem_url legal_url=legal_url %}To redeem your gift card, visit <a href="{{ redeem_url }}" target="_blank">{{ redeem_url }}</a>. Restrictions apply, see <a href="{{ legal_url }}" target="_blank">{{ legal_url }}</a>.{% endblocktrans %}
+                                </p>
+                            {% elif gift_card.payment_type == 'Tango' %}
+                                <p>
+                                    {% trans "Thank you for participating in our Web-CDI project! It is our pleasure to send you this " %}{{ gift_card.payment_type }}{% trans " Gift Card that can be redeemed towards millions of items at " %}<a href="https://{{ gift_card.gift_code }}" target="_blank">{{ gift_card.gift_code }}</a>. {% trans "You may want to print this screen for easy reference later--you’ll need the gift card claim code below." %}
+                                </p>
+                                <p>
+                                    {% trans "To redeem your gift card, visit " %}<a href="https://{{ gift_card.gift_code }}" target="_blank">{{ gift_card.gift_code }}</a>.
+                                </p>
+                            {% endif %}
                         </h4>
                  
                     {% endif %}

@@ -141,8 +141,8 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
 
                 data["payment_code"] = (
                     PaymentCode.objects.filter(
-                        study=self.administration_instance.study
-                    )
+                        study=self.administration_instance.study,
+                        hash_id__isnull=True                    )
                     .first()
                 )
             except:
@@ -471,7 +471,9 @@ class CreateBackgroundInfoView(CreateView):
         if data["allow_payment"] and self.bypass is None:
             try:
                 data["payment_code"] = (
-                    PaymentCode.objects.filter(study=self.study)
+                    PaymentCode.objects.filter(
+                        study=self.study,
+                        hash_id__isnull=True)
                     .first()
                 )
             except:

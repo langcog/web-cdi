@@ -91,20 +91,23 @@ class AdministrationSummaryView(DetailView):
             url_obj = amazon_urls[self.object.study.instrument.language]
             if PaymentCode.objects.filter(hash_id=self.object.url_hash).exists():
                 gift_card = PaymentCode.objects.get(hash_id=self.object.url_hash)
+                
+                ctx['gift_card'] = gift_card
                 ctx["gift_code"] = gift_card.gift_code
                 ctx["gift_amount"] = "${:,.2f}".format(gift_card.gift_amount)
-               
                 ctx['payment_type'] = gift_card.payment_type
+
                 if gift_card.payment_type == 'Amazon':
                     ctx['payment_type_url'] = 'www.amazon.com'
                     ctx["redeem_url"] = url_obj["redeem_url"]
                     ctx["legal_url"] = url_obj["legal_url"]
                 if gift_card.payment_type == 'Tango':
-                    ctx['payment_type_url'] = 'Tango URL'
-                    ctx["redeem_url"] = 'Tango Redeem URL'
-                    ctx["legal_url"] = 'Tango Legal URL'
+                    ctx['payment_type_url'] = 'www.rewardlink.io/r/1/'
+                    ctx["redeem_url"] = None
+                    ctx["legal_url"] = None
                     
             else:
+                ctx['gift_card'] = 'ran out'
                 ctx["gift_code"] = "ran out"
                 ctx["gift_amount"] = "ran out"
                 ctx["redeem_url"] = None
