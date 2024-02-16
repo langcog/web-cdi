@@ -138,4 +138,4 @@ class PaymentCodeAdmin(admin.ModelAdmin):
     get_researcher.admin_order_field = "study__researcher"
 
 
-admin.site.register(payment_code, PaymentCodeAdmin)
+admin.site.register(PaymentCode, PaymentCodeAdmin)

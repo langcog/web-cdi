@@ -19,7 +19,7 @@ from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView, UpdateView
-from researcher_UI.models import Administration, Researcher, Study, payment_code
+from researcher_UI.models import Administration, Study, PaymentCode
 from researcher_UI.utils import max_subject_id
 
 # Get an instance of a logger
@@ -138,15 +138,15 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
 
         if data["allow_payment"] and self.administration_instance.bypass is None:
             try:
-                data["gift_amount"] = (
-                    payment_code.objects.filter(
-                        study=self.administration_instance.study
-                    )
-                    .values_list("gift_amount", flat=True)
+
+                data["payment_code"] = (
+                    PaymentCode.objects.filter(
+                        study=self.administration_instance.study,
+                        hash_id__isnull=True                    )
                     .first()
                 )
             except:
-                data["gift_amount"] = None
+                data["payment_code"] = None
         study_name = self.administration_instance.study.name
         study_group = self.administration_instance.study.study_group
         if study_group:
@@ -470,13 +470,14 @@ class CreateBackgroundInfoView(CreateView):
 
         if data["allow_payment"] and self.bypass is None:
             try:
-                data["gift_amount"] = (
-                    payment_code.objects.filter(study=self.study)
-                    .values_list("gift_amount", flat=True)
+                data["payment_code"] = (
+                    PaymentCode.objects.filter(
+                        study=self.study,
+                        hash_id__isnull=True)
                     .first()
                 )
             except:
-                data["gift_amount"] = None
+                data["payment_code"] = None
         study_name = self.study.name
         study_group = self.study.study_group
         if study_group:
