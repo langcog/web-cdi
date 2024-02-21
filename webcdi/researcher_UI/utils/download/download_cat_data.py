@@ -4,7 +4,7 @@ from cdi_forms.models import BackgroundInfo
 from django.http import HttpResponse
 from researcher_UI.models import Benchmark, Administration
 from researcher_UI.utils.format_admin import format_admin_data, format_admin_header
-
+from django.db.models import Max, Min
 
 def download_cat_data(request, study_obj, administrations=None, adjusted=False):
     response = HttpResponse(content_type="text/csv")
@@ -65,6 +65,13 @@ def download_cat_data(request, study_obj, administrations=None, adjusted=False):
         benchmarks = Benchmark.objects.filter(instrument=study_obj.instrument).order_by(
             "percentile"
         )
+        max_age = Benchmark.objects.filter(instrument=study_obj.instrument).order_by(
+            "-age"
+        ).first().age
+        min_age = Benchmark.objects.filter(instrument=study_obj.instrument).order_by(
+            "age"
+        ).first().age
+
         rows = []
         for obj in administrations:
             row = {}
@@ -78,6 +85,11 @@ def download_cat_data(request, study_obj, administrations=None, adjusted=False):
                     age = obj.backgroundinfo.age - obj.backgroundinfo.due_date_diff
                 row["adjusted age"] = age
 
+            if age > max_age:
+                age = max_age
+            if age < min_age:
+                age = min_age
+                    
             answer = next(
                 item for item in answer_rows if item["administration_id"] == obj.id
             )
