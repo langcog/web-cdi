@@ -49,6 +49,7 @@ def get_cat_benchmark(context, administration_id, data):
         age = max
     if age < min:
         age = min
+    row['benchmark_cohort_age'] = age
 
     if Benchmark.objects.filter(instrument=administration.study.instrument, age=age).exists():
         benchmarks = Benchmark.objects.filter(instrument=administration.study.instrument, age=age).order_by(

@@ -82,6 +82,7 @@ def download_cat_summary(request, study_obj, administrations=None, adjusted=Fals
                 item for item in answer_rows if item["administration_id"] == obj.id
             )
             for b in benchmarks.filter(age=age):
+                row['Benchmarking Cohort Age'] = age
                 if answer["est_theta"]:
                     if answer["est_theta"] > b.raw_score:
                         row["est_theta_percentile"] = b.percentile
