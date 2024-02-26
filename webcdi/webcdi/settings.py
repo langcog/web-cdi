@@ -197,7 +197,7 @@ LOGGING = {
         "debug": {
             "level": "DEBUG",
             "handlers": ["file", "console"],
-            "propagate": False,
+            "propagate": True,
         },
     },
 }

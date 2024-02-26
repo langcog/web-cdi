@@ -3,6 +3,8 @@ from researcher_UI.models import SummaryData, administration_data, Benchmark, Ad
 from django.db.models import Max, Min
 register = template.Library()
 
+import logging
+logger = logging.getLogger("debug")
 
 @register.simple_tag(takes_context=True)
 def get_adjusted_summary_date(context, administration_id, data):
@@ -124,6 +126,26 @@ def get_adjusted_benchmark_age(administration_id):
         age = administration.backgroundinfo.age - administration.backgroundinfo.due_date_diff
     return age
         
+@register.simple_tag(takes_context=True)
+def get_benchmark_cohort_age(context, administration_id):
+    administration = Administration.objects.get(id=int(administration_id))
+    age=administration.backgroundinfo.age
+    if 'adjusted' in context:
+        if context['adjusted']:
+            if administration.backgroundinfo.early_or_late == "early":
+                age = administration.backgroundinfo.age + administration.backgroundinfo.due_date_diff
+            elif administration.backgroundinfo.early_or_late == "late":
+                age = administration.backgroundinfo.age - administration.backgroundinfo.due_date_diff
+    res = Benchmark.objects.filter(instrument=administration.study.instrument).aggregate(Max('age'), Min('age'))
+    max = res['age__max']
+    min = res['age__min']
+    logger.debug(f'Age: {age}; Max age: {max}; Min age: {min}')
+    if age > max:
+        age = max
+    if age < min:
+        age = min
+    return age
+
 @register.filter
 def get_summary_data(administration_id, data):
     if SummaryData.objects.filter(

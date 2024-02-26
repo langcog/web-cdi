@@ -30,11 +30,19 @@
                 <td>{% trans 'Edad en meses:' %}</td>
                 <td>{{ administration.backgroundinfo.age }}</td>
             </tr>
+            {% if adjusted %}
             <tr>
                 <td></td>
                 <td></td>
-                <td>{% trans 'Edad para comparar:' %}</td>
+                <td>{% trans 'Edad ajustada:' %}</td>
                 <td>{% if adjusted %}{{ administration.id|get_adjusted_benchmark_age }}{% else %}{{ administration.backgroundinfo.age }}{% endif %}</td>
+            </tr>
+            {% endif %}
+            <tr>
+                <td></td>
+                <td></td>
+                <td>{% trans 'Edad de la cohorte de evaluación comparativa:' %}</td>
+                <td>{% get_cat_benchmark administration.id "benchmark_cohort_age" %}</td>
             </tr>
         </table>
 

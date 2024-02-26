@@ -4,7 +4,9 @@ from cdi_forms.models import BackgroundInfo
 from django.http import HttpResponse
 from researcher_UI.models import Benchmark, Administration
 from researcher_UI.utils.format_admin import format_admin_data, format_admin_header
-from django.db.models import Max, Min
+import logging
+# Get an instance of a logger
+logger = logging.getLogger("debug")
 
 def download_cat_data(request, study_obj, administrations=None, adjusted=False):
     response = HttpResponse(content_type="text/csv")
@@ -78,12 +80,15 @@ def download_cat_data(request, study_obj, administrations=None, adjusted=False):
             row["administration_id"] = obj.id
 
             age = obj.backgroundinfo.age
-            if adjusted and not obj.backgroundinfo.born_on_due_date:
-                if obj.backgroundinfo.early_or_late == "early":
-                    age = obj.backgroundinfo.age + obj.backgroundinfo.due_date_diff
-                elif obj.backgroundinfo.early_or_late == "late":
-                    age = obj.backgroundinfo.age - obj.backgroundinfo.due_date_diff
-                row["adjusted age"] = age
+            if adjusted: 
+                if not obj.backgroundinfo.born_on_due_date:
+                    if obj.backgroundinfo.early_or_late == "early":
+                        age = obj.backgroundinfo.age + obj.backgroundinfo.due_date_diff
+                    elif obj.backgroundinfo.early_or_late == "late":
+                        age = obj.backgroundinfo.age - obj.backgroundinfo.due_date_diff
+                row["Adjusted Age"] = age
+            
+                logger.debug(f'Adjusted Age is {age}')
 
             if age > max_age:
                 age = max_age

@@ -240,7 +240,7 @@ class AdministerAdministraionView(UpdateView):
             )
             if self.word['definition'] is None:
                 self.word = cdi_cat_api(
-                    f"startItem?age_mos=36&language={CAT_LANG_DICT[self.language]}"
+                    f"startItem?age_mos=30&language={CAT_LANG_DICT[self.language]}"
                 )
             logger.debug(f'self.word = {self.word}') 
         else:
