@@ -201,18 +201,28 @@ def update_summary_scores(administration_instance):
         summary.value = str(age)
         summary.save()
 
-        if age is not None and background_info.early_or_late == "early":
+        adjusted_benchmark_age = background_info.age
+        if adjusted_benchmark_age is not None and background_info.early_or_late == "early":
             try:
-                adjusted_benchmark_age = age - int(background_info.due_date_diff / 4)
+                adjusted_benchmark_age = adjusted_benchmark_age - int(background_info.due_date_diff / 4)
             except:
-                adjusted_benchmark_age = age
-        else:
-            adjusted_benchmark_age = age
+                pass
+        elif adjusted_benchmark_age is not None and background_info.early_or_late == "late":
+            try:
+                adjusted_benchmark_age = age + int(background_info.due_date_diff / 4)
+            except:
+                pass
+        
         summary, created = SummaryData.objects.get_or_create(
             administration=administration_instance, title="adjusted benchmark age"
         )
         summary.value = str(adjusted_benchmark_age)
         summary.save()
+
+        if adjusted_benchmark_age < min_age:
+            adjusted_benchmark_age = min_age
+        if adjusted_benchmark_age > max_age:
+            adjusted_benchmark_age = max_age
 
         for f in InstrumentScore.objects.filter(
             instrument=administration_instance.study.instrument

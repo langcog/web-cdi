@@ -13,6 +13,7 @@ class Command(BaseCommand):
         parser.add_argument("-s", "--study_id", type=int)
         parser.add_argument("-l", "--language", type=str)
         parser.add_argument("-f", "--form", type=str)
+        parser.add_argument("-u", "--username", type=str)
 
     def handle(self, *args, **options):
         subject = f"WebCDI Summary Data"
@@ -24,6 +25,8 @@ class Command(BaseCommand):
             query = Q(query) & Q(study__instrument__language=options["language"])
         if options["form"]:
             query = Q(query) & Q(study__instrument__form=options["form"])
+        if options['username']:
+            query = Q(query) & Q(study__researcher__username=options["username"])
 
         administrations = Administration.objects.filter(query).filter(completed=True)
         
