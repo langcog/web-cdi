@@ -12,6 +12,6 @@ MAILTO="hjsmehta@gmail.com"
 00 * * * * root source /var/app/venv/*/bin/activate && export $(cat /opt/elasticbeanstalk/deployment/custom_env_var | xargs)  && /var/app/current/manage.py crontab_scoring
 0 1 1 * * root source /var/app/venv/*/bin/activate && export $(cat /opt/elasticbeanstalk/deployment/custom_env_var | xargs)  && /var/app/current/manage.py monthly_report
 0 0 * * 0 root source /var/app/venv/*/bin/activate && export $(cat /opt/elasticbeanstalk/deployment/custom_env_var | xargs)  && /var/app/current/manage.py weekly_reminder
-0 8 * * * root source /var/app/venv/*/bin/activate && export $(cat /opt/elasticbeanstalk/deployment/custom_env_var | xargs)  && /var/app/current/manage.py update_summary_data -u marchman
-0 8 * * * root source /var/app/venv/*/bin/activate && export $(cat /opt/elasticbeanstalk/deployment/custom_env_var | xargs)  && /var/app/current/manage.py update_summary_data -u marchmantest
+#0 8 * * * root source /var/app/venv/*/bin/activate && export $(cat /opt/elasticbeanstalk/deployment/custom_env_var | xargs)  && /var/app/current/manage.py update_summary_data -u marchman
+#0 8 * * * root source /var/app/venv/*/bin/activate && export $(cat /opt/elasticbeanstalk/deployment/custom_env_var | xargs)  && /var/app/current/manage.py update_summary_data -u marchmantest
 # this file needs a blank space as the last line otherwise it will fail

@@ -81,11 +81,12 @@ def download_cat_data(request, study_obj, administrations=None, adjusted=False):
 
             age = obj.backgroundinfo.age
             if adjusted: 
-                if not obj.backgroundinfo.born_on_due_date:
+                logger.debug(f'Born on due date: {obj.backgroundinfo.born_on_due_date}')
+                if obj.backgroundinfo.born_on_due_date:
                     if obj.backgroundinfo.early_or_late == "early":
-                        age = obj.backgroundinfo.age + obj.backgroundinfo.due_date_diff
+                        age = obj.backgroundinfo.age - int(obj.backgroundinfo.due_date_diff/4)
                     elif obj.backgroundinfo.early_or_late == "late":
-                        age = obj.backgroundinfo.age - obj.backgroundinfo.due_date_diff
+                        age = obj.backgroundinfo.age + int(obj.backgroundinfo.due_date_diff/4)
                 row["Adjusted Age"] = age
             
                 logger.debug(f'Adjusted Age is {age}')

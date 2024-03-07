@@ -38,12 +38,11 @@ def get_cat_benchmark(context, administration_id, data):
         'raw_score_sex': 0
     }
     
-    age=administration.backgroundinfo.age
-    if 'adjusted' in context and not administration.backgroundinfo.born_on_due_date:
-        if administration.backgroundinfo.early_or_late == "early":
-            age = administration.backgroundinfo.age - int(administration.backgroundinfo.due_date_diff/4)
-        elif administration.backgroundinfo.early_or_late == "late":
-            age = administration.backgroundinfo.age + int(administration.backgroundinfo.due_date_diff/4)
+    if 'adjusted' in context:
+        age = get_adjusted_benchmark_age(administration_id)
+    else:
+        age = administration.backgroundinfo.age
+
     res = Benchmark.objects.filter(instrument=administration.study.instrument).aggregate(Max('age'), Min('age'))
     max = res['age__max']
     min = res['age__min']
