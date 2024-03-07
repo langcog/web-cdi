@@ -8,7 +8,6 @@ from researcher_UI.models import (
 
 from .models import BackgroundInfo, Instrument_Forms
 
-
 def calc_benchmark(x1, x2, y1, y2, raw_score):
     if x1 == x2:
         return int((y1 + y2) / 2)
@@ -187,8 +186,14 @@ def update_summary_scores(administration_instance):
             )
         except:
             return
+
         try:
             age = background_info.age
+            summary, created = SummaryData.objects.get_or_create(
+                administration=administration_instance, title="benchmark age"
+            )
+            summary.value = str(age)
+            summary.save()
             if age < min_age:
                 age = min_age
             if age > max_age:
@@ -196,11 +201,12 @@ def update_summary_scores(administration_instance):
         except:
             age = None
         summary, created = SummaryData.objects.get_or_create(
-            administration=administration_instance, title="benchmark age"
+            administration=administration_instance, title="benchmark cohort age"
         )
+        
         summary.value = str(age)
         summary.save()
-
+        
         adjusted_benchmark_age = background_info.age
         if adjusted_benchmark_age is not None and background_info.early_or_late == "early":
             try:
@@ -223,6 +229,12 @@ def update_summary_scores(administration_instance):
             adjusted_benchmark_age = min_age
         if adjusted_benchmark_age > max_age:
             adjusted_benchmark_age = max_age
+
+        summary, created = SummaryData.objects.get_or_create(
+            administration=administration_instance, title="adjusted benchmark cohort age"
+        )
+        summary.value = str(adjusted_benchmark_age)
+        summary.save()
 
         for f in InstrumentScore.objects.filter(
             instrument=administration_instance.study.instrument
