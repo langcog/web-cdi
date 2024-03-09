@@ -5,9 +5,12 @@ def get_score_headers(study_obj, adjusted=False):
     score_forms = InstrumentScore.objects.filter(instrument=study_obj.instrument)
     score_header = []
     if Benchmark.objects.filter(instrument=study_obj.instrument).exists():
-        score_header.append("benchmark age")
         if adjusted:
             score_header.append("adjusted benchmark age")
+            score_header.append("adjusted benchmark cohort age")
+        score_header.append("benchmark age")
+        score_header.append("benchmark cohort age")
+
     for f in score_forms:  # let's get the scoring headers
         score_header.append(f.title)
         if Benchmark.objects.filter(instrument_score=f).exists():

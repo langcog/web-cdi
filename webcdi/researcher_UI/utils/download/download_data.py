@@ -193,9 +193,10 @@ def download_data(
         "WG",
     ]:
         pd.concat([combined_data, pd.DataFrame([ {"study_name": "3rd Edition (Jackson-Maldonado et al. 2003)"}])], ignore_index=True)
-
+        
     # Turn pandas dataframe into a CSV
     combined_data.to_csv(response, encoding="utf-8", index=False)
+
 
     # Return CSV
     return response

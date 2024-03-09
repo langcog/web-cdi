@@ -9,6 +9,8 @@ from django_weasyprint import WeasyTemplateResponseMixin
 
 from researcher_UI.models import Study
 
+import logging
+logger = logging.getLogger("debug")
 
 class PDFAdministrationDetailView(WeasyTemplateResponseMixin, DetailView):
     model = Study
@@ -16,6 +18,7 @@ class PDFAdministrationDetailView(WeasyTemplateResponseMixin, DetailView):
     def get_template_names(self):
         name = slugify(f"{self.object.instrument.verbose_name}")
         template_name = f"researcher_UI/individual/{name}.html"
+        logger.debug(f'Clinical report template name: {template_name}')
         try:
             get_template(template_name)
             return [template_name]
@@ -41,6 +44,7 @@ class PDFAdministrationDetailView(WeasyTemplateResponseMixin, DetailView):
         self.object = self.get_object()
         name = slugify(f"{self.object.instrument.verbose_name}")
         template_name = f"researcher_UI/individual/{name}.html"
+        logger.debug(f'Clinical report template name: {template_name}')
         try:
             get_template(template_name)
         except Exception as e:
@@ -50,6 +54,7 @@ class PDFAdministrationDetailView(WeasyTemplateResponseMixin, DetailView):
                     f"""
                     <h1>No Clinical Template Available</h1>
                     <p>We do not have a clinical template available for { self.object.instrument } studies.</p>
+                    <script>console.log("Internal Error {e}")</script>
                     """,
                 ),
             )

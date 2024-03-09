@@ -59,6 +59,13 @@ def download_cat_summary(request, study_obj, administrations=None, adjusted=Fals
         benchmarks = Benchmark.objects.filter(instrument=study_obj.instrument).order_by(
             "percentile"
         )
+        max_age = Benchmark.objects.filter(instrument=study_obj.instrument).order_by(
+            "-age"
+        ).first().age
+        min_age = Benchmark.objects.filter(instrument=study_obj.instrument).order_by(
+            "age"
+        ).first().age
+        
         rows = []
         for obj in administrations:
             row = {}
@@ -66,10 +73,16 @@ def download_cat_summary(request, study_obj, administrations=None, adjusted=Fals
 
             age = obj.backgroundinfo.age
 
+            if age > max_age:
+                age = max_age
+            if age < min_age:
+                age = min_age
+
             answer = next(
                 item for item in answer_rows if item["administration_id"] == obj.id
             )
             for b in benchmarks.filter(age=age):
+                row['Benchmarking Cohort Age'] = age
                 if answer["est_theta"]:
                     if answer["est_theta"] > b.raw_score:
                         row["est_theta_percentile"] = b.percentile
