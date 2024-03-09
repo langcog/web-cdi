@@ -240,6 +240,7 @@ def update_summary_scores(administration_instance):
             instrument=administration_instance.study.instrument
         ):
             if Benchmark.objects.filter(instrument_score=f).exists():
+                print(f'Getting benchmark for score {f} and age {age}')
                 benchmark = Benchmark.objects.filter(instrument_score=f, age=age)[0]
                 try:
                     adjusted_benchmark = Benchmark.objects.filter(
