@@ -68,23 +68,21 @@ def get_cat_benchmark(context, administration_id, data):
                 if administration.catresponse.est_theta > b.raw_score_girl:
                     row["est_theta_percentile_sex"] = b.percentile
         
+    
+        q = Q (instrument=administration.study.instrument, instrument_score__title='Total Produced', age=age, percentile=row["est_theta_percentile"])
         try:
-            q = Q (instrument=administration.study.instrument, instrument_score__title='Total Produced', age=age)
             row["raw_score"] = int(
-                Benchmark.objects.filter(q)
-                .order_by("-instrument__form")[0]
+                Benchmark.objects.get(q)
                 .raw_score
             )
             if administration.backgroundinfo.sex == "M":
                 row["raw_score_sex"] = int(
-                    Benchmark.objects.filter(q)
-                    .order_by("-instrument__form")[0]
+                    Benchmark.objects.get(q)
                     .raw_score_boy
                 )
             elif administration.backgroundinfo.sex == "F":
                 row["raw_score_sex"] =int(
-                    Benchmark.objects.filter(q)
-                    .order_by("-instrument__form")[0]
+                    Benchmark.objects.get(q)
                     .raw_score_girl
                 )
         except Exception as e:
