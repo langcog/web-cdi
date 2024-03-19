@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-19 13:09+0000\n"
+"POT-Creation-Date: 2024-03-19 10:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -229,12 +229,15 @@ msgid "Your registration was accepted -- %(site_name)s"
 msgstr ""
 
 #: registration/templates/registration/activation_complete.html:4
+msgid "Activation is complete"
+msgstr ""
+
 #: registration/templates/registration/activation_complete.html:6
-msgid "Activation was complete"
+msgid "Your account has been activated"
 msgstr ""
 
 #: registration/templates/registration/activation_complete.html:10
-msgid "Your account was activated"
+msgid "Your account it active.  Please login."
 msgstr ""
 
 #: registration/templates/registration/activation_email.txt:4
