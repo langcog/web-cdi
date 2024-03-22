@@ -1,6 +1,6 @@
 from django import template
 from researcher_UI.models import SummaryData, administration_data, Benchmark, Administration
-from django.db.models import Max, Min
+from django.db.models import Max, Min, Q 
 register = template.Library()
 
 import logging
@@ -43,7 +43,8 @@ def get_cat_benchmark(context, administration_id, data):
     else:
         age = administration.backgroundinfo.age
 
-    res = Benchmark.objects.filter(instrument=administration.study.instrument).aggregate(Max('age'), Min('age'))
+    q = Q (instrument=administration.study.instrument, instrument_score__title='Benchmark Theta')
+    res = Benchmark.objects.filter(q).aggregate(Max('age'), Min('age'))
     max = res['age__max']
     min = res['age__min']
     if age > max:
@@ -52,8 +53,9 @@ def get_cat_benchmark(context, administration_id, data):
         age = min
     row['benchmark_cohort_age'] = age
 
+    q = Q (instrument=administration.study.instrument, instrument_score__title='Benchmark Theta', age=age)
     if Benchmark.objects.filter(instrument=administration.study.instrument, age=age).exists():
-        benchmarks = Benchmark.objects.filter(instrument=administration.study.instrument, age=age).order_by(
+        benchmarks = Benchmark.objects.filter(q).order_by(
             "percentile"
         )
         for b in benchmarks.filter(age=age):
@@ -66,49 +68,21 @@ def get_cat_benchmark(context, administration_id, data):
                 if administration.catresponse.est_theta > b.raw_score_girl:
                     row["est_theta_percentile_sex"] = b.percentile
         
+    
+        q = Q (instrument=administration.study.instrument, instrument_score__title='Total Produced', age=age, percentile=row["est_theta_percentile"])
         try:
             row["raw_score"] = int(
-                Benchmark.objects.filter(
-                    age=age,
-                    instrument_score__title__in=[
-                        "Total Produced",
-                        "Words Produced",
-                        "Palabras que dice",
-                    ],
-                    instrument__language=administration.study.instrument.language,
-                    percentile=row["est_theta_percentile"],
-                )
-                .order_by("-instrument__form")[0]
+                Benchmark.objects.get(q)
                 .raw_score
             )
             if administration.backgroundinfo.sex == "M":
                 row["raw_score_sex"] = int(
-                    Benchmark.objects.filter(
-                        age=age,
-                        instrument_score__title__in=[
-                            "Total Produced",
-                            "Words Produced",
-                            "Palabras que dice",
-                        ],
-                        instrument__language=administration.study.instrument.language,
-                        percentile=row["est_theta_percentile_sex"],
-                    )
-                    .order_by("-instrument__form")[0]
+                    Benchmark.objects.get(q)
                     .raw_score_boy
                 )
             elif administration.backgroundinfo.sex == "F":
                 row["raw_score_sex"] =int(
-                    Benchmark.objects.filter(
-                        age=age,
-                        instrument_score__title__in=[
-                            "Total Produced",
-                            "Words Produced",
-                            "Palabras que dice",
-                        ],
-                        instrument__language=administration.study.instrument.language,
-                        percentile=row["est_theta_percentile_sex"],
-                    )
-                    .order_by("-instrument__form")[0]
+                    Benchmark.objects.get(q)
                     .raw_score_girl
                 )
         except Exception as e:

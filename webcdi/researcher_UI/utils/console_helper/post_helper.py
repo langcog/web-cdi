@@ -6,7 +6,6 @@ from django.utils.safestring import mark_safe
 from researcher_UI.models import Administration
 from researcher_UI.utils.download import (
     download_cat_data,
-    download_cat_summary,
     download_cdi_format,
     download_data,
     download_dictionary,
@@ -128,8 +127,8 @@ def post_condition(request, ids, study_obj):
     elif "download-summary-csv" in request.POST:
         administrations = Administration.objects.filter(study=study_obj)
         if study_obj.instrument.form in settings.CAT_FORMS:
-            return download_cat_summary.download_cat_summary(
-                request, study_obj, administrations
+            return download_cat_data.download_cat_data(
+                request, study_obj, administrations, summary=True, 
             )
         else:
             return download_summary.download_summary(

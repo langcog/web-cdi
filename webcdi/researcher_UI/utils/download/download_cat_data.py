@@ -2,13 +2,15 @@ import pandas as pd
 from cdi_forms.cat_forms.models import CatResponse
 from cdi_forms.models import BackgroundInfo
 from django.http import HttpResponse
-from researcher_UI.models import Benchmark, Administration
+from django.db.models import Q 
+from researcher_UI.models import Administration
 from researcher_UI.utils.format_admin import format_admin_data, format_admin_header
+from .cat_utils import get_pd_norms
 import logging
 # Get an instance of a logger
 logger = logging.getLogger("debug")
 
-def download_cat_data(request, study_obj, administrations=None, adjusted=False):
+def download_cat_data(request, study_obj, administrations=None, adjusted=False, summary=False):
     response = HttpResponse(content_type="text/csv")
     filename = study_obj.name + "_items.csv"
     response["Content-Disposition"] = (
@@ -34,16 +36,21 @@ def download_cat_data(request, study_obj, administrations=None, adjusted=False):
     for count in range(678):
         items.append(count + 1)
 
-    answers = CatResponse.objects.values(
-        "administration_id", "est_theta", "administered_words", "administered_responses"
-    ).filter(administration__in=administrations)
+    if summary:
+        answers = CatResponse.objects.values(
+            "administration_id", "est_theta"
+        ).filter(administration__in=administrations)
+    else:
+        answers = CatResponse.objects.values(
+            "administration_id", "est_theta", "administered_words", "administered_responses"
+        ).filter(administration__in=administrations)
     rows = []
     for answer in answers:
         row = {}
         row["administration_id"] = answer["administration_id"]
         row["est_theta"] = answer["est_theta"]
 
-        if answer["administered_words"]:
+        if not summary and answer["administered_words"]:
             count = 0
             for word in answer["administered_words"]:
                 row[word] = answer["administered_responses"][count]
@@ -62,104 +69,8 @@ def download_cat_data(request, study_obj, administrations=None, adjusted=False):
         admin_data, pd_background_answers, how="outer", on="administration_id"
     )
 
-    # norms
-    if Benchmark.objects.filter(instrument=study_obj.instrument).exists():
-        benchmarks = Benchmark.objects.filter(instrument=study_obj.instrument).order_by(
-            "percentile"
-        )
-        max_age = Benchmark.objects.filter(instrument=study_obj.instrument).order_by(
-            "-age"
-        ).first().age
-        min_age = Benchmark.objects.filter(instrument=study_obj.instrument).order_by(
-            "age"
-        ).first().age
-
-        rows = []
-        for obj in administrations:
-            row = {}
-            row["administration_id"] = obj.id
-
-            age = obj.backgroundinfo.age
-            if adjusted: 
-                logger.debug(f'Born on due date: {obj.backgroundinfo.born_on_due_date}')
-                if obj.backgroundinfo.born_on_due_date:
-                    if obj.backgroundinfo.early_or_late == "early":
-                        age = obj.backgroundinfo.age - int(obj.backgroundinfo.due_date_diff/4)
-                    elif obj.backgroundinfo.early_or_late == "late":
-                        age = obj.backgroundinfo.age + int(obj.backgroundinfo.due_date_diff/4)
-                row["Adjusted Age"] = age
-            
-                logger.debug(f'Adjusted Age is {age}')
-
-            if age > max_age:
-                age = max_age
-            if age < min_age:
-                age = min_age
-                    
-            answer = next(
-                item for item in answer_rows if item["administration_id"] == obj.id
-            )
-            for b in benchmarks.filter(age=age):
-                row['Benchmarking Cohort Age'] = age
-                if answer["est_theta"]:
-                    if answer["est_theta"] > b.raw_score:
-                        row["est_theta_percentile"] = b.percentile
-                    if obj.backgroundinfo.sex == "M":
-                        if answer["est_theta"] > b.raw_score_boy:
-                            row["est_theta_percentile_sex"] = b.percentile
-                    if obj.backgroundinfo.sex == "F":
-                        if answer["est_theta"] > b.raw_score_girl:
-                            row["est_theta_percentile_sex"] = b.percentile
-            if "est_theta_percentile" in row:
-                try:
-                    row["raw_score"] = (
-                        Benchmark.objects.filter(
-                            age=age,
-                            instrument_score__title__in=[
-                                "Total Produced",
-                                "Words Produced",
-                                "Palabras que dice",
-                            ],
-                            instrument__language=obj.study.instrument.language,
-                            percentile=row["est_theta_percentile"],
-                        )
-                        .order_by("-instrument__form")[0]
-                        .raw_score
-                    )
-                    if obj.backgroundinfo.sex == "M":
-                        row["raw_score_sex"] = (
-                            Benchmark.objects.filter(
-                                age=age,
-                                instrument_score__title__in=[
-                                    "Total Produced",
-                                    "Words Produced",
-                                    "Palabras que dice",
-                                ],
-                                instrument__language=obj.study.instrument.language,
-                                percentile=row["est_theta_percentile_sex"],
-                            )
-                            .order_by("-instrument__form")[0]
-                            .raw_score_boy
-                        )
-                    elif obj.backgroundinfo.sex == "F":
-                        row["raw_score_sex"] = (
-                            Benchmark.objects.filter(
-                                age=age,
-                                instrument_score__title__in=[
-                                    "Total Produced",
-                                    "Words Produced",
-                                    "Palabras que dice",
-                                ],
-                                instrument__language=obj.study.instrument.language,
-                                percentile=row["est_theta_percentile_sex"],
-                            )
-                            .order_by("-instrument__form")[0]
-                            .raw_score_girl
-                        )
-                except Exception as e:
-                    pass
-            rows.append(row)
-        pd_norms = pd.DataFrame.from_dict(rows)
+    # Get PD Norms
+    pd_norms=get_pd_norms(study_obj, administrations, adjusted, answer_rows)
 
     combined_data = pd.merge(
         combined_data, pd_norms, how="outer", on="administration_id"

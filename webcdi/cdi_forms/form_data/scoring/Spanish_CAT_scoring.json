@@ -4,5 +4,11 @@
         "category" : "theta",
         "measure" : "theta",
         "order" : 1
+    },
+    {
+        "title" : "Total Produced",
+        "category" : "word",
+        "measure" : "produces",
+        "order" : 2
     }
 ]
