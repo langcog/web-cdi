@@ -178,6 +178,5 @@ def admin_new_fun(request, permitted, study_name, study_obj):
     else:
         data["stat"] = "error"
         data["error_message"] = "permission denied"
-        data["redirect_url"] = "endalk/"
-
+        
     return data

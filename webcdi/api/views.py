@@ -189,9 +189,13 @@ class BaseAPIView(StudyOwnerMixin, TemplateView):
             "WS",
             "WG",
         ]:
-            combined_data = combined_data.append(
-                {"study_name": "3rd Edition (Marchman et al., 2023)"}, ignore_index=True
-            )
+            pd.concat(
+            [
+                combined_data,
+                pd.DataFrame([{"study_name": "3rd Edition (Marchman et al., 2023)"}]),
+            ],
+            ignore_index=True,
+        )
 
         # Turn pandas dataframe into a CSV
         return combined_data.transpose().to_json()

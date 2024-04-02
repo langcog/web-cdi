@@ -16,15 +16,7 @@ except ImportError:
 
     datetime_now = datetime.datetime.now
 
-if django.VERSION >= (1, 9):
-    patterns = lambda x, *args: args
-    from django.conf.urls import include, url
-else:
-    try:
-        # django 1.4
-        from django.conf.urls import include, patterns, url
-    except ImportError:
-        from django.conf.urls.defaults import include, patterns, url
+from django.urls import re_path as url
 
 try:
     from django.contrib.admin.utils import unquote

@@ -1,5 +1,6 @@
 from .administration_model import Administration  # noqa
-from .administration_model import AdministrationSummary, administration_data
+from .administration_model import (AdministrationSummary,  # noqa
+                                   administration_data)
 from .benchmark import Benchmark  # noqa
 from .demographic import Demographic  # noqa
 from .instrument_family import InstrumentFamily  # noqa
@@ -10,4 +11,4 @@ from .measure import Measure  # noqa
 from .payment_code import PaymentCode  # noqa
 from .researcher_model import Researcher  # noqa
 from .study_model import Study  # noqa
-from .summary_data import SummaryData  # ßnoqa
+from .summary_data import SummaryData  # noqa

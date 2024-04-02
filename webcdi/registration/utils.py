@@ -7,7 +7,7 @@ Utilities for django-inspectional-registration
 __author__ = "Alisue <lambdalisue@hashnote.net>"
 import random
 
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str as force_text
 from six.moves import range
 
 from registration.compat import sha1
