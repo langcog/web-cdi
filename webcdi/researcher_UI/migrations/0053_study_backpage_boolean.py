@@ -6,13 +6,16 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('researcher_UI', '0052_study_prolific_boolean'),
+        ("researcher_UI", "0052_study_prolific_boolean"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='study',
-            name='backpage_boolean',
-            field=models.BooleanField(default=True, help_text='When selected the final demographics page will be shown - deselect to not show the final page'),
+            model_name="study",
+            name="backpage_boolean",
+            field=models.BooleanField(
+                default=True,
+                help_text="When selected the final demographics page will be shown - deselect to not show the final page",
+            ),
         ),
     ]

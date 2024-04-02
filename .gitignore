@@ -23,7 +23,7 @@ env/
 __pycache__/
 */.vscode/
 
-.env
+.env*
 
 # Elastic Beanstalk Files 
 .elasticbeanstalk/*

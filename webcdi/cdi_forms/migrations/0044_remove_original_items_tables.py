@@ -8,36 +8,36 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cdi_forms', '0043_add_combined_items_table'),
+        ("cdi_forms", "0043_add_combined_items_table"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='english_wg',
-            name='choices',
+            model_name="english_wg",
+            name="choices",
         ),
         migrations.RemoveField(
-            model_name='english_ws',
-            name='choices',
+            model_name="english_ws",
+            name="choices",
         ),
         migrations.RemoveField(
-            model_name='spanish_wg',
-            name='choices',
+            model_name="spanish_wg",
+            name="choices",
         ),
         migrations.RemoveField(
-            model_name='spanish_ws',
-            name='choices',
+            model_name="spanish_ws",
+            name="choices",
         ),
         migrations.DeleteModel(
-            name='English_WG',
+            name="English_WG",
         ),
         migrations.DeleteModel(
-            name='English_WS',
+            name="English_WS",
         ),
         migrations.DeleteModel(
-            name='Spanish_WG',
+            name="Spanish_WG",
         ),
         migrations.DeleteModel(
-            name='Spanish_WS',
+            name="Spanish_WS",
         ),
     ]

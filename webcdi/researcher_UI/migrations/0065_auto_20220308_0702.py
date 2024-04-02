@@ -6,33 +6,45 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('researcher_UI', '0064_auto_20210901_0556'),
+        ("researcher_UI", "0064_auto_20210901_0556"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='study',
-            name='hide_source_id',
-            field=models.BooleanField(default=False, verbose_name='Hide source id from parents/participants?'),
+            model_name="study",
+            name="hide_source_id",
+            field=models.BooleanField(
+                default=False, verbose_name="Hide source id from parents/participants?"
+            ),
         ),
         migrations.AlterField(
-            model_name='administration',
-            name='analysis',
-            field=models.BooleanField(default=None, null=True, verbose_name='Confirmed Age and Completion'),
+            model_name="administration",
+            name="analysis",
+            field=models.BooleanField(
+                default=None, null=True, verbose_name="Confirmed Age and Completion"
+            ),
         ),
         migrations.AlterField(
-            model_name='administration',
-            name='bypass',
-            field=models.BooleanField(default=None, null=True, verbose_name='Willing to forgo payment'),
+            model_name="administration",
+            name="bypass",
+            field=models.BooleanField(
+                default=None, null=True, verbose_name="Willing to forgo payment"
+            ),
         ),
         migrations.AlterField(
-            model_name='administration',
-            name='include',
-            field=models.BooleanField(default=True, null=True, verbose_name='Include for eventual analysis'),
+            model_name="administration",
+            name="include",
+            field=models.BooleanField(
+                default=True, null=True, verbose_name="Include for eventual analysis"
+            ),
         ),
         migrations.AlterField(
-            model_name='administration',
-            name='opt_out',
-            field=models.BooleanField(default=None, null=True, verbose_name='Participant opted out of broader sharing'),
+            model_name="administration",
+            name="opt_out",
+            field=models.BooleanField(
+                default=None,
+                null=True,
+                verbose_name="Participant opted out of broader sharing",
+            ),
         ),
     ]

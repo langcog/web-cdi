@@ -8,13 +8,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('researcher_UI', '0031_auto_20190530_0807'),
+        ("researcher_UI", "0031_auto_20190530_0807"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='instrumentscore',
-            name='kind',
-            field=models.CharField(choices=[('count', 'count'), ('list', 'list')], default='count', max_length=5),
+            model_name="instrumentscore",
+            name="kind",
+            field=models.CharField(
+                choices=[("count", "count"), ("list", "list")],
+                default="count",
+                max_length=5,
+            ),
         ),
     ]

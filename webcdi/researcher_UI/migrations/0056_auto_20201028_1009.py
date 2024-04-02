@@ -7,18 +7,28 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('researcher_UI', '0055_merge_20200916_0933'),
+        ("researcher_UI", "0055_merge_20200916_0933"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='study',
-            name='end_message',
-            field=models.CharField(choices=[('standard', 'Standard'), ('bespoke', 'Bespoke'), ('combined', 'Combined')], default='standard', max_length=10),
+            model_name="study",
+            name="end_message",
+            field=models.CharField(
+                choices=[
+                    ("standard", "Standard"),
+                    ("bespoke", "Bespoke"),
+                    ("combined", "Combined"),
+                ],
+                default="standard",
+                max_length=10,
+            ),
         ),
         migrations.AddField(
-            model_name='study',
-            name='end_message_text',
-            field=ckeditor_uploader.fields.RichTextUploadingField(blank=True, null=True),
+            model_name="study",
+            name="end_message_text",
+            field=ckeditor_uploader.fields.RichTextUploadingField(
+                blank=True, null=True
+            ),
         ),
     ]

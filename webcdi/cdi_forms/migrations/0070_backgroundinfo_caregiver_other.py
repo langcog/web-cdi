@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cdi_forms', '0069_merge_20200421_0638'),
+        ("cdi_forms", "0069_merge_20200421_0638"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='backgroundinfo',
-            name='caregiver_other',
+            model_name="backgroundinfo",
+            name="caregiver_other",
             field=models.CharField(blank=True, max_length=25, null=True),
         ),
     ]

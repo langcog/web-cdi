@@ -2,9 +2,10 @@
 
 import datetime
 
-from brookes.models import BrookesCode
 from django.db import migrations, models
 from django.utils import timezone
+
+from brookes.models import BrookesCode
 from researcher_UI.models import Researcher
 
 

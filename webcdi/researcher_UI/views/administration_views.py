@@ -1,27 +1,25 @@
 import datetime
 from typing import Any, Optional
-from django.db import models
-from django.views.generic import DetailView, UpdateView, CreateView
+
 from django.conf import settings
-from django.http import Http404
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
+from django.db import models
+from django.http import Http404, JsonResponse
 from django.shortcuts import redirect
 from django.urls import reverse
-from django.contrib.auth.models import User
 from django.utils import timezone
+from django.views.generic import CreateView, DetailView, UpdateView
 from ipware.ip import get_client_ip
-from researcher_UI.models import Administration, Study
-from researcher_UI.views import ip_address
-from researcher_UI.mixins import StudyOwnerMixin
-from researcher_UI.forms import StudyFormForm
-from researcher_UI.utils import random_url_generator, max_subject_id, max_repeat_num
+
 from cdi_forms.models import BackgroundInfo
-
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import JsonResponse
-
+from researcher_UI.forms import StudyFormForm
+from researcher_UI.mixins import StudyOwnerMixin
+from researcher_UI.models import Administration, Study, ip_address
+from researcher_UI.utils import (admin_new_participant_fun, max_repeat_num,
+                                 max_subject_id, random_url_generator)
 from researcher_UI.utils.console_helper import get_helper
 
-from researcher_UI.utils import admin_new_participant_fun
 
 class EditAdministrationView(LoginRequiredMixin, StudyOwnerMixin, UpdateView):
     model = Administration
@@ -74,7 +72,8 @@ class AdministerNewParticipant(CreateView):
     def post(self, request, username, study_name):
         admin = admin_new_participant_fun(request, username, study_name)
         return redirect(reverse("administer_cdi_form", args=[admin.url_hash]))
-    
+
+
 class AddNewParent(DetailView):
     model = Study
 
@@ -109,47 +108,74 @@ class AddNewParent(DetailView):
         return let_through, bypass, source_id
 
     def get_object(self) -> models.Model:
-        researcher = User.objects.get(username=self.kwargs['username'])
-        self.object = Study.objects.get(name=self.kwargs['study_name'], researcher=researcher)
+        researcher = User.objects.get(username=self.kwargs["username"])
+        self.object = Study.objects.get(
+            name=self.kwargs["study_name"], researcher=researcher
+        )
         return self.object
-    
+
     def get(self, request, username, study_name):
         self.get_object()
-        let_through, bypass, source_id = self.admin_new_parent_fun(
-            request
-        )
+        let_through, bypass, source_id = self.admin_new_parent_fun(request)
         if let_through:
             if self.object.no_demographic_boolean:
-                event_id = None if not 'event_id' in request.GET else request.GET['event_id']
-                if BackgroundInfo.objects.filter(source_id=request.GET['source_id'],  event_id=event_id, administration__study=self.object).exists():
-                    background_info = BackgroundInfo.objects.get(source_id=request.GET['source_id'], event_id=event_id, administration__study=self.object)
-                    return redirect("administer_cdi_form", hash_id=background_info.administration.url_hash)
-             
-                if not 'source_id' in request.GET or not 'age' in request.GET or not 'sex' in request.GET:
-                    raise Http404("Age, sex and source_id must be included in the a no demographic call.")
+                event_id = (
+                    None if not "event_id" in request.GET else request.GET["event_id"]
+                )
+                if BackgroundInfo.objects.filter(
+                    source_id=request.GET["source_id"],
+                    event_id=event_id,
+                    administration__study=self.object,
+                ).exists():
+                    background_info = BackgroundInfo.objects.get(
+                        source_id=request.GET["source_id"],
+                        event_id=event_id,
+                        administration__study=self.object,
+                    )
+                    return redirect(
+                        "administer_cdi_form",
+                        hash_id=background_info.administration.url_hash,
+                    )
 
-                if BackgroundInfo.objects.filter(source_id=request.GET['source_id'], administration__study=self.object).exists():
-                    old_admin = BackgroundInfo.objects.filter(source_id=request.GET['source_id'], administration__study=self.object)[0].administration
+                if (
+                    not "source_id" in request.GET
+                    or not "age" in request.GET
+                    or not "sex" in request.GET
+                ):
+                    raise Http404(
+                        "Age, sex and source_id must be included in the a no demographic call."
+                    )
+
+                if BackgroundInfo.objects.filter(
+                    source_id=request.GET["source_id"],
+                    administration__study=self.object,
+                ).exists():
+                    old_admin = BackgroundInfo.objects.filter(
+                        source_id=request.GET["source_id"],
+                        administration__study=self.object,
+                    )[0].administration
                     new_admin = Administration.objects.create(
                         study=self.object,
                         subject_id=old_admin.subject_id,
-                        repeat_num=max_repeat_num(old_admin)+1,
+                        repeat_num=max_repeat_num(old_admin) + 1,
                         url_hash=random_url_generator(),
                         completed=False,
-                        due_date=timezone.now() + datetime.timedelta(days=self.object.test_period),
+                        due_date=timezone.now()
+                        + datetime.timedelta(days=self.object.test_period),
                     )
-                else:    
+                else:
                     new_admin = Administration.objects.create(
                         study=self.object,
                         subject_id=max_subject_id(self.object) + 1,
                         repeat_num=1,
                         url_hash=random_url_generator(),
                         completed=False,
-                        due_date=timezone.now() + datetime.timedelta(days=self.object.test_period),
+                        due_date=timezone.now()
+                        + datetime.timedelta(days=self.object.test_period),
                     )
 
-                if 'offset' in request.GET:
-                    offset = int(request.GET['offset'])
+                if "offset" in request.GET:
+                    offset = int(request.GET["offset"])
                 else:
                     offset = 0
                 data = {}
@@ -161,25 +187,24 @@ class AddNewParent(DetailView):
                     born_on_due_date = 1
                     due_date_diff = abs(offset)
                     if offset < 0:
-                        early_or_late = 'early'
+                        early_or_late = "early"
                     else:
-                        early_or_late = 'late'
-    
+                        early_or_late = "late"
+
                 new_background = BackgroundInfo.objects.create(
                     administration=new_admin,
-                    sex = request.GET['sex'].upper(),
-                    source_id = request.GET['source_id'],
-                    event_id = event_id,
-                    age = int(request.GET['age']),
+                    sex=request.GET["sex"].upper(),
+                    source_id=request.GET["source_id"],
+                    event_id=event_id,
+                    age=int(request.GET["age"]),
                     born_on_due_date=born_on_due_date,
                     due_date_diff=due_date_diff,
-                    early_or_late=early_or_late
+                    early_or_late=early_or_late,
                 )
                 new_admin.completedBackgroundInfo = True
                 new_admin.save()
                 return redirect("administer_cdi_form", hash_id=new_admin.url_hash)
-                
-                
+
             if self.object.instrument.form in settings.CAT_FORMS:
                 return redirect(
                     reverse(

@@ -1,6 +1,8 @@
-from modeltranslation.translator import register, TranslationOptions
+from modeltranslation.translator import TranslationOptions, register
+
 from .models import Choices
+
 
 @register(Choices)
 class ChoicesTranslationOptions(TranslationOptions):
-    fields = ('choice_set',)
+    fields = ("choice_set",)

@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cdi_forms', '0054_choices_choice_set_en_ca_data'),
+        ("cdi_forms", "0054_choices_choice_set_en_ca_data"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='instrument_forms',
-            name='scoring_category',
+            model_name="instrument_forms",
+            name="scoring_category",
             field=models.CharField(blank=True, max_length=101, null=True),
         ),
     ]

@@ -37,15 +37,12 @@ ALLOWED_HOSTS = [
     "ec2-52-88-52-34.us-west-2.compute.amazonaws.com",
     HOST_IP,
     HOST_NAME,
+    "web",  # For tests in using docker
+    "test",  # For tests in using docker
     "localhost",
     "127.0.0.2",
     "127.0.0.1",
-    "webcdi-dev.us-west-2.elasticbeanstalk.com",
-    ".us-west-2.elasticbeanstalk.com",
-    "webcdi.stanford.edu",
-    "webcdi-dev.stanford.edu",
-    ".elb.amazonaws.com",
-    '.webcdi.org',
+    ".webcdi.org",
 ]
 
 IPS_TO_ADD = [socket.gethostname()]
@@ -64,7 +61,7 @@ ADMINS = (("Henry Mehta", "hjsmehta@gmail.com"),)
 DJANGO_SERVER_TYPE = os.environ.get("DJANGO_SERVER_TYPE", "DEV")  # DEV or PROD
 # print(get_secret(f"{os.environ.get('DJANGO_SERVER_TYPE','dev').lower()}/webcdi/RDS_PASSWORD")['password'])
 # Database Settings
-if os.environ.get('DJANGO_SERVER_TYPE','dev') == 'LOCAL':
+if os.environ.get("DJANGO_SERVER_TYPE", "dev") in ["LOCAL", "TEST"]:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
@@ -123,7 +120,7 @@ CAT_API_BASE_URL = os.environ.get(
 # EMAIL settings
 AWS_SES_REGION_NAME = "us-west-2"
 AWS_SES_REGION_ENDPOINT = "email.us-west-2.amazonaws.com"
-EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND',"django_ses.SESBackend")
+EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND", "django_ses.SESBackend")
 DEFAULT_FROM_EMAIL_NAME = os.environ.get("DEFAULT_FROM_EMAIL_NAME", "WebCDI Local")
 DEFAULT_FROM_EMAIL_ADDRESS = os.environ.get(
     "DEFAULT_FROM_EMAIL_ADDRESS", "hjsmehta@gmail.com"
@@ -135,4 +132,4 @@ DEFAULT_RECIPIENT_EMAIL = EMAIL_HOST_USER = os.environ.get(
 
 BROOKES_EMAIL = os.environ.get("BROOKES_EMAIL", "hjsmehta@gmail.com")
 
-PRIMARY_HOST = os.environ.get('PRIMARY_HOST', None)
+PRIMARY_HOST = os.environ.get("PRIMARY_HOST", None)

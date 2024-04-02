@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+
 """
 Default registration backend class
 
@@ -40,21 +41,20 @@ Original License::
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-__author__ = 'Alisue <lambdalisue@hashnote.net>'
+__author__ = "Alisue <lambdalisue@hashnote.net>"
 import sys
+
 from django.urls import reverse
 
 from registration import signals
-from registration.conf import settings
 from registration.backends.base import RegistrationBackendBase
+from registration.conf import settings
+from registration.forms import ActivationForm, RegistrationForm
 from registration.models import RegistrationProfile
-from registration.forms import ActivationForm
-from registration.forms import RegistrationForm
 from registration.supplements import get_supplement_class
 
 
 class DefaultRegistrationBackend(RegistrationBackendBase):
-
     """Default registration backend class
 
     A registration backend which floows a simple workflow:
@@ -103,8 +103,7 @@ class DefaultRegistrationBackend(RegistrationBackendBase):
 
     """
 
-    def register(self, username, email, request,
-                 supplement=None, send_email=None):
+    def register(self, username, email, request, supplement=None, send_email=None):
         """register new user with ``username`` and ``email``
 
         Given a username, email address, register a new user account, which
@@ -136,7 +135,9 @@ class DefaultRegistrationBackend(RegistrationBackendBase):
             send_email = settings.REGISTRATION_REGISTRATION_EMAIL
 
         new_user = RegistrationProfile.objects.register(
-            username, email, self.get_site(request),
+            username,
+            email,
+            self.get_site(request),
             send_email=send_email,
         )
         profile = new_user.registration_profile
@@ -154,8 +155,7 @@ class DefaultRegistrationBackend(RegistrationBackendBase):
 
         return new_user
 
-    def accept(self, profile, request, send_email=None, message=None,
-               force=False):
+    def accept(self, profile, request, send_email=None, message=None, force=False):
         """accept the account registration of ``profile``
 
         Given a profile, accept account registration, which will
@@ -181,8 +181,10 @@ class DefaultRegistrationBackend(RegistrationBackendBase):
             send_email = settings.REGISTRATION_ACCEPTANCE_EMAIL
 
         accepted_user = RegistrationProfile.objects.accept_registration(
-            profile, self.get_site(request),
-            send_email=send_email, message=message,
+            profile,
+            self.get_site(request),
+            send_email=send_email,
+            message=message,
             force=force,
         )
 
@@ -222,8 +224,8 @@ class DefaultRegistrationBackend(RegistrationBackendBase):
             send_email = settings.REGISTRATION_REJECTION_EMAIL
 
         rejected_user = RegistrationProfile.objects.reject_registration(
-            profile, self.get_site(request),
-            send_email=send_email, message=message)
+            profile, self.get_site(request), send_email=send_email, message=message
+        )
 
         if rejected_user:
             signals.user_rejected.send(
@@ -235,8 +237,15 @@ class DefaultRegistrationBackend(RegistrationBackendBase):
 
         return rejected_user
 
-    def activate(self, activation_key, request, password=None, send_email=None,
-                 message=None, no_profile_delete=False):
+    def activate(
+        self,
+        activation_key,
+        request,
+        password=None,
+        send_email=None,
+        message=None,
+        no_profile_delete=False,
+    ):
         """activate user with ``activation_key`` and ``password``
 
         Given an activation key, password, look up and activate the user
@@ -269,7 +278,8 @@ class DefaultRegistrationBackend(RegistrationBackendBase):
             password=password,
             send_email=send_email,
             message=message,
-            no_profile_delete=no_profile_delete)
+            no_profile_delete=no_profile_delete,
+        )
 
         if activated:
             user, password, is_generated = activated
@@ -286,10 +296,10 @@ class DefaultRegistrationBackend(RegistrationBackendBase):
     def get_supplement_class(self):
         """Return the current registration supplement class"""
         # cache mechanisms will break the test thus disable it in test
-        if not hasattr(self, '_supplement_class_cache') or 'test' in sys.argv:
+        if not hasattr(self, "_supplement_class_cache") or "test" in sys.argv:
             cls = get_supplement_class()
-            setattr(self, '_supplement_class_cache', cls)
-        return getattr(self, '_supplement_class_cache')
+            setattr(self, "_supplement_class_cache", cls)
+        return getattr(self, "_supplement_class_cache")
 
     def get_activation_form_class(self):
         """Return the default form class used for user activation"""
@@ -310,15 +320,15 @@ class DefaultRegistrationBackend(RegistrationBackendBase):
 
     def get_activation_complete_url(self, user):
         """Return a url to redirect to after successful user activation"""
-        return reverse('registration_activation_complete')
+        return reverse("registration_activation_complete")
 
     def get_registration_complete_url(self, user):
         """Return a url to redirect to after successful user registration"""
-        return reverse('registration_complete')
+        return reverse("registration_complete")
 
     def get_registration_closed_url(self):
         """Return a url to redirect to if registration is closed"""
-        return reverse('registration_disallowed')
+        return reverse("registration_disallowed")
 
     def registration_allowed(self):
         """
@@ -333,4 +343,4 @@ class DefaultRegistrationBackend(RegistrationBackendBase):
             registration is not permitted.
 
         """
-        return getattr(settings, 'REGISTRATION_OPEN', True)
+        return getattr(settings, "REGISTRATION_OPEN", True)

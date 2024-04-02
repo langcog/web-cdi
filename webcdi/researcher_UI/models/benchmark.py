@@ -1,5 +1,8 @@
 from django.db import models
+
 from researcher_UI.models import Instrument
+
+
 class Benchmark(models.Model):
     """
     Class to store benchmark data for each instrument and score.
@@ -7,7 +10,7 @@ class Benchmark(models.Model):
     """
 
     instrument = models.ForeignKey(Instrument, on_delete=models.CASCADE)
-    instrument_score = models.ForeignKey('InstrumentScore', on_delete=models.CASCADE)
+    instrument_score = models.ForeignKey("InstrumentScore", on_delete=models.CASCADE)
     percentile = models.IntegerField()
     age = models.IntegerField()
     raw_score = models.FloatField()

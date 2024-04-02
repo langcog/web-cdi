@@ -6,23 +6,32 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('researcher_UI', '0087_auto_20230829_0640'),
+        ("researcher_UI", "0087_auto_20230829_0640"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='study',
-            name='api_token',
+            model_name="study",
+            name="api_token",
             field=models.CharField(blank=True, max_length=101, null=True),
         ),
         migrations.AlterField(
-            model_name='researcher',
-            name='allowed_instruments',
-            field=models.ManyToManyField(blank=True, to='researcher_UI.Instrument', verbose_name='Instruments this researcher has access to'),
+            model_name="researcher",
+            name="allowed_instruments",
+            field=models.ManyToManyField(
+                blank=True,
+                to="researcher_UI.Instrument",
+                verbose_name="Instruments this researcher has access to",
+            ),
         ),
         migrations.AlterField(
-            model_name='study',
-            name='completion_data',
-            field=models.CharField(blank=True, help_text='Data to be included in the completion url.', max_length=255, null=True),
+            model_name="study",
+            name="completion_data",
+            field=models.CharField(
+                blank=True,
+                help_text="Data to be included in the completion url.",
+                max_length=255,
+                null=True,
+            ),
         ),
     ]

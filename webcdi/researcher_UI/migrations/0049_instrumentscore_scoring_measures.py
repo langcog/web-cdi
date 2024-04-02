@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('researcher_UI', '0048_auto_20200409_1841'),
+        ("researcher_UI", "0048_auto_20200409_1841"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='instrumentscore',
-            name='scoring_measures',
+            model_name="instrumentscore",
+            name="scoring_measures",
             field=models.CharField(default=1, max_length=101),
             preserve_default=False,
         ),

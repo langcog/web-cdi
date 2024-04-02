@@ -1,5 +1,3 @@
-
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 import urllib
@@ -58,7 +56,7 @@ INSTALLED_APPS = (
     "django.contrib.staticfiles",
     "django.contrib.humanize",
     "cdi_forms",
-    'api',
+    "api",
     "crispy_forms",
     "bootstrap4",
     "bootstrap3",
@@ -91,9 +89,7 @@ MIDDLEWARE = [
     "webcdi.middleware.AdminLocaleMiddleware",
 ]
 
-AUTHENTICATION_BACKENDS = [
-    "django.contrib.auth.backends.ModelBackend"
-]
+AUTHENTICATION_BACKENDS = ["django.contrib.auth.backends.ModelBackend"]
 
 AXES_ENABLED = False
 

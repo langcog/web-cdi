@@ -9,13 +9,19 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('researcher_UI', '0028_administrationsummary'),
+        ("researcher_UI", "0028_administrationsummary"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='study',
-            name='test_period',
-            field=models.IntegerField(default=14, validators=[django.core.validators.MinValueValidator(1), django.core.validators.MaxValueValidator(28)]),
+            model_name="study",
+            name="test_period",
+            field=models.IntegerField(
+                default=14,
+                validators=[
+                    django.core.validators.MinValueValidator(1),
+                    django.core.validators.MaxValueValidator(28),
+                ],
+            ),
         ),
     ]

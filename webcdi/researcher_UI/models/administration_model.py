@@ -1,13 +1,15 @@
 import logging
-from django.db import models
 
+from django.db import models
 from django.shortcuts import reverse
 
-logger = logging.getLogger('debug')
+logger = logging.getLogger("debug")
+
 
 class AdministrationManager(models.Manager):
     def is_active(self):
         return super().get_queryset().filter(is_active=True)
+
 
 # Model for individual administrations
 class Administration(models.Model):
@@ -91,12 +93,12 @@ class Administration(models.Model):
 
     def redirect_url(self):
         target = f"{self.study.redirect_url}".strip()
-        if '{source_id}' in target:
-            logger.debug('Got a source_id')
-            target = target.replace('{source_id}', self.backgroundinfo.source_id)
+        if "{source_id}" in target:
+            logger.debug("Got a source_id")
+            target = target.replace("{source_id}", self.backgroundinfo.source_id)
 
         # TODO if study completed and redirect_url is a call to a redirect, get the actual URL
-        
+
         if self.study.append_source_id_to_redirect:
             target = f"{target}?{self.study.source_id_url_parameter_key}={self.backgroundinfo.source_id}"
         return target
@@ -125,7 +127,5 @@ class administration_data(models.Model):
             "item_ID",
         )  # Each administation_data object must have a unique combination of administration ID and item ID.
 
-
     def __str__(self):
         return f"%s %s" % (self.administration, self.item_ID)
-

@@ -2,9 +2,10 @@ import json
 import os
 
 import pandas as pd
-from cdi_forms.models import BackgroundInfo
 from django.conf import settings
 from django.urls import reverse
+
+from cdi_forms.models import BackgroundInfo
 from researcher_UI.models import Administration, administration_data
 from researcher_UI.utils.processDemos import processDemos_fun
 from researcher_UI.utils.random_url_generator import random_url_generator

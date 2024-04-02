@@ -4,15 +4,16 @@ from researcher_UI.models import Administration
 
 from .utils import string_bool_coerce
 
-YESNO_CHOICES = ((False, 'No'), (True, 'Yes'))
+YESNO_CHOICES = ((False, "No"), (True, "Yes"))
+
 
 class CatItemForm(forms.ModelForm):
     item = forms.TypedChoiceField(
-        choices=YESNO_CHOICES, 
-        widget=forms.RadioSelect, 
-        coerce = string_bool_coerce,
-        required=True, 
-        label= "Does your child know?"
+        choices=YESNO_CHOICES,
+        widget=forms.RadioSelect,
+        coerce=string_bool_coerce,
+        required=True,
+        label="Does your child know?",
     )
     word_id = forms.IntegerField(
         widget=forms.HiddenInput,
@@ -24,15 +25,13 @@ class CatItemForm(forms.ModelForm):
 
     class Meta:
         model = Administration
-        fields = ['word_id','item','label']
-        widgets = {
-            'word_id' : forms.HiddenInput(),
-            'label' : forms.HiddenInput()
-        }
+        fields = ["word_id", "item", "label"]
+        widgets = {"word_id": forms.HiddenInput(), "label": forms.HiddenInput()}
 
     def __init__(self, *args, **kwargs):
-        self.context = kwargs.pop('context', None)
+        self.context = kwargs.pop("context", None)
         super().__init__(*args, **kwargs)
         try:
-            self.fields['item'].label = self.context['label']
-        except: pass
+            self.fields["item"].label = self.context["label"]
+        except:
+            pass

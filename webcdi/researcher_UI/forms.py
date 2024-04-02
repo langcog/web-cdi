@@ -1,3 +1,5 @@
+import logging
+
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import HTML, Div, Field, Fieldset, Layout, Submit
@@ -5,10 +7,13 @@ from django import forms
 from django.contrib.postgres.forms import IntegerRangeField
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
+
 from form_utils.forms import BetterModelForm
 from researcher_UI.models import *
 
 from . import choices
+
+logger = logging.getLogger("debug")
 
 
 # Form for creating a new study
@@ -180,9 +185,7 @@ class AddStudyForm(BetterModelForm):
             }
         ),
     )
-    gift_card_provider = forms.ChoiceField(
-        choices=PaymentCode.PAYMENT_TYPE_CHOICES
-    )
+    gift_card_provider = forms.ChoiceField(choices=PaymentCode.PAYMENT_TYPE_CHOICES)
     gift_codes = forms.CharField(
         widget=forms.Textarea(
             attrs={
@@ -191,7 +194,7 @@ class AddStudyForm(BetterModelForm):
         ),
         required=False,
         label="Gift Card Codes",
-        help_text="Paste gift card codes here. Can be separated by spaces, commas, or new lines."
+        help_text="Paste gift card codes here. Can be separated by spaces, commas, or new lines.",
     )  # Can add a list of gift card codes (separated by new lines, commas, or spaces) to the PaymentCode model that are given out to participants upon completion of current study.
     gift_amount = forms.CharField(
         max_length=7,
@@ -217,15 +220,15 @@ class AddStudyForm(BetterModelForm):
         self.helper.form_method = "post"
         self.fields["backpage_boolean"].initial = True
 
-        if self.researcher: 
+        if self.researcher:
             self.fields["instrument"] = forms.ModelChoiceField(
                 queryset=Instrument.objects.filter(
                     researcher=self.researcher.researcher
-                ), 
+                ),
                 empty_label="(choose from the list)",
             )
         else:
-            try: 
+            try:
                 self.fields["instrument"] = forms.ModelChoiceField(
                     queryset=Instrument.objects.filter(pk=self.instance.instrument.pk),
                     empty_label=None,
@@ -244,8 +247,7 @@ class AddStudyForm(BetterModelForm):
 
         for field in self.fields:
             if not isinstance(self.fields[field].widget, forms.widgets.CheckboxInput):
-                self.fields[field].widget.attrs['class'] = 'form-control'
-
+                self.fields[field].widget.attrs["class"] = "form-control"
 
     def study_options_fieldset(self):
         return Fieldset(
@@ -257,8 +259,12 @@ class AddStudyForm(BetterModelForm):
             Field("birth_weight_units"),
             Field("timing"),
             Field("allow_payment", css_class="css_enabler"),
-
-            Div(Field("gift_card_provider", css_class="allow_payment collapse form-control")),
+            Div(
+                Field(
+                    "gift_card_provider",
+                    css_class="allow_payment collapse form-control",
+                )
+            ),
             Div(Field("gift_codes"), css_class="allow_payment collapse"),
             Div(Field("gift_amount"), css_class="allow_payment collapse"),
             Field("anon_collection"),

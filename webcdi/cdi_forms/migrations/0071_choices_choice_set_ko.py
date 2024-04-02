@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cdi_forms', '0070_merge_20200421_0708'),
+        ("cdi_forms", "0070_merge_20200421_0708"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='choices',
-            name='choice_set_ko',
+            model_name="choices",
+            name="choice_set_ko",
             field=models.CharField(max_length=101, null=True),
         ),
     ]

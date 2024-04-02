@@ -8,27 +8,22 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cdi_forms', '0039_populate_choice_model'),
+        ("cdi_forms", "0039_populate_choice_model"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='english_wg',
-            name='choices',
+            model_name="english_wg",
+            name="choices",
         ),
         migrations.RemoveField(
-            model_name='english_ws',
-            name='choices',
+            model_name="english_ws",
+            name="choices",
         ),
         migrations.RenameField(
-            model_name='english_wg',
-            old_name='choices_link',
-            new_name='choices'
+            model_name="english_wg", old_name="choices_link", new_name="choices"
         ),
         migrations.RenameField(
-            model_name='english_ws',
-            old_name='choices_link',
-            new_name='choices'
+            model_name="english_ws", old_name="choices_link", new_name="choices"
         ),
-
     ]

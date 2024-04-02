@@ -4,8 +4,9 @@ import json
 import re
 
 import pandas as pd
-from cdi_forms.models import BackgroundInfo, Zipcode
 from django.conf import settings
+
+from cdi_forms.models import BackgroundInfo, Zipcode
 from researcher_UI.utils.make_str import make_str_fun
 
 
@@ -50,9 +51,11 @@ def processDemos_fun(csv_file, demo_list=None):
                 recoded_df[col] = (
                     recoded_df[col]
                     .apply(
-                        lambda x: int(x)
-                        if x in range(1950, datetime.datetime.today().year + 1)
-                        else 0
+                        lambda x: (
+                            int(x)
+                            if x in range(1950, datetime.datetime.today().year + 1)
+                            else 0
+                        )
                     )
                     .astype("int")
                 )
@@ -64,9 +67,11 @@ def processDemos_fun(csv_file, demo_list=None):
                 )
             elif col == "early_or_late":
                 recoded_df[col] = recoded_df[col].apply(
-                    lambda x: make_str_fun(x.lower())
-                    if x and x.lower() in ["early", "late"]
-                    else None
+                    lambda x: (
+                        make_str_fun(x.lower())
+                        if x and x.lower() in ["early", "late"]
+                        else None
+                    )
                 )
             elif col == "zip_code":
 
@@ -118,19 +123,24 @@ def processDemos_fun(csv_file, demo_list=None):
                 recoded_df[col] = recoded_df[col].apply(round_kg)
             elif col == "annual_income":
                 recoded_df[col] = recoded_df[col].apply(
-                    lambda x: make_str_fun(x)
-                    if x
-                    and x in dict(BackgroundInfo._meta.get_field(col).choices).keys()
-                    else "Prefer not to disclose"
+                    lambda x: (
+                        make_str_fun(x)
+                        if x
+                        and x
+                        in dict(BackgroundInfo._meta.get_field(col).choices).keys()
+                        else "Prefer not to disclose"
+                    )
                 )
             elif col == "child_ethnicity":
                 recoded_df[col] = recoded_df[col].apply(
-                    lambda x: list(
-                        set(make_str_fun(x).upper().split("/"))
-                        & set(["N", "H", "W", "B", "A", "O"])
+                    lambda x: (
+                        list(
+                            set(make_str_fun(x).upper().split("/"))
+                            & set(["N", "H", "W", "B", "A", "O"])
+                        )
+                        if x
+                        else []
                     )
-                    if x
-                    else []
                 )
             elif col == "other_languages":
                 lang_choices = [
@@ -140,12 +150,14 @@ def processDemos_fun(csv_file, demo_list=None):
                     ).iteritems()
                 ]
                 recoded_df[col] = recoded_df[col].apply(
-                    lambda x: list(
-                        set([y.strip() for y in make_str_fun(x).split("/")])
-                        & set(lang_choices)
+                    lambda x: (
+                        list(
+                            set([y.strip() for y in make_str_fun(x).split("/")])
+                            & set(lang_choices)
+                        )
+                        if x
+                        else []
                     )
-                    if x
-                    else []
                 )
 
     recoded_df = recoded_df.where((pd.notnull(recoded_df)), None)

@@ -36,4 +36,3 @@ LITERACY_CHOICES = [
     (FIVE_SIX, FIVE_SIX.title()),
     (DAILY, DAILY.title()),
 ]
-

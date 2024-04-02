@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+
 """
 Backend
 
@@ -40,13 +41,13 @@ Original License::
     (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
-__author__ = 'Alisue <lambdalisue@hashnote.net>'
-__all__ = ('get_backend', 'RegistrationBackendBase')
+__author__ = "Alisue <lambdalisue@hashnote.net>"
+__all__ = ("get_backend", "RegistrationBackendBase")
 from django.core.exceptions import ImproperlyConfigured
 
-from registration.conf import settings
-from registration.compat import import_module
 from registration.backends.base import RegistrationBackendBase
+from registration.compat import import_module
+from registration.conf import settings
 
 
 def get_backend_class(path=None):
@@ -61,23 +62,29 @@ def get_backend_class(path=None):
 
     """
     path = path or settings.REGISTRATION_BACKEND_CLASS
-    i = path.rfind('.')
-    module, attr = path[:i], path[i+1:]
+    i = path.rfind(".")
+    module, attr = path[:i], path[i + 1 :]
     try:
         mod = import_module(module)
     except ImportError as e:
         raise ImproperlyConfigured(
-                'Error loading registration backend %s: "%s"' % (module, e))
+            'Error loading registration backend %s: "%s"' % (module, e)
+        )
     try:
         cls = getattr(mod, attr)
     except AttributeError:
-        raise ImproperlyConfigured((
-                'Module "%s" does not define a registration backend named "%s"'
-                ) % (module, attr))
+        raise ImproperlyConfigured(
+            ('Module "%s" does not define a registration backend named "%s"')
+            % (module, attr)
+        )
     if cls and not issubclass(cls, RegistrationBackendBase):
-        raise ImproperlyConfigured((
+        raise ImproperlyConfigured(
+            (
                 'Registration backend class "%s" must be a subclass of '
-                '``registration.backends.RegistrationBackendBase``') % path)
+                "``registration.backends.RegistrationBackendBase``"
+            )
+            % path
+        )
     return cls
 
 

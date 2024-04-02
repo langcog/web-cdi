@@ -6,9 +6,8 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('researcher_UI', '0054_auto_20200821_1132'),
-        ('researcher_UI', '0053_study_backpage_boolean'),
+        ("researcher_UI", "0054_auto_20200821_1132"),
+        ("researcher_UI", "0053_study_backpage_boolean"),
     ]
 
-    operations = [
-    ]
+    operations = []

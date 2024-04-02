@@ -8,13 +8,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cdi_forms', '0059_auto_20190801_1616'),
+        ("cdi_forms", "0059_auto_20190801_1616"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='backgroundinfo',
-            name='sex',
-            field=models.CharField(blank=True, choices=[('M', 'Male'), ('F', 'Female'), ('O', 'Other')], max_length=1, null=True),
+            model_name="backgroundinfo",
+            name="sex",
+            field=models.CharField(
+                blank=True,
+                choices=[("M", "Male"), ("F", "Female"), ("O", "Other")],
+                max_length=1,
+                null=True,
+            ),
         ),
     ]

@@ -3,7 +3,9 @@ from __future__ import unicode_literals
 
 from django.contrib.auth.models import User
 from django.db import models
+
 from .researcher_model import Researcher
+
 
 class Demographic(models.Model):
     """
@@ -74,5 +76,3 @@ def get_background_header():  # Returns a list of variables for backgroundinfo o
         "vision_problems_boolean",
         "vision_problems",
     ]
-
-

@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('researcher_UI', '0052_study_prolific_boolean'),
+        ("researcher_UI", "0052_study_prolific_boolean"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='study',
-            name='print_my_answers_boolean',
+            model_name="study",
+            name="print_my_answers_boolean",
             field=models.BooleanField(default=True),
         ),
     ]

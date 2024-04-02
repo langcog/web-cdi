@@ -1,20 +1,18 @@
 import numpy as np
 import pandas as pd
-from cdi_forms.models import BackgroundInfo, Instrument_Forms
-from cdi_forms.views import get_model_header
 from django.contrib import messages
 from django.contrib.sites.shortcuts import get_current_site
 from django.http import HttpResponse, HttpResponseServerError
 from django.shortcuts import render
 from django.urls import reverse
-from researcher_UI.models import Administration, InstrumentScore, administration_data
-from researcher_UI.utils import (
-    format_admin_data,
-    format_admin_header,
-    get_background_header,
-    get_score_headers,
-    get_study_scores,
-)
+
+from cdi_forms.models import BackgroundInfo, Instrument_Forms
+from cdi_forms.views import get_model_header
+from researcher_UI.models import (Administration, InstrumentScore,
+                                  administration_data)
+from researcher_UI.utils import (format_admin_data, format_admin_header,
+                                 get_background_header, get_score_headers,
+                                 get_study_scores)
 
 
 def download_data(
@@ -96,7 +94,7 @@ def download_data(
     # Add scoring
     melted_scores = get_study_scores(administrations)
     if len(melted_scores) > 0:
-        #return HttpResponseServerError(f"There are no data in the study(ies) to report")
+        # return HttpResponseServerError(f"There are no data in the study(ies) to report")
         score_header = get_score_headers(study_obj, adjusted=adjusted)
         melted_scores.set_index("administration_id")
         missing_columns = list(set(score_header) - set(melted_scores.columns))
@@ -107,9 +105,10 @@ def download_data(
 
         for instance in InstrumentScore.objects.filter(instrument=study_obj.instrument):
             if instance.kind == "count":
-                melted_scores[instance.title].replace(r"^\s*$", 0, regex=True, inplace=True)
+                melted_scores[instance.title].replace(
+                    r"^\s*$", 0, regex=True, inplace=True
+                )
                 melted_scores[instance.title].replace(np.NaN, 0, inplace=True)
-
 
         try:
             background_answers1 = pd.merge(
@@ -120,7 +119,9 @@ def download_data(
             )
         except:
             background_answers = pd.DataFrame(
-                columns=list(new_background) + list(melted_answers) + list(melted_scores)
+                columns=list(new_background)
+                + list(melted_answers)
+                + list(melted_scores)
             )
     else:
         try:
@@ -173,9 +174,7 @@ def download_data(
             admin_header + background_header + model_header + score_header
         ]
     else:
-        combined_data = combined_data[
-            admin_header + background_header + model_header
-        ]
+        combined_data = combined_data[admin_header + background_header + model_header]
 
     combined_data = combined_data.replace("nan", "", regex=True)
     combined_data = combined_data.replace("None", "", regex=True)
@@ -187,16 +186,29 @@ def download_data(
         "WS",
         "WG",
     ]:
-        pd.concat([combined_data, pd.DataFrame([ {"study_name": "3rd Edition (Marchman et al., 2023)"}])], ignore_index=True)
+        pd.concat(
+            [
+                combined_data,
+                pd.DataFrame([{"study_name": "3rd Edition (Marchman et al., 2023)"}]),
+            ],
+            ignore_index=True,
+        )
     if study_obj.instrument.language in ["Spanish"] and study_obj.instrument.form in [
         "WS",
         "WG",
     ]:
-        pd.concat([combined_data, pd.DataFrame([ {"study_name": "3rd Edition (Jackson-Maldonado et al. 2003)"}])], ignore_index=True)
-        
+        pd.concat(
+            [
+                combined_data,
+                pd.DataFrame(
+                    [{"study_name": "3rd Edition (Jackson-Maldonado et al. 2003)"}]
+                ),
+            ],
+            ignore_index=True,
+        )
+
     # Turn pandas dataframe into a CSV
     combined_data.to_csv(response, encoding="utf-8", index=False)
-
 
     # Return CSV
     return response

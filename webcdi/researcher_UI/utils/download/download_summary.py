@@ -1,12 +1,14 @@
 import numpy as np
 import pandas as pd
-from cdi_forms.models import BackgroundInfo
 from django.contrib.sites.shortcuts import get_current_site
 from django.http import HttpResponse, HttpResponseServerError
 from django.urls import reverse
+
+from cdi_forms.models import BackgroundInfo
 from researcher_UI.models import Administration
 from researcher_UI.utils.background_header import get_background_header
-from researcher_UI.utils.format_admin import format_admin_data, format_admin_header
+from researcher_UI.utils.format_admin import (format_admin_data,
+                                              format_admin_header)
 from researcher_UI.utils.score_headers import get_score_headers
 from researcher_UI.utils.study_score import get_study_scores
 
@@ -109,7 +111,13 @@ def download_summary(request, study_obj, administrations=None):
         "WS",
         "WG",
     ]:
-        pd.concat([combined_data, pd.DataFrame([ {"study_name": "3rd Edition (Marchman et al., 2023)"}])], ignore_index=True)
+        pd.concat(
+            [
+                combined_data,
+                pd.DataFrame([{"study_name": "3rd Edition (Marchman et al., 2023)"}]),
+            ],
+            ignore_index=True,
+        )
 
     # Turn pandas dataframe into a CSV
     combined_data.to_csv(response, encoding="utf-8", index=False)

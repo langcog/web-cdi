@@ -6,13 +6,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('researcher_UI', '0061_auto_20210122_0838'),
+        ("researcher_UI", "0061_auto_20210122_0838"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='study',
-            name='participant_source_boolean',
-            field=models.IntegerField(choices=[(0, 'None'), (1, 'Prolific'), (2, 'Centiment')], default=0),
+            model_name="study",
+            name="participant_source_boolean",
+            field=models.IntegerField(
+                choices=[(0, "None"), (1, "Prolific"), (2, "Centiment")], default=0
+            ),
         ),
     ]

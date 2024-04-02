@@ -6,13 +6,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('researcher_UI', '0080_auto_20230816_0454'),
+        ("researcher_UI", "0080_auto_20230816_0454"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='researcher',
-            name='allowed_instruments',
-            field=models.ManyToManyField(blank=True, to='researcher_UI.Instrument', verbose_name='Instruments this researcher has access to'),
+            model_name="researcher",
+            name="allowed_instruments",
+            field=models.ManyToManyField(
+                blank=True,
+                to="researcher_UI.Instrument",
+                verbose_name="Instruments this researcher has access to",
+            ),
         ),
     ]

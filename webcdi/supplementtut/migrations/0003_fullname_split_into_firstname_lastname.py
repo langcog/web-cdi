@@ -8,29 +8,33 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('supplementtut', '0002_myregistrationsupplement_position'),
+        ("supplementtut", "0002_myregistrationsupplement_position"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='myregistrationsupplement',
-            name='name',
+            model_name="myregistrationsupplement",
+            name="name",
         ),
         migrations.AddField(
-            model_name='myregistrationsupplement',
-            name='first_name',
-            field=models.CharField(default='FirstName', max_length=101, verbose_name='First name'),
+            model_name="myregistrationsupplement",
+            name="first_name",
+            field=models.CharField(
+                default="FirstName", max_length=101, verbose_name="First name"
+            ),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='myregistrationsupplement',
-            name='last_name',
-            field=models.CharField(default='LastName', max_length=101, verbose_name='Last name'),
+            model_name="myregistrationsupplement",
+            name="last_name",
+            field=models.CharField(
+                default="LastName", max_length=101, verbose_name="Last name"
+            ),
             preserve_default=False,
         ),
         migrations.AlterField(
-            model_name='myregistrationsupplement',
-            name='institution',
-            field=models.CharField(max_length=101, verbose_name='Name of Institution'),
+            model_name="myregistrationsupplement",
+            name="institution",
+            field=models.CharField(max_length=101, verbose_name="Name of Institution"),
         ),
     ]

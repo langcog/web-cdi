@@ -8,17 +8,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('researcher_UI', '0030_instrumentscore'),
+        ("researcher_UI", "0030_instrumentscore"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='instrumentscore',
-            options={'ordering': ['instrument', 'order']},
+            name="instrumentscore",
+            options={"ordering": ["instrument", "order"]},
         ),
         migrations.AddField(
-            model_name='instrumentscore',
-            name='order',
+            model_name="instrumentscore",
+            name="order",
             field=models.IntegerField(default=999),
         ),
     ]

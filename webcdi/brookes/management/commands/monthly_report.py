@@ -1,11 +1,12 @@
 import csv
 import datetime
 
-from brookes.models import BrookesCode
 from django.conf import settings
 from django.contrib.sites.models import Site
 from django.core.mail import EmailMessage
 from django.core.management.base import BaseCommand
+
+from brookes.models import BrookesCode
 
 
 class Command(BaseCommand):

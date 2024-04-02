@@ -8,20 +8,19 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('researcher_UI', '0027_study_active'),
+        ("researcher_UI", "0027_study_active"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='AdministrationSummary',
-            fields=[
-            ],
+            name="AdministrationSummary",
+            fields=[],
             options={
-                'verbose_name': 'Administration Summary',
-                'proxy': True,
-                'verbose_name_plural': 'Administration Summary',
-                'indexes': [],
+                "verbose_name": "Administration Summary",
+                "proxy": True,
+                "verbose_name_plural": "Administration Summary",
+                "indexes": [],
             },
-            bases=('researcher_UI.administration',),
+            bases=("researcher_UI.administration",),
         ),
     ]

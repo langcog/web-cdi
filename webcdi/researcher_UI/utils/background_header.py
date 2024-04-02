@@ -2,7 +2,7 @@ def get_background_header(study_obj):
     # Fetch background data variables
     background_header = [
         "source_id",
-        'event_id',
+        "event_id",
         "age",
         "sex",
         "country",

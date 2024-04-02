@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cdi_forms', '0052_auto_20190408_0940'),
+        ("cdi_forms", "0052_auto_20190408_0940"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='choices',
-            name='choice_set_en_ca',
+            model_name="choices",
+            name="choice_set_en_ca",
             field=models.CharField(max_length=101, null=True),
         ),
     ]

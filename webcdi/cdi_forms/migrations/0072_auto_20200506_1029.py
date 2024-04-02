@@ -7,13 +7,24 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cdi_forms', '0071_backgroundinfo_prolific_pid'),
+        ("cdi_forms", "0071_backgroundinfo_prolific_pid"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='backgroundinfo',
-            name='zip_code',
-            field=models.CharField(blank=True, max_length=6, null=True, validators=[django.core.validators.RegexValidator(message='Please enter a valid U.S. zip code', regex='^(\\d{3}([*]{2})?)|([A-Z]{2}|\\d{4}([A-Z]{2}}))$')], verbose_name='Zip Code (if you live in the U.S.)'),
+            model_name="backgroundinfo",
+            name="zip_code",
+            field=models.CharField(
+                blank=True,
+                max_length=6,
+                null=True,
+                validators=[
+                    django.core.validators.RegexValidator(
+                        message="Please enter a valid U.S. zip code",
+                        regex="^(\\d{3}([*]{2})?)|([A-Z]{2}|\\d{4}([A-Z]{2}}))$",
+                    )
+                ],
+                verbose_name="Zip Code (if you live in the U.S.)",
+            ),
         ),
     ]

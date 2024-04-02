@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+
 """
 Registration Supplement
 """
-__author__ = 'Alisue <lambdalisue@hashnote.net>'
-__all__ = ('RegistrationSupplementBase', 'get_supplement_class')
+__author__ = "Alisue <lambdalisue@hashnote.net>"
+__all__ = ("RegistrationSupplementBase", "get_supplement_class")
 from django.core.exceptions import ImproperlyConfigured
 
 from registration.compat import import_module
@@ -19,28 +20,36 @@ def get_supplement_class(path=None):
     exists, or because the module does not contain a class of the
     appropriate name), ``django.core.exceptions.ImproperlyConfigured``
     is raised.
-   
+
     """
     from registration.conf import settings
+
     path = path or settings.REGISTRATION_SUPPLEMENT_CLASS
     if not path:
         return None
-    i = path.rfind('.')
-    module, attr = path[:i], path[i+1:]
+    i = path.rfind(".")
+    module, attr = path[:i], path[i + 1 :]
     try:
         mod = import_module(module)
     except ImportError as e:
         raise ImproperlyConfigured(
-                'Error loading registration addition %s: "%s"' % (module, e))
+            'Error loading registration addition %s: "%s"' % (module, e)
+        )
     try:
         cls = getattr(mod, attr)
     except AttributeError:
-        raise ImproperlyConfigured((
-                'Module "%s" does not define a registration supplement named '
-                '"%s"') % (module, attr))
+        raise ImproperlyConfigured(
+            ('Module "%s" does not define a registration supplement named ' '"%s"')
+            % (module, attr)
+        )
     from registration.supplements.base import RegistrationSupplementBase
+
     if cls and not issubclass(cls, RegistrationSupplementBase):
-        raise ImproperlyConfigured((
-            'Registration supplement class "%s" must be a subclass of '
-            '``registration.supplements.RegistrationSupplementBase``') % path)
+        raise ImproperlyConfigured(
+            (
+                'Registration supplement class "%s" must be a subclass of '
+                "``registration.supplements.RegistrationSupplementBase``"
+            )
+            % path
+        )
     return cls

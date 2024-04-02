@@ -9,14 +9,16 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cdi_forms', '0045_add_french_to_choices_model'),
+        ("cdi_forms", "0045_add_french_to_choices_model"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='instrument_forms',
-            name='item_order',
-            field=models.IntegerField(default=999, validators=[django.core.validators.MinValueValidator(1)]),
+            model_name="instrument_forms",
+            name="item_order",
+            field=models.IntegerField(
+                default=999, validators=[django.core.validators.MinValueValidator(1)]
+            ),
             preserve_default=False,
         ),
     ]

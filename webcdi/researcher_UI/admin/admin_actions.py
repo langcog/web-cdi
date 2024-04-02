@@ -1,8 +1,8 @@
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
-from researcher_UI.utils.download import download_data, download_summary
 
 from researcher_UI.models import Administration
+from researcher_UI.utils.download import download_data, download_summary
 
 
 def scoring_data(modeladmin, request, queryset):

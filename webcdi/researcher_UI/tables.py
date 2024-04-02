@@ -1,7 +1,9 @@
 import django_tables2 as tables
-from django.utils.safestring import mark_safe
-from researcher_UI.models import Administration
 from django.utils.html import mark_safe
+from django.utils.safestring import mark_safe
+
+from researcher_UI.models import Administration
+
 
 # Table for organizing administration objects into a table on the researcher interface
 class StudyAdministrationTable(tables.Table):
@@ -28,9 +30,7 @@ class StudyAdministrationTable(tables.Table):
         return (
             mark_safe('<span class="true">✔</span>')
             if value
-            else mark_safe('<span class="false">✘</span>')
-            if not value
-            else ""
+            else mark_safe('<span class="false">✘</span>') if not value else ""
         )
 
     # Associates administration table with administration model

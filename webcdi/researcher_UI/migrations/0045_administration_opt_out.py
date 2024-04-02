@@ -6,13 +6,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('researcher_UI', '0044_study_timing'),
+        ("researcher_UI", "0044_study_timing"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='administration',
-            name='opt_out',
-            field=models.NullBooleanField(default=None, verbose_name='Participant opted out of broader sharing'),
+            model_name="administration",
+            name="opt_out",
+            field=models.NullBooleanField(
+                default=None, verbose_name="Participant opted out of broader sharing"
+            ),
         ),
     ]

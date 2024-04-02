@@ -8,22 +8,22 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('researcher_UI', '0034_benchmark'),
+        ("researcher_UI", "0034_benchmark"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='benchmark',
-            options={'ordering': ['instrument_score', 'age', 'raw_score']},
+            name="benchmark",
+            options={"ordering": ["instrument_score", "age", "raw_score"]},
         ),
         migrations.RenameField(
-            model_name='benchmark',
-            old_name='raw_score_boy',
-            new_name='percentile_boy',
+            model_name="benchmark",
+            old_name="raw_score_boy",
+            new_name="percentile_boy",
         ),
         migrations.RenameField(
-            model_name='benchmark',
-            old_name='raw_score_girl',
-            new_name='percentile_girl',
+            model_name="benchmark",
+            old_name="raw_score_girl",
+            new_name="percentile_girl",
         ),
     ]

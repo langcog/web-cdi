@@ -6,14 +6,16 @@ Time-stamp: <2010-04-28 02:57:16 carljm forms.py>
 
 """
 from __future__ import unicode_literals
+
 from copy import deepcopy
 
 from django import forms
+
 try:
-    from django.forms.utils import flatatt, ErrorDict
-except ImportError: # Django < 1.9 compatibility
-    from django.forms.util import flatatt, ErrorDict
-#from django.utils import six
+    from django.forms.utils import ErrorDict, flatatt
+except ImportError:  # Django < 1.9 compatibility
+    from django.forms.util import ErrorDict, flatatt
+# from django.utils import six
 import six
 from django.utils.safestring import mark_safe
 
@@ -32,8 +34,8 @@ def with_metaclass(meta, *bases):
 
 class Fieldset(object):
     """An iterable Fieldset with a legend and a set of BoundFields."""
-    def __init__(self, form, name, boundfields, legend='', classes='',
-                 description=''):
+
+    def __init__(self, form, name, boundfields, legend="", classes="", description=""):
         self.form = form
         self.boundfields = boundfields
         if legend is None:
@@ -44,8 +46,14 @@ class Fieldset(object):
         self.name = name
 
     def _errors(self):
-        return ErrorDict(((k, v) for (k, v) in six.iteritems(self.form.errors)
-                          if k in [f.name for f in self.boundfields]))
+        return ErrorDict(
+            (
+                (k, v)
+                for (k, v) in six.iteritems(self.form.errors)
+                if k in [f.name for f in self.boundfields]
+            )
+        )
+
     errors = property(_errors)
 
     def __iter__(self):
@@ -54,9 +62,13 @@ class Fieldset(object):
 
     def __repr__(self):
         return "%s('%s', %s, legend='%s', classes='%s', description='%s')" % (
-            self.__class__.__name__, self.name,
-            [f.name for f in self.boundfields], self.legend, self.classes,
-            self.description)
+            self.__class__.__name__,
+            self.name,
+            [f.name for f in self.boundfields],
+            self.legend,
+            self.classes,
+            self.description,
+        )
 
 
 class FieldsetCollection(object):
@@ -84,27 +96,34 @@ class FieldsetCollection(object):
 
     def _gather_fieldsets(self):
         if not self.fieldsets:
-            self.fieldsets = (('main', {'fields': self.form.fields.keys(),
-                                        'legend': ''}),)
+            self.fieldsets = (
+                ("main", {"fields": self.form.fields.keys(), "legend": ""}),
+            )
         for name, options in self.fieldsets:
             try:
-                field_names = [n for n in options['fields']
-                               if n in self.form.fields]
+                field_names = [n for n in options["fields"] if n in self.form.fields]
             except KeyError:
                 message = "Fieldset definition must include 'fields' option."
                 raise ValueError(message)
-            boundfields = [forms.forms.BoundField(self.form,
-                                                  self.form.fields[n], n)
-                           for n in field_names]
-            self._cached_fieldsets.append(Fieldset(self.form, name,
-                boundfields, options.get('legend', None),
-                ' '.join(options.get('classes', ())),
-                options.get('description', '')))
+            boundfields = [
+                forms.forms.BoundField(self.form, self.form.fields[n], n)
+                for n in field_names
+            ]
+            self._cached_fieldsets.append(
+                Fieldset(
+                    self.form,
+                    name,
+                    boundfields,
+                    options.get("legend", None),
+                    " ".join(options.get("classes", ())),
+                    options.get("description", ""),
+                )
+            )
 
 
 def _get_meta_attr(attrs, attr, default):
     try:
-        ret = getattr(attrs['Meta'], attr)
+        ret = getattr(attrs["Meta"], attr)
     except (KeyError, AttributeError):
         ret = default
     return ret
@@ -112,7 +131,7 @@ def _get_meta_attr(attrs, attr, default):
 
 def _set_meta_attr(attrs, attr, value):
     try:
-        setattr(attrs['Meta'], attr, value)
+        setattr(attrs["Meta"], attr, value)
         return True
     except KeyError:
         return False
@@ -120,11 +139,11 @@ def _set_meta_attr(attrs, attr, value):
 
 def get_fieldsets(bases, attrs):
     """Get the fieldsets definition from the inner Meta class."""
-    fieldsets = _get_meta_attr(attrs, 'fieldsets', None)
+    fieldsets = _get_meta_attr(attrs, "fieldsets", None)
     if fieldsets is None:
-        #grab the fieldsets from the first base class that has them
+        # grab the fieldsets from the first base class that has them
         for base in bases:
-            fieldsets = getattr(base, 'base_fieldsets', None)
+            fieldsets = getattr(base, "base_fieldsets", None)
             if fieldsets is not None:
                 break
     fieldsets = fieldsets or []
@@ -136,56 +155,61 @@ def get_fields_from_fieldsets(fieldsets):
     fields = []
     try:
         for name, options in fieldsets:
-            fields.extend(options['fields'])
+            fields.extend(options["fields"])
     except (TypeError, KeyError):
-        raise ValueError('"fieldsets" must be an iterable of two-tuples, '
-                         'and the second tuple must be a dictionary '
-                         'with a "fields" key')
+        raise ValueError(
+            '"fieldsets" must be an iterable of two-tuples, '
+            "and the second tuple must be a dictionary "
+            'with a "fields" key'
+        )
     return fields or None
 
 
 def get_row_attrs(bases, attrs):
     """Get the row_attrs definition from the inner Meta class."""
-    return _get_meta_attr(attrs, 'row_attrs', {})
+    return _get_meta_attr(attrs, "row_attrs", {})
 
 
 def _mark_row_attrs(bf, form):
     row_attrs = deepcopy(form._row_attrs.get(bf.name, {}))
     if bf.field.required:
-        req_class = 'required'
+        req_class = "required"
     else:
-        req_class = 'optional'
+        req_class = "optional"
     if bf.errors:
-        req_class += ' error'
-    if 'class' in row_attrs:
-        row_attrs['class'] = row_attrs['class'] + ' ' + req_class
+        req_class += " error"
+    if "class" in row_attrs:
+        row_attrs["class"] = row_attrs["class"] + " " + req_class
     else:
-        row_attrs['class'] = req_class
+        row_attrs["class"] = req_class
     bf.row_attrs = mark_safe(flatatt(row_attrs))
     return bf
 
 
 class BetterFormBaseMetaclass(type):
     def __new__(cls, name, bases, attrs):
-        attrs['base_fieldsets'] = get_fieldsets(bases, attrs)
-        fields = get_fields_from_fieldsets(attrs['base_fieldsets'])
-        if (_get_meta_attr(attrs, 'fields', None) is None and
-            _get_meta_attr(attrs, 'exclude', None) is None):
-            _set_meta_attr(attrs, 'fields', fields)
-        attrs['base_row_attrs'] = get_row_attrs(bases, attrs)
+        attrs["base_fieldsets"] = get_fieldsets(bases, attrs)
+        fields = get_fields_from_fieldsets(attrs["base_fieldsets"])
+        if (
+            _get_meta_attr(attrs, "fields", None) is None
+            and _get_meta_attr(attrs, "exclude", None) is None
+        ):
+            _set_meta_attr(attrs, "fields", fields)
+        attrs["base_row_attrs"] = get_row_attrs(bases, attrs)
 
-        new_class = super(BetterFormBaseMetaclass,
-                          cls).__new__(cls, name, bases, attrs)
+        new_class = super(BetterFormBaseMetaclass, cls).__new__(cls, name, bases, attrs)
         return new_class
 
 
-class BetterFormMetaclass(BetterFormBaseMetaclass,
-                          forms.forms.DeclarativeFieldsMetaclass):
+class BetterFormMetaclass(
+    BetterFormBaseMetaclass, forms.forms.DeclarativeFieldsMetaclass
+):
     pass
 
 
-class BetterModelFormMetaclass(BetterFormBaseMetaclass,
-                               forms.models.ModelFormMetaclass):
+class BetterModelFormMetaclass(
+    BetterFormBaseMetaclass, forms.models.ModelFormMetaclass
+):
     pass
 
 
@@ -241,6 +265,7 @@ class BetterBaseForm(object):
     fieldsets.
 
     """
+
     def __init__(self, *args, **kwargs):
         self._fieldsets = deepcopy(self.base_fieldsets)
         self._row_attrs = deepcopy(self.base_row_attrs)
@@ -250,8 +275,7 @@ class BetterBaseForm(object):
     @property
     def fieldsets(self):
         if not self._fieldset_collection:
-            self._fieldset_collection = FieldsetCollection(
-                self, self._fieldsets)
+            self._fieldset_collection = FieldsetCollection(self, self._fieldsets)
         return self._fieldset_collection
 
     def __iter__(self):
@@ -263,13 +287,13 @@ class BetterBaseForm(object):
         return _mark_row_attrs(bf, self)
 
 
-class BetterForm(with_metaclass(BetterFormMetaclass, BetterBaseForm),
-                 forms.Form):
+class BetterForm(with_metaclass(BetterFormMetaclass, BetterBaseForm), forms.Form):
     __doc__ = BetterBaseForm.__doc__
 
 
-class BetterModelForm(with_metaclass(BetterModelFormMetaclass,
-                                     BetterBaseForm), forms.ModelForm):
+class BetterModelForm(
+    with_metaclass(BetterModelFormMetaclass, BetterBaseForm), forms.ModelForm
+):
     __doc__ = BetterBaseForm.__doc__
 
 
@@ -285,12 +309,13 @@ class BasePreviewFormMixin(object):
     its ``errors`` dictionary).
 
     """
+
     def __init__(self, *args, **kwargs):
         super(BasePreviewFormMixin, self).__init__(*args, **kwargs)
-        self.preview = self.check_preview(kwargs.get('data', None))
+        self.preview = self.check_preview(kwargs.get("data", None))
 
     def check_preview(self, data):
-        if data and data.get('submit', '').lower() == u'preview':
+        if data and data.get("submit", "").lower() == "preview":
             return True
         return False
 

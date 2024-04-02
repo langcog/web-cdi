@@ -1,12 +1,12 @@
-from researcher_UI.utils import random_url_generator
-
-from django.contrib.auth.models import User
-from researcher_UI.models import Study, ip_address, Administration
-from ipware.ip import get_client_ip
-import requests
-from django.utils import timezone
 import datetime
 
+import requests
+from django.contrib.auth.models import User
+from django.utils import timezone
+from ipware.ip import get_client_ip
+
+from researcher_UI.models import Administration, Study, ip_address
+from researcher_UI.utils import random_url_generator
 
 
 def admin_new_participant_fun(request, username, study_name):
@@ -60,7 +60,7 @@ def admin_new_participant_fun(request, username, study_name):
                 admin.due_date = timezone.now() + datetime.timedelta(days=test_period)
                 admin.bypass = None
                 admin.save()
-                
+
             elif num_admins == 1:
                 if request.GET.get("final_cdi"):
                     admin = Administration.objects.create(

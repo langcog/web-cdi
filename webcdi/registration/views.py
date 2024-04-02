@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+
 """
 Class based views for django-inspectional-registration
 """
-__author__ = 'Alisue <lambdalisue@hashnote.net>'
+__author__ = "Alisue <lambdalisue@hashnote.net>"
 from django.http import Http404
 from django.shortcuts import redirect
+from django.utils.translation import gettext_lazy as _
 from django.views.generic import TemplateView
-from django.views.generic.edit import ProcessFormView
-from django.views.generic.edit import FormMixin
 from django.views.generic.base import TemplateResponseMixin
 from django.views.generic.detail import SingleObjectMixin
-from django.utils.translation import gettext_lazy as _
+from django.views.generic.edit import FormMixin, ProcessFormView
 
 from registration.backends import get_backend
 from registration.models import RegistrationProfile
@@ -19,18 +19,18 @@ from registration.models import RegistrationProfile
 
 class RegistrationCompleteView(TemplateView):
     """A simple template view for registration complete"""
-    template_name = r'registration/registration_complete.html'
+
+    template_name = r"registration/registration_complete.html"
 
     def get_context_data(self, **kwargs):
-        context = super(RegistrationCompleteView,
-                        self).get_context_data(**kwargs)
+        context = super(RegistrationCompleteView, self).get_context_data(**kwargs)
         # get registration_profile instance from the session
-        if 'registration_profile_pk' in self.request.session:
-            profile_pk = self.request.session.pop('registration_profile_pk')
+        if "registration_profile_pk" in self.request.session:
+            profile_pk = self.request.session.pop("registration_profile_pk")
             profile = RegistrationProfile.objects.get(pk=profile_pk)
         else:
             profile = None
-        context['registration_profile'] = profile
+        context["registration_profile"] = profile
         return context
 
 
@@ -40,16 +40,19 @@ class RegistrationClosedView(TemplateView):
     This view is called when user accessed to RegistrationView
     with REGISTRATION_OPEN = False
     """
-    template_name = r'registration/registration_closed.html'
+
+    template_name = r"registration/registration_closed.html"
 
 
 class ActivationCompleteView(TemplateView):
     """A simple template view for activation complete"""
-    template_name = r'registration/activation_complete.html'
+
+    template_name = r"registration/activation_complete.html"
 
 
-class ActivationView(TemplateResponseMixin, FormMixin,
-                     SingleObjectMixin, ProcessFormView):
+class ActivationView(
+    TemplateResponseMixin, FormMixin, SingleObjectMixin, ProcessFormView
+):
     """A complex view for activation
 
     GET:
@@ -60,7 +63,8 @@ class ActivationView(TemplateResponseMixin, FormMixin,
     POST:
         Activate the user who has ``activation_key`` with passed ``password1``
     """
-    template_name = r'registration/activation_form.html'
+
+    template_name = r"registration/activation_form.html"
     model = RegistrationProfile
 
     def __init__(self, *args, **kwargs):
@@ -69,7 +73,7 @@ class ActivationView(TemplateResponseMixin, FormMixin,
 
     def get_queryset(self):
         """get ``RegistrationProfile`` queryset which status is 'accepted'"""
-        return self.model.objects.filter(_status='accepted')
+        return self.model.objects.filter(_status="accepted")
 
     def get_object(self, queryset=None):
         """get ``RegistrationProfile`` instance by ``activation_key``
@@ -78,11 +82,11 @@ class ActivationView(TemplateResponseMixin, FormMixin,
         """
         queryset = queryset or self.get_queryset()
         try:
-            obj = queryset.get(activation_key=self.kwargs['activation_key'])
+            obj = queryset.get(activation_key=self.kwargs["activation_key"])
             if obj.activation_key_expired():
-                raise Http404(_('Activation key has expired'))
+                raise Http404(_("Activation key has expired"))
         except self.model.DoesNotExist:
-            raise Http404(_('An invalid activation key has passed'))
+            raise Http404(_("An invalid activation key has passed"))
         return obj
 
     def get_success_url(self):
@@ -99,9 +103,10 @@ class ActivationView(TemplateResponseMixin, FormMixin,
         this method is called when form validation has successed.
         """
         profile = self.get_object()
-        password = form.cleaned_data['password1']
+        password = form.cleaned_data["password1"]
         self.activated_user = self.backend.activate(
-            profile.activation_key, self.request, password=password)
+            profile.activation_key, self.request, password=password
+        )
         return super(ActivationView, self).form_valid(form)
 
     def get(self, request, *args, **kwargs):
@@ -128,7 +133,8 @@ class RegistrationView(FormMixin, TemplateResponseMixin, ProcessFormView):
     POST:
         Register the user with passed ``username`` and ``email1``
     """
-    template_name = r'registration/registration_form.html'
+
+    template_name = r"registration/registration_form.html"
 
     def __init__(self, *args, **kwargs):
         self.backend = get_backend()
@@ -161,28 +167,25 @@ class RegistrationView(FormMixin, TemplateResponseMixin, ProcessFormView):
 
         this method is called when form validation has successed.
         """
-        username = form.cleaned_data['username']
-        email = form.cleaned_data['email1']
+        username = form.cleaned_data["username"]
+        email = form.cleaned_data["email1"]
         if supplement_form:
             supplement = supplement_form.save(commit=False)
         else:
             supplement = None
-        self.new_user = self.backend.register(username, email,
-                                              self.request,
-                                              supplement=supplement)
+        self.new_user = self.backend.register(
+            username, email, self.request, supplement=supplement
+        )
         profile = self.new_user.registration_profile
         # save the profile on the session so that the RegistrationCompleteView
         # can refer the profile instance.
         # this instance is automatically removed when the user accessed
         # RegistrationCompleteView
-        self.request.session['registration_profile_pk'] = profile.pk
+        self.request.session["registration_profile_pk"] = profile.pk
         return super(RegistrationView, self).form_valid(form)
 
     def form_invalid(self, form, supplement_form=None):
-        context = self.get_context_data(
-            form=form,
-            supplement_form=supplement_form
-        )
+        context = self.get_context_data(form=form, supplement_form=supplement_form)
         return self.render_to_response(context)
 
     def get(self, request, *args, **kwargs):
@@ -190,8 +193,7 @@ class RegistrationView(FormMixin, TemplateResponseMixin, ProcessFormView):
         form = self.get_form(form_class)
         supplement_form_class = self.get_supplement_form_class()
         supplement_form = self.get_supplement_form(supplement_form_class)
-        context = self.get_context_data(
-                form=form, supplement_form=supplement_form)
+        context = self.get_context_data(form=form, supplement_form=supplement_form)
         return self.render_to_response(context)
 
     def post(self, request, *args, **kwargs):
@@ -203,7 +205,6 @@ class RegistrationView(FormMixin, TemplateResponseMixin, ProcessFormView):
             return self.form_valid(form, supplement_form)
         else:
             return self.form_invalid(form, supplement_form)
-
 
     def dispatch(self, request, *args, **kwargs):
         if not self.backend.registration_allowed():

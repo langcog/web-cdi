@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+
 """
 Send notification emails to admins, managers or particular recipients 
 when new user has registered in the site
@@ -70,19 +71,18 @@ import sys
 from django.core.exceptions import ImproperlyConfigured
 from django.template.loader import render_to_string
 
-from registration.utils import get_site
-from registration.utils import send_mail
-from registration.signals import user_registered
 from registration.contrib.notification.conf import settings
+from registration.signals import user_registered
+from registration.utils import get_site, send_mail
 
 
 def is_notification_enable():
     """get whether the registration notification is enable"""
     if not settings.REGISTRATION_NOTIFICATION:
         return False
-    if 'test' in sys.argv and not getattr(settings,
-                                          '_REGISTRATION_NOTIFICATION_IN_TESTS',
-                                          False):
+    if "test" in sys.argv and not getattr(
+        settings, "_REGISTRATION_NOTIFICATION_IN_TESTS", False
+    ):
         # Registration Notification is not available in test to prevent the test
         # fails of ``registration.tests.*``.
         # For testing Registration Notification, you must set
@@ -97,9 +97,11 @@ def is_notification_enable():
         # REGISTRATION_NOTIFICATION = False insted of setting False to all
         # settings of notification.
         import warnings
+
         warnings.warn(
-            'To set ``registration.contrib.notification`` disable, '
-            'set ``REGISTRATION_NOTIFICATION`` to ``False``')
+            "To set ``registration.contrib.notification`` disable, "
+            "set ``REGISTRATION_NOTIFICATION`` to ``False``"
+        )
         return False
     return True
 
@@ -110,17 +112,17 @@ def send_notification_email_reciver(sender, user, profile, request, **kwargs):
         return
 
     context = {
-        'user': user,
-        'profile': profile,
-        'site': get_site(request),
+        "user": user,
+        "profile": profile,
+        "site": get_site(request),
     }
     subject = render_to_string(
-        settings.REGISTRATION_NOTIFICATION_EMAIL_SUBJECT_TEMPLATE_NAME,
-        context)
+        settings.REGISTRATION_NOTIFICATION_EMAIL_SUBJECT_TEMPLATE_NAME, context
+    )
     subject = "".join(subject.splitlines())
     message = render_to_string(
-        settings.REGISTRATION_NOTIFICATION_EMAIL_TEMPLATE_NAME,
-        context)
+        settings.REGISTRATION_NOTIFICATION_EMAIL_TEMPLATE_NAME, context
+    )
 
     recipients = []
     if settings.REGISTRATION_NOTIFICATION_ADMINS:
@@ -136,15 +138,21 @@ def send_notification_email_reciver(sender, user, profile, request, **kwargs):
         elif isinstance(method_or_iterable, (list, tuple)):
             recipients.extend(method_or_iterable)
         else:
-            raise ImproperlyConfigured((
-                '``REGISTRATION_NOTIFICATION_RECIPIENTS`` must '
-                'be a list of recipients or function which return '
-                'a list of recipients (Currently the value was "%s")'
-            ) % method_or_iterable)
+            raise ImproperlyConfigured(
+                (
+                    "``REGISTRATION_NOTIFICATION_RECIPIENTS`` must "
+                    "be a list of recipients or function which return "
+                    'a list of recipients (Currently the value was "%s")'
+                )
+                % method_or_iterable
+            )
     # remove duplications
     recipients = frozenset(recipients)
 
-    mail_from = getattr(settings, 'REGISTRATION_FROM_EMAIL', '') or \
-                    settings.DEFAULT_FROM_EMAIL
+    mail_from = (
+        getattr(settings, "REGISTRATION_FROM_EMAIL", "") or settings.DEFAULT_FROM_EMAIL
+    )
     send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, recipients)
+
+
 user_registered.connect(send_notification_email_reciver)

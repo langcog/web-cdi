@@ -1,0 +1,6 @@
+# additonal requiements to run manage.py test
+# run docker-compose exec web pip install -r requirements_test.txt
+selenium
+flake8
+black
+isort

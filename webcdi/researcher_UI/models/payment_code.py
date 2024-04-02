@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Model for stored gift card codes
 class PaymentCode(models.Model):
     study = models.ForeignKey(
@@ -15,12 +16,11 @@ class PaymentCode(models.Model):
         verbose_name="Date code was given to participant", null=True
     )  # Date that payment code was given to a participant
     PAYMENT_TYPE_CHOICES = [
-        ('Amazon', 'Amazon'),
-        ('Tango', 'Tango'),
+        ("Amazon", "Amazon"),
+        ("Tango", "Tango"),
     ]
     payment_type = models.CharField(
-        max_length=50,
-        choices=PAYMENT_TYPE_CHOICES
+        max_length=50, choices=PAYMENT_TYPE_CHOICES
     )  # Type of gift card code. Currently only 'Amazon' is allowed
     gift_amount = models.DecimalField(
         max_digits=6, decimal_places=2, verbose_name="Monetary value"

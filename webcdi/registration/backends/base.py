@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+
 """
 Base class of registration backend
 
 All backends of django-inspectional-registration should be a subclass
 of the ``BackendBase``
 """
-__author__ = 'Alisue <lambdalisue@hashnote.net>'
+__author__ = "Alisue <lambdalisue@hashnote.net>"
 from registration.utils import get_site
 
 
 class RegistrationBackendBase(object):
-
     """Base class of registration backend
 
     Methods:
@@ -40,8 +40,7 @@ class RegistrationBackendBase(object):
         """
         return get_site(request)
 
-    def register(self, username, email, request,
-                 supplement=None, send_email=True):
+    def register(self, username, email, request, supplement=None, send_email=True):
         """register a new user account with given ``username`` and ``email``
 
         Returning should be a instance of new ``User``
@@ -49,8 +48,7 @@ class RegistrationBackendBase(object):
         """
         raise NotImplementedError
 
-    def accept(self, profile, request,
-               send_email=True, message=None, force=False):
+    def accept(self, profile, request, send_email=True, message=None, force=False):
         """accept account registration with given ``profile`` (an instance of
         ``RegistrationProfile``)
 
@@ -76,8 +74,15 @@ class RegistrationBackendBase(object):
         """
         raise NotImplementedError
 
-    def activate(self, activation_key, request, password=None, send_email=True,
-                 message=None, no_profile_delete=False):
+    def activate(
+        self,
+        activation_key,
+        request,
+        password=None,
+        send_email=True,
+        message=None,
+        no_profile_delete=False,
+    ):
         """activate account with ``activation_key`` and ``password``
 
         This method should be called after the account registration has

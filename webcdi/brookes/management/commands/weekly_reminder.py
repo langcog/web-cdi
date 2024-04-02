@@ -1,9 +1,10 @@
 import datetime
 
-from brookes.models import BrookesCode
 from dateutil.relativedelta import relativedelta
 from django.core.mail import EmailMessage
 from django.core.management.base import BaseCommand
+
+from brookes.models import BrookesCode
 
 
 class Command(BaseCommand):

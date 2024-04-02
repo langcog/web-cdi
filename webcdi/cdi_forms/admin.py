@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Choices, Instrument_Forms, BackgroundInfo
+from .models import BackgroundInfo, Choices, Instrument_Forms
 
 # Register your models here.
 
@@ -14,7 +14,9 @@ admin.site.register(Instrument_Forms, InstrumentFormsAdmin)
 
 admin.site.register(Choices)
 
+
 class BackgroundInfoAdmin(admin.ModelAdmin):
-    readonly_fields = ['administration']
+    readonly_fields = ["administration"]
+
 
 admin.site.register(BackgroundInfo, BackgroundInfoAdmin)

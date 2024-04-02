@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+
 """
 Forms of django-inspectional-registration
 
@@ -39,18 +40,21 @@ Original License::
     (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
-__author__ = 'Alisue <lambdalisue@hashnote.net>'
+__author__ = "Alisue <lambdalisue@hashnote.net>"
 __all__ = (
-    'ActivationForm', 'RegistrationForm', 
-    'RegistrationFormNoFreeEmail',
-    'RegistrationFormTermsOfService',
-    'RegistrationFormUniqueEmail',
+    "ActivationForm",
+    "RegistrationForm",
+    "RegistrationFormNoFreeEmail",
+    "RegistrationFormTermsOfService",
+    "RegistrationFormUniqueEmail",
 )
 from django import forms
 from django.utils.translation import gettext_lazy as _
+
 from registration.compat import get_user_model
 
-attrs_dict = {'class': 'required'}
+attrs_dict = {"class": "required"}
+
 
 class ActivationForm(forms.Form):
     """Form for activating a user account.
@@ -62,23 +66,26 @@ class ActivationForm(forms.Form):
     user data is delegated to the active registration backend.
 
     """
-    password1 = forms.CharField(widget=forms.PasswordInput(attrs=attrs_dict,
-                                                           render_value=False),
-                                label=_("Password"))
-    password2 = forms.CharField(widget=forms.PasswordInput(attrs=attrs_dict,
-                                                           render_value=False),
-                                label=_("Password (again)"))
-    
+
+    password1 = forms.CharField(
+        widget=forms.PasswordInput(attrs=attrs_dict, render_value=False),
+        label=_("Password"),
+    )
+    password2 = forms.CharField(
+        widget=forms.PasswordInput(attrs=attrs_dict, render_value=False),
+        label=_("Password (again)"),
+    )
+
     def clean(self):
         """Check the passed two password are equal
-        
+
         Verifiy that the values entered into the two password fields match.
         Note that an error here will end up in ``non_field_errors()`` because it
         doesn't apply to a single field.
 
         """
-        if 'password1' in self.cleaned_data and 'password2' in self.cleaned_data:
-            if self.cleaned_data['password1'] != self.cleaned_data['password2']:
+        if "password1" in self.cleaned_data and "password2" in self.cleaned_data:
+            if self.cleaned_data["password1"] != self.cleaned_data["password2"]:
                 raise forms.ValidationError(_("The two password fields didn't match."))
         return self.cleaned_data
 
@@ -86,7 +93,7 @@ class ActivationForm(forms.Form):
 class RegistrationForm(forms.Form):
     """Form for registration a user account.
 
-    Validates that the requested username is not already in use, and requires 
+    Validates that the requested username is not already in use, and requires
     the email to be entered twice to catch typos.
 
     Subclasses should feel free to add any additional validation they need, but
@@ -94,21 +101,25 @@ class RegistrationForm(forms.Form):
     user data is delegated to the active registration backend.
 
     """
-    username = forms.RegexField(regex=r'^[\w.@+-]+$',
-                                max_length=30,
-                                widget=forms.TextInput(attrs=attrs_dict),
-                                label=_("Username"),
-                                error_messages={
-                                    'invalid': _("This value must contain "
-                                                 "only letters, numbers and "
-                                                 "underscores.")
-                                })
-    email1 = forms.EmailField(widget=forms.TextInput(attrs=dict(attrs_dict,
-                                                                maxlength=75)),
-                             label=_("E-mail"))
-    email2 = forms.EmailField(widget=forms.TextInput(attrs=dict(attrs_dict,
-                                                                maxlength=75)),
-                             label=_("E-mail (again)"))
+
+    username = forms.RegexField(
+        regex=r"^[\w.@+-]+$",
+        max_length=30,
+        widget=forms.TextInput(attrs=attrs_dict),
+        label=_("Username"),
+        error_messages={
+            "invalid": _(
+                "This value must contain " "only letters, numbers and " "underscores."
+            )
+        },
+    )
+    email1 = forms.EmailField(
+        widget=forms.TextInput(attrs=dict(attrs_dict, maxlength=75)), label=_("E-mail")
+    )
+    email2 = forms.EmailField(
+        widget=forms.TextInput(attrs=dict(attrs_dict, maxlength=75)),
+        label=_("E-mail (again)"),
+    )
 
     def clean_username(self):
         """
@@ -116,24 +127,22 @@ class RegistrationForm(forms.Form):
         """
         User = get_user_model()
         try:
-            User.objects.get(username__iexact=self.cleaned_data['username'])
+            User.objects.get(username__iexact=self.cleaned_data["username"])
         except User.DoesNotExist:
-            return self.cleaned_data['username']
-        raise forms.ValidationError(_(
-            "A user with that username already exists."))
+            return self.cleaned_data["username"]
+        raise forms.ValidationError(_("A user with that username already exists."))
 
     def clean(self):
         """Check the passed two email are equal
-        
+
         Verifiy that the values entered into the two email fields match.
         Note that an error here will end up in ``non_field_errors()`` because
         it doesn't apply to a single field.
 
         """
-        if 'email1' in self.cleaned_data and 'email2' in self.cleaned_data:
-            if self.cleaned_data['email1'] != self.cleaned_data['email2']:
-                raise forms.ValidationError(_(
-                    "The two email fields didn't match."))
+        if "email1" in self.cleaned_data and "email2" in self.cleaned_data:
+            if self.cleaned_data["email1"] != self.cleaned_data["email2"]:
+                raise forms.ValidationError(_("The two email fields didn't match."))
         return self.cleaned_data
 
 
@@ -143,11 +152,12 @@ class RegistrationFormTermsOfService(RegistrationForm):
     agreeing to a site's Terms of Service.
 
     """
-    tos = forms.BooleanField(widget=forms.CheckboxInput(attrs=attrs_dict),
-                             label=_('I have read and agree to the Terms '
-                                     'of Service'),
-                             error_messages={'required': _(
-                                 "You must agree to the terms to register")})
+
+    tos = forms.BooleanField(
+        widget=forms.CheckboxInput(attrs=attrs_dict),
+        label=_("I have read and agree to the Terms " "of Service"),
+        error_messages={"required": _("You must agree to the terms to register")},
+    )
 
 
 class RegistrationFormUniqueEmail(RegistrationForm):
@@ -158,11 +168,14 @@ class RegistrationFormUniqueEmail(RegistrationForm):
     def clean_email1(self):
         """Validate that the supplied email address is unique for the site."""
         User = get_user_model()
-        if User.objects.filter(email__iexact=self.cleaned_data['email1']):
-            raise forms.ValidationError(_(
-                "This email address is already in use. "
-                "Please supply a different email address."))
-        return self.cleaned_data['email1']
+        if User.objects.filter(email__iexact=self.cleaned_data["email1"]):
+            raise forms.ValidationError(
+                _(
+                    "This email address is already in use. "
+                    "Please supply a different email address."
+                )
+            )
+        return self.cleaned_data["email1"]
 
 
 class RegistrationFormNoFreeEmail(RegistrationForm):
@@ -175,19 +188,33 @@ class RegistrationFormNoFreeEmail(RegistrationForm):
     attribute ``bad_domains``.
 
     """
-    bad_domains = ['aim.com', 'aol.com', 'email.com', 'gmail.com',
-                   'googlemail.com', 'hotmail.com', 'hushmail.com',
-                   'msn.com', 'mail.ru', 'mailinator.com', 'live.com',
-                   'yahoo.com']
-    
+
+    bad_domains = [
+        "aim.com",
+        "aol.com",
+        "email.com",
+        "gmail.com",
+        "googlemail.com",
+        "hotmail.com",
+        "hushmail.com",
+        "msn.com",
+        "mail.ru",
+        "mailinator.com",
+        "live.com",
+        "yahoo.com",
+    ]
+
     def clean_email1(self):
         """
         Check the supplied email address against a list of known free webmail
         domains.
         """
-        email_domain = self.cleaned_data['email1'].split('@')[1]
+        email_domain = self.cleaned_data["email1"].split("@")[1]
         if email_domain in self.bad_domains:
-            raise forms.ValidationError(_(
-                "Registration using free email addresses is prohibited. "
-                "Please supply a different email address."))
-        return self.cleaned_data['email1']
+            raise forms.ValidationError(
+                _(
+                    "Registration using free email addresses is prohibited. "
+                    "Please supply a different email address."
+                )
+            )
+        return self.cleaned_data["email1"]

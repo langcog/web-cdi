@@ -1,9 +1,10 @@
-from brookes.utils import create_brookes_code
+import pytz
 from dateutil.relativedelta import relativedelta
-from django.db import models
-from researcher_UI.models import InstrumentFamily
-
 from django.contrib.auth.models import User
+from django.db import models
+
+from brookes.utils import create_brookes_code
+from researcher_UI.models import InstrumentFamily
 
 # Create your models here.
 
@@ -28,5 +29,8 @@ class BrookesCode(models.Model):
 
     def save(self):
         if self.applied and not self.expiry:
-            self.expiry = self.applied + relativedelta(years=1)
+            self.expiry = (self.applied + relativedelta(years=1)).replace(
+                tzinfo=pytz.utc
+            )
+
         return super().save()

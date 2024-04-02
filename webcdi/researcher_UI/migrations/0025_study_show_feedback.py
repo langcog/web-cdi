@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('researcher_UI', '0024_study_birth_weight_units'),
+        ("researcher_UI", "0024_study_birth_weight_units"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='study',
-            name='show_feedback',
+            model_name="study",
+            name="show_feedback",
             field=models.BooleanField(default=True),
         ),
     ]

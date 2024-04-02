@@ -1,22 +1,25 @@
-from django.test import TestCase, LiveServerTestCase, Client
-from selenium.webdriver.chrome.webdriver import WebDriver
-from django.urls import reverse
-import pickle, os, time, random
+import os
+import pickle
+import random
+import time
+from subprocess import PIPE, Popen
 
 from django.conf import settings
+from django.contrib.auth.models import User
+from django.core.management import call_command
+from django.test import Client, LiveServerTestCase, TestCase
+from django.test.utils import override_settings
+from django.urls import reverse
 from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.select import Select
+from selenium.webdriver.support.ui import WebDriverWait
 
-from django.test.utils import override_settings
-from subprocess import Popen, PIPE
-from django.core.management import call_command
-
-from django.contrib.auth.models import User
 from researcher_UI.models import *
 from researcher_UI.tests import generate_fake_results
+
 from .models import *
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))

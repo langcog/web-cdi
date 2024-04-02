@@ -1,6 +1,11 @@
-from cdi_forms.scores import update_summary_scores
+import logging
+
 from django.core.management.base import BaseCommand
+
+from cdi_forms.scores import update_summary_scores
 from researcher_UI.models import Administration
+
+logger = logging.getLogger(__name__)
 
 
 class Command(BaseCommand):
@@ -12,5 +17,5 @@ class Command(BaseCommand):
         count = 0
         for instance in administrations:
             count += 1
-            print(f"Processing item {count} of {len(administrations)}")
+            logger.debug(f"Processing item {count} of {len(administrations)}")
             update_summary_scores(instance)

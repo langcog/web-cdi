@@ -6,7 +6,8 @@ import string
 
 from django.conf import settings
 from django.db import migrations, models
-from researcher_UI.models import Demographic, InstrumentFamily, Instrument
+
+from researcher_UI.models import Demographic, Instrument, InstrumentFamily
 
 
 def add_families(apps, schema_editor):

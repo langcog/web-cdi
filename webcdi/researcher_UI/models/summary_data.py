@@ -2,6 +2,7 @@ from django.db import models
 
 from researcher_UI.models import Administration
 
+
 class SummaryData(models.Model):
     """
     Class to store the administrations summary scores for the instrument scoring mechanisms loaded from json files held in
@@ -18,4 +19,3 @@ class SummaryData(models.Model):
     class Meta:
         unique_together = ("administration", "title")
         ordering = ["administration"]
-
