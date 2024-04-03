@@ -43,7 +43,8 @@ ALLOWED_HOSTS = [
     "127.0.0.2",
     "127.0.0.1",
     ".webcdi.org",
-    '.webcdi.stanford.edu'
+    '.webcdi.stanford.edu',
+    '.webcdi-dev.stanford.edu'
 ]
 
 IPS_TO_ADD = [socket.gethostname()]
