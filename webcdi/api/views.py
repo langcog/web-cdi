@@ -28,8 +28,6 @@ class BaseAPIView(StudyOwnerMixin, TemplateView):
     ]
 
     def get_json(self, request, study_obj, administrations=None):
-        if self.permission_denied_message:
-            return JsonResponse({"error": self.permission_denied_message})
         adjusted = True
         administrations = (
             administrations
@@ -190,12 +188,14 @@ class BaseAPIView(StudyOwnerMixin, TemplateView):
             "WG",
         ]:
             pd.concat(
-            [
-                combined_data,
-                pd.DataFrame([{"study_name": "3rd Edition (Marchman et al., 2023)"}]),
-            ],
-            ignore_index=True,
-        )
+                [
+                    combined_data,
+                    pd.DataFrame(
+                        [{"study_name": "3rd Edition (Marchman et al., 2023)"}]
+                    ),
+                ],
+                ignore_index=True,
+            )
 
         # Turn pandas dataframe into a CSV
         return combined_data.transpose().to_json()

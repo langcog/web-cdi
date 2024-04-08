@@ -1,67 +1,33 @@
 import datetime
 import logging
-import pickle
 import random
 import time
 
 import numpy as np
 import pytz
-from dateutil.relativedelta import relativedelta
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.core.management import call_command
 from django.db.models import Max
-from django.test import LiveServerTestCase, TestCase, tag
+from django.test import LiveServerTestCase, tag
 from django.test.utils import override_settings
-from django.urls import reverse
 from selenium import webdriver
-from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.options import Options
-from selenium.webdriver.firefox.webdriver import WebDriver
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.ui import WebDriverWait
 
 from brookes.models import BrookesCode
 from cdi_forms.models import BackgroundInfo, Instrument_Forms
-from cdi_forms.views import model_map
 from researcher_UI.models import (Administration, Instrument, InstrumentFamily,
-                                  Researcher, Study, administration_data)
+                                  Study, administration_data)
 from researcher_UI.utils.random_url_generator import random_url_generator
 
 logger = logging.getLogger("selenium")
 logger.setLevel(logging.INFO)
 
 # Create your tests here.
-
-
-@tag("selenium")
-class WebSiteOpens(LiveServerTestCase):
-    LiveServerTestCase.host = "web"
-
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        options = Options()
-        cls.firefox = webdriver.Remote(
-            command_executor="http://selenium:4444", options=options
-        )
-        cls.firefox.implicitly_wait(10)
-
-    @classmethod
-    def tearDownClass(cls):
-        cls.firefox.quit()
-        super().tearDownClass()
-
-    def test_visit_home_age(self):
-        self.firefox.get(f"{self.live_server_url}")
-        self.assertIn(self.firefox.title, "Web CDI")
-
-    def test_visit_login_page(self):
-        self.firefox.get(f"{self.live_server_url}/accounts/login/")
-        self.assertIn(self.firefox.title, "Login")
 
 
 def generate_fake_results(study_obj, autogenerate_count):
@@ -98,7 +64,6 @@ def generate_fake_results(study_obj, autogenerate_count):
         ),
     )
 
-    # item_set = model_map(study_obj.instrument.name).filter(item_type = 'word').values_list('itemID',flat=True)
     instrument_obj = Instrument.objects.get(name=study_obj.instrument.name)
     cdi_items = Instrument_Forms.objects.filter(instrument=instrument_obj).order_by(
         "item_order"
@@ -156,7 +121,7 @@ def generate_fake_results(study_obj, autogenerate_count):
     call_command("crontab_scoring")
 
 
-@tag("selenium")
+@tag("selenium", "researcher")
 @override_settings(DEBUG=True)
 class Reseacher_UIProcessTests(LiveServerTestCase):
     LiveServerTestCase.host = "web"

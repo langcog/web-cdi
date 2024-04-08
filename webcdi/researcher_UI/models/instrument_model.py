@@ -28,7 +28,7 @@ class Instrument(models.Model):
     )
 
     def __str__(self):
-        return f"%s" % (self.verbose_name)
+        return f"{self.verbose_name}"
 
     class Meta:
         unique_together = (

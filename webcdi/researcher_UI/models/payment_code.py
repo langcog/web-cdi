@@ -32,3 +32,6 @@ class PaymentCode(models.Model):
             "payment_type",
             "gift_code",
         )  # Each object must have a unique combination of code type and the actual gift card code itself
+
+    def __str__(self):
+        return f"{self.study} {self.gift_code}"

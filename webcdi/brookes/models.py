@@ -27,10 +27,10 @@ class BrookesCode(models.Model):
     def __str__(self) -> str:
         return f"{self.code}"
 
-    def save(self):
+    def save(self, *args, **kwargs):
         if self.applied and not self.expiry:
             self.expiry = (self.applied + relativedelta(years=1)).replace(
                 tzinfo=pytz.utc
             )
 
-        return super().save()
+        return super().save(*args, **kwargs)

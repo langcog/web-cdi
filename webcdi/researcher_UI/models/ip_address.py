@@ -10,3 +10,6 @@ class ip_address(models.Model):
     date_added = models.DateTimeField(
         verbose_name="Date IP address was added to database", auto_now_add=True
     )  # Date that IP address was added to database.
+
+    def __str__(self):
+        return f"{self.study} : {self.ip_address} : {self.date_added}"

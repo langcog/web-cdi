@@ -4,3 +4,4 @@ selenium
 flake8
 black
 isort
+coverage

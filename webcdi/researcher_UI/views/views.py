@@ -10,12 +10,11 @@ from django.urls import reverse
 from django.views import generic
 from ipware.ip import get_client_ip
 
+from researcher_UI.forms import *
 from researcher_UI.models import Study
 from researcher_UI.utils.admin_new import admin_new_fun
 from researcher_UI.utils.console_helper.get_helper import get_helper
 from researcher_UI.utils.console_helper.post_helper import post_condition
-
-from researcher_UI.forms import *
 
 
 class Console(LoginRequiredMixin, generic.ListView):

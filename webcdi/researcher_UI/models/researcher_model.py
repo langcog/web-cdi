@@ -23,9 +23,4 @@ class Researcher(models.Model):
     )
 
     def __str__(self):
-        return f"%s %s (%s, %s)" % (
-            self.user.first_name,
-            self.user.last_name,
-            self.position,
-            self.institution,
-        )
+        return f"{self.user.first_name} {self.user.last_name} ({self.position}, {self.institution})"

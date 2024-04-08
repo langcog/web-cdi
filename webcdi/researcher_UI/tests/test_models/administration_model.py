@@ -1,0 +1,149 @@
+from django.contrib.auth.models import User
+from django.shortcuts import reverse
+from django.test import TestCase, tag
+from django.utils import timezone
+
+from cdi_forms.models import BackgroundInfo
+from researcher_UI.models import (Administration, Instrument, InstrumentFamily,
+                                  Study)
+
+# models test
+
+
+@tag("model")
+class AdministrationModelTest(TestCase):
+
+    def setUp(self) -> None:
+        user = User.objects.create_user(
+            username="PaulMcCartney", password="PaulMcCartney"
+        )
+
+        instrument_family = InstrumentFamily.objects.create(
+            name="Instrument Family Test Model", chargeable=False
+        )
+
+        instrument = Instrument.objects.create(
+            name="Test Instrument",
+            language="Test Language",
+            form="Test Form",
+            min_age=3,
+            max_age=15,
+            family=instrument_family,
+        )
+
+        study = Study.objects.create(
+            researcher=user,
+            name="Test Study Instance",
+            instrument=instrument,
+            redirect_url="https://redirect_url.com/redirect/{source_id}",
+        )
+
+        self.administration = Administration.objects.create(
+            study=study,
+            subject_id=1,
+            repeat_num=1,
+            url_hash="0123456789012345678901234567890123456789012345678901234567890123",
+            completed=False,
+            due_date=timezone.now(),
+        )
+
+        BackgroundInfo.objects.create(
+            administration=self.administration, age=12, source_id="123456"
+        )
+
+        cat_instrument = Instrument.objects.create(
+            name="CAT Test Instrument",
+            language="Test Language",
+            form="CAT",
+            min_age=3,
+            max_age=15,
+            family=instrument_family,
+        )
+        cat_study = Study.objects.create(
+            researcher=user,
+            name="CAT Test Study Instance",
+            instrument=cat_instrument,
+            append_source_id_to_redirect=True,
+            source_id_url_parameter_key="param_key",
+            redirect_url="https://redirect_url.com/redirect/",
+        )
+
+        self.cat_administration = Administration.objects.create(
+            study=cat_study,
+            subject_id=1,
+            repeat_num=1,
+            url_hash="cat3456789012345678901234567890123456789012345678901234567890123",
+            completed=False,
+            due_date=timezone.now(),
+        )
+
+        BackgroundInfo.objects.create(
+            administration=self.cat_administration, age=12, source_id="cat123456"
+        )
+        return super().setUp()
+
+    def test_administration_creation(self):
+        instance = self.administration
+
+        self.assertTrue(isinstance(instance, Administration))
+        self.assertEqual(
+            instance.__str__(),
+            f"{instance.study} {instance.subject_id} {instance.repeat_num}",
+        )
+        self.assertEqual(Administration.objects.is_active().count(), 2)
+        self.assertEqual(
+            instance.get_meta_data(),
+            [
+                instance.study,
+                instance.subject_id,
+                instance.repeat_num,
+                instance.url_hash,
+                instance.completed,
+                instance.completedBackgroundInfo,
+                instance.due_date,
+                instance.last_modified,
+            ],
+        )
+        self.assertEqual(
+            reverse("administer_cdi_form", kwargs={"hash_id": instance.url_hash}),
+            instance.get_absolute_url(),
+        )
+        self.assertEqual(
+            instance.redirect_url(),
+            f"{instance.study.redirect_url}".strip().replace(
+                "{source_id}", instance.backgroundinfo.source_id
+            ),
+        )
+
+    def test_cat_administration_creation(self):
+        instance = self.cat_administration
+
+        self.assertTrue(isinstance(instance, Administration))
+        self.assertEqual(
+            instance.__str__(),
+            f"{instance.study} {instance.subject_id} {instance.repeat_num}",
+        )
+        self.assertEqual(Administration.objects.is_active().count(), 2)
+        self.assertEqual(
+            instance.get_meta_data(),
+            [
+                instance.study,
+                instance.subject_id,
+                instance.repeat_num,
+                instance.url_hash,
+                instance.completed,
+                instance.completedBackgroundInfo,
+                instance.due_date,
+                instance.last_modified,
+            ],
+        )
+        self.assertEqual(
+            reverse(
+                "cat_forms:administer_cat_form", kwargs={"hash_id": instance.url_hash}
+            ),
+            instance.get_absolute_url(),
+        )
+        self.assertEqual(
+            instance.redirect_url(),
+            f"{instance.study.redirect_url.strip()}?{instance.study.source_id_url_parameter_key}={instance.backgroundinfo.source_id}",
+        )
