@@ -27,6 +27,7 @@ __pycache__/
 .env*
 
 .coverage
+.vscode/*
 
 # Elastic Beanstalk Files 
 .elasticbeanstalk/*

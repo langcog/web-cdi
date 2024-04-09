@@ -23,7 +23,6 @@ from django.views.generic import TemplateView
 from django.views.generic.base import RedirectView
 from django_registration.backends.activation.views import RegistrationView
 
-from supplementtut.views import *  # noqa
 from webcdi.forms import SignUpForm
 from webcdi.views import CustomLoginView, HomeView
 
@@ -62,8 +61,6 @@ urlpatterns = [
         name="interface",
     ),
     re_path(r"interface/", include("researcher_UI.urls")),
-    # url(r"^registration/", include("registration.urls")),
-    # url(r"^signup/$", signup, name="signup"),
     re_path(
         r"^lockout/$", TemplateView.as_view(template_name="registration/lockout.html")
     ),
