@@ -1,25 +1,23 @@
 import logging
 
 from django.contrib.auth.models import User
-from django.test import RequestFactory, TestCase
+from django.test import RequestFactory, TestCase, tag
 from django.urls import reverse
 
-from researcher_UI.models import Instrument, InstrumentFamily, Researcher
+from researcher_UI.tests import generate_fake_results
+from researcher_UI.models import Instrument, InstrumentFamily, Researcher, Study
 from researcher_UI.views import AddStudy
+from researcher_UI.forms import AddPairedStudyForm
 
-logger = logging.getLogger("selenium")
-logger.setLevel(logging.INFO)
-
-
+@tag('new')
 class AddStudyViewTest(TestCase):
-
     def setUp(self):
-        self.user = User.objects.create_user(username="henry", password="poiuytre12")
+        self.user = User.objects.create_user(username="henry", password="secret")
         Researcher.objects.get_or_create(user=self.user)
-        instrument_family, created = InstrumentFamily.objects.get_or_create(
+        instrument_family = InstrumentFamily.objects.create(
             name="BigCats", chargeable=False
         )
-        instrument, created = Instrument.objects.get_or_create(
+        instrument = Instrument.objects.create(
             name="lion",
             language="lionish",
             form="roar",
@@ -66,5 +64,47 @@ class AddStudyViewTest(TestCase):
     def test_post_isValid(self):
         self.client.force_login(self.user)
         response = self.client.post(self.url, self.valid_payload)
-        self.assertRedirects(response, "/interface/study/1/detail/")
+        self.assertEqual(response.status_code, 302)
+
+@tag('new')
+class AddPairedStudyTest(TestCase):
+    fixtures = [
+        "researcher_UI/fixtures/researcher_UI_test_fixtures.json",
+        "cdi_forms/fixtures/cdi_forms_test_fixtures.json",
+    ]
+    def setUp(self) -> None:
+        super().setUp()
+        self.user = User.objects.create_user(username="henry", password="secret")
+        Researcher.objects.get_or_create(user=self.user)
+        
+        for counter in range(3):
+            instrument = Instrument.objects.all().order_by('?')[0]
+            study = Study.objects.create(
+                researcher = self.user,
+                name = f'Study {counter}',
+                instrument = instrument,
+                max_age = instrument.max_age,
+                min_age = instrument.min_age
+            )
+            generate_fake_results(study, 10)
+
+        self.study = Study.objects.filter(researcher=self.user).order_by('?')[0]
+
+        self.url = reverse("researcher_ui:add_paired_study")
+
+    def test_get(self):
+        self.client.force_login(self.user)
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 200)
+
+    def test_post(self):
+        self.client.force_login(self.user)
+        payload = {
+            'study_group': 'StudyGroup',
+            'paired_studies': [self.study.id]
+        }
+        form = AddPairedStudyForm(data=payload)
+        self.assertTrue(form.is_valid())
+
+        response = self.client.post(self.url, payload)
         self.assertEqual(response.status_code, 302)

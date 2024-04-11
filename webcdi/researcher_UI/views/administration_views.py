@@ -62,7 +62,6 @@ class EditAdministrationView(LoginRequiredMixin, StudyOwnerMixin, UpdateView):
             obj.save()
 
         super().form_valid(form)
-
         return JsonResponse(
             {"message": "Your data is updated successfully"}, status=200
         )
@@ -115,6 +114,7 @@ class AddNewParent(DetailView):
         return self.object
 
     def get(self, request, username, study_name):
+        print('GET Add New Parent')
         self.get_object()
         let_through, bypass, source_id = self.admin_new_parent_fun(request)
         if let_through:
@@ -217,6 +217,7 @@ class AddNewParent(DetailView):
                     )
                 )
             else:
+                print('Redirect to create background info')
                 return redirect(
                     reverse(
                         "create-new-background-info",

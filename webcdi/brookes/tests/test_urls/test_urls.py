@@ -37,12 +37,3 @@ class TestBrookesUrls(TestCase):
             response,
             f'{reverse("login")}?next={reverse("brookes:enter_codes", kwargs={"instrument_family": self.instrument_family.id},)}',
         )
-
-    def test_brookes_force_fail(self):
-        response = self.client.get(
-            reverse(
-                "brookes:enter_codes",
-                kwargs={"instrument_family": self.instrument_family.id},
-            )
-        )
-        self.assertEqual(response.status_code, 200)

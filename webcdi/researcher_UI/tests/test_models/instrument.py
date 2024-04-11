@@ -1,7 +1,8 @@
 from django.test import TestCase, tag
 
 from researcher_UI.models import Instrument, InstrumentFamily
-
+from researcher_UI.tests.utils import get_admin_change_view_url, get_admin_changelist_view_url
+from django.contrib.auth.models import User
 # models test
 
 
@@ -28,3 +29,21 @@ class InstrumentModelTest(TestCase):
         self.assertTrue(isinstance(instance, Instrument))
         self.assertEqual(instance.__str__(), f"{instance.verbose_name}")
         self.assertEqual(instance.item_count, 0)
+
+    @tag('admin')
+    def test_admin(self):
+        self.user = User.objects.create_superuser(
+            'super-user', "content_tester@goldenstandard.com", 'password'
+        )
+        c = self.client
+        c.login(username='super-user', password='password')
+
+        # create test data
+        instance = self.instrument
+
+        # run test
+        response = c.get(get_admin_change_view_url(instance))
+        self.assertEqual(response.status_code, 200)
+
+        response = c.get(get_admin_changelist_view_url(instance))
+        self.assertEqual(response.status_code, 200)

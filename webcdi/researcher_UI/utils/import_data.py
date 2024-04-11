@@ -59,11 +59,11 @@ def import_data_fun(request, study_obj):
     instruments_json = json.load(
         open(os.path.realpath(PROJECT_ROOT + "/static/json/instruments.json"))
     )
-    header_file_path = filter(
+    header_file_path = list(filter(
         lambda x: x["language"] == study_obj.instrument.language
         and x["form"] == study_obj.instrument.form,
         instruments_json,
-    )[0]["fillable_headers"]
+    ))[0]["fillable_headers"]
 
     pdf_header_df = pd.read_csv(
         open(os.path.realpath(PROJECT_ROOT + "/" + header_file_path))
@@ -92,7 +92,7 @@ def import_data_fun(request, study_obj):
         try:
             due_date = try_parsing_date_fun(admin_row["date_today"])
         except ValueError:
-            error_msg = "Invalid date format. Please submit dates as MM-DD-YYYY or YYYY-MM-DD. '/' and '.' delimiters are alsoacceptable."
+            error_msg = "Invalid date format. Please submit dates as MM-DD-YYYY or YYYY-MM-DD. '/' and '.' delimiters are also acceptable."
             break
 
         new_admin = Administration.objects.create(

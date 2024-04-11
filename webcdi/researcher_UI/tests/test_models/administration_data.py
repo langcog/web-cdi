@@ -4,7 +4,7 @@ from django.utils import timezone
 
 from researcher_UI.models import (Administration, Instrument, InstrumentFamily,
                                   Study, administration_data)
-
+from researcher_UI.tests.utils import get_admin_change_view_url, get_admin_changelist_view_url
 # models test
 
 
@@ -56,3 +56,21 @@ class AdministrationDataModelTest(TestCase):
         self.assertEqual(
             instance.__str__(), f"{instance.administration} {instance.item_ID}"
         )
+
+    @tag('admin')
+    def test_admin(self):
+        self.user = User.objects.create_superuser(
+            'super-user', "content_tester@goldenstandard.com", 'password'
+        )
+        c = self.client
+        c.login(username='super-user', password='password')
+
+        # create test data
+        instance = self.administration_data
+
+        # run test
+        response = c.get(get_admin_change_view_url(instance))
+        self.assertEqual(response.status_code, 200)
+
+        response = c.get(get_admin_changelist_view_url(instance))
+        self.assertEqual(response.status_code, 200)

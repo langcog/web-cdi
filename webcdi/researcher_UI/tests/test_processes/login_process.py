@@ -5,7 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 
 logger = logging.getLogger("selenium")
-logger.setLevel(logging.INFO)
+logger.setLevel(logging.ERROR)
 
 # Create your tests here.
 

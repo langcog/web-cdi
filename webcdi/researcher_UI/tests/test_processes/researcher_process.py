@@ -25,7 +25,7 @@ from researcher_UI.models import (Administration, Instrument, InstrumentFamily,
 from researcher_UI.utils.random_url_generator import random_url_generator
 
 logger = logging.getLogger("selenium")
-logger.setLevel(logging.INFO)
+logger.setLevel(logging.ERROR)
 
 # Create your tests here.
 

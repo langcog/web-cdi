@@ -45,6 +45,8 @@ urlpatterns = [
         views.AddNewParent.as_view(),
         name="administer_new_parent",
     ),
+    # TODO
+    # work out if this is ever called
     re_path(
         r"^(?P<username>[^/]+)/(?P<study_name>[^/]+)/new_participant/$",
         views.AdministerNewParticipant.as_view(),

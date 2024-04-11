@@ -139,7 +139,6 @@ def get_benchmark_cohort_age(context, administration_id):
     ).aggregate(Max("age"), Min("age"))
     max = res["age__max"]
     min = res["age__min"]
-    logger.debug(f"Age: {age}; Max age: {max}; Min age: {min}")
     if age > max:
         age = max
     if age < min:

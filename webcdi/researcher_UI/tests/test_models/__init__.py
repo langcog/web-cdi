@@ -11,3 +11,5 @@ from .payment_code import PaymentCodeModelTest  # noqa
 from .researcher import ResearcherModelTest  # noqa
 from .study import StudyModelTest  # noqa
 from .summary_data import SummaryDataModelTest  # noqa
+from .user import UserModelTest  # noqa
+from .administration_summary import AdministrationSummaryModelTest  # noqa

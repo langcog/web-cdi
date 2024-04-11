@@ -26,9 +26,9 @@ def admin_new_participant_fun(request, username, study_name):
         prev_visitor = ip_address.objects.filter(ip_address=visitor_ip).count()
 
     if (prev_visitor < 5 and completed < 5) or request.user.is_authenticated:
-        if completed_admins < subject_cap:
+        if subject_cap is None:
             let_through = True
-        elif subject_cap is None:
+        elif completed_admins < subject_cap:
             let_through = True
         elif bypass:
             let_through = True
@@ -52,7 +52,7 @@ def admin_new_participant_fun(request, username, study_name):
                         "studyId": "ContinuousCDI",
                     },
                 )
-                admin = administration(
+                admin = Administration(
                     study=study_obj, subject_id=subject_id, repeat_num=1
                 )
                 admin.url_hash = random_url_generator()

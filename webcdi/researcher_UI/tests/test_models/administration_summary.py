@@ -2,17 +2,18 @@ from django.contrib.auth.models import User
 from django.shortcuts import reverse
 from django.test import TestCase, tag
 from django.utils import timezone
+from django.urls import reverse
 
-from cdi_forms.models import BackgroundInfo
 from researcher_UI.models import (Administration, Instrument, InstrumentFamily,
-                                  Study)
+                                  Study, AdministrationSummary)
+from cdi_forms.models import BackgroundInfo
 
 from researcher_UI.tests.utils import get_admin_change_view_url, get_admin_changelist_view_url
 # models test
 
 
 @tag("model")
-class AdministrationModelTest(TestCase):
+class AdministrationSummaryModelTest(TestCase):
 
     def setUp(self) -> None:
 
@@ -40,7 +41,7 @@ class AdministrationModelTest(TestCase):
             redirect_url="https://redirect_url.com/redirect/{source_id}",
         )
 
-        self.administration = Administration.objects.create(
+        self.administration = AdministrationSummary.objects.create(
             study=study,
             subject_id=1,
             repeat_num=1,
@@ -84,86 +85,28 @@ class AdministrationModelTest(TestCase):
         )
         return super().setUp()
 
-    def test_administration_creation(self):
-        instance = self.administration
-
-        self.assertTrue(isinstance(instance, Administration))
-        self.assertEqual(
-            instance.__str__(),
-            f"{instance.study} {instance.subject_id} {instance.repeat_num}",
-        )
-        self.assertEqual(Administration.objects.is_active().count(), 2)
-        self.assertEqual(
-            instance.get_meta_data(),
-            [
-                instance.study,
-                instance.subject_id,
-                instance.repeat_num,
-                instance.url_hash,
-                instance.completed,
-                instance.completedBackgroundInfo,
-                instance.due_date,
-                instance.last_modified,
-            ],
-        )
-        self.assertEqual(
-            reverse("administer_cdi_form", kwargs={"hash_id": instance.url_hash}),
-            instance.get_absolute_url(),
-        )
-        self.assertEqual(
-            instance.redirect_url(),
-            f"{instance.study.redirect_url}".strip().replace(
-                "{source_id}", instance.backgroundinfo.source_id
-            ),
-        )
-
-    def test_cat_administration_creation(self):
-        instance = self.cat_administration
-
-        self.assertTrue(isinstance(instance, Administration))
-        self.assertEqual(
-            instance.__str__(),
-            f"{instance.study} {instance.subject_id} {instance.repeat_num}",
-        )
-        self.assertEqual(Administration.objects.is_active().count(), 2)
-        self.assertEqual(
-            instance.get_meta_data(),
-            [
-                instance.study,
-                instance.subject_id,
-                instance.repeat_num,
-                instance.url_hash,
-                instance.completed,
-                instance.completedBackgroundInfo,
-                instance.due_date,
-                instance.last_modified,
-            ],
-        )
-        self.assertEqual(
-            reverse(
-                "cat_forms:administer_cat_form", kwargs={"hash_id": instance.url_hash}
-            ),
-            instance.get_absolute_url(),
-        )
-        self.assertEqual(
-            instance.redirect_url(),
-            f"{instance.study.redirect_url.strip()}?{instance.study.source_id_url_parameter_key}={instance.backgroundinfo.source_id}",
-        )
-
     @tag('admin')
     def test_admin(self):
         self.user = User.objects.create_superuser(
             'super-user', "content_tester@goldenstandard.com", 'password'
         )
-        c = self.client
-        c.login(username='super-user', password='password')
+
+        self.client.login(username='super-user', password='password')
 
         # create test data
         instance = self.administration
 
         # run test
-        response = c.get(get_admin_change_view_url(instance))
+
+        url = reverse(
+            "admin:researcher_UI_administrationsummary_change",
+            args=(instance.pk,),
+        )
+        response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
-        response = c.get(get_admin_changelist_view_url(instance))
+        url = reverse(
+            "admin:researcher_UI_administrationsummary_changelist",
+        )
+        response = self.client.get(get_admin_changelist_view_url(instance))
         self.assertEqual(response.status_code, 200)
