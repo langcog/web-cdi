@@ -51,7 +51,7 @@ requests==2.31.0
 s3transfer==0.8.2
 six==1.16.0
 soupsieve==2.5
-sqlparse==0.4.4
+sqlparse==0.5.0
 tinycss2==1.2.1
 typing_extensions==4.9.0
 tzdata==2023.4
