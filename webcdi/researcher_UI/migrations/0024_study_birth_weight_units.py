@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('researcher_UI', '0023_auto_20171221_2253'),
+        ("researcher_UI", "0023_auto_20171221_2253"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='study',
-            name='birth_weight_units',
-            field=models.CharField(default=b'lb', max_length=5),
+            model_name="study",
+            name="birth_weight_units",
+            field=models.CharField(default=b"lb", max_length=5),
         ),
     ]

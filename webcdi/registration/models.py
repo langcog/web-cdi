@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+
 """
 Models of django-inspectional-registration
 
@@ -41,43 +42,40 @@ Original License::
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-__author__ = 'Alisue <lambdalisue@hashnote.net>'
+__author__ = "Alisue <lambdalisue@hashnote.net>"
 __all__ = (
-    'ActivationForm', 'RegistrationForm',
-    'RegistrationFormNoFreeEmail',
-    'RegistrationFormTermsOfService',
-    'RegistrationFormUniqueEmail',
+    "ActivationForm",
+    "RegistrationForm",
+    "RegistrationFormNoFreeEmail",
+    "RegistrationFormTermsOfService",
+    "RegistrationFormUniqueEmail",
 )
+import datetime
 import re
 import sys
-import six
-import datetime
+from logging import getLogger
 
+import six
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.template.loader import render_to_string
-from django.core.exceptions import ObjectDoesNotExist
 from django.utils.translation import gettext_lazy as _
-#from django.utils.encoding import python_2_unicode_compatible
+# from django.utils.encoding import python_2_unicode_compatible
 from six import python_2_unicode_compatible
 
+from registration.compat import (datetime_now, get_user_model,
+                                 transaction_atomic, user_model_label)
 from registration.conf import settings
-from registration.compat import get_user_model
-from registration.compat import user_model_label
-from registration.compat import datetime_now
-from registration.utils import generate_activation_key
-from registration.utils import generate_random_password
-from registration.utils import send_mail
 from registration.supplements import get_supplement_class
-from registration.compat import transaction_atomic
+from registration.utils import (generate_activation_key,
+                                generate_random_password, send_mail)
 
-from logging import getLogger
 logger = getLogger(__name__)
 
-SHA1_RE = re.compile(r'^[a-f0-9]{40}$')
+SHA1_RE = re.compile(r"^[a-f0-9]{40}$")
 
 
 class RegistrationManager(models.Manager):
-
     """Custom manager for the ``RegistrationProfile`` model.
 
     The methods defined here provide shortcuts for account registration,
@@ -86,6 +84,7 @@ class RegistrationManager(models.Manager):
     expired/rejected inactive accounts.
 
     """
+
     @transaction_atomic
     def register(self, username, email, site, send_email=True):
         """register new user with ``username`` and ``email``
@@ -106,7 +105,7 @@ class RegistrationManager(models.Manager):
 
         """
         User = get_user_model()
-        new_user = User.objects.create_user(username, email, 'password')
+        new_user = User.objects.create_user(username, email, "password")
         new_user.set_unusable_password()
         new_user.is_active = False
         new_user.save()
@@ -119,12 +118,13 @@ class RegistrationManager(models.Manager):
         return new_user
 
     @transaction_atomic
-    def accept_registration(self, profile, site,
-                            send_email=True, message=None, force=False):
+    def accept_registration(
+        self, profile, site, send_email=True, message=None, force=False
+    ):
         """accept account registration of ``profile``
 
         Accept account registration and email activation url to the ``User``,
-        returning accepted ``User``. 
+        returning accepted ``User``.
 
         By default, an acceptance email will be sent to the new user. To
         disable this, pass ``send_email=False``. An acceptance email will be
@@ -132,8 +132,8 @@ class RegistrationManager(models.Manager):
         ``registration/acceptance_email_subject.txt``.
 
         This method **DOES** works even after ``reject_registration`` has called
-        (this mean the account registration has rejected previously) because 
-        rejecting user by mistake may occur in this real world :-p If the account 
+        (this mean the account registration has rejected previously) because
+        rejecting user by mistake may occur in this real world :-p If the account
         registration has already accepted, returning will be ``None``
 
         The ``date_joined`` attribute of ``User`` updated to now in this
@@ -142,11 +142,11 @@ class RegistrationManager(models.Manager):
 
         """
         # rejected -> accepted is allowed
-        if force or profile.status in ('untreated', 'rejected'):
+        if force or profile.status in ("untreated", "rejected"):
             if force:
                 # removing activation_key will force to create a new one
                 profile.activation_key = None
-            profile.status = 'accepted'
+            profile.status = "accepted"
             profile.save()
 
             if send_email:
@@ -160,7 +160,7 @@ class RegistrationManager(models.Manager):
         """reject account registration of ``profile``
 
         Reject account registration and email rejection to the ``User``,
-        returning accepted ``User``. 
+        returning accepted ``User``.
 
         By default, an rejection email will be sent to the new user. To
         disable this, pass ``send_email=False``. An rejection email will be
@@ -169,13 +169,13 @@ class RegistrationManager(models.Manager):
 
         This method **DOES NOT** works after ``accept_registration`` has called
         (this mean the account registration has accepted previously).
-        If the account registration has already accepted/rejected, returning 
+        If the account registration has already accepted/rejected, returning
         will be ``None``
 
         """
         # accepted -> rejected is not allowed
-        if profile.status == 'untreated':
-            profile.status = 'rejected'
+        if profile.status == "untreated":
+            profile.status = "rejected"
             profile.save()
 
             if send_email:
@@ -185,12 +185,19 @@ class RegistrationManager(models.Manager):
         return None
 
     @transaction_atomic
-    def activate_user(self, activation_key, site, password=None,
-                      send_email=True, message=None, no_profile_delete=False):
+    def activate_user(
+        self,
+        activation_key,
+        site,
+        password=None,
+        send_email=True,
+        message=None,
+        no_profile_delete=False,
+    ):
         """activate account with ``activation_key`` and ``password``
 
-        Activate account and email notification to the ``User``, returning 
-        activated ``User``, ``password`` and ``is_generated``. 
+        Activate account and email notification to the ``User``, returning
+        activated ``User``, ``password`` and ``is_generated``.
 
         By default, an activation email will be sent to the new user. To
         disable this, pass ``send_email=False``. An activation email will be
@@ -222,22 +229,23 @@ class RegistrationManager(models.Manager):
 
         """
         try:
-            profile = self.get(
-                _status='accepted', activation_key=activation_key)
+            profile = self.get(_status="accepted", activation_key=activation_key)
         except self.model.DoesNotExist:
             return None
         if not profile.activation_key_expired():
             is_generated = password is None
             password = password or generate_random_password(
-                length=settings.REGISTRATION_DEFAULT_PASSWORD_LENGTH)
+                length=settings.REGISTRATION_DEFAULT_PASSWORD_LENGTH
+            )
             user = profile.user
             user.set_password(password)
             user.is_active = True
             user.save()
 
             if send_email:
-                profile.send_activation_email(site, password,
-                                              is_generated, message=message)
+                profile.send_activation_email(
+                    site, password, is_generated, message=message
+                )
 
             if not no_profile_delete:
                 # the profile is no longer required
@@ -261,7 +269,7 @@ class RegistrationManager(models.Manager):
 
         It is recommended that this method be executed regularly as part of your
         routine site maintenance; this application provides a custom management
-        command which will call this method, accessible as 
+        command which will call this method, accessible as
         ``manage.py cleanupexpiredregistration`` (for just expired users) or
         ``manage.py cleanupregistration`` (for expired or rejected users).
 
@@ -280,8 +288,8 @@ class RegistrationManager(models.Manager):
             the username will become available for use again.
 
         If you have a troublesome ``User`` and wish to disable their account while
-        keeping it in the database, simply delete the associated 
-        ``RegistrationProfile``; an inactive ``User`` which does not have an 
+        keeping it in the database, simply delete the associated
+        ``RegistrationProfile``; an inactive ``User`` which does not have an
         associated ``RegistrationProfile`` will be deleted.
 
         """
@@ -291,7 +299,7 @@ class RegistrationManager(models.Manager):
                     user = profile.user
                     if not user.is_active:
                         user.delete()
-                        profile.delete()    # just in case
+                        profile.delete()  # just in case
                 except ObjectDoesNotExist:
                     profile.delete()
 
@@ -311,7 +319,7 @@ class RegistrationManager(models.Manager):
 
         It is recommended that this method be executed regularly as part of your
         routine site maintenance; this application provides a custom management
-        command which will call this method, accessible as 
+        command which will call this method, accessible as
         ``manage.py cleanuprejectedregistration`` (for just rejected users) or
         ``manage.py cleanupregistration`` (for expired or rejected users).
 
@@ -330,13 +338,13 @@ class RegistrationManager(models.Manager):
             the username will become available for use again.
 
         If you have a troublesome ``User`` and wish to disable their account while
-        keeping it in the database, simply delete the associated 
-        ``RegistrationProfile``; an inactive ``User`` which does not have an 
+        keeping it in the database, simply delete the associated
+        ``RegistrationProfile``; an inactive ``User`` which does not have an
         associated ``RegistrationProfile`` will be deleted.
 
         """
         for profile in self.all():
-            if profile.status == 'rejected':
+            if profile.status == "rejected":
                 try:
                     user = profile.user
                     if not user.is_active:
@@ -348,7 +356,6 @@ class RegistrationManager(models.Manager):
 
 @python_2_unicode_compatible
 class RegistrationProfile(models.Model):
-
     """Registration profile model class
 
     A simple profile which stores an activation key and inspection status for use
@@ -364,35 +371,46 @@ class RegistrationProfile(models.Model):
     store data temporarily during account registration, inspection and activation.
 
     """
+
     STATUS_LIST = (
-        ('untreated', _('Unprocessed')),
-        ('accepted', _('Registration accepted')),
-        ('rejected', _('Registration rejected')),
+        ("untreated", _("Unprocessed")),
+        ("accepted", _("Registration accepted")),
+        ("rejected", _("Registration rejected")),
     )
-    user = models.OneToOneField(user_model_label, verbose_name=_('user'),
-                                related_name='registration_profile',
-                                editable=False,
-                               on_delete=models.CASCADE)
-    _status = models.CharField(_('status'), max_length=10, db_column='status',
-                               choices=STATUS_LIST, default='untreated',
-                               editable=False)
-    activation_key = models.CharField(_('activation key'), max_length=40,
-                                      null=True, default=None, editable=False)
+    user = models.OneToOneField(
+        user_model_label,
+        verbose_name=_("user"),
+        related_name="registration_profile",
+        editable=False,
+        on_delete=models.CASCADE,
+    )
+    _status = models.CharField(
+        _("status"),
+        max_length=10,
+        db_column="status",
+        choices=STATUS_LIST,
+        default="untreated",
+        editable=False,
+    )
+    activation_key = models.CharField(
+        _("activation key"), max_length=40, null=True, default=None, editable=False
+    )
 
     objects = RegistrationManager()
 
     class Meta:
-        verbose_name = _('registration profile')
-        verbose_name_plural = _('registration profiles')
+        verbose_name = _("registration profile")
+        verbose_name_plural = _("registration profiles")
         permissions = (
-            ('accept_registration', 'Can accept registration'),
-            ('reject_registration', 'Can reject registration'),
-            ('activate_user', 'Can activate user in admin site'),
+            ("accept_registration", "Can accept registration"),
+            ("reject_registration", "Can reject registration"),
+            ("activate_user", "Can activate user in admin site"),
         )
 
     def _get_supplement_class(self):
         """get supplement class of this registration"""
         return get_supplement_class()
+
     supplement_class = property(_get_supplement_class)
 
     def _get_supplement(self):
@@ -401,10 +419,11 @@ class RegistrationProfile(models.Model):
         if supplement_class:
             app_label = supplement_class._meta.app_label
             class_name = supplement_class.__name__.lower()
-            field_name = '_%s_%s_supplement' % (app_label, class_name)
+            field_name = "_%s_%s_supplement" % (app_label, class_name)
             return getattr(self, field_name, None)
         else:
             return None
+
     supplement = property(_get_supplement)
 
     def _get_status(self):
@@ -415,7 +434,7 @@ class RegistrationProfile(models.Model):
 
         """
         if self.activation_key_expired():
-            return 'expired'
+            return "expired"
         return self._status
 
     def _set_status(self, value):
@@ -430,22 +449,24 @@ class RegistrationProfile(models.Model):
         """
         self._status = value
         # Automatically generate activation key for accepted profile
-        if value == 'accepted' and not self.activation_key:
+        if value == "accepted" and not self.activation_key:
             username = self.user.username
             self.activation_key = generate_activation_key(username)
             # update user's date_joined
             self.user.date_joined = datetime_now()
             self.user.save()
-        elif value != 'accepted' and self.activation_key:
+        elif value != "accepted" and self.activation_key:
             self.activation_key = None
+
     status = property(_get_status, _set_status)
 
     def get_status_display(self):
         """get human readable status"""
         sl = list(self.STATUS_LIST)
-        sl.append(('expired', _('Activation key has expired')))
+        sl.append(("expired", _("Activation key has expired")))
         sl = dict(sl)
         return sl.get(self.status)
+
     get_status_display.short_description = _("status")
 
     def __str__(self):
@@ -464,44 +485,44 @@ class RegistrationProfile(models.Model):
             profiles are not treated yet or rejected by inspector.
 
         2.  Otherwise, the date the user signed up (which automatically updated
-            in registration acceptance) is incremented by the number of days 
+            in registration acceptance) is incremented by the number of days
             specified in the setting ``ACCOUNT_ACTIVATION_DAYS`` (which should
             be the number of days after acceptance during which a user is allowed
             to activate their account); if the result is less than or equal to
             the current date, the key has expired and this method return ``True``.
 
         """
-        if self._status != 'accepted':
+        if self._status != "accepted":
             return False
-        expiration_date = datetime.timedelta(
-            days=settings.ACCOUNT_ACTIVATION_DAYS)
+        expiration_date = datetime.timedelta(days=settings.ACCOUNT_ACTIVATION_DAYS)
         expired = self.user.date_joined + expiration_date <= datetime_now()
         return expired
+
     activation_key_expired.boolean = True
-    activation_key_expired.short_description = _(
-        'Activation Key Expired?'
-    )
+    activation_key_expired.short_description = _("Activation Key Expired?")
 
     def _send_email(self, site, action, extra_context=None):
         context = {
-            'user': self.user,
-            'site': site,
+            "user": self.user,
+            "site": site,
         }
-        if action != 'activation':
+        if action != "activation":
             # the profile was deleted in 'activation' action
-            context['profile'] = self
+            context["profile"] = self
 
         if extra_context:
             context.update(extra_context)
 
         subject = render_to_string(
-            'registration/%s_email_subject.txt' % action, context)
-        subject = ''.join(subject.splitlines())
-        message = render_to_string(
-            'registration/%s_email.txt' % action, context)
+            "registration/%s_email_subject.txt" % action, context
+        )
+        subject = "".join(subject.splitlines())
+        message = render_to_string("registration/%s_email.txt" % action, context)
 
-        mail_from = getattr(settings, 'REGISTRATION_FROM_EMAIL', '') or \
-                        settings.DEFAULT_FROM_EMAIL
+        mail_from = (
+            getattr(settings, "REGISTRATION_FROM_EMAIL", "")
+            or settings.DEFAULT_FROM_EMAIL
+        )
         send_mail(subject, message, mail_from, [self.user.email])
 
     def send_registration_email(self, site):
@@ -535,7 +556,7 @@ class RegistrationProfile(models.Model):
             A ``RegistrationProfile`` instance of the registration
 
         """
-        self._send_email(site, 'registration')
+        self._send_email(site, "registration")
 
     def send_acceptance_email(self, site, message=None):
         """send acceptance email to the user associated with this profile
@@ -582,11 +603,11 @@ class RegistrationProfile(models.Model):
 
         """
         extra_context = {
-            'activation_key': self.activation_key,
-            'expiration_days': settings.ACCOUNT_ACTIVATION_DAYS,
-            'message': message,
+            "activation_key": self.activation_key,
+            "expiration_days": settings.ACCOUNT_ACTIVATION_DAYS,
+            "message": message,
         }
-        self._send_email(site, 'acceptance', extra_context)
+        self._send_email(site, "acceptance", extra_context)
 
     def send_rejection_email(self, site, message=None):
         """send rejection email to the user associated with this profile
@@ -624,12 +645,13 @@ class RegistrationProfile(models.Model):
 
         """
         extra_context = {
-            'message': message,
+            "message": message,
         }
-        self._send_email(site, 'rejection', extra_context)
+        self._send_email(site, "rejection", extra_context)
 
-    def send_activation_email(self, site, password=None, is_generated=False,
-                              message=None):
+    def send_activation_email(
+        self, site, password=None, is_generated=False, message=None
+    ):
         """send activation email to the user associated with this profile
 
         Send a activation email to the ``User`` associated with this
@@ -669,8 +691,8 @@ class RegistrationProfile(models.Model):
 
         """
         extra_context = {
-            'password': password,
-            'is_generated': is_generated,
-            'message': message,
+            "password": password,
+            "is_generated": is_generated,
+            "message": message,
         }
-        self._send_email(site, 'activation', extra_context)
+        self._send_email(site, "activation", extra_context)

@@ -6,23 +6,37 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cdi_forms', '0081_auto_20210728_1006'),
+        ("cdi_forms", "0081_auto_20210728_1006"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='backgroundinfo',
-            name='kindergarten_dpw',
-            field=models.IntegerField(blank=True, null=True, verbose_name='Days per week'),
+            model_name="backgroundinfo",
+            name="kindergarten_dpw",
+            field=models.IntegerField(
+                blank=True, null=True, verbose_name="Days per week"
+            ),
         ),
         migrations.AddField(
-            model_name='backgroundinfo',
-            name='kindergarten_hpd',
-            field=models.IntegerField(blank=True, null=True, verbose_name='Hours per day'),
+            model_name="backgroundinfo",
+            name="kindergarten_hpd",
+            field=models.IntegerField(
+                blank=True, null=True, verbose_name="Hours per day"
+            ),
         ),
         migrations.AddField(
-            model_name='backgroundinfo',
-            name='kindergarten_since_when',
-            field=models.CharField(blank=True, choices=[('Less than 6 months', 'Less than 6 months'), ('Between 6 and 12 months', 'Between 6 and 12 months'), ('More than 12 months', 'More than 12 months')], max_length=51, null=True, verbose_name='Since when'),
+            model_name="backgroundinfo",
+            name="kindergarten_since_when",
+            field=models.CharField(
+                blank=True,
+                choices=[
+                    ("Less than 6 months", "Less than 6 months"),
+                    ("Between 6 and 12 months", "Between 6 and 12 months"),
+                    ("More than 12 months", "More than 12 months"),
+                ],
+                max_length=51,
+                null=True,
+                verbose_name="Since when",
+            ),
         ),
     ]

@@ -8,13 +8,23 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cdi_forms', '0048_auto_20190328_1545'),
+        ("cdi_forms", "0048_auto_20190328_1545"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='backgroundinfo',
-            name='form_filler',
-            field=models.CharField(choices=[('mother', 'Mother'), ('father', 'Father'), ('both parents', 'Both caregivers'), ('grandparent(s)', 'Grandparent(s)'), ('other', 'Other')], max_length=20, verbose_name='Who is filling in the form?'),
+            model_name="backgroundinfo",
+            name="form_filler",
+            field=models.CharField(
+                choices=[
+                    ("mother", "Mother"),
+                    ("father", "Father"),
+                    ("both parents", "Both caregivers"),
+                    ("grandparent(s)", "Grandparent(s)"),
+                    ("other", "Other"),
+                ],
+                max_length=20,
+                verbose_name="Who is filling in the form?",
+            ),
         ),
     ]

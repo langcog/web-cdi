@@ -1,10 +1,11 @@
-from django_weasyprint import WeasyTemplateResponseMixin
-from django.shortcuts import redirect
 from django.conf import settings
-from researcher_UI.models import Administration
+from django.shortcuts import redirect
 from django.views.generic import DetailView
+from django_weasyprint import WeasyTemplateResponseMixin
 
 from cdi_forms.views.utils import prefilled_cdi_data
+from researcher_UI.models import Administration
+
 
 class PDFAdministrationDetailView(WeasyTemplateResponseMixin, DetailView):
     model = Administration

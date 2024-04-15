@@ -3,15 +3,12 @@ import datetime
 from django.conf import settings
 from django.contrib import messages
 from django.utils.safestring import mark_safe
+
 from researcher_UI.models import Administration
-from researcher_UI.utils.download import (
-    download_cat_data,
-    download_cdi_format,
-    download_data,
-    download_dictionary,
-    download_links,
-    download_summary,
-)
+from researcher_UI.utils.download import (download_cat_data,
+                                          download_cdi_format, download_data,
+                                          download_dictionary, download_links,
+                                          download_summary)
 from researcher_UI.utils.random_url_generator import random_url_generator
 
 
@@ -128,7 +125,10 @@ def post_condition(request, ids, study_obj):
         administrations = Administration.objects.filter(study=study_obj)
         if study_obj.instrument.form in settings.CAT_FORMS:
             return download_cat_data.download_cat_data(
-                request, study_obj, administrations, summary=True, 
+                request,
+                study_obj,
+                administrations,
+                summary=True,
             )
         else:
             return download_summary.download_summary(

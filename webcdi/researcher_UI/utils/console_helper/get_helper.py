@@ -1,9 +1,12 @@
 import os
-from researcher_UI.models import Study, PaymentCode, Administration
+
 from django.conf import settings
-from researcher_UI.forms import AddStudyForm
-from researcher_UI.tables import StudyAdministrationTable
 from django_tables2 import RequestConfig
+
+from researcher_UI.forms import AddStudyForm
+from researcher_UI.models import Administration, PaymentCode, Study
+from researcher_UI.tables import StudyAdministrationTable
+
 
 def get_helper(request, study_name, num_per_page):
     username = None  # Set username to None at first

@@ -1,8 +1,9 @@
 import re
 
 import pandas as pd
-from cdi_forms.views import model_map
 from django.http import HttpResponse
+
+from cdi_forms.views import model_map
 
 
 def download_dictionary(request, study_obj):

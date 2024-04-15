@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Model for stored IP addresses (only stored for studies created by 'langcoglab' and specific studies marked to log IP addresses, under Stanford's IRB approval)
 class ip_address(models.Model):
     study = models.ForeignKey(
@@ -10,3 +11,5 @@ class ip_address(models.Model):
         verbose_name="Date IP address was added to database", auto_now_add=True
     )  # Date that IP address was added to database.
 
+    def __str__(self):
+        return f"{self.study} : {self.ip_address} : {self.date_added}"

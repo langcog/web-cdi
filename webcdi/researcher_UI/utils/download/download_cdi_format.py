@@ -1,17 +1,17 @@
-from django.http import HttpResponse
-from researcher_UI.forms import *
-from researcher_UI.models import (
-    administration_data,
-)
-from cdi_forms.views import get_model_header
-from cdi_forms.models import BackgroundInfo
-import pandas as pd
-import numpy as np
-from django.utils.translation import gettext_lazy as _
+import re
+import zipfile
 from io import BytesIO
-import re, zipfile
+
+import numpy as np
+import pandas as pd
+from django.http import HttpResponse
+from django.utils.translation import gettext_lazy as _
+
+from cdi_forms.models import BackgroundInfo
+from cdi_forms.views import get_model_header
+from researcher_UI.forms import *
+from researcher_UI.models import Administration, administration_data
 from researcher_UI.utils.write_to_zip import write_to_zip
-from researcher_UI.models import Administration
 
 
 def download_cdi_format(request, study_obj, administrations=None):

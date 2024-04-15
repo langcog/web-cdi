@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+
 """
 Automatically log activated user in when they have activated with their activation
 link. This doesn't happen when the user was activated programatically with Django
@@ -19,21 +20,22 @@ of your ``settings.py``
     ``_REGISTRATION_AUTO_LOGIN_IN_TESTS`` to ``True`` in ``setUp()`` method
     of the test case class and delete the attribute in ``tearDown()`` method.
 """
-__author__ = 'Alisue <lambdalisue@hashnote.net>'
+__author__ = "Alisue <lambdalisue@hashnote.net>"
 import sys
-from django.contrib.auth import login
-from django.contrib.auth import get_backends
-from registration.signals import user_activated
+
+from django.contrib.auth import get_backends, login
+
 from registration.contrib.autologin.conf import settings
+from registration.signals import user_activated
 
 
 def is_auto_login_enable():
     """get whether the registration autologin is enable"""
     if not settings.REGISTRATION_AUTO_LOGIN:
         return False
-    if 'test' in sys.argv and not getattr(settings,
-                                          '_REGISTRATION_AUTO_LOGIN_IN_TESTS',
-                                          False):
+    if "test" in sys.argv and not getattr(
+        settings, "_REGISTRATION_AUTO_LOGIN_IN_TESTS", False
+    ):
         # Registration Auto Login is not available in test to prevent the test
         # fails of ``registration.tests.*``.
         # For testing Registration Auto Login, you must set
@@ -51,6 +53,8 @@ def auto_login_reciver(sender, user, password, is_generated, request, **kwargs):
         return
     # A bit of a hack to bypass `authenticate()`
     backend = get_backends()[0]
-    user.backend = '%s.%s' % (backend.__module__, backend.__class__.__name__)
+    user.backend = "%s.%s" % (backend.__module__, backend.__class__.__name__)
     login(request, user)
+
+
 user_activated.connect(auto_login_reciver)

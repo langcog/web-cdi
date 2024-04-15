@@ -1,46 +1,29 @@
 import datetime
 from typing import Any
 
-from django.http import HttpRequest, HttpResponse
-from django.utils import translation
-from brookes.models import BrookesCode
 from dateutil.relativedelta import relativedelta
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import LoginView
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
-from django.views.generic import TemplateView
-from webcdi.forms import SignUpForm
+from django.utils import translation
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
+from django.views.generic import TemplateView
+
+from brookes.models import BrookesCode
+from webcdi.forms import SignUpForm
 
 
 @method_decorator([never_cache], name="dispatch")
 class HomeView(TemplateView):
-    template_name = 'webcdi/home.html'
+    template_name = "webcdi/home.html"
 
     def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
-        translation.activate('en')
+        translation.activate("en")
         request.LANGUAGE_CODE = translation.get_language()
         return super().dispatch(request, *args, **kwargs)
-    
-def signup(request):
-    if request.method == "POST":
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            user.refresh_from_db()  # load the profile instance created by the signal
-            user.researcher.institution = form.cleaned_data.get("institution")
-            user.researcher.position = form.cleaned_data.get("position")
-            user.save()
-            username = form.cleaned_data.get("username")
-            raw_password = form.cleaned_data.get("password1")
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return redirect("researcher_ui:console")
-    else:
-        form = SignUpForm()
-    return render(request, "webcdi/signup.html", {"form": form})
 
 
 class CustomLoginView(LoginView):
@@ -68,6 +51,6 @@ class CustomLoginView(LoginView):
         return super().get_success_url()
 
     def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
-        translation.activate('en')
+        translation.activate("en")
         request.LANGUAGE_CODE = translation.get_language()
         return super().dispatch(request, *args, **kwargs)

@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.views.generic import CreateView, UpdateView
 from psycopg2.extras import NumericRange
+
 from researcher_UI.forms import AddPairedStudyForm, AddStudyForm, EditStudyForm
 from researcher_UI.mixins import ReseacherOwnsStudyMixin
 from researcher_UI.models import Study
@@ -69,9 +70,14 @@ class UpdateStudyView(LoginRequiredMixin, ReseacherOwnsStudyMixin, UpdateView):
         self.object.save()
 
         res = raw_gift_code_fun(
-            self.request, form.cleaned_data.get("gift_card_provider"), raw_gift_amount, self.object, new_study_name, raw_gift_codes
+            self.request,
+            form.cleaned_data.get("gift_card_provider"),
+            raw_gift_amount,
+            self.object,
+            new_study_name,
+            raw_gift_codes,
         )
-        
+
         return super().form_valid(form)
 
 

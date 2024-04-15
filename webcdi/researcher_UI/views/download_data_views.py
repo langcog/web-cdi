@@ -1,16 +1,19 @@
-from django.views.generic import DetailView
+import logging
+
 from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import redirect
-from django.utils.safestring import mark_safe
+from django.urls import reverse
 from django.template.loader import get_template
+from django.utils.safestring import mark_safe
 from django.utils.text import slugify
+from django.views.generic import DetailView
 from django_weasyprint import WeasyTemplateResponseMixin
 
 from researcher_UI.models import Study
 
-import logging
 logger = logging.getLogger("debug")
+
 
 class PDFAdministrationDetailView(WeasyTemplateResponseMixin, DetailView):
     model = Study
@@ -18,7 +21,6 @@ class PDFAdministrationDetailView(WeasyTemplateResponseMixin, DetailView):
     def get_template_names(self):
         name = slugify(f"{self.object.instrument.verbose_name}")
         template_name = f"researcher_UI/individual/{name}.html"
-        logger.debug(f'Clinical report template name: {template_name}')
         try:
             get_template(template_name)
             return [template_name]
@@ -36,15 +38,14 @@ class PDFAdministrationDetailView(WeasyTemplateResponseMixin, DetailView):
             for id in ids:
                 int_ids.append(int(id))
             ctx["administrations"] = ctx["administrations"].filter(pk__in=int_ids)
-        if 'adjusted' in self.kwargs:
-            ctx['adjusted'] = True
+        if "adjusted" in self.kwargs:
+            ctx["adjusted"] = True
         return ctx
 
     def get(self, request, *args, **kwargs) -> HttpResponse:
         self.object = self.get_object()
         name = slugify(f"{self.object.instrument.verbose_name}")
         template_name = f"researcher_UI/individual/{name}.html"
-        logger.debug(f'Clinical report template name: {template_name}')
         try:
             get_template(template_name)
         except Exception as e:
@@ -59,6 +60,6 @@ class PDFAdministrationDetailView(WeasyTemplateResponseMixin, DetailView):
                 ),
             )
 
-            return redirect(request.META.get("HTTP_REFERER"))
+            return redirect(reverse('researcher_ui:console_study', kwargs={'pk': self.object.id}) )
 
         return super().get(request, *args, **kwargs)

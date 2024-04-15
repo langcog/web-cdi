@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.db.models import Count
 from django.http import HttpResponse
 from rangefilter.filters import DateRangeFilterBuilder
+
 from researcher_UI.models import *
 
 # Register your models here.
@@ -82,14 +83,14 @@ class ResearcherInline(admin.StackedInline):
     model = Researcher
     can_delete = False
     verbose_name_plural = "researchers"
-    filter_horizontal = ["allowed_instruments"]
+    filter_horizontal = ["allowed_instruments", "allowed_instrument_families"]
 
 
 def email_list(modeladmin, request, queryset):
     response = HttpResponse(content_type="text/csv")
-    response[
-        "Content-Disposition"
-    ] = f'attachment; filename="User Email CSV Export for {request.user.email}.csv"'
+    response["Content-Disposition"] = (
+        f'attachment; filename="User Email CSV Export for {request.user.email}.csv"'
+    )
 
     response.write("\ufeff".encode("utf8"))
     writer = csv.writer(response, dialect="excel")

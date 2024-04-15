@@ -8,13 +8,25 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cdi_forms', '0041_repopulate_instruments'),
+        ("cdi_forms", "0041_repopulate_instruments"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='backgroundinfo',
-            name='caregiver_info',
-            field=models.IntegerField(choices=[(2, 'Two parents'), (1, 'One parent'), (3, 'One or both parents and other caregiver(s) (e.g., grandparent)'), (4, 'Other caregivers (e.g., grandparent or grandparents)'), (0, 'Prefer not to disclose')], verbose_name='Who does your child live with?'),
+            model_name="backgroundinfo",
+            name="caregiver_info",
+            field=models.IntegerField(
+                choices=[
+                    (2, "Two parents"),
+                    (1, "One parent"),
+                    (
+                        3,
+                        "One or both parents and other caregiver(s) (e.g., grandparent)",
+                    ),
+                    (4, "Other caregivers (e.g., grandparent or grandparents)"),
+                    (0, "Prefer not to disclose"),
+                ],
+                verbose_name="Who does your child live with?",
+            ),
         ),
     ]

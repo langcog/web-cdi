@@ -13,7 +13,7 @@ services:
       healthcheck:
         test: "exit 0"
 
-  web:
+  web: 
     build:
       context: .
       dockerfile: Dockerfile
@@ -43,5 +43,10 @@ services:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
 
+  selenium:
+    image: selenium/standalone-firefox
+    ports:
+    - 4444:4444
+    
 volumes:
   postgres_data:

@@ -19,7 +19,7 @@ class InstrumentScore(models.Model):
     kind = models.CharField(max_length=5, default="count", choices=KIND_OPTIONS)
 
     def __str__(self):
-        return f"%s: %s" % (self.instrument, self.title)
+        return f"{self.instrument}: {self.title}"
 
     class Meta:
         ordering = ["instrument", "order"]

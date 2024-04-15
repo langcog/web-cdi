@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+
 """
 Django custom signals used in django-inspectional-registration
 
@@ -16,11 +17,8 @@ SIGNALS:
     user_activated
         sent when user has activated by Backend
 """
-__author__ = 'Alisue <lambdalisue@hashnote.net>'
-__all__ = (
-    'user_registered', 'user_accepted',
-    'user_rejected', 'user_activated'
-)
+__author__ = "Alisue <lambdalisue@hashnote.net>"
+__all__ = ("user_registered", "user_accepted", "user_rejected", "user_activated")
 from django.dispatch import Signal
 
 # A new user has registered

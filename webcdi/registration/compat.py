@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+
 """
 Compatibility module
 """
-__author__ = 'Alisue <lambdalisue@hashnote.net>'
+__author__ = "Alisue <lambdalisue@hashnote.net>"
 import django
 from django.conf import settings
 
@@ -12,22 +13,10 @@ try:
     from django.utils.timezone import now as datetime_now
 except ImportError:
     import datetime
+
     datetime_now = datetime.datetime.now
 
-if django.VERSION >= (1, 9):
-    patterns = lambda x, *args: args
-    from django.conf.urls import url
-    from django.conf.urls import include
-else:
-    try:
-        # django 1.4
-        from django.conf.urls import url
-        from django.conf.urls import patterns
-        from django.conf.urls import include
-    except ImportError:
-        from django.conf.urls.defaults import url
-        from django.conf.urls.defaults import patterns
-        from django.conf.urls.defaults import include
+from django.urls import re_path as url
 
 try:
     from django.contrib.admin.utils import unquote
@@ -107,11 +96,12 @@ except ImportError:
 # being loaded, the user_model_label should be used when possible, with calls
 # to get_user_model deferred to execution time
 
-user_model_label = getattr(settings, 'AUTH_USER_MODEL', 'auth.User')
+user_model_label = getattr(settings, "AUTH_USER_MODEL", "auth.User")
 
 try:
     from django.contrib.auth import get_user_model
 except ImportError:
     from django.contrib.auth.models import User
+
     get_user_model = lambda: User
 # ===========================================================================}}}

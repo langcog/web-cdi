@@ -6,18 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cdi_forms', '0088_alter_backgroundinfo_sibling_count'),
+        ("cdi_forms", "0088_alter_backgroundinfo_sibling_count"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='instrument_forms',
-            name='enable_response',
+            model_name="instrument_forms",
+            name="enable_response",
             field=models.CharField(blank=True, max_length=51, null=True),
         ),
         migrations.AddField(
-            model_name='instrument_forms',
-            name='enabler',
+            model_name="instrument_forms",
+            name="enabler",
             field=models.CharField(blank=True, max_length=21, null=True),
         ),
     ]

@@ -18,12 +18,16 @@ webcdi/webcdi/databases*
 webcdi/webcdi/email*
 webcdi/webcdi/captcha*
 webcdi/media/*
+webcdi/htmlcov
 
 env/
 __pycache__/
 */.vscode/
 
-.env
+.env*
+
+.coverage
+.vscode/*
 
 # Elastic Beanstalk Files 
 .elasticbeanstalk/*

@@ -1,9 +1,9 @@
+from django.contrib.auth.models import User
 from django.db import models
 
-from django.contrib.auth.models import User
-
-from .instrument_model import Instrument
 from .instrument_family import InstrumentFamily
+from .instrument_model import Instrument
+
 
 class Researcher(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -18,16 +18,9 @@ class Researcher(models.Model):
     )
     allowed_instrument_families = models.ManyToManyField(
         InstrumentFamily,
-        verbose_name="Instrument Families this researcher has access to", 
-        blank=True
+        verbose_name="Instrument Families this researcher has access to",
+        blank=True,
     )
 
     def __str__(self):
-        return f"%s %s (%s, %s)" % (
-            self.user.first_name,
-            self.user.last_name,
-            self.position,
-            self.institution,
-        )
-
-   
+        return f"{self.user.first_name} {self.user.last_name} ({self.position}, {self.institution})"

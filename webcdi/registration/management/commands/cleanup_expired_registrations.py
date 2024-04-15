@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+
 """
 A management command which deletes expired or rejected accounts (e.g.,
 accounts which signed up but never activated) from the database.
@@ -46,7 +47,7 @@ Original License::
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-__author__ = 'Alisue <lambdalisue@hashnote.net>'
+__author__ = "Alisue <lambdalisue@hashnote.net>"
 from registration.models import RegistrationProfile
 
 try:
@@ -57,6 +58,7 @@ try:
 
         def handle(self, **options):
             RegistrationProfile.objects.delete_expired_users()
+
 except ImportError:
     from django.core.management import NoArgsCommand
 

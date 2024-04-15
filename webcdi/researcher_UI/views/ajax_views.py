@@ -1,8 +1,9 @@
+from django.core import serializers
+from django.http import HttpResponse, JsonResponse
 from django.views.generic import DetailView
+
 from researcher_UI.models import Instrument
 
-from django.http import HttpResponse, JsonResponse
-from django.core import serializers
 
 class AjaxDemographicForms(DetailView):
     def get(self, request):

@@ -3,10 +3,12 @@ import re
 
 import numpy as np
 import pandas as pd
+import pytz
 from django.db.models import Max
 from django.urls import reverse
-from researcher_UI.utils.random_url_generator import random_url_generator
+
 from researcher_UI.models import Administration, Study
+from researcher_UI.utils.random_url_generator import random_url_generator
 
 
 def admin_new_fun(request, permitted, study_name, study_obj):
@@ -105,8 +107,10 @@ def admin_new_fun(request, permitted, study_name, study_obj):
                             repeat_num=old_rep + 1,
                             url_hash=new_hash,
                             completed=False,
-                            due_date=datetime.datetime.now()
-                            + datetime.timedelta(days=test_period),
+                            due_date=pytz.utc.localize(
+                                datetime.datetime.now()
+                                + datetime.timedelta(days=test_period)
+                            ),
                         )
 
             if params["new_subject_ids"][0] != "":
@@ -126,8 +130,10 @@ def admin_new_fun(request, permitted, study_name, study_obj):
                             repeat_num=old_rep + 1,
                             url_hash=new_hash,
                             completed=False,
-                            due_date=datetime.datetime.now()
-                            + datetime.timedelta(days=test_period),
+                            due_date=pytz.utc.localize(
+                                datetime.datetime.now()
+                                + datetime.timedelta(days=test_period)
+                            ),
                         )
 
             if params["autogenerate_count"][0] != "":
@@ -154,8 +160,10 @@ def admin_new_fun(request, permitted, study_name, study_obj):
                         repeat_num=1,
                         url_hash=new_hash,
                         completed=False,
-                        due_date=datetime.datetime.now()
-                        + datetime.timedelta(days=test_period),
+                        due_date=pytz.utc.localize(
+                            datetime.datetime.now()
+                            + datetime.timedelta(days=test_period)
+                        ),
                     )
 
             data["stat"] = "ok"
@@ -170,6 +178,5 @@ def admin_new_fun(request, permitted, study_name, study_obj):
     else:
         data["stat"] = "error"
         data["error_message"] = "permission denied"
-        data["redirect_url"] = "endalk/"
 
     return data

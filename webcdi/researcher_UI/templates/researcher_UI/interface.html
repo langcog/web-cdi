@@ -15,7 +15,7 @@
                     <div class='col-md-12'>
                         <div class="row">
                             <div class='col'>
-                                <a href="{% url 'researcher_ui:researcher_add_instruments' pk=request.user.researcher.pk %}" type="button" type="button" style='width:100%;' class="btn btn-primary">Add Instruments</a>
+                                <a id='id_add_instruments' href="{% url 'researcher_ui:researcher_add_instruments' pk=request.user.researcher.pk %}" type="button" type="button" style='width:100%;' class="btn btn-primary">Add Instruments</a>
                             </div>
                             <div class="col">
                                 <a id="id_new_study" href="{% url 'researcher_ui:add_study' %}" type="button" style='width:100%;' class="btn btn-primary">New Study</a>

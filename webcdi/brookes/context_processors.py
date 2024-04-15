@@ -1,7 +1,8 @@
 import datetime
 
-from brookes.models import BrookesCode
 from dateutil.relativedelta import relativedelta
+
+from brookes.models import BrookesCode
 
 
 def renewal_codes(request):

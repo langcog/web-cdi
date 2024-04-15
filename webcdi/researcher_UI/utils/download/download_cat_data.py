@@ -1,16 +1,24 @@
+import logging
+
 import pandas as pd
+from django.db.models import Q
+from django.http import HttpResponse
+
 from cdi_forms.cat_forms.models import CatResponse
 from cdi_forms.models import BackgroundInfo
-from django.http import HttpResponse
-from django.db.models import Q 
 from researcher_UI.models import Administration
-from researcher_UI.utils.format_admin import format_admin_data, format_admin_header
+from researcher_UI.utils.format_admin import (format_admin_data,
+                                              format_admin_header)
+
 from .cat_utils import get_pd_norms
-import logging
+
 # Get an instance of a logger
 logger = logging.getLogger("debug")
 
-def download_cat_data(request, study_obj, administrations=None, adjusted=False, summary=False):
+
+def download_cat_data(
+    request, study_obj, administrations=None, adjusted=False, summary=False
+):
     response = HttpResponse(content_type="text/csv")
     filename = study_obj.name + "_items.csv"
     response["Content-Disposition"] = (
@@ -37,12 +45,15 @@ def download_cat_data(request, study_obj, administrations=None, adjusted=False, 
         items.append(count + 1)
 
     if summary:
-        answers = CatResponse.objects.values(
-            "administration_id", "est_theta"
-        ).filter(administration__in=administrations)
+        answers = CatResponse.objects.values("administration_id", "est_theta").filter(
+            administration__in=administrations
+        )
     else:
         answers = CatResponse.objects.values(
-            "administration_id", "est_theta", "administered_words", "administered_responses"
+            "administration_id",
+            "est_theta",
+            "administered_words",
+            "administered_responses",
         ).filter(administration__in=administrations)
     rows = []
     for answer in answers:
@@ -70,16 +81,30 @@ def download_cat_data(request, study_obj, administrations=None, adjusted=False, 
     )
 
     # Get PD Norms
-    pd_norms=get_pd_norms(study_obj, administrations, adjusted, answer_rows)
+    pd_norms = get_pd_norms(study_obj, administrations, adjusted, answer_rows)
 
     combined_data = pd.merge(
         combined_data, pd_norms, how="outer", on="administration_id"
     )
 
-    if study_obj.instrument.language in ["French French"] and study_obj.instrument.form in [
+    if study_obj.instrument.language in [
+        "French French"
+    ] and study_obj.instrument.form in [
         "CAT",
     ]:
-        pd.concat([combined_data, pd.DataFrame([ {"study_name": "NOTE:  The Ns for the by sex norms are small (some are <5)."}])], ignore_index=True)
+        pd.concat(
+            [
+                combined_data,
+                pd.DataFrame(
+                    [
+                        {
+                            "study_name": "NOTE:  The Ns for the by sex norms are small (some are <5)."
+                        }
+                    ]
+                ),
+            ],
+            ignore_index=True,
+        )
 
     # Turn pandas dataframe into a CSV
     combined_data.to_csv(response, encoding="utf-8", index=False)

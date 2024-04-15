@@ -1,12 +1,12 @@
 import re
 
 from django.conf import settings
-from django.http import HttpResponseRedirect, HttpResponsePermanentRedirect
+from django.core.exceptions import MiddlewareNotUsed
+from django.http import HttpResponsePermanentRedirect, HttpResponseRedirect
+from django.urls import resolve
 from django.utils import translation
 from django.utils.deprecation import MiddlewareMixin
-from django.core.exceptions import MiddlewareNotUsed
 from django.utils.http import url_has_allowed_host_and_scheme
-from django.urls import resolve
 
 EXEMPT_URLS = [re.compile(settings.LOGIN_URL.lstrip("/"))]
 if hasattr(settings, "LOGIN_EXEMPT_URLS"):
@@ -38,6 +38,7 @@ class AdminLocaleMiddleware(MiddlewareMixin):
         ):
             translation.activate("en")
             request.LANGUAGE_CODE = translation.get_language()
+
 
 class PrimaryHostRedirectMiddleware:
     """

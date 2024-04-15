@@ -1,11 +1,13 @@
-from researcher_UI.forms import AddInstrumentForm
-from researcher_UI.models import Researcher
-from brookes.models import BrookesCode
-from django.views.generic import UpdateView
 import datetime
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
+from django.views.generic import UpdateView
+
+from brookes.models import BrookesCode
+from researcher_UI.forms import AddInstrumentForm
+from researcher_UI.models import Researcher
+
 
 class AddInstruments(LoginRequiredMixin, UpdateView):
     model = Researcher

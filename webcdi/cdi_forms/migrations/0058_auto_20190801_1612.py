@@ -8,48 +8,76 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cdi_forms', '0057_auto_20190801_1606'),
+        ("cdi_forms", "0057_auto_20190801_1606"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='backgroundinfo',
-            name='ear_infections_boolean',
-            field=models.IntegerField(blank=True, null=True, verbose_name='Has your child experienced chronic ear infections (5 or more)? '),
+            model_name="backgroundinfo",
+            name="ear_infections_boolean",
+            field=models.IntegerField(
+                blank=True,
+                null=True,
+                verbose_name="Has your child experienced chronic ear infections (5 or more)? ",
+            ),
         ),
         migrations.AlterField(
-            model_name='backgroundinfo',
-            name='hearing_loss_boolean',
-            field=models.IntegerField(blank=True, null=True, verbose_name='Do you suspect that your child may have hearing loss?'),
+            model_name="backgroundinfo",
+            name="hearing_loss_boolean",
+            field=models.IntegerField(
+                blank=True,
+                null=True,
+                verbose_name="Do you suspect that your child may have hearing loss?",
+            ),
         ),
         migrations.AlterField(
-            model_name='backgroundinfo',
-            name='illnesses_boolean',
-            field=models.IntegerField(blank=True, null=True, verbose_name='Has your child had any major illnesses, hospitalizations, or diagnosed disabilities?'),
+            model_name="backgroundinfo",
+            name="illnesses_boolean",
+            field=models.IntegerField(
+                blank=True,
+                null=True,
+                verbose_name="Has your child had any major illnesses, hospitalizations, or diagnosed disabilities?",
+            ),
         ),
         migrations.AlterField(
-            model_name='backgroundinfo',
-            name='learning_disability_boolean',
-            field=models.IntegerField(blank=True, null=True, verbose_name='Have you or anyone in your immediate family been diagnosed with a language or learning disability?'),
+            model_name="backgroundinfo",
+            name="learning_disability_boolean",
+            field=models.IntegerField(
+                blank=True,
+                null=True,
+                verbose_name="Have you or anyone in your immediate family been diagnosed with a language or learning disability?",
+            ),
         ),
         migrations.AlterField(
-            model_name='backgroundinfo',
-            name='other_languages_boolean',
+            model_name="backgroundinfo",
+            name="other_languages_boolean",
             field=models.IntegerField(blank=True, null=True),
         ),
         migrations.AlterField(
-            model_name='backgroundinfo',
-            name='services_boolean',
-            field=models.IntegerField(blank=True, null=True, verbose_name='Has your child ever received any services for speech, language, or development issues?'),
+            model_name="backgroundinfo",
+            name="services_boolean",
+            field=models.IntegerField(
+                blank=True,
+                null=True,
+                verbose_name="Has your child ever received any services for speech, language, or development issues?",
+            ),
         ),
         migrations.AlterField(
-            model_name='backgroundinfo',
-            name='vision_problems_boolean',
-            field=models.IntegerField(blank=True, null=True, verbose_name='Is there some reason to suspect that your child may have vision problems?'),
+            model_name="backgroundinfo",
+            name="vision_problems_boolean",
+            field=models.IntegerField(
+                blank=True,
+                null=True,
+                verbose_name="Is there some reason to suspect that your child may have vision problems?",
+            ),
         ),
         migrations.AlterField(
-            model_name='backgroundinfo',
-            name='worried_boolean',
-            field=models.IntegerField(blank=True, null=True, verbose_name="Are you worried about your child's progress in language or communication?"),
+            model_name="backgroundinfo",
+            name="worried_boolean",
+            field=models.IntegerField(
+                blank=True,
+                null=True,
+                verbose_name="Are you worried about your child's progress in language or communication?",
+            ),
         ),
     ]

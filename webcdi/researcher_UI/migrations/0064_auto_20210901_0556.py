@@ -6,28 +6,45 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('researcher_UI', '0063_auto_20210129_0748'),
+        ("researcher_UI", "0063_auto_20210129_0748"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='study',
-            name='append_source_id_to_redirect',
-            field=models.BooleanField(default=False, verbose_name='Append source_id to redirect URL?'),
+            model_name="study",
+            name="append_source_id_to_redirect",
+            field=models.BooleanField(
+                default=False, verbose_name="Append source_id to redirect URL?"
+            ),
         ),
         migrations.AddField(
-            model_name='study',
-            name='source_id_url_parameter_key',
-            field=models.CharField(blank=True, max_length=51, null=True, verbose_name='URL parameter key'),
+            model_name="study",
+            name="source_id_url_parameter_key",
+            field=models.CharField(
+                blank=True, max_length=51, null=True, verbose_name="URL parameter key"
+            ),
         ),
         migrations.AlterField(
-            model_name='study',
-            name='participant_source_boolean',
-            field=models.IntegerField(choices=[(0, 'None'), (1, 'Prolific'), (2, 'Centiment'), (3, 'RedCap'), (4, 'Lookit'), (5, 'Mturk'), (99, 'Other')], default=0),
+            model_name="study",
+            name="participant_source_boolean",
+            field=models.IntegerField(
+                choices=[
+                    (0, "None"),
+                    (1, "Prolific"),
+                    (2, "Centiment"),
+                    (3, "RedCap"),
+                    (4, "Lookit"),
+                    (5, "Mturk"),
+                    (99, "Other"),
+                ],
+                default=0,
+            ),
         ),
         migrations.AlterField(
-            model_name='study',
-            name='redirect_url',
-            field=models.URLField(blank=True, help_text='Please enter redirect URL', null=True),
+            model_name="study",
+            name="redirect_url",
+            field=models.URLField(
+                blank=True, help_text="Please enter redirect URL", null=True
+            ),
         ),
     ]

@@ -4,13 +4,14 @@ import os
 import re
 from pathlib import Path
 
-from cdi_forms.forms import BackgroundForm, BackpageBackgroundForm
-from cdi_forms.models import BackgroundInfo, Instrument_Forms, Zipcode
 from django.conf import settings
 from django.http import Http404
 from django.utils import translation
-from researcher_UI.models import administration_data, Instrument
-from researcher_UI.models import Administration
+
+from cdi_forms.forms import BackgroundForm, BackpageBackgroundForm
+from cdi_forms.models import BackgroundInfo, Instrument_Forms, Zipcode
+from researcher_UI.models import (Administration, Instrument,
+                                  administration_data)
 
 logger = logging.getLogger("debug")
 
@@ -121,9 +122,9 @@ def prefilled_cdi_data(administration_instance):
         data = json.loads(content_file.read())
         data["object"] = administration_instance
         data["title"] = administration_instance.study.instrument.verbose_name
-        instrument_name = data[
-            "instrument_name"
-        ] = administration_instance.study.instrument.name
+        instrument_name = data["instrument_name"] = (
+            administration_instance.study.instrument.name
+        )
         data["completed"] = administration_instance.completed
         data["due_date"] = administration_instance.due_date.strftime(
             "%b %d, %Y, %I:%M %p"
@@ -231,9 +232,11 @@ def cdi_items(object_group, item_type, prefilled_data, item_id):
                 value for key, value in obj.items() if "choice_set_" in key
             ][0].split(";")
             prefilled_values = [
-                False
-                if obj["itemID"] not in prefilled_data
-                else x == prefilled_data[obj["itemID"]]
+                (
+                    False
+                    if obj["itemID"] not in prefilled_data
+                    else x == prefilled_data[obj["itemID"]]
+                )
                 for x in raw_split_choices
             ]
 

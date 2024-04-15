@@ -6,18 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cdi_forms', '0067_auto_20200416_0954'),
+        ("cdi_forms", "0067_auto_20200416_0954"),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='backgroundinfo',
-            old_name='birth_weight_confirmation',
-            new_name='birth_weight_confirmation_lb',
+            model_name="backgroundinfo",
+            old_name="birth_weight_confirmation",
+            new_name="birth_weight_confirmation_lb",
         ),
         migrations.AddField(
-            model_name='backgroundinfo',
-            name='birth_weight_confirmation_kg',
-            field=models.FloatField(blank=True, null=True, verbose_name='Birth weight'),
+            model_name="backgroundinfo",
+            name="birth_weight_confirmation_kg",
+            field=models.FloatField(blank=True, null=True, verbose_name="Birth weight"),
         ),
     ]

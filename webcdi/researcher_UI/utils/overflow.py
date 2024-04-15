@@ -1,6 +1,7 @@
-from researcher_UI.models import User, ip_address, study
 from django.urls import reverse
 from ipware.ip import get_client_ip
+
+from researcher_UI.models import User, ip_address, study
 
 
 def overflow_fun(request, username, study_name):

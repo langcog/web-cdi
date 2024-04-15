@@ -6,13 +6,16 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('researcher_UI', '0078_study_direct_redirect_boolean'),
+        ("researcher_UI", "0078_study_direct_redirect_boolean"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='study',
-            name='no_demographic_boolean',
-            field=models.BooleanField(default=False, help_text='You must include DOB, age and sex in the link parameters'),
+            model_name="study",
+            name="no_demographic_boolean",
+            field=models.BooleanField(
+                default=False,
+                help_text="You must include DOB, age and sex in the link parameters",
+            ),
         ),
     ]

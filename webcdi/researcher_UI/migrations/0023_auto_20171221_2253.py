@@ -8,18 +8,22 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('researcher_UI', '0022_study_prefilled_data'),
+        ("researcher_UI", "0022_study_prefilled_data"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='study',
-            name='max_age',
-            field=models.IntegerField(blank=True, null=True, verbose_name=b'Maximum age'),
+            model_name="study",
+            name="max_age",
+            field=models.IntegerField(
+                blank=True, null=True, verbose_name=b"Maximum age"
+            ),
         ),
         migrations.AddField(
-            model_name='study',
-            name='min_age',
-            field=models.IntegerField(blank=True, null=True, verbose_name=b'Minimum age'),
+            model_name="study",
+            name="min_age",
+            field=models.IntegerField(
+                blank=True, null=True, verbose_name=b"Minimum age"
+            ),
         ),
     ]

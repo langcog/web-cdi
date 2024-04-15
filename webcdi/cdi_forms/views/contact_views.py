@@ -1,14 +1,15 @@
 from typing import Any
-from django.http import HttpResponse, HttpRequest
-from django.views.generic import DetailView, FormView
-from django.urls import reverse
-
-from django.utils import translation
-from researcher_UI.models import Administration
 
 from django.contrib import messages
-from cdi_forms.views.utils import language_map
+from django.http import HttpRequest, HttpResponse
+from django.urls import reverse
+from django.utils import translation
+from django.views.generic import DetailView, FormView
+
 from cdi_forms.forms import ContactForm
+from cdi_forms.views.utils import language_map
+from researcher_UI.models import Administration
+
 
 class AdministrationContactView(FormView, DetailView):
     model = Administration
@@ -17,9 +18,9 @@ class AdministrationContactView(FormView, DetailView):
 
     def get_success_url(self) -> str:
         return reverse("administer_cdi_form", args=[self.object.url_hash])
-    
+
     def get_object(self, queryset=None):
-        self.object = Administration.objects.get(url_hash=self.kwargs['hash_id'])
+        self.object = Administration.objects.get(url_hash=self.kwargs["hash_id"])
         return self.object
 
     def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
@@ -31,5 +32,5 @@ class AdministrationContactView(FormView, DetailView):
 
     def form_valid(self, form: Any) -> HttpResponse:
         form.send_email()
-        messages.success(self.request, 'Form submission successful!')
+        messages.success(self.request, "Form submission successful!")
         return super().form_valid(form)

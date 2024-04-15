@@ -5,10 +5,9 @@ templatetags for django-form-utils
 """
 from __future__ import unicode_literals
 
-from django import forms
-from django import template
-from django.template.loader import render_to_string
 import six
+from django import forms, template
+from django.template.loader import render_to_string
 
 from ..forms import BetterForm, BetterModelForm
 from ..utils import select_template_from_string
@@ -35,24 +34,23 @@ def render(form, template_name=None):
     ``form_utils/better_form.html`` will be used instead if present.
 
     """
-    default = 'form_utils/form.html'
+    default = "form_utils/form.html"
     if isinstance(form, (BetterForm, BetterModelForm)):
-        default = ','.join(['form_utils/better_form.html', default])
+        default = ",".join(["form_utils/better_form.html", default])
     tpl = select_template_from_string(template_name or default)
 
-    return tpl.render(template.Context({'form': form}))
+    return tpl.render(template.Context({"form": form}))
 
 
 @register.filter
 def label(boundfield, contents=None):
     """Render label tag for a boundfield, optionally with given contents."""
     label_text = contents or boundfield.label
-    id_ = boundfield.field.widget.attrs.get('id') or boundfield.auto_id
+    id_ = boundfield.field.widget.attrs.get("id") or boundfield.auto_id
 
-    return render_to_string("forms/_label.html", {
-        "label_text": label_text,
-        "id": id_,
-        "field": boundfield})
+    return render_to_string(
+        "forms/_label.html", {"label_text": label_text, "id": id_, "field": boundfield}
+    )
 
 
 @register.filter
@@ -60,8 +58,7 @@ def value_text(boundfield):
     """Return the value for given boundfield as human-readable text."""
     val = boundfield.value()
     # If choices is set, use the display label
-    return six.text_type(
-        dict(getattr(boundfield.field, "choices", [])).get(val, val))
+    return six.text_type(dict(getattr(boundfield.field, "choices", [])).get(val, val))
 
 
 @register.filter
@@ -106,4 +103,4 @@ def is_radio(boundfield):
     whose RadioSelect does not inherit from Django's built-in RadioSelect.
 
     """
-    return 'radio' in boundfield.field.widget.__class__.__name__.lower()
+    return "radio" in boundfield.field.widget.__class__.__name__.lower()

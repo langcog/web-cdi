@@ -8,17 +8,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('researcher_UI', '0036_auto_20190621_0742'),
+        ("researcher_UI", "0036_auto_20190621_0742"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='benchmark',
-            options={'ordering': ['instrument_score', 'age', 'percentile']},
+            name="benchmark",
+            options={"ordering": ["instrument_score", "age", "percentile"]},
         ),
         migrations.AddField(
-            model_name='administration',
-            name='local_lab_id',
+            model_name="administration",
+            name="local_lab_id",
             field=models.CharField(blank=True, max_length=101, null=True),
         ),
     ]

@@ -1,5 +1,3 @@
-
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 import urllib
@@ -58,7 +56,7 @@ INSTALLED_APPS = (
     "django.contrib.staticfiles",
     "django.contrib.humanize",
     "cdi_forms",
-    'api',
+    "api",
     "crispy_forms",
     "bootstrap4",
     "bootstrap3",
@@ -91,9 +89,7 @@ MIDDLEWARE = [
     "webcdi.middleware.AdminLocaleMiddleware",
 ]
 
-AUTHENTICATION_BACKENDS = [
-    "django.contrib.auth.backends.ModelBackend"
-]
+AUTHENTICATION_BACKENDS = ["django.contrib.auth.backends.ModelBackend"]
 
 AXES_ENABLED = False
 
@@ -380,34 +376,6 @@ CKEDITOR_CONFIGS = {
 AWS_QUERYSTRING_AUTH = False
 
 LOGOUT_REDIRECT_URL = "/"
-
-
-def is_ec2_linux():
-    """Detect if we are running on an EC2 Linux Instance
-    See http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/identify_ec2_instances.html
-    """
-    if os.path.isfile("/sys/hypervisor/uuid"):
-        with open("/sys/hypervisor/uuid") as f:
-            uuid = f.read()
-            return uuid.startswith("ec2")
-    return False
-
-
-def get_linux_ec2_private_ip():
-    """Get the private IP Address of the machine if running on an EC2 linux server"""
-    response = None
-    if not is_ec2_linux():
-        return None
-    try:
-        response = urllib.request.urlopen(
-            "http://169.254.169.254/latest/meta-data/local-ipv4"
-        )
-        return response.read()
-    except:
-        return None
-    finally:
-        if response:
-            response.close()
 
 
 private_ip = get_linux_ec2_private_ip()

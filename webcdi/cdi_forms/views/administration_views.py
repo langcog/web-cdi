@@ -5,17 +5,6 @@ import re
 from typing import Any, Dict, List
 
 import requests
-from cdi_forms.models import Instrument_Forms
-from cdi_forms.utils import unicode_csv_reader
-from cdi_forms.views.utils import (
-    PROJECT_ROOT,
-    get_administration_instance,
-    has_backpage,
-    language_map,
-    model_map,
-    prefilled_background_form,
-    prefilled_cdi_data,
-)
 from django.conf import settings
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
@@ -23,12 +12,15 @@ from django.urls import reverse
 from django.utils import timezone, translation
 from django.views.generic import DetailView, UpdateView
 from ipware.ip import get_client_ip
-from researcher_UI.models import (
-    Administration,
-    administration_data,
-    ip_address,
-    PaymentCode,
-)
+
+from cdi_forms.models import Instrument_Forms
+from cdi_forms.utils import unicode_csv_reader
+from cdi_forms.views.utils import (PROJECT_ROOT, get_administration_instance,
+                                   has_backpage, language_map, model_map,
+                                   prefilled_background_form,
+                                   prefilled_cdi_data)
+from researcher_UI.models import (Administration, PaymentCode,
+                                  administration_data, ip_address)
 
 logger = logging.getLogger("debug")
 
@@ -52,8 +44,12 @@ class AdministrationSummaryView(DetailView):
                 for item in data:
                     data[item] = (
                         data[item]
-                        .replace("{{source_id}}", str(self.object.backgroundinfo.source_id))
-                        .replace("{{event_id}}", str(self.object.backgroundinfo.event_id))
+                        .replace(
+                            "{{source_id}}", str(self.object.backgroundinfo.source_id)
+                        )
+                        .replace(
+                            "{{event_id}}", str(self.object.backgroundinfo.event_id)
+                        )
                     )
                 r = requests.post(redirect_url, data=data)
                 ctx["redirect_url"] = str(r.content, "UTF-8")
@@ -91,23 +87,23 @@ class AdministrationSummaryView(DetailView):
             url_obj = amazon_urls[self.object.study.instrument.language]
             if PaymentCode.objects.filter(hash_id=self.object.url_hash).exists():
                 gift_card = PaymentCode.objects.get(hash_id=self.object.url_hash)
-                
-                ctx['gift_card'] = gift_card
+
+                ctx["gift_card"] = gift_card
                 ctx["gift_code"] = gift_card.gift_code
                 ctx["gift_amount"] = "${:,.2f}".format(gift_card.gift_amount)
-                ctx['payment_type'] = gift_card.payment_type
+                ctx["payment_type"] = gift_card.payment_type
 
-                if gift_card.payment_type == 'Amazon':
-                    ctx['payment_type_url'] = 'www.amazon.com'
+                if gift_card.payment_type == "Amazon":
+                    ctx["payment_type_url"] = "www.amazon.com"
                     ctx["redeem_url"] = url_obj["redeem_url"]
                     ctx["legal_url"] = url_obj["legal_url"]
-                if gift_card.payment_type == 'Tango':
-                    ctx['payment_type_url'] = 'www.rewardlink.io/r/1/'
+                if gift_card.payment_type == "Tango":
+                    ctx["payment_type_url"] = "www.rewardlink.io/r/1/"
                     ctx["redeem_url"] = None
                     ctx["legal_url"] = None
-                    
+
             else:
-                ctx['gift_card'] = 'ran out'
+                ctx["gift_card"] = "ran out"
                 ctx["gift_code"] = "ran out"
                 ctx["gift_amount"] = "ran out"
                 ctx["redeem_url"] = None
@@ -367,7 +363,7 @@ class AdministrationUpdateView(UpdateView):
             else:
                 self.object.completed = True
                 self.object.completed_date = timezone.now()
-                print('This should be completed now')
+                print("This should be completed now")
 
                 if self.object.study.completion_data:
                     data = self.object.study.completion_data
@@ -419,9 +415,9 @@ class AdministrationUpdateView(UpdateView):
                         )
         Administration.objects.filter(url_hash=self.object.url_hash).update(
             last_modified=timezone.now(),
-            page_number=0
-            if not "section" in self.kwargs
-            else int(self.kwargs["section"]),
+            page_number=(
+                0 if not "section" in self.kwargs else int(self.kwargs["section"])
+            ),
         )
 
         return redirect(response)
@@ -485,9 +481,11 @@ class AdministrationUpdateView(UpdateView):
                     value for key, value in obj.items() if "choice_set_" in key
                 ][0].split(";")
                 prefilled_values = [
-                    False
-                    if obj["itemID"] not in prefilled_data
-                    else x == prefilled_data[obj["itemID"]]
+                    (
+                        False
+                        if obj["itemID"] not in prefilled_data
+                        else x == prefilled_data[obj["itemID"]]
+                    )
                     for x in raw_split_choices
                 ]
 

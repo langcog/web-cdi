@@ -13,22 +13,21 @@ Including another URLconf
     1. Add an import:  from blog import urls as blog_urls
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
+
 from django.conf import settings
-from django.urls import include, re_path
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
-from django.urls import path
+from django.urls import include, path, re_path
 from django.views.generic import TemplateView
 from django.views.generic.base import RedirectView
 from django_registration.backends.activation.views import RegistrationView
-from supplementtut.views import *  # noqa
 
 from webcdi.forms import SignUpForm
 from webcdi.views import CustomLoginView, HomeView
 
 urlpatterns = [
-    path("", HomeView.as_view(), name='home'),
+    path("", HomeView.as_view(), name="home"),
     re_path(
         r"^favicon\.ico",
         RedirectView.as_view(url="/static/images/favicon.ico", permanent=True),
@@ -62,13 +61,13 @@ urlpatterns = [
         name="interface",
     ),
     re_path(r"interface/", include("researcher_UI.urls")),
-    # url(r"^registration/", include("registration.urls")),
-    # url(r"^signup/$", signup, name="signup"),
-    re_path(r"^lockout/$", TemplateView.as_view(template_name="registration/lockout.html")),
+    re_path(
+        r"^lockout/$", TemplateView.as_view(template_name="registration/lockout.html")
+    ),
     re_path(r"^health/?", include("health_check.urls")),
     re_path(r"^ckeditor/", include("ckeditor_uploader.urls")),
     path("brookes/", include("brookes.urls")),
-    path('api/', include('api.urls')),
+    path("api/", include("api.urls")),
 ]
 
 if settings.DEBUG:

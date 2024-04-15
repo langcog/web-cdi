@@ -2,9 +2,6 @@ import json
 
 import numpy as np
 import pandas as pd
-from api.mixins import StudyOwnerMixin
-from cdi_forms.models import BackgroundInfo, Instrument_Forms
-from cdi_forms.views import get_model_header
 from django.contrib import messages
 from django.contrib.sites.shortcuts import get_current_site
 from django.http import HttpResponse, JsonResponse
@@ -13,19 +10,15 @@ from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView
-from researcher_UI.models import (
-    Administration,
-    InstrumentScore,
-    Study,
-    administration_data,
-)
-from researcher_UI.utils import (
-    format_admin_data,
-    format_admin_header,
-    get_background_header,
-    get_score_headers,
-    get_study_scores,
-)
+
+from api.mixins import StudyOwnerMixin
+from cdi_forms.models import BackgroundInfo, Instrument_Forms
+from cdi_forms.views import get_model_header
+from researcher_UI.models import (Administration, InstrumentScore, Study,
+                                  administration_data)
+from researcher_UI.utils import (format_admin_data, format_admin_header,
+                                 get_background_header, get_score_headers,
+                                 get_study_scores)
 
 
 @method_decorator(csrf_exempt, name="dispatch")
@@ -35,8 +28,6 @@ class BaseAPIView(StudyOwnerMixin, TemplateView):
     ]
 
     def get_json(self, request, study_obj, administrations=None):
-        if self.permission_denied_message:
-            return JsonResponse({"error": self.permission_denied_message})
         adjusted = True
         administrations = (
             administrations
@@ -196,8 +187,14 @@ class BaseAPIView(StudyOwnerMixin, TemplateView):
             "WS",
             "WG",
         ]:
-            combined_data = combined_data.append(
-                {"study_name": "3rd Edition (Marchman et al., 2023)"}, ignore_index=True
+            pd.concat(
+                [
+                    combined_data,
+                    pd.DataFrame(
+                        [{"study_name": "3rd Edition (Marchman et al., 2023)"}]
+                    ),
+                ],
+                ignore_index=True,
             )
 
         # Turn pandas dataframe into a CSV

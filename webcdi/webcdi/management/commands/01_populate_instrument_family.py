@@ -4,6 +4,7 @@ import string
 
 from django.conf import settings
 from django.core.management.base import BaseCommand
+
 from researcher_UI.models import InstrumentFamily
 
 # Populates the ItemInfo and ItemMap models with data from instrument definition files.
@@ -17,7 +18,9 @@ class Command(BaseCommand):
         PROJECT_ROOT = settings.BASE_DIR
         families = json.load(
             open(
-                os.path.realpath(PROJECT_ROOT + "/static/json/instrument_families.json"),
+                os.path.realpath(
+                    PROJECT_ROOT + "/static/json/instrument_families.json"
+                ),
                 encoding="utf8",
             )
         )
@@ -32,13 +35,9 @@ class Command(BaseCommand):
         for family in families:
             family_name = family["name"]
 
-            print(
-                f"Updating instrument table for {family_name}"
-            )
+            print(f"Updating instrument table for {family_name}")
 
-            data_dict = {
-                "chargeable": family['chargeable']
-            }
+            data_dict = {"chargeable": family["chargeable"]}
 
             family_obj, created = InstrumentFamily.objects.update_or_create(
                 name=family_name,
@@ -46,8 +45,8 @@ class Command(BaseCommand):
             )
 
             if created:
-                created = 'created'
+                created = "created"
             else:
-                created = 'updated'
+                created = "updated"
 
-            print(f'{family_obj} {created}')
+            print(f"{family_obj} {created}")

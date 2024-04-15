@@ -8,12 +8,12 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('researcher_UI', '0036_auto_20190621_0742'),
+        ("researcher_UI", "0036_auto_20190621_0742"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='benchmark',
-            options={'ordering': ['instrument_score', 'age', 'percentile']},
+            name="benchmark",
+            options={"ordering": ["instrument_score", "age", "percentile"]},
         ),
     ]

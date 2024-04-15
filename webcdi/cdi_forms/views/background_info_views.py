@@ -4,10 +4,6 @@ import logging
 import os
 from typing import Any
 
-from cdi_forms.forms.forms import BackgroundForm, BackpageBackgroundForm
-from cdi_forms.models import BackgroundInfo
-from cdi_forms.utils import get_demographic_filename
-from cdi_forms.views.utils import PROJECT_ROOT, language_map, safe_harbor_zip_code
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.db.models import Max
@@ -19,7 +15,13 @@ from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView, UpdateView
-from researcher_UI.models import Administration, Study, PaymentCode
+
+from cdi_forms.forms.forms import BackgroundForm, BackpageBackgroundForm
+from cdi_forms.models import BackgroundInfo
+from cdi_forms.utils import get_demographic_filename
+from cdi_forms.views.utils import (PROJECT_ROOT, language_map,
+                                   safe_harbor_zip_code)
+from researcher_UI.models import Administration, PaymentCode, Study
 from researcher_UI.utils import max_subject_id
 
 # Get an instance of a logger
@@ -50,24 +52,24 @@ class AdministrationMixin(object):
 
     def get_study_context(self):
         self.study_context = {}
-        self.study_context[
-            "language"
-        ] = self.administration_instance.study.instrument.language
-        self.study_context[
-            "instrument"
-        ] = self.administration_instance.study.instrument.name
+        self.study_context["language"] = (
+            self.administration_instance.study.instrument.language
+        )
+        self.study_context["instrument"] = (
+            self.administration_instance.study.instrument.name
+        )
         self.study_context["min_age"] = self.administration_instance.study.min_age
         self.study_context["max_age"] = self.administration_instance.study.max_age
-        self.study_context[
-            "birthweight_units"
-        ] = self.administration_instance.study.birth_weight_units
+        self.study_context["birthweight_units"] = (
+            self.administration_instance.study.birth_weight_units
+        )
         self.study_context["child_age"] = None
         self.study_context["zip_code"] = ""
         self.study_context["language_code"] = self.user_language
         self.study_context["study"] = self.administration_instance.study
-        self.study_context[
-            "source_id"
-        ] = self.administration_instance.backgroundinfo.source_id
+        self.study_context["source_id"] = (
+            self.administration_instance.backgroundinfo.source_id
+        )
         self.study_context["study_obj"] = self.administration_instance.study
         return self.study_context
 
@@ -139,12 +141,9 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
         if data["allow_payment"] and self.administration_instance.bypass is None:
             try:
 
-                data["payment_code"] = (
-                    PaymentCode.objects.filter(
-                        study=self.administration_instance.study,
-                        hash_id__isnull=True                    )
-                    .first()
-                )
+                data["payment_code"] = PaymentCode.objects.filter(
+                    study=self.administration_instance.study, hash_id__isnull=True
+                ).first()
             except:
                 data["payment_code"] = None
         study_name = self.administration_instance.study.name
@@ -268,9 +267,7 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
         ):  # And test has yet to be completed and has not timed out
             try:
                 if self.object.age:
-                    self.study_context[
-                        "child_age"
-                    ] = (
+                    self.study_context["child_age"] = (
                         self.object.age
                     )  # Populate dictionary with child's age for validation in forms.py.
                 self.background_form = self.form_class(
@@ -470,12 +467,9 @@ class CreateBackgroundInfoView(CreateView):
 
         if data["allow_payment"] and self.bypass is None:
             try:
-                data["payment_code"] = (
-                    PaymentCode.objects.filter(
-                        study=self.study,
-                        hash_id__isnull=True)
-                    .first()
-                )
+                data["payment_code"] = PaymentCode.objects.filter(
+                    study=self.study, hash_id__isnull=True
+                ).first()
             except:
                 data["payment_code"] = None
         study_name = self.study.name
@@ -529,7 +523,8 @@ class CreateBackgroundInfoView(CreateView):
         return response
 
     def form_valid(self, form):
-        from researcher_UI.utils.random_url_generator import random_url_generator
+        from researcher_UI.utils.random_url_generator import \
+            random_url_generator
 
         # new_admin = Administration.objects.create(study =self.study, subject_id = max_subject_id+1, repeat_num = 1, url_hash = random_url_generator(), completed = False, due_date = datetime.datetime.now()+datetime.timedelta(days=self.study.test_period)) # Create an administration object for participant within database
         new_admin = Administration.objects.create(
@@ -593,7 +588,8 @@ class CreateBackgroundInfoView(CreateView):
                 max_subject_id is None
             ):  # If the max subject ID could not be found (e.g., study has 0 participants)
                 max_subject_id = 0  # Mark as zero
-            from researcher_UI.utils.random_url_generator import random_url_generator
+            from researcher_UI.utils.random_url_generator import \
+                random_url_generator
 
             administration_instance = Administration.objects.create(
                 study=self.study,

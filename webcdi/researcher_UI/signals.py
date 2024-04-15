@@ -1,7 +1,7 @@
+from django.contrib.auth.models import User
 from django.db.models.signals import m2m_changed, post_save
 from django.dispatch import receiver
 
-from django.contrib.auth.models import User
 # from registration.models import RegistrationProfile
 from researcher_UI.models import Researcher
 
@@ -41,6 +41,7 @@ m2m_changed.connect(
     update_instruments,
     sender=Researcher.allowed_instrument_families.through,
 )
+
 
 @receiver(post_save, sender=User)
 def update_user_profile(sender, instance, created, **kwargs):

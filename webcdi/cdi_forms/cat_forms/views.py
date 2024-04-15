@@ -1,20 +1,17 @@
 import logging
 import os.path
 
-from cdi_forms.models import BackgroundInfo, requests_log
-from cdi_forms.views import (
-    PROJECT_ROOT,
-    BackgroundInfoView,
-    BackpageBackgroundInfoView,
-    CreateBackgroundInfoView,
-    language_map,
-)
 from django.conf import settings
 from django.db.models import Min
 from django.http import Http404
 from django.shortcuts import redirect, render
 from django.utils import timezone, translation
 from django.views.generic import UpdateView
+
+from cdi_forms.models import BackgroundInfo, requests_log
+from cdi_forms.views import (PROJECT_ROOT, BackgroundInfoView,
+                             BackpageBackgroundInfoView,
+                             CreateBackgroundInfoView, language_map)
 from researcher_UI.models import Administration
 
 from .cdi_cat_api import cdi_cat_api
@@ -238,11 +235,11 @@ class AdministerAdministraionView(UpdateView):
             self.word = cdi_cat_api(
                 f"startItem?age_mos={self.object.backgroundinfo.age}&language={CAT_LANG_DICT[self.language]}"
             )
-            if self.word['definition'] is None:
+            if self.word["definition"] is None:
                 self.word = cdi_cat_api(
                     f"startItem?age_mos=30&language={CAT_LANG_DICT[self.language]}"
                 )
-            logger.debug(f'self.word = {self.word}') 
+            logger.debug(f"self.word = {self.word}")
         else:
             self.word = cdi_cat_api(
                 f"nextItem?responses={list(map(int,administered_responses))}&items={administered_items}&language={CAT_LANG_DICT[self.language]}"

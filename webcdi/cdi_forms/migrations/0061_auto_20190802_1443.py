@@ -8,13 +8,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cdi_forms', '0060_auto_20190801_1624'),
+        ("cdi_forms", "0060_auto_20190801_1624"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='backgroundinfo',
-            name='annual_income',
-            field=models.CharField(blank=True, max_length=30, null=True, verbose_name='Estimated Annual Family Income (in USD)'),
+            model_name="backgroundinfo",
+            name="annual_income",
+            field=models.CharField(
+                blank=True,
+                max_length=30,
+                null=True,
+                verbose_name="Estimated Annual Family Income (in USD)",
+            ),
         ),
     ]

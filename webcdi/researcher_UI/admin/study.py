@@ -1,5 +1,6 @@
-from brookes.filters import DropdownFilter
 from django.contrib import admin
+
+from brookes.filters import DropdownFilter
 from researcher_UI.models import Study
 
 from .admin_actions import scoring_data, scoring_summary
@@ -19,7 +20,7 @@ class StudyAdmin(admin.ModelAdmin):
         "share_opt_out",
         ("researcher__username", DropdownFilter),
         ("instrument__verbose_name", DropdownFilter),
-        'active',
+        "active",
     ]
     search_fields = ["instrument__name", "researcher__username", "name"]
     actions = [scoring_data, scoring_summary]

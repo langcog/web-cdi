@@ -5,6 +5,7 @@ import string
 
 from django.conf import settings
 from django.core.management.base import BaseCommand
+
 from researcher_UI.models import *
 
 # Populates the ItemInfo and ItemMap models with data from instrument definition files.
@@ -70,7 +71,7 @@ class Command(BaseCommand):
             instrument_min_age = curr_instrument["min_age"]
             instrument_max_age = curr_instrument["max_age"]
 
-            family = InstrumentFamily.objects.get(name=curr_instrument['family'])
+            family = InstrumentFamily.objects.get(name=curr_instrument["family"])
 
             data_dict = {
                 "language": instrument_language,
@@ -78,7 +79,7 @@ class Command(BaseCommand):
                 "verbose_name": instrument_verbose_name,
                 "min_age": instrument_min_age,
                 "max_age": instrument_max_age,
-                'family': family
+                "family": family,
             }
 
             instrument_obj, created = Instrument.objects.update_or_create(
@@ -88,7 +89,7 @@ class Command(BaseCommand):
 
             for demo in instrument_obj.demographics.all():
                 instrument_obj.demographics.remove(demo)
-                
+
             try:
                 for demo in curr_instrument["demographics"]:
                     demographic, created = Demographic.objects.update_or_create(

@@ -6,15 +6,12 @@ import datetime
 from django import forms
 from django.contrib.postgres.fields import ArrayField
 from django.core.exceptions import ValidationError
-from django.core.validators import (
-    MaxValueValidator,
-    MinValueValidator,
-    RegexValidator,
-    validate_comma_separated_integer_list,
-)
+from django.core.validators import (MaxValueValidator, MinValueValidator,
+                                    RegexValidator,
+                                    validate_comma_separated_integer_list)
 from django.db import models
-from django.utils.translation import pgettext_lazy
 from django.utils.translation import gettext_lazy as _
+from django.utils.translation import pgettext_lazy
 from django_countries.fields import CountryField
 
 from . import choices
@@ -91,16 +88,12 @@ class Instrument_Forms(models.Model):
     )  # used to provide scoring granulatity - uses item_type if blank
 
     enabler = models.CharField(
-        max_length=21,
-        blank=True,
-        null=True
-    ) # if this record depends on another, enter the other itemID here
+        max_length=21, blank=True, null=True
+    )  # if this record depends on another, enter the other itemID here
     enable_response = models.CharField(
-        max_length=51,
-        blank=True,
-        null=True
-    ) # if this records depends on another, enterr the accepted responses here
-    
+        max_length=51, blank=True, null=True
+    )  # if this records depends on another, enterr the accepted responses here
+
     def __unicode__(self):
         return "%s (%s, %s)" % (
             self.definition,
@@ -652,8 +645,8 @@ class BackgroundInfo(models.Model):
     )
 
     def __str__(self):
-        return f'{self.administration}'
-    
+        return f"{self.administration}"
+
 
 # Model of zipcodes reported to be in 3-digit zip code prefixes with a population lower than 20,000. Tests with a zipcode found in this model will have their digits replaced with their state abbreviation.
 class Zipcode(models.Model):

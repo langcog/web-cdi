@@ -8,18 +8,24 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cdi_forms', '0056_choices_choice_set_nl'),
+        ("cdi_forms", "0056_choices_choice_set_nl"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='backgroundinfo',
-            name='illnesses_boolean',
-            field=models.IntegerField(default=-1, verbose_name='Has your child had any major illnesses, hospitalizations, or diagnosed disabilities?'),
+            model_name="backgroundinfo",
+            name="illnesses_boolean",
+            field=models.IntegerField(
+                default=-1,
+                verbose_name="Has your child had any major illnesses, hospitalizations, or diagnosed disabilities?",
+            ),
         ),
         migrations.AlterField(
-            model_name='backgroundinfo',
-            name='learning_disability_boolean',
-            field=models.IntegerField(default=-1, verbose_name='Have you or anyone in your immediate family been diagnosed with a language or learning disability?'),
+            model_name="backgroundinfo",
+            name="learning_disability_boolean",
+            field=models.IntegerField(
+                default=-1,
+                verbose_name="Have you or anyone in your immediate family been diagnosed with a language or learning disability?",
+            ),
         ),
     ]

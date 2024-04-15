@@ -1,13 +1,13 @@
 import json
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.views.generic import UpdateView
-from researcher_UI.models import Study
+
 from researcher_UI.forms import ImportDataForm
-
-
+from researcher_UI.models import Study
 from researcher_UI.utils import import_data_fun
-from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 class ImportData(LoginRequiredMixin, UpdateView):
     model = Study
@@ -23,4 +23,3 @@ class ImportData(LoginRequiredMixin, UpdateView):
         study_obj = self.get_object()
         context["form"] = ImportDataForm(researcher=self.request.user, study=study_obj)
         return context
-    

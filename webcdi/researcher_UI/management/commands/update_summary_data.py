@@ -1,10 +1,11 @@
 import datetime
 
-from cdi_forms.scores import update_summary_scores
 from django.conf import settings
 from django.core.mail import EmailMessage
 from django.core.management.base import BaseCommand
 from django.db.models import Q
+
+from cdi_forms.scores import update_summary_scores
 from researcher_UI.models import Administration, Study
 
 
@@ -25,11 +26,11 @@ class Command(BaseCommand):
             query = Q(query) & Q(study__instrument__language=options["language"])
         if options["form"]:
             query = Q(query) & Q(study__instrument__form=options["form"])
-        if options['username']:
+        if options["username"]:
             query = Q(query) & Q(study__researcher__username=options["username"])
 
         administrations = Administration.objects.filter(query).filter(completed=True)
-        
+
         count = 0
         thousands = 0
         for instance in administrations:

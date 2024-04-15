@@ -2,6 +2,7 @@ from django.db import models
 
 from researcher_UI.models import InstrumentScore
 
+
 class Measure(models.Model):
     """
     Class to store the measures and their values used for scoring

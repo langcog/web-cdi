@@ -8,13 +8,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('researcher_UI', '0032_instrumentscore_kind'),
+        ("researcher_UI", "0032_instrumentscore_kind"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='researcher',
-            name='allowed_instruments',
-            field=models.ManyToManyField(blank=True, to='researcher_UI.instrument', verbose_name='Instruments this researcher has access to'),
+            model_name="researcher",
+            name="allowed_instruments",
+            field=models.ManyToManyField(
+                blank=True,
+                to="researcher_UI.instrument",
+                verbose_name="Instruments this researcher has access to",
+            ),
         ),
     ]

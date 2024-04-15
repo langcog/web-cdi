@@ -1,14 +1,12 @@
-
-from django import forms
-
-from django.utils.translation import gettext_lazy as _
-from django.core.validators import EmailValidator
-from django.conf import settings
-from django.core.mail import EmailMessage
-from django.template.loader import get_template
-
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, Field, Layout, Submit
+from django import forms
+from django.conf import settings
+from django.core.mail import EmailMessage
+from django.core.validators import EmailValidator
+from django.template.loader import get_template
+from django.utils.translation import gettext_lazy as _
+
 
 # Form for contacting Web-CDI team. Asks for basic contact information and test ID. Simple format.
 class ContactForm(forms.Form):
@@ -52,10 +50,10 @@ class ContactForm(forms.Form):
         cleaned_data = self.cleaned_data
         template = get_template("cdi_forms/administration_contact_email_template.txt")
         context = {
-            "contact_name": cleaned_data['contact_name'],
-            "contact_id": cleaned_data['contact_id'],
-            "contact_email": cleaned_data['contact_email'],
-            "form_content": cleaned_data['content'],
+            "contact_name": cleaned_data["contact_name"],
+            "contact_id": cleaned_data["contact_id"],
+            "contact_email": cleaned_data["contact_email"],
+            "form_content": cleaned_data["content"],
         }
         content = template.render(context)
         email = EmailMessage(
@@ -63,6 +61,6 @@ class ContactForm(forms.Form):
             content,
             settings.CONTACT_EMAIL,
             [settings.USER_ADMIN_EMAIL],
-            headers={"Reply-To": cleaned_data['contact_email']},
+            headers={"Reply-To": cleaned_data["contact_email"]},
         )
         email.send()

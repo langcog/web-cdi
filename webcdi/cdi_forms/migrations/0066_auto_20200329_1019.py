@@ -6,23 +6,29 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cdi_forms', '0065_auto_20200120_0806'),
+        ("cdi_forms", "0065_auto_20200120_0806"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='backgroundinfo',
-            name='sibling_boolean',
-            field=models.BooleanField(verbose_name='Does you child have siblings?',blank=True, null=True),
+            model_name="backgroundinfo",
+            name="sibling_boolean",
+            field=models.BooleanField(
+                verbose_name="Does you child have siblings?", blank=True, null=True
+            ),
         ),
         migrations.AddField(
-            model_name='backgroundinfo',
-            name='sibling_count',
-            field=models.IntegerField(blank=True, null=True, verbose_name='How many siblings does you child have?'),
+            model_name="backgroundinfo",
+            name="sibling_count",
+            field=models.IntegerField(
+                blank=True,
+                null=True,
+                verbose_name="How many siblings does you child have?",
+            ),
         ),
         migrations.AddField(
-            model_name='backgroundinfo',
-            name='sibling_data',
+            model_name="backgroundinfo",
+            name="sibling_data",
             field=models.TextField(blank=True, null=True),
         ),
     ]

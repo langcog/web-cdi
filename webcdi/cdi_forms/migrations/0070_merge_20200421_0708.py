@@ -6,9 +6,8 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cdi_forms', '0069_auto_20200413_0757'),
-        ('cdi_forms', '0069_merge_20200421_0638'),
+        ("cdi_forms", "0069_auto_20200413_0757"),
+        ("cdi_forms", "0069_merge_20200421_0638"),
     ]
 
-    operations = [
-    ]
+    operations = []

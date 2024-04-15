@@ -1,12 +1,12 @@
-from researcher_UI.models import (
-    Benchmark,
-    InstrumentScore,
-    Measure,
-    SummaryData,
-    administration_data,
-)
+import logging
+
+from researcher_UI.models import (Benchmark, InstrumentScore, Measure,
+                                  SummaryData, administration_data)
 
 from .models import BackgroundInfo, Instrument_Forms
+
+logger = logging.getLogger(__name__)
+
 
 def calc_benchmark(x1, x2, y1, y2, raw_score):
     if x1 == x2:
@@ -203,22 +203,30 @@ def update_summary_scores(administration_instance):
         summary, created = SummaryData.objects.get_or_create(
             administration=administration_instance, title="benchmark cohort age"
         )
-        
+
         summary.value = str(age)
         summary.save()
-        
+
         adjusted_benchmark_age = background_info.age
-        if adjusted_benchmark_age is not None and background_info.early_or_late == "early":
+        if (
+            adjusted_benchmark_age is not None
+            and background_info.early_or_late == "early"
+        ):
             try:
-                adjusted_benchmark_age = adjusted_benchmark_age - int(background_info.due_date_diff / 4)
+                adjusted_benchmark_age = adjusted_benchmark_age - int(
+                    background_info.due_date_diff / 4
+                )
             except:
                 pass
-        elif adjusted_benchmark_age is not None and background_info.early_or_late == "late":
+        elif (
+            adjusted_benchmark_age is not None
+            and background_info.early_or_late == "late"
+        ):
             try:
                 adjusted_benchmark_age = age + int(background_info.due_date_diff / 4)
             except:
                 pass
-        
+
         summary, created = SummaryData.objects.get_or_create(
             administration=administration_instance, title="adjusted benchmark age"
         )
@@ -231,7 +239,8 @@ def update_summary_scores(administration_instance):
             adjusted_benchmark_age = max_age
 
         summary, created = SummaryData.objects.get_or_create(
-            administration=administration_instance, title="adjusted benchmark cohort age"
+            administration=administration_instance,
+            title="adjusted benchmark cohort age",
         )
         summary.value = str(adjusted_benchmark_age)
         summary.save()
@@ -240,7 +249,7 @@ def update_summary_scores(administration_instance):
             instrument=administration_instance.study.instrument
         ):
             if Benchmark.objects.filter(instrument_score=f).exists():
-                print(f'Getting benchmark for score {f} and age {age}')
+                logger.debug(f"Getting benchmark for score {f} and age {age}")
                 benchmark = Benchmark.objects.filter(instrument_score=f, age=age)[0]
                 try:
                     adjusted_benchmark = Benchmark.objects.filter(

@@ -8,13 +8,13 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cdi_forms', '0050_auto_20190328_1634'),
+        ("cdi_forms", "0050_auto_20190328_1634"),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='choices',
-            old_name='choice_set_fr',
-            new_name='choice_set_fr_ca',
+            model_name="choices",
+            old_name="choice_set_fr",
+            new_name="choice_set_fr_ca",
         ),
     ]

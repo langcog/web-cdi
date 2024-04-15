@@ -1,17 +1,18 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+
 """
 Utilities for django-inspectional-registration
 """
-__author__ = 'Alisue <lambdalisue@hashnote.net>'
+__author__ = "Alisue <lambdalisue@hashnote.net>"
 import random
 
-from django.utils.encoding import force_text
-#from django.utils.six.moves import range
-
-from six.moves  import range
+from django.utils.encoding import force_str as force_text
+from six.moves import range
 
 from registration.compat import sha1
+
+# from django.utils.six.moves import range
 
 
 def get_site(request):
@@ -30,15 +31,15 @@ def get_site(request):
 
 def generate_activation_key(username):
     """generate activation key with username
-    
+
     originally written by ubernostrum in django-registration_
 
     .. _django-registration: https://bitbucket.org/ubernostrum/django-registration
     """
     username = force_text(username)
     seed = force_text(random.random())
-    salt = sha1(seed.encode('utf-8')).hexdigest()[:5]
-    activation_key = sha1((salt+username).encode('utf-8')).hexdigest()
+    salt = sha1(seed.encode("utf-8")).hexdigest()[:5]
+    activation_key = sha1((salt + username).encode("utf-8")).hexdigest()
     return activation_key
 
 
@@ -46,14 +47,14 @@ def generate_random_password(length=10):
     """generate random password with passed length"""
     # Without 1, l, O, 0 because those character are hard to tell
     # the difference between in same fonts
-    chars = '23456789abcdefghijklmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ'
+    chars = "23456789abcdefghijklmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"
     password = "".join([random.choice(chars) for i in range(length)])
     return password
 
 
 def send_mail(subject, message, from_email, recipients):
     """send mail to recipients
-    
+
     this method use django-mailer_ ``send_mail`` method when
     the app is in ``INSTALLED_APPS``
 
@@ -65,12 +66,15 @@ def send_mail(subject, message, from_email, recipients):
 
     .. _django-mailer: http://code.google.com/p/django-mailer/
     """
+    import sys
+
     from django.conf import settings
     from django.core.mail import send_mail as django_send_mail
-    import sys
-    if 'test' not in sys.argv and 'mailer' in settings.INSTALLED_APPS:
+
+    if "test" not in sys.argv and "mailer" in settings.INSTALLED_APPS:
         try:
             from mailer import send_mail
+
             return send_mail(subject, message, from_email, recipients)
         except ImportError:
             pass

@@ -1,12 +1,12 @@
-from researcher_UI.utils import random_url_generator
-
-from django.contrib.auth.models import User
-from researcher_UI.models import Study, ip_address, Administration
-from ipware.ip import get_client_ip
-import requests
-from django.utils import timezone
 import datetime
 
+import requests
+from django.contrib.auth.models import User
+from django.utils import timezone
+from ipware.ip import get_client_ip
+
+from researcher_UI.models import Administration, Study, ip_address
+from researcher_UI.utils import random_url_generator
 
 
 def admin_new_participant_fun(request, username, study_name):
@@ -26,9 +26,9 @@ def admin_new_participant_fun(request, username, study_name):
         prev_visitor = ip_address.objects.filter(ip_address=visitor_ip).count()
 
     if (prev_visitor < 5 and completed < 5) or request.user.is_authenticated:
-        if completed_admins < subject_cap:
+        if subject_cap is None:
             let_through = True
-        elif subject_cap is None:
+        elif completed_admins < subject_cap:
             let_through = True
         elif bypass:
             let_through = True
@@ -52,7 +52,7 @@ def admin_new_participant_fun(request, username, study_name):
                         "studyId": "ContinuousCDI",
                     },
                 )
-                admin = administration(
+                admin = Administration(
                     study=study_obj, subject_id=subject_id, repeat_num=1
                 )
                 admin.url_hash = random_url_generator()
@@ -60,7 +60,7 @@ def admin_new_participant_fun(request, username, study_name):
                 admin.due_date = timezone.now() + datetime.timedelta(days=test_period)
                 admin.bypass = None
                 admin.save()
-                
+
             elif num_admins == 1:
                 if request.GET.get("final_cdi"):
                     admin = Administration.objects.create(

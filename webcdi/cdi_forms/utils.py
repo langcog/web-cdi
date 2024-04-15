@@ -1,5 +1,5 @@
-import os
 import csv
+import os
 
 PROJECT_ROOT = os.path.abspath(
     os.path.dirname(__file__)
@@ -19,7 +19,9 @@ def get_demographic_filename(std):
     except:
         return ""
 
-from itertools import tee, islice, chain
+
+from itertools import chain, islice, tee
+
 
 def previous_and_next(some_iterable):
     prevs, items, nexts = tee(some_iterable, 3)
@@ -27,8 +29,8 @@ def previous_and_next(some_iterable):
     nexts = chain(islice(nexts, 1, None), [None])
     return zip(prevs, items, nexts)
 
+
 def unicode_csv_reader(utf8_data, dialect=csv.excel, **kwargs):
     csv_reader = csv.reader(utf8_data, dialect=dialect, **kwargs)
     for row in csv_reader:
         yield [cell for cell in row]
-        

@@ -1,5 +1,6 @@
-from researcher_UI.models import SummaryData
 import pandas as pd
+
+from researcher_UI.models import SummaryData
 
 
 def get_study_scores(administrations):

@@ -1,9 +1,10 @@
 import datetime
 
-from brookes.models import BrookesCode
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+
+from brookes.models import BrookesCode
 from researcher_UI import choices
 
 

@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('researcher_UI', '0021_ip_address'),
+        ("researcher_UI", "0021_ip_address"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='study',
-            name='prefilled_data',
+            model_name="study",
+            name="prefilled_data",
             field=models.IntegerField(default=0),
         ),
     ]

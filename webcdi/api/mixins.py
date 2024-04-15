@@ -1,8 +1,8 @@
 import json
 
 from django.contrib.auth import authenticate
-from django.core.exceptions import PermissionDenied
 from django.http import JsonResponse
+
 from researcher_UI.models import Study
 
 
@@ -28,13 +28,3 @@ class StudyOwnerMixin(object):
                 status=403, data={"error": self.permission_denied_message}
             )
         return super().dispatch(request, *args, **kwargs)
-
-    def get_permission_denied_message(self):
-        """
-        Override this method to override the permission_denied_message attribute.
-        """
-        return self.permission_denied_message
-
-    def handle_no_permission(self):
-        if self.raise_exception:
-            raise PermissionDenied(self.get_permission_denied_message())

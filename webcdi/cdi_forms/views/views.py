@@ -5,16 +5,6 @@ import logging
 import os.path
 
 import requests
-from cdi_forms.forms.forms import BackgroundForm
-from cdi_forms.models import *
-from cdi_forms.views.utils import (
-    PROJECT_ROOT,
-    get_administration_instance,
-    has_backpage,
-    language_map,
-    model_map,
-    prefilled_cdi_data,
-)
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
@@ -24,6 +14,12 @@ from django.urls import reverse
 from django.utils import timezone, translation
 from django.utils.translation import gettext_lazy as _
 from ipware.ip import get_client_ip
+
+from cdi_forms.forms.forms import BackgroundForm
+from cdi_forms.models import *
+from cdi_forms.views.utils import (PROJECT_ROOT, get_administration_instance,
+                                   has_backpage, language_map, model_map,
+                                   prefilled_cdi_data)
 from researcher_UI.models import *
 
 # Get an instance of a logger
@@ -318,7 +314,9 @@ def administer_cdi_form(request, hash_id):
             elif administration_instance.completedBackgroundInfo:
                 if administration_instance.page_number > 0:
                     return redirect(
-                        "update_administration_section", hash_id=administration_instance.url_hash, section=administration_instance.page_number+1
+                        "update_administration_section",
+                        hash_id=administration_instance.url_hash,
+                        section=administration_instance.page_number + 1,
                     )
                 else:
                     return redirect(

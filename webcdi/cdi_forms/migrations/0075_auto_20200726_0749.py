@@ -6,22 +6,22 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cdi_forms', '0074_catstartingword'),
+        ("cdi_forms", "0074_catstartingword"),
     ]
 
     operations = [
         migrations.AlterUniqueTogether(
-            name='instrumentitem',
+            name="instrumentitem",
             unique_together=None,
         ),
         migrations.RemoveField(
-            model_name='instrumentitem',
-            name='instrument',
+            model_name="instrumentitem",
+            name="instrument",
         ),
         migrations.DeleteModel(
-            name='CatStartingWord',
+            name="CatStartingWord",
         ),
         migrations.DeleteModel(
-            name='InstrumentItem',
+            name="InstrumentItem",
         ),
     ]

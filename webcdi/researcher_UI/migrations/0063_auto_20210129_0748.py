@@ -6,13 +6,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('researcher_UI', '0062_auto_20210122_0844'),
+        ("researcher_UI", "0062_auto_20210122_0844"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='study',
-            name='redirect_url',
-            field=models.URLField(blank=True, help_text='Enter the basic return URL - the Centiment aid will be added automatically', null=True),
+            model_name="study",
+            name="redirect_url",
+            field=models.URLField(
+                blank=True,
+                help_text="Enter the basic return URL - the Centiment aid will be added automatically",
+                null=True,
+            ),
         ),
     ]

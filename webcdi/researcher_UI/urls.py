@@ -1,4 +1,4 @@
-from django.urls import path, include, re_path
+from django.urls import include, path, re_path
 
 from researcher_UI import views
 
@@ -10,22 +10,43 @@ urlpatterns = [
         "study/",
         include(
             [
-                path("<int:pk>/detail/", views.StudyCreateView.as_view(), name="console_study"), 
+                path(
+                    "<int:pk>/detail/",
+                    views.StudyCreateView.as_view(),
+                    name="console_study",
+                ),
                 path("add/", views.AddStudy.as_view(), name="add_study"),
-                path("add_paired/", views.AddPairedStudy.as_view(), name="add_paired_study"),
-                path("<int:pk>/administer_new/", views.AdminNew.as_view(), name="administer_new"),
-                path("<int:pk>/import_data/", views.ImportData.as_view(), name="import_data",),
-                path("<int:pk>/update/", views.UpdateStudyView.as_view(), name="rename_study"),
+                path(
+                    "add_paired/",
+                    views.AddPairedStudy.as_view(),
+                    name="add_paired_study",
+                ),
+                path(
+                    "<int:pk>/administer_new/",
+                    views.AdminNew.as_view(),
+                    name="administer_new",
+                ),
+                path(
+                    "<int:pk>/import_data/",
+                    views.ImportData.as_view(),
+                    name="import_data",
+                ),
+                path(
+                    "<int:pk>/update/",
+                    views.UpdateStudyView.as_view(),
+                    name="rename_study",
+                ),
                 path("<int:pk>/overflow/", views.Overflow.as_view(), name="overflow"),
             ]
-        )
+        ),
     ),
-
     re_path(
         r"^(?P<username>[^/]+)/(?P<study_name>[^/]+)/new_parent/$",
         views.AddNewParent.as_view(),
         name="administer_new_parent",
     ),
+    # TODO
+    # work out if this is ever called
     re_path(
         r"^(?P<username>[^/]+)/(?P<study_name>[^/]+)/new_participant/$",
         views.AdministerNewParticipant.as_view(),
