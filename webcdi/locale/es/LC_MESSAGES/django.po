@@ -1771,8 +1771,9 @@ msgstr "Ocultar/mostrar instrucciones: "
 
 #: cdi_forms/templates/cdi_forms/administration_form.html:121
 msgid ""
-"¡Gracias por completar! Revise sus respuestas y, si está listo/a, presione \"enviar.\""
-msgstr ""
+"Thank you for completing!  Please review your responses and if you are "
+"ready, click submit!"
+msgstr "¡Gracias por completar! Revise sus respuestas y, si está listo/a, presione \"enviar.\""
 
 #: cdi_forms/templates/cdi_forms/administration_form.html:265
 #: cdi_forms/templates/cdi_forms/cdi_form.html:381
