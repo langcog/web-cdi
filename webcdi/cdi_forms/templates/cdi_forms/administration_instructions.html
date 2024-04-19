@@ -217,7 +217,7 @@
     </div>
     <div class="button-wrapper">
         <div class="flex-row  d-flex justify-content-center">
-            <a class="btn btn-primary next-cdi-page" href="{% url 'update_administration_section' object.url_hash 1 %}">{% trans "Next Page" %} &#62;&#62;</a>
+            <a id="id_next_page" class="btn btn-primary next-cdi-page" href="{% url 'update_administration_section' object.url_hash 1 %}">{% trans "Next Page" %} &#62;&#62;</a>
         </div>
     </div>
     <input type="hidden" id="page_number" name="page_number" value = "0">
