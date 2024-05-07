@@ -2,8 +2,8 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth import login
-
 from registration.signals import user_activated, user_registered
+
 from researcher_UI.models import *
 
 

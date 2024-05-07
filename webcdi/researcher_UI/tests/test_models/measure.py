@@ -1,9 +1,11 @@
+from django.contrib.auth.models import User
 from django.test import TestCase, tag
 
 from researcher_UI.models import (Instrument, InstrumentFamily,
                                   InstrumentScore, Measure)
-from researcher_UI.tests.utils import get_admin_change_view_url, get_admin_changelist_view_url
-from django.contrib.auth.models import User
+from researcher_UI.tests.utils import (get_admin_change_view_url,
+                                       get_admin_changelist_view_url)
+
 # models test
 
 

@@ -1,5 +1,6 @@
 from .administration_data import AdministrationDataModelTest  # noqa
 from .administration_model import AdministrationModelTest  # noqa
+from .administration_summary import AdministrationSummaryModelTest  # noqa
 from .benchmark import BenchmarkModelTest  # noqa
 from .demographic import DemographicModelTest  # noqa
 from .instrument import InstrumentModelTest  # noqa
@@ -12,4 +13,3 @@ from .researcher import ResearcherModelTest  # noqa
 from .study import StudyModelTest  # noqa
 from .summary_data import SummaryDataModelTest  # noqa
 from .user import UserModelTest  # noqa
-from .administration_summary import AdministrationSummaryModelTest  # noqa

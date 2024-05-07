@@ -24,6 +24,8 @@ docker-create-db:
 	docker-compose exec -it db bash 
 	psql -U postgres
 	CREATE DATABASE <DATABASENAME>;
+	CREATE USER "<USERNAME>" WITH PASSWORD '<PASSWORD>';
+	ALTER USER "<USERNAME>" WITH SUPERUSER;
 	ALTER DATABASE <DATABASENAME> OWNER TO "<USERNAME>";
 
 docker-lint:

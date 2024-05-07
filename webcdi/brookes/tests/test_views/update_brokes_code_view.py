@@ -12,6 +12,7 @@ from researcher_UI.models import InstrumentFamily
 logger = logging.getLogger("selenium")
 logger.setLevel(logging.INFO)
 
+
 class UpdateBrookesCodeTest(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(username="henry", password="secret")

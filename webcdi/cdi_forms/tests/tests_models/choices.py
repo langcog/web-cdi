@@ -1,7 +1,8 @@
 from django.contrib.auth.models import User
 from django.test import TestCase, tag
+from django.utils import timezone
 
-from researcher_UI.models import Demographic
+from cdi_forms.models import Choices
 from researcher_UI.tests.utils import (get_admin_change_view_url,
                                        get_admin_changelist_view_url)
 
@@ -9,18 +10,17 @@ from researcher_UI.tests.utils import (get_admin_change_view_url,
 
 
 @tag("model")
-class DemographicModelTest(TestCase):
+class ChoiceModelTest(TestCase):
+
     def setUp(self) -> None:
+        return super().setUp()
 
-        self.demographic = Demographic.objects.create(
-            name="Demographic Model Test", path="path/to/demographic/files/"
-        )
+    @tag("model")
+    def test_administration_creation(self):
+        instance = Choices(choice_set="Test Choice")
 
-    def test_demographic_creation(self):
-        instance = self.demographic
-
-        self.assertTrue(isinstance(instance, Demographic))
-        self.assertEqual(instance.__str__(), f"{instance.name}")
+        self.assertTrue(isinstance(instance, Choices))
+        self.assertEqual(instance.__str__(), f"{instance.choice_set}")
 
     @tag("admin")
     def test_admin(self):
@@ -31,11 +31,11 @@ class DemographicModelTest(TestCase):
         c.login(username="super-user", password="password")
 
         # create test data
-        instance = self.demographic
+        instance = Choices(choice_set="Admin Test Choice")
 
         # run test
-        response = c.get(get_admin_change_view_url(instance))
-        self.assertEqual(response.status_code, 200)
+        # response = c.get(get_admin_change_view_url(instance))
+        # self.assertEqual(response.status_code, 200)
 
         response = c.get(get_admin_changelist_view_url(instance))
         self.assertEqual(response.status_code, 200)

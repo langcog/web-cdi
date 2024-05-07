@@ -2,8 +2,9 @@ from django.contrib.auth.models import User
 from django.test import TestCase, tag
 from django.utils import timezone
 
+from cdi_forms.models import BackgroundInfo
 from researcher_UI.models import (Administration, Instrument, InstrumentFamily,
-                                  Study, SummaryData)
+                                  Study)
 from researcher_UI.tests.utils import (get_admin_change_view_url,
                                        get_admin_changelist_view_url)
 
@@ -11,7 +12,8 @@ from researcher_UI.tests.utils import (get_admin_change_view_url,
 
 
 @tag("model")
-class SummaryDataModelTest(TestCase):
+class BackgroundIndoModelTest(TestCase):
+
     def setUp(self) -> None:
         user = User.objects.create_user(
             username="PaulMcCartney", password="PaulMcCartney"
@@ -31,30 +33,33 @@ class SummaryDataModelTest(TestCase):
         )
 
         study = Study.objects.create(
-            researcher=user, name="Test Study Instance", instrument=instrument
+            researcher=user,
+            name="Test Study Instance",
+            instrument=instrument,
+            redirect_url="https://redirect_url.com/redirect/{source_id}",
         )
+
         administration = Administration.objects.create(
             study=study,
             subject_id=1,
             repeat_num=1,
-            url_hash="qergfqewrfqwer",
+            url_hash="0123456789012345678901234567890123456789012345678901234567890123",
             completed=False,
             due_date=timezone.now(),
         )
 
-        self.summary_data = SummaryData.objects.create(
-            administration=administration,
-            title="Summary Data Title",
-            value="Summary Data Value",
+        self.instance = BackgroundInfo.objects.create(
+            administration=administration, age=12, source_id="123456"
         )
 
-    def test_summary_data_creation(self):
-        instance = self.summary_data
+        return super().setUp()
 
-        self.assertTrue(isinstance(instance, SummaryData))
-        self.assertEqual(
-            instance.__str__(), f"{instance.administration}: {instance.title}"
-        )
+    @tag("model")
+    def test_administration_creation(self):
+        instance = self.instance
+
+        self.assertTrue(isinstance(instance, BackgroundInfo))
+        self.assertEqual(instance.__str__(), f"{instance.administration}")
 
     @tag("admin")
     def test_admin(self):
@@ -65,7 +70,7 @@ class SummaryDataModelTest(TestCase):
         c.login(username="super-user", password="password")
 
         # create test data
-        instance = self.summary_data
+        instance = self.instance
 
         # run test
         response = c.get(get_admin_change_view_url(instance))

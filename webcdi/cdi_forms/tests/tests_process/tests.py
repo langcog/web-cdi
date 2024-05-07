@@ -8,7 +8,9 @@ from django.core.management import call_command
 from django.test import Client, LiveServerTestCase
 from django.test.utils import override_settings
 from django.urls import reverse
-from selenium.common.exceptions import NoSuchElementException, UnexpectedTagNameException, ElementNotInteractableException
+from selenium.common.exceptions import (ElementNotInteractableException,
+                                        NoSuchElementException,
+                                        UnexpectedTagNameException)
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -16,7 +18,7 @@ from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.ui import WebDriverWait
 
 from cdi_forms.models import *
-from researcher_UI.models import Instrument, Study, Demographic
+from researcher_UI.models import Demographic, Instrument, Study
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
@@ -30,7 +32,6 @@ logger = logging.getLogger("selenium")
 logger.setLevel(logging.INFO)
 
 # Create your tests here.
-
 
 
 def scroll_and_click(passed_in_driver, object):
@@ -58,11 +59,6 @@ class WebSiteOpensTests(LiveServerTestCase):
             command_executor="http://selenium:4444", options=options
         )
         cls.selenium.implicitly_wait(10)
-
-    @classmethod
-    def tearDownClass(cls):
-        cls.selenium.quit()
-        super().tearDownClass()
 
     def test_visit_home_age(self):
         self.selenium.get(f"{self.live_server_url}")
@@ -115,11 +111,6 @@ class TestParentInterface(LiveServerTestCase):
         options.add_argument("--disable-dev-shm-usage")
         cls.selenium = webdriver.Remote("http://selenium:4444", options=options)
         cls.selenium.implicitly_wait(1)
-
-    @classmethod
-    def tearDownClass(cls):
-        cls.selenium.quit()
-        super().tearDownClass()
 
     def find_css(self, css_selector):
         """Shortcut to find elements by CSS. Returns either a list or singleton"""
@@ -287,7 +278,6 @@ class TestParentInterface(LiveServerTestCase):
         if self.selenium.find_elements(By.ID, "id_submit_btn"):
             self.selenium.find_element(By.ID, "id_submit_btn").click()
 
-
     def complete_administration(self):
         completed = False
         while not completed:
@@ -298,9 +288,7 @@ class TestParentInterface(LiveServerTestCase):
                 element = self.selenium.find_element(By.ID, "page_number")
                 if element.get_attribute("value") == "0":
                     # instruction page
-                    element = self.selenium.find_element(
-                        By.ID, "id_next_page"
-                    )
+                    element = self.selenium.find_element(By.ID, "id_next_page")
                     scroll_and_click(self.selenium, element)
             if self.selenium.find_elements(By.ID, "id_next"):
                 element = self.selenium.find_element(By.ID, "id_next")
@@ -313,7 +301,7 @@ class TestParentInterface(LiveServerTestCase):
                 element = self.selenium.find_element(By.NAME, "btn-next")
                 scroll_and_click(self.selenium, element)
             if self.selenium.find_elements(By.ID, "id_submit_btn2"):
-                completed=True
+                completed = True
                 element = self.selenium.find_element(By.ID, "id_submit_btn2")
                 scroll_and_click(self.selenium, element)
         self.selenium.switch_to.alert.accept()
@@ -334,7 +322,7 @@ class TestParentInterface(LiveServerTestCase):
         self.complete_administration()
 
         # not sure why I have to do it like this, but deosn't get the alert if any quicker
-        
+
         try:
             WebDriverWait(self.selenium, 10).until(
                 EC.presence_of_element_located((By.ID, "id_results"))
@@ -342,7 +330,6 @@ class TestParentInterface(LiveServerTestCase):
             self.assertEqual(True, True)
         except:
             self.assertEqual(True, "Did not go to results page")
-
 
     def test_parent_UI_with_waiver(self):
         self.study_obj.waiver = "<p>This is a Waiver Example</p>"
@@ -368,10 +355,9 @@ class TestParentInterface(LiveServerTestCase):
         except:
             self.assertEqual(True, "Waiver Modal didn't open")
 
-    @tag('new')
     def test_parent_UI_dutch_background_info(self):
         self.instrument = Instrument.objects.get(name="Dutch_WG")
-        demographic = Demographic.objects.get(name='Dutch_Split.json')
+        demographic = Demographic.objects.get(name="Dutch_Split.json")
         self.study_obj = Study.objects.create(
             researcher=self.admin,
             name="Dutch Test Study",
@@ -379,7 +365,7 @@ class TestParentInterface(LiveServerTestCase):
             min_age=16,
             max_age=30,
             demographic=demographic,
-            birth_weight_units='kg'
+            birth_weight_units="kg",
         )
         self.study_obj.save()
 

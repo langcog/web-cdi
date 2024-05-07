@@ -1,6 +1,6 @@
-
 from django.test import TestCase, tag
 from django.urls import reverse
+
 from researcher_UI.models import Instrument, InstrumentFamily
 
 
@@ -18,20 +18,17 @@ class AjaxDemographicFormsTest(TestCase):
             max_age=15,
             family=instrument_family,
         )
-        
+
     def test_get(self):
-        payload = {
-            'id': self.instrument.name
-        }
+        payload = {"id": self.instrument.name}
         response = self.client.get(self.url, payload)
         self.assertEqual(response.status_code, 200)
 
     def test_get_invalid_insrument(self):
-        payload = {
-            'id': 'peanut'
-        }
+        payload = {"id": "peanut"}
         response = self.client.get(self.url, payload)
         self.assertEqual(response.status_code, 200)
+
 
 class AjaxChargeStatusTest(TestCase):
     def setUp(self):
@@ -58,25 +55,27 @@ class AjaxChargeStatusTest(TestCase):
             family=instrument_family,
         )
         self.url = reverse("researcher_ui:get_charge_status")
-        
+
     def test_get_chargeable_true(self):
-        payload = {
-            'id': self.chargeable_instrument.name
-        }
+        payload = {"id": self.chargeable_instrument.name}
         response = self.client.get(self.url, payload)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
-            response.json()["chargeable"], Instrument.objects.get(name=self.chargeable_instrument.name).family.chargeable
+            response.json()["chargeable"],
+            Instrument.objects.get(
+                name=self.chargeable_instrument.name
+            ).family.chargeable,
         )
         self.assertTrue(response.json()["chargeable"])
 
     def test_get_non_chargeable_true(self):
-        payload = {
-            'id': self.non_chargeable_instrument.name
-        }
+        payload = {"id": self.non_chargeable_instrument.name}
         response = self.client.get(self.url, payload)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
-            response.json()["chargeable"], Instrument.objects.get(name=self.non_chargeable_instrument.name).family.chargeable
+            response.json()["chargeable"],
+            Instrument.objects.get(
+                name=self.non_chargeable_instrument.name
+            ).family.chargeable,
         )
         self.assertFalse(response.json()["chargeable"])

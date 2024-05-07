@@ -4,7 +4,9 @@ from django.utils import timezone
 
 from researcher_UI.models import (Instrument, InstrumentFamily, PaymentCode,
                                   Study)
-from researcher_UI.tests.utils import get_admin_change_view_url, get_admin_changelist_view_url
+from researcher_UI.tests.utils import (get_admin_change_view_url,
+                                       get_admin_changelist_view_url)
+
 # models test
 
 
@@ -47,13 +49,13 @@ class PaymentCodeModelTest(TestCase):
         self.assertTrue(isinstance(instance, PaymentCode))
         self.assertEqual(instance.__str__(), f"{instance.study} {instance.gift_code}")
 
-    @tag('admin')
+    @tag("admin")
     def test_admin(self):
         self.user = User.objects.create_superuser(
-            'super-user', "content_tester@goldenstandard.com", 'password'
+            "super-user", "content_tester@goldenstandard.com", "password"
         )
         c = self.client
-        c.login(username='super-user', password='password')
+        c.login(username="super-user", password="password")
 
         # create test data
         instance = self.payment_code

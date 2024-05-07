@@ -1,14 +1,15 @@
 from django.contrib.auth.models import User
 from django.shortcuts import reverse
 from django.test import TestCase, tag
-from django.utils import timezone
 from django.urls import reverse
+from django.utils import timezone
 
-from researcher_UI.models import (Administration, Instrument, InstrumentFamily,
-                                  Study, AdministrationSummary)
 from cdi_forms.models import BackgroundInfo
+from researcher_UI.models import (Administration, AdministrationSummary,
+                                  Instrument, InstrumentFamily, Study)
+from researcher_UI.tests.utils import (get_admin_change_view_url,
+                                       get_admin_changelist_view_url)
 
-from researcher_UI.tests.utils import get_admin_change_view_url, get_admin_changelist_view_url
 # models test
 
 
@@ -85,13 +86,13 @@ class AdministrationSummaryModelTest(TestCase):
         )
         return super().setUp()
 
-    @tag('admin')
+    @tag("admin")
     def test_admin(self):
         self.user = User.objects.create_superuser(
-            'super-user', "content_tester@goldenstandard.com", 'password'
+            "super-user", "content_tester@goldenstandard.com", "password"
         )
 
-        self.client.login(username='super-user', password='password')
+        self.client.login(username="super-user", password="password")
 
         # create test data
         instance = self.administration
