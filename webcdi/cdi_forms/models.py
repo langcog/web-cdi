@@ -94,13 +94,6 @@ class Instrument_Forms(models.Model):
         max_length=51, blank=True, null=True
     )  # if this records depends on another, enterr the accepted responses here
 
-    def __unicode__(self):
-        return "%s (%s, %s)" % (
-            self.definition,
-            self.instrument.verbose_name,
-            self.itemID,
-        )
-
     def __str__(self):
         return f"%s (%s, %s)" % (
             self.definition,
@@ -654,3 +647,6 @@ class Zipcode(models.Model):
     zip_prefix = models.CharField(max_length=3)
     population = models.IntegerField()
     state = models.CharField(max_length=2)
+
+    def __str__(self):
+        return f"{self.zip_code}"

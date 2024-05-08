@@ -8,7 +8,9 @@ from django.core.management import call_command
 from django.test import Client, LiveServerTestCase
 from django.test.utils import override_settings
 from django.urls import reverse
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import (ElementNotInteractableException,
+                                        NoSuchElementException,
+                                        UnexpectedTagNameException)
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -16,7 +18,7 @@ from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.ui import WebDriverWait
 
 from cdi_forms.models import *
-from researcher_UI.models import Instrument, Study
+from researcher_UI.models import Demographic, Instrument, Study
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
@@ -57,11 +59,6 @@ class WebSiteOpensTests(LiveServerTestCase):
             command_executor="http://selenium:4444", options=options
         )
         cls.selenium.implicitly_wait(10)
-
-    @classmethod
-    def tearDownClass(cls):
-        cls.selenium.quit()
-        super().tearDownClass()
 
     def test_visit_home_age(self):
         self.selenium.get(f"{self.live_server_url}")
@@ -115,11 +112,6 @@ class TestParentInterface(LiveServerTestCase):
         cls.selenium = webdriver.Remote("http://selenium:4444", options=options)
         cls.selenium.implicitly_wait(1)
 
-    @classmethod
-    def tearDownClass(cls):
-        cls.selenium.quit()
-        super().tearDownClass()
-
     def find_css(self, css_selector):
         """Shortcut to find elements by CSS. Returns either a list or singleton"""
         elems = self.find_elements_by_css_selector(css_selector)
@@ -152,6 +144,8 @@ class TestParentInterface(LiveServerTestCase):
             element.send_keys(input_date)
         except NoSuchElementException:
             pass
+        except ElementNotInteractableException:
+            pass
 
         try:
             element = self.selenium.find_element(By.ID, "id_sex_1")
@@ -165,6 +159,8 @@ class TestParentInterface(LiveServerTestCase):
             element.select_by_value("1")
         except NoSuchElementException:
             pass
+        except UnexpectedTagNameException:
+            pass
 
         try:
             element = self.selenium.find_element(By.ID, "id_multi_birth_boolean_1")
@@ -176,6 +172,16 @@ class TestParentInterface(LiveServerTestCase):
             element = Select(self.selenium.find_element(By.ID, "id_birth_weight_lb"))
             element.select_by_value("1.0")
         except NoSuchElementException:
+            pass
+        except UnexpectedTagNameException:
+            pass
+
+        try:
+            element = Select(self.selenium.find_element(By.ID, "id_birth_weight_kg"))
+            element.select_by_value("2.5")
+        except NoSuchElementException:
+            pass
+        except UnexpectedTagNameException:
             pass
 
         try:
@@ -189,11 +195,15 @@ class TestParentInterface(LiveServerTestCase):
             element.select_by_value("mother")
         except NoSuchElementException:
             pass
+        except UnexpectedTagNameException:
+            pass
 
         try:
             element = Select(self.selenium.find_element(By.ID, "id_mother_yob"))
             element.select_by_value("1977")
         except NoSuchElementException:
+            pass
+        except UnexpectedTagNameException:
             pass
 
         try:
@@ -201,17 +211,23 @@ class TestParentInterface(LiveServerTestCase):
             element.select_by_value("18")
         except NoSuchElementException:
             pass
+        except UnexpectedTagNameException:
+            pass
 
         try:
             element = Select(self.selenium.find_element(By.ID, "id_annual_income"))
-            element.select_by_value("50000-75000")
+            element.select_by_value("Prefer not to disclose")
         except NoSuchElementException:
+            pass
+        except UnexpectedTagNameException:
             pass
 
         try:
             element = Select(self.selenium.find_element(By.ID, "id_caregiver_info"))
             element.select_by_value("2")
         except NoSuchElementException:
+            pass
+        except UnexpectedTagNameException:
             pass
 
         try:
@@ -258,7 +274,38 @@ class TestParentInterface(LiveServerTestCase):
         except NoSuchElementException:
             pass
 
-    @tag("new")
+        self.selenium.find_element(By.NAME, "btn-next").click()
+        if self.selenium.find_elements(By.ID, "id_submit_btn"):
+            self.selenium.find_element(By.ID, "id_submit_btn").click()
+
+    def complete_administration(self):
+        completed = False
+        while not completed:
+            if self.selenium.find_elements(By.ID, "id_child_dob"):
+                self.selenium.find_element(By.ID, "id_child_dob")
+                self.complete_background_info()
+            if self.selenium.find_elements(By.ID, "page_number"):
+                element = self.selenium.find_element(By.ID, "page_number")
+                if element.get_attribute("value") == "0":
+                    # instruction page
+                    element = self.selenium.find_element(By.ID, "id_next_page")
+                    scroll_and_click(self.selenium, element)
+            if self.selenium.find_elements(By.ID, "id_next"):
+                element = self.selenium.find_element(By.ID, "id_next")
+                els = self.selenium.find_elements(By.XPATH, "//input[@type='checkbox']")
+                for el in els:
+                    scroll_and_click(self.selenium, el)
+                els = self.selenium.find_elements(By.XPATH, "//input[@type='radio']")
+                for el in els:
+                    scroll_and_click(self.selenium, el)
+                element = self.selenium.find_element(By.NAME, "btn-next")
+                scroll_and_click(self.selenium, element)
+            if self.selenium.find_elements(By.ID, "id_submit_btn2"):
+                completed = True
+                element = self.selenium.find_element(By.ID, "id_submit_btn2")
+                scroll_and_click(self.selenium, element)
+        self.selenium.switch_to.alert.accept()
+
     def test_parent_UI(self):
         test_url = reverse(
             "researcher_ui:administer_new_parent",
@@ -272,55 +319,10 @@ class TestParentInterface(LiveServerTestCase):
         except:  # NoSuchElementException:
             pass
 
-        completed = False
-        while not completed:
-            try:
-                # Background Info Page
-                self.selenium.find_element(By.ID, "id_child_dob")
-
-                print("BACKGROUND")
-                self.complete_background_info()
-                self.selenium.find_element(By.NAME, "btn-next").click()
-
-            except NoSuchElementException:
-                # assume data entry for now
-                print("NOT BACKGROUND")
-                pass
-
-            try:
-                element = self.selenium.find_element(By.ID, "page_number")
-                if element.get_attribute("value") == "0":
-                    # instruction page
-                    element = self.selenium.find_element(
-                        By.CLASS, "btn btn-primary next-cdi-page"
-                    )
-                    print("INSTRUCTION PAGE")
-                    scroll_and_click(self.selenium, element)
-
-                else:
-                    print(f"PAGE {element.get_attribute('value')}")
-            except NoSuchElementException:
-                # assume data entry for now
-                completed = True
-                pass
-
-        self.selenium.execute_script("fastforward()")
-        self.selenium.wait_for_css('input[name="btn-next"]', 5)[1].click()
-
-        time.sleep(5)
-        self.selenium.execute_script("fastforward()")
+        self.complete_administration()
 
         # not sure why I have to do it like this, but deosn't get the alert if any quicker
-        WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable((By.ID, "id_submit_btn2"))
-        )
-        time.sleep(5)
-        WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable((By.ID, "id_submit_btn2"))
-        ).click()
 
-        alert = self.selenium.switch_to_alert()
-        alert.accept()
         try:
             WebDriverWait(self.selenium, 10).until(
                 EC.presence_of_element_located((By.ID, "id_results"))
@@ -355,12 +357,15 @@ class TestParentInterface(LiveServerTestCase):
 
     def test_parent_UI_dutch_background_info(self):
         self.instrument = Instrument.objects.get(name="Dutch_WG")
+        demographic = Demographic.objects.get(name="Dutch_Split.json")
         self.study_obj = Study.objects.create(
             researcher=self.admin,
             name="Dutch Test Study",
             instrument=self.instrument,
             min_age=16,
             max_age=30,
+            demographic=demographic,
+            birth_weight_units="kg",
         )
         self.study_obj.save()
 
@@ -370,26 +375,10 @@ class TestParentInterface(LiveServerTestCase):
         )
         self.selenium.get(f"{self.live_server_url}/{test_url}")
 
-        # complete background page
-        self.selenium.execute_script("fastforward()")
-        self.selenium.wait_for_css('input[name="btn-next"]', 5)[1].click()
-        time.sleep(5)
-        # complete questionnaire
-        self.selenium.execute_script("fastforward()")
-        WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable((By.ID, "id_submit_btn2"))
-        )
-        time.sleep(5)
-        WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable((By.ID, "id_submit_btn2"))
-        ).click()
-        alert = self.selenium.switch_to_alert()
-        alert.accept()
-        # complete backpage
-        self.selenium.execute_script("dutch_backpage_fastforward()")
-        WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable((By.ID, "id_submit_btn"))
-        ).click()
+        self.complete_administration()
+
+        # this will pick up the back page
+        self.complete_background_info()
 
         try:
             WebDriverWait(self.selenium, 10).until(

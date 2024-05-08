@@ -3,8 +3,8 @@ import logging
 from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import redirect
-from django.urls import reverse
 from django.template.loader import get_template
+from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.utils.text import slugify
 from django.views.generic import DetailView
@@ -60,6 +60,8 @@ class PDFAdministrationDetailView(WeasyTemplateResponseMixin, DetailView):
                 ),
             )
 
-            return redirect(reverse('researcher_ui:console_study', kwargs={'pk': self.object.id}) )
+            return redirect(
+                reverse("researcher_ui:console_study", kwargs={"pk": self.object.id})
+            )
 
         return super().get(request, *args, **kwargs)

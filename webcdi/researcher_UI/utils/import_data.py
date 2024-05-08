@@ -59,11 +59,13 @@ def import_data_fun(request, study_obj):
     instruments_json = json.load(
         open(os.path.realpath(PROJECT_ROOT + "/static/json/instruments.json"))
     )
-    header_file_path = list(filter(
-        lambda x: x["language"] == study_obj.instrument.language
-        and x["form"] == study_obj.instrument.form,
-        instruments_json,
-    ))[0]["fillable_headers"]
+    header_file_path = list(
+        filter(
+            lambda x: x["language"] == study_obj.instrument.language
+            and x["form"] == study_obj.instrument.form,
+            instruments_json,
+        )
+    )[0]["fillable_headers"]
 
     pdf_header_df = pd.read_csv(
         open(os.path.realpath(PROJECT_ROOT + "/" + header_file_path))

@@ -195,6 +195,11 @@ LOGGING = {
             "handlers": ["file", "console"],
             "propagate": True,
         },
+        "tests": {
+            "level": "DEBUG",
+            "handlers": ["console", "file"],
+            "propagate": False,
+        },
     },
 }
 

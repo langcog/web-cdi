@@ -4,7 +4,9 @@ from django.utils import timezone
 
 from researcher_UI.models import (Instrument, InstrumentFamily, Study,
                                   ip_address)
-from researcher_UI.tests.utils import get_admin_change_view_url, get_admin_changelist_view_url
+from researcher_UI.tests.utils import (get_admin_change_view_url,
+                                       get_admin_changelist_view_url)
+
 # models test
 
 
@@ -44,4 +46,3 @@ class IPAddressModelTest(TestCase):
             instance.__str__(),
             f"{instance.study} : {instance.ip_address} : {instance.date_added}",
         )
-

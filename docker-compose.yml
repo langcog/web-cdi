@@ -1,4 +1,4 @@
-version: '3.7'
+version: "3.7"
 
 services:
   db:
@@ -17,6 +17,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    shm_size: 2gb
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - ./webcdi:/app
@@ -44,9 +45,11 @@ services:
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
 
   selenium:
-    image: selenium/standalone-firefox
+    image: selenium/standalone-firefox:latest
     ports:
-    - 4444:4444
+      - 4444:4444
+    shm_size: 2gb
+
     
 volumes:
   postgres_data:

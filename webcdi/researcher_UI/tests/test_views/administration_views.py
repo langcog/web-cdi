@@ -1,17 +1,18 @@
 import logging
 
 from django.contrib.auth.models import User
+from django.contrib.messages import get_messages
 from django.test import RequestFactory, TestCase, tag
 from django.urls import reverse
 from django.utils import timezone
 
-from django.contrib.messages import get_messages
-
-from researcher_UI.models import Instrument, InstrumentFamily, Researcher, Study, Administration
+from researcher_UI.models import (Administration, Instrument, InstrumentFamily,
+                                  Researcher, Study)
 from researcher_UI.views import EditAdministrationView, StudyFormForm
 
 logger = logging.getLogger("selenium")
 logger.setLevel(logging.INFO)
+
 
 class EditAdministrationViewTest(TestCase):
     def setUp(self):
@@ -49,8 +50,9 @@ class EditAdministrationViewTest(TestCase):
         self.user.researcher.save()
 
         self.screen = EditAdministrationView
-        self.url = reverse("researcher_ui:edit_study_new", kwargs={'pk': self.administration.id})
-        
+        self.url = reverse(
+            "researcher_ui:edit_study_new", kwargs={"pk": self.administration.id}
+        )
 
     def test_get(self):
         self.client.force_login(self.user)
@@ -60,10 +62,10 @@ class EditAdministrationViewTest(TestCase):
     def test_post_isInvalid(self):
         self.client.force_login(self.user)
         payload = {
-            "id" : self.administration.id,
+            "id": self.administration.id,
             "subject_id": self.administration.subject_id,
-            "local_lab_id": 'abc',
-            "opt_out": 'peanut'
+            "local_lab_id": "abc",
+            "opt_out": "peanut",
         }
         form = StudyFormForm(data=payload)
         self.assertEqual(form.errors["subject_id_old"][0], "This field is required.")
@@ -71,11 +73,11 @@ class EditAdministrationViewTest(TestCase):
     def test_post_isValid(self):
         self.client.force_login(self.user)
         payload = {
-            "id" : self.administration.id,
-            "subject_id": self.administration.subject_id+1,
-            "local_lab_id": 'abc',
+            "id": self.administration.id,
+            "subject_id": self.administration.subject_id + 1,
+            "local_lab_id": "abc",
             "opt_out": True,
-            'subject_id_old': self.administration.subject_id,
+            "subject_id_old": self.administration.subject_id,
         }
         form = StudyFormForm(data=payload)
         self.assertTrue(form.is_valid())
@@ -85,10 +87,11 @@ class EditAdministrationViewTest(TestCase):
         self.assertEqual(
             response.json()["message"], "Your data is updated successfully"
         )
-  
+
+
 class AddNewParentTest(TestCase):
     def setUp(self):
-        self.username = 'study_user'
+        self.username = "study_user"
         self.user = User.objects.create_user(username="study_user", password="secret")
         Researcher.objects.get_or_create(user=self.user)
         instrument_family = InstrumentFamily.objects.create(
@@ -123,11 +126,12 @@ class AddNewParentTest(TestCase):
         self.user.researcher.save()
 
         self.screen = EditAdministrationView
-        self.url = reverse("researcher_ui:administer_new_parent", kwargs={'username': self.username, 'study_name': study.name})
+        self.url = reverse(
+            "researcher_ui:administer_new_parent",
+            kwargs={"username": self.username, "study_name": study.name},
+        )
 
     def test_get_isValid(self):
         self.client.force_login(self.user)
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 302)
-
-

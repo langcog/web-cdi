@@ -27,7 +27,6 @@ class StudyAPIViewTest(TestCase):
         )
 
         instrument = Instrument.objects.filter(form__in=["WS", "WG"]).order_by("?")[0]
-        print(instrument)
         self.study = Study.objects.create(
             researcher=self.user, name="Test Study Instance", instrument=instrument
         )
@@ -93,7 +92,3 @@ class StudyAPIViewTest(TestCase):
         self.assertEqual(
             response.json()["Error"], "You must select at least 1 completed survey"
         )
-
-    def test_api_force_fail(self):
-        response = self.client.generic("POST", self.empty_url, json.dumps(self.payload))
-        self.assertEqual(response.status_code, 302)

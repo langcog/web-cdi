@@ -363,7 +363,6 @@ class AdministrationUpdateView(UpdateView):
             else:
                 self.object.completed = True
                 self.object.completed_date = timezone.now()
-                print("This should be completed now")
 
                 if self.object.study.completion_data:
                     data = self.object.study.completion_data
@@ -455,6 +454,7 @@ class AdministrationUpdateView(UpdateView):
                         remove_list.append(obj)
                         continue
                 else:
+                    remove_list.append(obj)
                     continue
             if "textbox" in obj["item"]:
                 obj["text"] = obj["definition"]
@@ -704,7 +704,7 @@ class AdministrationUpdateView(UpdateView):
 
 def update_administration_data_item(request):
     if not request.POST:
-        return
+        return HttpResponse(status=405)
 
     hash_id = request.POST.get("hash_id")
     administration_instance = get_administration_instance(hash_id)
