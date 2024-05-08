@@ -33,11 +33,9 @@ class CustomRegistrationView(RegistrationView):
 
     def form_valid(self, form):
         user = form.save()
-        researcher = Researcher(
-            user=user,
-            institution=self.request.POST["institution"],
-            position=self.request.POST["position"],
-        )
+        researcher = Researcher.objects.get_or_create(user=user)
+        researcher.institution=self.request.POST["institution"]
+        researcher.countposition=self.request.POST["position"]
         researcher.save()
         return super().form_valid(form)
 
