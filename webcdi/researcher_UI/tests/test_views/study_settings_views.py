@@ -8,13 +8,15 @@ from researcher_UI.forms import AddPairedStudyForm
 from researcher_UI.models import (Instrument, InstrumentFamily, Researcher,
                                   Study)
 from researcher_UI.tests import generate_fake_results
+from researcher_UI.tests.utils import random_password
 from researcher_UI.views import AddStudy
 
 
 @tag("new")
 class AddStudyViewTest(TestCase):
     def setUp(self):
-        self.user = User.objects.create_user(username="henry", password="secret")
+        self.password = random_password()
+        self.user = User.objects.create_user(username="henry", password=self.password)
         Researcher.objects.get_or_create(user=self.user)
         instrument_family = InstrumentFamily.objects.create(
             name="BigCats", chargeable=False
@@ -78,7 +80,8 @@ class AddPairedStudyTest(TestCase):
 
     def setUp(self) -> None:
         super().setUp()
-        self.user = User.objects.create_user(username="henry", password="secret")
+        self.password = random_password()
+        self.user = User.objects.create_user(username="henry", password=self.password)
         Researcher.objects.get_or_create(user=self.user)
 
         for counter in range(3):

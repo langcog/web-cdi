@@ -8,6 +8,7 @@ from django.utils import timezone
 
 from researcher_UI.models import (Administration, Instrument, InstrumentFamily,
                                   Researcher, Study)
+from researcher_UI.tests.utils import random_password
 from researcher_UI.views import EditAdministrationView, StudyFormForm
 
 logger = logging.getLogger("selenium")
@@ -16,7 +17,8 @@ logger.setLevel(logging.INFO)
 
 class EditAdministrationViewTest(TestCase):
     def setUp(self):
-        self.user = User.objects.create_user(username="henry", password="secret")
+        self.password = random_password()
+        self.user = User.objects.create_user(username="henry", password=self.password)
         Researcher.objects.get_or_create(user=self.user)
         instrument_family = InstrumentFamily.objects.create(
             name="BigCats", chargeable=False
@@ -92,7 +94,10 @@ class EditAdministrationViewTest(TestCase):
 class AddNewParentTest(TestCase):
     def setUp(self):
         self.username = "study_user"
-        self.user = User.objects.create_user(username="study_user", password="secret")
+        self.password = random_password()
+        self.user = User.objects.create_user(
+            username="study_user", password=self.password
+        )
         Researcher.objects.get_or_create(user=self.user)
         instrument_family = InstrumentFamily.objects.create(
             name="BigCats", chargeable=False

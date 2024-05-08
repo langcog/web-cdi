@@ -307,80 +307,103 @@ class AdministrationUpdateViewTest(TestCase):
         response = self.client.post(self.url, payload)
         self.assertEqual(response.status_code, 302)
 
-    @tag('new')
+    @tag("new")
     def test_post_enabler_blank(self):
         self.client.force_login(self.user)
 
         payload = {"btn-next": True, "next": 30}
         url = reverse(
-            "update_administration_section", kwargs={"hash_id": self.administration.url_hash, 'section': 29}
+            "update_administration_section",
+            kwargs={"hash_id": self.administration.url_hash, "section": 29},
         )
         response = self.client.post(url, payload)
         self.assertEqual(response.status_code, 302)
         redirect_url = reverse(
-            "update_administration_section", kwargs={"hash_id": self.administration.url_hash, 'section': 30}
+            "update_administration_section",
+            kwargs={"hash_id": self.administration.url_hash, "section": 30},
         )
-        self.assertRedirects(response, redirect_url, status_code=302, target_status_code=200, fetch_redirect_response=True)
+        self.assertRedirects(
+            response,
+            redirect_url,
+            status_code=302,
+            target_status_code=200,
+            fetch_redirect_response=True,
+        )
         response = self.client.get(redirect_url, payload)
         self.assertContains(response, "Thank you for completing!")
 
-    @tag('new')
+    @tag("new")
     def test_post_enabler_negative(self):
         self.client.force_login(self.user)
 
-        payload = {
-            "btn-next": True, 
-            "next": 30,
-            "item_760": "not yet"}
+        payload = {"btn-next": True, "next": 30, "item_760": "not yet"}
         url = reverse(
-            "update_administration_section", kwargs={"hash_id": self.administration.url_hash, 'section': 29}
+            "update_administration_section",
+            kwargs={"hash_id": self.administration.url_hash, "section": 29},
         )
         response = self.client.post(url, payload)
         self.assertEqual(response.status_code, 302)
         redirect_url = reverse(
-            "update_administration_section", kwargs={"hash_id": self.administration.url_hash, 'section': 30}
+            "update_administration_section",
+            kwargs={"hash_id": self.administration.url_hash, "section": 30},
         )
-        self.assertRedirects(response, redirect_url, status_code=302, target_status_code=200, fetch_redirect_response=True)
+        self.assertRedirects(
+            response,
+            redirect_url,
+            status_code=302,
+            target_status_code=200,
+            fetch_redirect_response=True,
+        )
         response = self.client.get(redirect_url, payload)
         self.assertContains(response, "Thank you for completing!")
 
-    @tag('new')
+    @tag("new")
     def test_post_enabler_sometimes(self):
         self.client.force_login(self.user)
 
-        payload = {
-            "btn-next": True, 
-            "next": 30,
-            "item_760": "sometimes"}
+        payload = {"btn-next": True, "next": 30, "item_760": "sometimes"}
         url = reverse(
-            "update_administration_section", kwargs={"hash_id": self.administration.url_hash, 'section': 29}
+            "update_administration_section",
+            kwargs={"hash_id": self.administration.url_hash, "section": 29},
         )
         response = self.client.post(url, payload)
         self.assertEqual(response.status_code, 302)
         redirect_url = reverse(
-            "update_administration_section", kwargs={"hash_id": self.administration.url_hash, 'section': 30}
+            "update_administration_section",
+            kwargs={"hash_id": self.administration.url_hash, "section": 30},
         )
-        self.assertRedirects(response, redirect_url, status_code=302, target_status_code=200, fetch_redirect_response=True)
+        self.assertRedirects(
+            response,
+            redirect_url,
+            status_code=302,
+            target_status_code=200,
+            fetch_redirect_response=True,
+        )
         response = self.client.get(redirect_url, payload)
         self.assertNotContains(response, "Thank you for completing!")
 
-    @tag('new')
+    @tag("new")
     def test_post_enabler_often(self):
         self.client.force_login(self.user)
 
-        payload = {
-            "btn-next": True, 
-            "next": 30,
-            "item_760": "often"}
+        payload = {"btn-next": True, "next": 30, "item_760": "often"}
         url = reverse(
-            "update_administration_section", kwargs={"hash_id": self.administration.url_hash, 'section': 29}
+            "update_administration_section",
+            kwargs={"hash_id": self.administration.url_hash, "section": 29},
         )
         response = self.client.post(url, payload)
         self.assertEqual(response.status_code, 302)
         redirect_url = reverse(
-            "update_administration_section", kwargs={"hash_id": self.administration.url_hash, 'section': 30}
+            "update_administration_section",
+            kwargs={"hash_id": self.administration.url_hash, "section": 30},
         )
-        self.assertRedirects(response, redirect_url, status_code=302, target_status_code=200, fetch_redirect_response=True)
+        self.assertRedirects(
+            response,
+            redirect_url,
+            status_code=302,
+            target_status_code=200,
+            fetch_redirect_response=True,
+        )
         response = self.client.get(redirect_url, payload)
         self.assertNotContains(response, "Thank you for completing!")
 

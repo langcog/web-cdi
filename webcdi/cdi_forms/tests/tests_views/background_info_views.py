@@ -1,5 +1,5 @@
-import logging
 import datetime
+import logging
 
 from django.contrib.auth.models import User
 from django.test import TestCase, tag
@@ -38,68 +38,72 @@ class CreateBackgroundInfoViewTest(TestCase):
         )
 
         self.url = reverse(
-                        "create-new-background-info",
-                        kwargs={
-                            "study_id": self.study.id,
-                            "bypass": True,
-                            "source_id": "123456",
-                        },
-                    )
+            "create-new-background-info",
+            kwargs={
+                "study_id": self.study.id,
+                "bypass": True,
+                "source_id": "123456",
+            },
+        )
 
     def test_get(self):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
 
     def test_invalid_post(self):
-        now = (datetime.datetime.now() - datetime.timedelta(days=500)).strftime('%m/%d/%Y')
+        now = (datetime.datetime.now() - datetime.timedelta(days=500)).strftime(
+            "%m/%d/%Y"
+        )
         payload = {
-            'form_filler': 'mother',
-            'child_dob': now,
-            'sex': 'M',
-            'birth_weight_lb': '3.5',
-            'birth_order': 1,
-            'born_on_due_date': 0,
-            'multi_birth_boolean': 0,
-            'primary_caregiver': 'mother',
-            'mother_yob': 1966,
-            'mother_education': 18,
-            'annual_income': '25000-50000',
-            'caregiver_info': '1',
-            'other_languages_boolean': 0,
-            'ear_infections_boolean': 0,
-            'hearing_loss_boolean': 0,
-            'vision_problems_boolean': 0,
-            'illnesses_boolean': 0,
-            'services_boolean': 0,
-            'worried_boolean': 0,
+            "form_filler": "mother",
+            "child_dob": now,
+            "sex": "M",
+            "birth_weight_lb": "3.5",
+            "birth_order": 1,
+            "born_on_due_date": 0,
+            "multi_birth_boolean": 0,
+            "primary_caregiver": "mother",
+            "mother_yob": 1966,
+            "mother_education": 18,
+            "annual_income": "25000-50000",
+            "caregiver_info": "1",
+            "other_languages_boolean": 0,
+            "ear_infections_boolean": 0,
+            "hearing_loss_boolean": 0,
+            "vision_problems_boolean": 0,
+            "illnesses_boolean": 0,
+            "services_boolean": 0,
+            "worried_boolean": 0,
             #'learning_disability_boolean': 0
         }
         response = self.client.post(self.url, payload)
         self.assertEqual(response.status_code, 200)
 
     def test_valid_post(self):
-        now = (datetime.datetime.now() - datetime.timedelta(days=500)).strftime('%m/%d/%Y')
+        now = (datetime.datetime.now() - datetime.timedelta(days=500)).strftime(
+            "%m/%d/%Y"
+        )
         payload = {
-            'form_filler': 'mother',
-            'child_dob': now,
-            'sex': 'M',
-            'birth_weight_lb': '3.5',
-            'birth_order': 1,
-            'born_on_due_date': 0,
-            'multi_birth_boolean': 0,
-            'primary_caregiver': 'mother',
-            'mother_yob': 1966,
-            'mother_education': 18,
-            'annual_income': '25000-50000',
-            'caregiver_info': '1',
-            'other_languages_boolean': 0,
-            'ear_infections_boolean': 0,
-            'hearing_loss_boolean': 0,
-            'vision_problems_boolean': 0,
-            'illnesses_boolean': 0,
-            'services_boolean': 0,
-            'worried_boolean': 0,
-            'learning_disability_boolean': 0
+            "form_filler": "mother",
+            "child_dob": now,
+            "sex": "M",
+            "birth_weight_lb": "3.5",
+            "birth_order": 1,
+            "born_on_due_date": 0,
+            "multi_birth_boolean": 0,
+            "primary_caregiver": "mother",
+            "mother_yob": 1966,
+            "mother_education": 18,
+            "annual_income": "25000-50000",
+            "caregiver_info": "1",
+            "other_languages_boolean": 0,
+            "ear_infections_boolean": 0,
+            "hearing_loss_boolean": 0,
+            "vision_problems_boolean": 0,
+            "illnesses_boolean": 0,
+            "services_boolean": 0,
+            "worried_boolean": 0,
+            "learning_disability_boolean": 0,
         }
         response = self.client.post(self.url, payload)
         self.assertEqual(response.status_code, 302)
@@ -139,10 +143,7 @@ class BackgroundInfoViewTest(TestCase):
             administration=self.administration, age=12, source_id="123456"
         )
 
-        self.url = reverse(
-                        "background-info",
-                        kwargs={'pk': background_info.pk }
-                    )
+        self.url = reverse("background-info", kwargs={"pk": background_info.pk})
 
     def test_get(self):
         response = self.client.get(self.url)
