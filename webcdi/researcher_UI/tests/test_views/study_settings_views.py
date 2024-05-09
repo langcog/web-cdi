@@ -12,7 +12,6 @@ from researcher_UI.tests.utils import random_password
 from researcher_UI.views import AddStudy
 
 
-@tag("new")
 class AddStudyViewTest(TestCase):
     def setUp(self):
         self.password = random_password()
@@ -71,7 +70,6 @@ class AddStudyViewTest(TestCase):
         self.assertEqual(response.status_code, 302)
 
 
-@tag("new")
 class AddPairedStudyTest(TestCase):
     fixtures = [
         "researcher_UI/fixtures/researcher_UI_test_fixtures.json",

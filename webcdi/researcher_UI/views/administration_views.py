@@ -67,12 +67,6 @@ class EditAdministrationView(LoginRequiredMixin, StudyOwnerMixin, UpdateView):
         )
 
 
-class AdministerNewParticipant(CreateView):
-    def post(self, request, username, study_name):
-        admin = admin_new_participant_fun(request, username, study_name)
-        return redirect(reverse("administer_cdi_form", args=[admin.url_hash]))
-
-
 class AddNewParent(DetailView):
     model = Study
 
