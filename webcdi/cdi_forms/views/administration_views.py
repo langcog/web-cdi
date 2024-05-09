@@ -75,6 +75,10 @@ class AdministrationSummaryView(DetailView):
                     "redeem_url": "http://www.amazon.com/redeem",
                     "legal_url": "http://www.amazon.com/gc-legal",
                 },
+                "Canadian English": {
+                    "redeem_url": "http://www.amazon.com/redeem",
+                    "legal_url": "http://www.amazon.com/gc-legal",
+                },
                 "Spanish": {
                     "redeem_url": "http://www.amazon.com/gc/redeem/?language=es_US",
                     "legal_url": "http://www.amazon.com/gc-legal/?language=es_US",

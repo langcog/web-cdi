@@ -1,4 +1,5 @@
 from .add_paired_study import add_paired_study_fun  # noqa
+from .admin_new_participant import admin_new_participant_fun  # noqa
 from .background_header import get_background_header  # noqa
 from .format_admin import format_admin_data, format_admin_header  # noqa
 from .import_data import import_data_fun  # noqa
