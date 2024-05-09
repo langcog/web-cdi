@@ -6,7 +6,6 @@ from researcher_UI.models import (Benchmark, Instrument, InstrumentFamily,
                                   InstrumentScore)
 
 
-@tag("new")
 class CommandsTestCase(TestCase):
 
     def test_populate_instrument_family(self):
