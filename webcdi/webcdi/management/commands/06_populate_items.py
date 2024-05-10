@@ -10,6 +10,9 @@ from django.core.management.base import BaseCommand
 from cdi_forms.models import *
 from researcher_UI.models import *
 
+import logging
+logger = logging.getLogger('debug')
+
 # Populates the ItemInfo and ItemMap models with data from instrument definition files.
 # Given no arguments, does so for all instruments in 'static/json/instruments.json'.
 # Given a language with -l and a form with -f, does so for only their Instrument object.
@@ -72,7 +75,7 @@ class Command(BaseCommand):
                 app_label="cdi_forms", model_name="Instrument_Forms"
             )
 
-            print("    Populating items for", instrument_language, instrument_form)
+            logger.debug(f"    Populating items for {instrument_language}, {instrument_form}")
 
             ftype = curr_instrument["csv_file"].split(".")[-1]
 
@@ -107,7 +110,7 @@ class Command(BaseCommand):
                         try:
                             choices_key = Choices.objects.get(choice_set=item_choices)
                         except:
-                            print(item, item_type, item_category, item_choices)
+                            logger.debug(f"{item}, {item_type}, {item_category}, {item_choices}")
                             raise IOError(
                                 "Can't find choice set %s in model for %s"
                                 % (

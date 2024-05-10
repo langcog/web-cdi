@@ -21,10 +21,9 @@ from django.contrib.auth import views as auth_views
 from django.urls import include, path, re_path
 from django.views.generic import TemplateView
 from django.views.generic.base import RedirectView
-from django_registration.backends.activation.views import RegistrationView
 
 from webcdi.forms import SignUpForm
-from webcdi.views import CustomLoginView, HomeView
+from webcdi.views import CustomLoginView, CustomRegistrationView, HomeView
 
 urlpatterns = [
     path("", HomeView.as_view(), name="home"),
@@ -39,7 +38,7 @@ urlpatterns = [
     re_path(r"^form/", include("cdi_forms.urls")),
     path(
         "accounts/register/",
-        RegistrationView.as_view(form_class=SignUpForm),
+        CustomRegistrationView.as_view(form_class=SignUpForm),
         name="django_registration_register",
     ),
     path("accounts/", include("django_registration.backends.activation.urls")),

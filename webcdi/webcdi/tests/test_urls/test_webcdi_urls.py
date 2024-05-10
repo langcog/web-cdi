@@ -1,8 +1,7 @@
 from django.test import TestCase, tag
 from django.urls import resolve, reverse
-from django_registration.backends.activation.views import RegistrationView
 
-from webcdi.views import CustomLoginView, HomeView
+from webcdi.views import CustomLoginView, CustomRegistrationView, HomeView
 
 
 @tag("url")
@@ -29,4 +28,4 @@ class TestWebCDIUrls(TestCase):
         self.assertEqual(response.status_code, 200)
 
         resolver = resolve(reverse("django_registration_register"))
-        self.assertEqual(resolver.func.view_class, RegistrationView)
+        self.assertEqual(resolver.func.view_class, CustomRegistrationView)

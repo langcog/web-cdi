@@ -12,6 +12,9 @@ from researcher_UI.models import InstrumentFamily
 # Given a language with -l and a form with -f, does so for only their Instrument object.
 
 
+import logging
+logger = logging.getLogger('debug')
+
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
@@ -35,7 +38,7 @@ class Command(BaseCommand):
         for family in families:
             family_name = family["name"]
 
-            print(f"Updating instrument table for {family_name}")
+            logger.debug(f"Updating instrument table for {family_name}")
 
             data_dict = {"chargeable": family["chargeable"]}
 
@@ -49,4 +52,4 @@ class Command(BaseCommand):
             else:
                 created = "updated"
 
-            print(f"{family_obj} {created}")
+            logger.debug(f"{family_obj} {created}")

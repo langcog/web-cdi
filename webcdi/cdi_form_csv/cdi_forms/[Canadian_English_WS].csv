@@ -759,43 +759,43 @@ item_757,sitted,word_ending,word_endings_verbs,produces,sitted,sitted,,word_endi
 item_758,taked,word_ending,word_endings_verbs,produces,taked,taked,,word_endings_verbs_2,,
 item_759,wented,word_ending,word_endings_verbs,produces,wented,wented,,word_endings_verbs_2,,
 item_760,combine,combine,combine,not yet; sometimes; often,Has your child begun to combine words yet?,,,,,
-item_example1,combination_example1,combination_examples,combination_examples,,,,,,Item_760,sometimes; often
-item_example2,combination_example2,combination_examples,combination_examples,,,,,,Item_760,sometimes; often
-item_example3,combination_example3,combination_examples,combination_examples,,,,,,Item_760,sometimes; often
-item_761,complx01,complexity,complexity,simple; complex,two shoe \ two shoes,two shoe / two shoes,morphology,,Item_760,sometimes; often
-item_762,complx02,complexity,complexity,simple; complex,two foot \ two feet,two foot / two feet,morphology,,Item_760,sometimes; often
-item_763,complx03,complexity,complexity,simple; complex,daddy car \ daddy's car,daddy car / daddy's car,morphology,,Item_760,sometimes; often
-item_764,complx04,complexity,complexity,simple; complex,kitty sleep \ kitty sleeping,kitty sleep / kitty sleeping,morphology,,Item_760,sometimes; often
-item_765,complx05,complexity,complexity,simple; complex,I make tower \ I making tower,I make tower / I making tower,morphology,,Item_760,sometimes; often
-item_766,complx06,complexity,complexity,simple; complex,I fall down \ I fell down,I fall down / I fell down,morphology,,Item_760,sometimes; often
-item_767,complx07,complexity,complexity,simple; complex,more cookie \ more cookies,more cookie / more cookies,morphology,,Item_760,sometimes; often
-item_768,complx08,complexity,complexity,simple; complex,these my tooth \ these my teeth,these my tooth / these my teeth,morphology,,Item_760,sometimes; often
-item_769,complx09,complexity,complexity,simple; complex,baby blanket \ baby's blanket,baby blanket / baby's blanket,morphology,,Item_760,sometimes; often
-item_770,complx10,complexity,complexity,simple; complex,doggie kiss me \ doggie kissed me,doggie kiss me / doggie kissed me,morphology,,Item_760,sometimes; often
-item_771,complx11,complexity,complexity,simple; complex,daddy pick me up \ daddy picked me up,daddy pick me up / daddy picked me up,morphology,,Item_760,sometimes; often
-item_772,complx12,complexity,complexity,simple; complex,kitty go away \ kitty went away,kitty go away / kitty went away,morphology,,Item_760,sometimes; often
-item_773,complx13,complexity,complexity,simple; complex,doggie table \ doggie on table,doggie table / doggie on table,syntax,,Item_760,sometimes; often
-item_774,complx14,complexity,complexity,simple; complex,that my truck \ that's my truck,that my truck / that's my truck,syntax,,Item_760,sometimes; often
-item_775,complx15,complexity,complexity,simple; complex,baby crying \ baby is crying,baby crying / baby is crying,syntax,,Item_760,sometimes; often
-item_776,complx16,complexity,complexity,simple; complex,you fix it \ can you fix it,you fix it / can you fix it,syntax,,Item_760,sometimes; often
-item_777,complx17,complexity,complexity,simple; complex,"read me story, Mommy \ read me a story, Mommy","read me story, Mommy / read me a story, Mommy",syntax,,Item_760,sometimes; often
-item_778,complx18,complexity,complexity,simple; complex,no wash dolly \ don't wash dolly,no wash dolly / don't wash dolly,syntax,,Item_760,sometimes; often
-item_779,complx19,complexity,complexity,simple; complex,want more juice \ want juice in there,want more juice / want juice in there,syntax,,Item_760,sometimes; often
-item_780,complx20,complexity,complexity,simple; complex,there a kitty \ there's a kitty,there a kitty / there's a kitty,syntax,,Item_760,sometimes; often
-item_781,complx21,complexity,complexity,simple; complex,go bye-bye \ wanna go bye-bye,go bye-bye / wanna go bye-bye,syntax,,Item_760,sometimes; often
-item_782,complx22,complexity,complexity,simple; complex,where mommy go \ where did mommy go,where mommy go / where did mommy go,syntax,,Item_760,sometimes; often
-item_783,complx23,complexity,complexity,simple; complex,coffee hot \ that coffee hot,coffee hot / that coffee hot,syntax,,Item_760,sometimes; often
-item_784,complx24,complexity,complexity,simple; complex,I no do it \ I can't do it,I no do it / I can't do it,syntax,,Item_760,sometimes; often
-item_785,complx25,complexity,complexity,simple; complex,I like read stories \ I like to read stories,I like read stories / I like to read stories,syntax,,Item_760,sometimes; often
-item_786,complx26,complexity,complexity,simple; complex,don't read book \ don't want you read that book,don't read book / don't want you read that book,syntax,,Item_760,sometimes; often
-item_787,complx27,complexity,complexity,simple; complex,turn on light \ turn on light so I can see,turn on light / turn on light so I can see,syntax,,Item_760,sometimes; often
-item_788,complx28,complexity,complexity,simple; complex,I want that \ I want that one you got,I want that / I want that one you got,syntax,,Item_760,sometimes; often
-item_789,complx29,complexity,complexity,simple; complex,want cookies \ want cookies and milk,want cookies / want cookies and milk,syntax,,Item_760,sometimes; often
-item_790,complx30,complexity,complexity,simple; complex,cookie mommy \ cookie for mommy,cookie mommy / cookie for mommy,syntax,,Item_760,sometimes; often
-item_791,complx31,complexity,complexity,simple; complex,baby want eat \ baby want to eat,baby want eat / baby want to eat,syntax,,Item_760,sometimes; often
-item_792,complx32,complexity,complexity,simple; complex,lookit me \ lookit me dancing,lookit me / lookit me dancing,syntax,,Item_760,sometimes; often
-item_793,complx33,complexity,complexity,simple; complex,Lookit \ lookit what I got,lookit / lookit what I got,syntax,,Item_760,sometimes; often
-item_794,complx34,complexity,complexity,simple; complex,where's my dolly \ where's my dolly name Sam,where's my dolly / where's my dolly name Sam,syntax,,Item_760,sometimes; often
-item_795,complx35,complexity,complexity,simple; complex,we made this \ me and Paul made this,we made this / me and Paul made this,syntax,,Item_760,sometimes; often
-item_796,complx36,complexity,complexity,simple; complex,I sing song \ I sing song for you,I sing song / I sing song for you,syntax,,Item_760,sometimes; often
-item_797,complx37,complexity,complexity,simple; complex,baby crying \ baby crying cuz she's sad,baby crying / baby crying cuz she's sad,syntax,,Item_760,sometimes; often
+item_example1,combination_example1,combination_examples,combination_examples,,,,,,item_760,sometimes; often
+item_example2,combination_example2,combination_examples,combination_examples,,,,,,item_760,sometimes; often
+item_example3,combination_example3,combination_examples,combination_examples,,,,,,item_760,sometimes; often
+item_761,complx01,complexity,complexity,simple; complex,two shoe \ two shoes,two shoe / two shoes,morphology,,item_760,sometimes; often
+item_762,complx02,complexity,complexity,simple; complex,two foot \ two feet,two foot / two feet,morphology,,item_760,sometimes; often
+item_763,complx03,complexity,complexity,simple; complex,daddy car \ daddy's car,daddy car / daddy's car,morphology,,item_760,sometimes; often
+item_764,complx04,complexity,complexity,simple; complex,kitty sleep \ kitty sleeping,kitty sleep / kitty sleeping,morphology,,item_760,sometimes; often
+item_765,complx05,complexity,complexity,simple; complex,I make tower \ I making tower,I make tower / I making tower,morphology,,item_760,sometimes; often
+item_766,complx06,complexity,complexity,simple; complex,I fall down \ I fell down,I fall down / I fell down,morphology,,item_760,sometimes; often
+item_767,complx07,complexity,complexity,simple; complex,more cookie \ more cookies,more cookie / more cookies,morphology,,item_760,sometimes; often
+item_768,complx08,complexity,complexity,simple; complex,these my tooth \ these my teeth,these my tooth / these my teeth,morphology,,item_760,sometimes; often
+item_769,complx09,complexity,complexity,simple; complex,baby blanket \ baby's blanket,baby blanket / baby's blanket,morphology,,item_760,sometimes; often
+item_770,complx10,complexity,complexity,simple; complex,doggie kiss me \ doggie kissed me,doggie kiss me / doggie kissed me,morphology,,item_760,sometimes; often
+item_771,complx11,complexity,complexity,simple; complex,daddy pick me up \ daddy picked me up,daddy pick me up / daddy picked me up,morphology,,item_760,sometimes; often
+item_772,complx12,complexity,complexity,simple; complex,kitty go away \ kitty went away,kitty go away / kitty went away,morphology,,item_760,sometimes; often
+item_773,complx13,complexity,complexity,simple; complex,doggie table \ doggie on table,doggie table / doggie on table,syntax,,item_760,sometimes; often
+item_774,complx14,complexity,complexity,simple; complex,that my truck \ that's my truck,that my truck / that's my truck,syntax,,item_760,sometimes; often
+item_775,complx15,complexity,complexity,simple; complex,baby crying \ baby is crying,baby crying / baby is crying,syntax,,item_760,sometimes; often
+item_776,complx16,complexity,complexity,simple; complex,you fix it \ can you fix it,you fix it / can you fix it,syntax,,item_760,sometimes; often
+item_777,complx17,complexity,complexity,simple; complex,"read me story, Mommy \ read me a story, Mommy","read me story, Mommy / read me a story, Mommy",syntax,,item_760,sometimes; often
+item_778,complx18,complexity,complexity,simple; complex,no wash dolly \ don't wash dolly,no wash dolly / don't wash dolly,syntax,,item_760,sometimes; often
+item_779,complx19,complexity,complexity,simple; complex,want more juice \ want juice in there,want more juice / want juice in there,syntax,,item_760,sometimes; often
+item_780,complx20,complexity,complexity,simple; complex,there a kitty \ there's a kitty,there a kitty / there's a kitty,syntax,,item_760,sometimes; often
+item_781,complx21,complexity,complexity,simple; complex,go bye-bye \ wanna go bye-bye,go bye-bye / wanna go bye-bye,syntax,,item_760,sometimes; often
+item_782,complx22,complexity,complexity,simple; complex,where mommy go \ where did mommy go,where mommy go / where did mommy go,syntax,,item_760,sometimes; often
+item_783,complx23,complexity,complexity,simple; complex,coffee hot \ that coffee hot,coffee hot / that coffee hot,syntax,,item_760,sometimes; often
+item_784,complx24,complexity,complexity,simple; complex,I no do it \ I can't do it,I no do it / I can't do it,syntax,,item_760,sometimes; often
+item_785,complx25,complexity,complexity,simple; complex,I like read stories \ I like to read stories,I like read stories / I like to read stories,syntax,,item_760,sometimes; often
+item_786,complx26,complexity,complexity,simple; complex,don't read book \ don't want you read that book,don't read book / don't want you read that book,syntax,,item_760,sometimes; often
+item_787,complx27,complexity,complexity,simple; complex,turn on light \ turn on light so I can see,turn on light / turn on light so I can see,syntax,,item_760,sometimes; often
+item_788,complx28,complexity,complexity,simple; complex,I want that \ I want that one you got,I want that / I want that one you got,syntax,,item_760,sometimes; often
+item_789,complx29,complexity,complexity,simple; complex,want cookies \ want cookies and milk,want cookies / want cookies and milk,syntax,,item_760,sometimes; often
+item_790,complx30,complexity,complexity,simple; complex,cookie mommy \ cookie for mommy,cookie mommy / cookie for mommy,syntax,,item_760,sometimes; often
+item_791,complx31,complexity,complexity,simple; complex,baby want eat \ baby want to eat,baby want eat / baby want to eat,syntax,,item_760,sometimes; often
+item_792,complx32,complexity,complexity,simple; complex,lookit me \ lookit me dancing,lookit me / lookit me dancing,syntax,,item_760,sometimes; often
+item_793,complx33,complexity,complexity,simple; complex,Lookit \ lookit what I got,lookit / lookit what I got,syntax,,item_760,sometimes; often
+item_794,complx34,complexity,complexity,simple; complex,where's my dolly \ where's my dolly name Sam,where's my dolly / where's my dolly name Sam,syntax,,item_760,sometimes; often
+item_795,complx35,complexity,complexity,simple; complex,we made this \ me and Paul made this,we made this / me and Paul made this,syntax,,item_760,sometimes; often
+item_796,complx36,complexity,complexity,simple; complex,I sing song \ I sing song for you,I sing song / I sing song for you,syntax,,item_760,sometimes; often
+item_797,complx37,complexity,complexity,simple; complex,baby crying \ baby crying cuz she's sad,baby crying / baby crying cuz she's sad,syntax,,item_760,sometimes; often

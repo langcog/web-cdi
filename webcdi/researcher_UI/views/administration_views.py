@@ -16,7 +16,7 @@ from cdi_forms.models import BackgroundInfo
 from researcher_UI.forms import StudyFormForm
 from researcher_UI.mixins import StudyOwnerMixin
 from researcher_UI.models import Administration, Study, ip_address
-from researcher_UI.utils import (admin_new_participant_fun, max_repeat_num,
+from researcher_UI.utils import (max_repeat_num,
                                  max_subject_id, random_url_generator)
 from researcher_UI.utils.console_helper import get_helper
 
@@ -66,11 +66,6 @@ class EditAdministrationView(LoginRequiredMixin, StudyOwnerMixin, UpdateView):
             {"message": "Your data is updated successfully"}, status=200
         )
 
-
-class AdministerNewParticipant(CreateView):
-    def post(self, request, username, study_name):
-        admin = admin_new_participant_fun(request, username, study_name)
-        return redirect(reverse("administer_cdi_form", args=[admin.url_hash]))
 
 
 class AddNewParent(DetailView):

@@ -1,6 +1,7 @@
 from .admininster_new import AdminNewTest  # noqa
 from .administration_views import (AddNewParentTest,  # noqa
-                                   EditAdministrationViewTest)
+                                   EditAdministrationViewTest,
+                                   AdministerNewParticipantTest)
 from .ajax_views import AjaxChargeStatusTest, AjaxDemographicFormsTest  # noqa
 from .console import ConsoleViewTest  # noqa
 from .download_data_views import PDFAdministrationDetailViewTest  # noqa

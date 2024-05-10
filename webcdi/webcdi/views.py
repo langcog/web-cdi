@@ -11,8 +11,10 @@ from django.utils import translation
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from django.views.generic import TemplateView
+from django_registration.backends.activation.views import RegistrationView
 
 from brookes.models import BrookesCode
+from researcher_UI.models import Researcher
 from webcdi.forms import SignUpForm
 
 
@@ -24,6 +26,18 @@ class HomeView(TemplateView):
         translation.activate("en")
         request.LANGUAGE_CODE = translation.get_language()
         return super().dispatch(request, *args, **kwargs)
+
+
+class CustomRegistrationView(RegistrationView):
+    form_class = SignUpForm
+
+    def form_valid(self, form):
+        user = form.save()
+        researcher, created = Researcher.objects.get_or_create(user=user)
+        researcher.institution = self.request.POST["institution"]
+        researcher.position = self.request.POST["position"]
+        researcher.save()
+        return super().form_valid(form)
 
 
 class CustomLoginView(LoginView):
