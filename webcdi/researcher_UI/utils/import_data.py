@@ -118,14 +118,17 @@ def import_data_fun(request, study_obj):
 
         dot = due_date
 
-        try:
-            dob = try_parsing_date_fun(admin_row["birthdate"])
-        except ValueError:
-            error_msg = "Invalid date format. Please submit dates as MM-DD-YYYY or YYYY-MM-DD. '/' and '.' delimiters are alsoacceptable."
-            break
+        if 'age' in admin_row:
+            age = admin_row['age']
+        else:
+            try:
+                dob = try_parsing_date_fun(admin_row["birthdate"])
+            except ValueError:
+                error_msg = "Invalid date format. Please submit dates as MM-DD-YYYY or YYYY-MM-DD. '/' and '.' delimiters are alsoacceptable."
+                break
 
-        raw_age = dot - dob
-        age = int(float(raw_age.days) / (365.2425 / 12.0))
+            raw_age = dot - dob
+            age = int(float(raw_age.days) / (365.2425 / 12.0))
 
         csv_dict = {"sex": sex, "age": age}
 
@@ -227,7 +230,9 @@ def import_data_fun(request, study_obj):
 
     if error_msg is None:
         data["stat"] = "ok"
-        data["redirect_url"] = reverse("researcher_ui:console", args=[study_obj.name])
+        data["redirect_url"] = reverse(
+            "researcher_ui:console_study", args=[study_obj.pk]
+        )
     else:
         Administration.objects.filter(pk__in=new_admin_pks).delete()
         data["stat"] = "error"

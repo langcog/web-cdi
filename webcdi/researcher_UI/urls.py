@@ -45,7 +45,6 @@ urlpatterns = [
         views.AddNewParent.as_view(),
         name="administer_new_parent",
     ),
-    
     re_path(
         r"^(?P<username>[^/]+)/(?P<study_name>[^/]+)/overflow/$",
         views.Overflow.as_view(),

@@ -1,3 +1,5 @@
+import logging
+
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
@@ -10,6 +12,8 @@ from researcher_UI.forms import AddPairedStudyForm, AddStudyForm, EditStudyForm
 from researcher_UI.mixins import ReseacherOwnsStudyMixin
 from researcher_UI.models import Study
 from researcher_UI.utils import add_paired_study_fun, raw_gift_code_fun
+
+logger = logging.getLogger("debug")
 
 
 class AddPairedStudy(LoginRequiredMixin, CreateView):

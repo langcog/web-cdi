@@ -10,10 +10,6 @@ from django.core.management.base import BaseCommand
 from cdi_forms.models import *
 from researcher_UI.models import *
 
-
-import logging
-logger = logging.getLogger('debug')
-
 # Populates the ItemInfo and ItemMap models with data from instrument definition files.
 # Given no arguments, does so for all instruments in 'static/json/instruments.json'.
 # Given a language with -l and a form with -f, does so for only their Instrument object.
@@ -71,10 +67,10 @@ class Command(BaseCommand):
 
             filename = os.path.realpath(PROJECT_ROOT + "/" + instrument_scoring)
             if not os.path.isfile(filename):
-                logger.debug(f"     No scoring for {instrument_language} {instrument_form}.")
+                print(f"     No scoring for {instrument_language} {instrument_form}.")
                 continue
 
-            logger.debug(
+            print(
                 "    Populating Scoring Methodology for",
                 instrument_language,
                 instrument_form,

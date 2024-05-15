@@ -89,7 +89,7 @@ def download_cdi_format(request, study_obj, administrations=None):
         else:
             return str(arg)
 
-    new_answers.loc[:, 1:] = new_answers.iloc[:, 1:].applymap(my_fun)
+    new_answers.iloc[:, 1:] = new_answers.iloc[:, 1:].applymap(my_fun)
 
     if study_obj.instrument.form == "WG":
         for c in new_answers.columns[1:]:

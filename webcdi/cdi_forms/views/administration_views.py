@@ -84,8 +84,8 @@ class AdministrationSummaryView(DetailView):
                     "legal_url": "http://www.amazon.ca/gc-legal/?language=fr_CA",
                 },
             }
-            url_obj = amazon_urls.get(self.object.study.instrument.language) 
-            if url_obj is None: 
+            url_obj = amazon_urls.get(self.object.study.instrument.language)
+            if url_obj is None:
                 url_obj = amazon_urls.get("English")
             if PaymentCode.objects.filter(hash_id=self.object.url_hash).exists():
                 gift_card = PaymentCode.objects.get(hash_id=self.object.url_hash)

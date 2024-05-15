@@ -16,8 +16,8 @@ from cdi_forms.models import BackgroundInfo
 from researcher_UI.forms import StudyFormForm
 from researcher_UI.mixins import StudyOwnerMixin
 from researcher_UI.models import Administration, Study, ip_address
-from researcher_UI.utils import (max_repeat_num,
-                                 max_subject_id, random_url_generator)
+from researcher_UI.utils import (max_repeat_num, max_subject_id,
+                                 random_url_generator)
 from researcher_UI.utils.console_helper import get_helper
 
 
@@ -65,7 +65,6 @@ class EditAdministrationView(LoginRequiredMixin, StudyOwnerMixin, UpdateView):
         return JsonResponse(
             {"message": "Your data is updated successfully"}, status=200
         )
-
 
 
 class AddNewParent(DetailView):

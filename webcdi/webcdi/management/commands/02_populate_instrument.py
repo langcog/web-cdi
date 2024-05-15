@@ -8,9 +8,6 @@ from django.core.management.base import BaseCommand
 
 from researcher_UI.models import *
 
-import logging
-logger = logging.getLogger('debug')
-
 # Populates the ItemInfo and ItemMap models with data from instrument definition files.
 # Given no arguments, does so for all instruments in 'static/json/instruments.json'.
 # Given a language with -l and a form with -f, does so for only their Instrument object.
@@ -62,7 +59,7 @@ class Command(BaseCommand):
             instrument_form = curr_instrument["form"]
             instrument_verbose_name = curr_instrument["verbose_name"]
 
-            logger.debug(
+            print(
                 "Updating instrument table for (%s %s)"
                 % (instrument_language, instrument_form)
             )
@@ -99,6 +96,6 @@ class Command(BaseCommand):
                         name=demo, path="/form_data/background_info/" + demo
                     )
                     instrument_obj.demographics.add(demographic)
-                    logger.debug(f"    Added demographic {demographic}")
+                    print(f"    Added demographic {demographic}")
             except:
-                logger.debug(f"    No demographic selections for {instrument_obj.name}")
+                print(f"    No demographic selections for {instrument_obj.name}")
