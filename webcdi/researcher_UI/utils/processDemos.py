@@ -2,6 +2,7 @@ import codecs
 import datetime
 import json
 import re
+
 import numpy as np
 import pandas as pd
 from django.conf import settings
@@ -40,7 +41,9 @@ def processDemos_fun(csv_file, demo_list=None):
                 "vision_problems",
                 "worried",
             ]:
-                recoded_df[col] = recoded_df[col].apply(lambda x: x if not np.isnan(x) else 0)
+                recoded_df[col] = recoded_df[col].apply(
+                    lambda x: x if not np.isnan(x) else 0
+                )
             elif col == "language_from":
                 recoded_df[col] = recoded_df[col].apply(
                     lambda x: make_str_fun(x) if x and len(str(x)) <= 50 else None
@@ -85,10 +88,7 @@ def processDemos_fun(csv_file, demo_list=None):
                         return ""
 
                 recoded_df[col] = str(recoded_df[col])
-                recoded_df[col] = (
-                    recoded_df[col].str[:3].apply(parse_zipcode)
-                    
-                )
+                recoded_df[col] = recoded_df[col].str[:3].apply(parse_zipcode)
             elif col == "language_days_per_week":
                 recoded_df[col] = recoded_df[col].apply(
                     lambda x: int(x) if x in range(1, 8) else None

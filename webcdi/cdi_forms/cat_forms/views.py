@@ -28,6 +28,7 @@ CAT_LANG_DICT = {
     "fr": "FR",
     "fr-ca": "FR",
     "en-ca": "EN",
+    "jp": "JP",
 }
 
 # Create your views here.

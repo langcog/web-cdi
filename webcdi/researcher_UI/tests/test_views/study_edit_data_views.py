@@ -8,6 +8,7 @@ from django.urls import reverse
 from researcher_UI.models import Instrument, Study
 from researcher_UI.tests.utils import random_password
 
+
 class ImportDataTest(TestCase):
     fixtures = [
         "researcher_UI/fixtures/researcher_UI_test_fixtures.json",
@@ -71,7 +72,6 @@ class ImportDataTest(TestCase):
             response.json()["redirect_url"],
             reverse("researcher_ui:console_study", kwargs={"pk": self.study.pk}),
         )  # , status_code=200, target_status_code=302)
-
 
     def test_post_WG(self):
         self.client.force_login(self.user)

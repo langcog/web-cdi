@@ -118,8 +118,8 @@ def import_data_fun(request, study_obj):
 
         dot = due_date
 
-        if 'age' in admin_row:
-            age = admin_row['age']
+        if "age" in admin_row:
+            age = admin_row["age"]
         else:
             try:
                 dob = try_parsing_date_fun(admin_row["birthdate"])
