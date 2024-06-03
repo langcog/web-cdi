@@ -75,7 +75,6 @@ class AdministerAdministraionView(UpdateView):
     def get_hardest_easiest(self):
         if self.object.catresponse.administered_items:
             yes_list = self.get_yes_responses()
-            logger.debug(f"Yes List: {yes_list}")
             hardest = cdi_cat_api(
                 f"hardestWord?items={yes_list}&language={CAT_LANG_DICT[self.language]}"
             )["definition"]
@@ -85,7 +84,6 @@ class AdministerAdministraionView(UpdateView):
         else:
             hardest = None
             easiest = None
-        logger.debug(f"Hardest: {hardest}; Easiest: {easiest}")
         return hardest, easiest
 
     def get_object(self, queryset=None):
@@ -93,14 +91,10 @@ class AdministerAdministraionView(UpdateView):
             self.hash_id = self.kwargs["hash_id"]
             obj = Administration.objects.get(url_hash=self.hash_id)
         except Exception as e:
-            logger.debug(
-                f"Obj for { self.kwargs['hash_id'] } not found with error { e }"
-            )
             raise Http404("Administration not found")
         return obj
 
     def post(self, request, *args, **kwargs):
-        logger.debug(f"Administer CAT Form POST")
         self.object = self.get_object()
         if "btn-back" in request.POST:
             return redirect(
@@ -151,7 +145,7 @@ class AdministerAdministraionView(UpdateView):
         ctx["language_code"] = language_map(self.object.study.instrument.language)
 
         if self.word:
-            logger.debug(f"word is { self.word }")
+            ctx['word'] = self.word
             ctx["form"] = CatItemForm(
                 context={"label": self.word["definition"]},
                 initial={
@@ -183,16 +177,12 @@ class AdministerAdministraionView(UpdateView):
         return ctx
 
     def get(self, request, *args, **kwargs):
-        logger.debug(f"Administer CAT Form")
         self.object = self.get_object()
-        logger.debug(
-            f"Object: { self.object }; Completed: { self.object.completed }; CompletedSurvey: { self.object.completedSurvey }; CompletedDemographics: { self.object.completedBackgroundInfo } "
-        )
+        
         user_language = language_map(self.object.study.instrument.language)
         self.language = user_language
         translation.activate(user_language)
         if not self.object.completed and self.object.due_date < timezone.now():
-            logger.debug(f"{self.object} is not completed it is too late")
             response = render(
                 request, "cdi_forms/expired.html", {}
             )  # Render contact form template
@@ -200,9 +190,6 @@ class AdministerAdministraionView(UpdateView):
             return response
         requests_log.objects.create(url_hash=self.hash_id, request_type="GET")
         if self.object.completed or self.object.due_date < timezone.now():
-            logger.debug(f"Completed for {self.object} is { self.object.completed }")
-            logger.debug(f"Due date for {self.object} is { self.object.due_date }")
-            logger.debug(f"Administration instance {self.object} COMPLETED")
             response = render(
                 request,
                 "cdi_forms/cat_forms/cat_completed.html",
@@ -214,10 +201,8 @@ class AdministerAdministraionView(UpdateView):
             administration=self.object
         )
         if self.object.completedSurvey:
-            logger.debug(f"Administration instance {self.object} BACKPAGE")
             return redirect("backpage-background-info", pk=background_instance.pk)
         elif not self.object.completedBackgroundInfo:
-            logger.debug(f"Administration instance {self.object} BACKGROUND INFO")
             return redirect("background-info", pk=background_instance.pk)
 
         cat_response, created = CatResponse.objects.get_or_create(
@@ -240,13 +225,11 @@ class AdministerAdministraionView(UpdateView):
                 self.word = cdi_cat_api(
                     f"startItem?age_mos=30&language={CAT_LANG_DICT[self.language]}"
                 )
-            logger.debug(f"self.word = {self.word}")
         else:
             self.word = cdi_cat_api(
                 f"nextItem?responses={list(map(int,administered_responses))}&items={administered_items}&language={CAT_LANG_DICT[self.language]}"
             )
             if self.word["stop"] == True:
-                logger.debug(f"CAT Completed { self.word } ")
                 try:
                     filename = os.path.realpath(
                         PROJECT_ROOT + self.object.study.demographic.path

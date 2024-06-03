@@ -1,0 +1,26 @@
+"item","response","theta","index"
+"au revoir",1,0.0749,16
+"cuisine",0,-.4686,440
+"yeux",1,-0.2099,122
+"assiette",1,-0.0964,166
+"verre (vaisselle)",1,-0.0251,201
+"feuille (de papier)",1,0.0515,178
+"avec",1,0.1687,479
+"parler",0,0.123,622
+"avoir",0,0.088,597
+"nuage",1,0.1245,510
+"malade",0,0.0945,278
+"grand",0,0.0545,276
+"boîte",1,0.0845,169
+"garçon",1,0.1134,126
+"être réveillé",1,0.1557,563
+"fait",0,0.1302,541
+"porter",0,0.1036,589
+"orange (nourriture)",1,0.1224,81
+"neige",1,0.1441,241
+"docteur",0,0.1287,527
+"travailler",0,0.1136,617
+"travail",1,0.1268,249
+"salon",1,0.142,220
+"dire",1,0.1664,303
+"se réveiller",0,0.0221179486496071,626
