@@ -94,7 +94,6 @@ class CATJapaneseAdministrationDataItemTest(TestCase):
         for row in contents[1:]:
             self.assertEqual(response.status_code, 200)
             self.assertIsInstance(response.context['form'], CatItemForm)
-            print(response.context['word'])
             self.assertContains(response, f"お子さまは次の単語を言いますか？{row[col_names.index('item')]} ?")
             payload = {
                 'word_id': row[col_names.index("index")],
@@ -116,7 +115,7 @@ class CATJapaneseAdministrationDataItemTest(TestCase):
                     self.url,
                 )
                 response = self.client.get(self.url)
-                #self.assertEqual(response.context["object"].catresponse.est_theta, float("{:.4f}".format(float(row[col_names.index("theta")]))))
+                self.assertEqual(response.context["object"].catresponse.est_theta, float("{:.4f}".format(float(row[col_names.index("theta")]))))
 
     @tag('new')
     def test_japanese_start_values(self):
