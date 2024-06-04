@@ -246,6 +246,7 @@ LANGUAGES = [
     ("nl", _("Dutch")),
     ("he", _("Hebrew")),
     ("ko", _("Korean")),
+    ("jp", _("Japanese")),
 ]
 
 # this is used to find the right choices etc for a language
@@ -259,6 +260,7 @@ LANGUAGE_DICT = {
     "Hebrew": "he",
     "Korean": "ko",
     "Argentine Spanish": "es_ar",
+    "Japanese": "jp",
 }
 
 LANGUAGE_TO_COUNTRY_DICT = {
