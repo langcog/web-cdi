@@ -25,7 +25,7 @@ class ConsoleTest(TestCase):
         super().setUp()
         self.password = random_password()
         self.user = User.objects.create_user(
-            username="testuser", password=self.password
+            username="test_user", password=self.password
         )
         Researcher.objects.get_or_create(user=self.user)
 
@@ -47,7 +47,7 @@ class StudyCreateViewTest(TestCase):
         super().setUp()
         self.password = random_password()
         self.user = User.objects.create_user(
-            username="testuser", password=self.password
+            username="test_user", password=self.password
         )
         Researcher.objects.get_or_create(user=self.user)
 
@@ -236,7 +236,7 @@ class AdminNewTest(TestCase):
     def setUp(self):
         self.password = random_password()
         self.user = User.objects.create_user(
-            username="testuser", password=self.password
+            username="test_user", password=self.password
         )
         Researcher.objects.get_or_create(user=self.user)
 
@@ -467,7 +467,7 @@ class OverflowTest(TestCase):
     def setUp(self):
         self.password = random_password()
         self.user = User.objects.create_user(
-            username="testuser", password=self.password
+            username="test_user", password=self.password
         )
         Researcher.objects.get_or_create(user=self.user)
 

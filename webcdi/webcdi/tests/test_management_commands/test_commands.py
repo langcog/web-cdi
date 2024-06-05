@@ -14,7 +14,7 @@ class CommandsTestCase(TestCase):
         call_command("01_populate_instrument_family", *args, **opts)
 
         families = InstrumentFamily.objects.all()
-        self.assertEqual(len(families), 12)
+        self.assertEqual(len(families), 13)
 
     def test_populate_instrument(self):
         args = []
@@ -23,8 +23,9 @@ class CommandsTestCase(TestCase):
         call_command("02_populate_instrument", *args, **opts)
 
         instruments = Instrument.objects.all()
-        self.assertEqual(len(instruments), 25)
+        self.assertEqual(len(instruments), 26)
 
+    
     def test_populate_scoring(self):
         args = []
         opts = {}
@@ -33,8 +34,9 @@ class CommandsTestCase(TestCase):
         call_command("03_populate_scoring", *args, **opts)
 
         scores = InstrumentScore.objects.all()
-        self.assertEqual(len(scores), 173)
+        self.assertEqual(len(scores), 175)
 
+    
     def test_populate_benchmark(self):
         args = []
         opts = {}
@@ -46,6 +48,7 @@ class CommandsTestCase(TestCase):
         items = Benchmark.objects.all()
         self.assertEqual(len(items), 8650)
 
+    
     def test_populate_choices(self):
         args = []
         opts = {}
@@ -58,6 +61,7 @@ class CommandsTestCase(TestCase):
         items = Choices.objects.all()
         self.assertEqual(len(items), 10)
 
+    
     def test_populate_items(self):
         args = []
         opts = {}

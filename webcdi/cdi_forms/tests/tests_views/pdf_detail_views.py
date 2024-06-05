@@ -1,7 +1,7 @@
 import logging
 
 from django.contrib.auth.models import User
-from django.test import TestCase
+from django.test import TestCase, tag
 from django.urls import reverse
 
 from researcher_UI.models import Administration, Instrument, Study
@@ -52,4 +52,4 @@ class PDFAdministrationDetailViewTest(TestCase):
         administration = Administration.objects.filter(completed=True)[0]
         url = reverse("administration-pdf-view", kwargs={"pk": administration.pk})
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 200)

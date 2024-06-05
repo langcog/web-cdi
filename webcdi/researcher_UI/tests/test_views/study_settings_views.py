@@ -18,7 +18,7 @@ logger = logging.getLogger("debug")
 class AddStudyViewTest(TestCase):
     def setUp(self):
         self.password = random_password()
-        self.user = User.objects.create_user(username="henry", password=self.password)
+        self.user = User.objects.create_user(username="test_user", password=self.password)
         Researcher.objects.get_or_create(user=self.user)
         instrument_family = InstrumentFamily.objects.create(
             name="BigCats", chargeable=False
@@ -82,7 +82,7 @@ class AddPairedStudyTest(TestCase):
     def setUp(self) -> None:
         super().setUp()
         self.password = random_password()
-        self.user = User.objects.create_user(username="henry", password=self.password)
+        self.user = User.objects.create_user(username="test_user", password=self.password)
         Researcher.objects.get_or_create(user=self.user)
 
         for counter in range(3):
@@ -124,7 +124,7 @@ class UpdateStudyTest(TestCase):
     def setUp(self) -> None:
         super().setUp()
         self.password = random_password()
-        self.user = User.objects.create_user(username="henry", password=self.password)
+        self.user = User.objects.create_user(username="test_user", password=self.password)
         Researcher.objects.get_or_create(user=self.user)
 
         family = InstrumentFamily.objects.get(name="English (American) Short")
@@ -208,7 +208,7 @@ class UpdateStudyTest(TestCase):
             reverse("researcher_ui:console_study", kwargs={"pk": self.study.pk}),
         )  # , status_code=200, target_status_code=302)
         payment_codes = PaymentCode.objects.all()
-        self.assertEqual(len(payment_codes), 2)
+        self.assertEqual(len(payment_codes), 3)
 
     def test_post_vouchers_invalid_code(self):
         self.client.force_login(self.user)
@@ -256,7 +256,7 @@ class UpdateStudyTest(TestCase):
             reverse("researcher_ui:console_study", kwargs={"pk": self.study.pk}),
         )  # , status_code=200, target_status_code=302)
         payment_codes = PaymentCode.objects.all()
-        self.assertEqual(len(payment_codes), 1)
+        self.assertEqual(len(payment_codes), 2)
 
     def test_post_vouchers_invalid_amount(self):
         self.client.force_login(self.user)

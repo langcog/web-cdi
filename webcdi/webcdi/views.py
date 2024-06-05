@@ -31,6 +31,11 @@ class HomeView(TemplateView):
 class CustomRegistrationView(RegistrationView):
     form_class = SignUpForm
 
+    def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
+        translation.activate("en")
+        request.LANGUAGE_CODE = translation.get_language()
+        return super().dispatch(request, *args, **kwargs)
+
     def form_valid(self, form):
         user = form.save()
         researcher, created = Researcher.objects.get_or_create(user=user)

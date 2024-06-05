@@ -12,11 +12,11 @@ logger.setLevel(logging.INFO)
 class LoginTestCase(TestCase):
     def setUp(self):
         self.password = random_password()
-        User.objects.create(username="henry", password=self.password)
+        User.objects.create(username="test_user", password=self.password)
 
     def test_user_can_login(self):
         c = Client()
         response = c.post(
-            "/accounts/login/", {"username": "henry", "password": self.password}
+            "/accounts/login/", {"username": "test_user", "password": self.password}
         )
         self.assertEqual(200, response.status_code)

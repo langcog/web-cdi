@@ -117,15 +117,15 @@ class CATJapaneseAdministrationDataItemTest(TestCase):
                 response = self.client.get(self.url)
                 self.assertEqual(response.context["object"].catresponse.est_theta, float("{:.4f}".format(float(row[col_names.index("theta")]))))
 
-    @tag('new')
+    
     def test_japanese_start_values(self):
         self.start_values(f'{settings.BASE_DIR}/cdi_forms/cat_forms/tests/test_data/japanese_start.csv')
 
-    @tag('new')
+    
     def test_japanese_seq_1(self):
         self.sequence_test(f'{settings.BASE_DIR}/cdi_forms/cat_forms/tests/test_data/japanese_sequence_1.csv')
 
-    @tag('new')
+    
     def test_japanese_seq_2(self):
         self.backgroundinfo.age=24
         self.backgroundinfo.save()

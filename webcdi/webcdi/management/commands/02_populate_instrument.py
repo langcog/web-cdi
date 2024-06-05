@@ -70,7 +70,6 @@ class Command(BaseCommand):
 
             instrument_min_age = curr_instrument["min_age"]
             instrument_max_age = curr_instrument["max_age"]
-
             family = InstrumentFamily.objects.get(name=curr_instrument["family"])
 
             data_dict = {
