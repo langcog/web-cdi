@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-11 15:05+0000\n"
+"POT-Creation-Date: 2024-06-17 07:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,447 +17,463 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-#: cdi_forms/forms/contact_form.py:15
+
+#: cdi_forms/forms/contact_form.py:13
 msgid "Your Name"
 msgstr ""
 
-#: cdi_forms/forms/contact_form.py:17
+#: cdi_forms/forms/contact_form.py:15
 msgid "Your Email Address"
 msgstr "メールアドレス"
 
-#: cdi_forms/forms/contact_form.py:23
+#: cdi_forms/forms/contact_form.py:21
 msgid "Your Test URL"
 msgstr ""
 
-#: cdi_forms/forms/contact_form.py:26
+#: cdi_forms/forms/contact_form.py:24
 msgid "What would you like to tell us?"
 msgstr ""
 
-#: cdi_forms/forms/contact_form.py:46
+#: cdi_forms/forms/contact_form.py:44
 #: cdi_forms/templates/cdi_forms/_navigation_buttons.html:15
 #: cdi_forms/templates/cdi_forms/administration_form.html:13
 #: cdi_forms/templates/cdi_forms/cdi_form.html:11
-#: cdi_forms/templates/cdi_forms/cdi_form.html:323 cdi_forms/views/views.py:138
+#: cdi_forms/templates/cdi_forms/cdi_form.html:323 cdi_forms/views/views.py:134
 msgid "Submit"
 msgstr "送信する"
 
-#: cdi_forms/forms/forms.py:31 cdi_forms/forms/forms.py:32
-#: cdi_forms/models.py:640
+#: cdi_forms/forms/forms.py:33 cdi_forms/forms/forms.py:34
+#: cdi_forms/models.py:626
 #: cdi_forms/templates/cdi_forms/administration_base.html:162
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:150
 #: cdi_forms/templates/cdi_forms/cdi_base.html:153
 msgid "No"
 msgstr "いいえ"
 
-#: cdi_forms/forms/forms.py:31 cdi_forms/forms/forms.py:32
-#: cdi_forms/models.py:639
+#: cdi_forms/forms/forms.py:33 cdi_forms/forms/forms.py:34
+#: cdi_forms/models.py:625
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:153
 msgid "Yes"
 msgstr "はい"
 
-#: cdi_forms/forms/forms.py:32 cdi_forms/forms/forms.py:44
-#: cdi_forms/forms/forms.py:73 cdi_forms/forms/forms.py:95
-#: cdi_forms/forms/forms.py:106 cdi_forms/forms/forms.py:130
-#: cdi_forms/forms/forms.py:209 cdi_forms/models.py:172 cdi_forms/models.py:231
-#: cdi_forms/models.py:236 cdi_forms/models.py:329 cdi_forms/models.py:642
+#: cdi_forms/forms/forms.py:34 cdi_forms/forms/forms.py:46
+#: cdi_forms/forms/forms.py:75 cdi_forms/forms/forms.py:97
+#: cdi_forms/forms/forms.py:108 cdi_forms/forms/forms.py:132
+#: cdi_forms/forms/forms.py:214 cdi_forms/models.py:158 cdi_forms/models.py:217
+#: cdi_forms/models.py:222 cdi_forms/models.py:315 cdi_forms/models.py:628
 msgid "Prefer not to disclose"
 msgstr "情報開示を希望しない"
 
-#: cdi_forms/forms/forms.py:35
+#: cdi_forms/forms/forms.py:37
 msgid "Under $25,000"
 msgstr ""
 
-#: cdi_forms/forms/forms.py:36
+#: cdi_forms/forms/forms.py:38
 msgid "$25,000-$50,000"
 msgstr ""
 
-#: cdi_forms/forms/forms.py:37
+#: cdi_forms/forms/forms.py:39
 msgid "$50,000-$75,000"
 msgstr ""
 
-#: cdi_forms/forms/forms.py:38
+#: cdi_forms/forms/forms.py:40
 msgid "$75,000-$100,000"
 msgstr ""
 
-#: cdi_forms/forms/forms.py:39
+#: cdi_forms/forms/forms.py:41
 msgid "$100,000-$125,000"
 msgstr ""
 
-#: cdi_forms/forms/forms.py:40
+#: cdi_forms/forms/forms.py:42
 msgid "$125,000-$150,000"
 msgstr ""
 
-#: cdi_forms/forms/forms.py:41
+#: cdi_forms/forms/forms.py:43
 msgid "$150,000-$175,000"
 msgstr ""
 
-#: cdi_forms/forms/forms.py:42
+#: cdi_forms/forms/forms.py:44
 msgid "$175,000-$200,000"
 msgstr ""
 
-#: cdi_forms/forms/forms.py:43
+#: cdi_forms/forms/forms.py:45
 msgid "Over $200,000"
 msgstr ""
 
-#: cdi_forms/forms/forms.py:47
+#: cdi_forms/forms/forms.py:49
 msgid "American Indian / Alaska Native"
 msgstr ""
 
-#: cdi_forms/forms/forms.py:48
+#: cdi_forms/forms/forms.py:50
 msgid "Asian (Far East, Southeast Asia, Indian Sub-continent)"
 msgstr ""
 
-#: cdi_forms/forms/forms.py:49
+#: cdi_forms/forms/forms.py:51
 msgid "Native Hawaiian or Other Pacific Islander"
 msgstr ""
 
-#: cdi_forms/forms/forms.py:50
+#: cdi_forms/forms/forms.py:52
 msgid "Black or African American"
 msgstr ""
 
-#: cdi_forms/forms/forms.py:51
+#: cdi_forms/forms/forms.py:53
 msgid "White"
 msgstr ""
 
-#: cdi_forms/forms/forms.py:52 cdi_forms/forms/forms.py:208
-#: cdi_forms/models.py:142 cdi_forms/models.py:242 cdi_forms/models.py:463
+#: cdi_forms/forms/forms.py:54 cdi_forms/forms/forms.py:213
+#: cdi_forms/models.py:128 cdi_forms/models.py:228 cdi_forms/models.py:449
 msgid "Other"
 msgstr ""
 
-#: cdi_forms/forms/forms.py:57
+#: cdi_forms/forms/forms.py:59
 msgid "Less than 3 lbs, 0 oz"
 msgstr "3ポンド、0オンス未満"
 
-#: cdi_forms/forms/forms.py:58
+#: cdi_forms/forms/forms.py:60
 msgid "3 lbs, 0 oz - 3 lbs, 7 oz"
 msgstr "3ポンド、0オンス～3ポンド、7オンス"
 
-#: cdi_forms/forms/forms.py:59
+#: cdi_forms/forms/forms.py:61
 msgid "3 lbs, 8 oz - 3 lbs, 15 oz"
 msgstr "3ポンド、8オンス～3ポンド、15オンス"
 
-#: cdi_forms/forms/forms.py:60
+#: cdi_forms/forms/forms.py:62
 msgid "4 lbs, 0 oz - 4 lbs, 7 oz"
 msgstr "4ポンド、0オンス～4ポンド、7オンス"
 
-#: cdi_forms/forms/forms.py:61
+#: cdi_forms/forms/forms.py:63
 msgid "4 lbs, 8 oz - 4 lbs, 15 oz"
 msgstr "4ポンド、8オンス - 4ポンド、15オンス"
 
-#: cdi_forms/forms/forms.py:62
+#: cdi_forms/forms/forms.py:64
 msgid "5 lbs, 0 oz - 5 lbs, 7 oz"
 msgstr "5ポンド、0オンス - 5ポンド、7オンス"
 
-#: cdi_forms/forms/forms.py:63
+#: cdi_forms/forms/forms.py:65
 msgid "5 lbs, 8 oz - 5 lbs, 15 oz"
 msgstr "5ポンド、8オンス - 5ポンド、15オンス"
 
-#: cdi_forms/forms/forms.py:64
+#: cdi_forms/forms/forms.py:66
 msgid "6 lbs, 0 oz - 6 lbs, 7 oz"
 msgstr "6ポンド、0オンス - 6ポンド、7オンス"
 
-#: cdi_forms/forms/forms.py:65
+#: cdi_forms/forms/forms.py:67
 msgid "6 lbs, 8 oz - 6 lbs, 15 oz"
 msgstr "6ポンド、8オンス - 6ポンド、15オンス"
 
-#: cdi_forms/forms/forms.py:66
+#: cdi_forms/forms/forms.py:68
 msgid "7 lbs, 0 oz - 7 lbs, 7 oz"
 msgstr "7ポンド、0オンス - 7ポンド、7オンス"
 
-#: cdi_forms/forms/forms.py:67
+#: cdi_forms/forms/forms.py:69
 msgid "7 lbs, 8 oz - 7 lbs, 15 oz"
 msgstr "7ポンド、8オンス - 7ポンド、15オンス"
 
-#: cdi_forms/forms/forms.py:68
+#: cdi_forms/forms/forms.py:70
 msgid "8 lbs, 0 oz - 8 lbs, 7 oz"
 msgstr "8ポンド、0オンス - 8ポンド、7オンス"
 
-#: cdi_forms/forms/forms.py:69
+#: cdi_forms/forms/forms.py:71
 msgid "8 lbs, 8 oz - 8 lbs, 15 oz"
 msgstr "8ポンド、8オンス - 8ポンド、15オンス"
 
-#: cdi_forms/forms/forms.py:70
+#: cdi_forms/forms/forms.py:72
 msgid "9 lbs, 0 oz - 9 lbs, 7 oz"
 msgstr "9ポンド、0オンス - 9ポンド、7オンス"
 
-#: cdi_forms/forms/forms.py:71
+#: cdi_forms/forms/forms.py:73
 msgid "9 lbs, 8 oz - 9 lbs, 15 oz"
 msgstr "9ポンド、8オンス - 9ポンド、15オンス"
 
-#: cdi_forms/forms/forms.py:72
+#: cdi_forms/forms/forms.py:74
 msgid "10 lbs, 0 oz or more"
 msgstr "10ポンド、0オンス以上"
 
-#: cdi_forms/forms/forms.py:79
+#: cdi_forms/forms/forms.py:81
 msgid "Less than 1500 grams"
 msgstr "1500グラム未満"
 
-#: cdi_forms/forms/forms.py:80
+#: cdi_forms/forms/forms.py:82
 msgid "1500 grams - 1749 grams"
 msgstr "1,500～1,749グラム"
 
-#: cdi_forms/forms/forms.py:81
+#: cdi_forms/forms/forms.py:83
 msgid "1750 grams - 1999 grams"
 msgstr "1,750～1,999グラム"
 
-#: cdi_forms/forms/forms.py:82
+#: cdi_forms/forms/forms.py:84
 msgid "2000 grams - 2249 grams"
 msgstr "2,000～2,249グラム"
 
-#: cdi_forms/forms/forms.py:83
+#: cdi_forms/forms/forms.py:85
 msgid "2250 grams - 2499 grams"
 msgstr "2,250～2,499グラム"
 
-#: cdi_forms/forms/forms.py:84
+#: cdi_forms/forms/forms.py:86
 msgid "2500 grams - 2749 grams"
 msgstr "2,500～2,749グラム"
 
-#: cdi_forms/forms/forms.py:85
+#: cdi_forms/forms/forms.py:87
 msgid "2750 grams - 2999 grams"
 msgstr "2,750～2,999グラム"
 
-#: cdi_forms/forms/forms.py:86
+#: cdi_forms/forms/forms.py:88
 msgid "3000 grams - 3249 grams"
 msgstr "3,000～3,249グラム"
 
-#: cdi_forms/forms/forms.py:87
+#: cdi_forms/forms/forms.py:89
 msgid "3250 grams - 3499 grams"
 msgstr "3,250～3,499グラム"
 
-#: cdi_forms/forms/forms.py:88
+#: cdi_forms/forms/forms.py:90
 msgid "3500 grams - 3749 grams"
 msgstr "3,500～3,749グラム"
 
-#: cdi_forms/forms/forms.py:89
+#: cdi_forms/forms/forms.py:91
 msgid "3750 grams - 3999 grams"
 msgstr "3,750～3,999グラム"
 
-#: cdi_forms/forms/forms.py:90
+#: cdi_forms/forms/forms.py:92
 msgid "4000 grams - 4249 grams"
 msgstr "4,000～4,249グラム"
 
-#: cdi_forms/forms/forms.py:91
+#: cdi_forms/forms/forms.py:93
 msgid "4250 grams - 4499 grams"
 msgstr "4,250～4,499グラム"
 
-#: cdi_forms/forms/forms.py:92
+#: cdi_forms/forms/forms.py:94
 msgid "4500 grams - 4749 grams"
 msgstr "4,500～4,749グラム"
 
-#: cdi_forms/forms/forms.py:93
+#: cdi_forms/forms/forms.py:95
 msgid "4750 grams - 4999 grams"
 msgstr "4,750～4,999グラム"
 
-#: cdi_forms/forms/forms.py:94
+#: cdi_forms/forms/forms.py:96
 msgid "5000 grams or more"
 msgstr "5,000グラム以上"
 
-#: cdi_forms/forms/forms.py:102 cdi_forms/forms/forms.py:118
+#: cdi_forms/forms/forms.py:104 cdi_forms/forms/forms.py:120
 msgid "12 (High school graduate)"
 msgstr "高校卒業程度"
 
-#: cdi_forms/forms/forms.py:103 cdi_forms/forms/forms.py:122
+#: cdi_forms/forms/forms.py:105 cdi_forms/forms/forms.py:124
 msgid "16 (College graduate)"
 msgstr "大学卒業程度"
 
-#: cdi_forms/forms/forms.py:104 cdi_forms/forms/forms.py:124
+#: cdi_forms/forms/forms.py:106 cdi_forms/forms/forms.py:126
 msgid "18 (Advanced degree)"
 msgstr "大学院卒業程度"
 
-#: cdi_forms/forms/forms.py:105 cdi_forms/forms/forms.py:129
+#: cdi_forms/forms/forms.py:107 cdi_forms/forms/forms.py:131
 msgid "23 or more"
 msgstr ""
 
-#: cdi_forms/forms/forms.py:142 cdi_forms/models.py:475
+#: cdi_forms/forms/forms.py:144 cdi_forms/models.py:461
 msgid "Does you child have siblings?"
 msgstr "お子さまにごきょうだいはいますか？"
 
-#: cdi_forms/forms/forms.py:145 cdi_forms/models.py:478
+#: cdi_forms/forms/forms.py:147 cdi_forms/models.py:464
 msgid "How many siblings does you child have?"
 msgstr "お子さまには何人のごきょうだいがいますか？"
 
-#: cdi_forms/forms/forms.py:150
+#: cdi_forms/forms/forms.py:152
 msgid "Please provide the sex and age of each sibling"
 msgstr "お子さまのごきょうだいについて、性別と年齢をそれぞれお答えください"
 
-#: cdi_forms/forms/forms.py:160
+#: cdi_forms/forms/forms.py:165
 msgid ""
 "To protect your privacy, we never store your child's date of birth, we only "
 "record age in months."
-msgstr "プライバシー保護のため、お子さまの生年月日は記録・保存せず、ご記入いただいた情報から算出した月齢情報だけを保存します。"
+msgstr ""
+"プライバシー保護のため、お子さまの生年月日は記録・保存せず、ご記入いただいた"
+"情報から算出した月齢情報だけを保存します。"
 
-#: cdi_forms/forms/forms.py:163
+#: cdi_forms/forms/forms.py:168
 msgid "Child DOB<span class=\"asteriskField\">*</span>"
 msgstr "お子さまの生年月日<span class=\"asteriskField\">*</span>"
 
-#: cdi_forms/forms/forms.py:169
+#: cdi_forms/forms/forms.py:174
 msgid "Age (in months)<span class=\"asteriskField\">*</span>"
 msgstr "月齢<span class=\"asteriskField\">*</span>"
 
-#: cdi_forms/forms/forms.py:172
+#: cdi_forms/forms/forms.py:177
 msgid "This field will update when you enter or change your child's DOB."
-msgstr "この項目は、お子さまの生年月日を入力または変更すると自動的に更新されます。"
+msgstr ""
+"この項目は、お子さまの生年月日を入力または変更すると自動的に更新されます。"
 
-#: cdi_forms/forms/forms.py:183
+#: cdi_forms/forms/forms.py:188
 msgid "What is your postal/zip code?"
 msgstr "郵便番号"
 
-#: cdi_forms/forms/forms.py:192 cdi_forms/models.py:314
+#: cdi_forms/forms/forms.py:197 cdi_forms/models.py:300
 msgid "Is your child Hispanic or Latino?"
 msgstr ""
 
-#: cdi_forms/forms/forms.py:197 cdi_forms/models.py:217
+#: cdi_forms/forms/forms.py:202 cdi_forms/models.py:203
 msgid "Early"
 msgstr "早かった"
 
-#: cdi_forms/forms/forms.py:197 cdi_forms/models.py:217
+#: cdi_forms/forms/forms.py:202 cdi_forms/models.py:203
 msgid "Late"
 msgstr "遅かった"
 
-#: cdi_forms/forms/forms.py:199 cdi_forms/models.py:215
+#: cdi_forms/forms/forms.py:204 cdi_forms/models.py:201
 msgid "Was he/she early or late?"
 msgstr "早かったか、遅かったか、どちらに当てはまりますか？"
 
-#: cdi_forms/forms/forms.py:206 cdi_forms/models.py:140
+#: cdi_forms/forms/forms.py:211 cdi_forms/models.py:126
 msgid "Male"
 msgstr "男性"
 
-#: cdi_forms/forms/forms.py:207 cdi_forms/models.py:141
+#: cdi_forms/forms/forms.py:212 cdi_forms/models.py:127
 msgid "Female"
 msgstr "女性"
 
-#: cdi_forms/forms/forms.py:212
+#: cdi_forms/forms/forms.py:217
 msgid "Sex"
 msgstr "お子さまの (生物学的な) 性"
 
-#: cdi_forms/forms/forms.py:217
+#: cdi_forms/forms/forms.py:222
 msgid "Which language(s)"
 msgstr "それはどの言語ですか？"
 
-#: cdi_forms/forms/forms.py:223 cdi_forms/forms/forms.py:229
-#: cdi_forms/forms/forms.py:235
+#: cdi_forms/forms/forms.py:229 cdi_forms/forms/forms.py:237
+#: cdi_forms/forms/forms.py:245
 msgid "Please specify"
 msgstr "当てはまるものを選んでください。"
 
-#: cdi_forms/forms/forms.py:242
+#: cdi_forms/forms/forms.py:254
 msgctxt "caregiver_other"
 msgid "Please specify"
 msgstr "当てはまるものを選んでください。"
 
-#: cdi_forms/forms/forms.py:337 cdi_forms/forms/forms.py:391
+#: cdi_forms/forms/forms.py:351 cdi_forms/forms/forms.py:405
 msgid "This field cannot be empty"
 msgstr "この項目を空欄にすることはできません"
 
-#: cdi_forms/forms/forms.py:344
+#: cdi_forms/forms/forms.py:358
 msgid "Please enter number of weeks"
 msgstr "在胎週数を入力してください"
 
-#: cdi_forms/forms/forms.py:351
+#: cdi_forms/forms/forms.py:365
 msgid "Cannot be more than 18 weeks early"
 msgstr "18週よりも早い期間は記入できません"
 
-#: cdi_forms/forms/forms.py:358
+#: cdi_forms/forms/forms.py:372
 msgid "Cannot be more than 4 weeks late"
 msgstr "4週よりも遅い期間は記入できません"
 
-#: cdi_forms/forms/forms.py:364 cdi_forms/forms/forms.py:385
+#: cdi_forms/forms/forms.py:378 cdi_forms/forms/forms.py:399
 msgid "Please enter your child's DOB in the field above."
 msgstr "上の項目にお子さまの生年月日を入力してください。"
 
-#: cdi_forms/forms/forms.py:377
+#: cdi_forms/forms/forms.py:391
 msgid "Your baby is too young for this version of the CDI."
-msgstr "あなたのお子さまは、こちらのアンケートに回答するには月齢が小さすぎるようです"
+msgstr ""
+"あなたのお子さまは、こちらのアンケートに回答するには月齢が小さすぎるようです"
 
-#: cdi_forms/forms/forms.py:381
+#: cdi_forms/forms/forms.py:395
 msgid "Your baby is too old for this version of the CDI."
-msgstr "あなたのお子さまは、こちらのアンケートに回答するには月齢が大きすぎるようです"
+msgstr ""
+"あなたのお子さまは、こちらのアンケートに回答するには月齢が大きすぎるようです"
 
-#: cdi_forms/forms/forms.py:413 cdi_forms/forms/forms.py:416
-#: cdi_forms/models.py:203 cdi_forms/models.py:206 cdi_forms/models.py:276
-#: cdi_forms/models.py:279
+#: cdi_forms/forms/forms.py:427 cdi_forms/forms/forms.py:430
+#: cdi_forms/models.py:189 cdi_forms/models.py:192 cdi_forms/models.py:262
+#: cdi_forms/models.py:265
 msgid "Birth weight"
 msgstr "出生時の体重"
 
-#: cdi_forms/forms/forms.py:431 cdi_forms/models.py:191
+#: cdi_forms/forms/forms.py:444 cdi_forms/models.py:177
 msgid "Was your child born as part of a multiple birth?"
 msgstr "お子さまは多胎児として生まれましたか？"
 
-#: cdi_forms/forms/forms.py:440
+#: cdi_forms/forms/forms.py:453
 msgid ""
 "Was your child born early or late (more than one week before or after the "
 "due date)?"
-msgstr "お子様は予定日よりも早く生まれましたか、それとも遅く生まれましたか (出産予定日の前後1週間以上)？"
+msgstr ""
+"お子様は予定日よりも早く生まれましたか、それとも遅く生まれましたか (出産予定"
+"日の前後1週間以上)？"
 
-
-#: cdi_forms/forms/forms.py:448
+#: cdi_forms/forms/forms.py:461
 msgid "Does your child regularly hear a language other than English?"
-msgstr "お子さまは日常生活で日本語以外の言語にふれていますか？(ビデオや音楽など非対面のものではなく、対面でふれている言語についてお答えください)"
+msgstr ""
+"お子さまは日常生活で日本語以外の言語にふれていますか？(ビデオや音楽など非対面"
+"のものではなく、対面でふれている言語についてお答えください)"
 
-#: cdi_forms/forms/forms.py:456
+#: cdi_forms/forms/forms.py:469
 msgid "Has your child experienced chronic ear infections (5 or more)?"
 msgstr "お子さまは慢性的（5回以上）な外耳炎を経験していますか？"
 
-#: cdi_forms/forms/forms.py:464 cdi_forms/models.py:389
+#: cdi_forms/forms/forms.py:477 cdi_forms/models.py:375
 msgid "Do you suspect that your child may have hearing loss?"
 msgstr "お子さまは難聴の可能性がありますか？"
 
-#: cdi_forms/forms/forms.py:472 cdi_forms/models.py:399
+#: cdi_forms/forms/forms.py:485 cdi_forms/models.py:385
 msgid ""
 "Is there some reason to suspect that your child may have vision problems?"
 msgstr "お子さまの視力に問題があると思われることはありますか？"
 
-#: cdi_forms/forms/forms.py:480 cdi_forms/models.py:410
+#: cdi_forms/forms/forms.py:493 cdi_forms/models.py:396
 msgid ""
 "Has your child had any major illnesses, hospitalizations, or diagnosed "
 "disabilities?"
-msgstr "お子さまには大きな病気、入院、またはしょうがいの診断の経験がありますか？"
+msgstr ""
+"お子さまには大きな病気、入院、またはしょうがいの診断の経験がありますか？"
 
-#: cdi_forms/forms/forms.py:488 cdi_forms/models.py:421
+#: cdi_forms/forms/forms.py:501 cdi_forms/models.py:407
 msgid ""
 "Has your child ever received any services for speech, language, or "
 "development issues?"
-msgstr "お子さまは、発話や言語、発達に関する治療・支援を受けたことがありますか (療育など)？"
+msgstr ""
+"お子さまは、発話や言語、発達に関する治療・支援を受けたことがありますか (療育"
+"など)？"
 
-#: cdi_forms/forms/forms.py:496 cdi_forms/models.py:435
+#: cdi_forms/forms/forms.py:509 cdi_forms/models.py:421
 msgid ""
 "Are you worried about your child's progress in language or communication?"
-msgstr "お子さまの言語やコミュニケーションの発達について、何か心配なことはありますか？"
+msgstr ""
+"お子さまの言語やコミュニケーションの発達について、何か心配なことはあります"
+"か？"
 
-#: cdi_forms/forms/forms.py:504 cdi_forms/models.py:446
+#: cdi_forms/forms/forms.py:517 cdi_forms/models.py:432
 msgid ""
 "Have you or anyone in your immediate family been diagnosed with a language "
 "or learning disability?"
-msgstr "あなた自身またはご家族で、言語や学習上の問題について診断を受けた方はいらっしゃいますか (限局性学習症など)？"
+msgstr ""
+"あなた自身またはご家族で、言語や学習上の問題について診断を受けた方はいらっ"
+"しゃいますか (限局性学習症など)？"
 
-#: cdi_forms/forms/forms.py:541
+#: cdi_forms/forms/forms.py:554
 msgid "mm/dd/yyyy"
 msgstr "月/日/年"
 
-#: cdi_forms/forms/forms.py:547
+#: cdi_forms/forms/forms.py:560
 msgid "dd/mm/yyyy"
 msgstr "日/月/年"
 
-#: cdi_forms/forms/forms.py:772 cdi_forms/models.py:308
+#: cdi_forms/forms/forms.py:798 cdi_forms/models.py:294
 msgid "Estimated Annual Family Income (in USD)"
 msgstr "おおよその世帯年収 (円) (任意：差し支えなければご回答ください)"
 
-#: cdi_forms/forms/forms.py:780
+#: cdi_forms/forms/forms.py:808
 msgid "My child is (check all that apply):"
 msgstr "私のお子さまは（該当するものすべてにチェックを入れてください）："
 
-#: cdi_forms/forms/forms.py:785 cdi_forms/forms/forms.py:803
+#: cdi_forms/forms/forms.py:813 cdi_forms/forms/forms.py:835
 msgid "Basic Information"
 msgstr "基本情報"
 
-#: cdi_forms/forms/forms.py:822
+#: cdi_forms/forms/forms.py:864
 msgid "Family Background"
 msgstr "家族構成"
 
-#: cdi_forms/forms/forms.py:834 cdi_forms/models.py:318
+#: cdi_forms/forms/forms.py:884 cdi_forms/models.py:304
 msgid "Child's Ethnicity"
 msgstr "お子さまの民族"
 
-#: cdi_forms/forms/forms.py:838
+#: cdi_forms/forms/forms.py:888
 msgid ""
 "The following information is being collected for the sole purpose of "
 "reporting to our grant-funding institute, i.e.,  NIH (National Institute of "
@@ -465,19 +481,19 @@ msgid ""
 "inclusiveness of our research. Your cooperation is appreciated, but optional."
 msgstr ""
 
-#: cdi_forms/forms/forms.py:846
+#: cdi_forms/forms/forms.py:896
 msgid "Caregiver Information"
 msgstr "養育者の情報"
 
-#: cdi_forms/forms/forms.py:851
+#: cdi_forms/forms/forms.py:903
 msgid "Language Exposure"
 msgstr "日常でふれている言語の情報"
 
-#: cdi_forms/forms/forms.py:862
+#: cdi_forms/forms/forms.py:919
 msgid "Health"
 msgstr "心身の状態や発達に関する情報"
 
-#: cdi_forms/forms/forms.py:888
+#: cdi_forms/forms/forms.py:947
 #, python-format
 msgid "Your identifier for %(source)s"
 msgstr ""
@@ -674,818 +690,824 @@ msgstr ""
 msgid "français, langue française (French)"
 msgstr ""
 
-#: cdi_forms/languages.py:54
+#: cdi_forms/languages.py:56
 msgid "Fulfulde, Pulaar, Pular (Fula; Fulah; Pulaar; Pular)"
 msgstr ""
 
-#: cdi_forms/languages.py:55
+#: cdi_forms/languages.py:58
 msgid "Galego (Galician)"
 msgstr ""
 
-#: cdi_forms/languages.py:56
+#: cdi_forms/languages.py:59
 msgid "ქართული (Georgian)"
 msgstr ""
 
-#: cdi_forms/languages.py:57
+#: cdi_forms/languages.py:60
 msgid "Deutsch (German)"
 msgstr ""
 
-#: cdi_forms/languages.py:58
+#: cdi_forms/languages.py:61
 msgid "Ελληνικά (Greek, Modern)"
 msgstr ""
 
-#: cdi_forms/languages.py:59
+#: cdi_forms/languages.py:62
 msgid "Avañeẽ (Guaraní)"
 msgstr ""
 
-#: cdi_forms/languages.py:60
+#: cdi_forms/languages.py:63
 msgid "ગુજરાતી (Gujarati)"
 msgstr ""
 
-#: cdi_forms/languages.py:61
+#: cdi_forms/languages.py:64
 msgid "Kreyòl ayisyen (Haitian; Haitian Creole)"
 msgstr ""
 
-#: cdi_forms/languages.py:62
+#: cdi_forms/languages.py:65
 msgid "Hausa, هَوُسَ (Hausa)"
 msgstr ""
 
-#: cdi_forms/languages.py:63
+#: cdi_forms/languages.py:66
 msgid "עברית (Hebrew (modern))"
 msgstr ""
 
-#: cdi_forms/languages.py:64
+#: cdi_forms/languages.py:67
 msgid "Otjiherero (Herero)"
 msgstr ""
 
-#: cdi_forms/languages.py:65
+#: cdi_forms/languages.py:68
 msgid "हिन्दी, हिंदी (Hindi)"
 msgstr ""
 
-#: cdi_forms/languages.py:66
+#: cdi_forms/languages.py:69
 msgid "Hiri Motu (Hiri Motu)"
 msgstr ""
 
-#: cdi_forms/languages.py:67
+#: cdi_forms/languages.py:70
 msgid "Magyar (Hungarian)"
 msgstr ""
 
-#: cdi_forms/languages.py:68
+#: cdi_forms/languages.py:71
 msgid "Interlingua (Interlingua)"
 msgstr ""
 
-#: cdi_forms/languages.py:69
+#: cdi_forms/languages.py:72
 msgid "Bahasa Indonesia (Indonesian)"
 msgstr ""
 
-#: cdi_forms/languages.py:70
+#: cdi_forms/languages.py:75
 msgid "Originally called Occidental; then Interlingue after WWII (Interlingue)"
 msgstr ""
 
-#: cdi_forms/languages.py:71
+#: cdi_forms/languages.py:77
 msgid "Gaeilge (Irish)"
 msgstr ""
 
-#: cdi_forms/languages.py:72
+#: cdi_forms/languages.py:78
 msgid "Asụsụ Igbo (Igbo)"
 msgstr ""
 
-#: cdi_forms/languages.py:73
+#: cdi_forms/languages.py:79
 msgid "Iñupiaq, Iñupiatun (Inupiaq)"
 msgstr ""
 
-#: cdi_forms/languages.py:74
+#: cdi_forms/languages.py:80
 msgid "Ido (Ido)"
 msgstr ""
 
-#: cdi_forms/languages.py:75
+#: cdi_forms/languages.py:81
 msgid "Íslenska (Icelandic)"
 msgstr ""
 
-#: cdi_forms/languages.py:76
+#: cdi_forms/languages.py:82
 msgid "Italiano (Italian)"
 msgstr ""
 
-#: cdi_forms/languages.py:77
+#: cdi_forms/languages.py:83
 msgid "ᐃᓄᒃᑎᑐᑦ (Inuktitut)"
 msgstr ""
 
-#: cdi_forms/languages.py:78
+#: cdi_forms/languages.py:84
 msgid "日本語 (にほんご／にっぽんご) (Japanese)"
 msgstr ""
 
-#: cdi_forms/languages.py:79
+#: cdi_forms/languages.py:85
 msgid "basa Jawa (Javanese)"
 msgstr ""
 
-#: cdi_forms/languages.py:80
+#: cdi_forms/languages.py:88
 msgid "kalaallisut, kalaallit oqaasii (Kalaallisut, Greenlandic)"
 msgstr ""
 
-#: cdi_forms/languages.py:81
+#: cdi_forms/languages.py:90
 msgid "ಕನ್ನಡ (Kannada)"
 msgstr ""
 
-#: cdi_forms/languages.py:82
+#: cdi_forms/languages.py:91
 msgid "Kanuri (Kanuri)"
 msgstr ""
 
-#: cdi_forms/languages.py:83
+#: cdi_forms/languages.py:92
 msgid "कश्मीरी, كشميري‎ (Kashmiri)"
 msgstr ""
 
-#: cdi_forms/languages.py:84
+#: cdi_forms/languages.py:93
 msgid "Қазақ тілі (Kazakh)"
 msgstr ""
 
-#: cdi_forms/languages.py:85
+#: cdi_forms/languages.py:94
 msgid "ភាសាខ្មែរ (Khmer)"
 msgstr ""
 
-#: cdi_forms/languages.py:86
+#: cdi_forms/languages.py:95
 msgid "Gĩkũyũ (Kikuyu, Gikuyu)"
 msgstr ""
 
-#: cdi_forms/languages.py:87
+#: cdi_forms/languages.py:96
 msgid "Ikinyarwanda (Kinyarwanda)"
 msgstr ""
 
-#: cdi_forms/languages.py:88
+#: cdi_forms/languages.py:97
 msgid "кыргыз тили (Kirghiz, Kyrgyz)"
 msgstr ""
 
-#: cdi_forms/languages.py:89
+#: cdi_forms/languages.py:98
 msgid "коми кыв (Komi)"
 msgstr ""
 
-#: cdi_forms/languages.py:90
+#: cdi_forms/languages.py:99
 msgid "KiKongo (Kongo)"
 msgstr ""
 
-#: cdi_forms/languages.py:91
+#: cdi_forms/languages.py:100
 msgid "한국어 (韓國語), 조선말 (朝鮮語) (Korean)"
 msgstr ""
 
-#: cdi_forms/languages.py:92
+#: cdi_forms/languages.py:101
 msgid "Kurdî, كوردی (Kurdish)"
 msgstr ""
 
-#: cdi_forms/languages.py:93
+#: cdi_forms/languages.py:102
 msgid "Kuanyama (Kwanyama, Kuanyama)"
 msgstr ""
 
-#: cdi_forms/languages.py:94
+#: cdi_forms/languages.py:103
 msgid "latine, lingua latina (Latin)"
 msgstr ""
 
-#: cdi_forms/languages.py:95
+#: cdi_forms/languages.py:106
 msgid "Lëtzebuergesch (Luxembourgish, Letzeburgesch)"
 msgstr ""
 
-#: cdi_forms/languages.py:96
+#: cdi_forms/languages.py:108
 msgid "Luganda (Luganda)"
 msgstr ""
 
-#: cdi_forms/languages.py:97
+#: cdi_forms/languages.py:111
 msgid "Limburgs (Limburgish, Limburgan, Limburger)"
 msgstr ""
 
-#: cdi_forms/languages.py:98
+#: cdi_forms/languages.py:113
 msgid "Lingála (Lingala)"
 msgstr ""
 
-#: cdi_forms/languages.py:99
+#: cdi_forms/languages.py:114
 msgid "ພາສາລາວ (Lao)"
 msgstr ""
 
-#: cdi_forms/languages.py:100
+#: cdi_forms/languages.py:115
 msgid "lietuvių kalba (Lithuanian)"
 msgstr ""
 
-#: cdi_forms/languages.py:101
+#: cdi_forms/languages.py:116
 msgid "Luba-Katanga (Luba-Katanga)"
 msgstr ""
 
-#: cdi_forms/languages.py:102
+#: cdi_forms/languages.py:117
 msgid "latviešu valoda (Latvian)"
 msgstr ""
 
-#: cdi_forms/languages.py:103
+#: cdi_forms/languages.py:118
 msgid "Gaelg, Gailck (Manx)"
 msgstr ""
 
-#: cdi_forms/languages.py:104
+#: cdi_forms/languages.py:119
 msgid "македонски јазик (Macedonian)"
 msgstr ""
 
-#: cdi_forms/languages.py:105
+#: cdi_forms/languages.py:120
 msgid "Malagasy fiteny (Malagasy)"
 msgstr ""
 
-#: cdi_forms/languages.py:106
+#: cdi_forms/languages.py:121
 msgid "bahasa Melayu, بهاس ملايو (Malay)"
 msgstr ""
 
-#: cdi_forms/languages.py:107
+#: cdi_forms/languages.py:122
 msgid "മലയാളം (Malayalam)"
 msgstr ""
 
-#: cdi_forms/languages.py:108
+#: cdi_forms/languages.py:123
 msgid "Malti (Maltese)"
 msgstr ""
 
-#: cdi_forms/languages.py:109
+#: cdi_forms/languages.py:124
 msgid "te reo Māori (Māori)"
 msgstr ""
 
-#: cdi_forms/languages.py:110
+#: cdi_forms/languages.py:125
 msgid "मराठी (Marathi (Marāṭhī))"
 msgstr ""
 
-#: cdi_forms/languages.py:111
+#: cdi_forms/languages.py:126
 msgid "Kajin M̧ajeļ (Marshallese)"
 msgstr ""
 
-#: cdi_forms/languages.py:112
+#: cdi_forms/languages.py:127
 msgid "монгол (Mongolian)"
 msgstr ""
 
-#: cdi_forms/languages.py:113
+#: cdi_forms/languages.py:128
 msgid "Ekakairũ Naoero (Nauru)"
 msgstr ""
 
-#: cdi_forms/languages.py:114
+#: cdi_forms/languages.py:129
 msgid "Diné bizaad, Dinékʼehǰí (Navajo, Navaho)"
 msgstr ""
 
-#: cdi_forms/languages.py:115
+#: cdi_forms/languages.py:130
 msgid "Norsk bokmål (Norwegian Bokmål)"
 msgstr ""
 
-#: cdi_forms/languages.py:116
+#: cdi_forms/languages.py:131
 msgid "isiNdebele (North Ndebele)"
 msgstr ""
 
-#: cdi_forms/languages.py:117
+#: cdi_forms/languages.py:132
 msgid "नेपाली (Nepali)"
 msgstr ""
 
-#: cdi_forms/languages.py:118
+#: cdi_forms/languages.py:133
 msgid "Owambo (Ndonga)"
 msgstr ""
 
-#: cdi_forms/languages.py:119
+#: cdi_forms/languages.py:134
 msgid "Norsk nynorsk (Norwegian Nynorsk)"
 msgstr ""
 
-#: cdi_forms/languages.py:120
+#: cdi_forms/languages.py:135
 msgid "Norsk (Norwegian)"
 msgstr ""
 
-#: cdi_forms/languages.py:121
+#: cdi_forms/languages.py:136
 msgid "Nuosuhxop (Nuosu)"
 msgstr ""
 
-#: cdi_forms/languages.py:122
+#: cdi_forms/languages.py:137
 msgid "isiNdebele (South Ndebele)"
 msgstr ""
 
-#: cdi_forms/languages.py:123
+#: cdi_forms/languages.py:138
 msgid "Occitan (Occitan)"
 msgstr ""
 
-#: cdi_forms/languages.py:124
+#: cdi_forms/languages.py:139
 msgid "ᐊᓂᔑᓈᐯᒧᐎᓐ (Ojibwe, Ojibwa)"
 msgstr ""
 
-#: cdi_forms/languages.py:125
+#: cdi_forms/languages.py:143
 msgid ""
 "ѩзыкъ словѣньскъ (Old Church Slavonic, Church Slavic, Church Slavonic, Old "
 "Bulgarian, Old Slavonic)"
 msgstr ""
 
-#: cdi_forms/languages.py:126
+#: cdi_forms/languages.py:146
 msgid "Afaan Oromoo (Oromo)"
 msgstr ""
 
-#: cdi_forms/languages.py:127
+#: cdi_forms/languages.py:147
 msgid "ଓଡ଼ିଆ (Oriya)"
 msgstr ""
 
-#: cdi_forms/languages.py:128
+#: cdi_forms/languages.py:148
 msgid "ирон æвзаг (Ossetian, Ossetic)"
 msgstr ""
 
-#: cdi_forms/languages.py:129
+#: cdi_forms/languages.py:149
 msgid "ਪੰਜਾਬੀ, پنجابی (Panjabi, Punjabi)"
 msgstr ""
 
-#: cdi_forms/languages.py:130
+#: cdi_forms/languages.py:150
 msgid "पाऴि (Pāli)"
 msgstr ""
 
-#: cdi_forms/languages.py:131
+#: cdi_forms/languages.py:151
 msgid "فارسی (Persian)"
 msgstr ""
 
-#: cdi_forms/languages.py:132
+#: cdi_forms/languages.py:152
 msgid "polski (Polish)"
 msgstr ""
 
-#: cdi_forms/languages.py:133
+#: cdi_forms/languages.py:153
 msgid "پښتو (Pashto, Pushto)"
 msgstr ""
 
-#: cdi_forms/languages.py:134
+#: cdi_forms/languages.py:154
 msgid "Português (Portuguese)"
 msgstr ""
 
-#: cdi_forms/languages.py:135
+#: cdi_forms/languages.py:155
 msgid "Runa Simi, Kichwa (Quechua)"
 msgstr ""
 
-#: cdi_forms/languages.py:136
+#: cdi_forms/languages.py:156
 msgid "rumantsch grischun (Romansh)"
 msgstr ""
 
-#: cdi_forms/languages.py:137
+#: cdi_forms/languages.py:157
 msgid "kiRundi (Kirundi)"
 msgstr ""
 
-#: cdi_forms/languages.py:138
+#: cdi_forms/languages.py:158
 msgid "română (Romanian, Moldavian, Moldovan)"
 msgstr ""
 
-#: cdi_forms/languages.py:139
+#: cdi_forms/languages.py:159
 msgid "русский язык (Russian)"
 msgstr ""
 
-#: cdi_forms/languages.py:140
+#: cdi_forms/languages.py:160
 msgid "संस्कृतम् (Sanskrit (Saṁskṛta))"
 msgstr ""
 
-#: cdi_forms/languages.py:141
+#: cdi_forms/languages.py:161
 msgid "sardu (Sardinian)"
 msgstr ""
 
-#: cdi_forms/languages.py:142
+#: cdi_forms/languages.py:162
 msgid "सिन्धी, سنڌي، سندھی (Sindhi)"
 msgstr ""
 
-#: cdi_forms/languages.py:143
+#: cdi_forms/languages.py:163
 msgid "Davvisámegiella (Northern Sami)"
 msgstr ""
 
-#: cdi_forms/languages.py:144
+#: cdi_forms/languages.py:164
 msgid "gagana faa Samoa (Samoan)"
 msgstr ""
 
-#: cdi_forms/languages.py:145
+#: cdi_forms/languages.py:165
 msgid "yângâ tî sängö (Sango)"
 msgstr ""
 
-#: cdi_forms/languages.py:146
+#: cdi_forms/languages.py:166
 msgid "српски језик (Serbian)"
 msgstr ""
 
-#: cdi_forms/languages.py:147
+#: cdi_forms/languages.py:167
 msgid "Gàidhlig (Scottish Gaelic; Gaelic)"
 msgstr ""
 
-#: cdi_forms/languages.py:148
+#: cdi_forms/languages.py:168
 msgid "chiShona (Shona)"
 msgstr ""
 
-#: cdi_forms/languages.py:149
+#: cdi_forms/languages.py:169
 msgid "සිංහල (Sinhala, Sinhalese)"
 msgstr ""
 
-#: cdi_forms/languages.py:150
+#: cdi_forms/languages.py:170
 msgid "slovenčina (Slovak)"
 msgstr ""
 
-#: cdi_forms/languages.py:151
+#: cdi_forms/languages.py:171
 msgid "slovenščina (Slovene)"
 msgstr ""
 
-#: cdi_forms/languages.py:152
+#: cdi_forms/languages.py:172
 msgid "Soomaaliga, af Soomaali (Somali)"
 msgstr ""
 
-#: cdi_forms/languages.py:153
+#: cdi_forms/languages.py:173
 msgid "Sesotho (Southern Sotho)"
 msgstr ""
 
-#: cdi_forms/languages.py:154
+#: cdi_forms/languages.py:174
 msgid "español, castellano (Spanish; Castilian)"
 msgstr ""
 
-#: cdi_forms/languages.py:155
+#: cdi_forms/languages.py:175
 msgid "Basa Sunda (Sundanese)"
 msgstr ""
 
-#: cdi_forms/languages.py:156
+#: cdi_forms/languages.py:176
 msgid "Kiswahili (Swahili)"
 msgstr ""
 
-#: cdi_forms/languages.py:157
+#: cdi_forms/languages.py:177
 msgid "SiSwati (Swati)"
 msgstr ""
 
-#: cdi_forms/languages.py:158
+#: cdi_forms/languages.py:178
 msgid "svenska (Swedish)"
 msgstr ""
 
-#: cdi_forms/languages.py:159
+#: cdi_forms/languages.py:179
 msgid "தமிழ் (Tamil)"
 msgstr ""
 
-#: cdi_forms/languages.py:160
+#: cdi_forms/languages.py:180
 msgid "тоҷикӣ, toğikī, تاجیکی‎ (Telugu)"
 msgstr ""
 
-#: cdi_forms/languages.py:161
+#: cdi_forms/languages.py:181
 msgid "తెలుగు (Tajik)"
 msgstr ""
 
-#: cdi_forms/languages.py:162
+#: cdi_forms/languages.py:182
 msgid "ไทย (Thai)"
 msgstr ""
 
-#: cdi_forms/languages.py:163
+#: cdi_forms/languages.py:183
 msgid "ትግርኛ (Tigrinya)"
 msgstr ""
 
-#: cdi_forms/languages.py:164
+#: cdi_forms/languages.py:186
 msgid "བོད་ཡིག (Tibetan Standard, Tibetan, Central)"
 msgstr ""
 
-#: cdi_forms/languages.py:165
+#: cdi_forms/languages.py:188
 msgid "Türkmen, Түркмен (Turkmen)"
 msgstr ""
 
-#: cdi_forms/languages.py:166
+#: cdi_forms/languages.py:189
 msgid "Wikang Tagalog (Tagalog)"
 msgstr ""
 
-#: cdi_forms/languages.py:167
+#: cdi_forms/languages.py:190
 msgid "Setswana (Tswana)"
 msgstr ""
 
-#: cdi_forms/languages.py:168
+#: cdi_forms/languages.py:191
 msgid "faka Tonga (Tonga (Tonga Islands))"
 msgstr ""
 
-#: cdi_forms/languages.py:169
+#: cdi_forms/languages.py:192
 msgid "Türkçe (Turkish)"
 msgstr ""
 
-#: cdi_forms/languages.py:170
+#: cdi_forms/languages.py:193
 msgid "Xitsonga (Tsonga)"
 msgstr ""
 
-#: cdi_forms/languages.py:171
+#: cdi_forms/languages.py:194
 msgid "татарча, tatarça, تاتارچا (Tatar)"
 msgstr ""
 
-#: cdi_forms/languages.py:172
+#: cdi_forms/languages.py:195
 msgid "Twi (Twi)"
 msgstr ""
 
-#: cdi_forms/languages.py:173
+#: cdi_forms/languages.py:196
 msgid "Reo Tahiti (Tahitian)"
 msgstr ""
 
-#: cdi_forms/languages.py:174
+#: cdi_forms/languages.py:197
 msgid "Uyƣurqə, ئۇيغۇرچە (Uighur, Uyghur)"
 msgstr ""
 
-#: cdi_forms/languages.py:175
+#: cdi_forms/languages.py:198
 msgid "українська (Ukrainian)"
 msgstr ""
 
-#: cdi_forms/languages.py:176
+#: cdi_forms/languages.py:199
 msgid "اردو (Urdu)"
 msgstr ""
 
-#: cdi_forms/languages.py:177
+#: cdi_forms/languages.py:200
 msgid "zbek, Ўзбек, أۇزبېك (Uzbek)"
 msgstr ""
 
-#: cdi_forms/languages.py:178
+#: cdi_forms/languages.py:201
 msgid "Tshivenḓa (Venda)"
 msgstr ""
 
-#: cdi_forms/languages.py:179
+#: cdi_forms/languages.py:202
 msgid "Tiếng Việt (Vietnamese)"
 msgstr ""
 
-#: cdi_forms/languages.py:180
+#: cdi_forms/languages.py:203
 msgid "Volapük (Volapük)"
 msgstr ""
 
-#: cdi_forms/languages.py:181
+#: cdi_forms/languages.py:204
 msgid "Waloon (Walloon)"
 msgstr ""
 
-#: cdi_forms/languages.py:182
+#: cdi_forms/languages.py:205
 msgid "Cymraeg (Welsh)"
 msgstr ""
 
-#: cdi_forms/languages.py:183
+#: cdi_forms/languages.py:206
 msgid "Wollof (Wolof)"
 msgstr ""
 
-#: cdi_forms/languages.py:184
+#: cdi_forms/languages.py:207
 msgid "Frysk (Western Frisian)"
 msgstr ""
 
-#: cdi_forms/languages.py:185
+#: cdi_forms/languages.py:208
 msgid "isiXhosa (Xhosa)"
 msgstr ""
 
-#: cdi_forms/languages.py:186
+#: cdi_forms/languages.py:209
 msgid "ייִדיש (Yiddish)"
 msgstr ""
 
-#: cdi_forms/languages.py:187
+#: cdi_forms/languages.py:210
 msgid "Yorùbá (Yoruba)"
 msgstr ""
 
-#: cdi_forms/languages.py:188
+#: cdi_forms/languages.py:211
 msgid "Saɯ cueŋƅ, Saw cuengh (Zhuang, Chuang)"
 msgstr ""
 
-#: cdi_forms/models.py:131
+#: cdi_forms/models.py:117
 msgid "Age (in months)"
 msgstr "月齢"
 
-#: cdi_forms/models.py:143
+#: cdi_forms/models.py:129
 msgid "Prefer not to respond"
 msgstr "答えたくない"
 
-#: cdi_forms/models.py:146
+#: cdi_forms/models.py:132
 msgid "Country"
 msgstr "国籍"
 
-#: cdi_forms/models.py:149
+#: cdi_forms/models.py:135
 msgid "Zip Code (if you live in the U.S.)"
 msgstr ""
 
-#: cdi_forms/models.py:155
+#: cdi_forms/models.py:141
 msgid "Please enter a valid U.S. zip code"
 msgstr ""
 
-#: cdi_forms/models.py:162
+#: cdi_forms/models.py:148
 msgid "1 (First)"
 msgstr "1（第1番目）"
 
-#: cdi_forms/models.py:163
+#: cdi_forms/models.py:149
 msgid "2 (Second)"
 msgstr "2（第2番目）"
 
-#: cdi_forms/models.py:164
+#: cdi_forms/models.py:150
 msgid "3 (Third)"
 msgstr "3（第3番目）"
 
-#: cdi_forms/models.py:165
+#: cdi_forms/models.py:151
 msgid "4 (Fourth)"
 msgstr "4（第4番目）"
 
-#: cdi_forms/models.py:166
+#: cdi_forms/models.py:152
 msgid "5 (Fifth)"
 msgstr "5（第5番目）"
 
-#: cdi_forms/models.py:167
+#: cdi_forms/models.py:153
 msgid "6 (Sixth)"
 msgstr "6（第6番目）"
 
-#: cdi_forms/models.py:168
+#: cdi_forms/models.py:154
 msgid "7 (Seventh)"
 msgstr "7（第7番目）"
 
-#: cdi_forms/models.py:169
+#: cdi_forms/models.py:155
 msgid "8 (Eighth)"
 msgstr "8（第8番目）"
 
-#: cdi_forms/models.py:170
+#: cdi_forms/models.py:156
 msgid "9 (Ninth)"
 msgstr "9（第9番目）"
 
-#: cdi_forms/models.py:171
+#: cdi_forms/models.py:157
 msgid "10 or more (Tenth or Later)"
 msgstr "10以上（第10番目以上）"
 
-#: cdi_forms/models.py:176
+#: cdi_forms/models.py:162
 msgid "Birth order"
 msgstr "お子さまは第何子ですか？"
 
-#: cdi_forms/models.py:184
+#: cdi_forms/models.py:170
 msgid "Twins"
 msgstr "双子"
 
-#: cdi_forms/models.py:185
+#: cdi_forms/models.py:171
 msgid "Triplets"
 msgstr "三つ子"
 
-#: cdi_forms/models.py:186
+#: cdi_forms/models.py:172
 msgid "Quadruplets"
 msgstr "四つ子"
 
-#: cdi_forms/models.py:187
+#: cdi_forms/models.py:173
 msgid "Quintuplets or greater"
 msgstr "五つ子以上"
 
-#: cdi_forms/models.py:196
+#: cdi_forms/models.py:182
 msgid "Twins, triplets, quadruplets, other?"
 msgstr "双子、三つ子、四つ子、その他のいずれに当てはまりますか？"
 
-#: cdi_forms/models.py:210
+#: cdi_forms/models.py:196
 msgid "Was your child born earlier or later than their due date?"
 msgstr "お子さまは予定日より早く生まれましたか、それとも遅く生まれましたか？"
 
-#: cdi_forms/models.py:222
+#: cdi_forms/models.py:208
 msgid "By how many weeks? (round to the nearest week)"
-msgstr "予定日から何週間ほど早かった／遅かったかを教えてください (最も近い週数で四捨五入してください)"
+msgstr ""
+"予定日から何週間ほど早かった／遅かったかを教えてください (最も近い週数で四捨"
+"五入してください)"
 
-#: cdi_forms/models.py:225
+#: cdi_forms/models.py:211
 msgid "Number of weeks cannot be less than 1"
 msgstr "1週より少ない週数を記入することはできません"
 
-#: cdi_forms/models.py:239 cdi_forms/models.py:459
+#: cdi_forms/models.py:225 cdi_forms/models.py:445
 msgid "Mother"
 msgstr "母親"
 
-#: cdi_forms/models.py:240 cdi_forms/models.py:460
+#: cdi_forms/models.py:226 cdi_forms/models.py:446
 msgid "Father"
 msgstr "父親"
 
-#: cdi_forms/models.py:241 cdi_forms/models.py:462
+#: cdi_forms/models.py:227 cdi_forms/models.py:448
 msgid "Grandparent(s)"
 msgstr "祖父母"
 
-#: cdi_forms/models.py:246
+#: cdi_forms/models.py:232
 msgid "Primary Caregiver"
 msgstr "お子さま主に養育している方 (＝主たる養育者) はどなたですか？"
 
-#: cdi_forms/models.py:254 cdi_forms/models.py:270
+#: cdi_forms/models.py:240 cdi_forms/models.py:256
 msgid "Primary Caregiver Year of birth"
 msgstr "主たる養育者の出生年 (西暦)"
 
-#: cdi_forms/models.py:260
+#: cdi_forms/models.py:246
 msgid "Primary Caregiver Education"
 msgstr "主たる養育者の最終学歴について教えてください。"
 
-#: cdi_forms/models.py:262 cdi_forms/models.py:301
+#: cdi_forms/models.py:248 cdi_forms/models.py:287
 msgid ""
 "Choose highest grade completed (12 = high school graduate; 16 = college "
 "graduate; 18 = advanced degree)"
 msgstr "最高学歴を選択"
 
-#: cdi_forms/models.py:283
+#: cdi_forms/models.py:269
 msgid "Secondary Caregiver"
 msgstr "第二の養育者 (主たる養育者が「母親」の場合は「父親」など)　（任意）"
 
-#: cdi_forms/models.py:291
+#: cdi_forms/models.py:277
 msgid "Secondary Caregiver Year of birth"
 msgstr "第二の養育者の出生年 (西暦)"
 
-#: cdi_forms/models.py:297
+#: cdi_forms/models.py:283
 msgid "Secondary Caregiver Education"
 msgstr "第二の養育者の最終学歴について教えてください。"
 
-#: cdi_forms/models.py:325
+#: cdi_forms/models.py:311
 msgid "Two parents"
 msgstr "父母の2人"
 
-#: cdi_forms/models.py:326
+#: cdi_forms/models.py:312
 msgid "One parent"
 msgstr "父母のどちらか1人"
 
-#: cdi_forms/models.py:327
+#: cdi_forms/models.py:313
 msgid "One or both parents and other caregiver(s) (e.g., grandparent)"
 msgstr "父母のどちらか1人または両方と他の養育者1人（祖父母など）"
 
-#: cdi_forms/models.py:328
+#: cdi_forms/models.py:314
 msgid "Other caregivers (e.g., grandparent or grandparents)"
 msgstr "他の養育者（祖父母や祖父母など）"
 
-#: cdi_forms/models.py:333
+#: cdi_forms/models.py:319
 msgid "Who does your child live with?"
 msgstr "お子さまは誰と一緒に生活していますか？"
 
-#: cdi_forms/models.py:347
+#: cdi_forms/models.py:333
 msgid "From whom?"
 msgstr "その言語にふれるのは誰とやりとりするときですか？"
 
-#: cdi_forms/models.py:353
+#: cdi_forms/models.py:339
 msgid "How many days per week is the child exposed to these languages?"
 msgstr "お子さまは週に何日くらいその言語にふれていますか？"
 
-#: cdi_forms/models.py:356
+#: cdi_forms/models.py:342
 msgid "Number of days per week cannot exceed 7"
 msgstr "日数として7を超える数字を記入することはできません"
 
-#: cdi_forms/models.py:357
+#: cdi_forms/models.py:343
 msgid "Number of days per week cannot be less than 1"
 msgstr "日数として1よりも小さい数字を記入することはできません"
 
-#: cdi_forms/models.py:364
+#: cdi_forms/models.py:350
 msgid "How many hours per day is the child exposed to these languages?"
 msgstr "お子さまは1日に何時間くらいその言語にふれていますか？"
 
-#: cdi_forms/models.py:367
+#: cdi_forms/models.py:353
 msgid "Number of hours per day cannot exceed 24"
 msgstr "時間数として24を超える数字を記入することはできません"
 
-#: cdi_forms/models.py:368
+#: cdi_forms/models.py:354
 msgid "Number of hours per day cannot be less than 1"
 msgstr "時間数として1よりも小さい数字を記入することはできません"
 
-#: cdi_forms/models.py:374
+#: cdi_forms/models.py:360
 msgid "Has your child experienced chronic ear infections (5 or more)? "
 msgstr "お子さまは慢性的な耳の感染症に5回以上かかったことがありますか？"
 
-#: cdi_forms/models.py:384
+#: cdi_forms/models.py:370
 msgid "Has your child undergone interventions (e.g., tubes)?  Please describe"
-msgstr "お子さまは鼓膜チューブなどの大きな治療を受けたことがありますか？可能な範囲で構いませんので、"
-"詳しく教えてください。"
+msgstr ""
+"お子さまは鼓膜チューブなどの大きな治療を受けたことがありますか？可能な範囲で"
+"構いませんので、詳しく教えてください。"
 
-#: cdi_forms/models.py:394 cdi_forms/models.py:405 cdi_forms/models.py:416
-#: cdi_forms/models.py:441
+#: cdi_forms/models.py:380 cdi_forms/models.py:391 cdi_forms/models.py:402
+#: cdi_forms/models.py:427
 msgid "Please describe"
 msgstr "可能な範囲で構いませんので、詳しく教えてください。"
 
-#: cdi_forms/models.py:430
+#: cdi_forms/models.py:416
 msgctxt "daycare"
 msgid "Please describe"
 msgstr "可能な範囲で構いませんので、詳しく教えてください"
 
-#: cdi_forms/models.py:455
+#: cdi_forms/models.py:441
 msgid "Indicate which family member and provide a description"
-msgstr "診断を受けた方はどなたですか。可能な範囲で教えてください。(任意項目です。差し支えなければご回答ください)"
+msgstr ""
+"診断を受けた方はどなたですか。可能な範囲で教えてください。(任意項目です。差し"
+"支えなければご回答ください)"
 
-#: cdi_forms/models.py:461
+#: cdi_forms/models.py:447
 msgid "Both caregivers"
 msgstr "両親どちらも"
 
-#: cdi_forms/models.py:466
+#: cdi_forms/models.py:452
 msgid "Who is filling in the form?"
 msgstr "誰がこのフォームに記入していますか？"
 
-#: cdi_forms/models.py:589
+#: cdi_forms/models.py:575
 msgid "Place of residence (neighnorhood/district)"
 msgstr "居住地（近隣／地区）"
 
-#: cdi_forms/models.py:595
+#: cdi_forms/models.py:581
 msgid "Primary caregiver occupation"
 msgstr "主たる養育者の職業"
 
-#: cdi_forms/models.py:601
+#: cdi_forms/models.py:587
 msgid "Primary caregiver occupation description"
 msgstr "主たる養育者の職業の説明"
 
-#: cdi_forms/models.py:607
+#: cdi_forms/models.py:593
 msgid "Secondary caregiver occupation"
 msgstr "第二の養育者の職業"
 
-#: cdi_forms/models.py:613
+#: cdi_forms/models.py:599
 msgid "Secondary caregiver occupation description"
 msgstr "第二の養育者の職業の説明"
 
-#: cdi_forms/models.py:620
+#: cdi_forms/models.py:606
 msgid "Less than 6 months"
 msgstr "6ヶ月未満"
 
-#: cdi_forms/models.py:621
+#: cdi_forms/models.py:607
 msgid "Between 6 and 12 months"
 msgstr "6ヶ月以上12ヶ月未満"
 
-#: cdi_forms/models.py:622
+#: cdi_forms/models.py:608
 msgid "More than 12 months"
 msgstr "12ヶ月以上"
 
-#: cdi_forms/models.py:629
+#: cdi_forms/models.py:615
 msgid "Since when"
 msgstr "いつから"
 
-#: cdi_forms/models.py:632
+#: cdi_forms/models.py:618
 msgid "Hours per day"
 msgstr "1日あたりの時間数"
 
-#: cdi_forms/models.py:635
+#: cdi_forms/models.py:621
 msgid "Days per week"
 msgstr "週あたりの日数"
 
-#: cdi_forms/models.py:641
+#: cdi_forms/models.py:627
 msgid "Don't know"
 msgstr "わからない"
 
-#: cdi_forms/models.py:646
+#: cdi_forms/models.py:632
 msgid ""
 "Has your child been diagnosed with any troubles, for example, hearing, "
 "vision, speech, learning difficulty"
-msgstr "お子さまは、聴覚、視覚、言語、学習障害など、何か異常が診断されていますか？"
+msgstr ""
+"お子さまは、聴覚、視覚、言語、学習障害など、何か異常が診断されていますか？"
 
 #: cdi_forms/templates/cdi_forms/_captcha_page.html:7
 #: cdi_forms/templates/cdi_forms/cdi_form.html:285
@@ -1493,7 +1515,10 @@ msgid ""
 "You are almost done! Click \"Yes\" if you agree with ALL of the following "
 "points. Your answer will not affect your results. There is nothing wrong "
 "with choosing \"No\":"
-msgstr "もう少しで回答が完了します！以下のすべての項目に同意される場合は、「はい」をクリックしてください。「いいえ」を選んでも問題はありません。あなたの答えが結果に影響することはありません。"
+msgstr ""
+"もう少しで回答が完了します！以下のすべての項目に同意される場合は、「はい」を"
+"クリックしてください。「いいえ」を選んでも問題はありません。あなたの答えが結"
+"果に影響することはありません。"
 
 #: cdi_forms/templates/cdi_forms/_captcha_page.html:11
 #: cdi_forms/templates/cdi_forms/cdi_form.html:289
@@ -1517,7 +1542,9 @@ msgstr "このアンケートに【初めて】回答します"
 msgid ""
 "Yes, I have a child who is %(age)s months old, I filled out the entire "
 "questionnaire, and I am taking this questionnaire for the first time."
-msgstr "はい、私には生後%(age)sヶ月の子どもがいます。このアンケートに回答するのは初めてであり、すべての質問項目に回答しました。"
+msgstr ""
+"はい、私には生後%(age)sヶ月の子どもがいます。このアンケートに回答するのは初め"
+"てであり、すべての質問項目に回答しました。"
 
 #: cdi_forms/templates/cdi_forms/_captcha_page.html:28
 #: cdi_forms/templates/cdi_forms/cdi_form.html:306
@@ -1525,13 +1552,17 @@ msgstr "はい、私には生後%(age)sヶ月の子どもがいます。この�
 msgid ""
 "No, I do NOT have a child who is %(age)s months old, I have NOT filled out "
 "the entire questionnaire, and/or I have taken this questionnaire before."
-msgstr "いいえ、私には生後%(age)sヶ月の子どもはいません。以前にもこのアンケートに回答したことがあるか、あるいは未回答の質問項目があります。"
+msgstr ""
+"いいえ、私には生後%(age)sヶ月の子どもはいません。以前にもこのアンケートに回答"
+"したことがあるか、あるいは未回答の質問項目があります。"
 
 #: cdi_forms/templates/cdi_forms/_captcha_page.html:34
 #: cdi_forms/templates/cdi_forms/cdi_form.html:312
 msgid ""
 "Finally, please check the Captcha box below to display the submit button!"
-msgstr "最後に、送信ボタンを表示するために、下のCaptchaボックスにチェックを入れてください！"
+msgstr ""
+"最後に、送信ボタンを表示するために、下のCaptchaボックスにチェックを入れてくだ"
+"さい！"
 
 #: cdi_forms/templates/cdi_forms/_navigation_buttons.html:7
 #: cdi_forms/templates/cdi_forms/cdi_form.html:321
@@ -1548,8 +1579,8 @@ msgstr "次のページ"
 #: cdi_forms/templates/cdi_forms/administration_form.html:11
 #: cdi_forms/templates/cdi_forms/cdi_form.html:10
 #: cdi_forms/templates/cdi_forms/cdi_form.html:327
-#: cdi_forms/templates/cdi_forms/study_group.html:6
-#: cdi_forms/views/views.py:101 researcher_UI/forms.py:338
+#: cdi_forms/templates/cdi_forms/study_group.html:6 cdi_forms/views/views.py:97
+#: researcher_UI/forms.py:344
 msgid "Save"
 msgstr "一時保存する"
 
@@ -1560,7 +1591,7 @@ msgstr "一時保存する"
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:32
 #: cdi_forms/templates/cdi_forms/cdi_form.html:14
 #: cdi_forms/templates/cdi_forms/cdi_form.html:328
-#: cdi_forms/views/background_info_views.py:349 cdi_forms/views/views.py:126
+#: cdi_forms/views/background_info_views.py:346 cdi_forms/views/views.py:122
 msgid "Go back to Background Info"
 msgstr "背景情報の記入に戻る"
 
@@ -1584,7 +1615,9 @@ msgstr "このアンケートは期日前であればいつでも記入できま
 #: cdi_forms/templates/cdi_forms/cdi_base.html:75
 msgid ""
 "It can also be saved at any time and resumed later by using the same link"
-msgstr "また、このアンケートを保存し、同じリンクを使用してご都合の良い時に再開することができます。"
+msgstr ""
+"また、このアンケートを保存し、同じリンクを使用してご都合の良い時に再開するこ"
+"とができます。"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:76
 #: cdi_forms/templates/cdi_forms/cdi_base.html:75
@@ -1606,14 +1639,17 @@ msgstr "また、回答期限後に内容を修正することもできません
 msgid ""
 "Please use the navigation buttons below. Do not use the \"back\" and "
 "\"forward\" buttons on your browser."
-msgstr "下のナビゲーションボタンをご利用ください。ブラウザの「戻る」「進む」ボタンは使用しないでください。"
+msgstr ""
+"下のナビゲーションボタンをご利用ください。ブラウザの「戻る」「進む」ボタンは"
+"使用しないでください。"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:80
 #: cdi_forms/templates/cdi_forms/cdi_base.html:79
 msgid ""
 "You can use the tab button and arrows keys to quickly navigate and answer "
 "questions."
-msgstr "Tabキーと矢印キーを使うことで、質問間を素早く移動し、回答することができます。"
+msgstr ""
+"Tabキーと矢印キーを使うことで、質問間を素早く移動し、回答することができます。"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:102
 #: cdi_forms/templates/cdi_forms/cdi_base.html:100
@@ -1660,7 +1696,9 @@ msgstr "否認"
 msgid ""
 "Thank you for your response. We are unable to continue. Please close the "
 "window. If you would like, you may review the Waiver."
-msgstr "ご回答ありがとうございます。続行できません。ウィンドウを閉じてください。よろしければ、放棄を再度ご確認することができます。"
+msgstr ""
+"ご回答ありがとうございます。続行できません。ウィンドウを閉じてください。よろ"
+"しければ、放棄を再度ご確認することができます。"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:181
 #: cdi_forms/templates/cdi_forms/cdi_base.html:174
@@ -1676,7 +1714,9 @@ msgstr "お問い合わせフォーム"
 #: cdi_forms/templates/cdi_forms/contact.html:33
 msgid ""
 "Fill out the form below and a member of our team will get back to you soon!"
-msgstr "下記のフォームに必要事項をご記入ください。担当者からご連絡させていただきます。"
+msgstr ""
+"下記のフォームに必要事項をご記入ください。担当者からご連絡させていただきま"
+"す。"
 
 #: cdi_forms/templates/cdi_forms/administration_contact.html:67
 #: cdi_forms/templates/cdi_forms/contact.html:67
@@ -1702,7 +1742,9 @@ msgstr "MB-CDIラボのロゴ"
 msgid ""
 "Unfortunately the time allowed to complete this survey has expired.  Please "
 "contact your researcher."
-msgstr "恐れ入りますが、このアンケートの回答期限は切れています。調査担当の研究者までご連絡ください"
+msgstr ""
+"恐れ入りますが、このアンケートの回答期限は切れています。調査担当の研究者まで"
+"ご連絡ください"
 
 #: cdi_forms/templates/cdi_forms/administration_form.html:37
 #: cdi_forms/templates/cdi_forms/cdi_items.html:18
@@ -1713,7 +1755,9 @@ msgstr "指示を隠す/表示する"
 msgid ""
 "Thank you for completing!  Please review your responses and if you are "
 "ready, click submit!"
-msgstr "ご回答ありがとうございました。回答を確認し、準備ができましたら、送信ボタンをクリックしてください！"
+msgstr ""
+"ご回答ありがとうございました。回答を確認し、準備ができましたら、送信ボタンを"
+"クリックしてください！"
 
 #: cdi_forms/templates/cdi_forms/administration_form.html:265
 #: cdi_forms/templates/cdi_forms/cdi_form.html:381
@@ -1733,7 +1777,11 @@ msgid ""
 "your child \"understands\" and \"understands and says.\"  This assessment is "
 "for children of many ages. Your child may not be able to understand or say a "
 "lot of the words on the form. That is perfectly fine!"
-msgstr "このセクションでは、お子さまが「理解している」または「理解し、かつ言うことのできる」単語またはフレーズについてお尋ねします。この質問フォームは幅広い月齢を対象に行っていますので、リスト内の単語で理解したり言えたりするものが非常に少ない場合がああるかもしれませんが、心配しないでください。"
+msgstr ""
+"このセクションでは、お子さまが「理解している」または「理解し、かつ言うことの"
+"できる」単語またはフレーズについてお尋ねします。この質問フォームは幅広い月齢"
+"を対象に行っていますので、リスト内の単語で理解したり言えたりするものが非常に"
+"少ない場合がああるかもしれませんが、心配しないでください。"
 
 #: cdi_forms/templates/cdi_forms/administration_instructions.html:33
 #: cdi_forms/templates/cdi_forms/cdi_form.html:63
@@ -1741,7 +1789,10 @@ msgid ""
 "Your child \"understands\" a word/phrase if they know what the word/phrase "
 "means, even though they may not be able to say it themselves. Here are some "
 "examples."
-msgstr "単語やフレーズの意味をお子さまが分かってさえいれば、お子さん自身がその単語を言えなくても、お子さまはその単語を「理解している」ということになります。以下に例を示します。"
+msgstr ""
+"単語やフレーズの意味をお子さまが分かってさえいれば、お子さん自身がその単語を"
+"言えなくても、お子さまはその単語を「理解している」ということになります。以下"
+"に例を示します。"
 
 #: cdi_forms/templates/cdi_forms/administration_instructions.html:46
 #: cdi_forms/templates/cdi_forms/cdi_form.html:77
@@ -1753,7 +1804,9 @@ msgstr "「理解している」にチェックを付ける場合："
 msgid ""
 "Your child responds appropriately to the word/phrase. For example, when you "
 "say \"Get the ball,\" s/he turns and tries to find the ball."
-msgstr "お子さまが単語やフレーズに適切に応答する場合。たとえば、「ボールを取ってきて」と聞いたときに、周囲を見渡してボールを探そうとする場合など。"
+msgstr ""
+"お子さまが単語やフレーズに適切に応答する場合。たとえば、「ボールを取ってき"
+"て」と聞いたときに、周囲を見渡してボールを探そうとする場合など。"
 
 #: cdi_forms/templates/cdi_forms/administration_instructions.html:63
 #: cdi_forms/templates/cdi_forms/cdi_form.html:94
@@ -1765,7 +1818,9 @@ msgstr "「理解している」にチェックを付けない場合："
 msgid ""
 "Your child doesn't have a meaning for the word/phrase.  S/he may have heard "
 "it before, like in a story, but you don't think s/he knows what it means."
-msgstr "お子さまが単語やフレーズの意味を分かっていない場合。以前に聞いたことがあったとしても、その意味を理解していないと思われる場合。"
+msgstr ""
+"お子さまが単語やフレーズの意味を分かっていない場合。以前に聞いたことがあった"
+"としても、その意味を理解していないと思われる場合。"
 
 #: cdi_forms/templates/cdi_forms/administration_instructions.html:73
 #: cdi_forms/templates/cdi_forms/cdi_form.html:106
@@ -1773,7 +1828,10 @@ msgid ""
 "Your child \"understands and says\" a word/phrase if they know what the word/"
 "phrase means AND they are able to say it by themselves. Here are some "
 "examples."
-msgstr "単語またはフレーズの意味をお子さまが分かっていて、かつ自分でその単語を言う場合にのみ、お子さまはその単語またはフレーズを「理解し、言える」ということになります。以下に例を示します。"
+msgstr ""
+"単語またはフレーズの意味をお子さまが分かっていて、かつ自分でその単語を言う場"
+"合にのみ、お子さまはその単語またはフレーズを「理解し、言える」ということにな"
+"ります。以下に例を示します。"
 
 #: cdi_forms/templates/cdi_forms/administration_instructions.html:83
 #: cdi_forms/templates/cdi_forms/cdi_form.html:118
@@ -1785,14 +1843,19 @@ msgstr "「理解し、言える」にチェックを付ける場合："
 msgid ""
 "Your child says a word/phrase when trying to name an object or describe "
 "something that happened.  You think s/he has a meaning for that word/phrase."
-msgstr "お子さまが事物の名前を言ったり、起こった出来事について話したりしようとして単語やフレーズを言う場合。お子さまがその単語やフレーズの意味を知っていると感じられる場合。"
+msgstr ""
+"お子さまが事物の名前を言ったり、起こった出来事について話したりしようとして単"
+"語やフレーズを言う場合。お子さまがその単語やフレーズの意味を知っていると感じ"
+"られる場合。"
 
 #: cdi_forms/templates/cdi_forms/administration_instructions.html:100
 #: cdi_forms/templates/cdi_forms/cdi_form.html:137
 msgid ""
 "It's fine if your child can't say the whole word or says it his/her own "
 "\"special\" way."
-msgstr "お子さまがその単語を完璧に発音できなくても構いません。お子さまなりの独自の言い方で言う場合もチェックをつけてください (例：「スプーン」を「プン」と言う)。"
+msgstr ""
+"お子さまがその単語を完璧に発音できなくても構いません。お子さまなりの独自の言"
+"い方で言う場合もチェックをつけてください (例：「スプーン」を「プン」と言う)。"
 
 #: cdi_forms/templates/cdi_forms/administration_instructions.html:102
 #: cdi_forms/templates/cdi_forms/cdi_form.html:139
@@ -1804,7 +1867,10 @@ msgstr "「理解し、言える」にチェックを付けてください。"
 msgid ""
 "DON'T check if your child is just stringing sounds together.  This is not a "
 "real word that means something."
-msgstr "お子さまがただ音をつなぎ合わせているだけで、その音に意味が伴わない場合 (例：「バババババ」と音を繰り返して音遊びをしている場合)、チェックを付けないでください。"
+msgstr ""
+"お子さまがただ音をつなぎ合わせているだけで、その音に意味が伴わない場合 (例："
+"「バババババ」と音を繰り返して音遊びをしている場合)、チェックを付けないでくだ"
+"さい。"
 
 #: cdi_forms/templates/cdi_forms/administration_instructions.html:119
 #: cdi_forms/templates/cdi_forms/administration_instructions.html:136
@@ -1820,8 +1886,10 @@ msgstr "「理解し、言える」にチェックを付けない場合："
 #: cdi_forms/templates/cdi_forms/cdi_form.html:261
 msgid ""
 "DON'T ask your child to repeat the words on the list. This doesn't count!"
-msgstr "リスト内の単語をお子さんに繰り返して言うように要求しないでください "
-"(例：「ブーブーって言ってごらん？」と要求する)。そのような場合はチェックしないでください。"
+msgstr ""
+"リスト内の単語をお子さんに繰り返して言うように要求しないでください (例："
+"「ブーブーって言ってごらん？」と要求する)。そのような場合はチェックしないでく"
+"ださい。"
 
 #: cdi_forms/templates/cdi_forms/administration_instructions.html:144
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:46
@@ -1833,11 +1901,13 @@ msgid ""
 "examples. This assessment is for children of many ages. Your child may not "
 "be able to understand or say a lot of the words on the form. That is "
 "perfectly fine!"
-msgstr "このセクションでは、お子さまが「理解し、かつ言うことのできる」単語についてお尋ねします。"
-"リストにある単語の意味をお子さんが分かっていて、かつ自分でその単語を言う場合にのみ、お子さまはその単語を"
-"「理解し、言える」ということになります。"
-"以下に例を示します。この質問フォームは幅広い月齢を対象に行っていますので、"
-"リスト内の単語で理解したり言えたりするものが非常に少ない場合がああるかもしれませんが、心配しないでください。"
+msgstr ""
+"このセクションでは、お子さまが「理解し、かつ言うことのできる」単語についてお"
+"尋ねします。リストにある単語の意味をお子さんが分かっていて、かつ自分でその単"
+"語を言う場合にのみ、お子さまはその単語を「理解し、言える」ということになりま"
+"す。以下に例を示します。この質問フォームは幅広い月齢を対象に行っていますの"
+"で、リスト内の単語で理解したり言えたりするものが非常に少ない場合がああるかも"
+"しれませんが、心配しないでください。"
 
 #: cdi_forms/templates/cdi_forms/administration_instructions.html:157
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:59
@@ -1851,8 +1921,9 @@ msgstr "チェックを付ける場合："
 msgid ""
 "Your child says the word when trying to name an object or describe something "
 "that happened.  You think s/he has a meaning for that word."
-msgstr "お子さまが事物の名前を言ったり、起こった出来事について話したりしようとして単語を言う場合。"
-"お子さまがその単語の意味を知っていると感じられる場合。"
+msgstr ""
+"お子さまが事物の名前を言ったり、起こった出来事について話したりしようとして単"
+"語を言う場合。お子さまがその単語の意味を知っていると感じられる場合。"
 
 #: cdi_forms/templates/cdi_forms/administration_instructions.html:175
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:80
@@ -1861,13 +1932,13 @@ msgid ""
 "It's fine if your child can't say the whole word or says it his/her own "
 "\"special\" way. If you use another word in your family (e.g., Nana for "
 "Grandma), that is ok too!"
-msgstr "お子さまがその単語を完璧に発音できなくても構いません。"
-"お子さんなりの独自の言い方で言う場合もチェックをつけてください "
-"(例：「スプーン」を「プン」と言う)。また、家庭内で独自に使う単語がある場合も、"
-"リストの単語と意味が同じであればチェックを付けてください (例："
-"「おばあちゃん」の代わりに「ばあば」と言う)。"
-"丁寧表現の「お」があってもなくても同じ単語だと見なしてください "
-"(例：「うま」を「おうま」と言う、「おやさい」を「やさい」と言う)。"
+msgstr ""
+"お子さまがその単語を完璧に発音できなくても構いません。お子さんなりの独自の言"
+"い方で言う場合もチェックをつけてください (例：「スプーン」を「プン」と言う)。"
+"また、家庭内で独自に使う単語がある場合も、リストの単語と意味が同じであれば"
+"チェックを付けてください (例：「おばあちゃん」の代わりに「ばあば」と言う)。丁"
+"寧表現の「お」があってもなくても同じ単語だと見なしてください (例：「うま」を"
+"「おうま」と言う、「おやさい」を「やさい」と言う)。"
 
 #: cdi_forms/templates/cdi_forms/administration_instructions.html:177
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:82
@@ -1881,9 +1952,9 @@ msgstr "チェックを付けてください。"
 msgid ""
 "DON'T check the box if your child is just stringing sounds together. This is "
 "not a real word that means something."
-msgstr "チェックを付けない場合："
-"お子さまがただ音をつなぎ合わせているだけで、"
-"その音に意味が伴わない場合 (例：「バババババ」と音を繰り返して音遊びをしている場合)。"
+msgstr ""
+"チェックを付けない場合：お子さまがただ音をつなぎ合わせているだけで、その音に"
+"意味が伴わない場合 (例：「バババババ」と音を繰り返して音遊びをしている場合)。"
 
 #: cdi_forms/templates/cdi_forms/administration_summary.html:39
 #: cdi_forms/templates/cdi_forms/background_info.html:18
@@ -1935,7 +2006,18 @@ msgid ""
 "with your child’s physician. If you enjoyed our assessment, you can learn "
 "more about the CDI <a href=\"http://mb-cdi.stanford.edu/\" "
 "target=\"_blank\">here</a>. We appreciate your contribution!"
-msgstr "マッカーサーコミュニケーション発達質問紙 (CDI) にご協力いただき、ありがとうございました。養育者の方々のご協力のお蔭で、私たち研究者は子どもたちの言葉の発達や、言葉の発達が子どもや文化によってどのように異なるかについて、より深く知るための研究を進めることができます。CDIには、さまざまな子どもたちが使うさまざまな単語が反映されています。あなたのお子さまが知っている単語が少なくても心配はいりません。以下、私たちの研究にもとづいて、お子さまの語彙の発達に関する情報をお知らせします。こちらは臨床的な評価ではありません。お子さまの発達について何かご心配があれば、かかりつけの医師にご相談されることをお勧めします。このアンケートをお楽しみいただけたなら、CDIについて<a href=""http://mb-cdi.stanford.edu/"" target=""_blank"">こちら</a>でもっと詳しく知ることができます。みなさまのご協力に心から感謝いたします。"
+msgstr ""
+"マッカーサーコミュニケーション発達質問紙 (CDI) にご協力いただき、ありがとうご"
+"ざいました。養育者の方々のご協力のお蔭で、私たち研究者は子どもたちの言葉の発"
+"達や、言葉の発達が子どもや文化によってどのように異なるかについて、より深く知"
+"るための研究を進めることができます。CDIには、さまざまな子どもたちが使うさまざ"
+"まな単語が反映されています。あなたのお子さまが知っている単語が少なくても心配"
+"はいりません。以下、私たちの研究にもとづいて、お子さまの語彙の発達に関する情"
+"報をお知らせします。こちらは臨床的な評価ではありません。お子さまの発達につい"
+"て何かご心配があれば、かかりつけの医師にご相談されることをお勧めします。この"
+"アンケートをお楽しみいただけたなら、CDIについて<a href=http://mb-cdi."
+"stanford.edu/ target=_blank>こちら</a>でもっと詳しく知ることができます。みな"
+"さまのご協力に心から感謝いたします。"
 
 #: cdi_forms/templates/cdi_forms/administration_summary.html:178
 #, python-format
@@ -2040,7 +2122,8 @@ msgstr "お子さまはbestProdCatカテゴリーで最も多くの単語を言�
 
 #: cdi_forms/templates/cdi_forms/administration_summary.html:512
 msgid "My child understands the most words in the bestCompCat category."
-msgstr "お子さまはbestCompCatカテゴリーで最も多くの単語を理解することができます。"
+msgstr ""
+"お子さまはbestCompCatカテゴリーで最も多くの単語を理解することができます。"
 
 #: cdi_forms/templates/cdi_forms/administration_summary.html:598
 msgid "The hardest word my child says is INSERTWORDHERE."
@@ -2054,7 +2137,7 @@ msgstr "お子さまが理解している最も難しい単語はINSERTWORDHERE�
 #: cdi_forms/templates/cdi_forms/background_info.html:72
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:124
 #: cdi_forms/templates/cdi_forms/study_group.html:7
-#: cdi_forms/views/background_info_views.py:326
+#: cdi_forms/views/background_info_views.py:323
 msgid "Next"
 msgstr "次へ"
 
@@ -2078,34 +2161,43 @@ msgstr "このフォームでは、お子さまが日本語で「言う」単語
 msgid ""
 "Try to complete the survey when you have a few quiet minutes, without "
 "interruptions. An example might be when your child is sleeping."
-msgstr "お子さまが寝ているときなど、できるだけ静かな時間に中断することなくご回答ください。"
+msgstr ""
+"お子さまが寝ているときなど、できるだけ静かな時間に中断することなくご回答くだ"
+"さい。"
 
 #: cdi_forms/templates/cdi_forms/background_info.html:28
 msgid ""
 "Don’t worry! Your child does not need to pronounce the words exactly as you "
 "do (e.g., “raff” instead of “giraffe”).  And there might be some words in "
 "your family that you use instead (e.g., “nana” for “grandma”)."
-msgstr "お子さまが大人と同じように発音していなくても構いません (例：「さかな」を「たかな」と言う)。"
+msgstr ""
+"お子さまが大人と同じように発音していなくても構いません (例：「さかな」を「た"
+"かな」と言う)。"
 
 #: cdi_forms/templates/cdi_forms/background_info.html:29
 msgid ""
 "Remember, these words are just some of the words that a child might say, so "
 "it is ok if they do not say all of them!"
-msgstr "フォームの単語リストは、お子さまが言う可能性のある単語の一部であり、"
-"もしすべて言わなかったとしても心配しないでください。"
+msgstr ""
+"フォームの単語リストは、お子さまが言う可能性のある単語の一部であり、もしすべ"
+"て言わなかったとしても心配しないでください。"
 
 #: cdi_forms/templates/cdi_forms/background_info.html:32
 #: cdi_forms/templates/cdi_forms/study_group.html:22
 msgid ""
 "Try to complete the inventory when you have at least 30 quiet minutes, "
 "without interruptions. An example might be when your child is sleeping."
-msgstr "お子さまが寝ているときなど、できるだけ静かで回答を中断せずに済む環境を30分以上確保できるときに、こちらのアンケートに回答してください。"
+msgstr ""
+"お子さまが寝ているときなど、できるだけ静かで回答を中断せずに済む環境を30分以"
+"上確保できるときに、こちらのアンケートに回答してください。"
 
 #: cdi_forms/templates/cdi_forms/background_info.html:34
 msgid ""
 "Try to complete the inventory when you have at least 10-15 quiet minutes, "
 "without interruptions. An example might be when your child is sleeping."
-msgstr "お子さまが寝ているときなど、できるだけ静かで回答を中断せずに済む環境を10～15分確保できるときに、こちらのアンケートに回答してください。"
+msgstr ""
+"お子さまが寝ているときなど、できるだけ静かで回答を中断せずに済む環境を10～15"
+"分確保できるときに、こちらのアンケートに回答してください。"
 
 #: cdi_forms/templates/cdi_forms/background_info.html:36
 #: cdi_forms/templates/cdi_forms/study_group.html:23
@@ -2113,26 +2205,34 @@ msgid ""
 "You do not have to complete the inventory in one sitting. If you are "
 "interrupted, it is ok to put it down and come back to it when you have more "
 "time."
-msgstr "こちらのアンケートは、一度にすべて回答する必要はありません。いちど中断していただき、お時間のあるときにまた戻っていただいて構いません。"
+msgstr ""
+"こちらのアンケートは、一度にすべて回答する必要はありません。いちど中断してい"
+"ただき、お時間のあるときにまた戻っていただいて構いません。"
 
 #: cdi_forms/templates/cdi_forms/background_info.html:37
 #: cdi_forms/templates/cdi_forms/study_group.html:24
 msgid ""
 "Feel free to ask others (e.g. other family members, nanny, child care "
 "providers) to help you fill out this form."
-msgstr "こちらのアンケートへの回答に際して、ほかの方 (ご家族やベビーシッター、園の先生など) にご相談いただいても問題ありません。"
+msgstr ""
+"こちらのアンケートへの回答に際して、ほかの方 (ご家族やベビーシッター、園の先"
+"生など) にご相談いただいても問題ありません。"
 
 #: cdi_forms/templates/cdi_forms/background_info.html:38
 #: cdi_forms/templates/cdi_forms/study_group.html:25
 msgid ""
 "Please read all of the instructions on the inventory carefully, and make "
 "sure you complete all of the sections."
-msgstr "インストラクションの全項目をよくお読みいただき、すべてのセクションに確実にご回答ください。"
+msgstr ""
+"インストラクションの全項目をよくお読みいただき、すべてのセクションに確実にご"
+"回答ください。"
 
 #: cdi_forms/templates/cdi_forms/background_info.html:55
 #: cdi_forms/templates/cdi_forms/study_group.html:29
 msgid "For more information about the MB-CDI,"
-msgstr "MB-CDI (MacArthur-Bates Communicative Development Inventories) に関する詳細は、こちらをクリックしてください。（説明は英語のみになります）"
+msgstr ""
+"MB-CDI (MacArthur-Bates Communicative Development Inventories) に関する詳細"
+"は、こちらをクリックしてください。（説明は英語のみになります）"
 
 #: cdi_forms/templates/cdi_forms/background_info.html:55
 #: cdi_forms/templates/cdi_forms/study_group.html:29
@@ -2150,7 +2250,7 @@ msgstr "背景情報"
 
 #: cdi_forms/templates/cdi_forms/backpage_info.html:12
 #: cdi_forms/templates/cdi_forms/backpage_info.html:45
-#: cdi_forms/views/background_info_views.py:337
+#: cdi_forms/views/background_info_views.py:334
 msgid "Finish"
 msgstr "終了する"
 
@@ -2167,7 +2267,9 @@ msgstr "調査完了"
 msgid ""
 "Thank you for filling this out! Of the words we asked, the hardest word your "
 "child knows is \"%(hardest)s\" and the easiest word is \"%(easiest)s\"."
-msgstr "ご記入ありがとうございました。今回お聞きした単語のうち、お子さまが知っている最も難しい単語は「%(hardest)s」、最も簡単な単語は「%(easiest)s」でした。"
+msgstr ""
+"ご記入ありがとうございました。今回お聞きした単語のうち、お子さまが知っている"
+"最も難しい単語は「%(hardest)s」、最も簡単な単語は「%(easiest)s」でした。"
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:45
 msgid ""
@@ -2181,7 +2283,18 @@ msgid ""
 "recommend that you talk with your child’s physician. If you enjoyed our "
 "assessment, you can learn more about the CDI <a href=\"http://mb-cdi."
 "stanford.edu/\" target=\"_blank\">here</a>. We appreciate your contribution!"
-msgstr "マッカーサーコミュニケーション発達質問紙 (CDI) にご協力いただき、ありがとうございました。養育者の方々のご協力のお蔭で、私たち研究者は子どもたちの言葉の発達や、言葉の発達が子どもや文化によってどのように異なるかについて、より深く知るための研究を進めることができます。CDIには、さまざまな子どもたちが使うさまざまな単語が反映されています。あなたのお子さまが知っている単語が少なくても心配はいりません。以下、私たちの研究にもとづいて、お子さまの語彙の発達に関する情報をお知らせします。こちらは臨床的な評価ではありません。お子さまの発達について何かご心配があれば、かかりつけの医師にご相談されることをお勧めします。このアンケートをお楽しみいただけたなら、CDIについて<a href=""http://mb-cdi.stanford.edu/"" target=""_blank"">こちら</a>でもっと詳しく知ることができます。みなさまのご協力に心から感謝いたします。"
+msgstr ""
+"マッカーサーコミュニケーション発達質問紙 (CDI) にご協力いただき、ありがとうご"
+"ざいました。養育者の方々のご協力のお蔭で、私たち研究者は子どもたちの言葉の発"
+"達や、言葉の発達が子どもや文化によってどのように異なるかについて、より深く知"
+"るための研究を進めることができます。CDIには、さまざまな子どもたちが使うさまざ"
+"まな単語が反映されています。あなたのお子さまが知っている単語が少なくても心配"
+"はいりません。以下、私たちの研究にもとづいて、お子さまの語彙の発達に関する情"
+"報をお知らせします。こちらは臨床的な評価ではありません。お子さまの発達につい"
+"て何かご心配があれば、かかりつけの医師にご相談されることをお勧めします。この"
+"アンケートをお楽しみいただけたなら、CDIについて<a href=http://mb-cdi."
+"stanford.edu/ target=_blank>こちら</a>でもっと詳しく知ることができます。みな"
+"さまのご協力に心から感謝いたします。"
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:137
 #, python-format
@@ -2206,7 +2319,14 @@ msgid ""
 "your child’s physician. If you enjoyed our assessment, you can learn more "
 "about the CDI <a href=\"http://mb-cdi.stanford.edu/\" "
 "target=\"_blank\">here</a>. Again, we appreciate your interest!"
-msgstr "マッカーサーコミュニケーション発達質問紙 (CDI) にご関心をもってくださり、ありがとうございます。以前にもCDIフォームにご記入いただいたことがあるようですね。一度だけご記入いただきますようお願いいたします。お子さまの発達についてご心配がある場合は、かかりつけの医師にご相談されることをお勧めします。アンケートをお楽しみいただけたなら、<a href=""http://mb-cdi.stanford.edu/"" target=""_blank"">こちら</a>からCDIについてもっと詳しく知ることができます。ご関心をもってくださり、ありがとうございました。"
+msgstr ""
+"マッカーサーコミュニケーション発達質問紙 (CDI) にご関心をもってくださり、あり"
+"がとうございます。以前にもCDIフォームにご記入いただいたことがあるようですね。"
+"一度だけご記入いただきますようお願いいたします。お子さまの発達についてご心配"
+"がある場合は、かかりつけの医師にご相談されることをお勧めします。アンケートを"
+"お楽しみいただけたなら、<a href=http://mb-cdi.stanford.edu/ target=_blank>こ"
+"ちら</a>からCDIについてもっと詳しく知ることができます。ご関心をもってくださ"
+"り、ありがとうございました。"
 
 #: cdi_forms/templates/cdi_forms/overflow.html:49
 #: cdi_forms/templates/cdi_forms/study_overflow.html:49
@@ -2224,7 +2344,18 @@ msgid ""
 "physician. If you enjoyed our assessment, you can learn more about the CDI "
 "<a href=\"http://mb-cdi.stanford.edu/\" target=\"_blank\">here</a>. Again, "
 "we appreciate your interest!"
-msgstr "マッカーサーコミュニケーション発達質問紙 (CDI) へのご記入に関心をもってくださり、ありがとうございます。現在、調査スロットはすべて埋まってしまっており、ご記入いただいても謝礼のお渡しが難しい状況です。もし、それでもなおCDIに記入してお子さまの語彙発達についてもっと知りたいという方は、<a href=""%(bypass_url)s"" target=""_blank"">こちら</a>をクリックしてアンケートにご記入いただけます。ただし、謝礼を受け取ることはできませんのでご留意ください。今後、新しい研究・調査がはじまるまでお待ちいただくことも可能です！お子さまの発達についてご心配がある場合は、かかりつけの医師にご相談されることをお勧めします。アンケートをお楽しみいただけたなら、<a href=""http://mb-cdi.stanford.edu/"" target=""_blank"">こちら</a>からCDIについてもっと詳しく知ることができます。ご関心をもってくださり、ありがとうございました。"
+msgstr ""
+"マッカーサーコミュニケーション発達質問紙 (CDI) へのご記入に関心をもってくださ"
+"り、ありがとうございます。現在、調査スロットはすべて埋まってしまっており、ご"
+"記入いただいても謝礼のお渡しが難しい状況です。もし、それでもなおCDIに記入して"
+"お子さまの語彙発達についてもっと知りたいという方は、<a href=%(bypass_url)s "
+"target=_blank>こちら</a>をクリックしてアンケートにご記入いただけます。ただ"
+"し、謝礼を受け取ることはできませんのでご留意ください。今後、新しい研究・調査"
+"がはじまるまでお待ちいただくことも可能です！お子さまの発達についてご心配があ"
+"る場合は、かかりつけの医師にご相談されることをお勧めします。アンケートをお楽"
+"しみいただけたなら、<a href=http://mb-cdi.stanford.edu/ target=_blank>こちら"
+"</a>からCDIについてもっと詳しく知ることができます。ご関心をもってくださり、あ"
+"りがとうございました。"
 
 #: cdi_forms/templates/cdi_forms/study_group.html:46
 msgid "How old is your child?"
@@ -2234,30 +2365,44 @@ msgstr "お子さまの月齢を教えてください"
 msgid ""
 "My baby speaks LANGUAGE and is between MIN_AGE and MAX_AGE months old. [XX "
 "slot(s) left]"
-msgstr "私の子どもは、LANGUAGEを話し、かつ月齢はMIN_AGEヶ月～MAX_AGEヶ月の間です。[XX slot(s) left]"
+msgstr ""
+"私の子どもは、LANGUAGEを話し、かつ月齢はMIN_AGEヶ月～MAX_AGEヶ月の間です。"
+"[XX slot(s) left]"
 
 #: cdi_forms/templates/cdi_forms/study_group.html:60
 msgid "Born between STARTDATE and ENDDATE"
 msgstr "生年月日はSTARTDATE～ENDDATEの間です"
 
-#: cdi_forms/views/background_info_views.py:134
-#: cdi_forms/views/background_info_views.py:466
-#, python-format
-msgid "Your child should be between %(min_age)d to %(max_age)d months of age."
+#: cdi_forms/views/background_info_views.py:136
+#, fuzzy
+#| msgid ""
+#| "Your child should be between %(min_age)d to %(max_age)d months of age."
+msgid ""
+"Your child should be between {data[\"min_age\"]} to {data[\"max_age\"]} "
+"months of age."
 msgstr "このフォームの対象月齢は%(min_age)dヶ月から%(max_age)dヶ月までです。"
 
-#: cdi_forms/views/background_info_views.py:168
-#: cdi_forms/views/background_info_views.py:498
+#: cdi_forms/views/background_info_views.py:167
+#: cdi_forms/views/background_info_views.py:492
 #, python-format
 msgid " Not the right age? <a href='%(sgurl)s'> Click here</a>"
-msgstr "対象月齢ではありませんでしたか？<a href='%(sgurl)s'>こちら</a>をクリックしてみてください。"
+msgstr ""
+"対象月齢ではありませんでしたか？<a href='%(sgurl)s'>こちら</a>をクリックして"
+"みてください。"
 
-#: cdi_forms/views/background_info_views.py:178
-#: cdi_forms/views/background_info_views.py:508
+#: cdi_forms/views/background_info_views.py:177
+#: cdi_forms/views/background_info_views.py:502
 msgid ""
 " Not the right age? You should contact your researcher for steps on what to "
 "do next."
-msgstr "対象月齢ではありませんでしたか？恐れ入りますが、担当の研究者までお問い合わせください。"
+msgstr ""
+"対象月齢ではありませんでしたか？恐れ入りますが、担当の研究者までお問い合わせ"
+"ください。"
+
+#: cdi_forms/views/background_info_views.py:463
+#, python-format
+msgid "Your child should be between %(min_age)d to %(max_age)d months of age."
+msgstr "このフォームの対象月齢は%(min_age)dヶ月から%(max_age)dヶ月までです。"
 
 #: researcher_UI/admin/admin_actions.py:13
 #: researcher_UI/admin/admin_actions.py:41
@@ -2276,13 +2421,15 @@ msgstr "研究には少なくとも1件の回答が必要です。%sには回答
 msgid ""
 "You cannot download data for {q.name}.  The study has opted out of "
 "datasharing"
-msgstr "{q.name}のデータをダウンロードすることはできません。この研究では、データ共有は許諾されていません。"
+msgstr ""
+"{q.name}のデータをダウンロードすることはできません。この研究では、データ共有"
+"は許諾されていません。"
 
-#: researcher_UI/forms.py:28
+#: researcher_UI/forms.py:33
 msgid "Default"
 msgstr "初期設定"
 
-#: researcher_UI/forms.py:32
+#: researcher_UI/forms.py:37
 msgid "Opening Dialog Box"
 msgstr "メッセージボックスを開ける"
 
@@ -2817,10 +2964,57 @@ msgstr ""
 msgid "vocabulario estimado (todos):"
 msgstr ""
 
-#: supplementtut/templates/supplementtut/acceptance_email.txt:2
-#: supplementtut/templates/supplementtut/activation_email.txt:2
-#: supplementtut/templates/supplementtut/registration_email.txt:2
-#: supplementtut/templates/supplementtut/rejection_email.txt:2
+#: researcher_UI/templates/researcher_UI/individual/spanish-mexican-cat.html:77
+msgid "Jackson-Maldonado et al. (2003)"
+msgstr ""
+
+#: webcdi/settings.py:240
+msgid "English"
+msgstr "英語"
+
+#: webcdi/settings.py:241
+msgid "Spanish"
+msgstr "スペイン語"
+
+#: webcdi/settings.py:243
+msgid "French Quebec"
+msgstr "フランス語 (ケベック)"
+
+#: webcdi/settings.py:244
+msgid "French French"
+msgstr "フランス語 (フランス)"
+
+#: webcdi/settings.py:245
+msgid "Canadian English"
+msgstr "英語 (カナダ)"
+
+#: webcdi/settings.py:246
+msgid "Dutch"
+msgstr "オランダ語"
+
+#: webcdi/settings.py:247
+msgid "Hebrew"
+msgstr "ヘブライ語"
+
+#: webcdi/settings.py:248
+msgid "Korean"
+msgstr "韓国語"
+
+#: webcdi/settings.py:249
+msgid "Japanese"
+msgstr ""
+
+#: webcdi/templates/django_registration/activation_complete.html:4
+#: webcdi/templates/django_registration/activation_complete.html:6
+#: webcdi/templates/django_registration/registration_complete.html:4
+#: webcdi/templates/django_registration/registration_complete.html:6
+msgid "Registration is complete!"
+msgstr "登録が完了しました！"
+
+#: webcdi/templates/django_registration/activation_complete.html:13
+msgid "Your account has been activated!"
+msgstr "あなたのアカウントはアクティベートされました！"
+
 #: webcdi/templates/django_registration/activation_email_body.txt:2
 #: webcdi/templates/registration/acceptance_email.txt:2
 #: webcdi/templates/registration/registration_email.txt:2
@@ -2829,239 +3023,59 @@ msgstr ""
 msgid "Dear %(user)s,"
 msgstr "%(user)sさま"
 
-#: supplementtut/templates/supplementtut/acceptance_email.txt:4
+#: webcdi/templates/django_registration/activation_email_body.txt:4
 #, python-format
-msgid "Your registration of %(site_name)s was accepted by inspector."
-msgstr "%(site_name)sへのあなたの登録は審査のうえ承認されました。"
+msgid "Your account at %(site_name)s was activated by the Web-CDI Team"
+msgstr ""
+"Web-CDIチームによって、あなたの%(site_name)sへのアカウントがアクティベートさ"
+"れました"
 
-#: supplementtut/templates/supplementtut/acceptance_email.txt:6
-#: webcdi/templates/registration/acceptance_email.txt:6
-msgid ""
-"Please click the following url and set your account password to finish "
-"activation."
-msgstr "下記のリンクをクリックし、パスワードを設定して、アカウントのアクティベートを完了させてください。"
-
-#: supplementtut/templates/supplementtut/acceptance_email.txt:10
-#: webcdi/templates/registration/acceptance_email.txt:10
-#, python-format
-msgid "The activation link above will be expired in %(expiration_days)s days."
-msgstr "上記のアクティベート用リンクは%(expiration_days)s日で無効になります。"
-
-#: supplementtut/templates/supplementtut/acceptance_email_subject.txt:2
-#: webcdi/templates/django_registration/activation_email_subject.txt:2
-#, python-format
-msgid "Your registration was accepted -- %(site_name)s"
-msgstr "あなたの登録は承認されました：%(site_name)s"
-
-#: supplementtut/templates/supplementtut/activation_complete.html:4
-#: supplementtut/templates/supplementtut/activation_complete.html:6
-msgid "Activation was complete"
-msgstr "アクティベートが完了しました。"
-
-#: supplementtut/templates/supplementtut/activation_complete.html:11
-#: webcdi/templates/django_registration/activation_complete.html:13
-msgid "Your account has been activated!"
-msgstr "あなたのアカウントはアクティベートされました！"
-
-#: supplementtut/templates/supplementtut/activation_email.txt:4
-#, python-format
-msgid "Your account of %(site_name)s was activated by inspector"
-msgstr "あなたの%(site_name)sへのアカウントは審査者によりアクティベートされました"
-
-#: supplementtut/templates/supplementtut/activation_email.txt:6
 #: webcdi/templates/django_registration/activation_email_body.txt:6
 msgid ""
 "The password of your account was generated automatically and displayed below."
 msgstr "あなたのアカウントのパスワードは自動的に生成され下記に表示されます。"
 
-#: supplementtut/templates/supplementtut/activation_email.txt:7
-#: supplementtut/templates/supplementtut/activation_email.txt:18
 #: webcdi/templates/django_registration/activation_email_body.txt:7
 #: webcdi/templates/django_registration/activation_email_body.txt:20
 msgid "Please click the following url to login."
 msgstr "下記のリンクをクリックしてログインしてください。"
 
-#: supplementtut/templates/supplementtut/activation_email.txt:8
 #: webcdi/templates/django_registration/activation_email_body.txt:8
 msgid ""
 "It is strongly recommended that you change your initial password to "
 "something more secure."
-msgstr "セキュリティーをより強固にするために、初期パスワードは必ず変更するようにしてください。"
+msgstr ""
+"セキュリティーをより強固にするために、初期パスワードは必ず変更するようにして"
+"ください。"
 
-#: supplementtut/templates/supplementtut/activation_email.txt:10
-#: supplementtut/templates/supplementtut/activation_email.txt:20
 #: webcdi/templates/django_registration/activation_email_body.txt:10
 #: webcdi/templates/django_registration/activation_email_body.txt:22
 msgid "::Your account information::"
 msgstr "::あなたのアカウント情報::"
 
-#: supplementtut/templates/supplementtut/activation_email.txt:11
-#: supplementtut/templates/supplementtut/activation_email.txt:21
 #: webcdi/templates/django_registration/activation_email_body.txt:11
 #: webcdi/templates/django_registration/activation_email_body.txt:23
 #, python-format
 msgid "USERNAME: %(user)s"
 msgstr "ユーザーネーム： %(user)s"
 
-#: supplementtut/templates/supplementtut/activation_email.txt:12
 #: webcdi/templates/django_registration/activation_email_body.txt:12
 #, python-format
 msgid "PASSWORD: %(password)s"
 msgstr "パスワード：%(password)s"
 
-#: supplementtut/templates/supplementtut/activation_email.txt:16
-#, python-format
-msgid "Your account of %(site_name)s was successfully activated"
-msgstr "あなたの%(site_name)sへのアカウントは適切にアクティベートされました,"
-
-#: supplementtut/templates/supplementtut/activation_email_subject.txt:2
-#, python-format
-msgid "Your account was activated -- %(site_name)s"
-msgstr "あなたのアカウントはアクティベートされました：%(site_name)s"
-
-#: supplementtut/templates/supplementtut/activation_form.html:4
-#: supplementtut/templates/supplementtut/activation_form.html:6
-#: webcdi/templates/registration/activation_form.html:4
-#: webcdi/templates/registration/activation_form.html:6
-msgid "Activate your account"
-msgstr "アカウントをアクティベートする"
-
-#: supplementtut/templates/supplementtut/activation_form.html:12
-#: webcdi/templates/registration/activation_form.html:12
-msgid "Please fill the password to complete account activation"
-msgstr "アカウントのアクティベートを完了させるために、パスワードを入力してください。"
-
-#: supplementtut/templates/supplementtut/activation_form.html:16
-#: webcdi/templates/registration/activation_form.html:25
-msgid "Activate"
-msgstr "アクティベートする"
-
-#: supplementtut/templates/supplementtut/registration_closed.html:4
-#: supplementtut/templates/supplementtut/registration_closed.html:6
-#: webcdi/templates/registration/registration_closed.html:4
-#: webcdi/templates/registration/registration_closed.html:6
-msgid "Registration is closed"
-msgstr "登録画面が閉じられました"
-
-#: supplementtut/templates/supplementtut/registration_closed.html:10
-#: webcdi/templates/registration/registration_closed.html:10
-msgid "The registration is currently closed."
-msgstr "登録画面は現在閉じられています"
-
-#: supplementtut/templates/supplementtut/registration_complete.html:4
-#: supplementtut/templates/supplementtut/registration_complete.html:6
-#: webcdi/templates/django_registration/activation_complete.html:4
-#: webcdi/templates/django_registration/activation_complete.html:6
-#: webcdi/templates/django_registration/registration_complete.html:4
-#: webcdi/templates/django_registration/registration_complete.html:6
-msgid "Registration is complete!"
-msgstr "登録が完了しました！"
-
-#: supplementtut/templates/supplementtut/registration_complete.html:11
-#: webcdi/templates/django_registration/registration_complete.html:13
-msgid "You have successfully filled out our registration form."
-msgstr "登録フォームへの入力が適切に完了しました。"
-
-#: supplementtut/templates/supplementtut/registration_complete.html:12
-msgid "Please wait until the Web-CDI team can review your application."
-msgstr "Web-CDIチームがあなたの申請を確認するまで、しばらくの期間お待ちください。"
-
-#: supplementtut/templates/supplementtut/registration_complete.html:13
-#: supplementtut/templates/supplementtut/registration_email.txt:6
-#: webcdi/templates/registration/registration_email.txt:6
-msgid "You will receive an acceptance or rejection email within several days."
-msgstr "数日の間に、承認または拒否のご連絡を差し上げます。"
-
-#: supplementtut/templates/supplementtut/registration_email.txt:3
-msgid "Your account registration was created successfully."
-msgstr "アカウント登録が成功しました。"
-
-#: supplementtut/templates/supplementtut/registration_email.txt:5
-msgid "Please wait until the inspector verify your registration."
-msgstr "審査者があなたの申請を確認するまで、しばらくの期間お待ちください。"
-
-#: supplementtut/templates/supplementtut/registration_email_subject.txt:2
-#: webcdi/templates/registration/registration_email_subject.txt:2
-#, python-format
-msgid "Your registration was created -- %(site_name)s"
-msgstr "登録が作成されました：%(site_name)s"
-
-#: supplementtut/templates/supplementtut/registration_form.html:4
-#: supplementtut/templates/supplementtut/registration_form.html:6
-#: webcdi/templates/django_registration/registration_form.html:4
-#: webcdi/templates/webcdi/signup.html:4
-msgid "Registration"
-msgstr "登録"
-
-#: supplementtut/templates/supplementtut/registration_form.html:13
-#: webcdi/templates/registration/registration_form.html:8
-msgid "Please fill the following fields to create your registration"
-msgstr "登録のため、下記の欄にご記入ください"
-
-#: supplementtut/templates/supplementtut/registration_form.html:18
-#: webcdi/templates/django_registration/registration_form.html:35
-#: webcdi/templates/registration/registration_form.html:29
-#: webcdi/templates/webcdi/signup.html:35
-msgid "Register"
-msgstr "登録者"
-
-#: supplementtut/templates/supplementtut/rejection_email.txt:4
-msgid "I am afraid that your account registration was rejected by inspector."
-msgstr "残念ながら、あなたの登録は審査者により拒否されました。"
-
-#: supplementtut/templates/supplementtut/rejection_email.txt:7
-#: webcdi/templates/registration/rejection_email.txt:8
-msgid "Rejection reasons:"
-msgstr "拒否された理由："
-
-#: supplementtut/templates/supplementtut/rejection_email_subject.txt:2
-#: webcdi/templates/registration/rejection_email_subject.txt:2
-#, python-format
-msgid "Your registration was rejected -- %(site_name)s"
-msgstr "登録できませんでした -- %(site_name)s"
-
-#: webcdi/settings.py:239
-msgid "English"
-msgstr "英語"
-
-#: webcdi/settings.py:240
-msgid "Spanish"
-msgstr "スペイン語"
-
-#: webcdi/settings.py:242
-msgid "French Quebec"
-msgstr "フランス語 (ケベック)"
-
-#: webcdi/settings.py:243
-msgid "French French"
-msgstr "フランス語 (フランス)"
-
-#: webcdi/settings.py:244
-msgid "Canadian English"
-msgstr "英語 (カナダ)"
-
-#: webcdi/settings.py:245
-msgid "Dutch"
-msgstr "オランダ語"
-
-#: webcdi/settings.py:246
-msgid "Hebrew"
-msgstr "ヘブライ語"
-
-#: webcdi/settings.py:247
-msgid "Korean"
-msgstr "韓国語"
-
-#: webcdi/templates/django_registration/activation_email_body.txt:4
-#, python-format
-msgid "Your account at %(site_name)s was activated by the Web-CDI Team"
-msgstr "Web-CDIチームによって、あなたの%(site_name)sへのアカウントがアクティベートされました"
-
 #: webcdi/templates/django_registration/activation_email_body.txt:18
 #, python-format
 msgid ""
 "Your account at %(site_name)s was successfully activated by the Web-CDI Team"
-msgstr "Web-CDIチームによって、あなたの%(site_name)sへのアカウントが適切にアクティベートされました"
+msgstr ""
+"Web-CDIチームによって、あなたの%(site_name)sへのアカウントが適切にアクティ"
+"ベートされました"
+
+#: webcdi/templates/django_registration/activation_email_subject.txt:2
+#, python-format
+msgid "Your registration was accepted -- %(site_name)s"
+msgstr "あなたの登録は承認されました：%(site_name)s"
 
 #: webcdi/templates/django_registration/activation_failed.html:4
 msgid "Activation Issue"
@@ -3075,19 +3089,66 @@ msgstr "アクティベートに関して、なにか問題が生じたようで
 msgid ""
 "Please email hjsmehta@gmail.com with your username, stating you are received "
 "this message."
-msgstr "こちらのメッセージを受け取った旨を、hjsmehta@gmail.comまでお知らせください。その際、ユーザーネームも明記していただくようお願いいたします。"
+msgstr ""
+"こちらのメッセージを受け取った旨を、hjsmehta@gmail.comまでお知らせください。"
+"その際、ユーザーネームも明記していただくようお願いいたします。"
+
+#: webcdi/templates/django_registration/registration_complete.html:13
+msgid "You have successfully filled out our registration form."
+msgstr "登録フォームへの入力が適切に完了しました。"
 
 #: webcdi/templates/django_registration/registration_complete.html:14
 msgid ""
 "Thank you for registering for Web-CDI. An email was sent to the address you "
 "provided. Please click on the link in that email to complete your "
 "registration (please check you spam and junk email)"
-msgstr "Web-CDIに登録してくださりありがとうございます。あなたのメールアドレス宛にメールを送信しました。メール内のリンクをクリックして、登録を完了させてください (メールが見当たらない場合は、迷惑メールフォルダもご確認ください)。"
+msgstr ""
+"Web-CDIに登録してくださりありがとうございます。あなたのメールアドレス宛にメー"
+"ルを送信しました。メール内のリンクをクリックして、登録を完了させてください "
+"(メールが見当たらない場合は、迷惑メールフォルダもご確認ください)。"
+
+#: webcdi/templates/django_registration/registration_form.html:4
+#: webcdi/templates/webcdi/signup.html:4
+msgid "Registration"
+msgstr "登録"
+
+#: webcdi/templates/django_registration/registration_form.html:35
+#: webcdi/templates/registration/registration_form.html:29
+#: webcdi/templates/webcdi/signup.html:35
+msgid "Register"
+msgstr "登録者"
 
 #: webcdi/templates/registration/acceptance_email.txt:4
 #, python-format
 msgid "Your registration at %(site_name)s was accepted by the Web-CDI Team."
 msgstr "Web-CDIチームによって、あなたの%(site_name)sへの登録が承認されました。"
+
+#: webcdi/templates/registration/acceptance_email.txt:6
+msgid ""
+"Please click the following url and set your account password to finish "
+"activation."
+msgstr ""
+"下記のリンクをクリックし、パスワードを設定して、アカウントのアクティベートを"
+"完了させてください。"
+
+#: webcdi/templates/registration/acceptance_email.txt:10
+#, python-format
+msgid "The activation link above will be expired in %(expiration_days)s days."
+msgstr "上記のアクティベート用リンクは%(expiration_days)s日で無効になります。"
+
+#: webcdi/templates/registration/activation_form.html:4
+#: webcdi/templates/registration/activation_form.html:6
+msgid "Activate your account"
+msgstr "アカウントをアクティベートする"
+
+#: webcdi/templates/registration/activation_form.html:12
+msgid "Please fill the password to complete account activation"
+msgstr ""
+"アカウントのアクティベートを完了させるために、パスワードを入力してください。"
+
+#: webcdi/templates/registration/activation_form.html:25
+msgid "Activate"
+msgstr "アクティベートする"
 
 #: webcdi/templates/registration/login.html:34
 #: webcdi/templates/registration/password_reset_complete.html:18
@@ -3115,7 +3176,10 @@ msgstr "パスワードを変更しました"
 msgid ""
 "Please enter your old password, for security's sake, and then enter your new "
 "password twice so we can verify you typed it in correctly."
-msgstr "セキュリティー保護のため、古いパスワードを入力してください。そのうえで、新しいパスワードを2回入力してください (正しくパスワードを入力しているか確認するためです)。"
+msgstr ""
+"セキュリティー保護のため、古いパスワードを入力してください。そのうえで、新し"
+"いパスワードを2回入力してください (正しくパスワードを入力しているか確認するた"
+"めです)。"
 
 #: webcdi/templates/registration/password_change_form.html:24
 #: webcdi/templates/registration/password_reset_confirm.html:35
@@ -3134,32 +3198,42 @@ msgstr "パスワードが設定されました。ログインしてみてくだ
 msgid ""
 "Please enter your new password twice so we can verify you typed it in "
 "correctly."
-msgstr "新しいパスワードを2回入力してください (正しくパスワードを入力しているか確認するためです)。"
+msgstr ""
+"新しいパスワードを2回入力してください (正しくパスワードを入力しているか確認す"
+"るためです)。"
 
 #: webcdi/templates/registration/password_reset_confirm.html:43
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
 "used.  Please request a new password reset."
-msgstr "パスワードをリセットするためのリンクが無効のようです (既に使用された可能性があります)。パスワードのリセットを改めてリクエストしてください。"
+msgstr ""
+"パスワードをリセットするためのリンクが無効のようです (既に使用された可能性が"
+"あります)。パスワードのリセットを改めてリクエストしてください。"
 
 #: webcdi/templates/registration/password_reset_done.html:14
 msgid ""
 "We emailed you instructions for setting your password. If an account exists "
 "with the email you entered, you should receive them shortly."
-msgstr "パスワードを設定するための説明メールをお送りします。あなたが入力したメールアドレスに対応するアカウントが存在する場合、すぐにメールが届きます。"
+msgstr ""
+"パスワードを設定するための説明メールをお送りします。あなたが入力したメールア"
+"ドレスに対応するアカウントが存在する場合、すぐにメールが届きます。"
 
 #: webcdi/templates/registration/password_reset_done.html:16
 msgid ""
 "If you do not receive an email, please make sure you entered the address you "
 "registered with and check your spam folder."
-msgstr "もしメールが届かなかった場合、登録したメールアドレスを入力したかどうかよく確かめてください。また、迷惑メールフォルダもご確認ください。"
+msgstr ""
+"もしメールが届かなかった場合、登録したメールアドレスを入力したかどうかよく確"
+"かめてください。また、迷惑メールフォルダもご確認ください。"
 
 #: webcdi/templates/registration/password_reset_email.html:2
 #, python-format
 msgid ""
 "You received this email because you requested a password reset for your user "
 "account at %(site_name)s."
-msgstr "このメールは、%(site_name)sへのアカウントについて、パスワードのリセットが要求されたのでお送りしています。"
+msgstr ""
+"このメールは、%(site_name)sへのアカウントについて、パスワードのリセットが要求"
+"されたのでお送りしています。"
 
 #: webcdi/templates/registration/password_reset_email.html:4
 msgid "Please go to the following page and choose a new password:"
@@ -3182,11 +3256,22 @@ msgstr "%(site_name)sチーム"
 msgid ""
 "Forgotten your password? Enter your email address below and we will email "
 "instructions for setting a new one."
-msgstr "パスワードを忘れてしまいましたか？下記にメールアドレスをご記入ください。新しいパスワードを設定するための説明メールをお送りします。"
+msgstr ""
+"パスワードを忘れてしまいましたか？下記にメールアドレスをご記入ください。新し"
+"いパスワードを設定するための説明メールをお送りします。"
 
 #: webcdi/templates/registration/password_reset_form.html:33
 msgid "Reset"
 msgstr "リセット"
+
+#: webcdi/templates/registration/registration_closed.html:4
+#: webcdi/templates/registration/registration_closed.html:6
+msgid "Registration is closed"
+msgstr "登録画面が閉じられました"
+
+#: webcdi/templates/registration/registration_closed.html:10
+msgid "The registration is currently closed."
+msgstr "登録画面は現在閉じられています"
 
 #: webcdi/templates/registration/registration_email.txt:3
 msgid "Your account application was completed successfully."
@@ -3196,6 +3281,19 @@ msgstr "アカウント申請が正しく実施されました"
 msgid "A member of the Web-CDI team will review your registration shortly."
 msgstr "できるだけ早く、Web-CDIチームがあなたの登録を審査します,"
 
+#: webcdi/templates/registration/registration_email.txt:6
+msgid "You will receive an acceptance or rejection email within several days."
+msgstr "数日の間に、承認または拒否のご連絡を差し上げます。"
+
+#: webcdi/templates/registration/registration_email_subject.txt:2
+#, python-format
+msgid "Your registration was created -- %(site_name)s"
+msgstr "登録が作成されました：%(site_name)s"
+
+#: webcdi/templates/registration/registration_form.html:8
+msgid "Please fill the following fields to create your registration"
+msgstr "登録のため、下記の欄にご記入ください"
+
 #: webcdi/templates/registration/rejection_email.txt:4
 msgid "Your account registration was rejected by the Web-CDI Team."
 msgstr "あなたの登録はWeb-CDIチームから拒否されました"
@@ -3203,3 +3301,47 @@ msgstr "あなたの登録はWeb-CDIチームから拒否されました"
 #: webcdi/templates/registration/rejection_email.txt:7
 msgid "Your application was rejected due to:"
 msgstr "あなたの申請は以下の理由で拒否されました："
+
+#: webcdi/templates/registration/rejection_email.txt:8
+msgid "Rejection reasons:"
+msgstr "拒否された理由："
+
+#: webcdi/templates/registration/rejection_email_subject.txt:2
+#, python-format
+msgid "Your registration was rejected -- %(site_name)s"
+msgstr "登録できませんでした -- %(site_name)s"
+
+#, python-format
+#~ msgid "Your registration of %(site_name)s was accepted by inspector."
+#~ msgstr "%(site_name)sへのあなたの登録は審査のうえ承認されました。"
+
+#~ msgid "Activation was complete"
+#~ msgstr "アクティベートが完了しました。"
+
+#, python-format
+#~ msgid "Your account of %(site_name)s was activated by inspector"
+#~ msgstr ""
+#~ "あなたの%(site_name)sへのアカウントは審査者によりアクティベートされました"
+
+#, python-format
+#~ msgid "Your account of %(site_name)s was successfully activated"
+#~ msgstr ""
+#~ "あなたの%(site_name)sへのアカウントは適切にアクティベートされました,"
+
+#, python-format
+#~ msgid "Your account was activated -- %(site_name)s"
+#~ msgstr "あなたのアカウントはアクティベートされました：%(site_name)s"
+
+#~ msgid "Please wait until the Web-CDI team can review your application."
+#~ msgstr ""
+#~ "Web-CDIチームがあなたの申請を確認するまで、しばらくの期間お待ちください。"
+
+#~ msgid "Your account registration was created successfully."
+#~ msgstr "アカウント登録が成功しました。"
+
+#~ msgid "Please wait until the inspector verify your registration."
+#~ msgstr "審査者があなたの申請を確認するまで、しばらくの期間お待ちください。"
+
+#~ msgid ""
+#~ "I am afraid that your account registration was rejected by inspector."
+#~ msgstr "残念ながら、あなたの登録は審査者により拒否されました。"
