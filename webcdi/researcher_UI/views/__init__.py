@@ -7,3 +7,4 @@ from .study_edit_data_views import ImportData  # noqa
 from .study_settings_views import (AddPairedStudy, AddStudy,  # noqa
                                    UpdateStudyView)
 from .views import *  # noqa
+from .profile import ProfileView, ChangePasswordView  # noqa

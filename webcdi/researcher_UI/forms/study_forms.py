@@ -11,7 +11,7 @@ from django.utils.translation import gettext_lazy as _
 from form_utils.forms import BetterModelForm
 from researcher_UI.models import *
 
-from . import choices
+from researcher_UI import choices
 
 logger = logging.getLogger("debug")
 

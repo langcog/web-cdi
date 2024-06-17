@@ -1,0 +1,34 @@
+{% extends 'researcher_UI/base.html' %}
+{% load static %}
+
+{% block title %}Update Profile{% endblock %}
+
+{% block main %}
+    <div class='container login-card d-flex justify-content-center' style="margin-top:100px; padding-left:3rem;">
+        <div class="row">
+            <div class="col-12" style="margin-bottom:1rem;">
+                <h1>Update Profile</h1>
+            </div>
+            <div class="col-12" style="margin-bottom:1rem;">
+                <form method='post' action='.'>
+                    {% csrf_token %}
+                    <table>
+                        {{ form.as_table }}
+                        {{ researcher_form.as_table }}
+                    </table>
+                    <input type="submit" class="btn btn-primary" value='Submit'>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12" style="margin-bottom:1rem;">
+                <h1>Update Password</h1>
+            </div>
+            <div class="col-12" style="margin-bottom:1rem;">
+                <a href="{% url 'researcher_ui:change_password' %}" class="btn btn-primary">Change Password</a>  
+            </div>
+        </div>
+        
+    </div>
+    
+{% endblock %}
