@@ -18,7 +18,9 @@ logger = logging.getLogger("debug")
 class AddStudyViewTest(TestCase):
     def setUp(self):
         self.password = random_password()
-        self.user = User.objects.create_user(username="test_user", password=self.password)
+        self.user = User.objects.create_user(
+            username="test_user", password=self.password
+        )
         Researcher.objects.get_or_create(user=self.user)
         instrument_family = InstrumentFamily.objects.create(
             name="BigCats", chargeable=False
@@ -82,7 +84,9 @@ class AddPairedStudyTest(TestCase):
     def setUp(self) -> None:
         super().setUp()
         self.password = random_password()
-        self.user = User.objects.create_user(username="test_user", password=self.password)
+        self.user = User.objects.create_user(
+            username="test_user", password=self.password
+        )
         Researcher.objects.get_or_create(user=self.user)
 
         for counter in range(3):
@@ -124,7 +128,9 @@ class UpdateStudyTest(TestCase):
     def setUp(self) -> None:
         super().setUp()
         self.password = random_password()
-        self.user = User.objects.create_user(username="test_user", password=self.password)
+        self.user = User.objects.create_user(
+            username="test_user", password=self.password
+        )
         Researcher.objects.get_or_create(user=self.user)
 
         family = InstrumentFamily.objects.get(name="English (American) Short")

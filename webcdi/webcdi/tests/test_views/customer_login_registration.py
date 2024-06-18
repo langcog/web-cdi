@@ -118,7 +118,7 @@ class CustomRegistrationViewTest(TestCase):
     def test_webcdi_custom_registration_post_isInValid(self):
         response = self.client.post(self.url, self.invalid_payload)
         self.assertEqual(response.status_code, 200)
-        self.assertFormError(response, 'form', 'email', 'This field is required.')
+        self.assertFormError(response, "form", "email", "This field is required.")
 
         self.assertContains(
             response,

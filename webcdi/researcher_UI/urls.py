@@ -80,14 +80,10 @@ urlpatterns = [
         views.PDFAdministrationDetailView.as_view(),
         name="pdf_summary_adjusted",
     ),
-    path(
-        "profile/",
-        views.ProfileView.as_view(),
-        name="profile"
-    ),
+    path("profile/", views.ProfileView.as_view(), name="profile"),
     path(
         "profile/change_password/",
         views.ChangePasswordView.as_view(),
-        name="change_password"
+        name="change_password",
     ),
 ]

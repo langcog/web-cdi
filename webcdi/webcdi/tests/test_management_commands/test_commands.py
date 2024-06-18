@@ -25,7 +25,6 @@ class CommandsTestCase(TestCase):
         instruments = Instrument.objects.all()
         self.assertEqual(len(instruments), 26)
 
-    
     def test_populate_scoring(self):
         args = []
         opts = {}
@@ -36,7 +35,6 @@ class CommandsTestCase(TestCase):
         scores = InstrumentScore.objects.all()
         self.assertEqual(len(scores), 175)
 
-    
     def test_populate_benchmark(self):
         args = []
         opts = {}
@@ -48,7 +46,6 @@ class CommandsTestCase(TestCase):
         items = Benchmark.objects.all()
         self.assertEqual(len(items), 8650)
 
-    
     def test_populate_choices(self):
         args = []
         opts = {}
@@ -61,7 +58,6 @@ class CommandsTestCase(TestCase):
         items = Choices.objects.all()
         self.assertEqual(len(items), 10)
 
-    
     def test_populate_items(self):
         args = []
         opts = {}

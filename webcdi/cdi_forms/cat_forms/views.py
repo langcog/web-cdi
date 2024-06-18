@@ -145,7 +145,7 @@ class AdministerAdministraionView(UpdateView):
         ctx["language_code"] = language_map(self.object.study.instrument.language)
 
         if self.word:
-            ctx['word'] = self.word
+            ctx["word"] = self.word
             ctx["form"] = CatItemForm(
                 context={"label": self.word["definition"]},
                 initial={
@@ -178,7 +178,7 @@ class AdministerAdministraionView(UpdateView):
 
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
-        
+
         user_language = language_map(self.object.study.instrument.language)
         self.language = user_language
         translation.activate(user_language)

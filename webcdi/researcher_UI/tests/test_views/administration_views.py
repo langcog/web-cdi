@@ -18,7 +18,9 @@ logger.setLevel(logging.INFO)
 class EditAdministrationViewTest(TestCase):
     def setUp(self):
         self.password = random_password()
-        self.user = User.objects.create_user(username="test_user", password=self.password)
+        self.user = User.objects.create_user(
+            username="test_user", password=self.password
+        )
         Researcher.objects.get_or_create(user=self.user)
         instrument_family = InstrumentFamily.objects.create(
             name="BigCats", chargeable=False
