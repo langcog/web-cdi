@@ -1,0 +1,292 @@
+[
+    {
+        "page":"front",
+        "contents":[
+            {
+                "fieldset":"Basic Information",
+                "fields":[
+                    {
+                        "field":"form_filler",
+                        "div":[
+                            "form_filler_other"
+                        ]
+                    },
+                    {
+                        "field":"source_id"
+                    },
+                    {
+                        "field":"child_dob"
+                    },
+                    {
+                        "field":"age"
+                    },
+                    {
+                        "field":"sex"
+                    },
+                    {
+                        "field":"country",
+                        "div":[
+                            "zip_code"
+                        ]
+                    },
+                    {
+                        "field":"mother_yob_confirmation"
+                    },
+                    {
+                        "field":"birth_weight_confirmation_lb",
+                        "widget_type":"Select"
+                    },
+                    {
+                        "field":"birth_order"
+                    },
+                    {
+                        "field":"multi_birth_boolean",
+                        "div":[
+                            "multi_birth"
+                        ]
+                    },
+                    {
+                        "field":"birth_weight_lb",
+                        "widget_type":"Select",
+                        "choices":[
+                            {
+                                "key":"",
+                                "value":"--------"
+                            },
+                            {
+                                "key":"1.0",
+                                "value":"Less than 3 lbs, 0 oz"
+                            },
+                            {
+                                "key":"3.0",
+                                "value":"3 lbs, 0 oz - 3 lbs, 7 oz"
+                            },
+                            {
+                                "key":"3.5",
+                                "value":"3 lbs, 8 oz - 3 lbs, 15 oz"
+                            },
+                            {
+                                "key":"4.0",
+                                "value":"4 lbs, 0 oz - 4 lbs, 7 oz"
+                            },
+                            {
+                                "key":"4.5",
+                                "value":"4 lbs, 8 oz - 4 lbs, 15 oz"
+                            },
+                            {
+                                "key":"5.0",
+                                "value":"5 lbs, 0 oz - 5 lbs, 7 oz"
+                            },
+                            {
+                                "key":"5.5",
+                                "value":"5 lbs, 8 oz - 5 lbs, 15 oz"
+                            },
+                            {
+                                "key":"6.0",
+                                "value":"6 lbs, 0 oz - 6 lbs, 7 oz"
+                            },
+                            {
+                                "key":"6.5",
+                                "value":"6 lbs, 8 oz - 6 lbs, 15 oz"
+                            },
+                            {
+                                "key":"7.0",
+                                "value":"7 lbs, 0 oz - 7 lbs, 7 oz"
+                            },
+                            {
+                                "key":"7.5",
+                                "value":"7 lbs, 8 oz - 7 lbs, 15 oz"
+                            },
+                            {
+                                "key":"8.0",
+                                "value":"8 lbs, 0 oz - 8 lbs, 7 oz"
+                            },
+                            {
+                                "key":"8.5",
+                                "value":"8 lbs, 8 oz - 8 lbs, 15 oz"
+                            },
+                            {
+                                "key":"9.0",
+                                "value":"9 lbs, 0 oz - 9 lbs, 7 oz"
+                            },
+                            {
+                                "key":"9.5",
+                                "value":"9 lbs, 8 oz - 9 lbs, 15 oz"
+                            },
+                            {
+                                "key":"10.0",
+                                "value":"10 lbs, 0 oz or more"
+                            },
+                            {
+                                "key":"0.0",
+                                "value":"Prefer not to disclose"
+                            }
+                        ]
+                    },
+                    {
+                        "field":"born_on_due_date",
+                        "div":[
+                            "early_or_late",
+                            "due_date_diff"
+                        ]
+                    }
+                ]
+            },
+            {
+                "fieldset":"Family Background",
+                "fields":[
+                    {
+                        "field":"primary_caregiver",
+                        "div":[
+                            "primary_caregiver_other"
+                        ]
+                    },
+                    {
+                        "field":"mother_yob"
+                    },
+                    {
+                        "field":"mother_education",
+                        "help":"Choose highest grade completed (12 = high school graduate; 16 = college graduate; 18 = advanced degree)"
+                    },
+                    {
+                        "field":"secondary_caregiver",
+                        "div":[
+                            "secondary_caregiver_other"
+                        ]
+                    },
+                    {
+                        "field":"father_yob"
+                    },
+                    {
+                        "field":"father_education",
+                        "help":"Choose highest grade completed (12 = high school graduate; 16 = college graduate; 18 = advanced degree)"
+                    },
+                    {
+                        "field":"annual_income",
+                        "widget_type":"Select",
+                        "choices":[
+                            {
+                                "key":"",
+                                "value":"--------"
+                            },
+                            {
+                                "key":"<25000",
+                                "value":"Under $25,000"
+                            },
+                            {
+                                "key":"25000-50000",
+                                "value":"$25,000-$50,000"
+                            },
+                            {
+                                "key":"50000-75000",
+                                "value":"$50,000-$75,000"
+                            },
+                            {
+                                "key":"75000-100000",
+                                "value":"$75,000-$100,000"
+                            },
+                            {
+                                "key":"100000-125000",
+                                "value":"$100,000-$125,000"
+                            },
+                            {
+                                "key":"125000-150000",
+                                "value":"$125,000-$150,000"
+                            },
+                            {
+                                "key":"150000-175000",
+                                "value":"$150,000-$175,000"
+                            },
+                            {
+                                "key":"175000-200000",
+                                "value":"$175,000-$200,000"
+                            },
+                            {
+                                "key":">200000",
+                                "value":"Over $200,000"
+                            },
+                            {
+                                "key":"Prefer not to disclose",
+                                "value":"Prefer not to disclose"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "fieldset":"Caregiver Information",
+                "fields":[
+                    {
+                        "field":"caregiver_info"
+                    }
+                ]
+            },
+            {
+                "fieldset":"Language Exposure",
+                "fields":[
+                    {
+                        "field":"other_languages_boolean",
+                        "divs":[
+                            {
+                                "field":"other_languages",
+                                "css":"make-selectize",
+                                "div":[
+                                    "language_from",
+                                    "language_days_per_week",
+                                    "language_hours_per_day"
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "fieldset":"Health",
+                "fields":[
+                    {
+                        "field":"ear_infections_boolean",
+                        "div":[
+                            "ear_infections"
+                        ]
+                    },
+                    {
+                        "field":"hearing_loss_boolean",
+                        "div":[
+                            "hearing_loss"
+                        ]
+                    },
+                    {
+                        "field":"vision_problems_boolean",
+                        "div":[
+                            "vision_problems"
+                        ]
+                    },
+                    {
+                        "field":"illnesses_boolean",
+                        "div":[
+                            "illnesses"
+                        ]
+                    },
+                    {
+                        "field":"services_boolean",
+                        "div":[
+                            "services"
+                        ]
+                    },
+                    {
+                        "field":"worried_boolean",
+                        "div":[
+                            "worried"
+                        ]
+                    },
+                    {
+                        "field":"learning_disability_boolean",
+                        "div":[
+                            "learning_disability"
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
