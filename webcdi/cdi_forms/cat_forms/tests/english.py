@@ -81,7 +81,7 @@ class CATEnglishAdministrationDataItemTest(TestCase):
             response = self.client.get(self.url)
             self.assertEqual(response.status_code, 200)
             self.assertIsInstance(response.context["form"], CatItemForm)
-            self.assertContains(response, f"Does your child say ... {word} ?")
+            self.assertContains(response, f"Does your child say ... {word}?")
 
     def test_english_start_values(self):
         self.start_values(

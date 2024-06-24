@@ -81,7 +81,7 @@ class CATJapaneseAdministrationDataItemTest(TestCase):
             response = self.client.get(self.url)
             self.assertEqual(response.status_code, 200)
             self.assertIsInstance(response.context["form"], CatItemForm)
-            self.assertContains(response, f"お子さまは次の単語を言いますか？{word} ?")
+            self.assertContains(response, f"お子さまは次の単語を言いますか？「足 {word}」")
 
     def sequence_test(self, file_name):
         response = self.client.get(self.url)

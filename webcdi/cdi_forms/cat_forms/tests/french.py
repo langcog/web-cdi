@@ -82,7 +82,7 @@ class CATFrenchAdministrationDataItemTest(TestCase):
             self.assertEqual(response.status_code, 200)
             self.assertIsInstance(response.context["form"], CatItemForm)
             self.assertContains(
-                response, f"Votre enfant comprend-il et dit-il ... {word} ?"
+                response, f"Votre enfant comprend-il et dit-il ... {word}?"
             )
 
     def sequence_test(self, file_name):
