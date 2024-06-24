@@ -146,6 +146,28 @@
                     },
                     {
                         "field":"mother_education",
+                        "choices":[
+                            {
+                                "key":"",
+                                "value":"--------"
+                            },
+                            {
+                                "key":12,
+                                "value":"高校卒業程度"
+                            },
+                            {
+                                "key":16,
+                                "value":"大学卒業程度"
+                            },
+                            {
+                                "key":18,
+                                "value":"大学院卒業程度"
+                            },
+                            {
+                                "key":0,
+                                "value":"情報開示を希望しない"
+                            }
+                        ],
                         "help":"Choose highest grade completed (12 = high school graduate; 16 = college graduate; 18 = advanced degree)"
                     },
                     {
@@ -159,6 +181,28 @@
                     },
                     {
                         "field":"father_education",
+                        "choices":[
+                            {
+                                "key":"",
+                                "value":"--------"
+                            },
+                            {
+                                "key":12,
+                                "value":"高校卒業程度"
+                            },
+                            {
+                                "key":16,
+                                "value":"大学卒業程度"
+                            },
+                            {
+                                "key":18,
+                                "value":"大学院卒業程度"
+                            },
+                            {
+                                "key":0,
+                                "value":"情報開示を希望しない"
+                            }
+                        ],
                         "help":"Choose highest grade completed (12 = high school graduate; 16 = college graduate; 18 = advanced degree)"
                     },
                     {
@@ -170,44 +214,44 @@
                                 "value":"--------"
                             },
                             {
-                                "key":"<25000",
-                                "value":"Under $25,000"
+                                "key":"<300",
+                                "value":"300万円未満"
                             },
                             {
-                                "key":"25000-50000",
-                                "value":"$25,000-$50,000"
+                                "key":"300-450",
+                                "value":"300～400万円"
                             },
                             {
                                 "key":"50000-75000",
-                                "value":"$50,000-$75,000"
+                                "value":"400～500万円"
                             },
                             {
                                 "key":"75000-100000",
-                                "value":"$75,000-$100,000"
+                                "value":"500～600万円"
                             },
                             {
-                                "key":"100000-125000",
-                                "value":"$100,000-$125,000"
+                                "key":"600-700",
+                                "value":"600～700万円"
                             },
                             {
-                                "key":"125000-150000",
-                                "value":"$125,000-$150,000"
+                                "key":"700-800",
+                                "value":"700～800万円"
                             },
                             {
-                                "key":"150000-175000",
-                                "value":"$150,000-$175,000"
+                                "key":"800-900",
+                                "value":"800～900万円"
                             },
                             {
-                                "key":"175000-200000",
-                                "value":"$175,000-$200,000"
+                                "key":"900-1000",
+                                "value":"900～1,000万円"
                             },
                             {
-                                "key":">200000",
-                                "value":"Over $200,000"
+                                "key":">1000",
+                                "value":"1,000万円以上"
                             },
                             {
                                 "key":"Prefer not to disclose",
-                                "value":"Prefer not to disclose"
+                                "value":"答えたくない"
                             }
                         ]
                     }
