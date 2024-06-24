@@ -7,7 +7,7 @@ from django.contrib.auth.views import PasswordChangeView
 from django.db.models.base import Model as Model
 from django.db.models.query import QuerySet
 from django.forms import BaseModelForm
-from django.http import HttpResponse
+from django.http import HttpRequest, HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import UpdateView
 
@@ -27,7 +27,7 @@ class ProfileView(UpdateView):
         ctx = super().get_context_data(**kwargs)
         ctx["researcher_form"] = ResearcherForm(instance=self.request.user.researcher)
         return ctx
-
+    
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         researcher_form = ResearcherForm(
             instance=self.request.user.researcher, data=self.request.POST
@@ -41,7 +41,7 @@ class ChangePasswordView(PasswordChangeView):
     form_class = PasswordChangeForm
     success_url = reverse_lazy("researcher_ui:console")
     template_name = "researcher_UI/change_password.html"
-
+    
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         messages.success(self.request, "Your password has been updated")
         return super().form_valid(form)
