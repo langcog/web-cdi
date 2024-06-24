@@ -2352,10 +2352,9 @@ msgid "%(words_shown)s of %(max_words)s (maximum) "
 msgstr ""
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:143
-#, fuzzy, python-format
-#| msgid "Does your child say ... "
+#, python-format
 msgid "Does your child say ... %(word)s?"
-msgstr "¿Su hijo/a dice ..."
+msgstr "¿Su hijo/a dice ... %(word)s?"
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:147
 msgid "* or word used in your family"

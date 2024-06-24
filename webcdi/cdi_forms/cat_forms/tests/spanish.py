@@ -99,7 +99,7 @@ class CATSpanishAdministrationDataItemTest(TestCase):
             self.assertEqual(response.status_code, 200)
             self.assertIsInstance(response.context["form"], CatItemForm)
             self.assertContains(
-                response, f"¿Su hijo/a dice ...{row[col_names.index('item')]} ?"
+                response, f"¿Su hijo/a dice ...{row[col_names.index('item')]}?"
             )
             payload = {
                 "word_id": row[col_names.index("index")],

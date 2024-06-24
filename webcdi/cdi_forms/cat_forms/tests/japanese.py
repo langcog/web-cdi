@@ -100,7 +100,7 @@ class CATJapaneseAdministrationDataItemTest(TestCase):
             self.assertIsInstance(response.context["form"], CatItemForm)
             self.assertContains(
                 response,
-                f"お子さまは次の単語を言いますか？{row[col_names.index('item')]} ?",
+                f"お子さまは次の単語を言いますか？「足 {row[col_names.index('item')]}」",
             )
             payload = {
                 "word_id": row[col_names.index("index")],
