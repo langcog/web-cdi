@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-17 07:09+0000\n"
+"POT-Creation-Date: 2024-06-24 07:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -45,14 +45,14 @@ msgstr "Enviar"
 #: cdi_forms/forms/forms.py:33 cdi_forms/forms/forms.py:34
 #: cdi_forms/models.py:626
 #: cdi_forms/templates/cdi_forms/administration_base.html:162
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:150
-#: cdi_forms/templates/cdi_forms/cdi_base.html:153
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:152
+#: cdi_forms/templates/cdi_forms/cdi_base.html:154
 msgid "No"
 msgstr "No"
 
 #: cdi_forms/forms/forms.py:33 cdi_forms/forms/forms.py:34
 #: cdi_forms/models.py:625
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:153
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:155
 msgid "Yes"
 msgstr "Sí"
 
@@ -1596,7 +1596,7 @@ msgstr "Página Siguiente"
 #: cdi_forms/templates/cdi_forms/cdi_form.html:10
 #: cdi_forms/templates/cdi_forms/cdi_form.html:327
 #: cdi_forms/templates/cdi_forms/study_group.html:6 cdi_forms/views/views.py:97
-#: researcher_UI/forms.py:344
+#: researcher_UI/forms/study_forms.py:343
 msgid "Save"
 msgstr "Guardar"
 
@@ -1618,19 +1618,19 @@ msgid "Don't forget to save your progress whenever you can!"
 msgstr "¡No olvide guardar su progreso siempre que pueda!"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:71
-#: cdi_forms/templates/cdi_forms/cdi_base.html:70
+#: cdi_forms/templates/cdi_forms/cdi_base.html:71
 msgid "Instructions: "
 msgstr "Instrucciones: "
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:75
-#: cdi_forms/templates/cdi_forms/cdi_base.html:74
+#: cdi_forms/templates/cdi_forms/cdi_base.html:75
 msgid "This form can be filled any time before the due date."
 msgstr ""
 "Este formulario puede ser completado en cualquier momento antes de la fecha "
 "de entrega."
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:76
-#: cdi_forms/templates/cdi_forms/cdi_base.html:75
+#: cdi_forms/templates/cdi_forms/cdi_base.html:76
 msgid ""
 "It can also be saved at any time and resumed later by using the same link"
 msgstr ""
@@ -1638,22 +1638,22 @@ msgstr ""
 "utilizando la misma página."
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:76
-#: cdi_forms/templates/cdi_forms/cdi_base.html:75
+#: cdi_forms/templates/cdi_forms/cdi_base.html:76
 msgid "create bookmark"
 msgstr "cree el marcador"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:77
-#: cdi_forms/templates/cdi_forms/cdi_base.html:76
+#: cdi_forms/templates/cdi_forms/cdi_base.html:77
 msgid "After the form is submitted, it cannot be altered."
 msgstr "Después de enviar el formulario, no se podrá modificar."
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:78
-#: cdi_forms/templates/cdi_forms/cdi_base.html:77
+#: cdi_forms/templates/cdi_forms/cdi_base.html:78
 msgid "The form also cannot be altered after the due date."
 msgstr "El formulario no se podrá modificar después de la fecha de entrega."
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:79
-#: cdi_forms/templates/cdi_forms/cdi_base.html:78
+#: cdi_forms/templates/cdi_forms/cdi_base.html:79
 msgid ""
 "Please use the navigation buttons below. Do not use the \"back\" and "
 "\"forward\" buttons on your browser."
@@ -1662,7 +1662,7 @@ msgstr ""
 "botones \"Atrás\" y \"Adelante\" en su navegador."
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:80
-#: cdi_forms/templates/cdi_forms/cdi_base.html:79
+#: cdi_forms/templates/cdi_forms/cdi_base.html:80
 msgid ""
 "You can use the tab button and arrows keys to quickly navigate and answer "
 "questions."
@@ -1671,17 +1671,17 @@ msgstr ""
 "y responder preguntas."
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:102
-#: cdi_forms/templates/cdi_forms/cdi_base.html:100
+#: cdi_forms/templates/cdi_forms/cdi_base.html:101
 msgid "Due date"
 msgstr "Fecha de entrega"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:107
-#: cdi_forms/templates/cdi_forms/cdi_base.html:105
+#: cdi_forms/templates/cdi_forms/cdi_base.html:106
 msgid "Show waiver of documentation"
 msgstr "Mostrar exención de documentación"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:112
-#: cdi_forms/templates/cdi_forms/cdi_base.html:110
+#: cdi_forms/templates/cdi_forms/cdi_base.html:111
 msgid "Reach out to the Web-CDI Team!"
 msgstr "¡Póngase en contacto con el equipo del Web-CDI!"
 
@@ -1701,17 +1701,17 @@ msgid "Instructions:"
 msgstr "Instrucciones: "
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:163
-#: cdi_forms/templates/cdi_forms/cdi_base.html:154
+#: cdi_forms/templates/cdi_forms/cdi_base.html:155
 msgid "Okay"
 msgstr "Bien"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:174
-#: cdi_forms/templates/cdi_forms/cdi_base.html:167
+#: cdi_forms/templates/cdi_forms/cdi_base.html:168
 msgid "Waiver Denied"
 msgstr "Renuncia Denegada"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:178
-#: cdi_forms/templates/cdi_forms/cdi_base.html:171
+#: cdi_forms/templates/cdi_forms/cdi_base.html:172
 msgid ""
 "Thank you for your response. We are unable to continue. Please close the "
 "window. If you would like, you may review the Waiver."
@@ -1721,7 +1721,7 @@ msgstr ""
 "su consentimiento."
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:181
-#: cdi_forms/templates/cdi_forms/cdi_base.html:174
+#: cdi_forms/templates/cdi_forms/cdi_base.html:175
 msgid "Review Waiver"
 msgstr "Revisar el documento de renuncia"
 
@@ -2351,11 +2351,13 @@ msgstr ""
 msgid "%(words_shown)s of %(max_words)s (maximum) "
 msgstr ""
 
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:142
-msgid "Does your child say ... "
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:143
+#, fuzzy, python-format
+#| msgid "Does your child say ... "
+msgid "Does your child say ... %(word)s?"
 msgstr "¿Su hijo/a dice ..."
 
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:145
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:147
 msgid "* or word used in your family"
 msgstr ""
 
@@ -2473,11 +2475,11 @@ msgid ""
 "datasharing"
 msgstr ""
 
-#: researcher_UI/forms.py:33
+#: researcher_UI/forms/study_forms.py:32
 msgid "Default"
 msgstr ""
 
-#: researcher_UI/forms.py:37
+#: researcher_UI/forms/study_forms.py:36
 msgid "Opening Dialog Box"
 msgstr ""
 

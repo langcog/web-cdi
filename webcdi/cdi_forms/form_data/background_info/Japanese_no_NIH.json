@@ -168,7 +168,7 @@
                                 "value":"情報開示を希望しない"
                             }
                         ],
-                        "help":"Choose highest grade completed (12 = high school graduate; 16 = college graduate; 18 = advanced degree)"
+                        "help":"最終学歴を選択"
                     },
                     {
                         "field":"secondary_caregiver",
@@ -203,7 +203,7 @@
                                 "value":"情報開示を希望しない"
                             }
                         ],
-                        "help":"Choose highest grade completed (12 = high school graduate; 16 = college graduate; 18 = advanced degree)"
+                        "help":"最終学歴を選択"
                     },
                     {
                         "field":"annual_income",

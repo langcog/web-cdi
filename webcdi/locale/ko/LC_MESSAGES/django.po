@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-17 07:09+0000\n"
+"POT-Creation-Date: 2024-06-24 07:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,14 +45,14 @@ msgstr "제출"
 #: cdi_forms/forms/forms.py:33 cdi_forms/forms/forms.py:34
 #: cdi_forms/models.py:626
 #: cdi_forms/templates/cdi_forms/administration_base.html:162
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:150
-#: cdi_forms/templates/cdi_forms/cdi_base.html:153
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:152
+#: cdi_forms/templates/cdi_forms/cdi_base.html:154
 msgid "No"
 msgstr "아니오"
 
 #: cdi_forms/forms/forms.py:33 cdi_forms/forms/forms.py:34
 #: cdi_forms/models.py:625
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:153
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:155
 msgid "Yes"
 msgstr "네"
 
@@ -1591,7 +1591,7 @@ msgstr "다음 페이지"
 #: cdi_forms/templates/cdi_forms/cdi_form.html:10
 #: cdi_forms/templates/cdi_forms/cdi_form.html:327
 #: cdi_forms/templates/cdi_forms/study_group.html:6 cdi_forms/views/views.py:97
-#: researcher_UI/forms.py:344
+#: researcher_UI/forms/study_forms.py:343
 msgid "Save"
 msgstr "저장"
 
@@ -1613,17 +1613,17 @@ msgid "Don't forget to save your progress whenever you can!"
 msgstr "가능한 한 설문 내용을 저장하면서 진행해 주십시오."
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:71
-#: cdi_forms/templates/cdi_forms/cdi_base.html:70
+#: cdi_forms/templates/cdi_forms/cdi_base.html:71
 msgid "Instructions: "
 msgstr "안내 사항: "
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:75
-#: cdi_forms/templates/cdi_forms/cdi_base.html:74
+#: cdi_forms/templates/cdi_forms/cdi_base.html:75
 msgid "This form can be filled any time before the due date."
 msgstr "본 설문은 마감일 전까지 언제든지 응답할 수 있습니다."
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:76
-#: cdi_forms/templates/cdi_forms/cdi_base.html:75
+#: cdi_forms/templates/cdi_forms/cdi_base.html:76
 msgid ""
 "It can also be saved at any time and resumed later by using the same link"
 msgstr ""
@@ -1631,22 +1631,22 @@ msgstr ""
 "니다."
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:76
-#: cdi_forms/templates/cdi_forms/cdi_base.html:75
+#: cdi_forms/templates/cdi_forms/cdi_base.html:76
 msgid "create bookmark"
 msgstr "책갈피 만들기"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:77
-#: cdi_forms/templates/cdi_forms/cdi_base.html:76
+#: cdi_forms/templates/cdi_forms/cdi_base.html:77
 msgid "After the form is submitted, it cannot be altered."
 msgstr "본 설문을 제출하신 후에는 응답 내용을 변경하실 수 없습니다."
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:78
-#: cdi_forms/templates/cdi_forms/cdi_base.html:77
+#: cdi_forms/templates/cdi_forms/cdi_base.html:78
 msgid "The form also cannot be altered after the due date."
 msgstr "또한 마감일 이후에도 본 설문의 응답 내용을 변경하실 수 없습니다."
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:79
-#: cdi_forms/templates/cdi_forms/cdi_base.html:78
+#: cdi_forms/templates/cdi_forms/cdi_base.html:79
 msgid ""
 "Please use the navigation buttons below. Do not use the \"back\" and "
 "\"forward\" buttons on your browser."
@@ -1655,24 +1655,24 @@ msgstr ""
 "튼을 사용하지 마십시오."
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:80
-#: cdi_forms/templates/cdi_forms/cdi_base.html:79
+#: cdi_forms/templates/cdi_forms/cdi_base.html:80
 msgid ""
 "You can use the tab button and arrows keys to quickly navigate and answer "
 "questions."
 msgstr "탭 키와 방향 키를 사용하여 빠르게 탐색하고 질문에 답하실 수 있습니다."
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:102
-#: cdi_forms/templates/cdi_forms/cdi_base.html:100
+#: cdi_forms/templates/cdi_forms/cdi_base.html:101
 msgid "Due date"
 msgstr "마감일"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:107
-#: cdi_forms/templates/cdi_forms/cdi_base.html:105
+#: cdi_forms/templates/cdi_forms/cdi_base.html:106
 msgid "Show waiver of documentation"
 msgstr "연구참여포기서 보기"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:112
-#: cdi_forms/templates/cdi_forms/cdi_base.html:110
+#: cdi_forms/templates/cdi_forms/cdi_base.html:111
 msgid "Reach out to the Web-CDI Team!"
 msgstr "웹CDI 팀에 연락해 주십시오!"
 
@@ -1692,17 +1692,17 @@ msgid "Instructions:"
 msgstr "안내 사항: "
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:163
-#: cdi_forms/templates/cdi_forms/cdi_base.html:154
+#: cdi_forms/templates/cdi_forms/cdi_base.html:155
 msgid "Okay"
 msgstr "네"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:174
-#: cdi_forms/templates/cdi_forms/cdi_base.html:167
+#: cdi_forms/templates/cdi_forms/cdi_base.html:168
 msgid "Waiver Denied"
 msgstr "연구참여포기서 인정되지 않음"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:178
-#: cdi_forms/templates/cdi_forms/cdi_base.html:171
+#: cdi_forms/templates/cdi_forms/cdi_base.html:172
 msgid ""
 "Thank you for your response. We are unable to continue. Please close the "
 "window. If you would like, you may review the Waiver."
@@ -1711,7 +1711,7 @@ msgstr ""
 "십시오. 원한다면 연구참여포기서를 다시 보실 수 있습니다."
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:181
-#: cdi_forms/templates/cdi_forms/cdi_base.html:174
+#: cdi_forms/templates/cdi_forms/cdi_base.html:175
 msgid "Review Waiver"
 msgstr "연구참여포기서 다시 보기"
 
@@ -2335,13 +2335,13 @@ msgstr ""
 msgid "%(words_shown)s of %(max_words)s (maximum) "
 msgstr ""
 
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:142
-#, fuzzy
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:143
+#, fuzzy, python-format
 #| msgid "Who does your child live with?"
-msgid "Does your child say ... "
+msgid "Does your child say ... %(word)s?"
 msgstr "아동은 누구와 살고 있나요?"
 
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:145
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:147
 msgid "* or word used in your family"
 msgstr ""
 
@@ -2454,11 +2454,11 @@ msgid ""
 "datasharing"
 msgstr ""
 
-#: researcher_UI/forms.py:33
+#: researcher_UI/forms/study_forms.py:32
 msgid "Default"
 msgstr ""
 
-#: researcher_UI/forms.py:37
+#: researcher_UI/forms/study_forms.py:36
 msgid "Opening Dialog Box"
 msgstr ""
 

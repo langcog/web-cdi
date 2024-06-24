@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-17 07:08+0000\n"
+"POT-Creation-Date: 2024-06-24 07:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,14 +45,14 @@ msgstr "送信する"
 #: cdi_forms/forms/forms.py:33 cdi_forms/forms/forms.py:34
 #: cdi_forms/models.py:626
 #: cdi_forms/templates/cdi_forms/administration_base.html:162
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:150
-#: cdi_forms/templates/cdi_forms/cdi_base.html:153
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:152
+#: cdi_forms/templates/cdi_forms/cdi_base.html:154
 msgid "No"
 msgstr "いいえ"
 
 #: cdi_forms/forms/forms.py:33 cdi_forms/forms/forms.py:34
 #: cdi_forms/models.py:625
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:153
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:155
 msgid "Yes"
 msgstr "はい"
 
@@ -123,7 +123,7 @@ msgstr ""
 #: cdi_forms/forms/forms.py:54 cdi_forms/forms/forms.py:213
 #: cdi_forms/models.py:128 cdi_forms/models.py:228 cdi_forms/models.py:449
 msgid "Other"
-msgstr ""
+msgstr "その他"
 
 #: cdi_forms/forms/forms.py:59
 msgid "Less than 3 lbs, 0 oz"
@@ -324,11 +324,11 @@ msgstr "早かったか、遅かったか、どちらに当てはまりますか
 
 #: cdi_forms/forms/forms.py:211 cdi_forms/models.py:126
 msgid "Male"
-msgstr "男性"
+msgstr "男の子"
 
 #: cdi_forms/forms/forms.py:212 cdi_forms/models.py:127
 msgid "Female"
-msgstr "女性"
+msgstr "女の子"
 
 #: cdi_forms/forms/forms.py:217
 msgid "Sex"
@@ -393,8 +393,7 @@ msgid ""
 "Was your child born early or late (more than one week before or after the "
 "due date)?"
 msgstr ""
-"お子様は予定日よりも早く生まれましたか、それとも遅く生まれましたか (出産予定"
-"日の前後1週間以上)？"
+"お子様は予定日よりも早く／遅く生まれましたか (出産予定日から1週間以上前または後でしたか)？"
 
 #: cdi_forms/forms/forms.py:461
 msgid "Does your child regularly hear a language other than English?"
@@ -491,7 +490,7 @@ msgstr "日常でふれている言語の情報"
 
 #: cdi_forms/forms/forms.py:919
 msgid "Health"
-msgstr "心身の状態や発達に関する情報"
+msgstr "心身の状態や発達に関する情報：差し支えない範囲でお答えください。"
 
 #: cdi_forms/forms/forms.py:947
 #, python-format
@@ -1352,13 +1351,13 @@ msgstr "主たる養育者の出生年 (西暦)"
 
 #: cdi_forms/models.py:246
 msgid "Primary Caregiver Education"
-msgstr "主たる養育者の最終学歴について教えてください。"
+msgstr "主たる養育者の最終学歴について教えてください (任意：差し支えなければご回答ください)。"
 
 #: cdi_forms/models.py:248 cdi_forms/models.py:287
 msgid ""
 "Choose highest grade completed (12 = high school graduate; 16 = college "
 "graduate; 18 = advanced degree)"
-msgstr "最高学歴を選択"
+msgstr "最終学歴を選択"
 
 #: cdi_forms/models.py:269
 msgid "Secondary Caregiver"
@@ -1370,7 +1369,7 @@ msgstr "第二の養育者の出生年 (西暦)"
 
 #: cdi_forms/models.py:283
 msgid "Secondary Caregiver Education"
-msgstr "第二の養育者の最終学歴について教えてください。"
+msgstr "第二の養育者の最終学歴について教えてください (任意：差し支えなければご回答ください)。"
 
 #: cdi_forms/models.py:311
 msgid "Two parents"
@@ -1390,7 +1389,7 @@ msgstr "他の養育者（祖父母や祖父母など）"
 
 #: cdi_forms/models.py:319
 msgid "Who does your child live with?"
-msgstr "お子さまは誰と一緒に生活していますか？"
+msgstr "お子さまと一緒に住んでいる養育者はどなたですか？"
 
 #: cdi_forms/models.py:333
 msgid "From whom?"
@@ -1580,7 +1579,7 @@ msgstr "次のページ"
 #: cdi_forms/templates/cdi_forms/cdi_form.html:10
 #: cdi_forms/templates/cdi_forms/cdi_form.html:327
 #: cdi_forms/templates/cdi_forms/study_group.html:6 cdi_forms/views/views.py:97
-#: researcher_UI/forms.py:344
+#: researcher_UI/forms/study_forms.py:343
 msgid "Save"
 msgstr "一時保存する"
 
@@ -1602,17 +1601,17 @@ msgid "Don't forget to save your progress whenever you can!"
 msgstr "一時保存するのをお忘れなく！"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:71
-#: cdi_forms/templates/cdi_forms/cdi_base.html:70
+#: cdi_forms/templates/cdi_forms/cdi_base.html:71
 msgid "Instructions: "
 msgstr "記入方法"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:75
-#: cdi_forms/templates/cdi_forms/cdi_base.html:74
+#: cdi_forms/templates/cdi_forms/cdi_base.html:75
 msgid "This form can be filled any time before the due date."
 msgstr "このアンケートは期日前であればいつでも記入できます。"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:76
-#: cdi_forms/templates/cdi_forms/cdi_base.html:75
+#: cdi_forms/templates/cdi_forms/cdi_base.html:76
 msgid ""
 "It can also be saved at any time and resumed later by using the same link"
 msgstr ""
@@ -1620,22 +1619,22 @@ msgstr ""
 "とができます。"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:76
-#: cdi_forms/templates/cdi_forms/cdi_base.html:75
+#: cdi_forms/templates/cdi_forms/cdi_base.html:76
 msgid "create bookmark"
 msgstr "ブックマークを作成する"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:77
-#: cdi_forms/templates/cdi_forms/cdi_base.html:76
+#: cdi_forms/templates/cdi_forms/cdi_base.html:77
 msgid "After the form is submitted, it cannot be altered."
 msgstr "アンケートを一度送信した後に、内容を変更することはできません。"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:78
-#: cdi_forms/templates/cdi_forms/cdi_base.html:77
+#: cdi_forms/templates/cdi_forms/cdi_base.html:78
 msgid "The form also cannot be altered after the due date."
 msgstr "また、回答期限後に内容を修正することもできません。"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:79
-#: cdi_forms/templates/cdi_forms/cdi_base.html:78
+#: cdi_forms/templates/cdi_forms/cdi_base.html:79
 msgid ""
 "Please use the navigation buttons below. Do not use the \"back\" and "
 "\"forward\" buttons on your browser."
@@ -1644,7 +1643,7 @@ msgstr ""
 "使用しないでください。"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:80
-#: cdi_forms/templates/cdi_forms/cdi_base.html:79
+#: cdi_forms/templates/cdi_forms/cdi_base.html:80
 msgid ""
 "You can use the tab button and arrows keys to quickly navigate and answer "
 "questions."
@@ -1652,17 +1651,17 @@ msgstr ""
 "Tabキーと矢印キーを使うことで、質問間を素早く移動し、回答することができます。"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:102
-#: cdi_forms/templates/cdi_forms/cdi_base.html:100
+#: cdi_forms/templates/cdi_forms/cdi_base.html:101
 msgid "Due date"
 msgstr "回答期限"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:107
-#: cdi_forms/templates/cdi_forms/cdi_base.html:105
+#: cdi_forms/templates/cdi_forms/cdi_base.html:106
 msgid "Show waiver of documentation"
 msgstr "ドキュメンテーション放棄の表示"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:112
-#: cdi_forms/templates/cdi_forms/cdi_base.html:110
+#: cdi_forms/templates/cdi_forms/cdi_base.html:111
 msgid "Reach out to the Web-CDI Team!"
 msgstr "Web-CDIチームにご連絡するにはこちら。"
 
@@ -1682,17 +1681,17 @@ msgid "Instructions:"
 msgstr "使用方法"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:163
-#: cdi_forms/templates/cdi_forms/cdi_base.html:154
+#: cdi_forms/templates/cdi_forms/cdi_base.html:155
 msgid "Okay"
 msgstr "承知しました"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:174
-#: cdi_forms/templates/cdi_forms/cdi_base.html:167
+#: cdi_forms/templates/cdi_forms/cdi_base.html:168
 msgid "Waiver Denied"
 msgstr "否認"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:178
-#: cdi_forms/templates/cdi_forms/cdi_base.html:171
+#: cdi_forms/templates/cdi_forms/cdi_base.html:172
 msgid ""
 "Thank you for your response. We are unable to continue. Please close the "
 "window. If you would like, you may review the Waiver."
@@ -1701,7 +1700,7 @@ msgstr ""
 "しければ、放棄を再度ご確認することができます。"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:181
-#: cdi_forms/templates/cdi_forms/cdi_base.html:174
+#: cdi_forms/templates/cdi_forms/cdi_base.html:175
 msgid "Review Waiver"
 msgstr "放棄を確認する"
 
@@ -1913,7 +1912,7 @@ msgstr ""
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:59
 #: cdi_forms/templates/cdi_forms/cdi_form.html:206
 msgid "DO check the box if:"
-msgstr "チェックを付ける場合："
+msgstr "上記のいずれの場合も、チェックを付けてください。"
 
 #: cdi_forms/templates/cdi_forms/administration_instructions.html:159
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:61
@@ -2007,17 +2006,7 @@ msgid ""
 "more about the CDI <a href=\"http://mb-cdi.stanford.edu/\" "
 "target=\"_blank\">here</a>. We appreciate your contribution!"
 msgstr ""
-"マッカーサーコミュニケーション発達質問紙 (CDI) にご協力いただき、ありがとうご"
-"ざいました。養育者の方々のご協力のお蔭で、私たち研究者は子どもたちの言葉の発"
-"達や、言葉の発達が子どもや文化によってどのように異なるかについて、より深く知"
-"るための研究を進めることができます。CDIには、さまざまな子どもたちが使うさまざ"
-"まな単語が反映されています。あなたのお子さまが知っている単語が少なくても心配"
-"はいりません。以下、私たちの研究にもとづいて、お子さまの語彙の発達に関する情"
-"報をお知らせします。こちらは臨床的な評価ではありません。お子さまの発達につい"
-"て何かご心配があれば、かかりつけの医師にご相談されることをお勧めします。この"
-"アンケートをお楽しみいただけたなら、CDIについて<a href=http://mb-cdi."
-"stanford.edu/ target=_blank>こちら</a>でもっと詳しく知ることができます。みな"
-"さまのご協力に心から感謝いたします。"
+"マッカーサーコミュニケーション発達質問紙 (CDI) にご協力いただき、ありがとうございました。養育者の方々のご協力のお蔭で、私たち研究者は子どもたちの言葉の発達や、言葉の発達が子どもや文化によってどのように異なるかについて、より深く知るための研究を進めることができます。CDIには、さまざまな子どもたちが使うさまざまな単語が反映されています。あなたのお子さまが知っている単語が少なくても心配はいりません。以下、私たちの研究にもとづいて、お子さまの語彙の発達に関する情報をお知らせします。こちらは臨床的な評価ではありません。お子さまの発達について何かご心配があれば、かかりつけの医師にご相談されることをお勧めします。このアンケートをお楽しみいただけたなら、CDIについて<a href=\"http://mb-cdi.stanford.edu/\" target=\"_blank\">こちら</a>でもっと詳しく知ることができます (英語のページとなります)。みなさまのご協力に心から感謝いたします。"
 
 #: cdi_forms/templates/cdi_forms/administration_summary.html:178
 #, python-format
@@ -2171,8 +2160,7 @@ msgid ""
 "do (e.g., “raff” instead of “giraffe”).  And there might be some words in "
 "your family that you use instead (e.g., “nana” for “grandma”)."
 msgstr ""
-"お子さまが大人と同じように発音していなくても構いません (例：「さかな」を「た"
-"かな」と言う)。"
+"お子さまが大人と同じように発音していなくても構いません (例：「さかな」を「たかな」と発音する場合も「言う」とお考えください)。"
 
 #: cdi_forms/templates/cdi_forms/background_info.html:29
 msgid ""
@@ -2284,28 +2272,19 @@ msgid ""
 "assessment, you can learn more about the CDI <a href=\"http://mb-cdi."
 "stanford.edu/\" target=\"_blank\">here</a>. We appreciate your contribution!"
 msgstr ""
-"マッカーサーコミュニケーション発達質問紙 (CDI) にご協力いただき、ありがとうご"
-"ざいました。養育者の方々のご協力のお蔭で、私たち研究者は子どもたちの言葉の発"
-"達や、言葉の発達が子どもや文化によってどのように異なるかについて、より深く知"
-"るための研究を進めることができます。CDIには、さまざまな子どもたちが使うさまざ"
-"まな単語が反映されています。あなたのお子さまが知っている単語が少なくても心配"
-"はいりません。以下、私たちの研究にもとづいて、お子さまの語彙の発達に関する情"
-"報をお知らせします。こちらは臨床的な評価ではありません。お子さまの発達につい"
-"て何かご心配があれば、かかりつけの医師にご相談されることをお勧めします。この"
-"アンケートをお楽しみいただけたなら、CDIについて<a href=http://mb-cdi."
-"stanford.edu/ target=_blank>こちら</a>でもっと詳しく知ることができます。みな"
-"さまのご協力に心から感謝いたします。"
+"マッカーサーコミュニケーション発達質問紙 (CDI) にご協力いただき、ありがとうございました。養育者の方々のご協力のお蔭で、私たち研究者は子どもたちの言葉の発達や、言葉の発達が子どもや文化によってどのように異なるかについて、より深く知るための研究を進めることができます。CDIには、さまざまな子どもたちが使うさまざまな単語が反映されています。あなたのお子さまが知っている単語が少なくても心配はいりません。以下、私たちの研究にもとづいて、お子さまの語彙の発達に関する情報をお知らせします。こちらは臨床的な評価ではありません。お子さまの発達について何かご心配があれば、かかりつけの医師にご相談されることをお勧めします。このアンケートをお楽しみいただけたなら、CDIについて<a href=\"http://mb-cdi.stanford.edu/\" target=\"_blank\">こちら</a>でもっと詳しく知ることができます (英語のページとなります)。みなさまのご協力に心から感謝いたします。"
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:137
 #, python-format
 msgid "%(words_shown)s of %(max_words)s (maximum) "
-msgstr "%(max_words)s (maximum)のうち%(words_shown)s"
+msgstr "%(max_words)s (最大の質問数) のうち%(words_shown)s"
 
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:142
-msgid "Does your child say ... "
-msgstr "お子さまは次の単語を言いますか？"
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:143
+#, python-format
+msgid "Does your child say ... %(word)s?"
+msgstr "お子さまは次の単語を言いますか？「足 %(word)s」"
 
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:145
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:147
 msgid "* or word used in your family"
 msgstr "* またはご家庭で使われている単語"
 
@@ -2320,13 +2299,7 @@ msgid ""
 "about the CDI <a href=\"http://mb-cdi.stanford.edu/\" "
 "target=\"_blank\">here</a>. Again, we appreciate your interest!"
 msgstr ""
-"マッカーサーコミュニケーション発達質問紙 (CDI) にご関心をもってくださり、あり"
-"がとうございます。以前にもCDIフォームにご記入いただいたことがあるようですね。"
-"一度だけご記入いただきますようお願いいたします。お子さまの発達についてご心配"
-"がある場合は、かかりつけの医師にご相談されることをお勧めします。アンケートを"
-"お楽しみいただけたなら、<a href=http://mb-cdi.stanford.edu/ target=_blank>こ"
-"ちら</a>からCDIについてもっと詳しく知ることができます。ご関心をもってくださ"
-"り、ありがとうございました。"
+"マッカーサーコミュニケーション発達質問紙 (CDI) にご協力いただき、ありがとうございました。養育者の方々のご協力のお蔭で、私たち研究者は子どもたちの言葉の発達や、言葉の発達が子どもや文化によってどのように異なるかについて、より深く知るための研究を進めることができます。CDIには、さまざまな子どもたちが使うさまざまな単語が反映されています。あなたのお子さまが知っている単語が少なくても心配はいりません。以下、私たちの研究にもとづいて、お子さまの語彙の発達に関する情報をお知らせします。こちらは臨床的な評価ではありません。お子さまの発達について何かご心配があれば、かかりつけの医師にご相談されることをお勧めします。このアンケートをお楽しみいただけたなら、CDIについて<a href=\"http://mb-cdi.stanford.edu/\" target=\"_blank\">こちら</a>でもっと詳しく知ることができます (英語のページとなります)。みなさまのご協力に心から感謝いたします。"
 
 #: cdi_forms/templates/cdi_forms/overflow.html:49
 #: cdi_forms/templates/cdi_forms/study_overflow.html:49
@@ -2345,17 +2318,7 @@ msgid ""
 "<a href=\"http://mb-cdi.stanford.edu/\" target=\"_blank\">here</a>. Again, "
 "we appreciate your interest!"
 msgstr ""
-"マッカーサーコミュニケーション発達質問紙 (CDI) へのご記入に関心をもってくださ"
-"り、ありがとうございます。現在、調査スロットはすべて埋まってしまっており、ご"
-"記入いただいても謝礼のお渡しが難しい状況です。もし、それでもなおCDIに記入して"
-"お子さまの語彙発達についてもっと知りたいという方は、<a href=%(bypass_url)s "
-"target=_blank>こちら</a>をクリックしてアンケートにご記入いただけます。ただ"
-"し、謝礼を受け取ることはできませんのでご留意ください。今後、新しい研究・調査"
-"がはじまるまでお待ちいただくことも可能です！お子さまの発達についてご心配があ"
-"る場合は、かかりつけの医師にご相談されることをお勧めします。アンケートをお楽"
-"しみいただけたなら、<a href=http://mb-cdi.stanford.edu/ target=_blank>こちら"
-"</a>からCDIについてもっと詳しく知ることができます。ご関心をもってくださり、あ"
-"りがとうございました。"
+"マッカーサーコミュニケーション発達質問紙 (CDI) へのご記入に関心をもってくださり、ありがとうございます。現在、調査スロットはすべて埋まってしまっており、ご記入いただいても謝礼のお渡しが難しい状況です。もし、それでもなおCDIに記入してお子さまの語彙発達についてもっと知りたいという方は、<a href=\"%(bypass_url)s\" target=\"_blank\">こちら</a>をクリックしてアンケートにご記入いただけます。ただし、謝礼を受け取ることはできませんのでご留意ください。今後、新しい研究・調査がはじまるまでお待ちいただくことも可能です！お子さまの発達についてご心配がある場合は、かかりつけの医師にご相談されることをお勧めします。アンケートをお楽しみいただけたなら、<a href=\"http://mb-cdi.stanford.edu/\" target=\"_blank\">こちら</a>からCDIについてもっと詳しく知ることができます (英語のページとなります)。ご関心をもってくださり、ありがとうございました。"
 
 #: cdi_forms/templates/cdi_forms/study_group.html:46
 msgid "How old is your child?"
@@ -2425,11 +2388,11 @@ msgstr ""
 "{q.name}のデータをダウンロードすることはできません。この研究では、データ共有"
 "は許諾されていません。"
 
-#: researcher_UI/forms.py:33
+#: researcher_UI/forms/study_forms.py:32
 msgid "Default"
 msgstr "初期設定"
 
-#: researcher_UI/forms.py:37
+#: researcher_UI/forms/study_forms.py:36
 msgid "Opening Dialog Box"
 msgstr "メッセージボックスを開ける"
 

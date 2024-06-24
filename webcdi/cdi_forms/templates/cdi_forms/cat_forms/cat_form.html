@@ -139,7 +139,9 @@
         </div>
         <div class="row pt10vh">
             <div class="col-12 center">
-                <h1>{% blocktrans %}Does your child say ... {% endblocktrans %}{{ form.item.label }} ?</h1>
+                {% with form.item.label as word %}
+                <h1>{% blocktrans %}Does your child say ... {{ word }}?{% endblocktrans %}</h1>
+                {% endwith %}
                 {{ form.word_id }}
                 {{ form.label }}
                 {% if footnote %}{% trans "* or word used in your family" %}{% endif %}
