@@ -268,7 +268,7 @@ LANGUAGE_TO_COUNTRY_DICT = {
 }
 
 
-COUNTRIES_FIRST = ["US", "CA", "NL", "IL", "FR", "CH", "BE", "LU"]
+COUNTRIES_FIRST = ["US", "CA", "NL", "IL", "JP", "FR", "CH", "BE", "LU"]
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
