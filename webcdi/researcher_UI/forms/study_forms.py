@@ -255,7 +255,6 @@ class AddStudyForm(BetterModelForm):
             Field("instrument"),
             Field("share_opt_out"),
             Field("test_period"),
-            Field("birth_weight_units"),
             Field("timing"),
             Field("allow_payment", css_class="css_enabler"),
             Div(
@@ -284,6 +283,7 @@ class AddStudyForm(BetterModelForm):
             Div(
                 Field("age_range"),
                 Field("demographic", css_class="css_enabler form-control"),
+                Div(Field("birth_weight_units"), css_class="no_demographic"),
                 Div(Field("backpage_boolean"), css_class="demographic"),
                 Div(Field("confirmation_questions"), css_class="demographic"),
                 Field("prefilled_data"),
