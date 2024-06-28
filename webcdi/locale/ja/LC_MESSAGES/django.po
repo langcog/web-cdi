@@ -1343,7 +1343,7 @@ msgstr "祖父母"
 
 #: cdi_forms/models.py:232
 msgid "Primary Caregiver"
-msgstr "お子さま主に養育している方 (＝主たる養育者) はどなたですか？"
+msgstr "お子さまの主たる養育者はどなたですか？"
 
 #: cdi_forms/models.py:240 cdi_forms/models.py:256
 msgid "Primary Caregiver Year of birth"
@@ -2282,7 +2282,7 @@ msgstr "%(max_words)s (最大の質問数) のうち%(words_shown)s"
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:143
 #, python-format
 msgid "Does your child say ... %(word)s?"
-msgstr "お子さまは次の単語を言いますか？「足 %(word)s」"
+msgstr "お子さまは次の単語を言いますか？「%(word)s」"
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:147
 msgid "* or word used in your family"
