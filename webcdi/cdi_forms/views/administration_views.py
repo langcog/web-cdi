@@ -658,6 +658,7 @@ class AdministrationUpdateView(UpdateView):
             # Read json file and store additional variables regarding the instrument, study, and the administration
             data = json.loads(content_file.read())
 
+        return_data = {}
         for part in data["parts"]:
             for item_type in part["types"]:
                 if "page" in item_type:
@@ -695,14 +696,8 @@ class AdministrationUpdateView(UpdateView):
                             return_data["contents"] = data["parts"]
                             return_data["menu"] = target_section
                             return return_data
-                else:
-                    return_data = {}
-
-                    """
-                    if self.object.study.show_feedback:
-                        raw_objects.extend(x)
-                    """
-
+                
+        return return_data
 
 def update_administration_data_item(request):
     if not request.POST:
