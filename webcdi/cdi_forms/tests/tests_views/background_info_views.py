@@ -482,7 +482,6 @@ class CreateBackgroundInfoViewTest(TestCase):
         )
 
 
-
 class BackgroundInfoViewTest(TestCase):
     fixtures = [
         "researcher_UI/fixtures/researcher_UI_test_fixtures.json",
@@ -524,6 +523,7 @@ class BackgroundInfoViewTest(TestCase):
     def test_get(self):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
+
 
 class CreateBackgroundInfoNotDefaultDemographicViewTest(TestCase):
     fixtures = [
@@ -603,7 +603,7 @@ class CreateBackgroundInfoNotDefaultDemographicViewTest(TestCase):
                 self.assertRedirects(
                     response,
                     reverse("administer_cdi_form", args=[administration.url_hash]),
-                    target_status_code=302
+                    target_status_code=302,
                 )
                 administration.completedSurvey = True
                 administration.save()
@@ -621,7 +621,8 @@ class CreateBackgroundInfoNotDefaultDemographicViewTest(TestCase):
                     )
                 self.assertEqual(response.status_code, 302)
 
-@tag('new')
+
+@tag("new")
 class StudyRedirectTests(TestCase):
     fixtures = [
         "researcher_UI/fixtures/researcher_UI_test_fixtures.json",
@@ -645,10 +646,10 @@ class StudyRedirectTests(TestCase):
             min_age=12,
             max_age=36,
             redirect_url="https://example.com/redirect/{source_id}",
-            redirect_boolean = True,
-            direct_redirect_boolean = True,
-            timing = 0,
-            demographic=Demographic.objects.get(name='English_Split.json'),
+            redirect_boolean=True,
+            direct_redirect_boolean=True,
+            timing=0,
+            demographic=Demographic.objects.get(name="English_Split.json"),
         )
 
         self.url = reverse(
@@ -691,7 +692,7 @@ class StudyRedirectTests(TestCase):
         self.assertRedirects(
             response,
             reverse("administer_cdi_form", args=[administration.url_hash]),
-            target_status_code=302
+            target_status_code=302,
         )
         administration.completedSurvey = True
         administration.save()
@@ -706,15 +707,17 @@ class StudyRedirectTests(TestCase):
         self.assertRedirects(
             response,
             reverse("administer_cdi_form", args=[administration.url_hash]),
-            target_status_code=302
+            target_status_code=302,
         )
         administration.completed = True
         administration.save()
-        response = self.client.get(reverse("administration_summary_view", args=[administration.url_hash]))
+        response = self.client.get(
+            reverse("administration_summary_view", args=[administration.url_hash])
+        )
         redirect_url = administration.study.redirect_url.replace(
-                "{{source_id}}", str(administration.backgroundinfo.source_id)
-            ).replace("{{event_id}}", str(administration.backgroundinfo.event_id))
+            "{{source_id}}", str(administration.backgroundinfo.source_id)
+        ).replace("{{event_id}}", str(administration.backgroundinfo.event_id))
         self.assertEquals(
-            response.context['redirect_url'], 
-            redirect_url, 
+            response.context["redirect_url"],
+            redirect_url,
         )
