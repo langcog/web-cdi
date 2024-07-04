@@ -8,7 +8,7 @@ from django.utils.translation import gettext_lazy as _
 from webcdi.utils import get_linux_ec2_private_ip
 
 DEBUG = bool(os.environ.get("DEBUG", False))
-#DEBUG=False
+# DEBUG=False
 TEMPLATE_DEBUG = False
 
 try:

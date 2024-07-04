@@ -260,7 +260,6 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
         self.get_hash_id()
         self.get_study_context()
         self.get_user_language()
-
         if (
             not self.administration_instance.completed
             and self.administration_instance.due_date > timezone.now()
@@ -320,7 +319,10 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
                 obj.save()
 
                 # If 'Next' button is pressed, update last_modified and mark completion of BackgroundInfo. Fetch CDI form by hash ID.
-                if "btn-next" in request.POST and request.POST["btn-next"] == _("Next"):
+                if "btn-next" in request.POST and request.POST["btn-next"] in [
+                    "Next",
+                    _("Next"),
+                ]:
                     Administration.objects.filter(url_hash=self.hash_id).update(
                         last_modified=timezone.now()
                     )

@@ -696,8 +696,9 @@ class AdministrationUpdateView(UpdateView):
                             return_data["contents"] = data["parts"]
                             return_data["menu"] = target_section
                             return return_data
-                
+
         return return_data
+
 
 def update_administration_data_item(request):
     if not request.POST:

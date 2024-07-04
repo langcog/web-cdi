@@ -53,8 +53,8 @@ class ProileTestCase(TestCase):
         form = PasswordChangeForm(user=self.user, data=payload)
         self.assertTrue(form.is_valid())
 
-        #TODO This doesn't work for some reason
-        '''
+        # TODO This doesn't work for some reason
+        """
         response = self.client.get(
             reverse_lazy("researcher_ui:change_password"),
         )
@@ -67,4 +67,4 @@ class ProileTestCase(TestCase):
         )
         print(response.context['form'].errors)
         self.assertEqual(response.template_name, "researcher_ui/console.html")
-        self.assertRedirects(response, reverse_lazy("researcher_ui:console"))'''
+        self.assertRedirects(response, reverse_lazy("researcher_ui:console"))"""

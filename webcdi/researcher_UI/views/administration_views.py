@@ -6,10 +6,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.db import models
 from django.http import Http404, JsonResponse
-from django.shortcuts import redirect
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 from django.utils import timezone
-from django.shortcuts import get_object_or_404
 from django.views.generic import CreateView, DetailView, UpdateView
 from ipware.ip import get_client_ip
 
@@ -104,8 +103,7 @@ class AddNewParent(DetailView):
     def get_object(self) -> models.Model:
         researcher = get_object_or_404(User, username=self.kwargs["username"])
         self.object = get_object_or_404(
-            Study,
-            name=self.kwargs["study_name"], researcher=researcher
+            Study, name=self.kwargs["study_name"], researcher=researcher
         )
         return self.object
 
