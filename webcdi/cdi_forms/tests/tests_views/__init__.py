@@ -1,7 +1,8 @@
 from .administration_views import AdministrationDetailViewTest  # noqa
 from .administration_views import (AdministrationSummaryViewTest,
                                    AdministrationUpdateViewTest,
-                                   UpdateAdministrationDataItemTest)
+                                   UpdateAdministrationDataItemTest,
+                                   UpdateSummaryViewTest)
 from .background_info_views import (  # noqa
     BackgroundInfoViewTest, CreateBackgroundInfoNotDefaultDemographicViewTest,
     CreateBackgroundInfoViewTest, StudyRedirectTests)

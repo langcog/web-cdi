@@ -1,5 +1,5 @@
 import logging
-
+from django.core.management import call_command
 from django.contrib.auth.models import User
 from django.test import TestCase, tag
 from django.urls import reverse
@@ -624,3 +624,33 @@ class UpdateAdministrationDataItemTest(TestCase):
             administration=self.administration, item_ID="item_761"
         )
         self.assertEqual(item.value, "complex")
+
+
+class UpdateSummaryViewTest(TestCase):
+    fixtures = [
+        "researcher_UI/fixtures/researcher_UI_test_fixtures.json",
+        "cdi_forms/fixtures/cdi_forms_test_fixtures.json",
+    ]
+
+    def setUp(self):
+        self.user = User.objects.create_user(username="test_user", password="secret")
+
+        instrument = Instrument.objects.get(
+            language="English",
+            form="WS",
+        )
+
+        self.study = Study.objects.create(
+            researcher=self.user,
+            name="Test Study Instance",
+            instrument=instrument,
+            redirect_url="https://example.com/redirect/{source_id}",
+        )
+
+    def test_completed_get(self):
+        self.client.force_login(self.user)
+        generate_fake_results(self.study, 10)
+        args = []
+        opts = {}
+        call_command("update_summary_data", *args, **opts)
+        self.assertEquals(10, Administration.objects.filter(study=self.study, scored=True).count())

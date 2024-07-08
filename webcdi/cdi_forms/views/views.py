@@ -302,7 +302,6 @@ def administer_cdi_form(request, hash_id):
 
     if request.method == "GET" or refresh:
         requests_log.objects.create(url_hash=hash_id, request_type="GET")
-
         if (
             not administration_instance.completed
             and administration_instance.due_date > timezone.now()
@@ -326,7 +325,6 @@ def administer_cdi_form(request, hash_id):
             else:
                 return redirect("background-info", pk=background_instance.pk)
         else:
-            print(f"Administration is completed is {administration_instance.completed}")
             # only printable
             return redirect(reverse("administration_summary_view", args=(hash_id,)))
 

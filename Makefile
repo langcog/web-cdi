@@ -18,7 +18,7 @@ docker-db-populate:
 	docker-compose run web ./manage.py 06_populate_items
 	
 docker-test:
-	docker-compose exec web coverage run manage.py test --exclude=selenium
+	docker-compose exec web coverage run manage.py test --exclude=selenium --omit="*/migrations*"
 	
 docker-create-db:
 	docker-compose exec -it db bash 
