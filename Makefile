@@ -18,7 +18,7 @@ docker-db-populate:
 	docker-compose run web ./manage.py 06_populate_items
 	
 docker-test:
-	docker-compose exec web coverage run manage.py test --exclude=selenium --omit="*/migrations*"
+	docker-compose exec web coverage run manage.py test --exclude=selenium
 	
 docker-create-db:
 	docker-compose exec -it db bash 
@@ -48,7 +48,7 @@ make sync-media::
 	rsync -rvz live:/var/lib/dokku/data/storage/live-${PROJECT}/media ./media/
 
 make dev-deploy::
-	git push dokku-dev develop:main
+	eb deploy webcdi-dev-django4
 
 make live-deploy::
-	git push dokku main:main
+	eb deploy webcdi-env
