@@ -384,13 +384,13 @@ class AddPairedStudyForm(forms.ModelForm):
 
     # Form validation. The paired_studies field cannot be empty.
     def clean(self):
-        cleaned_data = super(AddPairedStudyForm, self).clean()
+        cleaned_data = super().clean()
         if not cleaned_data.get("paired_studies"):
             self.add_error("paired_studies", "Added studies cannot be blank")
 
     # Form initiation. Specify form and field layout. Updated paired_studies so that only unpaired studies associated with the researcher are displayed.
     def __init__(self, *args, **kwargs):
-        self.researcher = kwargs.pop("researcher", None)
+        self.request = kwargs.pop('request')
         super(AddPairedStudyForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_id = "add-paired-study"
@@ -399,12 +399,11 @@ class AddPairedStudyForm(forms.ModelForm):
         self.helper.field_class = "col-9"
         self.helper.form_method = "post"
         self.helper.form_action = reverse("researcher_ui:add_paired_study")
-        if self.researcher:
-            self.fields["paired_studies"] = forms.ModelMultipleChoiceField(
-                queryset=Study.objects.filter(
-                    study_group="", researcher=self.researcher
-                )
+        self.fields["paired_studies"] = forms.ModelMultipleChoiceField(
+            queryset=Study.objects.filter(
+                researcher=self.request.user
             )
+        )
 
 
 class ImportDataForm(forms.ModelForm):

@@ -26,10 +26,18 @@ class AddPairedStudy(LoginRequiredMixin, CreateView):
         return redirect(reverse("researcher_ui:console"))
 
     def get_context_data(self, **kwargs):
-        context = super(AddPairedStudy, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         researcher = self.request.user
         context["researcher"] = researcher
         return context
+
+    def get_form_kwargs(self):
+        """ Passes the request object to the form class.
+         This is necessary to only display members that belong to a given user"""
+
+        kwargs = super().get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
 
 
 class UpdateStudyView(LoginRequiredMixin, ReseacherOwnsStudyMixin, UpdateView):
