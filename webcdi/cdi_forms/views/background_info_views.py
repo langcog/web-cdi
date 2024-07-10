@@ -494,7 +494,7 @@ class CreateBackgroundInfoView(CreateView):
                 " Not the right age? <a href='%(sgurl)s'> Click here</a>"
             ) % {
                 "sgurl": reverse(
-                    "find_paired_studies", args=[data["username"], data["study_group"]]
+                    "find_paired_studies", args=[data["username"], study_name, self.source_id]
                 )
             }
         else:

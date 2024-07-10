@@ -330,11 +330,12 @@ def administer_cdi_form(request, hash_id):
 
 
 # For studies that are grouped together, render a modal form that properly displays information regarding each study.
-def find_paired_studies(request, username, study_group):
+def find_paired_studies(request, username, study_name, source_id):
     data = {}
     researcher = User.objects.get(username=username)
+    study = Study.objects.get(name=study_name, researcher=researcher)
     possible_studies = (
-        Study.objects.filter(study_group=study_group, researcher=researcher)
+        Study.objects.filter(study_group=study.study_group, researcher=researcher)
         .annotate(
             admin_count=models.Sum(
                 models.Case(
@@ -361,25 +362,24 @@ def find_paired_studies(request, username, study_group):
         )
         .order_by("min_age")
     )
-
-    first_study = Study.objects.filter(study_group=study_group, researcher=researcher)[
-        :1
-    ].get()
-
+    
     context = {}
-    context["language"] = first_study.instrument.language
-    context["instrument"] = first_study.instrument.name
-    context["min_age"] = first_study.min_age
-    context["max_age"] = first_study.max_age
-    context["birthweight_units"] = first_study.birth_weight_units
+    context["language"] = study.instrument.language
+    context["instrument"] = study.instrument.name
+    context["min_age"] = study.min_age
+    context["max_age"] = study.max_age
+    context["birthweight_units"] = study.birth_weight_units
+    context["study"] = context["study_obj"] = study
+    context["source_id"] = source_id
 
     # user_language = language_map(administration_instance.study.instrument.language)
-    user_language = language_map(first_study.instrument.language)
+    user_language = language_map(study.instrument.language)
 
     translation.activate(user_language)
 
     data["background_form"] = BackgroundForm(context=context)
     data["possible_studies"] = possible_studies
+
     data["lang_list"] = (
         possible_studies.order_by("user_language")
         .values_list("user_language", flat=True)

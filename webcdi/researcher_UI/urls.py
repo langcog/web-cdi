@@ -17,11 +17,6 @@ urlpatterns = [
                 ),
                 path("add/", views.AddStudy.as_view(), name="add_study"),
                 path(
-                    "add_paired/",
-                    views.AddPairedStudy.as_view(),
-                    name="add_paired_study",
-                ),
-                path(
                     "<int:pk>/administer_new/",
                     views.AdminNew.as_view(),
                     name="administer_new",
@@ -37,6 +32,19 @@ urlpatterns = [
                     name="rename_study",
                 ),
                 path("<int:pk>/overflow/", views.Overflow.as_view(), name="overflow"),
+                path(
+                    "paired/",
+                    include(
+                        [
+                            path(
+                                "add/",
+                                views.AddPairedStudy.as_view(),
+                                name="add_paired_study",
+                            ),
+                           
+                        ]
+                    )
+                )
             ]
         ),
     ),

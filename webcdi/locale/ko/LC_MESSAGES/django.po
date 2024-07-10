@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-24 07:33+0000\n"
+"POT-Creation-Date: 2024-07-10 11:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -452,27 +452,27 @@ msgstr "월/일/년"
 msgid "dd/mm/yyyy"
 msgstr "일/월/년"
 
-#: cdi_forms/forms/forms.py:798 cdi_forms/models.py:294
+#: cdi_forms/forms/forms.py:800 cdi_forms/models.py:294
 msgid "Estimated Annual Family Income (in USD)"
 msgstr "연 가계소득 추정치 (원)"
 
-#: cdi_forms/forms/forms.py:808
+#: cdi_forms/forms/forms.py:810
 msgid "My child is (check all that apply):"
 msgstr "우리 아이는 (해당하는 모든 칸에 체크 표시 해주십시오):"
 
-#: cdi_forms/forms/forms.py:813 cdi_forms/forms/forms.py:835
+#: cdi_forms/forms/forms.py:815 cdi_forms/forms/forms.py:837
 msgid "Basic Information"
 msgstr "기본 정보"
 
-#: cdi_forms/forms/forms.py:864
+#: cdi_forms/forms/forms.py:866
 msgid "Family Background"
 msgstr "가족력"
 
-#: cdi_forms/forms/forms.py:884 cdi_forms/models.py:304
+#: cdi_forms/forms/forms.py:886 cdi_forms/models.py:304
 msgid "Child's Ethnicity"
 msgstr "아동의 인종"
 
-#: cdi_forms/forms/forms.py:888
+#: cdi_forms/forms/forms.py:890
 msgid ""
 "The following information is being collected for the sole purpose of "
 "reporting to our grant-funding institute, i.e.,  NIH (National Institute of "
@@ -484,19 +484,19 @@ msgstr ""
 "여 다음과 같은 정보를 수집합니다. 귀하의 협조는 선택사항이지만, 수집에 응해주"
 "신다면 감사하겠습니다."
 
-#: cdi_forms/forms/forms.py:896
+#: cdi_forms/forms/forms.py:898
 msgid "Caregiver Information"
 msgstr "주양육자 정보"
 
-#: cdi_forms/forms/forms.py:903
+#: cdi_forms/forms/forms.py:905
 msgid "Language Exposure"
 msgstr "노출 언어"
 
-#: cdi_forms/forms/forms.py:919
+#: cdi_forms/forms/forms.py:921
 msgid "Health"
 msgstr "건강"
 
-#: cdi_forms/forms/forms.py:947
+#: cdi_forms/forms/forms.py:949
 #, python-format
 msgid "Your identifier for %(source)s"
 msgstr ""
@@ -1602,7 +1602,7 @@ msgstr "저장"
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:32
 #: cdi_forms/templates/cdi_forms/cdi_form.html:14
 #: cdi_forms/templates/cdi_forms/cdi_form.html:328
-#: cdi_forms/views/background_info_views.py:346 cdi_forms/views/views.py:122
+#: cdi_forms/views/background_info_views.py:348 cdi_forms/views/views.py:122
 msgid "Go back to Background Info"
 msgstr "배경 정보로 돌아가기"
 
@@ -2126,7 +2126,7 @@ msgstr "PDF로 저장하기"
 #: cdi_forms/templates/cdi_forms/background_info.html:77
 #: cdi_forms/templates/cdi_forms/backpage_info.html:48
 #: cdi_forms/templates/cdi_forms/cdi_form.html:339
-#: cdi_forms/templates/cdi_forms/study_group.html:113
+#: cdi_forms/templates/cdi_forms/study_group.html:86
 msgid "Form unavailable. Contact admin."
 msgstr "설문을 시작할 수 없습니다. 관리자에게 문의하십시오."
 
@@ -2162,7 +2162,7 @@ msgstr "우리 아이가 이해하기에 가장 어려워하는 어휘는 INSERT
 #: cdi_forms/templates/cdi_forms/background_info.html:72
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:124
 #: cdi_forms/templates/cdi_forms/study_group.html:7
-#: cdi_forms/views/background_info_views.py:323
+#: cdi_forms/views/background_info_views.py:324
 msgid "Next"
 msgstr "다음"
 
@@ -2272,7 +2272,7 @@ msgstr "배경 정보"
 
 #: cdi_forms/templates/cdi_forms/backpage_info.html:12
 #: cdi_forms/templates/cdi_forms/backpage_info.html:45
-#: cdi_forms/views/background_info_views.py:334
+#: cdi_forms/views/background_info_views.py:336
 msgid "Finish"
 msgstr "완료"
 
@@ -2394,17 +2394,24 @@ msgstr ""
 msgid "How old is your child?"
 msgstr "아동은 몇 살입니까?"
 
-#: cdi_forms/templates/cdi_forms/study_group.html:57
+#: cdi_forms/templates/cdi_forms/study_group.html:59
+#, python-format
 msgid ""
-"My baby speaks LANGUAGE and is between MIN_AGE and MAX_AGE months old. [XX "
-"slot(s) left]"
+"\n"
+"                                                    My baby speaks "
+"%(language)s and is between %(min_age)s and %(max_age)s months old. "
+"[%(slots_left)s slot(s) left]\n"
+"                                                "
 msgstr ""
-"우리 아이는 LAUGNAGE 를 사용하고 MIN_AGE 이상 MAX_AGE 개월 이하입니다. [XX "
-"slot(s) left]"
 
-#: cdi_forms/templates/cdi_forms/study_group.html:60
-msgid "Born between STARTDATE and ENDDATE"
-msgstr "STARTDATE 과 ENDDATE 사이에 태어났습니다"
+#: cdi_forms/templates/cdi_forms/study_group.html:63
+#, python-format
+msgid ""
+"\n"
+"                                                    My baby speaks "
+"%(language)s and is between %(min_age)s and %(max_age)s months old.\n"
+"                                                "
+msgstr ""
 
 #: cdi_forms/views/background_info_views.py:136
 #, fuzzy
@@ -2416,21 +2423,21 @@ msgid ""
 msgstr "아동의 연령은 %(min_age)d 개월에서 %(max_age)d 개월 사이여야 합니다."
 
 #: cdi_forms/views/background_info_views.py:167
-#: cdi_forms/views/background_info_views.py:492
+#: cdi_forms/views/background_info_views.py:494
 #, python-format
 msgid " Not the right age? <a href='%(sgurl)s'> Click here</a>"
 msgstr ""
 "해당하는 연령이 아닌가요? <a href='%(sgurl)s'>이곳을 클릭해 주십시오</a>"
 
 #: cdi_forms/views/background_info_views.py:177
-#: cdi_forms/views/background_info_views.py:502
+#: cdi_forms/views/background_info_views.py:504
 msgid ""
 " Not the right age? You should contact your researcher for steps on what to "
 "do next."
 msgstr ""
 "해당하는 연령이 아닌가요? 다음 단계를 위하여 연구원에게 연락해 주십시오."
 
-#: cdi_forms/views/background_info_views.py:463
+#: cdi_forms/views/background_info_views.py:465
 #, python-format
 msgid "Your child should be between %(min_age)d to %(max_age)d months of age."
 msgstr "아동의 연령은 %(min_age)d 개월에서 %(max_age)d 개월 사이여야 합니다."
@@ -3017,41 +3024,41 @@ msgstr ""
 msgid "Jackson-Maldonado et al. (2003)"
 msgstr ""
 
-#: webcdi/settings.py:240
+#: webcdi/settings.py:241
 msgid "English"
 msgstr "영어"
 
-#: webcdi/settings.py:241
+#: webcdi/settings.py:242
 msgid "Spanish"
 msgstr "스페인어"
 
-#: webcdi/settings.py:243
+#: webcdi/settings.py:244
 msgid "French Quebec"
 msgstr "퀘벡 프랑스어"
 
-#: webcdi/settings.py:244
+#: webcdi/settings.py:245
 #, fuzzy
 #| msgid "French Quebec"
 msgid "French French"
 msgstr "퀘벡 프랑스어"
 
-#: webcdi/settings.py:245
+#: webcdi/settings.py:246
 msgid "Canadian English"
 msgstr "캐나다어"
 
-#: webcdi/settings.py:246
+#: webcdi/settings.py:247
 msgid "Dutch"
 msgstr "독일어"
 
-#: webcdi/settings.py:247
+#: webcdi/settings.py:248
 msgid "Hebrew"
 msgstr "히브리어"
 
-#: webcdi/settings.py:248
+#: webcdi/settings.py:249
 msgid "Korean"
 msgstr "한국어"
 
-#: webcdi/settings.py:249
+#: webcdi/settings.py:250
 msgid "Japanese"
 msgstr ""
 
@@ -3350,6 +3357,16 @@ msgstr "실패한 이유:"
 #, python-format
 msgid "Your registration was rejected -- %(site_name)s"
 msgstr "등록을 실패하였습니다 -- %(site_name)s"
+
+#~ msgid ""
+#~ "My baby speaks LANGUAGE and is between MIN_AGE and MAX_AGE months old. "
+#~ "[XX slot(s) left]"
+#~ msgstr ""
+#~ "우리 아이는 LAUGNAGE 를 사용하고 MIN_AGE 이상 MAX_AGE 개월 이하입니다. "
+#~ "[XX slot(s) left]"
+
+#~ msgid "Born between STARTDATE and ENDDATE"
+#~ msgstr "STARTDATE 과 ENDDATE 사이에 태어났습니다"
 
 #, python-format
 #~ msgid ""

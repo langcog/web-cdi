@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-24 07:33+0000\n"
+"POT-Creation-Date: 2024-07-10 11:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -393,7 +393,8 @@ msgid ""
 "Was your child born early or late (more than one week before or after the "
 "due date)?"
 msgstr ""
-"お子様は予定日よりも早く／遅く生まれましたか (出産予定日から1週間以上前または後でしたか)？"
+"お子様は予定日よりも早く／遅く生まれましたか (出産予定日から1週間以上前または"
+"後でしたか)？"
 
 #: cdi_forms/forms/forms.py:461
 msgid "Does your child regularly hear a language other than English?"
@@ -452,27 +453,27 @@ msgstr "月/日/年"
 msgid "dd/mm/yyyy"
 msgstr "日/月/年"
 
-#: cdi_forms/forms/forms.py:798 cdi_forms/models.py:294
+#: cdi_forms/forms/forms.py:800 cdi_forms/models.py:294
 msgid "Estimated Annual Family Income (in USD)"
 msgstr "おおよその世帯年収 (円) (任意：差し支えなければご回答ください)"
 
-#: cdi_forms/forms/forms.py:808
+#: cdi_forms/forms/forms.py:810
 msgid "My child is (check all that apply):"
 msgstr "私のお子さまは（該当するものすべてにチェックを入れてください）："
 
-#: cdi_forms/forms/forms.py:813 cdi_forms/forms/forms.py:835
+#: cdi_forms/forms/forms.py:815 cdi_forms/forms/forms.py:837
 msgid "Basic Information"
 msgstr "基本情報"
 
-#: cdi_forms/forms/forms.py:864
+#: cdi_forms/forms/forms.py:866
 msgid "Family Background"
 msgstr "家族構成"
 
-#: cdi_forms/forms/forms.py:884 cdi_forms/models.py:304
+#: cdi_forms/forms/forms.py:886 cdi_forms/models.py:304
 msgid "Child's Ethnicity"
 msgstr "お子さまの民族"
 
-#: cdi_forms/forms/forms.py:888
+#: cdi_forms/forms/forms.py:890
 msgid ""
 "The following information is being collected for the sole purpose of "
 "reporting to our grant-funding institute, i.e.,  NIH (National Institute of "
@@ -480,19 +481,19 @@ msgid ""
 "inclusiveness of our research. Your cooperation is appreciated, but optional."
 msgstr ""
 
-#: cdi_forms/forms/forms.py:896
+#: cdi_forms/forms/forms.py:898
 msgid "Caregiver Information"
 msgstr "養育者の情報"
 
-#: cdi_forms/forms/forms.py:903
+#: cdi_forms/forms/forms.py:905
 msgid "Language Exposure"
 msgstr "日常でふれている言語の情報"
 
-#: cdi_forms/forms/forms.py:919
+#: cdi_forms/forms/forms.py:921
 msgid "Health"
 msgstr "心身の状態や発達に関する情報：差し支えない範囲でお答えください。"
 
-#: cdi_forms/forms/forms.py:947
+#: cdi_forms/forms/forms.py:949
 #, python-format
 msgid "Your identifier for %(source)s"
 msgstr ""
@@ -1351,7 +1352,9 @@ msgstr "主たる養育者の出生年 (西暦)"
 
 #: cdi_forms/models.py:246
 msgid "Primary Caregiver Education"
-msgstr "主たる養育者の最終学歴について教えてください (任意：差し支えなければご回答ください)。"
+msgstr ""
+"主たる養育者の最終学歴について教えてください (任意：差し支えなければご回答く"
+"ださい)。"
 
 #: cdi_forms/models.py:248 cdi_forms/models.py:287
 msgid ""
@@ -1369,7 +1372,9 @@ msgstr "第二の養育者の出生年 (西暦)"
 
 #: cdi_forms/models.py:283
 msgid "Secondary Caregiver Education"
-msgstr "第二の養育者の最終学歴について教えてください (任意：差し支えなければご回答ください)。"
+msgstr ""
+"第二の養育者の最終学歴について教えてください (任意：差し支えなければご回答く"
+"ださい)。"
 
 #: cdi_forms/models.py:311
 msgid "Two parents"
@@ -1590,7 +1595,7 @@ msgstr "一時保存する"
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:32
 #: cdi_forms/templates/cdi_forms/cdi_form.html:14
 #: cdi_forms/templates/cdi_forms/cdi_form.html:328
-#: cdi_forms/views/background_info_views.py:346 cdi_forms/views/views.py:122
+#: cdi_forms/views/background_info_views.py:348 cdi_forms/views/views.py:122
 msgid "Go back to Background Info"
 msgstr "背景情報の記入に戻る"
 
@@ -2006,7 +2011,17 @@ msgid ""
 "more about the CDI <a href=\"http://mb-cdi.stanford.edu/\" "
 "target=\"_blank\">here</a>. We appreciate your contribution!"
 msgstr ""
-"マッカーサーコミュニケーション発達質問紙 (CDI) にご協力いただき、ありがとうございました。養育者の方々のご協力のお蔭で、私たち研究者は子どもたちの言葉の発達や、言葉の発達が子どもや文化によってどのように異なるかについて、より深く知るための研究を進めることができます。CDIには、さまざまな子どもたちが使うさまざまな単語が反映されています。あなたのお子さまが知っている単語が少なくても心配はいりません。以下、私たちの研究にもとづいて、お子さまの語彙の発達に関する情報をお知らせします。こちらは臨床的な評価ではありません。お子さまの発達について何かご心配があれば、かかりつけの医師にご相談されることをお勧めします。このアンケートをお楽しみいただけたなら、CDIについて<a href=\"http://mb-cdi.stanford.edu/\" target=\"_blank\">こちら</a>でもっと詳しく知ることができます (英語のページとなります)。みなさまのご協力に心から感謝いたします。"
+"マッカーサーコミュニケーション発達質問紙 (CDI) にご協力いただき、ありがとうご"
+"ざいました。養育者の方々のご協力のお蔭で、私たち研究者は子どもたちの言葉の発"
+"達や、言葉の発達が子どもや文化によってどのように異なるかについて、より深く知"
+"るための研究を進めることができます。CDIには、さまざまな子どもたちが使うさまざ"
+"まな単語が反映されています。あなたのお子さまが知っている単語が少なくても心配"
+"はいりません。以下、私たちの研究にもとづいて、お子さまの語彙の発達に関する情"
+"報をお知らせします。こちらは臨床的な評価ではありません。お子さまの発達につい"
+"て何かご心配があれば、かかりつけの医師にご相談されることをお勧めします。この"
+"アンケートをお楽しみいただけたなら、CDIについて<a href=\"http://mb-cdi."
+"stanford.edu/\" target=\"_blank\">こちら</a>でもっと詳しく知ることができます "
+"(英語のページとなります)。みなさまのご協力に心から感謝いたします。"
 
 #: cdi_forms/templates/cdi_forms/administration_summary.html:178
 #, python-format
@@ -2089,7 +2104,7 @@ msgstr "PDFとして保存する"
 #: cdi_forms/templates/cdi_forms/background_info.html:77
 #: cdi_forms/templates/cdi_forms/backpage_info.html:48
 #: cdi_forms/templates/cdi_forms/cdi_form.html:339
-#: cdi_forms/templates/cdi_forms/study_group.html:113
+#: cdi_forms/templates/cdi_forms/study_group.html:86
 msgid "Form unavailable. Contact admin."
 msgstr "フォームが使用できません。管理者に連絡してください。"
 
@@ -2126,7 +2141,7 @@ msgstr "お子さまが理解している最も難しい単語はINSERTWORDHERE�
 #: cdi_forms/templates/cdi_forms/background_info.html:72
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:124
 #: cdi_forms/templates/cdi_forms/study_group.html:7
-#: cdi_forms/views/background_info_views.py:323
+#: cdi_forms/views/background_info_views.py:324
 msgid "Next"
 msgstr "次へ"
 
@@ -2160,7 +2175,8 @@ msgid ""
 "do (e.g., “raff” instead of “giraffe”).  And there might be some words in "
 "your family that you use instead (e.g., “nana” for “grandma”)."
 msgstr ""
-"お子さまが大人と同じように発音していなくても構いません (例：「さかな」を「たかな」と発音する場合も「言う」とお考えください)。"
+"お子さまが大人と同じように発音していなくても構いません (例：「さかな」を「た"
+"かな」と発音する場合も「言う」とお考えください)。"
 
 #: cdi_forms/templates/cdi_forms/background_info.html:29
 msgid ""
@@ -2238,7 +2254,7 @@ msgstr "背景情報"
 
 #: cdi_forms/templates/cdi_forms/backpage_info.html:12
 #: cdi_forms/templates/cdi_forms/backpage_info.html:45
-#: cdi_forms/views/background_info_views.py:334
+#: cdi_forms/views/background_info_views.py:336
 msgid "Finish"
 msgstr "終了する"
 
@@ -2272,7 +2288,17 @@ msgid ""
 "assessment, you can learn more about the CDI <a href=\"http://mb-cdi."
 "stanford.edu/\" target=\"_blank\">here</a>. We appreciate your contribution!"
 msgstr ""
-"マッカーサーコミュニケーション発達質問紙 (CDI) にご協力いただき、ありがとうございました。養育者の方々のご協力のお蔭で、私たち研究者は子どもたちの言葉の発達や、言葉の発達が子どもや文化によってどのように異なるかについて、より深く知るための研究を進めることができます。CDIには、さまざまな子どもたちが使うさまざまな単語が反映されています。あなたのお子さまが知っている単語が少なくても心配はいりません。以下、私たちの研究にもとづいて、お子さまの語彙の発達に関する情報をお知らせします。こちらは臨床的な評価ではありません。お子さまの発達について何かご心配があれば、かかりつけの医師にご相談されることをお勧めします。このアンケートをお楽しみいただけたなら、CDIについて<a href=\"http://mb-cdi.stanford.edu/\" target=\"_blank\">こちら</a>でもっと詳しく知ることができます (英語のページとなります)。みなさまのご協力に心から感謝いたします。"
+"マッカーサーコミュニケーション発達質問紙 (CDI) にご協力いただき、ありがとうご"
+"ざいました。養育者の方々のご協力のお蔭で、私たち研究者は子どもたちの言葉の発"
+"達や、言葉の発達が子どもや文化によってどのように異なるかについて、より深く知"
+"るための研究を進めることができます。CDIには、さまざまな子どもたちが使うさまざ"
+"まな単語が反映されています。あなたのお子さまが知っている単語が少なくても心配"
+"はいりません。以下、私たちの研究にもとづいて、お子さまの語彙の発達に関する情"
+"報をお知らせします。こちらは臨床的な評価ではありません。お子さまの発達につい"
+"て何かご心配があれば、かかりつけの医師にご相談されることをお勧めします。この"
+"アンケートをお楽しみいただけたなら、CDIについて<a href=\"http://mb-cdi."
+"stanford.edu/\" target=\"_blank\">こちら</a>でもっと詳しく知ることができます "
+"(英語のページとなります)。みなさまのご協力に心から感謝いたします。"
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:137
 #, python-format
@@ -2299,7 +2325,17 @@ msgid ""
 "about the CDI <a href=\"http://mb-cdi.stanford.edu/\" "
 "target=\"_blank\">here</a>. Again, we appreciate your interest!"
 msgstr ""
-"マッカーサーコミュニケーション発達質問紙 (CDI) にご協力いただき、ありがとうございました。養育者の方々のご協力のお蔭で、私たち研究者は子どもたちの言葉の発達や、言葉の発達が子どもや文化によってどのように異なるかについて、より深く知るための研究を進めることができます。CDIには、さまざまな子どもたちが使うさまざまな単語が反映されています。あなたのお子さまが知っている単語が少なくても心配はいりません。以下、私たちの研究にもとづいて、お子さまの語彙の発達に関する情報をお知らせします。こちらは臨床的な評価ではありません。お子さまの発達について何かご心配があれば、かかりつけの医師にご相談されることをお勧めします。このアンケートをお楽しみいただけたなら、CDIについて<a href=\"http://mb-cdi.stanford.edu/\" target=\"_blank\">こちら</a>でもっと詳しく知ることができます (英語のページとなります)。みなさまのご協力に心から感謝いたします。"
+"マッカーサーコミュニケーション発達質問紙 (CDI) にご協力いただき、ありがとうご"
+"ざいました。養育者の方々のご協力のお蔭で、私たち研究者は子どもたちの言葉の発"
+"達や、言葉の発達が子どもや文化によってどのように異なるかについて、より深く知"
+"るための研究を進めることができます。CDIには、さまざまな子どもたちが使うさまざ"
+"まな単語が反映されています。あなたのお子さまが知っている単語が少なくても心配"
+"はいりません。以下、私たちの研究にもとづいて、お子さまの語彙の発達に関する情"
+"報をお知らせします。こちらは臨床的な評価ではありません。お子さまの発達につい"
+"て何かご心配があれば、かかりつけの医師にご相談されることをお勧めします。この"
+"アンケートをお楽しみいただけたなら、CDIについて<a href=\"http://mb-cdi."
+"stanford.edu/\" target=\"_blank\">こちら</a>でもっと詳しく知ることができます "
+"(英語のページとなります)。みなさまのご協力に心から感謝いたします。"
 
 #: cdi_forms/templates/cdi_forms/overflow.html:49
 #: cdi_forms/templates/cdi_forms/study_overflow.html:49
@@ -2318,23 +2354,45 @@ msgid ""
 "<a href=\"http://mb-cdi.stanford.edu/\" target=\"_blank\">here</a>. Again, "
 "we appreciate your interest!"
 msgstr ""
-"マッカーサーコミュニケーション発達質問紙 (CDI) へのご記入に関心をもってくださり、ありがとうございます。現在、調査スロットはすべて埋まってしまっており、ご記入いただいても謝礼のお渡しが難しい状況です。もし、それでもなおCDIに記入してお子さまの語彙発達についてもっと知りたいという方は、<a href=\"%(bypass_url)s\" target=\"_blank\">こちら</a>をクリックしてアンケートにご記入いただけます。ただし、謝礼を受け取ることはできませんのでご留意ください。今後、新しい研究・調査がはじまるまでお待ちいただくことも可能です！お子さまの発達についてご心配がある場合は、かかりつけの医師にご相談されることをお勧めします。アンケートをお楽しみいただけたなら、<a href=\"http://mb-cdi.stanford.edu/\" target=\"_blank\">こちら</a>からCDIについてもっと詳しく知ることができます (英語のページとなります)。ご関心をもってくださり、ありがとうございました。"
+"マッカーサーコミュニケーション発達質問紙 (CDI) へのご記入に関心をもってくださ"
+"り、ありがとうございます。現在、調査スロットはすべて埋まってしまっており、ご"
+"記入いただいても謝礼のお渡しが難しい状況です。もし、それでもなおCDIに記入して"
+"お子さまの語彙発達についてもっと知りたいという方は、<a "
+"href=\"%(bypass_url)s\" target=\"_blank\">こちら</a>をクリックしてアンケート"
+"にご記入いただけます。ただし、謝礼を受け取ることはできませんのでご留意くださ"
+"い。今後、新しい研究・調査がはじまるまでお待ちいただくことも可能です！お子さ"
+"まの発達についてご心配がある場合は、かかりつけの医師にご相談されることをお勧"
+"めします。アンケートをお楽しみいただけたなら、<a href=\"http://mb-cdi."
+"stanford.edu/\" target=\"_blank\">こちら</a>からCDIについてもっと詳しく知るこ"
+"とができます (英語のページとなります)。ご関心をもってくださり、ありがとうござ"
+"いました。"
 
 #: cdi_forms/templates/cdi_forms/study_group.html:46
 msgid "How old is your child?"
 msgstr "お子さまの月齢を教えてください"
 
-#: cdi_forms/templates/cdi_forms/study_group.html:57
+#: cdi_forms/templates/cdi_forms/study_group.html:59
+#, python-format
 msgid ""
-"My baby speaks LANGUAGE and is between MIN_AGE and MAX_AGE months old. [XX "
-"slot(s) left]"
+"\n"
+"                                                    My baby speaks "
+"%(language)s and is between %(min_age)s and %(max_age)s months old. "
+"[%(slots_left)s slot(s) left]\n"
+"                                                "
 msgstr ""
-"私の子どもは、LANGUAGEを話し、かつ月齢はMIN_AGEヶ月～MAX_AGEヶ月の間です。"
-"[XX slot(s) left]"
 
-#: cdi_forms/templates/cdi_forms/study_group.html:60
-msgid "Born between STARTDATE and ENDDATE"
-msgstr "生年月日はSTARTDATE～ENDDATEの間です"
+#: cdi_forms/templates/cdi_forms/study_group.html:63
+#, python-format
+msgid ""
+"\n"
+"                                                    My baby speaks "
+"%(language)s and is between %(min_age)s and %(max_age)s months old.\n"
+"                                                "
+msgstr ""
+"\n"
+" My baby "
+" is between %(min_age)s and %(max_age)s months old and speaks %(language)s "
+
 
 #: cdi_forms/views/background_info_views.py:136
 #, fuzzy
@@ -2346,7 +2404,7 @@ msgid ""
 msgstr "このフォームの対象月齢は%(min_age)dヶ月から%(max_age)dヶ月までです。"
 
 #: cdi_forms/views/background_info_views.py:167
-#: cdi_forms/views/background_info_views.py:492
+#: cdi_forms/views/background_info_views.py:494
 #, python-format
 msgid " Not the right age? <a href='%(sgurl)s'> Click here</a>"
 msgstr ""
@@ -2354,7 +2412,7 @@ msgstr ""
 "みてください。"
 
 #: cdi_forms/views/background_info_views.py:177
-#: cdi_forms/views/background_info_views.py:502
+#: cdi_forms/views/background_info_views.py:504
 msgid ""
 " Not the right age? You should contact your researcher for steps on what to "
 "do next."
@@ -2362,7 +2420,7 @@ msgstr ""
 "対象月齢ではありませんでしたか？恐れ入りますが、担当の研究者までお問い合わせ"
 "ください。"
 
-#: cdi_forms/views/background_info_views.py:463
+#: cdi_forms/views/background_info_views.py:465
 #, python-format
 msgid "Your child should be between %(min_age)d to %(max_age)d months of age."
 msgstr "このフォームの対象月齢は%(min_age)dヶ月から%(max_age)dヶ月までです。"
@@ -2931,39 +2989,39 @@ msgstr ""
 msgid "Jackson-Maldonado et al. (2003)"
 msgstr ""
 
-#: webcdi/settings.py:240
+#: webcdi/settings.py:241
 msgid "English"
 msgstr "英語"
 
-#: webcdi/settings.py:241
+#: webcdi/settings.py:242
 msgid "Spanish"
 msgstr "スペイン語"
 
-#: webcdi/settings.py:243
+#: webcdi/settings.py:244
 msgid "French Quebec"
 msgstr "フランス語 (ケベック)"
 
-#: webcdi/settings.py:244
+#: webcdi/settings.py:245
 msgid "French French"
 msgstr "フランス語 (フランス)"
 
-#: webcdi/settings.py:245
+#: webcdi/settings.py:246
 msgid "Canadian English"
 msgstr "英語 (カナダ)"
 
-#: webcdi/settings.py:246
+#: webcdi/settings.py:247
 msgid "Dutch"
 msgstr "オランダ語"
 
-#: webcdi/settings.py:247
+#: webcdi/settings.py:248
 msgid "Hebrew"
 msgstr "ヘブライ語"
 
-#: webcdi/settings.py:248
+#: webcdi/settings.py:249
 msgid "Korean"
 msgstr "韓国語"
 
-#: webcdi/settings.py:249
+#: webcdi/settings.py:250
 msgid "Japanese"
 msgstr ""
 
@@ -3273,6 +3331,16 @@ msgstr "拒否された理由："
 #, python-format
 msgid "Your registration was rejected -- %(site_name)s"
 msgstr "登録できませんでした -- %(site_name)s"
+
+#~ msgid ""
+#~ "My baby speaks LANGUAGE and is between MIN_AGE and MAX_AGE months old. "
+#~ "[XX slot(s) left]"
+#~ msgstr ""
+#~ "私の子どもは、LANGUAGEを話し、かつ月齢はMIN_AGEヶ月～MAX_AGEヶ月の間です。"
+#~ "[XX slot(s) left]"
+
+#~ msgid "Born between STARTDATE and ENDDATE"
+#~ msgstr "生年月日はSTARTDATE～ENDDATEの間です"
 
 #, python-format
 #~ msgid "Your registration of %(site_name)s was accepted by inspector."
