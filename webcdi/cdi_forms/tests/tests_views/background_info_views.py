@@ -621,6 +621,7 @@ class CreateBackgroundInfoNotDefaultDemographicViewTest(TestCase):
                     )
                 self.assertEqual(response.status_code, 302)
 
+
 class StudyRedirectTests(TestCase):
     fixtures = [
         "researcher_UI/fixtures/researcher_UI_test_fixtures.json",

@@ -13,6 +13,7 @@ from researcher_UI.utils import raw_gift_code_fun
 
 logger = logging.getLogger("debug")
 
+
 class UpdateStudyView(LoginRequiredMixin, ReseacherOwnsStudyMixin, UpdateView):
     model = Study
     template_name = "researcher_UI/study_form.html"

@@ -41,10 +41,9 @@ urlpatterns = [
                                 views.AddPairedStudy.as_view(),
                                 name="add_paired_study",
                             ),
-                           
                         ]
-                    )
-                )
+                    ),
+                ),
             ]
         ),
     ),

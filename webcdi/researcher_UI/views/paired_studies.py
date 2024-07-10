@@ -11,6 +11,7 @@ from researcher_UI.utils import add_paired_study_fun
 
 logger = logging.getLogger("debug")
 
+
 class AddPairedStudy(LoginRequiredMixin, CreateView):
     model = Study
     form_class = AddPairedStudyForm
@@ -27,9 +28,9 @@ class AddPairedStudy(LoginRequiredMixin, CreateView):
         return context
 
     def get_form_kwargs(self):
-        """ Passes the request object to the form class.
-         This is necessary to only display members that belong to a given user"""
+        """Passes the request object to the form class.
+        This is necessary to only display members that belong to a given user"""
 
         kwargs = super().get_form_kwargs()
-        kwargs['request'] = self.request
+        kwargs["request"] = self.request
         return kwargs

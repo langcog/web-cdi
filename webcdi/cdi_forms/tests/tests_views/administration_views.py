@@ -1,6 +1,7 @@
 import logging
-from django.core.management import call_command
+
 from django.contrib.auth.models import User
+from django.core.management import call_command
 from django.test import TestCase, tag
 from django.urls import reverse
 from django.utils import timezone
@@ -653,4 +654,6 @@ class UpdateSummaryViewTest(TestCase):
         args = []
         opts = {}
         call_command("update_summary_data", *args, **opts)
-        self.assertEquals(10, Administration.objects.filter(study=self.study, scored=True).count())
+        self.assertEquals(
+            10, Administration.objects.filter(study=self.study, scored=True).count()
+        )

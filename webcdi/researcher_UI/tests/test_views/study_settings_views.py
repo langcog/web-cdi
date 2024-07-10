@@ -100,7 +100,9 @@ class AddPairedStudyTest(TestCase):
             )
             generate_fake_results(study, 10)
 
-        self.study = Study.objects.filter(researcher=self.user).order_by("?")[0]
+        studies = Study.objects.filter(researcher=self.user).order_by("?")
+        self.study = studies[0]
+        self.study1 = studies[1]
 
         self.url = reverse("researcher_ui:add_paired_study")
 
@@ -111,12 +113,13 @@ class AddPairedStudyTest(TestCase):
 
     def test_post(self):
         self.client.force_login(self.user)
-        payload = {"study_group": "StudyGroup", "paired_studies": [self.study.id]}
-        form = AddPairedStudyForm(data=payload)
-        self.assertTrue(form.is_valid())
+        payload = {
+            "study_group": "StudyGroup",
+            "paired_studies": [self.study.id, self.study1.id],
+        }
 
         response = self.client.post(self.url, payload)
-        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse("researcher_ui:console"))
 
 
 class UpdateStudyTest(TestCase):

@@ -3,7 +3,7 @@ import os
 
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.test import TestCase, tag
+from django.test import RequestFactory, TestCase, tag
 from django.urls import reverse
 
 from researcher_UI.forms import AddPairedStudyForm, AdminNewForm
@@ -77,22 +77,17 @@ class StudyCreateViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_post(self):
+        # not sure this is testing anything
         self.client.force_login(self.user)
-        payload = {"study_group": "StudyGroup", "paired_studies": [self.study.id]}
-        form = AddPairedStudyForm(data=payload)
-        self.assertTrue(form.is_valid())
+        payload = {
+            "study_group": "StudyGroup",
+            "paired_studies": [self.study.id, self.delete_study.id],
+        }
 
         response = self.client.post(self.url, payload)
-        self.assertEqual(response.status_code, 302)
-
-    def test_post(self):
-        self.client.force_login(self.user)
-        payload = {"study_group": "StudyGroup", "paired_studies": [self.study.id]}
-        form = AddPairedStudyForm(data=payload)
-        self.assertTrue(form.is_valid())
-
-        response = self.client.post(self.url, payload)
-        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(
+            response, reverse("researcher_ui:console_study", args=(self.study.pk,))
+        )
 
     def test_post_administer_selected(self):
         self.client.force_login(self.user)

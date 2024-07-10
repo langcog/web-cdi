@@ -1,9 +1,11 @@
 from django.contrib.auth.models import User
+from django.template import Context, Template
 from django.test import TestCase, tag
 from django.urls import reverse
-from django.template import Template, Context
-from researcher_UI.models import Instrument, Study
+
 from researcher_UI.forms import AddInstrumentForm
+from researcher_UI.models import Instrument, Study
+
 
 class AddInstrumentsTest(TestCase):
     fixtures = [
@@ -30,7 +32,7 @@ class AddInstrumentsTest(TestCase):
             name="Test Instrument 1",
         )
 
-    @tag('new')
+    @tag("new")
     def test_get(self):
         self.client.force_login(self.user)
         response = self.client.get(

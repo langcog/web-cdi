@@ -362,7 +362,7 @@ def find_paired_studies(request, username, study_name, source_id):
         )
         .order_by("min_age")
     )
-    
+
     context = {}
     context["language"] = study.instrument.language
     context["instrument"] = study.instrument.name
