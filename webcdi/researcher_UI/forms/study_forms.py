@@ -365,14 +365,14 @@ class EditStudyForm(AddStudyForm):
     def clean(self):
         return super().clean()
 
-
 # Form for grouping studies together
-class AddPairedStudyForm(forms.ModelForm):
+class AddPairedStudyForm(BetterModelForm):
     study_group = forms.CharField(
-        label="Study Group Name", max_length=51
+        label="Study Group Name", max_length=51,
+        widget = forms.TextInput(attrs={'class': 'form-control'})
     )  # Type out study group's name
     paired_studies = forms.ModelMultipleChoiceField(
-        queryset=Study.objects.all()
+        queryset=Study.objects.all(),
     )  # List all studies created by researcher that are currently unpaired.
 
     class Meta:
@@ -394,7 +394,6 @@ class AddPairedStudyForm(forms.ModelForm):
         super(AddPairedStudyForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_id = "add-paired-study"
-        self.helper.form_class = "form-horizontal"
         self.helper.label_class = "col-3"
         self.helper.field_class = "col-9"
         self.helper.form_method = "post"
@@ -402,7 +401,10 @@ class AddPairedStudyForm(forms.ModelForm):
         self.fields["paired_studies"] = forms.ModelMultipleChoiceField(
             queryset=Study.objects.filter(
                 researcher=self.request.user
-            )
+            ),
+            widget = forms.SelectMultiple(attrs={'class': 'form-control'}),
+            help_text = 'Use the ctrl/cmd keys to select multiple studies.'
+            
         )
 
 
