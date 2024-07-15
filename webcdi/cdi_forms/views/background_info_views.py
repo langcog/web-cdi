@@ -170,7 +170,6 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
                 "sgurl": reverse(
                     "find_paired_studies",
                     args=[data["username"], study_name, source_id],
-                    # args=[data["username"], data["study_group"]]
                 )
             }
         else:
