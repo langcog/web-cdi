@@ -168,9 +168,9 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
                 " Not the right age? <a href='%(sgurl)s'> Click here</a>"
             ) % {
                 "sgurl": reverse(
-                    "find_paired_studies", 
+                    "find_paired_studies",
                     args=[data["username"], study_name, source_id],
-                    #args=[data["username"], data["study_group"]]
+                    # args=[data["username"], data["study_group"]]
                 )
             }
         else:
