@@ -149,6 +149,7 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
         study_name = self.administration_instance.study.name
         study_group = self.administration_instance.study.study_group
         if study_group:
+            source_id = self.administration_instance.backgroundinfo.source_id
             data["study_group"] = study_group
             data["alt_study_info"] = (
                 Study.objects.filter(
@@ -167,7 +168,9 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
                 " Not the right age? <a href='%(sgurl)s'> Click here</a>"
             ) % {
                 "sgurl": reverse(
-                    "find_paired_studies", args=[data["username"], data["study_group"]]
+                    "find_paired_studies", 
+                    args=[data["username"], study_name, source_id],
+                    #args=[data["username"], data["study_group"]]
                 )
             }
         else:
