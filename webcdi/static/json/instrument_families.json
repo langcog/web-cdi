@@ -8,6 +8,9 @@
 	},	{
 		"name": "English (American/Canadian) CAT",
 		"chargeable": 1
+	},{
+		"name": "French (Canadian) Long",
+		"chargeable": 1
 	},
 	{
 		"name": "Spanish (Mexican) Long",
@@ -40,9 +43,8 @@
     {
 		"name": "French (French) CAT",
 		"chargeable": 0
-	},
-	{
-		"name": "French (Canadian) Long",
+	},{
+		"name": "Japanese CAT",
 		"chargeable": 0
 	}
 

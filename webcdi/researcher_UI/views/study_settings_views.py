@@ -1,31 +1,17 @@
-from django.contrib import messages
+import logging
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse
-from django.utils.safestring import mark_safe
 from django.views.generic import CreateView, UpdateView
 from psycopg2.extras import NumericRange
 
-from researcher_UI.forms import AddPairedStudyForm, AddStudyForm, EditStudyForm
+from researcher_UI.forms import AddStudyForm, EditStudyForm
 from researcher_UI.mixins import ReseacherOwnsStudyMixin
 from researcher_UI.models import Study
-from researcher_UI.utils import add_paired_study_fun, raw_gift_code_fun
+from researcher_UI.utils import raw_gift_code_fun
 
-
-class AddPairedStudy(LoginRequiredMixin, CreateView):
-    model = Study
-    form_class = AddPairedStudyForm
-    template_name = "researcher_UI/add_paired_study_modal.html"
-
-    def form_valid(self, form):
-        add_paired_study_fun(form, self.request.user)
-        return redirect(reverse("researcher_ui:console"))
-
-    def get_context_data(self, **kwargs):
-        context = super(AddPairedStudy, self).get_context_data(**kwargs)
-        researcher = self.request.user
-        context["researcher"] = researcher
-        return context
+logger = logging.getLogger("debug")
 
 
 class UpdateStudyView(LoginRequiredMixin, ReseacherOwnsStudyMixin, UpdateView):

@@ -84,12 +84,11 @@ class CustomLoginViewTest(TestCase):
         )
 
 
-@tag("new")
 class CustomRegistrationViewTest(TestCase):
 
     def setUp(self):
         password = random_password()
-        self.username = "TestUser"
+        self.username = "test_user"
         self.institution = "Test Institution"
         self.position = "Test Position"
         self.first_name = "FirstNameTest"
@@ -106,7 +105,7 @@ class CustomRegistrationViewTest(TestCase):
             "password2": password,
         }
 
-        self.invalid_payload = {"username": "henry", "password": "not-a-secret"}
+        self.invalid_payload = {"username": "test_user", "password": "not-a-secret"}
 
         self.screen = CustomRegistrationView
         self.url = reverse("django_registration_register")
@@ -119,6 +118,8 @@ class CustomRegistrationViewTest(TestCase):
     def test_webcdi_custom_registration_post_isInValid(self):
         response = self.client.post(self.url, self.invalid_payload)
         self.assertEqual(response.status_code, 200)
+        self.assertFormError(response, "form", "email", "This field is required.")
+
         self.assertContains(
             response,
             "This field is required.",

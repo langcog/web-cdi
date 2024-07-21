@@ -3,6 +3,7 @@ import datetime
 import json
 import re
 
+import numpy as np
 import pandas as pd
 from django.conf import settings
 
@@ -41,11 +42,11 @@ def processDemos_fun(csv_file, demo_list=None):
                 "worried",
             ]:
                 recoded_df[col] = recoded_df[col].apply(
-                    lambda x: make_str_fun(x) if x and len(x) <= 1000 else None
+                    lambda x: x if not np.isnan(x) else 0
                 )
             elif col == "language_from":
                 recoded_df[col] = recoded_df[col].apply(
-                    lambda x: make_str_fun(x) if x and len(x) <= 50 else None
+                    lambda x: make_str_fun(x) if x and len(str(x)) <= 50 else None
                 )
             elif "yob" in col:
                 recoded_df[col] = (
@@ -69,7 +70,7 @@ def processDemos_fun(csv_file, demo_list=None):
                 recoded_df[col] = recoded_df[col].apply(
                     lambda x: (
                         make_str_fun(x.lower())
-                        if x and x.lower() in ["early", "late"]
+                        if x and str(x).lower() in ["early", "late"]
                         else None
                     )
                 )
@@ -86,6 +87,7 @@ def processDemos_fun(csv_file, demo_list=None):
                     else:
                         return ""
 
+                recoded_df[col] = str(recoded_df[col])
                 recoded_df[col] = recoded_df[col].str[:3].apply(parse_zipcode)
             elif col == "language_days_per_week":
                 recoded_df[col] = recoded_df[col].apply(
@@ -115,27 +117,24 @@ def processDemos_fun(csv_file, demo_list=None):
             elif col == "birth_weight_kg":
 
                 def round_kg(c):
-                    c = int(c * 4) / 4.0
-                    c = 1.0 if c < 1.5 else c
-                    c = 5.0 if c > 5.0 else c
-                    return c
+                    try:
+                        c = int(c * 4) / 4.0
+                        c = 1.0 if c < 1.5 else c
+                        c = 5.0 if c > 5.0 else c
+                        return c
+                    except:
+                        return None
 
                 recoded_df[col] = recoded_df[col].apply(round_kg)
             elif col == "annual_income":
                 recoded_df[col] = recoded_df[col].apply(
-                    lambda x: (
-                        make_str_fun(x)
-                        if x
-                        and x
-                        in dict(BackgroundInfo._meta.get_field(col).choices).keys()
-                        else "Prefer not to disclose"
-                    )
+                    lambda x: (make_str_fun(x) if x else "Prefer not to disclose")
                 )
             elif col == "child_ethnicity":
                 recoded_df[col] = recoded_df[col].apply(
                     lambda x: (
                         list(
-                            set(make_str_fun(x).upper().split("/"))
+                            set(str(make_str_fun(x)).upper().split("/"))
                             & set(["N", "H", "W", "B", "A", "O"])
                         )
                         if x
@@ -147,12 +146,12 @@ def processDemos_fun(csv_file, demo_list=None):
                     make_str_fun(v["name"])
                     for k, v in json.load(
                         codecs.open(PROJECT_ROOT + "/languages.json", "r", "utf-8")
-                    ).iteritems()
+                    ).items()
                 ]
                 recoded_df[col] = recoded_df[col].apply(
                     lambda x: (
                         list(
-                            set([y.strip() for y in make_str_fun(x).split("/")])
+                            set([y.strip() for y in str(make_str_fun(x)).split("/")])
                             & set(lang_choices)
                         )
                         if x

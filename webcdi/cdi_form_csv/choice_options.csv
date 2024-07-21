@@ -1,11 +1,11 @@
-choice_set,choice_set_en,choice_set_es,choice_set_fr_ca,choice_set_en_ca,choice_set_nl,choice_set_he,choice_set_ko,choice_set_es_ar,choice_set_fr
-produces,produces,produce,dit,produces,zegt,אומר,표현한다,produce,dit
-not yet; sometimes; often,not yet; sometimes; often,todavía no; de vez en cuando; frecuentemente,pas encore; parfois; souvent,not yet; sometimes; often,nog niet; soms; vaak,עדיין לא; לפעמים; לעיתים קרובות,아직 못함; 가끔; 종종,todavía no; de vez en cuando; frecuentemente,pas encore; parfois; souvent
-simple; complex,simple; complex,simple; complex,simple; complex,simple; complex, eenvoudig; complex,פשוט; מורכב,1; 2,simple; complex,simple; complex
-no; yes,no; yes,no; sí,non; oui, no; yes, nee; ja,לא; כן,아니오; 네,no; sí,non; oui
-understands,understands,comprende,comprend,understands, begrijpt,מבין,이해한다,comprende,comprend
-never; sometimes; often,never; sometimes; often,todavía no; de vez en cuando; frecuentemente,jamais; parfois; souvent,never; sometimes; often, nooit; soms; veel,אף פעם; לפעמים; לעיתים קרובות,전혀; 가끔; 종종,todavía no; de vez en cuando; frecuentemente,jamais; parfois; souvent
-understands; produces,understands; produces,comprende; produce,comprend; dit,understands; produces, begrijpen; begrijpen en zeggen,מבין; אומר,이해한다; 표현한다,comprende; produce,comprend; dit
-pronoun; article,pronoun; article,,pronoun; article, pronoun; article, voornaamwoord; lidwoord,כינוי גוף; ידוע,대명사; 관사,,pronoun; article
-1; 2,1; 2,,,,,,1; 2,,
-one; two; three; four,one; two; three; four,,,,,1; 2; 3; 4,,,
+choice_set,choice_set_en,choice_set_es,choice_set_fr_ca,choice_set_en_ca,choice_set_nl,choice_set_he,choice_set_ko,choice_set_es_ar,choice_set_fr,choice_set_ja
+produces,produces,produce,dit,produces,zegt,אומר,표현한다,produce,dit,produces
+not yet; sometimes; often,not yet; sometimes; often,todavía no; de vez en cuando; frecuentemente,pas encore; parfois; souvent,not yet; sometimes; often,nog niet; soms; vaak,עדיין לא; לפעמים; לעיתים קרובות,아직 못함; 가끔; 종종,todavía no; de vez en cuando; frecuentemente,pas encore; parfois; souvent,not yet; sometimes; often
+simple; complex,simple; complex,simple; complex,simple; complex,simple; complex, eenvoudig; complex,פשוט; מורכב,1; 2,simple; complex,simple; complex,simple; complex
+no; yes,no; yes,no; sí,non; oui, no; yes, nee; ja,לא; כן,아니오; 네,no; sí,non; oui,no; yes
+understands,understands,comprende,comprend,understands, begrijpt,מבין,이해한다,comprende,comprend,understands
+never; sometimes; often,never; sometimes; often,todavía no; de vez en cuando; frecuentemente,jamais; parfois; souvent,never; sometimes; often, nooit; soms; veel,אף פעם; לפעמים; לעיתים קרובות,전혀; 가끔; 종종,todavía no; de vez en cuando; frecuentemente,jamais; parfois; souvent,never; sometimes; often
+understands; produces,understands; produces,comprende; produce,comprend; dit,understands; produces, begrijpen; begrijpen en zeggen,מבין; אומר,이해한다; 표현한다,comprende; produce,comprend; dit,understands; produces
+pronoun; article,pronoun; article,,pronoun; article, pronoun; article, voornaamwoord; lidwoord,כינוי גוף; ידוע,대명사; 관사,,pronoun; article,pronoun; article
+1; 2,1; 2,,,,,,1; 2,,,1; 2
+one; two; three; four,one; two; three; four,,,,,1; 2; 3; 4,,,,one; two; three; four

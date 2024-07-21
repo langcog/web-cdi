@@ -18,7 +18,9 @@ logger.setLevel(logging.INFO)
 class EditAdministrationViewTest(TestCase):
     def setUp(self):
         self.password = random_password()
-        self.user = User.objects.create_user(username="henry", password=self.password)
+        self.user = User.objects.create_user(
+            username="test_user", password=self.password
+        )
         Researcher.objects.get_or_create(user=self.user)
         instrument_family = InstrumentFamily.objects.create(
             name="BigCats", chargeable=False
@@ -141,3 +143,73 @@ class AddNewParentTest(TestCase):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 302)
 
+    def test_pos_offset(self):
+        self.administration.study.no_demographic_boolean = True
+        self.administration.study.save()
+        self.client.force_login(self.user)
+        url = f"{self.url}?offset=2&source_id=123456&age=15&sex=m"
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 302)
+
+    def test_neg_offset(self):
+        self.administration.study.no_demographic_boolean = True
+        self.administration.study.save()
+        self.client.force_login(self.user)
+        url = f"{self.url}?offset=-2&source_id=123456&age=15&sex=m"
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 302)
+
+    def test_no_offset(self):
+        self.administration.study.no_demographic_boolean = True
+        self.administration.study.save()
+        self.client.force_login(self.user)
+        url = f"{self.url}?source_id=123456&age=15&sex=m"
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 302)
+
+    def test_event_id(self):
+        self.administration.study.no_demographic_boolean = True
+        self.administration.study.save()
+        self.client.force_login(self.user)
+        url = f"{self.url}?source_id=123456&age=15&sex=m&event_id=test"
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 302)
+
+    def test_repeat_num(self):
+        self.administration.study.no_demographic_boolean = True
+        self.administration.study.save()
+        self.client.force_login(self.user)
+        url = f"{self.url}?source_id=123456&age=15&sex=m&event_id=stage_1"
+        response = self.client.get(url)
+        administrations = Administration.objects.filter(
+            backgroundinfo__source_id="123456"
+        )
+        self.assertEqual(1, len(administrations))
+        self.assertEqual(response.status_code, 302)
+
+        self.administration.study.no_demographic_boolean = True
+        self.administration.study.save()
+        self.client.force_login(self.user)
+        url = f"{self.url}?source_id=123456&age=15&sex=m&event_id=stage_2"
+        response = self.client.get(url)
+        administrations = Administration.objects.filter(
+            backgroundinfo__source_id="123456"
+        )
+        self.assertEqual(2, len(administrations))
+        self.assertEqual(response.status_code, 302)
+
+    def test_no_age(self):
+        self.administration.study.no_demographic_boolean = True
+        self.administration.study.save()
+        self.client.force_login(self.user)
+        url = f"{self.url}?source_id=123456&sex=m"
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 404)
+
+    def test_no_set(self):
+        self.administration.study.no_demographic_boolean = True
+        self.administration.study.save()
+        self.client.force_login(self.user)
+        url = f"{self.url}?source_id=123456&age=15"
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 404)

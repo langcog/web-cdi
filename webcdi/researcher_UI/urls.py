@@ -17,11 +17,6 @@ urlpatterns = [
                 ),
                 path("add/", views.AddStudy.as_view(), name="add_study"),
                 path(
-                    "add_paired/",
-                    views.AddPairedStudy.as_view(),
-                    name="add_paired_study",
-                ),
-                path(
                     "<int:pk>/administer_new/",
                     views.AdminNew.as_view(),
                     name="administer_new",
@@ -37,6 +32,18 @@ urlpatterns = [
                     name="rename_study",
                 ),
                 path("<int:pk>/overflow/", views.Overflow.as_view(), name="overflow"),
+                path(
+                    "paired/",
+                    include(
+                        [
+                            path(
+                                "add/",
+                                views.AddPairedStudy.as_view(),
+                                name="add_paired_study",
+                            ),
+                        ]
+                    ),
+                ),
             ]
         ),
     ),
@@ -45,7 +52,6 @@ urlpatterns = [
         views.AddNewParent.as_view(),
         name="administer_new_parent",
     ),
-    
     re_path(
         r"^(?P<username>[^/]+)/(?P<study_name>[^/]+)/overflow/$",
         views.Overflow.as_view(),
@@ -80,5 +86,11 @@ urlpatterns = [
         "study/<int:pk>/clinical/<str:adjusted>/",
         views.PDFAdministrationDetailView.as_view(),
         name="pdf_summary_adjusted",
+    ),
+    path("profile/", views.ProfileView.as_view(), name="profile"),
+    path(
+        "profile/change_password/",
+        views.ChangePasswordView.as_view(),
+        name="change_password",
     ),
 ]

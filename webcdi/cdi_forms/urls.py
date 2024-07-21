@@ -52,8 +52,8 @@ urlpatterns = [
         name="administer_cdi_form",
     ),
     re_path(r"^save_answer/$", views.save_answer, name="save_answer"),
-    re_path(
-        r"^group/(?P<username>[^/]+)/(?P<study_group>[a-zA-Z0-9-_]+)/$",
+    path(
+        "group/<str:username>/<str:study_name>/<str:source_id>",
         views.find_paired_studies,
         name="find_paired_studies",
     ),

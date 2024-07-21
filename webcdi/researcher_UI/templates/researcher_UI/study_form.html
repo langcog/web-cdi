@@ -236,8 +236,10 @@
             function check_for_demographic() {
               if ($('#id_demographic').find(":selected").val() > 0) {
                 $('.demographic').removeClass('collapse')
+                $('.no_demographic').addClass('collapse')
               } else {
                 $('.demographic').addClass('collapse');
+                $('.no_demographic').removeClass('collapse');
               }  
             }        
 

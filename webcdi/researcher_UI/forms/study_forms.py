@@ -9,9 +9,8 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 from form_utils.forms import BetterModelForm
+from researcher_UI import choices
 from researcher_UI.models import *
-
-from . import choices
 
 logger = logging.getLogger("debug")
 
@@ -256,7 +255,6 @@ class AddStudyForm(BetterModelForm):
             Field("instrument"),
             Field("share_opt_out"),
             Field("test_period"),
-            Field("birth_weight_units"),
             Field("timing"),
             Field("allow_payment", css_class="css_enabler"),
             Div(
@@ -285,6 +283,7 @@ class AddStudyForm(BetterModelForm):
             Div(
                 Field("age_range"),
                 Field("demographic", css_class="css_enabler form-control"),
+                Div(Field("birth_weight_units"), css_class="no_demographic"),
                 Div(Field("backpage_boolean"), css_class="demographic"),
                 Div(Field("confirmation_questions"), css_class="demographic"),
                 Field("prefilled_data"),
@@ -368,12 +367,14 @@ class EditStudyForm(AddStudyForm):
 
 
 # Form for grouping studies together
-class AddPairedStudyForm(forms.ModelForm):
+class AddPairedStudyForm(BetterModelForm):
     study_group = forms.CharField(
-        label="Study Group Name", max_length=51
+        label="Study Group Name",
+        max_length=51,
+        widget=forms.TextInput(attrs={"class": "form-control"}),
     )  # Type out study group's name
     paired_studies = forms.ModelMultipleChoiceField(
-        queryset=Study.objects.all()
+        queryset=Study.objects.all(),
     )  # List all studies created by researcher that are currently unpaired.
 
     class Meta:
@@ -385,27 +386,25 @@ class AddPairedStudyForm(forms.ModelForm):
 
     # Form validation. The paired_studies field cannot be empty.
     def clean(self):
-        cleaned_data = super(AddPairedStudyForm, self).clean()
+        cleaned_data = super().clean()
         if not cleaned_data.get("paired_studies"):
             self.add_error("paired_studies", "Added studies cannot be blank")
 
     # Form initiation. Specify form and field layout. Updated paired_studies so that only unpaired studies associated with the researcher are displayed.
     def __init__(self, *args, **kwargs):
-        self.researcher = kwargs.pop("researcher", None)
+        self.request = kwargs.pop("request")
         super(AddPairedStudyForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_id = "add-paired-study"
-        self.helper.form_class = "form-horizontal"
         self.helper.label_class = "col-3"
         self.helper.field_class = "col-9"
         self.helper.form_method = "post"
         self.helper.form_action = reverse("researcher_ui:add_paired_study")
-        if self.researcher:
-            self.fields["paired_studies"] = forms.ModelMultipleChoiceField(
-                queryset=Study.objects.filter(
-                    study_group="", researcher=self.researcher
-                )
-            )
+        self.fields["paired_studies"] = forms.ModelMultipleChoiceField(
+            queryset=Study.objects.filter(researcher=self.request.user),
+            widget=forms.SelectMultiple(attrs={"class": "form-control"}),
+            help_text="Use the ctrl/cmd keys to select multiple studies.",
+        )
 
 
 class ImportDataForm(forms.ModelForm):

@@ -15,24 +15,24 @@
                     {% csrf_token %}
                     <div class="row">
                         {% for field in form %}
-                            {% instrument_filter field  as instrument_res%}
-                                <div class="col-md-4">
-                                    {% for i in instrument_res.0 %}
-                                        {{i}} <br>
-                                    {% endfor %}
-                                </div>
+                            {% instrument_filter field  as instrument_res %}
+                            <div class="col-md-4">
+                                {% for i in instrument_res.0 %}
+                                    {{i}} <br>
+                                {% endfor %}
+                            </div>
 
-                                <div class="col-md-4">
-                                    {% for i in instrument_res.1 %}
-                                        {{i}}  <br>
-                                    {% endfor %}
-                                </div>
+                            <div class="col-md-4">
+                                {% for i in instrument_res.1 %}
+                                    {{i}}  <br>
+                                {% endfor %}
+                            </div>
 
-                                <div  class="col-md-4">
-                                    {% for i in instrument_res.2 %}
-                                        {{i}} <br>
-                                    {% endfor %}
-                                </div>
+                            <div  class="col-md-4">
+                                {% for i in instrument_res.2 %}
+                                    {{i}} <br>
+                                {% endfor %}
+                            </div>
                         {% endfor %}
                     </div>
 

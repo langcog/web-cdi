@@ -744,12 +744,14 @@ class BackgroundForm(BetterModelForm):
 
             if "birth_weight_lb" in selected_fields:
                 self.birth_weight_required = True
+                self.birth_weight_field = "birth_weight_lb"
                 if len(self.fields["birth_weight_lb"].widget.choices) < 1:
                     self.fields["birth_weight_lb"].widget.choices = (
                         BIRTH_WEIGHT_LB_CHOICES
                     )
             elif "birth_weight_kg" in selected_fields:
                 self.birth_weight_required = True
+                self.birth_weight_field = "birth_weight_kg"
                 if len(self.fields["birth_weight_kg"].widget.choices) < 1:
                     self.fields["birth_weight_kg"].widget.choices = (
                         BIRTH_WEIGHT_KG_CHOICES

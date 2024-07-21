@@ -6,7 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.db import models
 from django.http import Http404, JsonResponse
-from django.shortcuts import redirect
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 from django.utils import timezone
 from django.views.generic import CreateView, DetailView, UpdateView
@@ -16,8 +16,8 @@ from cdi_forms.models import BackgroundInfo
 from researcher_UI.forms import StudyFormForm
 from researcher_UI.mixins import StudyOwnerMixin
 from researcher_UI.models import Administration, Study, ip_address
-from researcher_UI.utils import (max_repeat_num,
-                                 max_subject_id, random_url_generator)
+from researcher_UI.utils import (max_repeat_num, max_subject_id,
+                                 random_url_generator)
 from researcher_UI.utils.console_helper import get_helper
 
 
@@ -67,7 +67,6 @@ class EditAdministrationView(LoginRequiredMixin, StudyOwnerMixin, UpdateView):
         )
 
 
-
 class AddNewParent(DetailView):
     model = Study
 
@@ -102,9 +101,9 @@ class AddNewParent(DetailView):
         return let_through, bypass, source_id
 
     def get_object(self) -> models.Model:
-        researcher = User.objects.get(username=self.kwargs["username"])
-        self.object = Study.objects.get(
-            name=self.kwargs["study_name"], researcher=researcher
+        researcher = get_object_or_404(User, username=self.kwargs["username"])
+        self.object = get_object_or_404(
+            Study, name=self.kwargs["study_name"], researcher=researcher
         )
         return self.object
 

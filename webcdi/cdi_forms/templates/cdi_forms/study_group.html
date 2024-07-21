@@ -2,116 +2,89 @@
 {% load i18n %}
 
 {% block nav_buttons %}
-{% if not completed %}
-<input name="btn-save" value='{% trans "Save" %}' class="btn btn-primary" type="button">
-<input name="btn-next" value='{% trans "Next" %}' class="btn btn-primary" type="submit">
-{% endif %}
+    {% if not completed %}
+        <input name="btn-save" value='{% trans "Save" %}' class="btn btn-primary" type="button">
+        <input name="btn-next" value='{% trans "Next" %}' class="btn btn-primary" type="submit">
+    {% endif %}
 {% endblock %}
 
 {% block main %}
-{% if background_form %}
-<input type="hidden" name="background-info-form" value="background-info-form"/>
-<div class="row">
-    <h2>{% trans "MacArthur-Bates Communicative Development Inventory" %}</h2>
-    <h4><div class="flex-row" id="instrument_age" style="text-decoration: underline;">
-        {% blocktrans with min_age=min_age max_age=max_age %}For {{ min_age }}- to {{ max_age }}-month-old children{% endblocktrans %}
-    </div></h4>
-    <div class="flex-row">
-        <h4>{% trans "Instructions for completing the language inventory" %}</h4>
-        <ul>
-            <li> {% trans "Try to complete the inventory when you have at least 30 quiet minutes, without interruptions. An example might be when your child is sleeping." %} </li>
-            <li> {% trans "You do not have to complete the inventory in one sitting. If you are interrupted, it is ok to put it down and come back to it when you have more time." %} </li>
-            <li> {% trans "Feel free to ask others (e.g. other family members, nanny, child care providers) to help you fill out this form." %} </li>
-            <li> {% trans "Please read all of the instructions on the inventory carefully, and make sure you complete all of the sections." %} </li>
-        </ul>
-    </div>
-    <p>
-        {% trans "For more information about the MB-CDI," %} <a href="http://mb-cdi.stanford.edu/">{% trans "click here" %}</a>.<br> 
-        {% trans "Thank you! We appreciate your time and effort!" %}
-    </p>
-</div>
-<br>
-<div class="row">
-    <!-- Load blank version of backgroundform in crispy format -->
-    {% load crispy_forms_tags %}
-    {% crispy background_form %}
-</div>
-<!-- Loads modal showing possible studies that participant can enter into. -->
-<div id="possible_studies" class="modal fade" role="dialog">
-
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-
-            <div class="modal-header">
-                <h2 class="modal-title" >{% for curr_lang in lang_list %}{% language curr_lang %}{% trans "How old is your child?" %}{% endlanguage %}<br>{% endfor %}</h2>
+    {% if background_form %}
+        <input type="hidden" name="background-info-form" value="background-info-form"/>
+        <div class="row">
+            <h2>{% trans "MacArthur-Bates Communicative Development Inventory" %}</h2>
+            <h4><div class="flex-row" id="instrument_age" style="text-decoration: underline;">
+                {% blocktrans with min_age=min_age max_age=max_age %}For {{ min_age }}- to {{ max_age }}-month-old children{% endblocktrans %}
+            </div></h4>
+            <div class="flex-row">
+                <h4>{% trans "Instructions for completing the language inventory" %}</h4>
+                <ul>
+                    <li> {% trans "Try to complete the inventory when you have at least 30 quiet minutes, without interruptions. An example might be when your child is sleeping." %} </li>
+                    <li> {% trans "You do not have to complete the inventory in one sitting. If you are interrupted, it is ok to put it down and come back to it when you have more time." %} </li>
+                    <li> {% trans "Feel free to ask others (e.g. other family members, nanny, child care providers) to help you fill out this form." %} </li>
+                    <li> {% trans "Please read all of the instructions on the inventory carefully, and make sure you complete all of the sections." %} </li>
+                </ul>
             </div>
-
-            <div class="modal-body">
-
-                <div class="inner">
-                    {% for curr_study in possible_studies %}
-                        {% language curr_study.user_language %}
-                        <div id="div_{{curr_study.name}}">
-                        
-                            <h3><a href = "{% url 'researcher_ui:administer_new_parent' username=username study_name=curr_study.name %}">
-                            {% trans 'My baby speaks LANGUAGE and is between MIN_AGE and MAX_AGE months old. [XX slot(s) left]' %}
-                            </a> </h3> 
-                            <ul><li>
-                                {% trans 'Born between STARTDATE and ENDDATE' %}
-                            </li></ul> 
-                            <br>
-                        
-                        </div>
-                        <script type="text/javascript">
-
-                            var min_age = parseInt("{{ curr_study.min_age }}");
-                            var max_age = parseInt("{{ curr_study.max_age }}");
-                            var poss_age;
-                            var dob_min = moment().subtract((min_age - 2), 'months');
-                            var dob_max = moment().subtract((max_age + 2), 'months');
-                            var b_date = dob_min;
-                            var t_date = moment();
-                            var age_range = [];
-
-                            while (b_date.isAfter(dob_max)) {
-                                var day_diff = ((t_date.date() - b_date.date()) >= 15)? 1: 0
-                                var poss_age = 12*(t_date.year() - b_date.year()) + (t_date.month() - b_date.month()) + day_diff;
-                                if (poss_age >= min_age & poss_age <= max_age) {
-                                    curr_date = b_date.locale("{{ curr_study.user_language }}")
-                                    age_range.push(curr_date.format("ll"))
-                                }
-
-                                b_date.subtract(1, 'days')
-
-                            }
-
-                            var curr_text = $('#div_{{curr_study.name}}').html();
-                            curr_text = curr_text.replace(/LANGUAGE/g, "{% trans curr_study.instrument.language %}").replace(/MIN_AGE/g, "{{ curr_study.min_age }}").replace(/MAX_AGE/g, "{{ curr_study.max_age }}").replace(/STARTDATE/g, age_range[age_range.length - 1]).replace(/ENDDATE/g, age_range[0]);;
-                            var slots_left = parseInt("{{ curr_study.slots_left }}");
-                            if (slots_left > 0) {
-                                curr_text = curr_text.replace("XX", String(slots_left));
-                            } else if (slots_left <=0) {
-                                curr_text = curr_text.replace("XX", String(0));
-                            } else {
-                                curr_text = curr_text.replace(/\[(.*?)\]/g, "");
-                            }
-
-                            $('#div_{{curr_study.name}}').html(curr_text);
-                        </script>
-                        {% endlanguage %}
-                    {% endfor %}
-                </div>
-
-            </div>
-
-        
+            <p>
+                {% trans "For more information about the MB-CDI," %} <a href="http://mb-cdi.stanford.edu/">{% trans "click here" %}</a>.<br> 
+                {% trans "Thank you! We appreciate your time and effort!" %}
+            </p>
         </div>
-    </div>
-</div>
+        <br>
+        <div class="row">
+            <!-- Load blank version of backgroundform in crispy format -->
+            {% load crispy_forms_tags %}
+            {% crispy background_form %}
+        </div>
+        <!-- Loads modal showing possible studies that participant can enter into. -->
+        <div id="possible_studies" class="modal fade" role="dialog">
 
-{% else %}
-<p>{% trans "Form unavailable. Contact admin." %} </p>
-{% endif %}
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h2 class="modal-title" >{% for curr_lang in lang_list %}{% language curr_lang %}{% trans "How old is your child?" %}{% endlanguage %}<br>{% endfor %}</h2>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <div class="inner">
+                            {% for curr_study in possible_studies %}
+                                <div id="div_{{curr_study.name|slugify}}">
+                                
+                                    <h3>
+                                        <a href = "{% url 'researcher_ui:administer_new_parent' username=username study_name=curr_study.name %}">
+                                            {% language curr_study.instrument.language %}
+                                            {% if curr_study.subject_cap %}
+                                                {% blocktrans with language=curr_study.instrument.language min_age=curr_study.min_age max_age=curr_study.max_age slots_left=curr_study.slots_left %}
+                                                    My baby speaks {{ language }} and is between {{ min_age }} and {{ max_age }} months old. [{{ slots_left }} slot(s) left]
+                                                {% endblocktrans%}
+                                            {% else %}
+                                                {% blocktrans with language=curr_study.instrument.language min_age=curr_study.min_age max_age=curr_study.max_age %}
+                                                    My baby speaks {{ language }} and is between {{ min_age }} and {{ max_age }} months old.
+                                                {% endblocktrans%}
+                                            {% endif %}
+                                            {% endlanguage %}
+                                        </a> 
+                                    </h3> 
+                                    
+                                    <br>
+                                
+                                </div>
+                                
+                            {% endfor %}
+                        </div>
+
+                    </div>
+
+                
+                </div>
+            </div>
+        </div>
+
+    {% else %}
+        <p>{% trans "Form unavailable. Contact admin." %} </p>
+    {% endif %}
 {% endblock %}
 
 {% block scripts %}

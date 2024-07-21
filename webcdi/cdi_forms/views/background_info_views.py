@@ -149,6 +149,7 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
         study_name = self.administration_instance.study.name
         study_group = self.administration_instance.study.study_group
         if study_group:
+            source_id = self.administration_instance.backgroundinfo.source_id
             data["study_group"] = study_group
             data["alt_study_info"] = (
                 Study.objects.filter(
@@ -167,7 +168,8 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
                 " Not the right age? <a href='%(sgurl)s'> Click here</a>"
             ) % {
                 "sgurl": reverse(
-                    "find_paired_studies", args=[data["username"], data["study_group"]]
+                    "find_paired_studies",
+                    args=[data["username"], study_name, source_id],
                 )
             }
         else:
@@ -260,7 +262,6 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
         self.get_hash_id()
         self.get_study_context()
         self.get_user_language()
-
         if (
             not self.administration_instance.completed
             and self.administration_instance.due_date > timezone.now()
@@ -320,7 +321,10 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
                 obj.save()
 
                 # If 'Next' button is pressed, update last_modified and mark completion of BackgroundInfo. Fetch CDI form by hash ID.
-                if "btn-next" in request.POST and request.POST["btn-next"] == _("Next"):
+                if "btn-next" in request.POST and request.POST["btn-next"] in [
+                    "Next",
+                    _("Next"),
+                ]:
                     Administration.objects.filter(url_hash=self.hash_id).update(
                         last_modified=timezone.now()
                     )
@@ -492,7 +496,8 @@ class CreateBackgroundInfoView(CreateView):
                 " Not the right age? <a href='%(sgurl)s'> Click here</a>"
             ) % {
                 "sgurl": reverse(
-                    "find_paired_studies", args=[data["username"], data["study_group"]]
+                    "find_paired_studies",
+                    args=[data["username"], study_name, self.source_id],
                 )
             }
         else:

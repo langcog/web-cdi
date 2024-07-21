@@ -8,6 +8,7 @@ from django.utils.translation import gettext_lazy as _
 from webcdi.utils import get_linux_ec2_private_ip
 
 DEBUG = bool(os.environ.get("DEBUG", False))
+# DEBUG=False
 TEMPLATE_DEBUG = False
 
 try:
@@ -246,6 +247,7 @@ LANGUAGES = [
     ("nl", _("Dutch")),
     ("he", _("Hebrew")),
     ("ko", _("Korean")),
+    ("ja", _("Japanese")),
 ]
 
 # this is used to find the right choices etc for a language
@@ -259,6 +261,7 @@ LANGUAGE_DICT = {
     "Hebrew": "he",
     "Korean": "ko",
     "Argentine Spanish": "es_ar",
+    "Japanese": "ja",
 }
 
 LANGUAGE_TO_COUNTRY_DICT = {
@@ -266,7 +269,7 @@ LANGUAGE_TO_COUNTRY_DICT = {
 }
 
 
-COUNTRIES_FIRST = ["US", "CA", "NL", "IL", "FR", "CH", "BE", "LU"]
+COUNTRIES_FIRST = ["US", "CA", "NL", "IL", "JP", "FR", "CH", "BE", "LU"]
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")

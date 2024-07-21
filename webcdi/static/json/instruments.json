@@ -311,5 +311,17 @@
 		"starting_words" : "cdi_form_csv/cat_forms/starting_words/[Spanish_Ages_CAT].csv",
 		"benchmark" : "cdi_forms/form_data/benchmarking/Spanish_CAT_benchmark.csv",
 		"demographics" : ["Spanish_Split.json"]
+	},{
+		"language": "Japanese",
+		"family": "Japanese CAT",
+		"form": "CAT",
+		"verbose_name": "Japanese CAT",
+		"min_age": 12,
+		"max_age": 36,
+		"csv_file": "cdi_form_csv/cat_forms/[English_CAT].csv",
+		"json_data": "",
+		"scoring_json" : "cdi_forms/form_data/scoring/Japanese_CAT_scoring.json",
+		"starting_words" : "cdi_form_csv/cat_forms/starting_words/[Japanese_Ages_CAT].csv",
+		"demographics" : ["Japanese_no_NIH.json"]
 	}
 ]
