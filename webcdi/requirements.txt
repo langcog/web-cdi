@@ -38,7 +38,7 @@ jmespath==1.0.1
 Markdown==3.5.1
 numpy==1.26.3
 pandas==2.1.4
-pillow==10.2.0
+pillow==10.3.0
 psycopg2-binary==2.9.9
 pycparser==2.21
 pydyf==0.8.0
@@ -51,7 +51,7 @@ requests==2.31.0
 s3transfer==0.8.2
 six==1.16.0
 soupsieve==2.5
-sqlparse==0.4.4
+sqlparse==0.5.0
 tinycss2==1.2.1
 typing_extensions==4.9.0
 tzdata==2023.4
