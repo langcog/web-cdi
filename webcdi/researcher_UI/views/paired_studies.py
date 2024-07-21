@@ -28,8 +28,7 @@ class AddPairedStudy(LoginRequiredMixin, CreateView):
         return context
 
     def get_form_kwargs(self):
-        """Passes the request object to the form class.
-        This is necessary to only display members that belong to a given user"""
+        """Passes the request object to the form class."""
 
         kwargs = super().get_form_kwargs()
         kwargs["request"] = self.request

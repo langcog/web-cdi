@@ -32,7 +32,6 @@ class AddInstrumentsTest(TestCase):
             name="Test Instrument 1",
         )
 
-    @tag("new")
     def test_get(self):
         self.client.force_login(self.user)
         response = self.client.get(
