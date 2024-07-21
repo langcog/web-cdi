@@ -1,9 +1,6 @@
-
-from django.test import RequestFactory, TestCase, tag
-
 from django.conf import settings
 from django.contrib.auth.models import User
-
+from django.test import RequestFactory, TestCase, tag
 from django.urls import reverse
 
 from researcher_UI.forms import AddPairedStudyForm, AdminNewForm
@@ -12,7 +9,8 @@ from researcher_UI.models import (Administration, Instrument, InstrumentFamily,
 from researcher_UI.tests import generate_fake_results
 from researcher_UI.tests.utils import random_password
 
-@tag('new')
+
+@tag("new")
 class PairedStudyCreateViewTest(TestCase):
     fixtures = [
         "researcher_UI/fixtures/researcher_UI_test_fixtures.json",
@@ -42,7 +40,7 @@ class PairedStudyCreateViewTest(TestCase):
         self.study = studies[0]
         self.study1 = studies[1]
 
-        self.url = reverse('researcher_ui:add_paired_study')
+        self.url = reverse("researcher_ui:add_paired_study")
         self.delete_url = reverse(
             "researcher_ui:console_study", kwargs={"pk": self.study1.pk}
         )
@@ -57,41 +55,34 @@ class PairedStudyCreateViewTest(TestCase):
         request = RequestFactory().get(reverse("researcher_ui:console"))
         request.user = self.user
 
-        study_group = 'StudyGroup'
+        study_group = "StudyGroup"
         payload = {
             "study_group": study_group,
             "paired_studies": [self.study.id, self.study1.id],
-            'request': request
+            "request": request,
         }
         form = AddPairedStudyForm(data=payload)
         self.assertTrue(form.is_valid())
-
 
     def test_failed_AddPairedStudyForm(self):
         self.client.force_login(self.user)
         request = RequestFactory().get(reverse("researcher_ui:console"))
         request.user = self.user
 
-        study_group = 'StudyGroup'
-        payload = {
-            "study_group": study_group,
-            "paired_studies": [],
-            'request': request
-        }
+        study_group = "StudyGroup"
+        payload = {"study_group": study_group, "paired_studies": [], "request": request}
         form = AddPairedStudyForm(data=payload)
         self.assertTrue(form.is_valid())
 
     def test_post(self):
         self.client.force_login(self.user)
-        study_group = 'StudyGroup'
+        study_group = "StudyGroup"
         payload = {
             "study_group": study_group,
             "paired_studies": [self.study.id, self.study1.id],
         }
         response = self.client.post(self.url, payload)
-        self.assertRedirects(
-            response, reverse("researcher_ui:console")
-        )
+        self.assertRedirects(response, reverse("researcher_ui:console"))
         study = Study.objects.get(id=self.study.id)
         study1 = Study.objects.get(id=self.study1.id)
         self.assertEqual(study.study_group, study_group)
