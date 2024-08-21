@@ -96,7 +96,7 @@ def get_cat_benchmark(context, administration_id, data):
         )
         try:
             row["raw_score"] = int(Benchmark.objects.get(q).raw_score)
-            
+
         except Exception as e:
             pass
 
@@ -114,7 +114,7 @@ def get_cat_benchmark(context, administration_id, data):
                 row["raw_score_sex"] = int(Benchmark.objects.get(q).raw_score_girl)
         except Exception as e:
             pass
-        
+
     return row[data]
 
 

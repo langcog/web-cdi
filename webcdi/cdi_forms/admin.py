@@ -1,8 +1,8 @@
 from django.contrib import admin
 
+from .cat_forms.models import CatResponse
 from .models import BackgroundInfo, Choices, Instrument_Forms
 
-from .cat_forms.models import CatResponse
 # Register your models here.
 
 
