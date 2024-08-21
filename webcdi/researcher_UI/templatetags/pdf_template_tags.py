@@ -1,12 +1,16 @@
+import logging
+
 from django import template
 from django.db.models import Max, Min, Q
-
-from researcher_UI.models import (Administration, Benchmark, SummaryData,
-                                  administration_data)
+from researcher_UI.models import (
+    Administration,
+    Benchmark,
+    SummaryData,
+    administration_data,
+)
 
 register = template.Library()
 
-import logging
 
 logger = logging.getLogger("debug")
 
@@ -96,12 +100,27 @@ def get_cat_benchmark(context, administration_id, data):
         )
         try:
             row["raw_score"] = int(Benchmark.objects.get(q).raw_score)
+
+        except Exception as e:
+            logger.debug(f"Exception {e}")
+            pass
+
+        q = Q(
+            instrument=administration.study.instrument,
+            instrument_score__title="Total Produced",
+            age=age,
+            percentile=row["est_theta_percentile_sex"],
+        )
+        try:
+            row["raw_score"] = int(Benchmark.objects.get(q).raw_score)
             if administration.backgroundinfo.sex == "M":
                 row["raw_score_sex"] = int(Benchmark.objects.get(q).raw_score_boy)
             elif administration.backgroundinfo.sex == "F":
                 row["raw_score_sex"] = int(Benchmark.objects.get(q).raw_score_girl)
         except Exception as e:
+            logger.debug(f"Exception {e}")
             pass
+
     return row[data]
 
 

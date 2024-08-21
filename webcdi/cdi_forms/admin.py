@@ -1,5 +1,6 @@
 from django.contrib import admin
 
+from .cat_forms.models import CatResponse
 from .models import BackgroundInfo, Choices, Instrument_Forms
 
 # Register your models here.
@@ -20,3 +21,8 @@ class BackgroundInfoAdmin(admin.ModelAdmin):
 
 
 admin.site.register(BackgroundInfo, BackgroundInfoAdmin)
+
+
+# Register your models here.
+
+admin.site.register(CatResponse)
