@@ -101,8 +101,13 @@
         <div class='row login-card' style="padding:1rem;">
             <div id='administration-form' class="form-inline">
                 {% csrf_token %}
-                    <div>
+                    <div class="row">
+                        
                         <form method='post' action='{% url "researcher_ui:console_study" pk=current_study.pk %}'  class="row  d-flex justify-content-center">
+                            <div class='col-md-3'>
+                                    <input id='id_search' type="text" placeholder="Search.." name="search", style="max-width: 85%">
+                                    <button id='search_button' type="submit"><i class="fa fa-search"></i></button>
+                            </div>
                             <div class='col-md-3'>
                                 <button style='width:100%; height: 100%;' class="btn btn-secondary selected-btn btn-block" id='add-selected' type='submit' name='administer-selected' value='administer-selected' disabled  >Re-administer Participants</button>
                             </div>
