@@ -2,12 +2,9 @@ import logging
 
 from django import template
 from django.db.models import Max, Min, Q
-from researcher_UI.models import (
-    Administration,
-    Benchmark,
-    SummaryData,
-    administration_data,
-)
+
+from researcher_UI.models import (Administration, Benchmark, SummaryData,
+                                  administration_data)
 
 register = template.Library()
 

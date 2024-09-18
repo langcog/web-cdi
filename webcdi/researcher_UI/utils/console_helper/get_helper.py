@@ -1,14 +1,16 @@
+import logging
 import os
 
 from django.conf import settings
-from django_tables2 import RequestConfig
 from django.db.models import Q
+from django_tables2 import RequestConfig
 
 from researcher_UI.forms import AddStudyForm
 from researcher_UI.models import Administration, PaymentCode, Study
 from researcher_UI.tables import StudyAdministrationTable
-import logging
+
 logger = logging.getLogger("debug")
+
 
 def get_helper(request, study_name, num_per_page):
     username = None  # Set username to None at first
@@ -26,16 +28,19 @@ def get_helper(request, study_name, num_per_page):
     if study_name is not None:
         current_study = Study.objects.get(researcher=request.user, name=study_name)
         query = Q(study=current_study, is_active=True)
-        if 'search' in request.GET:
+        if "search" in request.GET:
             try:
-                if len(request.GET['search']) < 1:
-                    query=query
+                if len(request.GET["search"]) < 1:
+                    query = query
                 else:
-                    query = Q(query) & Q( Q(subject_id=int(request.GET['search'])) | Q(local_lab_id=request.GET['search']))
+                    query = Q(query) & Q(
+                        Q(subject_id=int(request.GET["search"]))
+                        | Q(local_lab_id=request.GET["search"])
+                    )
             except ValueError:
-                query = Q(query) & Q(local_lab_id=request.GET['search'])
+                query = Q(query) & Q(local_lab_id=request.GET["search"])
 
-            logger.debug(f'Query is {query}')
+            logger.debug(f"Query is {query}")
         administration_table = StudyAdministrationTable(
             Administration.objects.filter(query)
         )

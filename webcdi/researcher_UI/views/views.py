@@ -43,9 +43,8 @@ class StudyCreateView(LoginRequiredMixin, generic.CreateView):
         context = get_helper(self.request, self.get_object().name, num_per_page)
         return context
 
-    
     def post(self, request, *args, **kwargs):
-        logger.debug(f'request.POST is {request.POST}')
+        logger.debug(f"request.POST is {request.POST}")
         study_obj = self.get_object()
         permitted = Study.objects.filter(
             researcher=request.user, name=study_obj.name
@@ -61,23 +60,19 @@ class StudyCreateView(LoginRequiredMixin, generic.CreateView):
                 # except Exception as e:
                 #    context = {"error": "This combination is already existed."}
                 #    return render(request, "researcher_UI/500_error.html", context)
-                logger.debug (f'res is {res}')
+                logger.debug(f"res is {res}")
                 if res:
                     return res
                 else:
                     target = reverse(
-                            "researcher_ui:console_study", kwargs={"pk": study_obj.pk}
-                        )
-                    return redirect(
-                        f'{target}?search={request.POST["search"]}'
-                    )
-            else:
-                target = reverse(
                         "researcher_ui:console_study", kwargs={"pk": study_obj.pk}
                     )
-                return redirect(
-                    f'{target}?search={request.POST["search"]}'
+                    return redirect(f'{target}?search={request.POST["search"]}')
+            else:
+                target = reverse(
+                    "researcher_ui:console_study", kwargs={"pk": study_obj.pk}
                 )
+                return redirect(f'{target}?search={request.POST["search"]}')
 
 
 class AdminNew(LoginRequiredMixin, generic.UpdateView):
