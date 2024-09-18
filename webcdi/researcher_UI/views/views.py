@@ -1,7 +1,6 @@
 import json
 from typing import Any, Dict
 
-from django import http
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.http.response import HttpResponse

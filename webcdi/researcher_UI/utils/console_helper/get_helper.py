@@ -73,7 +73,7 @@ def get_helper(request, study_name, num_per_page):
         context["completed_admins"] = Administration.objects.filter(
             study=current_study, completed=True
         ).count()
-        context["unique_children"] = count = (
+        context["unique_children"] = (
             Administration.objects.filter(study=current_study, completed=True)
             .values("subject_id")
             .distinct()
