@@ -17,5 +17,4 @@ class Command(BaseCommand):
         count = 0
         for instance in administrations:
             count += 1
-            logger.debug(f"Processing item {count} of {len(administrations)}")
             update_summary_scores(instance)

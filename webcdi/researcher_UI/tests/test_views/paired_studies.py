@@ -9,8 +9,6 @@ from researcher_UI.models import (Administration, Instrument, InstrumentFamily,
 from researcher_UI.tests import generate_fake_results
 from researcher_UI.tests.utils import random_password
 
-
-@tag("new")
 class PairedStudyCreateViewTest(TestCase):
     fixtures = [
         "researcher_UI/fixtures/researcher_UI_test_fixtures.json",
@@ -50,6 +48,7 @@ class PairedStudyCreateViewTest(TestCase):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
 
+    # TODO this test doesn't work
     def test_AddPairedStudyForm(self):
         self.client.force_login(self.user)
         request = RequestFactory().get(reverse("researcher_ui:console"))
@@ -64,6 +63,7 @@ class PairedStudyCreateViewTest(TestCase):
         form = AddPairedStudyForm(data=payload)
         self.assertTrue(form.is_valid())
 
+    # TODO this test doesn't work
     def test_failed_AddPairedStudyForm(self):
         self.client.force_login(self.user)
         request = RequestFactory().get(reverse("researcher_ui:console"))

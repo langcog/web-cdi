@@ -89,6 +89,28 @@ class StudyCreateViewTest(TestCase):
             response, reverse("researcher_ui:console_study", args=(self.study.pk,))
         )
 
+    def test_search(self):
+        self.client.force_login(self.user)
+        payload = {'search': 1}
+
+        # test search on subject_id
+        response = self.client.post(f'{self.url}?search=1', payload, follow=True)
+        self.assertRedirects(
+            response, f'{self.url}?search=1'
+        )
+
+        # test search on local_lab_id
+        administration = Administration.objects.filter(study=self.study)[0]
+        some_string = random_password
+        administration.local_lab_id = some_string
+        administration.save()
+        payload = {'search': some_string}
+        response = self.client.post(f'{self.url}?search={some_string}', payload, follow=True)
+        self.assertRedirects(
+            response, f'{self.url}?search={some_string}'
+        )
+
+
     def test_post_administer_selected(self):
         self.client.force_login(self.user)
         administrations = Administration.objects.filter(study=self.study).values_list(

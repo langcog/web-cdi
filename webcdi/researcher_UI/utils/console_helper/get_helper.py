@@ -39,8 +39,6 @@ def get_helper(request, study_name, num_per_page):
                     )
             except ValueError:
                 query = Q(query) & Q(local_lab_id=request.GET["search"])
-
-            logger.debug(f"Query is {query}")
         administration_table = StudyAdministrationTable(
             Administration.objects.filter(query)
         )
