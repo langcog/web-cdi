@@ -5,10 +5,14 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.test import RequestFactory, TestCase, tag
 from django.urls import reverse
-
 from researcher_UI.forms import AddPairedStudyForm, AdminNewForm
-from researcher_UI.models import (Administration, Instrument, InstrumentFamily,
-                                  Researcher, Study)
+from researcher_UI.models import (
+    Administration,
+    Instrument,
+    InstrumentFamily,
+    Researcher,
+    Study,
+)
 from researcher_UI.tests import generate_fake_results
 from researcher_UI.tests.utils import random_password
 
@@ -88,6 +92,25 @@ class StudyCreateViewTest(TestCase):
         self.assertRedirects(
             response, reverse("researcher_ui:console_study", args=(self.study.pk,))
         )
+
+    def test_search(self):
+        self.client.force_login(self.user)
+        payload = {"search": 1}
+
+        # test search on subject_id
+        response = self.client.post(f"{self.url}?search=1", payload, follow=True)
+        self.assertRedirects(response, f"{self.url}?search=1")
+
+        # test search on local_lab_id
+        administration = Administration.objects.filter(study=self.study)[0]
+        some_string = random_password
+        administration.local_lab_id = some_string
+        administration.save()
+        payload = {"search": some_string}
+        response = self.client.post(
+            f"{self.url}?search={some_string}", payload, follow=True
+        )
+        self.assertRedirects(response, f"{self.url}?search={some_string}")
 
     def test_post_administer_selected(self):
         self.client.force_login(self.user)

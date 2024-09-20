@@ -1,7 +1,6 @@
 import json
 from typing import Any, Dict
 
-from django import http
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.http.response import HttpResponse
@@ -9,7 +8,6 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.views import generic
 from ipware.ip import get_client_ip
-
 from researcher_UI.forms import *
 from researcher_UI.models import Study
 from researcher_UI.utils.admin_new import admin_new_fun
@@ -59,19 +57,24 @@ class StudyCreateView(LoginRequiredMixin, generic.CreateView):
                 # except Exception as e:
                 #    context = {"error": "This combination is already existed."}
                 #    return render(request, "researcher_UI/500_error.html", context)
-
                 if res:
                     return res
                 else:
-                    return redirect(
-                        reverse(
-                            "researcher_ui:console_study", kwargs={"pk": study_obj.pk}
-                        )
+                    target = reverse(
+                        "researcher_ui:console_study", kwargs={"pk": study_obj.pk}
                     )
+                    if "search" in request.POST:
+                        return redirect(f'{target}?search={request.POST["search"]}')
+                    else:
+                        return redirect(f"{target}")
             else:
-                return redirect(
-                    reverse("researcher_ui:console_study", kwargs={"pk": study_obj.pk})
+                target = reverse(
+                    "researcher_ui:console_study", kwargs={"pk": study_obj.pk}
                 )
+                if "search" in request.POST:
+                    return redirect(f'{target}?search={request.POST["search"]}')
+                else:
+                    return redirect(f"{target}")
 
 
 class AdminNew(LoginRequiredMixin, generic.UpdateView):

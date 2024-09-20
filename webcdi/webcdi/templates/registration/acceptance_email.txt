@@ -3,8 +3,8 @@
 
 {% blocktrans with site.name as site_name %}Your registration at {{ site_name }} was accepted by the Web-CDI Team.{% endblocktrans %}
 
-{% trans 'Please click the following url and set your account password to finish activation.' %}
+{% trans 'Your registration is complete.  Please click the link below to login' %}
 
-http://{{ site.domain }}{% url 'registration_activate' activation_key=activation_key %}
+http://{{ site.domain }}
 
 {% blocktrans %}The activation link above will be expired in {{ expiration_days }} days.{% endblocktrans %}
