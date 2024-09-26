@@ -5,6 +5,6 @@
 
 {% trans 'Your registration is complete.  Please click the link below to login' %}
 
-http://{{ site.domain }}
+https://{{ site.domain }}
 
 {% blocktrans %}The activation link above will be expired in {{ expiration_days }} days.{% endblocktrans %}
