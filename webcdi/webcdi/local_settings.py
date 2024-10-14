@@ -120,9 +120,13 @@ CAT_API_BASE_URL = os.environ.get(
 )
 
 # EMAIL settings
-AWS_SES_REGION_NAME = "us-west-2"
-AWS_SES_REGION_ENDPOINT = "email.us-west-2.amazonaws.com"
+
 EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND", "django_ses.SESBackend")
+if EMAIL_BACKEND == "django_ses.SESBackend":
+    AWS_SES_REGION_NAME = "us-west-2"
+    AWS_SES_REGION_ENDPOINT = "email.us-west-2.amazonaws.com"
+EMAIL_PORT = os.environ.get("EMAIL_PORT", 25)
+
 DEFAULT_FROM_EMAIL_NAME = os.environ.get("DEFAULT_FROM_EMAIL_NAME", "WebCDI Local")
 DEFAULT_FROM_EMAIL_ADDRESS = os.environ.get(
     "DEFAULT_FROM_EMAIL_ADDRESS", "hjsmehta@gmail.com"
