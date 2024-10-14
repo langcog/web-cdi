@@ -22,5 +22,5 @@
 {% trans '::Your account information::' %}
 {% blocktrans %}USERNAME: {{ user }}{% endblocktrans %}
 
-{{ request.scheme }}://{{ request.get_host }}{% url 'django_registration_activate' activation_key %}
+{{ request.scheme }}://{{ request.get_host }}{% url 'home' %}
 {% endif %}
