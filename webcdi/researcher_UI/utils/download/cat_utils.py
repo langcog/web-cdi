@@ -20,7 +20,10 @@ def get_pd_norms(study_obj, administrations, adjusted, answer_rows):
             row = {}
             row["administration_id"] = obj.id
 
-            age = obj.backgroundinfo.age
+            try:
+                age = obj.backgroundinfo.age
+            except:
+                continue
             if adjusted:
                 logger.debug(f"Born on due date: {obj.backgroundinfo.born_on_due_date}")
                 if obj.backgroundinfo.born_on_due_date:

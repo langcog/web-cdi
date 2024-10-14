@@ -122,7 +122,7 @@ CAT_API_BASE_URL = os.environ.get(
 # EMAIL settings
 
 EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND", "django_ses.SESBackend")
-if EMAIL_BACKEND == 'django_ses.SESBackend':
+if EMAIL_BACKEND == "django_ses.SESBackend":
     AWS_SES_REGION_NAME = "us-west-2"
     AWS_SES_REGION_ENDPOINT = "email.us-west-2.amazonaws.com"
 EMAIL_PORT = os.environ.get("EMAIL_PORT", 25)
