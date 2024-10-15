@@ -1,12 +1,10 @@
-from django.conf import settings
+
 from django.contrib.auth.models import User
-from django.test import RequestFactory, TestCase, tag
+from django.test import RequestFactory, TestCase
 from django.urls import reverse
-from researcher_UI.forms import AddPairedStudyForm, AdminNewForm
+from researcher_UI.forms import AddPairedStudyForm
 from researcher_UI.models import (
-    Administration,
     Instrument,
-    InstrumentFamily,
     Researcher,
     Study,
 )
