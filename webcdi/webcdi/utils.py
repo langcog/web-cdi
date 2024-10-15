@@ -27,3 +27,9 @@ def get_linux_ec2_private_ip():
     finally:
         if response:
             response.close()
+
+def is_true (val):
+    if isinstance(val, str):
+        if val.lower() == 'true': return True
+    if val in [True, 1]: return True
+    return False
