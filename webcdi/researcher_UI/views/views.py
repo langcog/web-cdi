@@ -8,7 +8,6 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.views import generic
 from ipware.ip import get_client_ip
-
 from researcher_UI.forms import *
 from researcher_UI.models import Study
 from researcher_UI.utils.admin_new import admin_new_fun
