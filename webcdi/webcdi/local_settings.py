@@ -62,23 +62,23 @@ ADMINS = (("Henry Mehta", "hjsmehta@gmail.com"),)
 
 DJANGO_SERVER_TYPE = os.environ.get("DJANGO_SERVER_TYPE", "DEV")  # DEV or PROD
 
-RDS_ENGINE = os.environ.get("RDS_ENGINE", 'django.db.backends.postgresql')
-if RDS_ENGINE == 'webcdi_postgresql_engine':
+RDS_ENGINE = os.environ.get("RDS_ENGINE", "django.db.backends.postgresql")
+if RDS_ENGINE == "webcdi_postgresql_engine":
     RDS_PASSWORD = get_secret(
-                f"{os.environ.get('DJANGO_SERVER_TYPE','dev').lower()}/webcdi/RDS_PASSWORD"
-            )["password"]
+        f"{os.environ.get('DJANGO_SERVER_TYPE','dev').lower()}/webcdi/RDS_PASSWORD"
+    )["password"]
 else:
     RDS_PASSWORD = os.environ["RDS_PASSWORD"]
 DATABASES = {
-        "default": {
-            "ENGINE": RDS_ENGINE,
-            "NAME": os.environ["RDS_DB_NAME"],
-            "USER": os.environ["RDS_USERNAME"],
-            "PASSWORD": RDS_PASSWORD,
-            "HOST": os.environ["RDS_HOSTNAME"],
-            "PORT": os.environ["RDS_PORT"],
-        }
+    "default": {
+        "ENGINE": RDS_ENGINE,
+        "NAME": os.environ["RDS_DB_NAME"],
+        "USER": os.environ["RDS_USERNAME"],
+        "PASSWORD": RDS_PASSWORD,
+        "HOST": os.environ["RDS_HOSTNAME"],
+        "PORT": os.environ["RDS_PORT"],
     }
+}
 
 SITE_ID = int(os.environ.get("SITE_ID", 3))  # 4 for MPI, 2 for DEV, 3 for local
 
