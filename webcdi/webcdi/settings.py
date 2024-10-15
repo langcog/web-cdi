@@ -2,16 +2,18 @@
 import json
 import os
 import socket
+
 import boto3
 from botocore.exceptions import ClientError
-from webcdi.utils import is_true
 from django.utils.crypto import get_random_string
 from django.utils.translation import gettext_lazy as _
-from webcdi.utils import get_linux_ec2_private_ip
+
+from webcdi.utils import get_linux_ec2_private_ip, is_true
 
 DEBUG = bool(os.environ.get("DEBUG", False))
 # DEBUG=False
 TEMPLATE_DEBUG = False
+
 
 def get_secret(secret_name, region_name="us-west-2"):
     # Create a Secrets Manager client
@@ -29,6 +31,7 @@ def get_secret(secret_name, region_name="us-west-2"):
     secret = get_secret_value_response["SecretString"]
 
     return json.loads(secret)
+
 
 HOST_NAME = socket.gethostname()
 HOST_IP = socket.gethostbyname(HOST_NAME)
@@ -142,11 +145,11 @@ def generate_secret_key(fname):
 
 # SECURITY WARNING: keep the secret key used in production secret!
 try:
-    from .secret_key import * #  noqa
+    from .secret_key import *  # noqa
 except ImportError:
     SETTINGS_DIR = os.path.abspath(os.path.dirname(__file__))
     generate_secret_key(os.path.join(SETTINGS_DIR, "secret_key.py"))
-    from .secret_key import *
+    from .secret_key import *  # noqa
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
 
