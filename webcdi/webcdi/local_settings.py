@@ -61,28 +61,20 @@ for IP in list(NEW_IPS):
 ADMINS = (("Henry Mehta", "hjsmehta@gmail.com"),)
 
 DJANGO_SERVER_TYPE = os.environ.get("DJANGO_SERVER_TYPE", "DEV")  # DEV or PROD
-# print(get_secret(f"{os.environ.get('DJANGO_SERVER_TYPE','dev').lower()}/webcdi/RDS_PASSWORD")['password'])
-# Database Settings
-if os.environ.get("DJANGO_SERVER_TYPE", "dev") in ["LOCAL", "TEST"]:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql",
-            "NAME": os.environ["RDS_DB_NAME"],
-            "USER": os.environ["RDS_USERNAME"],
-            "PASSWORD": os.environ["RDS_PASSWORD"],
-            "HOST": os.environ["RDS_HOSTNAME"],
-            "PORT": os.environ["RDS_PORT"],
-        }
-    }
-else:
-    DATABASES = {
-        "default": {
-            "ENGINE": "webcdi_postgresql_engine",
-            "NAME": os.environ["RDS_DB_NAME"],
-            "USER": os.environ["RDS_USERNAME"],
-            "PASSWORD": get_secret(
+
+RDS_ENGINE = os.environ.get("RDS_ENGINE", 'django.db.backends.postgresql')
+if RDS_ENGINE == 'webcdi_postgresql_engine':
+    RDS_PASSWORD = get_secret(
                 f"{os.environ.get('DJANGO_SERVER_TYPE','dev').lower()}/webcdi/RDS_PASSWORD"
-            )["password"],
+            )["password"]
+else:
+    RDS_PASSWORD = os.environ["RDS_PASSWORD"]
+DATABASES = {
+        "default": {
+            "ENGINE": RDS_ENGINE,
+            "NAME": os.environ["RDS_DB_NAME"],
+            "USER": os.environ["RDS_USERNAME"],
+            "PASSWORD": RDS_PASSWORD,
             "HOST": os.environ["RDS_HOSTNAME"],
             "PORT": os.environ["RDS_PORT"],
         }
@@ -95,7 +87,7 @@ USER_ADMIN_EMAIL = "hjsmehta@gmail.com"
 
 SERVER_EMAIL = "webcdi-contact@stanford.edu"
 
-# captcha settings
+# captcha settings - no longer used
 RECAPTCHA_PUBLIC_KEY = os.environ.get("RECAPTCHA_PUBLIC_KEY", "<RECAPTCHA_PUBLIC_KEY>")
 RECAPTCHA_PRIVATE_KEY = os.environ.get(
     "RECAPTCHA_PRIVATE_KEY", "<RECAPTCHA_PRIVATE_KEY>"
