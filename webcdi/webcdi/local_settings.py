@@ -48,13 +48,14 @@ if AWS_INSTANCE:
         )
         DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
-ALLOWED_HOSTS = json.loads(os.environ['ALLOWED_HOSTS'])
+ALLOWED_HOSTS = json.loads(os.environ["ALLOWED_HOSTS"])
 if AWS_INSTANCE:
     ALLOWED_HOSTS += [
         "ec2-52-88-52-34.us-west-2.compute.amazonaws.com",
         HOST_IP,
-        HOST_NAME,]
-    
+        HOST_NAME,
+    ]
+
 
 IPS_TO_ADD = [socket.gethostname()]
 
@@ -67,7 +68,7 @@ for IP in IPS_TO_ADD:
 for IP in list(NEW_IPS):
     ALLOWED_HOSTS.append(IP)
 
-ADMINS = (("Henry Mehta", "hjsmehta@gmail.com"),)
+ADMINS = json.loads(os.environ["ADMINS"])
 
 DJANGO_SERVER_TYPE = os.environ.get("DJANGO_SERVER_TYPE", "DEV")  # DEV or PROD
 
@@ -101,10 +102,8 @@ RECAPTCHA_PRIVATE_KEY = os.environ.get(
     "RECAPTCHA_PRIVATE_KEY", "<RECAPTCHA_PRIVATE_KEY>"
 )
 # Home page links
-CONTACT_EMAIL = "webcdi-contact@stanford.edu"
-MORE_INFO_ADDRESS = "http://mb-cdi.stanford.edu/"
-
-
+CONTACT_EMAIL = os.environ.get("CONTACT_EMAIL", "webcdi-contact@stanford.edu")
+MORE_INFO_ADDRESS = os.environ.get("MORE_INFO_ADDRESS", "http://mb-cdi.stanford.edu/")
 
 # CAT Server
 CAT_API_BASE_URL = os.environ.get(
