@@ -2,9 +2,11 @@
 import json
 import os
 import socket
-from webcdi.utils import is_true
+
 import boto3
 from botocore.exceptions import ClientError
+
+from webcdi.utils import is_true
 
 # Use this code snippet in your app.
 # If you need more information about configurations
@@ -96,7 +98,7 @@ CONTACT_EMAIL = "webcdi-contact@stanford.edu"
 MORE_INFO_ADDRESS = "http://mb-cdi.stanford.edu/"
 
 # AWS creds
-AWS_INSTANCE = is_true(os.environ.get('AWS_INSTANCE', True))
+AWS_INSTANCE = is_true(os.environ.get("AWS_INSTANCE", True))
 
 if AWS_INSTANCE:
     secret = get_secret("webcdi/webcdi-IAM")
@@ -104,7 +106,7 @@ if AWS_INSTANCE:
     AWS_SECRET_ACCESS_KEY = secret["AWS_SECRET_ACCESS_KEY"]
     if "RDS_HOSTNAME" in os.environ:
         AWS_STORAGE_BUCKET_NAME = os.environ.get(
-            "AWS_STORAGE_BUCKET_NAME", "AWS_STORAGE_BUCKET" 
+            "AWS_STORAGE_BUCKET_NAME", "AWS_STORAGE_BUCKET"
         )
         DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
@@ -116,13 +118,15 @@ CAT_API_BASE_URL = os.environ.get(
 # EMAIL settings
 EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND", "django_ses.SESBackend")
 if EMAIL_BACKEND == "django_ses.SESBackend":
-    AWS_SES_REGION_NAME = os.environ.get("AWS_SES_REGION_NAME","us-west-2")
-    AWS_SES_REGION_ENDPOINT = os.environ.get("AWS_SES_REGION_ENDPOINT","email.us-west-2.amazonaws.com")
+    AWS_SES_REGION_NAME = os.environ.get("AWS_SES_REGION_NAME", "us-west-2")
+    AWS_SES_REGION_ENDPOINT = os.environ.get(
+        "AWS_SES_REGION_ENDPOINT", "email.us-west-2.amazonaws.com"
+    )
 EMAIL_PORT = os.environ.get("EMAIL_PORT", 25)
 
 DEFAULT_FROM_EMAIL_NAME = os.environ["DEFAULT_FROM_EMAIL_NAME"]
 DEFAULT_FROM_EMAIL_ADDRESS = os.environ["DEFAULT_FROM_EMAIL_ADDRESS"]
-DEFAULT_FROM_EMAIL = f'{DEFAULT_FROM_EMAIL_NAME} <{DEFAULT_FROM_EMAIL_ADDRESS}>'
+DEFAULT_FROM_EMAIL = f"{DEFAULT_FROM_EMAIL_NAME} <{DEFAULT_FROM_EMAIL_ADDRESS}>"
 DEFAULT_RECIPIENT_EMAIL = EMAIL_HOST_USER = os.environ["DEFAULT_RECIPIENT_EMAIL"]
 
 BROOKES_EMAIL = os.environ["BROOKES_EMAIL"]
