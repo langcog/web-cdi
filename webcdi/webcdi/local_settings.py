@@ -35,19 +35,26 @@ def get_secret(secret_name, region_name="us-west-2"):
 HOST_NAME = socket.gethostname()
 HOST_IP = socket.gethostbyname(HOST_NAME)
 
-ALLOWED_HOSTS = [
-    "ec2-52-88-52-34.us-west-2.compute.amazonaws.com",
-    HOST_IP,
-    HOST_NAME,
-    "web",  # For tests in using docker
-    "test",  # For tests in using docker
-    "localhost",
-    "127.0.0.2",
-    "127.0.0.1",
-    ".webcdi.org",
-    ".webcdi.stanford.edu",
-    ".webcdi-dev.stanford.edu",
-]
+# AWS creds
+AWS_INSTANCE = is_true(os.environ.get("AWS_INSTANCE", True))
+
+if AWS_INSTANCE:
+    secret = get_secret("webcdi/webcdi-IAM")
+    AWS_ACCESS_KEY_ID = secret["AWS_ACCESS_KEY_ID"]
+    AWS_SECRET_ACCESS_KEY = secret["AWS_SECRET_ACCESS_KEY"]
+    if "RDS_HOSTNAME" in os.environ:
+        AWS_STORAGE_BUCKET_NAME = os.environ.get(
+            "AWS_STORAGE_BUCKET_NAME", "AWS_STORAGE_BUCKET"
+        )
+        DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+
+ALLOWED_HOSTS = json.loads(os.environ['ALLOWED_HOSTS'])
+if AWS_INSTANCE:
+    ALLOWED_HOSTS += [
+        "ec2-52-88-52-34.us-west-2.compute.amazonaws.com",
+        HOST_IP,
+        HOST_NAME,]
+    
 
 IPS_TO_ADD = [socket.gethostname()]
 
@@ -97,18 +104,7 @@ RECAPTCHA_PRIVATE_KEY = os.environ.get(
 CONTACT_EMAIL = "webcdi-contact@stanford.edu"
 MORE_INFO_ADDRESS = "http://mb-cdi.stanford.edu/"
 
-# AWS creds
-AWS_INSTANCE = is_true(os.environ.get("AWS_INSTANCE", True))
 
-if AWS_INSTANCE:
-    secret = get_secret("webcdi/webcdi-IAM")
-    AWS_ACCESS_KEY_ID = secret["AWS_ACCESS_KEY_ID"]
-    AWS_SECRET_ACCESS_KEY = secret["AWS_SECRET_ACCESS_KEY"]
-    if "RDS_HOSTNAME" in os.environ:
-        AWS_STORAGE_BUCKET_NAME = os.environ.get(
-            "AWS_STORAGE_BUCKET_NAME", "AWS_STORAGE_BUCKET"
-        )
-        DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
 # CAT Server
 CAT_API_BASE_URL = os.environ.get(
