@@ -11,13 +11,135 @@ DEBUG = bool(os.environ.get("DEBUG", False))
 # DEBUG=False
 TEMPLATE_DEBUG = False
 
-try:
-    from .secret_settings import *
+# This file contains settings changed for MPI instance
+import json
+import os
+import socket
 
-    print("Importing Secret Settings")
-except Exception:
-    # print(f"Importing Local Settings with error {e}")
-    from .local_settings import *
+import boto3
+from botocore.exceptions import ClientError
+
+from webcdi.utils import is_true
+
+# Use this code snippet in your app.
+# If you need more information about configurations
+# or implementing the sample code, visit the AWS docs:
+# https://aws.amazon.com/developer/language/python/
+
+
+def get_secret(secret_name, region_name="us-west-2"):
+    # Create a Secrets Manager client
+    session = boto3.session.Session()
+    client = session.client(service_name="secretsmanager", region_name=region_name)
+
+    try:
+        get_secret_value_response = client.get_secret_value(SecretId=secret_name)
+    except ClientError as e:
+        # For a list of exceptions thrown, see
+        # https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
+        raise e
+
+    # Decrypts secret using the associated KMS key.
+    secret = get_secret_value_response["SecretString"]
+
+    return json.loads(secret)
+
+
+HOST_NAME = socket.gethostname()
+HOST_IP = socket.gethostbyname(HOST_NAME)
+
+# AWS creds
+AWS_INSTANCE = is_true(os.environ.get("AWS_INSTANCE", True))
+
+if AWS_INSTANCE:
+    secret = get_secret("webcdi/webcdi-IAM")
+    AWS_ACCESS_KEY_ID = secret["AWS_ACCESS_KEY_ID"]
+    AWS_SECRET_ACCESS_KEY = secret["AWS_SECRET_ACCESS_KEY"]
+    if "RDS_HOSTNAME" in os.environ:
+        AWS_STORAGE_BUCKET_NAME = os.environ.get(
+            "AWS_STORAGE_BUCKET_NAME", "AWS_STORAGE_BUCKET"
+        )
+        DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+
+ALLOWED_HOSTS = json.loads(os.environ["ALLOWED_HOSTS"])
+if AWS_INSTANCE:
+    ALLOWED_HOSTS += [
+        "ec2-52-88-52-34.us-west-2.compute.amazonaws.com",
+        HOST_IP,
+        HOST_NAME,
+    ]
+
+
+IPS_TO_ADD = [socket.gethostname()]
+
+NEW_IPS = set()
+
+for IP in IPS_TO_ADD:
+    for i in range(0, 100):
+        NEW_IPS.add(socket.gethostbyname(IP))
+
+for IP in list(NEW_IPS):
+    ALLOWED_HOSTS.append(IP)
+
+ADMINS = json.loads(os.environ["ADMINS"])
+
+DJANGO_SERVER_TYPE = os.environ.get("DJANGO_SERVER_TYPE", "DEV")  # DEV or PROD
+
+RDS_ENGINE = os.environ.get("RDS_ENGINE", "django.db.backends.postgresql")
+if RDS_ENGINE == "webcdi_postgresql_engine":
+    RDS_PASSWORD = get_secret(
+        f"{os.environ.get('DJANGO_SERVER_TYPE','dev').lower()}/webcdi/RDS_PASSWORD"
+    )["password"]
+else:
+    RDS_PASSWORD = os.environ["RDS_PASSWORD"]
+DATABASES = {
+    "default": {
+        "ENGINE": RDS_ENGINE,
+        "NAME": os.environ["RDS_DB_NAME"],
+        "USER": os.environ["RDS_USERNAME"],
+        "PASSWORD": RDS_PASSWORD,
+        "HOST": os.environ["RDS_HOSTNAME"],
+        "PORT": os.environ["RDS_PORT"],
+    }
+}
+
+SITE_ID = int(os.environ.get("SITE_ID", 3))  # 4 for MPI, 2 for DEV, 3 for local
+
+# USER_ADMIN_EMAIL = 'webcdi-contact@stanford.edu'
+USER_ADMIN_EMAIL = os.environ["USER_ADMIN_EMAIL"]
+SERVER_EMAIL = os.environ["SERVER_EMAIL"]
+
+# captcha settings - no longer used
+RECAPTCHA_PUBLIC_KEY = os.environ.get("RECAPTCHA_PUBLIC_KEY", "<RECAPTCHA_PUBLIC_KEY>")
+RECAPTCHA_PRIVATE_KEY = os.environ.get(
+    "RECAPTCHA_PRIVATE_KEY", "<RECAPTCHA_PRIVATE_KEY>"
+)
+# Home page links
+CONTACT_EMAIL = os.environ.get("CONTACT_EMAIL", "webcdi-contact@stanford.edu")
+MORE_INFO_ADDRESS = os.environ.get("MORE_INFO_ADDRESS", "http://mb-cdi.stanford.edu/")
+
+# CAT Server
+CAT_API_BASE_URL = os.environ.get(
+    "CAT_API_URL", "http://cdicatapi-env.eba-c2knb6uj.us-west-2.elasticbeanstalk.com/"
+)
+
+# EMAIL settings
+EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND", "django_ses.SESBackend")
+if EMAIL_BACKEND == "django_ses.SESBackend":
+    AWS_SES_REGION_NAME = os.environ.get("AWS_SES_REGION_NAME", "us-west-2")
+    AWS_SES_REGION_ENDPOINT = os.environ.get(
+        "AWS_SES_REGION_ENDPOINT", "email.us-west-2.amazonaws.com"
+    )
+EMAIL_PORT = os.environ.get("EMAIL_PORT", 25)
+
+DEFAULT_FROM_EMAIL_NAME = os.environ["DEFAULT_FROM_EMAIL_NAME"]
+DEFAULT_FROM_EMAIL_ADDRESS = os.environ["DEFAULT_FROM_EMAIL_ADDRESS"]
+DEFAULT_FROM_EMAIL = f"{DEFAULT_FROM_EMAIL_NAME} <{DEFAULT_FROM_EMAIL_ADDRESS}>"
+DEFAULT_RECIPIENT_EMAIL = EMAIL_HOST_USER = os.environ["DEFAULT_RECIPIENT_EMAIL"]
+
+BROOKES_EMAIL = os.environ["BROOKES_EMAIL"]
+
+PRIMARY_HOST = os.environ.get("PRIMARY_HOST", None)
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
