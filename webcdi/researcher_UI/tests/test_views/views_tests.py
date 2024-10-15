@@ -3,12 +3,16 @@ import os
 
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.test import RequestFactory, TestCase, tag
+from django.test import  TestCase
 from django.urls import reverse
-
-from researcher_UI.forms import AddPairedStudyForm, AdminNewForm
-from researcher_UI.models import (Administration, Instrument, InstrumentFamily,
-                                  Researcher, Study)
+from researcher_UI.forms import  AdminNewForm
+from researcher_UI.models import (
+    Administration,
+    Instrument,
+    InstrumentFamily,
+    Researcher,
+    Study,
+)
 from researcher_UI.tests import generate_fake_results
 from researcher_UI.tests.utils import random_password
 
@@ -410,7 +414,6 @@ class AdminNewTest(TestCase):
 
     def test_post_autogenerate_10(self):
         self.client.force_login(self.user)
-        PROJECT_ROOT = settings.BASE_DIR
 
         payload = {
             "study": self.study.id,
@@ -435,7 +438,6 @@ class AdminNewTest(TestCase):
 
     def test_post_autogenerate_greater_100(self):
         self.client.force_login(self.user)
-        PROJECT_ROOT = settings.BASE_DIR
 
         payload = {
             "study": self.study.id,
@@ -458,7 +460,6 @@ class AdminNewTest(TestCase):
 
     def test_post_empty_form(self):
         self.client.force_login(self.user)
-        PROJECT_ROOT = settings.BASE_DIR
 
         payload = {
             "study": self.study.id,

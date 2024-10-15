@@ -4,7 +4,6 @@ import os
 from django.conf import settings
 from django.db.models import Q
 from django_tables2 import RequestConfig
-
 from researcher_UI.forms import AddStudyForm
 from researcher_UI.models import Administration, PaymentCode, Study
 from researcher_UI.tables import StudyAdministrationTable

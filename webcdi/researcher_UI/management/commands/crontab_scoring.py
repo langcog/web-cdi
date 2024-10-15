@@ -1,8 +1,7 @@
 import logging
 
-from django.core.management.base import BaseCommand
-
 from cdi_forms.scores import update_summary_scores
+from django.core.management.base import BaseCommand
 from researcher_UI.models import Administration
 
 logger = logging.getLogger(__name__)
