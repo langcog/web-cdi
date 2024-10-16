@@ -43,11 +43,8 @@ if AWS_INSTANCE:
     secret = get_secret("webcdi/webcdi-IAM")
     AWS_ACCESS_KEY_ID = secret["AWS_ACCESS_KEY_ID"]
     AWS_SECRET_ACCESS_KEY = secret["AWS_SECRET_ACCESS_KEY"]
-    if "RDS_HOSTNAME" in os.environ:
-        AWS_STORAGE_BUCKET_NAME = os.environ.get(
-            "AWS_STORAGE_BUCKET_NAME", "AWS_STORAGE_BUCKET"
-        )
-        DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+    AWS_STORAGE_BUCKET_NAME = os.environ["AWS_STORAGE_BUCKET_NAME"]
+    DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
 ALLOWED_HOSTS = json.loads(os.environ["ALLOWED_HOSTS"])
 if AWS_INSTANCE:
@@ -92,10 +89,6 @@ DATABASES = {
 }
 
 SITE_ID = int(os.environ.get("SITE_ID", 3))  # 4 for MPI, 2 for DEV, 3 for local
-
-# USER_ADMIN_EMAIL = 'webcdi-contact@stanford.edu'
-USER_ADMIN_EMAIL = os.environ["USER_ADMIN_EMAIL"]
-SERVER_EMAIL = os.environ["SERVER_EMAIL"]
 
 # captcha settings - no longer used
 RECAPTCHA_PUBLIC_KEY = os.environ.get("RECAPTCHA_PUBLIC_KEY", "<RECAPTCHA_PUBLIC_KEY>")
