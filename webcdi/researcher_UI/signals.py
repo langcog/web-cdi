@@ -5,6 +5,7 @@ from django.dispatch import receiver
 # from registration.models import RegistrationProfile
 from researcher_UI.models import Researcher
 
+
 @receiver(post_save, sender=Researcher)
 def update_instruments(sender, instance, **kwargs):
     """
