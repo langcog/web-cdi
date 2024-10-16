@@ -60,7 +60,7 @@ class ContactForm(forms.Form):
             "New contact form submission",
             content,
             settings.CONTACT_EMAIL,
-            [settings.USER_ADMIN_EMAIL],
+            [settings.ADMINS],
             headers={"Reply-To": cleaned_data["contact_email"]},
         )
         email.send()

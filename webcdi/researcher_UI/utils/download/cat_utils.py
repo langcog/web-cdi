@@ -83,6 +83,7 @@ def get_pd_norms(study_obj, administrations, adjusted, answer_rows):
                             .raw_score_girl
                         )
                 except Exception as e:
+                    logger.debug(e)
                     pass
             rows.append(row)
     return pd.DataFrame.from_dict(rows)
