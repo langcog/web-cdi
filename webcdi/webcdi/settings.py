@@ -46,8 +46,9 @@ if AWS_INSTANCE:
     AWS_STORAGE_BUCKET_NAME = os.environ["AWS_STORAGE_BUCKET_NAME"]
     DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
-ALLOWED_HOSTS = json.loads(os.environ["ALLOWED_HOSTS"])
+
 print(f'OS environ Allowed Hosts = {os.environ["ALLOWED_HOSTS"]}')
+ALLOWED_HOSTS = json.loads(os.environ["ALLOWED_HOSTS"])
 print(f'Variable ALLOWED_HOSTS = {ALLOWED_HOSTS}')
 if AWS_INSTANCE:
     ALLOWED_HOSTS += [
