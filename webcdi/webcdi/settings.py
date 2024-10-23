@@ -47,14 +47,14 @@ if AWS_INSTANCE:
     DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
 
-print(f'OS environ Allowed Hosts = {os.environ["ALLOWED_HOSTS"]}')
-print(f'It has type {type(os.environ["ALLOWED_HOSTS"])}')
-try:
-    ALLOWED_HOSTS = json.loads(os.environ["ALLOWED_HOSTS"])
-except Exception as e:
-    print(e)
-    ALLOWED_HOSTS = os.environ["ALLOWED_HOSTS"].replace('[','').split(',')
-print(f'Variable ALLOWED_HOSTS = {ALLOWED_HOSTS}')
+def json_or_string_to_list(var):
+    try:
+        return json.loads(var)
+    except Exception as e:
+        return var.replace('[','').replace(']','').split(',')
+
+
+ALLOWED_HOSTS = json_or_string_to_list(os.environ["ALLOWED_HOSTS"])
 if AWS_INSTANCE:
     ALLOWED_HOSTS += [
         "ec2-52-88-52-34.us-west-2.compute.amazonaws.com",
@@ -74,7 +74,7 @@ for IP in IPS_TO_ADD:
 for IP in list(NEW_IPS):
     ALLOWED_HOSTS.append(IP)
 
-ADMINS = json.loads(os.environ["ADMINS"])
+ADMINS = json_or_string_to_list(os.environ["ADMINS"])
 
 DJANGO_SERVER_TYPE = os.environ.get("DJANGO_SERVER_TYPE", "DEV")  # DEV or PROD
 
