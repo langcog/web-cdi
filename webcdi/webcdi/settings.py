@@ -47,6 +47,8 @@ if AWS_INSTANCE:
     DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
 ALLOWED_HOSTS = json.loads(os.environ["ALLOWED_HOSTS"])
+print(f'OS environ Allowed Hosts = {os.environ["ALLOWED_HOSTS"]}')
+print(f'Variable ALLOWED_HOSTS = {ALLOWED_HOSTS}')
 if AWS_INSTANCE:
     ALLOWED_HOSTS += [
         "ec2-52-88-52-34.us-west-2.compute.amazonaws.com",
