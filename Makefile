@@ -19,7 +19,10 @@ docker-db-populate:
 	
 docker-test:
 	docker-compose exec web coverage run manage.py test --exclude=selenium
-	
+
+docker-score:
+	docker-compose exec web ./manage.py crontab_scoring
+
 docker-create-db:
 	docker-compose exec -it db bash 
 	psql -U postgres
