@@ -48,7 +48,12 @@ if AWS_INSTANCE:
 
 
 print(f'OS environ Allowed Hosts = {os.environ["ALLOWED_HOSTS"]}')
-ALLOWED_HOSTS = json.loads(os.environ["ALLOWED_HOSTS"])
+print(f'It has type {type(os.environ["ALLOWED_HOSTS"])}')
+try:
+    ALLOWED_HOSTS = json.loads(os.environ["ALLOWED_HOSTS"])
+except Exception as e:
+    print(e)
+    ALLOWED_HOSTS = os.environ["ALLOWED_HOSTS"].replace('[','').split(',')
 print(f'Variable ALLOWED_HOSTS = {ALLOWED_HOSTS}')
 if AWS_INSTANCE:
     ALLOWED_HOSTS += [
