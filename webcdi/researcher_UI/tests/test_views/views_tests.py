@@ -5,14 +5,10 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
+
 from researcher_UI.forms import AdminNewForm
-from researcher_UI.models import (
-    Administration,
-    Instrument,
-    InstrumentFamily,
-    Researcher,
-    Study,
-)
+from researcher_UI.models import (Administration, Instrument, InstrumentFamily,
+                                  Researcher, Study)
 from researcher_UI.tests import generate_fake_results
 from researcher_UI.tests.utils import random_password
 

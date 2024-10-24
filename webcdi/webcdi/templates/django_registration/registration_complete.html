@@ -11,7 +11,8 @@
 		<div class="row">
 			<div id="success">
 				<p>{% trans 'You have successfully filled out our registration form.' %}</p>
-				<p>{% trans 'Thank you for registering for Web-CDI. An email was sent to the address you provided. Please click on the link in that email to complete your registration (please check you spam and junk email)' %} <br>
+				<p>{% trans 'Thank you for registering for Web-CDI. You can login.' %} </p>
+				<a href="{% url 'researcher_ui:console' %}" class='btn btn-primary'>Login</a>
 			</div>
 		</div>
 	</div>

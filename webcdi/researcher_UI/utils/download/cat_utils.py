@@ -2,6 +2,7 @@ import logging
 
 import pandas as pd
 from django.db.models import Q
+
 from researcher_UI.models import Benchmark
 
 logger = logging.getLogger(__name__)
