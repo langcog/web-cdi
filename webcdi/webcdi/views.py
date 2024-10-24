@@ -4,10 +4,8 @@ from typing import Any
 
 from dateutil.relativedelta import relativedelta
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import LoginView
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
-from django.shortcuts import redirect, render
 from django.utils import translation
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
