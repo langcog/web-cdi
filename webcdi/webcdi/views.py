@@ -1,11 +1,12 @@
 import datetime
+import logging
 from typing import Any
 
 from dateutil.relativedelta import relativedelta
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import LoginView
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.utils import translation
 from django.utils.decorators import method_decorator
@@ -16,6 +17,8 @@ from django_registration.backends.activation.views import RegistrationView
 from brookes.models import BrookesCode
 from researcher_UI.models import Researcher
 from webcdi.forms import SignUpForm
+
+logger = logging.getLogger("debug")
 
 
 @method_decorator([never_cache], name="dispatch")
@@ -38,11 +41,17 @@ class CustomRegistrationView(RegistrationView):
 
     def form_valid(self, form):
         user = form.save()
+        super().form_valid(form)
+        logger.debug(f"User is {user}.  Is Active is {user.is_active}")
         researcher, created = Researcher.objects.get_or_create(user=user)
         researcher.institution = self.request.POST["institution"]
         researcher.position = self.request.POST["position"]
         researcher.save()
-        return super().form_valid(form)
+
+        user.is_active = True
+        user.save()
+        logger.debug(f"User is {user}.  Is Active is {user.is_active}")
+        return HttpResponseRedirect(self.get_success_url())
 
 
 class CustomLoginView(LoginView):

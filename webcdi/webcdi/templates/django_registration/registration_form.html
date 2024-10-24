@@ -16,21 +16,9 @@
           <!--End login card-->
           <form action="{{ app_path }}" method="post" id="login-form">
             {% csrf_token %}
-            {% include 'registration/alert_none_fields.html' %}
-            
-            {% for field in form %}
-              <div class="row">
-                  <label class="col-12" for="{{ field.label }}" style="font-family:Arial, Helvetica, sans-serif;">{{ field.label }} <span style="color: red;font-family:none"> * </span></label>
-                  <div class="col-12">
-                    {{ field }}
-                  </div>
-                  
-                    {% with errors=field.errors %}
-                      {% include 'registration/alert.html' %}
-                    {% endwith%}
-              </div>
-            {%  endfor  %}
-
+            <table>
+            {{ form.as_table }}
+          </table>
               <div  class="input-row">
                 <input type="submit" name="login" style="font-size: 16px;" class="btn btn-primary" value="{% trans "Register" %}">
               </div>

@@ -51,7 +51,7 @@ def json_or_string_to_list(var):
     try:
         return json.loads(var)
     except Exception as e:
-        return var.replace('[','').replace(']','').split(',')
+        return var.replace("[", "").replace("]", "").split(",")
 
 
 ALLOWED_HOSTS = json_or_string_to_list(os.environ["ALLOWED_HOSTS"])

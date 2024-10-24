@@ -28,3 +28,5 @@ m2m_changed.connect(
 def update_user_profile(sender, instance, created, **kwargs):
     if created:
         Researcher.objects.get_or_create(user=instance)
+        instance.is_active = True
+        instance.save()

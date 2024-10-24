@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.test import RequestFactory, TestCase
 from django.urls import reverse
+
 from researcher_UI.forms import AddPairedStudyForm
 from researcher_UI.models import Instrument, Researcher, Study
 from researcher_UI.tests import generate_fake_results
