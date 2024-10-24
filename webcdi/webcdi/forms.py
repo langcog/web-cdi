@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 
 
 class SignUpForm(UserCreationForm):
-
     username = forms.CharField(
         max_length=30, widget=forms.TextInput(attrs={"class": "form-control"})
     )

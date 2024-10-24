@@ -42,7 +42,6 @@ class CustomRegistrationView(RegistrationView):
     def form_valid(self, form):
         user = form.save()
         super().form_valid(form)
-        logger.debug(f"User is {user}.  Is Active is {user.is_active}")
         researcher, created = Researcher.objects.get_or_create(user=user)
         researcher.institution = self.request.POST["institution"]
         researcher.position = self.request.POST["position"]
@@ -50,7 +49,6 @@ class CustomRegistrationView(RegistrationView):
 
         user.is_active = True
         user.save()
-        logger.debug(f"User is {user}.  Is Active is {user.is_active}")
         return HttpResponseRedirect(self.get_success_url())
 
 
