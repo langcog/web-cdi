@@ -1,10 +1,9 @@
 import os
 
 import pandas as pd
+from cdi_forms.models import Choices
 from django.conf import settings
 from django.core.management.base import BaseCommand
-
-from cdi_forms.models import Choices
 
 
 class Command(BaseCommand):

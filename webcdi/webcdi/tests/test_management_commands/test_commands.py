@@ -1,9 +1,12 @@
+from cdi_forms.models import Choices, Instrument_Forms
 from django.core.management import call_command
 from django.test import TestCase
-
-from cdi_forms.models import Choices, Instrument_Forms
-from researcher_UI.models import (Benchmark, Instrument, InstrumentFamily,
-                                  InstrumentScore)
+from researcher_UI.models import (
+    Benchmark,
+    Instrument,
+    InstrumentFamily,
+    InstrumentScore,
+)
 
 
 class CommandsTestCase(TestCase):
