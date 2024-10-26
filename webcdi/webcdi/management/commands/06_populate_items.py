@@ -21,13 +21,11 @@ def unicode_csv_reader(utf8_data, dialect=csv.excel, **kwargs):
 
 
 class Command(BaseCommand):
-
     def add_arguments(self, parser):
         parser.add_argument("-l", "--language", type=str)
         parser.add_argument("-f", "--form", type=str)
 
     def handle(self, *args, **options):
-
         PROJECT_ROOT = settings.BASE_DIR
         instruments = json.load(
             open(
@@ -76,7 +74,6 @@ class Command(BaseCommand):
             ftype = curr_instrument["csv_file"].split(".")[-1]
 
             if ftype == "csv":
-
                 contents = list(
                     unicode_csv_reader(
                         open(

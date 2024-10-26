@@ -17,7 +17,6 @@ logger.setLevel(logging.INFO)
 
 
 class CustomLoginViewTest(TestCase):
-
     def setUp(self):
         self.password = random_password()
         self.not_a_password = random_password()
@@ -85,7 +84,6 @@ class CustomLoginViewTest(TestCase):
 
 
 class CustomRegistrationViewTest(TestCase):
-
     def setUp(self):
         password = random_password()
         self.username = "test_user"

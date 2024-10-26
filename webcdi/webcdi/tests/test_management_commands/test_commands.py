@@ -7,7 +7,6 @@ from researcher_UI.models import (Benchmark, Instrument, InstrumentFamily,
 
 
 class CommandsTestCase(TestCase):
-
     def test_populate_instrument_family(self):
         args = []
         opts = {}

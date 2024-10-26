@@ -21,7 +21,6 @@ def unicode_csv_reader(utf8_data, dialect=csv.excel, **kwargs):
 
 
 class Command(BaseCommand):
-
     def add_arguments(self, parser):
         parser.add_argument("-l", "--language", type=str)
         parser.add_argument("-f", "--form", type=str)
