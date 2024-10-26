@@ -3,7 +3,7 @@ import logging
 from dateutil.relativedelta import relativedelta
 from django.contrib.auth.models import User
 from django.contrib.messages import get_messages
-from django.test import RequestFactory, TestCase, tag
+from django.test import RequestFactory, TestCase
 from django.urls import reverse
 from django.utils import timezone
 
