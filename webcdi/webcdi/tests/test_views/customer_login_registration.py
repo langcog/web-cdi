@@ -1,15 +1,15 @@
 import logging
 
+from brookes.models import BrookesCode
 from dateutil.relativedelta import relativedelta
 from django.contrib.auth.models import User
 from django.contrib.messages import get_messages
 from django.test import RequestFactory, TestCase
 from django.urls import reverse
 from django.utils import timezone
-
-from brookes.models import BrookesCode
 from researcher_UI.models import Instrument, InstrumentFamily, Researcher
 from researcher_UI.tests.utils import random_password
+
 from webcdi.views import CustomLoginView, CustomRegistrationView
 
 logger = logging.getLogger("selenium")
@@ -17,7 +17,6 @@ logger.setLevel(logging.INFO)
 
 
 class CustomLoginViewTest(TestCase):
-
     def setUp(self):
         self.password = random_password()
         self.not_a_password = random_password()
@@ -85,7 +84,6 @@ class CustomLoginViewTest(TestCase):
 
 
 class CustomRegistrationViewTest(TestCase):
-
     def setUp(self):
         password = random_password()
         self.username = "test_user"

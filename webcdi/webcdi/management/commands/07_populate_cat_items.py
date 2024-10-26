@@ -2,11 +2,10 @@ import csv
 import json
 import os
 
+from cdi_forms.cat_forms.models import *
 from django.apps import apps
 from django.conf import settings
 from django.core.management.base import BaseCommand
-
-from cdi_forms.cat_forms.models import *
 from researcher_UI.models import *
 
 # Populates the ItemInfo and ItemMap models with data from instrument definition files.
@@ -21,7 +20,6 @@ def unicode_csv_reader(utf8_data, dialect=csv.excel, **kwargs):
 
 
 class Command(BaseCommand):
-
     def add_arguments(self, parser):
         parser.add_argument("-l", "--language", type=str)
         parser.add_argument("-f", "--form", type=str)
