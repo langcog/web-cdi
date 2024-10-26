@@ -2,7 +2,6 @@ import datetime
 import logging
 from typing import Any
 
-from brookes.models import BrookesCode
 from dateutil.relativedelta import relativedelta
 from django.contrib import messages
 from django.contrib.auth.views import LoginView
@@ -12,8 +11,9 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from django.views.generic import TemplateView
 from django_registration.backends.activation.views import RegistrationView
-from researcher_UI.models import Researcher
 
+from brookes.models import BrookesCode
+from researcher_UI.models import Researcher
 from webcdi.forms import SignUpForm
 
 logger = logging.getLogger("debug")

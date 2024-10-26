@@ -21,7 +21,6 @@ from django.contrib.auth import views as auth_views
 from django.urls import include, path, re_path
 from django.views.generic import TemplateView
 from django.views.generic.base import RedirectView
-from django.views.i18n import JavaScriptCatalog
 
 from webcdi.forms import SignUpForm
 from webcdi.views import CustomLoginView, CustomRegistrationView, HomeView
