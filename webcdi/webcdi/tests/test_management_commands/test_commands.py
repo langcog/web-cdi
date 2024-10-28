@@ -1,13 +1,15 @@
-from django.core.management import call_command
-from django.test import TestCase, tag
-
 from cdi_forms.models import Choices, Instrument_Forms
-from researcher_UI.models import (Benchmark, Instrument, InstrumentFamily,
-                                  InstrumentScore)
+from django.core.management import call_command
+from django.test import TestCase
+from researcher_UI.models import (
+    Benchmark,
+    Instrument,
+    InstrumentFamily,
+    InstrumentScore,
+)
 
 
 class CommandsTestCase(TestCase):
-
     def test_populate_instrument_family(self):
         args = []
         opts = {}

@@ -1,17 +1,13 @@
-import csv
 import os
 
 import pandas as pd
+from cdi_forms.models import Choices
 from django.conf import settings
 from django.core.management.base import BaseCommand
 
-from cdi_forms.models import Choices
-
 
 class Command(BaseCommand):
-
     def handle(self, *args, **options):
-
         PROJECT_ROOT = settings.BASE_DIR
         choices_csv_path = os.path.realpath(
             PROJECT_ROOT + "/cdi_form_csv/choice_options.csv"

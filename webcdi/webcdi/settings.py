@@ -1,4 +1,5 @@
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import ast
 import json
 import os
 import socket
@@ -46,15 +47,7 @@ if AWS_INSTANCE:
     AWS_STORAGE_BUCKET_NAME = os.environ["AWS_STORAGE_BUCKET_NAME"]
     DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
-
-def json_or_string_to_list(var):
-    try:
-        return json.loads(var)
-    except Exception as e:
-        return var.replace("[", "").replace("]", "").split(",")
-
-
-ALLOWED_HOSTS = json_or_string_to_list(os.environ["ALLOWED_HOSTS"])
+ALLOWED_HOSTS = ast.literal_eval(os.environ["ALLOWED_HOSTS"])
 if AWS_INSTANCE:
     ALLOWED_HOSTS += [
         "ec2-52-88-52-34.us-west-2.compute.amazonaws.com",
@@ -74,7 +67,8 @@ for IP in IPS_TO_ADD:
 for IP in list(NEW_IPS):
     ALLOWED_HOSTS.append(IP)
 
-ADMINS = json_or_string_to_list(os.environ["ADMINS"])
+
+ADMINS = ast.literal_eval(os.environ["ADMINS"])
 
 DJANGO_SERVER_TYPE = os.environ.get("DJANGO_SERVER_TYPE", "DEV")  # DEV or PROD
 
