@@ -28,7 +28,7 @@ def download_cat_data(
     administrations = (
         administrations
         if administrations is not None
-        else Administration.objects.filter(study=study_obj)
+        else Administration.objects.filter(study=study_obj, is_active=True)
     )
 
     admin_header = format_admin_header(study_obj)

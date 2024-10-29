@@ -44,9 +44,13 @@ def get_pd_norms(study_obj, administrations, adjusted, answer_rows):
             if age < min_age:
                 age = min_age
 
-            answer = next(
-                item for item in answer_rows if item["administration_id"] == obj.id
-            )
+            try:
+                answer = next(
+                    item for item in answer_rows if item["administration_id"] == obj.id
+                )
+            except Exception as e:
+                continue
+
             for b in benchmarks.filter(age=age):
                 row["Benchmarking Cohort Age"] = age
                 if answer["est_theta"]:
