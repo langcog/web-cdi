@@ -50,7 +50,7 @@ def get_pd_norms(study_obj, administrations, adjusted, answer_rows):
                 )
             except Exception as e:
                 continue
-            
+
             for b in benchmarks.filter(age=age):
                 row["Benchmarking Cohort Age"] = age
                 if answer["est_theta"]:

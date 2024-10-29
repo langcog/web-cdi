@@ -2,10 +2,11 @@ import csv
 import json
 import os
 
-from cdi_forms.models import *
 from django.apps import apps
 from django.conf import settings
 from django.core.management.base import BaseCommand
+
+from cdi_forms.models import *
 from researcher_UI.models import *
 
 # Populates the ItemInfo and ItemMap models with data from instrument definition files.
