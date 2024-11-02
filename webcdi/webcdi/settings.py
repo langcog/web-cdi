@@ -49,8 +49,11 @@ if AWS_INSTANCE:
 
 if '"' not in os.environ["ALLOWED_HOSTS"]:
     TEMP_ALLOWED_HOSTS = os.environ["ALLOWED_HOSTS"]
-    ALLOWED_HOSTS = TEMP_ALLOWED_HOSTS.replace("[", '["').replace("]", '"').replace(",", '","').replace(
-        " ", ""
+    ALLOWED_HOSTS = (
+        TEMP_ALLOWED_HOSTS.replace("[", '["')
+        .replace("]", '"]')
+        .replace(",", '","')
+        .replace(" ", "")
     )
     print(ALLOWED_HOSTS)
     print(type(ALLOWED_HOSTS))
