@@ -47,7 +47,17 @@ if AWS_INSTANCE:
     AWS_STORAGE_BUCKET_NAME = os.environ["AWS_STORAGE_BUCKET_NAME"]
     DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
-ALLOWED_HOSTS = ast.literal_eval(os.environ["ALLOWED_HOSTS"])
+if '"' not in os.environ["ALLOWED_HOSTS"]:
+    TEMP_ALLOWED_HOSTS = os.environ["ALLOWED_HOSTS"]
+    ALLOWED_HOSTS = (
+        TEMP_ALLOWED_HOSTS.replace("[", '["')
+        .replace("]", '"]')
+        .replace(",", '","')
+        .replace(" ", "")
+    )
+    ALLOWED_HOSTS = ast.literal_eval(ALLOWED_HOSTS)
+else:
+    ALLOWED_HOSTS = ast.literal_eval(os.environ["ALLOWED_HOSTS"])
 if AWS_INSTANCE:
     ALLOWED_HOSTS += [
         "ec2-52-88-52-34.us-west-2.compute.amazonaws.com",
@@ -67,8 +77,17 @@ for IP in IPS_TO_ADD:
 for IP in list(NEW_IPS):
     ALLOWED_HOSTS.append(IP)
 
-
-ADMINS = ast.literal_eval(os.environ["ADMINS"])
+if '"' not in os.environ["ADMINS"]:
+    TEMP_ADMINS = os.environ["ADMINS"]
+    ADMINS = (
+        TEMP_ADMINS.replace("(", '("')
+        .replace(")", '")')
+        .replace(",", '","')
+        .replace(" ", "")
+    )
+    ADMINS = ast.literal_eval(ADMINS)
+else:
+    ADMINS = ast.literal_eval(os.environ["ADMINS"])
 
 DJANGO_SERVER_TYPE = os.environ.get("DJANGO_SERVER_TYPE", "DEV")  # DEV or PROD
 
