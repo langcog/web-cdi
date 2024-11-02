@@ -48,7 +48,14 @@ if AWS_INSTANCE:
     DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
 print(os.environ["ALLOWED_HOSTS"])
-ALLOWED_HOSTS = ast.literal_eval(os.environ["ALLOWED_HOSTS"])
+if '"' not in os.environ["ALLOWED_HOSTS"]:
+    ALLOWED_HOSTS = os.environ["ALLOWED_HOSTS"]
+    ALLOWED_HOSTS.replace('[','["').replace(']','"').replace(',','","').replace(' ','')
+    print(os.environ["ALLOWED_HOSTS"])
+    ALLOWED_HOSTS = ast.literal_eval(os.environ["ALLOWED_HOSTS"])
+    print(os.environ["ALLOWED_HOSTS"])
+else:
+    ALLOWED_HOSTS = ast.literal_eval(os.environ["ALLOWED_HOSTS"])
 if AWS_INSTANCE:
     ALLOWED_HOSTS += [
         "ec2-52-88-52-34.us-west-2.compute.amazonaws.com",
