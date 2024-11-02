@@ -55,10 +55,7 @@ if '"' not in os.environ["ALLOWED_HOSTS"]:
         .replace(",", '","')
         .replace(" ", "")
     )
-    print(ALLOWED_HOSTS)
-    print(type(ALLOWED_HOSTS))
     ALLOWED_HOSTS = ast.literal_eval(ALLOWED_HOSTS)
-    print(ALLOWED_HOSTS)
 else:
     ALLOWED_HOSTS = ast.literal_eval(os.environ["ALLOWED_HOSTS"])
 if AWS_INSTANCE:
@@ -81,7 +78,17 @@ for IP in list(NEW_IPS):
     ALLOWED_HOSTS.append(IP)
 
 
-ADMINS = ast.literal_eval(os.environ["ADMINS"])
+if '"' not in os.environ["ADMINS"]:
+    TEMP_ADMINS = os.environ["ADMINS"]
+    ADMINS = (
+        TEMP_ADMINS.replace("(", '("')
+        .replace(")", '")')
+        .replace(",", '","')
+        .replace(" ", "")
+    )
+    ADMINS = ast.literal_eval(ADMINS)
+else:
+    ADMINS = ast.literal_eval(os.environ["ADMINS"])
 
 DJANGO_SERVER_TYPE = os.environ.get("DJANGO_SERVER_TYPE", "DEV")  # DEV or PROD
 
