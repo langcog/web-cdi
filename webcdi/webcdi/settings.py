@@ -54,6 +54,7 @@ if '"' not in os.environ["ALLOWED_HOSTS"]:
         " ", ""
     )
     print(ALLOWED_HOSTS)
+    print(type(ALLOWED_HOSTS))
     ALLOWED_HOSTS = ast.literal_eval(ALLOWED_HOSTS)
     print(ALLOWED_HOSTS)
 else:
