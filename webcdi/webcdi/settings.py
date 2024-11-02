@@ -50,10 +50,12 @@ if AWS_INSTANCE:
 print(os.environ["ALLOWED_HOSTS"])
 if '"' not in os.environ["ALLOWED_HOSTS"]:
     ALLOWED_HOSTS = os.environ["ALLOWED_HOSTS"]
-    ALLOWED_HOSTS.replace('[','["').replace(']','"').replace(',','","').replace(' ','')
-    print(os.environ["ALLOWED_HOSTS"])
-    ALLOWED_HOSTS = ast.literal_eval(os.environ["ALLOWED_HOSTS"])
-    print(os.environ["ALLOWED_HOSTS"])
+    ALLOWED_HOSTS.replace("[", '["').replace("]", '"').replace(",", '","').replace(
+        " ", ""
+    )
+    print(ALLOWED_HOSTS)
+    ALLOWED_HOSTS = ast.literal_eval(ALLOWED_HOSTS)
+    print(ALLOWED_HOSTS)
 else:
     ALLOWED_HOSTS = ast.literal_eval(os.environ["ALLOWED_HOSTS"])
 if AWS_INSTANCE:
