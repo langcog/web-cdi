@@ -77,7 +77,6 @@ for IP in IPS_TO_ADD:
 for IP in list(NEW_IPS):
     ALLOWED_HOSTS.append(IP)
 
-print(f'os admion is {os.environ["ADMINS"]}')
 if '"' not in os.environ["ADMINS"]:
     TEMP_ADMINS = os.environ["ADMINS"]
     ADMINS = (
@@ -86,7 +85,6 @@ if '"' not in os.environ["ADMINS"]:
         .replace(",", '","')
         .replace(" ", "")
     )
-    print(ADMINS)
     ADMINS = ast.literal_eval(ADMINS)
 else:
     ADMINS = ast.literal_eval(os.environ["ADMINS"])
