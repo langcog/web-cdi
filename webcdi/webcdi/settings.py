@@ -47,10 +47,9 @@ if AWS_INSTANCE:
     AWS_STORAGE_BUCKET_NAME = os.environ["AWS_STORAGE_BUCKET_NAME"]
     DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
-print(os.environ["ALLOWED_HOSTS"])
 if '"' not in os.environ["ALLOWED_HOSTS"]:
-    ALLOWED_HOSTS = os.environ["ALLOWED_HOSTS"]
-    ALLOWED_HOSTS.replace("[", '["').replace("]", '"').replace(",", '","').replace(
+    TEMP_ALLOWED_HOSTS = os.environ["ALLOWED_HOSTS"]
+    ALLOWED_HOSTS = TEMP_ALLOWED_HOSTS.replace("[", '["').replace("]", '"').replace(",", '","').replace(
         " ", ""
     )
     print(ALLOWED_HOSTS)
