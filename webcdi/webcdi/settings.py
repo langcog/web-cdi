@@ -86,6 +86,7 @@ if '"' not in os.environ["ADMINS"]:
         .replace(",", '","')
         .replace(" ", "")
     )
+    print(ADMINS)
     ADMINS = ast.literal_eval(ADMINS)
 else:
     ADMINS = ast.literal_eval(os.environ["ADMINS"])
