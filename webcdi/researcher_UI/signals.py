@@ -1,9 +1,10 @@
 from django.contrib.auth.models import User
-from django.db.models.signals import m2m_changed, post_save
+from django.db.models.signals import m2m_changed, post_save, pre_save
 from django.dispatch import receiver
 
+from cdi_forms.scores import update_summary_scores
 # from registration.models import RegistrationProfile
-from researcher_UI.models import Researcher
+from researcher_UI.models import Administration, Researcher
 
 
 @receiver(post_save, sender=Researcher)
@@ -30,3 +31,18 @@ def update_user_profile(sender, instance, created, **kwargs):
         Researcher.objects.get_or_create(user=instance)
         instance.is_active = True
         instance.save()
+
+
+@receiver(pre_save, sender=Administration)
+def cache_previous_completed(sender, instance, *args, **kwargs):
+    original_completed = None
+    if instance.id:
+        original_completed = Administration.objects.get(pk=instance.id).completed
+
+    instance.__original_completed = original_completed
+
+
+@receiver(post_save, sender=Administration)
+def post_save_completed_handler(sender, instance, created, **kwargs):
+    if instance.completed and not instance.__original_completed:
+        update_summary_scores(instance)
