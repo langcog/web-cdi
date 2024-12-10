@@ -532,7 +532,7 @@ LOGIN_EXEMPT_URLS = (
 
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
-TRUSTED_ORIGINS = os.environ.get["TRUSTED_ORIGINS", False]
+TRUSTED_ORIGINS = os.environ.get("TRUSTED_ORIGINS", False)
 if TRUSTED_ORIGINS:
     if '"' not in os.environ["TRUSTED_ORIGINS"]:
         TRUSTED_ORIGINS = os.environ["TRUSTED_ORIGINS"]
