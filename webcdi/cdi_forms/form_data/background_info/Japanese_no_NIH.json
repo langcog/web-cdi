@@ -3,7 +3,7 @@
         "page":"front",
         "contents":[
             {
-                "fieldset":"Basic Information",
+                "fieldset":"基本情報",
                 "fields":[
                     {
                         "field":"form_filler",
@@ -133,7 +133,7 @@
                 ]
             },
             {
-                "fieldset":"Family Background",
+                "fieldset":"家族構成",
                 "fields":[
                     {
                         "field":"primary_caregiver",
@@ -258,7 +258,7 @@
                 ]
             },
             {
-                "fieldset":"Caregiver Information",
+                "fieldset":"養育者の情報",
                 "fields":[
                     {
                         "field":"caregiver_info"
@@ -266,7 +266,7 @@
                 ]
             },
             {
-                "fieldset":"Language Exposure",
+                "fieldset":"日常でふれている言語の情報",
                 "fields":[
                     {
                         "field":"other_languages_boolean",
@@ -285,7 +285,7 @@
                 ]
             },
             {
-                "fieldset":"Health",
+                "fieldset":"心身の状態や発達に関する情報：差し支えない範囲でお答えください。",
                 "fields":[
                     {
                         "field":"ear_infections_boolean",

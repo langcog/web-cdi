@@ -133,8 +133,8 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
         data["study_waiver"] = self.administration_instance.study.waiver
         data["allow_payment"] = self.administration_instance.study.allow_payment
         data["hint"] = _(
-            f'Your child should be between {data["min_age"]} to {data["max_age"]} months of age.'
-        )
+            "Your child should be between %(min_age)d to %(max_age)d months of age."
+        ) % {"min_age": data["min_age"], "max_age": data["max_age"]}
         data["form"] = self.administration_instance.study.instrument.form
         data["explanation"] = mark_safe(self.get_explanation_text())
 
