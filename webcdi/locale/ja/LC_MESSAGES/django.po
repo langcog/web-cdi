@@ -341,12 +341,12 @@ msgstr "それはどの言語ですか？"
 #: cdi_forms/forms/forms.py:229 cdi_forms/forms/forms.py:237
 #: cdi_forms/forms/forms.py:245
 msgid "Please specify"
-msgstr "当てはまるものを選んでください。"
+msgstr "具体的にご記入ください。"
 
 #: cdi_forms/forms/forms.py:254
 msgctxt "caregiver_other"
 msgid "Please specify"
-msgstr "当てはまるものを選んでください。"
+msgstr "具体的にご記入ください。"
 
 #: cdi_forms/forms/forms.py:351 cdi_forms/forms/forms.py:405
 msgid "This field cannot be empty"
