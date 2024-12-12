@@ -62,7 +62,7 @@ msgstr "はい"
 #: cdi_forms/forms/forms.py:214 cdi_forms/models.py:158 cdi_forms/models.py:217
 #: cdi_forms/models.py:222 cdi_forms/models.py:315 cdi_forms/models.py:628
 msgid "Prefer not to disclose"
-msgstr "情報開示を希望しない"
+msgstr "答えたくない"
 
 #: cdi_forms/forms/forms.py:37
 msgid "Under $25,000"
@@ -1378,7 +1378,7 @@ msgstr ""
 
 #: cdi_forms/models.py:311
 msgid "Two parents"
-msgstr "父母の2人"
+msgstr "父母の両方"
 
 #: cdi_forms/models.py:312
 msgid "One parent"
@@ -1386,11 +1386,11 @@ msgstr "父母のどちらか1人"
 
 #: cdi_forms/models.py:313
 msgid "One or both parents and other caregiver(s) (e.g., grandparent)"
-msgstr "父母のどちらか1人または両方と他の養育者1人（祖父母など）"
+msgstr "父母 (両方または一方) と他の養育者 (祖父母など)"
 
 #: cdi_forms/models.py:314
 msgid "Other caregivers (e.g., grandparent or grandparents)"
-msgstr "他の養育者（祖父母や祖父母など）"
+msgstr "他の養育者 (祖父母など)"
 
 #: cdi_forms/models.py:319
 msgid "Who does your child live with?"
@@ -1917,7 +1917,7 @@ msgstr ""
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:59
 #: cdi_forms/templates/cdi_forms/cdi_form.html:206
 msgid "DO check the box if:"
-msgstr "上記のいずれの場合も、チェックを付けてください。"
+msgstr "チェックを付ける場合："
 
 #: cdi_forms/templates/cdi_forms/administration_instructions.html:159
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:61
@@ -1948,7 +1948,7 @@ msgstr ""
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:82
 #: cdi_forms/templates/cdi_forms/cdi_form.html:228
 msgid "DO check the box."
-msgstr "チェックを付けてください。"
+msgstr "上記のいずれの場合も、チェックを付けてください。"
 
 #: cdi_forms/templates/cdi_forms/administration_instructions.html:194
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:100
@@ -2235,8 +2235,7 @@ msgstr ""
 #: cdi_forms/templates/cdi_forms/study_group.html:29
 msgid "For more information about the MB-CDI,"
 msgstr ""
-"MB-CDI (MacArthur-Bates Communicative Development Inventories) に関する詳細"
-"は、こちらをクリックしてください。（説明は英語のみになります）"
+"マッカーサーコミュニケーション発達質問紙 (MB-CDI: MacArthur-Bates Communicative Development Inventories) に関する詳細は、"
 
 #: cdi_forms/templates/cdi_forms/background_info.html:55
 #: cdi_forms/templates/cdi_forms/study_group.html:29
