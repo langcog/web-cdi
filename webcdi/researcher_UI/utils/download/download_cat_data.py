@@ -83,9 +83,10 @@ def download_cat_data(
     # Get PD Norms
     pd_norms = get_pd_norms(study_obj, administrations, adjusted, answer_rows)
 
-    combined_data = pd.merge(
-        combined_data, pd_norms, how="outer", on="administration_id"
-    )
+    if pd_norms:
+        combined_data = pd.merge(
+            combined_data, pd_norms, how="outer", on="administration_id"
+        )
 
     if study_obj.instrument.language in [
         "French French"
