@@ -91,4 +91,4 @@ def get_pd_norms(study_obj, administrations, adjusted, answer_rows):
                     logger.debug(e)
                     pass
             rows.append(row)
-    return pd.DataFrame.from_dict(rows)
+        return pd.DataFrame.from_dict(rows)
