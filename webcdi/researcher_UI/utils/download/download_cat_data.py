@@ -83,7 +83,7 @@ def download_cat_data(
     # Get PD Norms
     pd_norms = get_pd_norms(study_obj, administrations, adjusted, answer_rows)
 
-    if pd_norms:
+    if not pd_norms is None:
         combined_data = pd.merge(
             combined_data, pd_norms, how="outer", on="administration_id"
         )
