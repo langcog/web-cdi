@@ -322,6 +322,7 @@
 		"json_data": "",
 		"scoring_json" : "cdi_forms/form_data/scoring/Japanese_CAT_scoring.json",
 		"starting_words" : "cdi_form_csv/cat_forms/starting_words/[Japanese_Ages_CAT].csv",
+		"benchmark" : "cdi_forms/form_data/benchmarking/Japanese_CAT_benchmark.csv",
 		"demographics" : ["Japanese_no_NIH.json"]
 	}
 ]
