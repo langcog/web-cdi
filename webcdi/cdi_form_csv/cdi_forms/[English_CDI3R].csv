@@ -1,272 +1,272 @@
-itemID,item,item_type,category,choices,definition,gloss,complexity_category,enabler,enable_response
-item_1,general,general,general,(a); (b); (c); (d); (e); (f),"(a) She/he is not yet saying words on his/her own. <br/>  (b) She/he is talking, but you cannot understand him/her. <br/> (c) She/he is talking in single words, such as ""clock"" or ""look"". <br/> (d) She/he is talking in 2-3 word phrases, such as ""give puppy"" or ""want ice cream."" <br/>  (e) She/he is talking in fairly complete sentences, such as ""I got car"" or ""Can I go outside?"" <br/>  (f) She/he is talking in long and complex sentences, such as ""when we went to the park, I went on the swings"" or ""I saw a dog on the street.""",,,,
-item_2,lunch,word,foods_nouns,produces,lunch,lunch,,item_1,(c); (d); (e); (f)
-item_3,stove,word,foods_nouns,produces,stove,stove,,item_1,(c); (d); (e); (f)
-item_4,breakfast,word,foods_nouns,produces,breakfast,breakfast,,item_1,(c); (d); (e); (f)
-item_5,oven,word,foods_nouns,produces,oven,oven,,item_1,(c); (d); (e); (f)
-item_6,dinner,word,foods_nouns,produces,dinner,dinner,,item_1,(c); (d); (e); (f)
-item_7,snack,word,foods_nouns,produces,snack,snack,,item_1,(c); (d); (e); (f)
-item_8,bake/baked,word,foods_verbs,produces,bake/baked,bake/baked,,item_1,(c); (d); (e); (f)
-item_9,boil,word,foods_verbs,produces,boil,boil,,item_1,(c); (d); (e); (f)
-item_10,burn/burnt,word,foods_verbs,produces,burn/burnt,burn/burnt,,item_1,(c); (d); (e); (f)
-item_11,chop,word,foods_verbs,produces,chop,chop,,item_1,(c); (d); (e); (f)
-item_12,cook (make food),word,foods_verbs,produces,cook (make food),cook (make food),,item_1,(c); (d); (e); (f)
-item_13,cut,word,foods_verbs,produces,cut,cut,,item_1,(c); (d); (e); (f)
-item_14,fry/fried,word,foods_verbs,produces,fry/fried,fry/fried,,item_1,(c); (d); (e); (f)
-item_15,full,word,foods_verbs,produces,full,full,,item_1,(c); (d); (e); (f)
-item_16,hungry,word,foods_verbs,produces,hungry,hungry,,item_1,(c); (d); (e); (f)
-item_17,grill,word,foods_verbs,produces,grill,grill,,item_1,(c); (d); (e); (f)
-item_18,mash,word,foods_verbs,produces,mash,mash,,item_1,(c); (d); (e); (f)
-item_19,melt,word,foods_verbs,produces,melt,melt,,item_1,(c); (d); (e); (f)
-item_20,mix,word,foods_verbs,produces,mix,mix,,item_1,(c); (d); (e); (f)
-item_21,peel,word,foods_verbs,produces,peel,peel,,item_1,(c); (d); (e); (f)
-item_22,pour,word,foods_verbs,produces,pour,pour,,item_1,(c); (d); (e); (f)
-item_23,raw,word,foods_verbs,produces,raw,raw,,item_1,(c); (d); (e); (f)
-item_24,rinse/wash,word,foods_verbs,produces,rinse/wash,rinse/wash,,item_1,(c); (d); (e); (f)
-item_25,roast,word,foods_verbs,produces,roast,roast,,item_1,(c); (d); (e); (f)
-item_26,salt/salty,word,foods_verbs,produces,salt/salty,salt/salty,,item_1,(c); (d); (e); (f)
-item_27,slice,word,foods_verbs,produces,slice,slice,,item_1,(c); (d); (e); (f)
-item_28,spicy,word,foods_verbs,produces,spicy,spicy,,item_1,(c); (d); (e); (f)
-item_29,spoon,word,foods_verbs,produces,spoon,spoon,,item_1,(c); (d); (e); (f)
-item_30,stir,word,foods_verbs,produces,stir,stir,,item_1,(c); (d); (e); (f)
-item_31,sweet,word,foods_verbs,produces,sweet,sweet,,item_1,(c); (d); (e); (f)
-item_32,taste,word,foods_verbs,produces,taste,taste,,item_1,(c); (d); (e); (f)
-item_33,thirsty,word,foods_verbs,produces,thirsty,thirsty,,item_1,(c); (d); (e); (f)
-item_34,ankle,word,body_nouns,produces,ankle,ankle,,item_1,(c); (d); (e); (f)
-item_35,armpit,word,body_nouns,produces,armpit,armpit,,item_1,(c); (d); (e); (f)
-item_36,belly button,word,body_nouns,produces,belly button,belly button,,item_1,(c); (d); (e); (f)
-item_37,brain,word,body_nouns,produces,brain,brain,,item_1,(c); (d); (e); (f)
-item_38,bruise,word,body_nouns,produces,bruise,bruise,,item_1,(c); (d); (e); (f)
-item_39,chest,word,body_nouns,produces,chest,chest,,item_1,(c); (d); (e); (f)
-item_40,elbow,word,body_nouns,produces,elbow,elbow,,item_1,(c); (d); (e); (f)
-item_41,fever,word,body_nouns,produces,fever,fever,,item_1,(c); (d); (e); (f)
-item_42,finger,word,body_nouns,produces,finger,finger,,item_1,(c); (d); (e); (f)
-item_43,head,word,body_nouns,produces,head,head,,item_1,(c); (d); (e); (f)
-item_44,headache/ache,word,body_nouns,produces,headache/ache,headache/ache,,item_1,(c); (d); (e); (f)
-item_45,heart,word,body_nouns,produces,heart,heart,,item_1,(c); (d); (e); (f)
-item_46,knee,word,body_nouns,produces,knee,knee,,item_1,(c); (d); (e); (f)
-item_47,lips,word,body_nouns,produces,lips,lips,,item_1,(c); (d); (e); (f)
-item_48,lungs,word,body_nouns,produces,lungs,lungs,,item_1,(c); (d); (e); (f)
-item_49,muscle,word,body_nouns,produces,muscle,muscle,,item_1,(c); (d); (e); (f)
-item_50,nails,word,body_nouns,produces,nails,nails,,item_1,(c); (d); (e); (f)
-item_51,neck,word,body_nouns,produces,neck,neck,,item_1,(c); (d); (e); (f)
-item_52,scar,word,body_nouns,produces,scar,scar,,item_1,(c); (d); (e); (f)
-item_53,skeleton,word,body_nouns,produces,skeleton,skeleton,,item_1,(c); (d); (e); (f)
-item_54,snot,word,body_nouns,produces,snot,snot,,item_1,(c); (d); (e); (f)
-item_55,stomach,word,body_nouns,produces,stomach,stomach,,item_1,(c); (d); (e); (f)
-item_56,tears,word,body_nouns,produces,tears,tears,,item_1,(c); (d); (e); (f)
-item_57,thumb,word,body_nouns,produces,thumb,thumb,,item_1,(c); (d); (e); (f)
-item_58,toe,word,body_nouns,produces,toe,toe,,item_1,(c); (d); (e); (f)
-item_59,wound,word,body_nouns,produces,wound,wound,,item_1,(c); (d); (e); (f)
-item_60,wrist,word,body_nouns,produces,wrist,wrist,,item_1,(c); (d); (e); (f)
-item_61,bleed,word,body_verbs,produces,bleed,bleed,,item_1,(c); (d); (e); (f)
-item_62,breathe,word,body_verbs,produces,breathe,breathe,,item_1,(c); (d); (e); (f)
-item_63,chew,word,body_verbs,produces,chew,chew,,item_1,(c); (d); (e); (f)
-item_64,cough,word,body_verbs,produces,cough,cough,,item_1,(c); (d); (e); (f)
-item_65,fart,word,body_verbs,produces,fart,fart,,item_1,(c); (d); (e); (f)
-item_66,hairy,word,body_verbs,produces,hairy,hairy,,item_1,(c); (d); (e); (f)
-item_67,heal,word,body_verbs,produces,heal,heal,,item_1,(c); (d); (e); (f)
-item_68,healthy,word,body_verbs,produces,healthy,healthy,,item_1,(c); (d); (e); (f)
-item_69,hurt,word,body_verbs,produces,hurt,hurt,,item_1,(c); (d); (e); (f)
-item_70,itch,word,body_verbs,produces,itch,itch,,item_1,(c); (d); (e); (f)
-item_71,nap,word,body_verbs,produces,nap,nap,,item_1,(c); (d); (e); (f)
-item_72,scratch,word,body_verbs,produces,scratch,scratch,,item_1,(c); (d); (e); (f)
-item_73,shake,word,body_verbs,produces,shake,shake,,item_1,(c); (d); (e); (f)
-item_74,sick/ill,word,body_verbs,produces,sick/ill,sick/ill,,item_1,(c); (d); (e); (f)
-item_75,smell,word,body_verbs,produces,smell,smell,,item_1,(c); (d); (e); (f)
-item_76,sneeze,word,body_verbs,produces,sneeze,sneeze,,item_1,(c); (d); (e); (f)
-item_77,snore,word,body_verbs,produces,snore,snore,,item_1,(c); (d); (e); (f)
-item_78,sore,word,body_verbs,produces,sore,sore,,item_1,(c); (d); (e); (f)
-item_79,stretch,word,body_verbs,produces,stretch,stretch,,item_1,(c); (d); (e); (f)
-item_80,swallow,word,body_verbs,produces,swallow,swallow,,item_1,(c); (d); (e); (f)
-item_81,sweaty,word,body_verbs,produces,sweaty,sweaty,,item_1,(c); (d); (e); (f)
-item_82,tired/sleepy,word,body_verbs,produces,tired/sleepy,tired/sleepy,,item_1,(c); (d); (e); (f)
-item_83,vomit/puke/throw-up,word,body_verbs,produces,vomit/puke/throw-up,vomit/puke/throw-up,,item_1,(c); (d); (e); (f)
-item_84,wiggle,word,body_verbs,produces,wiggle,wiggle,,item_1,(c); (d); (e); (f)
-item_85,dream,word,think_nouns,produces,dream,dream,,item_1,(c); (d); (e); (f)
-item_86,idea,word,think_nouns,produces,idea,idea,,item_1,(c); (d); (e); (f)
-item_87,joke,word,think_nouns,produces,joke,joke,,item_1,(c); (d); (e); (f)
-item_88,mind (for thinking),word,think_nouns,produces,mind (for thinking),mind (for thinking),,item_1,(c); (d); (e); (f)
-item_89,nightmare,word,think_nouns,produces,nightmare,nightmare,,item_1,(c); (d); (e); (f)
-item_90,reason,word,think_nouns,produces,reason,reason,,item_1,(c); (d); (e); (f)
-item_91,trouble,word,think_nouns,produces,trouble,trouble,,item_1,(c); (d); (e); (f)
-item_92,truth,word,think_nouns,produces,truth,truth,,item_1,(c); (d); (e); (f)
-item_93,afraid,word,think_verbs,produces,afraid,afraid,,item_1,(c); (d); (e); (f)
-item_94,angry,word,think_verbs,produces,angry,angry,,item_1,(c); (d); (e); (f)
-item_95,agree,word,think_verbs,produces,agree,agree,,item_1,(c); (d); (e); (f)
-item_96,annoyed,word,think_verbs,produces,annoyed,annoyed,,item_1,(c); (d); (e); (f)
-item_97,argue,word,think_verbs,produces,argue,argue,,item_1,(c); (d); (e); (f)
-item_98,ashamed,word,think_verbs,produces,ashamed,ashamed,,item_1,(c); (d); (e); (f)
-item_99,bad,word,think_verbs,produces,bad,bad,,item_1,(c); (d); (e); (f)
-item_100,because,word,think_verbs,produces,because,because,,item_1,(c); (d); (e); (f)
-item_101,believe,word,think_verbs,produces,believe,believe,,item_1,(c); (d); (e); (f)
-item_102,best,word,think_verbs,produces,best,best,,item_1,(c); (d); (e); (f)
-item_103,boring,word,think_verbs,produces,boring,boring,,item_1,(c); (d); (e); (f)
-item_104,brave,word,think_verbs,produces,brave,brave,,item_1,(c); (d); (e); (f)
-item_105,calm,word,think_verbs,produces,calm,calm,,item_1,(c); (d); (e); (f)
-item_106,careful,word,think_verbs,produces,careful,careful,,item_1,(c); (d); (e); (f)
-item_107,clever,word,think_verbs,produces,clever,clever,,item_1,(c); (d); (e); (f)
-item_108,correct/right,word,think_verbs,produces,correct/right,correct/right,,item_1,(c); (d); (e); (f)
-item_109,could be,word,think_verbs,produces,could be,could be,,item_1,(c); (d); (e); (f)
-item_110,comfort,word,think_verbs,produces,comfort,comfort,,item_1,(c); (d); (e); (f)
-item_111,count,word,think_verbs,produces,count,count,,item_1,(c); (d); (e); (f)
-item_112,crazy,word,think_verbs,produces,crazy,crazy,,item_1,(c); (d); (e); (f)
-item_113,cry,word,think_verbs,produces,cry,cry,,item_1,(c); (d); (e); (f)
-item_114,curious,word,think_verbs,produces,curious,curious,,item_1,(c); (d); (e); (f)
-item_115,dangerous,word,think_verbs,produces,dangerous,dangerous,,item_1,(c); (d); (e); (f)
-item_116,desperate,word,think_verbs,produces,deparate,deparate,,item_1,(c); (d); (e); (f)
-item_117,disappointed,word,think_verbs,produces,disappointed,disappointed,,item_1,(c); (d); (e); (f)
-item_118,discover,word,think_verbs,produces,discover,discover,,item_1,(c); (d); (e); (f)
-item_119,disgusted/grossed out,word,think_verbs,produces,disgusted/grossed out,disgusted/grossed out,,item_1,(c); (d); (e); (f)
-item_120,disturb,word,think_verbs,produces,disturb,disturb,,item_1,(c); (d); (e); (f)
-item_121,embarrassed,word,think_verbs,produces,embarrassed,embarrassed,,item_1,(c); (d); (e); (f)
-item_122,enjoy,word,think_verbs,produces,enjoy,enjoy,,item_1,(c); (d); (e); (f)
-item_123,examine,word,think_verbs,produces,examine,examine,,item_1,(c); (d); (e); (f)
-item_124,excited,word,think_verbs,produces,excited,excited,,item_1,(c); (d); (e); (f)
-item_125,explain,word,think_verbs,produces,explain,explain,,item_1,(c); (d); (e); (f)
-item_126,fake,word,think_verbs,produces,fake,fake,,item_1,(c); (d); (e); (f)
-item_127,feel,word,think_verbs,produces,feel,feel,,item_1,(c); (d); (e); (f)
-item_128,figure out,word,think_verbs,produces,figure out,figure out,,item_1,(c); (d); (e); (f)
-item_129,fool,word,think_verbs,produces,fool,fool,,item_1,(c); (d); (e); (f)
-item_130,forget,word,think_verbs,produces,forget,forget,,item_1,(c); (d); (e); (f)
-item_131,funny,word,think_verbs,produces,funny,funny,,item_1,(c); (d); (e); (f)
-item_132,furious,word,think_verbs,produces,furious,furious,,item_1,(c); (d); (e); (f)
-item_133,glad,word,think_verbs,produces,glad,glad,,item_1,(c); (d); (e); (f)
-item_134,guess,word,think_verbs,produces,guess,guess,,item_1,(c); (d); (e); (f)
-item_135,grumpy,word,think_verbs,produces,grumpy,grumpy,,item_1,(c); (d); (e); (f)
-item_136,happy,word,think_verbs,produces,happy,happy,,item_1,(c); (d); (e); (f)
-item_137,hate,word,think_verbs,produces,hate,hate,,item_1,(c); (d); (e); (f)
-item_138,help,word,think_verbs,produces,help,help,,item_1,(c); (d); (e); (f)
-item_139,hide,word,think_verbs,produces,hide,hide,,item_1,(c); (d); (e); (f)
-item_140,hope,word,think_verbs,produces,hope,hope,,item_1,(c); (d); (e); (f)
-item_141,imagine,word,think_verbs,produces,imagine,imagine,,item_1,(c); (d); (e); (f)
-item_142,irritated,word,think_verbs,produces,irritated,irritated,,item_1,(c); (d); (e); (f)
-item_143,know,word,think_verbs,produces,know,know,,item_1,(c); (d); (e); (f)
-item_144,learn,word,think_verbs,produces,learn,learn,,item_1,(c); (d); (e); (f)
-item_145,lie (speak untruthfully),word,think_verbs,produces,lie (speak untruthfully),lie (speak untruthfully),,item_1,(c); (d); (e); (f)
-item_146,like,word,think_verbs,produces,like,like,,item_1,(c); (d); (e); (f)
-item_147,lonely,word,think_verbs,produces,lonely,lonely,,item_1,(c); (d); (e); (f)
-item_148,lose,word,think_verbs,produces,lose,lose,,item_1,(c); (d); (e); (f)
-item_149,lost,word,think_verbs,produces,lost,lost,,item_1,(c); (d); (e); (f)
-item_150,make believe,word,think_verbs,produces,make believe,make believe,,item_1,(c); (d); (e); (f)
-item_151,maybe,word,think_verbs,produces,maybe,maybe,,item_1,(c); (d); (e); (f)
-item_152,mean (not nice),word,think_verbs,produces,mean (not nice),mean (not nice),,item_1,(c); (d); (e); (f)
-item_153,mean (as in meaning),word,think_verbs,produces,mean (as in meaning),mean (as in meaning),,item_1,(c); (d); (e); (f)
-item_154,might,word,think_verbs,produces,might,might,,item_1,(c); (d); (e); (f)
-item_155,miss,word,think_verbs,produces,miss,miss,,item_1,(c); (d); (e); (f)
-item_156,naughty,word,think_verbs,produces,naughty,naughty,,item_1,(c); (d); (e); (f)
-item_157,need,word,think_verbs,produces,need,need,,item_1,(c); (d); (e); (f)
-item_158,nervous,word,think_verbs,produces,nervous,nervous,,item_1,(c); (d); (e); (f)
-item_159,never,word,think_verbs,produces,never,never,,item_1,(c); (d); (e); (f)
-item_160,new,word,think_verbs,produces,new,new,,item_1,(c); (d); (e); (f)
-item_161,pretend,word,think_verbs,produces,pretend,pretend,,item_1,(c); (d); (e); (f)
-item_162,probably,word,think_verbs,produces,probably,probably,,item_1,(c); (d); (e); (f)
-item_163,promise,word,think_verbs,produces,promise,promise,,item_1,(c); (d); (e); (f)
-item_164,proud,word,think_verbs,produces,proud,proud,,item_1,(c); (d); (e); (f)
-item_165,read,word,think_verbs,produces,read,read,,item_1,(c); (d); (e); (f)
-item_166,real,word,think_verbs,produces,real,real,,item_1,(c); (d); (e); (f)
-item_167,recognize,word,think_verbs,produces,recognize,recognize,,item_1,(c); (d); (e); (f)
-item_168,regret,word,think_verbs,produces,regret,regret,,item_1,(c); (d); (e); (f)
-item_169,remember,word,think_verbs,produces,remember,remember,,item_1,(c); (d); (e); (f)
-item_170,remind,word,think_verbs,produces,remind,remind,,item_1,(c); (d); (e); (f)
-item_171,sad,word,think_verbs,produces,sad,sad,,item_1,(c); (d); (e); (f)
-item_172,safe,word,think_verbs,produces,safe,safe,,item_1,(c); (d); (e); (f)
-item_173,scare,word,think_verbs,produces,scare,scare,,item_1,(c); (d); (e); (f)
-item_174,selfish,word,think_verbs,produces,selfish,selfish,,item_1,(c); (d); (e); (f)
-item_175,share,word,think_verbs,produces,share,share,,item_1,(c); (d); (e); (f)
-item_176,shy,word,think_verbs,produces,shy,shy,,item_1,(c); (d); (e); (f)
-item_177,silly,word,think_verbs,produces,silly,silly,,item_1,(c); (d); (e); (f)
-item_178,similar,word,think_verbs,produces,similar,similar,,item_1,(c); (d); (e); (f)
-item_179,smart,word,think_verbs,produces,smart,smart,,item_1,(c); (d); (e); (f)
-item_180,sometimes,word,think_verbs,produces,sometimes,sometimes,,item_1,(c); (d); (e); (f)
-item_181,soon,word,think_verbs,produces,soon,soon,,item_1,(c); (d); (e); (f)
-item_182,stupid,word,think_verbs,produces,stupid,stupid,,item_1,(c); (d); (e); (f)
-item_183,surprise/surprised,word,think_verbs,produces,surprise/surprised,surprise/surprised,,item_1,(c); (d); (e); (f)
-item_184,teach,word,think_verbs,produces,teach,teach,,item_1,(c); (d); (e); (f)
-item_185,tease,word,think_verbs,produces,tease,tease,,item_1,(c); (d); (e); (f)
-item_186,think,word,think_verbs,produces,think,think,,item_1,(c); (d); (e); (f)
-item_187,trust,word,think_verbs,produces,trust,trust,,item_1,(c); (d); (e); (f)
-item_188,uncomfortable,word,think_verbs,produces,uncomfortable,uncomfortable,,item_1,(c); (d); (e); (f)
-item_189,understand,word,think_verbs,produces,understand,understand,,item_1,(c); (d); (e); (f)
-item_190,warn,word,think_verbs,produces,warn,warn,,item_1,(c); (d); (e); (f)
-item_191,wish,word,think_verbs,produces,wish,wish,,item_1,(c); (d); (e); (f)
-item_192,wonder,word,think_verbs,produces,wonder,wonder,,item_1,(c); (d); (e); (f)
-item_193,worried,word,think_verbs,produces,worried,worried,,item_1,(c); (d); (e); (f)
-item_194,around,word,quant_verbs,produces,around,around,,item_1,(c); (d); (e); (f)
-item_195,behind,word,quant_verbs,produces,behind,behind,,item_1,(c); (d); (e); (f)
-item_196,between,word,quant_verbs,produces,between,between,,item_1,(c); (d); (e); (f)
-item_197,both,word,quant_verbs,produces,both,both,,item_1,(c); (d); (e); (f)
-item_198,bunch,word,quant_verbs,produces,bunch,bunch,,item_1,(c); (d); (e); (f)
-item_199,close,word,quant_verbs,produces,close,close,,item_1,(c); (d); (e); (f)
-item_200,each,word,quant_verbs,produces,each,each,,item_1,(c); (d); (e); (f)
-item_201,every,word,quant_verbs,produces,every,every,,item_1,(c); (d); (e); (f)
-item_202,far/distant,word,quant_verbs,produces,far/distant,far/distant,,item_1,(c); (d); (e); (f)
-item_203,few,word,quant_verbs,produces,few,few,,item_1,(c); (d); (e); (f)
-item_204,inside,word,quant_verbs,produces,inside,inside,,item_1,(c); (d); (e); (f)
-item_205,less,word,quant_verbs,produces,less,less,,item_1,(c); (d); (e); (f)
-item_206,many/a lot,word,quant_verbs,produces,many/a lot,many/a lot,,item_1,(c); (d); (e); (f)
-item_207,near,word,quant_verbs,produces,near,near,,item_1,(c); (d); (e); (f)
-item_208,next to,word,quant_verbs,produces,next to,next to,,item_1,(c); (d); (e); (f)
-item_209,none,word,quant_verbs,produces,none,none,,item_1,(c); (d); (e); (f)
-item_210,other (one),word,quant_verbs,produces,other (one),other (one),,item_1,(c); (d); (e); (f)
-item_211,plenty,word,quant_verbs,produces,plenty,plenty,,item_1,(c); (d); (e); (f)
-item_212,combine,combine,combine,not yet; sometimes; often,"Has your child begun to combine words yet, such as ""nother cookie"" or ""doggie bite""?",,,item_1,(c); (d); (e); (f)
-item_example1,combination_examples,combination_examples,combination_examples,,,,combination_example1,item_212,sometimes; often
-item_example2,combination_examples,combination_examples,combination_examples,,,,combination_example2,item_212,sometimes; often
-item_example3,combination_examples,combination_examples,combination_examples,,,,combination_example3,item_212,sometimes; often
-item_213,use_ed,usage,how_use_words,not yet; sometimes; often,"When we talk about something that happened in the past, we usually add special endings. For example: ""walk__ed__"" or ""I kick__ed__ the ball"". Has your child started doing that?",,,item_212,sometimes; often
-item_214,use_is,usage,how_use_words,not yet; sometimes; often,"Sometimes ""is"" is the only verb in a sentence, as in ""That __is__ my truck"" or ""That__'s__ Mommy."" Has your child started making sentences like that?",,,item_212,sometimes; often
-item_215,use_helping,usage,how_use_words,not yet; sometimes; often,"Sometimes we use helping verbs like ""is"", ""am"" or ""are"". For example: ""She __is__ throwing the ball"" or ""I __am__ opening it."" Has your child started doing that?",,,item_212,sometimes; often
-item_216,use_a_the,usage,how_use_words,not yet; sometimes; often,"Does your child use ""a"" and ""the""? For example, do they say sentences like ""I want __the__ truck"" or ""I want __a__ truck"" instead of ""I want truck""?",,,item_212,sometimes; often
-item_217,use_whatwho,usage,how_use_words,not yet; sometimes; often,"Does your child ask questions with more than one word that begin ""what,"" ""who"", or ""where""?",,,item_212,sometimes; often
-item_218,use_whenwhy,usage,how_use_words,not yet; sometimes; often,"Does your child ask questions with more than one word that begin ""when,"" ""why"", or ""how""?",,,item_212,sometimes; often
-item_219,use_because,usage,how_use_words,not yet; sometimes; often,"Does your child give reasons for things, using the word ""because"", ""cause"" or ""cuz""?",,,item_212,sometimes; often
-item_226,use_could,usage,how_use_words,not yet; sometimes; often,"Does your child talk about things that ""could"" or ""might"" happen, such as ""he __gonna__ hurt himself if he's not careful""?",,,item_212,sometimes; often
-item_221,use_er_est,usage,how_use_words,not yet; sometimes; often,"Does your child use ""-er"" and ""-est"" as word endings in comparisons? For example: ""My bike is bigg__er__ than his!"" or ""This block is bigg__est__.""",,,item_212,sometimes; often
-item_222,use_moreless,usage,how_use_words,not yet; sometimes; often,"Does your child use ""more"" and ""less"" to compare quantities? For example, ""This glass has __more__. This one has __less__.""",,,item_212,sometimes; often
-item_223,use_mostleast,usage,how_use_words,not yet; sometimes; often,"Does your child use ""most"" and ""least"" to compare quantities? For example, ""This glass has the __most/least__.""",,,item_212,sometimes; often
-item_224,use_and,usage,how_use_words,not yet; sometimes; often,"We sometimes use words like ""and"" to link two different sentences. For example, ""We went to the store __and__ bought ice cream."" Does your child use ""and"" in complex sentences like that?",,,item_212,sometimes; often
-item_225,use_but,usage,how_use_words,not yet; sometimes; often,"We sometimes use words like ""but"" to link two different sentences. For example, ""I want cake __but__ there's no more."" Does your child use ""but"" in complex sentences like that?",,,item_212,sometimes; often
-item_226,use_or,usage,how_use_words,not yet; sometimes; often,"We sometimes use words like ""or"" to link two different sentences. For example, ""Can we watch TV __or__ read a book?"" Does your child use ""or"" in complex sentences like that?",,,item_212,sometimes; often
-item_227,use_poss,usage,how_use_words,not yet; sometimes; often,"When we talk about a thing that belongs to someone, we usually add special endings. For example: ""Mom__'s__ shoe."" or ""Daddy__'s__ hair.""  Has your child started doing that?",,,item_212,sometimes; often
-item_228,use_relclause,usage,how_use_words,not yet; sometimes; often,"Does your child use words like ""what"" and ""who"" in the middle of sentences? For example, ""That's __what__ I said."" or ""I know __who__ did it.""",,,item_212,sometimes; often
-item_229,use_from,usage,how_use_words,not yet; sometimes; often,"Sometimes we talk about coming from a place. For example: ""Mom came __from__ the store."" Does your child make sentences like this?",,,item_212,sometimes; often
-item_230,complx01,complexity,complexity,mostly (a); equal; mostly (b),a. I have a friend. <br/> b. I have a friend who goes to my school.,,,item_212,sometimes; often
-item_231,complx02,complexity,complexity,mostly (a); equal; mostly (b),a. I got ice cream. <br/> b. I got ice cream with chocolate on top.,,,item_212,sometimes; often
-item_232,complx03,complexity,complexity,mostly (a); equal; mostly (b),a. The baby's crying. <br/> b. The baby's crying cuz she's hungry.,,,item_212,sometimes; often
-item_233,complx04,complexity,complexity,mostly (a); equal; mostly (b),a. We are going. <br/> b. We are going to the store.,,,item_212,sometimes; often
-item_234,complx05,complexity,complexity,mostly (a); equal; mostly (b),a. I like the doll. <br/> b. I like the doll with the red hair.,,,item_212,sometimes; often
-item_235,complx06,complexity,complexity,mostly (a); equal; mostly (b),a. I will clean up later. <br/> b. I will clean up with Bobby gets home.,,,item_212,sometimes; often
-item_236,complx07,complexity,complexity,mostly (a); equal; mostly (b),a. Turn on the light. <br/> b. Turn on the light so I can see.,,,item_212,sometimes; often
-item_237,complx08,complexity,complexity,mostly (a); equal; mostly (b),a. My care is big and yours is little. <br/> b. My car is bigger than yours.,,,item_212,sometimes; often
-item_238,complx09,complexity,complexity,mostly (a); equal; mostly (b),a. I want a truck. <br/> b. I want a truck like Tommy's.,,,item_212,sometimes; often
-item_239,complx10,complexity,complexity,mostly (a); equal; mostly (b),a. I will go to sleep later. <br/> b. I will go to sleep after I eat.,,,item_212,sometimes; often
-item_240,complx11,complexity,complexity,mostly (a); equal; mostly (b),a. That is my brother. <br/> b. The boy playing over there is my brother.,,,item_212,sometimes; often
-item_241,complx12,complexity,complexity,mostly (a); equal; mostly (b),a. I want the ball. <br/> b. I want the ball but I can't reach it.,,,item_212,sometimes; often
-item_242,complx13,complexity,complexity,mostly (a); equal; mostly (b),a. I want to go. <br/> b. I want to go outside and ride my bike.,,,item_212,sometimes; often
-item_243,complx14,complexity,complexity,mostly (a); equal; mostly (b),a. I go to the park. <br/> b. I go to the park if my mom lets me.,,,item_212,sometimes; often
-item_244,complx15,complexity,complexity,mostly (a); equal; mostly (b),a. Your shirt is pretty. <br/> b. The shirt you're wearing is pretty.,,,item_212,sometimes; often
-item_245,complx16,complexity,complexity,mostly (a); equal; mostly (b),a. I tried the cake. <br/> b. I tried the cake that had sprinkles.,,,item_212,sometimes; often
-item_246,complx17,complexity,complexity,mostly (a); equal; mostly (b),a. I want to go to the park. <br/> b. I wan to go to the park when daddy gets home.,,,item_212,sometimes; often
-item_247,complx18,complexity,complexity,mostly (a); equal; mostly (b),a. We went to the store. <br/> b. We went to the store to buy ice cream. ,,,item_212,sometimes; often
-item_248,pronunciation_1,pronunciation,pronunciation,rarely; sometimes; often,Can you understand the words your child says? (except when your child is saying nonsense for fun)?,,,item_212,sometimes; often
-item_249,pronunciation_2,pronunciation,pronunciation,rarely; sometimes; often,Can people outside your home/family understand the words you child says (except when your child is saying nonsense for fun)?,,,item_212,sometimes; often
-item_250,pronunciation_3,pronunciation,pronunciation,rarely; sometimes; often,"Does your child pronounce the English “sh” sound correctly? For example, “__sh__oe” or “__sh__irt”, instead of “soo” or “sirt.”",,,item_212,sometimes; often
-item_251,pronunciation_4,pronunciation,pronunciation,rarely; sometimes; often,"Does your child pronounce the English “ch” sound correctly?  For example, “__ch__air” or “__ch__apstick”, instead of “shair” or “sapstick”.",,,item_212,sometimes; often
-item_252,pronunciation_5,pronunciation,pronunciation,rarely; sometimes; often,"Does your child often use a “w” sound to replace “r” or “l” in words, for example, saying “__w__a__w__ipop” for “lollipop” and “__w__abbit” for “rabbit”?",,,item_212,sometimes; often
-item_253,pronunciation_6,pronunciation,pronunciation,rarely; sometimes; often,"Some words begin with an “s’” sound, following by a consonant, for example “__st__op” and “__sp__ill”. Does your child include both of these sounds, or does he/she simplify by leaving out the “s”, for example, “top” or “pill”?",,,item_212,sometimes; often
-item_254,meta_print_1,meta_print,meta_print,not yet; sometimes; often,"Has your child noticed that certain words sound very similar because they rhyme?   For example, car/star and fat/cat ?",,,item_212,sometimes; often
-item_255,meta_print_2,meta_print,meta_print,not yet; sometimes; often,"Have you heard your child on his/her own play with language by dividing words into syllables? For example, hap-py, bo-ring, base-ball.",,,item_212,sometimes; often
-item_256,meta_print_3,meta_print,meta_print,not yet; sometimes; often,"Has your child shown that he/she understands that some people speak a different language, for example, by imitating the way they speak or by asking questions?",,,item_212,sometimes; often
-item_257,meta_print_4,meta_print,meta_print,not yet; sometimes; often,"Has your child ever asked what a specific word, such as ""curious"" means?",,,item_212,sometimes; often
-item_258,meta_print_5,meta_print,meta_print,not yet; sometimes; often,"Has your child ever commented on the fact that some words have more than one meaning? For example, “bat” is an animal that flies and is also used in playing baseball.",,,item_212,sometimes; often
-item_259,meta_print_6,meta_print,meta_print,not yet; sometimes; often,"Has your child ever commented on the fact that there are expressions that have a meaning that is completely different from what the words directly mean, such as “It’s raining cats and dogs”,  “I’m absolutely starving”,  and “under the weather”",,,item_212,sometimes; often
-item_260,meta_print_7,meta_print,meta_print,not yet; sometimes; often,Does your child sometimes make up new silly words or gibberish like “smish” for fun?,,,item_212,sometimes; often
-item_261,meta_print_8,meta_print,meta_print,not yet; sometimes; often,"Does your child sometimes make up new words that make sense, like ‘redberry’ for a berry that is red or ‘handsocks’ for gloves? ",,,item_212,sometimes; often
-item_262,meta_print_9,meta_print,meta_print,yes; no; I don't know,"Has your child ever shown that they know the difference between real words and nonsense words? For example, “book” and “play” are words, but not “fod” or “gesh”",,,item_212,sometimes; often
-item_263,meta_print_10,meta_print,meta_print,not yet; sometimes; often,"Is your child interested in letters, for example on letter blocks, or signs?",,,item_212,sometimes; often
-item_264,meta_print_11,meta_print,meta_print,not yet; sometimes; often,"Does your child know the sounds (not just the names) of at least two letters? For example, does he/she know that the letter ‘M’ sounds like “mmm”, or the letter ‘U’ sounds like “ooo”?",,,item_212,sometimes; often
-item_265,meta_print_12,meta_print,meta_print,not yet; sometimes; often,Can your child write at least two letters by him/herself?,,,item_212,sometimes; often
-item_266,meta_print_13,meta_print,meta_print,not yet; sometimes; often,"Can your child write at least two words, such as “mom”, his/her own name, or a pet’s name on his/her own, without copying? It’s ok if the spelling isn’t correct.",,,item_212,sometimes; often
-item_267,meta_print_14,meta_print,meta_print,not yet; sometimes; often,"Does your child ever ‘pretend’ to read a book, while holding it, either from memory, or by making up a story based on the pictures?",,,item_212,sometimes; often
-item_268,meta_print_15,meta_print,meta_print,not yet; sometimes; often,Does your child ever point to a word on the book when you read it aloud?,,,item_212,sometimes; often
+itemID,item,item_type,category,choices,definition,gloss,complexity_category
+item_1,general,general,general,(a); (b); (c); (d); (e); (f),"(a) She/he is not yet saying words on his/her own. <br/> (b) She/he is talking, but you cannot understand him/her. <br/> (c) She/he is talking in single words, such as ""clock"" or ""look"". <br/> (d) She/he is talking in 2-3 word phrases, such as ""give puppy"" or ""want ice cream."" <br/> (e) She/he is talking in fairly complete sentences, such as ""I got car"" or ""Can I go outside?"" <br/> (f) She/he is talking in long and complex sentences, such as ""when we went to the park, I went on the swings"" or ""I saw a dog on the street.""",,
+item_2,lunch,word,foods_nouns,produces,lunch,lunch,
+item_3,stove,word,foods_nouns,produces,stove,stove,
+item_4,breakfast,word,foods_nouns,produces,breakfast,breakfast,
+item_5,oven,word,foods_nouns,produces,oven,oven,
+item_6,dinner,word,foods_nouns,produces,dinner,dinner,
+item_7,snack,word,foods_nouns,produces,snack,snack,
+item_8,bake/baked,word,foods_verbs,produces,bake/baked,bake/baked,
+item_9,boil,word,foods_verbs,produces,boil,boil,
+item_10,burn/burnt,word,foods_verbs,produces,burn/burnt,burn/burnt,
+item_11,chop,word,foods_verbs,produces,chop,chop,
+item_12,cook (make food),word,foods_verbs,produces,cook (make food),cook (make food),
+item_13,cut,word,foods_verbs,produces,cut,cut,
+item_14,fry/fried,word,foods_verbs,produces,fry/fried,fry/fried,
+item_15,full,word,foods_verbs,produces,full,full,
+item_16,hungry,word,foods_verbs,produces,hungry,hungry,
+item_17,grill,word,foods_verbs,produces,grill,grill,
+item_18,mash,word,foods_verbs,produces,mash,mash,
+item_19,melt,word,foods_verbs,produces,melt,melt,
+item_20,mix,word,foods_verbs,produces,mix,mix,
+item_21,peel,word,foods_verbs,produces,peel,peel,
+item_22,pour,word,foods_verbs,produces,pour,pour,
+item_23,raw,word,foods_verbs,produces,raw,raw,
+item_24,rinse/wash,word,foods_verbs,produces,rinse/wash,rinse/wash,
+item_25,roast,word,foods_verbs,produces,roast,roast,
+item_26,salt/salty,word,foods_verbs,produces,salt/salty,salt/salty,
+item_27,slice,word,foods_verbs,produces,slice,slice,
+item_28,spicy,word,foods_verbs,produces,spicy,spicy,
+item_29,spoon,word,foods_verbs,produces,spoon,spoon,
+item_30,stir,word,foods_verbs,produces,stir,stir,
+item_31,sweet,word,foods_verbs,produces,sweet,sweet,
+item_32,taste,word,foods_verbs,produces,taste,taste,
+item_33,thirsty,word,foods_verbs,produces,thirsty,thirsty,
+item_34,ankle,word,body_nouns,produces,ankle,ankle,
+item_35,armpit,word,body_nouns,produces,armpit,armpit,
+item_36,belly button,word,body_nouns,produces,belly button,belly button,
+item_37,brain,word,body_nouns,produces,brain,brain,
+item_38,bruise,word,body_nouns,produces,bruise,bruise,
+item_39,chest,word,body_nouns,produces,chest,chest,
+item_40,elbow,word,body_nouns,produces,elbow,elbow,
+item_41,fever,word,body_nouns,produces,fever,fever,
+item_42,finger,word,body_nouns,produces,finger,finger,
+item_43,head,word,body_nouns,produces,head,head,
+item_44,headache/ache,word,body_nouns,produces,headache/ache,headache/ache,
+item_45,heart,word,body_nouns,produces,heart,heart,
+item_46,knee,word,body_nouns,produces,knee,knee,
+item_47,lips,word,body_nouns,produces,lips,lips,
+item_48,lungs,word,body_nouns,produces,lungs,lungs,
+item_49,muscle,word,body_nouns,produces,muscle,muscle,
+item_50,nails,word,body_nouns,produces,nails,nails,
+item_51,neck,word,body_nouns,produces,neck,neck,
+item_52,scar,word,body_nouns,produces,scar,scar,
+item_53,skeleton,word,body_nouns,produces,skeleton,skeleton,
+item_54,snot,word,body_nouns,produces,snot,snot,
+item_55,stomach,word,body_nouns,produces,stomach,stomach,
+item_56,tears,word,body_nouns,produces,tears,tears,
+item_57,thumb,word,body_nouns,produces,thumb,thumb,
+item_58,toe,word,body_nouns,produces,toe,toe,
+item_59,wound,word,body_nouns,produces,wound,wound,
+item_60,wrist,word,body_nouns,produces,wrist,wrist,
+item_61,bleed,word,body_verbs,produces,bleed,bleed,
+item_62,breathe,word,body_verbs,produces,breathe,breathe,
+item_63,chew,word,body_verbs,produces,chew,chew,
+item_64,cough,word,body_verbs,produces,cough,cough,
+item_65,fart,word,body_verbs,produces,fart,fart,
+item_66,hairy,word,body_verbs,produces,hairy,hairy,
+item_67,heal,word,body_verbs,produces,heal,heal,
+item_68,healthy,word,body_verbs,produces,healthy,healthy,
+item_69,hurt,word,body_verbs,produces,hurt,hurt,
+item_70,itch,word,body_verbs,produces,itch,itch,
+item_71,nap,word,body_verbs,produces,nap,nap,
+item_72,scratch,word,body_verbs,produces,scratch,scratch,
+item_73,shake,word,body_verbs,produces,shake,shake,
+item_74,sick/ill,word,body_verbs,produces,sick/ill,sick/ill,
+item_75,smell,word,body_verbs,produces,smell,smell,
+item_76,sneeze,word,body_verbs,produces,sneeze,sneeze,
+item_77,snore,word,body_verbs,produces,snore,snore,
+item_78,sore,word,body_verbs,produces,sore,sore,
+item_79,stretch,word,body_verbs,produces,stretch,stretch,
+item_80,swallow,word,body_verbs,produces,swallow,swallow,
+item_81,sweaty,word,body_verbs,produces,sweaty,sweaty,
+item_82,tired/sleepy,word,body_verbs,produces,tired/sleepy,tired/sleepy,
+item_83,vomit/puke/throw-up,word,body_verbs,produces,vomit/puke/throw-up,vomit/puke/throw-up,
+item_84,wiggle,word,body_verbs,produces,wiggle,wiggle,
+item_85,dream,word,think_nouns,produces,dream,dream,
+item_86,idea,word,think_nouns,produces,idea,idea,
+item_87,joke,word,think_nouns,produces,joke,joke,
+item_88,mind (for thinking),word,think_nouns,produces,mind (for thinking),mind (for thinking),
+item_89,nightmare,word,think_nouns,produces,nightmare,nightmare,
+item_90,reason,word,think_nouns,produces,reason,reason,
+item_91,trouble,word,think_nouns,produces,trouble,trouble,
+item_92,truth,word,think_nouns,produces,truth,truth,
+item_93,afraid,word,think_verbs,produces,afraid,afraid,
+item_94,angry,word,think_verbs,produces,angry,angry,
+item_95,agree,word,think_verbs,produces,agree,agree,
+item_96,annoyed,word,think_verbs,produces,annoyed,annoyed,
+item_97,argue,word,think_verbs,produces,argue,argue,
+item_98,ashamed,word,think_verbs,produces,ashamed,ashamed,
+item_99,bad,word,think_verbs,produces,bad,bad,
+item_100,because,word,think_verbs,produces,because,because,
+item_101,believe,word,think_verbs,produces,believe,believe,
+item_102,best,word,think_verbs,produces,best,best,
+item_103,boring,word,think_verbs,produces,boring,boring,
+item_104,brave,word,think_verbs,produces,brave,brave,
+item_105,calm,word,think_verbs,produces,calm,calm,
+item_106,careful,word,think_verbs,produces,careful,careful,
+item_107,clever,word,think_verbs,produces,clever,clever,
+item_108,correct/right,word,think_verbs,produces,correct/right,correct/right,
+item_109,could be,word,think_verbs,produces,could be,could be,
+item_110,comfort,word,think_verbs,produces,comfort,comfort,
+item_111,count,word,think_verbs,produces,count,count,
+item_112,crazy,word,think_verbs,produces,crazy,crazy,
+item_113,cry,word,think_verbs,produces,cry,cry,
+item_114,curious,word,think_verbs,produces,curious,curious,
+item_115,dangerous,word,think_verbs,produces,dangerous,dangerous,
+item_116,desperate,word,think_verbs,produces,deparate,deparate,
+item_117,disappointed,word,think_verbs,produces,disappointed,disappointed,
+item_118,discover,word,think_verbs,produces,discover,discover,
+item_119,disgusted/grossed out,word,think_verbs,produces,disgusted/grossed out,disgusted/grossed out,
+item_120,disturb,word,think_verbs,produces,disturb,disturb,
+item_121,embarrassed,word,think_verbs,produces,embarrassed,embarrassed,
+item_122,enjoy,word,think_verbs,produces,enjoy,enjoy,
+item_123,examine,word,think_verbs,produces,examine,examine,
+item_124,excited,word,think_verbs,produces,excited,excited,
+item_125,explain,word,think_verbs,produces,explain,explain,
+item_126,fake,word,think_verbs,produces,fake,fake,
+item_127,feel,word,think_verbs,produces,feel,feel,
+item_128,figure out,word,think_verbs,produces,figure out,figure out,
+item_129,fool,word,think_verbs,produces,fool,fool,
+item_130,forget,word,think_verbs,produces,forget,forget,
+item_131,funny,word,think_verbs,produces,funny,funny,
+item_132,furious,word,think_verbs,produces,furious,furious,
+item_133,glad,word,think_verbs,produces,glad,glad,
+item_134,guess,word,think_verbs,produces,guess,guess,
+item_135,grumpy,word,think_verbs,produces,grumpy,grumpy,
+item_136,happy,word,think_verbs,produces,happy,happy,
+item_137,hate,word,think_verbs,produces,hate,hate,
+item_138,help,word,think_verbs,produces,help,help,
+item_139,hide,word,think_verbs,produces,hide,hide,
+item_140,hope,word,think_verbs,produces,hope,hope,
+item_141,imagine,word,think_verbs,produces,imagine,imagine,
+item_142,irritated,word,think_verbs,produces,irritated,irritated,
+item_143,know,word,think_verbs,produces,know,know,
+item_144,learn,word,think_verbs,produces,learn,learn,
+item_145,lie (speak untruthfully),word,think_verbs,produces,lie (speak untruthfully),lie (speak untruthfully),
+item_146,like,word,think_verbs,produces,like,like,
+item_147,lonely,word,think_verbs,produces,lonely,lonely,
+item_148,lose,word,think_verbs,produces,lose,lose,
+item_149,lost,word,think_verbs,produces,lost,lost,
+item_150,make believe,word,think_verbs,produces,make believe,make believe,
+item_151,maybe,word,think_verbs,produces,maybe,maybe,
+item_152,mean (not nice),word,think_verbs,produces,mean (not nice),mean (not nice),
+item_153,mean (as in meaning),word,think_verbs,produces,mean (as in meaning),mean (as in meaning),
+item_154,might,word,think_verbs,produces,might,might,
+item_155,miss,word,think_verbs,produces,miss,miss,
+item_156,naughty,word,think_verbs,produces,naughty,naughty,
+item_157,need,word,think_verbs,produces,need,need,
+item_158,nervous,word,think_verbs,produces,nervous,nervous,
+item_159,never,word,think_verbs,produces,never,never,
+item_160,new,word,think_verbs,produces,new,new,
+item_161,pretend,word,think_verbs,produces,pretend,pretend,
+item_162,probably,word,think_verbs,produces,probably,probably,
+item_163,promise,word,think_verbs,produces,promise,promise,
+item_164,proud,word,think_verbs,produces,proud,proud,
+item_165,read,word,think_verbs,produces,read,read,
+item_166,real,word,think_verbs,produces,real,real,
+item_167,recognize,word,think_verbs,produces,recognize,recognize,
+item_168,regret,word,think_verbs,produces,regret,regret,
+item_169,remember,word,think_verbs,produces,remember,remember,
+item_170,remind,word,think_verbs,produces,remind,remind,
+item_171,sad,word,think_verbs,produces,sad,sad,
+item_172,safe,word,think_verbs,produces,safe,safe,
+item_173,scare,word,think_verbs,produces,scare,scare,
+item_174,selfish,word,think_verbs,produces,selfish,selfish,
+item_175,share,word,think_verbs,produces,share,share,
+item_176,shy,word,think_verbs,produces,shy,shy,
+item_177,silly,word,think_verbs,produces,silly,silly,
+item_178,similar,word,think_verbs,produces,similar,similar,
+item_179,smart,word,think_verbs,produces,smart,smart,
+item_180,sometimes,word,think_verbs,produces,sometimes,sometimes,
+item_181,soon,word,think_verbs,produces,soon,soon,
+item_182,stupid,word,think_verbs,produces,stupid,stupid,
+item_183,surprise/surprised,word,think_verbs,produces,surprise/surprised,surprise/surprised,
+item_184,teach,word,think_verbs,produces,teach,teach,
+item_185,tease,word,think_verbs,produces,tease,tease,
+item_186,think,word,think_verbs,produces,think,think,
+item_187,trust,word,think_verbs,produces,trust,trust,
+item_188,uncomfortable,word,think_verbs,produces,uncomfortable,uncomfortable,
+item_189,understand,word,think_verbs,produces,understand,understand,
+item_190,warn,word,think_verbs,produces,warn,warn,
+item_191,wish,word,think_verbs,produces,wish,wish,
+item_192,wonder,word,think_verbs,produces,wonder,wonder,
+item_193,worried,word,think_verbs,produces,worried,worried,
+item_194,around,word,quant_verbs,produces,around,around,
+item_195,behind,word,quant_verbs,produces,behind,behind,
+item_196,between,word,quant_verbs,produces,between,between,
+item_197,both,word,quant_verbs,produces,both,both,
+item_198,bunch,word,quant_verbs,produces,bunch,bunch,
+item_199,close,word,quant_verbs,produces,close,close,
+item_200,each,word,quant_verbs,produces,each,each,
+item_201,every,word,quant_verbs,produces,every,every,
+item_202,far/distant,word,quant_verbs,produces,far/distant,far/distant,
+item_203,few,word,quant_verbs,produces,few,few,
+item_204,inside,word,quant_verbs,produces,inside,inside,
+item_205,less,word,quant_verbs,produces,less,less,
+item_206,many/a lot,word,quant_verbs,produces,many/a lot,many/a lot,
+item_207,near,word,quant_verbs,produces,near,near,
+item_208,next to,word,quant_verbs,produces,next to,next to,
+item_209,none,word,quant_verbs,produces,none,none,
+item_210,other (one),word,quant_verbs,produces,other (one),other (one),
+item_211,plenty,word,quant_verbs,produces,plenty,plenty,
+item_212,combine,combine,combine,not yet; sometimes; often,"Has your child begun to combine words yet, such as ""nother cookie"" or ""doggie bite""?",,
+item_example1,combination_examples,combination_examples,combination_examples,,,,combination_example1
+item_example2,combination_examples,combination_examples,combination_examples,,,,combination_example2
+item_example3,combination_examples,combination_examples,combination_examples,,,,combination_example3
+item_213,use_ed,usage,how_use_words,not yet; sometimes; often,"When we talk about something that happened in the past, we usually add special endings. For example: ""walk<strong>ed</strong>"" or ""I kick<strong>ed</strong> the ball"". Has your child started doing that?",,
+item_214,use_is,usage,how_use_words,not yet; sometimes; often,"Sometimes ""is"" is the only verb in a sentence, as in ""That <strong>is</strong> my truck"" or ""That<strong>'s</strong> Mommy."" Has your child started making sentences like that?",,
+item_215,use_helping,usage,how_use_words,not yet; sometimes; often,"Sometimes we use helping verbs like ""is"", ""am"" or ""are"". For example: ""She <strong>is</strong> throwing the ball"" or ""I <strong>am</strong> opening it."" Has your child started doing that?",,
+item_216,use_a_the,usage,how_use_words,not yet; sometimes; often,"Does your child use ""a"" and ""the""? For example, do they say sentences like ""I want <strong>the</strong> truck"" or ""I want <strong>a</strong> truck"" instead of ""I want truck""?",,
+item_217,use_whatwho,usage,how_use_words,not yet; sometimes; often,"Does your child ask questions with more than one word that begin ""what,"" ""who"", or ""where""?",,
+item_218,use_whenwhy,usage,how_use_words,not yet; sometimes; often,"Does your child ask questions with more than one word that begin ""when,"" ""why"", or ""how""?",,
+item_219,use_because,usage,how_use_words,not yet; sometimes; often,"Does your child give reasons for things, using the word ""because"", ""cause"" or ""cuz""?",,
+item_226,use_could,usage,how_use_words,not yet; sometimes; often,"Does your child talk about things that ""could"" or ""might"" happen, such as ""he <strong>gonna</strong> hurt himself if he's not careful""?",,
+item_221,use_er_est,usage,how_use_words,not yet; sometimes; often,"Does your child use ""-er"" and ""-est"" as word endings in comparisons? For example: ""My bike is bigg<strong>er</strong> than his!"" or ""This block is bigg<strong>est</strong>.""",,
+item_222,use_moreless,usage,how_use_words,not yet; sometimes; often,"Does your child use ""more"" and ""less"" to compare quantities? For example, ""This glass has <strong>more</strong>. This one has <strong>less</strong>.""",,
+item_223,use_mostleast,usage,how_use_words,not yet; sometimes; often,"Does your child use ""most"" and ""least"" to compare quantities? For example, ""This glass has the <strong>most/least</strong>.""",,
+item_224,use_and,usage,how_use_words,not yet; sometimes; often,"We sometimes use words like ""and"" to link two different sentences. For example, ""We went to the store <strong>and</strong> bought ice cream."" Does your child use ""and"" in complex sentences like that?",,
+item_225,use_but,usage,how_use_words,not yet; sometimes; often,"We sometimes use words like ""but"" to link two different sentences. For example, ""I want cake <strong>but</strong> there's no more."" Does your child use ""but"" in complex sentences like that?",,
+item_226,use_or,usage,how_use_words,not yet; sometimes; often,"We sometimes use words like ""or"" to link two different sentences. For example, ""Can we watch TV <strong>or</strong> read a book?"" Does your child use ""or"" in complex sentences like that?",,
+item_227,use_poss,usage,how_use_words,not yet; sometimes; often,"When we talk about a thing that belongs to someone, we usually add special endings. For example: ""Mom<strong>'s</strong> shoe."" or ""Daddy<strong>'s</strong> hair.""  Has your child started doing that?",,
+item_228,use_relclause,usage,how_use_words,not yet; sometimes; often,"Does your child use words like ""what"" and ""who"" in the middle of sentences? For example, ""That's <strong>what</strong> I said."" or ""I know <strong>who</strong> did it.""",,
+item_229,use_from,usage,how_use_words,not yet; sometimes; often,"Sometimes we talk about coming from a place. For example: ""Mom came <strong>from</strong> the store."" Does your child make sentences like this?",,
+item_230,complx01,complexity,complexity,mostly (a); equal; mostly (b),a. I have a friend. <br/> b. I have a friend who goes to my school.,,
+item_231,complx02,complexity,complexity,mostly (a); equal; mostly (b),a. I got ice cream. <br/> b. I got ice cream with chocolate on top.,,
+item_232,complx03,complexity,complexity,mostly (a); equal; mostly (b),a. The baby's crying. <br/> b. The baby's crying cuz she's hungry.,,
+item_233,complx04,complexity,complexity,mostly (a); equal; mostly (b),a. We are going. <br/> b. We are going to the store.,,
+item_234,complx05,complexity,complexity,mostly (a); equal; mostly (b),a. I like the doll. <br/> b. I like the doll with the red hair.,,
+item_235,complx06,complexity,complexity,mostly (a); equal; mostly (b),a. I will clean up later. <br/> b. I will clean up with Bobby gets home.,,
+item_236,complx07,complexity,complexity,mostly (a); equal; mostly (b),a. Turn on the light. <br/> b. Turn on the light so I can see.,,
+item_237,complx08,complexity,complexity,mostly (a); equal; mostly (b),a. My care is big and yours is little. <br/> b. My car is bigger than yours.,,
+item_238,complx09,complexity,complexity,mostly (a); equal; mostly (b),a. I want a truck. <br/> b. I want a truck like Tommy's.,,
+item_239,complx10,complexity,complexity,mostly (a); equal; mostly (b),a. I will go to sleep later. <br/> b. I will go to sleep after I eat.,,
+item_240,complx11,complexity,complexity,mostly (a); equal; mostly (b),a. That is my brother. <br/> b. The boy playing over there is my brother.,,
+item_241,complx12,complexity,complexity,mostly (a); equal; mostly (b),a. I want the ball. <br/> b. I want the ball but I can't reach it.,,
+item_242,complx13,complexity,complexity,mostly (a); equal; mostly (b),a. I want to go. <br/> b. I want to go outside and ride my bike.,,
+item_243,complx14,complexity,complexity,mostly (a); equal; mostly (b),a. I go to the park. <br/> b. I go to the park if my mom lets me.,,
+item_244,complx15,complexity,complexity,mostly (a); equal; mostly (b),a. Your shirt is pretty. <br/> b. The shirt you're wearing is pretty.,,
+item_245,complx16,complexity,complexity,mostly (a); equal; mostly (b),a. I tried the cake. <br/> b. I tried the cake that had sprinkles.,,
+item_246,complx17,complexity,complexity,mostly (a); equal; mostly (b),a. I want to go to the park. <br/> b. I wan to go to the park when daddy gets home.,,
+item_247,complx18,complexity,complexity,mostly (a); equal; mostly (b),a. We went to the store. <br/> b. We went to the store to buy ice cream. ,,
+item_248,pronunciation_1,pronunciation,pronunciation,rarely; sometimes; often,Can you understand the words your child says? (except when your child is saying nonsense for fun)?,,
+item_249,pronunciation_2,pronunciation,pronunciation,rarely; sometimes; often,Can people outside your home/family understand the words you child says (except when your child is saying nonsense for fun)?,,
+item_250,pronunciation_3,pronunciation,pronunciation,rarely; sometimes; often,"Does your child pronounce the English “sh” sound correctly? For example, “<strong>sh</strong>oe” or “<strong>sh</strong>irt”, instead of “soo” or “sirt.”",,
+item_251,pronunciation_4,pronunciation,pronunciation,rarely; sometimes; often,"Does your child pronounce the English “ch” sound correctly?  For example, “<strong>ch</strong>air” or “<strong>ch</strong>apstick”, instead of “shair” or “sapstick”.",,
+item_252,pronunciation_5,pronunciation,pronunciation,rarely; sometimes; often,"Does your child often use a “w” sound to replace “r” or “l” in words, for example, saying “<strong>waw</strong>ipop” for “lollipop” and “<strong>w</strong>abbit” for “rabbit”?",,
+item_253,pronunciation_6,pronunciation,pronunciation,rarely; sometimes; often,"Some words begin with an “s’” sound, following by a consonant, for example “<strong>st</strong>op” and “<strong>sp</strong>ill”. Does your child include both of these sounds, or does he/she simplify by leaving out the “s”, for example, “top” or “pill”?",,
+item_254,meta_print_1,meta_print,meta_print,not yet; sometimes; often,"Has your child noticed that certain words sound very similar because they rhyme?   For example, car/star and fat/cat ?",,
+item_255,meta_print_2,meta_print,meta_print,not yet; sometimes; often,"Have you heard your child on his/her own play with language by dividing words into syllables? For example, hap-py, bo-ring, base-ball.",,
+item_256,meta_print_3,meta_print,meta_print,not yet; sometimes; often,"Has your child shown that he/she understands that some people speak a different language, for example, by imitating the way they speak or by asking questions?",,
+item_257,meta_print_4,meta_print,meta_print,not yet; sometimes; often,"Has your child ever asked what a specific word, such as ""curious"" means?",,
+item_258,meta_print_5,meta_print,meta_print,not yet; sometimes; often,"Has your child ever commented on the fact that some words have more than one meaning? For example, “bat” is an animal that flies and is also used in playing baseball.",,
+item_259,meta_print_6,meta_print,meta_print,not yet; sometimes; often,"Has your child ever commented on the fact that there are expressions that have a meaning that is completely different from what the words directly mean, such as “It’s raining cats and dogs”,  “I’m absolutely starving”,  and “under the weather”",,
+item_260,meta_print_7,meta_print,meta_print,not yet; sometimes; often,Does your child sometimes make up new silly words or gibberish like “smish” for fun?,,
+item_261,meta_print_8,meta_print,meta_print,not yet; sometimes; often,"Does your child sometimes make up new words that make sense, like ‘redberry’ for a berry that is red or ‘handsocks’ for gloves? ",,
+item_262,meta_print_9,meta_print,meta_print,yes; no; I don't know,"Has your child ever shown that they know the difference between real words and nonsense words? For example, “book” and “play” are words, but not “fod” or “gesh”",,
+item_263,meta_print_10,meta_print,meta_print,not yet; sometimes; often,"Is your child interested in letters, for example on letter blocks, or signs?",,
+item_264,meta_print_11,meta_print,meta_print,not yet; sometimes; often,"Does your child know the sounds (not just the names) of at least two letters? For example, does he/she know that the letter ‘M’ sounds like “mmm”, or the letter ‘U’ sounds like “ooo”?",,
+item_265,meta_print_12,meta_print,meta_print,not yet; sometimes; often,Can your child write at least two letters by him/herself?,,
+item_266,meta_print_13,meta_print,meta_print,not yet; sometimes; often,"Can your child write at least two words, such as “mom”, his/her own name, or a pet’s name on his/her own, without copying? It’s ok if the spelling isn’t correct.",,
+item_267,meta_print_14,meta_print,meta_print,not yet; sometimes; often,"Does your child ever ‘pretend’ to read a book, while holding it, either from memory, or by making up a story based on the pictures?",,
+item_268,meta_print_15,meta_print,meta_print,not yet; sometimes; often,Does your child ever point to a word on the book when you read it aloud?,,
