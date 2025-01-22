@@ -114,6 +114,10 @@
                         "field":"mother_yob"
                     },
                     {
+                        "field":"mother_education",
+                        "help":"Choose highest grade completed (12 = high school graduate; 16 = college graduate; 18 = advanced degree)"
+                    },
+                    {
                         "field":"secondary_caregiver",
                         "div":[
                             "secondary_caregiver_other"
