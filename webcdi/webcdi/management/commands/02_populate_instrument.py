@@ -72,8 +72,8 @@ class Command(BaseCommand):
             instrument_max_age = curr_instrument["max_age"]
             try:
                 family = InstrumentFamily.objects.get(name=curr_instrument["family"])
-            except :
-                family=None
+            except:
+                family = None
 
             data_dict = {
                 "language": instrument_language,
