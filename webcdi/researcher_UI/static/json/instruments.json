@@ -327,7 +327,7 @@
 	},
 	{
 		"language": "English",
-		"family": "English (American/Canadian) Long",
+		"family": "English CDI3R",
 		"form": "CDI3R",
 		"verbose_name": "English (American) CDI3R",
 		"min_age": 16,
