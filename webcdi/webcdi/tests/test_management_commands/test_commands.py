@@ -22,7 +22,7 @@ class CommandsTestCase(TestCase):
         call_command("02_populate_instrument", *args, **opts)
 
         instruments = Instrument.objects.all()
-        self.assertEqual(len(instruments), 26)
+        self.assertEqual(len(instruments), 27)
 
     def test_populate_scoring(self):
         args = []

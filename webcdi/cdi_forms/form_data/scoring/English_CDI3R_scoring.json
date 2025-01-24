@@ -1,0 +1,34 @@
+[
+    {
+        "title" : "Total Words",
+        "category" : "word",
+        "measure" : "produces",
+        "order" : 1
+    },
+    {
+        "title" : "Using Language",
+        "category" : "how_use_words",
+        "measure" : "sometimes; often",
+        "order" : 8
+    },
+    {
+        "title" : "Pronunciation",
+        "category" : "pronunciation",
+        "measure" : "sometimes; often",
+        "order" : 10
+    },
+    {
+        "title" : "Talking about language and about print",
+        "category" : "meta_print",
+        "measure" : "sometimes; often",
+        "order" : 11
+    },
+    {
+        "title" : "Combination Examples",
+        "category" : "combination_examples",
+        "measure" : "complex",
+        "order" : 12,
+        "kind" : "list"
+    }
+
+]

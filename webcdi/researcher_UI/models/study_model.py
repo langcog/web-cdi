@@ -122,17 +122,19 @@ class Study(models.Model):
         return self.name
 
     def valid_code(self, user):
-        if (
-            self.instrument.family.chargeable
-            and not BrookesCode.objects.filter(
-                researcher=user,
-                instrument_family=self.instrument.family,
-                expiry__gte=datetime.date.today(),
-            ).exists()
-        ):
-            return False
-        else:
-            return True
+        if self.instrument.family:
+            if (
+                self.instrument.family.chargeable
+                and not BrookesCode.objects.filter(
+                    researcher=user,
+                    instrument_family=self.instrument.family,
+                    expiry__gte=datetime.date.today(),
+                ).exists()
+            ):
+                return False
+            else:
+                return True
+        return True
 
     class Meta:
         unique_together = (
