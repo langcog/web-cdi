@@ -15,7 +15,6 @@ logger = logging.getLogger("debug")
 TESTING = sys.argv[1:2] == ["test"]
 
 
-
 @receiver(post_save, sender=Researcher)
 def update_instruments(sender, instance, **kwargs):
     """
