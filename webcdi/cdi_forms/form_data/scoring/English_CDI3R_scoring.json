@@ -7,7 +7,7 @@
     },
     {
         "title" : "Using Language",
-        "category" : "how_use_words",
+        "category" : "usage",
         "measure" : "sometimes; often",
         "order" : 8
     },
@@ -20,26 +20,26 @@
     {
         "title" : "Talking about language and about print",
         "category" : "meta_print",
-        "measure" : "sometimes; often",
+        "measure" : "sometimes; often; yes",
         "order" : 11
     },
     {
-        "title" : "Combination Examples 1",
-        "category" : "combination_examples1",
+        "title" : "Combination Example 1",
+        "category" : "combination_example1",
         "measure" : "complex",
         "order" : 12,
         "kind" : "list"
     },
     {
-        "title" : "Combination Examples 2",
-        "category" : "combination_examples2",
+        "title" : "Combination Example 2",
+        "category" : "combination_example2",
         "measure" : "complex",
         "order" : 13,
         "kind" : "list"
     },
     {
-        "title" : "Combination Examples 3",
-        "category" : "combination_examples3",
+        "title" : "Combination Example 3",
+        "category" : "combination_example3",
         "measure" : "complex",
         "order" : 14,
         "kind" : "list"
