@@ -211,9 +211,9 @@ item_209,none,word,quant_verbs,produces,none,none,,item_1,(c); (d); (e); (f)
 item_210,other (one),word,quant_verbs,produces,other (one),other (one),,item_1,(c); (d); (e); (f)
 item_211,plenty,word,quant_verbs,produces,plenty,plenty,,item_1,(c); (d); (e); (f)
 item_212,combine,combine,combine,not yet; sometimes; often,"Has your child begun to combine words yet, such as ""nother cookie"" or ""doggie bite""?",,,item_1,(c); (d); (e); (f)
-item_example1,combination_example1,combination_examples,combination_examples,,,,combination_example1,item_212,sometimes; often
-item_example2,combination_example2,combination_examples,combination_examples,,,,combination_example2,item_212,sometimes; often
-item_example3,combination_example3,combination_examples,combination_examples,,,,combination_example3,item_212,sometimes; often
+item_example1,combination_example1,combination_example1,combination_examples,,,,,item_212,sometimes; often
+item_example2,combination_example2,combination_example2,combination_examples,,,,,item_212,sometimes; often
+item_example3,combination_example3,combination_example3,combination_examples,,,,,item_212,sometimes; often
 item_213,use_ed,usage,how_use_words,not yet; sometimes; often,"When we talk about something that happened in the past, we usually add special endings. For example: ""walk<strong>ed</strong>"" or ""I kick<strong>ed</strong> the ball"". Has your child started doing that?",,,item_212,sometimes; often
 item_214,use_is,usage,how_use_words,not yet; sometimes; often,"Sometimes ""is"" is the only verb in a sentence, as in ""That <strong>is</strong> my truck"" or ""That<strong>'s</strong> Mommy."" Has your child started making sentences like that?",,,item_212,sometimes; often
 item_215,use_helping,usage,how_use_words,not yet; sometimes; often,"Sometimes we use helping verbs like ""is"", ""am"" or ""are"". For example: ""She <strong>is</strong> throwing the ball"" or ""I <strong>am</strong> opening it."" Has your child started doing that?",,,item_212,sometimes; often

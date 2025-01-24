@@ -5,7 +5,7 @@ from researcher_UI.models import (Benchmark, InstrumentScore, Measure,
 
 from .models import BackgroundInfo, Instrument_Forms
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("debug")
 
 
 def calc_benchmark(x1, x2, y1, y2, raw_score):
@@ -116,19 +116,24 @@ def update_summary_scores(administration_instance):
     for administration_data_item in administration_data.objects.filter(
         administration=administration_instance
     ):
-        inst = Instrument_Forms.objects.get(
-            instrument=administration_instance.study.instrument,
-            itemID=administration_data_item.item_ID,
-        )
+        try:
+            inst = Instrument_Forms.objects.get(
+                instrument=administration_instance.study.instrument,
+                itemID=administration_data_item.item_ID,
+            )
+        except Exception as e:
+            logger.error(
+                f"{e} : instrument = {administration_instance.study.instrument} : item_ID = {administration_data_item.item_ID}"
+            )
         scoring_category = (
             inst.scoring_category if inst.scoring_category else inst.item_type
         )
-
         # this is the scoring
         for f in InstrumentScore.objects.filter(
             instrument=administration_instance.study.instrument,
             category__contains=scoring_category,
         ):  # items can be counted under multiple Titles check category against all categories
+            logger.debug(f"Instrument Score: {f}")
             summary, created = SummaryData.objects.get_or_create(
                 administration=administration_instance, title=f.title
             )
