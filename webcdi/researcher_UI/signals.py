@@ -1,3 +1,4 @@
+import logging
 import sys
 
 from django.contrib.auth.models import User
@@ -8,6 +9,8 @@ from django.dispatch import receiver
 from cdi_forms.scores import update_summary_scores
 # from registration.models import RegistrationProfile
 from researcher_UI.models import Administration, Researcher
+
+logger = logging.getLogger("debug")
 
 TESTING = sys.argv[1:2] == ["test"]
 
@@ -44,9 +47,15 @@ def cache_previous_completed(sender, instance, *args, **kwargs):
     if instance.id and not TESTING:
         original_completed = Administration.objects.get(pk=instance.id).completed
     instance.__original_completed = original_completed
+    logger.debug(
+        f"pre_save setting __original_completed to { instance.__original_completed }"
+    )
 
 
 @receiver(post_save, sender=Administration)
 def post_save_completed_handler(sender, instance, created, **kwargs):
+    logger.debug(
+        f"post_save: __original_completed is { instance.__original_completed }; completed is {instance.completed}"
+    )
     if instance.completed and not instance.__original_completed and not TESTING:
         update_summary_scores(instance)

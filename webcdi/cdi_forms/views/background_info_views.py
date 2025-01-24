@@ -337,12 +337,10 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
                 elif "btn-next" in request.POST and request.POST["btn-next"] == _(
                     "Finish"
                 ):
-                    Administration.objects.filter(url_hash=self.hash_id).update(
-                        last_modified=timezone.now()
-                    )
-                    Administration.objects.filter(url_hash=self.hash_id).update(
-                        completed=True
-                    )
+                    administration = Administration.objects.get(url_hash=self.hash_id)
+                    administration.last_modified = timezone.now()
+                    administration.completed = True
+                    administration.save()
                     request.method = "GET"
                     return redirect("administer_cdi_form", hash_id=self.hash_id)
 
