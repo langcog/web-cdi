@@ -13,7 +13,7 @@ from researcher_UI.models import Administration, Researcher
 logger = logging.getLogger("debug")
 
 TESTING = sys.argv[1:2] == ["test"]
-TESTING = False
+
 
 
 @receiver(post_save, sender=Researcher)
