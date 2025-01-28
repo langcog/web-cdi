@@ -32,32 +32,32 @@
                         {
                             "id":"foods_verbs",
                             "title":"Food-related Words: Verbs",
-                            "page":2
+                            "page":3
                         },
                         {
                             "id":"body_nouns",
                             "title":"Body-related Words: Nouns",
-                            "page":3
+                            "page":4
                         },
                         {
                             "id":"body_verbs",
                             "title":"Body-related Words: Verbs",
-                            "page":3
+                            "page":5
                         },
                         {
                             "id":"think_nouns",
                             "title":"Words about Thinking and Feeling: Nouns",
-                            "page":4
+                            "page":6
                         },
                         {
                             "id":"think_verbs",
                             "title":"Words about Thinking and Feeling: Verbs",
-                            "page":4
+                            "page":7
                         },
                         {
                             "id":"quant_verbs",
                             "title":"Quantity, Amount, and Space-related Words",
-                            "page":5
+                            "page":8
                         }
                     ],
                     "text":"Here, we are interested in the words your child SAYS. Please mark the words you have heard your child say on his/her own, not just copying you. If your child says a different pronunciation of a word, mark it anyway. This is only a sample of words; please do not worry if your child does not say many of these words yet. Your child likely knows many words not on these lists.",
@@ -74,31 +74,20 @@
                     "id":"combine",
                     "title":"",
                     "type":"radiobutton",
-                    "page":6
-                },
-                {
-                    "id":"combine",
-                    "sections":[
-                        {
-                            "id":"combine",
-                            "page":1
-                        }
-                    ],
-                    "text":"If you answered 'not yet', please stop here. If you selected 'sometimes' or 'often', please click Next to continue.",
-                    "type":"radiobutton"
+                    "page":9
                 },
                 {
                     "id":"combination_examples",
                     "title":"Examples",
                     "text":"Please list three of the longest sentences you have heard your child say recently.",
                     "type":"textbox",
-                    "page":7
+                    "page":10
                 },
                 {
                     "id":"usage",
                     "title":"Using Language",
                     "type":"radiobutton",
-                    "page":8
+                    "page":11
                 }
             ]
         },
@@ -111,7 +100,7 @@
                     "text":"Children often use short expressions but may sometimes use longer ones. For each pair of sentences below, please mark the one that sounds MOST like the way your child talks at the moment. If your child is saying sentences even more complicated than the two provided, mark the second one (option b).",
                     "title":"Sentence Complexity",
                     "type":"radiobutton",
-                    "page":9
+                    "page":12
                 }
             ]
         },
@@ -123,7 +112,7 @@
                     "id":"pronunciation",
                     "title":"",
                     "type":"radiobutton",
-                    "page":10
+                    "page":13
                 }
             ]
         },
@@ -135,7 +124,7 @@
                     "id":"meta_print",
                     "title":"",
                     "type":"radiobutton",
-                    "page":11
+                    "page":14
                 }
             ]
         }
