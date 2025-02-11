@@ -180,22 +180,24 @@
         }
         window.onload = function() {
             state = getCookie('sectionInstructions{{data.type.id}}')
+            console.log('State onload: ', state)
             if (state == 1) {
-                console.log('Set cookie 2')
-                $("#sectionInstructions{{data.type.id}}").collapse('show');
-                $('#section_instructions_title').addClass("collaped");
-                $("#section_instructions_title").attr("aria-expanded","true");
-            } else {
-                console.log('Set cookie 1')
                 $("#sectionInstructions{{data.type.id}}").collapse('hide');
                 $('#section_instructions_title').addClass("collaped");
                 $("#section_instructions_title").attr("aria-expanded","false");
+            } else {
+                $("#sectionInstructions{{data.type.id}}").collapse('show');
+                $('#section_instructions_title').addClass("collaped");
+                $("#section_instructions_title").attr("aria-expanded","true");
+               
             }
             state = getCookie('sectionInstructions{{data.type.id}}')
+            console.log('State onload 2: ', state)
         }
         $("#section_instructions_title").click(function(){
             $("#sectionInstructions{{data.type.id}}").collapse('toggle');
             state = state % 2 + 1
+            console.log('State setting: ', state)
             setCookie('sectionInstructions{{data.type.id}}',state,1) 
         });
     </script>
