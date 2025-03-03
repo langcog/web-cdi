@@ -14,7 +14,7 @@ def get_gift_card_regex(gift_type):
     if gift_type == "Amazon":
         return re.compile(r"^[a-zA-Z0-9]{4}-[a-zA-Z0-9]{6}-[a-zA-Z0-9]{4}$")
     if gift_type == "Tango":
-        return re.compile(r"^www.rewardlink.io/r/1/[A-Za-z0-9-_]{43}$")
+        return re.compile(r"^(?:www.rewardlink.io|www.rl.tangocard.com)/r/1/[A-Za-z0-9-_]{43}$")
     return re.compile(r"^[A-Za-z0-9-]+$")
 
 
