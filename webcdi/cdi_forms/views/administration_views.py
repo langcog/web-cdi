@@ -605,7 +605,7 @@ class AdministrationUpdateView(UpdateView):
         if not target_section and "section" in self.kwargs:
             target_section = self.kwargs["section"]
         elif not target_section and self.object.page_number > 0:
-            target_section = self.object.page_number + 1
+            target_section = min(self.object.page_number + 1, self.max_page())
 
         prefilled_data_list = administration_data.objects.filter(
             administration=self.object
