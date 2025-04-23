@@ -132,7 +132,9 @@ if EMAIL_BACKEND == "django_ses.SESBackend":
     AWS_SES_REGION_ENDPOINT = os.environ.get(
         "AWS_SES_REGION_ENDPOINT", "email.us-west-2.amazonaws.com"
     )
-
+    AWS_SES_CONFIGURATION_SET = os.environ.get(
+        "AWS_SES_CONFIGURATION_SET", "WebCDI_EMails"
+    )
 EMAIL_PORT = os.environ.get("EMAIL_PORT", 25)
 
 DEFAULT_FROM_EMAIL_NAME = os.environ["DEFAULT_FROM_EMAIL_NAME"]
