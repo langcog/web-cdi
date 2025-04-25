@@ -44,6 +44,10 @@ def get_helper(request, study_name, num_per_page):
         )
         if not current_study.confirm_completion:
             administration_table.exclude = ("study", "id", "url_hash", "analysis")
+        if not current_study.send_completion_flag_url:
+            excludes = list(administration_table.exclude)
+            excludes.append("send_completion_flag_url_response")
+            administration_table.exclude = excludes
 
         filename = os.path.realpath(
             settings.BASE_DIR

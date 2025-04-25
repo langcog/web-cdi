@@ -321,7 +321,7 @@ LOGGING = {
         },
         "debug": {
             "level": "DEBUG",
-            "handlers": ["file", "console"],
+            "handlers": ["file", "console", "mail_admins"],
             "propagate": True,
         },
         "tests": {

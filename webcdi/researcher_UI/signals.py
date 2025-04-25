@@ -1,5 +1,6 @@
 import logging
 import sys
+import requests 
 
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
@@ -59,3 +60,33 @@ def post_save_completed_handler(sender, instance, created, **kwargs):
     )
     if instance.completed and not instance.__original_completed and not TESTING:
         update_summary_scores(instance)
+
+@receiver(post_save, sender=Administration)
+def check_send_completion_flag_url_response(sender, instance, created, **kwargs):
+    if instance.study.send_completion_flag_url and instance.completed:
+        data = instance.study.completion_data
+        for item in data:
+            data[item] = (
+                data[item]
+                .replace(
+                    "{{source_id}}",
+                    instance.backgroundinfo.source_id or "",
+                )
+                .replace(
+                    "{{event_id}}",
+                    instance.backgroundinfo.event_id or "",
+                )
+                        )
+        count = 0
+        while instance.send_completion_flag_url_response != 200:
+            count += 1
+            r = requests.post(
+                instance.study.send_completion_flag_url, data=data
+            )
+            instance.send_completion_flag_url_response = int(r.status_code)
+            if count > 5:
+                logger.error(
+                    f"Failed to get 200 status code for Administration { instance.id } within source_id { instance.backgroundinfo.source_id }"
+                )
+                break
+            
