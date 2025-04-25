@@ -1,6 +1,7 @@
 import logging
 import sys
 import requests 
+import time
 
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
@@ -79,14 +80,18 @@ def check_send_completion_flag_url_response(sender, instance, created, **kwargs)
                         )
         count = 0
         while instance.send_completion_flag_url_response != 200:
+            if count > 4:
+                logger.error(
+                    f"Failed to get 200 status code for Administration { instance.id } within source_id { instance.backgroundinfo.source_id }"
+                )
+                break
+            time.sleep(3600)
+            
             count += 1
             r = requests.post(
                 instance.study.send_completion_flag_url, data=data
             )
             instance.send_completion_flag_url_response = int(r.status_code)
-            if count > 5:
-                logger.error(
-                    f"Failed to get 200 status code for Administration { instance.id } within source_id { instance.backgroundinfo.source_id }"
-                )
-                break
+            
+            
             
