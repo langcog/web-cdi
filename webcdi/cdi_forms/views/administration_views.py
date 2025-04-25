@@ -384,6 +384,7 @@ class AdministrationUpdateView(UpdateView):
                         r = requests.post(
                             self.object.study.send_completion_flag_url, data=data
                         )
+                        self.object.send_completion_flag_url_response = int(r.status_code)
 
                 self.object.save()
                 response = reverse(

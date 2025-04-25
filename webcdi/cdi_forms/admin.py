@@ -18,6 +18,7 @@ admin.site.register(Choices)
 
 class BackgroundInfoAdmin(admin.ModelAdmin):
     readonly_fields = ["administration"]
+    search_fields = ["source_id"]
 
 
 admin.site.register(BackgroundInfo, BackgroundInfoAdmin)
