@@ -12,7 +12,7 @@ class Command(BaseCommand):
     help = "Crontab job to update RedCap system"
 
     def handle(self, *args, **options):
-        administrations = Administration.objects.filter(completed=True, send_completion_flag_url_response__isnull=False)
+        administrations = Administration.objects.filter(completed=True, send_completion_flag_url_response__isnull=True, study__send_completion_flag_url__isnull=False)
 
         for instance in administrations:
             instance.save()
