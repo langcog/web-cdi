@@ -12,4 +12,7 @@ source "$PYTHONPATH/activate" && {
     python ./manage.py 05_populate_choices;
     python ./manage.py 06_populate_items;
     #python ./manage.py 07_populate_cat_items;
+
+
+    python ./manage.py update_redcap;
 }
