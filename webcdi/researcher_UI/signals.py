@@ -51,16 +51,10 @@ def cache_previous_completed(sender, instance, *args, **kwargs):
     if instance.id and not TESTING:
         original_completed = Administration.objects.get(pk=instance.id).completed
     instance.__original_completed = original_completed
-    logger.debug(
-        f"pre_save setting __original_completed to { instance.__original_completed }"
-    )
-
+    
 
 @receiver(post_save, sender=Administration)
 def post_save_completed_handler(sender, instance, created, **kwargs):
-    logger.debug(
-        f"post_save: __original_completed is { instance.__original_completed }; completed is {instance.completed}"
-    )
     if instance.completed and not instance.__original_completed and not TESTING:
         update_summary_scores(instance)
 
@@ -88,10 +82,6 @@ def check_send_completion_flag_url_response(sender, instance, created, **kwargs)
             wait_for_it.start ()
         else:
             instance.save()
-
-        
-        
-
 
     if instance.study.send_completion_flag_url and instance.completed:
         data = instance.study.completion_data
