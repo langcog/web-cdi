@@ -61,6 +61,7 @@
 
         <hr />
         <div class="row form-group">  
+          {% if object.single_reuseable_link_active %}
             <label for="add_new_parent" class="col-3 control-label">Single Reusable Link:</label>
             <div class="col-9" id="reusable_link_div" style = "overflow: hidden; text-overflow: ellipsis;">
               <a href="{% url 'researcher_ui:administer_new_parent' username study_name %}" id="reusable_link">Click here</a><br>
@@ -83,6 +84,7 @@
                 //}
               </script>
             </div>
+          {% endif %}
         </div>
         {% endif %}
 
