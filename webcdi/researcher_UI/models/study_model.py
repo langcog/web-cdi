@@ -117,7 +117,7 @@ class Study(models.Model):
         null=True,
         help_text="Data to be included in the completion url.",
     )
-    single_reuseable_link_active = models.BooleanField(default=True)
+    single_reusable_link_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name

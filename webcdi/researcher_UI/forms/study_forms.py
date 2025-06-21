@@ -201,7 +201,7 @@ class AddStudyForm(BetterModelForm):
         label="Amount per Card (in USD)",
         widget=forms.TextInput(attrs={"placeholder": "$XX.XX"}),
     )
-    single_reuseable_link_active = forms.BooleanField(
+    single_reusable_link_active = forms.BooleanField(
         required=False
     )
 
@@ -263,7 +263,7 @@ class AddStudyForm(BetterModelForm):
             Div(Field("gift_card_provider"),css_class="allow_payment collapse form-control"),
             Div(Field("gift_codes"), css_class="allow_payment collapse"),
             Div(Field("gift_amount"), css_class="allow_payment collapse"),
-            Field("single_reuseable_link_active"),
+            Field("single_reusable_link_active"),
             Field("anon_collection"),
             Field("subject_cap"),
         )
