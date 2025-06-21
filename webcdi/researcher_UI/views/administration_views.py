@@ -11,6 +11,7 @@ from django.urls import reverse
 from django.utils import timezone
 from django.views.generic import CreateView, DetailView, UpdateView
 from ipware.ip import get_client_ip
+from django.shortcuts import render
 
 from cdi_forms.models import BackgroundInfo
 from researcher_UI.forms import StudyFormForm
@@ -109,6 +110,10 @@ class AddNewParent(DetailView):
 
     def get(self, request, username, study_name):
         self.get_object()
+        if not self.object.single_reuseable_link_active:
+            return render(request, 'cdi_forms/single_reuseable_link_inactive.html' )
+
+        
         let_through, bypass, source_id = self.admin_new_parent_fun(request)
         if let_through:
             if self.object.no_demographic_boolean:

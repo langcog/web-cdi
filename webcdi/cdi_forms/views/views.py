@@ -270,9 +270,12 @@ def administer_cdi_form(request, hash_id):
     except:
         raise Http404("Administration not found")
 
+    if not administration_instance.study.single_reuseable_link.active:
+        return render(request, 'cdi_forms/single_reuseable_link_inactive.html' ) 
+
     if administration_instance.study.instrument.form in settings.CAT_FORMS:
         return redirect("cat_forms:administer_cat_form", hash_id=hash_id)
-
+ 
     refresh = False
     if request.method == "POST":
         if (

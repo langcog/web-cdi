@@ -201,6 +201,9 @@ class AddStudyForm(BetterModelForm):
         label="Amount per Card (in USD)",
         widget=forms.TextInput(attrs={"placeholder": "$XX.XX"}),
     )
+    single_reuseable_link_active = forms.BooleanField(
+        required=False
+    )
 
     # Form validation. Form is passed automatically to views.py for higher level checking.
     def clean(self):
@@ -257,14 +260,10 @@ class AddStudyForm(BetterModelForm):
             Field("test_period"),
             Field("timing"),
             Field("allow_payment", css_class="css_enabler"),
-            Div(
-                Field(
-                    "gift_card_provider",
-                    css_class="allow_payment collapse form-control",
-                )
-            ),
+            Div(Field("gift_card_provider"),css_class="allow_payment collapse form-control"),
             Div(Field("gift_codes"), css_class="allow_payment collapse"),
             Div(Field("gift_amount"), css_class="allow_payment collapse"),
+            Field("single_reuseable_link_active"),
             Field("anon_collection"),
             Field("subject_cap"),
         )
