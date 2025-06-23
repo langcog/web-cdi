@@ -589,7 +589,7 @@ class AdministrationUpdateView(UpdateView):
         }
         return section
 
-    def max_page(self, contents):
+    def max_page(self, contents=[]):
         page = 0
         for part in contents:
             for item in part["types"]:
