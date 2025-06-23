@@ -128,8 +128,8 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
         data["language"] = self.administration_instance.study.instrument.language
         data["language_code"] = self.user_language
         data["title"] = self.administration_instance.study.instrument.verbose_name
-        data["max_age"] = self.administration_instance.study.max_age
-        data["min_age"] = self.administration_instance.study.min_age
+        data["max_age"] = self.administration_instance.study.max_age if self.administration_instance.study.max_age else 36
+        data["min_age"] = self.administration_instance.study.min_age if self.administration_instance.study.max_age else 12
         data["study_waiver"] = self.administration_instance.study.waiver
         data["allow_payment"] = self.administration_instance.study.allow_payment
         data["hint"] = _(

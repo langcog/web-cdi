@@ -83,27 +83,28 @@ def check_send_completion_flag_url_response(sender, instance, created, **kwargs)
         else:
             instance.save()
 
-    if instance.study.send_completion_flag_url and instance.completed:
-        data = instance.study.completion_data
-        for item in data:
-            data[item] = (
-                data[item]
-                .replace(
-                    "{{source_id}}",
-                    instance.backgroundinfo.source_id or "",
-                )
-                .replace(
-                    "{{event_id}}",
-                    instance.backgroundinfo.event_id or "",
-                )
-        )
-        
-        count = 0
-        if instance.send_completion_flag_url_response != 200:
-            logger.debug(f'count: {count}')
-            wait_for_it = Timer (5, delayed_check,f'{count}')
-            wait_for_it.start ()
+    if not TESTING:
+        if instance.study.send_completion_flag_url and instance.completed:
+            data = instance.study.completion_data
+            for item in data:
+                data[item] = (
+                    data[item]
+                    .replace(
+                        "{{source_id}}",
+                        instance.backgroundinfo.source_id or "",
+                    )
+                    .replace(
+                        "{{event_id}}",
+                        instance.backgroundinfo.event_id or "",
+                    )
+            )
             
+            count = 0
+            if instance.send_completion_flag_url_response != 200:
+                logger.debug(f'count: {count}')
+                wait_for_it = Timer (5, delayed_check,f'{count}')
+                wait_for_it.start ()
+                
             
         
                 

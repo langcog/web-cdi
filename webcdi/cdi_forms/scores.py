@@ -133,7 +133,7 @@ def update_summary_scores(administration_instance):
             instrument=administration_instance.study.instrument,
             category__contains=scoring_category,
         ):  # items can be counted under multiple Titles check category against all categories
-            logger.debug(f"Instrument Score: {f}")
+            # logger.debug(f"Instrument Score: {f}")
             summary, created = SummaryData.objects.get_or_create(
                 administration=administration_instance, title=f.title
             )
@@ -254,7 +254,7 @@ def update_summary_scores(administration_instance):
             instrument=administration_instance.study.instrument
         ):
             if Benchmark.objects.filter(instrument_score=f).exists():
-                logger.debug(f"Getting benchmark for score {f} and age {age}")
+                # logger.debug(f"Getting benchmark for score {f} and age {age}")
                 benchmark = Benchmark.objects.filter(instrument_score=f, age=age)[0]
                 try:
                     adjusted_benchmark = Benchmark.objects.filter(
