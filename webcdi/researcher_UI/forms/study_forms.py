@@ -202,7 +202,8 @@ class AddStudyForm(BetterModelForm):
         widget=forms.TextInput(attrs={"placeholder": "$XX.XX"}),
     )
     single_reusable_link_active = forms.BooleanField(
-        required=False
+        required=False,
+        initial=True,
     )
 
     # Form validation. Form is passed automatically to views.py for higher level checking.
