@@ -336,5 +336,21 @@
 		"json_data": "cdi_forms/form_data/English_CDI3R_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/English_CDI3R_scoring.json",
 		"demographics" : ["English_CDI3R_demographics.json"]
+	},
+	{
+		"language": "Dutch",
+		"family": "Dutch Long",
+		"form": "CAT",
+		"verbose_name": "Dutch CAT",
+		"min_age": 12,
+		"max_age": 36,
+		"csv_file": "cdi_form_csv/cat_forms/[English_CAT].csv",
+		"json_data": "cdi_forms/form_data/Dutch_WS_meta.json",
+		"fillable_headers": "cdi_form_csv/cdi_forms/DutchWS_pdf_headers.csv",
+		"scoring_json" : "cdi_forms/form_data/scoring/Dutch_CAT_scoring.json",
+		"starting_words" : "cdi_form_csv/cat_forms/starting_words/[Dutch_Ages_CAT].csv",
+		"benchmark" : "cdi_forms/form_data/benchmarking/Dutch_CAT_benchmark.csv",
+		"demographics" : ["Dutch_Split.json"]
+		
 	}
 ]
