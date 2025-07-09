@@ -349,7 +349,6 @@
 		"fillable_headers": "cdi_form_csv/cdi_forms/DutchWS_pdf_headers.csv",
 		"scoring_json" : "cdi_forms/form_data/scoring/Dutch_CAT_scoring.json",
 		"starting_words" : "cdi_form_csv/cat_forms/starting_words/[Dutch_Ages_CAT].csv",
-		"benchmark" : "cdi_forms/form_data/benchmarking/Dutch_CAT_benchmark.csv",
 		"demographics" : ["Dutch_Split.json"]
 		
 	}
