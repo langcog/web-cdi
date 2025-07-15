@@ -2370,7 +2370,7 @@ msgstr ""
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:143
 msgid "Does your child say ... %(word)s?"
-msgstr "Zegt uw kind ...  %(word)s?"
+msgstr "Begrijpt en zegt uw kind ...  %(word)s?"
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:147
 msgid "* or word used in your family"
