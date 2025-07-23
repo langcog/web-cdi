@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-10 11:03+0000\n"
+"POT-Creation-Date: 2025-07-23 13:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1734,6 +1734,7 @@ msgstr ""
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:31
 #: cdi_forms/templates/cdi_forms/expired.html:32
 #: cdi_forms/templates/cdi_forms/overflow.html:37
+#: cdi_forms/templates/cdi_forms/single_reusable_link_inactive.html:37
 #: cdi_forms/templates/cdi_forms/study_overflow.html:37
 msgid "MB-CDI Lab Logo"
 msgstr ""
@@ -1758,13 +1759,13 @@ msgid ""
 "ready, click submit!"
 msgstr ""
 
-#: cdi_forms/templates/cdi_forms/administration_form.html:265
+#: cdi_forms/templates/cdi_forms/administration_form.html:267
 #: cdi_forms/templates/cdi_forms/cdi_form.html:381
 msgid ""
 "Are you ready to submit? You cannot change your answers after submission."
 msgstr "האם אתה מוכן להגיש? לא תוכל לשנות את תשובותיך לאחר הגשת השאלון."
 
-#: cdi_forms/templates/cdi_forms/administration_form.html:297
+#: cdi_forms/templates/cdi_forms/administration_form.html:299
 #: cdi_forms/templates/cdi_forms/cdi_form.html:411
 msgid "understands and says"
 msgstr "מבין ואומר"
@@ -1875,7 +1876,6 @@ msgstr "אל תסמן \"מבין ואומר\"."
 
 #: cdi_forms/templates/cdi_forms/administration_instructions.html:134
 #: cdi_forms/templates/cdi_forms/administration_instructions.html:209
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:117
 #: cdi_forms/templates/cdi_forms/cdi_form.html:174
 #: cdi_forms/templates/cdi_forms/cdi_form.html:261
 msgid ""
@@ -1885,7 +1885,6 @@ msgstr ""
 "המילה אם הוא מחקה אותך!"
 
 #: cdi_forms/templates/cdi_forms/administration_instructions.html:144
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:46
 #: cdi_forms/templates/cdi_forms/cdi_form.html:192
 msgid ""
 "In this section, you will be asked about words that your child \"understands "
@@ -1901,13 +1900,11 @@ msgstr ""
 "מאוד מילים מתוך הרשימה.זה לגמרי בסדר! "
 
 #: cdi_forms/templates/cdi_forms/administration_instructions.html:157
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:59
 #: cdi_forms/templates/cdi_forms/cdi_form.html:206
 msgid "DO check the box if:"
 msgstr "סמן את התיבה אם:"
 
 #: cdi_forms/templates/cdi_forms/administration_instructions.html:159
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:61
 #: cdi_forms/templates/cdi_forms/cdi_form.html:208
 msgid ""
 "Your child says the word when trying to name an object or describe something "
@@ -1915,7 +1912,6 @@ msgid ""
 msgstr "ילדך אומר את המילה כשהוא מנסה לתאר חפץ או אירוע שקרה."
 
 #: cdi_forms/templates/cdi_forms/administration_instructions.html:175
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:80
 #: cdi_forms/templates/cdi_forms/cdi_form.html:226
 msgid ""
 "It's fine if your child can't say the whole word or says it his/her own "
@@ -1926,13 +1922,11 @@ msgstr ""
 "משתמשים במילה אחרת במשפחה שלכם (למשל, \"צצי\" למוצץ) זה בסדר גמור!"
 
 #: cdi_forms/templates/cdi_forms/administration_instructions.html:177
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:82
 #: cdi_forms/templates/cdi_forms/cdi_form.html:228
 msgid "DO check the box."
 msgstr "יש לסמן את התיבה."
 
 #: cdi_forms/templates/cdi_forms/administration_instructions.html:194
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:100
 #: cdi_forms/templates/cdi_forms/cdi_form.html:245
 msgid ""
 "DON'T check the box if your child is just stringing sounds together. This is "
@@ -1975,6 +1969,7 @@ msgstr "מילים שמבין (%%)"
 
 #: cdi_forms/templates/cdi_forms/administration_summary.html:168
 #: cdi_forms/templates/cdi_forms/overflow.html:40
+#: cdi_forms/templates/cdi_forms/single_reusable_link_inactive.html:40
 #: cdi_forms/templates/cdi_forms/study_overflow.html:40
 msgid "Thank you!"
 msgstr "תודה!"
@@ -2040,17 +2035,10 @@ msgstr ""
 #: cdi_forms/templates/cdi_forms/administration_summary.html:195
 msgid ""
 "Thank you for participating in our Web-CDI project! It is our pleasure to "
-"send you this "
-msgstr ""
-
-#: cdi_forms/templates/cdi_forms/administration_summary.html:195
-msgid " Gift Card that can be redeemed towards millions of items at "
-msgstr ""
-
-#: cdi_forms/templates/cdi_forms/administration_summary.html:195
-msgid ""
-"You may want to print this screen for easy reference later--you’ll need the "
-"gift card claim code below."
+"send you this Tango Choice Card that can be redeemed for a gift card from "
+"your choice of hundreds of stores! Just click below and you will be taken to "
+"the Tango site. You may want to print this screen for easy reference later--"
+"you’ll need the gift card claim code below. "
 msgstr ""
 
 #: cdi_forms/templates/cdi_forms/administration_summary.html:198
@@ -2120,9 +2108,8 @@ msgstr "המילה הכי קשה שהילד/ה שלי מבין/ה היא INSERTW
 
 #: cdi_forms/templates/cdi_forms/background_info.html:7
 #: cdi_forms/templates/cdi_forms/background_info.html:72
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:124
 #: cdi_forms/templates/cdi_forms/study_group.html:7
-#: cdi_forms/views/background_info_views.py:324
+#: cdi_forms/views/background_info_views.py:326
 msgid "Next"
 msgstr "הבא"
 
@@ -2232,7 +2219,7 @@ msgstr "פרטי רקע"
 
 #: cdi_forms/templates/cdi_forms/backpage_info.html:12
 #: cdi_forms/templates/cdi_forms/backpage_info.html:45
-#: cdi_forms/views/background_info_views.py:336
+#: cdi_forms/views/background_info_views.py:338
 msgid "Finish"
 msgstr "סיום"
 
@@ -2288,14 +2275,109 @@ msgstr ""
 "את השאלון, אפשר ללמוד עוד על CDI <a href=\"http://mb-cdi.stanford.edu/\" "
 "target=\"_blank\">כאן</a>. אנו מודים לך מקרב לב על השתתפותך במחקר!"
 
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:46
+#, fuzzy
+#| msgid ""
+#| "In this section, you will be asked about words that your child "
+#| "\"understands and says.\" Your child \"understands and says\" a word on "
+#| "the list if they know what the word means AND they say it by themselves. "
+#| "Here are some examples. This assessment is for children of many ages. "
+#| "Your child may not be able to understand or say a lot of the words on the "
+#| "form. That is perfectly fine!"
+msgctxt "cat"
+msgid ""
+"In this section, you will be asked about words that your child \"understands "
+"and says.\" Your child \"understands and says\" a word on the list if they "
+"know what the word means AND they say it by themselves. Here are some "
+"examples. This assessment is for children of many ages. Your child may not "
+"be able to understand or say a lot of the words on the form. That is "
+"perfectly fine!"
+msgstr ""
+"בחלק זה תתבקשו לסמן אילו מילים ילדך \"מבין ואומר\".ילדך \"מבין ואומר\" מילה "
+"ברשימה אם הוא יודע מה משמעות המילה ואומר אותה באופן עצמאי. להלן מספר דוגמאות."
+"השאלון הזה מיועד לילדים בגילאים שונים. יכול להיות שילדך לא מבין או אומר הרבה "
+"מאוד מילים מתוך הרשימה.זה לגמרי בסדר! "
+
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:59
+#, fuzzy
+#| msgid "DO check the box if:"
+msgctxt "cat"
+msgid " 'DO check the box if:' "
+msgstr "סמן את התיבה אם:"
+
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:61
+#, fuzzy
+#| msgid ""
+#| "Your child says the word when trying to name an object or describe "
+#| "something that happened.  You think s/he has a meaning for that word."
+msgctxt "cat"
+msgid ""
+" 'Your child says the word when trying to name an object or describe "
+"something that happened.  You think s/he has a meaning for that word.' "
+msgstr "ילדך אומר את המילה כשהוא מנסה לתאר חפץ או אירוע שקרה."
+
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:80
+#, fuzzy
+#| msgid ""
+#| "It's fine if your child can't say the whole word or says it his/her own "
+#| "\"special\" way. If you use another word in your family (e.g., Nana for "
+#| "Grandma), that is ok too!"
+msgctxt "cat"
+msgid ""
+"It's fine if your child can't say the whole word or says it his/her own "
+"\"special\" way. If you use another word in your family (e.g., Nana for "
+"Grandma), that is ok too!"
+msgstr ""
+"זה בסדר אם ילדך לא אומר את המילה כולה, או אומר אותה בצורה משובשת. אם אתם "
+"משתמשים במילה אחרת במשפחה שלכם (למשל, \"צצי\" למוצץ) זה בסדר גמור!"
+
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:82
+#, fuzzy
+#| msgid "DO check the box."
+msgctxt "cat"
+msgid " 'DO check the box.' "
+msgstr "יש לסמן את התיבה."
+
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:100
+#, fuzzy
+#| msgid ""
+#| "DON'T check the box if your child is just stringing sounds together. This "
+#| "is not a real word that means something."
+msgctxt "cat"
+msgid ""
+"DON'T check the box if your child is just stringing sounds together. This is "
+"not a real word that means something."
+msgstr ""
+"אל תסמן את התיבה אם ילדך רק מצרף צלילים. זאת לא מילה אמיתית שיש לה משמעות."
+
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:117
+#, fuzzy
+#| msgid ""
+#| "DON'T ask your child to repeat the words on the list. This doesn't count!"
+msgctxt "cat"
+msgid ""
+"DON'T ask your child to repeat the words on the list. This doesn't count!"
+msgstr ""
+"אל תבקש מילדך לחזור אחריך ולהגיד את המילים ברשימה. זה לא נחשב שהוא אומר את "
+"המילה אם הוא מחקה אותך!"
+
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:124
+#, fuzzy
+#| msgid "Next"
+msgctxt "cat"
+msgid "Next"
+msgstr "הבא"
+
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:137
 #, python-format
+msgctxt "cat"
 msgid "%(words_shown)s of %(max_words)s (maximum) "
 msgstr ""
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:143
 #, fuzzy, python-format
 #| msgid "Does you child have siblings?"
+msgctxt "cat"
 msgid "Does your child say ... %(word)s?"
 msgstr "האם לילדך יש אחים?"
 
@@ -2338,6 +2420,14 @@ msgid ""
 "we appreciate your interest!"
 msgstr ""
 
+#: cdi_forms/templates/cdi_forms/single_reusable_link_inactive.html:44
+msgid ""
+"\n"
+"                Thank you for your interest in our research project on "
+"children’s language development. This study is now completed.\n"
+"                "
+msgstr ""
+
 #: cdi_forms/templates/cdi_forms/study_group.html:46
 msgid "How old is your child?"
 msgstr "בין כמה הילד/ה שלך?"
@@ -2362,35 +2452,25 @@ msgid ""
 msgstr ""
 
 #: cdi_forms/views/background_info_views.py:136
-#, fuzzy
-#| msgid ""
-#| "Your child should be between %(min_age)d to %(max_age)d months of age."
-msgid ""
-"Your child should be between {data[\"min_age\"]} to {data[\"max_age\"]} "
-"months of age."
-msgstr ""
-"לפי הרישומים שלנו הילד שלך אמור להיות בין גיל %(min_age)d לגיל %(max_age)d "
-"חודשים."
-
-#: cdi_forms/views/background_info_views.py:167
-#: cdi_forms/views/background_info_views.py:494
-#, python-format
-msgid " Not the right age? <a href='%(sgurl)s'> Click here</a>"
-msgstr "לא הגיל הנכון? <a href='%(sgurl)s'> לחץ כאן</a>"
-
-#: cdi_forms/views/background_info_views.py:177
-#: cdi_forms/views/background_info_views.py:504
-msgid ""
-" Not the right age? You should contact your researcher for steps on what to "
-"do next."
-msgstr "זה לא הגיל הנכון? נא לפנות לאיש הקשר שלך."
-
 #: cdi_forms/views/background_info_views.py:465
 #, python-format
 msgid "Your child should be between %(min_age)d to %(max_age)d months of age."
 msgstr ""
 "לפי הרישומים שלנו הילד שלך אמור להיות בין גיל %(min_age)d לגיל %(max_age)d "
 "חודשים."
+
+#: cdi_forms/views/background_info_views.py:168
+#: cdi_forms/views/background_info_views.py:494
+#, python-format
+msgid " Not the right age? <a href='%(sgurl)s'> Click here</a>"
+msgstr "לא הגיל הנכון? <a href='%(sgurl)s'> לחץ כאן</a>"
+
+#: cdi_forms/views/background_info_views.py:179
+#: cdi_forms/views/background_info_views.py:505
+msgid ""
+" Not the right age? You should contact your researcher for steps on what to "
+"do next."
+msgstr "זה לא הגיל הנכון? נא לפנות לאיש הקשר שלך."
 
 #: researcher_UI/admin/admin_actions.py:13
 #: researcher_UI/admin/admin_actions.py:41
@@ -2972,39 +3052,39 @@ msgstr ""
 msgid "Jackson-Maldonado et al. (2003)"
 msgstr ""
 
-#: webcdi/settings.py:241
+#: webcdi/settings.py:369
 msgid "English"
 msgstr ""
 
-#: webcdi/settings.py:242
+#: webcdi/settings.py:370
 msgid "Spanish"
 msgstr ""
 
-#: webcdi/settings.py:244
+#: webcdi/settings.py:372
 msgid "French Quebec"
 msgstr ""
 
-#: webcdi/settings.py:245
+#: webcdi/settings.py:373
 msgid "French French"
 msgstr ""
 
-#: webcdi/settings.py:246
+#: webcdi/settings.py:374
 msgid "Canadian English"
 msgstr ""
 
-#: webcdi/settings.py:247
+#: webcdi/settings.py:375
 msgid "Dutch"
 msgstr ""
 
-#: webcdi/settings.py:248
+#: webcdi/settings.py:376
 msgid "Hebrew"
 msgstr ""
 
-#: webcdi/settings.py:249
+#: webcdi/settings.py:377
 msgid "Korean"
 msgstr ""
 
-#: webcdi/settings.py:250
+#: webcdi/settings.py:378
 msgid "Japanese"
 msgstr ""
 
@@ -3021,8 +3101,6 @@ msgstr "החשבון שלך הופעל!"
 
 #: webcdi/templates/django_registration/activation_email_body.txt:2
 #: webcdi/templates/registration/acceptance_email.txt:2
-#: webcdi/templates/registration/registration_email.txt:2
-#: webcdi/templates/registration/rejection_email.txt:2
 #, python-format
 msgid "Dear %(user)s,"
 msgstr "יקר/ה,  %(user)s"
@@ -3096,19 +3174,17 @@ msgid "You have successfully filled out our registration form."
 msgstr "סיימת בהצלחה למלא את טופס ההרשמה"
 
 #: webcdi/templates/django_registration/registration_complete.html:14
-msgid ""
-"Thank you for registering for Web-CDI. An email was sent to the address you "
-"provided. Please click on the link in that email to complete your "
-"registration (please check you spam and junk email)"
-msgstr ""
+#, fuzzy
+#| msgid "Thank you for using Web-CDI!"
+msgid "Thank you for registering for Web-CDI. You can login."
+msgstr "תודה שהשתמשת ב Web-CDI!"
 
 #: webcdi/templates/django_registration/registration_form.html:4
 #: webcdi/templates/webcdi/signup.html:4
 msgid "Registration"
 msgstr "רישום"
 
-#: webcdi/templates/django_registration/registration_form.html:35
-#: webcdi/templates/registration/registration_form.html:29
+#: webcdi/templates/django_registration/registration_form.html:23
 #: webcdi/templates/webcdi/signup.html:35
 msgid "Register"
 msgstr "רישום"
@@ -3119,10 +3195,8 @@ msgid "Your registration at %(site_name)s was accepted by the Web-CDI Team."
 msgstr "ההרשמה שלך באתר %(site_name)s אושרה על ידי צוות Web-CDI."
 
 #: webcdi/templates/registration/acceptance_email.txt:6
-msgid ""
-"Please click the following url and set your account password to finish "
-"activation."
-msgstr "נא ללחוץ על הקישור להלן כדי להפעיל את החשבון. "
+msgid "Your registration is complete.  Please click the link below to login"
+msgstr ""
 
 #: webcdi/templates/registration/acceptance_email.txt:10
 #, python-format
@@ -3251,52 +3325,56 @@ msgstr ""
 msgid "Reset"
 msgstr ""
 
-#: webcdi/templates/registration/registration_closed.html:4
-#: webcdi/templates/registration/registration_closed.html:6
-msgid "Registration is closed"
-msgstr "טופס ההרשמה סגור"
+#, fuzzy
+#~| msgid ""
+#~| "Your child should be between %(min_age)d to %(max_age)d months of age."
+#~ msgid ""
+#~ "Your child should be between {data[\"min_age\"]} to {data[\"max_age\"]} "
+#~ "months of age."
+#~ msgstr ""
+#~ "לפי הרישומים שלנו הילד שלך אמור להיות בין גיל %(min_age)d לגיל "
+#~ "%(max_age)d חודשים."
 
-#: webcdi/templates/registration/registration_closed.html:10
-msgid "The registration is currently closed."
-msgstr "טופס ההרשמה סגור באופן זמני"
+#~ msgid ""
+#~ "Please click the following url and set your account password to finish "
+#~ "activation."
+#~ msgstr "נא ללחוץ על הקישור להלן כדי להפעיל את החשבון. "
 
-#: webcdi/templates/registration/registration_email.txt:3
-msgid "Your account application was completed successfully."
-msgstr "הבקשה שלך ליצירת חשבון הושלמה בהצלחה"
+#~ msgid "Registration is closed"
+#~ msgstr "טופס ההרשמה סגור"
 
-#: webcdi/templates/registration/registration_email.txt:5
-msgid "A member of the Web-CDI team will review your registration shortly."
-msgstr "חברי צוות שאלון Web-CDI יבדקו את הרישום שלך בהקדם"
+#~ msgid "The registration is currently closed."
+#~ msgstr "טופס ההרשמה סגור באופן זמני"
 
-#: webcdi/templates/registration/registration_email.txt:6
-msgid "You will receive an acceptance or rejection email within several days."
-msgstr "בעוד מספר ימים תקבל מייל ובו קבלה או דחייה של הבקשה"
+#~ msgid "Your account application was completed successfully."
+#~ msgstr "הבקשה שלך ליצירת חשבון הושלמה בהצלחה"
 
-#: webcdi/templates/registration/registration_email_subject.txt:2
+#~ msgid "A member of the Web-CDI team will review your registration shortly."
+#~ msgstr "חברי צוות שאלון Web-CDI יבדקו את הרישום שלך בהקדם"
+
+#~ msgid ""
+#~ "You will receive an acceptance or rejection email within several days."
+#~ msgstr "בעוד מספר ימים תקבל מייל ובו קבלה או דחייה של הבקשה"
+
 #, python-format
-msgid "Your registration was created -- %(site_name)s"
-msgstr "הרישום שלך נוצר %(site_name)s"
+#~ msgid "Your registration was created -- %(site_name)s"
+#~ msgstr "הרישום שלך נוצר %(site_name)s"
 
-#: webcdi/templates/registration/registration_form.html:8
-msgid "Please fill the following fields to create your registration"
-msgstr "נא למלא את השדות הבאים כדי להרשם"
+#~ msgid "Please fill the following fields to create your registration"
+#~ msgstr "נא למלא את השדות הבאים כדי להרשם"
 
-#: webcdi/templates/registration/rejection_email.txt:4
-msgid "Your account registration was rejected by the Web-CDI Team."
-msgstr "הרישום שלך נדחה על ידי צוות השאלון"
+#~ msgid "Your account registration was rejected by the Web-CDI Team."
+#~ msgstr "הרישום שלך נדחה על ידי צוות השאלון"
 
-#: webcdi/templates/registration/rejection_email.txt:7
-msgid "Your application was rejected due to:"
-msgstr "הסיבה לדחיית הרישום שלך היא:"
+#~ msgid "Your application was rejected due to:"
+#~ msgstr "הסיבה לדחיית הרישום שלך היא:"
 
-#: webcdi/templates/registration/rejection_email.txt:8
-msgid "Rejection reasons:"
-msgstr "סיבות הדחייה:"
+#~ msgid "Rejection reasons:"
+#~ msgstr "סיבות הדחייה:"
 
-#: webcdi/templates/registration/rejection_email_subject.txt:2
 #, python-format
-msgid "Your registration was rejected -- %(site_name)s"
-msgstr "הרישום שלך נדחה %(site_name)s"
+#~ msgid "Your registration was rejected -- %(site_name)s"
+#~ msgstr "הרישום שלך נדחה %(site_name)s"
 
 #, python-format
 #~ msgid "Your registration of %(site_name)s was accepted by inspector."
