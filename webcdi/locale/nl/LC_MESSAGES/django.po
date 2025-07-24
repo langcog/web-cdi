@@ -2164,15 +2164,15 @@ msgid ""
 "In this survey, we ask you about words that your child “says” in English."
 msgstr ""
 "In deze vragenlijst vragen we u naar woorden die uw kind in het Nederlands "
-"“zegt”."
+"begrijpt en zegt."
 
 #: cdi_forms/templates/cdi_forms/background_info.html:27
 msgid ""
 "Try to complete the survey when you have a few quiet minutes, without "
 "interruptions. An example might be when your child is sleeping."
 msgstr ""
-"Probeer de vragenlijst in te vullen op een rustig moment, zonder "
-"onderbrekingen. Bijvoorbeeld wanneer uw kind slaapt."
+"Voordat we u uitgebreidere uitleg geven over het invullen van de "
+"vragenlijst, willen we u eerst een paar algemene vragen stellen."
 
 #: cdi_forms/templates/cdi_forms/background_info.html:28
 msgid ""
@@ -2180,17 +2180,15 @@ msgid ""
 "do (e.g., “raff” instead of “giraffe”).  And there might be some words in "
 "your family that you use instead (e.g., “nana” for “grandma”)."
 msgstr ""
-"Geen zorgen! Het is niet nodig dat uw kind de woorden precies zo uitspreekt "
-"als u (bijvoorbeeld “raaf” in plaats van “giraffe”). Het kan ook zijn dat "
-"jullie thuis andere woorden gebruiken (zoals “nana” voor “oma”)."
+"Klik op de knop 'Volgende' onderaan de pagina zodra u klaar bent met het "
+"invullen van deze algemene vragen."
 
 #: cdi_forms/templates/cdi_forms/background_info.html:29
 msgid ""
 "Remember, these words are just some of the words that a child might say, so "
 "it is ok if they do not say all of them!"
 msgstr ""
-"Bedenk dat dit slechts een aantal woorden zijn die kinderen kunnen zeggen. "
-"Het is dus helemaal niet erg als uw kind (nog) niet alle woorden zegt!"
+"<span></span>"
 
 #: cdi_forms/templates/cdi_forms/background_info.html:32
 #: cdi_forms/templates/cdi_forms/study_group.html:22
@@ -2319,23 +2317,29 @@ msgstr ""
 "Deze vragenlijst gaat over taal. Wat begrijpt en zegt uw kind? Dat kunnen "
 "woorden zijn, of groepjes woorden, of een zin. We vragen steeds of uw kind "
 "iets begrijpt en zegt. Dan kiest u “Ja”. U kiest “Nee” als uw kind een woord "
-"nog niet kent. Hieronder helpen we u om te kiezen."
+"nog niet kent. Hieronder helpen we u om te kiezen. Deze vragenlijst is voor "
+"kinderen van verschillende leeftijden. Het kan zijn dat uw kind niet veel "
+"woorden van de vragenlijst begrijpt en zegt. Dat is helemaal prima! <br/><br/>"
+"U kiest “Ja” als uw kind weet wat het woord betekent EN als hij of zij het "
+"zelf kan zeggen. U kiest “Nee” als uw kind een woord niet kent, dus als uw "
+"kind het woord niet begrijpt en zegt. We geven hieronder vier voorbeelden."
+
 
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:59
 msgctxt "cat"
 msgid " 'DO check the box if:' "
-msgstr "U kiest “Ja” als uw kind weet wat het woord betekent EN als hij of zij het "
-"zelf kan zeggen. Hieronder staan twee voorbeelden."
+msgstr ""
+"1. Uw kind probeert te zeggen wat iets is, of te zeggen wat er gebeurt. "
+"U denkt dat uw kind de betekenis kent van wat hij of zij zegt. "
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:61
 msgctxt "cat"
 msgid ""
 " 'Your child says the word when trying to name an object or describe "
 "something that happened.  You think s/he has a meaning for that word.' "
-msgstr ""
-"1. Uw kind probeert te zeggen wat iets is, of te zeggen wat er gebeurt. "
-"U denkt dat uw kind de betekenis kent van wat hij of zij zegt. "
+msgstr "<span></span>"
+
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:80
 msgctxt "cat"
@@ -2345,14 +2349,13 @@ msgid ""
 "Grandma), that is ok too!"
 msgstr ""
 "2. Het is ook goed als uw kind niet het hele woord kan zeggen, "
-"bijvoorbeeld “raf” in plaats van “giraffe”. Als u een ander woord "
-"gebruikt in uw familie (zoals “omi” in plaats van “oma”) mag u "
-"ook “Ja” kiezen."
+"bijvoorbeeld “raf” in plaats van “giraffe”. Als u een ander woord gebruikt "
+"in uw familie (zoals “omi” in plaats van “oma”) mag u ook “Ja” kiezen."
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:82
 msgctxt "cat"
 msgid " 'DO check the box.' "
-msgstr " <br/>"
+msgstr " <span></span>"
 
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:100
@@ -2361,21 +2364,16 @@ msgid ""
 "DON'T check the box if your child is just stringing sounds together. This is "
 "not a real word that means something."
 msgstr ""
-"U kiest “Nee” als uw kind een woord niet kent, dus als uw kind het woord "
-"niet begrijpt en zegt. We geven hieronder twee voorbeelden.<br/><br/>"
-"1. Uw kind maakt alleen maar geluiden die niets te maken hebben met het "
-"woord. Dat geluid is dan geen echt woord met een betekenis."
+"3. Uw kind maakt alleen maar geluiden die niets te maken hebben met het woord. "
+"Dat geluid is dan geen echt woord met een betekenis."
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:117
 msgctxt "cat"
 msgid ""
 "DON'T ask your child to repeat the words on the list. This doesn't count!"
 msgstr ""
-"2. Uw kind zegt een woord alleen als u uw kind vraagt om een woord te "
-"herhalen, maar nooit zelf. Dit telt niet mee!<br/><br/>"
-"Deze vragenlijst is voor kinderen van verschillende leeftijden. Het kan "
-"zijn dat uw kind niet veel woorden van de vragenlijst begrijpt en zegt. "
-"Dat is helemaal prima!"
+"4. Uw kind zegt een woord alleen als u uw kind vraagt om een woord te herhalen, "
+"maar nooit zelf. Dit telt niet mee! "
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:124
 msgctxt "cat"
