@@ -2179,7 +2179,7 @@ msgid ""
 "do (e.g., “raff” instead of “giraffe”).  And there might be some words in "
 "your family that you use instead (e.g., “nana” for “grandma”)."
 msgstr ""
-"Vervolgens krijgt u een korte toelichting over het invullen van de vragenlijst."
+"Vervolgens krijgt u een korte instructie over het invullen van de vragenlijst."
 
 #: cdi_forms/templates/cdi_forms/background_info.html:29
 msgid ""
