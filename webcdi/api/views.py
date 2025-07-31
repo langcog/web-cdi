@@ -215,12 +215,14 @@ class SourceAPI(BaseAPIView):
         study = Study.objects.get(pk=kwargs.pop("pk"))
         if "event_id" in kwargs:
             administrations = Administration.objects.filter(
+                study=study,
                 backgroundinfo__in=BackgroundInfo.objects.filter(
                     event_id=kwargs.pop("event_id"), source_id=kwargs.pop("source_id")
                 )
             )
         else:
             administrations = Administration.objects.filter(
+                study=study,
                 backgroundinfo__in=BackgroundInfo.objects.filter(
                     source_id=kwargs.pop("source_id")
                 )
