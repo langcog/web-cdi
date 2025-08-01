@@ -22,14 +22,8 @@ from .utils import string_bool_coerce
 # Get an instance of a logger
 logger = logging.getLogger("debug")
 
-CAT_LANG_DICT = {
-    "en": "EN",
-    "es": "SP",
-    "fr": "FR",
-    "fr-ca": "FR",
-    "en-ca": "EN",
-    "ja": "JP",
-}
+CAT_LANG_DICT = settings.CAT_LANG_DICT
+
 
 # Create your views here.
 

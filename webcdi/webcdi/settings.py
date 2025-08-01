@@ -548,3 +548,13 @@ if TRUSTED_ORIGINS:
         CSRF_TRUSTED_ORIGINS = ast.literal_eval(CSRF_TRUSTED_ORIGINS)
     else:
         CSRF_TRUSTED_ORIGINS = ast.literal_eval(os.environ["TRUSTED_ORIGINS"])
+
+CAT_LANG_DICT = {
+    "en": "EN",
+    "es": "SP",
+    "fr": "FR",
+    "fr-ca": "FR",
+    "en-ca": "EN",
+    "ja": "JP",
+    "nl": "NL"
+}

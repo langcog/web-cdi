@@ -43,12 +43,12 @@
     <!-- Instructions given to parents based on form. Includes photos. -->
     <div id = "intro_part1" class = "page_div collapse">
         <p class="lead" id="intro_text">
-            {% blocktrans %}In this section, you will be asked about words that your child "understands and says." Your child "understands and says" a word on the list if they know what the word means AND they say it by themselves. Here are some examples. This assessment is for children of many ages. Your child may not be able to understand or say a lot of the words on the form. That is perfectly fine!{% endblocktrans %}
+            {% blocktrans context "cat" %}In this section, you will be asked about words that your child "understands and says." Your child "understands and says" a word on the list if they know what the word means AND they say it by themselves. Here are some examples. This assessment is for children of many ages. Your child may not be able to understand or say a lot of the words on the form. That is perfectly fine!{% endblocktrans %}
         </p>
 
         <div class="row">
             <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
-                {% with 'images/'|add:language_code|add:'_says-yes-ball_WS.png' as image_static %}
+                {% with 'images/'|add:language_code|add:'_says-yes-ball_CAT.png' as image_static %}
                     <img src="{% static image_static %}" class="rounded mx-auto d-block" alt="Having your child say the word in the presence of the object can mean that your child understands and says the word." style="max-width: 90%; border: 1px solid black;">
                 {% endwith %}
 
@@ -56,9 +56,9 @@
 
             <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
                 <h4>
-                {% trans 'DO check the box if:' %}
+                {% blocktrans context "cat" %} 'DO check the box if:' {% endblocktrans %}
                 <br><br>
-                {% trans 'Your child says the word when trying to name an object or describe something that happened.  You think s/he has a meaning for that word.' %}
+                {% blocktrans context "cat" %} 'Your child says the word when trying to name an object or describe something that happened.  You think s/he has a meaning for that word.' {% endblocktrans %}
                 </h4>
 
 
@@ -77,9 +77,9 @@
 
             <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
                 <h4>
-                {% blocktrans %}It's fine if your child can't say the whole word or says it his/her own "special" way. If you use another word in your family (e.g., Nana for Grandma), that is ok too!{% endblocktrans %}
+                {% blocktrans context "cat" %}It's fine if your child can't say the whole word or says it his/her own "special" way. If you use another word in your family (e.g., Nana for Grandma), that is ok too!{% endblocktrans %}
                 <br><br>
-                {% trans 'DO check the box.' %}
+                {% blocktrans context "cat" %} 'DO check the box.' {% endblocktrans %}
                 </h4>
 
 
@@ -97,7 +97,7 @@
 
             <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
                 <h4>
-                {% blocktrans %}DON'T check the box if your child is just stringing sounds together. This is not a real word that means something.{% endblocktrans %}
+                {% blocktrans context "cat"%}DON'T check the box if your child is just stringing sounds together. This is not a real word that means something.{% endblocktrans %}
                 </h4>
 
             </div>
@@ -114,14 +114,14 @@
 
             <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
                 <h4>
-                {% blocktrans %}DON'T ask your child to repeat the words on the list. This doesn't count!{% endblocktrans %}
+                {% blocktrans context "cat"%}DON'T ask your child to repeat the words on the list. This doesn't count!{% endblocktrans %}
                 </h4>
             </div>
         </div>
 
         <div class="row">
             <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
-            <a id="next_button" class="btn btn-primary" value="Next">{% blocktrans %}Next{% endblocktrans %}</a>
+            <a id="next_button" class="btn btn-primary" value="Next">{% blocktrans context "cat"%}Next{% endblocktrans %}</a>
         </div>
 
 
@@ -134,13 +134,13 @@
         <div class="row pt10vh">
             <div class="progress" style="width:100%">
                 <div class="progress-bar" role="progressbar" aria-valuenow="{{ words_shown|div:max_words }}" aria-valuemin="0" aria-valuemax="100" style="width:{{ words_shown|div:max_words }}%"></div>                   
-                <div class="progress-bar-title">{% blocktrans %}{{ words_shown }} of {{ max_words }} (maximum) {% endblocktrans %}</div>
+                <div class="progress-bar-title">{% blocktrans context "cat"%}{{ words_shown }} of {{ max_words }} (maximum) {% endblocktrans %}</div>
             </div> 
         </div>
         <div class="row pt10vh">
             <div class="col-12 center">
                 {% with form.item.label as word %}
-                <h1>{% blocktrans %}Does your child say ... {{ word }}?{% endblocktrans %}</h1>
+                <h1>{% blocktrans context "cat"%}Does your child say ... {{ word }}?{% endblocktrans %}</h1>
                 {% endwith %}
                 {{ form.word_id }}
                 {{ form.label }}

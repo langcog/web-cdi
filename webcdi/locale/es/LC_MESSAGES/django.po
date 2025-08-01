@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-10 11:03+0000\n"
+"POT-Creation-Date: 2025-07-23 13:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1753,6 +1753,7 @@ msgstr ""
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html:31
 #: cdi_forms/templates/cdi_forms/expired.html:32
 #: cdi_forms/templates/cdi_forms/overflow.html:37
+#: cdi_forms/templates/cdi_forms/single_reusable_link_inactive.html:37
 #: cdi_forms/templates/cdi_forms/study_overflow.html:37
 msgid "MB-CDI Lab Logo"
 msgstr "Logotipo del Inventario"
@@ -1777,14 +1778,14 @@ msgstr ""
 "¡Gracias por completar! Revise sus respuestas y, si está listo/a, presione "
 "\"enviar.\""
 
-#: cdi_forms/templates/cdi_forms/administration_form.html:265
+#: cdi_forms/templates/cdi_forms/administration_form.html:267
 #: cdi_forms/templates/cdi_forms/cdi_form.html:381
 msgid ""
 "Are you ready to submit? You cannot change your answers after submission."
 msgstr ""
 "¿Está listo para enviar? No puede cambiar sus respuestas después de envío"
 
-#: cdi_forms/templates/cdi_forms/administration_form.html:297
+#: cdi_forms/templates/cdi_forms/administration_form.html:299
 #: cdi_forms/templates/cdi_forms/cdi_form.html:411
 msgid "understands and says"
 msgstr "comp. y dice"
@@ -1900,7 +1901,6 @@ msgstr "NO marque \"comprende y dice\""
 
 #: cdi_forms/templates/cdi_forms/administration_instructions.html:134
 #: cdi_forms/templates/cdi_forms/administration_instructions.html:209
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:117
 #: cdi_forms/templates/cdi_forms/cdi_form.html:174
 #: cdi_forms/templates/cdi_forms/cdi_form.html:261
 msgid ""
@@ -1910,7 +1910,6 @@ msgstr ""
 "cuenta!"
 
 #: cdi_forms/templates/cdi_forms/administration_instructions.html:144
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:46
 #: cdi_forms/templates/cdi_forms/cdi_form.html:192
 msgid ""
 "In this section, you will be asked about words that your child \"understands "
@@ -1928,13 +1927,11 @@ msgstr ""
 "cuestionario y eso está bien!"
 
 #: cdi_forms/templates/cdi_forms/administration_instructions.html:157
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:59
 #: cdi_forms/templates/cdi_forms/cdi_form.html:206
 msgid "DO check the box if:"
 msgstr "Marque la caja si:"
 
 #: cdi_forms/templates/cdi_forms/administration_instructions.html:159
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:61
 #: cdi_forms/templates/cdi_forms/cdi_form.html:208
 msgid ""
 "Your child says the word when trying to name an object or describe something "
@@ -1945,7 +1942,6 @@ msgstr ""
 "frase."
 
 #: cdi_forms/templates/cdi_forms/administration_instructions.html:175
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:80
 #: cdi_forms/templates/cdi_forms/cdi_form.html:226
 msgid ""
 "It's fine if your child can't say the whole word or says it his/her own "
@@ -1957,13 +1953,11 @@ msgstr ""
 "\"hermana\", eso también cuenta."
 
 #: cdi_forms/templates/cdi_forms/administration_instructions.html:177
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:82
 #: cdi_forms/templates/cdi_forms/cdi_form.html:228
 msgid "DO check the box."
 msgstr "Marque la caja"
 
 #: cdi_forms/templates/cdi_forms/administration_instructions.html:194
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:100
 #: cdi_forms/templates/cdi_forms/cdi_form.html:245
 msgid ""
 "DON'T check the box if your child is just stringing sounds together. This is "
@@ -2006,6 +2000,7 @@ msgstr "Comprensión de Palabras (%%)"
 
 #: cdi_forms/templates/cdi_forms/administration_summary.html:168
 #: cdi_forms/templates/cdi_forms/overflow.html:40
+#: cdi_forms/templates/cdi_forms/single_reusable_link_inactive.html:40
 #: cdi_forms/templates/cdi_forms/study_overflow.html:40
 msgid "Thank you!"
 msgstr "¡Gracias!"
@@ -2100,20 +2095,26 @@ msgstr ""
 "href=\"%(legal_url)s\" target=\"_blank\">%(legal_url)s</a>."
 
 #: cdi_forms/templates/cdi_forms/administration_summary.html:195
+#, fuzzy
+#| msgid ""
+#| "Thank you for participating in our Web-CDI project! It is our pleasure to "
+#| "send you this Amazon.com Gift Card that can be redeemed towards millions "
+#| "of items at <a href=\"http://www.amazon.com\" target=\"_blank\">www."
+#| "amazon.com</a>. You may want to print this screen for easy reference "
+#| "later--you’ll need the gift card claim code below."
 msgid ""
 "Thank you for participating in our Web-CDI project! It is our pleasure to "
-"send you this "
+"send you this Tango Choice Card that can be redeemed for a gift card from "
+"your choice of hundreds of stores! Just click below and you will be taken to "
+"the Tango site. You may want to print this screen for easy reference later--"
+"you’ll need the gift card claim code below. "
 msgstr ""
-
-#: cdi_forms/templates/cdi_forms/administration_summary.html:195
-msgid " Gift Card that can be redeemed towards millions of items at "
-msgstr ""
-
-#: cdi_forms/templates/cdi_forms/administration_summary.html:195
-msgid ""
-"You may want to print this screen for easy reference later--you’ll need the "
-"gift card claim code below."
-msgstr ""
+"¡Gracias por participar en la participación de nuestro proyecto Web-CDI! Es "
+"un placer enviarle esta Amazon.com Tarjeta de Regalo que puede canjearse por "
+"millones de artículos en <a href=\"http://www.amazon.com\" "
+"target=\"_blank\">www.amazon.com</a>. Es posible que desee imprimir esta "
+"pantalla para una fácil referencia más adelante; necesitará el código de "
+"reclamo de la tarjeta de regalo a continuación."
 
 #: cdi_forms/templates/cdi_forms/administration_summary.html:198
 msgid "To redeem your gift card, visit "
@@ -2180,9 +2181,8 @@ msgstr "La palabra más difícil que mi niño(a) entiende es INSERTWORDHERE"
 
 #: cdi_forms/templates/cdi_forms/background_info.html:7
 #: cdi_forms/templates/cdi_forms/background_info.html:72
-#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:124
 #: cdi_forms/templates/cdi_forms/study_group.html:7
-#: cdi_forms/views/background_info_views.py:324
+#: cdi_forms/views/background_info_views.py:326
 msgid "Next"
 msgstr "Siguiente"
 
@@ -2298,7 +2298,7 @@ msgstr "Informe Historial"
 
 #: cdi_forms/templates/cdi_forms/backpage_info.html:12
 #: cdi_forms/templates/cdi_forms/backpage_info.html:45
-#: cdi_forms/views/background_info_views.py:336
+#: cdi_forms/views/background_info_views.py:338
 msgid "Finish"
 msgstr "Terminar"
 
@@ -2346,13 +2346,116 @@ msgstr ""
 "puede obtener más información sobre el Inventario <a href=\"http://mb-cdi."
 "stanford.edu/\" target=\"_blank\">aquí</a>. ¡Apreciamos su contribución!"
 
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:46
+#, fuzzy
+#| msgid ""
+#| "In this section, you will be asked about words that your child "
+#| "\"understands and says.\" Your child \"understands and says\" a word on "
+#| "the list if they know what the word means AND they say it by themselves. "
+#| "Here are some examples. This assessment is for children of many ages. "
+#| "Your child may not be able to understand or say a lot of the words on the "
+#| "form. That is perfectly fine!"
+msgctxt "cat"
+msgid ""
+"In this section, you will be asked about words that your child \"understands "
+"and says.\" Your child \"understands and says\" a word on the list if they "
+"know what the word means AND they say it by themselves. Here are some "
+"examples. This assessment is for children of many ages. Your child may not "
+"be able to understand or say a lot of the words on the form. That is "
+"perfectly fine!"
+msgstr ""
+"En esta sección, se les preguntará cuáles frases y palabras su niño/a "
+"\"comprende Y dice\". Su niño/a \"comprende y dice\" una palabra o frase en "
+"esta lista si lo puede decir solito/a y también sabe lo que significa la "
+"palabra o frase. Este cuestionario es para niños de varias edades. ¡Puede "
+"ser que su niño/a todavía no comprende o dice muchas de las palabras en este "
+"cuestionario y eso está bien!"
+
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:59
+#, fuzzy
+#| msgid "DO check the box if:"
+msgctxt "cat"
+msgid " 'DO check the box if:' "
+msgstr "Marque la caja si:"
+
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:61
+#, fuzzy
+#| msgid ""
+#| "Your child says the word when trying to name an object or describe "
+#| "something that happened.  You think s/he has a meaning for that word."
+msgctxt "cat"
+msgid ""
+" 'Your child says the word when trying to name an object or describe "
+"something that happened.  You think s/he has a meaning for that word.' "
+msgstr ""
+"Su niño/a dice una palabra/frase cuando quiere nombrar un objeto o decriber "
+"algo que paso.  Usted cree que él/ella tiene un significado para esa palabra/"
+"frase."
+
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:80
+#, fuzzy
+#| msgid ""
+#| "It's fine if your child can't say the whole word or says it his/her own "
+#| "\"special\" way. If you use another word in your family (e.g., Nana for "
+#| "Grandma), that is ok too!"
+msgctxt "cat"
+msgid ""
+"It's fine if your child can't say the whole word or says it his/her own "
+"\"special\" way. If you use another word in your family (e.g., Nana for "
+"Grandma), that is ok too!"
+msgstr ""
+"También cuenta si su niño/a no puede decir la palabra completa o lo dice a "
+"su manera. Si usen otro nombre en su familia, por ejemplo \"nana\" en vez de "
+"\"hermana\", eso también cuenta."
+
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:82
+#, fuzzy
+#| msgid "DO check the box."
+msgctxt "cat"
+msgid " 'DO check the box.' "
+msgstr "Marque la caja"
+
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:100
+#, fuzzy
+#| msgid ""
+#| "DON'T check the box if your child is just stringing sounds together. This "
+#| "is not a real word that means something."
+msgctxt "cat"
+msgid ""
+"DON'T check the box if your child is just stringing sounds together. This is "
+"not a real word that means something."
+msgstr ""
+"NO marque la caja si su niño/a está repitiendo sonidos similares. Esto no es "
+"una palabra real que significa algo."
+
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:117
+#, fuzzy
+#| msgid ""
+#| "DON'T ask your child to repeat the words on the list. This doesn't count!"
+msgctxt "cat"
+msgid ""
+"DON'T ask your child to repeat the words on the list. This doesn't count!"
+msgstr ""
+"No le pida a su niño/a que repita las palabras de este cuestionario. ¡Eso no "
+"cuenta!"
+
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:124
+#, fuzzy
+#| msgid "Next"
+msgctxt "cat"
+msgid "Next"
+msgstr "Siguiente"
+
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:137
 #, python-format
+msgctxt "cat"
 msgid "%(words_shown)s of %(max_words)s (maximum) "
 msgstr ""
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:143
-#, python-format
+#, fuzzy, python-format
+#| msgid "Does your child say ... %(word)s?"
+msgctxt "cat"
 msgid "Does your child say ... %(word)s?"
 msgstr "¿Su hijo/a dice ... %(word)s?"
 
@@ -2410,6 +2513,14 @@ msgstr ""
 "stanford.edu/\" target=\"_blank\">aquí</a>. Nuevamente, apreciamos su "
 "interés!"
 
+#: cdi_forms/templates/cdi_forms/single_reusable_link_inactive.html:44
+msgid ""
+"\n"
+"                Thank you for your interest in our research project on "
+"children’s language development. This study is now completed.\n"
+"                "
+msgstr ""
+
 #: cdi_forms/templates/cdi_forms/study_group.html:46
 msgid "How old is your child?"
 msgstr "¿Cuántos años su niño(a) tiene?"
@@ -2434,33 +2545,25 @@ msgid ""
 msgstr ""
 
 #: cdi_forms/views/background_info_views.py:136
-#, fuzzy
-#| msgid ""
-#| "Your child should be between %(min_age)d to %(max_age)d months of age."
-msgid ""
-"Your child should be between {data[\"min_age\"]} to {data[\"max_age\"]} "
-"months of age."
+#: cdi_forms/views/background_info_views.py:465
+#, python-format
+msgid "Your child should be between %(min_age)d to %(max_age)d months of age."
 msgstr "Su niño(a) debe estar entre %(min_age)d y %(max_age)d meses de edad."
 
-#: cdi_forms/views/background_info_views.py:167
+#: cdi_forms/views/background_info_views.py:168
 #: cdi_forms/views/background_info_views.py:494
 #, python-format
 msgid " Not the right age? <a href='%(sgurl)s'> Click here</a>"
 msgstr " ¿No la edad apropiada? <a href='%(sgurl)s'> Haga click aquí</a>"
 
-#: cdi_forms/views/background_info_views.py:177
-#: cdi_forms/views/background_info_views.py:504
+#: cdi_forms/views/background_info_views.py:179
+#: cdi_forms/views/background_info_views.py:505
 msgid ""
 " Not the right age? You should contact your researcher for steps on what to "
 "do next."
 msgstr ""
 " ¿No es de la edad correcta? Contacte a un investigador para instrucciones "
 "sobre el próximo paso."
-
-#: cdi_forms/views/background_info_views.py:465
-#, python-format
-msgid "Your child should be between %(min_age)d to %(max_age)d months of age."
-msgstr "Su niño(a) debe estar entre %(min_age)d y %(max_age)d meses de edad."
 
 #: researcher_UI/admin/admin_actions.py:13
 #: researcher_UI/admin/admin_actions.py:41
@@ -3042,41 +3145,41 @@ msgstr ""
 msgid "Jackson-Maldonado et al. (2003)"
 msgstr ""
 
-#: webcdi/settings.py:241
+#: webcdi/settings.py:369
 msgid "English"
 msgstr "inglés"
 
-#: webcdi/settings.py:242
+#: webcdi/settings.py:370
 msgid "Spanish"
 msgstr "español"
 
-#: webcdi/settings.py:244
+#: webcdi/settings.py:372
 msgid "French Quebec"
 msgstr "francés"
 
-#: webcdi/settings.py:245
+#: webcdi/settings.py:373
 #, fuzzy
 #| msgid "French Quebec"
 msgid "French French"
 msgstr "francés"
 
-#: webcdi/settings.py:246
+#: webcdi/settings.py:374
 msgid "Canadian English"
 msgstr "inglés"
 
-#: webcdi/settings.py:247
+#: webcdi/settings.py:375
 msgid "Dutch"
 msgstr ""
 
-#: webcdi/settings.py:248
+#: webcdi/settings.py:376
 msgid "Hebrew"
 msgstr ""
 
-#: webcdi/settings.py:249
+#: webcdi/settings.py:377
 msgid "Korean"
 msgstr ""
 
-#: webcdi/settings.py:250
+#: webcdi/settings.py:378
 msgid "Japanese"
 msgstr ""
 
@@ -3093,8 +3196,6 @@ msgstr ""
 
 #: webcdi/templates/django_registration/activation_email_body.txt:2
 #: webcdi/templates/registration/acceptance_email.txt:2
-#: webcdi/templates/registration/registration_email.txt:2
-#: webcdi/templates/registration/rejection_email.txt:2
 #, python-format
 msgid "Dear %(user)s,"
 msgstr ""
@@ -3166,10 +3267,7 @@ msgid "You have successfully filled out our registration form."
 msgstr ""
 
 #: webcdi/templates/django_registration/registration_complete.html:14
-msgid ""
-"Thank you for registering for Web-CDI. An email was sent to the address you "
-"provided. Please click on the link in that email to complete your "
-"registration (please check you spam and junk email)"
+msgid "Thank you for registering for Web-CDI. You can login."
 msgstr ""
 
 #: webcdi/templates/django_registration/registration_form.html:4
@@ -3177,8 +3275,7 @@ msgstr ""
 msgid "Registration"
 msgstr ""
 
-#: webcdi/templates/django_registration/registration_form.html:35
-#: webcdi/templates/registration/registration_form.html:29
+#: webcdi/templates/django_registration/registration_form.html:23
 #: webcdi/templates/webcdi/signup.html:35
 msgid "Register"
 msgstr ""
@@ -3189,9 +3286,7 @@ msgid "Your registration at %(site_name)s was accepted by the Web-CDI Team."
 msgstr ""
 
 #: webcdi/templates/registration/acceptance_email.txt:6
-msgid ""
-"Please click the following url and set your account password to finish "
-"activation."
+msgid "Your registration is complete.  Please click the link below to login"
 msgstr ""
 
 #: webcdi/templates/registration/acceptance_email.txt:10
@@ -3311,52 +3406,14 @@ msgstr ""
 msgid "Reset"
 msgstr ""
 
-#: webcdi/templates/registration/registration_closed.html:4
-#: webcdi/templates/registration/registration_closed.html:6
-msgid "Registration is closed"
-msgstr ""
-
-#: webcdi/templates/registration/registration_closed.html:10
-msgid "The registration is currently closed."
-msgstr ""
-
-#: webcdi/templates/registration/registration_email.txt:3
-msgid "Your account application was completed successfully."
-msgstr ""
-
-#: webcdi/templates/registration/registration_email.txt:5
-msgid "A member of the Web-CDI team will review your registration shortly."
-msgstr ""
-
-#: webcdi/templates/registration/registration_email.txt:6
-msgid "You will receive an acceptance or rejection email within several days."
-msgstr ""
-
-#: webcdi/templates/registration/registration_email_subject.txt:2
-#, python-format
-msgid "Your registration was created -- %(site_name)s"
-msgstr ""
-
-#: webcdi/templates/registration/registration_form.html:8
-msgid "Please fill the following fields to create your registration"
-msgstr ""
-
-#: webcdi/templates/registration/rejection_email.txt:4
-msgid "Your account registration was rejected by the Web-CDI Team."
-msgstr ""
-
-#: webcdi/templates/registration/rejection_email.txt:7
-msgid "Your application was rejected due to:"
-msgstr ""
-
-#: webcdi/templates/registration/rejection_email.txt:8
-msgid "Rejection reasons:"
-msgstr ""
-
-#: webcdi/templates/registration/rejection_email_subject.txt:2
-#, python-format
-msgid "Your registration was rejected -- %(site_name)s"
-msgstr ""
+#, fuzzy
+#~| msgid ""
+#~| "Your child should be between %(min_age)d to %(max_age)d months of age."
+#~ msgid ""
+#~ "Your child should be between {data[\"min_age\"]} to {data[\"max_age\"]} "
+#~ "months of age."
+#~ msgstr ""
+#~ "Su niño(a) debe estar entre %(min_age)d y %(max_age)d meses de edad."
 
 #~ msgid ""
 #~ "My baby speaks LANGUAGE and is between MIN_AGE and MAX_AGE months old. "

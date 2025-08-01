@@ -18,7 +18,7 @@ docker-db-populate:
 	docker-compose exec -it web ./manage.py 06_populate_items
 	
 docker-test:
-	docker-compose exec web coverage run manage.py test --exclude=selenium --exclude=cat
+	docker-compose exec web coverage run manage.py test --exclude=selenium
 
 docker-score:
 	docker-compose exec web ./manage.py crontab_scoring
