@@ -2347,14 +2347,6 @@ msgstr ""
 "stanford.edu/\" target=\"_blank\">aquí</a>. ¡Apreciamos su contribución!"
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:46
-#, fuzzy
-#| msgid ""
-#| "In this section, you will be asked about words that your child "
-#| "\"understands and says.\" Your child \"understands and says\" a word on "
-#| "the list if they know what the word means AND they say it by themselves. "
-#| "Here are some examples. This assessment is for children of many ages. "
-#| "Your child may not be able to understand or say a lot of the words on the "
-#| "form. That is perfectly fine!"
 msgctxt "cat"
 msgid ""
 "In this section, you will be asked about words that your child \"understands "
@@ -2372,17 +2364,11 @@ msgstr ""
 "cuestionario y eso está bien!"
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:59
-#, fuzzy
-#| msgid "DO check the box if:"
 msgctxt "cat"
 msgid " 'DO check the box if:' "
 msgstr "Marque la caja si:"
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:61
-#, fuzzy
-#| msgid ""
-#| "Your child says the word when trying to name an object or describe "
-#| "something that happened.  You think s/he has a meaning for that word."
 msgctxt "cat"
 msgid ""
 " 'Your child says the word when trying to name an object or describe "
@@ -2393,11 +2379,6 @@ msgstr ""
 "frase."
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:80
-#, fuzzy
-#| msgid ""
-#| "It's fine if your child can't say the whole word or says it his/her own "
-#| "\"special\" way. If you use another word in your family (e.g., Nana for "
-#| "Grandma), that is ok too!"
 msgctxt "cat"
 msgid ""
 "It's fine if your child can't say the whole word or says it his/her own "
@@ -2409,17 +2390,11 @@ msgstr ""
 "\"hermana\", eso también cuenta."
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:82
-#, fuzzy
-#| msgid "DO check the box."
 msgctxt "cat"
 msgid " 'DO check the box.' "
 msgstr "Marque la caja"
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:100
-#, fuzzy
-#| msgid ""
-#| "DON'T check the box if your child is just stringing sounds together. This "
-#| "is not a real word that means something."
 msgctxt "cat"
 msgid ""
 "DON'T check the box if your child is just stringing sounds together. This is "
@@ -2429,9 +2404,6 @@ msgstr ""
 "una palabra real que significa algo."
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:117
-#, fuzzy
-#| msgid ""
-#| "DON'T ask your child to repeat the words on the list. This doesn't count!"
 msgctxt "cat"
 msgid ""
 "DON'T ask your child to repeat the words on the list. This doesn't count!"
@@ -2440,8 +2412,6 @@ msgstr ""
 "cuenta!"
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:124
-#, fuzzy
-#| msgid "Next"
 msgctxt "cat"
 msgid "Next"
 msgstr "Siguiente"
@@ -2453,8 +2423,6 @@ msgid "%(words_shown)s of %(max_words)s (maximum) "
 msgstr ""
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:143
-#, fuzzy, python-format
-#| msgid "Does your child say ... %(word)s?"
 msgctxt "cat"
 msgid "Does your child say ... %(word)s?"
 msgstr "¿Su hijo/a dice ... %(word)s?"
