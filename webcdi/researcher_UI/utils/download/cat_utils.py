@@ -55,13 +55,13 @@ def get_pd_norms(study_obj, administrations, adjusted, answer_rows):
                 row["Benchmarking Cohort Age"] = age
                 if answer["est_theta"]:
                     if answer["est_theta"] > b.raw_score:
-                        row["est_theta_percentile"] = b.percentile if b.percentile > 0 else '<1'
+                        row["est_theta_percentile"] = b.percentile if b.percentile > 1 else '<1'
                     if obj.backgroundinfo.sex == "M":
                         if answer["est_theta"] > b.raw_score_boy:
-                            row["est_theta_percentile_sex"] = b.percentile if b.percentile > 0 else '<1'
+                            row["est_theta_percentile_sex"] = b.percentile if b.percentile > 1 else '<1'
                     if obj.backgroundinfo.sex == "F":
                         if answer["est_theta"] > b.raw_score_girl:
-                            row["est_theta_percentile_sex"] = b.percentile if b.percentile > 0 else '<1'
+                            row["est_theta_percentile_sex"] = b.percentile if b.percentile > 1 else '<1'
             if "est_theta_percentile" in row:
                 try:
                     q = Q(
