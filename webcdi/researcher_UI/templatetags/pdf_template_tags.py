@@ -81,13 +81,13 @@ def get_cat_benchmark(context, administration_id, data):
         benchmarks = Benchmark.objects.filter(q).order_by("percentile")
         for b in benchmarks.filter(age=age):
             if administration.catresponse.est_theta > b.raw_score:
-                row["est_theta_percentile"] = b.percentile
+                row["est_theta_percentile"] = b.percentile if b.percentile > 1 else '<1'
             if administration.backgroundinfo.sex == "M":
                 if administration.catresponse.est_theta > b.raw_score_boy:
-                    row["est_theta_percentile_sex"] = b.percentile
+                    row["est_theta_percentile_sex"] = b.percentile if b.percentile > 1 else '<1'
             if administration.backgroundinfo.sex == "F":
                 if administration.catresponse.est_theta > b.raw_score_girl:
-                    row["est_theta_percentile_sex"] = b.percentile
+                    row["est_theta_percentile_sex"] = b.percentile if b.percentile > 1 else '<1'
 
         q = Q(
             instrument=administration.study.instrument,
