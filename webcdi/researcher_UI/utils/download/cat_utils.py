@@ -64,7 +64,7 @@ def get_pd_norms(study_obj, administrations, adjusted, answer_rows):
                         if answer["est_theta"] > b.raw_score_girl:
                             row["est_theta_percentile_sex"] = b.percentile if b.percentile > 1 else f'<{lowest_percentile.percentile}'
             if "est_theta_percentile" in row:
-                if str(row['est_theta_percentile']) :
+                if row['est_theta_percentile']  == f'<{lowest_percentile.percentile}' :
                     q = Q(
                         instrument=obj.study.instrument,
                         instrument_score__title="Total Produced",
@@ -85,7 +85,7 @@ def get_pd_norms(study_obj, administrations, adjusted, answer_rows):
                     logger.debug(f"Exception {e}")
                     pass
 
-                if str(row['est_theta_percentile_sex']) :
+                if row['est_theta_percentile_sex']  == f'<{lowest_percentile.percentile}' :
                     q = Q(
                         instrument=obj.study.instrument,
                         instrument_score__title="Total Produced",

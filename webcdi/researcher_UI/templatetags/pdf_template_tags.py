@@ -90,7 +90,7 @@ def get_cat_benchmark(context, administration_id, data):
                 if administration.catresponse.est_theta > b.raw_score_girl:
                     row["est_theta_percentile_sex"] = b.percentile if b.percentile > 1 else f'<{lowest_percentile.percentile}'
 
-        if str(row['est_theta_percentile']) :
+        if row['est_theta_percentile'] == f'<{lowest_percentile.percentile}' :
             q = Q(
                 instrument=administration.study.instrument,
                 instrument_score__title="Total Produced",
@@ -111,7 +111,7 @@ def get_cat_benchmark(context, administration_id, data):
             logger.debug(f"Exception {e}")
             pass
 
-        if str(row['est_theta_percentile_sex']) :
+        if row['est_theta_percentile_sex']  == f'<{lowest_percentile.percentile}' :
             q = Q(
                 instrument=administration.study.instrument,
                 instrument_score__title="Total Produced",
