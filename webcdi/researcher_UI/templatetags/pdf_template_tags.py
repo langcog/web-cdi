@@ -79,22 +79,31 @@ def get_cat_benchmark(context, administration_id, data):
         instrument=administration.study.instrument, age=age
     ).exists():
         benchmarks = Benchmark.objects.filter(q).order_by("percentile")
+        lowest_percentile = benchmarks.filter(percentile__gt=0).order_by('percentile')[0]
         for b in benchmarks.filter(age=age):
             if administration.catresponse.est_theta > b.raw_score:
-                row["est_theta_percentile"] = b.percentile
+                row["est_theta_percentile"] = b.percentile if b.percentile > 1 else f'<{lowest_percentile.percentile}'
             if administration.backgroundinfo.sex == "M":
                 if administration.catresponse.est_theta > b.raw_score_boy:
-                    row["est_theta_percentile_sex"] = b.percentile
+                    row["est_theta_percentile_sex"] = b.percentile if b.percentile > 1 else f'<{lowest_percentile.percentile}'
             if administration.backgroundinfo.sex == "F":
                 if administration.catresponse.est_theta > b.raw_score_girl:
-                    row["est_theta_percentile_sex"] = b.percentile
+                    row["est_theta_percentile_sex"] = b.percentile if b.percentile > 1 else f'<{lowest_percentile.percentile}'
 
-        q = Q(
-            instrument=administration.study.instrument,
-            instrument_score__title="Total Produced",
-            age=age,
-            percentile=row["est_theta_percentile"],
-        )
+        if row['est_theta_percentile'] == f'<{lowest_percentile.percentile}' :
+            q = Q(
+                instrument=administration.study.instrument,
+                instrument_score__title="Total Produced",
+                age=age,
+                percentile=lowest_percentile.percentile,
+            )
+        else:
+            q = Q(
+                instrument=administration.study.instrument,
+                instrument_score__title="Total Produced",
+                age=age,
+                percentile=row["est_theta_percentile"],
+            )
         try:
             row["raw_score"] = int(Benchmark.objects.get(q).raw_score)
 
@@ -102,12 +111,20 @@ def get_cat_benchmark(context, administration_id, data):
             logger.debug(f"Exception {e}")
             pass
 
-        q = Q(
-            instrument=administration.study.instrument,
-            instrument_score__title="Total Produced",
-            age=age,
-            percentile=row["est_theta_percentile_sex"],
-        )
+        if row['est_theta_percentile_sex']  == f'<{lowest_percentile.percentile}' :
+            q = Q(
+                instrument=administration.study.instrument,
+                instrument_score__title="Total Produced",
+                age=age,
+                percentile=lowest_percentile.percentile,
+            )
+        else:
+            q = Q(
+                instrument=administration.study.instrument,
+                instrument_score__title="Total Produced",
+                age=age,
+                percentile=row["est_theta_percentile_sex"],
+            )
         try:
             row["raw_score"] = int(Benchmark.objects.get(q).raw_score)
             if administration.backgroundinfo.sex == "M":
