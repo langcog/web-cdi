@@ -37,7 +37,7 @@ django-tables2==2.7.0
 django-weasyprint==1.1.0.post2
 flake8==7.1.1
 fonttools==4.47.0
-h11==0.14.0
+h11==0.16.0
 html5lib==1.1
 idna==3.7
 isort==5.13.2
