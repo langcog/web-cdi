@@ -335,7 +335,7 @@
 		"csv_file": "cdi_form_csv/cdi_forms/[English_CDI3R].csv",
 		"json_data": "cdi_forms/form_data/English_CDI3R_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/English_CDI3R_scoring.json",
-		"demographics" : ["English_CDI3R_demographics.json"]
+		"demographics" : ["English_CDI3R_demographics.json","English_Split.json"]
 	},
 	{
 		"language": "Dutch",

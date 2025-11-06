@@ -26,7 +26,7 @@ class AdministrationAdmin(admin.ModelAdmin):
         ("study__name", DropdownFilter),
         ("study__researcher__username", DropdownFilter),
     ]
-    search_fields = ["study__name", "url_hash"]
+    search_fields = ["study__name", "url_hash","id","subject_id"]
     actions = [
         set_is_active_true,
     ]
