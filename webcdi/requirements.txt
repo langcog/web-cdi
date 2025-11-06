@@ -17,7 +17,7 @@ confusable-homoglyphs==3.2.0
 coverage==7.6.3
 cssselect2==0.7.0
 defusedxml==0.7.1
-Django==4.2.25
+Django==4.2.26
 django-admin-rangefilter==0.12.0
 django-bootstrap3==21.1
 django-bootstrap3-datetimepicker==2.2.3
