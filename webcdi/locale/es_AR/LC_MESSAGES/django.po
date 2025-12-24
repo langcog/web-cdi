@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-23 13:50+0000\n"
+"POT-Creation-Date: 2025-12-24 07:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -46,7 +46,7 @@ msgstr "Enviar"
 #: cdi_forms/models.py:626
 #: cdi_forms/templates/cdi_forms/administration_base.html:162
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:152
-#: cdi_forms/templates/cdi_forms/cdi_base.html:154
+#: cdi_forms/templates/cdi_forms/cdi_base.html:165
 msgid "No"
 msgstr "No"
 
@@ -1605,14 +1605,14 @@ msgid "Instructions: "
 msgstr "Instrucciones: "
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:75
-#: cdi_forms/templates/cdi_forms/cdi_base.html:75
+#: cdi_forms/templates/cdi_forms/cdi_base.html:85
 msgid "This form can be filled any time before the due date."
 msgstr ""
 "Este formulario puede ser completado en cualquier momento antes de la fecha "
 "de entrega."
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:76
-#: cdi_forms/templates/cdi_forms/cdi_base.html:76
+#: cdi_forms/templates/cdi_forms/cdi_base.html:86
 msgid ""
 "It can also be saved at any time and resumed later by using the same link"
 msgstr ""
@@ -1620,22 +1620,23 @@ msgstr ""
 "utilizando la misma página."
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:76
-#: cdi_forms/templates/cdi_forms/cdi_base.html:76
+#: cdi_forms/templates/cdi_forms/cdi_base.html:77
+#: cdi_forms/templates/cdi_forms/cdi_base.html:86
 msgid "create bookmark"
 msgstr "cree el marcador"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:77
-#: cdi_forms/templates/cdi_forms/cdi_base.html:77
+#: cdi_forms/templates/cdi_forms/cdi_base.html:87
 msgid "After the form is submitted, it cannot be altered."
 msgstr "Después de enviar el formulario, no se podrá modificar."
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:78
-#: cdi_forms/templates/cdi_forms/cdi_base.html:78
+#: cdi_forms/templates/cdi_forms/cdi_base.html:88
 msgid "The form also cannot be altered after the due date."
 msgstr "El formulario no se podrá modificar después de la fecha de entrega."
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:79
-#: cdi_forms/templates/cdi_forms/cdi_base.html:79
+#: cdi_forms/templates/cdi_forms/cdi_base.html:89
 msgid ""
 "Please use the navigation buttons below. Do not use the \"back\" and "
 "\"forward\" buttons on your browser."
@@ -1644,7 +1645,7 @@ msgstr ""
 "botones \"Atrás\" y \"Adelante\" en su navegador."
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:80
-#: cdi_forms/templates/cdi_forms/cdi_base.html:80
+#: cdi_forms/templates/cdi_forms/cdi_base.html:90
 msgid ""
 "You can use the tab button and arrows keys to quickly navigate and answer "
 "questions."
@@ -1653,17 +1654,17 @@ msgstr ""
 "y responder preguntas."
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:102
-#: cdi_forms/templates/cdi_forms/cdi_base.html:101
+#: cdi_forms/templates/cdi_forms/cdi_base.html:112
 msgid "Due date"
 msgstr "Fecha de entrega"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:107
-#: cdi_forms/templates/cdi_forms/cdi_base.html:106
+#: cdi_forms/templates/cdi_forms/cdi_base.html:117
 msgid "Show waiver of documentation"
 msgstr "Mostrar exención de documentación"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:112
-#: cdi_forms/templates/cdi_forms/cdi_base.html:111
+#: cdi_forms/templates/cdi_forms/cdi_base.html:122
 msgid "Reach out to the Web-CDI Team!"
 msgstr "¡Póngase en contacto con el equipo de la Web-CDI!"
 
@@ -1683,17 +1684,17 @@ msgid "Instructions:"
 msgstr "Instrucciones: "
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:163
-#: cdi_forms/templates/cdi_forms/cdi_base.html:155
+#: cdi_forms/templates/cdi_forms/cdi_base.html:166
 msgid "Okay"
 msgstr "Bien"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:174
-#: cdi_forms/templates/cdi_forms/cdi_base.html:168
+#: cdi_forms/templates/cdi_forms/cdi_base.html:179
 msgid "Waiver Denied"
 msgstr "Renuncia Denegada"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:178
-#: cdi_forms/templates/cdi_forms/cdi_base.html:172
+#: cdi_forms/templates/cdi_forms/cdi_base.html:183
 msgid ""
 "Thank you for your response. We are unable to continue. Please close the "
 "window. If you would like, you may review the Waiver."
@@ -1703,7 +1704,7 @@ msgstr ""
 "su consentimiento."
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:181
-#: cdi_forms/templates/cdi_forms/cdi_base.html:175
+#: cdi_forms/templates/cdi_forms/cdi_base.html:186
 msgid "Review Waiver"
 msgstr "Revisar el documento de renuncia"
 
@@ -2043,9 +2044,9 @@ msgstr ""
 #| msgid ""
 #| "Thank you for participating in our Web-CDI project! It is our pleasure to "
 #| "send you this Amazon.com Gift Card that can be redeemed towards millions "
-#| "of items at <a href=\"http://www.amazon.com\" target=\"_blank\">www."
-#| "amazon.com</a>. You may want to print this screen for easy reference "
-#| "later--you’ll need the gift card claim code below."
+#| "of items at <a href=\"http://www.amazon.com\" "
+#| "target=\"_blank\">www.amazon.com</a>. You may want to print this screen "
+#| "for easy reference later--you’ll need the gift card claim code below."
 msgid ""
 "Thank you for participating in our Web-CDI project! It is our pleasure to "
 "send you this %(gift_card.payment_type)s Gift Card that can be redeemed "
@@ -2088,9 +2089,9 @@ msgstr ""
 #| msgid ""
 #| "Thank you for participating in our Web-CDI project! It is our pleasure to "
 #| "send you this Amazon.com Gift Card that can be redeemed towards millions "
-#| "of items at <a href=\"http://www.amazon.com\" target=\"_blank\">www."
-#| "amazon.com</a>. You may want to print this screen for easy reference "
-#| "later--you’ll need the gift card claim code below."
+#| "of items at <a href=\"http://www.amazon.com\" "
+#| "target=\"_blank\">www.amazon.com</a>. You may want to print this screen "
+#| "for easy reference later--you’ll need the gift card claim code below."
 msgid ""
 "Thank you for participating in our Web-CDI project! It is our pleasure to "
 "send you this Tango Choice Card that can be redeemed for a gift card from "
@@ -2335,8 +2336,9 @@ msgid ""
 "many different children. Don’t worry if your child only knows a few of them "
 "right now. If you have any concerns about your child’s development, we "
 "recommend that you talk with your child’s physician. If you enjoyed our "
-"assessment, you can learn more about the CDI <a href=\"http://mb-cdi."
-"stanford.edu/\" target=\"_blank\">here</a>. We appreciate your contribution!"
+"assessment, you can learn more about the CDI <a href=\"http://mb-"
+"cdi.stanford.edu/\" target=\"_blank\">here</a>. We appreciate your "
+"contribution!"
 msgstr ""
 "Gracias por tomarse el tiempo para completar el Inventario de Desarrollo "
 "Comunicativo de MacArthur-Bates (Inventario). Con la ayuda de padres, madres "
@@ -2468,6 +2470,51 @@ msgstr "¿Con quién vive su hijo(a)?"
 msgid "* or word used in your family"
 msgstr ""
 
+#: cdi_forms/templates/cdi_forms/cdi_base.html:76
+msgctxt "CAT"
+msgid "This form can be filled any time before the due date."
+msgstr ""
+"Este formulario puede ser completado en cualquier momento antes de la fecha "
+"de entrega."
+
+#: cdi_forms/templates/cdi_forms/cdi_base.html:77
+msgctxt "CAT"
+msgid ""
+"It can also be saved at any time and resumed later by using the same link"
+msgstr ""
+"También se puede guardar en cualquier momento y puede continuar más tarde "
+"utilizando la misma página."
+
+#: cdi_forms/templates/cdi_forms/cdi_base.html:78
+msgctxt "CAT"
+msgid "After the form is submitted, it cannot be altered."
+msgstr "Después de enviar el formulario, no se podrá modificar."
+
+#: cdi_forms/templates/cdi_forms/cdi_base.html:79
+#, fuzzy
+#| msgid "The form also cannot be altered after the due date."
+msgctxt "CAT"
+msgid "The form also cannot be altered after the due date."
+msgstr "El formulario no se podrá modificar después de la fecha de entrega."
+
+#: cdi_forms/templates/cdi_forms/cdi_base.html:80
+msgctxt "CAT"
+msgid ""
+"Please use the navigation buttons below. Do not use the \"back\" and "
+"\"forward\" buttons on your browser."
+msgstr ""
+"Por favor, usá los botones de navegación al final de la página. No uses los "
+"botones \"Atrás\" y \"Adelante\" en su navegador."
+
+#: cdi_forms/templates/cdi_forms/cdi_base.html:81
+msgctxt "CAT"
+msgid ""
+"You can use the tab button and arrows keys to quickly navigate and answer "
+"questions."
+msgstr ""
+"Podés usar el botón de tab y las teclas de flechas para navegar rápidamente "
+"y responder preguntas."
+
 #: cdi_forms/templates/cdi_forms/overflow.html:44
 #: cdi_forms/templates/cdi_forms/study_overflow.html:44
 msgid ""
@@ -2484,9 +2531,9 @@ msgstr ""
 "antes. Le pedimos que solo complete nuestra evaluación una vez. Si tenés "
 "alguna inquietud sobre el desarrollo de tu hijo(a), te recomendamos que "
 "hables con su pediatra. Si esta evaluación te pareció interesante podes "
-"obtener más información sobre el Inventario <a href=\"http://mb-cdi.stanford."
-"edu/\" target=\"_blank\">aquí</a>. Nuevamente, agradecemos tu tiempo e "
-"interés!"
+"obtener más información sobre el Inventario <a href=\"http://mb-"
+"cdi.stanford.edu/\" target=\"_blank\">aquí</a>. Nuevamente, agradecemos tu "
+"tiempo e interés!"
 
 #: cdi_forms/templates/cdi_forms/overflow.html:49
 #: cdi_forms/templates/cdi_forms/study_overflow.html:49
@@ -2514,8 +2561,8 @@ msgstr ""
 "target=\"_blank\">aquí</a> para completar el cuestionario de 30 minutos. Si "
 "tiene alguna inquietud sobre el desarrollo de su niño(a), le recomendamos "
 "que hable con el médico de su niño(a). Si disfrutó de nuestra evaluación, "
-"puede obtener más información sobre el Inventario <a href=\"http://mb-cdi."
-"stanford.edu/\" target=\"_blank\">aquí</a>. Nuevamente, apreciamos su "
+"puede obtener más información sobre el Inventario <a href=\"http://mb-"
+"cdi.stanford.edu/\" target=\"_blank\">aquí</a>. Nuevamente, apreciamos su "
 "interés!"
 
 #: cdi_forms/templates/cdi_forms/single_reusable_link_inactive.html:44
@@ -2579,14 +2626,6 @@ msgstr ""
 #: researcher_UI/admin/admin_actions.py:46
 #, python-format
 msgid "Studies must have at least 1 responsent. %s has none"
-msgstr ""
-
-#: researcher_UI/admin/admin_actions.py:25
-#: researcher_UI/admin/admin_actions.py:53
-#, python-brace-format
-msgid ""
-"You cannot download data for {q.name}.  The study has opted out of "
-"datasharing"
 msgstr ""
 
 #: researcher_UI/forms/study_forms.py:32
@@ -3408,6 +3447,21 @@ msgstr ""
 #: webcdi/templates/registration/password_reset_form.html:33
 msgid "Reset"
 msgstr ""
+
+#, fuzzy
+#~| msgid "This form can be filled any time before the due date."
+#~ msgctxt "CAT"
+#~ msgid "CAT This form can be filled any time before the due date."
+#~ msgstr ""
+#~ "Este formulario puede ser completado en cualquier momento antes de la "
+#~ "fecha de entrega."
+
+#, fuzzy
+#~| msgid "This form can be filled any time before the due date."
+#~ msgid "NOT CAT This form can be filled any time before the due date."
+#~ msgstr ""
+#~ "Este formulario puede ser completado en cualquier momento antes de la "
+#~ "fecha de entrega."
 
 #, fuzzy
 #~| msgid ""

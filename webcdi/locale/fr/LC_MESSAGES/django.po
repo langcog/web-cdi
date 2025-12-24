@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-23 13:50+0000\n"
+"POT-Creation-Date: 2025-12-24 07:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,7 +46,7 @@ msgstr "Soumettre"
 #: cdi_forms/models.py:626
 #: cdi_forms/templates/cdi_forms/administration_base.html:162
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:152
-#: cdi_forms/templates/cdi_forms/cdi_base.html:154
+#: cdi_forms/templates/cdi_forms/cdi_base.html:165
 msgid "No"
 msgstr "Non"
 
@@ -1626,33 +1626,34 @@ msgid "Instructions: "
 msgstr "Indications: "
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:75
-#: cdi_forms/templates/cdi_forms/cdi_base.html:75
+#: cdi_forms/templates/cdi_forms/cdi_base.html:85
 msgid "This form can be filled any time before the due date."
 msgstr "Ce formulaire peut être rempli à tout moment avant la date limite."
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:76
-#: cdi_forms/templates/cdi_forms/cdi_base.html:76
+#: cdi_forms/templates/cdi_forms/cdi_base.html:86
 msgid ""
 "It can also be saved at any time and resumed later by using the same link"
 msgstr "Il peut être sauvegardé et repris plus tard en utilisant le même lien"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:76
-#: cdi_forms/templates/cdi_forms/cdi_base.html:76
+#: cdi_forms/templates/cdi_forms/cdi_base.html:77
+#: cdi_forms/templates/cdi_forms/cdi_base.html:86
 msgid "create bookmark"
 msgstr "créer un signet"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:77
-#: cdi_forms/templates/cdi_forms/cdi_base.html:77
+#: cdi_forms/templates/cdi_forms/cdi_base.html:87
 msgid "After the form is submitted, it cannot be altered."
 msgstr "Une fois le formulaire envoyé, il ne peut plus être modifié."
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:78
-#: cdi_forms/templates/cdi_forms/cdi_base.html:78
+#: cdi_forms/templates/cdi_forms/cdi_base.html:88
 msgid "The form also cannot be altered after the due date."
 msgstr "Le formulaire ne peut pas être modifié après la date limite."
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:79
-#: cdi_forms/templates/cdi_forms/cdi_base.html:79
+#: cdi_forms/templates/cdi_forms/cdi_base.html:89
 msgid ""
 "Please use the navigation buttons below. Do not use the \"back\" and "
 "\"forward\" buttons on your browser."
@@ -1661,24 +1662,24 @@ msgstr ""
 "“précédent” et “suivant” de votre navigateur"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:80
-#: cdi_forms/templates/cdi_forms/cdi_base.html:80
+#: cdi_forms/templates/cdi_forms/cdi_base.html:90
 msgid ""
 "You can use the tab button and arrows keys to quickly navigate and answer "
 "questions."
 msgstr "Ce formulaire ne doit pas vous prendre plus de 10 min."
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:102
-#: cdi_forms/templates/cdi_forms/cdi_base.html:101
+#: cdi_forms/templates/cdi_forms/cdi_base.html:112
 msgid "Due date"
 msgstr "Date limite"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:107
-#: cdi_forms/templates/cdi_forms/cdi_base.html:106
+#: cdi_forms/templates/cdi_forms/cdi_base.html:117
 msgid "Show waiver of documentation"
 msgstr "Voir les informations sur ma participation"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:112
-#: cdi_forms/templates/cdi_forms/cdi_base.html:111
+#: cdi_forms/templates/cdi_forms/cdi_base.html:122
 msgid "Reach out to the Web-CDI Team!"
 msgstr "Contactez l'équipe responsable de cet inventaire."
 
@@ -1698,17 +1699,17 @@ msgid "Instructions:"
 msgstr "indications: "
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:163
-#: cdi_forms/templates/cdi_forms/cdi_base.html:155
+#: cdi_forms/templates/cdi_forms/cdi_base.html:166
 msgid "Okay"
 msgstr "OK"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:174
-#: cdi_forms/templates/cdi_forms/cdi_base.html:168
+#: cdi_forms/templates/cdi_forms/cdi_base.html:179
 msgid "Waiver Denied"
 msgstr "Consentement de participation refusé"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:178
-#: cdi_forms/templates/cdi_forms/cdi_base.html:172
+#: cdi_forms/templates/cdi_forms/cdi_base.html:183
 msgid ""
 "Thank you for your response. We are unable to continue. Please close the "
 "window. If you would like, you may review the Waiver."
@@ -1719,7 +1720,7 @@ msgstr ""
 "consentement. "
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:181
-#: cdi_forms/templates/cdi_forms/cdi_base.html:175
+#: cdi_forms/templates/cdi_forms/cdi_base.html:186
 msgid "Review Waiver"
 msgstr "Revoir le consentement"
 
@@ -2039,9 +2040,9 @@ msgstr ""
 "notre recherche. Ce résumé n'est pas une évaluation clinique. Si vous avez "
 "des inquiétudes concernant le développement de votre enfant, nous vous "
 "recommandons d’en parler avec le médecin de votre enfant. Si vous avez aimé "
-"notre inventaire, vous pouvez en apprendre plus ici <a href=\"http://mb-cdi."
-"stanford.edu/\" target=\"_blank\">(lien en anglais)</a>. Encore une fois, "
-"nous vous remercions de votre intérêt!"
+"notre inventaire, vous pouvez en apprendre plus ici <a href=\"http://mb-"
+"cdi.stanford.edu/\" target=\"_blank\">(lien en anglais)</a>. Encore une "
+"fois, nous vous remercions de votre intérêt!"
 
 #: cdi_forms/templates/cdi_forms/administration_summary.html:178
 #, fuzzy, python-format
@@ -2063,9 +2064,9 @@ msgstr ""
 #| msgid ""
 #| "Thank you for participating in our Web-CDI project! It is our pleasure to "
 #| "send you this Amazon.com Gift Card that can be redeemed towards millions "
-#| "of items at <a href=\"http://www.amazon.com\" target=\"_blank\">www."
-#| "amazon.com</a>. You may want to print this screen for easy reference "
-#| "later--you’ll need the gift card claim code below."
+#| "of items at <a href=\"http://www.amazon.com\" "
+#| "target=\"_blank\">www.amazon.com</a>. You may want to print this screen "
+#| "for easy reference later--you’ll need the gift card claim code below."
 msgid ""
 "Thank you for participating in our Web-CDI project! It is our pleasure to "
 "send you this %(gift_card.payment_type)s Gift Card that can be redeemed "
@@ -2075,10 +2076,10 @@ msgid ""
 msgstr ""
 "Merci d'avoir participé à notre projet! Il nous fait plaisir de vous envoyer "
 "cette carte cadeau Amazon.com * qui peut être échangée contre des millions "
-"d'articles sur <a href=\"http://www.amazon.com\" target=\"_blank\">www."
-"amazon.com</a>. Vous pouvez prendre une capture d’écran pour vous y référer "
-"facilement plus tard - vous aurez besoin du code ci-dessous pour utiliser "
-"votre carte-cadeau."
+"d'articles sur <a href=\"http://www.amazon.com\" "
+"target=\"_blank\">www.amazon.com</a>. Vous pouvez prendre une capture "
+"d’écran pour vous y référer facilement plus tard - vous aurez besoin du code "
+"ci-dessous pour utiliser votre carte-cadeau."
 
 #: cdi_forms/templates/cdi_forms/administration_summary.html:187
 msgid "Gift Card Amount"
@@ -2108,9 +2109,9 @@ msgstr ""
 #| msgid ""
 #| "Thank you for participating in our Web-CDI project! It is our pleasure to "
 #| "send you this Amazon.com Gift Card that can be redeemed towards millions "
-#| "of items at <a href=\"http://www.amazon.com\" target=\"_blank\">www."
-#| "amazon.com</a>. You may want to print this screen for easy reference "
-#| "later--you’ll need the gift card claim code below."
+#| "of items at <a href=\"http://www.amazon.com\" "
+#| "target=\"_blank\">www.amazon.com</a>. You may want to print this screen "
+#| "for easy reference later--you’ll need the gift card claim code below."
 msgid ""
 "Thank you for participating in our Web-CDI project! It is our pleasure to "
 "send you this Tango Choice Card that can be redeemed for a gift card from "
@@ -2120,10 +2121,10 @@ msgid ""
 msgstr ""
 "Merci d'avoir participé à notre projet! Il nous fait plaisir de vous envoyer "
 "cette carte cadeau Amazon.com * qui peut être échangée contre des millions "
-"d'articles sur <a href=\"http://www.amazon.com\" target=\"_blank\">www."
-"amazon.com</a>. Vous pouvez prendre une capture d’écran pour vous y référer "
-"facilement plus tard - vous aurez besoin du code ci-dessous pour utiliser "
-"votre carte-cadeau."
+"d'articles sur <a href=\"http://www.amazon.com\" "
+"target=\"_blank\">www.amazon.com</a>. Vous pouvez prendre une capture "
+"d’écran pour vous y référer facilement plus tard - vous aurez besoin du code "
+"ci-dessous pour utiliser votre carte-cadeau."
 
 #: cdi_forms/templates/cdi_forms/administration_summary.html:198
 msgid "To redeem your gift card, visit "
@@ -2345,8 +2346,9 @@ msgid ""
 "many different children. Don’t worry if your child only knows a few of them "
 "right now. If you have any concerns about your child’s development, we "
 "recommend that you talk with your child’s physician. If you enjoyed our "
-"assessment, you can learn more about the CDI <a href=\"http://mb-cdi."
-"stanford.edu/\" target=\"_blank\">here</a>. We appreciate your contribution!"
+"assessment, you can learn more about the CDI <a href=\"http://mb-"
+"cdi.stanford.edu/\" target=\"_blank\">here</a>. We appreciate your "
+"contribution!"
 msgstr ""
 "<br/>Nous vous remercions pour votre intérêt porté à l’inventaire de "
 "développement communicatif de MacArthur-Bates ! Avec l’aide de parents et "
@@ -2359,8 +2361,8 @@ msgstr ""
 "notre recherche. Ce résumé n’est pas une évaluation clinique. Si vous avez "
 "des inquiétudes concernant le développement de votre enfant, nous vous "
 "recommandons d’en parler avec son médecin. Si vous avez aimé notre "
-"inventaire, vous pouvez en apprendre plus ici <a href=\"http://mb-cdi."
-"stanford.edu/\" target=\"_blank\">(lien en anglais)</a>. Merci encore de "
+"inventaire, vous pouvez en apprendre plus ici <a href=\"http://mb-"
+"cdi.stanford.edu/\" target=\"_blank\">(lien en anglais)</a>. Merci encore de "
 "votre intérêt !"
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:46
@@ -2442,11 +2444,13 @@ msgid "Next"
 msgstr "Suivant"
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:137
+#, python-format
 msgctxt "cat"
 msgid "%(words_shown)s of %(max_words)s (maximum) "
 msgstr "%(words_shown)s sur %(max_words)s (maximum) "
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:143
+#, python-format
 msgctxt "cat"
 msgid "Does your child say ... %(word)s?"
 msgstr "Votre enfant comprend-il et dit-il ... %(word)s?"
@@ -2454,6 +2458,43 @@ msgstr "Votre enfant comprend-il et dit-il ... %(word)s?"
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:147
 msgid "* or word used in your family"
 msgstr ""
+
+#: cdi_forms/templates/cdi_forms/cdi_base.html:76
+msgctxt "CAT"
+msgid "This form can be filled any time before the due date."
+msgstr "Ce formulaire peut être rempli à tout moment avant la date limite."
+
+#: cdi_forms/templates/cdi_forms/cdi_base.html:77
+msgctxt "CAT"
+msgid ""
+"It can also be saved at any time and resumed later by using the same link"
+msgstr "Il peut être sauvegardé et repris plus tard en utilisant le même lien"
+
+#: cdi_forms/templates/cdi_forms/cdi_base.html:78
+msgctxt "CAT"
+msgid "After the form is submitted, it cannot be altered."
+msgstr "Une fois le formulaire envoyé, il ne peut plus être modifié."
+
+#: cdi_forms/templates/cdi_forms/cdi_base.html:79
+msgctxt "CAT"
+msgid "The form also cannot be altered after the due date."
+msgstr "Le formulaire ne peut pas être modifié après la date limite."
+
+#: cdi_forms/templates/cdi_forms/cdi_base.html:80
+msgctxt "CAT"
+msgid ""
+"Please use the navigation buttons below. Do not use the \"back\" and "
+"\"forward\" buttons on your browser."
+msgstr ""
+"Utilisez les boutons de navigation ci-dessous. N’utilisez pas les boutons "
+"“précédent” et “suivant” de votre navigateur"
+
+#: cdi_forms/templates/cdi_forms/cdi_base.html:81
+msgctxt "CAT"
+msgid ""
+"You can use the tab button and arrows keys to quickly navigate and answer "
+"questions."
+msgstr "Ce formulaire ne doit pas vous prendre plus de 10 min."
 
 #: cdi_forms/templates/cdi_forms/overflow.html:44
 #: cdi_forms/templates/cdi_forms/study_overflow.html:44
@@ -2472,9 +2513,9 @@ msgstr ""
 "questionnaire une seule fois. Si vous avez des inquiétudes concernant le "
 "développement de votre enfant, nous vous recommandons d’en parler avec le "
 "médecin de votre enfant. Si vous avez apprécié notre évaluation, vous pouvez "
-"en apprendre plus sur cet inventaire ici <a href=\"http://mb-cdi.stanford."
-"edu/\" target=\"_blank\">(lien en anglais)</a>. Encore une fois, nous vous "
-"remercions de votre intérêt!"
+"en apprendre plus sur cet inventaire ici <a href=\"http://mb-"
+"cdi.stanford.edu/\" target=\"_blank\">(lien en anglais)</a>. Encore une "
+"fois, nous vous remercions de votre intérêt!"
 
 #: cdi_forms/templates/cdi_forms/overflow.html:49
 #: cdi_forms/templates/cdi_forms/study_overflow.html:49
@@ -2570,14 +2611,6 @@ msgstr ""
 #: researcher_UI/admin/admin_actions.py:46
 #, python-format
 msgid "Studies must have at least 1 responsent. %s has none"
-msgstr ""
-
-#: researcher_UI/admin/admin_actions.py:25
-#: researcher_UI/admin/admin_actions.py:53
-#, python-brace-format
-msgid ""
-"You cannot download data for {q.name}.  The study has opted out of "
-"datasharing"
 msgstr ""
 
 #: researcher_UI/forms/study_forms.py:32
@@ -3399,6 +3432,17 @@ msgid "Reset"
 msgstr ""
 
 #, fuzzy
+#~| msgid "This form can be filled any time before the due date."
+#~ msgctxt "CAT"
+#~ msgid "CAT This form can be filled any time before the due date."
+#~ msgstr "Ce formulaire peut être rempli à tout moment avant la date limite."
+
+#, fuzzy
+#~| msgid "This form can be filled any time before the due date."
+#~ msgid "NOT CAT This form can be filled any time before the due date."
+#~ msgstr "Ce formulaire peut être rempli à tout moment avant la date limite."
+
+#, fuzzy
 #~| msgid ""
 #~| "Your child should be between %(min_age)d to %(max_age)d months of age."
 #~ msgid ""
@@ -3445,11 +3489,11 @@ msgstr ""
 #~ msgstr "Partagez sur Facebook"
 
 #~ msgid ""
-#~ "Your identifier for { self.curr_context[\"study_obj\"]."
-#~ "get_participant_source_boolean_display() }"
+#~ "Your identifier for "
+#~ "{ self.curr_context[\"study_obj\"].get_participant_source_boolean_display() }"
 #~ msgstr ""
-#~ "Votre numéro de participation anonyme { self.curr_context[\"study_obj\"]."
-#~ "get_participant_source_boolean_display() }"
+#~ "Votre numéro de participation anonyme "
+#~ "{ self.curr_context[\"study_obj\"].get_participant_source_boolean_display() }"
 
 #~ msgid "Category"
 #~ msgstr "Catégorie"

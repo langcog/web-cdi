@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-23 13:50+0000\n"
+"POT-Creation-Date: 2025-12-24 07:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,7 +46,7 @@ msgstr "送信する"
 #: cdi_forms/models.py:626
 #: cdi_forms/templates/cdi_forms/administration_base.html:162
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:152
-#: cdi_forms/templates/cdi_forms/cdi_base.html:154
+#: cdi_forms/templates/cdi_forms/cdi_base.html:165
 msgid "No"
 msgstr "いいえ"
 
@@ -1611,12 +1611,12 @@ msgid "Instructions: "
 msgstr "記入方法"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:75
-#: cdi_forms/templates/cdi_forms/cdi_base.html:75
+#: cdi_forms/templates/cdi_forms/cdi_base.html:85
 msgid "This form can be filled any time before the due date."
 msgstr "このアンケートは期日前であればいつでも記入できます。"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:76
-#: cdi_forms/templates/cdi_forms/cdi_base.html:76
+#: cdi_forms/templates/cdi_forms/cdi_base.html:86
 msgid ""
 "It can also be saved at any time and resumed later by using the same link"
 msgstr ""
@@ -1624,22 +1624,23 @@ msgstr ""
 "とができます。"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:76
-#: cdi_forms/templates/cdi_forms/cdi_base.html:76
+#: cdi_forms/templates/cdi_forms/cdi_base.html:77
+#: cdi_forms/templates/cdi_forms/cdi_base.html:86
 msgid "create bookmark"
 msgstr "ブックマークを作成する"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:77
-#: cdi_forms/templates/cdi_forms/cdi_base.html:77
+#: cdi_forms/templates/cdi_forms/cdi_base.html:87
 msgid "After the form is submitted, it cannot be altered."
 msgstr "アンケートを一度送信した後に、内容を変更することはできません。"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:78
-#: cdi_forms/templates/cdi_forms/cdi_base.html:78
+#: cdi_forms/templates/cdi_forms/cdi_base.html:88
 msgid "The form also cannot be altered after the due date."
 msgstr "また、回答期限後に内容を修正することもできません。"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:79
-#: cdi_forms/templates/cdi_forms/cdi_base.html:79
+#: cdi_forms/templates/cdi_forms/cdi_base.html:89
 msgid ""
 "Please use the navigation buttons below. Do not use the \"back\" and "
 "\"forward\" buttons on your browser."
@@ -1648,7 +1649,7 @@ msgstr ""
 "使用しないでください。"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:80
-#: cdi_forms/templates/cdi_forms/cdi_base.html:80
+#: cdi_forms/templates/cdi_forms/cdi_base.html:90
 msgid ""
 "You can use the tab button and arrows keys to quickly navigate and answer "
 "questions."
@@ -1656,17 +1657,17 @@ msgstr ""
 "Tabキーと矢印キーを使うことで、質問間を素早く移動し、回答することができます。"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:102
-#: cdi_forms/templates/cdi_forms/cdi_base.html:101
+#: cdi_forms/templates/cdi_forms/cdi_base.html:112
 msgid "Due date"
 msgstr "回答期限"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:107
-#: cdi_forms/templates/cdi_forms/cdi_base.html:106
+#: cdi_forms/templates/cdi_forms/cdi_base.html:117
 msgid "Show waiver of documentation"
 msgstr "ドキュメンテーション放棄の表示"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:112
-#: cdi_forms/templates/cdi_forms/cdi_base.html:111
+#: cdi_forms/templates/cdi_forms/cdi_base.html:122
 msgid "Reach out to the Web-CDI Team!"
 msgstr "Web-CDIチームにご連絡するにはこちら。"
 
@@ -1686,17 +1687,17 @@ msgid "Instructions:"
 msgstr "使用方法"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:163
-#: cdi_forms/templates/cdi_forms/cdi_base.html:155
+#: cdi_forms/templates/cdi_forms/cdi_base.html:166
 msgid "Okay"
 msgstr "承知しました"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:174
-#: cdi_forms/templates/cdi_forms/cdi_base.html:168
+#: cdi_forms/templates/cdi_forms/cdi_base.html:179
 msgid "Waiver Denied"
 msgstr "否認"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:178
-#: cdi_forms/templates/cdi_forms/cdi_base.html:172
+#: cdi_forms/templates/cdi_forms/cdi_base.html:183
 msgid ""
 "Thank you for your response. We are unable to continue. Please close the "
 "window. If you would like, you may review the Waiver."
@@ -1705,7 +1706,7 @@ msgstr ""
 "しければ、放棄を再度ご確認することができます。"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:181
-#: cdi_forms/templates/cdi_forms/cdi_base.html:175
+#: cdi_forms/templates/cdi_forms/cdi_base.html:186
 msgid "Review Waiver"
 msgstr "放棄を確認する"
 
@@ -2271,8 +2272,9 @@ msgid ""
 "many different children. Don’t worry if your child only knows a few of them "
 "right now. If you have any concerns about your child’s development, we "
 "recommend that you talk with your child’s physician. If you enjoyed our "
-"assessment, you can learn more about the CDI <a href=\"http://mb-cdi."
-"stanford.edu/\" target=\"_blank\">here</a>. We appreciate your contribution!"
+"assessment, you can learn more about the CDI <a href=\"http://mb-"
+"cdi.stanford.edu/\" target=\"_blank\">here</a>. We appreciate your "
+"contribution!"
 msgstr ""
 "マッカーサーコミュニケーション発達質問紙 (CDI) にご協力いただき、ありがとうご"
 "ざいました。養育者の方々のご協力のお蔭で、私たち研究者は、子どもたちの言葉の"
@@ -2359,11 +2361,13 @@ msgid "Next"
 msgstr "次へ"
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:137
+#, python-format
 msgctxt "cat"
 msgid "%(words_shown)s of %(max_words)s (maximum) "
 msgstr "%(max_words)s (最大の質問数) のうち%(words_shown)s"
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:143
+#, python-format
 msgctxt "cat"
 msgid "Does your child say ... %(word)s?"
 msgstr "お子さまは次の単語を言いますか？「%(word)s」"
@@ -2371,6 +2375,46 @@ msgstr "お子さまは次の単語を言いますか？「%(word)s」"
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:147
 msgid "* or word used in your family"
 msgstr "* またはご家庭で使われている単語"
+
+#: cdi_forms/templates/cdi_forms/cdi_base.html:76
+msgctxt "CAT"
+msgid "This form can be filled any time before the due date."
+msgstr "このアンケートは期日前であればいつでも記入できます。"
+
+#: cdi_forms/templates/cdi_forms/cdi_base.html:77
+msgctxt "CAT"
+msgid ""
+"It can also be saved at any time and resumed later by using the same link"
+msgstr ""
+"また、このアンケートを保存し、同じリンクを使用してご都合の良い時に再開するこ"
+"とができます。"
+
+#: cdi_forms/templates/cdi_forms/cdi_base.html:78
+msgctxt "CAT"
+msgid "After the form is submitted, it cannot be altered."
+msgstr "アンケートを一度送信した後に、内容を変更することはできません。"
+
+#: cdi_forms/templates/cdi_forms/cdi_base.html:79
+msgctxt "CAT"
+msgid "The form also cannot be altered after the due date."
+msgstr "また、回答期限後に内容を修正することもできません。"
+
+#: cdi_forms/templates/cdi_forms/cdi_base.html:80
+msgctxt "CAT"
+msgid ""
+"Please use the navigation buttons below. Do not use the \"back\" and "
+"\"forward\" buttons on your browser."
+msgstr ""
+"下のナビゲーションボタンをご利用ください。ブラウザの「戻る」「進む」ボタンは"
+"使用しないでください。"
+
+#: cdi_forms/templates/cdi_forms/cdi_base.html:81
+msgctxt "CAT"
+msgid ""
+"You can use the tab button and arrows keys to quickly navigate and answer "
+"questions."
+msgstr ""
+"Tabキーと矢印キーを使うことで、質問間を素早く移動し、回答することができます。"
 
 #: cdi_forms/templates/cdi_forms/overflow.html:44
 #: cdi_forms/templates/cdi_forms/study_overflow.html:44
@@ -2391,9 +2435,9 @@ msgstr ""
 "はいりません。以下、私たちの研究にもとづいて、お子さまの語彙の発達に関する情"
 "報をお知らせします。こちらは臨床的な評価ではありません。お子さまの発達につい"
 "て何かご心配があれば、かかりつけの医師にご相談されることをお勧めします。この"
-"アンケートをお楽しみいただけたなら、CDIについて<a href=\"http://mb-cdi."
-"stanford.edu/\" target=\"_blank\">こちら</a>でもっと詳しく知ることができます "
-"(英語のページとなります)。みなさまのご協力に心から感謝いたします。"
+"アンケートをお楽しみいただけたなら、CDIについて<a href=\"http://mb-"
+"cdi.stanford.edu/\" target=\"_blank\">こちら</a>でもっと詳しく知ることができ"
+"ます (英語のページとなります)。みなさまのご協力に心から感謝いたします。"
 
 #: cdi_forms/templates/cdi_forms/overflow.html:49
 #: cdi_forms/templates/cdi_forms/study_overflow.html:49
@@ -2420,10 +2464,10 @@ msgstr ""
 "にご記入いただけます。ただし、謝礼を受け取ることはできませんのでご留意くださ"
 "い。今後、新しい研究・調査がはじまるまでお待ちいただくことも可能です！お子さ"
 "まの発達についてご心配がある場合は、かかりつけの医師にご相談されることをお勧"
-"めします。アンケートをお楽しみいただけたなら、<a href=\"http://mb-cdi."
-"stanford.edu/\" target=\"_blank\">こちら</a>からCDIについてもっと詳しく知るこ"
-"とができます (英語のページとなります)。ご関心をもってくださり、ありがとうござ"
-"いました。"
+"めします。アンケートをお楽しみいただけたなら、<a href=\"http://mb-"
+"cdi.stanford.edu/\" target=\"_blank\">こちら</a>からCDIについてもっと詳しく知"
+"ることができます (英語のページとなります)。ご関心をもってくださり、ありがとう"
+"ございました。"
 
 #: cdi_forms/templates/cdi_forms/single_reusable_link_inactive.html:44
 msgid ""
@@ -2492,16 +2536,6 @@ msgstr "すべての研究において、使用される方法は同じでなけ
 #, python-format
 msgid "Studies must have at least 1 responsent. %s has none"
 msgstr "研究には少なくとも1件の回答が必要です。%sには回答がありません。"
-
-#: researcher_UI/admin/admin_actions.py:25
-#: researcher_UI/admin/admin_actions.py:53
-#, python-brace-format
-msgid ""
-"You cannot download data for {q.name}.  The study has opted out of "
-"datasharing"
-msgstr ""
-"{q.name}のデータをダウンロードすることはできません。この研究では、データ共有"
-"は許諾されていません。"
 
 #: researcher_UI/forms/study_forms.py:32
 msgid "Default"
@@ -3328,6 +3362,25 @@ msgstr ""
 #: webcdi/templates/registration/password_reset_form.html:33
 msgid "Reset"
 msgstr "リセット"
+
+#, fuzzy
+#~| msgid "This form can be filled any time before the due date."
+#~ msgctxt "CAT"
+#~ msgid "CAT This form can be filled any time before the due date."
+#~ msgstr "このアンケートは期日前であればいつでも記入できます。"
+
+#, fuzzy
+#~| msgid "This form can be filled any time before the due date."
+#~ msgid "NOT CAT This form can be filled any time before the due date."
+#~ msgstr "このアンケートは期日前であればいつでも記入できます。"
+
+#, python-brace-format
+#~ msgid ""
+#~ "You cannot download data for {q.name}.  The study has opted out of "
+#~ "datasharing"
+#~ msgstr ""
+#~ "{q.name}のデータをダウンロードすることはできません。この研究では、データ共"
+#~ "有は許諾されていません。"
 
 #~ msgid ""
 #~ "Your child should be between {data[\"min_age\"]} to {data[\"min_age\"]} "

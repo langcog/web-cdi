@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-23 13:50+0000\n"
+"POT-Creation-Date: 2025-12-24 07:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,7 +47,7 @@ msgstr "שלח"
 #: cdi_forms/models.py:626
 #: cdi_forms/templates/cdi_forms/administration_base.html:162
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:152
-#: cdi_forms/templates/cdi_forms/cdi_base.html:154
+#: cdi_forms/templates/cdi_forms/cdi_base.html:165
 msgid "No"
 msgstr "לא"
 
@@ -1611,12 +1611,12 @@ msgid "Instructions: "
 msgstr "הוראות"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:75
-#: cdi_forms/templates/cdi_forms/cdi_base.html:75
+#: cdi_forms/templates/cdi_forms/cdi_base.html:85
 msgid "This form can be filled any time before the due date."
 msgstr "ניתן למלא שאלון זה בכל זמן לפני תאריך התפוגה שלו"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:76
-#: cdi_forms/templates/cdi_forms/cdi_base.html:76
+#: cdi_forms/templates/cdi_forms/cdi_base.html:86
 msgid ""
 "It can also be saved at any time and resumed later by using the same link"
 msgstr ""
@@ -1624,22 +1624,23 @@ msgstr ""
 "הקישור"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:76
-#: cdi_forms/templates/cdi_forms/cdi_base.html:76
+#: cdi_forms/templates/cdi_forms/cdi_base.html:77
+#: cdi_forms/templates/cdi_forms/cdi_base.html:86
 msgid "create bookmark"
 msgstr "צור סימנייה"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:77
-#: cdi_forms/templates/cdi_forms/cdi_base.html:77
+#: cdi_forms/templates/cdi_forms/cdi_base.html:87
 msgid "After the form is submitted, it cannot be altered."
 msgstr "לאחר שהשאלון נשלח לא ניתן לשנות את התשובות"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:78
-#: cdi_forms/templates/cdi_forms/cdi_base.html:78
+#: cdi_forms/templates/cdi_forms/cdi_base.html:88
 msgid "The form also cannot be altered after the due date."
 msgstr "לא ניתן לשנות את התשובות לאחר תאריך התפוגה של השאלון"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:79
-#: cdi_forms/templates/cdi_forms/cdi_base.html:79
+#: cdi_forms/templates/cdi_forms/cdi_base.html:89
 msgid ""
 "Please use the navigation buttons below. Do not use the \"back\" and "
 "\"forward\" buttons on your browser."
@@ -1648,24 +1649,24 @@ msgstr ""
 "שבדפדפן שלך."
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:80
-#: cdi_forms/templates/cdi_forms/cdi_base.html:80
+#: cdi_forms/templates/cdi_forms/cdi_base.html:90
 msgid ""
 "You can use the tab button and arrows keys to quickly navigate and answer "
 "questions."
 msgstr "ניתן להשתמש בכפתור tab ובחצים כדי לנווט במסמך ולענות על שאלות."
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:102
-#: cdi_forms/templates/cdi_forms/cdi_base.html:101
+#: cdi_forms/templates/cdi_forms/cdi_base.html:112
 msgid "Due date"
 msgstr "תאריך אחרון לשליחת השאלון:"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:107
-#: cdi_forms/templates/cdi_forms/cdi_base.html:106
+#: cdi_forms/templates/cdi_forms/cdi_base.html:117
 msgid "Show waiver of documentation"
 msgstr "הראה את נוסח ההודעה שאישרתי"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:112
-#: cdi_forms/templates/cdi_forms/cdi_base.html:111
+#: cdi_forms/templates/cdi_forms/cdi_base.html:122
 msgid "Reach out to the Web-CDI Team!"
 msgstr "צור קשר עם צוות Web-CDI"
 
@@ -1687,24 +1688,24 @@ msgid "Instructions:"
 msgstr "הוראות"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:163
-#: cdi_forms/templates/cdi_forms/cdi_base.html:155
+#: cdi_forms/templates/cdi_forms/cdi_base.html:166
 msgid "Okay"
 msgstr "כן"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:174
-#: cdi_forms/templates/cdi_forms/cdi_base.html:168
+#: cdi_forms/templates/cdi_forms/cdi_base.html:179
 msgid "Waiver Denied"
 msgstr "האישור נדחה"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:178
-#: cdi_forms/templates/cdi_forms/cdi_base.html:172
+#: cdi_forms/templates/cdi_forms/cdi_base.html:183
 msgid ""
 "Thank you for your response. We are unable to continue. Please close the "
 "window. If you would like, you may review the Waiver."
 msgstr "תודה על תגובתך. ניתן להמשיך ולמלא את השאלון רק לאחר אישור הודעה זו."
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:181
-#: cdi_forms/templates/cdi_forms/cdi_base.html:175
+#: cdi_forms/templates/cdi_forms/cdi_base.html:186
 msgid "Review Waiver"
 msgstr "הצג שוב את ההודעה"
 
@@ -1895,9 +1896,9 @@ msgid ""
 "perfectly fine!"
 msgstr ""
 "בחלק זה תתבקשו לסמן אילו מילים ילדך \"מבין ואומר\".ילדך \"מבין ואומר\" מילה "
-"ברשימה אם הוא יודע מה משמעות המילה ואומר אותה באופן עצמאי. להלן מספר דוגמאות."
-"השאלון הזה מיועד לילדים בגילאים שונים. יכול להיות שילדך לא מבין או אומר הרבה "
-"מאוד מילים מתוך הרשימה.זה לגמרי בסדר! "
+"ברשימה אם הוא יודע מה משמעות המילה ואומר אותה באופן עצמאי. להלן מספר "
+"דוגמאות.השאלון הזה מיועד לילדים בגילאים שונים. יכול להיות שילדך לא מבין או "
+"אומר הרבה מאוד מילים מתוך הרשימה.זה לגמרי בסדר! "
 
 #: cdi_forms/templates/cdi_forms/administration_instructions.html:157
 #: cdi_forms/templates/cdi_forms/cdi_form.html:206
@@ -2263,8 +2264,9 @@ msgid ""
 "many different children. Don’t worry if your child only knows a few of them "
 "right now. If you have any concerns about your child’s development, we "
 "recommend that you talk with your child’s physician. If you enjoyed our "
-"assessment, you can learn more about the CDI <a href=\"http://mb-cdi."
-"stanford.edu/\" target=\"_blank\">here</a>. We appreciate your contribution!"
+"assessment, you can learn more about the CDI <a href=\"http://mb-"
+"cdi.stanford.edu/\" target=\"_blank\">here</a>. We appreciate your "
+"contribution!"
 msgstr ""
 "תודה רבה על השתתפותך במילוי שאלון MacArthur-Bates Communicative Development "
 "Inventory (CDI)! בעזרתם של הורים ומטפלים כמוך, נוכל ללמוד על התפתחות שפה של "
@@ -2294,9 +2296,9 @@ msgid ""
 "perfectly fine!"
 msgstr ""
 "בחלק זה תתבקשו לסמן אילו מילים ילדך \"מבין ואומר\".ילדך \"מבין ואומר\" מילה "
-"ברשימה אם הוא יודע מה משמעות המילה ואומר אותה באופן עצמאי. להלן מספר דוגמאות."
-"השאלון הזה מיועד לילדים בגילאים שונים. יכול להיות שילדך לא מבין או אומר הרבה "
-"מאוד מילים מתוך הרשימה.זה לגמרי בסדר! "
+"ברשימה אם הוא יודע מה משמעות המילה ואומר אותה באופן עצמאי. להלן מספר "
+"דוגמאות.השאלון הזה מיועד לילדים בגילאים שונים. יכול להיות שילדך לא מבין או "
+"אומר הרבה מאוד מילים מתוך הרשימה.זה לגמרי בסדר! "
 
 #: cdi_forms/templates/cdi_forms/cat_forms/cat_form.html:59
 #, fuzzy
@@ -2385,6 +2387,45 @@ msgstr "האם לילדך יש אחים?"
 msgid "* or word used in your family"
 msgstr ""
 
+#: cdi_forms/templates/cdi_forms/cdi_base.html:76
+msgctxt "CAT"
+msgid "This form can be filled any time before the due date."
+msgstr "ניתן למלא שאלון זה בכל זמן לפני תאריך התפוגה שלו"
+
+#: cdi_forms/templates/cdi_forms/cdi_base.html:77
+msgctxt "CAT"
+msgid ""
+"It can also be saved at any time and resumed later by using the same link"
+msgstr ""
+"ניתן גם לשמור את התשובות בכל רגע ולהמשיך למלא את השאלון תוך שימוש באותו "
+"הקישור"
+
+#: cdi_forms/templates/cdi_forms/cdi_base.html:78
+msgctxt "CAT"
+msgid "After the form is submitted, it cannot be altered."
+msgstr "לאחר שהשאלון נשלח לא ניתן לשנות את התשובות"
+
+#: cdi_forms/templates/cdi_forms/cdi_base.html:79
+msgctxt "CAT"
+msgid "The form also cannot be altered after the due date."
+msgstr "לא ניתן לשנות את התשובות לאחר תאריך התפוגה של השאלון"
+
+#: cdi_forms/templates/cdi_forms/cdi_base.html:80
+msgctxt "CAT"
+msgid ""
+"Please use the navigation buttons below. Do not use the \"back\" and "
+"\"forward\" buttons on your browser."
+msgstr ""
+"נא להשתמש בכפתורי הניווט שלמטה. נא לא להשתמש בכפתורי ה\"אחורה\" ו\"קדימה\" "
+"שבדפדפן שלך."
+
+#: cdi_forms/templates/cdi_forms/cdi_base.html:81
+msgctxt "CAT"
+msgid ""
+"You can use the tab button and arrows keys to quickly navigate and answer "
+"questions."
+msgstr "ניתן להשתמש בכפתור tab ובחצים כדי לנווט במסמך ולענות על שאלות."
+
 #: cdi_forms/templates/cdi_forms/overflow.html:44
 #: cdi_forms/templates/cdi_forms/study_overflow.html:44
 msgid ""
@@ -2399,8 +2440,8 @@ msgstr ""
 "תודה רבה על התעניינותך בשאלון MacArthur-Bates Communicative Development "
 "Inventory (CDI)! נראה שכבר מילאת שאלון זה בעבר. אנו מבקשים למלא את השאלון רק "
 "פעם אחת. במידה ואתם מודאגים לגבי התפתחות ילדך, אנו ממליצים שתפנה לרופא.אם "
-"נהנת למלא את השאלון, אפשר ללמוד עוד על CDI <a href=\"http://mb-cdi.stanford."
-"edu/\" target=\"_blank\">כאן</a>."
+"נהנת למלא את השאלון, אפשר ללמוד עוד על CDI <a href=\"http://mb-"
+"cdi.stanford.edu/\" target=\"_blank\">כאן</a>."
 
 #: cdi_forms/templates/cdi_forms/overflow.html:49
 #: cdi_forms/templates/cdi_forms/study_overflow.html:49
@@ -2482,14 +2523,6 @@ msgstr "הכלים של כל המחקרים חייבים להיות זהים."
 #, python-format
 msgid "Studies must have at least 1 responsent. %s has none"
 msgstr "למחקרים חייב להיות לפחות משתתף אחד. ל %s לא היה אף משתתף. "
-
-#: researcher_UI/admin/admin_actions.py:25
-#: researcher_UI/admin/admin_actions.py:53
-#, python-brace-format
-msgid ""
-"You cannot download data for {q.name}.  The study has opted out of "
-"datasharing"
-msgstr ""
 
 #: researcher_UI/forms/study_forms.py:32
 msgid "Default"
@@ -3326,14 +3359,25 @@ msgid "Reset"
 msgstr ""
 
 #, fuzzy
+#~| msgid "This form can be filled any time before the due date."
+#~ msgctxt "CAT"
+#~ msgid "CAT This form can be filled any time before the due date."
+#~ msgstr "ניתן למלא שאלון זה בכל זמן לפני תאריך התפוגה שלו"
+
+#, fuzzy
+#~| msgid "This form can be filled any time before the due date."
+#~ msgid "NOT CAT This form can be filled any time before the due date."
+#~ msgstr "ניתן למלא שאלון זה בכל זמן לפני תאריך התפוגה שלו"
+
+#, fuzzy
 #~| msgid ""
 #~| "Your child should be between %(min_age)d to %(max_age)d months of age."
 #~ msgid ""
 #~ "Your child should be between {data[\"min_age\"]} to {data[\"max_age\"]} "
 #~ "months of age."
 #~ msgstr ""
-#~ "לפי הרישומים שלנו הילד שלך אמור להיות בין גיל %(min_age)d לגיל "
-#~ "%(max_age)d חודשים."
+#~ "לפי הרישומים שלנו הילד שלך אמור להיות בין גיל %(min_age)d לגיל %"
+#~ "(max_age)d חודשים."
 
 #~ msgid ""
 #~ "Please click the following url and set your account password to finish "
