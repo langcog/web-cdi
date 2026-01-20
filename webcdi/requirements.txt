@@ -64,7 +64,7 @@ python-dotenv==1.0.1
 python-ipware==2.0.1
 python-stdnum==1.19
 pytz==2023.3.post1
-requests==2.32.2
+requests==2.32.4
 s3transfer==0.8.2
 selenium==4.25.0
 six==1.16.0
