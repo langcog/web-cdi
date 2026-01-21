@@ -2422,8 +2422,9 @@ msgid ""
 "It can also be saved at any time and resumed later by using the same link "
 "(<a id=\"bookmarkme\" href=\"\">\"create bookmark\" </a>)"
 msgstr ""
-"U kunt de vragenlijst tussendoor opslaan en op een ander moment verdergaan "
-"met invullen. Hiervoor kunt u dezelfde link gebruiken"
+"Gebruik tijdens het invullen van de vragenlijst de knoppen \"Nee\" of \"Ja\" "
+" om antwoord te geven. Zodra u op een antwoord geklikt heeft, verschijnt de"
+" volgende vraag. U kunt dan niet meer terug naar de vorige vraag"
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:78
 msgctxt "CAT"
