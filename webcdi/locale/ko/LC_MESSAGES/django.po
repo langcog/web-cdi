@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-24 07:44+0000\n"
+"POT-Creation-Date: 2026-01-21 12:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1631,7 +1631,6 @@ msgstr ""
 "니다."
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:76
-#: cdi_forms/templates/cdi_forms/cdi_base.html:77
 #: cdi_forms/templates/cdi_forms/cdi_base.html:86
 msgid "create bookmark"
 msgstr "책갈피 만들기"
@@ -2452,9 +2451,13 @@ msgid "This form can be filled any time before the due date."
 msgstr "본 설문은 마감일 전까지 언제든지 응답할 수 있습니다."
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:77
+#, fuzzy
+#| msgid ""
+#| "It can also be saved at any time and resumed later by using the same link"
 msgctxt "CAT"
 msgid ""
-"It can also be saved at any time and resumed later by using the same link"
+"It can also be saved at any time and resumed later by using the same link "
+"(<a id=\"bookmarkme\" href=\"\">\"create bookmark\" </a>)"
 msgstr ""
 "또한 설문을 저장한 뒤 언제든지 동일한 링크를 통해 다시 응답을 시작할 수 있습"
 "니다."
@@ -3435,6 +3438,13 @@ msgstr ""
 #: webcdi/templates/registration/password_reset_form.html:33
 msgid "Reset"
 msgstr ""
+
+#~ msgctxt "CAT"
+#~ msgid ""
+#~ "It can also be saved at any time and resumed later by using the same link"
+#~ msgstr ""
+#~ "또한 설문을 저장한 뒤 언제든지 동일한 링크를 통해 다시 응답을 시작할 수 있"
+#~ "습니다."
 
 #, fuzzy
 #~| msgid "This form can be filled any time before the due date."

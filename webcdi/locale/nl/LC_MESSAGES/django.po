@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-24 07:44+0000\n"
+"POT-Creation-Date: 2026-01-21 12:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1613,7 +1613,6 @@ msgstr ""
 "met invullen. Hiervoor kunt u dezelfde link gebruiken"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:76
-#: cdi_forms/templates/cdi_forms/cdi_base.html:77
 #: cdi_forms/templates/cdi_forms/cdi_base.html:86
 msgid "create bookmark"
 msgstr "u kunt hier een bladwijzer voor deze link maken"
@@ -2414,17 +2413,17 @@ msgstr ""
 msgctxt "CAT"
 msgid "This form can be filled any time before the due date."
 msgstr ""
-"Houd in gedachten: Als uw kind een ander woord gebruikt (bijv. “raf” "
-"in plaats van “giraffe” of “omi” in plaats van “oma”) mag u ook “Ja” kiezen."
+"Houd in gedachten: Als uw kind een ander woord gebruikt (bijv. “raf” in "
+"plaats van “giraffe” of “omi” in plaats van “oma”) mag u ook “Ja” kiezen."
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:77
 msgctxt "CAT"
 msgid ""
-"It can also be saved at any time and resumed later by using the same link"
+"It can also be saved at any time and resumed later by using the same link "
+"(<a id=\"bookmarkme\" href=\"\">\"create bookmark\" </a>)"
 msgstr ""
-"Gebruik tijdens het invullen van de vragenlijst de knoppen “Nee“ of “Ja“ om "
-"antwoord te geven. Zodra u op een antwoord geklikt heeft, verschijnt de "
-"volgende vraag. U kunt dan niet meer terug naar de vorige vraag. "
+"U kunt de vragenlijst tussendoor opslaan en op een ander moment verdergaan "
+"met invullen. Hiervoor kunt u dezelfde link gebruiken"
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:78
 msgctxt "CAT"
@@ -2437,8 +2436,8 @@ msgctxt "CAT"
 msgid "The form also cannot be altered after the due date."
 msgstr ""
 "U kunt de vragenlijst tussendoor opslaan en op een ander moment verdergaan "
-"met invullen. Hiervoor kunt u dezelfde link gebruiken (u kunt hier een "
-"bladwijzer voor deze link maken)."
+"met invullen. Hiervoor kunt u dezelfde link gebruiken <a id=\"bookmarkme\" "
+"href=\"\">(u kunt hier een bladwijzer voor deze link maken).</a>"
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:80
 msgctxt "CAT"
@@ -3390,3 +3389,11 @@ msgstr ""
 #: webcdi/templates/registration/password_reset_form.html:33
 msgid "Reset"
 msgstr ""
+
+#~ msgctxt "CAT"
+#~ msgid ""
+#~ "It can also be saved at any time and resumed later by using the same link"
+#~ msgstr ""
+#~ "Gebruik tijdens het invullen van de vragenlijst de knoppen “Nee“ of “Ja“ "
+#~ "om antwoord te geven. Zodra u op een antwoord geklikt heeft, verschijnt "
+#~ "de volgende vraag. U kunt dan niet meer terug naar de vorige vraag. "

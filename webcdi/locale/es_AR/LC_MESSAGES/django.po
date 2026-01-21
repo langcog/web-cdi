@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-24 07:44+0000\n"
+"POT-Creation-Date: 2026-01-21 12:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1620,7 +1620,6 @@ msgstr ""
 "utilizando la misma página."
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:76
-#: cdi_forms/templates/cdi_forms/cdi_base.html:77
 #: cdi_forms/templates/cdi_forms/cdi_base.html:86
 msgid "create bookmark"
 msgstr "cree el marcador"
@@ -2478,9 +2477,13 @@ msgstr ""
 "de entrega."
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:77
+#, fuzzy
+#| msgid ""
+#| "It can also be saved at any time and resumed later by using the same link"
 msgctxt "CAT"
 msgid ""
-"It can also be saved at any time and resumed later by using the same link"
+"It can also be saved at any time and resumed later by using the same link "
+"(<a id=\"bookmarkme\" href=\"\">\"create bookmark\" </a>)"
 msgstr ""
 "También se puede guardar en cualquier momento y puede continuar más tarde "
 "utilizando la misma página."
@@ -3447,6 +3450,13 @@ msgstr ""
 #: webcdi/templates/registration/password_reset_form.html:33
 msgid "Reset"
 msgstr ""
+
+#~ msgctxt "CAT"
+#~ msgid ""
+#~ "It can also be saved at any time and resumed later by using the same link"
+#~ msgstr ""
+#~ "También se puede guardar en cualquier momento y puede continuar más tarde "
+#~ "utilizando la misma página."
 
 #, fuzzy
 #~| msgid "This form can be filled any time before the due date."

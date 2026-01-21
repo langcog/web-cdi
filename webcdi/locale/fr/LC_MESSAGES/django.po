@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-24 07:44+0000\n"
+"POT-Creation-Date: 2026-01-21 12:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1637,7 +1637,6 @@ msgid ""
 msgstr "Il peut être sauvegardé et repris plus tard en utilisant le même lien"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:76
-#: cdi_forms/templates/cdi_forms/cdi_base.html:77
 #: cdi_forms/templates/cdi_forms/cdi_base.html:86
 msgid "create bookmark"
 msgstr "créer un signet"
@@ -2467,8 +2466,11 @@ msgstr "Ce formulaire peut être rempli à tout moment avant la date limite."
 #: cdi_forms/templates/cdi_forms/cdi_base.html:77
 msgctxt "CAT"
 msgid ""
-"It can also be saved at any time and resumed later by using the same link"
-msgstr "Il peut être sauvegardé et repris plus tard en utilisant le même lien"
+"It can also be saved at any time and resumed later by using the same link "
+"(<a id=\"bookmarkme\" href=\"\">\"create bookmark\" </a>)"
+msgstr ""
+"Il peut être sauvegardé et repris plus tard en utilisant le même lien"
+"(<a id=\"bookmarkme\" href=\"\">\"créer un signet\" </a>)"
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:78
 msgctxt "CAT"
@@ -3430,6 +3432,12 @@ msgstr ""
 #: webcdi/templates/registration/password_reset_form.html:33
 msgid "Reset"
 msgstr ""
+
+#~ msgctxt "CAT"
+#~ msgid ""
+#~ "It can also be saved at any time and resumed later by using the same link"
+#~ msgstr ""
+#~ "Il peut être sauvegardé et repris plus tard en utilisant le même lien"
 
 #, fuzzy
 #~| msgid "This form can be filled any time before the due date."

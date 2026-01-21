@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-24 07:44+0000\n"
+"POT-Creation-Date: 2026-01-21 12:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1624,7 +1624,6 @@ msgstr ""
 "とができます。"
 
 #: cdi_forms/templates/cdi_forms/administration_base.html:76
-#: cdi_forms/templates/cdi_forms/cdi_base.html:77
 #: cdi_forms/templates/cdi_forms/cdi_base.html:86
 msgid "create bookmark"
 msgstr "ブックマークを作成する"
@@ -2384,10 +2383,12 @@ msgstr "このアンケートは期日前であればいつでも記入できま
 #: cdi_forms/templates/cdi_forms/cdi_base.html:77
 msgctxt "CAT"
 msgid ""
-"It can also be saved at any time and resumed later by using the same link"
+"It can also be saved at any time and resumed later by using the same link "
+"(<a id=\"bookmarkme\" href=\"\">\"create bookmark\" </a>)"
 msgstr ""
 "また、このアンケートを保存し、同じリンクを使用してご都合の良い時に再開するこ"
 "とができます。"
+"(<a id=\"bookmarkme\" href=\"\">\"ブックマークを作成する\" </a>)"
 
 #: cdi_forms/templates/cdi_forms/cdi_base.html:78
 msgctxt "CAT"
@@ -3362,6 +3363,13 @@ msgstr ""
 #: webcdi/templates/registration/password_reset_form.html:33
 msgid "Reset"
 msgstr "リセット"
+
+#~ msgctxt "CAT"
+#~ msgid ""
+#~ "It can also be saved at any time and resumed later by using the same link"
+#~ msgstr ""
+#~ "また、このアンケートを保存し、同じリンクを使用してご都合の良い時に再開する"
+#~ "ことができます。"
 
 #, fuzzy
 #~| msgid "This form can be filled any time before the due date."
