@@ -40,16 +40,8 @@ docker-cleanup:
 	docker-compose exec web black .
 	docker-compose exec web isort .
 
-populate-docker-db:
-	docker-compose exec -T db mysql -uwhite_eagle_lodge -pwhite_eagle_lodge white_eagle_lodge < live-database.sql
-	
-make sync-dev-db::
-	ssh giant-dev mysql:export develop-${PROJECT} > mydump.sql
-	cat mydump.sql | docker-compose exec -T db mysql -pgiant ${PROJECT}
-	rm mydump.sql
-
-make sync-media::
-	rsync -rvz live:/var/lib/dokku/data/storage/live-${PROJECT}/media ./media/
+docker-makemessages:
+ 	docker-compose exec web ./manage.py makemessages -all
 
 make dev-deploy::
 	eb deploy webcdi-dev-django4

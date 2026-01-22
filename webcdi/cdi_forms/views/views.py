@@ -246,6 +246,7 @@ def cdi_form(request, hash_id):
         data["language"] = administration_instance.study.instrument.language
         data["form"] = administration_instance.study.instrument.form
         data["language_code"] = user_language
+        data["object"] = administration_instance
 
         # if administration_instance.study.confirm_completion and administration_instance.study.researcher.username == "langcoglab" and administration_instance.study.allow_payment:
         if (
