@@ -41,8 +41,8 @@ docker-cleanup:
 	docker-compose exec web isort .
 
 docker-makemessages:
- 	docker-compose exec web ./manage.py makemessages -all
-
+	docker-compose exec web ./manage.py makemessages -all
+	
 make dev-deploy::
 	eb deploy webcdi-dev-django4
 
