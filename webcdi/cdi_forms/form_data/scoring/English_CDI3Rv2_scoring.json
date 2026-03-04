@@ -20,7 +20,7 @@
     {
         "title" : "Sentence complexity",
         "category" : "complexity",
-        "measure" : "mostly b",
+        "measure" : "mostly (b)",
         "order" : 10
     },
     {
