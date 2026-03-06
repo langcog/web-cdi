@@ -113,13 +113,25 @@
         },
         {
             "id":6,
-            "title":"F. Talking about language and about print",
+            "title":"F. Talking about language",
+            "types":[
+                {
+                    "id":"meta_lang",
+                    "title":"",
+                    "type":"radiobutton",
+                    "page":13
+                }
+            ]
+        },
+         {
+            "id":6,
+            "title":"G. Talking about print",
             "types":[
                 {
                     "id":"meta_print",
                     "title":"",
                     "type":"radiobutton",
-                    "page":13
+                    "page":14
                 }
             ]
         }
