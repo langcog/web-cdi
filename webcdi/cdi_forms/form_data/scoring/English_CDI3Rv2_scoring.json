@@ -28,12 +28,13 @@
         "category" : "meta_lang",
         "measure" : "sometimes; often; yes",
         "order" : 11
-    },{
+    },
+    {
         "title" : "Talking about print",
         "category" : "meta_print",
         "measure" : "sometimes; often; yes",
         "order" : 12
-    }
+    },
     {
         "title" : "Combination Example 1",
         "category" : "combination_example1",
