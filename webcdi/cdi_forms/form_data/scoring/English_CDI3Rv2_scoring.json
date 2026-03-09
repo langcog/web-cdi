@@ -9,11 +9,17 @@
         "title" : "Using Language",
         "category" : "usage",
         "measure" : "sometimes; often",
+        "order" : 7
+    },
+    {
+        "title" : "Pronunciation Family",
+        "category" : "pronunciation_1",
+        "measure" : "sometimes; often; yes",
         "order" : 8
     },
     {
-        "title" : "Pronunciation",
-        "category" : "pronunciation",
+        "title" : "Pronunciation Outside Family",
+        "category" : "pronunciation_2",
         "measure" : "sometimes; often; yes",
         "order" : 9
     },
