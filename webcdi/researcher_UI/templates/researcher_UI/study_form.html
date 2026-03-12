@@ -85,6 +85,15 @@
 
                   $( "#id_age_range_0" ).val( '8' );
                   $( "#id_age_range_1" ).val( '18' );                      
+                } else if ( current_instrument.indexOf('CDI3R') > -1 ) {
+                  $('#slider_div').slider('values', 0, 30);
+                  $('#slider_div').slider('values', 1, 48);     
+
+                  $('#min').html( 30 );
+                  $('#max').html( 48 ); 
+
+                  $( "#id_age_range_0" ).val( '30' );
+                  $( "#id_age_range_1" ).val( '48' ); 
                 } else if ( current_instrument.indexOf('CDI3') > -1 ) {
                   $('#slider_div').slider('values', 0, 30);
                   $('#slider_div').slider('values', 1, 37);     

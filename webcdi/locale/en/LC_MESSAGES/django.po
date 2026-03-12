@@ -2374,7 +2374,7 @@ msgstr ""
 #: cdi_forms/views/background_info_views.py:465
 #, python-format
 msgid "Your child should be between %(min_age)d to %(max_age)d months of age."
-msgstr ""
+msgstr "This form is appropriate for children %(min_age)d to %(max_age)d months of age. "
 
 #: cdi_forms/views/background_info_views.py:168
 #: cdi_forms/views/background_info_views.py:494

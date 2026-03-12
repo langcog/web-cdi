@@ -124,6 +124,7 @@
 		"csv_file": "cdi_form_csv/cdi_forms/[Canadian_English_WS].csv",
 		"json_data": "cdi_forms/form_data/Canadian_English_WS_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/Canadian_English_WS_scoring.json",
+		"benchmark" : "cdi_forms/form_data/benchmarking/English_WS_benchmark.csv",
 		"demographics" : ["English_Split.json"]
 	},
 	{
@@ -136,6 +137,7 @@
 		"csv_file": "cdi_form_csv/cdi_forms/[Canadian_English_WG].csv",
 		"json_data": "cdi_forms/form_data/Canadian_English_WG_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/Canadian_English_WG_scoring.json",
+		"benchmark" : "cdi_forms/form_data/benchmarking/English_WG_benchmark.csv",
 		"demographics" : ["English_Split.json"]
 	},
 	{
@@ -330,8 +332,8 @@
 		"family": "English CDI3R",
 		"form": "CDI3R",
 		"verbose_name": "English (American) CDI3R",
-		"min_age": 16,
-		"max_age": 30,
+		"min_age": 30,
+		"max_age": 48,
 		"csv_file": "cdi_form_csv/cdi_forms/[English_CDI3R].csv",
 		"json_data": "cdi_forms/form_data/English_CDI3R_meta.json",
 		"scoring_json" : "cdi_forms/form_data/scoring/English_CDI3R_scoring.json",
@@ -351,5 +353,17 @@
 		"starting_words" : "cdi_form_csv/cat_forms/starting_words/[Dutch_Ages_CAT].csv",
 		"demographics" : ["Dutch_Split.json", "Dutch_CAT.json"]
 		
+	},
+	{
+		"language": "English",
+		"family": "English CDI3R",
+		"form": "CDI3Rv2",
+		"verbose_name": "English (American) CDI3R v2",
+		"min_age": 30,
+		"max_age": 48,
+		"csv_file": "cdi_form_csv/cdi_forms/[English_CDI3Rv2].csv",
+		"json_data": "cdi_forms/form_data/English_CDI3Rv2_meta.json",
+		"scoring_json" : "cdi_forms/form_data/scoring/English_CDI3Rv2_scoring.json",
+		"demographics" : ["English_CDI3R_demographics.json","English_Split.json"]
 	}
 ]

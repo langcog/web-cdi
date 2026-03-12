@@ -13,7 +13,7 @@ docker-db-populate:
 	docker-compose exec -it web ./manage.py 01_populate_instrument_family
 	docker-compose exec -it web ./manage.py 02_populate_instrument
 	docker-compose exec -it web ./manage.py 03_populate_scoring
-	docker-compose exec -it web ./manage.py 04a_delete_benchmark;
+	docker-compose exec -it web ./manage.py 04a_delete_benchmark
 	docker-compose exec -it web ./manage.py 04_populate_benchmark
 	docker-compose exec -it web ./manage.py 05_populate_choices
 	docker-compose exec -it web ./manage.py 06_populate_items
@@ -41,8 +41,8 @@ docker-cleanup:
 	docker-compose exec web isort .
 
 docker-makemessages:
- 	docker-compose exec web ./manage.py makemessages -all
-
+	docker-compose exec web ./manage.py makemessages -all
+	
 make dev-deploy::
 	eb deploy webcdi-dev-django4
 
