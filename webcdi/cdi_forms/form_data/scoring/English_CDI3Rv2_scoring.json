@@ -8,19 +8,19 @@
     {
         "title" : "Using Language",
         "category" : "usage",
-        "measure" : "sometimes; often",
+        "measure" : "sometimes;often",
         "order" : 7
     },
     {
         "title" : "Pronunciation Family",
         "category" : "pronunciation_1",
-        "measure" : "sometimes; often; yes",
+        "measure" : "sometimes;often",
         "order" : 8
     },
     {
         "title" : "Pronunciation Outside Family",
         "category" : "pronunciation_2",
-        "measure" : "sometimes; often; yes",
+        "measure" : "sometimes;often",
         "order" : 9
     },
     {
@@ -32,13 +32,13 @@
     {
         "title" : "Talking about language",
         "category" : "meta_lang",
-        "measure" : "sometimes; often; yes",
+        "measure" : "sometimes;often;yes",
         "order" : 11
     },
     {
         "title" : "Talking about print",
         "category" : "meta_print",
-        "measure" : "sometimes; often; yes",
+        "measure" : "sometimes;often;yes",
         "order" : 12
     },
     {
