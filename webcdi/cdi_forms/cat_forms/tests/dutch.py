@@ -2,9 +2,9 @@ import csv
 import datetime
 import os
 
-from django.core.management import call_command
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.management import call_command
 from django.test import TestCase, tag
 from django.urls import reverse
 from django.utils import timezone
@@ -26,7 +26,8 @@ def make_boolean(text):
         return True
     return False
 
-@tag('cat','dutch')
+
+@tag("cat", "dutch")
 class CATDutchAdministrationDataItemTest(TestCase):
     fixtures = [
         "researcher_UI/fixtures/researcher_UI_test_fixtures.json",
@@ -84,11 +85,13 @@ class CATDutchAdministrationDataItemTest(TestCase):
             self.backgroundinfo.save()
 
             response = self.client.get(self.url)
-            
+
             self.assertEqual(response.status_code, 200)
             self.assertIsInstance(response.context["form"], CatItemForm)
-            
-            self.assertContains(response, f"Begrijpt en zegt uw kind ...  {word.lower()}?")
+
+            self.assertContains(
+                response, f"Begrijpt en zegt uw kind ...  {word.lower()}?"
+            )
 
     def sequence_test(self, file_name):
         response = self.client.get(self.url)
@@ -105,7 +108,8 @@ class CATDutchAdministrationDataItemTest(TestCase):
             self.assertEqual(response.status_code, 200)
             self.assertIsInstance(response.context["form"], CatItemForm)
             self.assertContains(
-                response, f"Begrijpt en zegt uw kind ...  {row[col_names.index('item')].lower()}?"
+                response,
+                f"Begrijpt en zegt uw kind ...  {row[col_names.index('item')].lower()}?",
             )
             payload = {
                 "word_id": row[col_names.index("index")],
@@ -132,7 +136,7 @@ class CATDutchAdministrationDataItemTest(TestCase):
                     response.context["object"].catresponse.est_theta,
                     float("{:.4f}".format(float(row[col_names.index("theta")]))),
                 )
-    
+
     def test_spanish_start_values(self):
         self.start_values(
             f"{settings.BASE_DIR}/cdi_forms/cat_forms/tests/test_data/dutch_start.csv"

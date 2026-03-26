@@ -26,7 +26,7 @@ def make_boolean(text):
     return False
 
 
-@tag('cat')
+@tag("cat")
 class CATFrenchAdministrationDataItemTest(TestCase):
     fixtures = [
         "researcher_UI/fixtures/researcher_UI_test_fixtures.json",

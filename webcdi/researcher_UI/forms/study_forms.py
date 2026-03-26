@@ -140,7 +140,8 @@ class AddStudyForm(BetterModelForm):
     redirect_button_boolean = forms.BooleanField(
         initial=True,
         required=False,
-        help_text="Deselect this if you want to specify customer text for the redirect button",)
+        help_text="Deselect this if you want to specify customer text for the redirect button",
+    )
     redirect_button_text = forms.CharField(required=False)
 
     participant_source_boolean = forms.ChoiceField(
@@ -211,7 +212,7 @@ class AddStudyForm(BetterModelForm):
         required=False,
         initial=True,
     )
-    show_my_answers_boolen =forms.BooleanField(
+    show_my_answers_boolen = forms.BooleanField(
         required=False,
         initial=True,
     )
@@ -271,7 +272,10 @@ class AddStudyForm(BetterModelForm):
             Field("test_period"),
             Field("timing"),
             Field("allow_payment", css_class="css_enabler"),
-            Div(Field("gift_card_provider"),css_class="allow_payment collapse form-control"),
+            Div(
+                Field("gift_card_provider"),
+                css_class="allow_payment collapse form-control",
+            ),
             Div(Field("gift_codes"), css_class="allow_payment collapse"),
             Div(Field("gift_amount"), css_class="allow_payment collapse"),
             Field("single_reusable_link_active"),
@@ -320,15 +324,14 @@ class AddStudyForm(BetterModelForm):
                 Field("redirect_url"),
                 Field("direct_redirect_boolean", css_class="css_enabler"),
                 Div(
-                    Field("json_redirect"), 
+                    Field("json_redirect"),
                     css_class="direct_redirect_boolean collapse",
                 ),
                 Field("custom_redirect_button_boolean"),
                 Div(
                     Field("custom_redirect_button_text"),
-                    css_class="custom_redirect_button_boolean collapse"
+                    css_class="custom_redirect_button_boolean collapse",
                 ),
-
                 css_class="redirect_boolean collapse",
             ),
             Field("participant_source_boolean", css_class="css_enabler form-control"),

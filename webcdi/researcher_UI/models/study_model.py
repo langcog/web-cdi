@@ -70,13 +70,17 @@ class Study(models.Model):
         blank=True, null=True, help_text="Enter redirect json here"
     )
     custom_redirect_button_boolean = models.BooleanField(
-        default = False,
-        verbose_name='Use Bespoke Text for Redirect Button',
-        help_text='Select if you want Bespoke Text'
+        default=False,
+        verbose_name="Use Bespoke Text for Redirect Button",
+        help_text="Select if you want Bespoke Text",
     )
-    custom_redirect_button_text = models.CharField(max_length=40, blank=True, null=True,
-                                            verbose_name='Custom Text for Redirect Button',
-                                            help_text='Specify Redirect Button text here')
+    custom_redirect_button_text = models.CharField(
+        max_length=40,
+        blank=True,
+        null=True,
+        verbose_name="Custom Text for Redirect Button",
+        help_text="Specify Redirect Button text here",
+    )
     append_source_id_to_redirect = models.BooleanField(
         verbose_name="Append source_id to redirect URL?", default=False
     )
