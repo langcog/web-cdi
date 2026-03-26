@@ -137,6 +137,12 @@ class AddStudyForm(BetterModelForm):
         widget=forms.Textarea(attrs={"placeholder": JSON_REDIRECT_PLACEHOLDER}),
     )
 
+    redirect_button_boolean = forms.BooleanField(
+        initial=True,
+        required=False,
+        help_text="Deselect this if you want to specify customer text for the redirect button",)
+    redirect_button_text = forms.CharField(required=False)
+
     participant_source_boolean = forms.ChoiceField(
         label="Participant Source", choices=choices.PARTICIPANT_SOURCE_CHOICES
     )  # Whether to give redirect button upon completion of administration
@@ -202,6 +208,10 @@ class AddStudyForm(BetterModelForm):
         widget=forms.TextInput(attrs={"placeholder": "$XX.XX"}),
     )
     single_reusable_link_active = forms.BooleanField(
+        required=False,
+        initial=True,
+    )
+    show_my_answers_boolen =forms.BooleanField(
         required=False,
         initial=True,
     )
@@ -310,8 +320,15 @@ class AddStudyForm(BetterModelForm):
                 Field("redirect_url"),
                 Field("direct_redirect_boolean", css_class="css_enabler"),
                 Div(
-                    Field("json_redirect"), css_class="direct_redirect_boolean collapse"
+                    Field("json_redirect"), 
+                    css_class="direct_redirect_boolean collapse",
                 ),
+                Field("custom_redirect_button_boolean"),
+                Div(
+                    Field("custom_redirect_button_text"),
+                    css_class="custom_redirect_button_boolean collapse"
+                ),
+
                 css_class="redirect_boolean collapse",
             ),
             Field("participant_source_boolean", css_class="css_enabler form-control"),
@@ -329,6 +346,7 @@ class AddStudyForm(BetterModelForm):
     def completion_page_fieldset(self):
         return Fieldset(
             "Completion Page Details",
+            Field("show_my_answers_boolen"),
             Field("print_my_answers_boolean"),
             Field("confirm_completion"),
             Field("show_feedback"),

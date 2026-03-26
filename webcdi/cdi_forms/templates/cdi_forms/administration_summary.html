@@ -224,9 +224,11 @@
         {% endif %}
 
         <!-- Text triggers the submitted answers div to appear -->
+         {% if object.study.show_my_answers_boolen %}
         <div class="row justify-content-center">
             <h4><a href="#filled_form" data-toggle="collapse">{% trans "Show Me My Answers" %}</a></h4>
         </div>
+        {% endif %}
         {% if object.study.print_my_answers_boolean %}
         <div class="row justify-content-center">
             <h4><a href="{% url 'administration-pdf-view' object.pk %}">{% trans "Print My Answers" %}</a></h4>
@@ -234,7 +236,13 @@
         {% endif %}
         {% if object.study.redirect_boolean %}
         <div class="row justify-content-center">
-            <h4><a class="btn btn-danger btn-lg active" href="{{ redirect_url }}">{% trans "Click to complete the study" %}</a></h4>
+            <h4><a class="btn btn-danger btn-lg active" href="{{ redirect_url }}">
+                {% if object.study.custom_redirect_button_boolean %}
+                    {{ object.study.custom_redirect_button_text }}
+                {% else %}
+                    {% trans "Click to complete the study" %} 
+                {% endif %}
+                </a></h4>
         </div>
         {% endif %}
         

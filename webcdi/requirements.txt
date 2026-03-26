@@ -22,7 +22,7 @@ django-admin-rangefilter==0.12.0
 django-bootstrap3==21.1
 django-bootstrap3-datetimepicker==2.2.3
 django-bootstrap4==21.1
-django-ckeditor==6.7.0
+django-ckeditor==6.7.3
 django-countries==7.5.1
 django-crispy-forms==2.1
 django-health-check==3.17.0
