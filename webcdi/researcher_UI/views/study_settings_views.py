@@ -95,7 +95,7 @@ class AddStudy(LoginRequiredMixin, CreateView):
         study_instance.researcher = researcher
         if not form.cleaned_data.get("test_period"):
             study_instance.test_period = 14
-
+        
         study_instance.save()
 
         return redirect(
@@ -106,3 +106,5 @@ class AddStudy(LoginRequiredMixin, CreateView):
         context = super().get_context_data(**kwargs)
         context["researcher"] = self.request.user
         return context
+
+    

@@ -7,6 +7,7 @@ from django import forms
 from django.contrib.postgres.forms import IntegerRangeField
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
+from django.core.exceptions import ValidationError
 
 from form_utils.forms import BetterModelForm
 from researcher_UI import choices
@@ -368,6 +369,13 @@ class AddStudyForm(BetterModelForm):
         model = Study
         exclude = ["study_group", "researcher"]
 
+    def clean_name(self):
+        study_name = self.cleaned_data["name"]
+        researcher = self.researcher
+        if Study.objects.filter(name=study_name, researcher=researcher ).exists():
+            raise ValidationError(f"You MUST use unique Study Names.  You have already used '{study_name}'")
+        
+        return study_name
 
 class EditStudyForm(AddStudyForm):
     def __init__(self, *args, **kwargs):
