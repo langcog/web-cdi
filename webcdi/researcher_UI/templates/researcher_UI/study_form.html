@@ -308,6 +308,19 @@
               check_for_direct_redirect_boolean();      
             });
 
+            function check_for_custom_redirect_button_boolean() {
+              if ($('#id_custom_redirect_button_boolean').prop('checked')) {
+                $('.custom_redirect_button_boolean').removeClass('collapse')
+              } else {
+                $('.custom_redirect_button_boolean').addClass('collapse');
+              }  
+            }        
+
+            check_for_custom_redirect_button_boolean();
+            $('#id_custom_redirect_button_boolean').on('change', function () {
+              check_for_custom_redirect_button_boolean();      
+            });
+
             function check_for_allow_payment() {
               if ($('#id_allow_payment').prop('checked')) {
                 $('.allow_payment').removeClass('collapse')

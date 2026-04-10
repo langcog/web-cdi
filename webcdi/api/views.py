@@ -218,14 +218,14 @@ class SourceAPI(BaseAPIView):
                 study=study,
                 backgroundinfo__in=BackgroundInfo.objects.filter(
                     event_id=kwargs.pop("event_id"), source_id=kwargs.pop("source_id")
-                )
+                ),
             )
         else:
             administrations = Administration.objects.filter(
                 study=study,
                 backgroundinfo__in=BackgroundInfo.objects.filter(
                     source_id=kwargs.pop("source_id")
-                )
+                ),
             )
         qs_json = self.get_json(request, study, administrations)
 

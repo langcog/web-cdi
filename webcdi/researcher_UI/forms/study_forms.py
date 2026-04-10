@@ -7,6 +7,7 @@ from django import forms
 from django.contrib.postgres.forms import IntegerRangeField
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
+from django.core.exceptions import ValidationError
 
 from form_utils.forms import BetterModelForm
 from researcher_UI import choices
@@ -137,6 +138,13 @@ class AddStudyForm(BetterModelForm):
         widget=forms.Textarea(attrs={"placeholder": JSON_REDIRECT_PLACEHOLDER}),
     )
 
+    redirect_button_boolean = forms.BooleanField(
+        initial=True,
+        required=False,
+        help_text="Deselect this if you want to specify customer text for the redirect button",
+    )
+    redirect_button_text = forms.CharField(required=False)
+
     participant_source_boolean = forms.ChoiceField(
         label="Participant Source", choices=choices.PARTICIPANT_SOURCE_CHOICES
     )  # Whether to give redirect button upon completion of administration
@@ -205,6 +213,10 @@ class AddStudyForm(BetterModelForm):
         required=False,
         initial=True,
     )
+    show_my_answers_boolen = forms.BooleanField(
+        required=False,
+        initial=True,
+    )
 
     # Form validation. Form is passed automatically to views.py for higher level checking.
     def clean(self):
@@ -261,7 +273,10 @@ class AddStudyForm(BetterModelForm):
             Field("test_period"),
             Field("timing"),
             Field("allow_payment", css_class="css_enabler"),
-            Div(Field("gift_card_provider"),css_class="allow_payment collapse form-control"),
+            Div(
+                Field("gift_card_provider"),
+                css_class="allow_payment collapse form-control",
+            ),
             Div(Field("gift_codes"), css_class="allow_payment collapse"),
             Div(Field("gift_amount"), css_class="allow_payment collapse"),
             Field("single_reusable_link_active"),
@@ -310,7 +325,13 @@ class AddStudyForm(BetterModelForm):
                 Field("redirect_url"),
                 Field("direct_redirect_boolean", css_class="css_enabler"),
                 Div(
-                    Field("json_redirect"), css_class="direct_redirect_boolean collapse"
+                    Field("json_redirect"),
+                    css_class="direct_redirect_boolean collapse",
+                ),
+                Field("custom_redirect_button_boolean"),
+                Div(
+                    Field("custom_redirect_button_text"),
+                    css_class="custom_redirect_button_boolean collapse",
                 ),
                 css_class="redirect_boolean collapse",
             ),
@@ -329,6 +350,7 @@ class AddStudyForm(BetterModelForm):
     def completion_page_fieldset(self):
         return Fieldset(
             "Completion Page Details",
+            Field("show_my_answers_boolen"),
             Field("print_my_answers_boolean"),
             Field("confirm_completion"),
             Field("show_feedback"),
@@ -347,6 +369,13 @@ class AddStudyForm(BetterModelForm):
         model = Study
         exclude = ["study_group", "researcher"]
 
+    def clean_name(self):
+        study_name = self.cleaned_data["name"]
+        researcher = self.researcher
+        if Study.objects.filter(name=study_name, researcher=researcher ).exists():
+            raise ValidationError(f"You MUST use unique Study Names.  You have already used '{study_name}'")
+        
+        return study_name
 
 class EditStudyForm(AddStudyForm):
     def __init__(self, *args, **kwargs):

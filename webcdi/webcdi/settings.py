@@ -556,5 +556,5 @@ CAT_LANG_DICT = {
     "fr-ca": "FR",
     "en-ca": "EN",
     "ja": "JP",
-    "nl": "NL"
+    "nl": "NL",
 }

@@ -12,7 +12,9 @@ def get_pd_norms(study_obj, administrations, adjusted, answer_rows):
     q = Q(instrument=study_obj.instrument, instrument_score__title="Benchmark Theta")
     if Benchmark.objects.filter(q).exists():
         benchmarks = Benchmark.objects.filter(q).order_by("percentile")
-        lowest_percentile = benchmarks.filter(percentile__gt=0).order_by('percentile')[0]
+        lowest_percentile = benchmarks.filter(percentile__gt=0).order_by("percentile")[
+            0
+        ]
         max_age = Benchmark.objects.filter(q).order_by("-age").first().age
         min_age = Benchmark.objects.filter(q).order_by("age").first().age
 
@@ -56,15 +58,27 @@ def get_pd_norms(study_obj, administrations, adjusted, answer_rows):
                 row["Benchmarking Cohort Age"] = age
                 if answer["est_theta"]:
                     if answer["est_theta"] > b.raw_score:
-                        row["est_theta_percentile"] = b.percentile if b.percentile > 1 else f'<{lowest_percentile.percentile}'
+                        row["est_theta_percentile"] = (
+                            b.percentile
+                            if b.percentile > 1
+                            else f"<{lowest_percentile.percentile}"
+                        )
                     if obj.backgroundinfo.sex == "M":
                         if answer["est_theta"] > b.raw_score_boy:
-                            row["est_theta_percentile_sex"] = b.percentile if b.percentile > 1 else f'<{lowest_percentile.percentile}'
+                            row["est_theta_percentile_sex"] = (
+                                b.percentile
+                                if b.percentile > 1
+                                else f"<{lowest_percentile.percentile}"
+                            )
                     if obj.backgroundinfo.sex == "F":
                         if answer["est_theta"] > b.raw_score_girl:
-                            row["est_theta_percentile_sex"] = b.percentile if b.percentile > 1 else f'<{lowest_percentile.percentile}'
+                            row["est_theta_percentile_sex"] = (
+                                b.percentile
+                                if b.percentile > 1
+                                else f"<{lowest_percentile.percentile}"
+                            )
             if "est_theta_percentile" in row:
-                if row['est_theta_percentile']  == f'<{lowest_percentile.percentile}' :
+                if row["est_theta_percentile"] == f"<{lowest_percentile.percentile}":
                     q = Q(
                         instrument=obj.study.instrument,
                         instrument_score__title="Total Produced",
@@ -85,7 +99,10 @@ def get_pd_norms(study_obj, administrations, adjusted, answer_rows):
                     logger.debug(f"Exception {e}")
                     pass
 
-                if row['est_theta_percentile_sex']  == f'<{lowest_percentile.percentile}' :
+                if (
+                    row["est_theta_percentile_sex"]
+                    == f"<{lowest_percentile.percentile}"
+                ):
                     q = Q(
                         instrument=obj.study.instrument,
                         instrument_score__title="Total Produced",
@@ -102,9 +119,13 @@ def get_pd_norms(study_obj, administrations, adjusted, answer_rows):
                 try:
                     row["raw_score"] = int(Benchmark.objects.get(q).raw_score)
                     if obj.backgroundinfo.sex == "M":
-                        row["raw_score_sex"] = int(Benchmark.objects.get(q).raw_score_boy)
+                        row["raw_score_sex"] = int(
+                            Benchmark.objects.get(q).raw_score_boy
+                        )
                     elif obj.backgroundinfo.sex == "F":
-                        row["raw_score_sex"] = int(Benchmark.objects.get(q).raw_score_girl)
+                        row["raw_score_sex"] = int(
+                            Benchmark.objects.get(q).raw_score_girl
+                        )
                 except Exception as e:
                     logger.debug(f"Exception {e}")
                     pass
