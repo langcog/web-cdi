@@ -59,7 +59,7 @@ def download_cat_data(
     for answer in answers:
         row = {}
         row["administration_id"] = answer["administration_id"]
-        row["est_theta"] = float(answer["est_theta"])
+        row["est_theta"] = answer["est_theta"]
 
         if not summary and answer["administered_words"]:
             count = 0
