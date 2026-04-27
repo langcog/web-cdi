@@ -99,23 +99,28 @@ def get_pd_norms(study_obj, administrations, adjusted, answer_rows):
                     logger.debug(f"Exception {e}")
                     pass
 
-                if (
-                    row["est_theta_percentile_sex"]
-                    == f"<{lowest_percentile.percentile}"
-                ):
-                    q = Q(
-                        instrument=obj.study.instrument,
-                        instrument_score__title="Total Produced",
-                        age=age,
-                        percentile=lowest_percentile.percentile,
-                    )
-                else:
-                    q = Q(
-                        instrument=obj.study.instrument,
-                        instrument_score__title="Total Produced",
-                        age=age,
-                        percentile=row["est_theta_percentile_sex"],
-                    )
+                try:
+                    if (
+                        row["est_theta_percentile_sex"]
+                        == f"<{lowest_percentile.percentile}"
+                    ):
+                        q = Q(
+                            instrument=obj.study.instrument,
+                            instrument_score__title="Total Produced",
+                            age=age,
+                            percentile=lowest_percentile.percentile,
+                        )
+                    else:
+                        q = Q(
+                            instrument=obj.study.instrument,
+                            instrument_score__title="Total Produced",
+                            age=age,
+                            percentile=row["est_theta_percentile_sex"],
+                        )
+                except Exception as e:
+                    logger.debug(f"Exception {e}")
+                    pass
+
                 try:
                     row["raw_score"] = int(Benchmark.objects.get(q).raw_score)
                     if obj.backgroundinfo.sex == "M":
