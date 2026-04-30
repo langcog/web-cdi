@@ -152,6 +152,9 @@ class AddStudyForm(BetterModelForm):
     hide_source_id = forms.BooleanField(
         label="Hide source from participant/parent", required=False
     )
+    required_source_id = forms.BooleanField(
+        label="Is source id a required field?", required=False
+    )
     source_id_url_parameter_key = forms.CharField(required=False)
 
     backpage_boolean = forms.BooleanField(
@@ -338,6 +341,7 @@ class AddStudyForm(BetterModelForm):
             Field("participant_source_boolean", css_class="css_enabler form-control"),
             Div(
                 Field("hide_source_id"),
+                Field("required_source_id"),
                 Field("send_completion_flag_url", css_class="css_enabler form-control"),
                 Div(
                     Field("completion_data"),

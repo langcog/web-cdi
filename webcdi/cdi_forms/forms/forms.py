@@ -562,6 +562,9 @@ class BackgroundForm(BetterModelForm):
         if self.curr_context["study"].hide_source_id:
             self.fields["source_id"].widget = forms.HiddenInput()
 
+        if self.curr_context['study'].required_source_id:
+            self.fields["source_id"].required = True
+
         # if we have a specified background info, use it
         if os.path.isfile(self.filename):
             rows = []
