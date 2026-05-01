@@ -87,6 +87,11 @@ class Study(models.Model):
     hide_source_id = models.BooleanField(
         verbose_name="Hide source id from parents/participants?", default=False
     )
+    required_source_id = models.BooleanField(
+        default=False,
+        verbose_name="Is source id a required field?"
+    )
+    
     source_id_url_parameter_key = models.CharField(
         "URL parameter key", blank=True, null=True, max_length=51
     )
