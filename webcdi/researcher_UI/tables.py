@@ -33,6 +33,11 @@ class StudyAdministrationTable(tables.Table):
             else mark_safe('<span class="false">✘</span>') if not value else ""
         )
 
+    def __init__(self, *args, **kwargs):  
+        super().__init__(*args, **kwargs)
+        self.base_columns['subject_id'].verbose_name = "Child Id"
+        self.base_columns['opt_out'].verbose_name = "Opted out of sharing"
+
     # Associates administration table with administration model
     class Meta:
         model = Administration

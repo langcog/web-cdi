@@ -234,7 +234,7 @@
                                         <input type="text" class="form-control" name="local_lab_id" id="local_lab_id{{row.record.pk}}" value="{{row.record.local_lab_id}}">
                                     </div>
                                     <div class="form-group">
-                                        <label for="recipient-name" class="col-form-label">Participant opted out of broader sharing</label>
+                                        <label for="recipient-name" class="col-form-label">Opted out of sharing</label>
                                         <select name="opt_out" id="opt_out{{row.record.pk}}" class="form-group">
                                             <option value="None" {% if row.record.opt_out == None %} selected{% endif %}>Unknown</option>
                                             <option value="True" {% if row.record.opt_out == "Yes" %} selected {% endif %}> Yes</option>
