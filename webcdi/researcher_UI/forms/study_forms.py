@@ -18,13 +18,13 @@ logger = logging.getLogger("debug")
 
 # Form for creating a new study
 class AddStudyForm(BetterModelForm):
-    name = forms.CharField(label="Study Name", max_length=51)  # Study name
+    name = forms.CharField(label="Administration Group Name", max_length=51)  # Study name
     instrument = forms.ModelChoiceField(
         queryset=Instrument.objects.filter(language="English"),
-        empty_label="(choose from the list)",
+        empty_label="(choose from the list)"
     )  # Study instrument (CANNOT BE CHANGED LATER)
     no_demographic_boolean = forms.BooleanField(
-        label="Minimum demographic data provided in URL link",
+        label=_("Minimum demographic data provided in URL link"),
         help_text="You will need to include DOB, sex and age offset in the link URL.  For example http://127.0.0.1:8000/interface/henry/Henry%20Test%20-%20ws1/new_parent/?age={age}&offset={offset}&sex={sex}",
         required=False,
         # initial = False
@@ -39,11 +39,11 @@ class AddStudyForm(BetterModelForm):
     )  # Addition of an IRB waiver of documentation or any other instructive text can be added here
     allow_payment = forms.BooleanField(
         required=False,
-        label='Would you like to pay subjects in the form of gift cards? (You will need to upload gift card codes under "Update Study").',
+        label='Would you like to pay participants in the form of gift cards? (You will be able to upload additional vendor and code links "Update Administration Group").',
     )  # Whether study participants will be compensated in the form of gift card codes upon completion
     anon_collection = forms.BooleanField(
         required=False,
-        label="Do you plan on collecting only anonymous data in this study? (e.g., posting ads on social media, mass emails, etc)",
+        label="Do you plan on collecting only anonymous data? (e.g., posting ads on social media, mass emails, etc)",
     )  # Whether the study will have only anonymous participants (opens up a range of other settings for anonymous data collection)
     subject_cap = forms.IntegerField(
         label="Maximum number of participants",
@@ -69,11 +69,11 @@ class AddStudyForm(BetterModelForm):
             }
         ),
     )  # Number of days that a participant can use to complete an administration before expiration. By default, participants have 14 days to complete test. Ranges from 1-28 days.
-    age_range = IntegerRangeField(label="Age Range For Study (in months)")
+    age_range = IntegerRangeField(label="Age Range (in months)")
     show_feedback = forms.BooleanField(
         required=False,
         initial=True,
-        label="Would you like to show participants graphs of their data after completion?",
+        label="Show graph of participant's responses?",
     )
 
     prefilled_data_choices = (
@@ -84,7 +84,7 @@ class AddStudyForm(BetterModelForm):
     prefilled_data = forms.ChoiceField(
         choices=prefilled_data_choices,
         label="Pre-fill data for longitudinal participants?",
-        help_text="For longitudinal participants, would you like to populate the test with responses from earlier tests?",
+        help_text="For longitudinal participants, would you like to populate the administration with responses from earlier adminitrations?",
     )
 
     birth_weight_choices = (
@@ -95,7 +95,7 @@ class AddStudyForm(BetterModelForm):
         choices=birth_weight_choices, label="Measurement units for birthweight"
     )
     timing = forms.IntegerField(
-        label="Minimum time (minutes) a parent must take to complete the study (default=6)",
+        label="Minimum time (minutes) a parent must take to complete the administration (default=6)",
         required=True,
         widget=forms.NumberInput(),
         initial=6,
@@ -107,7 +107,7 @@ class AddStudyForm(BetterModelForm):
     )
 
     redirect_boolean = forms.BooleanField(
-        label="Provide redirect button at completion of study?", required=False
+        label="Provide redirect button back to this service after completion?", required=False
     )  # Whether to give redirect button upon completion of administration
     redirect_url = forms.URLField(
         required=False,
@@ -162,7 +162,7 @@ class AddStudyForm(BetterModelForm):
     )
 
     print_my_answers_boolean = forms.BooleanField(
-        label="Allow participant to print their responses at end of Study?",
+        label="Allow participant to print their responses after completion?",
         required=False,
     )
 
@@ -171,7 +171,7 @@ class AddStudyForm(BetterModelForm):
 
     share_opt_out = forms.BooleanField(
         required=False,
-        help_text="For chargeable instruments you may opt out of sharing the study data.",
+        help_text="For chargeable forms you may opt out of sharing the data.",
     )
     demographic_opt_out = forms.BooleanField(
         label="Collect only Minimum demographic data (age, sex, age offset).",
@@ -219,6 +219,7 @@ class AddStudyForm(BetterModelForm):
     show_my_answers_boolen = forms.BooleanField(
         required=False,
         initial=True,
+        label="Allow participant to see their answers?"
     )
 
     # Form validation. Form is passed automatically to views.py for higher level checking.
@@ -244,6 +245,7 @@ class AddStudyForm(BetterModelForm):
                     researcher=self.researcher.researcher
                 ),
                 empty_label="(choose from the list)",
+                label="Form"
             )
         else:
             try:
@@ -269,7 +271,7 @@ class AddStudyForm(BetterModelForm):
 
     def study_options_fieldset(self):
         return Fieldset(
-            "Study Options",
+            "Options",
             Field("name"),
             Field("instrument"),
             Field("share_opt_out"),

@@ -4,32 +4,36 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 id="modal-title" class="modal-title" >Administer new subjects</h4>
+        <h4 id="modal-title" class="modal-title" >Administer new administrations</h4>
       </div>
       <div class="modal-body">
       <form method='post' class="form-horizontal" enctype="multipart/form-data">
         {% csrf_token %}
-        <p>Use ONE of these options to add participants to your interface. Use the "New Subject Ids" option to create links using your own ID numbers (numeric only). Typically, this is done in small batches when you are ready to send out the links. Use the "Autogenerate" or "Upload CSV" dialog if you want to create many links at the same time. In all cases, subject IDs should not include any identifiable information and are enforced to be numeric. Note that all links will expire in the time (default = 14 days) from their creation.</p>
+        <p style="font-size:large">Use ONE of these options to add participants to your interface. Use the "New Subject Ids" option to create links using your own ID numbers (numeric only). Typically, this is done in small batches when you are ready to send out the links. Use the "Autogenerate" or "Upload CSV" dialog if you want to create many links at the same time. In all cases, subject IDs should not include any identifiable information and are enforced to be numeric. Note that all links will expire in the time (default = 14 days) from their creation.</p>
         <hr />
         <div class="row form-group">
-            <label for="new-subject-ids" class="col-3 control-label">New Subject Ids:</label>
-            <div class="col-9">
-              <textarea name="new_subject_ids" class="form-control" rows="3" id='new-subject-ids' placeholder="Copy and paste in a list of subject IDs here (separated by spaces, commas, semicolons, or new lines)"></textarea>
-              <p> The subject IDs should not include any identifiable information. For the same reason they are enforced to be numeric </p>
-
+          <div class="col-12">
+            <label for="new-subject-ids" class="control-label" style="text-weight:bold; font-size:larger">
+              Your Own Participant ID(s):
+            </label>               
+            <p>Use this option to add administrations using your own ID numbers (numeric only). Typically, this is done in small batches when you are ready to send out the links. If you enter an ID for a participant who has already had an administration in this Administration Group, Web-CDI will assume it is the same child. IDs should not include any identifiable information and are forced to be numeric. All links will expire in the time (default = 14 days) from their creation.</p>
+            <textarea name="new_subject_ids" class="form-control" rows="3" id='new-subject-ids' placeholder="Copy and paste in a list of subject IDs here (separated by spaces, commas, semicolons, or new lines)"></textarea>
+            <p> IDs should not include any identifiable information. For the same reason they are enforced to be numeric </p>
+          </div>
+        </div>
+        <hr />
+        <div class="row form-group">
+            <div class="col-12">
+              <label for="autogenerate-count" class=" control-label" style="text-weight:bold; font-size:larger">Web-CDI ID(s):</label>
+              <p>Use these options to create many links at the same time using Web-CDI IDs.</p>
+              <input type="number" max_value="100" name='autogenerate_count' class="form-control" id ='autogenerate-count' placeholder="Autogenerate XX subject IDs">
             </div>
         </div>
         <hr />
         <div class="row form-group">
-            <label for="autogenerate-count" class="col-3 control-label">Number of IDs to Autogenerate:</label>
-            <div class="col-9">
-            <input type="number" max_value="100" name='autogenerate_count' class="form-control" id ='autogenerate-count' placeholder="Autogenerate XX subject IDs">
-            </div>
-        </div>
-        <hr />
-        <div class="row form-group">
-            <label for="subject-ids-csv" class="col-3 control-label">Upload a CSV of Subject IDs:</label>
-            <div class="col-9">
+            <div class="col-12">
+              <label for="subject-ids-csv" class=" control-label" style="text-weight:bold; font-size:larger">Upload a CSV of  IDs:</label>
+            
               <input type="file" name = 'subject-ids-csv' class="form-control" id ='subject-ids-csv'><br>
               <input type="checkbox" name = 'csv-header' id ='csv-header'><label for='ignore-csv-header'>&nbsp; This file has a header row</label><br>
               <div id = "subj_col_div" class = "collapse">
@@ -62,11 +66,12 @@
         <hr />
         <div class="row form-group">  
           {% if object.single_reusable_link_active %}
-            <label for="add_new_parent" class="col-3 control-label">Single Reusable Link:</label>
             <div class="col-9" id="reusable_link_div" style = "overflow: hidden; text-overflow: ellipsis;">
-              <a href="{% url 'researcher_ui:administer_new_parent' username study_name %}" id="reusable_link">Click here</a><br>
-              (For mass emails or adding to a website. Does not track IP addresses or use cookies. Every link click creates a new administration.)
-
+              <label for="add_new_parent" class="control-label" style="text-weight:bold; font-size:larger">Single Reusable Link:</label>
+              <p>
+                <a href="{% url 'researcher_ui:administer_new_parent' username study_name %}" id="reusable_link">Click here</a><br>
+                (For mass emails or adding to a website. Does not track IP addresses or use cookies. Every link click creates a new administration.)
+              </p>
               
               {% if study_group %}
 
@@ -91,12 +96,15 @@
         {% if object.participant_source_boolean > 0 %}
         <hr />
         <div class="row form-group">
-          <label for="add_new_parent" class="col-3 control-label">External Source Link:</label>
-          <div class="col-9" id="prolific_link_div" style = "overflow: hidden; text-overflow: ellipsis;">
-            <a href="">{{ request.scheme }}://{{ request.META.HTTP_HOST }}{% url 'researcher_ui:administer_new_parent' username study_name %}?source_id={% verbatim %}{{%source_id%}}{% endverbatim %}&event_id={% verbatim %}{{%event_id%}}{% endverbatim %}{% if object.no_demographic_boolean %}&age={% verbatim %}{{%age%}}{% endverbatim %}&sex={% verbatim %}{{%sex%}}{% endverbatim %}&offset={% verbatim %}{{%offset%}}{% endverbatim %}{% endif %}</a><br>
+          <div class="col-12" id="prolific_link_div" style = "overflow: hidden; text-overflow: ellipsis;">
+            <label for="add_new_parent" class="control-label" style="text-weight:bold; font-size:larger">External Source Link:</label>
+          
+            <p>
+              <a href="">{{ request.scheme }}://{{ request.META.HTTP_HOST }}{% url 'researcher_ui:administer_new_parent' username study_name %}?source_id={% verbatim %}{{%source_id%}}{% endverbatim %}&event_id={% verbatim %}{{%event_id%}}{% endverbatim %}{% if object.no_demographic_boolean %}&age={% verbatim %}{{%age%}}{% endverbatim %}&sex={% verbatim %}{{%sex%}}{% endverbatim %}&offset={% verbatim %}{{%offset%}}{% endverbatim %}{% endif %}</a><br>
             (This link will not open a new administration.  It is to be copied into External Source and will enable opening on a new child capturing the External Source Id from there. 
             Event_id is optional.  If event_id is specified it will create a new administration (if different to previous event_id).
             {% if not object.no_demographic_boolean %}If you want a link with a blank source Id, use the Single Reusable Link.{% endif %})
+            </p>
           </div>
         </div>
         {% endif %}
