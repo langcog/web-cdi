@@ -39,7 +39,7 @@ class AddStudyForm(BetterModelForm):
     )  # Addition of an IRB waiver of documentation or any other instructive text can be added here
     allow_payment = forms.BooleanField(
         required=False,
-        label='Would you like to pay participants in the form of gift cards? (You will be able to upload additional vendor and code links "Update Administration Group").',
+        label='Would you like to pay participants in the form of gift cards? (You will be able to upload additional vendor and code links in "Update Administration Group").',
     )  # Whether study participants will be compensated in the form of gift card codes upon completion
     anon_collection = forms.BooleanField(
         required=False,
