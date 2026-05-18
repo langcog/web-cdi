@@ -252,6 +252,7 @@ class AddStudyForm(BetterModelForm):
                 self.fields["instrument"] = forms.ModelChoiceField(
                     queryset=Instrument.objects.filter(pk=self.instance.instrument.pk),
                     empty_label=None,
+                    label="Form"
                 )
             except:
                 pass
