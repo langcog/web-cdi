@@ -43,7 +43,7 @@
         <div class="row form-group">
             <div class="col-12">
               <label for="autogenerate-count" class=" control-label" style="text-weight:bold; font-size:larger">Autogenerate Web-CDI ID(s):</label>
-              <p>Use these options to create many links at the same time using Web-CDI IDs.</p>
+              <p>Use this options to create many links at the same time using Web-CDI IDs.</p>
               <input type="number" max_value="100" name='autogenerate_count' class="form-control" id ='autogenerate-count' placeholder="Autogenerate XX subject IDs">
             </div>
         </div>
@@ -76,7 +76,7 @@
               <label for="add_new_parent" class="control-label" style="text-weight:bold; font-size:larger">Single Reusable Link:</label>
               <p>
                 <a href="{% url 'researcher_ui:administer_new_parent' username study_name %}" id="reusable_link">Click here</a><br>
-                (For mass emails or adding to a website. Does not track IP addresses or use cookies. Every link click creates a new administration.)
+                For mass emails or adding to a website. Does not track IP addresses or use cookies. Every link click creates a new administration.
               </p>
               
               {% if study_group %}
