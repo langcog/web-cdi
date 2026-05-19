@@ -11,29 +11,27 @@
                     </h1>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-12">
-                    <p>
-                        To administer a CDI, click on “Administration Group Set up” to tell Web-CDI which CDI form you want to use, along with other features that are common to all administrations in that group.  
-                        If you are using only 1 type of CDI form (e.g., Words & Gestures), you need to set up 1 Administration Group.  
-                        You will need to set up another Administration Group if you are also using, for example, the Words & Sentences form. 
-                        Then choose your Administration Group in the dropdown menu below. Click on Add Administrations to enter an ID for a single participant using your own IDs or tell Web-CDI to generate a batch of participants. 
-                        Click on “My CDI Forms” to see the CDI forms that are currently assigned to you. 
-                    </p>
-                </div>
-            </div>
         </div>
         {% if current_study %}
             <form method='post'  action='{% url "researcher_ui:console_study" pk=current_study.pk %}' id='study-form'>
         {% else %}
             <form method='post'  action='' id='study-form'>
         {% endif %}
+        
         <div class="row">
             <div class='col'>
                 <a id='id_add_instruments' href="{% url 'researcher_ui:researcher_add_instruments' pk=request.user.researcher.pk %}" type="button" type="button" style='width:100%;' class="btn btn-primary">My CDI Forms</a>
             </div>
             <div class="col">
                 <a id="id_new_study" href="{% url 'researcher_ui:add_study' %}" type="button" style='width:100%;' class="btn btn-primary">Administration Group Set Up</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class='col'>
+                <p>Click here to see the CDI forms that are currently assigned to you.</p>
+            </div>
+            <div class='col'>
+                <p>Create a new group of CDI forms for families.  You will need to create a new group for each CDI form you are using, e.g., 1 group for Words & Gestures and 1 group for Words & Sentences.</p>
             </div>
         </div>
         <div class="row">
@@ -72,18 +70,19 @@
                     <div class="btn-group btn-block">
                         <button id="id_add_participants" type="button" class="btn btn-secondary btn-block" onclick = "modal_form('/interface/study/{{ current_study.pk|urlencode }}/administer_new/')">Add Administrations</button>
                         <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="sr-only">Toggle Dropdown</span>
+                            <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <div class="dropdown-menu">
-                        <button type="button" class="dropdown-item btn btn-secondary btn-block"   onclick = "modal_form('/interface/study/{{ current_study.pk|urlencode }}/import_data/')" >Import Spreadsheet Data</button>
+                            <button type="button" class="dropdown-item btn btn-secondary btn-block"   onclick = "modal_form('/interface/study/{{ current_study.pk|urlencode }}/import_data/')" >Import Spreadsheet Data</button>
                         </div>
                     </div>
+                    Enter your own ID for a single child or tell Web-CDI to generate IDs for you.
                 </div>
 
 
-                    <div class='col-md-3'>
-                        <button style='width:100%; height: 100%;' class="btn btn-secondary selected-btn btn-block" id='add-selected' type='submit' name='administer-selected' value='administer-selected' disabled  >Re-administer Selected Administrations</button>
-                    </div>
+                <div class='col-md-3'>
+                    <button  class="btn btn-secondary selected-btn btn-block" id='add-selected' type='submit' name='administer-selected' value='administer-selected' disabled  >Re-administer Selected Administrations</button>
+                </div>
 
 
                 <div class="col-3">
@@ -100,7 +99,7 @@
                 <div class="row" style="margin-top:1rem">
                     <div class='col-md-3'>
                         
-                            <input id='id_search' type="text" placeholder="Search by ID...." name="search", style="max-width: 85%">
+                            <input id='id_search' type="text" placeholder="Search by Participant ID...." name="search", style="max-width: 85%">
                             <button id='search_button' type="submit"><i class="fa fa-search"></i></button>
                         
                     </div>
