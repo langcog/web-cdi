@@ -118,7 +118,7 @@ class BaseAPIView(StudyOwnerMixin, TemplateView):
                 melted_scores[instance.title].replace(
                     r"^\s*$", 0, regex=True, inplace=True
                 )
-                melted_scores[instance.title].replace(np.NaN, 0, inplace=True)
+                melted_scores[instance.title].replace(np.nan, 0, inplace=True)
 
         try:
             background_answers1 = pd.merge(
@@ -175,8 +175,8 @@ class BaseAPIView(StudyOwnerMixin, TemplateView):
             admin_header + background_header + model_header + score_header
         ]
 
-        combined_data = combined_data.replace("nan", "", regex=True)
-        combined_data = combined_data.replace("None", "", regex=True)
+        #combined_data = combined_data.replace("nan", "", regex=True)
+        #combined_data = combined_data.replace("None", "", regex=True)
         combined_data["child_ethnicity"].replace("[]", "", inplace=True)
         combined_data["other_languages"].replace("[]", "", inplace=True)
 

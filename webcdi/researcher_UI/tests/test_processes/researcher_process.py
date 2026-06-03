@@ -77,7 +77,7 @@ def generate_fake_results(study_obj, autogenerate_count):
                 size=1,
             )[0],
             sex=np.random.choice(["M", "F", "O"], size=1, p=[0.49, 0.49, 0.02])[0],
-            birth_order=np.random.choice(range(1, 10), size=1),
+            birth_order=np.random.choice(range(1, 10), size=1)[0],
             multi_birth_boolean=0,
             birth_weight_lb=6.5,
             born_on_due_date=0,

@@ -43,7 +43,7 @@ class CommandsTestCase(TestCase):
         call_command("04_populate_benchmark", *args, **opts)
 
         items = Benchmark.objects.all()
-        self.assertEqual(len(items), 19666)
+        self.assertEqual(len(items), 27586)
 
     def test_populate_choices(self):
         args = []
