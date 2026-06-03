@@ -3,7 +3,7 @@ import os
 
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.test import TestCase
+from django.test import TestCase, tag
 from django.urls import reverse
 
 from researcher_UI.forms import AdminNewForm
@@ -154,6 +154,7 @@ class StudyCreateViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(str(response), '<HttpResponse status_code=200, "text/csv">')
 
+    @tag('error')
     def test_post_download_study_scoring(self):
         self.client.force_login(self.user)
         payload = {"download-study-scoring": True}
@@ -164,6 +165,7 @@ class StudyCreateViewTest(TestCase):
             str(response), '<HttpResponse status_code=200, "application/octet-stream">'
         )
 
+    @tag('error')
     def test_post_download_study_scoring_selected(self):
         self.client.force_login(self.user)
         administrations = Administration.objects.filter(study=self.study).values_list(

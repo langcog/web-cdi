@@ -1,4 +1,3 @@
-{% load querystring from django_tables2 %}
 {% load django_tables2 %}
 {% load trans blocktrans from i18n %}
 {% load bootstrap4 %}
@@ -183,7 +182,7 @@
                 {% for column in table.columns %}
                     <th {{ column.attrs.th.as_html }} style="text-align:center;">
                         {% if column.orderable %}
-                            <a href="{% querystring table.prefixed_order_by_field=column.order_by_alias.next %}">{{ column.header }}</a>
+                            <a href="{% querystring sort=column.order_by_alias.next %}">{{ column.header }}</a>
                         {% else %}
                             {{ column.header }}
                         {% endif %}
