@@ -1,5 +1,5 @@
 app-version
-asgiref==3.7.2
+asgiref>=3.8.1
 attrs==24.2.0
 beautifulsoup4==4.12.2
 black==24.10.0
@@ -17,7 +17,7 @@ confusable-homoglyphs==3.2.0
 coverage==7.6.3
 cssselect2==0.7.0
 defusedxml==0.7.1
-Django==4.2.28
+Django==5.2.14
 django-admin-rangefilter==0.12.0
 django-bootstrap3==21.1
 django-bootstrap3-datetimepicker==2.2.3
@@ -25,7 +25,7 @@ django-bootstrap4==21.1
 django-ckeditor==6.7.3
 django-countries==7.5.1
 django-crispy-forms==2.1
-django-health-check==3.17.0
+django-health-check==4.4.1
 django-ipware==6.0.3
 django-js-asset==2.2.0
 django-localflavor==4.0
