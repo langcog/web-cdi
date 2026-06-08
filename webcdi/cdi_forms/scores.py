@@ -112,6 +112,16 @@ def update_summary_scores(administration_instance):
     if not administration_instance.completed:
         return
     SummaryData.objects.filter(administration=administration_instance).delete()
+    for f in InstrumentScore.objects.filter(
+            instrument=administration_instance.study.instrument,
+        ):  # items can be counted under multiple Titles check category against all categories
+            # logger.debug(f"Instrument Score: {f}")
+            summary, created = SummaryData.objects.get_or_create(
+                administration=administration_instance, title=f.title
+            )
+            if f.kind == "count": summary.value=0
+            summary.save()
+        
 
     for administration_data_item in administration_data.objects.filter(
         administration=administration_instance
@@ -160,7 +170,6 @@ def update_summary_scores(administration_instance):
                             )
                 else:
                     summary.value = administration_data_item.value
-
             summary.save()
 
     # this is the benchmark data
