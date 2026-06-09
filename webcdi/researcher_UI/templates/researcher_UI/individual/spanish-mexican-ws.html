@@ -8,7 +8,7 @@
         <div class="main" style="border:2px solid black; text-align: center; margin-bottom: 20px">
             <h2>MacArthur-Bates Inventario del Desarrollo 
                 de Habilidades Comunicativas</h2>
-            <h2>Inventario I</h2>
+            <h2>Inventario II</h2>
             <h2>Informe del Niño</h2>
         </div>
 
@@ -121,15 +121,15 @@
             </tr>
             
             <tr>                
-                <td>{% trans 'Example' %} 1</td>
+                <td>Ejemplo 1</td>
                 <td colspan="3">{{ administration.id|get_form_data:"item_example1" }}</td>
             </tr>
             <tr>                
-                <td>{% trans 'Example' %} 2</td>
+                <td>Ejemplo 2</td>
                 <td colspan="3">{{ administration.id|get_form_data:"item_example2" }}</td>
             </tr>
             <tr>                
-                <td>{% trans 'Example' %} 3</td>
+                <td>Ejemplo 3</td>
                 <td colspan="3">{{ administration.id|get_form_data:"item_example3" }}</td>
             </tr>
             <tr><td colspan="4"></td></tr>
@@ -143,12 +143,12 @@
             </tr>
             <tr>
                 <td></td>
-                <td>{% trans 'Percentile (by sex):' %}</td>
+                <td>Percentil (por sexo)</td>
                 <td colspan="2">{% get_adjusted_summary_date administration.id "Complejidad Percentile-sex" %}</td>
             </tr>
             <tr>
                 <td></td>
-                <td>{% trans 'Percentile (both sexes):' %}</td>
+                <td>Percentil (todos)</td>
                 <td colspan="2">{% get_adjusted_summary_date administration.id "Complejidad Percentile-both" %}</td>
             </tr>
             

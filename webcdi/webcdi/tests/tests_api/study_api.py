@@ -2,7 +2,7 @@ import json
 import logging
 
 from django.contrib.auth.models import User
-from django.test import TestCase
+from django.test import TestCase, tag
 from django.urls import reverse
 
 from researcher_UI.models import Instrument, Study

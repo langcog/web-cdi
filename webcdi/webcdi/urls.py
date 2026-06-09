@@ -21,6 +21,7 @@ from django.contrib.auth import views as auth_views
 from django.urls import include, path, re_path
 from django.views.generic import TemplateView
 from django.views.generic.base import RedirectView
+from health_check.views import HealthCheckView
 
 from webcdi.forms import SignUpForm
 from webcdi.views import CustomLoginView, CustomRegistrationView, HomeView
@@ -63,7 +64,36 @@ urlpatterns = [
     re_path(
         r"^lockout/$", TemplateView.as_view(template_name="registration/lockout.html")
     ),
-    re_path(r"^health/?", include("health_check.urls")),
+    #re_path(r"^health/?", include("health_check.urls")),
+    path(
+        "health/",
+        HealthCheckView.as_view(
+            checks=[  # optional, default is all but 3rd party checks
+                "health_check.Cache",
+                "health_check.DNS",
+                "health_check.Database",
+                "health_check.Mail",
+                "health_check.Storage",
+                # 3rd party checks
+                "health_check.contrib.psutil.Disk",
+                "health_check.contrib.psutil.Memory",
+                "health_check.contrib.celery.Ping",
+                (
+                    "health_check.contrib.kafka.Kafka",
+                    {"bootstrap_servers": ["localhost:9092"]},
+                ),
+                (  # tuple with options
+                    "health_check.contrib.rabbitmq.RabbitMQ",
+                    {"amqp_url": "amqp://guest:guest@localhost:5672//"},
+                ),
+                # AWS service status check
+                (
+                    "health_check.contrib.rss.AWS",
+                    {"region": "eu-west-1", "service": "s3"},
+                ),
+            ],
+        ),
+    ),
     re_path(r"^ckeditor/", include("ckeditor_uploader.urls")),
     path("brookes/", include("brookes.urls")),
     path("api/", include("api.urls")),

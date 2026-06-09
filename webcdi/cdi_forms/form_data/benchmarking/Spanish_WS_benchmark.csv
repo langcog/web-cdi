@@ -1,634 +1,3004 @@
 title,percentile,age,raw_score,raw_score_boy,raw_score_girl
-Palabras que dice,99,16,566,446,499
-Palabras que dice,95,16,261,287,272
-Palabras que dice,90,16,181,196,194
-Palabras que dice,85,16,151,132,161
-Palabras que dice,80,16,131,105,129
-Palabras que dice,75,16,110,88,116
-Palabras que dice,70,16,89,70,109
-Palabras que dice,65,16,71,56,86
-Palabras que dice,60,16,59,48,71
-Palabras que dice,55,16,52,44,60
-Palabras que dice,50,16,43,34,48
-Palabras que dice,45,16,35,31,43
-Palabras que dice,40,16,29,28,38
-Palabras que dice,35,16,26,25,28
-Palabras que dice,30,16,22,22,23
-Palabras que dice,25,16,19,19,20
-Palabras que dice,20,16,16,15,16
-Palabras que dice,15,16,12,11,13
-Palabras que dice,10,16,10,8,11
-Palabras que dice,5,16,6,5,6
 Palabras que dice,0,16,0,0,0
-Palabras que dice,99,17,592,479,540
-Palabras que dice,95,17,308,323,329
-Palabras que dice,90,17,217,229,237
-Palabras que dice,85,17,181,159,198
-Palabras que dice,80,17,157,128,158
-Palabras que dice,75,17,132,108,140
-Palabras que dice,70,17,108,88,130
-Palabras que dice,65,17,88,70,104
-Palabras que dice,60,17,73,61,86
-Palabras que dice,55,17,64,56,74
-Palabras que dice,50,17,54,43,60
-Palabras que dice,45,17,45,39,54
-Palabras que dice,40,17,36,36,47
-Palabras que dice,35,17,33,32,35
-Palabras que dice,30,17,28,28,29
-Palabras que dice,25,17,24,24,26
-Palabras que dice,20,17,20,19,20
-Palabras que dice,15,17,15,14,17
-Palabras que dice,10,17,12,10,14
-Palabras que dice,5,17,7,6,7
+Palabras que dice,1,16,0,0,0
+Palabras que dice,2,16,1,0,1
+Palabras que dice,3,16,1,1,1
+Palabras que dice,4,16,2,1,2
+Palabras que dice,5,16,2,2,3
+Palabras que dice,6,16,3,2,3
+Palabras que dice,7,16,3,3,4
+Palabras que dice,8,16,4,3,5
+Palabras que dice,9,16,5,4,6
+Palabras que dice,10,16,6,4,7
+Palabras que dice,11,16,6,5,8
+Palabras que dice,12,16,7,6,9
+Palabras que dice,13,16,8,6,10
+Palabras que dice,14,16,9,7,11
+Palabras que dice,15,16,10,8,12
+Palabras que dice,16,16,11,9,13
+Palabras que dice,17,16,12,10,14
+Palabras que dice,18,16,13,10,15
+Palabras que dice,19,16,14,11,16
+Palabras que dice,20,16,15,12,17
+Palabras que dice,21,16,16,13,19
+Palabras que dice,22,16,17,14,20
+Palabras que dice,23,16,18,15,21
+Palabras que dice,24,16,19,16,23
+Palabras que dice,25,16,20,17,24
+Palabras que dice,26,16,21,18,25
+Palabras que dice,27,16,23,19,27
+Palabras que dice,28,16,24,20,28
+Palabras que dice,29,16,25,21,30
+Palabras que dice,30,16,26,22,31
+Palabras que dice,31,16,28,24,33
+Palabras que dice,32,16,29,25,34
+Palabras que dice,33,16,30,26,36
+Palabras que dice,34,16,32,27,38
+Palabras que dice,35,16,33,28,39
+Palabras que dice,36,16,35,30,41
+Palabras que dice,37,16,36,31,43
+Palabras que dice,38,16,38,32,44
+Palabras que dice,39,16,39,34,46
+Palabras que dice,40,16,41,35,48
+Palabras que dice,41,16,43,37,50
+Palabras que dice,42,16,44,38,52
+Palabras que dice,43,16,46,40,54
+Palabras que dice,44,16,48,41,56
+Palabras que dice,45,16,49,43,58
+Palabras que dice,46,16,51,44,60
+Palabras que dice,47,16,53,46,62
+Palabras que dice,48,16,55,48,64
+Palabras que dice,49,16,57,49,66
+Palabras que dice,50,16,59,51,69
+Palabras que dice,51,16,61,53,71
+Palabras que dice,52,16,63,55,73
+Palabras que dice,53,16,65,57,76
+Palabras que dice,54,16,67,59,78
+Palabras que dice,55,16,69,61,81
+Palabras que dice,56,16,72,63,83
+Palabras que dice,57,16,74,65,86
+Palabras que dice,58,16,76,67,88
+Palabras que dice,59,16,79,69,91
+Palabras que dice,60,16,81,71,94
+Palabras que dice,61,16,84,74,97
+Palabras que dice,62,16,86,76,100
+Palabras que dice,63,16,89,79,103
+Palabras que dice,64,16,92,81,106
+Palabras que dice,65,16,94,84,109
+Palabras que dice,66,16,97,86,112
+Palabras que dice,67,16,100,89,116
+Palabras que dice,68,16,103,92,119
+Palabras que dice,69,16,106,95,123
+Palabras que dice,70,16,110,98,126
+Palabras que dice,71,16,113,101,130
+Palabras que dice,72,16,116,104,134
+Palabras que dice,73,16,120,107,138
+Palabras que dice,74,16,124,111,142
+Palabras que dice,75,16,128,114,146
+Palabras que dice,76,16,132,118,151
+Palabras que dice,77,16,136,122,155
+Palabras que dice,78,16,140,126,160
+Palabras que dice,79,16,144,130,165
+Palabras que dice,80,16,149,134,170
+Palabras que dice,81,16,154,139,176
+Palabras que dice,82,16,159,143,181
+Palabras que dice,83,16,164,148,187
+Palabras que dice,84,16,170,154,193
+Palabras que dice,85,16,176,159,200
+Palabras que dice,86,16,182,165,207
+Palabras que dice,87,16,189,172,214
+Palabras que dice,88,16,196,178,222
+Palabras que dice,89,16,204,186,231
+Palabras que dice,90,16,212,193,240
+Palabras que dice,91,16,221,202,249
+Palabras que dice,92,16,231,211,260
+Palabras que dice,93,16,242,222,272
+Palabras que dice,94,16,255,234,286
+Palabras que dice,95,16,269,248,301
+Palabras que dice,96,16,286,264,319
+Palabras que dice,97,16,307,284,341
+Palabras que dice,98,16,335,312,370
+Palabras que dice,99,16,378,354,414
 Palabras que dice,0,17,0,0,0
-Palabras que dice,99,18,613,509,574
-Palabras que dice,95,18,357,360,388
-Palabras que dice,90,18,257,264,283
-Palabras que dice,85,18,215,190,239
-Palabras que dice,80,18,185,155,192
-Palabras que dice,75,18,158,132,168
-Palabras que dice,70,18,131,108,154
-Palabras que dice,65,18,108,88,125
-Palabras que dice,60,18,90,76,105
-Palabras que dice,55,18,79,70,90
-Palabras que dice,50,18,67,55,74
-Palabras que dice,45,18,56,49,66
-Palabras que dice,40,18,46,44,58
-Palabras que dice,35,18,42,39,45
-Palabras que dice,30,18,36,34,37
-Palabras que dice,25,18,30,29,33
-Palabras que dice,20,18,25,23,26
-Palabras que dice,15,18,19,17,21
-Palabras que dice,10,18,15,12,17
-Palabras que dice,5,18,9,7,9
+Palabras que dice,1,17,0,0,0
+Palabras que dice,2,17,1,1,1
+Palabras que dice,3,17,2,1,2
+Palabras que dice,4,17,2,2,3
+Palabras que dice,5,17,3,2,4
+Palabras que dice,6,17,4,3,5
+Palabras que dice,7,17,5,4,6
+Palabras que dice,8,17,6,5,7
+Palabras que dice,9,17,7,5,8
+Palabras que dice,10,17,8,6,9
+Palabras que dice,11,17,9,7,10
+Palabras que dice,12,17,10,8,11
+Palabras que dice,13,17,11,9,13
+Palabras que dice,14,17,12,10,14
+Palabras que dice,15,17,13,11,15
+Palabras que dice,16,17,14,12,17
+Palabras que dice,17,17,15,13,18
+Palabras que dice,18,17,17,14,20
+Palabras que dice,19,17,18,15,21
+Palabras que dice,20,17,19,16,22
+Palabras que dice,21,17,20,17,24
+Palabras que dice,22,17,22,18,26
+Palabras que dice,23,17,23,20,27
+Palabras que dice,24,17,25,21,29
+Palabras que dice,25,17,26,22,30
+Palabras que dice,26,17,27,23,32
+Palabras que dice,27,17,29,25,34
+Palabras que dice,28,17,30,26,35
+Palabras que dice,29,17,32,27,37
+Palabras que dice,30,17,33,29,39
+Palabras que dice,31,17,35,30,41
+Palabras que dice,32,17,37,32,43
+Palabras que dice,33,17,38,33,45
+Palabras que dice,34,17,40,35,47
+Palabras que dice,35,17,42,36,48
+Palabras que dice,36,17,44,38,50
+Palabras que dice,37,17,45,39,52
+Palabras que dice,38,17,47,41,55
+Palabras que dice,39,17,49,43,57
+Palabras que dice,40,17,51,44,59
+Palabras que dice,41,17,53,46,61
+Palabras que dice,42,17,55,48,63
+Palabras que dice,43,17,57,50,65
+Palabras que dice,44,17,59,51,68
+Palabras que dice,45,17,61,53,70
+Palabras que dice,46,17,63,55,72
+Palabras que dice,47,17,65,57,75
+Palabras que dice,48,17,67,59,77
+Palabras que dice,49,17,70,61,80
+Palabras que dice,50,17,72,63,82
+Palabras que dice,51,17,74,65,85
+Palabras que dice,52,17,77,68,88
+Palabras que dice,53,17,79,70,90
+Palabras que dice,54,17,81,72,93
+Palabras que dice,55,17,84,74,96
+Palabras que dice,56,17,87,77,99
+Palabras que dice,57,17,89,79,102
+Palabras que dice,58,17,92,82,105
+Palabras que dice,59,17,95,84,108
+Palabras que dice,60,17,98,87,111
+Palabras que dice,61,17,100,89,114
+Palabras que dice,62,17,103,92,118
+Palabras que dice,63,17,106,95,121
+Palabras que dice,64,17,110,98,125
+Palabras que dice,65,17,113,101,128
+Palabras que dice,66,17,116,104,132
+Palabras que dice,67,17,119,107,135
+Palabras que dice,68,17,123,110,139
+Palabras que dice,69,17,126,113,143
+Palabras que dice,70,17,130,117,147
+Palabras que dice,71,17,134,120,151
+Palabras que dice,72,17,138,124,156
+Palabras que dice,73,17,142,128,160
+Palabras que dice,74,17,146,131,165
+Palabras que dice,75,17,150,135,169
+Palabras que dice,76,17,155,140,174
+Palabras que dice,77,17,159,144,179
+Palabras que dice,78,17,164,148,184
+Palabras que dice,79,17,169,153,190
+Palabras que dice,80,17,174,158,195
+Palabras que dice,81,17,179,163,201
+Palabras que dice,82,17,185,168,207
+Palabras que dice,83,17,191,174,214
+Palabras que dice,84,17,197,179,220
+Palabras que dice,85,17,204,186,227
+Palabras que dice,86,17,211,192,235
+Palabras que dice,87,17,218,199,243
+Palabras que dice,88,17,226,206,251
+Palabras que dice,89,17,234,214,260
+Palabras que dice,90,17,243,223,270
+Palabras que dice,91,17,253,232,280
+Palabras que dice,92,17,263,242,291
+Palabras que dice,93,17,275,254,304
+Palabras que dice,94,17,288,267,318
+Palabras que dice,95,17,304,281,333
+Palabras que dice,96,17,321,299,352
+Palabras que dice,97,17,343,320,374
+Palabras que dice,98,17,372,348,404
+Palabras que dice,99,17,416,391,447
 Palabras que dice,0,18,0,0,0
-Palabras que dice,99,19,630,535,601
-Palabras que dice,95,19,404,397,443
-Palabras que dice,90,19,299,301,332
-Palabras que dice,85,19,252,224,284
-Palabras que dice,80,19,217,186,230
-Palabras que dice,75,19,187,159,200
-Palabras que dice,70,19,157,132,182
-Palabras que dice,65,19,131,109,150
-Palabras que dice,60,19,111,95,127
-Palabras que dice,55,19,97,87,110
-Palabras que dice,50,19,83,69,92
-Palabras que dice,45,19,69,61,81
-Palabras que dice,40,19,58,55,71
-Palabras que dice,35,19,52,49,56
-Palabras que dice,30,19,45,43,47
-Palabras que dice,25,19,37,36,41
-Palabras que dice,20,19,31,29,33
-Palabras que dice,15,19,23,21,26
-Palabras que dice,10,19,18,15,21
-Palabras que dice,5,19,11,9,12
+Palabras que dice,1,18,1,0,1
+Palabras que dice,2,18,1,1,2
+Palabras que dice,3,18,2,2,3
+Palabras que dice,4,18,3,3,4
+Palabras que dice,5,18,4,4,5
+Palabras que dice,6,18,5,4,7
+Palabras que dice,7,18,7,5,8
+Palabras que dice,8,18,8,6,9
+Palabras que dice,9,18,9,8,11
+Palabras que dice,10,18,10,9,12
+Palabras que dice,11,18,11,10,14
+Palabras que dice,12,18,13,11,15
+Palabras que dice,13,18,14,12,17
+Palabras que dice,14,18,16,13,18
+Palabras que dice,15,18,17,15,20
+Palabras que dice,16,18,18,16,22
+Palabras que dice,17,18,20,17,23
+Palabras que dice,18,18,21,18,25
+Palabras que dice,19,18,23,20,27
+Palabras que dice,20,18,25,21,29
+Palabras que dice,21,18,26,23,30
+Palabras que dice,22,18,28,24,32
+Palabras que dice,23,18,30,26,34
+Palabras que dice,24,18,31,27,36
+Palabras que dice,25,18,33,29,38
+Palabras que dice,26,18,35,30,40
+Palabras que dice,27,18,36,32,42
+Palabras que dice,28,18,38,33,44
+Palabras que dice,29,18,40,35,46
+Palabras que dice,30,18,42,37,48
+Palabras que dice,31,18,44,38,51
+Palabras que dice,32,18,46,40,53
+Palabras que dice,33,18,48,42,55
+Palabras que dice,34,18,50,44,57
+Palabras que dice,35,18,52,46,59
+Palabras que dice,36,18,54,48,62
+Palabras que dice,37,18,56,49,64
+Palabras que dice,38,18,58,51,67
+Palabras que dice,39,18,60,53,69
+Palabras que dice,40,18,63,55,71
+Palabras que dice,41,18,65,57,74
+Palabras que dice,42,18,67,59,77
+Palabras que dice,43,18,70,62,79
+Palabras que dice,44,18,72,64,82
+Palabras que dice,45,18,74,66,84
+Palabras que dice,46,18,77,68,87
+Palabras que dice,47,18,79,70,90
+Palabras que dice,48,18,82,73,93
+Palabras que dice,49,18,84,75,96
+Palabras que dice,50,18,87,78,99
+Palabras que dice,51,18,90,80,102
+Palabras que dice,52,18,93,83,105
+Palabras que dice,53,18,95,85,108
+Palabras que dice,54,18,98,88,111
+Palabras que dice,55,18,101,90,114
+Palabras que dice,56,18,104,93,117
+Palabras que dice,57,18,107,96,121
+Palabras que dice,58,18,110,99,124
+Palabras que dice,59,18,113,102,127
+Palabras que dice,60,18,117,105,131
+Palabras que dice,61,18,120,108,135
+Palabras que dice,62,18,123,111,138
+Palabras que dice,63,18,127,114,142
+Palabras que dice,64,18,130,117,146
+Palabras que dice,65,18,134,121,150
+Palabras que dice,66,18,138,124,154
+Palabras que dice,67,18,141,128,158
+Palabras que dice,68,18,145,131,162
+Palabras que dice,69,18,149,135,166
+Palabras que dice,70,18,153,139,171
+Palabras que dice,71,18,158,143,175
+Palabras que dice,72,18,162,147,180
+Palabras que dice,73,18,166,151,185
+Palabras que dice,74,18,171,155,190
+Palabras que dice,75,18,176,160,195
+Palabras que dice,76,18,181,164,200
+Palabras que dice,77,18,186,169,206
+Palabras que dice,78,18,191,174,211
+Palabras que dice,79,18,196,179,217
+Palabras que dice,80,18,202,184,223
+Palabras que dice,81,18,208,190,229
+Palabras que dice,82,18,214,196,236
+Palabras que dice,83,18,221,202,243
+Palabras que dice,84,18,227,208,250
+Palabras que dice,85,18,234,215,257
+Palabras que dice,86,18,242,222,265
+Palabras que dice,87,18,250,230,274
+Palabras que dice,88,18,258,238,282
+Palabras que dice,89,18,267,246,292
+Palabras que dice,90,18,277,255,302
+Palabras que dice,91,18,287,265,313
+Palabras que dice,92,18,298,276,324
+Palabras que dice,93,18,311,288,337
+Palabras que dice,94,18,325,302,351
+Palabras que dice,95,18,341,317,368
+Palabras que dice,96,18,359,335,386
+Palabras que dice,97,18,381,357,409
+Palabras que dice,98,18,410,386,438
+Palabras que dice,99,18,454,430,481
 Palabras que dice,0,19,0,0,0
-Palabras que dice,99,20,642,559,622
-Palabras que dice,95,20,449,432,494
-Palabras que dice,90,20,343,339,382
-Palabras que dice,85,20,291,261,330
-Palabras que dice,80,20,251,220,271
-Palabras que dice,75,20,218,190,235
-Palabras que dice,70,20,186,161,212
-Palabras que dice,65,20,159,135,177
-Palabras que dice,60,20,135,118,153
-Palabras que dice,55,20,119,107,133
-Palabras que dice,50,20,102,86,112
-Palabras que dice,45,20,86,76,99
-Palabras que dice,40,20,72,68,87
-Palabras que dice,35,20,65,60,70
-Palabras que dice,30,20,56,53,60
-Palabras que dice,25,20,47,45,53
-Palabras que dice,20,20,39,36,41
-Palabras que dice,15,20,29,26,33
-Palabras que dice,10,20,22,19,26
-Palabras que dice,5,20,14,10,15
+Palabras que dice,1,19,1,1,1
+Palabras que dice,2,19,2,2,3
+Palabras que dice,3,19,3,3,4
+Palabras que dice,4,19,5,4,6
+Palabras que dice,5,19,6,5,7
+Palabras que dice,6,19,7,6,9
+Palabras que dice,7,19,9,8,11
+Palabras que dice,8,19,10,9,12
+Palabras que dice,9,19,12,10,14
+Palabras que dice,10,19,14,12,16
+Palabras que dice,11,19,15,13,18
+Palabras que dice,12,19,17,15,20
+Palabras que dice,13,19,19,16,22
+Palabras que dice,14,19,20,18,24
+Palabras que dice,15,19,22,19,26
+Palabras que dice,16,19,24,21,28
+Palabras que dice,17,19,26,23,30
+Palabras que dice,18,19,28,24,32
+Palabras que dice,19,19,29,26,34
+Palabras que dice,20,19,31,28,36
+Palabras que dice,21,19,33,29,38
+Palabras que dice,22,19,35,31,41
+Palabras que dice,23,19,37,33,43
+Palabras que dice,24,19,39,35,45
+Palabras que dice,25,19,41,37,47
+Palabras que dice,26,19,44,39,50
+Palabras que dice,27,19,46,40,52
+Palabras que dice,28,19,48,42,55
+Palabras que dice,29,19,50,44,57
+Palabras que dice,30,19,52,46,60
+Palabras que dice,31,19,55,48,62
+Palabras que dice,32,19,57,51,65
+Palabras que dice,33,19,59,53,67
+Palabras que dice,34,19,62,55,70
+Palabras que dice,35,19,64,57,72
+Palabras que dice,36,19,66,59,75
+Palabras que dice,37,19,69,61,78
+Palabras que dice,38,19,71,64,81
+Palabras que dice,39,19,74,66,83
+Palabras que dice,40,19,77,68,86
+Palabras que dice,41,19,79,71,89
+Palabras que dice,42,19,82,73,92
+Palabras que dice,43,19,85,76,95
+Palabras que dice,44,19,87,78,98
+Palabras que dice,45,19,90,81,101
+Palabras que dice,46,19,93,83,104
+Palabras que dice,47,19,96,86,107
+Palabras que dice,48,19,99,89,111
+Palabras que dice,49,19,102,92,114
+Palabras que dice,50,19,105,94,117
+Palabras que dice,51,19,108,97,120
+Palabras que dice,52,19,111,100,124
+Palabras que dice,53,19,114,103,127
+Palabras que dice,54,19,118,106,131
+Palabras que dice,55,19,121,109,134
+Palabras que dice,56,19,124,112,138
+Palabras que dice,57,19,128,115,142
+Palabras que dice,58,19,131,119,146
+Palabras que dice,59,19,135,122,149
+Palabras que dice,60,19,139,125,153
+Palabras que dice,61,19,142,129,157
+Palabras que dice,62,19,146,132,161
+Palabras que dice,63,19,150,136,166
+Palabras que dice,64,19,154,140,170
+Palabras que dice,65,19,158,143,174
+Palabras que dice,66,19,162,147,178
+Palabras que dice,67,19,166,151,183
+Palabras que dice,68,19,171,155,188
+Palabras que dice,69,19,175,159,192
+Palabras que dice,70,19,180,164,197
+Palabras que dice,71,19,184,168,202
+Palabras que dice,72,19,189,172,207
+Palabras que dice,73,19,194,177,212
+Palabras que dice,74,19,199,182,218
+Palabras que dice,75,19,204,187,223
+Palabras que dice,76,19,210,192,229
+Palabras que dice,77,19,215,197,235
+Palabras que dice,78,19,221,203,241
+Palabras que dice,79,19,227,208,247
+Palabras que dice,80,19,233,214,254
+Palabras que dice,81,19,240,220,260
+Palabras que dice,82,19,246,226,267
+Palabras que dice,83,19,253,233,274
+Palabras que dice,84,19,261,240,282
+Palabras que dice,85,19,268,247,290
+Palabras que dice,86,19,276,255,298
+Palabras que dice,87,19,285,263,307
+Palabras que dice,88,19,293,271,316
+Palabras que dice,89,19,303,280,326
+Palabras que dice,90,19,313,290,336
+Palabras que dice,91,19,324,301,347
+Palabras que dice,92,19,336,312,359
+Palabras que dice,93,19,349,325,372
+Palabras que dice,94,19,363,339,387
+Palabras que dice,95,19,379,355,403
+Palabras que dice,96,19,398,373,422
+Palabras que dice,97,19,421,396,444
+Palabras que dice,98,19,449,424,473
+Palabras que dice,99,19,491,467,513
 Palabras que dice,0,20,0,0,0
-Palabras que dice,99,21,652,579,638
-Palabras que dice,95,21,491,465,537
-Palabras que dice,90,21,387,377,429
-Palabras que dice,85,21,332,300,377
-Palabras que dice,80,21,287,257,315
-Palabras que dice,75,21,253,224,272
-Palabras que dice,70,21,219,193,244
-Palabras que dice,65,21,189,165,208
-Palabras que dice,60,21,163,144,182
-Palabras que dice,55,21,144,131,160
-Palabras que dice,50,21,124,106,136
-Palabras que dice,45,21,106,93,120
-Palabras que dice,40,21,90,84,106
-Palabras que dice,35,21,80,74,88
-Palabras que dice,30,21,70,65,75
-Palabras que dice,25,21,58,55,66
-Palabras que dice,20,21,49,45,52
-Palabras que dice,15,21,36,32,41
-Palabras que dice,10,21,27,23,32
-Palabras que dice,5,21,17,13,18
+Palabras que dice,1,20,1,1,2
+Palabras que dice,2,20,3,3,4
+Palabras que dice,3,20,5,4,6
+Palabras que dice,4,20,6,6,8
+Palabras que dice,5,20,8,7,10
+Palabras que dice,6,20,10,9,12
+Palabras que dice,7,20,12,10,14
+Palabras que dice,8,20,14,12,16
+Palabras que dice,9,20,16,14,18
+Palabras que dice,10,20,18,16,21
+Palabras que dice,11,20,20,18,23
+Palabras que dice,12,20,22,19,25
+Palabras que dice,13,20,24,21,28
+Palabras que dice,14,20,26,23,30
+Palabras que dice,15,20,28,25,33
+Palabras que dice,16,20,30,27,35
+Palabras que dice,17,20,33,29,38
+Palabras que dice,18,20,35,31,40
+Palabras que dice,19,20,37,33,43
+Palabras que dice,20,20,40,35,45
+Palabras que dice,21,20,42,38,48
+Palabras que dice,22,20,44,40,51
+Palabras que dice,23,20,47,42,53
+Palabras que dice,24,20,49,44,56
+Palabras que dice,25,20,52,46,59
+Palabras que dice,26,20,54,49,61
+Palabras que dice,27,20,57,51,64
+Palabras que dice,28,20,59,53,67
+Palabras que dice,29,20,62,56,70
+Palabras que dice,30,20,65,58,73
+Palabras que dice,31,20,67,60,76
+Palabras que dice,32,20,70,63,79
+Palabras que dice,33,20,73,65,82
+Palabras que dice,34,20,75,68,85
+Palabras que dice,35,20,78,71,88
+Palabras que dice,36,20,81,73,91
+Palabras que dice,37,20,84,76,94
+Palabras que dice,38,20,87,78,97
+Palabras que dice,39,20,90,81,100
+Palabras que dice,40,20,93,84,104
+Palabras que dice,41,20,96,87,107
+Palabras que dice,42,20,99,90,110
+Palabras que dice,43,20,102,92,113
+Palabras que dice,44,20,105,95,117
+Palabras que dice,45,20,109,98,120
+Palabras que dice,46,20,112,101,124
+Palabras que dice,47,20,115,104,127
+Palabras que dice,48,20,119,107,131
+Palabras que dice,49,20,122,111,135
+Palabras que dice,50,20,125,114,138
+Palabras que dice,51,20,129,117,142
+Palabras que dice,52,20,133,120,146
+Palabras que dice,53,20,136,124,150
+Palabras que dice,54,20,140,127,154
+Palabras que dice,55,20,144,130,158
+Palabras que dice,56,20,147,134,162
+Palabras que dice,57,20,151,138,166
+Palabras que dice,58,20,155,141,170
+Palabras que dice,59,20,159,145,174
+Palabras que dice,60,20,163,149,179
+Palabras que dice,61,20,167,153,183
+Palabras que dice,62,20,172,157,187
+Palabras que dice,63,20,176,161,192
+Palabras que dice,64,20,180,165,197
+Palabras que dice,65,20,185,169,201
+Palabras que dice,66,20,190,173,206
+Palabras que dice,67,20,194,178,211
+Palabras que dice,68,20,199,182,216
+Palabras que dice,69,20,204,187,221
+Palabras que dice,70,20,209,191,226
+Palabras que dice,71,20,214,196,232
+Palabras que dice,72,20,219,201,237
+Palabras que dice,73,20,225,206,243
+Palabras que dice,74,20,230,211,249
+Palabras que dice,75,20,236,217,254
+Palabras que dice,76,20,242,222,261
+Palabras que dice,77,20,248,228,267
+Palabras que dice,78,20,254,234,273
+Palabras que dice,79,20,260,240,280
+Palabras que dice,80,20,267,246,287
+Palabras que dice,81,20,274,253,294
+Palabras que dice,82,20,281,259,301
+Palabras que dice,83,20,288,266,308
+Palabras que dice,84,20,296,274,316
+Palabras que dice,85,20,304,282,325
+Palabras que dice,86,20,313,290,333
+Palabras que dice,87,20,321,298,342
+Palabras que dice,88,20,331,307,352
+Palabras que dice,89,20,341,317,361
+Palabras que dice,90,20,351,327,372
+Palabras que dice,91,20,362,338,383
+Palabras que dice,92,20,374,350,396
+Palabras que dice,93,20,388,363,409
+Palabras que dice,94,20,402,377,423
+Palabras que dice,95,20,419,393,439
+Palabras que dice,96,20,437,412,458
+Palabras que dice,97,20,459,434,479
+Palabras que dice,98,20,487,462,506
+Palabras que dice,99,20,527,503,545
 Palabras que dice,0,21,0,0,0
-Palabras que dice,99,22,659,597,650
-Palabras que dice,95,22,527,496,572
-Palabras que dice,90,22,429,414,473
-Palabras que dice,85,22,373,340,423
-Palabras que dice,80,22,324,297,359
-Palabras que dice,75,22,290,262,311
-Palabras que dice,70,22,254,228,279
-Palabras que dice,65,22,224,198,242
-Palabras que dice,60,22,195,175,214
-Palabras que dice,55,22,173,159,190
-Palabras que dice,50,22,150,131,164
-Palabras que dice,45,22,130,114,144
-Palabras que dice,40,22,112,103,128
-Palabras que dice,35,22,98,91,109
-Palabras que dice,30,22,86,79,94
-Palabras que dice,25,22,72,67,83
-Palabras que dice,20,22,61,55,64
-Palabras que dice,15,22,45,40,52
-Palabras que dice,10,22,34,28,39
-Palabras que dice,5,22,21,15,23
+Palabras que dice,1,21,2,2,2
+Palabras que dice,2,21,4,4,5
+Palabras que dice,3,21,6,6,8
+Palabras que dice,4,21,9,8,10
+Palabras que dice,5,21,11,10,13
+Palabras que dice,6,21,13,12,16
+Palabras que dice,7,21,16,14,18
+Palabras que dice,8,21,18,16,21
+Palabras que dice,9,21,20,19,24
+Palabras que dice,10,21,23,21,27
+Palabras que dice,11,21,25,23,30
+Palabras que dice,12,21,28,25,32
+Palabras que dice,13,21,31,28,35
+Palabras que dice,14,21,33,30,38
+Palabras que dice,15,21,36,33,41
+Palabras que dice,16,21,39,35,44
+Palabras que dice,17,21,41,37,47
+Palabras que dice,18,21,44,40,50
+Palabras que dice,19,21,47,42,53
+Palabras que dice,20,21,50,45,56
+Palabras que dice,21,21,52,48,59
+Palabras que dice,22,21,55,50,62
+Palabras que dice,23,21,58,53,66
+Palabras que dice,24,21,61,55,69
+Palabras que dice,25,21,64,58,72
+Palabras que dice,26,21,67,61,75
+Palabras que dice,27,21,70,63,78
+Palabras que dice,28,21,73,66,82
+Palabras que dice,29,21,76,69,85
+Palabras que dice,30,21,79,72,88
+Palabras que dice,31,21,82,75,92
+Palabras que dice,32,21,85,78,95
+Palabras que dice,33,21,89,80,98
+Palabras que dice,34,21,92,83,102
+Palabras que dice,35,21,95,86,105
+Palabras que dice,36,21,98,89,109
+Palabras que dice,37,21,102,92,113
+Palabras que dice,38,21,105,96,116
+Palabras que dice,39,21,108,99,120
+Palabras que dice,40,21,112,102,123
+Palabras que dice,41,21,115,105,127
+Palabras que dice,42,21,119,108,131
+Palabras que dice,43,21,122,112,135
+Palabras que dice,44,21,126,115,139
+Palabras que dice,45,21,130,118,142
+Palabras que dice,46,21,133,122,146
+Palabras que dice,47,21,137,125,150
+Palabras que dice,48,21,141,129,154
+Palabras que dice,49,21,145,132,158
+Palabras que dice,50,21,149,136,162
+Palabras que dice,51,21,153,139,167
+Palabras que dice,52,21,157,143,171
+Palabras que dice,53,21,161,147,175
+Palabras que dice,54,21,165,151,179
+Palabras que dice,55,21,169,155,184
+Palabras que dice,56,21,173,159,188
+Palabras que dice,57,21,178,163,193
+Palabras que dice,58,21,182,167,197
+Palabras que dice,59,21,186,171,202
+Palabras que dice,60,21,191,175,207
+Palabras que dice,61,21,196,179,211
+Palabras que dice,62,21,200,184,216
+Palabras que dice,63,21,205,188,221
+Palabras que dice,64,21,210,192,226
+Palabras que dice,65,21,215,197,231
+Palabras que dice,66,21,220,202,237
+Palabras que dice,67,21,225,207,242
+Palabras que dice,68,21,230,211,247
+Palabras que dice,69,21,235,216,253
+Palabras que dice,70,21,241,222,258
+Palabras que dice,71,21,246,227,264
+Palabras que dice,72,21,252,232,270
+Palabras que dice,73,21,258,238,276
+Palabras que dice,74,21,264,243,282
+Palabras que dice,75,21,270,249,288
+Palabras que dice,76,21,276,255,294
+Palabras que dice,77,21,283,261,301
+Palabras que dice,78,21,289,267,308
+Palabras que dice,79,21,296,274,315
+Palabras que dice,80,21,303,280,322
+Palabras que dice,81,21,310,287,329
+Palabras que dice,82,21,318,294,337
+Palabras que dice,83,21,325,302,344
+Palabras que dice,84,21,333,310,353
+Palabras que dice,85,21,342,318,361
+Palabras que dice,86,21,351,326,370
+Palabras que dice,87,21,360,335,379
+Palabras que dice,88,21,369,344,388
+Palabras que dice,89,21,379,354,398
+Palabras que dice,90,21,390,364,409
+Palabras que dice,91,21,401,375,420
+Palabras que dice,92,21,413,388,432
+Palabras que dice,93,21,427,401,445
+Palabras que dice,94,21,441,415,460
+Palabras que dice,95,21,457,431,475
+Palabras que dice,96,21,475,449,493
+Palabras que dice,97,21,496,471,513
+Palabras que dice,98,21,523,498,539
+Palabras que dice,99,21,559,537,573
 Palabras que dice,0,22,0,0,0
-Palabras que dice,99,23,665,612,658
-Palabras que dice,95,23,558,524,600
-Palabras que dice,90,23,468,449,513
-Palabras que dice,85,23,413,380,466
-Palabras que dice,80,23,362,337,403
-Palabras que dice,75,23,327,301,351
-Palabras que dice,70,23,291,267,315
-Palabras que dice,65,23,261,236,277
-Palabras que dice,60,23,230,209,249
-Palabras que dice,55,23,205,191,224
-Palabras que dice,50,23,180,160,195
-Palabras que dice,45,23,157,138,172
-Palabras que dice,40,23,137,126,154
-Palabras que dice,35,23,120,110,133
-Palabras que dice,30,23,106,96,117
-Palabras que dice,25,23,89,82,103
-Palabras que dice,20,23,75,68,80
-Palabras que dice,15,23,55,49,64
-Palabras que dice,10,23,41,34,48
-Palabras que dice,5,23,25,19,29
+Palabras que dice,1,22,3,3,4
+Palabras que dice,2,22,6,5,7
+Palabras que dice,3,22,9,8,10
+Palabras que dice,4,22,12,11,14
+Palabras que dice,5,22,15,13,17
+Palabras que dice,6,22,18,16,21
+Palabras que dice,7,22,21,19,24
+Palabras que dice,8,22,24,22,27
+Palabras que dice,9,22,27,24,31
+Palabras que dice,10,22,30,27,34
+Palabras que dice,11,22,33,30,38
+Palabras que dice,12,22,36,33,41
+Palabras que dice,13,22,39,36,45
+Palabras que dice,14,22,42,39,48
+Palabras que dice,15,22,45,42,52
+Palabras que dice,16,22,49,45,55
+Palabras que dice,17,22,52,47,59
+Palabras que dice,18,22,55,50,62
+Palabras que dice,19,22,58,53,66
+Palabras que dice,20,22,62,56,69
+Palabras que dice,21,22,65,59,73
+Palabras que dice,22,22,68,63,77
+Palabras que dice,23,22,72,66,80
+Palabras que dice,24,22,75,69,84
+Palabras que dice,25,22,79,72,88
+Palabras que dice,26,22,82,75,91
+Palabras que dice,27,22,86,78,95
+Palabras que dice,28,22,89,81,99
+Palabras que dice,29,22,93,85,103
+Palabras que dice,30,22,96,88,107
+Palabras que dice,31,22,100,91,110
+Palabras que dice,32,22,103,95,114
+Palabras que dice,33,22,107,98,118
+Palabras que dice,34,22,111,101,122
+Palabras que dice,35,22,114,105,126
+Palabras que dice,36,22,118,108,130
+Palabras que dice,37,22,122,112,134
+Palabras que dice,38,22,126,115,138
+Palabras que dice,39,22,130,119,142
+Palabras que dice,40,22,134,122,146
+Palabras que dice,41,22,138,126,151
+Palabras que dice,42,22,142,130,155
+Palabras que dice,43,22,146,133,159
+Palabras que dice,44,22,150,137,163
+Palabras que dice,45,22,154,141,168
+Palabras que dice,46,22,158,145,172
+Palabras que dice,47,22,162,149,176
+Palabras que dice,48,22,166,152,181
+Palabras que dice,49,22,171,156,185
+Palabras que dice,50,22,175,160,190
+Palabras que dice,51,22,179,164,194
+Palabras que dice,52,22,184,169,199
+Palabras que dice,53,22,188,173,204
+Palabras que dice,54,22,193,177,208
+Palabras que dice,55,22,197,181,213
+Palabras que dice,56,22,202,186,218
+Palabras que dice,57,22,207,190,223
+Palabras que dice,58,22,212,194,228
+Palabras que dice,59,22,216,199,233
+Palabras que dice,60,22,221,204,238
+Palabras que dice,61,22,226,208,243
+Palabras que dice,62,22,231,213,248
+Palabras que dice,63,22,237,218,253
+Palabras que dice,64,22,242,223,259
+Palabras que dice,65,22,247,228,264
+Palabras que dice,66,22,253,233,270
+Palabras que dice,67,22,258,238,275
+Palabras que dice,68,22,264,243,281
+Palabras que dice,69,22,269,248,287
+Palabras que dice,70,22,275,254,293
+Palabras que dice,71,22,281,259,299
+Palabras que dice,72,22,287,265,305
+Palabras que dice,73,22,293,271,311
+Palabras que dice,74,22,299,277,317
+Palabras que dice,75,22,306,283,324
+Palabras que dice,76,22,312,289,331
+Palabras que dice,77,22,319,296,337
+Palabras que dice,78,22,326,302,344
+Palabras que dice,79,22,333,309,351
+Palabras que dice,80,22,340,316,359
+Palabras que dice,81,22,348,323,366
+Palabras que dice,82,22,355,330,374
+Palabras que dice,83,22,363,338,382
+Palabras que dice,84,22,372,346,390
+Palabras que dice,85,22,380,354,398
+Palabras que dice,86,22,389,363,407
+Palabras que dice,87,22,398,372,416
+Palabras que dice,88,22,408,381,426
+Palabras que dice,89,22,418,391,436
+Palabras que dice,90,22,428,402,446
+Palabras que dice,91,22,440,413,457
+Palabras que dice,92,22,452,425,469
+Palabras que dice,93,22,464,438,481
+Palabras que dice,94,22,478,452,495
+Palabras que dice,95,22,494,467,510
+Palabras que dice,96,22,511,485,526
+Palabras que dice,97,22,531,506,545
+Palabras que dice,98,22,555,531,568
+Palabras que dice,99,22,587,566,598
 Palabras que dice,0,23,0,0,0
-Palabras que dice,99,24,669,624,665
-Palabras que dice,95,24,584,549,622
-Palabras que dice,90,24,504,482,547
-Palabras que dice,85,24,451,419,504
-Palabras que dice,80,24,400,378,445
-Palabras que dice,75,24,366,342,391
-Palabras que dice,70,24,330,308,352
-Palabras que dice,65,24,300,277,315
-Palabras que dice,60,24,268,248,286
-Palabras que dice,55,24,240,226,260
-Palabras que dice,50,24,214,192,229
-Palabras que dice,45,24,188,166,203
-Palabras que dice,40,24,166,152,183
-Palabras que dice,35,24,146,133,162
-Palabras que dice,30,24,129,117,143
-Palabras que dice,25,24,109,100,128
-Palabras que dice,20,24,93,83,99
-Palabras que dice,15,24,68,61,79
-Palabras que dice,10,24,50,41,58
-Palabras que dice,5,24,31,23,36
+Palabras que dice,1,23,4,4,5
+Palabras que dice,2,23,8,7,10
+Palabras que dice,3,23,12,11,14
+Palabras que dice,4,23,16,14,18
+Palabras que dice,5,23,19,18,23
+Palabras que dice,6,23,23,21,27
+Palabras que dice,7,23,27,25,31
+Palabras que dice,8,23,31,28,35
+Palabras que dice,9,23,34,32,40
+Palabras que dice,10,23,38,35,44
+Palabras que dice,11,23,42,39,48
+Palabras que dice,12,23,46,42,52
+Palabras que dice,13,23,49,45,56
+Palabras que dice,14,23,53,49,60
+Palabras que dice,15,23,57,52,65
+Palabras que dice,16,23,61,56,69
+Palabras que dice,17,23,65,59,73
+Palabras que dice,18,23,68,63,77
+Palabras que dice,19,23,72,66,81
+Palabras que dice,20,23,76,70,85
+Palabras que dice,21,23,80,73,90
+Palabras que dice,22,23,84,77,94
+Palabras que dice,23,23,88,81,98
+Palabras que dice,24,23,92,84,102
+Palabras que dice,25,23,96,88,106
+Palabras que dice,26,23,100,91,111
+Palabras que dice,27,23,104,95,115
+Palabras que dice,28,23,108,99,119
+Palabras que dice,29,23,112,103,124
+Palabras que dice,30,23,116,106,128
+Palabras que dice,31,23,120,110,132
+Palabras que dice,32,23,124,114,137
+Palabras que dice,33,23,128,118,141
+Palabras que dice,34,23,133,121,146
+Palabras que dice,35,23,137,125,150
+Palabras que dice,36,23,141,129,154
+Palabras que dice,37,23,145,133,159
+Palabras que dice,38,23,150,137,163
+Palabras que dice,39,23,154,141,168
+Palabras que dice,40,23,158,145,173
+Palabras que dice,41,23,163,149,177
+Palabras que dice,42,23,167,153,182
+Palabras que dice,43,23,172,157,187
+Palabras que dice,44,23,176,162,191
+Palabras que dice,45,23,181,166,196
+Palabras que dice,46,23,185,170,201
+Palabras que dice,47,23,190,174,206
+Palabras que dice,48,23,195,179,210
+Palabras que dice,49,23,199,183,215
+Palabras que dice,50,23,204,187,220
+Palabras que dice,51,23,209,192,225
+Palabras que dice,52,23,214,196,230
+Palabras que dice,53,23,219,201,235
+Palabras que dice,54,23,223,205,240
+Palabras que dice,55,23,228,210,245
+Palabras que dice,56,23,234,215,251
+Palabras que dice,57,23,239,219,256
+Palabras que dice,58,23,244,224,261
+Palabras que dice,59,23,249,229,266
+Palabras que dice,60,23,254,234,272
+Palabras que dice,61,23,260,239,277
+Palabras que dice,62,23,265,244,283
+Palabras que dice,63,23,270,249,288
+Palabras que dice,64,23,276,254,294
+Palabras que dice,65,23,282,260,300
+Palabras que dice,66,23,287,265,305
+Palabras que dice,67,23,293,271,311
+Palabras que dice,68,23,299,276,317
+Palabras que dice,69,23,305,282,323
+Palabras que dice,70,23,311,288,329
+Palabras que dice,71,23,317,293,336
+Palabras que dice,72,23,323,299,342
+Palabras que dice,73,23,330,305,348
+Palabras que dice,74,23,336,312,355
+Palabras que dice,75,23,343,318,362
+Palabras que dice,76,23,350,324,368
+Palabras que dice,77,23,357,331,375
+Palabras que dice,78,23,364,338,382
+Palabras que dice,79,23,371,345,389
+Palabras que dice,80,23,378,352,397
+Palabras que dice,81,23,386,359,404
+Palabras que dice,82,23,393,367,412
+Palabras que dice,83,23,401,375,420
+Palabras que dice,84,23,410,383,428
+Palabras que dice,85,23,418,391,436
+Palabras que dice,86,23,427,400,445
+Palabras que dice,87,23,436,409,454
+Palabras que dice,88,23,445,418,463
+Palabras que dice,89,23,455,428,473
+Palabras que dice,90,23,466,438,483
+Palabras que dice,91,23,476,449,493
+Palabras que dice,92,23,488,461,504
+Palabras que dice,93,23,500,473,516
+Palabras que dice,94,23,513,487,529
+Palabras que dice,95,23,528,501,542
+Palabras que dice,96,23,543,518,557
+Palabras que dice,97,23,561,537,574
+Palabras que dice,98,23,583,560,594
+Palabras que dice,99,23,611,592,620
 Palabras que dice,0,24,0,0,0
-Palabras que dice,99,25,672,635,669
-Palabras que dice,95,25,606,570,638
-Palabras que dice,90,25,535,512,576
-Palabras que dice,85,25,486,456,538
-Palabras que dice,80,25,435,418,483
-Palabras que dice,75,25,403,382,429
-Palabras que dice,70,25,369,349,388
-Palabras que dice,65,25,340,320,352
-Palabras que dice,60,25,307,288,325
-Palabras que dice,55,25,278,265,298
-Palabras que dice,50,25,250,229,267
-Palabras que dice,45,25,223,197,237
-Palabras que dice,40,25,200,181,215
-Palabras que dice,35,25,175,159,195
-Palabras que dice,30,25,156,140,174
-Palabras que dice,25,25,132,120,156
-Palabras que dice,20,25,114,102,121
-Palabras que dice,15,25,84,74,98
-Palabras que dice,10,25,61,50,71
-Palabras que dice,5,25,38,28,45
+Palabras que dice,1,24,6,5,7
+Palabras que dice,2,24,11,10,13
+Palabras que dice,3,24,16,15,19
+Palabras que dice,4,24,21,19,24
+Palabras que dice,5,24,25,23,30
+Palabras que dice,6,24,30,28,35
+Palabras que dice,7,24,35,32,40
+Palabras que dice,8,24,39,36,45
+Palabras que dice,9,24,44,40,50
+Palabras que dice,10,24,48,44,55
+Palabras que dice,11,24,53,49,60
+Palabras que dice,12,24,57,53,65
+Palabras que dice,13,24,62,57,70
+Palabras que dice,14,24,66,61,75
+Palabras que dice,15,24,71,65,80
+Palabras que dice,16,24,75,69,85
+Palabras que dice,17,24,80,73,90
+Palabras que dice,18,24,84,77,95
+Palabras que dice,19,24,89,81,99
+Palabras que dice,20,24,93,85,104
+Palabras que dice,21,24,98,89,109
+Palabras que dice,22,24,102,93,114
+Palabras que dice,23,24,107,98,119
+Palabras que dice,24,24,111,102,124
+Palabras que dice,25,24,116,106,128
+Palabras que dice,26,24,120,110,133
+Palabras que dice,27,24,125,114,138
+Palabras que dice,28,24,130,118,143
+Palabras que dice,29,24,134,123,148
+Palabras que dice,30,24,139,127,153
+Palabras que dice,31,24,143,131,158
+Palabras que dice,32,24,148,135,162
+Palabras que dice,33,24,153,140,167
+Palabras que dice,34,24,157,144,172
+Palabras que dice,35,24,162,148,177
+Palabras que dice,36,24,167,152,182
+Palabras que dice,37,24,172,157,187
+Palabras que dice,38,24,176,161,192
+Palabras que dice,39,24,181,166,197
+Palabras que dice,40,24,186,170,202
+Palabras que dice,41,24,191,174,207
+Palabras que dice,42,24,196,179,212
+Palabras que dice,43,24,200,183,217
+Palabras que dice,44,24,205,188,222
+Palabras que dice,45,24,210,193,228
+Palabras que dice,46,24,215,197,233
+Palabras que dice,47,24,220,202,238
+Palabras que dice,48,24,225,207,243
+Palabras que dice,49,24,230,211,248
+Palabras que dice,50,24,236,216,254
+Palabras que dice,51,24,241,221,259
+Palabras que dice,52,24,246,226,264
+Palabras que dice,53,24,251,231,270
+Palabras que dice,54,24,256,235,275
+Palabras que dice,55,24,262,240,280
+Palabras que dice,56,24,267,245,286
+Palabras que dice,57,24,272,251,291
+Palabras que dice,58,24,278,256,297
+Palabras que dice,59,24,283,261,303
+Palabras que dice,60,24,289,266,308
+Palabras que dice,61,24,295,271,314
+Palabras que dice,62,24,300,277,320
+Palabras que dice,63,24,306,282,326
+Palabras que dice,64,24,312,288,331
+Palabras que dice,65,24,318,293,337
+Palabras que dice,66,24,324,299,343
+Palabras que dice,67,24,330,304,349
+Palabras que dice,68,24,336,310,355
+Palabras que dice,69,24,342,316,362
+Palabras que dice,70,24,348,322,368
+Palabras que dice,71,24,354,328,374
+Palabras que dice,72,24,361,334,381
+Palabras que dice,73,24,367,341,387
+Palabras que dice,74,24,374,347,394
+Palabras que dice,75,24,380,353,400
+Palabras que dice,76,24,387,360,407
+Palabras que dice,77,24,394,367,414
+Palabras que dice,78,24,401,374,421
+Palabras que dice,79,24,408,381,428
+Palabras que dice,80,24,416,388,435
+Palabras que dice,81,24,423,395,443
+Palabras que dice,82,24,431,403,450
+Palabras que dice,83,24,439,411,458
+Palabras que dice,84,24,447,419,466
+Palabras que dice,85,24,455,427,474
+Palabras que dice,86,24,464,435,482
+Palabras que dice,87,24,472,444,490
+Palabras que dice,88,24,481,453,499
+Palabras que dice,89,24,491,463,508
+Palabras que dice,90,24,501,473,518
+Palabras que dice,91,24,511,483,527
+Palabras que dice,92,24,522,494,538
+Palabras que dice,93,24,533,506,548
+Palabras que dice,94,24,545,519,560
+Palabras que dice,95,24,558,533,572
+Palabras que dice,96,24,572,548,585
+Palabras que dice,97,24,588,565,600
+Palabras que dice,98,24,607,586,617
+Palabras que dice,99,24,630,613,638
 Palabras que dice,0,25,0,0,0
-Palabras que dice,99,26,674,643,673
-Palabras que dice,95,26,623,589,650
-Palabras que dice,90,26,563,539,599
-Palabras que dice,85,26,518,491,567
-Palabras que dice,80,26,469,455,518
-Palabras que dice,75,26,439,422,465
-Palabras que dice,70,26,407,391,423
-Palabras que dice,65,26,381,363,390
-Palabras que dice,60,26,348,331,364
-Palabras que dice,55,26,318,306,338
-Palabras que dice,50,26,289,269,306
-Palabras que dice,45,26,260,232,273
-Palabras que dice,40,26,236,214,251
-Palabras que dice,35,26,208,189,232
-Palabras que dice,30,26,187,167,209
-Palabras que dice,25,26,159,144,189
-Palabras que dice,20,26,138,123,148
-Palabras que dice,15,26,102,90,119
-Palabras que dice,10,26,74,60,85
-Palabras que dice,5,26,46,34,56
+Palabras que dice,1,25,8,8,10
+Palabras que dice,2,25,15,14,18
+Palabras que dice,3,25,21,19,25
+Palabras que dice,4,25,27,25,32
+Palabras que dice,5,25,33,30,39
+Palabras que dice,6,25,39,35,45
+Palabras que dice,7,25,44,40,51
+Palabras que dice,8,25,50,45,58
+Palabras que dice,9,25,55,50,64
+Palabras que dice,10,25,61,55,70
+Palabras que dice,11,25,66,60,75
+Palabras que dice,12,25,71,65,81
+Palabras que dice,13,25,77,70,87
+Palabras que dice,14,25,82,74,93
+Palabras que dice,15,25,87,79,98
+Palabras que dice,16,25,92,84,104
+Palabras que dice,17,25,98,89,110
+Palabras que dice,18,25,103,93,115
+Palabras que dice,19,25,108,98,121
+Palabras que dice,20,25,113,103,126
+Palabras que dice,21,25,118,107,132
+Palabras que dice,22,25,123,112,137
+Palabras que dice,23,25,128,117,143
+Palabras que dice,24,25,133,121,148
+Palabras que dice,25,25,139,126,154
+Palabras que dice,26,25,144,130,159
+Palabras que dice,27,25,149,135,165
+Palabras que dice,28,25,154,140,170
+Palabras que dice,29,25,159,144,175
+Palabras que dice,30,25,164,149,181
+Palabras que dice,31,25,169,154,186
+Palabras que dice,32,25,174,159,192
+Palabras que dice,33,25,180,163,197
+Palabras que dice,34,25,185,168,202
+Palabras que dice,35,25,190,173,208
+Palabras que dice,36,25,195,177,213
+Palabras que dice,37,25,200,182,219
+Palabras que dice,38,25,205,187,224
+Palabras que dice,39,25,211,192,229
+Palabras que dice,40,25,216,197,235
+Palabras que dice,41,25,221,201,240
+Palabras que dice,42,25,226,206,246
+Palabras que dice,43,25,232,211,251
+Palabras que dice,44,25,237,216,257
+Palabras que dice,45,25,242,221,262
+Palabras que dice,46,25,247,226,268
+Palabras que dice,47,25,253,231,273
+Palabras que dice,48,25,258,236,279
+Palabras que dice,49,25,264,241,284
+Palabras que dice,50,25,269,246,290
+Palabras que dice,51,25,275,251,295
+Palabras que dice,52,25,280,256,301
+Palabras que dice,53,25,286,262,307
+Palabras que dice,54,25,291,267,312
+Palabras que dice,55,25,297,272,318
+Palabras que dice,56,25,302,277,324
+Palabras que dice,57,25,308,283,329
+Palabras que dice,58,25,314,288,335
+Palabras que dice,59,25,319,293,341
+Palabras que dice,60,25,325,299,347
+Palabras que dice,61,25,331,304,353
+Palabras que dice,62,25,337,310,359
+Palabras que dice,63,25,343,316,364
+Palabras que dice,64,25,349,321,370
+Palabras que dice,65,25,354,327,376
+Palabras que dice,66,25,361,333,382
+Palabras que dice,67,25,367,339,389
+Palabras que dice,68,25,373,345,395
+Palabras que dice,69,25,379,351,401
+Palabras que dice,70,25,385,357,407
+Palabras que dice,71,25,392,363,413
+Palabras que dice,72,25,398,369,420
+Palabras que dice,73,25,405,375,426
+Palabras que dice,74,25,411,382,433
+Palabras que dice,75,25,418,388,439
+Palabras que dice,76,25,424,395,446
+Palabras que dice,77,25,431,402,452
+Palabras que dice,78,25,438,409,459
+Palabras que dice,79,25,445,416,466
+Palabras que dice,80,25,452,423,473
+Palabras que dice,81,25,460,430,480
+Palabras que dice,82,25,467,437,487
+Palabras que dice,83,25,475,445,495
+Palabras que dice,84,25,482,453,502
+Palabras que dice,85,25,490,461,510
+Palabras que dice,86,25,498,469,517
+Palabras que dice,87,25,507,478,525
+Palabras que dice,88,25,515,486,533
+Palabras que dice,89,25,524,496,542
+Palabras que dice,90,25,533,505,550
+Palabras que dice,91,25,542,515,559
+Palabras que dice,92,25,552,525,568
+Palabras que dice,93,25,562,536,578
+Palabras que dice,94,25,573,548,588
+Palabras que dice,95,25,585,560,598
+Palabras que dice,96,25,597,574,610
+Palabras que dice,97,25,611,590,622
+Palabras que dice,98,25,626,608,635
+Palabras que dice,99,25,645,630,652
 Palabras que dice,0,26,0,0,0
-Palabras que dice,99,27,676,651,675
-Palabras que dice,95,27,636,605,659
-Palabras que dice,90,27,586,562,618
-Palabras que dice,85,27,546,521,591
-Palabras que dice,80,27,500,490,548
-Palabras que dice,75,27,473,459,498
-Palabras que dice,70,27,444,431,457
-Palabras que dice,65,27,420,406,426
-Palabras que dice,60,27,389,374,402
-Palabras que dice,55,27,358,347,377
-Palabras que dice,50,27,330,311,346
-Palabras que dice,45,27,300,269,311
-Palabras que dice,40,27,276,250,288
-Palabras que dice,35,27,244,222,271
-Palabras que dice,30,27,222,197,248
-Palabras que dice,25,27,190,171,225
-Palabras que dice,20,27,167,148,178
-Palabras que dice,15,27,123,109,144
-Palabras que dice,10,27,90,72,103
-Palabras que dice,5,27,56,41,69
+Palabras que dice,1,26,11,10,14
+Palabras que dice,2,26,20,18,24
+Palabras que dice,3,26,28,25,33
+Palabras que dice,4,26,35,32,41
+Palabras que dice,5,26,42,38,50
+Palabras que dice,6,26,49,44,57
+Palabras que dice,7,26,56,50,65
+Palabras que dice,8,26,62,56,72
+Palabras que dice,9,26,69,62,79
+Palabras que dice,10,26,75,68,86
+Palabras que dice,11,26,81,73,93
+Palabras que dice,12,26,88,79,100
+Palabras que dice,13,26,94,84,107
+Palabras que dice,14,26,100,90,113
+Palabras que dice,15,26,106,95,120
+Palabras que dice,16,26,112,100,126
+Palabras que dice,17,26,118,106,133
+Palabras que dice,18,26,123,111,139
+Palabras que dice,19,26,129,116,145
+Palabras que dice,20,26,135,122,151
+Palabras que dice,21,26,141,127,158
+Palabras que dice,22,26,147,132,164
+Palabras que dice,23,26,152,137,170
+Palabras que dice,24,26,158,142,176
+Palabras que dice,25,26,164,147,182
+Palabras que dice,26,26,169,153,188
+Palabras que dice,27,26,175,158,194
+Palabras que dice,28,26,181,163,200
+Palabras que dice,29,26,186,168,206
+Palabras que dice,30,26,192,173,212
+Palabras que dice,31,26,197,178,218
+Palabras que dice,32,26,203,183,224
+Palabras que dice,33,26,209,189,229
+Palabras que dice,34,26,214,194,235
+Palabras que dice,35,26,220,199,241
+Palabras que dice,36,26,225,204,247
+Palabras que dice,37,26,231,209,253
+Palabras que dice,38,26,236,214,259
+Palabras que dice,39,26,242,219,264
+Palabras que dice,40,26,248,225,270
+Palabras que dice,41,26,253,230,276
+Palabras que dice,42,26,259,235,282
+Palabras que dice,43,26,264,240,288
+Palabras que dice,44,26,270,245,293
+Palabras que dice,45,26,276,251,299
+Palabras que dice,46,26,281,256,305
+Palabras que dice,47,26,287,261,311
+Palabras que dice,48,26,292,267,316
+Palabras que dice,49,26,298,272,322
+Palabras que dice,50,26,304,277,328
+Palabras que dice,51,26,309,283,334
+Palabras que dice,52,26,315,288,340
+Palabras que dice,53,26,321,293,345
+Palabras que dice,54,26,327,299,351
+Palabras que dice,55,26,332,304,357
+Palabras que dice,56,26,338,310,363
+Palabras que dice,57,26,344,315,369
+Palabras que dice,58,26,350,321,375
+Palabras que dice,59,26,356,326,380
+Palabras que dice,60,26,361,332,386
+Palabras que dice,61,26,367,338,392
+Palabras que dice,62,26,373,343,398
+Palabras que dice,63,26,379,349,404
+Palabras que dice,64,26,385,355,410
+Palabras que dice,65,26,391,361,416
+Palabras que dice,66,26,397,367,422
+Palabras que dice,67,26,403,373,428
+Palabras que dice,68,26,410,379,434
+Palabras que dice,69,26,416,385,440
+Palabras que dice,70,26,422,391,446
+Palabras que dice,71,26,428,397,452
+Palabras que dice,72,26,435,403,459
+Palabras que dice,73,26,441,409,465
+Palabras que dice,74,26,447,416,471
+Palabras que dice,75,26,454,422,477
+Palabras que dice,76,26,460,429,484
+Palabras que dice,77,26,467,435,490
+Palabras que dice,78,26,474,442,497
+Palabras que dice,79,26,480,449,503
+Palabras que dice,80,26,487,456,510
+Palabras que dice,81,26,494,463,516
+Palabras que dice,82,26,501,470,523
+Palabras que dice,83,26,508,478,530
+Palabras que dice,84,26,516,485,536
+Palabras que dice,85,26,523,493,543
+Palabras que dice,86,26,530,501,550
+Palabras que dice,87,26,538,509,558
+Palabras que dice,88,26,546,517,565
+Palabras que dice,89,26,554,525,572
+Palabras que dice,90,26,562,534,580
+Palabras que dice,91,26,570,543,587
+Palabras que dice,92,26,579,553,595
+Palabras que dice,93,26,588,563,604
+Palabras que dice,94,26,598,573,612
+Palabras que dice,95,26,607,585,621
+Palabras que dice,96,26,618,597,630
+Palabras que dice,97,26,629,610,640
+Palabras que dice,98,26,642,625,650
+Palabras que dice,99,26,656,644,662
 Palabras que dice,0,27,0,0,0
-Palabras que dice,99,28,677,656,677
-Palabras que dice,95,28,647,619,665
-Palabras que dice,90,28,605,582,633
-Palabras que dice,85,28,570,548,610
-Palabras que dice,80,28,528,521,573
-Palabras que dice,75,28,504,493,528
-Palabras que dice,70,28,478,468,488
-Palabras que dice,65,28,457,446,461
-Palabras que dice,60,28,428,415,439
-Palabras que dice,55,28,398,389,416
-Palabras que dice,50,28,371,353,386
-Palabras que dice,45,28,341,309,350
-Palabras que dice,40,28,318,288,327
-Palabras que dice,35,28,282,258,313
-Palabras que dice,30,28,259,230,289
-Palabras que dice,25,28,224,201,265
-Palabras que dice,20,28,198,176,212
-Palabras que dice,15,28,148,131,173
-Palabras que dice,10,28,108,86,123
-Palabras que dice,5,28,68,49,85
+Palabras que dice,1,27,15,13,18
+Palabras que dice,2,27,26,23,31
+Palabras que dice,3,27,36,32,42
+Palabras que dice,4,27,45,40,53
+Palabras que dice,5,27,53,47,62
+Palabras que dice,6,27,61,54,72
+Palabras que dice,7,27,69,61,80
+Palabras que dice,8,27,77,68,89
+Palabras que dice,9,27,84,75,97
+Palabras que dice,10,27,92,81,105
+Palabras que dice,11,27,99,88,113
+Palabras que dice,12,27,106,94,121
+Palabras que dice,13,27,113,100,129
+Palabras que dice,14,27,120,107,136
+Palabras que dice,15,27,126,113,144
+Palabras que dice,16,27,133,119,151
+Palabras que dice,17,27,140,125,158
+Palabras que dice,18,27,146,130,165
+Palabras que dice,19,27,153,136,172
+Palabras que dice,20,27,159,142,179
+Palabras que dice,21,27,166,148,186
+Palabras que dice,22,27,172,154,193
+Palabras que dice,23,27,178,159,200
+Palabras que dice,24,27,184,165,206
+Palabras que dice,25,27,191,171,213
+Palabras que dice,26,27,197,176,219
+Palabras que dice,27,27,203,182,226
+Palabras que dice,28,27,209,188,232
+Palabras que dice,29,27,215,193,239
+Palabras que dice,30,27,221,199,245
+Palabras que dice,31,27,227,204,252
+Palabras que dice,32,27,233,210,258
+Palabras que dice,33,27,239,215,264
+Palabras que dice,34,27,245,221,270
+Palabras que dice,35,27,251,226,277
+Palabras que dice,36,27,257,232,283
+Palabras que dice,37,27,263,237,289
+Palabras que dice,38,27,269,243,295
+Palabras que dice,39,27,275,248,301
+Palabras que dice,40,27,281,254,307
+Palabras que dice,41,27,287,259,313
+Palabras que dice,42,27,292,265,320
+Palabras que dice,43,27,298,270,326
+Palabras que dice,44,27,304,276,332
+Palabras que dice,45,27,310,281,338
+Palabras que dice,46,27,316,287,344
+Palabras que dice,47,27,322,292,350
+Palabras que dice,48,27,327,298,355
+Palabras que dice,49,27,333,303,361
+Palabras que dice,50,27,339,309,367
+Palabras que dice,51,27,345,314,373
+Palabras que dice,52,27,351,320,379
+Palabras que dice,53,27,357,325,385
+Palabras que dice,54,27,362,331,391
+Palabras que dice,55,27,368,337,397
+Palabras que dice,56,27,374,342,403
+Palabras que dice,57,27,380,348,408
+Palabras que dice,58,27,386,354,414
+Palabras que dice,59,27,392,359,420
+Palabras que dice,60,27,398,365,426
+Palabras que dice,61,27,403,371,432
+Palabras que dice,62,27,409,376,438
+Palabras que dice,63,27,415,382,443
+Palabras que dice,64,27,421,388,449
+Palabras que dice,65,27,427,394,455
+Palabras que dice,66,27,433,400,461
+Palabras que dice,67,27,439,406,467
+Palabras que dice,68,27,445,412,473
+Palabras que dice,69,27,451,418,479
+Palabras que dice,70,27,457,424,484
+Palabras que dice,71,27,463,430,490
+Palabras que dice,72,27,469,436,496
+Palabras que dice,73,27,475,442,502
+Palabras que dice,74,27,482,448,508
+Palabras que dice,75,27,488,455,514
+Palabras que dice,76,27,494,461,520
+Palabras que dice,77,27,500,468,526
+Palabras que dice,78,27,507,474,532
+Palabras que dice,79,27,513,481,538
+Palabras que dice,80,27,519,487,544
+Palabras que dice,81,27,526,494,550
+Palabras que dice,82,27,532,501,556
+Palabras que dice,83,27,539,508,562
+Palabras que dice,84,27,546,515,568
+Palabras que dice,85,27,552,522,574
+Palabras que dice,86,27,559,529,580
+Palabras que dice,87,27,566,537,586
+Palabras que dice,88,27,573,545,593
+Palabras que dice,89,27,580,552,599
+Palabras que dice,90,27,587,561,605
+Palabras que dice,91,27,595,569,612
+Palabras que dice,92,27,602,577,619
+Palabras que dice,93,27,610,586,625
+Palabras que dice,94,27,618,596,632
+Palabras que dice,95,27,626,605,639
+Palabras que dice,96,27,635,616,646
+Palabras que dice,97,27,644,627,654
+Palabras que dice,98,27,654,640,661
+Palabras que dice,99,27,665,655,670
 Palabras que dice,0,28,0,0,0
-Palabras que dice,99,29,678,661,678
-Palabras que dice,95,29,655,630,670
-Palabras que dice,90,29,621,600,644
-Palabras que dice,85,29,590,572,626
-Palabras que dice,80,29,553,549,595
-Palabras que dice,75,29,532,524,554
-Palabras que dice,70,29,509,503,516
-Palabras que dice,65,29,491,484,493
-Palabras que dice,60,29,465,455,474
-Palabras que dice,55,29,436,429,452
-Palabras que dice,50,29,411,396,425
-Palabras que dice,45,29,382,349,388
-Palabras que dice,40,29,360,328,366
-Palabras que dice,35,29,322,295,355
-Palabras que dice,30,29,299,266,332
-Palabras que dice,25,29,261,234,307
-Palabras que dice,20,29,234,208,249
-Palabras que dice,15,29,176,157,206
-Palabras que dice,10,29,129,103,146
-Palabras que dice,5,29,82,60,104
+Palabras que dice,1,28,20,17,24
+Palabras que dice,2,28,33,29,40
+Palabras que dice,3,28,45,39,53
+Palabras que dice,4,28,56,49,65
+Palabras que dice,5,28,66,57,77
+Palabras que dice,6,28,75,66,88
+Palabras que dice,7,28,84,74,98
+Palabras que dice,8,28,93,82,108
+Palabras que dice,9,28,102,89,117
+Palabras que dice,10,28,110,97,127
+Palabras que dice,11,28,118,104,136
+Palabras que dice,12,28,126,111,145
+Palabras que dice,13,28,134,118,153
+Palabras que dice,14,28,142,125,162
+Palabras que dice,15,28,149,132,170
+Palabras que dice,16,28,156,138,178
+Palabras que dice,17,28,164,145,186
+Palabras que dice,18,28,171,151,194
+Palabras que dice,19,28,178,158,202
+Palabras que dice,20,28,185,164,209
+Palabras que dice,21,28,192,171,217
+Palabras que dice,22,28,199,177,224
+Palabras que dice,23,28,206,183,231
+Palabras que dice,24,28,213,189,239
+Palabras que dice,25,28,219,195,246
+Palabras que dice,26,28,226,201,253
+Palabras que dice,27,28,233,207,260
+Palabras que dice,28,28,239,213,267
+Palabras que dice,29,28,246,219,274
+Palabras que dice,30,28,252,225,281
+Palabras que dice,31,28,258,231,287
+Palabras que dice,32,28,265,237,294
+Palabras que dice,33,28,271,243,301
+Palabras que dice,34,28,277,249,307
+Palabras que dice,35,28,284,255,314
+Palabras que dice,36,28,290,260,320
+Palabras que dice,37,28,296,266,327
+Palabras que dice,38,28,302,272,333
+Palabras que dice,39,28,308,278,340
+Palabras que dice,40,28,315,284,346
+Palabras que dice,41,28,321,289,352
+Palabras que dice,42,28,327,295,358
+Palabras que dice,43,28,333,301,365
+Palabras que dice,44,28,339,306,371
+Palabras que dice,45,28,345,312,377
+Palabras que dice,46,28,351,318,383
+Palabras que dice,47,28,357,323,389
+Palabras que dice,48,28,363,329,395
+Palabras que dice,49,28,368,335,401
+Palabras que dice,50,28,374,340,407
+Palabras que dice,51,28,380,346,413
+Palabras que dice,52,28,386,352,419
+Palabras que dice,53,28,392,357,425
+Palabras que dice,54,28,398,363,430
+Palabras que dice,55,28,404,369,436
+Palabras que dice,56,28,410,375,442
+Palabras que dice,57,28,415,380,448
+Palabras que dice,58,28,421,386,453
+Palabras que dice,59,28,427,392,459
+Palabras que dice,60,28,433,397,465
+Palabras que dice,61,28,439,403,470
+Palabras que dice,62,28,444,409,476
+Palabras que dice,63,28,450,415,482
+Palabras que dice,64,28,456,420,487
+Palabras que dice,65,28,462,426,493
+Palabras que dice,66,28,467,432,498
+Palabras que dice,67,28,473,438,504
+Palabras que dice,68,28,479,444,509
+Palabras que dice,69,28,485,450,515
+Palabras que dice,70,28,491,455,520
+Palabras que dice,71,28,496,461,526
+Palabras que dice,72,28,502,467,531
+Palabras que dice,73,28,508,473,537
+Palabras que dice,74,28,514,479,542
+Palabras que dice,75,28,519,485,548
+Palabras que dice,76,28,525,492,553
+Palabras que dice,77,28,531,498,558
+Palabras que dice,78,28,537,504,564
+Palabras que dice,79,28,543,510,569
+Palabras que dice,80,28,549,516,574
+Palabras que dice,81,28,555,523,580
+Palabras que dice,82,28,561,529,585
+Palabras que dice,83,28,566,536,590
+Palabras que dice,84,28,572,542,596
+Palabras que dice,85,28,578,549,601
+Palabras que dice,86,28,584,556,606
+Palabras que dice,87,28,591,562,611
+Palabras que dice,88,28,597,569,617
+Palabras que dice,89,28,603,576,622
+Palabras que dice,90,28,609,584,627
+Palabras que dice,91,28,615,591,632
+Palabras que dice,92,28,622,599,638
+Palabras que dice,93,28,628,606,643
+Palabras que dice,94,28,635,615,648
+Palabras que dice,95,28,641,623,653
+Palabras que dice,96,28,648,632,659
+Palabras que dice,97,28,655,641,664
+Palabras que dice,98,28,663,651,669
+Palabras que dice,99,28,670,663,674
 Palabras que dice,0,29,0,0,0
-Palabras que dice,99,30,679,665,679
-Palabras que dice,95,30,661,639,673
-Palabras que dice,90,30,634,614,653
-Palabras que dice,85,30,608,592,639
-Palabras que dice,80,30,575,572,613
-Palabras que dice,75,30,556,551,576
-Palabras que dice,70,30,537,533,542
-Palabras que dice,65,30,522,518,521
-Palabras que dice,60,30,499,491,505
-Palabras que dice,55,30,472,466,486
-Palabras que dice,50,30,449,436,462
-Palabras que dice,45,30,422,389,426
-Palabras que dice,40,30,402,368,404
-Palabras que dice,35,30,363,334,397
-Palabras que dice,30,30,339,303,375
-Palabras que dice,25,30,300,269,350
-Palabras que dice,20,30,271,242,288
-Palabras que dice,15,30,207,185,241
-Palabras que dice,10,30,152,122,172
-Palabras que dice,5,30,99,71,126
+Palabras que dice,1,29,25,22,31
+Palabras que dice,2,29,42,36,49
+Palabras que dice,3,29,55,48,65
+Palabras que dice,4,29,68,59,80
+Palabras que dice,5,29,80,69,93
+Palabras que dice,6,29,90,79,106
+Palabras que dice,7,29,101,88,117
+Palabras que dice,8,29,111,97,129
+Palabras que dice,9,29,121,105,140
+Palabras que dice,10,29,130,114,150
+Palabras que dice,11,29,139,122,160
+Palabras que dice,12,29,148,130,170
+Palabras que dice,13,29,157,137,180
+Palabras que dice,14,29,165,145,189
+Palabras que dice,15,29,173,152,198
+Palabras que dice,16,29,182,160,207
+Palabras que dice,17,29,190,167,216
+Palabras que dice,18,29,197,174,224
+Palabras que dice,19,29,205,181,233
+Palabras que dice,20,29,213,188,241
+Palabras que dice,21,29,220,195,249
+Palabras que dice,22,29,228,201,257
+Palabras que dice,23,29,235,208,265
+Palabras que dice,24,29,242,215,273
+Palabras que dice,25,29,249,221,281
+Palabras que dice,26,29,256,228,288
+Palabras que dice,27,29,263,234,296
+Palabras que dice,28,29,270,241,303
+Palabras que dice,29,29,277,247,310
+Palabras que dice,30,29,284,253,317
+Palabras que dice,31,29,291,259,324
+Palabras que dice,32,29,297,266,331
+Palabras que dice,33,29,304,272,338
+Palabras que dice,34,29,311,278,345
+Palabras que dice,35,29,317,284,352
+Palabras que dice,36,29,323,290,359
+Palabras que dice,37,29,330,296,365
+Palabras que dice,38,29,336,302,372
+Palabras que dice,39,29,343,308,378
+Palabras que dice,40,29,349,314,385
+Palabras que dice,41,29,355,320,391
+Palabras que dice,42,29,361,326,397
+Palabras que dice,43,29,367,332,404
+Palabras que dice,44,29,373,338,410
+Palabras que dice,45,29,379,343,416
+Palabras que dice,46,29,385,349,422
+Palabras que dice,47,29,391,355,428
+Palabras que dice,48,29,397,361,434
+Palabras que dice,49,29,403,367,440
+Palabras que dice,50,29,409,372,446
+Palabras que dice,51,29,415,378,452
+Palabras que dice,52,29,421,384,457
+Palabras que dice,53,29,427,389,463
+Palabras que dice,54,29,433,395,469
+Palabras que dice,55,29,438,401,474
+Palabras que dice,56,29,444,406,480
+Palabras que dice,57,29,450,412,486
+Palabras que dice,58,29,455,418,491
+Palabras que dice,59,29,461,423,497
+Palabras que dice,60,29,467,429,502
+Palabras que dice,61,29,472,435,507
+Palabras que dice,62,29,478,440,513
+Palabras que dice,63,29,483,446,518
+Palabras que dice,64,29,489,452,523
+Palabras que dice,65,29,494,457,528
+Palabras que dice,66,29,500,463,534
+Palabras que dice,67,29,505,469,539
+Palabras que dice,68,29,511,474,544
+Palabras que dice,69,29,516,480,549
+Palabras que dice,70,29,522,486,554
+Palabras que dice,71,29,527,491,559
+Palabras que dice,72,29,532,497,564
+Palabras que dice,73,29,538,503,568
+Palabras que dice,74,29,543,509,573
+Palabras que dice,75,29,549,514,578
+Palabras que dice,76,29,554,520,583
+Palabras que dice,77,29,559,526,587
+Palabras que dice,78,29,564,532,592
+Palabras que dice,79,29,570,538,597
+Palabras que dice,80,29,575,543,601
+Palabras que dice,81,29,580,549,606
+Palabras que dice,82,29,586,555,610
+Palabras que dice,83,29,591,561,615
+Palabras que dice,84,29,596,567,619
+Palabras que dice,85,29,601,573,624
+Palabras que dice,86,29,606,579,628
+Palabras que dice,87,29,612,585,632
+Palabras que dice,88,29,617,591,636
+Palabras que dice,89,29,622,598,640
+Palabras que dice,90,29,627,604,644
+Palabras que dice,91,29,632,611,648
+Palabras que dice,92,29,638,617,652
+Palabras que dice,93,29,643,624,656
+Palabras que dice,94,29,648,630,660
+Palabras que dice,95,29,653,637,664
+Palabras que dice,96,29,658,645,667
+Palabras que dice,97,29,664,652,671
+Palabras que dice,98,29,669,660,674
+Palabras que dice,99,29,674,669,677
 Palabras que dice,0,30,0,0,0
-Complejidad,99,16,27,12,24
-Complejidad,95,16,3,3,4
-Complejidad,90,16,1,0,1
-Complejidad,85,16,0,0,0
-Complejidad,80,16,0,0,0
-Complejidad,75,16,0,0,0
-Complejidad,70,16,0,0,0
-Complejidad,65,16,0,0,0
-Complejidad,60,16,0,0,0
-Complejidad,55,16,0,0,0
-Complejidad,50,16,0,0,0
-Complejidad,45,16,0,0,0
-Complejidad,40,16,0,0,0
-Complejidad,35,16,0,0,0
-Complejidad,30,16,0,0,0
-Complejidad,25,16,0,0,0
-Complejidad,20,16,0,0,0
-Complejidad,15,16,0,0,0
-Complejidad,10,16,0,0,0
-Complejidad,5,16,0,0,0
+Palabras que dice,1,30,32,27,38
+Palabras que dice,2,30,51,44,60
+Palabras que dice,3,30,67,58,79
+Palabras que dice,4,30,82,70,95
+Palabras que dice,5,30,95,82,111
+Palabras que dice,6,30,107,93,125
+Palabras que dice,7,30,119,103,138
+Palabras que dice,8,30,130,113,151
+Palabras que dice,9,30,141,123,163
+Palabras que dice,10,30,152,132,175
+Palabras que dice,11,30,162,141,186
+Palabras que dice,12,30,171,149,197
+Palabras que dice,13,30,181,158,208
+Palabras que dice,14,30,190,166,218
+Palabras que dice,15,30,199,174,228
+Palabras que dice,16,30,208,182,238
+Palabras que dice,17,30,217,190,247
+Palabras que dice,18,30,225,198,256
+Palabras que dice,19,30,233,205,266
+Palabras que dice,20,30,242,213,274
+Palabras que dice,21,30,250,220,283
+Palabras que dice,22,30,257,227,292
+Palabras que dice,23,30,265,234,300
+Palabras que dice,24,30,273,241,308
+Palabras que dice,25,30,280,248,316
+Palabras que dice,26,30,288,255,324
+Palabras que dice,27,30,295,262,332
+Palabras que dice,28,30,302,269,340
+Palabras que dice,29,30,310,275,347
+Palabras que dice,30,30,317,282,355
+Palabras que dice,31,30,324,289,362
+Palabras que dice,32,30,331,295,369
+Palabras que dice,33,30,337,301,376
+Palabras que dice,34,30,344,308,383
+Palabras que dice,35,30,351,314,390
+Palabras que dice,36,30,357,320,397
+Palabras que dice,37,30,364,327,404
+Palabras que dice,38,30,370,333,410
+Palabras que dice,39,30,377,339,417
+Palabras que dice,40,30,383,345,423
+Palabras que dice,41,30,389,351,430
+Palabras que dice,42,30,396,357,436
+Palabras que dice,43,30,402,363,442
+Palabras que dice,44,30,408,369,448
+Palabras que dice,45,30,414,375,454
+Palabras que dice,46,30,420,381,460
+Palabras que dice,47,30,426,387,466
+Palabras que dice,48,30,432,392,472
+Palabras que dice,49,30,438,398,478
+Palabras que dice,50,30,443,404,484
+Palabras que dice,51,30,449,410,489
+Palabras que dice,52,30,455,415,495
+Palabras que dice,53,30,460,421,500
+Palabras que dice,54,30,466,427,506
+Palabras que dice,55,30,472,432,511
+Palabras que dice,56,30,477,438,516
+Palabras que dice,57,30,483,444,521
+Palabras que dice,58,30,488,449,527
+Palabras que dice,59,30,494,455,532
+Palabras que dice,60,30,499,460,537
+Palabras que dice,61,30,504,466,542
+Palabras que dice,62,30,510,471,547
+Palabras que dice,63,30,515,477,551
+Palabras que dice,64,30,520,482,556
+Palabras que dice,65,30,525,488,561
+Palabras que dice,66,30,530,493,566
+Palabras que dice,67,30,535,498,570
+Palabras que dice,68,30,540,504,575
+Palabras que dice,69,30,546,509,579
+Palabras que dice,70,30,550,515,584
+Palabras que dice,71,30,555,520,588
+Palabras que dice,72,30,560,525,592
+Palabras que dice,73,30,565,531,596
+Palabras que dice,74,30,570,536,601
+Palabras que dice,75,30,575,541,605
+Palabras que dice,76,30,580,547,609
+Palabras que dice,77,30,584,552,613
+Palabras que dice,78,30,589,557,617
+Palabras que dice,79,30,594,563,620
+Palabras que dice,80,30,598,568,624
+Palabras que dice,81,30,603,573,628
+Palabras que dice,82,30,607,579,631
+Palabras que dice,83,30,612,584,635
+Palabras que dice,84,30,616,589,639
+Palabras que dice,85,30,621,595,642
+Palabras que dice,86,30,625,600,645
+Palabras que dice,87,30,630,606,648
+Palabras que dice,88,30,634,611,652
+Palabras que dice,89,30,638,616,655
+Palabras que dice,90,30,642,622,658
+Palabras que dice,91,30,646,627,661
+Palabras que dice,92,30,651,633,663
+Palabras que dice,93,30,655,638,666
+Palabras que dice,94,30,659,644,669
+Palabras que dice,95,30,662,649,671
+Palabras que dice,96,30,666,655,673
+Palabras que dice,97,30,670,661,675
+Palabras que dice,98,30,674,667,677
+Palabras que dice,99,30,677,673,679
 Complejidad,0,16,0,0,0
-Complejidad,99,17,29,15,27
-Complejidad,95,17,4,5,6
-Complejidad,90,17,1,0,1
-Complejidad,85,17,0,0,0
-Complejidad,80,17,0,0,0
-Complejidad,75,17,0,0,0
-Complejidad,70,17,0,0,0
-Complejidad,65,17,0,0,0
-Complejidad,60,17,0,0,0
-Complejidad,55,17,0,0,0
-Complejidad,50,17,0,0,0
-Complejidad,45,17,0,0,0
-Complejidad,40,17,0,0,0
-Complejidad,35,17,0,0,0
-Complejidad,30,17,0,0,0
-Complejidad,25,17,0,0,0
-Complejidad,20,17,0,0,0
-Complejidad,15,17,0,0,0
-Complejidad,10,17,0,0,0
-Complejidad,5,17,0,0,0
+Complejidad,1,16,0,0,0
+Complejidad,2,16,0,0,0
+Complejidad,3,16,0,0,0
+Complejidad,4,16,0,0,0
+Complejidad,5,16,0,0,0
+Complejidad,6,16,0,0,0
+Complejidad,7,16,0,0,0
+Complejidad,8,16,0,0,0
+Complejidad,9,16,0,0,0
+Complejidad,10,16,0,0,0
+Complejidad,11,16,0,0,0
+Complejidad,12,16,0,0,0
+Complejidad,13,16,0,0,0
+Complejidad,14,16,0,0,0
+Complejidad,15,16,0,0,0
+Complejidad,16,16,0,0,0
+Complejidad,17,16,0,0,0
+Complejidad,18,16,0,0,0
+Complejidad,19,16,0,0,0
+Complejidad,20,16,0,0,0
+Complejidad,21,16,0,0,0
+Complejidad,22,16,0,0,0
+Complejidad,23,16,0,0,0
+Complejidad,24,16,0,0,0
+Complejidad,25,16,0,0,0
+Complejidad,26,16,0,0,0
+Complejidad,27,16,0,0,0
+Complejidad,28,16,0,0,0
+Complejidad,29,16,0,0,0
+Complejidad,30,16,0,0,0
+Complejidad,31,16,0,0,0
+Complejidad,32,16,0,0,0
+Complejidad,33,16,0,0,0
+Complejidad,34,16,0,0,0
+Complejidad,35,16,0,0,0
+Complejidad,36,16,0,0,0
+Complejidad,37,16,0,0,0
+Complejidad,38,16,0,0,0
+Complejidad,39,16,0,0,0
+Complejidad,40,16,0,0,0
+Complejidad,41,16,0,0,0
+Complejidad,42,16,0,0,0
+Complejidad,43,16,0,0,0
+Complejidad,44,16,0,0,0
+Complejidad,45,16,0,0,0
+Complejidad,46,16,0,0,0
+Complejidad,47,16,0,0,0
+Complejidad,48,16,0,0,0
+Complejidad,49,16,0,0,0
+Complejidad,50,16,0,0,0
+Complejidad,51,16,0,0,0
+Complejidad,52,16,0,0,0
+Complejidad,53,16,0,0,0
+Complejidad,54,16,0,0,0
+Complejidad,55,16,0,0,0
+Complejidad,56,16,0,0,0
+Complejidad,57,16,0,0,0
+Complejidad,58,16,0,0,0
+Complejidad,59,16,0,0,0
+Complejidad,60,16,0,0,0
+Complejidad,61,16,0,0,0
+Complejidad,62,16,0,0,0
+Complejidad,63,16,0,0,1
+Complejidad,64,16,1,0,1
+Complejidad,65,16,1,0,1
+Complejidad,66,16,1,0,1
+Complejidad,67,16,1,1,1
+Complejidad,68,16,1,1,1
+Complejidad,69,16,1,1,1
+Complejidad,70,16,1,1,1
+Complejidad,71,16,1,1,1
+Complejidad,72,16,1,1,1
+Complejidad,73,16,1,1,1
+Complejidad,74,16,1,1,1
+Complejidad,75,16,1,1,1
+Complejidad,76,16,1,1,1
+Complejidad,77,16,1,1,2
+Complejidad,78,16,1,1,2
+Complejidad,79,16,2,1,2
+Complejidad,80,16,2,1,2
+Complejidad,81,16,2,1,2
+Complejidad,82,16,2,1,2
+Complejidad,83,16,2,2,2
+Complejidad,84,16,2,2,3
+Complejidad,85,16,2,2,3
+Complejidad,86,16,3,2,3
+Complejidad,87,16,3,2,3
+Complejidad,88,16,3,2,4
+Complejidad,89,16,3,2,4
+Complejidad,90,16,3,3,4
+Complejidad,91,16,4,3,5
+Complejidad,92,16,4,3,5
+Complejidad,93,16,5,3,6
+Complejidad,94,16,5,4,6
+Complejidad,95,16,6,4,7
+Complejidad,96,16,6,5,8
+Complejidad,97,16,7,5,9
+Complejidad,98,16,8,6,11
+Complejidad,99,16,11,8,13
 Complejidad,0,17,0,0,0
-Complejidad,99,18,30,18,29
-Complejidad,95,18,7,7,9
-Complejidad,90,18,2,1,2
-Complejidad,85,18,0,0,0
-Complejidad,80,18,0,0,0
-Complejidad,75,18,0,0,0
-Complejidad,70,18,0,0,0
-Complejidad,65,18,0,0,0
-Complejidad,60,18,0,0,0
-Complejidad,55,18,0,0,0
-Complejidad,50,18,0,0,0
-Complejidad,45,18,0,0,0
-Complejidad,40,18,0,0,0
-Complejidad,35,18,0,0,0
-Complejidad,30,18,0,0,0
-Complejidad,25,18,0,0,0
-Complejidad,20,18,0,0,0
-Complejidad,15,18,0,0,0
-Complejidad,10,18,0,0,0
-Complejidad,5,18,0,0,0
+Complejidad,1,17,0,0,0
+Complejidad,2,17,0,0,0
+Complejidad,3,17,0,0,0
+Complejidad,4,17,0,0,0
+Complejidad,5,17,0,0,0
+Complejidad,6,17,0,0,0
+Complejidad,7,17,0,0,0
+Complejidad,8,17,0,0,0
+Complejidad,9,17,0,0,0
+Complejidad,10,17,0,0,0
+Complejidad,11,17,0,0,0
+Complejidad,12,17,0,0,0
+Complejidad,13,17,0,0,0
+Complejidad,14,17,0,0,0
+Complejidad,15,17,0,0,0
+Complejidad,16,17,0,0,0
+Complejidad,17,17,0,0,0
+Complejidad,18,17,0,0,0
+Complejidad,19,17,0,0,0
+Complejidad,20,17,0,0,0
+Complejidad,21,17,0,0,0
+Complejidad,22,17,0,0,0
+Complejidad,23,17,0,0,0
+Complejidad,24,17,0,0,0
+Complejidad,25,17,0,0,0
+Complejidad,26,17,0,0,0
+Complejidad,27,17,0,0,0
+Complejidad,28,17,0,0,0
+Complejidad,29,17,0,0,0
+Complejidad,30,17,0,0,0
+Complejidad,31,17,0,0,0
+Complejidad,32,17,0,0,0
+Complejidad,33,17,0,0,0
+Complejidad,34,17,0,0,0
+Complejidad,35,17,0,0,0
+Complejidad,36,17,0,0,0
+Complejidad,37,17,0,0,0
+Complejidad,38,17,0,0,0
+Complejidad,39,17,0,0,0
+Complejidad,40,17,0,0,0
+Complejidad,41,17,0,0,0
+Complejidad,42,17,0,0,0
+Complejidad,43,17,0,0,0
+Complejidad,44,17,0,0,0
+Complejidad,45,17,0,0,0
+Complejidad,46,17,0,0,0
+Complejidad,47,17,0,0,0
+Complejidad,48,17,0,0,0
+Complejidad,49,17,0,0,0
+Complejidad,50,17,0,0,0
+Complejidad,51,17,0,0,0
+Complejidad,52,17,0,0,0
+Complejidad,53,17,0,0,0
+Complejidad,54,17,0,0,0
+Complejidad,55,17,0,0,0
+Complejidad,56,17,0,0,0
+Complejidad,57,17,0,0,0
+Complejidad,58,17,0,0,0
+Complejidad,59,17,0,0,0
+Complejidad,60,17,0,0,1
+Complejidad,61,17,1,0,1
+Complejidad,62,17,1,0,1
+Complejidad,63,17,1,1,1
+Complejidad,64,17,1,1,1
+Complejidad,65,17,1,1,1
+Complejidad,66,17,1,1,1
+Complejidad,67,17,1,1,1
+Complejidad,68,17,1,1,1
+Complejidad,69,17,1,1,1
+Complejidad,70,17,1,1,1
+Complejidad,71,17,1,1,1
+Complejidad,72,17,1,1,1
+Complejidad,73,17,1,1,1
+Complejidad,74,17,1,1,2
+Complejidad,75,17,1,1,2
+Complejidad,76,17,2,1,2
+Complejidad,77,17,2,1,2
+Complejidad,78,17,2,1,2
+Complejidad,79,17,2,2,2
+Complejidad,80,17,2,2,3
+Complejidad,81,17,2,2,3
+Complejidad,82,17,2,2,3
+Complejidad,83,17,3,2,3
+Complejidad,84,17,3,2,3
+Complejidad,85,17,3,2,4
+Complejidad,86,17,3,3,4
+Complejidad,87,17,3,3,4
+Complejidad,88,17,4,3,5
+Complejidad,89,17,4,3,5
+Complejidad,90,17,4,3,5
+Complejidad,91,17,5,4,6
+Complejidad,92,17,5,4,7
+Complejidad,93,17,6,4,7
+Complejidad,94,17,6,5,8
+Complejidad,95,17,7,5,9
+Complejidad,96,17,8,6,10
+Complejidad,97,17,9,7,11
+Complejidad,98,17,11,8,13
+Complejidad,99,17,13,10,16
 Complejidad,0,18,0,0,0
-Complejidad,99,19,32,21,30
-Complejidad,95,19,9,10,12
-Complejidad,90,19,3,1,3
-Complejidad,85,19,0,0,1
-Complejidad,80,19,0,0,0
-Complejidad,75,19,0,0,0
-Complejidad,70,19,0,0,0
-Complejidad,65,19,0,0,0
-Complejidad,60,19,0,0,0
-Complejidad,55,19,0,0,0
-Complejidad,50,19,0,0,0
-Complejidad,45,19,0,0,0
-Complejidad,40,19,0,0,0
+Complejidad,1,18,0,0,0
+Complejidad,2,18,0,0,0
+Complejidad,3,18,0,0,0
+Complejidad,4,18,0,0,0
+Complejidad,5,18,0,0,0
+Complejidad,6,18,0,0,0
+Complejidad,7,18,0,0,0
+Complejidad,8,18,0,0,0
+Complejidad,9,18,0,0,0
+Complejidad,10,18,0,0,0
+Complejidad,11,18,0,0,0
+Complejidad,12,18,0,0,0
+Complejidad,13,18,0,0,0
+Complejidad,14,18,0,0,0
+Complejidad,15,18,0,0,0
+Complejidad,16,18,0,0,0
+Complejidad,17,18,0,0,0
+Complejidad,18,18,0,0,0
+Complejidad,19,18,0,0,0
+Complejidad,20,18,0,0,0
+Complejidad,21,18,0,0,0
+Complejidad,22,18,0,0,0
+Complejidad,23,18,0,0,0
+Complejidad,24,18,0,0,0
+Complejidad,25,18,0,0,0
+Complejidad,26,18,0,0,0
+Complejidad,27,18,0,0,0
+Complejidad,28,18,0,0,0
+Complejidad,29,18,0,0,0
+Complejidad,30,18,0,0,0
+Complejidad,31,18,0,0,0
+Complejidad,32,18,0,0,0
+Complejidad,33,18,0,0,0
+Complejidad,34,18,0,0,0
+Complejidad,35,18,0,0,0
+Complejidad,36,18,0,0,0
+Complejidad,37,18,0,0,0
+Complejidad,38,18,0,0,0
+Complejidad,39,18,0,0,0
+Complejidad,40,18,0,0,0
+Complejidad,41,18,0,0,0
+Complejidad,42,18,0,0,0
+Complejidad,43,18,0,0,0
+Complejidad,44,18,0,0,0
+Complejidad,45,18,0,0,0
+Complejidad,46,18,0,0,0
+Complejidad,47,18,0,0,0
+Complejidad,48,18,0,0,0
+Complejidad,49,18,0,0,0
+Complejidad,50,18,0,0,0
+Complejidad,51,18,0,0,0
+Complejidad,52,18,0,0,0
+Complejidad,53,18,0,0,0
+Complejidad,54,18,0,0,0
+Complejidad,55,18,0,0,0
+Complejidad,56,18,0,0,1
+Complejidad,57,18,1,0,1
+Complejidad,58,18,1,0,1
+Complejidad,59,18,1,1,1
+Complejidad,60,18,1,1,1
+Complejidad,61,18,1,1,1
+Complejidad,62,18,1,1,1
+Complejidad,63,18,1,1,1
+Complejidad,64,18,1,1,1
+Complejidad,65,18,1,1,1
+Complejidad,66,18,1,1,1
+Complejidad,67,18,1,1,1
+Complejidad,68,18,1,1,1
+Complejidad,69,18,1,1,1
+Complejidad,70,18,1,1,2
+Complejidad,71,18,1,1,2
+Complejidad,72,18,2,1,2
+Complejidad,73,18,2,1,2
+Complejidad,74,18,2,1,2
+Complejidad,75,18,2,2,2
+Complejidad,76,18,2,2,2
+Complejidad,77,18,2,2,3
+Complejidad,78,18,2,2,3
+Complejidad,79,18,3,2,3
+Complejidad,80,18,3,2,3
+Complejidad,81,18,3,2,4
+Complejidad,82,18,3,2,4
+Complejidad,83,18,3,3,4
+Complejidad,84,18,4,3,4
+Complejidad,85,18,4,3,5
+Complejidad,86,18,4,3,5
+Complejidad,87,18,5,4,5
+Complejidad,88,18,5,4,6
+Complejidad,89,18,5,4,6
+Complejidad,90,18,6,4,7
+Complejidad,91,18,6,5,8
+Complejidad,92,18,7,5,8
+Complejidad,93,18,7,6,9
+Complejidad,94,18,8,6,10
+Complejidad,95,18,9,7,11
+Complejidad,96,18,10,8,12
+Complejidad,97,18,11,9,14
+Complejidad,98,18,13,10,16
+Complejidad,99,18,16,13,19
+Complejidad,0,19,0,0,0
+Complejidad,1,19,0,0,0
+Complejidad,2,19,0,0,0
+Complejidad,3,19,0,0,0
+Complejidad,4,19,0,0,0
+Complejidad,5,19,0,0,0
+Complejidad,6,19,0,0,0
+Complejidad,7,19,0,0,0
+Complejidad,8,19,0,0,0
+Complejidad,9,19,0,0,0
+Complejidad,10,19,0,0,0
+Complejidad,11,19,0,0,0
+Complejidad,12,19,0,0,0
+Complejidad,13,19,0,0,0
+Complejidad,14,19,0,0,0
+Complejidad,15,19,0,0,0
+Complejidad,16,19,0,0,0
+Complejidad,17,19,0,0,0
+Complejidad,18,19,0,0,0
+Complejidad,19,19,0,0,0
+Complejidad,20,19,0,0,0
+Complejidad,21,19,0,0,0
+Complejidad,22,19,0,0,0
+Complejidad,23,19,0,0,0
+Complejidad,24,19,0,0,0
+Complejidad,25,19,0,0,0
+Complejidad,26,19,0,0,0
+Complejidad,27,19,0,0,0
+Complejidad,28,19,0,0,0
+Complejidad,29,19,0,0,0
+Complejidad,30,19,0,0,0
+Complejidad,31,19,0,0,0
+Complejidad,32,19,0,0,0
+Complejidad,33,19,0,0,0
+Complejidad,34,19,0,0,0
 Complejidad,35,19,0,0,0
-Complejidad,30,19,37,0,0
-Complejidad,25,19,37,0,0
-Complejidad,20,19,37,0,0
-Complejidad,15,19,37,0,0
-Complejidad,10,19,37,0,0
-Complejidad,5,19,35,0,0
-Complejidad,0,19,34,0,0
-Complejidad,99,20,32,25,32
-Complejidad,95,20,29,13,16
-Complejidad,90,20,25,2,5
-Complejidad,85,20,16,1,2
-Complejidad,80,20,14,0,0
-Complejidad,75,20,7,0,0
-Complejidad,70,20,3,0,0
-Complejidad,65,20,1,0,0
-Complejidad,60,20,1,0,0
-Complejidad,55,20,0,0,0
-Complejidad,50,20,0,0,0
-Complejidad,45,20,0,0,0
-Complejidad,40,20,0,0,0
-Complejidad,35,20,0,0,0
-Complejidad,30,20,0,0,0
-Complejidad,25,20,0,0,0
-Complejidad,20,20,0,0,0
-Complejidad,15,20,0,0,0
-Complejidad,10,20,0,0,0
-Complejidad,5,20,0,0,0
+Complejidad,36,19,0,0,0
+Complejidad,37,19,0,0,0
+Complejidad,38,19,0,0,0
+Complejidad,39,19,0,0,0
+Complejidad,40,19,0,0,0
+Complejidad,41,19,0,0,0
+Complejidad,42,19,0,0,0
+Complejidad,43,19,0,0,0
+Complejidad,44,19,0,0,0
+Complejidad,45,19,0,0,0
+Complejidad,46,19,0,0,0
+Complejidad,47,19,0,0,0
+Complejidad,48,19,0,0,0
+Complejidad,49,19,0,0,0
+Complejidad,50,19,0,0,0
+Complejidad,51,19,0,0,0
+Complejidad,52,19,0,0,0
+Complejidad,53,19,0,0,1
+Complejidad,54,19,1,0,1
+Complejidad,55,19,1,0,1
+Complejidad,56,19,1,1,1
+Complejidad,57,19,1,1,1
+Complejidad,58,19,1,1,1
+Complejidad,59,19,1,1,1
+Complejidad,60,19,1,1,1
+Complejidad,61,19,1,1,1
+Complejidad,62,19,1,1,1
+Complejidad,63,19,1,1,1
+Complejidad,64,19,1,1,1
+Complejidad,65,19,1,1,1
+Complejidad,66,19,1,1,2
+Complejidad,67,19,1,1,2
+Complejidad,68,19,2,1,2
+Complejidad,69,19,2,1,2
+Complejidad,70,19,2,1,2
+Complejidad,71,19,2,2,2
+Complejidad,72,19,2,2,2
+Complejidad,73,19,2,2,3
+Complejidad,74,19,2,2,3
+Complejidad,75,19,3,2,3
+Complejidad,76,19,3,2,3
+Complejidad,77,19,3,2,3
+Complejidad,78,19,3,2,4
+Complejidad,79,19,3,3,4
+Complejidad,80,19,4,3,4
+Complejidad,81,19,4,3,5
+Complejidad,82,19,4,3,5
+Complejidad,83,19,4,3,5
+Complejidad,84,19,5,4,6
+Complejidad,85,19,5,4,6
+Complejidad,86,19,5,4,7
+Complejidad,87,19,6,5,7
+Complejidad,88,19,6,5,8
+Complejidad,89,19,7,5,8
+Complejidad,90,19,7,6,9
+Complejidad,91,19,8,6,10
+Complejidad,92,19,9,7,10
+Complejidad,93,19,9,7,11
+Complejidad,94,19,10,8,12
+Complejidad,95,19,11,9,13
+Complejidad,96,19,12,10,15
+Complejidad,97,19,14,11,17
+Complejidad,98,19,16,13,19
+Complejidad,99,19,19,16,23
 Complejidad,0,20,0,0,0
-Complejidad,99,21,34,27,33
-Complejidad,95,21,17,17,20
-Complejidad,90,21,7,4,9
-Complejidad,85,21,1,2,3
-Complejidad,80,21,1,1,1
-Complejidad,75,21,1,0,1
-Complejidad,70,21,0,0,1
-Complejidad,65,21,0,0,0
-Complejidad,60,21,0,0,0
-Complejidad,55,21,0,0,0
-Complejidad,50,21,0,0,0
-Complejidad,45,21,0,0,0
-Complejidad,40,21,0,0,0
-Complejidad,35,21,0,0,0
-Complejidad,30,21,0,0,0
-Complejidad,25,21,0,0,0
-Complejidad,20,21,0,0,0
-Complejidad,15,21,0,0,0
-Complejidad,10,21,0,0,0
-Complejidad,5,21,0,0,0
+Complejidad,1,20,0,0,0
+Complejidad,2,20,0,0,0
+Complejidad,3,20,0,0,0
+Complejidad,4,20,0,0,0
+Complejidad,5,20,0,0,0
+Complejidad,6,20,0,0,0
+Complejidad,7,20,0,0,0
+Complejidad,8,20,0,0,0
+Complejidad,9,20,0,0,0
+Complejidad,10,20,0,0,0
+Complejidad,11,20,0,0,0
+Complejidad,12,20,0,0,0
+Complejidad,13,20,0,0,0
+Complejidad,14,20,0,0,0
+Complejidad,15,20,0,0,0
+Complejidad,16,20,0,0,0
+Complejidad,17,20,0,0,0
+Complejidad,18,20,0,0,0
+Complejidad,19,20,0,0,0
+Complejidad,20,20,0,0,0
+Complejidad,21,20,0,0,0
+Complejidad,22,20,0,0,0
+Complejidad,23,20,0,0,0
+Complejidad,24,20,0,0,0
+Complejidad,25,20,0,0,0
+Complejidad,26,20,0,0,0
+Complejidad,27,20,0,0,0
+Complejidad,28,20,0,0,0
+Complejidad,29,20,0,0,0
+Complejidad,30,20,0,0,0
+Complejidad,31,20,0,0,0
+Complejidad,32,20,0,0,0
+Complejidad,33,20,0,0,0
+Complejidad,34,20,0,0,0
+Complejidad,35,20,0,0,0
+Complejidad,36,20,0,0,0
+Complejidad,37,20,0,0,0
+Complejidad,38,20,0,0,0
+Complejidad,39,20,0,0,0
+Complejidad,40,20,0,0,0
+Complejidad,41,20,0,0,0
+Complejidad,42,20,0,0,0
+Complejidad,43,20,0,0,0
+Complejidad,44,20,0,0,0
+Complejidad,45,20,0,0,0
+Complejidad,46,20,0,0,0
+Complejidad,47,20,0,0,0
+Complejidad,48,20,0,0,0
+Complejidad,49,20,0,0,1
+Complejidad,50,20,1,0,1
+Complejidad,51,20,1,0,1
+Complejidad,52,20,1,1,1
+Complejidad,53,20,1,1,1
+Complejidad,54,20,1,1,1
+Complejidad,55,20,1,1,1
+Complejidad,56,20,1,1,1
+Complejidad,57,20,1,1,1
+Complejidad,58,20,1,1,1
+Complejidad,59,20,1,1,1
+Complejidad,60,20,1,1,1
+Complejidad,61,20,1,1,1
+Complejidad,62,20,1,1,2
+Complejidad,63,20,1,1,2
+Complejidad,64,20,2,1,2
+Complejidad,65,20,2,1,2
+Complejidad,66,20,2,1,2
+Complejidad,67,20,2,2,2
+Complejidad,68,20,2,2,2
+Complejidad,69,20,2,2,3
+Complejidad,70,20,2,2,3
+Complejidad,71,20,3,2,3
+Complejidad,72,20,3,2,3
+Complejidad,73,20,3,2,4
+Complejidad,74,20,3,3,4
+Complejidad,75,20,3,3,4
+Complejidad,76,20,4,3,4
+Complejidad,77,20,4,3,5
+Complejidad,78,20,4,3,5
+Complejidad,79,20,4,4,5
+Complejidad,80,20,5,4,6
+Complejidad,81,20,5,4,6
+Complejidad,82,20,5,4,6
+Complejidad,83,20,6,5,7
+Complejidad,84,20,6,5,7
+Complejidad,85,20,7,5,8
+Complejidad,86,20,7,6,8
+Complejidad,87,20,7,6,9
+Complejidad,88,20,8,6,10
+Complejidad,89,20,9,7,10
+Complejidad,90,20,9,7,11
+Complejidad,91,20,10,8,12
+Complejidad,92,20,11,9,13
+Complejidad,93,20,12,9,14
+Complejidad,94,20,13,10,15
+Complejidad,95,20,14,11,16
+Complejidad,96,20,15,12,18
+Complejidad,97,20,17,14,20
+Complejidad,98,20,20,16,22
+Complejidad,99,20,23,19,26
 Complejidad,0,21,0,0,0
-Complejidad,99,22,35,30,34
-Complejidad,95,22,21,21,24
-Complejidad,90,22,11,6,13
-Complejidad,85,22,3,3,6
-Complejidad,80,22,2,2,2
-Complejidad,75,22,1,1,2
-Complejidad,70,22,1,1,1
-Complejidad,65,22,0,0,1
-Complejidad,60,22,0,0,0
-Complejidad,55,22,0,0,0
-Complejidad,50,22,0,0,0
-Complejidad,45,22,0,0,0
-Complejidad,40,22,0,0,0
-Complejidad,35,22,0,0,0
-Complejidad,30,22,0,0,0
-Complejidad,25,22,0,0,0
-Complejidad,20,22,0,0,0
-Complejidad,15,22,0,0,0
-Complejidad,10,22,0,0,0
-Complejidad,5,22,0,0,0
+Complejidad,1,21,0,0,0
+Complejidad,2,21,0,0,0
+Complejidad,3,21,0,0,0
+Complejidad,4,21,0,0,0
+Complejidad,5,21,0,0,0
+Complejidad,6,21,0,0,0
+Complejidad,7,21,0,0,0
+Complejidad,8,21,0,0,0
+Complejidad,9,21,0,0,0
+Complejidad,10,21,0,0,0
+Complejidad,11,21,0,0,0
+Complejidad,12,21,0,0,0
+Complejidad,13,21,0,0,0
+Complejidad,14,21,0,0,0
+Complejidad,15,21,0,0,0
+Complejidad,16,21,0,0,0
+Complejidad,17,21,0,0,0
+Complejidad,18,21,0,0,0
+Complejidad,19,21,0,0,0
+Complejidad,20,21,0,0,0
+Complejidad,21,21,0,0,0
+Complejidad,22,21,0,0,0
+Complejidad,23,21,0,0,0
+Complejidad,24,21,0,0,0
+Complejidad,25,21,0,0,0
+Complejidad,26,21,0,0,0
+Complejidad,27,21,0,0,0
+Complejidad,28,21,0,0,0
+Complejidad,29,21,0,0,0
+Complejidad,30,21,0,0,0
+Complejidad,31,21,0,0,0
+Complejidad,32,21,0,0,0
+Complejidad,33,21,0,0,0
+Complejidad,34,21,0,0,0
+Complejidad,35,21,0,0,0
+Complejidad,36,21,0,0,0
+Complejidad,37,21,0,0,0
+Complejidad,38,21,0,0,0
+Complejidad,39,21,0,0,0
+Complejidad,40,21,0,0,0
+Complejidad,41,21,0,0,0
+Complejidad,42,21,0,0,0
+Complejidad,43,21,0,0,0
+Complejidad,44,21,0,0,0
+Complejidad,45,21,0,0,1
+Complejidad,46,21,0,0,1
+Complejidad,47,21,1,0,1
+Complejidad,48,21,1,1,1
+Complejidad,49,21,1,1,1
+Complejidad,50,21,1,1,1
+Complejidad,51,21,1,1,1
+Complejidad,52,21,1,1,1
+Complejidad,53,21,1,1,1
+Complejidad,54,21,1,1,1
+Complejidad,55,21,1,1,1
+Complejidad,56,21,1,1,1
+Complejidad,57,21,1,1,2
+Complejidad,58,21,1,1,2
+Complejidad,59,21,1,1,2
+Complejidad,60,21,2,1,2
+Complejidad,61,21,2,1,2
+Complejidad,62,21,2,2,2
+Complejidad,63,21,2,2,2
+Complejidad,64,21,2,2,3
+Complejidad,65,21,2,2,3
+Complejidad,66,21,2,2,3
+Complejidad,67,21,3,2,3
+Complejidad,68,21,3,2,3
+Complejidad,69,21,3,2,4
+Complejidad,70,21,3,3,4
+Complejidad,71,21,3,3,4
+Complejidad,72,21,4,3,4
+Complejidad,73,21,4,3,5
+Complejidad,74,21,4,3,5
+Complejidad,75,21,4,4,5
+Complejidad,76,21,5,4,6
+Complejidad,77,21,5,4,6
+Complejidad,78,21,5,4,6
+Complejidad,79,21,6,5,7
+Complejidad,80,21,6,5,7
+Complejidad,81,21,7,5,8
+Complejidad,82,21,7,6,8
+Complejidad,83,21,7,6,9
+Complejidad,84,21,8,6,9
+Complejidad,85,21,8,7,10
+Complejidad,86,21,9,7,11
+Complejidad,87,21,10,8,11
+Complejidad,88,21,10,8,12
+Complejidad,89,21,11,9,13
+Complejidad,90,21,12,9,14
+Complejidad,91,21,13,10,15
+Complejidad,92,21,14,11,16
+Complejidad,93,21,15,12,17
+Complejidad,94,21,16,13,18
+Complejidad,95,21,17,14,20
+Complejidad,96,21,19,15,22
+Complejidad,97,21,21,17,23
+Complejidad,98,21,23,19,26
+Complejidad,99,21,27,23,29
 Complejidad,0,22,0,0,0
-Complejidad,99,23,35,32,35
-Complejidad,95,23,26,25,28
-Complejidad,90,23,16,11,19
-Complejidad,85,23,5,6,10
-Complejidad,80,23,4,3,5
-Complejidad,75,23,3,2,4
-Complejidad,70,23,1,1,2
-Complejidad,65,23,1,1,1
-Complejidad,60,23,1,1,1
-Complejidad,55,23,0,1,1
-Complejidad,50,23,0,0,0
-Complejidad,45,23,0,0,0
-Complejidad,40,23,0,0,0
-Complejidad,35,23,0,0,0
-Complejidad,30,23,0,0,0
-Complejidad,25,23,0,0,0
-Complejidad,20,23,0,0,0
-Complejidad,15,23,0,0,0
-Complejidad,10,23,0,0,0
-Complejidad,5,23,0,0,0
+Complejidad,1,22,0,0,0
+Complejidad,2,22,0,0,0
+Complejidad,3,22,0,0,0
+Complejidad,4,22,0,0,0
+Complejidad,5,22,0,0,0
+Complejidad,6,22,0,0,0
+Complejidad,7,22,0,0,0
+Complejidad,8,22,0,0,0
+Complejidad,9,22,0,0,0
+Complejidad,10,22,0,0,0
+Complejidad,11,22,0,0,0
+Complejidad,12,22,0,0,0
+Complejidad,13,22,0,0,0
+Complejidad,14,22,0,0,0
+Complejidad,15,22,0,0,0
+Complejidad,16,22,0,0,0
+Complejidad,17,22,0,0,0
+Complejidad,18,22,0,0,0
+Complejidad,19,22,0,0,0
+Complejidad,20,22,0,0,0
+Complejidad,21,22,0,0,0
+Complejidad,22,22,0,0,0
+Complejidad,23,22,0,0,0
+Complejidad,24,22,0,0,0
+Complejidad,25,22,0,0,0
+Complejidad,26,22,0,0,0
+Complejidad,27,22,0,0,0
+Complejidad,28,22,0,0,0
+Complejidad,29,22,0,0,0
+Complejidad,30,22,0,0,0
+Complejidad,31,22,0,0,0
+Complejidad,32,22,0,0,0
+Complejidad,33,22,0,0,0
+Complejidad,34,22,0,0,0
+Complejidad,35,22,0,0,0
+Complejidad,36,22,0,0,0
+Complejidad,37,22,0,0,0
+Complejidad,38,22,0,0,0
+Complejidad,39,22,0,0,0
+Complejidad,40,22,0,0,1
+Complejidad,41,22,0,0,1
+Complejidad,42,22,1,0,1
+Complejidad,43,22,1,0,1
+Complejidad,44,22,1,1,1
+Complejidad,45,22,1,1,1
+Complejidad,46,22,1,1,1
+Complejidad,47,22,1,1,1
+Complejidad,48,22,1,1,1
+Complejidad,49,22,1,1,1
+Complejidad,50,22,1,1,1
+Complejidad,51,22,1,1,1
+Complejidad,52,22,1,1,1
+Complejidad,53,22,1,1,2
+Complejidad,54,22,1,1,2
+Complejidad,55,22,2,1,2
+Complejidad,56,22,2,1,2
+Complejidad,57,22,2,2,2
+Complejidad,58,22,2,2,2
+Complejidad,59,22,2,2,3
+Complejidad,60,22,2,2,3
+Complejidad,61,22,2,2,3
+Complejidad,62,22,3,2,3
+Complejidad,63,22,3,2,3
+Complejidad,64,22,3,2,4
+Complejidad,65,22,3,3,4
+Complejidad,66,22,3,3,4
+Complejidad,67,22,4,3,4
+Complejidad,68,22,4,3,5
+Complejidad,69,22,4,3,5
+Complejidad,70,22,4,4,5
+Complejidad,71,22,5,4,6
+Complejidad,72,22,5,4,6
+Complejidad,73,22,5,4,6
+Complejidad,74,22,6,5,7
+Complejidad,75,22,6,5,7
+Complejidad,76,22,6,5,8
+Complejidad,77,22,7,5,8
+Complejidad,78,22,7,6,9
+Complejidad,79,22,8,6,9
+Complejidad,80,22,8,6,10
+Complejidad,81,22,9,7,10
+Complejidad,82,22,9,7,11
+Complejidad,83,22,10,8,11
+Complejidad,84,22,10,8,12
+Complejidad,85,22,11,9,13
+Complejidad,86,22,12,9,14
+Complejidad,87,22,12,10,14
+Complejidad,88,22,13,11,15
+Complejidad,89,22,14,11,16
+Complejidad,90,22,15,12,17
+Complejidad,91,22,16,13,18
+Complejidad,92,22,17,14,19
+Complejidad,93,22,18,15,21
+Complejidad,94,22,19,16,22
+Complejidad,95,22,21,17,23
+Complejidad,96,22,22,19,25
+Complejidad,97,22,24,21,27
+Complejidad,98,22,27,23,29
+Complejidad,99,22,30,26,32
 Complejidad,0,23,0,0,0
-Complejidad,99,24,36,33,35
-Complejidad,95,24,29,28,31
-Complejidad,90,24,21,17,24
-Complejidad,85,24,11,10,16
-Complejidad,80,24,7,6,10
-Complejidad,75,24,5,3,7
-Complejidad,70,24,3,2,5
-Complejidad,65,24,2,2,3
-Complejidad,60,24,2,1,2
-Complejidad,55,24,1,1,1
-Complejidad,50,24,0,0,1
-Complejidad,45,24,0,0,0
-Complejidad,40,24,0,0,0
-Complejidad,35,24,0,0,0
-Complejidad,30,24,0,0,0
-Complejidad,25,24,0,0,0
-Complejidad,20,24,0,0,0
-Complejidad,15,24,0,0,0
-Complejidad,10,24,0,0,0
-Complejidad,5,24,0,0,0
+Complejidad,1,23,0,0,0
+Complejidad,2,23,0,0,0
+Complejidad,3,23,0,0,0
+Complejidad,4,23,0,0,0
+Complejidad,5,23,0,0,0
+Complejidad,6,23,0,0,0
+Complejidad,7,23,0,0,0
+Complejidad,8,23,0,0,0
+Complejidad,9,23,0,0,0
+Complejidad,10,23,0,0,0
+Complejidad,11,23,0,0,0
+Complejidad,12,23,0,0,0
+Complejidad,13,23,0,0,0
+Complejidad,14,23,0,0,0
+Complejidad,15,23,0,0,0
+Complejidad,16,23,0,0,0
+Complejidad,17,23,0,0,0
+Complejidad,18,23,0,0,0
+Complejidad,19,23,0,0,0
+Complejidad,20,23,0,0,0
+Complejidad,21,23,0,0,0
+Complejidad,22,23,0,0,0
+Complejidad,23,23,0,0,0
+Complejidad,24,23,0,0,0
+Complejidad,25,23,0,0,0
+Complejidad,26,23,0,0,0
+Complejidad,27,23,0,0,0
+Complejidad,28,23,0,0,0
+Complejidad,29,23,0,0,0
+Complejidad,30,23,0,0,0
+Complejidad,31,23,0,0,0
+Complejidad,32,23,0,0,0
+Complejidad,33,23,0,0,0
+Complejidad,34,23,0,0,0
+Complejidad,35,23,0,0,0
+Complejidad,36,23,0,0,1
+Complejidad,37,23,0,0,1
+Complejidad,38,23,1,0,1
+Complejidad,39,23,1,0,1
+Complejidad,40,23,1,1,1
+Complejidad,41,23,1,1,1
+Complejidad,42,23,1,1,1
+Complejidad,43,23,1,1,1
+Complejidad,44,23,1,1,1
+Complejidad,45,23,1,1,1
+Complejidad,46,23,1,1,1
+Complejidad,47,23,1,1,1
+Complejidad,48,23,1,1,2
+Complejidad,49,23,1,1,2
+Complejidad,50,23,2,1,2
+Complejidad,51,23,2,1,2
+Complejidad,52,23,2,1,2
+Complejidad,53,23,2,2,2
+Complejidad,54,23,2,2,3
+Complejidad,55,23,2,2,3
+Complejidad,56,23,2,2,3
+Complejidad,57,23,3,2,3
+Complejidad,58,23,3,2,3
+Complejidad,59,23,3,2,4
+Complejidad,60,23,3,3,4
+Complejidad,61,23,3,3,4
+Complejidad,62,23,4,3,4
+Complejidad,63,23,4,3,5
+Complejidad,64,23,4,3,5
+Complejidad,65,23,4,4,5
+Complejidad,66,23,5,4,6
+Complejidad,67,23,5,4,6
+Complejidad,68,23,5,4,6
+Complejidad,69,23,6,5,7
+Complejidad,70,23,6,5,7
+Complejidad,71,23,6,5,8
+Complejidad,72,23,7,5,8
+Complejidad,73,23,7,6,9
+Complejidad,74,23,8,6,9
+Complejidad,75,23,8,6,10
+Complejidad,76,23,8,7,10
+Complejidad,77,23,9,7,11
+Complejidad,78,23,9,8,11
+Complejidad,79,23,10,8,12
+Complejidad,80,23,11,9,13
+Complejidad,81,23,11,9,13
+Complejidad,82,23,12,10,14
+Complejidad,83,23,12,10,15
+Complejidad,84,23,13,11,15
+Complejidad,85,23,14,11,16
+Complejidad,86,23,15,12,17
+Complejidad,87,23,15,13,18
+Complejidad,88,23,16,13,19
+Complejidad,89,23,17,14,20
+Complejidad,90,23,18,15,21
+Complejidad,91,23,19,16,22
+Complejidad,92,23,20,17,23
+Complejidad,93,23,22,18,24
+Complejidad,94,23,23,19,26
+Complejidad,95,23,24,21,27
+Complejidad,96,23,26,22,29
+Complejidad,97,23,28,24,30
+Complejidad,98,23,30,27,32
+Complejidad,99,23,33,30,34
 Complejidad,0,24,0,0,0
-Complejidad,99,25,36,35,36
-Complejidad,95,25,32,31,33
-Complejidad,90,25,26,23,29
-Complejidad,85,25,18,16,23
-Complejidad,80,25,13,10,18
-Complejidad,75,25,9,6,13
-Complejidad,70,25,6,4,9
-Complejidad,65,25,4,3,5
-Complejidad,60,25,3,2,4
-Complejidad,55,25,2,2,2
-Complejidad,50,25,1,1,1
-Complejidad,45,25,1,1,1
-Complejidad,40,25,0,0,1
-Complejidad,35,25,0,0,0
-Complejidad,30,25,0,0,0
-Complejidad,25,25,0,0,0
-Complejidad,20,25,0,0,0
-Complejidad,15,25,0,0,0
-Complejidad,10,25,0,0,0
-Complejidad,5,25,0,0,0
+Complejidad,1,24,0,0,0
+Complejidad,2,24,0,0,0
+Complejidad,3,24,0,0,0
+Complejidad,4,24,0,0,0
+Complejidad,5,24,0,0,0
+Complejidad,6,24,0,0,0
+Complejidad,7,24,0,0,0
+Complejidad,8,24,0,0,0
+Complejidad,9,24,0,0,0
+Complejidad,10,24,0,0,0
+Complejidad,11,24,0,0,0
+Complejidad,12,24,0,0,0
+Complejidad,13,24,0,0,0
+Complejidad,14,24,0,0,0
+Complejidad,15,24,0,0,0
+Complejidad,16,24,0,0,0
+Complejidad,17,24,0,0,0
+Complejidad,18,24,0,0,0
+Complejidad,19,24,0,0,0
+Complejidad,20,24,0,0,0
+Complejidad,21,24,0,0,0
+Complejidad,22,24,0,0,0
+Complejidad,23,24,0,0,0
+Complejidad,24,24,0,0,0
+Complejidad,25,24,0,0,0
+Complejidad,26,24,0,0,0
+Complejidad,27,24,0,0,0
+Complejidad,28,24,0,0,0
+Complejidad,29,24,0,0,0
+Complejidad,30,24,0,0,0
+Complejidad,31,24,0,0,0
+Complejidad,32,24,0,0,1
+Complejidad,33,24,0,0,1
+Complejidad,34,24,1,0,1
+Complejidad,35,24,1,1,1
+Complejidad,36,24,1,1,1
+Complejidad,37,24,1,1,1
+Complejidad,38,24,1,1,1
+Complejidad,39,24,1,1,1
+Complejidad,40,24,1,1,1
+Complejidad,41,24,1,1,1
+Complejidad,42,24,1,1,2
+Complejidad,43,24,1,1,2
+Complejidad,44,24,1,1,2
+Complejidad,45,24,2,1,2
+Complejidad,46,24,2,1,2
+Complejidad,47,24,2,1,2
+Complejidad,48,24,2,2,2
+Complejidad,49,24,2,2,3
+Complejidad,50,24,2,2,3
+Complejidad,51,24,2,2,3
+Complejidad,52,24,3,2,3
+Complejidad,53,24,3,2,4
+Complejidad,54,24,3,2,4
+Complejidad,55,24,3,3,4
+Complejidad,56,24,3,3,4
+Complejidad,57,24,4,3,5
+Complejidad,58,24,4,3,5
+Complejidad,59,24,4,3,5
+Complejidad,60,24,5,4,6
+Complejidad,61,24,5,4,6
+Complejidad,62,24,5,4,6
+Complejidad,63,24,5,4,7
+Complejidad,64,24,6,5,7
+Complejidad,65,24,6,5,7
+Complejidad,66,24,6,5,8
+Complejidad,67,24,7,5,8
+Complejidad,68,24,7,6,9
+Complejidad,69,24,8,6,9
+Complejidad,70,24,8,7,10
+Complejidad,71,24,9,7,10
+Complejidad,72,24,9,7,11
+Complejidad,73,24,10,8,11
+Complejidad,74,24,10,8,12
+Complejidad,75,24,11,9,13
+Complejidad,76,24,11,9,13
+Complejidad,77,24,12,9,14
+Complejidad,78,24,12,10,15
+Complejidad,79,24,13,11,15
+Complejidad,80,24,14,11,16
+Complejidad,81,24,14,12,17
+Complejidad,82,24,15,12,18
+Complejidad,83,24,16,13,18
+Complejidad,84,24,17,14,19
+Complejidad,85,24,17,14,20
+Complejidad,86,24,18,15,21
+Complejidad,87,24,19,16,22
+Complejidad,88,24,20,17,23
+Complejidad,89,24,21,18,24
+Complejidad,90,24,22,19,25
+Complejidad,91,24,23,20,26
+Complejidad,92,24,24,21,27
+Complejidad,93,24,26,22,28
+Complejidad,94,24,27,23,29
+Complejidad,95,24,28,25,30
+Complejidad,96,24,30,26,32
+Complejidad,97,24,31,28,33
+Complejidad,98,24,33,30,34
+Complejidad,99,24,35,32,36
 Complejidad,0,25,0,0,0
-Complejidad,99,26,37,36,36
-Complejidad,95,26,34,33,35
-Complejidad,90,26,30,29,32
-Complejidad,85,26,26,23,29
-Complejidad,80,26,20,16,26
-Complejidad,75,26,15,11,20
-Complejidad,70,26,11,8,15
-Complejidad,65,26,8,6,10
-Complejidad,60,26,6,5,8
-Complejidad,55,26,4,4,5
-Complejidad,50,26,2,2,2
-Complejidad,45,26,1,1,2
-Complejidad,40,26,1,0,1
-Complejidad,35,26,0,0,1
-Complejidad,30,26,0,0,0
-Complejidad,25,26,0,0,0
-Complejidad,20,26,0,0,0
-Complejidad,15,26,0,0,0
-Complejidad,10,26,0,0,0
-Complejidad,5,26,0,0,0
+Complejidad,1,25,0,0,0
+Complejidad,2,25,0,0,0
+Complejidad,3,25,0,0,0
+Complejidad,4,25,0,0,0
+Complejidad,5,25,0,0,0
+Complejidad,6,25,0,0,0
+Complejidad,7,25,0,0,0
+Complejidad,8,25,0,0,0
+Complejidad,9,25,0,0,0
+Complejidad,10,25,0,0,0
+Complejidad,11,25,0,0,0
+Complejidad,12,25,0,0,0
+Complejidad,13,25,0,0,0
+Complejidad,14,25,0,0,0
+Complejidad,15,25,0,0,0
+Complejidad,16,25,0,0,0
+Complejidad,17,25,0,0,0
+Complejidad,18,25,0,0,0
+Complejidad,19,25,0,0,0
+Complejidad,20,25,0,0,0
+Complejidad,21,25,0,0,0
+Complejidad,22,25,0,0,0
+Complejidad,23,25,0,0,0
+Complejidad,24,25,0,0,0
+Complejidad,25,25,0,0,0
+Complejidad,26,25,0,0,0
+Complejidad,27,25,0,0,1
+Complejidad,28,25,0,0,1
+Complejidad,29,25,0,0,1
+Complejidad,30,25,1,0,1
+Complejidad,31,25,1,0,1
+Complejidad,32,25,1,1,1
+Complejidad,33,25,1,1,1
+Complejidad,34,25,1,1,1
+Complejidad,35,25,1,1,1
+Complejidad,36,25,1,1,1
+Complejidad,37,25,1,1,2
+Complejidad,38,25,1,1,2
+Complejidad,39,25,1,1,2
+Complejidad,40,25,2,1,2
+Complejidad,41,25,2,1,2
+Complejidad,42,25,2,1,2
+Complejidad,43,25,2,2,3
+Complejidad,44,25,2,2,3
+Complejidad,45,25,2,2,3
+Complejidad,46,25,3,2,3
+Complejidad,47,25,3,2,3
+Complejidad,48,25,3,2,4
+Complejidad,49,25,3,2,4
+Complejidad,50,25,3,3,4
+Complejidad,51,25,4,3,5
+Complejidad,52,25,4,3,5
+Complejidad,53,25,4,3,5
+Complejidad,54,25,4,3,6
+Complejidad,55,25,5,4,6
+Complejidad,56,25,5,4,6
+Complejidad,57,25,5,4,7
+Complejidad,58,25,6,4,7
+Complejidad,59,25,6,5,8
+Complejidad,60,25,6,5,8
+Complejidad,61,25,7,5,8
+Complejidad,62,25,7,6,9
+Complejidad,63,25,8,6,9
+Complejidad,64,25,8,6,10
+Complejidad,65,25,8,7,10
+Complejidad,66,25,9,7,11
+Complejidad,67,25,9,7,11
+Complejidad,68,25,10,8,12
+Complejidad,69,25,10,8,13
+Complejidad,70,25,11,9,13
+Complejidad,71,25,12,9,14
+Complejidad,72,25,12,10,14
+Complejidad,73,25,13,10,15
+Complejidad,74,25,13,11,16
+Complejidad,75,25,14,11,17
+Complejidad,76,25,15,12,17
+Complejidad,77,25,15,12,18
+Complejidad,78,25,16,13,19
+Complejidad,79,25,17,14,19
+Complejidad,80,25,17,14,20
+Complejidad,81,25,18,15,21
+Complejidad,82,25,19,16,22
+Complejidad,83,25,20,16,23
+Complejidad,84,25,21,17,23
+Complejidad,85,25,22,18,24
+Complejidad,86,25,22,19,25
+Complejidad,87,25,23,20,26
+Complejidad,88,25,24,21,27
+Complejidad,89,25,25,22,28
+Complejidad,90,25,26,23,29
+Complejidad,91,25,27,24,30
+Complejidad,92,25,28,25,31
+Complejidad,93,25,29,26,31
+Complejidad,94,25,30,27,32
+Complejidad,95,25,31,28,33
+Complejidad,96,25,33,30,34
+Complejidad,97,25,34,31,35
+Complejidad,98,25,35,33,36
+Complejidad,99,25,36,35,36
 Complejidad,0,26,0,0,0
-Complejidad,99,27,37,36,37
-Complejidad,95,27,35,35,36
-Complejidad,90,27,33,33,35
-Complejidad,85,27,32,29,33
-Complejidad,80,27,27,23,31
-Complejidad,75,27,22,18,27
-Complejidad,70,27,17,14,22
-Complejidad,65,27,14,10,17
-Complejidad,60,27,10,8,14
-Complejidad,55,27,7,6,9
-Complejidad,50,27,3,3,4
-Complejidad,45,27,3,2,4
-Complejidad,40,27,1,1,3
-Complejidad,35,27,1,1,1
-Complejidad,30,27,0,0,0
-Complejidad,25,27,0,0,0
-Complejidad,20,27,0,0,0
-Complejidad,15,27,0,0,0
-Complejidad,10,27,0,0,0
-Complejidad,5,27,0,0,0
+Complejidad,1,26,0,0,0
+Complejidad,2,26,0,0,0
+Complejidad,3,26,0,0,0
+Complejidad,4,26,0,0,0
+Complejidad,5,26,0,0,0
+Complejidad,6,26,0,0,0
+Complejidad,7,26,0,0,0
+Complejidad,8,26,0,0,0
+Complejidad,9,26,0,0,0
+Complejidad,10,26,0,0,0
+Complejidad,11,26,0,0,0
+Complejidad,12,26,0,0,0
+Complejidad,13,26,0,0,0
+Complejidad,14,26,0,0,0
+Complejidad,15,26,0,0,0
+Complejidad,16,26,0,0,0
+Complejidad,17,26,0,0,0
+Complejidad,18,26,0,0,0
+Complejidad,19,26,0,0,0
+Complejidad,20,26,0,0,0
+Complejidad,21,26,0,0,0
+Complejidad,22,26,0,0,0
+Complejidad,23,26,0,0,1
+Complejidad,24,26,0,0,1
+Complejidad,25,26,0,0,1
+Complejidad,26,26,1,0,1
+Complejidad,27,26,1,0,1
+Complejidad,28,26,1,1,1
+Complejidad,29,26,1,1,1
+Complejidad,30,26,1,1,1
+Complejidad,31,26,1,1,1
+Complejidad,32,26,1,1,2
+Complejidad,33,26,1,1,2
+Complejidad,34,26,1,1,2
+Complejidad,35,26,2,1,2
+Complejidad,36,26,2,1,2
+Complejidad,37,26,2,1,2
+Complejidad,38,26,2,2,3
+Complejidad,39,26,2,2,3
+Complejidad,40,26,2,2,3
+Complejidad,41,26,3,2,3
+Complejidad,42,26,3,2,4
+Complejidad,43,26,3,2,4
+Complejidad,44,26,3,2,4
+Complejidad,45,26,4,3,5
+Complejidad,46,26,4,3,5
+Complejidad,47,26,4,3,5
+Complejidad,48,26,4,3,6
+Complejidad,49,26,5,4,6
+Complejidad,50,26,5,4,6
+Complejidad,51,26,5,4,7
+Complejidad,52,26,6,4,7
+Complejidad,53,26,6,5,8
+Complejidad,54,26,6,5,8
+Complejidad,55,26,7,5,9
+Complejidad,56,26,7,6,9
+Complejidad,57,26,8,6,10
+Complejidad,58,26,8,6,10
+Complejidad,59,26,9,7,11
+Complejidad,60,26,9,7,11
+Complejidad,61,26,9,7,12
+Complejidad,62,26,10,8,12
+Complejidad,63,26,11,8,13
+Complejidad,64,26,11,9,13
+Complejidad,65,26,12,9,14
+Complejidad,66,26,12,10,15
+Complejidad,67,26,13,10,15
+Complejidad,68,26,13,11,16
+Complejidad,69,26,14,11,17
+Complejidad,70,26,15,12,17
+Complejidad,71,26,15,12,18
+Complejidad,72,26,16,13,19
+Complejidad,73,26,17,13,19
+Complejidad,74,26,17,14,20
+Complejidad,75,26,18,15,21
+Complejidad,76,26,19,15,22
+Complejidad,77,26,19,16,22
+Complejidad,78,26,20,17,23
+Complejidad,79,26,21,17,24
+Complejidad,80,26,22,18,25
+Complejidad,81,26,23,19,25
+Complejidad,82,26,23,20,26
+Complejidad,83,26,24,21,27
+Complejidad,84,26,25,21,28
+Complejidad,85,26,26,22,28
+Complejidad,86,26,27,23,29
+Complejidad,87,26,27,24,30
+Complejidad,88,26,28,25,31
+Complejidad,89,26,29,26,31
+Complejidad,90,26,30,27,32
+Complejidad,91,26,31,28,33
+Complejidad,92,26,32,29,33
+Complejidad,93,26,32,30,34
+Complejidad,94,26,33,31,35
+Complejidad,95,26,34,32,35
+Complejidad,96,26,35,33,36
+Complejidad,97,26,35,34,36
+Complejidad,98,26,36,35,37
+Complejidad,99,26,37,36,37
 Complejidad,0,27,0,0,0
-Complejidad,99,28,37,37,37
-Complejidad,95,28,36,36,37
-Complejidad,90,28,35,35,36
-Complejidad,85,28,35,33,35
-Complejidad,80,28,32,29,35
-Complejidad,75,28,28,25,32
-Complejidad,70,28,25,21,28
-Complejidad,65,28,21,17,24
-Complejidad,60,28,17,13,21
-Complejidad,55,28,12,11,16
-Complejidad,50,28,6,5,8
-Complejidad,45,28,5,3,7
-Complejidad,40,28,2,1,5
-Complejidad,35,28,1,1,2
-Complejidad,30,28,1,0,1
-Complejidad,25,28,0,0,1
-Complejidad,20,28,0,0,0
-Complejidad,15,28,0,0,0
-Complejidad,10,28,0,0,0
-Complejidad,5,28,0,0,0
+Complejidad,1,27,0,0,0
+Complejidad,2,27,0,0,0
+Complejidad,3,27,0,0,0
+Complejidad,4,27,0,0,0
+Complejidad,5,27,0,0,0
+Complejidad,6,27,0,0,0
+Complejidad,7,27,0,0,0
+Complejidad,8,27,0,0,0
+Complejidad,9,27,0,0,0
+Complejidad,10,27,0,0,0
+Complejidad,11,27,0,0,0
+Complejidad,12,27,0,0,0
+Complejidad,13,27,0,0,0
+Complejidad,14,27,0,0,0
+Complejidad,15,27,0,0,0
+Complejidad,16,27,0,0,0
+Complejidad,17,27,0,0,0
+Complejidad,18,27,0,0,0
+Complejidad,19,27,0,0,1
+Complejidad,20,27,0,0,1
+Complejidad,21,27,0,0,1
+Complejidad,22,27,1,0,1
+Complejidad,23,27,1,0,1
+Complejidad,24,27,1,0,1
+Complejidad,25,27,1,1,1
+Complejidad,26,27,1,1,1
+Complejidad,27,27,1,1,1
+Complejidad,28,27,1,1,2
+Complejidad,29,27,1,1,2
+Complejidad,30,27,1,1,2
+Complejidad,31,27,2,1,2
+Complejidad,32,27,2,1,3
+Complejidad,33,27,2,1,3
+Complejidad,34,27,2,2,3
+Complejidad,35,27,2,2,3
+Complejidad,36,27,3,2,4
+Complejidad,37,27,3,2,4
+Complejidad,38,27,3,2,4
+Complejidad,39,27,3,2,5
+Complejidad,40,27,4,3,5
+Complejidad,41,27,4,3,5
+Complejidad,42,27,4,3,6
+Complejidad,43,27,5,3,6
+Complejidad,44,27,5,4,6
+Complejidad,45,27,5,4,7
+Complejidad,46,27,6,4,7
+Complejidad,47,27,6,4,8
+Complejidad,48,27,6,5,8
+Complejidad,49,27,7,5,9
+Complejidad,50,27,7,5,9
+Complejidad,51,27,8,6,10
+Complejidad,52,27,8,6,10
+Complejidad,53,27,9,7,11
+Complejidad,54,27,9,7,11
+Complejidad,55,27,10,7,12
+Complejidad,56,27,10,8,13
+Complejidad,57,27,11,8,13
+Complejidad,58,27,11,9,14
+Complejidad,59,27,12,9,15
+Complejidad,60,27,12,10,15
+Complejidad,61,27,13,10,16
+Complejidad,62,27,14,11,17
+Complejidad,63,27,14,11,17
+Complejidad,64,27,15,12,18
+Complejidad,65,27,16,12,19
+Complejidad,66,27,16,13,19
+Complejidad,67,27,17,14,20
+Complejidad,68,27,18,14,21
+Complejidad,69,27,18,15,21
+Complejidad,70,27,19,15,22
+Complejidad,71,27,20,16,23
+Complejidad,72,27,20,17,24
+Complejidad,73,27,21,17,24
+Complejidad,74,27,22,18,25
+Complejidad,75,27,23,19,26
+Complejidad,76,27,23,20,26
+Complejidad,77,27,24,20,27
+Complejidad,78,27,25,21,28
+Complejidad,79,27,26,22,28
+Complejidad,80,27,26,23,29
+Complejidad,81,27,27,23,30
+Complejidad,82,27,28,24,30
+Complejidad,83,27,28,25,31
+Complejidad,84,27,29,26,31
+Complejidad,85,27,30,27,32
+Complejidad,86,27,31,27,33
+Complejidad,87,27,31,28,33
+Complejidad,88,27,32,29,34
+Complejidad,89,27,32,30,34
+Complejidad,90,27,33,31,35
+Complejidad,91,27,34,31,35
+Complejidad,92,27,34,32,35
+Complejidad,93,27,35,33,36
+Complejidad,94,27,35,34,36
+Complejidad,95,27,36,34,36
+Complejidad,96,27,36,35,37
+Complejidad,97,27,36,36,37
+Complejidad,98,27,37,36,37
+Complejidad,99,27,37,37,37
 Complejidad,0,28,0,0,0
-Complejidad,99,29,37,37,37
-Complejidad,95,29,37,37,37
-Complejidad,90,29,37,36,37
-Complejidad,85,29,37,35,37
-Complejidad,80,29,35,33,37
-Complejidad,75,29,32,30,35
-Complejidad,70,29,31,27,33
-Complejidad,65,29,28,23,30
-Complejidad,60,29,23,20,28
-Complejidad,55,29,18,16,23
-Complejidad,50,29,10,9,14
-Complejidad,45,29,8,6,11
-Complejidad,40,29,4,2,9
-Complejidad,35,29,2,1,3
-Complejidad,30,29,1,1,1
-Complejidad,25,29,1,0,1
-Complejidad,20,29,0,0,0
-Complejidad,15,29,0,0,0
-Complejidad,10,29,0,0,0
-Complejidad,5,29,0,0,0
+Complejidad,1,28,0,0,0
+Complejidad,2,28,0,0,0
+Complejidad,3,28,0,0,0
+Complejidad,4,28,0,0,0
+Complejidad,5,28,0,0,0
+Complejidad,6,28,0,0,0
+Complejidad,7,28,0,0,0
+Complejidad,8,28,0,0,0
+Complejidad,9,28,0,0,0
+Complejidad,10,28,0,0,0
+Complejidad,11,28,0,0,0
+Complejidad,12,28,0,0,0
+Complejidad,13,28,0,0,0
+Complejidad,14,28,0,0,0
+Complejidad,15,28,0,0,0
+Complejidad,16,28,0,0,1
+Complejidad,17,28,0,0,1
+Complejidad,18,28,0,0,1
+Complejidad,19,28,1,0,1
+Complejidad,20,28,1,0,1
+Complejidad,21,28,1,0,1
+Complejidad,22,28,1,1,1
+Complejidad,23,28,1,1,2
+Complejidad,24,28,1,1,2
+Complejidad,25,28,1,1,2
+Complejidad,26,28,2,1,2
+Complejidad,27,28,2,1,2
+Complejidad,28,28,2,1,3
+Complejidad,29,28,2,1,3
+Complejidad,30,28,2,2,3
+Complejidad,31,28,3,2,4
+Complejidad,32,28,3,2,4
+Complejidad,33,28,3,2,4
+Complejidad,34,28,3,2,5
+Complejidad,35,28,4,3,5
+Complejidad,36,28,4,3,6
+Complejidad,37,28,4,3,6
+Complejidad,38,28,5,3,6
+Complejidad,39,28,5,4,7
+Complejidad,40,28,6,4,7
+Complejidad,41,28,6,4,8
+Complejidad,42,28,6,5,8
+Complejidad,43,28,7,5,9
+Complejidad,44,28,7,5,10
+Complejidad,45,28,8,6,10
+Complejidad,46,28,8,6,11
+Complejidad,47,28,9,6,11
+Complejidad,48,28,9,7,12
+Complejidad,49,28,10,7,13
+Complejidad,50,28,10,8,13
+Complejidad,51,28,11,8,14
+Complejidad,52,28,12,9,15
+Complejidad,53,28,12,9,15
+Complejidad,54,28,13,10,16
+Complejidad,55,28,13,10,17
+Complejidad,56,28,14,11,17
+Complejidad,57,28,15,11,18
+Complejidad,58,28,15,12,19
+Complejidad,59,28,16,13,19
+Complejidad,60,28,17,13,20
+Complejidad,61,28,18,14,21
+Complejidad,62,28,18,14,22
+Complejidad,63,28,19,15,22
+Complejidad,64,28,20,16,23
+Complejidad,65,28,20,16,24
+Complejidad,66,28,21,17,24
+Complejidad,67,28,22,18,25
+Complejidad,68,28,22,18,26
+Complejidad,69,28,23,19,26
+Complejidad,70,28,24,20,27
+Complejidad,71,28,25,21,28
+Complejidad,72,28,25,21,28
+Complejidad,73,28,26,22,29
+Complejidad,74,28,27,23,29
+Complejidad,75,28,27,24,30
+Complejidad,76,28,28,24,31
+Complejidad,77,28,29,25,31
+Complejidad,78,28,29,26,32
+Complejidad,79,28,30,26,32
+Complejidad,80,28,30,27,33
+Complejidad,81,28,31,28,33
+Complejidad,82,28,32,29,34
+Complejidad,83,28,32,29,34
+Complejidad,84,28,33,30,34
+Complejidad,85,28,33,31,35
+Complejidad,86,28,34,31,35
+Complejidad,87,28,34,32,35
+Complejidad,88,28,34,33,36
+Complejidad,89,28,35,33,36
+Complejidad,90,28,35,34,36
+Complejidad,91,28,36,34,36
+Complejidad,92,28,36,35,36
+Complejidad,93,28,36,35,37
+Complejidad,94,28,36,36,37
+Complejidad,95,28,37,36,37
+Complejidad,96,28,37,36,37
+Complejidad,97,28,37,37,37
+Complejidad,98,28,37,37,37
+Complejidad,99,28,37,37,37
 Complejidad,0,29,0,0,0
-Complejidad,99,30,37,37,37
-Complejidad,95,30,37,37,37
-Complejidad,90,30,37,37,37
-Complejidad,85,30,37,36,37
-Complejidad,80,30,37,35,37
-Complejidad,75,30,35,34,36
-Complejidad,70,30,34,32,35
-Complejidad,65,30,32,29,34
-Complejidad,60,30,29,26,33
-Complejidad,55,30,25,22,29
-Complejidad,50,30,16,15,20
-Complejidad,45,30,14,10,18
-Complejidad,40,30,7,4,14
-Complejidad,35,30,3,2,5
-Complejidad,30,30,1,1,2
-Complejidad,25,30,1,0,2
-Complejidad,20,30,0,0,0
-Complejidad,15,30,0,0,0
-Complejidad,10,30,0,0,0
-Complejidad,5,30,0,0,0
+Complejidad,1,29,0,0,0
+Complejidad,2,29,0,0,0
+Complejidad,3,29,0,0,0
+Complejidad,4,29,0,0,0
+Complejidad,5,29,0,0,0
+Complejidad,6,29,0,0,0
+Complejidad,7,29,0,0,0
+Complejidad,8,29,0,0,0
+Complejidad,9,29,0,0,0
+Complejidad,10,29,0,0,0
+Complejidad,11,29,0,0,0
+Complejidad,12,29,0,0,0
+Complejidad,13,29,0,0,1
+Complejidad,14,29,0,0,1
+Complejidad,15,29,0,0,1
+Complejidad,16,29,1,0,1
+Complejidad,17,29,1,0,1
+Complejidad,18,29,1,0,1
+Complejidad,19,29,1,1,1
+Complejidad,20,29,1,1,2
+Complejidad,21,29,1,1,2
+Complejidad,22,29,1,1,2
+Complejidad,23,29,2,1,3
+Complejidad,24,29,2,1,3
+Complejidad,25,29,2,1,3
+Complejidad,26,29,2,1,4
+Complejidad,27,29,3,2,4
+Complejidad,28,29,3,2,4
+Complejidad,29,29,3,2,5
+Complejidad,30,29,4,2,5
+Complejidad,31,29,4,3,6
+Complejidad,32,29,4,3,6
+Complejidad,33,29,5,3,7
+Complejidad,34,29,5,3,7
+Complejidad,35,29,6,4,8
+Complejidad,36,29,6,4,8
+Complejidad,37,29,7,4,9
+Complejidad,38,29,7,5,10
+Complejidad,39,29,8,5,10
+Complejidad,40,29,8,6,11
+Complejidad,41,29,9,6,12
+Complejidad,42,29,9,7,12
+Complejidad,43,29,10,7,13
+Complejidad,44,29,11,8,14
+Complejidad,45,29,11,8,14
+Complejidad,46,29,12,9,15
+Complejidad,47,29,13,9,16
+Complejidad,48,29,13,10,17
+Complejidad,49,29,14,10,17
+Complejidad,50,29,15,11,18
+Complejidad,51,29,15,11,19
+Complejidad,52,29,16,12,20
+Complejidad,53,29,17,13,20
+Complejidad,54,29,18,13,21
+Complejidad,55,29,18,14,22
+Complejidad,56,29,19,15,23
+Complejidad,57,29,20,15,23
+Complejidad,58,29,20,16,24
+Complejidad,59,29,21,17,25
+Complejidad,60,29,22,18,25
+Complejidad,61,29,23,18,26
+Complejidad,62,29,23,19,27
+Complejidad,63,29,24,20,27
+Complejidad,64,29,25,21,28
+Complejidad,65,29,25,21,29
+Complejidad,66,29,26,22,29
+Complejidad,67,29,27,23,30
+Complejidad,68,29,27,23,30
+Complejidad,69,29,28,24,31
+Complejidad,70,29,29,25,31
+Complejidad,71,29,29,26,32
+Complejidad,72,29,30,26,32
+Complejidad,73,29,30,27,33
+Complejidad,74,29,31,28,33
+Complejidad,75,29,32,28,34
+Complejidad,76,29,32,29,34
+Complejidad,77,29,32,30,34
+Complejidad,78,29,33,30,35
+Complejidad,79,29,33,31,35
+Complejidad,80,29,34,31,35
+Complejidad,81,29,34,32,35
+Complejidad,82,29,34,32,36
+Complejidad,83,29,35,33,36
+Complejidad,84,29,35,33,36
+Complejidad,85,29,35,34,36
+Complejidad,86,29,36,34,36
+Complejidad,87,29,36,35,36
+Complejidad,88,29,36,35,37
+Complejidad,89,29,36,35,37
+Complejidad,90,29,36,36,37
+Complejidad,91,29,37,36,37
+Complejidad,92,29,37,36,37
+Complejidad,93,29,37,36,37
+Complejidad,94,29,37,37,37
+Complejidad,95,29,37,37,37
+Complejidad,96,29,37,37,37
+Complejidad,97,29,37,37,37
+Complejidad,98,29,37,37,37
+Complejidad,99,29,37,37,37
 Complejidad,0,30,0,0,0
+Complejidad,1,30,0,0,0
+Complejidad,2,30,0,0,0
+Complejidad,3,30,0,0,0
+Complejidad,4,30,0,0,0
+Complejidad,5,30,0,0,0
+Complejidad,6,30,0,0,0
+Complejidad,7,30,0,0,0
+Complejidad,8,30,0,0,0
+Complejidad,9,30,0,0,0
+Complejidad,10,30,0,0,0
+Complejidad,11,30,0,0,1
+Complejidad,12,30,0,0,1
+Complejidad,13,30,1,0,1
+Complejidad,14,30,1,0,1
+Complejidad,15,30,1,0,1
+Complejidad,16,30,1,0,2
+Complejidad,17,30,1,1,2
+Complejidad,18,30,1,1,2
+Complejidad,19,30,2,1,2
+Complejidad,20,30,2,1,3
+Complejidad,21,30,2,1,3
+Complejidad,22,30,2,1,4
+Complejidad,23,30,3,2,4
+Complejidad,24,30,3,2,5
+Complejidad,25,30,3,2,5
+Complejidad,26,30,4,2,6
+Complejidad,27,30,4,3,6
+Complejidad,28,30,5,3,7
+Complejidad,29,30,5,3,7
+Complejidad,30,30,6,3,8
+Complejidad,31,30,6,4,9
+Complejidad,32,30,7,4,9
+Complejidad,33,30,7,5,10
+Complejidad,34,30,8,5,11
+Complejidad,35,30,9,6,12
+Complejidad,36,30,9,6,12
+Complejidad,37,30,10,7,13
+Complejidad,38,30,11,7,14
+Complejidad,39,30,11,8,15
+Complejidad,40,30,12,8,16
+Complejidad,41,30,13,9,16
+Complejidad,42,30,14,10,17
+Complejidad,43,30,14,10,18
+Complejidad,44,30,15,11,19
+Complejidad,45,30,16,12,20
+Complejidad,46,30,17,12,21
+Complejidad,47,30,17,13,21
+Complejidad,48,30,18,14,22
+Complejidad,49,30,19,14,23
+Complejidad,50,30,20,15,24
+Complejidad,51,30,21,16,25
+Complejidad,52,30,21,17,25
+Complejidad,53,30,22,17,26
+Complejidad,54,30,23,18,27
+Complejidad,55,30,24,19,27
+Complejidad,56,30,24,20,28
+Complejidad,57,30,25,21,29
+Complejidad,58,30,26,21,29
+Complejidad,59,30,27,22,30
+Complejidad,60,30,27,23,30
+Complejidad,61,30,28,24,31
+Complejidad,62,30,29,24,31
+Complejidad,63,30,29,25,32
+Complejidad,64,30,30,26,32
+Complejidad,65,30,30,27,33
+Complejidad,66,30,31,27,33
+Complejidad,67,30,31,28,34
+Complejidad,68,30,32,29,34
+Complejidad,69,30,32,29,34
+Complejidad,70,30,33,30,34
+Complejidad,71,30,33,30,35
+Complejidad,72,30,34,31,35
+Complejidad,73,30,34,32,35
+Complejidad,74,30,34,32,35
+Complejidad,75,30,35,33,36
+Complejidad,76,30,35,33,36
+Complejidad,77,30,35,33,36
+Complejidad,78,30,35,34,36
+Complejidad,79,30,36,34,36
+Complejidad,80,30,36,35,36
+Complejidad,81,30,36,35,37
+Complejidad,82,30,36,35,37
+Complejidad,83,30,36,35,37
+Complejidad,84,30,36,36,37
+Complejidad,85,30,37,36,37
+Complejidad,86,30,37,36,37
+Complejidad,87,30,37,36,37
+Complejidad,88,30,37,36,37
+Complejidad,89,30,37,37,37
+Complejidad,90,30,37,37,37
+Complejidad,91,30,37,37,37
+Complejidad,92,30,37,37,37
+Complejidad,93,30,37,37,37
+Complejidad,94,30,37,37,37
+Complejidad,95,30,37,37,37
+Complejidad,96,30,37,37,37
+Complejidad,97,30,37,37,37
+Complejidad,98,30,37,37,37
+Complejidad,99,30,37,37,37
 Combinar palabras,999,16,0,24,46
 Combinar palabras,999,17,0,30,45
 Combinar palabras,999,18,0,39,39

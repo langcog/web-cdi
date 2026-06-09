@@ -1,4 +1,3 @@
-{% load querystring from django_tables2 %}
 {% load django_tables2 %}
 {% load trans blocktrans from i18n %}
 {% load bootstrap4 %}
@@ -183,7 +182,7 @@
                 {% for column in table.columns %}
                     <th {{ column.attrs.th.as_html }} style="text-align:center;">
                         {% if column.orderable %}
-                            <a href="{% querystring table.prefixed_order_by_field=column.order_by_alias.next %}">{{ column.header }}</a>
+                            <a href="{% querystring sort=column.order_by_alias.next %}">{{ column.header }}</a>
                         {% else %}
                             {{ column.header }}
                         {% endif %}
@@ -234,7 +233,7 @@
                                         <input type="text" class="form-control" name="local_lab_id" id="local_lab_id{{row.record.pk}}" value="{{row.record.local_lab_id}}">
                                     </div>
                                     <div class="form-group">
-                                        <label for="recipient-name" class="col-form-label">Participant opted out of broader sharing</label>
+                                        <label for="recipient-name" class="col-form-label">Opted out of sharing</label>
                                         <select name="opt_out" id="opt_out{{row.record.pk}}" class="form-group">
                                             <option value="None" {% if row.record.opt_out == None %} selected{% endif %}>Unknown</option>
                                             <option value="True" {% if row.record.opt_out == "Yes" %} selected {% endif %}> Yes</option>
