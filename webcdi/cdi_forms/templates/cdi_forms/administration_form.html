@@ -25,7 +25,9 @@
 {% block main %}
 {% csrf_token %}
     <div id = "{{ part.id }}_div" class="part_div ">
-        <h2 id="{{ part.id }}"> {{ data.part }}</h2>
+        {% if data.objects|length > 0 %}
+            <h2 id="{{ part.id }}"> {{ data.part }}</h2>
+        {% endif %}
         <div id = "{{ data.type.id }}_div" class = "page_div ">
             <h3 id = "{{ data.type.id }}"> {{ data.type.title }}</h3>
             {% if data.type.subtitle %}<h3 > {{ data.type.subtitle }}</h3>{% endif %}
@@ -38,12 +40,13 @@
                         {% trans "Hide/Show Instructions: " %} <i class="material-icons">arrow_drop_up</i>
                     </a>
                 {% endif %}
-            {% endif %}
-            {% if data.section.title %}
-                <h4 id ="{{ section.id }}" >{{ data.section.title }}</h4>
-            {% endif %}
-            {% if data.section.text %}
-                <div class="col-md-12">{{ data.section.text }}</div>
+           
+                {% if data.section.title %}
+                    <h4 id ="{{ section.id }}" >{{ data.section.title }}</h4>
+                {% endif %}
+                {% if data.section.text %}
+                    <div class="col-md-12">{{ data.section.text }}</div>
+                {% endif %}
             {% endif %}
 
             <div class="row alternate-color">
@@ -127,7 +130,6 @@
             </div>
             <div class="col-md-12">{{ data.section.footnote }}</div>
         </div>
-
         
         {% include 'cdi_forms/_captcha_page.html' %}
 
