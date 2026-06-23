@@ -29,7 +29,9 @@
             <h2 id="{{ part.id }}"> {{ data.part }}</h2>
         {% endif %}
         <div id = "{{ data.type.id }}_div" class = "page_div ">
-            <h3 id = "{{ data.type.id }}"> {{ data.type.title }}</h3>
+            {% if data.objects|length > 0 %}
+                <h3 id = "{{ data.type.id }}"> {{ data.type.title }}</h3>
+            {% endif %}
             {% if data.type.subtitle %}<h3 > {{ data.type.subtitle }}</h3>{% endif %}
             {% if data.objects|length > 0 %}
                 <div id="sectionInstructions{{data.type.id}}" class="collapse" data-toggle="collapse" style="font-size: .85em;">
