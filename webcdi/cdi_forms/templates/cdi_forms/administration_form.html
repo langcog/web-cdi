@@ -25,23 +25,30 @@
 {% block main %}
 {% csrf_token %}
     <div id = "{{ part.id }}_div" class="part_div ">
-        <h2 id="{{ part.id }}"> {{ data.part }}</h2>
+        {% if data.objects|length > 0 %}
+            <h2 id="{{ part.id }}"> {{ data.part }}</h2>
+        {% endif %}
         <div id = "{{ data.type.id }}_div" class = "page_div ">
-            <h3 id = "{{ data.type.id }}"> {{ data.type.title }}</h3>
+            {% if data.objects|length > 0 %}
+                <h3 id = "{{ data.type.id }}"> {{ data.type.title }}</h3>
+            {% endif %}
             {% if data.type.subtitle %}<h3 > {{ data.type.subtitle }}</h3>{% endif %}
-            <div id="sectionInstructions{{data.type.id}}" class="collapse" data-toggle="collapse" style="font-size: .85em;">
-                <p class="lead"> {{ data.type.instructions | capfirst }}</p>
-            </div>
-            {% if data.type.instructions|length > 0 %}
-                <a href="#sectionInstructions{{data.type.id}}" data-toggle="collapse" id="section_instructions_title">
-                    {% trans "Hide/Show Instructions: " %} <i class="material-icons">arrow_drop_up</i>
-                </a>
-            {% endif %}
-            {% if data.section.title %}
-                <h4 id ="{{ section.id }}" >{{ data.section.title }}</h4>
-            {% endif %}
-            {% if data.section.text %}
-                <div class="col-md-12">{{ data.section.text }}</div>
+            {% if data.objects|length > 0 %}
+                <div id="sectionInstructions{{data.type.id}}" class="collapse" data-toggle="collapse" style="font-size: .85em;">
+                    <p class="lead"> {{ data.type.instructions | capfirst }}</p>
+                </div>
+                {% if data.type.instructions|length > 0 %}
+                    <a href="#sectionInstructions{{data.type.id}}" data-toggle="collapse" id="section_instructions_title">
+                        {% trans "Hide/Show Instructions: " %} <i class="material-icons">arrow_drop_up</i>
+                    </a>
+                {% endif %}
+           
+                {% if data.section.title %}
+                    <h4 id ="{{ section.id }}" >{{ data.section.title }}</h4>
+                {% endif %}
+                {% if data.section.text %}
+                    <div class="col-md-12">{{ data.section.text }}</div>
+                {% endif %}
             {% endif %}
 
             <div class="row alternate-color">
@@ -125,7 +132,6 @@
             </div>
             <div class="col-md-12">{{ data.section.footnote }}</div>
         </div>
-
         
         {% include 'cdi_forms/_captcha_page.html' %}
 

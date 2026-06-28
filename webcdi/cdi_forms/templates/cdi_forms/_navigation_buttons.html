@@ -14,7 +14,12 @@
         {% if data.menu == contents|max_page and timer %}
             <input id="id_submit_btn2" name="btn-submit" value="{% trans 'Submit' %}" class="btn btn-success submit-button" type="submit" onclick="clicked(event)">
         {% endif %}
-        <font id="progress">{{ data.menu }}/{{ contents|max_page }}</font>
+        {% if data.menu|length < 1 and contents|length < 1 and timer %}
+            <input id="id_submit_btn2" name="btn-submit" value="{% trans 'Submit' %}" class="btn btn-success submit-button" type="submit" onclick="clicked(event)">
+        {% endif %}
+        {% if contents|length > 0 %}
+            <font id="progress">{{ data.menu }}/{{ contents|max_page }}</font>
+        {% endif %}
     </div>
     <div class="flex-row d-flex justify-content-center">        
         <input name="btn-save" value="{% trans 'Save' %}" class="btn btn-primary" type="submit">
