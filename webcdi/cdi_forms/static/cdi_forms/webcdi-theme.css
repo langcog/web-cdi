@@ -301,6 +301,147 @@ main[role="main"] {
   box-shadow: 0 0 0 2px rgba(43, 93, 140, 0.15);
 }
 
+/* ---- researcher console interior ---- */
+/* table.html ships its own .login-card style block; neutralize its
+   scrollbar and spacing quirks */
+.login-card {
+  overflow: visible;
+  padding: 12px 0;
+}
+.login-card .btn {
+  white-space: normal;
+}
+.login-card .row {
+  row-gap: 10px;
+}
+/* disabled bulk-action buttons: quiet until selections enable them */
+.login-card .btn:disabled {
+  border-color: var(--wcdi-line);
+  color: var(--wcdi-ink-soft);
+  background: transparent;
+  opacity: 0.7;
+}
+.login-card > .container h1 {
+  font-size: 26px;
+  padding: 8px 0 4px;
+}
+
+/* administrations table as a card */
+.table-container {
+  background: var(--wcdi-card);
+  border: 1px solid var(--wcdi-line);
+  border-radius: var(--wcdi-radius);
+  padding: 6px 14px 10px;
+  margin-top: 14px;
+  overflow-x: auto;
+}
+.table {
+  color: var(--wcdi-ink);
+  margin-bottom: 8px;
+}
+.table thead th {
+  font-size: 12.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--wcdi-ink-soft);
+  border-top: none;
+  border-bottom: 2px solid var(--wcdi-line);
+  white-space: nowrap;
+}
+.table thead th a {
+  color: var(--wcdi-ink-soft);
+}
+.table thead th a:hover {
+  color: var(--wcdi-primary);
+}
+.table td {
+  border-top: 1px solid var(--wcdi-line);
+  vertical-align: middle;
+  font-size: 14.5px;
+}
+.table tbody tr:hover {
+  background: var(--wcdi-primary-wash);
+}
+
+/* row-edit pencil button (bare .btn-primary without .btn) */
+.table td > button.btn-primary {
+  border: none;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+
+/* search box on the study page */
+#id_search {
+  height: 38px;
+  border: 1.5px solid var(--wcdi-line);
+  border-radius: 8px 0 0 8px;
+  padding: 0 12px;
+  border-right: none;
+}
+#id_search:focus {
+  border-color: var(--wcdi-primary);
+  outline: none;
+}
+#search_button {
+  height: 38px;
+  border: 1.5px solid var(--wcdi-primary);
+  background: var(--wcdi-primary);
+  color: #fff;
+  border-radius: 0 8px 8px 0;
+  padding: 0 14px;
+  cursor: pointer;
+}
+
+/* generic content card panel */
+.wcdi-card-panel {
+  background: var(--wcdi-card);
+  border: 1px solid var(--wcdi-line);
+  border-radius: var(--wcdi-radius);
+  padding: 20px 22px;
+  height: 100%;
+}
+.wcdi-card-panel h2 {
+  font-size: 18px;
+  margin: 0 0 12px;
+}
+
+/* forms rendered with as_table */
+.wcdi-form-table {
+  width: 100%;
+  margin-bottom: 14px;
+}
+.wcdi-form-table th {
+  text-align: left;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 8px 12px 8px 0;
+  white-space: nowrap;
+}
+.wcdi-form-table td {
+  padding: 6px 0;
+  width: 100%;
+}
+.wcdi-form-table input[type="text"],
+.wcdi-form-table input[type="email"],
+.wcdi-form-table input[type="password"] {
+  width: 100%;
+  border: 1.5px solid var(--wcdi-line);
+  border-radius: 8px;
+  padding: 6px 10px;
+  margin-bottom: 0;
+}
+
+/* pagination */
+.page-link {
+  color: var(--wcdi-primary);
+  border-color: var(--wcdi-line);
+}
+.page-item.active .page-link {
+  background-color: var(--wcdi-primary);
+  border-color: var(--wcdi-primary);
+}
+
 /* ---- misc chrome ---- */
 hr {
   border-top-color: var(--wcdi-line);

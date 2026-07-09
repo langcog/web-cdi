@@ -4,15 +4,14 @@
 {% block title %}Update Profile{% endblock %}
 
 {% block main %}
-    <div class='container login-card d-flex justify-content-center' style="margin-top:100px; padding-left:3rem;">
-        <div class="row">
-            <div class="col-12" style="margin-bottom:1rem;">
-                <h1>Update Profile</h1>
-            </div>
-            <div class="col-12" style="margin-bottom:1rem;">
+    <h1 style="font-size:26px; margin:18px 0 16px;">Your profile</h1>
+    <div class="row" style="row-gap:16px;">
+        <div class="col-md-7">
+            <div class="wcdi-card-panel">
+                <h2>Update profile</h2>
                 <form method='post' action='.'>
                     {% csrf_token %}
-                    <table>
+                    <table class="wcdi-form-table">
                         {{ form.as_table }}
                         {{ researcher_form.as_table }}
                     </table>
@@ -20,15 +19,12 @@
                 </form>
             </div>
         </div>
-        <div class="row">
-            <div class="col-12" style="margin-bottom:1rem;">
-                <h1>Update Password</h1>
-            </div>
-            <div class="col-12" style="margin-bottom:1rem;">
-                <a href="{% url 'researcher_ui:change_password' %}" class="btn btn-primary">Change Password</a>  
+        <div class="col-md-5">
+            <div class="wcdi-card-panel">
+                <h2>Password</h2>
+                <p>Change the password you use to sign in to Web-CDI.</p>
+                <a href="{% url 'researcher_ui:change_password' %}" class="btn btn-secondary">Change Password</a>
             </div>
         </div>
-        
     </div>
-    
 {% endblock %}
