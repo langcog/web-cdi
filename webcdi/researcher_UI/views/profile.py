@@ -1,6 +1,7 @@
 from typing import Any
 
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
 from django.contrib.auth.views import PasswordChangeView
@@ -14,7 +15,7 @@ from django.views.generic import UpdateView
 from researcher_UI.forms import ProfileForm, ResearcherForm
 
 
-class ProfileView(UpdateView):
+class ProfileView(LoginRequiredMixin, UpdateView):
     model = User
     form_class = ProfileForm
     template_name = "researcher_UI/profile.html"
