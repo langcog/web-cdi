@@ -29,7 +29,7 @@
     {% if not completed %}
         <div class="button-wrapper">
             <div class="flex-row d-flex justify-content-center">    
-                <input name="btn-back" value="{% trans 'Go back to Background Info' %}" class="btn btn-primary" type="submit">
+                <input name="btn-back" value="{% trans 'Go back to Background Info' %}" class="btn btn-link wcdi-nav-link" type="submit">
             </div>
         </div>
     {% endif %}
@@ -41,91 +41,7 @@
 <!-- Actual CDI form. Sections are broken into pages and automatically collapse and extend based on changePages function -->
 <ul>
     <!-- Instructions given to parents based on form. Includes photos. -->
-    <div id = "intro_part1" class = "page_div collapse">
-        <p class="lead" id="intro_text">
-            {% blocktrans context "cat" %}In this section, you will be asked about words that your child "understands and says." Your child "understands and says" a word on the list if they know what the word means AND they say it by themselves. Here are some examples. This assessment is for children of many ages. Your child may not be able to understand or say a lot of the words on the form. That is perfectly fine!{% endblocktrans %}
-        </p>
-
-        <div class="row">
-            <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
-                {% with 'images/'|add:language_code|add:'_says-yes-ball_CAT.png' as image_static %}
-                    <img src="{% static image_static %}" class="rounded mx-auto d-block" alt="Having your child say the word in the presence of the object can mean that your child understands and says the word." style="max-width: 90%; border: 1px solid black;">
-                {% endwith %}
-
-            </div>
-
-            <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
-                <h4>
-                {% blocktrans context "cat" %} 'DO check the box if:' {% endblocktrans %}
-                <br><br>
-                {% blocktrans context "cat" %} 'Your child says the word when trying to name an object or describe something that happened.  You think s/he has a meaning for that word.' {% endblocktrans %}
-                </h4>
-
-
-
-            </div>
-        </div> 
-        <br>
-
-        <div class="row">
-            <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
-                {% with 'images/'|add:language_code|add:'_says-yes-raff_WS.png' as image_static %}
-                    <img src="{% static image_static %}" class="rounded mx-auto d-block" alt="Having your child say the word in the presence of the object can mean that your child understands and says the word." style="max-width: 90%; border: 1px solid black;">
-                {% endwith %}
-
-            </div>
-
-            <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
-                <h4>
-                {% blocktrans context "cat" %}It's fine if your child can't say the whole word or says it his/her own "special" way. If you use another word in your family (e.g., Nana for Grandma), that is ok too!{% endblocktrans %}
-                <br><br>
-                {% blocktrans context "cat" %} 'DO check the box.' {% endblocktrans %}
-                </h4>
-
-
-            </div>
-        </div> 
-        <br>
-
-        <div class="row">
-            <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
-                {% with 'images/'|add:language_code|add:'_says-no-baba_WS.png' as image_static %}
-                    <img src="{% static image_static %}" class="rounded mx-auto d-block" alt="Saying the word alone is not enough to mean that your child understands and says a word. The context is important!" style="max-width: 90%; border: 1px solid black;">
-                {% endwith %}
-
-            </div>
-
-            <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
-                <h4>
-                {% blocktrans context "cat"%}DON'T check the box if your child is just stringing sounds together. This is not a real word that means something.{% endblocktrans %}
-                </h4>
-
-            </div>
-        </div>
-        <br>
-
-        <div class="row">
-            <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
-                {% with 'images/'|add:language_code|add:'_says-no-coaching_WS.png' as image_static %}
-                    <img src="{% static image_static %}" class="rounded mx-auto d-block" alt="Having your child repeat back a taught word is not enough to mean that your child undestands the word." style="max-width: 90%; border: 1px solid black;">
-                {% endwith %}
-
-            </div>
-
-            <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
-                <h4>
-                {% blocktrans context "cat"%}DON'T ask your child to repeat the words on the list. This doesn't count!{% endblocktrans %}
-                </h4>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-12 col-lg-6" style="padding-top: 1%; padding-bottom: 1%;">
-            <a id="next_button" class="btn btn-primary" value="Next">{% blocktrans context "cat"%}Next{% endblocktrans %}</a>
-        </div>
-
-
-    </div>
+    {% include 'cdi_forms/cat_forms/cat_instructions.html' %}
     <br>
 </ul>
 

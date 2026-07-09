@@ -1,0 +1,180 @@
+{% extends 'cdi_forms/cdi_base.html' %}
+{% load i18n cat_forms_tags static %}
+
+{% block extra_css %}
+<link rel='stylesheet' href="{% static 'cdi_forms/cat_forms.css' %}">
+
+<style>
+    .progress {
+        position: relative;
+      }
+
+      .progress-bar-title {
+        position: absolute;
+        text-align: center;
+        line-height: 20px; /* line-height should be equal to bar height */
+        overflow: hidden;
+        color: #000;
+        margin-top: 10px;
+        right: 0;
+        left: 0;
+        top: 0;
+      }
+</style>
+{% endblock %}
+
+<!-- Navigation buttons placed in cdi_base.html -->
+{% block nav_buttons %}
+    <div class="button-wrapper">
+        <div class="flex-row d-flex justify-content-center">
+            <input name="btn-back" value="{% trans 'Go back to Background Info' %}" class="btn btn-link wcdi-nav-link" type="submit">
+        </div>
+    </div>
+{% endblock %}
+
+{% block main %}
+{% csrf_token %}
+
+<ul>
+    {% include 'cdi_forms/cat_forms/cat_instructions.html' %}
+    <br>
+</ul>
+
+<div id="cat_div" class="page_div collapse">
+    <div class="container">
+        <div class="row pt10vh">
+            <div class="progress" style="width:100%">
+                <div id="cat_progress_bar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%"></div>
+                <div class="progress-bar-title"><span id="cat_progress_label"></span></div>
+            </div>
+        </div>
+        <div class="row pt10vh">
+            <div class="col-12 center">
+                <h1 id="cat_question"></h1>
+                <div id="cat_footnote" style="display:none;">{% trans "* or word used in your family" %}</div>
+            </div>
+        </div>
+        <div class="row pt10vh">
+            <div class="col-6 center">
+                <button id="id_no" type="button" class="btn btn-danger btn-lg">{% trans 'No' %}</button>
+            </div>
+            <div class="col-6 center">
+                <button id="id_yes" type="button" class="btn btn-success btn-lg">{% trans 'Yes' %}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'cdi_forms/cat/webcdi-cat.js' %}"></script>
+<script>
+(function () {
+    "use strict";
+    {% blocktrans asvar question_tpl context "cat" with word="[WORD]" %}Does your child say ... {{ word }}?{% endblocktrans %}
+    {% blocktrans asvar progress_tpl context "cat" with shown="[N]" max_words="[MAX]" %}{{ shown }} of {{ max_words }} (maximum) {% endblocktrans %}
+    var QUESTION_TPL = "{{ question_tpl|escapejs }}";
+    var PROGRESS_TPL = "{{ progress_tpl|escapejs }}";
+    var PARAMS_URL = "{% static 'cdi_forms/cat/' %}{{ cat_bank_code }}.json";
+    var ANSWER_URL = "{% url 'cat_forms:cat_answer' hash_id=hash_id %}";
+    var AGE = {{ cat_age }};
+    var STATE = {{ cat_state_json|safe }};
+    var CSRF = document.querySelector("[name=csrfmiddlewaretoken]").value;
+
+    var engine = null;
+    var currentItem = null;
+
+    function showItem(item) {
+        currentItem = item;
+        document.getElementById("cat_question").textContent =
+            QUESTION_TPL.replace("[WORD]", item.definition);
+        document.getElementById("cat_footnote").style.display =
+            item.definition.indexOf("*") !== -1 ? "" : "none";
+        var shown = engine.state().items.length + 1;
+        var pct = Math.round((100 * shown) / {{ cat_max_words }});
+        var bar = document.getElementById("cat_progress_bar");
+        bar.style.width = pct + "%";
+        bar.setAttribute("aria-valuenow", pct);
+        document.getElementById("cat_progress_label").textContent =
+            PROGRESS_TPL.replace("[N]", shown).replace("[MAX]", {{ cat_max_words }});
+        setButtonsEnabled(true);
+    }
+
+    function setButtonsEnabled(enabled) {
+        document.getElementById("id_yes").disabled = !enabled;
+        document.getElementById("id_no").disabled = !enabled;
+    }
+
+    function postAnswer(item, response, out) {
+        return fetch(ANSWER_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json", "X-CSRFToken": CSRF },
+            body: JSON.stringify({
+                index: item.index,
+                definition: item.definition,
+                response: response,
+                est_theta: out.curTheta,
+                done: out.stop,
+            }),
+        }).then(function (r) {
+            if (!r.ok) throw new Error("save failed: " + r.status);
+            return r.json();
+        });
+    }
+
+    function answer(response) {
+        setButtonsEnabled(false);
+        var item = currentItem;
+        engine.record(item.index, response ? 1 : 0);
+        var out = engine.next();
+        postAnswer(item, response, out)
+            .then(function (data) {
+                if (data.completed || out.stop) {
+                    window.location.reload();
+                } else {
+                    showItem(out);
+                }
+            })
+            .catch(function () {
+                // undo optimistic record so a retry does not double-count
+                window.alert("{% trans 'Your answer could not be saved. Please check your connection and try again.' %}");
+                window.location.reload();
+            });
+    }
+
+    document.getElementById("id_yes").addEventListener("click", function () { answer(true); });
+    document.getElementById("id_no").addEventListener("click", function () { answer(false); });
+
+    fetch(PARAMS_URL)
+        .then(function (r) { return r.json(); })
+        .then(function (params) {
+            engine = WebCDICat.createEngine(params, STATE);
+            var out;
+            if (STATE.items.length === 0) {
+                var si = engine.startItem(AGE);
+                out = { stop: false, index: si.index, definition: si.definition };
+            } else {
+                out = engine.next();
+            }
+            if (out.stop) {
+                window.location.reload();
+                return;
+            }
+            showItem(out);
+        });
+})();
+</script>
+
+<script type="text/javascript">
+    // Show instructions on the very first item, otherwise go straight to the word
+    if ({{ words_shown }} == 1) {
+        $("#intro_part1").collapse('show');
+    } else {
+        $("#cat_div").collapse('show');
+    }
+    $("#instructions").collapse('show');
+
+    $('#next_button').on('click', function() {
+        $("#intro_part1").collapse('hide');
+        $("#cat_div").collapse('show');
+    })
+</script>
+{% endblock %}

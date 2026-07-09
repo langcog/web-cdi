@@ -138,6 +138,11 @@ CAT_API_BASE_URL = os.environ.get(
     "CAT_API_URL", "http://cdicatapi-env.eba-c2knb6uj.us-west-2.elasticbeanstalk.com/"
 )
 
+# CAT engine: "remote" calls the R API above per item; "browser" runs the
+# validated jsCat engine client-side (static/cdi_forms/cat/) and only posts
+# answers back for persistence.
+CAT_ENGINE = os.environ.get("CAT_ENGINE", "remote")
+
 # EMAIL settings
 EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND", "django_ses.SESBackend")
 if EMAIL_BACKEND == "django_ses.SESBackend":
