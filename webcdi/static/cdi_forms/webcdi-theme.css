@@ -553,6 +553,79 @@ div:has(> #id_search) {
   border-color: var(--wcdi-primary);
 }
 
+/* ---- participant form navigation (Qualtrics-style arrows) ---- */
+.wcdi-form-nav {
+  position: sticky;
+  bottom: 0;
+  background: var(--wcdi-card);
+  border-top: 1px solid var(--wcdi-line);
+  margin: 24px -12px 0;
+  padding: 10px 16px 6px;
+  z-index: 10;
+}
+.wcdi-form-nav-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  max-width: 560px;
+  margin: 0 auto;
+}
+.wcdi-nav-arrow {
+  min-width: 52px;
+  height: 44px;
+  font-size: 20px;
+  line-height: 1;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+.wcdi-nav-arrow-spacer {
+  min-width: 52px;
+  flex-shrink: 0;
+}
+.wcdi-nav-progress {
+  flex: 1;
+  text-align: center;
+}
+.wcdi-nav-progress .progress {
+  height: 6px;
+  margin-bottom: 4px;
+}
+.wcdi-nav-progress font {
+  font-size: 12.5px;
+  color: var(--wcdi-ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+.submit-button {
+  height: 44px;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+.wcdi-form-nav-sub {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 2px;
+}
+.wcdi-nav-link {
+  color: var(--wcdi-ink-soft);
+  font-size: 13.5px;
+  text-decoration: none;
+  border: none;
+  background: transparent;
+  padding: 2px 8px;
+  width: auto;
+}
+.wcdi-nav-link:hover {
+  color: var(--wcdi-primary);
+  background: transparent;
+}
+.wcdi-nav-hint {
+  text-align: center;
+  font-size: 12px;
+  color: var(--wcdi-ink-soft);
+  margin: 2px 0 4px;
+}
+
 /* ---- misc chrome ---- */
 hr {
   border-top-color: var(--wcdi-line);
