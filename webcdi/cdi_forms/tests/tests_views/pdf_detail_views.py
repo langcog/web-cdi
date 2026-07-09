@@ -53,4 +53,9 @@ class PDFAdministrationDetailViewTest(TestCase):
         administration = Administration.objects.filter(study=study, completed=True)[0]
         url = reverse("administration-pdf-view", kwargs={"pk": administration.pk})
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
+        # Korean administrations deliberately skip WeasyPrint and redirect
+        # to the HTML view (see PDFAdministrationDetailView.get)
+        self.assertRedirects(
+            response,
+            reverse("administration-view", kwargs={"pk": administration.pk}),
+        )
