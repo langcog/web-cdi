@@ -444,6 +444,46 @@ div:has(> #id_search) {
   cursor: pointer;
 }
 
+/* toolbars: auto-width buttons in a wrapping flex row */
+.wcdi-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+.wcdi-toolbar .btn {
+  width: auto;
+  white-space: nowrap;
+}
+.wcdi-toolbar .dropdown-item {
+  white-space: normal;
+}
+
+/* destructive actions read as such */
+.wcdi-btn-danger, .wcdi-btn-danger:disabled {
+  color: #a03535;
+  border-color: #d3b1b1;
+  background: transparent;
+}
+.wcdi-btn-danger:hover:not(:disabled) {
+  color: #7d2424;
+  border-color: #a03535;
+  background: #faf1f1;
+}
+
+/* back link on detail pages */
+.wcdi-back {
+  display: inline-block;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--wcdi-ink-soft);
+  margin-bottom: 4px;
+}
+.wcdi-back:hover {
+  color: var(--wcdi-primary);
+  text-decoration: none;
+}
+
 /* dashboard study cards */
 .wcdi-study-card {
   display: flex;
