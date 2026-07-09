@@ -25,6 +25,7 @@ __pycache__/
 */.vscode/
 
 .env*
+!.env.example
 
 .coverage
 .vscode/*

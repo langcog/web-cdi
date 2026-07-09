@@ -8,6 +8,8 @@ Web-CDI is currently in an alpha pilot, and is available for testing by research
 
 # Codebase documentation
 
+For local development setup (Docker-based), see [DEVELOPMENT.md](DEVELOPMENT.md).
+
 ## Adding new forms
 
 + Forms are stored in CSV format in web-cdi/webcdi/cdi_form_csv
