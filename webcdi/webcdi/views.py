@@ -19,6 +19,14 @@ from webcdi.forms import SignUpForm
 logger = logging.getLogger("debug")
 
 
+class AboutView(TemplateView):
+    template_name = "webcdi/about.html"
+
+
+class DocumentationView(TemplateView):
+    template_name = "webcdi/documentation.html"
+
+
 @method_decorator([never_cache], name="dispatch")
 class HomeView(TemplateView):
     template_name = "webcdi/home.html"

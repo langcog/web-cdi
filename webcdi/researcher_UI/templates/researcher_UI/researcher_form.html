@@ -5,12 +5,14 @@
 {% block title %}WebCDI Interface: Add Instruments{% endblock %}
 
 {% block main %}
-    <div class='container login-card d-flex justify-content-center' style="margin-top:100px; padding-left:3rem;">
+    <h1 style="font-size:26px; margin:18px 0 16px;">Instruments</h1>
+    <div class="wcdi-card-panel" style="margin-bottom:24px;">
         <div class='row'>
             <div class="col-12" style="margin-bottom:1rem;">
-                <h4> Select the instruments you want to use</h4>
+                <h2>Select the instruments you want to use</h2>
+                <p style="color:#5a6b76; margin-bottom:0;">Some instruments require an access code from Brookes Publishing; the rest are free of charge. Your selections determine which forms are available when you create an administration group.</p>
             </div>
-            <div class="col-12"> 
+            <div class="col-12">
                 <form action="." method="post">
                     {% csrf_token %}
                     <div class="row">
@@ -41,7 +43,7 @@
                     </div>
                 </form>
             </div>
-        <div>
+        </div>
     </div>
-    
+
 {% endblock %}

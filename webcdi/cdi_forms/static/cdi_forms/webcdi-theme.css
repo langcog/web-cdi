@@ -327,6 +327,15 @@ main[role="main"] {
 }
 
 /* administrations table as a card */
+/* form-inline makes #administration-form a flex container whose columns
+   size to their content, so the wide table blew past the viewport and
+   dragged the buttons along when scrolling; min-width:0 lets the column
+   shrink to its row and .table-container's own overflow-x take over */
+#administration-form .col-md-12,
+#administration-form .row {
+  min-width: 0;
+  max-width: 100%;
+}
 .table-container {
   background: var(--wcdi-card);
   border: 1px solid var(--wcdi-line);
@@ -334,19 +343,24 @@ main[role="main"] {
   padding: 6px 14px 10px;
   margin-top: 14px;
   overflow-x: auto;
+  max-width: 100%;
 }
 .table {
   color: var(--wcdi-ink);
   margin-bottom: 8px;
 }
 .table thead th {
-  font-size: 12.5px;
+  font-size: 12px;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   color: var(--wcdi-ink-soft);
   border-top: none;
   border-bottom: 2px solid var(--wcdi-line);
-  white-space: nowrap;
+  white-space: normal;
+  vertical-align: bottom;
+}
+.table th, .table td {
+  padding: 8px 10px;
 }
 .table thead th a {
   color: var(--wcdi-ink-soft);
@@ -371,13 +385,21 @@ main[role="main"] {
   cursor: pointer;
 }
 
-/* search box on the study page */
+/* search box on the study page: input + button as one row */
+div:has(> #id_search) {
+  display: flex;
+  align-items: center;
+}
 #id_search {
   height: 38px;
   border: 1.5px solid var(--wcdi-line);
   border-radius: 8px 0 0 8px;
   padding: 0 12px;
   border-right: none;
+  flex: 1;
+  min-width: 0;
+  max-width: none !important; /* beats the template's inline max-width */
+  margin-bottom: 0 !important;
 }
 #id_search:focus {
   border-color: var(--wcdi-primary);
@@ -393,12 +415,15 @@ main[role="main"] {
   cursor: pointer;
 }
 
-/* generic content card panel */
+/* generic content card panel; add .wcdi-card-fill to stretch to the
+   column height (only for a single panel per column) */
 .wcdi-card-panel {
   background: var(--wcdi-card);
   border: 1px solid var(--wcdi-line);
   border-radius: var(--wcdi-radius);
   padding: 20px 22px;
+}
+.wcdi-card-fill {
   height: 100%;
 }
 .wcdi-card-panel h2 {
