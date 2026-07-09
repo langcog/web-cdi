@@ -143,6 +143,26 @@ label input:checked ~ i.material-icons.check_box {
   color: var(--wcdi-pine);
 }
 
+/* ---- researcher console layout ---- */
+/* base.html renders {% block main %} straight into <main> with no
+   container; box it so content stops bumping the viewport edge */
+main[role="main"] {
+  max-width: 1140px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 20px 48px;
+}
+.navbar.bg-light {
+  background-color: var(--wcdi-card) !important;
+  border-bottom: 1px solid var(--wcdi-line);
+}
+.navbar .nav-link {
+  color: var(--wcdi-ink-soft);
+}
+.navbar .nav-link:hover, .navbar .nav-item.active .nav-link {
+  color: var(--wcdi-pine);
+}
+
 /* ---- misc chrome ---- */
 hr {
   border-top-color: var(--wcdi-line);
