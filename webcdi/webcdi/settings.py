@@ -133,6 +133,25 @@ RECAPTCHA_PRIVATE_KEY = os.environ.get(
 CONTACT_EMAIL = os.environ.get("CONTACT_EMAIL", "webcdi-contact@stanford.edu")
 MORE_INFO_ADDRESS = os.environ.get("MORE_INFO_ADDRESS", "http://mb-cdi.stanford.edu/")
 
+# Google Analytics measurement ID (empty string disables the snippet)
+GOOGLE_ANALYTICS_ID = os.environ.get("GOOGLE_ANALYTICS_ID", "328947117")
+
+# Gift-card redemption links shown to compensated participants
+AMAZON_GIFT_CARD_URLS = {
+    "English": {
+        "redeem_url": "http://www.amazon.com/redeem",
+        "legal_url": "http://www.amazon.com/gc-legal",
+    },
+    "Spanish": {
+        "redeem_url": "http://www.amazon.com/gc/redeem/?language=es_US",
+        "legal_url": "http://www.amazon.com/gc-legal/?language=es_US",
+    },
+    "French Quebec": {
+        "redeem_url": "http://www.amazon.ca/gc/redeem/?language=fr_CA",
+        "legal_url": "http://www.amazon.ca/gc-legal/?language=fr_CA",
+    },
+}
+
 # CAT Server
 CAT_API_BASE_URL = os.environ.get(
     "CAT_API_URL", "http://cdicatapi-env.eba-c2knb6uj.us-west-2.elasticbeanstalk.com/"
@@ -180,12 +199,18 @@ def generate_secret_key(fname):
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-try:
-    from .secret_key import *  # noqa
-except ImportError:
-    SETTINGS_DIR = os.path.abspath(os.path.dirname(__file__))
-    generate_secret_key(os.path.join(SETTINGS_DIR, "secret_key.py"))
-    from .secret_key import *  # noqa
+# Prefer the environment (set SECRET_KEY on the EB environment / in .env);
+# the generated-file fallback keeps existing deployments working but means
+# each fresh instance mints its own key (invalidating sessions), so
+# production should always set the env var.
+SECRET_KEY = os.environ.get("SECRET_KEY")
+if not SECRET_KEY:
+    try:
+        from .secret_key import *  # noqa
+    except ImportError:
+        SETTINGS_DIR = os.path.abspath(os.path.dirname(__file__))
+        generate_secret_key(os.path.join(SETTINGS_DIR, "secret_key.py"))
+        from .secret_key import *  # noqa
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
 
@@ -229,7 +254,6 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
-    "webcdi.middleware.LoginRequiredMiddleware",
     "webcdi.middleware.AdminLocaleMiddleware",
 ]
 
@@ -535,17 +559,10 @@ if private_ip:
 
 CAT_FORMS = ["CAT", "CAT2"]
 
-LOGIN_EXEMPT_URLS = (
-    r"^registration/logout/$",
-    r"^registration/register/$",
-    r"^registration/password-reset/$",
-    r"^registration/password-reset/done/$",
-    r"^registration/password-reset/confirm/",
-    r"^registration/password-reset/complete/$",
-    r"^registration/password/change/$",
-    r"^registration/password/change/",
-    r"^",
-)
+# NOTE: the old LoginRequiredMiddleware + LOGIN_EXEMPT_URLS pair was removed:
+# the exempt list ended with r"^" (matches every URL), so the middleware had
+# been a no-op. Access control lives on the views — researcher views use
+# LoginRequiredMixin; participant views are anonymous by design (hash URLs).
 
 
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"

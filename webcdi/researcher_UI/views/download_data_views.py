@@ -1,6 +1,7 @@
 import logging
 
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.template.loader import get_template
@@ -15,8 +16,12 @@ from researcher_UI.models import Study
 logger = logging.getLogger("debug")
 
 
-class PDFAdministrationDetailView(WeasyTemplateResponseMixin, DetailView):
+class PDFAdministrationDetailView(LoginRequiredMixin, WeasyTemplateResponseMixin, DetailView):
     model = Study
+
+    def get_queryset(self):
+        # clinical reports contain child data: only the owning researcher
+        return Study.objects.filter(researcher=self.request.user)
 
     def get_template_names(self):
         name = slugify(f"{self.object.instrument.verbose_name}")

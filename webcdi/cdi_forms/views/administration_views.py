@@ -70,20 +70,7 @@ class AdministrationSummaryView(DetailView):
         ctx["gift_code"] = None
         ctx["gift_amount"] = None
         if self.object.study.allow_payment and self.object.bypass is None:
-            amazon_urls = {
-                "English": {
-                    "redeem_url": "http://www.amazon.com/redeem",
-                    "legal_url": "http://www.amazon.com/gc-legal",
-                },
-                "Spanish": {
-                    "redeem_url": "http://www.amazon.com/gc/redeem/?language=es_US",
-                    "legal_url": "http://www.amazon.com/gc-legal/?language=es_US",
-                },
-                "French Quebec": {
-                    "redeem_url": "http://www.amazon.ca/gc/redeem/?language=fr_CA",
-                    "legal_url": "http://www.amazon.ca/gc-legal/?language=fr_CA",
-                },
-            }
+            amazon_urls = settings.AMAZON_GIFT_CARD_URLS
             url_obj = amazon_urls.get(self.object.study.instrument.language)
             if url_obj is None:
                 url_obj = amazon_urls.get("English")

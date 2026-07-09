@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.test import TestCase, tag
 from django.urls import reverse
 
@@ -6,6 +7,9 @@ from researcher_UI.models import Instrument, InstrumentFamily
 
 class AjaxDemographicFormsTest(TestCase):
     def setUp(self):
+        # these endpoints are researcher-only (LoginRequiredMixin)
+        self.user = User.objects.create_user(username="researcher", password="secret")
+        self.client.force_login(self.user)
         self.url = reverse("researcher_ui:get_demographic_forms")
         instrument_family = InstrumentFamily.objects.create(
             name="BigCats", chargeable=True
@@ -32,6 +36,8 @@ class AjaxDemographicFormsTest(TestCase):
 
 class AjaxChargeStatusTest(TestCase):
     def setUp(self):
+        self.user = User.objects.create_user(username="researcher", password="secret")
+        self.client.force_login(self.user)
         instrument_family = InstrumentFamily.objects.create(
             name="BigCats", chargeable=True
         )
