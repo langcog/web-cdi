@@ -41,6 +41,7 @@ class PDFAdministrationDetailViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_korean_get(self):
+        self.client.force_login(self.user)
         instrument = Instrument.objects.get(language="Korean", form="WS")
         study = Study.objects.create(
             researcher=self.user,
@@ -49,7 +50,7 @@ class PDFAdministrationDetailViewTest(TestCase):
             redirect_url="https://redirect_url.com/redirect/{source_id}",
         )
         generate_fake_results(study, 1)
-        administration = Administration.objects.filter(completed=True)[0]
+        administration = Administration.objects.filter(study=study, completed=True)[0]
         url = reverse("administration-pdf-view", kwargs={"pk": administration.pk})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
