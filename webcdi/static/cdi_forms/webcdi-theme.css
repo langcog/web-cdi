@@ -19,12 +19,36 @@
   --wcdi-radius: 10px;
 }
 
+/* ---- typography ----
+   The system font stack (SF Pro / Segoe / Roboto), normal weight for
+   body text, bold reserved for headings. Overrides the single-weight
+   Karla @font-face that console.css/home loaded, which rendered every
+   weight from one heavy cut and made the whole site feel bold. */
 body {
   background-color: var(--wcdi-paper);
   color: var(--wcdi-ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  font-weight: 400;
+  letter-spacing: normal;
+  line-height: 1.55;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+p, li, td, label {
+  font-weight: 400;
+}
+
+.wcdi-muted, .text-muted {
+  color: var(--wcdi-ink-soft) !important;
 }
 /* main content grows so the footer sits at the bottom of short pages */
 main[role="main"], .bs-docs-container {
