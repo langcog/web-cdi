@@ -1,0 +1,182 @@
+/* Web-CDI visual theme — design-token layer over Bootstrap.
+   Loaded after bootstrap.min.css and base.css in the participant-facing
+   base templates; overrides only colors, radii, and component chrome.
+   Palette: warm paper ground, deep pine accent, green checked state,
+   amber for progress/notes. */
+
+:root {
+  --wcdi-paper: #fbfaf8;
+  --wcdi-ink: #24313a;
+  --wcdi-ink-soft: #5a6b76;
+  --wcdi-line: #e3e0da;
+  --wcdi-card: #ffffff;
+  --wcdi-pine: #22665c;
+  --wcdi-pine-deep: #174a43;
+  --wcdi-pine-wash: #edf3f1;
+  --wcdi-check: #2e7d4f;
+  --wcdi-check-wash: #f2f8f4;
+  --wcdi-amber: #d98e32;
+  --wcdi-radius: 10px;
+}
+
+body {
+  background-color: var(--wcdi-paper);
+  color: var(--wcdi-ink);
+}
+
+h1, h2, h3, h4, legend {
+  color: var(--wcdi-ink);
+}
+
+a {
+  color: var(--wcdi-pine);
+}
+a:hover, a:focus {
+  color: var(--wcdi-pine-deep);
+}
+
+/* base.css underlines <strong>; that reads as a link — undo it */
+strong {
+  text-decoration: none;
+  font-weight: 700;
+}
+
+/* ---- buttons ---- */
+.btn-primary, .btn-info, .btn-success {
+  background-color: var(--wcdi-pine);
+  border-color: var(--wcdi-pine);
+  color: #fff;
+  border-radius: 8px;
+  font-weight: 600;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active,
+.btn-info:hover, .btn-info:focus, .btn-info:active,
+.btn-success:hover, .btn-success:focus, .btn-success:active {
+  background-color: var(--wcdi-pine-deep);
+  border-color: var(--wcdi-pine-deep);
+  color: #fff;
+}
+.btn-secondary, .btn-default {
+  background-color: transparent;
+  border: 1.5px solid var(--wcdi-pine);
+  color: var(--wcdi-pine);
+  border-radius: 8px;
+  font-weight: 600;
+}
+.btn-secondary:hover, .btn-default:hover {
+  background-color: var(--wcdi-pine-wash);
+  color: var(--wcdi-pine-deep);
+}
+
+/* focus visibility: keyboard only, no ring on mouse clicks */
+.btn:focus-visible, a:focus-visible, input:focus-visible,
+select:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--wcdi-pine);
+  outline-offset: 1px;
+  box-shadow: none;
+}
+.btn:focus, label.btn:focus-within {
+  box-shadow: none;
+  outline: none;
+}
+.alco-child:has(input:focus-visible), .alco-child1:has(input:focus-visible) {
+  outline: 2px solid var(--wcdi-pine);
+  outline-offset: 2px;
+  border-radius: var(--wcdi-radius);
+}
+
+/* ---- form controls ---- */
+.form-control {
+  border-color: var(--wcdi-line);
+  border-radius: 8px;
+  color: var(--wcdi-ink);
+}
+.form-control:focus {
+  border-color: var(--wcdi-pine);
+  box-shadow: 0 0 0 2px rgba(34, 102, 92, 0.15);
+}
+
+/* ---- checklist item cards (.alco-child wraps each word) ---- */
+.alco-child, .alco-child1 {
+  background-color: var(--wcdi-card);
+  border: 1.5px solid var(--wcdi-line);
+  border-radius: var(--wcdi-radius);
+  transition: border-color 0.12s ease;
+}
+.alco-child:hover, .alco-child1:hover {
+  border-color: var(--wcdi-pine);
+}
+.alco-child label.btn, .alco-child1 label.btn {
+  min-height: 44px;
+  align-items: center;
+}
+/* checked state: whole card flips, not just the icon */
+.alco-child:has(input:checked), .alco-child1:has(input:checked) {
+  background-color: var(--wcdi-check-wash);
+  border-color: var(--wcdi-check);
+}
+input:checked ~ span {
+  color: var(--wcdi-pine-deep);
+  font-weight: 600;
+}
+label input:checked ~ i.material-icons.radio_button_checked,
+label input:checked ~ i.material-icons.check_box {
+  color: var(--wcdi-check);
+}
+
+/* ---- progress ---- */
+.progress {
+  background-color: #e8e5e0;
+  border-radius: 99px;
+  height: 10px;
+}
+.progress-bar {
+  background-color: var(--wcdi-pine);
+  border-radius: 99px;
+}
+
+/* ---- sidebar / table of contents on form pages ---- */
+.bs-docs-sidebar a {
+  color: var(--wcdi-ink-soft);
+}
+.bs-docs-sidebar a:hover {
+  color: var(--wcdi-pine);
+}
+
+/* ---- researcher console layout ---- */
+/* base.html renders {% block main %} straight into <main> with no
+   container; box it so content stops bumping the viewport edge */
+main[role="main"] {
+  max-width: 1140px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 20px 48px;
+}
+.navbar.bg-light {
+  background-color: var(--wcdi-card) !important;
+  border-bottom: 1px solid var(--wcdi-line);
+}
+.navbar .nav-link {
+  color: var(--wcdi-ink-soft);
+}
+.navbar .nav-link:hover, .navbar .nav-item.active .nav-link {
+  color: var(--wcdi-pine);
+}
+
+/* ---- misc chrome ---- */
+hr {
+  border-top-color: var(--wcdi-line);
+}
+.well, .jumbotron, .card {
+  background-color: var(--wcdi-card);
+  border: 1px solid var(--wcdi-line);
+  border-radius: var(--wcdi-radius);
+}
+.modal-content {
+  border-radius: var(--wcdi-radius);
+}
+.alert-info {
+  background-color: var(--wcdi-pine-wash);
+  border-color: var(--wcdi-pine);
+  color: var(--wcdi-pine-deep);
+}
