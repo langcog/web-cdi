@@ -24,10 +24,13 @@ from django.views.generic.base import RedirectView
 from health_check.views import HealthCheckView
 
 from webcdi.forms import SignUpForm
-from webcdi.views import CustomLoginView, CustomRegistrationView, HomeView
+from webcdi.views import (AboutView, CustomLoginView, CustomRegistrationView,
+                          DocumentationView, HomeView)
 
 urlpatterns = [
     path("", HomeView.as_view(), name="home"),
+    path("about/", AboutView.as_view(), name="about"),
+    path("documentation/", DocumentationView.as_view(), name="documentation"),
     re_path(
         r"^favicon\.ico",
         RedirectView.as_view(url="/static/images/favicon.ico", permanent=True),

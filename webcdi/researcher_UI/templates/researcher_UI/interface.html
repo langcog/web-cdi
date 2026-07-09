@@ -2,146 +2,124 @@
 {% load static %}
 
 {% block main %}
-    <div class='login-card' style="margin-top:100px; width:100%">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <h1 style="text-align: center; color:black ">
-                    Welcome to Web-CDI!
-                    </h1>
+    <div class='login-card' style="width:100%">
+        {% if not current_study %}
+            <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin:18px 0 18px;">
+                <div>
+                    <h1 style="font-size:26px; margin:0;">Your administration groups</h1>
+                    <div class="wcdi-muted">Each group administers one CDI form to a set of participants.</div>
+                </div>
+                <div style="margin-left:auto;">
+                    <a id="id_new_study" href="{% url 'researcher_ui:add_study' %}" class="btn btn-primary">+ New administration group</a>
                 </div>
             </div>
-        </div>
-        {% if current_study %}
-            <form method='post'  action='{% url "researcher_ui:console_study" pk=current_study.pk %}' id='study-form'>
-        {% else %}
-            <form method='post'  action='' id='study-form'>
+
+            {% if studies %}
+                <div class="row" style="row-gap:14px;">
+                    {% for study in studies %}
+                        <div class="col-md-6 col-lg-4">
+                            <div class="wcdi-card-panel wcdi-card-fill wcdi-study-card">
+                                <div class="wcdi-study-name">{{ study.name }}</div>
+                                <div class="wcdi-muted" style="font-size:13.5px; margin-bottom:10px;">{{ study.instrument.verbose_name }}</div>
+                                <div class="progress" style="margin-bottom:6px;">
+                                    <div class="progress-bar" role="progressbar" style="width:{% if study.n_admins %}{% widthratio study.n_completed study.n_admins 100 %}{% else %}0{% endif %}%"></div>
+                                </div>
+                                <div class="wcdi-muted" style="font-size:13px; margin-bottom:12px;">
+                                    {{ study.n_completed }} of {{ study.n_admins }} administration{{ study.n_admins|pluralize }} completed
+                                    &middot; {{ study.n_children }} child{{ study.n_children|pluralize:"ren" }}
+                                </div>
+                                <a href="{% url 'researcher_ui:console_study' pk=study.pk %}" style="font-weight:600;">View group &rarr;</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="wcdi-card-panel" style="max-width:620px;">
+                    <h2>Get started</h2>
+                    <p>Welcome! Setting up data collection takes three steps:</p>
+                    <ol style="padding-left:20px;">
+                        <li style="margin-bottom:6px;"><a href="{% url 'researcher_ui:researcher_add_instruments' pk=request.user.researcher.pk %}">Select the CDI instruments</a> you plan to use (some require a Brookes Publishing access code).</li>
+                        <li style="margin-bottom:6px;"><a href="{% url 'researcher_ui:add_study' %}">Create an administration group</a> — one per form, e.g. one group for Words &amp; Gestures and one for Words &amp; Sentences.</li>
+                        <li>Add participants to the group and send them their links.</li>
+                    </ol>
+                    <p style="margin-bottom:0;">The <a href="{% url 'documentation' %}">documentation</a> walks through the whole workflow.</p>
+                </div>
+            {% endif %}
         {% endif %}
-        
-        <div class="row">
-            <div class='col'>
-                <a id='id_add_instruments' href="{% url 'researcher_ui:researcher_add_instruments' pk=request.user.researcher.pk %}" type="button" type="button" style='width:100%;' class="btn btn-primary">My CDI Forms</a>
-            </div>
-            <div class="col">
-                <a id="id_new_study" href="{% url 'researcher_ui:add_study' %}" type="button" style='width:100%;' class="btn btn-primary">Administration Group Set Up</a>
-            </div>
-        </div>
-        <div class="row">
-            <div class='col'>
-                <p>Click here to see the CDI forms that are currently assigned to you.</p>
-            </div>
-            <div class='col'>
-                <p>Create a new group of CDI forms for families.  You will need to create a new group for each CDI form you are using, e.g., 1 group for Words & Gestures and 1 group for Words & Sentences.</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class='col'>
-                <div style = 'width:100%' class="form-group">
-                    <select  style = 'width:100%;' id="study-selector" class="form-control" onchange="location = encodeURI(this.options[this.selectedIndex].value);">
-                        <option value="/interface/" selected disabled>Select Administration Group</option>
+
+        {% if current_study %}
+            <div style="display:flex; align-items:flex-end; gap:12px; flex-wrap:wrap; margin:14px 0 6px;">
+                <div>
+                    <a href="{% url 'researcher_ui:console' %}" class="wcdi-back">&larr; All groups</a>
+                    <h1 style="font-size:24px; margin:2px 0 4px;">{{ current_study.name }}</h1>
+                    <div class="wcdi-muted" style="font-size:14px;">
+                        {{ study_instrument }}
+                        {% if study_group %} &middot; Study group: {{ study_group }}{% endif %}
+                        {% if completed_admins %} &middot; {{ completed_admins }} completed &middot; {{ unique_children }} child{{ unique_children|pluralize:"ren" }}{% endif %}
+                        {% if allow_payment %} &middot; {{ available_giftcards }} gift card{{ available_giftcards|pluralize }} left{% endif %}
+                    </div>
+                </div>
+                <div style="margin-left:auto; min-width:230px;">
+                    <select id="study-selector" class="form-control" onchange="location = encodeURI(this.options[this.selectedIndex].value);">
                         {% for study in studies %}
                             <option value="{% url 'researcher_ui:console_study' pk=study.pk %}"{% if study.pk == current_study.pk %} selected="" {% endif %}>{{ study }}</option>
                         {% endfor %}
-                    </select> 
-                </div>
-                <div>
-                    {% if study_instrument %}
-                        <h4>Form: {{ study_instrument }}</h4>
-                    {% endif %}
-
-                    {% if study_group %}
-                        <h4>Study Group: {{ study_group }}</h4>
-                    {% endif %}
-
-                    {% if completed_admins %}
-                        <h4># Completed Administrations: {{ completed_admins }} Administration{% if compl != 1 %}s{% endif %}, {{ unique_children }} Children</h4>
-                    {% endif %}
-
-                    {% if allow_payment %}
-                        <h4># Gift Cards Left: {{ available_giftcards }}</h4>
-                    {% endif %}                    
+                    </select>
                 </div>
             </div>
-            
-        </div>
+
+            <form method='post'  action='{% url "researcher_ui:console_study" pk=current_study.pk %}' id='study-form'>
         {% if current_study %}
-            <div class="row">
-                <div class="col-3">
-                    <div class="btn-group btn-block">
-                        <button id="id_add_participants" type="button" class="btn btn-secondary btn-block" onclick = "modal_form('/interface/study/{{ current_study.pk|urlencode }}/administer_new/')">Add Administrations</button>
-                        <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu">
-                            <button type="button" class="dropdown-item btn btn-secondary btn-block"   onclick = "modal_form('/interface/study/{{ current_study.pk|urlencode }}/import_data/')" >Import Spreadsheet Data</button>
-                        </div>
+            <div class="wcdi-toolbar" style="margin-top:14px;">
+                <div class="btn-group">
+                    <button id="id_add_participants" type="button" class="btn btn-primary" title="Enter your own ID for a single child or tell Web-CDI to generate IDs for you." onclick = "modal_form('/interface/study/{{ current_study.pk|urlencode }}/administer_new/')">Add Administrations</button>
+                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu">
+                        <button type="button" class="dropdown-item"   onclick = "modal_form('/interface/study/{{ current_study.pk|urlencode }}/import_data/')" >Import Spreadsheet Data</button>
                     </div>
-                    Enter your own ID for a single child or tell Web-CDI to generate IDs for you.
                 </div>
-
-
-                <div class='col-md-3'>
-                    <button  class="btn btn-secondary selected-btn btn-block" id='add-selected' type='submit' name='administer-selected' value='administer-selected' disabled  >Re-administer Selected Administrations</button>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Download All</button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <button class="dropdown-item" type="submit" name='download-summary-csv' id='download-summary-csv'>Summary Scores/Percentiles (csv)</button>
+                        <button class="dropdown-item" type="submit" name='download-study-csv' id='download-study-csv'>Items and Summary Scores/Percentiles (csv)</button>
+                        <button class="dropdown-item" type="submit" name='download-study-csv-adjusted' id='download-study-csv-adjusted'>Items and Summary Scores/Percentiles with Adjusted Ages (csv)</button>
+                    </div>
                 </div>
-
-
-                <div class="col-3">
-                    <a id="id_update_study" type="button" class="btn btn-secondary btn-block" href="{% url 'researcher_ui:rename_study' pk=current_study.pk %}" >Update Administration Group</a>
-                </div>
-                <div class="col-3">
-                    <button type="submit" class="btn btn-secondary btn-block" name='delete-study' id='delete-study' onclick='return confirm("Are you sure you want to delete the entire study and all the data associated with it?");' >Delete Study</button>
-                </div>                                                                                
+                <a id="id_update_study" class="btn btn-secondary" href="{% url 'researcher_ui:rename_study' pk=current_study.pk %}" >Update Group</a>
+                <button type="submit" class="btn btn-secondary wcdi-btn-danger" style="margin-left:auto;" name='delete-study' id='delete-study' onclick='return confirm("Are you sure you want to delete the entire study and all the data associated with it?");' >Delete Group</button>
             </div>
         {% endif %}
 
         {% if current_study %}
-            <div id='administration-form' class="form-inline">
-                <div class="row" style="margin-top:1rem">
-                    <div class='col-md-3'>
-                        
-                            <input id='id_search' type="text" placeholder="Search by Participant ID...." name="search", style="max-width: 85%">
-                            <button id='search_button' type="submit"><i class="fa fa-search"></i></button>
-                        
+            <div id='administration-form'>
+                <div class="wcdi-toolbar" style="margin-top:10px;">
+                    <div style="flex:1; min-width:220px; max-width:320px;">
+                        <input id='id_search' type="text" placeholder="Search by Participant ID...." name="search">
+                        <button id='search_button' type="submit"><i class="fa fa-search"></i></button>
                     </div>
-                    <div class="col-md-3">
-                        <div class="dropdown">
-                            <button class="btn btn-secondary  btn-block dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Download All Administrations (Spreadsheet)
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                <button class="dropdown-item btn btn-secondary btn-block" type="submit" name='download-summary-csv' id='download-summary-csv'>Summary Scores/Percentiles (csv)</button>
-                                <button class="dropdown-item btn btn-secondary btn-block" type="submit" name='download-study-csv' id='download-study-csv'>Items and Summary Scores/Percentiles (csv)</button>
-                                <button class="dropdown-item btn btn-secondary btn-block" type="submit" name='download-study-csv-adjusted' id='download-study-csv-adjusted'>Items and Summary Scores/Percentiles with Adjusted Ages (csv)</button>
-                            </div>
-                        </div>                                            
+                    <span class="wcdi-muted" style="font-size:13px;">With selected:</span>
+                    <button class="btn btn-secondary selected-btn" id='add-selected' type='submit' name='administer-selected' value='administer-selected' disabled  >Re-administer</button>
+                    <div class="dropdown selected-btn" >
+                        <button class="btn btn-secondary selected-btn dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>Download</button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+                            <a id="id_select_clinical" class="dropdown-item selected-btn" onclick="javascript:append_url_checkboxes()">Clinical Report (pdf)</a>
+                            <a id="id_select_clinical_adjusted" class="dropdown-item selected-btn" onclick="javascript:append_url_checkboxes_adjusted()">Clinical Report with Adjusted Ages (pdf)</a>
+                            <button class="dropdown-item selected-btn" id='download-selected-summary' type="submit" name='download-selected-summary' value='download-selected-summary' disabled>Summary Scores/Percentiles Only (csv)</button>
+                            <button class="dropdown-item selected-btn" id='download-selected' type='submit' name='download-selected' value='download-selected'  disabled >Items and Summary Scores/Percentiles (csv)</button>
+                            <button class="dropdown-item selected-btn" id='download-selected-adjusted' type='submit' name='download-selected-adjusted' value='download-selected-adjusted'  disabled >Items and Summary Scores/Percentiles with Adjusted Ages (csv)</button>
+                            {% if not study.instrument.form == 'CAT' %}
+                            <button class="dropdown-item selected-btn" id='download-links' type='submit' name='download-links' value='download-links'  disabled >Links only (csv)</button>
+                            {% endif %}
+
+                        </div>
                     </div>
-                    <div class='col-md-3'>
-                                            
-                            <div class="dropdown selected-btn" >
-                                <button class="btn btn-secondary selected-btn btn-block dropdown-toggle" style='width:100%; white-space: normal; word-wrap: break-word;' type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
-                                    Download Selected Administrations (Clinical Reports and Spreadsheet)
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-                                    <a id="id_select_clinical" class="dropdown-item btn btn-secondary selected-btn btn-block" onclick="javascript:append_url_checkboxes()">Clinical Report (pdf)</a>
-                                    <a id="id_select_clinical_adjusted" class="dropdown-item btn btn-secondary selected-btn btn-block" onclick="javascript:append_url_checkboxes_adjusted()">Clinical Report with Adjusted Ages (pdf)</a>
-                                    <button class="dropdown-item btn btn-secondary selected-btn btn-block" id='download-selected-summary' type="submit" name='download-selected-summary' value='download-selected-summary' disabled>Summary Scores/Percentiles Only (csv)</button>
-                                    <button class="dropdown-item btn btn-secondary selected-btn btn-block" id='download-selected' type='submit' name='download-selected' value='download-selected'  disabled >Items and Summary Scores/Percentiles (csv)</button>
-                                    <button class="dropdown-item btn btn-secondary selected-btn btn-block" id='download-selected-adjusted' type='submit' name='download-selected-adjusted' value='download-selected-adjusted'  disabled >Items and Summary Scores/Percentiles with Adjusted Ages (csv)</button>
-                                    {% if not study.instrument.form == 'CAT' %}
-                                    <button class="dropdown-item btn btn-secondary selected-btn btn-block" id='download-links' type='submit' name='download-links' value='download-links'  disabled >Links only (csv)</button>
-                                    {% endif %}
-                                    
-                                </div>
-                            </div>   
-                                                                
-                    </div> 
-                    <div class='col-md-3'>
-                            
-                            <button style='width:100%; white-space: normal; word-wrap: break-word;' class="btn btn-secondary selected-btn btn-block" id='delete-selected' type='submit' name='delete-selected' value='administer-selected' disabled onclick='return confirm("Are you sure you want to delete the selected administration record and all the data associated with it?");' >Delete Selected Administrations</button>
-                        
-                    </div>
-                                                
-                    <div class='col-md-12'>
+                    <button class="btn btn-secondary selected-btn wcdi-btn-danger" id='delete-selected' type='submit' name='delete-selected' value='administer-selected' disabled onclick='return confirm("Are you sure you want to delete the selected administration record and all the data associated with it?");' >Delete</button>
+                </div>
+
+                <div>
                         {% include "researcher_UI/table.html" with table=study_administrations %}
                         <script type="text/javascript">
                             var utc_time;
@@ -152,16 +130,16 @@
                                 $(this).html(local_time);
                             });
                         </script>
-                    </div>
-                    
                 </div>
             </div>
-    
+
         {% endif %}
-    </form>
+            </form>
+        {% endif %}
+    </div>
     <!-- New Study Modal -->
     <div class="modal" id="modal-form" tabindex="" role="dialog" aria-labelledby="new study"></div>
-{% endblock %} 
+{% endblock %}
 
 {% block scripts %}
 <script>

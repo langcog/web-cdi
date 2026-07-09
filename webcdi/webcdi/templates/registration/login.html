@@ -9,45 +9,41 @@
 {% block main %}
 {{ block.super }}
 
-<div style="margin-top:100px; margin-bottom:10rem;">
-  <div class="container">
-      <!--Start login card-->
-      <div class="login-card col-12" align="center" >
-          <h1>Login</h1><br>
+<div class="wcdi-auth-wrap">
+    <div class="wcdi-auth-card">
+        <h1>{% trans 'Sign in' %}</h1>
+        <div class="wcdi-auth-sub">{% trans 'Researcher and clinician access' %}</div>
 
-          <!--End login card-->
-          <form action="{{ app_path }}" method="post" id="login-form">
-            {% csrf_token %}
-            {% include 'registration/alert_none_fields.html' %}
-            
-            {% for field in form %}
-              <div class="input-row">
-                  <label for="{{ field.label }}" style="font-family:Arial, Helvetica, sans-serif;">{{ field.label }}  <span style="color: red;font-family:none"> * </span></label>
-                    {{ field }}
-                    {% with errors=field.errors %}
-                      {% include 'registration/alert.html' %}
-                    {% endwith%}
-              </div>
-            {%  endfor  %}
+        <form action="{{ app_path }}" method="post" id="login-form">
+          {% csrf_token %}
+          {% include 'registration/alert_none_fields.html' %}
 
-              <div  class="input-row">
-                <input type="submit" name="login" class="btn btn-primary" value="{% trans "Log in" %}">
-              </div>
-          </form>
-          
-          <div class="login-help input-row">
-              <a  href="{% url 'password_reset' %}" >Forgot your password? Click here to reset.</a>
-              <br>
-                OR
-              <br>
-              <a href="{% url 'django_registration_register' %}">Don't have an account yet? Click here to register.</a> <br>
-          </div>
+          {% for field in form %}
+            <div class="input-row form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }} <span style="color: red;"> * </span></label>
+                  {{ field }}
+                  {% with errors=field.errors %}
+                    {% include 'registration/alert.html' %}
+                  {% endwith%}
+            </div>
+          {%  endfor  %}
+
+            <div class="input-row">
+              <input type="submit" name="login" class="btn btn-primary btn-block" value="{% trans "Log in" %}">
+            </div>
+        </form>
+
+        <div class="login-help input-row">
+            <a href="{% url 'password_reset' %}">Forgot your password? Click here to reset.</a>
+            <br>
+              OR
+            <br>
+            <a href="{% url 'django_registration_register' %}">Don't have an account yet? Click here to register.</a>
+        </div>
     </div>
-
-  </div>
-  <script type="text/javascript">
-    document.getElementById('id_username').focus()
-    </script>
 </div>
+<script type="text/javascript">
+  document.getElementById('id_username').focus()
+</script>
 
 {% endblock %}
