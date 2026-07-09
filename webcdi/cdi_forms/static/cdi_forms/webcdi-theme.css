@@ -1,18 +1,18 @@
 /* Web-CDI visual theme — design-token layer over Bootstrap.
    Loaded after bootstrap.min.css and base.css in the participant-facing
    base templates; overrides only colors, radii, and component chrome.
-   Palette: warm paper ground, deep pine accent, green checked state,
-   amber for progress/notes. */
+   Palette: clean paper ground, deep harbor-blue primary, semantic green
+   for checked/success states, amber reserved for notes. */
 
 :root {
-  --wcdi-paper: #fbfaf8;
+  --wcdi-paper: #fafbfc;
   --wcdi-ink: #24313a;
   --wcdi-ink-soft: #5a6b76;
-  --wcdi-line: #e3e0da;
+  --wcdi-line: #dfe4e9;
   --wcdi-card: #ffffff;
-  --wcdi-pine: #22665c;
-  --wcdi-pine-deep: #174a43;
-  --wcdi-pine-wash: #edf3f1;
+  --wcdi-primary: #2b5d8c;
+  --wcdi-primary-deep: #1d4266;
+  --wcdi-primary-wash: #ecf2f8;
   --wcdi-check: #2e7d4f;
   --wcdi-check-wash: #f2f8f4;
   --wcdi-amber: #d98e32;
@@ -22,6 +22,17 @@
 body {
   background-color: var(--wcdi-paper);
   color: var(--wcdi-ink);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+/* main content grows so the footer sits at the bottom of short pages */
+main[role="main"], .bs-docs-container {
+  flex: 1 0 auto;
+  width: 100%;
+}
+.wcdi-footer {
+  margin-top: auto;
 }
 
 h1, h2, h3, h4, legend {
@@ -29,10 +40,10 @@ h1, h2, h3, h4, legend {
 }
 
 a {
-  color: var(--wcdi-pine);
+  color: var(--wcdi-primary);
 }
 a:hover, a:focus {
-  color: var(--wcdi-pine-deep);
+  color: var(--wcdi-primary-deep);
 }
 
 /* base.css underlines <strong>; that reads as a link — undo it */
@@ -43,8 +54,8 @@ strong {
 
 /* ---- buttons ---- */
 .btn-primary, .btn-info, .btn-success {
-  background-color: var(--wcdi-pine);
-  border-color: var(--wcdi-pine);
+  background-color: var(--wcdi-primary);
+  border-color: var(--wcdi-primary);
   color: #fff;
   border-radius: 8px;
   font-weight: 600;
@@ -52,26 +63,26 @@ strong {
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active,
 .btn-info:hover, .btn-info:focus, .btn-info:active,
 .btn-success:hover, .btn-success:focus, .btn-success:active {
-  background-color: var(--wcdi-pine-deep);
-  border-color: var(--wcdi-pine-deep);
+  background-color: var(--wcdi-primary-deep);
+  border-color: var(--wcdi-primary-deep);
   color: #fff;
 }
 .btn-secondary, .btn-default {
   background-color: transparent;
-  border: 1.5px solid var(--wcdi-pine);
-  color: var(--wcdi-pine);
+  border: 1.5px solid var(--wcdi-primary);
+  color: var(--wcdi-primary);
   border-radius: 8px;
   font-weight: 600;
 }
 .btn-secondary:hover, .btn-default:hover {
-  background-color: var(--wcdi-pine-wash);
-  color: var(--wcdi-pine-deep);
+  background-color: var(--wcdi-primary-wash);
+  color: var(--wcdi-primary-deep);
 }
 
 /* focus visibility: keyboard only, no ring on mouse clicks */
 .btn:focus-visible, a:focus-visible, input:focus-visible,
 select:focus-visible, textarea:focus-visible {
-  outline: 2px solid var(--wcdi-pine);
+  outline: 2px solid var(--wcdi-primary);
   outline-offset: 1px;
   box-shadow: none;
 }
@@ -80,7 +91,7 @@ select:focus-visible, textarea:focus-visible {
   outline: none;
 }
 .alco-child:has(input:focus-visible), .alco-child1:has(input:focus-visible) {
-  outline: 2px solid var(--wcdi-pine);
+  outline: 2px solid var(--wcdi-primary);
   outline-offset: 2px;
   border-radius: var(--wcdi-radius);
 }
@@ -92,8 +103,8 @@ select:focus-visible, textarea:focus-visible {
   color: var(--wcdi-ink);
 }
 .form-control:focus {
-  border-color: var(--wcdi-pine);
-  box-shadow: 0 0 0 2px rgba(34, 102, 92, 0.15);
+  border-color: var(--wcdi-primary);
+  box-shadow: 0 0 0 2px rgba(43, 93, 140, 0.15);
 }
 
 /* ---- checklist item cards (.alco-child wraps each word) ---- */
@@ -104,7 +115,7 @@ select:focus-visible, textarea:focus-visible {
   transition: border-color 0.12s ease;
 }
 .alco-child:hover, .alco-child1:hover {
-  border-color: var(--wcdi-pine);
+  border-color: var(--wcdi-primary);
 }
 .alco-child label.btn, .alco-child1 label.btn {
   min-height: 44px;
@@ -116,7 +127,7 @@ select:focus-visible, textarea:focus-visible {
   border-color: var(--wcdi-check);
 }
 input:checked ~ span {
-  color: var(--wcdi-pine-deep);
+  color: var(--wcdi-primary-deep);
   font-weight: 600;
 }
 label input:checked ~ i.material-icons.radio_button_checked,
@@ -126,12 +137,12 @@ label input:checked ~ i.material-icons.check_box {
 
 /* ---- progress ---- */
 .progress {
-  background-color: #e8e5e0;
+  background-color: #e6eaee;
   border-radius: 99px;
   height: 10px;
 }
 .progress-bar {
-  background-color: var(--wcdi-pine);
+  background-color: var(--wcdi-primary);
   border-radius: 99px;
 }
 
@@ -140,7 +151,7 @@ label input:checked ~ i.material-icons.check_box {
   color: var(--wcdi-ink-soft);
 }
 .bs-docs-sidebar a:hover {
-  color: var(--wcdi-pine);
+  color: var(--wcdi-primary);
 }
 
 /* ---- researcher console layout ---- */
@@ -160,7 +171,134 @@ main[role="main"] {
   color: var(--wcdi-ink-soft);
 }
 .navbar .nav-link:hover, .navbar .nav-item.active .nav-link {
-  color: var(--wcdi-pine);
+  color: var(--wcdi-primary);
+}
+
+/* user chip in the navbar */
+.wcdi-avatar {
+  background: var(--wcdi-primary-wash);
+  color: var(--wcdi-primary-deep);
+  font-weight: 700;
+  font-size: 13px;
+  border-radius: 99px;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 6px;
+  text-transform: uppercase;
+}
+
+/* page-header band (filled via {% block page_header %}) */
+.wcdi-page-header {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 26px 20px 4px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.wcdi-page-header .wcdi-eyebrow {
+  display: block;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--wcdi-ink-soft);
+  font-weight: 600;
+}
+.wcdi-page-header h1 {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+}
+.wcdi-page-header .wcdi-page-actions {
+  margin-left: auto;
+}
+
+/* shared footer */
+.wcdi-footer {
+  background: var(--wcdi-card);
+  border-top: 1px solid var(--wcdi-line);
+  margin-top: 48px;
+  padding: 18px 20px;
+  font-size: 13.5px;
+  color: var(--wcdi-ink-soft);
+}
+.wcdi-footer .wcdi-footer-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.wcdi-footer b {
+  color: var(--wcdi-ink);
+}
+.wcdi-footer nav {
+  margin-left: auto;
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.wcdi-footer a {
+  color: var(--wcdi-ink-soft);
+}
+.wcdi-footer a:hover {
+  color: var(--wcdi-primary);
+}
+
+/* centered auth card (login / password reset) */
+.wcdi-auth-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 40px 16px 24px;
+}
+.wcdi-auth-card {
+  background: var(--wcdi-card);
+  border: 1px solid var(--wcdi-line);
+  border-radius: 12px;
+  padding: 28px 26px;
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 2px 10px rgba(36, 49, 58, 0.05);
+}
+.wcdi-auth-card h1 {
+  font-size: 22px;
+  margin: 0 0 4px;
+}
+.wcdi-auth-card .wcdi-auth-sub {
+  font-size: 14px;
+  color: var(--wcdi-ink-soft);
+  margin-bottom: 18px;
+}
+.wcdi-auth-card .login-help {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 14px;
+}
+.wcdi-auth-card label {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+.wcdi-auth-card input[type="text"],
+.wcdi-auth-card input[type="password"],
+.wcdi-auth-card input[type="email"] {
+  display: block;
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  border: 1.5px solid var(--wcdi-line);
+  border-radius: 8px;
+  font-size: 16px;
+}
+.wcdi-auth-card input:focus {
+  border-color: var(--wcdi-primary);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(43, 93, 140, 0.15);
 }
 
 /* ---- misc chrome ---- */
@@ -176,7 +314,7 @@ hr {
   border-radius: var(--wcdi-radius);
 }
 .alert-info {
-  background-color: var(--wcdi-pine-wash);
-  border-color: var(--wcdi-pine);
-  color: var(--wcdi-pine-deep);
+  background-color: var(--wcdi-primary-wash);
+  border-color: var(--wcdi-primary);
+  color: var(--wcdi-primary-deep);
 }

@@ -43,7 +43,7 @@
 
   <body>
 
-    <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+    <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
         <a class="navbar-brand" href="{% url 'researcher_ui:console' %}">
             <img width="150px"  src="{% static 'researcher_UI/images/logo_black.png' %}">
         </a>
@@ -57,7 +57,10 @@
                     <a class="nav-link" href="{% url 'researcher_ui:console' %}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" target="_blank" href="{% static '/webcdi/pdf/webCDIManual.pdf' %}">Help</a>
+                    <a class="nav-link" target="_blank" href="{% static '/webcdi/pdf/webCDIManual.pdf' %}">Documentation</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" target="_blank" href="{{ MORE_INFO_LINK }}">About</a>
                 </li>
                 {% if RENEWAL_CODES %}
                     <li class="nav-item dropdown">
@@ -72,7 +75,7 @@
                 {% endif %}
                 {% if request.user.is_authenticated %}
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ request.user.username }}</a>
+                    <a class="nav-link dropdown-toggle" href="" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="wcdi-avatar">{{ request.user.username|first }}</span>{{ request.user.username }}</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown02">
                         {% if request.user.is_staff %}
                             <a class="dropdown-item" href="{% url 'admin:index' %}">Admin</a>
@@ -86,7 +89,9 @@
         </div>
     </nav>
 
-    <main role="main" style="margin-top:100px">
+    {% block page_header %}{% endblock %}
+
+    <main role="main" style="margin-top:24px">
         {% if messages %}
             {% for message in messages %}
             <div class="container-fluid p-0">
@@ -102,6 +107,8 @@
         {% block main %} 
         {% endblock %}
     </main><!-- /.container -->
+
+    {% include "webcdi/footer.html" %}
 
     {% block scripts %}
     {% endblock %}

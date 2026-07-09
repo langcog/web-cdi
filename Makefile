@@ -19,7 +19,7 @@ docker-db-populate:
 	docker-compose exec -it web ./manage.py 06_populate_items
 	
 docker-test:
-	docker compose exec web python manage.py test --exclude=selenium --parallel auto
+	docker compose exec web python manage.py test --exclude=selenium --parallel auto --noinput
 
 docker-test-coverage:
 	docker compose exec web coverage run manage.py test --exclude=selenium
