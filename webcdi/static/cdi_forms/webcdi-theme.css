@@ -332,6 +332,11 @@ main[role="main"] {
   overflow: visible;
   padding: 12px 0;
 }
+/* table.html's embedded style paints .login-card h1 white; it renders
+   inside <body>, after this sheet, so outrank it rather than tie */
+main .login-card h1, body .login-card h1 {
+  color: var(--wcdi-ink);
+}
 .login-card .btn {
   white-space: normal;
 }
@@ -437,6 +442,23 @@ div:has(> #id_search) {
   border-radius: 0 8px 8px 0;
   padding: 0 14px;
   cursor: pointer;
+}
+
+/* dashboard study cards */
+.wcdi-study-card {
+  display: flex;
+  flex-direction: column;
+}
+.wcdi-study-card .wcdi-study-name {
+  font-weight: 700;
+  font-size: 16.5px;
+  margin-bottom: 2px;
+}
+.wcdi-study-card > a {
+  margin-top: auto;
+}
+.wcdi-study-card .progress {
+  height: 8px;
 }
 
 /* generic content card panel; add .wcdi-card-fill to stretch to the

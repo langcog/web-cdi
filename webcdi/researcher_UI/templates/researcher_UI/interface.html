@@ -3,67 +3,72 @@
 
 {% block main %}
     <div class='login-card' style="width:100%">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <h1 style="text-align: center; color:black ">
-                    Welcome to Web-CDI!
-                    </h1>
+        {% if not current_study %}
+            <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin:18px 0 18px;">
+                <div>
+                    <h1 style="font-size:26px; margin:0;">Your administration groups</h1>
+                    <div class="wcdi-muted">Each group administers one CDI form to a set of participants.</div>
+                </div>
+                <div style="margin-left:auto;">
+                    <a id="id_new_study" href="{% url 'researcher_ui:add_study' %}" class="btn btn-primary">+ New administration group</a>
                 </div>
             </div>
-        </div>
-        {% if current_study %}
-            <form method='post'  action='{% url "researcher_ui:console_study" pk=current_study.pk %}' id='study-form'>
-        {% else %}
-            <form method='post'  action='' id='study-form'>
+
+            {% if studies %}
+                <div class="row" style="row-gap:14px;">
+                    {% for study in studies %}
+                        <div class="col-md-6 col-lg-4">
+                            <div class="wcdi-card-panel wcdi-card-fill wcdi-study-card">
+                                <div class="wcdi-study-name">{{ study.name }}</div>
+                                <div class="wcdi-muted" style="font-size:13.5px; margin-bottom:10px;">{{ study.instrument.verbose_name }}</div>
+                                <div class="progress" style="margin-bottom:6px;">
+                                    <div class="progress-bar" role="progressbar" style="width:{% if study.n_admins %}{% widthratio study.n_completed study.n_admins 100 %}{% else %}0{% endif %}%"></div>
+                                </div>
+                                <div class="wcdi-muted" style="font-size:13px; margin-bottom:12px;">
+                                    {{ study.n_completed }} of {{ study.n_admins }} administration{{ study.n_admins|pluralize }} completed
+                                    &middot; {{ study.n_children }} child{{ study.n_children|pluralize:"ren" }}
+                                </div>
+                                <a href="{% url 'researcher_ui:console_study' pk=study.pk %}" style="font-weight:600;">View group &rarr;</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="wcdi-card-panel" style="max-width:620px;">
+                    <h2>Get started</h2>
+                    <p>Welcome! Setting up data collection takes three steps:</p>
+                    <ol style="padding-left:20px;">
+                        <li style="margin-bottom:6px;"><a href="{% url 'researcher_ui:researcher_add_instruments' pk=request.user.researcher.pk %}">Select the CDI instruments</a> you plan to use (some require a Brookes Publishing access code).</li>
+                        <li style="margin-bottom:6px;"><a href="{% url 'researcher_ui:add_study' %}">Create an administration group</a> — one per form, e.g. one group for Words &amp; Gestures and one for Words &amp; Sentences.</li>
+                        <li>Add participants to the group and send them their links.</li>
+                    </ol>
+                    <p style="margin-bottom:0;">The <a href="{% url 'documentation' %}">documentation</a> walks through the whole workflow.</p>
+                </div>
+            {% endif %}
         {% endif %}
-        
-        <div class="row">
-            <div class='col'>
-                <a id='id_add_instruments' href="{% url 'researcher_ui:researcher_add_instruments' pk=request.user.researcher.pk %}" type="button" type="button" style='width:100%;' class="btn btn-primary">My CDI Forms</a>
-            </div>
-            <div class="col">
-                <a id="id_new_study" href="{% url 'researcher_ui:add_study' %}" type="button" style='width:100%;' class="btn btn-primary">Administration Group Set Up</a>
-            </div>
-        </div>
-        <div class="row">
-            <div class='col'>
-                <p>Click here to see the CDI forms that are currently assigned to you.</p>
-            </div>
-            <div class='col'>
-                <p>Create a new group of CDI forms for families.  You will need to create a new group for each CDI form you are using, e.g., 1 group for Words & Gestures and 1 group for Words & Sentences.</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class='col'>
-                <div style = 'width:100%' class="form-group">
-                    <select  style = 'width:100%;' id="study-selector" class="form-control" onchange="location = encodeURI(this.options[this.selectedIndex].value);">
-                        <option value="/interface/" selected disabled>Select Administration Group</option>
+
+        {% if current_study %}
+            <div style="display:flex; align-items:flex-end; gap:12px; flex-wrap:wrap; margin:14px 0 6px;">
+                <div>
+                    <a href="{% url 'researcher_ui:console' %}" class="wcdi-muted" style="font-size:13px;">&larr; All groups</a>
+                    <h1 style="font-size:24px; margin:2px 0 4px;">{{ current_study.name }}</h1>
+                    <div class="wcdi-muted" style="font-size:14px;">
+                        {{ study_instrument }}
+                        {% if study_group %} &middot; Study group: {{ study_group }}{% endif %}
+                        {% if completed_admins %} &middot; {{ completed_admins }} completed &middot; {{ unique_children }} child{{ unique_children|pluralize:"ren" }}{% endif %}
+                        {% if allow_payment %} &middot; {{ available_giftcards }} gift card{{ available_giftcards|pluralize }} left{% endif %}
+                    </div>
+                </div>
+                <div style="margin-left:auto; min-width:230px;">
+                    <select id="study-selector" class="form-control" onchange="location = encodeURI(this.options[this.selectedIndex].value);">
                         {% for study in studies %}
                             <option value="{% url 'researcher_ui:console_study' pk=study.pk %}"{% if study.pk == current_study.pk %} selected="" {% endif %}>{{ study }}</option>
                         {% endfor %}
-                    </select> 
-                </div>
-                <div>
-                    {% if study_instrument %}
-                        <h4>Form: {{ study_instrument }}</h4>
-                    {% endif %}
-
-                    {% if study_group %}
-                        <h4>Study Group: {{ study_group }}</h4>
-                    {% endif %}
-
-                    {% if completed_admins %}
-                        <h4># Completed Administrations: {{ completed_admins }} Administration{% if compl != 1 %}s{% endif %}, {{ unique_children }} Children</h4>
-                    {% endif %}
-
-                    {% if allow_payment %}
-                        <h4># Gift Cards Left: {{ available_giftcards }}</h4>
-                    {% endif %}                    
+                    </select>
                 </div>
             </div>
-            
-        </div>
+
+            <form method='post'  action='{% url "researcher_ui:console_study" pk=current_study.pk %}' id='study-form'>
         {% if current_study %}
             <div class="row">
                 <div class="col-3">
@@ -158,10 +163,12 @@
             </div>
     
         {% endif %}
-    </form>
+            </form>
+        {% endif %}
+    </div>
     <!-- New Study Modal -->
     <div class="modal" id="modal-form" tabindex="" role="dialog" aria-labelledby="new study"></div>
-{% endblock %} 
+{% endblock %}
 
 {% block scripts %}
 <script>
