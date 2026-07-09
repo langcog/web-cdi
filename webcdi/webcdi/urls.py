@@ -20,8 +20,8 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import include, path, re_path
 from django.views.generic import TemplateView
-from django.views.generic.base import RedirectView
 from health_check.views import HealthCheckView
+from django.views.generic.base import RedirectView
 
 from webcdi.forms import SignUpForm
 from webcdi.views import (AboutView, CustomLoginView, CustomRegistrationView,
@@ -67,33 +67,18 @@ urlpatterns = [
     re_path(
         r"^lockout/$", TemplateView.as_view(template_name="registration/lockout.html")
     ),
-    #re_path(r"^health/?", include("health_check.urls")),
+    # Health probe for the EB load balancer. Only the checks bundled with
+    # this health_check package are used (Database is the meaningful one);
+    # the previous inline list also named psutil/celery/kafka/rabbitmq/rss
+    # backends whose packages are not installed, so every request raised
+    # ModuleNotFoundError.
     path(
         "health/",
         HealthCheckView.as_view(
-            checks=[  # optional, default is all but 3rd party checks
-                "health_check.Cache",
-                "health_check.DNS",
+            checks=[
                 "health_check.Database",
-                "health_check.Mail",
+                "health_check.Cache",
                 "health_check.Storage",
-                # 3rd party checks
-                "health_check.contrib.psutil.Disk",
-                "health_check.contrib.psutil.Memory",
-                "health_check.contrib.celery.Ping",
-                (
-                    "health_check.contrib.kafka.Kafka",
-                    {"bootstrap_servers": ["localhost:9092"]},
-                ),
-                (  # tuple with options
-                    "health_check.contrib.rabbitmq.RabbitMQ",
-                    {"amqp_url": "amqp://guest:guest@localhost:5672//"},
-                ),
-                # AWS service status check
-                (
-                    "health_check.contrib.rss.AWS",
-                    {"region": "eu-west-1", "service": "s3"},
-                ),
             ],
         ),
     ),

@@ -36,7 +36,7 @@ class PrimaryHostRedirectMiddleware:
         Checks if the current request matches our primary host settings
         """
         try:
-            if "healthcheck" in resolve(request.path_info).url_name:
+            if "health" in (resolve(request.path_info).url_name or ""):
                 return self.get_response(request)
         except Exception:
             pass
