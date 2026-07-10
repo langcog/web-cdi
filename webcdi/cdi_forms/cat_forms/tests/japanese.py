@@ -4,7 +4,7 @@ import os
 
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.test import TestCase, tag
+from django.test import TestCase, override_settings, tag
 from django.urls import reverse
 from django.utils import timezone
 
@@ -12,6 +12,10 @@ from cdi_forms.cat_forms.forms import CatItemForm
 from cdi_forms.models import BackgroundInfo
 from researcher_UI.models import Administration, Instrument, Study
 from researcher_UI.tests.utils import random_password
+from cdi_forms.cat_forms.tests.cat_api_mock import (
+    install_sequence_api,
+    install_start_api,
+)
 
 
 def csv_reader(utf8_data, dialect=csv.excel, **kwargs):
@@ -27,6 +31,7 @@ def make_boolean(text):
 
 
 @tag("cat")
+@override_settings(CAT_ENGINE="remote")
 class CATJapaneseAdministrationDataItemTest(TestCase):
     fixtures = [
         "researcher_UI/fixtures/researcher_UI_test_fixtures.json",
@@ -68,6 +73,7 @@ class CATJapaneseAdministrationDataItemTest(TestCase):
         )
 
     def start_values(self, file_name):
+        install_start_api(self, file_name)
         for age in range(12, 37):
             # read csv, and split on "," the line
             csv_file = csv.reader(open(os.path.realpath(file_name), "r"), delimiter=",")
@@ -85,6 +91,7 @@ class CATJapaneseAdministrationDataItemTest(TestCase):
             self.assertContains(response, f"お子さまは次の単語を言いますか？「{word}」")
 
     def sequence_test(self, file_name):
+        install_sequence_api(self, file_name)
         response = self.client.get(self.url)
 
         contents = list(
