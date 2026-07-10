@@ -1,6 +1,6 @@
 <!doctype html>
 
-{% load i18n %}
+{% load i18n sanitize %}
 {% load static %}
 {% load cdiform_tags %}
 
@@ -160,7 +160,7 @@
                 </div>
                 <div class="modal-body">
                     {% if object.study.waiver and object.study.waiver != "" %}
-                        {{ object.study.waiver|safe }}
+                        {{ object.study.waiver|sanitize_richtext }}
                     {% endif %}
                 </div>
                 <div class="modal-footer">

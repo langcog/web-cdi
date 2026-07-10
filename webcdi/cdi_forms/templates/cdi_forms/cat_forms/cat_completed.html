@@ -1,4 +1,4 @@
-{% load i18n cat_forms_tags %}
+{% load i18n cat_forms_tags sanitize %}
 {% to_list 'Dutch' as language_list %}
 
 <html lang="en">
@@ -35,7 +35,7 @@
         </div>
         {% if object.study.end_message == 'bespoke' or object.study.end_message == 'combined' %}
         <div class="row">
-            {{ object.study.end_message_text|safe }}
+            {{ object.study.end_message_text|sanitize_richtext }}
         </div>
         {% endif %}
         {% if object.study.end_message == 'standard' or object.study.end_message == 'combined' %}

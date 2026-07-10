@@ -1,4 +1,4 @@
-{% load i18n cdiform_tags %}
+{% load i18n cdiform_tags sanitize %}
 {% to_list 'Dutch' as language_list %}
 {% if 'WG' in object.study.instrument.name or 'L1' in object.study.instrument.name %}
     {% set_true as show_produced %}
@@ -211,7 +211,7 @@
             {% endif %}
             {% if object.study.end_message == 'bespoke' or object.study.end_message == 'combined' %}
                 <div class="row">
-                    {{ object.study.end_message_text|safe }}
+                    {{ object.study.end_message_text|sanitize_richtext }}
                 </div>
             {% endif %}
             <br>
