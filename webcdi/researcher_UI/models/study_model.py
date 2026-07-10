@@ -1,6 +1,5 @@
 import datetime
 
-from ckeditor_uploader.fields import RichTextUploadingField
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
@@ -18,7 +17,7 @@ class Study(models.Model):
         "instrument", on_delete=models.CASCADE
     )  # Instrument associated with study
     # waiver = models.TextField(blank = True) # IRB Waiver of documentation for study or any additional instructions provided to participant
-    waiver = RichTextUploadingField(verbose_name="Opening Dialog Box", blank=True)
+    waiver = models.TextField(verbose_name="Opening Dialog Box", blank=True)
     study_group = models.CharField(max_length=51, blank=True)  # Study group
     anon_collection = models.BooleanField(
         default=False
@@ -107,7 +106,7 @@ class Study(models.Model):
     end_message = models.CharField(
         max_length=10, choices=choices.END_MESSAGE_CHOICES, default="standard"
     )
-    end_message_text = RichTextUploadingField(blank=True, null=True)
+    end_message_text = models.TextField(blank=True, null=True)
 
     no_demographic_boolean = models.BooleanField(
         default=False,
