@@ -82,7 +82,6 @@ urlpatterns = [
             ],
         ),
     ),
-    re_path(r"^ckeditor/", include("ckeditor_uploader.urls")),
     path("brookes/", include("brookes.urls")),
     path("api/", include("api.urls")),
 ]
