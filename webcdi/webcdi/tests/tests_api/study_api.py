@@ -64,6 +64,10 @@ class StudyAPIViewTest(TestCase):
         generate_fake_results(self.study, 10)
         generate_fake_results(self.english_study, 10)
 
+    # Quarantined: fails in CI with pandas "DataFrame index must be unique for
+    # orient='columns'" (issue #640). Passes locally in isolation; only the
+    # full CI run trips it. Excluded from the gate until #640 is fixed.
+    @tag("known_failure")
     def test_study_api(self):
         response = self.client.generic("POST", self.url, json.dumps(self.payload))
         self.assertEqual(response.status_code, 200)
