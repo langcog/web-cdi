@@ -115,3 +115,69 @@ class BrowserCatTest(TestCase):
             if CatResponse.objects.filter(administration=self.administration).exists()
             else None
         )
+
+
+@tag("cat")
+@override_settings(CAT_ENGINE="browser")
+class BrowserCatHardestEasiestTest(TestCase):
+    """In browser mode the completion page's hardest/easiest word is computed
+    locally from the static bank instead of the R API. Verify the view reads
+    the right language bank, considers only 'yes' items, and applies the
+    easiness rule (max/min of the intercept, d = -a*b)."""
+
+    fixtures = [
+        "researcher_UI/fixtures/researcher_UI_test_fixtures.json",
+        "cdi_forms/fixtures/cdi_forms_test_fixtures.json",
+    ]
+
+    def setUp(self):
+        self.user = User.objects.create_user(username="test_user", password="secret")
+        instrument = Instrument.objects.get(language="English", form="CAT")
+        self.study = Study.objects.create(
+            researcher=self.user, name="HE Study", instrument=instrument
+        )
+        self.administration = Administration.objects.create(
+            study=self.study,
+            subject_id=1,
+            repeat_num=1,
+            url_hash=random_password(size=64),
+            completed=True,
+            scored=True,
+            due_date=timezone.now() + datetime.timedelta(days=31),
+            completedBackgroundInfo=True,
+        )
+        BackgroundInfo.objects.create(administration=self.administration, age=24)
+        # a mix of yes/no; only the yes items should count
+        self.yes_indices = [35, 326, 206]  # ball, leg, find
+        self.no_index = 411  # answered "no", must be ignored
+        CatResponse.objects.create(
+            administration=self.administration,
+            administered_items=self.yes_indices + [self.no_index],
+            administered_words=["ball", "leg", "find", "pants"],
+            administered_responses=[True, True, True, False],
+            est_theta=0.5,
+        )
+
+    def _bank_expected(self):
+        from cdi_forms.cat_forms.views import _cat_bank
+
+        bank = {it["index"]: it for it in _cat_bank("EN")["items"]}
+        yes = [bank[i] for i in self.yes_indices]
+        easiness = lambda it: -it["a"] * it["b"]
+        return (min(yes, key=easiness)["definition"],  # hardest
+                max(yes, key=easiness)["definition"])  # easiest
+
+    def test_hardest_easiest_matches_bank(self):
+        from cdi_forms.cat_forms.views import AdministerAdministraionView
+
+        view = AdministerAdministraionView()
+        view.object = self.administration
+        view.language = "en"
+        hardest, easiest = view.get_hardest_easiest()
+
+        exp_hardest, exp_easiest = self._bank_expected()
+        self.assertEqual(hardest, exp_hardest)
+        self.assertEqual(easiest, exp_easiest)
+        # the "no" item must not be selected
+        self.assertNotEqual(hardest, "pants")
+        self.assertNotEqual(easiest, "pants")
