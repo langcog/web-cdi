@@ -1,0 +1,57 @@
+name: Selenium (browser suite)
+
+# The end-to-end browser tests (LiveServerTestCase + a Firefox grid) are the
+# real guard for the jQuery migration and the interactive console/parent flows.
+# They take 60–90 min and some currently encode pre-facelift console markup
+# (see issue on refreshing their locators), so they run on a nightly schedule
+# and on demand rather than blocking every PR.
+
+on:
+  schedule:
+    - cron: "0 8 * * *" # 08:00 UTC nightly (~midnight US Pacific)
+  workflow_dispatch: # "Run workflow" button for on-demand runs
+
+concurrency:
+  group: selenium-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  selenium:
+    name: Browser suite (Selenium)
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Provision .env
+        run: cp .env.example .env
+
+      # The Selenium tests are LiveServerTestCase with host "web" driving a
+      # remote Firefox at selenium:4444 — both are compose service names, so
+      # the whole stack has to be up, not just a Postgres service container.
+      - name: Build and start db + web + selenium
+        run: docker compose up -d --build --wait db web selenium
+
+      # --wait treats the grid as ready once the container is running, but the
+      # Firefox node needs a few more seconds to register. Poll its status
+      # endpoint (published on 4444) before driving it.
+      - name: Wait for the Selenium grid
+        run: |
+          for i in $(seq 1 30); do
+            if curl -sf http://localhost:4444/wd/hub/status >/dev/null; then
+              echo "grid ready after ${i} tries"; exit 0
+            fi
+            sleep 2
+          done
+          echo "Selenium grid never became ready"; docker compose logs selenium; exit 1
+
+      # No --parallel: standalone-firefox serves one session, and each parallel
+      # worker would spin up its own LiveServer competing for it.
+      - name: Run the Selenium-tagged tests
+        run: >-
+          docker compose exec -T -e CAT_ENGINE=remote web
+          python manage.py test --tag=selenium --noinput
+
+      - name: Dump logs on failure
+        if: failure()
+        run: docker compose logs web selenium
