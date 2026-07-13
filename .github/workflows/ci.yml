@@ -27,7 +27,10 @@ jobs:
   test:
     name: Django suite (unit + integration)
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    # ~18 min locally with many cores; GitHub's 2-core runners have far less
+    # parallelism, so give it headroom. Sharding across runners is the real
+    # speed-up (follow-up) — this just gets a green baseline.
+    timeout-minutes: 75
     steps:
       - uses: actions/checkout@v4
 
