@@ -53,6 +53,7 @@ def create_benchmark_score(
                     benchmark = b
                     sex_score = benchmark.percentile
                 else:
+                    '''
                     sex_score = calc_benchmark(
                         benchmark.raw_score_boy,
                         b.raw_score_boy,
@@ -60,6 +61,7 @@ def create_benchmark_score(
                         b.percentile,
                         raw_score,
                     )
+                    '''
                     break
         elif background_info.sex == "F":
             benchmark = benchmarks[0]
@@ -69,6 +71,7 @@ def create_benchmark_score(
                     benchmark = b
                     sex_score = benchmark.percentile
                 else:
+                    '''
                     sex_score = calc_benchmark(
                         benchmark.raw_score_girl,
                         b.raw_score_girl,
@@ -76,6 +79,7 @@ def create_benchmark_score(
                         b.percentile,
                         raw_score,
                     )
+                    '''
                     break
 
         if sex_score < 1:
