@@ -19,6 +19,7 @@ def calc_benchmark(x1, x2, y1, y2, raw_score):
 def create_benchmark_score(
     benchmark, age, background_info, administration_instance, f, adjusted
 ):
+    original_benchmark = benchmark
     if benchmark.percentile == 999:
         summary, created = SummaryData.objects.get_or_create(
             administration=administration_instance,
@@ -36,7 +37,7 @@ def create_benchmark_score(
             title=f"{f.title} Percentile-sex{adjusted}",
         )
         benchmarks = Benchmark.objects.filter(instrument_score=f, age=age)
-        unisex_score = sex_score = 0
+        sex_score = 0
         try:
             raw_score = int(
                 SummaryData.objects.get(
@@ -92,6 +93,7 @@ def create_benchmark_score(
                 administration=administration_instance,
                 title=f.title + f" Percentile-both{adjusted}",
             )
+            benchmark = original_benchmark
             unisex_score = benchmark.percentile
             for b in benchmarks[1:]:
                 if b.raw_score <= raw_score:
