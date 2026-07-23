@@ -98,6 +98,7 @@ def create_benchmark_score(
                     benchmark = b
                     unisex_score = benchmark.percentile
                 else:
+                    '''
                     unisex_score = calc_benchmark(
                         benchmark.raw_score,
                         b.raw_score,
@@ -105,6 +106,7 @@ def create_benchmark_score(
                         b.percentile,
                         raw_score,
                     )
+                    '''
                     break
             if unisex_score < 1:
                 unisex_score = "<1"
