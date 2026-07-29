@@ -32,7 +32,7 @@ admin.site.register(administration_data, AdministrationDataAdmin)
 
 class BenchmarkAdmin(admin.ModelAdmin):
     list_display = ["instrument", "instrument_score", "age", "percentile"]
-    list_filter = ["instrument__language", "instrument__form", "age", "percentile"]
+    list_filter = ["instrument__language", "instrument__form", "age", "percentile", "instrument_score"]
 
 
 admin.site.register(Benchmark, BenchmarkAdmin)
