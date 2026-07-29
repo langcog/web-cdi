@@ -28,7 +28,14 @@
         "category" : "word_forms_verbs_1",
         "measure" : "produces",
         "order" : 5
+    },  
+    {
+        "title" : "Word Forms 1 Total",
+        "category" : "word_forms_verbs_1;word_forms_nouns_1",
+        "measure" : "produces",
+        "order" : 5
     },
+
     {
         "title" : "Word Forms 2 Nouns",
         "category" : "word_endings_nouns_2",
@@ -38,6 +45,11 @@
     {
         "title" : "Word Forms 2 Verbs",
         "category" : "word_endings_verbs_2",
+        "measure" : "produces",
+        "order" : 7
+    },{
+        "title" : "Word Endings 2 Total",
+        "category" : "word_endings_verbs_2;word_endings_nouns_2",
         "measure" : "produces",
         "order" : 7
     },
