@@ -14,9 +14,10 @@ def get_study_scores(administrations):
         index="administration_id", columns="title", values="value"
     )
     melted_scores.fillna('0', inplace=True)
-    melted_scores['Combination Example 1'] = melted_scores['Combination Example 1'].replace('0', 'no response provided')
-    melted_scores['Combination Example 2'] = melted_scores['Combination Example 2'].replace('0', 'no response provided')
-    melted_scores['Combination Example 3'] = melted_scores['Combination Example 3'].replace('0', 'no response provided')
+    if 'Combination Example 1' in melted_scores:
+        melted_scores['Combination Example 1'] = melted_scores['Combination Example 1'].replace('0', 'no response provided')
+        melted_scores['Combination Example 2'] = melted_scores['Combination Example 2'].replace('0', 'no response provided')
+        melted_scores['Combination Example 3'] = melted_scores['Combination Example 3'].replace('0', 'no response provided')
     
     
     melted_scores.reset_index(level=0, inplace=True)

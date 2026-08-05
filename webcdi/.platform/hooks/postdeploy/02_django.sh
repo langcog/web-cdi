@@ -13,6 +13,6 @@ source "$PYTHONPATH/activate" && {
     python ./manage.py 04_populate_benchmark;
     python ./manage.py 05_populate_choices;
     python ./manage.py 06_populate_items;
-    python ./manage.py update_summary_data -l English -f WS;
-
+    #python ./manage.py update_summary_data -l English -f WS;
+    #python ./manage.py update_summary_data -l "Canadian English" -f WS;
 }
