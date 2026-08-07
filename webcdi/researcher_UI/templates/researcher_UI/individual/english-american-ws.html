@@ -104,25 +104,25 @@
                 <td style='vertical-align:top'>({% trans 'of' %} 4)</td>
             </tr>
             <tr>
-                <td>{% trans 'Word Forms 1: Nouns' %}</td>
+                <td>{% trans 'Word Forms: Nouns' %}</td>
                 <td>{% trans 'Number:' %}</td>
                 <td>{{ administration.id|get_summary_data:"Word Forms 1 Nouns" }}</td>
                 <td>({% trans 'of' %} 5)</td>
             </tr>
             <tr>
-                <td>{% trans 'Word Forms 2: Verbs' %}</td>
+                <td>{% trans 'Word Forms: Verbs' %}</td>
                 <td>{% trans 'Number:' %}</td>
-                <td>{{ administration.id|get_summary_data:"Word Forms 2 Verbs" }}</td>
+                <td>{{ administration.id|get_summary_data:"Word Forms 1 Verbs" }}</td>
                 <td>({% trans 'of' %} 20)</td>
             </tr>
             <tr>
-                <td>{% trans 'Word Forms 2: Nouns' %}</td>
+                <td>{% trans 'Word Endings: Nouns' %}</td>
                 <td>{% trans 'Number:' %}</td>
                 <td>{{ administration.id|get_summary_data:"Word Forms 2 Nouns" }}</td>
                 <td>({% trans 'of' %} 14)</td>
             </tr>
             <tr>
-                <td>{% trans 'Word Forms 2: Verbs' %}</td>
+                <td>{% trans 'Word Endinings: Verbs' %}</td>
                 <td>{% trans 'Number:' %}</td>
                 <td>{{ administration.id|get_summary_data:"Word Forms 2 Verbs" }}</td>
                 <td>({% trans 'of' %} 31)</td>
@@ -161,12 +161,12 @@
             <tr>
                 <td></td>
                 <td>{% trans 'Percentile (by sex):' %}</td>
-                <td colspan="2">{% get_adjusted_summary_date administration.id "Total Produced Percentile-sex" %}%</td>
+                <td colspan="2">{% get_adjusted_summary_date administration.id "Complexity Percentile-sex" %}%</td>
             </tr>
             <tr>
                 <td></td>
                 <td>{% trans 'Percentile (both sexes):' %}</td>
-                <td colspan="2">{% get_adjusted_summary_date administration.id "Total Produced Percentile-sex" %}%</td>
+                <td colspan="2">{% get_adjusted_summary_date administration.id "Complexity Percentile-both" %}%</td>
             </tr>
             
         </table>
