@@ -11,9 +11,42 @@ from django.utils.translation import gettext_lazy as _
 
 from webcdi.utils import get_linux_ec2_private_ip, is_true
 
-DEBUG = bool(os.environ.get("DEBUG", False))
-# DEBUG=False
+DEBUG = is_true(os.environ.get("DEBUG", False))
 TEMPLATE_DEBUG = False
+
+
+def _parse_env_list(value):
+    """Parse a bracketed list env var.
+
+    Accepts either a quoted Python literal ('["a", "b"]') or the unquoted
+    shorthand used in EB configs ('[a,b]'), in which case quotes are added
+    and whitespace stripped before evaluation.
+    """
+    if '"' not in value:
+        value = (
+            value.replace("[", '["')
+            .replace("]", '"]')
+            .replace(",", '","')
+            .replace(" ", "")
+        )
+    return ast.literal_eval(value)
+
+
+def _parse_env_admins(value):
+    """Parse the ADMINS env var: a list of (name, email) tuples.
+
+    Accepts a quoted Python literal or the unquoted shorthand
+    ('[(Name,email@example.com)]'); the shorthand strips all whitespace,
+    including inside names.
+    """
+    if '"' not in value:
+        value = (
+            value.replace("(", '("')
+            .replace(")", '")')
+            .replace(",", '","')
+            .replace(" ", "")
+        )
+    return ast.literal_eval(value)
 
 
 def get_secret(secret_name, region_name="us-west-2"):
@@ -47,17 +80,7 @@ if AWS_INSTANCE:
     AWS_STORAGE_BUCKET_NAME = os.environ["AWS_STORAGE_BUCKET_NAME"]
     DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
-if '"' not in os.environ["ALLOWED_HOSTS"]:
-    TEMP_ALLOWED_HOSTS = os.environ["ALLOWED_HOSTS"]
-    ALLOWED_HOSTS = (
-        TEMP_ALLOWED_HOSTS.replace("[", '["')
-        .replace("]", '"]')
-        .replace(",", '","')
-        .replace(" ", "")
-    )
-    ALLOWED_HOSTS = ast.literal_eval(ALLOWED_HOSTS)
-else:
-    ALLOWED_HOSTS = ast.literal_eval(os.environ["ALLOWED_HOSTS"])
+ALLOWED_HOSTS = _parse_env_list(os.environ["ALLOWED_HOSTS"])
 if AWS_INSTANCE:
     ALLOWED_HOSTS += [
         "ec2-52-88-52-34.us-west-2.compute.amazonaws.com",
@@ -77,17 +100,7 @@ for IP in IPS_TO_ADD:
 for IP in list(NEW_IPS):
     ALLOWED_HOSTS.append(IP)
 
-if '"' not in os.environ["ADMINS"]:
-    TEMP_ADMINS = os.environ["ADMINS"]
-    ADMINS = (
-        TEMP_ADMINS.replace("(", '("')
-        .replace(")", '")')
-        .replace(",", '","')
-        .replace(" ", "")
-    )
-    ADMINS = ast.literal_eval(ADMINS)
-else:
-    ADMINS = ast.literal_eval(os.environ["ADMINS"])
+ADMINS = _parse_env_admins(os.environ["ADMINS"])
 
 DJANGO_SERVER_TYPE = os.environ.get("DJANGO_SERVER_TYPE", "DEV")  # DEV or PROD
 
@@ -534,17 +547,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 TRUSTED_ORIGINS = os.environ.get("TRUSTED_ORIGINS", False)
 if TRUSTED_ORIGINS:
-    if '"' not in os.environ["TRUSTED_ORIGINS"]:
-        TRUSTED_ORIGINS = os.environ["TRUSTED_ORIGINS"]
-        CSRF_TRUSTED_ORIGINS = (
-            TRUSTED_ORIGINS.replace("[", '["')
-            .replace("]", '"]')
-            .replace(",", '","')
-            .replace(" ", "")
-        )
-        CSRF_TRUSTED_ORIGINS = ast.literal_eval(CSRF_TRUSTED_ORIGINS)
-    else:
-        CSRF_TRUSTED_ORIGINS = ast.literal_eval(os.environ["TRUSTED_ORIGINS"])
+    CSRF_TRUSTED_ORIGINS = _parse_env_list(TRUSTED_ORIGINS)
 
 CAT_LANG_DICT = {
     "en": "EN",
