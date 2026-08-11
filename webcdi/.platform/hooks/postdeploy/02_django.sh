@@ -2,6 +2,8 @@
 
 source "$PYTHONPATH/activate" && {
     # migrate
+
+    python ./manage.py update_english_ws_scoring;
     python ./manage.py migrate --noinput;
     python ./manage.py collectstatic --noinput;
     python ./manage.py 01_populate_instrument_family;
@@ -11,6 +13,7 @@ source "$PYTHONPATH/activate" && {
     python ./manage.py 04_populate_benchmark;
     python ./manage.py 05_populate_choices;
     python ./manage.py 06_populate_items;
-    #python ./manage.py 07_populate_cat_items;
-
+    
+    python ./manage.py update_summary_data -l English -f WS;
+    python ./manage.py update_summary_data -l "Canadian English" -f WS;
 }

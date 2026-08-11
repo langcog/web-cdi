@@ -8,6 +8,7 @@ docker-dev:
 	docker-compose up
 
 docker-db-populate:
+	docker-compose exec -it web ./manage.py update_english_ws_scoring
 	docker-compose exec -it web ./manage.py migrate
 	docker-compose exec -it web ./manage.py collectstatic --noinput
 	docker-compose exec -it web ./manage.py 01_populate_instrument_family
@@ -17,7 +18,7 @@ docker-db-populate:
 	docker-compose exec -it web ./manage.py 04_populate_benchmark
 	docker-compose exec -it web ./manage.py 05_populate_choices
 	docker-compose exec -it web ./manage.py 06_populate_items
-	
+
 docker-test:
 	docker-compose exec web coverage run manage.py test --exclude=selenium
 
@@ -43,8 +44,8 @@ docker-cleanup:
 docker-makemessages:
 	docker-compose exec web ./manage.py makemessages -all
 	
-make dev-deploy::
+dev-deploy::
 	eb deploy webcdi-dev-django4
 
-make live-deploy::
+live-deploy::
 	eb deploy webcdi-env
