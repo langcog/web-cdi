@@ -32,7 +32,7 @@ class CommandsTestCase(TestCase):
         call_command("03_populate_scoring", *args, **opts)
 
         scores = InstrumentScore.objects.all()
-        self.assertEqual(len(scores), 194)
+        self.assertEqual(len(scores), 201)
 
     def test_populate_benchmark(self):
         args = []
@@ -43,7 +43,7 @@ class CommandsTestCase(TestCase):
         call_command("04_populate_benchmark", *args, **opts)
 
         items = Benchmark.objects.all()
-        self.assertEqual(len(items), 27586)
+        self.assertEqual(len(items), 47494)
 
     def test_populate_choices(self):
         args = []
