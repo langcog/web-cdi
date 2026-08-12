@@ -25,6 +25,7 @@ __pycache__/
 */.vscode/
 
 .env*
+!.env.example
 
 .coverage
 .vscode/*
@@ -34,3 +35,6 @@ __pycache__/
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
 
+
+# in-browser CAT engine build deps
+webcdi/cdi_forms/cat_forms/jscat/node_modules/

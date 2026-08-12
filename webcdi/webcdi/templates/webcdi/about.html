@@ -1,0 +1,62 @@
+{% extends 'researcher_UI/base.html' %}
+{% load static %}
+
+{% block title %}About Web-CDI{% endblock %}
+
+{% block main %}
+    <h1 style="font-size:26px; margin:18px 0 16px;">About Web-CDI</h1>
+
+    <div class="row" style="row-gap:16px;">
+        <div class="col-lg-7">
+            <div class="wcdi-card-panel">
+                <h2>What is Web-CDI?</h2>
+                <p>
+                    Web-CDI is the online administration system for the MacArthur-Bates
+                    Communicative Development Inventories (CDIs), parent-report instruments
+                    for measuring young children's early language development. The system is
+                    supported by the CDI Advisory Board and housed at Stanford University.
+                </p>
+                <p>
+                    All data stored in Web-CDI are de-identified: no information about
+                    individual respondents' identities is stored in the database, including
+                    child date of birth. Users are strongly encouraged to share their
+                    de-identified data with <a href="http://wordbank.stanford.edu" target="_blank">Wordbank</a>,
+                    an open database of CDI administrations across many languages.
+                </p>
+                <h2 style="margin-top:20px;">Citing Web-CDI</h2>
+                <p style="margin-bottom:0;">
+                    See deMayo et al. (2021) <em>Language Development Research</em> for more
+                    information about Web-CDI, and Kachergis et al. (2022)
+                    <em>Journal of Speech, Language &amp; Hearing Research</em> for the CDI-CAT.
+                    More about the English CDI instruments is in the MacArthur-Bates User's
+                    Guide and Technical Manual, 3rd Edition (Marchman, Dale, &amp; Fenson, 2023).
+                </p>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="wcdi-card-panel" style="margin-bottom:16px;">
+                <h2>Support</h2>
+                <p>
+                    Technical difficulties with the site? Contact the Web-CDI team at
+                    <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>.
+                </p>
+                <p style="margin-bottom:0;">
+                    The English long forms, Mexican Spanish long forms, English CDI III, and
+                    the English/Spanish CDI-CAT require an access code from
+                    <a href="https://brookespublishing.com/webcdi/" target="_blank">Brookes Publishing</a>.
+                    For problems with an access code, contact the
+                    <a href="https://support.brookespublishing.com/" target="_blank">Brookes support team</a>.
+                </p>
+            </div>
+            <div class="wcdi-card-panel">
+                <h2>Links</h2>
+                <ul style="margin-bottom:0; padding-left:20px;">
+                    <li><a href="{% url 'documentation' %}">Web-CDI documentation</a></li>
+                    <li><a href="{{ MORE_INFO_LINK }}" target="_blank">About the MB-CDI instruments</a></li>
+                    <li><a href="http://wordbank.stanford.edu" target="_blank">Wordbank</a></li>
+                    <li><a href="https://github.com/langcog/web-cdi" target="_blank">Web-CDI on GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

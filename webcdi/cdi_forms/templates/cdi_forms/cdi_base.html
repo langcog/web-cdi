@@ -3,6 +3,7 @@
 <html {% if language_code %}lang="{{ language_code }}"{% else %}lang="en"{% endif %}>
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     {% load i18n %}
     {% load static %}
 
@@ -46,6 +47,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     
     <link rel='stylesheet' href="{% static 'cdi_forms/extra_mobile.css' %}">
+    <link rel='stylesheet' href="{% static 'cdi_forms/webcdi-theme.css' %}">
 
     <script>
     function countChar(val) {
@@ -279,5 +281,6 @@ $('#cdi_form').validate()
 </script>
 {% block scripts %}
 {% endblock %}
+{% include "webcdi/footer.html" %}
 </body>
 </html>

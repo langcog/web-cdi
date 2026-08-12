@@ -1,0 +1,16 @@
+{
+  "name": "webcdi-cat",
+  "private": true,
+  "description": "In-browser CAT engine for Web-CDI (wraps @bdelab/jscat). Build with `npm run build`; validate the built bundle with `npm test`.",
+  "type": "module",
+  "scripts": {
+    "build": "esbuild engine.mjs --bundle --format=iife --global-name=WebCDICat --minify --outfile=../../static/cdi_forms/cat/webcdi-cat.js && cp ../../static/cdi_forms/cat/webcdi-cat.js ../../../static/cdi_forms/cat/webcdi-cat.js",
+    "test": "node test-engine.mjs"
+  },
+  "dependencies": {
+    "@bdelab/jscat": "^5.3.2"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.0"
+  }
+}
