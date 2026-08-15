@@ -84,10 +84,11 @@ def download_cdi_format(request, study_obj, administrations=None):
     new_answers = melted_answers
 
     def my_fun(arg):
+        # cells must be str: the replace() maps below match on "nan",
+        # "produces", etc., and pandas 3 str-dtype columns reject bytes
         if isinstance(arg, str):
-            return arg.encode("utf-8")
-        else:
-            return str(arg)
+            return arg
+        return str(arg)
 
     new_answers.iloc[:, 1:] = new_answers.iloc[:, 1:].map(my_fun)
 

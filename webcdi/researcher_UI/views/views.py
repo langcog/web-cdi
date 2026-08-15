@@ -2,6 +2,7 @@ import json
 from typing import Any, Dict
 
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Count, Q
 from django.http import HttpResponse
 from django.http.response import HttpResponse
 from django.shortcuts import redirect
@@ -21,9 +22,19 @@ class Console(LoginRequiredMixin, generic.ListView):
     template_name = "researcher_UI/interface.html"
 
     def get_context_data(self, *args, **kwargs):
-        studies = Study.objects.filter(
-            researcher=self.request.user, active=True
-        ).order_by("id")
+        studies = (
+            Study.objects.filter(researcher=self.request.user, active=True)
+            .annotate(
+                n_admins=Count("administration", distinct=True),
+                n_completed=Count(
+                    "administration",
+                    filter=Q(administration__completed=True),
+                    distinct=True,
+                ),
+                n_children=Count("administration__subject_id", distinct=True),
+            )
+            .order_by("id")
+        )
         context = {"studies": studies}
         return context
 

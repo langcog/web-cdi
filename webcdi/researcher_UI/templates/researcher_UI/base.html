@@ -43,7 +43,7 @@
 
   <body>
 
-    <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+    <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
         <a class="navbar-brand" href="{% url 'researcher_ui:console' %}">
             <img width="150px"  src="{% static 'researcher_UI/images/logo_black.png' %}">
         </a>
@@ -56,24 +56,34 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="{% url 'researcher_ui:console' %}">Home <span class="sr-only">(current)</span></a>
                 </li>
+                {% if request.user.is_authenticated and request.user.researcher %}
                 <li class="nav-item">
-                    <a class="nav-link" target="_blank" href="{% static '/webcdi/pdf/webCDIManual.pdf' %}">Help</a>
+                    <a class="nav-link" href="{% url 'researcher_ui:researcher_add_instruments' pk=request.user.researcher.pk %}">Instruments</a>
                 </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'documentation' %}">Documentation</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'about' %}">About</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
                 {% if RENEWAL_CODES %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Renewals Due</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown01">
-                            {% for code in RENEWAL_CODES %}    
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown01">
+                            {% for code in RENEWAL_CODES %}
                             <a class="dropdown-item" href="{% url 'brookes:enter_codes' code.instrument_family.pk %}">{{ code.instrument_family }}</a>
                             {% endfor %}
                         </div>
-                        
+
                     </li>
                 {% endif %}
                 {% if request.user.is_authenticated %}
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ request.user.username }}</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdown02">
+                    <a class="nav-link dropdown-toggle" href="" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="wcdi-avatar">{{ request.user.username|first }}</span>{{ request.user.username }}</a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown02">
                         {% if request.user.is_staff %}
                             <a class="dropdown-item" href="{% url 'admin:index' %}">Admin</a>
                         {% endif %}
@@ -86,7 +96,9 @@
         </div>
     </nav>
 
-    <main role="main" style="margin-top:100px">
+    {% block page_header %}{% endblock %}
+
+    <main role="main" style="margin-top:24px">
         {% if messages %}
             {% for message in messages %}
             <div class="container-fluid p-0">
@@ -102,6 +114,8 @@
         {% block main %} 
         {% endblock %}
     </main><!-- /.container -->
+
+    {% include "webcdi/footer.html" %}
 
     {% block scripts %}
     {% endblock %}

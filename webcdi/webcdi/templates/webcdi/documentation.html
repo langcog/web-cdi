@@ -1,0 +1,368 @@
+{% extends 'researcher_UI/base.html' %}
+{% load static %}
+
+{% block title %}Documentation{% endblock %}
+
+{% block main %}
+    <h1 style="font-size:26px; margin:18px 0 4px;">Web-CDI documentation</h1>
+    <p style="margin-bottom:16px;">A guide for researchers administering the MacArthur-Bates Communicative Development Inventories (CDIs) online.
+        <a href="{% static 'webcdi/pdf/webCDIManual.pdf' %}">PDF version</a></p>
+
+    <div class="wcdi-card-panel" style="margin-bottom:16px">
+        <h2>Contents</h2>
+        <ul>
+            <li><a href="#overview">Overview &amp; data sharing (Wordbank)</a></li>
+            <li><a href="#registering">Registering for an account</a></li>
+            <li><a href="#instruments">Selecting instruments</a></li>
+            <li><a href="#groups">Creating an administration group (study) and its options</a></li>
+            <li><a href="#participants">Adding participants</a></li>
+            <li><a href="#tracking">Tracking completion</a></li>
+            <li><a href="#downloading">Downloading data &amp; scoring</a></li>
+            <li><a href="#respondents">What respondents see</a></li>
+            <li><a href="#emails">Sample emails to participants</a></li>
+        </ul>
+    </div>
+
+    <div class="wcdi-card-panel" style="margin-bottom:16px" id="overview">
+        <h2>Overview &amp; data sharing (Wordbank)</h2>
+        <p>Web-CDI is an online version of the MacArthur-Bates Communicative Development Inventories (CDIs).
+            The system is supported by the CDI Advisory Board and is housed at Stanford University.
+            All of the data stored in Web-CDI are de-identified. No information about individual respondents'
+            identities is stored in the database, including child date of birth.</p>
+        <p>In exchange for using Web-CDI, users are strongly encouraged to share the de-identified data with
+            <a href="http://wordbank.stanford.edu">Wordbank</a>, an open database of CDI instruments in many
+            different languages. By collecting data using Web-CDI, you are contributing to our ongoing efforts
+            to create large databases of CDIs from many families learning many different languages.</p>
+        <p>The English long forms (American/Canadian English WG and WS), Mexican Spanish long forms (WG and WS),
+            English CDI III, and English/Mexican Spanish CDI-CAT are distributed through Brookes Publishing Company
+            and require an access code that can be purchased at
+            <a href="https://brookespublishing.com/product/cdi">https://brookespublishing.com/product/cdi</a>.
+            We understand that some users will not be able to share their data. Users who have purchased an access
+            code will be asked to determine whether they want to share their data with Wordbank.</p>
+        <p>More information about the English CDI suite of instruments can be found in the MacArthur-Bates User's
+            Guide and Technical Manual, 3rd Edition (Marchman, Dale, and Fenson, 2023), also available from Brookes
+            Publishing Company. See deMayo et al. (2021), <em>Language Development Research</em>, for more information
+            about Web-CDI; see Kachergis et al. (2022), <em>Journal of Speech, Language &amp; Hearing Research</em>,
+            for more information about CDI-CAT.</p>
+    </div>
+
+    <div class="wcdi-card-panel" style="margin-bottom:16px" id="registering">
+        <h2>Registering for an account</h2>
+        <p>You must first register for an account. On the main page, click on the <strong>Register</strong> button
+            and complete the registration page. Fill in your full name, email address, position, and institution.
+            You will receive an email sent to that address; click on the email validation link to finalize your account.
+            Please check your spam and junk folders if you do not get the email within 5 minutes.
+            In the future, you will simply need to enter your credentials on the <strong>Login</strong> page.</p>
+    </div>
+
+    <div class="wcdi-card-panel" style="margin-bottom:16px" id="instruments">
+        <h2>Selecting instruments</h2>
+        <p>In <strong>My CDI Forms</strong> (reachable from the console), you must indicate which Web-CDI instruments
+            you would like to have available to you. Some of the instruments (e.g., American/Canadian English long forms)
+            require an authentication code that must be purchased from Brookes Publishing Co.; other instruments are
+            available to you free of charge. Click on the instruments that you wish to use.</p>
+    </div>
+
+    <div class="wcdi-card-panel" style="margin-bottom:16px" id="groups">
+        <h2>Creating an administration group (study) and its options</h2>
+        <p>Once you have selected your instruments, you can create a new administration group (study) using the
+            <strong>Administration Group Set Up</strong> dialog. Indicate the name of the study and then use the
+            dropdown menu to indicate the instrument that is associated with that study. Each study can be associated
+            with only one instrument.</p>
+        <p class="alert alert-info">Tip: In some cases, you might be administering multiple instruments to a single
+            participant. For example, a child might receive the American English Words &amp; Gestures form when they
+            are 15 months, but then a Words &amp; Sentences form when they are 24 months. Each of those administrations
+            is housed within Web-CDI in different studies. However, you can track your participants across studies when
+            you download the data, because each child is given a unique ID that you determine. It is recommended that
+            your study names include the name of the instrument for ease of tracking, e.g., "My study WG" and
+            "My study WS".</p>
+        <p><strong>Note on data sharing options:</strong> While we encourage all users to make their data available
+            for sharing, users of chargeable instruments (e.g., the English (American) long forms) can, if they wish,
+            opt out of sharing their data at the study level. This means that all of the administrations in this study
+            would NOT be available for broader sharing with Wordbank. In this case, you can also opt out of collecting
+            the required demographic information.</p>
+        <p>There are several other choices in the Administration Group Set Up dialog:</p>
+        <ul>
+            <li><strong>Age range:</strong> The default age range for the selected instrument will be automatically
+                populated (e.g., 8 to 18 months for the American English Words &amp; Gestures form). When a participant
+                completes the date of birth, the child's age will automatically populate into the age field. If the
+                child is outside of the age window set for that instrument, the respondent will not be allowed to
+                continue. Adjust the slider to allow participants to complete your instrument who are outside the
+                default age range.
+                <p class="alert alert-info" style="margin-top:8px">Tip: If you know that your participants will be
+                    near the edges of the default age ranges, go ahead and broaden the range, e.g., change the upper
+                    end of the W&amp;G age range to 20 months, even though most of your participants may fall within
+                    the default age range. This ensures that all of your respondents will be allowed to complete the
+                    CDI without getting an error.</p></li>
+            <li><strong>Demographic:</strong> The default demographic option requires respondents to complete all of
+                the demographic questions prior to completing the CDI. Other options are available which ask some
+                questions at the beginning and some after the CDI is completed. Please contact the Web-CDI team if
+                you think that you might want to hear more about these options.</li>
+            <li><strong>Days before expiration:</strong> This option allows you to set the number of days that the
+                links are active. The clock starts when you create the link. The default time is 14 days, which allows
+                the respondent to complete the link in a reasonable time after it is created. If the link has expired,
+                the respondent will get an error message to contact the researcher. We have found that 14 days is the
+                optimum time limit for most use-cases.
+                <p class="alert alert-info" style="margin-top:8px">Tip: Remember that the clock starts when you create
+                    the link in the participant interface (described below), so it is best to add a participant and
+                    create the link just prior to the point when you will be sending the link to the respondent.</p></li>
+            <li><strong>Measurement units:</strong> Choose pounds/ounces vs. grams depending on your data collection
+                context. Note that all participants within a single study must use the same measurement units.</li>
+            <li><strong>Minimum time to complete:</strong> This is the amount of time that a respondent must spend
+                when completing the CDI. Note that in order to submit the CDI, the respondent must click on every page
+                and must do so in at least the allotted time. They will not get the submit button at the end of the
+                form until that time has elapsed. By setting the default at 6 minutes, which is very short for
+                completing the long forms, we can discourage people from racing through the form and later exclude
+                responses that are completed in an unreasonably short period of time. See discussion of this issue in
+                deMayo et al. (2021).
+                <p class="alert alert-info" style="margin-top:8px">Tip: If you are using the short forms, you should
+                    change this option to a smaller number, e.g., 2 minutes.</p></li>
+            <li><strong>Opening dialog box:</strong> Anything that you put in this box will be presented to the
+                respondents when they first click on the link. This box could be used for a consent form/waiver of
+                documentation. For example, when seeing the opening dialog box, the respondent must click past this
+                document to continue. By doing so, the respondent consents to participate, but has waived the option
+                of receiving the documentation of their consent. How you use this box will depend on your particular
+                situation and what your particular IRB requires. If your participants must consent to complete the CDI
+                within Web-CDI, then you can use this box to place your consent form and to obtain consent. However,
+                if you are receiving consent for completion of the CDI through a consent form completed at some other
+                time (e.g., when they come into your laboratory), then you can leave this box blank.
+                <p class="alert alert-info" style="margin-top:8px">Tip: Because this box is the first thing that the
+                    respondent sees when clicking on the link, you can be creative about what you put in this box.
+                    That is, you could choose to use this box to put a cute picture, a reminder of the payment, your
+                    contact information, etc.</p></li>
+            <li><strong>Prefill data for longitudinal participants:</strong> This option allows you to populate
+                responses from the demographic questionnaire across administrations for the same participant (based on
+                ID). In all cases, it is recommended that respondents be asked to review their responses from one
+                administration to the other. This is especially important for children who might be exposed to another
+                language at home or who might be receiving services.
+                <p class="alert alert-info" style="margin-top:8px">Tip: Note that for all administrations, respondents
+                    are required to re-enter who is filling out the form and child date of birth (to compute age).
+                    Child date of birth is never stored in the database and therefore cannot be populated from previous
+                    administrations.</p></li>
+            <li><strong>Amazon gift cards:</strong> Enter information here regarding making payments to respondents
+                with Amazon gift cards.</li>
+            <li><strong>Anonymous data collection:</strong> Use this option to indicate information necessary for
+                collecting data through social media sites.</li>
+            <li><strong>Show graph?</strong> After respondents complete the CDI, they are shown a graph of their
+                results and some statements regarding the words that they selected. Use this option to toggle off
+                this graph.</li>
+            <li><strong>Redirect options:</strong> This section asks you to provide information when you are linking
+                Web-CDI to other systems like RedCap, Lookit, etc. Please contact the Web-CDI team if you are
+                interested in receiving more detailed information about these options.</li>
+            <li><strong>End message:</strong> On the final splash page, respondents see the graph (above) and this
+                standard message. You have the option to add to this message or replace it altogether.</li>
+        </ul>
+        <p>Click save to save your study options. You may return to "Update Study" to change all of the options
+            except the instrument. Choose your study in the dropdown menu to see the participants in your study.</p>
+    </div>
+
+    <div class="wcdi-card-panel" style="margin-bottom:16px" id="participants">
+        <h2>Adding participants</h2>
+        <p>Click on "Add participants" to open the Participants dialog box. There are multiple options for adding
+            participants. The most typical use-case is to type in the list of participants in the New Subject IDs box,
+            e.g., 1111, 1112, 1113, etc. These IDs must be all numeric (i.e., no alpha). If you enter an ID twice, the
+            system will assume that it is the same individual and will assign multiple administrations to that ID.</p>
+        <p class="alert alert-info">Tip: You can also add additional administrations for a given ID by using the
+            "Re-Administer Participant" dialog box. Select the participant that you want and then click on the dialog
+            box. A new administration of that ID number will appear in your participant listing.</p>
+        <p>You can also autogenerate a list of IDs (e.g., if you are running several participants at a site on the
+            same day, such as a Children's Museum). You can also upload from a csv, or use a single-reusable link.
+            The single-reusable link is designed to be used with external platforms, e.g., Facebook. Please contact
+            the Web-CDI team for more information about using single-reusable links.</p>
+        <p class="alert alert-info">Tip: When you enter IDs into Web-CDI, these should be meaningful to you, as it is
+            the only way for you to track your participants within Web-CDI. You can also add additional information in
+            the Local Lab ID column, which does not have any constraints on the field type (e.g., it can contain
+            alphanumeric characters).</p>
+    </div>
+
+    <div class="wcdi-card-panel" style="margin-bottom:16px" id="tracking">
+        <h2>Tracking completion</h2>
+        <p>The resulting list of participants contains the administration number (e.g., 1st admin, 2nd admin, etc.),
+            the link that you send to respondents, local lab ID (if used), and other information about when the link
+            was created, when it was last modified, and when it will expire. The Xs indicate that the background form
+            or the CDI itself has not yet been completed by the respondent. You can use the information about when the
+            link was last modified to track whether a respondent has opened the link and started completing the CDI
+            form. When the CDIs have been completed by the respondents, the Xs will change to checkmarks. You may need
+            to refresh your page to see the checkmarks. A checkmark under the "Scored" column indicates that the
+            scores have been computed by the system and are ready for download.</p>
+        <p class="alert alert-info">Tip: Use the "Participant has opted out of broader sharing" option to indicate
+            that an individual participant has not given consent for data to be shared with Wordbank. In many cases,
+            an individual participant may opt in for study participation, but may opt out of sharing, even though your
+            study, in general, has opted in for sharing. You can indicate this by clicking on this option, but must do
+            so for every administration. This information will not propagate if a new administration is added with the
+            same subject ID.</p>
+    </div>
+
+    <div class="wcdi-card-panel" style="margin-bottom:16px" id="downloading">
+        <h2>Downloading data &amp; scoring</h2>
+        <p>After your respondents have completed their CDIs, you have several options for how to download their
+            responses and scores.</p>
+        <ul>
+            <li><strong>Download data (csv format):</strong> This option will download all of the respondents in your
+                database. The csv output will first have all of the basic metadata, the demographic responses, and
+                then all of the responses for each item. Lastly, the summary scores and corresponding percentiles
+                (by sex and for both sexes combined) will be provided.
+                <p class="alert alert-info" style="margin-top:8px">Tip: If the child's age in months is within the age
+                    window of the norming sample (e.g., 8&ndash;18 months for Words &amp; Gestures, 16&ndash;30 months
+                    for Words &amp; Sentences), the benchmark age will be the child's chronological age as indicated by
+                    the date of birth and date of test when the CDI was completed. However, if the child is outside the
+                    age range of the norming data, e.g., older than 30 months, the benchmark age will reflect the
+                    appropriate age in the norming data.</p></li>
+            <li><strong>Download data with adjusted benchmarks (csv format):</strong> If a caregiver indicated that a
+                child was born prior to their due date, the percentile scores will be based on an adjusted benchmark
+                age. For example, a 21-month-old child who was born 4 weeks early would have a benchmark age of 21
+                months, but an adjusted benchmark age of 20 months after correcting for degree of prematurity.</li>
+            <li><strong>Download Summary data (csv format):</strong> This option is the same as Download data but will
+                not provide individual item responses.</li>
+            <li><strong>Download Selected Data:</strong> Use this option to download data for only certain
+                participants. You must click the box to the left of the participant ID to activate this option. The
+                Download Selected Data option gives two additional outputs:
+                <ul>
+                    <li>The <strong>Clinical Report</strong> gives scores and percentiles for selected administrations
+                        in a friendly report format that is appropriate to share with the families or other
+                        professionals. This report is currently available for the English and Spanish long forms.</li>
+                    <li>The <strong>Selected Links</strong> option just downloads the links for the selected
+                        participants. This is useful for selecting individuals in a csv format for sending out emails
+                        to participants.</li>
+                </ul></li>
+        </ul>
+    </div>
+
+    <div class="wcdi-card-panel" style="margin-bottom:16px" id="respondents">
+        <h2>What respondents see</h2>
+        <p><strong>Sending out links:</strong> Copy and paste the links for each participant into an email. When the
+            participant clicks on the link, they will first see the opening dialog box (if used), and then some basic
+            instructions and the demographic questions. Note that the ages listed at the top of the form are the ages
+            that you selected in the study dialog box. See the <a href="#emails">example emails to respondents</a> at
+            the end of this document.</p>
+        <p>The general instructions ask respondents to complete the CDI when they have some time alone and give the
+            respondent a general idea of how long it will take to complete the form. The respondent can leave and
+            return to the link as many times as they wish, as long as the link has not expired.</p>
+        <p>The respondent must complete the Child's DOB field, and the age of the child (from today) will be
+            automatically populated (in whole months). The remaining demographic questions ask about the child's sex,
+            birth order, race and ethnicity, exposure to other languages, caregiver education, family income, and some
+            basic health information. If a respondent clicks yes on these questions, the question opens up so that the
+            respondent can provide additional information as appropriate.</p>
+        <p class="alert alert-info">Tip: As indicated above, if you have chosen the option to populate these responses
+            across administrations, please ask the respondents to double-check their previous responses as they might
+            have changed. This is especially important for questions about health history, caregiver perceptions of
+            developmental delay, and exposure to another language.</p>
+        <p>Once the respondent has completed the background demographic questions, the pictured instructions
+            appear.</p>
+        <p class="alert alert-info">Tip: It is strongly recommended that these instructions are reviewed for the
+            respondents (whenever possible) prior to them receiving the link to the CDI. While these instructions are
+            intended to stand on their own, the information in these instructions is more likely to be effective and
+            utilized by the respondents if the instructions are familiar to them prior to completing the forms. That
+            is, by the time the respondents see these picture instructions, they should be "old information." It is
+            also strongly recommended that any individual who is interfacing with the respondents be familiar with the
+            instructions so that they can answer any questions that might arise.</p>
+        <p>Next, the sections of the CDI appear, typically one section per screen. For example, the first section of
+            the vocabulary checklist on the Words &amp; Sentences form is Sound Effects, followed by Vehicles, etc.
+            When the respondent clicks on a response, a mark appears and the response changes color.</p>
+        <p>There is a page indicator that shows the respondent how many pages are in the form and that indicates
+            their progress.</p>
+        <p class="alert alert-info">Tip: Note that there is no requirement to click on any item on the form, only that
+            the respondent navigate to each page in at least the minimum time set in the study dialog. Recall that the
+            respondent will not see the "submit" button until they have reached the last page and have exceeded the
+            minimum time allotted.</p>
+        <p>After hitting the submit button, the respondent is asked to confirm, as no changes can be made to the form
+            after the form is submitted. The respondent is then shown the splash page and a graphic summary of their
+            responses. This graph is intended to provide a fun summary of their responses, but does not provide any
+            clinically-relevant information. You may toggle off the presentation of this graph in the study dialog.
+            You may also modify or add to the splash page. Respondents have the option to save their graph as a pdf
+            for printing or saving electronically (for displaying on the refrigerator, sharing with others, or putting
+            in the child's baby book or other records).</p>
+    </div>
+
+    <div class="wcdi-card-panel" style="margin-bottom:16px" id="emails">
+        <h2>Sample emails to participants</h2>
+        <p>Where the emails say "20&ndash;30 minutes," use that estimate for long forms; for short forms, use
+            5&ndash;10 minutes.</p>
+
+        <details style="margin-bottom:12px">
+            <summary><strong>Words &amp; Gestures &mdash; English</strong></summary>
+            <p>Dear Caregiver,</p>
+            <p>Thank you for your interest in our ______ study!</p>
+            <p>As we discussed, the next step is for you to complete our language questionnaire. Please complete the
+                questionnaire when you have at least 20&ndash;30 minutes of free time, for example, when your child is
+                sleeping. Don't worry if you need to take a break! You can come back to it as often as you like, but
+                please complete the form by __________ (date).</p>
+            <p>This questionnaire asks you to mark the words that you think your child "understands" or "understands
+                and says." There are many words listed on the form and your child may know only a few of them right
+                now. That is perfectly fine! The form also asks you about some gestures and activities that your child
+                may be able to do now.</p>
+            <p>As we discussed, click on "understands" if you think your child has a meaning for that word, but
+                doesn't say the word. Click on "understands and says" if your child says that word on their own and
+                knows something about what it means. Remember that "childlike" pronunciations are ok!! And so are
+                special words that you use in your family (e.g., "nana" instead of "grandma").</p>
+            <p>Please feel free to email or call us if you have any questions at _____________.</p>
+            <p>Click on the link below to begin!!</p>
+            <p>[INSERT LINK]</p>
+        </details>
+
+        <details style="margin-bottom:12px">
+            <summary><strong>Words &amp; Gestures &mdash; Spanish</strong></summary>
+            <p>Querido Padre,</p>
+            <p>&iexcl;Muchas gracias por su inter&eacute;s en participar en nuestro estudio de ______!</p>
+            <p>Como hemos discutido antes, su pr&oacute;ximo paso va a ser completar un cuestionario de idiomas.
+                Por favor complete el cuestionario cuando tenga por lo menos 20&ndash;30 minutos de tiempo libre.
+                Por ejemplo, cuando su hijo(a) est&eacute; durmiendo. &iexcl;No se preocupe si tiene que tomar un
+                descanso! Usted puede regresar al cuestionario a menudo como guste, pero por favor complete la forma
+                antes del ________ (date).</p>
+            <p>Este cuestionario le va a pedir marcar las palabras que usted piense que "entiende" o "entiende y dice"
+                su hijo(a). Hay muchas palabras en la forma y posiblemente su hijo(a) solamente sabe algunas ahorita.
+                &iexcl;Eso est&aacute; perfectamente bien! La forma tambi&eacute;n va a preguntar sobre gestos y
+                actividades que su hijo(a) posiblemente puede hacer ahorita.</p>
+            <p>Como hemos discutido, por favor solamente marque "entiende" si usted piensa que su hijo(a) entiende lo
+                que significa la palabra pero no lo dice. Marque "entiende y dice" solamente si su hijo(a) dice esa
+                palabra y sabe lo que significa. &iexcl;Recu&eacute;rdase que "pronunciaciones de ni&ntilde;o"
+                est&aacute;n bien! Y tambi&eacute;n palabras especiales que utilice su familia (por ejemplo "banana"
+                en lugar de "pl&aacute;tano").</p>
+            <p>Por favor m&aacute;ndenos un correo electr&oacute;nico o ll&aacute;menos si tiene alguna pregunta a
+                ______.</p>
+            <p>&iexcl;Haga clic al enlace por debajo!</p>
+            <p>[INSERT LINK]</p>
+        </details>
+
+        <details style="margin-bottom:12px">
+            <summary><strong>Words &amp; Sentences &mdash; English</strong></summary>
+            <p>Dear Caregiver,</p>
+            <p>Thank you for your interest in our ______ study!</p>
+            <p>As we discussed, the next step is for you to complete our language questionnaire. Please complete the
+                questionnaire when you have at least 20&ndash;30 minutes of free time, for example, when your child is
+                sleeping. Don't worry if you need to take a break! You can come back to it as often as you like, but
+                please complete the form by __________ (date).</p>
+            <p>This questionnaire asks you to mark the words that you think your child "understands and says." There
+                are many words listed on the form and your child may know only a few of them right now. That is
+                perfectly fine! The form also asks you about the kinds of sentences your child might be saying.</p>
+            <p>As we discussed, mark the bubble if your child says that word on their own and knows something about
+                what it means. Remember that "childlike" pronunciations are ok!! And so are special words that you use
+                in your family (e.g., "nana" instead of "grandma").</p>
+            <p>Please feel free to email or call us if you have any questions at _____________.</p>
+            <p>Click on the link below to begin!!</p>
+            <p>[INSERT LINK]</p>
+        </details>
+
+        <details style="margin-bottom:12px">
+            <summary><strong>Words &amp; Sentences &mdash; Spanish</strong></summary>
+            <p>Querido Padre,</p>
+            <p>&iexcl;Muchas gracias por su inter&eacute;s en participar en nuestro estudio de ______!</p>
+            <p>Como hemos discutido antes, su pr&oacute;ximo paso va a ser completar un cuestionario de idiomas.
+                Por favor complete el cuestionario cuando tenga por lo menos 20&ndash;30 minutos de tiempo libre.
+                Por ejemplo, cuando su hijo(a) est&eacute; durmiendo. &iexcl;No se preocupe si tiene que tomar un
+                descanso! Ud. puede regresar al cuestionario a menudo como guste, pero por favor complete la forma
+                antes del ________ (date).</p>
+            <p>Este cuestionario le va a pedir marcar las palabras que Ud. piense que "entiende y dice" su hijo(a).
+                Hay muchas palabras en la forma y posiblemente su hijo(a) solamente sabe algunas ahorita. &iexcl;Eso
+                est&aacute; perfectamente bien! La forma tambi&eacute;n va a preguntar sobre frases que su hijo(a)
+                posiblemente est&aacute; diciendo ahorita.</p>
+            <p>Como hemos discutido, por favor solamente marque la burbuja si su hijo(a) dice esa palabra o sabe lo
+                que significa. &iexcl;Recu&eacute;rdase que "pronunciaciones de ni&ntilde;o" est&aacute;n bien! Y
+                tambi&eacute;n palabras especiales que utilice su familia (por ejemplo "banana" en lugar de
+                "pl&aacute;tano"). Por favor m&aacute;ndenos un correo electr&oacute;nico o ll&aacute;menos si tiene
+                alguna pregunta a ______.</p>
+            <p>&iexcl;Haga clic al enlace por debajo!</p>
+            <p>[INSERT LINK]</p>
+        </details>
+    </div>
+{% endblock %}
