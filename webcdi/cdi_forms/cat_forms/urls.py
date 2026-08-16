@@ -31,4 +31,9 @@ urlpatterns = [
         views.AdministerAdministraionView.as_view(),
         name="administer_cat_form",
     ),
+    path(
+        "answer/<hash_id>/",
+        views.CatAnswerView.as_view(),
+        name="cat_answer",
+    ),
 ]
