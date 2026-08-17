@@ -1,33 +1,9 @@
-import re
-
 from django.conf import settings
 from django.core.exceptions import MiddlewareNotUsed
-from django.http import HttpResponsePermanentRedirect, HttpResponseRedirect
+from django.http import HttpResponsePermanentRedirect
 from django.urls import resolve
 from django.utils import translation
 from django.utils.deprecation import MiddlewareMixin
-from django.utils.http import url_has_allowed_host_and_scheme
-
-EXEMPT_URLS = [re.compile(settings.LOGIN_URL.lstrip("/"))]
-if hasattr(settings, "LOGIN_EXEMPT_URLS"):
-    EXEMPT_URLS += [re.compile(url) for url in settings.LOGIN_EXEMPT_URLS]
-
-
-class LoginRequiredMiddleware(MiddlewareMixin):
-    def process_request(self, request):
-        assert hasattr(request, "user"), "The Login Required Middleware"
-        if not request.user.is_authenticated:
-            path = request.path_info.lstrip("/")
-            if not any(m.match(path) for m in EXEMPT_URLS):
-                redirect_to = settings.LOGIN_URL
-                # 'next' variable to support redirection to attempted page after login
-                if len(path) > 0 and url_has_allowed_host_and_scheme(
-                    url=request.path_info, allowed_hosts=request.get_host()
-                ):
-                    redirect_to = f"{settings.LOGIN_URL}?next={request.path_info}"
-
-                return HttpResponseRedirect(redirect_to)
-
 
 class AdminLocaleMiddleware(MiddlewareMixin):
     def process_request(self, request):
