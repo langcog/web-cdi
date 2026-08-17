@@ -239,8 +239,6 @@ INSTALLED_APPS = (
     "localflavor",
     "django_countries",
     "webcdi",
-    "ckeditor",
-    "ckeditor_uploader",
     "brookes",
     "rangefilter",
 )
@@ -441,112 +439,6 @@ COUNTRIES_FIRST = ["US", "CA", "NL", "IL", "JP", "FR", "CH", "BE", "LU"]
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-CKEDITOR_UPLOAD_PATH = "ckeditor_uploads/"
-CKEDITOR_CONFIGS = {
-    "default": {
-        "toolbar": [
-            {
-                "name": "document",
-                "items": [
-                    "Source",
-                    "-",
-                    "Save",
-                    "NewPage",
-                    "Preview",
-                    "Print",
-                    "-",
-                    "Templates",
-                ],
-            },
-            {
-                "name": "clipboard",
-                "items": [
-                    "Cut",
-                    "Copy",
-                    "Paste",
-                    "PasteText",
-                    "PasteFromWord",
-                    "-",
-                    "Undo",
-                    "Redo",
-                ],
-            },
-            {"name": "editing", "items": ["Find", "Replace", "-", "SelectAll"]},
-            {
-                "name": "forms",
-                "items": [
-                    "Form",
-                    "Checkbox",
-                    "Radio",
-                    "TextField",
-                    "Textarea",
-                    "Select",
-                    "Button",
-                    "ImageButton",
-                    "HiddenField",
-                ],
-            },
-            "/",
-            {
-                "name": "basicstyles",
-                "items": [
-                    "Bold",
-                    "Italic",
-                    "Underline",
-                    "Strike",
-                    "Subscript",
-                    "Superscript",
-                    "-",
-                    "RemoveFormat",
-                ],
-            },
-            {
-                "name": "paragraph",
-                "items": [
-                    "NumberedList",
-                    "BulletedList",
-                    "-",
-                    "Outdent",
-                    "Indent",
-                    "-",
-                    "Blockquote",
-                    "CreateDiv",
-                    "-",
-                    "JustifyLeft",
-                    "JustifyCenter",
-                    "JustifyRight",
-                    "JustifyBlock",
-                    "-",
-                    "BidiLtr",
-                    "BidiRtl",
-                    "Language",
-                ],
-            },
-            {"name": "links", "items": ["Link", "Unlink", "Anchor"]},
-            {
-                "name": "insert",
-                "items": [
-                    "Image",
-                    "Flash",
-                    "Table",
-                    "HorizontalRule",
-                    "Smiley",
-                    "SpecialChar",
-                    "PageBreak",
-                    "Iframe",
-                ],
-            },
-            "/",
-            {"name": "styles", "items": ["Styles", "Format", "Font", "FontSize"]},
-            {"name": "colors", "items": ["TextColor", "BGColor"]},
-            {"name": "tools", "items": ["Maximize", "ShowBlocks"]},
-        ],
-        #'skin': 'moono',
-        #'toolbar': None,
-        "height": "100%",
-        "width": "100%",
-    }
-}
 
 AWS_QUERYSTRING_AUTH = False
 

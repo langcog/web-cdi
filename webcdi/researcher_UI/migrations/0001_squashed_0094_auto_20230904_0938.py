@@ -5,8 +5,6 @@ import json
 import os
 import string
 
-import ckeditor.fields
-import ckeditor_uploader.fields
 import django.core.validators
 import django.db.models.deletion
 from django.conf import settings
@@ -814,12 +812,12 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="study",
             name="waiver",
-            field=ckeditor.fields.RichTextField(blank=True),
+            field=models.TextField(blank=True),
         ),
         migrations.AlterField(
             model_name="study",
             name="waiver",
-            field=ckeditor_uploader.fields.RichTextUploadingField(blank=True),
+            field=models.TextField(blank=True),
         ),
         migrations.AlterField(
             model_name="administration",
@@ -1088,7 +1086,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="study",
             name="end_message_text",
-            field=ckeditor_uploader.fields.RichTextUploadingField(
+            field=models.TextField(
                 blank=True, null=True
             ),
         ),
@@ -1267,7 +1265,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="study",
             name="waiver",
-            field=ckeditor_uploader.fields.RichTextUploadingField(
+            field=models.TextField(
                 blank=True, verbose_name="Opening Dialog Box"
             ),
         ),
