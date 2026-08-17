@@ -1,6 +1,7 @@
 import logging
 
 import pandas as pd
+from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q
 
 from researcher_UI.models import Benchmark
@@ -26,7 +27,7 @@ def get_pd_norms(study_obj, administrations, adjusted, answer_rows):
 
             try:
                 age = obj.backgroundinfo.age
-            except:
+            except ObjectDoesNotExist:
                 continue
             if adjusted:
                 logger.debug(f"Born on due date: {obj.backgroundinfo.born_on_due_date}")
@@ -81,7 +82,7 @@ def get_pd_norms(study_obj, administrations, adjusted, answer_rows):
                             )
             try:
                 logger.debug(f"Est Theta: {answer['est_theta']} ... Raw Score: {row['est_theta_percentile']} ... Sex: {row['est_theta_percentile_sex']}")
-            except:
+            except KeyError:
                 pass
                     
             if "est_theta_percentile" in row:

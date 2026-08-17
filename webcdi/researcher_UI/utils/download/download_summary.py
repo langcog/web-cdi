@@ -77,7 +77,7 @@ def download_summary(request, study_obj, administrations=None):
         background_answers = pd.merge(
             new_background, melted_scores, how="outer", on="administration_id"
         )
-    except:
+    except KeyError:
         background_answers = pd.DataFrame(
             columns=list(new_background) + list(melted_scores)
         )
