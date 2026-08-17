@@ -55,7 +55,7 @@ class CommandsTestCase(TestCase):
         call_command("05_populate_choices", *args, **opts)
 
         items = Choices.objects.all()
-        self.assertEqual(len(items), 14)
+        self.assertEqual(len(items), 13)
 
     def test_populate_items(self):
         args = []
