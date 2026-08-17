@@ -1,0 +1,9 @@
+# Keep the build context small. None of these are needed to build the image
+# (it pip-installs from webcdi/requirements*.txt), and at runtime docker-compose
+# masks /app with the ./webcdi bind mount, so the copied tree is throwaway.
+.git
+**/node_modules
+**/__pycache__
+*.pyc
+.env
+webcdi/.elasticbeanstalk

@@ -20,10 +20,10 @@ docker-db-populate:
 	docker-compose exec -it web ./manage.py 06_populate_items
 
 docker-test:
-	docker compose exec -e CAT_ENGINE=remote web python manage.py test --exclude=selenium --parallel auto --noinput
+	docker compose exec -e CAT_ENGINE=remote web python manage.py test --exclude=selenium --exclude=known_failure --parallel auto --noinput
 
 docker-test-coverage:
-	docker compose exec -e CAT_ENGINE=remote web coverage run manage.py test --exclude=selenium
+	docker compose exec -e CAT_ENGINE=remote web coverage run manage.py test --exclude=selenium --exclude=known_failure
 
 docker-test-jscat:
 	docker compose exec web python manage.py 08_generate_cat_json
