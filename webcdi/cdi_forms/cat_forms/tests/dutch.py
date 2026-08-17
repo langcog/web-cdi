@@ -5,7 +5,7 @@ import os
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.management import call_command
-from django.test import TestCase, tag
+from django.test import TestCase, override_settings, tag
 from django.urls import reverse
 from django.utils import timezone
 
@@ -13,6 +13,10 @@ from cdi_forms.cat_forms.forms import CatItemForm
 from cdi_forms.models import BackgroundInfo
 from researcher_UI.models import Administration, Instrument, Study
 from researcher_UI.tests.utils import random_password
+from cdi_forms.cat_forms.tests.cat_api_mock import (
+    install_sequence_api,
+    install_start_api,
+)
 
 
 def csv_reader(utf8_data, dialect=csv.excel, **kwargs):
@@ -28,6 +32,7 @@ def make_boolean(text):
 
 
 @tag("cat", "dutch")
+@override_settings(CAT_ENGINE="remote")
 class CATDutchAdministrationDataItemTest(TestCase):
     fixtures = [
         "researcher_UI/fixtures/researcher_UI_test_fixtures.json",
@@ -73,6 +78,7 @@ class CATDutchAdministrationDataItemTest(TestCase):
         )
 
     def start_values(self, file_name):
+        install_start_api(self, file_name)
         for age in range(12, 37):
             # read csv, and split on "," the line
             csv_file = csv.reader(open(os.path.realpath(file_name), "r"), delimiter=",")
@@ -94,6 +100,7 @@ class CATDutchAdministrationDataItemTest(TestCase):
             )
 
     def sequence_test(self, file_name):
+        install_sequence_api(self, file_name)
         response = self.client.get(self.url)
         contents = list(
             csv_reader(
@@ -137,17 +144,17 @@ class CATDutchAdministrationDataItemTest(TestCase):
                     float("{:.4f}".format(float(row[col_names.index("theta")]))),
                 )
 
-    def test_spanish_start_values(self):
+    def test_dutch_start_values(self):
         self.start_values(
             f"{settings.BASE_DIR}/cdi_forms/cat_forms/tests/test_data/dutch_start.csv"
         )
 
-    def test_spanish_seq_1(self):
+    def test_dutch_seq_1(self):
         self.sequence_test(
             f"{settings.BASE_DIR}/cdi_forms/cat_forms/tests/test_data/dutch_sequence_1.csv"
         )
 
-    def test_spanish_seq_2(self):
+    def test_dutch_seq_2(self):
         self.backgroundinfo.age = 28
         self.backgroundinfo.save()
         self.sequence_test(

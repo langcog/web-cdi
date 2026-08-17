@@ -1,11 +1,10 @@
 import csv
 import datetime
 import os
-from unittest import skip
 
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.test import TestCase, tag
+from django.test import TestCase, override_settings, tag
 from django.urls import reverse
 from django.utils import timezone
 
@@ -13,6 +12,10 @@ from cdi_forms.cat_forms.forms import CatItemForm
 from cdi_forms.models import BackgroundInfo
 from researcher_UI.models import Administration, Instrument, Study
 from researcher_UI.tests.utils import random_password
+from cdi_forms.cat_forms.tests.cat_api_mock import (
+    install_sequence_api,
+    install_start_api,
+)
 
 
 def csv_reader(utf8_data, dialect=csv.excel, **kwargs):
@@ -28,6 +31,7 @@ def make_boolean(text):
 
 
 @tag("cat")
+@override_settings(CAT_ENGINE="remote")
 class CATSpanishAdministrationDataItemTest(TestCase):
     fixtures = [
         "researcher_UI/fixtures/researcher_UI_test_fixtures.json",
@@ -69,6 +73,7 @@ class CATSpanishAdministrationDataItemTest(TestCase):
         )
 
     def start_values(self, file_name):
+        install_start_api(self, file_name)
         for age in range(12, 37):
             # read csv, and split on "," the line
             csv_file = csv.reader(open(os.path.realpath(file_name), "r"), delimiter=",")
@@ -86,6 +91,7 @@ class CATSpanishAdministrationDataItemTest(TestCase):
             self.assertContains(response, f"¿Su hijo/a dice ... {word}?")
 
     def sequence_test(self, file_name):
+        install_sequence_api(self, file_name)
         response = self.client.get(self.url)
 
         contents = list(
@@ -133,11 +139,6 @@ class CATSpanishAdministrationDataItemTest(TestCase):
             f"{settings.BASE_DIR}/cdi_forms/cat_forms/tests/test_data/spanish_start.csv"
         )
 
-    @skip(
-        "Recorded sequence predates the parameter set on the deployed CAT API "
-        "(live API now returns pre-rename item names like 'bolsa (household)'). "
-        "Re-record or replace with the offline jsCat validation harness."
-    )
     def test_spanish_seq_1(self):
         self.sequence_test(
             f"{settings.BASE_DIR}/cdi_forms/cat_forms/tests/test_data/spanish_sequence_1.csv"
