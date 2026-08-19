@@ -10,7 +10,7 @@
                     <div class="wcdi-muted">Each group administers one CDI form to a set of participants.</div>
                 </div>
                 <div style="margin-left:auto;">
-                    <a id="id_new_study" href="{% url 'researcher_ui:add_study' %}" class="btn btn-primary">+ New administration group</a>
+                    <a id="id_new_study" href="{% url 'researcher_ui:add_study' %}" class="btn btn-primary">New administration group</a>
                 </div>
             </div>
 
@@ -40,7 +40,7 @@
                     <ol style="padding-left:20px;">
                         <li style="margin-bottom:6px;"><a href="{% url 'researcher_ui:researcher_add_instruments' pk=request.user.researcher.pk %}">Select the CDI instruments</a> you plan to use (some require a Brookes Publishing access code).</li>
                         <li style="margin-bottom:6px;"><a href="{% url 'researcher_ui:add_study' %}">Create an administration group</a> — one per form, e.g. one group for Words &amp; Gestures and one for Words &amp; Sentences.</li>
-                        <li>Add participants to the group and send them their links.</li>
+                        <li>Add administrations to the group and send participants their links.</li>
                     </ol>
                     <p style="margin-bottom:0;">The <a href="{% url 'documentation' %}">documentation</a> walks through the whole workflow.</p>
                 </div>
@@ -60,6 +60,7 @@
                     </div>
                 </div>
                 <div style="margin-left:auto; min-width:230px;">
+                    <label for="study-selector" class="sr-only">Switch group</label>
                     <select id="study-selector" class="form-control" onchange="location = encodeURI(this.options[this.selectedIndex].value);">
                         {% for study in studies %}
                             <option value="{% url 'researcher_ui:console_study' pk=study.pk %}"{% if study.pk == current_study.pk %} selected="" {% endif %}>{{ study }}</option>
@@ -68,83 +69,83 @@
                 </div>
             </div>
 
-            <form method='post'  action='{% url "researcher_ui:console_study" pk=current_study.pk %}' id='study-form'>
-        {% if current_study %}
-            <div class="wcdi-toolbar" style="margin-top:14px;">
-                <div class="btn-group">
-                    <button id="id_add_participants" type="button" class="btn btn-primary" title="Enter your own ID for a single child or tell Web-CDI to generate IDs for you." onclick = "modal_form('/interface/study/{{ current_study.pk|urlencode }}/administer_new/')">Add Administrations</button>
-                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="sr-only">Toggle Dropdown</span>
-                    </button>
-                    <div class="dropdown-menu">
-                        <button type="button" class="dropdown-item"   onclick = "modal_form('/interface/study/{{ current_study.pk|urlencode }}/import_data/')" >Import Spreadsheet Data</button>
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Download All</button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                        <button class="dropdown-item" type="submit" name='download-summary-csv' id='download-summary-csv'>Summary Scores/Percentiles (csv)</button>
-                        <button class="dropdown-item" type="submit" name='download-study-csv' id='download-study-csv'>Items and Summary Scores/Percentiles (csv)</button>
-                        <button class="dropdown-item" type="submit" name='download-study-csv-adjusted' id='download-study-csv-adjusted'>Items and Summary Scores/Percentiles with Adjusted Ages (csv)</button>
-                    </div>
-                </div>
-                <a id="id_update_study" class="btn btn-secondary" href="{% url 'researcher_ui:rename_study' pk=current_study.pk %}" >Update Group</a>
-                <button type="submit" class="btn btn-secondary wcdi-btn-danger" style="margin-left:auto;" name='delete-study' id='delete-study' onclick='return confirm("Are you sure you want to delete the entire study and all the data associated with it?");' >Delete Group</button>
-            </div>
-        {% endif %}
+            <form method='post' action='{% url "researcher_ui:console_study" pk=current_study.pk %}' id='study-form'>
+            {% csrf_token %}
 
-        {% if current_study %}
+            {# ---- primary toolbar: one verb each ---- #}
+            <div class="wcdi-toolbar" style="margin-top:14px;">
+                <button id="id_add_participants" type="button" class="btn btn-primary"
+                        onclick="modal_form('{% url 'researcher_ui:administer_new' current_study.pk %}')">Add administrations</button>
+
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="download-menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Download</button>
+                    <div class="dropdown-menu wcdi-download-menu" aria-labelledby="download-menu-btn">
+                        <div class="dropdown-header wcdi-scope-all">All administrations</div>
+                        <div class="dropdown-header wcdi-scope-selected" style="display:none;"><span class="wcdi-sel-count">0</span> selected administrations</div>
+                        <button class="dropdown-item" type="submit" name="download-summary-csv" data-all="download-summary-csv" data-selected="download-selected-summary">Summary scores &amp; percentiles (csv)</button>
+                        <button class="dropdown-item" type="submit" name="download-study-csv" data-all="download-study-csv" data-selected="download-selected">Items + summary scores (csv)</button>
+                        <button class="dropdown-item" type="submit" name="download-study-csv-adjusted" data-all="download-study-csv-adjusted" data-selected="download-selected-adjusted">Items + summary scores, adjusted ages (csv)</button>
+                        <div class="dropdown-divider"></div>
+                        {# These need a selection: the PDF report is per row and the links export has no whole-group variant #}
+                        <a id="id_select_clinical" class="dropdown-item wcdi-needs-selection" href="#" onclick="return open_clinical_report(this, '{% url 'researcher_ui:pdf_summary' current_study.pk %}');">Clinical report (pdf) <span class="wcdi-needs-hint">— select rows first</span></a>
+                        <a id="id_select_clinical_adjusted" class="dropdown-item wcdi-needs-selection" href="#" onclick="return open_clinical_report(this, '{% url 'researcher_ui:pdf_summary_adjusted' current_study.pk 'adjusted' %}');">Clinical report, adjusted ages (pdf) <span class="wcdi-needs-hint">— select rows first</span></a>
+                        {% if not study.instrument.form == 'CAT' %}
+                        <button class="dropdown-item wcdi-needs-selection" type="submit" name="download-links" disabled>Participant links (csv) <span class="wcdi-needs-hint">— select rows first</span></button>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <a id="id_update_study" class="btn btn-secondary" href="{% url 'researcher_ui:rename_study' pk=current_study.pk %}">Group settings</a>
+            </div>
+
+            {# ---- selection toolbar ---- #}
             <div id='administration-form'>
                 <div class="wcdi-toolbar" style="margin-top:10px;">
-                    <div style="flex:1; min-width:220px; max-width:320px;">
-                        <input id='id_search' type="text" placeholder="Search by Participant ID...." name="search">
-                        <button id='search_button' type="submit"><i class="fa fa-search"></i></button>
+                    <div style="flex:1; min-width:220px; max-width:340px;">
+                        <label for="id_search" class="sr-only">Search by participant ID</label>
+                        <input id='id_search' type="text" placeholder="Search by participant ID…" name="search">
+                        <button id='search_button' type="submit" aria-label="Search"><i class="fa fa-search"></i></button>
                     </div>
-                    <span class="wcdi-muted" style="font-size:13px;">With selected:</span>
-                    <button class="btn btn-secondary selected-btn" id='add-selected' type='submit' name='administer-selected' value='administer-selected' disabled  >Re-administer</button>
-                    <div class="dropdown selected-btn" >
-                        <button class="btn btn-secondary selected-btn dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>Download</button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-                            <a id="id_select_clinical" class="dropdown-item selected-btn" onclick="javascript:append_url_checkboxes()">Clinical Report (pdf)</a>
-                            <a id="id_select_clinical_adjusted" class="dropdown-item selected-btn" onclick="javascript:append_url_checkboxes_adjusted()">Clinical Report with Adjusted Ages (pdf)</a>
-                            <button class="dropdown-item selected-btn" id='download-selected-summary' type="submit" name='download-selected-summary' value='download-selected-summary' disabled>Summary Scores/Percentiles Only (csv)</button>
-                            <button class="dropdown-item selected-btn" id='download-selected' type='submit' name='download-selected' value='download-selected'  disabled >Items and Summary Scores/Percentiles (csv)</button>
-                            <button class="dropdown-item selected-btn" id='download-selected-adjusted' type='submit' name='download-selected-adjusted' value='download-selected-adjusted'  disabled >Items and Summary Scores/Percentiles with Adjusted Ages (csv)</button>
-                            {% if not study.instrument.form == 'CAT' %}
-                            <button class="dropdown-item selected-btn" id='download-links' type='submit' name='download-links' value='download-links'  disabled >Links only (csv)</button>
-                            {% endif %}
-
-                        </div>
-                    </div>
-                    <button class="btn btn-secondary selected-btn wcdi-btn-danger" id='delete-selected' type='submit' name='delete-selected' value='administer-selected' disabled onclick='return confirm("Are you sure you want to delete the selected administration record and all the data associated with it?");' >Delete</button>
+                    <span class="wcdi-muted wcdi-selection-label" style="font-size:13px; margin-left:auto;"><span class="wcdi-sel-count">0</span> selected</span>
+                    <button class="btn btn-secondary selected-btn" id='add-selected' type='submit' name='administer-selected' value='administer-selected' disabled
+                            title="Create a new administration for each selected participant">Re-administer</button>
+                    <button class="btn btn-secondary selected-btn wcdi-btn-danger" id='delete-selected-open' type='button' disabled
+                            data-toggle="modal" data-target="#delete-selected-modal">Delete</button>
                 </div>
 
                 <div>
-                        {% include "researcher_UI/table.html" with table=study_administrations %}
-                        <script type="text/javascript">
-                            var utc_time;
-                            var local_time;
-                            $('.due_date, .last_modified, .created_date').not('.orderable, .sortable').each( function () {
-                                utc_time = moment.utc($(this).html(), "MM/DD/YYYY hh:mm a");
-                                local_time = moment(utc_time).local().format("MM/DD/YYYY hh:mm a");
-                                $(this).html(local_time);
-                            });
-                        </script>
+                    {% include "researcher_UI/table.html" with table=study_administrations %}
                 </div>
             </div>
 
-        {% endif %}
+            {# ---- delete selected: proper confirm, posts the existing delete-selected ---- #}
+            <div class="modal" id="delete-selected-modal" tabindex="-1" role="dialog" aria-labelledby="delete-selected-title">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title wcdi-danger-text" id="delete-selected-title">Delete <span class="wcdi-sel-count">0</span> administration<span class="wcdi-sel-plural">s</span>?</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body">
+                            <p style="margin:0;">Their responses and scores are removed from this group. <strong>This cannot be undone from your account.</strong>
+                               If there is any chance you will want these data, download them first.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-link wcdi-nav-link" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn wcdi-btn-danger-solid" id="delete-selected" name="delete-selected" value="delete-selected">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             </form>
         {% endif %}
     </div>
-    <!-- New Study Modal -->
-    <div class="modal" id="modal-form" tabindex="" role="dialog" aria-labelledby="new study"></div>
+    <!-- Shared modal container for the add-administrations / import dialogs -->
+    <div class="modal" id="modal-form" tabindex="" role="dialog" aria-labelledby="modal-title"></div>
 {% endblock %}
 
 {% block scripts %}
 <script>
-    // Function from static/researcher_UI.js. Disables the 'selected' buttons unless at least one of the checkboxes in select_col is selected.
-    checked_only()
     $('form').each(function(){this.onkeypress = checkEnter;});
 
     // Tracks the number of administrations to be displayed per page.
@@ -175,68 +176,56 @@
             }
         }
     });
-    var shifted = false;
 
     // Checkboxes selected while Shift button is held down select all checkboxes in between as well
     var lastChecked = null;
     var handleChecked = function(e) {
-        shifted = e.shiftKey;
-        if(lastChecked && shifted) {
-            var i = $('input[type="checkbox"]').index(lastChecked);
-            var j = $('input[type="checkbox"]').index(e.target);
-            var checkboxes = [];
-            if (j > i) {
-                checkboxes = $('input[type="checkbox"]:gt('+ (i-1) +'):lt('+ (j-i) +')');
-            } else {
-                checkboxes = $('input[type="checkbox"]:gt('+ j +'):lt('+ (i-j) +')');
-            }
-            if (!$(e.target).is(':checked')) {
-                $(checkboxes).prop('checked', false);
-            } else {
-                $(checkboxes).prop('checked', true);
-            }
+        if (lastChecked && e.shiftKey) {
+            var boxes = $('input[name="select_col"]');
+            var i = boxes.index(lastChecked);
+            var j = boxes.index(e.target);
+            var lo = Math.min(i, j), hi = Math.max(i, j);
+            boxes.slice(lo, hi + 1).prop('checked', $(e.target).is(':checked'));
         }
         lastChecked = e.target;
     }
+    $('input[name="select_col"]').click(function(e) { handleChecked(e); });
 
-    $('input[name="select_col"').click( function() {
-        handleChecked(event);
-    });
-
-    // Check for the number of completed tests as reported by Django. If none of the tests are completed, disables download_data option.
-    var completed_admins = "{{ completed_admins }}";
-
-    if (parseInt("{{ completed_admins }}")) {
-        $('#download-study').removeClass('disabled');
-    } else
-    {
-        $('#download-study').addClass('disabled');
-    }
-</script>
-
-<script>
-    // This add ticked items to url call for Clinical/PDF downloads
     {% if current_study %}
-    append_url_checkboxes = function (){
-        var url = new URL("{{ request.scheme }}://{{request.get_host }}{% url 'researcher_ui:pdf_summary' current_study.pk %}");
-        var checkedBoxes = document.querySelectorAll('input[name=select_col]:checked');
-        for (let i = 0; i < checkedBoxes.length; i++) {
-            url.searchParams.append('id', checkedBoxes[i].value);
-          }
- 
-        $('#id_select_clinical').attr('href', url)
-        //window.open(url)
-        }
-    append_url_checkboxes_adjusted = function (){
-        var url = new URL("{{ request.scheme }}://{{request.get_host }}{% url 'researcher_ui:pdf_summary_adjusted' current_study.pk 'adjusted' %}");
-        var checkedBoxes = document.querySelectorAll('input[name=select_col]:checked');
-        for (let i = 0; i < checkedBoxes.length; i++) {
-            url.searchParams.append('id', checkedBoxes[i].value);
-            }
-    
-        $('#id_select_clinical_adjusted').attr('href', url)
-        //window.open(url)
-        }
+    // ---- selection-aware toolbar ----
+    // One Download menu: with nothing ticked it posts the whole-group names,
+    // with rows ticked it posts the selected-rows names (same view handlers).
+    function selectedIds() {
+        return $('input[name="select_col"]:checked').map(function () { return this.value; }).get();
+    }
+    function syncSelection() {
+        var n = selectedIds().length;
+        $('.wcdi-sel-count').text(n);
+        $('.wcdi-sel-plural').text(n === 1 ? '' : 's');
+        $('.selected-btn').prop('disabled', n === 0);
+        $('.wcdi-download-menu [data-all]').each(function () {
+            $(this).attr('name', n > 0 ? $(this).data('selected') : $(this).data('all'));
+        });
+        $('.wcdi-download-menu .wcdi-needs-selection').toggleClass('disabled', n === 0)
+            .filter('button').prop('disabled', n === 0);
+        $('.wcdi-needs-hint').toggle(n === 0);
+        $('.wcdi-scope-all').toggle(n === 0);
+        $('.wcdi-scope-selected').toggle(n > 0);
+    }
+    $(document).on('change', 'input[name="select_col"], thead input[type="checkbox"]', syncSelection);
+    // the header select-all checkbox toggles via toggle(); catch it after it runs
+    $(document).on('click', 'thead input[type="checkbox"]', function () { setTimeout(syncSelection, 0); });
+    syncSelection();
+
+    // Clinical reports are per-row PDFs: build the URL from the ticked rows.
+    function open_clinical_report(el, base) {
+        var ids = selectedIds();
+        if (!ids.length) return false;
+        var url = new URL(base, window.location.origin);
+        ids.forEach(function (id) { url.searchParams.append('id', id); });
+        window.open(url.toString(), '_blank');
+        return false;
+    }
     {% endif %}
 </script>
 {% endblock %}

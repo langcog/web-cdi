@@ -1,130 +1,148 @@
-<!-- Modal window for creating new tests within a study -->
+<!-- Add-administrations dialog. One method visible at a time (tabs); the
+     backend (admin_new_fun) decides what was asked for by which fields arrive,
+     so the hidden tabs' empty fields change nothing. -->
 
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
+        <h4 id="modal-title" class="modal-title">Add administrations</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 id="modal-title" class="modal-title" >Administer new administrations</h4>
       </div>
       <div class="modal-body">
-      <form method='post' class="form-horizontal" enctype="multipart/form-data">
+      <form method='post' enctype="multipart/form-data" id="add-administrations-form">
         {% csrf_token %}
-        <p style="font-size:large">
-          Use ONE of these options to add participants to your interface. 
-          Use the "Your Own Participant ID(s)" option to create links using your own ID numbers (numeric only). 
-          Typically, this is done in small batches when you are ready to send out the links. Use the "Upload a CSV of ID(s)" or "Autogenerate Web-CDI ID(s)" options if you want to create many links at the same time. 
-          Use the “Single Reusable Link” option if you are collecting data anonymously (e.g., via Facebook, Prolific) - anyone who clicks on the link will create a new administration using a Web-CDI ID. 
-          Note that all links will expire in the time (default = 14 days) from their creation.</p>
-        <hr />
-        <div class="row form-group">
-          <div class="col-12">
-            <label for="new-subject-ids" class="control-label" style="text-weight:bold; font-size:larger">
-              Your Own Participant ID(s):
-            </label>               
-            <p>Use this option to add administrations using your own ID numbers (numeric only). Typically, this is done in small batches when you are ready to send out the links. If you enter an ID for a participant who has already had an administration in this Administration Group, Web-CDI will assume it is the same child. IDs should not include any identifiable information and are forced to be numeric. All links will expire in the time (default = 14 days) from their creation.</p>
-            <textarea name="new_subject_ids" class="form-control" rows="3" id='new-subject-ids' placeholder="Copy and paste in a list of subject IDs here (separated by spaces, commas, semicolons, or new lines)"></textarea>
-            <p> IDs should not include any identifiable information. For the same reason they are enforced to be numeric </p>
-          </div>
-        </div>
-        
-        <hr />
-        <div class="row form-group">
-            <div class="col-12">
-              <label for="subject-ids-csv" class=" control-label" style="text-weight:bold; font-size:larger">Upload a CSV of  IDs:</label>
-            
-              <input type="file" name = 'subject-ids-csv' class="form-control" id ='subject-ids-csv'><br>
-              <input type="checkbox" name = 'csv-header' id ='csv-header'><label for='ignore-csv-header'>&nbsp; This file has a header row</label><br>
-              <div id = "subj_col_div" class = "collapse">
-                <input type="text" name = "subject-ids-column" id = "subject-ids-column" class="form-control" placeholder="Name of Subject ID Column (ex. subject_id)">
-              </div>
-            </div>
-        </div>
-        <hr />
-        <div class="row form-group">
-            <div class="col-12">
-              <label for="autogenerate-count" class=" control-label" style="text-weight:bold; font-size:larger">Autogenerate Web-CDI ID(s):</label>
-              <p>Use this option to create many links at the same time using Web-CDI IDs.</p>
-              <input type="number" max_value="100" name='autogenerate_count' class="form-control" id ='autogenerate-count' placeholder="Autogenerate XX subject IDs">
-            </div>
-        </div>
-        <script type="text/javascript">
-          $(':file').on('change', function() {
-              var file = this.files[0];
-              if (file.size > 1024) {
-                  alert('max upload size is 1k')
-              }
 
-          });
-
-          $('#csv-header').on('change', function() {
-              if ($('#csv-header').prop('checked')) {
-                  $('#subj_col_div').collapse('show');
-              } else {
-                  $('#subj_col_div').collapse('hide');
-              }
-          });
-
-
-        </script>
-
-        {% if not object.no_demographic_boolean %}
-
-        <hr />
-        <div class="row form-group">  
-          {% if object.single_reusable_link_active %}
-            <div class="col-9" id="reusable_link_div" style = "overflow: hidden; text-overflow: ellipsis;">
-              <label for="add_new_parent" class="control-label" style="text-weight:bold; font-size:larger">Single Reusable Link:</label>
-              <p>
-                <a href="{% url 'researcher_ui:administer_new_parent' username study_name %}" id="reusable_link">Click here</a><br>
-                For mass emails or adding to a website. Does not track IP addresses or use cookies. Every link click creates a new administration.
-              </p>
-              
-              {% if study_group %}
-
-              {% endif %}
-
-              <script type="text/javascript">
-                $('#reusable_link').html($('#reusable_link')[0].href).css;
-                $('#reusable_link').on('click', function() {
-                  $('#reusable_link').hide();
-                })
-
-                //var study_group = "{{ study_group }}";
-                //if (study_group != "") {
-                //  $('#study_group_link').html($('#study_group_link')[0].href);
-                //}
-              </script>
-            </div>
+        <div class="wcdi-muted" style="font-size:13px; margin-bottom:6px;">How do you want to add them?</div>
+        <ul class="nav nav-pills wcdi-method-pills" role="tablist" id="add-method-tabs">
+          <li class="nav-item"><a class="nav-link active" data-toggle="pill" href="#tab-ids" role="tab" data-submit-label="Create links">Enter participant IDs</a></li>
+          <li class="nav-item"><a class="nav-link" data-toggle="pill" href="#tab-generate" role="tab" data-submit-label="Generate links">Generate IDs for me</a></li>
+          <li class="nav-item"><a class="nav-link" data-toggle="pill" href="#tab-csv" role="tab" data-submit-label="Upload and create links">Upload a CSV of IDs</a></li>
+          {% if object.single_reusable_link_active and not object.no_demographic_boolean %}
+          <li class="nav-item"><a class="nav-link" data-toggle="pill" href="#tab-reusable" role="tab" data-submit-label="">Reusable link</a></li>
           {% endif %}
-        </div>
-        {% endif %}
+          {% if object.participant_source_boolean > 0 %}
+          <li class="nav-item"><a class="nav-link" data-toggle="pill" href="#tab-external" role="tab" data-submit-label="">External source</a></li>
+          {% endif %}
+          <li class="nav-item wcdi-method-pill-sep"><a class="nav-link" data-toggle="pill" href="#tab-import" role="tab" data-submit-label="Open the importer" data-submit-action="import">Import completed responses</a></li>
+        </ul>
 
-        {% if object.participant_source_boolean > 0 %}
-        <hr />
-        <div class="row form-group">
-          <div class="col-12" id="prolific_link_div" style = "overflow: hidden; text-overflow: ellipsis;">
-            <label for="add_new_parent" class="control-label" style="text-weight:bold; font-size:larger">External Source Link:</label>
-          
-            <p>
-              <a href="">{{ request.scheme }}://{{ request.META.HTTP_HOST }}{% url 'researcher_ui:administer_new_parent' username study_name %}?source_id={% verbatim %}{{%source_id%}}{% endverbatim %}&event_id={% verbatim %}{{%event_id%}}{% endverbatim %}{% if object.no_demographic_boolean %}&age={% verbatim %}{{%age%}}{% endverbatim %}&sex={% verbatim %}{{%sex%}}{% endverbatim %}&offset={% verbatim %}{{%offset%}}{% endverbatim %}{% endif %}</a><br>
-            (This link will not open a new administration.  It is to be copied into External Source and will enable opening on a new child capturing the External Source Id from there. 
-            Event_id is optional.  If event_id is specified it will create a new administration (if different to previous event_id).
-            {% if not object.no_demographic_boolean %}If you want a link with a blank source Id, use the Single Reusable Link.{% endif %})
-            </p>
+        <div class="tab-content wcdi-method-panels">
+
+          <div class="tab-pane fade show active" id="tab-ids" role="tabpanel">
+            <p class="wcdi-method-help">One link per ID. Enter the same ID again later to add a second administration for that child.
+              IDs must be numeric and must not identify anyone.</p>
+            <label for="new-subject-ids" class="sr-only">Participant IDs</label>
+            <textarea name="new_subject_ids" class="form-control" rows="4" id="new-subject-ids"
+                      placeholder="1101, 1102, 1103 &mdash; separated by spaces, commas, or new lines"></textarea>
           </div>
-        </div>
-        {% endif %}
 
+          <div class="tab-pane fade" id="tab-generate" role="tabpanel">
+            <p class="wcdi-method-help">Web-CDI assigns the IDs. Useful for running many children at a site on the same day
+              (e.g. a children's museum).</p>
+            <label for="autogenerate-count" class="wcdi-method-label">How many?</label>
+            <input type="number" min="1" max="100" name="autogenerate_count" class="form-control" id="autogenerate-count"
+                   placeholder="e.g. 20" style="max-width:160px;">
+          </div>
+
+          <div class="tab-pane fade" id="tab-csv" role="tabpanel">
+            <p class="wcdi-method-help">One ID per row. If the file has a header row, tick the box and tell us which column holds the IDs.</p>
+            <label for="subject-ids-csv" class="wcdi-method-label">CSV file</label>
+            <input type="file" name="subject-ids-csv" class="form-control-file" id="subject-ids-csv" accept=".csv,text/csv">
+            <div class="form-check" style="margin-top:10px;">
+              <input type="checkbox" class="form-check-input" name="csv-header" id="csv-header">
+              <label class="form-check-label" for="csv-header">This file has a header row</label>
+            </div>
+            <div id="subj_col_div" class="collapse" style="margin-top:8px;">
+              <input type="text" name="subject-ids-column" id="subject-ids-column" class="form-control"
+                     placeholder="Name of the ID column (e.g. subject_id)" style="max-width:320px;">
+            </div>
+          </div>
+
+          {% if object.single_reusable_link_active and not object.no_demographic_boolean %}
+          <div class="tab-pane fade" id="tab-reusable" role="tabpanel">
+            <p class="wcdi-method-help">For mass emails, websites, or anonymous recruitment (e.g. Facebook, Prolific).
+              Every click on this link creates a new administration with a Web-CDI ID. No IP addresses or cookies are used.</p>
+            <div class="wcdi-link-row">
+              <input type="text" readonly class="form-control" id="reusable_link_input"
+                     value="{{ request.scheme }}://{{ request.META.HTTP_HOST }}{% url 'researcher_ui:administer_new_parent' username study_name %}">
+              <button type="button" class="btn btn-secondary" data-copy="#reusable_link_input">Copy</button>
+            </div>
+          </div>
+          {% endif %}
+
+          {% if object.participant_source_boolean > 0 %}
+          <div class="tab-pane fade" id="tab-external" role="tabpanel">
+            <p class="wcdi-method-help">Paste this into your external platform (e.g. Prolific). It does not open an administration
+              itself; it lets the platform create one per child and records the platform's participant ID as
+              <code>source_id</code>. <code>event_id</code> is optional &mdash; a different event_id creates a new administration.
+              {% if not object.no_demographic_boolean %}For a link with no source ID, use the reusable link.{% endif %}</p>
+            <div class="wcdi-link-row">
+              <input type="text" readonly class="form-control" id="external_link_input"
+                     value="{{ request.scheme }}://{{ request.META.HTTP_HOST }}{% url 'researcher_ui:administer_new_parent' username study_name %}?source_id={% verbatim %}{{%source_id%}}{% endverbatim %}&event_id={% verbatim %}{{%event_id%}}{% endverbatim %}{% if object.no_demographic_boolean %}&age={% verbatim %}{{%age%}}{% endverbatim %}&sex={% verbatim %}{{%sex%}}{% endverbatim %}&offset={% verbatim %}{{%offset%}}{% endverbatim %}{% endif %}">
+              <button type="button" class="btn btn-secondary" data-copy="#external_link_input">Copy</button>
+            </div>
+          </div>
+          {% endif %}
+
+          <div class="tab-pane fade" id="tab-import" role="tabpanel">
+            <p class="wcdi-method-help">Already have completed forms? Web-CDI can import the CSV that the English MB-CDI fillable
+              PDFs export (Words &amp; Gestures and Words &amp; Sentences), creating a <em>completed</em> administration per row.
+              The importer has templates to download and notes on the required columns.</p>
+          </div>
+
+        </div>
+
+        <div class="wcdi-muted" style="font-size:12.5px; margin-top:12px;">
+          Links expire {{ object.test_period }} day{{ object.test_period|pluralize }} after they are created (change this in the group settings).
+          See the <a href="{% url 'documentation' %}#participants" target="_blank">documentation</a> for more on each method.
+        </div>
       </form>
-      <div class="alert alert-danger error-message" role="alert" style="display:none">
-            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-              <span class="sr-only">Error:</span>
-              <div style='display:inline' id='error-message-text'></div>
+
+      <div class="alert alert-danger error-message" role="alert" style="display:none; margin-top:12px;">
+            <span class="sr-only">Error:</span>
+            <div style='display:inline' id='error-message-text'></div>
+      </div>
       </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <input id="id_modal_submit_btn" name="submit" value="Submit" class="btn btn-primary" type="button">
+        <button type="button" class="btn btn-link wcdi-nav-link" data-dismiss="modal">Cancel</button>
+        <input id="id_modal_submit_btn" name="submit" value="Create links" class="btn btn-primary" type="button">
+        <button id="id_modal_import_btn" type="button" class="btn btn-primary" style="display:none;"
+                onclick="modal_form('{% url 'researcher_ui:import_data' object.pk %}')">Open the importer</button>
       </div>
     </div>
   </div>
+
+  <script type="text/javascript">
+    (function () {
+      // Footer button follows the active tab: label, or hidden for link-only tabs,
+      // or hands off to the importer dialog.
+      var submitBtn = $('#id_modal_submit_btn'), importBtn = $('#id_modal_import_btn');
+      function syncFooter(link) {
+        var label = $(link).data('submit-label');
+        var action = $(link).data('submit-action');
+        importBtn.toggle(action === 'import');
+        submitBtn.toggle(action !== 'import' && !!label);
+        if (label && action !== 'import') submitBtn.val(label);
+      }
+      $('#add-method-tabs a[data-toggle="pill"]').on('shown.bs.tab', function (e) { syncFooter(e.target); });
+      syncFooter($('#add-method-tabs a.active')[0]);
+
+      $('#csv-header').on('change', function () {
+        $('#subj_col_div').collapse($(this).prop('checked') ? 'show' : 'hide');
+      });
+      $('#subject-ids-csv').on('change', function () {
+        var file = this.files[0];
+        if (file && file.size > 1024 * 1024) { alert('Please keep the CSV under 1 MB.'); this.value = ''; }
+      });
+
+      // Copy buttons for the link tabs
+      $('#modal-form [data-copy]').on('click', function () {
+        var input = document.querySelector($(this).data('copy')), btn = $(this);
+        input.select();
+        var done = function () { btn.text('Copied'); setTimeout(function () { btn.text('Copy'); }, 1400); };
+        if (navigator.clipboard) { navigator.clipboard.writeText(input.value).then(done); }
+        else { document.execCommand('copy'); done(); }
+      });
+    })();
+  </script>

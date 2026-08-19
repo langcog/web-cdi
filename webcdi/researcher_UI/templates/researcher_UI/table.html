@@ -5,25 +5,17 @@
 {% if table.page %}
     <div class="table-container">
 {% endif %}
- 
+
 {% block table %}
 <script>
     function edit_function(id){
         $('#'+id).modal()
     }
-    function Convert_to_localtime(utcDate){
-        let newStr = utcDate.replace('p.m.','PM');
-        newStr = newStr.replace('a.m.','AM');
-        const date = new Date(newStr); 
-        var local_date = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(),  date.getHours(), date.getMinutes(), date.getSeconds()));
-        var local_date_formatted= local_date.toLocaleString([], { hour12: true});
-        return local_date_formatted
-    }
     const edit_study_new = (id) =>{
        $(".overlay").fadeIn(300);
 
        const csrf_token = document.getElementsByName("csrfmiddlewaretoken")[0].value;
-       const url =  $('#form_modal_hidden_id'+id).val();   
+       const url =  $('#form_modal_hidden_id'+id).val();
         $.ajax({
         type: "POST",
         url: url,
@@ -48,99 +40,9 @@
         }
         });
     }
-    
 </script>
 <style>
-    .login-card {
-        padding: 40px;
-        margin: 0 auto 10px;
-        border-radius: 10px;
-        overflow: scroll;
-      
-      }
-      .login-card h1{
-        color: white;
-      }
-      .input-row{
-        margin-top: 15px;
-      }
-      
-      .login-card input[type=submit] {
-        width: 100%;
-        display: block;
-        margin-bottom: 10px;
-        position: relative;
-        border-radius: 10px;
-      
-      }
-      .login-card input[type=button] {
-        width: 100%;
-        display: block;
-        margin-bottom: 10px;
-        position: relative;
-        border-radius: 10px;
-        background: red;
-      
-      }
-      
-      .login-card input[type=text], input[type=password] {
-        height: 44px;
-        font-size: 12px;
-        width: 100%;
-        margin-bottom: 10px;
-        -webkit-appearance: none;
-        background: #fff;
-        border: 1px solid #d9d9d9;
-        border-top: 1px solid #c0c0c0;
-        /* border-radius: 2px; */
-        padding: 0 8px;
-        box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        border-radius: 10px;
-      
-      }
-      .login-card input[type=text], input[type=email] {
-        height: 44px;
-        font-size: 12px;
-        width: 100%;
-        margin-bottom: 10px;
-        -webkit-appearance: none;
-        background: #fff;
-        border: 1px solid #d9d9d9;
-        border-top: 1px solid #c0c0c0;
-        /* border-radius: 2px; */
-        padding: 0 8px;
-        box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        border-radius: 10px;
-      
-      }
-      .login-card select {
-        height: 44px;
-        font-size: 12px;
-        width: 100%;
-        margin-bottom: 10px;
-        -webkit-appearance: none;
-        background: #fff;
-        border: 1px solid #d9d9d9;
-        border-top: 1px solid #c0c0c0;
-        /* border-radius: 2px; */
-        padding: 0 8px;
-        box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        border-radius: 10px;
-      
-      }
-      .login-card input[type=text]:hover, input[type=password]:hover {
-        border: 1px solid #b9b9b9;
-        border-top: 1px solid #a0a0a0;
-        -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-        -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-        box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-        border-radius: 10px;
-      
-      }
-    .overlay{	
+    .overlay{
     position: fixed;
     top: 0;
     z-index: 100;
@@ -153,7 +55,7 @@
     height: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;  
+    align-items: center;
     }
     .spinner {
     width: 40px;
@@ -164,123 +66,138 @@
     animation: sp-anime 0.8s infinite linear;
     }
     @keyframes sp-anime {
-    100% { 
-        transform: rotate(360deg); 
+    100% {
+        transform: rotate(360deg);
     }
     }
-    .is-hide{
-    display:none;
-    }
-
 </style>
 
-<table class="table">
+<div class="wcdi-table-scroll">
+<table class="table wcdi-admin-table">
     {% block table.thead %}
         {% if table.show_header %}
             <thead {{ table.attrs.thead.as_html }}>
                 <tr>
                 {% for column in table.columns %}
-                    <th {{ column.attrs.th.as_html }} style="text-align:center;">
+                    <th {{ column.attrs.th.as_html }} class="wcdi-col-{{ column.name }}">
                         {% if column.orderable %}
-                            <a href="{% querystring sort=column.order_by_alias.next %}">{{ column.header }}</a>
+                            <a class="column_sort_links" href="{% querystring sort=column.order_by_alias.next %}">{{ column.header }}</a>
                         {% else %}
                             {{ column.header }}
                         {% endif %}
                     </th>
                 {% endfor %}
-                <th> Action </th>
                 </tr>
             </thead>
         {% endif %}
     {% endblock table.thead %}
-    
+
     <tbody>
-    {% for row in table.paginated_rows %}      
+    {% for row in table.paginated_rows %}
         <tr>
-            <!--Modal-->
-            <div class="modal" id="{{row.record.pk}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <form class="login-card"  action="{% url 'researcher_ui:edit_study_new' pk=row.record.pk %}"    method="post">
-                    {% csrf_token %}
-                    <input type="hidden" value="{% url 'researcher_ui:edit_study_new' pk=row.record.pk %}" id="form_modal_hidden_id{{row.record.pk}}" > 
-                
-                    <div class="overlay">
-                        <div class="cv-spinner">
-                            <span class="spinner"></span>
-                        </div>
-                    </div>
-
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Update</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-    
-                            <div class="modal-body">
-                                <div>
-                                    <div class="form-group">
-                                        <label for="recipient-name" class="col-form-label">Subject Id</label>
-                                        <input type="text" class="form-control" name="subject_id" id="subject_id{{row.record.pk}}" value="{{row.record.subject_id}}">
-                                        <input type="hidden"  name="subject_id_old" id="subject_id_old{{row.record.pk}}" value="{{row.record.subject_id}}">
-                                        <span style="color: red; font-size: 12px;" id="subject_id_error_message{{row.record.pk}}">
-                                            <p></p>
-                                        </span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="recipient-name" class="col-form-label">Local Lab Id</label>
-                                        <input type="text" class="form-control" name="local_lab_id" id="local_lab_id{{row.record.pk}}" value="{{row.record.local_lab_id}}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="recipient-name" class="col-form-label">Opted out of sharing</label>
-                                        <select name="opt_out" id="opt_out{{row.record.pk}}" class="form-group">
-                                            <option value="None" {% if row.record.opt_out == None %} selected{% endif %}>Unknown</option>
-                                            <option value="True" {% if row.record.opt_out == "Yes" %} selected {% endif %}> Yes</option>
-                                            <option value="False" {% if row.record.opt_out == "No" %} selected {% endif %}>  No</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary"  data-dismiss="modal">Close</button>
-                                <button type="button" onclick="edit_study_new('{{row.record.pk}}')" class="btn btn-primary">Save</button>
-                            </div>
-    
-                        </div>
-                    </div>
-                </form>
-            </div>          
-            <!--Modal-->
             {% for column, cell in row.items %}
-                {% if column|stringformat:"s" in '"Last modified","Expiration date","Creation date"' %}
-                    <td style="text-align: center;">
-                        <span id="converted_result{{forloop.parentloop.counter}}{{forloop.counter}}"></span>
-                        <script>document.getElementById('converted_result{{forloop.parentloop.counter}}{{forloop.counter}}').innerText = Convert_to_localtime("{{cell}}")</script>
-                    </td>
-                {% else %}
-                    <td style="text-align: center;">
-                        {{cell}}
-                    </td>
-                {% endif %}
+                <td class="wcdi-col-{{ column.name }}">{{ cell }}</td>
             {% endfor %}
-
-            <td>
-                <button type="button" class="btn-primary" style="border-radius:50%;" 
-                    onclick="edit_function({{row.record.pk}})">
-                    <span class="fa fa-edit"></span>
-                </button>
-            </td>
         </tr>
     {% endfor %}
     </tbody>
 </table>
+</div>
+
+{# Per-row edit dialogs. Kept outside the table so the markup stays valid. #}
+{% for row in table.paginated_rows %}
+<div class="modal" id="{{row.record.pk}}" tabindex="-1" role="dialog" aria-labelledby="edit-title-{{row.record.pk}}" aria-hidden="true">
+    <form action="{% url 'researcher_ui:edit_study_new' pk=row.record.pk %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" value="{% url 'researcher_ui:edit_study_new' pk=row.record.pk %}" id="form_modal_hidden_id{{row.record.pk}}">
+
+        <div class="overlay">
+            <div class="cv-spinner">
+                <span class="spinner"></span>
+            </div>
+        </div>
+
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="edit-title-{{row.record.pk}}">Edit administration</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="subject_id{{row.record.pk}}" class="col-form-label">Participant ID</label>
+                        <input type="text" class="form-control" name="subject_id" id="subject_id{{row.record.pk}}" value="{{row.record.subject_id}}">
+                        <input type="hidden" name="subject_id_old" id="subject_id_old{{row.record.pk}}" value="{{row.record.subject_id}}">
+                        <span style="color: #a33a3a; font-size: 12px;" id="subject_id_error_message{{row.record.pk}}"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="local_lab_id{{row.record.pk}}" class="col-form-label">Lab ID <span class="wcdi-muted">(optional; any format)</span></label>
+                        <input type="text" class="form-control" name="local_lab_id" id="local_lab_id{{row.record.pk}}" value="{{row.record.local_lab_id|default_if_none:''}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="opt_out{{row.record.pk}}" class="col-form-label">Opted out of data sharing</label>
+                        <select name="opt_out" id="opt_out{{row.record.pk}}" class="form-control">
+                            <option value="None" {% if row.record.opt_out == None %} selected{% endif %}>Unknown</option>
+                            <option value="True" {% if row.record.opt_out %} selected{% endif %}>Yes</option>
+                            <option value="False" {% if row.record.opt_out == False %} selected{% endif %}>No</option>
+                        </select>
+                        <small class="wcdi-muted">Set to Yes if this participant declined to have their de-identified data shared with Wordbank.</small>
+                    </div>
+
+                    <dl class="wcdi-edit-meta">
+                        <dt>Administration</dt><dd>#{{ row.record.repeat_num }}</dd>
+                        <dt>Last modified</dt><dd><time data-utc="{{ row.record.last_modified|date:'c' }}">{{ row.record.last_modified|date:'n/j/y' }}</time></dd>
+                        {% if current_study.confirm_completion %}
+                        <dt>Confirmed age &amp; completion</dt><dd>{% if row.record.analysis %}Yes{% elif row.record.analysis == False %}No{% else %}&mdash;{% endif %}</dd>
+                        {% endif %}
+                        {% if current_study.send_completion_flag_url %}
+                        <dt>Completion-flag response</dt><dd>{{ row.record.send_completion_flag_url_response|default_if_none:"—" }}</dd>
+                        {% endif %}
+                    </dl>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link wcdi-nav-link" data-dismiss="modal">Cancel</button>
+                    <button type="button" onclick="edit_study_new('{{row.record.pk}}')" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endfor %}
+
+<script>
+    // Dates: server renders ISO (UTC) in data-utc; show the viewer's local time.
+    (function () {
+        document.querySelectorAll('time[data-utc]').forEach(function (t) {
+            var d = new Date(t.getAttribute('data-utc'));
+            if (isNaN(d)) return;
+            t.textContent = d.toLocaleDateString([], { year: '2-digit', month: 'numeric', day: 'numeric' });
+            t.title = d.toLocaleString([], { hour12: true });
+        });
+    })();
+    // Copy a participant link to the clipboard.
+    $(document).on('click', '.wcdi-copy-link', function () {
+        var btn = $(this), url = location.origin + btn.data('link');
+        var done = function () {
+            btn.addClass('copied').attr('title', 'Copied');
+            setTimeout(function () { btn.removeClass('copied').attr('title', "Copy the participant's link"); }, 1400);
+        };
+        if (navigator.clipboard) { navigator.clipboard.writeText(url).then(done); }
+        else {
+            var ta = document.createElement('textarea'); ta.value = url; document.body.appendChild(ta);
+            ta.select(); document.execCommand('copy'); document.body.removeChild(ta); done();
+        }
+    });
+</script>
 
 {% endblock table %}
 
 {% if table.page %}
     {% block pagination %}
-        <div class = "col-md-12" style = "float:none; display:inline-block; vertical-align:middle;">
+        <div class="wcdi-table-foot">
             <nav>{% bootstrap_pagination table.page url=request.get_full_path %}</nav>
             <a href="{% url 'researcher_ui:console_study' current_study.pk %}?view_all=all" id="view_all" class="btn btn-link" role="link">Show All</a>
         </div>

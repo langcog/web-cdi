@@ -248,7 +248,10 @@ class StudyCreateViewTest(TestCase):
 
         response = self.client.post(self.delete_url, payload)
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, self.delete_url)
+        # deleting a group lands on the dashboard, not the deleted group's page
+        self.assertRedirects(response, reverse("researcher_ui:console"))
+        self.delete_study.refresh_from_db()
+        self.assertFalse(self.delete_study.active)
 
 
 class AdminNewTest(TestCase):
