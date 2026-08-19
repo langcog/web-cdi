@@ -8,6 +8,7 @@ from django.views.generic import FormView
 
 from brookes.forms import BrookesCodeForm
 from brookes.models import BrookesCode
+from brookes.utils import BROOKES_SUPPORT_URL, purchase_url_for
 from researcher_UI.models import InstrumentFamily
 
 # Create your views here.
@@ -41,6 +42,8 @@ class UpdateBrookesCode(LoginRequiredMixin, FormView):
         ctx["instrument_family"] = InstrumentFamily.objects.get(
             id=self.kwargs["instrument_family"]
         )
+        ctx["purchase_url"] = purchase_url_for(ctx["instrument_family"])
+        ctx["support_url"] = BROOKES_SUPPORT_URL
         return ctx
 
     def form_valid(self, form):

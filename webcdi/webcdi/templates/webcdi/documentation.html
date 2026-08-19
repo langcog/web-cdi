@@ -4,24 +4,26 @@
 {% block title %}Documentation{% endblock %}
 
 {% block main %}
-    <h1 style="font-size:26px; margin:18px 0 4px;">Web-CDI documentation</h1>
-    <p style="margin-bottom:16px;">A guide for researchers administering the MacArthur-Bates Communicative Development Inventories (CDIs) online.
-        <a href="{% static 'webcdi/pdf/webCDIManual.pdf' %}">PDF version</a></p>
-
-    <div class="wcdi-card-panel" style="margin-bottom:16px">
-        <h2>Contents</h2>
-        <ul>
-            <li><a href="#overview">Overview &amp; data sharing (Wordbank)</a></li>
+<div class="wcdi-doc">
+    <nav class="wcdi-doc-toc" aria-label="Documentation sections">
+        <div class="wcdi-doc-toc-title">Contents</div>
+        <ol>
+            <li><a href="#overview">Overview &amp; data sharing</a></li>
             <li><a href="#registering">Registering for an account</a></li>
-            <li><a href="#instruments">Selecting instruments</a></li>
-            <li><a href="#groups">Creating an administration group (study) and its options</a></li>
-            <li><a href="#participants">Adding participants</a></li>
+            <li><a href="#instruments">Selecting instruments &amp; access codes</a></li>
+            <li><a href="#groups">Creating an administration group</a></li>
+            <li><a href="#participants">Adding administrations</a></li>
             <li><a href="#tracking">Tracking completion</a></li>
             <li><a href="#downloading">Downloading data &amp; scoring</a></li>
             <li><a href="#respondents">What respondents see</a></li>
             <li><a href="#emails">Sample emails to participants</a></li>
-        </ul>
-    </div>
+            <li><a href="#cite">How to cite</a></li>
+        </ol>
+    </nav>
+
+    <div class="wcdi-doc-main">
+    <h1 style="font-size:26px; margin:18px 0 4px;">Web-CDI documentation</h1>
+    <p style="margin-bottom:16px;">A guide for researchers administering the MacArthur-Bates Communicative Development Inventories (CDIs) online.</p>
 
     <div class="wcdi-card-panel" style="margin-bottom:16px" id="overview">
         <h2>Overview &amp; data sharing (Wordbank)</h2>
@@ -30,20 +32,17 @@
             All of the data stored in Web-CDI are de-identified. No information about individual respondents'
             identities is stored in the database, including child date of birth.</p>
         <p>In exchange for using Web-CDI, users are strongly encouraged to share the de-identified data with
-            <a href="http://wordbank.stanford.edu">Wordbank</a>, an open database of CDI instruments in many
+            <a href="http://wordbank.stanford.edu" target="_blank" rel="noopener">Wordbank</a>, an open database of CDI instruments in many
             different languages. By collecting data using Web-CDI, you are contributing to our ongoing efforts
             to create large databases of CDIs from many families learning many different languages.</p>
         <p>The English long forms (American/Canadian English WG and WS), Mexican Spanish long forms (WG and WS),
             English CDI III, and English/Mexican Spanish CDI-CAT are distributed through Brookes Publishing Company
-            and require an access code that can be purchased at
-            <a href="https://brookespublishing.com/product/cdi">https://brookespublishing.com/product/cdi</a>.
+            and require an <a href="https://brookespublishing.com/webcdi/" target="_blank" rel="noopener">access code</a>
+            (a one-year licence per researcher; see <a href="#instruments">Selecting instruments &amp; access codes</a>).
             We understand that some users will not be able to share their data. Users who have purchased an access
             code will be asked to determine whether they want to share their data with Wordbank.</p>
-        <p>More information about the English CDI suite of instruments can be found in the MacArthur-Bates User's
-            Guide and Technical Manual, 3rd Edition (Marchman, Dale, and Fenson, 2023), also available from Brookes
-            Publishing Company. See deMayo et al. (2021), <em>Language Development Research</em>, for more information
-            about Web-CDI; see Kachergis et al. (2022), <em>Journal of Speech, Language &amp; Hearing Research</em>,
-            for more information about CDI-CAT.</p>
+        <p style="margin-bottom:0;">For more about the instruments and the platform, see the references under
+            <a href="#cite">How to cite</a>.</p>
     </div>
 
     <div class="wcdi-card-panel" style="margin-bottom:16px" id="registering">
@@ -56,32 +55,38 @@
     </div>
 
     <div class="wcdi-card-panel" style="margin-bottom:16px" id="instruments">
-        <h2>Selecting instruments</h2>
-        <p>In <strong>My CDI Forms</strong> (reachable from the console), you must indicate which Web-CDI instruments
-            you would like to have available to you. Some of the instruments (e.g., American/Canadian English long forms)
-            require an authentication code that must be purchased from Brookes Publishing Co.; other instruments are
-            available to you free of charge. Click on the instruments that you wish to use.</p>
+        <h2>Selecting instruments &amp; access codes</h2>
+        <p>On the <strong>Instruments</strong> page (in the top navigation), tick the Web-CDI instruments you want to
+            have available. Your selections determine which forms you can choose when you create an administration
+            group. Most instruments are free of charge.</p>
+        <p>Some instruments (the American/Canadian English long forms, the Mexican Spanish long forms, English CDI III,
+            and the English and Mexican Spanish CDI-CAT) are distributed by Brookes Publishing and require an
+            <strong>access code</strong>. When you select one of these and save, Web-CDI asks you to enter the code.
+            A code activates that instrument on your account for one year; each researcher needs their own code.
+            Codes are sold per instrument on
+            <a href="https://brookespublishing.com/webcdi/" target="_blank" rel="noopener">Brookes's Web-CDI page</a>, and the
+            code-entry page links directly to the right product. For problems with a code, contact
+            <a href="https://support.brookespublishing.com/" target="_blank" rel="noopener">Brookes support</a>.</p>
     </div>
 
     <div class="wcdi-card-panel" style="margin-bottom:16px" id="groups">
         <h2>Creating an administration group (study) and its options</h2>
-        <p>Once you have selected your instruments, you can create a new administration group (study) using the
-            <strong>Administration Group Set Up</strong> dialog. Indicate the name of the study and then use the
-            dropdown menu to indicate the instrument that is associated with that study. Each study can be associated
-            with only one instrument.</p>
+        <p>Once you have selected your instruments, click <strong>+ New administration group</strong> on your
+            dashboard. Give the group a name and choose the instrument from the dropdown. Each group administers
+            exactly one instrument.</p>
         <p class="alert alert-info">Tip: In some cases, you might be administering multiple instruments to a single
             participant. For example, a child might receive the American English Words &amp; Gestures form when they
             are 15 months, but then a Words &amp; Sentences form when they are 24 months. Each of those administrations
-            is housed within Web-CDI in different studies. However, you can track your participants across studies when
+            is housed within Web-CDI in a different group. However, you can track your participants across groups when
             you download the data, because each child is given a unique ID that you determine. It is recommended that
-            your study names include the name of the instrument for ease of tracking, e.g., "My study WG" and
+            your group names include the name of the instrument for ease of tracking, e.g., "My study WG" and
             "My study WS".</p>
         <p><strong>Note on data sharing options:</strong> While we encourage all users to make their data available
             for sharing, users of chargeable instruments (e.g., the English (American) long forms) can, if they wish,
-            opt out of sharing their data at the study level. This means that all of the administrations in this study
+            opt out of sharing their data at the group level. This means that all of the administrations in this group
             would NOT be available for broader sharing with Wordbank. In this case, you can also opt out of collecting
             the required demographic information.</p>
-        <p>There are several other choices in the Administration Group Set Up dialog:</p>
+        <p>There are several other choices on the group form:</p>
         <ul>
             <li><strong>Age range:</strong> The default age range for the selected instrument will be automatically
                 populated (e.g., 8 to 18 months for the American English Words &amp; Gestures form). When a participant
@@ -104,10 +109,10 @@
                 the respondent will get an error message to contact the researcher. We have found that 14 days is the
                 optimum time limit for most use-cases.
                 <p class="alert alert-info" style="margin-top:8px">Tip: Remember that the clock starts when you create
-                    the link in the participant interface (described below), so it is best to add a participant and
-                    create the link just prior to the point when you will be sending the link to the respondent.</p></li>
+                    the link, so it is best to add a participant and create the link just prior to the point when you
+                    will be sending the link to the respondent.</p></li>
             <li><strong>Measurement units:</strong> Choose pounds/ounces vs. grams depending on your data collection
-                context. Note that all participants within a single study must use the same measurement units.</li>
+                context. Note that all participants within a single group must use the same measurement units.</li>
             <li><strong>Minimum time to complete:</strong> This is the amount of time that a respondent must spend
                 when completing the CDI. Note that in order to submit the CDI, the respondent must click on every page
                 and must do so in at least the allotted time. They will not get the submit button at the end of the
@@ -152,79 +157,79 @@
             <li><strong>End message:</strong> On the final splash page, respondents see the graph (above) and this
                 standard message. You have the option to add to this message or replace it altogether.</li>
         </ul>
-        <p>Click save to save your study options. You may return to "Update Study" to change all of the options
-            except the instrument. Choose your study in the dropdown menu to see the participants in your study.</p>
+        <p>Click <strong>Save</strong>. You can change any of these options except the instrument later, from the
+            group's page via <strong>Update Group</strong>. Open a group from the cards on your dashboard (or the group
+            switcher at the top right of any group page) to see its administrations.</p>
     </div>
 
     <div class="wcdi-card-panel" style="margin-bottom:16px" id="participants">
-        <h2>Adding participants</h2>
-        <p>Click on "Add participants" to open the Participants dialog box. There are multiple options for adding
-            participants. The most typical use-case is to type in the list of participants in the New Subject IDs box,
-            e.g., 1111, 1112, 1113, etc. These IDs must be all numeric (i.e., no alpha). If you enter an ID twice, the
-            system will assume that it is the same individual and will assign multiple administrations to that ID.</p>
-        <p class="alert alert-info">Tip: You can also add additional administrations for a given ID by using the
-            "Re-Administer Participant" dialog box. Select the participant that you want and then click on the dialog
-            box. A new administration of that ID number will appear in your participant listing.</p>
+        <h2>Adding administrations</h2>
+        <p>On a group's page, click <strong>Add Administrations</strong>. There are several ways to add
+            participants. The most typical use-case is to type your own list of participant IDs into the
+            <strong>Your Own Participant ID(s)</strong> box, e.g., 1111, 1112, 1113, etc. These IDs must be all
+            numeric (i.e., no letters). If you enter an ID that already exists in the group, the system assumes it is
+            the same child and creates an additional administration for that ID.</p>
+        <p class="alert alert-info">Tip: You can also add another administration for an existing participant by
+            ticking their row in the table and clicking <strong>Re-administer</strong>. A new administration of that
+            ID will appear in the list.</p>
         <p>You can also autogenerate a list of IDs (e.g., if you are running several participants at a site on the
-            same day, such as a Children's Museum). You can also upload from a csv, or use a single-reusable link.
-            The single-reusable link is designed to be used with external platforms, e.g., Facebook. Please contact
-            the Web-CDI team for more information about using single-reusable links.</p>
+            same day, such as a Children's Museum), upload a CSV of IDs, or use a single reusable link. The single
+            reusable link is designed to be used with external platforms, e.g., Facebook or Prolific: anyone who opens
+            it creates a new administration with a Web-CDI-generated ID. Please contact the Web-CDI team for more
+            information about using single reusable links.</p>
         <p class="alert alert-info">Tip: When you enter IDs into Web-CDI, these should be meaningful to you, as it is
-            the only way for you to track your participants within Web-CDI. You can also add additional information in
-            the Local Lab ID column, which does not have any constraints on the field type (e.g., it can contain
-            alphanumeric characters).</p>
+            the only way for you to track your participants within Web-CDI. You can also record additional information
+            in the <strong>Local Lab ID</strong> field &mdash; which has no constraints on format (it can contain letters)
+            &mdash; by clicking the pencil (edit) button on a row.</p>
     </div>
 
     <div class="wcdi-card-panel" style="margin-bottom:16px" id="tracking">
         <h2>Tracking completion</h2>
-        <p>The resulting list of participants contains the administration number (e.g., 1st admin, 2nd admin, etc.),
-            the link that you send to respondents, local lab ID (if used), and other information about when the link
-            was created, when it was last modified, and when it will expire. The Xs indicate that the background form
-            or the CDI itself has not yet been completed by the respondent. You can use the information about when the
-            link was last modified to track whether a respondent has opened the link and started completing the CDI
-            form. When the CDIs have been completed by the respondents, the Xs will change to checkmarks. You may need
-            to refresh your page to see the checkmarks. A checkmark under the "Scored" column indicates that the
-            scores have been computed by the system and are ready for download.</p>
-        <p class="alert alert-info">Tip: Use the "Participant has opted out of broader sharing" option to indicate
-            that an individual participant has not given consent for data to be shared with Wordbank. In many cases,
-            an individual participant may opt in for study participation, but may opt out of sharing, even though your
-            study, in general, has opted in for sharing. You can indicate this by clicking on this option, but must do
-            so for every administration. This information will not propagate if a new administration is added with the
-            same subject ID.</p>
+        <p>The table on the group's page lists each administration with its number (1st, 2nd, etc.), the link you
+            send to the respondent, the local lab ID (if used), and when the link was created, last modified, and will
+            expire. A cross means the background form or the CDI itself has not yet been completed by the respondent;
+            a checkmark means it has. You can use the last-modified time to see whether a respondent has opened the
+            link and started completing the form. You may need to refresh the page to see new checkmarks. A checkmark
+            under <strong>Scored</strong> indicates that the scores have been computed by the system and are ready for
+            download.</p>
+        <p class="alert alert-info">Tip: If an individual participant has not given consent for their data to be
+            shared with Wordbank &mdash; even though your group, in general, has opted in for sharing &mdash; click the
+            pencil (edit) button on their row and set <strong>Opted out of sharing</strong> to Yes. You must do this
+            for every administration: the setting does not carry over when a new administration is added with the same
+            subject ID.</p>
     </div>
 
     <div class="wcdi-card-panel" style="margin-bottom:16px" id="downloading">
         <h2>Downloading data &amp; scoring</h2>
         <p>After your respondents have completed their CDIs, you have several options for how to download their
-            responses and scores.</p>
+            responses and scores. The <strong>Download All</strong> menu covers every administration in the group:</p>
         <ul>
-            <li><strong>Download data (csv format):</strong> This option will download all of the respondents in your
-                database. The csv output will first have all of the basic metadata, the demographic responses, and
-                then all of the responses for each item. Lastly, the summary scores and corresponding percentiles
-                (by sex and for both sexes combined) will be provided.
+            <li><strong>Items and Summary Scores/Percentiles (csv):</strong> The csv output will first have all of the
+                basic metadata, the demographic responses, and then all of the responses for each item. Lastly, the
+                summary scores and corresponding percentiles (by sex and for both sexes combined) will be provided.
                 <p class="alert alert-info" style="margin-top:8px">Tip: If the child's age in months is within the age
                     window of the norming sample (e.g., 8&ndash;18 months for Words &amp; Gestures, 16&ndash;30 months
                     for Words &amp; Sentences), the benchmark age will be the child's chronological age as indicated by
                     the date of birth and date of test when the CDI was completed. However, if the child is outside the
                     age range of the norming data, e.g., older than 30 months, the benchmark age will reflect the
                     appropriate age in the norming data.</p></li>
-            <li><strong>Download data with adjusted benchmarks (csv format):</strong> If a caregiver indicated that a
-                child was born prior to their due date, the percentile scores will be based on an adjusted benchmark
-                age. For example, a 21-month-old child who was born 4 weeks early would have a benchmark age of 21
-                months, but an adjusted benchmark age of 20 months after correcting for degree of prematurity.</li>
-            <li><strong>Download Summary data (csv format):</strong> This option is the same as Download data but will
-                not provide individual item responses.</li>
-            <li><strong>Download Selected Data:</strong> Use this option to download data for only certain
-                participants. You must click the box to the left of the participant ID to activate this option. The
-                Download Selected Data option gives two additional outputs:
-                <ul>
-                    <li>The <strong>Clinical Report</strong> gives scores and percentiles for selected administrations
-                        in a friendly report format that is appropriate to share with the families or other
-                        professionals. This report is currently available for the English and Spanish long forms.</li>
-                    <li>The <strong>Selected Links</strong> option just downloads the links for the selected
-                        participants. This is useful for selecting individuals in a csv format for sending out emails
-                        to participants.</li>
-                </ul></li>
+            <li><strong>Items and Summary Scores/Percentiles with Adjusted Ages (csv):</strong> If a caregiver indicated
+                that a child was born prior to their due date, the percentile scores will be based on an adjusted
+                benchmark age. For example, a 21-month-old child who was born 4 weeks early would have a benchmark age
+                of 21 months, but an adjusted benchmark age of 20 months after correcting for degree of prematurity.</li>
+            <li><strong>Summary Scores/Percentiles (csv):</strong> The same as the first option but without the
+                individual item responses.</li>
+        </ul>
+        <p>To download only certain participants, tick the box at the left of their rows and use the
+            <strong>Download</strong> menu next to "With selected". It offers the same three csv formats for just
+            those rows, plus:</p>
+        <ul>
+            <li>The <strong>Clinical Report (pdf)</strong> gives scores and percentiles for the selected administrations
+                in a friendly report format that is appropriate to share with the families or other professionals.
+                This report is currently available for the English and Spanish long forms. A version with adjusted
+                ages is also offered.</li>
+            <li><strong>Links only (csv)</strong> downloads just the participant links for the selected rows, which is
+                useful for mail-merging invitations.</li>
         </ul>
     </div>
 
@@ -233,7 +238,7 @@
         <p><strong>Sending out links:</strong> Copy and paste the links for each participant into an email. When the
             participant clicks on the link, they will first see the opening dialog box (if used), and then some basic
             instructions and the demographic questions. Note that the ages listed at the top of the form are the ages
-            that you selected in the study dialog box. See the <a href="#emails">example emails to respondents</a> at
+            that you selected for the group. See the <a href="#emails">example emails to respondents</a> at
             the end of this document.</p>
         <p>The general instructions ask respondents to complete the CDI when they have some time alone and give the
             respondent a general idea of how long it will take to complete the form. The respondent can leave and
@@ -262,13 +267,13 @@
         <p>There is a page indicator that shows the respondent how many pages are in the form and that indicates
             their progress.</p>
         <p class="alert alert-info">Tip: Note that there is no requirement to click on any item on the form, only that
-            the respondent navigate to each page in at least the minimum time set in the study dialog. Recall that the
+            the respondent navigate to each page in at least the minimum time set for the group. Recall that the
             respondent will not see the "submit" button until they have reached the last page and have exceeded the
             minimum time allotted.</p>
         <p>After hitting the submit button, the respondent is asked to confirm, as no changes can be made to the form
             after the form is submitted. The respondent is then shown the splash page and a graphic summary of their
             responses. This graph is intended to provide a fun summary of their responses, but does not provide any
-            clinically-relevant information. You may toggle off the presentation of this graph in the study dialog.
+            clinically-relevant information. You may toggle off the presentation of this graph in the group settings.
             You may also modify or add to the splash page. Respondents have the option to save their graph as a pdf
             for printing or saving electronically (for displaying on the refrigerator, sharing with others, or putting
             in the child's baby book or other records).</p>
@@ -365,4 +370,44 @@
             <p>[INSERT LINK]</p>
         </details>
     </div>
+
+    <div class="wcdi-card-panel" style="margin-bottom:16px" id="cite">
+        <h2>How to cite</h2>
+        {% include "webcdi/_how_to_cite.html" %}
+    </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Highlight the current section in the sidebar as the reader scrolls: the
+// active section is the last one whose top has passed a line 25% down the
+// viewport (so the heading you're reading is the one lit up).
+(function () {
+    var links = Array.prototype.slice.call(document.querySelectorAll('.wcdi-doc-toc a[href^="#"]'));
+    var targets = links.map(function (a) {
+        return { a: a, el: document.getElementById(a.getAttribute('href').slice(1)) };
+    }).filter(function (t) { return t.el; });
+    if (!targets.length) return;
+    var ticking = false;
+    function update() {
+        ticking = false;
+        var line = window.innerHeight * 0.25;
+        var current = targets[0];
+        targets.forEach(function (t) {
+            if (t.el.getBoundingClientRect().top <= line) current = t;
+        });
+        // at the very bottom the last section can't reach the line; light it anyway
+        if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
+            current = targets[targets.length - 1];
+        }
+        targets.forEach(function (t) { t.a.classList.toggle('active', t === current); });
+    }
+    window.addEventListener('scroll', function () {
+        if (!ticking) { ticking = true; window.requestAnimationFrame(update); }
+    }, { passive: true });
+    update();
+})();
+</script>
 {% endblock %}

@@ -10,6 +10,7 @@ from django.urls import reverse
 from django.views import generic
 from ipware.ip import get_client_ip
 
+from brookes.utils import BROOKES_SUPPORT_URL, purchase_url_for
 from researcher_UI.forms import *
 from researcher_UI.models import Study
 from researcher_UI.utils.admin_new import admin_new_fun
@@ -111,6 +112,10 @@ class AdminNew(LoginRequiredMixin, generic.UpdateView):
         context["username"] = researcher.username
         context["study_name"] = self.object.name
         context["study_group"] = self.object.study_group
+        # for the no-licence modal (no_brookes_code.html)
+        context["instrument_family"] = self.object.instrument.family
+        context["purchase_url"] = purchase_url_for(self.object.instrument.family)
+        context["support_url"] = BROOKES_SUPPORT_URL
         return context
 
     def form_valid(self, form, *args, **kwargs):

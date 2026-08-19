@@ -324,6 +324,43 @@ main[role="main"] {
   outline: none;
   box-shadow: 0 0 0 2px rgba(43, 93, 140, 0.15);
 }
+/* wider variant for single-purpose forms with explanatory copy (Brookes code) */
+.wcdi-auth-card-wide {
+  max-width: 460px;
+}
+.wcdi-auth-card .wcdi-eyebrow {
+  font-size: 11.5px;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--wcdi-ink-soft);
+  margin-bottom: 4px;
+}
+.wcdi-auth-card .wcdi-auth-sub a {
+  white-space: nowrap;
+}
+.wcdi-form-error {
+  color: #a33a3a;
+  font-size: 13.5px;
+  margin: -6px 0 10px;
+}
+.wcdi-auth-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 4px;
+}
+.wcdi-auth-actions .btn-link {
+  padding-left: 0;
+}
+.wcdi-auth-foot {
+  margin: 16px 0 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--wcdi-line);
+  font-size: 13px;
+  color: var(--wcdi-ink-soft);
+}
 
 /* ---- researcher console interior ---- */
 /* table.html ships its own .login-card style block; neutralize its
@@ -643,3 +680,58 @@ hr {
   border-color: var(--wcdi-primary);
   color: var(--wcdi-primary-deep);
 }
+
+/* ---- documentation: sticky sidebar TOC ---- */
+.wcdi-doc {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0 32px;
+}
+@media (min-width: 992px) {
+  .wcdi-doc { grid-template-columns: 220px minmax(0, 1fr); }
+  .wcdi-doc-toc { position: sticky; top: 20px; align-self: start; margin-top: 22px; }
+}
+.wcdi-doc-toc-title {
+  font-size: 11.5px;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--wcdi-ink-soft);
+  margin: 0 0 8px;
+}
+.wcdi-doc-toc ol {
+  list-style: none;
+  margin: 0 0 18px;
+  padding: 0;
+  border-left: 2px solid var(--wcdi-line);
+}
+.wcdi-doc-toc li a {
+  display: block;
+  padding: 5px 0 5px 12px;
+  margin-left: -2px;
+  border-left: 2px solid transparent;
+  font-size: 13.5px;
+  color: var(--wcdi-ink-soft);
+  text-decoration: none;
+}
+.wcdi-doc-toc li a:hover { color: var(--wcdi-ink); }
+.wcdi-doc-toc li a.active {
+  color: var(--wcdi-primary);
+  border-left-color: var(--wcdi-primary);
+  font-weight: 600;
+}
+@media (max-width: 991.98px) {
+  .wcdi-doc-toc { background: var(--wcdi-card); border: 1px solid var(--wcdi-line); border-radius: var(--wcdi-radius); padding: 14px 16px 4px; margin: 18px 0 0; }
+  .wcdi-doc-toc ol { columns: 2; column-gap: 24px; border-left: 0; }
+  .wcdi-doc-toc li a { border-left: 0; margin-left: 0; padding-left: 0; }
+}
+.wcdi-doc-main { min-width: 0; }
+.wcdi-doc-main .wcdi-card-panel h2 { scroll-margin-top: 16px; }
+.wcdi-doc-main .wcdi-card-panel[id] { scroll-margin-top: 12px; }
+.wcdi-ref {
+  padding-left: 1.6em;
+  text-indent: -1.6em;
+  font-size: 14.5px;
+  color: var(--wcdi-ink-soft);
+}
+.wcdi-ref a { word-break: break-all; }
