@@ -72,6 +72,9 @@ class StudyCreateView(LoginRequiredMixin, generic.CreateView):
                 #    return render(request, "researcher_UI/500_error.html", context)
                 if res:
                     return res
+                elif "delete-study" in request.POST:
+                    # the group is gone; land on the dashboard, not its empty page
+                    return redirect(reverse("researcher_ui:console"))
                 else:
                     target = reverse(
                         "researcher_ui:console_study", kwargs={"pk": study_obj.pk}

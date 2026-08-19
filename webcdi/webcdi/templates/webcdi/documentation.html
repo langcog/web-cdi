@@ -71,7 +71,7 @@
 
     <div class="wcdi-card-panel" style="margin-bottom:16px" id="groups">
         <h2>Creating an administration group (study) and its options</h2>
-        <p>Once you have selected your instruments, click <strong>+ New administration group</strong> on your
+        <p>Once you have selected your instruments, click <strong>New administration group</strong> on your
             dashboard. Give the group a name and choose the instrument from the dropdown. Each group administers
             exactly one instrument.</p>
         <p class="alert alert-info">Tip: In some cases, you might be administering multiple instruments to a single
@@ -158,43 +158,46 @@
                 standard message. You have the option to add to this message or replace it altogether.</li>
         </ul>
         <p>Click <strong>Save</strong>. You can change any of these options except the instrument later, from the
-            group's page via <strong>Update Group</strong>. Open a group from the cards on your dashboard (or the group
+            group's page via <strong>Group settings</strong> (which is also where you delete a group). Open a group from the cards on your dashboard (or the group
             switcher at the top right of any group page) to see its administrations.</p>
     </div>
 
     <div class="wcdi-card-panel" style="margin-bottom:16px" id="participants">
         <h2>Adding administrations</h2>
-        <p>On a group's page, click <strong>Add Administrations</strong>. There are several ways to add
-            participants. The most typical use-case is to type your own list of participant IDs into the
-            <strong>Your Own Participant ID(s)</strong> box, e.g., 1111, 1112, 1113, etc. These IDs must be all
+        <p>On a group's page, click <strong>Add administrations</strong> and pick a method from the tabs. The most typical
+            use-case is <strong>Enter participant IDs</strong>: type your own list of IDs, e.g., 1111, 1112, 1113, etc. These IDs must be all
             numeric (i.e., no letters). If you enter an ID that already exists in the group, the system assumes it is
             the same child and creates an additional administration for that ID.</p>
         <p class="alert alert-info">Tip: You can also add another administration for an existing participant by
-            ticking their row in the table and clicking <strong>Re-administer</strong>. A new administration of that
+            ticking their row in the table and clicking <strong>Re-administer</strong>. To remove administrations,
+            tick them and click <strong>Delete</strong>. A new administration of that
             ID will appear in the list.</p>
-        <p>You can also autogenerate a list of IDs (e.g., if you are running several participants at a site on the
-            same day, such as a Children's Museum), upload a CSV of IDs, or use a single reusable link. The single
-            reusable link is designed to be used with external platforms, e.g., Facebook or Prolific: anyone who opens
-            it creates a new administration with a Web-CDI-generated ID. Please contact the Web-CDI team for more
-            information about using single reusable links.</p>
+        <p>The other tabs let Web-CDI <strong>generate IDs for you</strong> (e.g., if you are running several participants
+            at a site on the same day, such as a Children's Museum), <strong>upload a CSV of IDs</strong>, or copy a
+            <strong>reusable link</strong>. The reusable link is designed for external platforms, e.g., Facebook or
+            Prolific: anyone who opens it creates a new administration with a Web-CDI-generated ID. Please contact the
+            Web-CDI team for more information about using reusable links. The last tab, <strong>Import completed
+            responses</strong>, imports the CSV exported by the English MB-CDI fillable PDFs as already-completed
+            administrations.</p>
         <p class="alert alert-info">Tip: When you enter IDs into Web-CDI, these should be meaningful to you, as it is
             the only way for you to track your participants within Web-CDI. You can also record additional information
-            in the <strong>Local Lab ID</strong> field &mdash; which has no constraints on format (it can contain letters)
-            &mdash; by clicking the pencil (edit) button on a row.</p>
+            in the <strong>Lab ID</strong> field &mdash; which has no constraints on format (it can contain letters)
+            &mdash; by clicking <strong>Edit</strong> on a row.</p>
     </div>
 
     <div class="wcdi-card-panel" style="margin-bottom:16px" id="tracking">
         <h2>Tracking completion</h2>
-        <p>The table on the group's page lists each administration with its number (1st, 2nd, etc.), the link you
-            send to the respondent, the local lab ID (if used), and when the link was created, last modified, and will
-            expire. A cross means the background form or the CDI itself has not yet been completed by the respondent;
-            a checkmark means it has. You can use the last-modified time to see whether a respondent has opened the
-            link and started completing the form. You may need to refresh the page to see new checkmarks. A checkmark
-            under <strong>Scored</strong> indicates that the scores have been computed by the system and are ready for
-            download.</p>
+        <p>The table on the group's page lists each administration with its number (1st, 2nd, etc.), the
+            participant's link (<strong>Open</strong> to preview it, or the copy button to paste it into an email), the
+            lab ID (if used), its <strong>Status</strong>, and when it was created, expires, and was completed. Status
+            runs <em>Not started &rarr; In progress</em> (background info done, CDI under way) <em>&rarr; Completed
+            &rarr; Scored</em> (scores computed by the system and ready for download); a link that ran out before the
+            form was finished shows <em>Expired</em>. Hover the status for the last time the respondent touched the
+            form. You may need to refresh the page to see changes.</p>
         <p class="alert alert-info">Tip: If an individual participant has not given consent for their data to be
-            shared with Wordbank &mdash; even though your group, in general, has opted in for sharing &mdash; click the
-            pencil (edit) button on their row and set <strong>Opted out of sharing</strong> to Yes. You must do this
+            shared with Wordbank &mdash; even though your group, in general, has opted in for sharing &mdash; click
+            <strong>Edit</strong> on their row and set <strong>Opted out of data sharing</strong> to Yes (an
+            <em>opt-out</em> chip then appears next to the status). You must do this
             for every administration: the setting does not carry over when a new administration is added with the same
             subject ID.</p>
     </div>
@@ -202,7 +205,8 @@
     <div class="wcdi-card-panel" style="margin-bottom:16px" id="downloading">
         <h2>Downloading data &amp; scoring</h2>
         <p>After your respondents have completed their CDIs, you have several options for how to download their
-            responses and scores. The <strong>Download All</strong> menu covers every administration in the group:</p>
+            responses and scores, all under the <strong>Download</strong> menu. With no rows ticked it covers every
+            administration in the group; tick rows first and the same menu applies to just those rows:</p>
         <ul>
             <li><strong>Items and Summary Scores/Percentiles (csv):</strong> The csv output will first have all of the
                 basic metadata, the demographic responses, and then all of the responses for each item. Lastly, the
@@ -220,16 +224,14 @@
             <li><strong>Summary Scores/Percentiles (csv):</strong> The same as the first option but without the
                 individual item responses.</li>
         </ul>
-        <p>To download only certain participants, tick the box at the left of their rows and use the
-            <strong>Download</strong> menu next to "With selected". It offers the same three csv formats for just
-            those rows, plus:</p>
+        <p>Two items need a selection (they are per-participant outputs), so tick rows first:</p>
         <ul>
             <li>The <strong>Clinical Report (pdf)</strong> gives scores and percentiles for the selected administrations
                 in a friendly report format that is appropriate to share with the families or other professionals.
                 This report is currently available for the English and Spanish long forms. A version with adjusted
                 ages is also offered.</li>
-            <li><strong>Links only (csv)</strong> downloads just the participant links for the selected rows, which is
-                useful for mail-merging invitations.</li>
+            <li><strong>Participant links (csv)</strong> downloads just the participant links for the selected rows
+                (tick the header checkbox for all of them), which is useful for mail-merging invitations.</li>
         </ul>
     </div>
 

@@ -735,3 +735,206 @@ hr {
   color: var(--wcdi-ink-soft);
 }
 .wcdi-ref a { word-break: break-all; }
+
+/* ---- study-group page: selection toolbar, table, dialogs (round-2 redesign) ---- */
+.wcdi-table-scroll {
+  overflow-x: auto;
+  max-width: 100%;
+}
+.wcdi-admin-table {
+  margin-bottom: 0;
+  border-collapse: separate; /* needed for sticky cells to keep their borders */
+  border-spacing: 0;
+}
+.wcdi-admin-table thead th {
+  white-space: nowrap;
+  background: var(--wcdi-card);
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+.wcdi-admin-table td {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  background: var(--wcdi-card);
+}
+.wcdi-admin-table tbody tr:hover td {
+  background: var(--wcdi-primary-wash);
+}
+/* pinned identity columns: select, edit, participant ID */
+.wcdi-admin-table .wcdi-col-select_col,
+.wcdi-admin-table .wcdi-col-edit,
+.wcdi-admin-table .wcdi-col-subject_id {
+  position: sticky;
+  z-index: 1;
+}
+.wcdi-admin-table thead .wcdi-col-select_col,
+.wcdi-admin-table thead .wcdi-col-edit,
+.wcdi-admin-table thead .wcdi-col-subject_id {
+  z-index: 3;
+}
+.wcdi-admin-table .wcdi-col-select_col { left: 0; width: 36px; }
+.wcdi-admin-table .wcdi-col-edit { left: 36px; width: 76px; }
+.wcdi-admin-table .wcdi-col-subject_id { left: 112px; font-weight: 600; }
+.wcdi-admin-table .wcdi-col-subject_id::after {
+  /* soft edge that appears when the table scrolls under the pinned columns */
+  content: "";
+  position: absolute;
+  top: 0; right: -1px; bottom: 0;
+  width: 1px;
+  background: var(--wcdi-line);
+}
+.wcdi-admin-table .wcdi-col-repeat_num { text-align: center; }
+
+.wcdi-row-edit {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid var(--wcdi-line);
+  background: var(--wcdi-card);
+  color: var(--wcdi-primary);
+  font-size: 12.5px;
+  font-weight: 600;
+  border-radius: 6px;
+  padding: 3px 8px;
+  cursor: pointer;
+  line-height: 1.3;
+}
+.wcdi-row-edit:hover {
+  border-color: var(--wcdi-primary);
+  background: var(--wcdi-primary-wash);
+}
+.wcdi-link-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.wcdi-copy-link {
+  border: 1px solid var(--wcdi-line);
+  background: var(--wcdi-card);
+  color: var(--wcdi-ink-soft);
+  border-radius: 6px;
+  width: 26px;
+  height: 24px;
+  cursor: pointer;
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.wcdi-copy-link:hover { color: var(--wcdi-primary); border-color: var(--wcdi-primary); }
+.wcdi-copy-link.copied { color: var(--wcdi-check); border-color: var(--wcdi-check); }
+
+.wcdi-badge {
+  display: inline-block;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 2px 9px;
+  border-radius: 999px;
+  white-space: nowrap;
+  line-height: 1.5;
+}
+.wcdi-badge-scored   { background: var(--wcdi-primary-wash); color: var(--wcdi-primary); }
+.wcdi-badge-done     { background: var(--wcdi-check-wash);   color: var(--wcdi-check); }
+.wcdi-badge-survey   { background: #fbf1e2; color: #8a5a14; }
+.wcdi-badge-progress { background: #fbf1e2; color: #8a5a14; }
+.wcdi-badge-new      { background: #eef1f4; color: var(--wcdi-ink-soft); }
+.wcdi-badge-expired  { background: #fbeaea; color: #a33a3a; }
+.wcdi-badge-inactive { background: #eef1f4; color: var(--wcdi-ink-soft); text-decoration: line-through; }
+.wcdi-chip {
+  display: inline-block;
+  font-size: 10.5px;
+  color: var(--wcdi-ink-soft);
+  border: 1px solid var(--wcdi-line);
+  border-radius: 4px;
+  padding: 0 5px;
+  margin-left: 6px;
+  vertical-align: 1px;
+}
+.wcdi-table-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 8px;
+}
+.wcdi-table-foot nav { margin: 0; }
+.wcdi-table-foot .pagination { margin: 0; }
+
+.wcdi-edit-meta {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 4px 14px;
+  font-size: 13px;
+  margin: 14px 0 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--wcdi-line);
+}
+.wcdi-edit-meta dt { color: var(--wcdi-ink-soft); font-weight: 500; }
+.wcdi-edit-meta dd { margin: 0; }
+
+/* download menu: scope header + disabled-with-reason items */
+.wcdi-download-menu { min-width: 320px; }
+.wcdi-download-menu .dropdown-header {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--wcdi-ink-soft);
+}
+.wcdi-download-menu .wcdi-scope-selected { color: var(--wcdi-primary); }
+.wcdi-download-menu .dropdown-item.disabled,
+.wcdi-download-menu .dropdown-item:disabled { color: var(--wcdi-ink-soft); opacity: 0.75; cursor: default; }
+.wcdi-needs-hint { font-size: 11.5px; color: var(--wcdi-ink-soft); }
+
+.wcdi-selection-label { white-space: nowrap; }
+.wcdi-danger-text { color: #a33a3a; }
+.wcdi-btn-danger-solid, .wcdi-btn-danger-solid:focus {
+  background: #a33a3a;
+  border-color: #a33a3a;
+  color: #fff;
+  font-weight: 600;
+}
+.wcdi-btn-danger-solid:hover:not(:disabled) { background: #8a2f2f; border-color: #8a2f2f; color: #fff; }
+.wcdi-btn-danger-solid:disabled { opacity: 0.5; background: #a33a3a; border-color: #a33a3a; color: #fff; }
+
+/* danger zone (group settings page) */
+.wcdi-danger-zone {
+  border: 1px solid #d9a3a3;
+  border-radius: var(--wcdi-radius);
+  background: var(--wcdi-card);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+.wcdi-danger-zone h2 { color: #a33a3a; font-size: 16px; margin: 0 0 2px; }
+.wcdi-danger-zone p { margin: 0; font-size: 13.5px; color: var(--wcdi-ink-soft); max-width: 56ch; }
+
+/* add-administrations dialog: method tabs */
+.wcdi-method-pills { gap: 6px; margin-bottom: 14px; }
+.wcdi-method-pills .nav-link {
+  font-size: 13.5px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--wcdi-line);
+  color: var(--wcdi-ink);
+  background: var(--wcdi-paper);
+}
+.wcdi-method-pills .nav-link.active {
+  background: var(--wcdi-primary);
+  border-color: var(--wcdi-primary);
+  color: #fff;
+  font-weight: 600;
+}
+.wcdi-method-pills .wcdi-method-pill-sep { margin-left: auto; }
+.wcdi-method-pills .wcdi-method-pill-sep .nav-link:not(.active) { border-style: dashed; color: var(--wcdi-ink-soft); }
+.wcdi-method-panels { min-height: 120px; }
+.wcdi-method-help { font-size: 14px; color: var(--wcdi-ink-soft); margin: 0 0 10px; }
+.wcdi-method-label { font-size: 13px; font-weight: 600; margin-bottom: 4px; display: block; }
+.wcdi-link-row { display: flex; gap: 8px; align-items: center; }
+.wcdi-link-row input { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; }
