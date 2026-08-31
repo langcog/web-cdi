@@ -38,3 +38,4 @@ __pycache__/
 
 # in-browser CAT engine build deps
 webcdi/cdi_forms/cat_forms/jscat/node_modules/
+forms/
