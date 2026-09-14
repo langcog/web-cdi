@@ -984,3 +984,34 @@ hr {
   width: 15px;
   height: 15px;
 }
+
+/* ---- scroll hint: content fades into the sticky nav bar while more of the
+   page sits below the fold; a chevron marks it. Toggled by JS. ---- */
+.wcdi-scroll-hint {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -46px;
+  height: 46px;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(250, 251, 252, 0), rgba(250, 251, 252, 0.95));
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.wcdi-scroll-hint.visible {
+  opacity: 1;
+}
+.wcdi-scroll-hint .material-icons {
+  font-size: 24px;
+  color: var(--wcdi-ink-soft);
+}
+
+/* language subheads inside the instrument-citations block */
+.wcdi-cite-lang {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 16px 0 6px;
+}
