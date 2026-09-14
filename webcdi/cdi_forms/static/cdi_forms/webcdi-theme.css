@@ -1005,8 +1005,13 @@ hr {
   opacity: 1;
 }
 .wcdi-scroll-hint .material-icons {
-  font-size: 24px;
-  color: var(--wcdi-ink-soft);
+  font-size: 30px;
+  color: var(--wcdi-primary);
+  background: var(--wcdi-card);
+  border: 1px solid var(--wcdi-line);
+  border-radius: 50%;
+  box-shadow: 0 1px 4px rgba(36, 49, 58, 0.12);
+  margin-bottom: 2px;
 }
 
 /* language subheads inside the instrument-citations block */
