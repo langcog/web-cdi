@@ -938,3 +938,85 @@ hr {
 .wcdi-method-label { font-size: 13px; font-weight: 600; margin-bottom: 4px; display: block; }
 .wcdi-link-row { display: flex; gap: 8px; align-items: center; }
 .wcdi-link-row input { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; }
+
+/* ---- form item radio/checkbox option groups (WG understands/says, WS usage, etc.) ----
+   The markup right-aligns each label's own content, so option circles land at
+   ragged x-positions (QA: "this looks bad"). Render the option list as a grid
+   column instead: labels share a left edge (circles align vertically) and the
+   whole block anchors to the card's right edge; centered vertically. */
+.alco-child .btn-group-vertical[data-toggle="buttons"],
+.alco-child1 .btn-group-vertical[data-toggle="buttons"] {
+  display: grid !important; /* outranks Bootstrap's .d-flex */
+  justify-content: end;
+  justify-items: start;
+  align-content: center;
+  gap: 2px;
+}
+.alco-child .btn-group-vertical[data-toggle="buttons"] label.btn,
+.alco-child1 .btn-group-vertical[data-toggle="buttons"] label.btn {
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: auto;
+  margin: 0;
+}
+@media (max-width: 991.98px) {
+  /* stacked under the word on narrow screens: align with it instead */
+  .alco-child .btn-group-vertical[data-toggle="buttons"],
+  .alco-child1 .btn-group-vertical[data-toggle="buttons"] {
+    justify-content: start;
+  }
+}
+
+/* inline checkbox row (avoids Bootstrap's absolutely-positioned .form-check-input,
+   which QA saw hanging off the left edge of the add-administrations dialog) */
+.wcdi-check-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 400;
+  margin-bottom: 0;
+  cursor: pointer;
+}
+.wcdi-check-inline input[type="checkbox"] {
+  position: static;
+  margin: 0;
+  width: 15px;
+  height: 15px;
+}
+
+/* ---- scroll hint: content fades into the sticky nav bar while more of the
+   page sits below the fold; a chevron marks it. Toggled by JS. ---- */
+.wcdi-scroll-hint {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -46px;
+  height: 46px;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(250, 251, 252, 0), rgba(250, 251, 252, 0.95));
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.wcdi-scroll-hint.visible {
+  opacity: 1;
+}
+.wcdi-scroll-hint .material-icons {
+  font-size: 30px;
+  color: var(--wcdi-primary);
+  background: var(--wcdi-card);
+  border: 1px solid var(--wcdi-line);
+  border-radius: 50%;
+  box-shadow: 0 1px 4px rgba(36, 49, 58, 0.12);
+  margin-bottom: 2px;
+}
+
+/* language subheads inside the instrument-citations block */
+.wcdi-cite-lang {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 16px 0 6px;
+}

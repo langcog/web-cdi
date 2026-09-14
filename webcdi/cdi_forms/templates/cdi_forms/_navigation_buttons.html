@@ -2,6 +2,8 @@
 
 <!-- Navigation bar: back / progress / forward, with quiet secondary actions -->
 <div class="button-wrapper wcdi-form-nav">
+    {# Fades the content edge and shows a chevron while there is more of this page below the viewport #}
+    <div class="wcdi-scroll-hint" aria-hidden="true"><i class="material-icons">expand_more</i></div>
     <div class="wcdi-form-nav-row">
         {% if data.menu > 1 %}
             <input name="btn-previous" value="&#8592;" aria-label="{% trans 'Previous Page' %}" title="{% trans 'Previous Page' %}" class="btn btn-secondary wcdi-nav-arrow" type="submit">
@@ -36,3 +38,27 @@
     </div>
     <p class="wcdi-nav-hint">{% trans "Don't forget to save your progress whenever you can!" %}</p>
 </div>
+
+<script>
+    // Show the scroll hint only while there is more of the page below the fold.
+    (function () {
+        var hint = document.querySelector('.wcdi-scroll-hint');
+        if (!hint) return;
+        var scheduled = false;
+        function update() {
+            scheduled = false;
+            var more = window.innerHeight + window.scrollY <
+                       document.documentElement.scrollHeight - 60;
+            hint.classList.toggle('visible', more);
+        }
+        function schedule() {
+            if (!scheduled) { scheduled = true; setTimeout(update, 80); }
+        }
+        window.addEventListener('scroll', schedule, { passive: true });
+        window.addEventListener('resize', schedule);
+        // the form swaps pages in place, changing the document height
+        new MutationObserver(schedule).observe(document.body,
+            { childList: true, subtree: true, attributes: true, attributeFilter: ['class', 'style'] });
+        update();
+    })();
+</script>

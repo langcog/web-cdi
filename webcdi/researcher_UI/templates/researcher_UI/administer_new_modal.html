@@ -45,13 +45,15 @@
           </div>
 
           <div class="tab-pane fade" id="tab-csv" role="tabpanel">
-            <p class="wcdi-method-help">One ID per row. If the file has a header row, tick the box and tell us which column holds the IDs.</p>
+            <p class="wcdi-method-help">Upload a file with one ID per row. Web-CDI will assume that your IDs are in the
+              first column (other columns are ignored). If the file has a header row, tick the box &mdash; you can then
+              name a different ID column.</p>
             <label for="subject-ids-csv" class="wcdi-method-label">CSV file</label>
             <input type="file" name="subject-ids-csv" class="form-control-file" id="subject-ids-csv" accept=".csv,text/csv">
-            <div class="form-check" style="margin-top:10px;">
-              <input type="checkbox" class="form-check-input" name="csv-header" id="csv-header">
-              <label class="form-check-label" for="csv-header">This file has a header row</label>
-            </div>
+            <label class="wcdi-check-inline" style="margin-top:10px;">
+              <input type="checkbox" name="csv-header" id="csv-header">
+              This file has a header row
+            </label>
             <div id="subj_col_div" class="collapse" style="margin-top:8px;">
               <input type="text" name="subject-ids-column" id="subject-ids-column" class="form-control"
                      placeholder="Name of the ID column (e.g. subject_id)" style="max-width:320px;">
