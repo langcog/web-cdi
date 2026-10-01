@@ -49,7 +49,7 @@
     <div class='container'>
         <!-- Row displaying username, help button, and logout button. -->
         <div class='row'>
-        	<form style="width:100%" action="/accounts/logout/">
+        	<form style="width:100%" method="post" action="/accounts/logout/">{% csrf_token %}
 
                 <fieldset>
                     <legend>User:</legend>
