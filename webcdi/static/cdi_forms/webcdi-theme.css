@@ -1020,3 +1020,25 @@ hr {
   font-weight: 700;
   margin: 16px 0 6px;
 }
+
+/* collapsible Get started card on the dashboard */
+.wcdi-getstarted-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  color: inherit;
+  text-decoration: none;
+}
+.wcdi-getstarted-toggle:hover {
+  color: inherit;
+  text-decoration: none;
+}
+.wcdi-getstarted-toggle .fa {
+  color: var(--wcdi-ink-soft);
+  font-size: 13px;
+  transition: transform 0.2s ease;
+}
+.wcdi-getstarted-toggle.collapsed .fa {
+  transform: rotate(-90deg);
+}

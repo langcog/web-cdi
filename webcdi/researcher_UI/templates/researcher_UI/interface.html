@@ -14,6 +14,25 @@
                 </div>
             </div>
 
+            {# Get started: shown to everyone; open for new users, collapsed once you have groups #}
+            <div class="wcdi-card-panel wcdi-getstarted" style="max-width:620px; margin-bottom:18px;">
+                <a class="wcdi-getstarted-toggle{% if studies %} collapsed{% endif %}" data-toggle="collapse"
+                   href="#getting-started" role="button"
+                   aria-expanded="{% if studies %}false{% else %}true{% endif %}" aria-controls="getting-started">
+                    <h2 style="margin:0;">Get started</h2>
+                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                </a>
+                <div id="getting-started" class="collapse{% if not studies %} show{% endif %}">
+                    <p style="margin-top:12px;">Welcome! Setting up data collection takes three steps:</p>
+                    <ol style="padding-left:20px;">
+                        <li style="margin-bottom:6px;"><a href="{% url 'researcher_ui:researcher_add_instruments' pk=request.user.researcher.pk %}">Select the CDI instruments</a> you plan to use (some require a Brookes Publishing access code).</li>
+                        <li style="margin-bottom:6px;"><a href="{% url 'researcher_ui:add_study' %}">Create an administration group</a> — one per form, e.g. one group for Words &amp; Gestures and one for Words &amp; Sentences.</li>
+                        <li>Add administrations to the group and send participants their links.</li>
+                    </ol>
+                    <p style="margin-bottom:0;">The <a href="{% url 'documentation' %}">documentation</a> walks through the whole workflow.</p>
+                </div>
+            </div>
+
             {% if studies %}
                 <div class="row" style="row-gap:14px;">
                     {% for study in studies %}
@@ -32,17 +51,6 @@
                             </div>
                         </div>
                     {% endfor %}
-                </div>
-            {% else %}
-                <div class="wcdi-card-panel" style="max-width:620px;">
-                    <h2>Get started</h2>
-                    <p>Welcome! Setting up data collection takes three steps:</p>
-                    <ol style="padding-left:20px;">
-                        <li style="margin-bottom:6px;"><a href="{% url 'researcher_ui:researcher_add_instruments' pk=request.user.researcher.pk %}">Select the CDI instruments</a> you plan to use (some require a Brookes Publishing access code).</li>
-                        <li style="margin-bottom:6px;"><a href="{% url 'researcher_ui:add_study' %}">Create an administration group</a> — one per form, e.g. one group for Words &amp; Gestures and one for Words &amp; Sentences.</li>
-                        <li>Add administrations to the group and send participants their links.</li>
-                    </ol>
-                    <p style="margin-bottom:0;">The <a href="{% url 'documentation' %}">documentation</a> walks through the whole workflow.</p>
                 </div>
             {% endif %}
         {% endif %}
