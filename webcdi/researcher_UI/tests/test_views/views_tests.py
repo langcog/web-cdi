@@ -240,6 +240,21 @@ class StudyCreateViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(str(response), '<HttpResponse status_code=200, "text/csv">')
 
+    def test_post_download_dictionary_english(self):
+        # English WS/WG take the footer branch; setUp's random instrument rarely hits it
+        study = Study.objects.create(
+            researcher=self.user,
+            name="English dictionary",
+            instrument=Instrument.objects.get(name="English_WS"),
+        )
+        self.client.force_login(self.user)
+        response = self.client.post(
+            reverse("researcher_ui:console_study", kwargs={"pk": study.pk}),
+            {"download-dictionary": True},
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response["Content-Type"], "text/csv")
+
     def test_post_delete_study(self):
         self.client.force_login(self.user)
         payload = {
