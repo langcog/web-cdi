@@ -1,0 +1,6 @@
+google-genai==2.29.0
+openpyxl==3.1.5
+pandas==3.0.6
+pdfplumber==0.11.10
+pyarrow==26.0.0
+PyYAML==6.0.3

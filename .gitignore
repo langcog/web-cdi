@@ -50,3 +50,7 @@ forms/
 *.tfstate.backup
 *.tfplan
 *.local.tfvars
+
+# instrument authoring tools: local venv and LLM response cache
+instruments/.venv/
+instruments/.cache/

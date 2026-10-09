@@ -1,0 +1,16 @@
+instrument,itemID,category,definition,gloss,issue,confidence,explanation,suggested_fix
+Korean_WS,item_419,action_words,떄려,hit,misspelling,high,'떄려' is misspelled with 'ㅒ' instead of 'ㅐ' ('때려').,때려
+Korean_WS,item_455,action_words,뺴앗아,take away,misspelling,high,'뺴앗아' is misspelled with 'ㅒ' instead of 'ㅐ' ('빼앗아').,빼앗아
+Korean_WS,item_593,case_markers,-야,verb ending,gloss_mismatch,high,"The particle '-야' under case_markers is the vocative marker (호격 조사), but has been erroneously glossed as 'verb ending'.",vocative
+Korean_WS,item_596,case_markers,-하고,verb ending,gloss_mismatch,high,"The particle '-하고' under case_markers is a connective/comitative particle meaning 'and' or 'with', but has been erroneously glossed as 'verb ending'.",with/and
+Dutch_WS,item_130,food_drink,fruisap/sap,juice,misspelling,high,'fruisap' is a misspelling of Dutch 'fruitsap' (fruit juice).,fruitsap/sap
+Dutch_WS,item_157,food_drink,sandwich/pislolet/broodje/kadetje,sandwich,misspelling,high,'pislolet' is a misspelling of Belgian Dutch 'pistolet' (bread roll).,sandwich/pistolet/broodje/kadetje
+Dutch_WS,item_233,body_parts,wang/kaak,cachete,gloss_mismatch,high,The gloss 'cachete' is in Spanish rather than English. The English gloss for 'wang/kaak' is 'cheek'.,cheek
+Dutch_WS,item_270,household,steutel(s),key,misspelling,high,'steutel(s)' is a typographical error for 'sleutel(s)'.,sleutel(s)
+Dutch_WS,item_322,outside,dak,ceiling,gloss_mismatch,high,"'dak' means 'roof' in Dutch, whereas 'ceiling' is 'plafond'. In the 'outside' category of the CDI, the target word is 'roof'.",roof
+Dutch_WS,item_630,question_words,hoe,as,gloss_mismatch,high,"The Dutch question word 'hoe' means 'how', but is glossed as 'as'.",how
+Dutch_WS,item_639,prepositions,af,of,gloss_mismatch,medium,"The Dutch preposition 'af' corresponds to English 'off', not 'of'.",off
+Hebrew_WS,item_292,furniture_rooms,מפה,map,gloss_mismatch,high,"Under the category furniture_rooms, 'מפה' refers to a tablecloth, not a geographic 'map'.",tablecloth
+French_Quebec_WS,item_215,household,camera,,misspelling,medium,"""camera"" is missing the acute accent on the first ""e"" in French orthography.",caméra
+Argentine_Spanish_WS,item380,games_routines,a ver... a pasear,,merged_items,medium,"""a ver... a pasear"" appears to be two separate routine items (""a ver..."" and ""a pasear"") accidentally merged together.",
+Argentine_Spanish_WS,item381,games_routines,adíos-chau,,misspelling,high,"""adíos"" has the accent mark incorrectly placed on the 'i' instead of the 'o'; it should be ""adiós-chau"".",adiós-chau

@@ -1,0 +1,10 @@
+# LLM QA configuration. Pin exact model IDs so every QA report is reproducible;
+# changing a model is a deliberate edit that should be followed by re-running
+# calibration (tools/calibrate.py).
+vertex:
+  project: hs-hs-langcog-gemini
+  location: global
+models:
+  item_qa: gemini-3.8-flash
+  page_compare: gemini-3.8-flash
+temperature: 0
