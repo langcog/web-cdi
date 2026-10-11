@@ -1,19 +1,27 @@
-<!-- Modal window for creating new tests within a study -->
+<!-- Shown in place of the add-administrations dialog when the group's instrument is chargeable and the researcher has no active Brookes code -->
 
-  <div class="modal-dialog modal-lg" role="document">
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 id="modal-title" class="modal-title" >Access Denied</h4>
+        <h4 id="modal-title" class="modal-title">This group needs an active access code</h4>
       </div>
-      <div class="modal-body">      
-        <p> 
-          Access to this form requires an active license, available for purchase through Brookes Publishing Co (<a href='https://brookespublishing.com/product/cdi' target='_blank'>https://brookespublishing.com/product/cdi</a>)
+      <div class="modal-body">
+        <p>
+          <strong>{{ instrument_family }}</strong> is distributed by Brookes Publishing and needs an access code
+          before administrations can be added. A code activates the instrument on your account for one year;
+          each researcher needs their own code.
         </p>
-        <hr />
+        <p style="margin-bottom:0;">
+          <a href="{{ purchase_url }}" target="_blank" rel="noopener">Buy a code for this instrument &#8599;</a>
+          &nbsp;&middot;&nbsp; Already have one?
+          <a href="{% url 'brookes:enter_codes' instrument_family.id %}">Enter your code</a>
+          &nbsp;&middot;&nbsp; Code not working?
+          <a href="{{ support_url }}" target="_blank" rel="noopener">Brookes support</a>
+        </p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

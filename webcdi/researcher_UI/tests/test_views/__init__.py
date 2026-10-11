@@ -4,7 +4,6 @@ from .ajax_views import AjaxChargeStatusTest, AjaxDemographicFormsTest  # noqa
 from .console import ConsoleViewTest  # noqa
 from .download_data_views import PDFAdministrationDetailViewTest  # noqa
 from .instrument_views import AddInstrumentsTest  # noqa
-from .login_test import LoginTestCase  # noqa
 from .no_user_redirect import NoUserRedirectTest  # noqa
 from .paired_studies import PairedStudyCreateViewTest  # noqa
 from .profile import ProileTestCase  # noqa

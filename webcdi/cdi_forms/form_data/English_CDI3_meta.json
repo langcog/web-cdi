@@ -2,7 +2,7 @@
     "parts": [
         {
             "id": 1,
-            "title": "PART 1: Words Children Use",
+            "title": "",
             "types": [
                 {
                     "id": "word",
@@ -32,7 +32,7 @@
         },
         {
             "id": 2,
-            "title": "PART 2: Sentences and Grammar",
+            "title": "",
             "types": [
                 {
                     "id": "combine",
@@ -43,14 +43,14 @@
                 {
                     "id": "complexity",
                     "text": "For each pair of sentences below, please mark the one that sounds MOST like the way your child talks at the moment. If your child is saying sentences even more complicated than the two provided, mark the second one.",
-                    "title": "Complexity",
+                    "title": "Sentences",
                     "type": "radiobutton",
                     "page": 6
                 },
                 {
-                	"id": "usage",
-                	"title": "Using Language",
-                	"type": "radiobutton",
+                    "id": "usage",
+                    "title": "Using Language",
+                    "type": "radiobutton",
                     "page": 7
                 },
                 {

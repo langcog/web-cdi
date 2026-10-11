@@ -1,30 +1,41 @@
 {% extends 'researcher_UI/base.html' %}
 {% load static %}
 
-{% block title %}WebCDI Interface: Add Code{% endblock %}
+{% block title %}Web-CDI: Brookes access code{% endblock %}
 {% block main %}
-    <div class='container login-card d-flex justify-content-center' style="margin-top:100px; padding-left:3rem;">
-        <div class='row'>
-            <div class="col-12"> 
-                <form action="." method="post">
-                    <h1> Please enter a valid code for {{ instrument_family }}</h1>
-                    {% csrf_token %}
-                    <div class="col-12">
+    <div class="wcdi-auth-wrap">
+        <div class="wcdi-auth-card wcdi-auth-card-wide">
+            <div class="wcdi-eyebrow">Brookes access code</div>
+            <h1>Unlock {{ instrument_family }}</h1>
+            <p class="wcdi-auth-sub">
+                This instrument is distributed by Brookes Publishing and needs an access code.
+                A code activates the instrument on your account for <strong>one year</strong>;
+                each researcher needs their own code.
+                <a href="{{ purchase_url }}" target="_blank" rel="noopener">Buy a code for this instrument &#8599;</a>
+            </p>
 
-                        {{ form.code.label }}: 
-                        {{ form.code }}
-                        {% for error in form.code.errors %}
-                            <p style="color: red">{{ error }}</p>
-                        {% endfor %}
-                    </div>
+            <form action="." method="post">
+                {% csrf_token %}
+                <label for="id_code">Access code</label>
+                <input type="text" name="code" id="id_code" maxlength="15" autocomplete="off" autofocus
+                       placeholder="Paste the code from your Brookes order"
+                       {% if form.code.value %}value="{{ form.code.value }}"{% endif %}>
+                {% for error in form.code.errors %}
+                    <p class="wcdi-form-error">{{ error }}</p>
+                {% endfor %}
 
-                    <div class="col-12 justify-content-center">
-                        <input type='submit' class='btn' style="width:200px;" name='cancel' value="Cancel">
-                        <input type="submit" class="btn btn-primary" style="width:200px;" value="Save">
-                    </div>
-                </form>
-            </div>
-        <div>
+                <div class="wcdi-auth-actions">
+                    {# The view treats a POST carrying name=cancel value=Cancel as "remove this instrument from my list"; the value must stay exactly "Cancel" (see BrookesCodeForm.clean). #}
+                    <button type="submit" class="btn btn-link wcdi-nav-link" name="cancel" value="Cancel">Not now</button>
+                    <button type="submit" class="btn btn-primary">Apply code</button>
+                </div>
+            </form>
+
+            <p class="wcdi-auth-foot">
+                <em>Not now</em> removes {{ instrument_family }} from your instrument list; you can add it back from
+                Instruments at any time. Code not working? Contact
+                <a href="{{ support_url }}" target="_blank" rel="noopener">Brookes support</a>.
+            </p>
+        </div>
     </div>
-
 {% endblock %}

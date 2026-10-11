@@ -11,9 +11,42 @@ from django.utils.translation import gettext_lazy as _
 
 from webcdi.utils import get_linux_ec2_private_ip, is_true
 
-DEBUG = bool(os.environ.get("DEBUG", False))
-# DEBUG=False
+DEBUG = is_true(os.environ.get("DEBUG", False))
 TEMPLATE_DEBUG = False
+
+
+def _parse_env_list(value):
+    """Parse a bracketed list env var.
+
+    Accepts either a quoted Python literal ('["a", "b"]') or the unquoted
+    shorthand used in EB configs ('[a,b]'), in which case quotes are added
+    and whitespace stripped before evaluation.
+    """
+    if '"' not in value:
+        value = (
+            value.replace("[", '["')
+            .replace("]", '"]')
+            .replace(",", '","')
+            .replace(" ", "")
+        )
+    return ast.literal_eval(value)
+
+
+def _parse_env_admins(value):
+    """Parse the ADMINS env var: a list of (name, email) tuples.
+
+    Accepts a quoted Python literal or the unquoted shorthand
+    ('[(Name,email@example.com)]'); the shorthand strips all whitespace,
+    including inside names.
+    """
+    if '"' not in value:
+        value = (
+            value.replace("(", '("')
+            .replace(")", '")')
+            .replace(",", '","')
+            .replace(" ", "")
+        )
+    return ast.literal_eval(value)
 
 
 def get_secret(secret_name, region_name="us-west-2"):
@@ -47,17 +80,7 @@ if AWS_INSTANCE:
     AWS_STORAGE_BUCKET_NAME = os.environ["AWS_STORAGE_BUCKET_NAME"]
     DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
-if '"' not in os.environ["ALLOWED_HOSTS"]:
-    TEMP_ALLOWED_HOSTS = os.environ["ALLOWED_HOSTS"]
-    ALLOWED_HOSTS = (
-        TEMP_ALLOWED_HOSTS.replace("[", '["')
-        .replace("]", '"]')
-        .replace(",", '","')
-        .replace(" ", "")
-    )
-    ALLOWED_HOSTS = ast.literal_eval(ALLOWED_HOSTS)
-else:
-    ALLOWED_HOSTS = ast.literal_eval(os.environ["ALLOWED_HOSTS"])
+ALLOWED_HOSTS = _parse_env_list(os.environ["ALLOWED_HOSTS"])
 if AWS_INSTANCE:
     ALLOWED_HOSTS += [
         "ec2-52-88-52-34.us-west-2.compute.amazonaws.com",
@@ -77,17 +100,7 @@ for IP in IPS_TO_ADD:
 for IP in list(NEW_IPS):
     ALLOWED_HOSTS.append(IP)
 
-if '"' not in os.environ["ADMINS"]:
-    TEMP_ADMINS = os.environ["ADMINS"]
-    ADMINS = (
-        TEMP_ADMINS.replace("(", '("')
-        .replace(")", '")')
-        .replace(",", '","')
-        .replace(" ", "")
-    )
-    ADMINS = ast.literal_eval(ADMINS)
-else:
-    ADMINS = ast.literal_eval(os.environ["ADMINS"])
+ADMINS = _parse_env_admins(os.environ["ADMINS"])
 
 DJANGO_SERVER_TYPE = os.environ.get("DJANGO_SERVER_TYPE", "DEV")  # DEV or PROD
 
@@ -120,10 +133,34 @@ RECAPTCHA_PRIVATE_KEY = os.environ.get(
 CONTACT_EMAIL = os.environ.get("CONTACT_EMAIL", "webcdi-contact@stanford.edu")
 MORE_INFO_ADDRESS = os.environ.get("MORE_INFO_ADDRESS", "http://mb-cdi.stanford.edu/")
 
+# Google Analytics measurement ID (empty string disables the snippet)
+GOOGLE_ANALYTICS_ID = os.environ.get("GOOGLE_ANALYTICS_ID", "328947117")
+
+# Gift-card redemption links shown to compensated participants
+AMAZON_GIFT_CARD_URLS = {
+    "English": {
+        "redeem_url": "http://www.amazon.com/redeem",
+        "legal_url": "http://www.amazon.com/gc-legal",
+    },
+    "Spanish": {
+        "redeem_url": "http://www.amazon.com/gc/redeem/?language=es_US",
+        "legal_url": "http://www.amazon.com/gc-legal/?language=es_US",
+    },
+    "French Quebec": {
+        "redeem_url": "http://www.amazon.ca/gc/redeem/?language=fr_CA",
+        "legal_url": "http://www.amazon.ca/gc-legal/?language=fr_CA",
+    },
+}
+
 # CAT Server
 CAT_API_BASE_URL = os.environ.get(
     "CAT_API_URL", "http://cdicatapi-env.eba-c2knb6uj.us-west-2.elasticbeanstalk.com/"
 )
+
+# CAT engine: "remote" calls the R API above per item; "browser" runs the
+# validated jsCat engine client-side (static/cdi_forms/cat/) and only posts
+# answers back for persistence.
+CAT_ENGINE = os.environ.get("CAT_ENGINE", "remote")
 
 # EMAIL settings
 EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND", "django_ses.SESBackend")
@@ -162,12 +199,18 @@ def generate_secret_key(fname):
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-try:
-    from .secret_key import *  # noqa
-except ImportError:
-    SETTINGS_DIR = os.path.abspath(os.path.dirname(__file__))
-    generate_secret_key(os.path.join(SETTINGS_DIR, "secret_key.py"))
-    from .secret_key import *  # noqa
+# Prefer the environment (set SECRET_KEY on the EB environment / in .env);
+# the generated-file fallback keeps existing deployments working but means
+# each fresh instance mints its own key (invalidating sessions), so
+# production should always set the env var.
+SECRET_KEY = os.environ.get("SECRET_KEY")
+if not SECRET_KEY:
+    try:
+        from .secret_key import *  # noqa
+    except ImportError:
+        SETTINGS_DIR = os.path.abspath(os.path.dirname(__file__))
+        generate_secret_key(os.path.join(SETTINGS_DIR, "secret_key.py"))
+        from .secret_key import *  # noqa
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
 
@@ -196,8 +239,6 @@ INSTALLED_APPS = (
     "localflavor",
     "django_countries",
     "webcdi",
-    "ckeditor",
-    "ckeditor_uploader",
     "brookes",
     "rangefilter",
 )
@@ -211,7 +252,6 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
-    "webcdi.middleware.LoginRequiredMiddleware",
     "webcdi.middleware.AdminLocaleMiddleware",
 ]
 
@@ -399,112 +439,6 @@ COUNTRIES_FIRST = ["US", "CA", "NL", "IL", "JP", "FR", "CH", "BE", "LU"]
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-CKEDITOR_UPLOAD_PATH = "ckeditor_uploads/"
-CKEDITOR_CONFIGS = {
-    "default": {
-        "toolbar": [
-            {
-                "name": "document",
-                "items": [
-                    "Source",
-                    "-",
-                    "Save",
-                    "NewPage",
-                    "Preview",
-                    "Print",
-                    "-",
-                    "Templates",
-                ],
-            },
-            {
-                "name": "clipboard",
-                "items": [
-                    "Cut",
-                    "Copy",
-                    "Paste",
-                    "PasteText",
-                    "PasteFromWord",
-                    "-",
-                    "Undo",
-                    "Redo",
-                ],
-            },
-            {"name": "editing", "items": ["Find", "Replace", "-", "SelectAll"]},
-            {
-                "name": "forms",
-                "items": [
-                    "Form",
-                    "Checkbox",
-                    "Radio",
-                    "TextField",
-                    "Textarea",
-                    "Select",
-                    "Button",
-                    "ImageButton",
-                    "HiddenField",
-                ],
-            },
-            "/",
-            {
-                "name": "basicstyles",
-                "items": [
-                    "Bold",
-                    "Italic",
-                    "Underline",
-                    "Strike",
-                    "Subscript",
-                    "Superscript",
-                    "-",
-                    "RemoveFormat",
-                ],
-            },
-            {
-                "name": "paragraph",
-                "items": [
-                    "NumberedList",
-                    "BulletedList",
-                    "-",
-                    "Outdent",
-                    "Indent",
-                    "-",
-                    "Blockquote",
-                    "CreateDiv",
-                    "-",
-                    "JustifyLeft",
-                    "JustifyCenter",
-                    "JustifyRight",
-                    "JustifyBlock",
-                    "-",
-                    "BidiLtr",
-                    "BidiRtl",
-                    "Language",
-                ],
-            },
-            {"name": "links", "items": ["Link", "Unlink", "Anchor"]},
-            {
-                "name": "insert",
-                "items": [
-                    "Image",
-                    "Flash",
-                    "Table",
-                    "HorizontalRule",
-                    "Smiley",
-                    "SpecialChar",
-                    "PageBreak",
-                    "Iframe",
-                ],
-            },
-            "/",
-            {"name": "styles", "items": ["Styles", "Format", "Font", "FontSize"]},
-            {"name": "colors", "items": ["TextColor", "BGColor"]},
-            {"name": "tools", "items": ["Maximize", "ShowBlocks"]},
-        ],
-        #'skin': 'moono',
-        #'toolbar': None,
-        "height": "100%",
-        "width": "100%",
-    }
-}
 
 AWS_QUERYSTRING_AUTH = False
 
@@ -517,34 +451,17 @@ if private_ip:
 
 CAT_FORMS = ["CAT", "CAT2"]
 
-LOGIN_EXEMPT_URLS = (
-    r"^registration/logout/$",
-    r"^registration/register/$",
-    r"^registration/password-reset/$",
-    r"^registration/password-reset/done/$",
-    r"^registration/password-reset/confirm/",
-    r"^registration/password-reset/complete/$",
-    r"^registration/password/change/$",
-    r"^registration/password/change/",
-    r"^",
-)
+# NOTE: the old LoginRequiredMiddleware + LOGIN_EXEMPT_URLS pair was removed:
+# the exempt list ended with r"^" (matches every URL), so the middleware had
+# been a no-op. Access control lives on the views — researcher views use
+# LoginRequiredMixin; participant views are anonymous by design (hash URLs).
 
 
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 TRUSTED_ORIGINS = os.environ.get("TRUSTED_ORIGINS", False)
 if TRUSTED_ORIGINS:
-    if '"' not in os.environ["TRUSTED_ORIGINS"]:
-        TRUSTED_ORIGINS = os.environ["TRUSTED_ORIGINS"]
-        CSRF_TRUSTED_ORIGINS = (
-            TRUSTED_ORIGINS.replace("[", '["')
-            .replace("]", '"]')
-            .replace(",", '","')
-            .replace(" ", "")
-        )
-        CSRF_TRUSTED_ORIGINS = ast.literal_eval(CSRF_TRUSTED_ORIGINS)
-    else:
-        CSRF_TRUSTED_ORIGINS = ast.literal_eval(os.environ["TRUSTED_ORIGINS"])
+    CSRF_TRUSTED_ORIGINS = _parse_env_list(TRUSTED_ORIGINS)
 
 CAT_LANG_DICT = {
     "en": "EN",

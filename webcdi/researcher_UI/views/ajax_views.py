@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core import serializers
 from django.http import HttpResponse, JsonResponse
 from django.views.generic import DetailView
@@ -5,7 +6,7 @@ from django.views.generic import DetailView
 from researcher_UI.models import Instrument
 
 
-class AjaxDemographicForms(DetailView):
+class AjaxDemographicForms(LoginRequiredMixin, DetailView):
     def get(self, request):
         pk = request.GET["id"]
         try:
@@ -19,7 +20,7 @@ class AjaxDemographicForms(DetailView):
         return HttpResponse(data, content_type="application/json")
 
 
-class AjaxChargeStatus(DetailView):
+class AjaxChargeStatus(LoginRequiredMixin, DetailView):
     def get(self, request):
         pk = request.GET["id"]
 

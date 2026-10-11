@@ -1,6 +1,5 @@
 import logging
 
-from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import HTML, Div, Field, Fieldset, Layout, Submit
 from django import forms
@@ -33,9 +32,10 @@ class AddStudyForm(BetterModelForm):
         queryset=Demographic.objects.all(), empty_label=_("Default"), required=False
     )  # demographic cannot be changed later
     waiver = forms.CharField(
-        widget=CKEditorUploadingWidget(),
+        widget=forms.Textarea(attrs={"rows": 6, "class": "form-control"}),
         label=_("Opening Dialog Box"),
         required=False,
+        help_text=_("You can use Markdown for formatting (**bold**, [links](url), lists)."),
     )  # Addition of an IRB waiver of documentation or any other instructive text can be added here
     allow_payment = forms.BooleanField(
         required=False,
@@ -167,7 +167,11 @@ class AddStudyForm(BetterModelForm):
     )
 
     end_message = forms.ChoiceField(choices=choices.END_MESSAGE_CHOICES)
-    end_message_text = forms.CharField(widget=CKEditorUploadingWidget(), required=False)
+    end_message_text = forms.CharField(
+        widget=forms.Textarea(attrs={"rows": 6, "class": "form-control"}),
+        required=False,
+        help_text=_("You can use Markdown for formatting (**bold**, [links](url), lists)."),
+    )
 
     share_opt_out = forms.BooleanField(
         required=False,

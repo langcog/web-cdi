@@ -17,6 +17,9 @@ class PDFAdministrationDetailViewTest(TestCase):
         self.user = User.objects.create_user(
             username="PaulMcCartney", password="PaulMcCartney"
         )
+        # the clinical PDF exposes child data; the view now requires the
+        # owning researcher to be logged in
+        self.client.force_login(self.user)
 
         instrument = Instrument.objects.filter(
             language="English",
@@ -71,3 +74,21 @@ class PDFAdministrationDetailViewTest(TestCase):
             )
         )
         self.assertEqual(response.status_code, 302)
+
+    def test_anonymous_is_redirected(self):
+        # child data must not be reachable without logging in
+        self.client.logout()
+        response = self.client.get(
+            f'{reverse("researcher_ui:pdf_summary", kwargs={"pk": self.study.id})}{self.ids}'
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertIn("/accounts/login", response.url)
+
+    def test_other_researcher_cannot_access(self):
+        # a logged-in researcher cannot read another researcher's study
+        other = User.objects.create_user(username="RingoStarr", password="RingoStarr")
+        self.client.force_login(other)
+        response = self.client.get(
+            f'{reverse("researcher_ui:pdf_summary", kwargs={"pk": self.study.id})}{self.ids}'
+        )
+        self.assertEqual(response.status_code, 404)

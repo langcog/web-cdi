@@ -1,11 +1,13 @@
+import json
 import logging
 import os.path
 
 from django.conf import settings
 from django.db.models import Min
-from django.http import Http404
-from django.shortcuts import redirect, render
+from django.http import Http404, JsonResponse
+from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone, translation
+from django.views import View
 from django.views.generic import UpdateView
 
 from cdi_forms.models import BackgroundInfo, requests_log
@@ -24,6 +26,19 @@ logger = logging.getLogger("debug")
 
 CAT_LANG_DICT = settings.CAT_LANG_DICT
 
+_CAT_BANKS = {}
+
+
+def _cat_bank(code):
+    """Load (and cache) the static item bank used by the browser engine."""
+    if code not in _CAT_BANKS:
+        path = os.path.join(
+            settings.BASE_DIR, "cdi_forms", "static", "cdi_forms", "cat", f"{code}.json"
+        )
+        with open(path, encoding="utf8") as f:
+            _CAT_BANKS[code] = json.load(f)
+    return _CAT_BANKS[code]
+
 
 # Create your views here.
 
@@ -39,6 +54,66 @@ class CATCreateBackgroundInfoView(CreateBackgroundInfoView):
 
 class CATBackpageBackgroundInfoView(BackpageBackgroundInfoView):
     pass
+
+
+class CatAnswerView(View):
+    """JSON endpoint for the in-browser CAT engine: persists one answer per
+    POST (mirroring what the remote-engine flow stores per page load) and
+    applies the completion rules when the engine reports the stopping rule."""
+
+    def post(self, request, hash_id):
+        administration = get_object_or_404(Administration, url_hash=hash_id)
+        if administration.completed or administration.due_date < timezone.now():
+            return JsonResponse({"error": "closed"}, status=409)
+
+        try:
+            data = json.loads(request.body)
+            index = int(data["index"])
+            definition = str(data["definition"])
+            response_value = bool(data["response"])
+            est_theta = float(data["est_theta"])
+            done = bool(data.get("done"))
+        except (ValueError, KeyError, TypeError, json.JSONDecodeError):
+            return JsonResponse({"error": "bad payload"}, status=400)
+
+        cat_response, _ = CatResponse.objects.get_or_create(
+            administration=administration
+        )
+        administered_items = cat_response.administered_items or []
+        administered_words = cat_response.administered_words or []
+        administered_responses = cat_response.administered_responses or []
+
+        administered_items.append(index)
+        administered_words.append(definition)
+        administered_responses.append(response_value)
+
+        cat_response.administered_items = administered_items
+        cat_response.administered_words = administered_words
+        cat_response.administered_responses = administered_responses
+        cat_response.est_theta = est_theta
+        cat_response.save()
+
+        requests_log.objects.create(url_hash=hash_id, request_type="POST")
+
+        completed = False
+        if done or len(administered_items) >= 50:
+            try:
+                filename = os.path.realpath(
+                    PROJECT_ROOT + administration.study.demographic.path
+                )
+            except Exception:
+                filename = "None"
+            if os.path.isfile(filename):
+                administration.completedSurvey = True
+            else:
+                administration.completed = True
+            administration.scored = True
+            administration.save()
+            completed = True
+
+        return JsonResponse(
+            {"ok": True, "completed": completed, "count": len(administered_items)}
+        )
 
 
 class AdministerAdministraionView(UpdateView):
@@ -67,17 +142,39 @@ class AdministerAdministraionView(UpdateView):
         return yes_list
 
     def get_hardest_easiest(self):
-        if self.object.catresponse.administered_items:
-            yes_list = self.get_yes_responses()
-            hardest = cdi_cat_api(
-                f"hardestWord?items={yes_list}&language={CAT_LANG_DICT[self.language]}"
-            )["definition"]
-            easiest = cdi_cat_api(
-                f"easiestWord?items={yes_list}&language={CAT_LANG_DICT[self.language]}"
-            )["definition"]
-        else:
-            hardest = None
-            easiest = None
+        if not self.object.catresponse.administered_items:
+            return None, None
+        yes_indices = [
+            x
+            for x, y in zip(
+                self.object.catresponse.administered_items,
+                self.object.catresponse.administered_responses,
+            )
+            if y
+        ]
+        if not yes_indices:
+            return None, None
+        if settings.CAT_ENGINE == "browser":
+            # Same rule as the R API: easiest = max easiness intercept
+            # (d = -a*b in classic parameterization), hardest = min.
+            bank = {
+                it["index"]: it
+                for it in _cat_bank(CAT_LANG_DICT[self.language])["items"]
+            }
+            yes_items = [bank[i] for i in yes_indices if i in bank]
+            if not yes_items:
+                return None, None
+            easiness = lambda it: -it["a"] * it["b"]
+            easiest = max(yes_items, key=easiness)["definition"]
+            hardest = min(yes_items, key=easiness)["definition"]
+            return hardest, easiest
+        yes_list = self.get_yes_responses()
+        hardest = cdi_cat_api(
+            f"hardestWord?items={yes_list}&language={CAT_LANG_DICT[self.language]}"
+        )["definition"]
+        easiest = cdi_cat_api(
+            f"easiestWord?items={yes_list}&language={CAT_LANG_DICT[self.language]}"
+        )["definition"]
         return hardest, easiest
 
     def get_object(self, queryset=None):
@@ -94,6 +191,10 @@ class AdministerAdministraionView(UpdateView):
             return redirect(
                 "cat_forms:background-info", pk=self.object.backgroundinfo.id
             )
+        if "word_id" not in request.POST:
+            # browser-engine pages answer via CatAnswerView; a bare POST here
+            # (e.g. an accidental form submit) should not 500
+            return redirect("cat_forms:administer_cat_form", hash_id=self.hash_id)
 
         administered_responses = self.object.catresponse.administered_responses or []
         administered_words = self.object.catresponse.administered_words or []
@@ -210,6 +311,33 @@ class AdministerAdministraionView(UpdateView):
         administered_items = self.object.catresponse.administered_items or []
         administered_words = self.object.catresponse.administered_words or []
         self.est_theta = self.object.catresponse.est_theta
+
+        if settings.CAT_ENGINE == "browser" and self.language in CAT_LANG_DICT:
+            # The validated jsCat engine runs client-side; answers come back
+            # through CatAnswerView. No calls to the R API.
+            ctx = {
+                "title": "Web-CDI",
+                "hash_id": self.hash_id,
+                "object": self.object,
+                "language_code": user_language,
+                "cat_bank_code": CAT_LANG_DICT[self.language],
+                "cat_age": self.object.backgroundinfo.age or 30,
+                "cat_state_json": json.dumps(
+                    {
+                        "items": administered_items,
+                        "responses": [bool(r) for r in administered_responses],
+                    }
+                ),
+                "cat_max_words": self.max_words,
+                "words_shown": len(administered_words) + 1,
+                "due_date": self.object.due_date.strftime("%b %d, %Y, %I:%M %p"),
+                "completed": False,
+            }
+            response = render(
+                request, "cdi_forms/cat_forms/cat_form_browser.html", ctx
+            )
+            response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
+            return response
 
         if len(administered_words) < 1:  # first word might be specified by age
             self.word = cdi_cat_api(

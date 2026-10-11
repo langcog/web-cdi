@@ -25,8 +25,13 @@ def download_dictionary(request, study_obj):
         "WS",
         "WG",
     ]:
-        item_data = item_data.append(
-            {"study_name": "3rd Edition (Marchman et al., 2023)"}, ignore_index=True
+        # DataFrame.append was removed in pandas 2
+        item_data = pd.concat(
+            [
+                item_data,
+                pd.DataFrame([{"study_name": "3rd Edition (Marchman et al., 2023)"}]),
+            ],
+            ignore_index=True,
         )
 
     item_data[["itemID", "item_type", "category", "definition", "gloss"]].to_csv(

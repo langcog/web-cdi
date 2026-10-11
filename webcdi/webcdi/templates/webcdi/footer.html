@@ -1,0 +1,12 @@
+{% load static %}
+<footer class="wcdi-footer d-print-none">
+    <div class="wcdi-footer-inner">
+        <span><b>Web-CDI</b> &middot; Stanford Language &amp; Cognition Lab</span>
+        <nav>
+            <a href="{% url 'documentation' %}">Documentation</a>
+            <a href="{% url 'about' %}">About</a>
+            <a target="_blank" href="https://github.com/langcog/web-cdi">GitHub</a>
+            <a href="mailto:{{ CONTACT_EMAIL }}">Contact</a>
+        </nav>
+    </div>
+</footer>

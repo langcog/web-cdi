@@ -2,18 +2,19 @@
 {% extends 'researcher_UI/base.html' %}
 {% load i18n static %}
 
-{% block title %}WebCDI Interface: Add Study{% endblock %}
+{% block title %}{% if form_name %}Group settings · {{ study_obj.name }}{% else %}New administration group{% endif %}{% endblock %}
 {% block main %}
 {{ block.super }}
-<div style="margin-top:100px; margin-bottom:10rem;">
+<div style="margin-top:40px; margin-bottom:6rem;">
   <div>
     <div class="container" style="padding-bottom:2rem;">
           <div class="modal-header">
             <h4 id="modal-title" class="modal-title" >
               {% if form_name %}
-                Update Administration Group - {{ study_obj.instrument }}
+                Group settings &middot; {{ study_obj.name }}
+                <div class="wcdi-muted" style="font-size:14px; font-weight:400; margin-top:2px;">{{ study_obj.instrument }} &middot; the instrument cannot be changed after creation</div>
               {% else %}
-                Add new Administration Group
+                New administration group
               {% endif %}
             </h4>
           </div>
@@ -376,6 +377,59 @@
                   <span class="sr-only">Error:</span>
                   <div style='display:inline' id='error-message-text'></div>
           </div>
+
+          {% if form_name %}
+          {# ---- danger zone: deleting the group. Rare, so it lives here rather than on the group page. ---- #}
+          {% with n_admins=study_obj.administration_set.count %}
+          <div class="wcdi-danger-zone" id="danger-zone">
+            <div>
+              <h2>Delete this group</h2>
+              <p>Removes <strong>{{ study_obj.name }}</strong> and all {{ n_admins }} administration{{ n_admins|pluralize }} in it, including every response and score. This cannot be undone from your account.</p>
+            </div>
+            <button type="button" class="btn btn-secondary wcdi-btn-danger" data-toggle="modal" data-target="#delete-group-modal">Delete group&hellip;</button>
+          </div>
+
+          <div class="modal" id="delete-group-modal" tabindex="-1" role="dialog" aria-labelledby="delete-group-title">
+            <div class="modal-dialog" role="document">
+              {# posts the existing delete-study action to the group page's handler #}
+              <form method="post" action="{% url 'researcher_ui:console_study' pk=study_obj.pk %}" id="delete-group-form">
+                {% csrf_token %}
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title wcdi-danger-text" id="delete-group-title">Delete &ldquo;{{ study_obj.name }}&rdquo;?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  </div>
+                  <div class="modal-body">
+                    <p>This permanently removes the group <strong>{{ study_obj.name }}</strong> and all
+                      <strong>{{ n_admins }} administration{{ n_admins|pluralize }}</strong> in it, including every response and score.
+                      <strong>This cannot be undone from your account.</strong> Be sure you will never want these data again
+                      &mdash; download them first if there is any doubt.</p>
+                    <label for="delete-group-confirm" style="font-size:13.5px; font-weight:600;">Type <code>{{ study_obj.name }}</code> to confirm</label>
+                    <input type="text" class="form-control" id="delete-group-confirm" autocomplete="off" spellcheck="false" data-expected="{{ study_obj.name }}">
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-link wcdi-nav-link" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn wcdi-btn-danger-solid" id="delete-group-submit" name="delete-study" value="delete-study" disabled>Delete this group</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <script>
+            // The red button only arms when the typed name matches exactly.
+            (function () {
+              var input = document.getElementById('delete-group-confirm');
+              var submit = document.getElementById('delete-group-submit');
+              var expected = input.getAttribute('data-expected');
+              input.addEventListener('input', function () { submit.disabled = (input.value !== expected); });
+              $('#delete-group-modal').on('shown.bs.modal', function () { input.value = ''; submit.disabled = true; input.focus(); });
+              document.getElementById('delete-group-form').addEventListener('submit', function (e) {
+                if (input.value !== expected) e.preventDefault();
+              });
+            })();
+          </script>
+          {% endwith %}
+          {% endif %}
     </div>
   </div>
 </div>

@@ -1,6 +1,6 @@
 <!doctype html>
 
-{% load i18n %}
+{% load i18n sanitize %}
 {% load static %}
 {% load cdiform_tags %}
 
@@ -8,12 +8,13 @@
 <html {% if language_code %}lang="{{ language_code }}"{% else %}lang="en"{% endif %}>
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% trans title %}</title>
     <meta name="description" content="MacArthur-Bates Communicative Development Inventory">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" ></script>
 
-    <script src="{% static 'jquery/jquery-1.11.3.min.js' %}"></script>
+    <script src="{% static 'jquery/jquery-3.7.1.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
     <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
@@ -39,6 +40,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     
     <link rel='stylesheet' href="{% static 'cdi_forms/extra_mobile.css' %}">
+    <link rel='stylesheet' href="{% static 'cdi_forms/webcdi-theme.css' %}">
 
     <script>
         function countChar(val) {
@@ -48,14 +50,17 @@
     </script>
 
     {% block extra_css %}{% endblock %}
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=328947117"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-    gtag('config', '328947117');
-    </script>
+        {% if GOOGLE_ANALYTICS_ID %}
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ GOOGLE_ANALYTICS_ID }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '{{ GOOGLE_ANALYTICS_ID }}');
+</script>
+{% endif %}
 </head>
 
 <body data-spy="scroll" data-target="#navbar">
@@ -155,7 +160,7 @@
                 </div>
                 <div class="modal-body">
                     {% if object.study.waiver and object.study.waiver != "" %}
-                        {{ object.study.waiver|safe }}
+                        {{ object.study.waiver|sanitize_richtext }}
                     {% endif %}
                 </div>
                 <div class="modal-footer">
@@ -266,5 +271,6 @@
 
     {% block scripts %}
     {% endblock %}
+{% include "webcdi/footer.html" %}
 </body>
 </html>

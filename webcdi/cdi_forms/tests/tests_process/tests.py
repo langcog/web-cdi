@@ -55,6 +55,10 @@ class WebSiteOpensTests(LiveServerTestCase):
     def setUpClass(cls):
         super().setUpClass()
         options = Options()
+        # Without --disable-dev-shm-usage Firefox stalls for minutes per page
+        # inside the container (matches TestParentInterface's options below).
+        options.add_argument("--no-sandbox")
+        options.add_argument("--disable-dev-shm-usage")
         cls.selenium = webdriver.Remote(
             command_executor="http://selenium:4444", options=options
         )

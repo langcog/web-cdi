@@ -12,64 +12,49 @@
 }
 
 
-@media (max-width:991px){
-  body {
-    font-family: "Roboto", "sans-serif";
-    font-size: 40px;
-  }
-
-  label.btn span {
-    font-size: 2.3em;
-  }
-  a.btn, input.btn {
-    font-size:1em;
-  }
-
-  h1 { font-size: 1.5em; }
-  h2 { font-size: 1.3em; }
-  h3 { font-size: 1.15em; }
-  h4 { font-size: 1.1em; }
-  h5 { font-size: .83em; }
-  h6 { font-size: .75em; }
-
-  legend { font-size: 1.1em; }
-
-}
-
-@media (min-width:992px) and (max-width:1199px) {
-  body {
-    font-family: "Roboto", "sans-serif";
-    font-size: 24px;
-  }
-  label.btn span {
-    font-size: 1.9em;
-  }
-  a.btn, input.btn {
-    font-size:1em;
-  }
-
-  h1 { font-size: 2em; }
-  h2 { font-size: 1.2em; }
-  h3 { font-size: 1.15em; }
-  h4 { font-size: 1.1em; }
-  h5 { font-size: .83em; }
-  h6 { font-size: .75em; }
+/* Font sizes assume a proper viewport meta tag (width=device-width) on
+   every page that loads this file. The old 40px/24px small-screen sizes
+   compensated for pages rendering in the ~980px fallback viewport and
+   being scaled down; they must not come back. */
+body {
+  font-family: "Roboto", "sans-serif";
+  font-size: 16px;
 }
 
 @media (min-width:1200px){
-    body {
-      font-family: "Roboto", "sans-serif";
-      font-size: 18px;
-    }
-  label.btn span {
-    font-size: 1.1em;
+  body {
+    font-size: 18px;
   }
-  h1 { font-size: 2em; }
-  h2 { font-size: 1.5em; }
-  h3 { font-size: 1.17em; }
-  h4 { font-size: 1.12em; }
-  h5 { font-size: .83em; }
-  h6 { font-size: .75em; }
+}
+
+label.btn span {
+  font-size: 1.1em;
+}
+a.btn, input.btn {
+  font-size: 1em;
+}
+
+h1 { font-size: 2em; }
+h2 { font-size: 1.5em; }
+h3 { font-size: 1.17em; }
+h4 { font-size: 1.12em; }
+h5 { font-size: .83em; }
+h6 { font-size: .75em; }
+
+legend { font-size: 1.1em; }
+
+/* Comfortable touch targets on the item checklists */
+input[type=checkbox], input[type=radio] {
+  width: 1.25em;
+  height: 1.25em;
+}
+
+/* Breathing room on phones for pages without a Bootstrap container */
+@media (max-width:991px){
+  body {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
 }
 
 
@@ -83,11 +68,6 @@
     display: inline-block;
 }
 
-@media(max-width:1199px){.form-control { 
-    height: 1.9em;
-    font-size: 0.8em; 
-  }
-}
 
 .alco-child {
     margin: 10px;

@@ -2,6 +2,7 @@ import json
 from typing import Any, Dict
 
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Count, Q
 from django.http import HttpResponse
 from django.http.response import HttpResponse
 from django.shortcuts import redirect
@@ -9,6 +10,7 @@ from django.urls import reverse
 from django.views import generic
 from ipware.ip import get_client_ip
 
+from brookes.utils import BROOKES_SUPPORT_URL, purchase_url_for
 from researcher_UI.forms import *
 from researcher_UI.models import Study
 from researcher_UI.utils.admin_new import admin_new_fun
@@ -21,9 +23,19 @@ class Console(LoginRequiredMixin, generic.ListView):
     template_name = "researcher_UI/interface.html"
 
     def get_context_data(self, *args, **kwargs):
-        studies = Study.objects.filter(
-            researcher=self.request.user, active=True
-        ).order_by("id")
+        studies = (
+            Study.objects.filter(researcher=self.request.user, active=True)
+            .annotate(
+                n_admins=Count("administration", distinct=True),
+                n_completed=Count(
+                    "administration",
+                    filter=Q(administration__completed=True),
+                    distinct=True,
+                ),
+                n_children=Count("administration__subject_id", distinct=True),
+            )
+            .order_by("id")
+        )
         context = {"studies": studies}
         return context
 
@@ -60,6 +72,9 @@ class StudyCreateView(LoginRequiredMixin, generic.CreateView):
                 #    return render(request, "researcher_UI/500_error.html", context)
                 if res:
                     return res
+                elif "delete-study" in request.POST:
+                    # the group is gone; land on the dashboard, not its empty page
+                    return redirect(reverse("researcher_ui:console"))
                 else:
                     target = reverse(
                         "researcher_ui:console_study", kwargs={"pk": study_obj.pk}
@@ -100,6 +115,10 @@ class AdminNew(LoginRequiredMixin, generic.UpdateView):
         context["username"] = researcher.username
         context["study_name"] = self.object.name
         context["study_group"] = self.object.study_group
+        # for the no-licence modal (no_brookes_code.html)
+        context["instrument_family"] = self.object.instrument.family
+        context["purchase_url"] = purchase_url_for(self.object.instrument.family)
+        context["support_url"] = BROOKES_SUPPORT_URL
         return context
 
     def form_valid(self, form, *args, **kwargs):

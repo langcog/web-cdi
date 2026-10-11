@@ -7,7 +7,7 @@
 <title>{% block title %}{% endblock %}</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" ></script>
-<script src="{% static 'jquery/jquery-1.11.3.min.js' %}"></script>
+<script src="{% static 'jquery/jquery-3.7.1.min.js' %}"></script>
 <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
 <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
 <link rel="stylesheet" href="{% static 'supplementtut/base.css' %}" />
@@ -54,7 +54,10 @@
                 {% if user.has_usable_password %}
                 <a href="{% url 'admin:password_change' %}">{% trans 'Change password' %}</a> /
                 {% endif %}
-                <a href="{% url 'admin:logout' %}">{% trans 'Log out' %}</a>
+                <form method="post" action="{% url 'admin:logout' %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" style="background:none;border:none;padding:0;color:inherit;text-decoration:underline;cursor:pointer;font:inherit;">{% trans 'Log out' %}</button>
+                </form>
             {% endblock %}
         </div>
         {% endif %}

@@ -52,7 +52,7 @@ class BaseAPIView(StudyOwnerMixin, TemplateView):
                 index="administration_id", columns="item_ID", values="value"
             )
             melted_answers.reset_index(level=0, inplace=True)
-        except:
+        except KeyError:
             melted_answers = pd.DataFrame(
                 columns=get_model_header(study_obj.instrument.name)
             )
@@ -127,7 +127,7 @@ class BaseAPIView(StudyOwnerMixin, TemplateView):
             background_answers = pd.merge(
                 background_answers1, melted_scores, how="outer", on="administration_id"
             )
-        except:
+        except KeyError:
             background_answers = pd.DataFrame(
                 columns=list(new_background)
                 + list(melted_answers)
