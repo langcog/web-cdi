@@ -22,7 +22,7 @@ item_20,juice,word,col_1,understands; produces,juice,juice,juice,,20
 item_21,toast,word,col_1,understands; produces,toast,toast,toast,,21
 item_22,hat,word,col_1,understands; produces,hat,hat,hat,,22
 item_23,pants,word,col_1,understands; produces,pants,pants,pants,,23
-item_24,show,word,col_1,understands; produces,show,show,show,,24
+item_24,show,word,col_1,understands; produces,shoe,shoe,shoe,,24
 item_25,sock,word,col_1,understands; produces,sock,sock,sock,,25
 item_26,eye,word,col_1,understands; produces,eye,eye,eye,,26
 item_27,head,word,col_1,understands; produces,head,head,head,,27
