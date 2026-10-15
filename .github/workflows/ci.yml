@@ -37,7 +37,10 @@ jobs:
       # The web service reads its config from .env; the checked-in example is
       # already CI-safe (AWS_INSTANCE=False, console email, the db service).
       - name: Provision .env
-        run: cp .env.example .env
+        run: |
+          cp .env.example .env
+          # throwaway password for this run's local db container
+          sed -i "s/^RDS_PASSWORD=.*/RDS_PASSWORD=$(openssl rand -hex 16)/" .env
 
       # --build builds the image; --wait blocks until db's healthcheck passes.
       - name: Build and start db + web
