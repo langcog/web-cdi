@@ -138,7 +138,10 @@ class AdministrationSummaryViewTest(TestCase):
         self.study.allow_payment = True
         self.study.save()
         generate_fake_results(self.study, 1)
-        administration = Administration.objects.filter(completed=True)[0]
+        # this study's own administration (fixture administrations may already have codes)
+        administration = Administration.objects.filter(
+            study=self.study, completed=True
+        )[0]
         payment_code = PaymentCode(
             study=self.study,
             payment_type="Amazon",
@@ -157,7 +160,10 @@ class AdministrationSummaryViewTest(TestCase):
         self.study.allow_payment = True
         self.study.save()
         generate_fake_results(self.study, 1)
-        administration = Administration.objects.filter(completed=True)[0]
+        # this study's own administration (fixture administrations may already have codes)
+        administration = Administration.objects.filter(
+            study=self.study, completed=True
+        )[0]
         payment_code = PaymentCode(
             study=self.study,
             payment_type="Tango",

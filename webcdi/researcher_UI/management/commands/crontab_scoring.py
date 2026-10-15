@@ -2,7 +2,7 @@ import logging
 
 from django.core.management.base import BaseCommand
 
-from cdi_forms.scores import update_summary_scores
+from cdi_forms.scores import InstrumentScoring, update_summary_scores
 from researcher_UI.models import Administration
 
 logger = logging.getLogger(__name__)
@@ -15,6 +15,10 @@ class Command(BaseCommand):
         administrations = Administration.objects.filter(completed=True, scored=False)
 
         count = 0
-        for instance in administrations:
+        scoring = {}  # instrument pk -> InstrumentScoring, loaded once per run
+        for instance in administrations.select_related("study__instrument"):
             count += 1
-            update_summary_scores(instance)
+            instrument = instance.study.instrument
+            if instrument.pk not in scoring:
+                scoring[instrument.pk] = InstrumentScoring(instrument)
+            update_summary_scores(instance, scoring[instrument.pk])
