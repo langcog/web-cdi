@@ -47,8 +47,9 @@
   2026-10-14 was diagnosed by Henry — confirm the fix landed in master.
 - **Scoring:** no value-level tests; slow full rescoring (days); see
   `scoring-and-cat.md`.
-- **Ops:** cron `MAILTO`/`ADMINS` point at Henry (#638); cron calls
-  nonexistent `monthly_report`/`weekly_reminder`; 7-day log retention.
+- **Ops:** cron `MAILTO`/`ADMINS` point at Henry (#638); cron jobs likely
+  crash since #554 (no env); 7-day log retention; master CI broken since
+  2026-10-11 (blank `RDS_PASSWORD` in `.env.example`, which CI copies).
 - **Code health:** Bootstrap 3+4 mix (#633), D3 v3 graphs (#634), collectstatic
   output committed (#632), dead `registration/` + `supplementtut/` apps
   (#635), action-dispatch refactor (#636), migration squash (#637), stale

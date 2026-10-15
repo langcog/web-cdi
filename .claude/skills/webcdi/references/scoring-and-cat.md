@@ -50,10 +50,17 @@ rather than percentiles (e.g. English WS Combining; English WG Phrases).
   raw score (`calc_benchmark` linear interpolation is commented out — changed
   in Henry's "English99" PR #652, Aug 2026). Values below 1 are reported as
   `"<1"`. Sex-specific percentiles need sex M/F; unisex unless 9999.
-- Fragile spots worth knowing before touching this code: benchmark rows are
-  read without an explicit `order_by` (relies on insertion order); the "late"
-  branch adds to the clamped age while "early" subtracts from the raw age;
-  several bare `except:` blocks swallow errors silently.
+- Floor lookup is exact when the table has every percentile (English WS/WG,
+  Spanish WS/WG, English CAT: 99–100 rows per age), but **coarse for
+  instruments that still have 5-point tables** (English CDI-III, L1/L2A/L2B
+  short forms, French CAT, Japanese CAT) — those reported interpolated values
+  before #652. Rows are read in percentile order via `Benchmark.Meta.ordering`,
+  so CSV row order doesn't matter.
+- Known bug: a child whose sex is O/P/blank gets a sex-specific percentile of
+  `"<1"` (should be blank) — `sex_score` defaults to 0. Verified locally
+  2026-10-15.
+- Other fragile spots: the "late" branch adds to the clamped age while "early"
+  subtracts from the raw age; several bare `except:` blocks swallow errors.
 
 ## Performance: why a full rescore takes days
 

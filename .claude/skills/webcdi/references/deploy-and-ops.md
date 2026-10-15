@@ -11,8 +11,10 @@ or commits.
   `Webcdi-dev-django4` = staging (testing.webcdi.org); `webcdi-dev` = Henry's
   old demo (don't touch); `CdiCatApi-env` / `CdiCatApi-dev` = R CAT API;
   `Wordbank-prod` / `Wordbank-dev` belong to Wordbank, not Web-CDI.
-- **RDS (Postgres):** prod and dev DBs; public access is intentional (other
-  lab resources read them). Don't flag it.
+- **RDS (Postgres):** prod = `webcdiadmin` (db.t3.micro, created 2017 —
+  **this is production; never delete**), staging = `webcdi-dev-3`; `webcdi-dev`
+  (2024) is not used by any current environment. Public access on prod is
+  intentional per Mike (other lab resources read it).
 - **S3:** media buckets (`webcdi-media-prod`, `webcdi-media-dev`).
 - **Secrets Manager:** DB password at
   `{DJANGO_SERVER_TYPE lower}/webcdi/RDS_PASSWORD` (rotated automatically —
@@ -52,8 +54,14 @@ Henry's wiki also says deploying needs the EC2 key `web-cdi_011017.pem` in
 ## Cron (`.ebextensions/crontab.txt` → `/etc/cron.d/webcdi_cron_jobs`)
 
 - `crontab_scoring` every 10 min — scores newly completed administrations.
-- `monthly_report` (1st of month) and `weekly_reminder` (Sundays) — **these
-  management commands don't exist in the repo**, so they fail every run.
+- `monthly_report` (1st of month; emails Brookes a CSV of all license codes)
+  and `weekly_reminder` (Sundays; emails researchers whose Brookes license
+  expires within a month) — both in `brookes/management/commands/`.
+- **Since #554 (Nov 2024) the cron lines no longer load the EB environment**
+  (the `export $(cat …/custom_env_var | xargs)` prefix was removed), and
+  settings need env vars (`ADMINS`, `AWS_STORAGE_BUCKET_NAME`, …), so every
+  job very likely crashes at startup — silently, since the instance has no
+  mail transport. Verify in logs; fix tracked in the infra plan.
 - `MAILTO` is Henry's personal address (#638) — must change.
 - The file must end with a blank line or cron rejects it.
 - `crontab2.txt` is an unused leftover; slated for deletion.
