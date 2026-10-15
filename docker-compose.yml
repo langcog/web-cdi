@@ -5,7 +5,9 @@ services:
         - postgres_data:/var/lib/postgresql/data/
       environment:
         - POSTGRES_USER=postgres
-        - POSTGRES_PASSWORD=postgres
+        # Local-only password, taken from RDS_PASSWORD in .env (any value; CI
+        # generates one). Only applied when the volume is first created.
+        - POSTGRES_PASSWORD=${RDS_PASSWORD:?}
       ports:
         - "5432"
       healthcheck:
