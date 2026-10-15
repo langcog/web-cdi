@@ -15,7 +15,8 @@ installed on your machine.
 git clone https://github.com/langcog/web-cdi.git
 cd web-cdi
 
-# 1. Create your local environment file
+# 1. Create your local environment file, then set RDS_PASSWORD in it to any
+#    value (it becomes the local database container's password)
 cp .env.example .env
 
 # 2. Build the web image and start the stack

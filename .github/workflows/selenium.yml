@@ -24,7 +24,10 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Provision .env
-        run: cp .env.example .env
+        run: |
+          cp .env.example .env
+          # throwaway password for this run's local db container
+          sed -i "s/^RDS_PASSWORD=.*/RDS_PASSWORD=$(openssl rand -hex 16)/" .env
 
       # The Selenium tests are LiveServerTestCase with host "web" driving a
       # remote Firefox at selenium:4444 — both are compose service names, so
