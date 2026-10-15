@@ -1,4 +1,5 @@
 from .tests_models import *  # noqa
 from .tests_process import *  # noqa
+from .tests_scoring import *  # noqa
 from .tests_templatetags import *  # noqa
 from .tests_views import *  # noqa

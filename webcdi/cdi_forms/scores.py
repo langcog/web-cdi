@@ -32,10 +32,6 @@ def create_benchmark_score(
         summary.save()
 
     else:
-        summary, created = SummaryData.objects.get_or_create(
-            administration=administration_instance,
-            title=f"{f.title} Percentile-sex{adjusted}",
-        )
         benchmarks = Benchmark.objects.filter(instrument_score=f, age=age)
         sex_score = 0
         try:
@@ -83,10 +79,17 @@ def create_benchmark_score(
                     '''
                     break
 
-        if sex_score < 1:
-            sex_score = "<1"
-        summary.value = str(sex_score)
-        summary.save()
+        # sex-specific norms exist only for M/F; any other answer gets no
+        # sex percentile rather than a spurious "<1" (#674)
+        if background_info.sex in ("M", "F"):
+            if sex_score < 1:
+                sex_score = "<1"
+            summary, created = SummaryData.objects.get_or_create(
+                administration=administration_instance,
+                title=f"{f.title} Percentile-sex{adjusted}",
+            )
+            summary.value = str(sex_score)
+            summary.save()
 
         if not benchmark.raw_score == 9999:
             summary, created = SummaryData.objects.get_or_create(

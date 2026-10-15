@@ -24,6 +24,9 @@ def get_adjusted_summary_date(context, administration_id, data):
         ).value
         if res == "":
             res = 0
+    elif "Percentile" in data:
+        # no norms for this child (e.g. sex not M/F, or no unisex table): blank, not 0
+        res = ""
     else:
         res = 0
     return res
@@ -203,6 +206,9 @@ def get_summary_data(administration_id, data):
         ).value
         if res == "":
             res = 0
+    elif "Percentile" in data:
+        # no norms for this child (e.g. sex not M/F, or no unisex table): blank, not 0
+        res = ""
     else:
         res = 0
     return res
