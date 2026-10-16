@@ -172,7 +172,9 @@ EMAIL_PORT = os.environ.get("EMAIL_PORT", 25)
 # Mail goes out from DEFAULT_FROM_EMAIL (noreply@webcdi.org); replies reach
 # REPLY_TO_EMAIL.
 ANYMAIL = {
-    "POSTMARK_SERVER_TOKEN": os.environ.get("POSTMARK_SERVER_TOKEN", ""),
+    # strip: secrets pasted into Secret Manager often carry a trailing newline,
+    # which is invalid in an HTTP header
+    "POSTMARK_SERVER_TOKEN": os.environ.get("POSTMARK_SERVER_TOKEN", "").strip(),
     "SEND_DEFAULTS": {
         "reply_to": [os.environ.get("REPLY_TO_EMAIL", "webcdi-contact@stanford.edu")]
     },
@@ -207,7 +209,7 @@ def generate_secret_key(fname):
 # the generated-file fallback keeps existing deployments working but means
 # each fresh instance mints its own key (invalidating sessions), so
 # production should always set the env var.
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = os.environ.get("SECRET_KEY", "").strip() or None
 if not SECRET_KEY and not (DEBUG or AWS_INSTANCE):
     raise ImproperlyConfigured("SECRET_KEY must be set outside DEBUG")
 if not SECRET_KEY:
