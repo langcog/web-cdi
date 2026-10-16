@@ -7,3 +7,7 @@
 *.pyc
 .env
 webcdi/.elasticbeanstalk
+# licensed source PDFs and instrument-pipeline workspace: never send to a builder
+forms
+instruments/.venv
+instruments/.cache
