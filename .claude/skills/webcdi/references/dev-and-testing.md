@@ -34,7 +34,7 @@ http://localhost:8001). Things it doesn't say:
 - **Fast suite** (what CI runs; ~260 tests, ~18 min locally, ~40 min on
   GitHub's 2-core runners):
   ```
-  docker compose exec -T -e CAT_ENGINE=remote web python manage.py test --exclude=selenium --exclude=known_failure --parallel auto --noinput
+  docker compose exec -T web python manage.py test --exclude=selenium --exclude=known_failure --parallel auto --noinput
   ```
   (`make docker-test` is the same.)
 - **Discovery is via package `__init__.py` re-exports.** Every new test module
@@ -51,7 +51,9 @@ http://localhost:8001). Things it doesn't say:
 - `known_failure` tag = quarantined pandas-3 bugs (#640 StudyAPI `to_json`
   duplicate index; #649 CDI-format scoring download `'item_1' is not in list`).
 - WeasyPrint PDF tests may error under `--parallel` but pass alone.
-- CAT tests are hermetic: `cat_api_mock.py` replays recorded R-API sequences.
+- CAT: Django tests cover rendering/persistence for all 5 languages
+  (`cat_forms/tests/browser_engine.py`); the engine itself is validated by
+  `npm test` in `cat_forms/jscat/` (also a CI job).
 - **Selenium** (`--tag=selenium`, 28 tests, 60–90 min) runs nightly in
   `selenium.yml`, non-blocking. ~21 researcher-flow tests fail on stale
   locators from the 2026 redesign (#648) — test rot, not app bugs. Between

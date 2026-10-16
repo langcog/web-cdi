@@ -15,7 +15,6 @@ locals {
     RDS_HOSTNAME               = "/cloudsql/${google_sql_database_instance.db.connection_name}"
     RDS_PORT                   = "5432"
     SITE_ID                    = "1"
-    CAT_ENGINE                 = "browser"
     EMAIL_BACKEND              = var.email_backend
     DEFAULT_FROM_EMAIL_NAME    = "Web-CDI"
     DEFAULT_FROM_EMAIL_ADDRESS = "noreply@webcdi.org"

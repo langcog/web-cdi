@@ -1,6 +1,2 @@
-from .dutch import CATDutchAdministrationDataItemTest  # noqa
-from .english import CATEnglishAdministrationDataItemTest  # noqa
-from .french import CATFrenchAdministrationDataItemTest  # noqa
-from .japanese import CATJapaneseAdministrationDataItemTest  # noqa
-from .spanish import CATSpanishAdministrationDataItemTest  # noqa
-from .browser_engine import BrowserCatTest, BrowserCatHardestEasiestTest  # noqa
+from .browser_engine import (BrowserCatHardestEasiestTest,  # noqa
+                             BrowserCatTest, CatLanguagesTest)
