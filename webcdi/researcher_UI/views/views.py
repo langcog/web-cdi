@@ -12,6 +12,7 @@ from ipware.ip import get_client_ip
 
 from brookes.utils import BROOKES_SUPPORT_URL, purchase_url_for
 from researcher_UI.forms import *
+from researcher_UI.mixins import ReseacherOwnsStudyMixin
 from researcher_UI.models import Study
 from researcher_UI.utils.admin_new import admin_new_fun
 from researcher_UI.utils.console_helper.get_helper import get_helper
@@ -40,7 +41,7 @@ class Console(LoginRequiredMixin, generic.ListView):
         return context
 
 
-class StudyCreateView(LoginRequiredMixin, generic.CreateView):
+class StudyCreateView(LoginRequiredMixin, ReseacherOwnsStudyMixin, generic.CreateView):
     """
     We used createView but we didn't extend form_valid method,
     Becuase We can't use form_class or get_form method.
@@ -93,7 +94,7 @@ class StudyCreateView(LoginRequiredMixin, generic.CreateView):
                     return redirect(f"{target}")
 
 
-class AdminNew(LoginRequiredMixin, generic.UpdateView):
+class AdminNew(LoginRequiredMixin, ReseacherOwnsStudyMixin, generic.UpdateView):
     model = Study
     form_class = AdminNewForm
     # template_name = "researcher_UI/administer_new_modal.html"

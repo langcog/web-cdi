@@ -13,3 +13,4 @@ from .study_settings_views import AddStudyViewTest, UpdateStudyTest
 from .views_tests import OverflowTest  # noqa
 from .views_tests import (AdminNewTest, ConsoleTest,  # ßnoqa
                           StudyCreateViewTest)
+from .cross_researcher import CrossResearcherAccessTest  # noqa

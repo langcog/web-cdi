@@ -5,14 +5,19 @@ from django.http import HttpResponse
 from django.views.generic import UpdateView
 
 from researcher_UI.forms import ImportDataForm
+from researcher_UI.mixins import ReseacherOwnsStudyMixin
 from researcher_UI.models import Study
 from researcher_UI.utils import import_data_fun
 
 
-class ImportData(LoginRequiredMixin, UpdateView):
+class ImportData(LoginRequiredMixin, ReseacherOwnsStudyMixin, UpdateView):
     model = Study
     form_class = ImportDataForm
     template_name = "researcher_UI/import_data.html"
+
+    def get_form_kwargs(self):
+        # limit the study choices to the researcher's own studies
+        return {**super().get_form_kwargs(), "researcher": self.request.user}
 
     def form_valid(self, form):
         data = import_data_fun(self.request, self.get_object())
