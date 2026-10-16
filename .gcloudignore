@@ -1,0 +1,4 @@
+# Files not uploaded to Cloud Build (in addition to .gitignore'd files)
+.git
+#!include:.gitignore
+**/node_modules

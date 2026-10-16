@@ -43,3 +43,9 @@ forms/
 # Claude Code: share skills, keep per-machine config local
 .claude/*
 !.claude/skills/
+
+# OpenTofu working files (lock file is committed)
+**/.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfplan

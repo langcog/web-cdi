@@ -43,3 +43,37 @@ Optional:
 
 `/health/` checks the database, cache and storage; use it for startup and
 liveness probes.
+
+## Infrastructure (`deploy/terraform`, OpenTofu)
+
+One configuration per environment, parameterised by project (`staging.tfvars`
+→ `hs-langcog-general` for now, #690). It creates: APIs, an Artifact Registry
+repo, Cloud SQL Postgres 16 (backups + PITR, deletion protection, reachable
+only via the IAM-authenticated connector), generated secrets in Secret
+Manager, runtime and scheduler service accounts (IAM grants are project-level
+but conditioned to this environment's resource names), the public Cloud Run
+service, and Cloud Run jobs (`migrate`, `load-instruments`, `scoring`,
+`monthly-report`, `weekly-reminder`) with Cloud Scheduler triggers (email jobs
+only when `enable_email_jobs = true`).
+
+```bash
+deploy/terraform/bootstrap.sh <project>            # once: private state bucket
+cd deploy/terraform
+tofu init -backend-config=bucket=<project>-tfstate
+tofu plan -var-file=staging.tfvars -var image=<image> -out=plan.tfplan
+tofu apply plan.tfplan                              # review the plan first
+```
+
+Images: until CI/CD (#681) exists, build amd64 and push
+(`docker buildx build --platform linux/amd64 -f deploy/Dockerfile -t <image> --push .`);
+Cloud Build (`deploy/cloudbuild.yaml`) needs a build service account first.
+New images roll out with `gcloud run deploy`/`gcloud run jobs update`; tofu
+ignores image changes so `apply` never rolls them back.
+
+First-time data: run the `migrate` job, then `load-instruments`
+(`gcloud run jobs execute <name> --wait`). One-off commands run as job
+executions with overridden args, e.g.
+`gcloud run jobs execute webcdi-staging-migrate --args="^~^shell~-c~<python>"`.
+
+Staging: https://webcdi-staging-z2fr43hbjq-uw.a.run.app (email goes to the
+service logs; no real mail is sent).
