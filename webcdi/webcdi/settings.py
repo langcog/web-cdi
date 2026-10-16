@@ -6,6 +6,7 @@ import socket
 
 import boto3
 from botocore.exceptions import ClientError
+from django.core.exceptions import ImproperlyConfigured
 from django.utils.crypto import get_random_string
 from django.utils.translation import gettext_lazy as _
 
@@ -117,8 +118,10 @@ DATABASES = {
         "NAME": os.environ["RDS_DB_NAME"],
         "USER": os.environ["RDS_USERNAME"],
         "PASSWORD": RDS_PASSWORD,
-        "HOST": os.environ["RDS_HOSTNAME"],
+        "HOST": os.environ["RDS_HOSTNAME"],  # or /cloudsql/<connection name>
         "PORT": os.environ["RDS_PORT"],
+        "CONN_MAX_AGE": int(os.environ.get("DB_CONN_MAX_AGE", 0)),
+        "CONN_HEALTH_CHECKS": True,
     }
 }
 
@@ -204,6 +207,8 @@ def generate_secret_key(fname):
 # each fresh instance mints its own key (invalidating sessions), so
 # production should always set the env var.
 SECRET_KEY = os.environ.get("SECRET_KEY")
+if not SECRET_KEY and not (DEBUG or AWS_INSTANCE):
+    raise ImproperlyConfigured("SECRET_KEY must be set outside DEBUG")
 if not SECRET_KEY:
     try:
         from .secret_key import *  # noqa
@@ -252,6 +257,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "webcdi.middleware.AdminLocaleMiddleware",
 ]
 
@@ -298,8 +304,21 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
-STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+# Containers collect into a directory outside the source tree (STATIC_ROOT env)
+# and serve hashed, compressed files with WhiteNoise. Without it, STATIC_ROOT
+# stays the tracked webcdi/static/ used by the legacy EB deploy.
+STATIC_ROOT = os.environ.get("STATIC_ROOT", os.path.join(BASE_DIR, "static/"))
 STATIC_URL = "/static/"
+if "STATIC_ROOT" in os.environ:
+    STORAGES = {
+        "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
+        "staticfiles": {
+            "BACKEND": "webcdi.storage.StaticStorage"
+        },
+    }
+    # a template referencing a missing file falls back to the unhashed URL
+    # instead of raising (legacy templates aren't fully audited yet)
+    WHITENOISE_MANIFEST_STRICT = False
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap3"
 
@@ -368,6 +387,33 @@ LOGGING = {
         },
     },
 }
+
+# Containers: one JSON line per record on stdout (Cloud Logging reads
+# "severity"); request errors are also emailed to ADMINS.
+if os.environ.get("LOG_FORMAT") == "json":
+    LOGGING = {
+        "version": 1,
+        "disable_existing_loggers": False,
+        "filters": {
+            "require_debug_false": {"()": "django.utils.log.RequireDebugFalse"}
+        },
+        "formatters": {"json": {"()": "webcdi.log_format.JsonFormatter"}},
+        "handlers": {
+            "stdout": {"class": "logging.StreamHandler", "formatter": "json"},
+            "mail_admins": {
+                "level": "ERROR",
+                "filters": ["require_debug_false"],
+                "class": "django.utils.log.AdminEmailHandler",
+            },
+        },
+        "root": {"handlers": ["stdout"], "level": "INFO"},
+        "loggers": {
+            "django.request": {"handlers": ["mail_admins"], "level": "ERROR"},
+            "debug": {"level": "DEBUG"},
+            "weasyprint": {"level": "WARNING"},
+            "fontTools": {"level": "WARNING"},
+        },
+    }
 
 DATE_INPUT_FORMATS = (
     "%Y-%m-%d",
@@ -458,6 +504,14 @@ CAT_FORMS = ["CAT", "CAT2"]
 
 
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
+
+if is_true(os.environ.get("HTTPS_ONLY", False)):
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+    SECURE_SSL_REDIRECT = True
+    SECURE_REDIRECT_EXEMPT = [r"^health/$"]  # platform probes speak plain HTTP
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_HSTS_SECONDS = int(os.environ.get("HSTS_SECONDS", 3600))
 
 TRUSTED_ORIGINS = os.environ.get("TRUSTED_ORIGINS", False)
 if TRUSTED_ORIGINS:
