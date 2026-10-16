@@ -14,6 +14,10 @@ class AddInstruments(LoginRequiredMixin, UpdateView):
     form_class = AddInstrumentForm
     template_name = "researcher_UI/researcher_form.html"
 
+    def get_queryset(self):
+        # researchers can only edit their own instrument access
+        return Researcher.objects.filter(user=self.request.user)
+
     def get_success_url(self):
         res = reverse("researcher_ui:console")
         dt = datetime.date.today()
