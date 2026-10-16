@@ -2,6 +2,7 @@ import json
 from typing import Any, Dict
 
 from django.http import HttpRequest, HttpResponse
+from django.shortcuts import get_object_or_404
 from django.utils import translation
 from django.views.generic import DetailView
 
@@ -20,7 +21,7 @@ class InstructionDetailView(DetailView):
         return super().dispatch(request, *args, **kwargs)
 
     def get_object(self, queryset=None):
-        return Administration.objects.get(url_hash=self.kwargs["hash_id"])
+        return get_object_or_404(Administration, url_hash=self.kwargs["hash_id"])
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         ctx = super().get_context_data(**kwargs)
