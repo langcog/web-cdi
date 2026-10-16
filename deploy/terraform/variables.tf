@@ -71,3 +71,15 @@ variable "github_repository" {
   type        = string
   default     = "langcog/web-cdi"
 }
+
+variable "public" {
+  description = "Serve the site publicly. Set false while staging holds a copy of real data (#687); then only private_invokers can reach it (via `gcloud run services proxy`)."
+  type        = bool
+  default     = true
+}
+
+variable "private_invokers" {
+  description = "Principals allowed to reach a non-public service"
+  type        = list(string)
+  default     = ["user:mcfrank@stanford.edu"]
+}

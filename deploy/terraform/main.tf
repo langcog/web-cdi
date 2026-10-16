@@ -241,7 +241,7 @@ resource "google_cloud_run_v2_service" "web" {
 
   # Public site. Disabling the invoker check avoids a resource-level allUsers
   # binding (which needs setIamPolicy).
-  invoker_iam_disabled = true
+  invoker_iam_disabled = var.public
 
   template {
     service_account = google_service_account.runtime.email
@@ -324,6 +324,14 @@ resource "google_cloud_run_v2_service" "web" {
   ]
 }
 
+
+resource "google_cloud_run_v2_service_iam_member" "private" {
+  for_each = var.public ? toset([]) : toset(var.private_invokers)
+  name     = google_cloud_run_v2_service.web.name
+  location = var.region
+  role     = "roles/run.invoker"
+  member   = each.value
+}
 
 # --- Jobs (migrations, data loading, scheduled work) ------------------------
 
