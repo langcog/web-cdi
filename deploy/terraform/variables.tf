@@ -1,5 +1,5 @@
 variable "project_id" {
-  description = "GCP project (hs-langcog-general for now; see #690)"
+  description = "GCP project (hs-langcog-webcdi; see #690)"
   type        = string
 }
 
