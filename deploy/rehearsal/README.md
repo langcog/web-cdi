@@ -10,12 +10,14 @@ RDS into Cloud SQL); a laptop is only needed to start the steps and browse.
 
 ## 0. Prerequisite (Mike): the AWS prod database password
 
-It lives in AWS Secrets Manager (`prod/webcdi/RDS_PASSWORD`), which the deploy
-user can't read. Copy it into GCP without it appearing anywhere:
+It lives in AWS Secrets Manager (`prod/webcdi/RDS_PASSWORD`, the `password`
+field of its JSON), which the deploy user can't read. Copy it into GCP without
+it appearing anywhere — the silent prompt keeps it out of history and adds no
+trailing newline:
 
 ```bash
-gcloud secrets create webcdi-staging-aws-prod-db-password --data-file=- --project=hs-langcog-webcdi
-# paste the password, Enter, Ctrl-D
+read -rs PW && printf %s "$PW" | gcloud secrets create webcdi-staging-aws-prod-db-password --data-file=- --project=hs-langcog-webcdi; unset PW
+# paste the password at the (invisible) prompt, then Enter
 ```
 
 The `webcdi-staging-` prefix lets the staging runtime account read it. Delete
