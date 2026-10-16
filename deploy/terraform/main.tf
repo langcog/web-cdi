@@ -214,8 +214,9 @@ resource "google_project_iam_member" "runtime_postmark" {
   role    = "roles/secretmanager.secretAccessor"
   member  = "serviceAccount:${google_service_account.runtime.email}"
   condition {
-    title      = "Postmark token only"
-    expression = "resource.name == \"projects/${data.google_project.this.number}/secrets/${var.postmark_secret_id}\""
+    title = "Postmark token only"
+    # match the secret and its versions (Cloud Run checks .../versions/latest)
+    expression = "resource.name == \"projects/${data.google_project.this.number}/secrets/${var.postmark_secret_id}\" || resource.name.startsWith(\"projects/${data.google_project.this.number}/secrets/${var.postmark_secret_id}/\")"
   }
 }
 
