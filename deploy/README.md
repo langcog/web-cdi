@@ -63,11 +63,28 @@ tofu plan -var-file=staging.tfvars -var image=<image> -out=plan.tfplan
 tofu apply plan.tfplan                              # review the plan first
 ```
 
-Images: until CI/CD (#681) exists, build amd64 and push
-(`docker buildx build --platform linux/amd64 -f deploy/Dockerfile -t <image> --push .`);
-Cloud Build (`deploy/cloudbuild.yaml`) needs a build service account first.
-New images roll out with `gcloud run deploy`/`gcloud run jobs update`; tofu
-ignores image changes so `apply` never rolls them back.
+## Deploys (`.github/workflows/deploy.yml`)
+
+After CI passes on master, GitHub Actions authenticates through Workload
+Identity Federation (no keys; only `langcog/web-cdi` workflows), builds the
+image on an amd64 runner, pushes it to Artifact Registry tagged with the
+commit SHA, points every job at it, runs the `migrate` job, runs
+`load-instruments` **only if** `instruments.json`, `cdi_form_csv/` or
+`cdi_forms/form_data/` changed since the running image, deploys the service,
+and smoke-tests `/health/`, `/`, login and About — routing traffic back to the
+previous revision if that fails. Manual run: Actions → Deploy → Run workflow.
+Tofu ignores image changes, so `apply` never rolls a deploy back.
+
+The deploy identity can push to the `webcdi` repository, deploy/run Cloud
+Run, and act as the runtime service account only.
+
+## Monitoring (`monitoring.tf`)
+
+Exceptions are grouped in **Cloud Error Reporting** (the JSON logs carry
+`stack_trace` + `serviceContext`). Email to webcdi-contact@stanford.edu for:
+site down (`/health/` uptime check, every 5 min), ERROR logs from the service
+or its jobs (at most hourly), failed job executions, >5 server errors in 10
+minutes, and database CPU >80% / disk >85%.
 
 First-time data: run the `migrate` job, then `load-instruments`
 (`gcloud run jobs execute <name> --wait`). One-off commands run as job
