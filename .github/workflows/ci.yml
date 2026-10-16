@@ -46,8 +46,8 @@ jobs:
       - name: Build and start db + web
         run: docker compose up -d --build --wait db web
 
-      # known_failure = two pre-existing pandas-3 bugs (#640 + scoring download)
-      # that only trip in the full CI run; tracked, quarantined from the gate.
+      # known_failure = pre-existing pandas-3 StudyAPI bug (#640); tracked,
+      # quarantined from the gate.
       - name: Run test suite (Selenium excluded — see selenium.yml)
         run: >-
           docker compose exec -T web
