@@ -2,6 +2,7 @@ from typing import Any
 
 from django.contrib import messages
 from django.http import HttpRequest, HttpResponse
+from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.utils import translation
 from django.views.generic import DetailView, FormView
@@ -20,7 +21,7 @@ class AdministrationContactView(FormView, DetailView):
         return reverse("administer_cdi_form", args=[self.object.url_hash])
 
     def get_object(self, queryset=None):
-        self.object = Administration.objects.get(url_hash=self.kwargs["hash_id"])
+        self.object = get_object_or_404(Administration, url_hash=self.kwargs["hash_id"])
         return self.object
 
     def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:

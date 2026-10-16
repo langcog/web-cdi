@@ -301,7 +301,8 @@ def administer_cdi_form(request, hash_id):
         else:
             request.method = "GET"
 
-    if request.method == "GET" or refresh:
+    # HEAD (e.g. email link scanners) is served like GET; Django drops the body
+    if request.method in ("GET", "HEAD") or refresh:
         requests_log.objects.create(url_hash=hash_id, request_type="GET")
         if (
             not administration_instance.completed

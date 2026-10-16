@@ -7,7 +7,7 @@ from typing import Any, Dict, List
 import requests
 from django.conf import settings
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils import timezone, translation
 from django.views.generic import DetailView, UpdateView
@@ -165,7 +165,7 @@ class AdministrationSummaryView(DetailView):
             return ["cdi_forms/administration_summary.html"]
 
     def get_object(self, queryset=None):
-        self.object = Administration.objects.get(url_hash=self.kwargs["hash_id"])
+        self.object = get_object_or_404(Administration, url_hash=self.kwargs["hash_id"])
         return self.object
 
     def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
@@ -232,7 +232,7 @@ class AdministrationUpdateView(UpdateView):
         return ctx
 
     def get_object(self, queryset=None):
-        self.object = Administration.objects.get(url_hash=self.kwargs["hash_id"])
+        self.object = get_object_or_404(Administration, url_hash=self.kwargs["hash_id"])
         return self.object
 
     def get_instrument(self):
