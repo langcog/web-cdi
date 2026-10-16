@@ -5,7 +5,7 @@ from django.core.mail import EmailMessage
 from django.core.management.base import BaseCommand
 from django.db.models import Q
 
-from cdi_forms.scores import update_summary_scores
+from cdi_forms.scores import InstrumentScoring, update_summary_scores
 from researcher_UI.models import Administration, Study
 
 
@@ -33,10 +33,14 @@ class Command(BaseCommand):
 
         count = 0
         thousands = 0
-        for instance in administrations:
+        scoring = {}  # instrument pk -> InstrumentScoring, loaded once per run
+        for instance in administrations.select_related("study__instrument"):
             count += 1
             print(f"Processing item {count} of {len(administrations)}")
-            update_summary_scores(instance)
+            instrument = instance.study.instrument
+            if instrument.pk not in scoring:
+                scoring[instrument.pk] = InstrumentScoring(instrument)
+            update_summary_scores(instance, scoring[instrument.pk])
             if count == 1000:
                 thousands += 1
                 email = EmailMessage(

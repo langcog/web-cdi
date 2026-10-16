@@ -1,4 +1,17 @@
+"""Scoring of completed administrations.
+
+Raw scores come from InstrumentScore definitions; percentiles from Benchmark
+norm tables. Output is identical to the original row-by-row implementation
+(frozen in scores_legacy.py, checked by tests and `compare_scoring`), but an
+instrument's scoring configuration is loaded once and SummaryData is written
+in bulk: a few queries per administration instead of thousands (#668).
+
+Deliberate difference from the legacy code: a response whose item_ID is not
+an item of the instrument is skipped (legacy counted it under the previous
+response's category, or crashed if it came first).
+"""
 import logging
+from collections import defaultdict
 
 from researcher_UI.models import (Benchmark, InstrumentScore, Measure,
                                   SummaryData, administration_data)
@@ -16,289 +29,203 @@ def calc_benchmark(x1, x2, y1, y2, raw_score):
     return int(a + raw_score * gradient)
 
 
-def create_benchmark_score(
-    benchmark, age, background_info, administration_instance, f, adjusted
-):
+class InstrumentScoring:
+    """One instrument's scoring configuration, loaded with a handful of queries.
+
+    Bulk commands build one per instrument and reuse it across administrations.
+    """
+
+    def __init__(self, instrument):
+        self.instrument = instrument
+        self.item_category = {
+            item_id: scoring_category or item_type
+            for item_id, scoring_category, item_type in Instrument_Forms.objects.filter(
+                instrument=instrument
+            ).values_list("itemID", "scoring_category", "item_type")
+        }
+        self.scores = list(InstrumentScore.objects.filter(instrument=instrument))
+        self.categories = {f.pk: f.category.split(";") for f in self.scores}
+        self.measures = {f.pk: f.scoring_measures.split(";") for f in self.scores}
+        self.weights = defaultdict(dict)
+        for m in Measure.objects.filter(instrument_score__in=self.scores):
+            self.weights[m.instrument_score_id][m.key] = m.value
+        # score id -> age -> rows in percentile order (Benchmark.Meta.ordering)
+        self.benchmarks = defaultdict(lambda: defaultdict(list))
+        ages = []
+        for b in Benchmark.objects.filter(instrument=instrument):
+            self.benchmarks[b.instrument_score_id][b.age].append(b)
+            ages.append(b.age)
+        self.min_age = min(ages) if ages else None
+        self.max_age = max(ages) if ages else None
+
+    def weight(self, f, key):
+        try:
+            return self.weights[f.pk][key]
+        except KeyError:
+            raise Measure.DoesNotExist(f"No measure {key!r} for {f}")
+
+    def rows(self, f, age):
+        return self.benchmarks[f.pk].get(age, [])
+
+
+def benchmark_scores(values, benchmarks, f, sex, adjusted):
+    """Add percentile rows for score `f` to `values`.
+
+    `benchmarks` are f's norm rows at the child's (cohort) age in percentile
+    order. Percentile = the highest row whose raw score is <= the child's
+    (floor lookup; interpolation via calc_benchmark is disabled since #652).
+    Sex-specific percentiles exist only for M/F (#674).
+    """
+    benchmark = benchmarks[0]
     original_benchmark = benchmark
     if benchmark.percentile == 999:
-        summary, created = SummaryData.objects.get_or_create(
-            administration=administration_instance,
-            title=f.title + f" % yes answers at this age and sex{adjusted}",
+        title = f.title + f" % yes answers at this age and sex{adjusted}"
+        values.setdefault(title, "")
+        if sex == "M":
+            values[title] = str(benchmark.raw_score_boy)
+        elif sex == "F":
+            values[title] = str(benchmark.raw_score_girl)
+        return
+
+    try:
+        raw_score = int(values[f.title])
+    except (KeyError, ValueError, TypeError):
+        raw_score = 0
+
+    sex_score = 0
+    if sex in ("M", "F"):
+        column = "raw_score_boy" if sex == "M" else "raw_score_girl"
+        sex_score = benchmark.percentile
+        for b in benchmarks[1:]:
+            if getattr(b, column) <= raw_score:
+                benchmark = b
+                sex_score = benchmark.percentile
+            else:
+                break
+        values[f"{f.title} Percentile-sex{adjusted}"] = (
+            "<1" if sex_score < 1 else str(sex_score)
         )
-        if background_info.sex == "M":
-            summary.value = str(benchmark.raw_score_boy)
-        elif background_info.sex == "F":
-            summary.value = str(benchmark.raw_score_girl)
-        summary.save()
 
-    else:
-        benchmarks = Benchmark.objects.filter(instrument_score=f, age=age)
-        sex_score = 0
+    if not benchmark.raw_score == 9999:
+        benchmark = original_benchmark
+        unisex_score = benchmark.percentile
+        for b in benchmarks[1:]:
+            if b.raw_score <= raw_score:
+                benchmark = b
+                unisex_score = benchmark.percentile
+            else:
+                break
+        values[f.title + f" Percentile-both{adjusted}"] = (
+            "<1" if unisex_score < 1 else str(unisex_score)
+        )
+
+
+def _compute(administration_instance, scoring, values):
+    """Fill `values` (title -> str). Returns True if the administration is fully scored."""
+    for f in scoring.scores:
+        values.setdefault(f.title, "")
+        if f.kind == "count":
+            values[f.title] = "0"
+
+    for item_id, value in administration_data.objects.filter(
+        administration=administration_instance
+    ).values_list("item_ID", "value"):
+        scoring_category = scoring.item_category.get(item_id)
+        if scoring_category is None:
+            logger.error(
+                f"Unknown item_ID {item_id} for instrument {scoring.instrument}; not scored"
+            )
+            continue
+        for f in scoring.scores:
+            if scoring_category not in scoring.categories[f.pk]:
+                continue
+            if f.kind == "count":
+                if value in scoring.measures[f.pk]:
+                    if values[f.title] == "":
+                        values[f.title] = str(scoring.weight(f, value))
+                    else:
+                        values[f.title] = str(
+                            int(values[f.title]) + scoring.weight(f, value)
+                        )
+            else:
+                values[f.title] = value
+
+    if scoring.min_age is None:  # instrument has no norms
+        return True
+
+    try:
+        background_info = BackgroundInfo.objects.get(
+            administration=administration_instance
+        )
+    except Exception:
+        return False  # legacy behavior: left unscored, retried by cron
+
+    min_age, max_age = scoring.min_age, scoring.max_age
+    try:
+        age = background_info.age
+        values["benchmark age"] = str(age)
+        if age < min_age:
+            age = min_age
+        if age > max_age:
+            age = max_age
+    except Exception:
+        age = None
+    values["benchmark cohort age"] = str(age)
+
+    adjusted_benchmark_age = background_info.age
+    if adjusted_benchmark_age is not None and background_info.early_or_late == "early":
         try:
-            raw_score = int(
-                SummaryData.objects.get(
-                    administration=administration_instance, title=f.title
-                ).value
+            adjusted_benchmark_age = adjusted_benchmark_age - int(
+                background_info.due_date_diff / 4
             )
-        except:
-            raw_score = 0
-        if background_info.sex == "M":
-            benchmark = benchmarks[0]
-            sex_score = benchmark.percentile
-            for b in benchmarks[1:]:
-                if b.raw_score_boy <= raw_score:
-                    benchmark = b
-                    sex_score = benchmark.percentile
-                else:
-                    '''
-                    sex_score = calc_benchmark(
-                        benchmark.raw_score_boy,
-                        b.raw_score_boy,
-                        benchmark.percentile,
-                        b.percentile,
-                        raw_score,
-                    )
-                    '''
-                    break
-        elif background_info.sex == "F":
-            benchmark = benchmarks[0]
-            sex_score = benchmark.percentile
-            for b in benchmarks[1:]:
-                if b.raw_score_girl <= raw_score:
-                    benchmark = b
-                    sex_score = benchmark.percentile
-                else:
-                    '''
-                    sex_score = calc_benchmark(
-                        benchmark.raw_score_girl,
-                        b.raw_score_girl,
-                        benchmark.percentile,
-                        b.percentile,
-                        raw_score,
-                    )
-                    '''
-                    break
+        except Exception:
+            pass
+    elif adjusted_benchmark_age is not None and background_info.early_or_late == "late":
+        try:
+            adjusted_benchmark_age = age + int(background_info.due_date_diff / 4)
+        except Exception:
+            pass
+    values["adjusted benchmark age"] = str(adjusted_benchmark_age)
 
-        # sex-specific norms exist only for M/F; any other answer gets no
-        # sex percentile rather than a spurious "<1" (#674)
-        if background_info.sex in ("M", "F"):
-            if sex_score < 1:
-                sex_score = "<1"
-            summary, created = SummaryData.objects.get_or_create(
-                administration=administration_instance,
-                title=f"{f.title} Percentile-sex{adjusted}",
-            )
-            summary.value = str(sex_score)
-            summary.save()
+    if adjusted_benchmark_age < min_age:
+        adjusted_benchmark_age = min_age
+    if adjusted_benchmark_age > max_age:
+        adjusted_benchmark_age = max_age
+    values["adjusted benchmark cohort age"] = str(adjusted_benchmark_age)
 
-        if not benchmark.raw_score == 9999:
-            summary, created = SummaryData.objects.get_or_create(
-                administration=administration_instance,
-                title=f.title + f" Percentile-both{adjusted}",
-            )
-            benchmark = original_benchmark
-            unisex_score = benchmark.percentile
-            for b in benchmarks[1:]:
-                if b.raw_score <= raw_score:
-                    benchmark = b
-                    unisex_score = benchmark.percentile
-                else:
-                    '''
-                    unisex_score = calc_benchmark(
-                        benchmark.raw_score,
-                        b.raw_score,
-                        benchmark.percentile,
-                        b.percentile,
-                        raw_score,
-                    )
-                    '''
-                    break
-            if unisex_score < 1:
-                unisex_score = "<1"
-            summary.value = str(unisex_score)
-            summary.save()
+    for f in scoring.scores:
+        if not scoring.benchmarks.get(f.pk):
+            continue
+        rows = scoring.rows(f, age)
+        if not rows:
+            raise IndexError(f"No benchmark for {f} at age {age}")
+        adjusted_rows = scoring.rows(f, adjusted_benchmark_age)
+        if not adjusted_rows:
+            # legacy: fall back to the score's youngest age, and keep using it
+            # for the remaining scores of this administration
+            adjusted_benchmark_age = min(scoring.benchmarks[f.pk])
+            adjusted_rows = scoring.rows(f, adjusted_benchmark_age)
+        benchmark_scores(values, rows, f, background_info.sex, "")
+        benchmark_scores(values, adjusted_rows, f, background_info.sex, " (adjusted)")
+    return True
 
 
-def update_summary_scores(administration_instance):
+def update_summary_scores(administration_instance, scoring=None):
+    """Rebuild an administration's SummaryData. Pass `scoring` to reuse config across calls."""
     if not administration_instance.completed:
         return
+    if scoring is None:
+        scoring = InstrumentScoring(administration_instance.study.instrument)
     SummaryData.objects.filter(administration=administration_instance).delete()
-    for f in InstrumentScore.objects.filter(
-            instrument=administration_instance.study.instrument,
-        ):  # items can be counted under multiple Titles check category against all categories
-            # logger.debug(f"Instrument Score: {f}")
-            summary, created = SummaryData.objects.get_or_create(
-                administration=administration_instance, title=f.title
-            )
-            if f.kind == "count": summary.value=0
-            summary.save()
-        
-
-    for administration_data_item in administration_data.objects.filter(
-        administration=administration_instance
-    ):
-        try:
-            inst = Instrument_Forms.objects.get(
-                instrument=administration_instance.study.instrument,
-                itemID=administration_data_item.item_ID,
-            )
-        except Exception as e:
-            logger.error(
-                f"{e} : instrument = {administration_instance.study.instrument} : item_ID = {administration_data_item.item_ID}"
-            )
-        scoring_category = (
-            inst.scoring_category if inst.scoring_category else inst.item_type
+    values = {}
+    try:
+        complete = _compute(administration_instance, scoring, values)
+    finally:
+        # like the legacy code, keep whatever was computed before an error
+        SummaryData.objects.bulk_create(
+            SummaryData(administration=administration_instance, title=t, value=v)
+            for t, v in values.items()
         )
-        # this is the scoring
-        for f in InstrumentScore.objects.filter(
-            instrument=administration_instance.study.instrument,
-            category__contains=scoring_category,
-        ):  # items can be counted under multiple Titles check category against all categories
-            # logger.debug(f"Instrument Score: {f}")
-            summary, created = SummaryData.objects.get_or_create(
-                administration=administration_instance, title=f.title
-            )
-
-            if scoring_category in f.category.split(";"):
-                if f.kind == "count":
-                    if administration_data_item.value in f.scoring_measures.split(
-                        ";"
-                    ):  # and check all values to see if we increment
-                        if summary.value == "":
-                            summary.value = str(
-                                Measure.objects.get(
-                                    instrument_score=f,
-                                    key=administration_data_item.value,
-                                ).value
-                            )
-                        else:
-                            summary.value = str(
-                                int(summary.value)
-                                + Measure.objects.get(
-                                    instrument_score=f,
-                                    key=administration_data_item.value,
-                                ).value
-                            )
-                else:
-                    summary.value = administration_data_item.value
-            summary.save()
-
-    # this is the benchmark data
-    if Benchmark.objects.filter(
-        instrument=administration_instance.study.instrument
-    ).exists():
-        try:
-            max_age = (
-                Benchmark.objects.filter(
-                    instrument=administration_instance.study.instrument
-                )
-                .order_by("-age")[0]
-                .age
-            )
-            min_age = (
-                Benchmark.objects.filter(
-                    instrument=administration_instance.study.instrument
-                )
-                .order_by("age")[0]
-                .age
-            )
-        except:
-            pass
-
-        try:
-            background_info = BackgroundInfo.objects.get(
-                administration=administration_instance
-            )
-        except:
-            return
-
-        try:
-            age = background_info.age
-            summary, created = SummaryData.objects.get_or_create(
-                administration=administration_instance, title="benchmark age"
-            )
-            summary.value = str(age)
-            summary.save()
-            if age < min_age:
-                age = min_age
-            if age > max_age:
-                age = max_age
-        except:
-            age = None
-        summary, created = SummaryData.objects.get_or_create(
-            administration=administration_instance, title="benchmark cohort age"
-        )
-
-        summary.value = str(age)
-        summary.save()
-
-        adjusted_benchmark_age = background_info.age
-        if (
-            adjusted_benchmark_age is not None
-            and background_info.early_or_late == "early"
-        ):
-            try:
-                adjusted_benchmark_age = adjusted_benchmark_age - int(
-                    background_info.due_date_diff / 4
-                )
-            except:
-                pass
-        elif (
-            adjusted_benchmark_age is not None
-            and background_info.early_or_late == "late"
-        ):
-            try:
-                adjusted_benchmark_age = age + int(background_info.due_date_diff / 4)
-            except:
-                pass
-
-        summary, created = SummaryData.objects.get_or_create(
-            administration=administration_instance, title="adjusted benchmark age"
-        )
-        summary.value = str(adjusted_benchmark_age)
-        summary.save()
-
-        if adjusted_benchmark_age < min_age:
-            adjusted_benchmark_age = min_age
-        if adjusted_benchmark_age > max_age:
-            adjusted_benchmark_age = max_age
-
-        summary, created = SummaryData.objects.get_or_create(
-            administration=administration_instance,
-            title="adjusted benchmark cohort age",
-        )
-        summary.value = str(adjusted_benchmark_age)
-        summary.save()
-
-        for f in InstrumentScore.objects.filter(
-            instrument=administration_instance.study.instrument
-        ):
-            if Benchmark.objects.filter(instrument_score=f).exists():
-                # logger.debug(f"Getting benchmark for score {f} and age {age}")
-                benchmark = Benchmark.objects.filter(instrument_score=f, age=age)[0]
-                try:
-                    adjusted_benchmark = Benchmark.objects.filter(
-                        instrument_score=f, age=adjusted_benchmark_age
-                    )[0]
-                except:
-                    adjusted_benchmark_age = (
-                        Benchmark.objects.filter(instrument_score=f)
-                        .order_by("age")[0]
-                        .age
-                    )
-                    adjusted_benchmark = Benchmark.objects.filter(
-                        instrument_score=f, age=adjusted_benchmark_age
-                    )[0]
-                create_benchmark_score(
-                    benchmark, age, background_info, administration_instance, f, ""
-                )
-                create_benchmark_score(
-                    adjusted_benchmark,
-                    adjusted_benchmark_age,
-                    background_info,
-                    administration_instance,
-                    f,
-                    " (adjusted)",
-                )
-    administration_instance.scored = True
-    administration_instance.save()
+    if complete:
+        administration_instance.scored = True
+        administration_instance.save()
