@@ -46,16 +46,39 @@ jobs:
       - name: Build and start db + web
         run: docker compose up -d --build --wait db web
 
-      # CAT_ENGINE=remote exercises the remote code path; the CAT tests mock
-      # the R API (cat_api_mock), so no network call is made.
       # known_failure = two pre-existing pandas-3 bugs (#640 + scoring download)
       # that only trip in the full CI run; tracked, quarantined from the gate.
       - name: Run test suite (Selenium excluded — see selenium.yml)
         run: >-
-          docker compose exec -T -e CAT_ENGINE=remote web
+          docker compose exec -T web
           python manage.py test --exclude=selenium --exclude=known_failure
           --parallel auto --noinput
 
       - name: Dump web logs on failure
         if: failure()
         run: docker compose logs web
+
+  # The CAT runs entirely in the browser (jsCat). Check the committed bundle is
+  # what the source builds, and that it reproduces mirtCAT's item selection and
+  # theta estimates on the ground-truth sequences for every language.
+  jscat:
+    name: jsCat engine vs mirtCAT
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: webcdi/cdi_forms/cat_forms/jscat
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: webcdi/cdi_forms/cat_forms/jscat/package-lock.json
+      - run: npm ci --no-audit --no-fund
+      - name: Committed bundle matches source
+        run: |
+          npm run build
+          git diff --exit-code -- ../../static/cdi_forms/cat ../../../static/cdi_forms/cat
+      - name: Engine reproduces mirtCAT ground truth
+        run: npm test

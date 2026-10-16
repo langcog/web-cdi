@@ -38,7 +38,6 @@ Optional:
 | `HSTS_SECONDS` | 3600 | raise once HTTPS is settled |
 | `DB_CONN_MAX_AGE` | 0 | seconds to reuse DB connections (e.g. 60) |
 | `WEB_CONCURRENCY`, `GUNICORN_THREADS`, `GUNICORN_TIMEOUT` | 2, 4, 300 | gunicorn |
-| `CAT_ENGINE` | remote | `browser` for jsCat (the GCP build will be jsCat-only, #684) |
 | `PRIMARY_HOST`, `TRUSTED_ORIGINS`, `GOOGLE_ANALYTICS_ID`, `TIME_ZONE` | | see `.env.example` |
 
 `/health/` checks the database, cache and storage; use it for startup and

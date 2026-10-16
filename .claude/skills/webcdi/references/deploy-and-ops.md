@@ -83,8 +83,6 @@ Henry's wiki also says deploying needs the EC2 key `web-cdi_011017.pem` in
 | `SITE_ID` | Django Sites row: 1 WebCDI, 2 test, 3 local, 4 MPI |
 | `PRIMARY_HOST` | redirect bare host to this host (optional) |
 | `TIME_ZONE`, `LOG_FILE_PATH` | defaults UTC, `/tmp/` |
-| `CAT_API_URL` | R CAT API base URL |
-| `CAT_ENGINE` | `remote` (R API, prod default) or `browser` (jsCat) |
 | `SECRET_KEY`, `GOOGLE_ANALYTICS_ID` | from env |
 | `AWS_STORAGE_BUCKET_NAME`, AWS keys | S3 media; only when `AWS_INSTANCE` |
 

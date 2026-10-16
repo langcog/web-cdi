@@ -2,7 +2,7 @@ import datetime
 import json
 
 from django.contrib.auth.models import User
-from django.test import TestCase, override_settings, tag
+from django.test import TestCase, tag
 from django.urls import reverse
 from django.utils import timezone
 
@@ -11,13 +11,12 @@ from cdi_forms.models import BackgroundInfo
 from researcher_UI.models import Administration, Instrument, Study
 from researcher_UI.tests.utils import random_password
 
-# Tests for the in-browser (jsCat) CAT flow. Unlike the remote-engine tests
-# these make no network calls: item selection happens client-side, so the
-# server only renders the page shell and persists answers.
+# Tests for the CAT flow. Item selection and theta estimation run client-side
+# in jsCat (validated against mirtCAT by jscat/test-engine.mjs, which CI runs);
+# the server renders the page shell, persists answers and finishes the form.
 
 
 @tag("cat")
-@override_settings(CAT_ENGINE="browser")
 class BrowserCatTest(TestCase):
     fixtures = [
         "researcher_UI/fixtures/researcher_UI_test_fixtures.json",
@@ -118,10 +117,9 @@ class BrowserCatTest(TestCase):
 
 
 @tag("cat")
-@override_settings(CAT_ENGINE="browser")
 class BrowserCatHardestEasiestTest(TestCase):
-    """In browser mode the completion page's hardest/easiest word is computed
-    locally from the static bank instead of the R API. Verify the view reads
+    """The completion page's hardest/easiest word is computed from the static
+    item bank. Verify the view reads
     the right language bank, considers only 'yes' items, and applies the
     easiness rule (max/min of the intercept, d = -a*b)."""
 
@@ -181,3 +179,90 @@ class BrowserCatHardestEasiestTest(TestCase):
         # the "no" item must not be selected
         self.assertNotEqual(hardest, "pants")
         self.assertNotEqual(easiest, "pants")
+
+
+@tag("cat")
+class CatLanguagesTest(TestCase):
+    """Every CAT language renders its own bank, persists answers, completes,
+    and computes hardest/easiest from that bank (no external service)."""
+
+    fixtures = [
+        "researcher_UI/fixtures/researcher_UI_test_fixtures.json",
+        "cdi_forms/fixtures/cdi_forms_test_fixtures.json",
+    ]
+    LANGUAGES = [  # instrument language, bank code
+        ("English", "EN"),
+        ("Spanish", "SP"),
+        ("French French", "FR"),
+        ("Japanese", "JP"),
+        ("Dutch", "NL"),
+    ]
+
+    def test_each_language_end_to_end(self):
+        from cdi_forms.cat_forms.views import AdministerAdministraionView, _cat_bank
+
+        user = User.objects.create_user(username="cat_langs", password="x-test-only")
+        for n, (language, code) in enumerate(self.LANGUAGES):
+            with self.subTest(language=language):
+                instrument, _ = Instrument.objects.get_or_create(
+                    language=language,
+                    form="CAT",
+                    defaults=dict(
+                        name=f"{language.replace(' ', '_')}_CAT",
+                        verbose_name=f"{language} CAT",
+                        min_age=12,
+                        max_age=36,
+                    ),
+                )
+                study = Study.objects.create(
+                    researcher=user, name=f"CAT {language}", instrument=instrument
+                )
+                url_hash = random_password(size=64)
+                admin = Administration.objects.create(
+                    study=study,
+                    subject_id=n + 1,
+                    repeat_num=1,
+                    url_hash=url_hash,
+                    completed=False,
+                    due_date=timezone.now() + datetime.timedelta(days=31),
+                    completedBackgroundInfo=True,
+                )
+                BackgroundInfo.objects.create(administration=admin, age=24)
+
+                page = self.client.get(
+                    reverse("cat_forms:administer_cat_form", kwargs={"hash_id": url_hash})
+                )
+                self.assertEqual(page.status_code, 200)
+                self.assertContains(page, f"{code}.json")
+
+                items = _cat_bank(code)["items"][:3]
+                answer_url = reverse("cat_forms:cat_answer", kwargs={"hash_id": url_hash})
+                for i, item in enumerate(items):
+                    r = self.client.post(
+                        answer_url,
+                        json.dumps({
+                            "index": item["index"],
+                            "definition": item["definition"],
+                            "response": True,
+                            "est_theta": 0.1 * i,
+                            "done": i == len(items) - 1,
+                        }),
+                        content_type="application/json",
+                    )
+                    self.assertEqual(r.status_code, 200)
+                self.assertTrue(r.json()["completed"])
+                cat = CatResponse.objects.get(administration=admin)
+                self.assertEqual(cat.administered_items, [it["index"] for it in items])
+
+                view = AdministerAdministraionView()
+                view.object = Administration.objects.get(pk=admin.pk)
+                view.language = {"EN": "en", "SP": "es", "FR": "fr", "JP": "ja", "NL": "nl"}[code]
+                hardest, easiest = view.get_hardest_easiest()
+                easiness = lambda it: -it["a"] * it["b"]
+                self.assertEqual(hardest, min(items, key=easiness)["definition"])
+                self.assertEqual(easiest, max(items, key=easiness)["definition"])
+
+                done_page = self.client.get(
+                    reverse("cat_forms:administer_cat_form", kwargs={"hash_id": url_hash})
+                )
+                self.assertEqual(done_page.status_code, 200)

@@ -52,7 +52,7 @@ jobs:
       # worker would spin up its own LiveServer competing for it.
       - name: Run the Selenium-tagged tests
         run: >-
-          docker compose exec -T -e CAT_ENGINE=remote web
+          docker compose exec -T web
           python manage.py test --tag=selenium --noinput
 
       - name: Dump logs on failure

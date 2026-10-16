@@ -41,7 +41,7 @@ and Spanish Long + CAT forms require a paid Brookes Publishing code.
 | `Webcdi-env-2` | webcdi.org | **production** |
 | `Webcdi-dev-django4` | testing.webcdi.org | staging; plain http |
 | `webcdi-dev` | — | Henry's old demo env; leave alone |
-| `CdiCatApi-env` / `-dev` | — | R plumber CAT API (used when `CAT_ENGINE=remote`) |
+| `CdiCatApi-env` / `-dev` | — | retired R CAT API (AWS prod still uses it until cutover) |
 
 Deploy = `eb deploy <env>` from `webcdi/`; the postdeploy hook migrates and
 re-runs all populate commands. Details, env vars, cron, DB tasks:

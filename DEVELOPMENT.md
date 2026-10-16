@@ -77,9 +77,9 @@ about:
 - `AWS_INSTANCE` — **must be False locally.** When True (the production
   default) the app pulls credentials from AWS Secrets Manager and stores
   uploads in S3.
-- `CAT_API_URL` — the external R service used by computer-adaptive (CAT)
-  forms. Local development uses the production instance by default; see
-  <https://github.com/langcog/cdi-cat-api> for the source.
+- Computer-adaptive (CAT) forms run entirely in the browser (jsCat engine in
+  `webcdi/cdi_forms/cat_forms/jscat/`, item banks in
+  `cdi_forms/static/cdi_forms/cat/`); no external CAT service is needed.
 
 ## Architecture at a glance
 
