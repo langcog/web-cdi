@@ -28,15 +28,15 @@ locals {
   github_principal = "principalSet://iam.googleapis.com/${google_iam_workload_identity_pool.github.name}/attribute.repository/${var.github_repository}"
 }
 
-# push images to this repository only
+# push images. Project-wide: IAM conditions aren't honored for Artifact
+# Registry uploads, and a repository-level grant needs
+# artifactregistry.repositories.setIamPolicy (not in Editor). Today "webcdi" is
+# the only repository in the project; tighten to a repository-level grant if
+# that changes.
 resource "google_project_iam_member" "github_push" {
   project = var.project_id
   role    = "roles/artifactregistry.writer"
   member  = local.github_principal
-  condition {
-    title      = "webcdi image repository only"
-    expression = "resource.name.startsWith(\"projects/${var.project_id}/locations/${var.region}/repositories/${google_artifact_registry_repository.images.repository_id}\")"
-  }
 }
 
 # deploy services/jobs and run jobs (operations and executions have their own
