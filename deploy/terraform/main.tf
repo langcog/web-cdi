@@ -25,8 +25,9 @@ locals {
   }
 
   secrets = {
-    SECRET_KEY   = google_secret_manager_secret.django_secret_key.secret_id
-    RDS_PASSWORD = google_secret_manager_secret.db_password.secret_id
+    SECRET_KEY            = google_secret_manager_secret.django_secret_key.secret_id
+    RDS_PASSWORD          = google_secret_manager_secret.db_password.secret_id
+    POSTMARK_SERVER_TOKEN = var.postmark_secret_id
   }
 
   # Cloud Run jobs: name -> manage.py arguments
@@ -207,6 +208,17 @@ resource "google_secret_manager_secret_version" "db_password" {
   secret_data = random_password.db.result
 }
 
+# The externally issued Postmark token (one secret per project, created by hand)
+resource "google_project_iam_member" "runtime_postmark" {
+  project = var.project_id
+  role    = "roles/secretmanager.secretAccessor"
+  member  = "serviceAccount:${google_service_account.runtime.email}"
+  condition {
+    title      = "Postmark token only"
+    expression = "resource.name == \"projects/${data.google_project.this.number}/secrets/${var.postmark_secret_id}\""
+  }
+}
+
 # Project-level grant limited by condition to this environment's secrets
 # (resource-level setIamPolicy needs more than Editor + projectIamAdmin).
 resource "google_project_iam_member" "runtime_secrets" {
@@ -306,6 +318,7 @@ resource "google_cloud_run_v2_service" "web" {
 
   depends_on = [
     google_project_iam_member.runtime_secrets,
+    google_project_iam_member.runtime_postmark,
     google_project_iam_member.runtime_sql,
   ]
 }
@@ -378,6 +391,7 @@ resource "google_cloud_run_v2_job" "manage" {
 
   depends_on = [
     google_project_iam_member.runtime_secrets,
+    google_project_iam_member.runtime_postmark,
     google_project_iam_member.runtime_sql,
   ]
 }

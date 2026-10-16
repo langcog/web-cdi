@@ -167,6 +167,17 @@ if EMAIL_BACKEND == "django_ses.SESBackend":
     )
 EMAIL_PORT = os.environ.get("EMAIL_PORT", 25)
 
+# Postmark via django-anymail (GCP build, #680):
+#   EMAIL_BACKEND=anymail.backends.postmark.EmailBackend + POSTMARK_SERVER_TOKEN
+# Mail goes out from DEFAULT_FROM_EMAIL (noreply@webcdi.org); replies reach
+# REPLY_TO_EMAIL.
+ANYMAIL = {
+    "POSTMARK_SERVER_TOKEN": os.environ.get("POSTMARK_SERVER_TOKEN", ""),
+    "SEND_DEFAULTS": {
+        "reply_to": [os.environ.get("REPLY_TO_EMAIL", "webcdi-contact@stanford.edu")]
+    },
+}
+
 DEFAULT_FROM_EMAIL_NAME = os.environ["DEFAULT_FROM_EMAIL_NAME"]
 DEFAULT_FROM_EMAIL_ADDRESS = os.environ["DEFAULT_FROM_EMAIL_ADDRESS"]
 DEFAULT_FROM_EMAIL = f"{DEFAULT_FROM_EMAIL_NAME} <{DEFAULT_FROM_EMAIL_ADDRESS}>"
