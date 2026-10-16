@@ -19,6 +19,7 @@ cssselect2==0.9.0
 defusedxml==0.7.1
 Django==5.2.16
 django-admin-rangefilter==0.13.5
+django-anymail[postmark]==15.2
 django-bootstrap3==26.1
 django-bootstrap3-datetimepicker==2.2.3
 django-bootstrap4==26.1

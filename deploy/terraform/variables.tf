@@ -38,9 +38,15 @@ variable "admins" {
 }
 
 variable "email_backend" {
-  description = "Console backend logs mail instead of sending (staging until Postmark, #680)"
+  description = "Django email backend (Postmark via anymail; console backend logs mail instead)"
   type        = string
-  default     = "django.core.mail.backends.console.EmailBackend"
+  default     = "anymail.backends.postmark.EmailBackend"
+}
+
+variable "postmark_secret_id" {
+  description = "Secret Manager secret holding the Postmark server token (created by hand, #680)"
+  type        = string
+  default     = "postmark-server-token"
 }
 
 variable "enable_email_jobs" {
