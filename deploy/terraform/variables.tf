@@ -59,3 +59,9 @@ variable "max_instances" {
   type    = number
   default = 3
 }
+
+variable "github_repository" {
+  description = "GitHub repo allowed to deploy via Workload Identity Federation"
+  type        = string
+  default     = "langcog/web-cdi"
+}

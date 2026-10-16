@@ -1,0 +1,114 @@
+# Deploy to GCP staging after CI passes on master (#681, tracking #690).
+#
+# Authenticates with Workload Identity Federation (no stored keys). Builds the
+# production image (deploy/Dockerfile), runs migrations as a Cloud Run job,
+# reloads instrument data only when instrument files changed, deploys the web
+# service, smoke-tests it, and rolls traffic back if the smoke test fails.
+#
+# Repository variables: GCP_PROJECT, GCP_REGION, GCP_WIF_PROVIDER.
+name: Deploy
+
+on:
+  workflow_run:
+    workflows: ["CI"]
+    types: [completed]
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: deploy-staging
+  cancel-in-progress: false
+
+jobs:
+  staging:
+    if: github.event_name == 'workflow_dispatch' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push')
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    environment:
+      name: staging
+      url: ${{ steps.deploy.outputs.url }}
+    env:
+      PROJECT: ${{ vars.GCP_PROJECT }}
+      REGION: ${{ vars.GCP_REGION }}
+      NAME: webcdi-staging
+      SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.SHA }}
+          fetch-depth: 0
+
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.GCP_WIF_PROVIDER }}
+          project_id: ${{ vars.GCP_PROJECT }}
+
+      - uses: google-github-actions/setup-gcloud@v2
+
+      - name: Build and push image
+        run: |
+          IMAGE="$REGION-docker.pkg.dev/$PROJECT/webcdi/webcdi:$SHA"
+          echo "IMAGE=$IMAGE" >> "$GITHUB_ENV"
+          gcloud auth configure-docker "$REGION-docker.pkg.dev" --quiet
+          docker build -f deploy/Dockerfile -t "$IMAGE" .
+          docker push "$IMAGE"
+
+      - name: Record what is running now
+        run: |
+          PREV_REVISION=$(gcloud run services describe "$NAME" --region "$REGION" \
+            --format='value(status.latestReadyRevisionName)')
+          PREV_SHA=$(gcloud run services describe "$NAME" --region "$REGION" \
+            --format='value(spec.template.spec.containers[0].image)' | sed 's/.*://')
+          echo "PREV_REVISION=$PREV_REVISION" >> "$GITHUB_ENV"
+          echo "PREV_SHA=$PREV_SHA" >> "$GITHUB_ENV"
+          echo "currently running $PREV_REVISION ($PREV_SHA)"
+
+      - name: Point jobs at the new image
+        run: |
+          for job in migrate load-instruments scoring monthly-report weekly-reminder; do
+            gcloud run jobs update "$NAME-$job" --region "$REGION" --image "$IMAGE" --quiet
+          done
+
+      - name: Migrate database
+        run: gcloud run jobs execute "$NAME-migrate" --region "$REGION" --wait
+
+      - name: Reload instrument data if it changed
+        run: |
+          DATA='webcdi/static/json/instruments.json webcdi/cdi_form_csv webcdi/cdi_forms/form_data'
+          if ! git cat-file -e "$PREV_SHA^{commit}" 2>/dev/null; then
+            echo "previous image tag ($PREV_SHA) isn't a commit here; reloading to be safe"
+            CHANGED=yes
+          elif git diff --quiet "$PREV_SHA" "$SHA" -- $DATA; then
+            CHANGED=no
+          else
+            CHANGED=yes
+            git diff --stat "$PREV_SHA" "$SHA" -- $DATA
+          fi
+          if [ "$CHANGED" = yes ]; then
+            gcloud run jobs execute "$NAME-load-instruments" --region "$REGION" --wait
+          else
+            echo "instrument data unchanged; skipping reload"
+          fi
+
+      - name: Deploy web service
+        id: deploy
+        run: |
+          gcloud run deploy "$NAME" --region "$REGION" --image "$IMAGE" --quiet
+          URL=$(gcloud run services describe "$NAME" --region "$REGION" --format='value(status.url)')
+          echo "url=$URL" >> "$GITHUB_OUTPUT"
+          echo "URL=$URL" >> "$GITHUB_ENV"
+
+      - name: Smoke test (roll back on failure)
+        run: |
+          check() { curl -fsS -o /dev/null -w "%{http_code} $1\n" --retry 3 --retry-delay 5 "$URL$1"; }
+          if check /health/ && check / && check /accounts/login/ && check /about/; then
+            echo "smoke test passed"
+          else
+            echo "::error::smoke test failed; routing traffic back to $PREV_REVISION"
+            gcloud run services update-traffic "$NAME" --region "$REGION" --to-revisions "$PREV_REVISION=100"
+            exit 1
+          fi

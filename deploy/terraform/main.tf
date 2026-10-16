@@ -383,14 +383,14 @@ resource "google_cloud_run_v2_job" "manage" {
   ]
 }
 
-resource "google_project_iam_member" "scheduler_run_jobs" {
-  project = var.project_id
-  role    = "roles/run.invoker"
-  member  = "serviceAccount:${google_service_account.scheduler.email}"
-  condition {
-    title      = "${local.name} jobs only"
-    expression = "resource.name.startsWith(\"projects/${var.project_id}/locations/${var.region}/jobs/${local.name}-\")"
-  }
+# Resource-level grant on each scheduled job (IAM conditions don't apply to
+# Cloud Run job permissions; needs run.admin to apply).
+resource "google_cloud_run_v2_job_iam_member" "scheduler" {
+  for_each = local.schedules
+  name     = google_cloud_run_v2_job.manage[each.key].name
+  location = var.region
+  role     = "roles/run.invoker"
+  member   = "serviceAccount:${google_service_account.scheduler.email}"
 }
 
 resource "google_cloud_scheduler_job" "manage" {
@@ -412,5 +412,5 @@ resource "google_cloud_scheduler_job" "manage" {
     retry_count = 0
   }
 
-  depends_on = [google_project_iam_member.scheduler_run_jobs]
+  depends_on = [google_cloud_run_v2_job_iam_member.scheduler]
 }
