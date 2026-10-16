@@ -154,10 +154,6 @@ class StudyCreateViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(str(response), '<HttpResponse status_code=200, "text/csv">')
 
-    # Quarantined: fails in CI with "'item_1' is not in list" from
-    # download_cdi_format (pre-existing pandas-3 scoring-download bug, tracked
-    # alongside #640). Passes locally in isolation. Excluded from the gate.
-    @tag('error', 'known_failure')
     def test_post_download_study_scoring(self):
         self.client.force_login(self.user)
         payload = {"download-study-scoring": True}
@@ -168,7 +164,6 @@ class StudyCreateViewTest(TestCase):
             str(response), '<HttpResponse status_code=200, "application/octet-stream">'
         )
 
-    @tag('error')
     def test_post_download_study_scoring_selected(self):
         self.client.force_login(self.user)
         administrations = Administration.objects.filter(study=self.study).values_list(
@@ -536,3 +531,46 @@ class OverflowTest(TestCase):
         self.client.force_login(self.user)
         response = self.client.post(self.url, self.payload)
         self.assertEqual(response.status_code, 405)
+
+
+class CdiFormatDownloadTest(TestCase):
+    """CDI-format (zip) download for instruments with both item-ID styles.
+
+    #649: the export looked for a column named "item_1", but Argentine Spanish
+    WS names its items "item1", so the download crashed for that instrument
+    (and intermittently in CI, where setUp picks a random WS instrument).
+    """
+
+    fixtures = [
+        "researcher_UI/fixtures/researcher_UI_test_fixtures.json",
+        "cdi_forms/fixtures/cdi_forms_test_fixtures.json",
+    ]
+
+    def test_each_item_id_style(self):
+        import io
+        import zipfile
+
+        user = User.objects.create_user(username="cdi_fmt", password=random_password())
+        Researcher.objects.get_or_create(user=user)
+        self.client.force_login(user)
+        for name in ["English_WS", "Argentine_Spanish_WS"]:
+            with self.subTest(instrument=name):
+                instrument = Instrument.objects.get(name=name)
+                study = Study.objects.create(
+                    researcher=user, name=f"fmt {name}", instrument=instrument,
+                    min_age=instrument.min_age, max_age=instrument.max_age,
+                )
+                generate_fake_results(study, 2)
+                response = self.client.post(
+                    reverse("researcher_ui:console_study", kwargs={"pk": study.pk}),
+                    {"download-study-scoring": True},
+                )
+                self.assertEqual(response.status_code, 200)
+                archive = zipfile.ZipFile(io.BytesIO(response.content))
+                self.assertEqual(len(archive.namelist()), 2)
+                text = archive.read(archive.namelist()[0]).decode()
+                # 34 fixed-width (25-char) admin/background fields, then the
+                # vocabulary answers: one digit per item
+                vocab = text[34 * 25:]
+                self.assertGreater(len(vocab.strip()), 100)
+                self.assertRegex(vocab.strip(), r"^[0-9\s.]+$")

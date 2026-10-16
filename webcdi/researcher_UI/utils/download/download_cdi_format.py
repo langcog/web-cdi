@@ -24,7 +24,9 @@ def download_cdi_format(request, study_obj, administrations=None):
             study=study_obj, completed=True
         )
 
-    r = re.compile("item_[0-9]{1,3}")
+    # vocabulary item IDs are "item_1" in most instruments, "item1" in some
+    # (e.g. Argentine Spanish WS)
+    r = re.compile(r"item_?[0-9]+$")
     model_header = list(filter(r.match, get_model_header(study_obj.instrument.name)))
     admin_header = [
         "study_name",
@@ -90,7 +92,10 @@ def download_cdi_format(request, study_obj, administrations=None):
             return arg
         return str(arg)
 
-    new_answers.iloc[:, 1:] = new_answers.iloc[:, 1:].map(my_fun)
+    # assign whole columns (not .iloc in place): unanswered items are float NaN
+    # columns, and pandas 3 refuses to write strings into them in place
+    item_columns = new_answers.columns[1:]
+    new_answers[item_columns] = new_answers[item_columns].map(my_fun)
 
     if study_obj.instrument.form == "WG":
         for c in new_answers.columns[1:]:
@@ -160,7 +165,7 @@ def download_cdi_format(request, study_obj, administrations=None):
     combined_data["annual_income"] = combined_data["annual_income"].apply(
         lambda x: 0 if x == "Prefer not to disclose" else x
     )
-    vocab_start = combined_data.columns.values.tolist().index("item_1")
+    vocab_start = len(admin_header) + len(background_header)
 
     with zipfile.ZipFile(outfile, "w") as zf:
         combined_data.apply(lambda x: write_to_zip(x, zf, vocab_start), axis=1)
