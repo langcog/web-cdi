@@ -17,3 +17,8 @@ output "runtime_service_account" {
 output "jobs" {
   value = [for j in google_cloud_run_v2_job.manage : j.name]
 }
+
+output "github_wif_provider" {
+  description = "Set as the GCP_WIF_PROVIDER repository variable"
+  value       = google_iam_workload_identity_pool_provider.github.name
+}
