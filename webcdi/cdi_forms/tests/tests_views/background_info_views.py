@@ -524,6 +524,29 @@ class BackgroundInfoViewTest(TestCase):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
 
+    # Page-load check that auto-opens the consent waiver modal
+    WAIVER_POPUP = "Cookies.get('old_visitor')"
+
+    def test_waiver_popup_before_background_info_completed(self):
+        self.study.waiver = "Consent text"
+        self.study.save()
+        response = self.client.get(self.url)
+        self.assertContains(response, self.WAIVER_POPUP)
+
+    def test_no_waiver_popup_after_background_info_completed(self):
+        # Issue #311: a parent who already got past the background page (and so
+        # already consented) must not be asked to consent again when they come
+        # back via "Go back to Background Info".
+        self.study.waiver = "Consent text"
+        self.study.save()
+        self.administration.completedBackgroundInfo = True
+        self.administration.save()
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, self.WAIVER_POPUP)
+        # The waiver can still be reviewed from the sidebar link
+        self.assertContains(response, 'id="consent_waiver"')
+
 
 class CreateBackgroundInfoNotDefaultDemographicViewTest(TestCase):
     fixtures = [
