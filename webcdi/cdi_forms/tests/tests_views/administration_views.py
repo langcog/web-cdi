@@ -1,3 +1,4 @@
+import datetime
 import logging
 
 from django.contrib.auth.models import User
@@ -415,6 +416,61 @@ class AdministrationUpdateViewTest(TestCase):
         payload = {"btn-back": True}
         response = self.client.post(self.url, payload)
         self.assertEqual(response.status_code, 302)
+
+    def test_back_to_background_returns_to_same_section(self):
+        # "Go back to Background Info" from section 3, then "Next" on the
+        # background page, should land the parent on section 3 again (not 4).
+        self.study.min_age = 12
+        self.study.max_age = 36
+        self.study.save()
+        self.administration.due_date = timezone.now() + datetime.timedelta(days=14)
+        self.administration.completedBackgroundInfo = True
+        self.administration.save()
+        section_url = reverse(
+            "update_administration_section",
+            kwargs={"hash_id": self.administration.url_hash, "section": 3},
+        )
+
+        response = self.client.post(section_url, {"btn-back": True})
+        self.assertEqual(response.status_code, 302)
+        background_url = response.url
+        self.assertTrue(
+            background_url.startswith(
+                reverse(
+                    "background-info",
+                    args=(self.administration.backgroundinfo.pk,),
+                )
+            )
+        )
+
+        dob = (datetime.datetime.now() - datetime.timedelta(days=500)).strftime(
+            "%m/%d/%Y"
+        )
+        payload = {
+            "btn-next": "Next",
+            "form_filler": "mother",
+            "child_dob": dob,
+            "sex": "M",
+            "birth_weight_lb": "3.5",
+            "birth_order": 1,
+            "born_on_due_date": 0,
+            "multi_birth_boolean": 0,
+            "primary_caregiver": "mother",
+            "mother_yob": 1966,
+            "mother_education": 18,
+            "annual_income": "25000-50000",
+            "caregiver_info": "1",
+            "other_languages_boolean": 0,
+            "ear_infections_boolean": 0,
+            "hearing_loss_boolean": 0,
+            "vision_problems_boolean": 0,
+            "illnesses_boolean": 0,
+            "services_boolean": 0,
+            "worried_boolean": 0,
+            "learning_disability_boolean": 0,
+        }
+        response = self.client.post(background_url, payload)
+        self.assertRedirects(response, section_url, fetch_redirect_response=False)
 
     def test_btn_submit_post(self):
         self.client.force_login(self.user)

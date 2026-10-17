@@ -276,6 +276,9 @@ class AdministrationUpdateView(UpdateView):
             )
         if "btn-back" in request.POST:
             response = reverse("background-info", args=(self.object.backgroundinfo.pk,))
+            # Tell the background page where to send the parent back to
+            if "section" in self.kwargs:
+                response += f"?section={self.kwargs['section']}"
         if "btn-submit" in request.POST:
             # Some studies may require successfully passing a ReCaptcha test for submission. If so, get for a passing response before marking form as complete.
             result = {"success": None}
