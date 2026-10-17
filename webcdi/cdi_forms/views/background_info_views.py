@@ -340,14 +340,6 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
                         completedBackgroundInfo=True
                     )
                     request.method = "GET"
-                    # Came via "Go back to Background Info": return to that section
-                    section = request.GET.get("section", "")
-                    if section.isdigit() and int(section) > 0:
-                        return redirect(
-                            "update_administration_section",
-                            hash_id=self.hash_id,
-                            section=int(section),
-                        )
                     return redirect("administer_cdi_form", hash_id=self.hash_id)
 
                 elif "btn-next" in request.POST and request.POST["btn-next"] == _(

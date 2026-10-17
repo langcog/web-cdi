@@ -276,9 +276,6 @@ class AdministrationUpdateView(UpdateView):
             )
         if "btn-back" in request.POST:
             response = reverse("background-info", args=(self.object.backgroundinfo.pk,))
-            # Tell the background page where to send the parent back to
-            if "section" in self.kwargs:
-                response += f"?section={self.kwargs['section']}"
         if "btn-submit" in request.POST:
             # Some studies may require successfully passing a ReCaptcha test for submission. If so, get for a passing response before marking form as complete.
             result = {"success": None}
@@ -407,11 +404,16 @@ class AdministrationUpdateView(UpdateView):
                             item_ID=key,
                             defaults={"value": value},
                         )
+        # page_number is where the parent resumes: the section they are being
+        # sent to (Save and "Go back to Background Info" keep the current one)
+        resume_section = int(self.kwargs.get("section", 0))
+        if "btn-next" in request.POST:
+            resume_section = int(request.POST["next"])
+        elif "btn-previous" in request.POST:
+            resume_section = int(request.POST["previous"])
         Administration.objects.filter(url_hash=self.object.url_hash).update(
             last_modified=timezone.now(),
-            page_number=(
-                0 if not "section" in self.kwargs else int(self.kwargs["section"])
-            ),
+            page_number=resume_section,
         )
 
         return redirect(response)
@@ -595,10 +597,13 @@ class AdministrationUpdateView(UpdateView):
         return page
 
     def get_section(self, target_section=None):
+        # only the requested section is clamped; the empty-section skipping
+        # below recurses with explicit targets and must be able to run off the end
+        requested = not target_section
         if not target_section and "section" in self.kwargs:
             target_section = self.kwargs["section"]
-        elif not target_section and self.object.page_number > 0:
-            target_section = min(self.object.page_number + 1, self.max_page())
+        elif not target_section:
+            target_section = max(self.object.page_number, 1)
 
         prefilled_data_list = administration_data.objects.filter(
             administration=self.object
@@ -650,6 +655,9 @@ class AdministrationUpdateView(UpdateView):
         ) as content_file:  # Open associated json file with section ordering and nesting
             # Read json file and store additional variables regarding the instrument, study, and the administration
             data = json.loads(content_file.read())
+        # a section past the end (old bookmark, edited URL) shows the last one
+        if requested:
+            target_section = min(target_section, self.max_page(data["parts"]))
 
         return_data = {}
         for part in data["parts"]:

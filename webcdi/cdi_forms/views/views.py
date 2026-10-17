@@ -318,7 +318,7 @@ def administer_cdi_form(request, hash_id):
                     return redirect(
                         "update_administration_section",
                         hash_id=administration_instance.url_hash,
-                        section=administration_instance.page_number + 1,
+                        section=administration_instance.page_number,
                     )
                 else:
                     return redirect(
