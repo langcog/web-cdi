@@ -96,3 +96,21 @@ class CrossResearcherAccessTest(TestCase):
         for name in ["console_study", "administer_new", "rename_study", "researcher_add_instruments"]:
             with self.subTest(view=name):
                 self.assertEqual(self.client.get(self.owner_urls()[name]).status_code, 200)
+
+    def test_study_grouping_offers_and_accepts_only_own_studies(self):
+        # #449: the "group studies" picker once listed every researcher's studies
+        own = Study.objects.create(
+            researcher=self.other,
+            name="Intruder's own group",
+            instrument=self.study.instrument,
+        )
+        url = reverse("researcher_ui:add_paired_study")
+        response = self.client.get(url)
+        self.assertContains(response, "Intruder&#x27;s own group")
+        self.assertNotContains(response, "Owner&#x27;s private group")
+
+        self.client.post(
+            url, {"study_group": "hijack", "paired_studies": [self.study.pk, own.pk]}
+        )
+        self.study.refresh_from_db()
+        self.assertEqual(self.study.study_group, "")
