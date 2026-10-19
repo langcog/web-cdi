@@ -134,6 +134,24 @@ class ScoringEquivalenceTest(TestCase):
         # guard against a vacuous pass
         self.assertGreater(with_percentiles, 20)
 
+    def test_compare_sends_no_completion_notice(self):
+        # the rehearsal (#687) sent real notices this way before the fix
+        from unittest import mock
+
+        from researcher_UI import signals
+
+        admin = Administration.objects.get(pk=self.admin_ids[0])
+        admin.study.send_completion_flag_url = "https://example.invalid/flag"
+        admin.study.completion_data = {"id": "{{source_id}}"}
+        admin.study.save()
+        with mock.patch.object(signals, "TESTING", False), mock.patch.object(
+            signals, "Timer"
+        ) as timer, mock.patch.object(signals.requests, "post") as post:
+            compare_administration(admin.pk)
+            admin.save()  # the notice still fires outside the comparison
+        self.assertEqual(timer.call_count, 1)
+        post.assert_not_called()
+
     def test_query_count_is_small(self):
         admin = Administration.objects.get(pk=self.admin_ids[0])
         scoring = InstrumentScoring(admin.study.instrument)

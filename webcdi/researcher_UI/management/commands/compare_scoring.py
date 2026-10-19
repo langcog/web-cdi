@@ -5,11 +5,28 @@ rolled-back transaction and reports any difference in SummaryData rows, the
 `scored` flag, or raised errors. Writes nothing. Intended for a copy of
 production data (e.g. GCP staging during the migration rehearsal, #687).
 """
+from contextlib import contextmanager
+
 from django.core.management.base import BaseCommand
 from django.db import transaction
+from django.db.models.signals import post_save
 
 from cdi_forms import scores, scores_legacy
+from researcher_UI import signals
 from researcher_UI.models import Administration, SummaryData
+
+
+@contextmanager
+def no_completion_notices():
+    """Scoring saves the administration, and saving a completed one re-sends
+    its study's completion notice to the researcher's server (with retries on
+    timers that outlive the rollback). A dry run must not do that."""
+    receiver = signals.check_send_completion_flag_url_response
+    post_save.disconnect(receiver, sender=Administration)
+    try:
+        yield
+    finally:
+        post_save.connect(receiver, sender=Administration)
 
 
 def _run(score, administration_id):
@@ -34,8 +51,9 @@ def _run(score, administration_id):
 
 def compare_administration(administration_id):
     """Return (legacy, new, differences) for one administration."""
-    legacy = _run(scores_legacy.update_summary_scores, administration_id)
-    new = _run(scores.update_summary_scores, administration_id)
+    with no_completion_notices():
+        legacy = _run(scores_legacy.update_summary_scores, administration_id)
+        new = _run(scores.update_summary_scores, administration_id)
     differences = []
     for key in ("scored", "error"):
         if legacy[key] != new[key]:
