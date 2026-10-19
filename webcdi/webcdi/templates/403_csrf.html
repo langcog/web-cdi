@@ -1,0 +1,23 @@
+{% load i18n %}<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Web-CDI - {% trans "Page expired" %}</title>
+    <style>
+        body { font-family: "Karla", sans-serif; background: #29A9E6; margin: 0; padding: 16px; }
+        .box { max-width: 560px; margin: 10vh auto; background: #fff; border-radius: 6px; padding: 24px 28px; }
+        h1 { margin-top: 0; font-size: 1.6em; }
+        a { color: #1a6fa3; }
+    </style>
+</head>
+<body>
+<div class="box">
+    <h1>{% trans "This page expired" %}</h1>
+    <p>{% trans "For your security, forms on this site only work for a limited time and need cookies. Nothing you entered on this page was saved." %}</p>
+    <p>{% trans "Please go back, reload the page, and try again. If this keeps happening, make sure your browser allows cookies for this site." %}</p>
+    <p><a href="javascript:history.back()">{% trans "Go back" %}</a></p>
+    <p><small>{% trans "Still stuck? Contact" %} <a href="mailto:webcdi-contact@stanford.edu">webcdi-contact@stanford.edu</a>.</small></p>
+</div>
+</body>
+</html>

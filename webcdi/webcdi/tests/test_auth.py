@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.core import mail
-from django.test import TestCase, tag
+from django.test import Client, TestCase, tag
 from django.urls import reverse
 
 
@@ -75,3 +75,14 @@ class AuthFlowsTest(TestCase):
         self.assertRedirects(response, reverse("password_reset_done"))
         self.assertEqual(len(mail.outbox), 1)
         self.assertIn("auth@example.com", mail.outbox[0].to)
+
+    def test_csrf_failure_shows_friendly_page(self):
+        # e.g. a login page left open too long, or cookies blocked
+        client = Client(enforce_csrf_checks=True)
+        response = client.post(
+            reverse("login"),
+            {"username": "auth_tester", "password": "a-strong-password"},
+        )
+        self.assertEqual(response.status_code, 403)
+        self.assertContains(response, "This page expired", status_code=403)
+        self.assertNotContains(response, "CSRF verification failed", status_code=403)
