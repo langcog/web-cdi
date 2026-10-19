@@ -78,6 +78,12 @@ variable "public" {
   default     = true
 }
 
+variable "iap_members" {
+  description = "Google accounts (\"user:...\") allowed to open a non-public service in the browser via Identity-Aware Proxy, e.g. QA testers during the rehearsal (#687). Personal addresses stay out of the repo: pass them in a gitignored *.local.tfvars."
+  type        = list(string)
+  default     = []
+}
+
 variable "private_invokers" {
   description = "Principals allowed to reach a non-public service"
   type        = list(string)

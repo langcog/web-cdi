@@ -49,3 +49,4 @@ forms/
 *.tfstate
 *.tfstate.backup
 *.tfplan
+*.local.tfvars
