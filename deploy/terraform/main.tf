@@ -1,6 +1,8 @@
 data "google_project" "this" {}
 
 locals {
+  iap = !var.public && length(var.iap_members) > 0
+
   name = "webcdi-${var.environment}"
 
   # Environment shared by the web service and the jobs. Secrets are injected
@@ -63,6 +65,7 @@ resource "google_project_service" "apis" {
     "sts.googleapis.com",
     "logging.googleapis.com",
     "monitoring.googleapis.com",
+    "iap.googleapis.com",
   ])
   service            = each.key
   disable_on_destroy = false
@@ -242,6 +245,8 @@ resource "google_cloud_run_v2_service" "web" {
   # Public site. Disabling the invoker check avoids a resource-level allUsers
   # binding (which needs setIamPolicy).
   invoker_iam_disabled = var.public
+  # Google sign-in in front of a non-public service, for browser access
+  iap_enabled = local.iap
 
   template {
     service_account = google_service_account.runtime.email
@@ -331,6 +336,24 @@ resource "google_cloud_run_v2_service_iam_member" "private" {
   location = var.region
   role     = "roles/run.invoker"
   member   = each.value
+}
+
+# IAP calls the service as its own service agent, then admits iap_members
+resource "google_cloud_run_v2_service_iam_member" "iap_agent" {
+  count    = local.iap ? 1 : 0
+  name     = google_cloud_run_v2_service.web.name
+  location = var.region
+  role     = "roles/run.invoker"
+  member   = "serviceAccount:service-${data.google_project.this.number}@gcp-sa-iap.iam.gserviceaccount.com"
+}
+
+resource "google_iap_web_cloud_run_service_iam_member" "users" {
+  for_each               = local.iap ? toset(var.iap_members) : toset([])
+  project                = var.project_id
+  location               = var.region
+  cloud_run_service_name = google_cloud_run_v2_service.web.name
+  role                   = "roles/iap.httpsResourceAccessor"
+  member                 = each.value
 }
 
 # --- Jobs (migrations, data loading, scheduled work) ------------------------
