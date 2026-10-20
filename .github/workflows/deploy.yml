@@ -3,7 +3,8 @@
 # Authenticates with Workload Identity Federation (no stored keys). Builds the
 # production image (deploy/Dockerfile), runs migrations as a Cloud Run job,
 # reloads instrument data only when instrument files changed, deploys the web
-# service, smoke-tests it, and rolls traffic back if the smoke test fails.
+# service, smoke-tests it (inside the image when the service is private), and
+# rolls traffic back if the smoke test fails.
 #
 # Repository variables: GCP_PROJECT, GCP_REGION, GCP_WIF_PROVIDER.
 name: Deploy
@@ -104,8 +105,24 @@ jobs:
 
       - name: Smoke test (roll back on failure)
         run: |
-          check() { curl -fsS -o /dev/null -w "%{http_code} $1\n" --retry 3 --retry-delay 5 "$URL$1"; }
-          if check /health/ && check / && check /accounts/login/ && check /about/; then
+          PAGES="/health/ / /accounts/login/ /about/"
+          PUBLIC=$(gcloud run services describe "$NAME" --region "$REGION" --format=json \
+            | jq -r '.metadata.annotations["run.googleapis.com/invoker-iam-disabled"] // "false"')
+          if [ "$PUBLIC" = "true" ]; then
+            check() { curl -fsS -o /dev/null -w "%{http_code} $1\n" --retry 3 --retry-delay 5 "$URL$1"; }
+            smoke() { for p in $PAGES; do check "$p" || return 1; done; }
+          else
+            # Private (e.g. behind Google sign-in during a rehearsal): anonymous
+            # requests can't get in, so request the pages inside the new image
+            # with Django's test client, against the real database.
+            HOST=${URL#https://}
+            SCRIPT="from django.test import Client
+          c = Client(HTTP_HOST='$HOST', HTTP_X_FORWARDED_PROTO='https')
+          bad = [p for p in '$PAGES'.split() if c.get(p, secure=True).status_code != 200]
+          assert not bad, f'smoke test failed: {bad}'"
+            smoke() { gcloud run jobs execute "$NAME-migrate" --region "$REGION" --wait --args="^~^shell~-c~$SCRIPT"; }
+          fi
+          if smoke; then
             echo "smoke test passed"
           else
             echo "::error::smoke test failed; routing traffic back to $PREV_REVISION"
