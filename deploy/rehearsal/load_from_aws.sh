@@ -8,7 +8,11 @@ set -euo pipefail
 SRC="host=$SRC_HOST dbname=$SRC_DB user=$SRC_USER password=$SRC_PASSWORD sslmode=${SRC_SSLMODE:-require}"
 TGT="host=${TGT_HOST:-/cloudsql/$TGT_CONN} dbname=$TGT_DB user=$TGT_USER password=$TGT_PASSWORD"
 
-echo "$(date -u +%FT%TZ) source size: $(psql "$SRC" -Atc "select pg_size_pretty(pg_database_size(current_database()))")"
+# assign first: set -e ignores a failing $(...) inside echo's arguments, and we
+# must not empty the target if either database is unreachable
+size=$(psql "$SRC" -Atc "select pg_size_pretty(pg_database_size(current_database()))")
+psql "$TGT" -Atc "select 1" >/dev/null
+echo "$(date -u +%FT%TZ) source size: $size"
 echo "$(date -u +%FT%TZ) emptying target"
 # drop every table/view/sequence in public (works whoever owns the database)
 psql "$TGT" -v ON_ERROR_STOP=1 -At -c "
