@@ -33,6 +33,11 @@ class AjaxDemographicFormsTest(TestCase):
         response = self.client.get(self.url, payload)
         self.assertEqual(response.status_code, 200)
 
+    def test_get_missing_id(self):
+        # #630: used to raise MultiValueDictKeyError (500)
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 400)
+
 
 class AjaxChargeStatusTest(TestCase):
     def setUp(self):
@@ -85,3 +90,15 @@ class AjaxChargeStatusTest(TestCase):
             ).family.chargeable,
         )
         self.assertFalse(response.json()["chargeable"])
+
+    def test_get_missing_id(self):
+        # #630: used to raise MultiValueDictKeyError (500)
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 400)
+
+    def test_get_unknown_instrument(self):
+        # #630: used to raise Instrument.DoesNotExist (500). The study form
+        # sends id="" when the blank instrument option is selected.
+        for bad_id in ["peanut", ""]:
+            response = self.client.get(self.url, {"id": bad_id})
+            self.assertEqual(response.status_code, 400, bad_id)

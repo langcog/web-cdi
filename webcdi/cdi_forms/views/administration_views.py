@@ -6,7 +6,7 @@ from typing import Any, Dict, List
 
 import requests
 from django.conf import settings
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest, HttpResponse, HttpResponseBadRequest
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils import timezone, translation
@@ -707,6 +707,13 @@ def update_administration_data_item(request):
 
     hash_id = request.POST.get("hash_id")
     administration_instance = get_administration_instance(hash_id)
+
+    required = ["check", "item"]
+    if request.POST.get("check") == "true":
+        required.append("value")
+    missing = [key for key in required if key not in request.POST]
+    if missing:
+        return HttpResponseBadRequest(f"Missing parameters: {', '.join(missing)}")
 
     value = ""
     if request.POST["check"] == "true":

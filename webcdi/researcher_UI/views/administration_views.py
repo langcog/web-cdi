@@ -118,6 +118,8 @@ class AddNewParent(DetailView):
                 event_id = (
                     None if not "event_id" in request.GET else request.GET["event_id"]
                 )
+                if not "source_id" in request.GET:
+                    raise Http404("source_id must be included in a no demographic call.")
                 if BackgroundInfo.objects.filter(
                     source_id=request.GET["source_id"],
                     event_id=event_id,

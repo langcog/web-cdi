@@ -206,6 +206,15 @@ class AddNewParentTest(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 404)
 
+    def test_no_source_id(self):
+        # #630: an anonymous no-demographic link without source_id used to
+        # raise MultiValueDictKeyError (500); same 404 as missing age/sex
+        self.administration.study.no_demographic_boolean = True
+        self.administration.study.save()
+        url = f"{self.url}?age=15&sex=m"
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 404)
+
     def test_no_set(self):
         self.administration.study.no_demographic_boolean = True
         self.administration.study.save()
