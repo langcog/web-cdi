@@ -10,6 +10,21 @@ from django.urls import reverse
 from researcher_UI.models import Administration, Study
 from researcher_UI.utils.random_url_generator import random_url_generator
 
+ZERO_PADDED_MESSAGE = (
+    "Subject ids cannot start with 0 (e.g. 007): ids are stored as numbers, "
+    "so the leading zeros would be lost\n"
+)
+
+
+def is_zero_padded(subject_id):
+    return re.fullmatch(r"0\d+", str(subject_id).strip()) is not None
+
+
+def parse_csv_ids(column):
+    """Ids are read as text so zero-padding is visible, then made numeric."""
+    zero_padded = any(is_zero_padded(x) for x in column.dropna())
+    return pd.to_numeric(column, errors="coerce"), zero_padded
+
 
 def admin_new_fun(request, permitted, study_name, study_obj):
     data = {}
@@ -32,22 +47,22 @@ def admin_new_fun(request, permitted, study_name, study_obj):
 
         if raw_ids_csv:
             if "csv-header" in request.POST:
-                ids_df = pd.read_csv(raw_ids_csv)
+                ids_df = pd.read_csv(raw_ids_csv, dtype=str)
                 if request.POST["subject-ids-column"]:
                     subj_column = request.POST["subject-ids-column"]
                     if subj_column in ids_df.columns:
-                        ids_to_add = ids_df[subj_column]
+                        ids_to_add, zero_padded = parse_csv_ids(ids_df[subj_column])
                         ids_type = ids_to_add.dtype
                     else:
                         ids_type = "missing"
 
                 else:
-                    ids_to_add = ids_df[ids_df.columns[0]]
+                    ids_to_add, zero_padded = parse_csv_ids(ids_df[ids_df.columns[0]])
                     ids_type = ids_to_add.dtype
 
             else:
-                ids_df = pd.read_csv(raw_ids_csv, header=None)
-                ids_to_add = ids_df[ids_df.columns[0]]
+                ids_df = pd.read_csv(raw_ids_csv, header=None, dtype=str)
+                ids_to_add, zero_padded = parse_csv_ids(ids_df[ids_df.columns[0]])
                 ids_type = ids_to_add.dtype
 
             if ids_type != "int64":
@@ -65,14 +80,20 @@ def admin_new_fun(request, permitted, study_name, study_obj):
                         data[
                             "error_message"
                         ] += "Non integer subject ids\n"  # Save this error message
+            elif zero_padded:
+                validity = False
+                data["error_message"] += ZERO_PADDED_MESSAGE
 
         if params["new_subject_ids"][0] != "":
             subject_ids = re.split("[,;\s\t\n]+", str(params["new_subject_ids"][0]))
-            subject_ids = filter(None, subject_ids)
+            subject_ids = list(filter(None, subject_ids))
             subject_ids_numbers = all([x.isdigit() for x in subject_ids])
             if not subject_ids_numbers:
                 validity = False
                 data["error_message"] += "Non integer subject ids\n"
+            elif any(is_zero_padded(x) for x in subject_ids):
+                validity = False
+                data["error_message"] += ZERO_PADDED_MESSAGE
 
         if params["autogenerate_count"][0] != "":
             autogenerate_count = params["autogenerate_count"][0]

@@ -364,6 +364,26 @@ class AdminNewTest(TestCase):
             "Non integer subject ids. Make sure first row is numeric\n",
         )
 
+    def test_post_rejects_zero_padded_ids(self):
+        # #569: "007" would be stored as 7, silently changing the researcher's id
+        from django.core.files.uploadedfile import SimpleUploadedFile
+
+        from researcher_UI.utils.admin_new import ZERO_PADDED_MESSAGE
+
+        self.client.force_login(self.user)
+        typed = {"new_subject_ids": "8 007", "autogenerate_count": ""}
+        csv = {
+            "subject-ids-csv": SimpleUploadedFile("ids.csv", b"8\n007\n"),
+            "new_subject_ids": "",
+            "autogenerate_count": "",
+        }
+        for name, payload in {"typed": typed, "csv": csv}.items():
+            with self.subTest(input=name):
+                response = self.client.post(self.url, payload)
+                self.assertEqual(response.json()["stat"], "error")
+                self.assertEqual(response.json()["error_message"], ZERO_PADDED_MESSAGE)
+        self.assertFalse(Administration.objects.filter(study=self.study).exists())
+
     def test_post_load_subject_ids_from_csv_with_header(self):
         self.client.force_login(self.user)
         PROJECT_ROOT = settings.BASE_DIR
