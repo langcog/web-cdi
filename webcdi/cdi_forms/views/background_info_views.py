@@ -139,6 +139,9 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
             else 12
         )
         data["study_waiver"] = self.administration_instance.study.waiver
+        # Getting past the background page requires accepting the waiver, so
+        # don't pop it up again when the parent comes back here (#311).
+        data["waiver_accepted"] = self.administration_instance.completedBackgroundInfo
         data["allow_payment"] = self.administration_instance.study.allow_payment
         data["hint"] = _(
             "Your child should be between %(min_age)d to %(max_age)d months of age."

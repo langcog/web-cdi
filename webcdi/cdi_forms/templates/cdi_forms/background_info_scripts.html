@@ -187,12 +187,14 @@
     {% if not dont_show_waiver %}
     window.onload = function() { 
 
+        {% if not waiver_accepted %}
         if (parseInt(study_waiver) > 0) {
             if ((Cookies.get('old_visitor') == 'false') || (Cookies.get('old_visitor') == null)) {
                 $('#consent_waiver').modal({backdrop:"static", keyboard:false});
                 Cookies.set('old_visitor',false,{path: ''});
             }
         }
+        {% endif %}
         addWarnings();
     };
 
