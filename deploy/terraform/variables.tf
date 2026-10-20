@@ -89,3 +89,9 @@ variable "private_invokers" {
   type        = list(string)
   default     = ["user:mcfrank@stanford.edu"]
 }
+
+variable "log_retention_days" {
+  description = "Retention for the project's _Default log bucket (#682)"
+  type        = number
+  default     = 90
+}
