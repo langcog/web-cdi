@@ -160,3 +160,12 @@ resource "google_monitoring_alert_policy" "database" {
   }
   notification_channels = local.channels
 }
+
+# Keep logs (request logs, job output, errors) for 90 days instead of the 30-day
+# default (#682). Applies to the project's _Default log bucket.
+resource "google_logging_project_bucket_config" "default" {
+  project        = var.project_id
+  location       = "global"
+  bucket_id      = "_Default"
+  retention_days = var.log_retention_days
+}
