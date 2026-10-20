@@ -5,7 +5,7 @@ description: Orientation for developing and operating Web-CDI (webcdi.org — th
 
 # Web-CDI
 
-Snapshot **2026-10-15**. Consolidates Henry Mehta's wiki
+Snapshot **2026-10-20**. Consolidates Henry Mehta's wiki
 (github.com/langcog/web-cdi/wiki), the 2026 modernization and QA sessions,
 and the new-instruments campaign. Branch/PR/issue facts go stale — check
 `gh pr list` / `gh issue list` before relying on them. Setup basics live in
@@ -29,24 +29,23 @@ and Spanish Long + CAT forms require a paid Brookes Publishing code.
 - **Virginia Marchman** (call her Virginia) — CDI Advisory Board; authority on
   instrument content, wording, citations, norms and scoring expectations.
 - **Alvin** — working on web-cdi development with Mike.
-- A QA tester sends feedback rounds via Mike; the Dutch group runs their own
-  EU server (behind our code).
+- **Vic Moreno** — manages the lab's AWS account; set up webcdi.org's DNS
+  records for Postmark; QA. A QA tester sends feedback rounds via Mike; the Dutch group runs their
+  own EU server (behind our code).
 - Ownership handoff is incomplete — see `references/deploy-and-ops.md`
-  ("Things only Henry had").
+  ("Handoff status").
 
-## Environments (AWS Elastic Beanstalk, us-west-2)
+## Environments
 
-| Env | URL | Notes |
+| Env | Where | Notes |
 |---|---|---|
-| `Webcdi-env-2` | webcdi.org | **production** |
-| `Webcdi-dev-django4` | testing.webcdi.org | staging; plain http |
-| `webcdi-dev` | — | Henry's old demo env; leave alone |
-| `CdiCatApi-env` / `-dev` | — | retired R CAT API (AWS prod still uses it until cutover) |
+| GCP staging | Cloud Run `webcdi-staging`, project `hs-langcog-webcdi` | **where all deploys and QA happen**; merges to master deploy here automatically; currently a private, scrubbed copy of production behind Google sign-in |
+| GCP production | — | not built yet (`references/roadmap.md`) |
+| AWS `Webcdi-env-2` | webcdi.org | **current production, frozen** on the 2026-10-11 release until cutover |
 
-Deploy = `eb deploy <env>` from `webcdi/`; the postdeploy hook migrates and
-re-runs all populate commands. Details, env vars, cron, DB tasks:
-`references/deploy-and-ops.md`. **Never deploy to production without Mike's
-go-ahead.**
+Details, operations and what needs Mike's credentials:
+`references/deploy-and-ops.md`. **Never deploy to or change AWS without
+Mike's go-ahead.**
 
 ## Repo map (`webcdi/`)
 
@@ -95,7 +94,8 @@ go-ahead.**
 | Task | Read |
 |---|---|
 | Run locally, write/run tests, CI, browser checks | `references/dev-and-testing.md` |
-| Deploy, env vars, cron, AWS, DB fixes, ownership gaps | `references/deploy-and-ops.md` |
+| Deploys, GCP/AWS operations, staging access, email, DB fixes | `references/deploy-and-ops.md` |
+| What's next, the pre-QA backlog and its scope, rules for working it | `references/roadmap.md` |
 | Add/modify an instrument, language, background form, graphs | `references/instruments-and-forms.md` |
 | Scoring, benchmarks/percentiles, CAT engines | `references/scoring-and-cat.md` |
 | Researcher console features, downloads, payments, Wordful/REDCap | `references/researcher-features.md` |

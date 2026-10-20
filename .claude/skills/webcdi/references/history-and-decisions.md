@@ -18,6 +18,10 @@
   close them rather than merge.
 - 2026-10: Henry steps back; Mike's team owns development. New-instruments
   campaign underway (`references/instruments-and-forms.md`).
+- 2026-10-15 onward: GCP rebuild (#690) — container, OpenTofu, CI/CD with
+  keyless deploys, monitoring, jsCat-only CAT, bulk scorer, security fixes,
+  Postmark email; AWS frozen. Migration rehearsal on a scrubbed copy of
+  production (#687). Roadmap: `references/roadmap.md`.
 
 ## Standing decisions (don't relitigate without Mike)
 
@@ -35,33 +39,34 @@
   no groups, collapsed otherwise.
 - Bug fixes in item text: fix `definition`/`gloss`; never rename `item`
   (export column names).
-- CI-now, CD-later; Selenium nightly and non-blocking.
-- Interpolated vs floor percentiles: floor since #652 (Aug 2026) — confirm with
-  Virginia before changing either way.
+- Merges to master deploy to GCP staging automatically; Selenium is nightly
+  and non-blocking. AWS production is frozen (no deploys without Mike).
+- Percentiles follow Virginia's rules (#686, implemented #727; see
+  `scoring-and-cat.md`) — change them only with her.
+- Subject IDs are integers; zero-padded IDs are rejected at entry (#718).
+- Staging with real data is private (Google sign-in) and scrubbed; QA testers
+  get fresh test accounts.
 
-## Known bugs and debts (as of 2026-10-15)
+## Known bugs and debts (as of 2026-10-20)
 
-- **Downloads:** pandas-3 silent no-ops (blank count scores not zeroed;
-  `[]` left in `child_ethnicity`/`other_languages`); empty-selection 500;
-  #649 CDI-format crash; #640 API export crash. A prod download 500 reported
-  2026-10-14 was diagnosed by Henry — confirm the fix landed in master.
-- **Scoring:** no value-level tests; slow full rescoring (days); see
-  `scoring-and-cat.md`.
-- **Ops:** cron `MAILTO`/`ADMINS` point at Henry (#638); cron jobs likely
-  crash since #554 (no env); 7-day log retention; master CI broken since
-  2026-10-11 (blank `RDS_PASSWORD` in `.env.example`, which CI copies).
-- **Code health:** Bootstrap 3+4 mix (#633), D3 v3 graphs (#634), collectstatic
-  output committed (#632), dead `registration/` + `supplementtut/` apps
-  (#635), action-dispatch refactor (#636), migration squash (#637), stale
-  Selenium locators (#648), lint config, two diverged instruments.json copies,
-  the R CAT API still in production (#528).
-- Long-standing feature requests: #449 group studies, #321 Canadian norms,
-  #491 Spanish short-form scoring, #290 currency in Spanish forms, #148 more
-  download options, #122/#107 bilingual and cross-study linkage, #102 Danish.
+- Pre-QA backlog with scopes: `references/roadmap.md`.
+- **Code health (after cutover):** Bootstrap 3+4 mix (#633), D3 v3 graphs
+  (#634), console dispatch refactor (#636), migration squash (#637), lint
+  config, two diverged instruments.json copies.
+- `test_populate_items` errors under `--parallel` but passes alone.
+- Long-standing feature requests carry the `feature` label (e.g. #449 group
+  studies semantics, #321 Canadian norms, #491 Spanish short-form scoring,
+  #290 currency in Spanish forms, #148 download filters, #122/#107 bilingual
+  and cross-study linkage, #102 Danish, #408 completion emails, #401
+  citation policy).
+- French CAT rarely records sex (1,083 of 1,138 completed administrations have
+  it blank), so its sex percentiles are mostly "not computed".
 
 ## Waiting on others
 
-- Virginia: golden-case scoring examples; French (France) CAT citation
+- Postmark account approval (pending since 2026-10-16).
+- DNS access for webcdi.org (cutover).
+- Virginia: French (France) CAT citation
   (public "forthcoming" placeholder), Japanese (in review), Korean (Pae 2003?).
 - Native speakers: Korean, Hebrew, Quebec French item checks (PR #666).
 - Hindi developers: Word version of the Hindi WS.

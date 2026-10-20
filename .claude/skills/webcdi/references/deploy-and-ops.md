@@ -1,108 +1,116 @@
 # Deploy and operations
 
-## AWS layout
+Web-CDI is moving from AWS Elastic Beanstalk to Google Cloud (tracking #690).
+**GCP is where all deploys and QA happen; AWS production is frozen** on the
+2026-10-11 release until cutover (#688) and decommissioning (#689).
 
-Lab AWS account, region **us-west-2** (other regions empty). CLI profile on
-Mike's machine: `webcdi` (IAM user `webcdi-deploy`; EB deploy + S3 multipart).
-Other people need their own credentials from Mike — never share keys in chat
-or commits.
+## GCP (project `hs-langcog-webcdi`, region `us-west1`)
 
-- **EB environments:** `Webcdi-env-2` = production (webcdi.org);
-  `Webcdi-dev-django4` = staging (testing.webcdi.org); `webcdi-dev` = Henry's
-  old demo (don't touch); `CdiCatApi-env` / `CdiCatApi-dev` = R CAT API;
-  `Wordbank-prod` / `Wordbank-dev` belong to Wordbank, not Web-CDI.
-- **RDS (Postgres):** prod = `webcdiadmin` (db.t3.micro, created 2017 —
-  **this is production; never delete**), staging = `webcdi-dev-3`; `webcdi-dev`
-  (2024) is not used by any current environment. Public access on prod is
-  intentional per Mike (other lab resources read it).
-- **S3:** media buckets (`webcdi-media-prod`, `webcdi-media-dev`).
-- **Secrets Manager:** DB password at
-  `{DJANGO_SERVER_TYPE lower}/webcdi/RDS_PASSWORD` (rotated automatically —
-  that's why `RDS_ENGINE=webcdi_postgresql_engine` exists) and IAM creds at
-  `webcdi/webcdi-IAM`. Only read when `AWS_INSTANCE` is true.
-- **Email:** AWS SES (`django_ses.SESBackend`, us-west-2).
-- **Logs:** EB streams `/var/log/app/*.log`, httpd, etc. to **CloudWatch**
-  with **7-day retention**; `eb logs <env>` pulls a bundle. Reading prod logs
-  is a production read — ask Mike first.
-- A 2026-09 cost audit found runaway AWS Backup snapshots (a wildcard monthly
-  plan) and many stopped legacy instances; cleanup is in progress and owned by
-  Mike. Don't delete AWS resources without explicit instruction.
+Stanford Moderate Risk data; this project is approved for real data.
+Infrastructure is code: `deploy/terraform/` (OpenTofu), image
+`deploy/Dockerfile`, runbooks in `deploy/README.md` and `deploy/rehearsal/`.
 
-## Deploying
-
-1. Merge to `master` (CI green). Deploy from a clean checkout of what you
-   merged.
-2. From `webcdi/`: `eb deploy Webcdi-dev-django4` (staging) → check
-   testing.webcdi.org → `eb deploy Webcdi-env-2` (production, **only with
-   Mike's go-ahead**). `git archive` from `webcdi/` roots the bundle
-   correctly.
-3. `.platform/hooks/postdeploy/02_django.sh` then runs on each instance:
-   `migrate`, `collectstatic`, and populate commands `01_populate_instrument_family`,
-   `02_populate_instrument`, `03_populate_scoring`, `04a_delete_benchmark`,
-   `04_populate_benchmark`, `05_populate_choices`, `06_populate_items`. So
-   changes to instruments.json, item CSVs, scoring JSON or benchmark CSVs go
-   live on deploy with no manual step. One-off rescoring commands
-   (`update_summary_data`, `update_english_ws_scoring`) are commented out —
-   Henry toggles them in for a release that changes scoring, then back out.
-4. `01_copy_env.sh` copies EB env vars to a file readable by cron jobs.
-5. Env vars are set per environment in EB (`eb setenv KEY=value`; empty
-   `PRIMARY_HOST=` disables the host-redirect middleware).
-
-Henry's wiki also says deploying needs the EC2 key `web-cdi_011017.pem` in
-`~/.ssh` (for `eb ssh`; plain `eb deploy` doesn't need it).
-
-## Cron (`.ebextensions/crontab.txt` → `/etc/cron.d/webcdi_cron_jobs`)
-
-- `crontab_scoring` every 10 min — scores newly completed administrations.
-- `monthly_report` (1st of month; emails Brookes a CSV of all license codes)
-  and `weekly_reminder` (Sundays; emails researchers whose Brookes license
-  expires within a month) — both in `brookes/management/commands/`.
-- **Since #554 (Nov 2024) the cron lines no longer load the EB environment**
-  (the `export $(cat …/custom_env_var | xargs)` prefix was removed), and
-  settings need env vars (`ADMINS`, `AWS_STORAGE_BUCKET_NAME`, …), so every
-  job very likely crashes at startup — silently, since the instance has no
-  mail transport. Verify in logs; fix tracked in the infra plan.
-- `MAILTO` is Henry's personal address (#638) — must change.
-- The file must end with a blank line or cron rejects it.
-- `crontab2.txt` is an unused leftover; slated for deletion.
-
-## Environment variables (read in `webcdi/settings.py`; template `.env.example`)
-
-| Variable | Meaning |
+| Piece | Name |
 |---|---|
-| `AWS_INSTANCE` | true on EB (Secrets Manager, S3); **false locally** |
-| `DJANGO_SERVER_TYPE` | `DEV` / `PROD` (picks the Secrets Manager path) |
-| `RDS_ENGINE`, `RDS_DB_NAME`, `RDS_USERNAME`, `RDS_PASSWORD`, `RDS_HOSTNAME`, `RDS_PORT` | DB; sqlite not supported |
-| `EMAIL_BACKEND`, `AWS_SES_REGION_NAME`, `AWS_SES_REGION_ENDPOINT`, `EMAIL_PORT` | email |
-| `DEFAULT_FROM_EMAIL_NAME`, `DEFAULT_FROM_EMAIL_ADDRESS`, `DEFAULT_RECIPIENT_EMAIL`, `SERVER_EMAIL` | senders |
-| `ADMINS` | JSON list of (name, email) — **receives 500-error emails** |
-| `BROOKES_EMAIL` | Brookes contact notified about code use; leave as is unless Brookes asks |
-| `CONTACT_EMAIL`, `MORE_INFO_ADDRESS` | home-page links |
-| `ALLOWED_HOSTS`, `TRUSTED_ORIGINS` | JSON lists (prod: `[".webcdi.org"]`) |
-| `DEBUG` | false in prod; **true locally** |
-| `SITE_ID` | Django Sites row: 1 WebCDI, 2 test, 3 local, 4 MPI |
-| `PRIMARY_HOST` | redirect bare host to this host (optional) |
-| `TIME_ZONE`, `LOG_FILE_PATH` | defaults UTC, `/tmp/` |
-| `SECRET_KEY`, `GOOGLE_ANALYTICS_ID` | from env |
-| `AWS_STORAGE_BUCKET_NAME`, AWS keys | S3 media; only when `AWS_INSTANCE` |
+| Web service (Cloud Run) | `webcdi-staging` — https://webcdi-staging-qiqpffb23q-uw.a.run.app |
+| Database (Cloud SQL, Postgres 16; backups + point-in-time recovery) | `webcdi-staging-db` |
+| Jobs (Cloud Run, same image) | `webcdi-staging-{migrate,load-instruments,scoring,monthly-report,weekly-reminder}` |
+| Schedule (Cloud Scheduler) | scoring every 10 min; email jobs off on staging (`enable_email_jobs`) |
+| Secrets (Secret Manager) | `webcdi-staging-*` (generated) and `postmark-server-token` (by hand) |
+| Images (Artifact Registry) | `us-west1-docker.pkg.dev/hs-langcog-webcdi/webcdi/webcdi:<git sha>` |
+| State | `gs://hs-langcog-webcdi-tfstate` (prefix `webcdi`) |
 
-## Common DB fixes (Django admin `/wcadmin/` or psql)
+There is **no GCP production environment yet** — building it (with a GitHub
+deploy-approval gate, webcdi.org domain mapping, Postmark live) is the next
+infrastructure step; see `references/roadmap.md`.
 
-- **Researcher "lost" a group:** `researcher_UI_study.active` is False (soft
-  delete) → set True.
-- **Reuse a gift-card code** (used in testing): in `researcher_UI_payment_code`
-  clear `hash_id` and `assignment_date`; change `study_id` to move it.
-- **Grant instrument access:** Users → user → Researcher → "Instruments this
-  researcher has access to"; Brookes-gated families also need a code.
+### Deploys: merge to master
 
-## Things only Henry had (handoff checklist)
+`.github/workflows/deploy.yml` runs after CI passes on master: build and push
+`:<sha>`, point the jobs at it, run `migrate`, rerun `load-instruments` only if
+instrument data files changed, deploy the service, smoke-test, and roll traffic
+back on failure. GitHub authenticates with Workload Identity Federation — **no
+stored keys**. When the service is private (see below) the smoke test runs the
+same pages through Django's test client inside a one-off job (#731).
 
-Confirm each with Mike/Henry and record where it now lives:
-- [ ] Error emails: prod `ADMINS` and cron `MAILTO` point at Henry.
-- [ ] EC2 key pair `web-cdi_011017.pem` (only needed for `eb ssh`).
-- [ ] Prod Django superuser(s); GitHub repo admin; Dependabot triage.
+CI uses `concurrency: cancel-in-progress` on master, so rapid merges cancel
+older runs and only the newest commit deploys. Check the true master head's
+run, not a cancelled one.
+
+### Staging access (current state, Oct 2026)
+
+Staging holds a **scrubbed copy of production** for the migration rehearsal
+(#687), so it is private:
+- **Browser:** Google sign-in (Identity-Aware Proxy, #725). Allowed accounts
+  are `iap_members` in a gitignored `deploy/terraform/*.local.tfvars` (never
+  commit personal addresses). Only accounts in Stanford's Google organisation
+  get through; gmail accounts are refused. Then log into Web-CDI normally.
+- **Email:** console backend (logged, not sent).
+- **Scrubbed** so test clicks can't reach the outside world: completion-flag
+  URLs and server-side redirect URLs blanked, gift-card codes replaced with
+  `STAGING-TEST-<id>`. Redo this after every fresh copy (`deploy/rehearsal/`).
+- QA testers get **fresh test researcher accounts**, never real ones.
+
+### Operating it (needs Mike's gcloud login — not available to cloud sessions)
+
+- Infrastructure changes: `tofu plan -var-file=staging.tfvars [-var-file=qa.local.tfvars] -var image=unused … -out=X.tfplan`,
+  review, then `tofu apply X.tfplan`. **Never apply without a reviewed saved
+  plan.** Plans from a branch that lacks merged infra code will try to undo it.
+- One-off Django code against staging data: execute the migrate job with
+  `--args="^~^shell~-c~<python>"`; read output with `gcloud logging read`
+  filtered by `labels."run.googleapis.com/execution_name"`.
+- IAM quirks: Editor can't set resource-level IAM policies; Mike self-granted
+  `run.admin`, `iam.serviceAccountAdmin`, `iam.workloadIdentityPoolAdmin`,
+  `iap.admin`. Conditioned project grants work for Secret Manager (must match
+  `/versions/` too) but not for job invoke or Artifact Registry upload.
+  `gcloud run jobs replace` and `gcloud iap` need the Cloud Resource Manager
+  API, which is off — use `jobs create` with flags / the REST API.
+- If `gcloud` says "Reauthentication failed", Mike must run `gcloud auth login`
+  (OpenTofu's application-default credentials may still work meanwhile).
+
+### Email (Postmark)
+
+django-anymail → Postmark; From `noreply@webcdi.org` (DKIM and Return-Path
+verified), Reply-To `webcdi-contact@stanford.edu`. As of 2026-10-20 the
+Postmark account is **pending approval**: it only delivers to `@webcdi.org`
+addresses (error 412 otherwise). Errors and alerts go to
+webcdi-contact@stanford.edu (forwards to Mike). Django error emails
+can contain participant data — summarize them in issues, don't paste them.
+
+## AWS (legacy production, frozen)
+
+Lab AWS account, us-west-2. **No deploys or changes without Mike's explicit
+OK** — including "small" ones; Mike prefers to leave AWS alone until it's
+decommissioned. CLI profile `webcdi` (IAM user `webcdi-deploy`).
+
+- **EB:** `Webcdi-env-2` = production (webcdi.org); `Webcdi-dev-django4` = old
+  staging (testing.webcdi.org); `webcdi-dev` = Henry's old demo;
+  `CdiCatApi-env` / `-dev` = R CAT API (prod still uses it).
+- **RDS:** prod = `webcdiadmin` (**never delete** until decommissioning, #689),
+  `webcdi-dev-3` = old staging.
+- **Secrets Manager:** prod DB password at `prod/webcdi/RDS_PASSWORD`
+  (`password` field). `webcdi-deploy` can read it (inline policy
+  `read-webcdi-rds-password`, added by Vic for the rehearsal and cutover);
+  copy it straight into GCP Secret Manager — never print it.
+- **Cron** (`.ebextensions/crontab.txt`) was silently broken from Nov 2024 to
+  Oct 2026 (env not loaded); fixed in master (#695) but AWS still runs the
+  Oct 11 code.
+- Security fixes merged since Oct 11 reach production only at cutover (Mike's
+  decision; don't hotfix AWS without him).
+- Reading prod logs is a production read — ask Mike first.
+
+## Common DB fixes (Django admin `/wcadmin/` or a one-off job)
+
+- **Researcher "lost" a group:** `Study.active` is False (soft delete) → True.
+- **Reuse a gift-card code:** clear `hash_id` and `assignment_date`.
+- **Grant instrument access:** Users → user → Researcher → instruments;
+  Brookes-gated families also need a code.
+
+## Handoff status (things only Henry had)
+
+- [x] Error emails → webcdi-contact@stanford.edu (GCP build).
+- [x] GitHub access trimmed (Oct 2026) to Mike, mikabr, vic-moreno, Henry
+  (write), Alvin (write), plus langcog organisation owners.
 - [ ] Brookes Publishing contact and the code-issuing workflow.
 - [ ] Dutch group's EU server: who deploys it, which version it runs.
-- [ ] REDCap/Wordful study links (`references/researcher-features.md`).
-- [ ] DNS for webcdi.org and SES sender verification — who controls them.
-- [ ] The R CAT API (`langcog/cdi-cat-api`, George Kachergis) — redeploys.
+- [ ] DNS for webcdi.org (Vic set the Postmark records) — needed for cutover.
