@@ -1,17 +1,27 @@
 """Scoring of completed administrations.
 
 Raw scores come from InstrumentScore definitions; percentiles from Benchmark
-norm tables. Output is identical to the original row-by-row implementation
-(frozen in scores_legacy.py, checked by tests and `compare_scoring`), but an
-instrument's scoring configuration is loaded once and SummaryData is written
-in bulk: a few queries per administration instead of thousands (#668).
+norm tables. An instrument's scoring configuration is loaded once and
+SummaryData is written in bulk: a few queries per administration (#668; the
+rewrite matched the original row-by-row scorer exactly on 500 production
+administrations before the percentile rules below changed, #687).
 
-Deliberate difference from the legacy code: a response whose item_ID is not
-an item of the instrument is skipped (legacy counted it under the previous
-response's category, or crashed if it came first).
+Percentile rules (Virginia Marchman, #686), shared by the scorer, the CAT
+report and the CAT download via `percentile_thresholds`/`percentile_of`:
+- tables with every percentile 1-99 are used as published;
+- coarser tables (5, 10, ..., 95, 99) are filled in linearly at 1-point steps;
+- below the lowest published percentile (the 5th), the table is extended at
+  the slope between the two lowest (5th to 10th) to establish the 1st;
+- a score below the 1st percentile is "<1"; the highest percentile is 99;
+- ties (several percentiles with the same raw score) take the highest;
+- sex-specific results for a child not recorded as M or F are "not computed".
+
+A response whose item_ID is not an item of the instrument is skipped.
 """
 import logging
 from collections import defaultdict
+
+from django.conf import settings
 
 from researcher_UI.models import (Benchmark, InstrumentScore, Measure,
                                   SummaryData, administration_data)
@@ -21,12 +31,60 @@ from .models import BackgroundInfo, Instrument_Forms
 logger = logging.getLogger("debug")
 
 
-def calc_benchmark(x1, x2, y1, y2, raw_score):
-    if x1 == x2:
-        return int((y1 + y2) / 2)
-    gradient = float(y2 - y1) / (x2 - x1)
-    a = float(y1 - (x1 * gradient))
-    return int(a + raw_score * gradient)
+NOT_COMPUTED = "not computed"
+SEX_COLUMNS = {"M": "raw_score_boy", "F": "raw_score_girl"}
+
+
+def percentile_thresholds(points):
+    """{percentile: raw score} from one norm table -> {1..99: threshold}.
+
+    Percentiles outside 1-99 (0 rows, the 999 "% yes" marker) are ignored.
+    Returns {} when the table has no usable rows (no norms).
+    """
+    known = sorted((p, v) for p, v in points.items() if 1 <= p <= 99)
+    if not known:
+        return {}
+    thresholds = {}
+    for (a, ra), (b, rb) in zip(known, known[1:]):
+        for p in range(a, b):
+            thresholds[p] = ra + (rb - ra) * (p - a) / (b - a)
+    top, rtop = known[-1]
+    thresholds[top] = rtop
+    low, rlow = known[0]
+    if low > 1 and len(known) > 1:
+        step = (known[1][1] - rlow) / (known[1][0] - low)
+        for p in range(1, low):
+            thresholds[p] = rlow - (low - p) * step
+    return thresholds
+
+
+def table_thresholds(rows, column="raw_score"):
+    """Thresholds for one column (raw_score / raw_score_boy / raw_score_girl) of Benchmark rows."""
+    return percentile_thresholds({b.percentile: getattr(b, column) for b in rows})
+
+
+def percentile_of(score, thresholds):
+    """The highest percentile whose threshold `score` reaches, as text.
+
+    "<1" below the 1st percentile; None when there are no norms.
+    """
+    if not thresholds:
+        return None
+    result = "<1"
+    for p in sorted(thresholds):
+        if thresholds[p] <= score:
+            result = str(p)
+        else:
+            break
+    return result
+
+
+def value_at(percentile, thresholds):
+    """The raw score at a percentile ("<1" -> the 1st), for estimates like CAT words produced."""
+    if not thresholds or percentile is None:
+        return None
+    p = 1 if percentile == "<1" else int(percentile)
+    return thresholds.get(p)
 
 
 class InstrumentScoring:
@@ -71,53 +129,36 @@ class InstrumentScoring:
 def benchmark_scores(values, benchmarks, f, sex, adjusted):
     """Add percentile rows for score `f` to `values`.
 
-    `benchmarks` are f's norm rows at the child's (cohort) age in percentile
-    order. Percentile = the highest row whose raw score is <= the child's
-    (floor lookup; interpolation via calc_benchmark is disabled since #652).
-    Sex-specific percentiles exist only for M/F (#674).
+    `benchmarks` are f's norm rows at the child's (cohort) age; see the
+    module docstring for the rules.
     """
     benchmark = benchmarks[0]
-    original_benchmark = benchmark
     if benchmark.percentile == 999:
         title = f.title + f" % yes answers at this age and sex{adjusted}"
-        values.setdefault(title, "")
-        if sex == "M":
-            values[title] = str(benchmark.raw_score_boy)
-        elif sex == "F":
-            values[title] = str(benchmark.raw_score_girl)
+        if sex in SEX_COLUMNS:
+            values[title] = str(getattr(benchmark, SEX_COLUMNS[sex]))
+        else:
+            values[title] = NOT_COMPUTED
         return
 
+    unisex = table_thresholds(benchmarks)
+    if not unisex:  # no norms at this age
+        return
     try:
-        raw_score = int(values[f.title])
+        raw_score = float(values[f.title])
     except (KeyError, ValueError, TypeError):
         raw_score = 0
 
-    sex_score = 0
-    if sex in ("M", "F"):
-        column = "raw_score_boy" if sex == "M" else "raw_score_girl"
-        sex_score = benchmark.percentile
-        for b in benchmarks[1:]:
-            if getattr(b, column) <= raw_score:
-                benchmark = b
-                sex_score = benchmark.percentile
-            else:
-                break
-        values[f"{f.title} Percentile-sex{adjusted}"] = (
-            "<1" if sex_score < 1 else str(sex_score)
+    sex_title = f"{f.title} Percentile-sex{adjusted}"
+    if sex in SEX_COLUMNS:
+        sex_score = percentile_of(
+            raw_score, table_thresholds(benchmarks, SEX_COLUMNS[sex])
         )
-
-    if not benchmark.raw_score == 9999:
-        benchmark = original_benchmark
-        unisex_score = benchmark.percentile
-        for b in benchmarks[1:]:
-            if b.raw_score <= raw_score:
-                benchmark = b
-                unisex_score = benchmark.percentile
-            else:
-                break
-        values[f.title + f" Percentile-both{adjusted}"] = (
-            "<1" if unisex_score < 1 else str(unisex_score)
-        )
+        if sex_score is not None:
+            values[sex_title] = sex_score
+    else:
+        values[sex_title] = NOT_COMPUTED
+    values[f"{f.title} Percentile-both{adjusted}"] = percentile_of(raw_score, unisex)
 
 
 def _compute(administration_instance, scoring, values):
@@ -193,6 +234,11 @@ def _compute(administration_instance, scoring, values):
         adjusted_benchmark_age = max_age
     values["adjusted benchmark cohort age"] = str(adjusted_benchmark_age)
 
+    if scoring.instrument.form in settings.CAT_FORMS and not _cat_scores(
+        administration_instance, scoring, values, age
+    ):
+        return True
+
     for f in scoring.scores:
         if not scoring.benchmarks.get(f.pk):
             continue
@@ -208,6 +254,64 @@ def _compute(administration_instance, scoring, values):
         benchmark_scores(values, rows, f, background_info.sex, "")
         benchmark_scores(values, adjusted_rows, f, background_info.sex, " (adjusted)")
     return True
+
+
+def _cat_scores(administration_instance, scoring, values, age):
+    """CAT ability lives in CatResponse, not in item responses: score theta
+    itself, and estimate words produced as the Total Produced norm at the
+    child's theta percentile. False if there is no estimate to score."""
+    try:
+        theta = administration_instance.catresponse.est_theta
+    except Exception:
+        theta = None
+    if theta is None:
+        values["Benchmark Theta"] = ""
+        values["Total Produced"] = ""
+        return False
+    values["Benchmark Theta"] = str(theta)
+    by_title = {f.title: f for f in scoring.scores}
+    theta_rows = scoring.rows(by_title["Benchmark Theta"], age)
+    produced_rows = scoring.rows(by_title["Total Produced"], age)
+    estimate = value_at(
+        percentile_of(theta, table_thresholds(theta_rows)),
+        table_thresholds(produced_rows),
+    )
+    values["Total Produced"] = "" if estimate is None else str(max(0, round(estimate)))
+    return True
+
+
+def cat_norms(instrument, age, theta, sex):
+    """CAT report/download figures at one (cohort) age: theta percentiles and
+    estimated words produced (the Total Produced norm at that percentile).
+    Values are None where there are no norms (or no theta)."""
+    if theta is None:
+        return dict.fromkeys(
+            ["est_theta_percentile", "raw_score", "est_theta_percentile_sex", "raw_score_sex"]
+        )
+    rows = defaultdict(list)
+    for b in Benchmark.objects.filter(instrument=instrument, age=age).select_related(
+        "instrument_score"
+    ):
+        rows[b.instrument_score.title].append(b)
+    theta_rows, produced_rows = rows["Benchmark Theta"], rows["Total Produced"]
+
+    def estimate(percentile, column):
+        words = value_at(percentile, table_thresholds(produced_rows, column))
+        return None if words is None else max(0, round(words))
+
+    result = {}
+    result["est_theta_percentile"] = percentile_of(theta, table_thresholds(theta_rows))
+    result["raw_score"] = estimate(result["est_theta_percentile"], "raw_score")
+    if sex in SEX_COLUMNS:
+        column = SEX_COLUMNS[sex]
+        result["est_theta_percentile_sex"] = percentile_of(
+            theta, table_thresholds(theta_rows, column)
+        )
+        result["raw_score_sex"] = estimate(result["est_theta_percentile_sex"], column)
+    else:
+        result["est_theta_percentile_sex"] = NOT_COMPUTED
+        result["raw_score_sex"] = NOT_COMPUTED
+    return result
 
 
 def update_summary_scores(administration_instance, scoring=None):

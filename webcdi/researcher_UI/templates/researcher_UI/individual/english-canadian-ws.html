@@ -63,12 +63,12 @@
                 <td colspan="1"></td>
                 <td>{% trans 'Percentile (by sex):' %}</td>
 
-                <td colspan="2">{% get_adjusted_summary_date administration.id "Total Produced Percentile-sex" %}%</td>
+                <td colspan="2">{% get_adjusted_summary_date administration.id "Total Produced Percentile-sex" as pct %}{{ pct|as_percent }}</td>
             </tr>
             <tr>
                 <td colspan="1"></td>
                 <td>{% trans 'Percentile (both sexes):' %}</td>
-                <td colspan="2">{% get_adjusted_summary_date administration.id "Total Produced Percentile-both" %}%</td>
+                <td colspan="2">{% get_adjusted_summary_date administration.id "Total Produced Percentile-both" as pct %}{{ pct|as_percent }}</td>
             </tr>
             <tr>
                 <td colspan="4">{% trans 'How children use words' %}</td>
@@ -161,12 +161,12 @@
             <tr>
                 <td></td>
                 <td>{% trans 'Percentile (by sex):' %}</td>
-                <td colspan="2">{% get_adjusted_summary_date administration.id "Complexity Percentile-sex" %}%</td>
+                <td colspan="2">{% get_adjusted_summary_date administration.id "Complexity Percentile-sex" as pct %}{{ pct|as_percent }}</td>
             </tr>
             <tr>
                 <td></td>
                 <td>{% trans 'Percentile (both sexes):' %}</td>
-                <td colspan="2">{% get_adjusted_summary_date administration.id "Complexitye Percentile-both" %}%</td>
+                <td colspan="2">{% get_adjusted_summary_date administration.id "Complexitye Percentile-both" as pct %}{{ pct|as_percent }}</td>
             </tr>
             
         </table>

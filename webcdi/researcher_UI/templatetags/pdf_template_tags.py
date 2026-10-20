@@ -3,6 +3,7 @@ import logging
 from django import template
 from django.db.models import Max, Min, Q
 
+from cdi_forms.scores import NOT_COMPUTED, cat_norms
 from researcher_UI.models import (Administration, Benchmark, SummaryData,
                                   administration_data)
 
@@ -30,6 +31,14 @@ def get_adjusted_summary_date(context, administration_id, data):
     else:
         res = 0
     return res
+
+
+@register.filter
+def as_percent(value):
+    """A percentile with its % sign; blanks and "not computed" as they are."""
+    if value in ("", None, NOT_COMPUTED):
+        return value or ""
+    return f"{value}%"
 
 
 @register.simple_tag(takes_context=True)
@@ -73,84 +82,13 @@ def get_cat_benchmark(context, administration_id, data):
         age = min
     row["benchmark_cohort_age"] = age
 
-    q = Q(
-        instrument=administration.study.instrument,
-        instrument_score__title="Benchmark Theta",
-        age=age,
+    norms = cat_norms(
+        administration.study.instrument,
+        age,
+        administration.catresponse.est_theta,
+        administration.backgroundinfo.sex,
     )
-    if Benchmark.objects.filter(
-        instrument=administration.study.instrument, age=age
-    ).exists():
-        benchmarks = Benchmark.objects.filter(q).order_by("percentile")
-        lowest_percentile = benchmarks.filter(percentile__gt=0).order_by("percentile")[
-            0
-        ]
-        for b in benchmarks.filter(age=age):
-            if administration.catresponse.est_theta > b.raw_score:
-                row["est_theta_percentile"] = (
-                    b.percentile
-                    if b.percentile > 1
-                    else f"<{lowest_percentile.percentile}"
-                )
-            if administration.backgroundinfo.sex == "M":
-                if administration.catresponse.est_theta > b.raw_score_boy:
-                    row["est_theta_percentile_sex"] = (
-                        b.percentile
-                        if b.percentile > 1
-                        else f"<{lowest_percentile.percentile}"
-                    )
-            if administration.backgroundinfo.sex == "F":
-                if administration.catresponse.est_theta > b.raw_score_girl:
-                    row["est_theta_percentile_sex"] = (
-                        b.percentile
-                        if b.percentile > 1
-                        else f"<{lowest_percentile.percentile}"
-                    )
-
-        if row["est_theta_percentile"] == f"<{lowest_percentile.percentile}":
-            q = Q(
-                instrument=administration.study.instrument,
-                instrument_score__title="Total Produced",
-                age=age,
-                percentile=lowest_percentile.percentile,
-            )
-        else:
-            q = Q(
-                instrument=administration.study.instrument,
-                instrument_score__title="Total Produced",
-                age=age,
-                percentile=row["est_theta_percentile"],
-            )
-        try:
-            row["raw_score"] = int(Benchmark.objects.get(q).raw_score)
-
-        except Exception as e:
-            logger.debug(f"Exception {e}")
-            pass
-
-        if row["est_theta_percentile_sex"] == f"<{lowest_percentile.percentile}":
-            q = Q(
-                instrument=administration.study.instrument,
-                instrument_score__title="Total Produced",
-                age=age,
-                percentile=lowest_percentile.percentile,
-            )
-        else:
-            q = Q(
-                instrument=administration.study.instrument,
-                instrument_score__title="Total Produced",
-                age=age,
-                percentile=row["est_theta_percentile_sex"],
-            )
-        try:
-            row["raw_score"] = int(Benchmark.objects.get(q).raw_score)
-            if administration.backgroundinfo.sex == "M":
-                row["raw_score_sex"] = int(Benchmark.objects.get(q).raw_score_boy)
-            elif administration.backgroundinfo.sex == "F":
-                row["raw_score_sex"] = int(Benchmark.objects.get(q).raw_score_girl)
-        except Exception as e:
-            logger.debug(f"Exception {e}")
-            pass
+    row.update({k: v for k, v in norms.items() if v is not None})
 
     return row[data]
 

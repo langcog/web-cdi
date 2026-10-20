@@ -61,12 +61,12 @@
                 <td>{{ administration.id|get_summary_data:"Produces" }}</td>
                 <td>(of 89)</td>
                 <td>{% trans 'Percentile (by sex):' %}</td>
-                <td>{% get_adjusted_summary_date administration.id "Produces Percentile-sex" %}%</td>
+                <td>{% get_adjusted_summary_date administration.id "Produces Percentile-sex" as pct %}{{ pct|as_percent }}</td>
             </tr>
             <tr>
                 <td colspan="5"></td>
                 <td>{% trans 'Percentile (both sexes):' %}</td>
-                <td>{% get_adjusted_summary_date administration.id "Produces Percentile-both" %}%</td>
+                <td>{% get_adjusted_summary_date administration.id "Produces Percentile-both" as pct %}{{ pct|as_percent }}</td>
             </tr>
             <tr>
                 <td></td>

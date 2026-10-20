@@ -56,12 +56,12 @@
                 <td>{{ administration.id|get_summary_data:"Total Produced" }}</td>
                 <td>(of 100)</td>
                 <td>{% trans 'Percentile (by sex):' %}</td>
-                <td>{% get_adjusted_summary_date administration.id "Total Produced Percentile-sex" %}%</td>
+                <td>{% get_adjusted_summary_date administration.id "Total Produced Percentile-sex" as pct %}{{ pct|as_percent }}</td>
             </tr>
             <tr>
                 <td colspan="5"></td>
                 <td>{% trans 'Percentile (both sexes):' %}</td>
-                <td>{% get_adjusted_summary_date administration.id "Total Produced Percentile-both" %}%</td>
+                <td>{% get_adjusted_summary_date administration.id "Total Produced Percentile-both" as pct %}{{ pct|as_percent }}</td>
             </tr>
         </table>
         <table>
@@ -81,12 +81,12 @@
             <tr>
                 <td colspan="2"></td>
                 <td>{% trans 'Percentile (by sex):' %}</td>
-                <td>{% get_adjusted_summary_date administration.id "Complexity Percentile-sex" %}%</td>
+                <td>{% get_adjusted_summary_date administration.id "Complexity Percentile-sex" as pct %}{{ pct|as_percent }}</td>
             </tr>
             <tr>
                 <td colspan="2"></td>
                 <td>{% trans 'Percentile (by both):' %}</td>
-                <td>{% get_adjusted_summary_date administration.id "Complexity Percentile-both" %}%</td>
+                <td>{% get_adjusted_summary_date administration.id "Complexity Percentile-both" as pct %}{{ pct|as_percent }}</td>
             </tr>
             <tr>
                 <th colspan="6">{% trans 'User Language' %}</th>
@@ -100,12 +100,12 @@
             <tr>
                 <td colspan="2"></td>
                 <td>{% trans 'Percentile (by sex):' %}</td>
-                <td>{% get_adjusted_summary_date administration.id "How to Use Words Percentile-sex" %}%</td>
+                <td>{% get_adjusted_summary_date administration.id "How to Use Words Percentile-sex" as pct %}{{ pct|as_percent }}</td>
             </tr>
             <tr>
                 <td colspan="2"></td>
                 <td>{% trans 'Percentile (by both):' %}</td>
-                <td>{% get_adjusted_summary_date administration.id "How to Use Words Percentile-both" %}%</td>
+                <td>{% get_adjusted_summary_date administration.id "How to Use Words Percentile-both" as pct %}{{ pct|as_percent }}</td>
             </tr>
         </table>
         <table>

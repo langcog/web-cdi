@@ -55,12 +55,12 @@
             <tr>
                 <td></td>
                 <td>{% trans 'Percentile (by sex):' %}</td>
-                <td>{% get_cat_benchmark administration.id "est_theta_percentile_sex" %}%</td>
+                <td>{% get_cat_benchmark administration.id "est_theta_percentile_sex" as pct %}{{ pct|as_percent }}</td>
             </tr>
             <tr>
                 <td></td>
                 <td>{% trans 'Percentile (by both sexes):' %}</td>
-                <td>{% get_cat_benchmark administration.id "est_theta_percentile" %}%</td>
+                <td>{% get_cat_benchmark administration.id "est_theta_percentile" as pct %}{{ pct|as_percent }}</td>
             </tr>
             <tr>
                 <td></td>
