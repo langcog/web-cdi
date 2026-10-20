@@ -28,9 +28,11 @@ Pointed to by `scoring_json` in instruments.json; loaded by
 Pointed to by `benchmark`; loaded by `04a_delete_benchmark` +
 `04_populate_benchmark`. Header `title,percentile,age,raw_score,raw_score_boy,raw_score_girl`;
 one row per (score title × age × percentile). `title` must match the scoring
-title exactly. Sentinels: `raw_score = 9999` → no unisex norms for that
-measure; `percentile = 999` → row holds a mean "% yes at this age and sex"
-rather than percentiles (e.g. English WS Combining; English WG Phrases).
+title exactly. Sentinel: `percentile = 999` → the row holds a mean "% yes at
+this age and sex" rather than percentiles (e.g. English WS Combining; English
+WG Phrases). `percentile = 0` rows are ignored. Some tables have every
+percentile 1–99; others are coarse (5, 10, …, 95, 99: English CDI-III,
+L1/L2A/L2B short forms, French CAT, Japanese CAT).
 
 ## How scoring runs (`cdi_forms/scores.py`)
 
@@ -43,50 +45,44 @@ rather than percentiles (e.g. English WS Combining; English WG Phrases).
   `update_summary_data -l <language> -f <form>` (or `-u <username>`).
 - **Ages:** child age is clamped to the benchmark table's min/max age
   ("benchmark cohort age"). "Adjusted" age subtracts (early) or adds (late)
-  `due_date_diff / 4` months for prematurity; both plain and adjusted
-  percentiles are stored.
-- **Percentile lookup is a floor, not interpolation:** the reported value is
-  the percentile of the highest benchmark row whose raw score ≤ the child's
-  raw score (`calc_benchmark` linear interpolation is commented out — changed
-  in Henry's "English99" PR #652, Aug 2026). Values below 1 are reported as
-  `"<1"`. Sex-specific percentiles need sex M/F; unisex unless 9999.
-- Floor lookup is exact when the table has every percentile (English WS/WG,
-  Spanish WS/WG, English CAT: 99–100 rows per age), but **coarse for
-  instruments that still have 5-point tables** (English CDI-III, L1/L2A/L2B
-  short forms, French CAT, Japanese CAT) — those reported interpolated values
-  before #652. Rows are read in percentile order via `Benchmark.Meta.ordering`,
-  so CSV row order doesn't matter.
-- Known bug: a child whose sex is O/P/blank gets a sex-specific percentile of
-  `"<1"` (should be blank) — `sex_score` defaults to 0. Verified locally
-  2026-10-15.
-- Other fragile spots: the "late" branch adds to the clamped age while "early"
-  subtracts from the raw age; several bare `except:` blocks swallow errors.
+  `due_date_diff / 4` months for prematurity (missing weeks = no adjustment);
+  both plain and adjusted percentiles are stored.
+- **Percentile rules (Virginia, #686; implemented in #727).** One
+  implementation — `percentile_thresholds` / `percentile_of` / `value_at` in
+  `scores.py` — used by the scorer, the CAT report tag (`get_cat_benchmark`)
+  and the CAT download (`cat_utils`, via `cat_norms`):
+  - full tables (1–99) are used as published;
+  - coarse tables are filled in linearly at 1-point steps (95→99 in quarters);
+  - below the lowest published percentile (the 5th), extend at the slope
+    between the two lowest rows (5th→10th) to establish the 1st;
+  - a score below the 1st is `"<1"`; the top is 99; ties (several percentiles
+    with the same raw score) take the **highest** percentile;
+  - sex-specific results for a child not recorded as M/F are `"not computed"`;
+  - a table with no 1–99 rows means no norms → no percentile.
+  Reports print `%` only after a number (`as_percent` filter).
+- **CAT summaries** are scored from `CatResponse.est_theta` (before #727 the
+  stored "Benchmark Theta" was always 0); "Total Produced" is the estimated
+  words produced = the Total Produced norm at the child's theta percentile.
+- Old vs new on 300 real administrations per instrument (2026-10-19): full
+  tables unchanged; coarse tables up a median of 2 (max 4); CAT ±1 for full
+  tables. Stored summaries need a full rescore after deploy.
 
-## Performance: why a full rescore takes days
+## Performance
 
-`update_summary_scores` is row-by-row ORM: for every response it re-fetches
-the item (`Instrument_Forms.get`), queries matching `InstrumentScore`s, then
-per score does `get_or_create` + `Measure.get` + `save`. Measured locally
-(2026-10-15): one English WS administration (398 responses) = **5,576
-queries**, 1.8 s with the DB on localhost; on EB→RDS each query is a network
-round trip, so several seconds per administration, single-threaded. Rescoring
-all English WS on prod (`update_summary_data -l English -f WS`) therefore
-takes 2–3 days. The fix is to load the instrument's items/scores/measures
-once, count in Python, and `bulk_create` the SummaryData rows (a handful of
-queries per administration). Before optimizing, snapshot current outputs on a
-sample and require identical results from the new code.
+The scorer loads an instrument's configuration once (`InstrumentScoring`) and
+writes `SummaryData` in bulk: ~7 queries per administration instead of ~5,600
+(#694). A full rescore takes minutes. Before the percentile change it matched
+the original row-by-row scorer exactly on 500 production administrations; the
+legacy scorer and `compare_scoring` were then retired (#727). Note: scoring
+saves the administration, which fires the completion-notice signal (#723).
 
-`crontab_scoring` has no lock: if a run takes longer than 10 minutes, the next
-run starts on the same unscored administrations.
+## Test coverage
 
-## Test coverage — honest status
-
-Only one test runs classic scoring (`update_summary_data` over fake WS
-administrations) and it asserts only that administrations get marked scored.
-**No test checks a raw score or percentile value.** Plan agreed with Mike:
-golden-case tests where Virginia supplies (age, sex, responses) → expected
-scores/percentiles from the published norms; we build the harness. Still
-waiting on her cases. CAT theta, by contrast, is value-tested.
+Value-level tests now exist: `cdi_forms/tests/tests_scoring/` —
+`PercentileRulesTest` (golden cases from Virginia's rules and the published
+L1 16-month table), `CatScoringTest`, `SexPercentileTest`, and
+`ScoringEquivalenceTest` (every fixture instrument scores with valid
+percentile values).
 
 ## Downloads that expose scores
 

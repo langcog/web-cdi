@@ -48,8 +48,8 @@ http://localhost:8001). Things it doesn't say:
 - **Randomized fixtures hide bugs:** some tests pick `Instrument...order_by("?")`,
   so a bug in one language/form shows up as intermittent CI failure. When CI
   flakes, suspect this first and add a test pinned to the failing instrument.
-- `known_failure` tag = quarantined pandas-3 bugs (#640 StudyAPI `to_json`
-  duplicate index; #649 CDI-format scoring download `'item_1' is not in list`).
+- `known_failure` tag = quarantined bugs (#640 StudyAPI `to_json` duplicate
+  index).
 - WeasyPrint PDF tests may error under `--parallel` but pass alone.
 - CAT: Django tests cover rendering/persistence for all 5 languages
   (`cat_forms/tests/browser_engine.py`); the engine itself is validated by
@@ -58,18 +58,32 @@ http://localhost:8001). Things it doesn't say:
   `selenium.yml`, non-blocking. ~21 researcher-flow tests fail on stale
   locators from the 2026 redesign (#648) — test rot, not app bugs. Between
   killed local runs: `docker compose restart selenium`.
-- **Scoring has no value-level tests** — see `references/scoring-and-cat.md`.
+- Scoring has value-level tests (`cdi_forms/tests/tests_scoring/`) — see
+  `references/scoring-and-cat.md`.
 - `make docker-lint` is broken (black/flake8 have no config and scan
   `node_modules`).
 
 ## CI (GitHub Actions; repo is public so minutes are free)
 
-- `ci.yml`: fast suite on every PR and push to master (~40 min). Builds via
-  `docker compose up -d --build --wait` with `.env` from `.env.example`.
+- `ci.yml`: fast suite + `jscat` job on every PR and push to master. Builds
+  via `docker compose up -d --build --wait` with `.env` from `.env.example`
+  (CI generates a random DB password — never put password literals in the
+  repo; GitGuardian blocks them). Required checks: "Django suite (unit +
+  integration)", "GitGuardian Security Checks", "jsCat engine vs mirtCAT".
+  Branches need not be up to date with master to merge.
+- `deploy.yml`: after CI passes on master, deploys to GCP staging
+  (`references/deploy-and-ops.md`).
 - `selenium.yml`: nightly 08:00 UTC + manual dispatch.
-- No CD yet: deploys are manual `eb deploy` (#639 plans OIDC-based deploys).
 - Reading failures: `gh run view <id> --log-failed`, then grep for
   `^ERROR:|^FAIL:|Traceback`.
+
+## Working from a cloud session
+
+Cloud sessions clone the repo and can run tests and open PRs, but have no
+gcloud/AWS credentials and no access to staging. Install Postgres 16 in the
+environment (tests need it: `ArrayField`), or use the docker compose stack if
+Docker is available. Leave anything needing GCP (job runs, data counts,
+`tofu apply`, logs) to Mike's primary session and say so in the PR.
 
 ## Browser checks
 
