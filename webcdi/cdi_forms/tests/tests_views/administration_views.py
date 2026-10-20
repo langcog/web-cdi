@@ -1,3 +1,4 @@
+import datetime
 import logging
 
 from django.contrib.auth.models import User
@@ -415,6 +416,122 @@ class AdministrationUpdateViewTest(TestCase):
         payload = {"btn-back": True}
         response = self.client.post(self.url, payload)
         self.assertEqual(response.status_code, 302)
+
+    def test_back_to_background_returns_to_same_section(self):
+        # "Go back to Background Info" from section 3, then "Next" on the
+        # background page, should land the parent on section 3 again (not 4).
+        self.study.min_age = 12
+        self.study.max_age = 36
+        self.study.save()
+        self.administration.due_date = timezone.now() + datetime.timedelta(days=14)
+        self.administration.completedBackgroundInfo = True
+        self.administration.save()
+        section_url = reverse(
+            "update_administration_section",
+            kwargs={"hash_id": self.administration.url_hash, "section": 3},
+        )
+
+        response = self.client.post(section_url, {"btn-back": True})
+        self.assertEqual(response.status_code, 302)
+        background_url = response.url
+        self.assertTrue(
+            background_url.startswith(
+                reverse(
+                    "background-info",
+                    args=(self.administration.backgroundinfo.pk,),
+                )
+            )
+        )
+
+        dob = (datetime.datetime.now() - datetime.timedelta(days=500)).strftime(
+            "%m/%d/%Y"
+        )
+        payload = {
+            "btn-next": "Next",
+            "form_filler": "mother",
+            "child_dob": dob,
+            "sex": "M",
+            "birth_weight_lb": "3.5",
+            "birth_order": 1,
+            "born_on_due_date": 0,
+            "multi_birth_boolean": 0,
+            "primary_caregiver": "mother",
+            "mother_yob": 1966,
+            "mother_education": 18,
+            "annual_income": "25000-50000",
+            "caregiver_info": "1",
+            "other_languages_boolean": 0,
+            "ear_infections_boolean": 0,
+            "hearing_loss_boolean": 0,
+            "vision_problems_boolean": 0,
+            "illnesses_boolean": 0,
+            "services_boolean": 0,
+            "worried_boolean": 0,
+            "learning_disability_boolean": 0,
+        }
+        response = self.client.post(background_url, payload, follow=True)
+        self.assertEqual(response.redirect_chain[-1][0], section_url)
+
+    def resume_url(self):
+        """Where reopening the parent's link sends them."""
+        response = self.client.get(
+            reverse("administer_cdi_form", args=(self.administration.url_hash,))
+        )
+        return response.url
+
+    def section_url(self, section):
+        return reverse(
+            "update_administration_section",
+            kwargs={"hash_id": self.administration.url_hash, "section": section},
+        )
+
+    def test_resume_where_the_parent_was_sent(self):
+        self.administration.due_date = timezone.now() + datetime.timedelta(days=14)
+        self.administration.completedBackgroundInfo = True
+        self.administration.save()
+        for button, payload, resume_at in [
+            ("save", {"btn-save": True}, 4),
+            ("next", {"btn-next": True, "next": 5}, 5),
+            ("previous", {"btn-previous": True, "previous": 3}, 3),
+        ]:
+            with self.subTest(button=button):
+                self.client.post(self.section_url(4), payload)
+                self.assertEqual(self.resume_url(), self.section_url(resume_at))
+
+    def test_section_past_the_end_shows_the_last_section(self):
+        # English WS has sections 1-31
+        last = self.client.get(self.section_url(31)).context["data"]["menu"]
+        response = self.client.get(self.section_url(99))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context["data"]["menu"], last)
+
+    def test_page_without_section_resumes_from_page_number(self):
+        self.administration.page_number = 6
+        self.administration.save()
+        self.assertEqual(self.client.get(self.url).context["data"]["menu"], 6)
+        self.administration.page_number = 0
+        self.administration.save()
+        self.assertEqual(self.client.get(self.url).context["data"]["menu"], 1)
+
+    def test_migration_keeps_in_progress_parents_where_they_were(self):
+        import importlib
+
+        from django.apps import apps
+
+        migration = importlib.import_module(
+            "researcher_UI.migrations.0108_page_number_is_resume_section"
+        )
+        self.administration.page_number = 4  # old meaning: last posted from 4
+        self.administration.save()
+        done = Administration.objects.create(
+            study=self.study, subject_id=2, repeat_num=1, url_hash="d" * 64,
+            completed=True, due_date=timezone.now(), page_number=4,
+        )
+        migration.forwards(apps, None)
+        self.administration.refresh_from_db()
+        done.refresh_from_db()
+        self.assertEqual(self.administration.page_number, 5)  # old code resumed at 4 + 1
+        self.assertEqual(done.page_number, 4)
 
     def test_btn_submit_post(self):
         self.client.force_login(self.user)
