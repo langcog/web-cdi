@@ -34,6 +34,10 @@ class CommandsTestCase(TestCase):
         scores = InstrumentScore.objects.all()
         self.assertEqual(len(scores), 201)
 
+        # re-running updates in place (instrument + title are unique, #675)
+        call_command("03_populate_scoring", *args, **opts)
+        self.assertEqual(InstrumentScore.objects.count(), 201)
+
     def test_populate_benchmark(self):
         args = []
         opts = {}

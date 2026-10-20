@@ -23,3 +23,10 @@ class InstrumentScore(models.Model):
 
     class Meta:
         ordering = ["instrument", "order"]
+        constraints = [
+            # duplicate titles broke the 2026-10-11 deploy and downloads (#675)
+            models.UniqueConstraint(
+                fields=["instrument", "title"],
+                name="unique_instrumentscore_instrument_title",
+            ),
+        ]

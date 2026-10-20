@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.db import IntegrityError, transaction
 from django.test import TestCase, tag
 
 from researcher_UI.models import Instrument, InstrumentFamily, InstrumentScore
@@ -36,6 +37,34 @@ class InstrumentScoreModelTest(TestCase):
 
         self.assertTrue(isinstance(instance, InstrumentScore))
         self.assertEqual(instance.__str__(), f"{instance.instrument}: {instance.title}")
+
+    def test_title_unique_per_instrument(self):
+        """#675: duplicate score titles for one instrument broke the 2026-10-11
+        deploy (MultipleObjectsReturned in 03_populate_scoring) and every
+        English WS/WG download. The database must refuse them."""
+        with self.assertRaises(IntegrityError), transaction.atomic():
+            InstrumentScore.objects.create(
+                instrument=self.instrument_score.instrument,
+                title=self.instrument_score.title,
+                category="Other Category",
+                scoring_measures="Other Measure",
+            )
+
+    def test_same_title_allowed_for_other_instrument(self):
+        other = Instrument.objects.create(
+            name="Other Test Instrument",
+            language="Test Language",
+            form="Other Form",
+            min_age=3,
+            max_age=15,
+            family=self.instrument_score.instrument.family,
+        )
+        InstrumentScore.objects.create(
+            instrument=other,
+            title=self.instrument_score.title,
+            category="Instrument Score Test Category",
+            scoring_measures="Instrument Score Test Measure",
+        )
 
     @tag("admin")
     def test_admin(self):
