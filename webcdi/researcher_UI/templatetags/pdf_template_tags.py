@@ -99,11 +99,11 @@ def get_adjusted_benchmark_age(administration_id):
     age = administration.backgroundinfo.age
     if administration.backgroundinfo.early_or_late == "early":
         age = administration.backgroundinfo.age - int(
-            administration.backgroundinfo.due_date_diff / 4
+            (administration.backgroundinfo.due_date_diff or 0) / 4
         )
     elif administration.backgroundinfo.early_or_late == "late":
         age = administration.backgroundinfo.age + int(
-            administration.backgroundinfo.due_date_diff / 4
+            (administration.backgroundinfo.due_date_diff or 0) / 4
         )
     return age
 
@@ -116,11 +116,11 @@ def get_benchmark_cohort_age(context, administration_id):
         if context["adjusted"]:
             if administration.backgroundinfo.early_or_late == "early":
                 age = administration.backgroundinfo.age - int(
-                    administration.backgroundinfo.due_date_diff / 4
+                    (administration.backgroundinfo.due_date_diff or 0) / 4
                 )
             elif administration.backgroundinfo.early_or_late == "late":
                 age = administration.backgroundinfo.age + int(
-                    administration.backgroundinfo.due_date_diff / 4
+                    (administration.backgroundinfo.due_date_diff or 0) / 4
                 )
     res = Benchmark.objects.filter(
         instrument=administration.study.instrument

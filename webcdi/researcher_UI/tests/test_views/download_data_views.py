@@ -106,3 +106,14 @@ class PDFAdministrationDetailViewTest(TestCase):
             reverse("researcher_ui:console_study", kwargs={"pk": self.study.id}),
         )
         self.assertContains(response, "has been completed yet")
+    def test_adjusted_report_with_early_birth_but_no_weeks(self):
+        # staging QA: early/late with no weeks recorded crashed the adjusted report (500)
+        admin = Administration.objects.filter(study=self.study, completed=True).first()
+        admin.backgroundinfo.early_or_late = "early"
+        admin.backgroundinfo.due_date_diff = None
+        admin.backgroundinfo.save()
+        url = reverse(
+            "researcher_ui:pdf_summary_adjusted", kwargs={"pk": self.study.id, "adjusted": True}
+        )
+        response = self.client.get(f"{url}?id={admin.id}")
+        self.assertEqual(response.status_code, 200)

@@ -31,11 +31,11 @@ def get_pd_norms(study_obj, administrations, adjusted, answer_rows):
                 if obj.backgroundinfo.born_on_due_date:
                     if obj.backgroundinfo.early_or_late == "early":
                         age = obj.backgroundinfo.age - int(
-                            obj.backgroundinfo.due_date_diff / 4
+                            (obj.backgroundinfo.due_date_diff or 0) / 4
                         )
                     elif obj.backgroundinfo.early_or_late == "late":
                         age = obj.backgroundinfo.age + int(
-                            obj.backgroundinfo.due_date_diff / 4
+                            (obj.backgroundinfo.due_date_diff or 0) / 4
                         )
                 row["Adjusted Age"] = age
 
