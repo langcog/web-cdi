@@ -92,3 +92,17 @@ class PDFAdministrationDetailViewTest(TestCase):
             f'{reverse("researcher_ui:pdf_summary", kwargs={"pk": self.study.id})}{self.ids}'
         )
         self.assertEqual(response.status_code, 404)
+
+    def test_no_completed_administrations_redirects_with_message(self):
+        # a report of only incomplete administrations used to be a blank PDF
+        pending = Administration.objects.create(
+            study=self.study, subject_id=999, repeat_num=1, url_hash="f" * 64,
+            completed=False, due_date=self.study.administration_set.first().due_date,
+        )
+        url = reverse("researcher_ui:pdf_summary", kwargs={"pk": self.study.id})
+        response = self.client.get(f"{url}?id={pending.id}", follow=True)
+        self.assertEqual(
+            response.redirect_chain[0][0],
+            reverse("researcher_ui:console_study", kwargs={"pk": self.study.id}),
+        )
+        self.assertContains(response, "has been completed yet")

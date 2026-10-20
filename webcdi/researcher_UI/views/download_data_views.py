@@ -32,17 +32,20 @@ class PDFAdministrationDetailView(LoginRequiredMixin, WeasyTemplateResponseMixin
         except:
             return ["researcher_UI/individual/no_clinical_template.html"]
 
-    def get_context_data(self, **kwargs):
-        ctx = super().get_context_data(**kwargs)
-        ctx["administrations"] = self.object.administration_set.all().filter(
-            completed=True
-        )
+    def completed_administrations(self):
+        """The selected (?id=...) administrations that are completed; reports only cover those."""
+        administrations = self.object.administration_set.all().filter(completed=True)
         if "id" in self.request.GET:
             ids = self.request.GET.getlist("id")
             int_ids = []
             for id in ids:
                 int_ids.append(int(id))
-            ctx["administrations"] = ctx["administrations"].filter(pk__in=int_ids)
+            administrations = administrations.filter(pk__in=int_ids)
+        return administrations
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx["administrations"] = self.completed_administrations()
         if "adjusted" in self.kwargs:
             ctx["adjusted"] = True
         return ctx
@@ -65,6 +68,17 @@ class PDFAdministrationDetailView(LoginRequiredMixin, WeasyTemplateResponseMixin
                 ),
             )
 
+            return redirect(
+                reverse("researcher_ui:console_study", kwargs={"pk": self.object.id})
+            )
+
+        if not self.completed_administrations().exists():
+            # otherwise the PDF comes out blank
+            messages.info(
+                self.request,
+                "None of the selected administrations has been completed yet, "
+                "so there is no clinical report to show.",
+            )
             return redirect(
                 reverse("researcher_ui:console_study", kwargs={"pk": self.object.id})
             )
