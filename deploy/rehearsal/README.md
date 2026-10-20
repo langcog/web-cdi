@@ -73,7 +73,7 @@ staging host with a one-off `shell -c` execution of the migrate job (see
 
 | Check | How | Pass if |
 |---|---|---|
-| Scoring equivalence | `compare_scoring --limit 2000`, and per instrument (`--instrument English_WS`, …) | 0 differences except the documented unknown-item case |
+| Scoring equivalence | done 2026-10-19: legacy vs bulk scorer, 500 production administrations | 0 differences (the comparison tool was then retired with the #686 percentile rules) |
 | Duplicate score titles | `InstrumentScore` rows grouped by (instrument, title) | none (then add the unique constraint, #675) |
 | Full rescore | `update_summary_data` | completes in minutes; "<1" sex percentiles gone (#674) |
 | Downloads | study CSV, summary CSV, CDI-format zip for a sample of groups across instruments | 200; columns as on AWS |

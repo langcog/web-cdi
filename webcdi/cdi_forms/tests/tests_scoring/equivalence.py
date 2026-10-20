@@ -7,9 +7,8 @@ from django.test.utils import CaptureQueriesContext
 from django.utils import timezone
 
 from cdi_forms.models import BackgroundInfo, Instrument_Forms
-from cdi_forms.scores import InstrumentScoring, update_summary_scores
-from researcher_UI.management.commands.compare_scoring import \
-    compare_administration
+from cdi_forms.scores import (NOT_COMPUTED, InstrumentScoring,
+                               update_summary_scores)
 from researcher_UI.models import (Administration, Benchmark, Instrument,
                                   InstrumentScore, Measure, Study,
                                   SummaryData, administration_data)
@@ -37,12 +36,13 @@ BACKGROUND_DEFAULTS = dict(
 
 @tag("scoring")
 class ScoringEquivalenceTest(TestCase):
-    """The bulk scorer must reproduce the legacy scorer exactly (#668).
+    """Every instrument with scoring definitions scores without error.
 
-    Builds administrations for every instrument in the test fixtures that has
-    scoring definitions, varying the inputs that drive the scorer's branches
-    (sex, prematurity, ages outside the norms, missing background info), and
-    compares every SummaryData row, the `scored` flag and any raised error.
+    (Until #686 this compared the bulk scorer with the original row-by-row
+    one; they matched exactly here and on 500 production administrations,
+    #687, before the percentile rules changed.) Administrations vary the
+    inputs that drive the scorer's branches: sex, prematurity, ages outside
+    the norms, missing background info.
     """
 
     fixtures = [
@@ -122,14 +122,20 @@ class ScoringEquivalenceTest(TestCase):
             .values_list("pk", flat=True)
         )
 
-    def test_bulk_matches_legacy(self):
+    def test_scores_every_instrument(self):
         self.assertGreaterEqual(len(self.instruments), 5, self.instruments)
+        allowed = {"<1", NOT_COMPUTED} | {str(p) for p in range(1, 100)}
         with_percentiles = 0
         for pk in self.admin_ids:
-            legacy, new, differences = compare_administration(pk)
+            admin = Administration.objects.get(pk=pk)
+            update_summary_scores(admin)
+            rows = dict(
+                SummaryData.objects.filter(administration=admin).values_list("title", "value")
+            )
+            percentiles = {t: v for t, v in rows.items() if "Percentile" in t}
             with self.subTest(administration=pk):
-                self.assertEqual(differences, [])
-            if any("Percentile" in t for t in new["rows"]):
+                self.assertLessEqual(set(percentiles.values()), allowed)
+            if percentiles:
                 with_percentiles += 1
         # guard against a vacuous pass
         self.assertGreater(with_percentiles, 20)
