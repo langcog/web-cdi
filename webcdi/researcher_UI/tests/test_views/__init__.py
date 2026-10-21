@@ -15,6 +15,7 @@ from .views_tests import CdiFormatDownloadTest, EmptySelectionDownloadTest  # no
 from .views_tests import NoCompletedDownloadTest  # noqa
 from .views_tests import RepeatedItemLabelDownloadTest  # noqa
 from .views_tests import DownloadCleanupTest  # noqa
+from .views_tests import CompletedNotReadyDownloadTest  # noqa
 from .views_tests import (AdminNewTest, ConsoleTest,  # ßnoqa
                           StudyCreateViewTest)
 from .cross_researcher import CrossResearcherAccessTest  # noqa

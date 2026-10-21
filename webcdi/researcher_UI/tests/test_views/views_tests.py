@@ -638,7 +638,8 @@ class EmptySelectionDownloadTest(TestCase):
 class NoCompletedDownloadTest(TestCase):
     """#741: data and summary downloads of only incomplete administrations
     (selected, or a whole group with none completed) returned a 500. They
-    should go back to the group page with a message instead."""
+    should go back to the group page with a message instead. #757: the same
+    for CAT groups and for the scoring-format (zip) download."""
 
     fixtures = [
         "researcher_UI/fixtures/researcher_UI_test_fixtures.json",
@@ -646,14 +647,18 @@ class NoCompletedDownloadTest(TestCase):
     ]
 
     def test_no_completed_administrations(self):
-        from django.contrib.messages import get_messages
-
         user = User.objects.create_user(username="nocompl", password=random_password())
         Researcher.objects.get_or_create(user=user)
         self.client.force_login(user)
-        instrument = Instrument.objects.get(name="English_WS")
+        for name in ["English_WS", "English_CAT"]:
+            self.check_no_completed(user, name)
+
+    def check_no_completed(self, user, name):
+        from django.contrib.messages import get_messages
+
+        instrument = Instrument.objects.get(name=name)
         study = Study.objects.create(
-            researcher=user, name="no completed English_WS", instrument=instrument,
+            researcher=user, name=f"no completed {name}", instrument=instrument,
             min_age=instrument.min_age, max_age=instrument.max_age,
         )
         generate_fake_results(study, 2)
@@ -664,11 +669,15 @@ class NoCompletedDownloadTest(TestCase):
             ("download-selected", True),
             ("download-selected-adjusted", True),
             ("download-selected-summary", True),
+            ("download-study-scoring-selected", True),
             ("download-study-csv", False),
             ("download-study-csv-adjusted", False),
             ("download-summary-csv", False),
+            ("download-study-scoring", False),
         ]:
-            with self.subTest(action=action):
+            if "scoring" in action and instrument.form in settings.CAT_FORMS:
+                continue  # refused for CAT forms; see CompletedNotReadyDownloadTest
+            with self.subTest(instrument=name, action=action):
                 payload = {action: True}
                 if selected:
                     payload["select_col"] = ids
@@ -815,3 +824,136 @@ class DownloadCleanupTest(TestCase):
         row = self.download("download-summary-csv")
         self.assertEqual(row["child_ethnicity"], "")
         self.assertEqual(row["other_languages"], "")
+
+
+class CompletedNotReadyDownloadTest(TestCase):
+    """#757: downloads of completed administrations that are missing
+    something the download expected returned a 500."""
+
+    fixtures = [
+        "researcher_UI/fixtures/researcher_UI_test_fixtures.json",
+        "cdi_forms/fixtures/cdi_forms_test_fixtures.json",
+    ]
+
+    def setUp(self):
+        self.user = User.objects.create_user(
+            username="notready", password=random_password()
+        )
+        Researcher.objects.get_or_create(user=self.user)
+        self.client.force_login(self.user)
+
+    def make_study(self, name):
+        instrument = Instrument.objects.get(name=name)
+        study = Study.objects.create(
+            researcher=self.user, name=f"not ready {name}", instrument=instrument,
+            min_age=instrument.min_age, max_age=instrument.max_age,
+        )
+        generate_fake_results(study, 2)
+        return study
+
+    def test_cat_without_cat_responses(self):
+        # completed CAT administrations with no CatResponse (e.g. finished
+        # the background pages only) raised KeyError: 'administration_id'
+        import csv
+        import io
+
+        from cdi_forms.cat_forms.models import CatResponse
+
+        study = self.make_study("English_CAT")
+        self.assertFalse(CatResponse.objects.filter(administration__study=study).exists())
+        url = reverse("researcher_ui:console_study", kwargs={"pk": study.pk})
+        for action in [
+            "download-study-csv",
+            "download-study-csv-adjusted",
+            "download-summary-csv",
+        ]:
+            with self.subTest(action=action):
+                response = self.client.post(url, {action: True})
+                self.assertEqual(response.status_code, 200)
+                rows = list(csv.DictReader(io.StringIO(response.content.decode())))
+                self.assertEqual(len(rows), 2)
+                self.assertTrue(all(r["est_theta"] == "" for r in rows))
+
+        # one administration with a CAT response: its theta and words come
+        # through, the other row stays blank
+        administration = Administration.objects.filter(study=study).first()
+        CatResponse.objects.create(
+            administration=administration,
+            administered_words=["ball"],
+            administered_responses=[True],
+            est_theta=0.5,
+        )
+        response = self.client.post(url, {"download-study-csv": True})
+        self.assertEqual(response.status_code, 200)
+        rows = list(csv.DictReader(io.StringIO(response.content.decode())))
+        self.assertEqual(
+            sorted((r["est_theta"], r["ball"]) for r in rows),
+            [("", ""), ("0.5", "True")],
+        )
+
+    def test_summary_before_scoring(self):
+        # completed but not yet scored (the scoring job runs every 10
+        # minutes): back to the group page with a message, not a 500
+        from django.contrib.messages import get_messages
+
+        from researcher_UI.models import SummaryData
+
+        study = self.make_study("English_WS")
+        SummaryData.objects.filter(administration__study=study).delete()
+        Administration.objects.filter(study=study).update(scored=False)
+        ids = [str(pk) for pk in Administration.objects.filter(study=study).values_list("pk", flat=True)]
+        url = reverse("researcher_ui:console_study", kwargs={"pk": study.pk})
+        for payload in [
+            {"download-summary-csv": True},
+            {"download-selected-summary": True, "select_col": ids},
+        ]:
+            with self.subTest(payload=payload):
+                response = self.client.post(url, payload)
+                self.assertRedirects(response, url, fetch_redirect_response=False)
+                self.assertTrue(
+                    any(
+                        "not been scored yet" in str(m)
+                        for m in get_messages(response.wsgi_request)
+                    )
+                )
+
+    def test_scoring_format_refused_for_cat_forms(self):
+        # CAT forms have no item list, so the CDI scoring-program (zip)
+        # download raised AssertionError in model_map (500); staging showed
+        # it for English_CAT2. Both CAT form codes go back with a message.
+        from django.contrib.messages import get_messages
+
+        cat2 = Instrument.objects.get(name="English_CAT")
+        cat2.pk = cat2.name = "English_CAT2"
+        cat2.form = "CAT2"
+        cat2.save()
+        self.assertEqual(sorted(settings.CAT_FORMS), ["CAT", "CAT2"])
+        for name in ["English_CAT", "English_CAT2"]:
+            study = self.make_study(name)
+            ids = [str(pk) for pk in Administration.objects.filter(study=study).values_list("pk", flat=True)]
+            url = reverse("researcher_ui:console_study", kwargs={"pk": study.pk})
+            for payload in [
+                {"download-study-scoring": True},
+                {"download-study-scoring-selected": True, "select_col": ids},
+            ]:
+                with self.subTest(instrument=name, payload=payload):
+                    response = self.client.post(url, payload)
+                    self.assertRedirects(response, url, fetch_redirect_response=False)
+                    self.assertIn(
+                        "The CDI scoring-program format is not available for CAT forms. Please use the items download.",
+                        [str(m) for m in get_messages(response.wsgi_request)],
+                    )
+
+    def test_summary_for_form_without_scores(self):
+        # Argentine Spanish WG has no scoring definitions, so it never has
+        # summary scores; say so rather than "try again shortly"
+        from django.contrib.messages import get_messages
+
+        study = self.make_study("Argentine_Spanish_WG")
+        url = reverse("researcher_ui:console_study", kwargs={"pk": study.pk})
+        response = self.client.post(url, {"download-summary-csv": True})
+        self.assertRedirects(response, url, fetch_redirect_response=False)
+        self.assertIn(
+            "This form has no summary scores. Please use the items download.",
+            [str(m) for m in get_messages(response.wsgi_request)],
+        )

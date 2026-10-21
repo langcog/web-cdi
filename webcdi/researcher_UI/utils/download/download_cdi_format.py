@@ -4,6 +4,8 @@ from io import BytesIO
 
 import numpy as np
 import pandas as pd
+from django.conf import settings
+from django.contrib import messages
 from django.http import HttpResponse
 from django.utils.translation import gettext_lazy as _
 
@@ -17,12 +19,28 @@ from researcher_UI.utils.write_to_zip import write_to_zip
 def download_cdi_format(request, study_obj, administrations=None):
     outfile = BytesIO()
 
+    if study_obj.instrument.form in settings.CAT_FORMS:
+        # CAT forms have no fixed item list, so there is no scoring-program
+        # file to write (this used to be an AssertionError 500, #757)
+        messages.info(
+            request,
+            "The CDI scoring-program format is not available for CAT forms. Please use the items download.",
+        )
+        return None
+
     if administrations is not None:
         completed_admins = administrations.filter(completed=True)
     else:
         completed_admins = Administration.objects.filter(
             study=study_obj, completed=True
         )
+    if not completed_admins.exists():
+        # back to the group page with a message, as for the other downloads (#757)
+        messages.info(
+            request,
+            "None of these administrations has been completed yet, so there is nothing to download.",
+        )
+        return None
 
     # vocabulary item IDs are "item_1" in most instruments, "item1" in some
     # (e.g. Argentine Spanish WS)

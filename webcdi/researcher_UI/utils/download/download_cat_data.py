@@ -1,6 +1,7 @@
 import logging
 
 import pandas as pd
+from django.contrib import messages
 from django.db.models import Q
 from django.http import HttpResponse
 
@@ -30,6 +31,13 @@ def download_cat_data(
         if administrations is not None
         else Administration.objects.filter(study=study_obj, is_active=True)
     )
+    if not administrations.filter(completed=True).exists():
+        # back to the group page with a message, as for the other downloads (#757)
+        messages.info(
+            request,
+            "None of these administrations has been completed yet, so there is nothing to download.",
+        )
+        return None
 
     admin_header = format_admin_header(study_obj)
     admin_data = format_admin_data(pd, study_obj, administrations, admin_header)
@@ -70,7 +78,11 @@ def download_cat_data(
         rows.append(row)
 
     answer_rows = rows
-    pd_answers = pd.DataFrame.from_dict(rows)
+    # with no CAT responses (e.g. only the background pages were finished)
+    # the frame needs its key column for the merges below (#757)
+    pd_answers = pd.DataFrame.from_dict(rows) if rows else pd.DataFrame(
+        columns=["administration_id", "est_theta"]
+    )
 
     pd_background_answers = pd.merge(
         pd_background_data, pd_answers, how="outer", on="administration_id"
@@ -83,7 +95,7 @@ def download_cat_data(
     # Get PD Norms
     pd_norms = get_pd_norms(study_obj, administrations, adjusted, answer_rows)
 
-    if not pd_norms is None:
+    if pd_norms is not None and not pd_norms.empty:
         combined_data = pd.merge(
             combined_data, pd_norms, how="outer", on="administration_id"
         )

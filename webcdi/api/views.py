@@ -106,8 +106,10 @@ class BaseAPIView(StudyOwnerMixin, TemplateView):
         # Add scoring
         melted_scores = get_study_scores(administrations)
         if len(melted_scores) < 1:
-            return json.dumps(
-                {"Error": f"There are no data in the study(ies) to report"}
+            # nothing scored yet, or a form with no scoring definitions (e.g.
+            # Argentine Spanish WG): export the items, scores empty (#757)
+            melted_scores = pd.DataFrame(
+                {"administration_id": pd.Series(dtype="int64")}
             )
         score_header = get_score_headers(study_obj, adjusted=adjusted)
         melted_scores.set_index("administration_id")
