@@ -2,6 +2,7 @@ import datetime
 import logging
 
 from django.contrib.auth.models import User
+from django.core import mail
 from django.core.management import call_command
 from django.test import TestCase, tag
 from django.urls import reverse
@@ -796,3 +797,5 @@ class UpdateSummaryViewTest(TestCase):
         self.assertEquals(
             10, Administration.objects.filter(study=self.study, scored=True).count()
         )
+        # progress goes to the log, not to anyone's inbox
+        self.assertEqual(len(mail.outbox), 0)
