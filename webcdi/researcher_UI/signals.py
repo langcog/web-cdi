@@ -10,7 +10,6 @@ from django.db.models.signals import m2m_changed, post_save, pre_save
 from django.dispatch import receiver
 
 from cdi_forms.scores import update_summary_scores
-# from registration.models import RegistrationProfile
 from researcher_UI.models import Administration, Researcher
 
 logger = logging.getLogger("debug")
