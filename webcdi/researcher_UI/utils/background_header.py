@@ -1,3 +1,58 @@
+import json
+
+from cdi_forms.utils import get_demographic_filename
+
+# Asked only by particular studies' background forms (e.g. Argentine Spanish,
+# English Centiment); listed in downloads only when the study's form has them.
+STUDY_SPECIFIC_FIELDS = [
+    "children_comforted",
+    "show_respect",
+    "close_bonds",
+    "parents_help_learn",
+    "play_learning",
+    "explore_experiment",
+    "do_as_told",
+    "read_at_home",
+    "teach_alphbet",
+    "rhyming_games",
+    "read_for_pleasure",
+    "child_asks_for_reading",
+    "child_self_reads",
+    "child_asks_words_say",
+    "place_of_residence",
+    "primary_caregiver_occupation",
+    "primary_caregiver_occupation_description",
+    "secondary_caregiver_occupation",
+    "secondary_caregiver_occupation_description",
+    "kindergarten_since_when",
+    "kindergarten_hpd",
+    "kindergarten_dpw",
+]
+
+
+def form_fields(study_obj):
+    """Field names in the study's background form, or None if it can't be read."""
+    try:
+        with open(get_demographic_filename(study_obj), encoding="utf-8") as f:
+            pages = json.load(f)
+    except (OSError, ValueError):
+        return None
+    found = set()
+
+    def walk(node):
+        if isinstance(node, dict):
+            if isinstance(node.get("field"), str):
+                found.add(node["field"])
+            for v in node.values():
+                walk(v)
+        elif isinstance(node, list):
+            for v in node:
+                walk(v)
+
+    walk(pages)
+    return found
+
+
 def get_background_header(study_obj):
     # Fetch background data variables
     background_header = [
@@ -78,6 +133,11 @@ def get_background_header(study_obj):
         "kindergarten_hpd",
         "kindergarten_dpw",
     ]
+    fields = form_fields(study_obj)
+    if fields is not None:
+        background_header = [
+            h for h in background_header if h not in STUDY_SPECIFIC_FIELDS or h in fields
+        ]
     if not study_obj.confirmation_questions:
         background_header.remove("birth_weight_confirmation_lb")
         background_header.remove("birth_weight_confirmation_kg")

@@ -20,4 +20,4 @@ from .views_tests import (AdminNewTest, ConsoleTest,  # ßnoqa
                           StudyCreateViewTest)
 from .cross_researcher import CrossResearcherAccessTest  # noqa
 from .console_markup import ConsoleMarkupTest  # noqa
-from .summary_download import SummaryDownloadTextTest  # noqa
+from .summary_download import StudySpecificBackgroundColumnsTest, SummaryDownloadTextTest  # noqa
