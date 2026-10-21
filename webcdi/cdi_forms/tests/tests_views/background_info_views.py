@@ -313,6 +313,52 @@ class CreateBackgroundInfoViewTest(TestCase):
         response = self.client.post(self.url, payload)
         self.assertEqual(response.status_code, 302)
 
+    def saved_due_date_fields(self, answer):
+        """Post early/late details with the given yes/no answer; return what is saved."""
+        url = reverse(
+            "create-new-background-info",
+            kwargs={"study_id": self.study.id, "bypass": True, "source_id": random_password()},
+        )
+        payload = {
+            "form_filler": "mother",
+            "child_dob": (
+                datetime.datetime.now() - datetime.timedelta(days=500)
+            ).strftime("%m/%d/%Y"),
+            "sex": "M",
+            "birth_weight_lb": "3.5",
+            "birth_order": 1,
+            "born_on_due_date": answer,
+            "early_or_late": "early",
+            "due_date_diff": 2,
+            "multi_birth_boolean": 0,
+            "primary_caregiver": "mother",
+            "mother_yob": 1966,
+            "mother_education": 18,
+            "annual_income": "25000-50000",
+            "caregiver_info": "1",
+            "other_languages_boolean": 0,
+            "ear_infections_boolean": 0,
+            "hearing_loss_boolean": 0,
+            "vision_problems_boolean": 0,
+            "illnesses_boolean": 0,
+            "services_boolean": 0,
+            "worried_boolean": 0,
+            "learning_disability_boolean": 0,
+        }
+        response = self.client.post(url, payload)
+        self.assertEqual(response.status_code, 302)
+        saved = BackgroundInfo.objects.filter(administration__study=self.study).latest("pk")
+        return saved.born_on_due_date, saved.early_or_late, saved.due_date_diff
+
+    def test_early_or_late_saved_with_yes(self):
+        self.assertEqual(self.saved_due_date_fields(1), (1, "early", 2))
+
+    def test_leftover_early_or_late_dropped_without_yes(self):
+        # #726: the details stay in the page (hidden) after switching away from "Yes"
+        for answer in (0, 2):
+            with self.subTest(born_on_due_date=answer):
+                self.assertEqual(self.saved_due_date_fields(answer), (answer, None, None))
+
     def test_too_young_post(self):
         now = (datetime.datetime.now() - datetime.timedelta(days=35)).strftime(
             "%m/%d/%Y"

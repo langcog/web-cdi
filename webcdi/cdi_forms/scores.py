@@ -87,6 +87,24 @@ def value_at(percentile, thresholds):
     return thresholds.get(p)
 
 
+def prematurity_adjustment(background_info):
+    """Months to add to the child's age for "adjusted" scores (#726).
+
+    Only when the parent answered "yes" to "Was your child born earlier or
+    later than their due date?" (born_on_due_date == 1) and gave early/late and
+    the number of weeks: -weeks/4 if early, +weeks/4 if late (whole months).
+    Otherwise 0, including leftover early/late values from another answer.
+    """
+    if background_info.born_on_due_date != 1 or not background_info.due_date_diff:
+        return 0
+    months = int(background_info.due_date_diff / 4)
+    if background_info.early_or_late == "early":
+        return -months
+    if background_info.early_or_late == "late":
+        return months
+    return 0
+
+
 class InstrumentScoring:
     """One instrument's scoring configuration, loaded with a handful of queries.
 
@@ -214,18 +232,8 @@ def _compute(administration_instance, scoring, values):
     values["benchmark cohort age"] = str(age)
 
     adjusted_benchmark_age = background_info.age
-    if adjusted_benchmark_age is not None and background_info.early_or_late == "early":
-        try:
-            adjusted_benchmark_age = adjusted_benchmark_age - int(
-                background_info.due_date_diff / 4
-            )
-        except Exception:
-            pass
-    elif adjusted_benchmark_age is not None and background_info.early_or_late == "late":
-        try:
-            adjusted_benchmark_age = age + int(background_info.due_date_diff / 4)
-        except Exception:
-            pass
+    if adjusted_benchmark_age is not None:
+        adjusted_benchmark_age += prematurity_adjustment(background_info)
     values["adjusted benchmark age"] = str(adjusted_benchmark_age)
 
     if adjusted_benchmark_age < min_age:

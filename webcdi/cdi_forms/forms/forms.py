@@ -371,6 +371,11 @@ class BackgroundForm(BetterModelForm):
                     self.add_error(
                         "born_on_due_date", _("Cannot be more than 4 weeks late")
                     )
+        # The parent's answer wins (#726): early/late details left over from an
+        # earlier "Yes" (hidden, but still submitted) are not saved.
+        if cleaned_data.get("born_on_due_date") != 1:
+            cleaned_data["early_or_late"] = None
+            cleaned_data["due_date_diff"] = None
 
         # Ensure that the 'age' field is not empty.
         if cleaned_data.get("age") == "":
