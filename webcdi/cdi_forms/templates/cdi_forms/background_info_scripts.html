@@ -20,6 +20,13 @@
             $(e).closest('.form-group').next('.dependent').css('display','none');
         });
     });
+    // Born early or late: answering anything but 'Yes' clears the hidden details (#726).
+    $('input[name="born_on_due_date"]').change(function(){
+        if (this.value != "1") {
+            $('input[name="early_or_late"]').prop('checked', false);
+            $('#id_due_date_diff').val('');
+        }
+    });
 
     $('#id_country').each(function(index, e){
         if(($(this).val() == "US") | ($(this).val() == "NL")){

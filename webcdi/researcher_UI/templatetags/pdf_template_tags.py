@@ -3,7 +3,7 @@ import logging
 from django import template
 from django.db.models import Max, Min, Q
 
-from cdi_forms.scores import NOT_COMPUTED, cat_norms
+from cdi_forms.scores import NOT_COMPUTED, cat_norms, prematurity_adjustment
 from researcher_UI.models import (Administration, Benchmark, SummaryData,
                                   administration_data)
 
@@ -96,16 +96,8 @@ def get_cat_benchmark(context, administration_id, data):
 @register.filter
 def get_adjusted_benchmark_age(administration_id):
     administration = Administration.objects.get(id=int(administration_id))
-    age = administration.backgroundinfo.age
-    if administration.backgroundinfo.early_or_late == "early":
-        age = administration.backgroundinfo.age - int(
-            (administration.backgroundinfo.due_date_diff or 0) / 4
-        )
-    elif administration.backgroundinfo.early_or_late == "late":
-        age = administration.backgroundinfo.age + int(
-            (administration.backgroundinfo.due_date_diff or 0) / 4
-        )
-    return age
+    background_info = administration.backgroundinfo
+    return background_info.age + prematurity_adjustment(background_info)
 
 
 @register.simple_tag(takes_context=True)
@@ -114,14 +106,7 @@ def get_benchmark_cohort_age(context, administration_id):
     age = administration.backgroundinfo.age
     if "adjusted" in context:
         if context["adjusted"]:
-            if administration.backgroundinfo.early_or_late == "early":
-                age = administration.backgroundinfo.age - int(
-                    (administration.backgroundinfo.due_date_diff or 0) / 4
-                )
-            elif administration.backgroundinfo.early_or_late == "late":
-                age = administration.backgroundinfo.age + int(
-                    (administration.backgroundinfo.due_date_diff or 0) / 4
-                )
+            age += prematurity_adjustment(administration.backgroundinfo)
     res = Benchmark.objects.filter(
         instrument=administration.study.instrument
     ).aggregate(Max("age"), Min("age"))

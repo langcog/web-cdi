@@ -4,7 +4,7 @@ import pandas as pd
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q
 
-from cdi_forms.scores import cat_norms
+from cdi_forms.scores import cat_norms, prematurity_adjustment
 from researcher_UI.models import Benchmark
 
 logger = logging.getLogger("debug")
@@ -27,16 +27,7 @@ def get_pd_norms(study_obj, administrations, adjusted, answer_rows):
             except ObjectDoesNotExist:
                 continue
             if adjusted:
-                logger.debug(f"Born on due date: {obj.backgroundinfo.born_on_due_date}")
-                if obj.backgroundinfo.born_on_due_date:
-                    if obj.backgroundinfo.early_or_late == "early":
-                        age = obj.backgroundinfo.age - int(
-                            (obj.backgroundinfo.due_date_diff or 0) / 4
-                        )
-                    elif obj.backgroundinfo.early_or_late == "late":
-                        age = obj.backgroundinfo.age + int(
-                            (obj.backgroundinfo.due_date_diff or 0) / 4
-                        )
+                age += prematurity_adjustment(obj.backgroundinfo)
                 row["Adjusted Age"] = age
 
                 logger.debug(f"Adjusted Age is {age}")
