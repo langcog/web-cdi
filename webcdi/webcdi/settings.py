@@ -431,7 +431,6 @@ DATE_INPUT_FORMATS = (
 )
 
 
-REGISTRATION_SUPPLEMENT_CLASS = "supplementtut.models.MyRegistrationSupplement"
 ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_OPEN = True
 
