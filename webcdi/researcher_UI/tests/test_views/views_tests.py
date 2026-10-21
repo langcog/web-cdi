@@ -749,3 +749,69 @@ class RepeatedItemLabelDownloadTest(TestCase):
                     [row[header.index(k)] if k in header else None for k in keys],
                     [values[i] for i in ordered],
                 )
+
+
+class DownloadCleanupTest(TestCase):
+    """#756: under pandas 3, `df[col].replace(..., inplace=True)` is a silent
+    no-op, so count scores missing from the stored summaries came out blank
+    instead of 0, and empty ethnicity/language lists came out as "[]"."""
+
+    fixtures = [
+        "researcher_UI/fixtures/researcher_UI_test_fixtures.json",
+        "cdi_forms/fixtures/cdi_forms_test_fixtures.json",
+    ]
+
+    def setUp(self):
+        from cdi_forms.models import BackgroundInfo
+        from researcher_UI.models import InstrumentScore, SummaryData
+
+        self.user = User.objects.create_user(
+            username="cleanup", password=random_password()
+        )
+        Researcher.objects.get_or_create(user=self.user)
+        self.client.force_login(self.user)
+        instrument = Instrument.objects.get(name="English_WS")
+        self.study = Study.objects.create(
+            researcher=self.user, name="cleanup English_WS", instrument=instrument,
+            min_age=instrument.min_age, max_age=instrument.max_age,
+        )
+        generate_fake_results(self.study, 2)
+        self.administration = Administration.objects.filter(study=self.study).first()
+        BackgroundInfo.objects.filter(administration=self.administration).update(
+            child_ethnicity=[], other_languages=[]
+        )
+        # a count score with no stored value for anyone in the group (e.g. a
+        # score added after these administrations were scored)
+        self.count_title = (
+            InstrumentScore.objects.filter(instrument=instrument, kind="count")
+            .first()
+            .title
+        )
+        SummaryData.objects.filter(
+            administration__study=self.study, title=self.count_title
+        ).delete()
+
+    def download(self, action):
+        import csv
+        import io
+
+        response = self.client.post(
+            reverse("researcher_ui:console_study", kwargs={"pk": self.study.pk}),
+            {action: True},
+        )
+        self.assertEqual(response.status_code, 200)
+        rows = list(csv.DictReader(io.StringIO(response.content.decode())))
+        return next(
+            r for r in rows if r["administration_id"] == str(self.administration.pk)
+        )
+
+    def test_items_csv(self):
+        row = self.download("download-study-csv")
+        self.assertEqual(row[self.count_title], "0")
+        self.assertEqual(row["child_ethnicity"], "")
+        self.assertEqual(row["other_languages"], "")
+
+    def test_summary_csv(self):
+        row = self.download("download-summary-csv")
+        self.assertEqual(row["child_ethnicity"], "")
+        self.assertEqual(row["other_languages"], "")
