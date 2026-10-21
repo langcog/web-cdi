@@ -4,14 +4,13 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.shortcuts import redirect
-from django.template.loader import get_template
 from django.urls import reverse
 from django.utils.safestring import mark_safe
-from django.utils.text import slugify
 from django.views.generic import DetailView
 from django_weasyprint import WeasyTemplateResponseMixin
 
 from researcher_UI.models import Study
+from researcher_UI.utils.clinical_report import clinical_template_name
 
 logger = logging.getLogger("debug")
 
@@ -24,13 +23,8 @@ class PDFAdministrationDetailView(LoginRequiredMixin, WeasyTemplateResponseMixin
         return Study.objects.filter(researcher=self.request.user)
 
     def get_template_names(self):
-        name = slugify(f"{self.object.instrument.verbose_name}")
-        template_name = f"researcher_UI/individual/{name}.html"
-        try:
-            get_template(template_name)
-            return [template_name]
-        except:
-            return ["researcher_UI/individual/no_clinical_template.html"]
+        template_name = clinical_template_name(self.object.instrument)
+        return [template_name or "researcher_UI/individual/no_clinical_template.html"]
 
     def completed_administrations(self):
         """The selected (?id=...) administrations that are completed; reports only cover those."""
@@ -52,18 +46,13 @@ class PDFAdministrationDetailView(LoginRequiredMixin, WeasyTemplateResponseMixin
 
     def get(self, request, *args, **kwargs) -> HttpResponse:
         self.object = self.get_object()
-        name = slugify(f"{self.object.instrument.verbose_name}")
-        template_name = f"researcher_UI/individual/{name}.html"
-        try:
-            get_template(template_name)
-        except Exception as e:
+        if not clinical_template_name(self.object.instrument):
             messages.info(
                 self.request,
                 mark_safe(
                     f"""
                     <h1>No Clinical Template Available</h1>
                     <p>We do not have a clinical template available for { self.object.instrument } studies.</p>
-                    <script>console.log("Internal Error {e}")</script>
                     """,
                 ),
             )

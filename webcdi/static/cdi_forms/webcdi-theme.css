@@ -150,6 +150,13 @@ select:focus-visible, textarea:focus-visible {
   background-color: var(--wcdi-check-wash);
   border-color: var(--wcdi-check);
 }
+/* question cards nest .alco-child1 inside .alco-child: draw one card, not two */
+.alco-child .alco-child1,
+.alco-child .alco-child1:hover,
+.alco-child .alco-child1:has(input:checked) {
+  background-color: transparent;
+  border-color: transparent;
+}
 input:checked ~ span {
   color: var(--wcdi-primary-deep);
   font-weight: 600;

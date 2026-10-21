@@ -8,6 +8,7 @@ from django_tables2 import RequestConfig
 from researcher_UI.forms import AddStudyForm
 from researcher_UI.models import Administration, PaymentCode, Study
 from researcher_UI.tables import StudyAdministrationTable
+from researcher_UI.utils.clinical_report import clinical_template_name
 
 logger = logging.getLogger("debug")
 
@@ -39,6 +40,9 @@ def get_helper(request, study_name, num_per_page):
                     )
             except ValueError:
                 query = Q(query) & Q(local_lab_id=request.GET["search"])
+        context["has_clinical_report"] = bool(
+            clinical_template_name(current_study.instrument)
+        )
         administration_table = StudyAdministrationTable(
             Administration.objects.filter(query)
         )

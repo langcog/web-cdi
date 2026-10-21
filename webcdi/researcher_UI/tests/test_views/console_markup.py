@@ -56,3 +56,21 @@ class ConsoleMarkupTest(TestCase):
         parsed.feed(page.content.decode())
         self.assertEqual(parsed.nested, 0)
         self.assertEqual(parsed.button_form.get("delete-selected"), "study-form")
+
+    def test_clinical_report_menu_matches_instrument(self):
+        # staging QA: instruments without a report template opened a tab that
+        # redirected back with a message; now the menu says so up front
+        user = User.objects.create_user("menu", password="x-test-only")
+        Researcher.objects.get_or_create(user=user)
+        self.client.force_login(user)
+        for language, has_report in [("English", True), ("Dutch", False)]:
+            with self.subTest(language=language):
+                study = Study.objects.create(
+                    researcher=user, name=f"menu {language}",
+                    instrument=Instrument.objects.get(language=language, form="WS"),
+                )
+                page = self.client.get(reverse("researcher_ui:console_study", args=[study.pk]))
+                self.assertEqual('id="id_select_clinical"' in page.content.decode(), has_report)
+                self.assertEqual(
+                    "not available for this instrument" in page.content.decode(), not has_report
+                )
