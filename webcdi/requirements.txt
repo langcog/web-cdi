@@ -17,7 +17,7 @@ confusable-homoglyphs==3.3.1
 coverage==7.14.1
 cssselect2==0.9.0
 defusedxml==0.7.1
-Django==5.2.16
+Django==5.2.18
 django-admin-rangefilter==0.13.5
 django-anymail[postmark]==15.2
 django-bootstrap3==26.1
