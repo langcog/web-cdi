@@ -1,5 +1,6 @@
 import datetime
 import logging
+from unittest import mock
 
 from django.contrib.auth.models import User
 from django.core import mail
@@ -625,8 +626,18 @@ class AdministrationUpdateViewTest(TestCase):
         self.study.send_completion_flag_url = "https://example.com"
         self.study.save()
         payload = {"btn-submit": True}
-        response = self.client.post(self.url, payload)
+        post = mock.Mock(return_value=mock.Mock(status_code=200))
+        with mock.patch(
+            "researcher_UI.utils.completion_notice.requests.post", post
+        ), self.captureOnCommitCallbacks(execute=True):
+            response = self.client.post(self.url, payload)
         self.assertEqual(response.status_code, 302)
+        # one completion notice (#723), with the placeholders filled in
+        post.assert_called_once()
+        self.assertEqual(post.call_args.args, ("https://example.com",))
+        self.assertEqual(post.call_args.kwargs["data"]["webcdi_completion_status"], "1")
+        self.administration.refresh_from_db()
+        self.assertEqual(self.administration.send_completion_flag_url_response, 200)
 
     def test_post_data(self):
         payload = {

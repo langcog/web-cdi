@@ -1,16 +1,15 @@
 import logging
 import sys
-import time
-from threading import Timer
 
-import requests
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
+from django.db import transaction
 from django.db.models.signals import m2m_changed, post_save, pre_save
 from django.dispatch import receiver
 
 from cdi_forms.scores import update_summary_scores
 from researcher_UI.models import Administration, Researcher
+from researcher_UI.utils.completion_notice import send_completion_notice
 
 logger = logging.getLogger("debug")
 
@@ -57,47 +56,28 @@ def post_save_completed_handler(sender, instance, created, **kwargs):
         update_summary_scores(instance)
 
 
+@receiver(pre_save, sender=Administration)
+def flag_completion_notice(sender, instance, **kwargs):
+    """Mark an existing administration that is becoming completed.
+
+    The flag is only ever set here and cleared by send_completion_notice_handler,
+    so a nested save (e.g. scoring from post_save_completed_handler) can't
+    hide the transition or send the notice twice. Newly created, already
+    completed administrations (data imports) are not notified.
+    """
+    if (
+        not kwargs.get("raw")
+        and instance.completed
+        and instance.id
+        and instance.study.send_completion_flag_url
+        and Administration.objects.filter(pk=instance.id, completed=False).exists()
+    ):
+        instance._completion_notice_due = True
+
+
 @receiver(post_save, sender=Administration)
-def check_send_completion_flag_url_response(sender, instance, created, **kwargs):
-
-    def delayed_check(count):
-        counter = int(count)
-        counter += 1
-
-        logger.debug(f"counter: {counter}")
-        if counter > 5:
-            logger.error(
-                f"Failed to get 200 status code for Administration { instance.id } within source_id { instance.backgroundinfo.source_id }"
-            )
-            return
-
-        r = requests.post(instance.study.send_completion_flag_url, data=data)
-        instance.send_completion_flag_url_response = int(r.status_code)
-
-        if instance.send_completion_flag_url_response != 200:
-            wait_for_it = Timer(counter * 600, delayed_check, f"{counter}")
-            wait_for_it.start()
-        else:
-            instance.save()
-
-    if not TESTING:
-        if instance.study.send_completion_flag_url and instance.completed:
-            data = instance.study.completion_data
-            for item in data:
-                data[item] = (
-                    data[item]
-                    .replace(
-                        "{{source_id}}",
-                        instance.backgroundinfo.source_id or "",
-                    )
-                    .replace(
-                        "{{event_id}}",
-                        instance.backgroundinfo.event_id or "",
-                    )
-                )
-
-            count = 0
-            if instance.send_completion_flag_url_response != 200:
-                logger.debug(f"count: {count}")
-                wait_for_it = Timer(5, delayed_check, f"{count}")
-                wait_for_it.start()
+def send_completion_notice_handler(sender, instance, created, **kwargs):
+    if getattr(instance, "_completion_notice_due", False):
+        instance._completion_notice_due = False
+        # retries, if needed, are made by crontab_scoring
+        transaction.on_commit(lambda: send_completion_notice(instance))

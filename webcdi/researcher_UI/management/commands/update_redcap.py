@@ -2,8 +2,8 @@ import logging
 
 from django.core.management.base import BaseCommand
 
-from cdi_forms.scores import update_summary_scores
 from researcher_UI.models import Administration
+from researcher_UI.utils.completion_notice import send_completion_notice
 
 logger = logging.getLogger(__name__)
 
@@ -15,8 +15,9 @@ class Command(BaseCommand):
         administrations = Administration.objects.filter(
             completed=True,
             send_completion_flag_url_response__isnull=True,
+            completion_notice_attempts=0,
             study__send_completion_flag_url__isnull=False,
         )
 
         for instance in administrations:
-            instance.save()
+            send_completion_notice(instance)

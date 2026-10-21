@@ -33,6 +33,12 @@ class Administration(models.Model):
         verbose_name="Completed Survey", default=False
     )  # Because we're adding the functionality to add background info after completing the survey, this tells us if the survey has been completed - note, it is only used when background info collected after survey
     send_completion_flag_url_response = models.IntegerField(blank=True, null=True)
+    completion_notice_attempts = models.PositiveSmallIntegerField(
+        default=0
+    )  # Completion notices sent to study.send_completion_flag_url so far
+    completion_notice_next_attempt = models.DateTimeField(
+        blank=True, null=True
+    )  # When the scheduled job should retry a failed completion notice (null = none pending)
     due_date = models.DateTimeField(
         verbose_name="Expiration date"
     )  # Expiration date for administration

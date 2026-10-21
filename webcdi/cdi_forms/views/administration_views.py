@@ -352,29 +352,8 @@ class AdministrationUpdateView(UpdateView):
             else:
                 self.object.completed = True
                 self.object.completed_date = timezone.now()
-
-                if self.object.study.completion_data:
-                    data = self.object.study.completion_data
-                    for item in data:
-                        data[item] = (
-                            data[item]
-                            .replace(
-                                "{{source_id}}",
-                                self.object.backgroundinfo.source_id or "",
-                            )
-                            .replace(
-                                "{{event_id}}",
-                                self.object.backgroundinfo.event_id or "",
-                            )
-                        )
-                    if self.object.study.send_completion_flag_url:
-                        r = requests.post(
-                            self.object.study.send_completion_flag_url, data=data
-                        )
-                        self.object.send_completion_flag_url_response = int(
-                            r.status_code
-                        )
-
+                # the completion notice, if the study has one, is sent by
+                # researcher_UI.signals on this transition to completed
                 self.object.save()
                 response = reverse(
                     "administration_summary_view", args=(self.object.url_hash,)

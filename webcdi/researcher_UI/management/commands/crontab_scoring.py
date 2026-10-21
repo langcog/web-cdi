@@ -4,6 +4,7 @@ from django.core.management.base import BaseCommand
 
 from cdi_forms.scores import InstrumentScoring, update_summary_scores
 from researcher_UI.models import Administration
+from researcher_UI.utils.completion_notice import retry_completion_notices
 
 logger = logging.getLogger(__name__)
 
@@ -27,3 +28,6 @@ class Command(BaseCommand):
                 # one bad administration must not stop scoring for the rest;
                 # it stays unscored and is retried (and logged) next run
                 logger.exception(f"Scoring failed for administration {instance.pk}")
+
+        # completion notices whose earlier attempts failed (#723)
+        retry_completion_notices()
