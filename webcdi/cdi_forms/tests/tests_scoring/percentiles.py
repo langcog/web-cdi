@@ -120,3 +120,110 @@ class CatScoringTest(TestCase):
         self.assertEqual(rows["Benchmark Theta Percentile-both"], "50")
         self.assertEqual(rows["Total Produced"], "100")
         self.assertEqual(rows["Total Produced Percentile-both"], "50")
+
+
+@tag("scoring")
+class PerScoreAgeRangeTest(TestCase):
+    """Each score is clamped to its own norm ages. English and Dutch CAT have
+    Total Produced norms from 8 months but Benchmark Theta norms from 12, so
+    children aged 8-11 crashed the scorer and stayed unscored."""
+
+    def test_child_younger_than_one_scores_norms(self):
+        instrument = Instrument.objects.create(
+            name="Agesish_CAT", verbose_name="Agesish CAT", language="Agesish",
+            form="CAT", min_age=8, max_age=36,
+        )
+        make_norms(instrument, "Total Produced", {50: (10, 10, 10)}, age=8)
+        make_norms(instrument, "Benchmark Theta", {50: (0.0, 0.0, 0.0)}, age=12)
+        study = Study.objects.create(
+            researcher=User.objects.create_user("ages-owner"), name="ages", instrument=instrument
+        )
+        admin = Administration.objects.create(
+            study=study, subject_id=1, repeat_num=1, url_hash="a" * 64,
+            completed=True, due_date=timezone.now(),
+        )
+        BackgroundInfo.objects.create(
+            administration=admin, **{**BACKGROUND_DEFAULTS, "age": 9, "sex": "F"}
+        )
+        CatResponse.objects.create(administration=admin, est_theta=0.5)
+        update_summary_scores(admin)
+        admin.refresh_from_db()
+        rows = dict(SummaryData.objects.filter(administration=admin).values_list("title", "value"))
+        self.assertTrue(admin.scored)
+        self.assertEqual(rows["Benchmark Theta Percentile-both"], "50")  # 12-month norms
+
+
+@tag("scoring")
+class ScoringCommandsKeepGoingTest(TestCase):
+    """One administration that fails to score must not stop the others."""
+
+    def test_scheduled_scoring_skips_a_failure(self):
+        from unittest import mock
+
+        from django.core.management import call_command
+
+        from researcher_UI.management.commands import crontab_scoring
+
+        instrument = Instrument.objects.create(
+            name="Plain_WS", verbose_name="Plain WS", language="Plain", form="WS",
+            min_age=16, max_age=30,
+        )
+        study = Study.objects.create(
+            researcher=User.objects.create_user("keepgoing"), name="kg", instrument=instrument
+        )
+        admins = [
+            Administration.objects.create(
+                study=study, subject_id=n, repeat_num=1, url_hash=f"{n:x}".rjust(64, "b"),
+                completed=True, due_date=timezone.now(),
+            )
+            for n in (1, 2)
+        ]
+        real = crontab_scoring.update_summary_scores
+
+        def flaky(instance, scoring=None):
+            if instance.pk == admins[0].pk:
+                raise IndexError("broken norms")
+            return real(instance, scoring)
+
+        with mock.patch.object(crontab_scoring, "update_summary_scores", flaky), \
+                self.assertLogs("researcher_UI.management.commands.crontab_scoring", "ERROR"):
+            call_command("crontab_scoring")
+        for a in admins:
+            a.refresh_from_db()
+        self.assertFalse(admins[0].scored)
+        self.assertTrue(admins[1].scored)
+
+    def test_bulk_rescore_finishes_and_reports_failures(self):
+        from unittest import mock
+
+        from django.core.management import CommandError, call_command
+
+        from researcher_UI.management.commands import update_summary_data
+
+        instrument = Instrument.objects.create(
+            name="Bulk_WS", verbose_name="Bulk WS", language="Bulk", form="WS",
+            min_age=16, max_age=30,
+        )
+        study = Study.objects.create(
+            researcher=User.objects.create_user("bulk"), name="bulk", instrument=instrument
+        )
+        admins = [
+            Administration.objects.create(
+                study=study, subject_id=n, repeat_num=1, url_hash=f"{n:x}".rjust(64, "d"),
+                completed=True, due_date=timezone.now(),
+            )
+            for n in (1, 2)
+        ]
+        real = update_summary_data.update_summary_scores
+
+        def flaky(instance, scoring=None):
+            if instance.pk == admins[0].pk:
+                raise IndexError("broken norms")
+            return real(instance, scoring)
+
+        with mock.patch.object(update_summary_data, "update_summary_scores", flaky), \
+                self.assertLogs("researcher_UI.management.commands.update_summary_data", "ERROR"), \
+                self.assertRaisesMessage(CommandError, "1 administrations failed"):
+            call_command("update_summary_data", study_id=study.pk)
+        admins[1].refresh_from_db()
+        self.assertTrue(admins[1].scored)

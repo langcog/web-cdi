@@ -21,4 +21,9 @@ class Command(BaseCommand):
             instrument = instance.study.instrument
             if instrument.pk not in scoring:
                 scoring[instrument.pk] = InstrumentScoring(instrument)
-            update_summary_scores(instance, scoring[instrument.pk])
+            try:
+                update_summary_scores(instance, scoring[instrument.pk])
+            except Exception:
+                # one bad administration must not stop scoring for the rest;
+                # it stays unscored and is retried (and logged) next run
+                logger.exception(f"Scoring failed for administration {instance.pk}")

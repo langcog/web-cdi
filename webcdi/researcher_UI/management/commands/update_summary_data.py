@@ -1,10 +1,13 @@
 import datetime
+import logging
 
-from django.core.management.base import BaseCommand
+from django.core.management.base import BaseCommand, CommandError
 from django.db.models import Q
 
 from cdi_forms.scores import InstrumentScoring, update_summary_scores
 from researcher_UI.models import Administration, Study
+
+logger = logging.getLogger(__name__)
 
 
 class Command(BaseCommand):
@@ -30,15 +33,25 @@ class Command(BaseCommand):
 
         total = administrations.count()
         count = 0
+        failed = []
         scoring = {}  # instrument pk -> InstrumentScoring, loaded once per run
         for instance in administrations.select_related("study__instrument"):
             count += 1
             instrument = instance.study.instrument
             if instrument.pk not in scoring:
                 scoring[instrument.pk] = InstrumentScoring(instrument)
-            update_summary_scores(instance, scoring[instrument.pk])
+            try:
+                update_summary_scores(instance, scoring[instrument.pk])
+            except Exception:
+                # keep going: one bad administration must not stop a full rescore
+                logger.exception(f"Scoring failed for administration {instance.pk}")
+                failed.append(instance.pk)
             if count % 1000 == 0:
                 self.stdout.write(f"{count} of {total} rescored")
 
         # progress goes to the job log (Cloud Run); failures alert via monitoring
         self.stdout.write(f"COMPLETED at {datetime.datetime.now()}: {count} rescored")
+        if failed:
+            raise CommandError(
+                f"{len(failed)} administrations failed to score (see log): {failed[:50]}"
+            )
