@@ -664,7 +664,7 @@ class UpdateAdministrationDataItemTest(TestCase):
             repeat_num=1,
             url_hash="0123456789012345678901234567890123456789012345678901234567890123",
             completed=False,
-            due_date=timezone.now(),
+            due_date=timezone.now() + datetime.timedelta(days=14),
         )
 
         BackgroundInfo.objects.create(
@@ -765,6 +765,61 @@ class UpdateAdministrationDataItemTest(TestCase):
             administration=self.administration, item_ID="item_761"
         )
         self.assertEqual(item.value, "complex")
+
+    def assert_refused(self, administration):
+        # #739: no item changes once the administration is completed or expired
+        administration_data.objects.create(
+            administration=administration, item_ID="item_2", value="produces"
+        )
+        last_modified = Administration.objects.get(pk=administration.pk).last_modified
+        for payload in [
+            {"check": "true", "item": "item_1", "value": "produces"},  # add
+            {"check": "true", "item": "item_2", "value": "understands"},  # change
+            {"check": "false", "item": "item_2"},  # remove
+        ]:
+            payload["hash_id"] = administration.url_hash
+            response = self.client.post(self.url, payload)
+            self.assertEqual(response.status_code, 409, payload)
+        self.assertEqual(
+            list(
+                administration_data.objects.filter(
+                    administration=administration
+                ).values_list("item_ID", "value")
+            ),
+            [("item_2", "produces")],
+        )
+        self.assertEqual(
+            Administration.objects.get(pk=administration.pk).last_modified,
+            last_modified,
+        )
+
+    def test_completed_administration_refused(self):
+        self.administration.completed = True
+        self.administration.save()
+        self.assert_refused(self.administration)
+
+    def test_expired_administration_refused(self):
+        self.administration.due_date = timezone.now() - datetime.timedelta(minutes=1)
+        self.administration.save()
+        self.assert_refused(self.administration)
+
+    def test_open_administration_accepted(self):
+        payload = {
+            "hash_id": self.administration.url_hash,
+            "check": "true",
+            "item": "item_1",
+            "value": "produces",
+        }
+        response = self.client.post(self.url, payload)
+        self.assertEqual(response.status_code, 200)
+        payload = {"hash_id": self.administration.url_hash, "check": "false", "item": "item_1"}
+        response = self.client.post(self.url, payload)
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(
+            administration_data.objects.filter(
+                administration=self.administration
+            ).exists()
+        )
 
 
 class UpdateSummaryViewTest(TestCase):
