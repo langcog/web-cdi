@@ -121,6 +121,46 @@ class StudyAPIViewTest(TestCase):
                     [record[k] for k in keys], [values[i] for i in ordered]
                 )
 
+    def test_count_scores_and_empty_lists(self):
+        # #756: pandas-3 in-place replaces were no-ops, so a count score with
+        # no stored value came out blank (not 0) and empty lists as "[]"
+        from cdi_forms.models import BackgroundInfo
+        from researcher_UI.models import InstrumentScore, SummaryData
+
+        instrument = Instrument.objects.get(name="English_WS")
+        study = Study.objects.create(
+            researcher=self.user, name="cleanup English_WS", instrument=instrument
+        )
+        generate_fake_results(study, 2)
+        administration = Administration.objects.filter(study=study).first()
+        BackgroundInfo.objects.filter(administration=administration).update(
+            child_ethnicity=[], other_languages=[]
+        )
+        count_title = (
+            InstrumentScore.objects.filter(instrument=instrument, kind="count")
+            .first()
+            .title
+        )
+        SummaryData.objects.filter(
+            administration__study=study, title=count_title
+        ).delete()
+
+        response = self.client.generic(
+            "POST",
+            reverse("api:study_api", kwargs={"pk": study.id}),
+            json.dumps(self.payload),
+        )
+        self.assertEqual(response.status_code, 200)
+        record = next(
+            r
+            for r in response.json().values()
+            if r["administration_id"] == administration.pk
+        )
+        # counts are stored as strings ("0", "12"), like the scorer writes them
+        self.assertEqual(record[count_title], "0")
+        self.assertEqual(record["child_ethnicity"], "")
+        self.assertEqual(record["other_languages"], "")
+
     def test_english_study_api(self):
         response = self.client.generic(
             "POST", self.english_url, json.dumps(self.payload)

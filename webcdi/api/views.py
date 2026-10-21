@@ -119,10 +119,12 @@ class BaseAPIView(StudyOwnerMixin, TemplateView):
 
         for instance in InstrumentScore.objects.filter(instrument=study_obj.instrument):
             if instance.kind == "count":
-                melted_scores[instance.title].replace(
-                    r"^\s*$", 0, regex=True, inplace=True
+                # assign: an in-place replace on a column is a no-op in pandas 3
+                melted_scores[instance.title] = (
+                    melted_scores[instance.title]
+                    .replace(r"^\s*$", "0", regex=True)
+                    .replace(np.nan, "0")
                 )
-                melted_scores[instance.title].replace(np.nan, 0, inplace=True)
 
         try:
             background_answers1 = pd.merge(
@@ -181,8 +183,8 @@ class BaseAPIView(StudyOwnerMixin, TemplateView):
 
         #combined_data = combined_data.replace("nan", "", regex=True)
         #combined_data = combined_data.replace("None", "", regex=True)
-        combined_data["child_ethnicity"].replace("[]", "", inplace=True)
-        combined_data["other_languages"].replace("[]", "", inplace=True)
+        combined_data["child_ethnicity"] = combined_data["child_ethnicity"].replace("[]", "")
+        combined_data["other_languages"] = combined_data["other_languages"].replace("[]", "")
 
         # Turn pandas dataframe into a CSV
         return combined_data.transpose().to_json()
