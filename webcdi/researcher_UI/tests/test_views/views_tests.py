@@ -633,3 +633,48 @@ class EmptySelectionDownloadTest(TestCase):
                         "Select at least one administration to download.",
                         [str(m) for m in get_messages(response.wsgi_request)],
                     )
+
+
+class NoCompletedDownloadTest(TestCase):
+    """#741: data and summary downloads of only incomplete administrations
+    (selected, or a whole group with none completed) returned a 500. They
+    should go back to the group page with a message instead."""
+
+    fixtures = [
+        "researcher_UI/fixtures/researcher_UI_test_fixtures.json",
+        "cdi_forms/fixtures/cdi_forms_test_fixtures.json",
+    ]
+
+    def test_no_completed_administrations(self):
+        from django.contrib.messages import get_messages
+
+        user = User.objects.create_user(username="nocompl", password=random_password())
+        Researcher.objects.get_or_create(user=user)
+        self.client.force_login(user)
+        instrument = Instrument.objects.get(name="English_WS")
+        study = Study.objects.create(
+            researcher=user, name="no completed English_WS", instrument=instrument,
+            min_age=instrument.min_age, max_age=instrument.max_age,
+        )
+        generate_fake_results(study, 2)
+        Administration.objects.filter(study=study).update(completed=False)
+        ids = [str(pk) for pk in Administration.objects.filter(study=study).values_list("pk", flat=True)]
+        url = reverse("researcher_ui:console_study", kwargs={"pk": study.pk})
+        for action, selected in [
+            ("download-selected", True),
+            ("download-selected-adjusted", True),
+            ("download-selected-summary", True),
+            ("download-study-csv", False),
+            ("download-study-csv-adjusted", False),
+            ("download-summary-csv", False),
+        ]:
+            with self.subTest(action=action):
+                payload = {action: True}
+                if selected:
+                    payload["select_col"] = ids
+                response = self.client.post(url, payload)
+                self.assertRedirects(response, url, fetch_redirect_response=False)
+                self.assertIn(
+                    "None of these administrations has been completed yet, so there is nothing to download.",
+                    [str(m) for m in get_messages(response.wsgi_request)],
+                )
