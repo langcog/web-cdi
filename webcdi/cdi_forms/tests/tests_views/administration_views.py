@@ -72,6 +72,18 @@ class AdministrationSummaryViewTest(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
+    def test_jquery_loads_before_bootstrap(self):
+        # staging QA: "Show Me My Answers" did nothing because Bootstrap's JS
+        # (which wires up the collapse toggle) ran before jQuery existed
+        generate_fake_results(self.study, 1)
+        administration = Administration.objects.filter(completed=True)[0]
+        url = reverse(
+            "administration_summary_view", kwargs={"hash_id": administration.url_hash}
+        )
+        page = self.client.get(url).content.decode()
+        self.assertIn("Show Me My Answers", page)  # the summary page, not "expired"
+        self.assertLess(page.index("jquery-3.7.1.min.js"), page.index("bootstrap/bootstrap.min.js"))
+
     def test_completed_WG_get(self):
         self.client.force_login(self.user)
         instrument = Instrument.objects.get(
