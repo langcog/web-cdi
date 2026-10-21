@@ -12,7 +12,7 @@ from researcher_UI.models import (Administration, InstrumentScore,
                                   administration_data)
 from researcher_UI.utils import (format_admin_data, format_admin_header,
                                  get_background_header, get_score_headers,
-                                 get_study_scores)
+                                 get_study_scores, unique_item_labels)
 
 
 def download_data(
@@ -61,7 +61,12 @@ def download_data(
         .filter(instrument=study_obj.instrument)
         .distinct()
     )
-    new_headers = {x["itemID"]: x["item"] for x in new_headers}
+    # repeated labels get _1, _2, ... so each item keeps its own column (#755)
+    new_headers = unique_item_labels(
+        model_header,
+        {x["itemID"]: x["item"] for x in new_headers},
+        taken=admin_header + background_header,
+    )
     model_header = [new_headers.get(n, n) for n in model_header]
 
     melted_answers.rename(columns=new_headers, inplace=True)

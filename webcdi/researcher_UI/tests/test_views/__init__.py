@@ -13,6 +13,7 @@ from .study_settings_views import AddStudyViewTest, UpdateStudyTest
 from .views_tests import OverflowTest  # noqa
 from .views_tests import CdiFormatDownloadTest, EmptySelectionDownloadTest  # noqa
 from .views_tests import NoCompletedDownloadTest  # noqa
+from .views_tests import RepeatedItemLabelDownloadTest  # noqa
 from .views_tests import (AdminNewTest, ConsoleTest,  # ßnoqa
                           StudyCreateViewTest)
 from .cross_researcher import CrossResearcherAccessTest  # noqa
