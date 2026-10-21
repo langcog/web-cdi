@@ -185,3 +185,29 @@ class StudyAPIViewTest(TestCase):
         self.assertEqual(
             response.json()["Error"], "You must select at least 1 completed survey"
         )
+
+    def test_instrument_without_scores(self):
+        # #757: Argentine Spanish WG has no scoring definitions, so its
+        # administrations never get summary scores and the export answered
+        # {"Error": "There are no data ..."} with no items at all
+        instrument = Instrument.objects.get(name="Argentine_Spanish_WG")
+        study = Study.objects.create(
+            researcher=self.user, name="no scores", instrument=instrument
+        )
+        generate_fake_results(study, 2)
+        response = self.client.generic(
+            "POST",
+            reverse("api:study_api", kwargs={"pk": study.id}),
+            json.dumps(self.payload),
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertNotIn("Error", response.json())
+        record = next(iter(response.json().values()))
+        administration = Administration.objects.get(pk=record["administration_id"])
+        item_id, value = administration_data.objects.filter(
+            administration=administration
+        ).values_list("item_ID", "value")[0]
+        label = Instrument_Forms.objects.get(
+            instrument=instrument, itemID=item_id
+        ).item
+        self.assertIn(label, record)

@@ -2,11 +2,11 @@ import numpy as np
 import pandas as pd
 from django.contrib import messages
 from django.contrib.sites.shortcuts import get_current_site
-from django.http import HttpResponse, HttpResponseServerError
+from django.http import HttpResponse
 from django.urls import reverse
 
 from cdi_forms.models import BackgroundInfo
-from researcher_UI.models import Administration
+from researcher_UI.models import Administration, InstrumentScore
 from researcher_UI.utils.background_header import get_background_header
 from researcher_UI.utils.format_admin import (format_admin_data,
                                               format_admin_header)
@@ -69,7 +69,20 @@ def download_summary(request, study_obj, administrations=None):
     # Add scoring
     melted_scores = get_study_scores(administrations)
     if len(melted_scores) < 1:
-        return HttpResponseServerError(f"There are no data in the study(ies) to report")
+        # back to the group page with a message instead of a 500 (#757)
+        if InstrumentScore.objects.filter(instrument=study_obj.instrument).exists():
+            messages.info(
+                request,
+                "These administrations have not been scored yet. Scoring runs "
+                "automatically every 10 minutes, so please try again shortly. "
+                "The items download is available now.",
+            )
+        else:
+            messages.info(
+                request,
+                "This form has no summary scores. Please use the items download.",
+            )
+        return None
 
     score_header = get_score_headers(study_obj)
     melted_scores.set_index("administration_id")

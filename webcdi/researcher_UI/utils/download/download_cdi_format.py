@@ -4,6 +4,7 @@ from io import BytesIO
 
 import numpy as np
 import pandas as pd
+from django.contrib import messages
 from django.http import HttpResponse
 from django.utils.translation import gettext_lazy as _
 
@@ -23,6 +24,13 @@ def download_cdi_format(request, study_obj, administrations=None):
         completed_admins = Administration.objects.filter(
             study=study_obj, completed=True
         )
+    if not completed_admins.exists():
+        # back to the group page with a message, as for the other downloads (#757)
+        messages.info(
+            request,
+            "None of these administrations has been completed yet, so there is nothing to download.",
+        )
+        return None
 
     # vocabulary item IDs are "item_1" in most instruments, "item1" in some
     # (e.g. Argentine Spanish WS)
