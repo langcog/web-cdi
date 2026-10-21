@@ -192,3 +192,38 @@ class ScoringCommandsKeepGoingTest(TestCase):
             a.refresh_from_db()
         self.assertFalse(admins[0].scored)
         self.assertTrue(admins[1].scored)
+
+    def test_bulk_rescore_finishes_and_reports_failures(self):
+        from unittest import mock
+
+        from django.core.management import CommandError, call_command
+
+        from researcher_UI.management.commands import update_summary_data
+
+        instrument = Instrument.objects.create(
+            name="Bulk_WS", verbose_name="Bulk WS", language="Bulk", form="WS",
+            min_age=16, max_age=30,
+        )
+        study = Study.objects.create(
+            researcher=User.objects.create_user("bulk"), name="bulk", instrument=instrument
+        )
+        admins = [
+            Administration.objects.create(
+                study=study, subject_id=n, repeat_num=1, url_hash=f"{n:x}".rjust(64, "d"),
+                completed=True, due_date=timezone.now(),
+            )
+            for n in (1, 2)
+        ]
+        real = update_summary_data.update_summary_scores
+
+        def flaky(instance, scoring=None):
+            if instance.pk == admins[0].pk:
+                raise IndexError("broken norms")
+            return real(instance, scoring)
+
+        with mock.patch.object(update_summary_data, "update_summary_scores", flaky), \
+                self.assertLogs("researcher_UI.management.commands.update_summary_data", "ERROR"), \
+                self.assertRaisesMessage(CommandError, "1 administrations failed"):
+            call_command("update_summary_data", study_id=study.pk)
+        admins[1].refresh_from_db()
+        self.assertTrue(admins[1].scored)
