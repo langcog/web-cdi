@@ -262,7 +262,7 @@ class AdministrationUpdateViewTest(TestCase):
             repeat_num=1,
             url_hash="0123456789012345678901234567890123456789012345678901234567890123",
             completed=False,
-            due_date=timezone.now(),
+            due_date=timezone.now() + datetime.timedelta(days=14),
         )
 
         BackgroundInfo.objects.create(
@@ -308,6 +308,55 @@ class AdministrationUpdateViewTest(TestCase):
         self.administration.save()
         response = self.client.post(self.url)
         self.assertEqual(response.status_code, 302)
+
+    def test_expired_post_refused(self):
+        # #758: an expired, uncompleted form can't be saved or submitted
+        self.study.allow_payment = True
+        self.study.save()
+        PaymentCode.objects.create(
+            study=self.study,
+            payment_type="Amazon",
+            gift_amount=5.00,
+            gift_code="1234567890",
+        )
+        self.administration.due_date = timezone.now() - datetime.timedelta(minutes=1)
+        self.administration.page_number = 2
+        self.administration.save()
+        last_modified = Administration.objects.get(
+            pk=self.administration.pk
+        ).last_modified
+        summary_url = reverse(
+            "administration_summary_view", args=(self.administration.url_hash,)
+        )
+        for button, payload in [
+            ("save", {"btn-save": True}),
+            ("next", {"btn-next": True, "next": 5}),
+            ("previous", {"btn-previous": True, "previous": 1}),
+            ("submit", {"btn-submit": True}),
+        ]:
+            with self.subTest(button=button):
+                payload["item_1"] = "produces"
+                response = self.client.post(self.section_url(3), payload)
+                self.assertRedirects(
+                    response, summary_url, fetch_redirect_response=False
+                )
+                self.assertTemplateUsed(
+                    self.client.get(summary_url),
+                    "cdi_forms/administration_expired.html",
+                )
+                administration = Administration.objects.get(pk=self.administration.pk)
+                self.assertFalse(administration.completed)
+                self.assertFalse(administration.completedSurvey)
+                self.assertEqual(administration.page_number, 2)
+                self.assertEqual(administration.last_modified, last_modified)
+                self.assertFalse(
+                    administration_data.objects.filter(
+                        administration=self.administration
+                    ).exists()
+                )
+                self.assertIsNone(
+                    PaymentCode.objects.get(gift_code="1234567890").hash_id
+                )
 
     def test_btn_save_post(self):
         self.client.force_login(self.user)
@@ -604,7 +653,7 @@ class AdministrationUpdateViewTest(TestCase):
                 repeat_num=1,
                 url_hash=random_url_generator(),
                 completed=False,
-                due_date=timezone.now(),
+                due_date=timezone.now() + datetime.timedelta(days=14),
             )
             administration.save()
 
