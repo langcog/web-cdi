@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 from django.contrib import messages
 from django.contrib.sites.shortcuts import get_current_site
-from django.http import HttpResponse, HttpResponseServerError
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse
 
@@ -29,7 +29,12 @@ def download_data(
         else Administration.objects.filter(study=study_obj)
     )
     if not administrations.filter(completed=True).exists():
-        return HttpResponseServerError("You must select at least 1 completed survery")
+        # back to the group page (or admin changelist) with a message (#741)
+        messages.info(
+            request,
+            "None of these administrations has been completed yet, so there is nothing to download.",
+        )
+        return None
     model_header = get_model_header(study_obj.instrument.name)
 
     # Fetch administration variables
