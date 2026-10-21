@@ -14,7 +14,7 @@ from django_registration.backends.activation.views import RegistrationView
 
 from brookes.models import BrookesCode
 from researcher_UI.models import Researcher
-from webcdi.forms import SignUpForm
+from webcdi.forms import LoginForm, SignUpForm
 
 logger = logging.getLogger("debug")
 
@@ -59,6 +59,8 @@ class CustomRegistrationView(RegistrationView):
 
 
 class CustomLoginView(LoginView):
+    authentication_form = LoginForm
+
     def get_success_url(self) -> str:
         # We might want to message researchers their licence is about to expire
 

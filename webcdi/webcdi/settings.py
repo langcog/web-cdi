@@ -264,7 +264,13 @@ MIDDLEWARE = [
     "webcdi.middleware.AdminLocaleMiddleware",
 ]
 
-AUTHENTICATION_BACKENDS = ["django.contrib.auth.backends.ModelBackend"]
+# Log in with username or email (#722). ModelBackend stays listed so sessions
+# created before the change remain valid; it only matches exact usernames,
+# which UsernameOrEmailBackend already handles the same way.
+AUTHENTICATION_BACKENDS = [
+    "webcdi.backends.UsernameOrEmailBackend",
+    "django.contrib.auth.backends.ModelBackend",
+]
 
 AXES_ENABLED = False
 
