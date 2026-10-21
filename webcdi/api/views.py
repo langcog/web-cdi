@@ -21,6 +21,26 @@ from researcher_UI.utils import (format_admin_data, format_admin_header,
                                  get_study_scores)
 
 
+def unique_item_labels(item_ids, labels, taken=()):
+    """Map item IDs to their labels, made unique for use as JSON keys (#640).
+
+    Some forms use the same label for two items (e.g. a word listed as both a
+    noun and a verb). The first keeps the plain label; repeats get _1, _2, ...
+    in form order. Labels that are already unique are unchanged.
+    """
+    used = set(taken)
+    unique = {}
+    for item_id in item_ids:
+        label = labels.get(item_id, item_id)
+        candidate, n = label, 0
+        while candidate in used:
+            n += 1
+            candidate = f"{label}_{n}"
+        used.add(candidate)
+        unique[item_id] = candidate
+    return unique
+
+
 @method_decorator(csrf_exempt, name="dispatch")
 class BaseAPIView(StudyOwnerMixin, TemplateView):
     http_method_names = [
@@ -62,7 +82,11 @@ class BaseAPIView(StudyOwnerMixin, TemplateView):
             .filter(instrument=study_obj.instrument)
             .distinct()
         )
-        new_headers = {x["itemID"]: x["item"] for x in new_headers}
+        new_headers = unique_item_labels(
+            model_header,
+            {x["itemID"]: x["item"] for x in new_headers},
+            taken=admin_header + background_header,
+        )
         model_header = [new_headers.get(n, n) for n in model_header]
 
         melted_answers.rename(columns=new_headers, inplace=True)

@@ -2,10 +2,13 @@ import json
 import logging
 
 from django.contrib.auth.models import User
-from django.test import TestCase, tag
+from django.test import TestCase
 from django.urls import reverse
 
-from researcher_UI.models import Instrument, Study
+from cdi_forms.models import Instrument_Forms
+from cdi_forms.views import get_model_header
+from researcher_UI.models import (Administration, Instrument, Study,
+                                  administration_data)
 from researcher_UI.tests import generate_fake_results
 
 logger = logging.getLogger("selenium")
@@ -64,13 +67,59 @@ class StudyAPIViewTest(TestCase):
         generate_fake_results(self.study, 10)
         generate_fake_results(self.english_study, 10)
 
-    # Quarantined: fails in CI with pandas "DataFrame index must be unique for
-    # orient='columns'" (issue #640). Passes locally in isolation; only the
-    # full CI run trips it. Excluded from the gate until #640 is fixed.
-    @tag("known_failure")
     def test_study_api(self):
         response = self.client.generic("POST", self.url, json.dumps(self.payload))
         self.assertEqual(response.status_code, 200)
+
+    def test_repeated_item_labels(self):
+        # #640: some forms list the same word twice (e.g. as a noun and as a
+        # verb); the export keys items by label, which made duplicate keys
+        # and a 500 on pandas 3. Each item keeps its own value, and repeats
+        # are suffixed _1, _2, ... in form order.
+        for name in ["Dutch_WS", "Argentine_Spanish_WS"]:
+            with self.subTest(instrument=name):
+                instrument = Instrument.objects.get(name=name)
+                study = Study.objects.create(
+                    researcher=self.user, name=f"{name} labels", instrument=instrument
+                )
+                generate_fake_results(study, 2)
+                labels = {}
+                for item_id, label in Instrument_Forms.objects.filter(
+                    instrument=instrument
+                ).values_list("itemID", "item"):
+                    labels.setdefault(label, []).append(item_id)
+                label, item_ids = next(
+                    (k, v) for k, v in sorted(labels.items()) if len(v) > 1
+                )
+                administration = Administration.objects.filter(
+                    study=study, completed=True
+                ).first()
+                values = {}
+                for n, item_id in enumerate(item_ids):
+                    values[item_id] = f"value {n}"
+                    administration_data.objects.update_or_create(
+                        administration=administration,
+                        item_ID=item_id,
+                        defaults={"value": values[item_id]},
+                    )
+
+                response = self.client.generic(
+                    "POST",
+                    reverse("api:study_api", kwargs={"pk": study.id}),
+                    json.dumps(self.payload),
+                )
+                self.assertEqual(response.status_code, 200)
+                record = next(
+                    r
+                    for r in response.json().values()
+                    if r["administration_id"] == administration.pk
+                )
+                form_order = get_model_header(name)
+                ordered = sorted(item_ids, key=form_order.index)
+                keys = [label] + [f"{label}_{n}" for n in range(1, len(ordered))]
+                self.assertEqual(
+                    [record[k] for k in keys], [values[i] for i in ordered]
+                )
 
     def test_english_study_api(self):
         response = self.client.generic(

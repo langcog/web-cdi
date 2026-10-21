@@ -48,8 +48,7 @@ http://localhost:8001). Things it doesn't say:
 - **Randomized fixtures hide bugs:** some tests pick `Instrument...order_by("?")`,
   so a bug in one language/form shows up as intermittent CI failure. When CI
   flakes, suspect this first and add a test pinned to the failing instrument.
-- `known_failure` tag = quarantined bugs (#640 StudyAPI `to_json` duplicate
-  index).
+- `known_failure` tag = quarantined bugs (none at present; #640 was the last).
 - WeasyPrint PDF tests may error under `--parallel` but pass alone.
 - CAT: Django tests cover rendering/persistence for all 5 languages
   (`cat_forms/tests/browser_engine.py`); the engine itself is validated by
