@@ -107,8 +107,8 @@ def download_summary(request, study_obj, administrations=None):
 
     # Organize columns
     combined_data = combined_data[admin_header + background_header + score_header]
-    combined_data = combined_data.replace("nan", "", regex=True)
-    combined_data = combined_data.replace("None", "", regex=True)
+    # whole cells only: a substring replace turned "Fernanda" into "Ferda"
+    combined_data = combined_data.replace(r"^(nan|None)$", "", regex=True)
     combined_data["child_ethnicity"] = combined_data["child_ethnicity"].replace("[]", "")
     combined_data["other_languages"] = combined_data["other_languages"].replace("[]", "")
 
