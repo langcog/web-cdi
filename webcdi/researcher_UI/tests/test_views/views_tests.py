@@ -678,3 +678,74 @@ class NoCompletedDownloadTest(TestCase):
                     "None of these administrations has been completed yet, so there is nothing to download.",
                     [str(m) for m in get_messages(response.wsgi_request)],
                 )
+
+
+class RepeatedItemLabelDownloadTest(TestCase):
+    """#755: some forms use the same label for two items (Dutch WS "eten",
+    Argentine Spanish WS "como"). The item CSV renamed item columns to labels
+    and then selected by label, so the second item repeated the first item's
+    answers. Repeats now get _1, _2, ... in form order, as in the API (#747).
+    """
+
+    fixtures = [
+        "researcher_UI/fixtures/researcher_UI_test_fixtures.json",
+        "cdi_forms/fixtures/cdi_forms_test_fixtures.json",
+    ]
+
+    def test_each_item_keeps_its_own_value(self):
+        import csv
+        import io
+
+        from cdi_forms.models import Instrument_Forms
+        from cdi_forms.views import get_model_header
+        from researcher_UI.models import administration_data
+
+        user = User.objects.create_user(username="labels", password=random_password())
+        Researcher.objects.get_or_create(user=user)
+        self.client.force_login(user)
+        for name in ["Dutch_WS", "Argentine_Spanish_WS"]:
+            with self.subTest(instrument=name):
+                instrument = Instrument.objects.get(name=name)
+                study = Study.objects.create(
+                    researcher=user, name=f"labels {name}", instrument=instrument,
+                    min_age=instrument.min_age, max_age=instrument.max_age,
+                )
+                generate_fake_results(study, 2)
+                labels = {}
+                for item_id, label in Instrument_Forms.objects.filter(
+                    instrument=instrument
+                ).values_list("itemID", "item"):
+                    labels.setdefault(label, []).append(item_id)
+                label, item_ids = next(
+                    (k, v) for k, v in sorted(labels.items()) if len(v) > 1
+                )
+                administration = Administration.objects.filter(
+                    study=study, completed=True
+                ).first()
+                values = {}
+                for n, item_id in enumerate(item_ids):
+                    values[item_id] = f"value {n}"
+                    administration_data.objects.update_or_create(
+                        administration=administration,
+                        item_ID=item_id,
+                        defaults={"value": values[item_id]},
+                    )
+
+                response = self.client.post(
+                    reverse("researcher_ui:console_study", kwargs={"pk": study.pk}),
+                    {"download-study-csv": True},
+                )
+                self.assertEqual(response.status_code, 200)
+                rows = list(csv.reader(io.StringIO(response.content.decode())))
+                header = rows[0]
+                self.assertEqual(len(header), len(set(header)))
+                row = next(
+                    r for r in rows[1:]
+                    if r[header.index("administration_id")] == str(administration.pk)
+                )
+                ordered = sorted(item_ids, key=get_model_header(name).index)
+                keys = [label] + [f"{label}_{n}" for n in range(1, len(ordered))]
+                self.assertEqual(
+                    [row[header.index(k)] if k in header else None for k in keys],
+                    [values[i] for i in ordered],
+                )
