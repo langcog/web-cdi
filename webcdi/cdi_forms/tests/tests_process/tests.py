@@ -19,6 +19,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 from cdi_forms.models import *
 from researcher_UI.models import Demographic, Instrument, Study
+from researcher_UI.tests.utils import LiveServerFixturesMixin
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
@@ -74,7 +75,7 @@ class WebSiteOpensTests(LiveServerTestCase):
 
 
 @tag("selenium")
-class TestParentInterface(LiveServerTestCase):
+class TestParentInterface(LiveServerFixturesMixin, LiveServerTestCase):
     LiveServerTestCase.host = "web"
     fixtures = [
         "researcher_UI/fixtures/researcher_UI_test_fixtures.json",
