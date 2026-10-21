@@ -2,6 +2,7 @@ from .administration_data import AdministrationDataModelTest  # noqa
 from .administration_model import AdministrationModelTest  # noqa
 from .administration_summary import AdministrationSummaryModelTest  # noqa
 from .benchmark import BenchmarkModelTest  # noqa
+from .completion_notice import CompletionNoticeTest  # noqa
 from .demographic import DemographicModelTest  # noqa
 from .instrument import InstrumentModelTest  # noqa
 from .instrument_family import InstrumentFamilyModelTest  # noqa
