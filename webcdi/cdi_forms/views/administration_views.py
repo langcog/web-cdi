@@ -258,7 +258,9 @@ class AdministrationUpdateView(UpdateView):
         return super().get(request, *args, **kwargs)
 
     def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
-        if self.object.completed:
+        # an expired form is closed too, as in administer_cdi_form (#758);
+        # the summary page shows expired administrations the "expired" notice
+        if self.object.completed or self.object.due_date <= timezone.now():
             return redirect(
                 reverse("administration_summary_view", args=(self.object.url_hash,))
             )
