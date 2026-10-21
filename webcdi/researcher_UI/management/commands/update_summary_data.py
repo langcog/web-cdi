@@ -1,7 +1,5 @@
 import datetime
 
-from django.conf import settings
-from django.core.mail import EmailMessage
 from django.core.management.base import BaseCommand
 from django.db.models import Q
 
@@ -17,7 +15,6 @@ class Command(BaseCommand):
         parser.add_argument("-u", "--username", type=str)
 
     def handle(self, *args, **options):
-        subject = f"WebCDI Summary Data"
         query = Q()
         if options["study_id"]:
             study_obj = Study.objects.get(pk=options["study_id"])
@@ -31,36 +28,17 @@ class Command(BaseCommand):
 
         administrations = Administration.objects.filter(query).filter(completed=True)
 
+        total = administrations.count()
         count = 0
-        thousands = 0
         scoring = {}  # instrument pk -> InstrumentScoring, loaded once per run
         for instance in administrations.select_related("study__instrument"):
             count += 1
-            print(f"Processing item {count} of {len(administrations)}")
             instrument = instance.study.instrument
             if instrument.pk not in scoring:
                 scoring[instrument.pk] = InstrumentScoring(instrument)
             update_summary_scores(instance, scoring[instrument.pk])
-            if count == 1000:
-                thousands += 1
-                email = EmailMessage(
-                    subject=subject,
-                    body=f"%s of %s records processed at %s"
-                    % (
-                        thousands * count,
-                        len(administrations),
-                        datetime.datetime.now(),
-                    ),
-                    from_email=settings.DEFAULT_FROM_EMAIL,
-                    to=["hjsmehta@gmail.com"],
-                )
-                email.send()
-                count = 0
+            if count % 1000 == 0:
+                self.stdout.write(f"{count} of {total} rescored")
 
-        email = EmailMessage(
-            subject=subject,
-            body=f"COMPLETED at {datetime.datetime.now()} - {thousands * 1000 + count} Completed",
-            from_email=settings.DEFAULT_FROM_EMAIL,
-            to=["hjsmehta@gmail.com"],
-        )
-        email.send()
+        # progress goes to the job log (Cloud Run); failures alert via monitoring
+        self.stdout.write(f"COMPLETED at {datetime.datetime.now()}: {count} rescored")
