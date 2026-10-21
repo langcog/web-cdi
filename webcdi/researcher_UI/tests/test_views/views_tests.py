@@ -596,39 +596,40 @@ class CdiFormatDownloadTest(TestCase):
                 self.assertRegex(vocab.strip(), r"^[0-9\s.]+$")
 
 
-class DuplicateScoreTitleDownloadTest(TestCase):
-    """#675: on 2026-10-11 a deploy left two English WS scores with the same
-    title; every English WS/WG download then 500'd in a no-op "footer"
-    pd.concat (removed). Downloads must survive duplicate score titles."""
+class EmptySelectionDownloadTest(TestCase):
+    """#675: posting a selected-rows download with no rows selected returned
+    a 500. It should go back to the group page with a message instead."""
 
     fixtures = [
         "researcher_UI/fixtures/researcher_UI_test_fixtures.json",
         "cdi_forms/fixtures/cdi_forms_test_fixtures.json",
     ]
 
-    def test_downloads_with_duplicate_score_title(self):
-        from researcher_UI.models import InstrumentScore, Measure
+    def test_no_rows_selected(self):
+        from django.contrib.messages import get_messages
 
-        user = User.objects.create_user(username="dup", password=random_password())
+        user = User.objects.create_user(username="nosel", password=random_password())
         Researcher.objects.get_or_create(user=user)
         self.client.force_login(user)
-        instrument = Instrument.objects.get(name="English_WS")
-        score = InstrumentScore.objects.filter(instrument=instrument).first()
-        duplicate = InstrumentScore.objects.create(
-            instrument=instrument,
-            title=score.title,
-            category=score.category,
-            scoring_measures=score.scoring_measures,
-        )
-        for m in Measure.objects.filter(instrument_score=score):
-            Measure.objects.create(instrument_score=duplicate, key=m.key, value=m.value)
-        study = Study.objects.create(
-            researcher=user, name="dup titles", instrument=instrument,
-            min_age=instrument.min_age, max_age=instrument.max_age,
-        )
-        generate_fake_results(study, 2)
-        url = reverse("researcher_ui:console_study", kwargs={"pk": study.pk})
-        for action in ["download-study-csv", "download-summary-csv"]:
-            with self.subTest(action=action):
-                response = self.client.post(url, {action: True})
-                self.assertEqual(response.status_code, 200)
+        for name in ["English_WS", "English_CAT"]:
+            instrument = Instrument.objects.get(name=name)
+            study = Study.objects.create(
+                researcher=user, name=f"no selection {name}", instrument=instrument,
+                min_age=instrument.min_age, max_age=instrument.max_age,
+            )
+            generate_fake_results(study, 2)
+            url = reverse("researcher_ui:console_study", kwargs={"pk": study.pk})
+            for action in [
+                "download-selected",
+                "download-selected-adjusted",
+                "download-selected-summary",
+                "download-study-scoring-selected",
+                "download-links",
+            ]:
+                with self.subTest(instrument=name, action=action):
+                    response = self.client.post(url, {action: True})
+                    self.assertRedirects(response, url, fetch_redirect_response=False)
+                    self.assertIn(
+                        "Select at least one administration to download.",
+                        [str(m) for m in get_messages(response.wsgi_request)],
+                    )

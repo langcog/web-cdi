@@ -12,7 +12,21 @@ from researcher_UI.utils.download import (download_cat_data,
 from researcher_UI.utils.random_url_generator import random_url_generator
 
 
+SELECTED_DOWNLOADS = (
+    "download-selected",
+    "download-selected-adjusted",
+    "download-selected-summary",
+    "download-study-scoring-selected",
+    "download-links",
+)
+
+
 def post_condition(request, ids, study_obj):
+    if not ids and any(action in request.POST for action in SELECTED_DOWNLOADS):
+        # returning None sends the researcher back to the group page (#675)
+        messages.info(request, "Select at least one administration to download.")
+        return None
+
     if "administer-selected" in request.POST:
         if not study_obj.valid_code(request.user):
             messages.warning(
