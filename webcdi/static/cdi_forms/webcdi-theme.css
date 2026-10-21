@@ -954,6 +954,9 @@ hr {
 .alco-child .btn-group-vertical[data-toggle="buttons"],
 .alco-child1 .btn-group-vertical[data-toggle="buttons"] {
   display: grid !important; /* outranks Bootstrap's .d-flex */
+  /* one fixed-width column, so options line up from card to card even when
+     their labels differ in length (complexity pairs) */
+  grid-template-columns: min(100%, 15rem);
   justify-content: end;
   justify-items: start;
   align-content: center;
