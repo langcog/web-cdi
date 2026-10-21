@@ -11,6 +11,7 @@ from django.core.management import call_command
 from django.db.models import Max
 from django.test import LiveServerTestCase, tag
 from django.test.utils import override_settings
+from urllib.parse import urlparse
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.options import Options
@@ -22,6 +23,7 @@ from brookes.models import BrookesCode
 from cdi_forms.models import BackgroundInfo, Instrument_Forms
 from researcher_UI.models import (Administration, Instrument, InstrumentFamily,
                                   Study, administration_data)
+from researcher_UI.tests.utils import LiveServerFixturesMixin
 from researcher_UI.utils.random_url_generator import random_url_generator
 
 logger = logging.getLogger("selenium")
@@ -123,7 +125,7 @@ def generate_fake_results(study_obj, autogenerate_count):
 
 @tag("selenium", "researcher")
 @override_settings(DEBUG=True)
-class Reseacher_UIProcessTests(LiveServerTestCase):
+class Reseacher_UIProcessTests(LiveServerFixturesMixin, LiveServerTestCase):
     LiveServerTestCase.host = "web"
     fixtures = [
         "researcher_UI/fixtures/researcher_UI_test_fixtures.json",
@@ -154,6 +156,8 @@ class Reseacher_UIProcessTests(LiveServerTestCase):
         options.add_argument("--disable-dev-shm-usage")
         cls.selenium = webdriver.Remote("http://selenium:4444", options=options)
         cls.selenium.implicitly_wait(1)
+        # wide enough that the navbar isn't collapsed
+        cls.selenium.set_window_size(1400, 1000)
 
     @classmethod
     def tearDownClass(cls):
@@ -185,7 +189,41 @@ class Reseacher_UIProcessTests(LiveServerTestCase):
         self.researcher_login()
         self.set_researcher_instruments()
 
+    def path(self):
+        return urlparse(self.selenium.current_url).path
+
+    def wait_for_group_page(self, timeout=100):
+        # the group page (after creating a group or adding administrations)
+        WebDriverWait(self.selenium, timeout).until(
+            EC.element_to_be_clickable((By.ID, "id_add_participants"))
+        )
+
+    def open_add_administrations(self, tab=None):
+        WebDriverWait(self.selenium, 10).until(
+            EC.element_to_be_clickable((By.ID, "id_add_participants"))
+        ).click()
+        WebDriverWait(self.selenium, 10).until(
+            EC.text_to_be_present_in_element((By.ID, "modal-title"), "Add administrations")
+        )
+        if tab:
+            WebDriverWait(self.selenium, 10).until(
+                EC.element_to_be_clickable(
+                    (By.XPATH, f"//a[@data-toggle='pill' and normalize-space()='{tab}']")
+                )
+            ).click()
+
+    def download(self, name):
+        # one Download menu; with rows ticked its items post the selected-rows names
+        WebDriverWait(self.selenium, 10).until(
+            EC.element_to_be_clickable((By.ID, "download-menu-btn"))
+        ).click()
+        WebDriverWait(self.selenium, 10).until(
+            EC.element_to_be_clickable((By.XPATH, f"//button[@name='{name}']"))
+        ).click()
+
     def create_new_study(self, study_name, study_instrument):
+        # "New administration group" is on the dashboard
+        self.selenium.get(f"{self.live_server_url}/interface/")
         WebDriverWait(self.selenium, 10).until(
             EC.element_to_be_clickable((By.XPATH, "//a[@id='id_new_study']"))
         ).click()
@@ -199,13 +237,13 @@ class Reseacher_UIProcessTests(LiveServerTestCase):
 
     def test_researcher_login_to_researcher_UI(self):
         self.researcher_login()
-        url = self.selenium.current_url.split(":")[2][5:]
+        url = self.path()
         self.assertEqual("/interface/", url)
 
     def test_access_add_instrument_family(self):
         self.researcher_login()
         WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "//a[@id='id_add_instruments']"))
+            EC.element_to_be_clickable((By.LINK_TEXT, "Instruments"))
         ).click()
         # Check Accessed Page
         self.assertIn(self.selenium.title, "WebCDI Interface: Add Instruments")
@@ -213,7 +251,7 @@ class Reseacher_UIProcessTests(LiveServerTestCase):
     def test_add_non_chargeable_instrument_family(self):
         self.researcher_login()
         WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "//a[@id='id_add_instruments']"))
+            EC.element_to_be_clickable((By.LINK_TEXT, "Instruments"))
         ).click()
         instrument_family = InstrumentFamily.objects.filter(chargeable=False).order_by(
             "?"
@@ -239,7 +277,7 @@ class Reseacher_UIProcessTests(LiveServerTestCase):
         code.save()
 
         WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "//a[@id='id_add_instruments']"))
+            EC.element_to_be_clickable((By.LINK_TEXT, "Instruments"))
         ).click()
         instrument_family = InstrumentFamily.objects.filter(chargeable=True).order_by(
             "?"
@@ -250,13 +288,15 @@ class Reseacher_UIProcessTests(LiveServerTestCase):
         self.selenium.find_element(By.ID, "id_save").click()
 
         # check at Brookes Code page
-        self.assertIn(self.selenium.title, "WebCDI Interface: Add Code")
+        self.assertEqual(self.selenium.title, "Web-CDI: Brookes access code")
         code_input = self.selenium.find_element(By.ID, "id_code")
         code_input.send_keys(code.code)
-        self.selenium.find_element(By.XPATH, f"//input[@value='Save']").click()
+        self.selenium.find_element(
+            By.XPATH, "//button[normalize-space()='Apply code']"
+        ).click()
 
         # check back to interface page
-        url = self.selenium.current_url.split(":")[2][5:]
+        url = self.path()
         self.assertEqual("/interface/", url)
         self.assertEqual(
             instrument_family.id,
@@ -266,16 +306,18 @@ class Reseacher_UIProcessTests(LiveServerTestCase):
             list(self.researcher.researcher.allowed_instruments.all()),
             list(Instrument.objects.filter(family=instrument_family)),
         )
-        self.assertEqual(BrookesCode.objects.all()[0].researcher.id, self.researcher.id)
+        # the fixtures have a code of their own; check the one applied here
+        code.refresh_from_db()
+        self.assertEqual(code.researcher_id, self.researcher.id)
 
     def test_access_to_add_study(self):
         self.researcher_login()
         WebDriverWait(self.selenium, 10).until(
             EC.element_to_be_clickable((By.XPATH, "//a[@id='id_new_study']"))
         ).click()
-        self.assertIn(self.selenium.title, "WebCDI Interface: Add Study")
+        self.assertEqual(self.selenium.title, "New administration group")
         title = self.selenium.find_element("id", "modal-title")
-        self.assertIn(title.text, "Add new study")
+        self.assertEqual(title.text, "New administration group")
 
     def test_add_new_study(self):
         self.researcher_login_plus_instruments()
@@ -299,32 +341,16 @@ class Reseacher_UIProcessTests(LiveServerTestCase):
         self.create_new_study(study_name, study_instrument)
         # allow page to reload
         time.sleep(1)
-        WebDriverWait(self.selenium, 100).until(
-            EC.element_to_be_clickable((By.XPATH, "//a[@id='id_new_study']"))
-        )
+        self.wait_for_group_page()
         study_obj = Study.objects.get(name=study_name)
 
         # add participants using subject ids
-        WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable(
-                (By.XPATH, "//button[@id='id_add_participants']")
-            )
-        ).click()
-        WebDriverWait(self.selenium, 10).until(
-            EC.presence_of_element_located((By.ID, "modal-title"))
-        )
-
-        self.assertEqual(
-            "Administer new subjects",
-            self.selenium.find_element(By.ID, "modal-title").text,
-        )
+        self.open_add_administrations()
 
         new_subject_ids = self.selenium.find_element(By.ID, "new-subject-ids")
         new_subject_ids.send_keys("1, 2, 3")
         self.selenium.find_element(By.ID, "id_modal_submit_btn").click()
-        WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "//a[@id='id_new_study']"))
-        )
+        self.wait_for_group_page()
         time.sleep(1)
         administration_objs = Administration.objects.filter(study=study_obj)
         self.assertEqual(3, len(administration_objs))
@@ -342,30 +368,18 @@ class Reseacher_UIProcessTests(LiveServerTestCase):
         self.create_new_study(study_name, study_instrument)
         # allow page to reload
         time.sleep(1)
-        WebDriverWait(self.selenium, 100).until(
-            EC.element_to_be_clickable((By.XPATH, "//a[@id='id_new_study']"))
-        )
+        self.wait_for_group_page()
         study_obj = Study.objects.get(name=study_name)
 
         # add participants using autogenerate ids
-        WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable(
-                (By.XPATH, "//button[@id='id_add_participants']")
-            )
-        ).click()
-        WebDriverWait(self.selenium, 10).until(
-            EC.presence_of_element_located((By.ID, "modal-title"))
+        self.open_add_administrations("Generate IDs for me")
+        # wait for the tab's fade-in before typing
+        new_subject_ids = WebDriverWait(self.selenium, 10).until(
+            EC.visibility_of_element_located((By.ID, "autogenerate-count"))
         )
-        self.assertEqual(
-            "Administer new subjects",
-            self.selenium.find_element(By.ID, "modal-title").text,
-        )
-        new_subject_ids = self.selenium.find_element(By.ID, "autogenerate-count")
         new_subject_ids.send_keys("10")
         self.selenium.find_element(By.ID, "id_modal_submit_btn").click()
-        WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "//a[@id='id_new_study']"))
-        )
+        self.wait_for_group_page()
         time.sleep(1)  # this is here because sometimes all records aren't being saved
         administration_objs = Administration.objects.filter(study=study_obj)
         self.assertEqual(10, len(administration_objs))
@@ -379,24 +393,11 @@ class Reseacher_UIProcessTests(LiveServerTestCase):
         self.create_new_study(study_name, study_instrument)
         # allow page to reload
         time.sleep(1)
-        WebDriverWait(self.selenium, 100).until(
-            EC.element_to_be_clickable((By.XPATH, "//a[@id='id_new_study']"))
-        )
+        self.wait_for_group_page()
         study_obj = Study.objects.get(name=study_name)
 
         # add participants using file with header
-        WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable(
-                (By.XPATH, "//button[@id='id_add_participants']")
-            )
-        ).click()
-        WebDriverWait(self.selenium, 10).until(
-            EC.presence_of_element_located((By.ID, "modal-title"))
-        )
-        self.assertEqual(
-            "Administer new subjects",
-            self.selenium.find_element(By.ID, "modal-title").text,
-        )
+        self.open_add_administrations("Upload a CSV of IDs")
         new_subject_ids = WebDriverWait(self.selenium, 10).until(
             EC.presence_of_element_located((By.ID, "subject-ids-csv"))
         )
@@ -406,17 +407,15 @@ class Reseacher_UIProcessTests(LiveServerTestCase):
         new_subject_ids.send_keys(filename)
         csv_header = (
             WebDriverWait(self.selenium, 10)
-            .until(EC.presence_of_element_located((By.ID, "csv-header")))
+            .until(EC.element_to_be_clickable((By.ID, "csv-header")))
             .click()
         )
         csv_header = WebDriverWait(self.selenium, 10).until(
-            EC.presence_of_element_located((By.ID, "subject-ids-column"))
+            EC.visibility_of_element_located((By.ID, "subject-ids-column"))
         )
         csv_header.send_keys("id")
         self.selenium.find_element(By.ID, "id_modal_submit_btn").click()
-        WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "//a[@id='id_new_study']"))
-        )
+        self.wait_for_group_page()
         time.sleep(1)  # this is here because sometimes all records aren't being saved
         administration_objs = Administration.objects.filter(study=study_obj)
         self.assertEqual(4, len(administration_objs))
@@ -430,24 +429,11 @@ class Reseacher_UIProcessTests(LiveServerTestCase):
         self.create_new_study(study_name, study_instrument)
         # allow page to reload
         time.sleep(1)
-        WebDriverWait(self.selenium, 100).until(
-            EC.element_to_be_clickable((By.XPATH, "//a[@id='id_new_study']"))
-        )
+        self.wait_for_group_page()
         study_obj = Study.objects.get(name=study_name)
 
         # add participants using file without header
-        WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable(
-                (By.XPATH, "//button[@id='id_add_participants']")
-            )
-        ).click()
-        WebDriverWait(self.selenium, 10).until(
-            EC.presence_of_element_located((By.ID, "modal-title"))
-        )
-        self.assertEqual(
-            "Administer new subjects",
-            self.selenium.find_element(By.ID, "modal-title").text,
-        )
+        self.open_add_administrations("Upload a CSV of IDs")
         new_subject_ids = WebDriverWait(self.selenium, 10).until(
             EC.presence_of_element_located((By.ID, "subject-ids-csv"))
         )
@@ -457,9 +443,7 @@ class Reseacher_UIProcessTests(LiveServerTestCase):
         )
         new_subject_ids.send_keys(filename)
         self.selenium.find_element(By.ID, "id_modal_submit_btn").click()
-        WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "//a[@id='id_new_study']"))
-        )
+        self.wait_for_group_page()
         time.sleep(1)  # this is here because sometimes all records aren't being saved
         administration_objs = Administration.objects.filter(study=study_obj)
         self.assertEqual(4, len(administration_objs))
@@ -477,30 +461,19 @@ class Reseacher_UIProcessTests(LiveServerTestCase):
         self.create_new_study(study_name, study_instrument)
         # allow page to reload
         time.sleep(1)
-        WebDriverWait(self.selenium, 100).until(
-            EC.element_to_be_clickable((By.XPATH, "//a[@id='id_new_study']"))
-        )
+        self.wait_for_group_page()
         study_obj = Study.objects.get(name=study_name)
 
         # add participants using single reusable link - this is done last because page changes
-        WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable(
-                (By.XPATH, "//button[@id='id_add_participants']")
-            )
-        ).click()
-        WebDriverWait(self.selenium, 10).until(
-            EC.presence_of_element_located((By.ID, "modal-title"))
-        )
-        self.assertEqual(
-            "Administer new subjects",
-            self.selenium.find_element(By.ID, "modal-title").text,
-        )
+        self.open_add_administrations("Reusable link")
 
-        WebDriverWait(self.selenium, 10).until(
-            EC.presence_of_element_located((By.ID, "reusable_link"))
-        ).click()
+        # the dialog shows the reusable link to copy; follow it
+        link = WebDriverWait(self.selenium, 10).until(
+            EC.visibility_of_element_located((By.ID, "reusable_link_input"))
+        ).get_attribute("value")
+        self.selenium.get(link)
 
-        url = self.selenium.current_url.split(":")[2][5:][:17]
+        url = self.path()[:17]
         self.assertEqual("/form/background/", url)
 
         # TODO
@@ -517,30 +490,19 @@ class Reseacher_UIProcessTests(LiveServerTestCase):
         self.create_new_study(study_name, study_instrument)
         # allow page to reload
         time.sleep(1)
-        WebDriverWait(self.selenium, 100).until(
-            EC.element_to_be_clickable((By.XPATH, "//a[@id='id_new_study']"))
-        )
+        self.wait_for_group_page()
         study_obj = Study.objects.get(name=study_name)
 
         # add participants using single reusable link - this is done last because page changes
-        WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable(
-                (By.XPATH, "//button[@id='id_add_participants']")
-            )
-        ).click()
-        WebDriverWait(self.selenium, 10).until(
-            EC.presence_of_element_located((By.ID, "modal-title"))
-        )
-        self.assertEqual(
-            "Administer new subjects",
-            self.selenium.find_element(By.ID, "modal-title").text,
-        )
+        self.open_add_administrations("Reusable link")
 
-        WebDriverWait(self.selenium, 10).until(
-            EC.presence_of_element_located((By.ID, "reusable_link"))
-        ).click()
+        # the dialog shows the reusable link to copy; follow it
+        link = WebDriverWait(self.selenium, 10).until(
+            EC.visibility_of_element_located((By.ID, "reusable_link_input"))
+        ).get_attribute("value")
+        self.selenium.get(link)
 
-        url = self.selenium.current_url.split(":")[2][5:][:17]
+        url = self.path()[:17]
         self.assertEqual("/form/cat/backgro", url)
 
         # TODO
@@ -556,13 +518,16 @@ class Reseacher_UIProcessTests(LiveServerTestCase):
 
         # check new study opens
         study_name = "Download Data"
-        study_instrument = Instrument.objects.all().order_by("?")[0].name
+        # generate_fake_results writes item answers, not CAT responses
+        study_instrument = (
+            Instrument.objects.exclude(form__in=settings.CAT_FORMS)
+            .order_by("?")[0]
+            .name
+        )
         self.create_new_study(study_name, study_instrument)
         # allow page to reload
         time.sleep(1)
-        WebDriverWait(self.selenium, 100).until(
-            EC.element_to_be_clickable((By.XPATH, "//a[@id='id_new_study']"))
-        )
+        self.wait_for_group_page()
         study_obj = Study.objects.get(name=study_name)
 
         generate_fake_results(study_obj, 10)
@@ -570,109 +535,58 @@ class Reseacher_UIProcessTests(LiveServerTestCase):
         administration_objs = Administration.objects.filter(study=study_obj)
 
         # now clicked download data dropdown
-        WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "//button[@id='dropdownMenu2']"))
-        ).click()
-        # and the download button
-        WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "//button[@id='download-study-csv']"))
-        ).click()
+        self.download("download-study-csv")
 
         # download summary data
-        WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "//button[@id='dropdownMenu2']"))
-        ).click()
-        WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable(
-                (By.XPATH, "//button[@id='download-summary-csv']")
-            )
-        ).click()
+        self.download("download-summary-csv")
 
         # download adjusted scoring format
-        WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "//button[@id='dropdownMenu2']"))
-        ).click()
-        WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable(
-                (By.XPATH, "//button[@id='download-study-csv-adjusted']")
-            )
-        ).click()
+        self.download("download-study-csv-adjusted")
 
     def test_add_participants(self):
         self.researcher_login_plus_instruments()
 
         # check new study opens
         study_name = "Add Participant Test"
-        study_instrument = Instrument.objects.all().order_by("?")[0].name
+        # generate_fake_results writes item answers, not CAT responses
+        study_instrument = (
+            Instrument.objects.exclude(form__in=settings.CAT_FORMS)
+            .order_by("?")[0]
+            .name
+        )
         self.create_new_study(study_name, study_instrument)
         # allow page to reload
         time.sleep(1)
-        WebDriverWait(self.selenium, 100).until(
-            EC.element_to_be_clickable((By.XPATH, "//a[@id='id_new_study']"))
-        )
+        self.wait_for_group_page()
         study_obj = Study.objects.get(name=study_name)
 
         # add participants using subject ids
-        WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable(
-                (By.XPATH, "//button[@id='id_add_participants']")
-            )
-        ).click()
-        WebDriverWait(self.selenium, 10).until(
-            EC.presence_of_element_located((By.ID, "modal-title"))
-        )
-        self.assertEqual(
-            "Administer new subjects",
-            self.selenium.find_element(By.ID, "modal-title").text,
-        )
+        self.open_add_administrations()
         new_subject_ids = self.selenium.find_element(By.ID, "new-subject-ids")
         new_subject_ids.send_keys("1, 2, 3")
         WebDriverWait(self.selenium, 10).until(
             EC.element_to_be_clickable((By.ID, "id_modal_submit_btn"))
         ).click()
-        WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "//a[@id='id_new_study']"))
-        )
+        self.wait_for_group_page()
         time.sleep(1)
         administration_objs = Administration.objects.filter(study=study_obj)
         self.assertEqual(3, len(administration_objs))
 
         # add participants using autogenerate ids
-        WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable(
-                (By.XPATH, "//button[@id='id_add_participants']")
-            )
-        ).click()
-        WebDriverWait(self.selenium, 10).until(
-            EC.presence_of_element_located((By.ID, "modal-title"))
+        self.open_add_administrations("Generate IDs for me")
+        # wait for the tab's fade-in before typing
+        new_subject_ids = WebDriverWait(self.selenium, 10).until(
+            EC.visibility_of_element_located((By.ID, "autogenerate-count"))
         )
-        self.assertEqual(
-            "Administer new subjects",
-            self.selenium.find_element(By.ID, "modal-title").text,
-        )
-        new_subject_ids = self.selenium.find_element(By.ID, "autogenerate-count")
         new_subject_ids.send_keys("10")
         self.selenium.find_element(By.ID, "id_modal_submit_btn").click()
-        WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "//a[@id='id_new_study']"))
-        )
+        self.wait_for_group_page()
         time.sleep(1)  # this is here because sometimes all records aren't being saved
         administration_objs = Administration.objects.filter(study=study_obj)
         self.assertEqual(13, len(administration_objs))
 
         # add participants using file with header
-        WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable(
-                (By.XPATH, "//button[@id='id_add_participants']")
-            )
-        ).click()
-        WebDriverWait(self.selenium, 10).until(
-            EC.presence_of_element_located((By.ID, "modal-title"))
-        )
-        self.assertEqual(
-            "Administer new subjects",
-            self.selenium.find_element(By.ID, "modal-title").text,
-        )
+        self.open_add_administrations("Upload a CSV of IDs")
         new_subject_ids = WebDriverWait(self.selenium, 10).until(
             EC.presence_of_element_located((By.ID, "subject-ids-csv"))
         )
@@ -682,34 +596,21 @@ class Reseacher_UIProcessTests(LiveServerTestCase):
         new_subject_ids.send_keys(filename)
         csv_header = (
             WebDriverWait(self.selenium, 10)
-            .until(EC.presence_of_element_located((By.ID, "csv-header")))
+            .until(EC.element_to_be_clickable((By.ID, "csv-header")))
             .click()
         )
         csv_header = WebDriverWait(self.selenium, 10).until(
-            EC.presence_of_element_located((By.ID, "subject-ids-column"))
+            EC.visibility_of_element_located((By.ID, "subject-ids-column"))
         )
         csv_header.send_keys("id")
         self.selenium.find_element(By.ID, "id_modal_submit_btn").click()
-        WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "//a[@id='id_new_study']"))
-        )
+        self.wait_for_group_page()
         time.sleep(1)  # this is here because sometimes all records aren't being saved
         administration_objs = Administration.objects.filter(study=study_obj)
         self.assertEqual(17, len(administration_objs))
 
         # add participants using file without header
-        WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable(
-                (By.XPATH, "//button[@id='id_add_participants']")
-            )
-        ).click()
-        WebDriverWait(self.selenium, 10).until(
-            EC.presence_of_element_located((By.ID, "modal-title"))
-        )
-        self.assertEqual(
-            "Administer new subjects",
-            self.selenium.find_element(By.ID, "modal-title").text,
-        )
+        self.open_add_administrations("Upload a CSV of IDs")
         new_subject_ids = WebDriverWait(self.selenium, 10).until(
             EC.presence_of_element_located((By.ID, "subject-ids-csv"))
         )
@@ -719,9 +620,7 @@ class Reseacher_UIProcessTests(LiveServerTestCase):
         )
         new_subject_ids.send_keys(filename)
         self.selenium.find_element(By.ID, "id_modal_submit_btn").click()
-        WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "//a[@id='id_new_study']"))
-        )
+        self.wait_for_group_page()
         time.sleep(1)  # this is here because sometimes all records aren't being saved
         administration_objs = Administration.objects.filter(study=study_obj)
         self.assertEqual(21, len(administration_objs))
@@ -732,42 +631,18 @@ class Reseacher_UIProcessTests(LiveServerTestCase):
         self.assertEqual(31, len(administration_objs))
 
         # now clicked download data dropdown
-        WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "//button[@id='dropdownMenu2']"))
-        ).click()
-        # and the download button
-        WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "//button[@id='download-study-csv']"))
-        ).click()
+        self.download("download-study-csv")
 
         # download summary data
-        WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "//button[@id='dropdownMenu2']"))
-        ).click()
-        WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable(
-                (By.XPATH, "//button[@id='download-summary-csv']")
-            )
-        ).click()
+        self.download("download-summary-csv")
 
         # add participants using single reusable link - this is done last because page changes
-        WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable(
-                (By.XPATH, "//button[@id='id_add_participants']")
-            )
-        ).click()
-        WebDriverWait(self.selenium, 10).until(
-            EC.presence_of_element_located((By.ID, "modal-title"))
-        )
-        self.assertEqual(
-            "Administer new subjects",
-            self.selenium.find_element(By.ID, "modal-title").text,
-        )
-        new_subject_ids = (
-            WebDriverWait(self.selenium, 10)
-            .until(EC.presence_of_element_located((By.ID, "reusable_link")))
-            .click()
-        )
+        self.open_add_administrations("Reusable link")
+        # the dialog shows the reusable link to copy; follow it
+        link = WebDriverWait(self.selenium, 10).until(
+            EC.visibility_of_element_located((By.ID, "reusable_link_input"))
+        ).get_attribute("value")
+        self.selenium.get(link)
 
         administration_objs = Administration.objects.filter(study=study_obj)
         self.assertEqual(31, len(administration_objs))
@@ -785,23 +660,14 @@ class Reseacher_UIProcessTests(LiveServerTestCase):
             self.create_new_study(study_name, instrument_obj.name)
             # allow page to reload
             time.sleep(1)
-            WebDriverWait(self.selenium, 100).until(
-                EC.element_to_be_clickable((By.XPATH, "//a[@id='id_new_study']"))
-            )
+            self.wait_for_group_page()
             study_obj = Study.objects.get(name=study_name)
 
             generate_fake_results(study_obj, 10)
             time.sleep(1)
             administration_objs = Administration.objects.filter(study=study_obj)
             self.assertEqual(10, len(administration_objs))
-            WebDriverWait(self.selenium, 10).until(
-                EC.element_to_be_clickable((By.XPATH, "//button[@id='dropdownMenu2']"))
-            ).click()
-            WebDriverWait(self.selenium, 10).until(
-                EC.element_to_be_clickable(
-                    (By.XPATH, "//button[@id='download-study-csv']")
-                )
-            ).click()
+            self.download("download-study-csv")
 
     def test_update_study(self):
         self.researcher_login_plus_instruments()
@@ -812,9 +678,7 @@ class Reseacher_UIProcessTests(LiveServerTestCase):
         self.create_new_study(study_name, study_instrument)
         # allow page to reload
         time.sleep(1)
-        WebDriverWait(self.selenium, 100).until(
-            EC.element_to_be_clickable((By.XPATH, "//a[@id='id_new_study']"))
-        )
+        self.wait_for_group_page()
         study_obj = Study.objects.get(name=study_name)
 
         # Test can update study
@@ -846,24 +710,29 @@ class Reseacher_UIProcessTests(LiveServerTestCase):
         self.create_new_study(study_name, study_instrument)
         # allow page to reload
         time.sleep(1)
-        WebDriverWait(self.selenium, 100).until(
-            EC.element_to_be_clickable((By.XPATH, "//a[@id='id_new_study']"))
-        )
+        self.wait_for_group_page()
         study_obj = Study.objects.get(name=study_name)
 
-        # Test can delete study - this isn't the best way to do it but given the structure best I can think of ...
+        # Group settings -> "Delete group..." -> type the group name to confirm
         WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "//button[@id='delete-study']"))
+            EC.element_to_be_clickable((By.ID, "id_update_study"))
         ).click()
-        alert = self.selenium.switch_to.alert.accept()
+        WebDriverWait(self.selenium, 10).until(
+            EC.element_to_be_clickable(
+                (By.XPATH, "//button[@data-target='#delete-group-modal']")
+            )
+        ).click()
+        WebDriverWait(self.selenium, 10).until(
+            EC.visibility_of_element_located((By.ID, "delete-group-confirm"))
+        ).send_keys(study_name)
+        WebDriverWait(self.selenium, 10).until(
+            EC.element_to_be_clickable((By.ID, "delete-group-submit"))
+        ).click()
+        # back on the dashboard; deletes are soft
         WebDriverWait(self.selenium, 10).until(
             EC.element_to_be_clickable((By.XPATH, "//a[@id='id_new_study']"))
         )
-        try:
-            study_obj = Study.objects.get(name=study_name)
-            self.assertEqual(True, False)
-        except:
-            self.assertEqual(True, True)
+        self.assertFalse(Study.objects.get(pk=study_obj.pk).active)
 
     def test_select_all(self):
         self.researcher_login_plus_instruments()
@@ -874,9 +743,7 @@ class Reseacher_UIProcessTests(LiveServerTestCase):
         self.create_new_study(study_name, study_instrument)
         # allow page to reload
         time.sleep(1)
-        WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "//a[@id='id_new_study']"))
-        )
+        self.wait_for_group_page()
         study_obj = Study.objects.get(name=study_name)
 
         generate_fake_results(study_obj, 10)
@@ -895,13 +762,18 @@ class Reseacher_UIProcessTests(LiveServerTestCase):
                 break
         self.assertEqual(True, checked)
 
-        # ensure re-administer etc are selectable
+        # ensure re-administer etc are selectable, and downloads switch to
+        # the selected rows
         add_selected = self.selenium.find_element(By.ID, "add-selected")
         self.assertEqual(True, add_selected.is_enabled())
-        download_selected = self.selenium.find_element(By.ID, "dropdownMenu")
-        self.assertEqual(True, download_selected.is_enabled())
-        delete_selected = self.selenium.find_element(By.ID, "delete-selected")
+        delete_selected = self.selenium.find_element(By.ID, "delete-selected-open")
         self.assertEqual(True, delete_selected.is_enabled())
+        download_summary = self.selenium.find_element(
+            By.XPATH, "//button[@data-all='download-summary-csv']"
+        )
+        self.assertEqual(
+            "download-selected-summary", download_summary.get_attribute("name")
+        )
 
         # ensure none checked
         WebDriverWait(self.selenium, 10).until(
@@ -917,8 +789,10 @@ class Reseacher_UIProcessTests(LiveServerTestCase):
 
         # ensure re-administer etc are NOT selectable
         self.assertEqual(False, add_selected.is_enabled())
-        self.assertEqual(False, download_selected.is_enabled())
         self.assertEqual(False, delete_selected.is_enabled())
+        self.assertEqual(
+            "download-summary-csv", download_summary.get_attribute("name")
+        )
 
     def test_readminister(self):
         self.researcher_login_plus_instruments()
@@ -929,9 +803,7 @@ class Reseacher_UIProcessTests(LiveServerTestCase):
         self.create_new_study(study_name, study_instrument)
         # allow page to reload
         time.sleep(1)
-        WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "//a[@id='id_new_study']"))
-        )
+        self.wait_for_group_page()
         study_obj = Study.objects.get(name=study_name)
 
         generate_fake_results(study_obj, 10)
@@ -955,13 +827,16 @@ class Reseacher_UIProcessTests(LiveServerTestCase):
         self.researcher_login_plus_instruments()
         # create new study
         study_name = "Download Selected Functionality"
-        study_instrument = Instrument.objects.all().order_by("?")[0].name
+        # generate_fake_results writes item answers, not CAT responses
+        study_instrument = (
+            Instrument.objects.exclude(form__in=settings.CAT_FORMS)
+            .order_by("?")[0]
+            .name
+        )
         self.create_new_study(study_name, study_instrument)
         # allow page to reload
         time.sleep(1)
-        WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "//a[@id='id_new_study']"))
-        )
+        self.wait_for_group_page()
         study_obj = Study.objects.get(name=study_name)
 
         generate_fake_results(study_obj, 10)
@@ -976,14 +851,10 @@ class Reseacher_UIProcessTests(LiveServerTestCase):
             if count % 2 == 0:
                 el.click()
 
-        self.selenium.find_element(By.ID, "dropdownMenu").click()
-        self.selenium.find_element(By.ID, "download-selected").click()
-
-        self.selenium.find_element(By.ID, "dropdownMenu").click()
-        self.selenium.find_element(By.ID, "download-selected-summary").click()
-
-        self.selenium.find_element(By.ID, "dropdownMenu").click()
-        self.selenium.find_element(By.ID, "download-links").click()
+        self.download("download-selected")
+        self.download("download-selected-summary")
+        if study_obj.instrument.form not in settings.CAT_FORMS:
+            self.download("download-links")
 
     def test_delete_selected(self):
         self.researcher_login_plus_instruments()
@@ -993,9 +864,7 @@ class Reseacher_UIProcessTests(LiveServerTestCase):
         self.create_new_study(study_name, study_instrument)
         # allow page to reload
         time.sleep(1)
-        WebDriverWait(self.selenium, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "//a[@id='id_new_study']"))
-        )
+        self.wait_for_group_page()
         study_obj = Study.objects.get(name=study_name)
 
         generate_fake_results(study_obj, 10)
@@ -1010,9 +879,12 @@ class Reseacher_UIProcessTests(LiveServerTestCase):
             if count % 2 == 0:
                 el.click()
 
-        self.selenium.find_element(By.ID, "delete-selected").click()
-        alert = self.selenium.switch_to.alert.accept()
-        time.sleep(5)
+        self.selenium.find_element(By.ID, "delete-selected-open").click()
+        WebDriverWait(self.selenium, 10).until(
+            EC.element_to_be_clickable((By.ID, "delete-selected"))
+        ).click()
+        self.wait_for_group_page()
+        time.sleep(1)
         administration_objs = Administration.objects.filter(
             study=study_obj, is_active=True
         )
