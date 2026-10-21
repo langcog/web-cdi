@@ -715,6 +715,13 @@ def update_administration_data_item(request):
     if missing:
         return HttpResponseBadRequest(f"Missing parameters: {', '.join(missing)}")
 
+    # same states in which the form pages refuse edits (#739)
+    if (
+        administration_instance.completed
+        or administration_instance.due_date <= timezone.now()
+    ):
+        return HttpResponse("This form is closed.", status=409)
+
     value = ""
     if request.POST["check"] == "true":
         value = request.POST["value"]
