@@ -14,6 +14,23 @@ from researcher_UI.models import *
 # Given a language with -l and a form with -f, does so for only their Instrument object.
 
 
+# fields set from each CSV row (the data_dict below)
+ITEM_FIELDS = [
+    "item",
+    "item_type",
+    "category",
+    "choices",
+    "definition",
+    "gloss",
+    "complexity_category",
+    "uni_lemma",
+    "item_order",
+    "scoring_category",
+    "enabler",
+    "enable_response",
+]
+
+
 def unicode_csv_reader(utf8_data, dialect=csv.excel, **kwargs):
     csv_reader = csv.reader(utf8_data, dialect=dialect, **kwargs)
     for row in csv_reader:
@@ -53,6 +70,7 @@ class Command(BaseCommand):
         else:
             input_instruments = instruments
 
+        choices_cache = {}  # choice_set -> Choices
         for curr_instrument in input_instruments:
             if curr_instrument["form"] in settings.CAT_FORMS:
                 continue
@@ -90,6 +108,19 @@ class Command(BaseCommand):
             else:
                 raise IOError("Instrument file must be a CSV.")
 
+            # One query per instrument for its existing items and one per
+            # distinct choice set, then bulk writes, instead of ~3 queries per
+            # item (#685). Same result as update_or_create item by item: a
+            # repeated itemID keeps its last row's values.
+            existing = {}
+            for item in instrument_forms.objects.filter(instrument=instrument_obj):
+                if item.itemID in existing:
+                    # update_or_create would have raised here too
+                    raise instrument_forms.MultipleObjectsReturned(
+                        f"{instrument_obj} has more than one item {item.itemID}"
+                    )
+                existing[item.itemID] = item
+            to_create, to_update = {}, {}
             for row in range(1, nrows):
                 row_values = get_row(row)
                 if len(row_values) > 1:
@@ -101,7 +132,11 @@ class Command(BaseCommand):
                     choices_key = None
                     if "example" not in item_type:
                         try:
-                            choices_key = Choices.objects.get(choice_set=item_choices)
+                            if item_choices not in choices_cache:
+                                choices_cache[item_choices] = Choices.objects.get(
+                                    choice_set=item_choices
+                                )
+                            choices_key = choices_cache[item_choices]
                         except:
                             print(
                                 f"{item}, {item_type}, {item_category}, {item_choices}"
@@ -162,8 +197,28 @@ class Command(BaseCommand):
                         "enable_response": enable_response,
                     }
 
-                    cdi_item, created = instrument_forms.objects.update_or_create(
-                        instrument=instrument_obj,
-                        itemID=itemID,
-                        defaults=data_dict,
-                    )
+                    if itemID in existing:
+                        cdi_item = existing[itemID]
+                        # rewrite only items whose values change; compare the
+                        # choices FK by id (no query per item)
+                        current = {
+                            f: cdi_item.choices_id if f == "choices" else getattr(cdi_item, f)
+                            for f in ITEM_FIELDS
+                        }
+                        wanted = dict(data_dict, choices=choices_key and choices_key.pk)
+                        if itemID in to_update or current != wanted:
+                            to_update[itemID] = cdi_item
+                    elif itemID in to_create:
+                        cdi_item = to_create[itemID]
+                    else:
+                        cdi_item = instrument_forms(
+                            instrument=instrument_obj, itemID=itemID
+                        )
+                        to_create[itemID] = cdi_item
+                    for field, value in data_dict.items():
+                        setattr(cdi_item, field, value)
+
+            instrument_forms.objects.bulk_create(to_create.values(), batch_size=1000)
+            instrument_forms.objects.bulk_update(
+                to_update.values(), ITEM_FIELDS, batch_size=1000
+            )

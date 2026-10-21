@@ -96,13 +96,33 @@ class Command(BaseCommand):
             else:
                 raise IOError("Instrument file must be a CSV.")
 
+            # One query per instrument for its scores and existing benchmarks,
+            # then bulk writes, instead of 3 queries per row (#685). Same
+            # result as update_or_create row by row: a repeated
+            # (score, percentile, age) keeps its last row's values.
+            scores = {
+                score.title: score
+                for score in InstrumentScore.objects.filter(instrument=instrument_obj)
+            }
+            existing = {}
+            for b in Benchmark.objects.filter(instrument=instrument_obj):
+                key = (b.instrument_score_id, b.percentile, b.age)
+                if key in existing:
+                    # update_or_create would have raised here too
+                    raise Benchmark.MultipleObjectsReturned(
+                        f"{instrument_obj} has more than one benchmark {key}"
+                    )
+                existing[key] = b
+            to_create, to_update = {}, {}
             for row in range(1, nrows):
                 row_values = get_row(row)
                 if len(row_values) > 1:
                     title = row_values[col_names.index("title")]
-                    scoring_obj = InstrumentScore.objects.get(
-                        title=title, instrument=instrument_obj
-                    )
+                    if title not in scores:
+                        raise InstrumentScore.DoesNotExist(
+                            f"No InstrumentScore {title!r} for {instrument_obj}"
+                        )
+                    scoring_obj = scores[title]
                     percentile = row_values[col_names.index("percentile")]
                     age = row_values[col_names.index("age")]
                     raw_score = row_values[col_names.index("raw_score")]
@@ -114,10 +134,26 @@ class Command(BaseCommand):
                         "raw_score_girl": raw_score_girl,
                     }
 
-                    cdi_item, created = Benchmark.objects.update_or_create(
-                        instrument=instrument_obj,
-                        instrument_score=scoring_obj,
-                        percentile=percentile,
-                        age=age,
-                        defaults=data_dict,
-                    )
+                    key = (scoring_obj.pk, int(percentile), int(age))
+                    if key in existing:
+                        benchmark = existing[key]
+                        to_update[key] = benchmark
+                    elif key in to_create:
+                        benchmark = to_create[key]
+                    else:
+                        benchmark = Benchmark(
+                            instrument=instrument_obj,
+                            instrument_score=scoring_obj,
+                            percentile=percentile,
+                            age=age,
+                        )
+                        to_create[key] = benchmark
+                    for field, value in data_dict.items():
+                        setattr(benchmark, field, value)
+
+            Benchmark.objects.bulk_create(to_create.values(), batch_size=1000)
+            Benchmark.objects.bulk_update(
+                to_update.values(),
+                ["raw_score", "raw_score_boy", "raw_score_girl"],
+                batch_size=1000,
+            )
