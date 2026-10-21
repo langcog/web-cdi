@@ -140,6 +140,15 @@ class InstrumentScoring:
         except KeyError:
             raise Measure.DoesNotExist(f"No measure {key!r} for {f}")
 
+    def rows_near(self, f, age):
+        """f's norm rows at `age`, clamped to f's own age range: an
+        instrument's scores can have different ranges (English CAT: Total
+        Produced 8-36 months, Benchmark Theta 12-36)."""
+        ages = self.benchmarks[f.pk]
+        if not ages:
+            return []
+        return self.rows(f, min(max(age, min(ages)), max(ages)))
+
     def rows(self, f, age):
         return self.benchmarks[f.pk].get(age, [])
 
@@ -250,15 +259,10 @@ def _compute(administration_instance, scoring, values):
     for f in scoring.scores:
         if not scoring.benchmarks.get(f.pk):
             continue
-        rows = scoring.rows(f, age)
+        rows = scoring.rows_near(f, age)
         if not rows:
             raise IndexError(f"No benchmark for {f} at age {age}")
-        adjusted_rows = scoring.rows(f, adjusted_benchmark_age)
-        if not adjusted_rows:
-            # legacy: fall back to the score's youngest age, and keep using it
-            # for the remaining scores of this administration
-            adjusted_benchmark_age = min(scoring.benchmarks[f.pk])
-            adjusted_rows = scoring.rows(f, adjusted_benchmark_age)
+        adjusted_rows = scoring.rows_near(f, adjusted_benchmark_age)
         benchmark_scores(values, rows, f, background_info.sex, "")
         benchmark_scores(values, adjusted_rows, f, background_info.sex, " (adjusted)")
     return True
@@ -278,8 +282,8 @@ def _cat_scores(administration_instance, scoring, values, age):
         return False
     values["Benchmark Theta"] = str(theta)
     by_title = {f.title: f for f in scoring.scores}
-    theta_rows = scoring.rows(by_title["Benchmark Theta"], age)
-    produced_rows = scoring.rows(by_title["Total Produced"], age)
+    theta_rows = scoring.rows_near(by_title["Benchmark Theta"], age)
+    produced_rows = scoring.rows_near(by_title["Total Produced"], age)
     estimate = value_at(
         percentile_of(theta, table_thresholds(theta_rows)),
         table_thresholds(produced_rows),
