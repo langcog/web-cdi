@@ -675,6 +675,8 @@ class NoCompletedDownloadTest(TestCase):
             ("download-summary-csv", False),
             ("download-study-scoring", False),
         ]:
+            if "scoring" in action and instrument.form in settings.CAT_FORMS:
+                continue  # refused for CAT forms; see CompletedNotReadyDownloadTest
             with self.subTest(instrument=name, action=action):
                 payload = {action: True}
                 if selected:
@@ -914,6 +916,33 @@ class CompletedNotReadyDownloadTest(TestCase):
                         for m in get_messages(response.wsgi_request)
                     )
                 )
+
+    def test_scoring_format_refused_for_cat_forms(self):
+        # CAT forms have no item list, so the CDI scoring-program (zip)
+        # download raised AssertionError in model_map (500); staging showed
+        # it for English_CAT2. Both CAT form codes go back with a message.
+        from django.contrib.messages import get_messages
+
+        cat2 = Instrument.objects.get(name="English_CAT")
+        cat2.pk = cat2.name = "English_CAT2"
+        cat2.form = "CAT2"
+        cat2.save()
+        self.assertEqual(sorted(settings.CAT_FORMS), ["CAT", "CAT2"])
+        for name in ["English_CAT", "English_CAT2"]:
+            study = self.make_study(name)
+            ids = [str(pk) for pk in Administration.objects.filter(study=study).values_list("pk", flat=True)]
+            url = reverse("researcher_ui:console_study", kwargs={"pk": study.pk})
+            for payload in [
+                {"download-study-scoring": True},
+                {"download-study-scoring-selected": True, "select_col": ids},
+            ]:
+                with self.subTest(instrument=name, payload=payload):
+                    response = self.client.post(url, payload)
+                    self.assertRedirects(response, url, fetch_redirect_response=False)
+                    self.assertIn(
+                        "The CDI scoring-program format is not available for CAT forms. Please use the items download.",
+                        [str(m) for m in get_messages(response.wsgi_request)],
+                    )
 
     def test_summary_for_form_without_scores(self):
         # Argentine Spanish WG has no scoring definitions, so it never has

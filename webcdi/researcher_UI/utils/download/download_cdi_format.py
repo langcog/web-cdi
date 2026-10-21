@@ -4,6 +4,7 @@ from io import BytesIO
 
 import numpy as np
 import pandas as pd
+from django.conf import settings
 from django.contrib import messages
 from django.http import HttpResponse
 from django.utils.translation import gettext_lazy as _
@@ -17,6 +18,15 @@ from researcher_UI.utils.write_to_zip import write_to_zip
 
 def download_cdi_format(request, study_obj, administrations=None):
     outfile = BytesIO()
+
+    if study_obj.instrument.form in settings.CAT_FORMS:
+        # CAT forms have no fixed item list, so there is no scoring-program
+        # file to write (this used to be an AssertionError 500, #757)
+        messages.info(
+            request,
+            "The CDI scoring-program format is not available for CAT forms. Please use the items download.",
+        )
+        return None
 
     if administrations is not None:
         completed_admins = administrations.filter(completed=True)
