@@ -676,6 +676,22 @@ class UpdateAdministrationDataItemTest(TestCase):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 405)
 
+    def test_missing_params(self):
+        # #630: used to raise MultiValueDictKeyError (500)
+        base = {"hash_id": self.administration.url_hash}
+        for payload in [
+            {**base, "item": "item_1", "value": "produces"},  # no check
+            {**base, "check": "true", "value": "produces"},  # no item
+            {**base, "check": "true", "item": "item_1"},  # no value
+        ]:
+            response = self.client.post(self.url, payload)
+            self.assertEqual(response.status_code, 400, payload)
+        self.assertFalse(
+            administration_data.objects.filter(
+                administration=self.administration
+            ).exists()
+        )
+
     def test_upload_data(self):
         payload = {
             "hash_id": self.administration.url_hash,
