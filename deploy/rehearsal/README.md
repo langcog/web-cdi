@@ -23,6 +23,42 @@ read -rs PW && printf %s "$PW" | gcloud secrets create webcdi-staging-aws-prod-d
 The `webcdi-staging-` prefix lets the staging runtime account read it. Delete
 the secret after the rehearsal (step 8).
 
+## Refresh, as run on 2026-10-21 (≈15 minutes)
+
+Staging is already private behind Google sign-in (#725) with email on the
+console backend, so a refresh is:
+
+1. **Re-copy the production DB password.** It rotates, so a stored copy goes
+   stale (the copy then fails fast without touching staging). The deploy user
+   can read it (inline policy `read-webcdi-rds-password`); pipe it straight
+   across, never print it:
+   ```bash
+   AWS_PROFILE=webcdi aws secretsmanager get-secret-value --region us-west-2 --secret-id prod/webcdi/RDS_PASSWORD --query SecretString --output text \
+     | python3 -c 'import sys,json; sys.stdout.write(json.loads(sys.stdin.read())["password"])' \
+     | gcloud secrets versions add webcdi-staging-aws-prod-db-password --data-file=- --project=hs-langcog-webcdi
+   ```
+   then disable the previous version.
+2. **Copy** (step 2 below): `gcloud run jobs execute webcdi-staging-load-from-aws --wait` — 85 s.
+3. **Check before migrating**: no duplicate `InstrumentScore (instrument, title)`
+   rows (the unique constraint's migration would fail).
+4. **Scrub** with [`scrub_staging.py`](scrub_staging.py) (refuses to run outside
+   Cloud SQL): blanks completion-flag and server-side redirect URLs, replaces
+   gift codes. Run it via the migrate job's `shell -c`.
+5. **Migrate** (`webcdi-staging-migrate`) — 25 s.
+6. **Reload instruments** (`webcdi-staging-load-instruments`) — 21 s. Production's
+   instrument data predates master's item fixes.
+7. **Site row** → staging host (step 4 below).
+8. **Full rescore**: `update_summary_data` via the migrate job with
+   `--task-timeout=4h` — 11 min 40 s for 31,801 administrations.
+9. **Checks**: valid percentile values, nothing completed-but-unscored, CAT
+   theta non-zero, and a download sweep (each study's owner via the test
+   client, inside a rolled-back transaction). Results: #687.
+10. **QA accounts**: fresh test researchers (never real accounts), created
+    from locally hashed passwords so plaintext never reaches job arguments.
+
+For the production cutover (#688), steps 1, 2, 5, 6, 7 and 8 apply (no
+scrub, no QA accounts), against the production database.
+
 ## 1. Make staging private and stop its email
 
 ```bash
@@ -76,7 +112,7 @@ staging host with a one-off `shell -c` execution of the migrate job (see
 | Scoring equivalence | done 2026-10-19: legacy vs bulk scorer, 500 production administrations | 0 differences (the comparison tool was then retired with the #686 percentile rules) |
 | Duplicate score titles | `InstrumentScore` rows grouped by (instrument, title) | none (then add the unique constraint, #675) |
 | Full rescore | `update_summary_data` | completes in minutes; "<1" sex percentiles gone (#674) |
-| Downloads | study CSV, summary CSV, CDI-format zip for a sample of groups across instruments | 200; columns as on AWS |
+| Downloads | sweep: each instrument's newest group with completed forms × whole-group downloads, as its owner | 200, or a redirect with a message where a download doesn't apply (CAT scoring zip) |
 | CAT | open a CAT administration per language via the proxy | renders, answers save, completes |
 | Researcher flows | log in (your own account), group page, add administrations, downloads | work as on AWS |
 | Restore drill | Cloud SQL point-in-time restore to a scratch instance | restores; delete it after |

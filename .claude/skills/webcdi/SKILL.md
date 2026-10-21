@@ -62,8 +62,9 @@ Mike's go-ahead.**
 - `cdi_form_csv/cdi_forms/` — item lists (`[Language_Form].csv`);
   `cdi_form_csv/choice_options.csv` — response choice sets + translations.
 - `static/json/instruments.json` — master instrument registry (a second copy
-  in `researcher_UI/static/json/` has **diverged**; migrations and populate
-  read `static/json/`).
+  in `researcher_UI/static/json/` is identical as of 2026-10-21; migrations,
+  populate commands and data import read `static/json/` **by path** — one
+  reason the committed `webcdi/static/` tree can't simply be removed, #632).
 - `brookes/` — purchase codes; `api/` — JSON export; `locale/` — translations.
 
 ## Rules that bite (read before editing)
@@ -73,7 +74,9 @@ Mike's go-ahead.**
   `__init__` silently never runs.
 - **Theme CSS exists twice** and must stay identical:
   `cdi_forms/static/cdi_forms/webcdi-theme.css` and
-  `static/cdi_forms/webcdi-theme.css`.
+  `static/cdi_forms/webcdi-theme.css`. Likewise `supplementtut/*.css` in
+  `researcher_UI/static/supplementtut/` and `static/supplementtut/` (#760),
+  and the CAT bundle `webcdi-cat.js` in both static trees.
 - **Django 5: logout is POST-only.** Never reintroduce
   `<a href="{% url 'logout' %}">`; `webcdi/tests/test_auth.py` guards it.
 - **pandas 3 + Copy-on-Write:** `df[col].replace(..., inplace=True)` is a

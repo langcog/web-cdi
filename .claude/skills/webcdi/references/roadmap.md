@@ -2,14 +2,12 @@
 
 Agreed with Mike. Check `gh issue list` / `gh pr list` for current state.
 
-1. **Pre-QA backlog** (below) — fix, test, merge; each merge deploys to
-   private staging automatically.
-2. **Refresh the rehearsal** (#687, `deploy/rehearsal/`): fresh copy of AWS
-   production, scrub, migrate, full rescore (`update_summary_data`), timed;
-   downloads per instrument, CAT per language, restore drill.
-3. **Full QA** by a naive lab member following a written QA guide (researcher
-   and parent flows), with a results checklist; Virginia signs off on
-   percentiles.
+1. **Pre-QA backlog** — done (below).
+2. **Refresh the rehearsal** — done 2026-10-21 (#687; ~15 min end to end;
+   checklist in `deploy/rehearsal/README.md`). Restore drill still to do.
+3. **Full QA** by a naive lab member following the QA guide (a claude.ai
+   artifact, results saved per tester; test accounts `qa-tester-1..3` on
+   staging, credentials with Mike); Virginia signs off on percentiles.
 4. **GCP production environment** (can proceed in parallel): prod tfvars /
    service / DB / secrets, deletion protection, GitHub environment approval for
    prod deploys, webcdi.org domain mapping + certificate (needs DNS access),
@@ -22,20 +20,13 @@ Before cutover, decide with Mike/Virginia how to tell researchers that
 percentiles changed (#727: coarse tables up ~2 points on average, "not
 computed" for non-M/F sex percentiles, CAT summaries corrected).
 
-## Pre-QA backlog (do these; one issue per PR)
+## Pre-QA backlog — done (2026-10-21)
 
-| Issue | Scope |
-|---|---|
-| #723 | Completion notices: send only on the transition to completed; persist pending retries (e.g. a field swept by the scheduled scoring job) instead of `threading.Timer`. Keep behaviour for the 8 studies that use it; test with mocked `requests.post`. |
-| #726 | CAT download (`cat_utils.get_pd_norms`) adjusts age only when `born_on_due_date` is true — check how the field is stored for early/late children, then adjust on `early_or_late` like the scorer and CAT report. |
-| #675 | Unique constraint on `InstrumentScore (instrument, title)`. The rehearsal copy has no duplicates (verified 2026-10-19). Migration + test. |
-| #630 | Anonymous AJAX endpoints 500 on missing params → 400/redirect. |
-| #640 | `/api` StudyAPI export crashes on pandas 3 (`to_json` duplicate index); currently `known_failure`. |
-| #722 (part 1 only) | Login with username **or** email (case-insensitive); if an email matches several accounts, ask for the username. Unique email (case-insensitive) on new registrations. **Do not** delete or deactivate existing accounts (part 2 needs Mike's sign-off on a list). |
-| #685 | `load_instruments` takes ~19 min; make it faster without changing results. |
-| #682 | Log retention for the GCP project (infra code; `tofu apply` is Mike's). |
-| #648 | Refresh Selenium locators for the redesigned console. |
-| #632, #635 | Stop committing collectstatic output; delete dead `registration/` and `supplementtut/` apps. |
+Merged: #723 (#744), #739 (#745), #741 (#746), #640 (#747), #722 part 1 (#748),
+#635 (#749), #685 (#750), #648 (#754), #726 (#736), #675 (#737), plus the
+download correctness fixes from the backlog run (#755 #759, #756 #761, #757
+#762, #758 #760, summary-text #763) and scoring robustness (#742). Rehearsal
+refreshed with all of it (#687). Open decisions and small items: #764.
 
 **Deferred until after cutover** (don't start): #633 Bootstrap, #634 D3,
 #636 console refactor, #637 migration squash, #722 part 2, feature requests
