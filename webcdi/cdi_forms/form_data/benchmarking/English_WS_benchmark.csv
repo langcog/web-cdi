@@ -87,7 +87,7 @@ Word Forms 1 Total,84,16,2,2,2
 Word Forms 1 Total,85,16,2,2,3
 Word Forms 1 Total,86,16,2,2,3
 Word Forms 1 Total,87,16,2,2,3
-Word Forms 1 Total,88,16,2,2,3
+Word Forms 1 Total,88,16,3,2,3
 Word Forms 1 Total,89,16,3,2,3
 Word Forms 1 Total,90,16,3,3,4
 Word Forms 1 Total,91,16,3,3,4
@@ -154,7 +154,7 @@ Word Forms 1 Total,51,17,0,0,1
 Word Forms 1 Total,52,17,0,0,1
 Word Forms 1 Total,53,17,0,0,1
 Word Forms 1 Total,54,17,0,0,1
-Word Forms 1 Total,55,17,0,0,1
+Word Forms 1 Total,55,17,1,0,1
 Word Forms 1 Total,56,17,1,0,1
 Word Forms 1 Total,57,17,1,0,1
 Word Forms 1 Total,58,17,1,0,1
@@ -284,7 +284,7 @@ Word Forms 1 Total,81,18,3,2,3
 Word Forms 1 Total,82,18,3,2,4
 Word Forms 1 Total,83,18,3,3,4
 Word Forms 1 Total,84,18,3,3,4
-Word Forms 1 Total,85,18,3,3,4
+Word Forms 1 Total,85,18,4,3,4
 Word Forms 1 Total,86,18,4,3,5
 Word Forms 1 Total,87,18,4,3,5
 Word Forms 1 Total,88,18,4,4,5
@@ -560,7 +560,7 @@ Word Forms 1 Total,57,21,2,2,3
 Word Forms 1 Total,58,21,2,2,3
 Word Forms 1 Total,59,21,2,2,3
 Word Forms 1 Total,60,21,2,2,3
-Word Forms 1 Total,61,21,2,2,3
+Word Forms 1 Total,61,21,3,2,3
 Word Forms 1 Total,62,21,3,2,3
 Word Forms 1 Total,63,21,3,2,3
 Word Forms 1 Total,64,21,3,2,4
@@ -643,7 +643,7 @@ Word Forms 1 Total,40,22,1,1,2
 Word Forms 1 Total,41,22,1,1,2
 Word Forms 1 Total,42,22,1,1,2
 Word Forms 1 Total,43,22,1,1,2
-Word Forms 1 Total,44,22,1,1,2
+Word Forms 1 Total,44,22,2,1,2
 Word Forms 1 Total,45,22,2,1,2
 Word Forms 1 Total,46,22,2,1,2
 Word Forms 1 Total,47,22,2,1,2
@@ -673,7 +673,7 @@ Word Forms 1 Total,70,22,5,4,6
 Word Forms 1 Total,71,22,5,4,6
 Word Forms 1 Total,72,22,5,4,6
 Word Forms 1 Total,73,22,5,4,6
-Word Forms 1 Total,74,22,5,4,7
+Word Forms 1 Total,74,22,6,4,7
 Word Forms 1 Total,75,22,6,5,7
 Word Forms 1 Total,76,22,6,5,7
 Word Forms 1 Total,77,22,6,5,7
@@ -684,7 +684,7 @@ Word Forms 1 Total,81,22,7,6,9
 Word Forms 1 Total,82,22,8,6,9
 Word Forms 1 Total,83,22,8,6,9
 Word Forms 1 Total,84,22,8,7,10
-Word Forms 1 Total,85,22,8,7,10
+Word Forms 1 Total,85,22,9,7,10
 Word Forms 1 Total,86,22,9,7,10
 Word Forms 1 Total,87,22,9,7,11
 Word Forms 1 Total,88,22,10,8,11
@@ -695,7 +695,7 @@ Word Forms 1 Total,92,22,12,10,13
 Word Forms 1 Total,93,22,12,10,14
 Word Forms 1 Total,94,22,13,11,15
 Word Forms 1 Total,95,22,14,11,15
-Word Forms 1 Total,96,22,14,12,16
+Word Forms 1 Total,96,22,15,12,16
 Word Forms 1 Total,97,22,16,13,17
 Word Forms 1 Total,98,22,17,15,18
 Word Forms 1 Total,99,22,19,16,20
@@ -767,7 +767,7 @@ Word Forms 1 Total,64,23,5,4,6
 Word Forms 1 Total,65,23,5,4,6
 Word Forms 1 Total,66,23,5,4,6
 Word Forms 1 Total,67,23,5,4,6
-Word Forms 1 Total,68,23,5,4,7
+Word Forms 1 Total,68,23,6,4,7
 Word Forms 1 Total,69,23,6,4,7
 Word Forms 1 Total,70,23,6,5,7
 Word Forms 1 Total,71,23,6,5,7
@@ -779,10 +779,10 @@ Word Forms 1 Total,76,23,7,6,9
 Word Forms 1 Total,77,23,8,6,9
 Word Forms 1 Total,78,23,8,6,9
 Word Forms 1 Total,79,23,8,7,10
-Word Forms 1 Total,80,23,8,7,10
+Word Forms 1 Total,80,23,9,7,10
 Word Forms 1 Total,81,23,9,7,10
 Word Forms 1 Total,82,23,9,7,11
-Word Forms 1 Total,83,23,9,8,11
+Word Forms 1 Total,83,23,10,8,11
 Word Forms 1 Total,84,23,10,8,11
 Word Forms 1 Total,85,23,10,8,12
 Word Forms 1 Total,86,23,11,9,12
@@ -791,7 +791,7 @@ Word Forms 1 Total,88,23,11,9,13
 Word Forms 1 Total,89,23,12,10,14
 Word Forms 1 Total,90,23,12,10,14
 Word Forms 1 Total,91,23,13,11,15
-Word Forms 1 Total,92,23,13,11,15
+Word Forms 1 Total,92,23,14,11,15
 Word Forms 1 Total,93,23,14,12,16
 Word Forms 1 Total,94,23,15,12,16
 Word Forms 1 Total,95,23,16,13,17
@@ -832,7 +832,7 @@ Word Forms 1 Total,29,24,1,1,2
 Word Forms 1 Total,30,24,1,1,2
 Word Forms 1 Total,31,24,1,1,2
 Word Forms 1 Total,32,24,1,1,2
-Word Forms 1 Total,33,24,1,1,2
+Word Forms 1 Total,33,24,2,1,2
 Word Forms 1 Total,34,24,2,1,2
 Word Forms 1 Total,35,24,2,1,2
 Word Forms 1 Total,36,24,2,1,2
@@ -849,7 +849,7 @@ Word Forms 1 Total,46,24,3,2,4
 Word Forms 1 Total,47,24,3,2,4
 Word Forms 1 Total,48,24,3,2,4
 Word Forms 1 Total,49,24,3,3,4
-Word Forms 1 Total,50,24,3,3,4
+Word Forms 1 Total,50,24,4,3,4
 Word Forms 1 Total,51,24,4,3,5
 Word Forms 1 Total,52,24,4,3,5
 Word Forms 1 Total,53,24,4,3,5
@@ -877,10 +877,10 @@ Word Forms 1 Total,74,24,8,7,10
 Word Forms 1 Total,75,24,9,7,10
 Word Forms 1 Total,76,24,9,7,10
 Word Forms 1 Total,77,24,9,7,11
-Word Forms 1 Total,78,24,9,8,11
+Word Forms 1 Total,78,24,10,8,11
 Word Forms 1 Total,79,24,10,8,11
 Word Forms 1 Total,80,24,10,8,12
-Word Forms 1 Total,81,24,10,8,12
+Word Forms 1 Total,81,24,11,8,12
 Word Forms 1 Total,82,24,11,9,12
 Word Forms 1 Total,83,24,11,9,13
 Word Forms 1 Total,84,24,12,9,13
@@ -927,7 +927,7 @@ Word Forms 1 Total,24,25,1,1,2
 Word Forms 1 Total,25,25,1,1,2
 Word Forms 1 Total,26,25,1,1,2
 Word Forms 1 Total,27,25,1,1,2
-Word Forms 1 Total,28,25,1,1,2
+Word Forms 1 Total,28,25,2,1,2
 Word Forms 1 Total,29,25,2,1,2
 Word Forms 1 Total,30,25,2,1,2
 Word Forms 1 Total,31,25,2,1,2
@@ -943,7 +943,7 @@ Word Forms 1 Total,40,25,3,2,4
 Word Forms 1 Total,41,25,3,2,4
 Word Forms 1 Total,42,25,3,2,4
 Word Forms 1 Total,43,25,3,3,4
-Word Forms 1 Total,44,25,3,3,4
+Word Forms 1 Total,44,25,4,3,4
 Word Forms 1 Total,45,25,4,3,5
 Word Forms 1 Total,46,25,4,3,5
 Word Forms 1 Total,47,25,4,3,5
@@ -1084,7 +1084,7 @@ Word Forms 1 Total,81,26,14,12,16
 Word Forms 1 Total,82,26,14,12,16
 Word Forms 1 Total,83,26,15,12,17
 Word Forms 1 Total,84,26,15,13,17
-Word Forms 1 Total,85,26,16,13,17
+Word Forms 1 Total,85,26,15,13,17
 Word Forms 1 Total,86,26,16,13,18
 Word Forms 1 Total,87,26,16,14,18
 Word Forms 1 Total,88,26,17,14,18
@@ -1167,7 +1167,7 @@ Word Forms 1 Total,64,27,10,8,12
 Word Forms 1 Total,65,27,11,9,13
 Word Forms 1 Total,66,27,11,9,13
 Word Forms 1 Total,67,27,11,9,13
-Word Forms 1 Total,68,27,12,9,13
+Word Forms 1 Total,68,27,11,9,13
 Word Forms 1 Total,69,27,12,10,14
 Word Forms 1 Total,70,27,12,10,14
 Word Forms 1 Total,71,27,12,10,14
@@ -1261,14 +1261,14 @@ Word Forms 1 Total,58,28,10,9,12
 Word Forms 1 Total,59,28,11,9,13
 Word Forms 1 Total,60,28,11,9,13
 Word Forms 1 Total,61,28,11,9,13
-Word Forms 1 Total,62,28,12,10,14
+Word Forms 1 Total,62,28,11,10,14
 Word Forms 1 Total,63,28,12,10,14
 Word Forms 1 Total,64,28,12,10,14
 Word Forms 1 Total,65,28,12,10,14
 Word Forms 1 Total,66,28,13,11,15
 Word Forms 1 Total,67,28,13,11,15
 Word Forms 1 Total,68,28,13,11,15
-Word Forms 1 Total,69,28,14,11,15
+Word Forms 1 Total,69,28,13,11,15
 Word Forms 1 Total,70,28,14,12,16
 Word Forms 1 Total,71,28,14,12,16
 Word Forms 1 Total,72,28,14,12,16
@@ -1289,7 +1289,7 @@ Word Forms 1 Total,86,28,19,17,21
 Word Forms 1 Total,87,28,19,17,21
 Word Forms 1 Total,88,28,20,18,21
 Word Forms 1 Total,89,28,20,18,21
-Word Forms 1 Total,90,28,21,19,22
+Word Forms 1 Total,90,28,20,19,22
 Word Forms 1 Total,91,28,21,19,22
 Word Forms 1 Total,92,28,21,20,22
 Word Forms 1 Total,93,28,22,20,23
@@ -1355,21 +1355,21 @@ Word Forms 1 Total,52,29,10,9,13
 Word Forms 1 Total,53,29,11,9,13
 Word Forms 1 Total,54,29,11,9,13
 Word Forms 1 Total,55,29,11,9,13
-Word Forms 1 Total,56,29,12,10,14
+Word Forms 1 Total,56,29,11,10,14
 Word Forms 1 Total,57,29,12,10,14
 Word Forms 1 Total,58,29,12,10,14
 Word Forms 1 Total,59,29,12,10,14
 Word Forms 1 Total,60,29,13,11,15
 Word Forms 1 Total,61,29,13,11,15
 Word Forms 1 Total,62,29,13,11,15
-Word Forms 1 Total,63,29,14,12,16
+Word Forms 1 Total,63,29,13,12,16
 Word Forms 1 Total,64,29,14,12,16
 Word Forms 1 Total,65,29,14,12,16
 Word Forms 1 Total,66,29,14,12,16
 Word Forms 1 Total,67,29,15,13,17
 Word Forms 1 Total,68,29,15,13,17
 Word Forms 1 Total,69,29,15,13,17
-Word Forms 1 Total,70,29,16,14,17
+Word Forms 1 Total,70,29,15,14,17
 Word Forms 1 Total,71,29,16,14,18
 Word Forms 1 Total,72,29,16,14,18
 Word Forms 1 Total,73,29,16,14,18
@@ -1379,10 +1379,10 @@ Word Forms 1 Total,76,29,17,15,19
 Word Forms 1 Total,77,29,18,16,19
 Word Forms 1 Total,78,29,18,16,20
 Word Forms 1 Total,79,29,18,16,20
-Word Forms 1 Total,80,29,19,17,20
+Word Forms 1 Total,80,29,18,17,20
 Word Forms 1 Total,81,29,19,17,20
 Word Forms 1 Total,82,29,19,17,21
-Word Forms 1 Total,83,29,20,18,21
+Word Forms 1 Total,83,29,19,18,21
 Word Forms 1 Total,84,29,20,18,21
 Word Forms 1 Total,85,29,20,18,21
 Word Forms 1 Total,86,29,20,19,22
@@ -1403,102 +1403,702 @@ Word Forms 1 Total,0,30,0,0,0
 Word Forms 1 Total,1,30,0,0,0
 Word Forms 1 Total,2,30,0,0,0
 Word Forms 1 Total,3,30,0,0,1
-Word Forms 1 Total,4,30,0,0,1
-Word Forms 1 Total,5,30,0,0,1
+Word Forms 1 Total,4,30,1,0,1
+Word Forms 1 Total,5,30,1,0,1
 Word Forms 1 Total,6,30,1,1,2
 Word Forms 1 Total,7,30,1,1,2
 Word Forms 1 Total,8,30,1,1,2
 Word Forms 1 Total,9,30,1,1,2
-Word Forms 1 Total,10,30,1,1,3
-Word Forms 1 Total,11,30,1,1,3
-Word Forms 1 Total,12,30,1,1,3
+Word Forms 1 Total,10,30,2,1,3
+Word Forms 1 Total,11,30,2,1,3
+Word Forms 1 Total,12,30,2,1,3
 Word Forms 1 Total,13,30,2,2,3
 Word Forms 1 Total,14,30,2,2,4
-Word Forms 1 Total,15,30,2,2,4
-Word Forms 1 Total,16,30,2,2,4
-Word Forms 1 Total,17,30,2,2,5
+Word Forms 1 Total,15,30,3,2,4
+Word Forms 1 Total,16,30,3,2,4
+Word Forms 1 Total,17,30,3,2,5
 Word Forms 1 Total,18,30,3,2,5
-Word Forms 1 Total,19,30,3,3,5
-Word Forms 1 Total,20,30,3,3,5
-Word Forms 1 Total,21,30,3,3,6
-Word Forms 1 Total,22,30,3,3,6
-Word Forms 1 Total,23,30,4,3,6
-Word Forms 1 Total,24,30,4,4,7
-Word Forms 1 Total,25,30,4,4,7
-Word Forms 1 Total,26,30,4,4,7
-Word Forms 1 Total,27,30,4,4,7
-Word Forms 1 Total,28,30,5,4,8
-Word Forms 1 Total,29,30,5,5,8
-Word Forms 1 Total,30,30,5,5,8
-Word Forms 1 Total,31,30,5,5,9
-Word Forms 1 Total,32,30,5,5,9
-Word Forms 1 Total,33,30,6,6,9
-Word Forms 1 Total,34,30,6,6,9
-Word Forms 1 Total,35,30,6,6,10
-Word Forms 1 Total,36,30,6,6,10
-Word Forms 1 Total,37,30,7,7,10
-Word Forms 1 Total,38,30,7,7,11
-Word Forms 1 Total,39,30,7,7,11
-Word Forms 1 Total,40,30,7,7,11
-Word Forms 1 Total,41,30,8,7,11
-Word Forms 1 Total,42,30,8,8,12
-Word Forms 1 Total,43,30,8,8,12
-Word Forms 1 Total,44,30,8,8,12
-Word Forms 1 Total,45,30,9,9,12
-Word Forms 1 Total,46,30,9,9,13
-Word Forms 1 Total,47,30,9,9,13
-Word Forms 1 Total,48,30,9,9,13
-Word Forms 1 Total,49,30,10,10,14
-Word Forms 1 Total,50,30,10,10,14
-Word Forms 1 Total,51,30,10,10,14
-Word Forms 1 Total,52,30,10,10,14
-Word Forms 1 Total,53,30,11,11,15
-Word Forms 1 Total,54,30,11,11,15
-Word Forms 1 Total,55,30,11,11,15
-Word Forms 1 Total,56,30,12,11,15
-Word Forms 1 Total,57,30,12,12,16
-Word Forms 1 Total,58,30,12,12,16
-Word Forms 1 Total,59,30,12,12,16
-Word Forms 1 Total,60,30,13,13,16
-Word Forms 1 Total,61,30,13,13,17
-Word Forms 1 Total,62,30,13,13,17
-Word Forms 1 Total,63,30,14,13,17
-Word Forms 1 Total,64,30,14,14,17
-Word Forms 1 Total,65,30,14,14,18
-Word Forms 1 Total,66,30,14,14,18
-Word Forms 1 Total,67,30,15,15,18
-Word Forms 1 Total,68,30,15,15,18
-Word Forms 1 Total,69,30,15,15,19
-Word Forms 1 Total,70,30,16,16,19
-Word Forms 1 Total,71,30,16,16,19
-Word Forms 1 Total,72,30,16,16,19
-Word Forms 1 Total,73,30,16,16,20
-Word Forms 1 Total,74,30,17,17,20
-Word Forms 1 Total,75,30,17,17,20
-Word Forms 1 Total,76,30,17,17,20
-Word Forms 1 Total,77,30,18,18,21
-Word Forms 1 Total,78,30,18,18,21
-Word Forms 1 Total,79,30,18,18,21
-Word Forms 1 Total,80,30,19,19,21
-Word Forms 1 Total,81,30,19,19,22
-Word Forms 1 Total,82,30,19,19,22
-Word Forms 1 Total,83,30,20,20,22
-Word Forms 1 Total,84,30,20,20,22
-Word Forms 1 Total,85,30,20,20,22
-Word Forms 1 Total,86,30,20,21,23
-Word Forms 1 Total,87,30,21,21,23
-Word Forms 1 Total,88,30,21,21,23
-Word Forms 1 Total,89,30,21,21,23
-Word Forms 1 Total,90,30,22,22,23
-Word Forms 1 Total,91,30,22,22,24
-Word Forms 1 Total,92,30,22,22,24
+Word Forms 1 Total,19,30,4,3,5
+Word Forms 1 Total,20,30,4,3,5
+Word Forms 1 Total,21,30,4,3,6
+Word Forms 1 Total,22,30,4,3,6
+Word Forms 1 Total,23,30,5,3,6
+Word Forms 1 Total,24,30,5,4,7
+Word Forms 1 Total,25,30,5,4,7
+Word Forms 1 Total,26,30,5,4,7
+Word Forms 1 Total,27,30,5,4,7
+Word Forms 1 Total,28,30,6,4,8
+Word Forms 1 Total,29,30,6,5,8
+Word Forms 1 Total,30,30,6,5,8
+Word Forms 1 Total,31,30,6,5,9
+Word Forms 1 Total,32,30,7,5,9
+Word Forms 1 Total,33,30,7,6,9
+Word Forms 1 Total,34,30,7,6,9
+Word Forms 1 Total,35,30,8,6,10
+Word Forms 1 Total,36,30,8,6,10
+Word Forms 1 Total,37,30,8,7,10
+Word Forms 1 Total,38,30,8,7,11
+Word Forms 1 Total,39,30,9,7,11
+Word Forms 1 Total,40,30,9,7,11
+Word Forms 1 Total,41,30,9,7,11
+Word Forms 1 Total,42,30,9,8,12
+Word Forms 1 Total,43,30,10,8,12
+Word Forms 1 Total,44,30,10,8,12
+Word Forms 1 Total,45,30,10,9,12
+Word Forms 1 Total,46,30,10,9,13
+Word Forms 1 Total,47,30,11,9,13
+Word Forms 1 Total,48,30,11,9,13
+Word Forms 1 Total,49,30,11,10,14
+Word Forms 1 Total,50,30,12,10,14
+Word Forms 1 Total,51,30,12,10,14
+Word Forms 1 Total,52,30,12,10,14
+Word Forms 1 Total,53,30,12,11,15
+Word Forms 1 Total,54,30,13,11,15
+Word Forms 1 Total,55,30,13,11,15
+Word Forms 1 Total,56,30,13,11,15
+Word Forms 1 Total,57,30,13,12,16
+Word Forms 1 Total,58,30,14,12,16
+Word Forms 1 Total,59,30,14,12,16
+Word Forms 1 Total,60,30,14,13,16
+Word Forms 1 Total,61,30,15,13,17
+Word Forms 1 Total,62,30,15,13,17
+Word Forms 1 Total,63,30,15,13,17
+Word Forms 1 Total,64,30,15,14,17
+Word Forms 1 Total,65,30,16,14,18
+Word Forms 1 Total,66,30,16,14,18
+Word Forms 1 Total,67,30,16,15,18
+Word Forms 1 Total,68,30,17,15,18
+Word Forms 1 Total,69,30,17,15,19
+Word Forms 1 Total,70,30,17,16,19
+Word Forms 1 Total,71,30,17,16,19
+Word Forms 1 Total,72,30,18,16,19
+Word Forms 1 Total,73,30,18,16,20
+Word Forms 1 Total,74,30,18,17,20
+Word Forms 1 Total,75,30,19,17,20
+Word Forms 1 Total,76,30,19,17,20
+Word Forms 1 Total,77,30,19,18,21
+Word Forms 1 Total,78,30,19,18,21
+Word Forms 1 Total,79,30,20,18,21
+Word Forms 1 Total,80,30,20,19,21
+Word Forms 1 Total,81,30,20,19,22
+Word Forms 1 Total,82,30,20,19,22
+Word Forms 1 Total,83,30,21,20,22
+Word Forms 1 Total,84,30,21,20,22
+Word Forms 1 Total,85,30,21,20,22
+Word Forms 1 Total,86,30,22,21,23
+Word Forms 1 Total,87,30,22,21,23
+Word Forms 1 Total,88,30,22,21,23
+Word Forms 1 Total,89,30,22,21,23
+Word Forms 1 Total,90,30,23,22,23
+Word Forms 1 Total,91,30,23,22,24
+Word Forms 1 Total,92,30,23,22,24
 Word Forms 1 Total,93,30,23,23,24
-Word Forms 1 Total,94,30,23,23,24
-Word Forms 1 Total,95,30,23,23,24
+Word Forms 1 Total,94,30,24,23,24
+Word Forms 1 Total,95,30,24,23,24
 Word Forms 1 Total,96,30,24,24,24
 Word Forms 1 Total,97,30,24,24,25
-Word Forms 1 Total,98,30,24,24,25
+Word Forms 1 Total,98,30,25,24,25
 Word Forms 1 Total,99,30,25,25,25
+Word Forms 1 Total,0,31,0,0,0
+Word Forms 1 Total,1,31,0,0,0
+Word Forms 1 Total,2,31,0,0,1
+Word Forms 1 Total,3,31,1,0,1
+Word Forms 1 Total,4,31,1,0,1
+Word Forms 1 Total,5,31,1,1,2
+Word Forms 1 Total,6,31,1,1,2
+Word Forms 1 Total,7,31,1,1,2
+Word Forms 1 Total,8,31,2,1,3
+Word Forms 1 Total,9,31,2,1,3
+Word Forms 1 Total,10,31,2,1,3
+Word Forms 1 Total,11,31,2,2,4
+Word Forms 1 Total,12,31,3,2,4
+Word Forms 1 Total,13,31,3,2,4
+Word Forms 1 Total,14,31,3,2,5
+Word Forms 1 Total,15,31,3,2,5
+Word Forms 1 Total,16,31,4,3,5
+Word Forms 1 Total,17,31,4,3,6
+Word Forms 1 Total,18,31,4,3,6
+Word Forms 1 Total,19,31,5,3,6
+Word Forms 1 Total,20,31,5,4,7
+Word Forms 1 Total,21,31,5,4,7
+Word Forms 1 Total,22,31,5,4,7
+Word Forms 1 Total,23,31,6,4,8
+Word Forms 1 Total,24,31,6,5,8
+Word Forms 1 Total,25,31,6,5,8
+Word Forms 1 Total,26,31,6,5,9
+Word Forms 1 Total,27,31,7,5,9
+Word Forms 1 Total,28,31,7,6,9
+Word Forms 1 Total,29,31,7,6,10
+Word Forms 1 Total,30,31,8,6,10
+Word Forms 1 Total,31,31,8,6,10
+Word Forms 1 Total,32,31,8,7,10
+Word Forms 1 Total,33,31,8,7,11
+Word Forms 1 Total,34,31,9,7,11
+Word Forms 1 Total,35,31,9,7,11
+Word Forms 1 Total,36,31,9,8,12
+Word Forms 1 Total,37,31,10,8,12
+Word Forms 1 Total,38,31,10,8,12
+Word Forms 1 Total,39,31,10,9,13
+Word Forms 1 Total,40,31,10,9,13
+Word Forms 1 Total,41,31,11,9,13
+Word Forms 1 Total,42,31,11,9,13
+Word Forms 1 Total,43,31,11,10,14
+Word Forms 1 Total,44,31,12,10,14
+Word Forms 1 Total,45,31,12,10,14
+Word Forms 1 Total,46,31,12,10,14
+Word Forms 1 Total,47,31,12,11,15
+Word Forms 1 Total,48,31,13,11,15
+Word Forms 1 Total,49,31,13,11,15
+Word Forms 1 Total,50,31,13,12,16
+Word Forms 1 Total,51,31,14,12,16
+Word Forms 1 Total,52,31,14,12,16
+Word Forms 1 Total,53,31,14,13,16
+Word Forms 1 Total,54,31,14,13,17
+Word Forms 1 Total,55,31,15,13,17
+Word Forms 1 Total,56,31,15,13,17
+Word Forms 1 Total,57,31,15,14,17
+Word Forms 1 Total,58,31,16,14,18
+Word Forms 1 Total,59,31,16,14,18
+Word Forms 1 Total,60,31,16,15,18
+Word Forms 1 Total,61,31,16,15,18
+Word Forms 1 Total,62,31,17,15,19
+Word Forms 1 Total,63,31,17,15,19
+Word Forms 1 Total,64,31,17,16,19
+Word Forms 1 Total,65,31,17,16,19
+Word Forms 1 Total,66,31,18,16,19
+Word Forms 1 Total,67,31,18,17,20
+Word Forms 1 Total,68,31,18,17,20
+Word Forms 1 Total,69,31,18,17,20
+Word Forms 1 Total,70,31,19,18,20
+Word Forms 1 Total,71,31,19,18,21
+Word Forms 1 Total,72,31,19,18,21
+Word Forms 1 Total,73,31,20,18,21
+Word Forms 1 Total,74,31,20,19,21
+Word Forms 1 Total,75,31,20,19,21
+Word Forms 1 Total,76,31,20,19,22
+Word Forms 1 Total,77,31,21,20,22
+Word Forms 1 Total,78,31,21,20,22
+Word Forms 1 Total,79,31,21,20,22
+Word Forms 1 Total,80,31,21,20,22
+Word Forms 1 Total,81,31,21,21,23
+Word Forms 1 Total,82,31,22,21,23
+Word Forms 1 Total,83,31,22,21,23
+Word Forms 1 Total,84,31,22,21,23
+Word Forms 1 Total,85,31,22,22,23
+Word Forms 1 Total,86,31,23,22,23
+Word Forms 1 Total,87,31,23,22,24
+Word Forms 1 Total,88,31,23,23,24
+Word Forms 1 Total,89,31,23,23,24
+Word Forms 1 Total,90,31,23,23,24
+Word Forms 1 Total,91,31,24,23,24
+Word Forms 1 Total,92,31,24,23,24
+Word Forms 1 Total,93,31,24,24,24
+Word Forms 1 Total,94,31,24,24,25
+Word Forms 1 Total,95,31,24,24,25
+Word Forms 1 Total,96,31,25,24,25
+Word Forms 1 Total,97,31,25,25,25
+Word Forms 1 Total,98,31,25,25,25
+Word Forms 1 Total,99,31,25,25,25
+Word Forms 1 Total,0,32,0,0,0
+Word Forms 1 Total,1,32,0,0,1
+Word Forms 1 Total,2,32,0,0,1
+Word Forms 1 Total,3,32,1,0,2
+Word Forms 1 Total,4,32,1,1,2
+Word Forms 1 Total,5,32,1,1,2
+Word Forms 1 Total,6,32,2,1,3
+Word Forms 1 Total,7,32,2,1,3
+Word Forms 1 Total,8,32,2,1,4
+Word Forms 1 Total,9,32,3,2,4
+Word Forms 1 Total,10,32,3,2,4
+Word Forms 1 Total,11,32,3,2,5
+Word Forms 1 Total,12,32,3,2,5
+Word Forms 1 Total,13,32,4,3,6
+Word Forms 1 Total,14,32,4,3,6
+Word Forms 1 Total,15,32,4,3,6
+Word Forms 1 Total,16,32,5,3,7
+Word Forms 1 Total,17,32,5,4,7
+Word Forms 1 Total,18,32,5,4,8
+Word Forms 1 Total,19,32,6,4,8
+Word Forms 1 Total,20,32,6,4,8
+Word Forms 1 Total,21,32,6,5,9
+Word Forms 1 Total,22,32,7,5,9
+Word Forms 1 Total,23,32,7,5,9
+Word Forms 1 Total,24,32,7,6,10
+Word Forms 1 Total,25,32,8,6,10
+Word Forms 1 Total,26,32,8,6,10
+Word Forms 1 Total,27,32,8,6,11
+Word Forms 1 Total,28,32,8,7,11
+Word Forms 1 Total,29,32,9,7,11
+Word Forms 1 Total,30,32,9,7,12
+Word Forms 1 Total,31,32,9,8,12
+Word Forms 1 Total,32,32,10,8,12
+Word Forms 1 Total,33,32,10,8,13
+Word Forms 1 Total,34,32,10,9,13
+Word Forms 1 Total,35,32,11,9,13
+Word Forms 1 Total,36,32,11,9,13
+Word Forms 1 Total,37,32,11,10,14
+Word Forms 1 Total,38,32,12,10,14
+Word Forms 1 Total,39,32,12,10,14
+Word Forms 1 Total,40,32,12,11,15
+Word Forms 1 Total,41,32,12,11,15
+Word Forms 1 Total,42,32,13,11,15
+Word Forms 1 Total,43,32,13,11,15
+Word Forms 1 Total,44,32,13,12,16
+Word Forms 1 Total,45,32,14,12,16
+Word Forms 1 Total,46,32,14,12,16
+Word Forms 1 Total,47,32,14,13,16
+Word Forms 1 Total,48,32,15,13,17
+Word Forms 1 Total,49,32,15,13,17
+Word Forms 1 Total,50,32,15,14,17
+Word Forms 1 Total,51,32,15,14,18
+Word Forms 1 Total,52,32,16,14,18
+Word Forms 1 Total,53,32,16,15,18
+Word Forms 1 Total,54,32,16,15,18
+Word Forms 1 Total,55,32,16,15,18
+Word Forms 1 Total,56,32,17,15,19
+Word Forms 1 Total,57,32,17,16,19
+Word Forms 1 Total,58,32,17,16,19
+Word Forms 1 Total,59,32,18,16,19
+Word Forms 1 Total,60,32,18,17,20
+Word Forms 1 Total,61,32,18,17,20
+Word Forms 1 Total,62,32,18,17,20
+Word Forms 1 Total,63,32,19,18,20
+Word Forms 1 Total,64,32,19,18,20
+Word Forms 1 Total,65,32,19,18,21
+Word Forms 1 Total,66,32,19,18,21
+Word Forms 1 Total,67,32,20,19,21
+Word Forms 1 Total,68,32,20,19,21
+Word Forms 1 Total,69,32,20,19,21
+Word Forms 1 Total,70,32,20,19,22
+Word Forms 1 Total,71,32,20,20,22
+Word Forms 1 Total,72,32,21,20,22
+Word Forms 1 Total,73,32,21,20,22
+Word Forms 1 Total,74,32,21,21,22
+Word Forms 1 Total,75,32,21,21,22
+Word Forms 1 Total,76,32,22,21,23
+Word Forms 1 Total,77,32,22,21,23
+Word Forms 1 Total,78,32,22,21,23
+Word Forms 1 Total,79,32,22,22,23
+Word Forms 1 Total,80,32,22,22,23
+Word Forms 1 Total,81,32,23,22,23
+Word Forms 1 Total,82,32,23,22,23
+Word Forms 1 Total,83,32,23,23,24
+Word Forms 1 Total,84,32,23,23,24
+Word Forms 1 Total,85,32,23,23,24
+Word Forms 1 Total,86,32,23,23,24
+Word Forms 1 Total,87,32,24,23,24
+Word Forms 1 Total,88,32,24,24,24
+Word Forms 1 Total,89,32,24,24,24
+Word Forms 1 Total,90,32,24,24,24
+Word Forms 1 Total,91,32,24,24,24
+Word Forms 1 Total,92,32,24,24,25
+Word Forms 1 Total,93,32,24,24,25
+Word Forms 1 Total,94,32,25,24,25
+Word Forms 1 Total,95,32,25,25,25
+Word Forms 1 Total,96,32,25,25,25
+Word Forms 1 Total,97,32,25,25,25
+Word Forms 1 Total,98,32,25,25,25
+Word Forms 1 Total,99,32,25,25,25
+Word Forms 1 Total,0,33,0,0,0
+Word Forms 1 Total,1,33,0,0,1
+Word Forms 1 Total,2,33,1,0,1
+Word Forms 1 Total,3,33,1,0,2
+Word Forms 1 Total,4,33,1,1,3
+Word Forms 1 Total,5,33,2,1,3
+Word Forms 1 Total,6,33,2,1,4
+Word Forms 1 Total,7,33,2,1,4
+Word Forms 1 Total,8,33,3,2,5
+Word Forms 1 Total,9,33,3,2,5
+Word Forms 1 Total,10,33,4,2,6
+Word Forms 1 Total,11,33,4,3,6
+Word Forms 1 Total,12,33,4,3,6
+Word Forms 1 Total,13,33,5,3,7
+Word Forms 1 Total,14,33,5,3,7
+Word Forms 1 Total,15,33,5,4,8
+Word Forms 1 Total,16,33,6,4,8
+Word Forms 1 Total,17,33,6,4,9
+Word Forms 1 Total,18,33,7,5,9
+Word Forms 1 Total,19,33,7,5,9
+Word Forms 1 Total,20,33,7,5,10
+Word Forms 1 Total,21,33,8,6,10
+Word Forms 1 Total,22,33,8,6,11
+Word Forms 1 Total,23,33,8,7,11
+Word Forms 1 Total,24,33,9,7,11
+Word Forms 1 Total,25,33,9,7,12
+Word Forms 1 Total,26,33,9,8,12
+Word Forms 1 Total,27,33,10,8,12
+Word Forms 1 Total,28,33,10,8,13
+Word Forms 1 Total,29,33,10,9,13
+Word Forms 1 Total,30,33,11,9,13
+Word Forms 1 Total,31,33,11,9,14
+Word Forms 1 Total,32,33,11,10,14
+Word Forms 1 Total,33,33,12,10,14
+Word Forms 1 Total,34,33,12,10,15
+Word Forms 1 Total,35,33,12,11,15
+Word Forms 1 Total,36,33,13,11,15
+Word Forms 1 Total,37,33,13,11,15
+Word Forms 1 Total,38,33,13,12,16
+Word Forms 1 Total,39,33,14,12,16
+Word Forms 1 Total,40,33,14,12,16
+Word Forms 1 Total,41,33,14,13,17
+Word Forms 1 Total,42,33,15,13,17
+Word Forms 1 Total,43,33,15,13,17
+Word Forms 1 Total,44,33,15,14,17
+Word Forms 1 Total,45,33,15,14,18
+Word Forms 1 Total,46,33,16,14,18
+Word Forms 1 Total,47,33,16,15,18
+Word Forms 1 Total,48,33,16,15,18
+Word Forms 1 Total,49,33,17,15,19
+Word Forms 1 Total,50,33,17,16,19
+Word Forms 1 Total,51,33,17,16,19
+Word Forms 1 Total,52,33,17,16,19
+Word Forms 1 Total,53,33,18,17,20
+Word Forms 1 Total,54,33,18,17,20
+Word Forms 1 Total,55,33,18,17,20
+Word Forms 1 Total,56,33,18,18,20
+Word Forms 1 Total,57,33,19,18,20
+Word Forms 1 Total,58,33,19,18,21
+Word Forms 1 Total,59,33,19,18,21
+Word Forms 1 Total,60,33,19,19,21
+Word Forms 1 Total,61,33,20,19,21
+Word Forms 1 Total,62,33,20,19,21
+Word Forms 1 Total,63,33,20,20,21
+Word Forms 1 Total,64,33,20,20,22
+Word Forms 1 Total,65,33,21,20,22
+Word Forms 1 Total,66,33,21,20,22
+Word Forms 1 Total,67,33,21,21,22
+Word Forms 1 Total,68,33,21,21,22
+Word Forms 1 Total,69,33,21,21,22
+Word Forms 1 Total,70,33,22,21,23
+Word Forms 1 Total,71,33,22,21,23
+Word Forms 1 Total,72,33,22,22,23
+Word Forms 1 Total,73,33,22,22,23
+Word Forms 1 Total,74,33,22,22,23
+Word Forms 1 Total,75,33,22,22,23
+Word Forms 1 Total,76,33,23,22,23
+Word Forms 1 Total,77,33,23,23,24
+Word Forms 1 Total,78,33,23,23,24
+Word Forms 1 Total,79,33,23,23,24
+Word Forms 1 Total,80,33,23,23,24
+Word Forms 1 Total,81,33,23,23,24
+Word Forms 1 Total,82,33,24,24,24
+Word Forms 1 Total,83,33,24,24,24
+Word Forms 1 Total,84,33,24,24,24
+Word Forms 1 Total,85,33,24,24,24
+Word Forms 1 Total,86,33,24,24,24
+Word Forms 1 Total,87,33,24,24,24
+Word Forms 1 Total,88,33,24,24,25
+Word Forms 1 Total,89,33,24,24,25
+Word Forms 1 Total,90,33,24,24,25
+Word Forms 1 Total,91,33,25,25,25
+Word Forms 1 Total,92,33,25,25,25
+Word Forms 1 Total,93,33,25,25,25
+Word Forms 1 Total,94,33,25,25,25
+Word Forms 1 Total,95,33,25,25,25
+Word Forms 1 Total,96,33,25,25,25
+Word Forms 1 Total,97,33,25,25,25
+Word Forms 1 Total,98,33,25,25,25
+Word Forms 1 Total,99,33,25,25,25
+Word Forms 1 Total,0,34,0,0,0
+Word Forms 1 Total,1,34,0,0,1
+Word Forms 1 Total,2,34,1,0,2
+Word Forms 1 Total,3,34,1,1,3
+Word Forms 1 Total,4,34,2,1,3
+Word Forms 1 Total,5,34,2,1,4
+Word Forms 1 Total,6,34,3,1,5
+Word Forms 1 Total,7,34,3,2,5
+Word Forms 1 Total,8,34,4,2,6
+Word Forms 1 Total,9,34,4,2,6
+Word Forms 1 Total,10,34,4,3,7
+Word Forms 1 Total,11,34,5,3,7
+Word Forms 1 Total,12,34,5,4,8
+Word Forms 1 Total,13,34,6,4,8
+Word Forms 1 Total,14,34,6,4,9
+Word Forms 1 Total,15,34,7,5,9
+Word Forms 1 Total,16,34,7,5,10
+Word Forms 1 Total,17,34,7,6,10
+Word Forms 1 Total,18,34,8,6,11
+Word Forms 1 Total,19,34,8,6,11
+Word Forms 1 Total,20,34,9,7,11
+Word Forms 1 Total,21,34,9,7,12
+Word Forms 1 Total,22,34,9,8,12
+Word Forms 1 Total,23,34,10,8,13
+Word Forms 1 Total,24,34,10,8,13
+Word Forms 1 Total,25,34,11,9,13
+Word Forms 1 Total,26,34,11,9,14
+Word Forms 1 Total,27,34,11,10,14
+Word Forms 1 Total,28,34,12,10,14
+Word Forms 1 Total,29,34,12,10,15
+Word Forms 1 Total,30,34,12,11,15
+Word Forms 1 Total,31,34,13,11,15
+Word Forms 1 Total,32,34,13,12,16
+Word Forms 1 Total,33,34,13,12,16
+Word Forms 1 Total,34,34,14,12,16
+Word Forms 1 Total,35,34,14,13,17
+Word Forms 1 Total,36,34,14,13,17
+Word Forms 1 Total,37,34,15,13,17
+Word Forms 1 Total,38,34,15,14,17
+Word Forms 1 Total,39,34,15,14,18
+Word Forms 1 Total,40,34,16,15,18
+Word Forms 1 Total,41,34,16,15,18
+Word Forms 1 Total,42,34,16,15,18
+Word Forms 1 Total,43,34,17,16,19
+Word Forms 1 Total,44,34,17,16,19
+Word Forms 1 Total,45,34,17,16,19
+Word Forms 1 Total,46,34,17,17,19
+Word Forms 1 Total,47,34,18,17,20
+Word Forms 1 Total,48,34,18,17,20
+Word Forms 1 Total,49,34,18,18,20
+Word Forms 1 Total,50,34,19,18,20
+Word Forms 1 Total,51,34,19,18,20
+Word Forms 1 Total,52,34,19,18,21
+Word Forms 1 Total,53,34,19,19,21
+Word Forms 1 Total,54,34,19,19,21
+Word Forms 1 Total,55,34,20,19,21
+Word Forms 1 Total,56,34,20,20,21
+Word Forms 1 Total,57,34,20,20,22
+Word Forms 1 Total,58,34,20,20,22
+Word Forms 1 Total,59,34,21,20,22
+Word Forms 1 Total,60,34,21,21,22
+Word Forms 1 Total,61,34,21,21,22
+Word Forms 1 Total,62,34,21,21,22
+Word Forms 1 Total,63,34,21,21,23
+Word Forms 1 Total,64,34,22,22,23
+Word Forms 1 Total,65,34,22,22,23
+Word Forms 1 Total,66,34,22,22,23
+Word Forms 1 Total,67,34,22,22,23
+Word Forms 1 Total,68,34,22,22,23
+Word Forms 1 Total,69,34,22,23,23
+Word Forms 1 Total,70,34,23,23,23
+Word Forms 1 Total,71,34,23,23,24
+Word Forms 1 Total,72,34,23,23,24
+Word Forms 1 Total,73,34,23,23,24
+Word Forms 1 Total,74,34,23,23,24
+Word Forms 1 Total,75,34,23,23,24
+Word Forms 1 Total,76,34,23,24,24
+Word Forms 1 Total,77,34,24,24,24
+Word Forms 1 Total,78,34,24,24,24
+Word Forms 1 Total,79,34,24,24,24
+Word Forms 1 Total,80,34,24,24,24
+Word Forms 1 Total,81,34,24,24,24
+Word Forms 1 Total,82,34,24,24,24
+Word Forms 1 Total,83,34,24,24,25
+Word Forms 1 Total,84,34,24,24,25
+Word Forms 1 Total,85,34,24,25,25
+Word Forms 1 Total,86,34,24,25,25
+Word Forms 1 Total,87,34,25,25,25
+Word Forms 1 Total,88,34,25,25,25
+Word Forms 1 Total,89,34,25,25,25
+Word Forms 1 Total,90,34,25,25,25
+Word Forms 1 Total,91,34,25,25,25
+Word Forms 1 Total,92,34,25,25,25
+Word Forms 1 Total,93,34,25,25,25
+Word Forms 1 Total,94,34,25,25,25
+Word Forms 1 Total,95,34,25,25,25
+Word Forms 1 Total,96,34,25,25,25
+Word Forms 1 Total,97,34,25,25,25
+Word Forms 1 Total,98,34,25,25,25
+Word Forms 1 Total,99,34,25,25,25
+Word Forms 1 Total,0,35,0,0,0
+Word Forms 1 Total,1,35,1,0,1
+Word Forms 1 Total,2,35,1,0,2
+Word Forms 1 Total,3,35,2,1,3
+Word Forms 1 Total,4,35,2,1,4
+Word Forms 1 Total,5,35,3,1,5
+Word Forms 1 Total,6,35,3,2,6
+Word Forms 1 Total,7,35,4,2,6
+Word Forms 1 Total,8,35,4,3,7
+Word Forms 1 Total,9,35,5,3,7
+Word Forms 1 Total,10,35,5,3,8
+Word Forms 1 Total,11,35,6,4,9
+Word Forms 1 Total,12,35,6,4,9
+Word Forms 1 Total,13,35,7,5,10
+Word Forms 1 Total,14,35,7,5,10
+Word Forms 1 Total,15,35,8,6,11
+Word Forms 1 Total,16,35,8,6,11
+Word Forms 1 Total,17,35,9,7,12
+Word Forms 1 Total,18,35,9,7,12
+Word Forms 1 Total,19,35,10,8,13
+Word Forms 1 Total,20,35,10,8,13
+Word Forms 1 Total,21,35,11,9,13
+Word Forms 1 Total,22,35,11,9,14
+Word Forms 1 Total,23,35,11,10,14
+Word Forms 1 Total,24,35,12,10,15
+Word Forms 1 Total,25,35,12,10,15
+Word Forms 1 Total,26,35,13,11,15
+Word Forms 1 Total,27,35,13,11,16
+Word Forms 1 Total,28,35,13,12,16
+Word Forms 1 Total,29,35,14,12,16
+Word Forms 1 Total,30,35,14,13,17
+Word Forms 1 Total,31,35,15,13,17
+Word Forms 1 Total,32,35,15,14,17
+Word Forms 1 Total,33,35,15,14,18
+Word Forms 1 Total,34,35,16,14,18
+Word Forms 1 Total,35,35,16,15,18
+Word Forms 1 Total,36,35,16,15,18
+Word Forms 1 Total,37,35,17,16,19
+Word Forms 1 Total,38,35,17,16,19
+Word Forms 1 Total,39,35,17,16,19
+Word Forms 1 Total,40,35,17,17,19
+Word Forms 1 Total,41,35,18,17,20
+Word Forms 1 Total,42,35,18,17,20
+Word Forms 1 Total,43,35,18,18,20
+Word Forms 1 Total,44,35,19,18,20
+Word Forms 1 Total,45,35,19,18,21
+Word Forms 1 Total,46,35,19,19,21
+Word Forms 1 Total,47,35,19,19,21
+Word Forms 1 Total,48,35,20,19,21
+Word Forms 1 Total,49,35,20,20,21
+Word Forms 1 Total,50,35,20,20,22
+Word Forms 1 Total,51,35,20,20,22
+Word Forms 1 Total,52,35,21,20,22
+Word Forms 1 Total,53,35,21,21,22
+Word Forms 1 Total,54,35,21,21,22
+Word Forms 1 Total,55,35,21,21,22
+Word Forms 1 Total,56,35,21,21,22
+Word Forms 1 Total,57,35,22,22,23
+Word Forms 1 Total,58,35,22,22,23
+Word Forms 1 Total,59,35,22,22,23
+Word Forms 1 Total,60,35,22,22,23
+Word Forms 1 Total,61,35,22,22,23
+Word Forms 1 Total,62,35,22,23,23
+Word Forms 1 Total,63,35,23,23,23
+Word Forms 1 Total,64,35,23,23,23
+Word Forms 1 Total,65,35,23,23,24
+Word Forms 1 Total,66,35,23,23,24
+Word Forms 1 Total,67,35,23,23,24
+Word Forms 1 Total,68,35,23,24,24
+Word Forms 1 Total,69,35,23,24,24
+Word Forms 1 Total,70,35,24,24,24
+Word Forms 1 Total,71,35,24,24,24
+Word Forms 1 Total,72,35,24,24,24
+Word Forms 1 Total,73,35,24,24,24
+Word Forms 1 Total,74,35,24,24,24
+Word Forms 1 Total,75,35,24,24,24
+Word Forms 1 Total,76,35,24,24,24
+Word Forms 1 Total,77,35,24,24,25
+Word Forms 1 Total,78,35,24,24,25
+Word Forms 1 Total,79,35,24,25,25
+Word Forms 1 Total,80,35,24,25,25
+Word Forms 1 Total,81,35,24,25,25
+Word Forms 1 Total,82,35,25,25,25
+Word Forms 1 Total,83,35,25,25,25
+Word Forms 1 Total,84,35,25,25,25
+Word Forms 1 Total,85,35,25,25,25
+Word Forms 1 Total,86,35,25,25,25
+Word Forms 1 Total,87,35,25,25,25
+Word Forms 1 Total,88,35,25,25,25
+Word Forms 1 Total,89,35,25,25,25
+Word Forms 1 Total,90,35,25,25,25
+Word Forms 1 Total,91,35,25,25,25
+Word Forms 1 Total,92,35,25,25,25
+Word Forms 1 Total,93,35,25,25,25
+Word Forms 1 Total,94,35,25,25,25
+Word Forms 1 Total,95,35,25,25,25
+Word Forms 1 Total,96,35,25,25,25
+Word Forms 1 Total,97,35,25,25,25
+Word Forms 1 Total,98,35,25,25,25
+Word Forms 1 Total,99,35,25,25,25
+Word Forms 1 Total,0,36,0,0,0
+Word Forms 1 Total,1,36,1,0,2
+Word Forms 1 Total,2,36,1,0,3
+Word Forms 1 Total,3,36,2,1,4
+Word Forms 1 Total,4,36,3,1,5
+Word Forms 1 Total,5,36,3,2,6
+Word Forms 1 Total,6,36,4,2,7
+Word Forms 1 Total,7,36,5,3,7
+Word Forms 1 Total,8,36,5,3,8
+Word Forms 1 Total,9,36,6,4,9
+Word Forms 1 Total,10,36,7,4,9
+Word Forms 1 Total,11,36,7,5,10
+Word Forms 1 Total,12,36,8,5,11
+Word Forms 1 Total,13,36,8,6,11
+Word Forms 1 Total,14,36,9,6,12
+Word Forms 1 Total,15,36,9,7,12
+Word Forms 1 Total,16,36,10,8,13
+Word Forms 1 Total,17,36,10,8,13
+Word Forms 1 Total,18,36,11,9,14
+Word Forms 1 Total,19,36,11,9,14
+Word Forms 1 Total,20,36,12,10,15
+Word Forms 1 Total,21,36,12,10,15
+Word Forms 1 Total,22,36,13,11,15
+Word Forms 1 Total,23,36,13,11,16
+Word Forms 1 Total,24,36,14,12,16
+Word Forms 1 Total,25,36,14,12,17
+Word Forms 1 Total,26,36,14,13,17
+Word Forms 1 Total,27,36,15,13,17
+Word Forms 1 Total,28,36,15,14,18
+Word Forms 1 Total,29,36,16,14,18
+Word Forms 1 Total,30,36,16,15,18
+Word Forms 1 Total,31,36,16,15,19
+Word Forms 1 Total,32,36,17,16,19
+Word Forms 1 Total,33,36,17,16,19
+Word Forms 1 Total,34,36,17,17,19
+Word Forms 1 Total,35,36,18,17,20
+Word Forms 1 Total,36,36,18,17,20
+Word Forms 1 Total,37,36,18,18,20
+Word Forms 1 Total,38,36,19,18,20
+Word Forms 1 Total,39,36,19,19,21
+Word Forms 1 Total,40,36,19,19,21
+Word Forms 1 Total,41,36,19,19,21
+Word Forms 1 Total,42,36,20,20,21
+Word Forms 1 Total,43,36,20,20,21
+Word Forms 1 Total,44,36,20,20,22
+Word Forms 1 Total,45,36,20,20,22
+Word Forms 1 Total,46,36,21,21,22
+Word Forms 1 Total,47,36,21,21,22
+Word Forms 1 Total,48,36,21,21,22
+Word Forms 1 Total,49,36,21,22,22
+Word Forms 1 Total,50,36,21,22,23
+Word Forms 1 Total,51,36,22,22,23
+Word Forms 1 Total,52,36,22,22,23
+Word Forms 1 Total,53,36,22,22,23
+Word Forms 1 Total,54,36,22,23,23
+Word Forms 1 Total,55,36,22,23,23
+Word Forms 1 Total,56,36,23,23,23
+Word Forms 1 Total,57,36,23,23,23
+Word Forms 1 Total,58,36,23,23,24
+Word Forms 1 Total,59,36,23,23,24
+Word Forms 1 Total,60,36,23,24,24
+Word Forms 1 Total,61,36,23,24,24
+Word Forms 1 Total,62,36,23,24,24
+Word Forms 1 Total,63,36,23,24,24
+Word Forms 1 Total,64,36,24,24,24
+Word Forms 1 Total,65,36,24,24,24
+Word Forms 1 Total,66,36,24,24,24
+Word Forms 1 Total,67,36,24,24,24
+Word Forms 1 Total,68,36,24,24,24
+Word Forms 1 Total,69,36,24,24,24
+Word Forms 1 Total,70,36,24,24,24
+Word Forms 1 Total,71,36,24,25,25
+Word Forms 1 Total,72,36,24,25,25
+Word Forms 1 Total,73,36,24,25,25
+Word Forms 1 Total,74,36,24,25,25
+Word Forms 1 Total,75,36,24,25,25
+Word Forms 1 Total,76,36,25,25,25
+Word Forms 1 Total,77,36,25,25,25
+Word Forms 1 Total,78,36,25,25,25
+Word Forms 1 Total,79,36,25,25,25
+Word Forms 1 Total,80,36,25,25,25
+Word Forms 1 Total,81,36,25,25,25
+Word Forms 1 Total,82,36,25,25,25
+Word Forms 1 Total,83,36,25,25,25
+Word Forms 1 Total,84,36,25,25,25
+Word Forms 1 Total,85,36,25,25,25
+Word Forms 1 Total,86,36,25,25,25
+Word Forms 1 Total,87,36,25,25,25
+Word Forms 1 Total,88,36,25,25,25
+Word Forms 1 Total,89,36,25,25,25
+Word Forms 1 Total,90,36,25,25,25
+Word Forms 1 Total,91,36,25,25,25
+Word Forms 1 Total,92,36,25,25,25
+Word Forms 1 Total,93,36,25,25,25
+Word Forms 1 Total,94,36,25,25,25
+Word Forms 1 Total,95,36,25,25,25
+Word Forms 1 Total,96,36,25,25,25
+Word Forms 1 Total,97,36,25,25,25
+Word Forms 1 Total,98,36,25,25,25
+Word Forms 1 Total,99,36,25,25,25
 Word Endings 2 Total,0,16,0,0,0
 Word Endings 2 Total,1,16,0,0,0
 Word Endings 2 Total,2,16,0,0,0
@@ -1686,7 +2286,7 @@ Word Endings 2 Total,83,17,1,1,2
 Word Endings 2 Total,84,17,1,1,2
 Word Endings 2 Total,85,17,1,1,2
 Word Endings 2 Total,86,17,1,1,2
-Word Endings 2 Total,87,17,2,1,2
+Word Endings 2 Total,87,17,1,1,2
 Word Endings 2 Total,88,17,2,1,2
 Word Endings 2 Total,89,17,2,1,2
 Word Endings 2 Total,90,17,2,2,2
@@ -1894,7 +2494,7 @@ Word Endings 2 Total,91,19,3,3,4
 Word Endings 2 Total,92,19,3,3,4
 Word Endings 2 Total,93,19,4,3,5
 Word Endings 2 Total,94,19,4,3,5
-Word Endings 2 Total,95,19,5,4,6
+Word Endings 2 Total,95,19,4,4,6
 Word Endings 2 Total,96,19,5,4,6
 Word Endings 2 Total,97,19,6,4,7
 Word Endings 2 Total,98,19,7,5,8
@@ -1988,7 +2588,7 @@ Word Endings 2 Total,85,20,3,2,3
 Word Endings 2 Total,86,20,3,2,4
 Word Endings 2 Total,87,20,3,2,4
 Word Endings 2 Total,88,20,3,3,4
-Word Endings 2 Total,89,20,4,3,4
+Word Endings 2 Total,89,20,3,3,4
 Word Endings 2 Total,90,20,4,3,5
 Word Endings 2 Total,91,20,4,3,5
 Word Endings 2 Total,92,20,4,3,5
@@ -2194,7 +2794,7 @@ Word Endings 2 Total,91,22,6,5,7
 Word Endings 2 Total,92,22,7,5,8
 Word Endings 2 Total,93,22,7,5,8
 Word Endings 2 Total,94,22,8,6,9
-Word Endings 2 Total,95,22,9,6,10
+Word Endings 2 Total,95,22,8,6,10
 Word Endings 2 Total,96,22,9,7,11
 Word Endings 2 Total,97,22,11,8,12
 Word Endings 2 Total,98,22,12,9,14
@@ -2296,7 +2896,7 @@ Word Endings 2 Total,93,23,9,6,10
 Word Endings 2 Total,94,23,9,7,11
 Word Endings 2 Total,95,23,10,8,12
 Word Endings 2 Total,96,23,11,8,13
-Word Endings 2 Total,97,23,13,10,14
+Word Endings 2 Total,97,23,12,10,14
 Word Endings 2 Total,98,23,14,11,16
 Word Endings 2 Total,99,23,17,13,19
 Word Endings 2 Total,0,24,0,0,0
@@ -2485,11 +3085,11 @@ Word Endings 2 Total,82,25,6,5,7
 Word Endings 2 Total,83,25,6,5,7
 Word Endings 2 Total,84,25,7,5,8
 Word Endings 2 Total,85,25,7,5,8
-Word Endings 2 Total,86,25,8,6,9
+Word Endings 2 Total,86,25,7,6,9
 Word Endings 2 Total,87,25,8,6,9
 Word Endings 2 Total,88,25,8,7,10
 Word Endings 2 Total,89,25,9,7,10
-Word Endings 2 Total,90,25,10,7,11
+Word Endings 2 Total,90,25,9,7,11
 Word Endings 2 Total,91,25,10,8,11
 Word Endings 2 Total,92,25,11,8,12
 Word Endings 2 Total,93,25,12,9,13
@@ -2648,7 +3248,7 @@ Word Endings 2 Total,45,27,1,1,2
 Word Endings 2 Total,46,27,1,1,2
 Word Endings 2 Total,47,27,1,1,2
 Word Endings 2 Total,48,27,1,1,2
-Word Endings 2 Total,49,27,1,1,2
+Word Endings 2 Total,49,27,2,1,2
 Word Endings 2 Total,50,27,2,1,2
 Word Endings 2 Total,51,27,2,1,2
 Word Endings 2 Total,52,27,2,1,2
@@ -2688,7 +3288,7 @@ Word Endings 2 Total,85,27,9,8,11
 Word Endings 2 Total,86,27,10,8,11
 Word Endings 2 Total,87,27,10,9,12
 Word Endings 2 Total,88,27,11,9,12
-Word Endings 2 Total,89,27,12,10,13
+Word Endings 2 Total,89,27,11,10,13
 Word Endings 2 Total,90,27,12,10,14
 Word Endings 2 Total,91,27,13,11,14
 Word Endings 2 Total,92,27,14,12,15
@@ -2999,6 +3599,606 @@ Word Endings 2 Total,96,30,23,23,24
 Word Endings 2 Total,97,30,25,25,26
 Word Endings 2 Total,98,30,27,28,28
 Word Endings 2 Total,99,30,30,31,32
+Word Endings 2 Total,0,31,0,0,0
+Word Endings 2 Total,1,31,0,0,0
+Word Endings 2 Total,2,31,0,0,0
+Word Endings 2 Total,3,31,0,0,0
+Word Endings 2 Total,4,31,0,0,0
+Word Endings 2 Total,5,31,0,0,0
+Word Endings 2 Total,6,31,0,0,0
+Word Endings 2 Total,7,31,0,0,0
+Word Endings 2 Total,8,31,0,0,0
+Word Endings 2 Total,9,31,0,0,0
+Word Endings 2 Total,10,31,0,0,0
+Word Endings 2 Total,11,31,0,0,0
+Word Endings 2 Total,12,31,0,0,0
+Word Endings 2 Total,13,31,0,0,0
+Word Endings 2 Total,14,31,0,0,0
+Word Endings 2 Total,15,31,0,0,0
+Word Endings 2 Total,16,31,0,0,0
+Word Endings 2 Total,17,31,0,0,0
+Word Endings 2 Total,18,31,0,0,1
+Word Endings 2 Total,19,31,0,0,1
+Word Endings 2 Total,20,31,0,0,1
+Word Endings 2 Total,21,31,0,0,1
+Word Endings 2 Total,22,31,1,0,1
+Word Endings 2 Total,23,31,1,0,1
+Word Endings 2 Total,24,31,1,0,1
+Word Endings 2 Total,25,31,1,0,1
+Word Endings 2 Total,26,31,1,1,1
+Word Endings 2 Total,27,31,1,1,1
+Word Endings 2 Total,28,31,1,1,1
+Word Endings 2 Total,29,31,1,1,1
+Word Endings 2 Total,30,31,1,1,1
+Word Endings 2 Total,31,31,1,1,2
+Word Endings 2 Total,32,31,1,1,2
+Word Endings 2 Total,33,31,1,1,2
+Word Endings 2 Total,34,31,1,1,2
+Word Endings 2 Total,35,31,1,1,2
+Word Endings 2 Total,36,31,2,1,2
+Word Endings 2 Total,37,31,2,1,2
+Word Endings 2 Total,38,31,2,1,2
+Word Endings 2 Total,39,31,2,2,3
+Word Endings 2 Total,40,31,2,2,3
+Word Endings 2 Total,41,31,2,2,3
+Word Endings 2 Total,42,31,2,2,3
+Word Endings 2 Total,43,31,2,2,3
+Word Endings 2 Total,44,31,2,2,3
+Word Endings 2 Total,45,31,3,2,3
+Word Endings 2 Total,46,31,3,2,4
+Word Endings 2 Total,47,31,3,3,4
+Word Endings 2 Total,48,31,3,3,4
+Word Endings 2 Total,49,31,3,3,4
+Word Endings 2 Total,50,31,3,3,4
+Word Endings 2 Total,51,31,3,3,4
+Word Endings 2 Total,52,31,4,3,5
+Word Endings 2 Total,53,31,4,3,5
+Word Endings 2 Total,54,31,4,4,5
+Word Endings 2 Total,55,31,4,4,5
+Word Endings 2 Total,56,31,4,4,5
+Word Endings 2 Total,57,31,5,4,6
+Word Endings 2 Total,58,31,5,4,6
+Word Endings 2 Total,59,31,5,5,6
+Word Endings 2 Total,60,31,5,5,6
+Word Endings 2 Total,61,31,5,5,7
+Word Endings 2 Total,62,31,6,5,7
+Word Endings 2 Total,63,31,6,6,7
+Word Endings 2 Total,64,31,6,6,7
+Word Endings 2 Total,65,31,6,6,8
+Word Endings 2 Total,66,31,7,6,8
+Word Endings 2 Total,67,31,7,7,8
+Word Endings 2 Total,68,31,7,7,8
+Word Endings 2 Total,69,31,7,7,9
+Word Endings 2 Total,70,31,8,8,9
+Word Endings 2 Total,71,31,8,8,9
+Word Endings 2 Total,72,31,8,8,10
+Word Endings 2 Total,73,31,9,9,10
+Word Endings 2 Total,74,31,9,9,10
+Word Endings 2 Total,75,31,9,10,11
+Word Endings 2 Total,76,31,10,10,11
+Word Endings 2 Total,77,31,10,10,12
+Word Endings 2 Total,78,31,11,11,12
+Word Endings 2 Total,79,31,11,11,13
+Word Endings 2 Total,80,31,11,12,13
+Word Endings 2 Total,81,31,12,12,13
+Word Endings 2 Total,82,31,12,13,14
+Word Endings 2 Total,83,31,13,13,14
+Word Endings 2 Total,84,31,13,14,15
+Word Endings 2 Total,85,31,14,15,16
+Word Endings 2 Total,86,31,15,15,16
+Word Endings 2 Total,87,31,15,16,17
+Word Endings 2 Total,88,31,16,17,18
+Word Endings 2 Total,89,31,17,18,18
+Word Endings 2 Total,90,31,18,19,19
+Word Endings 2 Total,91,31,18,20,20
+Word Endings 2 Total,92,31,19,21,21
+Word Endings 2 Total,93,31,20,22,22
+Word Endings 2 Total,94,31,22,23,23
+Word Endings 2 Total,95,31,23,24,24
+Word Endings 2 Total,96,31,24,26,26
+Word Endings 2 Total,97,31,26,28,28
+Word Endings 2 Total,98,31,29,30,30
+Word Endings 2 Total,99,31,32,34,33
+Word Endings 2 Total,0,32,0,0,0
+Word Endings 2 Total,1,32,0,0,0
+Word Endings 2 Total,2,32,0,0,0
+Word Endings 2 Total,3,32,0,0,0
+Word Endings 2 Total,4,32,0,0,0
+Word Endings 2 Total,5,32,0,0,0
+Word Endings 2 Total,6,32,0,0,0
+Word Endings 2 Total,7,32,0,0,0
+Word Endings 2 Total,8,32,0,0,0
+Word Endings 2 Total,9,32,0,0,0
+Word Endings 2 Total,10,32,0,0,0
+Word Endings 2 Total,11,32,0,0,0
+Word Endings 2 Total,12,32,0,0,0
+Word Endings 2 Total,13,32,0,0,0
+Word Endings 2 Total,14,32,0,0,0
+Word Endings 2 Total,15,32,0,0,1
+Word Endings 2 Total,16,32,0,0,1
+Word Endings 2 Total,17,32,0,0,1
+Word Endings 2 Total,18,32,0,0,1
+Word Endings 2 Total,19,32,0,0,1
+Word Endings 2 Total,20,32,1,0,1
+Word Endings 2 Total,21,32,1,0,1
+Word Endings 2 Total,22,32,1,0,1
+Word Endings 2 Total,23,32,1,1,1
+Word Endings 2 Total,24,32,1,1,1
+Word Endings 2 Total,25,32,1,1,1
+Word Endings 2 Total,26,32,1,1,1
+Word Endings 2 Total,27,32,1,1,2
+Word Endings 2 Total,28,32,1,1,2
+Word Endings 2 Total,29,32,1,1,2
+Word Endings 2 Total,30,32,1,1,2
+Word Endings 2 Total,31,32,1,1,2
+Word Endings 2 Total,32,32,1,1,2
+Word Endings 2 Total,33,32,2,1,2
+Word Endings 2 Total,34,32,2,1,2
+Word Endings 2 Total,35,32,2,2,2
+Word Endings 2 Total,36,32,2,2,3
+Word Endings 2 Total,37,32,2,2,3
+Word Endings 2 Total,38,32,2,2,3
+Word Endings 2 Total,39,32,2,2,3
+Word Endings 2 Total,40,32,2,2,3
+Word Endings 2 Total,41,32,3,2,3
+Word Endings 2 Total,42,32,3,2,3
+Word Endings 2 Total,43,32,3,3,4
+Word Endings 2 Total,44,32,3,3,4
+Word Endings 2 Total,45,32,3,3,4
+Word Endings 2 Total,46,32,3,3,4
+Word Endings 2 Total,47,32,3,3,4
+Word Endings 2 Total,48,32,4,3,5
+Word Endings 2 Total,49,32,4,4,5
+Word Endings 2 Total,50,32,4,4,5
+Word Endings 2 Total,51,32,4,4,5
+Word Endings 2 Total,52,32,4,4,5
+Word Endings 2 Total,53,32,4,4,6
+Word Endings 2 Total,54,32,5,5,6
+Word Endings 2 Total,55,32,5,5,6
+Word Endings 2 Total,56,32,5,5,6
+Word Endings 2 Total,57,32,5,5,6
+Word Endings 2 Total,58,32,5,5,7
+Word Endings 2 Total,59,32,6,6,7
+Word Endings 2 Total,60,32,6,6,7
+Word Endings 2 Total,61,32,6,6,7
+Word Endings 2 Total,62,32,6,7,8
+Word Endings 2 Total,63,32,7,7,8
+Word Endings 2 Total,64,32,7,7,8
+Word Endings 2 Total,65,32,7,7,9
+Word Endings 2 Total,66,32,8,8,9
+Word Endings 2 Total,67,32,8,8,9
+Word Endings 2 Total,68,32,8,9,10
+Word Endings 2 Total,69,32,8,9,10
+Word Endings 2 Total,70,32,9,9,10
+Word Endings 2 Total,71,32,9,10,11
+Word Endings 2 Total,72,32,9,10,11
+Word Endings 2 Total,73,32,10,10,11
+Word Endings 2 Total,74,32,10,11,12
+Word Endings 2 Total,75,32,11,11,12
+Word Endings 2 Total,76,32,11,12,12
+Word Endings 2 Total,77,32,11,12,13
+Word Endings 2 Total,78,32,12,13,13
+Word Endings 2 Total,79,32,12,13,14
+Word Endings 2 Total,80,32,13,14,14
+Word Endings 2 Total,81,32,13,14,15
+Word Endings 2 Total,82,32,14,15,15
+Word Endings 2 Total,83,32,14,16,16
+Word Endings 2 Total,84,32,15,16,16
+Word Endings 2 Total,85,32,15,17,17
+Word Endings 2 Total,86,32,16,18,18
+Word Endings 2 Total,87,32,17,19,18
+Word Endings 2 Total,88,32,17,19,19
+Word Endings 2 Total,89,32,18,20,20
+Word Endings 2 Total,90,32,19,21,21
+Word Endings 2 Total,91,32,20,22,21
+Word Endings 2 Total,92,32,21,23,22
+Word Endings 2 Total,93,32,22,25,23
+Word Endings 2 Total,94,32,23,26,25
+Word Endings 2 Total,95,32,24,27,26
+Word Endings 2 Total,96,32,26,29,27
+Word Endings 2 Total,97,32,28,31,29
+Word Endings 2 Total,98,32,30,33,31
+Word Endings 2 Total,99,32,33,36,34
+Word Endings 2 Total,0,33,0,0,0
+Word Endings 2 Total,1,33,0,0,0
+Word Endings 2 Total,2,33,0,0,0
+Word Endings 2 Total,3,33,0,0,0
+Word Endings 2 Total,4,33,0,0,0
+Word Endings 2 Total,5,33,0,0,0
+Word Endings 2 Total,6,33,0,0,0
+Word Endings 2 Total,7,33,0,0,0
+Word Endings 2 Total,8,33,0,0,0
+Word Endings 2 Total,9,33,0,0,0
+Word Endings 2 Total,10,33,0,0,0
+Word Endings 2 Total,11,33,0,0,0
+Word Endings 2 Total,12,33,0,0,0
+Word Endings 2 Total,13,33,0,0,1
+Word Endings 2 Total,14,33,0,0,1
+Word Endings 2 Total,15,33,0,0,1
+Word Endings 2 Total,16,33,0,0,1
+Word Endings 2 Total,17,33,1,0,1
+Word Endings 2 Total,18,33,1,0,1
+Word Endings 2 Total,19,33,1,0,1
+Word Endings 2 Total,20,33,1,1,1
+Word Endings 2 Total,21,33,1,1,1
+Word Endings 2 Total,22,33,1,1,1
+Word Endings 2 Total,23,33,1,1,1
+Word Endings 2 Total,24,33,1,1,2
+Word Endings 2 Total,25,33,1,1,2
+Word Endings 2 Total,26,33,1,1,2
+Word Endings 2 Total,27,33,1,1,2
+Word Endings 2 Total,28,33,1,1,2
+Word Endings 2 Total,29,33,1,1,2
+Word Endings 2 Total,30,33,2,1,2
+Word Endings 2 Total,31,33,2,1,2
+Word Endings 2 Total,32,33,2,2,3
+Word Endings 2 Total,33,33,2,2,3
+Word Endings 2 Total,34,33,2,2,3
+Word Endings 2 Total,35,33,2,2,3
+Word Endings 2 Total,36,33,2,2,3
+Word Endings 2 Total,37,33,2,2,3
+Word Endings 2 Total,38,33,3,2,3
+Word Endings 2 Total,39,33,3,2,4
+Word Endings 2 Total,40,33,3,3,4
+Word Endings 2 Total,41,33,3,3,4
+Word Endings 2 Total,42,33,3,3,4
+Word Endings 2 Total,43,33,3,3,4
+Word Endings 2 Total,44,33,3,3,4
+Word Endings 2 Total,45,33,4,4,5
+Word Endings 2 Total,46,33,4,4,5
+Word Endings 2 Total,47,33,4,4,5
+Word Endings 2 Total,48,33,4,4,5
+Word Endings 2 Total,49,33,4,4,5
+Word Endings 2 Total,50,33,5,5,6
+Word Endings 2 Total,51,33,5,5,6
+Word Endings 2 Total,52,33,5,5,6
+Word Endings 2 Total,53,33,5,5,6
+Word Endings 2 Total,54,33,5,6,7
+Word Endings 2 Total,55,33,6,6,7
+Word Endings 2 Total,56,33,6,6,7
+Word Endings 2 Total,57,33,6,6,7
+Word Endings 2 Total,58,33,6,7,8
+Word Endings 2 Total,59,33,7,7,8
+Word Endings 2 Total,60,33,7,7,8
+Word Endings 2 Total,61,33,7,8,8
+Word Endings 2 Total,62,33,7,8,9
+Word Endings 2 Total,63,33,8,8,9
+Word Endings 2 Total,64,33,8,9,9
+Word Endings 2 Total,65,33,8,9,10
+Word Endings 2 Total,66,33,9,9,10
+Word Endings 2 Total,67,33,9,10,10
+Word Endings 2 Total,68,33,9,10,11
+Word Endings 2 Total,69,33,10,11,11
+Word Endings 2 Total,70,33,10,11,11
+Word Endings 2 Total,71,33,10,11,12
+Word Endings 2 Total,72,33,11,12,12
+Word Endings 2 Total,73,33,11,12,13
+Word Endings 2 Total,74,33,11,13,13
+Word Endings 2 Total,75,33,12,13,13
+Word Endings 2 Total,76,33,12,14,14
+Word Endings 2 Total,77,33,13,15,14
+Word Endings 2 Total,78,33,13,15,15
+Word Endings 2 Total,79,33,14,16,15
+Word Endings 2 Total,80,33,14,16,16
+Word Endings 2 Total,81,33,15,17,16
+Word Endings 2 Total,82,33,15,18,17
+Word Endings 2 Total,83,33,16,18,17
+Word Endings 2 Total,84,33,16,19,18
+Word Endings 2 Total,85,33,17,20,19
+Word Endings 2 Total,86,33,18,21,19
+Word Endings 2 Total,87,33,18,21,20
+Word Endings 2 Total,88,33,19,22,21
+Word Endings 2 Total,89,33,20,23,21
+Word Endings 2 Total,90,33,21,24,22
+Word Endings 2 Total,91,33,21,25,23
+Word Endings 2 Total,92,33,22,26,24
+Word Endings 2 Total,93,33,24,27,25
+Word Endings 2 Total,94,33,25,29,26
+Word Endings 2 Total,95,33,26,30,27
+Word Endings 2 Total,96,33,28,32,29
+Word Endings 2 Total,97,33,29,34,31
+Word Endings 2 Total,98,33,32,36,33
+Word Endings 2 Total,99,33,35,39,36
+Word Endings 2 Total,0,34,0,0,0
+Word Endings 2 Total,1,34,0,0,0
+Word Endings 2 Total,2,34,0,0,0
+Word Endings 2 Total,3,34,0,0,0
+Word Endings 2 Total,4,34,0,0,0
+Word Endings 2 Total,5,34,0,0,0
+Word Endings 2 Total,6,34,0,0,0
+Word Endings 2 Total,7,34,0,0,0
+Word Endings 2 Total,8,34,0,0,0
+Word Endings 2 Total,9,34,0,0,0
+Word Endings 2 Total,10,34,0,0,0
+Word Endings 2 Total,11,34,0,0,1
+Word Endings 2 Total,12,34,0,0,1
+Word Endings 2 Total,13,34,0,0,1
+Word Endings 2 Total,14,34,0,0,1
+Word Endings 2 Total,15,34,1,0,1
+Word Endings 2 Total,16,34,1,0,1
+Word Endings 2 Total,17,34,1,0,1
+Word Endings 2 Total,18,34,1,1,1
+Word Endings 2 Total,19,34,1,1,1
+Word Endings 2 Total,20,34,1,1,1
+Word Endings 2 Total,21,34,1,1,1
+Word Endings 2 Total,22,34,1,1,2
+Word Endings 2 Total,23,34,1,1,2
+Word Endings 2 Total,24,34,1,1,2
+Word Endings 2 Total,25,34,1,1,2
+Word Endings 2 Total,26,34,1,1,2
+Word Endings 2 Total,27,34,2,1,2
+Word Endings 2 Total,28,34,2,1,2
+Word Endings 2 Total,29,34,2,2,3
+Word Endings 2 Total,30,34,2,2,3
+Word Endings 2 Total,31,34,2,2,3
+Word Endings 2 Total,32,34,2,2,3
+Word Endings 2 Total,33,34,2,2,3
+Word Endings 2 Total,34,34,2,2,3
+Word Endings 2 Total,35,34,3,2,4
+Word Endings 2 Total,36,34,3,3,4
+Word Endings 2 Total,37,34,3,3,4
+Word Endings 2 Total,38,34,3,3,4
+Word Endings 2 Total,39,34,3,3,4
+Word Endings 2 Total,40,34,3,3,4
+Word Endings 2 Total,41,34,4,4,5
+Word Endings 2 Total,42,34,4,4,5
+Word Endings 2 Total,43,34,4,4,5
+Word Endings 2 Total,44,34,4,4,5
+Word Endings 2 Total,45,34,4,4,5
+Word Endings 2 Total,46,34,4,5,6
+Word Endings 2 Total,47,34,5,5,6
+Word Endings 2 Total,48,34,5,5,6
+Word Endings 2 Total,49,34,5,5,6
+Word Endings 2 Total,50,34,5,6,7
+Word Endings 2 Total,51,34,6,6,7
+Word Endings 2 Total,52,34,6,6,7
+Word Endings 2 Total,53,34,6,7,7
+Word Endings 2 Total,54,34,6,7,8
+Word Endings 2 Total,55,34,6,7,8
+Word Endings 2 Total,56,34,7,7,8
+Word Endings 2 Total,57,34,7,8,8
+Word Endings 2 Total,58,34,7,8,9
+Word Endings 2 Total,59,34,8,9,9
+Word Endings 2 Total,60,34,8,9,9
+Word Endings 2 Total,61,34,8,9,10
+Word Endings 2 Total,62,34,8,10,10
+Word Endings 2 Total,63,34,9,10,10
+Word Endings 2 Total,64,34,9,10,11
+Word Endings 2 Total,65,34,9,11,11
+Word Endings 2 Total,66,34,10,11,11
+Word Endings 2 Total,67,34,10,12,12
+Word Endings 2 Total,68,34,10,12,12
+Word Endings 2 Total,69,34,11,13,12
+Word Endings 2 Total,70,34,11,13,13
+Word Endings 2 Total,71,34,11,14,13
+Word Endings 2 Total,72,34,12,14,13
+Word Endings 2 Total,73,34,12,15,14
+Word Endings 2 Total,74,34,13,15,14
+Word Endings 2 Total,75,34,13,16,15
+Word Endings 2 Total,76,34,14,16,15
+Word Endings 2 Total,77,34,14,17,16
+Word Endings 2 Total,78,34,14,18,16
+Word Endings 2 Total,79,34,15,18,17
+Word Endings 2 Total,80,34,15,19,17
+Word Endings 2 Total,81,34,16,20,18
+Word Endings 2 Total,82,34,17,20,18
+Word Endings 2 Total,83,34,17,21,19
+Word Endings 2 Total,84,34,18,22,19
+Word Endings 2 Total,85,34,18,23,20
+Word Endings 2 Total,86,34,19,23,21
+Word Endings 2 Total,87,34,20,24,21
+Word Endings 2 Total,88,34,21,25,22
+Word Endings 2 Total,89,34,21,26,23
+Word Endings 2 Total,90,34,22,27,24
+Word Endings 2 Total,91,34,23,28,25
+Word Endings 2 Total,92,34,24,29,26
+Word Endings 2 Total,93,34,25,30,27
+Word Endings 2 Total,94,34,26,32,28
+Word Endings 2 Total,95,34,28,33,29
+Word Endings 2 Total,96,34,29,35,30
+Word Endings 2 Total,97,34,31,36,32
+Word Endings 2 Total,98,34,33,38,34
+Word Endings 2 Total,99,34,36,41,37
+Word Endings 2 Total,0,35,0,0,0
+Word Endings 2 Total,1,35,0,0,0
+Word Endings 2 Total,2,35,0,0,0
+Word Endings 2 Total,3,35,0,0,0
+Word Endings 2 Total,4,35,0,0,0
+Word Endings 2 Total,5,35,0,0,0
+Word Endings 2 Total,6,35,0,0,0
+Word Endings 2 Total,7,35,0,0,0
+Word Endings 2 Total,8,35,0,0,0
+Word Endings 2 Total,9,35,0,0,1
+Word Endings 2 Total,10,35,0,0,1
+Word Endings 2 Total,11,35,0,0,1
+Word Endings 2 Total,12,35,0,0,1
+Word Endings 2 Total,13,35,1,0,1
+Word Endings 2 Total,14,35,1,0,1
+Word Endings 2 Total,15,35,1,0,1
+Word Endings 2 Total,16,35,1,1,1
+Word Endings 2 Total,17,35,1,1,1
+Word Endings 2 Total,18,35,1,1,1
+Word Endings 2 Total,19,35,1,1,2
+Word Endings 2 Total,20,35,1,1,2
+Word Endings 2 Total,21,35,1,1,2
+Word Endings 2 Total,22,35,1,1,2
+Word Endings 2 Total,23,35,1,1,2
+Word Endings 2 Total,24,35,2,1,2
+Word Endings 2 Total,25,35,2,1,2
+Word Endings 2 Total,26,35,2,2,3
+Word Endings 2 Total,27,35,2,2,3
+Word Endings 2 Total,28,35,2,2,3
+Word Endings 2 Total,29,35,2,2,3
+Word Endings 2 Total,30,35,2,2,3
+Word Endings 2 Total,31,35,3,2,3
+Word Endings 2 Total,32,35,3,3,4
+Word Endings 2 Total,33,35,3,3,4
+Word Endings 2 Total,34,35,3,3,4
+Word Endings 2 Total,35,35,3,3,4
+Word Endings 2 Total,36,35,3,3,4
+Word Endings 2 Total,37,35,3,3,5
+Word Endings 2 Total,38,35,4,4,5
+Word Endings 2 Total,39,35,4,4,5
+Word Endings 2 Total,40,35,4,4,5
+Word Endings 2 Total,41,35,4,4,5
+Word Endings 2 Total,42,35,4,5,6
+Word Endings 2 Total,43,35,5,5,6
+Word Endings 2 Total,44,35,5,5,6
+Word Endings 2 Total,45,35,5,5,6
+Word Endings 2 Total,46,35,5,6,7
+Word Endings 2 Total,47,35,5,6,7
+Word Endings 2 Total,48,35,6,6,7
+Word Endings 2 Total,49,35,6,7,7
+Word Endings 2 Total,50,35,6,7,8
+Word Endings 2 Total,51,35,6,7,8
+Word Endings 2 Total,52,35,7,8,8
+Word Endings 2 Total,53,35,7,8,8
+Word Endings 2 Total,54,35,7,8,9
+Word Endings 2 Total,55,35,7,9,9
+Word Endings 2 Total,56,35,8,9,9
+Word Endings 2 Total,57,35,8,9,10
+Word Endings 2 Total,58,35,8,10,10
+Word Endings 2 Total,59,35,9,10,10
+Word Endings 2 Total,60,35,9,11,10
+Word Endings 2 Total,61,35,9,11,11
+Word Endings 2 Total,62,35,9,12,11
+Word Endings 2 Total,63,35,10,12,11
+Word Endings 2 Total,64,35,10,12,12
+Word Endings 2 Total,65,35,11,13,12
+Word Endings 2 Total,66,35,11,13,13
+Word Endings 2 Total,67,35,11,14,13
+Word Endings 2 Total,68,35,12,14,13
+Word Endings 2 Total,69,35,12,15,14
+Word Endings 2 Total,70,35,12,16,14
+Word Endings 2 Total,71,35,13,16,15
+Word Endings 2 Total,72,35,13,17,15
+Word Endings 2 Total,73,35,14,17,15
+Word Endings 2 Total,74,35,14,18,16
+Word Endings 2 Total,75,35,15,18,16
+Word Endings 2 Total,76,35,15,19,17
+Word Endings 2 Total,77,35,15,20,17
+Word Endings 2 Total,78,35,16,20,18
+Word Endings 2 Total,79,35,16,21,18
+Word Endings 2 Total,80,35,17,22,19
+Word Endings 2 Total,81,35,18,23,19
+Word Endings 2 Total,82,35,18,23,20
+Word Endings 2 Total,83,35,19,24,20
+Word Endings 2 Total,84,35,19,25,21
+Word Endings 2 Total,85,35,20,26,22
+Word Endings 2 Total,86,35,21,27,22
+Word Endings 2 Total,87,35,21,27,23
+Word Endings 2 Total,88,35,22,28,24
+Word Endings 2 Total,89,35,23,29,25
+Word Endings 2 Total,90,35,24,30,25
+Word Endings 2 Total,91,35,25,31,26
+Word Endings 2 Total,92,35,26,32,27
+Word Endings 2 Total,93,35,27,33,28
+Word Endings 2 Total,94,35,28,35,29
+Word Endings 2 Total,95,35,29,36,31
+Word Endings 2 Total,96,35,31,37,32
+Word Endings 2 Total,97,35,32,39,33
+Word Endings 2 Total,98,35,34,40,35
+Word Endings 2 Total,99,35,37,42,38
+Word Endings 2 Total,0,36,0,0,0
+Word Endings 2 Total,1,36,0,0,0
+Word Endings 2 Total,2,36,0,0,0
+Word Endings 2 Total,3,36,0,0,0
+Word Endings 2 Total,4,36,0,0,0
+Word Endings 2 Total,5,36,0,0,0
+Word Endings 2 Total,6,36,0,0,0
+Word Endings 2 Total,7,36,0,0,0
+Word Endings 2 Total,8,36,0,0,1
+Word Endings 2 Total,9,36,0,0,1
+Word Endings 2 Total,10,36,0,0,1
+Word Endings 2 Total,11,36,1,0,1
+Word Endings 2 Total,12,36,1,0,1
+Word Endings 2 Total,13,36,1,0,1
+Word Endings 2 Total,14,36,1,1,1
+Word Endings 2 Total,15,36,1,1,1
+Word Endings 2 Total,16,36,1,1,2
+Word Endings 2 Total,17,36,1,1,2
+Word Endings 2 Total,18,36,1,1,2
+Word Endings 2 Total,19,36,1,1,2
+Word Endings 2 Total,20,36,1,1,2
+Word Endings 2 Total,21,36,2,1,2
+Word Endings 2 Total,22,36,2,1,2
+Word Endings 2 Total,23,36,2,2,3
+Word Endings 2 Total,24,36,2,2,3
+Word Endings 2 Total,25,36,2,2,3
+Word Endings 2 Total,26,36,2,2,3
+Word Endings 2 Total,27,36,2,2,3
+Word Endings 2 Total,28,36,3,2,3
+Word Endings 2 Total,29,36,3,3,4
+Word Endings 2 Total,30,36,3,3,4
+Word Endings 2 Total,31,36,3,3,4
+Word Endings 2 Total,32,36,3,3,4
+Word Endings 2 Total,33,36,3,3,4
+Word Endings 2 Total,34,36,4,4,5
+Word Endings 2 Total,35,36,4,4,5
+Word Endings 2 Total,36,36,4,4,5
+Word Endings 2 Total,37,36,4,4,5
+Word Endings 2 Total,38,36,4,5,6
+Word Endings 2 Total,39,36,4,5,6
+Word Endings 2 Total,40,36,5,5,6
+Word Endings 2 Total,41,36,5,5,6
+Word Endings 2 Total,42,36,5,6,7
+Word Endings 2 Total,43,36,5,6,7
+Word Endings 2 Total,44,36,6,6,7
+Word Endings 2 Total,45,36,6,7,7
+Word Endings 2 Total,46,36,6,7,8
+Word Endings 2 Total,47,36,6,7,8
+Word Endings 2 Total,48,36,7,8,8
+Word Endings 2 Total,49,36,7,8,8
+Word Endings 2 Total,50,36,7,9,9
+Word Endings 2 Total,51,36,7,9,9
+Word Endings 2 Total,52,36,8,9,9
+Word Endings 2 Total,53,36,8,10,10
+Word Endings 2 Total,54,36,8,10,10
+Word Endings 2 Total,55,36,8,11,10
+Word Endings 2 Total,56,36,9,11,10
+Word Endings 2 Total,57,36,9,11,11
+Word Endings 2 Total,58,36,9,12,11
+Word Endings 2 Total,59,36,10,12,11
+Word Endings 2 Total,60,36,10,13,12
+Word Endings 2 Total,61,36,10,13,12
+Word Endings 2 Total,62,36,11,14,12
+Word Endings 2 Total,63,36,11,14,13
+Word Endings 2 Total,64,36,11,15,13
+Word Endings 2 Total,65,36,12,15,14
+Word Endings 2 Total,66,36,12,16,14
+Word Endings 2 Total,67,36,13,17,14
+Word Endings 2 Total,68,36,13,17,15
+Word Endings 2 Total,69,36,13,18,15
+Word Endings 2 Total,70,36,14,18,16
+Word Endings 2 Total,71,36,14,19,16
+Word Endings 2 Total,72,36,15,19,16
+Word Endings 2 Total,73,36,15,20,17
+Word Endings 2 Total,74,36,16,21,17
+Word Endings 2 Total,75,36,16,21,18
+Word Endings 2 Total,76,36,17,22,18
+Word Endings 2 Total,77,36,17,23,19
+Word Endings 2 Total,78,36,18,24,19
+Word Endings 2 Total,79,36,18,24,20
+Word Endings 2 Total,80,36,19,25,20
+Word Endings 2 Total,81,36,19,26,21
+Word Endings 2 Total,82,36,20,26,22
+Word Endings 2 Total,83,36,20,27,22
+Word Endings 2 Total,84,36,21,28,23
+Word Endings 2 Total,85,36,22,29,23
+Word Endings 2 Total,86,36,22,30,24
+Word Endings 2 Total,87,36,23,31,25
+Word Endings 2 Total,88,36,24,31,26
+Word Endings 2 Total,89,36,25,32,26
+Word Endings 2 Total,90,36,26,33,27
+Word Endings 2 Total,91,36,27,34,28
+Word Endings 2 Total,92,36,27,35,29
+Word Endings 2 Total,93,36,29,36,30
+Word Endings 2 Total,94,36,30,37,31
+Word Endings 2 Total,95,36,31,38,32
+Word Endings 2 Total,96,36,32,40,33
+Word Endings 2 Total,97,36,34,41,35
+Word Endings 2 Total,98,36,36,42,37
+Word Endings 2 Total,99,36,38,43,39
 Total Produced,0,16,0,0,0
 Total Produced,1,16,0,0,0
 Total Produced,2,16,1,1,1
@@ -4499,6 +5699,606 @@ Total Produced,96,30,673,667,674
 Total Produced,97,30,675,671,676
 Total Produced,98,30,677,674,677
 Total Produced,99,30,679,677,679
+Total Produced,0,31,0,0,0
+Total Produced,1,31,75,42,85
+Total Produced,2,31,108,66,120
+Total Produced,3,31,133,85,146
+Total Produced,4,31,154,103,169
+Total Produced,5,31,173,118,188
+Total Produced,6,31,190,133,205
+Total Produced,7,31,206,146,221
+Total Produced,8,31,220,159,236
+Total Produced,9,31,234,172,250
+Total Produced,10,31,247,183,263
+Total Produced,11,31,259,195,275
+Total Produced,12,31,270,206,287
+Total Produced,13,31,282,216,298
+Total Produced,14,31,292,226,308
+Total Produced,15,31,302,236,318
+Total Produced,16,31,312,246,328
+Total Produced,17,31,322,256,338
+Total Produced,18,31,331,265,347
+Total Produced,19,31,340,274,355
+Total Produced,20,31,348,282,364
+Total Produced,21,31,357,291,372
+Total Produced,22,31,365,300,380
+Total Produced,23,31,373,308,388
+Total Produced,24,31,381,316,396
+Total Produced,25,31,388,324,403
+Total Produced,26,31,396,332,410
+Total Produced,27,31,403,339,417
+Total Produced,28,31,410,347,424
+Total Produced,29,31,417,354,431
+Total Produced,30,31,424,361,437
+Total Produced,31,31,430,369,444
+Total Produced,32,31,437,376,450
+Total Produced,33,31,443,383,456
+Total Produced,34,31,449,390,462
+Total Produced,35,31,455,396,468
+Total Produced,36,31,461,403,474
+Total Produced,37,31,467,410,480
+Total Produced,38,31,473,416,485
+Total Produced,39,31,478,422,490
+Total Produced,40,31,484,429,496
+Total Produced,41,31,489,435,501
+Total Produced,42,31,495,441,506
+Total Produced,43,31,500,447,511
+Total Produced,44,31,505,453,516
+Total Produced,45,31,510,459,521
+Total Produced,46,31,515,465,526
+Total Produced,47,31,520,471,530
+Total Produced,48,31,525,476,535
+Total Produced,49,31,530,482,540
+Total Produced,50,31,534,487,544
+Total Produced,51,31,539,493,548
+Total Produced,52,31,543,498,553
+Total Produced,53,31,548,504,557
+Total Produced,54,31,552,509,561
+Total Produced,55,31,557,514,565
+Total Produced,56,31,561,519,569
+Total Produced,57,31,565,524,573
+Total Produced,58,31,569,529,577
+Total Produced,59,31,573,534,581
+Total Produced,60,31,577,539,585
+Total Produced,61,31,581,544,588
+Total Produced,62,31,585,549,592
+Total Produced,63,31,588,553,595
+Total Produced,64,31,592,558,599
+Total Produced,65,31,596,563,602
+Total Produced,66,31,599,567,606
+Total Produced,67,31,603,572,609
+Total Produced,68,31,606,576,612
+Total Produced,69,31,610,580,615
+Total Produced,70,31,613,585,618
+Total Produced,71,31,616,589,621
+Total Produced,72,31,619,593,624
+Total Produced,73,31,623,597,627
+Total Produced,74,31,626,601,630
+Total Produced,75,31,629,605,633
+Total Produced,76,31,632,609,636
+Total Produced,77,31,635,613,638
+Total Produced,78,31,637,617,641
+Total Produced,79,31,640,621,644
+Total Produced,80,31,643,624,646
+Total Produced,81,31,645,628,649
+Total Produced,82,31,648,632,651
+Total Produced,83,31,651,635,653
+Total Produced,84,31,653,639,656
+Total Produced,85,31,655,642,658
+Total Produced,86,31,658,645,660
+Total Produced,87,31,660,648,662
+Total Produced,88,31,662,651,664
+Total Produced,89,31,664,655,666
+Total Produced,90,31,666,657,668
+Total Produced,91,31,668,660,669
+Total Produced,92,31,670,663,671
+Total Produced,93,31,672,666,673
+Total Produced,94,31,673,668,674
+Total Produced,95,31,675,671,675
+Total Produced,96,31,676,673,677
+Total Produced,97,31,677,675,678
+Total Produced,98,31,679,677,679
+Total Produced,99,31,679,679,680
+Total Produced,0,32,0,0,0
+Total Produced,1,32,91,51,101
+Total Produced,2,32,128,79,140
+Total Produced,3,32,156,101,170
+Total Produced,4,32,180,121,194
+Total Produced,5,32,200,139,215
+Total Produced,6,32,219,155,233
+Total Produced,7,32,235,170,250
+Total Produced,8,32,251,184,266
+Total Produced,9,32,265,198,281
+Total Produced,10,32,279,211,294
+Total Produced,11,32,292,223,307
+Total Produced,12,32,304,235,319
+Total Produced,13,32,315,247,330
+Total Produced,14,32,326,258,341
+Total Produced,15,32,337,268,352
+Total Produced,16,32,347,279,362
+Total Produced,17,32,357,289,371
+Total Produced,18,32,366,298,380
+Total Produced,19,32,375,308,389
+Total Produced,20,32,384,317,398
+Total Produced,21,32,392,326,406
+Total Produced,22,32,400,335,414
+Total Produced,23,32,408,343,422
+Total Produced,24,32,416,352,429
+Total Produced,25,32,424,360,437
+Total Produced,26,32,431,368,444
+Total Produced,27,32,438,376,451
+Total Produced,28,32,445,384,457
+Total Produced,29,32,452,391,464
+Total Produced,30,32,458,399,470
+Total Produced,31,32,465,406,476
+Total Produced,32,32,471,413,483
+Total Produced,33,32,477,420,488
+Total Produced,34,32,483,427,494
+Total Produced,35,32,489,434,500
+Total Produced,36,32,495,440,505
+Total Produced,37,32,500,447,511
+Total Produced,38,32,506,453,516
+Total Produced,39,32,511,459,521
+Total Produced,40,32,516,466,526
+Total Produced,41,32,521,472,531
+Total Produced,42,32,526,478,536
+Total Produced,43,32,531,484,540
+Total Produced,44,32,536,489,545
+Total Produced,45,32,541,495,550
+Total Produced,46,32,545,501,554
+Total Produced,47,32,550,506,558
+Total Produced,48,32,554,511,562
+Total Produced,49,32,559,517,567
+Total Produced,50,32,563,522,571
+Total Produced,51,32,567,527,575
+Total Produced,52,32,571,532,578
+Total Produced,53,32,575,537,582
+Total Produced,54,32,579,542,586
+Total Produced,55,32,583,547,589
+Total Produced,56,32,586,552,593
+Total Produced,57,32,590,556,596
+Total Produced,58,32,594,561,600
+Total Produced,59,32,597,565,603
+Total Produced,60,32,601,570,606
+Total Produced,61,32,604,574,610
+Total Produced,62,32,607,578,613
+Total Produced,63,32,611,582,616
+Total Produced,64,32,614,587,619
+Total Produced,65,32,617,591,622
+Total Produced,66,32,620,595,624
+Total Produced,67,32,623,598,627
+Total Produced,68,32,626,602,630
+Total Produced,69,32,628,606,633
+Total Produced,70,32,631,610,635
+Total Produced,71,32,634,613,638
+Total Produced,72,32,637,617,640
+Total Produced,73,32,639,620,642
+Total Produced,74,32,642,624,645
+Total Produced,75,32,644,627,647
+Total Produced,76,32,646,630,649
+Total Produced,77,32,649,633,651
+Total Produced,78,32,651,636,653
+Total Produced,79,32,653,639,655
+Total Produced,80,32,655,642,657
+Total Produced,81,32,657,645,659
+Total Produced,82,32,659,648,661
+Total Produced,83,32,661,650,663
+Total Produced,84,32,663,653,664
+Total Produced,85,32,664,656,666
+Total Produced,86,32,666,658,667
+Total Produced,87,32,668,660,669
+Total Produced,88,32,669,663,670
+Total Produced,89,32,670,665,671
+Total Produced,90,32,672,667,673
+Total Produced,91,32,673,669,674
+Total Produced,92,32,674,670,675
+Total Produced,93,32,675,672,676
+Total Produced,94,32,676,674,677
+Total Produced,95,32,677,675,678
+Total Produced,96,32,678,677,678
+Total Produced,97,32,679,678,679
+Total Produced,98,32,679,679,679
+Total Produced,99,32,680,680,680
+Total Produced,0,33,0,0,0
+Total Produced,1,33,108,61,118
+Total Produced,2,33,149,93,162
+Total Produced,3,33,180,118,194
+Total Produced,4,33,206,140,220
+Total Produced,5,33,228,160,242
+Total Produced,6,33,248,178,262
+Total Produced,7,33,266,195,280
+Total Produced,8,33,282,211,296
+Total Produced,9,33,297,225,311
+Total Produced,10,33,311,239,325
+Total Produced,11,33,324,253,338
+Total Produced,12,33,337,266,351
+Total Produced,13,33,349,278,362
+Total Produced,14,33,360,290,374
+Total Produced,15,33,371,301,384
+Total Produced,16,33,381,312,394
+Total Produced,17,33,391,322,404
+Total Produced,18,33,400,333,413
+Total Produced,19,33,409,342,422
+Total Produced,20,33,418,352,430
+Total Produced,21,33,427,361,439
+Total Produced,22,33,435,371,447
+Total Produced,23,33,442,379,454
+Total Produced,24,33,450,388,462
+Total Produced,25,33,457,396,469
+Total Produced,26,33,465,405,476
+Total Produced,27,33,471,413,482
+Total Produced,28,33,478,420,489
+Total Produced,29,33,485,428,495
+Total Produced,30,33,491,435,501
+Total Produced,31,33,497,443,507
+Total Produced,32,33,503,450,513
+Total Produced,33,33,509,457,518
+Total Produced,34,33,515,463,524
+Total Produced,35,33,520,470,529
+Total Produced,36,33,526,476,534
+Total Produced,37,33,531,483,539
+Total Produced,38,33,536,489,544
+Total Produced,39,33,541,495,549
+Total Produced,40,33,546,501,554
+Total Produced,41,33,550,507,558
+Total Produced,42,33,555,513,563
+Total Produced,43,33,560,518,567
+Total Produced,44,33,564,524,571
+Total Produced,45,33,568,529,575
+Total Produced,46,33,572,534,579
+Total Produced,47,33,576,539,583
+Total Produced,48,33,580,544,587
+Total Produced,49,33,584,549,590
+Total Produced,50,33,588,554,594
+Total Produced,51,33,592,559,597
+Total Produced,52,33,595,563,601
+Total Produced,53,33,599,568,604
+Total Produced,54,33,602,572,607
+Total Produced,55,33,606,577,611
+Total Produced,56,33,609,581,614
+Total Produced,57,33,612,585,617
+Total Produced,58,33,615,589,620
+Total Produced,59,33,618,593,622
+Total Produced,60,33,621,597,625
+Total Produced,61,33,624,601,628
+Total Produced,62,33,626,604,630
+Total Produced,63,33,629,608,633
+Total Produced,64,33,632,611,635
+Total Produced,65,33,634,615,638
+Total Produced,66,33,637,618,640
+Total Produced,67,33,639,621,642
+Total Produced,68,33,642,624,644
+Total Produced,69,33,644,628,647
+Total Produced,70,33,646,631,649
+Total Produced,71,33,648,633,651
+Total Produced,72,33,650,636,653
+Total Produced,73,33,652,639,654
+Total Produced,74,33,654,642,656
+Total Produced,75,33,656,644,658
+Total Produced,76,33,658,647,659
+Total Produced,77,33,659,649,661
+Total Produced,78,33,661,651,663
+Total Produced,79,33,663,654,664
+Total Produced,80,33,664,656,665
+Total Produced,81,33,666,658,667
+Total Produced,82,33,667,660,668
+Total Produced,83,33,668,662,669
+Total Produced,84,33,669,664,670
+Total Produced,85,33,671,665,672
+Total Produced,86,33,672,667,673
+Total Produced,87,33,673,669,674
+Total Produced,88,33,674,670,674
+Total Produced,89,33,675,672,675
+Total Produced,90,33,676,673,676
+Total Produced,91,33,676,674,677
+Total Produced,92,33,677,675,677
+Total Produced,93,33,678,676,678
+Total Produced,94,33,678,677,678
+Total Produced,95,33,679,678,679
+Total Produced,96,33,679,679,679
+Total Produced,97,33,680,679,680
+Total Produced,98,33,680,680,680
+Total Produced,99,33,680,680,680
+Total Produced,0,34,0,0,0
+Total Produced,1,34,125,72,136
+Total Produced,2,34,171,108,184
+Total Produced,3,34,205,136,218
+Total Produced,4,34,233,161,246
+Total Produced,5,34,256,183,270
+Total Produced,6,34,277,203,291
+Total Produced,7,34,296,221,309
+Total Produced,8,34,313,238,326
+Total Produced,9,34,329,254,342
+Total Produced,10,34,343,269,356
+Total Produced,11,34,357,283,370
+Total Produced,12,34,370,297,382
+Total Produced,13,34,382,310,394
+Total Produced,14,34,393,322,405
+Total Produced,15,34,404,334,416
+Total Produced,16,34,414,345,426
+Total Produced,17,34,424,356,435
+Total Produced,18,34,433,367,445
+Total Produced,19,34,442,377,453
+Total Produced,20,34,451,387,462
+Total Produced,21,34,459,397,470
+Total Produced,22,34,467,406,477
+Total Produced,23,34,475,415,485
+Total Produced,24,34,482,424,492
+Total Produced,25,34,489,432,499
+Total Produced,26,34,496,440,506
+Total Produced,27,34,503,448,512
+Total Produced,28,34,509,456,518
+Total Produced,29,34,516,464,524
+Total Produced,30,34,522,471,530
+Total Produced,31,34,527,478,535
+Total Produced,32,34,533,485,541
+Total Produced,33,34,538,492,546
+Total Produced,34,34,544,498,551
+Total Produced,35,34,549,505,556
+Total Produced,36,34,554,511,561
+Total Produced,37,34,559,517,565
+Total Produced,38,34,563,523,570
+Total Produced,39,34,568,529,574
+Total Produced,40,34,572,534,579
+Total Produced,41,34,577,540,583
+Total Produced,42,34,581,545,587
+Total Produced,43,34,585,550,590
+Total Produced,44,34,589,555,594
+Total Produced,45,34,592,560,598
+Total Produced,46,34,596,565,601
+Total Produced,47,34,600,570,605
+Total Produced,48,34,603,574,608
+Total Produced,49,34,607,579,611
+Total Produced,50,34,610,583,614
+Total Produced,51,34,613,587,617
+Total Produced,52,34,616,591,620
+Total Produced,53,34,619,595,623
+Total Produced,54,34,622,599,626
+Total Produced,55,34,625,603,628
+Total Produced,56,34,628,606,631
+Total Produced,57,34,630,610,633
+Total Produced,58,34,633,613,636
+Total Produced,59,34,635,617,638
+Total Produced,60,34,638,620,640
+Total Produced,61,34,640,623,643
+Total Produced,62,34,642,626,645
+Total Produced,63,34,644,629,647
+Total Produced,64,34,646,632,649
+Total Produced,65,34,648,635,651
+Total Produced,66,34,650,637,652
+Total Produced,67,34,652,640,654
+Total Produced,68,34,654,642,656
+Total Produced,69,34,656,645,658
+Total Produced,70,34,657,647,659
+Total Produced,71,34,659,649,661
+Total Produced,72,34,661,652,662
+Total Produced,73,34,662,654,663
+Total Produced,74,34,663,656,665
+Total Produced,75,34,665,658,666
+Total Produced,76,34,666,659,667
+Total Produced,77,34,667,661,668
+Total Produced,78,34,668,663,669
+Total Produced,79,34,670,664,670
+Total Produced,80,34,671,666,671
+Total Produced,81,34,672,667,672
+Total Produced,82,34,672,669,673
+Total Produced,83,34,673,670,674
+Total Produced,84,34,674,671,675
+Total Produced,85,34,675,672,675
+Total Produced,86,34,676,673,676
+Total Produced,87,34,676,674,677
+Total Produced,88,34,677,675,677
+Total Produced,89,34,677,676,678
+Total Produced,90,34,678,677,678
+Total Produced,91,34,678,677,678
+Total Produced,92,34,679,678,679
+Total Produced,93,34,679,678,679
+Total Produced,94,34,679,679,679
+Total Produced,95,34,679,679,680
+Total Produced,96,34,680,679,680
+Total Produced,97,34,680,680,680
+Total Produced,98,34,680,680,680
+Total Produced,99,34,680,680,680
+Total Produced,0,35,0,0,0
+Total Produced,1,35,144,82,155
+Total Produced,2,35,194,123,206
+Total Produced,3,35,230,155,243
+Total Produced,4,35,260,182,272
+Total Produced,5,35,285,206,297
+Total Produced,6,35,307,228,319
+Total Produced,7,35,326,248,338
+Total Produced,8,35,344,266,356
+Total Produced,9,35,360,283,372
+Total Produced,10,35,375,299,386
+Total Produced,11,35,389,314,400
+Total Produced,12,35,402,329,413
+Total Produced,13,35,414,342,424
+Total Produced,14,35,425,355,436
+Total Produced,15,35,436,368,446
+Total Produced,16,35,446,379,456
+Total Produced,17,35,456,391,466
+Total Produced,18,35,465,402,475
+Total Produced,19,35,474,412,483
+Total Produced,20,35,482,422,491
+Total Produced,21,35,490,432,499
+Total Produced,22,35,498,441,507
+Total Produced,23,35,505,450,514
+Total Produced,24,35,512,459,520
+Total Produced,25,35,519,467,527
+Total Produced,26,35,526,475,533
+Total Produced,27,35,532,483,539
+Total Produced,28,35,538,491,545
+Total Produced,29,35,544,498,551
+Total Produced,30,35,550,505,556
+Total Produced,31,35,555,512,561
+Total Produced,32,35,560,518,566
+Total Produced,33,35,565,525,571
+Total Produced,34,35,570,531,576
+Total Produced,35,35,575,537,580
+Total Produced,36,35,579,543,585
+Total Produced,37,35,584,549,589
+Total Produced,38,35,588,554,593
+Total Produced,39,35,592,559,597
+Total Produced,40,35,596,565,600
+Total Produced,41,35,600,570,604
+Total Produced,42,35,603,574,608
+Total Produced,43,35,607,579,611
+Total Produced,44,35,610,584,614
+Total Produced,45,35,613,588,617
+Total Produced,46,35,617,592,620
+Total Produced,47,35,620,596,623
+Total Produced,48,35,623,600,626
+Total Produced,49,35,626,604,629
+Total Produced,50,35,628,608,631
+Total Produced,51,35,631,612,634
+Total Produced,52,35,633,615,636
+Total Produced,53,35,636,618,639
+Total Produced,54,35,638,622,641
+Total Produced,55,35,641,625,643
+Total Produced,56,35,643,628,645
+Total Produced,57,35,645,631,647
+Total Produced,58,35,647,634,649
+Total Produced,59,35,649,636,651
+Total Produced,60,35,651,639,653
+Total Produced,61,35,653,641,655
+Total Produced,62,35,654,644,656
+Total Produced,63,35,656,646,658
+Total Produced,64,35,658,648,659
+Total Produced,65,35,659,650,661
+Total Produced,66,35,661,652,662
+Total Produced,67,35,662,654,663
+Total Produced,68,35,663,656,665
+Total Produced,69,35,665,658,666
+Total Produced,70,35,666,660,667
+Total Produced,71,35,667,661,668
+Total Produced,72,35,668,663,669
+Total Produced,73,35,669,664,670
+Total Produced,74,35,670,666,671
+Total Produced,75,35,671,667,672
+Total Produced,76,35,672,668,673
+Total Produced,77,35,673,669,673
+Total Produced,78,35,673,670,674
+Total Produced,79,35,674,671,675
+Total Produced,80,35,675,672,675
+Total Produced,81,35,675,673,676
+Total Produced,82,35,676,674,676
+Total Produced,83,35,677,675,677
+Total Produced,84,35,677,676,677
+Total Produced,85,35,677,676,678
+Total Produced,86,35,678,677,678
+Total Produced,87,35,678,677,678
+Total Produced,88,35,679,678,679
+Total Produced,89,35,679,678,679
+Total Produced,90,35,679,679,679
+Total Produced,91,35,679,679,679
+Total Produced,92,35,679,679,680
+Total Produced,93,35,680,679,680
+Total Produced,94,35,680,680,680
+Total Produced,95,35,680,680,680
+Total Produced,96,35,680,680,680
+Total Produced,97,35,680,680,680
+Total Produced,98,35,680,680,680
+Total Produced,99,35,680,680,680
+Total Produced,0,36,0,0,0
+Total Produced,1,36,163,94,174
+Total Produced,2,36,217,139,229
+Total Produced,3,36,256,174,268
+Total Produced,4,36,287,204,299
+Total Produced,5,36,313,230,325
+Total Produced,6,36,336,254,347
+Total Produced,7,36,356,275,367
+Total Produced,8,36,374,295,385
+Total Produced,9,36,390,313,401
+Total Produced,10,36,406,330,416
+Total Produced,11,36,419,346,429
+Total Produced,12,36,432,361,442
+Total Produced,13,36,445,375,454
+Total Produced,14,36,456,388,465
+Total Produced,15,36,467,401,475
+Total Produced,16,36,477,413,485
+Total Produced,17,36,486,425,494
+Total Produced,18,36,495,436,503
+Total Produced,19,36,504,446,511
+Total Produced,20,36,512,456,519
+Total Produced,21,36,519,466,526
+Total Produced,22,36,527,475,534
+Total Produced,23,36,534,484,540
+Total Produced,24,36,540,493,547
+Total Produced,25,36,547,501,553
+Total Produced,26,36,553,509,559
+Total Produced,27,36,559,516,564
+Total Produced,28,36,564,523,570
+Total Produced,29,36,570,530,575
+Total Produced,30,36,575,537,580
+Total Produced,31,36,580,544,585
+Total Produced,32,36,584,550,589
+Total Produced,33,36,589,556,593
+Total Produced,34,36,593,562,598
+Total Produced,35,36,597,567,602
+Total Produced,36,36,601,572,605
+Total Produced,37,36,605,578,609
+Total Produced,38,36,609,583,613
+Total Produced,39,36,613,587,616
+Total Produced,40,36,616,592,619
+Total Produced,41,36,619,596,622
+Total Produced,42,36,622,601,625
+Total Produced,43,36,625,605,628
+Total Produced,44,36,628,609,631
+Total Produced,45,36,631,612,634
+Total Produced,46,36,634,616,636
+Total Produced,47,36,636,620,639
+Total Produced,48,36,639,623,641
+Total Produced,49,36,641,626,643
+Total Produced,50,36,643,629,645
+Total Produced,51,36,646,632,647
+Total Produced,52,36,648,635,649
+Total Produced,53,36,650,638,651
+Total Produced,54,36,651,640,653
+Total Produced,55,36,653,643,655
+Total Produced,56,36,655,645,656
+Total Produced,57,36,657,647,658
+Total Produced,58,36,658,650,659
+Total Produced,59,36,660,652,661
+Total Produced,60,36,661,654,662
+Total Produced,61,36,662,656,663
+Total Produced,62,36,664,657,665
+Total Produced,63,36,665,659,666
+Total Produced,64,36,666,661,667
+Total Produced,65,36,667,662,668
+Total Produced,66,36,668,664,669
+Total Produced,67,36,669,665,670
+Total Produced,68,36,670,666,671
+Total Produced,69,36,671,667,672
+Total Produced,70,36,672,669,672
+Total Produced,71,36,673,670,673
+Total Produced,72,36,673,671,674
+Total Produced,73,36,674,672,674
+Total Produced,74,36,675,672,675
+Total Produced,75,36,675,673,675
+Total Produced,76,36,676,674,676
+Total Produced,77,36,676,675,676
+Total Produced,78,36,677,675,677
+Total Produced,79,36,677,676,677
+Total Produced,80,36,677,676,678
+Total Produced,81,36,678,677,678
+Total Produced,82,36,678,677,678
+Total Produced,83,36,678,678,679
+Total Produced,84,36,679,678,679
+Total Produced,85,36,679,678,679
+Total Produced,86,36,679,679,679
+Total Produced,87,36,679,679,679
+Total Produced,88,36,679,679,679
+Total Produced,89,36,680,679,680
+Total Produced,90,36,680,680,680
+Total Produced,91,36,680,680,680
+Total Produced,92,36,680,680,680
+Total Produced,93,36,680,680,680
+Total Produced,94,36,680,680,680
+Total Produced,95,36,680,680,680
+Total Produced,96,36,680,680,680
+Total Produced,97,36,680,680,680
+Total Produced,98,36,680,680,680
+Total Produced,99,36,680,680,680
 Complexity,0,16,0,0,0
 Complexity,1,16,0,0,0
 Complexity,2,16,0,0,0
@@ -4558,7 +6358,7 @@ Complexity,55,16,0,0,0
 Complexity,56,16,0,0,0
 Complexity,57,16,0,0,0
 Complexity,58,16,0,0,0
-Complexity,59,16,1,0,1
+Complexity,59,16,0,0,1
 Complexity,60,16,1,1,1
 Complexity,61,16,1,1,1
 Complexity,62,16,1,1,1
@@ -4572,7 +6372,7 @@ Complexity,69,16,1,1,1
 Complexity,70,16,1,1,1
 Complexity,71,16,1,1,1
 Complexity,72,16,1,1,1
-Complexity,73,16,2,2,2
+Complexity,73,16,2,2,1
 Complexity,74,16,2,2,2
 Complexity,75,16,2,2,2
 Complexity,76,16,2,2,2
@@ -4587,18 +6387,18 @@ Complexity,84,16,3,4,3
 Complexity,85,16,4,4,4
 Complexity,86,16,4,4,4
 Complexity,87,16,4,5,4
-Complexity,88,16,5,5,5
+Complexity,88,16,5,5,4
 Complexity,89,16,5,5,5
 Complexity,90,16,6,6,5
 Complexity,91,16,6,6,6
 Complexity,92,16,7,7,6
 Complexity,93,16,7,8,7
-Complexity,94,16,8,9,8
+Complexity,94,16,8,9,7
 Complexity,95,16,9,10,8
 Complexity,96,16,10,11,9
-Complexity,97,16,12,12,11
-Complexity,98,16,13,14,13
-Complexity,99,16,17,18,16
+Complexity,97,16,11,12,11
+Complexity,98,16,13,14,12
+Complexity,99,16,16,18,15
 Complexity,0,17,0,0,0
 Complexity,1,17,0,0,0
 Complexity,2,17,0,0,0
@@ -4686,16 +6486,16 @@ Complexity,83,17,4,4,4
 Complexity,84,17,4,4,4
 Complexity,85,17,5,5,5
 Complexity,86,17,5,5,5
-Complexity,87,17,6,6,5
+Complexity,87,17,5,6,5
 Complexity,88,17,6,6,6
 Complexity,89,17,6,7,6
 Complexity,90,17,7,7,7
-Complexity,91,17,8,8,7
+Complexity,91,17,7,8,7
 Complexity,92,17,8,8,8
 Complexity,93,17,9,9,9
 Complexity,94,17,10,10,9
 Complexity,95,17,11,11,10
-Complexity,96,17,12,12,12
+Complexity,96,17,12,12,11
 Complexity,97,17,14,14,13
 Complexity,98,17,16,16,15
 Complexity,99,17,19,20,18
@@ -4762,7 +6562,7 @@ Complexity,59,18,1,1,1
 Complexity,60,18,1,1,1
 Complexity,61,18,1,1,1
 Complexity,62,18,1,1,1
-Complexity,63,18,1,1,2
+Complexity,63,18,1,1,1
 Complexity,64,18,1,1,2
 Complexity,65,18,2,1,2
 Complexity,66,18,2,2,2
@@ -4785,11 +6585,11 @@ Complexity,82,18,5,5,5
 Complexity,83,18,5,5,5
 Complexity,84,18,6,5,6
 Complexity,85,18,6,6,6
-Complexity,86,18,6,6,7
+Complexity,86,18,6,6,6
 Complexity,87,18,7,7,7
 Complexity,88,18,7,7,7
 Complexity,89,18,8,8,8
-Complexity,90,18,9,8,9
+Complexity,90,18,9,8,8
 Complexity,91,18,9,9,9
 Complexity,92,18,10,10,10
 Complexity,93,18,11,11,11
@@ -4798,7 +6598,7 @@ Complexity,95,18,13,13,13
 Complexity,96,18,14,14,14
 Complexity,97,18,16,16,16
 Complexity,98,18,18,18,18
-Complexity,99,18,22,22,21
+Complexity,99,18,21,22,21
 Complexity,0,19,0,0,0
 Complexity,1,19,0,0,0
 Complexity,2,19,0,0,0
@@ -4870,7 +6670,7 @@ Complexity,67,19,3,2,3
 Complexity,68,19,3,2,3
 Complexity,69,19,3,3,3
 Complexity,70,19,3,3,3
-Complexity,71,19,3,3,4
+Complexity,71,19,3,3,3
 Complexity,72,19,3,3,4
 Complexity,73,19,4,3,4
 Complexity,74,19,4,4,4
@@ -4878,7 +6678,7 @@ Complexity,75,19,4,4,4
 Complexity,76,19,4,4,5
 Complexity,77,19,5,4,5
 Complexity,78,19,5,5,5
-Complexity,79,19,5,5,6
+Complexity,79,19,5,5,5
 Complexity,80,19,6,5,6
 Complexity,81,19,6,6,6
 Complexity,82,19,6,6,7
@@ -4887,16 +6687,16 @@ Complexity,84,19,7,7,7
 Complexity,85,19,8,7,8
 Complexity,86,19,8,8,8
 Complexity,87,19,9,8,9
-Complexity,88,19,9,9,10
+Complexity,88,19,9,9,9
 Complexity,89,19,10,9,10
-Complexity,90,19,11,10,11
-Complexity,91,19,11,11,12
+Complexity,90,19,10,10,11
+Complexity,91,19,11,11,11
 Complexity,92,19,12,12,12
 Complexity,93,19,13,13,13
 Complexity,94,19,14,14,14
 Complexity,95,19,15,15,15
 Complexity,96,19,17,16,17
-Complexity,97,19,19,18,19
+Complexity,97,19,18,18,18
 Complexity,98,19,21,20,21
 Complexity,99,19,24,24,24
 Complexity,0,20,0,0,0
@@ -4969,7 +6769,7 @@ Complexity,66,20,3,3,4
 Complexity,67,20,3,3,4
 Complexity,68,20,4,3,4
 Complexity,69,20,4,3,4
-Complexity,70,20,4,4,5
+Complexity,70,20,4,4,4
 Complexity,71,20,4,4,5
 Complexity,72,20,5,4,5
 Complexity,73,20,5,4,5
@@ -4981,23 +6781,23 @@ Complexity,78,20,6,6,7
 Complexity,79,20,7,6,7
 Complexity,80,20,7,6,8
 Complexity,81,20,8,7,8
-Complexity,82,20,8,7,9
+Complexity,82,20,8,7,8
 Complexity,83,20,8,8,9
-Complexity,84,20,9,8,10
+Complexity,84,20,9,8,9
 Complexity,85,20,9,9,10
 Complexity,86,20,10,9,11
 Complexity,87,20,11,10,11
 Complexity,88,20,11,10,12
-Complexity,89,20,12,11,13
+Complexity,89,20,12,11,12
 Complexity,90,20,13,12,13
 Complexity,91,20,14,13,14
-Complexity,92,20,15,14,15
-Complexity,93,20,16,15,16
+Complexity,92,20,14,14,15
+Complexity,93,20,15,15,16
 Complexity,94,20,17,16,17
 Complexity,95,20,18,17,18
-Complexity,96,20,20,19,20
+Complexity,96,20,19,19,20
 Complexity,97,20,21,20,22
-Complexity,98,20,24,23,24
+Complexity,98,20,23,23,24
 Complexity,99,20,27,26,27
 Complexity,0,21,0,0,0
 Complexity,1,21,0,0,0
@@ -5051,7 +6851,7 @@ Complexity,48,21,1,1,2
 Complexity,49,21,2,1,2
 Complexity,50,21,2,1,2
 Complexity,51,21,2,1,2
-Complexity,52,21,2,1,2
+Complexity,52,21,2,2,2
 Complexity,53,21,2,2,2
 Complexity,54,21,2,2,3
 Complexity,55,21,2,2,3
@@ -5063,11 +6863,11 @@ Complexity,60,21,3,3,4
 Complexity,61,21,3,3,4
 Complexity,62,21,3,3,4
 Complexity,63,21,4,3,4
-Complexity,64,21,4,3,5
+Complexity,64,21,4,3,4
 Complexity,65,21,4,3,5
 Complexity,66,21,4,4,5
 Complexity,67,21,5,4,5
-Complexity,68,21,5,4,6
+Complexity,68,21,5,4,5
 Complexity,69,21,5,4,6
 Complexity,70,21,5,5,6
 Complexity,71,21,6,5,6
@@ -5078,23 +6878,23 @@ Complexity,75,21,7,6,8
 Complexity,76,21,7,6,8
 Complexity,77,21,8,7,9
 Complexity,78,21,8,7,9
-Complexity,79,21,9,8,10
+Complexity,79,21,9,8,9
 Complexity,80,21,9,8,10
-Complexity,81,21,10,8,10
+Complexity,81,21,9,8,10
 Complexity,82,21,10,9,11
-Complexity,83,21,11,9,12
+Complexity,83,21,10,9,11
 Complexity,84,21,11,10,12
-Complexity,85,21,12,10,13
+Complexity,85,21,12,11,13
 Complexity,86,21,12,11,13
 Complexity,87,21,13,12,14
 Complexity,88,21,14,12,15
-Complexity,89,21,15,13,15
+Complexity,89,21,14,13,15
 Complexity,90,21,15,14,16
 Complexity,91,21,16,15,17
 Complexity,92,21,17,16,18
 Complexity,93,21,18,17,19
 Complexity,94,21,19,18,20
-Complexity,95,21,21,19,22
+Complexity,95,21,21,19,21
 Complexity,96,21,22,21,23
 Complexity,97,21,24,23,25
 Complexity,98,21,26,25,27
@@ -5146,13 +6946,13 @@ Complexity,43,22,1,1,2
 Complexity,44,22,2,1,2
 Complexity,45,22,2,1,2
 Complexity,46,22,2,1,2
-Complexity,47,22,2,1,2
+Complexity,47,22,2,2,2
 Complexity,48,22,2,2,3
 Complexity,49,22,2,2,3
 Complexity,50,22,2,2,3
 Complexity,51,22,2,2,3
 Complexity,52,22,3,2,3
-Complexity,53,22,3,2,4
+Complexity,53,22,3,2,3
 Complexity,54,22,3,2,4
 Complexity,55,22,3,3,4
 Complexity,56,22,3,3,4
@@ -5164,20 +6964,20 @@ Complexity,61,22,4,4,5
 Complexity,62,22,5,4,6
 Complexity,63,22,5,4,6
 Complexity,64,22,5,4,6
-Complexity,65,22,5,4,6
+Complexity,65,22,5,5,6
 Complexity,66,22,6,5,7
 Complexity,67,22,6,5,7
 Complexity,68,22,6,5,7
 Complexity,69,22,7,6,8
 Complexity,70,22,7,6,8
-Complexity,71,22,7,6,9
+Complexity,71,22,7,6,8
 Complexity,72,22,8,7,9
 Complexity,73,22,8,7,9
-Complexity,74,22,9,7,10
+Complexity,74,22,8,7,10
 Complexity,75,22,9,8,10
 Complexity,76,22,9,8,11
 Complexity,77,22,10,8,11
-Complexity,78,22,10,9,12
+Complexity,78,22,10,9,11
 Complexity,79,22,11,9,12
 Complexity,80,22,11,10,13
 Complexity,81,22,12,10,13
@@ -5189,16 +6989,16 @@ Complexity,86,22,15,13,16
 Complexity,87,22,16,14,17
 Complexity,88,22,16,15,18
 Complexity,89,22,17,15,19
-Complexity,90,22,18,16,20
+Complexity,90,22,18,16,19
 Complexity,91,22,19,17,20
 Complexity,92,22,20,18,21
-Complexity,93,22,21,19,23
-Complexity,94,22,22,21,24
+Complexity,93,22,21,19,22
+Complexity,94,22,22,20,23
 Complexity,95,22,24,22,25
 Complexity,96,22,25,23,26
 Complexity,97,22,27,25,28
 Complexity,98,22,29,27,30
-Complexity,99,22,32,30,32
+Complexity,99,22,31,30,32
 Complexity,0,23,0,0,0
 Complexity,1,23,0,0,0
 Complexity,2,23,0,0,0
@@ -5221,11 +7021,11 @@ Complexity,18,23,0,0,0
 Complexity,19,23,0,0,0
 Complexity,20,23,0,0,0
 Complexity,21,23,0,0,0
-Complexity,22,23,0,0,1
+Complexity,22,23,0,0,0
 Complexity,23,23,0,0,1
 Complexity,24,23,0,0,1
 Complexity,25,23,0,0,1
-Complexity,26,23,0,0,1
+Complexity,26,23,1,0,1
 Complexity,27,23,1,0,1
 Complexity,28,23,1,0,1
 Complexity,29,23,1,0,1
@@ -5241,7 +7041,7 @@ Complexity,38,23,1,1,2
 Complexity,39,23,2,1,2
 Complexity,40,23,2,1,2
 Complexity,41,23,2,1,3
-Complexity,42,23,2,1,3
+Complexity,42,23,2,2,3
 Complexity,43,23,2,2,3
 Complexity,44,23,2,2,3
 Complexity,45,23,2,2,3
@@ -5254,35 +7054,35 @@ Complexity,51,23,3,3,4
 Complexity,52,23,4,3,5
 Complexity,53,23,4,3,5
 Complexity,54,23,4,3,5
-Complexity,55,23,4,3,6
+Complexity,55,23,4,3,5
 Complexity,56,23,5,4,6
 Complexity,57,23,5,4,6
 Complexity,58,23,5,4,6
 Complexity,59,23,5,4,7
-Complexity,60,23,6,4,7
+Complexity,60,23,6,5,7
 Complexity,61,23,6,5,7
 Complexity,62,23,6,5,8
 Complexity,63,23,7,5,8
 Complexity,64,23,7,6,8
 Complexity,65,23,7,6,9
-Complexity,66,23,8,6,9
+Complexity,66,23,7,6,9
 Complexity,67,23,8,6,9
 Complexity,68,23,8,7,10
 Complexity,69,23,9,7,10
 Complexity,70,23,9,7,11
 Complexity,71,23,9,8,11
-Complexity,72,23,10,8,12
+Complexity,72,23,10,8,11
 Complexity,73,23,10,9,12
 Complexity,74,23,11,9,12
 Complexity,75,23,11,9,13
-Complexity,76,23,12,10,14
+Complexity,76,23,12,10,13
 Complexity,77,23,12,10,14
-Complexity,78,23,13,11,15
+Complexity,78,23,13,11,14
 Complexity,79,23,13,11,15
 Complexity,80,23,14,12,16
-Complexity,81,23,15,12,16
+Complexity,81,23,14,12,16
 Complexity,82,23,15,13,17
-Complexity,83,23,16,14,18
+Complexity,83,23,16,14,17
 Complexity,84,23,16,14,18
 Complexity,85,23,17,15,19
 Complexity,86,23,18,16,20
@@ -5296,7 +7096,7 @@ Complexity,93,23,24,22,26
 Complexity,94,23,25,23,27
 Complexity,95,23,27,24,28
 Complexity,96,23,28,26,29
-Complexity,97,23,30,27,31
+Complexity,97,23,29,27,31
 Complexity,98,23,31,29,32
 Complexity,99,23,33,32,34
 Complexity,0,24,0,0,0
@@ -5324,7 +7124,7 @@ Complexity,21,24,0,0,1
 Complexity,22,24,1,0,1
 Complexity,23,24,1,0,1
 Complexity,24,24,1,0,1
-Complexity,25,24,1,0,1
+Complexity,25,24,1,1,1
 Complexity,26,24,1,1,1
 Complexity,27,24,1,1,1
 Complexity,28,24,1,1,1
@@ -5332,7 +7132,7 @@ Complexity,29,24,1,1,2
 Complexity,30,24,1,1,2
 Complexity,31,24,1,1,2
 Complexity,32,24,1,1,2
-Complexity,33,24,1,1,2
+Complexity,33,24,2,1,2
 Complexity,34,24,2,1,2
 Complexity,35,24,2,1,3
 Complexity,36,24,2,1,3
@@ -5354,15 +7154,15 @@ Complexity,51,24,5,4,6
 Complexity,52,24,5,4,7
 Complexity,53,24,5,4,7
 Complexity,54,24,6,4,7
-Complexity,55,24,6,5,8
+Complexity,55,24,6,5,7
 Complexity,56,24,6,5,8
 Complexity,57,24,6,5,8
-Complexity,58,24,7,5,9
+Complexity,58,24,7,5,8
 Complexity,59,24,7,6,9
 Complexity,60,24,7,6,9
 Complexity,61,24,8,6,10
-Complexity,62,24,8,6,10
-Complexity,63,24,9,7,10
+Complexity,62,24,8,7,10
+Complexity,63,24,8,7,10
 Complexity,64,24,9,7,11
 Complexity,65,24,9,7,11
 Complexity,66,24,10,8,12
@@ -5378,24 +7178,24 @@ Complexity,75,24,14,12,16
 Complexity,76,24,14,12,17
 Complexity,77,24,15,13,17
 Complexity,78,24,16,13,18
-Complexity,79,24,16,14,19
+Complexity,79,24,16,14,18
 Complexity,80,24,17,14,19
-Complexity,81,24,18,15,20
+Complexity,81,24,17,15,20
 Complexity,82,24,18,15,20
 Complexity,83,24,19,16,21
-Complexity,84,24,20,17,22
+Complexity,84,24,19,17,22
 Complexity,85,24,20,18,22
 Complexity,86,24,21,18,23
 Complexity,87,24,22,19,24
-Complexity,88,24,23,20,25
+Complexity,88,24,22,20,25
 Complexity,89,24,23,21,25
 Complexity,90,24,24,22,26
-Complexity,91,24,25,23,27
-Complexity,92,24,26,24,28
-Complexity,93,24,27,25,29
+Complexity,91,24,25,22,27
+Complexity,92,24,26,23,28
+Complexity,93,24,27,24,29
 Complexity,94,24,28,26,30
 Complexity,95,24,29,27,31
-Complexity,96,24,31,28,32
+Complexity,96,24,30,28,32
 Complexity,97,24,32,30,33
 Complexity,98,24,33,31,34
 Complexity,99,24,35,33,35
@@ -5417,7 +7217,7 @@ Complexity,14,25,0,0,1
 Complexity,15,25,0,0,1
 Complexity,16,25,0,0,1
 Complexity,17,25,0,0,1
-Complexity,18,25,0,0,1
+Complexity,18,25,1,0,1
 Complexity,19,25,1,0,1
 Complexity,20,25,1,0,1
 Complexity,21,25,1,0,1
@@ -5444,25 +7244,25 @@ Complexity,41,25,4,3,5
 Complexity,42,25,4,3,6
 Complexity,43,25,4,3,6
 Complexity,44,25,4,3,6
-Complexity,45,25,5,3,6
+Complexity,45,25,5,4,6
 Complexity,46,25,5,4,7
 Complexity,47,25,5,4,7
 Complexity,48,25,6,4,7
 Complexity,49,25,6,4,8
 Complexity,50,25,6,5,8
-Complexity,51,25,6,5,9
+Complexity,51,25,6,5,8
 Complexity,52,25,7,5,9
 Complexity,53,25,7,5,9
 Complexity,54,25,7,6,10
 Complexity,55,25,8,6,10
 Complexity,56,25,8,6,10
-Complexity,57,25,9,7,11
+Complexity,57,25,8,7,11
 Complexity,58,25,9,7,11
 Complexity,59,25,9,7,12
 Complexity,60,25,10,8,12
 Complexity,61,25,10,8,13
-Complexity,62,25,11,8,13
-Complexity,63,25,11,9,14
+Complexity,62,25,10,8,13
+Complexity,63,25,11,9,13
 Complexity,64,25,11,9,14
 Complexity,65,25,12,9,14
 Complexity,66,25,12,10,15
@@ -5470,14 +7270,14 @@ Complexity,67,25,13,10,15
 Complexity,68,25,13,11,16
 Complexity,69,25,14,11,16
 Complexity,70,25,14,12,17
-Complexity,71,25,15,12,18
+Complexity,71,25,15,12,17
 Complexity,72,25,15,13,18
 Complexity,73,25,16,13,19
 Complexity,74,25,16,14,19
 Complexity,75,25,17,14,20
 Complexity,76,25,18,15,20
 Complexity,77,25,18,15,21
-Complexity,78,25,19,16,22
+Complexity,78,25,19,16,21
 Complexity,79,25,19,16,22
 Complexity,80,25,20,17,23
 Complexity,81,25,21,18,23
@@ -5488,14 +7288,14 @@ Complexity,85,25,23,20,26
 Complexity,86,25,24,21,27
 Complexity,87,25,25,22,27
 Complexity,88,25,26,23,28
-Complexity,89,25,27,24,29
+Complexity,89,25,26,23,29
 Complexity,90,25,27,24,29
 Complexity,91,25,28,25,30
 Complexity,92,25,29,26,31
-Complexity,93,25,30,27,32
+Complexity,93,25,30,27,31
 Complexity,94,25,31,28,32
 Complexity,95,25,32,29,33
-Complexity,96,25,33,31,34
+Complexity,96,25,33,30,34
 Complexity,97,25,34,32,35
 Complexity,98,25,35,33,35
 Complexity,99,25,36,35,36
@@ -5517,7 +7317,7 @@ Complexity,14,26,0,0,1
 Complexity,15,26,1,0,1
 Complexity,16,26,1,0,1
 Complexity,17,26,1,0,1
-Complexity,18,26,1,0,1
+Complexity,18,26,1,1,1
 Complexity,19,26,1,1,2
 Complexity,20,26,1,1,2
 Complexity,21,26,1,1,2
@@ -5557,7 +7357,7 @@ Complexity,54,26,10,7,13
 Complexity,55,26,10,8,13
 Complexity,56,26,11,8,14
 Complexity,57,26,11,8,14
-Complexity,58,26,11,9,15
+Complexity,58,26,11,9,14
 Complexity,59,26,12,9,15
 Complexity,60,26,12,10,15
 Complexity,61,26,13,10,16
@@ -5565,18 +7365,18 @@ Complexity,62,26,13,10,16
 Complexity,63,26,14,11,17
 Complexity,64,26,14,11,17
 Complexity,65,26,15,12,18
-Complexity,66,26,15,12,19
+Complexity,66,26,15,12,18
 Complexity,67,26,16,13,19
 Complexity,68,26,16,13,20
 Complexity,69,26,17,14,20
 Complexity,70,26,17,14,21
 Complexity,71,26,18,15,21
-Complexity,72,26,19,15,22
+Complexity,72,26,18,15,22
 Complexity,73,26,19,16,22
 Complexity,74,26,20,16,23
 Complexity,75,26,20,17,23
 Complexity,76,26,21,17,24
-Complexity,77,26,22,18,25
+Complexity,77,26,21,18,24
 Complexity,78,26,22,19,25
 Complexity,79,26,23,19,26
 Complexity,80,26,23,20,26
@@ -5591,12 +7391,12 @@ Complexity,88,26,29,26,31
 Complexity,89,26,29,26,31
 Complexity,90,26,30,27,32
 Complexity,91,26,31,28,33
-Complexity,92,26,32,29,33
+Complexity,92,26,31,29,33
 Complexity,93,26,32,30,34
 Complexity,94,26,33,31,34
-Complexity,95,26,34,32,35
-Complexity,96,26,34,33,35
-Complexity,97,26,35,34,36
+Complexity,95,26,34,31,35
+Complexity,96,26,34,32,35
+Complexity,97,26,35,33,36
 Complexity,98,26,36,35,36
 Complexity,99,26,36,36,37
 Complexity,0,27,0,0,0
@@ -5614,7 +7414,7 @@ Complexity,11,27,0,0,1
 Complexity,12,27,1,0,1
 Complexity,13,27,1,0,1
 Complexity,14,27,1,0,1
-Complexity,15,27,1,0,2
+Complexity,15,27,1,1,2
 Complexity,16,27,1,1,2
 Complexity,17,27,1,1,2
 Complexity,18,27,1,1,2
@@ -5638,7 +7438,7 @@ Complexity,35,27,5,4,8
 Complexity,36,27,5,4,8
 Complexity,37,27,6,4,8
 Complexity,38,27,6,4,9
-Complexity,39,27,6,4,9
+Complexity,39,27,6,5,9
 Complexity,40,27,7,5,10
 Complexity,41,27,7,5,10
 Complexity,42,27,7,5,10
@@ -5663,25 +7463,25 @@ Complexity,60,27,15,12,19
 Complexity,61,27,16,13,20
 Complexity,62,27,16,13,20
 Complexity,63,27,17,13,21
-Complexity,64,27,18,14,21
+Complexity,64,27,17,14,21
 Complexity,65,27,18,14,22
 Complexity,66,27,19,15,22
-Complexity,67,27,19,16,23
+Complexity,67,27,19,15,23
 Complexity,68,27,20,16,23
 Complexity,69,27,20,17,24
 Complexity,70,27,21,17,24
 Complexity,71,27,21,18,25
 Complexity,72,27,22,18,25
-Complexity,73,27,23,19,26
+Complexity,73,27,22,19,26
 Complexity,74,27,23,19,26
 Complexity,75,27,24,20,27
-Complexity,76,27,24,21,28
+Complexity,76,27,24,21,27
 Complexity,77,27,25,21,28
-Complexity,78,27,25,22,29
+Complexity,78,27,25,22,28
 Complexity,79,27,26,22,29
-Complexity,80,27,27,23,30
+Complexity,80,27,27,23,29
 Complexity,81,27,27,24,30
-Complexity,82,27,28,24,31
+Complexity,82,27,28,24,30
 Complexity,83,27,28,25,31
 Complexity,84,27,29,26,31
 Complexity,85,27,30,26,32
@@ -5690,12 +7490,12 @@ Complexity,87,27,31,28,33
 Complexity,88,27,31,28,33
 Complexity,89,27,32,29,34
 Complexity,90,27,32,30,34
-Complexity,91,27,33,31,34
-Complexity,92,27,34,31,35
+Complexity,91,27,33,30,34
+Complexity,92,27,33,31,35
 Complexity,93,27,34,32,35
 Complexity,94,27,35,33,36
 Complexity,95,27,35,33,36
-Complexity,96,27,36,34,36
+Complexity,96,27,35,34,36
 Complexity,97,27,36,35,36
 Complexity,98,27,36,36,37
 Complexity,99,27,37,36,37
@@ -5705,7 +7505,7 @@ Complexity,2,28,0,0,0
 Complexity,3,28,0,0,0
 Complexity,4,28,0,0,0
 Complexity,5,28,0,0,0
-Complexity,6,28,0,0,0
+Complexity,6,28,0,0,1
 Complexity,7,28,0,0,1
 Complexity,8,28,0,0,1
 Complexity,9,28,0,0,1
@@ -5720,7 +7520,7 @@ Complexity,17,28,2,1,3
 Complexity,18,28,2,1,3
 Complexity,19,28,2,1,4
 Complexity,20,28,2,1,4
-Complexity,21,28,3,2,4
+Complexity,21,28,2,2,4
 Complexity,22,28,3,2,5
 Complexity,23,28,3,2,5
 Complexity,24,28,3,2,5
@@ -5738,7 +7538,7 @@ Complexity,35,28,7,5,10
 Complexity,36,28,7,5,11
 Complexity,37,28,8,5,11
 Complexity,38,28,8,6,12
-Complexity,39,28,9,6,12
+Complexity,39,28,8,6,12
 Complexity,40,28,9,6,13
 Complexity,41,28,9,7,13
 Complexity,42,28,10,7,14
@@ -5752,7 +7552,7 @@ Complexity,49,28,13,10,17
 Complexity,50,28,14,10,18
 Complexity,51,28,14,11,18
 Complexity,52,28,15,11,19
-Complexity,53,28,15,12,19
+Complexity,53,28,15,11,19
 Complexity,54,28,16,12,20
 Complexity,55,28,16,12,20
 Complexity,56,28,17,13,21
@@ -5760,20 +7560,20 @@ Complexity,57,28,17,13,21
 Complexity,58,28,18,14,22
 Complexity,59,28,18,14,22
 Complexity,60,28,19,15,23
-Complexity,61,28,19,15,24
+Complexity,61,28,19,15,23
 Complexity,62,28,20,16,24
-Complexity,63,28,21,16,25
+Complexity,63,28,20,16,25
 Complexity,64,28,21,17,25
-Complexity,65,28,22,18,26
+Complexity,65,28,22,17,26
 Complexity,66,28,22,18,26
-Complexity,67,28,23,19,27
+Complexity,67,28,23,19,26
 Complexity,68,28,23,19,27
 Complexity,69,28,24,20,27
 Complexity,70,28,24,20,28
 Complexity,71,28,25,21,28
-Complexity,72,28,25,22,29
+Complexity,72,28,25,21,29
 Complexity,73,28,26,22,29
-Complexity,74,28,27,23,30
+Complexity,74,28,26,23,30
 Complexity,75,28,27,23,30
 Complexity,76,28,28,24,31
 Complexity,77,28,28,24,31
@@ -5828,7 +7628,7 @@ Complexity,25,29,5,3,8
 Complexity,26,29,5,3,9
 Complexity,27,29,6,4,9
 Complexity,28,29,6,4,10
-Complexity,29,29,7,4,10
+Complexity,29,29,6,4,10
 Complexity,30,29,7,5,11
 Complexity,31,29,7,5,11
 Complexity,32,29,8,5,12
@@ -5842,7 +7642,7 @@ Complexity,39,29,11,8,16
 Complexity,40,29,12,8,16
 Complexity,41,29,12,9,17
 Complexity,42,29,13,9,17
-Complexity,43,29,13,10,18
+Complexity,43,29,13,9,18
 Complexity,44,29,14,10,18
 Complexity,45,29,14,10,19
 Complexity,46,29,15,11,20
@@ -5850,22 +7650,22 @@ Complexity,47,29,15,11,20
 Complexity,48,29,16,12,21
 Complexity,49,29,16,12,21
 Complexity,50,29,17,13,22
-Complexity,51,29,18,13,22
+Complexity,51,29,17,13,22
 Complexity,52,29,18,14,23
 Complexity,53,29,19,14,23
 Complexity,54,29,19,15,24
 Complexity,55,29,20,15,24
 Complexity,56,29,20,16,25
-Complexity,57,29,21,17,25
+Complexity,57,29,21,16,25
 Complexity,58,29,21,17,26
-Complexity,59,29,22,18,26
-Complexity,60,29,23,18,27
+Complexity,59,29,22,17,26
+Complexity,60,29,22,18,27
 Complexity,61,29,23,19,27
 Complexity,62,29,24,19,28
 Complexity,63,29,24,20,28
 Complexity,64,29,25,20,29
 Complexity,65,29,25,21,29
-Complexity,66,29,26,22,29
+Complexity,66,29,26,21,29
 Complexity,67,29,26,22,30
 Complexity,68,29,27,23,30
 Complexity,69,29,27,23,31
@@ -5874,7 +7674,7 @@ Complexity,71,29,28,24,31
 Complexity,72,29,29,25,32
 Complexity,73,29,29,25,32
 Complexity,74,29,30,26,33
-Complexity,75,29,30,27,33
+Complexity,75,29,30,26,33
 Complexity,76,29,31,27,33
 Complexity,77,29,31,28,33
 Complexity,78,29,31,28,34
@@ -5884,19 +7684,19 @@ Complexity,81,29,33,30,35
 Complexity,82,29,33,30,35
 Complexity,83,29,33,31,35
 Complexity,84,29,34,31,35
-Complexity,85,29,34,32,36
+Complexity,85,29,34,32,35
 Complexity,86,29,34,32,36
 Complexity,87,29,35,33,36
 Complexity,88,29,35,33,36
 Complexity,89,29,35,34,36
 Complexity,90,29,36,34,36
-Complexity,91,29,36,35,36
+Complexity,91,29,36,34,36
 Complexity,92,29,36,35,37
 Complexity,93,29,36,35,37
 Complexity,94,29,36,36,37
 Complexity,95,29,37,36,37
 Complexity,96,29,37,36,37
-Complexity,97,29,37,37,37
+Complexity,97,29,37,36,37
 Complexity,98,29,37,37,37
 Complexity,99,29,37,37,37
 Complexity,0,30,0,0,0
@@ -5905,7 +7705,7 @@ Complexity,2,30,0,0,0
 Complexity,3,30,0,0,0
 Complexity,4,30,0,0,1
 Complexity,5,30,0,0,1
-Complexity,6,30,1,0,1
+Complexity,6,30,0,0,1
 Complexity,7,30,1,0,2
 Complexity,8,30,1,0,2
 Complexity,9,30,1,1,2
@@ -5914,59 +7714,59 @@ Complexity,11,30,2,1,3
 Complexity,12,30,2,1,4
 Complexity,13,30,2,1,4
 Complexity,14,30,2,1,5
-Complexity,15,30,3,2,5
+Complexity,15,30,3,1,5
 Complexity,16,30,3,2,6
 Complexity,17,30,3,2,6
 Complexity,18,30,4,2,7
 Complexity,19,30,4,2,7
 Complexity,20,30,5,3,8
-Complexity,21,30,5,3,8
+Complexity,21,30,5,3,9
 Complexity,22,30,5,3,9
 Complexity,23,30,6,4,10
 Complexity,24,30,6,4,10
 Complexity,25,30,7,4,11
-Complexity,26,30,7,5,11
+Complexity,26,30,7,5,12
 Complexity,27,30,8,5,12
 Complexity,28,30,8,5,13
 Complexity,29,30,9,6,13
 Complexity,30,30,9,6,14
-Complexity,31,30,10,7,15
+Complexity,31,30,10,6,15
 Complexity,32,30,10,7,15
 Complexity,33,30,11,7,16
 Complexity,34,30,11,8,16
 Complexity,35,30,12,8,17
-Complexity,36,30,13,9,18
+Complexity,36,30,12,9,18
 Complexity,37,30,13,9,18
 Complexity,38,30,14,10,19
-Complexity,39,30,14,10,19
+Complexity,39,30,14,10,20
 Complexity,40,30,15,11,20
 Complexity,41,30,15,11,21
 Complexity,42,30,16,12,21
-Complexity,43,30,17,12,22
+Complexity,43,30,16,12,22
 Complexity,44,30,17,13,22
 Complexity,45,30,18,13,23
-Complexity,46,30,18,14,23
+Complexity,46,30,18,14,24
 Complexity,47,30,19,14,24
-Complexity,48,30,20,15,25
+Complexity,48,30,19,15,25
 Complexity,49,30,20,15,25
 Complexity,50,30,21,16,26
-Complexity,51,30,21,17,26
+Complexity,51,30,21,16,26
 Complexity,52,30,22,17,27
 Complexity,53,30,22,18,27
 Complexity,54,30,23,18,28
-Complexity,55,30,24,19,28
+Complexity,55,30,23,19,28
 Complexity,56,30,24,19,29
-Complexity,57,30,25,20,29
-Complexity,58,30,25,21,29
+Complexity,57,30,24,20,29
+Complexity,58,30,25,20,29
 Complexity,59,30,26,21,30
 Complexity,60,30,26,22,30
 Complexity,61,30,27,22,31
 Complexity,62,30,27,23,31
 Complexity,63,30,28,23,31
 Complexity,64,30,28,24,32
-Complexity,65,30,29,25,32
+Complexity,65,30,29,24,32
 Complexity,66,30,29,25,32
-Complexity,67,30,30,26,33
+Complexity,67,30,29,25,33
 Complexity,68,30,30,26,33
 Complexity,69,30,30,27,33
 Complexity,70,30,31,27,34
@@ -5978,7 +7778,7 @@ Complexity,75,30,33,30,35
 Complexity,76,30,33,30,35
 Complexity,77,30,33,31,35
 Complexity,78,30,34,31,35
-Complexity,79,30,34,32,36
+Complexity,79,30,34,31,36
 Complexity,80,30,34,32,36
 Complexity,81,30,35,32,36
 Complexity,82,30,35,33,36
@@ -5989,8 +7789,8 @@ Complexity,86,30,36,34,36
 Complexity,87,30,36,35,37
 Complexity,88,30,36,35,37
 Complexity,89,30,36,35,37
-Complexity,90,30,36,36,37
-Complexity,91,30,37,36,37
+Complexity,90,30,36,35,37
+Complexity,91,30,36,36,37
 Complexity,92,30,37,36,37
 Complexity,93,30,37,36,37
 Complexity,94,30,37,36,37
@@ -5999,6 +7799,606 @@ Complexity,96,30,37,37,37
 Complexity,97,30,37,37,37
 Complexity,98,30,37,37,37
 Complexity,99,30,37,37,37
+Complexity,0,31,0,0,0
+Complexity,1,31,0,0,0
+Complexity,2,31,0,0,0
+Complexity,3,31,0,0,1
+Complexity,4,31,0,0,1
+Complexity,5,31,1,0,1
+Complexity,6,31,1,0,2
+Complexity,7,31,1,0,2
+Complexity,8,31,1,1,3
+Complexity,9,31,1,1,3
+Complexity,10,31,2,1,4
+Complexity,11,31,2,1,5
+Complexity,12,31,2,1,5
+Complexity,13,31,3,1,6
+Complexity,14,31,3,2,6
+Complexity,15,31,4,2,7
+Complexity,16,31,4,2,8
+Complexity,17,31,5,3,9
+Complexity,18,31,5,3,9
+Complexity,19,31,6,3,10
+Complexity,20,31,6,4,11
+Complexity,21,31,7,4,11
+Complexity,22,31,7,4,12
+Complexity,23,31,8,5,13
+Complexity,24,31,8,5,14
+Complexity,25,31,9,6,14
+Complexity,26,31,9,6,15
+Complexity,27,31,10,6,16
+Complexity,28,31,11,7,16
+Complexity,29,31,11,7,17
+Complexity,30,31,12,8,18
+Complexity,31,31,13,8,18
+Complexity,32,31,13,9,19
+Complexity,33,31,14,9,20
+Complexity,34,31,14,10,20
+Complexity,35,31,15,10,21
+Complexity,36,31,16,11,22
+Complexity,37,31,16,12,22
+Complexity,38,31,17,12,23
+Complexity,39,31,18,13,24
+Complexity,40,31,18,13,24
+Complexity,41,31,19,14,25
+Complexity,42,31,20,14,25
+Complexity,43,31,20,15,26
+Complexity,44,31,21,16,26
+Complexity,45,31,21,16,27
+Complexity,46,31,22,17,27
+Complexity,47,31,23,17,28
+Complexity,48,31,23,18,28
+Complexity,49,31,24,19,29
+Complexity,50,31,24,19,29
+Complexity,51,31,25,20,30
+Complexity,52,31,26,20,30
+Complexity,53,31,26,21,31
+Complexity,54,31,27,22,31
+Complexity,55,31,27,22,31
+Complexity,56,31,28,23,32
+Complexity,57,31,28,23,32
+Complexity,58,31,29,24,32
+Complexity,59,31,29,25,33
+Complexity,60,31,30,25,33
+Complexity,61,31,30,26,33
+Complexity,62,31,30,26,34
+Complexity,63,31,31,27,34
+Complexity,64,31,31,27,34
+Complexity,65,31,32,28,34
+Complexity,66,31,32,28,35
+Complexity,67,31,32,29,35
+Complexity,68,31,33,29,35
+Complexity,69,31,33,30,35
+Complexity,70,31,33,30,35
+Complexity,71,31,34,31,35
+Complexity,72,31,34,31,36
+Complexity,73,31,34,32,36
+Complexity,74,31,34,32,36
+Complexity,75,31,35,32,36
+Complexity,76,31,35,33,36
+Complexity,77,31,35,33,36
+Complexity,78,31,35,33,36
+Complexity,79,31,36,34,36
+Complexity,80,31,36,34,37
+Complexity,81,31,36,34,37
+Complexity,82,31,36,35,37
+Complexity,83,31,36,35,37
+Complexity,84,31,36,35,37
+Complexity,85,31,36,35,37
+Complexity,86,31,36,36,37
+Complexity,87,31,37,36,37
+Complexity,88,31,37,36,37
+Complexity,89,31,37,36,37
+Complexity,90,31,37,36,37
+Complexity,91,31,37,36,37
+Complexity,92,31,37,37,37
+Complexity,93,31,37,37,37
+Complexity,94,31,37,37,37
+Complexity,95,31,37,37,37
+Complexity,96,31,37,37,37
+Complexity,97,31,37,37,37
+Complexity,98,31,37,37,37
+Complexity,99,31,37,37,37
+Complexity,0,32,0,0,0
+Complexity,1,32,0,0,0
+Complexity,2,32,0,0,1
+Complexity,3,32,0,0,1
+Complexity,4,32,0,0,1
+Complexity,5,32,1,0,2
+Complexity,6,32,1,0,3
+Complexity,7,32,1,1,3
+Complexity,8,32,2,1,4
+Complexity,9,32,2,1,5
+Complexity,10,32,2,1,5
+Complexity,11,32,3,1,6
+Complexity,12,32,3,2,7
+Complexity,13,32,4,2,8
+Complexity,14,32,4,2,9
+Complexity,15,32,5,3,10
+Complexity,16,32,6,3,10
+Complexity,17,32,6,3,11
+Complexity,18,32,7,4,12
+Complexity,19,32,7,4,13
+Complexity,20,32,8,5,14
+Complexity,21,32,9,5,15
+Complexity,22,32,10,6,16
+Complexity,23,32,10,6,16
+Complexity,24,32,11,7,17
+Complexity,25,32,12,7,18
+Complexity,26,32,12,8,19
+Complexity,27,32,13,8,20
+Complexity,28,32,14,9,20
+Complexity,29,32,14,10,21
+Complexity,30,32,15,10,22
+Complexity,31,32,16,11,23
+Complexity,32,32,17,11,23
+Complexity,33,32,17,12,24
+Complexity,34,32,18,13,25
+Complexity,35,32,19,13,25
+Complexity,36,32,19,14,26
+Complexity,37,32,20,15,26
+Complexity,38,32,21,15,27
+Complexity,39,32,22,16,28
+Complexity,40,32,22,17,28
+Complexity,41,32,23,17,29
+Complexity,42,32,24,18,29
+Complexity,43,32,24,19,30
+Complexity,44,32,25,19,30
+Complexity,45,32,25,20,31
+Complexity,46,32,26,21,31
+Complexity,47,32,27,21,31
+Complexity,48,32,27,22,32
+Complexity,49,32,28,22,32
+Complexity,50,32,28,23,32
+Complexity,51,32,29,24,33
+Complexity,52,32,29,24,33
+Complexity,53,32,30,25,33
+Complexity,54,32,30,25,34
+Complexity,55,32,30,26,34
+Complexity,56,32,31,27,34
+Complexity,57,32,31,27,34
+Complexity,58,32,32,28,35
+Complexity,59,32,32,28,35
+Complexity,60,32,32,29,35
+Complexity,61,32,33,29,35
+Complexity,62,32,33,30,35
+Complexity,63,32,33,30,36
+Complexity,64,32,34,31,36
+Complexity,65,32,34,31,36
+Complexity,66,32,34,31,36
+Complexity,67,32,34,32,36
+Complexity,68,32,35,32,36
+Complexity,69,32,35,33,36
+Complexity,70,32,35,33,36
+Complexity,71,32,35,33,36
+Complexity,72,32,36,34,37
+Complexity,73,32,36,34,37
+Complexity,74,32,36,34,37
+Complexity,75,32,36,34,37
+Complexity,76,32,36,35,37
+Complexity,77,32,36,35,37
+Complexity,78,32,36,35,37
+Complexity,79,32,36,35,37
+Complexity,80,32,36,36,37
+Complexity,81,32,37,36,37
+Complexity,82,32,37,36,37
+Complexity,83,32,37,36,37
+Complexity,84,32,37,36,37
+Complexity,85,32,37,36,37
+Complexity,86,32,37,36,37
+Complexity,87,32,37,37,37
+Complexity,88,32,37,37,37
+Complexity,89,32,37,37,37
+Complexity,90,32,37,37,37
+Complexity,91,32,37,37,37
+Complexity,92,32,37,37,37
+Complexity,93,32,37,37,37
+Complexity,94,32,37,37,37
+Complexity,95,32,37,37,37
+Complexity,96,32,37,37,37
+Complexity,97,32,37,37,37
+Complexity,98,32,37,37,37
+Complexity,99,32,37,37,37
+Complexity,0,33,0,0,0
+Complexity,1,33,0,0,0
+Complexity,2,33,0,0,1
+Complexity,3,33,0,0,1
+Complexity,4,33,1,0,2
+Complexity,5,33,1,0,3
+Complexity,6,33,1,1,4
+Complexity,7,33,2,1,4
+Complexity,8,33,2,1,5
+Complexity,9,33,3,1,6
+Complexity,10,33,3,2,7
+Complexity,11,33,4,2,8
+Complexity,12,33,5,2,9
+Complexity,13,33,5,3,10
+Complexity,14,33,6,3,11
+Complexity,15,33,7,4,13
+Complexity,16,33,7,4,14
+Complexity,17,33,8,5,15
+Complexity,18,33,9,5,16
+Complexity,19,33,10,6,17
+Complexity,20,33,11,6,18
+Complexity,21,33,12,7,19
+Complexity,22,33,12,7,19
+Complexity,23,33,13,8,20
+Complexity,24,33,14,9,21
+Complexity,25,33,15,9,22
+Complexity,26,33,16,10,23
+Complexity,27,33,17,11,24
+Complexity,28,33,17,12,25
+Complexity,29,33,18,12,25
+Complexity,30,33,19,13,26
+Complexity,31,33,20,14,27
+Complexity,32,33,21,14,27
+Complexity,33,33,21,15,28
+Complexity,34,33,22,16,29
+Complexity,35,33,23,17,29
+Complexity,36,33,24,17,30
+Complexity,37,33,24,18,30
+Complexity,38,33,25,19,31
+Complexity,39,33,26,20,31
+Complexity,40,33,26,20,32
+Complexity,41,33,27,21,32
+Complexity,42,33,27,22,32
+Complexity,43,33,28,22,33
+Complexity,44,33,29,23,33
+Complexity,45,33,29,24,33
+Complexity,46,33,30,24,34
+Complexity,47,33,30,25,34
+Complexity,48,33,31,26,34
+Complexity,49,33,31,26,35
+Complexity,50,33,31,27,35
+Complexity,51,33,32,27,35
+Complexity,52,33,32,28,35
+Complexity,53,33,33,29,35
+Complexity,54,33,33,29,35
+Complexity,55,33,33,30,36
+Complexity,56,33,34,30,36
+Complexity,57,33,34,31,36
+Complexity,58,33,34,31,36
+Complexity,59,33,34,31,36
+Complexity,60,33,35,32,36
+Complexity,61,33,35,32,36
+Complexity,62,33,35,33,36
+Complexity,63,33,35,33,36
+Complexity,64,33,35,33,37
+Complexity,65,33,36,34,37
+Complexity,66,33,36,34,37
+Complexity,67,33,36,34,37
+Complexity,68,33,36,34,37
+Complexity,69,33,36,35,37
+Complexity,70,33,36,35,37
+Complexity,71,33,36,35,37
+Complexity,72,33,36,35,37
+Complexity,73,33,36,36,37
+Complexity,74,33,37,36,37
+Complexity,75,33,37,36,37
+Complexity,76,33,37,36,37
+Complexity,77,33,37,36,37
+Complexity,78,33,37,36,37
+Complexity,79,33,37,36,37
+Complexity,80,33,37,36,37
+Complexity,81,33,37,37,37
+Complexity,82,33,37,37,37
+Complexity,83,33,37,37,37
+Complexity,84,33,37,37,37
+Complexity,85,33,37,37,37
+Complexity,86,33,37,37,37
+Complexity,87,33,37,37,37
+Complexity,88,33,37,37,37
+Complexity,89,33,37,37,37
+Complexity,90,33,37,37,37
+Complexity,91,33,37,37,37
+Complexity,92,33,37,37,37
+Complexity,93,33,37,37,37
+Complexity,94,33,37,37,37
+Complexity,95,33,37,37,37
+Complexity,96,33,37,37,37
+Complexity,97,33,37,37,37
+Complexity,98,33,37,37,37
+Complexity,99,33,37,37,37
+Complexity,0,34,0,0,0
+Complexity,1,34,0,0,0
+Complexity,2,34,0,0,1
+Complexity,3,34,1,0,2
+Complexity,4,34,1,0,3
+Complexity,5,34,1,0,4
+Complexity,6,34,2,1,5
+Complexity,7,34,2,1,6
+Complexity,8,34,3,1,7
+Complexity,9,34,4,2,9
+Complexity,10,34,5,2,10
+Complexity,11,34,5,3,11
+Complexity,12,34,6,3,12
+Complexity,13,34,7,4,14
+Complexity,14,34,8,4,15
+Complexity,15,34,9,5,16
+Complexity,16,34,10,5,17
+Complexity,17,34,11,6,18
+Complexity,18,34,12,7,20
+Complexity,19,34,13,7,21
+Complexity,20,34,14,8,22
+Complexity,21,34,15,9,23
+Complexity,22,34,16,10,24
+Complexity,23,34,17,11,25
+Complexity,24,34,18,11,25
+Complexity,25,34,19,12,26
+Complexity,26,34,20,13,27
+Complexity,27,34,21,14,28
+Complexity,28,34,21,15,29
+Complexity,29,34,22,16,29
+Complexity,30,34,23,16,30
+Complexity,31,34,24,17,30
+Complexity,32,34,25,18,31
+Complexity,33,34,25,19,32
+Complexity,34,34,26,20,32
+Complexity,35,34,27,21,32
+Complexity,36,34,28,21,33
+Complexity,37,34,28,22,33
+Complexity,38,34,29,23,34
+Complexity,39,34,29,24,34
+Complexity,40,34,30,24,34
+Complexity,41,34,31,25,34
+Complexity,42,34,31,26,35
+Complexity,43,34,31,27,35
+Complexity,44,34,32,27,35
+Complexity,45,34,32,28,35
+Complexity,46,34,33,28,36
+Complexity,47,34,33,29,36
+Complexity,48,34,33,29,36
+Complexity,49,34,34,30,36
+Complexity,50,34,34,31,36
+Complexity,51,34,34,31,36
+Complexity,52,34,35,31,36
+Complexity,53,34,35,32,36
+Complexity,54,34,35,32,36
+Complexity,55,34,35,33,37
+Complexity,56,34,35,33,37
+Complexity,57,34,36,33,37
+Complexity,58,34,36,34,37
+Complexity,59,34,36,34,37
+Complexity,60,34,36,34,37
+Complexity,61,34,36,35,37
+Complexity,62,34,36,35,37
+Complexity,63,34,36,35,37
+Complexity,64,34,36,35,37
+Complexity,65,34,36,35,37
+Complexity,66,34,37,36,37
+Complexity,67,34,37,36,37
+Complexity,68,34,37,36,37
+Complexity,69,34,37,36,37
+Complexity,70,34,37,36,37
+Complexity,71,34,37,36,37
+Complexity,72,34,37,36,37
+Complexity,73,34,37,36,37
+Complexity,74,34,37,37,37
+Complexity,75,34,37,37,37
+Complexity,76,34,37,37,37
+Complexity,77,34,37,37,37
+Complexity,78,34,37,37,37
+Complexity,79,34,37,37,37
+Complexity,80,34,37,37,37
+Complexity,81,34,37,37,37
+Complexity,82,34,37,37,37
+Complexity,83,34,37,37,37
+Complexity,84,34,37,37,37
+Complexity,85,34,37,37,37
+Complexity,86,34,37,37,37
+Complexity,87,34,37,37,37
+Complexity,88,34,37,37,37
+Complexity,89,34,37,37,37
+Complexity,90,34,37,37,37
+Complexity,91,34,37,37,37
+Complexity,92,34,37,37,37
+Complexity,93,34,37,37,37
+Complexity,94,34,37,37,37
+Complexity,95,34,37,37,37
+Complexity,96,34,37,37,37
+Complexity,97,34,37,37,37
+Complexity,98,34,37,37,37
+Complexity,99,34,37,37,37
+Complexity,0,35,0,0,0
+Complexity,1,35,0,0,0
+Complexity,2,35,0,0,1
+Complexity,3,35,1,0,2
+Complexity,4,35,1,0,4
+Complexity,5,35,2,1,5
+Complexity,6,35,2,1,6
+Complexity,7,35,3,1,8
+Complexity,8,35,4,2,10
+Complexity,9,35,5,2,11
+Complexity,10,35,6,3,13
+Complexity,11,35,7,3,14
+Complexity,12,35,8,4,16
+Complexity,13,35,9,5,17
+Complexity,14,35,11,5,19
+Complexity,15,35,12,6,20
+Complexity,16,35,13,7,21
+Complexity,17,35,14,8,23
+Complexity,18,35,15,9,24
+Complexity,19,35,16,10,25
+Complexity,20,35,18,11,26
+Complexity,21,35,19,12,27
+Complexity,22,35,20,13,28
+Complexity,23,35,21,14,29
+Complexity,24,35,22,15,30
+Complexity,25,35,23,16,30
+Complexity,26,35,24,17,31
+Complexity,27,35,25,18,32
+Complexity,28,35,26,19,32
+Complexity,29,35,27,20,33
+Complexity,30,35,27,20,33
+Complexity,31,35,28,21,34
+Complexity,32,35,29,22,34
+Complexity,33,35,29,23,34
+Complexity,34,35,30,24,35
+Complexity,35,35,31,25,35
+Complexity,36,35,31,26,35
+Complexity,37,35,32,26,35
+Complexity,38,35,32,27,36
+Complexity,39,35,33,28,36
+Complexity,40,35,33,29,36
+Complexity,41,35,33,29,36
+Complexity,42,35,34,30,36
+Complexity,43,35,34,30,36
+Complexity,44,35,34,31,36
+Complexity,45,35,35,31,36
+Complexity,46,35,35,32,37
+Complexity,47,35,35,32,37
+Complexity,48,35,35,33,37
+Complexity,49,35,36,33,37
+Complexity,50,35,36,33,37
+Complexity,51,35,36,34,37
+Complexity,52,35,36,34,37
+Complexity,53,35,36,34,37
+Complexity,54,35,36,35,37
+Complexity,55,35,36,35,37
+Complexity,56,35,36,35,37
+Complexity,57,35,37,35,37
+Complexity,58,35,37,36,37
+Complexity,59,35,37,36,37
+Complexity,60,35,37,36,37
+Complexity,61,35,37,36,37
+Complexity,62,35,37,36,37
+Complexity,63,35,37,36,37
+Complexity,64,35,37,36,37
+Complexity,65,35,37,36,37
+Complexity,66,35,37,37,37
+Complexity,67,35,37,37,37
+Complexity,68,35,37,37,37
+Complexity,69,35,37,37,37
+Complexity,70,35,37,37,37
+Complexity,71,35,37,37,37
+Complexity,72,35,37,37,37
+Complexity,73,35,37,37,37
+Complexity,74,35,37,37,37
+Complexity,75,35,37,37,37
+Complexity,76,35,37,37,37
+Complexity,77,35,37,37,37
+Complexity,78,35,37,37,37
+Complexity,79,35,37,37,37
+Complexity,80,35,37,37,37
+Complexity,81,35,37,37,37
+Complexity,82,35,37,37,37
+Complexity,83,35,37,37,37
+Complexity,84,35,37,37,37
+Complexity,85,35,37,37,37
+Complexity,86,35,37,37,37
+Complexity,87,35,37,37,37
+Complexity,88,35,37,37,37
+Complexity,89,35,37,37,37
+Complexity,90,35,37,37,37
+Complexity,91,35,37,37,37
+Complexity,92,35,37,37,37
+Complexity,93,35,37,37,37
+Complexity,94,35,37,37,37
+Complexity,95,35,37,37,37
+Complexity,96,35,37,37,37
+Complexity,97,35,37,37,37
+Complexity,98,35,37,37,37
+Complexity,99,35,37,37,37
+Complexity,0,36,0,0,0
+Complexity,1,36,0,0,1
+Complexity,2,36,0,0,2
+Complexity,3,36,1,0,3
+Complexity,4,36,2,0,5
+Complexity,5,36,2,1,7
+Complexity,6,36,3,1,9
+Complexity,7,36,4,2,11
+Complexity,8,36,6,2,13
+Complexity,9,36,7,3,15
+Complexity,10,36,8,4,16
+Complexity,11,36,9,4,18
+Complexity,12,36,11,5,20
+Complexity,13,36,12,6,22
+Complexity,14,36,14,7,23
+Complexity,15,36,15,8,25
+Complexity,16,36,17,9,26
+Complexity,17,36,18,10,27
+Complexity,18,36,19,12,28
+Complexity,19,36,21,13,29
+Complexity,20,36,22,14,30
+Complexity,21,36,23,15,31
+Complexity,22,36,24,16,32
+Complexity,23,36,25,18,32
+Complexity,24,36,26,19,33
+Complexity,25,36,27,20,33
+Complexity,26,36,28,21,34
+Complexity,27,36,29,22,34
+Complexity,28,36,30,23,35
+Complexity,29,36,30,24,35
+Complexity,30,36,31,25,35
+Complexity,31,36,32,26,36
+Complexity,32,36,32,27,36
+Complexity,33,36,33,28,36
+Complexity,34,36,33,28,36
+Complexity,35,36,34,29,36
+Complexity,36,36,34,30,36
+Complexity,37,36,34,30,36
+Complexity,38,36,35,31,37
+Complexity,39,36,35,32,37
+Complexity,40,36,35,32,37
+Complexity,41,36,35,33,37
+Complexity,42,36,36,33,37
+Complexity,43,36,36,33,37
+Complexity,44,36,36,34,37
+Complexity,45,36,36,34,37
+Complexity,46,36,36,34,37
+Complexity,47,36,36,35,37
+Complexity,48,36,36,35,37
+Complexity,49,36,37,35,37
+Complexity,50,36,37,35,37
+Complexity,51,36,37,36,37
+Complexity,52,36,37,36,37
+Complexity,53,36,37,36,37
+Complexity,54,36,37,36,37
+Complexity,55,36,37,36,37
+Complexity,56,36,37,36,37
+Complexity,57,36,37,36,37
+Complexity,58,36,37,37,37
+Complexity,59,36,37,37,37
+Complexity,60,36,37,37,37
+Complexity,61,36,37,37,37
+Complexity,62,36,37,37,37
+Complexity,63,36,37,37,37
+Complexity,64,36,37,37,37
+Complexity,65,36,37,37,37
+Complexity,66,36,37,37,37
+Complexity,67,36,37,37,37
+Complexity,68,36,37,37,37
+Complexity,69,36,37,37,37
+Complexity,70,36,37,37,37
+Complexity,71,36,37,37,37
+Complexity,72,36,37,37,37
+Complexity,73,36,37,37,37
+Complexity,74,36,37,37,37
+Complexity,75,36,37,37,37
+Complexity,76,36,37,37,37
+Complexity,77,36,37,37,37
+Complexity,78,36,37,37,37
+Complexity,79,36,37,37,37
+Complexity,80,36,37,37,37
+Complexity,81,36,37,37,37
+Complexity,82,36,37,37,37
+Complexity,83,36,37,37,37
+Complexity,84,36,37,37,37
+Complexity,85,36,37,37,37
+Complexity,86,36,37,37,37
+Complexity,87,36,37,37,37
+Complexity,88,36,37,37,37
+Complexity,89,36,37,37,37
+Complexity,90,36,37,37,37
+Complexity,91,36,37,37,37
+Complexity,92,36,37,37,37
+Complexity,93,36,37,37,37
+Complexity,94,36,37,37,37
+Complexity,95,36,37,37,37
+Complexity,96,36,37,37,37
+Complexity,97,36,37,37,37
+Complexity,98,36,37,37,37
+Complexity,99,36,37,37,37
 Combining,999,16,0,22,35
 Combining,999,17,0,33,50
 Combining,999,18,0,44,66
