@@ -133,6 +133,7 @@ class InstrumentScoring:
             ages.append(b.age)
         self.min_age = min(ages) if ages else None
         self.max_age = max(ages) if ages else None
+        self.unknown_items = set()  # already logged during this run
 
     def weight(self, f, key):
         try:
@@ -200,9 +201,13 @@ def _compute(administration_instance, scoring, values):
     ).values_list("item_ID", "value"):
         scoring_category = scoring.item_category.get(item_id)
         if scoring_category is None:
-            logger.error(
-                f"Unknown item_ID {item_id} for instrument {scoring.instrument}; not scored"
-            )
+            # legacy fields (e.g. ChildName on English WS) are expected; log
+            # each once per run, below the error alerts (#764)
+            if item_id not in scoring.unknown_items:
+                scoring.unknown_items.add(item_id)
+                logger.warning(
+                    f"Unknown item_ID {item_id} for instrument {scoring.instrument}; not scored"
+                )
             continue
         for f in scoring.scores:
             if scoring_category not in scoring.categories[f.pk]:
