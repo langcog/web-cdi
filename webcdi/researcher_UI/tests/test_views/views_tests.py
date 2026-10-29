@@ -913,6 +913,31 @@ class CompletedNotReadyDownloadTest(TestCase):
                     if expected:
                         self.assertEqual(rows[-1]["study_name"], note)
 
+    def test_links_download_for_every_form(self):
+        # #764: the participant-links download was hidden for CAT (not CAT2)
+        # groups; it needs no item list, so it is offered for every form
+        import csv
+        import io
+
+        cat2 = Instrument.objects.get(name="English_CAT")
+        cat2.pk = cat2.name = "English_CAT2"
+        cat2.form = "CAT2"
+        cat2.save()
+        for name in ["English_WS", "English_CAT", "English_CAT2"]:
+            with self.subTest(instrument=name):
+                study = self.make_study(name)
+                url = reverse("researcher_ui:console_study", kwargs={"pk": study.pk})
+                page = self.client.get(url).content.decode()
+                self.assertIn('name="download-links"', page)
+                ids = [str(pk) for pk in Administration.objects.filter(study=study).values_list("pk", flat=True)]
+                response = self.client.post(
+                    url, {"download-links": True, "select_col": ids}
+                )
+                self.assertEqual(response.status_code, 200)
+                rows = list(csv.DictReader(io.StringIO(response.content.decode())))
+                self.assertEqual(len(rows), 2)
+                self.assertTrue(all(r["link"].startswith("http") for r in rows))
+
     def test_summary_before_scoring(self):
         # completed but not yet scored (the scoring job runs every 10
         # minutes): back to the group page with a message, not a 500
