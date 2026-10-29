@@ -891,6 +891,28 @@ class CompletedNotReadyDownloadTest(TestCase):
             [("", ""), ("0.5", "True")],
         )
 
+    def test_french_cat_small_n_note(self):
+        # #764: the French CAT download is meant to end with a note that its
+        # by-sex norms rest on small Ns; since the pandas-2 port the row was
+        # built and discarded. English CAT has no such note.
+        import csv
+        import io
+
+        note = "NOTE:  The Ns for the by sex norms are small (some are <5)."
+        for name, expected in [("French_French_CAT", True), ("English_CAT", False)]:
+            study = self.make_study(name)
+            url = reverse("researcher_ui:console_study", kwargs={"pk": study.pk})
+            for action in ["download-study-csv", "download-summary-csv"]:
+                with self.subTest(instrument=name, action=action):
+                    response = self.client.post(url, {action: True})
+                    self.assertEqual(response.status_code, 200)
+                    rows = list(csv.DictReader(io.StringIO(response.content.decode())))
+                    self.assertEqual(
+                        [r["study_name"] for r in rows].count(note), int(expected)
+                    )
+                    if expected:
+                        self.assertEqual(rows[-1]["study_name"], note)
+
     def test_summary_before_scoring(self):
         # completed but not yet scored (the scoring job runs every 10
         # minutes): back to the group page with a message, not a 500
