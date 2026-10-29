@@ -5,8 +5,7 @@ from django.contrib import messages
 from django.utils.safestring import mark_safe
 
 from researcher_UI.models import Administration
-from researcher_UI.utils.download import (download_cat_data,
-                                          download_cdi_format, download_data,
+from researcher_UI.utils.download import (download_cat_data, download_data,
                                           download_dictionary, download_links,
                                           download_summary)
 from researcher_UI.utils.random_url_generator import random_url_generator
@@ -16,7 +15,6 @@ SELECTED_DOWNLOADS = (
     "download-selected",
     "download-selected-adjusted",
     "download-selected-summary",
-    "download-study-scoring-selected",
     "download-links",
 )
 
@@ -148,19 +146,6 @@ def post_condition(request, ids, study_obj):
             return download_summary.download_summary(
                 request, study_obj, administrations
             )
-
-    elif "download-study-scoring" in request.POST:
-        administrations = Administration.objects.filter(study=study_obj)
-        return download_cdi_format.download_cdi_format(
-            request, study_obj, administrations
-        )
-
-    elif "download-study-scoring-selected" in request.POST:
-        num_ids = list(set(map(int, ids)))
-        administrations = Administration.objects.filter(id__in=num_ids)
-        return download_cdi_format.download_cdi_format(
-            request, study_obj, administrations
-        )
 
     elif "download-dictionary" in request.POST:
         return download_dictionary.download_dictionary(request, study_obj)

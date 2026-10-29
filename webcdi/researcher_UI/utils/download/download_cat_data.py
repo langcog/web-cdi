@@ -105,7 +105,9 @@ def download_cat_data(
     ] and study_obj.instrument.form in [
         "CAT",
     ]:
-        pd.concat(
+        # assign it: pd.concat returns a new frame (the pandas-2 port dropped
+        # the assignment, so the note stopped appearing; #764)
+        combined_data = pd.concat(
             [
                 combined_data,
                 pd.DataFrame(
