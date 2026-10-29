@@ -154,32 +154,6 @@ class StudyCreateViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(str(response), '<HttpResponse status_code=200, "text/csv">')
 
-    def test_post_download_study_scoring(self):
-        self.client.force_login(self.user)
-        payload = {"download-study-scoring": True}
-
-        response = self.client.post(self.url, payload)
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(
-            str(response), '<HttpResponse status_code=200, "application/octet-stream">'
-        )
-
-    def test_post_download_study_scoring_selected(self):
-        self.client.force_login(self.user)
-        administrations = Administration.objects.filter(study=self.study).values_list(
-            "id", flat=True
-        )
-        payload = {
-            "download-study-scoring-selected": True,
-            "select_col": administrations,
-        }
-
-        response = self.client.post(self.url, payload)
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(
-            str(response), '<HttpResponse status_code=200, "application/octet-stream">'
-        )
-
     def test_post_download_links(self):
         self.client.force_login(self.user)
         administrations = Administration.objects.filter(study=self.study).values_list(
@@ -553,49 +527,6 @@ class OverflowTest(TestCase):
         self.assertEqual(response.status_code, 405)
 
 
-class CdiFormatDownloadTest(TestCase):
-    """CDI-format (zip) download for instruments with both item-ID styles.
-
-    #649: the export looked for a column named "item_1", but Argentine Spanish
-    WS names its items "item1", so the download crashed for that instrument
-    (and intermittently in CI, where setUp picks a random WS instrument).
-    """
-
-    fixtures = [
-        "researcher_UI/fixtures/researcher_UI_test_fixtures.json",
-        "cdi_forms/fixtures/cdi_forms_test_fixtures.json",
-    ]
-
-    def test_each_item_id_style(self):
-        import io
-        import zipfile
-
-        user = User.objects.create_user(username="cdi_fmt", password=random_password())
-        Researcher.objects.get_or_create(user=user)
-        self.client.force_login(user)
-        for name in ["English_WS", "Argentine_Spanish_WS"]:
-            with self.subTest(instrument=name):
-                instrument = Instrument.objects.get(name=name)
-                study = Study.objects.create(
-                    researcher=user, name=f"fmt {name}", instrument=instrument,
-                    min_age=instrument.min_age, max_age=instrument.max_age,
-                )
-                generate_fake_results(study, 2)
-                response = self.client.post(
-                    reverse("researcher_ui:console_study", kwargs={"pk": study.pk}),
-                    {"download-study-scoring": True},
-                )
-                self.assertEqual(response.status_code, 200)
-                archive = zipfile.ZipFile(io.BytesIO(response.content))
-                self.assertEqual(len(archive.namelist()), 2)
-                text = archive.read(archive.namelist()[0]).decode()
-                # 34 fixed-width (25-char) admin/background fields, then the
-                # vocabulary answers: one digit per item
-                vocab = text[34 * 25:]
-                self.assertGreater(len(vocab.strip()), 100)
-                self.assertRegex(vocab.strip(), r"^[0-9\s.]+$")
-
-
 class EmptySelectionDownloadTest(TestCase):
     """#675: posting a selected-rows download with no rows selected returned
     a 500. It should go back to the group page with a message instead."""
@@ -623,7 +554,6 @@ class EmptySelectionDownloadTest(TestCase):
                 "download-selected",
                 "download-selected-adjusted",
                 "download-selected-summary",
-                "download-study-scoring-selected",
                 "download-links",
             ]:
                 with self.subTest(instrument=name, action=action):
@@ -639,7 +569,7 @@ class NoCompletedDownloadTest(TestCase):
     """#741: data and summary downloads of only incomplete administrations
     (selected, or a whole group with none completed) returned a 500. They
     should go back to the group page with a message instead. #757: the same
-    for CAT groups and for the scoring-format (zip) download."""
+    for CAT groups."""
 
     fixtures = [
         "researcher_UI/fixtures/researcher_UI_test_fixtures.json",
@@ -669,14 +599,10 @@ class NoCompletedDownloadTest(TestCase):
             ("download-selected", True),
             ("download-selected-adjusted", True),
             ("download-selected-summary", True),
-            ("download-study-scoring-selected", True),
             ("download-study-csv", False),
             ("download-study-csv-adjusted", False),
             ("download-summary-csv", False),
-            ("download-study-scoring", False),
         ]:
-            if "scoring" in action and instrument.form in settings.CAT_FORMS:
-                continue  # refused for CAT forms; see CompletedNotReadyDownloadTest
             with self.subTest(instrument=name, action=action):
                 payload = {action: True}
                 if selected:
@@ -938,6 +864,22 @@ class CompletedNotReadyDownloadTest(TestCase):
                 self.assertEqual(len(rows), 2)
                 self.assertTrue(all(r["link"].startswith("http") for r in rows))
 
+    def test_scoring_program_download_removed(self):
+        # #764: the CDI scoring-program (zip of fixed-width .txt files) export
+        # was off the menu since #611 and the program is distributed by the
+        # CDI website; the handler is gone, so a stale POST just goes back
+        # to the group page
+        study = self.make_study("English_WS")
+        ids = [str(pk) for pk in Administration.objects.filter(study=study).values_list("pk", flat=True)]
+        url = reverse("researcher_ui:console_study", kwargs={"pk": study.pk})
+        for payload in [
+            {"download-study-scoring": True},
+            {"download-study-scoring-selected": True, "select_col": ids},
+        ]:
+            with self.subTest(payload=payload):
+                response = self.client.post(url, payload)
+                self.assertRedirects(response, url, fetch_redirect_response=False)
+
     def test_summary_before_scoring(self):
         # completed but not yet scored (the scoring job runs every 10
         # minutes): back to the group page with a message, not a 500
@@ -963,33 +905,6 @@ class CompletedNotReadyDownloadTest(TestCase):
                         for m in get_messages(response.wsgi_request)
                     )
                 )
-
-    def test_scoring_format_refused_for_cat_forms(self):
-        # CAT forms have no item list, so the CDI scoring-program (zip)
-        # download raised AssertionError in model_map (500); staging showed
-        # it for English_CAT2. Both CAT form codes go back with a message.
-        from django.contrib.messages import get_messages
-
-        cat2 = Instrument.objects.get(name="English_CAT")
-        cat2.pk = cat2.name = "English_CAT2"
-        cat2.form = "CAT2"
-        cat2.save()
-        self.assertEqual(sorted(settings.CAT_FORMS), ["CAT", "CAT2"])
-        for name in ["English_CAT", "English_CAT2"]:
-            study = self.make_study(name)
-            ids = [str(pk) for pk in Administration.objects.filter(study=study).values_list("pk", flat=True)]
-            url = reverse("researcher_ui:console_study", kwargs={"pk": study.pk})
-            for payload in [
-                {"download-study-scoring": True},
-                {"download-study-scoring-selected": True, "select_col": ids},
-            ]:
-                with self.subTest(instrument=name, payload=payload):
-                    response = self.client.post(url, payload)
-                    self.assertRedirects(response, url, fetch_redirect_response=False)
-                    self.assertIn(
-                        "The CDI scoring-program format is not available for CAT forms. Please use the items download.",
-                        [str(m) for m in get_messages(response.wsgi_request)],
-                    )
 
     def test_summary_for_form_without_scores(self):
         # Argentine Spanish WG has no scoring definitions, so it never has

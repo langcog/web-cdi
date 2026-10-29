@@ -540,7 +540,7 @@ class Reseacher_UIProcessTests(LiveServerFixturesMixin, LiveServerTestCase):
         # download summary data
         self.download("download-summary-csv")
 
-        # download adjusted scoring format
+        # download items + scores with adjusted ages
         self.download("download-study-csv-adjusted")
 
     def test_add_participants(self):
