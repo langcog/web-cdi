@@ -87,6 +87,7 @@ class AdministrationMixin(object):
 class BackgroundInfoView(AdministrationMixin, UpdateView):
     template_name = "cdi_forms/background_info.html"
     model = BackgroundInfo
+    queryset = BackgroundInfo.objects.filter(administration__is_active=True)
     form_class = BackgroundForm
     background_form = None
     which_page = "front"
@@ -224,6 +225,7 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
                     study__in=related_studies,
                     subject_id=self.administration_instance.subject_id,
                     completedBackgroundInfo=True,
+                    is_active=True,
                 )
                 if old_admins:
                     self.get_object = BackgroundInfo.objects.get(

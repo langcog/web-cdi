@@ -21,7 +21,9 @@ SELECTED_DOWNLOADS = (
 
 def post_condition(request, ids, study_obj):
     # selected-row actions apply to this group's rows; other ids count as unselected
-    selected = Administration.objects.filter(study=study_obj, id__in=ids)
+    selected = Administration.objects.filter(
+        study=study_obj, id__in=ids, is_active=True
+    )
     if not selected.exists() and any(
         action in request.POST for action in SELECTED_DOWNLOADS
     ):
@@ -107,7 +109,9 @@ def post_condition(request, ids, study_obj):
         study_obj.save()
 
     elif "download-study-csv" in request.POST:  # If 'Download Data' button is clicked
-        administrations = Administration.objects.filter(study=study_obj)
+        administrations = Administration.objects.filter(
+            study=study_obj, is_active=True
+        )
         if study_obj.instrument.form in settings.CAT_FORMS:
             return download_cat_data.download_cat_data(
                 request, study_obj, administrations
@@ -118,7 +122,9 @@ def post_condition(request, ids, study_obj):
     elif (
         "download-study-csv-adjusted" in request.POST
     ):  # If 'Download Data' button is clicked
-        administrations = Administration.objects.filter(study=study_obj)
+        administrations = Administration.objects.filter(
+            study=study_obj, is_active=True
+        )
         if study_obj.instrument.form in settings.CAT_FORMS:
             return download_cat_data.download_cat_data(
                 request, study_obj, administrations, adjusted=True
@@ -129,7 +135,9 @@ def post_condition(request, ids, study_obj):
             )
 
     elif "download-summary-csv" in request.POST:
-        administrations = Administration.objects.filter(study=study_obj)
+        administrations = Administration.objects.filter(
+            study=study_obj, is_active=True
+        )
         if study_obj.instrument.form in settings.CAT_FORMS:
             return download_cat_data.download_cat_data(
                 request,

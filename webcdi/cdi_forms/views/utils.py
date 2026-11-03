@@ -90,6 +90,7 @@ def prefilled_cdi_data(administration_instance):
             study=administration_instance.study,
             subject_id=administration_instance.subject_id,
             completed=True,
+            is_active=True,
         )
         if old_admins:
             old_admin = old_admins.latest("last_modified")
@@ -362,7 +363,9 @@ def safe_harbor_zip_code(obj):
 # Find the administration object for a test-taker based on their unique hash code.
 def get_administration_instance(hash_id):
     try:
-        administration_instance = Administration.objects.get(url_hash=hash_id)
+        administration_instance = Administration.objects.get(
+            url_hash=hash_id, is_active=True
+        )
     except:
         raise Http404("Administration not found")
     return administration_instance

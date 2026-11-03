@@ -261,7 +261,9 @@ def cdi_form(request, hash_id):
 # As the entire test (background --> CDI --> completion page) share the same URL, access the database to determine current status of test and render the appropriate template
 def administer_cdi_form(request, hash_id):
     try:
-        administration_instance = Administration.objects.get(url_hash=hash_id)
+        administration_instance = Administration.objects.get(
+            url_hash=hash_id, is_active=True
+        )
     except:
         raise Http404("Administration not found")
 
@@ -330,7 +332,11 @@ def find_paired_studies(request, username, study_name, source_id):
         .annotate(
             admin_count=models.Sum(
                 models.Case(
-                    models.When(administration__completed=True, then=1),
+                    models.When(
+                        administration__completed=True,
+                        administration__is_active=True,
+                        then=1,
+                    ),
                     default=0,
                     output_field=models.IntegerField(),
                 )

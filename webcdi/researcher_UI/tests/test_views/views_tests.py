@@ -360,6 +360,39 @@ class AdminNewTest(TestCase):
                 self.assertEqual(response.json()["error_message"], ZERO_PADDED_MESSAGE)
         self.assertFalse(Administration.objects.filter(study=self.study).exists())
 
+    def test_post_subject_ids_too_large_for_the_column_returns_error_message(self):
+        from researcher_UI.utils.admin_new import OUT_OF_RANGE_MESSAGE
+
+        self.client.force_login(self.user)
+        for subject_ids in ("2147483648", "1 99999999999"):
+            with self.subTest(subject_ids=subject_ids):
+                response = self.client.post(
+                    self.url,
+                    {"new_subject_ids": subject_ids, "autogenerate_count": ""},
+                )
+                self.assertEqual(response.status_code, 200)
+                self.assertEqual(response.json()["stat"], "error")
+                self.assertEqual(response.json()["error_message"], OUT_OF_RANGE_MESSAGE)
+        for content in (b"2147483648\n", b"1\n99999999999\n", b"-99999999999\n"):
+            with self.subTest(csv=content):
+                response = self.post_csv(content)
+                self.assertEqual(response.status_code, 200)
+                self.assertEqual(response.json()["stat"], "error")
+                self.assertEqual(response.json()["error_message"], OUT_OF_RANGE_MESSAGE)
+        self.assertFalse(Administration.objects.filter(study=self.study).exists())
+
+    def test_post_largest_subject_id_is_accepted(self):
+        self.client.force_login(self.user)
+        response = self.client.post(
+            self.url, {"new_subject_ids": "2147483647", "autogenerate_count": ""}
+        )
+        self.assertEqual(response.json()["stat"], "ok")
+        self.assertTrue(
+            Administration.objects.filter(
+                study=self.study, subject_id=2147483647
+            ).exists()
+        )
+
     def post_csv(self, content, **fields):
         from django.core.files.uploadedfile import SimpleUploadedFile
 

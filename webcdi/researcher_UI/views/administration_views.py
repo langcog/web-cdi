@@ -117,7 +117,7 @@ class AddNewParent(DetailView):
 
         subject_cap = self.object.subject_cap
         completed_admins = Administration.objects.filter(
-            study=self.object, completed=True
+            study=self.object, completed=True, is_active=True
         ).count()
         # the create routes carry bypass as True or not at all
         bypass = True if request.GET.get("bypass") else None
