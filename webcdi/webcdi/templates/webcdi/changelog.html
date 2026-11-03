@@ -45,6 +45,9 @@
                 <li>The fixed-width zip export for the old CDI scoring program has been removed. It was already off the Download menu.</li>
                 <li>New registrations can't reuse an email address that already has an account.</li>
                 <li>Background columns in data downloads now match what your group's form actually collects, so a file may have fewer columns than before.</li>
+                <li>Deleted administrations are left out of downloads, clinical reports and the API, and their participant links stop working. Reactivating one brings its link and answers back. Deleted administrations still count toward numbering, so numbers aren't reused.</li>
+                <li>Turning off a group's reusable link now closes it fully: new participants can't start through it.</li>
+                <li>On groups that skip the demographic form, an external platform's link reopens an existing administration only if it carries the same sex and an age within one month of the stored age.</li>
             </ul>
         </div>
 
@@ -57,6 +60,7 @@
                 <li>Uploading a file of participant IDs, or editing an ID to one already in use, now gives a clear message instead of hanging.</li>
                 <li>Downloads and clinical reports are more reliable: several crashes and blank pages are fixed, and selecting only unfinished forms now explains why there's nothing to download.</li>
                 <li>Participant links can be downloaded for every form, including CAT.</li>
+                <li>English CDI3R can now be selected on the Instruments page, with no Brookes code needed.</li>
                 <li>Dates in tables are unambiguous (Nov 2, 2026), and status labels are easier to tell apart.</li>
                 <li>Studies that receive completion notices get one per completed form, with automatic retries if their server doesn't respond.</li>
             </ul>
@@ -67,6 +71,7 @@
             <ul style="margin-bottom:0;">
                 <li>Saving and coming back returns parents to the section they were on, and they aren't asked to consent a second time.</li>
                 <li>Pages load faster, especially the results page after finishing a form.</li>
+                <li>&ldquo;Show my answers&rdquo; shows parents the answers they gave again, on a read-only panel.</li>
                 <li>Clearer buttons to show or hide the results graph and answers.</li>
                 <li>Corrected typos and question layout on several forms.</li>
             </ul>
