@@ -1,11 +1,16 @@
 import datetime
+import json
 from urllib.parse import urlencode
 
 from django.contrib.auth.models import User
 from django.test import Client, TestCase, tag
+from django.urls import reverse
+from django.utils import timezone
 
 from cdi_forms.models import BackgroundInfo
-from researcher_UI.models import Administration, Demographic, Instrument, Study
+from researcher_UI.models import (Administration, Demographic, Instrument,
+                                  Study, administration_data)
+from researcher_UI.utils.random_url_generator import random_url_generator
 
 BACKGROUND_TEMPLATE = "cdi_forms/background_info.html"
 
@@ -255,3 +260,259 @@ class NoDemographicParametersTest(NewParentTestCase):
                 self.assertEqual(background.born_on_due_date, born)
                 self.assertEqual(background.due_date_diff, diff)
                 self.assertEqual(background.early_or_late, early_or_late)
+
+
+class SourceIdResumeTest(NewParentTestCase):
+    """A no-demographic link opens an existing row only if the link's sex is
+    the stored one and its age is within a month of the stored one."""
+
+    def setUp(self):
+        super().setUp()
+        self.study = self.make_study(no_demographic_boolean=True)
+
+    def make_row(self, study=None, age=15, sex="M", **kwargs):
+        study = study or self.study
+        background = {
+            "source_id": kwargs.pop("source_id", "abc"),
+            "event_id": kwargs.pop("event_id", None),
+            "age": age,
+            "sex": sex,
+        }
+        kwargs.setdefault("subject_id", 1)
+        kwargs.setdefault("repeat_num", 1)
+        kwargs.setdefault("completed", False)
+        kwargs.setdefault("completedBackgroundInfo", True)
+        kwargs.setdefault("due_date", timezone.now() + datetime.timedelta(days=14))
+        row = Administration.objects.create(
+            study=study, url_hash=random_url_generator(), **kwargs
+        )
+        BackgroundInfo.objects.create(administration=row, **background)
+        return row
+
+    def get(self, study=None, **params):
+        params = {"source_id": "abc", "age": 15, "sex": "m", **params}
+        params = {k: v for k, v in params.items() if v is not None}
+        return self.client.get(self.new_parent_url(study or self.study, **params))
+
+    def assert_opens(self, response, row):
+        self.assertRedirects(
+            response,
+            reverse("administer_cdi_form", args=[row.url_hash]),
+            fetch_redirect_response=False,
+        )
+        self.assertEqual(Administration.objects.filter(study=row.study).count(), 1)
+
+    def assert_refused(self, response, row):
+        """The answer to a value no link may carry; nothing written."""
+        self.assertEqual(response.status_code, 404)
+        invalid = self.get(study=row.study, source_id="other", age="abc")
+        self.assertEqual(invalid.status_code, 404)
+        self.assertEqual(response.content, invalid.content)
+        self.assertNotIn(row.url_hash.encode(), response.content)
+        self.assertEqual(Administration.objects.filter(study=row.study).count(), 1)
+
+    def test_matching_link_opens_the_row(self):
+        row = self.make_row()
+        self.assert_opens(self.get(), row)
+
+    def test_matching_link_with_an_event_id_opens_the_row(self):
+        row = self.make_row(event_id="visit1")
+        self.assert_opens(self.get(event_id="visit1"), row)
+
+    def test_any_case_of_the_stored_sex_matches(self):
+        for stored, sent in (("M", "m"), ("M", "M"), ("m", "M"), ("1", "1"), ("", "")):
+            with self.subTest(stored=stored, sent=sent):
+                Administration.objects.filter(study=self.study).delete()
+                row = self.make_row(sex=stored)
+                self.assert_opens(self.get(sex=sent), row)
+
+    def test_link_with_other_values_does_not_open_or_change_the_row(self):
+        row = self.make_row()
+        before = BackgroundInfo.objects.filter(administration=row).values().get()
+        for params in (
+            {"age": 17},
+            {"age": 13},
+            {"age": 0},
+            {"sex": "f"},
+            {"sex": ""},
+            {"age": 16, "sex": "f"},
+        ):
+            with self.subTest(params=params):
+                self.assert_refused(self.get(**params), row)
+                self.assertEqual(
+                    BackgroundInfo.objects.filter(administration=row).values().get(),
+                    before,
+                )
+
+    def test_link_without_age_or_sex_does_not_open_the_row(self):
+        row = self.make_row()
+        for params in ({"age": None}, {"sex": None}, {"age": None, "sex": None}):
+            with self.subTest(params=params):
+                self.assert_refused(self.get(**params), row)
+
+    def test_row_with_no_stored_sex_opens_for_no_link(self):
+        row = self.make_row(sex=None)
+        for sex in ("", "m"):
+            with self.subTest(sex=sex):
+                self.assert_refused(self.get(sex=sex), row)
+
+    def test_age_within_a_month_of_the_stored_age_opens_the_row(self):
+        row = self.make_row()
+        for age in (14, 15, 16):
+            with self.subTest(age=age):
+                self.assert_opens(self.get(age=age), row)
+        for age in (13, 17):
+            with self.subTest(age=age):
+                self.assert_refused(self.get(age=age), row)
+
+    def test_age_is_compared_as_a_whole_number_of_months(self):
+        row = self.make_row()
+        for age in ("15", "015", " 15", "+15"):
+            with self.subTest(age=age):
+                self.assert_opens(self.get(age=age), row)
+        for age in ("15.0", "15.5", "15m", "15 months", "1y3m", "2021-08-01"):
+            with self.subTest(age=age):
+                self.assert_refused(self.get(age=age), row)
+
+    def test_stored_values_changed_on_the_background_form_are_the_ones_compared(self):
+        row = self.make_row()
+        BackgroundInfo.objects.filter(administration=row).update(age=17, sex="F")
+        self.assert_refused(self.get(), row)
+        self.assert_opens(self.get(age=17, sex="f"), row)
+
+    def test_finished_row_follows_the_same_rule(self):
+        row = self.make_row(completed=True)
+        self.assert_refused(self.get(age=17), row)
+        response = self.get()
+        self.assert_opens(response, row)
+        response = self.client.get(response["Location"], follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.redirect_chain[-1][0],
+            reverse("administration_summary_view", args=[row.url_hash]),
+        )
+
+    def test_row_in_progress_follows_the_same_rule(self):
+        row = self.make_row(page_number=3)
+        self.assert_refused(self.get(sex="f"), row)
+        response = self.get()
+        self.assert_opens(response, row)
+        self.assertRedirects(
+            self.client.get(response["Location"]),
+            reverse("update_administration_section", args=[row.url_hash, 3]),
+            fetch_redirect_response=False,
+        )
+
+    def test_expired_row_follows_the_same_rule(self):
+        row = self.make_row(due_date=timezone.now() - datetime.timedelta(days=1))
+        self.assert_refused(self.get(sex="f"), row)
+        self.assert_opens(self.get(), row)
+
+    @tag("cat")
+    def test_cat_row_follows_the_same_rule(self):
+        study = self.make_study(
+            form="CAT", name="CAT resume", no_demographic_boolean=True
+        )
+        row = self.make_row(study=study)
+        self.assert_refused(self.get(study=study, age=17), row)
+        response = self.get(study=study)
+        self.assert_opens(response, row)
+        self.assertRedirects(
+            self.client.get(response["Location"]),
+            reverse("cat_forms:administer_cat_form", args=[row.url_hash]),
+            fetch_redirect_response=False,
+        )
+
+    def test_a_new_event_id_is_a_new_row_at_the_childs_new_age(self):
+        row = self.make_row(event_id="visit1")
+        response = self.get(event_id="visit2", age=18)
+        self.assertEqual(response.status_code, 302)
+        self.assertNotIn(row.url_hash, response["Location"])
+        new = BackgroundInfo.objects.get(event_id="visit2")
+        self.assertEqual(new.age, 18)
+        self.assertEqual(new.administration.subject_id, row.subject_id)
+        self.assertEqual(new.administration.repeat_num, 2)
+        self.assertEqual(BackgroundInfo.objects.get(event_id="visit1").age, 15)
+
+    def test_two_rows_with_one_source_and_event_open_the_one_that_matches(self):
+        self.make_row(age=20)
+        row = self.make_row(subject_id=2)
+        response = self.get()
+        self.assertRedirects(
+            response,
+            reverse("administer_cdi_form", args=[row.url_hash]),
+            fetch_redirect_response=False,
+        )
+        self.assertEqual(self.get(age=30).status_code, 404)
+
+    def test_source_id_in_another_group_is_not_this_groups_row(self):
+        other = self.make_study(name="Other group", no_demographic_boolean=True)
+        row = self.make_row(study=other, age=20)
+        response = self.get()
+        self.assertEqual(response.status_code, 302)
+        self.assertNotIn(row.url_hash, response["Location"])
+
+    def test_source_id_link_on_a_study_with_a_background_form_never_opens_a_row(self):
+        # these links carry no age or sex: each one starts a new administration
+        study = self.make_study(name="With form")
+        row = self.make_row(study=study, age=20, sex="F", completed=False)
+        BackgroundInfo.objects.filter(administration=row).update(mother_yob=1966)
+        for params in ({}, {"age": 20, "sex": "f"}):
+            with self.subTest(params=params):
+                response = self.client.get(
+                    self.new_parent_url(study, source_id="abc", **params), follow=True
+                )
+                self.assertEqual(response.status_code, 200)
+                self.assertTemplateUsed(response, BACKGROUND_TEMPLATE)
+                self.assertNotContains(response, row.url_hash)
+                form = response.context["background_form"]
+                self.assertIsNone(form.instance.pk)
+                self.assertIsNone(form.instance.mother_yob)
+
+        response = self.client.post(
+            f"/form/background/create/{study.pk}/abc/",
+            {**background_payload(), "source_id": "abc"},
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertNotIn(row.url_hash, response["Location"])
+        self.assertEqual(Administration.objects.filter(study=study).count(), 2)
+        row.backgroundinfo.refresh_from_db()
+        self.assertEqual(row.backgroundinfo.sex, "F")
+        self.assertEqual(row.backgroundinfo.mother_yob, 1966)
+
+    def test_api_reads_a_row_by_source_id_for_its_owner_only(self):
+        # the researcher's own data: no age or sex is involved, and no row opens
+        row = self.make_row()
+        url = reverse(
+            "api:source_api", kwargs={"pk": self.study.pk, "source_id": "abc"}
+        )
+        self.researcher.set_password("x-test-only")
+        self.researcher.save()
+        response = self.client.generic(
+            "POST",
+            url,
+            json.dumps(
+                {"username": self.researcher.username, "password": "x-test-only"}
+            ),
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.json(), {"Error": "You must select at least 1 completed survey"}
+        )
+        Administration.objects.filter(pk=row.pk).update(completed=True)
+        administration_data.objects.create(
+            administration=row, item_ID="item_1", value="produces"
+        )
+        response = self.client.generic(
+            "POST",
+            url,
+            json.dumps(
+                {"username": self.researcher.username, "password": "x-test-only"}
+            ),
+        )
+        self.assertContains(response, row.url_hash)
+        response = self.client.generic(
+            "POST", url, json.dumps({"username": "nobody", "password": "wrong"})
+        )
+        self.assertEqual(response.status_code, 401)
+        self.assertNotIn(row.url_hash.encode(), response.content)
