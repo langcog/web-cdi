@@ -17,7 +17,7 @@ def download_links(request, study_obj, administrations=None):
     )  # Name CSV
 
     if administrations is None:
-        administrations = Administration.objects.filter(study=study_obj)
+        administrations = Administration.objects.filter(study=study_obj, is_active=True)
 
     admin_data = pd.DataFrame.from_records(administrations.values()).rename(
         columns={

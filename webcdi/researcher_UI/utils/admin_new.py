@@ -14,6 +14,8 @@ ZERO_PADDED_MESSAGE = (
     "Subject ids cannot start with 0 (e.g. 007): ids are stored as numbers, "
     "so the leading zeros would be lost\n"
 )
+SUBJECT_ID_MAX = 2147483647  # Administration.subject_id is an integer column
+OUT_OF_RANGE_MESSAGE = f"Subject ids must be no larger than {SUBJECT_ID_MAX}\n"
 UNREADABLE_CSV_MESSAGE = (
     "We couldn't read that file as a CSV. Save it as a plain .csv with one column "
     "of IDs.\n"
@@ -104,6 +106,9 @@ def admin_new_fun(request, permitted, study_name, study_obj):
             elif zero_padded:
                 validity = False
                 data["error_message"] += ZERO_PADDED_MESSAGE
+            elif ids_to_add.abs().max() > SUBJECT_ID_MAX:
+                validity = False
+                data["error_message"] += OUT_OF_RANGE_MESSAGE
 
         if params["new_subject_ids"][0] != "":
             subject_ids = re.split("[,;\s\t\n]+", str(params["new_subject_ids"][0]))
@@ -115,6 +120,9 @@ def admin_new_fun(request, permitted, study_name, study_obj):
             elif any(is_zero_padded(x) for x in subject_ids):
                 validity = False
                 data["error_message"] += ZERO_PADDED_MESSAGE
+            elif any(int(x) > SUBJECT_ID_MAX for x in subject_ids):
+                validity = False
+                data["error_message"] += OUT_OF_RANGE_MESSAGE
 
         if params["autogenerate_count"][0] != "":
             autogenerate_count = params["autogenerate_count"][0]

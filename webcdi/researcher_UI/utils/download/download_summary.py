@@ -28,7 +28,7 @@ def download_summary(request, study_obj, administrations=None):
     administrations = (
         administrations
         if administrations is not None
-        else Administration.objects.filter(study=study_obj)
+        else Administration.objects.filter(study=study_obj, is_active=True)
     )
     if not administrations.filter(completed=True).exists():
         # back to the group page (or admin changelist) with a message (#741)

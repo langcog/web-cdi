@@ -27,9 +27,9 @@ def scoring_data(modeladmin, request, queryset):
             )
             return
 
-    administrations = Administration.objects.filter(study__in=queryset).exclude(
-        opt_out=True
-    )
+    administrations = Administration.objects.filter(
+        study__in=queryset, is_active=True
+    ).exclude(opt_out=True)
     return download_data.download_data(request, study_obj, administrations)
 
 
@@ -55,7 +55,7 @@ def scoring_summary(modeladmin, request, queryset):
             )
             return
 
-    administrations = Administration.objects.filter(study__in=queryset).exclude(
-        opt_out=True
-    )
+    administrations = Administration.objects.filter(
+        study__in=queryset, is_active=True
+    ).exclude(opt_out=True)
     return download_summary.download_summary(request, study_obj, administrations)
