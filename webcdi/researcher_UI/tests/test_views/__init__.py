@@ -26,6 +26,7 @@ from .views_tests import (AdminNewTest, ConsoleTest,  # ßnoqa
 from .cross_researcher import CrossResearcherAccessTest  # noqa
 from .new_parent_links import (BypassLinkTest,  # noqa
                                NoDemographicParametersTest, SourceIdLinkTest)
+from .group_subject_ids import GroupSubjectIdTest  # noqa
 from .console_markup import (ConsoleMarkupTest, ConsoleSearchTest,  # noqa
                              LicenceRequiredLabelTest, NavbarActiveTest)
 from .summary_download import StudySpecificBackgroundColumnsTest, SummaryDownloadTextTest  # noqa
