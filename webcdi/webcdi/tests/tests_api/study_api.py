@@ -211,3 +211,28 @@ class StudyAPIViewTest(TestCase):
             instrument=instrument, itemID=item_id
         ).item
         self.assertIn(label, record)
+
+    def test_unknown_study_is_404(self):
+        unknown = self.study.id + 100000
+        for name, kwargs in [
+            ("api:study_api", {}),
+            ("api:source_api", {"source_id": "abc"}),
+            ("api:event_api", {"source_id": "abc", "event_id": "def"}),
+            ("api:administration_api", {"administration_id": 1}),
+        ]:
+            with self.subTest(name=name):
+                response = self.client.post(
+                    reverse(name, kwargs={"pk": unknown, **kwargs}),
+                    json.dumps(self.payload),
+                    content_type="application/json",
+                )
+                self.assertEqual(response.status_code, 404)
+                self.assertIn("error", response.json())
+
+    def test_unknown_study_with_wrong_credentials_is_401(self):
+        response = self.client.post(
+            reverse("api:study_api", kwargs={"pk": self.study.id + 100000}),
+            json.dumps({"username": "PaulMcCartney", "password": "wrong"}),
+            content_type="application/json",
+        )
+        self.assertEqual(response.status_code, 401)

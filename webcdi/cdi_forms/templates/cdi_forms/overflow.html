@@ -43,6 +43,14 @@
                 <h4>
                     {% blocktrans %}Thank you for your interest in completing the MacArthur-Bates Communicative Development Inventory (CDI)! It looks like you have completed the CDI form before. We ask that you only complete our assessment once. If you have any concerns about your child’s development, we recommend that you talk with your child’s physician. If you enjoyed our assessment, you can learn more about the CDI <a href="http://mb-cdi.stanford.edu/" target="_blank">here</a>. Again, we appreciate your interest!{% endblocktrans %}
                 </h4>
+            {% elif not bypass_url %}
+
+            <h4>
+                {% blocktrans %}
+                Thank you for your interest in our research project on children’s language development. This study is now completed.
+                {% endblocktrans %}
+            </h4>
+
             {% else %}
 
                 <h4>
