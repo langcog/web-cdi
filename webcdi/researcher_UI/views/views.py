@@ -2,6 +2,7 @@ import json
 from typing import Any, Dict
 from urllib.parse import urlencode
 
+from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count, Q
 from django.http import HttpResponse
@@ -149,11 +150,11 @@ class Overflow(generic.DetailView):
             prev_visitor = ip_address.objects.filter(ip_address=visitor_ip).count()
         if prev_visitor > 0 and not self.request.user.is_authenticated:
             ctx["repeat"] = True
-        ctx["bypass_url"] = (
-            reverse(
-                "researcher_ui:administer_new_parent",
-                args=[self.object.researcher.username, self.object.name],
+        # no-demographic studies have no background form to send a parent to
+        if not self.object.no_demographic_boolean:
+            cat = self.object.instrument.form in settings.CAT_FORMS
+            ctx["bypass_url"] = reverse(
+                ("cat_forms:" if cat else "") + "create-new-background-info",
+                kwargs={"study_id": self.object.id, "bypass": True, "source_id": "None"},
             )
-            + "?bypass=true"
-        )
         return ctx

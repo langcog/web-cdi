@@ -4,6 +4,7 @@ from typing import Any, Optional
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
+from django.core.validators import slug_re
 from django.db import models
 from django.http import Http404, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
@@ -74,6 +75,35 @@ class EditAdministrationView(LoginRequiredMixin, StudyOwnerMixin, UpdateView):
         )
 
 
+INTEGER_FIELD_MAX = 2147483647
+TEXT_ID_MAX = 255  # BackgroundInfo.source_id and event_id
+
+
+def no_demographic_link_values(params):
+    """Age, sex and offset from a no-demographic link.
+
+    A link is refused (404) if BackgroundInfo cannot hold what it carries, before
+    any row is created. Sex outside the form's choices and ages outside the
+    study's range are kept: such links have always opened, a platform may use its
+    own coding, and scoring reports those rows as not computed.
+    """
+    try:
+        age = int(params["age"])
+        offset = int(params.get("offset", 0))
+    except ValueError:
+        raise Http404("Age and offset must be whole numbers in a no demographic call.")
+    sex = params["sex"].upper()
+    if (
+        not 0 <= age <= INTEGER_FIELD_MAX
+        or abs(offset) > INTEGER_FIELD_MAX
+        or len(sex) > 1
+        or len(params["source_id"]) > TEXT_ID_MAX
+        or len(params.get("event_id", "")) > TEXT_ID_MAX
+    ):
+        raise Http404("A value in this no demographic call is out of range.")
+    return age, sex, offset
+
+
 class AddNewParent(DetailView):
     model = Study
 
@@ -89,7 +119,8 @@ class AddNewParent(DetailView):
         completed_admins = Administration.objects.filter(
             study=self.object, completed=True
         ).count()
-        bypass = request.GET.get("bypass", None)
+        # the create routes carry bypass as True or not at all
+        bypass = True if request.GET.get("bypass") else None
         let_through = None
         prev_visitor = 0
         visitor_ip = str(get_client_ip(request))
@@ -150,6 +181,7 @@ class AddNewParent(DetailView):
                     raise Http404(
                         "Age, sex and source_id must be included in the a no demographic call."
                     )
+                age, sex, offset = no_demographic_link_values(request.GET)
 
                 if BackgroundInfo.objects.filter(
                     source_id=request.GET["source_id"],
@@ -179,10 +211,6 @@ class AddNewParent(DetailView):
                         + datetime.timedelta(days=self.object.test_period),
                     )
 
-                if "offset" in request.GET:
-                    offset = int(request.GET["offset"])
-                else:
-                    offset = 0
                 data = {}
                 if offset == 0:
                     born_on_due_date = 0
@@ -198,10 +226,10 @@ class AddNewParent(DetailView):
 
                 new_background = BackgroundInfo.objects.create(
                     administration=new_admin,
-                    sex=request.GET["sex"].upper(),
+                    sex=sex,
                     source_id=request.GET["source_id"],
                     event_id=event_id,
-                    age=int(request.GET["age"]),
+                    age=age,
                     born_on_due_date=born_on_due_date,
                     due_date_diff=due_date_diff,
                     early_or_late=early_or_late,
@@ -209,6 +237,11 @@ class AddNewParent(DetailView):
                 new_admin.completedBackgroundInfo = True
                 new_admin.save()
                 return redirect("administer_cdi_form", hash_id=new_admin.url_hash)
+
+            # the create routes take source_id as a slug
+            source_id = source_id or None
+            if source_id is not None and not slug_re.match(source_id):
+                raise Http404("source_id may only use letters, numbers, - and _.")
 
             if self.object.instrument.form in settings.CAT_FORMS:
                 return redirect(

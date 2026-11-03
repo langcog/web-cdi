@@ -26,7 +26,9 @@ class StudyOwnerMixin(object):
                 status=401, data={"error": self.permission_denied_message}
             )
             # raise PermissionDenied('Invalid User')
-        study = Study.objects.get(pk=kwargs["pk"])
+        study = Study.objects.filter(pk=kwargs["pk"]).first()
+        if study is None:
+            return JsonResponse(status=404, data={"error": "Study not found"})
         if study.researcher != user:
             self.permission_denied_message = "You do not have access to this Study"
             # raise PermissionDenied(self.get_permission_denied_message())
