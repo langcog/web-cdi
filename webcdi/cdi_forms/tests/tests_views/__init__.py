@@ -10,6 +10,7 @@ from .contact_views import AdministrationContactViewTest  # noqa
 from .instruction_views import InstructionDetailViewTest  # noqa
 from .pdf_detail_views import PDFAdministrationDetailViewTest  # noqa
 from .richtext_render import StudyRichTextRoundTripTest  # noqa
+from .participant_guards import NoBackpageCompletionSignalsTest  # noqa
 from .participant_guards import (NoBackpageFlowTest,  # noqa
                                  RandomUrlGeneratorTest,
                                  ReusableLinkSettingTest, SaveAnswerTest)

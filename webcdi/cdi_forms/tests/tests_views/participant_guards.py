@@ -1,6 +1,7 @@
 import datetime
 import json
 import random
+from unittest import mock
 
 from django.test import TestCase, tag
 from django.utils import timezone
@@ -284,6 +285,124 @@ class NoBackpageFlowTest(ParticipantLinkTestCase):
         self.assertTemplateUsed(response, "cdi_forms/backpage_info.html")
         administration.refresh_from_db()
         self.assertFalse(administration.completed)
+
+
+class NoBackpageCompletionSignalsTest(ParticipantLinkTestCase):
+    """Finishing on a study with no backpage scores the administration and sends
+    one completion notice, with signals running as they do outside tests."""
+
+    NOTICE_URL = "https://example.com/notify"
+
+    def setUp(self):
+        super().setUp()
+        self.post = mock.Mock(return_value=mock.Mock(status_code=200))
+
+    def make_administration_for(self, form="WS", **kwargs):
+        study = self.make_study(
+            form=form,
+            name=f"Signals {form}",
+            backpage_boolean=False,
+            send_completion_flag_url=self.NOTICE_URL,
+            completion_data={"record_id": "{{source_id}}"},
+        )
+        administration = self.make_administration(
+            study, completedBackgroundInfo=True, **kwargs
+        )
+        BackgroundInfo.objects.create(
+            administration=administration,
+            age=20,
+            sex="F",
+            zip_code="941**",
+            source_id="abc",
+        )
+        return administration
+
+    def run_with_signals(self, request):
+        with mock.patch(
+            "researcher_UI.utils.completion_notice.requests.post", self.post
+        ), mock.patch(
+            "researcher_UI.signals.TESTING", False
+        ), self.captureOnCommitCallbacks(
+            execute=True
+        ):
+            return request()
+
+    def assert_finished(self, administration, completed_date=True):
+        administration.refresh_from_db()
+        self.assertTrue(administration.completed)
+        self.assertTrue(administration.scored)
+        if completed_date:
+            self.assertIsNotNone(administration.completed_date)
+        self.assert_one_notice(administration)
+
+    def assert_one_notice(self, administration):
+        self.post.assert_called_once()
+        self.assertEqual(self.post.call_args.args[0], self.NOTICE_URL)
+        self.assertEqual(self.post.call_args.kwargs["data"], {"record_id": "abc"})
+        administration.refresh_from_db()
+        self.assertEqual(administration.completion_notice_attempts, 1)
+        self.assertEqual(administration.send_completion_flag_url_response, 200)
+
+    def assert_no_notice_from_viewing_backpage(self, administration, path):
+        response = self.run_with_signals(lambda: self.client.get(path))
+        self.assertEqual(response.status_code, 302)
+        self.assert_one_notice(administration)
+
+    def test_regular_submit_step(self):
+        administration = self.make_administration_for()
+        link = administration.url_hash
+        response = self.run_with_signals(
+            lambda: self.client.post(
+                f"/form/administration/{link}/1/",
+                {"btn-submit": True, "item_1": "produces"},
+            )
+        )
+        self.assertRedirects(
+            response,
+            f"/form/administration/{link}/summary/",
+            fetch_redirect_response=False,
+        )
+        self.assert_finished(administration)
+        self.assert_no_notice_from_viewing_backpage(
+            administration, f"/form/background/{link}/backpage/"
+        )
+
+    def test_finish_page_post(self):
+        administration = self.make_administration_for(completedSurvey=True)
+        link = administration.url_hash
+        backpage = f"/form/background/{link}/backpage/"
+        response = self.run_with_signals(
+            lambda: self.client.post(backpage, {"btn-next": "Finish"})
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assert_finished(administration)
+        self.assert_no_notice_from_viewing_backpage(administration, backpage)
+
+    @tag("cat")
+    def test_cat_final_answer(self):
+        administration = self.make_administration_for(form="CAT")
+        link = administration.url_hash
+        response = self.run_with_signals(
+            lambda: self.client.post(
+                f"/form/cat/answer/{link}/",
+                json.dumps(
+                    {
+                        "index": 326,
+                        "definition": "leg",
+                        "response": True,
+                        "est_theta": 0.6,
+                        "done": True,
+                    }
+                ),
+                content_type="application/json",
+            )
+        )
+        self.assertTrue(response.json()["completed"])
+        # CAT's final answer has never recorded completed_date
+        self.assert_finished(administration, completed_date=False)
+        self.assert_no_notice_from_viewing_backpage(
+            administration, f"/form/cat/background-backpage/{link}/"
+        )
 
 
 class ReusableLinkSettingTest(ParticipantLinkTestCase):
