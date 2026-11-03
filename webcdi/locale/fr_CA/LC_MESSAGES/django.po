@@ -2131,6 +2131,22 @@ msgstr ""
 msgid "To redeem your gift card, visit "
 msgstr ""
 
+#: cdi_forms/templates/cdi_forms/administration_summary.html
+msgid "Hide my graph"
+msgstr "Masquer mon graphique"
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html
+msgid "Show my graph"
+msgstr "Afficher mon graphique"
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html
+msgid "Show my answers"
+msgstr "Afficher mes réponses"
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html
+msgid "Hide my answers"
+msgstr "Masquer mes réponses"
+
 #: cdi_forms/templates/cdi_forms/administration_summary.html:222
 msgid "Graph My Data!"
 msgstr "Affichez mes données!"

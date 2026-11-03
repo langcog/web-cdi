@@ -42,6 +42,14 @@
   	<meta property="og:title" content="{% trans 'MacArthur-Bates Communicative Development Inventory' %}" />
   	<meta property="og:description" content="{% trans 'Interesting tidbits learned from how your child speaks!' %}" />
 
+    <style>
+        /* The toggle's label and arrow follow the state Bootstrap's collapse keeps in aria-expanded */
+        .section-toggle[aria-expanded="true"] .when-closed,
+        .section-toggle[aria-expanded="false"] .when-open { display: none; }
+        .section-toggle::after { content: " \25BE"; }
+        .section-toggle[aria-expanded="true"]::after { content: " \25B4"; }
+    </style>
+
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
         {% for category in graph_data %}
@@ -219,16 +227,22 @@
         </div>
 
         {% if object.study.show_feedback %}
-            <!-- Button triggers the D3 graph div to appear. -->
+            <!-- Button shows and hides the graph div, which starts open. -->
             <div class="row justify-content-center" style="padding-bottom: 1%;">
-                <a class="btn btn-primary btn-lg active" href="#graph_data" data-toggle="collapse">{% trans "Graph My Data!" %}</a>
+                <a class="btn btn-primary btn-lg section-toggle" href="#graph_data" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="graph_data">
+                    <span class="when-open">{% trans "Hide my graph" %}</span>
+                    <span class="when-closed">{% trans "Show my graph" %}</span>
+                </a>
             </div>
         {% endif %}
 
-        <!-- Text triggers the submitted answers div to appear -->
+        <!-- Button shows and hides the submitted answers div, which starts closed. -->
          {% if object.study.show_my_answers_boolen %}
-        <div class="row justify-content-center">
-            <h4><a href="#filled_form" data-toggle="collapse">{% trans "Show Me My Answers" %}</a></h4>
+        <div class="row justify-content-center" style="padding-bottom: 1%;">
+            <a class="btn btn-primary btn-lg section-toggle collapsed" href="#filled_form" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="filled_form">
+                <span class="when-open">{% trans "Hide my answers" %}</span>
+                <span class="when-closed">{% trans "Show my answers" %}</span>
+            </a>
         </div>
         {% endif %}
         {% if object.study.print_my_answers_boolean %}
@@ -250,7 +264,7 @@
         
         <br>
         {% if object.study.show_feedback %}
-            <div class="col-md-12 collapse show" id="graph_data" style="height: 90vh;">
+            <div class="col-md-12 collapse show" id="graph_data">
                 <br>
                 <div class = "row"> 
                     <div class="col-md-6 text-center" id="num_words_text"></div>
@@ -282,7 +296,7 @@
         {% endif %}
 
         <!-- Div for submitted form. Identical to section in cdi_form.html however all inputs are disabled and all answers are displayed on one page. -->
-        <div class = "col-md-12 collapse" id="filled_form" role="main" style="padding-top:220px">
+        <div class = "col-md-12 collapse" id="filled_form" role="main">
 
             <div class="row">
                 {% load crispy_forms_tags %}
@@ -315,6 +329,11 @@
     setTimeout(function () {
         $('.fb-share-button span').css('width', '20%');
     }, 200);      
+
+    // Bring a section into view when it opens: the answers are below the tall graph
+    $('#graph_data, #filled_form').on('shown.bs.collapse', function () {
+        this.scrollIntoView({behavior: 'smooth'});
+    });
 </script>
 
 {% if object.study.show_feedback %}

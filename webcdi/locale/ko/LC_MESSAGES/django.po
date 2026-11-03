@@ -2097,6 +2097,22 @@ msgstr ""
 msgid "To redeem your gift card, visit "
 msgstr ""
 
+#: cdi_forms/templates/cdi_forms/administration_summary.html
+msgid "Hide my graph"
+msgstr "내 그래프 숨기기"
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html
+msgid "Show my graph"
+msgstr "내 그래프 보기"
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html
+msgid "Show my answers"
+msgstr "내 응답 보기"
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html
+msgid "Hide my answers"
+msgstr "내 응답 숨기기"
+
 #: cdi_forms/templates/cdi_forms/administration_summary.html:222
 msgid "Graph My Data!"
 msgstr "데이터를 그래프로 보기!"
