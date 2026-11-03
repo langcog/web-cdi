@@ -2108,11 +2108,11 @@ msgstr "Mijn grafiek weergeven"
 
 #: cdi_forms/templates/cdi_forms/administration_summary.html
 msgid "Show my answers"
-msgstr "Achtergrondvragen weergeven"
+msgstr "Mijn antwoorden weergeven"
 
 #: cdi_forms/templates/cdi_forms/administration_summary.html
 msgid "Hide my answers"
-msgstr "Achtergrondvragen verbergen"
+msgstr "Mijn antwoorden verbergen"
 
 #: cdi_forms/templates/cdi_forms/administration_summary.html:222
 msgid "Graph My Data!"

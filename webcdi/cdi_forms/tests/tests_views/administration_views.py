@@ -11,6 +11,7 @@ from django.test.utils import CaptureQueriesContext
 from django.urls import reverse
 from django.utils import timezone
 
+from cdi_forms.cat_forms.models import CatResponse
 from cdi_forms.models import BackgroundInfo, Instrument_Forms
 from researcher_UI.models import (Administration, Demographic, Instrument,
                                   PaymentCode, Study, administration_data)
@@ -100,7 +101,7 @@ class AdministrationSummaryViewTest(TestCase):
                 administration=self.administration,
                 item_ID=item.itemID,
                 value=(
-                    item.choices.choice_set.split(";")[0].strip()
+                    item.choices.choice_set_en.split(";")[0].strip()
                     if item.choices
                     else "yes"
                 ),
@@ -208,6 +209,15 @@ class AdministrationSummaryViewTest(TestCase):
                     due_date=timezone.now(),
                 )
                 BackgroundInfo.objects.create(administration=administration, age=20)
+                item = Instrument_Forms.objects.filter(
+                    instrument=instrument, choices__isnull=False
+                ).first()
+                # the answers toggle only appears when there are answers to show
+                self.answer(
+                    administration,
+                    item.itemID,
+                    item.choices.choice_set_en.split(";")[0].strip(),
+                )
                 response = self.client.get(
                     reverse(
                         "administration_summary_view",
@@ -215,6 +225,155 @@ class AdministrationSummaryViewTest(TestCase):
                     )
                 )
                 self.assertContains(response, label)
+
+    def answers_panel(self, url):
+        page = self.client.get(url).content.decode()
+        self.assertIn('id="filled_form"', page)
+        return page.split('id="filled_form"')[1].split("</form>")[0]
+
+    def completed_administration(self, instrument, **study_fields):
+        study = Study.objects.create(
+            researcher=self.user,
+            name=f"{instrument.name} answers {Study.objects.count()}",
+            instrument=instrument,
+            redirect_url="https://example.com/",
+            **study_fields,
+        )
+        administration = Administration.objects.create(
+            study=study,
+            subject_id=1,
+            repeat_num=1,
+            url_hash=random_url_generator(),
+            completed=True,
+            due_date=timezone.now(),
+        )
+        BackgroundInfo.objects.create(administration=administration, age=20)
+        return administration
+
+    def summary_url(self, administration):
+        return reverse(
+            "administration_summary_view", kwargs={"hash_id": administration.url_hash}
+        )
+
+    def answer(self, administration, item_id, value):
+        administration_data.objects.create(
+            administration=administration, item_ID=item_id, value=value
+        )
+
+    def test_show_my_answers_shows_the_answers(self):
+        # the panel showed the background form, then "Form unavailable. Contact admin."
+        # English WS: item_1 "baa baa" and item_2 "choo choo" are checkboxes
+        instrument = self.study.instrument
+        administration = self.completed_administration(instrument)
+        words = Instrument_Forms.objects.filter(
+            instrument=instrument, item_type="word"
+        ).order_by("item_order")
+        self.answer(administration, words[0].itemID, "produces")
+        self.answer(administration, "item_760", "often")
+        self.answer(administration, "item_example1", "doggy <script>go</script>")
+        panel = self.answers_panel(self.summary_url(administration))
+        self.assertIn(words[0].definition, panel)
+        self.assertNotIn(words[1].definition, panel)  # not answered
+        self.assertIn("often", panel)
+        self.assertIn("Has your child begun to combine words yet?", panel)
+        self.assertIn("doggy &lt;script&gt;go&lt;/script&gt;", panel)
+        self.assertNotIn("Form unavailable", panel)
+
+    def test_answers_panel_is_read_only(self):
+        url = self.complete_with_answers()
+        panel = self.answers_panel(url)
+        for control in ["<input", "<select", "<textarea", "<button", "<form"]:
+            self.assertNotIn(control, panel)
+        # the background form said to enter a date of birth we don't store
+        self.assertNotIn("Who is filling in the form?", panel)
+        self.assertNotIn("Child DOB", panel)
+
+    def test_answers_panel_off(self):
+        url = self.complete_with_answers()
+        self.study.show_my_answers_boolen = False
+        self.study.save()
+        response = self.client.get(url)
+        self.assertNotContains(response, 'id="filled_form"')
+        self.assertNotContains(response, "Show my answers")
+        self.assertIsNone(response.context.get("answers"))
+
+    def test_no_toggle_without_answers(self):
+        administration = self.completed_administration(self.study.instrument)
+        response = self.client.get(self.summary_url(administration))
+        self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, "Show my answers")
+        self.assertNotContains(response, 'id="filled_form"')
+
+    def test_answers_panel_on_every_item_form(self):
+        for instrument in Instrument.objects.exclude(form="CAT"):
+            with self.subTest(instrument=instrument.name):
+                administration = self.completed_administration(instrument)
+                items = list(
+                    Instrument_Forms.objects.filter(instrument=instrument)
+                    .select_related("choices")
+                    .order_by("item_order")
+                )
+                for item in items:
+                    self.answer(
+                        administration,
+                        item.itemID,
+                        item.choices.choice_set_en.split(";")[-1].strip()
+                        if item.choices
+                        else "free text",
+                    )
+                response = self.client.get(self.summary_url(administration))
+                self.assertEqual(response.status_code, 200)
+                shown = sum(
+                    len(group["words"]) + len(group["answers"])
+                    for part in response.context["answers"]
+                    for item_type in part["types"]
+                    for group in item_type["groups"]
+                )
+                # a few instruments have items their meta file doesn't place on any page
+                self.assertGreater(shown, 0.9 * len(items))
+                self.assertLessEqual(shown, len(items))
+                panel = self.answers_panel(self.summary_url(administration))
+                for control in ["<input", "<select", "<textarea", "<button", "<form"]:
+                    self.assertNotIn(control, panel)
+
+    def test_answers_panel_in_a_translated_instrument(self):
+        cases = [
+            # (instrument, item, stored value, question text, answer the parent sees)
+            ("Spanish_WS", "item_1", "produces", "¡am!", None),
+            ("Spanish_WS", "item_700", "produces", "com<strong>í</strong>", None),
+            ("Spanish_WG", "item_1", "yes", "¿Responde o voltea", "sí"),
+            ("Spanish_WG", "item_59", "produces", "guajolote", "comp. y dice"),
+            ("Spanish_WG", "item_60", "understands", "hipopótamo", "comprende"),
+        ]
+        for name, item_id, value, question, answer in cases:
+            with self.subTest(item=(name, item_id)):
+                instrument = Instrument.objects.get(name=name)
+                administration = self.completed_administration(instrument)
+                self.answer(administration, item_id, value)
+                panel = self.answers_panel(self.summary_url(administration))
+                self.assertIn(question, panel)
+                if answer:
+                    self.assertIn(answer, panel)
+
+    def test_cat_summary_goes_to_the_cat_completion_page(self):
+        # A CAT has no item list, so no answers to show; this URL raised an
+        # AssertionError (500) from model_map
+        instrument = Instrument.objects.get(form="CAT", language="English")
+        administration = self.completed_administration(instrument)
+        CatResponse.objects.create(administration=administration)
+        response = self.client.get(self.summary_url(administration))
+        self.assertRedirects(
+            response,
+            reverse(
+                "cat_forms:administer_cat_form",
+                kwargs={"hash_id": administration.url_hash},
+            ),
+            fetch_redirect_response=False,
+        )
+        completion = self.client.get(response.url)
+        self.assertEqual(completion.status_code, 200)
+        self.assertTemplateUsed(completion, "cdi_forms/cat_forms/cat_completed.html")
+        self.assertNotContains(completion, "Show my answers")
 
     def test_completed_WG_get(self):
         self.client.force_login(self.user)
@@ -364,6 +523,61 @@ class AdministrationDetailViewTest(TestCase):
         url = reverse("administration-view", kwargs={"hash_id": administration.url_hash})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
+
+    def test_print_queries_do_not_grow_with_answers(self):
+        # the translate filter cost two queries per checkbox word (~1,500 here)
+        administration = Administration.objects.create(
+            study=self.study,
+            subject_id=1,
+            repeat_num=1,
+            url_hash=random_url_generator(),
+            completed=True,
+            due_date=timezone.now(),
+        )
+        BackgroundInfo.objects.create(administration=administration, age=20)
+        administration_data.objects.bulk_create(
+            administration_data(
+                administration=administration,
+                item_ID=item.itemID,
+                value="produces",
+            )
+            for item in Instrument_Forms.objects.filter(
+                instrument=self.study.instrument, item_type="word"
+            )
+        )
+        with CaptureQueriesContext(connection) as queries:
+            response = self.client.get(
+                reverse("administration-view", kwargs={"pk": administration.pk})
+            )
+        self.assertEqual(response.status_code, 200)
+        self.assertLessEqual(
+            len(queries), 15, "\n".join(q["sql"][:120] for q in queries)
+        )
+
+    def test_print_shows_the_translated_choice(self):
+        instrument = Instrument.objects.get(name="Spanish_WS")
+        study = Study.objects.create(
+            researcher=self.user,
+            name="Spanish print",
+            instrument=instrument,
+            redirect_url="https://example.com/",
+        )
+        administration = Administration.objects.create(
+            study=study,
+            subject_id=1,
+            repeat_num=1,
+            url_hash=random_url_generator(),
+            completed=True,
+            due_date=timezone.now(),
+        )
+        BackgroundInfo.objects.create(administration=administration, age=20)
+        administration_data.objects.create(
+            administration=administration, item_ID="item_1", value="produces"
+        )
+        page = self.client.get(
+            reverse("administration-view", kwargs={"pk": administration.pk})
+        ).content.decode()
+        self.assertRegex(page, r"¡am!: </td>\s*<td>produce</td>")
 
 
 class AdministrationUpdateViewTest(TestCase):

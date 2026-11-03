@@ -9,7 +9,6 @@ from django.conf import settings
 from django.http import Http404
 from django.utils import translation
 
-from cdi_forms.forms import BackgroundForm, BackpageBackgroundForm
 from cdi_forms.models import BackgroundInfo, Instrument_Forms, Zipcode
 from researcher_UI.models import (Administration, Instrument,
                                   administration_data)
@@ -152,10 +151,12 @@ def prefilled_cdi_data(administration_instance):
             "definition",
             "choices__choice_set",
         ]
-        field_values += [
+        # the choice set in the instrument's language; templates read it off each item
+        data["choice_set_column"] = (
             "choices__choice_set_"
             + settings.LANGUAGE_DICT[administration_instance.study.instrument.language]
-        ]
+        )
+        field_values += [data["choice_set_column"]]
 
         # Load the instrument's items once; sections then pick theirs by category or type
         items_by_category = defaultdict(list)
@@ -210,6 +211,62 @@ def prefilled_cdi_data(administration_instance):
             age = ""
         data["age"] = age
     return data
+
+
+def answered_group(group, title=None):
+    """A section's answers: checked words, and question/answer pairs for the rest."""
+    words, answers = [], []
+    for obj in group["objects"]:
+        if "textbox" in obj["item"] or group["type"] == "textbox":
+            if obj.get("prefilled_value"):
+                answers.append(
+                    {
+                        "question": obj.get("text", obj["definition"]),
+                        "answer": obj["prefilled_value"],
+                    }
+                )
+        elif group["type"] == "checkbox":
+            if obj["prefilled_value"]:
+                words.append(obj["definition"])
+        else:
+            for shown, raw, selected in obj["choices"]:
+                if selected:
+                    # the form labels this choice the same way (administration_form.html)
+                    answer = (
+                        translation.gettext("understands and says")
+                        if raw == "produces"
+                        else shown.strip()
+                    )
+                    answers.append({"question": obj["text"], "answer": answer})
+    return {"title": title, "words": words, "answers": answers}
+
+
+def answered_parts(parts):
+    """prefilled_cdi_data's parts cut down to what the parent answered, for the
+    read-only panel on the summary page. Sections with no answers are left out."""
+    answered = []
+    for part in parts:
+        types = []
+        for item_type in part["types"]:
+            if "sections" in item_type:
+                groups = [
+                    answered_group(section, section.get("title"))
+                    for section in item_type["sections"]
+                ]
+            else:
+                groups = [answered_group(item_type)]
+            groups = [group for group in groups if group["words"] or group["answers"]]
+            if groups:
+                types.append(
+                    {
+                        "title": item_type.get("title"),
+                        "sub_title": item_type.get("sub_title"),
+                        "groups": groups,
+                    }
+                )
+        if types:
+            answered.append({"title": part.get("title"), "types": types})
+    return answered
 
 
 # Stitch section nesting in cdi_forms/form_data/*.json and instrument models together and prepare for CDI form rendering
@@ -309,30 +366,3 @@ def get_administration_instance(hash_id):
     except:
         raise Http404("Administration not found")
     return administration_instance
-
-
-# If the BackgroundInfo model was filled out before, populate BackgroundForm with responses based on administation object
-def prefilled_background_form(administration_instance, front_page=True):
-    background_instance = BackgroundInfo.objects.get(
-        administration=administration_instance
-    )
-
-    context = {}
-    context["language"] = administration_instance.study.instrument.language
-    context["instrument"] = administration_instance.study.instrument.name
-    context["min_age"] = administration_instance.study.min_age
-    context["max_age"] = administration_instance.study.max_age
-    context["birthweight_units"] = administration_instance.study.birth_weight_units
-    context["study_obj"] = administration_instance.study
-    context["study"] = administration_instance.study
-    context["source_id"] = administration_instance.backgroundinfo.source_id
-
-    if front_page:
-        background_form = BackgroundForm(
-            instance=background_instance, context=context, page="front"
-        )
-    else:
-        background_form = BackpageBackgroundForm(
-            instance=background_instance, context=context, page="back"
-        )
-    return background_form
