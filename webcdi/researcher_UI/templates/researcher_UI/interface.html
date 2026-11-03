@@ -113,7 +113,7 @@
                 <div class="wcdi-toolbar" style="margin-top:10px;">
                     <div style="flex:1; min-width:220px; max-width:340px;">
                         <label for="id_search" class="sr-only">Search by participant ID</label>
-                        <input id='id_search' type="text" placeholder="Search by participant ID…" name="search">
+                        <input id='id_search' type="text" placeholder="Search by participant ID…" name="search" value="{{ search }}">
                         <button id='search_button' type="submit" aria-label="Search"><i class="fa fa-search"></i></button>
                     </div>
                     <span class="wcdi-muted wcdi-selection-label" style="font-size:13px; margin-left:auto;"><span class="wcdi-sel-count">0</span> selected</span>
@@ -203,6 +203,16 @@
     $('input[name="select_col"]').click(function(e) { handleChecked(e); });
 
     {% if current_study %}
+    // Enter in the search box searches. checkEnter (above) blocks Enter on every
+    // form because implicit submission would press the form's first submit
+    // button, which is a download.
+    $('#id_search').on('keydown', function (e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            document.getElementById('search_button').click();
+        }
+    });
+
     // ---- selection-aware toolbar ----
     // One Download menu: with nothing ticked it posts the whole-group names,
     // with rows ticked it posts the selected-rows names (same view handlers).

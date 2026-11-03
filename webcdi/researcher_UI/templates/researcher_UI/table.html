@@ -111,8 +111,8 @@
         document.querySelectorAll('time[data-utc]').forEach(function (t) {
             var d = new Date(t.getAttribute('data-utc'));
             if (isNaN(d)) return;
-            t.textContent = d.toLocaleDateString([], { year: '2-digit', month: 'numeric', day: 'numeric' });
-            t.title = d.toLocaleString([], { hour12: true });
+            t.textContent = d.toLocaleDateString([], { year: 'numeric', month: 'short', day: 'numeric' });
+            t.title = d.toLocaleString([], { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
         });
     })();
     // Copy a participant link to the clipboard.

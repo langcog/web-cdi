@@ -1,5 +1,6 @@
 import json
 from typing import Any, Dict
+from urllib.parse import urlencode
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count, Q
@@ -81,7 +82,7 @@ class StudyCreateView(LoginRequiredMixin, ReseacherOwnsStudyMixin, generic.Creat
                         "researcher_ui:console_study", kwargs={"pk": study_obj.pk}
                     )
                     if "search" in request.POST:
-                        return redirect(f'{target}?search={request.POST["search"]}')
+                        return redirect(f'{target}?{urlencode({"search": request.POST["search"]})}')
                     else:
                         return redirect(f"{target}")
             else:
@@ -89,7 +90,7 @@ class StudyCreateView(LoginRequiredMixin, ReseacherOwnsStudyMixin, generic.Creat
                     "researcher_ui:console_study", kwargs={"pk": study_obj.pk}
                 )
                 if "search" in request.POST:
-                    return redirect(f'{target}?search={request.POST["search"]}')
+                    return redirect(f'{target}?{urlencode({"search": request.POST["search"]})}')
                 else:
                     return redirect(f"{target}")
 

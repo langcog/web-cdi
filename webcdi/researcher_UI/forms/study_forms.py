@@ -15,6 +15,15 @@ from researcher_UI.models import *
 logger = logging.getLogger("debug")
 
 
+class LicensedInstrumentChoiceField(forms.ModelChoiceField):
+    """Marks the instruments that need a Brookes access code (display text only)."""
+
+    def label_from_instance(self, obj):
+        if obj.family and obj.family.chargeable:
+            return f"{obj} (licence required)"
+        return str(obj)
+
+
 # Form for creating a new study
 class AddStudyForm(BetterModelForm):
     name = forms.CharField(label="Administration Group Name", max_length=51)  # Study name
@@ -244,10 +253,10 @@ class AddStudyForm(BetterModelForm):
         self.fields["backpage_boolean"].initial = True
 
         if self.researcher:
-            self.fields["instrument"] = forms.ModelChoiceField(
+            self.fields["instrument"] = LicensedInstrumentChoiceField(
                 queryset=Instrument.objects.filter(
                     researcher=self.researcher.researcher
-                ),
+                ).select_related("family"),
                 empty_label="(choose from the list)",
                 label="Form"
             )
@@ -520,6 +529,12 @@ class AddInstrumentForm(forms.ModelForm):
         model = Researcher
         fields = ["allowed_instrument_families"]
         widgets = {"allowed_instrument_families": forms.CheckboxSelectMultiple()}
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["allowed_instrument_families"].label_from_instance = lambda family: (
+            f"{family} (licence required)" if family.chargeable else str(family)
+        )
 
 
 class AddChargeableInstrumentForm(forms.ModelForm):

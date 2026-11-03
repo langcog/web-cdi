@@ -2,7 +2,8 @@ import logging
 import os
 
 from django.conf import settings
-from django.db.models import Q
+from django.db.models import CharField, Q
+from django.db.models.functions import Cast
 from django_tables2 import RequestConfig
 
 from researcher_UI.forms import AddStudyForm
@@ -28,24 +29,23 @@ def get_helper(request, study_name, num_per_page):
 
     if study_name is not None:
         current_study = Study.objects.get(researcher=request.user, name=study_name)
-        query = Q(study=current_study, is_active=True)
-        if "search" in request.GET:
-            try:
-                if len(request.GET["search"]) < 1:
-                    query = query
-                else:
-                    query = Q(query) & Q(
-                        Q(subject_id=int(request.GET["search"]))
-                        | Q(local_lab_id=request.GET["search"])
-                    )
-            except ValueError:
-                query = Q(query) & Q(local_lab_id=request.GET["search"])
+        administrations = Administration.objects.filter(
+            study=current_study, is_active=True
+        )
+        search = request.GET.get("search", "").strip()
+        context["search"] = search
+        if search:
+            # partial match: "10" finds participants 101 and 102
+            administrations = administrations.annotate(
+                subject_id_text=Cast("subject_id", CharField())
+            ).filter(
+                Q(subject_id_text__icontains=search)
+                | Q(local_lab_id__icontains=search)
+            )
         context["has_clinical_report"] = bool(
             clinical_template_name(current_study.instrument)
         )
-        administration_table = StudyAdministrationTable(
-            Administration.objects.filter(query)
-        )
+        administration_table = StudyAdministrationTable(administrations)
         if not current_study.confirm_completion:
             administration_table.exclude = ("study", "id", "url_hash", "analysis")
         if not current_study.send_completion_flag_url:
