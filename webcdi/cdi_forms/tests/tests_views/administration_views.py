@@ -358,22 +358,30 @@ class AdministrationSummaryViewTest(TestCase):
     def test_cat_summary_goes_to_the_cat_completion_page(self):
         # A CAT has no item list, so no answers to show; this URL raised an
         # AssertionError (500) from model_map
-        instrument = Instrument.objects.get(form="CAT", language="English")
-        administration = self.completed_administration(instrument)
-        CatResponse.objects.create(administration=administration)
-        response = self.client.get(self.summary_url(administration))
-        self.assertRedirects(
-            response,
-            reverse(
-                "cat_forms:administer_cat_form",
-                kwargs={"hash_id": administration.url_hash},
-            ),
-            fetch_redirect_response=False,
-        )
-        completion = self.client.get(response.url)
-        self.assertEqual(completion.status_code, 200)
-        self.assertTemplateUsed(completion, "cdi_forms/cat_forms/cat_completed.html")
-        self.assertNotContains(completion, "Show my answers")
+        cat2 = Instrument.objects.get(name="English_CAT")
+        cat2.pk = cat2.name = "English_CAT2"
+        cat2.form = "CAT2"
+        cat2.save()
+        for name in ["English_CAT", "English_CAT2"]:
+            with self.subTest(instrument=name):
+                instrument = Instrument.objects.get(name=name)
+                administration = self.completed_administration(instrument)
+                CatResponse.objects.create(administration=administration)
+                response = self.client.get(self.summary_url(administration))
+                self.assertRedirects(
+                    response,
+                    reverse(
+                        "cat_forms:administer_cat_form",
+                        kwargs={"hash_id": administration.url_hash},
+                    ),
+                    fetch_redirect_response=False,
+                )
+                completion = self.client.get(response.url)
+                self.assertEqual(completion.status_code, 200)
+                self.assertTemplateUsed(
+                    completion, "cdi_forms/cat_forms/cat_completed.html"
+                )
+                self.assertNotContains(completion, "Show my answers")
 
     def test_completed_WG_get(self):
         self.client.force_login(self.user)

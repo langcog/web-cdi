@@ -182,7 +182,7 @@ class AdministrationSummaryView(AdministrationByHashMixin, DetailView):
 
     def get(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
         # a CAT has no item list to summarize; its own completion page takes this role
-        if self.object.study.instrument.form == "CAT":
+        if self.object.study.instrument.form in settings.CAT_FORMS:
             return redirect(
                 "cat_forms:administer_cat_form", hash_id=self.object.url_hash
             )
