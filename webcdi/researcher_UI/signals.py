@@ -63,7 +63,8 @@ def flag_completion_notice(sender, instance, **kwargs):
     The flag is only ever set here and cleared by send_completion_notice_handler,
     so a nested save (e.g. scoring from post_save_completed_handler) can't
     hide the transition or send the notice twice. Newly created, already
-    completed administrations (data imports) are not notified.
+    completed administrations (data imports) are deliberately not notified:
+    those responses were completed elsewhere (decision on #723).
     """
     if (
         not kwargs.get("raw")
