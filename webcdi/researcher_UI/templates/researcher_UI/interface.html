@@ -63,7 +63,7 @@
                     <div class="wcdi-muted" style="font-size:14px;">
                         {{ study_instrument }}
                         {% if study_group %} &middot; Study group: {{ study_group }}{% endif %}
-                        {% if completed_admins %} &middot; {{ completed_admins }} completed &middot; {{ unique_children }} child{{ unique_children|pluralize:"ren" }}{% endif %}
+                        {% if n_admins %} &middot; {{ completed_admins }} of {{ n_admins }} administration{{ n_admins|pluralize }} completed &middot; {{ unique_children }} child{{ unique_children|pluralize:"ren" }}{% endif %}
                         {% if allow_payment %} &middot; {{ available_giftcards }} gift card{{ available_giftcards|pluralize }} left{% endif %}
                     </div>
                 </div>

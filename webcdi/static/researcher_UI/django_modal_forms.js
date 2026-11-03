@@ -1,5 +1,11 @@
 function modal_form(form_url){
     var modal_id = 'modal-form';
+    var show_error = function (message) {
+        $('#'+modal_id).modal('show');
+        $('#'+modal_id +' #error-message-text').html(message);
+        $('#'+modal_id + ' .error-message').css('display','block');
+    };
+    var failure_message = "Something went wrong and we couldn't finish this. Please reload the page and check the table before trying again.";
     $.ajax({
         type: 'GET',
         url: form_url,
@@ -35,10 +41,15 @@ function modal_form(form_url){
                                 $('#'+modal_id).modal('show');
                             }
                             else if(data['stat'] == "error"){
-                                $('#'+modal_id).modal('show');
-                                $('#'+modal_id +' #error-message-text').html(data['error_message']);
-                                $('#'+modal_id + ' .error-message').css('display','block');
+                                show_error(data['error_message']);
                             }
+                            else {
+                                // not the JSON we expect, e.g. a page instead
+                                show_error(failure_message);
+                            }
+                        },
+                        error: function () {
+                            show_error(failure_message);
                         }
                     });  
                 }              

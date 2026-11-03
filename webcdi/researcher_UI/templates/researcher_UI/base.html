@@ -107,7 +107,7 @@
         {% if messages %}
             {% for message in messages %}
             <div class="container-fluid p-0">
-                <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+                <div class="alert alert-{% if message.level_tag == 'error' %}danger{% else %}{{ message.level_tag }}{% endif %} alert-dismissible" role="alert" >
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="True">&times;</span>
                     </button>

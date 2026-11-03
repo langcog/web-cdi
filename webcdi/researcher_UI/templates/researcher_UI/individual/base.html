@@ -39,6 +39,10 @@
                     border-collapse: collapse;
                     margin-bottom: 10px;
                 }
+                /* each report forces a page break after itself; after the last one that is a blank page */
+                #content:last-child {
+                    break-after: auto !important;
+                }
 
                 @page {
                     size: {{ pagesize|default:"A4" }};

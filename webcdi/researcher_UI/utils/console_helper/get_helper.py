@@ -76,14 +76,13 @@ def get_helper(request, study_name, num_per_page):
         context["study_instrument"] = current_study.instrument.verbose_name
         context["study_group"] = current_study.study_group
         context["study_administrations"] = administration_table
-        context["completed_admins"] = Administration.objects.filter(
-            study=current_study, completed=True
-        ).count()
+        active_admins = Administration.objects.filter(
+            study=current_study, is_active=True
+        )
+        context["n_admins"] = active_admins.count()
+        context["completed_admins"] = active_admins.filter(completed=True).count()
         context["unique_children"] = (
-            Administration.objects.filter(study=current_study, completed=True)
-            .values("subject_id")
-            .distinct()
-            .count()
+            active_admins.values("subject_id").distinct().count()
         )
         context["allow_payment"] = current_study.allow_payment
         context["available_giftcards"] = PaymentCode.objects.filter(

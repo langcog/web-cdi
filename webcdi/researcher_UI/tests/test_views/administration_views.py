@@ -58,10 +58,76 @@ class EditAdministrationViewTest(TestCase):
             "researcher_ui:edit_study_new", kwargs={"pk": self.administration.id}
         )
 
-    def test_get(self):
+    def edit_subject_id(self, new_id):
         self.client.force_login(self.user)
-        response = self.client.post(self.url)
+        return self.client.post(
+            self.url,
+            {
+                "subject_id": new_id,
+                "subject_id_old": self.administration.subject_id,
+                "local_lab_id": "",
+                "opt_out": "None",
+            },
+        )
+
+    def add_administration(self, subject_id, repeat_num, **fields):
+        return Administration.objects.create(
+            study=self.administration.study,
+            subject_id=subject_id,
+            repeat_num=repeat_num,
+            url_hash=f"{subject_id}{repeat_num}".rjust(64, "a"),
+            completed=False,
+            due_date=timezone.now(),
+            **fields,
+        )
+
+    def assert_refused(self, response, message):
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json()["error"], message)
+        self.administration.refresh_from_db()
+        self.assertEqual(self.administration.subject_id, 1)
+
+    def test_edit_to_an_id_already_in_use(self):
+        # staging QA: an ID with one administration got past the "count > 1"
+        # check and hit the unique constraint: a 500 with no JSON for the dialog
+        self.add_administration(2, 1)
+        self.assert_refused(
+            self.edit_subject_id(2), "Participant ID 2 is already used in this group"
+        )
+
+    def test_edit_to_an_id_with_several_administrations(self):
+        self.add_administration(2, 1)
+        self.add_administration(2, 2)
+        self.assert_refused(
+            self.edit_subject_id(2), "Participant ID 2 is already used in this group"
+        )
+
+    def test_edit_to_an_id_only_a_deleted_administration_has(self):
+        # the deleted row still holds the unique (study, subject_id, repeat_num)
+        self.add_administration(2, 1, is_active=False)
+        self.assert_refused(
+            self.edit_subject_id(2),
+            "Participant ID 2 is already used in this group (by a deleted administration)",
+        )
+
+    def test_edit_to_a_free_id_renames_all_of_the_childs_administrations(self):
+        second = self.add_administration(1, 2)
+        response = self.edit_subject_id(5)
         self.assertEqual(response.status_code, 200)
+        self.administration.refresh_from_db()
+        second.refresh_from_db()
+        self.assertEqual(
+            (self.administration.subject_id, second.subject_id), (5, 5)
+        )
+
+    def test_saving_without_changing_the_id_is_not_a_duplicate(self):
+        self.add_administration(1, 2)
+        self.assertEqual(self.edit_subject_id(1).status_code, 200)
+
+    def test_invalid_id_returns_json_error(self):
+        # the dialog posts by AJAX; this used to return the whole group page
+        # with a 200, so the dialog closed as if the edit had been saved
+        self.assert_refused(self.edit_subject_id("abc"), "Enter a whole number.")
 
     def test_post_isInvalid(self):
         self.client.force_login(self.user)

@@ -1,6 +1,9 @@
 import datetime
+import re
 from html.parser import HTMLParser
+from pathlib import Path
 
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
@@ -56,6 +59,27 @@ class ConsoleMarkupTest(TestCase):
         parsed.feed(page.content.decode())
         self.assertEqual(parsed.nested, 0)
         self.assertEqual(parsed.button_form.get("delete-selected"), "study-form")
+
+    def test_template_comment_is_not_rendered(self):
+        # staging QA: a two-line {# #} comment was printed on the group page
+        user = User.objects.create_user("comment", password="x-test-only")
+        Researcher.objects.get_or_create(user=user)
+        study = Study.objects.create(
+            researcher=user, name="comment group",
+            instrument=Instrument.objects.get(language="English", form="WS"),
+        )
+        self.client.force_login(user)
+        page = self.client.get(reverse("researcher_ui:console_study", args=[study.pk]))
+        self.assertNotContains(page, "Per-row edit dialogs")
+
+    def test_no_template_has_a_multi_line_comment(self):
+        # {# #} only works on one line; anything longer needs {% comment %}
+        offenders = []
+        for path in Path(settings.BASE_DIR).glob("**/templates/**/*.html"):
+            for number, line in enumerate(path.read_text().splitlines(), 1):
+                if re.search(r"\{#(?!.*#\})", line):
+                    offenders.append(f"{path}:{number}")
+        self.assertEqual(offenders, [])
 
     def test_clinical_report_menu_matches_instrument(self):
         # staging QA: instruments without a report template opened a tab that

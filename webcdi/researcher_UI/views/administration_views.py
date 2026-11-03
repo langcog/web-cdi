@@ -31,18 +31,25 @@ class EditAdministrationView(LoginRequiredMixin, StudyOwnerMixin, UpdateView):
         context["study"] = self.object.study
         return context
 
+    def form_invalid(self, form):
+        # the edit dialog posts by AJAX: it needs the reason, not the whole page
+        errors = [error for errors in form.errors.values() for error in errors]
+        return JsonResponse({"error": " ".join(errors)}, status=400)
+
     def form_valid(self, form):
         obj = self.get_object()
 
         if "subject_id" in form.changed_data:
-            count = Administration.objects.filter(
-                study_id=obj.study.pk, subject_id=form.cleaned_data["subject_id"]
-            ).count()
-
-            if count > 1:
-                return JsonResponse(
-                    {"error": "subject id is already existed."}, status=400
-                )
+            new_id = form.cleaned_data["subject_id"]
+            in_use = Administration.objects.filter(
+                study_id=obj.study.pk, subject_id=new_id
+            )
+            if in_use.exists():
+                # deleted rows count: they still hold the unique constraint
+                error = f"Participant ID {new_id} is already used in this group"
+                if not in_use.filter(is_active=True).exists():
+                    error += " (by a deleted administration)"
+                return JsonResponse({"error": error}, status=400)
 
             _instances = Administration.objects.filter(
                 study=obj.study, subject_id=form.cleaned_data["subject_id_old"]

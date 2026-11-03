@@ -24,16 +24,19 @@ class Console(LoginRequiredMixin, generic.ListView):
     template_name = "researcher_UI/interface.html"
 
     def get_context_data(self, *args, **kwargs):
+        active = Q(administration__is_active=True)
         studies = (
             Study.objects.filter(researcher=self.request.user, active=True)
             .annotate(
-                n_admins=Count("administration", distinct=True),
+                n_admins=Count("administration", filter=active, distinct=True),
                 n_completed=Count(
                     "administration",
-                    filter=Q(administration__completed=True),
+                    filter=active & Q(administration__completed=True),
                     distinct=True,
                 ),
-                n_children=Count("administration__subject_id", distinct=True),
+                n_children=Count(
+                    "administration__subject_id", filter=active, distinct=True
+                ),
             )
             .order_by("id")
         )
