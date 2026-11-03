@@ -1,3 +1,4 @@
+import datetime
 import random
 
 from django.contrib.auth.models import User
@@ -231,3 +232,29 @@ class UnknownItemTest(TestCase):
         self.assertIn("ChildName", unknown[0].getMessage())
         self.assertFalse([r for r in logs.records if r.levelname == "ERROR"])
 
+
+    def test_scoring_leaves_last_modified_alone(self):
+        # last_modified is shown to researchers, downloaded and used to pick the
+        # administration a repeat prefills from: it must mean parent activity,
+        # and a full rescore must not reset it.
+        instrument = Instrument.objects.create(
+            name="Tiny_WS", verbose_name="Tiny", language="Tiny", form="WS",
+            min_age=16, max_age=30,
+        )
+        study = Study.objects.create(
+            researcher=User.objects.create_user("u", password="x-test-only"),
+            name="tiny", instrument=instrument,
+        )
+        admin = Administration.objects.create(
+            study=study, subject_id=1, repeat_num=1, url_hash="a" * 64,
+            completed=True, due_date=timezone.now(),
+        )
+        earlier = timezone.now() - datetime.timedelta(days=400)
+        Administration.objects.filter(pk=admin.pk).update(last_modified=earlier, scored=False)
+        admin.refresh_from_db()
+
+        update_summary_scores(admin, InstrumentScoring(instrument))
+
+        admin.refresh_from_db()
+        self.assertTrue(admin.scored)
+        self.assertEqual(admin.last_modified, earlier)

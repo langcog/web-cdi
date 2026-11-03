@@ -349,4 +349,5 @@ def update_summary_scores(administration_instance, scoring=None):
         )
     if complete:
         administration_instance.scored = True
-        administration_instance.save()
+        # only this field: last_modified records parent activity, not scoring
+        administration_instance.save(update_fields=["scored"])
