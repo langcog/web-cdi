@@ -1,5 +1,7 @@
+import io
 import logging
 import os
+import zipfile
 
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -357,6 +359,78 @@ class AdminNewTest(TestCase):
                 self.assertEqual(response.json()["stat"], "error")
                 self.assertEqual(response.json()["error_message"], ZERO_PADDED_MESSAGE)
         self.assertFalse(Administration.objects.filter(study=self.study).exists())
+
+    def post_csv(self, content, **fields):
+        from django.core.files.uploadedfile import SimpleUploadedFile
+
+        self.client.force_login(self.user)
+        return self.client.post(
+            self.url,
+            {
+                "subject-ids-csv": SimpleUploadedFile("ids.csv", content),
+                "new_subject_ids": "",
+                "autogenerate_count": "",
+                "subject-ids-column": "",
+                **fields,
+            },
+        )
+
+    def test_post_unreadable_csv_returns_error_message(self):
+        # staging QA: pd.read_csv raised, the view returned a 500, and the
+        # dialog just sat there
+        excel_file = io.BytesIO()
+        with zipfile.ZipFile(excel_file, "w", zipfile.ZIP_DEFLATED) as workbook:
+            workbook.writestr("xl/sheet1.xml", "".join(str(n) for n in range(2000)))
+        files = {
+            "binary bytes": bytes(range(256)) * 4,
+            "excel file": excel_file.getvalue(),
+            "empty file": b"",
+            "uneven rows": b"1\n2,3\n4,5,6\n",
+            "wrong encoding": "1\n2\n".encode("utf-16"),
+        }
+        for name, content in files.items():
+            for fields in ({}, {"csv-header": "on"}):
+                with self.subTest(file=name, fields=fields):
+                    response = self.post_csv(content, **fields)
+                    self.assertEqual(response.status_code, 200)
+                    self.assertEqual(response.json()["stat"], "error")
+                    self.assertEqual(
+                        response.json()["error_message"],
+                        "We couldn't read that file as a CSV. Save it as a plain .csv "
+                        "with one column of IDs.\n",
+                    )
+        self.assertFalse(Administration.objects.filter(study=self.study).exists())
+
+    def test_post_csv_with_only_a_header_is_an_error(self):
+        # used to report success, having added nobody
+        response = self.post_csv(b"id\n", **{"csv-header": "on"})
+        self.assertEqual(response.json()["stat"], "error")
+
+    def test_post_readable_csv_variants(self):
+        files = {
+            "one column": (b"11\n12\n", {}, {11, 12}),
+            "excel utf-8 byte order mark": (b"\xef\xbb\xbf11\r\n12\r\n", {}, {11, 12}),
+            "one column, header": (b"id\n11\n12\n", {"csv-header": "on"}, {11, 12}),
+            "many columns, first is used": (b"11,a\n12,b\n", {}, {11, 12}),
+            "many columns, chosen by name": (
+                b"name,id\na,11\nb,12\n",
+                {"csv-header": "on", "subject-ids-column": "id"},
+                {11, 12},
+            ),
+        }
+        for name, (content, fields, ids) in files.items():
+            with self.subTest(file=name):
+                Administration.objects.filter(study=self.study).delete()
+                response = self.post_csv(content, **fields)
+                self.assertEqual(response.json()["stat"], "ok")
+                self.assertEqual(
+                    set(
+                        Administration.objects.filter(study=self.study).values_list(
+                            "subject_id", flat=True
+                        )
+                    ),
+                    ids,
+                )
 
     def test_post_load_subject_ids_from_csv_with_header(self):
         self.client.force_login(self.user)

@@ -30,6 +30,9 @@ class UpdateStudyView(LoginRequiredMixin, ReseacherOwnsStudyMixin, UpdateView):
         context["min_age"] = age_range.lower
         context["max_age"] = age_range.upper
         context["study_obj"] = self.object
+        context["n_admins"] = self.object.administration_set.filter(
+            is_active=True
+        ).count()
         return context
 
     def form_valid(self, form):

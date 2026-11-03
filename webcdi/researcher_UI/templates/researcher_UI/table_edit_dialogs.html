@@ -1,5 +1,4 @@
-{# Per-row edit dialogs for table.html. Each has its own <form>, so include this
-   outside any enclosing form: a nested form's </form> ends the outer one. #}
+{# Per-row edit dialogs for table.html. Each has its own form, so include this outside any enclosing form: a nested form's closing tag ends the outer one. #}
 {% for row in table.paginated_rows %}
 <div class="modal" id="{{row.record.pk}}" tabindex="-1" role="dialog" aria-labelledby="edit-title-{{row.record.pk}}" aria-hidden="true">
     <form action="{% url 'researcher_ui:edit_study_new' pk=row.record.pk %}" method="post">

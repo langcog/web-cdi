@@ -380,7 +380,6 @@
 
           {% if form_name %}
           {# ---- danger zone: deleting the group. Rare, so it lives here rather than on the group page. ---- #}
-          {% with n_admins=study_obj.administration_set.count %}
           <div class="wcdi-danger-zone" id="danger-zone">
             <div>
               <h2>Delete this group</h2>
@@ -428,7 +427,6 @@
               });
             })();
           </script>
-          {% endwith %}
           {% endif %}
     </div>
   </div>

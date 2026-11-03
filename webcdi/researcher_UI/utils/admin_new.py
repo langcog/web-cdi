@@ -14,6 +14,16 @@ ZERO_PADDED_MESSAGE = (
     "Subject ids cannot start with 0 (e.g. 007): ids are stored as numbers, "
     "so the leading zeros would be lost\n"
 )
+UNREADABLE_CSV_MESSAGE = (
+    "We couldn't read that file as a CSV. Save it as a plain .csv with one column "
+    "of IDs.\n"
+)
+CSV_READ_ERRORS = (
+    pd.errors.ParserError,
+    pd.errors.EmptyDataError,
+    UnicodeDecodeError,
+    ValueError,
+)
 
 
 def is_zero_padded(subject_id):
@@ -46,8 +56,18 @@ def admin_new_fun(request, permitted, study_name, study_obj):
             data["error_message"] += "Form is empty\n"
 
         if raw_ids_csv:
-            if "csv-header" in request.POST:
-                ids_df = pd.read_csv(raw_ids_csv, dtype=str)
+            try:
+                ids_df = pd.read_csv(
+                    raw_ids_csv,
+                    header="infer" if "csv-header" in request.POST else None,
+                    dtype=str,
+                )
+            except CSV_READ_ERRORS:
+                ids_df = pd.DataFrame()
+
+            if ids_df.empty:
+                ids_type = "unreadable"
+            elif "csv-header" in request.POST:
                 if request.POST["subject-ids-column"]:
                     subj_column = request.POST["subject-ids-column"]
                     if subj_column in ids_df.columns:
@@ -61,13 +81,14 @@ def admin_new_fun(request, permitted, study_name, study_obj):
                     ids_type = ids_to_add.dtype
 
             else:
-                ids_df = pd.read_csv(raw_ids_csv, header=None, dtype=str)
                 ids_to_add, zero_padded = parse_csv_ids(ids_df[ids_df.columns[0]])
                 ids_type = ids_to_add.dtype
 
             if ids_type != "int64":
                 validity = False
-                if "csv-header" not in request.POST:
+                if ids_type == "unreadable":
+                    data["error_message"] += UNREADABLE_CSV_MESSAGE
+                elif "csv-header" not in request.POST:
                     data[
                         "error_message"
                     ] += "Non integer subject ids. Make sure first row is numeric\n"

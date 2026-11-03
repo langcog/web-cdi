@@ -35,8 +35,10 @@
         },
         error: function (response) {
             $(".overlay").fadeOut(300);
-            $("#subject_id_error_message"+id).empty()
-            $("#subject_id_error_message"+id).append(response.responseJSON.error)
+            // a server error has no JSON body, only our own refusals do
+            const message = (response.responseJSON && response.responseJSON.error)
+                || "Something went wrong and your changes were not saved. Please reload the page and try again.";
+            $("#subject_id_error_message"+id).text(message)
         }
         });
     }
