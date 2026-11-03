@@ -1,11 +1,17 @@
+import csv
 import datetime
+import io
+import json
 
 from django.contrib.auth.models import User
+from django.contrib.messages import get_messages
 from django.test import TestCase, tag
 from django.urls import reverse
 from django.utils import timezone
 
 from researcher_UI.models import Administration, Instrument, Researcher, Study
+from researcher_UI.tests import generate_fake_results
+from researcher_UI.utils.console_helper.post_helper import SELECTED_DOWNLOADS
 
 
 @tag("security")
@@ -114,3 +120,154 @@ class CrossResearcherAccessTest(TestCase):
         )
         self.study.refresh_from_db()
         self.assertEqual(self.study.study_group, "")
+
+    # Rows are chosen by id in the request. Whatever ids arrive, an action on a
+    # group applies only to that group's own administrations; other ids count
+    # as not selected.
+
+    def own_group(self, instrument="English_WS", name="Second researcher's group"):
+        instrument = Instrument.objects.get(name=instrument)
+        group = Study.objects.create(
+            researcher=self.other, name=name, instrument=instrument,
+            min_age=instrument.min_age, max_age=instrument.max_age,
+        )
+        generate_fake_results(group, 1)
+        return group, Administration.objects.get(study=group)
+
+    def row_in_first_group(self):
+        generate_fake_results(self.study, 1)
+        return Administration.objects.filter(study=self.study, completed=True).get()
+
+    def post_selected(self, group, action, *rows):
+        return self.client.post(
+            reverse("researcher_ui:console_study", args=[group.pk]),
+            {action: action, "select_col": [row.pk for row in rows]},
+        )
+
+    def test_selected_downloads_of_other_rows_count_as_no_selection(self):
+        group, _ = self.own_group()
+        other_row = self.row_in_first_group()
+        url = reverse("researcher_ui:console_study", args=[group.pk])
+        for action in SELECTED_DOWNLOADS:
+            with self.subTest(action=action):
+                response = self.post_selected(group, action, other_row)
+                self.assertRedirects(response, url, fetch_redirect_response=False)
+                self.assertIn(
+                    "Select at least one administration to download.",
+                    [str(m) for m in get_messages(response.wsgi_request)],
+                )
+
+    def test_selected_downloads_contain_only_the_current_groups_rows(self):
+        group, own_row = self.own_group()
+        other_row = self.row_in_first_group()
+        for action in (
+            "download-links",
+            "download-selected",
+            "download-selected-adjusted",
+            "download-selected-summary",
+        ):
+            with self.subTest(action=action):
+                response = self.post_selected(group, action, own_row, other_row)
+                self.assertEqual(response.status_code, 200)
+                rows = list(csv.DictReader(io.StringIO(response.content.decode())))
+                self.assertEqual(
+                    [int(row["administration_id"]) for row in rows], [own_row.pk]
+                )
+
+    def test_delete_selected_applies_to_the_current_group(self):
+        group, own_row = self.own_group()
+        other_row = self.row_in_first_group()
+        self.post_selected(group, "delete-selected", own_row, other_row)
+        own_row.refresh_from_db()
+        other_row.refresh_from_db()
+        self.assertFalse(own_row.is_active)
+        self.assertTrue(other_row.is_active)
+
+    def test_readminister_selected_applies_to_the_current_group(self):
+        # a form with no licence requirement, so re-administering is allowed
+        group, own_row = self.own_group(instrument="Dutch_WS")
+        other_row = self.row_in_first_group()
+        Administration.objects.filter(pk=other_row.pk).update(subject_id=500)
+        self.post_selected(group, "administer-selected", own_row, other_row)
+        self.assertEqual(
+            sorted(
+                Administration.objects.filter(study=group).values_list(
+                    "subject_id", "repeat_num"
+                )
+            ),
+            [(own_row.subject_id, 1), (own_row.subject_id, 2)],
+        )
+
+    def test_rows_in_the_researchers_other_group_are_not_selected(self):
+        group, own_row = self.own_group()
+        _, second_group_row = self.own_group(name="Second researcher's other group")
+        self.post_selected(group, "delete-selected", second_group_row)
+        second_group_row.refresh_from_db()
+        self.assertTrue(second_group_row.is_active)
+
+    def test_ids_of_no_administration_are_ignored(self):
+        group, own_row = self.own_group(instrument="Dutch_WS")
+        response = self.client.post(
+            reverse("researcher_ui:console_study", args=[group.pk]),
+            {
+                "administer-selected": "administer-selected",
+                "select_col": ["2147483647", "99999999999999999999"],
+            },
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(Administration.objects.filter(study=group).count(), 1)
+
+    def test_clinical_report_selection_applies_to_the_group_in_the_url(self):
+        group, own_row = self.own_group()
+        other_row = self.row_in_first_group()
+        url = reverse("researcher_ui:pdf_summary", args=[group.pk])
+
+        response = self.client.get(f"{url}?id={other_row.pk}")
+        self.assertEqual(response.status_code, 302)
+
+        response = self.client.get(f"{url}?id={other_row.pk}&id={own_row.pk}")
+        self.assertEqual(
+            [a.pk for a in response.context_data["administrations"]], [own_row.pk]
+        )
+
+    def test_clinical_report_ignores_ids_that_are_not_numbers(self):
+        group, own_row = self.own_group()
+        url = reverse("researcher_ui:pdf_summary", args=[group.pk])
+        self.assertEqual(self.client.get(f"{url}?id=abc").status_code, 302)
+
+    def test_edit_applies_to_the_rows_own_participant_id(self):
+        # subject_id_old comes from the request; it must not pick another child
+        group, own_row = self.own_group()
+        sibling = Administration.objects.create(
+            study=group, subject_id=50, repeat_num=1, url_hash="c" * 64,
+            completed=False, due_date=timezone.now() + datetime.timedelta(days=14),
+        )
+        response = self.client.post(
+            reverse("researcher_ui:edit_study_new", args=[own_row.pk]),
+            {
+                "subject_id": 60,
+                "subject_id_old": sibling.subject_id,
+                "local_lab_id": "",
+                "opt_out": "None",
+            },
+        )
+        self.assertEqual(response.status_code, 200)
+        own_row.refresh_from_db()
+        sibling.refresh_from_db()
+        self.assertEqual((own_row.subject_id, sibling.subject_id), (60, 50))
+
+    def test_administration_api_applies_to_the_study_in_the_url(self):
+        group, own_row = self.own_group()
+        other_row = self.row_in_first_group()
+        payload = {"username": "intruder", "password": "x-test-only"}
+        response = self.client.generic(
+            "POST",
+            reverse(
+                "api:administration_api",
+                kwargs={"pk": group.pk, "administration_id": other_row.pk},
+            ),
+            json.dumps(payload),
+        )
+        self.assertEqual(
+            response.json(), {"Error": "You must select at least 1 completed survey"}
+        )
