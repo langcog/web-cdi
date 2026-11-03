@@ -9,6 +9,7 @@ from researcher_UI.models import Administration
 
 class PDFAdministrationDetailView(WeasyTemplateResponseMixin, DetailView):
     model = Administration
+    queryset = Administration.objects.filter(is_active=True)
     template_name = "cdi_forms/pdf_administration.html"
     slug_field = "url_hash"
     slug_url_kwarg = "hash_id"

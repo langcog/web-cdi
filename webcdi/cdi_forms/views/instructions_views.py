@@ -21,7 +21,9 @@ class InstructionDetailView(DetailView):
         return super().dispatch(request, *args, **kwargs)
 
     def get_object(self, queryset=None):
-        return get_object_or_404(Administration, url_hash=self.kwargs["hash_id"])
+        return get_object_or_404(
+            Administration, url_hash=self.kwargs["hash_id"], is_active=True
+        )
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         ctx = super().get_context_data(**kwargs)

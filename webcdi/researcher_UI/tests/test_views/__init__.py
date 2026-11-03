@@ -3,6 +3,10 @@ from .administration_views import (AddNewParentTest,  # noqa
 from .ajax_views import AjaxChargeStatusTest, AjaxDemographicFormsTest  # noqa
 from .console import ConsoleViewTest  # noqa
 from .console_counts import ActiveAdministrationCountsTest  # noqa
+from .deleted_rows import (DeletedRowCapTest,  # noqa
+                           DeletedRowCatDownloadTest, DeletedRowDownloadTest,
+                           DeletedRowParticipantLinkTest,
+                           DeletedRowPrefillTest, DeletedRowRepeatNumTest)
 from .download_data_views import PDFAdministrationDetailViewTest  # noqa
 from .instrument_views import AddInstrumentsTest  # noqa
 from .no_user_redirect import NoUserRedirectTest  # noqa
@@ -23,6 +27,7 @@ from .cross_researcher import CrossResearcherAccessTest  # noqa
 from .new_parent_links import (BypassLinkTest,  # noqa
                                NoDemographicParametersTest, SourceIdLinkTest,
                                SourceIdResumeTest)
+from .group_subject_ids import GroupSubjectIdTest  # noqa
 from .console_markup import (ConsoleMarkupTest, ConsoleSearchTest,  # noqa
                              LicenceRequiredLabelTest, NavbarActiveTest)
 from .summary_download import StudySpecificBackgroundColumnsTest, SummaryDownloadTextTest  # noqa

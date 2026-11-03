@@ -13,7 +13,7 @@ class CommandsTestCase(TestCase):
         call_command("01_populate_instrument_family", *args, **opts)
 
         families = InstrumentFamily.objects.all()
-        self.assertEqual(len(families), 13)
+        self.assertEqual(len(families), 14)
 
     def test_populate_instrument(self):
         args = []
@@ -23,6 +23,21 @@ class CommandsTestCase(TestCase):
 
         instruments = Instrument.objects.all()
         self.assertEqual(len(instruments), 29)
+
+    def test_every_instrument_in_the_json_gets_a_family(self):
+        call_command("01_populate_instrument_family")
+        call_command("02_populate_instrument")
+
+        self.assertFalse(Instrument.objects.filter(family__isnull=True).exists())
+
+    def test_cdi3r_family_needs_no_code(self):
+        call_command("01_populate_instrument_family")
+        call_command("02_populate_instrument")
+
+        cdi3r = Instrument.objects.get(name="English_CDI3R").family
+        self.assertEqual(cdi3r.name, "English CDI3R")
+        self.assertFalse(cdi3r.chargeable)
+        self.assertEqual(Instrument.objects.filter(family=cdi3r).count(), 2)
 
     def test_populate_scoring(self):
         args = []

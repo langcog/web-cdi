@@ -78,6 +78,9 @@ class EditAdministrationView(LoginRequiredMixin, StudyOwnerMixin, UpdateView):
 INTEGER_FIELD_MAX = 2147483647
 TEXT_ID_MAX = 255  # BackgroundInfo.source_id and event_id
 OUT_OF_RANGE_MESSAGE = "A value in this no demographic call is out of range."
+# a platform may send the child's current age, so a returning link can be a
+# month away from the age stored when the row was created
+RESUME_AGE_TOLERANCE = 1
 
 
 def no_demographic_link_values(params):
@@ -118,7 +121,7 @@ class AddNewParent(DetailView):
 
         subject_cap = self.object.subject_cap
         completed_admins = Administration.objects.filter(
-            study=self.object, completed=True
+            study=self.object, completed=True, is_active=True
         ).count()
         # the create routes carry bypass as True or not at all
         bypass = True if request.GET.get("bypass") else None
@@ -175,10 +178,15 @@ class AddNewParent(DetailView):
                     administration__study=self.object,
                 )
                 if same_event.exists():
-                    # only a link with the row's own age and sex opens it; any
-                    # other answers as a link with a value out of range does
+                    # only a link close to the row's own age, with its sex,
+                    # opens it; any other answers as a link with a value out
+                    # of range does
                     background_info = same_event.filter(
-                        age=age, sex__iexact=sex
+                        age__range=(
+                            age - RESUME_AGE_TOLERANCE,
+                            age + RESUME_AGE_TOLERANCE,
+                        ),
+                        sex__iexact=sex,
                     ).first()
                     if background_info is None:
                         raise Http404(OUT_OF_RANGE_MESSAGE)

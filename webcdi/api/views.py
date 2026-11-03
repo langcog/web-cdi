@@ -32,7 +32,7 @@ class BaseAPIView(StudyOwnerMixin, TemplateView):
         administrations = (
             administrations
             if administrations is not None
-            else Administration.objects.filter(study=study_obj)
+            else Administration.objects.filter(study=study_obj, is_active=True)
         )
         if not administrations.filter(completed=True).exists():
             return json.dumps({"Error": "You must select at least 1 completed survey"})
@@ -207,6 +207,7 @@ class SourceAPI(BaseAPIView):
         if "event_id" in kwargs:
             administrations = Administration.objects.filter(
                 study=study,
+                is_active=True,
                 backgroundinfo__in=BackgroundInfo.objects.filter(
                     event_id=kwargs.pop("event_id"), source_id=kwargs.pop("source_id")
                 ),
@@ -214,6 +215,7 @@ class SourceAPI(BaseAPIView):
         else:
             administrations = Administration.objects.filter(
                 study=study,
+                is_active=True,
                 backgroundinfo__in=BackgroundInfo.objects.filter(
                     source_id=kwargs.pop("source_id")
                 ),
@@ -228,7 +230,7 @@ class AdministrationAPI(BaseAPIView):
     def post(self, request, *args, **kwargs):
         study_obj = Study.objects.get(pk=kwargs.pop("pk"))
         administrations = Administration.objects.filter(
-            study=study_obj, pk=kwargs.pop("administration_id")
+            study=study_obj, pk=kwargs.pop("administration_id"), is_active=True
         )
         qs_json = self.get_json(request, study_obj, administrations)
 

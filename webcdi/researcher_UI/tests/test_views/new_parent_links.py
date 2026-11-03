@@ -263,8 +263,8 @@ class NoDemographicParametersTest(NewParentTestCase):
 
 
 class SourceIdResumeTest(NewParentTestCase):
-    """A no-demographic link opens an existing row only if the link's age and
-    sex are those stored on the row."""
+    """A no-demographic link opens an existing row only if the link's sex is
+    the stored one and its age is within a month of the stored one."""
 
     def setUp(self):
         super().setUp()
@@ -330,7 +330,8 @@ class SourceIdResumeTest(NewParentTestCase):
         row = self.make_row()
         before = BackgroundInfo.objects.filter(administration=row).values().get()
         for params in (
-            {"age": 16},
+            {"age": 17},
+            {"age": 13},
             {"age": 0},
             {"sex": "f"},
             {"sex": ""},
@@ -355,6 +356,15 @@ class SourceIdResumeTest(NewParentTestCase):
             with self.subTest(sex=sex):
                 self.assert_refused(self.get(sex=sex), row)
 
+    def test_age_within_a_month_of_the_stored_age_opens_the_row(self):
+        row = self.make_row()
+        for age in (14, 15, 16):
+            with self.subTest(age=age):
+                self.assert_opens(self.get(age=age), row)
+        for age in (13, 17):
+            with self.subTest(age=age):
+                self.assert_refused(self.get(age=age), row)
+
     def test_age_is_compared_as_a_whole_number_of_months(self):
         row = self.make_row()
         for age in ("15", "015", " 15", "+15"):
@@ -372,7 +382,7 @@ class SourceIdResumeTest(NewParentTestCase):
 
     def test_finished_row_follows_the_same_rule(self):
         row = self.make_row(completed=True)
-        self.assert_refused(self.get(age=16), row)
+        self.assert_refused(self.get(age=17), row)
         response = self.get()
         self.assert_opens(response, row)
         response = self.client.get(response["Location"], follow=True)
@@ -404,7 +414,7 @@ class SourceIdResumeTest(NewParentTestCase):
             form="CAT", name="CAT resume", no_demographic_boolean=True
         )
         row = self.make_row(study=study)
-        self.assert_refused(self.get(study=study, age=16), row)
+        self.assert_refused(self.get(study=study, age=17), row)
         response = self.get(study=study)
         self.assert_opens(response, row)
         self.assertRedirects(

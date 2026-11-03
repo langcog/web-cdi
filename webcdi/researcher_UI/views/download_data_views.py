@@ -28,7 +28,9 @@ class PDFAdministrationDetailView(LoginRequiredMixin, WeasyTemplateResponseMixin
 
     def completed_administrations(self):
         """The selected (?id=...) administrations that are completed; reports only cover those."""
-        administrations = self.object.administration_set.all().filter(completed=True)
+        administrations = self.object.administration_set.filter(
+            completed=True, is_active=True
+        )
         if "id" in self.request.GET:
             ids = self.request.GET.getlist("id")
             int_ids = []

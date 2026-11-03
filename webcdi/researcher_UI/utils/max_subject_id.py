@@ -1,12 +1,12 @@
 from django.db.models import Max
 
-from researcher_UI.models import Administration, Researcher, Study
+from researcher_UI.models import Administration, Study
 
 
 def max_subject_id(study_obj):
     if study_obj.study_group:
         related_studies = Study.objects.filter(
-            researcher=Researcher, study_group=study_obj.study_group
+            researcher=study_obj.researcher, study_group=study_obj.study_group
         )
         max_id = Administration.objects.filter(study__in=related_studies).aggregate(
             Max("subject_id")

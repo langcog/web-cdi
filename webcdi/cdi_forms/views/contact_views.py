@@ -21,7 +21,9 @@ class AdministrationContactView(FormView, DetailView):
         return reverse("administer_cdi_form", args=[self.object.url_hash])
 
     def get_object(self, queryset=None):
-        self.object = get_object_or_404(Administration, url_hash=self.kwargs["hash_id"])
+        self.object = get_object_or_404(
+            Administration, url_hash=self.kwargs["hash_id"], is_active=True
+        )
         return self.object
 
     def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
