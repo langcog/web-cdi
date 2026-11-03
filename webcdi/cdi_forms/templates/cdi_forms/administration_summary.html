@@ -247,7 +247,7 @@
         {% endif %}
         {% if object.study.print_my_answers_boolean %}
         <div class="row justify-content-center">
-            <h4><a href="{% url 'administration-pdf-view' object.pk %}">{% trans "Print My Answers" %}</a></h4>
+            <h4><a href="{% url 'administration-pdf-view' object.url_hash %}">{% trans "Print My Answers" %}</a></h4>
         </div>
         {% endif %}
         {% if object.study.redirect_boolean %}

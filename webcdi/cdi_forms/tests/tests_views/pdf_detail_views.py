@@ -36,7 +36,9 @@ class PDFAdministrationDetailViewTest(TestCase):
         self.client.force_login(self.user)
         generate_fake_results(self.study, 1)
         administration = Administration.objects.filter(completed=True)[0]
-        url = reverse("administration-pdf-view", kwargs={"pk": administration.pk})
+        url = reverse(
+            "administration-pdf-view", kwargs={"hash_id": administration.url_hash}
+        )
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -51,11 +53,13 @@ class PDFAdministrationDetailViewTest(TestCase):
         )
         generate_fake_results(study, 1)
         administration = Administration.objects.filter(study=study, completed=True)[0]
-        url = reverse("administration-pdf-view", kwargs={"pk": administration.pk})
+        url = reverse(
+            "administration-pdf-view", kwargs={"hash_id": administration.url_hash}
+        )
         response = self.client.get(url)
         # Korean administrations deliberately skip WeasyPrint and redirect
         # to the HTML view (see PDFAdministrationDetailView.get)
         self.assertRedirects(
             response,
-            reverse("administration-view", kwargs={"pk": administration.pk}),
+            reverse("administration-view", kwargs={"hash_id": administration.url_hash}),
         )

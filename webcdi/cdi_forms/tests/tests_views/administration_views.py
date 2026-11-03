@@ -361,7 +361,7 @@ class AdministrationDetailViewTest(TestCase):
         self.client.force_login(self.user)
         generate_fake_results(self.study, 1)
         administration = Administration.objects.filter(completed=True)[0]
-        url = reverse("administration-view", kwargs={"pk": administration.pk})
+        url = reverse("administration-view", kwargs={"hash_id": administration.url_hash})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -632,7 +632,7 @@ class AdministrationUpdateViewTest(TestCase):
             background_url.startswith(
                 reverse(
                     "background-info",
-                    args=(self.administration.backgroundinfo.pk,),
+                    args=(self.administration.url_hash,),
                 )
             )
         )

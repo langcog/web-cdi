@@ -564,7 +564,9 @@ class BackgroundInfoViewTest(TestCase):
             administration=self.administration, age=12, source_id=random_password()
         )
 
-        self.url = reverse("background-info", kwargs={"pk": background_info.pk})
+        self.url = reverse(
+            "background-info", kwargs={"hash_id": self.administration.url_hash}
+        )
 
     def test_get(self):
         response = self.client.get(self.url)
@@ -679,7 +681,7 @@ class CreateBackgroundInfoNotDefaultDemographicViewTest(TestCase):
                 url = reverse(
                     "backpage-background-info",
                     kwargs={
-                        "pk": administration.backgroundinfo.id,
+                        "hash_id": administration.url_hash,
                     },
                 )
                 payload["btn-next"] = "Next"
@@ -767,7 +769,7 @@ class StudyRedirectTests(TestCase):
         url = reverse(
             "backpage-background-info",
             kwargs={
-                "pk": administration.backgroundinfo.id,
+                "hash_id": administration.url_hash,
             },
         )
         payload["btn-next"] = "Next"

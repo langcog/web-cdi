@@ -5,7 +5,7 @@ from . import views
 # Create URLs associated with some of the functions found in views.py 'views_FUNCTION NAME'. You can look up what each function renders in views.py. URLs are referenced in webcdi/urls.py
 urlpatterns = [
     path(
-        "background/<int:pk>/",
+        "background/<str:hash_id>/",
         include(
             [
                 path(
@@ -67,23 +67,6 @@ urlpatterns = [
         include(("cdi_forms.cat_forms.urls", "cat_forms"), namespace="cat_forms"),
     ),
     path(
-        "administration/<int:pk>/",
-        include(
-            [
-                path(
-                    "pdf/",
-                    views.PDFAdministrationDetailView.as_view(),
-                    name="administration-pdf-view",
-                ),
-                path(
-                    "view/",
-                    views.AdministrationDetailView.as_view(),
-                    name="administration-view",
-                ),
-            ]
-        ),
-    ),
-    path(
         "administration/<str:hash_id>/",
         include(
             [
@@ -116,6 +99,16 @@ urlpatterns = [
                     "contact/",
                     views.AdministrationContactView.as_view(),
                     name="contact",
+                ),
+                path(
+                    "pdf/",
+                    views.PDFAdministrationDetailView.as_view(),
+                    name="administration-pdf-view",
+                ),
+                path(
+                    "view/",
+                    views.AdministrationDetailView.as_view(),
+                    name="administration-view",
                 ),
             ]
         ),
