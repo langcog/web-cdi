@@ -69,8 +69,9 @@ After CI passes on master, GitHub Actions authenticates through Workload
 Identity Federation (no keys; only `langcog/web-cdi` workflows), builds the
 image on an amd64 runner, pushes it to Artifact Registry tagged with the
 commit SHA, points every job at it, runs the `migrate` job, runs
-`load-instruments` **only if** `instruments.json`, `cdi_form_csv/` or
-`cdi_forms/form_data/` changed since the running image, deploys the service,
+`load-instruments` **only if** `instruments.json`, `instrument_families.json`,
+`cdi_form_csv/` or `cdi_forms/form_data/` changed since the running image,
+deploys the service,
 and smoke-tests `/health/`, `/`, login and About — routing traffic back to the
 previous revision if that fails. Manual run: Actions → Deploy → Run workflow.
 Tofu ignores image changes, so `apply` never rolls a deploy back.
