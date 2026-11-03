@@ -15,10 +15,9 @@ from ipware.ip import get_client_ip
 
 from cdi_forms.models import Instrument_Forms
 from cdi_forms.utils import unicode_csv_reader
-from cdi_forms.views.utils import (PROJECT_ROOT, get_administration_instance,
-                                   has_backpage, language_map, model_map,
-                                   prefilled_background_form,
-                                   prefilled_cdi_data)
+from cdi_forms.views.utils import (PROJECT_ROOT, answered_parts,
+                                   get_administration_instance, has_backpage,
+                                   language_map, model_map, prefilled_cdi_data)
 from researcher_UI.models import (Administration, PaymentCode,
                                   administration_data, ip_address)
 
@@ -68,18 +67,6 @@ class AdministrationSummaryView(AdministrationByHashMixin, DetailView):
                     )
                 r = requests.post(redirect_url, data=data)
                 ctx["redirect_url"] = str(r.content, "UTF-8")
-        # Get form from database
-        background_form = prefilled_background_form(self.object)
-        ctx["background_form"] = background_form
-        try:
-            filename = os.path.realpath(
-                PROJECT_ROOT + self.object.study.demographic.path
-            )
-        except:
-            filename = "None"
-        if has_backpage(filename):
-            backpage_background_form = prefilled_background_form(self.object, False)
-            ctx["backpage_background_form"] = backpage_background_form
 
         # calc gift data
         ctx["gift_code"] = None
@@ -113,8 +100,12 @@ class AdministrationSummaryView(AdministrationByHashMixin, DetailView):
                 ctx["redeem_url"] = None
                 ctx["legal_url"] = None
 
+        prefilled_data = prefilled_cdi_data(self.object)
+        if self.object.study.show_my_answers_boolen:
+            ctx["answers"] = answered_parts(prefilled_data["parts"])
+
         # calculate graph data
-        ctx["cdi_items"] = prefilled_cdi_data(self.object)["cdi_items"]
+        ctx["cdi_items"] = prefilled_data["cdi_items"]
         cdi_items = json.loads(ctx["cdi_items"])
         categories = {}
 
@@ -190,6 +181,12 @@ class AdministrationSummaryView(AdministrationByHashMixin, DetailView):
         return super().dispatch(request, *args, **kwargs)
 
     def get(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
+        # a CAT has no item list to summarize; its own completion page takes this role
+        if self.object.study.instrument.form in settings.CAT_FORMS:
+            return redirect(
+                "cat_forms:administer_cat_form", hash_id=self.object.url_hash
+            )
+
         if not self.object.completed:
             return render(
                 request, "cdi_forms/administration_expired.html", {}
