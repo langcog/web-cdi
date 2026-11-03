@@ -356,6 +356,7 @@ class AdministrationUpdateView(AdministrationByHashMixin, UpdateView):
                 filename = "None"
             if has_backpage(filename):
                 self.object.completedSurvey = True
+            if has_backpage(filename) and self.object.study.backpage_boolean:
                 self.object.save()
                 response = reverse(
                     "backpage-background-info", args=(self.object.url_hash,)

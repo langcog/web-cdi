@@ -10,9 +10,15 @@ class StudyOwnerMixin(object):
     permission_denied_message = None
 
     def dispatch(self, request, *args, **kwargs):
-        data = json.loads(request.body)
-        username = data["username"]
-        password = data["password"]
+        try:
+            data = json.loads(request.body)
+            username = data["username"]
+            password = data["password"]
+        except (ValueError, KeyError, TypeError):
+            return JsonResponse(
+                status=400,
+                data={"error": "The request body must be JSON with username and password"},
+            )
         user = authenticate(username=username, password=password)
         if not user:
             self.permission_denied_message = "Invalid User Credentials"

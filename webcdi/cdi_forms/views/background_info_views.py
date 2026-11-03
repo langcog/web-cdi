@@ -8,7 +8,7 @@ from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.db.models import Max
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils import timezone, translation
 from django.utils.html import strip_tags
@@ -251,14 +251,6 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
         self.get_administration_instance()
-        if (
-            self.which_page == "back"
-            and not self.administration_instance.study.backpage_boolean
-        ):
-            self.administration_instance.completed = True
-            self.administration_instance.save()
-            return redirect(self.administration_instance.get_absolute_url())
-
         self.get_study_context()
         self.get_user_language()
         self.background_form = self.get_background_form()
@@ -388,6 +380,35 @@ class BackpageBackgroundInfoView(BackgroundInfoView):
         ctx["dont_show_waiver"] = True
         return ctx
 
+    def awaiting_finish(self, administration):
+        """The answers are in but the study has no backpage to finish on, e.g.
+        it was switched off after the parent submitted the form."""
+        return (
+            administration.completedSurvey
+            and not administration.completed
+            and administration.due_date > timezone.now()
+        )
+
+    def get(self, request, *args, **kwargs):
+        administration = self.get_object().administration
+        if administration.study.backpage_boolean:
+            return super().get(request, *args, **kwargs)
+        if self.awaiting_finish(administration):
+            self.template_name = "cdi_forms/backpage_finish.html"
+            return super().get(request, *args, **kwargs)
+        return redirect(administration.get_absolute_url())
+
+    def post(self, request, *args, **kwargs):
+        administration = self.get_object().administration
+        if administration.study.backpage_boolean:
+            return super().post(request, *args, **kwargs)
+        if self.awaiting_finish(administration):
+            administration.completed = True
+            administration.completed_date = timezone.now()
+            administration.last_modified = timezone.now()
+            administration.save()
+        return redirect(administration.get_absolute_url())
+
 
 class CreateBackgroundInfoView(CreateView):
     template_name = "cdi_forms/background_info.html"
@@ -399,6 +420,12 @@ class CreateBackgroundInfoView(CreateView):
     hash_id = None
     source_id = None
     which_page = "front"
+
+    def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
+        study = get_object_or_404(Study, id=kwargs["study_id"])
+        if not study.single_reusable_link_active:
+            return render(request, "cdi_forms/single_reusable_link_inactive.html")
+        return super().dispatch(request, *args, **kwargs)
 
     def get_bypass(self):
         self.bypass = self.kwargs["bypass"]
