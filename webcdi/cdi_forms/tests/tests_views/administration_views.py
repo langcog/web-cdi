@@ -555,7 +555,7 @@ class AdministrationDetailViewTest(TestCase):
         )
         with CaptureQueriesContext(connection) as queries:
             response = self.client.get(
-                reverse("administration-view", kwargs={"pk": administration.pk})
+                reverse("administration-view", kwargs={"hash_id": administration.url_hash})
             )
         self.assertEqual(response.status_code, 200)
         self.assertLessEqual(
@@ -583,7 +583,7 @@ class AdministrationDetailViewTest(TestCase):
             administration=administration, item_ID="item_1", value="produces"
         )
         page = self.client.get(
-            reverse("administration-view", kwargs={"pk": administration.pk})
+            reverse("administration-view", kwargs={"hash_id": administration.url_hash})
         ).content.decode()
         self.assertRegex(page, r"¡am!: </td>\s*<td>produce</td>")
 
