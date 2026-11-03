@@ -101,9 +101,7 @@
                         {% else %}
                         <span class="dropdown-item disabled" aria-disabled="true">Clinical report (pdf) <span class="wcdi-muted">— not available for this instrument</span></span>
                         {% endif %}
-                        {% if not study.instrument.form == 'CAT' %}
                         <button class="dropdown-item wcdi-needs-selection" type="submit" name="download-links" disabled>Participant links (csv) <span class="wcdi-needs-hint">— select rows first</span></button>
-                        {% endif %}
                     </div>
                 </div>
 

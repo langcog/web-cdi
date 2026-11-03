@@ -87,8 +87,9 @@ percentile values).
 ## Downloads that expose scores
 
 `researcher_UI/utils/download/`: `download_data.py` (items + scores),
-`download_summary.py` (scores only), `download_cdi_format.py` (CDI scoring
-format; #649 crash), `download_cat_data.py`, `download_dictionary.py`. All
+`download_summary.py` (scores only), `download_cat_data.py`,
+`download_dictionary.py`, `download_links.py`. (The CDI scoring-program zip
+export, `download_cdi_format.py`, was removed in #764.) All
 pandas-heavy and full of pandas-3 hazards (see SKILL.md "Rules that bite").
 
 ## CAT (computerized adaptive testing)

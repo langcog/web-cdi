@@ -540,7 +540,7 @@ class Reseacher_UIProcessTests(LiveServerFixturesMixin, LiveServerTestCase):
         # download summary data
         self.download("download-summary-csv")
 
-        # download adjusted scoring format
+        # download items + scores with adjusted ages
         self.download("download-study-csv-adjusted")
 
     def test_add_participants(self):
@@ -853,8 +853,7 @@ class Reseacher_UIProcessTests(LiveServerFixturesMixin, LiveServerTestCase):
 
         self.download("download-selected")
         self.download("download-selected-summary")
-        if study_obj.instrument.form not in settings.CAT_FORMS:
-            self.download("download-links")
+        self.download("download-links")
 
     def test_delete_selected(self):
         self.researcher_login_plus_instruments()

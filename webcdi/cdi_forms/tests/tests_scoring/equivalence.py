@@ -186,3 +186,48 @@ class UnknownItemTest(TestCase):
         self.assertFalse(Benchmark.objects.filter(instrument=instrument).exists())
         admin.refresh_from_db()
         self.assertTrue(admin.scored)
+
+    def test_unknown_item_logged_once_as_warning(self):
+        # #764: a full rescore logged one ERROR per response with an unknown
+        # item_ID (legacy fields such as ChildName on English WS), tripping
+        # error alerts. Now one WARNING per unknown item per scoring run.
+        instrument = Instrument.objects.create(
+            name="Tiny_WS", verbose_name="Tiny", language="Tiny", form="WS",
+            min_age=16, max_age=30,
+        )
+        InstrumentScore.objects.create(
+            instrument=instrument, title="Words", category="word",
+            scoring_measures="produces",
+        )
+        Instrument_Forms.objects.create(
+            instrument=instrument, itemID="item_1", item="ball", item_type="word",
+            category="toys", definition="ball", gloss="ball", item_order=1,
+        )
+        study = Study.objects.create(
+            researcher=User.objects.create_user("u", password="x-test-only"),
+            name="tiny", instrument=instrument,
+        )
+        admins = []
+        for n in range(3):
+            admin = Administration.objects.create(
+                study=study, subject_id=n + 1, repeat_num=1, url_hash=str(n) * 64,
+                completed=True, due_date=timezone.now(),
+            )
+            for item_id in ("item_1", "ChildName"):
+                administration_data.objects.create(
+                    administration=admin, item_ID=item_id, value="produces"
+                )
+            admins.append(admin)
+
+        f = InstrumentScore.objects.get(instrument=instrument)
+        Measure.objects.create(instrument_score=f, key="produces", value=1)
+        scoring = InstrumentScoring(instrument)
+        with self.assertLogs("debug", "WARNING") as logs:
+            for admin in admins:
+                update_summary_scores(admin, scoring)
+        unknown = [r for r in logs.records if "Unknown item_ID" in r.getMessage()]
+        self.assertEqual(len(unknown), 1)
+        self.assertEqual(unknown[0].levelname, "WARNING")
+        self.assertIn("ChildName", unknown[0].getMessage())
+        self.assertFalse([r for r in logs.records if r.levelname == "ERROR"])
+
