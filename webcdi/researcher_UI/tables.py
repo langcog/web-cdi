@@ -70,7 +70,7 @@ class StudyAdministrationTable(tables.Table):
         else:
             kind, label, tip = "new", "Not started", "The link has not been used yet"
         if record.last_modified:
-            tip += " · last activity " + timezone.localtime(record.last_modified).strftime("%-m/%-d/%Y %-I:%M %p")
+            tip += " · last activity " + timezone.localtime(record.last_modified).strftime("%b %-d, %Y %-I:%M %p")
         chip = ""
         if record.opt_out:
             chip = '<span class="wcdi-chip" title="Participant opted out of broader data sharing">opt-out</span>'
@@ -84,7 +84,7 @@ class StudyAdministrationTable(tables.Table):
         if not value:
             return mark_safe('<span class="wcdi-muted">—</span>')
         return format_html(
-            '<time data-utc="{}">{}</time>', value.isoformat(), value.strftime("%-m/%-d/%y")
+            '<time data-utc="{}">{}</time>', value.isoformat(), value.strftime("%b %-d, %Y")
         )
 
     def render_created_date(self, value):

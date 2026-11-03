@@ -44,7 +44,7 @@
 
                     <dl class="wcdi-edit-meta">
                         <dt>Administration</dt><dd>#{{ row.record.repeat_num }}</dd>
-                        <dt>Last modified</dt><dd><time data-utc="{{ row.record.last_modified|date:'c' }}">{{ row.record.last_modified|date:'n/j/y' }}</time></dd>
+                        <dt>Last modified</dt><dd><time data-utc="{{ row.record.last_modified|date:'c' }}">{{ row.record.last_modified|date:'M j, Y' }}</time></dd>
                         {% if current_study.confirm_completion %}
                         <dt>Confirmed age &amp; completion</dt><dd>{% if row.record.analysis %}Yes{% elif row.record.analysis == False %}No{% else %}&mdash;{% endif %}</dd>
                         {% endif %}
