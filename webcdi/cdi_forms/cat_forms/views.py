@@ -105,7 +105,7 @@ class CatAnswerView(View):
                 filename = "None"
             if os.path.isfile(filename):
                 administration.completedSurvey = True
-            else:
+            if not (os.path.isfile(filename) and administration.study.backpage_boolean):
                 administration.completed = True
             administration.scored = True
             administration.save()

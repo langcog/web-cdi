@@ -387,6 +387,13 @@ def save_answer(request):
     hash_id = request.POST.get("hash_id")
     administration_instance = get_administration_instance(hash_id)
 
+    # same states in which the form pages refuse edits (#739)
+    if (
+        administration_instance.completed
+        or administration_instance.due_date <= timezone.now()
+    ):
+        return HttpResponse("This form is closed.", status=409)
+
     instrument_name = (
         administration_instance.study.instrument.name
     )  # Get instrument name associated with study

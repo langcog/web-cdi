@@ -1,0 +1,12 @@
+{% extends 'cdi_forms/cdi_base.html' %}
+{% load i18n %}
+
+{% block main %}
+    {% csrf_token %}
+    <div class="row">
+        <h2>{% trans "Thank you! We appreciate your time and effort!" %}</h2>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <input id="id_submit_btn" name="btn-next" value='{% trans "Finish" %}' class="btn btn-primary" type="submit">
+    </div>
+{% endblock %}
