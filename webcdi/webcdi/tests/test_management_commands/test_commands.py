@@ -47,7 +47,16 @@ class CommandsTestCase(TestCase):
         call_command("04_populate_benchmark", *args, **opts)
 
         items = Benchmark.objects.all()
-        self.assertEqual(len(items), 47494)
+        # WS norms run 16-36 months (#767): 3,600 rows for 31-36, and the
+        # English WS file is shared with Canadian English WS
+        self.assertEqual(len(items), 53494)
+        self.assertEqual(
+            Benchmark.objects.get(
+                instrument__name="English_WS", instrument_score__title="Total Produced",
+                age=36, percentile=50,
+            ).raw_score,
+            643,  # Wordbank / 2023 manual norms, extrapolated to 36 months
+        )
 
     def test_populate_choices(self):
         args = []
