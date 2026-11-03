@@ -52,7 +52,7 @@ class EditAdministrationView(LoginRequiredMixin, StudyOwnerMixin, UpdateView):
                 return JsonResponse({"error": error}, status=400)
 
             _instances = Administration.objects.filter(
-                study=obj.study, subject_id=form.cleaned_data["subject_id_old"]
+                study=obj.study, subject_id=obj.subject_id
             )
 
             new_subject_id = int(form.cleaned_data["subject_id"])

@@ -33,7 +33,8 @@ class PDFAdministrationDetailView(LoginRequiredMixin, WeasyTemplateResponseMixin
             ids = self.request.GET.getlist("id")
             int_ids = []
             for id in ids:
-                int_ids.append(int(id))
+                if id.isdigit():
+                    int_ids.append(int(id))
             administrations = administrations.filter(pk__in=int_ids)
         return administrations
 

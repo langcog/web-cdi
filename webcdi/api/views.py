@@ -228,7 +228,7 @@ class AdministrationAPI(BaseAPIView):
     def post(self, request, *args, **kwargs):
         study_obj = Study.objects.get(pk=kwargs.pop("pk"))
         administrations = Administration.objects.filter(
-            pk=kwargs.pop("administration_id")
+            study=study_obj, pk=kwargs.pop("administration_id")
         )
         qs_json = self.get_json(request, study_obj, administrations)
 

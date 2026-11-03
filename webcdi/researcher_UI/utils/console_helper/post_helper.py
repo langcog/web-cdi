@@ -20,7 +20,11 @@ SELECTED_DOWNLOADS = (
 
 
 def post_condition(request, ids, study_obj):
-    if not ids and any(action in request.POST for action in SELECTED_DOWNLOADS):
+    # selected-row actions apply to this group's rows; other ids count as unselected
+    selected = Administration.objects.filter(study=study_obj, id__in=ids)
+    if not selected.exists() and any(
+        action in request.POST for action in SELECTED_DOWNLOADS
+    ):
         # returning None sends the researcher back to the group page (#675)
         messages.info(request, "Select at least one administration to download.")
         return None
@@ -35,12 +39,10 @@ def post_condition(request, ids, study_obj):
             )
             return None
         else:
-            num_ids = map(int, ids)  # Force numeric IDs into a list of integers
             new_administrations = []
             sids_created = set()
 
-            for nid in num_ids:  # For each ID number
-                admin_instance = Administration.objects.get(id=nid)
+            for admin_instance in selected:
                 sid = admin_instance.subject_id
                 if sid in sids_created:
                     continue
@@ -62,18 +64,13 @@ def post_condition(request, ids, study_obj):
             Administration.objects.bulk_create(new_administrations)
 
     elif "delete-selected" in request.POST:
-        num_ids = list(set(map(int, ids)))
-        Administration.objects.filter(id__in=num_ids).update(is_active=False)
+        selected.update(is_active=False)
 
     elif "download-links" in request.POST:
-        administrations = []
-        num_ids = list(set(map(int, ids)))  # Force IDs into a list of integers
-        administrations = Administration.objects.filter(id__in=ids)
-        return download_links.download_links(request, study_obj, administrations)
+        return download_links.download_links(request, study_obj, selected)
 
     elif "download-selected" in request.POST:  # If 'Download Selected Data' was clicked
-        num_ids = list(set(map(int, ids)))  # Force IDs into a list of integers
-        administrations = Administration.objects.filter(id__in=num_ids)
+        administrations = selected
         if study_obj.instrument.form in settings.CAT_FORMS:
             return download_cat_data.download_cat_data(
                 request, study_obj, administrations
@@ -84,8 +81,7 @@ def post_condition(request, ids, study_obj):
     elif (
         "download-selected-adjusted" in request.POST
     ):  # If 'Download Selected Data' was clicked
-        num_ids = list(set(map(int, ids)))  # Force IDs into a list of integers
-        administrations = Administration.objects.filter(id__in=num_ids)
+        administrations = selected
         if study_obj.instrument.form in settings.CAT_FORMS:
             return download_cat_data.download_cat_data(
                 request, study_obj, administrations, adjusted=True
@@ -96,8 +92,7 @@ def post_condition(request, ids, study_obj):
             )
 
     elif "download-selected-summary" in request.POST:
-        num_ids = list(set(map(int, ids)))  # Force IDs into a list of integers
-        administrations = Administration.objects.filter(id__in=num_ids)
+        administrations = selected
         if study_obj.instrument.form in settings.CAT_FORMS:
             return download_cat_data.download_cat_data(
                 request, study_obj, administrations
