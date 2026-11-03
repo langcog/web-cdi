@@ -208,6 +208,8 @@ class AdministrationSummaryView(AdministrationByHashMixin, DetailView):
 class AdministrationDetailView(DetailView):
     model = Administration
     template_name = "cdi_forms/pdf_administration.html"
+    slug_field = "url_hash"
+    slug_url_kwarg = "hash_id"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -287,7 +289,7 @@ class AdministrationUpdateView(AdministrationByHashMixin, UpdateView):
                 args=(self.object.url_hash, request.POST["next"]),
             )
         if "btn-back" in request.POST:
-            response = reverse("background-info", args=(self.object.backgroundinfo.pk,))
+            response = reverse("background-info", args=(self.object.url_hash,))
         if "btn-submit" in request.POST:
             # Some studies may require successfully passing a ReCaptcha test for submission. If so, get for a passing response before marking form as complete.
             result = {"success": None}
@@ -359,7 +361,7 @@ class AdministrationUpdateView(AdministrationByHashMixin, UpdateView):
                 self.object.completedSurvey = True
                 self.object.save()
                 response = reverse(
-                    "backpage-background-info", args=(self.object.backgroundinfo.pk,)
+                    "backpage-background-info", args=(self.object.url_hash,)
                 )
             else:
                 self.object.completed = True

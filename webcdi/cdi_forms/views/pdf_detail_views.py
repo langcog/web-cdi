@@ -10,6 +10,8 @@ from researcher_UI.models import Administration
 class PDFAdministrationDetailView(WeasyTemplateResponseMixin, DetailView):
     model = Administration
     template_name = "cdi_forms/pdf_administration.html"
+    slug_field = "url_hash"
+    slug_url_kwarg = "hash_id"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -23,5 +25,5 @@ class PDFAdministrationDetailView(WeasyTemplateResponseMixin, DetailView):
 
     def get(self, request, *args, **kwargs):
         if self.get_object().study.instrument.language == "Korean":
-            return redirect("administration-view", pk=self.get_object().pk)
+            return redirect("administration-view", hash_id=self.get_object().url_hash)
         return super().get(request, *args, **kwargs)

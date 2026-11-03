@@ -90,6 +90,8 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
     form_class = BackgroundForm
     background_form = None
     which_page = "front"
+    slug_field = "administration__url_hash"
+    slug_url_kwarg = "hash_id"
 
     def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
         language = language_map(
@@ -362,10 +364,7 @@ class BackgroundInfoView(AdministrationMixin, UpdateView):
                         last_modified=timezone.now()
                     )  # Update last_modified
                     request.method = "GET"
-                    background_instance = BackgroundInfo.objects.get(
-                        administration=self.administration_instance
-                    )
-                    return redirect("background-info", pk=background_instance.pk)
+                    return redirect("background-info", hash_id=self.hash_id)
 
             else:
                 logger.debug(

@@ -164,9 +164,7 @@ class AdministerAdministraionView(UpdateView):
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         if "btn-back" in request.POST:
-            return redirect(
-                "cat_forms:background-info", pk=self.object.backgroundinfo.id
-            )
+            return redirect("cat_forms:background-info", hash_id=self.hash_id)
         # answers arrive through CatAnswerView; any other POST just reloads
         return redirect("cat_forms:administer_cat_form", hash_id=self.hash_id)
 
@@ -212,13 +210,11 @@ class AdministerAdministraionView(UpdateView):
             )
             response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
             return response
-        background_instance, created = BackgroundInfo.objects.get_or_create(
-            administration=self.object
-        )
+        BackgroundInfo.objects.get_or_create(administration=self.object)
         if self.object.completedSurvey:
-            return redirect("backpage-background-info", pk=background_instance.pk)
+            return redirect("backpage-background-info", hash_id=self.hash_id)
         elif not self.object.completedBackgroundInfo:
-            return redirect("background-info", pk=background_instance.pk)
+            return redirect("background-info", hash_id=self.hash_id)
 
         cat_response, created = CatResponse.objects.get_or_create(
             administration=self.object

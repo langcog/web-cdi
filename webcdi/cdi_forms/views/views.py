@@ -125,10 +125,7 @@ def cdi_form(request, hash_id):
                     last_modified=timezone.now()
                 )  # Update last_modified
                 request.method = "GET"
-                background_instance = BackgroundInfo.objects.get(
-                    administration=administration_instance
-                )
-                return redirect("background-info", pk=background_instance.pk)
+                return redirect("background-info", hash_id=hash_id)
 
             elif "btn-submit" in request.POST and request.POST["btn-submit"] == _(
                 "Submit"
@@ -221,11 +218,8 @@ def cdi_form(request, hash_id):
                         completedSurvey=True
                     )
                     request.method = "GET"
-                    background_instance = BackgroundInfo.objects.get(
-                        administration=administration_instance
-                    )
                     return redirect(
-                        "backpage-background-info", pk=background_instance.pk
+                        "backpage-background-info", hash_id=hash_id
                     )  # Render back page
                 else:
                     Administration.objects.filter(url_hash=hash_id).update(
@@ -283,18 +277,13 @@ def administer_cdi_form(request, hash_id):
             requests_log.objects.create(url_hash=hash_id, request_type="POST")
 
             if "background-info-form" in request.POST:
-                return redirect(
-                    "background-info", pk=administration_instance.backgroundinfo.pk
-                )
+                return redirect("background-info", hash_id=hash_id)
 
             elif "cdi-form" in request.POST:
                 return cdi_form(request, hash_id)
 
             elif "back-page" in request.POST:
-                return redirect(
-                    "backpage-background-info",
-                    pk=administration_instance.backgroundinfo.pk,
-                )
+                return redirect("backpage-background-info", hash_id=hash_id)
 
             else:
                 refresh = True
@@ -308,11 +297,11 @@ def administer_cdi_form(request, hash_id):
             not administration_instance.completed
             and administration_instance.due_date > timezone.now()
         ):
-            background_instance, created = BackgroundInfo.objects.get_or_create(
+            BackgroundInfo.objects.get_or_create(
                 administration=administration_instance
             )
             if administration_instance.completedSurvey:
-                return redirect("backpage-background-info", pk=background_instance.pk)
+                return redirect("backpage-background-info", hash_id=hash_id)
             elif administration_instance.completedBackgroundInfo:
                 if administration_instance.page_number > 0:
                     return redirect(
@@ -325,7 +314,7 @@ def administer_cdi_form(request, hash_id):
                         "instructions", hash_id=administration_instance.url_hash
                     )
             else:
-                return redirect("background-info", pk=background_instance.pk)
+                return redirect("background-info", hash_id=hash_id)
         else:
             # only printable
             return redirect(reverse("administration_summary_view", args=(hash_id,)))
