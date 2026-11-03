@@ -77,6 +77,7 @@ class EditAdministrationView(LoginRequiredMixin, StudyOwnerMixin, UpdateView):
 
 INTEGER_FIELD_MAX = 2147483647
 TEXT_ID_MAX = 255  # BackgroundInfo.source_id and event_id
+OUT_OF_RANGE_MESSAGE = "A value in this no demographic call is out of range."
 
 
 def no_demographic_link_values(params):
@@ -100,7 +101,7 @@ def no_demographic_link_values(params):
         or len(params["source_id"]) > TEXT_ID_MAX
         or len(params.get("event_id", "")) > TEXT_ID_MAX
     ):
-        raise Http404("A value in this no demographic call is out of range.")
+        raise Http404(OUT_OF_RANGE_MESSAGE)
     return age, sex, offset
 
 
@@ -158,21 +159,6 @@ class AddNewParent(DetailView):
                 )
                 if not "source_id" in request.GET:
                     raise Http404("source_id must be included in a no demographic call.")
-                if BackgroundInfo.objects.filter(
-                    source_id=request.GET["source_id"],
-                    event_id=event_id,
-                    administration__study=self.object,
-                ).exists():
-                    background_info = BackgroundInfo.objects.get(
-                        source_id=request.GET["source_id"],
-                        event_id=event_id,
-                        administration__study=self.object,
-                    )
-                    return redirect(
-                        "administer_cdi_form",
-                        hash_id=background_info.administration.url_hash,
-                    )
-
                 if (
                     not "source_id" in request.GET
                     or not "age" in request.GET
@@ -182,6 +168,24 @@ class AddNewParent(DetailView):
                         "Age, sex and source_id must be included in the a no demographic call."
                     )
                 age, sex, offset = no_demographic_link_values(request.GET)
+
+                same_event = BackgroundInfo.objects.filter(
+                    source_id=request.GET["source_id"],
+                    event_id=event_id,
+                    administration__study=self.object,
+                )
+                if same_event.exists():
+                    # only a link with the row's own age and sex opens it; any
+                    # other answers as a link with a value out of range does
+                    background_info = same_event.filter(
+                        age=age, sex__iexact=sex
+                    ).first()
+                    if background_info is None:
+                        raise Http404(OUT_OF_RANGE_MESSAGE)
+                    return redirect(
+                        "administer_cdi_form",
+                        hash_id=background_info.administration.url_hash,
+                    )
 
                 if BackgroundInfo.objects.filter(
                     source_id=request.GET["source_id"],

@@ -77,7 +77,7 @@
             <p class="wcdi-method-help">Paste this into your external platform (e.g. Prolific). It does not open an administration
               itself; it lets the platform create one per child and records the platform's participant ID as
               <code>source_id</code>. <code>event_id</code> is optional &mdash; a different event_id creates a new administration.
-              {% if not object.no_demographic_boolean %}For a link with no source ID, use the reusable link.{% endif %}</p>
+              {% if not object.no_demographic_boolean %}For a link with no source ID, use the reusable link.{% else %}A link with the same <code>source_id</code> and <code>event_id</code> reopens that administration only if it carries the same <code>age</code> and <code>sex</code>; any other values get a &ldquo;not found&rdquo; page.{% endif %}</p>
             <div class="wcdi-link-row">
               <input type="text" readonly class="form-control" id="external_link_input"
                      value="{{ request.scheme }}://{{ request.META.HTTP_HOST }}{% url 'researcher_ui:administer_new_parent' username study_name %}?source_id={% verbatim %}{{%source_id%}}{% endverbatim %}&event_id={% verbatim %}{{%event_id%}}{% endverbatim %}{% if object.no_demographic_boolean %}&age={% verbatim %}{{%age%}}{% endverbatim %}&sex={% verbatim %}{{%sex%}}{% endverbatim %}&offset={% verbatim %}{{%offset%}}{% endverbatim %}{% endif %}">
