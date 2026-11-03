@@ -1,0 +1,35 @@
+{# Researcher-facing notice about the 2026 move. Parent forms don't use the templates that include this. Remove the includes when it has run its course. #}
+<div id="wcdi-announcement" class="d-print-none" role="region" aria-label="Site announcement"
+     style="background: var(--wcdi-primary-wash); border-bottom: 1px solid var(--wcdi-primary); padding: 18px 16px;">
+    <div style="max-width: 960px; margin: 0 auto; display: flex; gap: 16px; align-items: flex-start;">
+        <div style="flex: 1; min-width: 0;">
+            <h2 style="font-size: 20px; margin: 0 0 4px; color: var(--wcdi-primary);">Web-CDI has moved to a new home</h2>
+            <p style="margin: 0;">
+                Your account, groups and data came with you, and participant links still work.
+                We also fixed many bugs and updated how some percentiles are calculated, so scores
+                may differ from files you downloaded earlier.
+                <a href="{% url 'changelog' %}">See what changed</a>.
+            </p>
+        </div>
+        <button type="button" class="close" aria-label="Dismiss this announcement"><span aria-hidden="true">&times;</span></button>
+    </div>
+</div>
+<script>
+    (function () {
+        var banner = document.getElementById('wcdi-announcement');
+        var key = 'webcdi-announcement-2026-move';
+        // private windows can refuse storage: then it's dismissed for this page only
+        try {
+            if (localStorage.getItem(key)) {
+                banner.remove();
+                return;
+            }
+        } catch (e) {}
+        banner.querySelector('button').addEventListener('click', function () {
+            banner.remove();
+            try {
+                localStorage.setItem(key, '1');
+            } catch (e) {}
+        });
+    })();
+</script>

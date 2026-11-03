@@ -1,0 +1,83 @@
+{% extends 'researcher_UI/base.html' %}
+
+{% block title %}What's new in Web-CDI{% endblock %}
+
+{% block main %}
+    <div style="max-width: 820px;">
+        <h1 style="font-size:26px; margin:18px 0 8px;">What's new in Web-CDI</h1>
+        <p style="color:#5a6b76;">
+            In 2026 we moved Web-CDI to new hosting and worked through a long list of
+            bugs. Here is what changes for you. Questions? Write to
+            <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>.
+        </p>
+
+        <div class="wcdi-card-panel" style="margin-bottom:16px;">
+            <h2>What stays the same</h2>
+            <ul style="margin-bottom:0;">
+                <li>Your account, groups, participants and their responses came with you.</li>
+                <li>The site address is the same, and links you have already sent to parents still work.</li>
+                <li>You may need to log in again once.</li>
+            </ul>
+        </div>
+
+        <div class="wcdi-card-panel" style="margin-bottom:16px;">
+            <h2>Scores and percentiles</h2>
+            <p>
+                <b>We recalculated the scores of all existing administrations, so percentiles in a
+                new download may differ from a file you downloaded earlier.</b>
+                Keep your earlier files if you need to reproduce an analysis you already ran.
+            </p>
+            <ul style="margin-bottom:0;">
+                <li>Published percentile tables with a value at every percentile are used exactly as published.</li>
+                <li>Tables that give only every fifth percentile are now filled in by straight-line interpolation. Percentiles from these tables rose by about 2 points on average.</li>
+                <li>Scores below the 1st percentile are reported as &ldquo;&lt;1&rdquo;, and the top of the scale is 99. When several percentiles share the same raw score, the highest applies.</li>
+                <li>English and Spanish Words &amp; Sentences use the same norms as Wordbank, extended to 36 months.</li>
+                <li>Sex-specific percentiles are marked &ldquo;not computed&rdquo; when a child's sex is recorded as something other than male or female.</li>
+                <li>Prematurity adjustment applies only when the parent said the child was born early or late and gave the number of weeks.</li>
+                <li>CAT summary scores were corrected.</li>
+            </ul>
+        </div>
+
+        <div class="wcdi-card-panel" style="margin-bottom:16px;">
+            <h2>Changes that may affect how you work</h2>
+            <ul style="margin-bottom:0;">
+                <li>Participant IDs with leading zeros (such as 007) are now refused when you add them, because the zeros were being dropped without warning.</li>
+                <li>The fixed-width zip export for the old CDI scoring program has been removed. It was already off the Download menu.</li>
+                <li>New registrations can't reuse an email address that already has an account.</li>
+                <li>Background columns in data downloads now match what your group's form actually collects, so a file may have fewer columns than before.</li>
+            </ul>
+        </div>
+
+        <div class="wcdi-card-panel" style="margin-bottom:16px;">
+            <h2>Improvements for researchers</h2>
+            <ul style="margin-bottom:0;">
+                <li>Log in with your username or your email address.</li>
+                <li>Group search now finds partial matches, keeps your search term and works with the Enter key.</li>
+                <li>Deleting administrations works again, and counts on the dashboard and group pages leave out deleted ones.</li>
+                <li>Uploading a file of participant IDs, or editing an ID to one already in use, now gives a clear message instead of hanging.</li>
+                <li>Downloads and clinical reports are more reliable: several crashes and blank pages are fixed, and selecting only unfinished forms now explains why there's nothing to download.</li>
+                <li>Participant links can be downloaded for every form, including CAT.</li>
+                <li>Dates in tables are unambiguous (Nov 2, 2026), and status labels are easier to tell apart.</li>
+                <li>Studies that receive completion notices get one per completed form, with automatic retries if their server doesn't respond.</li>
+            </ul>
+        </div>
+
+        <div class="wcdi-card-panel" style="margin-bottom:16px;">
+            <h2>Improvements for parents</h2>
+            <ul style="margin-bottom:0;">
+                <li>Saving and coming back returns parents to the section they were on, and they aren't asked to consent a second time.</li>
+                <li>Pages load faster, especially the results page after finishing a form.</li>
+                <li>Clearer buttons to show or hide the results graph and answers.</li>
+                <li>Corrected typos and question layout on several forms.</li>
+            </ul>
+        </div>
+
+        <div class="wcdi-card-panel" style="margin-bottom:16px;">
+            <h2>Under the hood</h2>
+            <ul style="margin-bottom:0;">
+                <li>Up-to-date software and security patches, with stricter checks on who can see and change what.</li>
+                <li>Automated testing and deployment, monitoring, and regular backups.</li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}

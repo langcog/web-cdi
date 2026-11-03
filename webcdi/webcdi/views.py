@@ -27,6 +27,10 @@ class DocumentationView(TemplateView):
     template_name = "webcdi/documentation.html"
 
 
+class ChangelogView(TemplateView):
+    template_name = "webcdi/changelog.html"
+
+
 @method_decorator([never_cache], name="dispatch")
 class HomeView(TemplateView):
     template_name = "webcdi/home.html"
