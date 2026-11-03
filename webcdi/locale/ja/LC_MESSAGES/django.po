@@ -2064,6 +2064,22 @@ msgstr ""
 msgid "To redeem your gift card, visit "
 msgstr ""
 
+#: cdi_forms/templates/cdi_forms/administration_summary.html
+msgid "Hide my graph"
+msgstr "グラフを非表示にする"
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html
+msgid "Show my graph"
+msgstr "グラフを表示する"
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html
+msgid "Show my answers"
+msgstr "回答を表示する"
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html
+msgid "Hide my answers"
+msgstr "回答を非表示にする"
+
 #: cdi_forms/templates/cdi_forms/administration_summary.html:222
 msgid "Graph My Data!"
 msgstr "データをグラフで表示する"

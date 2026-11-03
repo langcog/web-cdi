@@ -5,11 +5,13 @@ from unittest import mock
 from django.contrib.auth.models import User
 from django.core import mail
 from django.core.management import call_command
+from django.db import connection
 from django.test import TestCase, tag
+from django.test.utils import CaptureQueriesContext
 from django.urls import reverse
 from django.utils import timezone
 
-from cdi_forms.models import BackgroundInfo
+from cdi_forms.models import BackgroundInfo, Instrument_Forms
 from researcher_UI.models import (Administration, Demographic, Instrument,
                                   PaymentCode, Study, administration_data)
 from researcher_UI.tests import generate_fake_results
@@ -82,8 +84,137 @@ class AdministrationSummaryViewTest(TestCase):
             "administration_summary_view", kwargs={"hash_id": administration.url_hash}
         )
         page = self.client.get(url).content.decode()
-        self.assertIn("Show Me My Answers", page)  # the summary page, not "expired"
+        self.assertIn("Show my answers", page)  # the summary page, not "expired"
         self.assertLess(page.index("jquery-3.7.1.min.js"), page.index("bootstrap/bootstrap.min.js"))
+
+    def complete_with_answers(self):
+        """Completes the administration with every item answered with the
+        first choice (or "yes" if it has none); returns the summary URL."""
+        self.administration.completed = True
+        self.administration.save()
+        items = Instrument_Forms.objects.filter(
+            instrument=self.study.instrument
+        ).select_related("choices")
+        administration_data.objects.bulk_create(
+            administration_data(
+                administration=self.administration,
+                item_ID=item.itemID,
+                value=(
+                    item.choices.choice_set.split(";")[0].strip()
+                    if item.choices
+                    else "yes"
+                ),
+            )
+            for item in items
+        )
+        return self.url
+
+    def test_summary_queries_do_not_grow_with_answers(self):
+        # staging QA: 15+ s to open a completed WS link, from one query per
+        # answer and one per section (444 queries for ~400 answers)
+        url = self.complete_with_answers()
+        self.assertGreater(self.administration.administration_data_set.count(), 500)
+        with CaptureQueriesContext(connection) as queries:
+            response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertLessEqual(
+            len(queries), 15, "\n".join(q["sql"][:120] for q in queries)
+        )
+
+    def test_graph_data_counts(self):
+        self.administration.completed = True
+        self.administration.save()
+        items = Instrument_Forms.objects.filter(
+            instrument=self.study.instrument, item_type="word", category="sounds"
+        ).order_by("item_order")
+        answers = {items[0]: "produces", items[1]: "produces", items[2]: "understands"}
+        phrase = Instrument_Forms.objects.filter(
+            instrument=self.study.instrument
+        ).exclude(item_type="word")[0]
+        administration_data.objects.bulk_create(
+            [
+                administration_data(
+                    administration=self.administration,
+                    item_ID=item.itemID,
+                    value=value,
+                )
+                for item, value in answers.items()
+            ]
+            # not a word: must not count towards any category
+            + [
+                administration_data(
+                    administration=self.administration,
+                    item_ID=phrase.itemID,
+                    value="produces",
+                ),
+            ]
+        )
+        graph_data = self.client.get(self.url).context["graph_data"]
+        self.assertEqual(graph_data["sounds"]["count"], items.count())
+        self.assertEqual(graph_data["sounds"]["produces"], 2)
+        self.assertEqual(graph_data["sounds"]["understands"], 3)
+        self.assertEqual(sum(c["produces"] for c in graph_data.values()), 2)
+        self.assertEqual(sum(c["understands"] for c in graph_data.values()), 3)
+
+    def test_toggles_say_they_show_and_hide(self):
+        # staging QA: the graph starts open, so "Graph My Data!" closed it;
+        # the answers opened out of sight under padding-top:220px
+        generate_fake_results(self.study, 1)
+        administration = Administration.objects.filter(completed=True)[0]
+        url = reverse(
+            "administration_summary_view", kwargs={"hash_id": administration.url_hash}
+        )
+        page = self.client.get(url).content.decode()
+        for label in [
+            "Hide my graph",
+            "Show my graph",
+            "Show my answers",
+            "Hide my answers",
+        ]:
+            self.assertIn(label, page)
+        # initial states match what is open: graph open, answers closed
+        self.assertIn(
+            'href="#graph_data" data-toggle="collapse" role="button" aria-expanded="true"',
+            page,
+        )
+        self.assertIn(
+            'href="#filled_form" data-toggle="collapse" role="button" aria-expanded="false"',
+            page,
+        )
+        self.assertNotIn("padding-top:220px", page)
+        self.assertNotIn("height: 90vh", page)
+        self.assertIn("shown.bs.collapse", page)
+
+    def test_toggle_labels_are_translated(self):
+        for language, form, label in [
+            ("Spanish", "WS", "Ocultar mi gráfico"),
+            ("French Quebec", "WS", "Masquer mes réponses"),
+            ("Korean", "WS", "내 그래프 숨기기"),
+        ]:
+            with self.subTest(language=language):
+                instrument = Instrument.objects.get(language=language, form=form)
+                study = Study.objects.create(
+                    researcher=self.user,
+                    name=f"{language} Test Study",
+                    instrument=instrument,
+                    redirect_url="https://example.com/",
+                )
+                administration = Administration.objects.create(
+                    study=study,
+                    subject_id=1,
+                    repeat_num=1,
+                    url_hash=random_url_generator(),
+                    completed=True,
+                    due_date=timezone.now(),
+                )
+                BackgroundInfo.objects.create(administration=administration, age=20)
+                response = self.client.get(
+                    reverse(
+                        "administration_summary_view",
+                        kwargs={"hash_id": administration.url_hash},
+                    )
+                )
+                self.assertContains(response, label)
 
     def test_completed_WG_get(self):
         self.client.force_login(self.user)
@@ -560,6 +691,109 @@ class AdministrationUpdateViewTest(TestCase):
             with self.subTest(button=button):
                 self.client.post(self.section_url(4), payload)
                 self.assertEqual(self.resume_url(), self.section_url(resume_at))
+
+    def test_section_queries_do_not_grow_with_enablers(self):
+        # the last English WS section's items are shown depending on item_760;
+        # each one's dependency used to be looked up in the database (91 queries)
+        administration_data.objects.create(
+            administration=self.administration, item_ID="item_760", value="often"
+        )
+        with CaptureQueriesContext(connection) as queries:
+            response = self.client.get(self.section_url(31))
+        self.assertEqual(response.status_code, 200)
+        self.assertGreater(len(response.context["data"]["objects"]), 30)
+        self.assertLessEqual(
+            len(queries), 10, "\n".join(q["sql"][:120] for q in queries)
+        )
+
+    def test_enabled_items_depend_on_the_enabler_answer(self):
+        items = Instrument_Forms.objects.filter(
+            instrument=self.study.instrument, enabler="item_760"
+        )
+        self.assertGreater(items.count(), 0)
+        complexity = set(items.filter(category="complexity").values_list("itemID", flat=True))
+        self.assertGreater(len(complexity), 30)
+
+        def shown():
+            data = self.client.get(self.section_url(31)).context["data"]
+            return {i["itemID"] for i in data["objects"]}
+
+        self.assertEqual(shown() & complexity, set())  # not answered
+        for value, expected in [
+            ("often", complexity),
+            ("sometimes", complexity),
+            ("not yet", set()),
+        ]:
+            with self.subTest(item_760=value):
+                administration_data.objects.update_or_create(
+                    administration=self.administration,
+                    item_ID="item_760",
+                    defaults={"value": value},
+                )
+                self.assertEqual(shown() & complexity, expected)
+
+    def test_saving_a_section_is_one_write(self):
+        # "Next" re-posts the whole page; each item used to cost ~7-9 queries
+        items = list(
+            Instrument_Forms.objects.filter(
+                instrument=self.study.instrument, item_type="word"
+            ).order_by("item_order")[:40]
+        )
+        saved, changed, new = items[0], items[1], items[2:]
+        for item, value in [(saved, "produces"), (changed, "understands")]:
+            administration_data.objects.create(
+                administration=self.administration, item_ID=item.itemID, value=value
+            )
+        payload = {
+            "btn-next": True,
+            "next": 3,
+            saved.itemID: "produces",
+            changed.itemID: "produces",
+        }
+        payload.update({item.itemID: "produces" for item in new})
+        with CaptureQueriesContext(connection) as queries:
+            response = self.client.post(self.section_url(2), payload)
+        self.assertEqual(response.status_code, 302)
+        self.assertLessEqual(
+            len(queries), 10, "\n".join(q["sql"][:120] for q in queries)
+        )
+        self.assertEqual(
+            dict(
+                administration_data.objects.filter(
+                    administration=self.administration
+                ).values_list("item_ID", "value")
+            ),
+            {item.itemID: "produces" for item in items},
+        )
+
+    def test_post_ignores_values_outside_the_item_choices(self):
+        word = Instrument_Forms.objects.filter(
+            instrument=self.study.instrument, item_type="word"
+        ).first()
+        administration_data.objects.create(
+            administration=self.administration, item_ID=word.itemID, value="produces"
+        )
+        textbox = Instrument_Forms.objects.filter(
+            instrument=self.study.instrument, choices__isnull=True
+        ).first()
+        response = self.client.post(
+            self.section_url(2),
+            {
+                "btn-save": True,
+                word.itemID: "not a choice",
+                textbox.itemID: "",
+                "not_an_item": "produces",
+            },
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(
+            list(
+                administration_data.objects.filter(
+                    administration=self.administration
+                ).values_list("item_ID", "value")
+            ),
+            [(word.itemID, "produces")],
+        )
 
     def test_section_past_the_end_shows_the_last_section(self):
         # English WS has sections 1-31

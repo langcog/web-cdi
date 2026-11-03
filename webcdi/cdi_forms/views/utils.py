@@ -2,6 +2,7 @@ import json
 import logging
 import os
 import re
+from collections import defaultdict
 from pathlib import Path
 
 from django.conf import settings
@@ -156,14 +157,22 @@ def prefilled_cdi_data(administration_instance):
             + settings.LANGUAGE_DICT[administration_instance.study.instrument.language]
         ]
 
+        # Load the instrument's items once; sections then pick theirs by category or type
+        items_by_category = defaultdict(list)
+        items_by_type = defaultdict(list)
+        for row in instrument_model.values(*field_values):
+            items_by_category[row["category"]].append(row)
+            items_by_type[row["item_type"]].append(row)
+
         # As some items are nested on different levels, carefully parse and store items for rendering.
         for part in data["parts"]:
             for item_type in part["types"]:
                 if "sections" in item_type:
                     for section in item_type["sections"]:
-                        group_objects = instrument_model.filter(
-                            category__exact=section["id"]
-                        ).values(*field_values)
+                        # copies: cdi_items adds to them, and a row is in both dicts
+                        group_objects = [
+                            dict(row) for row in items_by_category[section["id"]]
+                        ]
                         if "type" not in section:
                             section["type"] = item_type["type"]
                         x = cdi_items(
@@ -179,9 +188,7 @@ def prefilled_cdi_data(administration_instance):
                             section["starred"] = "*Or the word used in your family"
 
                 else:
-                    group_objects = instrument_model.filter(
-                        item_type__exact=item_type["id"]
-                    ).values(*field_values)
+                    group_objects = [dict(row) for row in items_by_type[item_type["id"]]]
                     x = cdi_items(
                         group_objects,
                         item_type["type"],

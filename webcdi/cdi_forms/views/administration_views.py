@@ -25,7 +25,22 @@ from researcher_UI.models import (Administration, PaymentCode,
 logger = logging.getLogger("debug")
 
 
-class AdministrationSummaryView(DetailView):
+class AdministrationByHashMixin:
+    """Fetches the Administration by URL hash once per request (dispatch, the
+    generic views and get_context_data all ask for it)."""
+
+    def get_object(self, queryset=None):
+        if not getattr(self, "object", None):
+            self.object = get_object_or_404(
+                Administration.objects.select_related(
+                    "study__instrument", "study__demographic", "backgroundinfo"
+                ),
+                url_hash=self.kwargs["hash_id"],
+            )
+        return self.object
+
+
+class AdministrationSummaryView(AdministrationByHashMixin, DetailView):
     model = Administration
     template_name = "cdi_forms/administration_summary.html"
 
@@ -140,16 +155,19 @@ class AdministrationSummaryView(DetailView):
         prefilled_data_list = administration_data.objects.filter(
             administration=self.object
         ).values("item_ID", "value")
+        word_categories = dict(
+            Instrument_Forms.objects.filter(
+                instrument=self.object.study.instrument, item_type="word"
+            ).values_list("itemID", "category")
+        )
         for item in prefilled_data_list:
-            instance = Instrument_Forms.objects.get(
-                itemID=item["item_ID"], instrument=self.object.study.instrument
-            )
-            if instance.item_type == "word":
+            category = word_categories.get(item["item_ID"])
+            if category is not None:
                 if item["value"] == "produces":
-                    categories[instance.category]["produces"] += 1
-                    categories[instance.category]["understands"] += 1
+                    categories[category]["produces"] += 1
+                    categories[category]["understands"] += 1
                 if item["value"] == "understands":
-                    categories[instance.category]["understands"] += 1
+                    categories[category]["understands"] += 1
 
         ctx["graph_data"] = categories
         ctx["language_code"] = settings.LANGUAGE_DICT[
@@ -163,10 +181,6 @@ class AdministrationSummaryView(DetailView):
             return ["cdi_forms/expired.html"]
         else:
             return ["cdi_forms/administration_summary.html"]
-
-    def get_object(self, queryset=None):
-        self.object = get_object_or_404(Administration, url_hash=self.kwargs["hash_id"])
-        return self.object
 
     def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
         self.get_object()
@@ -212,7 +226,7 @@ class AdministrationDetailView(DetailView):
         return super().dispatch(request, *args, **kwargs)
 
 
-class AdministrationUpdateView(UpdateView):
+class AdministrationUpdateView(AdministrationByHashMixin, UpdateView):
     model = Administration
     template_name = "cdi_forms/administration_form.html"
     fields = ["id"]
@@ -230,10 +244,6 @@ class AdministrationUpdateView(UpdateView):
         )
         ctx["language_code"] = language_map(self.get_object().study.instrument.language)
         return ctx
-
-    def get_object(self, queryset=None):
-        self.object = get_object_or_404(Administration, url_hash=self.kwargs["hash_id"])
-        return self.object
 
     def get_instrument(self):
         self.instrument = model_map(self.object.study.instrument.name)
@@ -361,30 +371,29 @@ class AdministrationUpdateView(UpdateView):
                     "administration_summary_view", args=(self.object.url_hash,)
                 )
 
-        for (
-            key
-        ) in (
-            request.POST
-        ):  # Parse responses and individually save each item's response (empty checkboxes or radiobuttons are not saved)
-            items = self.instrument.filter(itemID=key)
-            if len(items) == 1:
-                item = items[0]
-                value = request.POST[key]
-                if item.choices:
-                    choices = map(str.strip, item.choices.choice_set_en.split(";"))
-                    if value in choices:
-                        administration_data.objects.update_or_create(
-                            administration=self.object,
-                            item_ID=key,
-                            defaults={"value": value},
-                        )
-                else:
-                    if value:
-                        administration_data.objects.update_or_create(
-                            administration=self.object,
-                            item_ID=key,
-                            defaults={"value": value},
-                        )
+        # Parse responses and save them in one statement (empty checkboxes or radiobuttons are not saved)
+        responses = {}
+        for item in self.instrument.filter(itemID__in=list(request.POST)).select_related(
+            "choices"
+        ):
+            value = request.POST[item.itemID]
+            if item.choices:
+                choices = map(str.strip, item.choices.choice_set_en.split(";"))
+                if value in choices:
+                    responses[item.itemID] = value
+            elif value:
+                responses[item.itemID] = value
+        administration_data.objects.bulk_create(
+            [
+                administration_data(
+                    administration=self.object, item_ID=item_id, value=value
+                )
+                for item_id, value in responses.items()
+            ],
+            update_conflicts=True,
+            unique_fields=["administration", "item_ID"],
+            update_fields=["value"],
+        )
         # page_number is where the parent resumes: the section they are being
         # sent to (Save and "Go back to Background Info" keep the current one)
         resume_section = int(self.kwargs.get("section", 0))
@@ -420,15 +429,8 @@ class AdministrationUpdateView(UpdateView):
         remove_list = []
         for obj in object_group:
             if obj["enabler"]:
-                if administration_data.objects.filter(
-                    administration=self.object, item_ID=obj["enabler"]
-                ).exists():
-                    if (
-                        not administration_data.objects.get(
-                            administration=self.object, item_ID=obj["enabler"]
-                        ).value
-                        in obj["enable_response"]
-                    ):
+                if obj["enabler"] in prefilled_data:
+                    if not prefilled_data[obj["enabler"]] in obj["enable_response"]:
                         remove_list.append(obj)
                         continue
                 else:

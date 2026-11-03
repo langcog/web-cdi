@@ -2098,6 +2098,22 @@ msgstr ""
 msgid "To redeem your gift card, visit "
 msgstr ""
 
+#: cdi_forms/templates/cdi_forms/administration_summary.html
+msgid "Hide my graph"
+msgstr "Mijn grafiek verbergen"
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html
+msgid "Show my graph"
+msgstr "Mijn grafiek weergeven"
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html
+msgid "Show my answers"
+msgstr "Achtergrondvragen weergeven"
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html
+msgid "Hide my answers"
+msgstr "Achtergrondvragen verbergen"
+
 #: cdi_forms/templates/cdi_forms/administration_summary.html:222
 msgid "Graph My Data!"
 msgstr "Grafiek van mijn gegevens"
