@@ -79,7 +79,7 @@ jobs:
 
       - name: Reload instrument data if it changed
         run: |
-          DATA='webcdi/static/json/instruments.json webcdi/cdi_form_csv webcdi/cdi_forms/form_data'
+          DATA='webcdi/static/json/instruments.json webcdi/static/json/instrument_families.json webcdi/cdi_form_csv webcdi/cdi_forms/form_data'
           if ! git cat-file -e "$PREV_SHA^{commit}" 2>/dev/null; then
             echo "previous image tag ($PREV_SHA) isn't a commit here; reloading to be safe"
             CHANGED=yes
