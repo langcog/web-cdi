@@ -151,7 +151,7 @@ class AddNewParent(DetailView):
 
     def get(self, request, username, study_name):
         self.get_object()
-        if not self.object.single_reusable_link_active:
+        if not self.object.single_reusable_link_active or not self.object.active:
             return render(request, "cdi_forms/single_reusable_link_inactive.html")
 
         let_through, bypass, source_id = self.admin_new_parent_fun(request)

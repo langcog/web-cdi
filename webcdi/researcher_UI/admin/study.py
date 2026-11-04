@@ -7,6 +7,11 @@ from .admin_actions import scoring_data, scoring_summary
 
 
 class StudyAdmin(admin.ModelAdmin):
+    def has_delete_permission(self, request, obj=None):
+        # groups are only ever made inactive; this also stops a delete of a
+        # user or instrument that would take its groups with it
+        return False
+
     list_display = [
         "name",
         "get_responses",

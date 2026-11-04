@@ -383,7 +383,7 @@
           <div class="wcdi-danger-zone" id="danger-zone">
             <div>
               <h2>Delete this group</h2>
-              <p>Removes <strong>{{ study_obj.name }}</strong> and all {{ n_admins }} administration{{ n_admins|pluralize }} in it, including every response and score. This cannot be undone from your account.</p>
+              <p>Removes <strong>{{ study_obj.name }}</strong> and all {{ n_admins }} administration{{ n_admins|pluralize }} in it from your account, and their participant links stop working. You can't undo this from your account.</p>
             </div>
             <button type="button" class="btn btn-secondary wcdi-btn-danger" data-toggle="modal" data-target="#delete-group-modal">Delete group&hellip;</button>
           </div>
@@ -399,10 +399,10 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                   </div>
                   <div class="modal-body">
-                    <p>This permanently removes the group <strong>{{ study_obj.name }}</strong> and all
-                      <strong>{{ n_admins }} administration{{ n_admins|pluralize }}</strong> in it, including every response and score.
-                      <strong>This cannot be undone from your account.</strong> Be sure you will never want these data again
-                      &mdash; download them first if there is any doubt.</p>
+                    <p>This removes the group <strong>{{ study_obj.name }}</strong> and all
+                      <strong>{{ n_admins }} administration{{ n_admins|pluralize }}</strong> in it from your account, and their participant links stop working.
+                      <strong>You can't undo this from your account.</strong> If you delete a group by mistake, write to
+                      <a href="mailto:webcdi-contact@stanford.edu">webcdi-contact@stanford.edu</a> and we can restore it.</p>
                     <label for="delete-group-confirm" style="font-size:13.5px; font-weight:600;">Type <code>{{ study_obj.name }}</code> to confirm</label>
                     <input type="text" class="form-control" id="delete-group-confirm" autocomplete="off" spellcheck="false" data-expected="{{ study_obj.name }}">
                   </div>

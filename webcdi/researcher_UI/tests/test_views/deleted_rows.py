@@ -13,7 +13,7 @@ from cdi_forms.models import BackgroundInfo, Instrument_Forms, requests_log
 from cdi_forms.views.utils import prefilled_cdi_data
 from researcher_UI.admin.admin_actions import scoring_data, scoring_summary
 from researcher_UI.models import (Administration, Demographic, Instrument,
-                                  Study, administration_data)
+                                  Study, SummaryData, administration_data)
 from researcher_UI.tests import generate_fake_results
 from researcher_UI.utils.random_url_generator import random_url_generator
 from researcher_UI.views.download_data_views import PDFAdministrationDetailView
@@ -523,6 +523,114 @@ class DeletedRowParticipantLinkTest(DeletedRowTestCase):
             row, self.CAT_ROUTES, lambda code: self.assertNotEqual(code, 404)
         )
 
+    def test_every_route_of_a_row_in_a_deleted_group_is_404(self):
+        study = self.make_study()
+        row = self.make_row(study)
+        item_id = (
+            Instrument_Forms.objects.filter(
+                instrument=study.instrument, item_type="word"
+            )
+            .first()
+            .itemID
+        )
+        administration_data.objects.create(
+            administration=row, item_ID=item_id, value="understands"
+        )
+        Study.objects.filter(pk=study.pk).update(active=False)
+        before = self.snapshot(row)
+
+        self.assert_routes(
+            row, self.REGULAR_ROUTES, lambda code: self.assertEqual(code, 404)
+        )
+        self.post_everything(row, self.REGULAR_ROUTES, item_id)
+        for name, data in (
+            ("save_answer", {item_id: "produces"}),
+            (
+                "update-administration-data-item",
+                {"check": "true", "item": item_id, "value": "produces"},
+            ),
+        ):
+            with self.subTest(view=name):
+                response = self.client.post(
+                    reverse(name), {"hash_id": row.url_hash, **data}
+                )
+                self.assertEqual(response.status_code, 404)
+        self.assertEqual(self.snapshot(row), before)
+
+        # staff can bring the group back and the parent carries on
+        Study.objects.filter(pk=study.pk).update(active=True)
+        self.assert_routes(
+            row, self.REGULAR_ROUTES, lambda code: self.assertNotEqual(code, 404)
+        )
+
+    @tag("cat")
+    def test_every_route_of_a_cat_row_in_a_deleted_group_is_404(self):
+        study = self.make_study(form="CAT")
+        row = self.make_row(study)
+        Study.objects.filter(pk=study.pk).update(active=False)
+        before = self.snapshot(row)
+
+        self.assert_routes(
+            row, self.CAT_ROUTES, lambda code: self.assertEqual(code, 404)
+        )
+        response = self.client.post(
+            reverse("cat_forms:cat_answer", args=[row.url_hash]),
+            json.dumps(
+                {"index": 2, "definition": "cat", "response": True, "est_theta": 1.0}
+            ),
+            content_type="application/json",
+        )
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(self.snapshot(row), before)
+
+    def test_reusable_link_of_a_deleted_group_is_closed(self):
+        for form, name in (
+            ("WS", "create-new-background-info"),
+            ("CAT", "cat_forms:create-new-background-info"),
+        ):
+            study = self.make_study(form=form, name=f"Deleted {form}", active=False)
+            with self.subTest(form=form):
+                for url in (
+                    reverse(
+                        "researcher_ui:administer_new_parent",
+                        kwargs={
+                            "username": self.researcher.username,
+                            "study_name": study.name,
+                        },
+                    ),
+                    reverse(
+                        name,
+                        kwargs={
+                            "study_id": study.pk,
+                            "bypass": True,
+                            "source_id": "None",
+                        },
+                    ),
+                ):
+                    response = self.client.get(url)
+                    self.assertTemplateUsed(
+                        response, "cdi_forms/single_reusable_link_inactive.html"
+                    )
+                self.assertFalse(Administration.objects.filter(study=study).exists())
+
+    def test_source_link_of_a_deleted_group_does_not_open_a_row(self):
+        study = self.make_study(no_demographic_boolean=True, active=False)
+        row = self.make_administration(study, completedBackgroundInfo=True)
+        BackgroundInfo.objects.create(
+            administration=row, source_id="abc", age=15, sex="M"
+        )
+        response = self.client.get(
+            reverse(
+                "researcher_ui:administer_new_parent",
+                kwargs={"username": self.researcher.username, "study_name": study.name},
+            ),
+            {"source_id": "abc", "age": 15, "sex": "m"},
+        )
+        self.assertTemplateUsed(
+            response, "cdi_forms/single_reusable_link_inactive.html"
+        )
+        self.assertEqual(Administration.objects.filter(study=study).count(), 1)
+
     def test_source_id_link_to_a_deleted_row_does_not_open_it_or_make_a_new_one(self):
         study = self.make_study(no_demographic_boolean=True)
         row = self.make_administration(study, completedBackgroundInfo=True, is_active=False)
@@ -539,3 +647,113 @@ class DeletedRowParticipantLinkTest(DeletedRowTestCase):
         )
         self.assertEqual(response.status_code, 404)
         self.assertEqual(Administration.objects.filter(study=study).count(), 1)
+
+
+class DeletingKeepsDataTest(DeletedRowTestCase):
+    """Delete hides data from the researcher; nothing leaves the database."""
+
+    def setUp(self):
+        super().setUp()
+        self.study = self.make_study()
+        self.row = self.make_administration(self.study, completed=True)
+        administration_data.objects.create(
+            administration=self.row, item_ID="item_1", value="produces"
+        )
+        SummaryData.objects.create(administration=self.row, title="Score", value="1")
+        self.client.force_login(self.researcher)
+        self.url = reverse("researcher_ui:console_study", args=[self.study.pk])
+
+    def assert_data_kept(self):
+        self.assertTrue(Study.objects.filter(pk=self.study.pk).exists())
+        self.assertTrue(Administration.objects.filter(pk=self.row.pk).exists())
+        self.assertEqual(
+            administration_data.objects.get(administration=self.row).value, "produces"
+        )
+        self.assertEqual(SummaryData.objects.get(administration=self.row).value, "1")
+
+    def test_deleting_an_administration_keeps_it_in_the_database(self):
+        self.client.post(
+            self.url, {"delete-selected": "", "select_col": [str(self.row.pk)]}
+        )
+        self.row.refresh_from_db()
+        self.assertFalse(self.row.is_active)
+        self.assert_data_kept()
+
+    def test_deleting_a_group_keeps_it_in_the_database(self):
+        self.client.post(self.url, {"delete-study": "delete-study"})
+        self.study.refresh_from_db()
+        self.assertFalse(self.study.active)
+        self.assert_data_kept()
+
+    def test_group_page_tells_the_researcher_how_to_get_data_back(self):
+        for url in (
+            self.url,
+            reverse("researcher_ui:rename_study", args=[self.study.pk]),
+        ):
+            with self.subTest(url=url):
+                page = self.client.get(url).content.decode()
+                self.assertIn("webcdi-contact@stanford.edu", page)
+                self.assertNotIn("permanently", page)
+
+
+class AdminCannotRemoveDataTest(DeletedRowTestCase):
+    """The Django admin holds to the same rule as the researcher's Delete."""
+
+    def setUp(self):
+        super().setUp()
+        self.staff = User.objects.create_superuser(
+            username="delete_staff", password="x-test-only"
+        )
+        self.study = self.make_study()
+        self.row = self.make_administration(self.study, is_active=False)
+        self.client.force_login(self.staff)
+
+    def assert_nothing_removed(self):
+        self.assertTrue(User.objects.filter(pk=self.researcher.pk).exists())
+        self.assertTrue(Study.objects.filter(pk=self.study.pk).exists())
+        self.assertTrue(Administration.objects.filter(pk=self.row.pk).exists())
+
+    def test_no_delete_page_or_bulk_delete_for_groups_and_administrations(self):
+        for model, pk in (
+            ("study", self.study.pk),
+            ("administration", self.row.pk),
+        ):
+            with self.subTest(model=model):
+                url = reverse(f"admin:researcher_UI_{model}_delete", args=[pk])
+                self.assertEqual(
+                    self.client.post(url, {"post": "yes"}).status_code, 403
+                )
+                self.client.post(
+                    reverse(f"admin:researcher_UI_{model}_changelist"),
+                    {
+                        "action": "delete_selected",
+                        "_selected_action": [pk],
+                        "post": "yes",
+                    },
+                )
+                self.assert_nothing_removed()
+
+    def test_deleting_a_user_cannot_take_their_groups_along(self):
+        self.client.post(
+            reverse("admin:auth_user_delete", args=[self.researcher.pk]), {"post": "yes"}
+        )
+        self.assert_nothing_removed()
+
+    def test_deleting_an_instrument_cannot_take_its_groups_along(self):
+        self.client.post(
+            reverse(
+                "admin:researcher_UI_instrument_delete",
+                args=[self.study.instrument.pk],
+            ),
+            {"post": "yes"},
+        )
+        self.assert_nothing_removed()
+        self.assertTrue(Instrument.objects.filter(pk=self.study.instrument.pk).exists())
+
+    def test_staff_can_still_restore_an_administration(self):
+        self.client.post(
+            reverse("admin:researcher_UI_administration_changelist"),
+            {"action": "set_is_active_true", "_selected_action": [self.row.pk]},
+        )
+        self.row.refresh_from_db()
+        self.assertTrue(self.row.is_active)

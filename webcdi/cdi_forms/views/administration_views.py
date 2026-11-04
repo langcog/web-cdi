@@ -33,7 +33,7 @@ class AdministrationByHashMixin:
             self.object = get_object_or_404(
                 Administration.objects.select_related(
                     "study__instrument", "study__demographic", "backgroundinfo"
-                ).filter(is_active=True),
+                ).filter(is_active=True, study__active=True),
                 url_hash=self.kwargs["hash_id"],
             )
         return self.object
@@ -204,7 +204,7 @@ class AdministrationSummaryView(AdministrationByHashMixin, DetailView):
 
 class AdministrationDetailView(DetailView):
     model = Administration
-    queryset = Administration.objects.filter(is_active=True)
+    queryset = Administration.objects.filter(is_active=True, study__active=True)
     template_name = "cdi_forms/pdf_administration.html"
     slug_field = "url_hash"
     slug_url_kwarg = "hash_id"
