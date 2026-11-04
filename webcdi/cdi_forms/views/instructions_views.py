@@ -22,7 +22,10 @@ class InstructionDetailView(DetailView):
 
     def get_object(self, queryset=None):
         return get_object_or_404(
-            Administration, url_hash=self.kwargs["hash_id"], is_active=True
+            Administration,
+            url_hash=self.kwargs["hash_id"],
+            is_active=True,
+            study__active=True,
         )
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:

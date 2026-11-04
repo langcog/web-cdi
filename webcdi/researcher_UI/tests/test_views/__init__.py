@@ -3,10 +3,12 @@ from .administration_views import (AddNewParentTest,  # noqa
 from .ajax_views import AjaxChargeStatusTest, AjaxDemographicFormsTest  # noqa
 from .console import ConsoleViewTest  # noqa
 from .console_counts import ActiveAdministrationCountsTest  # noqa
-from .deleted_rows import (DeletedRowCapTest,  # noqa
-                           DeletedRowCatDownloadTest, DeletedRowDownloadTest,
+from .deleted_rows import (AdminCannotRemoveDataTest,  # noqa
+                           DeletedRowCapTest, DeletedRowCatDownloadTest,
+                           DeletedRowDownloadTest,
                            DeletedRowParticipantLinkTest,
-                           DeletedRowPrefillTest, DeletedRowRepeatNumTest)
+                           DeletedRowPrefillTest, DeletedRowRepeatNumTest,
+                           DeletingKeepsDataTest)
 from .download_data_views import PDFAdministrationDetailViewTest  # noqa
 from .instrument_views import AddInstrumentsTest  # noqa
 from .no_user_redirect import NoUserRedirectTest  # noqa

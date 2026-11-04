@@ -11,6 +11,10 @@ def set_is_active_true(modeladmin, request, queryset):
 
 
 class AdministrationAdmin(admin.ModelAdmin):
+    def has_delete_permission(self, request, obj=None):
+        # administrations are only ever made inactive
+        return False
+
     list_display = [
         "study",
         "subject_id",

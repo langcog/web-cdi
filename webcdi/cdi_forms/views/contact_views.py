@@ -22,7 +22,10 @@ class AdministrationContactView(FormView, DetailView):
 
     def get_object(self, queryset=None):
         self.object = get_object_or_404(
-            Administration, url_hash=self.kwargs["hash_id"], is_active=True
+            Administration,
+            url_hash=self.kwargs["hash_id"],
+            is_active=True,
+            study__active=True,
         )
         return self.object
 

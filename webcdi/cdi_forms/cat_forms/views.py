@@ -63,7 +63,7 @@ class CatAnswerView(View):
 
     def post(self, request, hash_id):
         administration = get_object_or_404(
-            Administration, url_hash=hash_id, is_active=True
+            Administration, url_hash=hash_id, is_active=True, study__active=True
         )
         if administration.completed or administration.due_date < timezone.now():
             return JsonResponse({"error": "closed"}, status=409)
@@ -158,7 +158,9 @@ class AdministerAdministraionView(UpdateView):
     def get_object(self, queryset=None):
         try:
             self.hash_id = self.kwargs["hash_id"]
-            obj = Administration.objects.get(url_hash=self.hash_id, is_active=True)
+            obj = Administration.objects.get(
+                url_hash=self.hash_id, is_active=True, study__active=True
+            )
         except Exception as e:
             raise Http404("Administration not found")
         return obj

@@ -87,7 +87,9 @@ class AdministrationMixin(object):
 class BackgroundInfoView(AdministrationMixin, UpdateView):
     template_name = "cdi_forms/background_info.html"
     model = BackgroundInfo
-    queryset = BackgroundInfo.objects.filter(administration__is_active=True)
+    queryset = BackgroundInfo.objects.filter(
+        administration__is_active=True, administration__study__active=True
+    )
     form_class = BackgroundForm
     background_form = None
     which_page = "front"
@@ -425,7 +427,7 @@ class CreateBackgroundInfoView(CreateView):
 
     def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
         study = get_object_or_404(Study, id=kwargs["study_id"])
-        if not study.single_reusable_link_active:
+        if not study.single_reusable_link_active or not study.active:
             return render(request, "cdi_forms/single_reusable_link_inactive.html")
         return super().dispatch(request, *args, **kwargs)
 

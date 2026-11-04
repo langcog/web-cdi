@@ -364,7 +364,7 @@ def safe_harbor_zip_code(obj):
 def get_administration_instance(hash_id):
     try:
         administration_instance = Administration.objects.get(
-            url_hash=hash_id, is_active=True
+            url_hash=hash_id, is_active=True, study__active=True
         )
     except:
         raise Http404("Administration not found")
