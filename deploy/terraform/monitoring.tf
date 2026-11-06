@@ -17,7 +17,7 @@ resource "google_monitoring_notification_channel" "email" {
 
 locals {
   channels = [google_monitoring_notification_channel.email.id]
-  host     = trimprefix(google_cloud_run_v2_service.web.uri, "https://")
+  host     = local.lb ? var.domains[0] : trimprefix(google_cloud_run_v2_service.web.uri, "https://")
 }
 
 # Site up? /health/ checks the database too.

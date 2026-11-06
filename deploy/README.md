@@ -46,7 +46,9 @@ liveness probes.
 ## Infrastructure (`deploy/terraform`, OpenTofu)
 
 One configuration per environment, parameterised by project (`staging.tfvars`
-→ `hs-langcog-webcdi`, the dedicated project, #690). It creates: APIs, an Artifact Registry
+→ `hs-langcog-webcdi`, the dedicated project, #690; `production.tfvars` →
+`hs-langcog-webcdi-prod`, which adds the load balancer in `lb.tf` for
+webcdi.org, see `cutover/README.md`). It creates: APIs, an Artifact Registry
 repo, Cloud SQL Postgres 16 (backups + PITR, deletion protection, reachable
 only via the IAM-authenticated connector), generated secrets in Secret
 Manager, runtime and scheduler service accounts (IAM grants are project-level
