@@ -92,5 +92,7 @@ First-time data: run the `migrate` job, then `load-instruments`
 executions with overridden args, e.g.
 `gcloud run jobs execute webcdi-staging-migrate --args="^~^shell~-c~<python>"`.
 
+Production cutover plan (draft): [`cutover/README.md`](cutover/README.md).
+
 Staging: https://webcdi-staging-qiqpffb23q-uw.a.run.app (email goes to the
 service logs; no real mail is sent).
