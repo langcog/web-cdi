@@ -2,7 +2,7 @@ app-version
 asgiref==3.11.1
 attrs==26.1.0
 beautifulsoup4==4.14.3
-black==26.5.1
+black==26.10.1
 bleach==6.4.0
 boto3==1.43.21
 botocore==1.43.21
