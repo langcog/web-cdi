@@ -337,7 +337,9 @@ class AdminNewTest(TestCase):
         self.assertEqual(response.json()["stat"], "error")
         self.assertEqual(
             response.json()["error_message"],
-            "Non integer subject ids. Make sure first row is numeric\n",
+            "Every row in the file's first column must be a whole-number ID (other "
+            'columns are ignored). If the file has a header row, tick "This file has '
+            'a header row".\n',
         )
 
     def test_post_rejects_zero_padded_ids(self):

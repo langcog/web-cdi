@@ -29,9 +29,10 @@ def get_helper(request, study_name, num_per_page):
 
     if study_name is not None:
         current_study = Study.objects.get(researcher=request.user, name=study_name)
+        # a stable default order; the table's column sorting still overrides it
         administrations = Administration.objects.filter(
             study=current_study, is_active=True
-        )
+        ).order_by("subject_id", "repeat_num", "pk")
         search = request.GET.get("search", "").strip()
         context["search"] = search
         if search:

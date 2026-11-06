@@ -74,10 +74,17 @@
 
           {% if object.participant_source_boolean > 0 %}
           <div class="tab-pane fade" id="tab-external" role="tabpanel">
-            <p class="wcdi-method-help">Paste this into your external platform (e.g. Prolific). It does not open an administration
-              itself; it lets the platform create one per child and records the platform's participant ID as
-              <code>source_id</code>. <code>event_id</code> is optional &mdash; a different event_id creates a new administration.
-              {% if not object.no_demographic_boolean %}For a link with no source ID, use the reusable link.{% else %}A link with the same <code>source_id</code> and <code>event_id</code> reopens that administration only if it carries the same <code>sex</code> and an <code>age</code> within one month of the stored one; any other values get a &ldquo;not found&rdquo; page.{% endif %}</p>
+            <p class="wcdi-method-help">Paste this into your external platform (e.g. Prolific), replacing each
+              <code>{% verbatim %}{{%&hellip;%}}{% endverbatim %}</code> part with the platform's own placeholder for that value
+              (on Prolific, <code>{% verbatim %}{{%PROLIFIC_PID%}}{% endverbatim %}</code> for the participant ID). The platform then
+              fills in the values for each participant.
+              {% if not object.no_demographic_boolean %}Each time a parent opens the link, they start a new form, and the
+              administration is created when they submit the background page, with the platform's participant ID saved as
+              <code>source_id</code>. IDs may use only letters, numbers, - and _. <code>event_id</code> isn't used for this
+              group, so opening the link again starts a new administration. For recruitment without a platform ID, use the
+              reusable link.{% else %}It does not open an administration itself; it lets the platform create one per child and
+              records the platform's participant ID as <code>source_id</code>. <code>event_id</code> is optional &mdash; a
+              different event_id creates a new administration. A link with the same <code>source_id</code> and <code>event_id</code> reopens that administration only if it carries the same <code>sex</code> and an <code>age</code> within one month of the stored one; any other values get a &ldquo;not found&rdquo; page.{% endif %}</p>
             <div class="wcdi-link-row">
               <input type="text" readonly class="form-control" id="external_link_input"
                      value="{{ request.scheme }}://{{ request.META.HTTP_HOST }}{% url 'researcher_ui:administer_new_parent' username study_name %}?source_id={% verbatim %}{{%source_id%}}{% endverbatim %}&event_id={% verbatim %}{{%event_id%}}{% endverbatim %}{% if object.no_demographic_boolean %}&age={% verbatim %}{{%age%}}{% endverbatim %}&sex={% verbatim %}{{%sex%}}{% endverbatim %}&offset={% verbatim %}{{%offset%}}{% endverbatim %}{% endif %}">

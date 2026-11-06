@@ -16,6 +16,14 @@ ZERO_PADDED_MESSAGE = (
 )
 SUBJECT_ID_MAX = 2147483647  # Administration.subject_id is an integer column
 OUT_OF_RANGE_MESSAGE = f"Subject ids must be no larger than {SUBJECT_ID_MAX}\n"
+NON_INTEGER_CSV_MESSAGE = (
+    "Every row in the file's first column must be a whole-number ID (other columns "
+    "are ignored). If the file has a header row, tick \"This file has a header row\".\n"
+)
+NON_INTEGER_COLUMN_MESSAGE = (
+    "Every row in the ID column (the first column, unless you named another) must "
+    "be a whole-number ID.\n"
+)
 UNREADABLE_CSV_MESSAGE = (
     "We couldn't read that file as a CSV. Save it as a plain .csv with one column "
     "of IDs.\n"
@@ -91,18 +99,14 @@ def admin_new_fun(request, permitted, study_name, study_obj):
                 if ids_type == "unreadable":
                     data["error_message"] += UNREADABLE_CSV_MESSAGE
                 elif "csv-header" not in request.POST:
-                    data[
-                        "error_message"
-                    ] += "Non integer subject ids. Make sure first row is numeric\n"
+                    data["error_message"] += NON_INTEGER_CSV_MESSAGE
                 else:
                     if ids_type == "missing":
                         data[
                             "error_message"
                         ] += "Unable to find specified column. Check for any typos."  # Save this error message
                     else:
-                        data[
-                            "error_message"
-                        ] += "Non integer subject ids\n"  # Save this error message
+                        data["error_message"] += NON_INTEGER_COLUMN_MESSAGE
             elif zero_padded:
                 validity = False
                 data["error_message"] += ZERO_PADDED_MESSAGE
