@@ -1,4 +1,5 @@
 import logging
+from decimal import Decimal, InvalidOperation
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import HTML, Div, Field, Fieldset, Layout, Submit
@@ -108,6 +109,7 @@ class AddStudyForm(BetterModelForm):
         required=True,
         widget=forms.NumberInput(),
         initial=6,
+        min_value=0,
     )
 
     confirmation_questions = forms.BooleanField(
@@ -391,11 +393,35 @@ class AddStudyForm(BetterModelForm):
 
     def clean_name(self):
         study_name = self.cleaned_data["name"]
-        researcher = self.researcher
-        if Study.objects.filter(name=study_name, researcher=researcher ).exists():
-            raise ValidationError(f"You MUST use unique Study Names.  You have already used '{study_name}'")
-        
-        return study_name
+        # the edit form is built without a researcher: use the group's own
+        researcher = self.researcher or getattr(self.instance, "researcher", None)
+        clash = (
+            Study.objects.filter(name=study_name, researcher=researcher)
+            .exclude(pk=self.instance.pk)
+            .first()
+        )
+        if clash is None:
+            return study_name
+        if not clash.active:
+            raise ValidationError(
+                f"Group names must be unique. '{study_name}' is used by a group you "
+                "deleted. Choose another name, or write to webcdi-contact@stanford.edu "
+                "to restore that group."
+            )
+        raise ValidationError(
+            f"Group names must be unique. You have already used '{study_name}'."
+        )
+
+    def clean_gift_amount(self):
+        gift_amount = self.cleaned_data["gift_amount"]
+        try:
+            negative = Decimal(gift_amount.replace("$", "")) < 0
+        except InvalidOperation:
+            # other amounts that aren't numbers are reported when codes are added
+            negative = False
+        if negative:
+            raise ValidationError("The amount per card can't be negative.")
+        return gift_amount
 
 class EditStudyForm(AddStudyForm):
     def __init__(self, *args, **kwargs):

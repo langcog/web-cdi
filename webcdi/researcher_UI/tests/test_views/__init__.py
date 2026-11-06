@@ -14,6 +14,8 @@ from .instrument_views import AddInstrumentsTest  # noqa
 from .no_user_redirect import NoUserRedirectTest  # noqa
 from .paired_studies import PairedStudyCreateViewTest  # noqa
 from .profile import ProileTestCase  # noqa
+from .qa_round2 import (ExternalSourceTextTest, GroupNameTest,  # noqa
+                        GroupNumberFieldsTest, GroupTableOrderTest)
 from .study_edit_data_views import ImportDataTest  # noqa
 from .study_settings_views import AddPairedStudyTest  # noqa
 from .study_settings_views import AddStudyViewTest, UpdateStudyTest
