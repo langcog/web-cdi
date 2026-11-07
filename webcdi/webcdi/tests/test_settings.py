@@ -1,7 +1,30 @@
-from django.test import SimpleTestCase, tag
+import logging
+from unittest import mock
 
-from webcdi.settings import _parse_env_admins, _parse_env_list
+from django.conf import settings
+from django.test import SimpleTestCase, override_settings, tag
+from django.utils.log import AdminEmailHandler, configure_logging
+
+from webcdi.settings import JSON_LOGGING, _parse_env_admins, _parse_env_list
 from webcdi.utils import is_true
+
+
+@tag("settings")
+class JsonLoggingTest(SimpleTestCase):
+    """Containers log JSON to stdout and never email request errors."""
+
+    def tearDown(self):
+        configure_logging(settings.LOGGING_CONFIG, settings.LOGGING)
+
+    @override_settings(DEBUG=False, ADMINS=[("Admin", "admin@example.com")])
+    def test_request_errors_are_logged_not_emailed(self):
+        configure_logging(settings.LOGGING_CONFIG, JSON_LOGGING)
+        # capture at the root, so the record passes every logger on the way
+        with mock.patch.object(AdminEmailHandler, "emit") as emit, self.assertLogs(
+            level="ERROR"
+        ):
+            logging.getLogger("django.request").error("Internal Server Error: /x/")
+        emit.assert_not_called()
 
 
 @tag("settings")
