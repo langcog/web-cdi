@@ -1,7 +1,8 @@
 # GitHub Actions deploys with short-lived credentials from Workload Identity
 # Federation: no service-account keys exist anywhere. Only workflows in
-# var.github_repository can obtain tokens, and the grants below are scoped to
-# this environment where IAM conditions allow.
+# var.github_repository can obtain tokens (in production, only jobs in the
+# approval-gated GitHub environment), and the grants below are scoped to this
+# environment where IAM conditions allow.
 
 resource "google_iam_workload_identity_pool" "github" {
   workload_identity_pool_id = "github"
@@ -13,12 +14,15 @@ resource "google_iam_workload_identity_pool_provider" "github" {
   workload_identity_pool_id          = google_iam_workload_identity_pool.github.workload_identity_pool_id
   workload_identity_pool_provider_id = "github-oidc"
   display_name                       = "GitHub OIDC"
-  attribute_mapping = {
+  attribute_mapping = merge({
     "google.subject"       = "assertion.sub"
     "attribute.repository" = "assertion.repository"
     "attribute.ref"        = "assertion.ref"
-  }
-  attribute_condition = "assertion.repository == \"${var.github_repository}\""
+    }, var.github_environment == "" ? {} : {
+    "attribute.environment" = "assertion.environment"
+  })
+  # Production: only jobs in the GitHub environment, which requires approval
+  attribute_condition = var.github_environment == "" ? "assertion.repository == \"${var.github_repository}\"" : "assertion.repository == \"${var.github_repository}\" && assertion.environment == \"${var.github_environment}\""
   oidc {
     issuer_uri = "https://token.actions.githubusercontent.com"
   }

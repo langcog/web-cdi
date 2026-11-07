@@ -7,7 +7,7 @@ locals {
 
   # Environment shared by the web service and the jobs. Secrets are injected
   # separately from Secret Manager.
-  env = {
+  env = merge({
     ALLOWED_HOSTS              = var.allowed_hosts
     ADMINS                     = var.admins
     HTTPS_ONLY                 = "true"
@@ -24,7 +24,10 @@ locals {
     SERVER_EMAIL               = "noreply@webcdi.org"
     BROOKES_EMAIL              = var.enable_email_jobs ? "AWagner@brookespublishing.com" : "webcdi-contact@stanford.edu"
     DJANGO_SERVER_TYPE         = upper(var.environment)
-  }
+    },
+    # behind the load balancer: redirect www and any other host to the first domain
+    local.lb ? { PRIMARY_HOST = var.domains[0] } : {}
+  )
 
   secrets = {
     SECRET_KEY            = google_secret_manager_secret.django_secret_key.secret_id
@@ -53,7 +56,7 @@ locals {
 # --- APIs -------------------------------------------------------------------
 
 resource "google_project_service" "apis" {
-  for_each = toset([
+  for_each = toset(concat([
     "run.googleapis.com",
     "sqladmin.googleapis.com",
     "secretmanager.googleapis.com",
@@ -66,7 +69,10 @@ resource "google_project_service" "apis" {
     "logging.googleapis.com",
     "monitoring.googleapis.com",
     "iap.googleapis.com",
-  ])
+    ], local.lb ? [
+    "compute.googleapis.com",
+    "certificatemanager.googleapis.com",
+  ] : []))
   service            = each.key
   disable_on_destroy = false
 }
@@ -147,8 +153,8 @@ resource "google_sql_database_instance" "db" {
     }
 
     maintenance_window {
-      day  = 7  # Sunday
-      hour = 10 # UTC
+      day  = var.db_maintenance_day
+      hour = var.db_maintenance_hour
     }
 
     insights_config {
@@ -240,7 +246,8 @@ resource "google_project_iam_member" "runtime_secrets" {
 resource "google_cloud_run_v2_service" "web" {
   name     = local.name
   location = var.region
-  ingress  = "INGRESS_TRAFFIC_ALL"
+  # with a load balancer, only traffic through it reaches the service
+  ingress = local.lb ? "INGRESS_TRAFFIC_INTERNAL_LOAD_BALANCER" : "INGRESS_TRAFFIC_ALL"
 
   # Public site. Disabling the invoker check avoids a resource-level allUsers
   # binding (which needs setIamPolicy).

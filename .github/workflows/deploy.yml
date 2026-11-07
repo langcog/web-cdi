@@ -1,12 +1,16 @@
-# Deploy to GCP staging after CI passes on master (#681, tracking #690).
+# Deploy to GCP staging after CI passes on master (#681, tracking #690), then
+# to production once approved in the GitHub "production" environment (#688).
 #
 # Authenticates with Workload Identity Federation (no stored keys). Builds the
 # production image (deploy/Dockerfile), runs migrations as a Cloud Run job,
 # reloads instrument data only when instrument files changed, deploys the web
 # service, smoke-tests it (inside the image when the service is private), and
-# rolls traffic back if the smoke test fails.
+# rolls traffic back if the smoke test fails. Production gets the same image,
+# copied from the staging registry.
 #
-# Repository variables: GCP_PROJECT, GCP_REGION, GCP_WIF_PROVIDER.
+# Repository variables: GCP_PROJECT, GCP_REGION, GCP_WIF_PROVIDER (staging),
+# DEPLOY_PRODUCTION ("true" once production exists). The production
+# environment overrides GCP_PROJECT, GCP_REGION and GCP_WIF_PROVIDER.
 name: Deploy
 
 on:
@@ -20,18 +24,20 @@ permissions:
   contents: read
   id-token: write
 
-concurrency:
-  group: deploy-staging
-  cancel-in-progress: false
-
 jobs:
   staging:
     if: github.event_name == 'workflow_dispatch' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push')
     runs-on: ubuntu-latest
     timeout-minutes: 60
+    concurrency:
+      group: deploy-staging
+      cancel-in-progress: false
     environment:
       name: staging
       url: ${{ steps.deploy.outputs.url }}
+    outputs:
+      image: ${{ steps.build.outputs.image }}
+      wif_provider: ${{ vars.GCP_WIF_PROVIDER }}
     env:
       PROJECT: ${{ vars.GCP_PROJECT }}
       REGION: ${{ vars.GCP_REGION }}
@@ -51,9 +57,11 @@ jobs:
       - uses: google-github-actions/setup-gcloud@v2
 
       - name: Build and push image
+        id: build
         run: |
           IMAGE="$REGION-docker.pkg.dev/$PROJECT/webcdi/webcdi:$SHA"
           echo "IMAGE=$IMAGE" >> "$GITHUB_ENV"
+          echo "image=$IMAGE" >> "$GITHUB_OUTPUT"
           gcloud auth configure-docker "$REGION-docker.pkg.dev" --quiet
           docker build -f deploy/Dockerfile -t "$IMAGE" .
           docker push "$IMAGE"
@@ -123,6 +131,115 @@ jobs:
             smoke() { gcloud run jobs execute "$NAME-migrate" --region "$REGION" --wait --args="^~^shell~-c~$SCRIPT"; }
           fi
           if smoke; then
+            echo "smoke test passed"
+          else
+            echo "::error::smoke test failed; routing traffic back to $PREV_REVISION"
+            gcloud run services update-traffic "$NAME" --region "$REGION" --to-revisions "$PREV_REVISION=100"
+            exit 1
+          fi
+
+  production:
+    needs: staging
+    if: vars.DEPLOY_PRODUCTION == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    # waits here for approval; a newer run queues behind it
+    concurrency:
+      group: deploy-production
+      cancel-in-progress: false
+    environment:
+      name: production
+      url: https://webcdi.org
+    env:
+      PROJECT: ${{ vars.GCP_PROJECT }}
+      REGION: ${{ vars.GCP_REGION }}
+      NAME: webcdi-production
+      HOST: webcdi.org
+      SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
+      SOURCE_IMAGE: ${{ needs.staging.outputs.image }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.SHA }}
+          fetch-depth: 0
+
+      # same image as staging: pull it with staging's credentials, push it
+      # with production's
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ needs.staging.outputs.wif_provider }}
+
+      - uses: google-github-actions/setup-gcloud@v2
+
+      - name: Pull the staging image
+        run: |
+          gcloud auth configure-docker "${SOURCE_IMAGE%%/*}" --quiet
+          docker pull "$SOURCE_IMAGE"
+
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.GCP_WIF_PROVIDER }}
+          project_id: ${{ vars.GCP_PROJECT }}
+
+      - name: Push it to production
+        run: |
+          IMAGE="$REGION-docker.pkg.dev/$PROJECT/webcdi/webcdi:$SHA"
+          echo "IMAGE=$IMAGE" >> "$GITHUB_ENV"
+          gcloud auth configure-docker "$REGION-docker.pkg.dev" --quiet
+          docker tag "$SOURCE_IMAGE" "$IMAGE"
+          docker push "$IMAGE"
+
+      - name: Record what is running now
+        run: |
+          PREV_REVISION=$(gcloud run services describe "$NAME" --region "$REGION" \
+            --format='value(status.latestReadyRevisionName)')
+          PREV_SHA=$(gcloud run services describe "$NAME" --region "$REGION" \
+            --format='value(spec.template.spec.containers[0].image)' | sed 's/.*://')
+          echo "PREV_REVISION=$PREV_REVISION" >> "$GITHUB_ENV"
+          echo "PREV_SHA=$PREV_SHA" >> "$GITHUB_ENV"
+          echo "currently running $PREV_REVISION ($PREV_SHA)"
+
+      - name: Point jobs at the new image
+        run: |
+          for job in migrate load-instruments scoring monthly-report weekly-reminder; do
+            gcloud run jobs update "$NAME-$job" --region "$REGION" --image "$IMAGE" --quiet
+          done
+
+      - name: Migrate database
+        run: gcloud run jobs execute "$NAME-migrate" --region "$REGION" --wait
+
+      - name: Reload instrument data if it changed
+        run: |
+          DATA='webcdi/static/json/instruments.json webcdi/static/json/instrument_families.json webcdi/cdi_form_csv webcdi/cdi_forms/form_data'
+          if ! git cat-file -e "$PREV_SHA^{commit}" 2>/dev/null; then
+            echo "previous image tag ($PREV_SHA) isn't a commit here; reloading to be safe"
+            CHANGED=yes
+          elif git diff --quiet "$PREV_SHA" "$SHA" -- $DATA; then
+            CHANGED=no
+          else
+            CHANGED=yes
+            git diff --stat "$PREV_SHA" "$SHA" -- $DATA
+          fi
+          if [ "$CHANGED" = yes ]; then
+            gcloud run jobs execute "$NAME-load-instruments" --region "$REGION" --wait
+          else
+            echo "instrument data unchanged; skipping reload"
+          fi
+
+      - name: Deploy web service
+        run: gcloud run deploy "$NAME" --region "$REGION" --image "$IMAGE" --quiet
+
+      # The service only takes traffic through the load balancer, and before
+      # cutover webcdi.org still points at AWS, so request the pages inside
+      # the new image with Django's test client, against the real database.
+      - name: Smoke test (roll back on failure)
+        run: |
+          PAGES="/health/ / /accounts/login/ /about/"
+          SCRIPT="from django.test import Client
+          c = Client(HTTP_HOST='$HOST', HTTP_X_FORWARDED_PROTO='https')
+          bad = [p for p in '$PAGES'.split() if c.get(p, secure=True).status_code != 200]
+          assert not bad, f'smoke test failed: {bad}'"
+          if gcloud run jobs execute "$NAME-migrate" --region "$REGION" --wait --args="^~^shell~-c~$SCRIPT"; then
             echo "smoke test passed"
           else
             echo "::error::smoke test failed; routing traffic back to $PREV_REVISION"

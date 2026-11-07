@@ -95,3 +95,27 @@ variable "log_retention_days" {
   type        = number
   default     = 90
 }
+
+variable "domains" {
+  description = "Custom domains served through a global HTTPS load balancer (production, #688); the first is the primary host. Empty: no load balancer, the run.app URL is the site."
+  type        = list(string)
+  default     = []
+}
+
+variable "github_environment" {
+  description = "If set, only GitHub Actions jobs running in this GitHub environment (which can require approval) get deploy credentials"
+  type        = string
+  default     = ""
+}
+
+variable "db_maintenance_day" {
+  description = "Cloud SQL maintenance day (1 = Monday ... 7 = Sunday)"
+  type        = number
+  default     = 7
+}
+
+variable "db_maintenance_hour" {
+  description = "Cloud SQL maintenance hour, UTC"
+  type        = number
+  default     = 10
+}

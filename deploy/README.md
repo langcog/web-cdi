@@ -46,7 +46,9 @@ liveness probes.
 ## Infrastructure (`deploy/terraform`, OpenTofu)
 
 One configuration per environment, parameterised by project (`staging.tfvars`
-→ `hs-langcog-webcdi`, the dedicated project, #690). It creates: APIs, an Artifact Registry
+→ `hs-langcog-webcdi`, the dedicated project, #690; `production.tfvars` →
+`hs-langcog-webcdi-prod`, which adds the load balancer in `lb.tf` for
+webcdi.org, see `cutover/README.md`). It creates: APIs, an Artifact Registry
 repo, Cloud SQL Postgres 16 (backups + PITR, deletion protection, reachable
 only via the IAM-authenticated connector), generated secrets in Secret
 Manager, runtime and scheduler service accounts (IAM grants are project-level
@@ -91,6 +93,8 @@ First-time data: run the `migrate` job, then `load-instruments`
 (`gcloud run jobs execute <name> --wait`). One-off commands run as job
 executions with overridden args, e.g.
 `gcloud run jobs execute webcdi-staging-migrate --args="^~^shell~-c~<python>"`.
+
+Production cutover plan (draft): [`cutover/README.md`](cutover/README.md).
 
 Staging: https://webcdi-staging-qiqpffb23q-uw.a.run.app (email goes to the
 service logs; no real mail is sent).
