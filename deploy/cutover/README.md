@@ -63,8 +63,9 @@ It only runs once the repository variable `DEPLOY_PRODUCTION` is `true`.
 
 ## Before the day
 
-- [ ] Postmark account approved; a test message from staging reaches a
-      stanford.edu address (it only delivers to @webcdi.org until approved).
+- [x] Postmark account approved, Basic plan (10,000 emails a month); Vic's
+      test send delivered (2026-11-06).
+- [ ] A password-reset email from production reaches a stanford.edu address.
 - [ ] First build done (above); the certificate is ACTIVE.
 - [ ] AWS database password copied into the production project's Secret
       Manager (as for the rehearsal, never printed), and a `load-from-aws` job
