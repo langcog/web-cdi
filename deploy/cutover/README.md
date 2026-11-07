@@ -1,8 +1,9 @@
 # Production cutover (#688)
 
 Drafted with Claude Opus 5.5; not yet reviewed. **Status: draft.** The
-production project (`hs-langcog-webcdi-prod`) exists but is empty. Each step
-below that creates or changes something waits for Mike's go-ahead.
+production environment was built on 2026-11-07 (first-build steps 1–6) with an
+empty database; webcdi.org still points at AWS. Each step below that creates
+or changes something waits for Mike's go-ahead.
 
 Moves webcdi.org from AWS Elastic Beanstalk to the GCP build, with the
 production database copied across while writes are stopped. Rollback is
@@ -51,8 +52,13 @@ It only runs once the repository variable `DEPLOY_PRODUCTION` is `true`.
    `docker pull --platform linux/amd64 <staging image>`, `docker tag`,
    `docker push` to
    `us-west1-docker.pkg.dev/hs-langcog-webcdi-prod/webcdi/webcdi:<sha>`.
-6. Full saved plan with `-var-file=production.tfvars -var image=<that image>`,
-   reviewed by Mike, applied.
+6. Database and jobs before the web service, whose startup check needs the
+   tables: a saved plan with `-target=google_cloud_run_v2_job.manage` (it
+   pulls in the database, secrets and accounts), applied; run the `migrate`
+   and `load-instruments` jobs; then the full saved plan with
+   `-var-file=production.tfvars -var image=<that image>`, reviewed by Mike,
+   applied. (Done 2026-11-07 in the other order: the service failed its
+   startup check on the empty database and had to be redeployed.)
 7. GitHub: the `production` environment's variables `GCP_PROJECT`,
    `GCP_REGION`, `GCP_WIF_PROVIDER` (from `tofu output github_wif_provider`);
    then the repository variable `DEPLOY_PRODUCTION=true`.

@@ -398,31 +398,26 @@ LOGGING = {
 }
 
 # Containers: one JSON line per record on stdout (Cloud Logging reads
-# "severity"); request errors are also emailed to ADMINS.
+# "severity"). Errors are not emailed: Error Reporting and the alert policies
+# cover them, and Django's error emails carry request data. Configuring the
+# "django" logger drops the mail handler Django's default logging puts there.
+JSON_LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {"json": {"()": "webcdi.log_format.JsonFormatter"}},
+    "handlers": {
+        "stdout": {"class": "logging.StreamHandler", "formatter": "json"},
+    },
+    "root": {"handlers": ["stdout"], "level": "INFO"},
+    "loggers": {
+        "django": {"level": "INFO"},
+        "debug": {"level": "DEBUG"},
+        "weasyprint": {"level": "WARNING"},
+        "fontTools": {"level": "WARNING"},
+    },
+}
 if os.environ.get("LOG_FORMAT") == "json":
-    LOGGING = {
-        "version": 1,
-        "disable_existing_loggers": False,
-        "filters": {
-            "require_debug_false": {"()": "django.utils.log.RequireDebugFalse"}
-        },
-        "formatters": {"json": {"()": "webcdi.log_format.JsonFormatter"}},
-        "handlers": {
-            "stdout": {"class": "logging.StreamHandler", "formatter": "json"},
-            "mail_admins": {
-                "level": "ERROR",
-                "filters": ["require_debug_false"],
-                "class": "django.utils.log.AdminEmailHandler",
-            },
-        },
-        "root": {"handlers": ["stdout"], "level": "INFO"},
-        "loggers": {
-            "django.request": {"handlers": ["mail_admins"], "level": "ERROR"},
-            "debug": {"level": "DEBUG"},
-            "weasyprint": {"level": "WARNING"},
-            "fontTools": {"level": "WARNING"},
-        },
-    }
+    LOGGING = JSON_LOGGING
 
 DATE_INPUT_FORMATS = (
     "%Y-%m-%d",
