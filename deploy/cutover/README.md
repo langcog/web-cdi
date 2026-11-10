@@ -63,7 +63,9 @@ It only runs once the repository variable `DEPLOY_PRODUCTION` is `true`.
    `GCP_REGION`, `GCP_WIF_PROVIDER` (from `tofu output github_wif_provider`);
    then the repository variable `DEPLOY_PRODUCTION=true`.
 8. Vic adds the two `_acme-challenge` CNAMEs from `tofu output
-   dns_authorizations`; wait for the certificate to show ACTIVE.
+   dns_authorizations`; wait for the certificate to show ACTIVE. (Done
+   2026-11-10, along with step 7 except `DEPLOY_PRODUCTION`, which waits
+   until after the dress rehearsal.)
 9. Budget alert on the project (needs billing-account access; Stanford may
    have to set it).
 
@@ -71,8 +73,11 @@ It only runs once the repository variable `DEPLOY_PRODUCTION` is `true`.
 
 - [x] Postmark account approved, Basic plan (10,000 emails a month); Vic's
       test send delivered (2026-11-06).
+- [x] A test email from production (`manage.py sendtestemail` through the
+      migrate job) reached webcdi-contact (2026-11-10).
 - [ ] A password-reset email from production reaches a stanford.edu address.
-- [ ] First build done (above); the certificate is ACTIVE.
+- [x] First build done (above); the certificate is ACTIVE (2026-11-10).
+      `curl --resolve` to the load balancer: `/health/` 200, www redirects.
 - [ ] AWS database password copied into the production project's Secret
       Manager (as for the rehearsal, never printed), and a `load-from-aws` job
       created there (`deploy/rehearsal/README.md` step 2, production names).
@@ -90,8 +95,9 @@ It only runs once the repository variable `DEPLOY_PRODUCTION` is `true`.
 - [ ] QA sign-off (Cherrie) and percentile sign-off (Virginia).
 - [ ] Researchers told the date at least a week ahead (Virginia's email),
       including the Dutch group, who run their own server.
-- [ ] Vic available in the window to change DNS; current alias targets of
-      `webcdi.org` and `www.webcdi.org` written down for rollback.
+- [x] Current alias targets of `webcdi.org` and `www.webcdi.org` written
+      down for rollback (Vic, 2026-11-10; kept outside the repo).
+- [ ] Vic available in the window to change DNS.
 - [ ] No merges to master on the day.
 
 ## Window
