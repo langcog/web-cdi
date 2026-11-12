@@ -1,8 +1,9 @@
 # Production cutover (#688)
 
 Drafted with Claude Opus 5.5; not yet reviewed. **Status: draft.** The
-production environment was built on 2026-11-07 (first-build steps 1–6) with an
-empty database; webcdi.org still points at AWS. Each step below that creates
+production environment was built on 2026-11-07 and holds the 2026-11-10
+dress-rehearsal copy; webcdi.org still points at AWS. **Cutover: Thursday
+2026-11-19, 9–11 pm Pacific.** Each step below that creates
 or changes something waits for Mike's go-ahead.
 
 Moves webcdi.org from AWS Elastic Beanstalk to the GCP build, with the
@@ -64,8 +65,7 @@ It only runs once the repository variable `DEPLOY_PRODUCTION` is `true`.
    then the repository variable `DEPLOY_PRODUCTION=true`.
 8. Vic adds the two `_acme-challenge` CNAMEs from `tofu output
    dns_authorizations`; wait for the certificate to show ACTIVE. (Done
-   2026-11-10, along with step 7 except `DEPLOY_PRODUCTION`, which waits
-   until after the dress rehearsal.)
+   2026-11-10, along with step 7; `DEPLOY_PRODUCTION=true` set 2026-11-12.)
 9. Budget alert on the project (needs billing-account access; Stanford may
    have to set it).
 
@@ -75,7 +75,8 @@ It only runs once the repository variable `DEPLOY_PRODUCTION` is `true`.
       test send delivered (2026-11-06).
 - [x] A test email from production (`manage.py sendtestemail` through the
       migrate job) reached webcdi-contact (2026-11-10).
-- [ ] A password-reset email from production reaches a stanford.edu address.
+- [x] A password-reset email from production reaches a stanford.edu address
+      (2026-11-12).
 - [x] First build done (above); the certificate is ACTIVE (2026-11-10).
       `curl --resolve` to the load balancer: `/health/` 200, www redirects.
 - [x] AWS database password copied into the production project's Secret
@@ -95,14 +96,23 @@ It only runs once the repository variable `DEPLOY_PRODUCTION` is `true`.
       Argentine Spanish WG redirect (#764); `/health/` and the login page 200
       through the load balancer. Found: Dutch CAT theta stored as 0 (#798).
       The database now holds this copy; the real copy overwrites it.
-- [ ] Browser test of production before DNS: map `webcdi.org` to the load
+- [x] Browser test of production before DNS: map `webcdi.org` to the load
       balancer IP in your `/etc/hosts`, log in with your own account, open a
-      group, a download, and a CAT form. Remove the line afterwards.
-- [ ] Restore drill: point-in-time restore of the production database to a
-      scratch instance; delete it after.
+      group, a download, and a CAT form. Remove the line afterwards. (Mike,
+      2026-11-12: login, download and Japanese CAT worked. Check the padlock
+      first: the certificate is from Google Trust Services on GCP, Amazon on
+      AWS. Safari reached AWS on the first try despite the mapping. Findings:
+      CAT progress bar (#801); groups without a background form (#802).)
+- [x] Restore drill: point-in-time restore of the production database to a
+      scratch instance; delete it after. (2026-11-12: `gcloud sql instances
+      clone --point-in-time`, 8.5 min; row counts matched production up to the
+      restore point; scratch instance deleted.)
 - [ ] Open items from the rehearsal: CAT forms through a browser in each
       language; the 2 completed CAT administrations with no theta.
-- [ ] QA sign-off (Cherrie) and percentile sign-off (Virginia).
+- [x] QA sign-off (Cherrie, 2026-11-12).
+- [ ] Percentile sign-off (Virginia): given on 2026-11-12 if both Web-CDI and
+      "the scoring app" use the 36-month tables. Web-CDI does (#767); which
+      scoring app she means is still open.
 - [ ] Researchers told the date at least a week ahead (Virginia's email),
       including the Dutch group, who run their own server.
 - [x] Current alias targets of `webcdi.org` and `www.webcdi.org` written
