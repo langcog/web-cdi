@@ -78,13 +78,23 @@ It only runs once the repository variable `DEPLOY_PRODUCTION` is `true`.
 - [ ] A password-reset email from production reaches a stanford.edu address.
 - [x] First build done (above); the certificate is ACTIVE (2026-11-10).
       `curl --resolve` to the load balancer: `/health/` 200, www redirects.
-- [ ] AWS database password copied into the production project's Secret
-      Manager (as for the rehearsal, never printed), and a `load-from-aws` job
-      created there (`deploy/rehearsal/README.md` step 2, production names).
-- [ ] **Dress rehearsal into the production database:** steps 2–6 of "On the
-      day" without stopping writes or touching DNS. Proves the job,
-      permissions and timings in the real environment. The real copy
-      overwrites it.
+- [x] AWS database password copied into the production project's Secret
+      Manager as `webcdi-production-aws-prod-db-password` (never printed), and
+      a `webcdi-production-load-from-aws` job created there
+      (`deploy/rehearsal/README.md` step 2, production names) (2026-11-10).
+      The job was created through the Cloud Run API: `gcloud run jobs create
+      --set-cloudsql-instances` asks to enable `sql-component.googleapis.com`,
+      which the project doesn't otherwise need. The password rotates, so
+      re-copy it on the day (`gcloud secrets versions add`).
+- [x] **Dress rehearsal into the production database** (2026-11-10): steps
+      2–7 of "On the day" (browser test aside) without stopping writes or
+      touching DNS. Copy 128 s (1.6 GB; counts matched except 17 item rows
+      written on AWS during the copy), migrate 32 s (4 migrations), reload instruments 48 s, rescore
+      15 min (32,555 completed, 0 failed, 0 left unscored). Percentile values
+      all valid (511,729); downloads as each owner 83 OK and the known
+      Argentine Spanish WG redirect (#764); `/health/` and the login page 200
+      through the load balancer. Found: Dutch CAT theta stored as 0 (#798).
+      The database now holds this copy; the real copy overwrites it.
 - [ ] Browser test of production before DNS: map `webcdi.org` to the load
       balancer IP in your `/etc/hosts`, log in with your own account, open a
       group, a download, and a CAT form. Remove the line afterwards.
@@ -112,7 +122,9 @@ production Cloud SQL maintenance window goes in the quietest weekday hour
 (around 2 am Pacific).
 
 Rehearsal timings on 2026-11-03: copy 132 s for 1.6 GB, migrate 25 s, reload
-instruments 21 s, rescore 804 s. Announce two hours; expect about one.
+instruments 21 s, rescore 804 s. Production dress rehearsal on 2026-11-10:
+copy 128 s, migrate 32 s, reload 48 s, rescore 15 min. Announce two hours;
+expect about one.
 
 ## On the day
 
@@ -129,15 +141,22 @@ instruments 21 s, rescore 804 s. Announce two hours; expect about one.
    Check from a new session: `SHOW default_transaction_read_only` is `on`.
    The AWS site still shows pages; saving anything fails with an error page,
    and AWS sends error emails to webcdi-contact. That is expected.
-2. **Copy:** `gcloud run jobs execute webcdi-production-load-from-aws --wait`.
+2. **Copy:** pause the scoring schedule
+   (`gcloud scheduler jobs pause webcdi-production-scoring --location $R`)
+   so it doesn't run against half-copied tables, then
+   `gcloud run jobs execute webcdi-production-load-from-aws --wait`.
    Every row count in its log must match exactly (writes are stopped).
 3. **Before migrating:** no duplicate `InstrumentScore (instrument, title)`
-   rows; every instrument has a family.
+   rows.
 4. **Migrate**, then **reload instruments** (`webcdi-production-migrate`,
-   `webcdi-production-load-instruments`).
-5. **Site row:** stays `webcdi.org`, as copied. Check it.
+   `webcdi-production-load-instruments`). Afterwards every instrument in
+   `instruments.json` has a family; 15 retired instruments that aren't in it
+   have none, as on AWS.
+5. **Site row:** stays `www.webcdi.org`, as copied (links to www redirect to
+   `webcdi.org` with path and query kept). Check it.
 6. **Rescore:** `update_summary_data` through the migrate job with
-   `--task-timeout=4h`. No completed administration left unscored.
+   `--task-timeout=4h`. No completed administration left unscored. Then
+   resume the scoring schedule.
 7. **Checks before DNS:** percentile values valid; download sweep;
    `curl --resolve webcdi.org:443:<LB IP> https://webcdi.org/health/`; the
    `/etc/hosts` browser test again (login, group page, download, a CAT form).
