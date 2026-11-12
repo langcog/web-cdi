@@ -121,6 +121,31 @@ class CatScoringTest(TestCase):
         self.assertEqual(rows["Total Produced"], "100")
         self.assertEqual(rows["Total Produced Percentile-both"], "50")
 
+    def test_theta_is_kept_without_norms(self):
+        # Dutch CAT: scoring titles but no norms, so no estimate of words produced
+        instrument = Instrument.objects.create(
+            name="Normless_CAT", verbose_name="Normless CAT", language="Normless",
+            form="CAT", min_age=12, max_age=36,
+        )
+        for title in ["Benchmark Theta", "Total Produced"]:
+            InstrumentScore.objects.create(
+                instrument=instrument, title=title, category="word",
+                scoring_measures="produces",
+            )
+        study = Study.objects.create(
+            researcher=User.objects.create_user("normless-owner"), name="normless",
+            instrument=instrument,
+        )
+        admin = Administration.objects.create(
+            study=study, subject_id=1, repeat_num=1, url_hash="d" * 64,
+            completed=True, due_date=timezone.now(),
+        )
+        CatResponse.objects.create(administration=admin, est_theta=1.2457)
+        update_summary_scores(admin)
+        rows = dict(SummaryData.objects.filter(administration=admin).values_list("title", "value"))
+        self.assertEqual(rows["Benchmark Theta"], "1.2457")
+        self.assertEqual(rows["Total Produced"], "")
+
 
 @tag("scoring")
 class PerScoreAgeRangeTest(TestCase):

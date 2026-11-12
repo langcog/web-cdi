@@ -224,6 +224,11 @@ def _compute(administration_instance, scoring, values):
                 values[f.title] = value
 
     if scoring.min_age is None:  # instrument has no norms
+        if scoring.instrument.form in settings.CAT_FORMS:
+            # e.g. Dutch CAT: report theta; no norms to estimate words produced
+            theta = _cat_theta(administration_instance)
+            values["Benchmark Theta"] = "" if theta is None else str(theta)
+            values["Total Produced"] = ""
         return True
 
     try:
@@ -273,14 +278,18 @@ def _compute(administration_instance, scoring, values):
     return True
 
 
+def _cat_theta(administration_instance):
+    try:
+        return administration_instance.catresponse.est_theta
+    except Exception:
+        return None
+
+
 def _cat_scores(administration_instance, scoring, values, age):
     """CAT ability lives in CatResponse, not in item responses: score theta
     itself, and estimate words produced as the Total Produced norm at the
     child's theta percentile. False if there is no estimate to score."""
-    try:
-        theta = administration_instance.catresponse.est_theta
-    except Exception:
-        theta = None
+    theta = _cat_theta(administration_instance)
     if theta is None:
         values["Benchmark Theta"] = ""
         values["Total Produced"] = ""
