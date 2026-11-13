@@ -35,7 +35,7 @@ django-ses==4.7.2
 django-storages==1.14.6
 django-tables2==3.0.0
 django-weasyprint==2.5.0
-dnspython==2.9.0
+dnspython==2.9.2
 flake8==7.3.0
 fonttools==4.63.0
 gunicorn==26.2.0
