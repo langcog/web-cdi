@@ -1,5 +1,6 @@
 import datetime
 import logging
+import re
 from unittest import mock
 
 from django.contrib.auth.models import User
@@ -895,8 +896,9 @@ class AdministrationUpdateViewTest(TestCase):
     def test_last_page_before_the_minimum_time_says_how_long_to_wait(self):
         # #808: parents who finished early saw no Submit button and left
         content = self.last_page()
-        self.assertIn('id="submit-after-wait"', content)
-        self.assertRegex(content, r'id="submit-after-wait"[^>]*disabled')
+        # both the sidebar and the bottom navigation bar show it disabled
+        self.assertEqual(len(re.findall(r'class="[^"]*submit-after-wait[^"]*"[^>]*disabled', content)), 2)
+        self.assertEqual(content.count("You can submit in"), 1)
         self.assertIn(f"You can submit in {self.study.timing} minutes", content)
 
     def test_wait_message_is_translated(self):
@@ -912,6 +914,7 @@ class AdministrationUpdateViewTest(TestCase):
         content = self.last_page()
         self.assertIn('name="btn-submit"', content)
         self.assertNotIn("submit-after-wait", content)
+        self.assertIn('id="id_submit_btn2"', content)  # the bottom bar's Submit
         self.assertNotIn("You can submit in", content)
 
     def resume_url(self):
