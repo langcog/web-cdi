@@ -29,7 +29,23 @@
         {% if data.menu|length < 1 and contents|length < 1 and timer %}
             <input id="id_submit_btn2" name="btn-submit" value="{% trans 'Submit' %}" class="btn btn-success submit-button" type="submit" onclick="clicked(event)">
         {% endif %}
+        {% if not timer %}{% if data.menu == contents|max_page or contents|length < 1 %}
+            {# before the group's minimum time: shown but disabled, with how long to wait (#808) #}
+            <input name="btn-submit" value="{% trans 'Submit' %}" class="btn btn-success submit-button submit-after-wait" type="submit" onclick="clicked(event)" disabled>
+        {% endif %}{% endif %}
     </div>
+    {% if not timer %}{% if data.menu == contents|max_page or contents|length < 1 %}
+        <p id="submit-wait-message" class="text-center">{% blocktrans count minutes=minutes_until_submit %}You can submit in {{ minutes }} minute. Please look over your answers in the meantime.{% plural %}You can submit in {{ minutes }} minutes. Please look over your answers in the meantime.{% endblocktrans %}</p>
+        <script>
+            setTimeout(function () {
+                document.querySelectorAll(".submit-after-wait").forEach(function (button) {
+                    button.disabled = false;
+                });
+                var message = document.getElementById("submit-wait-message");
+                if (message) { message.style.display = "none"; }
+            }, {{ seconds_until_submit }} * 1000);
+        </script>
+    {% endif %}{% endif %}
     <div class="wcdi-form-nav-sub">
         <input name="btn-save" value="{% trans 'Save' %}" class="btn btn-link wcdi-nav-link" type="submit">
         {% if not object.study.no_demographic_boolean %}
