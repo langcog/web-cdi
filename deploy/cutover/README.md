@@ -1,9 +1,9 @@
 # Production cutover (#688)
 
-Drafted with Claude Opus 5.5; not yet reviewed. **Status: draft.** The
-production environment was built on 2026-11-07 (first-build steps 1–6) with an
-empty database; webcdi.org still points at AWS. Each step below that creates
-or changes something waits for Mike's go-ahead.
+Drafted with Claude Opus 5.5; not yet reviewed. **Status: done.**
+webcdi.org moved to GCP on Thursday 2026-11-19 (DNS switched 9:18 pm
+Pacific); see "Cutover record" below. AWS stays up and read-only through the
+30-day hold, then #689. Follow-ups are in #810.
 
 Moves webcdi.org from AWS Elastic Beanstalk to the GCP build, with the
 production database copied across while writes are stopped. Rollback is
@@ -64,8 +64,7 @@ It only runs once the repository variable `DEPLOY_PRODUCTION` is `true`.
    then the repository variable `DEPLOY_PRODUCTION=true`.
 8. Vic adds the two `_acme-challenge` CNAMEs from `tofu output
    dns_authorizations`; wait for the certificate to show ACTIVE. (Done
-   2026-11-10, along with step 7 except `DEPLOY_PRODUCTION`, which waits
-   until after the dress rehearsal.)
+   2026-11-10, along with step 7; `DEPLOY_PRODUCTION=true` set 2026-11-12.)
 9. Budget alert on the project (needs billing-account access; Stanford may
    have to set it).
 
@@ -75,7 +74,8 @@ It only runs once the repository variable `DEPLOY_PRODUCTION` is `true`.
       test send delivered (2026-11-06).
 - [x] A test email from production (`manage.py sendtestemail` through the
       migrate job) reached webcdi-contact (2026-11-10).
-- [ ] A password-reset email from production reaches a stanford.edu address.
+- [x] A password-reset email from production reaches a stanford.edu address
+      (2026-11-12).
 - [x] First build done (above); the certificate is ACTIVE (2026-11-10).
       `curl --resolve` to the load balancer: `/health/` 200, www redirects.
 - [x] AWS database password copied into the production project's Secret
@@ -95,20 +95,30 @@ It only runs once the repository variable `DEPLOY_PRODUCTION` is `true`.
       Argentine Spanish WG redirect (#764); `/health/` and the login page 200
       through the load balancer. Found: Dutch CAT theta stored as 0 (#798).
       The database now holds this copy; the real copy overwrites it.
-- [ ] Browser test of production before DNS: map `webcdi.org` to the load
+- [x] Browser test of production before DNS: map `webcdi.org` to the load
       balancer IP in your `/etc/hosts`, log in with your own account, open a
-      group, a download, and a CAT form. Remove the line afterwards.
-- [ ] Restore drill: point-in-time restore of the production database to a
-      scratch instance; delete it after.
+      group, a download, and a CAT form. Remove the line afterwards. (Mike,
+      2026-11-12: login, download and Japanese CAT worked. Check the padlock
+      first: the certificate is from Google Trust Services on GCP, Amazon on
+      AWS. Safari reached AWS on the first try despite the mapping. Findings:
+      CAT progress bar (#801); groups without a background form (#802).)
+- [x] Restore drill: point-in-time restore of the production database to a
+      scratch instance; delete it after. (2026-11-12: `gcloud sql instances
+      clone --point-in-time`, 8.5 min; row counts matched production up to the
+      restore point; scratch instance deleted.)
 - [ ] Open items from the rehearsal: CAT forms through a browser in each
-      language; the 2 completed CAT administrations with no theta.
-- [ ] QA sign-off (Cherrie) and percentile sign-off (Virginia).
-- [ ] Researchers told the date at least a week ahead (Virginia's email),
-      including the Dutch group, who run their own server.
+      language; the 2 completed CAT administrations with no theta. (Japanese
+      CAT checked 2026-11-12; the rest moved to #810.)
+- [x] QA sign-off (Cherrie, 2026-11-12).
+- [x] Percentile sign-off (Virginia, 2026-11-12), given that Web-CDI and the
+      Wordbank scoring app both use the 36-month tables. They do: Web-CDI's
+      Words & Sentences norms (#767) match the scoring app's.
+- [x] Researchers told the date (Virginia's email), including the Dutch
+      group, who run their own server.
 - [x] Current alias targets of `webcdi.org` and `www.webcdi.org` written
       down for rollback (Vic, 2026-11-10; kept outside the repo).
-- [ ] Vic available in the window to change DNS.
-- [ ] No merges to master on the day.
+- [x] Vic available in the window to change DNS.
+- [x] No merges to master on the day.
 
 ## Window
 
@@ -128,17 +138,27 @@ expect about one.
 
 ## On the day
 
-`P` is the production project, `R=us-west1`.
+`P` is the production project, `R=us-west1`. The scripts used on the night
+are in `day-of/`: `runjob.py` runs a Cloud Run job with overridden arguments
+and prints its log; the `aws_*.sh` scripts run inside the `load-from-aws` job
+(`runjob.py webcdi-production-load-from-aws -- -c "$(cat X.sh)"`), and the
+`.py` checks through the migrate job (`runjob.py webcdi-production-migrate
+-- shell -c "$(cat X.py)"`). `watch.sh` summarizes traffic afterwards (counts
+only).
 
 1. **Stop writes on AWS** (Mike's go-ahead; the only change made to AWS).
    Runs from the production project with the `load-from-aws` job's image and
-   password, overriding its arguments:
+   password, overriding its arguments (`day-of/aws_write_stop.sh`). The app's
+   role doesn't own the database, so `ALTER DATABASE` would fail; the setting
+   goes on the role instead:
    ```sql
-   ALTER DATABASE "webcdi-admin" SET default_transaction_read_only = on;
+   ALTER ROLE "webcdi-admin" SET default_transaction_read_only = on;
    SELECT pg_terminate_backend(pid) FROM pg_stat_activity
-    WHERE datname = current_database() AND pid <> pg_backend_pid();
+    WHERE usename = current_user AND pid <> pg_backend_pid();
    ```
-   Check from a new session: `SHOW default_transaction_read_only` is `on`.
+   Check from a new session: `SHOW default_transaction_read_only` is `on`,
+   and a no-op write is refused. Rehearsed on the day inside a rolled-back
+   transaction (`day-of/aws_write_stop_rehearse.sh`).
    The AWS site still shows pages; saving anything fails with an error page,
    and AWS sends error emails to webcdi-contact. That is expected.
 2. **Copy:** pause the scoring schedule
@@ -171,18 +191,45 @@ expect about one.
 
 ## Rollback
 
-- **Before step 8:** users only saw the write stop. Undo it:
+- **Before step 8:** users only saw the write stop. Undo it
+  (`day-of/aws_write_undo.sh`):
   ```sql
   SET default_transaction_read_only = off;
-  ALTER DATABASE "webcdi-admin" RESET default_transaction_read_only;
+  ALTER ROLE "webcdi-admin" RESET default_transaction_read_only;
   SELECT pg_terminate_backend(pid) FROM pg_stat_activity
-   WHERE datname = current_database() AND pid <> pg_backend_pid();
+   WHERE usename = current_user AND pid <> pg_backend_pid();
   ```
   (the last statement makes the app reconnect without the setting).
 - **After step 8, until the window closes:** Vic restores the two aliases;
   undo the write stop as above. Forms saved on GCP in between are listed
   (administrations modified after the switch) and handled by hand.
 - **After the window:** fix forward on GCP (decision 4).
+
+## Cutover record (2026-11-19)
+
+All times Pacific. Mike drove, Vic changed DNS.
+
+- 8:45 pm write stop on AWS (`ALTER ROLE`, as above); checked from a new
+  session.
+- Copy 119 s; every row count matched exactly (e.g. 161,019
+  administrations, 6,898,965 item answers). Scoring schedule paused during
+  the copy.
+- No duplicate `InstrumentScore` rows; 4 migrations; instruments reloaded.
+- Rescore: 32,842 completed forms in 922 s, none failed, none left
+  unscored; scoring schedule resumed.
+- Checks: 516,433 percentile values, all valid; CAT theta stored as 0: none
+  (2 completed CAT forms have no theta, as on AWS); downloads as each owner
+  83 OK plus the known #764 redirect; `/health/` 200 through the load
+  balancer; Mike's `/etc/hosts` browser test passed.
+- 9:18 pm DNS switched: A records for the load balancer IP, TTL 300, for
+  both names. Google and Cloudflare resolvers agreed within minutes.
+- After: the live certificate is Google's; www redirects to webcdi.org; a
+  password reset from the live site arrived; no errors in the first watch.
+  AWS sent two expected read-only errors (9:08 and 9:12 pm) and none after
+  the switch.
+- Next morning: HBCD's half-hourly API pull failed for its largest study
+  (42 MB of JSON; Cloud Run refuses responses over 32 MiB) and building it
+  ran instances out of memory. Fixed by gzip (#812) and 2 GiB memory (#813).
 
 ## Afterwards
 
