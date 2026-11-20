@@ -1,10 +1,9 @@
 # Production cutover (#688)
 
-Drafted with Claude Opus 5.5; not yet reviewed. **Status: draft.** The
-production environment was built on 2026-11-07 and holds the 2026-11-10
-dress-rehearsal copy; webcdi.org still points at AWS. **Cutover: Thursday
-2026-11-19, 9–11 pm Pacific.** Each step below that creates
-or changes something waits for Mike's go-ahead.
+Drafted with Claude Opus 5.5; not yet reviewed. **Status: done.**
+webcdi.org moved to GCP on Thursday 2026-11-19 (DNS switched 9:18 pm
+Pacific); see "Cutover record" below. AWS stays up and read-only through the
+30-day hold, then #689. Follow-ups are in #810.
 
 Moves webcdi.org from AWS Elastic Beanstalk to the GCP build, with the
 production database copied across while writes are stopped. Rollback is
@@ -108,17 +107,18 @@ It only runs once the repository variable `DEPLOY_PRODUCTION` is `true`.
       clone --point-in-time`, 8.5 min; row counts matched production up to the
       restore point; scratch instance deleted.)
 - [ ] Open items from the rehearsal: CAT forms through a browser in each
-      language; the 2 completed CAT administrations with no theta.
+      language; the 2 completed CAT administrations with no theta. (Japanese
+      CAT checked 2026-11-12; the rest moved to #810.)
 - [x] QA sign-off (Cherrie, 2026-11-12).
-- [ ] Percentile sign-off (Virginia): given on 2026-11-12 if both Web-CDI and
-      "the scoring app" use the 36-month tables. Web-CDI does (#767); which
-      scoring app she means is still open.
-- [ ] Researchers told the date at least a week ahead (Virginia's email),
-      including the Dutch group, who run their own server.
+- [x] Percentile sign-off (Virginia, 2026-11-12), given that Web-CDI and the
+      Wordbank scoring app both use the 36-month tables. They do: Web-CDI's
+      Words & Sentences norms (#767) match the scoring app's.
+- [x] Researchers told the date (Virginia's email), including the Dutch
+      group, who run their own server.
 - [x] Current alias targets of `webcdi.org` and `www.webcdi.org` written
       down for rollback (Vic, 2026-11-10; kept outside the repo).
-- [ ] Vic available in the window to change DNS.
-- [ ] No merges to master on the day.
+- [x] Vic available in the window to change DNS.
+- [x] No merges to master on the day.
 
 ## Window
 
@@ -138,17 +138,27 @@ expect about one.
 
 ## On the day
 
-`P` is the production project, `R=us-west1`.
+`P` is the production project, `R=us-west1`. The scripts used on the night
+are in `day-of/`: `runjob.py` runs a Cloud Run job with overridden arguments
+and prints its log; the `aws_*.sh` scripts run inside the `load-from-aws` job
+(`runjob.py webcdi-production-load-from-aws -- -c "$(cat X.sh)"`), and the
+`.py` checks through the migrate job (`runjob.py webcdi-production-migrate
+-- shell -c "$(cat X.py)"`). `watch.sh` summarizes traffic afterwards (counts
+only).
 
 1. **Stop writes on AWS** (Mike's go-ahead; the only change made to AWS).
    Runs from the production project with the `load-from-aws` job's image and
-   password, overriding its arguments:
+   password, overriding its arguments (`day-of/aws_write_stop.sh`). The app's
+   role doesn't own the database, so `ALTER DATABASE` would fail; the setting
+   goes on the role instead:
    ```sql
-   ALTER DATABASE "webcdi-admin" SET default_transaction_read_only = on;
+   ALTER ROLE "webcdi-admin" SET default_transaction_read_only = on;
    SELECT pg_terminate_backend(pid) FROM pg_stat_activity
-    WHERE datname = current_database() AND pid <> pg_backend_pid();
+    WHERE usename = current_user AND pid <> pg_backend_pid();
    ```
-   Check from a new session: `SHOW default_transaction_read_only` is `on`.
+   Check from a new session: `SHOW default_transaction_read_only` is `on`,
+   and a no-op write is refused. Rehearsed on the day inside a rolled-back
+   transaction (`day-of/aws_write_stop_rehearse.sh`).
    The AWS site still shows pages; saving anything fails with an error page,
    and AWS sends error emails to webcdi-contact. That is expected.
 2. **Copy:** pause the scoring schedule
@@ -181,18 +191,45 @@ expect about one.
 
 ## Rollback
 
-- **Before step 8:** users only saw the write stop. Undo it:
+- **Before step 8:** users only saw the write stop. Undo it
+  (`day-of/aws_write_undo.sh`):
   ```sql
   SET default_transaction_read_only = off;
-  ALTER DATABASE "webcdi-admin" RESET default_transaction_read_only;
+  ALTER ROLE "webcdi-admin" RESET default_transaction_read_only;
   SELECT pg_terminate_backend(pid) FROM pg_stat_activity
-   WHERE datname = current_database() AND pid <> pg_backend_pid();
+   WHERE usename = current_user AND pid <> pg_backend_pid();
   ```
   (the last statement makes the app reconnect without the setting).
 - **After step 8, until the window closes:** Vic restores the two aliases;
   undo the write stop as above. Forms saved on GCP in between are listed
   (administrations modified after the switch) and handled by hand.
 - **After the window:** fix forward on GCP (decision 4).
+
+## Cutover record (2026-11-19)
+
+All times Pacific. Mike drove, Vic changed DNS.
+
+- 8:45 pm write stop on AWS (`ALTER ROLE`, as above); checked from a new
+  session.
+- Copy 119 s; every row count matched exactly (e.g. 161,019
+  administrations, 6,898,965 item answers). Scoring schedule paused during
+  the copy.
+- No duplicate `InstrumentScore` rows; 4 migrations; instruments reloaded.
+- Rescore: 32,842 completed forms in 922 s, none failed, none left
+  unscored; scoring schedule resumed.
+- Checks: 516,433 percentile values, all valid; CAT theta stored as 0: none
+  (2 completed CAT forms have no theta, as on AWS); downloads as each owner
+  83 OK plus the known #764 redirect; `/health/` 200 through the load
+  balancer; Mike's `/etc/hosts` browser test passed.
+- 9:18 pm DNS switched: A records for the load balancer IP, TTL 300, for
+  both names. Google and Cloudflare resolvers agreed within minutes.
+- After: the live certificate is Google's; www redirects to webcdi.org; a
+  password reset from the live site arrived; no errors in the first watch.
+  AWS sent two expected read-only errors (9:08 and 9:12 pm) and none after
+  the switch.
+- Next morning: HBCD's half-hourly API pull failed for its largest study
+  (42 MB of JSON; Cloud Run refuses responses over 32 MiB) and building it
+  ran instances out of memory. Fixed by gzip (#812) and 2 GiB memory (#813).
 
 ## Afterwards
 
