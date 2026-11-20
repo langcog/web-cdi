@@ -164,7 +164,7 @@ class BaseAPIView(StudyOwnerMixin, TemplateView):
         # Recreate link for administration
         test_url = "".join(
             [
-                "http://",
+                request.scheme + "://",
                 get_current_site(request).domain,
                 reverse("administer_cdi_form", args=["a" * 64]),
             ]

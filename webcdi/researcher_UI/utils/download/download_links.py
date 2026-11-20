@@ -37,7 +37,7 @@ def download_links(request, study_obj, administrations=None):
     # Recreate administration links and add them to dataframe
     test_url = "".join(
         [
-            "http://",
+            request.scheme + "://",
             get_current_site(request).domain,
             reverse("administer_cdi_form", args=["a" * 64]),
         ]
