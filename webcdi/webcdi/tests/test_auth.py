@@ -76,6 +76,29 @@ class AuthFlowsTest(TestCase):
         self.assertEqual(len(mail.outbox), 1)
         self.assertIn("auth@example.com", mail.outbox[0].to)
 
+    def test_password_reset_uses_the_sites_templates(self):
+        # django.contrib.admin's registration/ templates used to win (#810)
+        for name in ["password_reset", "password_reset_done", "password_reset_complete"]:
+            with self.subTest(name=name):
+                response = self.client.get(reverse(name))
+                self.assertTemplateUsed(response, "researcher_UI/base.html")
+                self.assertTemplateNotUsed(response, "admin/base_site.html")
+        response = self.client.get(
+            reverse("password_reset_confirm", args=("bad", "link"))
+        )
+        self.assertTemplateUsed(response, "researcher_UI/base.html")
+        self.client.post(reverse("password_reset"), {"email": "auth@example.com"})
+        self.assertIn("Thank you for using Web-CDI", mail.outbox[0].body)
+
+    def test_admin_password_change_still_renders(self):
+        admin = User.objects.create_superuser(
+            "pw_admin", email="pw@example.com", password="a-strong-password"
+        )
+        self.client.force_login(admin)
+        response = self.client.get(reverse("admin:password_change"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "id_old_password")
+
     def test_csrf_failure_shows_friendly_page(self):
         # e.g. a login page left open too long, or cookies blocked
         client = Client(enforce_csrf_checks=True)

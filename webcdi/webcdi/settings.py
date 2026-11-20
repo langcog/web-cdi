@@ -228,6 +228,9 @@ MANAGERS = ADMINS
 INSTALLED_APPS = (
     "researcher_UI",
     "modeltranslation",
+    # before django.contrib.admin, so the site's own registration/ templates
+    # (password reset and change) win over the admin's
+    "webcdi",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -246,7 +249,6 @@ INSTALLED_APPS = (
     "health_check",
     "localflavor",
     "django_countries",
-    "webcdi",
     "brookes",
     "rangefilter",
 )
