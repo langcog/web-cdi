@@ -888,6 +888,26 @@ class AdministrationUpdateViewTest(TestCase):
         response = self.client.post(background_url, payload, follow=True)
         self.assertEqual(response.redirect_chain[-1][0], section_url)
 
+    def last_page(self):
+        # sections past the end are clamped to the last page
+        return self.client.get(self.section_url(999)).content.decode()
+
+    def test_last_page_before_the_minimum_time_says_how_long_to_wait(self):
+        # #808: parents who finished early saw no Submit button and left
+        content = self.last_page()
+        self.assertIn('id="submit-after-wait"', content)
+        self.assertRegex(content, r'id="submit-after-wait"[^>]*disabled')
+        self.assertIn("You can submit in 6 minutes", content)
+
+    def test_last_page_after_the_minimum_time_can_be_submitted(self):
+        Administration.objects.filter(pk=self.administration.pk).update(
+            created_date=timezone.now() - datetime.timedelta(minutes=7)
+        )
+        content = self.last_page()
+        self.assertIn('name="btn-submit"', content)
+        self.assertNotIn("submit-after-wait", content)
+        self.assertNotIn("You can submit in", content)
+
     def resume_url(self):
         """Where reopening the parent's link sends them."""
         response = self.client.get(
