@@ -3523,3 +3523,8 @@ msgid "You can submit in %(minutes)s minute. Please look over your answers in th
 msgid_plural "You can submit in %(minutes)s minutes. Please look over your answers in the meantime."
 msgstr[0] "Podrá enviar el formulario en %(minutes)s minuto. Mientras tanto, por favor revise sus respuestas."
 msgstr[1] "Podrá enviar el formulario en %(minutes)s minutos. Mientras tanto, por favor revise sus respuestas."
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html
+msgid "Submit your responses"
+msgstr "Enviar sus respuestas"

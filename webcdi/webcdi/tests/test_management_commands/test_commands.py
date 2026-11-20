@@ -30,6 +30,22 @@ class CommandsTestCase(TestCase):
 
         self.assertFalse(Instrument.objects.filter(family__isnull=True).exists())
 
+    def test_dutch_cat_offers_the_background_form_without_location(self):
+        # #806: the MPI group's form without Land and Postcode
+        import os
+
+        from django.conf import settings
+
+        call_command("01_populate_instrument_family")
+        call_command("02_populate_instrument")
+        names = set(
+            Instrument.objects.get(name="Dutch_CAT").demographics.values_list("name", flat=True)
+        )
+        self.assertIn("Dutch_CAT_no_location.json", names)
+        for demographic in Instrument.objects.get(name="Dutch_CAT").demographics.all():
+            path = os.path.join(settings.BASE_DIR, "cdi_forms", demographic.path.lstrip("/"))
+            self.assertTrue(os.path.exists(path), path)
+
     def test_cdi3r_family_needs_no_code(self):
         call_command("01_populate_instrument_family")
         call_command("02_populate_instrument")

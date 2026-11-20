@@ -3653,3 +3653,8 @@ msgstr ""
 msgid "You can submit in %(minutes)s minute. Please look over your answers in the meantime."
 msgid_plural "You can submit in %(minutes)s minutes. Please look over your answers in the meantime."
 msgstr[0] "%(minutes)s분 후에 제출하실 수 있습니다. 그동안 응답 내용을 검토해 주십시오."
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html
+msgid "Submit your responses"
+msgstr "응답 제출하기"
