@@ -66,7 +66,7 @@ msgstr "Prefiero no revelar"
 
 #: cdi_forms/forms/forms.py:37
 msgid "Under $25,000"
-msgstr "Menos que "
+msgstr "Menos de $25,000"
 
 #: cdi_forms/forms/forms.py:38
 msgid "$25,000-$50,000"
@@ -98,7 +98,7 @@ msgstr ""
 
 #: cdi_forms/forms/forms.py:45
 msgid "Over $200,000"
-msgstr ""
+msgstr "Más de $200,000"
 
 #: cdi_forms/forms/forms.py:49
 msgid "American Indian / Alaska Native"

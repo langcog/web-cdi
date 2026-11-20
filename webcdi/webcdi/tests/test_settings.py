@@ -69,3 +69,16 @@ class EnvParsingTest(SimpleTestCase):
         self.assertFalse(is_true(""))
         self.assertFalse(is_true(False))
         self.assertFalse(is_true(0))
+
+
+class SpanishIncomeLabelsTest(SimpleTestCase):
+    """#802: the Spanish label for the lowest income band was "Menos que "
+    with no amount."""
+
+    def test_income_band_labels_have_amounts(self):
+        from django.utils import translation
+
+        for language in ["es", "es-ar"]:
+            with self.subTest(language=language), translation.override(language):
+                self.assertEqual(translation.gettext("Under $25,000"), "Menos de $25,000")
+                self.assertEqual(translation.gettext("Over $200,000"), "Más de $200,000")
