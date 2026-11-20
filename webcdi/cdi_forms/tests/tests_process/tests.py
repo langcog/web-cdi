@@ -48,6 +48,18 @@ def scroll_and_click(passed_in_driver, object):
     actions.perform()
 
 
+def unambiguous_dob(months=20):
+    """A birth date about `months` months ago whose day equals its month
+    (e.g. 3 March), so it reads the same as mm/dd/yyyy (English, Spanish)
+    and dd/mm/yyyy (other languages). 500 days ago typed as mm/dd made Dutch
+    forms read the child as too young (or the date as invalid) on some days,
+    and the test then resubmitted the background form forever."""
+    dob = datetime.date.today() - datetime.timedelta(days=int(months * 30.44))
+    while dob.day != dob.month:
+        dob -= datetime.timedelta(days=1)
+    return dob
+
+
 @tag("selenium", "login")
 class WebSiteOpensTests(LiveServerTestCase):
     LiveServerTestCase.host = "web"
@@ -64,6 +76,14 @@ class WebSiteOpensTests(LiveServerTestCase):
             command_executor="http://selenium:4444", options=options
         )
         cls.selenium.implicitly_wait(10)
+
+    @classmethod
+    def tearDownClass(cls):
+        # The container's browser runs one session at a time; a session left
+        # open made the next class fail to start one, and an open browser can
+        # keep the live server from shutting down (nightly runs hung for 2 h).
+        cls.selenium.quit()
+        super().tearDownClass()
 
     def test_visit_home_age(self):
         self.selenium.get(f"{self.live_server_url}")
@@ -101,6 +121,7 @@ class TestParentInterface(LiveServerFixturesMixin, LiveServerTestCase):
             instrument=self.instrument,
             min_age=16,
             max_age=30,
+            timing=0,  # no minimum time, so Submit shows on the last page
         )
         self.study_obj.save()
 
@@ -116,6 +137,14 @@ class TestParentInterface(LiveServerFixturesMixin, LiveServerTestCase):
         options.add_argument("--disable-dev-shm-usage")
         cls.selenium = webdriver.Remote("http://selenium:4444", options=options)
         cls.selenium.implicitly_wait(1)
+
+    @classmethod
+    def tearDownClass(cls):
+        # The container's browser runs one session at a time; a session left
+        # open made the next class fail to start one, and an open browser can
+        # keep the live server from shutting down (nightly runs hung for 2 h).
+        cls.selenium.quit()
+        super().tearDownClass()
 
     def find_css(self, css_selector):
         """Shortcut to find elements by CSS. Returns either a list or singleton"""
@@ -144,9 +173,7 @@ class TestParentInterface(LiveServerFixturesMixin, LiveServerTestCase):
 
         try:
             element = self.selenium.find_element(By.ID, "id_child_dob")
-            now = datetime.datetime.now() - datetime.timedelta(days=500)
-            input_date = now.strftime("%m/%d/%Y")
-            element.send_keys(input_date)
+            element.send_keys(unambiguous_dob().strftime("%m/%d/%Y"))
         except NoSuchElementException:
             pass
         except ElementNotInteractableException:
@@ -284,10 +311,16 @@ class TestParentInterface(LiveServerFixturesMixin, LiveServerTestCase):
             self.selenium.find_element(By.ID, "id_submit_btn").click()
 
     def complete_administration(self):
+        # Bounded: before the group's minimum time the last page has no
+        # Submit, and an unbounded loop hung the nightly run for 2 hours.
         completed = False
-        while not completed:
+        background_attempts = 0
+        for _ in range(200):
+            if completed:
+                break
             if self.selenium.find_elements(By.ID, "id_child_dob"):
-                self.selenium.find_element(By.ID, "id_child_dob")
+                background_attempts += 1
+                self.assertLess(background_attempts, 4, "background form was not accepted")
                 self.complete_background_info()
             if self.selenium.find_elements(By.ID, "page_number"):
                 element = self.selenium.find_element(By.ID, "page_number")
@@ -309,6 +342,7 @@ class TestParentInterface(LiveServerFixturesMixin, LiveServerTestCase):
                 completed = True
                 element = self.selenium.find_element(By.ID, "id_submit_btn2")
                 scroll_and_click(self.selenium, element)
+        self.assertTrue(completed, "never reached a Submit button")
         self.selenium.switch_to.alert.accept()
 
     def test_parent_UI(self):
@@ -371,6 +405,7 @@ class TestParentInterface(LiveServerFixturesMixin, LiveServerTestCase):
             max_age=30,
             demographic=demographic,
             birth_weight_units="kg",
+            timing=0,
         )
         self.study_obj.save()
 

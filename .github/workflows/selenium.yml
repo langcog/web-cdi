@@ -53,7 +53,7 @@ jobs:
       - name: Run the Selenium-tagged tests
         run: >-
           docker compose exec -T web
-          python manage.py test --tag=selenium --noinput
+          python manage.py test --tag=selenium --noinput -v 2
 
       - name: Dump logs on failure
         if: failure()
