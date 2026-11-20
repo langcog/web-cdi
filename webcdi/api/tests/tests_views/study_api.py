@@ -1,3 +1,4 @@
+import gzip
 import json
 import logging
 
@@ -68,6 +69,16 @@ class StudyAPIViewTest(TestCase):
     def test_study_api(self):
         response = self.client.generic("POST", self.url, json.dumps(self.payload))
         self.assertEqual(response.status_code, 200)
+
+    def test_study_api_is_gzipped_for_clients_that_accept_it(self):
+        # Cloud Run refuses uncompressed responses over 32 MiB
+        response = self.client.generic(
+            "POST", self.url, json.dumps(self.payload), HTTP_ACCEPT_ENCODING="gzip"
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response["Content-Encoding"], "gzip")
+        data = json.loads(gzip.decompress(response.content))
+        self.assertEqual(len(data), 10)
 
     def test_english_study_api(self):
         response = self.client.generic(

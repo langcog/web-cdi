@@ -9,6 +9,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.gzip import gzip_page
 from django.views.generic import TemplateView
 
 from api.mixins import StudyOwnerMixin
@@ -22,6 +23,9 @@ from researcher_UI.utils import (format_admin_data, format_admin_header,
 
 
 @method_decorator(csrf_exempt, name="dispatch")
+# Compressed for clients that accept gzip: Cloud Run refuses responses over
+# 32 MiB, and a large study's JSON is bigger than that uncompressed.
+@method_decorator(gzip_page, name="dispatch")
 class BaseAPIView(StudyOwnerMixin, TemplateView):
     http_method_names = [
         "post",
