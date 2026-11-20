@@ -3552,3 +3552,8 @@ msgstr[0] "תוכל לשלוח את השאלון בעוד %(minutes)s דקה. ב
 msgstr[1] "תוכל לשלוח את השאלון בעוד %(minutes)s דקות. בינתיים, אנא עבור על התשובות שלך."
 msgstr[2] "תוכל לשלוח את השאלון בעוד %(minutes)s דקות. בינתיים, אנא עבור על התשובות שלך."
 msgstr[3] "תוכל לשלוח את השאלון בעוד %(minutes)s דקות. בינתיים, אנא עבור על התשובות שלך."
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html
+msgid "Submit your responses"
+msgstr "שלח את התשובות שלך"

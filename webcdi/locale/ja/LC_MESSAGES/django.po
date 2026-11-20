@@ -3515,3 +3515,8 @@ msgstr "リセット"
 msgid "You can submit in %(minutes)s minute. Please look over your answers in the meantime."
 msgid_plural "You can submit in %(minutes)s minutes. Please look over your answers in the meantime."
 msgstr[0] "%(minutes)s分後に送信できます。それまでの間、回答をご確認ください。"
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html
+msgid "Submit your responses"
+msgstr "回答を送信する"

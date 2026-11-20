@@ -3161,3 +3161,8 @@ msgid_plural "You can submit in %(minutes)s minutes. Please look over your answe
 msgstr[0] "Formulář budete moci odeslat za %(minutes)s minutu. Mezitím si prosím zkontrolujte své odpovědi."
 msgstr[1] "Formulář budete moci odeslat za %(minutes)s minuty. Mezitím si prosím zkontrolujte své odpovědi."
 msgstr[2] "Formulář budete moci odeslat za %(minutes)s minut. Mezitím si prosím zkontrolujte své odpovědi."
+
+#: cdi_forms/templates/cdi_forms/administration_summary.html
+#: cdi_forms/templates/cdi_forms/cat_forms/cat_completed.html
+msgid "Submit your responses"
+msgstr "Odeslat odpovědi"
