@@ -185,3 +185,39 @@ class ExternalSourceTextTest(GroupSettingsTestCase):
         self.assertIn("reopens that administration only if", page)
         self.assertIn("PROLIFIC_PID", page)
         self.assertNotIn("opening the link again starts a new administration", page)
+
+
+class LowerOldDefaultMinimumTimeTest(TestCase):
+    """Migration 0112 (#808): groups at the old 6-minute default get their
+    form's new default; other values are left alone."""
+
+    def test_groups_at_six_get_the_forms_default(self):
+        import importlib
+
+        from django.apps import apps
+
+        migration = importlib.import_module(
+            "researcher_UI.migrations.0112_lower_old_default_minimum_time"
+        )
+        user = User.objects.create_user("timing-owner", password="x-test-only")
+        forms = {"WS": 6, "L2A": 6, "CDI3": 6}
+        studies = {
+            form: Study.objects.create(
+                researcher=user, name=form, timing=timing,
+                instrument=Instrument.objects.create(
+                    name=f"Timing_{form}", verbose_name=form, language="Timing",
+                    form=form, min_age=8, max_age=36,
+                ),
+            )
+            for form, timing in forms.items()
+        }
+        kept = Study.objects.create(
+            researcher=user, name="kept", timing=8,
+            instrument=studies["WS"].instrument,
+        )
+        migration.lower_old_default(apps, None)
+        for form, expected in {"WS": 3, "L2A": 2, "CDI3": 2}.items():
+            studies[form].refresh_from_db()
+            self.assertEqual(studies[form].timing, expected, form)
+        kept.refresh_from_db()
+        self.assertEqual(kept.timing, 8)
