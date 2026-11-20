@@ -111,7 +111,7 @@ def download_summary(request, study_obj, administrations=None):
     # Recreate link for administration
     test_url = "".join(
         [
-            "http://",
+            request.scheme + "://",
             get_current_site(request).domain,
             reverse("administer_cdi_form", args=["a" * 64]),
         ]

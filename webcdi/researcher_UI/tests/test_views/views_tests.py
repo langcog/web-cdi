@@ -973,6 +973,23 @@ class CompletedNotReadyDownloadTest(TestCase):
                 self.assertEqual(len(rows), 2)
                 self.assertTrue(all(r["link"].startswith("http") for r in rows))
 
+    def test_downloaded_links_use_https_on_a_secure_site(self):
+        # links were always written as http://, a redirect away from the form
+        import csv
+        import io
+
+        study = self.make_study("English_WS")
+        url = reverse("researcher_ui:console_study", kwargs={"pk": study.pk})
+        ids = [str(pk) for pk in Administration.objects.filter(study=study).values_list("pk", flat=True)]
+        for action in ["download-links", "download-study-csv", "download-summary-csv"]:
+            with self.subTest(action=action):
+                response = self.client.post(
+                    url, {action: True, "select_col": ids}, secure=True
+                )
+                rows = [r for r in csv.DictReader(io.StringIO(response.content.decode())) if r.get("link")]
+                self.assertTrue(rows)
+                self.assertTrue(all(r["link"].startswith("https://") for r in rows))
+
     def test_scoring_program_download_removed(self):
         # #764: the CDI scoring-program (zip of fixed-width .txt files) export
         # was off the menu since #611 and the program is distributed by the
