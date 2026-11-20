@@ -65,6 +65,14 @@ class WebSiteOpensTests(LiveServerTestCase):
         )
         cls.selenium.implicitly_wait(10)
 
+    @classmethod
+    def tearDownClass(cls):
+        # The container's browser runs one session at a time; a session left
+        # open made the next class fail to start one, and an open browser can
+        # keep the live server from shutting down (nightly runs hung for 2 h).
+        cls.selenium.quit()
+        super().tearDownClass()
+
     def test_visit_home_age(self):
         self.selenium.get(f"{self.live_server_url}")
         self.assertIn(self.selenium.title, "Web CDI")
@@ -116,6 +124,14 @@ class TestParentInterface(LiveServerFixturesMixin, LiveServerTestCase):
         options.add_argument("--disable-dev-shm-usage")
         cls.selenium = webdriver.Remote("http://selenium:4444", options=options)
         cls.selenium.implicitly_wait(1)
+
+    @classmethod
+    def tearDownClass(cls):
+        # The container's browser runs one session at a time; a session left
+        # open made the next class fail to start one, and an open browser can
+        # keep the live server from shutting down (nightly runs hung for 2 h).
+        cls.selenium.quit()
+        super().tearDownClass()
 
     def find_css(self, css_selector):
         """Shortcut to find elements by CSS. Returns either a list or singleton"""
