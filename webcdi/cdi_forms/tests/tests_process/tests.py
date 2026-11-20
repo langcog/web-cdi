@@ -109,6 +109,7 @@ class TestParentInterface(LiveServerFixturesMixin, LiveServerTestCase):
             instrument=self.instrument,
             min_age=16,
             max_age=30,
+            timing=0,  # no minimum time, so Submit shows on the last page
         )
         self.study_obj.save()
 
@@ -300,8 +301,12 @@ class TestParentInterface(LiveServerFixturesMixin, LiveServerTestCase):
             self.selenium.find_element(By.ID, "id_submit_btn").click()
 
     def complete_administration(self):
+        # Bounded: before the group's minimum time the last page has no
+        # Submit, and an unbounded loop hung the nightly run for 2 hours.
         completed = False
-        while not completed:
+        for _ in range(200):
+            if completed:
+                break
             if self.selenium.find_elements(By.ID, "id_child_dob"):
                 self.selenium.find_element(By.ID, "id_child_dob")
                 self.complete_background_info()
@@ -325,6 +330,7 @@ class TestParentInterface(LiveServerFixturesMixin, LiveServerTestCase):
                 completed = True
                 element = self.selenium.find_element(By.ID, "id_submit_btn2")
                 scroll_and_click(self.selenium, element)
+        self.assertTrue(completed, "never reached a Submit button")
         self.selenium.switch_to.alert.accept()
 
     def test_parent_UI(self):
@@ -387,6 +393,7 @@ class TestParentInterface(LiveServerFixturesMixin, LiveServerTestCase):
             max_age=30,
             demographic=demographic,
             birth_weight_units="kg",
+            timing=0,
         )
         self.study_obj.save()
 
