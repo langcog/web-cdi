@@ -11,8 +11,23 @@
             <input name="btn-save" value="{% trans 'Save' %}" class="btn btn-primary" type="submit">
             {% if data.menu == contents|max_page and timer %}
                 <input name="btn-submit" name="btn-submit" value="{% trans 'Submit' %}" class="btn btn-success submit-button" type="submit" onclick="clicked(event)">
+            {% elif data.menu == contents|max_page %}
+                <input id="submit-after-wait" name="btn-submit" value="{% trans 'Submit' %}" class="btn btn-success submit-button" type="submit" onclick="clicked(event)" disabled>
             {% endif %}
         </div>
+        {% if data.menu == contents|max_page and not timer %}
+        <div class="flex-row d-flex justify-content-center">
+            <p id="submit-wait-message" class="text-center">{% blocktrans count minutes=minutes_until_submit %}You can submit in {{ minutes }} minute. Please look over your answers in the meantime.{% plural %}You can submit in {{ minutes }} minutes. Please look over your answers in the meantime.{% endblocktrans %}</p>
+        </div>
+        <script>
+            setTimeout(function () {
+                var button = document.getElementById("submit-after-wait");
+                if (button) { button.disabled = false; }
+                var message = document.getElementById("submit-wait-message");
+                if (message) { message.style.display = "none"; }
+            }, {{ seconds_until_submit }} * 1000);
+        </script>
+        {% endif %}
         <div class="flex-row d-flex justify-content-center">    
             {% if not object.study.no_demographic_boolean %}
                 <input name="btn-back" value="{% trans 'Go back to Background Info' %}" class="btn btn-primary" type="submit">

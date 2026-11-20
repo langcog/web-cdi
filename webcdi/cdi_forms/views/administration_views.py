@@ -1,5 +1,6 @@
 import json
 import logging
+import math
 import os
 import re
 from typing import Any, Dict, List
@@ -236,12 +237,13 @@ class AdministrationUpdateView(AdministrationByHashMixin, UpdateView):
         ctx["data"] = self.get_section()
         if "contents" in ctx["data"]:
             ctx["contents"] = ctx["data"]["contents"]
-        ctx["timer"] = (
-            True
-            if (timezone.now() - self.object.created_date).total_seconds() / 60.0
-            > self.object.study.timing
-            else False
-        )
+        elapsed = (timezone.now() - self.object.created_date).total_seconds()
+        ctx["timer"] = elapsed / 60.0 > self.object.study.timing
+        # before the group's minimum time, the last page shows a disabled
+        # Submit and says how long to wait, rather than no button at all (#808)
+        wait = max(0, int(self.object.study.timing * 60 - elapsed) + 1)
+        ctx["seconds_until_submit"] = wait
+        ctx["minutes_until_submit"] = max(1, math.ceil(wait / 60))
         ctx["language_code"] = language_map(self.get_object().study.instrument.language)
         return ctx
 
