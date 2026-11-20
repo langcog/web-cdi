@@ -3414,3 +3414,10 @@ msgstr ""
 #~ "Gebruik tijdens het invullen van de vragenlijst de knoppen “Nee“ of “Ja“ "
 #~ "om antwoord te geven. Zodra u op een antwoord geklikt heeft, verschijnt "
 #~ "de volgende vraag. U kunt dan niet meer terug naar de vorige vraag. "
+
+#: cdi_forms/templates/cdi_forms/administration_form.html
+#, python-format
+msgid "You can submit in %(minutes)s minute. Please look over your answers in the meantime."
+msgid_plural "You can submit in %(minutes)s minutes. Please look over your answers in the meantime."
+msgstr[0] "U kunt het formulier over %(minutes)s minuut versturen. Kijk in de tussentijd uw antwoorden nog eens na."
+msgstr[1] "U kunt het formulier over %(minutes)s minuten versturen. Kijk in de tussentijd uw antwoorden nog eens na."

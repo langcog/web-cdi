@@ -8,6 +8,16 @@ from researcher_UI import choices
 
 
 # Model for individual studies
+def default_minimum_time(form):
+    """Minutes before a parent can submit, by instrument form (#808).
+
+    From completion times on webcdi.org (Nov 2026): the full Words & Gestures
+    and Words & Sentences forms rarely take under 3 minutes; the short forms
+    and the CDI-III often take under 6. (The CAT has no minimum.)
+    """
+    return 3 if form in ("WG", "WS") else 2
+
+
 class Study(models.Model):
     researcher = models.ForeignKey(
         "auth.user", on_delete=models.CASCADE
@@ -47,7 +57,7 @@ class Study(models.Model):
     birth_weight_units = models.CharField(max_length=5, default="lb")
     show_feedback = models.BooleanField(default=True)
     active = models.BooleanField(default=True)
-    timing = models.IntegerField(default=6)
+    timing = models.IntegerField(default=3)  # see default_minimum_time
     confirmation_questions = models.BooleanField(
         default=False
     )  # Whether to ask participant to restate primary carer age and child weight

@@ -3516,3 +3516,10 @@ msgstr ""
 
 #~ msgid "Category"
 #~ msgstr "Catégorie"
+
+#: cdi_forms/templates/cdi_forms/administration_form.html
+#, python-format
+msgid "You can submit in %(minutes)s minute. Please look over your answers in the meantime."
+msgid_plural "You can submit in %(minutes)s minutes. Please look over your answers in the meantime."
+msgstr[0] "Vous pourrez soumettre le formulaire dans %(minutes)s minute. En attendant, veuillez relire vos réponses."
+msgstr[1] "Vous pourrez soumettre le formulaire dans %(minutes)s minutes. En attendant, veuillez relire vos réponses."
