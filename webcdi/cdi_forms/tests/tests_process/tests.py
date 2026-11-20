@@ -48,6 +48,18 @@ def scroll_and_click(passed_in_driver, object):
     actions.perform()
 
 
+def unambiguous_dob(months=20):
+    """A birth date about `months` months ago whose day equals its month
+    (e.g. 3 March), so it reads the same as mm/dd/yyyy (English, Spanish)
+    and dd/mm/yyyy (other languages). 500 days ago typed as mm/dd made Dutch
+    forms read the child as too young (or the date as invalid) on some days,
+    and the test then resubmitted the background form forever."""
+    dob = datetime.date.today() - datetime.timedelta(days=int(months * 30.44))
+    while dob.day != dob.month:
+        dob -= datetime.timedelta(days=1)
+    return dob
+
+
 @tag("selenium", "login")
 class WebSiteOpensTests(LiveServerTestCase):
     LiveServerTestCase.host = "web"
@@ -161,9 +173,7 @@ class TestParentInterface(LiveServerFixturesMixin, LiveServerTestCase):
 
         try:
             element = self.selenium.find_element(By.ID, "id_child_dob")
-            now = datetime.datetime.now() - datetime.timedelta(days=500)
-            input_date = now.strftime("%m/%d/%Y")
-            element.send_keys(input_date)
+            element.send_keys(unambiguous_dob().strftime("%m/%d/%Y"))
         except NoSuchElementException:
             pass
         except ElementNotInteractableException:
@@ -304,11 +314,13 @@ class TestParentInterface(LiveServerFixturesMixin, LiveServerTestCase):
         # Bounded: before the group's minimum time the last page has no
         # Submit, and an unbounded loop hung the nightly run for 2 hours.
         completed = False
+        background_attempts = 0
         for _ in range(200):
             if completed:
                 break
             if self.selenium.find_elements(By.ID, "id_child_dob"):
-                self.selenium.find_element(By.ID, "id_child_dob")
+                background_attempts += 1
+                self.assertLess(background_attempts, 4, "background form was not accepted")
                 self.complete_background_info()
             if self.selenium.find_elements(By.ID, "page_number"):
                 element = self.selenium.find_element(By.ID, "page_number")
