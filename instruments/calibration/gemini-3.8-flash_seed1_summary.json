@@ -1,0 +1,164 @@
+{
+ "Korean_WS": {
+  "n_items": 641,
+  "injected": {
+   "typo": 6,
+   "merged": 6,
+   "untranslated": 6,
+   "wrong_category": 6,
+   "gloss_swap": 6
+  },
+  "caught_any_flag": {
+   "typo": 6,
+   "merged": 6,
+   "untranslated": 6,
+   "wrong_category": 6,
+   "gloss_swap": 6
+  },
+  "caught_right_type": {
+   "typo": 6,
+   "merged": 6,
+   "untranslated": 2,
+   "wrong_category": 6,
+   "gloss_swap": 6
+  },
+  "flags_on_untouched_items": 4,
+  "flags_on_untouched_by_confidence": {
+   "high": 4
+  },
+  "model_version": "gemini-3.8-flash",
+  "tokens": [
+   11856,
+   2617
+  ]
+ },
+ "Dutch_WS": {
+  "n_items": 702,
+  "injected": {
+   "typo": 6,
+   "strip_diacritics": 3,
+   "merged": 6,
+   "untranslated": 6,
+   "wrong_category": 6,
+   "gloss_swap": 6
+  },
+  "caught_any_flag": {
+   "typo": 6,
+   "merged": 6,
+   "untranslated": 6,
+   "wrong_category": 6,
+   "gloss_swap": 6
+  },
+  "caught_right_type": {
+   "typo": 6,
+   "merged": 5,
+   "untranslated": 5,
+   "wrong_category": 6,
+   "gloss_swap": 6
+  },
+  "flags_on_untouched_items": 7,
+  "flags_on_untouched_by_confidence": {
+   "high": 6,
+   "medium": 1
+  },
+  "model_version": "gemini-3.8-flash",
+  "tokens": [
+   13404,
+   2917
+  ]
+ },
+ "Hebrew_WS": {
+  "n_items": 600,
+  "injected": {
+   "typo": 6,
+   "merged": 6,
+   "untranslated": 6,
+   "wrong_category": 6,
+   "gloss_swap": 6
+  },
+  "caught_any_flag": {
+   "typo": 6,
+   "merged": 6,
+   "untranslated": 6,
+   "wrong_category": 6,
+   "gloss_swap": 6
+  },
+  "caught_right_type": {
+   "typo": 6,
+   "merged": 6,
+   "untranslated": 5,
+   "wrong_category": 6,
+   "gloss_swap": 6
+  },
+  "flags_on_untouched_items": 1,
+  "flags_on_untouched_by_confidence": {
+   "high": 1
+  },
+  "model_version": "gemini-3.8-flash",
+  "tokens": [
+   11542,
+   2430
+  ]
+ },
+ "French_Quebec_WS": {
+  "n_items": 664,
+  "injected": {
+   "typo": 6,
+   "strip_diacritics": 6,
+   "merged": 6,
+   "wrong_category": 6
+  },
+  "caught_any_flag": {
+   "typo": 6,
+   "strip_diacritics": 4,
+   "merged": 6,
+   "wrong_category": 6
+  },
+  "caught_right_type": {
+   "typo": 6,
+   "strip_diacritics": 4,
+   "merged": 6,
+   "wrong_category": 6
+  },
+  "flags_on_untouched_items": 1,
+  "flags_on_untouched_by_confidence": {
+   "medium": 1
+  },
+  "model_version": "gemini-3.8-flash",
+  "tokens": [
+   11542,
+   1812
+  ]
+ },
+ "Argentine_Spanish_WS": {
+  "n_items": 699,
+  "injected": {
+   "typo": 6,
+   "strip_diacritics": 6,
+   "merged": 6,
+   "wrong_category": 6
+  },
+  "caught_any_flag": {
+   "typo": 6,
+   "strip_diacritics": 5,
+   "merged": 6,
+   "wrong_category": 6
+  },
+  "caught_right_type": {
+   "typo": 6,
+   "strip_diacritics": 5,
+   "merged": 6,
+   "wrong_category": 6
+  },
+  "flags_on_untouched_items": 2,
+  "flags_on_untouched_by_confidence": {
+   "medium": 1,
+   "high": 1
+  },
+  "model_version": "gemini-3.8-flash",
+  "tokens": [
+   11399,
+   1894
+  ]
+ }
+}

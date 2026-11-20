@@ -1,0 +1,27 @@
+instrument:
+  language: New Zealand English
+  form: Short
+  verbose_name: English (New Zealand) Short
+  family: English (New Zealand) Short
+  min_age: 16
+  max_age: 30
+  checklist_title: English Words
+  script: latin
+item_ids: us_l2a
+sources:
+- path: Web-CDI Updates 2026/Ready to go/English (New Zealand)/NZ English_shortform.xlsx
+  drive_id: 1tuhskUz5ik58O06j_7VbltbHWeREiaXS
+  role: item list (xlsx)
+  sha256: f3d7c67cca1ac6f02881767f194f472487ac667e12ed2a09152693468d40ff3c
+provenance: Item list provided to the CDI Advisory Board (V. Marchman) as part of
+  the New Zealand short-form set; instructions are the English wrapper text in the
+  source.
+permissions: 'TODO: record who granted permission and when (MB8 tracker lists NZ English
+  as approved 2026-07-13)'
+citation: TODO
+norms: null
+todo:
+- confirm age range (US L2A range 16-30 mo used as placeholder)
+- none for instructions (English)
+status: extracted
+review: []

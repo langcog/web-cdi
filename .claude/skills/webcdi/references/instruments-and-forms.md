@@ -52,8 +52,11 @@ noted.
    translations down the column) and, if needed, the instrument list in
    `cdi_forms/templates/cdi_forms/printable_cdi.html` (~line 128).
 
-Loading: management commands `01`–`06` (also run by every deploy). Then grant
-researchers access to the instrument family in `/wcadmin/`.
+Loading: `python manage.py load_instruments` runs commands `01`–`06` in one
+transaction. The deploy reruns it on staging/production whenever files under
+`static/json/instruments.json`, `instrument_families.json`, `cdi_form_csv/`
+or `cdi_forms/form_data/` change. Then grant researchers access to the
+instrument family in `/wcadmin/`.
 
 Ignore `webcdi/adding_new_instrument.txt` (pre-2019 procedure with per-
 instrument models; obsolete).
@@ -90,26 +93,23 @@ Per the wiki "Adding a new language", plus code reality:
   `sibling_data`.
 - GDPR variants exist (e.g. `Dutch_CAT_no_location.json` drops country/zip).
 
-## The 2026 new-instruments pipeline (branch `new-instruments`)
+## The 2026 new-instruments campaign (`instruments/`)
 
-`instruments/` holds one package per instrument (`manifest.yaml` with sources
-+ sha256 + permissions + sign-offs; `items.csv` with provenance; `meta.json`)
-and tools: `sources.py` (verify source files), extractors, `validate.py`
-(deterministic checks), `qa_items.py` (LLM QA via Gemini on Vertex, project
-`hs-hs-langcog-gemini`, pinned models in `qa_config.yaml`), `calibrate.py`
-(fault-injection calibration). Read `instruments/README.md` on that branch.
+Read `instruments/STATUS.md` first (per-instrument stage, decisions, open
+questions), then `instruments/README.md` (the pipeline and how to publish a
+package into `webcdi/`).
 
+- `instruments/packages/<Package>/` is the authoring source (manifest with
+  sources + sha256 + corrections + sign-offs; `items.csv` with provenance;
+  `meta.json`). The app only sees the published copies under `webcdi/`.
 - Source files live in `forms/` (gitignored; licensed — never commit), from
-  Virginia's Drive folder "Web-CDI Updates 2026".
-- Calibration: flash and pro each catch ~96% of injected faults; pro finds
-  ~2× more real errors — run both, union the flags. Flags are advisory; a
-  native speaker and the Advisory Board sign off.
-- Current scope (decided 2026-10): **NZ English short form** first (16–30 mo;
-  = US L2A + 8 substitutions, reuses L2A itemIDs); then Turkish (TİGE, as
-  standalone parent-report WG/WS without stopping rules), Serbian (Ekavian +
-  Ijekavian, treat as final), Swedish WG/WS/CDI-III. Hindi blocked on a Word
-  version. Other NZ lists (Te Reo, Cantonese, Mandarin, Samoan, Tongan)
-  dropped for now; MB8 Mandarin/Cantonese may come from the Texas team
-  (needed Feb/Mar 2027).
-- Typo fixes to live instruments: PR #666 (US short forms, Argentine Spanish,
-  Dutch). Pending native-speaker checks: Korean, Hebrew, Quebec French items.
+  Virginia's Drive folder "Web-CDI Updates 2026" downloaded as a zip. The
+  Drive connector can read text but can't write binary files to disk
+  reliably; use the local copy.
+- LLM QA: Gemini on Vertex (`hs-hs-langcog-gemini`), both models, union of
+  flags (`tools/qa_package.py`); needs local Google credentials, so not from
+  cloud sessions. Flags are advisory — a native speaker and the Advisory
+  Board sign off.
+- Wordbank cross-checks: Wordbank's item lists (`wordbankr::get_item_data()`,
+  or the `items` table of the Redivis dataset `datapages.wordbank`) cover
+  Turkish, Swedish, Cantonese, Mandarin and Australian English.

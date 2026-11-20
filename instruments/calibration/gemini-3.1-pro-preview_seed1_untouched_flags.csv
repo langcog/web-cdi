@@ -1,0 +1,32 @@
+instrument,itemID,category,definition,gloss,issue,confidence,explanation,suggested_fix
+Korean_WS,item_419,action_words,떄려,hit,misspelling,high,'떄려' uses the incorrect vowel 'ㅒ' instead of 'ㅐ'. It should be '때려' (hit).,때려
+Korean_WS,item_455,action_words,뺴앗아,take away,misspelling,high,'뺴앗아' uses the incorrect vowel 'ㅒ' instead of 'ㅐ'. It should be '빼앗아' (take away).,빼앗아
+Korean_WS,item_593,case_markers,-야,verb ending,gloss_mismatch,high,"The item '-야' is categorized under 'case_markers' (where it functions as a vocative marker), but the gloss says 'verb ending'. This appears to be a copy-paste error from the 'other' category above.",vocative
+Korean_WS,item_596,case_markers,-하고,verb ending,gloss_mismatch,high,"The item '-하고' is categorized under 'case_markers' (where it functions as a comitative marker meaning 'and/with'), but the gloss says 'verb ending'. This appears to be a copy-paste error.",and/with
+Dutch_WS,item_15,sounds,piep piep (muis),squeek,misspelling,high,The English gloss 'squeek' is misspelled; it should be 'squeak'.,squeak
+Dutch_WS,item_33,animals,hamster/cavia,ginaepig,misspelling,high,The English gloss 'ginaepig' is misspelled; it should be 'guinea pig'.,guinea pig
+Dutch_WS,item_55,animals,schaap,scheep,misspelling,high,The English gloss 'scheep' is misspelled; it should be 'sheep'.,sheep
+Dutch_WS,item_96,toys,pen/stylo,pencil,gloss_mismatch,high,"The gloss 'pencil' does not match 'pen/stylo', which means 'pen'.",pen
+Dutch_WS,item_130,food_drink,fruisap/sap,juice,misspelling,high,'fruisap' is a misspelling of 'fruitsap'.,fruitsap/sap
+Dutch_WS,item_132,food_drink,hagelslag/muisjes*,sprinkels,misspelling,high,The English gloss 'sprinkels' is misspelled; it should be 'sprinkles'.,sprinkles
+Dutch_WS,item_157,food_drink,sandwich/pislolet/broodje/kadetje,sandwich,misspelling,high,'pislolet' is a misspelling of 'pistolet'.,sandwich/pistolet/broodje/kadetje
+Dutch_WS,item_208,body_parts,duim,tumb,misspelling,high,The English gloss 'tumb' is a misspelling of 'thumb'.,thumb
+Dutch_WS,item_233,body_parts,wang/kaak,cachete,wrong_language,high,The English gloss 'cachete' is actually a Spanish word. The correct English gloss for 'wang/kaak' is 'cheek'.,cheek
+Dutch_WS,item_270,household,steutel(s),key,misspelling,high,"The Dutch word for key is 'sleutel', not 'steutel'.",sleutel(s)
+Dutch_WS,item_290,furniture_rooms,deur,gate,gloss_mismatch,high,"The Dutch word 'deur' means 'door', not 'gate' (which would be 'hek' or 'poort').",door
+Dutch_WS,item_322,outside,dak,ceiling,gloss_mismatch,high,"The Dutch word 'dak' means 'roof', not 'ceiling' (which would be 'plafond').",roof
+Dutch_WS,itme_445,descriptive_words,is aan het slapen,is sleeping,other,high,The item ID is misspelled as 'itme_445' instead of 'item_445'.,item_445
+Dutch_WS,item_554,action_words,schaatsen/skeelen,to skate,misspelling,high,'skeelen' is a misspelling of the Dutch verb 'skeeleren'.,schaatsen/skeeleren
+Dutch_WS,item_582,action_words,wenen/huilen,mourn,gloss_mismatch,medium,"'wenen/huilen' means 'to cry' or 'to weep', whereas 'mourn' translates to 'rouwen'.",cry
+Dutch_WS,item_630,question_words,hoe,as,gloss_mismatch,high,"In the category of question words, the Dutch word 'hoe' means 'how', not 'as'.",how
+Dutch_WS,item_639,prepositions,af,of,gloss_mismatch,high,The Dutch word 'af' means 'off' or 'down'. The English gloss 'of' is likely a typo for 'off'.,off
+Hebrew_WS,item_161,food_drink,קלמטינה,clementine,misspelling,high,'קלמטינה' is a misspelling of 'קלמנטינה' (clementine).,קלמנטינה
+Hebrew_WS,item_199,body_parts,עיין/ עיניים,eye,misspelling,high,"The Hebrew word for 'eye' is 'עין', not 'עיין' (which means 'look' or 'study').",עין/ עיניים
+Hebrew_WS,item_292,furniture_rooms,מפה,map,gloss_mismatch,high,"The Hebrew word 'מפה' can mean 'map' or 'tablecloth'. Given the category 'furniture_rooms', the intended meaning is 'tablecloth'.",tablecloth
+Hebrew_WS,item_322,outside,חצר,backyard,duplicate,high,This is a duplicate of item_295 ('חצר | backyard').,
+Hebrew_WS,item_340,places,ברז,tap,category_mismatch,high,"A 'tap' ('ברז') is a household or outside object, not a place.",
+Hebrew_WS,item_463,action_words,לקרוע,tear,duplicate,high,The Hebrew word 'לקרוע' is a duplicate of item_445.,
+French_Quebec_WS,item_91,food_drink,beurre de pinnote/d'arachide,,misspelling,high,'pinnote' is a misspelling of the standard Quebec French term 'pinotte' (peanut).,beurre de pinotte/d'arachide
+Argentine_Spanish_WS,item380,games_routines,a ver... a pasear,,merged_items,medium,'a ver... a pasear' appears to be two separate routine phrases merged into one.,a ver...
+Argentine_Spanish_WS,item381,games_routines,adíos-chau,,misspelling,high,'adíos' has the accent on the wrong vowel; it should be 'adiós'.,adiós-chau
+Argentine_Spanish_WS,item655,prepositions,pero,,category_mismatch,medium,"'pero' (but) is a conjunction, not a preposition. It likely belongs in the 'connecting_words' category along with 'y', 'o', 'porque', etc.",
