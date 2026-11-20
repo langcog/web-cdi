@@ -7,6 +7,7 @@ from django.utils import timezone
 
 from researcher_UI.models import (Administration, Instrument, PaymentCode,
                                   Researcher, Study)
+from researcher_UI.models.study_model import default_minimum_time
 from researcher_UI.utils.random_url_generator import random_url_generator
 
 
@@ -100,12 +101,24 @@ class GroupNumberFieldsTest(GroupSettingsTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn("timing", response.context["form"].errors)
         self.study.refresh_from_db()
-        self.assertEqual(self.study.timing, 6)
+        self.assertEqual(self.study.timing, 3)  # unchanged: the model default
 
     def test_minimum_time_of_zero_means_none(self):
         self.assertEqual(self.rename("First group", timing=0).status_code, 302)
         self.study.refresh_from_db()
         self.assertEqual(self.study.timing, 0)
+
+    def test_blank_minimum_time_means_the_forms_default(self):
+        # #808: 3 minutes for Words & Gestures and Words & Sentences
+        Study.objects.filter(pk=self.study.pk).update(timing=6)
+        self.assertEqual(self.rename("First group", timing="").status_code, 302)
+        self.study.refresh_from_db()
+        self.assertEqual(self.study.timing, 3)
+
+    def test_short_forms_default_to_two_minutes(self):
+        self.assertEqual(default_minimum_time("L2A"), 2)
+        self.assertEqual(default_minimum_time("CDI3Rv2"), 2)
+        self.assertEqual(default_minimum_time("WG"), 3)
 
     def test_gift_amount_cannot_be_negative(self):
         response = self.rename(

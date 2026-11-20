@@ -3153,3 +3153,11 @@ msgstr ""
 #: webcdi/templates/registration/password_reset_form.html:33
 msgid "Reset"
 msgstr ""
+
+#: cdi_forms/templates/cdi_forms/administration_form.html
+#, python-format
+msgid "You can submit in %(minutes)s minute. Please look over your answers in the meantime."
+msgid_plural "You can submit in %(minutes)s minutes. Please look over your answers in the meantime."
+msgstr[0] "Formulář budete moci odeslat za %(minutes)s minutu. Mezitím si prosím zkontrolujte své odpovědi."
+msgstr[1] "Formulář budete moci odeslat za %(minutes)s minuty. Mezitím si prosím zkontrolujte své odpovědi."
+msgstr[2] "Formulář budete moci odeslat za %(minutes)s minut. Mezitím si prosím zkontrolujte své odpovědi."

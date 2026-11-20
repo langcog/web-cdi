@@ -897,11 +897,17 @@ class AdministrationUpdateViewTest(TestCase):
         content = self.last_page()
         self.assertIn('id="submit-after-wait"', content)
         self.assertRegex(content, r'id="submit-after-wait"[^>]*disabled')
-        self.assertIn("You can submit in 6 minutes", content)
+        self.assertIn(f"You can submit in {self.study.timing} minutes", content)
+
+    def test_wait_message_is_translated(self):
+        self.study.instrument = Instrument.objects.get(language="Spanish", form="WS")
+        self.study.save()
+        self.assertIn("Podrá enviar el formulario en", self.last_page())
 
     def test_last_page_after_the_minimum_time_can_be_submitted(self):
         Administration.objects.filter(pk=self.administration.pk).update(
-            created_date=timezone.now() - datetime.timedelta(minutes=7)
+            created_date=timezone.now()
+            - datetime.timedelta(minutes=self.study.timing + 1)
         )
         content = self.last_page()
         self.assertIn('name="btn-submit"', content)

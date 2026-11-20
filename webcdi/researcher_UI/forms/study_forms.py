@@ -12,6 +12,7 @@ from django.core.exceptions import ValidationError
 from form_utils.forms import BetterModelForm
 from researcher_UI import choices
 from researcher_UI.models import *
+from researcher_UI.models.study_model import default_minimum_time
 
 logger = logging.getLogger("debug")
 
@@ -105,10 +106,10 @@ class AddStudyForm(BetterModelForm):
         choices=birth_weight_choices, label="Measurement units for birthweight"
     )
     timing = forms.IntegerField(
-        label="Minimum time (minutes) a parent must take to complete the administration (default=6)",
-        required=True,
+        label="Minimum time (minutes) a parent must take to complete the administration",
+        help_text="Leave blank for the default: 3 minutes for Words & Gestures and Words & Sentences, 2 for the short forms and the CDI-III.",
+        required=False,
         widget=forms.NumberInput(),
-        initial=6,
         min_value=0,
     )
 
@@ -240,6 +241,12 @@ class AddStudyForm(BetterModelForm):
     # Form validation. Form is passed automatically to views.py for higher level checking.
     def clean(self):
         cleaned_data = super().clean()
+        if cleaned_data.get("timing") is None and "timing" not in self.errors:
+            instrument = cleaned_data.get("instrument") or getattr(
+                self.instance, "instrument", None
+            )
+            if instrument is not None:
+                cleaned_data["timing"] = default_minimum_time(instrument.form)
         return cleaned_data
 
     # Initiating form and field layout.

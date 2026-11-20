@@ -3509,3 +3509,9 @@ msgstr "リセット"
 #~ msgid ""
 #~ "I am afraid that your account registration was rejected by inspector."
 #~ msgstr "残念ながら、あなたの登録は審査者により拒否されました。"
+
+#: cdi_forms/templates/cdi_forms/administration_form.html
+#, python-format
+msgid "You can submit in %(minutes)s minute. Please look over your answers in the meantime."
+msgid_plural "You can submit in %(minutes)s minutes. Please look over your answers in the meantime."
+msgstr[0] "%(minutes)s分後に送信できます。それまでの間、回答をご確認ください。"
