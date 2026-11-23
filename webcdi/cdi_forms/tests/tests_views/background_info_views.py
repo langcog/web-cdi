@@ -787,7 +787,7 @@ class StudyRedirectTests(TestCase):
         redirect_url = administration.study.redirect_url.replace(
             "{{source_id}}", str(administration.backgroundinfo.source_id)
         ).replace("{{event_id}}", str(administration.backgroundinfo.event_id))
-        self.assertEquals(
+        self.assertEqual(
             response.context["redirect_url"],
             redirect_url,
         )

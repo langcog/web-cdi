@@ -1406,7 +1406,7 @@ class UpdateSummaryViewTest(TestCase):
         args = []
         opts = {}
         call_command("update_summary_data", *args, **opts)
-        self.assertEquals(
+        self.assertEqual(
             10, Administration.objects.filter(study=self.study, scored=True).count()
         )
         # progress goes to the log, not to anyone's inbox
