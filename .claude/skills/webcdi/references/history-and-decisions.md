@@ -21,7 +21,16 @@
 - 2026-10-15 onward: GCP rebuild (#690) — container, OpenTofu, CI/CD with
   keyless deploys, monitoring, jsCat-only CAT, bulk scorer, security fixes,
   Postmark email; AWS frozen. Migration rehearsal on a scrubbed copy of
-  production (#687). Roadmap: `references/roadmap.md`.
+  production (#687).
+- 2026-11-10 dress rehearsal into the production database; 2026-11-12
+  restore drill and QA sign-off (Cherrie); researchers emailed by Virginia.
+- **2026-11-19 cutover** (`deploy/cutover/README.md`): AWS writes stopped
+  8:45 pm, copy 119 s with exact counts, 32,842 forms rescored, DNS switched
+  9:18 pm. Next day: HBCD's API pull hit Cloud Run's 32 MiB response limit
+  (#812 gzip, #813 2 GiB); password reset templates (#811); #808 Submit
+  button fixes and per-form minimum times (#814, #815, #816, #820); nightly
+  Selenium fixed (#819). Follow-ups: #810; what's next:
+  `references/roadmap.md`.
 
 ## Standing decisions (don't relitigate without Mike)
 
@@ -39,17 +48,26 @@
   no groups, collapsed otherwise.
 - Bug fixes in item text: fix `definition`/`gloss`; never rename `item`
   (export column names).
-- Merges to master deploy to GCP staging automatically; Selenium is nightly
-  and non-blocking. AWS production is frozen (no deploys without Mike).
+- Merges to master deploy to staging automatically and to production after
+  approval (mcfrank or mikabr); Selenium is nightly and non-blocking. AWS is
+  retired and read-only (no changes without Mike).
+- **Minimum completion time** (`Study.timing`): 3 minutes for WG and WS, 2
+  for other forms (`default_minimum_time`, from completion-time data on #808;
+  Mike approved 2026-11-20). Groups at the old default of 6 were lowered
+  (#816). Before the minimum, the last page shows Submit disabled with "You
+  can submit in N minutes" (translated); the server doesn't enforce it.
+- The "ba!" in the CAT coaching picture is intentional (Mike, #806).
 - Percentiles follow Virginia's rules (#686, implemented #727; see
   `scoring-and-cat.md`) — change them only with her.
 - Subject IDs are integers; zero-padded IDs are rejected at entry (#718).
 - Staging with real data is private (Google sign-in) and scrubbed; QA testers
   get fresh test accounts.
 
-## Known bugs and debts (as of 2026-10-20)
+## Known bugs and debts (as of 2026-11-28)
 
-- Pre-QA backlog with scopes: `references/roadmap.md`.
+- Open items after the cutover: `references/roadmap.md` and #810.
+- 2 completed CAT administrations (from 2022–23) have responses but no stored
+  theta; left as is.
 - **Code health (after cutover):** Bootstrap 3+4 mix (#633), D3 v3 graphs
   (#634), console dispatch refactor (#636), migration squash (#637), lint
   config, two diverged instruments.json copies.
@@ -64,8 +82,7 @@
 
 ## Waiting on others
 
-- Postmark account approval (pending since 2026-10-16).
-- DNS access for webcdi.org (cutover).
+- Brookes contact confirmation (Virginia) before the email jobs go on.
 - Virginia: French (France) CAT citation
   (public "forthcoming" placeholder), Japanese (in review), Korean (Pae 2003?).
 - Native speakers: Korean, Hebrew, Quebec French item checks (PR #666).

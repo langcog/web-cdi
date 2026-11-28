@@ -18,7 +18,8 @@ The in-app `/documentation/` page is current.
 ## Group (Study) options worth knowing
 
 Waiver/consent text (`waiver`, Markdown, sanitized), age range, expiry days
-(`test_period`), birthweight units, minimum completion minutes (`timing`),
+(`test_period`), birthweight units, minimum completion minutes (`timing`;
+blank = the form's default, 3 for WG/WS and 2 otherwise),
 longitudinal prefill (`prefilled_data`), payment (`allow_payment` + gift
 codes), anonymous collection with a cap (`anon_collection`, `subject_cap`),
 end-of-form confirmation (`confirm_completion`, `confirmation_questions`),

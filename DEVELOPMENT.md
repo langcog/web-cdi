@@ -1,5 +1,7 @@
 # Developing Web-CDI locally
 
+_Updated with Claude Opus 5.5 (Nov 2026)._
+
 Web-CDI is a Django 5 / PostgreSQL application. Local development runs
 entirely in Docker via `docker compose`; you do not need Python or Postgres
 installed on your machine.
@@ -74,9 +76,9 @@ All configuration is read from environment variables in
 See [.env.example](.env.example) for the full annotated list. Two to know
 about:
 
-- `AWS_INSTANCE` — **must be False locally.** When True (the production
-  default) the app pulls credentials from AWS Secrets Manager and stores
-  uploads in S3.
+- `AWS_INSTANCE` — **must be False locally.** When True (the settings
+  default, kept from the AWS era) the app pulls credentials from AWS Secrets
+  Manager and stores uploads in S3. The production image sets it to false.
 - Computer-adaptive (CAT) forms run entirely in the browser (jsCat engine in
   `webcdi/cdi_forms/cat_forms/jscat/`, item banks in
   `cdi_forms/static/cdi_forms/cat/`); no external CAT service is needed.
@@ -87,20 +89,34 @@ about:
 - `webcdi/researcher_UI/` — researcher dashboard: studies, administrations,
   scoring, data download
 - `webcdi/cdi_forms/` — participant-facing forms (background info + CDI
-  items); `cdi_forms/cat_forms/` is the adaptive variant backed by the
-  CAT API
+  items); `cdi_forms/cat_forms/` is the adaptive variant, which runs in
+  the browser (jsCat)
 - `webcdi/brookes/` — Brookes Publishing licensing/payment codes
 - `webcdi/api/` — read-only JSON export endpoints
 - `webcdi/cdi_form_csv/` + `webcdi/cdi_forms/form_data/` — instrument
   definitions (items as CSV, per-form metadata as JSON) loaded by the
   numbered management commands in `webcdi/webcdi/management/commands/`
-- Scoring runs from cron in production (`crontab_scoring` management
-  command, every 10 minutes; see `webcdi/.ebextensions/crontab.txt`)
+- Scoring runs every 10 minutes in production (the `crontab_scoring`
+  management command as a Cloud Run job, triggered by Cloud Scheduler)
+
+## Browser tests (Selenium)
+
+The `selenium`-tagged tests (28, about 25 minutes) run nightly on GitHub and
+on demand (Actions → "Selenium (browser suite)" → Run workflow). To run them
+locally, start the `selenium` service and run the tests in a container that
+answers to the hostname `web`:
+
+```bash
+docker compose up -d db selenium
+docker compose run --rm --use-aliases web python manage.py test --tag=selenium --noinput -v 2
+```
 
 ## Production deployment
 
-Production and dev run on AWS Elastic Beanstalk and deploy via `eb deploy`
-(see `Makefile` targets `dev-deploy` / `live-deploy` and
-`webcdi/.ebextensions/`). Deployment requires AWS credentials held by the
-lab; see the lab manager. (`setup.txt` describes the legacy SSH-based
-process.)
+Production (webcdi.org) and staging run on Google Cloud. Merging to `master`
+deploys to staging automatically and then waits for approval to deploy the
+same image to production; see [deploy/README.md](deploy/README.md). The AWS
+Elastic Beanstalk files (`webcdi/.ebextensions/`, the `Makefile` targets
+`dev-deploy` / `live-deploy`, `setup.txt`) are from the old AWS site, which
+was retired from service on 2026-11-19 and is kept read-only until it is
+decommissioned (#689); don't use them.

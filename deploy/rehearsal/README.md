@@ -1,5 +1,10 @@
 # Migration rehearsal (#687)
 
+> **Historical (2026).** This is how staging was loaded from the AWS
+> database for the cutover rehearsals. AWS is retired and read-only now; a
+> future staging refresh should copy from the production Cloud SQL database
+> instead, with the same scrubbing steps below (#810).
+
 Copy the AWS production database into GCP staging, run the GCP build against
 it, and check that it behaves like production before cutover (#688). Web-CDI
 data is Stanford Moderate Risk; `hs-langcog-webcdi` is approved for it. While

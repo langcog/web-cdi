@@ -53,10 +53,16 @@ http://localhost:8001). Things it doesn't say:
 - CAT: Django tests cover rendering/persistence for all 5 languages
   (`cat_forms/tests/browser_engine.py`); the engine itself is validated by
   `npm test` in `cat_forms/jscat/` (also a CI job).
-- **Selenium** (`--tag=selenium`, 28 tests, 60–90 min) runs nightly in
-  `selenium.yml`, non-blocking. ~21 researcher-flow tests fail on stale
-  locators from the 2026 redesign (#648) — test rot, not app bugs. Between
-  killed local runs: `docker compose restart selenium`.
+- **Selenium** (`--tag=selenium`, 28 tests, about 25 min) runs nightly in
+  `selenium.yml` (non-blocking) and on manual dispatch; all 28 pass since
+  #819 (2026-11-20). Locally: `docker compose up -d db selenium`, then
+  `docker compose run --rm --use-aliases web python manage.py test
+  --tag=selenium --noinput -v 2` (the live server must answer to `web`).
+  Test groups need `timing=0`, and birth dates must read the same as mm/dd
+  and dd/mm (non-English forms parse dd/mm) — see `unambiguous_dob`. Each
+  class must `quit()` its browser (the container runs one session). Between
+  killed local runs: `docker compose restart selenium`. Don't switch git
+  branches during a local run: the working tree is mounted.
 - Scoring has value-level tests (`cdi_forms/tests/tests_scoring/`) — see
   `references/scoring-and-cat.md`.
 - `make docker-lint` is broken (black/flake8 have no config and scan

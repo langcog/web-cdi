@@ -5,9 +5,9 @@ description: Orientation for developing and operating Web-CDI (webcdi.org — th
 
 # Web-CDI
 
-Snapshot **2026-10-20**. Consolidates Henry Mehta's wiki
-(github.com/langcog/web-cdi/wiki), the 2026 modernization and QA sessions,
-and the new-instruments campaign. Branch/PR/issue facts go stale — check
+Snapshot **2026-11-28**, after the move to Google Cloud (2026-11-19).
+Consolidates Henry Mehta's wiki (github.com/langcog/web-cdi/wiki), the 2026
+modernization, QA and cutover sessions, and the new-instruments campaign. Branch/PR/issue facts go stale — check
 `gh pr list` / `gh issue list` before relying on them. Setup basics live in
 `DEVELOPMENT.md`; this skill covers what that file doesn't.
 
@@ -28,24 +28,26 @@ and Spanish Long + CAT forms require a paid Brookes Publishing code.
   Still the person to ask about undocumented history.
 - **Virginia Marchman** (call her Virginia) — CDI Advisory Board; authority on
   instrument content, wording, citations, norms and scoring expectations.
+- **Cherrie** — QA lead for the cutover (signed off 2026-11-12); takes over
+  day-to-day Web-CDI work from late Nov 2026, including the new-instruments
+  campaign (`instruments/HANDOFF.md`).
 - **Alvin** — working on web-cdi development with Mike.
-- **Vic Moreno** — manages the lab's AWS account; set up webcdi.org's DNS
-  records for Postmark; QA. A QA tester sends feedback rounds via Mike; the Dutch group runs their
+- **Vic Moreno** — manages the lab's AWS account and webcdi.org's DNS
+  (Route 53); changed DNS at the cutover; QA. A QA tester sends feedback rounds via Mike; the Dutch group runs their
   own EU server (behind our code).
-- Ownership handoff is incomplete — see `references/deploy-and-ops.md`
-  ("Handoff status").
+- Open handoff items: `references/deploy-and-ops.md` ("Handoff status").
 
 ## Environments
 
 | Env | Where | Notes |
 |---|---|---|
-| GCP staging | Cloud Run `webcdi-staging`, project `hs-langcog-webcdi` | **where all deploys and QA happen**; merges to master deploy here automatically; currently a private, scrubbed copy of production behind Google sign-in |
-| GCP production | — | not built yet (`references/roadmap.md`) |
-| AWS `Webcdi-env-2` | webcdi.org | **current production, frozen** on the 2026-10-11 release until cutover |
+| GCP production | webcdi.org; Cloud Run `webcdi-production`, project `hs-langcog-webcdi-prod` | **live since 2026-11-19**; each merge to master deploys here after approval (mcfrank or mikabr) |
+| GCP staging | Cloud Run `webcdi-staging`, project `hs-langcog-webcdi` | merges to master deploy here automatically, before production; private (Google sign-in), scrubbed copy of production |
+| AWS `Webcdi-env-2` | — (DNS no longer points to it) | **retired, read-only** (writes stopped at the cutover); kept until decommissioning (#689, from about 2026-12-19) |
 
-Details, operations and what needs Mike's credentials:
-`references/deploy-and-ops.md`. **Never deploy to or change AWS without
-Mike's go-ahead.**
+Details, operations and what needs Google Cloud roles:
+`references/deploy-and-ops.md`. **Never change AWS without Mike's
+go-ahead.**
 
 ## Repo map (`webcdi/`)
 
@@ -98,7 +100,7 @@ Mike's go-ahead.**
 |---|---|
 | Run locally, write/run tests, CI, browser checks | `references/dev-and-testing.md` |
 | Deploys, GCP/AWS operations, staging access, email, DB fixes | `references/deploy-and-ops.md` |
-| What's next, the pre-QA backlog and its scope, rules for working it | `references/roadmap.md` |
+| What's next after the cutover, rules for working issues | `references/roadmap.md` |
 | Add/modify an instrument, language, background form, graphs | `references/instruments-and-forms.md` |
 | Scoring, benchmarks/percentiles, CAT engines | `references/scoring-and-cat.md` |
 | Researcher console features, downloads, payments, Wordful/REDCap | `references/researcher-features.md` |
