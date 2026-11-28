@@ -1,18 +1,31 @@
 # Web-CDI
 
-[Web-CDI](http://webcdi.stanford.edu) is a project for the web-based administration of the [MacArthur-Bates Communicative Development Inventory](http://mb-cdi.stanford.edu), a checklist instrument for measuring children's early language development via parent report.
+_Updated with Claude Opus 5.5 (Nov 2026)._
 
-# Using the system
+[Web-CDI](https://webcdi.org) is a web platform for administering the
+[MacArthur-Bates Communicative Development Inventories](https://mb-cdi.stanford.edu)
+(CDI), parent-report checklists of children's early language, in many
+languages, including computer-adaptive (CAT) versions. Researchers create
+administration groups, send parents links, and download scored data.
 
-Web-CDI is currently in an alpha pilot, and is available for testing by researchers. If you would like to collect data via Web-CDI, please contact [webcdi-contact (at) stanford (dot) edu](mailto://webcdi-contact@stanford.edu) for more information.  
+## Using the system
 
-# Codebase documentation
+Researchers can register at [webcdi.org](https://webcdi.org). Questions:
+[webcdi-contact (at) stanford (dot) edu](mailto:webcdi-contact@stanford.edu).
+The researcher manual is in the
+[wiki](https://github.com/langcog/web-cdi/wiki/Researcher-Manual), and the
+site's [changelog page](https://webcdi.org/changelog/) lists user-visible
+changes.
 
-For local development setup (Docker-based), see [DEVELOPMENT.md](DEVELOPMENT.md).
+## Documentation
 
-## Adding new forms
+| Topic | Where |
+|---|---|
+| Local development (Docker), tests, environment variables | [DEVELOPMENT.md](DEVELOPMENT.md) |
+| Production and staging on Google Cloud: deploys, jobs, monitoring, infrastructure | [deploy/README.md](deploy/README.md) |
+| The 2026 move from AWS to Google Cloud (runbook and record) | [deploy/cutover/README.md](deploy/cutover/README.md) |
+| Adding instruments: pipeline, status, handoff | [instruments/README.md](instruments/README.md), [instruments/HANDOFF.md](instruments/HANDOFF.md) |
+| Forms, background questionnaires, scoring and benchmark files | [wiki](https://github.com/langcog/web-cdi/wiki) |
+| Orientation for Claude Code sessions (people, rules, history) | [.claude/skills/webcdi/](.claude/skills/webcdi/SKILL.md) |
 
-+ Forms are stored in CSV format in web-cdi/webcdi/cdi_form_csv
-  + JSON objects with other information are in web-cdi/webcdi/cdi_forms/form_data/
-+ Demographic form design are in webcdi/cdi_forms/forms.py and webcdi/cdi_forms/models.py
-##
+Bugs and requests: [GitHub issues](https://github.com/langcog/web-cdi/issues).

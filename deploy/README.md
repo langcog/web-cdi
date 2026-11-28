@@ -1,4 +1,23 @@
-# Production container
+# Running Web-CDI on Google Cloud
+
+_Updated with Claude Opus 5.5 (Nov 2026)._
+
+Since 2026-11-19, webcdi.org runs on Google Cloud (moved from AWS; record in
+[`cutover/README.md`](cutover/README.md)). Two environments, each in its own
+project, built from the same configuration and the same image:
+
+| | Production | Staging |
+|---|---|---|
+| Project | `hs-langcog-webcdi-prod` | `hs-langcog-webcdi` |
+| Address | https://webcdi.org (global load balancer; `www` redirects) | https://webcdi-staging-qiqpffb23q-uw.a.run.app (Google sign-in) |
+| Service / database | `webcdi-production`, Cloud SQL `webcdi-production-db` | `webcdi-staging`, `webcdi-staging-db` |
+| Email | Postmark, From `noreply@webcdi.org` | logged, not sent |
+| Deploys | each merge to `master`, **after approval** | each merge to `master`, automatically |
+
+Data on both is Stanford Moderate Risk. Staging holds a scrubbed copy of
+production and stays private.
+
+## The image
 
 `deploy/Dockerfile` builds the image that runs Web-CDI on Cloud Run (#677,
 tracking #690). The dev image (`./Dockerfile`, used by docker-compose and CI)
@@ -35,7 +54,7 @@ Optional:
 | Variable | Default | Notes |
 |---|---|---|
 | `HTTPS_ONLY` | false | behind Cloud Run/LB: trusts `X-Forwarded-Proto`, redirects to HTTPS (except `/health/`), secure cookies, HSTS |
-| `HSTS_SECONDS` | 3600 | raise once HTTPS is settled |
+| `HSTS_SECONDS` | 3600 | raise once HTTPS is settled (planned after the cutover, #810) |
 | `DB_CONN_MAX_AGE` | 0 | seconds to reuse DB connections (e.g. 60) |
 | `WEB_CONCURRENCY`, `GUNICORN_THREADS`, `GUNICORN_TIMEOUT` | 2, 4, 300 | gunicorn |
 | `PRIMARY_HOST`, `TRUSTED_ORIGINS`, `GOOGLE_ANALYTICS_ID`, `TIME_ZONE` | | see `.env.example` |
@@ -78,6 +97,18 @@ and smoke-tests `/health/`, `/`, login and About — routing traffic back to the
 previous revision if that fails. Manual run: Actions → Deploy → Run workflow.
 Tofu ignores image changes, so `apply` never rolls a deploy back.
 
+**Production** runs as a second job in the same workflow, after staging: it
+waits for approval in the GitHub `production` environment (reviewers: mcfrank,
+mikabr), copies the **same image** into the production registry, migrates,
+reloads instruments if needed, deploys, and smoke-tests as `webcdi.org`. It
+runs only while the repository variable `DEPLOY_PRODUCTION` is `true`.
+
+- Several merges in a row each queue a production run, and only one runs at a
+  time. Cancel the older waiting runs (Actions → Deploy → Cancel) and approve
+  the newest, so production ends up on master's head with one approval.
+- A migration in a deploy runs against production as soon as it's approved.
+  Data migrations should say in their PR how many rows they change.
+
 The deploy identity can push to the `webcdi` repository, deploy/run Cloud
 Run, and act as the runtime service account only.
 
@@ -89,12 +120,38 @@ site down (`/health/` uptime check, every 5 min), ERROR logs from the service
 or its jobs (at most hourly), failed job executions, >5 server errors in 10
 minutes, and database CPU >80% / disk >85%.
 
+Alerts and Django error emails go to webcdi-contact@stanford.edu. Error
+emails can contain participant data: summarize them in issues, don't paste
+them.
+
+## Operating production
+
+These need a Google account with roles on the production project.
+
+- **Health and traffic:** `cutover/day-of/watch.sh <since-UTC>` prints
+  request counts by status, error-log count and recent scoring runs (counts
+  only, no identifiers).
+- **One-off Django code** (counts, small fixes): `cutover/day-of/runjob.py
+  webcdi-production-migrate -- shell -c "<python>"` runs it as a job
+  execution and prints its log. Print aggregates, never participant data.
+- **Researcher fixes** (restore a "deleted" group, grant instrument access,
+  reuse a gift code): Django admin at https://webcdi.org/wcadmin/. Deleting
+  never removes data; it marks rows inactive.
+- **Infrastructure changes:** a saved `tofu plan` from current master,
+  reviewed, then `tofu apply` of that plan (above). The production state is
+  in `gs://hs-langcog-webcdi-prod-tfstate`; use a separate `TF_DATA_DIR`
+  from staging's.
+- **Limits to know:** Cloud Run refuses non-streamed responses over 32 MiB
+  (the study API gzips its JSON for this reason, #812); the web service has
+  1 CPU and 2 GiB memory (#813).
+- **Backups:** daily, with point-in-time recovery; a restore to a scratch
+  instance was tested on 2026-11-12 (`gcloud sql instances clone
+  --point-in-time`, about 9 minutes).
+
 First-time data: run the `migrate` job, then `load-instruments`
 (`gcloud run jobs execute <name> --wait`). One-off commands run as job
 executions with overridden args, e.g.
 `gcloud run jobs execute webcdi-staging-migrate --args="^~^shell~-c~<python>"`.
 
-Production cutover plan (draft): [`cutover/README.md`](cutover/README.md).
-
-Staging: https://webcdi-staging-qiqpffb23q-uw.a.run.app (email goes to the
-service logs; no real mail is sent).
+Production cutover (done 2026-11-19): [`cutover/README.md`](cutover/README.md).
+Follow-ups: #810. AWS decommissioning: #689, from about 2026-12-19.
